@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="Event">
+        <attr name="eventColor" format="color"/>
         <attr name="attending" format="boolean"/>
         <attr name="hallName" format="string"/>
         <attr name="startTime" format="string"/>

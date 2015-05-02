@@ -4,23 +4,24 @@
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="85dp"
+    android:layout_height="wrap_content"
     android:layoutDirection="rtl"
-    custom:cardCornerRadius="5dp"
     android:id="@+id/eventContainer">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/parentLayout"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="5dp">
+        android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/timeLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center_horizontal"
-            android:paddingEnd="10dp">
+            android:paddingEnd="5dp"
+            android:padding="5dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -67,14 +68,18 @@
         </LinearLayout>
 
         <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toEndOf="@+id/timeLayout"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/timeLayout"
+            android:layout_alignBottom="@+id/timeLayout"
+            android:paddingStart="5dp">
 
             <TextView
                 android:id="@+id/eventName"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:text="Event Title"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:maxLines="3"
@@ -82,14 +87,14 @@
 
             <TextView
                 android:id="@+id/lecturerName"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:gravity="end"
+                android:layout_alignParentEnd="true"
                 android:text="Lecturer name"
                 android:maxLength="20"
                 android:textAppearance="?android:attr/textAppearanceSmall"/>
 
         </RelativeLayout>
-    </LinearLayout>
+    </RelativeLayout>
 </android.support.v7.widget.CardView>

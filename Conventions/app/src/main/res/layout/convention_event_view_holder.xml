@@ -8,6 +8,7 @@
         android:id="@+id/eventElement"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        conventions:eventColor="@color/background_floating_material_light"
         conventions:attending="true"
         conventions:hallName="Oranim 1"
         conventions:startTime="14:00"

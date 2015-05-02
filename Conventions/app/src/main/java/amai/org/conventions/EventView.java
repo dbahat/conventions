@@ -25,6 +25,7 @@ public class EventView extends FrameLayout {
     private final TextView endTime;
     private final TextView eventName;
     private final TextView lecturerName;
+    private final LinearLayout timeLayout;
 
     private SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
 
@@ -34,6 +35,7 @@ public class EventView extends FrameLayout {
         LayoutInflater.from(this.getContext()).inflate(R.layout.convention_event, this, true);
 
         eventContainer = (CardView) this.findViewById(R.id.eventContainer);
+        timeLayout = (LinearLayout) this.findViewById(R.id.timeLayout);
         faveIconEnabled = (ImageView) this.findViewById(R.id.faveIconEnabled);
         faveIconDisabled = (ImageView) this.findViewById(R.id.faveIconDisabled);
         hallName = (TextView) this.findViewById(R.id.hallName);
@@ -50,6 +52,7 @@ public class EventView extends FrameLayout {
             return;
         }
         TypedArray params = getContext().obtainStyledAttributes(attrs, R.styleable.Event);
+        setColor(params.getColor(R.styleable.Event_eventColor, Color.WHITE));
         setAttending(params.getBoolean(R.styleable.Event_attending, false));
         setHallName(params.getString(R.styleable.Event_hallName));
         setShowHallName(params.getBoolean(R.styleable.Event_showHallName, true));
@@ -61,7 +64,7 @@ public class EventView extends FrameLayout {
     }
 
     public void setEvent(ConventionEvent event) {
-        setBackgroundColor(event.getType().getBackgroundColor());
+        setColor(event.getType().getBackgroundColor());
         setAttending(event.isAttending());
         setHallName(event.getHall().getName());
         setStartTime(timeFormat.format(event.getStartTime()));
@@ -70,8 +73,8 @@ public class EventView extends FrameLayout {
         setLecturerName(event.getLecturer());
     }
 
-    public void setBackgroundColor(int color) {
-        eventContainer.setCardBackgroundColor(color);
+    public void setColor(int color) {
+        timeLayout.setBackgroundColor(color);
     }
 
     public void setAttending(boolean isAttending) {
