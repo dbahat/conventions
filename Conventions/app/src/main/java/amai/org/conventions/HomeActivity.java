@@ -38,13 +38,18 @@ public class HomeActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void OnMapSelected(View view) {
+    public void onMapSelected(View view) {
         Intent intent = new Intent(this, MapActivity.class);
         startActivity(intent);
     }
 
-    public void OnProgramSelected(View view) {
+    public void onProgramSelected(View view) {
         Intent intent = new Intent(this, ProgramActivity.class);
+        startActivity(intent);
+    }
+
+    public void onHallSelected(View view) {
+        Intent intent = new Intent(this, HallActivity.class);
         startActivity(intent);
     }
 }

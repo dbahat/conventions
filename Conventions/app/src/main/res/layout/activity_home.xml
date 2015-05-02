@@ -54,7 +54,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:text="מפה"
-            android:onClick="OnMapSelected"
+            android:onClick="onMapSelected"
             />
 
         <Button
@@ -62,7 +62,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:text="תוכניה"
-            android:onClick="OnProgramSelected"
+            android:onClick="onProgramSelected"
             />
 
     </LinearLayout>
@@ -76,6 +76,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
+            android:text="Hall"
+            android:onClick="onHallSelected"
             />
 
         <Button

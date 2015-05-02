@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Event">
+        <attr name="attending" format="boolean"/>
+        <attr name="hallName" format="string"/>
+        <attr name="startTime" format="string"/>
+        <attr name="endTime" format="string"/>
+        <attr name="eventTitle" format="string"/>
+        <attr name="lecturerName" format="string"/>
+        <attr name="showHallName" format="boolean"/>
+    </declare-styleable>
+</resources>
