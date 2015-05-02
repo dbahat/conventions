@@ -9,4 +9,11 @@ public class Colors {
     public static final int RED = Color.rgb(247, 115, 113);
     public static final int PURPLE_LIGHT = Color.rgb(165, 159, 207);
     public static final int YELLOW = Color.rgb(248, 233, 174);
+
+    public static int fade(int color) {
+        float[] hsv = new float[3];
+        Color.colorToHSV(color, hsv);
+        hsv[1] = hsv[1] * 0.5f;
+        return Color.HSVToColor(hsv);
+    }
 }

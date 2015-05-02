@@ -1,25 +1,27 @@
 package amai.org.conventions;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.support.v7.widget.CardView;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import amai.org.conventions.model.Colors;
 import amai.org.conventions.model.ConventionEvent;
+import amai.org.conventions.model.Dates;
 
 public class EventView extends FrameLayout {
-    private final CardView eventContainer;
-    private final ImageView faveIconEnabled;
-    private final ImageView faveIconDisabled;
+    private final ImageView faveIcon;
     private final TextView hallName;
     private final TextView startTime;
     private final TextView endTime;
@@ -34,10 +36,8 @@ public class EventView extends FrameLayout {
 
         LayoutInflater.from(this.getContext()).inflate(R.layout.convention_event, this, true);
 
-        eventContainer = (CardView) this.findViewById(R.id.eventContainer);
         timeLayout = (LinearLayout) this.findViewById(R.id.timeLayout);
-        faveIconEnabled = (ImageView) this.findViewById(R.id.faveIconEnabled);
-        faveIconDisabled = (ImageView) this.findViewById(R.id.faveIconDisabled);
+        faveIcon = (ImageView) this.findViewById(R.id.faveIcon);
         hallName = (TextView) this.findViewById(R.id.hallName);
         startTime = (TextView) this.findViewById(R.id.startTime);
         endTime = (TextView) this.findViewById(R.id.endTime);
@@ -52,7 +52,7 @@ public class EventView extends FrameLayout {
             return;
         }
         TypedArray params = getContext().obtainStyledAttributes(attrs, R.styleable.Event);
-        setColor(params.getColor(R.styleable.Event_eventColor, Color.WHITE));
+        setColor(params.getColor(R.styleable.Event_eventColor, Color.WHITE), null);
         setAttending(params.getBoolean(R.styleable.Event_attending, false));
         setHallName(params.getString(R.styleable.Event_hallName));
         setShowHallName(params.getBoolean(R.styleable.Event_showHallName, true));
@@ -64,7 +64,7 @@ public class EventView extends FrameLayout {
     }
 
     public void setEvent(ConventionEvent event) {
-        setColor(event.getType().getBackgroundColor());
+        setColor(event.getType().getBackgroundColor(), event);
         setAttending(event.isAttending());
         setHallName(event.getHall().getName());
         setStartTime(timeFormat.format(event.getStartTime()));
@@ -73,13 +73,23 @@ public class EventView extends FrameLayout {
         setLecturerName(event.getLecturer());
     }
 
-    public void setColor(int color) {
-        timeLayout.setBackgroundColor(color);
+    public void setColor(int color, ConventionEvent event) {
+        Date now = Dates.now();
+        if (event == null || event.getStartTime().after(now)) {
+            timeLayout.setBackgroundColor(color);
+        } else if (event.getEndTime().before(now)) {
+            timeLayout.setBackgroundColor(Colors.fade(color));
+        } else {
+            GradientDrawable gradient = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
+                    new int[]{Colors.fade(color), color});
+            setBackground(timeLayout, gradient);
+        }
     }
 
     public void setAttending(boolean isAttending) {
-        faveIconEnabled.setVisibility(isAttending ? View.VISIBLE : View.GONE);
-        faveIconDisabled.setVisibility(isAttending ? View.GONE : View.VISIBLE);
+        Resources resources = getContext().getResources();
+        int favorite_icon = isAttending ? R.drawable.favorite_icon : R.drawable.favorite_icon_gray;
+        faveIcon.setImageDrawable(resources.getDrawable(favorite_icon));
     }
 
     protected void setShowHallName(boolean show) {
@@ -104,5 +114,15 @@ public class EventView extends FrameLayout {
 
     protected void setLecturerName(String name) {
         lecturerName.setText(name);
+    }
+
+    private void setBackground(LinearLayout layout, Drawable drawable) {
+        int pL = layout.getPaddingLeft();
+        int pT = layout.getPaddingTop();
+        int pR = layout.getPaddingRight();
+        int pB = layout.getPaddingBottom();
+
+        layout.setBackground(drawable);
+        layout.setPadding(pL, pT, pR, pB);
     }
 }
