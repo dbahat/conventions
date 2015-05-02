@@ -15,6 +15,14 @@
     <string-array name="navigation_pages">
         <item>Map</item>
         <item>Program</item>
-        <item>My events</item>
+        <item>Updates</item>
     </string-array>
+
+    <string-array name="program_pages">
+        <item>Program</item>
+        <item>My events</item>
+        <item>Popular events</item>
+    </string-array>
+
+    <string name="title_activity_program">ProgramActivity</string>
 </resources>

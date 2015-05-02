@@ -7,8 +7,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import java.util.Date;
-
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -42,6 +40,11 @@ public class HomeActivity extends AppCompatActivity {
 
     public void OnMapSelected(View view) {
         Intent intent = new Intent(this, MapActivity.class);
+        startActivity(intent);
+    }
+
+    public void OnProgramSelected(View view) {
+        Intent intent = new Intent(this, ProgramActivity.class);
         startActivity(intent);
     }
 }
