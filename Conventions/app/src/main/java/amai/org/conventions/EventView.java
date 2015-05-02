@@ -52,7 +52,14 @@ public class EventView extends FrameLayout {
             return;
         }
         TypedArray params = getContext().obtainStyledAttributes(attrs, R.styleable.Event);
-        setColor(params.getColor(R.styleable.Event_eventColor, Color.WHITE), null);
+
+        Drawable drawable = params.getDrawable(R.styleable.Event_eventColor);
+        if (drawable != null) {
+            setColor(drawable);
+        } else {
+            setColor(params.getColor(R.styleable.Event_eventColor, Color.WHITE));
+        }
+
         setAttending(params.getBoolean(R.styleable.Event_attending, false));
         setHallName(params.getString(R.styleable.Event_hallName));
         setShowHallName(params.getBoolean(R.styleable.Event_showHallName, true));
@@ -64,7 +71,7 @@ public class EventView extends FrameLayout {
     }
 
     public void setEvent(ConventionEvent event) {
-        setColor(event.getType().getBackgroundColor(), event);
+        setColorByEvent(event);
         setAttending(event.isAttending());
         setHallName(event.getHall().getName());
         setStartTime(timeFormat.format(event.getStartTime()));
@@ -73,17 +80,26 @@ public class EventView extends FrameLayout {
         setLecturerName(event.getLecturer());
     }
 
-    public void setColor(int color, ConventionEvent event) {
+    private void setColorByEvent(ConventionEvent event) {
         Date now = Dates.now();
-        if (event == null || event.getStartTime().after(now)) {
-            timeLayout.setBackgroundColor(color);
+        int color = event.getType().getBackgroundColor();
+        if (event.getStartTime().after(now)) {
+            setColor(color);
         } else if (event.getEndTime().before(now)) {
-            timeLayout.setBackgroundColor(Colors.fade(color));
+            setColor(Colors.fade(color));
         } else {
             GradientDrawable gradient = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
                     new int[]{Colors.fade(color), color});
-            setBackground(timeLayout, gradient);
+            setColor(gradient);
         }
+    }
+
+    public void setColor(Drawable drawable) {
+        setBackground(timeLayout, drawable);
+    }
+
+    public void setColor(int color) {
+        timeLayout.setBackgroundColor(color);
     }
 
     public void setAttending(boolean isAttending) {
