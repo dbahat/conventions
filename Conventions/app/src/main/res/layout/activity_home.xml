@@ -73,7 +73,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="מפה"
+                    android:text="@string/map"
                     style="@style/MainActivityOverlayText"/>
             </FrameLayout>
 
@@ -95,7 +95,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="תוכניה"
+                    android:text="@string/programme"
                     style="@style/MainActivityOverlayText"/>
             </FrameLayout>
         </LinearLayout>
@@ -122,7 +122,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="דרכי הגעה"
+                    android:text="@string/arrivalMethods"
                     style="@style/MainActivityOverlayText"/>
             </FrameLayout>
             
@@ -144,7 +144,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="עדכונים"
+                    android:text="@string/updates"
                     style="@style/MainActivityOverlayText"/>
             </FrameLayout>
         </LinearLayout>

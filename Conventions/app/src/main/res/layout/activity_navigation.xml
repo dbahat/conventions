@@ -8,6 +8,11 @@
         android:id="@+id/navigation_toolbar"
         layout="@layout/toolbar"
         />
+    <View
+        android:layout_width="match_parent"
+        android:layout_marginTop="1dp"
+        android:layout_height="10dp"
+        android:background="@drawable/toolbar_dropshadow" />
 
     <android.support.v4.view.ViewPager
         xmlns:android="http://schemas.android.com/apk/res/android"

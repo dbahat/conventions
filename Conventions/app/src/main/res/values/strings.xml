@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Conventions</string>
     <string name="title_activity_navigation">NavigationActivity</string>
+    <string name="map">מפה</string>
+    <string name="programme">תוכניה</string>
+    <string name="arrivalMethods">דרכי הגעה</string>
+    <string name="updates">עדכונים</string>
 
     <string-array name="map_floors">
         <item>Floor 1</item>
