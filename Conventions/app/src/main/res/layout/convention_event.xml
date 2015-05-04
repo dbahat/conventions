@@ -75,9 +75,11 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:text="Event Title"
+                android:textDirection="rtl"
+                android:layout_gravity="start|top"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:maxLines="3"
-                android:maxLength="75"/>
+                android:ellipsize="end"/>
 
             <TextView
                 android:id="@+id/lecturerName"

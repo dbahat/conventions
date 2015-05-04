@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Conventions</string>
-    <string name="title_activity_navigation">NavigationActivity</string>
     <string name="map">מפה</string>
     <string name="programme">תוכניה</string>
     <string name="arrivalMethods">דרכי הגעה</string>
@@ -13,14 +12,9 @@
     </string-array>
 
     <string-array name="navigation_pages">
-        <item>Map</item>
-        <item>Program</item>
-        <item>Hall</item>
+        <item>@string/map</item>
+        <item>@string/programme</item>
+        <item>@string/updates</item>
     </string-array>
 
-    <string-array name="program_pages">
-        <item>Program</item>
-        <item>My events</item>
-        <item>Popular events</item>
-    </string-array>
 </resources>
