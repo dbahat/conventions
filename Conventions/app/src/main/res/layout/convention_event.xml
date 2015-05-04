@@ -87,7 +87,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|bottom"
                 android:text="Lecturer name"
-                android:maxLength="20"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:textAppearance="?android:attr/textAppearanceSmall"/>
 
         </FrameLayout>

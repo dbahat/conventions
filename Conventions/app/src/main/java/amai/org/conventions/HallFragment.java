@@ -20,7 +20,7 @@ import amai.org.conventions.model.ConventionEvent;
  * A simple {@link Fragment} subclass.
  */
 public class HallFragment extends Fragment {
-    private static final String hallName = "Oranim 1";
+    private static final String hallName = "אורנים 2";
 
     public HallFragment() {
         // Required empty public constructor

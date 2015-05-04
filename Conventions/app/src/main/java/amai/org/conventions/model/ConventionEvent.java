@@ -23,12 +23,22 @@ public class ConventionEvent {
         this.title = title;
     }
 
+    public ConventionEvent withTitle(String title) {
+        setTitle(title);
+        return this;
+    }
+
     public String getLecturer() {
         return lecturer;
     }
 
     public void setLecturer(String lecturer) {
         this.lecturer = lecturer;
+    }
+
+    public ConventionEvent withLecturer(String lecturer) {
+        setLecturer(lecturer);
+        return this;
     }
 
     public boolean isAttending() {
@@ -39,12 +49,22 @@ public class ConventionEvent {
         this.attending = attending;
     }
 
+    public ConventionEvent withAttending(boolean attending) {
+        setAttending(attending);
+        return this;
+    }
+
     public Date getStartTime() {
         return startTime;
     }
 
     public void setStartTime(Date startTime) {
         this.startTime = startTime;
+    }
+
+    public ConventionEvent withStartTime(Date startTime) {
+        setStartTime(startTime);
+        return this;
     }
 
     public Date getEndTime() {
@@ -55,6 +75,11 @@ public class ConventionEvent {
         this.endTime = endTime;
     }
 
+    public ConventionEvent withEndTime(Date endTime) {
+        setEndTime(endTime);
+        return this;
+    }
+
     public EventType getType() {
         return type;
     }
@@ -63,11 +88,21 @@ public class ConventionEvent {
         this.type = type;
     }
 
+    public ConventionEvent withType(EventType type) {
+        setType(type);
+        return this;
+    }
+
     public Hall getHall() {
         return hall;
     }
 
     public void setHall(Hall hall) {
         this.hall = hall;
+    }
+
+    public ConventionEvent withHall(Hall hall) {
+        setHall(hall);
+        return this;
     }
 }
