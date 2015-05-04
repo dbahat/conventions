@@ -1,5 +1,6 @@
 package amai.org.conventions;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -10,10 +11,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
+
+import java.util.List;
 
 
 public class NavigationActivity extends AppCompatActivity {
@@ -56,11 +61,14 @@ public class NavigationActivity extends AppCompatActivity {
         actionButton1 = (Button) findViewById(R.id.toolbar_action_button_1);
         actionButton2 = (Button) findViewById(R.id.toolbar_action_button_2);
 
-        // Sets the menu to show on the spinner
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.navigation_pages, android.R.layout.simple_spinner_dropdown_item);
+        // Sets the menu to show on the spinner. Use a TitleLess adapter since the navigation spinner
+        // should only show the navigation page name inside it's drop-down menu.
+        CharSequence[] strings = getResources().getTextArray(R.array.navigation_pages);
+        TitleLessArrayAdapter adapter = new TitleLessArrayAdapter(this,
+                android.R.layout.simple_spinner_dropdown_item, strings);
         pageNavigationSpinner.setAdapter(adapter);
 
+        // Setting the spinner with a delay to ensure onItemSelected won't get invoked when first opening the activity.
         pageNavigationSpinner.post(new Runnable() {
             @Override
             public void run() {
@@ -102,6 +110,24 @@ public class NavigationActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             return 3;
+        }
+    }
+
+    /**
+     * An array adapter that doesn't set any text inside it's returned view.
+     * Should be used by spinner controls that shows text only in the drop-down text box.
+     */
+    private class TitleLessArrayAdapter extends ArrayAdapter<CharSequence> {
+
+        public TitleLessArrayAdapter(Context context, int resource, CharSequence[] objects) {
+            super(context, resource, objects);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View view = super.getView(position, convertView, parent);
+            ((TextView)view).setText("");
+            return view;
         }
     }
 }
