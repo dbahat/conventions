@@ -7,8 +7,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.AttributeSet;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -109,7 +107,7 @@ public class NavigationActivity extends AppCompatActivity {
      * An array adapter that doesn't set any text inside it's returned view.
      * Should be used by spinner controls that shows text only in the drop-down text box.
      */
-    private class TitleLessArrayAdapter extends ArrayAdapter<CharSequence> {
+    private static class TitleLessArrayAdapter extends ArrayAdapter<CharSequence> {
 
         public TitleLessArrayAdapter(Context context, int resource, CharSequence[] objects) {
             super(context, resource, objects);
@@ -120,23 +118,6 @@ public class NavigationActivity extends AppCompatActivity {
             View view = super.getView(position, convertView, parent);
             ((TextView) view).setText("");
             return view;
-        }
-    }
-
-    private class NonSwipeableViewPager extends ViewPager {
-
-        public NonSwipeableViewPager(Context context, AttributeSet attrs) {
-            super(context, attrs);
-        }
-
-        @Override
-        public boolean onInterceptTouchEvent(MotionEvent ev) {
-            return false;
-        }
-
-        @Override
-        public boolean onTouchEvent(MotionEvent ev) {
-            return false;
         }
     }
 }
