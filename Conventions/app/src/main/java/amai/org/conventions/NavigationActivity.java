@@ -7,6 +7,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -118,6 +120,23 @@ public class NavigationActivity extends AppCompatActivity {
             View view = super.getView(position, convertView, parent);
             ((TextView) view).setText("");
             return view;
+        }
+    }
+
+    private class NonSwipeableViewPager extends ViewPager {
+
+        public NonSwipeableViewPager(Context context, AttributeSet attrs) {
+            super(context, attrs);
+        }
+
+        @Override
+        public boolean onInterceptTouchEvent(MotionEvent ev) {
+            return false;
+        }
+
+        @Override
+        public boolean onTouchEvent(MotionEvent ev) {
+            return false;
         }
     }
 }
