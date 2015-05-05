@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -55,30 +56,23 @@ public class EventView extends FrameLayout {
         }
         TypedArray params = getContext().obtainStyledAttributes(attrs, R.styleable.Event);
 
-        int drawableOrColorId = R.styleable.Event_eventTypeColor;
-        setEventTypeColor(params, drawableOrColorId);
-
         setAttending(params.getBoolean(R.styleable.Event_attending, false));
         setHallName(params.getString(R.styleable.Event_hallName));
         setShowHallName(params.getBoolean(R.styleable.Event_showHallName, true));
+        setShowFavoriteIcon(params.getBoolean(R.styleable.Event_showFavoriteIcon, true));
         setStartTime(params.getString(R.styleable.Event_startTime));
         setEndTime(params.getString(R.styleable.Event_endTime));
         setEventTitle(params.getString(R.styleable.Event_eventTitle));
         setLecturerName(params.getString(R.styleable.Event_lecturerName));
+
+        setColorFromAttributes(timeLayout, params, R.styleable.Event_eventTypeColor);
+        setColorFromAttributes(eventDescription, params, R.styleable.Event_eventColor);
+
         params.recycle();
     }
 
-    private void setEventTypeColor(TypedArray params, int drawableOrColorId) {
-        Drawable drawable = params.getDrawable(drawableOrColorId);
-        if (drawable != null) {
-            setLayoutColor(timeLayout, drawable);
-        } else {
-            setColor(params.getColor(drawableOrColorId, Color.WHITE));
-        }
-    }
-
     public void setEvent(ConventionEvent event) {
-        setColorsByEvent(event);
+        setColorsFromEvent(event);
         setAttending(event.isAttending());
         setHallName(event.getHall().getName());
         setStartTime(timeFormat.format(event.getStartTime()));
@@ -87,18 +81,27 @@ public class EventView extends FrameLayout {
         setLecturerName(event.getLecturer());
     }
 
-    private void setColorsByEvent(ConventionEvent event) {
+    private void setColorsFromEvent(ConventionEvent event) {
         Date now = Dates.now();
         int color = event.getType().getBackgroundColor();
         if (event.getStartTime().after(now)) {
-            setColor(color);
+            setEventTypeColor(color);
         } else if (event.getEndTime().before(now)) {
-            setColor(Colors.fade(color));
+            setEventTypeColor(Colors.fade(color));
         } else {
             GradientDrawable gradient = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
                     new int[]{Colors.fade(color), color});
             setEventTypeColor(gradient);
-            eventDescription.setBackgroundColor(Color.rgb(250, 229, 146));
+            setEventColor(Colors.GOLD);
+        }
+    }
+
+    private void setColorFromAttributes(ViewGroup layout, TypedArray params, int drawableOrColorId) {
+        Drawable drawable = params.getDrawable(drawableOrColorId);
+        if (drawable != null) {
+            setLayoutColor(layout, drawable);
+        } else {
+            setLayoutColor(layout, params.getColor(drawableOrColorId, Color.WHITE));
         }
     }
 
@@ -106,15 +109,23 @@ public class EventView extends FrameLayout {
         setLayoutColor(timeLayout, drawable);
     }
 
-    public void setColor(int color) {
+    public void setEventTypeColor(int color) {
         setLayoutColor(timeLayout, color);
     }
 
-    private void setLayoutColor(LinearLayout layout, Drawable drawable) {
+    public void setEventColor(int color) {
+        setLayoutColor(eventDescription, color);
+    }
+
+    public void setEventColor(Drawable drawable) {
+        setLayoutColor(eventDescription, drawable);
+    }
+
+    private void setLayoutColor(ViewGroup layout, Drawable drawable) {
         setBackground(layout, drawable);
     }
 
-    private void setLayoutColor(LinearLayout layout, int color) {
+    private void setLayoutColor(ViewGroup layout, int color) {
         layout.setBackgroundColor(color);
     }
 
@@ -124,8 +135,12 @@ public class EventView extends FrameLayout {
         faveIcon.setImageDrawable(resources.getDrawable(favorite_icon));
     }
 
-    protected void setShowHallName(boolean show) {
+    public void setShowHallName(boolean show) {
         hallName.setVisibility(show ? VISIBLE : GONE);
+    }
+
+    public void setShowFavoriteIcon(boolean show) {
+        faveIcon.setVisibility(show ? VISIBLE : GONE);
     }
 
     protected void setHallName(String name) {
@@ -136,7 +151,7 @@ public class EventView extends FrameLayout {
         startTime.setText(formattedStartTime);
     }
 
-    protected void setEndTime(String formattedEndTime) {
+    public void setEndTime(String formattedEndTime) {
         endTime.setText(formattedEndTime);
     }
 
@@ -148,7 +163,7 @@ public class EventView extends FrameLayout {
         lecturerName.setText(name);
     }
 
-    private void setBackground(LinearLayout layout, Drawable drawable) {
+    private void setBackground(ViewGroup layout, Drawable drawable) {
         int pL = layout.getPaddingLeft();
         int pT = layout.getPaddingTop();
         int pR = layout.getPaddingRight();

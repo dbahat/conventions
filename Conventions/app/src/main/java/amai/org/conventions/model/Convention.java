@@ -19,11 +19,11 @@ public class Convention {
     }
 
     private Convention() {
-        Hall auditorium = new Hall("אודיטוריום אושיסקין");
-        Hall contentRoom = new Hall("חדר אירועי תוכן");
-        Hall oranim1 = new Hall("אורנים 1");
-        Hall oranim2 = new Hall("אורנים 2");
-        Hall oranim3 = new Hall("אורנים 3");
+        Hall auditorium = new Hall().withName("אודיטוריום אושיסקין").withOrder(1);
+        Hall contentRoom = new Hall().withName("חדר אירועי תוכן").withOrder(2);
+        Hall oranim1 = new Hall().withName("אורנים 1").withOrder(3);
+        Hall oranim2 = new Hall().withName("אורנים 2").withOrder(4);
+        Hall oranim3 = new Hall().withName("אורנים 3").withOrder(5);
 
         this.events = flattenList(
                 inHall(auditorium,

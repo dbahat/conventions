@@ -9,10 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
 
+import amai.org.conventions.model.CollectionsFilter;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
+import amai.org.conventions.model.ConventionEventComparator;
 
 
 /**
@@ -31,20 +33,22 @@ public class MyEventsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_my_events, container, false);
 
         RecyclerView hallEventsList = (RecyclerView) view.findViewById(R.id.myEventsList);
-        List<ConventionEvent> fullEventsList = Convention.getInstance().getEvents();
-        hallEventsList.setAdapter(new EventsViewAdapter(filter(fullEventsList)));
+        ArrayList<ConventionEvent> events = CollectionsFilter.filter(
+                Convention.getInstance().getEvents(),
+                new CollectionsFilter.Predicate<ConventionEvent>() {
+                    @Override
+                    public boolean where(ConventionEvent event) {
+                        return event.isAttending();
+                    }
+                },
+                new ArrayList<ConventionEvent>()
+        );
+        Collections.sort(events, new ConventionEventComparator());
+        hallEventsList.setAdapter(new EventsViewAdapter(events, false, true));
+
         hallEventsList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         return view;
     }
 
-    private static ArrayList<ConventionEvent> filter(List<ConventionEvent> fullEventsList) {
-        ArrayList<ConventionEvent> result = new ArrayList<>();
-        for (ConventionEvent event: fullEventsList) {
-            if (event.isAttending()) {
-                result.add(event);
-            }
-        }
-        return result;
-    }
 }
