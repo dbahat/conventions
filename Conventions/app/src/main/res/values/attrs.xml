@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="Event">
+        <attr name="eventTypeColor" format="color|integer"/>
         <attr name="eventColor" format="color|integer"/>
         <attr name="attending" format="boolean"/>
         <attr name="hallName" format="string"/>
@@ -9,5 +10,6 @@
         <attr name="eventTitle" format="string"/>
         <attr name="lecturerName" format="string"/>
         <attr name="showHallName" format="boolean"/>
+        <attr name="showFavoriteIcon" format="boolean"/>
     </declare-styleable>
 </resources>

@@ -28,6 +28,7 @@ public class EventView extends FrameLayout {
     private final TextView eventName;
     private final TextView lecturerName;
     private final LinearLayout timeLayout;
+    private final FrameLayout eventDescription;
 
     private SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
 
@@ -43,6 +44,7 @@ public class EventView extends FrameLayout {
         endTime = (TextView) this.findViewById(R.id.endTime);
         eventName = (TextView) this.findViewById(R.id.eventName);
         lecturerName = (TextView) this.findViewById(R.id.lecturerName);
+        eventDescription = (FrameLayout) this.findViewById(R.id.eventDescription);
 
         setAttributes(attrs);
     }
@@ -53,12 +55,8 @@ public class EventView extends FrameLayout {
         }
         TypedArray params = getContext().obtainStyledAttributes(attrs, R.styleable.Event);
 
-        Drawable drawable = params.getDrawable(R.styleable.Event_eventColor);
-        if (drawable != null) {
-            setColor(drawable);
-        } else {
-            setColor(params.getColor(R.styleable.Event_eventColor, Color.WHITE));
-        }
+        int drawableOrColorId = R.styleable.Event_eventTypeColor;
+        setEventTypeColor(params, drawableOrColorId);
 
         setAttending(params.getBoolean(R.styleable.Event_attending, false));
         setHallName(params.getString(R.styleable.Event_hallName));
@@ -70,8 +68,17 @@ public class EventView extends FrameLayout {
         params.recycle();
     }
 
+    private void setEventTypeColor(TypedArray params, int drawableOrColorId) {
+        Drawable drawable = params.getDrawable(drawableOrColorId);
+        if (drawable != null) {
+            setLayoutColor(timeLayout, drawable);
+        } else {
+            setColor(params.getColor(drawableOrColorId, Color.WHITE));
+        }
+    }
+
     public void setEvent(ConventionEvent event) {
-        setColorByEvent(event);
+        setColorsByEvent(event);
         setAttending(event.isAttending());
         setHallName(event.getHall().getName());
         setStartTime(timeFormat.format(event.getStartTime()));
@@ -80,7 +87,7 @@ public class EventView extends FrameLayout {
         setLecturerName(event.getLecturer());
     }
 
-    private void setColorByEvent(ConventionEvent event) {
+    private void setColorsByEvent(ConventionEvent event) {
         Date now = Dates.now();
         int color = event.getType().getBackgroundColor();
         if (event.getStartTime().after(now)) {
@@ -90,16 +97,25 @@ public class EventView extends FrameLayout {
         } else {
             GradientDrawable gradient = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
                     new int[]{Colors.fade(color), color});
-            setColor(gradient);
+            setEventTypeColor(gradient);
+            eventDescription.setBackgroundColor(Color.rgb(250, 229, 146));
         }
     }
 
-    public void setColor(Drawable drawable) {
-        setBackground(timeLayout, drawable);
+    public void setEventTypeColor(Drawable drawable) {
+        setLayoutColor(timeLayout, drawable);
     }
 
     public void setColor(int color) {
-        timeLayout.setBackgroundColor(color);
+        setLayoutColor(timeLayout, color);
+    }
+
+    private void setLayoutColor(LinearLayout layout, Drawable drawable) {
+        setBackground(layout, drawable);
+    }
+
+    private void setLayoutColor(LinearLayout layout, int color) {
+        layout.setBackgroundColor(color);
     }
 
     public void setAttending(boolean isAttending) {

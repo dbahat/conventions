@@ -117,7 +117,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:onClick="onHallSelected"
+                    android:onClick="onUpdatesSelected"
                     android:src="@drawable/updates"
                     android:scaleType="fitCenter"
                     />
@@ -139,7 +139,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:onClick="onHallSelected"
+                    android:onClick="onArrivalMethodsSelected"
                     android:src="@drawable/arrival_methods"
                     android:scaleType="fitCenter"
                     />

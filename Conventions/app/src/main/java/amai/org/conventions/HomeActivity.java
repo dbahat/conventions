@@ -28,9 +28,15 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onHallSelected(View view) {
+    public void onUpdatesSelected(View view) {
         Intent intent = new Intent(this, NavigationActivity.class);
         intent.putExtra(NavigationActivity.EXTRA_INITIAL_NAVIGATION_POSITION, 2);
+        startActivity(intent);
+    }
+
+    public void onArrivalMethodsSelected(View view) {
+        Intent intent = new Intent(this, NavigationActivity.class);
+        intent.putExtra(NavigationActivity.EXTRA_INITIAL_NAVIGATION_POSITION, 3);
         startActivity(intent);
     }
 }
