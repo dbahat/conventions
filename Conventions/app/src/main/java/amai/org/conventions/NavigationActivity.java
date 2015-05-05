@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import amai.org.conventions.navigation.NavigationPages;
+
 
 public class NavigationActivity extends AppCompatActivity {
 
@@ -25,11 +27,14 @@ public class NavigationActivity extends AppCompatActivity {
     private Spinner pageNavigationSpinner;
     private Button actionButton1;
     private Button actionButton2;
+    private NavigationPages navigationPages;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
+
+        navigationPages = new NavigationPages(this);
 
         setNavigationPager();
         initializeToolbar();
@@ -58,9 +63,8 @@ public class NavigationActivity extends AppCompatActivity {
 
         // Sets the menu to show on the spinner. Use a TitleLess adapter since the navigation spinner
         // should only show the navigation page name inside it's drop-down menu.
-        CharSequence[] strings = getResources().getTextArray(R.array.navigation_pages);
         TitleLessArrayAdapter adapter = new TitleLessArrayAdapter(this,
-                android.R.layout.simple_spinner_dropdown_item, strings);
+                android.R.layout.simple_spinner_dropdown_item, navigationPages.getPagesTitle());
         pageNavigationSpinner.setAdapter(adapter);
 
         // Setting the spinner with a delay to ensure onItemSelected won't get invoked when first opening the activity.
@@ -90,18 +94,7 @@ public class NavigationActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            switch (position) {
-                case 0:
-                    return new MapFragment();
-                case 1:
-                    return new ProgrammeFragment();
-                case 2:
-                    return new MyEventsFragment();
-                case 3:
-                    return new HallFragment();
-            }
-
-            throw new AssertionError("No navigation page for position " + position);
+            return NavigationActivity.this.navigationPages.getFragment(position);
         }
 
         @Override
@@ -123,7 +116,7 @@ public class NavigationActivity extends AppCompatActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View view = super.getView(position, convertView, parent);
-            ((TextView)view).setText("");
+            ((TextView) view).setText("");
             return view;
         }
     }

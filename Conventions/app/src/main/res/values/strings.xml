@@ -1,24 +1,10 @@
 <resources>
     <string name="app_name">Conventions</string>
-    <string name="map">מפה</string>
-    <string name="programme">תוכניה</string>
-    <string name="updates">עדכונים</string>
-    <string name="arrivalMethods">דרכי הגעה</string>
 
     <string-array name="map_floors">
         <item>Floor 1</item>
         <item>Floor 2</item>
         <item>Floor 3</item>
     </string-array>
-
-    <string-array name="navigation_pages">
-        <item>@string/map</item>
-        <item>@string/programme</item>
-        <item>@string/updates</item>
-        <item>@string/arrivalMethods</item>
-    </string-array>
-
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -61,12 +61,12 @@
                 android:layout_height="match_parent"
                 android:padding="5dp"
                 android:layout_margin="5dp"
+                android:onClick="onNavigationButtonClicked"
                 android:background="#d6d7d7">
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:onClick="onProgramSelected"
                     android:src="@drawable/events"
                     android:scaleType="fitCenter"
                     />
@@ -83,12 +83,12 @@
                 android:layout_height="match_parent"
                 android:padding="5dp"
                 android:layout_margin="5dp"
+                android:onClick="onNavigationButtonClicked"
                 android:background="#d6d7d7">
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:onClick="onMapSelected"
                     android:src="@drawable/map"
                     android:scaleType="fitCenter"
                     />
@@ -112,12 +112,12 @@
                 android:layout_height="match_parent"
                 android:padding="5dp"
                 android:layout_margin="5dp"
+                android:onClick="onNavigationButtonClicked"
                 android:background="#d6d7d7">
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:onClick="onUpdatesSelected"
                     android:src="@drawable/updates"
                     android:scaleType="fitCenter"
                     />
@@ -134,12 +134,12 @@
                 android:layout_height="match_parent"
                 android:padding="5dp"
                 android:layout_margin="5dp"
+                android:onClick="onNavigationButtonClicked"
                 android:background="#d6d7d7">
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:onClick="onArrivalMethodsSelected"
                     android:src="@drawable/arrival_methods"
                     android:scaleType="fitCenter"
                     />

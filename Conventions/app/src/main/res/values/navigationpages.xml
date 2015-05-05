@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="map">מפה</string>
+    <string name="programme">תוכניה</string>
+    <string name="updates">עדכונים</string>
+    <string name="arrivalMethods">דרכי הגעה</string>
+</resources>
