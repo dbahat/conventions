@@ -51,7 +51,7 @@ public class NavigationActivity extends AppCompatActivity {
     private void setNavigationPager() {
         // Instantiate a ViewPager and a PagerAdapter.
         pager = (ViewPager) findViewById(R.id.pager);
-        final FragmentStatePagerAdapter adapter = new MainPagerAdapter(getSupportFragmentManager());
+        final FragmentStatePagerAdapter adapter = new NavigationAdapter(getSupportFragmentManager());
         pager.setAdapter(adapter);
     }
 
@@ -86,9 +86,9 @@ public class NavigationActivity extends AppCompatActivity {
         });
     }
 
-    private class MainPagerAdapter extends FragmentStatePagerAdapter {
+    private class NavigationAdapter extends FragmentStatePagerAdapter {
 
-        public MainPagerAdapter(FragmentManager fm) {
+        public NavigationAdapter(FragmentManager fm) {
             super(fm);
         }
 
@@ -99,7 +99,7 @@ public class NavigationActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 4;
+            return NavigationActivity.this.navigationPages.getCount();
         }
     }
 

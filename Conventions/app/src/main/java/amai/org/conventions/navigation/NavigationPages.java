@@ -66,4 +66,8 @@ public class NavigationPages {
         }
         return pageTitles.indexOf(pageTitle);
     }
+
+    public int getCount() {
+        return pageIdToFragmentMapInOrder.size();
+    }
 }
