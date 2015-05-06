@@ -2,11 +2,13 @@ package amai.org.conventions.map;
 
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import amai.org.conventions.R;
 
@@ -16,6 +18,7 @@ import amai.org.conventions.R;
 public class MapFloorFragment extends Fragment {
 
     private static final String ARGS_FLOOR_NUMBER = "FloorNumber";
+    private View mapFloorImage;
 
     public MapFloorFragment() {
         // Required empty public constructor
@@ -25,16 +28,24 @@ public class MapFloorFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_map_floor, container, false);
-    }
+        View view = inflater.inflate(R.layout.fragment_map_floor, container, false);
 
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
+        mapFloorImage = (View) view.findViewById(R.id.map_floor_image);
 
-        if (isVisibleToUser) {
-            Log.d("aaa", "Now showing floor " + getArguments().getInt(ARGS_FLOOR_NUMBER));
+        int mapFloor = getArguments().getInt(ARGS_FLOOR_NUMBER);
+        switch (mapFloor) {
+            case 0:
+                mapFloorImage.setBackground(getResources().getDrawable(R.drawable.floor1));
+                break;
+            case 1:
+                mapFloorImage.setBackground(getResources().getDrawable(R.drawable.floor2));
+                break;
+            case 2:
+                mapFloorImage.setBackground(getResources().getDrawable(R.drawable.floor3));
+                break;
         }
+
+        return view;
     }
 
     public static MapFloorFragment newInstance(int floor) {
