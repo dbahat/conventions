@@ -9,36 +9,21 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-import amai.org.conventions.HallFragment;
-import amai.org.conventions.MapFragment;
-import amai.org.conventions.MyEventsFragment;
-import amai.org.conventions.ProgrammeFragment;
-import amai.org.conventions.R;
-
 /**
  * Container class for accessing data regarding the main navigation pages.
- *
- * Usage - When adding a new navigation page, add it to pageIdToFragmentMapInOrder with it's associated fragment.
+ * <p/>
+ * Usage - Extend this class, and pass to its constructor the mapping between page string resorce ids and their relevant
+ * fragment.
  */
-public class NavigationPages {
-    // Maps the page string resource id to it's associated fragment
-    private LinkedHashMap<Integer, Fragment> pageIdToFragmentMapInOrder;
-
-    // The page string resource ids in order
-    private List<Integer> pageIdsInOrder;
-
+public abstract class NavigationPages {
     private Context context;
+    private LinkedHashMap<Integer, Fragment> pageIdToFragmentMapInOrder;
+    private ArrayList<Integer> pageIdsInOrder;
 
-    public NavigationPages(Context context) {
+    public NavigationPages(Context context, LinkedHashMap<Integer, Fragment> pageIdToFragmentMapInOrder) {
         this.context = context;
-
-        pageIdToFragmentMapInOrder = new LinkedHashMap<>();
-        pageIdToFragmentMapInOrder.put(R.string.map, new MapFragment());
-        pageIdToFragmentMapInOrder.put(R.string.programme, new ProgrammeFragment());
-        pageIdToFragmentMapInOrder.put(R.string.updates, new MyEventsFragment());
-        pageIdToFragmentMapInOrder.put(R.string.arrivalMethods, new HallFragment());
-
-        pageIdsInOrder = new ArrayList<>(pageIdToFragmentMapInOrder.keySet());
+        this.pageIdToFragmentMapInOrder = pageIdToFragmentMapInOrder;
+        this.pageIdsInOrder = new ArrayList<>(pageIdToFragmentMapInOrder.keySet());
     }
 
     public Fragment getFragment(int position) {
@@ -56,7 +41,7 @@ public class NavigationPages {
             pageTitles.add(context.getResources().getString(pageId));
         }
 
-        return pageTitles.toArray(new String[] {});
+        return pageTitles.toArray(new String[]{});
     }
 
     public int getPosition(String pageTitle) {

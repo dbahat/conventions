@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".NavigationActivity" >
+            android:name=".navigation.NavigationActivity" >
         </activity>
     </application>
 

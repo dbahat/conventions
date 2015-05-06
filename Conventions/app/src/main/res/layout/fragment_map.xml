@@ -2,7 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" tools:context="amai.org.conventions.MapFragment">
 
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="MapFragment" />
+    <amai.org.conventions.navigation.NonSwipeableViewPager
+        android:id="@+id/map_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </FrameLayout>

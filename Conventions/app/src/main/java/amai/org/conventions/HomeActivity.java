@@ -7,7 +7,9 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.navigation.NavigationPages;
+import amai.org.conventions.navigation.PrimaryNavigationPages;
 
 
 public class HomeActivity extends AppCompatActivity {
@@ -19,7 +21,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        navigationPages = new NavigationPages(this);
+        navigationPages = new PrimaryNavigationPages(this);
     }
 
     public void onNavigationButtonClicked(View view) {

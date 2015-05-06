@@ -1,4 +1,4 @@
-package amai.org.conventions;
+package amai.org.conventions.navigation;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import amai.org.conventions.navigation.NavigationPages;
+import amai.org.conventions.R;
 
 
 public class NavigationActivity extends AppCompatActivity {
@@ -34,11 +34,27 @@ public class NavigationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
 
-        navigationPages = new NavigationPages(this);
+        navigationPages = new PrimaryNavigationPages(this);
 
         setNavigationPager();
         initializeToolbar();
         configureInitialPageIfNeeded();
+    }
+
+    public void configureMiddleSpinner(NavigationPages navigationPages, final ViewPager middleSpinnerViewPager) {
+        middleSpinner.setAdapter(new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_dropdown_item, navigationPages.getPagesTitle()));
+        middleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                middleSpinnerViewPager.setCurrentItem(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     private void configureInitialPageIfNeeded() {
@@ -51,7 +67,7 @@ public class NavigationActivity extends AppCompatActivity {
     private void setNavigationPager() {
         // Instantiate a ViewPager and a PagerAdapter.
         pager = (ViewPager) findViewById(R.id.pager);
-        final FragmentStatePagerAdapter adapter = new NavigationAdapter(getSupportFragmentManager());
+        final FragmentStatePagerAdapter adapter = new NavigationAdapter(getSupportFragmentManager(), navigationPages);
         pager.setAdapter(adapter);
     }
 
@@ -84,23 +100,6 @@ public class NavigationActivity extends AppCompatActivity {
                 });
             }
         });
-    }
-
-    private class NavigationAdapter extends FragmentStatePagerAdapter {
-
-        public NavigationAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return NavigationActivity.this.navigationPages.getFragment(position);
-        }
-
-        @Override
-        public int getCount() {
-            return NavigationActivity.this.navigationPages.getCount();
-        }
     }
 
     /**
