@@ -44,7 +44,7 @@ public class MyEventsFragment extends Fragment {
                 new ArrayList<ConventionEvent>()
         );
         Collections.sort(events, new ConventionEventComparator());
-        hallEventsList.setAdapter(new EventsViewAdapter(events, false, true));
+        hallEventsList.setAdapter(new EventsViewAdapter(events, true, true));
 
         hallEventsList.setLayoutManager(new LinearLayoutManager(getActivity()));
 

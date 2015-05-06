@@ -7,90 +7,89 @@
     android:layoutDirection="rtl"
     android:id="@+id/eventContainer">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/parentLayout"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:id="@+id/timeLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:padding="5dp"
             android:gravity="center_horizontal"
-            android:paddingEnd="5dp"
-            android:padding="5dp">
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:id="@+id/faveIcon"
-                    android:src="@drawable/favorite_icon"/>
-
-                <TextView
-                    android:id="@+id/hallName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Hall name"
-                    android:paddingBottom="5dp"/>
-
-            </LinearLayout>
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:id="@+id/faveIcon"
+                android:src="@drawable/favorite_icon_gold"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Start Time"
                 android:id="@+id/startTime"
-                android:paddingBottom="5dp"/>
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Start Time"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="End Time"
-                android:id="@+id/endTime" />
+                android:id="@+id/endTime"/>
 
         </LinearLayout>
 
-        <FrameLayout
+        <LinearLayout
             android:id="@+id/eventDescription"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_toEndOf="@+id/timeLayout"
-            android:layout_alignParentEnd="true"
-            android:layout_alignTop="@+id/timeLayout"
-            android:layout_alignBottom="@+id/timeLayout"
-            android:paddingStart="5dp">
+            android:padding="5dp"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/eventName"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:text="Event Title"
-                android:textDirection="rtl"
-                android:layout_gravity="start|top"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:maxLines="3"
-                android:ellipsize="end"/>
-
-            <TextView
-                android:id="@+id/lecturerName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end|bottom"
-                android:text="Lecturer name"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:textAppearance="?android:attr/textAppearanceSmall"/>
+                android:text="Event Title"
+                android:textDirection="rtl"
+                android:gravity="start|top"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:maxLines="2"
+                android:ellipsize="end"/>
 
-        </FrameLayout>
-    </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom">
+
+                <TextView
+                    android:id="@+id/hallName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:ellipsize="start"
+                    android:layout_alignParentStart="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@android:color/darker_gray"
+                    android:text="Hall name"/>
+
+                <TextView
+                    android:id="@+id/lecturerName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="Lecturer name"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textColor="@android:color/darker_gray"
+                    android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </LinearLayout>
 </android.support.v7.widget.CardView>

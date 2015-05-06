@@ -152,7 +152,7 @@ public class Convention {
                                 .withAttending(false),
 
                         new ConventionEvent()
-                                .withTitle("בין ורדים לרובוטים: האנימה של איקוהארה, אני ומיזאקי")
+                                .withTitle("בין ורדים לרובוטים: האנימה של איקוהארה, אנו ומיזאקי")
                                 .withLecturer("לירון אפריאט")
                                 .withStartTime(time("13:00"))
                                 .withEndTime(time("14:00"))

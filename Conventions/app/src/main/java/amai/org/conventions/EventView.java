@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -28,8 +27,8 @@ public class EventView extends FrameLayout {
     private final TextView endTime;
     private final TextView eventName;
     private final TextView lecturerName;
-    private final LinearLayout timeLayout;
-    private final FrameLayout eventDescription;
+    private final ViewGroup timeLayout;
+    private final ViewGroup eventDescription;
 
     private SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
 
@@ -38,14 +37,14 @@ public class EventView extends FrameLayout {
 
         LayoutInflater.from(this.getContext()).inflate(R.layout.convention_event, this, true);
 
-        timeLayout = (LinearLayout) this.findViewById(R.id.timeLayout);
+        timeLayout = (ViewGroup) this.findViewById(R.id.timeLayout);
         faveIcon = (ImageView) this.findViewById(R.id.faveIcon);
         hallName = (TextView) this.findViewById(R.id.hallName);
         startTime = (TextView) this.findViewById(R.id.startTime);
         endTime = (TextView) this.findViewById(R.id.endTime);
         eventName = (TextView) this.findViewById(R.id.eventName);
         lecturerName = (TextView) this.findViewById(R.id.lecturerName);
-        eventDescription = (FrameLayout) this.findViewById(R.id.eventDescription);
+        eventDescription = (ViewGroup) this.findViewById(R.id.eventDescription);
 
         setAttributes(attrs);
     }
@@ -87,11 +86,10 @@ public class EventView extends FrameLayout {
         if (event.getStartTime().after(now)) {
             setEventTypeColor(color);
         } else if (event.getEndTime().before(now)) {
-            setEventTypeColor(Colors.fade(color));
+            setEventTypeColor(color);
+            // TODO set background color?
         } else {
-            GradientDrawable gradient = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
-                    new int[]{Colors.fade(color), color});
-            setEventTypeColor(gradient);
+            setEventTypeColor(color);
             setEventColor(Colors.GOLD);
         }
     }
@@ -131,7 +129,7 @@ public class EventView extends FrameLayout {
 
     public void setAttending(boolean isAttending) {
         Resources resources = getContext().getResources();
-        int favorite_icon = isAttending ? R.drawable.favorite_icon : R.drawable.favorite_icon_gray;
+        int favorite_icon = isAttending ? R.drawable.favorite_icon_gold : R.drawable.favorite_icon_gray;
         faveIcon.setImageDrawable(resources.getDrawable(favorite_icon));
     }
 
