@@ -5,7 +5,6 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -129,7 +128,7 @@ public class EventView extends FrameLayout {
 
     public void setAttending(boolean isAttending) {
         Resources resources = getContext().getResources();
-        int favorite_icon = isAttending ? R.drawable.favorite_icon_gold : R.drawable.favorite_icon_gray;
+        int favorite_icon = isAttending ? R.drawable.favorite_icon_true : R.drawable.favorite_icon_false;
         faveIcon.setImageDrawable(resources.getDrawable(favorite_icon));
     }
 

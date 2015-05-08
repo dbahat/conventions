@@ -25,7 +25,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:id="@+id/faveIcon"
-                android:src="@drawable/favorite_icon_gold"/>
+                android:src="@drawable/favorite_icon_true"/>
 
             <TextView
                 android:layout_width="wrap_content"
