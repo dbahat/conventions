@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -31,6 +32,8 @@ public class EventView extends FrameLayout {
 
     private SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
 
+    private ConventionEvent event = null;
+
     public EventView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -44,6 +47,19 @@ public class EventView extends FrameLayout {
         eventName = (TextView) this.findViewById(R.id.eventName);
         lecturerName = (TextView) this.findViewById(R.id.lecturerName);
         eventDescription = (ViewGroup) this.findViewById(R.id.eventDescription);
+
+	    // TODO swipe on the entire view instead of click on the timeLayout, and handle the
+	    // event from the fragment or give an option of how to behave
+        timeLayout.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ConventionEvent event = EventView.this.event;
+                if (event != null) {
+                    event.setAttending(!event.isAttending());
+                    EventView.this.setEvent(event);
+                }
+            }
+        });
 
         setAttributes(attrs);
     }
@@ -70,6 +86,8 @@ public class EventView extends FrameLayout {
     }
 
     public void setEvent(ConventionEvent event) {
+        this.event = event;
+
         setColorsFromEvent(event);
         setAttending(event.isAttending());
         setHallName(event.getHall().getName());
@@ -84,9 +102,10 @@ public class EventView extends FrameLayout {
         int color = event.getType().getBackgroundColor();
         if (event.getStartTime().after(now)) {
             setEventTypeColor(color);
+	        setEventColor(Colors.WHITE);
         } else if (event.getEndTime().before(now)) {
             setEventTypeColor(color);
-            // TODO set background color?
+	        setEventColor(Colors.VERY_LIGHT_GRAY);
         } else {
             setEventTypeColor(color);
             setEventColor(Colors.GOLD);

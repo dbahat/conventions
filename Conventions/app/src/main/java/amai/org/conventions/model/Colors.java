@@ -10,6 +10,8 @@ public class Colors {
     public static final int PURPLE_LIGHT = Color.rgb(165, 159, 207);
     public static final int YELLOW = Color.rgb(248, 233, 174);
     public static final int GOLD = Color.rgb(250, 229, 146);
+	public static final int VERY_LIGHT_GRAY = Color.rgb(220, 220, 220);
+	public static final int WHITE = Color.WHITE;
 
     public static int fade(int color) {
         float[] hsv = new float[3];

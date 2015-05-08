@@ -1,6 +1,19 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="amai.org.conventions.MyEventsFragment">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="amai.org.conventions.MyEventsFragment"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/nextEventStart"
+        android:gravity="center"
+        android:background="#FAE592"
+        android:text="Next event start time"
+        />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/myEventsList"
         android:layout_width="match_parent"
@@ -8,4 +21,4 @@
 
     </android.support.v7.widget.RecyclerView>
 
-</FrameLayout>
+</LinearLayout>

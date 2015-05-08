@@ -28,23 +28,13 @@
             android:textSize="@dimen/abc_text_size_title_material"
             android:textColor="@android:color/white"/>
 
-        <Button
-            android:id="@+id/toolbar_action_button_1"
-            android:layout_width="30dp"
+        <LinearLayout
+            android:id="@+id/toolbar_action_buttons"
+            android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_alignParentEnd="true"
-            android:paddingStart="15dp"
-            android:paddingEnd="15dp"
-            android:visibility="gone"/>
-
-        <Button
-            android:id="@+id/toolbar_action_button_2"
-            android:layout_alignStart="@+id/toolbar_action_button_1"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:paddingStart="15dp"
-            android:paddingEnd="15dp"
-            android:visibility="gone"/>
+            android:orientation="horizontal">
+        </LinearLayout>
     </RelativeLayout>
 
 
