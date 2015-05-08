@@ -20,7 +20,7 @@ public class NavigationActivity extends AppCompatActivity {
 
     public static final String EXTRA_INITIAL_NAVIGATION_POSITION = "InitialNavigationPosition";
 
-    private ViewPager pager;
+    private ViewPager viewPager;
     private TextView title;
     private Spinner pageNavigationSpinner;
     private Button actionButton1;
@@ -53,15 +53,18 @@ public class NavigationActivity extends AppCompatActivity {
     private void configureInitialPageIfNeeded() {
         int initialPosition = getIntent().getIntExtra(EXTRA_INITIAL_NAVIGATION_POSITION, -1);
         if (initialPosition != -1) {
-            pager.setCurrentItem(initialPosition);
+            viewPager.setCurrentItem(initialPosition);
         }
     }
 
     private void setNavigationPager() {
         // Instantiate a ViewPager and a PagerAdapter.
-        pager = (ViewPager) findViewById(R.id.pager);
+        viewPager = (ViewPager) findViewById(R.id.pager);
         final FragmentStatePagerAdapter adapter = new NavigationAdapter(getSupportFragmentManager(), navigationPages);
-        pager.setAdapter(adapter);
+        viewPager.setAdapter(adapter);
+
+        // Hold all the fragments in memory for best transition performance.
+        viewPager.setOffscreenPageLimit(viewPager.getAdapter().getCount());
     }
 
     private void initializeToolbar() {
@@ -83,7 +86,7 @@ public class NavigationActivity extends AppCompatActivity {
                 pageNavigationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        pager.setCurrentItem(position);
+                        viewPager.setCurrentItem(position);
                     }
 
                     @Override

@@ -41,6 +41,34 @@ public class MapFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_map, container, false);
+        initializeViewPager(view);
+
+        return view;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        if (isVisibleToUser) {
+            // Set the floor title based on the current viewPager position
+            int currentPagePosition = viewPager != null ? viewPager.getCurrentItem() : 0;
+            NavigationActivity navigationActivity = (NavigationActivity) getActivity();
+            navigationActivity.setTitle(navigationPages.getPagesTitle()[currentPagePosition]);
+        }
+    }
+
+    public void onUpArrowClicked() {
+        // The viewPager pages are positioned backwards, meaning the "up" icon should bring us to the below page.
+        viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
+    }
+
+    public void onDownArrowClicked() {
+        // The viewPager pages are positioned backwards, meaning the "down" icon should bring us to the above page.
+        viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
+    }
+
+    private void initializeViewPager(View view) {
         viewPager = (VerticalViewPager) view.findViewById(R.id.map_view_pager);
 
         // Configure the view pager.
@@ -64,17 +92,8 @@ public class MapFragment extends Fragment {
             }
         });
 
-        return view;
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-
-        if (isVisibleToUser) {
-            int currentPagePosition = viewPager != null ? viewPager.getCurrentItem() : 0;
-            NavigationActivity navigationActivity = (NavigationActivity) getActivity();
-            navigationActivity.setTitle(navigationPages.getPagesTitle()[currentPagePosition]);
-        }
+        // Hold all the fragments in memory for best transition performance.
+        viewPager.setOffscreenPageLimit(viewPager.getAdapter().getCount());
+        viewPager.setCurrentItem(viewPager.getAdapter().getCount());
     }
 }
