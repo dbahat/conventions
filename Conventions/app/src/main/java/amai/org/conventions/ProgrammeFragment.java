@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import amai.org.conventions.navigation.NavigationActivity;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,5 +28,13 @@ public class ProgrammeFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_program, container, false);
     }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
 
+        if (isVisibleToUser) {
+            NavigationActivity navigationActivity = (NavigationActivity) getActivity();
+            navigationActivity.setTitle(getResources().getString(R.string.programme_title));
+        }
+    }
 }

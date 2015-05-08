@@ -15,6 +15,7 @@ import amai.org.conventions.model.CollectionsFilter;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
+import amai.org.conventions.navigation.NavigationActivity;
 
 
 /**
@@ -51,4 +52,13 @@ public class MyEventsFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        if (isVisibleToUser) {
+            NavigationActivity navigationActivity = (NavigationActivity) getActivity();
+            navigationActivity.setTitle(getResources().getString(R.string.my_events_title));
+        }
+    }
 }

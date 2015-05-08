@@ -38,7 +38,7 @@ public abstract class NavigationPages {
     public String[] getPagesTitle() {
         List<String> pageTitles = new LinkedList<>();
         for (Integer pageId : pageIdsInOrder) {
-            pageTitles.add(context.getResources().getString(pageId));
+            pageTitles.add(getString(pageId));
         }
 
         return pageTitles.toArray(new String[]{});
@@ -54,5 +54,9 @@ public abstract class NavigationPages {
 
     public int getCount() {
         return pageIdToFragmentMapInOrder.size();
+    }
+
+    protected String getString(int stringResourceId) {
+        return context.getResources().getString(stringResourceId);
     }
 }

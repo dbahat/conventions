@@ -2,8 +2,6 @@ package amai.org.conventions.navigation;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -23,7 +21,7 @@ public class NavigationActivity extends AppCompatActivity {
     public static final String EXTRA_INITIAL_NAVIGATION_POSITION = "InitialNavigationPosition";
 
     private ViewPager pager;
-    private Spinner middleSpinner;
+    private TextView title;
     private Spinner pageNavigationSpinner;
     private Button actionButton1;
     private Button actionButton2;
@@ -39,22 +37,17 @@ public class NavigationActivity extends AppCompatActivity {
         setNavigationPager();
         initializeToolbar();
         configureInitialPageIfNeeded();
+
+        hideTitle();
     }
 
-    public void configureMiddleSpinner(NavigationPages navigationPages, final ViewPager middleSpinnerViewPager) {
-        middleSpinner.setAdapter(new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_dropdown_item, navigationPages.getPagesTitle()));
-        middleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                middleSpinnerViewPager.setCurrentItem(position);
-            }
+    public void setTitle(String titleText) {
+        title.setText(titleText);
+        title.setVisibility(View.VISIBLE);
+    }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+    public void hideTitle() {
+        title.setVisibility(View.GONE);
     }
 
     private void configureInitialPageIfNeeded() {
@@ -72,7 +65,7 @@ public class NavigationActivity extends AppCompatActivity {
     }
 
     private void initializeToolbar() {
-        middleSpinner = (Spinner) findViewById(R.id.toolbar_middle_spinner);
+        title = (TextView) findViewById(R.id.toolbar_title);
         pageNavigationSpinner = (Spinner) findViewById(R.id.toolbar_page_navigation_spinner);
         actionButton1 = (Button) findViewById(R.id.toolbar_action_button_1);
         actionButton2 = (Button) findViewById(R.id.toolbar_action_button_2);
