@@ -86,7 +86,7 @@ public class NavigationActivity extends AppCompatActivity {
                 pageNavigationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        viewPager.setCurrentItem(position);
+                        viewPager.setCurrentItem(position, false);
                     }
 
                     @Override
