@@ -99,16 +99,14 @@ public class EventView extends FrameLayout {
 
     private void setColorsFromEvent(ConventionEvent event) {
         Date now = Dates.now();
-        int color = event.getType().getBackgroundColor();
+        int colorId = event.getType().getBackgroundColorId();
+        setEventTypeColor(getResources().getColor(colorId));
         if (event.getStartTime().after(now)) {
-            setEventTypeColor(color);
-	        setEventColor(Colors.WHITE);
+	        setEventColor(getResources().getColor(R.color.white));
         } else if (event.getEndTime().before(now)) {
-            setEventTypeColor(color);
-	        setEventColor(Colors.VERY_LIGHT_GRAY);
+	        setEventColor(getResources().getColor(R.color.very_light_gray));
         } else {
-            setEventTypeColor(color);
-            setEventColor(Colors.GOLD);
+            setEventColor(getResources().getColor(R.color.gold));
         }
     }
 

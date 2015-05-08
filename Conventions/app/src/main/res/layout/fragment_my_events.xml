@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/nextEventStart"
         android:gravity="center"
-        android:background="#FAE592"
+        android:background="@color/gold"
         android:text="Next event start time"
         />
 

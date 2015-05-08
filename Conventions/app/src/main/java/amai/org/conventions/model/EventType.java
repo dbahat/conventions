@@ -1,22 +1,22 @@
 package amai.org.conventions.model;
 
-import android.graphics.Color;
+import amai.org.conventions.R;
 
 public enum EventType {
 
-    Stage(Colors.PURPLE_MEDIUM),
-    Special(Colors.GRAY),
-    Screening(Colors.PURPLE_DARK),
-    Lecture(Colors.RED),
-    Workshop(Colors.PURPLE_LIGHT),
-    Panel(Colors.YELLOW);
+    Stage(R.color.medium_purple),
+    Special(R.color.silver),
+    Screening(R.color.dark_purple),
+    Lecture(R.color.red),
+    Workshop(R.color.light_purple),
+    Panel(R.color.yellow);
 
-    private int backgroundColor;
-    EventType(int backgroundColor) {
-        this.backgroundColor = backgroundColor;
+    private int backgroundColorId;
+    EventType(int backgroundColorId) {
+        this.backgroundColorId = backgroundColorId;
     }
 
-    public int getBackgroundColor() {
-        return backgroundColor;
+    public int getBackgroundColorId() {
+        return backgroundColorId;
     }
 }
