@@ -40,7 +40,7 @@ public class EventsViewOrHourAdapter extends RecyclerView.Adapter {
         if (holder instanceof EventsViewHolder) {
             EventsViewHolder eventViewHolder = (EventsViewHolder) holder;
             ConventionEvent conventionEvent = (ConventionEvent) eventsOrHours.get(position);
-            eventViewHolder.setModel(conventionEvent);
+            eventViewHolder.setModel(conventionEvent, false);
         }
         else if (holder instanceof EventTimeViewHolder) {
             EventTimeViewHolder eventTimeViewHolder = (EventTimeViewHolder) holder;

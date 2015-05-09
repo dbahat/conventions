@@ -311,7 +311,7 @@ public class Convention {
 								.withAttending(false),
 
 						new ConventionEvent()
-								.withTitle("המחזמר \"תודה שבחרת\" )NTT( - הסרט")
+								.withTitle("המחזמר \"תודה שבחרת\" (NTT) - הסרט")
 								.withStartTime(time("14:00"))
 								.withEndTime(time("16:00"))
 								.withType(EventType.Screening)
