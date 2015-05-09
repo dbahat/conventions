@@ -7,10 +7,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.navigation.NavigationPages;
-import amai.org.conventions.navigation.PrimaryNavigationPages;
-
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -21,7 +18,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        navigationPages = new PrimaryNavigationPages(this);
+        navigationPages = new NavigationPages(this);
     }
 
     public void onNavigationButtonClicked(View view) {
@@ -30,8 +27,8 @@ public class HomeActivity extends AppCompatActivity {
         FrameLayout frameLayout = (FrameLayout) view;
         TextView textView = (TextView) frameLayout.getChildAt(1);
 
-        Intent intent = new Intent(this, NavigationActivity.class);
-        intent.putExtra(NavigationActivity.EXTRA_INITIAL_NAVIGATION_POSITION, navigationPages.getPosition(textView.getText().toString()));
+        int position = navigationPages.getPosition(textView.getText().toString());
+        Intent intent = new Intent(this, navigationPages.getActivityType(position));
         startActivity(intent);
     }
 }

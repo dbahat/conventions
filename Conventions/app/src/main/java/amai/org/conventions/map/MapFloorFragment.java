@@ -1,6 +1,7 @@
 package amai.org.conventions.map;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ public class MapFloorFragment extends Fragment {
     private View mapFloorImage;
     private ImageView upArrowImage;
     private ImageView downArrowImage;
+    private OnMapArrowClickedListener mapArrowClickedListener;
 
     public MapFloorFragment() {
         // Required empty public constructor
@@ -37,6 +39,25 @@ public class MapFloorFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        if (!(activity instanceof OnMapArrowClickedListener)) {
+            throw new AssertionError("This fragment must be invoked form an activity implementing "
+                    + mapArrowClickedListener.getClass().getSimpleName());
+        }
+
+        mapArrowClickedListener = (OnMapArrowClickedListener) activity;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+
+        mapArrowClickedListener = null;
+    }
+
     public static MapFloorFragment newInstance(int floor) {
         MapFloorFragment fragment = new MapFloorFragment();
         Bundle args = new Bundle();
@@ -50,14 +71,18 @@ public class MapFloorFragment extends Fragment {
         upArrowImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MapFragment) getParentFragment()).onUpArrowClicked();
+                if (mapArrowClickedListener != null) {
+                    mapArrowClickedListener.onUpArrowClicked();
+                }
             }
         });
 
         downArrowImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MapFragment) getParentFragment()).onDownArrowClicked();
+                if (mapArrowClickedListener != null) {
+                    mapArrowClickedListener.onDownArrowClicked();
+                }
             }
         });
     }
@@ -84,5 +109,11 @@ public class MapFloorFragment extends Fragment {
                 upArrowImage.setVisibility(View.GONE);
                 break;
         }
+    }
+
+    public interface OnMapArrowClickedListener {
+        void onUpArrowClicked();
+
+        void onDownArrowClicked();
     }
 }

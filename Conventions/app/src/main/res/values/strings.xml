@@ -1,10 +1,9 @@
 <resources>
     <string name="app_name">Conventions</string>
 
-    <string name="map_floor_1">קומה 1</string>
-    <string name="map_floor_2">קומה 2</string>
-    <string name="map_floor_3">קומה 3</string>
+    <string name="map_floor">קומה</string>
 
     <string name="programme_title">תוכניה</string>
     <string name="my_events_title">האירועים שלי</string>
+    <string name="title_activity_hall">HallActivity</string>
 </resources>

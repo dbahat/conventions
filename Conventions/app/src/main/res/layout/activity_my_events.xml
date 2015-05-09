@@ -1,9 +1,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="amai.org.conventions.MyEventsFragment"
-    android:orientation="vertical">
+    tools:context="amai.org.conventions.MyEventsActivity"
+    android:orientation="vertical"
+    android:layoutDirection="rtl">
+
+    <include
+        android:id="@+id/my_events_toolbar"
+        layout="@layout/navigation_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <TextView
         android:layout_width="match_parent"

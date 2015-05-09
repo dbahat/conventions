@@ -1,7 +1,7 @@
 package amai.org.conventions.navigation;
 
+import android.app.Activity;
 import android.content.Context;
-import android.support.v4.app.Fragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,30 +9,34 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import amai.org.conventions.HallActivity;
+import amai.org.conventions.MyEventsActivity;
+import amai.org.conventions.ProgrammeActivity;
+import amai.org.conventions.R;
+import amai.org.conventions.map.MapActivity;
+
 /**
  * Container class for accessing data regarding the main navigation pages.
- * <p/>
- * Usage - Extend this class, and pass to its constructor the mapping between page string resorce ids and their relevant
- * fragment.
  */
-public abstract class NavigationPages {
+public class NavigationPages {
     private Context context;
-    private LinkedHashMap<Integer, Fragment> pageIdToFragmentMapInOrder;
+    private LinkedHashMap<Integer, Class<? extends Activity>> pageIdToActivityTypeMapInOrder;
     private ArrayList<Integer> pageIdsInOrder;
 
-    public NavigationPages(Context context, LinkedHashMap<Integer, Fragment> pageIdToFragmentMapInOrder) {
+    public NavigationPages(Context context) {
         this.context = context;
-        this.pageIdToFragmentMapInOrder = pageIdToFragmentMapInOrder;
-        this.pageIdsInOrder = new ArrayList<>(pageIdToFragmentMapInOrder.keySet());
+
+        pageIdToActivityTypeMapInOrder = createPageIdToActivityTypeMap();
+        pageIdsInOrder = new ArrayList<>(pageIdToActivityTypeMapInOrder.keySet());
     }
 
-    public Fragment getFragment(int position) {
-        if (position > pageIdToFragmentMapInOrder.size() || position < 0) {
+    public Class<? extends Activity> getActivityType(int position) {
+        if (position > pageIdToActivityTypeMapInOrder.size() || position < 0) {
             throw new AssertionError("No navigation page for position " + position);
         }
 
         int navigationPageId = pageIdsInOrder.get(position);
-        return pageIdToFragmentMapInOrder.get(navigationPageId);
+        return pageIdToActivityTypeMapInOrder.get(navigationPageId);
     }
 
     public String[] getPagesTitle() {
@@ -52,11 +56,21 @@ public abstract class NavigationPages {
         return pageTitles.indexOf(pageTitle);
     }
 
-    public int getCount() {
-        return pageIdToFragmentMapInOrder.size();
+    public int getPositionForType(Class<? extends NavigationActivity> navigationActivity) {
+        return new ArrayList<>(pageIdToActivityTypeMapInOrder.values()).indexOf(navigationActivity);
     }
 
     protected String getString(int stringResourceId) {
         return context.getResources().getString(stringResourceId);
+    }
+
+    private LinkedHashMap<Integer, Class<? extends Activity>> createPageIdToActivityTypeMap() {
+        LinkedHashMap<Integer, Class<? extends Activity>> pageIdToFragmentMapInOrder = new LinkedHashMap<>();
+        pageIdToFragmentMapInOrder.put(R.string.map, MapActivity.class);
+        pageIdToFragmentMapInOrder.put(R.string.events, ProgrammeActivity.class);
+        pageIdToFragmentMapInOrder.put(R.string.updates, MyEventsActivity.class);
+        pageIdToFragmentMapInOrder.put(R.string.arrivalMethods, HallActivity.class);
+
+        return pageIdToFragmentMapInOrder;
     }
 }

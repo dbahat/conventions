@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.Toolbar
+<amai.org.conventions.navigation.NavigationToolbar
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/toolbar"
+    android:id="@+id/navigation_toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#442B73">
+    android:background="@color/toolbar_color"
+    android:layoutDirection="rtl">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <Spinner
             android:id="@+id/toolbar_page_navigation_spinner"
@@ -29,7 +30,7 @@
             android:textColor="@android:color/white"/>
 
         <LinearLayout
-            android:id="@+id/toolbar_action_buttons"
+            android:id="@+id/toolbar_action_buttons_container"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_alignParentEnd="true"
@@ -37,5 +38,4 @@
         </LinearLayout>
     </RelativeLayout>
 
-
-</android.support.v7.widget.Toolbar>
+</amai.org.conventions.navigation.NavigationToolbar>

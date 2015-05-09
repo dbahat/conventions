@@ -5,16 +5,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import amai.org.conventions.model.ConventionEvent;
 
 public class EventsViewAdapter extends RecyclerView.Adapter<EventsViewHolder> {
-    private ArrayList<ConventionEvent> eventsList;
+    private List<ConventionEvent> eventsList;
     private boolean showFavoriteIcon;
     private boolean showHallName;
 
-    public EventsViewAdapter(ArrayList<ConventionEvent> eventsList, boolean showFavoriteIcon, boolean showHallName) {
+    public EventsViewAdapter(List<ConventionEvent> eventsList, boolean showFavoriteIcon, boolean showHallName) {
         this.eventsList = eventsList;
         this.showFavoriteIcon = showFavoriteIcon;
         this.showHallName = showHallName;

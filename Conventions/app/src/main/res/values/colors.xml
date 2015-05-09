@@ -9,4 +9,6 @@
     <color name="gold">#FAE592</color>
     <color name="very_light_gray">#DCDCDC</color>
     <color name="white">#FFFFFF</color>
+
+    <color name="toolbar_color">#442B73</color>
 </resources>

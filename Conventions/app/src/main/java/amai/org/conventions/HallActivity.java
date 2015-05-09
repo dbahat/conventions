@@ -1,42 +1,32 @@
 package amai.org.conventions;
 
-
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import amai.org.conventions.model.CollectionsFilter;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
 import amai.org.conventions.navigation.NavigationActivity;
+import amai.org.conventions.navigation.NavigationToolbar;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class HallFragment extends Fragment {
+
+public class HallActivity extends NavigationActivity {
     private final String hallName = "אורנים 2";
 
-    public HallFragment() {
-        // Required empty public constructor
-    }
-
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_hall, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_hall);
+        NavigationToolbar navigationToolbar = (NavigationToolbar) findViewById(R.id.hall_toolbar);
+        navigationToolbar.initialize();
+        navigationToolbar.setNavigationPageSelectedListener(this);
 
-        RecyclerView hallEventsList = (RecyclerView) view.findViewById(R.id.hallEventsList);
+        RecyclerView hallEventsList = (RecyclerView) findViewById(R.id.hallEventsList);
         final String hallName = this.hallName;
         ArrayList<ConventionEvent> events = CollectionsFilter.filter(
                 Convention.getInstance().getEvents(),
@@ -51,18 +41,6 @@ public class HallFragment extends Fragment {
         Collections.sort(events, new ConventionEventComparator());
         hallEventsList.setAdapter(new EventsViewAdapter(events, true, false));
 
-        hallEventsList.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        return view;
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-
-        if (isVisibleToUser) {
-            NavigationActivity navigationActivity = (NavigationActivity) getActivity();
-            navigationActivity.setTitle(hallName);
-        }
+        hallEventsList.setLayoutManager(new LinearLayoutManager(this));
     }
 }
