@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <amai.org.conventions.navigation.NavigationToolbar
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/navigation_toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/toolbar_color"

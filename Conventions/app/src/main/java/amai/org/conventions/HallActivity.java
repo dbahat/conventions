@@ -21,10 +21,7 @@ public class HallActivity extends NavigationActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hall);
-        NavigationToolbar navigationToolbar = (NavigationToolbar) findViewById(R.id.hall_toolbar);
-        navigationToolbar.initialize();
-        navigationToolbar.setNavigationPageSelectedListener(this);
+        setContentInContentContainer(R.layout.activity_hall);
 
         RecyclerView hallEventsList = (RecyclerView) findViewById(R.id.hallEventsList);
         final String hallName = this.hallName;

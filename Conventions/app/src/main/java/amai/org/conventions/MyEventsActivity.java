@@ -37,10 +37,7 @@ public class MyEventsActivity extends NavigationActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_events);
-        NavigationToolbar navigationToolbar = (NavigationToolbar) findViewById(R.id.my_events_toolbar);
-        navigationToolbar.initialize();
-        navigationToolbar.setNavigationPageSelectedListener(this);
+        setContentInContentContainer(R.layout.activity_my_events);
 
         List<ConventionEvent> events = getMyEvents();
         Collections.sort(events, new ConventionEventComparator());

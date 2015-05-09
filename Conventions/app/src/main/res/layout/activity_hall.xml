@@ -2,28 +2,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="amai.org.conventions.HallActivity"
+    android:layoutDirection="rtl"
     android:orientation="vertical"
-    android:layoutDirection="rtl">
-    
-    <include
-        android:id="@+id/hall_toolbar"
-        layout="@layout/navigation_toolbar"
+    tools:context="amai.org.conventions.HallActivity">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/hallEventsList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:foreground="@drawable/bottom_shadow">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/hallEventsList"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </android.support.v7.widget.RecyclerView>
-
-    </FrameLayout>
+    </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>

@@ -3,13 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="amai.org.conventions.ProgrammeActivity"
-    android:orientation="vertical"
-    android:layoutDirection="rtl">
-
-    <include
-        android:id="@+id/programme_toolbar"
-        layout="@layout/navigation_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+    android:orientation="vertical">
 
 </LinearLayout>

@@ -18,12 +18,9 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map);
+        setContentInContentContainer(R.layout.activity_map);
 
         initializeViewPager();
-        NavigationToolbar navigationToolbar = (NavigationToolbar) findViewById(R.id.map_toolbar);
-        navigationToolbar.initialize();
-        navigationToolbar.setNavigationPageSelectedListener(this);
     }
 
     private void initializeViewPager() {

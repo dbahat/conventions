@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="rtl"
+    android:orientation="vertical" >
+
+    <include
+        layout="@layout/navigation_toolbar"
+        android:id="@+id/navigation_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <!-- The content if each navigation page will be placed in runtime in this container -->
+    <!-- Setting shadow background to simulate shadow effect from the toolbar to the content -->
+    <FrameLayout
+        android:id="@+id/navigation_content_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bottom_shadow" />
+
+</LinearLayout>
