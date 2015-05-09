@@ -37,7 +37,7 @@ public class HallActivity extends NavigationActivity {
                 new ArrayList<ConventionEvent>()
         );
         Collections.sort(events, new ConventionEventComparator());
-        hallEventsList.setAdapter(new EventsViewAdapter(events, true, false));
+        hallEventsList.setAdapter(new EventsViewAdapter(events, true, false, false));
 
         hallEventsList.setLayoutManager(new LinearLayoutManager(this));
     }

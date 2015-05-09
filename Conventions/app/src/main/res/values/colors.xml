@@ -11,5 +11,7 @@
     <color name="ultra_light_gray">#EBEBEB</color>
     <color name="white">#FFFFFF</color>
 
+    <color name="conflictingEventsBackground">#D2D3D5</color>
+
     <color name="toolbar_color">#442B73</color>
 </resources>

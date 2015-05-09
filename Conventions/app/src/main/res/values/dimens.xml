@@ -9,4 +9,6 @@
     <dimen name="toolbar_button_padding_start">30dp</dimen>
     <dimen name="toolbar_button_padding_end">30dp</dimen>
 
+    <dimen name="event_height">73dp</dimen>
+
 </resources>

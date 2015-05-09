@@ -1,13 +1,9 @@
 package amai.org.conventions;
 
-import android.os.Handler;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -23,7 +19,6 @@ import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
 import amai.org.conventions.model.Dates;
 import amai.org.conventions.navigation.NavigationActivity;
-import amai.org.conventions.navigation.NavigationToolbar;
 
 
 public class MyEventsActivity extends NavigationActivity {
@@ -43,15 +38,17 @@ public class MyEventsActivity extends NavigationActivity {
         List<ConventionEvent> events = getMyEvents();
         Collections.sort(events, new ConventionEventComparator());
 
+
         // Set up text view for next event start
         nextEventStart = (TextView) findViewById(R.id.nextEventStart);
         setNextEventStartText(events);
 
         // Set up events list
-        RecyclerView hallEventsList = (RecyclerView) findViewById(R.id.myEventsList);
-        hallEventsList.setAdapter(new EventsViewAdapter(events, true, true));
+	    ArrayList<ArrayList<ConventionEvent>> nonConflictingGroups = getNonConflictingGroups(events);
+	    RecyclerView eventsList = (RecyclerView) findViewById(R.id.myEventsList);
+	    eventsList.setAdapter(new ConflictingEventsViewAdapter(nonConflictingGroups, true, true));
 
-        hallEventsList.setLayoutManager(new LinearLayoutManager(this));
+	    eventsList.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private List<ConventionEvent> getMyEvents() {
@@ -110,4 +107,40 @@ public class MyEventsActivity extends NavigationActivity {
             nextEventStartTextRunner.removeCallbacks(updateNextEventStartTimeText);
         }
     }
+
+	/**
+	 * Split events to conflicting groups. A conflict between 2 events happens when one of events starts
+	 * after the other event's start time and before its end time.
+	 * @param events - list of events sorted by start time
+	 * @return a list of event groups. Each event group is a list of events, with the same sort order as
+	 * sent, where each event conflicts with at least one other event in the group. Events from different
+	 * groups do not conflict with each other. The groups are ordered by the first event's start time.
+	 */
+	private ArrayList<ArrayList<ConventionEvent>> getNonConflictingGroups(List<ConventionEvent> events) {
+		ArrayList<ArrayList<ConventionEvent>> nonConflictingEventGroups = new ArrayList<>();
+
+		Date currGroupEndTime = null;
+		ArrayList<ConventionEvent> currGroup = null;
+		for (ConventionEvent event : events) {
+			// Non-conflicting event - it's either the first event or it starts after
+			// (or at the same time as) the current group ends.
+			if (currGroup == null || !event.getStartTime().before(currGroupEndTime)) {
+				// If we have a previous group, add it to the groups list
+				if (currGroup != null) {
+					nonConflictingEventGroups.add(currGroup);
+				}
+				currGroup = new ArrayList<>(1);
+				currGroupEndTime = null;
+			}
+			currGroup.add(event);
+			if (currGroupEndTime == null || event.getEndTime().after(currGroupEndTime)) {
+				currGroupEndTime = event.getEndTime();
+			}
+
+		}
+		// Add the last group
+		nonConflictingEventGroups.add(currGroup);
+
+		return nonConflictingEventGroups;
+	}
 }

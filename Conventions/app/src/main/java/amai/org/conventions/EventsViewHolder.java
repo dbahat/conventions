@@ -1,12 +1,8 @@
 package amai.org.conventions;
 
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import java.text.SimpleDateFormat;
 
 import amai.org.conventions.model.ConventionEvent;
 
@@ -22,9 +18,10 @@ public class EventsViewHolder extends RecyclerView.ViewHolder {
         eventView = (EventView) itemView.findViewById(eventElementId);
     }
 
-    public void setModel(ConventionEvent event) {
-        eventView.setEvent(event);
-        eventView.setShowFavoriteIcon(showFavoriteIcon);
-        eventView.setShowHallName(showHallName);
-    }
+	public void setModel(ConventionEvent event, boolean conflicting) {
+		eventView.setEvent(event);
+		eventView.setShowFavoriteIcon(showFavoriteIcon);
+		eventView.setShowHallName(showHallName);
+		eventView.setConflicting(conflicting);
+	}
 }

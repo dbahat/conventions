@@ -1,5 +1,6 @@
 package amai.org.conventions;
 
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,11 +14,13 @@ public class EventsViewAdapter extends RecyclerView.Adapter<EventsViewHolder> {
     private List<ConventionEvent> eventsList;
     private boolean showFavoriteIcon;
     private boolean showHallName;
+	private final boolean conflicting;
 
-    public EventsViewAdapter(List<ConventionEvent> eventsList, boolean showFavoriteIcon, boolean showHallName) {
+    public EventsViewAdapter(List<ConventionEvent> eventsList, boolean showFavoriteIcon, boolean showHallName, boolean conflicting) {
         this.eventsList = eventsList;
         this.showFavoriteIcon = showFavoriteIcon;
         this.showHallName = showHallName;
+	    this.conflicting = conflicting;
     }
 
     @Override
@@ -33,6 +36,7 @@ public class EventsViewAdapter extends RecyclerView.Adapter<EventsViewHolder> {
 
     @Override
     public void onBindViewHolder(EventsViewHolder eventsViewHolder, int position) {
-        eventsViewHolder.setModel(eventsList.get(position));
+        eventsViewHolder.setModel(eventsList.get(position), conflicting);
     }
 }
+

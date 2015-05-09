@@ -10,7 +10,7 @@
         android:id="@+id/parentLayout"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/event_height">
 
         <LinearLayout
             android:id="@+id/timeLayout"

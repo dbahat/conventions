@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +17,6 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import amai.org.conventions.model.Colors;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.Dates;
 
@@ -29,8 +29,9 @@ public class EventView extends FrameLayout {
     private final TextView lecturerName;
     private final ViewGroup timeLayout;
     private final ViewGroup eventDescription;
+	private final CardView eventContainer;
 
-    private SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+	private SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
 
     private ConventionEvent event = null;
 
@@ -47,6 +48,7 @@ public class EventView extends FrameLayout {
         eventName = (TextView) this.findViewById(R.id.eventName);
         lecturerName = (TextView) this.findViewById(R.id.lecturerName);
         eventDescription = (ViewGroup) this.findViewById(R.id.eventDescription);
+	    eventContainer = (CardView) this.findViewById(R.id.eventContainer);
 
 	    // TODO swipe on the entire view instead of click on the timeLayout, and handle the
 	    // event from the fragment or give an option of how to behave
@@ -56,11 +58,12 @@ public class EventView extends FrameLayout {
                 ConventionEvent event = EventView.this.event;
                 if (event != null) {
                     event.setAttending(!event.isAttending());
-                    EventView.this.setEvent(event);
+                    EventView.this.dataChanged();
                 }
             }
         });
 
+	    setConflicting(false);
         setAttributes(attrs);
     }
 
@@ -84,6 +87,10 @@ public class EventView extends FrameLayout {
 
         params.recycle();
     }
+
+	private void dataChanged() {
+		setEvent(this.event);
+	}
 
     public void setEvent(ConventionEvent event) {
         this.event = event;
@@ -186,4 +193,16 @@ public class EventView extends FrameLayout {
         layout.setBackground(drawable);
         layout.setPadding(pL, pT, pR, pB);
     }
+
+	public void setConflicting(boolean conflicting) {
+		if (conflicting) {
+			eventContainer.setCardElevation(0.0f);
+			eventContainer.setMaxCardElevation(0.0f);
+			eventContainer.setCardBackgroundColor(getResources().getColor(R.color.conflictingEventsBackground));
+		} else {
+			eventContainer.setCardElevation(6.0f);
+			eventContainer.setMaxCardElevation(6.0f);
+			eventContainer.setCardBackgroundColor(getResources().getColor(R.color.white));
+		}
+	}
 }
