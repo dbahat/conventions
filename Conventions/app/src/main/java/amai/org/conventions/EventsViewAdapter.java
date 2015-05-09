@@ -21,7 +21,7 @@ public class EventsViewAdapter extends RecyclerView.Adapter<EventsViewHolder> {
     }
 
     @Override
-    public EventsViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public EventsViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.convention_event_view_holder, viewGroup, false);
         return new EventsViewHolder(view, R.id.eventElement, showFavoriteIcon, showHallName);
     }
@@ -32,8 +32,7 @@ public class EventsViewAdapter extends RecyclerView.Adapter<EventsViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(EventsViewHolder eventsViewHolder, int i) {
-        eventsViewHolder.setModel(eventsList.get(i));
+    public void onBindViewHolder(EventsViewHolder eventsViewHolder, int position) {
+        eventsViewHolder.setModel(eventsList.get(position));
     }
-
 }

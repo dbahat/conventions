@@ -104,7 +104,7 @@ public class EventView extends FrameLayout {
         if (event.getStartTime().after(now)) {
 	        setEventColor(getResources().getColor(R.color.white));
         } else if (event.getEndTime().before(now)) {
-	        setEventColor(getResources().getColor(R.color.very_light_gray));
+	        setEventColor(getResources().getColor(R.color.ultra_light_gray));
         } else {
             setEventColor(getResources().getColor(R.color.gold));
         }
