@@ -38,6 +38,7 @@ public class MyEventsActivity extends NavigationActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentInContentContainer(R.layout.activity_my_events);
+        setToolbarTitle(getResources().getString(R.string.my_events_title));
 
         List<ConventionEvent> events = getMyEvents();
         Collections.sort(events, new ConventionEventComparator());

@@ -8,11 +8,11 @@ import android.support.v4.view.ViewPager;
 
 import amai.org.conventions.R;
 import amai.org.conventions.navigation.NavigationActivity;
-import amai.org.conventions.navigation.NavigationToolbar;
 import fr.castorflex.android.verticalviewpager.VerticalViewPager;
 
 public class MapActivity extends NavigationActivity implements MapFloorFragment.OnMapArrowClickedListener {
 
+    private static final int NUMBER_OF_FLOORS = 3;
     private VerticalViewPager viewPager;
 
     @Override
@@ -36,7 +36,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 
             @Override
             public void onPageSelected(int position) {
-                // TODO - Set the toolbar title here
+                setToolbarTitle(getResources().getString(R.string.map_floor) + " " + positionToFloorNumber(viewPager.getCurrentItem()));
             }
 
             @Override
@@ -68,12 +68,16 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 
         @Override
         public Fragment getItem(int position) {
-            return MapFloorFragment.newInstance(3 - position - 1);
+            return MapFloorFragment.newInstance(positionToFloorNumber(position));
         }
 
         @Override
         public int getCount() {
-            return 3;
+            return NUMBER_OF_FLOORS;
         }
+    }
+
+    private int positionToFloorNumber(int position) {
+        return NUMBER_OF_FLOORS - position;
     }
 }

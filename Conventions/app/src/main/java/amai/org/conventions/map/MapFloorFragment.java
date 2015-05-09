@@ -97,14 +97,14 @@ public class MapFloorFragment extends Fragment {
 
         int mapFloor = getArguments().getInt(ARGS_FLOOR_NUMBER);
         switch (mapFloor) {
-            case 0:
+            case 1:
                 mapFloorImage.setBackground(getResources().getDrawable(R.drawable.floor1));
                 downArrowImage.setVisibility(View.GONE);
                 break;
-            case 1:
+            case 2:
                 mapFloorImage.setBackground(getResources().getDrawable(R.drawable.floor2));
                 break;
-            case 2:
+            case 3:
                 mapFloorImage.setBackground(getResources().getDrawable(R.drawable.floor3));
                 upArrowImage.setVisibility(View.GONE);
                 break;

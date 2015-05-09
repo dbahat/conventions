@@ -11,14 +11,16 @@ import amai.org.conventions.R;
 
 public abstract class NavigationActivity extends AppCompatActivity implements NavigationToolbar.OnNavigationPageSelectedListener {
 
+    private NavigationToolbar navigationToolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_navigation);
 
-        NavigationToolbar navigationToolbar = (NavigationToolbar) findViewById(R.id.navigation_toolbar);
-        navigationToolbar.initialize();
+        navigationToolbar = (NavigationToolbar) findViewById(R.id.navigation_toolbar);
+        navigationToolbar.initialize(this);
         navigationToolbar.setNavigationPageSelectedListener(this);
     }
 
@@ -37,5 +39,9 @@ public abstract class NavigationActivity extends AppCompatActivity implements Na
 
         // Remove the current activity from memory
         finish();
+    }
+
+    protected void setToolbarTitle(String titleText) {
+        navigationToolbar.setTitle(titleText);
     }
 }

@@ -31,9 +31,9 @@ public class NavigationToolbar extends Toolbar {
         super(context, attrs);
     }
 
-    public void initialize() {
+    public void initialize(NavigationActivity navigationActivity) {
         resolveUIElements();
-        initializeToolbar();
+        initializeToolbar(navigationActivity);
     }
 
     public void setNavigationPageSelectedListener(OnNavigationPageSelectedListener navigationPageSelectedListener) {
@@ -56,13 +56,17 @@ public class NavigationToolbar extends Toolbar {
         return button;
     }
 
+    public void setTitle(String titleText) {
+        title.setText(titleText);
+    }
+
     private void resolveUIElements() {
         navigationSpinner = (Spinner) findViewById(R.id.toolbar_page_navigation_spinner);
         title = (TextView) findViewById(R.id.toolbar_title);
         actionButtonsContainer = (LinearLayout) findViewById(R.id.toolbar_action_buttons_container);
     }
 
-    private void initializeToolbar() {
+    private void initializeToolbar(NavigationActivity activity) {
 
         navigationPages = new NavigationPages(getContext());
 
@@ -74,7 +78,7 @@ public class NavigationToolbar extends Toolbar {
 
         // Set the current screen as the selected one, since spinner by default doesn't fire onItemSelected event when
         // clicking the currently selected activity.
-        navigationSpinner.setSelection(navigationPages.getPositionForType(((NavigationActivity) getContext()).getClass()));
+        navigationSpinner.setSelection(navigationPages.getPositionForType(activity.getClass()));
 
         // Setting the spinner with a delay to ensure onItemSelected won't get invoked when first opening the activity.
         navigationSpinner.post(new Runnable() {

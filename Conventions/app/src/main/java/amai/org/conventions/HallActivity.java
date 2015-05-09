@@ -22,6 +22,7 @@ public class HallActivity extends NavigationActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentInContentContainer(R.layout.activity_hall);
+        setToolbarTitle(hallName);
 
         RecyclerView hallEventsList = (RecyclerView) findViewById(R.id.hallEventsList);
         final String hallName = this.hallName;

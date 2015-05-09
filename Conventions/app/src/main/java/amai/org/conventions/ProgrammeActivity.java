@@ -13,5 +13,6 @@ public class ProgrammeActivity extends NavigationActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentInContentContainer(R.layout.activity_programme);
+        setToolbarTitle(getResources().getString(R.string.programme_title));
     }
 }

@@ -17,8 +17,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".HallActivity"
-            android:label="@string/title_activity_hall" >
+            android:name=".HallActivity" >
         </activity>
         <activity
             android:name=".MyEventsActivity" >
