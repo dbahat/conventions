@@ -1,5 +1,13 @@
 package amai.org.conventions.model;
 
+import android.content.Context;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -7,13 +15,15 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-public class Convention {
+public class Convention implements Serializable {
+	private static final String FILE_NAME = "convention_data";
+	private static SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:ss");
 	private static Convention convention = new Convention();
+	private static Context context;
 
 	private List<ConventionEvent> events;
 	private List<Hall> halls;
 
-	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:ss");
 
 	public static Convention getInstance() {
 		return convention;
@@ -370,5 +380,37 @@ public class Convention {
 		}
 
 		return flattened;
+	}
+
+	public static void initFromFile(Context context) {
+		Convention.context = context;
+		try {
+			FileInputStream fileInputStream = context.openFileInput(FILE_NAME);
+			ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+			convention = (Convention) objectInputStream.readObject();
+			objectInputStream.close();
+			fileInputStream.close();
+		} catch (FileNotFoundException f) {
+			// Ignore - default convention will be created from hard-coded data
+		} catch (Exception e) {
+			// Nothing we can do about badly formatted file, don't crash the app
+			e.printStackTrace();
+		}
+	}
+
+	public void save() {
+		if (context == null) {
+			return;
+		}
+		try {
+			FileOutputStream fos = context.openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
+			ObjectOutputStream os = new ObjectOutputStream(fos);
+			os.writeObject(this);
+			os.close();
+			fos.close();
+		} catch (Exception e) {
+			// Nothing we can do... don't crash the app
+			e.printStackTrace();
+		}
 	}
 }

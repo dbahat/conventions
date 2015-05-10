@@ -17,6 +17,7 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.Dates;
 
@@ -59,6 +60,7 @@ public class EventView extends FrameLayout {
                 if (event != null) {
                     event.setAttending(!event.isAttending());
                     EventView.this.dataChanged();
+	                Convention.getInstance().save();
                 }
             }
         });

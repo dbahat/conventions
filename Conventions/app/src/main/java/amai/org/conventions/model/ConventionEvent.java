@@ -1,8 +1,9 @@
 package amai.org.conventions.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ConventionEvent {
+public class ConventionEvent implements Serializable {
     private String title;
     private String lecturer;
     private Date startTime;
@@ -105,4 +106,24 @@ public class ConventionEvent {
         setHall(hall);
         return this;
     }
+
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof ConventionEvent) {
+			ConventionEvent other = (ConventionEvent) o;
+			return Objects.equals(title, other.title) &&
+					Objects.equals(lecturer, other.lecturer) &&
+					Objects.equals(startTime, other.startTime) &&
+					Objects.equals(endTime, other.endTime) &&
+					Objects.equals(type, other.type) &&
+					Objects.equals(hall, other.hall) &&
+					Objects.equals(attending, other.attending);
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(title, lecturer, startTime, endTime, type, hall, attending);
+	}
 }

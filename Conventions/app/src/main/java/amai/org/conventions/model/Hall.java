@@ -1,6 +1,8 @@
 package amai.org.conventions.model;
 
-public class Hall {
+import java.io.Serializable;
+
+public class Hall implements Serializable {
     private String name;
     private int order;
 
@@ -32,4 +34,18 @@ public class Hall {
         setOrder(order);
         return this;
     }
+
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Hall) {
+			Hall other = (Hall) o;
+			return Objects.equals(name, other.name) && Objects.equals(order, other.order);
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(name, order);
+	}
 }
