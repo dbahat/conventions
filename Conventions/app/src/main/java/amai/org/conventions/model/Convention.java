@@ -354,6 +354,16 @@ public class Convention implements Serializable {
 		return halls;
 	}
 
+	public ConventionEvent findById(int eventId) {
+		for (ConventionEvent event : getEvents()) {
+			if (eventId == event.getId()) {
+				return event;
+			}
+		}
+
+		return null;
+	}
+
 	private Date time(String timeAsString) {
 		try {
 			return dateFormat.parse("05.03.2015 " + timeAsString);

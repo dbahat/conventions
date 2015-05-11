@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -14,6 +15,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
+import amai.org.conventions.events.activities.EventActivity;
 import amai.org.conventions.events.adapters.EventsViewOrHourAdapter;
 import amai.org.conventions.events.activities.MyEventsActivity;
 import amai.org.conventions.model.Convention;

@@ -23,6 +23,7 @@ import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.Dates;
 
 public class EventView extends FrameLayout {
+
     private final ImageView faveIcon;
     private final TextView hallName;
     private final TextView startTime;
@@ -105,6 +106,9 @@ public class EventView extends FrameLayout {
         setEndTime(timeFormat.format(event.getEndTime()));
         setEventTitle(event.getTitle());
         setLecturerName(event.getLecturer());
+
+        // Setting the event id inside the view tag, so we can easily extract it from the view when listeneing to onClick events.
+        setTag(event.getId());
     }
 
     private void setColorsFromEvent(ConventionEvent event) {

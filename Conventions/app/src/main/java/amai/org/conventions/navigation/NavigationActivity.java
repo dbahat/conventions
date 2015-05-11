@@ -4,9 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.FrameLayout;
 
 import amai.org.conventions.R;
+import amai.org.conventions.events.EventView;
+import amai.org.conventions.events.activities.EventActivity;
 
 
 public abstract class NavigationActivity extends AppCompatActivity implements NavigationToolbar.OnNavigationPageSelectedListener {
@@ -32,6 +35,14 @@ public abstract class NavigationActivity extends AppCompatActivity implements Na
     @Override
     public void onNavigationPageSelected(Class<? extends Activity> activityToNavigateTo) {
         navigateToActivity(activityToNavigateTo);
+    }
+
+    public void onConventionEventClicked(View view) {
+        Intent intent = new Intent(this, EventActivity.class);
+        intent.putExtra(EventActivity.EXTRA_EVENT_ID, (int) view.getTag());
+        startActivity(intent);
+        overridePendingTransition(0, 0);
+        finish();
     }
 
     protected void setToolbarTitle(String titleText) {

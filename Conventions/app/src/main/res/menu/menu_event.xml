@@ -2,13 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="amai.org.conventions.events.activities.MyEventsActivity"
+    tools:context="amai.org.conventions.events.activities.EventActivity"
     tools:ignore="AlwaysShowAction">
 
     <item
-        android:id="@+id/my_event_navigate_to_programme"
-        android:title="@string/my_events_title"
+        android:id="@+id/event_change_favorite_state"
+        android:title="Add to favorites"
         android:icon="@drawable/favorite_icon_false"
+        android:orderInCategory="1"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/event_navigate_to_map"
+        android:title="See in map"
+        android:icon="@android:drawable/ic_dialog_map"
         android:orderInCategory="1"
         app:showAsAction="always"/>
 
