@@ -30,17 +30,18 @@ public class ProgrammeActivity extends NavigationActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    private List<ConventionEvent> getEventsAndStartTimes() {
+    private List<Object> getEventsAndStartTimes() {
         // Gets the convention events
-        List events = new ArrayList<Object>(Convention.getInstance().getEvents());
+	    List<ConventionEvent> events = Convention.getInstance().getEvents();
+	    List<Object> eventsAndDates = new ArrayList<Object>(events);
 
         // Gets the unique start times
-        List dates = extractUniqueRoundedStartDates(events);
+        List<Date> dates = extractUniqueRoundedStartDates(events);
 
-        events.addAll(dates);
+        eventsAndDates.addAll(dates);
 
-        Collections.sort(events, new ConventionEventOrTimeComparator());
-        return events;
+        Collections.sort(eventsAndDates, new ConventionEventOrTimeComparator());
+        return eventsAndDates;
     }
 
     private List<Date> extractUniqueRoundedStartDates(List<ConventionEvent> events) {
@@ -60,7 +61,7 @@ public class ProgrammeActivity extends NavigationActivity {
         return new ArrayList<>(dates);
     }
 
-    private class ConventionEventOrTimeComparator implements Comparator {
+    private class ConventionEventOrTimeComparator implements Comparator<Object> {
 
         private ConventionEventComparator conventionEventComparator = new ConventionEventComparator();
 

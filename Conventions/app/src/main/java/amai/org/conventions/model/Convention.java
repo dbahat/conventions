@@ -19,7 +19,7 @@ import java.util.Map;
 
 public class Convention implements Serializable {
 	private static final String EVENT_USER_INPUT_FILE_NAME = "convention_data_user_input";
-	private static SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:ss");
+	private static SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
 	private static Convention convention = new Convention();
 	private static Context context;
 
