@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class ConventionEvent implements Serializable {
+	private int id;
     private String title;
     private String lecturer;
     private Date startTime;
@@ -11,12 +12,20 @@ public class ConventionEvent implements Serializable {
     private EventType type;
     private Hall hall;
 
+	private UserInput userInput;
 //    private int peopleAttending;
-    private boolean attending;
-//    private Feedback feedback;
 
 
-    public String getTitle() {
+	public ConventionEvent(int id) {
+		this.id = id;
+		userInput = new UserInput();
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public String getTitle() {
         return title;
     }
 
@@ -43,11 +52,11 @@ public class ConventionEvent implements Serializable {
     }
 
     public boolean isAttending() {
-        return attending;
+        return userInput.isAttending();
     }
 
     public void setAttending(boolean attending) {
-        this.attending = attending;
+        this.userInput.setAttending(attending);
     }
 
     public ConventionEvent withAttending(boolean attending) {
@@ -107,6 +116,14 @@ public class ConventionEvent implements Serializable {
         return this;
     }
 
+	public UserInput getUserInput() {
+		return userInput;
+	}
+
+	public void setUserInput(UserInput userInput) {
+		this.userInput = userInput;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (o instanceof ConventionEvent) {
@@ -117,13 +134,42 @@ public class ConventionEvent implements Serializable {
 					Objects.equals(endTime, other.endTime) &&
 					Objects.equals(type, other.type) &&
 					Objects.equals(hall, other.hall) &&
-					Objects.equals(attending, other.attending);
+					Objects.equals(userInput, other.userInput);
 		}
 		return false;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(title, lecturer, startTime, endTime, type, hall, attending);
+		return Objects.hash(title, lecturer, startTime, endTime, type, hall, userInput);
 	}
+
+	public static class UserInput implements Serializable {
+		private boolean attending;
+//    private Feedback feedback;
+
+
+		public boolean isAttending() {
+			return attending;
+		}
+
+		public void setAttending(boolean attending) {
+			this.attending = attending;
+		}
+
+		@Override
+		public boolean equals(Object o) {
+			if (o instanceof UserInput) {
+				UserInput other = (UserInput) o;
+				return Objects.equals(this.isAttending(), other.isAttending());
+			}
+			return false;
+		}
+
+		@Override
+		public int hashCode() {
+			return Objects.hash(attending);
+		}
+	}
+
 }
