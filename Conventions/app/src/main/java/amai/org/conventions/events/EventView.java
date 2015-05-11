@@ -1,4 +1,4 @@
-package amai.org.conventions;
+package amai.org.conventions.events;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -17,6 +17,7 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import amai.org.conventions.R;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.Dates;

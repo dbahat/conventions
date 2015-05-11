@@ -1,6 +1,5 @@
-package amai.org.conventions;
+package amai.org.conventions.events.adapters;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +7,9 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import amai.org.conventions.R;
+import amai.org.conventions.events.holders.ConflictingEventsViewHolder;
+import amai.org.conventions.events.holders.EventsViewHolder;
 import amai.org.conventions.model.ConventionEvent;
 
 public class ConflictingEventsViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

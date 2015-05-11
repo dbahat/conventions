@@ -1,13 +1,14 @@
-package amai.org.conventions;
+package amai.org.conventions.events.holders;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+
+import amai.org.conventions.R;
 
 public class EventTimeViewHolder extends RecyclerView.ViewHolder {
     private TextView timeTextView;

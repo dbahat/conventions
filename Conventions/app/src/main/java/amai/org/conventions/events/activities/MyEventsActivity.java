@@ -1,4 +1,4 @@
-package amai.org.conventions;
+package amai.org.conventions.events.activities;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,6 +15,9 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import amai.org.conventions.ProgrammeActivity;
+import amai.org.conventions.R;
+import amai.org.conventions.events.adapters.ConflictingEventsViewAdapter;
 import amai.org.conventions.model.CollectionsFilter;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;

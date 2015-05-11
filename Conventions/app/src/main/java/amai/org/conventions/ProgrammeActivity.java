@@ -1,6 +1,5 @@
 package amai.org.conventions;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +14,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
+import amai.org.conventions.events.adapters.EventsViewOrHourAdapter;
+import amai.org.conventions.events.activities.MyEventsActivity;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;

@@ -1,4 +1,4 @@
-package amai.org.conventions;
+package amai.org.conventions.events.activities;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,12 +7,13 @@ import android.support.v7.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import amai.org.conventions.R;
+import amai.org.conventions.events.adapters.EventsViewAdapter;
 import amai.org.conventions.model.CollectionsFilter;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
 import amai.org.conventions.navigation.NavigationActivity;
-import amai.org.conventions.navigation.NavigationToolbar;
 
 
 public class HallActivity extends NavigationActivity {

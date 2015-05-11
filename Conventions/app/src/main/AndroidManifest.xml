@@ -18,10 +18,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".HallActivity" >
+            android:name=".events.activities.HallActivity" >
         </activity>
         <activity
-            android:name=".MyEventsActivity" >
+            android:name=".events.activities.MyEventsActivity" >
         </activity>
         <activity
             android:name=".ProgrammeActivity" >

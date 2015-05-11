@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:layoutDirection="rtl"
     android:orientation="vertical"
-    tools:context="amai.org.conventions.HallActivity">
+    tools:context="amai.org.conventions.events.activities.HallActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/hallEventsList"
