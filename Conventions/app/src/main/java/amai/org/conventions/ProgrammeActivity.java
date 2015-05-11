@@ -1,8 +1,11 @@
 package amai.org.conventions;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -24,10 +27,30 @@ public class ProgrammeActivity extends NavigationActivity {
         super.onCreate(savedInstanceState);
         setContentInContentContainer(R.layout.activity_programme);
         setToolbarTitle(getResources().getString(R.string.programme_title));
+        getNavigationToolbar().setAsActionBar(this);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.programmeList);
         recyclerView.setAdapter(new EventsViewOrHourAdapter(getEventsAndStartTimes()));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.programme_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.programme_navigate_to_my_events:
+                navigateToActivity(MyEventsActivity.class);
+
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private List<Object> getEventsAndStartTimes() {

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="amai.org.conventions.ProgrammeActivity"
+    tools:ignore="AlwaysShowAction">
+
+    <item
+        android:id="@+id/programme_navigate_to_my_events"
+        android:title="@string/programme_title"
+        android:icon="@drawable/favorite_icon_true"
+        android:orderInCategory="1"
+        app:showAsAction="always"/>
+
+</menu>

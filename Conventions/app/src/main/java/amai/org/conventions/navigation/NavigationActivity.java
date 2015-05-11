@@ -31,6 +31,18 @@ public abstract class NavigationActivity extends AppCompatActivity implements Na
 
     @Override
     public void onNavigationPageSelected(Class<? extends Activity> activityToNavigateTo) {
+        navigateToActivity(activityToNavigateTo);
+    }
+
+    protected void setToolbarTitle(String titleText) {
+        navigationToolbar.setTitle(titleText);
+    }
+
+    protected NavigationToolbar getNavigationToolbar() {
+        return navigationToolbar;
+    }
+
+    protected void navigateToActivity(Class<? extends Activity> activityToNavigateTo) {
         Intent intent = new Intent(this, activityToNavigateTo);
         startActivity(intent);
 
@@ -39,9 +51,5 @@ public abstract class NavigationActivity extends AppCompatActivity implements Na
 
         // Remove the current activity from memory
         finish();
-    }
-
-    protected void setToolbarTitle(String titleText) {
-        navigationToolbar.setTitle(titleText);
     }
 }

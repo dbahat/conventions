@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -34,6 +36,7 @@ public class MyEventsActivity extends NavigationActivity {
         super.onCreate(savedInstanceState);
         setContentInContentContainer(R.layout.activity_my_events);
         setToolbarTitle(getResources().getString(R.string.my_events_title));
+        getNavigationToolbar().setAsActionBar(this);
 
         List<ConventionEvent> events = getMyEvents();
         Collections.sort(events, new ConventionEventComparator());
@@ -49,6 +52,25 @@ public class MyEventsActivity extends NavigationActivity {
 	    eventsList.setAdapter(new ConflictingEventsViewAdapter(nonConflictingGroups, true, true));
 
 	    eventsList.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.my_events_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.my_event_navigate_to_programme:
+                navigateToActivity(ProgrammeActivity.class);
+
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private List<ConventionEvent> getMyEvents() {

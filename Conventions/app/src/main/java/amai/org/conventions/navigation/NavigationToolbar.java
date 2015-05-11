@@ -2,14 +2,14 @@ package amai.org.conventions.navigation;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -21,7 +21,6 @@ import amai.org.conventions.R;
 public class NavigationToolbar extends Toolbar {
     private Spinner navigationSpinner;
     private TextView title;
-    private LinearLayout actionButtonsContainer;
 
     private NavigationPages navigationPages;
 
@@ -40,30 +39,21 @@ public class NavigationToolbar extends Toolbar {
         this.navigationPageSelectedListener = navigationPageSelectedListener;
     }
 
-    public void clearActionButtons() {
-        actionButtonsContainer.removeAllViews();
-    }
-
-    public Button addActionButton() {
-        Button button = new Button(getContext());
-        button.setLayoutParams(new LinearLayout.LayoutParams(
-                getResources().getDimensionPixelSize(R.dimen.toolbar_button_width),
-                getResources().getDimensionPixelSize(R.dimen.toolbar_button_height)));
-        button.setPaddingRelative(
-                getResources().getDimensionPixelSize(R.dimen.toolbar_button_padding_start), 0,
-                getResources().getDimensionPixelSize(R.dimen.toolbar_button_padding_start), 0);
-        actionButtonsContainer.addView(button);
-        return button;
-    }
-
     public void setTitle(String titleText) {
         title.setText(titleText);
+    }
+
+    public void setAsActionBar(AppCompatActivity activity) {
+        activity.setSupportActionBar(this);
+        ActionBar actionBar = activity.getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(false);
+        }
     }
 
     private void resolveUIElements() {
         navigationSpinner = (Spinner) findViewById(R.id.toolbar_page_navigation_spinner);
         title = (TextView) findViewById(R.id.toolbar_title);
-        actionButtonsContainer = (LinearLayout) findViewById(R.id.toolbar_action_buttons_container);
     }
 
     private void initializeToolbar(NavigationActivity activity) {
