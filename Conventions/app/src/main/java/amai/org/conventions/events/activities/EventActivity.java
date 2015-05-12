@@ -1,8 +1,11 @@
 package amai.org.conventions.events.activities;
 
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import amai.org.conventions.R;
@@ -57,5 +60,8 @@ public class EventActivity extends NavigationActivity {
         lecturerName.setText(event.getLecturer());
         TextView time = (TextView)findViewById(R.id.event_time);
         time.setText(event.getStartTime().toString() + " " + event.getEndTime().toString());
+
+//	    ImageView imageView = (ImageView) findViewById(R.id.event_image);
+//	    imageView.setImageDrawable(getResources().getDrawable(R.drawable.event_ntt));
     }
 }

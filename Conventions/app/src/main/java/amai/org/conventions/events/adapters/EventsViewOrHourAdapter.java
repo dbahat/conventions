@@ -4,6 +4,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import java.util.Date;
 import java.util.List;
@@ -13,7 +15,7 @@ import amai.org.conventions.events.holders.EventTimeViewHolder;
 import amai.org.conventions.events.holders.EventsViewHolder;
 import amai.org.conventions.model.ConventionEvent;
 
-public class EventsViewOrHourAdapter extends RecyclerView.Adapter {
+public class EventsViewOrHourAdapter extends BaseAdapter {
 
     private static final int CONVENTION_EVENT_VIEW_TYPE = 0;
     private static final int HOUR_VIEW_TYPE = 1;
@@ -24,7 +26,6 @@ public class EventsViewOrHourAdapter extends RecyclerView.Adapter {
         this.eventsOrHours = eventsOrHours;
     }
 
-    @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
             case CONVENTION_EVENT_VIEW_TYPE:
@@ -38,7 +39,6 @@ public class EventsViewOrHourAdapter extends RecyclerView.Adapter {
         }
     }
 
-    @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof EventsViewHolder) {
             EventsViewHolder eventViewHolder = (EventsViewHolder) holder;
@@ -52,12 +52,38 @@ public class EventsViewOrHourAdapter extends RecyclerView.Adapter {
         }
     }
 
-    @Override
-    public int getItemCount() {
-        return eventsOrHours.size();
-    }
+	@Override
+	public int getCount() {
+		return eventsOrHours.size();
+	}
 
-    @Override
+	@Override
+	public Object getItem(int position) {
+		return eventsOrHours.get(position);
+	}
+
+	@Override
+	public long getItemId(int position) {
+		return position;
+	}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		RecyclerView.ViewHolder holder = null;
+		int type = getItemViewType(position);
+		System.out.println("getView " + position + " " + convertView + " type = " + type);
+		if (convertView == null) {
+			holder = onCreateViewHolder(parent, type);
+			convertView = holder.itemView;
+			convertView.setTag(holder);
+		} else {
+			holder = (RecyclerView.ViewHolder)convertView.getTag();
+		}
+		onBindViewHolder(holder, position);;
+		return convertView;
+	}
+
+	@Override
     public int getItemViewType(int position) {
         Object eventOrHour = eventsOrHours.get(position);
         if (eventOrHour instanceof ConventionEvent) {
@@ -70,4 +96,9 @@ public class EventsViewOrHourAdapter extends RecyclerView.Adapter {
 
         throw new AssertionError("The following type is not ConventionEvent on Date object: " + eventOrHour.getClass().getSimpleName());
     }
+
+	@Override
+	public int getViewTypeCount() {
+		return 2;
+	}
 }

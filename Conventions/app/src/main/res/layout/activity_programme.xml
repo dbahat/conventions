@@ -5,8 +5,10 @@
     tools:context="amai.org.conventions.ProgrammeActivity"
     android:orientation="vertical">
 
-    <android.support.v7.widget.RecyclerView
+    <ListView
         android:id="@+id/programmeList"
+        android:divider="@null"
+        android:dividerHeight="0dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

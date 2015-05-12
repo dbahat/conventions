@@ -3,6 +3,9 @@ package amai.org.conventions;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.ViewTreeObserver;
+import android.widget.AbsListView;
+import android.widget.ListView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +24,7 @@ import amai.org.conventions.events.activities.MyEventsActivity;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
+import amai.org.conventions.model.Dates;
 import amai.org.conventions.navigation.NavigationActivity;
 
 public class ProgrammeActivity extends NavigationActivity {
@@ -32,10 +36,56 @@ public class ProgrammeActivity extends NavigationActivity {
         setToolbarTitle(getResources().getString(R.string.programme_title));
         getNavigationToolbar().setAsActionBar(this);
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.programmeList);
-        recyclerView.setAdapter(new EventsViewOrHourAdapter(getEventsAndStartTimes()));
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        final ListView listView = (ListView) findViewById(R.id.programmeList);
+	    List<Object> eventsAndStartTimes = getEventsAndStartTimes();
+	    listView.setAdapter(new EventsViewOrHourAdapter(eventsAndStartTimes));
+
+	    final int position = getCurrentTimePosition(eventsAndStartTimes);
+	    if (position != -1) {
+		    final ViewTreeObserver vto = listView.getViewTreeObserver();
+		    vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+			    public void onGlobalLayout() {
+				    listView.smoothScrollToPositionFromTop(position, 0, 500);
+
+				    // There is a bug in smoothScrollToPositionFromTop that sometimes it doesn't scroll all the way.
+				    // More info here : https://code.google.com/p/android/issues/detail?id=36062
+				    // As a workaround, we listen to when it finished scrolling, and then scroll again to
+				    // the same position.
+				    listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+
+				    @Override
+				    public void onScrollStateChanged(AbsListView view, int scrollState) {
+					    if(scrollState== AbsListView.OnScrollListener.SCROLL_STATE_IDLE){
+						    listView.setOnScrollListener(null);
+						    listView.smoothScrollToPositionFromTop(position, 0, 500);
+					    }
+				    }
+
+				    @Override
+				    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+				    }
+			    });
+
+				    // Unregister the listener to only call scrollToPosition once
+			    listView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+		    }
+	    });
+	    }
     }
+
+	private int getCurrentTimePosition(List<Object> eventsAndStartTimes) {
+		int position = 0;
+		boolean found = false;
+		int currentHour = toHour(Dates.now());
+		for (Object object : eventsAndStartTimes) {
+			if (object instanceof Date && toHour((Date) object) == currentHour) {
+				found = true;
+				break;
+			}
+			++position;
+		}
+		return found ? position : -1;
+	}
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -56,7 +106,7 @@ public class ProgrammeActivity extends NavigationActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private List<Object> getEventsAndStartTimes() {
+	private List<Object> getEventsAndStartTimes() {
         // Gets the convention events
 	    List<ConventionEvent> events = Convention.getInstance().getEvents();
 	    List<Object> eventsAndDates = new ArrayList<Object>(events);
@@ -122,10 +172,10 @@ public class ProgrammeActivity extends NavigationActivity {
             }
         }
 
-        private int toHour(Date date) {
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(date);
-            return calendar.get(Calendar.HOUR_OF_DAY);
-        }
+    }
+    private static int toHour(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return calendar.get(Calendar.HOUR_OF_DAY);
     }
 }
