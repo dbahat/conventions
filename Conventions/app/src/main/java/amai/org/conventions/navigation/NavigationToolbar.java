@@ -19,7 +19,7 @@ import amai.org.conventions.R;
  * The top toolbar shown in each activity, allowing to navigate between the applications screens.
  */
 public class NavigationToolbar extends Toolbar {
-    private Spinner navigationSpinner;
+    private ExtendedSpinner navigationSpinner;
     private TextView title;
 
     private NavigationPages navigationPages;
@@ -52,7 +52,7 @@ public class NavigationToolbar extends Toolbar {
     }
 
     private void resolveUIElements() {
-        navigationSpinner = (Spinner) findViewById(R.id.toolbar_page_navigation_spinner);
+        navigationSpinner = (ExtendedSpinner) findViewById(R.id.toolbar_page_navigation_spinner);
         title = (TextView) findViewById(R.id.toolbar_title);
     }
 
@@ -66,15 +66,11 @@ public class NavigationToolbar extends Toolbar {
                 android.R.layout.simple_spinner_dropdown_item, navigationPages.getPagesTitle());
         navigationSpinner.setAdapter(adapter);
 
-        // Set the current screen as the selected one, since spinner by default doesn't fire onItemSelected event when
-        // clicking the currently selected activity.
-        navigationSpinner.setSelection(navigationPages.getPositionForType(activity.getClass()));
-
         // Setting the spinner with a delay to ensure onItemSelected won't get invoked when first opening the activity.
         navigationSpinner.post(new Runnable() {
             @Override
             public void run() {
-                navigationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                navigationSpinner.setOnItemSelectedEvenIfUnchangedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                         if (navigationPageSelectedListener != null) {

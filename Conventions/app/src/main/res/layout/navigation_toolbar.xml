@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <Spinner
+        <amai.org.conventions.navigation.ExtendedSpinner
             android:id="@+id/toolbar_page_navigation_spinner"
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -18,7 +18,7 @@
             android:background="@drawable/logo"
             android:spinnerMode="dropdown"
             >
-        </Spinner>
+        </amai.org.conventions.navigation.ExtendedSpinner>
 
         <TextView
             android:id="@+id/toolbar_title"
