@@ -1,4 +1,4 @@
-package amai.org.conventions;
+package amai.org.conventions.events.activities;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
+import amai.org.conventions.R;
 import amai.org.conventions.events.activities.EventActivity;
 import amai.org.conventions.events.adapters.EventsViewOrHourAdapter;
 import amai.org.conventions.events.activities.MyEventsActivity;

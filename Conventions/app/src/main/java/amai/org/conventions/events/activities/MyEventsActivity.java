@@ -15,7 +15,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import amai.org.conventions.ProgrammeActivity;
 import amai.org.conventions.R;
 import amai.org.conventions.events.adapters.ConflictingEventsViewAdapter;
 import amai.org.conventions.model.CollectionsFilter;

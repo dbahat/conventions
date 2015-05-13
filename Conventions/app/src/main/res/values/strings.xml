@@ -6,4 +6,6 @@
     <string name="programme_title">תוכניה</string>
     <string name="my_events_title">האירועים שלי</string>
 
+    <string name="event_added_to_favorites">האירוע התווסף לאירועים שלי</string>
+    <string name="event_removed_from_favorites">האירוע הוסר מהאירועים שלי</string>
 </resources>

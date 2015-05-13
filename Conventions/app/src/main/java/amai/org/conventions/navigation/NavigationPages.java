@@ -11,7 +11,7 @@ import java.util.List;
 
 import amai.org.conventions.events.activities.HallActivity;
 import amai.org.conventions.events.activities.MyEventsActivity;
-import amai.org.conventions.ProgrammeActivity;
+import amai.org.conventions.events.activities.ProgrammeActivity;
 import amai.org.conventions.R;
 import amai.org.conventions.map.MapActivity;
 

@@ -22,7 +22,7 @@
         </activity>
         <activity android:name=".events.activities.MyEventsActivity" >
         </activity>
-        <activity android:name=".ProgrammeActivity" >
+        <activity android:name=".events.activities.ProgrammeActivity" >
         </activity>
         <activity android:name=".map.MapActivity" >
         </activity>

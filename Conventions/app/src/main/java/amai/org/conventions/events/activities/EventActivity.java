@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import amai.org.conventions.R;
 import amai.org.conventions.map.MapActivity;
@@ -18,6 +19,8 @@ public class EventActivity extends NavigationActivity {
 
     public static final String EXTRA_EVENT_ID = "EventIdExtra";
 
+    private ConventionEvent conventionEvent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,12 +29,20 @@ public class EventActivity extends NavigationActivity {
         getNavigationToolbar().setAsActionBar(this);
 
         int eventId = getIntent().getIntExtra(EXTRA_EVENT_ID, 0);
-        setEvent(Convention.getInstance().findById(eventId));
+        conventionEvent = Convention.getInstance().findById(eventId);
+
+        setEvent(conventionEvent);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_event, menu);
+
+        if (conventionEvent.getUserInput().isAttending()) {
+            MenuItem favoritesButton = menu.findItem(R.id.event_change_favorite_state);
+            favoritesButton.setIcon(getResources().getDrawable(R.drawable.favorite_icon_true));
+        }
+
         return true;
     }
 
@@ -39,6 +50,16 @@ public class EventActivity extends NavigationActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.event_change_favorite_state:
+                if (conventionEvent.getUserInput().isAttending()) {
+                    conventionEvent.getUserInput().setAttending(false);
+                    item.setIcon(getResources().getDrawable(R.drawable.favorite_icon_false));
+                    Toast.makeText(this, getString(R.string.event_removed_from_favorites), Toast.LENGTH_SHORT).show();
+                } else {
+                    conventionEvent.getUserInput().setAttending(true);
+                    item.setIcon(getResources().getDrawable(R.drawable.favorite_icon_true));
+                    Toast.makeText(this, getString(R.string.event_added_to_favorites), Toast.LENGTH_SHORT).show();
+                }
+                Convention.getInstance().save();
                 return true;
             case R.id.event_navigate_to_map:
                 navigateToActivity(MapActivity.class);

@@ -42,7 +42,6 @@ public abstract class NavigationActivity extends AppCompatActivity implements Na
         intent.putExtra(EventActivity.EXTRA_EVENT_ID, (int) view.getTag());
         startActivity(intent);
         overridePendingTransition(0, 0);
-        finish();
     }
 
     protected void setToolbarTitle(String titleText) {
@@ -54,13 +53,19 @@ public abstract class NavigationActivity extends AppCompatActivity implements Na
     }
 
     protected void navigateToActivity(Class<? extends Activity> activityToNavigateTo) {
+        // When navigating using the main navigation spinner, clear the activity stack
+        navigateToActivity(activityToNavigateTo, true);
+    }
+
+    protected void navigateToActivity(Class<? extends Activity> activityToNavigateTo, boolean shouldClearActivityStack) {
         Intent intent = new Intent(this, activityToNavigateTo);
+        if (shouldClearActivityStack) {
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            finish();
+        }
         startActivity(intent);
 
         // Disable the animation shown when switching activities
         overridePendingTransition(0, 0);
-
-        // Remove the current activity from memory
-        finish();
     }
 }
