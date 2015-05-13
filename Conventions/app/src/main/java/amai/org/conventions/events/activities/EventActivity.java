@@ -1,15 +1,24 @@
 package amai.org.conventions.events.activities;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import amai.org.conventions.R;
+import amai.org.conventions.events.adapters.ImageAdapter;
 import amai.org.conventions.map.MapActivity;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
@@ -29,7 +38,7 @@ public class EventActivity extends NavigationActivity {
         getNavigationToolbar().setAsActionBar(this);
 
         int eventId = getIntent().getIntExtra(EXTRA_EVENT_ID, 0);
-        conventionEvent = Convention.getInstance().findById(eventId);
+        conventionEvent = Convention.getInstance().findEventById(eventId);
 
         setEvent(conventionEvent);
     }
@@ -82,7 +91,12 @@ public class EventActivity extends NavigationActivity {
         TextView time = (TextView)findViewById(R.id.event_time);
         time.setText(event.getStartTime().toString() + " " + event.getEndTime().toString());
 
-//	    ImageView imageView = (ImageView) findViewById(R.id.event_image);
-//	    imageView.setImageDrawable(getResources().getDrawable(R.drawable.event_ntt));
+	    ViewPager viewPager = (ViewPager) findViewById(R.id.imagesPager);
+	    if (event.getImages().size() > 0) {
+		    ImageAdapter adapter = new ImageAdapter(this, event.getImages());
+		    viewPager.setAdapter(adapter);
+	    } else {
+		    viewPager.setVisibility(View.GONE);
+	    }
     }
 }

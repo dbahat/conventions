@@ -354,7 +354,7 @@ public class Convention implements Serializable {
 		return halls;
 	}
 
-	public ConventionEvent findById(int eventId) {
+	public ConventionEvent findEventById(int eventId) {
 		for (ConventionEvent event : getEvents()) {
 			if (eventId == event.getId()) {
 				return event;

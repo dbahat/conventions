@@ -4,19 +4,11 @@
     android:orientation="vertical"
     tools:context="amai.org.conventions.events.activities.EventActivity">
 
-    <FrameLayout
+    <android.support.v4.view.ViewPager
+        android:id="@+id/imagesPager"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:background="@color/very_light_gray">
-
-        <ImageView
-            android:id="@+id/event_image"
-            android:adjustViewBounds="true"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"/>
-
-    </FrameLayout>
+        android:background="@color/very_light_gray"/>
 
     <TextView
         android:id="@+id/event_title"

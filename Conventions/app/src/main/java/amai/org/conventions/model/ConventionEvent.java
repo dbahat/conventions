@@ -1,7 +1,11 @@
 package amai.org.conventions.model;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
+
+import amai.org.conventions.R;
 
 public class ConventionEvent implements Serializable {
 	private int id;
@@ -11,6 +15,7 @@ public class ConventionEvent implements Serializable {
     private Date endTime;
     private EventType type;
     private Hall hall;
+	private List<Integer> images;
 
 	private UserInput userInput;
 //    private int peopleAttending;
@@ -18,6 +23,7 @@ public class ConventionEvent implements Serializable {
 
 	public ConventionEvent(int id) {
 		this.id = id;
+		images = Arrays.asList(R.drawable.event_ntt, R.drawable.event_ntt);
 		userInput = new UserInput();
 	}
 
@@ -115,6 +121,10 @@ public class ConventionEvent implements Serializable {
         setHall(hall);
         return this;
     }
+
+	public List<Integer> getImages() {
+		return images;
+	}
 
 	public UserInput getUserInput() {
 		return userInput;
