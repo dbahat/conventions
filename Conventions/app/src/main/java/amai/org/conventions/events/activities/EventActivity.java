@@ -7,6 +7,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,11 +18,15 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 import amai.org.conventions.R;
 import amai.org.conventions.events.adapters.ImageAdapter;
 import amai.org.conventions.map.MapActivity;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
+import amai.org.conventions.model.Dates;
 import amai.org.conventions.navigation.NavigationActivity;
 
 public class EventActivity extends NavigationActivity {
@@ -87,9 +92,18 @@ public class EventActivity extends NavigationActivity {
         TextView hallName = (TextView)findViewById(R.id.event_hall_name);
         hallName.setText(event.getHall().getName());
         TextView lecturerName = (TextView)findViewById(R.id.event_lecturer);
-        lecturerName.setText(event.getLecturer());
+        if (lecturerName != null) {
+            lecturerName.setText(event.getLecturer());
+        } else {
+            lecturerName.setVisibility(View.GONE);
+        }
         TextView time = (TextView)findViewById(R.id.event_time);
-        time.setText(event.getStartTime().toString() + " " + event.getEndTime().toString());
+
+        String formattedEventTime = String.format("%s - %s (%s)",
+                Dates.formatHoursAndMinutes(event.getStartTime()),
+                Dates.formatHoursAndMinutes(event.getEndTime()),
+                Dates.toHumanReadableTimeDuration(event.getEndTime().getTime() - event.getStartTime().getTime()));
+        time.setText(formattedEventTime);
 
 	    ViewPager viewPager = (ViewPager) findViewById(R.id.imagesPager);
 	    if (event.getImages().size() > 0) {
@@ -98,5 +112,8 @@ public class EventActivity extends NavigationActivity {
 	    } else {
 		    viewPager.setVisibility(View.GONE);
 	    }
+
+        TextView description = (TextView) findViewById(R.id.event_description);
+        description.setText(Html.fromHtml(event.getDescription()));
     }
 }

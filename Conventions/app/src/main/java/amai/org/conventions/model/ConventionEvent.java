@@ -17,6 +17,21 @@ public class ConventionEvent implements Serializable {
     private Hall hall;
 	private List<Integer> images;
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public ConventionEvent withDescription(String description) {
+        this.description = description;
+        return this;
+    }
+
+    private String description;
+
 	private UserInput userInput;
 //    private int peopleAttending;
 

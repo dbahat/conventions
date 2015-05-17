@@ -9,8 +9,9 @@ import java.util.List;
 public class Dates {
 	private static Date appStartDate = new Date();
 	private static Date initialDate = getInitialDate();
+
     private static Date getInitialDate() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
         try {
             return dateFormat.parse("05.03.2015 14:47");
         } catch (ParseException e) {
@@ -76,5 +77,9 @@ public class Dates {
 		}
 
 		return result.toString();
+	}
+
+	public static String formatHoursAndMinutes(Date date) {
+		return new SimpleDateFormat("HH:mm").format(date);
 	}
 }

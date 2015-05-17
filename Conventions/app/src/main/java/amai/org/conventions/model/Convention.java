@@ -89,7 +89,14 @@ public class Convention implements Serializable {
 								.withStartTime(time("11:00"))
 								.withEndTime(time("12:00"))
 								.withType(EventType.Panel)
-								.withAttending(false),
+								.withAttending(false)
+								.withDescription(
+										"<p><strong>תקציר:</strong></p>\n" +
+										"<p>דיון פתוח העוסק בסוגיות חברתיות הקיימות בתוך קהילת האנימה והמנגה בישראל.</p>\n" +
+										"<p><b>הפאנל בהשתתפות:</b></p>\n" +
+										"<p>אלה ברוך, בת 25, בקהילה למעלה מ-10 שנים, בעברה השתייכה לקהילות פורומים שונות, כיום קוספליירית זה 5 שנים.</p>\n" +
+										"<p>דני פייגלמן, בן 25, נחשף לקהילה בעת שירותו הצבאי, מהכנס הראשון שלו הוא מתנדב פעיל ובעל מעמד אחראי.</p>\n" +
+										"<p>תמר קלינמן, בת 17, נחשפה לעולם האנימה דרך אחיה הגדולים, שייכת לקבוצת אוטאקואים בווטסאפ.</p>"),
 
 						new ConventionEvent(7)
 								.withTitle("המדריך לקוספלייר המתחיל")

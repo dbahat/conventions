@@ -34,8 +34,6 @@ public class EventView extends FrameLayout {
     private final ViewGroup eventDescription;
 	private final CardView eventContainer;
 
-	private SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
-
     private ConventionEvent event = null;
 
     public EventView(Context context, AttributeSet attrs) {
@@ -102,8 +100,8 @@ public class EventView extends FrameLayout {
         setColorsFromEvent(event);
         setAttending(event.isAttending());
         setHallName(event.getHall().getName());
-        setStartTime(timeFormat.format(event.getStartTime()));
-        setEndTime(timeFormat.format(event.getEndTime()));
+        setStartTime(Dates.formatHoursAndMinutes(event.getStartTime()));
+        setEndTime(Dates.formatHoursAndMinutes(event.getEndTime()));
         setEventTitle(event.getTitle());
         setLecturerName(event.getLecturer());
 
