@@ -7,6 +7,10 @@ import java.util.Date;
 import java.util.List;
 
 public class Dates {
+	public enum TimeUnit {
+		HOUR, MINUTE, SECOND;
+	}
+
 	private static Date appStartDate = new Date();
 	private static Date initialDate = getInitialDate();
 
@@ -25,12 +29,27 @@ public class Dates {
 	}
 
 	public static String toHumanReadableTimeDuration(long milliseconds) {
+		return toHumanReadableTimeDuration(milliseconds, TimeUnit.MINUTE);
+	}
+
+	public static String toHumanReadableTimeDuration(long milliseconds, TimeUnit smallestUnit) {
 		long x = milliseconds / 1000;
 		int seconds = (int) (x % 60);
 		x /= 60;
 		int minutes = (int) (x % 60);
 		x /= 60;
 		int hours = (int) (x % 24);
+
+		switch (smallestUnit) {
+			case HOUR:
+				minutes = 0;
+				// Fallthrough
+			case MINUTE:
+				seconds = 0;
+				// Fallthrough
+			case SECOND:
+				break;
+		}
 
 		return toHumanReadableTimeDuration(hours, minutes, seconds);
 	}

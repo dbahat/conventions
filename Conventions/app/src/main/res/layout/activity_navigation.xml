@@ -18,6 +18,6 @@
         android:id="@+id/navigation_content_view_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bottom_shadow" />
+        android:foreground="@drawable/bottom_shadow" />
 
 </LinearLayout>

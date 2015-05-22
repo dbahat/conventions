@@ -30,6 +30,7 @@ public class MyEventsActivity extends NavigationActivity {
     // Handler for updating the next event start text
     private Handler nextEventStartTextRunner = new Handler();
     private Runnable updateNextEventStartTimeText;
+	private static int NEXT_EVENT_START_TIME_UPDATE_DELAY = 60000; // 1 minute
 
     private TextView nextEventStart;
 
@@ -121,11 +122,11 @@ public class MyEventsActivity extends NavigationActivity {
                     @Override
                     public void run() {
                         MyEventsActivity.this.setNextEventStartText(events);
-                        nextEventStartTextRunner.postAtTime(this, System.currentTimeMillis() + 1000);
+                        nextEventStartTextRunner.postAtTime(this, System.currentTimeMillis() + NEXT_EVENT_START_TIME_UPDATE_DELAY);
                     }
                 };
             }
-            nextEventStartTextRunner.postDelayed(updateNextEventStartTimeText, 1000);
+            nextEventStartTextRunner.postDelayed(updateNextEventStartTimeText, NEXT_EVENT_START_TIME_UPDATE_DELAY);
         } else {
             nextEventStartTextRunner.removeCallbacks(updateNextEventStartTimeText);
         }
