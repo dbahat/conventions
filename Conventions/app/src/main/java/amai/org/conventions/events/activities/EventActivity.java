@@ -53,16 +53,23 @@ public class EventActivity extends NavigationActivity {
                 if (conventionEvent.getUserInput().isAttending()) {
                     conventionEvent.getUserInput().setAttending(false);
                     item.setIcon(getResources().getDrawable(R.drawable.star_with_plus));
+                    item.setTitle(getResources().getString(R.string.event_add_to_favorites));
                     Toast.makeText(this, getString(R.string.event_removed_from_favorites), Toast.LENGTH_SHORT).show();
                 } else {
                     conventionEvent.getUserInput().setAttending(true);
                     item.setIcon(getResources().getDrawable(android.R.drawable.btn_star_big_on));
+                    item.setTitle(getResources().getString(R.string.event_remove_from_favorites));
                     Toast.makeText(this, getString(R.string.event_added_to_favorites), Toast.LENGTH_SHORT).show();
                 }
                 Convention.getInstance().save();
                 return true;
             case R.id.event_navigate_to_map:
                 navigateToActivity(MapActivity.class);
+                return true;
+            case R.id.event_navigate_to_hall:
+                Bundle bundle = new Bundle();
+                bundle.putString(HallActivity.EXTRA_HALL_NAME, conventionEvent.getHall().getName());
+                navigateToActivity(HallActivity.class, false, bundle);
                 return true;
         }
 
@@ -73,18 +80,18 @@ public class EventActivity extends NavigationActivity {
 
         setToolbarTitle(event.getType().toString());
 
-        TextView title = (TextView)findViewById(R.id.event_title);
+        TextView title = (TextView) findViewById(R.id.event_title);
         title.setText(event.getTitle());
-        TextView hallName = (TextView)findViewById(R.id.event_hall_name);
+        TextView hallName = (TextView) findViewById(R.id.event_hall_name);
         hallName.setText(event.getHall().getName());
-        TextView lecturerName = (TextView)findViewById(R.id.event_lecturer);
-	    String lecturer = event.getLecturer();
-	    if (lecturer == null) {
+        TextView lecturerName = (TextView) findViewById(R.id.event_lecturer);
+        String lecturer = event.getLecturer();
+        if (lecturer == null) {
             lecturerName.setVisibility(View.GONE);
         } else {
             lecturerName.setText(lecturer);
         }
-        TextView time = (TextView)findViewById(R.id.event_time);
+        TextView time = (TextView) findViewById(R.id.event_time);
 
         String formattedEventTime = String.format("%s - %s (%s)",
                 Dates.formatHoursAndMinutes(event.getStartTime()),
@@ -92,19 +99,19 @@ public class EventActivity extends NavigationActivity {
                 Dates.toHumanReadableTimeDuration(event.getEndTime().getTime() - event.getStartTime().getTime()));
         time.setText(formattedEventTime);
 
-	    ViewPager viewPager = (ViewPager) findViewById(R.id.imagesPager);
-	    if (event.getImages().size() > 0) {
-		    ImageAdapter adapter = new ImageAdapter(this, event.getImages());
-		    viewPager.setAdapter(adapter);
-	    } else {
-		    viewPager.setVisibility(View.GONE);
-	    }
+        ViewPager viewPager = (ViewPager) findViewById(R.id.imagesPager);
+        if (event.getImages().size() > 0) {
+            ImageAdapter adapter = new ImageAdapter(this, event.getImages());
+            viewPager.setAdapter(adapter);
+        } else {
+            viewPager.setVisibility(View.GONE);
+        }
 
         TextView description = (TextView) findViewById(R.id.event_description);
-	    String eventDescription = event.getDescription();
-	    if (eventDescription == null) {
-		    eventDescription = getString(R.string.no_description_found);
-	    }
+        String eventDescription = event.getDescription();
+        if (eventDescription == null) {
+            eventDescription = getString(R.string.no_description_found);
+        }
         description.setText(Html.fromHtml(eventDescription));
     }
 }

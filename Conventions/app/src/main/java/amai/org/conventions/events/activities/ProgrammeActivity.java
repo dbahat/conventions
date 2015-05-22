@@ -30,6 +30,8 @@ import amai.org.conventions.navigation.NavigationActivity;
 
 public class ProgrammeActivity extends NavigationActivity {
 
+    private EventsViewOrHourAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +40,8 @@ public class ProgrammeActivity extends NavigationActivity {
 
         final ListView listView = (ListView) findViewById(R.id.programmeList);
 	    List<Object> eventsAndStartTimes = getEventsAndStartTimes();
-	    listView.setAdapter(new EventsViewOrHourAdapter(eventsAndStartTimes));
+        adapter = new EventsViewOrHourAdapter(eventsAndStartTimes);
+	    listView.setAdapter(adapter);
 
 	    final int position = getCurrentTimePosition(eventsAndStartTimes);
 	    if (position != -1) {
@@ -73,7 +76,15 @@ public class ProgrammeActivity extends NavigationActivity {
 	    }
     }
 
-	private int getCurrentTimePosition(List<Object> eventsAndStartTimes) {
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        // Always redraw the list during onResume, since it's a fast operation, and this ensures the data is up to date in case the activity got paused.
+        adapter.notifyDataSetChanged();
+    }
+
+    private int getCurrentTimePosition(List<Object> eventsAndStartTimes) {
 		int position = 0;
 		boolean found = false;
 		int currentHour = toHour(Dates.now());

@@ -7,16 +7,22 @@
 
     <item
         android:id="@+id/event_change_favorite_state"
-        android:title="Add to favorites"
+        android:title="@string/event_add_to_favorites"
         android:icon="@drawable/star_with_plus"
         android:orderInCategory="1"
         app:showAsAction="always"/>
 
     <item
         android:id="@+id/event_navigate_to_map"
-        android:title="See in map"
+        android:title="@string/event_navigate_to_map"
         android:icon="@android:drawable/ic_dialog_map"
-        android:orderInCategory="1"
+        android:orderInCategory="2"
         app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/event_navigate_to_hall"
+        android:title="@string/event_navigate_to_hall"
+        android:orderInCategory="3"
+        app:showAsAction="never"/>
 
 </menu>

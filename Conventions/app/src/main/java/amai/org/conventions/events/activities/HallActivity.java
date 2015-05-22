@@ -17,16 +17,18 @@ import amai.org.conventions.navigation.NavigationActivity;
 
 
 public class HallActivity extends NavigationActivity {
-    private final String hallName = "אורנים 2";
+    public static final String EXTRA_HALL_NAME = "ExtraHallName";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        final String hallName = getIntent().getStringExtra(EXTRA_HALL_NAME);
+
         setContentInContentContainer(R.layout.activity_hall);
         setToolbarTitle(hallName);
 
         RecyclerView hallEventsList = (RecyclerView) findViewById(R.id.hallEventsList);
-        final String hallName = this.hallName;
         ArrayList<ConventionEvent> events = CollectionsFilter.filter(
                 Convention.getInstance().getEvents(),
                 new CollectionsFilter.Predicate<ConventionEvent>() {
