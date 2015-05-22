@@ -40,7 +40,7 @@ public class EventActivity extends NavigationActivity {
 
         if (conventionEvent.getUserInput().isAttending()) {
             MenuItem favoritesButton = menu.findItem(R.id.event_change_favorite_state);
-            favoritesButton.setIcon(getResources().getDrawable(R.drawable.favorite_icon_true));
+            favoritesButton.setIcon(getResources().getDrawable(android.R.drawable.btn_star_big_on));
         }
 
         return true;
@@ -52,11 +52,11 @@ public class EventActivity extends NavigationActivity {
             case R.id.event_change_favorite_state:
                 if (conventionEvent.getUserInput().isAttending()) {
                     conventionEvent.getUserInput().setAttending(false);
-                    item.setIcon(getResources().getDrawable(R.drawable.favorite_icon_false));
+                    item.setIcon(getResources().getDrawable(R.drawable.star_with_plus));
                     Toast.makeText(this, getString(R.string.event_removed_from_favorites), Toast.LENGTH_SHORT).show();
                 } else {
                     conventionEvent.getUserInput().setAttending(true);
-                    item.setIcon(getResources().getDrawable(R.drawable.favorite_icon_true));
+                    item.setIcon(getResources().getDrawable(android.R.drawable.btn_star_big_on));
                     Toast.makeText(this, getString(R.string.event_added_to_favorites), Toast.LENGTH_SHORT).show();
                 }
                 Convention.getInstance().save();

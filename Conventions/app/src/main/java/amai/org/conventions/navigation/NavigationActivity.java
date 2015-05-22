@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 
 import amai.org.conventions.AnimationPopupWindow;
@@ -40,6 +41,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		    public void onClick(View v) {
 			    if (popup == null || !popup.isShowing()) {
 				    final View view = LayoutInflater.from(NavigationActivity.this).inflate(R.layout.navigation_menu, null);
+				    setupImageColors(view);
 				    popup = new AnimationPopupWindow(
 						    view,
 						    ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -64,6 +66,20 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		    }
 	    });
     }
+
+	private void setupImageColors(View view) {
+		int color = R.color.toolbar_color;
+		changeImageColor(view, R.id.events_menu_image, color);
+		changeImageColor(view, R.id.map_menu_image, color);
+		changeImageColor(view, R.id.updates_menu_image, color);
+		changeImageColor(view, R.id.arrival_methods_menu_image, color);
+	}
+
+	private void changeImageColor(View view, int resource, int color) {
+		ImageView image = (ImageView) view.findViewById(resource);
+		image.setColorFilter(color);
+
+	}
 
 	@Override
 	protected void onDestroy() {

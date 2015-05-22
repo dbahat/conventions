@@ -157,7 +157,7 @@ public class EventView extends FrameLayout {
 
     public void setAttending(boolean isAttending) {
         Resources resources = getContext().getResources();
-        int favorite_icon = isAttending ? R.drawable.favorite_icon_true : R.drawable.favorite_icon_false;
+        int favorite_icon = isAttending ? android.R.drawable.btn_star_big_on : android.R.drawable.btn_star_big_off;
         faveIcon.setImageDrawable(resources.getDrawable(favorite_icon));
     }
 
