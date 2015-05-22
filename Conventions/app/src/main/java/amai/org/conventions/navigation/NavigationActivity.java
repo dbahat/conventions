@@ -65,6 +65,13 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	    });
     }
 
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+
+		dismissPopupIfNeeded();
+	}
+
 	private void setupActionBar(Toolbar toolbar) {
 		this.setSupportActionBar(toolbar);
 		ActionBar actionBar = this.getSupportActionBar();
@@ -92,9 +99,8 @@ public abstract class NavigationActivity extends AppCompatActivity {
     }
 
     protected void navigateToActivity(Class<? extends Activity> activityToNavigateTo) {
-	    if (popup != null && popup.isShowing()) {
-		    popup.dismissNow();
-	    }
+		dismissPopupIfNeeded();
+
         // When navigating using the main navigation spinner, clear the activity stack
         navigateToActivity(activityToNavigateTo, true);
     }
@@ -107,7 +113,6 @@ public abstract class NavigationActivity extends AppCompatActivity {
         }
         startActivity(intent);
 
-        // Disable the animation shown when switching activities
         overridePendingTransition(0, 0);
     }
 
@@ -125,5 +130,11 @@ public abstract class NavigationActivity extends AppCompatActivity {
 
 	public void onNavigateToArrivalMethods(View view) {
 		navigateToActivity(ArrivalMethodsActivity.class);
+	}
+
+	private void dismissPopupIfNeeded() {
+		if (popup != null && popup.isShowing()) {
+			popup.dismissNow();
+		}
 	}
 }
