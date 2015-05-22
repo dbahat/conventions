@@ -106,6 +106,12 @@ public abstract class NavigationActivity extends AppCompatActivity {
     }
 
     protected void navigateToActivity(Class<? extends Activity> activityToNavigateTo, boolean shouldClearActivityStack) {
+
+		// In case we were asked to navigate to the activity we're already in, ignore the request
+		if (activityToNavigateTo == this.getClass()) {
+			return;
+		}
+
         Intent intent = new Intent(this, activityToNavigateTo);
         if (shouldClearActivityStack) {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
