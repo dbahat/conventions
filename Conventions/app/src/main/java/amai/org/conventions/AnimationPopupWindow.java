@@ -1,6 +1,6 @@
 package amai.org.conventions;
 
-import android.content.Context;
+import android.os.Handler;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.PopupWindow;
@@ -25,7 +25,12 @@ public class AnimationPopupWindow extends PopupWindow {
 
 			@Override
 			public void onAnimationEnd(android.view.animation.Animation animation) {
-				dismissNow();
+				new Handler().post(new Runnable() {
+					@Override
+					public void run() {
+						dismissNow();
+					}
+				});
 			}
 
 			@Override
