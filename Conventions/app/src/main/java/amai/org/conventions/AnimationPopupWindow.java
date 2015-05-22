@@ -25,7 +25,7 @@ public class AnimationPopupWindow extends PopupWindow {
 
 			@Override
 			public void onAnimationEnd(android.view.animation.Animation animation) {
-				AnimationPopupWindow.super.dismiss();
+				dismissNow();
 			}
 
 			@Override
@@ -33,5 +33,9 @@ public class AnimationPopupWindow extends PopupWindow {
 			}
 		});
 		view.startAnimation(animation);
+	}
+
+	public void dismissNow() {
+		super.dismiss();
 	}
 }

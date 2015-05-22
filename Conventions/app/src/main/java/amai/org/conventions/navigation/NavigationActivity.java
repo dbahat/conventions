@@ -26,7 +26,7 @@ import amai.org.conventions.map.MapActivity;
 public abstract class NavigationActivity extends AppCompatActivity {
 
     private Toolbar navigationToolbar;
-	private PopupWindow popup;
+	private AnimationPopupWindow popup;
 
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +93,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 
     protected void navigateToActivity(Class<? extends Activity> activityToNavigateTo) {
 	    if (popup != null && popup.isShowing()) {
-		    popup.dismiss();
+		    popup.dismissNow();
 	    }
         // When navigating using the main navigation spinner, clear the activity stack
         navigateToActivity(activityToNavigateTo, true);
