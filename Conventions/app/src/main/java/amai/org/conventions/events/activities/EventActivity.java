@@ -1,25 +1,13 @@
 package amai.org.conventions.events.activities;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageSwitcher;
-import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 
 import amai.org.conventions.R;
 import amai.org.conventions.events.adapters.ImageAdapter;
@@ -39,8 +27,6 @@ public class EventActivity extends NavigationActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentInContentContainer(R.layout.activity_event);
-
-        getNavigationToolbar().setAsActionBar(this);
 
         int eventId = getIntent().getIntExtra(EXTRA_EVENT_ID, 0);
         conventionEvent = Convention.getInstance().findEventById(eventId);
@@ -92,10 +78,11 @@ public class EventActivity extends NavigationActivity {
         TextView hallName = (TextView)findViewById(R.id.event_hall_name);
         hallName.setText(event.getHall().getName());
         TextView lecturerName = (TextView)findViewById(R.id.event_lecturer);
-        if (lecturerName != null) {
-            lecturerName.setText(event.getLecturer());
-        } else {
+	    String lecturer = event.getLecturer();
+	    if (lecturer == null) {
             lecturerName.setVisibility(View.GONE);
+        } else {
+            lecturerName.setText(lecturer);
         }
         TextView time = (TextView)findViewById(R.id.event_time);
 
@@ -114,6 +101,10 @@ public class EventActivity extends NavigationActivity {
 	    }
 
         TextView description = (TextView) findViewById(R.id.event_description);
-        description.setText(Html.fromHtml(event.getDescription()));
+	    String eventDescription = event.getDescription();
+	    if (eventDescription == null) {
+		    eventDescription = getString(R.string.no_description_found);
+	    }
+        description.setText(Html.fromHtml(eventDescription));
     }
 }

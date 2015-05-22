@@ -11,4 +11,7 @@
 
     <dimen name="event_height">73dp</dimen>
 
+    <dimen name="navigation_popup_window_offset_y">-15dp</dimen>
+    <dimen name="navigation_popup_window_offset_x">10dp</dimen>
+
 </resources>

@@ -35,7 +35,6 @@ public class ProgrammeActivity extends NavigationActivity {
         super.onCreate(savedInstanceState);
         setContentInContentContainer(R.layout.activity_programme);
         setToolbarTitle(getResources().getString(R.string.programme_title));
-        getNavigationToolbar().setAsActionBar(this);
 
         final ListView listView = (ListView) findViewById(R.id.programmeList);
 	    List<Object> eventsAndStartTimes = getEventsAndStartTimes();

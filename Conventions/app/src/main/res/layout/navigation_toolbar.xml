@@ -1,40 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<amai.org.conventions.navigation.NavigationToolbar
+<android.support.v7.widget.Toolbar
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/toolbar_color"
+    app:contentInsetStart="0dp"
     android:layoutDirection="rtl">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <amai.org.conventions.navigation.ExtendedSpinner
-            android:id="@+id/toolbar_page_navigation_spinner"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentStart="true"
-            android:background="@drawable/logo"
-            android:spinnerMode="dropdown"
-            >
-        </amai.org.conventions.navigation.ExtendedSpinner>
-
-        <TextView
-            android:id="@+id/toolbar_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:textSize="@dimen/abc_text_size_title_material"
-            android:textColor="@android:color/white"/>
-
-        <LinearLayout
-            android:id="@+id/toolbar_action_buttons_container"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_alignParentEnd="true"
-            android:orientation="horizontal">
-        </LinearLayout>
-    </RelativeLayout>
-
-</amai.org.conventions.navigation.NavigationToolbar>
+</android.support.v7.widget.Toolbar>

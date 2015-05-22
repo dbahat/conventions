@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -22,10 +23,10 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void onNavigationButtonClicked(View view) {
-        // Note - We assume here the UI layout is a FrameLayout with 2 children, where the second one is a text view with the navigation page string
+        // Note - We assume here the UI layout is a ViewGroup with 2 children, where the second one is a text view with the navigation page string
         // resource. If this assumption changes the code here needs to be adjusted accordingly.
-        FrameLayout frameLayout = (FrameLayout) view;
-        TextView textView = (TextView) frameLayout.getChildAt(1);
+	    ViewGroup mainGroup = (ViewGroup) view;
+        TextView textView = (TextView) mainGroup.getChildAt(1);
 
         int position = navigationPages.getPosition(textView.getText().toString());
         Intent intent = new Intent(this, navigationPages.getActivityType(position));

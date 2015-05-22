@@ -5,6 +5,7 @@
         <item name="android:windowNoTitle">true</item>
         <!--We will be using the toolbar so no need to show ActionBar-->
         <item name="android:windowActionBar">false</item>
+        <item name="toolbarNavigationButtonStyle">@style/ToolbarNavigationButtonStyle</item>
     </style>
 
     <style name="MainActivityOverlayText">
@@ -18,4 +19,7 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="ToolbarNavigationButtonStyle" parent="@style/Widget.AppCompat.Toolbar.Button.Navigation">
+        <item name="android:scaleType">fitEnd</item>
+    </style>
 </resources>

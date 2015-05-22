@@ -2,39 +2,82 @@ package amai.org.conventions.navigation;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.PopupWindow;
 
+import amai.org.conventions.AnimationPopupWindow;
+import amai.org.conventions.ArrivalMethodsActivity;
 import amai.org.conventions.R;
-import amai.org.conventions.events.EventView;
 import amai.org.conventions.events.activities.EventActivity;
+import amai.org.conventions.events.activities.HallActivity;
+import amai.org.conventions.events.activities.MyEventsActivity;
+import amai.org.conventions.events.activities.ProgrammeActivity;
+import amai.org.conventions.map.MapActivity;
 
 
-public abstract class NavigationActivity extends AppCompatActivity implements NavigationToolbar.OnNavigationPageSelectedListener {
+public abstract class NavigationActivity extends AppCompatActivity {
 
-    private NavigationToolbar navigationToolbar;
+    private Toolbar navigationToolbar;
+	private PopupWindow popup;
 
-    @Override
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_navigation);
 
-        setContentView(R.layout.activity_navigation);
+        navigationToolbar = (Toolbar) findViewById(R.id.navigation_toolbar);
+		setupActionBar(navigationToolbar);
+	    navigationToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+		    @Override
+		    public void onClick(View v) {
+			    if (popup == null || !popup.isShowing()) {
+				    final View view = LayoutInflater.from(NavigationActivity.this).inflate(R.layout.navigation_menu, null);
+				    popup = new AnimationPopupWindow(
+						    view,
+						    ViewGroup.LayoutParams.WRAP_CONTENT,
+						    ViewGroup.LayoutParams.WRAP_CONTENT,
+						    R.anim.drop_down,
+						    R.anim.drop_down_reverse);
 
-        navigationToolbar = (NavigationToolbar) findViewById(R.id.navigation_toolbar);
-        navigationToolbar.initialize(this);
-        navigationToolbar.setNavigationPageSelectedListener(this);
+				    // This must be done to enable listening to clicks on the popup window
+				    popup.setBackgroundDrawable(new BitmapDrawable());
+				    popup.setAnimationStyle(0);
+				    popup.setFocusable(true);
+				    popup.setOutsideTouchable(true);
+
+				    // Move the inner view to the top start corner of the toolbar.
+				    // This is required because it's a card view with elevation (which uses padding for the
+				    // elevation and shadow) so we have to move it to the start point of the popup window.
+				    view.setY(getResources().getDimension(R.dimen.navigation_popup_window_offset_y));
+				    view.setX(getResources().getDimension(R.dimen.navigation_popup_window_offset_x));
+
+				    popup.showAsDropDown(navigationToolbar, 0, 0);
+			    }
+		    }
+	    });
     }
 
-    protected void setContentInContentContainer(int layoutResID) {
+	private void setupActionBar(Toolbar toolbar) {
+		this.setSupportActionBar(toolbar);
+		ActionBar actionBar = this.getSupportActionBar();
+		if (actionBar != null) {
+			actionBar.setDisplayHomeAsUpEnabled(false);
+			actionBar.setDisplayShowTitleEnabled(true);
+			toolbar.setNavigationIcon(R.drawable.logo);
+		}
+	}
+
+	protected void setContentInContentContainer(int layoutResID) {
         FrameLayout contentContainer = (FrameLayout) findViewById(R.id.navigation_content_view_container);
-        getLayoutInflater().inflate(layoutResID, contentContainer, true);
-    }
-
-    @Override
-    public void onNavigationPageSelected(Class<? extends Activity> activityToNavigateTo) {
-        navigateToActivity(activityToNavigateTo);
+	    getLayoutInflater().inflate(layoutResID, contentContainer, true);
     }
 
     public void onConventionEventClicked(View view) {
@@ -45,14 +88,13 @@ public abstract class NavigationActivity extends AppCompatActivity implements Na
     }
 
     protected void setToolbarTitle(String titleText) {
-        navigationToolbar.setTitle(titleText);
-    }
-
-    protected NavigationToolbar getNavigationToolbar() {
-        return navigationToolbar;
+        getSupportActionBar().setTitle(titleText);
     }
 
     protected void navigateToActivity(Class<? extends Activity> activityToNavigateTo) {
+	    if (popup != null && popup.isShowing()) {
+		    popup.dismiss();
+	    }
         // When navigating using the main navigation spinner, clear the activity stack
         navigateToActivity(activityToNavigateTo, true);
     }
@@ -68,4 +110,20 @@ public abstract class NavigationActivity extends AppCompatActivity implements Na
         // Disable the animation shown when switching activities
         overridePendingTransition(0, 0);
     }
+
+	public void onNavigateToProgramme(View view) {
+		navigateToActivity(ProgrammeActivity.class);
+	}
+
+	public void onNavigateToMap(View view) {
+		navigateToActivity(MapActivity.class);
+	}
+
+	public void onNavigateToUpdates(View view) {
+		navigateToActivity(MyEventsActivity.class);
+	}
+
+	public void onNavigateToArrivalMethods(View view) {
+		navigateToActivity(ArrivalMethodsActivity.class);
+	}
 }
