@@ -7,12 +7,15 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 
 import amai.org.conventions.R;
+import amai.org.conventions.model.Convention;
+import amai.org.conventions.model.ConventionMap;
+import amai.org.conventions.model.Floor;
 import amai.org.conventions.navigation.NavigationActivity;
 import fr.castorflex.android.verticalviewpager.VerticalViewPager;
 
 public class MapActivity extends NavigationActivity implements MapFloorFragment.OnMapArrowClickedListener {
 
-    private static final int NUMBER_OF_FLOORS = 3;
+    private static final ConventionMap map = Convention.getInstance().getMap();
     private VerticalViewPager viewPager;
 
     @Override
@@ -26,28 +29,28 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
     private void initializeViewPager() {
         viewPager = (VerticalViewPager) findViewById(R.id.map_view_pager);
 
-        // Configure the view pager.
+        // Configure the view pager
         viewPager.setAdapter(new MapFloorAdapter(getSupportFragmentManager()));
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+	        @Override
+	        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-            }
+	        }
 
-            @Override
-            public void onPageSelected(int position) {
-                setToolbarTitle(getResources().getString(R.string.map_floor) + " " + positionToFloorNumber(viewPager.getCurrentItem()));
-            }
+	        @Override
+	        public void onPageSelected(int position) {
+		        setToolbarTitle(pagerPositionToFloor(viewPager.getCurrentItem()).getName());
+	        }
 
-            @Override
-            public void onPageScrollStateChanged(int state) {
+	        @Override
+	        public void onPageScrollStateChanged(int state) {
 
-            }
+	        }
         });
 
-        // Hold all the fragments in memory for best transition performance.
+        // Hold all the fragments in memory for best transition performance
         viewPager.setOffscreenPageLimit(viewPager.getAdapter().getCount());
-        viewPager.setCurrentItem(viewPager.getAdapter().getCount());
+        viewPager.setCurrentItem(floorIndexToPagerPosition(0));
     }
 
     @Override
@@ -68,16 +71,24 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 
         @Override
         public Fragment getItem(int position) {
-            return MapFloorFragment.newInstance(positionToFloorNumber(position));
+            return MapFloorFragment.newInstance(pagerPositionToFloor(position).getNumber());
         }
 
         @Override
         public int getCount() {
-            return NUMBER_OF_FLOORS;
+	        return map.getFloors().size();
         }
     }
 
-    private int positionToFloorNumber(int position) {
-        return NUMBER_OF_FLOORS - position;
+	private int floorIndexToPagerPosition(int index) {
+		// View pager positions are opposite of the floor numbers because the first
+		// position is the top while floors start at the bottom
+		return map.getFloors().size() - 1 - index;
+	}
+
+    private Floor pagerPositionToFloor(int position) {
+	    // View pager positions are opposite of the floor numbers because the first
+	    // position is the top while floors start at the bottom
+        return map.getFloors().get(map.getFloors().size() - 1 - position);
     }
 }

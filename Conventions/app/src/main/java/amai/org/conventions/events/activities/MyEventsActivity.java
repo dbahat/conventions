@@ -17,7 +17,7 @@ import java.util.List;
 
 import amai.org.conventions.R;
 import amai.org.conventions.events.adapters.ConflictingEventsViewAdapter;
-import amai.org.conventions.model.CollectionsFilter;
+import amai.org.conventions.model.CollectionUtils;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
@@ -76,15 +76,15 @@ public class MyEventsActivity extends NavigationActivity {
     }
 
     private List<ConventionEvent> getMyEvents() {
-        return CollectionsFilter.filter(
-                Convention.getInstance().getEvents(),
-                new CollectionsFilter.Predicate<ConventionEvent>() {
-                    @Override
-                    public boolean where(ConventionEvent event) {
-                        return event.isAttending();
-                    }
-                },
-                new ArrayList<ConventionEvent>()
+        return CollectionUtils.filter(
+		        Convention.getInstance().getEvents(),
+		        new CollectionUtils.Predicate<ConventionEvent>() {
+			        @Override
+			        public boolean where(ConventionEvent event) {
+				        return event.isAttending();
+			        }
+		        },
+		        new ArrayList<ConventionEvent>()
         );
     }
 

@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import amai.org.conventions.R;
+import amai.org.conventions.model.Dates;
 
 public class EventTimeViewHolder extends RecyclerView.ViewHolder {
     private TextView timeTextView;
@@ -20,6 +21,6 @@ public class EventTimeViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void setTime(Date date) {
-        timeTextView.setText(new SimpleDateFormat("HH:SS", Locale.US).format(date));
+        timeTextView.setText(new SimpleDateFormat("HH:SS", Dates.getLocale()).format(date));
     }
 }

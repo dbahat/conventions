@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import amai.org.conventions.R;
+import amai.org.conventions.model.Convention;
+import amai.org.conventions.model.ConventionMap;
+import amai.org.conventions.model.Floor;
 
 /**
  * A fragment showing a single map floor
@@ -17,7 +20,7 @@ import amai.org.conventions.R;
 public class MapFloorFragment extends Fragment {
 
     private static final String ARGS_FLOOR_NUMBER = "FloorNumber";
-    private View mapFloorImage;
+    private ImageView mapFloorImage;
     private ImageView upArrowImage;
     private ImageView downArrowImage;
     private OnMapArrowClickedListener mapArrowClickedListener;
@@ -88,27 +91,22 @@ public class MapFloorFragment extends Fragment {
     }
 
     private void resolveUIElements(View view) {
-        mapFloorImage = view.findViewById(R.id.map_floor_image);
+        mapFloorImage = (ImageView) view.findViewById(R.id.map_floor_image);
         upArrowImage = (ImageView) view.findViewById(R.id.map_floor_up_arrow);
         downArrowImage = (ImageView) view.findViewById(R.id.map_floor_down_arrow);
     }
 
     private void configureMapFloorImage() {
-
         int mapFloor = getArguments().getInt(ARGS_FLOOR_NUMBER);
-        switch (mapFloor) {
-            case 1:
-                mapFloorImage.setBackground(getResources().getDrawable(R.drawable.floor1));
-                downArrowImage.setVisibility(View.GONE);
-                break;
-            case 2:
-                mapFloorImage.setBackground(getResources().getDrawable(R.drawable.floor2));
-                break;
-            case 3:
-                mapFloorImage.setBackground(getResources().getDrawable(R.drawable.floor3));
-                upArrowImage.setVisibility(View.GONE);
-                break;
-        }
+	    ConventionMap map = Convention.getInstance().getMap();
+	    Floor floor = map.findFloorByNumber(mapFloor);
+	    mapFloorImage.setImageDrawable(getResources().getDrawable(floor.getImageResource()));
+
+	    boolean isTopFloor = floor.getNumber() == map.getTopFloor().getNumber();
+	    upArrowImage.setVisibility(isTopFloor ? View.GONE : View.VISIBLE);
+
+	    boolean isBottomFloor = floor.getNumber() == map.getBottomFloor().getNumber();
+	    downArrowImage.setVisibility(isBottomFloor ? View.GONE : View.VISIBLE);
     }
 
     public interface OnMapArrowClickedListener {

@@ -2,11 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" tools:context="amai.org.conventions.map.MapFloorFragment">
 
-    <View
+    <ImageView
         android:id="@+id/map_floor_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/floor1"
+        android:src="@drawable/floor1"
         />
 
     <ImageView

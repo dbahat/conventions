@@ -9,7 +9,7 @@ import java.util.Collections;
 
 import amai.org.conventions.R;
 import amai.org.conventions.events.adapters.EventsViewAdapter;
-import amai.org.conventions.model.CollectionsFilter;
+import amai.org.conventions.model.CollectionUtils;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
@@ -29,15 +29,15 @@ public class HallActivity extends NavigationActivity {
         setToolbarTitle(hallName);
 
         RecyclerView hallEventsList = (RecyclerView) findViewById(R.id.hallEventsList);
-        ArrayList<ConventionEvent> events = CollectionsFilter.filter(
-                Convention.getInstance().getEvents(),
-                new CollectionsFilter.Predicate<ConventionEvent>() {
-                    @Override
-                    public boolean where(ConventionEvent event) {
-                        return hallName.equals(event.getHall().getName());
-                    }
-                },
-                new ArrayList<ConventionEvent>()
+        ArrayList<ConventionEvent> events = CollectionUtils.filter(
+		        Convention.getInstance().getEvents(),
+		        new CollectionUtils.Predicate<ConventionEvent>() {
+			        @Override
+			        public boolean where(ConventionEvent event) {
+				        return hallName.equals(event.getHall().getName());
+			        }
+		        },
+		        new ArrayList<ConventionEvent>()
         );
         Collections.sort(events, new ConventionEventComparator());
         hallEventsList.setAdapter(new EventsViewAdapter(events, true, false, false));

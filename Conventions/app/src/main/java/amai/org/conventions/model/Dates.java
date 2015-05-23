@@ -8,15 +8,17 @@ import java.util.List;
 import java.util.Locale;
 
 public class Dates {
-    public enum TimeUnit {
+
+	public enum TimeUnit {
         HOUR, MINUTE, SECOND;
     }
 
+	private static Locale LOCALE = new Locale("iw", "IL");
     private static Date appStartDate = new Date();
     private static Date initialDate = getInitialDate();
 
     private static Date getInitialDate() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm", Dates.getLocale());
         try {
             return dateFormat.parse("05.03.2015 14:47");
         } catch (ParseException e) {
@@ -100,10 +102,14 @@ public class Dates {
     }
 
     public static String formatDateWithoutTime(Date date) {
-        return new SimpleDateFormat("dd.MM.yyyy", Locale.US).format(date);
+        return new SimpleDateFormat("dd.MM.yyyy", getLocale()).format(date);
     }
 
     public static String formatHoursAndMinutes(Date date) {
-        return new SimpleDateFormat("HH:mm", Locale.US).format(date);
+        return new SimpleDateFormat("HH:mm", getLocale()).format(date);
     }
+
+	public static Locale getLocale() {
+		return LOCALE;
+	}
 }

@@ -1,8 +1,9 @@
 package amai.org.conventions.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class CollectionsFilter {
+public class CollectionUtils {
     public interface Predicate<T> {
         boolean where(T item);
     }
@@ -15,4 +16,19 @@ public class CollectionsFilter {
         }
         return newList;
     }
+
+	@SafeVarargs
+	public static <T> ArrayList<T> flattenList(List<T>... instancesList) {
+		int size = 0;
+		for (List<T> list : instancesList) {
+			size += list.size();
+		}
+
+		ArrayList<T> flattened = new ArrayList<>(size);
+		for (List<T> list : instancesList) {
+			flattened.addAll(list);
+		}
+
+		return flattened;
+	}
 }
