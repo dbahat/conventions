@@ -77,13 +77,13 @@
         android:background="@android:color/darker_gray" />
 
    <TextView
+       android:id="@+id/update_show_details_button"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:text="@string/update_show_full_text"
        android:textColor="@android:color/holo_blue_dark"
        android:gravity="center"
-       android:padding="5dp"
-       android:onClick="onShowFullUpdateTextClicked"/>
+       android:padding="5dp"/>
 
     <View
         android:layout_width="match_parent"

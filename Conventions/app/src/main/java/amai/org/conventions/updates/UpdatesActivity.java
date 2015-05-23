@@ -38,8 +38,4 @@ public class UpdatesActivity extends NavigationActivity {
         });
         recyclerView.setAdapter(new UpdatesAdapter(updates));
     }
-
-    public void onShowFullUpdateTextClicked(View view) {
-
-    }
 }
