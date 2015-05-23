@@ -53,4 +53,14 @@ public class ConventionMap {
 	public Floor getTopFloor() {
 		return floors.get(floors.size() - 1);
 	}
+
+	public MapLocation findLocationByHall(Hall hall) {
+		for (MapLocation location : getLocations()) {
+			if (location.getHall().equals(hall)) {
+				return location;
+			}
+		}
+
+		return null;
+	}
 }

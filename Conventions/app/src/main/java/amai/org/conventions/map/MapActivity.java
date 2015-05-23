@@ -15,6 +15,8 @@ import fr.castorflex.android.verticalviewpager.VerticalViewPager;
 
 public class MapActivity extends NavigationActivity implements MapFloorFragment.OnMapArrowClickedListener {
 
+    public static final String EXTRA_FLOOR_NUMBER = "ExtraFloorNumber";
+
     private static final ConventionMap map = Convention.getInstance().getMap();
     private VerticalViewPager viewPager;
 
@@ -24,6 +26,10 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
         setContentInContentContainer(R.layout.activity_map);
 
         initializeViewPager();
+
+
+        int floorNumber = getIntent().getIntExtra(EXTRA_FLOOR_NUMBER, 0);
+        viewPager.setCurrentItem(floorIndexToPagerPosition(floorNumber - 1 /* Since the floor index is zero based */));
     }
 
     private void initializeViewPager() {
@@ -32,25 +38,24 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
         // Configure the view pager
         viewPager.setAdapter(new MapFloorAdapter(getSupportFragmentManager()));
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-	        @Override
-	        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-	        }
+            }
 
-	        @Override
-	        public void onPageSelected(int position) {
-		        setToolbarTitle(pagerPositionToFloor(viewPager.getCurrentItem()).getName());
-	        }
+            @Override
+            public void onPageSelected(int position) {
+                setToolbarTitle(pagerPositionToFloor(viewPager.getCurrentItem()).getName());
+            }
 
-	        @Override
-	        public void onPageScrollStateChanged(int state) {
+            @Override
+            public void onPageScrollStateChanged(int state) {
 
 	        }
         });
 
         // Hold all the fragments in memory for best transition performance
         viewPager.setOffscreenPageLimit(viewPager.getAdapter().getCount());
-        viewPager.setCurrentItem(floorIndexToPagerPosition(0));
     }
 
     @Override

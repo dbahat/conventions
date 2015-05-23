@@ -15,6 +15,7 @@ import amai.org.conventions.map.MapActivity;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.Dates;
+import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.navigation.NavigationActivity;
 
 public class EventActivity extends NavigationActivity {
@@ -64,11 +65,18 @@ public class EventActivity extends NavigationActivity {
                 Convention.getInstance().save();
                 return true;
             case R.id.event_navigate_to_map:
-                navigateToActivity(MapActivity.class);
+                // Navigate to the map floor associated with this event
+                Bundle floorBundle = new Bundle();
+                MapLocation location = Convention.getInstance().getMap().findLocationByHall(conventionEvent.getHall());
+                floorBundle.putInt(MapActivity.EXTRA_FLOOR_NUMBER, location.getFloor().getNumber());
+
+                navigateToActivity(MapActivity.class, false, floorBundle);
                 return true;
             case R.id.event_navigate_to_hall:
+                // Navigate to the hall associated with this event
                 Bundle bundle = new Bundle();
                 bundle.putString(HallActivity.EXTRA_HALL_NAME, conventionEvent.getHall().getName());
+
                 navigateToActivity(HallActivity.class, false, bundle);
                 return true;
         }
