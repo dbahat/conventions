@@ -86,7 +86,7 @@ public class EventActivity extends NavigationActivity {
 
     private void setEvent(ConventionEvent event) {
 
-        setToolbarTitle(event.getType().toString());
+        setToolbarTitle(event.getType().getDescription());
 
         TextView title = (TextView) findViewById(R.id.event_title);
         title.setText(event.getTitle());
@@ -118,7 +118,10 @@ public class EventActivity extends NavigationActivity {
         TextView description = (TextView) findViewById(R.id.event_description);
         String eventDescription = event.getDescription();
         if (eventDescription == null) {
-            eventDescription = getString(R.string.no_description_found);
+            eventDescription = "<p>" + event.getTitle() + "</p>";
+	        if (event.getLecturer() != null && !event.getLecturer().isEmpty()) {
+		        eventDescription += "<p><b>" + "מאת: " + "</b>" + event.getLecturer() + "</p>";
+	        }
         }
         description.setText(Html.fromHtml(eventDescription));
     }

@@ -3,6 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingTop="10dp"
     android:layoutDirection="rtl">
 
     <!-- The text and date overlap since in code we set the text to indent only for the top lines,
@@ -10,6 +11,8 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -21,6 +24,7 @@
                 android:id="@+id/update_time_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@color/ultra_light_gray"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -48,7 +52,7 @@
                 </LinearLayout>
 
                 <View
-                    android:layout_width="75dp"
+                    android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@android:color/darker_gray"
                     android:layout_gravity="end"/>
@@ -57,14 +61,17 @@
 
             <View
                 android:layout_width="1dp"
-                android:layout_height="55dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="bottom"
                 android:background="@android:color/darker_gray"/>
         </LinearLayout>
 
         <TextView
             android:id="@+id/update_text"
-            android:padding="5dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLines="7"
@@ -77,6 +84,7 @@
         android:layout_width="300dp"
         android:layout_height="1dp"
         android:layout_gravity="center"
+        android:id="@+id/update_show_details_line"
         android:background="@android:color/darker_gray" />
 
    <TextView

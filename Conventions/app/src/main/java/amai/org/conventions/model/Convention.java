@@ -14,7 +14,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import amai.org.conventions.R;
@@ -92,7 +91,7 @@ public class Convention implements Serializable {
 								.withTitle("אירוע פתיחה")
 								.withStartTime(time("10:30"))
 								.withEndTime(time("12:00"))
-								.withType(EventType.Stage)
+								.withType(EventType.Central)
 								.withAttending(true),
 
 						new ConventionEvent(2)
@@ -100,21 +99,21 @@ public class Convention implements Serializable {
 								.withLecturer("R2")
 								.withStartTime(time("12:30"))
 								.withEndTime(time("14:30"))
-								.withType(EventType.Stage)
+								.withType(EventType.Central)
 								.withAttending(false),
 
 						new ConventionEvent(3)
 								.withTitle("הכנה לאירוע קוספליי")
 								.withStartTime(time("15:00"))
 								.withEndTime(time("16:00"))
-								.withType(EventType.Stage)
+								.withType(EventType.Central)
 								.withAttending(false),
 
 						new ConventionEvent(4)
 								.withTitle("אירוע הקוספליי")
 								.withStartTime(time("16:00"))
 								.withEndTime(time("19:00"))
-								.withType(EventType.Stage)
+								.withType(EventType.Central)
 								.withAttending(true),
 
 						new ConventionEvent(5)
@@ -122,7 +121,7 @@ public class Convention implements Serializable {
 								.withLecturer("R2")
 								.withStartTime(time("19:30"))
 								.withEndTime(time("21:00"))
-								.withType(EventType.Stage)
+								.withType(EventType.Central)
 								.withAttending(true)
 				),
 
@@ -356,7 +355,7 @@ public class Convention implements Serializable {
 								.withTitle("תחרות שירה")
 								.withStartTime(time("11:00"))
 								.withEndTime(time("12:00"))
-								.withType(EventType.Special)
+								.withType(EventType.Central)
 								.withAttending(true),
 
 						new ConventionEvent(33)
@@ -392,7 +391,7 @@ public class Convention implements Serializable {
 								.withTitle("אירוע קראוקה")
 								.withStartTime(time("16:30"))
 								.withEndTime(time("20:30"))
-								.withType(EventType.Special)
+								.withType(EventType.Central)
 								.withAttending(false)
 				)
 		);

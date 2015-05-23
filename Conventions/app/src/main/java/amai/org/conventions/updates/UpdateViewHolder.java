@@ -11,9 +11,10 @@ import amai.org.conventions.model.Dates;
 import amai.org.conventions.model.Update;
 
 public class UpdateViewHolder extends RecyclerView.ViewHolder {
-    private TextView updateTextView;
+	private TextView updateTextView;
     private TextView updateTime;
     private TextView updateDay;
+	private final View showDetailsLine;
     private TextView showDetailsButton;
     private LinearLayout updateTimeContainer;
 
@@ -23,6 +24,7 @@ public class UpdateViewHolder extends RecyclerView.ViewHolder {
         updateTextView = (TextView) itemView.findViewById(R.id.update_text);
         updateTime = (TextView) itemView.findViewById(R.id.update_time);
         updateDay = (TextView) itemView.findViewById(R.id.update_day);
+	    showDetailsLine = itemView.findViewById(R.id.update_show_details_line);
         showDetailsButton = (TextView) itemView.findViewById(R.id.update_show_details_button);
         updateTimeContainer = (LinearLayout) itemView.findViewById(R.id.update_time_container);
     }
@@ -38,6 +40,7 @@ public class UpdateViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View v) {
                 updateTextView.setMaxLines(Integer.MAX_VALUE);
+	            showDetailsLine.setVisibility(View.GONE);
                 showDetailsButton.setVisibility(View.GONE);
             }
         });
