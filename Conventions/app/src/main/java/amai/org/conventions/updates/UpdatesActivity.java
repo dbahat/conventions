@@ -25,6 +25,8 @@ public class UpdatesActivity extends NavigationActivity {
         super.onCreate(savedInstanceState);
         setContentInContentContainer(R.layout.activity_updates);
 
+        setToolbarTitle(getResources().getString(R.string.updates));
+
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.updates_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 

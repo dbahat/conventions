@@ -20,6 +20,7 @@ import amai.org.conventions.events.activities.EventActivity;
 import amai.org.conventions.events.activities.MyEventsActivity;
 import amai.org.conventions.events.activities.ProgrammeActivity;
 import amai.org.conventions.map.MapActivity;
+import amai.org.conventions.updates.UpdatesActivity;
 
 
 public abstract class NavigationActivity extends AppCompatActivity {
@@ -150,7 +151,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
     }
 
     public void onNavigateToUpdates(View view) {
-        navigateToActivity(MyEventsActivity.class);
+        navigateToActivity(UpdatesActivity.class);
     }
 
     public void onNavigateToArrivalMethods(View view) {
