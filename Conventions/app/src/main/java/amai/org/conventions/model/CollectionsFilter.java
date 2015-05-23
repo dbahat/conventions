@@ -2,11 +2,8 @@ package amai.org.conventions.model;
 
 import java.util.List;
 
-/**
- * Created by David on 05/05/2015.
- */
 public class CollectionsFilter {
-    public static interface Predicate<T> {
+    public interface Predicate<T> {
         boolean where(T item);
     }
 

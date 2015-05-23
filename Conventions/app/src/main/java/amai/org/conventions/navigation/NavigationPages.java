@@ -15,6 +15,7 @@ import amai.org.conventions.events.activities.MyEventsActivity;
 import amai.org.conventions.events.activities.ProgrammeActivity;
 import amai.org.conventions.R;
 import amai.org.conventions.map.MapActivity;
+import amai.org.conventions.updates.UpdatesActivity;
 
 /**
  * Container class for accessing data regarding the main navigation pages.
@@ -57,10 +58,6 @@ public class NavigationPages {
         return pageTitles.indexOf(pageTitle);
     }
 
-    public int getPositionForType(Class<? extends NavigationActivity> navigationActivity) {
-        return new ArrayList<>(pageIdToActivityTypeMapInOrder.values()).indexOf(navigationActivity);
-    }
-
     protected String getString(int stringResourceId) {
         return context.getResources().getString(stringResourceId);
     }
@@ -69,7 +66,7 @@ public class NavigationPages {
         LinkedHashMap<Integer, Class<? extends Activity>> pageIdToFragmentMapInOrder = new LinkedHashMap<>();
         pageIdToFragmentMapInOrder.put(R.string.map, MapActivity.class);
         pageIdToFragmentMapInOrder.put(R.string.events, ProgrammeActivity.class);
-        pageIdToFragmentMapInOrder.put(R.string.updates, MyEventsActivity.class);
+        pageIdToFragmentMapInOrder.put(R.string.updates, UpdatesActivity.class);
         pageIdToFragmentMapInOrder.put(R.string.arrivalMethods, ArrivalMethodsActivity.class);
 
         return pageIdToFragmentMapInOrder;

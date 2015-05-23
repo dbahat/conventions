@@ -15,4 +15,6 @@
     <string name="event_navigate_to_hall">הצג אולם</string>
     <string name="event_add_to_favorites">הוסף לאירועים שלי</string>
     <string name="event_remove_from_favorites">הסר מהאירועים שלי</string>
+
+    <string name="update_show_full_text">הצג עדכון מלא</string>
 </resources>
