@@ -33,30 +33,63 @@ public class MyEventsActivity extends NavigationActivity {
 	private static int NEXT_EVENT_START_TIME_UPDATE_DELAY = 60000; // 1 minute
 
     private TextView nextEventStart;
+	private RecyclerView eventsList;
+	private View emptyView;
 
-    @Override
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentInContentContainer(R.layout.activity_my_events);
         setToolbarTitle(getResources().getString(R.string.my_events_title));
 
-        List<ConventionEvent> events = getMyEvents();
-        Collections.sort(events, new ConventionEventComparator());
-
-
-        // Set up text view for next event start
         nextEventStart = (TextView) findViewById(R.id.nextEventStart);
-        setNextEventStartText(events);
-
-        // Set up events list
-	    ArrayList<ArrayList<ConventionEvent>> nonConflictingGroups = getNonConflictingGroups(events);
-	    RecyclerView eventsList = (RecyclerView) findViewById(R.id.myEventsList);
-	    eventsList.setAdapter(new ConflictingEventsViewAdapter(nonConflictingGroups, true, true));
-
+	    eventsList = (RecyclerView) findViewById(R.id.myEventsList);
 	    eventsList.setLayoutManager(new LinearLayoutManager(this));
+
+		emptyView = findViewById(R.id.my_events_empty);
+
+		updateDataset();
     }
 
-    @Override
+	@Override
+	protected void onResume() {
+		super.onResume();
+		updateDataset();
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		if (updateNextEventStartTimeText != null) {
+			nextEventStartTextRunner.removeCallbacks(updateNextEventStartTimeText);
+		}
+	}
+
+	private void updateDataset() {
+		List<ConventionEvent> events = getMyEvents();
+		Collections.sort(events, new ConventionEventComparator());
+
+		// Set up text view for next event start
+		setNextEventStartText(events);
+
+		// Set up events list
+		ArrayList<ArrayList<ConventionEvent>> nonConflictingGroups = getNonConflictingGroups(events);
+		eventsList.setAdapter(new ConflictingEventsViewAdapter(nonConflictingGroups, true, true));
+
+		updateVisibility(nonConflictingGroups.size(), eventsList, emptyView);
+	}
+
+	private void updateVisibility(int datasetSize, RecyclerView eventsList, View emptyView) {
+		if (datasetSize > 0) {
+			eventsList.setVisibility(View.VISIBLE);
+			emptyView.setVisibility(View.GONE);
+		} else {
+			eventsList.setVisibility(View.GONE);
+			emptyView.setVisibility(View.VISIBLE);
+		}
+	}
+
+	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.my_events_menu, menu);
         return true;
@@ -121,13 +154,13 @@ public class MyEventsActivity extends NavigationActivity {
                 updateNextEventStartTimeText = new Runnable() {
                     @Override
                     public void run() {
-                        MyEventsActivity.this.setNextEventStartText(events);
+	                    MyEventsActivity.this.setNextEventStartText(events);
                         nextEventStartTextRunner.postAtTime(this, System.currentTimeMillis() + NEXT_EVENT_START_TIME_UPDATE_DELAY);
                     }
                 };
             }
             nextEventStartTextRunner.postDelayed(updateNextEventStartTimeText, NEXT_EVENT_START_TIME_UPDATE_DELAY);
-        } else {
+        } else if (updateNextEventStartTimeText != null) {
             nextEventStartTextRunner.removeCallbacks(updateNextEventStartTimeText);
         }
     }

@@ -26,4 +26,15 @@
 
     </android.support.v7.widget.RecyclerView>
 
+    <TextView
+        android:id="@+id/my_events_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:textSize="@dimen/abc_text_size_large_material"
+        android:textColor="#909090"
+        android:padding="25dp"
+        android:text="@string/my_events_no_data" />
+
 </LinearLayout>
