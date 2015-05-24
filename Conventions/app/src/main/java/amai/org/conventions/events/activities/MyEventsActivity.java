@@ -160,10 +160,12 @@ public class MyEventsActivity extends NavigationActivity {
 			if (currGroupEndTime == null || event.getEndTime().after(currGroupEndTime)) {
 				currGroupEndTime = event.getEndTime();
 			}
-
 		}
+
 		// Add the last group
-		nonConflictingEventGroups.add(currGroup);
+		if (currGroup != null) {
+			nonConflictingEventGroups.add(currGroup);
+		}
 
 		return nonConflictingEventGroups;
 	}
