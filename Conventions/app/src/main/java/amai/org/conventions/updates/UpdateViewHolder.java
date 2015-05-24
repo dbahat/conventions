@@ -3,20 +3,22 @@ package amai.org.conventions.updates;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import amai.org.conventions.R;
 import amai.org.conventions.model.Dates;
-import amai.org.conventions.model.Update;
 
 public class UpdateViewHolder extends RecyclerView.ViewHolder {
-	private TextView updateTextView;
+    private static final int MAX_LINES_FOR_COLLAPSED_UPDATE = 7;
+
+    private TextView updateTextView;
     private TextView updateTime;
     private TextView updateDay;
-	private final View showDetailsLine;
-    private TextView showDetailsButton;
+    private FrameLayout showDetailsButton;
     private LinearLayout updateTimeContainer;
+    private OnMoreInfoClickListener onMoreInfoClickListener;
 
     public UpdateViewHolder(View itemView) {
         super(itemView);
@@ -24,26 +26,44 @@ public class UpdateViewHolder extends RecyclerView.ViewHolder {
         updateTextView = (TextView) itemView.findViewById(R.id.update_text);
         updateTime = (TextView) itemView.findViewById(R.id.update_time);
         updateDay = (TextView) itemView.findViewById(R.id.update_day);
-	    showDetailsLine = itemView.findViewById(R.id.update_show_details_line);
-        showDetailsButton = (TextView) itemView.findViewById(R.id.update_show_details_button);
+        showDetailsButton = (FrameLayout) itemView.findViewById(R.id.update_show_details_button);
         updateTimeContainer = (LinearLayout) itemView.findViewById(R.id.update_time_container);
     }
 
-    public void setContent(Update update) {
+    public void setContent(UpdateViewModel updateViewModel) {
         // Wait until the updateTimeContainer layout completes before writing the text, since we want to indent
         // the next based on the measured width of the time container
-        updateTimeContainer.addOnLayoutChangeListener(new SetUpdateTextTopRowsMarginOnLayoutChange(update.getText()));
+        updateTimeContainer.addOnLayoutChangeListener(new SetUpdateTextTopRowsMarginOnLayoutChange(updateViewModel.getUpdate().getText()));
 
-        updateTime.setText(Dates.formatHoursAndMinutes(update.getDate()));
-        updateDay.setText(Dates.formatDateWithoutTime(update.getDate()));
+        updateTime.setText(Dates.formatHoursAndMinutes(updateViewModel.getUpdate().getDate()));
+        updateDay.setText(Dates.formatDateWithoutTime(updateViewModel.getUpdate().getDate()));
+
+        if (updateViewModel.isCollapsed()) {
+            updateTextView.setMaxLines(MAX_LINES_FOR_COLLAPSED_UPDATE);
+            showDetailsButton.setVisibility(View.VISIBLE);
+        } else {
+            updateTextView.setMaxLines(Integer.MAX_VALUE);
+            showDetailsButton.setVisibility(View.GONE);
+        }
+
+
+
         showDetailsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateTextView.setMaxLines(Integer.MAX_VALUE);
-	            showDetailsLine.setVisibility(View.GONE);
-                showDetailsButton.setVisibility(View.GONE);
+                if (onMoreInfoClickListener != null) {
+                    onMoreInfoClickListener.onClicked();
+                }
             }
         });
+    }
+
+    public void setOnMoreInfoClickListener(OnMoreInfoClickListener listener) {
+        this.onMoreInfoClickListener = listener;
+    }
+
+    public interface OnMoreInfoClickListener {
+        void onClicked();
     }
 
     /**

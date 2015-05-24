@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import amai.org.conventions.R;
@@ -12,10 +13,16 @@ import amai.org.conventions.model.Update;
 
 public class UpdatesAdapter extends RecyclerView.Adapter<UpdateViewHolder> {
 
-    private List<Update> updates;
+    private List<UpdateViewModel> updates;
 
     public UpdatesAdapter(List<Update> updates) {
-        this.updates = updates;
+
+        List<UpdateViewModel> updateViewModels = new LinkedList<>();
+        for (Update update : updates) {
+            updateViewModels.add(new UpdateViewModel(update, true /* By default have all items collapsed */));
+        }
+
+        this.updates = updateViewModels;
     }
 
     @Override
@@ -25,8 +32,19 @@ public class UpdatesAdapter extends RecyclerView.Adapter<UpdateViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(UpdateViewHolder holder, int position) {
-        holder.setContent(updates.get(position));
+    public void onBindViewHolder(UpdateViewHolder holder, final int position) {
+        final UpdateViewModel updateViewModel = updates.get(position);
+        holder.setContent(updateViewModel);
+        holder.setOnMoreInfoClickListener(new UpdateViewHolder.OnMoreInfoClickListener() {
+            @Override
+            public void onClicked() {
+                updateViewModel.setCollapsed(false);
+
+                // NOTE - Currently not invoking NotifyItemChanged(), since this seems to cause the recyclerView to update the item to the wrong size.
+                // Updating all the dataset seems to cause it to draw the items in the correct size.
+                notifyDataSetChanged();
+            }
+        });
     }
 
     @Override

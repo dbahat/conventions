@@ -66,6 +66,8 @@
                 android:background="@android:color/darker_gray"/>
         </LinearLayout>
 
+        <!-- Note - the max lines of this textView is set dynamically in code, based on the
+         item's collapsed state -->
         <TextView
             android:id="@+id/update_text"
             android:paddingTop="5dp"
@@ -80,21 +82,27 @@
 
     </RelativeLayout>
 
-    <View
-        android:layout_width="300dp"
-        android:layout_height="1dp"
-        android:layout_gravity="center"
-        android:id="@+id/update_show_details_line"
-        android:background="@android:color/darker_gray" />
+    <FrameLayout
+        android:id="@+id/update_show_details_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
 
-   <TextView
-       android:id="@+id/update_show_details_button"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:text="@string/update_show_full_text"
-       android:textColor="@android:color/holo_blue_dark"
-       android:gravity="center"
-       android:padding="5dp"/>
+        <View
+            android:layout_width="300dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center|top"
+            android:background="@android:color/darker_gray" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/update_show_full_text"
+            android:textColor="@android:color/holo_blue_dark"
+            android:layout_gravity="center"
+            android:padding="5dp"/>
+
+    </FrameLayout>
 
     <View
         android:layout_width="match_parent"
