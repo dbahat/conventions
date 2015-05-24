@@ -37,7 +37,7 @@ public class MapFloorFragment extends Fragment {
 
         resolveUIElements(view);
         initializeUpAndDownButtons();
-        configureMapFloorImage();
+        configureMapFloor();
 
         return view;
     }
@@ -96,10 +96,11 @@ public class MapFloorFragment extends Fragment {
         downArrowImage = (ImageView) view.findViewById(R.id.map_floor_down_arrow);
     }
 
-    private void configureMapFloorImage() {
+    private void configureMapFloor() {
         int mapFloor = getArguments().getInt(ARGS_FLOOR_NUMBER);
 	    ConventionMap map = Convention.getInstance().getMap();
 	    Floor floor = map.findFloorByNumber(mapFloor);
+
 	    mapFloorImage.setImageDrawable(getResources().getDrawable(floor.getImageResource()));
 
 	    boolean isTopFloor = floor.getNumber() == map.getTopFloor().getNumber();
@@ -111,7 +112,6 @@ public class MapFloorFragment extends Fragment {
 
     public interface OnMapArrowClickedListener {
         void onUpArrowClicked();
-
         void onDownArrowClicked();
     }
 }

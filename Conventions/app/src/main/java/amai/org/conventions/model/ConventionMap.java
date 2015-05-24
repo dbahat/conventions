@@ -4,12 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConventionMap {
-	private List<Floor> floors;
-	private List<MapLocation> locations;
-
-	public ConventionMap() {
-		floors = new ArrayList<>();
-	}
+	private Floor lastLookedAtFloor = null;
+	private List<Floor> floors = new ArrayList<>();
+	private List<MapLocation> locations = new ArrayList<>();
 
 	public List<Floor> getFloors() {
 		return floors;
@@ -35,6 +32,16 @@ public class ConventionMap {
 	public ConventionMap withLocations(List<MapLocation> locations) {
 		setLocations(locations);
 		return this;
+	}
+
+	public Floor getLastLookedAtFloor() {
+		return lastLookedAtFloor;
+	}
+
+	public void setLastLookedAtFloor(Floor lastLookedAtFloor) {
+		if (lastLookedAtFloor != null) {
+			this.lastLookedAtFloor = lastLookedAtFloor;
+		}
 	}
 
 	public Floor findFloorByNumber(int number) {

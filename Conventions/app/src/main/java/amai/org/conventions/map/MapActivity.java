@@ -18,7 +18,10 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
     public static final String EXTRA_FLOOR_NUMBER = "ExtraFloorNumber";
 
     private static final ConventionMap map = Convention.getInstance().getMap();
+	private static final int NO_FLOOR = -1;
+
     private VerticalViewPager viewPager;
+	private int currentFloorNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +30,37 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 
         initializeViewPager();
 
-
-        int floorNumber = getIntent().getIntExtra(EXTRA_FLOOR_NUMBER, 0);
-        viewPager.setCurrentItem(floorIndexToPagerPosition(floorNumber - 1 /* Since the floor index is zero based */));
+	    Bundle bundle = (savedInstanceState != null ? savedInstanceState : getIntent().getExtras());
+	    int defaultFloorNumber = getDefaultFloorNumber();
+	    int floorNumber = (bundle == null ? defaultFloorNumber : bundle.getInt(EXTRA_FLOOR_NUMBER, defaultFloorNumber));
+	    setFloorInViewPager(floorNumber);
     }
 
-    private void initializeViewPager() {
+	private void setFloorInViewPager(int floorNumber) {
+		int floorIndex = NO_FLOOR;
+		if (floorNumber != NO_FLOOR) {
+		    floorIndex = floorNumberToFloorIndex(floorNumber);
+		}
+		// If no floor was sent or looked at or the floor was not found, view the first floor
+		if (floorIndex == NO_FLOOR) {
+			floorIndex = 0;
+		}
+
+		viewPager.setCurrentItem(floorIndexToPagerPosition(floorIndex));
+		Floor currentFloor = map.getFloors().get(floorIndex);
+		updateCurrentFloor(currentFloor);
+	}
+
+	private int getDefaultFloorNumber() {
+		int defaultFloor = NO_FLOOR;
+		Floor lastFloor = map.getLastLookedAtFloor();
+		if (lastFloor != null) {
+			defaultFloor = lastFloor.getNumber();
+		}
+		return defaultFloor;
+	}
+
+	private void initializeViewPager() {
         viewPager = (VerticalViewPager) findViewById(R.id.map_view_pager);
 
         // Configure the view pager
@@ -45,7 +73,8 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 
             @Override
             public void onPageSelected(int position) {
-                setToolbarTitle(pagerPositionToFloor(viewPager.getCurrentItem()).getName());
+	            Floor floor = pagerPositionToFloor(viewPager.getCurrentItem());
+	            updateCurrentFloor(floor);
             }
 
             @Override
@@ -58,14 +87,20 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
         viewPager.setOffscreenPageLimit(viewPager.getAdapter().getCount());
     }
 
-    @Override
+	private void updateCurrentFloor(Floor floor) {
+		setToolbarTitle(floor.getName());
+		currentFloorNumber = floor.getNumber();
+		map.setLastLookedAtFloor(floor);
+	}
+
+	@Override
     public void onUpArrowClicked() {
-        viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
+	    viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
     }
 
-    @Override
+	@Override
     public void onDownArrowClicked() {
-        viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
+		viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
     }
 
     private class MapFloorAdapter extends FragmentStatePagerAdapter {
@@ -91,9 +126,28 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		return map.getFloors().size() - 1 - index;
 	}
 
+	private int floorNumberToFloorIndex(int floorNumber) {
+		boolean found = false;
+		int index = 0;
+		for (Floor curr : map.getFloors()) {
+			if (curr.getNumber() == floorNumber) {
+				found = true;
+				break;
+			}
+			++index;
+		}
+		return found ? index : NO_FLOOR;
+	}
+
     private Floor pagerPositionToFloor(int position) {
 	    // View pager positions are opposite of the floor numbers because the first
 	    // position is the top while floors start at the bottom
         return map.getFloors().get(map.getFloors().size() - 1 - position);
     }
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putInt(EXTRA_FLOOR_NUMBER, currentFloorNumber);
+	}
 }
