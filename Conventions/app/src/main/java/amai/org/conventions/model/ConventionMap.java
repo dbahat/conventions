@@ -1,9 +1,14 @@
 package amai.org.conventions.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 
 public class ConventionMap {
+	public static int FLOOR_NOT_FOUND = -1;
+
 	private Floor lastLookedAtFloor = null;
 	private List<Floor> floors = new ArrayList<>();
 	private List<MapLocation> locations = new ArrayList<>();
@@ -61,13 +66,51 @@ public class ConventionMap {
 		return floors.get(floors.size() - 1);
 	}
 
-	public MapLocation findLocationByHall(Hall hall) {
+	public List<MapLocation> findLocationsByHall(Hall hall) {
+		List<MapLocation> locations = new LinkedList<>();
 		for (MapLocation location : getLocations()) {
 			if (location.getHall().equals(hall)) {
-				return location;
+				locations.add(location);
 			}
 		}
 
-		return null;
+		return locations;
+	}
+
+	public MapLocation findClosestLocation(List<MapLocation> locations) {
+		if (locations.size() == 0) {
+			return null;
+		} else if (locations.size() == 1) {
+			return locations.get(0);
+		} else {
+			final ConventionMap map = Convention.getInstance().getMap();
+			Floor currMapFloor = map.getLastLookedAtFloor();
+			if (currMapFloor != null) {
+				final int currMapFloorIndex = map.floorNumberToFloorIndex(currMapFloor.getNumber());
+				Collections.sort(locations, new Comparator<MapLocation>() {
+					@Override
+					public int compare(MapLocation lhs, MapLocation rhs) {
+						// Return the closest location to the last looked at floor
+						int distanceFromLeft = Math.abs(currMapFloorIndex - map.floorNumberToFloorIndex(lhs.getFloor().getNumber()));
+						int distanceFromRight = Math.abs(currMapFloorIndex - map.floorNumberToFloorIndex(rhs.getFloor().getNumber()));
+						return distanceFromLeft - distanceFromRight;
+					}
+				});
+			}
+			return locations.get(0);
+		}
+	}
+
+	public int floorNumberToFloorIndex(int floorNumber) {
+		boolean found = false;
+		int index = 0;
+		for (Floor curr : getFloors()) {
+			if (curr.getNumber() == floorNumber) {
+				found = true;
+				break;
+			}
+			++index;
+		}
+		return found ? index : FLOOR_NOT_FOUND;
 	}
 }

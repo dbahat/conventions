@@ -18,7 +18,6 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
     public static final String EXTRA_FLOOR_NUMBER = "ExtraFloorNumber";
 
     private static final ConventionMap map = Convention.getInstance().getMap();
-	private static final int NO_FLOOR = -1;
 
     private VerticalViewPager viewPager;
 	private int currentFloorNumber;
@@ -37,12 +36,12 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
     }
 
 	private void setFloorInViewPager(int floorNumber) {
-		int floorIndex = NO_FLOOR;
-		if (floorNumber != NO_FLOOR) {
-		    floorIndex = floorNumberToFloorIndex(floorNumber);
+		int floorIndex = ConventionMap.FLOOR_NOT_FOUND;
+		if (floorNumber != ConventionMap.FLOOR_NOT_FOUND) {
+		    floorIndex = map.floorNumberToFloorIndex(floorNumber);
 		}
 		// If no floor was sent or looked at or the floor was not found, view the first floor
-		if (floorIndex == NO_FLOOR) {
+		if (floorIndex == ConventionMap.FLOOR_NOT_FOUND) {
 			floorIndex = 0;
 		}
 
@@ -52,7 +51,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 	}
 
 	private int getDefaultFloorNumber() {
-		int defaultFloor = NO_FLOOR;
+		int defaultFloor = ConventionMap.FLOOR_NOT_FOUND;
 		Floor lastFloor = map.getLastLookedAtFloor();
 		if (lastFloor != null) {
 			defaultFloor = lastFloor.getNumber();
@@ -124,19 +123,6 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		// View pager positions are opposite of the floor numbers because the first
 		// position is the top while floors start at the bottom
 		return map.getFloors().size() - 1 - index;
-	}
-
-	private int floorNumberToFloorIndex(int floorNumber) {
-		boolean found = false;
-		int index = 0;
-		for (Floor curr : map.getFloors()) {
-			if (curr.getNumber() == floorNumber) {
-				found = true;
-				break;
-			}
-			++index;
-		}
-		return found ? index : NO_FLOOR;
 	}
 
     private Floor pagerPositionToFloor(int position) {

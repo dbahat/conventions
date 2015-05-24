@@ -9,11 +9,14 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import amai.org.conventions.R;
 import amai.org.conventions.events.adapters.ImageAdapter;
 import amai.org.conventions.map.MapActivity;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
+import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.Dates;
 import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.navigation.NavigationActivity;
@@ -67,7 +70,9 @@ public class EventActivity extends NavigationActivity {
             case R.id.event_navigate_to_map:
                 // Navigate to the map floor associated with this event
                 Bundle floorBundle = new Bundle();
-                MapLocation location = Convention.getInstance().getMap().findLocationByHall(conventionEvent.getHall());
+	            ConventionMap map = Convention.getInstance().getMap();
+	            List<MapLocation> locations = map.findLocationsByHall(conventionEvent.getHall());
+	            MapLocation location = map.findClosestLocation(locations);
                 floorBundle.putInt(MapActivity.EXTRA_FLOOR_NUMBER, location.getFloor().getNumber());
 
                 navigateToActivity(MapActivity.class, false, floorBundle);
@@ -84,7 +89,7 @@ public class EventActivity extends NavigationActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setEvent(ConventionEvent event) {
+	private void setEvent(ConventionEvent event) {
 
         setToolbarTitle(event.getType().getDescription());
 
