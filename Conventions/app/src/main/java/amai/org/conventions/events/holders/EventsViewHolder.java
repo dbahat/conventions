@@ -15,7 +15,7 @@ public class EventsViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
         this.showFavoriteIcon = showFavoriteIcon;
         this.showHallName = showHallName;
-        eventView = (EventView) itemView.findViewById(eventElementId);
+        this.eventView = (EventView) itemView.findViewById(eventElementId);
     }
 
 	public void setModel(ConventionEvent event, boolean conflicting) {
@@ -24,4 +24,8 @@ public class EventsViewHolder extends RecyclerView.ViewHolder {
 		eventView.setShowHallName(showHallName);
 		eventView.setConflicting(conflicting);
 	}
+
+    public void setOnChangeListener(EventView.OnChangeListener listener) {
+        eventView.setOnChangeListener(listener);
+    }
 }

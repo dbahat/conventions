@@ -34,6 +34,8 @@ public class EventView extends FrameLayout {
     private final ViewGroup eventDescription;
 	private final CardView eventContainer;
 
+    private OnChangeListener onChangeListener;
+
     private ConventionEvent event = null;
 
     public EventView(Context context, AttributeSet attrs) {
@@ -69,6 +71,10 @@ public class EventView extends FrameLayout {
         setAttributes(attrs);
     }
 
+    public void setOnChangeListener(OnChangeListener onChangeListener) {
+        this.onChangeListener = onChangeListener;
+    }
+
     private void setAttributes(AttributeSet attrs) {
         if (attrs == null) {
             return;
@@ -92,6 +98,10 @@ public class EventView extends FrameLayout {
 
 	private void dataChanged() {
 		setEvent(this.event);
+
+        if (onChangeListener != null) {
+            onChangeListener.onDataChanged();
+        }
 	}
 
     public void setEvent(ConventionEvent event) {
@@ -210,4 +220,8 @@ public class EventView extends FrameLayout {
 			eventContainer.setCardBackgroundColor(getResources().getColor(R.color.white));
 		}
 	}
+
+    public interface OnChangeListener {
+        public void onDataChanged();
+    }
 }

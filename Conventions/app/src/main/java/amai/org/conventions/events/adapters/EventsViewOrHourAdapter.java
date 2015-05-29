@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 import amai.org.conventions.R;
+import amai.org.conventions.events.EventView;
 import amai.org.conventions.events.ProgrammeConventionEvent;
 import amai.org.conventions.events.holders.EventTimeViewHolder;
 import amai.org.conventions.events.holders.EventsViewHolder;
@@ -52,6 +53,13 @@ public class EventsViewOrHourAdapter extends BaseAdapter implements StickyListHe
         }
 
         holder.setModel(events.get(position).getEvent(), false);
+        holder.setOnChangeListener(new EventView.OnChangeListener() {
+            @Override
+            public void onDataChanged() {
+                // In case an event was added or removed from the favorites, re-draw the list, since the same event might appear in multiple time sections
+                notifyDataSetChanged();
+            }
+        });
         return convertView;
     }
 
