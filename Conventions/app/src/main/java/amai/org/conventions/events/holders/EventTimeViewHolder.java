@@ -5,14 +5,15 @@ import android.view.View;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 import amai.org.conventions.R;
 import amai.org.conventions.model.Dates;
 
 public class EventTimeViewHolder extends RecyclerView.ViewHolder {
     private TextView timeTextView;
+    private int currentHour;
 
     public EventTimeViewHolder(View itemView) {
         super(itemView);
@@ -22,5 +23,13 @@ public class EventTimeViewHolder extends RecyclerView.ViewHolder {
 
     public void setTime(Date date) {
         timeTextView.setText(new SimpleDateFormat("HH:SS", Dates.getLocale()).format(date));
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        currentHour = calendar.get(Calendar.HOUR_OF_DAY);
+    }
+
+    public int getCurrentHour() {
+        return currentHour;
     }
 }

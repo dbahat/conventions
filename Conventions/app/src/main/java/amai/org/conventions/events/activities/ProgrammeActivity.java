@@ -1,10 +1,15 @@
 package amai.org.conventions.events.activities;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.AbsListView;
+import android.widget.DatePicker;
+import android.widget.TimePicker;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -17,6 +22,7 @@ import java.util.List;
 import amai.org.conventions.R;
 import amai.org.conventions.events.ProgrammeConventionEvent;
 import amai.org.conventions.events.adapters.EventsViewOrHourAdapter;
+import amai.org.conventions.events.holders.EventTimeViewHolder;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.Dates;
@@ -26,6 +32,8 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 public class ProgrammeActivity extends NavigationActivity {
 
     private EventsViewOrHourAdapter adapter;
+    private StickyListHeadersListView listView;
+    private List<ProgrammeConventionEvent> events;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,36 +41,17 @@ public class ProgrammeActivity extends NavigationActivity {
         setContentInContentContainer(R.layout.activity_programme);
         setToolbarTitle(getResources().getString(R.string.programme_title));
 
-        final StickyListHeadersListView listView = (StickyListHeadersListView) findViewById(R.id.programmeList);
-        List<ProgrammeConventionEvent> events = getEventList();
+        this.listView = (StickyListHeadersListView) findViewById(R.id.programmeList);
+        this.events = getEventList();
         adapter = new EventsViewOrHourAdapter(events);
         listView.setAdapter(adapter);
 
-        final int position = findCurrentTimePosition(events);
+        final int position = findHourPosition(floorHour(Dates.now()));
         if (position != -1) {
             final ViewTreeObserver vto = listView.getViewTreeObserver();
             vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                 public void onGlobalLayout() {
-                    listView.smoothScrollToPositionFromTop(position, 0, 500);
-
-                    // There is a bug in smoothScrollToPositionFromTop that sometimes it doesn't scroll all the way.
-                    // More info here : https://code.google.com/p/android/issues/detail?id=36062
-                    // As a workaround, we listen to when it finished scrolling, and then scroll again to
-                    // the same position.
-                    listView.setOnScrollListener(new AbsListView.OnScrollListener() {
-
-                        @Override
-                        public void onScrollStateChanged(AbsListView view, int scrollState) {
-                            if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
-                                listView.setOnScrollListener(null);
-                                listView.smoothScrollToPositionFromTop(position, 0, 500);
-                            }
-                        }
-
-                        @Override
-                        public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                        }
-                    });
+                    scrollToPosition(position);
 
                     // Unregister the listener to only call scrollToPosition once
                     listView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
@@ -98,17 +87,54 @@ public class ProgrammeActivity extends NavigationActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private int findCurrentTimePosition(List<ProgrammeConventionEvent> events) {
-        int currentHour = floorHour(Dates.now());
+    public void onTimeSectionClicked(View view) {
+        EventTimeViewHolder eventTimeViewHolder = (EventTimeViewHolder) view.getTag();
+        int selectedTimeSectionHour = eventTimeViewHolder.getCurrentHour();
+        TimePickerDialog dialog = new TimePickerDialog(this, TimePickerDialog.THEME_HOLO_LIGHT, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                int position = findHourPosition(hourOfDay);
+                if (position != -1) {
+                    scrollToPosition(position);
+                }
+            }
+        }, selectedTimeSectionHour, 0, true);
+        dialog.show();
+    }
+
+    private void scrollToPosition(final int position) {
+        listView.smoothScrollToPositionFromTop(position, 0, 500);
+
+        // There is a bug in smoothScrollToPositionFromTop that sometimes it doesn't scroll all the way.
+        // More info here : https://code.google.com/p/android/issues/detail?id=36062
+        // As a workaround, we listen to when it finished scrolling, and then scroll again to
+        // the same position.
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
+                    listView.setOnScrollListener(null);
+                    listView.smoothScrollToPositionFromTop(position, 0, 500);
+                }
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+            }
+        });
+    }
+
+    private int findHourPosition(int hour) {
         int i = 0;
         for (ProgrammeConventionEvent event : events) {
-            if (floorHour(event.getEvent().getStartTime()) == currentHour) {
+            if (floorHour(event.getEvent().getStartTime()) == hour) {
                 return i;
             }
             i++;
         }
 
-        return 0;
+        return -1;
     }
 
     private List<ProgrammeConventionEvent> getEventList() {
