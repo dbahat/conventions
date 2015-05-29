@@ -27,6 +27,7 @@ import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
 import amai.org.conventions.model.Dates;
 import amai.org.conventions.navigation.NavigationActivity;
+import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
 public class ProgrammeActivity extends NavigationActivity {
 
@@ -38,12 +39,18 @@ public class ProgrammeActivity extends NavigationActivity {
         setContentInContentContainer(R.layout.activity_programme);
         setToolbarTitle(getResources().getString(R.string.programme_title));
 
-        final ListView listView = (ListView) findViewById(R.id.programmeList);
-	    List<Object> eventsAndStartTimes = getEventsAndStartTimes();
-        adapter = new EventsViewOrHourAdapter(eventsAndStartTimes);
+        final StickyListHeadersListView listView = (StickyListHeadersListView) findViewById(R.id.programmeList);
+        List<ConventionEvent> events = new ArrayList<>(Convention.getInstance().getEvents());
+        Collections.sort(events, new Comparator<ConventionEvent>() {
+            @Override
+            public int compare(ConventionEvent lhs, ConventionEvent rhs) {
+                return lhs.getStartTime().compareTo(rhs.getStartTime());
+            }
+        });
+        adapter = new EventsViewOrHourAdapter(events);
 	    listView.setAdapter(adapter);
 
-	    final int position = getCurrentTimePosition(eventsAndStartTimes);
+	    final int position = findCurrentTimePosition(events);
 	    if (position != -1) {
 		    final ViewTreeObserver vto = listView.getViewTreeObserver();
 		    vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -84,20 +91,6 @@ public class ProgrammeActivity extends NavigationActivity {
         adapter.notifyDataSetChanged();
     }
 
-    private int getCurrentTimePosition(List<Object> eventsAndStartTimes) {
-		int position = 0;
-		boolean found = false;
-		int currentHour = toHour(Dates.now());
-		for (Object object : eventsAndStartTimes) {
-			if (object instanceof Date && toHour((Date) object) == currentHour) {
-				found = true;
-				break;
-			}
-			++position;
-		}
-		return found ? position : -1;
-	}
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.programme_menu, menu);
@@ -117,76 +110,22 @@ public class ProgrammeActivity extends NavigationActivity {
         return super.onOptionsItemSelected(item);
     }
 
-	private List<Object> getEventsAndStartTimes() {
-        // Gets the convention events
-	    List<ConventionEvent> events = Convention.getInstance().getEvents();
-	    List<Object> eventsAndDates = new ArrayList<Object>(events);
-
-        // Gets the unique start times
-        List<Date> dates = extractUniqueRoundedStartDates(events);
-
-        eventsAndDates.addAll(dates);
-
-        Collections.sort(eventsAndDates, new ConventionEventOrTimeComparator());
-        return eventsAndDates;
-    }
-
-    private List<Date> extractUniqueRoundedStartDates(List<ConventionEvent> events) {
-        HashSet<Date> dates = new HashSet<>();
-        for (ConventionEvent event : events) {
-            Date date = event.getStartTime();
-
-            // Round the hour
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(date);
-            calendar.set(Calendar.MINUTE, 0);
-            calendar.set(Calendar.SECOND, 0);
-
-            dates.add(calendar.getTime());
-        }
-
-        return new ArrayList<>(dates);
-    }
-
-    private class ConventionEventOrTimeComparator implements Comparator<Object> {
-
-        private ConventionEventComparator conventionEventComparator = new ConventionEventComparator();
-
-        @Override
-        public int compare(Object lhs, Object rhs) {
-            if (lhs instanceof ConventionEvent && rhs instanceof ConventionEvent) {
-                return conventionEventComparator.compare((ConventionEvent) lhs, (ConventionEvent) rhs);
-            }
-
-            if (lhs instanceof Date && rhs instanceof Date) {
-                return ((Date) lhs).compareTo((Date) rhs);
-            }
-
-            int leftStartTime = getStartHour(lhs);
-            int rightStartTime = getStartHour(rhs);
-
-            // If the hours are equal, return the date type first
-            if (leftStartTime == rightStartTime) {
-                if (lhs instanceof Date) return -1;
-                else return 1;
-            }
-
-            // Otherwise compare by the hours
-            return ((Integer) leftStartTime).compareTo(rightStartTime);
-        }
-
-        private int getStartHour(Object eventOrDate) {
-            if (eventOrDate instanceof ConventionEvent) {
-                return toHour(((ConventionEvent) eventOrDate).getStartTime());
-            } else {
-                return toHour((Date) eventOrDate);
-            }
-        }
-
-    }
     private static int toHour(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         return calendar.get(Calendar.HOUR_OF_DAY);
+    }
+
+    private int findCurrentTimePosition(List<ConventionEvent> events) {
+        int currentHour = toHour(Dates.now());
+        int i=0;
+        for (ConventionEvent event : events) {
+            if (toHour(event.getStartTime()) == currentHour) {
+                return i;
+            }
+            i++;
+        }
+
+        return 0;
     }
 }

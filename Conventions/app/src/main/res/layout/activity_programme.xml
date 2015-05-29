@@ -5,7 +5,7 @@
     tools:context="amai.org.conventions.events.activities.ProgrammeActivity"
     android:orientation="vertical">
 
-    <ListView
+    <se.emilsjolander.stickylistheaders.StickyListHeadersListView
         android:id="@+id/programmeList"
         android:divider="@null"
         android:dividerHeight="0dp"
