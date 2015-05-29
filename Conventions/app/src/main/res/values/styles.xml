@@ -6,6 +6,7 @@
         <!--We will be using the toolbar so no need to show ActionBar-->
         <item name="android:windowActionBar">false</item>
         <item name="toolbarNavigationButtonStyle">@style/ToolbarNavigationButtonStyle</item>
+        <item name="stickyListHeadersListViewStyle">@style/Widget.AppCompat.ListView</item>
     </style>
 
     <style name="MainActivityOverlayText">

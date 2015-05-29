@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 import amai.org.conventions.R;
+import amai.org.conventions.events.ProgrammeConventionEvent;
 import amai.org.conventions.events.holders.EventTimeViewHolder;
 import amai.org.conventions.events.holders.EventsViewHolder;
 import amai.org.conventions.model.ConventionEvent;
@@ -17,9 +18,9 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
 public class EventsViewOrHourAdapter extends BaseAdapter implements StickyListHeadersAdapter {
 
-    private List<ConventionEvent> events;
+    private List<ProgrammeConventionEvent> events;
 
-    public EventsViewOrHourAdapter(List<ConventionEvent> events) {
+    public EventsViewOrHourAdapter(List<ProgrammeConventionEvent> events) {
         this.events = events;
     }
 
@@ -50,7 +51,7 @@ public class EventsViewOrHourAdapter extends BaseAdapter implements StickyListHe
             holder = (EventsViewHolder) convertView.getTag();
         }
 
-        holder.setModel(events.get(position), false);
+        holder.setModel(events.get(position).getEvent(), false);
         return convertView;
     }
 
@@ -71,18 +72,12 @@ public class EventsViewOrHourAdapter extends BaseAdapter implements StickyListHe
             holder = (EventTimeViewHolder) convertView.getTag();
         }
 
-        holder.setTime(events.get(position).getStartTime());
+        holder.setTime(events.get(position).getTimeSection().getTime());
         return convertView;
     }
 
     @Override
     public long getHeaderId(int position) {
-        return toHour(events.get(position).getStartTime());
-    }
-
-    private static int toHour(Date date) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        return calendar.get(Calendar.HOUR_OF_DAY);
+        return events.get(position).getTimeSection().get(Calendar.HOUR_OF_DAY);
     }
 }

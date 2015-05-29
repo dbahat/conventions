@@ -1,30 +1,24 @@
 package amai.org.conventions.events.activities;
 
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.ViewTreeObserver;
-import android.widget.AbsListView;
-import android.widget.ListView;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import android.view.ViewTreeObserver;
+import android.widget.AbsListView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 
 import amai.org.conventions.R;
-import amai.org.conventions.events.activities.EventActivity;
+import amai.org.conventions.events.ProgrammeConventionEvent;
 import amai.org.conventions.events.adapters.EventsViewOrHourAdapter;
-import amai.org.conventions.events.activities.MyEventsActivity;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
-import amai.org.conventions.model.ConventionEventComparator;
 import amai.org.conventions.model.Dates;
 import amai.org.conventions.navigation.NavigationActivity;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
@@ -40,47 +34,41 @@ public class ProgrammeActivity extends NavigationActivity {
         setToolbarTitle(getResources().getString(R.string.programme_title));
 
         final StickyListHeadersListView listView = (StickyListHeadersListView) findViewById(R.id.programmeList);
-        List<ConventionEvent> events = new ArrayList<>(Convention.getInstance().getEvents());
-        Collections.sort(events, new Comparator<ConventionEvent>() {
-            @Override
-            public int compare(ConventionEvent lhs, ConventionEvent rhs) {
-                return lhs.getStartTime().compareTo(rhs.getStartTime());
-            }
-        });
+        List<ProgrammeConventionEvent> events = getEventList();
         adapter = new EventsViewOrHourAdapter(events);
-	    listView.setAdapter(adapter);
+        listView.setAdapter(adapter);
 
-	    final int position = findCurrentTimePosition(events);
-	    if (position != -1) {
-		    final ViewTreeObserver vto = listView.getViewTreeObserver();
-		    vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-			    public void onGlobalLayout() {
-				    listView.smoothScrollToPositionFromTop(position, 0, 500);
+        final int position = findCurrentTimePosition(events);
+        if (position != -1) {
+            final ViewTreeObserver vto = listView.getViewTreeObserver();
+            vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                public void onGlobalLayout() {
+                    listView.smoothScrollToPositionFromTop(position, 0, 500);
 
-				    // There is a bug in smoothScrollToPositionFromTop that sometimes it doesn't scroll all the way.
-				    // More info here : https://code.google.com/p/android/issues/detail?id=36062
-				    // As a workaround, we listen to when it finished scrolling, and then scroll again to
-				    // the same position.
-				    listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+                    // There is a bug in smoothScrollToPositionFromTop that sometimes it doesn't scroll all the way.
+                    // More info here : https://code.google.com/p/android/issues/detail?id=36062
+                    // As a workaround, we listen to when it finished scrolling, and then scroll again to
+                    // the same position.
+                    listView.setOnScrollListener(new AbsListView.OnScrollListener() {
 
-				    @Override
-				    public void onScrollStateChanged(AbsListView view, int scrollState) {
-					    if(scrollState== AbsListView.OnScrollListener.SCROLL_STATE_IDLE){
-						    listView.setOnScrollListener(null);
-						    listView.smoothScrollToPositionFromTop(position, 0, 500);
-					    }
-				    }
+                        @Override
+                        public void onScrollStateChanged(AbsListView view, int scrollState) {
+                            if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
+                                listView.setOnScrollListener(null);
+                                listView.smoothScrollToPositionFromTop(position, 0, 500);
+                            }
+                        }
 
-				    @Override
-				    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-				    }
-			    });
+                        @Override
+                        public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                        }
+                    });
 
-				    // Unregister the listener to only call scrollToPosition once
-			    listView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-		    }
-	    });
-	    }
+                    // Unregister the listener to only call scrollToPosition once
+                    listView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                }
+            });
+        }
     }
 
     @Override
@@ -110,22 +98,70 @@ public class ProgrammeActivity extends NavigationActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private static int toHour(Date date) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        return calendar.get(Calendar.HOUR_OF_DAY);
-    }
-
-    private int findCurrentTimePosition(List<ConventionEvent> events) {
-        int currentHour = toHour(Dates.now());
-        int i=0;
-        for (ConventionEvent event : events) {
-            if (toHour(event.getStartTime()) == currentHour) {
+    private int findCurrentTimePosition(List<ProgrammeConventionEvent> events) {
+        int currentHour = floorHour(Dates.now());
+        int i = 0;
+        for (ProgrammeConventionEvent event : events) {
+            if (floorHour(event.getEvent().getStartTime()) == currentHour) {
                 return i;
             }
             i++;
         }
 
         return 0;
+    }
+
+    private List<ProgrammeConventionEvent> getEventList() {
+        List<ConventionEvent> events = new ArrayList<>(Convention.getInstance().getEvents());
+        List<ProgrammeConventionEvent> programmeEvents = new LinkedList<>();
+
+        for (ConventionEvent event : events) {
+
+            // Convert the event start time to hourly time sections, and duplicate it if needed (e.g. if an event started at 13:30 and ended at 15:00, his
+            // time sections are 13:00 and 14:00
+            int eventDurationInHours = ceilHour(event.getEndTime()) - floorHour(event.getStartTime());
+            for (int i = 0; i < eventDurationInHours; i++) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(event.getStartTime());
+                calendar.add(Calendar.HOUR_OF_DAY, i);
+                calendar.clear(Calendar.MINUTE);
+                programmeEvents.add(new ProgrammeConventionEvent(event, calendar));
+            }
+        }
+
+        Collections.sort(programmeEvents, new Comparator<ProgrammeConventionEvent>() {
+            @Override
+            public int compare(ProgrammeConventionEvent lhs, ProgrammeConventionEvent rhs) {
+                // First compare by sections
+                int result = lhs.getTimeSection().compareTo(rhs.getTimeSection());
+                // In the same section, compare by hall order
+                if (result == 0) {
+                    result = lhs.getEvent().getHall().getOrder() - rhs.getEvent().getHall().getOrder();
+                }
+                // For 2 events in the same hall and section, compare by start time
+                if (result == 0) {
+                    result = lhs.getEvent().getStartTime().compareTo(rhs.getEvent().getStartTime());
+                }
+
+                return result;
+            }
+        });
+
+        return programmeEvents;
+    }
+
+    private static int floorHour(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return calendar.get(Calendar.HOUR_OF_DAY);
+    }
+
+    private int ceilHour(Date endTime) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(endTime);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+
+        return minute >= 30 ? hour + 1 : hour;
     }
 }
