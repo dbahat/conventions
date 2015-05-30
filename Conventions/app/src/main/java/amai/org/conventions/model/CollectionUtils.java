@@ -1,12 +1,17 @@
 package amai.org.conventions.model;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class CollectionUtils {
     public interface Predicate<T> {
         boolean where(T item);
     }
+
+	public static <T> List<T> filter(List<T> list, Predicate<T> predicate) {
+		return filter(list, predicate, new LinkedList<T>());
+	}
 
     public static <T, K extends List<T>> K filter(List<T> list, Predicate<T> predicate, K newList) {
         for (T item : list) {

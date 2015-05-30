@@ -1,13 +1,22 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="amai.org.conventions.map.MapFloorFragment">
+             xmlns:tools="http://schemas.android.com/tools"
+             xmlns:custom="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context="amai.org.conventions.map.MapFloorFragment"
+             android:padding="5dp">
 
-    <ImageView
+    <com.manuelpeinado.imagelayout.ImageLayout
+        android:gravity="center"
         android:id="@+id/map_floor_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/floor1"
-        />
+        custom:image="@drawable/floor1"
+        custom:fit="auto"
+        custom:imageWidth="100"
+        custom:imageHeight="100">
+
+    </com.manuelpeinado.imagelayout.ImageLayout>
 
     <ImageView
         android:id="@+id/map_floor_up_arrow"

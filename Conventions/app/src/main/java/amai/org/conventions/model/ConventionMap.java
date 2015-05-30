@@ -66,15 +66,13 @@ public class ConventionMap {
 		return floors.get(floors.size() - 1);
 	}
 
-	public List<MapLocation> findLocationsByHall(Hall hall) {
-		List<MapLocation> locations = new LinkedList<>();
-		for (MapLocation location : getLocations()) {
-			if (location.getHall().equals(hall)) {
-				locations.add(location);
+	public List<MapLocation> findLocationsByHall(final Hall hall) {
+		return CollectionUtils.filter(getLocations(), new CollectionUtils.Predicate<MapLocation>() {
+			@Override
+			public boolean where(MapLocation location) {
+				return location.getHall().getName().equals(hall.getName());
 			}
-		}
-
-		return locations;
+		});
 	}
 
 	public MapLocation findClosestLocation(List<MapLocation> locations) {
@@ -112,5 +110,14 @@ public class ConventionMap {
 			++index;
 		}
 		return found ? index : FLOOR_NOT_FOUND;
+	}
+
+	public List<MapLocation> findLocationsByFloor(final Floor floor) {
+		return CollectionUtils.filter(getLocations(), new CollectionUtils.Predicate<MapLocation>() {
+			@Override
+			public boolean where(MapLocation location) {
+				return location.getFloor().getNumber() == floor.getNumber();
+			}
+		});
 	}
 }

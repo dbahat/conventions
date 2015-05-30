@@ -396,20 +396,20 @@ public class Convention implements Serializable {
 				)
 		);
 
-		Floor floor1 = new Floor(1).withName("מפלס תחתון - כניסה").withImageResource(R.drawable.floor1);
-		Floor floor2 = new Floor(2).withName("מפלס עליון - אולם ראשי").withImageResource(R.drawable.floor2);
+		Floor floor1 = new Floor(1).withName("מפלס תחתון - כניסה").withImageResource(R.raw.floor1_no_markers).withMarkerWidth(11);
+		Floor floor2 = new Floor(2).withName("מפלס עליון - אולם ראשי").withImageResource(R.raw.floor2_no_markers).withMarkerWidth(13);
 
 		this.map = new ConventionMap()
 				.withFloors(Arrays.asList(floor1, floor2))
 				.withLocations(
 						CollectionUtils.flattenList(
 								inFloor(floor1,
-										new MapLocation().withHall(oranim1),
-										new MapLocation().withHall(oranim2),
-										new MapLocation().withHall(oranim3)),
+										new MapLocation().withHall(oranim1).withMarkerResource(R.raw.oranim1_marker).withX(49).withY(79),
+										new MapLocation().withHall(oranim2).withMarkerResource(R.raw.oranim2_marker).withX(59).withY(74),
+										new MapLocation().withHall(oranim3).withMarkerResource(R.raw.oranim3_marker).withX(69).withY(68)),
 								inFloor(floor2,
-										new MapLocation().withHall(auditorium),
-										new MapLocation().withHall(contentRoom))
+										new MapLocation().withHall(auditorium).withMarkerResource(R.raw.main_hall_marker).withX(53).withY(55),
+										new MapLocation().withHall(contentRoom).withMarkerResource(R.raw.content_room_marker).withX(86).withY(74))
 						)
 				);
 	}
@@ -467,6 +467,8 @@ public class Convention implements Serializable {
 		try {
 			FileInputStream fileInputStream = context.openFileInput(EVENT_USER_INPUT_FILE_NAME);
 			ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+
+			@SuppressWarnings("unchecked")
 			Map<Integer, ConventionEvent.UserInput> userInput = (Map<Integer, ConventionEvent.UserInput>) objectInputStream.readObject();
 			objectInputStream.close();
 			fileInputStream.close();

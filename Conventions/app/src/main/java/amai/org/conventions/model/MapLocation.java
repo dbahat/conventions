@@ -6,6 +6,7 @@ public class MapLocation {
 	private int y;
 	private Hall hall;
 	private String name;
+	private int markerResource;
 
 	public Floor getFloor() {
 		return floor;
@@ -72,6 +73,19 @@ public class MapLocation {
 
 	public MapLocation withName(String name) {
 		setName(name);
+		return this;
+	}
+
+	public int getMarkerResource() {
+		return markerResource;
+	}
+
+	public void setMarkerResource(int markerResource) {
+		this.markerResource = markerResource;
+	}
+
+	public MapLocation withMarkerResource(int markerResource) {
+		setMarkerResource(markerResource);
 		return this;
 	}
 }
