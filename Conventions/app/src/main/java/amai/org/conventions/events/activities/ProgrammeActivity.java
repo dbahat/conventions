@@ -1,15 +1,15 @@
 package amai.org.conventions.events.activities;
 
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.AbsListView;
-import android.widget.DatePicker;
-import android.widget.TimePicker;
+import android.widget.NumberPicker;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -94,15 +94,40 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
     public void onHeaderClick(StickyListHeadersListView stickyListHeadersListView, View view, int i, long l, boolean b) {
         EventTimeViewHolder eventTimeViewHolder = (EventTimeViewHolder) view.getTag();
         int selectedTimeSectionHour = eventTimeViewHolder.getCurrentHour();
-        TimePickerDialog dialog = new TimePickerDialog(this, TimePickerDialog.THEME_HOLO_LIGHT, new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                int position = findHourPosition(hourOfDay);
-                if (position != -1) {
-                    scrollToPosition(position);
-                }
-            }
-        }, selectedTimeSectionHour, 0, true);
+
+	    // Setup number picker dialog
+	    final NumberPicker numberPicker = new NumberPicker(this);
+	    int minValue = events.get(0).getTimeSection().get(Calendar.HOUR_OF_DAY);
+	    int maxValue = events.get(events.size() - 1).getTimeSection().get(Calendar.HOUR_OF_DAY);
+	    numberPicker.setMinValue(minValue);
+	    numberPicker.setMaxValue(maxValue);
+	    List<String> values = new ArrayList<>(maxValue - minValue + 1);
+
+	    for (int value = minValue; value <= maxValue; ++value) {
+		    String hour = String.valueOf(value);
+		    if (hour.length() == 1) {
+			    hour = "0" + hour;
+		    }
+		    hour += ":00";
+		    values.add(hour);
+	    }
+	    numberPicker.setDisplayedValues(values.toArray(new String[values.size()]));
+	    numberPicker.setValue(selectedTimeSectionHour);
+	    numberPicker.setWrapSelectorWheel(false);
+	    numberPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+
+	    AlertDialog dialog = new AlertDialog.Builder(new ContextThemeWrapper(this, android.R.style.Theme_Holo_Light_Dialog))
+			    .setView(numberPicker)
+			    .setPositiveButton(R.string.select_hour_ok,
+					    new DialogInterface.OnClickListener() {
+						    public void onClick(DialogInterface dialog, int whichButton) {
+				                int position = findHourPosition(numberPicker.getValue());
+				                if (position != -1) {
+				                    scrollToPosition(position);
+				                }
+						    }
+					    })
+			    .create();
         dialog.show();
     }
 
@@ -151,7 +176,7 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
         for (ConventionEvent event : events) {
 
             // Convert the event start time to hourly time sections, and duplicate it if needed (e.g. if an event started at 13:30 and ended at 15:00, his
-            // time sections are 13:00 and 14:00
+            // time sections are 13:00 and 14:00)
             int eventDurationInHours = ceilHour(event.getEndTime()) - floorHour(event.getStartTime());
             for (int i = 0; i < eventDurationInHours; i++) {
                 Calendar calendar = Calendar.getInstance();
