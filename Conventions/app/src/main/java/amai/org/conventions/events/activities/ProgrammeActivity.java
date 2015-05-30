@@ -28,8 +28,9 @@ import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.Dates;
 import amai.org.conventions.navigation.NavigationActivity;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
+import se.emilsjolander.stickylistheaders.StickyListHeadersListView.OnHeaderClickListener;
 
-public class ProgrammeActivity extends NavigationActivity {
+public class ProgrammeActivity extends NavigationActivity implements OnHeaderClickListener {
 
     private EventsViewOrHourAdapter adapter;
     private StickyListHeadersListView listView;
@@ -45,6 +46,7 @@ public class ProgrammeActivity extends NavigationActivity {
         this.events = getEventList();
         adapter = new EventsViewOrHourAdapter(events);
         listView.setAdapter(adapter);
+        listView.setOnHeaderClickListener(this);
 
         final int position = findHourPosition(floorHour(Dates.now()));
         if (position != -1) {
@@ -87,7 +89,9 @@ public class ProgrammeActivity extends NavigationActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void onTimeSectionClicked(View view) {
+
+    @Override
+    public void onHeaderClick(StickyListHeadersListView stickyListHeadersListView, View view, int i, long l, boolean b) {
         EventTimeViewHolder eventTimeViewHolder = (EventTimeViewHolder) view.getTag();
         int selectedTimeSectionHour = eventTimeViewHolder.getCurrentHour();
         TimePickerDialog dialog = new TimePickerDialog(this, TimePickerDialog.THEME_HOLO_LIGHT, new TimePickerDialog.OnTimeSetListener() {
@@ -127,14 +131,17 @@ public class ProgrammeActivity extends NavigationActivity {
 
     private int findHourPosition(int hour) {
         int i = 0;
+
         for (ProgrammeConventionEvent event : events) {
-            if (floorHour(event.getEvent().getStartTime()) == hour) {
+            if (floorHour(event.getEvent().getStartTime()) >= hour) {
                 return i;
             }
             i++;
         }
 
-        return -1;
+        // If we got here it means the user selected an hour later then the last event. In this case, return the last position (which is i-1, since it's
+        // zero based count)
+        return i - 1;
     }
 
     private List<ProgrammeConventionEvent> getEventList() {
