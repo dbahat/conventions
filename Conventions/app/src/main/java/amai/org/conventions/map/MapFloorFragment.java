@@ -133,6 +133,9 @@ public class MapFloorFragment extends Fragment {
 		    // Add markers
 		    List<MapLocation> locations = map.findLocationsByFloor(floor);
 		    for (final MapLocation location : locations) {
+			    // Add drop shadow
+			    mapFloorImage.addView(createMarkerShadowView(location));
+			    // Add the marker for this location
 			    View markerImageView = createMarkerView(location);
 			    mapFloorImage.addView(markerImageView);
 		    }
@@ -176,6 +179,28 @@ public class MapFloorFragment extends Fragment {
 				Toast.makeText(v.getContext(), currLocation.getName(), Toast.LENGTH_SHORT).show();
 			}
 		});
+		return markerImageView;
+	}
+
+	private View createMarkerShadowView(MapLocation location) throws SVGParseException {
+		SVGImageView markerImageView = new SVGImageView(getActivity());
+
+		// Set marker image
+		SVG markerSvg = loadSVG(R.raw.marker_shadow);
+		markerImageView.setSVG(markerSvg);
+
+		// Set marker layout parameters and scaling
+		ImageLayout.LayoutParams layoutParams = new ImageLayout.LayoutParams();
+		// Marker size
+		layoutParams.width = location.getFloor().getMarkerWidth() + 3;
+		layoutParams.height = layoutParams.width * 2;
+		// Marker location
+		layoutParams.centerX = location.getX();
+		layoutParams.bottom = 100 - location.getY() + 3;
+
+		markerImageView.setLayoutParams(layoutParams);
+		markerImageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+		markerImageView.setAlpha(0.5f);
 		return markerImageView;
 	}
 

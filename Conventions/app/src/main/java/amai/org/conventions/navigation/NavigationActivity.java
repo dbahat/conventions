@@ -3,6 +3,7 @@ package amai.org.conventions.navigation;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.PictureDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -13,18 +14,24 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.caverock.androidsvg.SVG;
+import com.caverock.androidsvg.SVGParseException;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import amai.org.conventions.AnimationPopupWindow;
 import amai.org.conventions.ArrivalMethodsActivity;
 import amai.org.conventions.R;
 import amai.org.conventions.events.activities.EventActivity;
-import amai.org.conventions.events.activities.MyEventsActivity;
 import amai.org.conventions.events.activities.ProgrammeActivity;
 import amai.org.conventions.map.MapActivity;
 import amai.org.conventions.updates.UpdatesActivity;
 
 
 public abstract class NavigationActivity extends AppCompatActivity {
-
+	private static Map<Integer, SVG> loadedSVGFiles = new HashMap<>();
+	
     private Toolbar navigationToolbar;
     private AnimationPopupWindow popup;
 
@@ -88,14 +95,33 @@ public abstract class NavigationActivity extends AppCompatActivity {
     }
 
     private void setupActionBar(Toolbar toolbar) {
+	    toolbar.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         this.setSupportActionBar(toolbar);
         ActionBar actionBar = this.getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(false);
             actionBar.setDisplayShowTitleEnabled(true);
-            toolbar.setNavigationIcon(R.drawable.logo);
+	        try {
+		        SVG logoSVG = loadSVG(R.raw.logo_shadow);
+	            toolbar.setNavigationIcon(new PictureDrawable(logoSVG.renderToPicture()));
+	        } catch (SVGParseException e) {
+		        throw new RuntimeException(e);
+	        }
+
         }
     }
+
+	private SVG loadSVG(int resource) throws SVGParseException {
+		if (loadedSVGFiles.containsKey(resource)) {
+			return loadedSVGFiles.get(resource);
+		}
+
+		SVG svg = SVG.getFromResource(getResources(), resource);
+		svg.setDocumentHeight("100%");
+		svg.setDocumentWidth("100%");
+		loadedSVGFiles.put(resource, svg);
+		return svg;
+	}
 
     protected void setContentInContentContainer(int layoutResID) {
         FrameLayout contentContainer = (FrameLayout) findViewById(R.id.navigation_content_view_container);
