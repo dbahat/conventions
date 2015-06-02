@@ -404,12 +404,37 @@ public class Convention implements Serializable {
 				.withLocations(
 						CollectionUtils.flattenList(
 								inFloor(floor1,
-										new MapLocation().withHall(oranim1).withMarkerResource(R.raw.oranim1_marker).withX(49).withY(79),
-										new MapLocation().withHall(oranim2).withMarkerResource(R.raw.oranim2_marker).withX(59).withY(74),
-										new MapLocation().withHall(oranim3).withMarkerResource(R.raw.oranim3_marker).withX(69).withY(68)),
+										new MapLocation()
+												.withHall(oranim1)
+												.withMarkerResource(R.raw.oranim1_marker)
+												.withSelectedMarkerResource(R.raw.oranim1_marker_selected)
+												.withX(49)
+												.withY(79),
+										new MapLocation()
+												.withHall(oranim2)
+												.withMarkerResource(R.raw.oranim2_marker)
+												.withSelectedMarkerResource(R.raw.oranim2_marker_selected)
+												.withX(59)
+												.withY(74),
+										new MapLocation()
+												.withHall(oranim3)
+												.withMarkerResource(R.raw.oranim3_marker)
+												.withSelectedMarkerResource(R.raw.oranim3_marker_selected)
+												.withX(69)
+												.withY(68)),
 								inFloor(floor2,
-										new MapLocation().withHall(auditorium).withMarkerResource(R.raw.main_hall_marker).withX(53).withY(55),
-										new MapLocation().withHall(contentRoom).withMarkerResource(R.raw.content_room_marker).withX(86).withY(74))
+										new MapLocation()
+												.withHall(auditorium)
+												.withMarkerResource(R.raw.main_hall_marker)
+												.withSelectedMarkerResource(R.raw.main_hall_marker_selected)
+												.withX(53)
+												.withY(55),
+										new MapLocation()
+												.withHall(contentRoom)
+												.withMarkerResource(R.raw.content_room_marker)
+												.withSelectedMarkerResource(R.raw.content_room_marker_selected)
+												.withX(86)
+												.withY(74))
 						)
 				);
 	}

@@ -31,7 +31,7 @@ import amai.org.conventions.updates.UpdatesActivity;
 
 public abstract class NavigationActivity extends AppCompatActivity {
 	private static Map<Integer, SVG> loadedSVGFiles = new HashMap<>();
-	
+
     private Toolbar navigationToolbar;
     private AnimationPopupWindow popup;
 
@@ -102,7 +102,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(false);
             actionBar.setDisplayShowTitleEnabled(true);
 	        try {
-		        SVG logoSVG = loadSVG(R.raw.logo_shadow);
+		        SVG logoSVG = loadSVG(R.raw.logo_border);
 	            toolbar.setNavigationIcon(new PictureDrawable(logoSVG.renderToPicture()));
 	        } catch (SVGParseException e) {
 		        throw new RuntimeException(e);

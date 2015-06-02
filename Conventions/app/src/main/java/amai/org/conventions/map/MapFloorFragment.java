@@ -3,6 +3,7 @@ package amai.org.conventions.map;
 
 import android.app.Activity;
 import android.graphics.Picture;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PictureDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.caverock.androidsvg.SVG;
 import com.caverock.androidsvg.SVGExternalFileResolver;
@@ -19,6 +19,7 @@ import com.caverock.androidsvg.SVGParseException;
 import com.manuelpeinado.imagelayout.ImageLayout;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -43,6 +44,7 @@ public class MapFloorFragment extends Fragment {
     private OnMapArrowClickedListener mapArrowClickedListener;
 
 	private SVGExternalFileResolver resolver;
+	private List<Marker> floorMarkers;
 
     public MapFloorFragment() {
         // Required empty public constructor
@@ -129,14 +131,16 @@ public class MapFloorFragment extends Fragment {
 		    Picture picture = svg.renderToPicture();
 		    mapFloorImage.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 		    mapFloorImage.setImageResourceFromDrawable(new PictureDrawable(picture), 100, 100);
+		    floorMarkers = new LinkedList<>();
 
 		    // Add markers
 		    List<MapLocation> locations = map.findLocationsByFloor(floor);
 		    for (final MapLocation location : locations) {
 			    // Add drop shadow
-			    mapFloorImage.addView(createMarkerShadowView(location));
+			    View markerShadowView = createMarkerShadowView(location);
+			    mapFloorImage.addView(markerShadowView);
 			    // Add the marker for this location
-			    View markerImageView = createMarkerView(location);
+			    View markerImageView = createMarkerView(location, markerShadowView);
 			    mapFloorImage.addView(markerImageView);
 		    }
 
@@ -152,8 +156,8 @@ public class MapFloorFragment extends Fragment {
 
     }
 
-	private View createMarkerView(final MapLocation location) throws SVGParseException {
-		SVGImageView markerImageView = new SVGImageView(getActivity());
+	private View createMarkerView(final MapLocation location, View markerShadowView) throws SVGParseException {
+		final SVGImageView markerImageView = new SVGImageView(getActivity());
 
 		// Set marker image
 		SVG markerSvg = loadSVG(location.getMarkerResource());
@@ -172,13 +176,25 @@ public class MapFloorFragment extends Fragment {
 		markerImageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 
 		// On click handler
-		markerImageView.setOnClickListener(new View.OnClickListener() {
-			MapLocation currLocation = location;
-			@Override
-			public void onClick(View v) {
-				Toast.makeText(v.getContext(), currLocation.getName(), Toast.LENGTH_SHORT).show();
-			}
-		});
+		Marker marker = new Marker(location, markerImageView, markerShadowView, markerImageView.getDrawable(),
+				new Marker.DrawableProvider() {
+					Drawable drawable = null;
+					@Override
+					public Drawable getDrawable() {
+						try {
+							if (drawable == null) {
+								SVG markerSelectedSvg = loadSVG(location.getSelectedMarkerResource());
+								drawable = new PictureDrawable(markerSelectedSvg.renderToPicture());
+							}
+							return drawable;
+						} catch (SVGParseException e) {
+							throw new RuntimeException(e);
+						}
+					}
+				});
+		floorMarkers.add(marker);
+		markerImageView.setOnClickListener(new MarkerClickListener(marker, floorMarkers));
+
 		return markerImageView;
 	}
 
@@ -204,7 +220,7 @@ public class MapFloorFragment extends Fragment {
 		return markerImageView;
 	}
 
-	private SVG loadSVG(int resource) throws SVGParseException {
+	public SVG loadSVG(int resource) throws SVGParseException {
 		if (loadedSVGFiles.containsKey(resource)) {
 			return loadedSVGFiles.get(resource);
 		}

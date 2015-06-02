@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   id="svg3808"
+   viewBox="0 0 55.060001 94.768704"
+   height="26.745834mm"
+   width="15.539156mm">
+  <defs
+     id="defs3810">
+    <clipPath
+       id="clipPath3774"
+       clipPathUnits="userSpaceOnUse">
+      <path
+         id="path3776"
+         d="m 719.174,381.388 413.074,0 0,395.894 -413.074,0 0,-395.894 z" />
+    </clipPath>
+  </defs>
+  <metadata
+     id="metadata3813">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(138.95853,-299.26357)"
+     id="layer1">
+    <g
+       id="g3770"
+       transform="matrix(1.25,0,0,-1.25,-1368.9874,1220.3487)">
+      <g
+         clip-path="url(#clipPath3774)"
+         id="g3772">
+        <g
+           transform="translate(1027.6106,711.1616)"
+           id="g3778">
+          <path
+             id="path3780"
+             style="fill:#db982e;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             d="m 0,0 c 0,-17.234 -21.563,-49.648 -21.563,-49.648 0,0 -21.564,30.777 -21.564,49.648 0,13.942 9.655,25.246 21.564,25.246 C -9.654,25.246 0,13.942 0,0" />
+        </g>
+        <g
+           transform="translate(1027.6106,711.1616)"
+           id="g3782">
+          <path
+             id="path3784"
+             style="fill:none;stroke:#947232;stroke-width:0.921;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+             d="m 0,0 c 0,-17.234 -21.563,-49.648 -21.563,-49.648 0,0 -21.564,30.777 -21.564,49.648 0,13.942 9.655,25.246 21.564,25.246 C -9.654,25.246 0,13.942 0,0 Z" />
+        </g>
+      </g>
+    </g>
+    <text
+       id="text3786"
+       style="font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.41150093px;font-family:'Abigail';-inkscape-font-specification:Abigail;writing-mode:lr-tb;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       x="-132.25732"
+       y="333.81235">
+      <tspan
+         id="tspan3788"
+         y="333.81235"
+         x="-132.25732 -121.85486 -117.95154 -112.26245 -104.47437 -100.42383">אורנים</tspan>
+      <tspan
+         id="tspan3790"
+         y="349.14914"
+         x="-115.44763">3</tspan>
+    </text>
+  </g>
+</svg>
