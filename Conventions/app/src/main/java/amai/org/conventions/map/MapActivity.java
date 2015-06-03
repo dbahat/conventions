@@ -10,12 +10,14 @@ import amai.org.conventions.R;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.Floor;
+import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.navigation.NavigationActivity;
 import fr.castorflex.android.verticalviewpager.VerticalViewPager;
 
 public class MapActivity extends NavigationActivity implements MapFloorFragment.OnMapArrowClickedListener {
 
     public static final String EXTRA_FLOOR_NUMBER = "ExtraFloorNumber";
+	public static final String EXTRA_MAP_LOCATION_ID = "ExtraMapLocationId";
 
     private static final ConventionMap map = Convention.getInstance().getMap();
 
@@ -27,15 +29,25 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
         super.onCreate(savedInstanceState);
         setContentInContentContainer(R.layout.activity_map);
 
-        initializeViewPager();
-
+	    // Read and initialize parameters from bundle
 	    Bundle bundle = (savedInstanceState != null ? savedInstanceState : getIntent().getExtras());
-	    int defaultFloorNumber = getDefaultFloorNumber();
+
+	    int initialLocationId = (bundle == null ? -1 : bundle.getInt(EXTRA_MAP_LOCATION_ID, -1));
+	    MapLocation initialLocation = null;
+	    if (initialLocationId != -1) {
+		    initialLocation = map.findLocationById(initialLocationId);
+	    }
+
+	    int defaultFloorNumber = initialLocation != null ? initialLocation.getFloor().getNumber() : getDefaultFloorNumber();
 	    int floorNumber = (bundle == null ? defaultFloorNumber : bundle.getInt(EXTRA_FLOOR_NUMBER, defaultFloorNumber));
-	    setFloorInViewPager(floorNumber);
+
+
+        initializeViewPager();
+	    setFloorInViewPager(floorNumber, initialLocation);
+
     }
 
-	private void setFloorInViewPager(int floorNumber) {
+	private void setFloorInViewPager(int floorNumber, MapLocation initialLocation) {
 		int floorIndex = ConventionMap.FLOOR_NOT_FOUND;
 		if (floorNumber != ConventionMap.FLOOR_NOT_FOUND) {
 		    floorIndex = map.floorNumberToFloorIndex(floorNumber);
@@ -46,6 +58,11 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		}
 
 		viewPager.setCurrentItem(floorIndexToPagerPosition(floorIndex));
+		if (initialLocation != null) {
+			MapFloorFragment currentFragment = (MapFloorFragment) viewPager.getAdapter().instantiateItem(viewPager, viewPager.getCurrentItem());
+			currentFragment.selectLocation(initialLocation);
+		}
+
 		Floor currentFloor = map.getFloors().get(floorIndex);
 		updateCurrentFloor(currentFloor);
 	}
@@ -103,14 +120,13 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
     }
 
     private class MapFloorAdapter extends FragmentStatePagerAdapter {
-
         public MapFloorAdapter(FragmentManager fm) {
             super(fm);
         }
 
         @Override
         public Fragment getItem(int position) {
-            return MapFloorFragment.newInstance(pagerPositionToFloor(position).getNumber());
+	        return MapFloorFragment.newInstance(pagerPositionToFloor(position).getNumber());
         }
 
         @Override

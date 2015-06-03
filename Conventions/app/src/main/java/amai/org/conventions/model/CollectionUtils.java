@@ -22,6 +22,15 @@ public class CollectionUtils {
         return newList;
     }
 
+	public static <T> T findFirst(List<T> list, Predicate<T> predicate) {
+		for (T item : list) {
+			if (predicate.where(item)) {
+				return item;
+			}
+		}
+		return null;
+	}
+
 	@SafeVarargs
 	public static <T> ArrayList<T> flattenList(List<T>... instancesList) {
 		int size = 0;

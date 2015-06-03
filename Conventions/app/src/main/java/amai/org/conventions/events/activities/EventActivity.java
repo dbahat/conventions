@@ -73,7 +73,7 @@ public class EventActivity extends NavigationActivity {
 	            ConventionMap map = Convention.getInstance().getMap();
 	            List<MapLocation> locations = map.findLocationsByHall(conventionEvent.getHall());
 	            MapLocation location = map.findClosestLocation(locations);
-                floorBundle.putInt(MapActivity.EXTRA_FLOOR_NUMBER, location.getFloor().getNumber());
+	            floorBundle.putInt(MapActivity.EXTRA_MAP_LOCATION_ID, location.getId());
 
                 navigateToActivity(MapActivity.class, false, floorBundle);
                 return true;

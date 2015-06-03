@@ -1,6 +1,7 @@
 package amai.org.conventions.model;
 
 public class MapLocation {
+	private int id;
 	private Floor floor;
 	private int x;
 	private int y;
@@ -8,6 +9,14 @@ public class MapLocation {
 	private String name;
 	private int markerResource;
 	private int selectedMarkerResource;
+
+	public MapLocation() {
+		id = ObjectIDs.getNextID();
+	}
+
+	public int getId() {
+		return id;
+	}
 
 	public Floor getFloor() {
 		return floor;

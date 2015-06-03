@@ -120,4 +120,13 @@ public class ConventionMap {
 			}
 		});
 	}
+
+	public MapLocation findLocationById(final int id) {
+		return CollectionUtils.findFirst(getLocations(), new CollectionUtils.Predicate<MapLocation>() {
+			@Override
+			public boolean where(MapLocation item) {
+				return item.getId() == id;
+			}
+		});
+	}
 }

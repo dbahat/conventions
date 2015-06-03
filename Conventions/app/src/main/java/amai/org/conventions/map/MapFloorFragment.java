@@ -45,8 +45,9 @@ public class MapFloorFragment extends Fragment {
 
 	private SVGExternalFileResolver resolver;
 	private List<Marker> floorMarkers;
+	private MapLocation locationToSelect;
 
-    public MapFloorFragment() {
+	public MapFloorFragment() {
         // Required empty public constructor
     }
 
@@ -143,6 +144,11 @@ public class MapFloorFragment extends Fragment {
 			    View markerImageView = createMarkerView(location, markerShadowView);
 			    mapFloorImage.addView(markerImageView);
 		    }
+		    // Set initially selected location now after we created all the markers
+		    if (locationToSelect != null) {
+		        selectLocation(locationToSelect);
+			    locationToSelect = null;
+		    }
 
 		    // Add up and down arrows
 		    boolean isTopFloor = floor.getNumber() == map.getTopFloor().getNumber();
@@ -218,6 +224,21 @@ public class MapFloorFragment extends Fragment {
 		markerImageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 		markerImageView.setAlpha(0.5f);
 		return markerImageView;
+	}
+
+	public void selectLocation(MapLocation location) {
+		// If this fragment is already initialized, select the marker
+		if (floorMarkers != null) {
+			for (Marker marker : floorMarkers) {
+				if (marker.getLocation().getId() == location.getId()) {
+					marker.select();
+					break;
+				}
+			}
+		} else {
+			// Save it for later use
+			locationToSelect = location;
+		}
 	}
 
 	public SVG loadSVG(int resource) throws SVGParseException {
