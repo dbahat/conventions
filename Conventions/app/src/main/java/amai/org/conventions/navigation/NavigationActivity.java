@@ -18,6 +18,7 @@ import com.caverock.androidsvg.SVG;
 import com.caverock.androidsvg.SVGParseException;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import amai.org.conventions.AnimationPopupWindow;
@@ -34,6 +35,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 
     private Toolbar navigationToolbar;
     private AnimationPopupWindow popup;
+	private Map<View, Class<? extends Activity>> navigationMapping;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,32 +48,54 @@ public abstract class NavigationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (popup == null || !popup.isShowing()) {
-                    final View view = LayoutInflater.from(NavigationActivity.this).inflate(R.layout.navigation_menu, null);
-				    setupImageColors(view);
-                    popup = new AnimationPopupWindow(
-                            view,
-                            ViewGroup.LayoutParams.WRAP_CONTENT,
-                            ViewGroup.LayoutParams.WRAP_CONTENT,
-                            R.anim.drop_down,
-                            R.anim.drop_down_reverse);
-
-                    // This must be done to enable listening to clicks on the popup window
-                    popup.setBackgroundDrawable(new BitmapDrawable());
-                    popup.setAnimationStyle(0);
-                    popup.setFocusable(true);
-                    popup.setOutsideTouchable(true);
-
-                    // Move the inner view to the top start corner of the toolbar.
-                    // This is required because it's a card view with elevation (which uses padding for the
-                    // elevation and shadow) so we have to move it to the start point of the popup window.
-                    view.setY(getResources().getDimension(R.dimen.navigation_popup_window_offset_y));
-                    view.setX(getResources().getDimension(R.dimen.navigation_popup_window_offset_x));
-
+	                popup = createNavigationPopup();
                     popup.showAsDropDown(navigationToolbar, 0, 0);
                 }
             }
         });
     }
+
+	private AnimationPopupWindow createNavigationPopup() {
+		final View view = LayoutInflater.from(NavigationActivity.this).inflate(R.layout.navigation_menu, null);
+		setupImageColors(view);
+		AnimationPopupWindow popup = new AnimationPopupWindow(
+		        view,
+		        ViewGroup.LayoutParams.WRAP_CONTENT,
+		        ViewGroup.LayoutParams.WRAP_CONTENT,
+		        R.anim.drop_down,
+		        R.anim.drop_down_reverse);
+
+		// This must be done to enable listening to clicks on the popup window
+		popup.setBackgroundDrawable(new BitmapDrawable());
+		popup.setAnimationStyle(0);
+		popup.setFocusable(true);
+		popup.setOutsideTouchable(true);
+
+		// Move the inner view to the top start corner of the toolbar.
+		// This is required because it's a card view with elevation (which uses padding for the
+		// elevation and shadow) so we have to move it to the start point of the popup window.
+		view.setY(getResources().getDimension(R.dimen.navigation_popup_window_offset_y));
+		view.setX(getResources().getDimension(R.dimen.navigation_popup_window_offset_x));
+
+		navigationMapping = new LinkedHashMap<>(4);
+		navigationMapping.put(view.findViewById(R.id.menu_navigate_to_programme), ProgrammeActivity.class);
+		navigationMapping.put(view.findViewById(R.id.menu_navigate_to_map), MapActivity.class);
+		navigationMapping.put(view.findViewById(R.id.menu_navigate_to_updates), UpdatesActivity.class);
+		navigationMapping.put(view.findViewById(R.id.menu_navigate_to_arrival_methods), ArrivalMethodsActivity.class);
+
+		// Check if we're in one of the navigation views and set it to unclickable
+		if (navigationMapping.containsValue(this.getClass())) {
+			for (Map.Entry<View, Class<? extends Activity>> entry : navigationMapping.entrySet()) {
+				if (entry.getValue() == this.getClass()) {
+					entry.getKey().setBackgroundColor(getResources().getColor(R.color.very_light_gray));
+					entry.getKey().setOnClickListener(null);
+					break;
+				}
+			}
+		}
+
+		return popup;
+	}
 
 	private void setupImageColors(View view) {
 		int color = R.color.toolbar_color;
@@ -84,7 +108,6 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	private void changeImageColor(View view, int resource, int color) {
 		ImageView image = (ImageView) view.findViewById(resource);
 		image.setColorFilter(color);
-
 	}
 
     @Override
@@ -168,21 +191,9 @@ public abstract class NavigationActivity extends AppCompatActivity {
         overridePendingTransition(0, 0);
     }
 
-    public void onNavigateToProgramme(View view) {
-        navigateToActivity(ProgrammeActivity.class);
-    }
-
-    public void onNavigateToMap(View view) {
-        navigateToActivity(MapActivity.class);
-    }
-
-    public void onNavigateToUpdates(View view) {
-        navigateToActivity(UpdatesActivity.class);
-    }
-
-    public void onNavigateToArrivalMethods(View view) {
-        navigateToActivity(ArrivalMethodsActivity.class);
-    }
+	public void onNavigate(View view) {
+		navigateToActivity(navigationMapping.get(view));
+	}
 
     private void dismissPopupIfNeeded() {
         if (popup != null && popup.isShowing()) {

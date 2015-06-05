@@ -47,7 +47,7 @@ public class NavigationPages {
             pageTitles.add(getString(pageId));
         }
 
-        return pageTitles.toArray(new String[]{});
+        return pageTitles.toArray(new String[pageTitles.size()]);
     }
 
     public int getPosition(String pageTitle) {

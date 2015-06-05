@@ -11,17 +11,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/menu_navigate_to_programme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="10dp"
             android:paddingEnd="30dp"
+            android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:onClick="onNavigateToProgramme">
+            android:onClick="onNavigate">
 
             <ImageView
                 android:layout_width="24dp"
@@ -44,13 +44,14 @@
             android:src="@android:color/darker_gray"/>
 
         <LinearLayout
+            android:id="@+id/menu_navigate_to_map"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="10dp"
             android:paddingEnd="30dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:onClick="onNavigateToMap">
+            android:onClick="onNavigate">
 
             <ImageView
                 android:layout_width="24dp"
@@ -73,13 +74,14 @@
             android:src="@android:color/darker_gray"/>
 
         <LinearLayout
+            android:id="@+id/menu_navigate_to_updates"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="10dp"
             android:paddingEnd="30dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:onClick="onNavigateToUpdates">
+            android:onClick="onNavigate">
 
             <ImageView
                 android:layout_width="24dp"
@@ -102,12 +104,14 @@
             android:src="@android:color/darker_gray"/>
 
         <LinearLayout
+            android:id="@+id/menu_navigate_to_arrival_methods"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="10dp"
             android:paddingEnd="30dp"
             android:paddingTop="10dp"
-            android:onClick="onNavigateToArrivalMethods">
+            android:paddingBottom="10dp"
+            android:onClick="onNavigate">
 
             <ImageView
                 android:layout_width="24dp"
