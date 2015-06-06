@@ -5,11 +5,35 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.1"
    id="svg5713"
    viewBox="0 0 727.52389 392.33883"
    height="392.33884"
-   width="727.52386">
+   width="727.52386"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="floor2_no_markers.svg">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1018"
+     id="namedview297"
+     showgrid="false"
+     inkscape:zoom="3.1669064"
+     inkscape:cx="466.75894"
+     inkscape:cy="350.40698"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg5713" />
   <defs
      id="defs5715">
     <clipPath
@@ -767,30 +791,6 @@
        style="fill:none;stroke:#231f20;stroke-width:0.67199999;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
        id="path4332" />
   </g>
-  <g
-     transform="matrix(1.2005,0,0,-1.2005,-95.90468,864.03334)"
-     id="g4334">
-    <g
-       id="g4336"
-       clip-path="url(#clipPath4338)">
-      <g
-         id="g4342"
-         transform="translate(627.6499,691.5974)">
-        <path
-           d="m 0,0 c 0,-18.86 -23.598,-54.332 -23.598,-54.332 0,0 -23.597,33.681 -23.597,54.332 0,15.258 10.565,27.627 23.597,27.627 C -10.565,27.627 0,15.258 0,0"
-           style="fill:#db2e38;fill-opacity:1;fill-rule:nonzero;stroke:none"
-           id="path4344" />
-      </g>
-      <g
-         id="g4346"
-         transform="translate(627.6499,691.5974)">
-        <path
-           d="m 0,0 c 0,-18.86 -23.598,-54.332 -23.598,-54.332 0,0 -23.597,33.681 -23.597,54.332 0,15.258 10.565,27.627 23.597,27.627 C -10.565,27.627 0,15.258 0,0 Z"
-           style="fill:none;stroke:#231f20;stroke-width:1.00699997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-           id="path4348" />
-      </g>
-    </g>
-  </g>
   <text
      y="36.30817"
      x="608.95508"
@@ -1122,32 +1122,6 @@
        style="fill:none;stroke:#231f20;stroke-width:0.67199999;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
        id="path4540" />
   </g>
-  <path
-     id="path4544"
-     style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
-     d="m 412.48318,108.21628 c 0,22.64143 -28.3294,65.22557 -28.3294,65.22557 0,0 -28.3282,-40.43404 -28.3282,-65.22557 0,-18.317224 12.68329,-33.166204 28.3282,-33.166204 15.64732,0 28.3294,14.84898 28.3294,33.166204" />
-  <g
-     id="g4546"
-     transform="matrix(1.2005,0,0,-1.2005,412.48318,108.21628)">
-    <path
-       d="m 0,0 c 0,-18.86 -23.598,-54.332 -23.598,-54.332 0,0 -23.597,33.681 -23.597,54.332 0,15.258 10.565,27.627 23.597,27.627 C -10.564,27.627 0,15.258 0,0 Z"
-       style="fill:none;stroke:#231f20;stroke-width:1.00699997;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-       id="path4548" />
-  </g>
-  <text
-     y="110.75428"
-     x="365.62341"
-     style="font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.3504982px;font-family:'Abigail';-inkscape-font-specification:Abigail;writing-mode:lr-tb;fill:#db2e38;fill-opacity:1;fill-rule:nonzero;stroke:none"
-     id="text4550">
-    <tspan
-       x="365.62341 376.55646 384.87717 389.13428"
-       y="110.75428"
-       id="tspan4552">אולם</tspan>
-    <tspan
-       x="365.08157 369.18393 381.47147 392.05621"
-       y="126.87327"
-       id="tspan4554">ראשי</tspan>
-  </text>
   <g
      transform="matrix(1.2005,0,0,-1.2005,-95.90468,864.03334)"
      id="g4556">

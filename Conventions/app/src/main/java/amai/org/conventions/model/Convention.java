@@ -397,8 +397,8 @@ public class Convention implements Serializable {
 				)
 		);
 
-		Floor floor1 = new Floor(1).withName("מפלס תחתון - כניסה").withImageResource(R.raw.floor1_no_markers).withMarkerWidth(11);
-		Floor floor2 = new Floor(2).withName("מפלס עליון - אולם ראשי").withImageResource(R.raw.floor2_no_markers).withMarkerWidth(13);
+		Floor floor1 = new Floor(1).withName("מפלס תחתון - כניסה").withImageResource(R.raw.floor1).withMarkerWidth(11);
+		Floor floor2 = new Floor(2).withName("מפלס עליון - אולם ראשי").withImageResource(R.raw.floor2).withMarkerWidth(13);
 
 		this.map = new ConventionMap()
 				.withFloors(Arrays.asList(floor1, floor2))
