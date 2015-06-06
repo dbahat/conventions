@@ -27,7 +27,7 @@ public class EventsViewAdapter extends RecyclerView.Adapter<EventsViewHolder> {
     @Override
     public EventsViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.convention_event_view_holder, viewGroup, false);
-        return new EventsViewHolder(view, R.id.eventElement, showFavoriteIcon, showHallName);
+        return new EventsViewHolder(view, showFavoriteIcon, showHallName);
     }
 
     @Override

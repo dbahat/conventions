@@ -29,4 +29,5 @@ dependencies {
     compile 'com.google.android.gms:play-services:7.5.0'
     compile 'com.caverock:androidsvg:1.2.1'
     compile 'se.emilsjolander:stickylistheaders:2.7.0'
+    compile 'com.daimajia.swipelayout:library:1.2.0'
 }

@@ -8,17 +8,14 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import amai.org.conventions.R;
-import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.Dates;
 
@@ -32,11 +29,7 @@ public class EventView extends FrameLayout {
     private final TextView lecturerName;
     private final ViewGroup timeLayout;
     private final ViewGroup eventDescription;
-	private final CardView eventContainer;
-
-    private OnChangeListener onChangeListener;
-
-    private ConventionEvent event = null;
+    private final CardView eventContainer;
 
     public EventView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -51,28 +44,10 @@ public class EventView extends FrameLayout {
         eventName = (TextView) this.findViewById(R.id.eventName);
         lecturerName = (TextView) this.findViewById(R.id.lecturerName);
         eventDescription = (ViewGroup) this.findViewById(R.id.eventDescription);
-	    eventContainer = (CardView) this.findViewById(R.id.eventContainer);
+        eventContainer = (CardView) this.findViewById(R.id.eventContainer);
 
-	    // TODO swipe on the entire view instead of click on the timeLayout, and handle the
-	    // event from the fragment or give an option of how to behave
-        timeLayout.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ConventionEvent event = EventView.this.event;
-                if (event != null) {
-                    event.setAttending(!event.isAttending());
-                    EventView.this.dataChanged();
-	                Convention.getInstance().save();
-                }
-            }
-        });
-
-	    setConflicting(false);
+        setConflicting(false);
         setAttributes(attrs);
-    }
-
-    public void setOnChangeListener(OnChangeListener onChangeListener) {
-        this.onChangeListener = onChangeListener;
     }
 
     private void setAttributes(AttributeSet attrs) {
@@ -96,17 +71,7 @@ public class EventView extends FrameLayout {
         params.recycle();
     }
 
-	private void dataChanged() {
-		setEvent(this.event);
-
-        if (onChangeListener != null) {
-            onChangeListener.onDataChanged();
-        }
-	}
-
     public void setEvent(ConventionEvent event) {
-        this.event = event;
-
         setColorsFromEvent(event);
         setAttending(event.isAttending());
         setHallName(event.getHall().getName());
@@ -124,9 +89,9 @@ public class EventView extends FrameLayout {
         int colorId = event.getType().getBackgroundColorId();
         setEventTypeColor(getResources().getColor(colorId));
         if (event.getStartTime().after(now)) {
-	        setEventColor(getResources().getColor(R.color.white));
+            setEventColor(getResources().getColor(R.color.white));
         } else if (event.getEndTime().before(now)) {
-	        setEventColor(getResources().getColor(R.color.ultra_light_gray));
+            setEventColor(getResources().getColor(R.color.ultra_light_gray));
         } else {
             setEventColor(getResources().getColor(R.color.gold));
         }
@@ -209,19 +174,15 @@ public class EventView extends FrameLayout {
         layout.setPadding(pL, pT, pR, pB);
     }
 
-	public void setConflicting(boolean conflicting) {
-		if (conflicting) {
-			eventContainer.setCardElevation(0.0f);
-			eventContainer.setMaxCardElevation(0.0f);
-			eventContainer.setCardBackgroundColor(getResources().getColor(R.color.conflictingEventsBackground));
-		} else {
-			eventContainer.setCardElevation(6.0f);
-			eventContainer.setMaxCardElevation(6.0f);
-			eventContainer.setCardBackgroundColor(getResources().getColor(R.color.white));
-		}
-	}
-
-    public interface OnChangeListener {
-        public void onDataChanged();
+    public void setConflicting(boolean conflicting) {
+        if (conflicting) {
+            eventContainer.setCardElevation(0.0f);
+            eventContainer.setMaxCardElevation(0.0f);
+            eventContainer.setCardBackgroundColor(getResources().getColor(R.color.conflictingEventsBackground));
+        } else {
+            eventContainer.setCardElevation(6.0f);
+            eventContainer.setMaxCardElevation(6.0f);
+            eventContainer.setCardBackgroundColor(getResources().getColor(R.color.white));
+        }
     }
 }

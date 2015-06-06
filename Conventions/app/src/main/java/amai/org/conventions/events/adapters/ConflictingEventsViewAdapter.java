@@ -31,7 +31,7 @@ public class ConflictingEventsViewAdapter extends RecyclerView.Adapter<RecyclerV
 	    switch (viewType) {
 		    case ITEM_VIEW_TYPE_REGULAR : {
 			    View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.convention_event_view_holder, viewGroup, false);
-			    return new EventsViewHolder(view, R.id.eventElement, showFavoriteIcon, showHallName);
+			    return new EventsViewHolder(view, showFavoriteIcon, showHallName);
 		    }
 		    case ITEM_VIEW_TYPE_CONFLICTING : {
 		        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.conflicting_events_view_holder, viewGroup, false);

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.daimajia.swipe.SwipeLayout
+    xmlns:swipe="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:conventions="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipe"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    swipe:leftEdgeSwipeOffset="0dp"
+    swipe:rightEdgeSwipeOffset="0dp"
+    swipe:drag_edge="left">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:tag="Bottom3"
+        android:weightSum="10">
+
+        <amai.org.conventions.events.EventView
+            android:id="@+id/hidden_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    <amai.org.conventions.events.EventView
+        android:id="@+id/main_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        conventions:eventColor="@color/background_floating_material_light"
+        conventions:attending="true"
+        conventions:hallName="Oranim 1"
+        conventions:startTime="14:00"
+        conventions:endTime="15:00"
+        conventions:eventTitle="The Best Event in the Convention!"
+        conventions:lecturerName="David Bahat"
+        conventions:showHallName="false"/>
+
+</com.daimajia.swipe.SwipeLayout>

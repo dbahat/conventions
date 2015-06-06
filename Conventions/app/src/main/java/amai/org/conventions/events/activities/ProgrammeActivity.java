@@ -21,7 +21,7 @@ import java.util.List;
 
 import amai.org.conventions.R;
 import amai.org.conventions.events.ProgrammeConventionEvent;
-import amai.org.conventions.events.adapters.EventsViewOrHourAdapter;
+import amai.org.conventions.events.adapters.SwipeableEventsViewOrHourAdapter;
 import amai.org.conventions.events.holders.EventTimeViewHolder;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
@@ -32,7 +32,7 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView.OnHeaderClic
 
 public class ProgrammeActivity extends NavigationActivity implements OnHeaderClickListener {
 
-    private EventsViewOrHourAdapter adapter;
+    private SwipeableEventsViewOrHourAdapter adapter;
     private StickyListHeadersListView listView;
     private List<ProgrammeConventionEvent> events;
 
@@ -44,8 +44,9 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
 
         this.listView = (StickyListHeadersListView) findViewById(R.id.programmeList);
         this.events = getEventList();
-        adapter = new EventsViewOrHourAdapter(events);
+        adapter = new SwipeableEventsViewOrHourAdapter(this, R.id.swipe, events);
         listView.setAdapter(adapter);
+
         listView.setOnHeaderClickListener(this);
 
         final int position = findHourPosition(floorHour(Dates.now()));
