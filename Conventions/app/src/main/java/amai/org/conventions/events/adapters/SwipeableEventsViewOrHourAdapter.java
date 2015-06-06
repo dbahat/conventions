@@ -15,9 +15,9 @@ import java.util.List;
 
 import amai.org.conventions.R;
 import amai.org.conventions.events.ProgrammeConventionEvent;
-import amai.org.conventions.events.SwipeableEventViewHolder;
+import amai.org.conventions.events.holders.SwipeableEventViewHolder;
 import amai.org.conventions.events.holders.EventTimeViewHolder;
-import amai.org.conventions.events.holders.EventsViewHolder;
+import amai.org.conventions.model.Convention;
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
 public class SwipeableEventsViewOrHourAdapter extends ArraySwipeAdapter implements StickyListHeadersAdapter {
@@ -50,7 +50,7 @@ public class SwipeableEventsViewOrHourAdapter extends ArraySwipeAdapter implemen
         SwipeableEventViewHolder holder;
         if (convertView == null) {
             View eventView = LayoutInflater.from(parent.getContext()).inflate(R.layout.swipeable_event_view_holder, parent, false);
-            holder = new SwipeableEventViewHolder(eventView);
+            holder = new SwipeableEventViewHolder(eventView, SwipeableEventViewHolder.SwipeAction.ChangeFavoriteState);
             convertView = eventView;
             convertView.setTag(holder);
         } else {
@@ -70,6 +70,9 @@ public class SwipeableEventsViewOrHourAdapter extends ArraySwipeAdapter implemen
                 // Update the favorite state in the model
                 boolean isAttending = events.get(position).getEvent().isAttending();
                 events.get(position).getEvent().setAttending(!isAttending);
+
+                // Save the changes
+                Convention.getInstance().save();
 
                 // Reset the layout state
                 layout.close(false, true);

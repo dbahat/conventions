@@ -74,9 +74,19 @@ public class MyEventsActivity extends NavigationActivity {
 
 		// Set up events list
 		ArrayList<ArrayList<ConventionEvent>> nonConflictingGroups = getNonConflictingGroups(events);
-		eventsList.setAdapter(new ConflictingEventsViewAdapter(nonConflictingGroups, true, true));
+		final ConflictingEventsViewAdapter adapter = new ConflictingEventsViewAdapter(nonConflictingGroups);
+		eventsList.setAdapter(adapter);
 
 		updateVisibility(nonConflictingGroups.size(), eventsList, emptyView);
+
+		// Register for dataset update events, in case we need to return the empty layout view after all items were dismissed.
+		adapter.addOnDatasetChangedListener(new ConflictingEventsViewAdapter.OnDatasetChangedListener() {
+			@Override
+			public void onItemRemoved(int position) {
+				updateVisibility(adapter.getItemCount(), eventsList, emptyView);
+			}
+		});
+
 	}
 
 	private void updateVisibility(int datasetSize, RecyclerView eventsList, View emptyView) {
