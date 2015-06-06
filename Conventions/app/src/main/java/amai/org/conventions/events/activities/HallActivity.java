@@ -29,16 +29,7 @@ public class HallActivity extends NavigationActivity {
         setToolbarTitle(hallName);
 
         RecyclerView hallEventsList = (RecyclerView) findViewById(R.id.hallEventsList);
-        ArrayList<ConventionEvent> events = CollectionUtils.filter(
-		        Convention.getInstance().getEvents(),
-		        new CollectionUtils.Predicate<ConventionEvent>() {
-			        @Override
-			        public boolean where(ConventionEvent event) {
-				        return hallName.equals(event.getHall().getName());
-			        }
-		        },
-		        new ArrayList<ConventionEvent>()
-        );
+        ArrayList<ConventionEvent> events = Convention.getInstance().findEventsByHall(hallName);
         Collections.sort(events, new ConventionEventComparator());
         hallEventsList.setAdapter(new EventsViewAdapter(events, true, false, false));
 

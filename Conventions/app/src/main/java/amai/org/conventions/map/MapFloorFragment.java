@@ -2,6 +2,7 @@ package amai.org.conventions.map;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Picture;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PictureDrawable;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.caverock.androidsvg.SVG;
 import com.caverock.androidsvg.SVGExternalFileResolver;
@@ -18,21 +20,29 @@ import com.caverock.androidsvg.SVGImageView;
 import com.caverock.androidsvg.SVGParseException;
 import com.manuelpeinado.imagelayout.ImageLayout;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import amai.org.conventions.R;
+import amai.org.conventions.events.EventView;
+import amai.org.conventions.events.activities.HallActivity;
 import amai.org.conventions.model.Convention;
+import amai.org.conventions.model.ConventionEvent;
+import amai.org.conventions.model.ConventionEventComparator;
 import amai.org.conventions.model.ConventionMap;
+import amai.org.conventions.model.Dates;
 import amai.org.conventions.model.Floor;
 import amai.org.conventions.model.MapLocation;
 
 /**
  * A fragment showing a single map floor
  */
-public class MapFloorFragment extends Fragment {
+public class MapFloorFragment extends Fragment implements Marker.MarkerListener {
 
     private static final String ARGS_FLOOR_NUMBER = "FloorNumber";
 
@@ -41,6 +51,13 @@ public class MapFloorFragment extends Fragment {
     private ImageLayout mapFloorImage;
     private ImageView upArrowImage;
     private ImageView downArrowImage;
+
+	private ViewGroup locationDetails;
+	private TextView locationTitle;
+	private ImageView locationDetailsCloseImage;
+	private EventView locationCurrentEvent;
+	private EventView locationNextEvent;
+
     private OnMapArrowClickedListener mapArrowClickedListener;
 
 	private SVGExternalFileResolver resolver;
@@ -58,13 +75,15 @@ public class MapFloorFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_map_floor, container, false);
 
         resolveUIElements(view);
+	    initializeLocationDetailsClose();
         initializeUpAndDownButtons();
         configureMapFloor();
+	    setMainViewClickListener(view);
 
-        return view;
+	    return view;
     }
 
-    @Override
+	@Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
@@ -118,7 +137,24 @@ public class MapFloorFragment extends Fragment {
         mapFloorImage = (ImageLayout) view.findViewById(R.id.map_floor_image);
         upArrowImage = (ImageView) view.findViewById(R.id.map_floor_up_arrow);
         downArrowImage = (ImageView) view.findViewById(R.id.map_floor_down_arrow);
+
+	    // Current selected location details
+	    locationDetails = (ViewGroup) view.findViewById(R.id.location_details);
+	    locationTitle = (TextView) view.findViewById(R.id.location_title);
+	    locationDetailsCloseImage = (ImageView) view.findViewById(R.id.location_details_close_image);
+	    locationCurrentEvent = (EventView) view.findViewById(R.id.location_current_event);
+	    locationNextEvent = (EventView) view.findViewById(R.id.location_next_event);
     }
+
+	private void initializeLocationDetailsClose() {
+		locationDetailsCloseImage.setColorFilter(getResources().getColor(android.R.color.black));
+		locationDetailsCloseImage.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				setSelectedLocationDetails(null);
+			}
+		});
+	}
 
     private void configureMapFloor() {
         int mapFloor = getArguments().getInt(ARGS_FLOOR_NUMBER);
@@ -199,7 +235,7 @@ public class MapFloorFragment extends Fragment {
 					}
 				});
 		floorMarkers.add(marker);
-		markerImageView.setOnClickListener(new MarkerClickListener(marker, floorMarkers));
+		marker.setOnClickListener(this);
 
 		return markerImageView;
 	}
@@ -263,4 +299,84 @@ public class MapFloorFragment extends Fragment {
         void onDownArrowClicked();
     }
 
+	@Override
+	public void onClick(Marker marker) {
+		// Deselect all markers except the clicked marker
+		for (Marker currMarker : floorMarkers) {
+			if (currMarker != marker) {
+				currMarker.deselect();
+			}
+		}
+
+		// Ensure clicked marker is selected
+		marker.select();
+		setSelectedLocationDetails(marker.getLocation());
+	}
+
+	private void setMainViewClickListener(View view) {
+		view.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				for (Marker marker : floorMarkers) {
+					marker.deselect();
+				}
+				setSelectedLocationDetails(null);
+			}
+		});
+	}
+
+	public void setSelectedLocationDetails(final MapLocation location) {
+		if (location == null) {
+			locationDetails.setVisibility(View.GONE);
+		} else {
+			locationDetails.setVisibility(View.VISIBLE);
+			locationTitle.setText(location.getName());
+
+			// Get current and next events in this location
+			ConventionEvent currEvent = null;
+			ConventionEvent nextEvent = null;
+			ArrayList<ConventionEvent> events = Convention.getInstance().findEventsByHall(location.getHall().getName());
+			Collections.sort(events, new ConventionEventComparator());
+			for (ConventionEvent event : events) {
+				Date now = Dates.now();
+				if (currEvent == null && event.getStartTime().before(now) && event.getEndTime().after(now)) {
+					currEvent = event;
+				}
+				if (nextEvent == null && event.getStartTime().after(now)) {
+					nextEvent = event;
+				}
+				if (currEvent != null && nextEvent != null) {
+					break;
+				}
+			}
+
+			if (currEvent == null) {
+				locationCurrentEvent.setVisibility(View.GONE);
+			} else {
+				locationCurrentEvent.setVisibility(View.VISIBLE);
+				locationCurrentEvent.setEvent(currEvent);
+			}
+
+			if (nextEvent == null) {
+				locationNextEvent.setVisibility(View.GONE);
+			} else {
+				locationNextEvent.setVisibility(View.VISIBLE);
+				locationNextEvent.setEvent(nextEvent);
+			}
+
+			locationDetails.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					// Navigate to the hall associated with this event
+					Bundle bundle = new Bundle();
+					bundle.putString(HallActivity.EXTRA_HALL_NAME, location.getHall().getName());
+
+					Intent intent = new Intent(getActivity(), HallActivity.class);
+					intent.putExtras(bundle);
+					startActivity(intent);
+					getActivity().overridePendingTransition(0, 0);
+				}
+			});
+		}
+	}
 }

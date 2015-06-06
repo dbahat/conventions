@@ -1,12 +1,13 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools"
              xmlns:custom="http://schemas.android.com/apk/res-auto"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context="amai.org.conventions.map.MapFloorFragment"
-             android:padding="5dp">
+             android:layoutDirection="rtl"
+             tools:context="amai.org.conventions.map.MapFloorFragment">
 
     <com.manuelpeinado.imagelayout.ImageLayout
+        android:padding="5dp"
         android:gravity="center"
         android:id="@+id/map_floor_image"
         android:layout_width="match_parent"
@@ -18,20 +19,81 @@
 
     </com.manuelpeinado.imagelayout.ImageLayout>
 
+    <LinearLayout
+        android:id="@+id/location_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:alpha="0.9"
+        android:layout_alignParentBottom="true">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:src="@android:color/black"/>
+
+        <LinearLayout
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/location_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextAppearance.AppCompat.Title"
+                    android:layout_alignParentStart="true"
+                    android:text="אורנים 1"/>
+
+                <ImageView
+                    android:layout_width="54dp"
+                    android:layout_height="42dp"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="18dp"
+                    android:paddingStart="24dp"
+                    android:id="@+id/location_details_close_image"
+                    android:src="@drawable/abc_ic_clear_mtrl_alpha"
+                    android:layout_alignParentEnd="true"/>
+            </RelativeLayout>
+
+            <amai.org.conventions.events.EventView
+                android:id="@+id/location_current_event"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <amai.org.conventions.events.EventView
+                android:id="@+id/location_next_event"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </LinearLayout>
+
     <ImageView
         android:id="@+id/map_floor_up_arrow"
+        android:paddingTop="5dp"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:src="@drawable/arrow_up_float"
         android:alpha="0.7"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"/>
 
     <ImageView
         android:id="@+id/map_floor_down_arrow"
+        android:paddingBottom="5dp"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:src="@drawable/arrow_down_float"
         android:alpha="0.7"
-        android:layout_gravity="center_horizontal|bottom"/>
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"/>
 
-</FrameLayout>
+</RelativeLayout>

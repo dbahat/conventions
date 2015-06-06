@@ -21,6 +21,7 @@ public class Marker {
 	private DrawableProvider selectedDrawableProvider;
 	private int shadowWidth;
 	private int shadowHeight;
+	private MarkerListener clickListener;
 
 	public Marker(MapLocation location, ImageView imageView, View shadowImageView, Drawable drawable, DrawableProvider selectedDrawableProvider) {
 		this.location = location;
@@ -33,6 +34,15 @@ public class Marker {
 		imageHeight = imageView.getLayoutParams().height;
 		shadowWidth = shadowImageView.getLayoutParams().width;
 		shadowHeight = shadowImageView.getLayoutParams().height;
+
+		imageView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (clickListener != null) {
+					clickListener.onClick(Marker.this);
+				}
+			}
+		});
 	}
 
 	public MapLocation getLocation() {
@@ -90,7 +100,15 @@ public class Marker {
 		imageView.startAnimation(animation);
 	}
 
+	public void setOnClickListener(MarkerListener listener) {
+		clickListener = listener;
+	}
+
 	public interface DrawableProvider {
 		Drawable getDrawable();
+	}
+
+	public interface MarkerListener {
+		void onClick(Marker marker);
 	}
 }

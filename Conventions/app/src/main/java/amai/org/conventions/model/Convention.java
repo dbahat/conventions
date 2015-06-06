@@ -10,6 +10,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
@@ -459,6 +460,19 @@ public class Convention implements Serializable {
 		}
 
 		return null;
+	}
+
+	public ArrayList<ConventionEvent> findEventsByHall(final String hallName) {
+		return CollectionUtils.filter(
+				getEvents(),
+				new CollectionUtils.Predicate<ConventionEvent>() {
+					@Override
+					public boolean where(ConventionEvent event) {
+						return hallName.equals(event.getHall().getName());
+					}
+				},
+				new ArrayList<ConventionEvent>()
+		);
 	}
 
 	private Date time(String timeAsString) {
