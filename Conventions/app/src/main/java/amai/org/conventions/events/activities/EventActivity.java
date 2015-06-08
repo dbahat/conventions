@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.viewpagerindicator.CirclePageIndicator;
+import com.viewpagerindicator.TitlePageIndicator;
+
 import java.util.List;
 
 import amai.org.conventions.R;
@@ -119,6 +122,9 @@ public class EventActivity extends NavigationActivity {
         } else {
             viewPager.setVisibility(View.GONE);
         }
+
+        CirclePageIndicator titleIndicator = (CirclePageIndicator)findViewById(R.id.imagesPagerIndicator);
+        titleIndicator.setViewPager(viewPager);
 
         TextView description = (TextView) findViewById(R.id.event_description);
         String eventDescription = event.getDescription();

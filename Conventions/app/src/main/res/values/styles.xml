@@ -7,6 +7,8 @@
         <item name="android:windowActionBar">false</item>
         <item name="toolbarNavigationButtonStyle">@style/ToolbarNavigationButtonStyle</item>
         <item name="stickyListHeadersListViewStyle">@style/Widget.AppCompat.ListView</item>
+
+        <item name="vpiCirclePageIndicatorStyle">@style/CustomCirclePageIndicator</item>
     </style>
 
     <style name="MainActivityOverlayText">
@@ -23,4 +25,15 @@
     <style name="ToolbarNavigationButtonStyle" parent="@style/Widget.AppCompat.Toolbar.Button.Navigation">
         <item name="android:scaleType">fitEnd</item>
     </style>
+
+    <style name="CustomCirclePageIndicator">
+        <item name="fillColor">@color/white</item>
+        <item name="pageColor">@color/ultra_light_gray</item>
+        <item name="strokeColor">@android:color/black</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="radius">3dp</item>
+        <item name="centered">true</item>
+        <item name="snap">false</item>
+    </style>
+
 </resources>
