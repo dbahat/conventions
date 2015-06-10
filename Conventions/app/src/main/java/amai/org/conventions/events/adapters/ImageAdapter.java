@@ -27,7 +27,7 @@ public class ImageAdapter extends PagerAdapter {
 
 	@Override
 	public boolean isViewFromObject(View view, Object object) {
-		return view == ((ImageView) object);
+		return view == object;
 	}
 
 	@Override

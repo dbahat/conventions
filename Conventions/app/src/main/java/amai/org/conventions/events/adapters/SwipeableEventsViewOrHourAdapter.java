@@ -1,13 +1,10 @@
 package amai.org.conventions.events.adapters;
 
 import android.content.Context;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.daimajia.swipe.SimpleSwipeListener;
-import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.ArraySwipeAdapter;
 
 import java.util.Calendar;
@@ -15,12 +12,13 @@ import java.util.List;
 
 import amai.org.conventions.R;
 import amai.org.conventions.events.ProgrammeConventionEvent;
-import amai.org.conventions.events.holders.SwipeableEventViewHolder;
 import amai.org.conventions.events.holders.EventTimeViewHolder;
+import amai.org.conventions.events.holders.SwipeableEventViewHolder;
 import amai.org.conventions.model.Convention;
+import amai.org.conventions.model.ConventionEvent;
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
-public class SwipeableEventsViewOrHourAdapter extends ArraySwipeAdapter implements StickyListHeadersAdapter {
+public class SwipeableEventsViewOrHourAdapter extends ArraySwipeAdapter<ProgrammeConventionEvent> implements StickyListHeadersAdapter {
 
     private List<ProgrammeConventionEvent> events;
 
@@ -47,46 +45,36 @@ public class SwipeableEventsViewOrHourAdapter extends ArraySwipeAdapter implemen
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        SwipeableEventViewHolder holder;
+        final SwipeableEventViewHolder holder;
         if (convertView == null) {
-            View eventView = LayoutInflater.from(parent.getContext()).inflate(R.layout.swipeable_event_view_holder, parent, false);
-            holder = new SwipeableEventViewHolder(eventView, SwipeableEventViewHolder.SwipeAction.ChangeFavoriteState);
-            convertView = eventView;
+	        convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.swipeable_event_view_holder, parent, false);
+            holder = new SwipeableEventViewHolder(convertView);
             convertView.setTag(holder);
         } else {
             holder = (SwipeableEventViewHolder) convertView.getTag();
             holder.reset();
         }
 
-        holder.setModel(events.get(position).getEvent());
+	    final ConventionEvent event = events.get(position).getEvent();
+	    holder.setModel(event);
 
         // Register to swipe open events to add/remove the item from favorites
-        holder.addOnSwipeListener(new SimpleSwipeListener() {
+        holder.setOnViewSwipedAction(new Runnable() {
+	        @Override
+	        public void run() {
+		        // Update the favorite state in the model
+		        final boolean isAttending = event.isAttending();
+		        event.setAttending(!isAttending);
 
-            @Override
-            public void onOpen(final SwipeLayout layout) {
-                super.onOpen(layout);
+		        // Save the changes
+		        Convention.getInstance().save();
 
-                // Update the favorite state in the model
-                boolean isAttending = events.get(position).getEvent().isAttending();
-                events.get(position).getEvent().setAttending(!isAttending);
-
-                // Save the changes
-                Convention.getInstance().save();
-
-                // Reset the layout state
-                layout.close(false, true);
-
-                // Notify the list view to redraw the UI so the new favorite icon state will apply.
-                // Done using handler.post since otherwise the UI shows flickering.
-                new Handler().post(new Runnable() {
-                    @Override
-                    public void run() {
-                       notifyDataSetChanged();
-                    }
-                });
-            }
+		        // Notify the list view to redraw the UI so the new favorite icon state will apply
+		        // for all views of this event
+		        notifyDataSetChanged();
+	        }
         });
+
         return convertView;
     }
 

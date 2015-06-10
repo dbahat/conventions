@@ -17,6 +17,7 @@ import java.util.List;
 
 import amai.org.conventions.R;
 import amai.org.conventions.events.adapters.ConflictingEventsViewAdapter;
+import amai.org.conventions.events.adapters.EventSwipeToDismissListener;
 import amai.org.conventions.model.CollectionUtils;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
@@ -80,7 +81,7 @@ public class MyEventsActivity extends NavigationActivity {
 		updateVisibility(nonConflictingGroups.size(), eventsList, emptyView);
 
 		// Register for dataset update events, in case we need to return the empty layout view after all items were dismissed.
-		adapter.addOnDatasetChangedListener(new ConflictingEventsViewAdapter.OnDatasetChangedListener() {
+		adapter.addOnDatasetChangedListener(new EventSwipeToDismissListener.OnDatasetChangedListener() {
 			@Override
 			public void onItemRemoved(int position) {
 				updateVisibility(adapter.getItemCount(), eventsList, emptyView);
