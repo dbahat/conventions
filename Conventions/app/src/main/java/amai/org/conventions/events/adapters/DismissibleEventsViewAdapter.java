@@ -5,22 +5,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import amai.org.conventions.R;
 import amai.org.conventions.events.holders.DismissibleEventViewHolder;
 import amai.org.conventions.model.ConventionEvent;
 
-public class DismissibleEventsViewAdapter extends RecyclerView.Adapter<DismissibleEventViewHolder> implements EventSwipeToDismissListener.ChangingDatasetAdapter {
-    private List<EventSwipeToDismissListener.OnDatasetChangedListener> onDatasetChangedListeners;
+public class DismissibleEventsViewAdapter extends RecyclerView.Adapter<DismissibleEventViewHolder> {
     private List<ConventionEvent> eventsList;
     private final boolean conflicting;
 
     public DismissibleEventsViewAdapter(List<ConventionEvent> eventsList, boolean conflicting) {
         this.eventsList = eventsList;
         this.conflicting = conflicting;
-        this.onDatasetChangedListeners = new LinkedList<>();
     }
 
     @Override
@@ -31,10 +28,12 @@ public class DismissibleEventsViewAdapter extends RecyclerView.Adapter<Dismissib
 
     @Override
     public void onBindViewHolder(DismissibleEventViewHolder holder, int position) {
+	    holder.reset();
+
 	    ConventionEvent event = eventsList.get(position);
 	    holder.setModel(event, conflicting);
 
-        EventSwipeToDismissListener listener = new EventSwipeToDismissListener(position, event, eventsList, this);
+        EventSwipeToDismissListener listener = new EventSwipeToDismissListener(holder, eventsList, this);
         holder.addOnSwipeListener(listener);
     }
 
@@ -42,20 +41,4 @@ public class DismissibleEventsViewAdapter extends RecyclerView.Adapter<Dismissib
     public int getItemCount() {
         return eventsList.size();
     }
-
-	@Override
-    public void addOnDatasetChangedListener(EventSwipeToDismissListener.OnDatasetChangedListener onDatasetChangedListener) {
-        onDatasetChangedListeners.add(onDatasetChangedListener);
-    }
-
-	@Override
-	public List<EventSwipeToDismissListener.OnDatasetChangedListener> getOnDatasetChangedListeners() {
-		return onDatasetChangedListeners;
-	}
-
-	@Override
-	public void onViewRecycled(DismissibleEventViewHolder holder) {
-		super.onViewRecycled(holder);
-		holder.reset();
-	}
 }

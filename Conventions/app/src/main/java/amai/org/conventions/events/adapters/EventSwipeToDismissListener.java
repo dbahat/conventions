@@ -7,45 +7,30 @@ import com.daimajia.swipe.SwipeLayout;
 
 import java.util.List;
 
+import amai.org.conventions.events.holders.DismissibleEventViewHolder;
 import amai.org.conventions.model.Convention;
-import amai.org.conventions.model.ConventionEvent;
 
 public class EventSwipeToDismissListener extends SimpleSwipeListener {
 
-	private int position;
-	private ConventionEvent event;
+	private DismissibleEventViewHolder viewHolder;
 	private List<?> eventsList;
 	private RecyclerView.Adapter<?> adapter;
 
-	public EventSwipeToDismissListener(int position, ConventionEvent event, List<?> eventsList, RecyclerView.Adapter<?> adapter) {
-		this.position = position;
-		this.event = event;
+	public EventSwipeToDismissListener(DismissibleEventViewHolder viewHolder, List<?> eventsList, RecyclerView.Adapter<?> adapter) {
+		this.viewHolder = viewHolder;
 		this.eventsList = eventsList;
 		this.adapter = adapter;
-
-		((ChangingDatasetAdapter) adapter).addOnDatasetChangedListener(new OnDatasetChangedListener() {
-			@Override
-			public void onItemRemoved(int position) {
-				if (position < EventSwipeToDismissListener.this.position) {
-					EventSwipeToDismissListener.this.position--;
-				}
-			}
-		});
 	}
 
 	@Override
 	public void onOpen(SwipeLayout layout) {
 		super.onOpen(layout);
 
-		event.setAttending(false);
+		viewHolder.getModel().setAttending(false);
 		Convention.getInstance().save();
 
-		eventsList.remove(position);
-		adapter.notifyItemRemoved(position);
-
-		for (OnDatasetChangedListener listener : ((ChangingDatasetAdapter) adapter).getOnDatasetChangedListeners()) {
-			listener.onItemRemoved(position);
-		}
+		eventsList.remove(viewHolder.getAdapterPosition());
+		adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
 	}
 
 	@Override
@@ -53,14 +38,5 @@ public class EventSwipeToDismissListener extends SimpleSwipeListener {
 		super.onUpdate(layout, leftOffset, topOffset);
 		float progress = 1 - (leftOffset * 1.5f / (float) layout.getMeasuredWidth());
 		layout.setAlpha(progress);
-	}
-
-	public interface OnDatasetChangedListener {
-		void onItemRemoved(int position);
-	}
-
-	public interface ChangingDatasetAdapter {
-		void addOnDatasetChangedListener(OnDatasetChangedListener listener);
-		List<OnDatasetChangedListener> getOnDatasetChangedListeners();
 	}
 }

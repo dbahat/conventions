@@ -17,7 +17,6 @@ import java.util.List;
 
 import amai.org.conventions.R;
 import amai.org.conventions.events.adapters.ConflictingEventsViewAdapter;
-import amai.org.conventions.events.adapters.EventSwipeToDismissListener;
 import amai.org.conventions.model.CollectionUtils;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
@@ -67,7 +66,7 @@ public class MyEventsActivity extends NavigationActivity {
 	}
 
 	private void updateDataset() {
-		List<ConventionEvent> events = getMyEvents();
+		final List<ConventionEvent> events = getMyEvents();
 		Collections.sort(events, new ConventionEventComparator());
 
 		// Set up text view for next event start
@@ -81,13 +80,13 @@ public class MyEventsActivity extends NavigationActivity {
 		updateVisibility(nonConflictingGroups.size(), eventsList, emptyView);
 
 		// Register for dataset update events, in case we need to return the empty layout view after all items were dismissed.
-		adapter.addOnDatasetChangedListener(new EventSwipeToDismissListener.OnDatasetChangedListener() {
+		adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
 			@Override
-			public void onItemRemoved(int position) {
+			public void onItemRangeRemoved(int positionStart, int itemCount) {
+				super.onItemRangeRemoved(positionStart, itemCount);
 				updateVisibility(adapter.getItemCount(), eventsList, emptyView);
 			}
 		});
-
 	}
 
 	private void updateVisibility(int datasetSize, RecyclerView eventsList, View emptyView) {

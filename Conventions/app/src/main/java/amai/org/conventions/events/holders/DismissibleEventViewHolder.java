@@ -16,9 +16,10 @@ import amai.org.conventions.model.ConventionEvent;
 public class DismissibleEventViewHolder extends RecyclerView.ViewHolder {
 
     private EventView mainEventView;
-
     private SwipeLayout swipeLayout;
+
     private SimpleSwipeListener listener;
+	private ConventionEvent event;
 
     public DismissibleEventViewHolder(View itemView) {
         super(itemView);
@@ -31,6 +32,7 @@ public class DismissibleEventViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void setModel(ConventionEvent event, boolean conflicting) {
+	    this.event = event;
         mainEventView.setEvent(event);
         mainEventView.setShowFavoriteIcon(true);
         mainEventView.setShowHallName(true);
@@ -42,7 +44,12 @@ public class DismissibleEventViewHolder extends RecyclerView.ViewHolder {
         swipeLayout.addSwipeListener(listener);
     }
 
+	public ConventionEvent getModel() {
+		return event;
+	}
+
     public void reset() {
+	    this.event = null;
         if (listener != null) {
             swipeLayout.removeSwipeListener(listener);
         }
