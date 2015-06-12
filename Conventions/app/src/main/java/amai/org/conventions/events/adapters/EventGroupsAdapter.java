@@ -13,13 +13,13 @@ import amai.org.conventions.events.holders.DismissibleEventViewHolder;
 import amai.org.conventions.events.holders.SwipeableEventViewHolder;
 import amai.org.conventions.model.ConventionEvent;
 
-public class ConflictingEventsViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 	private static final int ITEM_VIEW_TYPE_REGULAR = 1;
 	private static final int ITEM_VIEW_TYPE_CONFLICTING = 2;
 
 	private ArrayList<ArrayList<ConventionEvent>> eventGroups;
 
-    public ConflictingEventsViewAdapter(ArrayList<ArrayList<ConventionEvent>> eventGroups) {
+    public EventGroupsAdapter(ArrayList<ArrayList<ConventionEvent>> eventGroups) {
         this.eventGroups = eventGroups;
     }
 

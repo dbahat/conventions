@@ -159,7 +159,7 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
         int i = 0;
 
         for (ProgrammeConventionEvent event : events) {
-            if (floorHour(event.getEvent().getStartTime()) >= hour) {
+            if (event.getTimeSection().get(Calendar.HOUR_OF_DAY) >= hour) {
                 return i;
             }
             i++;

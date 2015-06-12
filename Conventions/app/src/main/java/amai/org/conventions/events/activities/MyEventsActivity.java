@@ -16,7 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 import amai.org.conventions.R;
-import amai.org.conventions.events.adapters.ConflictingEventsViewAdapter;
+import amai.org.conventions.events.adapters.EventGroupsAdapter;
 import amai.org.conventions.model.CollectionUtils;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
@@ -43,12 +43,9 @@ public class MyEventsActivity extends NavigationActivity {
         setToolbarTitle(getResources().getString(R.string.my_events_title));
 
         nextEventStart = (TextView) findViewById(R.id.nextEventStart);
+		emptyView = findViewById(R.id.my_events_empty);
 	    eventsList = (RecyclerView) findViewById(R.id.myEventsList);
 	    eventsList.setLayoutManager(new LinearLayoutManager(this));
-
-		emptyView = findViewById(R.id.my_events_empty);
-
-		updateDataset();
     }
 
 	@Override
@@ -74,7 +71,7 @@ public class MyEventsActivity extends NavigationActivity {
 
 		// Set up events list
 		ArrayList<ArrayList<ConventionEvent>> nonConflictingGroups = getNonConflictingGroups(events);
-		final ConflictingEventsViewAdapter adapter = new ConflictingEventsViewAdapter(nonConflictingGroups);
+		final EventGroupsAdapter adapter = new EventGroupsAdapter(nonConflictingGroups);
 		eventsList.setAdapter(adapter);
 
 		updateVisibility(nonConflictingGroups.size(), eventsList, emptyView);
@@ -132,6 +129,11 @@ public class MyEventsActivity extends NavigationActivity {
     }
 
     private void setNextEventStartText(final List<ConventionEvent> events) {
+	    // Remove existing callback
+	    if (updateNextEventStartTimeText != null) {
+		    nextEventStartTextRunner.removeCallbacks(updateNextEventStartTimeText);
+	    }
+
         ConventionEvent nextEvent = null;
         Date currTime = Dates.now();
         for (ConventionEvent curr : events) {
@@ -145,7 +147,7 @@ public class MyEventsActivity extends NavigationActivity {
         boolean displayNextEventStart = false;
         if (nextEvent != null) {
             Calendar startTime = Calendar.getInstance();
-            startTime.setTime(nextEvent.getStartTime());
+	        startTime.setTime(nextEvent.getStartTime());
             Calendar now = Calendar.getInstance();
             now.setTime(currTime);
             if (startTime.get(Calendar.DATE) == now.get(Calendar.DATE) &&
@@ -155,6 +157,7 @@ public class MyEventsActivity extends NavigationActivity {
             }
         }
         nextEventStart.setVisibility(displayNextEventStart ? View.VISIBLE : View.GONE);
+
         if (displayNextEventStart) {
             nextEventStart.setText("האירוע הבא מתחיל בעוד " +
                     Dates.toHumanReadableTimeDuration(nextEvent.getStartTime().getTime() - currTime.getTime()) +
@@ -165,13 +168,10 @@ public class MyEventsActivity extends NavigationActivity {
                     @Override
                     public void run() {
 	                    MyEventsActivity.this.setNextEventStartText(events);
-                        nextEventStartTextRunner.postAtTime(this, System.currentTimeMillis() + NEXT_EVENT_START_TIME_UPDATE_DELAY);
                     }
                 };
             }
             nextEventStartTextRunner.postDelayed(updateNextEventStartTimeText, NEXT_EVENT_START_TIME_UPDATE_DELAY);
-        } else if (updateNextEventStartTimeText != null) {
-            nextEventStartTextRunner.removeCallbacks(updateNextEventStartTimeText);
         }
     }
 
