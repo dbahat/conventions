@@ -60,21 +60,18 @@ public class ConflictingEventsViewAdapter extends RecyclerView.Adapter<RecyclerV
 	    } else if (eventsViewHolder instanceof ConflictingEventsViewHolder) {
 		    ((ConflictingEventsViewHolder) eventsViewHolder).setModel(eventGroups.get(i));
 	    }
+
+	    if (eventsViewHolder instanceof DismissibleEventViewHolder) {
+		    ((DismissibleEventViewHolder) eventsViewHolder).reset();
+	    } else if (eventsViewHolder instanceof SwipeableEventViewHolder) {
+		    ((SwipeableEventViewHolder) eventsViewHolder).reset();
+	    }
+
     }
 
 	@Override
 	public int getItemViewType(int position) {
 		return eventGroups.get(position).size() > 1 ? ITEM_VIEW_TYPE_CONFLICTING : ITEM_VIEW_TYPE_REGULAR;
-	}
-
-	@Override
-	public void onViewRecycled(RecyclerView.ViewHolder holder) {
-		super.onViewRecycled(holder);
-		if (holder instanceof DismissibleEventViewHolder) {
-			((DismissibleEventViewHolder)holder).reset();
-		} else if (holder instanceof SwipeableEventViewHolder) {
-			((SwipeableEventViewHolder) holder).reset();
-		}
 	}
 
 	@Override
