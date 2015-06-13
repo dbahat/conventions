@@ -21,10 +21,10 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 public class SwipeableEventsViewOrHourAdapter extends ArraySwipeAdapter<ProgrammeConventionEvent> implements StickyListHeadersAdapter {
 
     private List<ProgrammeConventionEvent> events;
+	private Runnable eventFavoriteChangedListener;
 
     public SwipeableEventsViewOrHourAdapter(Context context, int resource, List<ProgrammeConventionEvent> events) {
         super(context, resource);
-
         this.events = events;
     }
 
@@ -71,6 +71,10 @@ public class SwipeableEventsViewOrHourAdapter extends ArraySwipeAdapter<Programm
 		        // Notify the list view to redraw the UI so the new favorite icon state will apply
 		        // for all views of this event
 		        notifyDataSetChanged();
+
+		        if (eventFavoriteChangedListener != null) {
+			        eventFavoriteChangedListener.run();
+		        }
 	        }
         });
 
@@ -82,9 +86,13 @@ public class SwipeableEventsViewOrHourAdapter extends ArraySwipeAdapter<Programm
         return 2;
     }
 
+	public void setOnEventFavoriteChangedListener(Runnable action) {
+		this.eventFavoriteChangedListener = action;
+	}
+
     @Override
     public View getHeaderView(int position, View convertView, ViewGroup parent) {
-        EventTimeViewHolder holder = null;
+        EventTimeViewHolder holder;
         if (convertView == null) {
             View eventTimeView = LayoutInflater.from(parent.getContext()).inflate(R.layout.convention_event_time, parent, false);
             holder = new EventTimeViewHolder(eventTimeView);

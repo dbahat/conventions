@@ -1,6 +1,8 @@
 package amai.org.conventions.events.activities;
 
 import android.content.DialogInterface;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.ContextThemeWrapper;
@@ -8,7 +10,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.ScaleAnimation;
 import android.widget.AbsListView;
+import android.widget.ImageView;
 import android.widget.NumberPicker;
 
 import java.util.ArrayList;
@@ -35,8 +42,10 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
     private SwipeableEventsViewOrHourAdapter adapter;
     private StickyListHeadersListView listView;
     private List<ProgrammeConventionEvent> events;
+	private Menu menu;
+	private boolean navigateToMyEventsIconModified = false;
 
-    @Override
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentInContentContainer(R.layout.activity_programme);
@@ -46,6 +55,42 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
         this.events = getEventList();
         adapter = new SwipeableEventsViewOrHourAdapter(this, R.id.swipe, events);
         listView.setAdapter(adapter);
+	    adapter.setOnEventFavoriteChangedListener(new Runnable() {
+		    @Override
+		    public void run() {
+			    if (!navigateToMyEventsIconModified) {
+				    navigateToMyEventsIconModified = true;
+				    final MenuItem item = menu.findItem(R.id.programme_navigate_to_my_events);
+				    Drawable icon = item.getIcon();
+				    icon.setColorFilter(getResources().getColor(R.color.gold), PorterDuff.Mode.MULTIPLY);
+				    item.setIcon(icon);
+				    View actionView = getLayoutInflater().inflate(R.layout.my_events_icon, null);
+				    final ImageView myEventsIcon = (ImageView) actionView.findViewById(R.id.icon_to_animate);
+
+				    AnimationSet set = new AnimationSet(true);
+				    set.addAnimation(new ScaleAnimation(1, 2, 1, 2, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f));
+				    set.addAnimation(new AlphaAnimation(1, 0));
+				    set.setDuration(500);
+
+				    myEventsIcon.startAnimation(set);
+				    item.setActionView(actionView);
+				    set.setAnimationListener(new Animation.AnimationListener() {
+					    @Override
+					    public void onAnimationStart(Animation animation) {
+					    }
+
+					    @Override
+					    public void onAnimationEnd(Animation animation) {
+						    item.setActionView(null);
+					    }
+
+					    @Override
+					    public void onAnimationRepeat(Animation animation) {
+					    }
+				    });
+			    }
+		    }
+	    });
 
         listView.setOnHeaderClickListener(this);
 
@@ -73,6 +118,7 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+	    this.menu = menu;
         getMenuInflater().inflate(R.menu.programme_menu, menu);
         return true;
     }
@@ -81,7 +127,9 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.programme_navigate_to_my_events:
-                navigateToActivity(MyEventsActivity.class);
+	            navigateToMyEventsIconModified = false;
+	            item.getIcon().clearColorFilter();
+	            navigateToActivity(MyEventsActivity.class);
                 return true;
         }
 
