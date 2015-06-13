@@ -11,7 +11,7 @@ import amai.org.conventions.events.EventView;
 import amai.org.conventions.model.ConventionEvent;
 
 /**
- * ViewHolder for an event view that allow swipe to add/remove from favorites
+ * ViewHolder for an event view that allow swipe to remove from favorites
  */
 public class DismissibleEventViewHolder extends RecyclerView.ViewHolder {
 
@@ -24,7 +24,7 @@ public class DismissibleEventViewHolder extends RecyclerView.ViewHolder {
     public DismissibleEventViewHolder(View itemView) {
         super(itemView);
         swipeLayout = (SwipeLayout) itemView.findViewById(R.id.swipe);
-        mainEventView = (EventView) itemView.findViewById(R.id.main_layout);
+        mainEventView = (EventView) itemView.findViewById(R.id.dismissible_event);
     }
 
 	public void setModel(ConventionEvent event) {
@@ -32,6 +32,7 @@ public class DismissibleEventViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void setModel(ConventionEvent event, boolean conflicting) {
+	    this.reset();
 	    this.event = event;
         mainEventView.setEvent(event);
         mainEventView.setShowFavoriteIcon(true);

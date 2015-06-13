@@ -69,6 +69,7 @@ public class SwipeableEventViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void setModel(ConventionEvent event, boolean conflicting) {
+	    this.reset();
         mainEventView.setEvent(event);
         mainEventView.setShowFavoriteIcon(true);
         mainEventView.setShowHallName(true);

@@ -52,7 +52,6 @@ public class SwipeableEventsViewOrHourAdapter extends ArraySwipeAdapter<Programm
             convertView.setTag(holder);
         } else {
             holder = (SwipeableEventViewHolder) convertView.getTag();
-            holder.reset();
         }
 
 	    final ConventionEvent event = events.get(position).getEvent();

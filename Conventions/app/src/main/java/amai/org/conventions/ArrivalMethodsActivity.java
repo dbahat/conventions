@@ -19,7 +19,6 @@ public class ArrivalMethodsActivity extends NavigationActivity {
         super.onCreate(savedInstanceState);
         setContentInContentContainer(R.layout.activity_arrival_methods);
         setToolbarTitle(getResources().getString(R.string.arrivalMethods));
-        setUpMapIfNeeded();
     }
 
     @Override

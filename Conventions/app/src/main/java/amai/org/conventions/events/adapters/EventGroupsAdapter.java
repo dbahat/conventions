@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import amai.org.conventions.R;
 import amai.org.conventions.events.holders.ConflictingEventsViewHolder;
 import amai.org.conventions.events.holders.DismissibleEventViewHolder;
-import amai.org.conventions.events.holders.SwipeableEventViewHolder;
 import amai.org.conventions.model.ConventionEvent;
 
 public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -27,11 +26,11 @@ public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 	    switch (viewType) {
 		    case ITEM_VIEW_TYPE_REGULAR : {
-			    View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.dismissable_event_view_holder, viewGroup, false);
+			    View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.dismissible_event_view, viewGroup, false);
 			    return new DismissibleEventViewHolder(view);
 		    }
 		    case ITEM_VIEW_TYPE_CONFLICTING : {
-		        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.conflicting_events_view_holder, viewGroup, false);
+		        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.conflicting_events_view, viewGroup, false);
 		        return new ConflictingEventsViewHolder(view, viewGroup.getContext());
 		    }
 	    }
@@ -44,23 +43,16 @@ public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder eventsViewHolder, final int i) {
+    public void onBindViewHolder(RecyclerView.ViewHolder eventsViewHolder, final int position) {
 	    if (eventsViewHolder instanceof DismissibleEventViewHolder) {
-		    ((DismissibleEventViewHolder) eventsViewHolder).reset();
-	    } else if (eventsViewHolder instanceof SwipeableEventViewHolder) {
-		    ((SwipeableEventViewHolder) eventsViewHolder).reset();
-	    }
+			final DismissibleEventViewHolder dismissibleEventViewHolder = (DismissibleEventViewHolder) eventsViewHolder;
+		    dismissibleEventViewHolder.setModel(eventGroups.get(position).get(0));
 
-	    if (eventsViewHolder instanceof DismissibleEventViewHolder) {
-			final DismissibleEventViewHolder swipeableEventViewHolder = (DismissibleEventViewHolder) eventsViewHolder;
-		    ConventionEvent event = eventGroups.get(i).get(0);
-		    swipeableEventViewHolder.setModel(event);
-
-			EventSwipeToDismissListener listener = new EventSwipeToDismissListener((DismissibleEventViewHolder) eventsViewHolder, eventGroups, this);
-			swipeableEventViewHolder.addOnSwipeListener(listener);
+			EventSwipeToDismissListener listener = new EventSwipeToDismissListener(dismissibleEventViewHolder, eventGroups, this);
+			dismissibleEventViewHolder.addOnSwipeListener(listener);
 
 	    } else if (eventsViewHolder instanceof ConflictingEventsViewHolder) {
-		    ((ConflictingEventsViewHolder) eventsViewHolder).setModel(eventGroups.get(i));
+		    ((ConflictingEventsViewHolder) eventsViewHolder).setModel(eventGroups.get(position));
 	    }
     }
 

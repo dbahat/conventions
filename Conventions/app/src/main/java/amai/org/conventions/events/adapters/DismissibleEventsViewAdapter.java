@@ -22,16 +22,14 @@ public class DismissibleEventsViewAdapter extends RecyclerView.Adapter<Dismissib
 
     @Override
     public DismissibleEventViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.dismissable_event_view_holder, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.dismissible_event_view, parent, false);
         return new DismissibleEventViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(DismissibleEventViewHolder holder, int position) {
 	    holder.reset();
-
-	    ConventionEvent event = eventsList.get(position);
-	    holder.setModel(event, conflicting);
+	    holder.setModel(eventsList.get(position), conflicting);
 
         EventSwipeToDismissListener listener = new EventSwipeToDismissListener(holder, eventsList, this);
         holder.addOnSwipeListener(listener);
