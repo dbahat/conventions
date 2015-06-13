@@ -19,6 +19,9 @@ public class ViewPagerWithWrapContentHeight extends ViewPager {
 		int height = 0;
 		for(int i = 0; i < getChildCount(); ++i) {
 			View child = getChildAt(i);
+			if (child.getVisibility() == GONE) {
+				continue;
+			}
 			child.measure(widthMeasureSpec, MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
 			int childHeight = child.getMeasuredHeight();
 			if(childHeight > height) {

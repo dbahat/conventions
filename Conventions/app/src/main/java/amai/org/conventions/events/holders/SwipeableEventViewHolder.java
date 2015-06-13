@@ -1,16 +1,16 @@
 package amai.org.conventions.events.holders;
 
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import amai.org.conventions.R;
 import amai.org.conventions.events.EventView;
+import amai.org.conventions.events.adapters.ListPagerAdapter;
+import amai.org.conventions.events.listeners.OnSwipeListener;
 import amai.org.conventions.model.ConventionEvent;
 
 /**
@@ -18,51 +18,45 @@ import amai.org.conventions.model.ConventionEvent;
  */
 public class SwipeableEventViewHolder extends RecyclerView.ViewHolder {
 
+    private ViewPager viewPager;
     private EventView mainEventView;
     private EventView hiddenEventView;
+	private EventView hiddenEventView2;
 
-    private ViewPager viewPager;
-	private List<View> views;
-    private ViewPager.OnPageChangeListener listener;
+	private ViewPager.OnPageChangeListener listener;
+	private ConventionEvent event;
 
 	private int mainViewPosition = 0;
+	private boolean dismiss;
 
-	public SwipeableEventViewHolder(View itemView) {
+	public SwipeableEventViewHolder(View itemView, boolean dismiss) {
         super(itemView);
+		this.dismiss = dismiss;
 
-        viewPager = (ViewPager) itemView.findViewById(R.id.swipe_pager);
+		viewPager = (ViewPager) itemView.findViewById(R.id.swipe_pager);
 		mainEventView = (EventView) itemView.findViewById(R.id.main_event_view);
-
-	    views = new ArrayList<>(2); // 2 = maximum number of views in the list
-	    views.add(mainEventView);
-
         hiddenEventView = (EventView) itemView.findViewById(R.id.hidden_event_view);
-        views.add(0, hiddenEventView);
+		hiddenEventView2 = (EventView) itemView.findViewById(R.id.hidden_event_view2);
+
+		if (dismiss) {
+			hiddenEventView.setVisibility(View.GONE);
+			hiddenEventView2.setVisibility(View.GONE);
+		}
+
+		List<View> views = new ArrayList<>(3);
+        views.add(hiddenEventView);
+	    views.add(mainEventView);
+		views.add(hiddenEventView2);
+
         mainViewPosition = 1;
         viewPager.setCurrentItem(mainViewPosition, false);
-
 		viewPager.setOffscreenPageLimit(views.size() - 1);
-
-	    viewPager.setAdapter(new PagerAdapter() {
-		    @Override
-		    public int getCount() {
-			    return views.size();
-		    }
-
-		    @Override
-		    public boolean isViewFromObject(View view, Object object) {
-			    return view == object;
-		    }
-
-		    @Override
-		    public Object instantiateItem(ViewGroup container, int position) {
-			    View view = views.get(position);
-			    container.addView(view);
-			    return view;
-		    }
-	    });
+	    viewPager.setAdapter(new ListPagerAdapter(views));
     }
 
+	public ConventionEvent getModel() {
+		return event;
+	}
 
 	public void setModel(ConventionEvent event) {
         setModel(event, false);
@@ -70,58 +64,32 @@ public class SwipeableEventViewHolder extends RecyclerView.ViewHolder {
 
     public void setModel(ConventionEvent event, boolean conflicting) {
 	    this.reset();
-        mainEventView.setEvent(event);
-        mainEventView.setShowFavoriteIcon(true);
-        mainEventView.setShowHallName(true);
-        mainEventView.setConflicting(conflicting);
 
-        if (hiddenEventView != null) {
-            hiddenEventView.setEvent(event);
-            hiddenEventView.setShowFavoriteIcon(true);
-            hiddenEventView.setShowHallName(true);
-            hiddenEventView.setConflicting(conflicting);
+	    this.event = event;
+	    setEventInEventView(mainEventView, event, conflicting);
 
-            // Set the hidden swipe layout event to have the opposite attending icon state, so that swiping will
-            // feel like changing the attending state.
-            hiddenEventView.setAttending(!event.isAttending());
-        }
+	    if (!dismiss) {
+	        setEventInEventView(hiddenEventView, event, conflicting);
+	        setEventInEventView(hiddenEventView2, event, conflicting);
+
+	        // Set the hidden event views to have the opposite attending icon state, so that swiping will
+	        // feel like changing the attending state.
+	        hiddenEventView.setAttending(!event.isAttending());
+	        hiddenEventView2.setAttending(!event.isAttending());
+	    }
     }
 
-    public void setOnViewSwipedAction(final Runnable action) {
+	private void setEventInEventView(EventView view, ConventionEvent event, boolean conflicting) {
+		view.setEvent(event);
+		view.setShowFavoriteIcon(true);
+		view.setShowHallName(true);
+		view.setConflicting(conflicting);
+	}
+
+	public void setOnViewSwipedAction(final Runnable action) {
 	    removeOnPageChangeListener();
 
-	    this.listener = new ViewPager.OnPageChangeListener() {
-	        boolean pageSelected = false;
-
-	        @Override
-	        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-	        }
-
-	        @Override
-	        public void onPageSelected(int p) {
-		        // Only keep track that the page changed since this method is called before the scroll finished
-		        // so we can't perform UI updates here (because it will be immediate and the event view will appear
-		        // to be stuck)
-		        pageSelected = true;
-	        }
-
-	        @Override
-	        public void onPageScrollStateChanged(int state) {
-		        // If the page was selected (attending status changed) and scrolling has finished,
-		        // perform the actual action
-		        if (state != ViewPager.SCROLL_STATE_IDLE || !pageSelected) {
-			        return;
-		        }
-		        pageSelected = false;
-		        action.run();
-
-		        // Reset the layout state. Remove the listener so it isn't called when the current item is reset.
-		        viewPager.removeOnPageChangeListener(this);
-		        viewPager.setCurrentItem(mainViewPosition, false);
-		        viewPager.addOnPageChangeListener(this);
-	        }
-        };
-
+	    this.listener = new OnSwipeListener(viewPager, mainViewPosition, action, dismiss);
 	    viewPager.addOnPageChangeListener(listener);
     }
 
@@ -135,4 +103,5 @@ public class SwipeableEventViewHolder extends RecyclerView.ViewHolder {
 		    viewPager.removeOnPageChangeListener(listener);
 		}
 	}
+
 }

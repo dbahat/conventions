@@ -8,10 +8,11 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import amai.org.conventions.R;
-import amai.org.conventions.events.holders.DismissibleEventViewHolder;
+import amai.org.conventions.events.holders.SwipeableEventViewHolder;
+import amai.org.conventions.events.listeners.EventSwipeToDismissListener;
 import amai.org.conventions.model.ConventionEvent;
 
-public class DismissibleEventsViewAdapter extends RecyclerView.Adapter<DismissibleEventViewHolder> {
+public class DismissibleEventsViewAdapter extends RecyclerView.Adapter<SwipeableEventViewHolder> {
     private List<ConventionEvent> eventsList;
     private final boolean conflicting;
 
@@ -21,18 +22,18 @@ public class DismissibleEventsViewAdapter extends RecyclerView.Adapter<Dismissib
     }
 
     @Override
-    public DismissibleEventViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.dismissible_event_view, parent, false);
-        return new DismissibleEventViewHolder(view);
+    public SwipeableEventViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.swipeable_event_view, parent, false);
+        return new SwipeableEventViewHolder(view, true);
     }
 
     @Override
-    public void onBindViewHolder(DismissibleEventViewHolder holder, int position) {
+    public void onBindViewHolder(SwipeableEventViewHolder holder, int position) {
 	    holder.reset();
 	    holder.setModel(eventsList.get(position), conflicting);
 
         EventSwipeToDismissListener listener = new EventSwipeToDismissListener(holder, eventsList, this);
-        holder.addOnSwipeListener(listener);
+        holder.setOnViewSwipedAction(listener);
     }
 
     @Override

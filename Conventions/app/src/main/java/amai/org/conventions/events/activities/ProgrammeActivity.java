@@ -53,7 +53,7 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
 
         this.listView = (StickyListHeadersListView) findViewById(R.id.programmeList);
         this.events = getEventList();
-        adapter = new SwipeableEventsViewOrHourAdapter(this, R.id.swipe, events);
+        adapter = new SwipeableEventsViewOrHourAdapter(events);
         listView.setAdapter(adapter);
 	    adapter.setOnEventFavoriteChangedListener(new Runnable() {
 		    @Override

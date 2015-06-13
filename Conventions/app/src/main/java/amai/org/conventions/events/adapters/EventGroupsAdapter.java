@@ -11,7 +11,8 @@ import java.util.List;
 import amai.org.conventions.R;
 import amai.org.conventions.events.activities.MyEventsActivity;
 import amai.org.conventions.events.holders.ConflictingEventsViewHolder;
-import amai.org.conventions.events.holders.DismissibleEventViewHolder;
+import amai.org.conventions.events.holders.SwipeableEventViewHolder;
+import amai.org.conventions.events.listeners.EventSwipeToDismissListener;
 import amai.org.conventions.model.ConventionEvent;
 
 public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -28,8 +29,8 @@ public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 	    switch (viewType) {
 		    case ITEM_VIEW_TYPE_REGULAR : {
-			    View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.dismissible_event_view, viewGroup, false);
-			    return new DismissibleEventViewHolder(view);
+			    View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.swipeable_event_view, viewGroup, false);
+			    return new SwipeableEventViewHolder(view, true);
 		    }
 		    case ITEM_VIEW_TYPE_CONFLICTING : {
 		        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.conflicting_events_view, viewGroup, false);
@@ -46,12 +47,12 @@ public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder eventsViewHolder, final int position) {
-	    if (eventsViewHolder instanceof DismissibleEventViewHolder) {
-			final DismissibleEventViewHolder dismissibleEventViewHolder = (DismissibleEventViewHolder) eventsViewHolder;
+	    if (eventsViewHolder instanceof SwipeableEventViewHolder) {
+			final SwipeableEventViewHolder dismissibleEventViewHolder = (SwipeableEventViewHolder) eventsViewHolder;
 		    dismissibleEventViewHolder.setModel(eventGroups.get(position).get(0));
 
 			EventSwipeToDismissListener listener = new EventSwipeToDismissListener(dismissibleEventViewHolder, eventGroups, this);
-			dismissibleEventViewHolder.addOnSwipeListener(listener);
+			dismissibleEventViewHolder.setOnViewSwipedAction(listener);
 
 	    } else if (eventsViewHolder instanceof ConflictingEventsViewHolder) {
 		    final ConflictingEventsViewHolder conflictingEventsViewHolder = (ConflictingEventsViewHolder) eventsViewHolder;

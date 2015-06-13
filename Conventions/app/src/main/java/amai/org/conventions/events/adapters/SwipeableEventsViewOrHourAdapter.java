@@ -4,8 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.daimajia.swipe.adapters.ArraySwipeAdapter;
+import android.widget.BaseAdapter;
 
 import java.util.Calendar;
 import java.util.List;
@@ -18,13 +17,12 @@ import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
-public class SwipeableEventsViewOrHourAdapter extends ArraySwipeAdapter<ProgrammeConventionEvent> implements StickyListHeadersAdapter {
+public class SwipeableEventsViewOrHourAdapter extends BaseAdapter implements StickyListHeadersAdapter {
 
     private List<ProgrammeConventionEvent> events;
 	private Runnable eventFavoriteChangedListener;
 
-    public SwipeableEventsViewOrHourAdapter(Context context, int resource, List<ProgrammeConventionEvent> events) {
-        super(context, resource);
+    public SwipeableEventsViewOrHourAdapter(List<ProgrammeConventionEvent> events) {
         this.events = events;
     }
 
@@ -34,7 +32,7 @@ public class SwipeableEventsViewOrHourAdapter extends ArraySwipeAdapter<Programm
     }
 
     @Override
-    public Object getItem(int position) {
+    public ProgrammeConventionEvent getItem(int position) {
         return events.get(position);
     }
 
@@ -47,8 +45,8 @@ public class SwipeableEventsViewOrHourAdapter extends ArraySwipeAdapter<Programm
     public View getView(final int position, View convertView, ViewGroup parent) {
         final SwipeableEventViewHolder holder;
         if (convertView == null) {
-	        convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.swipeable_event_view_holder, parent, false);
-            holder = new SwipeableEventViewHolder(convertView);
+	        convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.swipeable_event_view, parent, false);
+            holder = new SwipeableEventViewHolder(convertView, false);
             convertView.setTag(holder);
         } else {
             holder = (SwipeableEventViewHolder) convertView.getTag();
@@ -109,10 +107,5 @@ public class SwipeableEventsViewOrHourAdapter extends ArraySwipeAdapter<Programm
     @Override
     public long getHeaderId(int position) {
         return events.get(position).getTimeSection().get(Calendar.HOUR_OF_DAY);
-    }
-
-    @Override
-    public int getSwipeLayoutResourceId(int i) {
-        return 0;
     }
 }
