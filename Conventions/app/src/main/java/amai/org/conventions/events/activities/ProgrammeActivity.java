@@ -49,7 +49,7 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
 
         listView.setOnHeaderClickListener(this);
 
-        final int position = findHourPosition(floorHour(Dates.now()));
+        final int position = findHourPosition(getHour(Dates.now()));
         if (position != -1) {
             final ViewTreeObserver vto = listView.getViewTreeObserver();
             vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -79,11 +79,9 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         switch (item.getItemId()) {
             case R.id.programme_navigate_to_my_events:
                 navigateToActivity(MyEventsActivity.class);
-
                 return true;
         }
 
@@ -175,10 +173,9 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
         List<ProgrammeConventionEvent> programmeEvents = new LinkedList<>();
 
         for (ConventionEvent event : events) {
-
-            // Convert the event start time to hourly time sections, and duplicate it if needed (e.g. if an event started at 13:30 and ended at 15:00, his
+            // Convert the event start time to hourly time sections, and duplicate it if needed (e.g. if an event started at 13:30 and ended at 15:00, its
             // time sections are 13:00 and 14:00)
-            int eventDurationInHours = ceilHour(event.getEndTime()) - floorHour(event.getStartTime());
+            int eventDurationInHours = getEndHour(event.getEndTime()) - getHour(event.getStartTime()) + 1;
             for (int i = 0; i < eventDurationInHours; i++) {
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(event.getStartTime());
@@ -209,18 +206,20 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
         return programmeEvents;
     }
 
-    private static int floorHour(Date date) {
+    private static int getHour(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         return calendar.get(Calendar.HOUR_OF_DAY);
     }
 
-    private int ceilHour(Date endTime) {
+    private static int getEndHour(Date endTime) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(endTime);
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
 
-        return minute >= 30 ? hour + 1 : hour;
+	    // The first minute of the next hour is considered this hour. For example, an event
+	    // ending at 12:00 is only considered to run during hour 11:00.
+        return minute > 0 ? hour : hour - 1;
     }
 }
