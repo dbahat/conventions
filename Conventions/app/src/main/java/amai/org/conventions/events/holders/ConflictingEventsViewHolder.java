@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import amai.org.conventions.R;
 import amai.org.conventions.events.adapters.DismissibleEventsViewAdapter;
@@ -22,14 +23,22 @@ public class ConflictingEventsViewHolder extends RecyclerView.ViewHolder {
     private final RecyclerView eventsListView;
     private final Context context;
     private DismissibleEventsViewAdapter adapter;
+	private RecyclerView.AdapterDataObserver eventRemovedListener;
 
-    public ConflictingEventsViewHolder(View itemView, Context context) {
+	public ConflictingEventsViewHolder(View itemView, Context context) {
         super(itemView);
         eventsListView = (RecyclerView) itemView.findViewById(R.id.conflictingEventsList);
         this.context = context;
     }
 
+	public List<ConventionEvent> getModel() {
+		return adapter.getEventsList();
+	}
+
     public void setModel(final ArrayList<ConventionEvent> events) {
+	    if (adapter != null && eventRemovedListener != null) {
+		    adapter.unregisterAdapterDataObserver(eventRemovedListener);
+	    }
         adapter = new DismissibleEventsViewAdapter(events, true);
         eventsListView.setAdapter(adapter);
         eventsListView.setLayoutManager(new LinearLayoutManager(context));
@@ -59,6 +68,21 @@ public class ConflictingEventsViewHolder extends RecyclerView.ViewHolder {
 		    }
 	    });
     }
+
+	public void setEventRemovedListener(final Runnable action) {
+		if (eventRemovedListener != null) {
+			adapter.unregisterAdapterDataObserver(eventRemovedListener);
+		}
+
+		this.eventRemovedListener = new RecyclerView.AdapterDataObserver() {
+			@Override
+			public void onItemRangeRemoved(int positionStart, int itemCount) {
+				super.onItemRangeRemoved(positionStart, itemCount);
+				action.run();
+			}
+		};
+		adapter.registerAdapterDataObserver(eventRemovedListener);
+	}
 
     private void updateListHeight() {
         // Set height - must be calculated at runtime since wrap_content does not work for recycler view inside recycler view

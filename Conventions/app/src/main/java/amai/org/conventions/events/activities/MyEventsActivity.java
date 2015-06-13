@@ -183,7 +183,7 @@ public class MyEventsActivity extends NavigationActivity {
 	 * sent, where each event conflicts with at least one other event in the group. Events from different
 	 * groups do not conflict with each other. The groups are ordered by the first event's start time.
 	 */
-	private ArrayList<ArrayList<ConventionEvent>> getNonConflictingGroups(List<ConventionEvent> events) {
+	public static ArrayList<ArrayList<ConventionEvent>> getNonConflictingGroups(List<ConventionEvent> events) {
 		ArrayList<ArrayList<ConventionEvent>> nonConflictingEventGroups = new ArrayList<>();
 
 		Date currGroupEndTime = null;

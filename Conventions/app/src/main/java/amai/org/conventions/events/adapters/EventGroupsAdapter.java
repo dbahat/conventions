@@ -6,8 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import amai.org.conventions.R;
+import amai.org.conventions.events.activities.MyEventsActivity;
 import amai.org.conventions.events.holders.ConflictingEventsViewHolder;
 import amai.org.conventions.events.holders.DismissibleEventViewHolder;
 import amai.org.conventions.model.ConventionEvent;
@@ -52,7 +54,31 @@ public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 			dismissibleEventViewHolder.addOnSwipeListener(listener);
 
 	    } else if (eventsViewHolder instanceof ConflictingEventsViewHolder) {
-		    ((ConflictingEventsViewHolder) eventsViewHolder).setModel(eventGroups.get(position));
+		    final ConflictingEventsViewHolder conflictingEventsViewHolder = (ConflictingEventsViewHolder) eventsViewHolder;
+		    conflictingEventsViewHolder.setModel(eventGroups.get(position));
+		    conflictingEventsViewHolder.setEventRemovedListener(new Runnable() {
+			    @Override
+			    public void run() {
+				    int adapterPosition = conflictingEventsViewHolder.getAdapterPosition();
+				    List<ConventionEvent> eventsList = conflictingEventsViewHolder.getModel();
+				    // If after removal only 1 item remains, the item type has changed
+				    if (eventsList.size() == 1) {
+					    // Use remove and insert instead of changed for fade-out and fade-in animation, to make it seem
+					    // like a bigger change
+					    notifyItemRemoved(adapterPosition);
+					    notifyItemInserted(adapterPosition);
+				    } else {
+					    ArrayList<ArrayList<ConventionEvent>> groups = MyEventsActivity.getNonConflictingGroups(eventsList);
+					    // If the number of groups changed, remove the group and insert the new groups
+					    if (groups.size() != 1) {
+						    eventGroups.remove(adapterPosition);
+						    eventGroups.addAll(adapterPosition, groups);
+						    notifyItemRemoved(adapterPosition);
+						    notifyItemRangeInserted(adapterPosition, groups.size());
+					    }
+				    }
+			    }
+		    });
 	    }
     }
 

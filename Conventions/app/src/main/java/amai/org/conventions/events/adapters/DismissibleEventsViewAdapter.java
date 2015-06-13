@@ -39,4 +39,8 @@ public class DismissibleEventsViewAdapter extends RecyclerView.Adapter<Dismissib
     public int getItemCount() {
         return eventsList.size();
     }
+
+	public List<ConventionEvent> getEventsList() {
+		return eventsList;
+	}
 }
