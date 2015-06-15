@@ -16,6 +16,7 @@ import android.widget.TextView;
 import java.util.Date;
 
 import amai.org.conventions.R;
+import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.Dates;
 
@@ -86,14 +87,14 @@ public class EventView extends FrameLayout {
 
     private void setColorsFromEvent(ConventionEvent event) {
         Date now = Dates.now();
-        int colorId = event.getType().getBackgroundColorId();
-        setEventTypeColor(getResources().getColor(colorId));
+        int colorAttrId = event.getType().getBackgroundColorAttributeId();
+        setEventTypeColor(ThemeAttributes.getColor(getContext(), colorAttrId));
         if (event.getStartTime().after(now)) {
-            setEventColor(getResources().getColor(R.color.white));
+            setEventColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeNotStartedColor));
         } else if (event.getEndTime().before(now)) {
-            setEventColor(getResources().getColor(R.color.ultra_light_gray));
+            setEventColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeEndedColor));
         } else {
-            setEventColor(getResources().getColor(R.color.gold));
+            setEventColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeCurrentColor));
         }
     }
 
@@ -178,11 +179,11 @@ public class EventView extends FrameLayout {
         if (conflicting) {
             eventContainer.setCardElevation(0.0f);
             eventContainer.setMaxCardElevation(0.0f);
-            eventContainer.setCardBackgroundColor(getResources().getColor(R.color.conflictingEventsBackground));
+            eventContainer.setCardBackgroundColor(ThemeAttributes.getColor(getContext(), R.attr.conflictingEventsBackground));
         } else {
             eventContainer.setCardElevation(6.0f);
             eventContainer.setMaxCardElevation(6.0f);
-            eventContainer.setCardBackgroundColor(getResources().getColor(R.color.white));
+            eventContainer.setCardBackgroundColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeNotStartedColor));
         }
     }
 }

@@ -5,7 +5,7 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/toolbar_color"
+    android:background="?toolbarBackground"
     app:contentInsetStart="0dp"
     android:layoutDirection="rtl">
 

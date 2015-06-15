@@ -24,7 +24,7 @@
                 android:id="@+id/update_time_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/ultra_light_gray"
+                android:background="?updateTimeColor"
                 android:orientation="vertical">
 
                 <LinearLayout

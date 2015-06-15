@@ -3,6 +3,7 @@ package amai.org.conventions.navigation;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PictureDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -24,6 +25,7 @@ import java.util.Map;
 import amai.org.conventions.AnimationPopupWindow;
 import amai.org.conventions.ArrivalMethodsActivity;
 import amai.org.conventions.R;
+import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.activities.EventActivity;
 import amai.org.conventions.events.activities.ProgrammeActivity;
 import amai.org.conventions.map.MapActivity;
@@ -87,7 +89,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		if (navigationMapping.containsValue(this.getClass())) {
 			for (Map.Entry<View, Class<? extends Activity>> entry : navigationMapping.entrySet()) {
 				if (entry.getValue() == this.getClass()) {
-					entry.getKey().setBackgroundColor(getResources().getColor(R.color.very_light_gray));
+					entry.getKey().setBackgroundColor(ThemeAttributes.getColor(this, R.attr.navigationPopupDisabledBackground));
 					entry.getKey().setOnClickListener(null);
 					break;
 				}
@@ -98,7 +100,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	}
 
 	private void setupImageColors(View view) {
-		int color = R.color.toolbar_color;
+		int color = ThemeAttributes.getColor(this, R.attr.toolbarBackground);
 		changeImageColor(view, R.id.events_menu_image, color);
 		changeImageColor(view, R.id.map_menu_image, color);
 		changeImageColor(view, R.id.updates_menu_image, color);
@@ -125,8 +127,20 @@ public abstract class NavigationActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(false);
             actionBar.setDisplayShowTitleEnabled(true);
 	        try {
-		        SVG logoSVG = loadSVG(R.raw.logo_border);
-	            toolbar.setNavigationIcon(new PictureDrawable(logoSVG.renderToPicture()));
+		        int logoType = ThemeAttributes.getColor(this, R.attr.toolbarLogoType);
+		        Drawable drawable = null;
+		        switch (logoType) {
+			        // bitmap
+			        case 0:
+				        drawable = ThemeAttributes.getDrawable(this, R.attr.toolbarLogo);
+				        break;
+			        // svg
+			        case 1:
+		                SVG logoSVG = loadSVG(ThemeAttributes.getResourceId(this, R.attr.toolbarLogo));
+				        drawable = new PictureDrawable(logoSVG.renderToPicture());
+				        break;
+		        }
+	            toolbar.setNavigationIcon(drawable);
 	        } catch (SVGParseException e) {
 		        throw new RuntimeException(e);
 	        }

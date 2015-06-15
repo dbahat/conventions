@@ -4,23 +4,23 @@ import amai.org.conventions.R;
 
 public enum EventType {
 
-    Central(R.color.medium_purple, "מרכזי"),
-    Special(R.color.silver, "מיוחד"),
-    Screening(R.color.dark_purple, "הקרנה"),
-    Lecture(R.color.red, "הרצאה"),
-    Workshop(R.color.light_purple, "סדנה"),
-    Panel(R.color.yellow, "פאנל");
+    Central(R.attr.eventTypeCentralColor, "מרכזי"),
+    Special(R.attr.eventTypeSpecialColor, "מיוחד"),
+    Screening(R.attr.eventTypeScreeningColor, "הקרנה"),
+    Lecture(R.attr.eventTypeLectureColor, "הרצאה"),
+    Workshop(R.attr.eventTypeWorkshopColor, "סדנה"),
+    Panel(R.attr.eventTypePanelColor, "פאנל");
 
-    private int backgroundColorId;
+    private int backgroundColorAttributeId;
 	private String description;
 
-    EventType(int backgroundColorId, String description) {
-        this.backgroundColorId = backgroundColorId;
+    EventType(int backgroundColorAttributeId, String description) {
+        this.backgroundColorAttributeId = backgroundColorAttributeId;
 	    this.description = description;
     }
 
-    public int getBackgroundColorId() {
-        return backgroundColorId;
+    public int getBackgroundColorAttributeId() {
+        return backgroundColorAttributeId;
     }
 
 	public String getDescription() {

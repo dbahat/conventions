@@ -20,9 +20,9 @@ public class EventsViewHolder extends RecyclerView.ViewHolder {
     }
 
 	public void setModel(ConventionEvent event, boolean conflicting) {
-		eventView.setEvent(event);
 		eventView.setShowFavoriteIcon(showFavoriteIcon);
 		eventView.setShowHallName(showHallName);
 		eventView.setConflicting(conflicting);
+		eventView.setEvent(event);
 	}
 }

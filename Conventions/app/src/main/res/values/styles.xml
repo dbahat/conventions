@@ -1,14 +1,51 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowNoTitle">true</item>
         <!--We will be using the toolbar so no need to show ActionBar-->
         <item name="android:windowActionBar">false</item>
         <item name="toolbarNavigationButtonStyle">@style/ToolbarNavigationButtonStyle</item>
         <item name="stickyListHeadersListViewStyle">@style/Widget.AppCompat.ListView</item>
-
         <item name="vpiCirclePageIndicatorStyle">@style/CustomCirclePageIndicator</item>
+    </style>
+
+    <style name="AppBaseTheme.Harucon">
+        <item name="toolbarBackground">@color/very_dark_purple</item>
+        <item name="toolbarLogo">@raw/logo_border</item>
+        <item name="toolbarLogoType">svg</item>
+        <item name="toolbarIconAccentColor">@color/gold</item>
+
+        <item name="appLogoHome">@drawable/logo</item>
+        <item name="mapHomeImage">@drawable/map</item>
+        <item name="eventsHomeImage">@drawable/events</item>
+        <item name="updatesHomeImage">@drawable/updates</item>
+        <item name="arrivalMethodsHomeImage">@drawable/arrival_methods</item>
+
+        <item name="eventTypeCentralColor">@color/medium_purple</item>
+        <item name="eventTypeSpecialColor">@color/silver</item>
+        <item name="eventTypeScreeningColor">@color/dark_purple</item>
+        <item name="eventTypeLectureColor">@color/red</item>
+        <item name="eventTypeWorkshopColor">@color/light_purple</item>
+        <item name="eventTypePanelColor">@color/yellow</item>
+
+        <item name="eventTypeEndedColor">@color/ultra_light_gray</item>
+        <item name="eventTypeCurrentColor">@color/light_yellow</item>
+        <item name="eventTypeNotStartedColor">@color/white</item>
+
+        <item name="nextEventStartTimeBackground">@color/gold</item>
+        <item name="nextEventStartTimeBottomLineColor">@android:color/black</item>
+        <item name="conflictingEventsBackground">@color/gray</item>
+
+        <item name="navigationPopupDisabledBackground">@color/very_light_gray</item>
+
+        <item name="eventTimeHeaderColor">@color/very_light_gray</item>
+
+        <item name="updateTimeColor">@color/ultra_light_gray</item>
+        <item name="updatesBackground">@color/white</item>
+
+        <item name="locationDetailsBackground">@color/white</item>
+        <item name="locationDetailsTopLineColor">@android:color/black</item>
     </style>
 
     <style name="MainActivityOverlayText">

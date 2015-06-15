@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="onConventionEventClicked"
-        conventions:eventColor="@color/background_floating_material_light"
+        conventions:eventColor="?eventTypeNotStartedColor"
         conventions:attending="true"
         conventions:hallName="Oranim 1"
         conventions:startTime="14:00"

@@ -9,14 +9,14 @@
         android:layout_height="wrap_content"
         android:id="@+id/nextEventStart"
         android:gravity="center"
-        android:background="@color/gold"
+        android:background="?nextEventStartTimeBackground"
         android:text="Next event start time"
         />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@android:color/black"
+        android:background="?nextEventStartTimeBottomLineColor"
         />
 
     <android.support.v7.widget.RecyclerView

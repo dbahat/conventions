@@ -27,6 +27,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import amai.org.conventions.R;
+import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.ProgrammeConventionEvent;
 import amai.org.conventions.events.adapters.SwipeableEventsViewOrHourAdapter;
 import amai.org.conventions.events.holders.EventTimeViewHolder;
@@ -62,7 +63,7 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
 				    navigateToMyEventsIconModified = true;
 				    final MenuItem item = menu.findItem(R.id.programme_navigate_to_my_events);
 				    Drawable icon = item.getIcon();
-				    icon.setColorFilter(getResources().getColor(R.color.gold), PorterDuff.Mode.MULTIPLY);
+				    icon.setColorFilter(ThemeAttributes.getColor(ProgrammeActivity.this, R.attr.toolbarIconAccentColor), PorterDuff.Mode.MULTIPLY);
 				    item.setIcon(icon);
 				    View actionView = getLayoutInflater().inflate(R.layout.my_events_icon, null);
 				    final ImageView myEventsIcon = (ImageView) actionView.findViewById(R.id.icon_to_animate);

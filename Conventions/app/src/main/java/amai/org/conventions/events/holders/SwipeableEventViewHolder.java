@@ -80,10 +80,10 @@ public class SwipeableEventViewHolder extends RecyclerView.ViewHolder {
     }
 
 	private void setEventInEventView(EventView view, ConventionEvent event, boolean conflicting) {
-		view.setEvent(event);
 		view.setShowFavoriteIcon(true);
 		view.setShowHallName(true);
 		view.setConflicting(conflicting);
+		view.setEvent(event);
 	}
 
 	public void setOnViewSwipedAction(final Runnable action) {

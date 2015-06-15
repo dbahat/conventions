@@ -23,7 +23,7 @@
         android:id="@+id/location_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="?locationDetailsBackground"
         android:orientation="vertical"
         android:visibility="gone"
         android:alpha="0.9"
@@ -32,7 +32,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:src="@android:color/black"/>
+            android:src="?locationDetailsTopLineColor"/>
 
         <LinearLayout
             android:padding="5dp"

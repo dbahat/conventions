@@ -12,4 +12,46 @@
         <attr name="showHallName" format="boolean"/>
         <attr name="showFavoriteIcon" format="boolean"/>
     </declare-styleable>
+
+    <declare-styleable name="ApplicationTheme">
+        <!-- Toolbar -->
+        <attr name="toolbarBackground" format="color|reference"/>
+        <attr name="toolbarLogo" format="integer|reference"/>
+        <attr name="toolbarLogoType" format="enum">
+            <enum name="bitmap" value="0"/>
+            <enum name="svg" value="1"/>
+        </attr>
+        <attr name="toolbarIconAccentColor" format="color|reference"/>
+        <!-- Home Screen -->
+        <attr name="appLogoHome" format="integer"/>
+        <attr name="mapHomeImage" format="integer"/>
+        <attr name="eventsHomeImage" format="integer"/>
+        <attr name="updatesHomeImage" format="integer"/>
+        <attr name="arrivalMethodsHomeImage" format="integer"/>
+        <!-- Event Types -->
+        <attr name="eventTypeCentralColor" format="color|reference"/>
+        <attr name="eventTypeSpecialColor" format="color|reference"/>
+        <attr name="eventTypeScreeningColor" format="color|reference"/>
+        <attr name="eventTypeLectureColor" format="color|reference"/>
+        <attr name="eventTypeWorkshopColor" format="color|reference"/>
+        <attr name="eventTypePanelColor" format="color|reference"/>
+        <!-- Event Time -->
+        <attr name="eventTypeEndedColor" format="color|reference"/>
+        <attr name="eventTypeCurrentColor" format="color|reference"/>
+        <attr name="eventTypeNotStartedColor" format="color|reference"/>
+        <!-- MyEvents Screen -->
+        <attr name="nextEventStartTimeBackground" format="color|reference"/>
+        <attr name="nextEventStartTimeBottomLineColor" format="color|reference"/>
+        <attr name="conflictingEventsBackground" format="color|reference"/>
+        <!-- Navigation Popup -->
+        <attr name="navigationPopupDisabledBackground" format="color|reference"/>
+        <!-- Programme Screen -->
+        <attr name="eventTimeHeaderColor" format="color|reference"/>
+        <!-- Updates Screen -->
+        <attr name="updateTimeColor" format="color|reference"/>
+        <attr name="updatesBackground" format="color|reference"/>
+        <!-- Map Screen -->
+        <attr name="locationDetailsBackground" format="color|reference"/>
+        <attr name="locationDetailsTopLineColor" format="color|reference"/>
+    </declare-styleable>
 </resources>

@@ -10,8 +10,7 @@
     <color name="very_light_gray">#DCDCDC</color>
     <color name="ultra_light_gray">#EBEBEB</color>
     <color name="white">#FFFFFF</color>
-
-    <color name="conflictingEventsBackground">#D2D3D5</color>
-
-    <color name="toolbar_color">#442B73</color>
+    <color name="gray">#D2D3D5</color>
+    <color name="very_dark_purple">#442B73</color>
+    <color name="light_yellow">#fffeffc9</color>
 </resources>

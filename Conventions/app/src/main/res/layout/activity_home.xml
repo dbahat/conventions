@@ -16,7 +16,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="80dp"
-            android:src="@drawable/logo"/>
+            android:src="?appLogoHome"/>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -67,7 +67,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/events"
+                    android:src="?eventsHomeImage"
                     android:scaleType="fitCenter"
                     />
                 <TextView
@@ -89,7 +89,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/map"
+                    android:src="?mapHomeImage"
                     android:scaleType="fitCenter"
                     />
                 <TextView
@@ -118,7 +118,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/updates"
+                    android:src="?updatesHomeImage"
                     android:scaleType="fitCenter"
                     />
                 <TextView
@@ -140,7 +140,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/arrival_methods"
+                    android:src="?arrivalMethodsHomeImage"
                     android:scaleType="fitCenter"
                     />
                 <TextView
