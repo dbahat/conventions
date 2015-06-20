@@ -10,13 +10,17 @@
         <item name="vpiCirclePageIndicatorStyle">@style/CustomCirclePageIndicator</item>
     </style>
 
-    <style name="AppBaseTheme.Harucon">
+    <style name="AppBaseTheme.Harucon2015">
         <item name="toolbarBackground">@color/very_dark_purple</item>
         <item name="toolbarLogo">@raw/logo_border</item>
         <item name="toolbarLogoType">svg</item>
         <item name="toolbarIconAccentColor">@color/gold</item>
 
         <item name="appLogoHome">@drawable/logo</item>
+        <item name="homeConventionNameVisibility">visible</item>
+        <item name="homeConventionName">הארוקון 2015</item>
+        <item name="homeConventionDate">03.05.2015</item>
+        <item name="homeButtonsColor">#d6d7d7</item>
         <item name="mapHomeImage">@drawable/map</item>
         <item name="eventsHomeImage">@drawable/events</item>
         <item name="updatesHomeImage">@drawable/updates</item>
@@ -46,6 +50,21 @@
 
         <item name="locationDetailsBackground">@color/white</item>
         <item name="locationDetailsTopLineColor">@android:color/black</item>
+    </style>
+
+    <style name="AppBaseTheme.Cami2015" parent="AppBaseTheme.Harucon2015">
+        <item name="appLogoHome">@drawable/cami_logo_border</item>
+        <item name="logoHomeBackground">?nextEventStartTimeBackground</item>
+        <item name="homeConventionNameVisibility">gone</item>
+        <item name="homeConventionName">כאמ"י 2015</item>
+        <item name="homeConventionDate">20.08.2015</item>
+
+        <item name="toolbarBackground">#6C0020</item>
+        <item name="toolbarLogo">@drawable/cami_logo_toolbar</item>1
+        <item name="toolbarLogoType">bitmap</item>
+        <item name="toolbarIconAccentColor">#CEE4A3</item>
+
+        <item name="nextEventStartTimeBackground">#FDB271</item>
     </style>
 
     <style name="MainActivityOverlayText">

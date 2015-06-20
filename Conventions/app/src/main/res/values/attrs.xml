@@ -24,6 +24,11 @@
         <attr name="toolbarIconAccentColor" format="color|reference"/>
         <!-- Home Screen -->
         <attr name="appLogoHome" format="integer"/>
+        <attr name="logoHomeBackground" format="color|reference"/>
+        <attr name="homeConventionNameVisibility" format="string"/>
+        <attr name="homeConventionName" format="string"/>
+        <attr name="homeConventionDate" format="string"/>
+        <attr name="homeButtonsColor" format="color|reference"/>
         <attr name="mapHomeImage" format="integer"/>
         <attr name="eventsHomeImage" format="integer"/>
         <attr name="updatesHomeImage" format="integer"/>
