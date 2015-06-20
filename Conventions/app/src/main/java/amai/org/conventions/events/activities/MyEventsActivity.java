@@ -64,7 +64,6 @@ public class MyEventsActivity extends NavigationActivity {
 
 	private void updateDataset() {
 		final List<ConventionEvent> events = getMyEvents();
-		Collections.sort(events, new ConventionEventComparator());
 
 		// Set up text view for next event start
 		setNextEventStartText(events);
@@ -82,6 +81,13 @@ public class MyEventsActivity extends NavigationActivity {
 			public void onItemRangeRemoved(int positionStart, int itemCount) {
 				super.onItemRangeRemoved(positionStart, itemCount);
 				updateVisibility(adapter.getItemCount(), eventsList, emptyView);
+			}
+		});
+
+		adapter.setOnEventRemovedAction(new Runnable() {
+			@Override
+			public void run() {
+				setNextEventStartText(getMyEvents());
 			}
 		});
 	}
@@ -116,16 +122,18 @@ public class MyEventsActivity extends NavigationActivity {
     }
 
     private List<ConventionEvent> getMyEvents() {
-        return CollectionUtils.filter(
-		        Convention.getInstance().getEvents(),
-		        new CollectionUtils.Predicate<ConventionEvent>() {
-			        @Override
-			        public boolean where(ConventionEvent event) {
-				        return event.isAttending();
-			        }
-		        },
-		        new ArrayList<ConventionEvent>()
-        );
+	    ArrayList<ConventionEvent> events = CollectionUtils.filter(
+			    Convention.getInstance().getEvents(),
+			    new CollectionUtils.Predicate<ConventionEvent>() {
+				    @Override
+				    public boolean where(ConventionEvent event) {
+					    return event.isAttending();
+				    }
+			    },
+			    new ArrayList<ConventionEvent>()
+	    );
+	    Collections.sort(events, new ConventionEventComparator());
+	    return events;
     }
 
     private void setNextEventStartText(final List<ConventionEvent> events) {

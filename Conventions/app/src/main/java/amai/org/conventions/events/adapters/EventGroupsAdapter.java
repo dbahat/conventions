@@ -20,9 +20,20 @@ public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 	private static final int ITEM_VIEW_TYPE_CONFLICTING = 2;
 
 	private ArrayList<ArrayList<ConventionEvent>> eventGroups;
+	private Runnable onEventRemovedAction;
 
     public EventGroupsAdapter(ArrayList<ArrayList<ConventionEvent>> eventGroups) {
         this.eventGroups = eventGroups;
+
+	    registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+		    @Override
+		    public void onItemRangeRemoved(int positionStart, int itemCount) {
+			    super.onItemRangeRemoved(positionStart, itemCount);
+			    if (onEventRemovedAction != null) {
+			        onEventRemovedAction.run();
+			    }
+		    }
+	    });
     }
 
     @Override
@@ -78,13 +89,25 @@ public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 						    notifyItemRangeInserted(adapterPosition, groups.size());
 					    }
 				    }
+
+				    if (onEventRemovedAction != null) {
+					    onEventRemovedAction.run();
+				    }
 			    }
 		    });
 	    }
     }
 
+	public void setOnEventRemovedAction(final Runnable onEventRemovedAction) {
+		this.onEventRemovedAction = onEventRemovedAction;
+	}
+
 	@Override
 	public int getItemViewType(int position) {
 		return eventGroups.get(position).size() > 1 ? ITEM_VIEW_TYPE_CONFLICTING : ITEM_VIEW_TYPE_REGULAR;
+	}
+
+	public ArrayList<ArrayList<ConventionEvent>> getEventGroups() {
+		return eventGroups;
 	}
 }
