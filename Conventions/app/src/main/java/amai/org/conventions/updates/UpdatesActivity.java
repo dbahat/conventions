@@ -24,7 +24,6 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -33,30 +32,38 @@ import java.util.List;
 
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
+import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.Dates;
 import amai.org.conventions.model.Update;
 import amai.org.conventions.navigation.NavigationActivity;
 
 public class UpdatesActivity extends NavigationActivity implements SwipeRefreshLayout.OnRefreshListener {
-    private static final String CAMI_EVENT_FEED_PATH = "/1580579905526635/feed";
+    private static final String CAMI_EVENT_FEED_PATH = "/cami.org.il/feed";
     private static final String CAMI_FACEBOOK_USERNAME = "Cami - כאמ\"י";
 
     private CallbackManager callbackManager;
     private SwipeRefreshLayout swipeRefreshLayout;
     private LoginButton loginButton;
     private RecyclerView recyclerView;
+    private UpdatesAdapter updatesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        FacebookSdk.sdkInitialize(getApplicationContext());
+
         setToolbarTitle(getResources().getString(R.string.updates));
         setContentInContentContainer(R.layout.activity_updates);
         resolveUiElements();
 
-        // Initialize the updates list to be empty.
-        // TODO - Extract the updates list of cache if exists.
-        initializeUpdatesList(new ArrayList<Update>());
+        // Initialize the recycler view.
+        updatesAdapter = new UpdatesAdapter();
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(updatesAdapter);
+
+        // Initialize the updates list based on the model cache.
+        initializeUpdatesList(Convention.getInstance().getUpdates());
 
         loginToFacebookIfNeeded();
     }
@@ -76,7 +83,6 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
     }
 
     private void loginToFacebookIfNeeded() {
-        FacebookSdk.sdkInitialize(getApplicationContext());
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         if (accessToken == null) {
             initializeFacebookLoginButton();
@@ -139,6 +145,9 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
                     @Override
                     public void onCompleted(GraphResponse graphResponse) {
                         List<Update> updates = parseAndFilterFacebookFeedResult(graphResponse);
+                        // Update the model, so next time we can read them from cache.
+                        Convention.getInstance().setUpdates(updates);
+                        Convention.getInstance().save();
                         initializeUpdatesList(updates);
 
                         swipeRefreshLayout.setRefreshing(false);
@@ -154,15 +163,16 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
         JSONObject response = graphResponse.getJSONObject();
         try {
             JSONArray data = response.getJSONArray("data");
-            for (int i=0; i<data.length(); i++) {
+            for (int i = 0; i < data.length(); i++) {
                 JSONObject post = data.getJSONObject(i);
                 JSONObject from = post.getJSONObject("from");
                 String fromName = from.getString("name");
-                if (fromName.contains(CAMI_FACEBOOK_USERNAME)) {
+                if (fromName.contains(CAMI_FACEBOOK_USERNAME) && post.has("message") && post.has("created_time") ) {
                     Update update = new Update();
                     String dateString = post.getString("created_time");
                     Date date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Dates.getLocale()).parse(dateString);
                     update.setDate(date);
+
                     update.setText(post.getString("message"));
                     updates.add(update);
                 }
@@ -175,7 +185,6 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
     }
 
     private void initializeUpdatesList(List<Update> updates) {
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setVisibility(View.VISIBLE);
 
         Collections.sort(updates, new Comparator<Update>() {
@@ -185,6 +194,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
                 return rhs.getDate().compareTo(lhs.getDate());
             }
         });
-        recyclerView.setAdapter(new UpdatesAdapter(updates));
+
+        updatesAdapter.setUpdates(updates);
     }
 }

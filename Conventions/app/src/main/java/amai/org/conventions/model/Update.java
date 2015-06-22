@@ -1,8 +1,9 @@
 package amai.org.conventions.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Update {
+public class Update implements Serializable {
     private String text;
     private Date date;
 

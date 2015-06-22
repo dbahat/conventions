@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,14 +16,8 @@ public class UpdatesAdapter extends RecyclerView.Adapter<UpdateViewHolder> {
 
     private List<UpdateViewModel> updates;
 
-    public UpdatesAdapter(List<Update> updates) {
-
-        List<UpdateViewModel> updateViewModels = new LinkedList<>();
-        for (Update update : updates) {
-            updateViewModels.add(new UpdateViewModel(update, true /* By default have all items collapsed */));
-        }
-
-        this.updates = updateViewModels;
+    public UpdatesAdapter() {
+        updates = new ArrayList<>();
     }
 
     @Override
@@ -50,5 +45,15 @@ public class UpdatesAdapter extends RecyclerView.Adapter<UpdateViewHolder> {
     @Override
     public int getItemCount() {
         return updates.size();
+    }
+
+    public void setUpdates(List<Update> updates) {
+        List<UpdateViewModel> updateViewModels = new LinkedList<>();
+        for (Update update : updates) {
+            updateViewModels.add(new UpdateViewModel(update, true /* By default have all items collapsed */));
+        }
+
+        this.updates = updateViewModels;
+        notifyDataSetChanged();
     }
 }
