@@ -17,6 +17,7 @@
     <string name="event_remove_from_favorites">הסר מהאירועים שלי</string>
 
     <string name="update_show_full_text">הצג עדכון מלא</string>
+    <string name="update_refresh_failed">לא ניתן לעדכן. בדוק חיבור לאינטרנט</string>
 
     <string name="my_events_no_data">הוסף אירוע לאירועים שלי ע\"י לחיצה על הכוכב בדף האירוע או ע\"י גריריתו ברשימת האירועים</string>
 

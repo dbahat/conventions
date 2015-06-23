@@ -6,7 +6,9 @@ import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -38,6 +40,7 @@ import amai.org.conventions.model.Update;
 import amai.org.conventions.navigation.NavigationActivity;
 
 public class UpdatesActivity extends NavigationActivity implements SwipeRefreshLayout.OnRefreshListener {
+    private static final String TAG = UpdatesActivity.class.getSimpleName();
     private static final String CAMI_EVENT_FEED_PATH = "/cami.org.il/feed";
     private static final String CAMI_FACEBOOK_USERNAME = "Cami - כאמ\"י";
 
@@ -46,6 +49,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
     private LoginButton loginButton;
     private RecyclerView recyclerView;
     private UpdatesAdapter updatesAdapter;
+    private boolean isRefreshInProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,12 +133,14 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 
     private void retrieveUpdatesListFromFacebookApi(AccessToken accessToken) {
 
+        isRefreshInProgress = true;
+
         // Workaround (Android issue #77712) - SwipeRefreshLayout indicator does not appear when the `setRefreshing(true)` is called before
         // the `SwipeRefreshLayout#onMeasure()`, so we post the setRefreshing call to the layout queue.
         swipeRefreshLayout.post(new Runnable() {
             @Override
             public void run() {
-                swipeRefreshLayout.setRefreshing(true);
+                swipeRefreshLayout.setRefreshing(isRefreshInProgress);
             }
         });
 
@@ -144,13 +150,20 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
                 new GraphRequest.Callback() {
                     @Override
                     public void onCompleted(GraphResponse graphResponse) {
-                        List<Update> updates = parseAndFilterFacebookFeedResult(graphResponse);
-                        // Update the model, so next time we can read them from cache.
-                        Convention.getInstance().setUpdates(updates);
-                        Convention.getInstance().save();
-                        initializeUpdatesList(updates);
 
-                        swipeRefreshLayout.setRefreshing(false);
+                        if (graphResponse.getError() != null) {
+                            Log.d(TAG, "Updates refresh failed. Reason: " + graphResponse.getError().toString());
+                            Toast.makeText(UpdatesActivity.this, R.string.update_refresh_failed, Toast.LENGTH_LONG).show();
+                        } else {
+                            List<Update> updates = parseAndFilterFacebookFeedResult(graphResponse);
+                            // Update the model, so next time we can read them from cache.
+                            Convention.getInstance().setUpdates(updates);
+                            Convention.getInstance().save();
+                            initializeUpdatesList(updates);
+                        }
+
+                        isRefreshInProgress = false;
+                        swipeRefreshLayout.setRefreshing(isRefreshInProgress);
                     }
                 });
         Bundle parameters = new Bundle();
@@ -160,6 +173,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 
     private List<Update> parseAndFilterFacebookFeedResult(GraphResponse graphResponse) {
         List<Update> updates = new LinkedList<>();
+
         JSONObject response = graphResponse.getJSONObject();
         try {
             JSONArray data = response.getJSONArray("data");
