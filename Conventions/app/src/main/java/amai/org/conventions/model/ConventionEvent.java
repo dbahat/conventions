@@ -38,7 +38,7 @@ public class ConventionEvent implements Serializable {
 
 	public ConventionEvent(int id) {
 		this.id = id;
-		images = Arrays.asList(R.drawable.event_ntt, R.drawable.event_ntt);
+		images = Arrays.asList(R.drawable.event_cosplay1, R.drawable.event_ntt, R.drawable.event_cosplay1);
 		userInput = new UserInput();
 	}
 

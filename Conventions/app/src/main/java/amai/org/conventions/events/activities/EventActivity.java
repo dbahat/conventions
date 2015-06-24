@@ -1,21 +1,27 @@
 package amai.org.conventions.events.activities;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
+import android.support.v7.graphics.Palette;
 import android.text.Html;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.viewpagerindicator.CirclePageIndicator;
-import com.viewpagerindicator.TitlePageIndicator;
-
 import java.util.List;
 
+import amai.org.conventions.AspectRatioImageView;
 import amai.org.conventions.R;
-import amai.org.conventions.events.adapters.ImageAdapter;
+import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.map.MapActivity;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
@@ -23,23 +29,87 @@ import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.Dates;
 import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.navigation.NavigationActivity;
+import uk.co.chrisjenx.paralloid.views.ParallaxScrollView;
+
 
 public class EventActivity extends NavigationActivity {
 
     public static final String EXTRA_EVENT_ID = "EventIdExtra";
 
     private ConventionEvent conventionEvent;
+	private LinearLayout imagesLayout;
 
-    @Override
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentInContentContainer(R.layout.activity_event);
 
+		imagesLayout = (LinearLayout) findViewById(R.id.images_layout);
+
         int eventId = getIntent().getIntExtra(EXTRA_EVENT_ID, 0);
         conventionEvent = Convention.getInstance().findEventById(eventId);
-
         setEvent(conventionEvent);
-    }
+
+	    final View mainLayout = findViewById(R.id.event_main_layout);
+	    final ParallaxScrollView scrollView = (ParallaxScrollView) findViewById(R.id.parallax_scroll);
+	    final View backgroundView = imagesLayout;
+	    final View detailBoxes = findViewById(R.id.event_detail_boxes);
+
+	    mainLayout.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+		    @Override
+		    public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+			    // Set parallax
+			    int foregroundHeight = detailBoxes.getMeasuredHeight();
+			    int backgroundHeight = backgroundView.getMeasuredHeight();
+			    int screenHeight = mainLayout.getMeasuredHeight();
+
+			    // If background height is bigger than screen size, scrolling should be until background full height is reached.
+			    // If it's smaller, scrolling should be until background is scrolled out of the screen.
+			    int backgroundToScroll;
+			    if (backgroundHeight < screenHeight) {
+				    backgroundToScroll = backgroundHeight;
+			    } else {
+				    backgroundToScroll = backgroundHeight - screenHeight;
+
+				    // If foreground height is smaller than background height (and background should be scrolled),
+				    // increase foreground height to allow scrolling until the end of the background and see all the images.
+				    if (backgroundToScroll > 0 && foregroundHeight < backgroundHeight) {
+					    detailBoxes.setMinimumHeight(backgroundHeight);
+					    // Update height to calculate the parallax factor
+				        foregroundHeight = backgroundHeight;
+				    }
+			    }
+			    int foregroundToScroll = foregroundHeight - screenHeight;
+
+			    // Set parallax scrolling if both foreground and background should be scrolled
+			    if (backgroundToScroll > 0 && foregroundToScroll > 0) {
+				    float scrollFactor = backgroundToScroll / (float) foregroundToScroll;
+				    // If scroll factor is bigger than 1, set it to 1 so the background doesn't move too fast.
+				    // This could happen only in case the background is smaller than screen size so we can
+				    // still see all the images.
+				    scrollView.parallaxViewBy(backgroundView, Math.min(scrollFactor, 1));
+			    }
+		    }
+	    });
+
+		// Set images background color according to last image's color palette
+		if (imagesLayout.getChildCount() > 0) {
+			final View imagesBackground = findViewById(R.id.images_background);
+			ImageView lastImage = (ImageView) imagesLayout.getChildAt(imagesLayout.getChildCount() - 1);
+			if (lastImage.getDrawable() instanceof BitmapDrawable && imagesBackground.getBackground() instanceof ColorDrawable) {
+				Bitmap bitmap = ((BitmapDrawable) lastImage.getDrawable()).getBitmap();
+				final int defaultColor = ((ColorDrawable) imagesBackground.getBackground()).getColor();
+
+				Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
+					@Override
+					public void onGenerated(Palette palette) {
+						int color = palette.getDarkMutedColor(defaultColor);
+						imagesBackground.setBackgroundColor(color);
+					}
+				});
+			}
+		}
+	}
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -115,16 +185,23 @@ public class EventActivity extends NavigationActivity {
                 Dates.toHumanReadableTimeDuration(event.getEndTime().getTime() - event.getStartTime().getTime()));
         time.setText(formattedEventTime);
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.imagesPager);
-        if (event.getImages().size() > 0) {
-            ImageAdapter adapter = new ImageAdapter(this, event.getImages());
-            viewPager.setAdapter(adapter);
-        } else {
-            viewPager.setVisibility(View.GONE);
-        }
-
-        CirclePageIndicator titleIndicator = (CirclePageIndicator)findViewById(R.id.imagesPagerIndicator);
-        titleIndicator.setViewPager(viewPager);
+		// Add images to the layout
+		List<Integer> images = event.getImages();
+		boolean first = true;
+		for (int imageId : images) {
+			ImageView imageView = new AspectRatioImageView(this);
+			LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+			int topMargin = 0;
+			if (first) {
+				first = false;
+			} else {
+				topMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics());
+			}
+			layoutParams.setMargins(0, topMargin, 0, 0);
+			imageView.setLayoutParams(layoutParams);
+			imageView.setImageResource(imageId);
+			imagesLayout.addView(imageView);
+		}
 
         TextView description = (TextView) findViewById(R.id.event_description);
         String eventDescription = event.getDescription();

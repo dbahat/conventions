@@ -50,6 +50,9 @@
 
         <item name="locationDetailsBackground">@color/white</item>
         <item name="locationDetailsTopLineColor">@android:color/black</item>
+
+        <item name="eventDetailsBoxColor">#B0FFFFFF</item>
+        <item name="eventDetailsDefaultBackgroundColor">#FDB271</item>
     </style>
 
     <style name="AppBaseTheme.Cami2015" parent="AppBaseTheme.Harucon2015">
@@ -80,6 +83,16 @@
 
     <style name="ToolbarNavigationButtonStyle" parent="@style/Widget.AppCompat.Toolbar.Button.Navigation">
         <item name="android:scaleType">fitEnd</item>
+    </style>
+
+    <style name="EventDetailsBox">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_marginStart">30dp</item>
+        <item name="android:layout_marginEnd">30dp</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:background">?eventDetailsBoxColor</item>
     </style>
 
     <style name="CustomCirclePageIndicator">

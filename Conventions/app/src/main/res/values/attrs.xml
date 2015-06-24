@@ -62,5 +62,8 @@
         <!-- Map Screen -->
         <attr name="locationDetailsBackground" format="color|reference"/>
         <attr name="locationDetailsTopLineColor" format="color|reference"/>
+        <!-- Event Screen -->
+        <attr name="eventDetailsBoxColor" format="color|reference"/>
+        <attr name="eventDetailsDefaultBackgroundColor" format="color|reference"/>
     </declare-styleable>
 </resources>
