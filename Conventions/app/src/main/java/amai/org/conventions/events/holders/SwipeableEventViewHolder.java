@@ -9,6 +9,7 @@ import java.util.List;
 
 import amai.org.conventions.R;
 import amai.org.conventions.events.EventView;
+import amai.org.conventions.events.ApplyBounceAnimationListener;
 import amai.org.conventions.events.adapters.ListPagerAdapter;
 import amai.org.conventions.events.listeners.OnSwipeListener;
 import amai.org.conventions.model.ConventionEvent;
@@ -52,6 +53,10 @@ public class SwipeableEventViewHolder extends RecyclerView.ViewHolder {
         viewPager.setCurrentItem(mainViewPosition, false);
 		viewPager.setOffscreenPageLimit(views.size() - 1);
 	    viewPager.setAdapter(new ListPagerAdapter(views));
+
+		ApplyBounceAnimationListener listener = new ApplyBounceAnimationListener();
+		mainEventView.setOnFavoritesButtonClickedListener(listener);
+		mainEventView.setOnLongClickListener(listener);
     }
 
 	public ConventionEvent getModel() {

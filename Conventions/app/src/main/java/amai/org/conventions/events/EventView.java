@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -81,8 +82,8 @@ public class EventView extends FrameLayout {
         setEventTitle(event.getTitle());
         setLecturerName(event.getLecturer());
 
-        // Setting the event id inside the view tag, so we can easily extract it from the view when listeneing to onClick events.
-        setTag(event.getId());
+        // Setting the event id inside the view tag, so we can easily extract it from the view when listening to onClick events.
+        eventContainer.setTag(event.getId());
     }
 
     private void setColorsFromEvent(ConventionEvent event) {
@@ -143,6 +144,15 @@ public class EventView extends FrameLayout {
 
     public void setShowFavoriteIcon(boolean show) {
         faveIcon.setVisibility(show ? VISIBLE : GONE);
+    }
+
+    public void setOnFavoritesButtonClickedListener(OnClickListener listener) {
+        timeLayout.setOnClickListener(listener);
+    }
+
+    @Override
+    public void setOnLongClickListener(OnLongClickListener listener) {
+        eventContainer.setOnLongClickListener(listener);
     }
 
     protected void setHallName(String name) {

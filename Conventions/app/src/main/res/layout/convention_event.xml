@@ -6,9 +6,10 @@
     android:layout_height="wrap_content"
     app:cardUseCompatPadding="true"
     android:layoutDirection="rtl"
-    android:id="@+id/eventContainer">
+    android:id="@+id/eventContainer"
+    android:onClick="onConventionEventClicked">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:id="@+id/parentLayout"
         android:orientation="horizontal"
         android:layout_width="match_parent"
