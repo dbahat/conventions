@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.manuelpeinado.imagelayout.ImageLayout;
+
 public class AspectRatioImageView extends ImageView {
 	public AspectRatioImageView(Context context) {
 		super(context);
@@ -28,8 +30,15 @@ public class AspectRatioImageView extends ImageView {
 			return;
 		}
 
-		int width = getMeasuredWidth();
-		int height = (int) (width * drawable.getIntrinsicHeight() / (float) drawable.getIntrinsicWidth());
+		int width;
+		int height;
+		if (getWidth() != ImageLayout.LayoutParams.WRAP_CONTENT) {
+			width = getMeasuredWidth();
+			height = (int) (width * drawable.getIntrinsicHeight() / (float) drawable.getIntrinsicWidth());
+		} else {
+			height = getMeasuredHeight();
+			width = (int) (height * drawable.getIntrinsicWidth() / (float) drawable.getIntrinsicHeight());
+		}
 		setMeasuredDimension(width, height);
 	}
 }

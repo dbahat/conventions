@@ -1,19 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- FrameLayout style copied from abc_action_menu_item_layout.xml -->
 <FrameLayout
-    android:layout_height="wrap_content"
+    style="?attr/actionButtonStyle"
     android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:paddingTop="4dip"
+    android:paddingBottom="4dip"
+    android:paddingLeft="8dip"
+    android:paddingRight="8dip"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <ImageView
+    <!-- ImageView size copied from ActionMenuItemView (constant MAX_ICON_SIZE) -->
+    <amai.org.conventions.AspectRatioImageView
         android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginLeft="8dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/non_animated_icon"
         android:src="@drawable/events_list_with_star"/>
 
-    <ImageView
+    <amai.org.conventions.AspectRatioImageView
         android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginLeft="8dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:id="@+id/icon_to_animate"
         android:src="@drawable/events_list_with_star"/>
 

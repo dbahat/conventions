@@ -11,6 +11,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/conflictingEventsCard"
         app:cardUseCompatPadding="true"
+        app:cardElevation="2dp"
+        app:cardMaxElevation="2dp"
         app:cardBackgroundColor="?conflictingEventsBackground">
 
         <android.support.v7.widget.RecyclerView

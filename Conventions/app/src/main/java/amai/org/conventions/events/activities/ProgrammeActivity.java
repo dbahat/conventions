@@ -62,18 +62,22 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
 			    if (!navigateToMyEventsIconModified) {
 				    navigateToMyEventsIconModified = true;
 				    final MenuItem item = menu.findItem(R.id.programme_navigate_to_my_events);
-				    Drawable icon = item.getIcon();
-				    icon.setColorFilter(ThemeAttributes.getColor(ProgrammeActivity.this, R.attr.toolbarIconAccentColor), PorterDuff.Mode.MULTIPLY);
-				    item.setIcon(icon);
+				    Drawable icon = item.getIcon().mutate();
+				    int accentColor = ThemeAttributes.getColor(ProgrammeActivity.this, R.attr.toolbarIconAccentColor);
+				    icon.setColorFilter(accentColor, PorterDuff.Mode.MULTIPLY);
+
 				    View actionView = getLayoutInflater().inflate(R.layout.my_events_icon, null);
-				    final ImageView myEventsIcon = (ImageView) actionView.findViewById(R.id.icon_to_animate);
+				    ImageView myEventsNonAnimatedIcon = (ImageView) actionView.findViewById(R.id.non_animated_icon);
+				    myEventsNonAnimatedIcon.setColorFilter(accentColor, PorterDuff.Mode.MULTIPLY);
+
+				    final ImageView myEventsAnimatedIcon = (ImageView) actionView.findViewById(R.id.icon_to_animate);
 
 				    AnimationSet set = new AnimationSet(true);
 				    set.addAnimation(new ScaleAnimation(1, 2, 1, 2, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f));
 				    set.addAnimation(new AlphaAnimation(1, 0));
 				    set.setDuration(500);
 
-				    myEventsIcon.startAnimation(set);
+				    myEventsAnimatedIcon.startAnimation(set);
 				    item.setActionView(actionView);
 				    set.setAnimationListener(new Animation.AnimationListener() {
 					    @Override

@@ -105,4 +105,12 @@
         <item name="snap">false</item>
     </style>
 
+    <style name="EventViewLargeText">
+        <item name="android:textSize">18dp</item>
+    </style>
+
+    <style name="EventViewSmallText">
+        <item name="android:textSize">14dp</item>
+    </style>
+
 </resources>

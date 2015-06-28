@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardUseCompatPadding="true"
+    app:cardElevation="2dp"
+    app:cardMaxElevation="2dp"
     android:layoutDirection="rtl"
     android:id="@+id/eventContainer"
     android:onClick="onConventionEventClicked">
@@ -33,13 +35,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/startTime"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                style="@style/EventViewLargeText"
                 android:text="Start Time"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
+                style="@style/EventViewSmallText"
                 android:text="End Time"
                 android:id="@+id/endTime"/>
 
@@ -59,7 +61,7 @@
                 android:text="Event Title"
                 android:textDirection="rtl"
                 android:gravity="start|top"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                style="@style/EventViewLargeText"
                 android:maxLines="2"
                 android:ellipsize="end"/>
 
@@ -75,7 +77,7 @@
                     android:maxLines="1"
                     android:ellipsize="start"
                     android:layout_alignParentStart="true"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    style="@style/EventViewSmallText"
                     android:textColor="@android:color/darker_gray"
                     android:text="Hall name"/>
 
@@ -88,7 +90,7 @@
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:textColor="@android:color/darker_gray"
-                    android:textAppearance="?android:attr/textAppearanceSmall"/>
+                    style="@style/EventViewSmallText"/>
 
             </RelativeLayout>
 
