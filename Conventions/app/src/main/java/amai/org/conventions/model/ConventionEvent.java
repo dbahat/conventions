@@ -1,6 +1,7 @@
 package amai.org.conventions.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -38,7 +39,7 @@ public class ConventionEvent implements Serializable {
 
 	public ConventionEvent(int id) {
 		this.id = id;
-		images = Arrays.asList(R.drawable.event_cosplay1, R.drawable.event_ntt, R.drawable.event_cosplay1);
+		images = new ArrayList<>();
 		userInput = new UserInput();
 	}
 
@@ -139,6 +140,15 @@ public class ConventionEvent implements Serializable {
 
 	public List<Integer> getImages() {
 		return images;
+	}
+
+	public void setImages(List<Integer> images) {
+		this.images = images;
+	}
+
+	public ConventionEvent withImages(Integer... images) {
+		setImages(Arrays.asList(images));
+		return this;
 	}
 
 	public UserInput getUserInput() {

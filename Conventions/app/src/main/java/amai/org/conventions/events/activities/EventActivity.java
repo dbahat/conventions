@@ -62,12 +62,14 @@ public class EventActivity extends NavigationActivity {
 			    int foregroundHeight = detailBoxes.getMeasuredHeight();
 			    int backgroundHeight = backgroundView.getMeasuredHeight();
 			    int screenHeight = mainLayout.getMeasuredHeight();
+			    float maxParallax = 1;
 
 			    // If background height is bigger than screen size, scrolling should be until background full height is reached.
 			    // If it's smaller, scrolling should be until background is scrolled out of the screen.
 			    int backgroundToScroll;
 			    if (backgroundHeight < screenHeight) {
 				    backgroundToScroll = backgroundHeight;
+				    maxParallax = 0.7f;
 			    } else {
 				    backgroundToScroll = backgroundHeight - screenHeight;
 
@@ -87,7 +89,7 @@ public class EventActivity extends NavigationActivity {
 				    // If scroll factor is bigger than 1, set it to 1 so the background doesn't move too fast.
 				    // This could happen only in case the background is smaller than screen size so we can
 				    // still see all the images.
-				    scrollView.parallaxViewBy(backgroundView, Math.min(scrollFactor, 1));
+				    scrollView.parallaxViewBy(backgroundView, Math.min(scrollFactor, maxParallax));
 			    }
 		    }
 	    });
@@ -96,15 +98,20 @@ public class EventActivity extends NavigationActivity {
 		if (imagesLayout.getChildCount() > 0) {
 			final View imagesBackground = findViewById(R.id.images_background);
 			ImageView lastImage = (ImageView) imagesLayout.getChildAt(imagesLayout.getChildCount() - 1);
-			if (lastImage.getDrawable() instanceof BitmapDrawable && imagesBackground.getBackground() instanceof ColorDrawable) {
+			if (lastImage.getDrawable() instanceof BitmapDrawable) {
 				Bitmap bitmap = ((BitmapDrawable) lastImage.getDrawable()).getBitmap();
-				final int defaultColor = ((ColorDrawable) imagesBackground.getBackground()).getColor();
 
 				Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
 					@Override
 					public void onGenerated(Palette palette) {
-						int color = palette.getDarkMutedColor(defaultColor);
-						imagesBackground.setBackgroundColor(color);
+						Palette.Swatch swatch = palette.getMutedSwatch();
+						if (swatch == null) {
+							// Try vibrant swatch
+							swatch = palette.getDarkVibrantSwatch();
+						}
+						if (swatch != null) {
+							imagesBackground.setBackgroundColor(swatch.getRgb());
+						}
 					}
 				});
 			}
