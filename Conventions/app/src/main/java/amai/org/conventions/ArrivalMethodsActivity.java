@@ -68,7 +68,7 @@ public class ArrivalMethodsActivity extends NavigationActivity {
                 // TODO - return the custom marker after scaling it to a proper size.
                 //.icon(BitmapDescriptorFactory.fromResource(R.drawable.logo))
                 .position(conventionLocation)
-                .title(getResources().getString(R.string.arrival_methods_marker_name)));
+                .title("\u200e" + getResources().getString(R.string.arrival_methods_marker_name)));
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(conventionLocation, 16));
     }

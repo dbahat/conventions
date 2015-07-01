@@ -9,7 +9,7 @@
     <string name="event_added_to_favorites">האירוע התווסף לאירועים שלי</string>
     <string name="event_removed_from_favorites">האירוע הוסר מהאירועים שלי</string>
     <string name="no_description_found">לא נמצא תיאור</string>
-    <string name="arrival_methods_marker_name">Nation Halls</string>
+    <string name="arrival_methods_marker_name">בנייני האומה</string>
 
     <string name="event_navigate_to_map">הצג במפה</string>
     <string name="event_navigate_to_hall">הצג אולם</string>
