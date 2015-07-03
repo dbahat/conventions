@@ -21,10 +21,11 @@
 
 
     <!-- General -->
-    <color name="very_light_gray">#DCDCDC</color>
-    <color name="ultra_light_gray">#EBEBEB</color>
-    <color name="white">#FFFFFF</color>
-    <color name="gray">#D2D3D5</color>
-    <color name="light_yellow">#fffeffc9</color>
     <color name="transparent_white">#B0FFFFFF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="ultra_light_gray">#EBEBEB</color>
+    <color name="very_light_gray">#DCDCDC</color>
+    <color name="gray">#D6D7D7</color>
+    <color name="dark_gray">#D2D3D5</color>
+    <color name="light_yellow">#fffeffc9</color>
 </resources>

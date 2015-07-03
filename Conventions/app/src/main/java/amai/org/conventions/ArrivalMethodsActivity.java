@@ -68,6 +68,7 @@ public class ArrivalMethodsActivity extends NavigationActivity {
                 // TODO - return the custom marker after scaling it to a proper size.
                 //.icon(BitmapDescriptorFactory.fromResource(R.drawable.harucon_logo))
                 .position(conventionLocation)
+		        // Workaround for Hebrew not being displayed - add unicode RTL character before the string
                 .title("\u200e" + getResources().getString(R.string.arrival_methods_marker_name)));
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(conventionLocation, 16));

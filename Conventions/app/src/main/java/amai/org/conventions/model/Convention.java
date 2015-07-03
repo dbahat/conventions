@@ -485,7 +485,7 @@ public class Convention implements Serializable {
 
     private Date time(String timeAsString) {
         try {
-            return dateFormat.parse("05.03.2015 " + timeAsString);
+            return dateFormat.parse("20.08.2015 " + timeAsString);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }

@@ -31,7 +31,7 @@ public class Dates {
         // TODO this is a mock for testing purpose. Change to new Date() when it's the real app.
 //        return new Date(System.currentTimeMillis() - appStartDate.getTime() + initialDate.getTime());
 	    Calendar currDate = Calendar.getInstance();
-	    currDate.set(2015, Calendar.MARCH, 5);
+	    currDate.set(2015, Calendar.AUGUST, 20);
 	    return currDate.getTime();
     }
 

@@ -12,6 +12,13 @@ public class ThemeAttributes {
 		return attrValue;
 	}
 
+	public static int getDimentionSize(Context context, int attribute) {
+		TypedArray typedArray = context.getTheme().obtainStyledAttributes(new int[]{attribute});
+		int attrValue = typedArray.getDimensionPixelSize(0, 0);
+		typedArray.recycle();
+		return attrValue;
+	}
+
 	public static Drawable getDrawable(Context context, int attribute) {
 		TypedArray typedArray = context.getTheme().obtainStyledAttributes(new int[]{attribute});
 		Drawable attrValue = typedArray.getDrawable(0);

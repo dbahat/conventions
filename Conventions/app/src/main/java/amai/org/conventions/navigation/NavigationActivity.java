@@ -2,6 +2,7 @@ package amai.org.conventions.navigation;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PictureDrawable;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +53,9 @@ public abstract class NavigationActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (popup == null || !popup.isShowing()) {
 	                popup = createNavigationPopup();
-                    popup.showAsDropDown(navigationToolbar, 0, 0);
+	                // Sending toolbar width to support Jellybean version (it does not align to
+	                // the right automatically)
+                    popup.showAsDropDown(navigationToolbar, navigationToolbar.getWidth(), 0);
                 }
             }
         });
@@ -133,6 +137,9 @@ public abstract class NavigationActivity extends AppCompatActivity {
 			        // bitmap
 			        case 0:
 				        drawable = ThemeAttributes.getDrawable(this, R.attr.toolbarLogo);
+				        // The scaling doesn't work properly for this icon (the width remains the original size)
+				        // so we have to resize it manually
+				        drawable = resizeBitmap(drawable, ThemeAttributes.getDimentionSize(this, R.attr.actionBarSize));
 				        break;
 			        // svg
 			        case 1:
@@ -147,6 +154,16 @@ public abstract class NavigationActivity extends AppCompatActivity {
 
         }
     }
+
+	/**
+	 * Resize bitmap height to specified pixels while keeping the aspect ratio
+	 */
+	private Drawable resizeBitmap(Drawable image, int height) {
+		Bitmap originalBitmap = ((BitmapDrawable) image).getBitmap();
+		int width = (int) (originalBitmap.getWidth() * height / (float) originalBitmap.getHeight());
+		Bitmap bitmapResized = Bitmap.createScaledBitmap(originalBitmap, width, height, false);
+		return new BitmapDrawable(getResources(), bitmapResized);
+	}
 
 	private SVG loadSVG(int resource) throws SVGParseException {
 		if (loadedSVGFiles.containsKey(resource)) {
