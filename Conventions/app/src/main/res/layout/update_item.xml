@@ -20,9 +20,11 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+            <!-- Note - Note using wrap_content for the time-box width since we need it
+            for wrapping the test around the time-box. -->
             <LinearLayout
                 android:id="@+id/update_time_container"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/update_time_container_size"
                 android:layout_height="wrap_content"
                 android:background="?updateTimeColor"
                 android:orientation="vertical">

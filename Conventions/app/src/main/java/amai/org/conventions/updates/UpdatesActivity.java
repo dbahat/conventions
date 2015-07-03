@@ -163,7 +163,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
                         }
 
                         isRefreshInProgress = false;
-                        swipeRefreshLayout.setRefreshing(isRefreshInProgress);
+                        swipeRefreshLayout.setRefreshing(false);
                     }
                 });
         Bundle parameters = new Bundle();

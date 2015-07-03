@@ -1,6 +1,7 @@
 package amai.org.conventions.updates;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,16 +29,13 @@ public class UpdatesAdapter extends RecyclerView.Adapter<UpdateViewHolder> {
 
     @Override
     public void onBindViewHolder(UpdateViewHolder holder, final int position) {
-        final UpdateViewModel updateViewModel = updates.get(position);
+        UpdateViewModel updateViewModel = updates.get(position);
         holder.setContent(updateViewModel);
         holder.setOnMoreInfoClickListener(new UpdateViewHolder.OnMoreInfoClickListener() {
             @Override
             public void onClicked() {
-                updateViewModel.setCollapsed(false);
-
-                // NOTE - Currently not invoking NotifyItemChanged(), since this seems to cause the recyclerView to update the item to the wrong size.
-                // Updating all the dataset seems to cause it to draw the items in the correct size.
-                notifyDataSetChanged();
+                updates.get(position).setCollapsed(false);
+                notifyItemChanged(position);
             }
         });
     }
