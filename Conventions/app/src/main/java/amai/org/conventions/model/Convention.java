@@ -55,7 +55,7 @@ public class Convention implements Serializable {
 				                .withEndTime(time("12:00"))
 				                .withType(EventType.Central)
 				                .withImages()
-				                .withAttending(true),
+				                .withAttending(false),
 
 		                new ConventionEvent(2)
 				                .withTitle("שתי טיפות של דם")
@@ -80,7 +80,7 @@ public class Convention implements Serializable {
 				                .withEndTime(time("19:00"))
 				                .withType(EventType.Central)
 				                .withImages(R.drawable.event_cosplay1, R.drawable.event_cosplay2, R.drawable.event_cosplay3)
-				                .withAttending(true),
+				                .withAttending(false),
 
 		                new ConventionEvent(5)
 				                .withTitle("שתי טיפות של דם")
@@ -89,7 +89,7 @@ public class Convention implements Serializable {
 				                .withEndTime(time("21:00"))
 				                .withType(EventType.Central)
 				                .withImages(R.drawable.event_ntt)
-				                .withAttending(true)
+				                .withAttending(false)
                 ),
 
                 inHall(contentRoom,
@@ -201,7 +201,7 @@ public class Convention implements Serializable {
 				                .withEndTime(time("14:00"))
 				                .withType(EventType.Lecture)
 				                .withImages(R.drawable.event_visual_novels)
-				                .withAttending(true),
+				                .withAttending(false),
 
 		                new ConventionEvent(17)
 				                .withTitle("חומרים טרמופלסטיים 101")
@@ -276,7 +276,7 @@ public class Convention implements Serializable {
 				                .withEndTime(time("13:00"))
 				                .withType(EventType.Lecture)
 				                .withImages(R.drawable.event_school)
-				                .withAttending(true),
+				                .withAttending(false),
 
 		                new ConventionEvent(25)
 				                .withTitle("סקיטים ושאר ירקות")
@@ -350,7 +350,7 @@ public class Convention implements Serializable {
 				                .withEndTime(time("12:00"))
 				                .withType(EventType.Central)
 				                .withImages(R.drawable.event_idols)
-				                .withAttending(true),
+				                .withAttending(false),
 
 		                new ConventionEvent(33)
 				                .withTitle("טריוויה 2015")

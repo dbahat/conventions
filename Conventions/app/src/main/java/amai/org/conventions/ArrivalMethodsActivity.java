@@ -66,7 +66,7 @@ public class ArrivalMethodsActivity extends NavigationActivity {
 
         mMap.addMarker(new MarkerOptions()
                 // TODO - return the custom marker after scaling it to a proper size.
-                //.icon(BitmapDescriptorFactory.fromResource(R.drawable.logo))
+                //.icon(BitmapDescriptorFactory.fromResource(R.drawable.harucon_logo))
                 .position(conventionLocation)
                 .title("\u200e" + getResources().getString(R.string.arrival_methods_marker_name)));
 

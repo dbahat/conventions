@@ -9,7 +9,6 @@ import java.util.Collections;
 
 import amai.org.conventions.R;
 import amai.org.conventions.events.adapters.EventsViewAdapter;
-import amai.org.conventions.model.CollectionUtils;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;

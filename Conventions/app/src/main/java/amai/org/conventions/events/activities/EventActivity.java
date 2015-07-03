@@ -2,11 +2,9 @@ package amai.org.conventions.events.activities;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.graphics.Palette;
 import android.text.Html;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,7 +19,6 @@ import java.util.List;
 
 import amai.org.conventions.AspectRatioImageView;
 import amai.org.conventions.R;
-import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.map.MapActivity;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;

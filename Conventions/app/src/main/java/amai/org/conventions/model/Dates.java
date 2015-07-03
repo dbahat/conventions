@@ -3,6 +3,7 @@ package amai.org.conventions.model;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -10,7 +11,7 @@ import java.util.Locale;
 public class Dates {
 
 	public enum TimeUnit {
-        HOUR, MINUTE, SECOND;
+        HOUR, MINUTE, SECOND
     }
 
 	private static Locale LOCALE = new Locale("iw", "IL");
@@ -28,7 +29,10 @@ public class Dates {
 
     public static Date now() {
         // TODO this is a mock for testing purpose. Change to new Date() when it's the real app.
-        return new Date(System.currentTimeMillis() - appStartDate.getTime() + initialDate.getTime());
+//        return new Date(System.currentTimeMillis() - appStartDate.getTime() + initialDate.getTime());
+	    Calendar currDate = Calendar.getInstance();
+	    currDate.set(2015, Calendar.MARCH, 5);
+	    return currDate.getTime();
     }
 
     public static String toHumanReadableTimeDuration(long milliseconds) {

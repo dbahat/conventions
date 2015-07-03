@@ -6,8 +6,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import amai.org.conventions.R;
-
 public class ConventionEvent implements Serializable {
 	private int id;
     private String title;

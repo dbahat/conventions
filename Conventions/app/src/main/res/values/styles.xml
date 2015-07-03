@@ -16,15 +16,15 @@
         <item name="toolbarLogoType">svg</item>
         <item name="toolbarIconAccentColor">@color/gold</item>
 
-        <item name="appLogoHome">@drawable/logo</item>
+        <item name="appLogoHome">@drawable/harucon_logo</item>
         <item name="homeConventionNameVisibility">visible</item>
         <item name="homeConventionName">הארוקון 2015</item>
         <item name="homeConventionDate">03.05.2015</item>
         <item name="homeButtonsColor">#d6d7d7</item>
-        <item name="mapHomeImage">@drawable/map</item>
-        <item name="eventsHomeImage">@drawable/events</item>
-        <item name="updatesHomeImage">@drawable/updates</item>
-        <item name="arrivalMethodsHomeImage">@drawable/arrival_methods</item>
+        <item name="mapHomeImage">@drawable/home_harucon_map</item>
+        <item name="eventsHomeImage">@drawable/home_harucon_events</item>
+        <item name="updatesHomeImage">@drawable/home_harucon_updates</item>
+        <item name="arrivalMethodsHomeImage">@drawable/home_harucon_arrival_methods</item>
 
         <item name="eventTypeCentralColor">@color/medium_purple</item>
         <item name="eventTypeSpecialColor">@color/silver</item>
@@ -51,30 +51,41 @@
         <item name="locationDetailsBackground">@color/white</item>
         <item name="locationDetailsTopLineColor">@android:color/black</item>
 
-        <item name="eventDetailsBoxColor">#B0FFFFFF</item>
-        <item name="eventDetailsDefaultBackgroundColor">#FDB271</item>
+        <item name="eventDetailsBoxColor">@color/transparent_white</item>
+        <item name="eventDetailsDefaultBackgroundColor">@color/orange</item>
     </style>
 
     <style name="AppBaseTheme.Cami2015" parent="AppBaseTheme.Harucon2015">
-        <item name="appLogoHome">@drawable/cami_logo_border</item>
+        <item name="toolbarBackground">@color/maroon</item>
+        <item name="toolbarLogo">@drawable/cami_logo_toolbar</item>1
+        <item name="toolbarLogoType">bitmap</item>
+        <item name="toolbarIconAccentColor">@color/light_green</item>
+
+        <item name="appLogoHome">@drawable/cami_logo_home_black</item>
         <item name="logoHomeBackground">?nextEventStartTimeBackground</item>
         <item name="homeConventionNameVisibility">gone</item>
         <item name="homeConventionName">כאמ"י 2015</item>
         <item name="homeConventionDate">20.08.2015</item>
+        <item name="mapHomeImage">@drawable/home_cami_map</item>
+        <item name="eventsHomeImage">@drawable/home_cami_events</item>
+        <item name="updatesHomeImage">@drawable/home_cami_updates</item>
+        <item name="arrivalMethodsHomeImage">@drawable/home_cami_arrival_methods</item>
 
-        <item name="toolbarBackground">#6C0020</item>
-        <item name="toolbarLogo">@drawable/cami_logo_toolbar</item>1
-        <item name="toolbarLogoType">bitmap</item>
-        <item name="toolbarIconAccentColor">#CEE4A3</item>
+        <item name="eventTypeCentralColor">@color/orange</item>
+        <item name="eventTypeSpecialColor">@color/dark_orange</item>
+        <item name="eventTypeScreeningColor">@color/sky_blue</item>
+        <item name="eventTypeLectureColor">@color/light_green</item>
+        <item name="eventTypeWorkshopColor">@color/blue</item>
+        <item name="eventTypePanelColor">@color/green</item>
 
-        <item name="nextEventStartTimeBackground">#FDB271</item>
+        <item name="nextEventStartTimeBackground">@color/orange</item>
     </style>
 
     <style name="MainActivityOverlayText">
-        <item name="android:textColor">#ffffffff</item>
+        <item name="android:textColor">@color/white</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">40dp</item>
-        <item name="android:shadowColor">#442B73</item>
+        <item name="android:shadowColor">?toolbarBackground</item>
         <item name="android:shadowDx">1</item>
         <item name="android:shadowDy">1</item>
         <item name="android:shadowRadius">20</item>
@@ -89,8 +100,8 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">vertical</item>
-        <item name="android:layout_marginStart">30dp</item>
-        <item name="android:layout_marginEnd">30dp</item>
+        <item name="android:layout_marginLeft">30dp</item>
+        <item name="android:layout_marginRight">30dp</item>
         <item name="android:padding">10dp</item>
         <item name="android:background">?eventDetailsBoxColor</item>
     </style>
