@@ -216,9 +216,9 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
             i++;
         }
 
-        // If we got here it means the user selected an hour later then the last event. In this case, return the last position (which is i-1, since it's
+        // If we got here it means the selected hour is after the last event ends so no scrolling is required
         // zero based count)
-        return i - 1;
+        return -1;
     }
 
     private List<ProgrammeConventionEvent> getEventList() {

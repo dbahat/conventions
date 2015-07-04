@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <!--We will be using the toolbar so no need to show ActionBar-->
+        <item name="android:windowActionBar">false</item>
+        <item name="toolbarNavigationButtonStyle">@style/ToolbarNavigationButtonStyle</item>
+        <item name="stickyListHeadersListViewStyle">@style/Widget.AppCompat.ListView</item>
+        <item name="vpiCirclePageIndicatorStyle">@style/CustomCirclePageIndicator</item>
+
+        <item name="homeButtonsColor">@color/gray</item>
+
+        <item name="eventTypeEndedColor">@color/ultra_light_gray</item>
+        <item name="eventTypeCurrentColor">@color/light_yellow</item>
+        <item name="eventTypeNotStartedColor">@color/white</item>
+
+        <item name="nextEventStartTimeBottomLineColor">@android:color/black</item>
+        <item name="conflictingEventsBackground">@color/dark_gray</item>
+
+        <item name="navigationPopupDisabledBackground">@color/very_light_gray</item>
+
+        <item name="eventTimeHeaderColor">@color/very_light_gray</item>
+        <item name="eventTimeHeaderBackground">@color/very_light_gray</item>
+
+        <item name="updateTimeColor">@color/ultra_light_gray</item>
+        <item name="updatesBackground">@color/white</item>
+
+        <item name="locationDetailsBackground">@color/white</item>
+        <item name="locationDetailsTopLineColor">@android:color/black</item>
+
+        <item name="eventDetailsBoxColor">@color/transparent_white</item>
+    </style>
+
+    <style name="AppBaseTheme.Harucon2015">
+        <item name="toolbarBackground">@color/very_dark_purple</item>
+        <item name="toolbarLogo">@raw/harucon_toolbar_logo_border</item>
+        <item name="toolbarLogoType">svg</item>
+        <item name="toolbarIconAccentColor">@color/gold</item>
+
+        <item name="appLogoHome">@drawable/harucon_logo</item>
+        <item name="homeConventionNameVisibility">visible</item>
+        <item name="homeConventionName">הארוקון 2015</item>
+        <item name="homeConventionDate">03.05.2015</item>
+        <item name="mapHomeImage">@drawable/home_harucon_map</item>
+        <item name="eventsHomeImage">@drawable/home_harucon_events</item>
+        <item name="updatesHomeImage">@drawable/home_harucon_updates</item>
+        <item name="arrivalMethodsHomeImage">@drawable/home_harucon_arrival_methods</item>
+
+        <item name="eventTypeCentralColor">@color/medium_purple</item>
+        <item name="eventTypeSpecialColor">@color/silver</item>
+        <item name="eventTypeScreeningColor">@color/dark_purple</item>
+        <item name="eventTypeLectureColor">@color/red</item>
+        <item name="eventTypeWorkshopColor">@color/light_purple</item>
+        <item name="eventTypePanelColor">@color/yellow</item>
+
+        <item name="nextEventStartTimeBackground">@color/gold</item>
+        <item name="eventDetailsDefaultBackgroundColor">@color/white</item>
+    </style>
+
+    <style name="AppBaseTheme.Cami2015">
+        <item name="toolbarBackground">@color/maroon</item>
+        <item name="toolbarLogo">@drawable/cami_logo_toolbar</item>
+        <item name="toolbarLogoType">bitmap</item>
+        <item name="toolbarIconAccentColor">@color/light_green</item>
+
+        <item name="appLogoHome">@drawable/cami_logo_home_black</item>
+        <item name="homeConventionNameVisibility">gone</item>
+        <item name="homeConventionName">כאמ"י 2015</item>
+        <item name="homeConventionDate">20.08.2015</item>
+        <item name="mapHomeImage">@drawable/home_cami_map</item>
+        <item name="eventsHomeImage">@drawable/home_cami_events</item>
+        <item name="updatesHomeImage">@drawable/home_cami_updates</item>
+        <item name="arrivalMethodsHomeImage">@drawable/home_cami_arrival_methods</item>
+
+        <item name="eventTypeCentralColor">@color/orange</item>
+        <item name="eventTypeSpecialColor">@color/dark_orange</item>
+        <item name="eventTypeScreeningColor">@color/sky_blue</item>
+        <item name="eventTypeLectureColor">@color/light_green</item>
+        <item name="eventTypeWorkshopColor">@color/blue</item>
+        <item name="eventTypePanelColor">@color/green</item>
+
+        <item name="nextEventStartTimeBackground">@color/orange</item>
+
+        <item name="eventDetailsDefaultBackgroundColor">@color/orange</item>
+    </style>
+</resources>

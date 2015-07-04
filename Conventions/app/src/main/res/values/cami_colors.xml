@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="maroon">#6C0020</color>
+    <color name="dark_orange">#DD6C4E</color>
+    <color name="orange">#FDB271</color>
+    <color name="light_green">#CEE4A3</color>
+    <color name="blue">#5C9EB8</color>
+    <color name="sky_blue">#9ECFF0</color>
+    <color name="green">#7EC078</color>
+</resources>
