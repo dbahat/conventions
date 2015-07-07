@@ -18,7 +18,7 @@ import java.util.Date;
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.ConventionEvent;
-import amai.org.conventions.model.Dates;
+import amai.org.conventions.utils.Dates;
 
 public class EventView extends FrameLayout {
 

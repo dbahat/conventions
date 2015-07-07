@@ -2,6 +2,8 @@ package amai.org.conventions.model;
 
 import java.io.Serializable;
 
+import amai.org.conventions.utils.Objects;
+
 public class Hall implements Serializable {
     private String name;
     private int order;

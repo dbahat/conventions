@@ -33,7 +33,7 @@ import amai.org.conventions.events.adapters.SwipeableEventsViewOrHourAdapter;
 import amai.org.conventions.events.holders.EventTimeViewHolder;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
-import amai.org.conventions.model.Dates;
+import amai.org.conventions.utils.Dates;
 import amai.org.conventions.navigation.NavigationActivity;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView.OnHeaderClickListener;

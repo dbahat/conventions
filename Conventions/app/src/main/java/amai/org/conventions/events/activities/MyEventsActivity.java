@@ -17,11 +17,11 @@ import java.util.List;
 
 import amai.org.conventions.R;
 import amai.org.conventions.events.adapters.EventGroupsAdapter;
-import amai.org.conventions.model.CollectionUtils;
+import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
-import amai.org.conventions.model.Dates;
+import amai.org.conventions.utils.Dates;
 import amai.org.conventions.navigation.NavigationActivity;
 
 

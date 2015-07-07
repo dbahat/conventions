@@ -7,7 +7,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import amai.org.conventions.R;
-import amai.org.conventions.model.Dates;
+import amai.org.conventions.utils.Dates;
 
 public class UpdateViewHolder extends RecyclerView.ViewHolder {
     private static final int MAX_LINES_FOR_COLLAPSED_UPDATE = 7;

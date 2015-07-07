@@ -35,7 +35,7 @@ import java.util.List;
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.Convention;
-import amai.org.conventions.model.Dates;
+import amai.org.conventions.utils.Dates;
 import amai.org.conventions.model.Update;
 import amai.org.conventions.navigation.NavigationActivity;
 
@@ -158,7 +158,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
                             List<Update> updates = parseAndFilterFacebookFeedResult(graphResponse);
                             // Update the model, so next time we can read them from cache.
                             Convention.getInstance().setUpdates(updates);
-                            Convention.getInstance().save();
+                            Convention.getInstance().getStorage().saveUpdates();
                             initializeUpdatesList(updates);
                         }
 
@@ -182,12 +182,14 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
                 JSONObject from = post.getJSONObject("from");
                 String fromName = from.getString("name");
                 if (fromName.contains(CAMI_FACEBOOK_USERNAME) && post.has("message") && post.has("created_time") ) {
-                    Update update = new Update();
+
                     String dateString = post.getString("created_time");
                     Date date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Dates.getLocale()).parse(dateString);
-                    update.setDate(date);
 
-                    update.setText(post.getString("message"));
+                    Update update = new Update()
+                            .withDate(date)
+                            .withText(post.getString("message"));
+
                     updates.add(update);
                 }
             }

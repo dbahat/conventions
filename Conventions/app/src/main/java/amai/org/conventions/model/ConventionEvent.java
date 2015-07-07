@@ -2,12 +2,14 @@ package amai.org.conventions.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import amai.org.conventions.utils.Objects;
+
 public class ConventionEvent implements Serializable {
-	private int id;
+	private String id;
+    private int serverId;
     private String title;
     private String lecturer;
     private Date startTime;
@@ -35,15 +37,23 @@ public class ConventionEvent implements Serializable {
 //    private int peopleAttending;
 
 
-	public ConventionEvent(int id) {
-		this.id = id;
+	public ConventionEvent() {
 		images = new ArrayList<>();
 		userInput = new UserInput();
 	}
 
-	public int getId() {
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
 		return id;
 	}
+
+    public ConventionEvent withId(String id) {
+        setId(id);
+        return this;
+    }
 
 	public String getTitle() {
         return title;
@@ -144,8 +154,8 @@ public class ConventionEvent implements Serializable {
 		this.images = images;
 	}
 
-	public ConventionEvent withImages(Integer... images) {
-		setImages(Arrays.asList(images));
+	public ConventionEvent withImages(List<Integer> images) {
+		setImages(images);
 		return this;
 	}
 
@@ -157,7 +167,20 @@ public class ConventionEvent implements Serializable {
 		this.userInput = userInput;
 	}
 
-	@Override
+    public int getServerId() {
+        return serverId;
+    }
+
+    public void setServerId(int serverId) {
+        this.serverId = serverId;
+    }
+
+    public ConventionEvent withServerId(int serverId) {
+        setServerId(serverId);
+        return this;
+    }
+
+    @Override
 	public boolean equals(Object o) {
 		if (o instanceof ConventionEvent) {
 			ConventionEvent other = (ConventionEvent) o;
@@ -167,14 +190,15 @@ public class ConventionEvent implements Serializable {
 					Objects.equals(endTime, other.endTime) &&
 					Objects.equals(type, other.type) &&
 					Objects.equals(hall, other.hall) &&
-					Objects.equals(userInput, other.userInput);
+					Objects.equals(userInput, other.userInput) &&
+                    Objects.equals(serverId, other.serverId);
 		}
 		return false;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(title, lecturer, startTime, endTime, type, hall, userInput);
+		return Objects.hash(title, lecturer, startTime, endTime, type, hall, userInput, serverId);
 	}
 
 	public static class UserInput implements Serializable {

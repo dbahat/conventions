@@ -1,4 +1,4 @@
-package amai.org.conventions.model;
+package amai.org.conventions.utils;
 
 public class Objects {
 	public static <T> boolean equals(T o1, T o2) {

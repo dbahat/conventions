@@ -9,7 +9,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import amai.org.conventions.R;
-import amai.org.conventions.model.Dates;
+import amai.org.conventions.utils.Dates;
 
 public class EventTimeViewHolder extends RecyclerView.ViewHolder {
     private TextView timeTextView;

@@ -1,5 +1,7 @@
 package amai.org.conventions.model;
 
+import android.util.Log;
+
 import amai.org.conventions.R;
 
 public enum EventType {
@@ -26,4 +28,24 @@ public enum EventType {
 	public String getDescription() {
 		return description;
 	}
+
+    public static EventType parse(int eventTypeId) {
+        switch (eventTypeId) {
+            case 16:
+                return EventType.Lecture;
+            case 17:
+                return EventType.Workshop;
+            case 18:
+                return EventType.Panel;
+            case 19:
+                return EventType.Screening;
+            case 20:
+                return EventType.Central;
+            case 21:
+                return EventType.Special;
+
+            default:
+                return EventType.Central;
+        }
+    }
 }

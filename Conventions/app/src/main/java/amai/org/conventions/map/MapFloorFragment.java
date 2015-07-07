@@ -35,7 +35,7 @@ import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
 import amai.org.conventions.model.ConventionMap;
-import amai.org.conventions.model.Dates;
+import amai.org.conventions.utils.Dates;
 import amai.org.conventions.model.Floor;
 import amai.org.conventions.model.MapLocation;
 

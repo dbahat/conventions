@@ -184,7 +184,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 
     public void onConventionEventClicked(View view) {
         Intent intent = new Intent(this, EventActivity.class);
-        intent.putExtra(EventActivity.EXTRA_EVENT_ID, (int) view.getTag());
+        intent.putExtra(EventActivity.EXTRA_EVENT_ID, (String) view.getTag());
         startActivity(intent);
         overridePendingTransition(0, 0);
     }

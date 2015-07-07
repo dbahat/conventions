@@ -1,4 +1,4 @@
-package amai.org.conventions.model;
+package amai.org.conventions.utils;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

@@ -22,7 +22,7 @@ public class EventSwipeToDismissListener implements Runnable {
 	@Override
 	public void run() {
 		viewHolder.getModel().setAttending(false);
-		Convention.getInstance().save();
+		Convention.getInstance().getStorage().saveUserInput();
 
 		eventsList.remove(viewHolder.getAdapterPosition());
 		adapter.notifyItemRemoved(viewHolder.getAdapterPosition());

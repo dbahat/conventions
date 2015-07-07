@@ -63,7 +63,7 @@ public class SwipeableEventsViewOrHourAdapter extends BaseAdapter implements Sti
 		        event.setAttending(!isAttending);
 
 		        // Save the changes
-		        Convention.getInstance().save();
+		        Convention.getInstance().getStorage().saveUserInput();
 
 		        // Notify the list view to redraw the UI so the new favorite icon state will apply
 		        // for all views of this event

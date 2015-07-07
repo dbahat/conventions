@@ -1,4 +1,4 @@
-package amai.org.conventions.model;
+package amai.org.conventions.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -7,6 +7,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import amai.org.conventions.model.Convention;
 
 public class Dates {
 
@@ -111,6 +113,20 @@ public class Dates {
 
     public static String formatHoursAndMinutes(Date date) {
         return new SimpleDateFormat("HH:mm", getLocale()).format(date);
+    }
+
+    public static Date parseHourAndMinute(String date) {
+        try {
+            Date hourAndMinute = new SimpleDateFormat("HH:mm:ss", getLocale()).parse(date);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(hourAndMinute);
+            calendar.set(Convention.getInstance().getDate().get(Calendar.YEAR),
+                    Convention.getInstance().getDate().get(Calendar.MONTH),
+                    Convention.getInstance().getDate().get(Calendar.DAY_OF_MONTH));
+            return calendar.getTime();
+        } catch (ParseException e) {
+            return new Date();
+        }
     }
 
 	public static Locale getLocale() {

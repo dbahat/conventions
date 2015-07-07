@@ -5,6 +5,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.graphics.Palette;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,7 +24,7 @@ import amai.org.conventions.map.MapActivity;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
-import amai.org.conventions.model.Dates;
+import amai.org.conventions.utils.Dates;
 import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.navigation.NavigationActivity;
 import uk.co.chrisjenx.paralloid.views.ParallaxScrollView;
@@ -43,7 +44,7 @@ public class EventActivity extends NavigationActivity {
 
 		imagesLayout = (LinearLayout) findViewById(R.id.images_layout);
 
-        int eventId = getIntent().getIntExtra(EXTRA_EVENT_ID, 0);
+        String eventId = getIntent().getStringExtra(EXTRA_EVENT_ID);
         conventionEvent = Convention.getInstance().findEventById(eventId);
         setEvent(conventionEvent);
 
@@ -142,7 +143,7 @@ public class EventActivity extends NavigationActivity {
                     item.setTitle(getResources().getString(R.string.event_remove_from_favorites));
                     Toast.makeText(this, getString(R.string.event_added_to_favorites), Toast.LENGTH_SHORT).show();
                 }
-                Convention.getInstance().save();
+                Convention.getInstance().getStorage().saveUserInput();
                 return true;
             case R.id.event_navigate_to_map:
                 // Navigate to the map floor associated with this event
@@ -176,7 +177,7 @@ public class EventActivity extends NavigationActivity {
         hallName.setText(event.getHall().getName());
         TextView lecturerName = (TextView) findViewById(R.id.event_lecturer);
         String lecturer = event.getLecturer();
-        if (lecturer == null) {
+        if (lecturer == null || lecturer.length() == 0) {
             lecturerName.setVisibility(View.GONE);
         } else {
             lecturerName.setText(lecturer);
@@ -208,13 +209,17 @@ public class EventActivity extends NavigationActivity {
 		}
 
         TextView description = (TextView) findViewById(R.id.event_description);
-        String eventDescription = event.getDescription();
-        if (eventDescription == null) {
-            eventDescription = "<p>" + event.getTitle() + "</p>";
-	        if (event.getLecturer() != null && !event.getLecturer().isEmpty()) {
-		        eventDescription += "<p><b>" + "מאת: " + "</b>" + event.getLecturer() + "</p>";
-	        }
-        }
+
+		// Enable internal links from HTML <a> tags within the description textView.
+		description.setMovementMethod(LinkMovementMethod.getInstance());
+
+		String eventDescription = event.getDescription()
+				// Translate new lines into html <br> tags
+				.replace("\n", "<BR/>")
+				// Replace images in the description text with some other non-visible tag (e.g. div)
+				.replace("<img", "<div")
+				.replace("/img>", "/div>");
+
         description.setText(Html.fromHtml(eventDescription));
     }
 }
