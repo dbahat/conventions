@@ -35,12 +35,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void onNavigationButtonClicked(View view) {
-        // Note - We assume here the UI layout is a ViewGroup with 2 children, where the second one is a text view with the navigation page string
-        // resource. If this assumption changes the code here needs to be adjusted accordingly.
-	    ViewGroup mainGroup = (ViewGroup) view;
-        TextView textView = (TextView) mainGroup.getChildAt(1);
-
-        int position = navigationPages.getPosition(textView.getText().toString());
+        int position = Integer.parseInt(view.getTag().toString());
         Intent intent = new Intent(this, navigationPages.getActivityType(position));
         startActivity(intent);
     }

@@ -64,7 +64,7 @@
         <item name="toolbarLogoType">bitmap</item>
         <item name="toolbarIconAccentColor">@color/light_green</item>
 
-        <item name="appLogoHome">@drawable/cami_logo_home_black</item>
+        <item name="appLogoHome">@drawable/cami_logo</item>
         <item name="homeConventionNameVisibility">gone</item>
         <item name="homeConventionName">כאמ"י 2015</item>
         <item name="homeConventionDate">20.08.2015</item>

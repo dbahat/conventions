@@ -5,7 +5,8 @@
     tools:context=".HomeActivity"
     android:padding="16dp"
     android:orientation="vertical"
-    android:layoutDirection="rtl">
+    android:layoutDirection="rtl"
+    android:background="@color/maroon">
 
     <LinearLayout
         android:id="@+id/home_top_bar"
@@ -17,34 +18,9 @@
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="80dp"
+            android:layout_height="130dp"
             android:src="?appLogoHome"
             android:padding="5dp"/>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_weight="1"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            android:layout_gravity="center">
-
-            <TextView
-                android:id="@+id/home_convention_title"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="?homeConventionName"
-                android:visibility="?homeConventionNameVisibility"
-                android:layout_gravity="center"/>
-
-            <TextView
-                android:id="@+id/home_convention_date"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="?homeConventionDate"
-                android:layout_gravity="center"/>
-        </LinearLayout>
 
     </LinearLayout>
 
@@ -67,7 +43,8 @@
                 android:padding="5dp"
                 android:layout_margin="5dp"
                 android:onClick="onNavigationButtonClicked"
-                android:background="?homeButtonsColor">
+                android:background="@color/orange"
+                android:tag="1">
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -75,11 +52,6 @@
                     android:src="?eventsHomeImage"
                     android:scaleType="fitCenter"
                     />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/events"
-                    style="@style/MainActivityOverlayText"/>
             </FrameLayout>
 
             <FrameLayout
@@ -89,7 +61,8 @@
                 android:padding="5dp"
                 android:layout_margin="5dp"
                 android:onClick="onNavigationButtonClicked"
-                android:background="?homeButtonsColor">
+                android:background="@color/dark_orange"
+                android:tag="0">
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -97,11 +70,6 @@
                     android:src="?mapHomeImage"
                     android:scaleType="fitCenter"
                     />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/map"
-                    style="@style/MainActivityOverlayText"/>
             </FrameLayout>
 
         </LinearLayout>
@@ -119,7 +87,8 @@
                 android:padding="5dp"
                 android:layout_margin="5dp"
                 android:onClick="onNavigationButtonClicked"
-                android:background="?homeButtonsColor">
+                android:background="@color/light_green"
+                android:tag="2">
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -127,11 +96,6 @@
                     android:src="?updatesHomeImage"
                     android:scaleType="fitCenter"
                     />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/updates"
-                    style="@style/MainActivityOverlayText"/>
             </FrameLayout>
 
             <FrameLayout
@@ -141,7 +105,8 @@
                 android:padding="5dp"
                 android:layout_margin="5dp"
                 android:onClick="onNavigationButtonClicked"
-                android:background="?homeButtonsColor">
+                android:background="@color/blue"
+                android:tag="3">
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -149,11 +114,6 @@
                     android:src="?arrivalMethodsHomeImage"
                     android:scaleType="fitCenter"
                     />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/arrivalMethods"
-                    style="@style/MainActivityOverlayText"/>
             </FrameLayout>
 
         </LinearLayout>
