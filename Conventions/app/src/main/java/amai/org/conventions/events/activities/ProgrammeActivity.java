@@ -36,8 +36,7 @@ import amai.org.conventions.events.adapters.SwipeableEventsViewOrHourAdapter;
 import amai.org.conventions.events.holders.EventTimeViewHolder;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
-import amai.org.conventions.networking.ModelRetriever;
-import amai.org.conventions.utils.CollectionUtils;
+import amai.org.conventions.networking.ModelRefresher;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.navigation.NavigationActivity;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
@@ -292,8 +291,8 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
 
             @Override
             protected Boolean doInBackground(Void... params) {
-                ModelRetriever modelRetriever = new ModelRetriever();
-                return modelRetriever.retrieveFromServer();
+                ModelRefresher modelRefresher = new ModelRefresher();
+                return modelRefresher.refreshFromServer();
             }
 
             @Override

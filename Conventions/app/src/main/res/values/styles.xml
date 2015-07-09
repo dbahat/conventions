@@ -18,10 +18,15 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">vertical</item>
-        <item name="android:layout_marginLeft">30dp</item>
-        <item name="android:layout_marginRight">30dp</item>
-        <item name="android:padding">10dp</item>
+        <item name="android:layout_marginLeft">@dimen/event_details_box_side_margins</item>
+        <item name="android:layout_marginRight">@dimen/event_details_box_side_margins</item>
+        <item name="android:padding">@dimen/event_details_box_padding</item>
         <item name="android:background">?eventDetailsBoxColor</item>
+    </style>
+
+    <style name="EventDetailsBox.Feedback">
+        <item name="android:padding">0dp</item>
+        <item name="android:background">?eventFeedbackBoxColor</item>
     </style>
 
     <style name="CustomCirclePageIndicator">
@@ -41,5 +46,22 @@
     <style name="EventViewSmallText">
         <item name="android:textSize">14dp</item>
     </style>
+
+    <style name="EventFeedbackButton" parent="@style/Widget.AppCompat.Button.Borderless">
+        <item name="android:textColor">?toolbarBackground</item>
+        <item name="android:minHeight">@null</item>
+        <item name="android:minWidth">@null</item>
+        <item name="android:padding">@null</item>
+        <item name="android:layout_margin">@null</item>
+        <item name="android:gravity">top</item>
+    </style>
+
+    <style name="EventAnswerButton" parent="TextAppearance.AppCompat.Button">
+        <item name="android:textColor">?feedbackAnswerButtonColor</item>
+    </style>
+    <style name="EventAnswerButtonHighlighted" parent="TextAppearance.AppCompat.Button">
+        <item name="android:textColor">?feedbackAnswerButtonSelectedColor</item>
+    </style>
+
 
 </resources>

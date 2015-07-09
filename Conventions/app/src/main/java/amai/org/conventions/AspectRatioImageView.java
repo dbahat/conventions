@@ -3,9 +3,8 @@ package amai.org.conventions;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.view.ViewGroup;
 import android.widget.ImageView;
-
-import com.manuelpeinado.imagelayout.ImageLayout;
 
 public class AspectRatioImageView extends ImageView {
 	public AspectRatioImageView(Context context) {
@@ -30,7 +29,7 @@ public class AspectRatioImageView extends ImageView {
 
 		int width;
 		int height;
-		if (getWidth() != ImageLayout.LayoutParams.WRAP_CONTENT) {
+		if (getWidth() != ViewGroup.LayoutParams.WRAP_CONTENT) {
 			width = getMeasuredWidth();
 			height = (int) (width * drawable.getIntrinsicHeight() / (float) drawable.getIntrinsicWidth());
 		} else {

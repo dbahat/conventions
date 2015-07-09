@@ -1,10 +1,11 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layoutDirection="rtl"
-    android:id="@+id/event_main_layout"
-    tools:context="amai.org.conventions.events.activities.EventActivity">
+             xmlns:tools="http://schemas.android.com/tools"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:layoutDirection="rtl"
+             android:id="@+id/event_main_layout"
+             tools:context="amai.org.conventions.events.activities.EventActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -56,30 +57,119 @@
                     android:layout_height="wrap_content"
                     style="@style/TextAppearance.AppCompat.Title"/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/event_hall_and_time"
+                    android:text="hall and time"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingTop="10dp">
+                    android:paddingTop="10dp"
+                    style="@style/TextAppearance.AppCompat.Subhead"/>
+            </LinearLayout>
 
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            style="@style/EventDetailsBox.Feedback">
+
+            <LinearLayout
+                android:id="@+id/feedback_closed"
+                android:onClick="openFeedback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/event_details_box_padding"
+                android:orientation="horizontal">
+                <TextView
+                    android:paddingTop="@dimen/event_details_box_padding"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextAppearance.AppCompat.Subhead"
+                    android:text="@string/event_has_ended"/>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:paddingTop="@dimen/event_details_box_padding"
+                        android:paddingEnd="@dimen/event_details_box_padding"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|end"
+                        style="@style/EventFeedbackButton"
+                        android:onClick="openFeedback"
+                        android:text="@string/add_feedback"/>
+
+                </FrameLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/feedback_open"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:onClick="closeFeedback"
+                    android:paddingStart="@dimen/event_details_box_padding"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                     <TextView
-                        android:id="@+id/event_hall_name"
-                        android:text="hall name"
+                        android:paddingTop="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         style="@style/TextAppearance.AppCompat.Subhead"
-                        />
+                        android:text="@string/feedback"/>
 
-                    <TextView
-                        android:id="@+id/event_time"
-                        android:text="time"
-                        android:layout_marginStart="10dp"
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <Button
+                            android:paddingTop="@dimen/event_details_box_padding"
+                            android:paddingEnd="@dimen/event_details_box_padding"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:gravity="end"
+                            style="@style/EventFeedbackButton"
+                            android:onClick="closeFeedback"
+                            android:text="@string/close_feedback"/>
+
+                    </FrameLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:padding="@dimen/event_details_box_padding"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/questions_layout"
+                    android:orientation="vertical"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="@dimen/event_details_box_padding"
+                    android:layout_marginEnd="@dimen/event_details_box_padding"
+                    android:layout_marginTop="@dimen/event_details_box_padding"
+                    android:layout_height="1dp"
+                    android:background="@android:color/black"
+                    android:alpha="0.1"/>
+                <LinearLayout
+                    android:paddingEnd="@dimen/event_details_box_padding"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="@style/TextAppearance.AppCompat.Subhead"/>
+                        android:text="@string/send"
+                        android:background="@drawable/feedback_highlighted_button"
+                        android:textColor="@color/white"
+                        style="@style/EventFeedbackButton"/>
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/share_on_facebook"
+                        style="@style/EventFeedbackButton"/>
 
                 </LinearLayout>
             </LinearLayout>
+        </LinearLayout>
 
             <LinearLayout
                 android:layout_marginTop="10dp"

@@ -14,6 +14,8 @@ import java.util.Locale;
 import java.util.Map;
 
 class AssetsExternalFileResolver extends SVGExternalFileResolver {
+	private static final String TAG = AssetsExternalFileResolver.class.getCanonicalName();
+
 	// Cache for created fonts
 	private Map<String, Typeface> fonts = new HashMap<>();
 	private Context context;
@@ -32,7 +34,7 @@ class AssetsExternalFileResolver extends SVGExternalFileResolver {
 			fonts.put(fontFamily, font);
 			return font;
 		} catch (Exception e) {
-			Log.e("amai", "error when creating font " + fontFamily.toLowerCase(Locale.ENGLISH) + ".ttf" + " from assets: " + e.getMessage());
+			Log.e(TAG, "error when creating font " + fontFamily.toLowerCase(Locale.ENGLISH) + ".ttf" + " from assets: " + e.getMessage());
 			// Cache the failure
 			fonts.put(fontFamily, null);
 			return null;
@@ -45,7 +47,7 @@ class AssetsExternalFileResolver extends SVGExternalFileResolver {
 			InputStream istream = context.getAssets().open(filename);
 			return BitmapFactory.decodeStream(istream);
 		} catch (Exception e) {
-			Log.e("amai", "error when creating bitmap for " + filename + " from assets: " + e.getMessage());
+			Log.e(TAG, "error when creating bitmap for " + filename + " from assets: " + e.getMessage());
 			return null;
 		}
 	}

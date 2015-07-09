@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">כאמ"י 2015</string>
+    <string name="app_name">כאמ\"י 2015</string>
 
     <string name="map_floor">קומה</string>
 
@@ -21,4 +21,18 @@
     <string name="my_events_no_data">הוסף אירוע לאירועים שלי ע\"י לחיצה על הכוכב בדף האירוע או ע\"י גריריתו ברשימת האירועים</string>
 
     <string name="select_hour_ok">הצג שעה</string>
+
+    <string name="question_enjoyment">האם נהנית באירוע?</string>
+    <string name="question_lecturer_quality">ההנחיה באירוע היתה:</string>
+    <string name="question_similar_events">האם תרצה לבוא לאירועים דומים בעתיד?</string>
+    <string name="question_additional_info">עוד משהו?</string>
+    <string name="event_has_ended">האירוע נגמר</string>
+    <string name="add_feedback">מלא פידבק</string>
+    <string name="feedback">פידבק</string>
+    <string name="close_feedback">הסתר</string>
+    <string name="send">שלח לאמא\"י</string>
+    <string name="share_on_facebook">שתף בפייסבוק</string>
+
+    <string name="yes">כן</string>
+    <string name="no">לא</string>
 </resources>

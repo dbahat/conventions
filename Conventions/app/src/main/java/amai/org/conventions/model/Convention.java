@@ -45,7 +45,8 @@ public class Convention implements Serializable {
         this.conventionStorage = new ConventionStorage();
 
         this.date = Calendar.getInstance();
-        this.date.set(2015, 20, 8);
+	    this.date.clear();
+        this.date.set(2015, Calendar.AUGUST, 20);
 
         Floor floor1 = new Floor(1).withName("מפלס תחתון - כניסה").withImageResource(R.raw.floor1).withMarkerWidth(11);
         Floor floor2 = new Floor(2).withName("מפלס עליון - אולם ראשי").withImageResource(R.raw.floor2).withMarkerWidth(13);

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import amai.org.conventions.R;
+import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Objects;
 
 public class ConventionEvent implements Serializable {
@@ -27,7 +29,7 @@ public class ConventionEvent implements Serializable {
     }
 
     public ConventionEvent withDescription(String description) {
-        this.description = description;
+        setDescription(description);
         return this;
     }
 
@@ -167,6 +169,14 @@ public class ConventionEvent implements Serializable {
 		this.userInput = userInput;
 	}
 
+	public boolean hasStarted() {
+		return startTime.before(Dates.now());
+	}
+
+	public boolean hasEnded() {
+		return endTime.before(Dates.now());
+	}
+
     public int getServerId() {
         return serverId;
     }
@@ -203,8 +213,16 @@ public class ConventionEvent implements Serializable {
 
 	public static class UserInput implements Serializable {
 		private boolean attending;
-//    private Feedback feedback;
+        private Feedback feedback;
 
+		public UserInput() {
+			feedback = new Feedback().withQuestions(
+					new Feedback.Question(R.string.question_enjoyment, Feedback.Question.AnswerType.SMILEY_3_POINTS),
+					new Feedback.Question(R.string.question_lecturer_quality, Feedback.Question.AnswerType.SMILEY_3_POINTS),
+					new Feedback.Question(R.string.question_similar_events, Feedback.Question.AnswerType.SMILEY_3_POINTS),
+					new Feedback.Question(R.string.question_additional_info, Feedback.Question.AnswerType.TEXT)
+			);
+		}
 
 		public boolean isAttending() {
 			return attending;
@@ -212,6 +230,10 @@ public class ConventionEvent implements Serializable {
 
 		public void setAttending(boolean attending) {
 			this.attending = attending;
+		}
+
+		public Feedback getFeedback() {
+			return feedback;
 		}
 
 		@Override

@@ -1,21 +1,30 @@
 package amai.org.conventions.events.activities;
 
 import android.graphics.Bitmap;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.graphics.Palette;
 import android.text.Html;
+import android.text.InputType;
+import android.util.Log;
 import android.text.method.LinkMovementMethod;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import amai.org.conventions.AspectRatioImageView;
@@ -24,6 +33,7 @@ import amai.org.conventions.map.MapActivity;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
+import amai.org.conventions.model.Feedback;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.navigation.NavigationActivity;
@@ -36,6 +46,8 @@ public class EventActivity extends NavigationActivity {
 
     private ConventionEvent conventionEvent;
 	private LinearLayout imagesLayout;
+	private View feedbackClosed;
+	private View feedbackOpen;
 
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +55,8 @@ public class EventActivity extends NavigationActivity {
         setContentInContentContainer(R.layout.activity_event);
 
 		imagesLayout = (LinearLayout) findViewById(R.id.images_layout);
+		feedbackClosed = findViewById(R.id.feedback_closed);
+		feedbackOpen = findViewById(R.id.feedback_open);
 
         String eventId = getIntent().getStringExtra(EXTRA_EVENT_ID);
         conventionEvent = Convention.getInstance().findEventById(eventId);
@@ -168,13 +182,11 @@ public class EventActivity extends NavigationActivity {
     }
 
 	private void setEvent(ConventionEvent event) {
-
         setToolbarTitle(event.getType().getDescription());
 
         TextView title = (TextView) findViewById(R.id.event_title);
         title.setText(event.getTitle());
-        TextView hallName = (TextView) findViewById(R.id.event_hall_name);
-        hallName.setText(event.getHall().getName());
+
         TextView lecturerName = (TextView) findViewById(R.id.event_lecturer);
         String lecturer = event.getLecturer();
         if (lecturer == null || lecturer.length() == 0) {
@@ -182,14 +194,173 @@ public class EventActivity extends NavigationActivity {
         } else {
             lecturerName.setText(lecturer);
         }
-        TextView time = (TextView) findViewById(R.id.event_time);
 
-        String formattedEventTime = String.format("%s - %s (%s)",
+        TextView time = (TextView) findViewById(R.id.event_hall_and_time);
+
+        String formattedEventTime = String.format("%s, %s - %s (%s)",
+		        event.getHall().getName(),
                 Dates.formatHoursAndMinutes(event.getStartTime()),
                 Dates.formatHoursAndMinutes(event.getEndTime()),
                 Dates.toHumanReadableTimeDuration(event.getEndTime().getTime() - event.getStartTime().getTime()));
         time.setText(formattedEventTime);
 
+		setupFeedback(event);
+
+		setupBackgroundImages(event);
+
+        TextView description = (TextView) findViewById(R.id.event_description);
+
+		// Enable internal links from HTML <a> tags within the description textView.
+		description.setMovementMethod(LinkMovementMethod.getInstance());
+
+		String eventDescription = event.getDescription()
+				// Translate new lines into html <br> tags
+				.replace("\n", "<BR/>")
+				// Replace images in the description text with some other non-visible tag (e.g. div)
+				.replace("<img", "<div")
+				.replace("/img>", "/div>");
+
+        description.setText(Html.fromHtml(eventDescription));
+    }
+
+	private void setupFeedback(ConventionEvent event) {
+		closeFeedback(null);
+
+		LinearLayout questionsLayout = (LinearLayout) findViewById(R.id.questions_layout);
+		for (Feedback.Question question : event.getUserInput().getFeedback().getQuestions()) {
+			questionsLayout.addView(buildQuestionView(question));
+		}
+	}
+
+	private View buildQuestionView(Feedback.Question question) {
+		LinearLayout questionLayout = new LinearLayout(this);
+		LinearLayout.LayoutParams questionLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		questionLayoutParams.setMargins(0, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, getResources().getDisplayMetrics()), 0, 0);
+		questionLayout.setLayoutParams(questionLayoutParams);
+
+		TextView questionText = new TextView(this);
+		questionText.setTextAppearance(this, R.style.TextAppearance_AppCompat_Body1);
+		questionText.setText(question.getStringId());
+
+		View answerView = null;
+		int layoutOrientation = LinearLayout.VERTICAL;
+
+		switch (question.getAnswerType()) {
+			case TEXT: {
+				EditText editText = new EditText(this);
+				editText.setFreezesText(true);
+				editText.setInputType(
+						InputType.TYPE_CLASS_TEXT |
+								InputType.TYPE_TEXT_FLAG_AUTO_CORRECT |
+								InputType.TYPE_TEXT_VARIATION_LONG_MESSAGE |
+								InputType.TYPE_TEXT_FLAG_MULTI_LINE |
+								InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS
+				);
+				LinearLayout.LayoutParams editTextLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+				editText.setLayoutParams(editTextLayoutParams);
+				editText.setTextAppearance(this, R.style.TextAppearance_AppCompat_Body1);
+
+				answerView = editText;
+				break;
+			}
+			case SMILEY_3_POINTS: {
+				LinearLayout imagesLayout = new LinearLayout(this);
+				imagesLayout.setOrientation(LinearLayout.HORIZONTAL);
+				int margin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, getResources().getDisplayMetrics());
+				int size = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics());
+
+				ColorMatrix matrix = new ColorMatrix();
+				matrix.setSaturation(0);
+				final ColorMatrixColorFilter grayscale = new ColorMatrixColorFilter(matrix);
+
+				final ImageView negativeRating = new ImageView(this);
+				LinearLayout.LayoutParams negativeLayoutParams = new LinearLayout.LayoutParams(size, size);
+				negativeLayoutParams.setMarginEnd(margin);
+				negativeRating.setLayoutParams(negativeLayoutParams);
+				negativeRating.setImageResource(R.drawable.negative_rating);
+				negativeRating.setColorFilter(grayscale);
+				imagesLayout.addView(negativeRating);
+
+				final ImageView positiveRating = new AspectRatioImageView(this);
+				LinearLayout.LayoutParams positiveLayoutParams = new LinearLayout.LayoutParams(size, size);
+				positiveLayoutParams.setMarginEnd(margin);
+				positiveRating.setLayoutParams(positiveLayoutParams);
+				positiveRating.setImageResource(R.drawable.positive_rating);
+				positiveRating.setColorFilter(grayscale);
+				imagesLayout.addView(positiveRating);
+
+				final ImageView veryPositiveRating = new AspectRatioImageView(this);
+				LinearLayout.LayoutParams veryPositiveLayoutParams = new LinearLayout.LayoutParams(size, size);
+				veryPositiveLayoutParams.setMarginEnd(margin);
+				veryPositiveRating.setLayoutParams(veryPositiveLayoutParams);
+				veryPositiveRating.setImageResource(R.drawable.very_positive_rating);
+				veryPositiveRating.setColorFilter(grayscale);
+				imagesLayout.addView(veryPositiveRating);
+
+				View.OnClickListener listener = new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						List<ImageView> otherImages = new ArrayList<>(Arrays.asList(negativeRating, positiveRating, veryPositiveRating));
+						for (ImageView otherImage : otherImages) {
+							otherImage.setColorFilter(grayscale);
+						}
+
+						ImageView selected = (ImageView) v;
+						selected.setColorFilter(getResources().getColor(R.color.yellow), PorterDuff.Mode.MULTIPLY);
+					}
+				};
+				negativeRating.setOnClickListener(listener);
+				positiveRating.setOnClickListener(listener);
+				veryPositiveRating.setOnClickListener(listener);
+
+				answerView = imagesLayout;
+				break;
+			}
+			case YES_NO: {
+				LinearLayout buttonsLayout = new LinearLayout(this);
+				buttonsLayout.setOrientation(LinearLayout.HORIZONTAL);
+
+				final TextView yesButton = new TextView(this);
+				yesButton.setTextAppearance(this, R.style.EventFeedbackButton);
+				yesButton.setText(R.string.yes);
+				int padding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics());
+				yesButton.setPaddingRelative(0, padding, padding * 4, padding);
+				buttonsLayout.addView(yesButton);
+
+				final TextView noButton = new TextView(this);
+				noButton.setTextAppearance(this, R.style.EventFeedbackButton);
+				noButton.setText(R.string.no);
+				noButton.setPaddingRelative(padding * 4, padding, padding * 4, padding);
+				buttonsLayout.addView(noButton);
+
+				View.OnClickListener listener = new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						TextView selected = (TextView) v;
+						selected.setTextAppearance(EventActivity.this, R.style.EventAnswerButtonHighlighted);
+
+						TextView otherButton = (selected == yesButton ? noButton : yesButton);
+						otherButton.setTextAppearance(EventActivity.this, R.style.EventFeedbackButton);
+					}
+				};
+				yesButton.setOnClickListener(listener);
+				noButton.setOnClickListener(listener);
+
+				answerView = buttonsLayout;
+				break;
+			}
+		}
+
+		questionLayout.setOrientation(layoutOrientation);
+		questionLayout.addView(questionText);
+		if (answerView != null) {
+			questionLayout.addView(answerView);
+		}
+
+		return questionLayout;
+	}
+
+	private void setupBackgroundImages(ConventionEvent event) {
 		// Add images to the layout
 		List<Integer> images = event.getImages();
 		boolean first = true;
@@ -207,19 +378,15 @@ public class EventActivity extends NavigationActivity {
 			imageView.setImageResource(imageId);
 			imagesLayout.addView(imageView);
 		}
+	}
 
-        TextView description = (TextView) findViewById(R.id.event_description);
+	public void openFeedback(View view) {
+		feedbackClosed.setVisibility(View.GONE);
+		feedbackOpen.setVisibility(View.VISIBLE);
+	}
 
-		// Enable internal links from HTML <a> tags within the description textView.
-		description.setMovementMethod(LinkMovementMethod.getInstance());
-
-		String eventDescription = event.getDescription()
-				// Translate new lines into html <br> tags
-				.replace("\n", "<BR/>")
-				// Replace images in the description text with some other non-visible tag (e.g. div)
-				.replace("<img", "<div")
-				.replace("/img>", "/div>");
-
-        description.setText(Html.fromHtml(eventDescription));
-    }
+	public void closeFeedback(View view) {
+		feedbackOpen.setVisibility(View.GONE);
+		feedbackClosed.setVisibility(View.VISIBLE);
+	}
 }

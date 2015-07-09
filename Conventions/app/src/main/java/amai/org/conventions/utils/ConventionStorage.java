@@ -1,23 +1,26 @@
 package amai.org.conventions.utils;
 
 import android.content.Context;
+import android.util.Log;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+import amai.org.conventions.R;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.Update;
 
 public class ConventionStorage {
+	private static final String TAG = ConventionStorage.class.getCanonicalName();
+
     private static final String EVENT_USER_INPUT_FILE_NAME = "convention_data_user_input";
     private static final String UPDATES_FILE_NAME = "convention_updates";
     private static final String EVENTS_FILE_NAME = "convention_events";
@@ -41,12 +44,11 @@ public class ConventionStorage {
         saveFile(Convention.getInstance().getUpdates(), UPDATES_FILE_NAME);
     }
 
-    public void saveEvents() {
+    public void saveEvents(List<ConventionEvent> events) {
         filesystemAccessLock.writeLock().lock();
         try {
-            saveFile(Convention.getInstance().getEvents(), EVENTS_FILE_NAME);
-        }
-        finally {
+            saveFile(events, EVENTS_FILE_NAME);
+        } finally {
             filesystemAccessLock.writeLock().unlock();
         }
     }
@@ -77,9 +79,16 @@ public class ConventionStorage {
 
     private static void readEventsFromLocalResources() {
         // No need to lock here, since we only read from the resources and only during app launch.
-        Object result = readResource(EVENTS_FILE_NAME);
+	    Object result = null;
+	    try {
+	        result = readFile(context.getResources().openRawResource(R.raw.convention_events));
+	    } catch (Exception e) {
+		    Log.e(TAG, "Could not read initial application events cache", e);
+	    }
+
+	    // We will load it from the internet if possible
         if (result == null) {
-            throw new AssertionError("The initial application events cache is missing");
+	        result = new ArrayList<ConventionEvent>();
         }
 
         @SuppressWarnings("unchecked")
@@ -92,8 +101,7 @@ public class ConventionStorage {
         Object result = null;
         try {
             result = readFile(EVENT_USER_INPUT_FILE_NAME);
-        }
-        finally {
+        } finally {
             filesystemAccessLock.readLock().unlock();
         }
 
@@ -120,10 +128,9 @@ public class ConventionStorage {
             os.writeObject(objectToSave);
             os.close();
             fos.close();
-
-        } catch (IOException e) {
-            // Nothing we can do... don't crash the app. Maybe show error message?
-            e.printStackTrace();
+        } catch (Exception e) {
+            // Nothing we can do... don't crash the app.
+	        Log.e(TAG, "File " + fileName + " could not be saved", e);
         }
     }
 
@@ -141,35 +148,21 @@ public class ConventionStorage {
     private static Object readFile(String fileName) {
         try {
             return readFile(context.openFileInput(fileName));
-        } catch (FileNotFoundException f) {
+        } catch (Exception e) {
             // Ignore - default user input will be created from hard-coded data
+	        Log.i(TAG, "Could not read file " + fileName + ": " + e.getMessage());
             return null;
         }
     }
 
-    private static Object readResource(String fileName) {
-        try {
-            return readFile(context.getAssets().open(fileName));
-        } catch (IOException e) {
-            // Ignore - default user input will be created from hard-coded data
-            return null;
-        }
-    }
-
-    private static Object readFile(InputStream inputStream) {
+    private static Object readFile(InputStream inputStream) throws Exception {
         Object result = null;
 
-        try {
-            ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
+        ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
 
-            result = objectInputStream.readObject();
-            objectInputStream.close();
-            inputStream.close();
-
-        } catch (Exception e) {
-            // Nothing we can do about badly formatted file, don't crash the app.
-            e.printStackTrace();
-        }
+        result = objectInputStream.readObject();
+        objectInputStream.close();
+        inputStream.close();
 
         return result;
     }

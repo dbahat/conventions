@@ -16,4 +16,7 @@
 
     <dimen name="update_extra_text_margin_for_top_update_lines">3dp</dimen>
     <dimen name="update_time_container_size">82dp</dimen>
+
+    <dimen name="event_details_box_side_margins">30dp</dimen>
+    <dimen name="event_details_box_padding">10dp</dimen>
 </resources>

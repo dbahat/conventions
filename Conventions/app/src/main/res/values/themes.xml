@@ -56,6 +56,11 @@
 
         <item name="nextEventStartTimeBackground">@color/gold</item>
         <item name="eventDetailsDefaultBackgroundColor">@color/white</item>
+        <item name="eventFeedbackBoxColor">@color/transparent_gold</item>
+        <item name="eventFeedbackHighlightedButtonColor">@color/very_dark_purple</item>
+        <item name="eventFeedbackHighlightedButtonPressedColor">@android:color/black</item>
+        <item name="feedbackAnswerButtonColor">@color/very_dark_purple</item>
+        <item name="feedbackAnswerButtonSelectedColor">@color/light_purple</item>
     </style>
 
     <style name="AppBaseTheme.Cami2015">
@@ -83,5 +88,12 @@
         <item name="nextEventStartTimeBackground">@color/orange</item>
 
         <item name="eventDetailsDefaultBackgroundColor">@color/orange</item>
+        <item name="eventFeedbackBoxColor">@color/transparent_light_green</item>
+        <!-- Note: if you change the theme, these values should be copied manually to file drawable\feedback_highlighted_button.xmled_button.xml
+         because prior to L it was not supported to reference theme attributes from a drawable xml -->
+        <item name="eventFeedbackHighlightedButtonColor">@color/maroon</item>
+        <item name="eventFeedbackHighlightedButtonPressedColor">@color/dark_maroon</item>
+        <item name="feedbackAnswerButtonColor">@color/maroon</item>
+        <item name="feedbackAnswerButtonSelectedColor">@color/dark_orange</item>
     </style>
 </resources>

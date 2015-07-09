@@ -5,11 +5,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import amai.org.conventions.navigation.NavigationPages;
-import amai.org.conventions.networking.ModelRetriever;
+import amai.org.conventions.networking.ModelRefresher;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -26,8 +24,8 @@ public class HomeActivity extends AppCompatActivity {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
-                ModelRetriever modelRetriever = new ModelRetriever();
-                modelRetriever.retrieveFromServer();
+                ModelRefresher modelRefresher = new ModelRefresher();
+                modelRefresher.refreshFromServer();
 
                 return null;
             }

@@ -33,7 +33,7 @@ public class Dates {
         // TODO this is a mock for testing purpose. Change to new Date() when it's the real app.
 //        return new Date(System.currentTimeMillis() - appStartDate.getTime() + initialDate.getTime());
 	    Calendar currDate = Calendar.getInstance();
-	    currDate.set(2015, Calendar.AUGUST, 20);
+	    setConventionDate(currDate);
 	    return currDate.getTime();
     }
 
@@ -120,14 +120,18 @@ public class Dates {
             Date hourAndMinute = new SimpleDateFormat("HH:mm:ss", getLocale()).parse(date);
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(hourAndMinute);
-            calendar.set(Convention.getInstance().getDate().get(Calendar.YEAR),
-                    Convention.getInstance().getDate().get(Calendar.MONTH),
-                    Convention.getInstance().getDate().get(Calendar.DAY_OF_MONTH));
+	        setConventionDate(calendar);
             return calendar.getTime();
         } catch (ParseException e) {
             return new Date();
         }
     }
+
+	public static void setConventionDate(Calendar calendar) {
+            calendar.set(Convention.getInstance().getDate().get(Calendar.YEAR),
+                    Convention.getInstance().getDate().get(Calendar.MONTH),
+                    Convention.getInstance().getDate().get(Calendar.DAY_OF_MONTH));
+	}
 
 	public static Locale getLocale() {
 		return LOCALE;
