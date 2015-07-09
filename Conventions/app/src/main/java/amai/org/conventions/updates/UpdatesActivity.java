@@ -17,6 +17,7 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
@@ -26,6 +27,7 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -67,9 +69,10 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
         recyclerView.setAdapter(updatesAdapter);
 
         // Initialize the updates list based on the model cache.
-        initializeUpdatesList(Convention.getInstance().getUpdates());
+        List<Update> updates = Convention.getInstance().getUpdates();
+        initializeUpdatesList(updates);
 
-        loginToFacebookIfNeeded();
+        loginToFacebookIfNeeded(updates);
     }
 
     @Override
@@ -86,13 +89,17 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
         }
     }
 
-    private void loginToFacebookIfNeeded() {
+    private void loginToFacebookIfNeeded(List<Update> updates) {
+        initializeFacebookLoginButton();
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
-        if (accessToken == null) {
-            initializeFacebookLoginButton();
-        } else {
+        if (accessToken != null && !accessToken.isExpired()) {
+            // If the user has a valid token use it to refresh his updates
             loginButton.setVisibility(View.GONE);
             retrieveUpdatesListFromFacebookApi(accessToken);
+        } else if (updates != null) {
+            // If the user has no valid token but logged in the past (meaning he has some cached data) attempt to perform a silent login.
+            loginButton.setVisibility(View.GONE);
+            LoginManager.getInstance().logInWithReadPermissions(this, Collections.singletonList("public_profile"));
         }
     }
 
