@@ -198,7 +198,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
         navigateToActivity(activityToNavigateTo, true, null);
     }
 
-    protected void navigateToActivity(Class<? extends Activity> activityToNavigateTo, boolean shouldClearActivityStack, Bundle extras) {
+    protected void navigateToActivity(Class<? extends Activity> activityToNavigateTo, boolean shouldEndActivityAfterExecution, Bundle extras) {
 
         dismissPopupIfNeeded();
 
@@ -208,8 +208,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
         }
 
         Intent intent = new Intent(this, activityToNavigateTo);
-        if (shouldClearActivityStack) {
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        if (shouldEndActivityAfterExecution) {
             finish();
         }
 

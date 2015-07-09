@@ -107,4 +107,9 @@ public class SwipeableEventsViewOrHourAdapter extends BaseAdapter implements Sti
     public long getHeaderId(int position) {
         return events.get(position).getTimeSection().get(Calendar.HOUR_OF_DAY);
     }
+
+    public void setItems(List<ProgrammeConventionEvent> events) {
+        this.events = events;
+        notifyDataSetChanged();
+    }
 }

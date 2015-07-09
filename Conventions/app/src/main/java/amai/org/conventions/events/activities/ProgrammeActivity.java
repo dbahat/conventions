@@ -3,7 +3,9 @@ package amai.org.conventions.events.activities;
 import android.content.DialogInterface;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.view.ContextThemeWrapper;
 import android.view.Menu;
@@ -17,6 +19,7 @@ import android.view.animation.ScaleAnimation;
 import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -33,18 +36,21 @@ import amai.org.conventions.events.adapters.SwipeableEventsViewOrHourAdapter;
 import amai.org.conventions.events.holders.EventTimeViewHolder;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
+import amai.org.conventions.networking.ModelRetriever;
+import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.navigation.NavigationActivity;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView.OnHeaderClickListener;
 
-public class ProgrammeActivity extends NavigationActivity implements OnHeaderClickListener {
+public class ProgrammeActivity extends NavigationActivity implements OnHeaderClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     private SwipeableEventsViewOrHourAdapter adapter;
     private StickyListHeadersListView listView;
     private List<ProgrammeConventionEvent> events;
 	private Menu menu;
 	private boolean navigateToMyEventsIconModified = false;
+    private SwipeRefreshLayout swipeLayout;
 
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +58,12 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
         setContentInContentContainer(R.layout.activity_programme);
         setToolbarTitle(getResources().getString(R.string.programme_title));
 
-        this.listView = (StickyListHeadersListView) findViewById(R.id.programmeList);
-        this.events = getEventList();
+        swipeLayout = (SwipeRefreshLayout) findViewById(R.id.programme_swipe_layout);
+        swipeLayout.setOnRefreshListener(this);
+        swipeLayout.setColorSchemeColors(ThemeAttributes.getColor(this, R.attr.toolbarBackground));
+
+        listView = (StickyListHeadersListView) findViewById(R.id.programmeList);
+        events = getEventList();
         adapter = new SwipeableEventsViewOrHourAdapter(events);
         listView.setAdapter(adapter);
 	    adapter.setOnEventFavoriteChangedListener(new Runnable() {
@@ -274,5 +284,27 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
 	    // The first minute of the next hour is considered this hour. For example, an event
 	    // ending at 12:00 is only considered to run during hour 11:00.
         return minute > 0 ? hour : hour - 1;
+    }
+
+    @Override
+    public void onRefresh() {
+        new AsyncTask<Void, Void, Boolean>() {
+
+            @Override
+            protected Boolean doInBackground(Void... params) {
+                ModelRetriever modelRetriever = new ModelRetriever();
+                return modelRetriever.retrieveFromServer();
+            }
+
+            @Override
+            protected void onPostExecute(Boolean isSuccess) {
+                swipeLayout.setRefreshing(false);
+                if (isSuccess) {
+                    adapter.setItems(getEventList());
+                } else {
+                    Toast.makeText(ProgrammeActivity.this, R.string.update_refresh_failed, Toast.LENGTH_SHORT).show();
+                }
+            }
+        }.execute();
     }
 }

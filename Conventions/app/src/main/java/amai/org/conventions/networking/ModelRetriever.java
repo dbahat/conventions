@@ -18,7 +18,11 @@ public class ModelRetriever {
     private static final String SERVER_ADDRESS = "http://2015.harucon.org.il/wp-admin/admin-ajax.php?action=get_event_list";
     private static final int CONNECT_TIMEOUT = 5000;
 
-    public Convention retrieveFromServer() {
+    /**
+     * Downloads the model from the CAMI server.
+     * @return true if the model retrieval completed successfully, false otherwise.
+     */
+    public boolean retrieveFromServer() {
         try {
             URL url = new URL(SERVER_ADDRESS);
 
@@ -35,8 +39,9 @@ public class ModelRetriever {
             }
         } catch (IOException e) {
             Log.w(TAG, "failed to retrieve model with exception " + e.getMessage());
+            return false;
         }
 
-        return Convention.getInstance();
+        return true;
     }
 }
