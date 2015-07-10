@@ -8,7 +8,6 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -30,24 +29,18 @@ public class ConventionStorage {
     private static Context context;
 
     public void saveUserInput() {
-        // Gather all event user input in a list with the event id
-        List<ConventionEvent> events = Convention.getInstance().getEvents();
-        Map<String, ConventionEvent.UserInput> userInput = new HashMap<>(events.size());
-        for (ConventionEvent event : events) {
-            userInput.put(event.getId(), event.getUserInput());
-        }
-
-        saveFile(userInput, EVENT_USER_INPUT_FILE_NAME);
+	    Map<String, ConventionEvent.UserInput> userInput = Convention.getInstance().getUserInput();
+	    saveFile(userInput, EVENT_USER_INPUT_FILE_NAME);
     }
 
     public void saveUpdates() {
         saveFile(Convention.getInstance().getUpdates(), UPDATES_FILE_NAME);
     }
 
-    public void saveEvents(List<ConventionEvent> events) {
+    public void saveEvents() {
         filesystemAccessLock.writeLock().lock();
         try {
-            saveFile(events, EVENTS_FILE_NAME);
+            saveFile(Convention.getInstance().getEvents(), EVENTS_FILE_NAME);
         } finally {
             filesystemAccessLock.writeLock().unlock();
         }
@@ -111,14 +104,7 @@ public class ConventionStorage {
 
         @SuppressWarnings("unchecked")
         Map<String, ConventionEvent.UserInput> userInput = (Map<String, ConventionEvent.UserInput>) result;
-
-        List<ConventionEvent> events = Convention.getInstance().getEvents();
-        for (ConventionEvent event : events) {
-            ConventionEvent.UserInput currInput = userInput.get(event.getId());
-            if (currInput != null) {
-                event.setUserInput(currInput);
-            }
-        }
+        Convention.getInstance().setUserInput(userInput);
     }
 
     private void saveFile(Object objectToSave, String fileName) {

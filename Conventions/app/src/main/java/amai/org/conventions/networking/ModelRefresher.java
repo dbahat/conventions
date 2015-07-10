@@ -34,26 +34,11 @@ public class ModelRefresher {
             try {
                 InputStreamReader reader = new InputStreamReader((InputStream) request.getContent());
                 List<ConventionEvent> eventList = new ModelParser().parse(reader);
-                Convention.getInstance().getStorage().saveEvents(eventList);
-
-	            // Refresh the existing events - user input should not be taken from the server
-	            List<ConventionEvent> previousEvents = Convention.getInstance().getEvents();
-	            Map<String, ConventionEvent> previousEventsMap = new HashMap<>();
-	            for (ConventionEvent event : previousEvents) {
-		            previousEventsMap.put(event.getId(), event);
-	            }
-
-	            Convention.getInstance().setEvents(eventList);
-	            for (ConventionEvent event : eventList) {
-		            ConventionEvent previousEvent = previousEventsMap.get(event.getId());
-		            // If previousEvent is null it means this event is new from the server
-		            if (previousEvent != null) {
-		                event.setUserInput(previousEvent.getUserInput());
-		            }
-	            }
+                Convention.getInstance().setEvents(eventList);
             } finally {
                 request.disconnect();
             }
+            Convention.getInstance().getStorage().saveEvents();
         } catch (IOException e) {
 	        Log.i(TAG, "Could not retrieve model due to IOException: " + e.getMessage());
 	        return false;

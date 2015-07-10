@@ -7,9 +7,10 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.graphics.Palette;
+import android.text.Editable;
 import android.text.Html;
 import android.text.InputType;
-import android.util.Log;
+import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.util.TypedValue;
 import android.view.Menu;
@@ -17,7 +18,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -34,9 +34,9 @@ import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.Feedback;
-import amai.org.conventions.utils.Dates;
 import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.navigation.NavigationActivity;
+import amai.org.conventions.utils.Dates;
 import uk.co.chrisjenx.paralloid.views.ParallaxScrollView;
 
 
@@ -48,11 +48,13 @@ public class EventActivity extends NavigationActivity {
 	private LinearLayout imagesLayout;
 	private View feedbackClosed;
 	private View feedbackOpen;
+	private boolean shouldSaveFeedback;
 
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentInContentContainer(R.layout.activity_event);
+		shouldSaveFeedback = false;
 
 		imagesLayout = (LinearLayout) findViewById(R.id.images_layout);
 		feedbackClosed = findViewById(R.id.feedback_closed);
@@ -181,6 +183,20 @@ public class EventActivity extends NavigationActivity {
         return super.onOptionsItemSelected(item);
     }
 
+	@Override
+	protected void onPause() {
+		super.onPause();
+		if (shouldSaveFeedback) {
+			Convention.getInstance().getStorage().saveUserInput();
+
+			// Reset answer changed flag
+			List<Feedback.Question> questions = this.conventionEvent.getUserInput().getFeedback().getQuestions();
+			for (Feedback.Question question : questions) {
+				question.setAnswerChanged(false);
+			}
+		}
+	}
+
 	private void setEvent(ConventionEvent event) {
         setToolbarTitle(event.getType().getDescription());
 
@@ -232,7 +248,7 @@ public class EventActivity extends NavigationActivity {
 		}
 	}
 
-	private View buildQuestionView(Feedback.Question question) {
+	private View buildQuestionView(final Feedback.Question question) {
 		LinearLayout questionLayout = new LinearLayout(this);
 		LinearLayout.LayoutParams questionLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		questionLayoutParams.setMargins(0, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, getResources().getDisplayMetrics()), 0, 0);
@@ -242,6 +258,7 @@ public class EventActivity extends NavigationActivity {
 		questionText.setTextAppearance(this, R.style.TextAppearance_AppCompat_Body1);
 		questionText.setText(question.getStringId());
 
+		Object answer = question.getAnswer();
 		View answerView = null;
 		int layoutOrientation = LinearLayout.VERTICAL;
 
@@ -259,6 +276,24 @@ public class EventActivity extends NavigationActivity {
 				LinearLayout.LayoutParams editTextLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 				editText.setLayoutParams(editTextLayoutParams);
 				editText.setTextAppearance(this, R.style.TextAppearance_AppCompat_Body1);
+				editText.addTextChangedListener(new TextWatcher() {
+					@Override
+					public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+					}
+
+					@Override
+					public void onTextChanged(CharSequence s, int start, int before, int count) {
+					}
+
+					@Override
+					public void afterTextChanged(Editable s) {
+						question.setAnswer(s.toString());
+						shouldSaveFeedback |= question.isAnswerChanged();
+					}
+				});
+				if (answer != null) {
+					editText.setText(answer.toString());
+				}
 
 				answerView = editText;
 				break;
@@ -307,11 +342,32 @@ public class EventActivity extends NavigationActivity {
 
 						ImageView selected = (ImageView) v;
 						selected.setColorFilter(getResources().getColor(R.color.yellow), PorterDuff.Mode.MULTIPLY);
+
+						Object answer = null;
+						if (selected == negativeRating) {
+							answer = Feedback.Question.NEGATIVE_ANSWER;
+						} else if (selected == positiveRating) {
+							answer = Feedback.Question.POSITIVE_ANSWER;
+						} else if (selected == veryPositiveRating) {
+							answer = Feedback.Question.VERY_POSITIVE_ANSWER;
+						}
+						question.setAnswer(answer);
+						shouldSaveFeedback |= question.isAnswerChanged();
 					}
 				};
 				negativeRating.setOnClickListener(listener);
 				positiveRating.setOnClickListener(listener);
 				veryPositiveRating.setOnClickListener(listener);
+
+				if (answer != null) {
+					if (answer.equals(Feedback.Question.NEGATIVE_ANSWER)) {
+						negativeRating.callOnClick();
+					} else if (answer.equals(Feedback.Question.POSITIVE_ANSWER)) {
+						positiveRating.callOnClick();
+					} else if (answer.equals(Feedback.Question.VERY_POSITIVE_ANSWER)) {
+						veryPositiveRating.callOnClick();
+					}
+				}
 
 				answerView = imagesLayout;
 				break;
@@ -341,10 +397,20 @@ public class EventActivity extends NavigationActivity {
 
 						TextView otherButton = (selected == yesButton ? noButton : yesButton);
 						otherButton.setTextAppearance(EventActivity.this, R.style.EventFeedbackButton);
+						question.setAnswer(selected.getText().toString());
+						shouldSaveFeedback |= question.isAnswerChanged();
 					}
 				};
 				yesButton.setOnClickListener(listener);
 				noButton.setOnClickListener(listener);
+
+				if (answer != null) {
+					if (answer.equals(yesButton.getText().toString())) {
+						yesButton.callOnClick();
+					} else if (answer.equals(noButton.getText().toString())) {
+						noButton.callOnClick();
+					}
+				}
 
 				answerView = buttonsLayout;
 				break;

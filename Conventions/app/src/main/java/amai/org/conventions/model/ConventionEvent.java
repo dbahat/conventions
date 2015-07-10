@@ -19,6 +19,7 @@ public class ConventionEvent implements Serializable {
     private EventType type;
     private Hall hall;
 	private List<Integer> images;
+    private String description;
 
     public String getDescription() {
         return description;
@@ -33,15 +34,10 @@ public class ConventionEvent implements Serializable {
         return this;
     }
 
-    private String description;
-
-	private UserInput userInput;
-//    private int peopleAttending;
 
 
 	public ConventionEvent() {
 		images = new ArrayList<>();
-		userInput = new UserInput();
 	}
 
     public void setId(String id) {
@@ -84,11 +80,11 @@ public class ConventionEvent implements Serializable {
     }
 
     public boolean isAttending() {
-        return userInput.isAttending();
+        return getUserInput().isAttending();
     }
 
     public void setAttending(boolean attending) {
-        this.userInput.setAttending(attending);
+        getUserInput().setAttending(attending);
     }
 
     public ConventionEvent withAttending(boolean attending) {
@@ -162,11 +158,7 @@ public class ConventionEvent implements Serializable {
 	}
 
 	public UserInput getUserInput() {
-		return userInput;
-	}
-
-	public void setUserInput(UserInput userInput) {
-		this.userInput = userInput;
+		return Convention.getInstance().getEventUserInput(getId());
 	}
 
 	public boolean hasStarted() {
@@ -200,7 +192,6 @@ public class ConventionEvent implements Serializable {
 					Objects.equals(endTime, other.endTime) &&
 					Objects.equals(type, other.type) &&
 					Objects.equals(hall, other.hall) &&
-					Objects.equals(userInput, other.userInput) &&
                     Objects.equals(serverId, other.serverId);
 		}
 		return false;
@@ -208,7 +199,7 @@ public class ConventionEvent implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(title, lecturer, startTime, endTime, type, hall, userInput, serverId);
+		return Objects.hash(title, lecturer, startTime, endTime, type, hall, serverId);
 	}
 
 	public static class UserInput implements Serializable {

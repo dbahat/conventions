@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import amai.org.conventions.R;
@@ -15,9 +17,10 @@ public class Convention implements Serializable {
 
     private static Convention convention = new Convention();
 
-    private List<ConventionEvent> events;
     private List<Hall> halls;
+    private List<ConventionEvent> events;
     private List<Update> updates;
+	private Map<String, ConventionEvent.UserInput> userInput;
 
     private ConventionMap map;
     private Calendar date;
@@ -34,6 +37,13 @@ public class Convention implements Serializable {
     }
 
     public Convention() {
+        this.conventionStorage = new ConventionStorage();
+	    this.userInput = new LinkedHashMap<>();
+
+        this.date = Calendar.getInstance();
+	    this.date.clear();
+        this.date.set(2015, Calendar.AUGUST, 20);
+
         Hall auditorium = new Hall().withName("אודיטוריום אוסישקין").withOrder(1);
         Hall contentRoom = new Hall().withName("חדר אירועי תוכן").withOrder(2);
         Hall oranim1 = new Hall().withName("אורנים 1").withOrder(3);
@@ -41,12 +51,6 @@ public class Convention implements Serializable {
         Hall oranim3 = new Hall().withName("אורנים 3").withOrder(5);
 
         this.halls = Arrays.asList(auditorium, contentRoom, oranim1, oranim2, oranim3);
-
-        this.conventionStorage = new ConventionStorage();
-
-        this.date = Calendar.getInstance();
-	    this.date.clear();
-        this.date.set(2015, Calendar.AUGUST, 20);
 
         Floor floor1 = new Floor(1).withName("מפלס תחתון - כניסה").withImageResource(R.raw.floor1).withMarkerWidth(11);
         Floor floor2 = new Floor(2).withName("מפלס עליון - אולם ראשי").withImageResource(R.raw.floor2).withMarkerWidth(13);
@@ -98,26 +102,48 @@ public class Convention implements Serializable {
     }
 
     public void setEvents(List<ConventionEvent> events) {
+        eventLockObject.writeLock().lock();
         try {
-            eventLockObject.writeLock().lock();
             this.events = events;
-        }
-        finally {
+	        updateUserInputFromEvents();
+        } finally {
             eventLockObject.writeLock().unlock();
         }
 	}
 
 	public List<ConventionEvent> getEvents() {
+        eventLockObject.writeLock().lock();
         try {
-            eventLockObject.writeLock().lock();
             return events;
-        }
-        finally {
+        } finally {
             eventLockObject.writeLock().unlock();
         }
     }
 
-    public List<Hall> getHalls() {
+	public Map<String, ConventionEvent.UserInput> getUserInput() {
+		return userInput;
+	}
+
+	public ConventionEvent.UserInput getEventUserInput(String eventId) {
+		return userInput.get(eventId);
+	}
+
+	public void setUserInput(Map<String, ConventionEvent.UserInput> userInput) {
+		this.userInput = userInput;
+		updateUserInputFromEvents();
+	}
+
+	private void updateUserInputFromEvents() {
+		// Add user input for new events
+		for (ConventionEvent event : events) {
+			if (!userInput.containsKey(event.getId())) {
+				userInput.put(event.getId(), new ConventionEvent.UserInput());
+			}
+		}
+		// TODO remove user input for deleted events?
+	}
+
+	public List<Hall> getHalls() {
         return halls;
     }
 
