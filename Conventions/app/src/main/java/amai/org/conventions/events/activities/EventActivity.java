@@ -27,8 +27,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import amai.org.conventions.AspectRatioImageView;
 import amai.org.conventions.R;
+import amai.org.conventions.customviews.AspectRatioImageView;
 import amai.org.conventions.map.MapActivity;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;

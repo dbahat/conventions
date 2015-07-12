@@ -1,4 +1,4 @@
-package amai.org.conventions;
+package amai.org.conventions.customviews;
 
 import android.os.Handler;
 import android.view.View;

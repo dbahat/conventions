@@ -2,15 +2,21 @@ package amai.org.conventions.map;
 
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.Picture;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PictureDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MotionEventCompat;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,6 +35,7 @@ import java.util.List;
 import java.util.Map;
 
 import amai.org.conventions.R;
+import amai.org.conventions.customviews.InterceptorLinearLayout;
 import amai.org.conventions.events.EventView;
 import amai.org.conventions.events.activities.HallActivity;
 import amai.org.conventions.model.Convention;
@@ -49,10 +56,10 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 	private static Map<Integer, SVG> loadedSVGFiles = new HashMap<>();
 
     private ImageLayout mapFloorImage;
-    private ImageView upArrowImage;
-    private ImageView downArrowImage;
+    private View upArrow;
+    private View downArrow;
 
-	private ViewGroup locationDetails;
+	private InterceptorLinearLayout locationDetails;
 	private TextView locationTitle;
 	private ImageView locationDetailsCloseImage;
 	private EventView locationCurrentEvent;
@@ -75,7 +82,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
         View view = inflater.inflate(R.layout.fragment_map_floor, container, false);
 
         resolveUIElements(view);
-	    initializeLocationDetailsClose();
+	    initializeLocationDetails();
         initializeUpAndDownButtons();
         configureMapFloor();
 	    setMainViewClickListener(view);
@@ -114,7 +121,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
     }
 
     private void initializeUpAndDownButtons() {
-        upArrowImage.setOnClickListener(new View.OnClickListener() {
+        upArrow.setOnClickListener(new View.OnClickListener() {
 	        @Override
 	        public void onClick(View v) {
 		        if (mapArrowClickedListener != null) {
@@ -123,7 +130,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 	        }
         });
 
-        downArrowImage.setOnClickListener(new View.OnClickListener() {
+        downArrow.setOnClickListener(new View.OnClickListener() {
 	        @Override
 	        public void onClick(View v) {
 		        if (mapArrowClickedListener != null) {
@@ -135,18 +142,18 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
     private void resolveUIElements(View view) {
         mapFloorImage = (ImageLayout) view.findViewById(R.id.map_floor_image);
-        upArrowImage = (ImageView) view.findViewById(R.id.map_floor_up_arrow);
-        downArrowImage = (ImageView) view.findViewById(R.id.map_floor_down_arrow);
+        upArrow = view.findViewById(R.id.map_floor_up);
+        downArrow = view.findViewById(R.id.map_floor_down);
 
 	    // Current selected location details
-	    locationDetails = (ViewGroup) view.findViewById(R.id.location_details);
+	    locationDetails = (InterceptorLinearLayout) view.findViewById(R.id.location_details);
 	    locationTitle = (TextView) view.findViewById(R.id.location_title);
 	    locationDetailsCloseImage = (ImageView) view.findViewById(R.id.location_details_close_image);
 	    locationCurrentEvent = (EventView) view.findViewById(R.id.location_current_event);
 	    locationNextEvent = (EventView) view.findViewById(R.id.location_next_event);
     }
 
-	private void initializeLocationDetailsClose() {
+	private void initializeLocationDetails() {
 		locationDetailsCloseImage.setColorFilter(getResources().getColor(android.R.color.black));
 		locationDetailsCloseImage.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -154,6 +161,108 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 				setSelectedLocationDetails(null);
 			}
 		});
+
+		InterceptorLinearLayout.AllTouchEventsListener touchListener = new InterceptorLinearLayout.AllTouchEventsListener() {
+			public final int TOUCH_SLOP = ViewConfiguration.get(getActivity()).getScaledTouchSlop();
+			float startPointY;
+			boolean isDragging = false;
+			boolean performedDragUpAction = false;
+
+			@Override
+			public boolean onInterceptTouchEvent(MotionEvent event) {
+				switch (MotionEventCompat.getActionMasked(event)) {
+					case MotionEvent.ACTION_DOWN:
+						// If the user started a scroll on the event details, don't let the view pager
+						// we're in intercept it (so it doesn't scroll to the floor below/above)
+						locationDetails.getParent().requestDisallowInterceptTouchEvent(true);
+						resetMotionEventParameters(event);
+						break;
+					case MotionEvent.ACTION_CANCEL:
+					case MotionEvent.ACTION_UP:
+						// Touch event finished, let the view pager intercept events again.
+						// We will only reach here is we didn't intercept this event.
+						locationDetails.getParent().requestDisallowInterceptTouchEvent(false);
+
+						// Touch event ended, don't handle the event. Children who are listening will handle it.
+						isDragging = false;
+						break;
+					case MotionEvent.ACTION_MOVE:
+						if (isDragging || movePassesThreshold(event)) {
+							// The view is being dragged, so it should handle the event
+							isDragging = true;
+							return true;
+						}
+						break;
+				}
+
+				// Don't intercept any touch event except dragging
+				return false;
+			}
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				switch (MotionEventCompat.getActionMasked(event)) {
+					case MotionEvent.ACTION_DOWN:
+						// If the user started a scroll on the event details, don't let the view pager
+						// we're in intercept it (so it doesn't scroll to the floor below/above).
+						// We get here only in rare cases (usually onInterceptTouchEvent should consume down event).
+						locationDetails.getParent().requestDisallowInterceptTouchEvent(true);
+						resetMotionEventParameters(event);
+						break;
+					case MotionEvent.ACTION_CANCEL:
+					case MotionEvent.ACTION_UP:
+						// Touch event finished, let the view pager intercept events again
+						v.getParent().requestDisallowInterceptTouchEvent(false);
+						// Handle click event for locationDetails (it isn't called because we consume
+						// all motion events)
+						handleClick(event);
+						break;
+					case MotionEvent.ACTION_MOVE:
+						// Handle drag event
+						handleMove(event);
+						break;
+				}
+				// Always consume the events that arrive here
+				return true;
+			}
+
+			private void handleMove(MotionEvent event) {
+				if (movePassesThreshold(event)) {
+					// Check if we moved down or up
+					if (startPointY - event.getY() > 0) {
+						// This could be called more than once because it takes a while to
+						// navigate to the hall while the user moves their finger
+						if (!performedDragUpAction) {
+							performedDragUpAction = true;
+							locationDetails.callOnClick();
+						}
+					} else {
+						setSelectedLocationDetails(null);
+					}
+				}
+			}
+
+			private void handleClick(MotionEvent event) {
+				if (!movePassesThreshold(event)) {
+					locationDetails.callOnClick();
+				}
+			}
+
+			private boolean movePassesThreshold(MotionEvent event) {
+				return Math.abs(startPointY - event.getY()) > TOUCH_SLOP;
+			}
+
+			private void resetMotionEventParameters(MotionEvent event) {
+				isDragging = false;
+				performedDragUpAction = false;
+				startPointY = event.getY();
+			}
+		};
+
+		// Intercept and handle touch events on locationDetails so we can handle drag as well
+		// as click on the view and its children
+		locationDetails.setOnInterceptTouchEventListener(touchListener);
+		locationDetails.setOnTouchListener(touchListener);
 	}
 
     private void configureMapFloor() {
@@ -188,10 +297,10 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
 		    // Add up and down arrows
 		    boolean isTopFloor = floor.getNumber() == map.getTopFloor().getNumber();
-		    upArrowImage.setVisibility(isTopFloor ? View.GONE : View.VISIBLE);
+		    upArrow.setVisibility(isTopFloor ? View.GONE : View.VISIBLE);
 
 		    boolean isBottomFloor = floor.getNumber() == map.getBottomFloor().getNumber();
-		    downArrowImage.setVisibility(isBottomFloor ? View.GONE : View.VISIBLE);
+		    downArrow.setVisibility(isBottomFloor ? View.GONE : View.VISIBLE);
 	    } catch (SVGParseException e) {
 		    throw new RuntimeException(e);
 	    }
@@ -327,7 +436,24 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
 	public void setSelectedLocationDetails(final MapLocation location) {
 		if (location == null) {
-			locationDetails.setVisibility(View.GONE);
+			if (locationDetails.getVisibility() != View.GONE) {
+				Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.abc_slide_out_bottom);
+				locationDetails.startAnimation(animation);
+				animation.setAnimationListener(new Animation.AnimationListener() {
+					@Override
+					public void onAnimationStart(Animation animation) {
+					}
+
+					@Override
+					public void onAnimationEnd(Animation animation) {
+						locationDetails.setVisibility(View.GONE);
+					}
+
+					@Override
+					public void onAnimationRepeat(Animation animation) {
+					}
+				});
+			}
 		} else {
 			locationDetails.setVisibility(View.VISIBLE);
 			locationTitle.setText(location.getName());
@@ -368,13 +494,13 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 				@Override
 				public void onClick(View v) {
 					// Navigate to the hall associated with this event
+					Bundle animationBundle = ActivityOptions.makeCustomAnimation(getActivity(), R.anim.abc_slide_in_bottom, 0).toBundle();
 					Bundle bundle = new Bundle();
 					bundle.putString(HallActivity.EXTRA_HALL_NAME, location.getHall().getName());
 
 					Intent intent = new Intent(getActivity(), HallActivity.class);
 					intent.putExtras(bundle);
-					startActivity(intent);
-					getActivity().overridePendingTransition(0, 0);
+					getActivity().startActivity(intent, animationBundle);
 				}
 			});
 		}

@@ -35,4 +35,6 @@
 
     <string name="yes">כן</string>
     <string name="no">לא</string>
+    <string name="floor_down">קומה למטה</string>
+    <string name="floor_up">קומה למעלה</string>
 </resources>

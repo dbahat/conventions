@@ -65,32 +65,32 @@ public class Convention implements Serializable {
                                                 .withMarkerResource(R.raw.oranim1_marker)
                                                 .withSelectedMarkerResource(R.raw.oranim1_marker_selected)
                                                 .withX(49)
-                                                .withY(79),
+                                                .withY(75),
                                         new MapLocation()
                                                 .withHall(oranim2)
                                                 .withMarkerResource(R.raw.oranim2_marker)
                                                 .withSelectedMarkerResource(R.raw.oranim2_marker_selected)
                                                 .withX(59)
-                                                .withY(74),
+                                                .withY(70),
                                         new MapLocation()
                                                 .withHall(oranim3)
                                                 .withMarkerResource(R.raw.oranim3_marker)
                                                 .withSelectedMarkerResource(R.raw.oranim3_marker_selected)
                                                 .withX(69)
-                                                .withY(68)),
+                                                .withY(64)),
                                 inFloor(floor2,
                                         new MapLocation()
                                                 .withHall(auditorium)
                                                 .withMarkerResource(R.raw.main_hall_marker)
                                                 .withSelectedMarkerResource(R.raw.main_hall_marker_selected)
                                                 .withX(53)
-                                                .withY(55),
+                                                .withY(51),
                                         new MapLocation()
                                                 .withHall(contentRoom)
                                                 .withMarkerResource(R.raw.content_room_marker)
                                                 .withSelectedMarkerResource(R.raw.content_room_marker_selected)
                                                 .withX(86)
-                                                .withY(74))
+                                                .withY(70))
                         )
                 );
 
