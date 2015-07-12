@@ -37,9 +37,9 @@ public class Feedback implements Serializable {
 	}
 
 	public static class Question implements Serializable {
-		public static final int NEGATIVE_ANSWER = -1;
-		public static final int POSITIVE_ANSWER = 1;
-		public static final int VERY_POSITIVE_ANSWER = 2;
+		public static final Object NEGATIVE_ANSWER = ":|";
+		public static final Object POSITIVE_ANSWER = ":)";
+		public static final Object VERY_POSITIVE_ANSWER = ":D";
 
 		private int stringId;
 		private AnswerType answerType;

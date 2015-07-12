@@ -160,13 +160,6 @@
                         android:background="@drawable/feedback_highlighted_button"
                         android:textColor="@color/white"
                         style="@style/EventFeedbackButton"/>
-
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/share_on_facebook"
-                        style="@style/EventFeedbackButton"/>
-
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
