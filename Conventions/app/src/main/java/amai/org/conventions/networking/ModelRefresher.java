@@ -31,11 +31,15 @@ public class ModelRefresher {
             HttpURLConnection request = (HttpURLConnection) url.openConnection();
             request.setConnectTimeout(CONNECT_TIMEOUT);
             request.connect();
+            InputStreamReader reader = null;
             try {
-                InputStreamReader reader = new InputStreamReader((InputStream) request.getContent());
+                reader = new InputStreamReader((InputStream) request.getContent());
                 List<ConventionEvent> eventList = new ModelParser().parse(reader);
                 Convention.getInstance().setEvents(eventList);
             } finally {
+                if (reader != null) {
+                    reader.close();
+                }
                 request.disconnect();
             }
             Convention.getInstance().getStorage().saveEvents();

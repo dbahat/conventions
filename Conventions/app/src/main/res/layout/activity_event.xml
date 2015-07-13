@@ -78,6 +78,7 @@
                 android:paddingStart="@dimen/event_details_box_padding"
                 android:orientation="horizontal">
                 <TextView
+                    android:id="@+id/collapsed_feedback_title"
                     android:paddingTop="@dimen/event_details_box_padding"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -148,19 +149,31 @@
                     android:layout_height="1dp"
                     android:background="@android:color/black"
                     android:alpha="0.1"/>
-                <LinearLayout
-                    android:paddingEnd="@dimen/event_details_box_padding"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
 
                     <Button
+                        android:id="@+id/send_feedback_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/send"
                         android:background="@drawable/feedback_highlighted_button"
                         android:textColor="@color/white"
-                        style="@style/EventFeedbackButton"/>
-                </LinearLayout>
+                        android:onClick="onSendFeedbackClicked"/>
+
+                    <!-- this progress bar gets un-hidden in runtime when the button is clicked -->
+                    <ProgressBar
+                        android:id="@+id/feedback_progress_bar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone" />
+
+                </FrameLayout>
+
+
             </LinearLayout>
         </LinearLayout>
 

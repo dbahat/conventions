@@ -31,7 +31,10 @@
     <string name="feedback">פידבק</string>
     <string name="close_feedback">הסתר</string>
     <string name="send">שלח לאמא\"י</string>
-    <string name="share_on_facebook">שתף בפייסבוק</string>
+
+    <string name="feedback_mail_title">מייל אוטומטי - פידבק לכאמ\"י 205 עבור האירוע</string>
+    <string name="feedback_send_mail_failed">ללא ניתן לשלוח את הפידבק. נסה שנית מאוחר יותר</string>
+    <string name="feedback_sent">הפידבק נשלח. תודה!</string>
 
     <string name="yes">כן</string>
     <string name="no">לא</string>

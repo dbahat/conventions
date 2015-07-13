@@ -21,6 +21,7 @@ public class Convention implements Serializable {
     private List<ConventionEvent> events;
     private List<Update> updates;
 	private Map<String, ConventionEvent.UserInput> userInput;
+    private String feedbackRecipient;
 
     private ConventionMap map;
     private Calendar date;
@@ -43,6 +44,7 @@ public class Convention implements Serializable {
         this.date = Calendar.getInstance();
 	    this.date.clear();
         this.date.set(2015, Calendar.AUGUST, 20);
+        this.feedbackRecipient = "cami2015androidapp@gmail.com";
 
         Hall auditorium = new Hall().withName("אודיטוריום אוסישקין").withOrder(1);
         Hall contentRoom = new Hall().withName("חדר אירועי תוכן").withOrder(2);
@@ -190,6 +192,10 @@ public class Convention implements Serializable {
 
     public List<Update> getUpdates() {
         return updates;
+    }
+
+    public String getFeedbackRecipient() {
+        return feedbackRecipient;
     }
 
     private List<MapLocation> inFloor(Floor floor, MapLocation... locations) {
