@@ -3,6 +3,7 @@ package amai.org.conventions.navigation;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PictureDrawable;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.caverock.androidsvg.SVG;
 import com.caverock.androidsvg.SVGParseException;
@@ -92,8 +94,17 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		if (navigationMapping.containsValue(this.getClass())) {
 			for (Map.Entry<View, Class<? extends Activity>> entry : navigationMapping.entrySet()) {
 				if (entry.getValue() == this.getClass()) {
-					entry.getKey().setBackgroundColor(ThemeAttributes.getColor(this, R.attr.navigationPopupDisabledBackground));
-					entry.getKey().setOnClickListener(null);
+					int selectedColor = ThemeAttributes.getColor(this, R.attr.navigationPopupSelectedColor);
+					ViewGroup navigationView = (ViewGroup) entry.getKey();
+					navigationView.setOnClickListener(null);
+					for (int i = 0; i < navigationView.getChildCount(); ++i) {
+						View child = navigationView.getChildAt(i);
+						if (child instanceof TextView) {
+							((TextView) child).setTextColor(selectedColor);
+						} else if (child instanceof ImageView) {
+							((ImageView) child).getDrawable().setColorFilter(selectedColor, PorterDuff.Mode.MULTIPLY);
+						}
+					}
 					break;
 				}
 			}
@@ -103,7 +114,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	}
 
 	private void setupImageColors(View view) {
-		int color = ThemeAttributes.getColor(this, R.attr.toolbarBackground);
+		int color = ThemeAttributes.getColor(this, R.attr.navigationPopupNotSelectedColor);
 		changeImageColor(view, R.id.events_menu_image, color);
 		changeImageColor(view, R.id.map_menu_image, color);
 		changeImageColor(view, R.id.updates_menu_image, color);

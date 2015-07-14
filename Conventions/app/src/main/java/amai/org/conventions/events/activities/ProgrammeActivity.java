@@ -5,11 +5,13 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.AlphaAnimation;
@@ -44,15 +46,17 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView.OnHeaderClic
 
 public class ProgrammeActivity extends NavigationActivity implements OnHeaderClickListener, SwipeRefreshLayout.OnRefreshListener {
 
+	public static final String EXTRA_DELAY_SCROLLING = "DelayScrollingExtra";
     private SwipeableEventsViewOrHourAdapter adapter;
     private StickyListHeadersListView listView;
     private List<ProgrammeConventionEvent> events;
 	private Menu menu;
 	private boolean navigateToMyEventsIconModified = false;
     private SwipeRefreshLayout swipeLayout;
+	private boolean cancelScroll;
 
 	@Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentInContentContainer(R.layout.activity_programme);
         setToolbarTitle(getResources().getString(R.string.programme_title));
@@ -109,17 +113,36 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
         listView.setOnHeaderClickListener(this);
 
         final int position = findHourPosition(getHour(Dates.now()));
-        if (position != -1) {
-            final ViewTreeObserver vto = listView.getViewTreeObserver();
-            vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                public void onGlobalLayout() {
-                    scrollToPosition(position);
+		if (position != -1) {
+			cancelScroll = false;
 
-                    // Unregister the listener to only call scrollToPosition once
-                    listView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                }
-            });
-        }
+			listView.setOnTouchListener(new View.OnTouchListener() {
+				@Override
+				public boolean onTouch(View v, MotionEvent event) {
+					if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+						cancelScroll = true;
+						listView.setOnTouchListener(null);
+					}
+					return false;
+				}
+			});
+
+			final ViewTreeObserver vto = listView.getViewTreeObserver();
+			vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+				public void onGlobalLayout() {
+					// Unregister the listener to only call scrollToPosition once
+					listView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+
+					int delay = getIntent().getIntExtra(EXTRA_DELAY_SCROLLING, 0);
+					new Handler().postDelayed(new Runnable() {
+						@Override
+						public void run() {
+							scrollToPosition(position);
+						}
+					}, delay);
+				}
+			});
+		}
     }
 
     @Override
@@ -184,6 +207,7 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
 						    public void onClick(DialogInterface dialog, int whichButton) {
 				                int position = findHourPosition(numberPicker.getValue());
 				                if (position != -1) {
+					                cancelScroll = false;
 				                    scrollToPosition(position);
 				                }
 						    }
@@ -193,26 +217,31 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
     }
 
     private void scrollToPosition(final int position) {
-        listView.smoothScrollToPositionFromTop(position, 0, 500);
+	    if (!cancelScroll) {
+            listView.smoothScrollToPositionFromTop(position, 0, 500);
 
-        // There is a bug in smoothScrollToPositionFromTop that sometimes it doesn't scroll all the way.
-        // More info here : https://code.google.com/p/android/issues/detail?id=36062
-        // As a workaround, we listen to when it finished scrolling, and then scroll again to
-        // the same position.
-        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+		    // There is a bug in smoothScrollToPositionFromTop that sometimes it doesn't scroll all the way.
+		    // More info here : https://code.google.com/p/android/issues/detail?id=36062
+		    // As a workaround, we listen to when it finished scrolling, and then scroll again to
+		    // the same position.
+		    listView.setOnScrollListener(new AbsListView.OnScrollListener() {
 
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-                if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
-                    listView.setOnScrollListener(null);
-                    listView.smoothScrollToPositionFromTop(position, 0, 500);
-                }
-            }
+		        @Override
+		        public void onScrollStateChanged(AbsListView view, int scrollState) {
+		            if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
+		                listView.setOnScrollListener(null);
+			            if (!cancelScroll) {
+		                    listView.smoothScrollToPositionFromTop(position, 0, 500);
+				            listView.setOnTouchListener(null);
+			            }
+		            }
+		        }
 
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-            }
-        });
+		        @Override
+		        public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+		        }
+		    });
+	    }
     }
 
     private int findHourPosition(int hour) {

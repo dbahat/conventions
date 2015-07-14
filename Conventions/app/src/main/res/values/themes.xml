@@ -18,7 +18,7 @@
         <item name="nextEventStartTimeBottomLineColor">@android:color/black</item>
         <item name="conflictingEventsBackground">@color/dark_gray</item>
 
-        <item name="navigationPopupDisabledBackground">@color/very_light_gray</item>
+        <item name="navigationPopupNotSelectedColor">@android:color/black</item>
 
         <item name="eventTimeHeaderColor">@color/very_light_gray</item>
         <item name="eventTimeHeaderBackground">@color/very_light_gray</item>
@@ -37,6 +37,7 @@
         <item name="toolbarLogo">@raw/harucon_toolbar_logo_border</item>
         <item name="toolbarLogoType">svg</item>
         <item name="toolbarIconAccentColor">@color/gold</item>
+        <item name="navigationPopupSelectedColor">@color/very_dark_purple</item>
 
         <item name="appLogoHome">@drawable/harucon_logo</item>
         <item name="homeConventionNameVisibility">visible</item>
@@ -68,6 +69,7 @@
         <item name="toolbarLogo">@drawable/cami_logo_toolbar</item>
         <item name="toolbarLogoType">bitmap</item>
         <item name="toolbarIconAccentColor">@color/light_green</item>
+        <item name="navigationPopupSelectedColor">@color/maroon</item>
 
         <item name="appLogoHome">@drawable/cami_logo</item>
         <item name="homeConventionNameVisibility">gone</item>

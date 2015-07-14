@@ -53,7 +53,8 @@
         <attr name="nextEventStartTimeBottomLineColor" format="color|reference"/>
         <attr name="conflictingEventsBackground" format="color|reference"/>
         <!-- Navigation Popup -->
-        <attr name="navigationPopupDisabledBackground" format="color|reference"/>
+        <attr name="navigationPopupSelectedColor" format="color|reference"/>
+        <attr name="navigationPopupNotSelectedColor" format="color|reference"/>
         <!-- Programme Screen -->
         <attr name="eventTimeHeaderColor" format="color|reference"/>
         <attr name="eventTimeHeaderBackground" format="color|reference"/>
