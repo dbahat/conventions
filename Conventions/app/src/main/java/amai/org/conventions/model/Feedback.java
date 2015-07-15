@@ -1,30 +1,30 @@
 package amai.org.conventions.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
-
-import amai.org.conventions.utils.Objects;
+import java.util.Map;
 
 public class Feedback implements Serializable {
-	List<Question> questions;
+	Map<Integer, FeedbackQuestion> questions;
 	boolean isSent;
 
 	public Feedback() {
-		questions = new LinkedList<>();
+		questions = new LinkedHashMap<>();
 	}
 
-	public List<Question> getQuestions() {
-		return questions;
+	public List<FeedbackQuestion> getQuestions() {
+		return new ArrayList<>(questions.values());
 	}
 
-	public void setQuestions(List<Question> questions) {
-		this.questions = questions;
-	}
-
-	public Feedback withQuestions(Question... questions) {
-		setQuestions(Arrays.asList(questions));
+	public Feedback withQuestions(FeedbackQuestion... newQuestions) {
+		questions.clear();
+		for (FeedbackQuestion question : newQuestions) {
+			questions.put(question.getQuestionId(), question);
+		}
 		return this;
 	}
 
@@ -36,55 +36,4 @@ public class Feedback implements Serializable {
 		this.isSent = isSent;
 	}
 
-	public static class Question implements Serializable {
-		public static final Object NEGATIVE_ANSWER = ":|";
-		public static final Object POSITIVE_ANSWER = ":)";
-		public static final Object VERY_POSITIVE_ANSWER = ":D";
-
-		private int stringId;
-		private AnswerType answerType;
-		private Object answer;
-		private boolean answerChanged;
-
-		public Question(int stringId, AnswerType answerType) {
-			this.stringId = stringId;
-			this.answerType = answerType;
-			answerChanged = false;
-		}
-
-		public int getStringId() {
-			return stringId;
-		}
-
-		public AnswerType getAnswerType() {
-			return answerType;
-		}
-
-		public void setAnswer(Object answer) {
-			if (!Objects.equals(answer, this.answer)) {
-				setAnswerChanged(true);
-			}
-			this.answer = answer;
-		}
-
-		public Object getAnswer() {
-			return answer;
-		}
-
-		public boolean hasAnswer() {
-			return answer != null;
-		}
-
-		public boolean isAnswerChanged() {
-			return answerChanged;
-		}
-
-		public void setAnswerChanged(boolean answerChanged) {
-			this.answerChanged = answerChanged;
-		}
-
-		public enum AnswerType {
-			TEXT, YES_NO, SMILEY_3_POINTS
-		}
-	}
 }

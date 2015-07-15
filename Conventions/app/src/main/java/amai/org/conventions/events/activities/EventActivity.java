@@ -20,7 +20,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -41,6 +40,7 @@ import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.Feedback;
+import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.Dates;
@@ -52,6 +52,8 @@ public class EventActivity extends NavigationActivity {
 
     public static final String EXTRA_EVENT_ID = "EventIdExtra";
 
+	private static final String TAG = EventActivity.class.getCanonicalName();
+
     private ConventionEvent conventionEvent;
     private LinearLayout imagesLayout;
     private View feedbackClosed;
@@ -59,9 +61,10 @@ public class EventActivity extends NavigationActivity {
     private boolean shouldSaveFeedback;
     private ProgressBar progressBar;
     private TextView collapsedFeedbackTitle;
-    private Button sendFeedbackButton;
+	private View sendFeedbackButton;
+	private View feedbackSentText;
 
-    @Override
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentInContentContainer(R.layout.activity_event);
@@ -72,7 +75,8 @@ public class EventActivity extends NavigationActivity {
         feedbackOpen = findViewById(R.id.feedback_open);
         progressBar = (ProgressBar) findViewById(R.id.feedback_progress_bar);
         collapsedFeedbackTitle = (TextView) findViewById(R.id.collapsed_feedback_title);
-        sendFeedbackButton = (Button) findViewById(R.id.send_feedback_button);
+		sendFeedbackButton = findViewById(R.id.send_feedback_button);
+		feedbackSentText = findViewById(R.id.feedback_sent_text);
 
         String eventId = getIntent().getStringExtra(EXTRA_EVENT_ID);
         conventionEvent = Convention.getInstance().findEventById(eventId);
@@ -204,8 +208,8 @@ public class EventActivity extends NavigationActivity {
             Convention.getInstance().getStorage().saveUserInput();
 
             // Reset answer changed flag
-            List<Feedback.Question> questions = this.conventionEvent.getUserInput().getFeedback().getQuestions();
-            for (Feedback.Question question : questions) {
+            List<FeedbackQuestion> questions = this.conventionEvent.getUserInput().getFeedback().getQuestions();
+            for (FeedbackQuestion question : questions) {
                 question.setAnswerChanged(false);
             }
         }
@@ -261,7 +265,7 @@ public class EventActivity extends NavigationActivity {
                 progressBar.setVisibility(View.GONE);
 
                 if (errorMessage != null) {
-                    Log.w("AMAI", "Failed to send feedback mail. Reason: " + errorMessage);
+                    Log.w(TAG, "Failed to send feedback mail. Reason: " + errorMessage);
                     Toast.makeText(EventActivity.this, getString(R.string.feedback_send_mail_failed), Toast.LENGTH_LONG).show();
                     view.setVisibility(View.VISIBLE);
                 } else {
@@ -275,21 +279,22 @@ public class EventActivity extends NavigationActivity {
 
     private String formatFeedbackMailBody() {
         return String.format(Dates.getLocale(), "%s\n%s, %s\n\n%s\n\n\nDeviceId: %s",
-                conventionEvent.getTitle(),
-                Dates.formatHoursAndMinutes(conventionEvent.getStartTime()),
-                conventionEvent.getHall().getName(),
-                formatFeedbackQuestions(),
-                getDeviceId()
+		        conventionEvent.getTitle(),
+		        Dates.formatHoursAndMinutes(conventionEvent.getStartTime()),
+		        conventionEvent.getHall().getName(),
+		        formatFeedbackQuestions(),
+		        getDeviceId()
         );
     }
 
     private String formatFeedbackQuestions() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Feedback.Question question : conventionEvent.getUserInput().getFeedback().getQuestions()) {
+	    Feedback feedback = conventionEvent.getUserInput().getFeedback();
+	    for (FeedbackQuestion question : feedback.getQuestions()) {
             if (question.hasAnswer()) {
                 stringBuilder.append(String.format(Dates.getLocale(), "%s %s\n",
-                        getString(question.getStringId()),
-                        question.getAnswer()));
+		                question.getQuestionText(getResources(), feedback.isSent()),
+		                question.getAnswer()));
             }
         }
 
@@ -347,17 +352,18 @@ public class EventActivity extends NavigationActivity {
 
         if (event.getUserInput().getFeedback().isSent()) {
             collapsedFeedbackTitle.setText(getString(R.string.feedback_sent));
-            sendFeedbackButton.setVisibility(View.GONE);
+	        sendFeedbackButton.setVisibility(View.GONE);
+	        feedbackSentText.setVisibility(View.VISIBLE);
         }
 
         LinearLayout questionsLayout = (LinearLayout) findViewById(R.id.questions_layout);
         questionsLayout.removeAllViews();
-        for (Feedback.Question question : event.getUserInput().getFeedback().getQuestions()) {
+        for (FeedbackQuestion question : event.getUserInput().getFeedback().getQuestions()) {
             questionsLayout.addView(buildQuestionView(question, event.getUserInput().getFeedback().isSent()));
         }
     }
 
-    private View buildQuestionView(final Feedback.Question question, boolean isSent) {
+    private View buildQuestionView(final FeedbackQuestion question, boolean isSent) {
         LinearLayout questionLayout = new LinearLayout(this);
         LinearLayout.LayoutParams questionLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         questionLayoutParams.setMargins(0, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, getResources().getDisplayMetrics()), 0, 0);
@@ -365,7 +371,7 @@ public class EventActivity extends NavigationActivity {
 
         TextView questionText = new TextView(this);
         questionText.setTextAppearance(this, R.style.TextAppearance_AppCompat_Body1);
-        questionText.setText(question.getStringId());
+        questionText.setText(question.getQuestionText(getResources(), isSent));
 
         Object answer = question.getAnswer();
         View answerView = null;
@@ -373,45 +379,54 @@ public class EventActivity extends NavigationActivity {
 
         switch (question.getAnswerType()) {
             case TEXT: {
-                EditText editText = new EditText(this);
-                editText.setFreezesText(true);
-                editText.setInputType(
-                        InputType.TYPE_CLASS_TEXT |
-                                InputType.TYPE_TEXT_FLAG_AUTO_CORRECT |
-                                InputType.TYPE_TEXT_VARIATION_LONG_MESSAGE |
-                                InputType.TYPE_TEXT_FLAG_MULTI_LINE |
-                                InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS
-                );
-                LinearLayout.LayoutParams editTextLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                editText.setLayoutParams(editTextLayoutParams);
-                editText.setTextAppearance(this, R.style.TextAppearance_AppCompat_Body1);
-                if (!isSent) {
-                    editText.addTextChangedListener(new TextWatcher() {
-                        @Override
-                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                        }
+	            if (isSent) {
+		            // Display in a text view
+		            TextView textView = new TextView(this);
+		            LinearLayout.LayoutParams textViewLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		            textView.setLayoutParams(textViewLayoutParams);
+		            textView.setTextAppearance(this, R.style.TextAppearance_AppCompat_Body1);
+		            if (answer != null) {
+		                textView.setText(answer.toString());
+		            }
 
-                        @Override
-                        public void onTextChanged(CharSequence s, int start, int before, int count) {
-                        }
+		            answerView = textView;
+	            } else {
+		            // Display in an editable text
+	                EditText editText = new EditText(this);
+	                editText.setFreezesText(true);
+	                editText.setInputType(
+			                InputType.TYPE_CLASS_TEXT |
+					                InputType.TYPE_TEXT_FLAG_AUTO_CORRECT |
+					                InputType.TYPE_TEXT_VARIATION_LONG_MESSAGE |
+					                InputType.TYPE_TEXT_FLAG_MULTI_LINE |
+					                InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS
+	                );
+	                LinearLayout.LayoutParams editTextLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+	                editText.setLayoutParams(editTextLayoutParams);
+	                editText.setTextAppearance(this, R.style.TextAppearance_AppCompat_Body1);
+	                editText.addTextChangedListener(new TextWatcher() {
+		                @Override
+		                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+		                }
 
-                        @Override
-                        public void afterTextChanged(Editable s) {
-                            question.setAnswer(s.toString());
-                            shouldSaveFeedback |= question.isAnswerChanged();
-                        }
-                    });
-                }
+		                @Override
+		                public void onTextChanged(CharSequence s, int start, int before, int count) {
+		                }
 
-                if (isSent) {
-                    editText.setEnabled(false);
-                }
+		                @Override
+		                public void afterTextChanged(Editable s) {
+			                question.setAnswer(s.toString());
+			                shouldSaveFeedback |= question.isAnswerChanged();
+		                }
+	                });
 
-                if (answer != null) {
-                    editText.setText(answer.toString());
-                }
+	                if (answer != null) {
+	                    editText.setText(answer.toString());
+	                }
 
-                answerView = editText;
+		            answerView = editText;
+	            }
+
                 break;
             }
             case SMILEY_3_POINTS: {
@@ -461,11 +476,11 @@ public class EventActivity extends NavigationActivity {
 
                         Object answer = null;
                         if (selected == negativeRating) {
-                            answer = Feedback.Question.NEGATIVE_ANSWER;
+                            answer = FeedbackQuestion.Smiley3PointAnswer.NEGATIVE;
                         } else if (selected == positiveRating) {
-                            answer = Feedback.Question.POSITIVE_ANSWER;
+                            answer = FeedbackQuestion.Smiley3PointAnswer.POSITIVE;
                         } else if (selected == veryPositiveRating) {
-                            answer = Feedback.Question.VERY_POSITIVE_ANSWER;
+                            answer = FeedbackQuestion.Smiley3PointAnswer.VERY_POSITIVE;
                         }
                         question.setAnswer(answer);
                         shouldSaveFeedback |= question.isAnswerChanged();
@@ -483,13 +498,20 @@ public class EventActivity extends NavigationActivity {
                 }
 
                 if (answer != null) {
-                    if (answer.equals(Feedback.Question.NEGATIVE_ANSWER)) {
-                        listener.onClick(negativeRating);
-                    } else if (answer.equals(Feedback.Question.POSITIVE_ANSWER)) {
-                        listener.onClick(positiveRating);
-                    } else if (answer.equals(Feedback.Question.VERY_POSITIVE_ANSWER)) {
-                        listener.onClick(veryPositiveRating);
-                    }
+	                FeedbackQuestion.Smiley3PointAnswer smileyAnswer = FeedbackQuestion.Smiley3PointAnswer.getByAnswerText(answer.toString());
+	                if (smileyAnswer != null) {
+		                switch (smileyAnswer) {
+			                case NEGATIVE:
+		                        listener.onClick(negativeRating);
+				                break;
+			                case POSITIVE:
+	                            listener.onClick(positiveRating);
+				                break;
+			                case VERY_POSITIVE:
+	                            listener.onClick(veryPositiveRating);
+				                break;
+		                }
+	                }
                 }
 
                 answerView = imagesLayout;

@@ -147,12 +147,14 @@
                     android:layout_marginEnd="@dimen/event_details_box_padding"
                     android:layout_marginTop="@dimen/event_details_box_padding"
                     android:layout_height="1dp"
+                    android:id="@+id/send_feedback_button_separator"
                     android:background="@android:color/black"
                     android:alpha="0.1"/>
 
                 <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/send_feedback_button_layout"
                     android:layout_gravity="center">
 
                     <Button
@@ -164,12 +166,22 @@
                         android:textColor="@color/white"
                         android:onClick="onSendFeedbackClicked"/>
 
-                    <!-- this progress bar gets un-hidden in runtime when the button is clicked -->
+                    <!-- This progress bar gets un-hidden in runtime when the button is clicked -->
                     <ProgressBar
                         android:id="@+id/feedback_progress_bar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:visibility="gone" />
+
+                    <!-- This text view is displayed when the feedback was already sent -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/TextAppearance.AppCompat.Subhead"
+                        android:id="@+id/feedback_sent_text"
+                        android:layout_margin="10dp"
+                        android:text="@string/feedback_sent"
+                        android:visibility="gone"/>
 
                 </FrameLayout>
 
