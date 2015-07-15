@@ -1,6 +1,11 @@
 package amai.org.conventions;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -13,8 +18,10 @@ import amai.org.conventions.navigation.NavigationActivity;
 public class ArrivalMethodsActivity extends NavigationActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+	private final static double LATITUDE = 31.786372;
+	private final static double LONGITUDE = 35.202425;
 
-    @Override
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentInContentContainer(R.layout.activity_arrival_methods);
@@ -27,7 +34,32 @@ public class ArrivalMethodsActivity extends NavigationActivity {
         setUpMapIfNeeded();
     }
 
-    /**
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.arrival_methods_menu, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.arrival_methods_navigate:
+				Intent intent = new Intent(Intent.ACTION_VIEW,
+						Uri.parse("geo:" + LATITUDE + "," + LONGITUDE +
+									"?q=" + LATITUDE + "," + LONGITUDE +
+									"(" + Uri.encode(getString(R.string.arrival_methods_marker_name)) + ")"));
+				if (intent.resolveActivity(getPackageManager()) != null) {
+					this.startActivity(intent);
+				} else {
+					Toast.makeText(this, "No activity for intent", Toast.LENGTH_SHORT).show();
+				}
+				return true;
+		}
+
+		return super.onOptionsItemSelected(item);
+	}
+
+	/**
      * Sets up the map if it is possible to do so (i.e., the Google Play services APK is correctly
      * installed) and the map has not already been instantiated.. This will ensure that we only ever
      * call {@link #setUpMap()} once when {@link #mMap} is not null.
@@ -62,7 +94,7 @@ public class ArrivalMethodsActivity extends NavigationActivity {
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
-        LatLng conventionLocation = new LatLng(31.786372, 35.202425);
+	    LatLng conventionLocation = new LatLng(LATITUDE, LONGITUDE);
 
         mMap.addMarker(new MarkerOptions()
                 // TODO - return the custom marker after scaling it to a proper size.

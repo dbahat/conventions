@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="amai.org.conventions.ArrivalMethodsActivity"
+    tools:ignore="AlwaysShowAction">
+
+    <item
+        android:id="@+id/arrival_methods_navigate"
+        android:title="@string/navigate"
+        android:icon="@drawable/directions"
+        android:orderInCategory="1"
+        app:showAsAction="always"/>
+
+</menu>

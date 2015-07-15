@@ -8,7 +8,7 @@
 
     <string name="event_added_to_favorites">האירוע התווסף לאירועים שלי</string>
     <string name="event_removed_from_favorites">האירוע הוסר מהאירועים שלי</string>
-    <string name="arrival_methods_marker_name">בנייני האומה</string>
+    <string name="arrival_methods_marker_name">כאמ\"י 2015 - בנייני האומה</string>
 
     <string name="event_navigate_to_map">הצג במפה</string>
     <string name="event_navigate_to_hall">הצג אולם</string>
@@ -40,4 +40,5 @@
     <string name="no">לא</string>
     <string name="floor_down">קומה למטה</string>
     <string name="floor_up">קומה למעלה</string>
+    <string name="navigate">ניווט</string>
 </resources>
