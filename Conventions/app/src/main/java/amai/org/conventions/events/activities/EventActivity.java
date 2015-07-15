@@ -225,7 +225,6 @@ public class EventActivity extends NavigationActivity {
 
             @Override
             protected String doInBackground(Void... params) {
-
                 // First save the user input before sending it
                 Convention.getInstance().getStorage().saveUserInput();
 
@@ -348,9 +347,21 @@ public class EventActivity extends NavigationActivity {
     }
 
     private void setupFeedback(ConventionEvent event) {
-        closeFeedback(null);
+	    // Feedback should start as closed in the following cases:
+	    // 1. Feedback was sent
+	    // 2. Event was not attended an no questions were answered
+	    // Otherwise it should start as open.
+	    Feedback feedback = event.getUserInput().getFeedback();
+	    boolean shouldFeedbackBeClosed = feedback.isSent() ||
+			    (!event.isAttending() && !feedback.hasAnsweredQuestions());
 
-        if (event.getUserInput().getFeedback().isSent()) {
+	    if (shouldFeedbackBeClosed) {
+            closeFeedback(null);
+	    } else {
+		    openFeedback(null);
+	    }
+
+        if (feedback.isSent()) {
             collapsedFeedbackTitle.setText(getString(R.string.feedback_sent));
 	        sendFeedbackButton.setVisibility(View.GONE);
 	        feedbackSentText.setVisibility(View.VISIBLE);
@@ -358,8 +369,8 @@ public class EventActivity extends NavigationActivity {
 
         LinearLayout questionsLayout = (LinearLayout) findViewById(R.id.questions_layout);
         questionsLayout.removeAllViews();
-        for (FeedbackQuestion question : event.getUserInput().getFeedback().getQuestions()) {
-            questionsLayout.addView(buildQuestionView(question, event.getUserInput().getFeedback().isSent()));
+        for (FeedbackQuestion question : feedback.getQuestions()) {
+            questionsLayout.addView(buildQuestionView(question, feedback.isSent()));
         }
     }
 

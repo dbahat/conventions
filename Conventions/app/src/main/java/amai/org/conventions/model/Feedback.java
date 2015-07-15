@@ -36,4 +36,13 @@ public class Feedback implements Serializable {
 		this.isSent = isSent;
 	}
 
+	public boolean hasAnsweredQuestions() {
+		for (FeedbackQuestion question : questions.values()) {
+			if (question.hasAnswer()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 }
