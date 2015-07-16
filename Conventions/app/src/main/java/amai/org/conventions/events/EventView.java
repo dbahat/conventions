@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
@@ -28,6 +29,7 @@ public class EventView extends FrameLayout {
     private final TextView endTime;
     private final TextView eventName;
     private final TextView lecturerName;
+	private final ImageView feedbackIcon;
     private final ViewGroup timeLayout;
     private final ViewGroup eventDescription;
     private final CardView eventContainer;
@@ -44,6 +46,7 @@ public class EventView extends FrameLayout {
         endTime = (TextView) this.findViewById(R.id.endTime);
         eventName = (TextView) this.findViewById(R.id.eventName);
         lecturerName = (TextView) this.findViewById(R.id.lecturerName);
+	    feedbackIcon = (ImageView) this.findViewById(R.id.feedback_icon);
         eventDescription = (ViewGroup) this.findViewById(R.id.eventDescription);
         eventContainer = (CardView) this.findViewById(R.id.eventContainer);
 
@@ -65,9 +68,11 @@ public class EventView extends FrameLayout {
         setEndTime(params.getString(R.styleable.Event_endTime));
         setEventTitle(params.getString(R.styleable.Event_eventTitle));
         setLecturerName(params.getString(R.styleable.Event_lecturerName));
+	    setFeedbackIcon(params.getDrawable(R.styleable.Event_feedbackIcon));
 
         setColorFromAttributes(timeLayout, params, R.styleable.Event_eventTypeColor);
         setColorFromAttributes(eventDescription, params, R.styleable.Event_eventColor);
+
 
         params.recycle();
     }
@@ -80,6 +85,7 @@ public class EventView extends FrameLayout {
         setEndTime(Dates.formatHoursAndMinutes(event.getEndTime()));
         setEventTitle(event.getTitle());
         setLecturerName(event.getLecturer());
+	    setFeedbackIconFromEvent(event);
 
         // Setting the event id inside the view tag, so we can easily extract it from the view when listening to onClick events.
         eventContainer.setTag(event.getId());
@@ -172,6 +178,31 @@ public class EventView extends FrameLayout {
     protected void setLecturerName(String name) {
         lecturerName.setText(name);
     }
+
+	protected void setFeedbackIcon(Drawable feedbackDrawable) {
+		if (feedbackDrawable != null) {
+			lecturerName.setVisibility(GONE);
+			feedbackIcon.setVisibility(VISIBLE);
+			feedbackIcon.setImageDrawable(feedbackDrawable);
+		} else {
+			lecturerName.setVisibility(VISIBLE);
+			feedbackIcon.setVisibility(GONE);
+		}
+	}
+
+	protected void setFeedbackIconFromEvent(ConventionEvent event) {
+		Drawable icon = null;
+		if (event.canFillFeedback()) {
+			icon = getResources().getDrawable(android.R.drawable.stat_notify_chat);
+			icon = icon.mutate();
+			if (event.isAttending()) {
+				icon.setColorFilter(getResources().getColor(R.color.green), PorterDuff.Mode.MULTIPLY);
+			} else {
+				icon.setColorFilter(getResources().getColor(R.color.very_dark_gray), PorterDuff.Mode.MULTIPLY);
+			}
+		}
+		setFeedbackIcon(icon);
+	}
 
     private void setBackground(ViewGroup layout, Drawable drawable) {
         int pL = layout.getPaddingLeft();

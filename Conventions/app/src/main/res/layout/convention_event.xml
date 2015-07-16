@@ -81,16 +81,29 @@
                     android:textColor="@android:color/darker_gray"
                     android:text="Hall name"/>
 
-                <TextView
-                    android:id="@+id/lecturerName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <FrameLayout
                     android:layout_alignParentEnd="true"
-                    android:text="Lecturer name"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:textColor="@android:color/darker_gray"
-                    style="@style/EventViewSmallText"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/lecturerName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Lecturer name"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:textColor="@android:color/darker_gray"
+                        style="@style/EventViewSmallText"/>
+
+                    <amai.org.conventions.customviews.AspectRatioImageView
+                        android:id="@+id/feedback_icon"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        android:src="@android:drawable/stat_notify_chat"
+                        android:visibility="gone"
+                        />
+                </FrameLayout>
 
             </RelativeLayout>
 

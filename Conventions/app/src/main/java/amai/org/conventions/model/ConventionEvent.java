@@ -2,6 +2,7 @@ package amai.org.conventions.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -167,6 +168,15 @@ public class ConventionEvent implements Serializable {
 
 	public boolean hasEnded() {
 		return endTime.before(Dates.now());
+	}
+
+	public boolean canFillFeedback() {
+		// Check if the event will end in 15 minutes or less
+		Calendar minimumTimeOfFillingFeedback = Calendar.getInstance();
+		minimumTimeOfFillingFeedback.setTime(endTime);
+		minimumTimeOfFillingFeedback.add(Calendar.MINUTE, -15);
+
+		return minimumTimeOfFillingFeedback.getTime().before(Dates.now());
 	}
 
     public int getServerId() {

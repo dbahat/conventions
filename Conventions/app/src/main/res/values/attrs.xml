@@ -11,6 +11,7 @@
         <attr name="lecturerName" format="string"/>
         <attr name="showHallName" format="boolean"/>
         <attr name="showFavoriteIcon" format="boolean"/>
+        <attr name="feedbackIcon" format="reference"/>
     </declare-styleable>
 
     <declare-styleable name="ApplicationTheme">
