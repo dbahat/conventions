@@ -52,6 +52,8 @@ import amai.org.conventions.model.MapLocation;
 public class MapFloorFragment extends Fragment implements Marker.MarkerListener {
 
     private static final String ARGS_FLOOR_NUMBER = "FloorNumber";
+	private static final String STATE_SELECTED_LOCATIONS = "StateSelectedLocation";
+	private static final String STATE_LOCATION_DETAILS_OPEN = "StateLocationDetailsOpen";
 
 	private static Map<Integer, SVG> loadedSVGFiles = new HashMap<>();
 
@@ -87,6 +89,27 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
         configureMapFloor();
 	    setMainViewClickListener(view);
 
+	    // Restore state
+	    if (savedInstanceState != null) {
+		    ArrayList<Integer> selectedLocations = savedInstanceState.getIntegerArrayList(STATE_SELECTED_LOCATIONS);
+		    MapLocation selectedLocation = null;
+		    for (int locationId : selectedLocations) {
+			    for (Marker marker : floorMarkers) {
+				    if (marker.getLocation().getId() == locationId) {
+				        selectedLocation = marker.getLocation();
+					    marker.select(false);
+				        break;
+				    }
+			    }
+		    }
+
+		    boolean locationDetailsOpen = savedInstanceState.getBoolean(STATE_LOCATION_DETAILS_OPEN);
+		    if (locationDetailsOpen && selectedLocation != null) {
+			    // If the details are open there should only be one location selected so we take the last one
+			    setSelectedLocationDetails(selectedLocation);
+		    }
+	    }
+
 	    return view;
     }
 
@@ -111,7 +134,21 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
         mapArrowClickedListener = null;
     }
 
-    public static MapFloorFragment newInstance(int floor) {
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		ArrayList<Integer> selectedLocationIDs = new ArrayList<>();
+		for (Marker marker : floorMarkers) {
+			if (marker.isSelected()) {
+				selectedLocationIDs.add(marker.getLocation().getId());
+			}
+		}
+		outState.putIntegerArrayList(STATE_SELECTED_LOCATIONS, selectedLocationIDs);
+		outState.putBoolean(STATE_LOCATION_DETAILS_OPEN, locationDetails.getVisibility() == View.VISIBLE);
+
+		super.onSaveInstanceState(outState);
+	}
+
+	public static MapFloorFragment newInstance(int floor) {
         MapFloorFragment fragment = new MapFloorFragment();
         Bundle args = new Bundle();
         args.putInt(ARGS_FLOOR_NUMBER, floor);

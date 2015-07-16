@@ -54,6 +54,10 @@ public class Marker {
 	}
 
 	public void select() {
+		select(true);
+	}
+
+	public void select(boolean animate) {
 		if (selected) {
 			return;
 		}
@@ -62,11 +66,15 @@ public class Marker {
 		// Change the marker image and make it marker bigger. Animate the size change.
 		imageView.setImageDrawable(selectedDrawableProvider.getDrawable());
 
-		scaleAndAnimate(imageView, imageWidth + 2, imageHeight + 4);
-		scaleAndAnimate(shadowImageView, shadowWidth + 2, shadowHeight + 4);
+		scaleAndAnimate(imageView, imageWidth + 2, imageHeight + 4, animate);
+		scaleAndAnimate(shadowImageView, shadowWidth + 2, shadowHeight + 4, animate);
 	}
 
 	public void deselect() {
+		deselect(true);
+	}
+
+	public void deselect(boolean animate) {
 		if (!selected) {
 			return;
 		}
@@ -75,15 +83,15 @@ public class Marker {
 		// Revert the marker image and size. Animate the size change.
 		imageView.setImageDrawable(drawable);
 
-		scaleAndAnimate(imageView, imageWidth, imageHeight);
-		scaleAndAnimate(shadowImageView, shadowWidth, shadowHeight);
+		scaleAndAnimate(imageView, imageWidth, imageHeight, animate);
+		scaleAndAnimate(shadowImageView, shadowWidth, shadowHeight, animate);
 	}
 
 	public boolean isSelected() {
 		return selected;
 	}
 
-	private void scaleAndAnimate(View view, int newWidth, int newHeight) {
+	private void scaleAndAnimate(View view, int newWidth, int newHeight, boolean animate) {
 		ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
 		int width = layoutParams.width;
 		int height = layoutParams.height;
@@ -92,12 +100,14 @@ public class Marker {
 		layoutParams.height = newHeight;
 		view.setLayoutParams(layoutParams);
 
-		float widthScale = width / (float) newWidth;
-		float heightScale = height / (float) newHeight;
-		ScaleAnimation animation = new ScaleAnimation(widthScale, 1f, heightScale, 1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 1f);
-		animation.setInterpolator(new BounceInterpolator());
-		animation.setDuration(500);
-		imageView.startAnimation(animation);
+		if (animate) {
+			float widthScale = width / (float) newWidth;
+			float heightScale = height / (float) newHeight;
+			ScaleAnimation animation = new ScaleAnimation(widthScale, 1f, heightScale, 1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 1f);
+			animation.setInterpolator(new BounceInterpolator());
+			animation.setDuration(500);
+			imageView.startAnimation(animation);
+		}
 	}
 
 	public void setOnClickListener(MarkerListener listener) {

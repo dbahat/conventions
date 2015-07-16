@@ -47,6 +47,8 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView.OnHeaderClic
 public class ProgrammeActivity extends NavigationActivity implements OnHeaderClickListener, SwipeRefreshLayout.OnRefreshListener {
 
 	public static final String EXTRA_DELAY_SCROLLING = "DelayScrollingExtra";
+	private static final String STATE_PREVENT_SCROLLING = "StatePreventScrolling";
+	private static final String STATE_NAVIGATE_ICON_MODIFIED = "StateNavigateIconModified";
     private SwipeableEventsViewOrHourAdapter adapter;
     private StickyListHeadersListView listView;
     private List<ProgrammeConventionEvent> events;
@@ -75,9 +77,7 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
 			    if (!navigateToMyEventsIconModified) {
 				    navigateToMyEventsIconModified = true;
 				    final MenuItem item = menu.findItem(R.id.programme_navigate_to_my_events);
-				    Drawable icon = item.getIcon().mutate();
-				    int accentColor = ThemeAttributes.getColor(ProgrammeActivity.this, R.attr.toolbarIconAccentColor);
-				    icon.setColorFilter(accentColor, PorterDuff.Mode.MULTIPLY);
+				    int accentColor = changeIconColor(item);
 
 				    View actionView = getLayoutInflater().inflate(R.layout.my_events_icon, null);
 				    ImageView myEventsNonAnimatedIcon = (ImageView) actionView.findViewById(R.id.non_animated_icon);
@@ -112,36 +112,42 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
 
         listView.setOnHeaderClickListener(this);
 
-        final int position = findHourPosition(getHour(Dates.now()));
-		if (position != -1) {
-			cancelScroll = false;
+		if (savedInstanceState != null && savedInstanceState.getBoolean(STATE_NAVIGATE_ICON_MODIFIED, false)) {
+			navigateToMyEventsIconModified = true;
+		}
 
-			listView.setOnTouchListener(new View.OnTouchListener() {
-				@Override
-				public boolean onTouch(View v, MotionEvent event) {
-					if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
-						cancelScroll = true;
-						listView.setOnTouchListener(null);
-					}
-					return false;
-				}
-			});
+		if (savedInstanceState == null || !savedInstanceState.getBoolean(STATE_PREVENT_SCROLLING, false)) {
+	        final int position = findHourPosition(getHour(Dates.now()));
+			if (position != -1) {
+				cancelScroll = false;
 
-			final ViewTreeObserver vto = listView.getViewTreeObserver();
-			vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-				public void onGlobalLayout() {
-					// Unregister the listener to only call scrollToPosition once
-					listView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-
-					int delay = getIntent().getIntExtra(EXTRA_DELAY_SCROLLING, 0);
-					new Handler().postDelayed(new Runnable() {
-						@Override
-						public void run() {
-							scrollToPosition(position);
+				listView.setOnTouchListener(new View.OnTouchListener() {
+					@Override
+					public boolean onTouch(View v, MotionEvent event) {
+						if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+							cancelScroll = true;
+							listView.setOnTouchListener(null);
 						}
-					}, delay);
-				}
-			});
+						return false;
+					}
+				});
+
+				final ViewTreeObserver vto = listView.getViewTreeObserver();
+				vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+					public void onGlobalLayout() {
+						// Unregister the listener to only call scrollToPosition once
+						listView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+
+						int delay = getIntent().getIntExtra(EXTRA_DELAY_SCROLLING, 0);
+						new Handler().postDelayed(new Runnable() {
+							@Override
+							public void run() {
+								scrollToPosition(position);
+							}
+						}, delay);
+					}
+				});
+			}
 		}
     }
 
@@ -157,8 +163,25 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
     public boolean onCreateOptionsMenu(Menu menu) {
 	    this.menu = menu;
         getMenuInflater().inflate(R.menu.programme_menu, menu);
+
+	    if (navigateToMyEventsIconModified) {
+		    MenuItem item = menu.findItem(R.id.programme_navigate_to_my_events);
+		    changeIconColor(item);
+	    }
         return true;
     }
+
+	/**
+	 * Change color of menu item icon to be accented
+	 * @param item the menu item
+	 * @return The new color
+	 */
+	private int changeIconColor(MenuItem item) {
+		Drawable icon = item.getIcon().mutate();
+		int accentColor = ThemeAttributes.getColor(ProgrammeActivity.this, R.attr.toolbarIconAccentColor);
+		icon.setColorFilter(accentColor, PorterDuff.Mode.MULTIPLY);
+		return accentColor;
+	}
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -173,8 +196,15 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
         return super.onOptionsItemSelected(item);
     }
 
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		outState.putBoolean(STATE_PREVENT_SCROLLING, true);
+		outState.putBoolean(STATE_NAVIGATE_ICON_MODIFIED, navigateToMyEventsIconModified);
 
-    @Override
+		super.onSaveInstanceState(outState);
+	}
+
+	@Override
     public void onHeaderClick(StickyListHeadersListView stickyListHeadersListView, View view, int i, long l, boolean b) {
         EventTimeViewHolder eventTimeViewHolder = (EventTimeViewHolder) view.getTag();
         int selectedTimeSectionHour = eventTimeViewHolder.getCurrentHour();
