@@ -56,6 +56,7 @@ public class EventActivity extends NavigationActivity {
     public static final String EXTRA_EVENT_ID = "EventIdExtra";
 
 	private static final String TAG = EventActivity.class.getCanonicalName();
+	private static final String STATE_FEEDBACK_OPEN = "StateFeedbackOpen";
 
     private ConventionEvent conventionEvent;
     private LinearLayout imagesLayout;
@@ -87,7 +88,7 @@ public class EventActivity extends NavigationActivity {
 
         String eventId = getIntent().getStringExtra(EXTRA_EVENT_ID);
         conventionEvent = Convention.getInstance().findEventById(eventId);
-        setEvent(conventionEvent);
+        setEvent(conventionEvent, savedInstanceState);
 
         final View mainLayout = findViewById(R.id.event_main_layout);
         final ParallaxScrollView scrollView = (ParallaxScrollView) findViewById(R.id.parallax_scroll);
@@ -222,7 +223,14 @@ public class EventActivity extends NavigationActivity {
         }
     }
 
-    public void onSendFeedbackClicked(final View view) {
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		outState.putBoolean(STATE_FEEDBACK_OPEN, feedbackOpen.getVisibility() == View.VISIBLE);
+
+		super.onSaveInstanceState(outState);
+	}
+
+	public void onSendFeedbackClicked(final View view) {
 
         // Hide the send feedback button and show a spinny while sending is in progress
         view.setVisibility(View.GONE);
@@ -276,7 +284,7 @@ public class EventActivity extends NavigationActivity {
                     view.setVisibility(View.VISIBLE);
                 } else {
                     // Re-setup the feedback UI so interactions will now be disabled in it, and the "feedback sent" indicator become visible.
-                    setupFeedback(conventionEvent);
+                    setupFeedback(conventionEvent, null);
                 }
             }
 
@@ -311,7 +319,7 @@ public class EventActivity extends NavigationActivity {
         return Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
     }
 
-    private void setEvent(ConventionEvent event) {
+    private void setEvent(ConventionEvent event, Bundle savedInstanceState) {
         setToolbarTitle(event.getType().getDescription());
 
         TextView title = (TextView) findViewById(R.id.event_title);
@@ -334,7 +342,7 @@ public class EventActivity extends NavigationActivity {
                 Dates.toHumanReadableTimeDuration(event.getEndTime().getTime() - event.getStartTime().getTime()));
         time.setText(formattedEventTime);
 
-        setupFeedback(event);
+        setupFeedback(event, savedInstanceState);
 
         setupBackgroundImages(event);
 
@@ -353,19 +361,27 @@ public class EventActivity extends NavigationActivity {
         description.setText(Html.fromHtml(eventDescription));
     }
 
-    private void setupFeedback(ConventionEvent event) {
+    private void setupFeedback(ConventionEvent event, Bundle savedInstanceState) {
 	    if (!event.canFillFeedback()) {
 		    findViewById(R.id.feedback_container).setVisibility(View.GONE);
 		    return;
 	    }
 
-	    // Feedback should start as closed in the following cases:
-	    // 1. Feedback was sent
-	    // 2. Event was not attended an no questions were answered
-	    // Otherwise it should start as open.
 	    Feedback feedback = event.getUserInput().getFeedback();
-	    boolean shouldFeedbackBeClosed = feedback.isSent() ||
-			    (!event.isAttending() && !feedback.hasAnsweredQuestions());
+
+	    // If we got the saved state of the feedback (from rotation etc), use it. Instead calculate the
+	    // initial state of the feedback.
+	    boolean shouldFeedbackBeClosed;
+	    if (savedInstanceState != null && savedInstanceState.containsKey(STATE_FEEDBACK_OPEN)) {
+		    shouldFeedbackBeClosed = !savedInstanceState.getBoolean(STATE_FEEDBACK_OPEN);
+	    } else {
+		    // Feedback should start as closed in the following cases:
+		    // 1. Feedback was sent
+		    // 2. Event was not attended an no questions were answered
+		    // Otherwise it should start as open.
+		    shouldFeedbackBeClosed = feedback.isSent() ||
+				    (!event.isAttending() && !feedback.hasAnsweredQuestions());
+	    }
 
 	    if (shouldFeedbackBeClosed) {
             closeFeedback(null);
