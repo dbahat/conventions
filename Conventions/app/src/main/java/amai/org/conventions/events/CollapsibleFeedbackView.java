@@ -101,7 +101,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
         conventionEvent = event;
 
         // Calculate the heights of the collapsed/expended states of the feedback view, since they are dynamic (based on the number of questions), and
-        // we need the heights pre-calculated to be able to properly animate the transistions.
+        // we need the heights pre-calculated to be able to properly animate the transitions.
         calculateCollapsedFeedbackHeight();
         calculateExpendedFeedbackHeight();
 

@@ -114,12 +114,22 @@ public class Convention implements Serializable {
 	}
 
 	public List<ConventionEvent> getEvents() {
-        eventLockObject.writeLock().lock();
+        eventLockObject.readLock().lock();
         try {
             return events;
         } finally {
-            eventLockObject.writeLock().unlock();
+            eventLockObject.readLock().unlock();
         }
+    }
+
+    public boolean doesHaveFavorites() {
+        List<ConventionEvent> events = getEvents();
+        boolean hasFavorites = false;
+        for (ConventionEvent event : events) {
+            hasFavorites |= event.isAttending();
+        }
+
+        return hasFavorites;
     }
 
 	public Map<String, ConventionEvent.UserInput> getUserInput() {

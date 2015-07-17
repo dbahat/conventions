@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.view.ContextThemeWrapper;
@@ -21,6 +22,7 @@ import android.view.animation.ScaleAnimation;
 import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -34,6 +36,7 @@ import java.util.List;
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.ProgrammeConventionEvent;
+import amai.org.conventions.events.ViewPagerAnimator;
 import amai.org.conventions.events.adapters.SwipeableEventsViewOrHourAdapter;
 import amai.org.conventions.events.holders.EventTimeViewHolder;
 import amai.org.conventions.model.Convention;
@@ -142,7 +145,7 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
 						new Handler().postDelayed(new Runnable() {
 							@Override
 							public void run() {
-								scrollToPosition(position);
+								scrollToPosition(position, true);
 							}
 						}, delay);
 					}
@@ -238,7 +241,7 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
 				                int position = findHourPosition(numberPicker.getValue());
 				                if (position != -1) {
 					                cancelScroll = false;
-				                    scrollToPosition(position);
+				                    scrollToPosition(position, false);
 				                }
 						    }
 					    })
@@ -246,7 +249,7 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
         dialog.show();
     }
 
-    private void scrollToPosition(final int position) {
+    private void scrollToPosition(final int position, final boolean shouldApplyFavoriteReminderAnimation) {
 	    if (!cancelScroll) {
             listView.smoothScrollToPositionFromTop(position, 0, 500);
 
@@ -256,25 +259,49 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
 		    // the same position.
 		    listView.setOnScrollListener(new AbsListView.OnScrollListener() {
 
-		        @Override
-		        public void onScrollStateChanged(AbsListView view, int scrollState) {
-		            if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
-		                listView.setOnScrollListener(null);
-			            if (!cancelScroll) {
-		                    listView.smoothScrollToPositionFromTop(position, 0, 500);
-				            listView.setOnTouchListener(null);
-			            }
-		            }
-		        }
+				@Override
+				public void onScrollStateChanged(AbsListView view, int scrollState) {
+					if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
+						listView.setOnScrollListener(null);
+						if (!cancelScroll) {
+							listView.smoothScrollToPositionFromTop(position, 0, 500);
+							listView.setOnTouchListener(null);
 
-		        @Override
-		        public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-		        }
-		    });
+							// In some cases we'll want to show bounce animation to the scrolled view, to make it easier for users
+							// to understand the views are swipeable.
+							if (shouldApplyFavoriteReminderAnimation) {
+								listView.postDelayed(new Runnable() {
+									@Override
+									public void run() {
+										triggerBounceAnimationIfNeeded();
+									}
+								}, 1500);
+							}
+						}
+					}
+				}
+
+				@Override
+				public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+				}
+			});
 	    }
     }
 
-    private int findHourPosition(int hour) {
+	private void triggerBounceAnimationIfNeeded() {
+		if (!Convention.getInstance().doesHaveFavorites()) {
+
+			if (listView.getListChildCount() > 1) {
+				// Apply the animation on the second listView child, since the first will always be hidden by a stickey header
+				View currentEvent = listView.getListChildAt(1);
+
+				ViewPager currentEventViewPager = (ViewPager) currentEvent.findViewById(R.id.swipe_pager);
+				ViewPagerAnimator.applyBounceAnimation(currentEventViewPager);
+			}
+		}
+	}
+
+	private int findHourPosition(int hour) {
         int i = 0;
 
         for (ProgrammeConventionEvent event : events) {
