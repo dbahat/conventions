@@ -25,6 +25,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
@@ -751,7 +752,7 @@ public class EventActivity extends NavigationActivity {
     private ValueAnimator slideAnimator(int start, int end, final View viewToResize) {
 
         ValueAnimator animator = ValueAnimator.ofInt(start, end);
-
+	    animator.setInterpolator(new AccelerateDecelerateInterpolator());
 
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
