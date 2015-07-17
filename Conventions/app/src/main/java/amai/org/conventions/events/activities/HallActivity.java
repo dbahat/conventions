@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import amai.org.conventions.R;
-import amai.org.conventions.events.adapters.EventsViewAdapter;
+import amai.org.conventions.events.adapters.SwipeableEventsViewAdapter;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
@@ -30,8 +30,8 @@ public class HallActivity extends NavigationActivity {
         RecyclerView hallEventsList = (RecyclerView) findViewById(R.id.hallEventsList);
         ArrayList<ConventionEvent> events = Convention.getInstance().findEventsByHall(hallName);
         Collections.sort(events, new ConventionEventComparator());
-        hallEventsList.setAdapter(new EventsViewAdapter(events, true, false, false));
 
+        hallEventsList.setAdapter(new SwipeableEventsViewAdapter(events));
         hallEventsList.setLayoutManager(new LinearLayoutManager(this));
     }
 }
