@@ -45,4 +45,15 @@ public class Feedback implements Serializable {
 		return false;
 	}
 
+	public FeedbackQuestion.Smiley3PointAnswer getWeightedRating() {
+		if (isSent()) {
+			for (FeedbackQuestion question : questions.values()) {
+				if (question.hasAnswer() && question.getAnswerType() == FeedbackQuestion.AnswerType.SMILEY_3_POINTS) {
+					return (FeedbackQuestion.Smiley3PointAnswer) question.getAnswer();
+				}
+			}
+		}
+		return null;
+	}
+
 }

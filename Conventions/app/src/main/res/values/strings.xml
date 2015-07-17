@@ -41,4 +41,5 @@
     <string name="floor_down">קומה למטה</string>
     <string name="floor_up">קומה למעלה</string>
     <string name="navigate">ניווט</string>
+    <string name="display_feedback">הצג פידבק</string>
 </resources>

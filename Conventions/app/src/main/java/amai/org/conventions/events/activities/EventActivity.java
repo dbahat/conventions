@@ -5,6 +5,7 @@ import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -20,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -34,6 +36,7 @@ import java.util.List;
 import java.util.Properties;
 
 import amai.org.conventions.R;
+import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.AspectRatioImageView;
 import amai.org.conventions.map.MapActivity;
 import amai.org.conventions.model.Convention;
@@ -61,6 +64,8 @@ public class EventActivity extends NavigationActivity {
     private boolean shouldSaveFeedback;
     private ProgressBar progressBar;
     private TextView collapsedFeedbackTitle;
+	private Button openFeedbackButton;
+	private ImageView feedbackIcon;
 	private View sendFeedbackButton;
 	private View feedbackSentText;
 
@@ -75,6 +80,8 @@ public class EventActivity extends NavigationActivity {
         feedbackOpen = findViewById(R.id.feedback_open);
         progressBar = (ProgressBar) findViewById(R.id.feedback_progress_bar);
         collapsedFeedbackTitle = (TextView) findViewById(R.id.collapsed_feedback_title);
+		openFeedbackButton = (Button) findViewById(R.id.open_feedback_button);
+		feedbackIcon = (ImageView) findViewById(R.id.feedback_icon);
 		sendFeedbackButton = findViewById(R.id.send_feedback_button);
 		feedbackSentText = findViewById(R.id.feedback_sent_text);
 
@@ -363,9 +370,11 @@ public class EventActivity extends NavigationActivity {
 
         if (feedback.isSent()) {
             collapsedFeedbackTitle.setText(getString(R.string.feedback_sent));
+	        openFeedbackButton.setText(getString(R.string.display_feedback));
 	        sendFeedbackButton.setVisibility(View.GONE);
 	        feedbackSentText.setVisibility(View.VISIBLE);
         }
+        setFeedbackIcon(event);
 
         LinearLayout questionsLayout = (LinearLayout) findViewById(R.id.questions_layout);
         questionsLayout.removeAllViews();
@@ -373,6 +382,22 @@ public class EventActivity extends NavigationActivity {
             questionsLayout.addView(buildQuestionView(question, feedback.isSent()));
         }
     }
+
+	private void setFeedbackIcon(ConventionEvent event) {
+		Drawable icon;
+		FeedbackQuestion.Smiley3PointAnswer weightedRating = event.getUserInput().getFeedback().getWeightedRating();
+		int filterColor;
+		if (weightedRating != null) {
+			icon = getResources().getDrawable(weightedRating.getImageResourceId());
+			filterColor = getResources().getColor(R.color.yellow);
+		} else {
+			icon = getResources().getDrawable(R.drawable.feedback);
+			filterColor = ThemeAttributes.getColor(this, R.attr.eventFeedbackHighlightedButtonColor);
+		}
+		icon = icon.mutate();
+		icon.setColorFilter(filterColor, PorterDuff.Mode.MULTIPLY);
+		feedbackIcon.setImageDrawable(icon);
+	}
 
     private View buildQuestionView(final FeedbackQuestion question, boolean isSent) {
         LinearLayout questionLayout = new LinearLayout(this);
@@ -454,7 +479,7 @@ public class EventActivity extends NavigationActivity {
                 LinearLayout.LayoutParams negativeLayoutParams = new LinearLayout.LayoutParams(size, size);
                 negativeLayoutParams.setMarginEnd(margin);
                 negativeRating.setLayoutParams(negativeLayoutParams);
-                negativeRating.setImageResource(R.drawable.negative_rating);
+                negativeRating.setImageResource(FeedbackQuestion.Smiley3PointAnswer.NEGATIVE.getImageResourceId());
                 negativeRating.setColorFilter(grayscale);
                 imagesLayout.addView(negativeRating);
 
@@ -462,7 +487,7 @@ public class EventActivity extends NavigationActivity {
                 LinearLayout.LayoutParams positiveLayoutParams = new LinearLayout.LayoutParams(size, size);
                 positiveLayoutParams.setMarginEnd(margin);
                 positiveRating.setLayoutParams(positiveLayoutParams);
-                positiveRating.setImageResource(R.drawable.positive_rating);
+                positiveRating.setImageResource(FeedbackQuestion.Smiley3PointAnswer.POSITIVE.getImageResourceId());
                 positiveRating.setColorFilter(grayscale);
                 imagesLayout.addView(positiveRating);
 
@@ -470,7 +495,7 @@ public class EventActivity extends NavigationActivity {
                 LinearLayout.LayoutParams veryPositiveLayoutParams = new LinearLayout.LayoutParams(size, size);
                 veryPositiveLayoutParams.setMarginEnd(margin);
                 veryPositiveRating.setLayoutParams(veryPositiveLayoutParams);
-                veryPositiveRating.setImageResource(R.drawable.very_positive_rating);
+                veryPositiveRating.setImageResource(FeedbackQuestion.Smiley3PointAnswer.VERY_POSITIVE.getImageResourceId());
                 veryPositiveRating.setColorFilter(grayscale);
                 imagesLayout.addView(veryPositiveRating);
 

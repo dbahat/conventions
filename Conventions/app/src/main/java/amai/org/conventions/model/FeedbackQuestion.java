@@ -86,16 +86,25 @@ public class FeedbackQuestion implements Serializable {
 	}
 
 	public enum Smiley3PointAnswer {
-		NEGATIVE(":|"), POSITIVE(":)"), VERY_POSITIVE(":D");
+		NEGATIVE(":|", R.drawable.negative_rating),
+		POSITIVE(":)", R.drawable.positive_rating),
+		VERY_POSITIVE(":D", R.drawable.very_positive_rating);
 
 		private String answerText;
-		Smiley3PointAnswer(String answerText) {
+		private int imageResourceId;
+
+		Smiley3PointAnswer(String answerText, int imageResourceId) {
 			this.answerText = answerText;
+			this.imageResourceId = imageResourceId;
 		}
 
 		@Override
 		public String toString() {
 			return answerText;
+		}
+
+		public int getImageResourceId() {
+			return imageResourceId;
 		}
 
 		public static Smiley3PointAnswer getByAnswerText(String textAnswer) {

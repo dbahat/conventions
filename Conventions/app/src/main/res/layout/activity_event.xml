@@ -85,21 +85,34 @@
                     style="@style/TextAppearance.AppCompat.Subhead"
                     android:text="@string/event_has_ended"/>
 
-                <FrameLayout
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:gravity="end"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <Button
                         android:paddingTop="@dimen/event_details_box_padding"
-                        android:paddingEnd="@dimen/event_details_box_padding"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:paddingEnd="@dimen/event_details_box_padding"
                         android:layout_gravity="top|end"
                         style="@style/EventFeedbackButton"
                         android:onClick="openFeedback"
+                        android:id="@+id/open_feedback_button"
                         android:text="@string/add_feedback"/>
 
-                </FrameLayout>
+                    <amai.org.conventions.customviews.AspectRatioImageView
+                        android:layout_marginEnd="@dimen/event_details_box_padding"
+                        android:layout_marginTop="@dimen/event_details_box_padding"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="top|end"
+                        android:layout_height="18dp"
+                        android:id="@+id/feedback_icon"
+                        android:src="@drawable/feedback"
+                        android:visibility="visible"/>
+
+                </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/feedback_open"

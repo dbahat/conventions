@@ -98,9 +98,9 @@
 
                     <amai.org.conventions.customviews.AspectRatioImageView
                         android:id="@+id/feedback_icon"
-                        android:layout_width="20dp"
-                        android:layout_height="wrap_content"
-                        android:src="@android:drawable/stat_notify_chat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="18dp"
+                        android:src="@drawable/feedback"
                         android:visibility="gone"
                         />
                 </FrameLayout>

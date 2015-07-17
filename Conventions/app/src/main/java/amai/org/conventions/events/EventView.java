@@ -19,6 +19,7 @@ import java.util.Date;
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.ConventionEvent;
+import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.utils.Dates;
 
 public class EventView extends FrameLayout {
@@ -193,13 +194,26 @@ public class EventView extends FrameLayout {
 	protected void setFeedbackIconFromEvent(ConventionEvent event) {
 		Drawable icon = null;
 		if (event.canFillFeedback()) {
-			icon = getResources().getDrawable(android.R.drawable.stat_notify_chat);
-			icon = icon.mutate();
-			if (event.isAttending()) {
-				icon.setColorFilter(getResources().getColor(R.color.green), PorterDuff.Mode.MULTIPLY);
+			FeedbackQuestion.Smiley3PointAnswer weightedRating = event.getUserInput().getFeedback().getWeightedRating();
+			int filterColor;
+			if (weightedRating != null) {
+				icon = getResources().getDrawable(weightedRating.getImageResourceId());
+				filterColor = getResources().getColor(R.color.yellow);
 			} else {
-				icon.setColorFilter(getResources().getColor(R.color.very_dark_gray), PorterDuff.Mode.MULTIPLY);
+				icon = getResources().getDrawable(R.drawable.feedback);
+				// If the user sent the feedback but it did not fill any smiley questions, there won't
+				// be a weighted rating
+				if (event.getUserInput().getFeedback().isSent()) {
+					icon = getResources().getDrawable(R.drawable.feedback_sent);
+					filterColor = getResources().getColor(R.color.yellow);
+				} else if (event.isAttending()) {
+					filterColor = getResources().getColor(R.color.green);
+				} else {
+					filterColor = getResources().getColor(R.color.very_dark_gray);
+				}
 			}
+			icon = icon.mutate();
+			icon.setColorFilter(filterColor, PorterDuff.Mode.MULTIPLY);
 		}
 		setFeedbackIcon(icon);
 	}
