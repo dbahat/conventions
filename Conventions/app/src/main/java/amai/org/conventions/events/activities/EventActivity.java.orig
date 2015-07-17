@@ -76,10 +76,14 @@ public class EventActivity extends NavigationActivity {
 	private View sendFeedbackButton;
 	private View feedbackSentText;
 
+<<<<<<< HEAD
+	@Override
+=======
     int expendedFeedbackLayoutHeight;
     int collapsedFeedbackLayoutHeight;
 
-	@Override
+    @Override
+>>>>>>> Feedback screen updates:
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentInContentContainer(R.layout.activity_event);
@@ -90,11 +94,15 @@ public class EventActivity extends NavigationActivity {
         feedbackExpended = (ViewGroup) findViewById(R.id.feedback_expended);
         progressBar = (ProgressBar) findViewById(R.id.feedback_progress_bar);
         collapsedFeedbackTitle = (TextView) findViewById(R.id.collapsed_feedback_title);
+<<<<<<< HEAD
 		openFeedbackButton = (Button) findViewById(R.id.open_feedback_button);
 		feedbackIcon = (ImageView) findViewById(R.id.feedback_icon);
-        feedbackContainer = (ViewGroup) findViewById(R.id.feedback_container);
 		sendFeedbackButton = findViewById(R.id.send_feedback_button);
 		feedbackSentText = findViewById(R.id.feedback_sent_text);
+=======
+        sendFeedbackButton = (Button) findViewById(R.id.send_feedback_button);
+        feedbackContainer = (ViewGroup) findViewById(R.id.feedback_container);
+>>>>>>> Feedback screen updates:
 
         String eventId = getIntent().getStringExtra(EXTRA_EVENT_ID);
         conventionEvent = Convention.getInstance().findEventById(eventId);
@@ -238,7 +246,7 @@ public class EventActivity extends NavigationActivity {
 
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
-		outState.putBoolean(STATE_FEEDBACK_OPEN, feedbackExpended.getVisibility() == View.VISIBLE);
+		outState.putBoolean(STATE_FEEDBACK_OPEN, feedbackOpen.getVisibility() == View.VISIBLE);
 
 		super.onSaveInstanceState(outState);
 	}
@@ -374,6 +382,7 @@ public class EventActivity extends NavigationActivity {
         description.setText(Html.fromHtml(eventDescription));
     }
 
+<<<<<<< HEAD
     private void setupFeedback(ConventionEvent event, Bundle savedInstanceState) {
 	    if (!event.canFillFeedback()) {
 		    findViewById(R.id.feedback_container).setVisibility(View.GONE);
@@ -397,12 +406,18 @@ public class EventActivity extends NavigationActivity {
 	    }
 
 	    if (shouldFeedbackBeClosed) {
-            closeFeedback();
+            closeFeedback(null);
 	    } else {
-		    openFeedback();
+		    openFeedback(null);
 	    }
 
         if (feedback.isSent()) {
+=======
+    private void setupFeedback(ConventionEvent event) {
+        closeFeedback();
+
+        if (event.getUserInput().getFeedback().isSent()) {
+>>>>>>> Feedback screen updates:
             collapsedFeedbackTitle.setText(getString(R.string.feedback_sent));
 	        openFeedbackButton.setText(getString(R.string.display_feedback));
 	        sendFeedbackButton.setVisibility(View.GONE);
@@ -485,7 +500,6 @@ public class EventActivity extends NavigationActivity {
 
 		                @Override
 		                public void afterTextChanged(Editable s) {
-                            sendFeedbackButton.setEnabled(true);
 			                question.setAnswer(s.toString());
 			                shouldSaveFeedback |= question.isAnswerChanged();
 		                }
@@ -493,12 +507,33 @@ public class EventActivity extends NavigationActivity {
 
 	                if (answer != null) {
 	                    editText.setText(answer.toString());
-                    sendFeedbackButton.setEnabled(true);
 	                }
 
 		            answerView = editText;
 	            }
 
+<<<<<<< HEAD
+=======
+                        @Override
+                        public void afterTextChanged(Editable s) {
+                            sendFeedbackButton.setEnabled(true);
+                            question.setAnswer(s.toString());
+                            shouldSaveFeedback |= question.isAnswerChanged();
+                        }
+                    });
+                }
+
+                if (isSent) {
+                    editText.setEnabled(false);
+                }
+
+                if (answer != null) {
+                    editText.setText(answer.toString());
+                    sendFeedbackButton.setEnabled(true);
+                }
+
+                answerView = editText;
+>>>>>>> Feedback screen updates:
                 break;
             }
             case SMILEY_3_POINTS: {
@@ -571,7 +606,7 @@ public class EventActivity extends NavigationActivity {
                 }
 
                 if (answer != null) {
-                    sendFeedbackButton.setEnabled(true);
+<<<<<<< HEAD
 	                FeedbackQuestion.Smiley3PointAnswer smileyAnswer = FeedbackQuestion.Smiley3PointAnswer.getByAnswerText(answer.toString());
 	                if (smileyAnswer != null) {
 		                switch (smileyAnswer) {
@@ -586,6 +621,16 @@ public class EventActivity extends NavigationActivity {
 				                break;
 		                }
 	                }
+=======
+                    sendFeedbackButton.setEnabled(true);
+                    if (answer.equals(Feedback.Question.NEGATIVE_ANSWER)) {
+                        listener.onClick(negativeRating);
+                    } else if (answer.equals(Feedback.Question.POSITIVE_ANSWER)) {
+                        listener.onClick(positiveRating);
+                    } else if (answer.equals(Feedback.Question.VERY_POSITIVE_ANSWER)) {
+                        listener.onClick(veryPositiveRating);
+                    }
+>>>>>>> Feedback screen updates:
                 }
 
                 answerView = imagesLayout;
@@ -684,11 +729,6 @@ public class EventActivity extends NavigationActivity {
         feedbackExpended.setVisibility(View.GONE);
     }
 
-    public void openFeedback() {
-        feedbackCollapsed.setVisibility(View.GONE);
-        feedbackExpended.setVisibility(View.VISIBLE);
-    }
-
     private enum FeedbackLayoutResizeAction {
         Expand,
         Collapse
@@ -780,7 +820,7 @@ public class EventActivity extends NavigationActivity {
         // Add all the questions to the view
         LinearLayout questionsLayout = (LinearLayout) expendedFeedbackLayout.findViewById(R.id.questions_layout);
         questionsLayout.removeAllViews();
-        for (FeedbackQuestion question : conventionEvent.getUserInput().getFeedback().getQuestions()) {
+        for (Feedback.Question question : conventionEvent.getUserInput().getFeedback().getQuestions()) {
             questionsLayout.addView(buildQuestionView(question, conventionEvent.getUserInput().getFeedback().isSent()));
         }
 
