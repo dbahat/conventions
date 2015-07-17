@@ -30,12 +30,11 @@ public class FeedbackQuestion implements Serializable {
 	private String text; // If feedback was already sent, this is the displayed text
 	private AnswerType answerType;
 	private Object answer;
-	private boolean answerChanged;
+	private transient boolean answerChanged = false; // No need to serialize this field
 
 	public FeedbackQuestion(int questionId, AnswerType answerType) {
 		this.questionId = questionId;
 		this.answerType = answerType;
-		answerChanged = false;
 	}
 
 	public int getQuestionId() {
@@ -81,10 +80,12 @@ public class FeedbackQuestion implements Serializable {
 		this.answerChanged = answerChanged;
 	}
 
+	// This enum must be backwards compatible - don't remove or rename any values from it
 	public enum AnswerType {
 		TEXT, YES_NO, SMILEY_3_POINTS
 	}
 
+	// This enum must be backwards compatible - don't remove or rename any values from it
 	public enum Smiley3PointAnswer {
 		NEGATIVE(":|", R.drawable.negative_rating),
 		POSITIVE(":)", R.drawable.positive_rating),

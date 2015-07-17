@@ -3,11 +3,26 @@ package amai.org.conventions.utils;
 import android.content.Context;
 import android.util.Log;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Reader;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -15,12 +30,13 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import amai.org.conventions.R;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
+import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.Update;
 
 public class ConventionStorage {
 	private static final String TAG = ConventionStorage.class.getCanonicalName();
 
-    private static final String EVENT_USER_INPUT_FILE_NAME = "convention_data_user_input";
+    private static final String EVENT_USER_INPUT_FILE_NAME = "convention_data_user_input.json";
     private static final String UPDATES_FILE_NAME = "convention_updates";
     private static final String EVENTS_FILE_NAME = "convention_events";
 
@@ -29,8 +45,26 @@ public class ConventionStorage {
     private static Context context;
 
     public void saveUserInput() {
-	    Map<String, ConventionEvent.UserInput> userInput = Convention.getInstance().getUserInput();
-	    saveFile(userInput, EVENT_USER_INPUT_FILE_NAME);
+	    Map<String, ConventionEvent.UserInput> origUserInput = Convention.getInstance().getUserInput();
+	    Map<String, ConventionEvent.UserInput> userInput = new LinkedHashMap<>();
+	    for (Map.Entry<String, ConventionEvent.UserInput> entry : origUserInput.entrySet()) {
+		    ConventionEvent.UserInput input = entry.getValue();
+		    if (input.isAttending() || input.getFeedback().hasAnsweredQuestions()) {
+			    try {
+				    // Copy the input and remove unanswered questions
+				    input = input.clone();
+				    input.getFeedback().removeUnansweredQuestions();
+			    } catch (CloneNotSupportedException e) {
+				    throw new RuntimeException(e);
+			    }
+			    userInput.put(entry.getKey(), input);
+		    }
+	    }
+
+	    // Save Smiley3PointAnswer according to enum value name instead of toString()
+	    Gson serialzer = new GsonBuilder().registerTypeAdapter(FeedbackQuestion.Smiley3PointAnswer.class,
+			    new EnumSerializer<>()).create();
+	    saveTextFile(serialzer.toJson(userInput), EVENT_USER_INPUT_FILE_NAME);
     }
 
     public void saveUpdates() {
@@ -46,13 +80,39 @@ public class ConventionStorage {
         }
     }
 
-    public static void initFromFile(Context context) {
+	private void saveTextFile(String toSave, String fileName) {
+		try {
+			FileOutputStream fos = context.openFileOutput(fileName, Context.MODE_PRIVATE);
+			OutputStreamWriter writer = new OutputStreamWriter(fos);
+			writer.write(toSave);
+			writer.close();
+			fos.close();
+		} catch (Exception e) {
+			// Nothing we can do... don't crash the app.
+			Log.e(TAG, "File " + fileName + " could not be saved", e);
+		}
+	}
+
+	private void saveFile(Object objectToSave, String fileName) {
+		try {
+			FileOutputStream fos = context.openFileOutput(fileName, Context.MODE_PRIVATE);
+			ObjectOutputStream os = new ObjectOutputStream(fos);
+			os.writeObject(objectToSave);
+			os.close();
+			fos.close();
+		} catch (Exception e) {
+			// Nothing we can do... don't crash the app.
+			Log.e(TAG, "File " + fileName + " could not be saved", e);
+		}
+	}
+
+	public static void initFromFile(Context context) {
         ConventionStorage.context = context;
 
         // First get the convention events data (before reading the user input, as it requires us to have the events set).
         if (!tryReadEventsFromCache()) {
             readEventsFromLocalResources();
-        };
+        }
 
         readUserInputFromFile();
         readUpdatesFromFile();
@@ -91,10 +151,21 @@ public class ConventionStorage {
 
     private static void readUserInputFromFile() {
         filesystemAccessLock.readLock().lock();
-        Object result = null;
+	    Reader reader = null;
+	    Object result = null;
         try {
-            result = readFile(EVENT_USER_INPUT_FILE_NAME);
+	        reader = openTextFile(EVENT_USER_INPUT_FILE_NAME);
+	        if (reader != null) {
+		        result = new Gson().fromJson(reader, new TypeToken<Map<String, ConventionEvent.UserInput>>() {}.getType());
+	        }
         } finally {
+	        if (reader != null) {
+		        try {
+			        reader.close();
+		        } catch (IOException e) {
+			        // Nothing we can do about it
+		        }
+	        }
             filesystemAccessLock.readLock().unlock();
         }
 
@@ -102,22 +173,16 @@ public class ConventionStorage {
             return;
         }
 
-        @SuppressWarnings("unchecked")
+	    Map<String, ConventionEvent.UserInput> currentUserInput = Convention.getInstance().getUserInput();
+	    @SuppressWarnings("unchecked")
         Map<String, ConventionEvent.UserInput> userInput = (Map<String, ConventionEvent.UserInput>) result;
-        Convention.getInstance().setUserInput(userInput);
-    }
-
-    private void saveFile(Object objectToSave, String fileName) {
-        try {
-            FileOutputStream fos = context.openFileOutput(fileName, Context.MODE_PRIVATE);
-            ObjectOutputStream os = new ObjectOutputStream(fos);
-            os.writeObject(objectToSave);
-            os.close();
-            fos.close();
-        } catch (Exception e) {
-            // Nothing we can do... don't crash the app.
-	        Log.e(TAG, "File " + fileName + " could not be saved", e);
-        }
+	    for (Map.Entry<String, ConventionEvent.UserInput> entry : userInput.entrySet()) {
+		    ConventionEvent.UserInput currentInput = currentUserInput.get(entry.getKey());
+		    // Ignore non-existing events
+		    if (currentInput != null) {
+			    currentInput.updateFrom(entry.getValue());
+		    }
+	    }
     }
 
     private static void readUpdatesFromFile() {
@@ -131,6 +196,17 @@ public class ConventionStorage {
         Convention.getInstance().setUpdates(updates);
     }
 
+	private static Reader openTextFile(String fileName) {
+		try {
+			FileInputStream inputStream = context.openFileInput(fileName);
+			return new InputStreamReader(inputStream);
+		} catch (Exception e) {
+			// Ignore - default user input will be created from hard-coded data
+			Log.i(TAG, "Could not read file " + fileName + ": " + e.getMessage());
+			return null;
+		}
+	}
+
     private static Object readFile(String fileName) {
         try {
             return readFile(context.openFileInput(fileName));
@@ -141,15 +217,20 @@ public class ConventionStorage {
         }
     }
 
-    private static Object readFile(InputStream inputStream) throws Exception {
-        Object result = null;
-
+	private static Object readFile(InputStream inputStream) throws Exception {
         ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
 
-        result = objectInputStream.readObject();
+		Object result = objectInputStream.readObject();
         objectInputStream.close();
         inputStream.close();
 
         return result;
     }
+
+	private static class EnumSerializer<T extends Enum> implements JsonSerializer<T> {
+		@Override
+		public JsonElement serialize(T src, Type typeOfSrc, JsonSerializationContext context) {
+			return new JsonPrimitive(src.name());
+		}
+	}
 }

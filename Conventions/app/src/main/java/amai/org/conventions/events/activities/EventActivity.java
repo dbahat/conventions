@@ -157,7 +157,7 @@ public class EventActivity extends NavigationActivity {
                     item.setTitle(getResources().getString(R.string.event_remove_from_favorites));
                     Toast.makeText(this, getString(R.string.event_added_to_favorites), Toast.LENGTH_SHORT).show();
                 }
-                Convention.getInstance().getStorage().saveUserInput();
+                saveUserInput();
                 return true;
             case R.id.event_navigate_to_map:
                 // Navigate to the map floor associated with this event
@@ -185,15 +185,19 @@ public class EventActivity extends NavigationActivity {
     protected void onPause() {
         super.onPause();
         if (feedbackView.isFeedbackChanged()) {
-            Convention.getInstance().getStorage().saveUserInput();
-
-            // Reset answer changed flag
-            List<FeedbackQuestion> questions = this.conventionEvent.getUserInput().getFeedback().getQuestions();
-            for (FeedbackQuestion question : questions) {
-                question.setAnswerChanged(false);
-            }
+	        saveUserInput();
         }
     }
+
+	private void saveUserInput() {
+		Convention.getInstance().getStorage().saveUserInput();
+
+		// Reset answer changed flag
+		List<FeedbackQuestion> questions = this.conventionEvent.getUserInput().getFeedback().getQuestions();
+		for (FeedbackQuestion question : questions) {
+		    question.setAnswerChanged(false);
+		}
+	}
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -211,7 +215,7 @@ public class EventActivity extends NavigationActivity {
             @Override
             protected String doInBackground(Void... params) {
                 // First save the user input before sending it
-                Convention.getInstance().getStorage().saveUserInput();
+                saveUserInput();
 
                 Properties properties = new Properties();
                 try {
@@ -237,8 +241,10 @@ public class EventActivity extends NavigationActivity {
                     return e.getMessage();
                 }
 
-                conventionEvent.getUserInput().getFeedback().setIsSent(true);
-                Convention.getInstance().getStorage().saveUserInput();
+	            Feedback feedback = conventionEvent.getUserInput().getFeedback();
+	            feedback.setIsSent(true);
+	            feedback.removeUnansweredQuestions();
+                saveUserInput();
 
                 // In case everything finished successfully, pass null to onPostExecute.
                 return null;

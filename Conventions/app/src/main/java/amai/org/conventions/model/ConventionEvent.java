@@ -212,7 +212,7 @@ public class ConventionEvent implements Serializable {
 		return Objects.hash(title, lecturer, startTime, endTime, type, hall, serverId);
 	}
 
-	public static class UserInput implements Serializable {
+	public static class UserInput implements Serializable, Cloneable {
 		private boolean attending;
         private Feedback feedback;
 
@@ -225,12 +225,36 @@ public class ConventionEvent implements Serializable {
 			);
 		}
 
+		@Override
+		public UserInput clone() throws CloneNotSupportedException {
+			UserInput newInput = (UserInput) super.clone();
+			newInput.feedback = feedback.clone();
+			return newInput;
+		}
+
+		/**
+		 * Update this instance from user input loaded from file
+		 * @param other the desrialized user input
+		 */
+		public void updateFrom(UserInput other) {
+			if (other == null) {
+				return;
+			}
+			attending = other.attending;
+			feedback.updateFrom(other.feedback);
+		}
+
 		public boolean isAttending() {
 			return attending;
 		}
 
 		public void setAttending(boolean attending) {
 			this.attending = attending;
+		}
+
+		public UserInput withAttending(boolean attending) {
+			setAttending(attending);
+			return this;
 		}
 
 		public Feedback getFeedback() {
