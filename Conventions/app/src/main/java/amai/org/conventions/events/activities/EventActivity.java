@@ -354,6 +354,11 @@ public class EventActivity extends NavigationActivity {
     }
 
     private void setupFeedback(ConventionEvent event) {
+	    if (!event.canFillFeedback()) {
+		    findViewById(R.id.feedback_container).setVisibility(View.GONE);
+		    return;
+	    }
+
 	    // Feedback should start as closed in the following cases:
 	    // 1. Feedback was sent
 	    // 2. Event was not attended an no questions were answered

@@ -67,6 +67,7 @@
             </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/feedback_container"
             android:layout_marginTop="10dp"
             style="@style/EventDetailsBox.Feedback">
 
