@@ -7,5 +7,6 @@
     <color name="gray">#D6D7D7</color>
     <color name="dark_gray">#D2D3D5</color>
     <color name="very_dark_gray">#959595</color>
-    <color name="light_yellow">#fffeffc9</color>
+    <color name="light_yellow">#FEFFC9</color>
+    <color name="transparent_light_yellow">#C0FEFFC9</color>
 </resources>
