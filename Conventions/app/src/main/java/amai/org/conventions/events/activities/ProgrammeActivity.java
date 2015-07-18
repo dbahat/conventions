@@ -264,7 +264,6 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
 						listView.setOnScrollListener(null);
 						if (!cancelScroll) {
 							listView.smoothScrollToPositionFromTop(position, 0, 500);
-							listView.setOnTouchListener(null);
 
 							// In some cases we'll want to show bounce animation to the scrolled view, to make it easier for users
 							// to understand the views are swipeable.
@@ -273,8 +272,11 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
 									@Override
 									public void run() {
 										triggerBounceAnimationIfNeeded();
+										listView.setOnTouchListener(null);
 									}
 								}, 1500);
+							} else {
+								listView.setOnTouchListener(null);
 							}
 						}
 					}
@@ -288,7 +290,7 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
     }
 
 	private void triggerBounceAnimationIfNeeded() {
-		if (!Convention.getInstance().hasFavorites()) {
+		if (!Convention.getInstance().hasFavorites() && !cancelScroll) {
 
 			if (listView.getListChildCount() > 1) {
 				// Apply the animation on the second listView child, since the first will always be hidden by a stickey header
