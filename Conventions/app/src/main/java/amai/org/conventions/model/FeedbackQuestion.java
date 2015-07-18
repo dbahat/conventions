@@ -91,9 +91,9 @@ public class FeedbackQuestion implements Serializable {
 
 	// This enum must be backwards compatible - don't remove or rename any values from it
 	public enum Smiley3PointAnswer {
-		NEGATIVE(":|", R.drawable.negative_rating),
-		POSITIVE(":)", R.drawable.positive_rating),
-		VERY_POSITIVE(":D", R.drawable.very_positive_rating);
+		NEGATIVE("|:", R.drawable.negative_rating),
+		POSITIVE("(:", R.drawable.positive_rating),
+		VERY_POSITIVE("D:", R.drawable.very_positive_rating);
 
 		private String answerText;
 		private int imageResourceId;
