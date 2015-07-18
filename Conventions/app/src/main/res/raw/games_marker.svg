@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   id="svg3519"
+   viewBox="0 0 55.884919 95.213861"
+   height="26.871468mm"
+   width="15.771966mm">
+  <defs
+     id="defs3521" />
+  <metadata
+     id="metadata3524">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(-405.66551,-469.62696)"
+     id="layer1">
+    <g
+       transform="matrix(1.25,0,0,-1.25,460.14989,501.76009)"
+       id="g3904">
+      <path
+         id="path3906"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         d="m 0,0 c 0,-17.234 -21.564,-49.648 -21.564,-49.648 0,0 -21.563,30.777 -21.563,49.648 0,13.942 9.655,25.246 21.563,25.246 C -9.654,25.246 0,13.942 0,0" />
+    </g>
+    <g
+       transform="matrix(1.25,0,0,-1.25,460.14989,501.76009)"
+       id="g3908">
+      <path
+         id="path3910"
+         style="fill:none;stroke:#231f20;stroke-width:0.921;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         d="m 0,0 c 0,-17.234 -21.564,-49.648 -21.564,-49.648 0,0 -21.563,30.777 -21.563,49.648 0,13.942 9.655,25.246 21.563,25.246 C -9.654,25.246 0,13.942 0,0 Z" />
+    </g>
+    <text
+       id="text3912"
+       style="font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.5757494px;font-family:Abigail;-inkscape-font-specification:Abigail;writing-mode:lr-tb;fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       x="410.80853"
+       y="496.31146">
+      <tspan
+         id="tspan3914"
+         y="496.31146"
+         x="410.80853 419.20416 422.41083 428.67844 431.8851 439.74139 444.23077 447.43744">קונסולות</tspan>
+      <tspan
+         id="tspan3916"
+         y="511.65976"
+         x="409.36554 416.82831 419.9184 428.06625 436.34531 445.60089 453.80707">ומשחקיה</tspan>
+    </text>
+  </g>
+</svg>

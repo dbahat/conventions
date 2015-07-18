@@ -4,27 +4,19 @@ import java.io.Serializable;
 
 import amai.org.conventions.utils.Objects;
 
-public class Hall implements Serializable {
-    private String name;
+public class Hall extends Place implements Serializable {
     private int order;
 
     public Hall() {
     }
 
-    public String getName() {
-        return name;
-    }
+	@Override
+	public Hall withName(String name) {
+		super.withName(name);
+		return this;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Hall withName(String name) {
-        setName(name);
-        return this;
-    }
-
-    public int getOrder() {
+	public int getOrder() {
         return order;
     }
 

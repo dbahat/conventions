@@ -63,36 +63,42 @@ public class Convention implements Serializable {
                         CollectionUtils.flattenList(
                                 inFloor(floor1,
                                         new MapLocation()
-                                                .withHall(oranim1)
+                                                .withPlace(oranim1)
                                                 .withMarkerResource(R.raw.oranim1_marker)
                                                 .withSelectedMarkerResource(R.raw.oranim1_marker_selected)
                                                 .withX(49)
                                                 .withY(75),
                                         new MapLocation()
-                                                .withHall(oranim2)
+                                                .withPlace(oranim2)
                                                 .withMarkerResource(R.raw.oranim2_marker)
                                                 .withSelectedMarkerResource(R.raw.oranim2_marker_selected)
                                                 .withX(59)
                                                 .withY(70),
                                         new MapLocation()
-                                                .withHall(oranim3)
+                                                .withPlace(oranim3)
                                                 .withMarkerResource(R.raw.oranim3_marker)
                                                 .withSelectedMarkerResource(R.raw.oranim3_marker_selected)
                                                 .withX(69)
-                                                .withY(64)),
+                                                .withY(64),
+		                                new MapLocation()
+		                                        .withPlace(new Place().withName("קונסולות ומשחקיה"))
+                                                .withMarkerResource(R.raw.games_marker)
+                                                .withSelectedMarkerResource(R.raw.games_marker)
+                                                .withX(83)
+                                                .withY(59)),
                                 inFloor(floor2,
-                                        new MapLocation()
-                                                .withHall(auditorium)
-                                                .withMarkerResource(R.raw.main_hall_marker)
-                                                .withSelectedMarkerResource(R.raw.main_hall_marker_selected)
-                                                .withX(53)
-                                                .withY(51),
-                                        new MapLocation()
-                                                .withHall(contentRoom)
-                                                .withMarkerResource(R.raw.content_room_marker)
-                                                .withSelectedMarkerResource(R.raw.content_room_marker_selected)
-                                                .withX(86)
-                                                .withY(70))
+		                                new MapLocation()
+				                                .withPlace(auditorium)
+				                                .withMarkerResource(R.raw.main_hall_marker)
+				                                .withSelectedMarkerResource(R.raw.main_hall_marker_selected)
+				                                .withX(53)
+				                                .withY(51),
+		                                new MapLocation()
+				                                .withPlace(contentRoom)
+				                                .withMarkerResource(R.raw.content_room_marker)
+				                                .withSelectedMarkerResource(R.raw.content_room_marker_selected)
+				                                .withX(86)
+				                                .withY(70))
                         )
                 );
 

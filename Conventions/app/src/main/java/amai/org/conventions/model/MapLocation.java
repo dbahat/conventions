@@ -5,7 +5,7 @@ public class MapLocation {
 	private Floor floor;
 	private int x;
 	private int y;
-	private Hall hall;
+	private Place place;
 	private String name;
 	private int markerResource;
 	private int selectedMarkerResource;
@@ -57,16 +57,16 @@ public class MapLocation {
 		return this;
 	}
 
-	public Hall getHall() {
-		return hall;
+	public Place getPlace() {
+		return place;
 	}
 
-	public void setHall(Hall hall) {
-		this.hall = hall;
+	public void setPlace(Place place) {
+		this.place = place;
 	}
 
-	public MapLocation withHall(Hall hall) {
-		setHall(hall);
+	public MapLocation withPlace(Place place) {
+		setPlace(place);
 		return this;
 	}
 
@@ -74,7 +74,7 @@ public class MapLocation {
 		if (name != null) {
 			return name;
 		}
-		return getHall().getName();
+		return getPlace().getName();
 	}
 
 	public void setName(String name) {

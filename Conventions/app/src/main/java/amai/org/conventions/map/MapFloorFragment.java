@@ -42,6 +42,8 @@ import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
 import amai.org.conventions.model.ConventionMap;
+import amai.org.conventions.model.Hall;
+import amai.org.conventions.model.Place;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.model.Floor;
 import amai.org.conventions.model.MapLocation;
@@ -498,7 +500,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 			// Get current and next events in this location
 			ConventionEvent currEvent = null;
 			ConventionEvent nextEvent = null;
-			ArrayList<ConventionEvent> events = Convention.getInstance().findEventsByHall(location.getHall().getName());
+			ArrayList<ConventionEvent> events = Convention.getInstance().findEventsByHall(location.getPlace().getName());
 			Collections.sort(events, new ConventionEventComparator());
 			for (ConventionEvent event : events) {
 				Date now = Dates.now();
@@ -530,14 +532,17 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 			locationDetails.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					// Navigate to the hall associated with this event
-					Bundle animationBundle = ActivityOptions.makeCustomAnimation(getActivity(), R.anim.abc_slide_in_bottom, 0).toBundle();
-					Bundle bundle = new Bundle();
-					bundle.putString(HallActivity.EXTRA_HALL_NAME, location.getHall().getName());
+					// Navigate to the hall associated with this location (only if it's a hall)
+					Place place = location.getPlace();
+					if (place instanceof Hall) {
+						Bundle animationBundle = ActivityOptions.makeCustomAnimation(getActivity(), R.anim.abc_slide_in_bottom, 0).toBundle();
+						Bundle bundle = new Bundle();
+						bundle.putString(HallActivity.EXTRA_HALL_NAME, place.getName());
 
-					Intent intent = new Intent(getActivity(), HallActivity.class);
-					intent.putExtras(bundle);
-					getActivity().startActivity(intent, animationBundle);
+						Intent intent = new Intent(getActivity(), HallActivity.class);
+						intent.putExtras(bundle);
+						getActivity().startActivity(intent, animationBundle);
+					}
 				}
 			});
 		}

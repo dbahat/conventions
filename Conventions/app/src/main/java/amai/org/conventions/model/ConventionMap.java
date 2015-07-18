@@ -71,7 +71,7 @@ public class ConventionMap {
 		return CollectionUtils.filter(getLocations(), new CollectionUtils.Predicate<MapLocation>() {
 			@Override
 			public boolean where(MapLocation location) {
-				return location.getHall().getName().equals(hall.getName());
+				return location.getPlace().getName().equals(hall.getName());
 			}
 		});
 	}
