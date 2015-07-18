@@ -259,7 +259,7 @@ public class EventActivity extends NavigationActivity {
                     Toast.makeText(EventActivity.this, getString(R.string.feedback_send_mail_failed), Toast.LENGTH_LONG).show();
                 } else {
                     // Re-setup the feedback UI so interactions will now be disabled in it, and the "feedback sent" indicator become visible.
-                    feedbackView.setEvent(conventionEvent);
+                    feedbackView.setEvent(conventionEvent, true);
                 }
             }
 
@@ -317,7 +317,7 @@ public class EventActivity extends NavigationActivity {
                 Dates.toHumanReadableTimeDuration(event.getEndTime().getTime() - event.getStartTime().getTime()));
         time.setText(formattedEventTime);
 
-        feedbackView.setEvent(event);
+        feedbackView.setEvent(event, false);
 
         // If the feedback view already had saved state, restore it
         if (savedInstanceState != null && savedInstanceState.containsKey(STATE_FEEDBACK_OPEN)) {

@@ -58,6 +58,10 @@ public class FeedbackQuestion implements Serializable {
 	}
 
 	public void setAnswer(Object answer) {
+		// Don't allow empty string an an answer
+		if (answer instanceof String && ((String) answer).isEmpty()) {
+			answer = null;
+		}
 		if (!Objects.equals(answer, this.answer)) {
 			setAnswerChanged(true);
 		}

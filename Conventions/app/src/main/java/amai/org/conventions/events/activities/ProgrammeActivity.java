@@ -22,7 +22,6 @@ import android.view.animation.ScaleAnimation;
 import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -289,7 +288,7 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
     }
 
 	private void triggerBounceAnimationIfNeeded() {
-		if (!Convention.getInstance().doesHaveFavorites()) {
+		if (!Convention.getInstance().hasFavorites()) {
 
 			if (listView.getListChildCount() > 1) {
 				// Apply the animation on the second listView child, since the first will always be hidden by a stickey header

@@ -122,14 +122,15 @@ public class Convention implements Serializable {
         }
     }
 
-    public boolean doesHaveFavorites() {
+    public boolean hasFavorites() {
         List<ConventionEvent> events = getEvents();
-        boolean hasFavorites = false;
         for (ConventionEvent event : events) {
-            hasFavorites |= event.isAttending();
+	        if (event.isAttending()) {
+		        return true;
+	        }
         }
 
-        return hasFavorites;
+        return false;
     }
 
 	public Map<String, ConventionEvent.UserInput> getUserInput() {

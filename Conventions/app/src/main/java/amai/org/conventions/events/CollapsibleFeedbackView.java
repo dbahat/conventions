@@ -77,6 +77,14 @@ public class CollapsibleFeedbackView extends FrameLayout {
         progressBar = (ProgressBar) findViewById(R.id.feedback_progress_bar);
     }
 
+	public void setState(State state, boolean animate) {
+		 if (animate) {
+			 setState(state);
+		 } else {
+			 setStateWithoutAnimation(state);
+		 }
+	}
+
     public void setState(State state) {
         this.state = state;
 
@@ -97,7 +105,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
         }
     }
 
-    public void setEvent(ConventionEvent event) {
+    public void setEvent(ConventionEvent event, boolean animate) {
         conventionEvent = event;
 
         // Calculate the heights of the collapsed/expended states of the feedback view, since they are dynamic (based on the number of questions), and
@@ -113,9 +121,9 @@ public class CollapsibleFeedbackView extends FrameLayout {
         Feedback feedback = event.getUserInput().getFeedback();
 
         if (shouldFeedbackBeClosed()) {
-            setStateWithoutAnimation(State.Collapsed);
+            setState(State.Collapsed, animate);
         } else {
-            setStateWithoutAnimation(State.Expended);
+            setState(State.Expended, animate);
         }
 
         if (feedback.isSent()) {
@@ -126,14 +134,19 @@ public class CollapsibleFeedbackView extends FrameLayout {
         }
         setFeedbackIcon(event);
 
-        LinearLayout questionsLayout = (LinearLayout) findViewById(R.id.questions_layout);
-        questionsLayout.removeAllViews();
-        for (FeedbackQuestion question : feedback.getQuestions()) {
-            questionsLayout.addView(buildQuestionView(question, feedback.isSent()));
-        }
+		LinearLayout questionsLayout = (LinearLayout) findViewById(R.id.questions_layout);
+	    buildQuestionsLayout(questionsLayout, feedback);
     }
 
-    public boolean isFeedbackChanged() {
+	private void buildQuestionsLayout(LinearLayout questionsLayout, Feedback feedback) {
+		questionsLayout.removeAllViews();
+		for (FeedbackQuestion question : feedback.getQuestions()) {
+		    questionsLayout.addView(buildQuestionView(question, feedback));
+		}
+		sendFeedbackButton.setEnabled(feedback.hasAnsweredQuestions());
+	}
+
+	public boolean isFeedbackChanged() {
         return feedbackChanged;
     }
 
@@ -177,7 +190,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
         feedbackIcon.setImageDrawable(icon);
     }
 
-    private View buildQuestionView(final FeedbackQuestion question, boolean isSent) {
+    private View buildQuestionView(final FeedbackQuestion question, final Feedback feedback) {
         LinearLayout questionLayout = new LinearLayout(getContext());
         LinearLayout.LayoutParams questionLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         questionLayoutParams.setMargins(0, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, getResources().getDisplayMetrics()), 0, 0);
@@ -185,7 +198,8 @@ public class CollapsibleFeedbackView extends FrameLayout {
 
         TextView questionText = new TextView(getContext());
         questionText.setTextAppearance(getContext(), R.style.TextAppearance_AppCompat_Body1);
-        questionText.setText(question.getQuestionText(getResources(), isSent));
+	    boolean isSent = feedback.isSent();
+	    questionText.setText(question.getQuestionText(getResources(), isSent));
 
         Object answer = question.getAnswer();
         View answerView = null;
@@ -219,25 +233,24 @@ public class CollapsibleFeedbackView extends FrameLayout {
                     editText.setLayoutParams(editTextLayoutParams);
                     editText.setTextAppearance(getContext(), R.style.TextAppearance_AppCompat_Body1);
                     editText.addTextChangedListener(new TextWatcher() {
-                        @Override
-                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                        }
+	                    @Override
+	                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+	                    }
 
-                        @Override
-                        public void onTextChanged(CharSequence s, int start, int before, int count) {
-                        }
+	                    @Override
+	                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+	                    }
 
-                        @Override
-                        public void afterTextChanged(Editable s) {
-                            sendFeedbackButton.setEnabled(true);
-                            question.setAnswer(s.toString());
-                            feedbackChanged |= question.isAnswerChanged();
-                        }
+	                    @Override
+	                    public void afterTextChanged(Editable s) {
+		                    question.setAnswer(s.toString());
+		                    sendFeedbackButton.setEnabled(feedback.hasAnsweredQuestions());
+		                    feedbackChanged |= question.isAnswerChanged();
+	                    }
                     });
 
                     if (answer != null) {
-                        editText.setText(answer.toString());
-                        sendFeedbackButton.setEnabled(true);
+	                    editText.setText(answer.toString());
                     }
 
                     answerView = editText;
@@ -315,7 +328,6 @@ public class CollapsibleFeedbackView extends FrameLayout {
                 }
 
                 if (answer != null) {
-                    sendFeedbackButton.setEnabled(true);
                     FeedbackQuestion.Smiley3PointAnswer smileyAnswer = FeedbackQuestion.Smiley3PointAnswer.getByAnswerText(answer.toString());
                     if (smileyAnswer != null) {
                         switch (smileyAnswer) {
@@ -375,7 +387,6 @@ public class CollapsibleFeedbackView extends FrameLayout {
                 }
 
                 if (answer != null) {
-                    sendFeedbackButton.setEnabled(true);
                     if (answer.equals(yesButton.getText().toString())) {
                         listener.onClick(yesButton);
                     } else if (answer.equals(noButton.getText().toString())) {
@@ -406,13 +417,11 @@ public class CollapsibleFeedbackView extends FrameLayout {
         root.addView(expendedFeedbackLayout);
 
         // Add all the questions to the view
+	    Feedback feedback = conventionEvent.getUserInput().getFeedback();
         LinearLayout questionsLayout = (LinearLayout) expendedFeedbackLayout.findViewById(R.id.questions_layout);
-        questionsLayout.removeAllViews();
-        for (FeedbackQuestion question : conventionEvent.getUserInput().getFeedback().getQuestions()) {
-            questionsLayout.addView(buildQuestionView(question, conventionEvent.getUserInput().getFeedback().isSent()));
-        }
+	    buildQuestionsLayout(questionsLayout, feedback);
 
-        // Wait for the layout onMeasure to be called, get it's height, and then remove it from the screen
+        // Wait for the layout onMeasure to be called, get its height, and then remove it from the screen
         expendedFeedbackLayout.post(new Runnable() {
             @Override
             public void run() {
