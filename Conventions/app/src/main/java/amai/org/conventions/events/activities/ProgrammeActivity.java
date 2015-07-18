@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -126,7 +127,8 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
 				listView.setOnTouchListener(new View.OnTouchListener() {
 					@Override
 					public boolean onTouch(View v, MotionEvent event) {
-						if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+						// For some reason if the user touches the list view after scrolling ends (before bounce), there is no down event
+						if (event.getActionMasked() == MotionEvent.ACTION_DOWN || event.getActionMasked() == MotionEvent.ACTION_MOVE) {
 							cancelScroll = true;
 							listView.setOnTouchListener(null);
 						}
@@ -291,9 +293,8 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
 
 	private void triggerBounceAnimationIfNeeded() {
 		if (!Convention.getInstance().hasFavorites() && !cancelScroll) {
-
 			if (listView.getListChildCount() > 1) {
-				// Apply the animation on the second listView child, since the first will always be hidden by a stickey header
+				// Apply the animation on the second listView child, since the first will always be hidden by a sticky header
 				View currentEvent = listView.getListChildAt(1);
 
 				ViewPager currentEventViewPager = (ViewPager) currentEvent.findViewById(R.id.swipe_pager);
