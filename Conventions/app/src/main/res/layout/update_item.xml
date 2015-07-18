@@ -34,13 +34,16 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
+                    <!-- using dp for the time box values, since we pre-define the timebox size (to make
+                     it easier to wrap the text abound it). -->
                     <TextView
                         android:id="@+id/update_day"
                         android:padding="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="12.10.2015"/>
+                        android:text="12.10.2015"
+                        android:textSize="14dp"/>
 
                     <TextView
                         android:id="@+id/update_time"
@@ -49,7 +52,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="10:00"
-                        style="@style/TextAppearance.AppCompat.Subhead"/>
+                        style="@style/TextAppearance.AppCompat.Subhead"
+                        android:textSize="16dp"/>
 
                 </LinearLayout>
 
