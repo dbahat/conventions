@@ -1,5 +1,6 @@
 package amai.org.conventions.updates;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -52,6 +53,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
     private RecyclerView recyclerView;
     private UpdatesAdapter updatesAdapter;
     private boolean isRefreshInProgress;
+    private View loginLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +83,11 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 	    if (callbackManager != null) {
             callbackManager.onActivityResult(requestCode, resultCode, data);
 	    }
+
+        // In case the user canceled his login attempt, show him the login button
+        if (resultCode == Activity.RESULT_CANCELED) {
+            loginLayout.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -96,11 +103,11 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         if (accessToken != null && !accessToken.isExpired()) {
             // If the user has a valid token use it to refresh his updates
-            loginButton.setVisibility(View.GONE);
+            loginLayout.setVisibility(View.GONE);
             retrieveUpdatesListFromFacebookApi(accessToken);
-        } else if (updates != null) {
-            // If the user has no valid token but logged in the past (meaning he has some cached data) attempt to perform a silent login.
-            loginButton.setVisibility(View.GONE);
+        } else {
+            // If the user has no valid token attempt to perform a silent login.
+            loginLayout.setVisibility(View.GONE);
             LoginManager.getInstance().logInWithReadPermissions(this, Collections.singletonList("public_profile"));
         }
     }
@@ -111,6 +118,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
         swipeRefreshLayout.setColorSchemeColors(ThemeAttributes.getColor(this, R.attr.toolbarBackground));
 
         loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginLayout = findViewById(R.id.login_layout);
         recyclerView = (RecyclerView) findViewById(R.id.updates_list);
     }
 
@@ -120,7 +128,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 
             @Override
             public void onSuccess(final LoginResult loginResult) {
-                loginButton.setVisibility(View.GONE);
+                loginLayout.setVisibility(View.GONE);
 
                 new Handler().post(new Runnable() {
                     @Override
