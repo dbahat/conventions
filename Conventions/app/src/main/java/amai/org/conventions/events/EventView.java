@@ -93,8 +93,7 @@ public class EventView extends FrameLayout {
     }
 
     private void setColorsFromEvent(ConventionEvent event) {
-        int colorAttrId = event.getType().getBackgroundColorAttributeId();
-        setEventTypeColor(ThemeAttributes.getColor(getContext(), colorAttrId));
+        setEventTypeColor(event.getBackgroundColor(getContext()));
         if (!event.hasStarted()) {
             setEventColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeNotStartedColor));
         } else if (event.hasEnded()) {

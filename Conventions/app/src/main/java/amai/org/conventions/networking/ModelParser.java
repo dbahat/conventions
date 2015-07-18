@@ -48,6 +48,7 @@ public class ModelParser {
 
                 ConventionEvent conventionEvent = new ConventionEvent()
                         .withServerId(eventId)
+		                .withColorFromServer(eventObj.get("timetable-bg").getAsString())
                         .withTitle(eventObj.get("title").getAsString())
                         .withLecturer(eventObj.get("sub-title").getAsString())
                         .withDescription(eventObj.get("content").getAsString())
@@ -55,8 +56,8 @@ public class ModelParser {
                         .withStartTime(startTime)
                         .withEndTime(endTime)
                         .withHall(hall)
-                        .withImages(mapper.getImageResourceIds(eventId))
-                        .withId(String.format("%d_%d", eventId, internalEventNumber));
+		                .withImages(mapper.getImageResourceIds(eventId))
+		                .withId(String.format("%d_%d", eventId, internalEventNumber));
 
                 eventList.add(conventionEvent);
                 internalEventNumber++;

@@ -1,18 +1,26 @@
 package amai.org.conventions.model;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.util.Log;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import amai.org.conventions.R;
+import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Objects;
 
 public class ConventionEvent implements Serializable {
+	private static final String TAG = ConventionEvent.class.getCanonicalName();
+	private static final int NO_COLOR = Color.TRANSPARENT; // Assuming we will never get this from the server...
+
 	private String id;
     private int serverId;
+	private int color;
     private String title;
     private String lecturer;
     private Date startTime;
@@ -22,7 +30,38 @@ public class ConventionEvent implements Serializable {
 	private List<Integer> images;
     private String description;
 
-    public String getDescription() {
+	public ConventionEvent() {
+		images = new ArrayList<>();
+		color = NO_COLOR; // Default for when color is not set or cannot be parsed
+	}
+
+	public int getColor() {
+		return color;
+	}
+
+	public void setColor(int color) {
+		this.color = color;
+	}
+
+	public ConventionEvent withColor(int color) {
+		setColor(color);
+		return this;
+	}
+
+	public ConventionEvent withColorFromServer(String serverColor) {
+		int color = NO_COLOR;
+		if (serverColor != null) {
+			try {
+				color = Color.parseColor("#" + serverColor);
+			} catch (IllegalArgumentException e) {
+				Log.e(TAG, "Color from server cannot be parsed: " + serverColor);
+			}
+		}
+		return withColor(color);
+	}
+
+
+	public String getDescription() {
         return description;
     }
 
@@ -34,12 +73,6 @@ public class ConventionEvent implements Serializable {
         setDescription(description);
         return this;
     }
-
-
-
-	public ConventionEvent() {
-		images = new ArrayList<>();
-	}
 
     public void setId(String id) {
         this.id = id;
@@ -122,6 +155,14 @@ public class ConventionEvent implements Serializable {
     public EventType getType() {
         return type;
     }
+
+	public int getBackgroundColor(Context context) {
+		// TODO uncomment when we change to Cami programme (and have the actual colors)
+//		if (color != NO_COLOR) {
+//			return color;
+//		}
+		return ThemeAttributes.getColor(context, getType().getBackgroundColorAttributeId());
+	}
 
     public void setType(EventType type) {
         this.type = type;
