@@ -32,7 +32,7 @@ public class WrappingTextLeadingMarginSpan implements LeadingMarginSpan.LeadingM
 
         // In lollipop the meaning of the "first" parameter changed, and will now appear for the first line of all paragraphs in the text.
         // As as workaround, we keep the number of drawn lines so as not to apply the leading margin on paragraphs after the first X lines.
-        if (Build.VERSION.SDK_INT >= 21) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             drawLineCount = wasDrawCalled ? drawLineCount + 1 : 0;
             wasDrawCalled = false;
             isFirstMargin = drawLineCount <= lines;

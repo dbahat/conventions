@@ -25,10 +25,10 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import amai.org.conventions.customviews.AnimationPopupWindow;
 import amai.org.conventions.ArrivalMethodsActivity;
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
+import amai.org.conventions.customviews.AnimationPopupWindow;
 import amai.org.conventions.events.activities.EventActivity;
 import amai.org.conventions.events.activities.ProgrammeActivity;
 import amai.org.conventions.map.MapActivity;
@@ -54,9 +54,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (popup == null || !popup.isShowing()) {
 	                popup = createNavigationPopup();
-	                // Sending toolbar width to support Jellybean version (it does not align to
-	                // the right automatically)
-                    popup.showAsDropDown(navigationToolbar, navigationToolbar.getWidth(), 0);
+                    popup.showAsDropDown(navigationToolbar);
                 }
             }
         });
@@ -64,10 +62,18 @@ public abstract class NavigationActivity extends AppCompatActivity {
 
 	private AnimationPopupWindow createNavigationPopup() {
 		final View view = LayoutInflater.from(NavigationActivity.this).inflate(R.layout.navigation_menu, null);
+
 		setupImageColors(view);
-		AnimationPopupWindow popup = new AnimationPopupWindow(
+		final AnimationPopupWindow popup = new AnimationPopupWindow(
 		        view,
-		        ViewGroup.LayoutParams.WRAP_CONTENT,
+	            // Sending toolbar width to support Jelly Bean version: the popup window does not align to
+	            // the right automatically so we set the width to full screen and inside it, the card view is
+	            // wrap_content with layout direction is ltr so it looks ok.
+				// Also there is a bug in KitKat where if we set the width to match_parent it takes up the whole
+				// width INCLUDING THE BUTTONS BAR and the content gets cut off on the right side. For this
+				// reason we also can't just set the offset of the popup window to the far right (since it gets
+				// cut off).
+				navigationToolbar.getWidth(),
 		        ViewGroup.LayoutParams.WRAP_CONTENT,
 		        R.anim.drop_down,
 		        R.anim.drop_down_reverse);
@@ -78,9 +84,18 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		popup.setFocusable(true);
 		popup.setOutsideTouchable(true);
 
+		// Now, because the popup is the full width of the screen, we must capture a touch event outside
+		// the card view and dismiss it.
+		view.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				popup.dismiss();
+			}
+		});
+
 		// Move the inner view to the top start corner of the toolbar.
-		// This is required because it's a card view with elevation (which uses padding for the
-		// elevation and shadow) so we have to move it to the start point of the popup window.
+		// This is required because inside it is a card view with elevation (which uses padding for
+		// the elevation and shadow) so we have to move it to the start point of the popup window.
 		view.setY(getResources().getDimension(R.dimen.navigation_popup_window_offset_y));
 		view.setX(getResources().getDimension(R.dimen.navigation_popup_window_offset_x));
 
