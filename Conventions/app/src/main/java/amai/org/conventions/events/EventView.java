@@ -205,7 +205,7 @@ public class EventView extends FrameLayout {
 				if (event.getUserInput().getFeedback().isSent()) {
 					icon = getResources().getDrawable(R.drawable.feedback_sent);
 					filterColor = getResources().getColor(R.color.yellow);
-				} else if (event.isAttending()) {
+				} else if (event.isAttending() || event.getUserInput().getFeedback().hasAnsweredQuestions()) {
 					filterColor = getResources().getColor(R.color.green);
 				} else {
 					filterColor = getResources().getColor(R.color.very_dark_gray);
