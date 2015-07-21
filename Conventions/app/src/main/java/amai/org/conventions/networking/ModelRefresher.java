@@ -17,7 +17,7 @@ import amai.org.conventions.model.ConventionEvent;
 public class ModelRefresher {
     private static final String TAG = ModelRefresher.class.getCanonicalName();
 
-    private static final String SERVER_ADDRESS = "http://2015.harucon.org.il/wp-admin/admin-ajax.php?action=get_event_list";
+    private static final String SERVER_ADDRESS = "http://2015.cami.org.il/wp-admin/admin-ajax.php?action=get_event_list";
     private static final int CONNECT_TIMEOUT = 5000;
 
     /**

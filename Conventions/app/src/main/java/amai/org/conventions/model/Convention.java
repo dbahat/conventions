@@ -46,13 +46,14 @@ public class Convention implements Serializable {
         this.date.set(2015, Calendar.AUGUST, 20);
         this.feedbackRecipient = "cami2015androidapp@gmail.com";
 
-        Hall auditorium = new Hall().withName("אודיטוריום אוסישקין").withOrder(1);
-        Hall contentRoom = new Hall().withName("חדר אירועי תוכן").withOrder(2);
-        Hall oranim1 = new Hall().withName("אורנים 1").withOrder(3);
-        Hall oranim2 = new Hall().withName("אורנים 2").withOrder(4);
-        Hall oranim3 = new Hall().withName("אורנים 3").withOrder(5);
+	    Hall mainHall = new Hall().withName("אולם ראשי").withOrder(1);
+        Hall auditorium = new Hall().withName("אודיטוריום שוורץ").withOrder(2);
+        Hall eshkol1 = new Hall().withName("אשכול 1").withOrder(3);
+        Hall eshkol3 = new Hall().withName("אשכול 3").withOrder(4);
+        Hall games = new Hall().withName("משחקייה").withOrder(5);
+        Hall specialEvents = new Hall().withName("אירועים מיוחדים").withOrder(6);
 
-        this.halls = Arrays.asList(auditorium, contentRoom, oranim1, oranim2, oranim3);
+        this.halls = Arrays.asList(mainHall, auditorium, eshkol1, eshkol3, games, specialEvents);
 
         Floor floor1 = new Floor(1).withName("מפלס תחתון - כניסה").withImageResource(R.raw.floor1).withMarkerWidth(11);
         Floor floor2 = new Floor(2).withName("מפלס עליון - אולם ראשי").withImageResource(R.raw.floor2).withMarkerWidth(13);
@@ -63,19 +64,19 @@ public class Convention implements Serializable {
                         CollectionUtils.flattenList(
                                 inFloor(floor1,
                                         new MapLocation()
-                                                .withPlace(oranim1)
+                                                .withPlace(eshkol3)
                                                 .withMarkerResource(R.raw.oranim1_marker)
                                                 .withSelectedMarkerResource(R.raw.oranim1_marker_selected)
                                                 .withX(49)
                                                 .withY(75),
                                         new MapLocation()
-                                                .withPlace(oranim2)
+                                                .withPlace(games)
                                                 .withMarkerResource(R.raw.oranim2_marker)
                                                 .withSelectedMarkerResource(R.raw.oranim2_marker_selected)
                                                 .withX(59)
                                                 .withY(70),
                                         new MapLocation()
-                                                .withPlace(oranim3)
+                                                .withPlace(specialEvents)
                                                 .withMarkerResource(R.raw.oranim3_marker)
                                                 .withSelectedMarkerResource(R.raw.oranim3_marker_selected)
                                                 .withX(69)
@@ -94,7 +95,7 @@ public class Convention implements Serializable {
 				                                .withX(53)
 				                                .withY(51),
 		                                new MapLocation()
-				                                .withPlace(contentRoom)
+				                                .withPlace(eshkol1)
 				                                .withMarkerResource(R.raw.content_room_marker)
 				                                .withSelectedMarkerResource(R.raw.content_room_marker_selected)
 				                                .withX(86)

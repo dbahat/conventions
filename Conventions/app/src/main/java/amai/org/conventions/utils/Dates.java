@@ -23,7 +23,7 @@ public class Dates {
     private static Date getInitialDate() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm", Dates.getLocale());
         try {
-            return dateFormat.parse("20.08.2015 14:17");
+            return dateFormat.parse("20.08.2015 09:17");
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
@@ -31,10 +31,10 @@ public class Dates {
 
     public static Date now() {
         // TODO this is a mock for testing purpose. Change to new Date() when it's the real app.
-//        return new Date(System.currentTimeMillis() - appStartDate.getTime() + initialDate.getTime());
-	    Calendar currDate = Calendar.getInstance();
-	    setConventionDate(currDate);
-	    return currDate.getTime();
+        return new Date(System.currentTimeMillis() - appStartDate.getTime() + initialDate.getTime());
+//	    Calendar currDate = Calendar.getInstance();
+//	    setConventionDate(currDate);
+//	    return currDate.getTime();
     }
 
     public static String toHumanReadableTimeDuration(long milliseconds) {

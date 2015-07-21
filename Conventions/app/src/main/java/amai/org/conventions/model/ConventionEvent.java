@@ -157,10 +157,9 @@ public class ConventionEvent implements Serializable {
     }
 
 	public int getBackgroundColor(Context context) {
-		// TODO uncomment when we change to Cami programme (and have the actual colors)
-//		if (color != NO_COLOR) {
-//			return color;
-//		}
+		if (color != NO_COLOR) {
+			return color;
+		}
 		return ThemeAttributes.getColor(context, getType().getBackgroundColorAttributeId());
 	}
 

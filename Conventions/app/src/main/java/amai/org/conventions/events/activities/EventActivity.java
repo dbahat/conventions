@@ -336,9 +336,7 @@ public class EventActivity extends NavigationActivity {
         description.setMovementMethod(LinkMovementMethod.getInstance());
 
         String eventDescription = event.getDescription()
-                // Translate new lines into html <br> tags
-                .replace("\n", "<BR/>")
-                        // Replace images in the description text with some other non-visible tag (e.g. div)
+                // Replace images in the description text with some other non-visible tag (e.g. div)
                 .replace("<img", "<div")
                 .replace("/img>", "/div>");
 

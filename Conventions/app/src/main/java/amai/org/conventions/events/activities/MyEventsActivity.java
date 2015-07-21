@@ -112,7 +112,7 @@ public class MyEventsActivity extends NavigationActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
-            case R.id.my_event_navigate_to_programme:
+            case R.id.my_events_navigate_to_programme:
                 navigateToActivity(ProgrammeActivity.class);
 
                 return true;

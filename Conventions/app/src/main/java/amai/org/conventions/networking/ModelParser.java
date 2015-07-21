@@ -50,7 +50,7 @@ public class ModelParser {
                         .withServerId(eventId)
 		                .withColorFromServer(eventObj.get("timetable-bg").getAsString())
                         .withTitle(eventObj.get("title").getAsString())
-                        .withLecturer(eventObj.get("sub-title").getAsString())
+                        .withLecturer(internalEventObj.get("before_hour_text").getAsString())
                         .withDescription(eventObj.get("content").getAsString())
                         .withType(EventType.parse(eventTypeId))
                         .withStartTime(startTime)
