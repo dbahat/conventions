@@ -30,11 +30,11 @@ public class EventToImageResourceIdMapper {
 	    eventIdToImageResourceIdMap.put(529, withImages());
         eventIdToImageResourceIdMap.put(622, withImages(R.drawable.event_cosplay1, R.drawable.event_cosplay2, R.drawable.event_cosplay3));
 	    eventIdToImageResourceIdMap.put(642, withImages());
-        eventIdToImageResourceIdMap.put(643, withImages(R.drawable.event_ntt));
+        eventIdToImageResourceIdMap.put(643, withImages(R.drawable.event_idols));
         eventIdToImageResourceIdMap.put(644, withImages(R.drawable.event_idols));
 	    eventIdToImageResourceIdMap.put(645, withImages());
         eventIdToImageResourceIdMap.put(647, withImages(R.drawable.event_visual_novels));
-	    eventIdToImageResourceIdMap.put(648, withImages(R.drawable.event_ntt));
+	    eventIdToImageResourceIdMap.put(648, withImages(R.drawable.event_idols));
 	    eventIdToImageResourceIdMap.put(649, withImages(R.drawable.event_visual_novels));
 	    eventIdToImageResourceIdMap.put(650, withImages(R.drawable.event_history));
 	    eventIdToImageResourceIdMap.put(652, withImages(R.drawable.event_yaoi));

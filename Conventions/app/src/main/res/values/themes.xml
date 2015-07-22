@@ -7,7 +7,6 @@
         <item name="android:windowActionBar">false</item>
         <item name="toolbarNavigationButtonStyle">@style/ToolbarNavigationButtonStyle</item>
         <item name="stickyListHeadersListViewStyle">@style/Widget.AppCompat.ListView</item>
-        <item name="vpiCirclePageIndicatorStyle">@style/CustomCirclePageIndicator</item>
 
         <item name="homeButtonsColor">@color/gray</item>
 
@@ -31,38 +30,6 @@
 
         <item name="eventDetailsBoxColor">@color/transparent_white</item>
         <item name="eventFeedbackBoxColor">@color/transparent_light_yellow</item>
-    </style>
-
-    <style name="AppBaseTheme.Harucon2015">
-        <item name="toolbarBackground">@color/very_dark_purple</item>
-        <item name="toolbarLogo">@raw/harucon_toolbar_logo_border</item>
-        <item name="toolbarLogoType">svg</item>
-        <item name="toolbarIconAccentColor">@color/gold</item>
-        <item name="navigationPopupSelectedColor">@color/very_dark_purple</item>
-
-        <item name="appLogoHome">@drawable/harucon_logo</item>
-        <item name="homeConventionNameVisibility">visible</item>
-        <item name="homeConventionName">הארוקון 2015</item>
-        <item name="homeConventionDate">03.05.2015</item>
-        <item name="mapHomeImage">@drawable/home_harucon_map</item>
-        <item name="eventsHomeImage">@drawable/home_harucon_events</item>
-        <item name="updatesHomeImage">@drawable/home_harucon_updates</item>
-        <item name="arrivalMethodsHomeImage">@drawable/home_harucon_arrival_methods</item>
-
-        <item name="eventTypeCentralColor">@color/medium_purple</item>
-        <item name="eventTypeSpecialColor">@color/silver</item>
-        <item name="eventTypeScreeningColor">@color/dark_purple</item>
-        <item name="eventTypeLectureColor">@color/red</item>
-        <item name="eventTypeWorkshopColor">@color/light_purple</item>
-        <item name="eventTypePanelColor">@color/yellow</item>
-
-        <item name="nextEventStartTimeBackground">@color/gold</item>
-        <item name="eventDetailsDefaultBackgroundColor">@color/white</item>
-        <item name="eventFeedbackBoxColor">@color/transparent_gold</item>
-        <item name="eventFeedbackHighlightedButtonColor">@color/very_dark_purple</item>
-        <item name="eventFeedbackHighlightedButtonPressedColor">@android:color/black</item>
-        <item name="feedbackAnswerButtonColor">@color/very_dark_purple</item>
-        <item name="feedbackAnswerButtonSelectedColor">@color/light_purple</item>
     </style>
 
     <style name="AppBaseTheme.Cami2015">
