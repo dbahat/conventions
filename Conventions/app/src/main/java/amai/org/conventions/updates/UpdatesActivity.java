@@ -84,8 +84,8 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
             callbackManager.onActivityResult(requestCode, resultCode, data);
 	    }
 
-        // In case the user canceled his login attempt, show him the login button
-        if (resultCode == Activity.RESULT_CANCELED) {
+        // In case the user canceled his login attempt and he doesn't have any cache, show him the login button
+        if (resultCode == Activity.RESULT_CANCELED && updatesAdapter.getItemCount() == 0) {
             loginLayout.setVisibility(View.VISIBLE);
         }
     }
@@ -100,14 +100,13 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 
     private void loginToFacebookIfNeeded(List<Update> updates) {
         initializeFacebookLoginButton();
+        loginLayout.setVisibility(View.GONE);
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         if (accessToken != null && !accessToken.isExpired()) {
             // If the user has a valid token use it to refresh his updates
-            loginLayout.setVisibility(View.GONE);
             retrieveUpdatesListFromFacebookApi(accessToken);
         } else {
             // If the user has no valid token attempt to perform a silent login.
-            loginLayout.setVisibility(View.GONE);
             LoginManager.getInstance().logInWithReadPermissions(this, Collections.singletonList("public_profile"));
         }
     }
