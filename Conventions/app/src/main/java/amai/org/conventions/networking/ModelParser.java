@@ -1,5 +1,8 @@
 package amai.org.conventions.networking;
 
+import android.graphics.drawable.Drawable;
+import android.text.Html;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -46,12 +49,14 @@ public class ModelParser {
                     throw new RuntimeException("Cannot find hall with name " + hallName);
                 }
 
+                String eventDescription = parseEventDescription(eventObj.get("content").getAsString());
+
                 ConventionEvent conventionEvent = new ConventionEvent()
                         .withServerId(eventId)
 		                .withColorFromServer(eventObj.get("timetable-bg").getAsString())
                         .withTitle(eventObj.get("title").getAsString())
                         .withLecturer(internalEventObj.get("before_hour_text").getAsString())
-                        .withDescription(eventObj.get("content").getAsString())
+                        .withDescription(eventDescription)
                         .withType(EventType.parse(eventTypeId))
                         .withStartTime(startTime)
                         .withEndTime(endTime)
@@ -65,5 +70,35 @@ public class ModelParser {
         }
 
         return eventList;
+    }
+
+    private String parseEventDescription(String rawEventDescription) {
+        String eventDescription = rawEventDescription
+                // Remove class, style, height and width attributes in tags since they make the element take
+                // up more space than needed and are not supported anyway
+                .replaceAll("class=\"[^\"]*\"", "")
+                .replaceAll("style=\"[^\"]*\"", "")
+                .replaceAll("width=\"[^\"]*\"", "")
+                .replaceAll("height=\"[^\"]*\"", "")
+                        // Replace divs and images with some other unsupported (and therefore ignored)
+                .replace("<div", "<xdiv")
+                .replace("/div>", "/xdiv>")
+                        // Remove tabs because they are not treated as whitespace and mess up the formatting
+                .replace("\t", "    ");
+
+        // Collect the images from the html. This must be done separately because we don't want to actually
+        // include the images in the output.
+        Html.fromHtml(eventDescription, new Html.ImageGetter() {
+            @Override
+            public Drawable getDrawable(String source) {
+                return null;
+            }
+        }, null);
+
+        // Replace img tags and remove src attribute for the reasons stated above
+        return eventDescription
+                .replaceAll("src=\"[^\"]*\"", "")
+                .replace("<img", "<ximg")
+                .replace("/img>", "/ximg>");
     }
 }

@@ -65,6 +65,15 @@ public class EventActivity extends NavigationActivity {
         conventionEvent = Convention.getInstance().findEventById(eventId);
         setEvent(conventionEvent, savedInstanceState);
 
+        // If the feedback view already had saved state, restore it
+        if (savedInstanceState != null && savedInstanceState.containsKey(STATE_FEEDBACK_OPEN)) {
+            if (savedInstanceState.getBoolean(STATE_FEEDBACK_OPEN)) {
+                feedbackView.setState(CollapsibleFeedbackView.State.Expended);
+            } else {
+                feedbackView.setState(CollapsibleFeedbackView.State.Collapsed);
+            }
+        }
+
         final View mainLayout = findViewById(R.id.event_main_layout);
         final ParallaxScrollView scrollView = (ParallaxScrollView) findViewById(R.id.parallax_scroll);
         final View backgroundView = imagesLayout;
@@ -326,15 +335,6 @@ public class EventActivity extends NavigationActivity {
 
         feedbackView.setEvent(event, false);
 
-        // If the feedback view already had saved state, restore it
-        if (savedInstanceState != null && savedInstanceState.containsKey(STATE_FEEDBACK_OPEN)) {
-            if (savedInstanceState.getBoolean(STATE_FEEDBACK_OPEN)) {
-                feedbackView.setState(CollapsibleFeedbackView.State.Expended);
-            } else {
-                feedbackView.setState(CollapsibleFeedbackView.State.Collapsed);
-            }
-        }
-
 	    setupEventDescription(event);
 
         setupBackgroundImages(event);
@@ -349,34 +349,6 @@ public class EventActivity extends NavigationActivity {
 			// Enable internal links from HTML <a> tags within the description textView.
 			TextView description = (TextView) findViewById(R.id.event_description);
 			description.setMovementMethod(LinkMovementMethod.getInstance());
-
-		    eventDescription = eventDescription
-					// Remove class, style, height and width attributes in tags since they make the element take
-					// up more space than needed and are not supported anyway
-				    .replaceAll("class=\"[^\"]*\"", "")
-				    .replaceAll("style=\"[^\"]*\"", "")
-				    .replaceAll("width=\"[^\"]*\"", "")
-				    .replaceAll("height=\"[^\"]*\"", "")
-		           // Replace divs and images with some other unsupported (and therefore ignored)
-				    .replace("<div", "<xdiv")
-				    .replace("/div>", "/xdiv>")
-				    // Remove tabs because they are not treated as whitespace and mess up the formatting
-				    .replace("\t", "    ");
-
-			// Collect the images from the html. This must be done separately because we don't want to actually
-			// include the images in the output.
-			Html.fromHtml(eventDescription, new Html.ImageGetter() {
-				@Override
-				public Drawable getDrawable(String source) {
-					return null;
-				}
-			}, null);
-
-			// Replace img tags and remove src attribute for the reasons stated above
-			eventDescription = eventDescription
-				    .replaceAll("src=\"[^\"]*\"", "")
-				    .replace("<img", "<ximg")
-				    .replace("/img>", "/ximg>");
 
 			Spanned spanned = Html.fromHtml(eventDescription, null, new ListTagHandler());
 			description.setText(spanned);
