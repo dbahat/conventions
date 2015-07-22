@@ -2,11 +2,13 @@ package amai.org.conventions.events.activities;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.graphics.Palette;
 import android.text.Html;
+import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.util.TypedValue;
@@ -36,6 +38,7 @@ import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.GMailSender;
+import fi.iki.kuitsi.listtest.ListTagHandler;
 import uk.co.chrisjenx.paralloid.views.ParallaxScrollView;
 
 
@@ -268,11 +271,11 @@ public class EventActivity extends NavigationActivity {
 
     private String formatFeedbackMailBody() {
         return String.format(Dates.getLocale(), "%s\n%s, %s\n\n%s\n\n\nDeviceId: %s",
-                conventionEvent.getTitle(),
-                Dates.formatHoursAndMinutes(conventionEvent.getStartTime()),
-                conventionEvent.getHall().getName(),
-                formatFeedbackQuestions(),
-                getDeviceId()
+		        conventionEvent.getTitle(),
+		        Dates.formatHoursAndMinutes(conventionEvent.getStartTime()),
+		        conventionEvent.getHall().getName(),
+		        formatFeedbackQuestions(),
+		        getDeviceId()
         );
     }
 
@@ -310,12 +313,16 @@ public class EventActivity extends NavigationActivity {
 
         TextView time = (TextView) findViewById(R.id.event_hall_and_time);
 
-        String formattedEventTime = String.format("%s, %s - %s (%s)",
-                event.getHall().getName(),
+	    String formattedEventHall = "";
+	    if (event.getHall() != null) {
+		    formattedEventHall = String.format("%s, ", event.getHall().getName());
+	    }
+
+        String formattedEventTime = String.format("%s - %s (%s)",
                 Dates.formatHoursAndMinutes(event.getStartTime()),
                 Dates.formatHoursAndMinutes(event.getEndTime()),
                 Dates.toHumanReadableTimeDuration(event.getEndTime().getTime() - event.getStartTime().getTime()));
-        time.setText(formattedEventTime);
+        time.setText(formattedEventHall + formattedEventTime);
 
         feedbackView.setEvent(event, false);
 
@@ -328,22 +335,55 @@ public class EventActivity extends NavigationActivity {
             }
         }
 
+	    setupEventDescription(event);
+
         setupBackgroundImages(event);
 
-        TextView description = (TextView) findViewById(R.id.event_description);
-
-        // Enable internal links from HTML <a> tags within the description textView.
-        description.setMovementMethod(LinkMovementMethod.getInstance());
-
-        String eventDescription = event.getDescription()
-                // Replace images in the description text with some other non-visible tag (e.g. div)
-                .replace("<img", "<div")
-                .replace("/img>", "/div>");
-
-        description.setText(Html.fromHtml(eventDescription));
     }
 
-    private void setupBackgroundImages(ConventionEvent event) {
+	private void setupEventDescription(ConventionEvent event) {
+		String eventDescription = event.getDescription();
+		if (eventDescription == null || eventDescription.isEmpty()) {
+			findViewById(R.id.event_description_box).setVisibility(View.GONE);
+		} else {
+			// Enable internal links from HTML <a> tags within the description textView.
+			TextView description = (TextView) findViewById(R.id.event_description);
+			description.setMovementMethod(LinkMovementMethod.getInstance());
+
+		    eventDescription = eventDescription
+					// Remove class, style, height and width attributes in tags since they make the element take
+					// up more space than needed and are not supported anyway
+				    .replaceAll("class=\"[^\"]*\"", "")
+				    .replaceAll("style=\"[^\"]*\"", "")
+				    .replaceAll("width=\"[^\"]*\"", "")
+				    .replaceAll("height=\"[^\"]*\"", "")
+		           // Replace divs and images with some other unsupported (and therefore ignored)
+				    .replace("<div", "<xdiv")
+				    .replace("/div>", "/xdiv>")
+				    // Remove tabs because they are not treated as whitespace and mess up the formatting
+				    .replace("\t", "    ");
+
+			// Collect the images from the html. This must be done separately because we don't want to actually
+			// include the images in the output.
+			Html.fromHtml(eventDescription, new Html.ImageGetter() {
+				@Override
+				public Drawable getDrawable(String source) {
+					return null;
+				}
+			}, null);
+
+			// Replace img tags and remove src attribute for the reasons stated above
+			eventDescription = eventDescription
+				    .replaceAll("src=\"[^\"]*\"", "")
+				    .replace("<img", "<ximg")
+				    .replace("/img>", "/ximg>");
+
+			Spanned spanned = Html.fromHtml(eventDescription, null, new ListTagHandler());
+			description.setText(spanned);
+		}
+	}
+
+	private void setupBackgroundImages(ConventionEvent event) {
         // Add images to the layout
         List<Integer> images = event.getImages();
         boolean first = true;

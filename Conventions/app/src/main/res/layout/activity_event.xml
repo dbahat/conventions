@@ -40,6 +40,7 @@
                     style="@style/TextAppearance.AppCompat.Headline"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textDirection="rtl"
                     android:text="title" />
             </LinearLayout>
 
@@ -52,6 +53,7 @@
                     style="@style/TextAppearance.AppCompat.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textDirection="rtl"
                     android:text="lecturer" />
 
                 <TextView
@@ -59,6 +61,7 @@
                     style="@style/TextAppearance.AppCompat.Subhead"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textDirection="rtl"
                     android:paddingTop="10dp"
                     android:text="hall and time" />
             </LinearLayout>
@@ -69,6 +72,7 @@
                 android:layout_height="wrap_content"/>
 
             <LinearLayout
+                android:id="@+id/event_description_box"
                 style="@style/EventDetailsBox"
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="10dp">
@@ -78,6 +82,7 @@
                     style="@style/TextAppearance.AppCompat.Body2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textDirection="rtl"
                     android:text="description" />
             </LinearLayout>
 
