@@ -49,19 +49,19 @@ public class ModelParser {
                     throw new RuntimeException("Cannot find hall with name " + hallName);
                 }
 
-                String eventDescription = parseEventDescription(eventObj.get("content").getAsString());
+                ParsedDescription eventDescription = parseEventDescription(eventObj.get("content").getAsString());
 
                 ConventionEvent conventionEvent = new ConventionEvent()
                         .withServerId(eventId)
 		                .withColorFromServer(eventObj.get("timetable-bg").getAsString())
                         .withTitle(eventObj.get("title").getAsString())
                         .withLecturer(internalEventObj.get("before_hour_text").getAsString())
-                        .withDescription(eventDescription)
+                        .withDescription(eventDescription.getDescription())
                         .withType(EventType.parse(eventTypeId))
                         .withStartTime(startTime)
                         .withEndTime(endTime)
                         .withHall(hall)
-		                .withImages(mapper.getImageResourceIds(eventId))
+		                .withImages(mapper.getImageResourceIds(eventDescription.getEventIds()))
 		                .withId(String.format("%d_%d", eventId, internalEventNumber));
 
                 eventList.add(conventionEvent);
@@ -72,7 +72,7 @@ public class ModelParser {
         return eventList;
     }
 
-    private String parseEventDescription(String rawEventDescription) {
+    private ParsedDescription parseEventDescription(String rawEventDescription) {
         String eventDescription = rawEventDescription
                 // Remove class, style, height and width attributes in tags since they make the element take
                 // up more space than needed and are not supported anyway
@@ -88,17 +88,54 @@ public class ModelParser {
 
         // Collect the images from the html. This must be done separately because we don't want to actually
         // include the images in the output.
+        final List<String> eventIds = new LinkedList<>();
         Html.fromHtml(eventDescription, new Html.ImageGetter() {
             @Override
             public Drawable getDrawable(String source) {
+                eventIds.add(source);
                 return null;
             }
         }, null);
 
         // Replace img tags and remove src attribute for the reasons stated above
-        return eventDescription
+        String filteredDescription = eventDescription
                 .replaceAll("src=\"[^\"]*\"", "")
                 .replace("<img", "<ximg")
                 .replace("/img>", "/ximg>");
+
+        return new ParsedDescription()
+                .withDescription(filteredDescription)
+                .withEventIds(eventIds);
+    }
+
+    private class ParsedDescription {
+        private String description;
+        private List<String> eventIds;
+
+        public String getDescription() {
+            return description;
+        }
+
+        public List<String> getEventIds() {
+            return eventIds;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public void setEventIds(List<String> eventIds) {
+            this.eventIds = eventIds;
+        }
+
+        public ParsedDescription withDescription(String description) {
+            setDescription(description);
+            return this;
+        }
+
+        public ParsedDescription withEventIds(List<String> eventIds) {
+            setEventIds(eventIds);
+            return this;
+        }
     }
 }
