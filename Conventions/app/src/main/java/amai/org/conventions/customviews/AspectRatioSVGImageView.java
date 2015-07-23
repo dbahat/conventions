@@ -2,22 +2,21 @@ package amai.org.conventions.customviews;
 
 import android.content.Context;
 import android.graphics.Point;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 
-public class AspectRatioImageView extends ImageView {
-	public AspectRatioImageView(Context context) {
+import com.caverock.androidsvg.SVGImageView;
+
+public class AspectRatioSVGImageView extends SVGImageView {
+	public AspectRatioSVGImageView(Context context) {
 		super(context);
 	}
 
-	public AspectRatioImageView(Context context, AttributeSet attrs) {
+	public AspectRatioSVGImageView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
 
-	public AspectRatioImageView(Context context, AttributeSet attrs, int defStyle) {
+	public AspectRatioSVGImageView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 	}
 

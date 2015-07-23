@@ -9,15 +9,15 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="14.927453mm"
-   height="13.642241mm"
-   viewBox="0 0 52.89255 48.338647"
-   id="svg3463"
+   width="12.925883mm"
+   height="14.492988mm"
+   viewBox="0 0 45.800378 51.353106"
+   id="svg3539"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="games_marker.svg">
+   sodipodi:docname="second_hand_marker.svg">
   <defs
-     id="defs3465" />
+     id="defs3541" />
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -25,23 +25,23 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.959798"
-     inkscape:cx="35.377113"
-     inkscape:cy="17.962266"
+     inkscape:zoom="11.2"
+     inkscape:cx="8.3571285"
+     inkscape:cy="17.397826"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     fit-margin-top="0"
-     fit-margin-left="0"
-     fit-margin-right="0"
-     fit-margin-bottom="0"
      inkscape:window-width="1920"
      inkscape:window-height="1018"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
   <metadata
-     id="metadata3468">
+     id="metadata3544">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
@@ -56,18 +56,18 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-233.55373,-448.19287)">
-    <path
-       style="fill:#ac2524"
-       inkscape:connector-curvature="0"
-       id="path488"
-       d="m 270.08581,472.10952 c 0,6.527 -11.816,24.422 -11.816,24.422 0,0 -11.816,-17.895 -11.816,-24.422 0,-6.525 5.291,-11.816 11.816,-11.816 6.525,0 11.816,5.291 11.816,11.816 z" />
+     transform="translate(-204.98782,-458.10661)">
     <text
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.79874992px;line-height:125%;font-family:Alef;-inkscape-font-specification:'Alef, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#010101"
-       id="text506"
-       font-size="16.7985"
-       x="232.39717"
-       y="457.06799"
-       sodipodi:linespacing="125%">משחקיה</text>
+       id="text593"
+       font-size="15.4936"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.49375153px;line-height:125%;font-family:Alef;-inkscape-font-specification:'Alef, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#010101"
+       x="203.92111"
+       y="466.23932"
+       sodipodi:linespacing="125%">יד שניה</text>
+    <path
+       id="path595"
+       d="m 237.61582,485.03872 c 0,6.526 -11.816,24.421 -11.816,24.421 0,0 -11.816,-17.895 -11.816,-24.421 0,-6.526 5.291,-11.816 11.816,-11.816 6.525,0 11.816,5.291 11.816,11.816 z"
+       inkscape:connector-curvature="0"
+       style="fill:#ac2524" />
   </g>
 </svg>

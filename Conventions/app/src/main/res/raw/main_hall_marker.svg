@@ -9,15 +9,15 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="16.331213mm"
-   height="28.109512mm"
-   viewBox="0 0 57.866503 99.600634"
-   id="svg3981"
+   width="19.815817mm"
+   height="14.570857mm"
+   viewBox="0 0 70.213524 51.629021"
+   id="svg3541"
    version="1.1"
    inkscape:version="0.91 r13725"
    sodipodi:docname="main_hall_marker.svg">
   <defs
-     id="defs3983" />
+     id="defs3543" />
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.979899"
-     inkscape:cx="286.2439"
-     inkscape:cy="39.379766"
+     inkscape:zoom="7.9195959"
+     inkscape:cx="35.852263"
+     inkscape:cy="-3.5328509"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -41,7 +41,7 @@
      inkscape:window-y="-8"
      inkscape:window-maximized="1" />
   <metadata
-     id="metadata3986">
+     id="metadata3546">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
@@ -56,34 +56,18 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-605.44255,-465.16073)">
+     transform="translate(-124.89323,-232.26198)">
     <path
-       id="path4544"
-       style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
-       d="m 662.7046,498.9314 c 0,22.64143 -28.3294,65.22557 -28.3294,65.22557 0,0 -28.3282,-40.43404 -28.3282,-65.22557 0,-18.31723 12.68329,-33.16622 28.3282,-33.16622 15.64732,0 28.3294,14.84899 28.3294,33.16622"
-       inkscape:connector-curvature="0" />
-    <g
-       id="g4546"
-       transform="matrix(1.2005,0,0,-1.2005,662.7046,498.9314)">
-      <path
-         inkscape:connector-curvature="0"
-         d="m 0,0 c 0,-18.86 -23.598,-54.332 -23.598,-54.332 0,0 -23.597,33.681 -23.597,54.332 0,15.258 10.565,27.627 23.597,27.627 C -10.564,27.627 0,15.258 0,0 Z"
-         style="fill:none;stroke:#231f20;stroke-width:1.00699997;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-         id="path4548" />
-    </g>
+       style="fill:#ac2524"
+       inkscape:connector-curvature="0"
+       id="path486"
+       d="m 166.9012,259.469 c 0,6.527 -11.816,24.422 -11.816,24.422 0,0 -11.816,-17.895 -11.816,-24.422 0,-6.525 5.291,-11.816 11.816,-11.816 6.525,0 11.816,5.291 11.816,11.816 z" />
     <text
-       y="501.46939"
-       x="615.84485"
-       style="font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.3504982px;font-family:'Abigail';-inkscape-font-specification:Abigail;writing-mode:lr-tb;fill:#db2e38;fill-opacity:1;fill-rule:nonzero;stroke:none"
-       id="text4550">
-      <tspan
-         x="615.84485 626.77789 635.09857 639.35571"
-         y="501.46939"
-         id="tspan4552">אולם</tspan>
-      <tspan
-         x="615.30298 619.40533 631.69287 642.27765"
-         y="517.58838"
-         id="tspan4554">ראשי</tspan>
-    </text>
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.79874992px;line-height:125%;font-family:Alef;-inkscape-font-specification:'Alef, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#010101"
+       id="text502"
+       font-size="16.7985"
+       x="123.96635"
+       y="243.11391"
+       sodipodi:linespacing="125%">אולם ראשי</text>
   </g>
 </svg>

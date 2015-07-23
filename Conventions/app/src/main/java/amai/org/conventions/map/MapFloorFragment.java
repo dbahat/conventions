@@ -35,6 +35,7 @@ import java.util.List;
 import java.util.Map;
 
 import amai.org.conventions.R;
+import amai.org.conventions.customviews.AspectRatioSVGImageView;
 import amai.org.conventions.customviews.InterceptorLinearLayout;
 import amai.org.conventions.events.EventView;
 import amai.org.conventions.events.activities.HallActivity;
@@ -321,11 +322,8 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		    // Add markers
 		    List<MapLocation> locations = map.findLocationsByFloor(floor);
 		    for (final MapLocation location : locations) {
-			    // Add drop shadow
-			    View markerShadowView = createMarkerShadowView(location);
-			    mapFloorImage.addView(markerShadowView);
 			    // Add the marker for this location
-			    View markerImageView = createMarkerView(location, markerShadowView);
+			    View markerImageView = createMarkerView(location, null);
 			    mapFloorImage.addView(markerImageView);
 		    }
 		    // Set initially selected location now after we created all the markers
@@ -347,7 +345,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
     }
 
 	private View createMarkerView(final MapLocation location, View markerShadowView) throws SVGParseException {
-		final SVGImageView markerImageView = new SVGImageView(getActivity());
+		final SVGImageView markerImageView = new AspectRatioSVGImageView(getActivity());
 
 		// Set marker image
 		SVG markerSvg = loadSVG(location.getMarkerResource());
@@ -356,8 +354,8 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		// Set marker layout parameters and scaling
 		ImageLayout.LayoutParams layoutParams = new ImageLayout.LayoutParams();
 		// Marker size
-		layoutParams.width = location.getFloor().getMarkerWidth();
-		layoutParams.height = layoutParams.width * 2;
+		layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+		layoutParams.height = location.getFloor().getMarkerHeight();
 		// Marker location
 		layoutParams.centerX = location.getX();
 		layoutParams.bottom = 100 - location.getY();
@@ -385,28 +383,6 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		floorMarkers.add(marker);
 		marker.setOnClickListener(this);
 
-		return markerImageView;
-	}
-
-	private View createMarkerShadowView(MapLocation location) throws SVGParseException {
-		SVGImageView markerImageView = new SVGImageView(getActivity());
-
-		// Set marker image
-		SVG markerSvg = loadSVG(R.raw.marker_shadow);
-		markerImageView.setSVG(markerSvg);
-
-		// Set marker layout parameters and scaling
-		ImageLayout.LayoutParams layoutParams = new ImageLayout.LayoutParams();
-		// Marker size
-		layoutParams.width = location.getFloor().getMarkerWidth() + 3;
-		layoutParams.height = layoutParams.width * 2;
-		// Marker location
-		layoutParams.centerX = location.getX();
-		layoutParams.bottom = 100 - location.getY() + 3;
-
-		markerImageView.setLayoutParams(layoutParams);
-		markerImageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-		markerImageView.setAlpha(0.5f);
 		return markerImageView;
 	}
 

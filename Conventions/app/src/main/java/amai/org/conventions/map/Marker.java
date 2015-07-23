@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import amai.org.conventions.model.MapLocation;
 
 public class Marker {
+	private static final float SCALE_FACTOR = 1.3f;
 	private MapLocation location;
 	private ImageView imageView;
 	private View shadowImageView;
@@ -32,8 +33,10 @@ public class Marker {
 
 		imageWidth = imageView.getLayoutParams().width;
 		imageHeight = imageView.getLayoutParams().height;
-		shadowWidth = shadowImageView.getLayoutParams().width;
-		shadowHeight = shadowImageView.getLayoutParams().height;
+		if (shadowImageView != null) {
+			shadowWidth = shadowImageView.getLayoutParams().width;
+			shadowHeight = shadowImageView.getLayoutParams().height;
+		}
 
 		imageView.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -66,8 +69,8 @@ public class Marker {
 		// Change the marker image and make it marker bigger. Animate the size change.
 		imageView.setImageDrawable(selectedDrawableProvider.getDrawable());
 
-		scaleAndAnimate(imageView, imageWidth + 2, imageHeight + 4, animate);
-		scaleAndAnimate(shadowImageView, shadowWidth + 2, shadowHeight + 4, animate);
+		scaleAndAnimate(imageView, getScaledSize(imageWidth), getScaledSize(imageHeight), animate);
+		scaleAndAnimate(shadowImageView, getScaledSize(shadowWidth), getScaledSize(shadowHeight), animate);
 	}
 
 	public void deselect() {
@@ -91,7 +94,18 @@ public class Marker {
 		return selected;
 	}
 
+	private int getScaledSize(int size) {
+		if (size == ViewGroup.LayoutParams.WRAP_CONTENT) {
+			return size;
+		}
+		return (int) (size * SCALE_FACTOR);
+	}
+
 	private void scaleAndAnimate(View view, int newWidth, int newHeight, boolean animate) {
+		if (view == null) {
+			return;
+		}
+
 		ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
 		int width = layoutParams.width;
 		int height = layoutParams.height;
@@ -103,6 +117,12 @@ public class Marker {
 		if (animate) {
 			float widthScale = width / (float) newWidth;
 			float heightScale = height / (float) newHeight;
+			// If one of them is wrap_content, take the scale from the other size
+			if (width == ViewGroup.LayoutParams.WRAP_CONTENT) {
+				widthScale = heightScale;
+			} else if (height == ViewGroup.LayoutParams.WRAP_CONTENT) {
+				heightScale = widthScale;
+			}
 			ScaleAnimation animation = new ScaleAnimation(widthScale, 1f, heightScale, 1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 1f);
 			animation.setInterpolator(new BounceInterpolator());
 			animation.setDuration(500);

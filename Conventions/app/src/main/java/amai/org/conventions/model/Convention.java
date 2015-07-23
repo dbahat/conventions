@@ -55,8 +55,8 @@ public class Convention implements Serializable {
 
         this.halls = Arrays.asList(mainHall, auditorium, eshkol1, eshkol3, games, specialEvents);
 
-        Floor floor1 = new Floor(1).withName("מפלס תחתון - כניסה").withImageResource(R.raw.floor1).withMarkerWidth(11);
-        Floor floor2 = new Floor(2).withName("מפלס עליון - אולם ראשי").withImageResource(R.raw.floor2).withMarkerWidth(13);
+        Floor floor1 = new Floor(1).withName("מפלס תחתון וקומת ביניים").withImageResource(R.raw.cami_floor1).withMarkerHeight(10);
+        Floor floor2 = new Floor(2).withName("מפלס עליון").withImageResource(R.raw.cami_floor2).withMarkerHeight(13);
 
         this.map = new ConventionMap()
                 .withFloors(Arrays.asList(floor1, floor2))
@@ -65,41 +65,121 @@ public class Convention implements Serializable {
                                 inFloor(floor1,
                                         new MapLocation()
                                                 .withPlace(eshkol3)
-                                                .withMarkerResource(R.raw.oranim1_marker)
-                                                .withSelectedMarkerResource(R.raw.oranim1_marker_selected)
-                                                .withX(49)
-                                                .withY(75),
-                                        new MapLocation()
-                                                .withPlace(games)
-                                                .withMarkerResource(R.raw.oranim2_marker)
-                                                .withSelectedMarkerResource(R.raw.oranim2_marker_selected)
-                                                .withX(59)
-                                                .withY(70),
-                                        new MapLocation()
-                                                .withPlace(specialEvents)
-                                                .withMarkerResource(R.raw.oranim3_marker)
-                                                .withSelectedMarkerResource(R.raw.oranim3_marker_selected)
-                                                .withX(69)
-                                                .withY(64),
+                                                .withMarkerResource(R.raw.eshkol3_marker)
+                                                .withSelectedMarkerResource(R.raw.eshkol3_marker)
+                                                .withX(53)
+                                                .withY(87),
 		                                new MapLocation()
-		                                        .withPlace(new Place().withName("קונסולות ומשחקיה"))
-                                                .withMarkerResource(R.raw.games_marker)
-                                                .withSelectedMarkerResource(R.raw.games_marker)
-                                                .withX(83)
-                                                .withY(59)),
-                                inFloor(floor2,
+		                                        .withPlace(new Place().withName("שירותים"))
+		                                        .withMarkerResource(R.raw.toilet_marker)
+		                                        .withSelectedMarkerResource(R.raw.toilet_marker)
+		                                        .withX(89)
+		                                        .withY(50),
+                                        new MapLocation()
+                                                .withPlace(new Place().withName("החתמות"))
+                                                .withMarkerResource(R.raw.signatures_marker)
+                                                .withSelectedMarkerResource(R.raw.signatures_marker)
+                                                .withX(80)
+                                                .withY(53),
+                                        new MapLocation()
+                                                .withPlace(new Place().withName("יד שניה"))
+                                                .withMarkerResource(R.raw.second_hand_marker)
+                                                .withSelectedMarkerResource(R.raw.second_hand_marker)
+                                                .withX(56)
+                                                .withY(53),
+		                                new MapLocation()
+		                                        .withPlace(new Place().withName("מודיעין"))
+                                                .withMarkerResource(R.raw.information_marker)
+                                                .withSelectedMarkerResource(R.raw.information_marker)
+                                                .withX(41)
+                                                .withY(31),
+		                                new MapLocation()
+				                                .withPlace(new Place().withName("שירותים"))
+				                                .withMarkerResource(R.raw.toilet_marker)
+				                                .withSelectedMarkerResource(R.raw.toilet_marker)
+				                                .withX(49)
+				                                .withY(6),
 		                                new MapLocation()
 				                                .withPlace(auditorium)
-				                                .withMarkerResource(R.raw.main_hall_marker)
-				                                .withSelectedMarkerResource(R.raw.main_hall_marker_selected)
-				                                .withX(53)
-				                                .withY(51),
+				                                .withMarkerResource(R.raw.schwartz_marker)
+				                                .withSelectedMarkerResource(R.raw.schwartz_marker)
+				                                .withX(30)
+				                                .withY(43),
 		                                new MapLocation()
 				                                .withPlace(eshkol1)
-				                                .withMarkerResource(R.raw.content_room_marker)
-				                                .withSelectedMarkerResource(R.raw.content_room_marker_selected)
-				                                .withX(86)
-				                                .withY(70))
+				                                .withMarkerResource(R.raw.eshkol1_marker)
+				                                .withSelectedMarkerResource(R.raw.eshkol1_marker)
+				                                .withX(24)
+				                                .withY(47),
+		                                new MapLocation()
+				                                .withPlace(new Place().withName("שירותים"))
+				                                .withMarkerResource(R.raw.toilet_marker)
+				                                .withSelectedMarkerResource(R.raw.toilet_marker)
+				                                .withX(12)
+				                                .withY(38)),
+		                        inFloor(floor2,
+				                        // Keep this location before storage because otherwise when
+				                        // storage is selected, it's displayed behind this location
+				                        new MapLocation()
+						                        .withPlace(new Place().withName("שיפוט קוספליי"))
+						                        .withMarkerResource(R.raw.cosplay_judgement_marker)
+						                        .withSelectedMarkerResource(R.raw.cosplay_judgement_marker)
+						                        .withX(85)
+						                        .withY(75),
+				                        new MapLocation()
+						                        .withPlace(new Place().withName("שמירת חפצים"))
+						                        .withMarkerResource(R.raw.storage_marker)
+						                        .withSelectedMarkerResource(R.raw.storage_marker)
+						                        .withX(92)
+						                        .withY(67),
+				                        new MapLocation()
+						                        .withPlace(new Place().withName("משחקיה"))
+						                        .withMarkerResource(R.raw.games_marker)
+						                        .withSelectedMarkerResource(R.raw.games_marker)
+						                        .withX(48)
+						                        .withY(79),
+				                        new MapLocation()
+						                        .withPlace(mainHall)
+						                        .withMarkerResource(R.raw.main_hall_marker)
+						                        .withSelectedMarkerResource(R.raw.main_hall_marker)
+						                        .withX(58)
+						                        .withY(57),
+				                        new MapLocation()
+						                        .withPlace(new Place().withName("כניסה פלוס"))
+						                        .withMarkerResource(R.raw.entrance_plus_marker)
+						                        .withSelectedMarkerResource(R.raw.entrance_plus_marker)
+						                        .withX(65)
+						                        .withY(37),
+				                        new MapLocation()
+						                        .withPlace(new Place().withName("תיקון קוספליי"))
+						                        .withMarkerResource(R.raw.cosplay_fixes_marker)
+						                        .withSelectedMarkerResource(R.raw.cosplay_fixes_marker)
+						                        .withX(59)
+						                        .withY(24),
+				                        new MapLocation()
+						                        .withPlace(new Place().withName("פינת צילום"))
+						                        .withMarkerResource(R.raw.photoshoot_corner_marker)
+						                        .withSelectedMarkerResource(R.raw.photoshoot_corner_marker)
+						                        .withX(52)
+						                        .withY(18),
+				                        new MapLocation()
+						                        .withPlace(new Place().withName("שירותים"))
+						                        .withMarkerResource(R.raw.toilet_marker)
+						                        .withSelectedMarkerResource(R.raw.toilet_marker)
+						                        .withX(58)
+						                        .withY(11),
+				                        new MapLocation()
+						                        .withPlace(new Place().withName("ווידוא ווקאון"))
+						                        .withMarkerResource(R.raw.walkon_marker)
+						                        .withSelectedMarkerResource(R.raw.walkon_marker)
+						                        .withX(25)
+						                        .withY(63),
+				                        new MapLocation()
+						                        .withPlace(new Place().withName("שירותים"))
+						                        .withMarkerResource(R.raw.toilet_marker)
+						                        .withSelectedMarkerResource(R.raw.toilet_marker)
+						                        .withX(8)
+						                        .withY(61))
                         )
                 );
 

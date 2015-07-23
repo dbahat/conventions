@@ -4,7 +4,7 @@ public class Floor {
 	private int number;
 	private String name;
 	private int imageResource;
-	private int markerWidth;
+	private int markerHeight;
 
 	public Floor(int number) {
 		this.number = number;
@@ -40,16 +40,16 @@ public class Floor {
 		return this;
 	}
 
-	public int getMarkerWidth() {
-		return markerWidth;
+	public int getMarkerHeight() {
+		return markerHeight;
 	}
 
-	public void setMarkerWidth(int markerWidth) {
-		this.markerWidth = markerWidth;
+	public void setMarkerHeight(int markerHeight) {
+		this.markerHeight = markerHeight;
 	}
 
-	public Floor withMarkerWidth(int markerWidth) {
-		setMarkerWidth(markerWidth);
+	public Floor withMarkerHeight(int markerHeight) {
+		setMarkerHeight(markerHeight);
 		return this;
 	}
 }
