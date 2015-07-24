@@ -150,6 +150,8 @@ public class EventActivity extends NavigationActivity {
             favoritesButton.setIcon(getResources().getDrawable(android.R.drawable.btn_star_big_on));
         }
 
+        hideNavigateToMapButtonIfNoLocationExists(menu);
+
         return true;
     }
 
@@ -176,7 +178,9 @@ public class EventActivity extends NavigationActivity {
                 ConventionMap map = Convention.getInstance().getMap();
                 List<MapLocation> locations = map.findLocationsByHall(conventionEvent.getHall());
                 MapLocation location = map.findClosestLocation(locations);
-                floorBundle.putInt(MapActivity.EXTRA_MAP_LOCATION_ID, location.getId());
+                if (location != null) {
+                    floorBundle.putInt(MapActivity.EXTRA_MAP_LOCATION_ID, location.getId());
+                }
 
                 navigateToActivity(MapActivity.class, false, floorBundle);
                 return true;
@@ -275,6 +279,15 @@ public class EventActivity extends NavigationActivity {
             }
 
         }.execute();
+    }
+
+    private void hideNavigateToMapButtonIfNoLocationExists(Menu menu) {
+        ConventionMap map = Convention.getInstance().getMap();
+        List<MapLocation> locations = map.findLocationsByHall(conventionEvent.getHall());
+        MapLocation location = map.findClosestLocation(locations);
+        if (location == null) {
+            menu.findItem(R.id.event_navigate_to_map).setVisible(false);
+        }
     }
 
     private String formatFeedbackMailBody() {
