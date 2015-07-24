@@ -65,6 +65,7 @@
         <!-- Map Screen -->
         <attr name="locationDetailsBackground" format="color|reference"/>
         <attr name="locationDetailsTopLineColor" format="color|reference"/>
+        <attr name="floorBackground" format="color|reference"/>
         <!-- Event Screen -->
         <attr name="eventDetailsBoxColor" format="color|reference"/>
         <attr name="eventFeedbackBoxColor" format="color|reference"/>

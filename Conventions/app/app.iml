@@ -133,8 +133,8 @@
     <orderEntry type="library" exported="" name="activation" level="project" />
     <orderEntry type="library" exported="" name="play-services-plus-7.5.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-maps-7.5.0" level="project" />
-    <orderEntry type="library" exported="" name="play-services-fitness-7.5.0" level="project" />
     <orderEntry type="library" exported="" name="mail" level="project" />
+    <orderEntry type="library" exported="" name="play-services-fitness-7.5.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-7.5.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-analytics-7.5.0" level="project" />
     <orderEntry type="library" exported="" name="mediarouter-v7-22.0.0" level="project" />

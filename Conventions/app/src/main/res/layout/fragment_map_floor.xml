@@ -5,6 +5,7 @@
              android:layout_height="match_parent"
              android:layoutDirection="rtl"
              android:orientation="vertical"
+              android:background="?floorBackground"
              tools:context="amai.org.conventions.map.MapFloorFragment">
 
     <LinearLayout
