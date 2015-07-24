@@ -10,6 +10,7 @@ import com.google.gson.JsonParser;
 
 import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -73,6 +74,11 @@ public class ModelParser {
                 }
                 if (conventionEvent.getType() == EventType.Games && conventionEvent.getDescription().length() == 0) {
                     conventionEvent = handleGamesEvent(conventionEvent);
+                }
+
+                // In case some events came up without any images at all, add a generic image to them.
+                if (conventionEvent.getImages().size() == 0) {
+                    conventionEvent.setImages(Collections.singletonList(R.drawable.event_generic));
                 }
 
                 eventList.add(conventionEvent);
