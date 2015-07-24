@@ -1,17 +1,15 @@
 package amai.org.conventions.model;
 
-import android.util.Log;
-
 import amai.org.conventions.R;
 
 public enum EventType {
 
-    Central(R.attr.eventTypeCentralColor, "מרכזי"),
-    Special(R.attr.eventTypeSpecialColor, "מיוחד"),
-    Screening(R.attr.eventTypeScreeningColor, "הקרנה"),
+    Games(R.attr.eventTypeCentralColor, "משחקים"),
+    Community(R.attr.eventTypeSpecialColor, "ארוע קהילה"),
     Lecture(R.attr.eventTypeLectureColor, "הרצאה"),
     Workshop(R.attr.eventTypeWorkshopColor, "סדנה"),
-    Panel(R.attr.eventTypePanelColor, "פאנל");
+    Panel(R.attr.eventTypePanelColor, "פאנל"),
+    GuestOfHonor(R.attr.eventTypePanelColor, "אורחת כבוד");
 
     private int backgroundColorAttributeId;
 	private String description;
@@ -32,20 +30,20 @@ public enum EventType {
     public static EventType parse(int eventTypeId) {
         switch (eventTypeId) {
             case 16:
-                return EventType.Lecture;
+                return EventType.Games;
             case 17:
-                return EventType.Workshop;
+                return EventType.Community;
             case 18:
-                return EventType.Panel;
+                return EventType.Lecture;
             case 19:
-                return EventType.Screening;
+                return EventType.Workshop;
             case 20:
-                return EventType.Central;
-            case 21:
-                return EventType.Special;
+                return EventType.Panel;
+            case 22:
+                return EventType.GuestOfHonor;
 
             default:
-                return EventType.Central;
+                return EventType.Community;
         }
     }
 }
