@@ -23,15 +23,20 @@ public class Dates {
     private static Date getInitialDate() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm", Dates.getLocale());
         try {
-            return dateFormat.parse("20.08.2015 09:17");
+            return dateFormat.parse("20.08.2015 12:17");
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
     }
 
     public static Date now() {
-        // TODO this is a mock for testing purpose. Change to new Date() when it's the real app.
-        return new Date(System.currentTimeMillis() - appStartDate.getTime() + initialDate.getTime());
+	    // Now
+	    return new Date(System.currentTimeMillis());
+
+	    // Fixed date
+//        return new Date(System.currentTimeMillis() - appStartDate.getTime() + initialDate.getTime());
+
+	    // Current time at the convention's date
 //	    Calendar currDate = Calendar.getInstance();
 //	    setConventionDate(currDate);
 //	    return currDate.getTime();

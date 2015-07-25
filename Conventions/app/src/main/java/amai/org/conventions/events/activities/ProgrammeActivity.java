@@ -9,7 +9,6 @@ import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,9 +40,9 @@ import amai.org.conventions.events.adapters.SwipeableEventsViewOrHourAdapter;
 import amai.org.conventions.events.holders.EventTimeViewHolder;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
+import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.networking.ModelRefresher;
 import amai.org.conventions.utils.Dates;
-import amai.org.conventions.navigation.NavigationActivity;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView.OnHeaderClickListener;
 
@@ -120,7 +119,7 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
 		}
 
 		if (savedInstanceState == null || !savedInstanceState.getBoolean(STATE_PREVENT_SCROLLING, false)) {
-	        final int position = findHourPosition(getHour(Dates.now()));
+	        final int position = findHourPosition(Dates.now());
 			if (position != -1) {
 				cancelScroll = false;
 
@@ -304,17 +303,38 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
 	}
 
 	private int findHourPosition(int hour) {
+		int i = 0;
+		for (ProgrammeConventionEvent event : events) {
+			// This is called from the hour popup, the date is not relevant in this case
+			if (event.getTimeSection().get(Calendar.HOUR_OF_DAY) >= hour) {
+				return i;
+			}
+			i++;
+		}
+
+		// If we got here it means the user selected an hour later then the last event. In this case,
+		// return the last position (which is i-1, since it's a zero based count)
+		return -1;
+	}
+
+	private int findHourPosition(Date time) {
+		Calendar timeCalendar = Calendar.getInstance();
+		timeCalendar.setTime(time);
+		// Only keep up to the hour part
+		timeCalendar.set(Calendar.MINUTE, 0);
+		timeCalendar.set(Calendar.SECOND, 0);
+		timeCalendar.set(Calendar.MILLISECOND, 0);
         int i = 0;
 
         for (ProgrammeConventionEvent event : events) {
-            if (event.getTimeSection().get(Calendar.HOUR_OF_DAY) >= hour) {
+	        // This is called from the activity startup, we don't want to scroll if it's not the convention date
+            if (!event.getTimeSection().before(timeCalendar)) {
                 return i;
             }
             i++;
         }
 
         // If we got here it means the selected hour is after the last event ends so no scrolling is required
-        // zero based count)
         return -1;
     }
 
