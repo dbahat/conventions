@@ -23,7 +23,7 @@ public class Dates {
     private static Date getInitialDate() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm", Dates.getLocale());
         try {
-            return dateFormat.parse("20.08.2015 12:17");
+            return dateFormat.parse("20.08.2015 09:14");
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
@@ -33,7 +33,7 @@ public class Dates {
 	    // Now
 	    return new Date(System.currentTimeMillis());
 
-	    // Fixed date
+	    // Fixed startup date
 //        return new Date(System.currentTimeMillis() - appStartDate.getTime() + initialDate.getTime());
 
 	    // Current time at the convention's date

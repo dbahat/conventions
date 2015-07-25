@@ -44,16 +44,16 @@ public class Convention implements Serializable {
         this.date = Calendar.getInstance();
 	    this.date.clear();
         this.date.set(2015, Calendar.AUGUST, 20);
-        this.feedbackRecipient = "cami2015androidapp@gmail.com";
+        this.feedbackRecipient = "hq@cami.org.il";
 
 	    Hall mainHall = new Hall().withName("אולם ראשי").withOrder(1);
         Hall auditorium = new Hall().withName("אודיטוריום שוורץ").withOrder(2);
         Hall eshkol1 = new Hall().withName("אשכול 1").withOrder(3);
-        Hall eshkol3 = new Hall().withName("אשכול 3").withOrder(4);
+        Hall eshkol2 = new Hall().withName("אשכול 2").withOrder(4);
         Hall games = new Hall().withName("משחקייה").withOrder(5);
         Hall specialEvents = new Hall().withName("אירועים מיוחדים").withOrder(6);
 
-        this.halls = Arrays.asList(mainHall, auditorium, eshkol1, eshkol3, games, specialEvents);
+        this.halls = Arrays.asList(mainHall, auditorium, eshkol1, eshkol2, games, specialEvents);
 
         Floor floor1 = new Floor(1).withName("מפלס תחתון וקומת ביניים").withImageResource(R.raw.cami_floor1).withMarkerHeight(10);
         Floor floor2 = new Floor(2).withName("מפלס עליון").withImageResource(R.raw.cami_floor2).withMarkerHeight(13);
@@ -64,9 +64,9 @@ public class Convention implements Serializable {
                         CollectionUtils.flattenList(
                                 inFloor(floor1,
                                         new MapLocation()
-                                                .withPlace(eshkol3)
-                                                .withMarkerResource(R.raw.eshkol3_marker)
-                                                .withSelectedMarkerResource(R.raw.eshkol3_marker_selected)
+                                                .withPlace(eshkol2)
+                                                .withMarkerResource(R.raw.eshkol2_marker)
+                                                .withSelectedMarkerResource(R.raw.eshkol2_marker_selected)
                                                 .withX(53)
                                                 .withY(87),
 		                                new MapLocation()
