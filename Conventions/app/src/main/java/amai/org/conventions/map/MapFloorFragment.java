@@ -11,12 +11,16 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MotionEventCompat;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,11 +47,11 @@ import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
 import amai.org.conventions.model.ConventionMap;
+import amai.org.conventions.model.Floor;
 import amai.org.conventions.model.Hall;
+import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.model.Place;
 import amai.org.conventions.utils.Dates;
-import amai.org.conventions.model.Floor;
-import amai.org.conventions.model.MapLocation;
 
 /**
  * A fragment showing a single map floor
@@ -57,9 +61,11 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
     private static final String ARGS_FLOOR_NUMBER = "FloorNumber";
 	private static final String STATE_SELECTED_LOCATIONS = "StateSelectedLocation";
 	private static final String STATE_LOCATION_DETAILS_OPEN = "StateLocationDetailsOpen";
+	private static final String STATE_MAP_FLOOR_ZOOMED = "StateMapFloorZoomed";
 
 	private static Map<Integer, SVG> loadedSVGFiles = new HashMap<>();
 
+	private HorizontalScrollView scrollView;
     private ImageLayout mapFloorImage;
     private View upArrow;
     private View downArrow;
@@ -83,6 +89,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+	    setHasOptionsMenu(true);
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_map_floor, container, false);
 
@@ -90,7 +97,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 	    initializeLocationDetails();
         initializeUpAndDownButtons();
         configureMapFloor();
-	    setMainViewClickListener(view);
+	    setDismissSelectionClickListener(mapFloorImage);
 
 	    // Restore state
 	    if (savedInstanceState != null) {
@@ -111,10 +118,33 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 			    // If the details are open there should only be one location selected so we take the last one
 			    setSelectedLocationDetails(selectedLocation);
 		    }
+
+		    if (savedInstanceState.getBoolean(STATE_MAP_FLOOR_ZOOMED)) {
+			    changeMapZoom(true);
+		    }
 	    }
 
 	    return view;
     }
+
+	private void changeMapZoom(boolean zoomIn) {
+		ViewGroup.LayoutParams layoutParams = mapFloorImage.getLayoutParams();
+		layoutParams.width = zoomIn ? ViewGroup.LayoutParams.WRAP_CONTENT : ViewGroup.LayoutParams.MATCH_PARENT;
+		mapFloorImage.setLayoutParams(layoutParams);
+
+		if (zoomIn) {
+			scrollView.post(new Runnable() {
+				@Override
+				public void run() {
+					scrollView.fullScroll(View.FOCUS_RIGHT);
+				}
+			});
+		}
+	}
+
+	private boolean isMapZoomedIn() {
+		return mapFloorImage.getLayoutParams().width == ViewGroup.LayoutParams.WRAP_CONTENT;
+	}
 
 	@Override
     public void onAttach(Activity activity) {
@@ -147,9 +177,27 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		}
 		outState.putIntegerArrayList(STATE_SELECTED_LOCATIONS, selectedLocationIDs);
 		outState.putBoolean(STATE_LOCATION_DETAILS_OPEN, locationDetails.getVisibility() == View.VISIBLE);
+		outState.putBoolean(STATE_MAP_FLOOR_ZOOMED, isMapZoomedIn());
 
 		super.onSaveInstanceState(outState);
 	}
+
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		super.onCreateOptionsMenu(menu, inflater);
+		inflater.inflate(R.menu.menu_map, menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.map_floor_zoom_to_fit:
+				changeMapZoom(!isMapZoomedIn());
+				return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
 
 	public static MapFloorFragment newInstance(int floor) {
         MapFloorFragment fragment = new MapFloorFragment();
@@ -181,6 +229,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
     }
 
     private void resolveUIElements(View view) {
+	    scrollView = (HorizontalScrollView) view.findViewById(R.id.horizontal_scroll_view);
         mapFloorImage = (ImageLayout) view.findViewById(R.id.map_floor_image);
         upArrow = view.findViewById(R.id.map_floor_up);
         downArrow = view.findViewById(R.id.map_floor_down);
@@ -437,7 +486,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		setSelectedLocationDetails(marker.getLocation());
 	}
 
-	private void setMainViewClickListener(View view) {
+	private void setDismissSelectionClickListener(View view) {
 		view.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

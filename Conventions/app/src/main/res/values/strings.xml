@@ -43,4 +43,5 @@
     <string name="floor_up">קומה למעלה</string>
     <string name="navigate">ניווט</string>
     <string name="display_feedback">הצג פידבק</string>
+    <string name="zoom_to_fit">התאם לגודל החלון</string>
 </resources>

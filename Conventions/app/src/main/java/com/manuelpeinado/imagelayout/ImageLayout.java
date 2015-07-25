@@ -253,11 +253,26 @@ public class ImageLayout extends ViewGroup {
             }
         }
         else if (isExactHeight && !isExactWidth) {
-            width = (int)(height * imageAspectRatio);
-            if (widthMode == MeasureSpec.AT_MOST && width > widthSpec) {
-                width = widthSpec;
-            }
+	        ViewGroup parent = (ViewGroup) getParent();
+	        int parentWiidth = parent.getMeasuredWidth();
+	        switch (getLayoutParams().width) {
+		        case ViewGroup.LayoutParams.MATCH_PARENT:
+			        width = parentWiidth;
+			        break;
+		        default:
+			        // If we have WRAP_CONTENT we want to make the width at least the available
+			        // space in the parent so it will appear centered (it could be more to keep the aspect ratio).
+			        // This is a workaround for this view being inside HorizontalScrollView (because it cannot be
+			        // centered there).
+		            width = Math.max(parentWiidth, (int) (height * imageAspectRatio));
+			        break;
+	        }
+
+	        if (widthMode == MeasureSpec.AT_MOST && width > widthSpec) {
+		        width = widthSpec;
+	        }
         }
+
         setMeasuredDimension(width, height);
 
         int effectiveWidth = width - getPaddingLeft() - getPaddingRight();

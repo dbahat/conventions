@@ -41,18 +41,27 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <com.manuelpeinado.imagelayout.ImageLayout
-            android:padding="5dp"
-            android:gravity="center"
-            android:id="@+id/map_floor_image"
+        <!-- This view must have software rendering because the ImageLayout inside it also has
+             software rendering and if it's too big it is not displayed -->
+        <HorizontalScrollView
+            android:id="@+id/horizontal_scroll_view"
+            android:layerType="software"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            custom:image="@drawable/floor1"
-            custom:fit="auto"
-            custom:imageWidth="100"
-            custom:imageHeight="100">
+            android:layout_height="match_parent">
 
-        </com.manuelpeinado.imagelayout.ImageLayout>
+                <com.manuelpeinado.imagelayout.ImageLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/map_floor_image"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    custom:image="@drawable/floor1"
+                    custom:fit="auto"
+                    custom:imageWidth="100"
+                    custom:imageHeight="100">
+                </com.manuelpeinado.imagelayout.ImageLayout>
+        </HorizontalScrollView>
+
 
         <amai.org.conventions.customviews.InterceptorLinearLayout
             android:id="@+id/location_details"
@@ -86,7 +95,7 @@
                         android:layout_height="wrap_content"
                         style="@style/TextAppearance.AppCompat.Title"
                         android:layout_alignParentStart="true"
-                        android:text="אורנים 1"/>
+                        android:text="Hall name"/>
 
                     <ImageView
                         android:layout_width="54dp"
