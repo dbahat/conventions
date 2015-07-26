@@ -1,5 +1,6 @@
 package amai.org.conventions.events.adapters;
 
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,10 +15,12 @@ import amai.org.conventions.model.ConventionEvent;
 
 public class SwipeableEventsViewAdapter extends RecyclerView.Adapter<SwipeableEventViewHolder> {
     private List<ConventionEvent> eventsList;
+	private View recyclerView;
 
-    public SwipeableEventsViewAdapter(List<ConventionEvent> eventsList) {
+	public SwipeableEventsViewAdapter(List<ConventionEvent> eventsList, View recyclerView) {
         this.eventsList = eventsList;
-    }
+		this.recyclerView = recyclerView;
+	}
 
     @Override
     public SwipeableEventViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -26,7 +29,7 @@ public class SwipeableEventsViewAdapter extends RecyclerView.Adapter<SwipeableEv
     }
 
     @Override
-    public void onBindViewHolder(SwipeableEventViewHolder holder, int position) {
+    public void onBindViewHolder(final SwipeableEventViewHolder holder, int position) {
         holder.reset();
         final ConventionEvent event = eventsList.get(position);
         holder.setModel(event, false);
@@ -44,6 +47,12 @@ public class SwipeableEventsViewAdapter extends RecyclerView.Adapter<SwipeableEv
                 // Notify the list view to redraw the UI so the new favorite icon state will apply
                 // for all views of this event
                 notifyDataSetChanged();
+
+	            if (isAttending) {
+		            Snackbar.make(recyclerView, R.string.event_added_to_favorites, Snackbar.LENGTH_SHORT).show();
+	            } else {
+		            Snackbar.make(recyclerView, R.string.event_removed_from_favorites, Snackbar.LENGTH_SHORT).show();
+	            }
             }
         });
     }

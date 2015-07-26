@@ -5,6 +5,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.design.widget.Snackbar;
 import android.support.v7.graphics.Palette;
 import android.text.Html;
 import android.text.Spanned;
@@ -48,6 +49,7 @@ public class EventActivity extends NavigationActivity {
     private static final String TAG = EventActivity.class.getCanonicalName();
     private static final String STATE_FEEDBACK_OPEN = "StateFeedbackOpen";
 
+	private View mainLayout;
     private ConventionEvent conventionEvent;
     private LinearLayout imagesLayout;
     private CollapsibleFeedbackView feedbackView;
@@ -73,7 +75,7 @@ public class EventActivity extends NavigationActivity {
             }
         }
 
-        final View mainLayout = findViewById(R.id.event_main_layout);
+        mainLayout = findViewById(R.id.event_main_layout);
         final ParallaxScrollView scrollView = (ParallaxScrollView) findViewById(R.id.parallax_scroll);
         final View backgroundView = imagesLayout;
         final View detailBoxes = findViewById(R.id.event_detail_boxes);
@@ -163,12 +165,12 @@ public class EventActivity extends NavigationActivity {
                     conventionEvent.getUserInput().setAttending(false);
                     item.setIcon(getResources().getDrawable(R.drawable.star_with_plus));
                     item.setTitle(getResources().getString(R.string.event_add_to_favorites));
-                    Toast.makeText(this, getString(R.string.event_removed_from_favorites), Toast.LENGTH_SHORT).show();
+                    Snackbar.make(this.mainLayout, R.string.event_removed_from_favorites, Snackbar.LENGTH_SHORT).show();
                 } else {
                     conventionEvent.getUserInput().setAttending(true);
                     item.setIcon(getResources().getDrawable(android.R.drawable.btn_star_big_on));
                     item.setTitle(getResources().getString(R.string.event_remove_from_favorites));
-                    Toast.makeText(this, getString(R.string.event_added_to_favorites), Toast.LENGTH_SHORT).show();
+                    Snackbar.make(this.mainLayout, R.string.event_added_to_favorites, Snackbar.LENGTH_SHORT).show();
                 }
                 saveUserInput();
                 return true;
@@ -271,7 +273,7 @@ public class EventActivity extends NavigationActivity {
 
                 if (errorMessage != null) {
                     Log.w(TAG, "Failed to send feedback mail. Reason: " + errorMessage);
-                    Toast.makeText(EventActivity.this, getString(R.string.feedback_send_mail_failed), Toast.LENGTH_LONG).show();
+                    Toast.makeText(EventActivity.this, R.string.feedback_send_mail_failed, Toast.LENGTH_LONG).show();
                 } else {
                     // Re-setup the feedback UI so interactions will now be disabled in it, and the "feedback sent" indicator become visible.
                     feedbackView.setEvent(conventionEvent, true);

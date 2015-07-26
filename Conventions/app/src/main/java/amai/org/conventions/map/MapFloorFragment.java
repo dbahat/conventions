@@ -136,7 +136,25 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 			scrollView.post(new Runnable() {
 				@Override
 				public void run() {
-					scrollView.fullScroll(View.FOCUS_RIGHT);
+					// Find a selected marker and center it
+					ImageView view = null;
+					for (Marker marker : floorMarkers) {
+						if (marker.isSelected()) {
+							view = marker.getImageView();
+							break;
+						}
+					}
+
+					if (view == null) {
+						// If no views are selected, show the beginning (right side) of the map.
+						// This is necessary because the HorizontalScrollView displays the left side
+						// by default regardless of the layout direction.
+						scrollView.fullScroll(View.FOCUS_RIGHT);
+					} else {
+						int scrollViewWidth = scrollView.getMeasuredWidth();
+						int scrollX = (view.getLeft() - (scrollViewWidth / 2)) + (view.getWidth() / 2);
+						scrollView.smoothScrollTo(scrollX, scrollView.getScrollY());
+					}
 				}
 			});
 		}

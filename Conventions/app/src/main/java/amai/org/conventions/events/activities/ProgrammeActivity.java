@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
@@ -73,9 +74,15 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
         events = getEventList();
         adapter = new SwipeableEventsViewOrHourAdapter(events);
         listView.setAdapter(adapter);
-	    adapter.setOnEventFavoriteChangedListener(new Runnable() {
+	    adapter.setOnEventFavoriteChangedListener(new SwipeableEventsViewOrHourAdapter.OnEventFavoriteChangedListener() {
 		    @Override
-		    public void run() {
+		    public void onEventFavoriteChanged(boolean isAttending) {
+			    if (isAttending) {
+				    Snackbar.make(listView, R.string.event_added_to_favorites, Snackbar.LENGTH_SHORT).show();
+			    } else {
+				    Snackbar.make(listView, R.string.event_removed_from_favorites, Snackbar.LENGTH_SHORT).show();
+			    }
+
 			    if (!navigateToMyEventsIconModified) {
 				    navigateToMyEventsIconModified = true;
 				    final MenuItem item = menu.findItem(R.id.programme_navigate_to_my_events);

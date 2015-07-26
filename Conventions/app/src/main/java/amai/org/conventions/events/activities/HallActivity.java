@@ -31,7 +31,7 @@ public class HallActivity extends NavigationActivity {
         ArrayList<ConventionEvent> events = Convention.getInstance().findEventsByHall(hallName);
         Collections.sort(events, new ConventionEventComparator());
 
-        hallEventsList.setAdapter(new SwipeableEventsViewAdapter(events));
+        hallEventsList.setAdapter(new SwipeableEventsViewAdapter(events, hallEventsList));
         hallEventsList.setLayoutManager(new LinearLayoutManager(this));
     }
 }

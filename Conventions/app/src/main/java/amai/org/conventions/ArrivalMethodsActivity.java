@@ -51,7 +51,7 @@ public class ArrivalMethodsActivity extends NavigationActivity {
 				if (intent.resolveActivity(getPackageManager()) != null) {
 					this.startActivity(intent);
 				} else {
-					Toast.makeText(this, "No activity for intent", Toast.LENGTH_SHORT).show();
+					Toast.makeText(this, getString(R.string.no_navigation_activity), Toast.LENGTH_LONG).show();
 				}
 				return true;
 		}

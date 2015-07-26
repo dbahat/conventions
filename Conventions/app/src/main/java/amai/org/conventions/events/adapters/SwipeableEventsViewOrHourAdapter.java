@@ -17,9 +17,12 @@ import amai.org.conventions.model.ConventionEvent;
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
 public class SwipeableEventsViewOrHourAdapter extends BaseAdapter implements StickyListHeadersAdapter {
+	public interface OnEventFavoriteChangedListener {
+		public void onEventFavoriteChanged(boolean newFavoriteState);
+	}
 
     private List<ProgrammeConventionEvent> events;
-	private Runnable eventFavoriteChangedListener;
+	private OnEventFavoriteChangedListener eventFavoriteChangedListener;
 
     public SwipeableEventsViewOrHourAdapter(List<ProgrammeConventionEvent> events) {
         this.events = events;
@@ -70,7 +73,7 @@ public class SwipeableEventsViewOrHourAdapter extends BaseAdapter implements Sti
 		        notifyDataSetChanged();
 
 		        if (eventFavoriteChangedListener != null) {
-			        eventFavoriteChangedListener.run();
+			        eventFavoriteChangedListener.onEventFavoriteChanged(!isAttending);
 		        }
 	        }
         });
@@ -83,7 +86,7 @@ public class SwipeableEventsViewOrHourAdapter extends BaseAdapter implements Sti
         return 2;
     }
 
-	public void setOnEventFavoriteChangedListener(Runnable action) {
+	public void setOnEventFavoriteChangedListener(OnEventFavoriteChangedListener action) {
 		this.eventFavoriteChangedListener = action;
 	}
 

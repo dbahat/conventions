@@ -44,4 +44,5 @@
     <string name="navigate">ניווט</string>
     <string name="display_feedback">הצג פידבק</string>
     <string name="zoom_to_fit">התאם לגודל החלון</string>
+    <string name="no_navigation_activity">לא נמצאה אפליקציה מתאימה לניווט</string>
 </resources>
