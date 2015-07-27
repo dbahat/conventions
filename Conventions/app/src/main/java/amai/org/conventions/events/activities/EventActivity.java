@@ -64,7 +64,7 @@ public class EventActivity extends NavigationActivity {
 
         String eventId = getIntent().getStringExtra(EXTRA_EVENT_ID);
         conventionEvent = Convention.getInstance().findEventById(eventId);
-        setEvent(conventionEvent, savedInstanceState);
+        setEvent(conventionEvent);
 
         // If the feedback view already had saved state, restore it
         if (savedInstanceState != null && savedInstanceState.containsKey(STATE_FEEDBACK_OPEN)) {
@@ -320,7 +320,7 @@ public class EventActivity extends NavigationActivity {
         return Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
     }
 
-    private void setEvent(ConventionEvent event, Bundle savedInstanceState) {
+    private void setEvent(ConventionEvent event) {
         setToolbarTitle(event.getType().getDescription());
 
         TextView title = (TextView) findViewById(R.id.event_title);

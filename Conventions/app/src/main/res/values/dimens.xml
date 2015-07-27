@@ -3,12 +3,6 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="toolbar_button_width">30dp</dimen>
-    <dimen name="toolbar_button_height">30dp</dimen>
-
-    <dimen name="toolbar_button_padding_start">30dp</dimen>
-    <dimen name="toolbar_button_padding_end">30dp</dimen>
-
     <dimen name="event_height">73dp</dimen>
 
     <dimen name="navigation_popup_window_offset_y">-15dp</dimen>

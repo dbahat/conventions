@@ -44,8 +44,8 @@ class AssetsExternalFileResolver extends SVGExternalFileResolver {
 	@Override
 	public Bitmap resolveImage(String filename) {
 		try {
-			InputStream istream = context.getAssets().open(filename);
-			return BitmapFactory.decodeStream(istream);
+			InputStream stream = context.getAssets().open(filename);
+			return BitmapFactory.decodeStream(stream);
 		} catch (Exception e) {
 			Log.e(TAG, "error when creating bitmap for " + filename + " from assets: " + e.getMessage());
 			return null;
