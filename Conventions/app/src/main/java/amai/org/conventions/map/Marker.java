@@ -119,8 +119,11 @@ public class Marker {
 			float heightScale = height / (float) newHeight;
 			// If one of them is wrap_content, take the scale from the other size
 			if (width == ViewGroup.LayoutParams.WRAP_CONTENT) {
+				// Lint suppress justification: we assign the scale for the width/height, which is ok.
+				//noinspection SuspiciousNameCombination
 				widthScale = heightScale;
 			} else if (height == ViewGroup.LayoutParams.WRAP_CONTENT) {
+				//noinspection SuspiciousNameCombination
 				heightScale = widthScale;
 			}
 			ScaleAnimation animation = new ScaleAnimation(widthScale, 1f, heightScale, 1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 1f);
