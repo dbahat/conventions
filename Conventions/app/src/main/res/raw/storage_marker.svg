@@ -9,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="25.445732mm"
-   height="14.112697mm"
-   viewBox="0 0 90.162043 50.005618"
+   width="90.162041"
+   height="56"
+   viewBox="0 0 90.162043 55.999999"
    id="svg3515"
    version="1.1"
    inkscape:version="0.91 r13725"
@@ -39,7 +39,8 @@
      inkscape:window-height="1018"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="1"
+     units="px" />
   <metadata
      id="metadata3520">
     <rdf:RDF>
@@ -56,12 +57,12 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-163.4904,-381.6451)">
+     transform="translate(-163.4904,-375.65072)">
     <path
        style="fill:#ac2524"
        inkscape:connector-curvature="0"
        id="path564"
-       d="m 215.96957,407.22872 c 0,6.527 -11.816,24.422 -11.816,24.422 0,0 -11.816,-17.895 -11.816,-24.422 0,-6.525 5.291,-11.816 11.816,-11.816 6.525,0 11.816,5.29 11.816,11.816 z" />
+       d="m 220.38742,407.22872 c 0,6.527 -11.816,24.422 -11.816,24.422 0,0 -11.816,-17.895 -11.816,-24.422 0,-6.525 5.291,-11.816 11.816,-11.816 6.525,0 11.816,5.29 11.816,11.816 z" />
     <text
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.79874992px;line-height:125%;font-family:Alef;-inkscape-font-specification:'Alef, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#010101"
        id="text568"

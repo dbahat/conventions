@@ -9,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="13.96354mm"
-   height="12.93554mm"
-   viewBox="0 0 49.47711 45.834591"
+   width="49.477112"
+   height="56"
+   viewBox="0 0 49.47711 56"
    id="svg3485"
    version="1.1"
    inkscape:version="0.91 r13725"
@@ -27,7 +27,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="7.9195959"
      inkscape:cx="-18.165555"
-     inkscape:cy="43.137478"
+     inkscape:cy="22.934427"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -39,7 +39,8 @@
      inkscape:window-height="1018"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="1"
+     units="px" />
   <metadata
      id="metadata3490">
     <rdf:RDF>
@@ -56,7 +57,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-341.43085,-217.6774)">
+     transform="translate(-341.43085,-207.51199)">
     <text
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.49375057px;line-height:125%;font-family:Alef;-inkscape-font-specification:'Alef, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#010101"
        id="text450"
@@ -66,7 +67,7 @@
        sodipodi:linespacing="125%">שירותים</text>
     <path
        id="path579"
-       d="m 373.62611,239.09099 c 0,6.526 -11.816,24.421 -11.816,24.421 0,0 -11.816,-17.895 -11.816,-24.421 0,-6.526 5.291,-11.816 11.816,-11.816 6.525,0 11.816,5.29 11.816,11.816 z"
+       d="m 377.9854,239.09099 c 0,6.526 -11.816,24.421 -11.816,24.421 0,0 -11.816,-17.895 -11.816,-24.421 0,-6.526 5.291,-11.816 11.816,-11.816 6.525,0 11.816,5.29 11.816,11.816 z"
        inkscape:connector-curvature="0"
        style="fill:#ac2524" />
   </g>

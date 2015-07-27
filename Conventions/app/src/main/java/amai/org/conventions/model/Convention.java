@@ -55,8 +55,8 @@ public class Convention implements Serializable {
 
         this.halls = Arrays.asList(mainHall, auditorium, eshkol1, eshkol2, games, specialEvents);
 
-        Floor floor1 = new Floor(1).withName("מפלס תחתון וקומת ביניים").withImageResource(R.raw.cami_floor1).withMarkerHeight(10);
-        Floor floor2 = new Floor(2).withName("מפלס עליון").withImageResource(R.raw.cami_floor2).withMarkerHeight(13);
+        Floor floor1 = new Floor(1).withName("מפלס תחתון וקומת ביניים").withImageResource(R.raw.cami_floor1).withMarkerHeight(13);
+        Floor floor2 = new Floor(2).withName("מפלס עליון").withImageResource(R.raw.cami_floor2).withMarkerHeight(14);
 
         this.map = new ConventionMap()
                 .withFloors(Arrays.asList(floor1, floor2))
@@ -67,56 +67,56 @@ public class Convention implements Serializable {
                                                 .withPlace(eshkol2)
                                                 .withMarkerResource(R.raw.eshkol2_marker)
                                                 .withSelectedMarkerResource(R.raw.eshkol2_marker_selected)
-                                                .withX(53)
-                                                .withY(87),
+                                                .withX(26)
+                                                .withY(73),
 		                                new MapLocation()
 		                                        .withPlace(new Place().withName("שירותים"))
 		                                        .withMarkerResource(R.raw.toilet_marker)
 		                                        .withSelectedMarkerResource(R.raw.toilet_marker_selected)
-		                                        .withX(89)
-		                                        .withY(50),
+		                                        .withX(90)
+		                                        .withY(60),
                                         new MapLocation()
                                                 .withPlace(new Place().withName("החתמות"))
                                                 .withMarkerResource(R.raw.signatures_marker)
                                                 .withSelectedMarkerResource(R.raw.signatures_marker_selected)
                                                 .withX(80)
-                                                .withY(53),
+                                                .withY(63),
                                         new MapLocation()
                                                 .withPlace(new Place().withName("יד שניה"))
                                                 .withMarkerResource(R.raw.second_hand_marker)
                                                 .withSelectedMarkerResource(R.raw.second_hand_marker_selected)
-                                                .withX(56)
-                                                .withY(53),
+                                                .withX(55)
+                                                .withY(64),
 		                                new MapLocation()
 		                                        .withPlace(new Place().withName("מודיעין"))
                                                 .withMarkerResource(R.raw.information_marker)
                                                 .withSelectedMarkerResource(R.raw.information_marker_selected)
                                                 .withX(41)
-                                                .withY(31),
+                                                .withY(37),
 		                                new MapLocation()
 				                                .withPlace(new Place().withName("שירותים"))
 				                                .withMarkerResource(R.raw.toilet_marker)
 				                                .withSelectedMarkerResource(R.raw.toilet_marker_selected)
 				                                .withX(49)
-				                                .withY(6),
+				                                .withY(7),
 		                                new MapLocation()
 				                                .withPlace(auditorium)
 				                                .withMarkerResource(R.raw.schwartz_marker)
 				                                .withSelectedMarkerResource(R.raw.schwartz_marker_selected)
 				                                .withX(30)
-				                                .withY(43),
+				                                .withY(49),
 		                                new MapLocation()
 				                                .withPlace(eshkol1)
 				                                .withMarkerResource(R.raw.eshkol1_marker)
 				                                .withSelectedMarkerResource(R.raw.eshkol1_marker_selected)
-				                                .withX(24)
-				                                .withY(47),
+				                                .withX(26)
+				                                .withY(54),
 		                                new MapLocation()
 				                                .withPlace(new Place().withName("שירותים"))
 				                                .withMarkerResource(R.raw.toilet_marker)
 				                                .withSelectedMarkerResource(R.raw.toilet_marker_selected)
 				                                .withX(12)
-				                                .withY(38)),
+				                                .withY(46)),
 		                        inFloor(floor2,
 				                        // Keep this location before storage because otherwise when
 				                        // storage is selected, it's displayed behind this location
@@ -124,13 +124,13 @@ public class Convention implements Serializable {
 						                        .withPlace(new Place().withName("שיפוט קוספליי"))
 						                        .withMarkerResource(R.raw.cosplay_judgement_marker)
 						                        .withSelectedMarkerResource(R.raw.cosplay_judgement_marker_selected)
-						                        .withX(85)
+						                        .withX(83)
 						                        .withY(75),
 				                        new MapLocation()
 						                        .withPlace(new Place().withName("שמירת חפצים"))
 						                        .withMarkerResource(R.raw.storage_marker)
 						                        .withSelectedMarkerResource(R.raw.storage_marker_selected)
-						                        .withX(92)
+						                        .withX(91)
 						                        .withY(67),
 				                        new MapLocation()
 						                        .withPlace(games)
@@ -172,13 +172,13 @@ public class Convention implements Serializable {
 						                        .withPlace(new Place().withName("ווידוא ווקאון"))
 						                        .withMarkerResource(R.raw.walkon_marker)
 						                        .withSelectedMarkerResource(R.raw.walkon_marker_selected)
-						                        .withX(25)
+						                        .withX(24)
 						                        .withY(63),
 				                        new MapLocation()
 						                        .withPlace(new Place().withName("שירותים"))
 						                        .withMarkerResource(R.raw.toilet_marker)
 						                        .withSelectedMarkerResource(R.raw.toilet_marker_selected)
-						                        .withX(8)
+						                        .withX(7)
 						                        .withY(61))
                         )
                 );

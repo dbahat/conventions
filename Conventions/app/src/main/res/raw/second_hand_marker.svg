@@ -9,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="12.925883mm"
-   height="14.492988mm"
-   viewBox="0 0 45.800378 51.353106"
+   width="45.800369"
+   height="56"
+   viewBox="0 0 45.800374 55.999998"
    id="svg3539"
    version="1.1"
    inkscape:version="0.91 r13725"
@@ -39,7 +39,8 @@
      fit-margin-top="0"
      fit-margin-left="0"
      fit-margin-right="0"
-     fit-margin-bottom="0" />
+     fit-margin-bottom="0"
+     units="px" />
   <metadata
      id="metadata3544">
     <rdf:RDF>
@@ -56,7 +57,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-204.98782,-458.10661)">
+     transform="translate(-204.98782,-453.45972)">
     <text
        id="text593"
        font-size="15.4936"
@@ -66,7 +67,7 @@
        sodipodi:linespacing="125%">יד שניה</text>
     <path
        id="path595"
-       d="m 237.61582,485.03872 c 0,6.526 -11.816,24.421 -11.816,24.421 0,0 -11.816,-17.895 -11.816,-24.421 0,-6.526 5.291,-11.816 11.816,-11.816 6.525,0 11.816,5.291 11.816,11.816 z"
+       d="m 239.70401,485.03872 c 0,6.526 -11.816,24.421 -11.816,24.421 0,0 -11.816,-17.895 -11.816,-24.421 0,-6.526 5.291,-11.816 11.816,-11.816 6.525,0 11.816,5.291 11.816,11.816 z"
        inkscape:connector-curvature="0"
        style="fill:#ac2524" />
   </g>

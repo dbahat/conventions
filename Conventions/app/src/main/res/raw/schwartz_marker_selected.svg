@@ -9,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="9.9495564mm"
-   height="12.945098mm"
-   viewBox="0 0 35.254333 45.868457"
+   width="35.254333"
+   height="56"
+   viewBox="0 0 35.254333 55.999999"
    id="svg3591"
    version="1.1"
    inkscape:version="0.91 r13725"
@@ -39,7 +39,8 @@
      inkscape:window-height="1018"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="1"
+     units="px" />
   <metadata
      id="metadata3596">
     <rdf:RDF>
@@ -56,7 +57,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-290.7412,-409.41658)">
+     transform="translate(-290.7412,-399.28504)">
     <text
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.49375057px;line-height:125%;font-family:Alef;-inkscape-font-specification:'Alef, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#010101"
        id="text552"
@@ -66,7 +67,7 @@
        sodipodi:linespacing="125%">שוורץ</text>
     <path
        id="path585"
-       d="m 320.25438,430.86404 c 0,6.526 -11.816,24.421 -11.816,24.421 0,0 -11.816,-17.895 -11.816,-24.421 0,-6.526 5.291,-11.816 11.816,-11.816 6.525,0 11.816,5.29 11.816,11.816 z"
+       d="m 320.18436,430.86404 c 0,6.526 -11.816,24.421 -11.816,24.421 0,0 -11.816,-17.895 -11.816,-24.421 0,-6.526 5.291,-11.816 11.816,-11.816 6.525,0 11.816,5.29 11.816,11.816 z"
        inkscape:connector-curvature="0"
        style="fill:#dd6c4e;fill-opacity:1" />
   </g>
