@@ -5,7 +5,7 @@ import amai.org.conventions.R;
 public enum EventType {
 
     Games(R.attr.eventTypeCentralColor, "משחקים"),
-    Community(R.attr.eventTypeSpecialColor, "ארוע קהילה"),
+    Community(R.attr.eventTypeSpecialColor, "אירוע קהילה"),
     Lecture(R.attr.eventTypeLectureColor, "הרצאה"),
     Workshop(R.attr.eventTypeWorkshopColor, "סדנה"),
     Panel(R.attr.eventTypePanelColor, "פאנל"),
