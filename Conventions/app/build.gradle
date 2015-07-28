@@ -8,8 +8,6 @@ android {
         applicationId "amai.org.conventions"
         minSdkVersion 17
         targetSdkVersion 22
-        versionCode 1
-        versionName "1.0"
     }
     buildTypes {
         release {

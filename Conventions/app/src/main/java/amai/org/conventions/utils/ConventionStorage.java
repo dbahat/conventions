@@ -10,6 +10,7 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -67,13 +68,13 @@ public class ConventionStorage {
     }
 
     public void saveUpdates() {
-        saveFile(Convention.getInstance().getUpdates(), UPDATES_FILE_NAME);
+        saveCacheFile(Convention.getInstance().getUpdates(), UPDATES_FILE_NAME);
     }
 
     public void saveEvents() {
         filesystemAccessLock.writeLock().lock();
         try {
-            saveFile(Convention.getInstance().getEvents(), EVENTS_FILE_NAME);
+            saveCacheFile(Convention.getInstance().getEvents(), EVENTS_FILE_NAME);
         } finally {
             filesystemAccessLock.writeLock().unlock();
         }
@@ -92,9 +93,9 @@ public class ConventionStorage {
 		}
 	}
 
-	private void saveFile(Object objectToSave, String fileName) {
+	private void saveCacheFile(Object objectToSave, String fileName) {
 		try {
-			FileOutputStream fos = context.openFileOutput(fileName, Context.MODE_PRIVATE);
+			FileOutputStream fos = new FileOutputStream(new File(context.getCacheDir(), fileName));
 			ObjectOutputStream os = new ObjectOutputStream(fos);
 			os.writeObject(objectToSave);
 			os.close();
@@ -118,7 +119,7 @@ public class ConventionStorage {
     }
 
     private static boolean tryReadEventsFromCache() {
-        Object result = readFile(EVENTS_FILE_NAME);
+        Object result = readCacheFile(EVENTS_FILE_NAME);
         if (result == null) {
             return false;
         }
@@ -185,7 +186,7 @@ public class ConventionStorage {
     }
 
     private static void readUpdatesFromFile() {
-        Object result = readFile(UPDATES_FILE_NAME);
+        Object result = readCacheFile(UPDATES_FILE_NAME);
         if (result == null) {
             return;
         }
@@ -206,11 +207,11 @@ public class ConventionStorage {
 		}
 	}
 
-    private static Object readFile(String fileName) {
+    private static Object readCacheFile(String fileName) {
         try {
-            return readFile(context.openFileInput(fileName));
+            return readFile(new FileInputStream(new File(context.getCacheDir(), fileName)));
         } catch (Exception e) {
-            // Ignore - default user input will be created from hard-coded data
+            // Ignore - required file will be created from default hard-coded data
 	        Log.i(TAG, "Could not read file " + fileName + ": " + e.getMessage());
             return null;
         }
