@@ -10,7 +10,6 @@ import android.support.v7.graphics.Palette;
 import android.text.Html;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -38,6 +37,7 @@ import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.GMailSender;
+import amai.org.conventions.utils.Log;
 import fi.iki.kuitsi.listtest.ListTagHandler;
 import uk.co.chrisjenx.paralloid.views.ParallaxScrollView;
 

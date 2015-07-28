@@ -1,18 +1,15 @@
 package amai.org.conventions.networking;
 
-import android.util.Log;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
+import amai.org.conventions.utils.Log;
 
 public class ModelRefresher {
     private static final String TAG = ModelRefresher.class.getCanonicalName();
@@ -22,6 +19,7 @@ public class ModelRefresher {
 
     /**
      * Downloads the model from the CAMI server.
+     *
      * @return true if the model retrieval completed successfully, false otherwise.
      */
     public boolean refreshFromServer() {
@@ -44,8 +42,8 @@ public class ModelRefresher {
             }
             Convention.getInstance().getStorage().saveEvents();
         } catch (IOException e) {
-	        Log.i(TAG, "Could not retrieve model due to IOException: " + e.getMessage());
-	        return false;
+            Log.i(TAG, "Could not retrieve model due to IOException: " + e.getMessage());
+            return false;
         } catch (Exception e) {
             Log.e(TAG, "Could not retrieve model: " + e.getMessage(), e);
             return false;

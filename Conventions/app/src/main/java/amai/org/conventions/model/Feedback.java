@@ -1,7 +1,5 @@
 package amai.org.conventions.model;
 
-import android.util.Log;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,6 +8,8 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import amai.org.conventions.utils.Log;
 
 public class Feedback implements Serializable, Cloneable {
 	private static final String TAG = Feedback.class.getCanonicalName();

@@ -2,47 +2,46 @@ package amai.org.conventions.customviews;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.LinearLayout;
 
 public class InterceptorLinearLayout extends LinearLayout {
-	public interface OnInterceptTouchListener {
-		boolean onInterceptTouchEvent(MotionEvent event);
-	}
+    private OnInterceptTouchListener listener = null;
 
-	public interface AllTouchEventsListener extends OnInterceptTouchListener, OnTouchListener{
-	}
+    public InterceptorLinearLayout(Context context) {
+        super(context);
+    }
 
-	private OnInterceptTouchListener listener = null;
+    public InterceptorLinearLayout(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
 
 
-	public InterceptorLinearLayout(Context context) {
-		super(context);
-	}
+    public InterceptorLinearLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+    }
 
-	public InterceptorLinearLayout(Context context, AttributeSet attrs) {
-		super(context, attrs);
-	}
+    public void setOnInterceptTouchEventListener(OnInterceptTouchListener listener) {
+        this.listener = listener;
+    }
 
-	public InterceptorLinearLayout(Context context, AttributeSet attrs, int defStyleAttr) {
-		super(context, attrs, defStyleAttr);
-	}
+    @Override
+    public void requestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+        super.requestDisallowInterceptTouchEvent(disallowIntercept);
+    }
 
-	public void setOnInterceptTouchEventListener(OnInterceptTouchListener listener) {
-		this.listener = listener;
-	}
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent event) {
+        if (listener != null && listener.onInterceptTouchEvent(event)) {
+            return true;
+        }
+        return super.onInterceptTouchEvent(event);
+    }
 
-	@Override
-	public void requestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-		super.requestDisallowInterceptTouchEvent(disallowIntercept);
-	}
+    public interface OnInterceptTouchListener {
+        boolean onInterceptTouchEvent(MotionEvent event);
+    }
 
-	@Override
-	public boolean onInterceptTouchEvent(MotionEvent event) {
-		if (listener != null && listener.onInterceptTouchEvent(event)) {
-			return true;
-		}
-		return super.onInterceptTouchEvent(event);
-	}
+    public interface AllTouchEventsListener extends OnInterceptTouchListener, OnTouchListener {
+    }
 }

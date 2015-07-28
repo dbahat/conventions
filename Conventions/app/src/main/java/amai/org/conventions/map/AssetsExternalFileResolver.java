@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
-import android.util.Log;
 
 import com.caverock.androidsvg.SVGExternalFileResolver;
 
@@ -12,6 +11,8 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+
+import amai.org.conventions.utils.Log;
 
 class AssetsExternalFileResolver extends SVGExternalFileResolver {
 	private static final String TAG = AssetsExternalFileResolver.class.getCanonicalName();

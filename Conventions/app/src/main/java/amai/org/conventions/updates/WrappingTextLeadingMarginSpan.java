@@ -5,7 +5,6 @@ import android.graphics.Paint;
 import android.os.Build;
 import android.text.Layout;
 import android.text.style.LeadingMarginSpan;
-import android.util.Log;
 
 /**
  * Allows to define {@link android.text.SpannableString} which wraps using pre-defined margin, only for the first X lines

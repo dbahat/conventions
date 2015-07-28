@@ -2,7 +2,6 @@ package amai.org.conventions.model;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.util.Log;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,6 +11,7 @@ import java.util.List;
 
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Objects;
 
 public class ConventionEvent implements Serializable {
