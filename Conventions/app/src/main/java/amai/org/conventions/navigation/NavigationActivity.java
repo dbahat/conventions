@@ -21,12 +21,12 @@ import android.widget.TextView;
 import com.caverock.androidsvg.SVG;
 import com.caverock.androidsvg.SVGParseException;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 import amai.org.conventions.ArrivalMethodsActivity;
 import amai.org.conventions.R;
+import amai.org.conventions.SVGFileLoader;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.AnimationPopupWindow;
 import amai.org.conventions.events.activities.EventActivity;
@@ -36,8 +36,6 @@ import amai.org.conventions.updates.UpdatesActivity;
 
 
 public abstract class NavigationActivity extends AppCompatActivity {
-	private static Map<Integer, SVG> loadedSVGFiles = new HashMap<>();
-
     private Toolbar navigationToolbar;
     private AnimationPopupWindow popup;
 	private Map<View, Class<? extends Activity>> navigationMapping;
@@ -168,7 +166,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 				        break;
 			        // svg
 			        case 1:
-		                SVG logoSVG = loadSVG(ThemeAttributes.getResourceId(this, R.attr.toolbarLogo));
+		                SVG logoSVG = SVGFileLoader.loadSVG(this, ThemeAttributes.getResourceId(this, R.attr.toolbarLogo));
 				        drawable = new PictureDrawable(logoSVG.renderToPicture());
 				        break;
 		        }
@@ -188,18 +186,6 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		int width = (int) (originalBitmap.getWidth() * height / (float) originalBitmap.getHeight());
 		Bitmap bitmapResized = Bitmap.createScaledBitmap(originalBitmap, width, height, false);
 		return new BitmapDrawable(getResources(), bitmapResized);
-	}
-
-	private SVG loadSVG(int resource) throws SVGParseException {
-		if (loadedSVGFiles.containsKey(resource)) {
-			return loadedSVGFiles.get(resource);
-		}
-
-		SVG svg = SVG.getFromResource(getResources(), resource);
-		svg.setDocumentHeight("100%");
-		svg.setDocumentWidth("100%");
-		loadedSVGFiles.put(resource, svg);
-		return svg;
 	}
 
     protected void setContentInContentContainer(int layoutResID) {

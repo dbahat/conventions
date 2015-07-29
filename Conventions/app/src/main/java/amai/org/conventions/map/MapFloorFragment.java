@@ -33,12 +33,11 @@ import com.manuelpeinado.imagelayout.ImageLayout;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import amai.org.conventions.R;
+import amai.org.conventions.SVGFileLoader;
 import amai.org.conventions.customviews.AspectRatioSVGImageView;
 import amai.org.conventions.customviews.InterceptorLinearLayout;
 import amai.org.conventions.events.EventView;
@@ -62,8 +61,6 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 	private static final String STATE_SELECTED_LOCATIONS = "StateSelectedLocation";
 	private static final String STATE_LOCATION_DETAILS_OPEN = "StateLocationDetailsOpen";
 	private static final String STATE_MAP_FLOOR_ZOOMED = "StateMapFloorZoomed";
-
-	private static Map<Integer, SVG> loadedSVGFiles = new HashMap<>();
 
 	private HorizontalScrollView scrollView;
     private ImageLayout mapFloorImage;
@@ -379,7 +376,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
 	    try {
 		    // Load svg image for the map floor
-		    SVG svg = loadSVG(floor.getImageResource());
+		    SVG svg = SVGFileLoader.loadSVG(getActivity(), floor.getImageResource());
 
 		    Picture picture = svg.renderToPicture();
 		    mapFloorImage.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
@@ -415,7 +412,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		final SVGImageView markerImageView = new AspectRatioSVGImageView(getActivity());
 
 		// Set marker image
-		SVG markerSvg = loadSVG(location.getMarkerResource());
+		SVG markerSvg = SVGFileLoader.loadSVG(getActivity(), location.getMarkerResource());
 		markerImageView.setSVG(markerSvg);
 
 		// Set marker layout parameters and scaling
@@ -438,7 +435,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 					public Drawable getDrawable() {
 						try {
 							if (drawable == null) {
-								SVG markerSelectedSvg = loadSVG(location.getSelectedMarkerResource());
+								SVG markerSelectedSvg = SVGFileLoader.loadSVG(getActivity(), location.getSelectedMarkerResource());
 								drawable = new PictureDrawable(markerSelectedSvg.renderToPicture());
 							}
 							return drawable;
@@ -466,17 +463,6 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 			// Save it for later use
 			locationToSelect = location;
 		}
-	}
-
-	public SVG loadSVG(int resource) throws SVGParseException {
-		if (loadedSVGFiles.containsKey(resource)) {
-			return loadedSVGFiles.get(resource);
-		}
-
-		SVG svg = SVG.getFromResource(getResources(), resource);
-		setSVGProperties(svg);
-		loadedSVGFiles.put(resource, svg);
-		return svg;
 	}
 
 	private void setSVGProperties(SVG svg) throws SVGParseException {

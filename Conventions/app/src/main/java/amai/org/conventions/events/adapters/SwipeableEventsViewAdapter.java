@@ -48,10 +48,11 @@ public class SwipeableEventsViewAdapter extends RecyclerView.Adapter<SwipeableEv
                 // for all views of this event
                 notifyDataSetChanged();
 
+	            // isAttending contains the previous value of the attending flag
 	            if (isAttending) {
-		            Snackbar.make(recyclerView, R.string.event_added_to_favorites, Snackbar.LENGTH_SHORT).show();
-	            } else {
 		            Snackbar.make(recyclerView, R.string.event_removed_from_favorites, Snackbar.LENGTH_SHORT).show();
+	            } else {
+		            Snackbar.make(recyclerView, R.string.event_added_to_favorites, Snackbar.LENGTH_SHORT).show();
 	            }
             }
         });

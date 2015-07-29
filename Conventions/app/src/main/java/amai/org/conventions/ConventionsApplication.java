@@ -53,4 +53,13 @@ public class ConventionsApplication extends Application {
                     Log.getStackTraceString(t));
         }
     }
+
+	@Override
+	public void onTrimMemory(int level) {
+		// Release memory when low
+		if (level >= TRIM_MEMORY_RUNNING_LOW) {
+			SVGFileLoader.releaseCache();
+		}
+		super.onTrimMemory(level);
+	}
 }
