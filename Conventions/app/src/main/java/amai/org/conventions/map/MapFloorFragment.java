@@ -75,7 +75,6 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
     private OnMapArrowClickedListener mapArrowClickedListener;
 
-	private SVGExternalFileResolver resolver;
 	private List<Marker> floorMarkers;
 	private MapLocation locationToSelect;
 
@@ -171,8 +170,6 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
         }
 
         mapArrowClickedListener = (OnMapArrowClickedListener) activity;
-
-	    resolver = new AssetsExternalFileResolver(activity);
     }
 
     @Override
@@ -463,12 +460,6 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 			// Save it for later use
 			locationToSelect = location;
 		}
-	}
-
-	private void setSVGProperties(SVG svg) throws SVGParseException {
-		svg.setDocumentHeight("100%");
-		svg.setDocumentWidth("100%");
-		svg.registerExternalFileResolver(resolver);
 	}
 
     public interface OnMapArrowClickedListener {

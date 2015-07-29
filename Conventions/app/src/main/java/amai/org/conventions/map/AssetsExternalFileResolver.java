@@ -14,14 +14,17 @@ import java.util.Map;
 
 import amai.org.conventions.utils.Log;
 
-class AssetsExternalFileResolver extends SVGExternalFileResolver {
+public class AssetsExternalFileResolver extends SVGExternalFileResolver {
 	private static final String TAG = AssetsExternalFileResolver.class.getCanonicalName();
 
 	// Cache for created fonts
 	private Map<String, Typeface> fonts = new HashMap<>();
 	private Context context;
 
-	public AssetsExternalFileResolver(Context context) {
+	public AssetsExternalFileResolver() {
+	}
+
+	public void setContext(Context context) {
 		this.context = context;
 	}
 
@@ -30,7 +33,10 @@ class AssetsExternalFileResolver extends SVGExternalFileResolver {
 		try {
 			if (fonts.containsKey(fontFamily)) {
 				return fonts.get(fontFamily);
+			} else if (context == null) {
+				return null;
 			}
+
 			Typeface font = Typeface.createFromAsset(context.getAssets(), fontFamily.toLowerCase(Locale.ENGLISH) + ".ttf");
 			fonts.put(fontFamily, font);
 			return font;
