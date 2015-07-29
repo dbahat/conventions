@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Picture;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PictureDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MotionEventCompat;
@@ -25,9 +26,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.caverock.androidsvg.SVG;
-import com.caverock.androidsvg.SVGExternalFileResolver;
 import com.caverock.androidsvg.SVGImageView;
-import com.caverock.androidsvg.SVGParseException;
 import com.manuelpeinado.imagelayout.ImageLayout;
 
 import java.util.ArrayList;
@@ -62,6 +61,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 	private static final String STATE_LOCATION_DETAILS_OPEN = "StateLocationDetailsOpen";
 	private static final String STATE_MAP_FLOOR_ZOOMED = "StateMapFloorZoomed";
 
+	private View progressBar;
 	private HorizontalScrollView scrollView;
     private ImageLayout mapFloorImage;
     private View upArrow;
@@ -92,34 +92,8 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
         resolveUIElements(view);
 	    initializeLocationDetails();
         initializeUpAndDownButtons();
-        configureMapFloor();
 	    setDismissSelectionClickListener(mapFloorImage);
-
-	    // Restore state
-	    if (savedInstanceState != null) {
-		    ArrayList<Integer> selectedLocations = savedInstanceState.getIntegerArrayList(STATE_SELECTED_LOCATIONS);
-		    MapLocation selectedLocation = null;
-		    for (int locationId : selectedLocations) {
-			    for (Marker marker : floorMarkers) {
-				    if (marker.getLocation().getId() == locationId) {
-				        selectedLocation = marker.getLocation();
-					    marker.select(false);
-				        break;
-				    }
-			    }
-		    }
-
-		    boolean locationDetailsOpen = savedInstanceState.getBoolean(STATE_LOCATION_DETAILS_OPEN);
-		    if (locationDetailsOpen && selectedLocation != null) {
-			    // If the details are open there should only be one location selected so we take the last one
-			    setSelectedLocationDetails(selectedLocation);
-		    }
-
-		    if (savedInstanceState.getBoolean(STATE_MAP_FLOOR_ZOOMED)) {
-			    changeMapZoom(true);
-		    }
-	    }
-
+        configureMapFloorAndRestoreState(savedInstanceState);
 	    return view;
     }
 
@@ -241,6 +215,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
     }
 
     private void resolveUIElements(View view) {
+	    progressBar = view.findViewById(R.id.floor_loading_progress_bar);
 	    scrollView = (HorizontalScrollView) view.findViewById(R.id.horizontal_scroll_view);
         mapFloorImage = (ImageLayout) view.findViewById(R.id.map_floor_image);
         upArrow = view.findViewById(R.id.map_floor_up);
@@ -366,46 +341,97 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		locationDetails.setOnTouchListener(touchListener);
 	}
 
-    private void configureMapFloor() {
+    private void configureMapFloorAndRestoreState(final Bundle savedInstanceState) {
         int mapFloor = getArguments().getInt(ARGS_FLOOR_NUMBER);
-	    ConventionMap map = Convention.getInstance().getMap();
-	    Floor floor = map.findFloorByNumber(mapFloor);
+	    final ConventionMap map = Convention.getInstance().getMap();
+	    final Floor floor = map.findFloorByNumber(mapFloor);
 
-	    try {
-		    // Load svg image for the map floor
-		    SVG svg = SVGFileLoader.loadSVG(getActivity(), floor.getImageResource());
+	    // Add up and down arrows
+	    boolean isTopFloor = floor.getNumber() == map.getTopFloor().getNumber();
+	    upArrow.setVisibility(isTopFloor ? View.GONE : View.VISIBLE);
 
-		    Picture picture = svg.renderToPicture();
-		    mapFloorImage.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-		    mapFloorImage.setImageResourceFromDrawable(new PictureDrawable(picture), 100, 100);
-		    floorMarkers = new LinkedList<>();
+	    boolean isBottomFloor = floor.getNumber() == map.getBottomFloor().getNumber();
+	    downArrow.setVisibility(isBottomFloor ? View.GONE : View.VISIBLE);
 
-		    // Add markers
-		    List<MapLocation> locations = map.findLocationsByFloor(floor);
-		    for (final MapLocation location : locations) {
-			    // Add the marker for this location
-			    View markerImageView = createMarkerView(location, null);
-			    mapFloorImage.addView(markerImageView);
+	    // Load images in background
+	    new AsyncTask<Void, Void, Boolean>() {
+		    SVG svg = null;
+		    List<MapLocation> locations = null;
+
+		    @Override
+		    protected Boolean doInBackground(Void... params) {
+			    // Load svg image for the map floor
+			    svg = SVGFileLoader.loadSVG(getActivity(), floor.getImageResource());
+
+			    // Find location markers and load their svg images (the views are created in the UI thread)
+			    floorMarkers = new LinkedList<>();
+			    locations = map.findLocationsByFloor(floor);
+			    for (final MapLocation location : locations) {
+			        // We don't save the result because it's saved in a cache for quicker access in the UI thread
+				    SVGFileLoader.loadSVG(getActivity(), location.getMarkerResource());
+			    }
+
+			    return true;
 		    }
-		    // Set initially selected location now after we created all the markers
-		    if (locationToSelect != null) {
-		        selectLocation(locationToSelect);
-			    locationToSelect = null;
+
+		    @Override
+		    protected void onPostExecute(Boolean successful) {
+			    // Check the background method finished successfully
+			    if (!successful) {
+				    return;
+			    }
+
+			    mapFloorImage.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+	            Picture picture = svg.renderToPicture();
+			    mapFloorImage.setImageResourceFromDrawable(new PictureDrawable(picture), 100, 100);
+
+			    // Add markers
+			    for (final MapLocation location : locations) {
+				    // Add the marker for this location
+				    View markerImageView = createMarkerView(location, null);
+				    mapFloorImage.addView(markerImageView);
+			    }
+			    // Set initially selected location now after we created all the markers
+			    if (locationToSelect != null) {
+			        selectLocation(locationToSelect);
+				    locationToSelect = null;
+			    }
+
+	            restoreState(savedInstanceState);
+
+			    progressBar.setVisibility(View.GONE);
+			    scrollView.setVisibility(View.VISIBLE);
 		    }
-
-		    // Add up and down arrows
-		    boolean isTopFloor = floor.getNumber() == map.getTopFloor().getNumber();
-		    upArrow.setVisibility(isTopFloor ? View.GONE : View.VISIBLE);
-
-		    boolean isBottomFloor = floor.getNumber() == map.getBottomFloor().getNumber();
-		    downArrow.setVisibility(isBottomFloor ? View.GONE : View.VISIBLE);
-	    } catch (SVGParseException e) {
-		    throw new RuntimeException(e);
-	    }
-
+	    }.execute();
     }
 
-	private View createMarkerView(final MapLocation location, View markerShadowView) throws SVGParseException {
+	private void restoreState(Bundle savedInstanceState) {
+		if (savedInstanceState != null) {
+			ArrayList<Integer> selectedLocations = savedInstanceState.getIntegerArrayList(STATE_SELECTED_LOCATIONS);
+			MapLocation selectedLocation = null;
+			for (int locationId : selectedLocations) {
+				for (Marker marker : floorMarkers) {
+					if (marker.getLocation().getId() == locationId) {
+						selectedLocation = marker.getLocation();
+						marker.select(false);
+						break;
+					}
+				}
+			}
+
+			boolean locationDetailsOpen = savedInstanceState.getBoolean(STATE_LOCATION_DETAILS_OPEN);
+			if (locationDetailsOpen && selectedLocation != null) {
+				// If the details are open there should only be one location selected so we take the last one
+				setSelectedLocationDetails(selectedLocation);
+			}
+
+			if (savedInstanceState.getBoolean(STATE_MAP_FLOOR_ZOOMED)) {
+				changeMapZoom(true);
+			}
+		}
+	}
+
+	private View createMarkerView(final MapLocation location, View markerShadowView) {
 		final SVGImageView markerImageView = new AspectRatioSVGImageView(getActivity());
 
 		// Set marker image
@@ -430,15 +456,11 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 					Drawable drawable = null;
 					@Override
 					public Drawable getDrawable() {
-						try {
-							if (drawable == null) {
-								SVG markerSelectedSvg = SVGFileLoader.loadSVG(getActivity(), location.getSelectedMarkerResource());
-								drawable = new PictureDrawable(markerSelectedSvg.renderToPicture());
-							}
-							return drawable;
-						} catch (SVGParseException e) {
-							throw new RuntimeException(e);
+						if (drawable == null) {
+							SVG markerSelectedSvg = SVGFileLoader.loadSVG(getActivity(), location.getSelectedMarkerResource());
+							drawable = new PictureDrawable(markerSelectedSvg.renderToPicture());
 						}
+						return drawable;
 					}
 				});
 		floorMarkers.add(marker);

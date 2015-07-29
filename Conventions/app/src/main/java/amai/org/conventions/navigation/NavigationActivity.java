@@ -19,7 +19,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.caverock.androidsvg.SVG;
-import com.caverock.androidsvg.SVGParseException;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -153,28 +152,23 @@ public abstract class NavigationActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(false);
             actionBar.setDisplayShowTitleEnabled(true);
-	        try {
-		        int logoType = ThemeAttributes.getColor(this, R.attr.toolbarLogoType);
-		        Drawable drawable = null;
-		        switch (logoType) {
-			        // bitmap
-			        case 0:
-				        drawable = ThemeAttributes.getDrawable(this, R.attr.toolbarLogo);
-				        // The scaling doesn't work properly for this icon (the width remains the original size)
-				        // so we have to resize it manually
-				        drawable = resizeBitmap(drawable, ThemeAttributes.getDimentionSize(this, R.attr.actionBarSize));
-				        break;
-			        // svg
-			        case 1:
-		                SVG logoSVG = SVGFileLoader.loadSVG(this, ThemeAttributes.getResourceId(this, R.attr.toolbarLogo));
-				        drawable = new PictureDrawable(logoSVG.renderToPicture());
-				        break;
-		        }
-	            toolbar.setNavigationIcon(drawable);
-	        } catch (SVGParseException e) {
-		        throw new RuntimeException(e);
+	        int logoType = ThemeAttributes.getColor(this, R.attr.toolbarLogoType);
+	        Drawable drawable = null;
+	        switch (logoType) {
+		        // bitmap
+		        case 0:
+			        drawable = ThemeAttributes.getDrawable(this, R.attr.toolbarLogo);
+			        // The scaling doesn't work properly for this icon (the width remains the original size)
+			        // so we have to resize it manually
+			        drawable = resizeBitmap(drawable, ThemeAttributes.getDimentionSize(this, R.attr.actionBarSize));
+			        break;
+		        // svg
+		        case 1:
+	                SVG logoSVG = SVGFileLoader.loadSVG(this, ThemeAttributes.getResourceId(this, R.attr.toolbarLogo));
+			        drawable = new PictureDrawable(logoSVG.renderToPicture());
+			        break;
 	        }
-
+            toolbar.setNavigationIcon(drawable);
         }
     }
 

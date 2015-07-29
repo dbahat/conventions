@@ -14,16 +14,20 @@ public class SVGFileLoader {
 	private static AssetsExternalFileResolver resolver = new AssetsExternalFileResolver();
 	private static Map<Integer, SVG> loadedSVGFiles = new HashMap<>();
 
-	public static SVG loadSVG(Context context, int resource) throws SVGParseException {
-		if (loadedSVGFiles.containsKey(resource)) {
-			return loadedSVGFiles.get(resource);
-		}
+	public static SVG loadSVG(Context context, int resource) {
+		try {
+			if (loadedSVGFiles.containsKey(resource)) {
+				return loadedSVGFiles.get(resource);
+			}
 
-		SVG svg = SVG.getFromResource(context.getResources(), resource);
-		resolver.setContext(context);
-		setSVGProperties(svg);
-		loadedSVGFiles.put(resource, svg);
-		return svg;
+			SVG svg = SVG.getFromResource(context.getResources(), resource);
+			resolver.setContext(context);
+			setSVGProperties(svg);
+			loadedSVGFiles.put(resource, svg);
+			return svg;
+		} catch (SVGParseException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	public static void releaseCache() {
