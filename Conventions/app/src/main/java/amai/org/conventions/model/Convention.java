@@ -53,7 +53,8 @@ public class Convention implements Serializable {
         Hall games = new Hall().withName("משחקייה").withOrder(5);
         Hall specialEvents = new Hall().withName("אירועים מיוחדים").withOrder(6);
 
-        this.halls = Arrays.asList(mainHall, auditorium, eshkol1, eshkol2, games, specialEvents);
+	    // This list can be modified
+        this.halls = new ArrayList<>(Arrays.asList(mainHall, auditorium, eshkol1, eshkol2, games, specialEvents));
 
         Floor floor1 = new Floor(1).withName("מפלס תחתון וקומת ביניים").withImageResource(R.raw.cami_floor1).withMarkerHeight(13);
         Floor floor2 = new Floor(2).withName("מפלס עליון").withImageResource(R.raw.cami_floor2).withMarkerHeight(14);
@@ -302,4 +303,19 @@ public class Convention implements Serializable {
         }
         return Arrays.asList(locations);
     }
+
+	public Hall addHall(String name) {
+		Hall hall = new Hall().withName(name).withOrder(getHighestHallOrder() + 1);
+		halls.add(hall);
+		return hall;
+	}
+
+	private int getHighestHallOrder() {
+		int maxHallOrder = -1;
+		for (Hall hall : getHalls()) {
+			maxHallOrder = Math.max(maxHallOrder, hall.getOrder());
+		}
+
+		return maxHallOrder;
+	}
 }

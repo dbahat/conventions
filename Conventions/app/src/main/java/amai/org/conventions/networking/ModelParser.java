@@ -18,12 +18,15 @@ import java.util.List;
 import amai.org.conventions.R;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
-import amai.org.conventions.utils.Dates;
 import amai.org.conventions.model.EventToImageResourceIdMapper;
 import amai.org.conventions.model.EventType;
 import amai.org.conventions.model.Hall;
+import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.Log;
 
 public class ModelParser {
+	private static final String TAG = ModelParser.class.getCanonicalName();
+
     public List<ConventionEvent> parse(InputStreamReader reader) {
         JsonParser jp = new JsonParser();
         EventToImageResourceIdMapper mapper = new EventToImageResourceIdMapper();
@@ -49,7 +52,9 @@ public class ModelParser {
                 Hall hall = Convention.getInstance().findHallByName(hallName);
 
                 if (hall == null) {
-                    throw new RuntimeException("Cannot find hall with name " + hallName);
+	                // Add a new hall to the convention
+	                hall = Convention.getInstance().addHall(hallName);
+                    Log.i(TAG, "Found and added new hall with name " + hallName);
                 }
 
                 ParsedDescription eventDescription = parseEventDescription(eventObj.get("content").getAsString());
