@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layoutDirection="rtl"
+    android:visibility="invisible"
     tools:context="amai.org.conventions.events.activities.EventActivity">
 
     <ScrollView
@@ -68,6 +69,7 @@
 
             <amai.org.conventions.events.CollapsibleFeedbackView
                 android:id="@+id/event_feedback_view"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 

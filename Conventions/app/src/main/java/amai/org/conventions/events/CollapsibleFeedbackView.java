@@ -35,7 +35,6 @@ import java.util.List;
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.AspectRatioImageView;
-import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.Feedback;
 import amai.org.conventions.model.FeedbackQuestion;
 
@@ -55,7 +54,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
     private int expendedFeedbackLayoutHeight;
     private int collapsedFeedbackLayoutHeight;
 
-    private ConventionEvent conventionEvent;
+    private Feedback feedback;
     private boolean feedbackChanged;
 
     public CollapsibleFeedbackView(Context context, AttributeSet attrs) {
@@ -105,26 +104,13 @@ public class CollapsibleFeedbackView extends FrameLayout {
         }
     }
 
-    public void setEvent(ConventionEvent event, boolean animate) {
-        conventionEvent = event;
+    public void setModel(Feedback feedback) {
+        this.feedback = feedback;
 
         // Calculate the heights of the collapsed/expended states of the feedback view, since they are dynamic (based on the number of questions), and
         // we need the heights pre-calculated to be able to properly animate the transitions.
         calculateCollapsedFeedbackHeight();
         calculateExpendedFeedbackHeight();
-
-        if (!event.canFillFeedback()) {
-            findViewById(R.id.feedback_container).setVisibility(View.GONE);
-            return;
-        }
-
-        Feedback feedback = event.getUserInput().getFeedback();
-
-        if (shouldFeedbackBeClosed()) {
-            setState(State.Collapsed, animate);
-        } else {
-            setState(State.Expended, animate);
-        }
 
         if (feedback.isSent()) {
             collapsedFeedbackTitle.setText(getContext().getString(R.string.feedback_sent));
@@ -132,7 +118,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
             sendFeedbackButton.setVisibility(View.GONE);
             feedbackSentText.setVisibility(View.VISIBLE);
         }
-        setFeedbackIcon(event);
+        setFeedbackIcon(feedback);
 
 		LinearLayout questionsLayout = (LinearLayout) findViewById(R.id.questions_layout);
 	    buildQuestionsLayout(questionsLayout, feedback);
@@ -164,19 +150,9 @@ public class CollapsibleFeedbackView extends FrameLayout {
         }
     }
 
-    private boolean shouldFeedbackBeClosed() {
-        // Feedback should start as closed in the following cases:
-        // 1. Feedback was sent
-        // 2. Event was not attended an no questions were answered
-        // Otherwise it should start as open.
-        Feedback feedback = conventionEvent.getUserInput().getFeedback();
-        return feedback.isSent() ||
-                (!conventionEvent.isAttending() && !feedback.hasAnsweredQuestions());
-    }
-
-    private void setFeedbackIcon(ConventionEvent event) {
+    private void setFeedbackIcon(Feedback feedback) {
         Drawable icon;
-        FeedbackQuestion.Smiley3PointAnswer weightedRating = event.getUserInput().getFeedback().getWeightedRating();
+        FeedbackQuestion.Smiley3PointAnswer weightedRating = feedback.getWeightedRating();
         int filterColor;
         if (weightedRating != null) {
             icon = getResources().getDrawable(weightedRating.getImageResourceId());
@@ -192,6 +168,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 
     private View buildQuestionView(final FeedbackQuestion question, final Feedback feedback) {
         LinearLayout questionLayout = new LinearLayout(getContext());
+	    questionLayout.setFocusableInTouchMode(true); // Prevent text edit from getting the focus
         LinearLayout.LayoutParams questionLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         questionLayoutParams.setMargins(0, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, getResources().getDisplayMetrics()), 0, 0);
         questionLayout.setLayoutParams(questionLayoutParams);
@@ -417,7 +394,6 @@ public class CollapsibleFeedbackView extends FrameLayout {
         root.addView(expendedFeedbackLayout);
 
         // Add all the questions to the view
-	    Feedback feedback = conventionEvent.getUserInput().getFeedback();
         LinearLayout questionsLayout = (LinearLayout) expendedFeedbackLayout.findViewById(R.id.questions_layout);
 	    buildQuestionsLayout(questionsLayout, feedback);
 
