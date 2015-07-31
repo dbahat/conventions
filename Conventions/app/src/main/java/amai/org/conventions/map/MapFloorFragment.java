@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MotionEventCompat;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -92,7 +93,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
         resolveUIElements(view);
 	    initializeLocationDetails();
         initializeUpAndDownButtons();
-	    setDismissSelectionClickListener(mapFloorImage);
+	    setMapClickListeners(mapFloorImage);
         configureMapFloorAndRestoreState(savedInstanceState);
 	    return view;
     }
@@ -503,14 +504,29 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		setSelectedLocationDetails(marker.getLocation());
 	}
 
-	private void setDismissSelectionClickListener(View view) {
-		view.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				for (Marker marker : floorMarkers) {
-					marker.deselect();
+	private void setMapClickListeners(View view) {
+		view.setOnTouchListener(new View.OnTouchListener() {
+			private GestureDetector gestureDetector = new GestureDetector(getActivity(), new GestureDetector.SimpleOnGestureListener() {
+				@Override
+				public boolean onDoubleTap(MotionEvent e) {
+					changeMapZoom(!isMapZoomedIn());
+					return true;
 				}
-				setSelectedLocationDetails(null);
+
+				@Override
+				public boolean onSingleTapConfirmed(MotionEvent e) {
+					for (Marker marker : floorMarkers) {
+						marker.deselect();
+					}
+					setSelectedLocationDetails(null);
+					return true;
+				}
+			});
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				gestureDetector.onTouchEvent(event);
+				return true;
 			}
 		});
 	}
