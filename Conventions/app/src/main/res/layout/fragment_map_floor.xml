@@ -52,7 +52,9 @@
         </FrameLayout>
 
         <!-- This view must have software rendering because the ImageLayout inside it also has
-             software rendering and if it's too big it is not displayed -->
+             software rendering and if it's too big it is not displayed.
+             The layout direction is ltr because of a bug in Jellybean where only the right side
+             of the map was displayed in rtl. -->
         <HorizontalScrollView
             android:id="@+id/horizontal_scroll_view"
             android:visibility="gone"

@@ -1,8 +1,12 @@
 package amai.org.conventions.navigation;
 
+import android.animation.Animator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.LightingColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -14,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -35,6 +40,7 @@ import amai.org.conventions.updates.UpdatesActivity;
 
 
 public abstract class NavigationActivity extends AppCompatActivity {
+	private static boolean showLogoGlow = true;
     private Toolbar navigationToolbar;
     private AnimationPopupWindow popup;
 	private Map<View, Class<? extends Activity>> navigationMapping;
@@ -49,7 +55,8 @@ public abstract class NavigationActivity extends AppCompatActivity {
         navigationToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (popup == null || !popup.isShowing()) {
+	            showLogoGlow = false;
+	            if (popup == null || !popup.isShowing()) {
 	                popup = createNavigationPopup();
                     popup.showAsDropDown(navigationToolbar);
                 }
@@ -146,7 +153,6 @@ public abstract class NavigationActivity extends AppCompatActivity {
     }
 
     private void setupActionBar(Toolbar toolbar) {
-	    toolbar.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         this.setSupportActionBar(toolbar);
         ActionBar actionBar = this.getSupportActionBar();
         if (actionBar != null) {
@@ -164,11 +170,52 @@ public abstract class NavigationActivity extends AppCompatActivity {
 			        break;
 		        // svg
 		        case 1:
+			        toolbar.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 	                SVG logoSVG = SVGFileLoader.loadSVG(this, ThemeAttributes.getResourceId(this, R.attr.toolbarLogo));
 			        drawable = new PictureDrawable(logoSVG.renderToPicture());
 			        break;
 	        }
             toolbar.setNavigationIcon(drawable);
+
+	        if (showLogoGlow) {
+		        for (int i = 0; i < toolbar.getChildCount(); ++i) {
+			        View view = toolbar.getChildAt(i);
+			        if (view instanceof ImageView && ((ImageView) view).getDrawable() == drawable) {
+				        final ImageView image = (ImageView) view;
+				        ValueAnimator animator = ValueAnimator.ofInt(255, 100, 255);
+				        animator.setInterpolator(new AccelerateDecelerateInterpolator());
+				        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+					        @Override
+					        public void onAnimationUpdate(ValueAnimator animation) {
+						        int value = (int) animation.getAnimatedValue();
+						        int mul = Color.argb(0, value, value, value);
+						        int add = Color.argb(0, 255 - value, 255 - value, 255 - value);
+						        image.setColorFilter(new LightingColorFilter(mul, add));
+					        }
+				        });
+				        animator.addListener(new Animator.AnimatorListener() {
+					        @Override
+					        public void onAnimationStart(Animator animation) {
+					        }
+
+					        @Override
+					        public void onAnimationEnd(Animator animation) {
+						        image.setColorFilter(null);
+					        }
+
+					        @Override
+					        public void onAnimationCancel(Animator animation) {
+					        }
+
+					        @Override
+					        public void onAnimationRepeat(Animator animation) {
+					        }
+				        });
+				        animator.setDuration(1500).setStartDelay(3000);
+				        animator.start();
+			        }
+		        }
+	        }
         }
     }
 
