@@ -51,9 +51,6 @@ public class CollapsibleFeedbackView extends FrameLayout {
     private ViewGroup feedbackContainer;
     private ProgressBar progressBar;
 
-    private int expendedFeedbackLayoutHeight;
-    private int collapsedFeedbackLayoutHeight;
-
     private Feedback feedback;
     private boolean feedbackChanged;
 
@@ -106,11 +103,6 @@ public class CollapsibleFeedbackView extends FrameLayout {
 
     public void setModel(Feedback feedback) {
         this.feedback = feedback;
-
-        // Calculate the heights of the collapsed/expended states of the feedback view, since they are dynamic (based on the number of questions), and
-        // we need the heights pre-calculated to be able to properly animate the transitions.
-        calculateCollapsedFeedbackHeight();
-        calculateExpendedFeedbackHeight();
 
         if (feedback.isSent()) {
             collapsedFeedbackTitle.setText(getContext().getString(R.string.feedback_sent));
@@ -383,50 +375,25 @@ public class CollapsibleFeedbackView extends FrameLayout {
         return questionLayout;
     }
 
-    private void calculateExpendedFeedbackHeight() {
-        final ViewGroup expendedFeedbackLayout = (ViewGroup) LayoutInflater.from(this.getContext()).inflate(R.layout.feedback_layout_expanded, null);
-
-        // Position the hidden view outside the bounds of the screen
-        expendedFeedbackLayout.setX(getScreenWidth());
-
-        // Add the view to the screen
-        final ViewGroup root = (ViewGroup)findViewById(R.id.feedback_container);
-        root.addView(expendedFeedbackLayout);
+    private int calculateExpendedFeedbackHeight() {
+        ViewGroup expendedFeedbackLayout = (ViewGroup) LayoutInflater.from(this.getContext()).inflate(R.layout.feedback_layout_expanded, null);
 
         // Add all the questions to the view
         LinearLayout questionsLayout = (LinearLayout) expendedFeedbackLayout.findViewById(R.id.questions_layout);
 	    buildQuestionsLayout(questionsLayout, feedback);
 
-        // Wait for the layout onMeasure to be called, get its height, and then remove it from the screen
-        expendedFeedbackLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                expendedFeedbackLayoutHeight = expendedFeedbackLayout.getMeasuredHeight();
-                root.removeView(expendedFeedbackLayout);
-            }
-        });
+        return calculateViewHeight(expendedFeedbackLayout);
     }
 
-    public void calculateCollapsedFeedbackHeight() {
-        final ViewGroup collapsedFeedbackLayout = (ViewGroup) LayoutInflater.from(this.getContext()).inflate(R.layout.feedback_layout_collapsed, null);
+    private int calculateCollapsedFeedbackHeight() {
+        return calculateViewHeight(LayoutInflater.from(this.getContext()).inflate(R.layout.feedback_layout_collapsed, null));
+    }
 
-        // Position the hidden view outside the bounds of the screen
-        collapsedFeedbackLayout.setX(getScreenWidth());
+    private int calculateViewHeight(View view) {
+        Point screenSize = getScreenSize();
 
-        // Add the view to the screen
-        final ViewGroup root = (ViewGroup)findViewById(R.id.feedback_container);
-        root.addView(collapsedFeedbackLayout);
-
-        collapsedFeedbackLayout.bringToFront();
-
-        // Wait for the layout onMeasure to be called, get its height, and then remove it from the screen
-        collapsedFeedbackLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                collapsedFeedbackLayoutHeight = collapsedFeedbackLayout.getMeasuredHeight();
-                root.removeView(collapsedFeedbackLayout);
-            }
-        });
+        view.measure(screenSize.x, screenSize.y);
+        return view.getMeasuredHeight();
     }
 
     private void resizeFeedbackContainer(State state) {
@@ -434,14 +401,20 @@ public class CollapsibleFeedbackView extends FrameLayout {
         int targetHeight = 0;
         ViewGroup layoutBeforeResize = null;
         ViewGroup layoutAfterResize = null;
+
+        // Calculate the heights of the collapsed/expended states of the feedback view, since they are dynamic (based on the number of questions), and
+        // we need the heights pre-calculated before the animation to be able to properly animate the transitions and restructure of the layout.
+        // Note -
+        // The calculation is done by re-inflating the layout (which is not very efficient), since only one of the collapsed/expended layouts is visible
+        // at any given time, and the other is in GONE state so the rest of the views will be positioned properly.
         switch (state) {
             case Expended:
-                targetHeight = expendedFeedbackLayoutHeight;
+                targetHeight = calculateExpendedFeedbackHeight();
                 layoutBeforeResize = feedbackCollapsed;
                 layoutAfterResize = feedbackExpended;
                 break;
             case Collapsed:
-                targetHeight = collapsedFeedbackLayoutHeight;
+                targetHeight = calculateCollapsedFeedbackHeight();
                 layoutBeforeResize = feedbackExpended;
                 layoutAfterResize = feedbackCollapsed;
                 break;
@@ -502,12 +475,12 @@ public class CollapsibleFeedbackView extends FrameLayout {
         return animator;
     }
 
-    private int getScreenWidth() {
+    private Point getScreenSize() {
         WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
-        return size.x;
+        return size;
     }
 
     public enum State {
