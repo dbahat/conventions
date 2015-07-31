@@ -57,6 +57,7 @@
             android:id="@+id/horizontal_scroll_view"
             android:visibility="gone"
             android:layerType="software"
+            android:layoutDirection="ltr"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
