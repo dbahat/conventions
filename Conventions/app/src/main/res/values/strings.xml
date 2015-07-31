@@ -20,6 +20,11 @@
     <string name="update_not_logged_in">כדי לצפות בעדכונים יש להתחבר לפייסבוק</string>
 
     <string name="my_events_no_data">הוסף אירוע לאירועים שלי ע\"י לחיצה על הכוכב בדף האירוע או ע\"י גריריתו ברשימת האירועים</string>
+    <string name="my_events_share">שתף</string>
+    <string name="my_event_share_title">התוכניה שלי לכאמ\"י 2015:</string>
+    <string name="my_event_share_signature">נוצר באפליקצית כאמ"י 2015.</string>
+    <string name="my_event_share_link">http://play.google.com/store/apps/details?id=amai.org.conventions</string>
+    <string name="my_event_share_chooser_dialog_title">שתף את רשימת האירועים</string>
 
     <string name="select_hour_ok">הצג שעה</string>
 

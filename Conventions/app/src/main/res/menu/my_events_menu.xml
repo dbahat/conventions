@@ -6,10 +6,16 @@
     tools:ignore="AlwaysShowAction">
 
     <item
-        android:id="@+id/my_events_navigate_to_programme"
-        android:title="@string/programme_title"
-        android:icon="@drawable/events_list"
+        android:id="@+id/my_events_share"
+        android:title="@string/my_events_share"
+        android:icon="@android:drawable/ic_menu_share"
         android:orderInCategory="1"
         app:showAsAction="always"/>
 
+    <item
+        android:id="@+id/my_events_navigate_to_programme"
+        android:title="@string/programme_title"
+        android:icon="@drawable/events_list"
+        android:orderInCategory="2"
+        app:showAsAction="always"/>
 </menu>

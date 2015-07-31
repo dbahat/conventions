@@ -1,7 +1,11 @@
 package amai.org.conventions.events.activities;
 
+import android.content.Intent;
+import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Parcelable;
+import android.support.v4.app.ShareCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -116,10 +120,73 @@ public class MyEventsActivity extends NavigationActivity {
                 navigateToActivity(ProgrammeActivity.class);
 
                 return true;
+			case R.id.my_events_share:
+				startActivity(createSharingIntent());
+
+				return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+	private Intent createSharingIntent() {
+		// get available share intents
+		List<Intent> targets = new ArrayList<>();
+		Intent template = new Intent(Intent.ACTION_SEND)
+				.setType("text/plain");
+		List<ResolveInfo> candidates = this.getPackageManager()
+				.queryIntentActivities(template, 0);
+
+		// remove facebook, since they don't allow sharing text inside the sharing intent, causing the app to appear borken.
+		for (ResolveInfo candidate : candidates) {
+			String packageName = candidate.activityInfo.packageName;
+			if (!packageName.equals("com.facebook.katana")) {
+				Intent shareIntent = ShareCompat.IntentBuilder
+						.from(this)
+						.setText(formatMyEventsToShare(false))
+						.setHtmlText(formatMyEventsToShare(true))
+						.setType("text/plain")
+						.getIntent()
+						.setPackage(packageName);
+
+				targets.add(shareIntent);
+			}
+		}
+		return Intent
+				.createChooser(targets.remove(0), getString(R.string.my_event_share_chooser_dialog_title))
+				.putExtra(Intent.EXTRA_INITIAL_INTENTS, targets.toArray(new Parcelable[targets.size()]));
+	}
+
+	private String formatMyEventsToShare(boolean isHtml) {
+		StringBuilder stringBuilder = new StringBuilder();
+
+		stringBuilder.append(getString(R.string.my_event_share_title));
+		stringBuilder.append("\n");
+		for (ConventionEvent event : getMyEvents()) {
+			stringBuilder.append(formatEventToShare(event));
+			stringBuilder.append("\n");
+		}
+		stringBuilder.append("\n");
+
+		if (isHtml) {
+			stringBuilder.append(
+					String.format(Dates.getLocale(), "<a href=\"%s\">%s</a>",
+							getString(R.string.my_event_share_link),
+							getString(R.string.my_event_share_signature)));
+		} else {
+			stringBuilder.append(getString(R.string.my_event_share_signature));
+			stringBuilder.append("\n");
+			stringBuilder.append(getString(R.string.my_event_share_link));
+		}
+
+		return stringBuilder.toString();
+	}
+
+	private String formatEventToShare(ConventionEvent event) {
+		return String.format(Dates.getLocale(), "%s: %s",
+				Dates.formatHoursAndMinutes(event.getStartTime()),
+				event.getTitle());
+	}
 
     private List<ConventionEvent> getMyEvents() {
 	    ArrayList<ConventionEvent> events = CollectionUtils.filter(
