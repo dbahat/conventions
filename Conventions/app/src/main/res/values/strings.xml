@@ -50,4 +50,6 @@
     <string name="display_feedback">הצג פידבק</string>
     <string name="zoom_to_fit">התאם לגודל החלון</string>
     <string name="no_navigation_activity">לא נמצאה אפליקציה מתאימה לניווט</string>
+    <string name="share_no_events">הוסף אירועים כדי לשתף</string>
+    <string name="ok">אישור</string>
 </resources>

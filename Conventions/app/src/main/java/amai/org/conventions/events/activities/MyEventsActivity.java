@@ -1,11 +1,13 @@
 package amai.org.conventions.events.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
 import android.support.v4.app.ShareCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -39,6 +41,7 @@ public class MyEventsActivity extends NavigationActivity {
     private TextView nextEventStart;
 	private RecyclerView eventsList;
 	private View emptyView;
+	private AlertDialog noEventsDialog;
 
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,7 +124,20 @@ public class MyEventsActivity extends NavigationActivity {
 
                 return true;
 			case R.id.my_events_share:
-				startActivity(createSharingIntent());
+				if (getMyEvents().size() > 0) {
+					startActivity(createSharingIntent());
+				} else {
+					noEventsDialog = new AlertDialog.Builder(this)
+							.setMessage(R.string.share_no_events)
+							.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									noEventsDialog.dismiss();
+								}
+							})
+							.create();
+					noEventsDialog.show();
+				}
 
 				return true;
         }
@@ -286,5 +302,13 @@ public class MyEventsActivity extends NavigationActivity {
 		}
 
 		return nonConflictingEventGroups;
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		if (noEventsDialog != null && noEventsDialog.isShowing()) {
+			noEventsDialog.dismiss();
+		}
 	}
 }
