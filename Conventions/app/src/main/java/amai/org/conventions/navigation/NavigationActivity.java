@@ -182,9 +182,10 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		return new BitmapDrawable(getResources(), bitmapResized);
 	}
 
-    protected void setContentInContentContainer(int layoutResID) {
+    protected View setContentInContentContainer(int layoutResID) {
         FrameLayout contentContainer = (FrameLayout) findViewById(R.id.navigation_content_view_container);
         getLayoutInflater().inflate(layoutResID, contentContainer, true);
+	    return contentContainer;
     }
 
     public void onConventionEventClicked(View view) {

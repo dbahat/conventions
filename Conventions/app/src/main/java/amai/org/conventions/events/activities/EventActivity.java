@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.Settings;
 import android.support.design.widget.Snackbar;
 import android.support.v7.graphics.Palette;
@@ -73,86 +72,99 @@ public class EventActivity extends NavigationActivity {
 	    setToolbarTitle(conventionEvent.getType().getDescription());
 
 	    // Do the rest after the layout loads
-	    new Handler().post(new Runnable() {
+	    new AsyncTask<Void, Void, Void>() {
+
 		    @Override
-		    public void run() {
-			    setEvent(conventionEvent);
-
-			    // If the feedback view already had saved state, restore it
-			    if (savedInstanceState != null && savedInstanceState.containsKey(STATE_FEEDBACK_OPEN)) {
-				    if (savedInstanceState.getBoolean(STATE_FEEDBACK_OPEN)) {
-					    feedbackView.setState(CollapsibleFeedbackView.State.Expended, false);
-				    } else {
-					    feedbackView.setState(CollapsibleFeedbackView.State.Collapsed, false);
-				    }
+		    protected Void doInBackground(Void... params) {
+			    try {
+				    // This is really ugly but necessary so that the screen won't wait for
+				    // onPostExecute to finish before loading
+				    Thread.sleep(1);
+			    } catch (InterruptedException e) {
+				    // Nothing to do here
 			    }
+			    return null;
+		    }
 
-			    mainLayout.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
-				    @Override
-				    public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-					    // Set parallax
-					    int foregroundHeight = detailBoxes.getMeasuredHeight();
-					    int backgroundHeight = backgroundView.getMeasuredHeight();
-					    int screenHeight = mainLayout.getMeasuredHeight();
-					    float maxParallax = 1;
+		    @Override
+		    protected void onPostExecute(Void v) {
+		        setEvent(conventionEvent);
 
-					    // If background height is bigger than screen size, scrolling should be until background full height is reached.
-					    // If it's smaller, scrolling should be until background is scrolled out of the screen.
-					    int backgroundToScroll;
-					    if (backgroundHeight < screenHeight) {
-						    backgroundToScroll = backgroundHeight;
-						    maxParallax = 0.7f;
-					    } else {
-						    backgroundToScroll = backgroundHeight - screenHeight;
+		        // If the feedback view already had saved state, restore it
+		        if (savedInstanceState != null && savedInstanceState.containsKey(STATE_FEEDBACK_OPEN)) {
+		            if (savedInstanceState.getBoolean(STATE_FEEDBACK_OPEN)) {
+							    feedbackView.setState(CollapsibleFeedbackView.State.Expended, false);
+		            } else {
+							    feedbackView.setState(CollapsibleFeedbackView.State.Collapsed, false);
+		            }
+		        }
 
-						    // If foreground height is smaller than background height (and background should be scrolled),
-						    // increase foreground height to allow scrolling until the end of the background and see all the images.
-						    if (backgroundToScroll > 0 && foregroundHeight < backgroundHeight) {
-							    detailBoxes.setMinimumHeight(backgroundHeight);
-							    // Update height to calculate the parallax factor
-							    foregroundHeight = backgroundHeight;
-						    }
-					    }
-					    int foregroundToScroll = foregroundHeight - screenHeight;
+		        mainLayout.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+		            @Override
+		            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+		                // Set parallax
+		                int foregroundHeight = detailBoxes.getMeasuredHeight();
+		                int backgroundHeight = backgroundView.getMeasuredHeight();
+		                int screenHeight = mainLayout.getMeasuredHeight();
+		                float maxParallax = 1;
 
-					    // Set parallax scrolling if both foreground and background should be scrolled
-					    if (backgroundToScroll > 0 && foregroundToScroll > 0) {
-						    float scrollFactor = backgroundToScroll / (float) foregroundToScroll;
-						    // If scroll factor is bigger than 1, set it to 1 so the background doesn't move too fast.
-						    // This could happen only in case the background is smaller than screen size so we can
-						    // still see all the images.
-						    scrollView.parallaxViewBy(backgroundView, Math.min(scrollFactor, maxParallax));
-					    }
-				    }
-			    });
+		                // If background height is bigger than screen size, scrolling should be until background full height is reached.
+		                // If it's smaller, scrolling should be until background is scrolled out of the screen.
+		                int backgroundToScroll;
+		                if (backgroundHeight < screenHeight) {
+		                    backgroundToScroll = backgroundHeight;
+		                    maxParallax = 0.7f;
+		                } else {
+		                    backgroundToScroll = backgroundHeight - screenHeight;
 
-			    // Set images background color according to last image's color palette
-			    if (imagesLayout.getChildCount() > 0) {
-				    final View imagesBackground = findViewById(R.id.images_background);
-				    ImageView lastImage = (ImageView) imagesLayout.getChildAt(imagesLayout.getChildCount() - 1);
-				    if (lastImage.getDrawable() instanceof BitmapDrawable) {
-					    Bitmap bitmap = ((BitmapDrawable) lastImage.getDrawable()).getBitmap();
+		                    // If foreground height is smaller than background height (and background should be scrolled),
+		                    // increase foreground height to allow scrolling until the end of the background and see all the images.
+		                    if (backgroundToScroll > 0 && foregroundHeight < backgroundHeight) {
+		                        detailBoxes.setMinimumHeight(backgroundHeight);
+		                        // Update height to calculate the parallax factor
+		                        foregroundHeight = backgroundHeight;
+		                    }
+		                }
+		                int foregroundToScroll = foregroundHeight - screenHeight;
 
-					    Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
-						    @Override
-						    public void onGenerated(Palette palette) {
-							    Palette.Swatch swatch = palette.getMutedSwatch();
-							    if (swatch == null) {
-								    // Try vibrant swatch
-								    swatch = palette.getDarkVibrantSwatch();
-							    }
-							    if (swatch != null) {
-								    imagesBackground.setBackgroundColor(swatch.getRgb());
-							    }
-						    }
-					    });
-				    }
-			    }
+		                // Set parallax scrolling if both foreground and background should be scrolled
+		                if (backgroundToScroll > 0 && foregroundToScroll > 0) {
+		                    float scrollFactor = backgroundToScroll / (float) foregroundToScroll;
+		                    // If scroll factor is bigger than 1, set it to 1 so the background doesn't move too fast.
+		                    // This could happen only in case the background is smaller than screen size so we can
+		                    // still see all the images.
+		                    scrollView.parallaxViewBy(backgroundView, Math.min(scrollFactor, maxParallax));
+		                }
+		            }
+		        });
+
+		        // Set images background color according to last image's color palette
+		        if (imagesLayout.getChildCount() > 0) {
+		            final View imagesBackground = findViewById(R.id.images_background);
+		            ImageView lastImage = (ImageView) imagesLayout.getChildAt(imagesLayout.getChildCount() - 1);
+		            if (lastImage.getDrawable() instanceof BitmapDrawable) {
+		                Bitmap bitmap = ((BitmapDrawable) lastImage.getDrawable()).getBitmap();
+
+		                Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
+		                    @Override
+		                    public void onGenerated(Palette palette) {
+		                        Palette.Swatch swatch = palette.getMutedSwatch();
+		                        if (swatch == null) {
+		                            // Try vibrant swatch
+		                            swatch = palette.getDarkVibrantSwatch();
+		                        }
+		                        if (swatch != null) {
+		                            imagesBackground.setBackgroundColor(swatch.getRgb());
+		                        }
+		                    }
+		                });
+		            }
+		        }
 
 			    mainLayout.setVisibility(View.VISIBLE);
 			    mainLayout.startAnimation(AnimationUtils.loadAnimation(EventActivity.this, android.R.anim.fade_in));
 		    }
-	    });
+        }.execute();
 
     }
 
@@ -232,7 +244,7 @@ public class EventActivity extends NavigationActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
 	    if (feedbackView.getVisibility() == View.VISIBLE) {
-            outState.putBoolean(STATE_FEEDBACK_OPEN, feedbackView.getState() == CollapsibleFeedbackView.State.Expended);
+        outState.putBoolean(STATE_FEEDBACK_OPEN, feedbackView.getState() == CollapsibleFeedbackView.State.Expended);
 	    }
 
         super.onSaveInstanceState(outState);
@@ -358,7 +370,7 @@ public class EventActivity extends NavigationActivity {
                 Dates.formatHoursAndMinutes(event.getStartTime()),
                 Dates.formatHoursAndMinutes(event.getEndTime()),
                 Dates.toHumanReadableTimeDuration(event.getEndTime().getTime() - event.getStartTime().getTime()));
-	    time.setText(formattedEventHall + formattedEventTime);
+        time.setText(formattedEventHall + formattedEventTime);
 
 	    setupFeedback(event, false);
 
