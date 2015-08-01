@@ -6,12 +6,12 @@ import amai.org.conventions.R;
 
 public enum EventType implements Serializable {
 
-    Games(R.attr.eventTypeCentralColor, "משחקים"),
-    Community(R.attr.eventTypeSpecialColor, "אירוע קהילה"),
+    Games(R.attr.eventTypeGameColor, "משחקים"),
+    Community(R.attr.eventTypeCommunityColor, "אירוע קהילה"),
     Lecture(R.attr.eventTypeLectureColor, "הרצאה"),
     Workshop(R.attr.eventTypeWorkshopColor, "סדנה"),
     Panel(R.attr.eventTypePanelColor, "פאנל"),
-    GuestOfHonor(R.attr.eventTypePanelColor, "אורחת כבוד");
+    GuestOfHonor(R.attr.eventTypeGuestOfHonorColor, "אורחת כבוד");
 
     private int backgroundColorAttributeId;
 	private String description;

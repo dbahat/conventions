@@ -5,7 +5,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -29,6 +31,8 @@ public class ProgrammeSearchActivity extends NavigationActivity {
     private LinkedList<EventType> eventTypeFilter;
     private String keywordsFilter;
     private SwipeableEventsViewAdapter adapter;
+    private RecyclerView recyclerView;
+    private TextView noResultsFoundView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +44,8 @@ public class ProgrammeSearchActivity extends NavigationActivity {
             eventTypeFilter = (LinkedList<EventType>) savedInstanceState.getSerializable(STATE_EVENT_TYPES_FILTER);
             keywordsFilter = savedInstanceState.getString(STATE_KEYWORDS_FILTER);
         }
+
+        noResultsFoundView = (TextView) findViewById(R.id.search_no_results_found);
 
         initializeEventsList();
         initializeKeywordFilter();
@@ -57,11 +63,11 @@ public class ProgrammeSearchActivity extends NavigationActivity {
     }
 
     private void initializeEventsList() {
-        RecyclerView searchEventsList = (RecyclerView) findViewById(R.id.searchEventsList);
+        recyclerView = (RecyclerView) findViewById(R.id.searchEventsList);
 
-        adapter = new SwipeableEventsViewAdapter(null, searchEventsList);
-        searchEventsList.setAdapter(adapter);
-        searchEventsList.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new SwipeableEventsViewAdapter(null, recyclerView);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private void initializeSearchCategories() {
@@ -124,14 +130,23 @@ public class ProgrammeSearchActivity extends NavigationActivity {
         });
         Collections.sort(events, new ConventionEventComparator());
         adapter.setEventsList(events);
+
+        // Show the "no results found" message if there are no results after applying the filters
+        if (events.size() == 0) {
+            noResultsFoundView.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+        } else {
+            noResultsFoundView.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+        }
     }
 
     private boolean containsKeywords(ConventionEvent event) {
-        boolean result = false;
+        boolean result = true;
 
-        // Split the keyword string into words, and search each word with logical OR
+        // Split the keyword string into words, and search each word with logical AND
         for (String keyword : keywordsFilter.split(" ")) {
-            result |= containsKeyword(event, keyword);
+            result &= containsKeyword(event, keyword);
         }
 
         return result;

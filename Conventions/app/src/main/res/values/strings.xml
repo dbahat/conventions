@@ -44,6 +44,7 @@
     <string name="feedback_sent">הפידבק נשלח. תודה!</string>
 
     <string name="search_input_search_keyword">הקלד את חיפושך...</string>
+    <string name="search_no_results_found">לא נמצאו תוצאות</string>
 
     <string name="yes">כן</string>
     <string name="no">לא</string>

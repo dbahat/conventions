@@ -24,4 +24,15 @@
 
     </android.support.v7.widget.RecyclerView>
 
+    <TextView
+        android:id="@+id/search_no_results_found"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:textSize="@dimen/abc_text_size_large_material"
+        android:textColor="#909090"
+        android:padding="25dp"
+        android:text="@string/search_no_results_found" />
+
 </LinearLayout>

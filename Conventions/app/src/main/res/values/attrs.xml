@@ -45,6 +45,9 @@
         <attr name="eventTypeLectureColor" format="color|reference"/>
         <attr name="eventTypeWorkshopColor" format="color|reference"/>
         <attr name="eventTypePanelColor" format="color|reference"/>
+        <attr name="eventTypeGameColor" format="color|reference"/>
+        <attr name="eventTypeCommunityColor" format="color|reference"/>
+        <attr name="eventTypeGuestOfHonorColor" format="color|reference"/>
         <!-- Event Time -->
         <attr name="eventTypeEndedColor" format="color|reference"/>
         <attr name="eventTypeCurrentColor" format="color|reference"/>
