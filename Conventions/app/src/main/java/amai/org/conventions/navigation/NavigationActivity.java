@@ -29,6 +29,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import amai.org.conventions.ArrivalMethodsActivity;
+import amai.org.conventions.HomeActivity;
 import amai.org.conventions.R;
 import amai.org.conventions.SVGFileLoader;
 import amai.org.conventions.ThemeAttributes;
@@ -40,10 +41,13 @@ import amai.org.conventions.updates.UpdatesActivity;
 
 
 public abstract class NavigationActivity extends AppCompatActivity {
+	private static final String EXTRA_SHOW_HOME_SCREEN_ON_BACK = "ExtraShowHomeScreenOnBack";
+
 	private static boolean showLogoGlow = true;
     private Toolbar navigationToolbar;
     private AnimationPopupWindow popup;
 	private Map<View, Class<? extends Activity>> navigationMapping;
+	private boolean showHomeScreenOnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,15 +57,17 @@ public abstract class NavigationActivity extends AppCompatActivity {
         navigationToolbar = (Toolbar) findViewById(R.id.navigation_toolbar);
         setupActionBar(navigationToolbar);
         navigationToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-	            showLogoGlow = false;
-	            if (popup == null || !popup.isShowing()) {
-	                popup = createNavigationPopup();
-                    popup.showAsDropDown(navigationToolbar);
-                }
-            }
+	        @Override
+	        public void onClick(View v) {
+		        showLogoGlow = false;
+		        if (popup == null || !popup.isShowing()) {
+			        popup = createNavigationPopup();
+			        popup.showAsDropDown(navigationToolbar);
+		        }
+	        }
         });
+
+	    showHomeScreenOnBack = getIntent().getBooleanExtra(EXTRA_SHOW_HOME_SCREEN_ON_BACK, false);
     }
 
 	private AnimationPopupWindow createNavigationPopup() {
@@ -247,11 +253,11 @@ public abstract class NavigationActivity extends AppCompatActivity {
     }
 
     protected void navigateToActivity(Class<? extends Activity> activityToNavigateTo) {
-        // When navigating using the main popup window, clear the activity stack so the back button would return button would exit the app
+        // When navigating using the main popup window, clear the activity stack so the back button would return to the home screen
         navigateToActivity(activityToNavigateTo, true, null);
     }
 
-    protected void navigateToActivity(Class<? extends Activity> activityToNavigateTo, boolean shouldEndActivityAfterExecution, Bundle extras) {
+    protected void navigateToActivity(Class<? extends Activity> activityToNavigateTo, boolean clearBackStack, Bundle extras) {
 
         dismissPopupIfNeeded();
 
@@ -261,7 +267,14 @@ public abstract class NavigationActivity extends AppCompatActivity {
         }
 
         Intent intent = new Intent(this, activityToNavigateTo);
-        if (shouldEndActivityAfterExecution) {
+        if (clearBackStack) {
+	        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+	        // If the user presses back when the back stack is clear we want to show the home screen
+	        // instead of existing.
+	        // This flag only has a meaning if we're navigating to a NavigationActivity.
+	        if (NavigationActivity.class.isAssignableFrom(activityToNavigateTo)) {
+	            intent.putExtra(EXTRA_SHOW_HOME_SCREEN_ON_BACK, true);
+	        }
             finish();
         }
 
@@ -271,7 +284,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 
         startActivity(intent);
 
-        overridePendingTransition(0, 0);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
 	public void onNavigate(View view) {
@@ -283,4 +296,13 @@ public abstract class NavigationActivity extends AppCompatActivity {
             popup.dismissNow();
         }
     }
+
+	@Override
+	public void onBackPressed() {
+		if (showHomeScreenOnBack) {
+			navigateToActivity(HomeActivity.class, true, null);
+			return;
+		}
+		super.onBackPressed();
+	}
 }
