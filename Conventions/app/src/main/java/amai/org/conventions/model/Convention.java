@@ -82,12 +82,12 @@ public class Convention implements Serializable {
                                                 .withSelectedMarkerResource(R.raw.signatures_marker_selected)
                                                 .withX(80)
                                                 .withY(63),
-                                        new MapLocation()
-                                                .withPlace(new Place().withName("יד שניה"))
-                                                .withMarkerResource(R.raw.second_hand_marker)
-                                                .withSelectedMarkerResource(R.raw.second_hand_marker_selected)
-                                                .withX(55)
-                                                .withY(64),
+//                                        new MapLocation()
+//                                                .withPlace(new Place().withName("יד שניה"))
+//                                                .withMarkerResource(R.raw.second_hand_marker)
+//                                                .withSelectedMarkerResource(R.raw.second_hand_marker_selected)
+//                                                .withX(55)
+//                                                .withY(64),
 		                                new MapLocation()
 		                                        .withPlace(new Place().withName("מודיעין"))
                                                 .withMarkerResource(R.raw.information_marker)
