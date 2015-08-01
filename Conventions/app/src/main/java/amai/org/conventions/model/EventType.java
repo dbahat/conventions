@@ -1,8 +1,10 @@
 package amai.org.conventions.model;
 
+import java.io.Serializable;
+
 import amai.org.conventions.R;
 
-public enum EventType {
+public enum EventType implements Serializable {
 
     Games(R.attr.eventTypeCentralColor, "משחקים"),
     Community(R.attr.eventTypeSpecialColor, "אירוע קהילה"),

@@ -5,6 +5,7 @@
 
     <string name="programme_title">תוכניה</string>
     <string name="my_events_title">האירועים שלי</string>
+    <string name="programme_search_title">חיפוש</string>
 
     <string name="event_added_to_favorites">האירוע התווסף לאירועים שלי</string>
     <string name="event_removed_from_favorites">האירוע הוסר מהאירועים שלי</string>
@@ -41,6 +42,8 @@
     <string name="feedback_mail_title">מייל אוטומטי - פידבק לכאמ\"י 205 עבור האירוע</string>
     <string name="feedback_send_mail_failed">לא ניתן לשלוח את הפידבק. נסה שנית מאוחר יותר</string>
     <string name="feedback_sent">הפידבק נשלח. תודה!</string>
+
+    <string name="search_input_search_keyword">הקלד את חיפושך...</string>
 
     <string name="yes">כן</string>
     <string name="no">לא</string>

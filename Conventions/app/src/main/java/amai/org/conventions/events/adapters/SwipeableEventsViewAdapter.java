@@ -62,4 +62,9 @@ public class SwipeableEventsViewAdapter extends RecyclerView.Adapter<SwipeableEv
     public int getItemCount() {
         return eventsList.size();
     }
+
+    public void setEventsList(List<ConventionEvent> eventsList) {
+        this.eventsList = eventsList;
+        notifyDataSetChanged();
+    }
 }

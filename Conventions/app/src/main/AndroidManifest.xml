@@ -44,6 +44,8 @@
         </activity>
         <activity android:name=".events.activities.ProgrammeActivity" >
         </activity>
+        <activity android:name=".events.activities.ProgrammeSearchActivity" >
+        </activity>
         <activity android:name=".map.MapActivity" >
         </activity>
         <activity android:name=".events.activities.EventActivity" >

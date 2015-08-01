@@ -201,6 +201,9 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
 	            item.getIcon().clearColorFilter();
 	            navigateToActivity(MyEventsActivity.class);
                 return true;
+			case R.id.programme_navigate_to_search:
+				navigateToActivity(ProgrammeSearchActivity.class);
+				return true;
         }
 
         return super.onOptionsItemSelected(item);
