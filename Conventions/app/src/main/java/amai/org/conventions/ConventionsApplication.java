@@ -10,6 +10,7 @@ import com.google.android.gms.analytics.StandardExceptionParser;
 import com.google.android.gms.analytics.Tracker;
 
 import java.util.Collection;
+import java.util.Locale;
 
 import amai.org.conventions.utils.ConventionStorage;
 import amai.org.conventions.utils.Dates;
@@ -21,8 +22,8 @@ public class ConventionsApplication extends Application {
 
     @Override
     public void onCreate() {
-
-        ConventionStorage.initFromFile(this);
+	    Locale.setDefault(Dates.getLocale());
+	    ConventionStorage.initFromFile(this);
         analytics = GoogleAnalytics.getInstance(this);
         analytics.setLocalDispatchPeriod(1800);
 
