@@ -57,15 +57,15 @@ public abstract class NavigationActivity extends AppCompatActivity {
         navigationToolbar = (Toolbar) findViewById(R.id.navigation_toolbar);
         setupActionBar(navigationToolbar);
         navigationToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-	        @Override
-	        public void onClick(View v) {
-		        showLogoGlow = false;
-		        if (popup == null || !popup.isShowing()) {
-			        popup = createNavigationPopup();
-			        popup.showAsDropDown(navigationToolbar);
-		        }
-	        }
-        });
+			@Override
+			public void onClick(View v) {
+				showLogoGlow = false;
+				if (popup == null || !popup.isShowing()) {
+					popup = createNavigationPopup();
+					popup.showAsDropDown(navigationToolbar);
+				}
+			}
+		});
 
 	    showHomeScreenOnBack = getIntent().getBooleanExtra(EXTRA_SHOW_HOME_SCREEN_ON_BACK, false);
     }
@@ -259,33 +259,37 @@ public abstract class NavigationActivity extends AppCompatActivity {
 
     protected void navigateToActivity(Class<? extends Activity> activityToNavigateTo, boolean clearBackStack, Bundle extras) {
 
-        dismissPopupIfNeeded();
+		dismissPopupIfNeeded();
 
-        // In case we were asked to navigate to the activity we're already in, ignore the request
-        if (activityToNavigateTo == this.getClass()) {
-            return;
-        }
+		// In case we were asked to navigate to the activity we're already in, ignore the request
+		if (activityToNavigateTo == this.getClass()) {
+			return;
+		}
 
-        Intent intent = new Intent(this, activityToNavigateTo);
-        if (clearBackStack) {
-	        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-	        // If the user presses back when the back stack is clear we want to show the home screen
-	        // instead of existing.
-	        // This flag only has a meaning if we're navigating to a NavigationActivity.
-	        if (NavigationActivity.class.isAssignableFrom(activityToNavigateTo)) {
-	            intent.putExtra(EXTRA_SHOW_HOME_SCREEN_ON_BACK, true);
-	        }
-            finish();
-        }
+		Intent intent = new Intent(this, activityToNavigateTo);
+		if (clearBackStack) {
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+			// If the user presses back when the back stack is clear we want to show the home screen
+			// instead of existing.
+			// This flag only has a meaning if we're navigating to a NavigationActivity.
+			if (NavigationActivity.class.isAssignableFrom(activityToNavigateTo)) {
+				intent.putExtra(EXTRA_SHOW_HOME_SCREEN_ON_BACK, true);
+			}
+			finish();
+		}
 
-        if (extras != null) {
-            intent.putExtras(extras);
-        }
+		if (extras != null) {
+			intent.putExtras(extras);
+		}
 
-        startActivity(intent);
+		startActivity(intent);
 
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-    }
+		if (clearBackStack) {
+			overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+		} else {
+			overridePendingTransition(R.anim.abc_grow_fade_in_from_bottom, R.anim.abc_shrink_fade_out_from_bottom);
+		}
+	}
 
 	public void onNavigate(View view) {
 		navigateToActivity(navigationMapping.get(view));

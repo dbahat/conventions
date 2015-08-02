@@ -202,7 +202,7 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
 	            navigateToActivity(MyEventsActivity.class);
                 return true;
 			case R.id.programme_navigate_to_search:
-				navigateToActivity(ProgrammeSearchActivity.class);
+				navigateToActivity(ProgrammeSearchActivity.class, false, null);
 				return true;
         }
 
