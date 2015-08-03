@@ -180,8 +180,12 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
 		    changeIconColor(item);
 	    }
 
-	    if (!Convention.getInstance().canFillFeedback()) {
+	    Convention convention = Convention.getInstance();
+	    if (!convention.canFillFeedback()) {
 		    menu.removeItem(R.id.programme_navigate_to_feedback);
+	    } else if (convention.hasEnded() && !convention.getFeedback().isSent()) {
+		    MenuItem item = menu.findItem(R.id.programme_navigate_to_feedback);
+		    changeIconColor(item);
 	    }
         return true;
     }
