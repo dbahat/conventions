@@ -7,6 +7,9 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.CardView;
+import android.text.SpannableString;
+import android.text.style.BackgroundColorSpan;
+import android.text.style.StyleSpan;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -15,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Date;
+import java.util.List;
 
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
@@ -237,5 +241,37 @@ public class EventView extends FrameLayout {
             eventContainer.setMaxCardElevation(6.0f);
             eventContainer.setCardBackgroundColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeNotStartedColor));
         }
+    }
+
+    public void setKeywordsHighlighting(List<String> keywords) {
+        for (String keyword : keywords) {
+            if (keyword.length() > 0) {
+                highlightKeywordInTextView(lecturerName, keyword);
+                highlightKeywordInTextView(hallName, keyword);
+                highlightKeywordInTextView(eventName, keyword);
+            }
+        }
+    }
+
+    private void highlightKeywordInTextView(TextView textView, String keyword) {
+        CharSequence originalText = textView.getText();
+
+        String textToHighlight = originalText.toString();
+        SpannableString highlightedText = originalText instanceof SpannableString
+                ? (SpannableString)originalText
+                : new SpannableString(originalText);
+
+        if (textToHighlight.contains(keyword)) {
+            int currentKeywordIndex = textToHighlight.indexOf(keyword);
+            while (currentKeywordIndex != -1) {
+                // Highlight the keyword
+                highlightedText.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), currentKeywordIndex, currentKeywordIndex + keyword.length(), 0);
+
+                // Now move to highlight the next word
+                currentKeywordIndex = textToHighlight.indexOf(keyword, currentKeywordIndex + keyword.length());
+            }
+        }
+
+        textView.setText(highlightedText);
     }
 }

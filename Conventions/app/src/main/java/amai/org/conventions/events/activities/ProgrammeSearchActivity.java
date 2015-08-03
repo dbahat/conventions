@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -129,6 +130,9 @@ public class ProgrammeSearchActivity extends NavigationActivity {
             }
         });
         Collections.sort(events, new ConventionEventComparator());
+        if (keywordsFilter != null) {
+            adapter.setKeywordsHighlighting(Arrays.asList(keywordsFilter.split(" ")));
+        }
         adapter.setEventsList(events);
 
         // Show the "no results found" message if there are no results after applying the filters

@@ -109,4 +109,9 @@ public class SwipeableEventViewHolder extends RecyclerView.ViewHolder {
 		}
 	}
 
+	public void setKeywordsHighlighting(List<String> keywords) {
+		mainEventView.setKeywordsHighlighting(keywords);
+		hiddenEventView.setKeywordsHighlighting(keywords);
+		hiddenEventView2.setKeywordsHighlighting(keywords);
+	}
 }

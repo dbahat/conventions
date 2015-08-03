@@ -17,6 +17,11 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"/>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/black"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/searchEventsList"
         android:layout_width="match_parent"

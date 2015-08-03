@@ -16,6 +16,7 @@ import amai.org.conventions.model.ConventionEvent;
 public class SwipeableEventsViewAdapter extends RecyclerView.Adapter<SwipeableEventViewHolder> {
     private List<ConventionEvent> eventsList;
 	private View recyclerView;
+    private List<String> keywordsToHighlight;
 
 	public SwipeableEventsViewAdapter(List<ConventionEvent> eventsList, View recyclerView) {
         this.eventsList = eventsList;
@@ -33,6 +34,10 @@ public class SwipeableEventsViewAdapter extends RecyclerView.Adapter<SwipeableEv
         holder.reset();
         final ConventionEvent event = eventsList.get(position);
         holder.setModel(event, false);
+
+        if (keywordsToHighlight != null) {
+            holder.setKeywordsHighlighting(keywordsToHighlight);
+        }
 
         holder.setOnViewSwipedAction(new Runnable() {
             @Override
@@ -66,5 +71,9 @@ public class SwipeableEventsViewAdapter extends RecyclerView.Adapter<SwipeableEv
     public void setEventsList(List<ConventionEvent> eventsList) {
         this.eventsList = eventsList;
         notifyDataSetChanged();
+    }
+
+    public void setKeywordsHighlighting(List<String> keywords) {
+        keywordsToHighlight = keywords;
     }
 }
