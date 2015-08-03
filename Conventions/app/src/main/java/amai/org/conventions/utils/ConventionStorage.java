@@ -30,6 +30,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import amai.org.conventions.R;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
+import amai.org.conventions.model.Feedback;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.Update;
 
@@ -37,6 +38,7 @@ public class ConventionStorage {
 	private static final String TAG = ConventionStorage.class.getCanonicalName();
 
     private static final String EVENT_USER_INPUT_FILE_NAME = "convention_data_user_input.json";
+	private static final String CONVENTION_FEEDBACK_FILE_NAME = "convention_feedback.json";
     private static final String UPDATES_FILE_NAME = "convention_updates";
     private static final String EVENTS_FILE_NAME = "convention_events";
 
@@ -66,6 +68,20 @@ public class ConventionStorage {
 			    new EnumSerializer<>()).create();
 	    saveTextFile(serialzer.toJson(userInput), EVENT_USER_INPUT_FILE_NAME);
     }
+
+	public void saveConventionFeedback() {
+		Feedback feedback = Convention.getInstance().getFeedback();
+		try {
+			feedback = feedback.clone();
+		} catch (CloneNotSupportedException e) {
+			throw new RuntimeException(e);
+		}
+		feedback.removeUnansweredQuestions();
+		// Save Smiley3PointAnswer according to enum value name instead of toString()
+		Gson serialzer = new GsonBuilder().registerTypeAdapter(FeedbackQuestion.Smiley3PointAnswer.class,
+				new EnumSerializer<>()).create();
+		saveTextFile(serialzer.toJson(feedback), CONVENTION_FEEDBACK_FILE_NAME);
+	}
 
     public void saveUpdates() {
         saveCacheFile(Convention.getInstance().getUpdates(), UPDATES_FILE_NAME);
@@ -115,6 +131,7 @@ public class ConventionStorage {
         }
 
         readUserInputFromFile();
+		readConventionFeedbackFromFile();
         readUpdatesFromFile();
     }
 
@@ -152,7 +169,7 @@ public class ConventionStorage {
     private static void readUserInputFromFile() {
         filesystemAccessLock.readLock().lock();
 	    Reader reader = null;
-	    Object result = null;
+	    Map<String, ConventionEvent.UserInput> result = null;
         try {
 	        reader = openTextFile(EVENT_USER_INPUT_FILE_NAME);
 	        if (reader != null) {
@@ -174,9 +191,7 @@ public class ConventionStorage {
         }
 
 	    Map<String, ConventionEvent.UserInput> currentUserInput = Convention.getInstance().getUserInput();
-	    @SuppressWarnings("unchecked")
-        Map<String, ConventionEvent.UserInput> userInput = (Map<String, ConventionEvent.UserInput>) result;
-	    for (Map.Entry<String, ConventionEvent.UserInput> entry : userInput.entrySet()) {
+	    for (Map.Entry<String, ConventionEvent.UserInput> entry : result.entrySet()) {
 		    ConventionEvent.UserInput currentInput = currentUserInput.get(entry.getKey());
 		    // Ignore non-existing events
 		    if (currentInput != null) {
@@ -185,7 +200,35 @@ public class ConventionStorage {
 	    }
     }
 
-    private static void readUpdatesFromFile() {
+	private static void readConventionFeedbackFromFile() {
+		filesystemAccessLock.readLock().lock();
+		Reader reader = null;
+		Feedback result = null;
+		try {
+			reader = openTextFile(CONVENTION_FEEDBACK_FILE_NAME);
+			if (reader != null) {
+				result = new Gson().fromJson(reader, Feedback.class);
+			}
+		} finally {
+			if (reader != null) {
+				try {
+					reader.close();
+				} catch (IOException e) {
+					// Nothing we can do about it
+				}
+			}
+			filesystemAccessLock.readLock().unlock();
+		}
+
+		if (result == null) {
+			return;
+		}
+
+		Feedback currentFeedback = Convention.getInstance().getFeedback();
+		currentFeedback.updateFrom(result);
+	}
+
+	private static void readUpdatesFromFile() {
         Object result = readCacheFile(UPDATES_FILE_NAME);
         if (result == null) {
             return;

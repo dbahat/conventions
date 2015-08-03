@@ -12,6 +12,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PictureDrawable;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -242,11 +243,15 @@ public abstract class NavigationActivity extends AppCompatActivity {
     }
 
     public void onConventionEventClicked(View view) {
-        Intent intent = new Intent(this, EventActivity.class);
-        intent.putExtra(EventActivity.EXTRA_EVENT_ID, (String) view.getTag());
-        startActivity(intent);
-        overridePendingTransition(0, 0);
+	    Bundle bundle = new Bundle();
+        bundle.putString(EventActivity.EXTRA_EVENT_ID, (String) view.getTag());
+	    addCustomEventActivityParameters(bundle);
+	    navigateToActivity(EventActivity.class, false, bundle);
+	    overridePendingTransition(0, 0);
     }
+
+	protected void addCustomEventActivityParameters(Bundle bundle) {
+	}
 
     protected void setToolbarTitle(String titleText) {
         getSupportActionBar().setTitle(titleText);
@@ -308,5 +313,9 @@ public abstract class NavigationActivity extends AppCompatActivity {
 			return;
 		}
 		super.onBackPressed();
+	}
+
+	protected String getDeviceId() {
+		return Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
 	}
 }

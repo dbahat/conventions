@@ -1,10 +1,10 @@
 package amai.org.conventions.events.activities;
 
 import android.graphics.Bitmap;
+import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.design.widget.Snackbar;
 import android.support.v7.graphics.Palette;
 import android.text.Html;
@@ -15,15 +15,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.Properties;
 
 import amai.org.conventions.R;
 import amai.org.conventions.customviews.AspectRatioImageView;
@@ -37,7 +36,6 @@ import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.Dates;
-import amai.org.conventions.utils.GMailSender;
 import amai.org.conventions.utils.Log;
 import fi.iki.kuitsi.listtest.ListTagHandler;
 import uk.co.chrisjenx.paralloid.views.ParallaxScrollView;
@@ -46,6 +44,7 @@ import uk.co.chrisjenx.paralloid.views.ParallaxScrollView;
 public class EventActivity extends NavigationActivity {
 
     public static final String EXTRA_EVENT_ID = "EventIdExtra";
+	public static final String EXTRA_FOCUS_ON_FEEDBACK = "ExtraFocusOnFeedback";
 
     private static final String TAG = EventActivity.class.getCanonicalName();
     private static final String STATE_FEEDBACK_OPEN = "StateFeedbackOpen";
@@ -53,6 +52,7 @@ public class EventActivity extends NavigationActivity {
 	private View mainLayout;
     private ConventionEvent conventionEvent;
     private LinearLayout imagesLayout;
+	private LinearLayout feedbackContainer;
     private CollapsibleFeedbackView feedbackView;
 
     @Override
@@ -62,6 +62,7 @@ public class EventActivity extends NavigationActivity {
 
         mainLayout = findViewById(R.id.event_main_layout);
         imagesLayout = (LinearLayout) findViewById(R.id.images_layout);
+	    feedbackContainer = (LinearLayout) findViewById(R.id.event_feedback_container);
         feedbackView = (CollapsibleFeedbackView) findViewById(R.id.event_feedback_view);
         final View detailBoxes = findViewById(R.id.event_detail_boxes);
         final View backgroundView = imagesLayout;
@@ -70,6 +71,8 @@ public class EventActivity extends NavigationActivity {
         String eventId = getIntent().getStringExtra(EXTRA_EVENT_ID);
         conventionEvent = Convention.getInstance().findEventById(eventId);
 	    setToolbarTitle(conventionEvent.getType().getDescription());
+
+	    final boolean shouldFocusOnFeedback = getIntent().getBooleanExtra(EXTRA_FOCUS_ON_FEEDBACK, false);
 
 	    // Do the rest after the layout loads
 	    new AsyncTask<Void, Void, Void>() {
@@ -93,11 +96,28 @@ public class EventActivity extends NavigationActivity {
 		        // If the feedback view already had saved state, restore it
 		        if (savedInstanceState != null && savedInstanceState.containsKey(STATE_FEEDBACK_OPEN)) {
 		            if (savedInstanceState.getBoolean(STATE_FEEDBACK_OPEN)) {
-							    feedbackView.setState(CollapsibleFeedbackView.State.Expended, false);
+					    feedbackView.setState(CollapsibleFeedbackView.State.Expended, false);
 		            } else {
-							    feedbackView.setState(CollapsibleFeedbackView.State.Collapsed, false);
+					    feedbackView.setState(CollapsibleFeedbackView.State.Collapsed, false);
 		            }
 		        }
+
+			    if (shouldFocusOnFeedback) {
+				    scrollView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+					    public void onGlobalLayout() {
+						    // Unregister the listener to only call smoothScrollTo once
+						    scrollView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+						    scrollView.post(new Runnable() {
+							    @Override
+							    public void run() {
+								    Point coordinates = findCoordinates(scrollView, feedbackView);
+								    scrollView.smoothScrollTo(coordinates.x, coordinates.y);
+							    }
+						    });
+					    }
+				    });
+
+			    }
 
 		        mainLayout.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
 		            @Override
@@ -243,71 +263,11 @@ public class EventActivity extends NavigationActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-	    if (feedbackView.getVisibility() == View.VISIBLE) {
-        outState.putBoolean(STATE_FEEDBACK_OPEN, feedbackView.getState() == CollapsibleFeedbackView.State.Expended);
+	    if (feedbackContainer.getVisibility() == View.VISIBLE) {
+            outState.putBoolean(STATE_FEEDBACK_OPEN, feedbackView.getState() == CollapsibleFeedbackView.State.Expended);
 	    }
 
         super.onSaveInstanceState(outState);
-    }
-
-    public void onSendFeedbackClicked(View view) {
-
-        feedbackView.setProgressBarVisibility(true);
-
-        new AsyncTask<Void, Void, String>() {
-
-            @Override
-            protected String doInBackground(Void... params) {
-                // First save the user input before sending it
-                saveUserInput();
-
-                Properties properties = new Properties();
-                try {
-                    properties.load(getResources().openRawResource(R.raw.mail));
-                } catch (IOException e) {
-                    return e.getMessage();
-                }
-
-                String mail = properties.getProperty("mail");
-                String password = properties.getProperty("password");
-                if (mail == null || password == null) {
-                    return "Failed to get the mail or password values from the mail.properties file.";
-                }
-
-                GMailSender sender = new GMailSender(mail, password);
-                try {
-                    sender.sendMail(
-                            getString(R.string.feedback_mail_title) + ": " + conventionEvent.getTitle(),
-                            formatFeedbackMailBody(),
-                            mail,
-                            Convention.getInstance().getFeedbackRecipient());
-                } catch (Exception e) {
-                    return e.getMessage();
-                }
-
-	            Feedback feedback = conventionEvent.getUserInput().getFeedback();
-	            feedback.setIsSent(true);
-	            feedback.removeUnansweredQuestions();
-                saveUserInput();
-
-                // In case everything finished successfully, pass null to onPostExecute.
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(String errorMessage) {
-                feedbackView.setProgressBarVisibility(false);
-
-                if (errorMessage != null) {
-                    Log.w(TAG, "Failed to send feedback mail. Reason: " + errorMessage);
-                    Toast.makeText(EventActivity.this, R.string.feedback_send_mail_failed, Toast.LENGTH_LONG).show();
-                } else {
-                    // Re-setup the feedback UI so interactions will now be disabled in it, and the "feedback sent" indicator become visible.
-                    setupFeedback(conventionEvent, true);
-                }
-            }
-
-        }.execute();
     }
 
     private void hideNavigateToMapButtonIfNoLocationExists(Menu menu) {
@@ -324,27 +284,9 @@ public class EventActivity extends NavigationActivity {
 		        conventionEvent.getTitle(),
 		        Dates.formatHoursAndMinutes(conventionEvent.getStartTime()),
 		        conventionEvent.getHall().getName(),
-		        formatFeedbackQuestions(),
+		        feedbackView.getFormattedQuestions(),
 		        getDeviceId()
         );
-    }
-
-    private String formatFeedbackQuestions() {
-        StringBuilder stringBuilder = new StringBuilder();
-        Feedback feedback = conventionEvent.getUserInput().getFeedback();
-        for (FeedbackQuestion question : feedback.getQuestions()) {
-            if (question.hasAnswer()) {
-                stringBuilder.append(String.format(Dates.getLocale(), "%s %s\n",
-                        question.getQuestionText(getResources(), feedback.isSent()),
-                        question.getAnswer()));
-            }
-        }
-
-        return stringBuilder.toString();
-    }
-
-    private String getDeviceId() {
-        return Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
     }
 
     private void setEvent(ConventionEvent event) {
@@ -382,7 +324,7 @@ public class EventActivity extends NavigationActivity {
 
 	private void setupFeedback(ConventionEvent event, boolean animate) {
 		if (event.canFillFeedback()) {
-			feedbackView.setVisibility(View.VISIBLE);
+			feedbackContainer.setVisibility(View.VISIBLE);
 	        feedbackView.setModel(event.getUserInput().getFeedback());
 
 			if (shouldFeedbackBeClosed()) {
@@ -391,8 +333,36 @@ public class EventActivity extends NavigationActivity {
 				feedbackView.setState(CollapsibleFeedbackView.State.Expended, animate);
 			}
 
+			feedbackView.setSendFeedbackClickListener(feedbackView.new SendMailOnClickListener() {
+				@Override
+				protected void saveFeedback() {
+					saveUserInput();
+				}
+
+				@Override
+				protected String getMailSubject() {
+					return getString(R.string.event_feedback_mail_title) + ": " + conventionEvent.getTitle();
+				}
+
+				@Override
+				protected String getMailBody() {
+					return formatFeedbackMailBody();
+				}
+
+				@Override
+				protected void onFailure(String errorMessage) {
+					Log.w(TAG, "Failed to send feedback mail. Reason: " + errorMessage);
+					Toast.makeText(EventActivity.this, R.string.feedback_send_mail_failed, Toast.LENGTH_LONG).show();
+				}
+
+				@Override
+				protected void onSuccess() {
+					super.onSuccess();
+					feedbackView.setState(CollapsibleFeedbackView.State.Collapsed, true);
+				}
+			});
 		} else {
-			feedbackView.setVisibility(View.GONE);
+			feedbackContainer.setVisibility(View.GONE);
 		}
 	}
 
@@ -448,4 +418,22 @@ public class EventActivity extends NavigationActivity {
     public void closeFeedback(View view) {
         feedbackView.setState(CollapsibleFeedbackView.State.Collapsed);
     }
+
+	private Point findCoordinates(ViewGroup parentView, View childView) {
+		// getX() and getY() (and also getTop(), getBottom() etc) return the
+		// coordinates of the view inside its parent. If a view is not directly inside
+		// the scroll view, we need to accumulate the corrdinates of all the parents.
+		Point coordinates = new Point();
+		while (childView != parentView) {
+			coordinates.x += childView.getX();
+			coordinates.y += childView.getY();
+			if (!(childView.getParent() instanceof View)) {
+				// Not inside parent view
+				break;
+			}
+
+			childView = (View) childView.getParent();
+		}
+		return coordinates;
+	}
 }

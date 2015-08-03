@@ -23,7 +23,7 @@ public class Dates {
     private static Date getInitialDate() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm", Dates.getLocale());
         try {
-            return dateFormat.parse("20.08.2015 09:14");
+            return dateFormat.parse("20.08.2015 16:14");
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }

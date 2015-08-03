@@ -19,4 +19,11 @@
         android:orderInCategory="2"
         app:showAsAction="always"/>
 
+    <item
+        android:id="@+id/programme_navigate_to_feedback"
+        android:title="@string/feedback"
+        android:icon="@drawable/feedback_menu_icon"
+        android:orderInCategory="1"
+        app:showAsAction="ifRoom"/>
+
 </menu>

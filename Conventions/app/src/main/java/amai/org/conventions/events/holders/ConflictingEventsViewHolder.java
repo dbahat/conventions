@@ -38,6 +38,7 @@ public class ConflictingEventsViewHolder extends RecyclerView.ViewHolder {
     public void setModel(final ArrayList<ConventionEvent> events) {
 	    if (adapter != null && eventRemovedListener != null) {
 		    adapter.unregisterAdapterDataObserver(eventRemovedListener);
+		    eventRemovedListener = null;
 	    }
         adapter = new DismissibleEventsViewAdapter(events, true);
         eventsListView.setAdapter(adapter);
@@ -72,6 +73,7 @@ public class ConflictingEventsViewHolder extends RecyclerView.ViewHolder {
 	public void setEventRemovedListener(final Runnable action) {
 		if (eventRemovedListener != null) {
 			adapter.unregisterAdapterDataObserver(eventRemovedListener);
+			eventRemovedListener = null;
 		}
 
 		this.eventRemovedListener = new RecyclerView.AdapterDataObserver() {

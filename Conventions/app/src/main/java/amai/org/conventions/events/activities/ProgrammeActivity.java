@@ -33,6 +33,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import amai.org.conventions.FeedbackActivity;
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.ProgrammeConventionEvent;
@@ -178,6 +179,10 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
 		    MenuItem item = menu.findItem(R.id.programme_navigate_to_my_events);
 		    changeIconColor(item);
 	    }
+
+	    if (!Convention.getInstance().canFillFeedback()) {
+		    menu.removeItem(R.id.programme_navigate_to_feedback);
+	    }
         return true;
     }
 
@@ -201,9 +206,12 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
 	            item.getIcon().clearColorFilter();
 	            navigateToActivity(MyEventsActivity.class);
                 return true;
+	        case R.id.programme_navigate_to_feedback:
+		        navigateToActivity(FeedbackActivity.class);
+				return true;
 			case R.id.programme_navigate_to_search:
 				navigateToActivity(ProgrammeSearchActivity.class, false, null);
-				return true;
+		        return true;
         }
 
         return super.onOptionsItemSelected(item);

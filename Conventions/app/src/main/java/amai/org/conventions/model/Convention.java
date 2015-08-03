@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import amai.org.conventions.R;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
+import amai.org.conventions.utils.Dates;
 
 public class Convention implements Serializable {
 
@@ -21,6 +23,7 @@ public class Convention implements Serializable {
     private List<ConventionEvent> events;
     private List<Update> updates;
 	private Map<String, ConventionEvent.UserInput> userInput;
+	private Feedback feedback;
     private String feedbackRecipient;
 
     private ConventionMap map;
@@ -40,6 +43,12 @@ public class Convention implements Serializable {
     public Convention() {
         this.conventionStorage = new ConventionStorage();
 	    this.userInput = new LinkedHashMap<>();
+	    feedback = new Feedback().withQuestions(
+			    new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_AGE, FeedbackQuestion.AnswerType.AGE),
+			    new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_LIKED, FeedbackQuestion.AnswerType.TEXT),
+			    new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_DISLIKED, FeedbackQuestion.AnswerType.TEXT),
+			    new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_ADDITIONAL_INFO, FeedbackQuestion.AnswerType.TEXT)
+	    );
 
         this.date = Calendar.getInstance();
 	    this.date.clear();
@@ -152,17 +161,17 @@ public class Convention implements Serializable {
 						                        .withX(65)
 						                        .withY(37),
 				                        new MapLocation()
-						                        .withPlace(new Place().withName("תיקון קוספליי"))
-						                        .withMarkerResource(R.raw.cosplay_fixes_marker)
-						                        .withSelectedMarkerResource(R.raw.cosplay_fixes_marker_selected)
-						                        .withX(59)
-						                        .withY(24),
-				                        new MapLocation()
 						                        .withPlace(new Place().withName("פינת צילום"))
 						                        .withMarkerResource(R.raw.photoshoot_corner_marker)
 						                        .withSelectedMarkerResource(R.raw.photoshoot_corner_marker_selected)
-						                        .withX(52)
-						                        .withY(18),
+						                        .withX(55)
+						                        .withY(35),
+				                        new MapLocation()
+						                        .withPlace(new Place().withName("תיקון קוספליי"))
+						                        .withMarkerResource(R.raw.cosplay_fixes_marker)
+						                        .withSelectedMarkerResource(R.raw.cosplay_fixes_marker_selected)
+						                        .withX(58)
+						                        .withY(22),
 				                        new MapLocation()
 						                        .withPlace(new Place().withName("שירותים"))
 						                        .withMarkerResource(R.raw.toilet_marker)
@@ -191,7 +200,11 @@ public class Convention implements Serializable {
         return date;
     }
 
-    public void setEvents(List<ConventionEvent> events) {
+	public Feedback getFeedback() {
+		return feedback;
+	}
+
+	public void setEvents(List<ConventionEvent> events) {
         eventLockObject.writeLock().lock();
         try {
             this.events = events;
@@ -296,6 +309,39 @@ public class Convention implements Serializable {
     public String getFeedbackRecipient() {
         return feedbackRecipient;
     }
+
+	public boolean canFillFeedback() {
+		// Check if the convention started at least 2 hours ago
+		Calendar minimumTimeOfFillingFeedback = Calendar.getInstance();
+		minimumTimeOfFillingFeedback.setTime(getFirstEventStartTime());
+		minimumTimeOfFillingFeedback.add(Calendar.MINUTE, 120);
+
+		return minimumTimeOfFillingFeedback.getTime().before(Dates.now());
+	}
+
+	private Date getFirstEventStartTime() {
+		Date minTime = null;
+		for (ConventionEvent event : getEvents()) {
+			if (minTime == null || minTime.after(event.getStartTime())) {
+				minTime = event.getStartTime();
+			}
+		}
+		return minTime;
+	}
+
+	public boolean hasEnded() {
+		return Dates.now().after(getLastEventEndTime());
+	}
+
+	private Date getLastEventEndTime() {
+		Date maxTime = null;
+		for (ConventionEvent event : getEvents()) {
+			if (maxTime == null || maxTime.before(event.getEndTime())) {
+				maxTime = event.getEndTime();
+			}
+		}
+		return maxTime;
+	}
 
     private List<MapLocation> inFloor(Floor floor, MapLocation... locations) {
         for (MapLocation location : locations) {

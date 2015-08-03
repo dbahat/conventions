@@ -67,11 +67,21 @@
                     android:text="hall and time" />
             </LinearLayout>
 
+
+        <LinearLayout
+            android:id="@+id/event_feedback_container"
+            style="@style/EventDetailsBox.Feedback"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
             <amai.org.conventions.events.CollapsibleFeedbackView
                 android:id="@+id/event_feedback_view"
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
+        </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/event_description_box"

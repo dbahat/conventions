@@ -8,6 +8,7 @@ import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -28,15 +29,20 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.AspectRatioImageView;
+import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.Feedback;
 import amai.org.conventions.model.FeedbackQuestion;
+import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.GMailSender;
 
 public class CollapsibleFeedbackView extends FrameLayout {
 
@@ -101,6 +107,10 @@ public class CollapsibleFeedbackView extends FrameLayout {
         }
     }
 
+	public void refresh() {
+		setModel(feedback);
+	}
+
     public void setModel(Feedback feedback) {
         this.feedback = feedback;
 
@@ -115,6 +125,10 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		LinearLayout questionsLayout = (LinearLayout) findViewById(R.id.questions_layout);
 	    buildQuestionsLayout(questionsLayout, feedback);
     }
+
+	public void setSendFeedbackClickListener(OnClickListener listener) {
+		sendFeedbackButton.setOnClickListener(listener);
+	}
 
 	private void buildQuestionsLayout(LinearLayout questionsLayout, Feedback feedback) {
 		questionsLayout.removeAllViews();
@@ -136,7 +150,13 @@ public class CollapsibleFeedbackView extends FrameLayout {
                 feedbackExpended.setVisibility(GONE);
                 feedbackCollapsed.setVisibility(VISIBLE);
                 break;
+	        case ExpandedHeadless:
+		        findViewById(R.id.feedback_expanded_title).setVisibility(GONE);
+		        feedbackExpended.setVisibility(VISIBLE);
+		        feedbackCollapsed.setVisibility(GONE);
+		        break;
             case Expended:
+	            findViewById(R.id.feedback_expanded_title).setVisibility(VISIBLE);
                 feedbackExpended.setVisibility(VISIBLE);
                 feedbackCollapsed.setVisibility(GONE);
         }
@@ -317,55 +337,14 @@ public class CollapsibleFeedbackView extends FrameLayout {
                 break;
             }
             case YES_NO: {
-                LinearLayout buttonsLayout = new LinearLayout(getContext());
-                buttonsLayout.setOrientation(LinearLayout.HORIZONTAL);
-
-                final TextView yesButton = new TextView(getContext());
-                yesButton.setTextAppearance(getContext(), R.style.EventFeedbackButton);
-                yesButton.setText(R.string.yes);
-                int padding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics());
-                yesButton.setPaddingRelative(0, padding, padding * 4, padding);
-                buttonsLayout.addView(yesButton);
-
-                final TextView noButton = new TextView(getContext());
-                noButton.setTextAppearance(getContext(), R.style.EventFeedbackButton);
-                noButton.setText(R.string.no);
-                noButton.setPaddingRelative(padding * 4, padding, padding * 4, padding);
-                buttonsLayout.addView(noButton);
-
-                View.OnClickListener listener = new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        sendFeedbackButton.setEnabled(true);
-                        TextView selected = (TextView) v;
-                        selected.setTextAppearance(getContext(), R.style.EventAnswerButtonHighlighted);
-
-                        TextView otherButton = (selected == yesButton ? noButton : yesButton);
-                        otherButton.setTextAppearance(getContext(), R.style.EventFeedbackButton);
-                        question.setAnswer(selected.getText().toString());
-                        feedbackChanged |= question.isAnswerChanged();
-                    }
-                };
-
-                if (!isSent) {
-                    yesButton.setOnClickListener(listener);
-                    noButton.setOnClickListener(listener);
-                } else {
-                    yesButton.setOnClickListener(null);
-                    noButton.setOnClickListener(null);
-                }
-
-                if (answer != null) {
-                    if (answer.equals(yesButton.getText().toString())) {
-                        listener.onClick(yesButton);
-                    } else if (answer.equals(noButton.getText().toString())) {
-                        listener.onClick(noButton);
-                    }
-                }
-
-                answerView = buttonsLayout;
+	            answerView = buildMultiAnswerQuestion(question, isSent, R.string.yes, R.string.no);
                 break;
             }
+	        case AGE: {
+		        answerView = buildMultiAnswerQuestion(question, isSent,
+				        R.string.age_less_than_12, R.string.age_12_to_18, R.string.age_more_than_18);
+		        break;
+	        }
         }
 
         questionLayout.setOrientation(layoutOrientation);
@@ -375,7 +354,63 @@ public class CollapsibleFeedbackView extends FrameLayout {
         return questionLayout;
     }
 
-    private int calculateExpendedFeedbackHeight() {
+	private LinearLayout buildMultiAnswerQuestion(final FeedbackQuestion question, boolean isSent, int... possibleAnswers) {
+		Object answer = question.getAnswer();
+		LinearLayout buttonsLayout = new LinearLayout(getContext());
+		buttonsLayout.setOrientation(LinearLayout.HORIZONTAL);
+
+		final List<TextView> answerViews = new ArrayList<>(possibleAnswers.length);
+
+		OnClickListener listener = new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				sendFeedbackButton.setEnabled(true);
+				TextView selected = (TextView) v;
+				selected.setTextAppearance(getContext(), R.style.EventAnswerButtonHighlighted);
+
+				for (TextView answerView : answerViews) {
+					if (selected != answerView) {
+						answerView.setTextAppearance(getContext(), R.style.EventFeedbackButton);
+					}
+				}
+
+				question.setAnswer(selected.getText().toString());
+				feedbackChanged |= question.isAnswerChanged();
+			}
+		};
+
+		int padding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics());
+		boolean first = true;
+		for (int answerStringId : possibleAnswers) {
+			final TextView answerButton = new TextView(getContext());
+			answerViews.add(answerButton);
+			answerButton.setTextAppearance(getContext(), R.style.EventFeedbackButton);
+			answerButton.setText(answerStringId);
+			int startPadding = padding * 4;
+			if (first) {
+				startPadding = 0;
+				first = false;
+			}
+			answerButton.setPaddingRelative(startPadding, padding, padding * 4, padding);
+			buttonsLayout.addView(answerButton);
+			if (!isSent) {
+				answerButton.setOnClickListener(listener);
+			} else {
+				answerButton.setOnClickListener(null);
+			}
+		}
+
+		if (answer != null) {
+			for (TextView answerView : answerViews) {
+				if (answer.equals(answerView.getText().toString())) {
+					listener.onClick(answerView);
+				}
+			}
+		}
+		return buttonsLayout;
+	}
+
+	private int calculateExpendedFeedbackHeight() {
         ViewGroup expendedFeedbackLayout = (ViewGroup) LayoutInflater.from(this.getContext()).inflate(R.layout.feedback_layout_expanded, null);
 
         // Add all the questions to the view
@@ -418,6 +453,8 @@ public class CollapsibleFeedbackView extends FrameLayout {
                 layoutBeforeResize = feedbackExpended;
                 layoutAfterResize = feedbackCollapsed;
                 break;
+	        case ExpandedHeadless:
+		        throw new RuntimeException("ExpendadHeadless state is not supported for animation");
         }
 
         ValueAnimator animation = slideAnimator(currentHeight, targetHeight, feedbackContainer);
@@ -485,6 +522,95 @@ public class CollapsibleFeedbackView extends FrameLayout {
 
     public enum State {
         Collapsed,
-        Expended
+        Expended,
+	    ExpandedHeadless
     }
+
+	public String getFormattedQuestions() {
+		StringBuilder stringBuilder = new StringBuilder();
+		for (FeedbackQuestion question : feedback.getQuestions()) {
+			if (question.hasAnswer()) {
+				stringBuilder.append(String.format(Dates.getLocale(), "%s %s\n",
+						question.getQuestionText(getResources(), feedback.isSent()),
+						question.getAnswer()));
+			}
+		}
+
+		return stringBuilder.toString();
+	}
+
+	public abstract class SendMailOnClickListener implements OnClickListener {
+		protected abstract void saveFeedback();
+
+		protected abstract String getMailSubject();
+		protected abstract String getMailBody();
+		protected String getMailRecipient() {
+			return Convention.getInstance().getFeedbackRecipient();
+		}
+
+		protected void onSuccess() {
+			// Refresh the feedback UI so interactions will now be disabled in it
+			refresh();
+		}
+		protected void onFailure(String errorMessage) {
+		}
+
+		@Override
+		public void onClick(View v) {
+			setProgressBarVisibility(true);
+
+			new AsyncTask<Void, Void, String>() {
+
+				@Override
+				protected String doInBackground(Void... params) {
+					// First save the feedback before sending it
+					saveFeedback();
+
+					Properties properties = new Properties();
+					try {
+						properties.load(getResources().openRawResource(R.raw.mail));
+					} catch (IOException e) {
+						return e.getMessage();
+					}
+
+					String mail = properties.getProperty("mail");
+					String password = properties.getProperty("password");
+					if (mail == null || password == null) {
+						return "Failed to get the mail or password values from the mail.properties file.";
+					}
+
+					GMailSender sender = new GMailSender(mail, password);
+					try {
+						sender.sendMail(
+								getMailSubject(),
+								getMailBody(),
+								mail,
+								getMailRecipient());
+					} catch (Exception e) {
+						return e.getMessage();
+					}
+
+					feedback.setIsSent(true);
+					feedback.removeUnansweredQuestions();
+					saveFeedback();
+
+					// In case everything finished successfully, pass null to onPostExecute.
+					return null;
+				}
+
+				@Override
+				protected void onPostExecute(String errorMessage) {
+					setProgressBarVisibility(false);
+
+					if (errorMessage != null) {
+						onFailure(errorMessage);
+					} else {
+						onSuccess();
+					}
+				}
+
+			}.execute();
+
+		}
+	}
 }
