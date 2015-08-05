@@ -131,7 +131,7 @@ public class FeedbackActivity extends NavigationActivity {
 
 			@Override
 			protected String getMailBody() {
-				return String.format(Dates.getLocale(), "%s\n\n\nDeviceId: %s",
+				return String.format(Dates.getLocale(), "%s\n\t\n\t\n\t\nDeviceId:\n%s",
 						feedbackView.getFormattedQuestions(),
 						getDeviceId()
 				);

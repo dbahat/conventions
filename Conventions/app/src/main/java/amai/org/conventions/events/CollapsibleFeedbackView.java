@@ -155,7 +155,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		        feedbackExpended.setVisibility(VISIBLE);
 		        feedbackCollapsed.setVisibility(GONE);
 		        break;
-            case Expended:
+            case Expanded:
 	            findViewById(R.id.feedback_expanded_title).setVisibility(VISIBLE);
                 feedbackExpended.setVisibility(VISIBLE);
                 feedbackCollapsed.setVisibility(GONE);
@@ -443,7 +443,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
         // The calculation is done by re-inflating the layout (which is not very efficient), since only one of the collapsed/expended layouts is visible
         // at any given time, and the other is in GONE state so the rest of the views will be positioned properly.
         switch (state) {
-            case Expended:
+            case Expanded:
                 targetHeight = calculateExpendedFeedbackHeight();
                 layoutBeforeResize = feedbackCollapsed;
                 layoutAfterResize = feedbackExpended;
@@ -522,7 +522,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 
     public enum State {
         Collapsed,
-        Expended,
+	    Expanded,
 	    ExpandedHeadless
     }
 
@@ -530,7 +530,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		StringBuilder stringBuilder = new StringBuilder();
 		for (FeedbackQuestion question : feedback.getQuestions()) {
 			if (question.hasAnswer()) {
-				stringBuilder.append(String.format(Dates.getLocale(), "%s %s\n",
+				stringBuilder.append(String.format(Dates.getLocale(), "%s\n%s\n\t\n\t\n",
 						question.getQuestionText(getResources(), feedback.isSent()),
 						question.getAnswer()));
 			}

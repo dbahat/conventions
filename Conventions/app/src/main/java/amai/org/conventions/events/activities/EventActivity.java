@@ -93,16 +93,20 @@ public class EventActivity extends NavigationActivity {
 		    protected void onPostExecute(Void v) {
 		        setEvent(conventionEvent);
 
+
 		        // If the feedback view already had saved state, restore it
 		        if (savedInstanceState != null && savedInstanceState.containsKey(STATE_FEEDBACK_OPEN)) {
 		            if (savedInstanceState.getBoolean(STATE_FEEDBACK_OPEN)) {
-					    feedbackView.setState(CollapsibleFeedbackView.State.Expended, false);
+					    feedbackView.setState(CollapsibleFeedbackView.State.Expanded, false);
 		            } else {
 					    feedbackView.setState(CollapsibleFeedbackView.State.Collapsed, false);
 		            }
-		        }
+		        } else if (shouldFocusOnFeedback) {
+				    // If we want to focus on the feedback view, it has to be expanded
+				    if (feedbackView.getState() == CollapsibleFeedbackView.State.Collapsed) {
+					    feedbackView.setState(CollapsibleFeedbackView.State.Expanded, false);
+				    }
 
-			    if (shouldFocusOnFeedback) {
 				    scrollView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 					    public void onGlobalLayout() {
 						    // Unregister the listener to only call smoothScrollTo once
@@ -116,8 +120,8 @@ public class EventActivity extends NavigationActivity {
 						    });
 					    }
 				    });
+		        }
 
-			    }
 
 		        mainLayout.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
 		            @Override
@@ -264,7 +268,7 @@ public class EventActivity extends NavigationActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
 	    if (feedbackContainer.getVisibility() == View.VISIBLE) {
-            outState.putBoolean(STATE_FEEDBACK_OPEN, feedbackView.getState() == CollapsibleFeedbackView.State.Expended);
+            outState.putBoolean(STATE_FEEDBACK_OPEN, feedbackView.getState() == CollapsibleFeedbackView.State.Expanded);
 	    }
 
         super.onSaveInstanceState(outState);
@@ -280,7 +284,7 @@ public class EventActivity extends NavigationActivity {
     }
 
     private String formatFeedbackMailBody() {
-        return String.format(Dates.getLocale(), "%s\n%s, %s\n\n%s\n\n\nDeviceId: %s",
+        return String.format(Dates.getLocale(), "%s\n%s, %s\n\n%s\n\t\n\t\n\t\nDeviceId:\n%s",
 		        conventionEvent.getTitle(),
 		        Dates.formatHoursAndMinutes(conventionEvent.getStartTime()),
 		        conventionEvent.getHall().getName(),
@@ -330,7 +334,7 @@ public class EventActivity extends NavigationActivity {
 			if (shouldFeedbackBeClosed()) {
 				feedbackView.setState(CollapsibleFeedbackView.State.Collapsed, animate);
 			} else {
-				feedbackView.setState(CollapsibleFeedbackView.State.Expended, animate);
+				feedbackView.setState(CollapsibleFeedbackView.State.Expanded, animate);
 			}
 
 			feedbackView.setSendFeedbackClickListener(feedbackView.new SendMailOnClickListener() {
@@ -412,7 +416,7 @@ public class EventActivity extends NavigationActivity {
     }
 
     public void openFeedback(View view) {
-        feedbackView.setState(CollapsibleFeedbackView.State.Expended);
+        feedbackView.setState(CollapsibleFeedbackView.State.Expanded);
     }
 
     public void closeFeedback(View view) {
