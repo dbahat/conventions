@@ -52,7 +52,10 @@ public class ConventionEvent implements Serializable {
 		int color = NO_COLOR;
 		if (serverColor != null) {
 			try {
-				color = Color.parseColor("#" + serverColor);
+				if (!serverColor.startsWith("#")) {
+					serverColor = "#" + serverColor;
+				}
+				color = Color.parseColor(serverColor);
 			} catch (IllegalArgumentException e) {
 				Log.e(TAG, "Color from server cannot be parsed: " + serverColor);
 			}

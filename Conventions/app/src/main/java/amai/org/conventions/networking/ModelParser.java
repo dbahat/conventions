@@ -46,6 +46,11 @@ public class ModelParser {
             for (JsonElement internalEvent : eventObj.get("timetable-info").getAsJsonArray()) {
                 JsonObject internalEventObj = internalEvent.getAsJsonObject();
 
+	            // Ignore hidden events
+	            if ("hidden".equals(internalEventObj.get("tooltip").getAsString())) {
+		            continue;
+	            }
+
                 Date startTime = Dates.parseHourAndMinute(internalEventObj.get("start").getAsString());
                 Date endTime = Dates.parseHourAndMinute(internalEventObj.get("end").getAsString());
                 String hallName = internalEventObj.get("room").getAsString();
@@ -74,12 +79,14 @@ public class ModelParser {
 
                 // Some events (like the guest of honor event and the games event) have special pages and are not retrieved from the API
                 // exposed by the server. For these spacial cases, add special handing of placing hardcoded texts/images.
-                if (conventionEvent.getType() == EventType.GuestOfHonor && conventionEvent.getDescription().length() == 0) {
-                    conventionEvent = handleGuestOfHonorEvent(conventionEvent);
-                }
-                if (conventionEvent.getType() == EventType.Games && conventionEvent.getDescription().length() == 0) {
-                    conventionEvent = handleGamesEvent(conventionEvent);
-                }
+	            if (conventionEvent.getDescription().length() == 0) {
+	                if (conventionEvent.getType() == EventType.GuestOfHonor) {
+	                    conventionEvent = handleGuestOfHonorEvent(conventionEvent);
+	                }
+	                if (conventionEvent.getType() == EventType.Games) {
+	                    conventionEvent = handleGamesEvent(conventionEvent);
+	                }
+	            }
 
                 // In case some events came up without any images at all, add a generic image to them.
                 if (conventionEvent.getImages().size() == 0) {
@@ -162,7 +169,7 @@ public class ModelParser {
     }
 
     private final List<Integer> guestOfHonorImageResourceIds = Arrays.asList( R.drawable.event_reika1,  R.drawable.event_reika2,  R.drawable.event_reika3);
-    private final String guestOfHonorDescription = "<p>השנה, אנחנו שמחים לארח אורחת מיוחדת – רייקה, קוספליירית ידועה שמגיעה אלינו מאוסאקה שביפן.</p>\n" +
+    private static final String guestOfHonorDescription = "<p>השנה, אנחנו שמחים לארח אורחת מיוחדת – רייקה, קוספליירית ידועה שמגיעה אלינו מאוסאקה שביפן.</p>\n" +
             "<p>רייקה היא קוספליירית יפנית מוכרת, ויש לה כ300 אלף עוקבים <a href=\"https://www.facebook.com/profile.php?id=315573555144954&amp;fref=ts\" target=\"_blank\">בעמוד הפייסבוק שלה</a>.</p>\n" +
             "<p>היא ידועה בעיקר בזכות הקרוספליי (קוספליי שעושה אדם ממין אחד לדמות מהמין השני) שלה, התחפושות המפורטות ומלאות הפרטים ועבודת האיפור המדוייקת.</p>\n" +
             "<p>רייקה התחילה להכין קוספליי לראשונה לפני כ18 שנים, ומאז היא לא מפסיקה – ומוזמנת לאינספור כנסים ואירועים מסביב לעולם, ולראשונה גם אלינו לישראל.</p>\n" +
@@ -175,7 +182,7 @@ public class ModelParser {
     }
 
     private final List<Integer> gamesImageResources = Arrays.asList( R.drawable.event_pokemon );
-    private final String gamesEventDescription = "<p><b>טורניר TCG – משחק הקלפים של פוקימון</b></p>\n" +
+    private static final String gamesEventDescription = "<p><b>טורניר TCG – משחק הקלפים של פוקימון</b></p>\n" +
             "<p>משחק הקלפים של פוקימון הוא משחק שולחני הידוע בשם TCG. הוא משלב בתוכו אספנות, החלפה ומשחק בקלפים בנושא פוקימון. יש למשחק הזה חוקים משלו, ואלה מבוססים על משחק הוידאו של פוקימון. המשחק הוא מרתק, מהנה ומלא אסטרטגיה. בעת משחק, כל שחקן אוחז ב-60 קלפים, המורכבים מקלפי פוקימון, קלפי מאמן וקלפי אנרגיה, ובאמצעותם עליו לנצח את היריב. דרך הנצחון נקבעת לפי אחת משלושת הדרכים הבאות:</p>\n" +
             "<ol>\n" +
             "<li>כאשר שחקן הצליח לאסוף את כל קלפי הפרס שלו.</li>\n" +
