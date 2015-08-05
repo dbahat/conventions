@@ -86,6 +86,16 @@ public class ModelParser {
 	                if (conventionEvent.getType() == EventType.Games) {
 	                    conventionEvent = handleGamesEvent(conventionEvent);
 	                }
+		            if (conventionEvent.getType() == EventType.Screening) {
+			            // There's no other way to tell the difference between these events :(
+			            if (conventionEvent.getServerId() == 1825) {
+				            // Pandora
+				            conventionEvent = handlePandoraEvent(conventionEvent);
+			            } else if (conventionEvent.getServerId() == 1824) {
+				            // Colorido movies
+				            conventionEvent = handleStudioColoridMoviesEvent(conventionEvent);
+			            }
+		            }
 	            }
 
                 // In case some events came up without any images at all, add a generic image to them.
@@ -208,4 +218,60 @@ public class ModelParser {
                 .withDescription(gamesEventDescription)
                 .withImages(gamesImageResources);
     }
+
+	private final List<Integer> coloridoMoviesImageResources = Arrays.asList(R.drawable.event_colorido_typhoon, R.drawable.event_colorido_sun);
+	private final static String coloridoMoviesEventDescription = "<p><span style=\"color: #ffffff;\">סטודיו קולורידו הוא סטודיו קטן אשר ידוע בפירסומות האנימציה והסרטים הקצרים העליזים והצבעוניים אותו הפיק. ברצוננו להודות לסטודיו קולורידו (Studio Colorido) על אישור הקרנת שניים מסרטיו לקהל המבקרים של כאמ&quot;י 2015.</span></p>\n" +
+			"<h3>טייפון נורודה &#8211; Taifuu no Noruda</h3>\n" +
+			"<p><strong>שנה:</strong> 2015 <strong>אורך:</strong> 27 דקות <strong>במאי:</strong> יוג'ירו אראי <strong>אנימציה:</strong> סטודיו Colorido.</p>\n" +
+			"<p>עלילת הסרט מתרחשת על אי מבודד כל שהוא, בחטיבת ביניים מסויימת, בערב לפני פסטיבל התרבות. נער פורש ממשחק הבייסבול אחרי ששיחק כל חייו ורב עם חברו הטוב ביותר כאשר לפתע הם פוגשים בבחורה מסתורית ואדומת עיניים בשם נורודה, וטייפון עוצמתי פוגע בחטיבת הביניים שלהם.</p>\n" +
+			"<p><strong>אודות הבמאי:</strong><br />\n" +
+			"ליוג'ירו אראי (Yojiro Arai), זוהי עבודתו הראשונה כבמאי. עד כה שימש כאנימטור בסטודיו ג'יבלי וכבמאי אנימציה בסטודיו קולורידו (בין עבודותיו בסטודיו גם הסרט &quot;ילד השמש וילדת הטל&quot;).</p>" +
+			"<h3>ילד השמש וילדת הטל &#8211; Sunny Boy &amp; Dewdrop Girl</h3>\n" +
+			"<p><strong>שנה:</strong> 2013 <strong>אורך:</strong> 18 דקות <strong>במאי:</strong> אישידה הירויאסו <strong>אנימציה:</strong> סטודיו Colorido.</p>\n" +
+			"<p>הינאטה מתאהב בחברתו לספסל הלימודים, שיגארו. אבל בעוד שהינאטה ממש טוב בלצייר, הוא ממש לא טוב בלדבר עם אנשים, אז הוא שומר על רגשותיו כלפיה בציוריו ובדמיונותיו. כשמשפחתה של שיגארו מחליטים לעבור לעיר אחרת, הינאטה מחליט ביום המעבר שלהם שהוא מוכרח להתוודות על רגשותיו כלפיה ויוצא למרדף אחר הרכבת שלוקחת את שיגארו.</p>\n" +
+			"<p><strong>אודות הבמאי:</strong></p>\n" +
+			"<p>אישידה הירויאסו (Ishida Hiroyasu) הינו בוגר אוניבריסטת קיוטו סייקה. הירויאסו מפיק סרטים קצרים בצורה עצמאית ומפרסם אותם באינטרט תחת השם Tete. ב-2009 הסרט שלו &quot;ההתוודאות של פומיקו&quot; (Fumiko no Kokuhaku), שאורכו 2 וחצי דקות, זכה לתשומת לב בינלאומית ברחבי הרשת. עבור סרט זה זכה הירויאסו בפרס הוידאו של היוטיוב היפני. עבודותיו זכו לשבחים בין היתר על ידי הבמאי מאמורו הוסודה (Mamoru Hosuda) והן הוצגו במגזין &quot;Newtype&quot;.</p>\n" +
+			"<p><a href=\"https://www.youtube.com/user/ishidahiroyasu/feed\" target=\"_blank\">לערוץ היוטוב שלו</a>.</p>";
+
+	private ConventionEvent handleStudioColoridMoviesEvent(ConventionEvent event) {
+		return event
+				.withDescription(coloridoMoviesEventDescription)
+				.withImages(coloridoMoviesImageResources);
+	}
+
+	private final List<Integer> pandoraImageResources = Arrays.asList(R.drawable.event_pandora);
+	private final static String pandoraEventDescription = "<p><b>תקציר:</b></p>\n" +
+			"<p>תארו לעצמכם עולם אנושי, קר ואכזרי, שכולו צבוע בשחור ולבן, בו חלים חוקים מחמירים ועונשים כבדים על כל מי שלא עומד בתקנות. יוקי טאנמי היא נערה רגילה בת 16 אשר לומדת בפנימיית ברקת, ועושה כל שביכולתה כדי לעמוד בציפיות ולשרוד במציאות האפרורית והמדכאת אך בסתר חולמת על מקום טוב יותר.</p>\n" +
+			"<p>תארו לעצמכם ממלכה קסומה, צבעונית ומגוונת בה חיים יצורי קסם מופלאים, אשר נשלטת ביד קשה על ידיי מלך רודן. אניה דה לה פנתגרם השנייה היא הנסיכה בעולם זה, וחולמת על היום בו תהפוך למלכת פנדורה.</p>\n" +
+			"<p>כל אחת חיה בעולם אחר אך שתיהן חולקות גורל משותף. שני העולמות מקבילים ומופרדים על ידי שער בצורת תיבה נעולה החוסמת את המעבר בין העולמות. אך מה יקרה כשהתיבה תפתח? אל תפספסו את ההזדמנות לראות את הדמויות מתאהבות, מתאכזבות ונלחמות על חייהן בפנדורה מיוזיקל!</p>" +
+			"<h3>צוות הפקה:</h3>\n" +
+			"<p><strong>במאית ויוצרת</strong> &#8211; נעה ירון.<br />\n" +
+			"<strong>מפיקה ויוצרת</strong> &#8211; שקד שפירא.<br />\n" +
+			"<strong>במאי שותף</strong> &#8211; רן בורשטיין.<br />\n" +
+			"<strong>יועצת אומנותית</strong> &#8211; הירו גרייסון.<br />\n" +
+			"<strong>אחראית קוספליי</strong> &#8211; ים בן דוד.<br />\n" +
+			"<strong>צוות קוספליי</strong> &#8211; שחר אגרנט, עינב לוי, אופיר לוטן, ים בן דוד, דריה ברט, עומר רהב, אריאל באום.   <strong> אחראי מוסיקה</strong> &#8211; אביב ייני אשל.<br />\n" +
+			"<strong>צוות מוסיקה</strong> &#8211; סלע ווינרוב, דניאל מרגלית, שי קדוש.<br />\n" +
+			"<strong>צוות תפאורה</strong> &#8211; ענבר גוטליב, אלון צנג.<br />\n" +
+			"<strong>אחראית אביזרים</strong> &#8211; אודיה ליבוביץ'.<br />\n" +
+			"<strong>צילום הסרט</strong> &#8211; יניב גדי, אורן רוסטרט ויובל ירון.<br />\n" +
+			"<strong>עריכת הסרט</strong> &#8211; נועה ירון.</p>" +
+			"<h3>שחקנים:</h3>\n" +
+			"<p><strong>יוקי</strong> &#8211; שיאל פלד זקס.<br />\n" +
+			"<strong>ליאו </strong>&#8211; עומר אופיר.<br />\n" +
+			"<strong>מקס </strong>&#8211; איתי רייכנטל.<br />\n" +
+			"<strong>טנשי</strong> &#8211; עומר רהב בן יעקב.<br />\n" +
+			"<strong>קארה</strong> &#8211; אריאל באום.<br />\n" +
+			"<strong>האחיות</strong> &#8211; אנאל בר, שקד שפירא, שירה כסלו.<br />\n" +
+			"<strong>קלוד</strong> &#8211; יותם שמיר.<br />\n" +
+			"<strong>אניה</strong> &#8211; אופיר לוטן.<br />\n" +
+			"<strong>נשות כפר</strong> &#8211; אסיא גרינברג, הדר שגיא, נעה ירון.<br />\n" +
+			"<strong>רקדניות</strong> &#8211; נועם אריאלי, ליאור נגר, אילי מלכי, אביה מלכי, תמר גולדליסט, אסיא גרינברג, גילי רן, בוריה ארפורט.</p>";
+
+	private ConventionEvent handlePandoraEvent(ConventionEvent event) {
+		return event
+				.withDescription(pandoraEventDescription)
+				.withImages(pandoraImageResources);
+	}
+
 }

@@ -50,9 +50,8 @@
 
         <item name="floorBackground">@color/orange</item>
 
-        <item name="eventTypeCentralColor">@color/orange</item>
         <item name="eventTypeSpecialColor">@color/dark_orange</item>
-        <item name="eventTypeScreeningColor">@color/sky_blue</item>
+        <item name="eventTypeScreeningColor">@color/orange</item>
         <item name="eventTypeLectureColor">@color/red</item>
         <item name="eventTypeWorkshopColor">@color/dark_green</item>
         <item name="eventTypePanelColor">@color/light_blue</item>

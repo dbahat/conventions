@@ -11,7 +11,8 @@ public enum EventType implements Serializable {
     Lecture(R.attr.eventTypeLectureColor, "הרצאה"),
     Workshop(R.attr.eventTypeWorkshopColor, "סדנה"),
     Panel(R.attr.eventTypePanelColor, "פאנל"),
-    GuestOfHonor(R.attr.eventTypeGuestOfHonorColor, "אורחת כבוד");
+    GuestOfHonor(R.attr.eventTypeGuestOfHonorColor, "אורחת כבוד"),
+	Screening(R.attr.eventTypeScreeningColor, "הקרנות");
 
     private int backgroundColorAttributeId;
 	private String description;
@@ -41,6 +42,8 @@ public enum EventType implements Serializable {
                 return EventType.Workshop;
             case 20:
                 return EventType.Panel;
+	        case 21:
+		        return EventType.Screening;
             case 22:
                 return EventType.GuestOfHonor;
 
