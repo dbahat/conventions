@@ -191,7 +191,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 			        View view = toolbar.getChildAt(i);
 			        if (view instanceof ImageView && ((ImageView) view).getDrawable() == drawable) {
 				        final ImageView image = (ImageView) view;
-				        ValueAnimator animator = ValueAnimator.ofInt(255, 100, 255);
+				        final ValueAnimator animator = ValueAnimator.ofInt(255, 100, 255);
 				        animator.setInterpolator(new AccelerateDecelerateInterpolator());
 				        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 					        @Override
@@ -203,8 +203,16 @@ public abstract class NavigationActivity extends AppCompatActivity {
 					        }
 				        });
 				        animator.addListener(new Animator.AnimatorListener() {
+					        // This is necessary because if I call animation.cancel() on animation start
+					        // it calls onAnimationStart again, causing an infinite recursion
+					        private boolean cancelled = false;
+
 					        @Override
 					        public void onAnimationStart(Animator animation) {
+						        if (!showLogoGlow && !cancelled) {
+							        cancelled = true;
+							        animation.cancel();
+						        }
 					        }
 
 					        @Override
@@ -214,6 +222,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 
 					        @Override
 					        public void onAnimationCancel(Animator animation) {
+						        image.setColorFilter(null);
 					        }
 
 					        @Override
