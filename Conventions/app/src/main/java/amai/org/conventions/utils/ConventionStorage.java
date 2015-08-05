@@ -138,6 +138,8 @@ public class ConventionStorage {
     private static boolean tryReadEventsFromCache() {
         Object result = readCacheFile(EVENTS_FILE_NAME);
         if (result == null) {
+			// Since we cannot read the cache file, delete it so we won't try to read it again next time
+			tryDeleteCacheFile(EVENTS_FILE_NAME);
             return false;
         }
 
@@ -146,6 +148,13 @@ public class ConventionStorage {
         Convention.getInstance().setEvents(events);
         return true;
     }
+
+	private static void tryDeleteCacheFile(String fileName) {
+		File file = new File(context.getCacheDir(), fileName);
+		if (file.exists()) {
+			file.delete();
+		}
+	}
 
     private static void readEventsFromLocalResources() {
         // No need to lock here, since we only read from the resources and only during app launch.
