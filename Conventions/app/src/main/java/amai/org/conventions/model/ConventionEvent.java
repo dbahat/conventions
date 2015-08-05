@@ -1,7 +1,6 @@
 package amai.org.conventions.model;
 
 import android.content.Context;
-import android.graphics.Color;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,13 +9,12 @@ import java.util.Date;
 import java.util.List;
 
 import amai.org.conventions.ThemeAttributes;
+import amai.org.conventions.networking.ModelParser;
 import amai.org.conventions.utils.Dates;
-import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Objects;
 
 public class ConventionEvent implements Serializable {
 	private static final String TAG = ConventionEvent.class.getCanonicalName();
-	private static final int NO_COLOR = Color.TRANSPARENT; // Assuming we will never get this from the server...
 
 	private String id;
     private int serverId;
@@ -32,7 +30,6 @@ public class ConventionEvent implements Serializable {
 
 	public ConventionEvent() {
 		images = new ArrayList<>();
-		color = NO_COLOR; // Default for when color is not set or cannot be parsed
 	}
 
 	public int getColor() {
@@ -47,22 +44,6 @@ public class ConventionEvent implements Serializable {
 		setColor(color);
 		return this;
 	}
-
-	public ConventionEvent withColorFromServer(String serverColor) {
-		int color = NO_COLOR;
-		if (serverColor != null) {
-			try {
-				if (!serverColor.startsWith("#")) {
-					serverColor = "#" + serverColor;
-				}
-				color = Color.parseColor(serverColor);
-			} catch (IllegalArgumentException e) {
-				Log.e(TAG, "Color from server cannot be parsed: " + serverColor);
-			}
-		}
-		return withColor(color);
-	}
-
 
 	public String getDescription() {
         return description;
@@ -160,10 +141,10 @@ public class ConventionEvent implements Serializable {
     }
 
 	public int getBackgroundColor(Context context) {
-		if (color != NO_COLOR) {
+		if (color != ModelParser.NO_COLOR) {
 			return color;
 		}
-		return ThemeAttributes.getColor(context, getType().getBackgroundColorAttributeId());
+		return getType().getBackgroundColor();
 	}
 
     public void setType(EventType type) {

@@ -2,53 +2,35 @@ package amai.org.conventions.model;
 
 import java.io.Serializable;
 
-import amai.org.conventions.R;
+public class EventType implements Serializable {
 
-public enum EventType implements Serializable {
-
-    Games(R.attr.eventTypeGameColor, "משחקים"),
-    Community(R.attr.eventTypeCommunityColor, "אירוע קהילה"),
-    Lecture(R.attr.eventTypeLectureColor, "הרצאה"),
-    Workshop(R.attr.eventTypeWorkshopColor, "סדנה"),
-    Panel(R.attr.eventTypePanelColor, "פאנל"),
-    GuestOfHonor(R.attr.eventTypeGuestOfHonorColor, "אורחת כבוד"),
-	Screening(R.attr.eventTypeScreeningColor, "הקרנות");
-
-    private int backgroundColorAttributeId;
+    private int backgroundColor;
 	private String description;
 
-    EventType(int backgroundColorAttributeId, String description) {
-        this.backgroundColorAttributeId = backgroundColorAttributeId;
+    public EventType(int backgroundColor, String description) {
+        this.backgroundColor = backgroundColor;
 	    this.description = description;
     }
 
-    public int getBackgroundColorAttributeId() {
-        return backgroundColorAttributeId;
+    public int getBackgroundColor() {
+        return backgroundColor;
     }
 
 	public String getDescription() {
 		return description;
 	}
 
-    public static EventType parse(int eventTypeId) {
-        switch (eventTypeId) {
-            case 16:
-                return EventType.Games;
-            case 17:
-                return EventType.Community;
-            case 18:
-                return EventType.Lecture;
-            case 19:
-                return EventType.Workshop;
-            case 20:
-                return EventType.Panel;
-	        case 21:
-		        return EventType.Screening;
-            case 22:
-                return EventType.GuestOfHonor;
+    @Override
+    public boolean equals(Object other) {
+        return other instanceof EventType && equals((EventType) other);
+    }
 
-            default:
-                return EventType.Community;
-        }
+    public boolean equals(EventType other) {
+        return other.getDescription().equals(getDescription());
+    }
+
+    @Override
+    public int hashCode() {
+        return getDescription().hashCode();
     }
 }

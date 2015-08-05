@@ -1,5 +1,6 @@
 package amai.org.conventions.networking;
 
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.text.Html;
 
@@ -25,7 +26,12 @@ import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
 
 public class ModelParser {
-	private static final String TAG = ModelParser.class.getCanonicalName();
+    public static final int NO_COLOR = Color.TRANSPARENT; // Assuming we will never get this from the server...
+
+    private static final String TAG = ModelParser.class.getCanonicalName();
+    private static final String GUEST_OF_HONOR = "אורחת כבוד";
+    private static final String GAMES = "משחקים";
+    public static final String SCREENINGS = "הקרנות";
 
     public List<ConventionEvent> parse(InputStreamReader reader) {
         JsonParser jp = new JsonParser();
@@ -39,7 +45,7 @@ public class ModelParser {
         for (JsonElement event : events) {
             JsonObject eventObj = event.getAsJsonObject();
             int eventId = eventObj.get("ID").getAsInt();
-            int eventTypeId = eventObj.get("categories-text").getAsJsonObject().get("id").getAsInt();
+            String eventType = eventObj.get("categories-text").getAsJsonObject().get("name").getAsString();
 
             int internalEventNumber = 1;
 
@@ -63,14 +69,15 @@ public class ModelParser {
                 }
 
                 ParsedDescription eventDescription = parseEventDescription(eventObj.get("content").getAsString());
+                int color = parseColorFromServer(eventObj.get("timetable-bg").getAsString());
 
                 ConventionEvent conventionEvent = new ConventionEvent()
                         .withServerId(eventId)
-		                .withColorFromServer(eventObj.get("timetable-bg").getAsString())
+		                .withColor(color)
                         .withTitle(eventObj.get("title").getAsString())
                         .withLecturer(internalEventObj.get("before_hour_text").getAsString())
                         .withDescription(eventDescription.getDescription())
-                        .withType(EventType.parse(eventTypeId))
+                        .withType(new EventType(color, eventType))
                         .withStartTime(startTime)
                         .withEndTime(endTime)
                         .withHall(hall)
@@ -80,13 +87,13 @@ public class ModelParser {
                 // Some events (like the guest of honor event and the games event) have special pages and are not retrieved from the API
                 // exposed by the server. For these spacial cases, add special handing of placing hardcoded texts/images.
 	            if (conventionEvent.getDescription().length() == 0) {
-	                if (conventionEvent.getType() == EventType.GuestOfHonor) {
+	                if (conventionEvent.getType().getDescription().equals(GUEST_OF_HONOR)) {
 	                    conventionEvent = handleGuestOfHonorEvent(conventionEvent);
 	                }
-	                if (conventionEvent.getType() == EventType.Games) {
+	                if (conventionEvent.getType().getDescription().equals(GAMES)) {
 	                    conventionEvent = handleGamesEvent(conventionEvent);
 	                }
-		            if (conventionEvent.getType() == EventType.Screening) {
+		            if (conventionEvent.getType().getDescription().equals(SCREENINGS)) {
 			            // There's no other way to tell the difference between these events :(
 			            if (conventionEvent.getServerId() == 1825) {
 				            // Pandora
@@ -109,6 +116,22 @@ public class ModelParser {
         }
 
         return eventList;
+    }
+
+    private int parseColorFromServer(String serverColor) {
+
+        int color = NO_COLOR;
+        if (serverColor != null) {
+            try {
+                if (!serverColor.startsWith("#")) {
+                    serverColor = "#" + serverColor;
+                }
+                color = Color.parseColor(serverColor);
+            } catch (IllegalArgumentException e) {
+                Log.e(TAG, "Color from server cannot be parsed: " + serverColor);
+            }
+        }
+        return color;
     }
 
     private ParsedDescription parseEventDescription(String rawEventDescription) {

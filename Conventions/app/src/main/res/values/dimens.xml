@@ -14,6 +14,8 @@
     <dimen name="event_details_box_side_margins">30dp</dimen>
     <dimen name="event_details_box_padding">10dp</dimen>
 
-    <dimen name="search_category_padding">4dp</dimen>
+    <dimen name="search_category_side_padding">4dp</dimen>
+    <dimen name="search_category_top_padding">1dp</dimen>
     <dimen name="search_category_margin">1dp</dimen>
+    <dimen name="search_category_width">52dp</dimen>
 </resources>

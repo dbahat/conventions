@@ -38,6 +38,7 @@
     <string name="feedback">פידבק</string>
     <string name="close_feedback">הסתר</string>
     <string name="send">שלח לאמא\"י</string>
+    <string name="back">חזור</string>
 
     <string name="event_feedback_mail_title">מייל אוטומטי - פידבק לכאמ\"י 2015 עבור האירוע</string>
     <string name="convention_feedback_mail_title">מייל אוטומטי - פידבק לכנס כאמ\"י 2015</string>

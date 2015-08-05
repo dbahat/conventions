@@ -1,11 +1,15 @@
 package amai.org.conventions.events.activities;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -42,6 +46,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
         setToolbarTitle(getResources().getString(R.string.programme_search_title));
 
         if (savedInstanceState != null) {
+            //noinspection unchecked
             eventTypeFilter = (LinkedList<EventType>) savedInstanceState.getSerializable(STATE_EVENT_TYPES_FILTER);
             keywordsFilter = savedInstanceState.getString(STATE_KEYWORDS_FILTER);
         }
@@ -56,11 +61,28 @@ public class ProgrammeSearchActivity extends NavigationActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_programme_search, menu);
+
+        return true;
+    }
+
+    @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
         outState.putString(STATE_KEYWORDS_FILTER, keywordsFilter);
         outState.putSerializable(STATE_EVENT_TYPES_FILTER, eventTypeFilter);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.programme_search_back) {
+            supportFinishAfterTransition();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void initializeEventsList() {
@@ -72,12 +94,13 @@ public class ProgrammeSearchActivity extends NavigationActivity {
     }
 
     private void initializeSearchCategories() {
-        SearchCategoriesLayout searchCategoriesLayout = (SearchCategoriesLayout) findViewById(R.id.search_categories_layout);
+        final SearchCategoriesLayout searchCategoriesLayout = (SearchCategoriesLayout) findViewById(R.id.search_categories_layout);
         searchCategoriesLayout.setOnFilterSelectedListener(new SearchCategoriesLayout.OnFilterSelectedListener() {
             @Override
             public void onFilterSelected(final List<EventType> selectedEventTypes) {
                 eventTypeFilter = new LinkedList<>(selectedEventTypes);
                 applyFilters();
+                hideKeyboard(searchCategoriesLayout);
             }
         });
 
@@ -143,6 +166,11 @@ public class ProgrammeSearchActivity extends NavigationActivity {
             noResultsFoundView.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
         }
+    }
+
+    private void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     private boolean containsKeywords(ConventionEvent event) {

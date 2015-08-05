@@ -5,12 +5,9 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.Gravity;
-import android.view.View;
 import android.widget.CheckedTextView;
-import android.widget.TextView;
 
 import amai.org.conventions.R;
-import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.EventType;
 
 public class SearchCategoryBox extends CheckedTextView {
@@ -19,7 +16,6 @@ public class SearchCategoryBox extends CheckedTextView {
 
     public SearchCategoryBox(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setGravity(Gravity.CENTER);
     }
 
     public void setEventType(EventType eventType) {
@@ -28,7 +24,7 @@ public class SearchCategoryBox extends CheckedTextView {
         Drawable drawable = getResources().getDrawable(android.R.drawable.checkbox_off_background);
         if (drawable != null) {
             drawable.mutate();
-            drawable.setColorFilter(ThemeAttributes.getColor(getContext(), eventType.getBackgroundColorAttributeId()), PorterDuff.Mode.MULTIPLY);
+            drawable.setColorFilter(eventType.getBackgroundColor(), PorterDuff.Mode.MULTIPLY);
             setCompoundDrawablesWithIntrinsicBounds(null, drawable, null, null);
         }
 

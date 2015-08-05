@@ -4,7 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -354,6 +357,22 @@ public class Convention implements Serializable {
 		Hall hall = new Hall().withName(name).withOrder(getHighestHallOrder() + 1);
 		halls.add(hall);
 		return hall;
+	}
+
+	public List<EventType> getEventTypes() {
+		HashSet<EventType> eventTypes = new HashSet<>();
+		for (ConventionEvent event : events) {
+			eventTypes.add(event.getType());
+		}
+
+		List<EventType> eventTypeList = new ArrayList<>(eventTypes);
+		Collections.sort(eventTypeList, new Comparator<EventType>() {
+			@Override
+			public int compare(EventType lhs, EventType rhs) {
+				return lhs.getDescription().compareTo(rhs.getDescription());
+			}
+		});
+		return eventTypeList;
 	}
 
 	private int getHighestHallOrder() {

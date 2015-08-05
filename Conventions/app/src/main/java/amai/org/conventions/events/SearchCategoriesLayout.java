@@ -2,6 +2,8 @@ package amai.org.conventions.events;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -9,6 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import amai.org.conventions.R;
+import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.EventType;
 
 /**
@@ -21,7 +24,7 @@ public class SearchCategoriesLayout extends LinearLayout {
     public SearchCategoriesLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        for (EventType eventType : EventType.values()) {
+        for (EventType eventType : Convention.getInstance().getEventTypes()) {
             SearchCategoryBox searchCategoryBox = createAndInitializeSearchCategoryBox(eventType);
             addView(searchCategoryBox);
         }
@@ -30,14 +33,19 @@ public class SearchCategoriesLayout extends LinearLayout {
     private SearchCategoryBox createAndInitializeSearchCategoryBox(EventType eventType) {
         final SearchCategoryBox searchCategoryBox = new SearchCategoryBox(getContext(), null);
         searchCategoryBox.setEventType(eventType);
+        searchCategoryBox.setGravity(Gravity.CENTER);
 
-        int padding = getResources().getDimensionPixelSize(R.dimen.search_category_padding);
-        searchCategoryBox.setPadding(padding, 0, padding, 0);
+        int sidePadding = getResources().getDimensionPixelSize(R.dimen.search_category_side_padding);
+        int topPadding = getResources().getDimensionPixelSize(R.dimen.search_category_top_padding);
+        searchCategoryBox.setPadding(sidePadding, topPadding, sidePadding, 0);
 
         int margin = getResources().getDimensionPixelSize(R.dimen.search_category_margin);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LayoutParams.WRAP_CONTENT,
+                LayoutParams.MATCH_PARENT);
         layoutParams.setMargins(margin, 0, margin, 0);
         searchCategoryBox.setLayoutParams(layoutParams);
+        searchCategoryBox.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 10);
 
         searchCategoryBox.setOnClickListener(new OnClickListener() {
             @Override
