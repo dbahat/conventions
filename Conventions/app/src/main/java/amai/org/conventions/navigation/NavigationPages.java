@@ -65,7 +65,7 @@ public class NavigationPages {
         pageIdToFragmentMapInOrder.put(R.string.map, MapActivity.class);
         pageIdToFragmentMapInOrder.put(R.string.events, ProgrammeActivity.class);
         pageIdToFragmentMapInOrder.put(R.string.updates, UpdatesActivity.class);
-        pageIdToFragmentMapInOrder.put(R.string.arrivalMethods, ArrivalMethodsActivity.class);
+        pageIdToFragmentMapInOrder.put(R.string.arrival_methods, ArrivalMethodsActivity.class);
 
         return pageIdToFragmentMapInOrder;
     }

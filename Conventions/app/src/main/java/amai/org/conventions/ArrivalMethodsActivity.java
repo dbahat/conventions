@@ -25,7 +25,7 @@ public class ArrivalMethodsActivity extends NavigationActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentInContentContainer(R.layout.activity_arrival_methods);
-        setToolbarTitle(getResources().getString(R.string.arrivalMethods));
+        setToolbarTitle(getResources().getString(R.string.arrival_methods));
     }
 
     @Override

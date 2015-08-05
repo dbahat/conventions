@@ -23,7 +23,7 @@ public class Dates {
     private static Date getInitialDate() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm", Dates.getLocale());
         try {
-            return dateFormat.parse("20.08.2015 16:14");
+            return dateFormat.parse("20.08.2015 20:14");
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
@@ -70,8 +70,10 @@ public class Dates {
 
     public static String toHumanReadableTimeDuration(int hours, int minutes, int seconds) {
         List<String> parts = new ArrayList<>(3);
-        if (hours > 1) {
-            parts.add(hours + " שעות");
+        if (hours > 2) {
+	        parts.add(hours + " שעות");
+        } else if (hours == 2) {
+	        parts.add("שעתיים");
         } else if (hours == 1) {
             parts.add("שעה");
         }

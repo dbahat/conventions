@@ -3,11 +3,11 @@ package amai.org.conventions.navigation;
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.LightingColorFilter;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PictureDrawable;
@@ -22,22 +22,27 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
 import com.caverock.androidsvg.SVG;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import amai.org.conventions.ArrivalMethodsActivity;
+import amai.org.conventions.FeedbackActivity;
 import amai.org.conventions.HomeActivity;
 import amai.org.conventions.R;
 import amai.org.conventions.SVGFileLoader;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.AnimationPopupWindow;
 import amai.org.conventions.events.activities.EventActivity;
+import amai.org.conventions.events.activities.MyEventsActivity;
 import amai.org.conventions.events.activities.ProgrammeActivity;
 import amai.org.conventions.map.MapActivity;
+import amai.org.conventions.model.Convention;
 import amai.org.conventions.updates.UpdatesActivity;
 
 
@@ -47,7 +52,6 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	private static boolean showLogoGlow = true;
     private Toolbar navigationToolbar;
     private AnimationPopupWindow popup;
-	private Map<View, Class<? extends Activity>> navigationMapping;
 	private boolean showHomeScreenOnBack;
 
     @Override
@@ -74,7 +78,25 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	private AnimationPopupWindow createNavigationPopup() {
 		final View view = LayoutInflater.from(NavigationActivity.this).inflate(R.layout.navigation_menu, null);
 
-		setupImageColors(view);
+		final List<NavigationItem> items = new ArrayList<>(Arrays.asList(
+				new NavigationItem(ProgrammeActivity.class, getString(R.string.programme_title), getResources().getDrawable(R.drawable.events_list)),
+				new NavigationItem(MyEventsActivity.class, getString(R.string.my_events_title), getResources().getDrawable(R.drawable.events_list_with_star)),
+				new NavigationItem(MapActivity.class, getString(R.string.map), getResources().getDrawable(android.R.drawable.ic_dialog_map)),
+				new NavigationItem(UpdatesActivity.class, getString(R.string.updates), getResources().getDrawable(android.R.drawable.stat_notify_sync_noanim)),
+				new NavigationItem(ArrivalMethodsActivity.class, getString(R.string.arrival_methods), getResources().getDrawable(R.drawable.directions))
+		));
+
+		if (Convention.getInstance().canFillFeedback()) {
+			items.add(new NavigationItem(FeedbackActivity.class, getString(R.string.feedback), getResources().getDrawable(R.drawable.feedback_menu_icon)));
+		}
+
+		ListView navigationItems = (ListView) view.findViewById(R.id.navigation_items);
+		navigationItems.setAdapter(new NavigationItemsAdapter(this, items));
+
+		// Set list width - wrap_content doesn't work due to unknown number of items in the list view
+		navigationItems.getLayoutParams().width = calculateWrapContentWidth(this, navigationItems.getAdapter());
+		navigationItems.setLayoutParams(navigationItems.getLayoutParams());
+
 		final AnimationPopupWindow popup = new AnimationPopupWindow(
 		        view,
 	            // Sending toolbar width to support Jelly Bean version: the popup window does not align to
@@ -110,46 +132,26 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		view.setY(getResources().getDimension(R.dimen.navigation_popup_window_offset_y));
 		view.setX(getResources().getDimension(R.dimen.navigation_popup_window_offset_x));
 
-		navigationMapping = new LinkedHashMap<>(4);
-		navigationMapping.put(view.findViewById(R.id.menu_navigate_to_programme), ProgrammeActivity.class);
-		navigationMapping.put(view.findViewById(R.id.menu_navigate_to_map), MapActivity.class);
-		navigationMapping.put(view.findViewById(R.id.menu_navigate_to_updates), UpdatesActivity.class);
-		navigationMapping.put(view.findViewById(R.id.menu_navigate_to_arrival_methods), ArrivalMethodsActivity.class);
-
-		// Check if we're in one of the navigation views and set it to unclickable
-		if (navigationMapping.containsValue(this.getClass())) {
-			for (Map.Entry<View, Class<? extends Activity>> entry : navigationMapping.entrySet()) {
-				if (entry.getValue() == this.getClass()) {
-					int selectedColor = ThemeAttributes.getColor(this, R.attr.navigationPopupSelectedColor);
-					ViewGroup navigationView = (ViewGroup) entry.getKey();
-					navigationView.setOnClickListener(null);
-					for (int i = 0; i < navigationView.getChildCount(); ++i) {
-						View child = navigationView.getChildAt(i);
-						if (child instanceof TextView) {
-							((TextView) child).setTextColor(selectedColor);
-						} else if (child instanceof ImageView) {
-							((ImageView) child).getDrawable().setColorFilter(selectedColor, PorterDuff.Mode.MULTIPLY);
-						}
-					}
-					break;
-				}
-			}
-		}
-
 		return popup;
 	}
 
-	private void setupImageColors(View view) {
-		int color = ThemeAttributes.getColor(this, R.attr.navigationPopupNotSelectedColor);
-		changeImageColor(view, R.id.events_menu_image, color);
-		changeImageColor(view, R.id.map_menu_image, color);
-		changeImageColor(view, R.id.updates_menu_image, color);
-		changeImageColor(view, R.id.arrival_methods_menu_image, color);
-	}
-
-	private void changeImageColor(View view, int resource, int color) {
-		ImageView image = (ImageView) view.findViewById(resource);
-		image.setColorFilter(color);
+	/**
+	 * Calculates the width of the widest view in an adapter, for use when you need to wrap_content on a ListView.
+	 * Used for ListViews with a known (and small) number of items.
+	 */
+	public static int calculateWrapContentWidth(Context context, ListAdapter adapter) {
+		int maxWidth = 0;
+		View view = null;
+		FrameLayout fakeParent = new FrameLayout(context);
+		for (int i = 0, count = adapter.getCount(); i < count; ++i) {
+			view = adapter.getView(i, view, fakeParent);
+			view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+			int width = view.getMeasuredWidth();
+			if (width > maxWidth) {
+				maxWidth = width;
+			}
+		}
+		return maxWidth;
 	}
 
     @Override
@@ -296,10 +298,6 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		}
 	}
 
-	public void onNavigate(View view) {
-		navigateToActivity(navigationMapping.get(view));
-	}
-
     private void dismissPopupIfNeeded() {
         if (popup != null && popup.isShowing()) {
             popup.dismissNow();
@@ -318,4 +316,5 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	protected String getDeviceId() {
 		return Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
 	}
+
 }

@@ -3,5 +3,5 @@
     <string name="map">מפה</string>
     <string name="events">אירועים</string>
     <string name="updates">עדכונים</string>
-    <string name="arrivalMethods">דרכי הגעה</string>
+    <string name="arrival_methods">דרכי הגעה</string>
 </resources>
