@@ -62,6 +62,8 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 	private static final String STATE_LOCATION_DETAILS_OPEN = "StateLocationDetailsOpen";
 	private static final String STATE_MAP_FLOOR_ZOOMED = "StateMapFloorZoomed";
 
+	private static boolean showAnimation = true;
+
 	private View progressBar;
 	private HorizontalScrollView scrollView;
     private ImageLayout mapFloorImage;
@@ -386,12 +388,23 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 	            Picture picture = svg.renderToPicture();
 			    mapFloorImage.setImageResourceFromDrawable(new PictureDrawable(picture), 100, 100);
 
+			    Animation animation = null;
+			    if (showAnimation) {
+			        showAnimation = false;
+				    animation = AnimationUtils.loadAnimation(getActivity(), R.anim.drop_and_fade_in_from_top);
+				    animation.setStartOffset(100);
+			    }
+
 			    // Add markers
 			    for (final MapLocation location : locations) {
 				    // Add the marker for this location
 				    View markerImageView = createMarkerView(location, null);
 				    mapFloorImage.addView(markerImageView);
+				    if (animation != null) {
+				        markerImageView.startAnimation(animation);
+				    }
 			    }
+
 			    // Set initially selected location now after we created all the markers
 			    if (locationToSelect != null) {
 			        selectLocation(locationToSelect);
@@ -475,7 +488,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		if (floorMarkers != null) {
 			for (Marker marker : floorMarkers) {
 				if (marker.getLocation().getId() == location.getId()) {
-					marker.select();
+					marker.select(false);
 					break;
 				}
 			}
