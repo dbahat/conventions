@@ -78,7 +78,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
     private OnMapArrowClickedListener mapArrowClickedListener;
 
-	private List<Marker> floorMarkers;
+	private List<Marker> floorMarkers = new LinkedList<>();
 	private MapLocation locationToSelect;
 
 	public MapFloorFragment() {
@@ -367,7 +367,6 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 			    svg = SVGFileLoader.loadSVG(getActivity(), floor.getImageResource());
 
 			    // Find location markers and load their svg images (the views are created in the UI thread)
-			    floorMarkers = new LinkedList<>();
 			    locations = map.findLocationsByFloor(floor);
 			    for (final MapLocation location : locations) {
 			        // We don't save the result because it's saved in a cache for quicker access in the UI thread
