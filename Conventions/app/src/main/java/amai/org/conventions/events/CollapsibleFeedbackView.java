@@ -336,13 +336,8 @@ public class CollapsibleFeedbackView extends FrameLayout {
                 answerView = imagesLayout;
                 break;
             }
-            case YES_NO: {
-	            answerView = buildMultiAnswerQuestion(question, isSent, R.string.yes, R.string.no);
-                break;
-            }
-	        case AGE: {
-		        answerView = buildMultiAnswerQuestion(question, isSent,
-				        R.string.age_less_than_12, R.string.age_12_to_18, R.string.age_more_than_18);
+	        case MULTIPLE_ANSWERS: {
+		        answerView = buildMultiAnswerQuestion(question, isSent, question.getMultipleAnswers());
 		        break;
 	        }
         }
@@ -354,12 +349,12 @@ public class CollapsibleFeedbackView extends FrameLayout {
         return questionLayout;
     }
 
-	private LinearLayout buildMultiAnswerQuestion(final FeedbackQuestion question, boolean isSent, int... possibleAnswers) {
+	private LinearLayout buildMultiAnswerQuestion(final FeedbackQuestion question, boolean isSent, List<Integer> possibleAnswers) {
 		Object answer = question.getAnswer();
 		LinearLayout buttonsLayout = new LinearLayout(getContext());
 		buttonsLayout.setOrientation(LinearLayout.HORIZONTAL);
 
-		final List<TextView> answerViews = new ArrayList<>(possibleAnswers.length);
+		final List<TextView> answerViews = new ArrayList<>(possibleAnswers.size());
 
 		OnClickListener listener = new OnClickListener() {
 			@Override

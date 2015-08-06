@@ -3,7 +3,10 @@ package amai.org.conventions.model;
 import android.content.res.Resources;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import amai.org.conventions.R;
@@ -63,6 +66,10 @@ public class FeedbackQuestion implements Serializable {
 		return answerType;
 	}
 
+	public void setAnswerType(AnswerType answerType) {
+		this.answerType = answerType;
+	}
+
 	public void setAnswer(Object answer) {
 		// Don't allow empty string an an answer
 		if (answer instanceof String && ((String) answer).isEmpty()) {
@@ -90,9 +97,17 @@ public class FeedbackQuestion implements Serializable {
 		this.answerChanged = answerChanged;
 	}
 
+	public List<Integer> getMultipleAnswers() {
+		switch (questionId) {
+			case QUESTION_ID_AGE:
+				return Arrays.asList(R.string.age_less_than_12, R.string.age_12_to_18, R.string.age_more_than_18);
+		}
+		return Collections.emptyList();
+	}
+
 	// This enum must be backwards compatible - don't remove or rename any values from it
 	public enum AnswerType {
-		TEXT, YES_NO, SMILEY_3_POINTS, AGE
+		TEXT, SMILEY_3_POINTS, MULTIPLE_ANSWERS
 	}
 
 	// This enum must be backwards compatible - don't remove or rename any values from it

@@ -2,10 +2,8 @@ package amai.org.conventions.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -54,6 +52,11 @@ public class Feedback implements Serializable, Cloneable {
 	}
 
 	private void convertQuestion(FeedbackQuestion question) {
+		// Handle unknown question type
+		if (question.getAnswerType() == null) {
+			question.setAnswerType(FeedbackQuestion.AnswerType.TEXT);
+		}
+
 		// Handle enum answer type
 		if (question.hasAnswer() && question.getAnswerType() == FeedbackQuestion.AnswerType.SMILEY_3_POINTS) {
 			try {

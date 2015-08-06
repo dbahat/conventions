@@ -47,7 +47,7 @@ public class Convention implements Serializable {
         this.conventionStorage = new ConventionStorage();
 	    this.userInput = new LinkedHashMap<>();
 	    feedback = new Feedback().withQuestions(
-			    new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_AGE, FeedbackQuestion.AnswerType.AGE),
+			    new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_AGE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS),
 			    new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_LIKED, FeedbackQuestion.AnswerType.TEXT),
 			    new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_DISLIKED, FeedbackQuestion.AnswerType.TEXT),
 			    new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_ADDITIONAL_INFO, FeedbackQuestion.AnswerType.TEXT)
