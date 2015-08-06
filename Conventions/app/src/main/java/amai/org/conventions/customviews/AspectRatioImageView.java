@@ -6,6 +6,8 @@ import android.util.AttributeSet;
 import android.widget.ImageView;
 
 public class AspectRatioImageView extends ImageView {
+	private boolean bottomFadingEdgeEnabled = false;
+
     public AspectRatioImageView(Context context) {
         super(context);
     }
@@ -27,4 +29,22 @@ public class AspectRatioImageView extends ImageView {
             setMeasuredDimension(point.x, point.y);
         }
     }
+
+	public void setBottomFadingEdgeEnabled(boolean enabled) {
+		bottomFadingEdgeEnabled = enabled;
+		setVerticalFadingEdgeEnabled(enabled);
+	}
+
+	@Override
+	protected float getTopFadingEdgeStrength() {
+		return 0;
+	}
+
+	@Override
+	protected float getBottomFadingEdgeStrength() {
+		if (bottomFadingEdgeEnabled) {
+			return 1;
+		}
+		return super.getBottomFadingEdgeStrength();
+	}
 }

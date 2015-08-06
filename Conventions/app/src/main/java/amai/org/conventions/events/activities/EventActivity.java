@@ -55,6 +55,8 @@ public class EventActivity extends NavigationActivity {
 	private LinearLayout feedbackContainer;
     private CollapsibleFeedbackView feedbackView;
 
+	private AspectRatioImageView fadingImageView;
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,7 +95,6 @@ public class EventActivity extends NavigationActivity {
 		    protected void onPostExecute(Void v) {
 		        setEvent(conventionEvent);
 
-
 		        // If the feedback view already had saved state, restore it
 		        if (savedInstanceState != null && savedInstanceState.containsKey(STATE_FEEDBACK_OPEN)) {
 		            if (savedInstanceState.getBoolean(STATE_FEEDBACK_OPEN)) {
@@ -122,7 +123,6 @@ public class EventActivity extends NavigationActivity {
 				    });
 		        }
 
-
 		        mainLayout.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
 		            @Override
 		            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
@@ -139,6 +139,9 @@ public class EventActivity extends NavigationActivity {
 		                    backgroundToScroll = backgroundHeight;
 		                    maxParallax = 0.7f;
 		                } else {
+			                if (fadingImageView != null) {
+			                    fadingImageView.setBottomFadingEdgeEnabled(false);
+			                }
 		                    backgroundToScroll = backgroundHeight - screenHeight;
 
 		                    // If foreground height is smaller than background height (and background should be scrolled),
@@ -399,8 +402,10 @@ public class EventActivity extends NavigationActivity {
         // Add images to the layout
         List<Integer> images = event.getImages();
         boolean first = true;
+		// This will contain the last image view after the loop
+		AspectRatioImageView imageView = null;
         for (int imageId : images) {
-            ImageView imageView = new AspectRatioImageView(this);
+            imageView = new AspectRatioImageView(this);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             int topMargin = 0;
             if (first) {
@@ -413,6 +418,12 @@ public class EventActivity extends NavigationActivity {
             imageView.setImageResource(imageId);
             imagesLayout.addView(imageView);
         }
+
+		if (imageView != null) {
+			fadingImageView = imageView;
+			fadingImageView.setBottomFadingEdgeEnabled(true);
+			fadingImageView.setFadingEdgeLength((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40, getResources().getDisplayMetrics()));
+		}
     }
 
     public void openFeedback(View view) {
