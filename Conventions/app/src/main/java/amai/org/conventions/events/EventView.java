@@ -8,7 +8,6 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.CardView;
 import android.text.SpannableString;
-import android.text.style.BackgroundColorSpan;
 import android.text.style.StyleSpan;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -17,7 +16,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.Date;
 import java.util.List;
 
 import amai.org.conventions.R;
@@ -202,6 +200,9 @@ public class EventView extends FrameLayout {
 			if (weightedRating != null) {
 				icon = getResources().getDrawable(weightedRating.getImageResourceId());
 				filterColor = getResources().getColor(R.color.yellow);
+			} else if (event.getUserInput().getFeedback().hasAnsweredQuestions()) {
+				icon = getResources().getDrawable(android.R.drawable.ic_dialog_email);
+				filterColor = getResources().getColor(R.color.green);
 			} else {
 				icon = getResources().getDrawable(R.drawable.feedback);
 				// If the user sent the feedback but it did not fill any smiley questions, there won't
@@ -209,7 +210,7 @@ public class EventView extends FrameLayout {
 				if (event.getUserInput().getFeedback().isSent()) {
 					icon = getResources().getDrawable(R.drawable.feedback_sent);
 					filterColor = getResources().getColor(R.color.yellow);
-				} else if (event.isAttending() || event.getUserInput().getFeedback().hasAnsweredQuestions()) {
+				} else if (event.isAttending()) {
 					filterColor = getResources().getColor(R.color.green);
 				} else {
 					filterColor = getResources().getColor(R.color.very_dark_gray);

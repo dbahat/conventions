@@ -9,6 +9,7 @@ import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -196,148 +197,15 @@ public class CollapsibleFeedbackView extends FrameLayout {
 
         switch (question.getAnswerType()) {
             case TEXT: {
-                if (isSent) {
-                    // Display in a text view
-                    TextView textView = new TextView(getContext());
-                    LinearLayout.LayoutParams textViewLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                    textView.setLayoutParams(textViewLayoutParams);
-                    textView.setTextAppearance(getContext(), R.style.TextAppearance_AppCompat_Body1);
-                    if (answer != null) {
-                        textView.setText(answer.toString());
-                    }
-
-                    answerView = textView;
-                } else {
-                    // Display in an editable text
-                    EditText editText = new EditText(getContext());
-                    editText.setFreezesText(true);
-                    editText.setInputType(
-                            InputType.TYPE_CLASS_TEXT |
-                                    InputType.TYPE_TEXT_FLAG_AUTO_CORRECT |
-                                    InputType.TYPE_TEXT_VARIATION_LONG_MESSAGE |
-                                    InputType.TYPE_TEXT_FLAG_MULTI_LINE |
-                                    InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS
-                    );
-                    LinearLayout.LayoutParams editTextLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                    editText.setLayoutParams(editTextLayoutParams);
-                    editText.setTextAppearance(getContext(), R.style.TextAppearance_AppCompat_Body1);
-                    editText.addTextChangedListener(new TextWatcher() {
-	                    @Override
-	                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-	                    }
-
-	                    @Override
-	                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-	                    }
-
-	                    @Override
-	                    public void afterTextChanged(Editable s) {
-		                    question.setAnswer(s.toString());
-		                    sendFeedbackButton.setEnabled(feedback.hasAnsweredQuestions());
-		                    feedbackChanged |= question.isAnswerChanged();
-	                    }
-                    });
-
-                    if (answer != null) {
-	                    editText.setText(answer.toString());
-                    }
-
-                    answerView = editText;
-                }
-
-                break;
+	            answerView = buildTextAnswerView(question, feedback);
+	            break;
             }
             case SMILEY_3_POINTS: {
-                LinearLayout imagesLayout = new LinearLayout(getContext());
-                imagesLayout.setOrientation(LinearLayout.HORIZONTAL);
-                int margin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, getResources().getDisplayMetrics());
-                int size = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics());
-
-                ColorMatrix matrix = new ColorMatrix();
-                matrix.setSaturation(0);
-                final ColorMatrixColorFilter grayscale = new ColorMatrixColorFilter(matrix);
-
-                final ImageView negativeRating = new ImageView(getContext());
-                LinearLayout.LayoutParams negativeLayoutParams = new LinearLayout.LayoutParams(size, size);
-                negativeLayoutParams.setMarginEnd(margin);
-                negativeRating.setLayoutParams(negativeLayoutParams);
-                negativeRating.setImageResource(FeedbackQuestion.Smiley3PointAnswer.NEGATIVE.getImageResourceId());
-                negativeRating.setColorFilter(grayscale);
-                imagesLayout.addView(negativeRating);
-
-                final ImageView positiveRating = new AspectRatioImageView(getContext());
-                LinearLayout.LayoutParams positiveLayoutParams = new LinearLayout.LayoutParams(size, size);
-                positiveLayoutParams.setMarginEnd(margin);
-                positiveRating.setLayoutParams(positiveLayoutParams);
-                positiveRating.setImageResource(FeedbackQuestion.Smiley3PointAnswer.POSITIVE.getImageResourceId());
-                positiveRating.setColorFilter(grayscale);
-                imagesLayout.addView(positiveRating);
-
-                final ImageView veryPositiveRating = new AspectRatioImageView(getContext());
-                LinearLayout.LayoutParams veryPositiveLayoutParams = new LinearLayout.LayoutParams(size, size);
-                veryPositiveLayoutParams.setMarginEnd(margin);
-                veryPositiveRating.setLayoutParams(veryPositiveLayoutParams);
-                veryPositiveRating.setImageResource(FeedbackQuestion.Smiley3PointAnswer.VERY_POSITIVE.getImageResourceId());
-                veryPositiveRating.setColorFilter(grayscale);
-                imagesLayout.addView(veryPositiveRating);
-
-                View.OnClickListener listener = new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        sendFeedbackButton.setEnabled(true);
-                        List<ImageView> otherImages = new ArrayList<>(Arrays.asList(negativeRating, positiveRating, veryPositiveRating));
-                        for (ImageView otherImage : otherImages) {
-                            otherImage.setColorFilter(grayscale);
-                        }
-
-                        ImageView selected = (ImageView) v;
-                        selected.setColorFilter(getResources().getColor(R.color.yellow), PorterDuff.Mode.MULTIPLY);
-
-                        Object answer = null;
-                        if (selected == negativeRating) {
-                            answer = FeedbackQuestion.Smiley3PointAnswer.NEGATIVE;
-                        } else if (selected == positiveRating) {
-                            answer = FeedbackQuestion.Smiley3PointAnswer.POSITIVE;
-                        } else if (selected == veryPositiveRating) {
-                            answer = FeedbackQuestion.Smiley3PointAnswer.VERY_POSITIVE;
-                        }
-                        question.setAnswer(answer);
-                        feedbackChanged |= question.isAnswerChanged();
-                    }
-                };
-
-                if (!isSent) {
-                    negativeRating.setOnClickListener(listener);
-                    positiveRating.setOnClickListener(listener);
-                    veryPositiveRating.setOnClickListener(listener);
-                } else {
-                    negativeRating.setOnClickListener(null);
-                    positiveRating.setOnClickListener(null);
-                    veryPositiveRating.setOnClickListener(null);
-                }
-
-                if (answer != null) {
-                    FeedbackQuestion.Smiley3PointAnswer smileyAnswer = FeedbackQuestion.Smiley3PointAnswer.getByAnswerText(answer.toString());
-                    if (smileyAnswer != null) {
-                        switch (smileyAnswer) {
-                            case NEGATIVE:
-                                listener.onClick(negativeRating);
-                                break;
-                            case POSITIVE:
-                                listener.onClick(positiveRating);
-                                break;
-                            case VERY_POSITIVE:
-                                listener.onClick(veryPositiveRating);
-                                break;
-                        }
-                    }
-                }
-
-                answerView = imagesLayout;
+	            answerView = buildSmiley3PointsAnswerView(question, feedback);
                 break;
             }
 	        case MULTIPLE_ANSWERS: {
-		        answerView = buildMultiAnswerQuestion(question, isSent, question.getMultipleAnswers());
+		        answerView = buildMultiAnswerView(question, feedback, question.getMultipleAnswers());
 		        break;
 	        }
         }
@@ -349,7 +217,161 @@ public class CollapsibleFeedbackView extends FrameLayout {
         return questionLayout;
     }
 
-	private LinearLayout buildMultiAnswerQuestion(final FeedbackQuestion question, boolean isSent, List<Integer> possibleAnswers) {
+	@NonNull
+	private View buildSmiley3PointsAnswerView(final FeedbackQuestion question, final Feedback feedback) {
+		LinearLayout imagesLayout = new LinearLayout(getContext());
+		imagesLayout.setOrientation(LinearLayout.HORIZONTAL);
+		int margin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, getResources().getDisplayMetrics());
+		int size = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics());
+
+		ColorMatrix matrix = new ColorMatrix();
+		matrix.setSaturation(0);
+		final ColorMatrixColorFilter grayscale = new ColorMatrixColorFilter(matrix);
+
+		final ImageView negativeRating = new ImageView(getContext());
+		LinearLayout.LayoutParams negativeLayoutParams = new LinearLayout.LayoutParams(size, size);
+		negativeLayoutParams.setMarginEnd(margin);
+		negativeRating.setLayoutParams(negativeLayoutParams);
+		negativeRating.setImageResource(FeedbackQuestion.Smiley3PointAnswer.NEGATIVE.getImageResourceId());
+		negativeRating.setColorFilter(grayscale);
+		imagesLayout.addView(negativeRating);
+
+		final ImageView positiveRating = new AspectRatioImageView(getContext());
+		LinearLayout.LayoutParams positiveLayoutParams = new LinearLayout.LayoutParams(size, size);
+		positiveLayoutParams.setMarginEnd(margin);
+		positiveRating.setLayoutParams(positiveLayoutParams);
+		positiveRating.setImageResource(FeedbackQuestion.Smiley3PointAnswer.POSITIVE.getImageResourceId());
+		positiveRating.setColorFilter(grayscale);
+		imagesLayout.addView(positiveRating);
+
+		final ImageView veryPositiveRating = new AspectRatioImageView(getContext());
+		LinearLayout.LayoutParams veryPositiveLayoutParams = new LinearLayout.LayoutParams(size, size);
+		veryPositiveLayoutParams.setMarginEnd(margin);
+		veryPositiveRating.setLayoutParams(veryPositiveLayoutParams);
+		veryPositiveRating.setImageResource(FeedbackQuestion.Smiley3PointAnswer.VERY_POSITIVE.getImageResourceId());
+		veryPositiveRating.setColorFilter(grayscale);
+		imagesLayout.addView(veryPositiveRating);
+
+		OnClickListener listener = new OnClickListener() {
+		    @Override
+		    public void onClick(View v) {
+		        List<ImageView> allImages = new ArrayList<>(Arrays.asList(negativeRating, positiveRating, veryPositiveRating));
+		        for (ImageView otherImage : allImages) {
+		            otherImage.setColorFilter(grayscale);
+		        }
+
+		        ImageView selected = (ImageView) v;
+		        Object selectedAnswer = null;
+		        if (selected == negativeRating) {
+		            selectedAnswer = FeedbackQuestion.Smiley3PointAnswer.NEGATIVE;
+		        } else if (selected == positiveRating) {
+		            selectedAnswer = FeedbackQuestion.Smiley3PointAnswer.POSITIVE;
+		        } else if (selected == veryPositiveRating) {
+		            selectedAnswer = FeedbackQuestion.Smiley3PointAnswer.VERY_POSITIVE;
+		        }
+
+			    // If the user clicked on the same answer, remove the answer
+			    if (selectedAnswer == question.getAnswer()) {
+				    selectedAnswer = null;
+			    }
+
+			    if (selectedAnswer != null) {
+		            selected.setColorFilter(getResources().getColor(R.color.yellow), PorterDuff.Mode.MULTIPLY);
+			    }
+
+		        question.setAnswer(selectedAnswer);
+		        feedbackChanged |= question.isAnswerChanged();
+		        sendFeedbackButton.setEnabled(feedback.hasAnsweredQuestions());
+		    }
+		};
+
+		if (!feedback.isSent()) {
+		    negativeRating.setOnClickListener(listener);
+		    positiveRating.setOnClickListener(listener);
+		    veryPositiveRating.setOnClickListener(listener);
+		} else {
+		    negativeRating.setOnClickListener(null);
+		    positiveRating.setOnClickListener(null);
+		    veryPositiveRating.setOnClickListener(null);
+		}
+
+		Object answer = question.getAnswer();
+		if (answer != null) {
+		    FeedbackQuestion.Smiley3PointAnswer smileyAnswer = FeedbackQuestion.Smiley3PointAnswer.getByAnswerText(answer.toString());
+		    if (smileyAnswer != null) {
+			    question.setAnswer(null); // Needed so onClick won't cancel the answer selection
+		        switch (smileyAnswer) {
+		            case NEGATIVE:
+		                listener.onClick(negativeRating);
+		                break;
+		            case POSITIVE:
+		                listener.onClick(positiveRating);
+		                break;
+		            case VERY_POSITIVE:
+		                listener.onClick(veryPositiveRating);
+		                break;
+		        }
+		    }
+		}
+		return imagesLayout;
+	}
+
+	@NonNull
+	private View buildTextAnswerView(final FeedbackQuestion question, final Feedback feedback) {
+		Object answer = question.getAnswer();
+		View answerView;
+		if (feedback.isSent()) {
+		    // Display in a text view
+		    TextView textView = new TextView(getContext());
+		    LinearLayout.LayoutParams textViewLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		    textView.setLayoutParams(textViewLayoutParams);
+		    textView.setTextAppearance(getContext(), R.style.TextAppearance_AppCompat_Body1);
+		    if (answer != null) {
+		        textView.setText(answer.toString());
+		    }
+
+		    answerView = textView;
+		} else {
+		    // Display in an editable text
+		    EditText editText = new EditText(getContext());
+		    editText.setFreezesText(true);
+		    editText.setInputType(
+		            InputType.TYPE_CLASS_TEXT |
+		                    InputType.TYPE_TEXT_FLAG_AUTO_CORRECT |
+		                    InputType.TYPE_TEXT_VARIATION_LONG_MESSAGE |
+		                    InputType.TYPE_TEXT_FLAG_MULTI_LINE |
+		                    InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS
+		    );
+		    LinearLayout.LayoutParams editTextLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		    editText.setLayoutParams(editTextLayoutParams);
+		    editText.setTextAppearance(getContext(), R.style.TextAppearance_AppCompat_Body1);
+		    editText.addTextChangedListener(new TextWatcher() {
+			    @Override
+			    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+			    }
+
+			    @Override
+			    public void onTextChanged(CharSequence s, int start, int before, int count) {
+			    }
+
+			    @Override
+			    public void afterTextChanged(Editable s) {
+				    question.setAnswer(s.toString());
+				    sendFeedbackButton.setEnabled(feedback.hasAnsweredQuestions());
+				    feedbackChanged |= question.isAnswerChanged();
+			    }
+		    });
+
+		    if (answer != null) {
+			    editText.setText(answer.toString());
+		    }
+
+		    answerView = editText;
+		}
+		return answerView;
+	}
+
+	private LinearLayout buildMultiAnswerView(final FeedbackQuestion question, final Feedback feedback, List<Integer> possibleAnswers) {
 		Object answer = question.getAnswer();
 		LinearLayout buttonsLayout = new LinearLayout(getContext());
 		buttonsLayout.setOrientation(LinearLayout.HORIZONTAL);
@@ -359,18 +381,24 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		OnClickListener listener = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				sendFeedbackButton.setEnabled(true);
 				TextView selected = (TextView) v;
 				selected.setTextAppearance(getContext(), R.style.EventAnswerButtonHighlighted);
 
+				// If the user selected the same answer, deselect it
+				String selectedAnswer = selected.getText().toString();
+				if (selectedAnswer.equals(question.getAnswer())) {
+					selectedAnswer = null;
+				}
+
 				for (TextView answerView : answerViews) {
-					if (selected != answerView) {
+					if (selectedAnswer == null || selected != answerView) {
 						answerView.setTextAppearance(getContext(), R.style.EventFeedbackButton);
 					}
 				}
 
-				question.setAnswer(selected.getText().toString());
+				question.setAnswer(selectedAnswer);
 				feedbackChanged |= question.isAnswerChanged();
+				sendFeedbackButton.setEnabled(feedback.hasAnsweredQuestions());
 			}
 		};
 
@@ -388,7 +416,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 			}
 			answerButton.setPaddingRelative(startPadding, padding, padding * 4, padding);
 			buttonsLayout.addView(answerButton);
-			if (!isSent) {
+			if (!feedback.isSent()) {
 				answerButton.setOnClickListener(listener);
 			} else {
 				answerButton.setOnClickListener(null);
@@ -398,7 +426,9 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		if (answer != null) {
 			for (TextView answerView : answerViews) {
 				if (answer.equals(answerView.getText().toString())) {
+					question.setAnswer(null); // Needed so onClick won't cancel the answer selection
 					listener.onClick(answerView);
+					break;
 				}
 			}
 		}
