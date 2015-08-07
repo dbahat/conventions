@@ -37,13 +37,63 @@
                     android:id="@+id/feedback_no_events_text"
                     style="@style/TextAppearance.AppCompat.Subhead"
                     android:text="@string/events_feedback_no_events"/>
-                <amai.org.conventions.customviews.NestedListView
-                    android:id="@+id/events_without_feedback_list"
-                    android:divider="@null"
-                    android:dividerHeight="0dp"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                </amai.org.conventions.customviews.NestedListView>
+                    android:layout_height="wrap_content"
+                    android:id="@+id/events_without_feedback_list_layout"
+                    android:orientation="vertical">
+                    <amai.org.conventions.customviews.NestedListView
+                        android:id="@+id/events_without_feedback_list"
+                        android:divider="@null"
+                        android:dividerHeight="0dp"
+                        android:animateLayoutChanges="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    </amai.org.conventions.customviews.NestedListView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/activity_horizontal_margin"
+                        android:paddingRight="@dimen/activity_horizontal_margin"
+                        style="@style/TextAppearance.AppCompat.Subhead"
+                        android:id="@+id/send_all_explanation"
+                        android:text="@string/send_all_explanation_no_events"/>
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+
+                        <Button
+                            android:id="@+id/send_all_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/feedback_highlighted_button"
+                            android:enabled="false"
+                            android:text="@string/send_all"
+                            android:textColor="@color/white" />
+
+                        <!-- this progress bar gets un-hidden in runtime when the button is clicked -->
+                        <ProgressBar
+                            android:id="@+id/send_all_progress_bar"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_gravity="center"
+                            style="@android:style/Widget.ProgressBar.Horizontal"
+                            android:progressDrawable="@drawable/rotating_circular_progress_bar"
+                            android:visibility="gone" />
+
+                    </FrameLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:alpha="0.1"
+                        android:background="@android:color/black"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        />
+
+                </LinearLayout>
             </FrameLayout>
         </LinearLayout>
 
@@ -65,6 +115,7 @@
                 android:id="@+id/events_with_sent_feedback_list"
                 android:divider="@null"
                 android:dividerHeight="0dp"
+                android:animateLayoutChanges="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             </amai.org.conventions.customviews.NestedListView>

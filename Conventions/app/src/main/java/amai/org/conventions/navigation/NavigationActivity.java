@@ -12,7 +12,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PictureDrawable;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -321,9 +320,4 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		}
 		super.onBackPressed();
 	}
-
-	protected String getDeviceId() {
-		return Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
-	}
-
 }

@@ -8,7 +8,6 @@ import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.text.Editable;
 import android.text.InputType;
@@ -30,20 +29,16 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Properties;
 
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.AspectRatioImageView;
-import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.Feedback;
 import amai.org.conventions.model.FeedbackQuestion;
-import amai.org.conventions.utils.Dates;
-import amai.org.conventions.utils.GMailSender;
+import amai.org.conventions.utils.FeedbackMail;
 
 public class CollapsibleFeedbackView extends FrameLayout {
 
@@ -524,15 +519,15 @@ public class CollapsibleFeedbackView extends FrameLayout {
         animator.setInterpolator(new AccelerateDecelerateInterpolator());
 
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                //Update Height
-                int value = (Integer) valueAnimator.getAnimatedValue();
+	        @Override
+	        public void onAnimationUpdate(ValueAnimator valueAnimator) {
+		        //Update Height
+		        int value = (Integer) valueAnimator.getAnimatedValue();
 
-                ViewGroup.LayoutParams layoutParams = viewToResize.getLayoutParams();
-                layoutParams.height = value;
-                viewToResize.setLayoutParams(layoutParams);
-            }
+		        ViewGroup.LayoutParams layoutParams = viewToResize.getLayoutParams();
+		        layoutParams.height = value;
+		        viewToResize.setLayoutParams(layoutParams);
+	        }
         });
         return animator;
     }
@@ -551,91 +546,33 @@ public class CollapsibleFeedbackView extends FrameLayout {
 	    ExpandedHeadless
     }
 
-	public String getFormattedQuestions() {
-		StringBuilder stringBuilder = new StringBuilder();
-		for (FeedbackQuestion question : feedback.getQuestions()) {
-			if (question.hasAnswer()) {
-				stringBuilder.append(String.format(Dates.getLocale(), "%s\n%s\n\t\n\t\n",
-						question.getQuestionText(getResources(), feedback.isSent()),
-						question.getAnswer()));
-			}
-		}
-
-		return stringBuilder.toString();
-	}
-
-	public abstract class SendMailOnClickListener implements OnClickListener {
+	public abstract class CollapsibleFeedbackViewSendMailListener extends FeedbackMail.SendEventMailOnClickListener {
 		protected abstract void saveFeedback();
-
-		protected abstract String getMailSubject();
-		protected abstract String getMailBody();
-		protected String getMailRecipient() {
-			return Convention.getInstance().getFeedbackRecipient();
-		}
 
 		protected void onSuccess() {
 			// Refresh the feedback UI so interactions will now be disabled in it
 			refresh();
 		}
-		protected void onFailure(String errorMessage) {
+
+		@Override
+		protected void beforeStart() {
+			setProgressBarVisibility(true);
 		}
 
 		@Override
-		public void onClick(View v) {
-			setProgressBarVisibility(true);
+		protected void beforeSend() {
+			// First save the feedback before sending it
+			saveFeedback();
+		}
 
-			new AsyncTask<Void, Void, String>() {
+		@Override
+		protected void afterSend() {
+			saveFeedback();
+		}
 
-				@Override
-				protected String doInBackground(Void... params) {
-					// First save the feedback before sending it
-					saveFeedback();
-
-					Properties properties = new Properties();
-					try {
-						properties.load(getResources().openRawResource(R.raw.mail));
-					} catch (IOException e) {
-						return e.getMessage();
-					}
-
-					String mail = properties.getProperty("mail");
-					String password = properties.getProperty("password");
-					if (mail == null || password == null) {
-						return "Failed to get the mail or password values from the mail.properties file.";
-					}
-
-					GMailSender sender = new GMailSender(mail, password);
-					try {
-						sender.sendMail(
-								getMailSubject(),
-								getMailBody(),
-								mail,
-								getMailRecipient());
-					} catch (Exception e) {
-						return e.getMessage();
-					}
-
-					feedback.setIsSent(true);
-					feedback.removeUnansweredQuestions();
-					saveFeedback();
-
-					// In case everything finished successfully, pass null to onPostExecute.
-					return null;
-				}
-
-				@Override
-				protected void onPostExecute(String errorMessage) {
-					setProgressBarVisibility(false);
-
-					if (errorMessage != null) {
-						onFailure(errorMessage);
-					} else {
-						onSuccess();
-					}
-				}
-
-			}.execute();
-
+		@Override
+		protected void afterEnd(Exception exception) {
+			setProgressBarVisibility(false);
 		}
 	}
 }

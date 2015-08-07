@@ -18,6 +18,11 @@ public class EventsViewAdapter extends BaseAdapter {
 		this.eventsList = eventsList;
 	}
 
+	public void setEventsList(List<ConventionEvent> eventsList) {
+		this.eventsList = eventsList;
+		notifyDataSetChanged();
+	}
+
 	@Override
 	public int getCount() {
 		return eventsList.size();

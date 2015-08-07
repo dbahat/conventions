@@ -32,10 +32,11 @@ import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.Feedback;
-import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.EventFeedbackMail;
+import amai.org.conventions.utils.FeedbackMail;
 import amai.org.conventions.utils.Log;
 import fi.iki.kuitsi.listtest.ListTagHandler;
 import uk.co.chrisjenx.paralloid.views.ParallaxScrollView;
@@ -260,12 +261,7 @@ public class EventActivity extends NavigationActivity {
 
 	private void saveUserInput() {
 		Convention.getInstance().getStorage().saveUserInput();
-
-		// Reset answer changed flag
-		List<FeedbackQuestion> questions = this.conventionEvent.getUserInput().getFeedback().getQuestions();
-		for (FeedbackQuestion question : questions) {
-		    question.setAnswerChanged(false);
-		}
+		conventionEvent.getUserInput().getFeedback().resetChangedAnswers();
 	}
 
     @Override
@@ -284,16 +280,6 @@ public class EventActivity extends NavigationActivity {
         if (location == null) {
             menu.findItem(R.id.event_navigate_to_map).setVisible(false);
         }
-    }
-
-    private String formatFeedbackMailBody() {
-        return String.format(Dates.getLocale(), "%s\n%s, %s\n\n%s\n\t\n\t\n\t\nDeviceId:\n%s",
-		        conventionEvent.getTitle(),
-		        Dates.formatHoursAndMinutes(conventionEvent.getStartTime()),
-		        conventionEvent.getHall().getName(),
-		        feedbackView.getFormattedQuestions(),
-		        getDeviceId()
-        );
     }
 
     private void setEvent(ConventionEvent event) {
@@ -340,25 +326,20 @@ public class EventActivity extends NavigationActivity {
 				feedbackView.setState(CollapsibleFeedbackView.State.Expanded, animate);
 			}
 
-			feedbackView.setSendFeedbackClickListener(feedbackView.new SendMailOnClickListener() {
+			feedbackView.setSendFeedbackClickListener(feedbackView.new CollapsibleFeedbackViewSendMailListener() {
 				@Override
 				protected void saveFeedback() {
 					saveUserInput();
 				}
 
 				@Override
-				protected String getMailSubject() {
-					return getString(R.string.event_feedback_mail_title) + ": " + conventionEvent.getTitle();
+				protected FeedbackMail getFeedbackMail() {
+					return new EventFeedbackMail(EventActivity.this, conventionEvent);
 				}
 
 				@Override
-				protected String getMailBody() {
-					return formatFeedbackMailBody();
-				}
-
-				@Override
-				protected void onFailure(String errorMessage) {
-					Log.w(TAG, "Failed to send feedback mail. Reason: " + errorMessage);
+				protected void onFailure(Exception exception) {
+					Log.w(TAG, "Failed to send feedback mail. Reason: " + exception.getMessage());
 					Toast.makeText(EventActivity.this, R.string.feedback_send_mail_failed, Toast.LENGTH_LONG).show();
 				}
 
@@ -372,6 +353,7 @@ public class EventActivity extends NavigationActivity {
 			feedbackContainer.setVisibility(View.GONE);
 		}
 	}
+
 
 	private boolean shouldFeedbackBeClosed() {
 		// Feedback should start as closed in the following cases:

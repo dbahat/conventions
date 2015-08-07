@@ -111,6 +111,12 @@ public class Feedback implements Serializable, Cloneable {
 		return false;
 	}
 
+	public void resetChangedAnswers() {
+		for (FeedbackQuestion question : getQuestions()) {
+			question.setAnswerChanged(false);
+		}
+	}
+
 	public FeedbackQuestion.Smiley3PointAnswer getWeightedRating() {
 		if (isSent()) {
 			for (FeedbackQuestion question : questions.values()) {

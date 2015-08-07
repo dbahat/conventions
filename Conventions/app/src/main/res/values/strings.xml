@@ -37,7 +37,7 @@
     <string name="add_feedback">מלא פידבק</string>
     <string name="feedback">פידבק</string>
     <string name="close_feedback">הסתר</string>
-    <string name="send">שלח לאמא\"י</string>
+    <string name="send">שלח</string>
     <string name="back">חזור</string>
 
     <string name="event_feedback_mail_title">מייל אוטומטי - פידבק לכאמ\"י 2015 עבור האירוע</string>
@@ -69,4 +69,8 @@
     <string name="age_less_than_12">פחות מ-12</string>
     <string name="age_12_to_18">12–18</string>
     <string name="age_more_than_18">יותר מ-18</string>
+    <string name="send_all_explanation_no_events">ניתן לשלוח פידבק שמילאת על אירועים ולא שלחת ע\"י לחיצה על \"שלח הכל\".</string>
+    <string name="send_all_explanation_with_1_event">יש אירוע אחד שעבורו מילאת פידבק ולא שלחת. ניתן לשלוח את הפידבק שמילאת ע\"י לחיצה על \"שלח הכל\".</string>
+    <string name="send_all_explanation_with_events">יש %d אירועים שעבורם מילאת פידבק ולא שלחת. ניתן לשלוח את הפידבק שמילאת ע\"י לחיצה על \"שלח הכל\".</string>
+    <string name="send_all">שלח הכל</string>
 </resources>

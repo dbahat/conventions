@@ -24,6 +24,7 @@ import java.util.List;
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.ConventionEvent;
+import amai.org.conventions.model.Feedback;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Strings;
@@ -36,7 +37,7 @@ public class EventView extends FrameLayout {
     private final TextView endTime;
     private final TextView eventName;
     private final TextView lecturerName;
-    private final ImageView feedbackIcon;
+	private final ImageView feedbackIcon;
     private final ViewGroup timeLayout;
     private final ViewGroup eventDescription;
     private final CardView eventContainer;
@@ -55,7 +56,7 @@ public class EventView extends FrameLayout {
         endTime = (TextView) this.findViewById(R.id.endTime);
         eventName = (TextView) this.findViewById(R.id.eventName);
         lecturerName = (TextView) this.findViewById(R.id.lecturerName);
-        feedbackIcon = (ImageView) this.findViewById(R.id.feedback_icon);
+	    feedbackIcon = (ImageView) this.findViewById(R.id.feedback_icon);
         eventDescription = (ViewGroup) this.findViewById(R.id.eventDescription);
         eventContainer = (CardView) this.findViewById(R.id.eventContainer);
         bottomLayout = this.findViewById(R.id.bottom_layout);
@@ -79,7 +80,7 @@ public class EventView extends FrameLayout {
         setEndTime(params.getString(R.styleable.Event_endTime));
         setEventTitle(params.getString(R.styleable.Event_eventTitle));
         setLecturerName(params.getString(R.styleable.Event_lecturerName));
-        setFeedbackIcon(params.getDrawable(R.styleable.Event_feedbackIcon));
+	    setFeedbackIcon(params.getDrawable(R.styleable.Event_feedbackIcon));
 
         setColorFromAttributes(timeLayout, params, R.styleable.Event_eventTypeColor);
         setColorFromAttributes(eventDescription, params, R.styleable.Event_eventColor);
@@ -96,7 +97,7 @@ public class EventView extends FrameLayout {
         setEndTime(Dates.formatHoursAndMinutes(event.getEndTime()));
         setEventTitle(event.getTitle());
         setLecturerName(event.getLecturer());
-        setFeedbackIconFromEvent(event);
+	    setFeedbackIconFromEvent(event);
 
         // Keep the description text without any HTML markup, for usage inside setKeywordsHighlighting()
         searchDescription.setText(Html.fromHtml(event.getDescription()).toString().replace("\n", " "));
@@ -192,49 +193,50 @@ public class EventView extends FrameLayout {
         lecturerName.setText(name);
     }
 
-    protected void setFeedbackIcon(Drawable feedbackDrawable) {
-        if (feedbackDrawable != null) {
-            lecturerName.setVisibility(GONE);
-            feedbackIcon.setVisibility(VISIBLE);
-            feedbackIcon.setImageDrawable(feedbackDrawable);
-        } else {
-            lecturerName.setVisibility(VISIBLE);
-            feedbackIcon.setVisibility(GONE);
-        }
-    }
+	protected void setFeedbackIcon(Drawable feedbackDrawable) {
+		if (feedbackDrawable != null) {
+			lecturerName.setVisibility(GONE);
+			feedbackIcon.setVisibility(VISIBLE);
+			feedbackIcon.setImageDrawable(feedbackDrawable);
+		} else {
+			lecturerName.setVisibility(VISIBLE);
+			feedbackIcon.setVisibility(GONE);
+		}
+	}
 
-    protected void setFeedbackIconFromEvent(ConventionEvent event) {
-        Drawable icon = null;
-        if (event.canFillFeedback()) {
-            FeedbackQuestion.Smiley3PointAnswer weightedRating = event.getUserInput().getFeedback().getWeightedRating();
-            int filterColor;
-            if (weightedRating != null) {
-                icon = getResources().getDrawable(weightedRating.getImageResourceId());
-                filterColor = getResources().getColor(R.color.yellow);
-            } else if (event.getUserInput().getFeedback().hasAnsweredQuestions()) {
-                icon = getResources().getDrawable(android.R.drawable.ic_dialog_email);
-                filterColor = getResources().getColor(R.color.green);
-            } else {
-                icon = getResources().getDrawable(R.drawable.feedback);
-                // If the user sent the feedback but it did not fill any smiley questions, there won't
-                // be a weighted rating
-                if (event.getUserInput().getFeedback().isSent()) {
-                    icon = getResources().getDrawable(R.drawable.feedback_sent);
-                    filterColor = getResources().getColor(R.color.yellow);
-                } else if (event.isAttending()) {
-                    filterColor = getResources().getColor(R.color.green);
-                } else {
-                    filterColor = getResources().getColor(R.color.very_dark_gray);
-                }
-            }
+	protected void setFeedbackIconFromEvent(ConventionEvent event) {
+		Drawable icon = null;
+		if (event.canFillFeedback()) {
+			Feedback feedback = event.getUserInput().getFeedback();
+			FeedbackQuestion.Smiley3PointAnswer weightedRating = feedback.getWeightedRating();
+			int filterColor;
+			if (weightedRating != null) {
+				icon = getResources().getDrawable(weightedRating.getImageResourceId());
+				filterColor = getResources().getColor(R.color.yellow);
+			} else if ((!feedback.isSent()) && feedback.hasAnsweredQuestions()) {
+				icon = getResources().getDrawable(android.R.drawable.ic_dialog_email);
+				filterColor = getResources().getColor(R.color.green);
+			} else {
+				icon = getResources().getDrawable(R.drawable.feedback);
+				// If the user sent the feedback but it did not fill any smiley questions, there won't
+				// be a weighted rating
+				if (feedback.isSent()) {
+					icon = getResources().getDrawable(R.drawable.feedback_sent);
+					filterColor = getResources().getColor(R.color.yellow);
+				} else if (event.isAttending()) {
+					filterColor = getResources().getColor(R.color.green);
+				} else {
+					filterColor = getResources().getColor(R.color.very_dark_gray);
+				}
+			}
 
             if (icon != null) {
-                icon = icon.mutate();
-                icon.setColorFilter(filterColor, PorterDuff.Mode.MULTIPLY);
-            }
+				icon = icon.mutate();
+				icon.setColorFilter(filterColor, PorterDuff.Mode.MULTIPLY);
+			}
         }
-        setFeedbackIcon(icon);
-    }
+		setFeedbackIcon(icon);
+	}
 
     private void setBackground(ViewGroup layout, Drawable drawable) {
         int pL = layout.getPaddingLeft();
@@ -297,22 +299,22 @@ public class EventView extends FrameLayout {
 
         String textToHighlight = originalText.toString();
         SpannableString highlightedText = originalText instanceof SpannableString
-                ? (SpannableString) originalText
+                ? (SpannableString)originalText
                 : new SpannableString(originalText);
 
         if (!textToHighlight.contains(keyword)) {
             return false;
         }
 
-        int currentKeywordIndex = textToHighlight.indexOf(keyword);
-        while (currentKeywordIndex != -1) {
-            // Highlight the keyword
-            highlightedText.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), currentKeywordIndex, currentKeywordIndex + keyword.length(), 0);
+            int currentKeywordIndex = textToHighlight.indexOf(keyword);
+            while (currentKeywordIndex != -1) {
+                // Highlight the keyword
+                highlightedText.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), currentKeywordIndex, currentKeywordIndex + keyword.length(), 0);
             highlightedText.setSpan(new ForegroundColorSpan(Color.BLACK), currentKeywordIndex, currentKeywordIndex + keyword.length(), 0);
 
-            // Now move to highlight the next word
-            currentKeywordIndex = textToHighlight.indexOf(keyword, currentKeywordIndex + keyword.length());
-        }
+                // Now move to highlight the next word
+                currentKeywordIndex = textToHighlight.indexOf(keyword, currentKeywordIndex + keyword.length());
+            }
 
         textView.setText(highlightedText);
         return true;

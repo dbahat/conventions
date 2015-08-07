@@ -50,7 +50,11 @@ public class GMailSender extends javax.mail.Authenticator {
         session = Session.getDefaultInstance(props, this);
     }
 
-    protected PasswordAuthentication getPasswordAuthentication() {
+	public String getUser() {
+		return user;
+	}
+
+	protected PasswordAuthentication getPasswordAuthentication() {
         return new PasswordAuthentication(user, password);
     }
 
