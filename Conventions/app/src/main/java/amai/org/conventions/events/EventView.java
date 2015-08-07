@@ -275,8 +275,8 @@ public class EventView extends FrameLayout {
                 boolean didHighlightLectureName = tryHighlightKeywordInTextView(lecturerName, lowerCaseKeyword);
                 boolean didHighlightHallName = tryHighlightKeywordInTextView(hallName, lowerCaseKeyword);
 
-                String filteredDescriptionText = searchDescription.getText().toString().toLowerCase();
-                boolean isKeywordInDescription = filteredDescriptionText.contains(lowerCaseKeyword);
+                String filteredDescriptionText = searchDescription.getText().toString();
+                boolean isKeywordInDescription = filteredDescriptionText.toLowerCase().contains(lowerCaseKeyword);
 
                 // If the keyword is in the description, hide the lecturer name and hall name and show the description text next to the keyword insead
                 // (assuming there are no highlighted keywords in the views we hid)
@@ -297,24 +297,24 @@ public class EventView extends FrameLayout {
     private boolean tryHighlightKeywordInTextView(TextView textView, String keyword) {
         CharSequence originalText = textView.getText();
 
-        String textToHighlight = originalText.toString();
+        String textToHighlight = originalText.toString().toLowerCase();
         SpannableString highlightedText = originalText instanceof SpannableString
-                ? (SpannableString)originalText
+                ? (SpannableString) originalText
                 : new SpannableString(originalText);
 
         if (!textToHighlight.contains(keyword)) {
             return false;
         }
 
-            int currentKeywordIndex = textToHighlight.indexOf(keyword);
-            while (currentKeywordIndex != -1) {
-                // Highlight the keyword
-                highlightedText.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), currentKeywordIndex, currentKeywordIndex + keyword.length(), 0);
+        int currentKeywordIndex = textToHighlight.indexOf(keyword);
+        while (currentKeywordIndex != -1) {
+            // Highlight the keyword
+            highlightedText.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), currentKeywordIndex, currentKeywordIndex + keyword.length(), 0);
             highlightedText.setSpan(new ForegroundColorSpan(Color.BLACK), currentKeywordIndex, currentKeywordIndex + keyword.length(), 0);
 
-                // Now move to highlight the next word
-                currentKeywordIndex = textToHighlight.indexOf(keyword, currentKeywordIndex + keyword.length());
-            }
+            // Now move to highlight the next word
+            currentKeywordIndex = textToHighlight.indexOf(keyword, currentKeywordIndex + keyword.length());
+        }
 
         textView.setText(highlightedText);
         return true;

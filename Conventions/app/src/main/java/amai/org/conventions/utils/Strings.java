@@ -16,10 +16,11 @@ public class Strings {
      * @return The text after snipping.
      */
     public static String snipTextNearKeyword(String textToSnip, String keyword) {
-        int startIndex = findIndexOfXWordBefore(textToSnip, keyword, 3);
+	    String lowerCaseText = textToSnip.toLowerCase();
+        int startIndex = findIndexOfXWordBefore(lowerCaseText, keyword, 3);
 
         // Note - trimming the text to be at most MAX_SNIPPIT_SIZE, since textView seem to appear distorted when passing
-        // a much larger text then the max allowed.
+        // a much larger text than the max allowed.
         if (startIndex <= 0) {
             return textToSnip.substring(0, Math.min(textToSnip.length(), MAX_SNIPPIT_SIZE));
         } else {

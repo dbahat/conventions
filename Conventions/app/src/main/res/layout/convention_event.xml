@@ -121,7 +121,7 @@
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:gravity="bottom"
-                    android:textColor="@color/dark_gray"
+                    android:textColor="@android:color/darker_gray"
                     android:visibility="gone"
                     style="@style/EventViewSmallText"/>
 
