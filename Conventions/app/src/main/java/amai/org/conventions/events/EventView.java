@@ -7,10 +7,13 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.CardView;
+import android.text.Html;
 import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -23,6 +26,7 @@ import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.Strings;
 
 public class EventView extends FrameLayout {
 
@@ -32,10 +36,12 @@ public class EventView extends FrameLayout {
     private final TextView endTime;
     private final TextView eventName;
     private final TextView lecturerName;
-	private final ImageView feedbackIcon;
+    private final ImageView feedbackIcon;
     private final ViewGroup timeLayout;
     private final ViewGroup eventDescription;
     private final CardView eventContainer;
+    private final View bottomLayout;
+    private final TextView searchDescription;
 
     public EventView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -49,9 +55,11 @@ public class EventView extends FrameLayout {
         endTime = (TextView) this.findViewById(R.id.endTime);
         eventName = (TextView) this.findViewById(R.id.eventName);
         lecturerName = (TextView) this.findViewById(R.id.lecturerName);
-	    feedbackIcon = (ImageView) this.findViewById(R.id.feedback_icon);
+        feedbackIcon = (ImageView) this.findViewById(R.id.feedback_icon);
         eventDescription = (ViewGroup) this.findViewById(R.id.eventDescription);
         eventContainer = (CardView) this.findViewById(R.id.eventContainer);
+        bottomLayout = this.findViewById(R.id.bottom_layout);
+        searchDescription = (TextView) this.findViewById(R.id.search_description);
 
         setConflicting(false);
         setAttributes(attrs);
@@ -71,7 +79,7 @@ public class EventView extends FrameLayout {
         setEndTime(params.getString(R.styleable.Event_endTime));
         setEventTitle(params.getString(R.styleable.Event_eventTitle));
         setLecturerName(params.getString(R.styleable.Event_lecturerName));
-	    setFeedbackIcon(params.getDrawable(R.styleable.Event_feedbackIcon));
+        setFeedbackIcon(params.getDrawable(R.styleable.Event_feedbackIcon));
 
         setColorFromAttributes(timeLayout, params, R.styleable.Event_eventTypeColor);
         setColorFromAttributes(eventDescription, params, R.styleable.Event_eventColor);
@@ -88,7 +96,10 @@ public class EventView extends FrameLayout {
         setEndTime(Dates.formatHoursAndMinutes(event.getEndTime()));
         setEventTitle(event.getTitle());
         setLecturerName(event.getLecturer());
-	    setFeedbackIconFromEvent(event);
+        setFeedbackIconFromEvent(event);
+
+        // Keep the description text without any HTML markup, for usage inside setKeywordsHighlighting()
+        searchDescription.setText(Html.fromHtml(event.getDescription()).toString().replace("\n", " "));
 
         // Setting the event id inside the view tag, so we can easily extract it from the view when listening to onClick events.
         eventContainer.setTag(event.getId());
@@ -181,46 +192,49 @@ public class EventView extends FrameLayout {
         lecturerName.setText(name);
     }
 
-	protected void setFeedbackIcon(Drawable feedbackDrawable) {
-		if (feedbackDrawable != null) {
-			lecturerName.setVisibility(GONE);
-			feedbackIcon.setVisibility(VISIBLE);
-			feedbackIcon.setImageDrawable(feedbackDrawable);
-		} else {
-			lecturerName.setVisibility(VISIBLE);
-			feedbackIcon.setVisibility(GONE);
-		}
-	}
+    protected void setFeedbackIcon(Drawable feedbackDrawable) {
+        if (feedbackDrawable != null) {
+            lecturerName.setVisibility(GONE);
+            feedbackIcon.setVisibility(VISIBLE);
+            feedbackIcon.setImageDrawable(feedbackDrawable);
+        } else {
+            lecturerName.setVisibility(VISIBLE);
+            feedbackIcon.setVisibility(GONE);
+        }
+    }
 
-	protected void setFeedbackIconFromEvent(ConventionEvent event) {
-		Drawable icon = null;
-		if (event.canFillFeedback()) {
-			FeedbackQuestion.Smiley3PointAnswer weightedRating = event.getUserInput().getFeedback().getWeightedRating();
-			int filterColor;
-			if (weightedRating != null) {
-				icon = getResources().getDrawable(weightedRating.getImageResourceId());
-				filterColor = getResources().getColor(R.color.yellow);
-			} else if (event.getUserInput().getFeedback().hasAnsweredQuestions()) {
-				icon = getResources().getDrawable(android.R.drawable.ic_dialog_email);
-				filterColor = getResources().getColor(R.color.green);
-			} else {
-				icon = getResources().getDrawable(R.drawable.feedback);
-				// If the user sent the feedback but it did not fill any smiley questions, there won't
-				// be a weighted rating
-				if (event.getUserInput().getFeedback().isSent()) {
-					icon = getResources().getDrawable(R.drawable.feedback_sent);
-					filterColor = getResources().getColor(R.color.yellow);
-				} else if (event.isAttending()) {
-					filterColor = getResources().getColor(R.color.green);
-				} else {
-					filterColor = getResources().getColor(R.color.very_dark_gray);
-				}
-			}
-			icon = icon.mutate();
-			icon.setColorFilter(filterColor, PorterDuff.Mode.MULTIPLY);
-		}
-		setFeedbackIcon(icon);
-	}
+    protected void setFeedbackIconFromEvent(ConventionEvent event) {
+        Drawable icon = null;
+        if (event.canFillFeedback()) {
+            FeedbackQuestion.Smiley3PointAnswer weightedRating = event.getUserInput().getFeedback().getWeightedRating();
+            int filterColor;
+            if (weightedRating != null) {
+                icon = getResources().getDrawable(weightedRating.getImageResourceId());
+                filterColor = getResources().getColor(R.color.yellow);
+            } else if (event.getUserInput().getFeedback().hasAnsweredQuestions()) {
+                icon = getResources().getDrawable(android.R.drawable.ic_dialog_email);
+                filterColor = getResources().getColor(R.color.green);
+            } else {
+                icon = getResources().getDrawable(R.drawable.feedback);
+                // If the user sent the feedback but it did not fill any smiley questions, there won't
+                // be a weighted rating
+                if (event.getUserInput().getFeedback().isSent()) {
+                    icon = getResources().getDrawable(R.drawable.feedback_sent);
+                    filterColor = getResources().getColor(R.color.yellow);
+                } else if (event.isAttending()) {
+                    filterColor = getResources().getColor(R.color.green);
+                } else {
+                    filterColor = getResources().getColor(R.color.very_dark_gray);
+                }
+            }
+
+            if (icon != null) {
+                icon = icon.mutate();
+                icon.setColorFilter(filterColor, PorterDuff.Mode.MULTIPLY);
+            }
+        }
+        setFeedbackIcon(icon);
+    }
 
     private void setBackground(ViewGroup layout, Drawable drawable) {
         int pL = layout.getPaddingLeft();
@@ -245,34 +259,62 @@ public class EventView extends FrameLayout {
     }
 
     public void setKeywordsHighlighting(List<String> keywords) {
+
+        // Reset the state of the bottom layout, in case it was changed by recent call to set keyword highlighting
+        bottomLayout.setVisibility(VISIBLE);
+        searchDescription.setVisibility(GONE);
+        boolean wasDescriptionSnipped = false;
+
         for (String keyword : keywords) {
             if (keyword.length() > 0) {
-                highlightKeywordInTextView(lecturerName, keyword);
-                highlightKeywordInTextView(hallName, keyword);
-                highlightKeywordInTextView(eventName, keyword);
+                String lowerCaseKeyword = keyword.toLowerCase();
+                tryHighlightKeywordInTextView(eventName, lowerCaseKeyword);
+
+                boolean didHighlightLectureName = tryHighlightKeywordInTextView(lecturerName, lowerCaseKeyword);
+                boolean didHighlightHallName = tryHighlightKeywordInTextView(hallName, lowerCaseKeyword);
+
+                String filteredDescriptionText = searchDescription.getText().toString().toLowerCase();
+                boolean isKeywordInDescription = filteredDescriptionText.contains(lowerCaseKeyword);
+
+                // If the keyword is in the description, hide the lecturer name and hall name and show the description text next to the keyword insead
+                // (assuming there are no highlighted keywords in the views we hid)
+                if (!didHighlightLectureName && !didHighlightHallName && isKeywordInDescription) {
+                    bottomLayout.setVisibility(GONE);
+                    searchDescription.setVisibility(VISIBLE);
+
+                    if (!wasDescriptionSnipped) {
+                        searchDescription.setText(Strings.snipTextNearKeyword(filteredDescriptionText, lowerCaseKeyword));
+                        wasDescriptionSnipped = true;
+                    }
+                    tryHighlightKeywordInTextView(searchDescription, lowerCaseKeyword);
+                }
             }
         }
     }
 
-    private void highlightKeywordInTextView(TextView textView, String keyword) {
+    private boolean tryHighlightKeywordInTextView(TextView textView, String keyword) {
         CharSequence originalText = textView.getText();
 
         String textToHighlight = originalText.toString();
         SpannableString highlightedText = originalText instanceof SpannableString
-                ? (SpannableString)originalText
+                ? (SpannableString) originalText
                 : new SpannableString(originalText);
 
-        if (textToHighlight.contains(keyword)) {
-            int currentKeywordIndex = textToHighlight.indexOf(keyword);
-            while (currentKeywordIndex != -1) {
-                // Highlight the keyword
-                highlightedText.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), currentKeywordIndex, currentKeywordIndex + keyword.length(), 0);
+        if (!textToHighlight.contains(keyword)) {
+            return false;
+        }
 
-                // Now move to highlight the next word
-                currentKeywordIndex = textToHighlight.indexOf(keyword, currentKeywordIndex + keyword.length());
-            }
+        int currentKeywordIndex = textToHighlight.indexOf(keyword);
+        while (currentKeywordIndex != -1) {
+            // Highlight the keyword
+            highlightedText.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), currentKeywordIndex, currentKeywordIndex + keyword.length(), 0);
+            highlightedText.setSpan(new ForegroundColorSpan(Color.BLACK), currentKeywordIndex, currentKeywordIndex + keyword.length(), 0);
+
+            // Now move to highlight the next word
+            currentKeywordIndex = textToHighlight.indexOf(keyword, currentKeywordIndex + keyword.length());
         }
 
         textView.setText(highlightedText);
+        return true;
     }
 }

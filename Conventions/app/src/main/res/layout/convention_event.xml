@@ -65,47 +65,67 @@
                 android:maxLines="2"
                 android:ellipsize="end"/>
 
-            <RelativeLayout
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="bottom">
+                android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/hallName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:ellipsize="start"
-                    android:layout_alignParentStart="true"
-                    style="@style/EventViewSmallText"
-                    android:textColor="@android:color/darker_gray"
-                    android:text="Hall name"/>
-
-                <FrameLayout
-                    android:layout_alignParentEnd="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:id="@+id/bottom_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="bottom">
 
                     <TextView
-                        android:id="@+id/lecturerName"
+                        android:id="@+id/hallName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Lecturer name"
                         android:maxLines="1"
-                        android:ellipsize="end"
+                        android:ellipsize="start"
+                        android:layout_alignParentStart="true"
+                        style="@style/EventViewSmallText"
                         android:textColor="@android:color/darker_gray"
-                        style="@style/EventViewSmallText"/>
+                        android:text="Hall name"/>
 
-                    <amai.org.conventions.customviews.AspectRatioImageView
-                        android:id="@+id/feedback_icon"
+                    <FrameLayout
+                        android:layout_alignParentEnd="true"
                         android:layout_width="wrap_content"
-                        android:layout_height="18dp"
-                        android:src="@drawable/feedback"
-                        android:visibility="gone"
-                        />
-                </FrameLayout>
+                        android:layout_height="wrap_content">
 
-            </RelativeLayout>
+                        <TextView
+                            android:id="@+id/lecturerName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Lecturer name"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:textColor="@android:color/darker_gray"
+                            style="@style/EventViewSmallText"/>
+
+                        <amai.org.conventions.customviews.AspectRatioImageView
+                            android:id="@+id/feedback_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="18dp"
+                            android:src="@drawable/feedback"
+                            android:visibility="gone"
+                            />
+                    </FrameLayout>
+
+                </RelativeLayout>
+
+                <!-- The below layout will replace the bottom layout at runtime if the user is
+                 performing a search in the event description -->
+                <TextView
+                    android:id="@+id/search_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:gravity="bottom"
+                    android:textColor="@color/dark_gray"
+                    android:visibility="gone"
+                    style="@style/EventViewSmallText"/>
+
+            </FrameLayout>
 
         </LinearLayout>
     </LinearLayout>

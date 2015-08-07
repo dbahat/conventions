@@ -2,9 +2,11 @@ package amai.org.conventions.events.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -38,6 +40,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
     private SwipeableEventsViewAdapter adapter;
     private RecyclerView recyclerView;
     private TextView noResultsFoundView;
+    private boolean applingTextFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,9 +129,21 @@ public class ProgrammeSearchActivity extends NavigationActivity {
             }
 
             @Override
-            public void afterTextChanged(final Editable s) {
+            public void afterTextChanged(Editable s) {
                 keywordsFilter = s.toString();
-                applyFilters();
+
+                // Apply the keyword filter in a short delay, to somewhat reduce slowness of applying the filter during typing
+                if (!applingTextFilter) {
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            applyFilters();
+                            applingTextFilter = false;
+                        }
+                    }, 300);
+                }
+
+                applingTextFilter = true;
             }
         });
 
@@ -185,9 +200,13 @@ public class ProgrammeSearchActivity extends NavigationActivity {
     }
 
     private boolean containsKeyword(ConventionEvent event, String keyword) {
+        // Filter out HTML tags from the event description
+        String filteredEventDescription = Html.fromHtml(event.getDescription()).toString();
+
         keyword = keyword.toLowerCase();
         return event.getTitle().toLowerCase().contains(keyword)
-                || event.getLecturer().contains(keyword)
-                || event.getHall().getName().contains(keyword);
+                || event.getLecturer().toLowerCase().contains(keyword)
+                || event.getHall().getName().toLowerCase().contains(keyword)
+                || filteredEventDescription.toLowerCase().contains(keyword);
     }
 }
