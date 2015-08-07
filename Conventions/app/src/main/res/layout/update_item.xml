@@ -85,6 +85,7 @@
             android:maxLines="7"
             android:autoLink="all"
             android:text="Bla bla bla, bla bla ba, blaBla bla bla, bla bla ba, blaBla bla bla, bla bla ba, blaBla bla bla, bla bla ba, blaBla bla bla, bla bla ba, blaBla bla bla, bla bla ba, bla"
+            android:textDirection="rtl"
             style="@style/TextAppearance.AppCompat.Subhead"/>
 
     </RelativeLayout>
