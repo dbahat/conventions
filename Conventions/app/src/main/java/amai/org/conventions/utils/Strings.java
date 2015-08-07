@@ -20,7 +20,7 @@ public class Strings {
 
         // Note - trimming the text to be at most MAX_SNIPPIT_SIZE, since textView seem to appear distorted when passing
         // a much larger text then the max allowed.
-        if (startIndex > 0) {
+        if (startIndex <= 0) {
             return textToSnip.substring(0, Math.min(textToSnip.length(), MAX_SNIPPIT_SIZE));
         } else {
             return "..." + textToSnip.substring(startIndex, Math.min(textToSnip.length(), startIndex + MAX_SNIPPIT_SIZE));
