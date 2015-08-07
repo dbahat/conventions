@@ -316,7 +316,12 @@ public class Convention implements Serializable {
 	public boolean canFillFeedback() {
 		// Check if the convention started at least 2 hours ago
 		Calendar minimumTimeOfFillingFeedback = Calendar.getInstance();
-		minimumTimeOfFillingFeedback.setTime(getFirstEventStartTime());
+		Date firstEventStartTime = getFirstEventStartTime();
+		if (firstEventStartTime == null) {
+			// Problem reading events
+			return false;
+		}
+		minimumTimeOfFillingFeedback.setTime(firstEventStartTime);
 		minimumTimeOfFillingFeedback.add(Calendar.MINUTE, 120);
 
 		return minimumTimeOfFillingFeedback.getTime().before(Dates.now());
@@ -333,7 +338,12 @@ public class Convention implements Serializable {
 	}
 
 	public boolean hasEnded() {
-		return Dates.now().after(getLastEventEndTime());
+		Date lastEventEndTime = getLastEventEndTime();
+		if (lastEventEndTime == null) {
+			// Problem reading events
+			return false;
+		}
+		return Dates.now().after(lastEventEndTime);
 	}
 
 	private Date getLastEventEndTime() {
