@@ -10,7 +10,9 @@ import android.text.Html;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -45,7 +47,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentInContentContainer(R.layout.activity_programme_search);
+        View rootView = setContentInContentContainer(R.layout.activity_programme_search);
         setToolbarTitle(getResources().getString(R.string.programme_search_title));
 
         if (savedInstanceState != null) {
@@ -61,6 +63,8 @@ public class ProgrammeSearchActivity extends NavigationActivity {
         initializeSearchCategories();
 
         applyFilters();
+
+        hideKeyboardOnClickOutsideEditText(rootView);
     }
 
     @Override
@@ -103,7 +107,6 @@ public class ProgrammeSearchActivity extends NavigationActivity {
             public void onFilterSelected(final List<EventType> selectedEventTypes) {
                 eventTypeFilter = new LinkedList<>(selectedEventTypes);
                 applyFilters();
-                hideKeyboard(searchCategoriesLayout);
             }
         });
 
@@ -208,5 +211,25 @@ public class ProgrammeSearchActivity extends NavigationActivity {
                 || event.getLecturer().toLowerCase().contains(keyword)
                 || event.getHall().getName().toLowerCase().contains(keyword)
                 || filteredEventDescription.toLowerCase().contains(keyword);
+    }
+
+    private void hideKeyboardOnClickOutsideEditText(View view) {
+        //Set up touch listener for non-text box views to hide keyboard.
+        if (!(view instanceof EditText)) {
+            view.setOnTouchListener(new View.OnTouchListener() {
+                public boolean onTouch(View v, MotionEvent event) {
+                    hideKeyboard(v);
+                    return false;
+                }
+            });
+        }
+
+        //If a layout container, iterate over children and seed recursion.
+        if (view instanceof ViewGroup) {
+            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+                View innerView = ((ViewGroup) view).getChildAt(i);
+                hideKeyboardOnClickOutsideEditText(innerView);
+            }
+        }
     }
 }
