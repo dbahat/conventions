@@ -164,7 +164,7 @@ public class FeedbackActivity extends NavigationActivity {
 		} else {
 			eventsWithSentFeedbackLayout.setVisibility(View.VISIBLE);
 
-			if (update) {
+			if (update && eventsWithSentFeedbackList.getAdapter() != null) {
 				((EventsViewAdapter) eventsWithSentFeedbackList.getAdapter()).setEventsList(eventsWithSentFeedback);
 			} else {
 				eventsWithSentFeedbackList.setAdapter(new EventsViewAdapter(eventsWithSentFeedback));
@@ -189,7 +189,7 @@ public class FeedbackActivity extends NavigationActivity {
 			noEventsText.setVisibility(View.GONE);
 			eventsWithoutFeedbackListLayout.setVisibility(View.VISIBLE);
 
-			if (update) {
+			if (update && eventsWithoutFeedbackList.getAdapter() != null) {
 				((EventsViewAdapter) eventsWithoutFeedbackList.getAdapter()).setEventsList(eventsWithoutFeedback);
 			} else {
 				eventsWithoutFeedbackList.setAdapter(new EventsViewAdapter(eventsWithoutFeedback));
