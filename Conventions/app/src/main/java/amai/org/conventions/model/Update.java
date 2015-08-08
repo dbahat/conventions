@@ -4,10 +4,38 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Update implements Serializable {
+	private String id;
     private String text;
     private Date date;
+	private boolean isNew;
 
-    public String getText() {
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public Update withId(String id) {
+		setId(id);
+		return this;
+	}
+
+	public boolean isNew() {
+		return isNew;
+	}
+
+	public void setIsNew(boolean isNew) {
+		this.isNew = isNew;
+	}
+
+	public Update withIsNew(boolean isNew) {
+		setIsNew(isNew);
+		return this;
+	}
+
+	public String getText() {
         return text;
     }
 

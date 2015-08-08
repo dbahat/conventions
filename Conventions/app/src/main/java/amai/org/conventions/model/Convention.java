@@ -7,7 +7,9 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +27,7 @@ public class Convention implements Serializable {
     private List<Hall> halls;
     private List<ConventionEvent> events;
     private List<Update> updates;
+	private Map<String, Update> updatesById;
 	private Map<String, ConventionEvent.UserInput> userInput;
 	private Feedback feedback;
     private String feedbackRecipient;
@@ -197,6 +200,7 @@ public class Convention implements Serializable {
                 );
 
         updates = new ArrayList<>();
+	    updatesById = new HashMap<>();
     }
 
     public Calendar getDate() {
@@ -303,11 +307,36 @@ public class Convention implements Serializable {
 
     public void setUpdates(List<Update> updates) {
         this.updates = updates;
+	    refreshUpdatesMap();
     }
 
     public List<Update> getUpdates() {
         return updates;
     }
+
+	private void refreshUpdatesMap() {
+		updatesById.clear();
+		for (Update update : updates) {
+			updatesById.put(update.getId(), update);
+		}
+	}
+
+	public List<Update> addUpdates(List<Update> newUpdates) {
+		for (Update update : newUpdates) {
+			if (updatesById.containsKey(update.getId())) {
+				// Remove the existing update
+				for (Iterator<Update> iter = updates.iterator(); iter.hasNext();) {
+					Update currUpdate = iter.next();
+					if (currUpdate.getId().equals(update.getId())) {
+						iter.remove();
+					}
+				}
+			}
+			updates.add(update);
+			updatesById.put(update.getId(), update);
+		}
+		return updates;
+	}
 
     public String getFeedbackRecipient() {
         return feedbackRecipient;
@@ -392,5 +421,16 @@ public class Convention implements Serializable {
 		}
 
 		return maxHallOrder;
+	}
+
+	public Date getNewestUpdateTime() {
+		Date newest = null;
+
+		for (Update update : getUpdates()) {
+			if (newest == null || update.getDate().after(newest)) {
+				newest = update.getDate();
+			}
+		}
+		return newest;
 	}
 }

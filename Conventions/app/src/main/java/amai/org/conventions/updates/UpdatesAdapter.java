@@ -51,6 +51,15 @@ public class UpdatesAdapter extends RecyclerView.Adapter<UpdateViewHolder> {
         }
 
         this.updates = updateViewModels;
-        notifyDataSetChanged();
+
+	    int position = 0;
+	    for (Update update : updates) {
+		    if (update.isNew()) {
+			    notifyItemInserted(position);
+		    } else {
+			    notifyItemChanged(position);
+		    }
+		    ++position;
+	    }
     }
 }
