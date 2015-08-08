@@ -15,6 +15,7 @@
     <string name="event_navigate_to_hall">הצג אולם</string>
     <string name="event_add_to_favorites">הוסף לאירועים שלי</string>
     <string name="event_remove_from_favorites">הסר מהאירועים שלי</string>
+    <string name="event_configure_notifications">הגדר תזכורות</string>
 
     <string name="update_show_full_text">הצג עדכון מלא</string>
     <string name="update_refresh_failed">לא ניתן לעדכן. בדוק חיבור לאינטרנט</string>
@@ -48,6 +49,15 @@
     <string name="search_input_search_keyword">הקלד את חיפושך...</string>
     <string name="search_no_results_found">לא נמצאו תוצאות</string>
 
+    <string name="notification_event_about_to_start_title">אירוע עומד להתחיל</string>
+    <string name="notification_event_about_to_start_message_format">האירוע %1$s עומד להתחיל באולם %2$s</string>
+    <string name="notification_event_ended_title">עזור לנו להשתפר</string>
+    <string name="notification_event_ended_message_format">נהנת באירוע %s? שלח פידבק למארגני האירוע</string>
+
+    <string name="configure_notification_event_about_to_start_message">שלח תזכורת לפני תחילת האירוע</string>
+    <string name="configure_notification_event_feedback_reminder_message">שלח תזכורת למלא פידבק אחרי שהאירוע מסתיים</string>
+    <string name="configure_notification_time">%d דקות</string>
+
     <string name="yes">כן</string>
     <string name="no">לא</string>
     <string name="floor_down">קומה למטה</string>
@@ -73,4 +83,7 @@
     <string name="send_all_explanation_with_1_event">יש אירוע אחד שעבורו מילאת פידבק ולא שלחת. ניתן לשלוח את הפידבק שמילאת ע\"י לחיצה על \"שלח הכל\".</string>
     <string name="send_all_explanation_with_events">יש %d אירועים שעבורם מילאת פידבק ולא שלחת. ניתן לשלוח את הפידבק שמילאת ע\"י לחיצה על \"שלח הכל\".</string>
     <string name="send_all">שלח הכל</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

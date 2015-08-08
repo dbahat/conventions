@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import java.util.Calendar;
 import java.util.List;
 
+import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.R;
 import amai.org.conventions.events.ProgrammeConventionEvent;
 import amai.org.conventions.events.holders.EventTimeViewHolder;
@@ -63,7 +64,14 @@ public class SwipeableEventsViewOrHourAdapter extends BaseAdapter implements Sti
 	        public void run() {
 		        // Update the favorite state in the model
 		        final boolean isAttending = event.isAttending();
-		        event.setAttending(!isAttending);
+
+                if (isAttending) {
+                    event.setAttending(false);
+                    ConventionsApplication.alarmScheduler.cancelDefaultEventAlarms(event);
+                } else {
+                    event.setAttending(true);
+                    ConventionsApplication.alarmScheduler.scheduleDefaultEventAlarms(event);
+                }
 
 		        // Save the changes
 		        Convention.getInstance().getStorage().saveUserInput();

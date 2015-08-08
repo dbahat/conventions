@@ -1,0 +1,75 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context="amai.org.conventions.events.ConfigureNotificationsFragment"
+    android:orientation="vertical"
+    android:layoutDirection="rtl">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/configure_notification_before_event_start_enabled"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:maxLines="4"
+            android:maxWidth="200dp"
+            android:text="@string/configure_notification_event_about_to_start_message"
+            android:gravity="center|start"/>
+
+        <Button
+            android:id="@+id/configure_notification_before_event_start_time"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:text="@string/configure_notification_time"
+            style="@style/EventFeedbackButton"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/configure_notification_after_event_end_enabled"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:maxLines="4"
+            android:maxWidth="200dp"
+            android:text="@string/configure_notification_event_feedback_reminder_message"
+            android:gravity="center|start"/>
+
+        <Button
+            android:id="@+id/configure_notification_after_event_end_time"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:text="@string/configure_notification_time"
+            style="@style/EventFeedbackButton"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"/>
+
+    <Button
+        android:id="@+id/configure_notification_dismiss"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ok"
+        style="@style/EventFeedbackButton"/>
+
+</LinearLayout>

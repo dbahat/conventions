@@ -24,9 +24,11 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.R;
 import amai.org.conventions.customviews.AspectRatioImageView;
 import amai.org.conventions.events.CollapsibleFeedbackView;
+import amai.org.conventions.events.ConfigureNotificationsFragment;
 import amai.org.conventions.map.MapActivity;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
@@ -216,11 +218,13 @@ public class EventActivity extends NavigationActivity {
             case R.id.event_change_favorite_state:
                 if (conventionEvent.getUserInput().isAttending()) {
                     conventionEvent.getUserInput().setAttending(false);
+					ConventionsApplication.alarmScheduler.cancelDefaultEventAlarms(conventionEvent);
                     item.setIcon(getResources().getDrawable(R.drawable.star_with_plus));
                     item.setTitle(getResources().getString(R.string.event_add_to_favorites));
                     Snackbar.make(this.mainLayout, R.string.event_removed_from_favorites, Snackbar.LENGTH_SHORT).show();
                 } else {
                     conventionEvent.getUserInput().setAttending(true);
+					ConventionsApplication.alarmScheduler.scheduleDefaultEventAlarms(conventionEvent);
                     item.setIcon(getResources().getDrawable(android.R.drawable.btn_star_big_on));
                     item.setTitle(getResources().getString(R.string.event_remove_from_favorites));
                     Snackbar.make(this.mainLayout, R.string.event_added_to_favorites, Snackbar.LENGTH_SHORT).show();
@@ -246,6 +250,11 @@ public class EventActivity extends NavigationActivity {
 
                 navigateToActivity(HallActivity.class, false, bundle);
                 return true;
+			case R.id.event_configure_notifications:
+
+				ConfigureNotificationsFragment configureNotificationsFragment = ConfigureNotificationsFragment.newInstance(conventionEvent.getId());
+				configureNotificationsFragment.show(getSupportFragmentManager(), null);
+				return true;
         }
 
         return super.onOptionsItemSelected(item);

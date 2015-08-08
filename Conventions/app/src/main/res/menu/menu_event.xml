@@ -20,9 +20,15 @@
         app:showAsAction="always"/>
 
     <item
+        android:id="@+id/event_configure_notifications"
+        android:title="@string/event_configure_notifications"
+        android:orderInCategory="3"
+        app:showAsAction="never"/>
+
+    <item
         android:id="@+id/event_navigate_to_hall"
         android:title="@string/event_navigate_to_hall"
-        android:orderInCategory="3"
+        android:orderInCategory="4"
         app:showAsAction="never"/>
 
 </menu>

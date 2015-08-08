@@ -6,7 +6,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.networking.ModelParser;
@@ -239,6 +242,8 @@ public class ConventionEvent implements Serializable {
 	public static class UserInput implements Serializable, Cloneable {
 		private boolean attending;
         private Feedback feedback;
+		private EventNotification eventAboutToStartNotification;
+		private EventNotification eventFeedbackReminderNotification;
 
 		public UserInput() {
 			feedback = new Feedback().withQuestions(
@@ -247,6 +252,9 @@ public class ConventionEvent implements Serializable {
 					new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_SIMILAR_EVENTS, FeedbackQuestion.AnswerType.SMILEY_3_POINTS),
 					new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_ADDITIONAL_INFO, FeedbackQuestion.AnswerType.TEXT)
 			);
+
+			eventAboutToStartNotification = new EventNotification(EventNotification.Type.AboutToStart);
+			eventFeedbackReminderNotification = new EventNotification(EventNotification.Type.FeedbackReminder);
 		}
 
 		@Override
@@ -283,6 +291,14 @@ public class ConventionEvent implements Serializable {
 
 		public Feedback getFeedback() {
 			return feedback;
+		}
+
+		public EventNotification getEventAboutToStartNotification() {
+			return eventAboutToStartNotification;
+		}
+
+		public EventNotification getEventFeedbackReminderNotification() {
+			return eventFeedbackReminderNotification;
 		}
 
 		@Override

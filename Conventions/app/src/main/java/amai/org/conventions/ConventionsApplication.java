@@ -19,9 +19,12 @@ public class ConventionsApplication extends Application {
 
     public static GoogleAnalytics analytics;
     public static Tracker tracker;
+    public static AlarmScheduler alarmScheduler;
 
     @Override
     public void onCreate() {
+        super.onCreate();
+
 	    Locale.setDefault(Dates.getLocale());
 	    ConventionStorage.initFromFile(this);
         analytics = GoogleAnalytics.getInstance(this);
@@ -30,6 +33,8 @@ public class ConventionsApplication extends Application {
         tracker = analytics.newTracker("UA-65293055-1");
         tracker.enableExceptionReporting(true);
         tracker.enableAutoActivityTracking(true);
+
+        alarmScheduler = new AlarmScheduler(this);
 
         // Change uncaught exception parser to include more information
         Thread.UncaughtExceptionHandler uncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();

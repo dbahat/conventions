@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.R;
 import amai.org.conventions.events.holders.SwipeableEventViewHolder;
 import amai.org.conventions.model.Convention;
@@ -45,6 +46,14 @@ public class SwipeableEventsViewAdapter extends RecyclerView.Adapter<SwipeableEv
                 // Update the favorite state in the model
                 final boolean isAttending = event.isAttending();
                 event.setAttending(!isAttending);
+
+                if (isAttending) {
+                    event.setAttending(false);
+                    ConventionsApplication.alarmScheduler.cancelDefaultEventAlarms(event);
+                } else {
+                    event.setAttending(true);
+                    ConventionsApplication.alarmScheduler.scheduleDefaultEventAlarms(event);
+                }
 
                 // Save the changes
                 Convention.getInstance().getStorage().saveUserInput();
