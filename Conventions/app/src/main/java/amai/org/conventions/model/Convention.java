@@ -338,6 +338,12 @@ public class Convention implements Serializable {
 		return updates;
 	}
 
+	public void clearNewFlagFromAllUpdates() {
+		for (Update update : updates) {
+			update.setIsNew(false);
+		}
+	}
+
     public String getFeedbackRecipient() {
         return feedbackRecipient;
     }

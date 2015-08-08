@@ -8,7 +8,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -16,44 +15,30 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.FacebookRequestError;
 import com.facebook.FacebookSdk;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.TimeZone;
 
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.Update;
 import amai.org.conventions.navigation.NavigationActivity;
-import amai.org.conventions.utils.Dates;
+import amai.org.conventions.networking.UpdatesRefresher;
 
 public class UpdatesActivity extends NavigationActivity implements SwipeRefreshLayout.OnRefreshListener {
-    private static final String TAG = UpdatesActivity.class.getSimpleName();
-    private static final String CAMI_EVENT_FEED_PATH = "/cami.org.il/posts";
-    private static final String CAMI_FACEBOOK_USERNAME = "Cami - כאמ\"י";
 
     private CallbackManager callbackManager;
     private SwipeRefreshLayout swipeRefreshLayout;
     private LoginButton loginButton;
     private RecyclerView recyclerView;
     private UpdatesAdapter updatesAdapter;
-    private boolean isRefreshInProgress;
     private View loginLayout;
 
     @Override
@@ -76,7 +61,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
         List<Update> updates = Convention.getInstance().getUpdates();
         initializeUpdatesList(updates);
 
-        loginToFacebookIfNeeded(updates);
+        loginToFacebookIfNeeded();
     }
 
     @Override
@@ -94,13 +79,16 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 
     @Override
     public void onRefresh() {
+	    Convention.getInstance().clearNewFlagFromAllUpdates();
+	    updatesAdapter.notifyItemRangeChanged(0, Convention.getInstance().getUpdates().size());
+
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         if (accessToken != null) {
             retrieveUpdatesListFromFacebookApi(accessToken);
         }
     }
 
-    private void loginToFacebookIfNeeded(List<Update> updates) {
+    private void loginToFacebookIfNeeded() {
         initializeFacebookLoginButton();
         loginLayout.setVisibility(View.GONE);
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
@@ -149,83 +137,44 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
         });
     }
 
-    private void retrieveUpdatesListFromFacebookApi(AccessToken accessToken) {
-
-        isRefreshInProgress = true;
+    private void retrieveUpdatesListFromFacebookApi(final AccessToken accessToken) {
+	    final UpdatesRefresher refresher = UpdatesRefresher.getInstance(UpdatesActivity.this);
 
         // Workaround (Android issue #77712) - SwipeRefreshLayout indicator does not appear when the `setRefreshing(true)` is called before
         // the `SwipeRefreshLayout#onMeasure()`, so we post the setRefreshing call to the layout queue.
+	    refresher.setIsRefreshInProgress(true);
         swipeRefreshLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                swipeRefreshLayout.setRefreshing(isRefreshInProgress);
-            }
+	        @Override
+	        public void run() {
+		        swipeRefreshLayout.setRefreshing(refresher.isRefreshInProgress());
+	        }
         });
 
-        GraphRequest request = GraphRequest.newGraphPathRequest(
-                accessToken,
-                CAMI_EVENT_FEED_PATH,
-                new GraphRequest.Callback() {
-                    @Override
-                    public void onCompleted(GraphResponse graphResponse) {
+	    refresher.refreshFromServer(accessToken, new UpdatesRefresher.OnUpdateFinishedListener() {
+		    @Override
+		    public void onSuccess() {
+			    updateRefreshingFlag();
+			    initializeUpdatesList(Convention.getInstance().getUpdates());
+			    // If we don't do that, the recycler view will show the previous items and the user will have to scroll manually
+			    recyclerView.scrollToPosition(0);
+		    }
 
-                        if (graphResponse.getError() != null) {
-                            Log.d(TAG, "Updates refresh failed. Reason: " + graphResponse.getError().toString());
-                            Toast.makeText(UpdatesActivity.this, R.string.update_refresh_failed, Toast.LENGTH_LONG).show();
-                        } else {
-                            List<Update> updatesFromResponse = parseAndFilterFacebookFeedResult(graphResponse);
-	                        clearNewFlagFromAllUpdates(); // Remove "new" flag from existing updates
-                            // Update the model, so next time we can read them from cache.
-	                        List<Update> updates = Convention.getInstance().addUpdates(updatesFromResponse);
-                            Convention.getInstance().getStorage().saveUpdates();
-                            initializeUpdatesList(updates);
-	                        // If we don't do that, the recycler view will show the previous items and the user will have to scroll manually
-	                        recyclerView.scrollToPosition(0);
-                        }
+		    @Override
+		    public void onError(FacebookRequestError error) {
+			    updateRefreshingFlag();
+			    Toast.makeText(UpdatesActivity.this, R.string.update_refresh_failed, Toast.LENGTH_LONG).show();
+		    }
 
-                        isRefreshInProgress = false;
-                        swipeRefreshLayout.setRefreshing(false);
-                    }
-                });
-        Bundle parameters = new Bundle();
-	    Date newestUpdateTime = Convention.getInstance().getNewestUpdateTime();
-	    if (newestUpdateTime != null) {
-		    parameters.putLong("since", newestUpdateTime.getTime() / 1000);
-	    }
-        request.setParameters(parameters);
-        request.executeAsync();
-    }
+		    @Override
+		    public void onInvalidTokenError() {
+			    updateRefreshingFlag();
+			    Toast.makeText(UpdatesActivity.this, R.string.update_refresh_failed, Toast.LENGTH_LONG).show();
+		    }
 
-	private List<Update> parseAndFilterFacebookFeedResult(GraphResponse graphResponse) {
-        List<Update> updates = new LinkedList<>();
-
-        JSONObject response = graphResponse.getJSONObject();
-        try {
-            JSONArray data = response.getJSONArray("data");
-            for (int i = 0; i < data.length(); i++) {
-                JSONObject post = data.getJSONObject(i);
-                if (post.has("id") && post.has("message") && post.has("created_time")) {
-
-                    String dateString = post.getString("created_time");
-	                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Dates.getLocale());
-	                // Note: facebook dates are returns in UTC always
-	                simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-	                Date date = simpleDateFormat.parse(dateString);
-
-                    Update update = new Update()
-		                    .withId(post.getString("id"))
-		                    .withIsNew(true)
-                            .withDate(date)
-                            .withText(post.getString("message"));
-
-                    updates.add(update);
-                }
-            }
-        } catch (JSONException | ParseException e) {
-            e.printStackTrace();
-        }
-
-        return updates;
+		    private void updateRefreshingFlag() {
+			    swipeRefreshLayout.setRefreshing(false);
+		    }
+	    });
     }
 
     private void initializeUpdatesList(List<Update> updates) {
@@ -246,12 +195,6 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 	protected void onPause() {
 		super.onPause();
 		// Remove new flag for viewed updates
-		clearNewFlagFromAllUpdates();
-	}
-
-	private void clearNewFlagFromAllUpdates() {
-		for (Update update : Convention.getInstance().getUpdates()) {
-			update.setIsNew(false);
-		}
+		Convention.getInstance().clearNewFlagFromAllUpdates();
 	}
 }

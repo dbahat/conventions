@@ -83,7 +83,6 @@
     <string name="send_all_explanation_with_1_event">יש אירוע אחד שעבורו מילאת פידבק ולא שלחת. ניתן לשלוח את הפידבק שמילאת ע\"י לחיצה על \"שלח הכל\".</string>
     <string name="send_all_explanation_with_events">יש %d אירועים שעבורם מילאת פידבק ולא שלחת. ניתן לשלוח את הפידבק שמילאת ע\"י לחיצה על \"שלח הכל\".</string>
     <string name="send_all">שלח הכל</string>
-
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="new_updates">יש %d עדכונים חדשים</string>
+    <string name="new_update">יש עדכון חדש</string>
 </resources>

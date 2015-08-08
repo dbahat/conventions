@@ -27,35 +27,40 @@ public class UpdatesAdapter extends RecyclerView.Adapter<UpdateViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(UpdateViewHolder holder, final int position) {
+    public void onBindViewHolder(final UpdateViewHolder holder, final int position) {
         UpdateViewModel updateViewModel = updates.get(position);
         holder.setContent(updateViewModel);
         holder.setOnMoreInfoClickListener(new UpdateViewHolder.OnMoreInfoClickListener() {
             @Override
             public void onClicked() {
-                updates.get(position).setCollapsed(false);
+	            int position = holder.getAdapterPosition();
+	            updates.get(position).setCollapsed(false);
                 notifyItemChanged(position);
             }
         });
     }
 
-    @Override
+	@Override
     public int getItemCount() {
         return updates.size();
     }
 
-    public void setUpdates(List<Update> updates) {
+    public void setUpdates(List<Update> newUpdates) {
         List<UpdateViewModel> updateViewModels = new LinkedList<>();
-        for (Update update : updates) {
+        for (Update update : newUpdates) {
             updateViewModels.add(new UpdateViewModel(update, true /* By default have all items collapsed */));
         }
 
-        this.updates = updateViewModels;
+	    // Only the sizeDiff first items are really inserted. The rest might have been changed.
+	    int sizeDiff = newUpdates.size() - updates.size();
+
+        updates = updateViewModels;
 
 	    int position = 0;
-	    for (Update update : updates) {
-		    if (update.isNew()) {
+	    for (Update update : newUpdates) {
+		    if (update.isNew() && sizeDiff > 0) {
 			    notifyItemInserted(position);
+			    --sizeDiff;
 		    } else {
 			    notifyItemChanged(position);
 		    }
