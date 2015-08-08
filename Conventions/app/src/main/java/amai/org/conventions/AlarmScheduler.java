@@ -41,7 +41,7 @@ public class AlarmScheduler {
     }
 
     public void scheduleEventAboutToStartNotification(ConventionEvent event, long time) {
-        if (time < new Date().getTime()) {
+        if (time < System.currentTimeMillis()) {
             // Don't allow scheduling event about to start notifications in the past
             return;
         }
@@ -56,7 +56,7 @@ public class AlarmScheduler {
     }
 
     public void scheduleFillFeedbackOnEventNotification(ConventionEvent event, long time) {
-        if (time < new Date().getTime()) {
+        if (time < System.currentTimeMillis()) {
             // Don't allow scheduling event about to ended notifications in the past
             return;
         }

@@ -91,6 +91,7 @@ public class ConventionsApplication extends Application {
 		// Release memory when low
 		if (level >= TRIM_MEMORY_RUNNING_LOW) {
 			SVGFileLoader.releaseCache();
+			EventNotificationService.releaseCache();
 		}
 		super.onTrimMemory(level);
 	}

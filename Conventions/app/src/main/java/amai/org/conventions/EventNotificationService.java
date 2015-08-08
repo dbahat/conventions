@@ -5,9 +5,12 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-import android.support.v7.app.NotificationCompat;
+import android.util.TypedValue;
 
 import amai.org.conventions.events.activities.EventActivity;
 import amai.org.conventions.model.ConventionEvent;
@@ -22,8 +25,9 @@ public class EventNotificationService extends Service {
     public static final String EXTRA_EVENT_NOTIFICATION_TYPE = "ExtraEventNotificationType";
 
     private NotificationManager notificationManager;
+	private static Bitmap largeIcon; // Cache for only creating the icon once
 
-    @Nullable
+	@Nullable
     @Override
     public IBinder onBind(Intent intent) {
         return null;
@@ -63,8 +67,9 @@ public class EventNotificationService extends Service {
                 .putExtra(EventActivity.EXTRA_FOCUS_ON_FEEDBACK, true);
 
         Notification.Builder builder = new Notification.Builder(this)
-                .setSmallIcon(R.drawable.cami_logo_toolbar)
-                .setContentTitle(getResources().getString(R.string.notification_event_ended_title))
+                .setSmallIcon(R.drawable.cami_logo_small_white)
+		        .setLargeIcon(getNotificationLargeIcon())
+		        .setContentTitle(getResources().getString(R.string.notification_event_ended_title))
                 .setContentText(getString(R.string.notification_event_ended_message_format, event.getTitle()))
                 .setAutoCancel(true)
                 .setContentIntent(PendingIntent.getActivity(this, 0, intent, 0));
@@ -84,7 +89,8 @@ public class EventNotificationService extends Service {
                 .putExtra(EventActivity.EXTRA_FOCUS_ON_FEEDBACK, false);
 
         Notification.Builder builder = new Notification.Builder(this)
-                .setSmallIcon(R.drawable.cami_logo_toolbar)
+                .setSmallIcon(R.drawable.cami_logo_small_white)
+		        .setLargeIcon(getNotificationLargeIcon())
                 .setContentTitle(getResources().getString(R.string.notification_event_about_to_start_title))
                 .setContentText(getEventAboutToStartNotificationText(event))
                 .setDefaults(Notification.DEFAULT_VIBRATE)
@@ -103,4 +109,23 @@ public class EventNotificationService extends Service {
         return getResources().getString(R.string.notification_event_about_to_start_message_format,
                 event.getTitle(), event.getHall().getName());
     }
+
+	private synchronized Bitmap getNotificationLargeIcon() {
+		if (largeIcon != null) {
+			return largeIcon;
+		}
+		largeIcon = resizeBitmap(getResources().getDrawable(R.drawable.cami_logo_app_icon), 64);
+		return largeIcon;
+	}
+
+	private Bitmap resizeBitmap(Drawable image, int heightInDp) {
+		int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, heightInDp, getResources().getDisplayMetrics());
+		Bitmap originalBitmap = ((BitmapDrawable) image).getBitmap();
+		int width = (int) (originalBitmap.getWidth() * height / (float) originalBitmap.getHeight());
+		return Bitmap.createScaledBitmap(originalBitmap, width, height, false);
+	}
+
+	public synchronized static void releaseCache() {
+		largeIcon = null;
+	}
 }
