@@ -191,8 +191,6 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 	    Date newestUpdateTime = Convention.getInstance().getNewestUpdateTime();
 	    if (newestUpdateTime != null) {
 		    parameters.putLong("since", newestUpdateTime.getTime() / 1000);
-	    } else {
-		    parameters.putLong("until", 1438790374); // 5/8 18:59
 	    }
         request.setParameters(parameters);
         request.executeAsync();

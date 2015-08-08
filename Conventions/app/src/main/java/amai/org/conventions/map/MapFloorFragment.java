@@ -484,7 +484,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
 	public void selectLocation(MapLocation location) {
 		// If this fragment is already initialized, select the marker
-		if (floorMarkers != null) {
+		if (!floorMarkers.isEmpty()) {
 			for (Marker marker : floorMarkers) {
 				if (marker.getLocation().getId() == location.getId()) {
 					marker.select(false);
