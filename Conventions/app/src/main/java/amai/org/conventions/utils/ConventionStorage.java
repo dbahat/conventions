@@ -51,7 +51,10 @@ public class ConventionStorage {
 	    Map<String, ConventionEvent.UserInput> userInput = new LinkedHashMap<>();
 	    for (Map.Entry<String, ConventionEvent.UserInput> entry : origUserInput.entrySet()) {
 		    ConventionEvent.UserInput input = entry.getValue();
-		    if (input.isAttending() || input.getFeedback().hasAnsweredQuestions()) {
+		    if (input.isAttending()
+					|| input.getFeedback().hasAnsweredQuestions()
+					|| input.getEventAboutToStartNotification().isEnabled()
+					|| input.getEventFeedbackReminderNotification().isEnabled()) {
 			    try {
 				    // Copy the input and remove unanswered questions
 				    input = input.clone();

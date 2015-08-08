@@ -12,6 +12,9 @@ import com.google.android.gms.analytics.Tracker;
 import java.util.Collection;
 import java.util.Locale;
 
+import amai.org.conventions.model.Convention;
+import amai.org.conventions.model.ConventionEvent;
+import amai.org.conventions.model.EventNotification;
 import amai.org.conventions.utils.ConventionStorage;
 import amai.org.conventions.utils.Dates;
 
@@ -35,12 +38,35 @@ public class ConventionsApplication extends Application {
         tracker.enableAutoActivityTracking(true);
 
         alarmScheduler = new AlarmScheduler(this);
+        restoreAlarmConfiguration();
 
         // Change uncaught exception parser to include more information
         Thread.UncaughtExceptionHandler uncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
         if (uncaughtExceptionHandler instanceof ExceptionReporter) {
             ExceptionReporter exceptionReporter = (ExceptionReporter) uncaughtExceptionHandler;
             exceptionReporter.setExceptionParser(new ExtendedExceptionParser(this, null));
+        }
+    }
+
+    /**
+     * Since the Android AlarmManager gets reset whenever the device reboots, we re-schedule all the notifications when the app is launched.
+     */
+    private void restoreAlarmConfiguration() {
+        for (ConventionEvent event : Convention.getInstance().getEvents()) {
+            restoreAlarmConfiguration(event, event.getUserInput().getEventAboutToStartNotification());
+        }
+    }
+
+    private void restoreAlarmConfiguration(ConventionEvent event, EventNotification eventNotification) {
+        if (eventNotification != null && eventNotification.isEnabled()) {
+            switch (eventNotification.getType()) {
+                case AboutToStart:
+                    alarmScheduler.scheduleEventAboutToStartNotification(event, eventNotification.getNotificationTime().getTime());
+                    break;
+                case FeedbackReminder:
+                    alarmScheduler.scheduleFillFeedbackOnEventNotification(event, eventNotification.getNotificationTime().getTime());
+                    break;
+            }
         }
     }
 

@@ -27,6 +27,11 @@ public class EventNotification implements Serializable, Cloneable {
         return type;
     }
 
+    @Override
+    public EventNotification clone() throws CloneNotSupportedException {
+        return (EventNotification) super.clone();
+    }
+
     public enum Type {
         AboutToStart,
         FeedbackReminder

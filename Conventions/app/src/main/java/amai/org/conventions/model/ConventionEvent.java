@@ -261,12 +261,14 @@ public class ConventionEvent implements Serializable {
 		public UserInput clone() throws CloneNotSupportedException {
 			UserInput newInput = (UserInput) super.clone();
 			newInput.feedback = feedback.clone();
+			newInput.eventFeedbackReminderNotification = eventFeedbackReminderNotification.clone();
+			newInput.eventAboutToStartNotification = eventAboutToStartNotification.clone();
 			return newInput;
 		}
 
 		/**
 		 * Update this instance from user input loaded from file
-		 * @param other the desrialized user input
+		 * @param other the deserialized user input
 		 */
 		public void updateFrom(UserInput other) {
 			if (other == null) {
@@ -274,6 +276,8 @@ public class ConventionEvent implements Serializable {
 			}
 			attending = other.attending;
 			feedback.updateFrom(other.feedback);
+			eventAboutToStartNotification = other.eventAboutToStartNotification;
+			eventFeedbackReminderNotification = other.eventFeedbackReminderNotification;
 		}
 
 		public boolean isAttending() {
