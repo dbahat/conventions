@@ -37,6 +37,7 @@ public class UpdatesRefresher {
 	private static final String TAG = UpdatesRefresher.class.getSimpleName();
 	private static final String CAMI_EVENT_FEED_PATH = "/cami.org.il/posts";
 	private boolean isRefreshInProgress = false;
+	private boolean enableNotificationAfterUpdate;
 
 	public static synchronized UpdatesRefresher getInstance(Context context) {
 		if (instance == null) {
@@ -57,7 +58,9 @@ public class UpdatesRefresher {
 		return isRefreshInProgress;
 	}
 
-	public void refreshFromServer(AccessToken accessToken, final OnUpdateFinishedListener listener) {
+	public void refreshFromServer(AccessToken accessToken, boolean enableNotificationAfterUpdate, final OnUpdateFinishedListener listener) {
+		this.enableNotificationAfterUpdate = enableNotificationAfterUpdate;
+
 		if (accessToken == null) {
 			accessToken = AccessToken.getCurrentAccessToken();
 			if (accessToken == null || accessToken.isExpired()) {
@@ -101,6 +104,10 @@ public class UpdatesRefresher {
 		}
 		request.setParameters(parameters);
 		request.executeAsync();
+	}
+
+	public boolean shouldEnableNotificationAfterUpdate() {
+		return enableNotificationAfterUpdate;
 	}
 
 	private List<Update> parseAndFilterFacebookFeedResult(GraphResponse graphResponse) {

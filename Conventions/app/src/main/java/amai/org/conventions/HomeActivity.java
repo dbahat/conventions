@@ -56,7 +56,7 @@ public class HomeActivity extends AppCompatActivity {
 			   final int numberOfUpdatesBeforeRefresh = Convention.getInstance().getUpdates().size();
 
 			   // Refresh and ignore all errors
-			   UpdatesRefresher.getInstance(HomeActivity.this).refreshFromServer(null, new UpdatesRefresher.OnUpdateFinishedListener() {
+			   UpdatesRefresher.getInstance(HomeActivity.this).refreshFromServer(null, true, new UpdatesRefresher.OnUpdateFinishedListener() {
 				   @Override
 				   public void onSuccess() {
 					   int newUpdates = 0;
@@ -69,7 +69,8 @@ public class HomeActivity extends AppCompatActivity {
 					   }
 
 					   // We don't want to raise the notification if there are no new updates, or if this is the first time updates are downloaded to cache.
-					   if (newUpdates > 0 && numberOfUpdatesBeforeRefresh > 0) {
+					   if (newUpdates > 0 && numberOfUpdatesBeforeRefresh > 0
+							   && UpdatesRefresher.getInstance(HomeActivity.this).shouldEnableNotificationAfterUpdate()) {
 						   String notificationTitle = newUpdates == 1
 								   ? getString(R.string.new_update)
 								   : getString(R.string.new_updates, newUpdates);
@@ -93,9 +94,6 @@ public class HomeActivity extends AppCompatActivity {
 								   .build();
 
 						   notificationManager.notify(NEW_UPDATES_NOTIFICATION_ID, notification);
-					   }
-					   else {
-						   Toast.makeText(HomeActivity.this, "No updates", Toast.LENGTH_SHORT).show();
 					   }
 				   }
 
