@@ -59,7 +59,7 @@ public class Convention implements Serializable {
         this.date = Calendar.getInstance();
 	    this.date.clear();
         this.date.set(2015, Calendar.AUGUST, 20);
-        this.feedbackRecipient = "hq@cami.org.il";
+        this.feedbackRecipient = "content@cami.org.il";
 
 	    Hall mainHall = new Hall().withName("אולם ראשי").withOrder(1);
         Hall auditorium = new Hall().withName("אודיטוריום שוורץ").withOrder(2);
