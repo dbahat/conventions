@@ -10,6 +10,7 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 
 import amai.org.conventions.events.activities.EventActivity;
+import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.EventNotification;
 
@@ -20,10 +21,12 @@ public class EventNotificationService extends Service {
 
     public static final String EXTRA_EVENT_TO_NOTIFY = "ExtraEventToNotify";
     public static final String EXTRA_EVENT_NOTIFICATION_TYPE = "ExtraEventNotificationType";
+    public static final String EXTRA_IS_END_OF_CONVENTION_NOTIFICATION = "ExtraEndOfConventionNotification";
 
+    private static final int FILL_CONVENTION_FEEDBACK_NOTIFICATION_ID = 91235;
     private NotificationManager notificationManager;
 
-	@Nullable
+    @Nullable
     @Override
     public IBinder onBind(Intent intent) {
         return null;
@@ -38,9 +41,16 @@ public class EventNotificationService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        if (intent.getBooleanExtra(EXTRA_IS_END_OF_CONVENTION_NOTIFICATION, false)) {
+            showFillConventionFeedbackNotification();
+
+            stopSelf();
+            return START_NOT_STICKY;
+        }
+
         ConventionEvent event = (ConventionEvent) intent.getSerializableExtra(EXTRA_EVENT_TO_NOTIFY);
         EventNotification.Type notificationType = (EventNotification.Type) intent.getSerializableExtra(EXTRA_EVENT_NOTIFICATION_TYPE);
-        if(event != null && notificationType != null) {
+        if (event != null && notificationType != null) {
             switch (notificationType) {
                 case AboutToStart:
                     showEventAboutToStartNotification(event);
@@ -52,8 +62,31 @@ public class EventNotificationService extends Service {
         }
 
         stopSelf();
-
         return START_NOT_STICKY;
+    }
+
+    private void showFillConventionFeedbackNotification() {
+
+        // In case the user already sent convention feedback, no need to show him the notification
+        if (Convention.getInstance().getFeedback().isSent()) {
+            return;
+        }
+
+        Intent intent = new Intent(this, FeedbackActivity.class);
+        Notification.Builder builder = new Notification.Builder(this)
+                .setSmallIcon(R.drawable.cami_logo_small_white)
+                .setLargeIcon(ImageHandler.getNotificationLargeIcon(this))
+                .setContentTitle(getString(R.string.notification_event_ended_title))
+                .setContentText(getString(R.string.notification_feedback_ended_message))
+                .setAutoCancel(true)
+                .setContentIntent(PendingIntent.getActivity(this, 0, intent, 0))
+                .setDefaults(Notification.DEFAULT_VIBRATE);
+
+        Notification notification = new Notification.BigTextStyle(builder)
+                .bigText(getString(R.string.notification_feedback_ended_message))
+                .build();
+
+        notificationManager.notify(FILL_CONVENTION_FEEDBACK_NOTIFICATION_ID, notification);
     }
 
     private void showEventFeedbackReminderNotification(ConventionEvent event) {
@@ -64,18 +97,18 @@ public class EventNotificationService extends Service {
 
         Notification.Builder builder = new Notification.Builder(this)
                 .setSmallIcon(R.drawable.cami_logo_small_white)
-		        .setLargeIcon(ImageHandler.getNotificationLargeIcon(this))
-		        .setContentTitle(getResources().getString(R.string.notification_event_ended_title))
+                .setLargeIcon(ImageHandler.getNotificationLargeIcon(this))
+                .setContentTitle(getResources().getString(R.string.notification_event_ended_title))
                 .setContentText(getString(R.string.notification_event_ended_message_format, event.getTitle()))
                 .setPriority(Notification.PRIORITY_LOW)
                 .setAutoCancel(true)
                 .setContentIntent(PendingIntent.getActivity(this, 0, intent, 0));
 
-	    if (Build.VERSION.SDK_INT >= 20) {
-		    builder.setGroup("cami_2015_send_event_feedback");
-	    }
+        if (Build.VERSION.SDK_INT >= 20) {
+            builder.setGroup("cami_2015_send_event_feedback");
+        }
 
-	    Notification notification = new Notification.BigTextStyle(builder)
+        Notification notification = new Notification.BigTextStyle(builder)
                 .bigText(getString(R.string.notification_event_ended_message_format, event.getTitle()))
                 .build();
 
@@ -91,7 +124,7 @@ public class EventNotificationService extends Service {
 
         Notification.Builder builder = new Notification.Builder(this)
                 .setSmallIcon(R.drawable.cami_logo_small_white)
-		        .setLargeIcon(ImageHandler.getNotificationLargeIcon(this))
+                .setLargeIcon(ImageHandler.getNotificationLargeIcon(this))
                 .setContentTitle(getResources().getString(R.string.notification_event_about_to_start_title))
                 .setContentText(getEventAboutToStartNotificationText(event))
                 .setDefaults(Notification.DEFAULT_VIBRATE)
@@ -99,9 +132,9 @@ public class EventNotificationService extends Service {
                 .setAutoCancel(true)
                 .setContentIntent(PendingIntent.getActivity(this, 0, intent, 0));
 
-	    if (Build.VERSION.SDK_INT >= 20) {
-		    builder.setGroup("cami_2015_event_about_to_start");
-	    }
+        if (Build.VERSION.SDK_INT >= 20) {
+            builder.setGroup("cami_2015_event_about_to_start");
+        }
 
         Notification notification = new Notification.BigTextStyle(builder)
                 .bigText(getEventAboutToStartNotificationText(event))

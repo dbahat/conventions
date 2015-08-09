@@ -28,8 +28,8 @@ public class ConventionsApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-	    Locale.setDefault(Dates.getLocale());
-	    ConventionStorage.initFromFile(this);
+        Locale.setDefault(Dates.getLocale());
+        ConventionStorage.initFromFile(this);
         analytics = GoogleAnalytics.getInstance(this);
         analytics.setLocalDispatchPeriod(1800);
 
@@ -46,6 +46,8 @@ public class ConventionsApplication extends Application {
             ExceptionReporter exceptionReporter = (ExceptionReporter) uncaughtExceptionHandler;
             exceptionReporter.setExceptionParser(new ExtendedExceptionParser(this, null));
         }
+
+        alarmScheduler.scheduleNotificationToFillConventionFeedback();
     }
 
     /**
@@ -70,6 +72,15 @@ public class ConventionsApplication extends Application {
         }
     }
 
+    @Override
+    public void onTrimMemory(int level) {
+        // Release memory when low
+        if (level >= TRIM_MEMORY_RUNNING_LOW) {
+            ImageHandler.releaseCache();
+        }
+        super.onTrimMemory(level);
+    }
+
     private static class ExtendedExceptionParser extends StandardExceptionParser {
 
         public ExtendedExceptionParser(Context context, Collection<String> additionalPackages) {
@@ -85,13 +96,4 @@ public class ConventionsApplication extends Application {
                     Log.getStackTraceString(t));
         }
     }
-
-	@Override
-	public void onTrimMemory(int level) {
-		// Release memory when low
-		if (level >= TRIM_MEMORY_RUNNING_LOW) {
-			ImageHandler.releaseCache();
-		}
-		super.onTrimMemory(level);
-	}
 }

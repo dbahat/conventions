@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import amai.org.conventions.events.ConfigureNotificationsFragment;
@@ -80,6 +81,15 @@ public class AlarmScheduler {
         PendingIntent pendingIntent = PendingIntent.getService(context, 0, intent, 0);
 
         alarmManager.cancel(pendingIntent);
+    }
+
+    public void scheduleNotificationToFillConventionFeedback() {
+        Intent intent = new Intent(context, EventNotificationService.class)
+                .putExtra(EventNotificationService.EXTRA_IS_END_OF_CONVENTION_NOTIFICATION, true);
+        Calendar postConventionDate = Calendar.getInstance();
+        postConventionDate.setTime(Convention.getInstance().getDate().getTime());
+        postConventionDate.add(Calendar.DAY_OF_MONTH, 1);
+        scheduleAlarm(postConventionDate.getTimeInMillis(), PendingIntent.getService(context, 0, intent, 0));
     }
 
     private PendingIntent createEventNotificationPendingIntent(ConventionEvent event, EventNotification.Type notificationType) {
