@@ -25,12 +25,14 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.caverock.androidsvg.SVG;
+import com.google.android.gms.analytics.HitBuilders;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import amai.org.conventions.ArrivalMethodsActivity;
+import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.FeedbackActivity;
 import amai.org.conventions.HomeActivity;
 import amai.org.conventions.R;
@@ -67,6 +69,11 @@ public abstract class NavigationActivity extends AppCompatActivity {
 				if (popup == null || !popup.isShowing()) {
 					popup = createNavigationPopup();
 					popup.showAsDropDown(navigationToolbar);
+
+					ConventionsApplication.tracker.send(new HitBuilders.EventBuilder()
+							.setCategory("Navigation")
+							.setAction("ButtonClicked")
+							.build());
 				}
 			}
 		});

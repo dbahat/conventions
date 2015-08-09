@@ -2,16 +2,15 @@ package amai.org.conventions.model;
 
 import android.content.Context;
 
+import com.google.android.gms.analytics.HitBuilders;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
-import amai.org.conventions.ThemeAttributes;
+import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.networking.ModelParser;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Objects;
@@ -285,7 +284,12 @@ public class ConventionEvent implements Serializable {
 		}
 
 		public void setAttending(boolean attending) {
+
 			this.attending = attending;
+			ConventionsApplication.tracker.send(new HitBuilders.EventBuilder()
+					.setCategory("Favorites")
+					.setAction(attending ? "Add" : "Remove")
+					.build());
 		}
 
 		public UserInput withAttending(boolean attending) {

@@ -22,6 +22,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.HitBuilders;
+
 import java.util.List;
 
 import amai.org.conventions.ConventionsApplication;
@@ -266,6 +268,12 @@ public class EventActivity extends NavigationActivity {
 
 				ConfigureNotificationsFragment configureNotificationsFragment = ConfigureNotificationsFragment.newInstance(conventionEvent.getId());
 				configureNotificationsFragment.show(getSupportFragmentManager(), null);
+
+				ConventionsApplication.tracker.send(new HitBuilders.EventBuilder()
+						.setCategory("Notifications")
+						.setAction("EditClicked")
+						.build());
+
 				return true;
         }
 
