@@ -86,7 +86,8 @@
                         android:textColor="@android:color/darker_gray"
                         android:text="Hall name"/>
 
-                    <FrameLayout
+                    <LinearLayout
+                        android:orientation="horizontal"
                         android:layout_alignParentEnd="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
@@ -102,13 +103,23 @@
                             style="@style/EventViewSmallText"/>
 
                         <amai.org.conventions.customviews.AspectRatioImageView
+                            android:layout_marginStart="5dp"
+                            android:id="@+id/alarm_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="18dp"
+                            android:src="@drawable/ic_action_alarms"
+                            android:visibility="gone"
+                            />
+
+                        <amai.org.conventions.customviews.AspectRatioImageView
+                            android:layout_marginStart="5dp"
                             android:id="@+id/feedback_icon"
                             android:layout_width="wrap_content"
                             android:layout_height="18dp"
                             android:src="@drawable/feedback"
                             android:visibility="gone"
                             />
-                    </FrameLayout>
+                    </LinearLayout>
 
                 </RelativeLayout>
 

@@ -3,7 +3,6 @@ package amai.org.conventions.events.activities;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.Snackbar;
@@ -60,8 +59,9 @@ public class EventActivity extends NavigationActivity {
     private CollapsibleFeedbackView feedbackView;
 
 	private AspectRatioImageView fadingImageView;
+	private Menu menu;
 
-    @Override
+	@Override
     protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentInContentContainer(R.layout.activity_event);
@@ -189,35 +189,58 @@ public class EventActivity extends NavigationActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_event, menu);
+	    this.menu = menu;
+	    getMenuInflater().inflate(R.menu.menu_event, menu);
 
-        if (conventionEvent.getUserInput().isAttending()) {
+	    ConventionEvent.UserInput userInput = conventionEvent.getUserInput();
+	    if (userInput.isAttending()) {
             MenuItem favoritesButton = menu.findItem(R.id.event_change_favorite_state);
             favoritesButton.setIcon(getResources().getDrawable(android.R.drawable.btn_star_big_on));
         }
 
-        hideNavigateToMapButtonIfNoLocationExists(menu);
+	    setupAlarmsMenuItem(menu, userInput);
+
+	    hideNavigateToMapButtonIfNoLocationExists(menu);
 
         return true;
     }
 
-    @Override
+	private void setupAlarmsMenuItem(Menu menu, ConventionEvent.UserInput userInput) {
+		// Remove alarms button for ended events (unless they still have a feedback reminder)
+		if (conventionEvent.hasEnded() && !userInput.getEventFeedbackReminderNotification().isEnabled()) {
+			menu.removeItem(R.id.event_configure_notifications);
+		// Hide alarms in the overflow menu if the event is over or there are no alarms for this event
+		// and it isn't in the favorites
+		} else if (userInput.isAttending() ||
+				userInput.getEventAboutToStartNotification().isEnabled() ||
+				userInput.getEventFeedbackReminderNotification().isEnabled()) {
+		    MenuItem alarmsItem = menu.findItem(R.id.event_configure_notifications);
+			alarmsItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+		} else {
+			MenuItem alarmsItem = menu.findItem(R.id.event_configure_notifications);
+			alarmsItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+		}
+	}
+
+	@Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.event_change_favorite_state:
-                if (conventionEvent.getUserInput().isAttending()) {
-                    conventionEvent.getUserInput().setAttending(false);
+	            ConventionEvent.UserInput userInput = conventionEvent.getUserInput();
+	            if (userInput.isAttending()) {
+                    userInput.setAttending(false);
 					ConventionsApplication.alarmScheduler.cancelDefaultEventAlarms(conventionEvent);
                     item.setIcon(getResources().getDrawable(R.drawable.star_with_plus));
                     item.setTitle(getResources().getString(R.string.event_add_to_favorites));
                     Snackbar.make(this.mainLayout, R.string.event_removed_from_favorites, Snackbar.LENGTH_SHORT).show();
                 } else {
-                    conventionEvent.getUserInput().setAttending(true);
+                    userInput.setAttending(true);
 					ConventionsApplication.alarmScheduler.scheduleDefaultEventAlarms(conventionEvent);
                     item.setIcon(getResources().getDrawable(android.R.drawable.btn_star_big_on));
                     item.setTitle(getResources().getString(R.string.event_remove_from_favorites));
                     Snackbar.make(this.mainLayout, R.string.event_added_to_favorites, Snackbar.LENGTH_SHORT).show();
                 }
+	            setupAlarmsMenuItem(menu, userInput);
                 saveUserInput();
                 return true;
             case R.id.event_navigate_to_map:

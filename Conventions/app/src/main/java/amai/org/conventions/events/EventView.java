@@ -38,6 +38,7 @@ public class EventView extends FrameLayout {
     private final TextView eventName;
     private final TextView lecturerName;
 	private final ImageView feedbackIcon;
+	private final ImageView alarmIcon;
     private final ViewGroup timeLayout;
     private final ViewGroup eventDescription;
     private final CardView eventContainer;
@@ -57,6 +58,7 @@ public class EventView extends FrameLayout {
         eventName = (TextView) this.findViewById(R.id.eventName);
         lecturerName = (TextView) this.findViewById(R.id.lecturerName);
 	    feedbackIcon = (ImageView) this.findViewById(R.id.feedback_icon);
+	    alarmIcon = (ImageView) this.findViewById(R.id.alarm_icon);
         eventDescription = (ViewGroup) this.findViewById(R.id.eventDescription);
         eventContainer = (CardView) this.findViewById(R.id.eventContainer);
         bottomLayout = this.findViewById(R.id.bottom_layout);
@@ -98,6 +100,7 @@ public class EventView extends FrameLayout {
         setEventTitle(event.getTitle());
         setLecturerName(event.getLecturer());
 	    setFeedbackIconFromEvent(event);
+	    setAlarmIconFromEvent(event);
 
         // Keep the description text without any HTML markup, for usage inside setKeywordsHighlighting()
         searchDescription.setText(Html.fromHtml(event.getDescription()).toString().replace("\n", " "));
@@ -195,12 +198,20 @@ public class EventView extends FrameLayout {
 
 	protected void setFeedbackIcon(Drawable feedbackDrawable) {
 		if (feedbackDrawable != null) {
-			lecturerName.setVisibility(GONE);
 			feedbackIcon.setVisibility(VISIBLE);
 			feedbackIcon.setImageDrawable(feedbackDrawable);
 		} else {
-			lecturerName.setVisibility(VISIBLE);
 			feedbackIcon.setVisibility(GONE);
+		}
+	}
+
+	protected void setAlarmIconFromEvent(ConventionEvent event) {
+		if (event.getUserInput().getEventAboutToStartNotification().isEnabled() ||
+			event.getUserInput().getEventFeedbackReminderNotification().isEnabled()) {
+			alarmIcon.setVisibility(VISIBLE);
+			alarmIcon.setColorFilter(getResources().getColor(R.color.very_dark_gray));
+		} else {
+			alarmIcon.setVisibility(GONE);
 		}
 	}
 

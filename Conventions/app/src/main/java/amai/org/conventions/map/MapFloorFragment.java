@@ -150,6 +150,8 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
         mapArrowClickedListener = (OnMapArrowClickedListener) activity;
 
+		// The activity might be detached during the lifecycle while we still need a context.
+		// The application context is always valid.
 		appContext = activity.getApplicationContext();
     }
 
@@ -449,7 +451,11 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 	}
 
 	private View createMarkerView(final MapLocation location, View markerShadowView) {
-		final SVGImageView markerImageView = new AspectRatioSVGImageView(getActivity());
+		// We send the appContext here and not the activity due to reasons stated in onAttach,
+		// this means any activity-specific information (like theme, layout direction etc) is not
+		// passed to this image view. It doesn't make any difference in this case since we don't use
+		// such information.
+		final SVGImageView markerImageView = new AspectRatioSVGImageView(appContext);
 
 		// Set marker image
 		SVG markerSvg = ImageHandler.loadSVG(appContext, location.getMarkerResource());

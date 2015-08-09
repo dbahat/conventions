@@ -20,7 +20,7 @@ public class EventNotification implements Serializable, Cloneable {
     }
 
     public boolean isEnabled() {
-        return notificationTime != null;
+        return notificationTime != null && notificationTime.after(new Date());
     }
 
     public Type getType() {
