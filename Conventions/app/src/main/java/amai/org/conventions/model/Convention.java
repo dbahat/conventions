@@ -85,24 +85,12 @@ public class Convention implements Serializable {
                                                 .withSelectedMarkerResource(R.raw.eshkol2_marker_selected)
                                                 .withX(26)
                                                 .withY(73),
-		                                new MapLocation()
-		                                        .withPlace(new Place().withName("שירותים"))
-		                                        .withMarkerResource(R.raw.toilet_marker)
-		                                        .withSelectedMarkerResource(R.raw.toilet_marker_selected)
-		                                        .withX(90)
-		                                        .withY(60),
                                         new MapLocation()
                                                 .withPlace(new Place().withName("החתמות"))
                                                 .withMarkerResource(R.raw.signatures_marker)
                                                 .withSelectedMarkerResource(R.raw.signatures_marker_selected)
-                                                .withX(80)
-                                                .withY(63),
-//                                        new MapLocation()
-//                                                .withPlace(new Place().withName("יד שניה"))
-//                                                .withMarkerResource(R.raw.second_hand_marker)
-//                                                .withSelectedMarkerResource(R.raw.second_hand_marker_selected)
-//                                                .withX(55)
-//                                                .withY(64),
+                                                .withX(81)
+                                                .withY(58),
 		                                new MapLocation()
 		                                        .withPlace(new Place().withName("מודיעין"))
                                                 .withMarkerResource(R.raw.information_marker)

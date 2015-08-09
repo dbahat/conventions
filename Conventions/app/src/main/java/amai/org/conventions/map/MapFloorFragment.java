@@ -3,6 +3,7 @@ package amai.org.conventions.map;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Picture;
 import android.graphics.drawable.Drawable;
@@ -80,6 +81,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
 	private List<Marker> floorMarkers = new LinkedList<>();
 	private MapLocation locationToSelect;
+	private Context appContext;
 
 	public MapFloorFragment() {
         // Required empty public constructor
@@ -147,6 +149,8 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
         }
 
         mapArrowClickedListener = (OnMapArrowClickedListener) activity;
+
+		appContext = activity.getApplicationContext();
     }
 
     @Override
@@ -242,7 +246,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		});
 
 		InterceptorLinearLayout.AllTouchEventsListener touchListener = new InterceptorLinearLayout.AllTouchEventsListener() {
-			public final int TOUCH_SLOP = ViewConfiguration.get(getActivity()).getScaledTouchSlop();
+			public final int TOUCH_SLOP = ViewConfiguration.get(appContext).getScaledTouchSlop();
 			float startPointY;
 			boolean isDragging = false;
 			boolean performedDragUpAction = false;
@@ -364,13 +368,13 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		    @Override
 		    protected Boolean doInBackground(Void... params) {
 			    // Load svg image for the map floor
-			    svg = SVGFileLoader.loadSVG(getActivity(), floor.getImageResource());
+			    svg = SVGFileLoader.loadSVG(appContext, floor.getImageResource());
 
 			    // Find location markers and load their svg images (the views are created in the UI thread)
 			    locations = map.findLocationsByFloor(floor);
 			    for (final MapLocation location : locations) {
 			        // We don't save the result because it's saved in a cache for quicker access in the UI thread
-				    SVGFileLoader.loadSVG(getActivity(), location.getMarkerResource());
+				    SVGFileLoader.loadSVG(appContext, location.getMarkerResource());
 			    }
 
 			    return true;
@@ -390,7 +394,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 			    Animation animation = null;
 			    if (showAnimation) {
 			        showAnimation = false;
-				    animation = AnimationUtils.loadAnimation(getActivity(), R.anim.drop_and_fade_in_from_top);
+				    animation = AnimationUtils.loadAnimation(appContext, R.anim.drop_and_fade_in_from_top);
 				    animation.setStartOffset(100);
 			    }
 
@@ -448,7 +452,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		final SVGImageView markerImageView = new AspectRatioSVGImageView(getActivity());
 
 		// Set marker image
-		SVG markerSvg = SVGFileLoader.loadSVG(getActivity(), location.getMarkerResource());
+		SVG markerSvg = SVGFileLoader.loadSVG(appContext, location.getMarkerResource());
 		markerImageView.setSVG(markerSvg);
 
 		// Set marker layout parameters and scaling
@@ -470,7 +474,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 					@Override
 					public Drawable getDrawable() {
 						if (drawable == null) {
-							SVG markerSelectedSvg = SVGFileLoader.loadSVG(getActivity(), location.getSelectedMarkerResource());
+							SVG markerSelectedSvg = SVGFileLoader.loadSVG(appContext, location.getSelectedMarkerResource());
 							drawable = new PictureDrawable(markerSelectedSvg.renderToPicture());
 						}
 						return drawable;
@@ -518,7 +522,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
 	private void setMapClickListeners(View view) {
 		view.setOnTouchListener(new View.OnTouchListener() {
-			private GestureDetector gestureDetector = new GestureDetector(getActivity(), new GestureDetector.SimpleOnGestureListener() {
+			private GestureDetector gestureDetector = new GestureDetector(appContext, new GestureDetector.SimpleOnGestureListener() {
 				@Override
 				public boolean onDoubleTap(MotionEvent e) {
 					changeMapZoom(!isMapZoomedIn());
@@ -546,7 +550,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 	public void setSelectedLocationDetails(final MapLocation location) {
 		if (location == null) {
 			if (locationDetails.getVisibility() != View.GONE) {
-				Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.abc_slide_out_bottom);
+				Animation animation = AnimationUtils.loadAnimation(appContext, R.anim.abc_slide_out_bottom);
 				locationDetails.startAnimation(animation);
 				animation.setAnimationListener(new Animation.AnimationListener() {
 					@Override
@@ -605,7 +609,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 					// Navigate to the hall associated with this location (only if it's a hall)
 					Place place = location.getPlace();
 					if (place instanceof Hall) {
-						Bundle animationBundle = ActivityOptions.makeCustomAnimation(getActivity(), R.anim.abc_slide_in_bottom, 0).toBundle();
+						Bundle animationBundle = ActivityOptions.makeCustomAnimation(appContext, R.anim.abc_slide_in_bottom, 0).toBundle();
 						Bundle bundle = new Bundle();
 						bundle.putString(HallActivity.EXTRA_HALL_NAME, place.getName());
 
