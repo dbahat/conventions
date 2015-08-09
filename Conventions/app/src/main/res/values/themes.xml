@@ -32,6 +32,8 @@
         <item name="eventFeedbackBoxColor">@color/transparent_light_yellow</item>
     </style>
 
+    <style name="AppBaseTheme.Cami2015.Toolbar"/>
+
     <style name="AppBaseTheme.Cami2015">
         <item name="toolbarBackground">@color/maroon</item>
         <item name="toolbarLogo">@drawable/cami_logo_toolbar</item>

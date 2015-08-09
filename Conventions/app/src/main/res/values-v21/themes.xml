@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppBaseTheme.Cami2015.Toolbar">
+        <item name="android:colorPrimaryDark">@color/dark_maroon</item>
+    </style>
+</resources>
