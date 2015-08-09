@@ -30,7 +30,7 @@ public class NavigationItemViewHolder extends RecyclerView.ViewHolder {
 		if (currentActivity.getClass() == item.getActivity()) {
 			int color = ThemeAttributes.getColor(currentActivity, R.attr.navigationPopupSelectedColor);
 			textView.setTextColor(color);
-			imageView.getDrawable().setColorFilter(color, PorterDuff.Mode.MULTIPLY);
+			imageView.setColorFilter(color, PorterDuff.Mode.MULTIPLY);
 			layout.setOnClickListener(null);
 		} else {
 			int color = ThemeAttributes.getColor(currentActivity, R.attr.navigationPopupNotSelectedColor);
