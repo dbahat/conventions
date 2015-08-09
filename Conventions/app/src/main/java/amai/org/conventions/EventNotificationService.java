@@ -67,6 +67,7 @@ public class EventNotificationService extends Service {
 		        .setLargeIcon(ImageHandler.getNotificationLargeIcon(this))
 		        .setContentTitle(getResources().getString(R.string.notification_event_ended_title))
                 .setContentText(getString(R.string.notification_event_ended_message_format, event.getTitle()))
+                .setPriority(Notification.PRIORITY_LOW)
                 .setAutoCancel(true)
                 .setContentIntent(PendingIntent.getActivity(this, 0, intent, 0));
 
@@ -94,7 +95,7 @@ public class EventNotificationService extends Service {
                 .setContentTitle(getResources().getString(R.string.notification_event_about_to_start_title))
                 .setContentText(getEventAboutToStartNotificationText(event))
                 .setDefaults(Notification.DEFAULT_VIBRATE)
-                .setPriority(Notification.PRIORITY_MAX)
+                .setPriority(Notification.PRIORITY_HIGH)
                 .setAutoCancel(true)
                 .setContentIntent(PendingIntent.getActivity(this, 0, intent, 0));
 
