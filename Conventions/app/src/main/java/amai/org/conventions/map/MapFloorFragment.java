@@ -38,7 +38,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import amai.org.conventions.R;
-import amai.org.conventions.SVGFileLoader;
+import amai.org.conventions.ImageHandler;
 import amai.org.conventions.customviews.AspectRatioSVGImageView;
 import amai.org.conventions.customviews.InterceptorLinearLayout;
 import amai.org.conventions.events.EventView;
@@ -368,13 +368,13 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		    @Override
 		    protected Boolean doInBackground(Void... params) {
 			    // Load svg image for the map floor
-			    svg = SVGFileLoader.loadSVG(appContext, floor.getImageResource());
+			    svg = ImageHandler.loadSVG(appContext, floor.getImageResource());
 
 			    // Find location markers and load their svg images (the views are created in the UI thread)
 			    locations = map.findLocationsByFloor(floor);
 			    for (final MapLocation location : locations) {
 			        // We don't save the result because it's saved in a cache for quicker access in the UI thread
-				    SVGFileLoader.loadSVG(appContext, location.getMarkerResource());
+				    ImageHandler.loadSVG(appContext, location.getMarkerResource());
 			    }
 
 			    return true;
@@ -452,7 +452,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		final SVGImageView markerImageView = new AspectRatioSVGImageView(getActivity());
 
 		// Set marker image
-		SVG markerSvg = SVGFileLoader.loadSVG(appContext, location.getMarkerResource());
+		SVG markerSvg = ImageHandler.loadSVG(appContext, location.getMarkerResource());
 		markerImageView.setSVG(markerSvg);
 
 		// Set marker layout parameters and scaling
@@ -474,7 +474,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 					@Override
 					public Drawable getDrawable() {
 						if (drawable == null) {
-							SVG markerSelectedSvg = SVGFileLoader.loadSVG(appContext, location.getSelectedMarkerResource());
+							SVG markerSelectedSvg = ImageHandler.loadSVG(appContext, location.getSelectedMarkerResource());
 							drawable = new PictureDrawable(markerSelectedSvg.renderToPicture());
 						}
 						return drawable;

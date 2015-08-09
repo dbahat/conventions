@@ -34,7 +34,7 @@ import amai.org.conventions.ArrivalMethodsActivity;
 import amai.org.conventions.FeedbackActivity;
 import amai.org.conventions.HomeActivity;
 import amai.org.conventions.R;
-import amai.org.conventions.SVGFileLoader;
+import amai.org.conventions.ImageHandler;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.AnimationPopupWindow;
 import amai.org.conventions.events.activities.EventActivity;
@@ -171,15 +171,12 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	        switch (logoType) {
 		        // bitmap
 		        case 0:
-			        drawable = ThemeAttributes.getDrawable(this, R.attr.toolbarLogo);
-			        // The scaling doesn't work properly for this icon (the width remains the original size)
-			        // so we have to resize it manually
-			        drawable = resizeBitmap(drawable, ThemeAttributes.getDimentionSize(this, R.attr.actionBarSize));
+			        drawable = ImageHandler.getToolbarLogo(this);
 			        break;
 		        // svg
 		        case 1:
 			        toolbar.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-	                SVG logoSVG = SVGFileLoader.loadSVG(this, ThemeAttributes.getResourceId(this, R.attr.toolbarLogo));
+	                SVG logoSVG = ImageHandler.loadSVG(this, ThemeAttributes.getResourceId(this, R.attr.toolbarLogo));
 			        drawable = new PictureDrawable(logoSVG.renderToPicture());
 			        break;
 	        }
@@ -236,15 +233,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
         }
     }
 
-	/**
-	 * Resize bitmap height to specified pixels while keeping the aspect ratio
-	 */
-	private Drawable resizeBitmap(Drawable image, int height) {
-		Bitmap originalBitmap = ((BitmapDrawable) image).getBitmap();
-		int width = (int) (originalBitmap.getWidth() * height / (float) originalBitmap.getHeight());
-		Bitmap bitmapResized = Bitmap.createScaledBitmap(originalBitmap, width, height, false);
-		return new BitmapDrawable(getResources(), bitmapResized);
-	}
+
 
     protected View setContentInContentContainer(int layoutResID) {
         FrameLayout contentContainer = (FrameLayout) findViewById(R.id.navigation_content_view_container);

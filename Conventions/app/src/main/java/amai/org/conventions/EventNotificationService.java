@@ -25,7 +25,6 @@ public class EventNotificationService extends Service {
     public static final String EXTRA_EVENT_NOTIFICATION_TYPE = "ExtraEventNotificationType";
 
     private NotificationManager notificationManager;
-	private static Bitmap largeIcon; // Cache for only creating the icon once
 
 	@Nullable
     @Override
@@ -68,7 +67,7 @@ public class EventNotificationService extends Service {
 
         Notification.Builder builder = new Notification.Builder(this)
                 .setSmallIcon(R.drawable.cami_logo_small_white)
-		        .setLargeIcon(getNotificationLargeIcon())
+		        .setLargeIcon(ImageHandler.getNotificationLargeIcon(this))
 		        .setContentTitle(getResources().getString(R.string.notification_event_ended_title))
                 .setContentText(getString(R.string.notification_event_ended_message_format, event.getTitle()))
                 .setAutoCancel(true)
@@ -90,7 +89,7 @@ public class EventNotificationService extends Service {
 
         Notification.Builder builder = new Notification.Builder(this)
                 .setSmallIcon(R.drawable.cami_logo_small_white)
-		        .setLargeIcon(getNotificationLargeIcon())
+		        .setLargeIcon(ImageHandler.getNotificationLargeIcon(this))
                 .setContentTitle(getResources().getString(R.string.notification_event_about_to_start_title))
                 .setContentText(getEventAboutToStartNotificationText(event))
                 .setDefaults(Notification.DEFAULT_VIBRATE)
@@ -109,23 +108,4 @@ public class EventNotificationService extends Service {
         return getResources().getString(R.string.notification_event_about_to_start_message_format,
                 event.getTitle(), event.getHall().getName());
     }
-
-	private synchronized Bitmap getNotificationLargeIcon() {
-		if (largeIcon != null) {
-			return largeIcon;
-		}
-		largeIcon = resizeBitmap(getResources().getDrawable(R.drawable.cami_logo_app_icon), 64);
-		return largeIcon;
-	}
-
-	private Bitmap resizeBitmap(Drawable image, int heightInDp) {
-		int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, heightInDp, getResources().getDisplayMetrics());
-		Bitmap originalBitmap = ((BitmapDrawable) image).getBitmap();
-		int width = (int) (originalBitmap.getWidth() * height / (float) originalBitmap.getHeight());
-		return Bitmap.createScaledBitmap(originalBitmap, width, height, false);
-	}
-
-	public synchronized static void releaseCache() {
-		largeIcon = null;
-	}
 }
