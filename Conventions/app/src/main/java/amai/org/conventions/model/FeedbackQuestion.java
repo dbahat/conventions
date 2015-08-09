@@ -18,8 +18,8 @@ public class FeedbackQuestion implements Serializable {
 	public static final int QUESTION_ID_SIMILAR_EVENTS = 3;
 	public static final int QUESTION_ID_ADDITIONAL_INFO = 4;
 	public static final int QUESTION_ID_AGE = 5;
-	public static final int QUESTION_ID_LIKED = 6;
-	public static final int QUESTION_ID_DISLIKED = 7;
+	public static final int QUESTION_ID_IMPROVEMENT = 7;
+	public static final int QUESTION_ID_LIKED = 8;
 
 	private static Map<Integer, Integer> questions = initQuestions();
 
@@ -31,7 +31,7 @@ public class FeedbackQuestion implements Serializable {
 		questions.put(QUESTION_ID_ADDITIONAL_INFO, R.string.question_additional_info);
 		questions.put(QUESTION_ID_AGE, R.string.question_age);
 		questions.put(QUESTION_ID_LIKED, R.string.question_liked);
-		questions.put(QUESTION_ID_DISLIKED, R.string.question_disliked);
+		questions.put(QUESTION_ID_IMPROVEMENT, R.string.question_improvement);
 		return questions;
 	}
 
