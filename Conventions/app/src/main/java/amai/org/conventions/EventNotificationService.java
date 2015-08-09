@@ -5,12 +5,9 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-import android.util.TypedValue;
 
 import amai.org.conventions.events.activities.EventActivity;
 import amai.org.conventions.model.ConventionEvent;
@@ -73,7 +70,11 @@ public class EventNotificationService extends Service {
                 .setAutoCancel(true)
                 .setContentIntent(PendingIntent.getActivity(this, 0, intent, 0));
 
-        Notification notification = new Notification.BigTextStyle(builder)
+	    if (Build.VERSION.SDK_INT >= 20) {
+		    builder.setGroup("cami_2015_send_event_feedback");
+	    }
+
+	    Notification notification = new Notification.BigTextStyle(builder)
                 .bigText(getString(R.string.notification_event_ended_message_format, event.getTitle()))
                 .build();
 
@@ -96,6 +97,10 @@ public class EventNotificationService extends Service {
                 .setPriority(Notification.PRIORITY_MAX)
                 .setAutoCancel(true)
                 .setContentIntent(PendingIntent.getActivity(this, 0, intent, 0));
+
+	    if (Build.VERSION.SDK_INT >= 20) {
+		    builder.setGroup("cami_2015_event_about_to_start");
+	    }
 
         Notification notification = new Notification.BigTextStyle(builder)
                 .bigText(getEventAboutToStartNotificationText(event))
