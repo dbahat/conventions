@@ -27,7 +27,7 @@ import amai.org.conventions.utils.Dates;
 
 public class UpdatesRefresher {
 	public interface OnUpdateFinishedListener {
-		void onSuccess();
+		void onSuccess(int newUpdatesNumber);
 		void onError(FacebookRequestError error);
 		void onInvalidTokenError();
 	}
@@ -88,11 +88,12 @@ public class UpdatesRefresher {
 							listener.onError(graphResponse.getError());
 						} else {
 							List<Update> updatesFromResponse = parseAndFilterFacebookFeedResult(graphResponse);
+							int newUpdatesNumber = updatesFromResponse.size();
 							// Update the model, so next time we can read them from cache.
 							Convention.getInstance().addUpdates(updatesFromResponse);
 							Convention.getInstance().getStorage().saveUpdates();
 							isRefreshInProgress = false;
-							listener.onSuccess();
+							listener.onSuccess(newUpdatesNumber);
 						}
 					}
 				});

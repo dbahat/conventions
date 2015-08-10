@@ -61,7 +61,7 @@ public class HomeActivity extends AppCompatActivity {
 			   // Refresh and ignore all errors
 			   UpdatesRefresher.getInstance(HomeActivity.this).refreshFromServer(null, true, new UpdatesRefresher.OnUpdateFinishedListener() {
 				   @Override
-				   public void onSuccess() {
+				   public void onSuccess(int newUpdatesNumber) {
 
 					   List<Update> newUpdates = CollectionUtils.filter(Convention.getInstance().getUpdates(), new CollectionUtils.Predicate<Update>() {
 						   @Override
@@ -71,7 +71,7 @@ public class HomeActivity extends AppCompatActivity {
 					   });
 
 					   // We don't want to raise the notification if there are no new updates, or if this is the first time updates are downloaded to cache.
-					   if (newUpdates.size() > 0 && numberOfUpdatesBeforeRefresh > 0
+					   if (newUpdatesNumber > 0 && newUpdates.size() > 0 && numberOfUpdatesBeforeRefresh > 0
 							   && UpdatesRefresher.getInstance(HomeActivity.this).shouldEnableNotificationAfterUpdate()) {
 
 						   Update latestUpdate = Collections.max(newUpdates, new Comparator<Update>() {

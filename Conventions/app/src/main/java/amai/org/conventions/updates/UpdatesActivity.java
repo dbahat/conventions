@@ -153,7 +153,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
         // Refresh, and don't allow new updates notification to occur due to this refresh
 	    refresher.refreshFromServer(accessToken, false, new UpdatesRefresher.OnUpdateFinishedListener() {
 		    @Override
-		    public void onSuccess() {
+		    public void onSuccess(int newUpdatesNumber) {
 			    updateRefreshingFlag();
 			    initializeUpdatesList(Convention.getInstance().getUpdates());
 			    // If we don't do that, the recycler view will show the previous items and the user will have to scroll manually
