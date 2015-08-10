@@ -5,7 +5,6 @@ import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.LightingColorFilter;
 import android.graphics.drawable.BitmapDrawable;
@@ -31,12 +30,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import amai.org.conventions.AboutActivity;
 import amai.org.conventions.ArrivalMethodsActivity;
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.FeedbackActivity;
 import amai.org.conventions.HomeActivity;
-import amai.org.conventions.R;
 import amai.org.conventions.ImageHandler;
+import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.AnimationPopupWindow;
 import amai.org.conventions.events.activities.EventActivity;
@@ -95,6 +95,8 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		if (Convention.getInstance().canFillFeedback()) {
 			items.add(new NavigationItem(FeedbackActivity.class, getString(R.string.feedback), getResources().getDrawable(R.drawable.feedback_menu_icon)));
 		}
+
+		items.add(new NavigationItem(AboutActivity.class, getString(R.string.about), getResources().getDrawable(R.drawable.ic_info_outline)));
 
 		ListView navigationItems = (ListView) view.findViewById(R.id.navigation_items);
 		navigationItems.setAdapter(new NavigationItemsAdapter(this, items));
