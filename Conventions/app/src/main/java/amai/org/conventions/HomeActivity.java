@@ -15,6 +15,10 @@ import android.widget.Toast;
 
 import com.facebook.FacebookRequestError;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 import amai.org.conventions.events.activities.EventActivity;
 import amai.org.conventions.events.activities.ProgrammeActivity;
 import amai.org.conventions.model.Convention;
@@ -23,6 +27,7 @@ import amai.org.conventions.navigation.NavigationPages;
 import amai.org.conventions.networking.ModelRefresher;
 import amai.org.conventions.networking.UpdatesRefresher;
 import amai.org.conventions.updates.UpdatesActivity;
+import amai.org.conventions.utils.CollectionUtils;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -59,21 +64,27 @@ public class HomeActivity extends AppCompatActivity {
 			   UpdatesRefresher.getInstance(HomeActivity.this).refreshFromServer(null, true, new UpdatesRefresher.OnUpdateFinishedListener() {
 				   @Override
 				   public void onSuccess() {
-					   int newUpdates = 0;
-					   Update latestUpdate = null;
-					   for (Update update : Convention.getInstance().getUpdates()) {
-						   if (update.isNew()) {
-							   ++newUpdates;
-							   latestUpdate = update;
+
+					   List<Update> newUpdates = CollectionUtils.filter(Convention.getInstance().getUpdates(), new CollectionUtils.Predicate<Update>() {
+						   @Override
+						   public boolean where(Update item) {
+							   return item.isNew();
 						   }
-					   }
+					   });
+
+					   Update latestUpdate = Collections.max(newUpdates, new Comparator<Update>() {
+						   @Override
+						   public int compare(Update lhs, Update rhs) {
+							   return lhs.getDate().compareTo(rhs.getDate());
+						   }
+					   });
 
 					   // We don't want to raise the notification if there are no new updates, or if this is the first time updates are downloaded to cache.
-					   if (newUpdates > 0 && numberOfUpdatesBeforeRefresh > 0
+					   if (newUpdates.size() > 0 && numberOfUpdatesBeforeRefresh > 0
 							   && UpdatesRefresher.getInstance(HomeActivity.this).shouldEnableNotificationAfterUpdate()) {
-						   String notificationTitle = newUpdates == 1
+						   String notificationTitle = newUpdates.size() == 1
 								   ? getString(R.string.new_update)
-								   : getString(R.string.new_updates, newUpdates);
+								   : getString(R.string.new_updates, newUpdates.size());
 
 						   String notificationMessage = latestUpdate.getText().substring(0, Math.min(200,latestUpdate.getText().length())) + "...";
 

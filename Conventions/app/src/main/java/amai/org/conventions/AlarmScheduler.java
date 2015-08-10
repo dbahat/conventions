@@ -88,7 +88,8 @@ public class AlarmScheduler {
                 .putExtra(EventNotificationService.EXTRA_IS_END_OF_CONVENTION_NOTIFICATION, true);
         Calendar postConventionDate = Calendar.getInstance();
         postConventionDate.setTime(Convention.getInstance().getDate().getTime());
-        postConventionDate.add(Calendar.DAY_OF_MONTH, 1);
+        postConventionDate.add(Calendar.DATE, 1);
+        postConventionDate.set(Calendar.HOUR_OF_DAY, 10);
         scheduleAlarm(postConventionDate.getTimeInMillis(), PendingIntent.getService(context, 0, intent, 0));
     }
 
