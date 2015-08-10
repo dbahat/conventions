@@ -1,9 +1,14 @@
 package amai.org.conventions.updates;
 
+import android.content.Context;
+import android.graphics.Point;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
+import android.text.TextUtils;
+import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -12,8 +17,9 @@ import amai.org.conventions.utils.Dates;
 
 public class UpdateViewHolder extends RecyclerView.ViewHolder {
     private static final int MAX_LINES_FOR_COLLAPSED_UPDATE = 7;
+    public static final int MAX_LINES_FOR_COLLAPSED_VIEW = 6;
 
-	private ViewGroup updateContainer;
+    private ViewGroup updateContainer;
     private TextView updateTextView;
     private TextView updateTime;
     private TextView updateDay;
@@ -36,8 +42,8 @@ public class UpdateViewHolder extends RecyclerView.ViewHolder {
         int extra_margin_for_top_lines = updateTextView.getResources().getDimensionPixelOffset(R.dimen.update_extra_text_margin_for_top_update_lines);
 	    int textLength = updateViewModel.getUpdate().getText().length();
 	    spannedUpdateText.setSpan(
-		        new WrappingTextLeadingMarginSpan(4, timeContainerSize + extra_margin_for_top_lines),
-		        0, textLength, 0);
+                new WrappingTextLeadingMarginSpan(4, timeContainerSize + extra_margin_for_top_lines),
+                0, textLength, 0);
 
 	    // Make new updates highlighted
 	    if (updateViewModel.getUpdate().isNew()) {
@@ -47,9 +53,10 @@ public class UpdateViewHolder extends RecyclerView.ViewHolder {
 	    }
 
         updateTextView.setText(spannedUpdateText);
-
         updateTime.setText(Dates.formatHoursAndMinutes(updateViewModel.getUpdate().getDate()));
         updateDay.setText(Dates.formatDateWithoutTime(updateViewModel.getUpdate().getDate()));
+
+        expandViewIfNumberOfTextLinesIsSmall(updateViewModel);
 
         if (updateViewModel.isCollapsed()) {
             updateTextView.setMaxLines(MAX_LINES_FOR_COLLAPSED_UPDATE);
@@ -75,5 +82,25 @@ public class UpdateViewHolder extends RecyclerView.ViewHolder {
 
     public interface OnMoreInfoClickListener {
         void onClicked();
+    }
+
+    private void expandViewIfNumberOfTextLinesIsSmall(UpdateViewModel updateViewModel) {
+        // In case the number of lines in the update is too small, show it as expanded (otherwise the user will get UX where clicking the expand button
+        // results in the view getting smaller).
+        Point screenSize = getScreenSize();
+        // For this check we need to measure the textView size. Not using accurate measure call here due to time constraints, and since the approximate mesure
+        // we do here is good enough.
+        updateTextView.measure(screenSize.x, screenSize.y);
+        if (updateTextView.getLineCount() <= MAX_LINES_FOR_COLLAPSED_VIEW) {
+            updateViewModel.setCollapsed(false);
+        }
+    }
+
+    private Point getScreenSize() {
+        WindowManager wm = (WindowManager) updateContainer.getContext().getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        return size;
     }
 }

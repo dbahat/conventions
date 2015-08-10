@@ -45,19 +45,19 @@ public class UpdatesAdapter extends RecyclerView.Adapter<UpdateViewHolder> {
         return updates.size();
     }
 
-    public void setUpdates(List<Update> newUpdates) {
+    public void setUpdates(List<Update> updatesToSet) {
         List<UpdateViewModel> updateViewModels = new LinkedList<>();
-        for (Update update : newUpdates) {
+        for (Update update : updatesToSet) {
             updateViewModels.add(new UpdateViewModel(update, true /* By default have all items collapsed */));
         }
 
 	    // Only the sizeDiff first items are really inserted. The rest might have been changed.
-	    int sizeDiff = newUpdates.size() - updates.size();
+	    int sizeDiff = updatesToSet.size() - updates.size();
 
         updates = updateViewModels;
 
 	    int position = 0;
-	    for (Update update : newUpdates) {
+	    for (Update update : updatesToSet) {
 		    if (update.isNew() && sizeDiff > 0) {
 			    notifyItemInserted(position);
 			    --sizeDiff;
