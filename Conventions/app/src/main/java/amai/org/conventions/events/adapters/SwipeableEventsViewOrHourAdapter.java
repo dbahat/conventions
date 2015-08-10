@@ -5,6 +5,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.google.android.gms.analytics.HitBuilders;
+
 import java.util.Calendar;
 import java.util.List;
 
@@ -64,6 +66,12 @@ public class SwipeableEventsViewOrHourAdapter extends BaseAdapter implements Sti
 	        public void run() {
 		        // Update the favorite state in the model
 		        final boolean isAttending = event.isAttending();
+
+                ConventionsApplication.tracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Favorites")
+                        .setAction(!isAttending ? "Add" : "Remove")
+                        .setLabel("SwipeToEdit")
+                        .build());
 
                 if (isAttending) {
                     event.setAttending(false);

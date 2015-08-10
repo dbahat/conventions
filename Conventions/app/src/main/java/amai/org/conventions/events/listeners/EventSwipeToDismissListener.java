@@ -2,6 +2,8 @@ package amai.org.conventions.events.listeners;
 
 import android.support.v7.widget.RecyclerView;
 
+import com.google.android.gms.analytics.HitBuilders;
+
 import java.util.List;
 
 import amai.org.conventions.ConventionsApplication;
@@ -22,6 +24,12 @@ public class EventSwipeToDismissListener implements Runnable {
 
 	@Override
 	public void run() {
+		ConventionsApplication.tracker.send(new HitBuilders.EventBuilder()
+				.setCategory("Favorites")
+				.setAction("Remove")
+				.setLabel("SwipeToDismiss")
+				.build());
+
 		viewHolder.getModel().setAttending(false);
 		Convention.getInstance().getStorage().saveUserInput();
 

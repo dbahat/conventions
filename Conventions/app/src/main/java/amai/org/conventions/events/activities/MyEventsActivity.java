@@ -15,12 +15,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.HitBuilders;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.R;
 import amai.org.conventions.events.adapters.EventGroupsAdapter;
 import amai.org.conventions.utils.CollectionUtils;
@@ -124,6 +127,12 @@ public class MyEventsActivity extends NavigationActivity {
 
                 return true;
 			case R.id.my_events_share:
+				ConventionsApplication.tracker.send(new HitBuilders.EventBuilder()
+						.setCategory("MyEvents")
+						.setAction("ShareClicked")
+						.setValue(getMyEvents().size())
+						.build());
+
 				if (getMyEvents().size() > 0) {
 					startActivity(createSharingIntent());
 				} else {

@@ -228,7 +228,15 @@ public class EventActivity extends NavigationActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.event_change_favorite_state:
-	            ConventionEvent.UserInput userInput = conventionEvent.getUserInput();
+
+				ConventionEvent.UserInput userInput = conventionEvent.getUserInput();
+
+				ConventionsApplication.tracker.send(new HitBuilders.EventBuilder()
+						.setCategory("Favorites")
+						.setAction(!userInput.isAttending() ? "Add" : "Remove")
+						.setLabel("EventActivity")
+						.build());
+
 	            if (userInput.isAttending()) {
                     userInput.setAttending(false);
 					ConventionsApplication.alarmScheduler.cancelDefaultEventAlarms(conventionEvent);
@@ -370,12 +378,22 @@ public class EventActivity extends NavigationActivity {
 				protected void onFailure(Exception exception) {
 					Log.w(TAG, "Failed to send feedback mail. Reason: " + exception.getMessage());
 					Toast.makeText(EventActivity.this, R.string.feedback_send_mail_failed, Toast.LENGTH_LONG).show();
+					sendUserSentFeedbackTelemetry(false);
 				}
 
 				@Override
 				protected void onSuccess() {
 					super.onSuccess();
 					feedbackView.setState(CollapsibleFeedbackView.State.Collapsed, true);
+					sendUserSentFeedbackTelemetry(true);
+				}
+
+				private void sendUserSentFeedbackTelemetry(boolean success) {
+					ConventionsApplication.tracker.send(new HitBuilders.EventBuilder()
+							.setCategory("Feedback")
+							.setAction("SendAttempt")
+							.setLabel(success ? "success" : "failure")
+							.build());
 				}
 			});
 		} else {

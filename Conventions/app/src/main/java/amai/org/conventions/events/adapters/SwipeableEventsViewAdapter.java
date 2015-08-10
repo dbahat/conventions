@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.analytics.HitBuilders;
+
 import java.util.List;
 
 import amai.org.conventions.ConventionsApplication;
@@ -45,7 +47,12 @@ public class SwipeableEventsViewAdapter extends RecyclerView.Adapter<SwipeableEv
             public void run() {
                 // Update the favorite state in the model
                 final boolean isAttending = event.isAttending();
-                event.setAttending(!isAttending);
+
+                ConventionsApplication.tracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Favorites")
+                        .setAction(!isAttending ? "Add" : "Remove")
+                        .setLabel("SwipeToEdit")
+                        .build());
 
                 if (isAttending) {
                     event.setAttending(false);

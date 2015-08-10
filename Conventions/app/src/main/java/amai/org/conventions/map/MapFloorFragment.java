@@ -29,6 +29,7 @@ import android.widget.TextView;
 
 import com.caverock.androidsvg.SVG;
 import com.caverock.androidsvg.SVGImageView;
+import com.google.android.gms.analytics.HitBuilders;
 import com.manuelpeinado.imagelayout.ImageLayout;
 
 import java.util.ArrayList;
@@ -37,6 +38,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.R;
 import amai.org.conventions.ImageHandler;
 import amai.org.conventions.customviews.AspectRatioSVGImageView;
@@ -514,6 +516,12 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
 	@Override
 	public void onClick(Marker marker) {
+		ConventionsApplication.tracker.send(new HitBuilders.EventBuilder()
+				.setCategory("Map")
+				.setAction("MarkerClicked")
+				.setLabel(marker.getLocation().getName())
+				.build());
+
 		// Deselect all markers except the clicked marker
 		for (Marker currMarker : floorMarkers) {
 			if (currMarker != marker) {
