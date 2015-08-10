@@ -130,12 +130,6 @@ public class Convention implements Serializable {
 						                        .withX(83)
 						                        .withY(75),
 				                        new MapLocation()
-						                        .withPlace(new Place().withName("שמירת חפצים"))
-						                        .withMarkerResource(R.raw.storage_marker)
-						                        .withSelectedMarkerResource(R.raw.storage_marker_selected)
-						                        .withX(91)
-						                        .withY(67),
-				                        new MapLocation()
 						                        .withPlace(games)
 						                        .withMarkerResource(R.raw.games_marker)
 						                        .withSelectedMarkerResource(R.raw.games_marker_selected)
@@ -172,11 +166,17 @@ public class Convention implements Serializable {
 						                        .withX(58)
 						                        .withY(11),
 				                        new MapLocation()
+						                        .withPlace(new Place().withName("שמירת חפצים"))
+						                        .withMarkerResource(R.raw.storage_marker)
+						                        .withSelectedMarkerResource(R.raw.storage_marker_selected)
+						                        .withX(22)
+						                        .withY(65),
+				                        new MapLocation()
 						                        .withPlace(new Place().withName("ווידוא ווקאון"))
 						                        .withMarkerResource(R.raw.walkon_marker)
 						                        .withSelectedMarkerResource(R.raw.walkon_marker_selected)
-						                        .withX(24)
-						                        .withY(63),
+						                        .withX(30)
+						                        .withY(58),
 				                        new MapLocation()
 						                        .withPlace(new Place().withName("שירותים"))
 						                        .withMarkerResource(R.raw.toilet_marker)
