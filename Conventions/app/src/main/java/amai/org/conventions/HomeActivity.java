@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Toast;
 
 import com.facebook.FacebookRequestError;
 
@@ -19,7 +18,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import amai.org.conventions.events.activities.EventActivity;
 import amai.org.conventions.events.activities.ProgrammeActivity;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.Update;
@@ -72,16 +70,17 @@ public class HomeActivity extends AppCompatActivity {
 						   }
 					   });
 
-					   Update latestUpdate = Collections.max(newUpdates, new Comparator<Update>() {
-						   @Override
-						   public int compare(Update lhs, Update rhs) {
-							   return lhs.getDate().compareTo(rhs.getDate());
-						   }
-					   });
-
 					   // We don't want to raise the notification if there are no new updates, or if this is the first time updates are downloaded to cache.
 					   if (newUpdates.size() > 0 && numberOfUpdatesBeforeRefresh > 0
 							   && UpdatesRefresher.getInstance(HomeActivity.this).shouldEnableNotificationAfterUpdate()) {
+
+						   Update latestUpdate = Collections.max(newUpdates, new Comparator<Update>() {
+							   @Override
+							   public int compare(Update lhs, Update rhs) {
+								   return lhs.getDate().compareTo(rhs.getDate());
+							   }
+						   });
+
 						   String notificationTitle = newUpdates.size() == 1
 								   ? getString(R.string.new_update)
 								   : getString(R.string.new_updates, newUpdates.size());
