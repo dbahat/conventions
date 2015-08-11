@@ -8,7 +8,7 @@ package amai.org.conventions.utils;
  */
 public class Log {
 
-    private static final boolean isEnabled = true;
+    private static final boolean isEnabled = false;
 
     public static int v(String tag, String msg) {
         return isEnabled ? android.util.Log.v(tag, msg) : 0;
