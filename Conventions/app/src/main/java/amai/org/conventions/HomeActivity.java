@@ -21,6 +21,7 @@ import java.util.List;
 import amai.org.conventions.events.activities.ProgrammeActivity;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.Update;
+import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.navigation.NavigationPages;
 import amai.org.conventions.networking.ModelRefresher;
 import amai.org.conventions.networking.UpdatesRefresher;
@@ -31,6 +32,7 @@ public class HomeActivity extends AppCompatActivity {
 
 	private static final int NEW_UPDATES_NOTIFICATION_ID = 75457;
 	private NavigationPages navigationPages;
+	private static int numberOfTimesNavigated = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,17 +122,23 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void onNavigationButtonClicked(View view) {
+	    ++numberOfTimesNavigated;
         int position = Integer.parseInt(view.getTag().toString());
 	    Class<? extends Activity> activityType = navigationPages.getActivityType(position);
 	    Intent intent = new Intent(this, activityType);
+	    Bundle extras = new Bundle();
+	    extras.putBoolean(NavigationActivity.EXTRA_NAVIGATED_FROM_HOME, true);
 
 	    if (activityType == ProgrammeActivity.class) {
-		    Bundle extras = new Bundle();
 		    extras.putInt(ProgrammeActivity.EXTRA_DELAY_SCROLLING, 500);
-		    intent.putExtras(extras);
 	    }
 
+	    intent.putExtras(extras);
 	    ActivityOptions options = ActivityOptions.makeCustomAnimation(this, 0, R.anim.shrink_to_top_right);
 	    startActivity(intent, options.toBundle());
     }
+
+	public static int getNumberOfTimesNavigated() {
+		return numberOfTimesNavigated;
+	}
 }

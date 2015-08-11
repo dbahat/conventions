@@ -48,9 +48,11 @@ import amai.org.conventions.updates.UpdatesActivity;
 
 
 public abstract class NavigationActivity extends AppCompatActivity {
+	public static final String EXTRA_NAVIGATED_FROM_HOME = "ExtraNavigatedFromHome";
 	private static final String EXTRA_SHOW_HOME_SCREEN_ON_BACK = "ExtraShowHomeScreenOnBack";
 
 	private static boolean showLogoGlow = true;
+	private boolean navigatedFromHome;
     private Toolbar navigationToolbar;
     private AnimationPopupWindow popup;
 	private boolean showHomeScreenOnBack;
@@ -60,7 +62,10 @@ public abstract class NavigationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
 
-        navigationToolbar = (Toolbar) findViewById(R.id.navigation_toolbar);
+	    navigatedFromHome = getIntent().getBooleanExtra(EXTRA_NAVIGATED_FROM_HOME, false);
+	    showHomeScreenOnBack = getIntent().getBooleanExtra(EXTRA_SHOW_HOME_SCREEN_ON_BACK, false);
+
+	    navigationToolbar = (Toolbar) findViewById(R.id.navigation_toolbar);
         setupActionBar(navigationToolbar);
         navigationToolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
@@ -78,8 +83,11 @@ public abstract class NavigationActivity extends AppCompatActivity {
 			}
 		});
 
-	    showHomeScreenOnBack = getIntent().getBooleanExtra(EXTRA_SHOW_HOME_SCREEN_ON_BACK, false);
     }
+
+	private boolean shouldShowLogoGlow() {
+		return showLogoGlow && navigatedFromHome && HomeActivity.getNumberOfTimesNavigated() > 1;
+	}
 
 	private AnimationPopupWindow createNavigationPopup() {
 		final View view = LayoutInflater.from(NavigationActivity.this).inflate(R.layout.navigation_menu, null);
@@ -191,7 +199,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	        }
             toolbar.setNavigationIcon(drawable);
 
-	        if (showLogoGlow) {
+	        if (shouldShowLogoGlow()) {
 				// Getting the toolbar imageView by iterating over the toolbar children, since the toolbar imageView has no ID.
 		        for (int i = 0; i < toolbar.getChildCount(); ++i) {
 			        View view = toolbar.getChildAt(i);
@@ -215,7 +223,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 
 					        @Override
 					        public void onAnimationStart(Animator animation) {
-						        if (!showLogoGlow && !cancelled) {
+						        if (!shouldShowLogoGlow() && !cancelled) {
 							        cancelled = true;
 							        animation.cancel();
 						        }
