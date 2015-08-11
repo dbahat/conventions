@@ -20,6 +20,8 @@ public class FeedbackQuestion implements Serializable {
 	public static final int QUESTION_ID_AGE = 5;
 	public static final int QUESTION_ID_IMPROVEMENT = 7;
 	public static final int QUESTION_ID_LIKED = 8;
+	public static final int QUESTION_ID_MAP_SIGNS = 9;
+	public static final int QUESTION_ID_CONFLICTING_EVENTS = 10;
 
 	private static Map<Integer, Integer> questions = initQuestions();
 
@@ -32,6 +34,8 @@ public class FeedbackQuestion implements Serializable {
 		questions.put(QUESTION_ID_AGE, R.string.question_age);
 		questions.put(QUESTION_ID_LIKED, R.string.question_liked);
 		questions.put(QUESTION_ID_IMPROVEMENT, R.string.question_improvement);
+		questions.put(QUESTION_ID_MAP_SIGNS, R.string.question_map_signs);
+		questions.put(QUESTION_ID_CONFLICTING_EVENTS, R.string.question_conflicting_events);
 		return questions;
 	}
 
@@ -100,14 +104,18 @@ public class FeedbackQuestion implements Serializable {
 	public List<Integer> getMultipleAnswers() {
 		switch (questionId) {
 			case QUESTION_ID_AGE:
-				return Arrays.asList(R.string.age_less_than_12, R.string.age_12_to_18, R.string.age_more_than_18);
+				return Arrays.asList(R.string.age_less_than_12, R.string.age_12_to_17, R.string.age_18_to_25, R.string.age_more_than_25);
+			case QUESTION_ID_MAP_SIGNS:
+				return Arrays.asList(R.string.yes, R.string.no);
+			case QUESTION_ID_CONFLICTING_EVENTS:
+				return Arrays.asList(R.string.answer_event_conflicted, R.string.answer_no_room, R.string.answer_too_early_or_late, R.string.answer_other_reason);
 		}
 		return Collections.emptyList();
 	}
 
 	// This enum must be backwards compatible - don't remove or rename any values from it
 	public enum AnswerType {
-		TEXT, SMILEY_3_POINTS, MULTIPLE_ANSWERS
+		TEXT, SMILEY_3_POINTS, MULTIPLE_ANSWERS, MULTIPLE_ANSWERS_RADIO
 	}
 
 	// This enum must be backwards compatible - don't remove or rename any values from it

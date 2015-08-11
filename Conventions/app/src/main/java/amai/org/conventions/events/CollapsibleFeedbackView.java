@@ -8,7 +8,6 @@ import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -24,9 +23,12 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -200,7 +202,11 @@ public class CollapsibleFeedbackView extends FrameLayout {
                 break;
             }
 	        case MULTIPLE_ANSWERS: {
-		        answerView = buildMultiAnswerView(question, feedback, question.getMultipleAnswers());
+		        answerView = buildMultiAnswerView(question, feedback, question.getMultipleAnswers(), false);
+		        break;
+	        }
+	        case MULTIPLE_ANSWERS_RADIO: {
+		        answerView = buildMultiAnswerView(question, feedback, question.getMultipleAnswers(), true);
 		        break;
 	        }
         }
@@ -212,7 +218,6 @@ public class CollapsibleFeedbackView extends FrameLayout {
         return questionLayout;
     }
 
-	@NonNull
 	private View buildSmiley3PointsAnswerView(final FeedbackQuestion question, final Feedback feedback) {
 		LinearLayout imagesLayout = new LinearLayout(getContext());
 		imagesLayout.setOrientation(LinearLayout.HORIZONTAL);
@@ -311,7 +316,6 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		return imagesLayout;
 	}
 
-	@NonNull
 	private View buildTextAnswerView(final FeedbackQuestion question, final Feedback feedback) {
 		Object answer = question.getAnswer();
 		View answerView;
@@ -366,10 +370,20 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		return answerView;
 	}
 
-	private LinearLayout buildMultiAnswerView(final FeedbackQuestion question, final Feedback feedback, List<Integer> possibleAnswers) {
+	private View buildMultiAnswerView(final FeedbackQuestion question, final Feedback feedback, List<Integer> possibleAnswers, final boolean radio) {
 		Object answer = question.getAnswer();
-		LinearLayout buttonsLayout = new LinearLayout(getContext());
-		buttonsLayout.setOrientation(LinearLayout.HORIZONTAL);
+		LinearLayout buttonsLayout;
+		final ViewGroup mainView;
+		if (radio) {
+			buttonsLayout = new RadioGroup(getContext());
+			mainView = buttonsLayout;
+			buttonsLayout.setOrientation(LinearLayout.VERTICAL);
+		} else {
+			buttonsLayout = new LinearLayout(getContext());
+			buttonsLayout.setOrientation(LinearLayout.HORIZONTAL);
+			mainView = new HorizontalScrollView(getContext());
+			mainView.addView(buttonsLayout);
+		}
 
 		final List<TextView> answerViews = new ArrayList<>(possibleAnswers.size());
 
@@ -384,6 +398,15 @@ public class CollapsibleFeedbackView extends FrameLayout {
 				if (selectedAnswer.equals(question.getAnswer())) {
 					selectedAnswer = null;
 				}
+				// Ensure radio buttons are synched with user selection
+				if (radio) {
+					RadioGroup radioGroup = (RadioGroup) mainView;
+					if (selectedAnswer == null) {
+						radioGroup.clearCheck();
+					} else {
+						radioGroup.check(v.getId());
+					}
+				}
 
 				for (TextView answerView : answerViews) {
 					if (selectedAnswer == null || selected != answerView) {
@@ -397,19 +420,25 @@ public class CollapsibleFeedbackView extends FrameLayout {
 			}
 		};
 
-		int padding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics());
+		int padding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4.5f, getResources().getDisplayMetrics());
 		boolean first = true;
 		for (int answerStringId : possibleAnswers) {
-			final TextView answerButton = new TextView(getContext());
+			final TextView answerButton;
+			if (radio) {
+				answerButton = new RadioButton(getContext());
+			} else {
+				answerButton = new TextView(getContext());
+			}
 			answerViews.add(answerButton);
 			answerButton.setTextAppearance(getContext(), R.style.EventFeedbackButton);
 			answerButton.setText(answerStringId);
+			int endPadding = padding * 4;
 			int startPadding = padding * 4;
-			if (first) {
+			if ((!radio) && first) {
 				startPadding = 0;
 				first = false;
 			}
-			answerButton.setPaddingRelative(startPadding, padding, padding * 4, padding);
+			answerButton.setPaddingRelative(startPadding, padding, endPadding, padding);
 			buttonsLayout.addView(answerButton);
 			if (!feedback.isSent()) {
 				answerButton.setOnClickListener(listener);
@@ -427,7 +456,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 				}
 			}
 		}
-		return buttonsLayout;
+		return mainView;
 	}
 
 	private int calculateExpendedFeedbackHeight() {
