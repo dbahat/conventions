@@ -192,6 +192,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
             toolbar.setNavigationIcon(drawable);
 
 	        if (showLogoGlow) {
+				// Getting the toolbar imageView by iterating over the toolbar children, since the toolbar imageView has no ID.
 		        for (int i = 0; i < toolbar.getChildCount(); ++i) {
 			        View view = toolbar.getChildAt(i);
 			        if (view instanceof ImageView && ((ImageView) view).getDrawable() == drawable) {
