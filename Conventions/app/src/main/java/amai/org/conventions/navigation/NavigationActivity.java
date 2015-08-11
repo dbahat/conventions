@@ -71,6 +71,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 			@Override
 			public void onClick(View v) {
 				showLogoGlow = false;
+				ConventionsApplication.settings.setNavigationPopupOpened();
 				if (popup == null || !popup.isShowing()) {
 					popup = createNavigationPopup();
 					popup.showAsDropDown(navigationToolbar);
@@ -86,7 +87,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
     }
 
 	private boolean shouldShowLogoGlow() {
-		return showLogoGlow && navigatedFromHome && HomeActivity.getNumberOfTimesNavigated() > 1;
+		return showLogoGlow && navigatedFromHome && HomeActivity.getNumberOfTimesNavigated() > 1 && !ConventionsApplication.settings.wasNavigationPopupOpened();
 	}
 
 	private AnimationPopupWindow createNavigationPopup() {
