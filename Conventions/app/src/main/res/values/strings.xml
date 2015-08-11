@@ -24,7 +24,7 @@
     <string name="my_events_no_data">הוסף אירוע לאירועים שלי ע\"י לחיצה על הכוכב בדף האירוע או ע\"י גריריתו ברשימת האירועים</string>
     <string name="my_events_share">שתף</string>
     <string name="my_event_share_title">התוכניה שלי לכאמ\"י 2015:</string>
-    <string name="my_event_share_signature">נוצר באפליקצית כאמ"י 2015.</string>
+    <string name="my_event_share_signature">נוצר באפליקצית כאמ\"י 2015.</string>
     <string name="my_event_share_link">http://play.google.com/store/apps/details?id=amai.org.conventions</string>
     <string name="my_event_share_chooser_dialog_title">שתף את רשימת האירועים</string>
 
@@ -53,7 +53,7 @@
     <string name="notification_event_about_to_start_message_format">האירוע %1$s עומד להתחיל באולם %2$s</string>
     <string name="notification_event_ended_title">עזור לנו להשתפר</string>
     <string name="notification_event_ended_message_format">נהנת באירוע %s? שלח פידבק למארגני האירוע</string>
-    <string name="notification_feedback_ended_message">כאמ"י 2015 הסתיים, ואנחנו רוצים לשמוע את דעתך</string>
+    <string name="notification_feedback_ended_message">כאמ\"י 2015 הסתיים, ואנחנו רוצים לשמוע את דעתך</string>
 
     <string name="configure_notification_event_about_to_start_message">שלח תזכורת לפני תחילת האירוע</string>
     <string name="configure_notification_event_feedback_reminder_message">שלח תזכורת למלא פידבק אחרי שהאירוע מסתיים</string>

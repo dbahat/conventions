@@ -19,6 +19,7 @@ import amai.org.conventions.R;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.Settings;
 
 public class Convention implements Serializable {
 
@@ -37,6 +38,7 @@ public class Convention implements Serializable {
 
     private ReentrantReadWriteLock eventLockObject = new ReentrantReadWriteLock();
     private ConventionStorage conventionStorage;
+	private Settings settings;
 
     public static Convention getInstance() {
         return convention;
@@ -46,16 +48,20 @@ public class Convention implements Serializable {
         return conventionStorage;
     }
 
-    public Convention() {
+	public Settings getSettings() {
+		return settings;
+	}
+
+	public Convention() {
         this.conventionStorage = new ConventionStorage();
 	    this.userInput = new LinkedHashMap<>();
 	    feedback = new Feedback().withQuestions(
-			    new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_AGE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS),
-			    new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_LIKED, FeedbackQuestion.AnswerType.SMILEY_3_POINTS),
-			    new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_MAP_SIGNS, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS),
-			    new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_CONFLICTING_EVENTS, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO),
-			    new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_IMPROVEMENT, FeedbackQuestion.AnswerType.TEXT)
-	    );
+				new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_AGE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS),
+				new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_LIKED, FeedbackQuestion.AnswerType.SMILEY_3_POINTS),
+				new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_MAP_SIGNS, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS),
+				new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_CONFLICTING_EVENTS, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO),
+				new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_IMPROVEMENT, FeedbackQuestion.AnswerType.TEXT)
+		);
 
         this.date = Calendar.getInstance();
 	    this.date.clear();

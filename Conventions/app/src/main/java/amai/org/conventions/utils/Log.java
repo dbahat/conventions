@@ -1,5 +1,7 @@
 package amai.org.conventions.utils;
 
+import amai.org.conventions.BuildConfig;
+
 /**
  * Thin wrapper around the android logcat.
  * Allows disabling the logs on store build.
@@ -8,7 +10,7 @@ package amai.org.conventions.utils;
  */
 public class Log {
 
-    private static final boolean isEnabled = false;
+    private static final boolean isEnabled = BuildConfig.DEBUG;
 
     public static int v(String tag, String msg) {
         return isEnabled ? android.util.Log.v(tag, msg) : 0;

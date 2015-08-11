@@ -5,6 +5,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 
 import java.util.Calendar;
@@ -84,13 +85,24 @@ public class AlarmScheduler {
     }
 
     public void scheduleNotificationToFillConventionFeedback() {
+        Calendar twoWeeksPostConventionDate = Calendar.getInstance();
+        twoWeeksPostConventionDate.setTime(Convention.getInstance().getDate().getTime());
+        twoWeeksPostConventionDate.add(Calendar.DATE, 14);
+
+        if (Convention.getInstance().getFeedback().isSent()
+                || ConventionsApplication.settings.wasConventionFeedbackNotificationShown()
+                || Calendar.getInstance().getTimeInMillis() >= twoWeeksPostConventionDate.getTimeInMillis()) {
+            return;
+        }
+
+        Calendar oneDayPostConventionDate = Calendar.getInstance();
+        oneDayPostConventionDate.setTime(Convention.getInstance().getDate().getTime());
+        oneDayPostConventionDate.add(Calendar.DATE, 1);
+        oneDayPostConventionDate.set(Calendar.HOUR_OF_DAY, 10);
+
         Intent intent = new Intent(context, EventNotificationService.class)
                 .putExtra(EventNotificationService.EXTRA_IS_END_OF_CONVENTION_NOTIFICATION, true);
-        Calendar postConventionDate = Calendar.getInstance();
-        postConventionDate.setTime(Convention.getInstance().getDate().getTime());
-        postConventionDate.add(Calendar.DATE, 1);
-        postConventionDate.set(Calendar.HOUR_OF_DAY, 10);
-        scheduleAlarm(postConventionDate.getTimeInMillis(), PendingIntent.getService(context, 0, intent, 0));
+        scheduleAlarm(oneDayPostConventionDate.getTimeInMillis(), PendingIntent.getService(context, 0, intent, 0));
     }
 
     private PendingIntent createEventNotificationPendingIntent(ConventionEvent event, EventNotification.Type notificationType) {

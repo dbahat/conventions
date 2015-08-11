@@ -17,12 +17,14 @@ import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.EventNotification;
 import amai.org.conventions.utils.ConventionStorage;
 import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.Settings;
 
 public class ConventionsApplication extends Application {
 
     public static GoogleAnalytics analytics;
     public static Tracker tracker;
     public static AlarmScheduler alarmScheduler;
+    public static Settings settings;
 
     @Override
     public void onCreate() {
@@ -47,6 +49,7 @@ public class ConventionsApplication extends Application {
             exceptionReporter.setExceptionParser(new ExtendedExceptionParser(this, null));
         }
 
+        settings = new Settings(this);
         alarmScheduler.scheduleNotificationToFillConventionFeedback();
     }
 

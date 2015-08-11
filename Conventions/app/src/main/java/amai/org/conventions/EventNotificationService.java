@@ -87,6 +87,8 @@ public class EventNotificationService extends Service {
                 .build();
 
         notificationManager.notify(FILL_CONVENTION_FEEDBACK_NOTIFICATION_ID, notification);
+
+        ConventionsApplication.settings.setFeedbackNotificationAsShown();
     }
 
     private void showEventFeedbackReminderNotification(ConventionEvent event) {
