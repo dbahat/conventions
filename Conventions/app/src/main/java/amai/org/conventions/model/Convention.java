@@ -105,6 +105,12 @@ public class Convention implements Serializable {
                                                 .withX(41)
                                                 .withY(37),
 		                                new MapLocation()
+				                                .withPlace(new Place().withName("קופות"))
+				                                .withMarkerResource(R.raw.cachiers_marker)
+				                                .withSelectedMarkerResource(R.raw.cachiers_marker_selected)
+				                                .withX(36)
+				                                .withY(19),
+		                                new MapLocation()
 				                                .withPlace(new Place().withName("שירותים"))
 				                                .withMarkerResource(R.raw.toilet_marker)
 				                                .withSelectedMarkerResource(R.raw.toilet_marker_selected)
