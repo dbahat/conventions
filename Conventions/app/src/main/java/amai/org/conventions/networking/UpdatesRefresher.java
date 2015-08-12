@@ -47,7 +47,9 @@ public class UpdatesRefresher {
 	}
 
 	private UpdatesRefresher(Context context) {
-		FacebookSdk.sdkInitialize(context.getApplicationContext());
+		if (!FacebookSdk.isInitialized()) {
+			FacebookSdk.sdkInitialize(context.getApplicationContext());
+		}
 	}
 
 	public void setIsRefreshInProgress(boolean isRefreshInProgress) {

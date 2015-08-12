@@ -45,7 +45,9 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        FacebookSdk.sdkInitialize(getApplicationContext());
+        if (!FacebookSdk.isInitialized()) {
+            FacebookSdk.sdkInitialize(getApplicationContext());
+        }
 
         setToolbarTitle(getResources().getString(R.string.updates));
         setContentInContentContainer(R.layout.activity_updates);
@@ -61,7 +63,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
         List<Update> updates = Convention.getInstance().getUpdates();
         initializeUpdatesList(updates);
 
-        loginToFacebookIfNeeded();
+        loginToFacebookIfNeeded(savedInstanceState);
     }
 
     @Override
@@ -88,15 +90,19 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
         }
     }
 
-    private void loginToFacebookIfNeeded() {
+    private void loginToFacebookIfNeeded(Bundle savedInstanceState) {
         initializeFacebookLoginButton();
         loginLayout.setVisibility(View.GONE);
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         if (accessToken != null && !accessToken.isExpired()) {
             // If the user has a valid token use it to refresh his updates
             retrieveUpdatesListFromFacebookApi(accessToken);
-        } else {
+        } else if (savedInstanceState == null) {
             // If the user has no valid token attempt to perform a silent login.
+            //
+            // Note - only attempt to do the silent login once when the activity is initially created, not when it's restored due to config changes.
+            // This is to prevent opening the user multiple login dialogs, which is both bad UX and may result in NullPointerException from the facebook SDK side
+            // (since the double dialogs may trigger it's OnActivityResult twice)
             LoginManager.getInstance().logInWithReadPermissions(this, Collections.singletonList("public_profile"));
         }
     }
