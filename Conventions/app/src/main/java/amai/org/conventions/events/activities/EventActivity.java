@@ -42,6 +42,7 @@ import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.EventFeedbackMail;
 import amai.org.conventions.utils.FeedbackMail;
 import amai.org.conventions.utils.Log;
+import amai.org.conventions.utils.Views;
 import fi.iki.kuitsi.listtest.ListTagHandler;
 import uk.co.chrisjenx.paralloid.views.ParallaxScrollView;
 
@@ -109,7 +110,7 @@ public class EventActivity extends NavigationActivity {
 							scrollView.post(new Runnable() {
 								@Override
 								public void run() {
-									Point coordinates = findCoordinates(scrollView, feedbackView);
+									Point coordinates = Views.findCoordinates(scrollView, feedbackView);
 									scrollView.smoothScrollTo(coordinates.x, coordinates.y);
 								}
 							});
@@ -463,21 +464,4 @@ public class EventActivity extends NavigationActivity {
         feedbackView.setState(CollapsibleFeedbackView.State.Collapsed);
     }
 
-	private Point findCoordinates(ViewGroup parentView, View childView) {
-		// getX() and getY() (and also getTop(), getBottom() etc) return the
-		// coordinates of the view inside its parent. If a view is not directly inside
-		// the scroll view, we need to accumulate the corrdinates of all the parents.
-		Point coordinates = new Point();
-		while (childView != parentView) {
-			coordinates.x += childView.getX();
-			coordinates.y += childView.getY();
-			if (!(childView.getParent() instanceof View)) {
-				// Not inside parent view
-				break;
-			}
-
-			childView = (View) childView.getParent();
-		}
-		return coordinates;
-	}
 }

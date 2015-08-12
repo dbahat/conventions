@@ -30,7 +30,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import amai.org.conventions.AboutActivity;
 import amai.org.conventions.ArrivalMethodsActivity;
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.FeedbackActivity;
@@ -104,8 +103,6 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		if (Convention.getInstance().canFillFeedback()) {
 			items.add(new NavigationItem(FeedbackActivity.class, getString(R.string.feedback), getResources().getDrawable(R.drawable.feedback_menu_icon)));
 		}
-
-		items.add(new NavigationItem(AboutActivity.class, getString(R.string.about), getResources().getDrawable(R.drawable.ic_info_outline)));
 
 		ListView navigationItems = (ListView) view.findViewById(R.id.navigation_items);
 		navigationItems.setAdapter(new NavigationItemsAdapter(this, items));

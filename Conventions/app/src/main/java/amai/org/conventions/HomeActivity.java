@@ -6,11 +6,13 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.facebook.FacebookRequestError;
 
@@ -27,6 +29,7 @@ import amai.org.conventions.networking.ModelRefresher;
 import amai.org.conventions.networking.UpdatesRefresher;
 import amai.org.conventions.updates.UpdatesActivity;
 import amai.org.conventions.utils.CollectionUtils;
+import amai.org.conventions.utils.Views;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -140,5 +143,15 @@ public class HomeActivity extends AppCompatActivity {
 
 	public static int getNumberOfTimesNavigated() {
 		return numberOfTimesNavigated;
+	}
+
+	public void onAboutClicked(View view) {
+		ViewGroup mainLayout = (ViewGroup) findViewById(R.id.home_main_layout);
+		View buttonsLayout = findViewById(R.id.buttons_layout);
+
+		AboutFragment aboutFragment = new AboutFragment();
+		Point coordinates = Views.findCoordinates(mainLayout, buttonsLayout);
+		aboutFragment.setLocation(coordinates.x, coordinates.y, buttonsLayout.getMeasuredWidth(), buttonsLayout.getMeasuredHeight());
+		aboutFragment.show(getSupportFragmentManager(), null);
 	}
 }
