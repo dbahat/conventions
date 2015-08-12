@@ -339,6 +339,10 @@ public class Convention implements Serializable {
 		return updates;
 	}
 
+	public Update getUpdate(String id) {
+		return updatesById.get(id);
+	}
+
 	public void clearNewFlagFromAllUpdates() {
 		for (Update update : updates) {
 			update.setIsNew(false);

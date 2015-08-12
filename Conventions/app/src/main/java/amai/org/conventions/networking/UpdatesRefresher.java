@@ -90,7 +90,15 @@ public class UpdatesRefresher {
 							listener.onError(graphResponse.getError());
 						} else {
 							List<Update> updatesFromResponse = parseAndFilterFacebookFeedResult(graphResponse);
-							int newUpdatesNumber = updatesFromResponse.size();
+							int newUpdatesNumber = 0;
+							for (Update responseUpdate : updatesFromResponse) {
+								Update currentUpdate = Convention.getInstance().getUpdate(responseUpdate.getId());
+								if (currentUpdate == null) {
+									++newUpdatesNumber;
+								} else  {
+									responseUpdate.setIsNew(currentUpdate.isNew());
+								}
+							}
 							// Update the model, so next time we can read them from cache.
 							Convention.getInstance().addUpdates(updatesFromResponse);
 							Convention.getInstance().getStorage().saveUpdates();
@@ -103,7 +111,10 @@ public class UpdatesRefresher {
 		Bundle parameters = new Bundle();
 		Date newestUpdateTime = Convention.getInstance().getNewestUpdateTime();
 		if (newestUpdateTime != null) {
-			parameters.putLong("since", newestUpdateTime.getTime() / 1000);
+			// Get all the new updates and the updates from 2 days before the last time in case an older post
+			// was updated. The Facebook Graph API since parameter receives unix epoch time which is the number
+			// of seconds instead of milliseconds.
+			parameters.putLong("since", (newestUpdateTime.getTime() / 1000) - (2 * 24 * 60 * 60));
 		}
 		request.setParameters(parameters);
 		request.executeAsync();
