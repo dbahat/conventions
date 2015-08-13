@@ -107,6 +107,10 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
             // This is to prevent opening the user multiple login dialogs, which is both bad UX and may result in NullPointerException from the facebook SDK side
             // (since the double dialogs may trigger it's OnActivityResult twice)
             LoginManager.getInstance().logInWithReadPermissions(this, Collections.singletonList("public_profile"));
+        } else {
+            // If we got here it means we both don't have the token and we already attempted to perform silent sign-in once.
+            // In this case, show the login button.
+            loginLayout.setVisibility(View.VISIBLE);
         }
     }
 
