@@ -63,7 +63,10 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
         List<Update> updates = Convention.getInstance().getUpdates();
         initializeUpdatesList(updates);
 
-        loginToFacebookIfNeeded(savedInstanceState);
+	    initializeFacebookLoginButton();
+	    loginLayout.setVisibility(View.GONE);
+
+	    loginToFacebookAndRetrieveUpdates(savedInstanceState);
     }
 
     @Override
@@ -87,12 +90,12 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         if (accessToken != null) {
             retrieveUpdatesListFromFacebookApi(accessToken);
+        } else {
+	        swipeRefreshLayout.setRefreshing(false);
         }
     }
 
-    private void loginToFacebookIfNeeded(Bundle savedInstanceState) {
-        initializeFacebookLoginButton();
-        loginLayout.setVisibility(View.GONE);
+    private void loginToFacebookAndRetrieveUpdates(Bundle savedInstanceState) {
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         if (accessToken != null && !accessToken.isExpired()) {
             // If the user has a valid token use it to refresh his updates
@@ -135,10 +138,12 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 
 	        @Override
 	        public void onCancel() {
+		        loginLayout.setVisibility(View.VISIBLE);
 	        }
 
 	        @Override
 	        public void onError(FacebookException e) {
+		        loginLayout.setVisibility(View.VISIBLE);
 	        }
         });
     }
