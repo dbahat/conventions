@@ -20,11 +20,13 @@ import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Settings;
 
 public class ConventionsApplication extends Application {
+	private final static String TAG = ConventionsApplication.class.getCanonicalName();
 
     public static GoogleAnalytics analytics;
     public static Tracker tracker;
     public static AlarmScheduler alarmScheduler;
     public static Settings settings;
+	private static String versionName;
 
     @Override
     public void onCreate() {
@@ -51,6 +53,12 @@ public class ConventionsApplication extends Application {
 
         settings = new Settings(this);
         alarmScheduler.scheduleNotificationToFillConventionFeedback();
+
+	    try {
+		    versionName = this.getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
+	    } catch (Exception e) {
+		    Log.i(TAG, "Could not get version name: " + e.getMessage());
+	    }
     }
 
     /**
@@ -99,4 +107,8 @@ public class ConventionsApplication extends Application {
                     Log.getStackTraceString(t));
         }
     }
+
+	public static String getVersionName() {
+		return versionName;
+	}
 }

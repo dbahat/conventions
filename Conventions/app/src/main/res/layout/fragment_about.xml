@@ -43,12 +43,11 @@
                 android:text="@string/about_app_title"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
 
-            <!--Currently disabled due to an issue fetching BuildConfig.VERSION_NAME in release builds-->
-            <!--<TextView-->
-                <!--android:id="@+id/about_app_version"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--style="@style/TextAppearance.AppCompat.Body2"/>-->
+            <TextView
+                android:id="@+id/about_app_version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TextAppearance.AppCompat.Body2"/>
 
             <TextView
                 android:id="@+id/about_app_content"
