@@ -127,7 +127,7 @@ public class MyEventsActivity extends NavigationActivity {
 
                 return true;
 			case R.id.my_events_share:
-				ConventionsApplication.tracker.send(new HitBuilders.EventBuilder()
+				ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
 						.setCategory("MyEvents")
 						.setAction("ShareClicked")
 						.setValue(getMyEvents().size())

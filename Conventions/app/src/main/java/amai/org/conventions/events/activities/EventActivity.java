@@ -232,11 +232,11 @@ public class EventActivity extends NavigationActivity {
 
 				ConventionEvent.UserInput userInput = conventionEvent.getUserInput();
 
-				ConventionsApplication.tracker.send(new HitBuilders.EventBuilder()
-						.setCategory("Favorites")
-						.setAction(!userInput.isAttending() ? "Add" : "Remove")
-						.setLabel("EventActivity")
-						.build());
+	            ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
+			            .setCategory("Favorites")
+			            .setAction(!userInput.isAttending() ? "Add" : "Remove")
+			            .setLabel("EventActivity")
+			            .build());
 
 	            if (userInput.isAttending()) {
                     userInput.setAttending(false);
@@ -278,7 +278,7 @@ public class EventActivity extends NavigationActivity {
 				ConfigureNotificationsFragment configureNotificationsFragment = ConfigureNotificationsFragment.newInstance(conventionEvent.getId());
 				configureNotificationsFragment.show(getSupportFragmentManager(), null);
 
-				ConventionsApplication.tracker.send(new HitBuilders.EventBuilder()
+				ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
 						.setCategory("Notifications")
 						.setAction("EditClicked")
 						.build());
@@ -390,7 +390,7 @@ public class EventActivity extends NavigationActivity {
 				}
 
 				private void sendUserSentFeedbackTelemetry(boolean success) {
-					ConventionsApplication.tracker.send(new HitBuilders.EventBuilder()
+					ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
 							.setCategory("Feedback")
 							.setAction("SendAttempt")
 							.setLabel(success ? "success" : "failure")
@@ -406,11 +406,13 @@ public class EventActivity extends NavigationActivity {
 	private boolean shouldFeedbackBeClosed() {
 		// Feedback should start as closed in the following cases:
 		// 1. Feedback was sent
-		// 2. Event was not attended an no questions were answered
+		// 2. Event was not attended and no questions were answered
+		// 3. Feedback sending time is over and no questions were answered
 		// Otherwise it should start as open.
 		Feedback feedback = conventionEvent.getUserInput().getFeedback();
 		return feedback.isSent() ||
-				(!conventionEvent.isAttending() && !feedback.hasAnsweredQuestions());
+				(!conventionEvent.isAttending() && !feedback.hasAnsweredQuestions()) ||
+				(Convention.getInstance().isFeedbackSendingTimeOver() && !feedback.hasAnsweredQuestions());
 	}
 
 

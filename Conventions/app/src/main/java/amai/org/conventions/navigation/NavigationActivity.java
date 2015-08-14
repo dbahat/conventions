@@ -75,7 +75,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 					popup = createNavigationPopup();
 					popup.showAsDropDown(navigationToolbar);
 
-					ConventionsApplication.tracker.send(new HitBuilders.EventBuilder()
+					ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
 							.setCategory("Navigation")
 							.setAction("ButtonClicked")
 							.build());

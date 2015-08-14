@@ -41,6 +41,7 @@ public class FeedbackActivity extends NavigationActivity {
 	private ViewGroup eventsWithoutFeedbackListLayout;
 
 	private TextView sendAllExplanation;
+	private ViewGroup sendAllButtonLayout;
 	private Button sendAllButton;
 	private ProgressBar sendAllProgress;
 
@@ -63,6 +64,7 @@ public class FeedbackActivity extends NavigationActivity {
 		eventsWithoutFeedbackListLayout = (ViewGroup) findViewById(R.id.events_without_feedback_list_layout);
 
 		sendAllExplanation = (TextView) findViewById(R.id.send_all_explanation);
+		sendAllButtonLayout = (ViewGroup) findViewById(R.id.send_all_button_layout);
 		sendAllButton = (Button) findViewById(R.id.send_all_button);
 		sendAllProgress = (ProgressBar) findViewById(R.id.send_all_progress_bar);
 
@@ -195,19 +197,24 @@ public class FeedbackActivity extends NavigationActivity {
 				eventsWithoutFeedbackList.setAdapter(new EventsViewAdapter(eventsWithoutFeedback));
 			}
 
-			int unsentFeedbacks = eventsWithUnsentFeedback.size();
-			if (unsentFeedbacks == 0) {
-				sendAllExplanation.setText(getString(R.string.send_all_explanation_no_events));
-				sendAllButton.setEnabled(false);
+			if (Convention.getInstance().isFeedbackSendingTimeOver()) {
+				sendAllExplanation.setVisibility(View.GONE);
+				sendAllButtonLayout.setVisibility(View.GONE);
 			} else {
-				String explanation;
-				if (unsentFeedbacks == 1) {
-					explanation = getString(R.string.send_all_explanation_with_1_event);
+				int unsentFeedbacks = eventsWithUnsentFeedback.size();
+				if (unsentFeedbacks == 0) {
+					sendAllExplanation.setText(getString(R.string.send_all_explanation_no_events));
+					sendAllButton.setEnabled(false);
 				} else {
-					explanation = getString(R.string.send_all_explanation_with_events, unsentFeedbacks);
+					String explanation;
+					if (unsentFeedbacks == 1) {
+						explanation = getString(R.string.send_all_explanation_with_1_event);
+					} else {
+						explanation = getString(R.string.send_all_explanation_with_events, unsentFeedbacks);
+					}
+					sendAllExplanation.setText(explanation);
+					sendAllButton.setEnabled(true);
 				}
-				sendAllExplanation.setText(explanation);
-				sendAllButton.setEnabled(true);
 			}
 		}
 	}

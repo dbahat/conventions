@@ -516,7 +516,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
 	@Override
 	public void onClick(Marker marker) {
-		ConventionsApplication.tracker.send(new HitBuilders.EventBuilder()
+		ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
 				.setCategory("Map")
 				.setAction("MarkerClicked")
 				.setLabel(marker.getLocation().getName())

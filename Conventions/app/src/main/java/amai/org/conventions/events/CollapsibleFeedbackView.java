@@ -38,6 +38,7 @@ import java.util.List;
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.AspectRatioImageView;
+import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.Feedback;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.utils.FeedbackMail;
@@ -49,7 +50,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
     private Button openFeedbackButton;
     private Button sendFeedbackButton;
     private ImageView feedbackIcon;
-    private View feedbackSentText;
+    private TextView feedbackSentText;
     private ViewGroup feedbackCollapsed;
     private ViewGroup feedbackExpended;
     private ViewGroup feedbackContainer;
@@ -71,7 +72,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
         feedbackIcon = (ImageView) findViewById(R.id.feedback_icon);
         feedbackContainer = (ViewGroup) findViewById(R.id.feedback_container);
         sendFeedbackButton = (Button) findViewById(R.id.send_feedback_button);
-        feedbackSentText = findViewById(R.id.feedback_sent_text);
+        feedbackSentText = (TextView) findViewById(R.id.feedback_sent_text);
         feedbackCollapsed = (ViewGroup) findViewById(R.id.feedback_collapsed);
         feedbackExpended = (ViewGroup) findViewById(R.id.feedback_expended);
         progressBar = (ProgressBar) findViewById(R.id.feedback_progress_bar);
@@ -117,7 +118,14 @@ public class CollapsibleFeedbackView extends FrameLayout {
             openFeedbackButton.setText(getContext().getString(R.string.display_feedback));
             sendFeedbackButton.setVisibility(View.GONE);
             feedbackSentText.setVisibility(View.VISIBLE);
+        } else if (Convention.getInstance().isFeedbackSendingTimeOver()) {
+	        collapsedFeedbackTitle.setText(getContext().getString(R.string.feedback_sending_time_over));
+	        openFeedbackButton.setText(getContext().getString(R.string.display));
+	        sendFeedbackButton.setVisibility(View.GONE);
+	        feedbackSentText.setVisibility(View.VISIBLE);
+	        feedbackSentText.setText(getContext().getString(R.string.feedback_sending_time_over));
         }
+
         setFeedbackIcon(feedback);
 
 		LinearLayout questionsLayout = (LinearLayout) findViewById(R.id.questions_layout);

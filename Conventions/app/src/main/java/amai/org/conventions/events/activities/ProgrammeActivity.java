@@ -183,7 +183,7 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
 	    Convention convention = Convention.getInstance();
 	    if (!convention.canFillFeedback()) {
 		    menu.removeItem(R.id.programme_navigate_to_feedback);
-	    } else if (convention.hasEnded() && !convention.getFeedback().isSent()) {
+	    } else if (convention.hasEnded() && !convention.getFeedback().isSent() && !convention.isFeedbackSendingTimeOver()) {
 		    MenuItem item = menu.findItem(R.id.programme_navigate_to_feedback);
 		    changeIconColor(item);
 	    }

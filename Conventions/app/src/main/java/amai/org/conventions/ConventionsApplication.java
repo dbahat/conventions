@@ -11,6 +11,7 @@ import com.google.android.gms.analytics.Tracker;
 
 import java.util.Collection;
 import java.util.Locale;
+import java.util.Map;
 
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
@@ -22,8 +23,7 @@ import amai.org.conventions.utils.Settings;
 public class ConventionsApplication extends Application {
 	private final static String TAG = ConventionsApplication.class.getCanonicalName();
 
-    public static GoogleAnalytics analytics;
-    public static Tracker tracker;
+	private static Tracker tracker;
     public static AlarmScheduler alarmScheduler;
     public static Settings settings;
 	private static String versionName;
@@ -34,12 +34,15 @@ public class ConventionsApplication extends Application {
 
         Locale.setDefault(Dates.getLocale());
         ConventionStorage.initFromFile(this);
-        analytics = GoogleAnalytics.getInstance(this);
-        analytics.setLocalDispatchPeriod(1800);
 
-        tracker = analytics.newTracker("UA-65293055-1");
-        tracker.enableExceptionReporting(true);
-        tracker.enableAutoActivityTracking(true);
+	    if (!BuildConfig.DEBUG) {
+		    GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
+	        analytics.setLocalDispatchPeriod(1800);
+
+	        tracker = analytics.newTracker("UA-65293055-1");
+	        tracker.enableExceptionReporting(true);
+	        tracker.enableAutoActivityTracking(true);
+	    }
 
         alarmScheduler = new AlarmScheduler(this);
         restoreAlarmConfiguration();
@@ -110,5 +113,11 @@ public class ConventionsApplication extends Application {
 
 	public static String getVersionName() {
 		return versionName;
+	}
+
+	public static void sendTrackingEvent(Map<String, String> trackingEvent) {
+		if (tracker != null) {
+			tracker.send(trackingEvent);
+		}
 	}
 }

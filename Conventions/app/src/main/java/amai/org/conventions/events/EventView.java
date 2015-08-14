@@ -23,6 +23,7 @@ import java.util.List;
 
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
+import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.Feedback;
 import amai.org.conventions.model.FeedbackQuestion;
@@ -224,7 +225,8 @@ public class EventView extends FrameLayout {
 			if (weightedRating != null) {
 				icon = getResources().getDrawable(weightedRating.getImageResourceId());
 				filterColor = getResources().getColor(R.color.yellow);
-			} else if ((!feedback.isSent()) && feedback.hasAnsweredQuestions()) {
+			} else if ((!feedback.isSent()) && feedback.hasAnsweredQuestions() &&
+					!Convention.getInstance().isFeedbackSendingTimeOver()) {
 				icon = getResources().getDrawable(android.R.drawable.ic_dialog_email);
 				filterColor = getResources().getColor(R.color.green);
 			} else {
@@ -234,7 +236,7 @@ public class EventView extends FrameLayout {
 				if (feedback.isSent()) {
 					icon = getResources().getDrawable(R.drawable.feedback_sent);
 					filterColor = getResources().getColor(R.color.yellow);
-				} else if (event.isAttending()) {
+				} else if (event.isAttending() || feedback.hasAnsweredQuestions()) {
 					filterColor = getResources().getColor(R.color.green);
 				} else {
 					filterColor = getResources().getColor(R.color.very_dark_gray);

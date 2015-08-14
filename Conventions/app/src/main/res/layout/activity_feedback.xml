@@ -59,6 +59,7 @@
                         android:id="@+id/send_all_explanation"
                         android:text="@string/send_all_explanation_no_events"/>
                     <FrameLayout
+                        android:id="@+id/send_all_button_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center">

@@ -24,7 +24,7 @@ public class EventSwipeToDismissListener implements Runnable {
 
 	@Override
 	public void run() {
-		ConventionsApplication.tracker.send(new HitBuilders.EventBuilder()
+		ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
 				.setCategory("Favorites")
 				.setAction("Remove")
 				.setLabel("SwipeToDismiss")

@@ -48,11 +48,11 @@ public class SwipeableEventsViewAdapter extends RecyclerView.Adapter<SwipeableEv
                 // Update the favorite state in the model
                 final boolean isAttending = event.isAttending();
 
-                ConventionsApplication.tracker.send(new HitBuilders.EventBuilder()
-                        .setCategory("Favorites")
-                        .setAction(!isAttending ? "Add" : "Remove")
-                        .setLabel("SwipeToEdit")
-                        .build());
+	            ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
+		                .setCategory("Favorites")
+		                .setAction(!isAttending ? "Add" : "Remove")
+		                .setLabel("SwipeToEdit")
+		                .build());
 
                 if (isAttending) {
                     event.setAttending(false);

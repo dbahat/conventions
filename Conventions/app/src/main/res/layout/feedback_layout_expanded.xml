@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
             android:visibility="gone" />
 
-        <!-- This text view is displayed when the feedback was already sent -->
+        <!-- This text view is displayed when the feedback cannot be sent -->
         <TextView
             android:id="@+id/feedback_sent_text"
             style="@style/TextAppearance.AppCompat.Subhead"
