@@ -1,8 +1,8 @@
 package amai.org.conventions.events.activities;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -62,7 +62,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
         initializeKeywordFilter();
         initializeSearchCategories();
 
-        applyFilters();
+        applyFiltersInBackground();
 
         hideKeyboardOnClickOutsideEditText(rootView);
     }
@@ -95,7 +95,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
     private void initializeEventsList() {
         recyclerView = (RecyclerView) findViewById(R.id.searchEventsList);
 
-        adapter = new SwipeableEventsViewAdapter(null, recyclerView);
+        adapter = new SwipeableEventsViewAdapter(Collections.<ConventionEvent>emptyList(), recyclerView);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -103,11 +103,11 @@ public class ProgrammeSearchActivity extends NavigationActivity {
     private void initializeSearchCategories() {
         final SearchCategoriesLayout searchCategoriesLayout = (SearchCategoriesLayout) findViewById(R.id.search_categories_layout);
         searchCategoriesLayout.setOnFilterSelectedListener(new SearchCategoriesLayout.OnFilterSelectedListener() {
-            @Override
-            public void onFilterSelected(final List<EventType> selectedEventTypes) {
-                eventTypeFilter = new LinkedList<>(selectedEventTypes);
-                applyFilters();
-            }
+	        @Override
+	        public void onFilterSelected(final List<EventType> selectedEventTypes) {
+		        eventTypeFilter = new LinkedList<>(selectedEventTypes);
+		        applyFiltersInBackground();
+	        }
         });
 
         if (eventTypeFilter != null) {
@@ -121,39 +121,50 @@ public class ProgrammeSearchActivity extends NavigationActivity {
         EditText keywordTextBox = (EditText) findViewById(R.id.search_keyword_text_box);
         keywordTextBox.addTextChangedListener(new TextWatcher() {
 
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+	        @Override
+	        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
+	        }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+	        @Override
+	        public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-            }
+	        }
 
-            @Override
-            public void afterTextChanged(Editable s) {
-                keywordsFilter = s.toString();
+	        @Override
+	        public void afterTextChanged(Editable s) {
+		        keywordsFilter = s.toString();
 
-                // Apply the keyword filter in a short delay, to somewhat reduce slowness of applying the filter during typing
-                if (!applingTextFilter) {
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            applyFilters();
-                            applingTextFilter = false;
-                        }
-                    }, 300);
-                }
+		        // Apply the keyword filter in a short delay, to somewhat reduce slowness of applying the filter during typing
+		        if (!applingTextFilter) {
+			        applyFiltersInBackground();
+		        }
 
-                applingTextFilter = true;
-            }
+		        applingTextFilter = true;
+	        }
         });
 
         if (keywordsFilter != null) {
             keywordTextBox.setText(keywordsFilter);
         }
     }
+
+	private void applyFiltersInBackground() {
+		new AsyncTask<Void, Void, Void>() {
+			@Override
+			protected Void doInBackground(Void... params) {
+				applyFilters();
+				applingTextFilter = false;
+				return null;
+			}
+
+			@Override
+			protected void onPostExecute(Void aVoid) {
+				adapter.notifyDataSetChanged();
+				setNoResultsVisibility(adapter.getItemCount());
+			}
+		}.execute();
+	}
 
     private void applyFilters() {
         List<ConventionEvent> events = Convention.getInstance().getEvents();
@@ -170,23 +181,25 @@ public class ProgrammeSearchActivity extends NavigationActivity {
                 return result;
             }
         });
-        Collections.sort(events, new ConventionEventComparator());
+	    Collections.sort(events, new ConventionEventComparator());
         if (keywordsFilter != null) {
             adapter.setKeywordsHighlighting(Arrays.asList(keywordsFilter.split(" ")));
         }
-        adapter.setEventsList(events);
-
-        // Show the "no results found" message if there are no results after applying the filters
-        if (events.size() == 0) {
-            noResultsFoundView.setVisibility(View.VISIBLE);
-            recyclerView.setVisibility(View.GONE);
-        } else {
-            noResultsFoundView.setVisibility(View.GONE);
-            recyclerView.setVisibility(View.VISIBLE);
-        }
+        adapter.setEventsList(events, false);
     }
 
-    private void hideKeyboard(View view) {
+	private void setNoResultsVisibility(int resultsNumber) {
+		// Show the "no results found" message if there are no results after applying the filters
+		if (resultsNumber == 0) {
+		    noResultsFoundView.setVisibility(View.VISIBLE);
+		    recyclerView.setVisibility(View.GONE);
+		} else {
+		    noResultsFoundView.setVisibility(View.GONE);
+		    recyclerView.setVisibility(View.VISIBLE);
+		}
+	}
+
+	private void hideKeyboard(View view) {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }

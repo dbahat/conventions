@@ -18,6 +18,7 @@ import amai.org.conventions.model.ConventionEvent;
 
 public class SwipeableEventsViewAdapter extends RecyclerView.Adapter<SwipeableEventViewHolder> {
     private List<ConventionEvent> eventsList;
+
 	private View recyclerView;
     private List<String> keywordsToHighlight;
 
@@ -85,9 +86,15 @@ public class SwipeableEventsViewAdapter extends RecyclerView.Adapter<SwipeableEv
     }
 
     public void setEventsList(List<ConventionEvent> eventsList) {
-        this.eventsList = eventsList;
-        notifyDataSetChanged();
+        setEventsList(eventsList, true);
     }
+
+	public void setEventsList(List<ConventionEvent> eventsList, boolean notify) {
+		this.eventsList = eventsList;
+		if (notify) {
+			notifyDataSetChanged();
+		}
+	}
 
     public void setKeywordsHighlighting(List<String> keywords) {
         keywordsToHighlight = keywords;
