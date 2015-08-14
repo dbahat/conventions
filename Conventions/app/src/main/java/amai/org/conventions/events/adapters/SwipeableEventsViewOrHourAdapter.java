@@ -5,26 +5,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.google.android.gms.analytics.HitBuilders;
-
 import java.util.Calendar;
 import java.util.List;
 
-import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.R;
 import amai.org.conventions.events.ProgrammeConventionEvent;
 import amai.org.conventions.events.holders.EventTimeViewHolder;
 import amai.org.conventions.events.holders.SwipeableEventViewHolder;
-import amai.org.conventions.model.Convention;
+import amai.org.conventions.events.listeners.OnEventFavoriteChangedListener;
 import amai.org.conventions.model.ConventionEvent;
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
 public class SwipeableEventsViewOrHourAdapter extends BaseAdapter implements StickyListHeadersAdapter {
-	public interface OnEventFavoriteChangedListener {
-		public void onEventFavoriteChanged(boolean newFavoriteState);
-	}
 
-    private List<ProgrammeConventionEvent> events;
+	private List<ProgrammeConventionEvent> events;
 	private OnEventFavoriteChangedListener eventFavoriteChangedListener;
 
     public SwipeableEventsViewOrHourAdapter(List<ProgrammeConventionEvent> events) {
@@ -64,32 +58,8 @@ public class SwipeableEventsViewOrHourAdapter extends BaseAdapter implements Sti
         holder.setOnViewSwipedAction(new Runnable() {
 	        @Override
 	        public void run() {
-		        // Update the favorite state in the model
-		        final boolean isAttending = event.isAttending();
-
-		        ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
-		                .setCategory("Favorites")
-		                .setAction(!isAttending ? "Add" : "Remove")
-		                .setLabel("SwipeToEdit")
-		                .build());
-
-                if (isAttending) {
-                    event.setAttending(false);
-                    ConventionsApplication.alarmScheduler.cancelDefaultEventAlarms(event);
-                } else {
-                    event.setAttending(true);
-                    ConventionsApplication.alarmScheduler.scheduleDefaultEventAlarms(event);
-                }
-
-		        // Save the changes
-		        Convention.getInstance().getStorage().saveUserInput();
-
-		        // Notify the list view to redraw the UI so the new favorite icon state will apply
-		        // for all views of this event
-		        notifyDataSetChanged();
-
 		        if (eventFavoriteChangedListener != null) {
-			        eventFavoriteChangedListener.onEventFavoriteChanged(!isAttending);
+			        eventFavoriteChangedListener.onEventFavoriteChanged(event);
 		        }
 	        }
         });

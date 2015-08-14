@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
@@ -36,6 +35,7 @@ import java.util.List;
 import amai.org.conventions.FeedbackActivity;
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
+import amai.org.conventions.events.DefaultEventFavoriteChangedListener;
 import amai.org.conventions.events.ProgrammeConventionEvent;
 import amai.org.conventions.events.ViewPagerAnimator;
 import amai.org.conventions.events.adapters.SwipeableEventsViewOrHourAdapter;
@@ -75,14 +75,10 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
         events = getEventList();
         adapter = new SwipeableEventsViewOrHourAdapter(events);
         listView.setAdapter(adapter);
-	    adapter.setOnEventFavoriteChangedListener(new SwipeableEventsViewOrHourAdapter.OnEventFavoriteChangedListener() {
+	    adapter.setOnEventFavoriteChangedListener(new DefaultEventFavoriteChangedListener(listView) {
 		    @Override
-		    public void onEventFavoriteChanged(boolean isAttending) {
-			    if (isAttending) {
-				    Snackbar.make(listView, R.string.event_added_to_favorites, Snackbar.LENGTH_SHORT).show();
-			    } else {
-				    Snackbar.make(listView, R.string.event_removed_from_favorites, Snackbar.LENGTH_SHORT).show();
-			    }
+		    public void onEventFavoriteChanged(ConventionEvent updatedEvent) {
+			    super.onEventFavoriteChanged(updatedEvent);
 
 			    if (!navigateToMyEventsIconModified) {
 				    navigateToMyEventsIconModified = true;
