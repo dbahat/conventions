@@ -83,33 +83,35 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
 			    if (!navigateToMyEventsIconModified) {
 				    navigateToMyEventsIconModified = true;
 				    final MenuItem item = menu.findItem(R.id.programme_navigate_to_my_events);
-				    int accentColor = changeIconColor(item);
 
 				    View actionView = getLayoutInflater().inflate(R.layout.my_events_icon, null);
 				    ImageView myEventsNonAnimatedIcon = (ImageView) actionView.findViewById(R.id.non_animated_icon);
-				    myEventsNonAnimatedIcon.setColorFilter(accentColor, PorterDuff.Mode.MULTIPLY);
+
+					int accentColor = ThemeAttributes.getColor(ProgrammeActivity.this, R.attr.toolbarIconAccentColor);
+					myEventsNonAnimatedIcon.setColorFilter(accentColor, PorterDuff.Mode.MULTIPLY);
 
 				    final ImageView myEventsAnimatedIcon = (ImageView) actionView.findViewById(R.id.icon_to_animate);
 
 				    AnimationSet set = new AnimationSet(true);
 				    set.addAnimation(new ScaleAnimation(1, 2, 1, 2, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f));
 				    set.addAnimation(new AlphaAnimation(1, 0));
-				    set.setDuration(500);
+				    set.setDuration(800);
 
 				    myEventsAnimatedIcon.startAnimation(set);
 				    item.setActionView(actionView);
 				    set.setAnimationListener(new Animation.AnimationListener() {
-					    @Override
-					    public void onAnimationStart(Animation animation) {
-					    }
+						@Override
+						public void onAnimationStart(Animation animation) {
+						}
 
-					    @Override
-					    public void onAnimationEnd(Animation animation) {
-						    item.setActionView(null);
-					    }
+						@Override
+						public void onAnimationEnd(Animation animation) {
+							item.setActionView(null);
+							changeIconColor(item);
+						}
 
-					    @Override
-					    public void onAnimationRepeat(Animation animation) {
+						@Override
+						public void onAnimationRepeat(Animation animation) {
 					    }
 				    });
 			    }
