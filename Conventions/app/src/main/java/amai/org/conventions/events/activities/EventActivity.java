@@ -1,16 +1,19 @@
 package amai.org.conventions.events.activities;
 
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.graphics.Palette;
 import android.text.Html;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.util.TypedValue;
+import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -226,33 +229,35 @@ public class EventActivity extends NavigationActivity {
 	}
 
 	@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
             case R.id.event_change_favorite_state:
-
 				ConventionEvent.UserInput userInput = conventionEvent.getUserInput();
 
-	            ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
-			            .setCategory("Favorites")
-			            .setAction(!userInput.isAttending() ? "Add" : "Remove")
-			            .setLabel("EventActivity")
-			            .build());
+	            // In the user is adding this event and it conflicts with another favorite event, ask the user what to do
+	            if ((!userInput.isAttending()) && Convention.getInstance().conflictsWithOtherFavoriteEvent(conventionEvent)) {
+		            final List<ConventionEvent> conflictingEvents = Convention.getInstance().getFavoriteConflictingEvents(conventionEvent);
+		            String message;
+		            if (conflictingEvents.size() == 1) {
+			            message = getString(R.string.event_conflicts_with_one_question, conflictingEvents.get(0).getTitle());
+		            } else {
+			            message = getString(R.string.event_conflicts_with_several_question, conflictingEvents.size());
+		            }
+		            new AlertDialog.Builder(new ContextThemeWrapper(this, android.R.style.Theme_Holo_Light_Dialog))
+				            .setTitle(R.string.event_add_to_favorites)
+				            .setMessage(message)
+				            .setPositiveButton(R.string.add_anyway, new DialogInterface.OnClickListener() {
+					            @Override
+					            public void onClick(DialogInterface dialog, int which) {
+						            changeEventFavoriteState(item);
+					            }
+				            })
+				            .setNegativeButton(R.string.cancel, null)
+				            .show();
+		            return true;
+	            }
 
-	            if (userInput.isAttending()) {
-                    userInput.setAttending(false);
-					ConventionsApplication.alarmScheduler.cancelDefaultEventAlarms(conventionEvent);
-                    item.setIcon(getResources().getDrawable(R.drawable.star_with_plus));
-                    item.setTitle(getResources().getString(R.string.event_add_to_favorites));
-                    Snackbar.make(this.mainLayout, R.string.event_removed_from_favorites, Snackbar.LENGTH_SHORT).show();
-                } else {
-                    userInput.setAttending(true);
-					ConventionsApplication.alarmScheduler.scheduleDefaultEventAlarms(conventionEvent);
-                    item.setIcon(getResources().getDrawable(android.R.drawable.btn_star_big_on));
-                    item.setTitle(getResources().getString(R.string.event_remove_from_favorites));
-                    Snackbar.make(this.mainLayout, R.string.event_added_to_favorites, Snackbar.LENGTH_SHORT).show();
-                }
-	            setupAlarmsMenuItem(menu, userInput);
-                saveUserInput();
+	            changeEventFavoriteState(item);
                 return true;
             case R.id.event_navigate_to_map:
                 // Navigate to the map floor associated with this event
@@ -289,7 +294,32 @@ public class EventActivity extends NavigationActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
+	private void changeEventFavoriteState(MenuItem item) {
+		ConventionEvent.UserInput userInput = conventionEvent.getUserInput();
+		ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
+				.setCategory("Favorites")
+				.setAction(!userInput.isAttending() ? "Add" : "Remove")
+				.setLabel("EventActivity")
+				.build());
+
+		if (userInput.isAttending()) {
+	        userInput.setAttending(false);
+						ConventionsApplication.alarmScheduler.cancelDefaultEventAlarms(conventionEvent);
+	        item.setIcon(getResources().getDrawable(R.drawable.star_with_plus));
+	        item.setTitle(getResources().getString(R.string.event_add_to_favorites));
+	        Snackbar.make(this.mainLayout, R.string.event_removed_from_favorites, Snackbar.LENGTH_SHORT).show();
+	    } else {
+	        userInput.setAttending(true);
+						ConventionsApplication.alarmScheduler.scheduleDefaultEventAlarms(conventionEvent);
+	        item.setIcon(getResources().getDrawable(android.R.drawable.btn_star_big_on));
+	        item.setTitle(getResources().getString(R.string.event_remove_from_favorites));
+	        Snackbar.make(this.mainLayout, R.string.event_added_to_favorites, Snackbar.LENGTH_SHORT).show();
+	    }
+		setupAlarmsMenuItem(menu, userInput);
+		saveUserInput();
+	}
+
+	@Override
     protected void onPause() {
         super.onPause();
         if (feedbackView.isFeedbackChanged()) {

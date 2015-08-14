@@ -8,7 +8,11 @@
     <string name="programme_search_title">חיפוש אירועים</string>
 
     <string name="event_added_to_favorites">האירוע התווסף לאירועים שלי</string>
+    <string name="event_added_to_favorites_but_conflicts">האירוע התווסף לאירועים שלי אך הוא מתנגש עם אירוע אחר ברשימה</string>
+    <string name="event_conflicts_with_one_question">האירוע מתנגש עם האירוע: %s מרשימת האירועים שלך.</string>
+    <string name="event_conflicts_with_several_question">האירוע מתנגש עם %d אירועים אחרים ברשימת האירועים שלך.</string>
     <string name="event_removed_from_favorites">האירוע הוסר מהאירועים שלי</string>
+    <string name="cancel">בטל</string>
     <string name="arrival_methods_marker_name">כאמ\"י 2015 - בנייני האומה</string>
 
     <string name="event_navigate_to_map">הצג במפה</string>
@@ -100,4 +104,5 @@
     <string name="answer_too_early_or_late">האירוע התרחש מוקדם או מאוחר מדי</string>
     <string name="answer_other_reason">סיבה אחרת</string>
     <string name="app_version">גרסה: %s</string>
+    <string name="add_anyway">הוסף בכל זאת</string>
 </resources>

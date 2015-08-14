@@ -24,7 +24,7 @@ public class DefaultEventFavoriteChangedListener implements OnEventFavoriteChang
 	}
 
 	@Override
-	public void onEventFavoriteChanged(ConventionEvent updatedEvent) {
+	public void onEventFavoriteChanged(final ConventionEvent updatedEvent) {
 		// Update the favorite state in the model
 		final boolean newAttending = !updatedEvent.isAttending();
 
@@ -44,8 +44,28 @@ public class DefaultEventFavoriteChangedListener implements OnEventFavoriteChang
 		// Save the changes
 		Convention.getInstance().getStorage().saveUserInput();
 
-		// Notify the list view to redraw the UI so the new favorite icon state will apply
+		// If the view is a list, notify view to redraw the UI so the new favorite icon state will apply
 		// for all views of this event
+		notifyDatasetChanged();
+
+		if (newAttending) {
+			// Check if the new favorite event conflicts with other events
+			if (Convention.getInstance().conflictsWithOtherFavoriteEvent(updatedEvent)) {
+				Snackbar.make(view, R.string.event_added_to_favorites_but_conflicts, Snackbar.LENGTH_LONG).setAction(R.string.cancel, new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						onEventFavoriteChanged(updatedEvent);
+					}
+				}).show();
+			} else {
+				Snackbar.make(view, R.string.event_added_to_favorites, Snackbar.LENGTH_SHORT).show();
+			}
+		} else {
+			Snackbar.make(view, R.string.event_removed_from_favorites, Snackbar.LENGTH_SHORT).show();
+		}
+	}
+
+	private void notifyDatasetChanged() {
 		if (view instanceof RecyclerView) {
 			RecyclerView.Adapter adapter = ((RecyclerView) view).getAdapter();
 			adapter.notifyDataSetChanged();
@@ -59,12 +79,6 @@ public class DefaultEventFavoriteChangedListener implements OnEventFavoriteChang
 			if (adapter instanceof BaseAdapter) {
 				((BaseAdapter) adapter).notifyDataSetChanged();
 			}
-		}
-
-		if (newAttending) {
-			Snackbar.make(view, R.string.event_added_to_favorites, Snackbar.LENGTH_SHORT).show();
-		} else {
-			Snackbar.make(view, R.string.event_removed_from_favorites, Snackbar.LENGTH_SHORT).show();
 		}
 	}
 }

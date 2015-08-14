@@ -452,4 +452,34 @@ public class Convention implements Serializable {
 		}
 		return newest;
 	}
+
+	public boolean conflictsWithOtherFavoriteEvent(ConventionEvent event) {
+		for (ConventionEvent otherEvent : Convention.getInstance().getEvents()) {
+			if (!otherEvent.getId().equals(event.getId()) && otherEvent.isAttending()) {
+				boolean first = event.getStartTime().before(otherEvent.getStartTime());
+				if ((first && event.getEndTime().after(otherEvent.getStartTime())) ||
+						((!first) && otherEvent.getEndTime().after(event.getStartTime()))) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	public List<ConventionEvent> getFavoriteConflictingEvents(final ConventionEvent event) {
+		return CollectionUtils.filter(getEvents(), new CollectionUtils.Predicate<ConventionEvent>() {
+			@Override
+			public boolean where(ConventionEvent otherEvent) {
+				return !otherEvent.getId().equals(event.getId()) && otherEvent.isAttending() && isConflicting(event, otherEvent);
+			}
+		});
+	}
+
+	private boolean isConflicting(ConventionEvent firstEvent, ConventionEvent secondEvent) {
+		// An event conflicts with another event when, in chronological order,
+		// the first event ends after the second event starts.
+		boolean first = firstEvent.getStartTime().before(secondEvent.getStartTime());
+		return (first && firstEvent.getEndTime().after(secondEvent.getStartTime())) ||
+				((!first) && secondEvent.getEndTime().after(firstEvent.getStartTime()));
+	}
 }
