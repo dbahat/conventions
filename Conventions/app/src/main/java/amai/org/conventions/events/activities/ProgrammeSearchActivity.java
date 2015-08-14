@@ -42,7 +42,6 @@ public class ProgrammeSearchActivity extends NavigationActivity {
     private SwipeableEventsViewAdapter adapter;
     private RecyclerView recyclerView;
     private TextView noResultsFoundView;
-    private boolean applingTextFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,13 +133,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 	        @Override
 	        public void afterTextChanged(Editable s) {
 		        keywordsFilter = s.toString();
-
-		        // Apply the keyword filter in a short delay, to somewhat reduce slowness of applying the filter during typing
-		        if (!applingTextFilter) {
-			        applyFiltersInBackground();
-		        }
-
-		        applingTextFilter = true;
+		        applyFiltersInBackground();
 	        }
         });
 
@@ -150,11 +143,13 @@ public class ProgrammeSearchActivity extends NavigationActivity {
     }
 
 	private void applyFiltersInBackground() {
+		final String keywordsFilter = this.keywordsFilter;
+		final LinkedList<EventType> eventTypeFilter = this.eventTypeFilter;
+
 		new AsyncTask<Void, Void, Void>() {
 			@Override
 			protected Void doInBackground(Void... params) {
-				applyFilters();
-				applingTextFilter = false;
+				applyFilters(keywordsFilter, eventTypeFilter);
 				return null;
 			}
 
@@ -166,13 +161,14 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 		}.execute();
 	}
 
-    private void applyFilters() {
+    private void applyFilters(final String keywordsFilter, final List<EventType> eventTypeFilter) {
         List<ConventionEvent> events = Convention.getInstance().getEvents();
+
         events = CollectionUtils.filter(events, new CollectionUtils.Predicate<ConventionEvent>() {
             @Override
             public boolean where(ConventionEvent item) {
                 boolean result = true;
-                if (keywordsFilter != null && keywordsFilter.length() > 0) {
+	            if (keywordsFilter != null && keywordsFilter.length() > 0) {
                     result = containsKeywords(item);
                 }
                 if (eventTypeFilter != null && eventTypeFilter.size() > 0) {
