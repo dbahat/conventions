@@ -26,12 +26,12 @@ import java.util.List;
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.R;
 import amai.org.conventions.events.adapters.EventGroupsAdapter;
-import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
-import amai.org.conventions.utils.Dates;
 import amai.org.conventions.navigation.NavigationActivity;
+import amai.org.conventions.utils.CollectionUtils;
+import amai.org.conventions.utils.Dates;
 
 
 public class MyEventsActivity extends NavigationActivity {
@@ -79,7 +79,7 @@ public class MyEventsActivity extends NavigationActivity {
 		setNextEventStartText(events);
 
 		// Set up events list
-		ArrayList<ArrayList<ConventionEvent>> nonConflictingGroups = getNonConflictingGroups(events);
+		ArrayList<EventsTimeSlot> nonConflictingGroups = getNonConflictingGroups(null, events, null);
 		final EventGroupsAdapter adapter = new EventGroupsAdapter(nonConflictingGroups);
 		eventsList.setAdapter(adapter);
 
@@ -283,34 +283,49 @@ public class MyEventsActivity extends NavigationActivity {
 	 * sent, where each event conflicts with at least one other event in the group. Events from different
 	 * groups do not conflict with each other. The groups are ordered by the first event's start time.
 	 */
-	public static ArrayList<ArrayList<ConventionEvent>> getNonConflictingGroups(List<ConventionEvent> events) {
-		ArrayList<ArrayList<ConventionEvent>> nonConflictingEventGroups = new ArrayList<>();
+	public static ArrayList<EventsTimeSlot> getNonConflictingGroups(EventsTimeSlot previous, List<ConventionEvent> events, EventsTimeSlot next) {
+		ArrayList<EventsTimeSlot> nonConflictingTimeSlots = new ArrayList<>();
 
-		Date currGroupEndTime = null;
-		ArrayList<ConventionEvent> currGroup = null;
+		Date currGroupEndTime = (previous != null ? previous.getEndTime() : null);
+		EventsTimeSlot currSlot = previous;
 		for (ConventionEvent event : events) {
 			// Non-conflicting event - it's either the first event or it starts after
 			// (or at the same time as) the current group ends.
-			if (currGroup == null || !event.getStartTime().before(currGroupEndTime)) {
+			if (currSlot == null || !event.getStartTime().before(currGroupEndTime)) {
 				// If we have a previous group, add it to the groups list
-				if (currGroup != null) {
-					nonConflictingEventGroups.add(currGroup);
+				if (currSlot != null) {
+					if (currSlot != previous) {
+						nonConflictingTimeSlots.add(currSlot);
+					}
+
+					// If there are at least 30 minutes between this group and the next, add a free time slot
+					if (event.getStartTime().getTime() - currGroupEndTime.getTime() >= 30 * 60 * 1000) {
+						EventsTimeSlot freeSlot = new EventsTimeSlot(currGroupEndTime, event.getStartTime());
+						nonConflictingTimeSlots.add(freeSlot);
+					}
 				}
-				currGroup = new ArrayList<>(1);
+				currSlot = new EventsTimeSlot();
 				currGroupEndTime = null;
 			}
-			currGroup.add(event);
+			currSlot.addEvent(event);
 			if (currGroupEndTime == null || event.getEndTime().after(currGroupEndTime)) {
 				currGroupEndTime = event.getEndTime();
 			}
 		}
 
 		// Add the last group
-		if (currGroup != null) {
-			nonConflictingEventGroups.add(currGroup);
+		if (currSlot != null) {
+			if (currSlot != previous) {
+				nonConflictingTimeSlots.add(currSlot);
+			}
+
+			if (next != null && next.getStartTime().getTime() - currGroupEndTime.getTime() > 30 * 60 * 1000) {
+				EventsTimeSlot freeSlot = new EventsTimeSlot(currGroupEndTime, next.getStartTime());
+				nonConflictingTimeSlots.add(freeSlot);
+			}
 		}
 
-		return nonConflictingEventGroups;
+		return nonConflictingTimeSlots;
 	}
 
 	@Override

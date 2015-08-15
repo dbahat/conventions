@@ -105,4 +105,5 @@
     <string name="answer_other_reason">סיבה אחרת</string>
     <string name="app_version">גרסה: %s</string>
     <string name="add_anyway">הוסף בכל זאת</string>
+    <string name="free_time">זמן פנוי: %s</string>
 </resources>

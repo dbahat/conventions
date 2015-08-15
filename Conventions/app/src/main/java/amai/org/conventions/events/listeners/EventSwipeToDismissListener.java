@@ -4,11 +4,14 @@ import android.support.v7.widget.RecyclerView;
 
 import com.google.android.gms.analytics.HitBuilders;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import amai.org.conventions.ConventionsApplication;
+import amai.org.conventions.events.adapters.EventGroupsAdapter;
 import amai.org.conventions.events.holders.SwipeableEventViewHolder;
 import amai.org.conventions.model.Convention;
+import amai.org.conventions.model.ConventionEvent;
 
 public class EventSwipeToDismissListener implements Runnable {
 
@@ -35,7 +38,12 @@ public class EventSwipeToDismissListener implements Runnable {
 
 		ConventionsApplication.alarmScheduler.cancelDefaultEventAlarms(viewHolder.getModel());
 
-		eventsList.remove(viewHolder.getAdapterPosition());
-		adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+		int adapterPosition = viewHolder.getAdapterPosition();
+		eventsList.remove(adapterPosition);
+		adapter.notifyItemRemoved(adapterPosition);
+
+		if (adapter instanceof EventGroupsAdapter) {
+			((EventGroupsAdapter) adapter).updateSlots(adapterPosition, new ArrayList<ConventionEvent>(), true);
+		}
 	}
 }
