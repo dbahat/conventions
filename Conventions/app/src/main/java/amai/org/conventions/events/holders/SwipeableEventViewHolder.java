@@ -95,6 +95,7 @@ public class SwipeableEventViewHolder extends RecyclerView.ViewHolder {
 	    removeOnPageChangeListener();
 
 	    this.listener = new OnSwipeListener(viewPager, mainViewPosition, action, dismiss);
+		viewPager.clearOnPageChangeListeners();
 	    viewPager.addOnPageChangeListener(listener);
     }
 

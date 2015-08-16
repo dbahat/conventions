@@ -7,7 +7,15 @@ public class OnSwipeListener implements ViewPager.OnPageChangeListener {
 	private int mainViewPosition;
 	private final Runnable action;
 	private boolean dismiss;
-	boolean pageSelected;
+	private boolean pageSelected;
+	private Runnable delayedSwipeActionPerformer = new Runnable() {
+		@Override
+		public void run() {
+			if (pageSelected) {
+				performSwipeAction();
+			}
+		}
+	};
 
 	public OnSwipeListener(ViewPager viewPager, int mainViewPosition, Runnable action, boolean dismiss) {
 		this.viewPager = viewPager;
@@ -39,6 +47,10 @@ public class OnSwipeListener implements ViewPager.OnPageChangeListener {
 		// so we can't perform UI updates here (because it will be immediate and the event view will appear
 		// to be stuck)
 		pageSelected = true;
+
+		// In certain cases, onPageScrollStateChanged is not called after onPageSelected. If it does not happen
+		// within half a second (which is enough time for the scroll to finish), perform the action anyway.
+		viewPager.postDelayed(delayedSwipeActionPerformer, 500);
 	}
 
 	@Override
@@ -48,6 +60,17 @@ public class OnSwipeListener implements ViewPager.OnPageChangeListener {
 		if (state != ViewPager.SCROLL_STATE_IDLE || !pageSelected) {
 			return;
 		}
+		performSwipeAction();
+	}
+
+	private synchronized void performSwipeAction() {
+		// Since this can be called from 2 places, making sure they aren't trying to call at the same time
+		if (!pageSelected) {
+			return;
+		}
+		// Remove callback in case it was not called and it will try to run later
+		viewPager.removeCallbacks(delayedSwipeActionPerformer);
+
 		pageSelected = false;
 		action.run();
 

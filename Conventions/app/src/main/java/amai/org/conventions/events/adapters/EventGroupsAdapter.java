@@ -157,6 +157,24 @@ public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 		// This is the number of new groups, excluding the free slots before and after the original group.
 		int newGroupsSize = groups.size();
 
+		// Check if there is a free slot after the changed events. We only check this if the groups size is more than 1
+		// because an "after" slot cannot be in the first index (in case there is only 1 slot and it's a free slot we treat it as
+		// a "before" slot). In that case, this must happen before the notifying about the new "before" slot or they will cancel each other
+		// (due to notifying "item inserted" then "item removed" on the same index).
+		if (groups.size() > 1 && groups.get(groups.size() - 1).getType() == EventsTimeSlot.EventsTimeSlotType.NO_EVENTS) {
+			--newGroupsSize;
+			// Notify the list: if there was no free slot after the events, it was added. If there was, it was possibly changed.
+			// The position here is always the one after the original events group.
+			if (!hadFreeAfter) {
+				notifyItemInserted(nextPosition);
+			} else {
+				notifyItemChanged(nextPosition);
+			}
+		} else if (hadFreeAfter) {
+			// If there was a free slot after, it was removed.
+			notifyItemRemoved(nextPosition);
+		}
+
 		// Check if there is a free slot before the changed events
 		if (groups.size() > 0 && groups.get(0).getType() == EventsTimeSlot.EventsTimeSlotType.NO_EVENTS) {
 			--newGroupsSize;
@@ -170,23 +188,6 @@ public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 		} else if (hadFreeBefore) {
 			// If there was a free slot before, it was removed.
 			notifyItemRemoved(previousPosition);
-		}
-
-		// Check if there is a free slot after the changed events. We only check this if the groups size is more than 1
-		// because an "after" slot cannot be in the first index (in case there is only 1 slot and it's a free slot we treat it as
-		// a "before" slot).
-		if (groups.size() > 1 && groups.get(groups.size() - 1).getType() == EventsTimeSlot.EventsTimeSlotType.NO_EVENTS) {
-			--newGroupsSize;
-			// Notify the list: if there was no free slot after the events, it was added. If there was, it was possibly changed.
-			// The position here is always the one after the original events group.
-			if (!hadFreeAfter) {
-				notifyItemInserted(nextPosition);
-			} else {
-				notifyItemChanged(nextPosition);
-			}
-		} else if (hadFreeAfter) {
-			// If there was a free slot after, it was removed.
-			notifyItemRemoved(nextPosition);
 		}
 
 		// Notify the list about changes in the original group, This is only relevant if it was a conflicting group

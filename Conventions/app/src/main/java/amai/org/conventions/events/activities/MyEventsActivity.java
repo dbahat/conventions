@@ -319,7 +319,7 @@ public class MyEventsActivity extends NavigationActivity {
 				nonConflictingTimeSlots.add(currSlot);
 			}
 
-			if (next != null && next.getStartTime().getTime() - currGroupEndTime.getTime() > 30 * 60 * 1000) {
+			if (next != null && next.getStartTime().getTime() - currGroupEndTime.getTime() >= 30 * 60 * 1000) {
 				EventsTimeSlot freeSlot = new EventsTimeSlot(currGroupEndTime, next.getStartTime());
 				nonConflictingTimeSlots.add(freeSlot);
 			}

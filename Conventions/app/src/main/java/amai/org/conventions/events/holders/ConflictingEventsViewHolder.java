@@ -4,18 +4,21 @@ import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Point;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.TypedValue;
+import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import amai.org.conventions.R;
+import amai.org.conventions.events.EventView;
 import amai.org.conventions.events.adapters.DismissibleEventsViewAdapter;
 import amai.org.conventions.model.ConventionEvent;
 
@@ -24,12 +27,32 @@ public class ConflictingEventsViewHolder extends RecyclerView.ViewHolder {
     private final Context context;
     private DismissibleEventsViewAdapter adapter;
 	private RecyclerView.AdapterDataObserver eventRemovedListener;
+	private static int eventViewHeight = -1;
 
 	public ConflictingEventsViewHolder(View itemView, Context context) {
         super(itemView);
         eventsListView = (RecyclerView) itemView.findViewById(R.id.conflictingEventsList);
         this.context = context;
+		if (eventViewHeight < 0) {
+			eventViewHeight = calculateEventViewHeight();
+		}
     }
+
+	private int calculateEventViewHeight() {
+		Point screenSize = getScreenSize();
+		EventView eventView = new EventView(context, null);
+		eventView.setConflicting(true);
+		eventView.measure(screenSize.x, screenSize.y);
+		return eventView.getMeasuredHeight();
+	}
+
+	private Point getScreenSize() {
+		WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+		Display display = wm.getDefaultDisplay();
+		Point size = new Point();
+		display.getSize(size);
+		return size;
+	}
 
 	public List<ConventionEvent> getModel() {
 		return adapter.getEventsList();
@@ -91,11 +114,8 @@ public class ConflictingEventsViewHolder extends RecyclerView.ViewHolder {
 	    updateViewHeight(getListHeight(eventsListView.getResources(), adapter.getItemCount()), eventsListView);
     }
 
-	private static int getListHeight(Resources resources, int items) {
-		float dpAsPixels = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1, resources.getDisplayMetrics());
-
-		// Leaving 2dp offset for the card view boarders
-		return (int) dpAsPixels + items * (int) (resources.getDimension(R.dimen.event_height) + dpAsPixels);
+	private int getListHeight(Resources resources, int items) {
+		return (items * eventViewHeight);
 	}
 
 	private static Animator getHeightChangeAnimator(final View view, int initialHeight, int targetHeight) {
