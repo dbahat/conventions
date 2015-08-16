@@ -51,12 +51,14 @@ public class DefaultEventFavoriteChangedListener implements OnEventFavoriteChang
 		if (newAttending) {
 			// Check if the new favorite event conflicts with other events
 			if (Convention.getInstance().conflictsWithOtherFavoriteEvent(updatedEvent)) {
-				Snackbar.make(view, R.string.event_added_to_favorites_but_conflicts, Snackbar.LENGTH_LONG).setAction(R.string.cancel, new View.OnClickListener() {
+				Snackbar snackbar = Snackbar.make(view, R.string.event_added_to_favorites_but_conflicts, Snackbar.LENGTH_LONG).setAction(R.string.cancel, new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						onEventFavoriteChanged(updatedEvent);
 					}
-				}).show();
+				});
+				snackbar.getView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+				snackbar.show();
 			} else {
 				Snackbar.make(view, R.string.event_added_to_favorites, Snackbar.LENGTH_SHORT).show();
 			}
