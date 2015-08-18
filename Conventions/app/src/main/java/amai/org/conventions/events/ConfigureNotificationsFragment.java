@@ -21,6 +21,7 @@ import amai.org.conventions.R;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.EventNotification;
+import amai.org.conventions.utils.Dates;
 
 public class ConfigureNotificationsFragment extends DialogFragment {
     private static final String EventId = "EventId";
@@ -177,7 +178,7 @@ public class ConfigureNotificationsFragment extends DialogFragment {
     private void updateNotificationSettings() {
 	    EventNotification feedbackReminder = event.getUserInput().getEventFeedbackReminderNotification();
 	    if (afterEventEndEnabledCheckbox.isChecked()) {
-            Date afterEventNotificationTime = new Date(event.getEndTime().getTime() + numberOfMinutesAfterEventNotification * 60 * 1000);
+            Date afterEventNotificationTime = new Date(event.getEndTime().getTime() + numberOfMinutesAfterEventNotification * Dates.MILLISECONDS_IN_MINUTE);
 	        if (afterEventNotificationTime.before(new Date())) {
 		        Toast.makeText(getActivity(), R.string.cannot_set_past_alarm, Toast.LENGTH_SHORT).show();
 		        feedbackReminder.setNotificationTime(null);
@@ -194,7 +195,7 @@ public class ConfigureNotificationsFragment extends DialogFragment {
 
 	    EventNotification eventStartNotification = event.getUserInput().getEventAboutToStartNotification();
 	    if (beforeEventStartEnabledCheckbox.isChecked()) {
-            Date beforeEventNotificationTime = new Date(event.getStartTime().getTime() - numberOfMinutesBeforeEventNotification * 60 * 1000);
+            Date beforeEventNotificationTime = new Date(event.getStartTime().getTime() - numberOfMinutesBeforeEventNotification * Dates.MILLISECONDS_IN_MINUTE);
 		    if (beforeEventNotificationTime.before(new Date())) {
 			    Toast.makeText(getActivity(), R.string.cannot_set_past_alarm, Toast.LENGTH_SHORT).show();
 			    eventStartNotification.setNotificationTime(null);

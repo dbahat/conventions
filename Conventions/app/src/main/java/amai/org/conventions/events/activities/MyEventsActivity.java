@@ -299,7 +299,7 @@ public class MyEventsActivity extends NavigationActivity {
 					}
 
 					// If there are at least 30 minutes between this group and the next, add a free time slot
-					if (event.getStartTime().getTime() - currGroupEndTime.getTime() >= 30 * 60 * 1000) {
+					if (event.getStartTime().getTime() - currGroupEndTime.getTime() >= 30 * Dates.MILLISECONDS_IN_MINUTE) {
 						EventsTimeSlot freeSlot = new EventsTimeSlot(currGroupEndTime, event.getStartTime());
 						nonConflictingTimeSlots.add(freeSlot);
 					}
@@ -319,7 +319,7 @@ public class MyEventsActivity extends NavigationActivity {
 				nonConflictingTimeSlots.add(currSlot);
 			}
 
-			if (next != null && next.getStartTime().getTime() - currGroupEndTime.getTime() >= 30 * 60 * 1000) {
+			if (next != null && next.getStartTime().getTime() - currGroupEndTime.getTime() >= 30 * Dates.MILLISECONDS_IN_MINUTE) {
 				EventsTimeSlot freeSlot = new EventsTimeSlot(currGroupEndTime, next.getStartTime());
 				nonConflictingTimeSlots.add(freeSlot);
 			}

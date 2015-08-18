@@ -12,6 +12,8 @@ import amai.org.conventions.model.Convention;
 
 public class Dates {
 
+	public static final long MILLISECONDS_IN_MINUTE = 60 * 1000;
+
 	public enum TimeUnit {
         HOUR, MINUTE, SECOND
     }
