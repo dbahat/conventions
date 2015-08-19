@@ -111,7 +111,7 @@ public class AlarmScheduler {
                 .setAction(notificationType.toString() + event.getId()) // Setting unique action id so different event intents won't collide
                 .putExtra(EventNotificationService.EXTRA_EVENT_TO_NOTIFY, event)
                 .putExtra(EventNotificationService.EXTRA_EVENT_NOTIFICATION_TYPE, notificationType);
-        return PendingIntent.getService(context, 0, intent, 0);
+        return PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
     }
 
 	private void scheduleAlarm(long time, PendingIntent pendingIntent, Accuracy accuracy) {
@@ -126,22 +126,21 @@ public class AlarmScheduler {
 	@TargetApi(Build.VERSION_CODES.KITKAT)
     private void scheduleAlarmKitkat(long time, PendingIntent pendingIntent, Accuracy accuracy) {
         // For Kitkat and above, the AlarmService batches notifications to improve battery life at the cost of alarm accuracy.
-        // Since event start notification time is important, schedule them using setExact, which bypass this optimization.
-		long startTime;
-		long endTime;
+        // Since event start notification time is important, schedule them using setWindow, which gives an exact window of time,
+        // allowing for some optimization while being accurate enough.
+		long length;
 		switch (accuracy) {
 			case INACCURATE:
 				scheduleAlarm(time, pendingIntent);
 				break;
 			default:
 				if (accuracy == Accuracy.UP_TO_1_MINUTE_EARLIER) {
-					startTime = time - Dates.MILLISECONDS_IN_MINUTE;
-					endTime = time;
+					time = time - Dates.MILLISECONDS_IN_MINUTE;
+					length = Dates.MILLISECONDS_IN_MINUTE;
 				} else {
-					startTime = time;
-					endTime = time + 5 * Dates.MILLISECONDS_IN_MINUTE;
+					length = 5 * Dates.MILLISECONDS_IN_MINUTE;
 				}
-                alarmManager.setWindow(AlarmManager.RTC_WAKEUP, startTime, endTime, pendingIntent);
+                alarmManager.setWindow(AlarmManager.RTC_WAKEUP, time, length, pendingIntent);
 
 		}
     }

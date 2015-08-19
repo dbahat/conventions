@@ -70,6 +70,7 @@ public class ConventionsApplication extends Application {
     private void restoreAlarmConfiguration() {
         for (ConventionEvent event : Convention.getInstance().getEvents()) {
             restoreAlarmConfiguration(event, event.getUserInput().getEventAboutToStartNotification());
+	        restoreAlarmConfiguration(event, event.getUserInput().getEventFeedbackReminderNotification());
         }
     }
 
