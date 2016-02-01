@@ -8,7 +8,7 @@
         android:id="@+id/eventElement"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        conventions:eventTypeColor="?eventTypeLectureColor"
+        conventions:eventTypeColor="@color/yellow"
         conventions:eventColor="?eventTypeNotStartedColor"
         conventions:attending="true"
         conventions:hallName="Oranim 1"

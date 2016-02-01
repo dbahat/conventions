@@ -26,34 +26,17 @@
         <!-- Home Screen -->
         <attr name="appLogoHome" format="integer"/>
         <attr name="logoHomeBackground" format="color|reference"/>
-        <attr name="homeConventionNameVisibility" format="enum">
-            <!-- Values taken from res/values/attrs.xml in android sources -->
-            <enum name="visible" value="0"/>
-            <enum name="gone" value="2"/>
-        </attr>
-        <attr name="homeConventionName" format="string"/>
-        <attr name="homeConventionDate" format="string"/>
-        <attr name="homeButtonsColor" format="color|reference"/>
         <attr name="mapHomeImage" format="integer"/>
         <attr name="eventsHomeImage" format="integer"/>
         <attr name="updatesHomeImage" format="integer"/>
         <attr name="arrivalMethodsHomeImage" format="integer"/>
-        <!-- Event Types -->
-        <attr name="eventTypeCentralColor" format="color|reference"/>
-        <attr name="eventTypeSpecialColor" format="color|reference"/>
-        <attr name="eventTypeScreeningColor" format="color|reference"/>
-        <attr name="eventTypeLectureColor" format="color|reference"/>
-        <attr name="eventTypeWorkshopColor" format="color|reference"/>
-        <attr name="eventTypePanelColor" format="color|reference"/>
-        <attr name="eventTypeGameColor" format="color|reference"/>
-        <attr name="eventTypeCommunityColor" format="color|reference"/>
-        <attr name="eventTypeGuestOfHonorColor" format="color|reference"/>
         <!-- Event Time -->
         <attr name="eventTypeEndedColor" format="color|reference"/>
         <attr name="eventTypeCurrentColor" format="color|reference"/>
         <attr name="eventTypeNotStartedColor" format="color|reference"/>
         <!-- MyEvents Screen -->
         <attr name="nextEventStartTimeBackground" format="color|reference"/>
+        <attr name="nextEventStartTimeTextColor" format="color|reference"/>
         <attr name="nextEventStartTimeBottomLineColor" format="color|reference"/>
         <attr name="conflictingEventsBackground" format="color|reference"/>
         <!-- Navigation Popup -->

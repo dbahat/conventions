@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="dark_blue">#130D33</color>
+    <color name="dark_purple">#43265C</color>
+    <color name="purple">#3C2874</color>
+    <color name="gold">#F8D681</color>
+    <color name="dark_purple_button">#2C0D59</color>
+    <color name="very_dark_purple_button">#210A43</color>
+    <color name="light_purple">#584772</color>
+</resources>

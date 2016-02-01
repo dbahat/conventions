@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Date;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -19,7 +19,6 @@ import amai.org.conventions.R;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 import amai.org.conventions.utils.Dates;
-import amai.org.conventions.utils.Settings;
 
 public class Convention implements Serializable {
 
@@ -38,7 +37,6 @@ public class Convention implements Serializable {
 
     private ReentrantReadWriteLock eventLockObject = new ReentrantReadWriteLock();
     private ConventionStorage conventionStorage;
-	private Settings settings;
 
     public static Convention getInstance() {
         return convention;
@@ -47,10 +45,6 @@ public class Convention implements Serializable {
     public ConventionStorage getStorage() {
         return conventionStorage;
     }
-
-	public Settings getSettings() {
-		return settings;
-	}
 
 	public Convention() {
         this.conventionStorage = new ConventionStorage();
@@ -65,7 +59,7 @@ public class Convention implements Serializable {
 
         this.date = Calendar.getInstance();
 	    this.date.clear();
-        this.date.set(2015, Calendar.AUGUST, 20);
+        this.date.set(2016, Calendar.MARCH, 24);
         this.feedbackRecipient = "content@cami.org.il";
 
 	    Hall mainHall = new Hall().withName("אולם ראשי").withOrder(1);

@@ -8,8 +8,6 @@
         <item name="toolbarNavigationButtonStyle">@style/ToolbarNavigationButtonStyle</item>
         <item name="stickyListHeadersListViewStyle">@style/Widget.AppCompat.ListView</item>
 
-        <item name="homeButtonsColor">@color/gray</item>
-
         <item name="eventTypeEndedColor">@color/ultra_light_gray</item>
         <item name="eventTypeCurrentColor">@color/light_yellow</item>
         <item name="eventTypeNotStartedColor">@color/white</item>
@@ -42,9 +40,6 @@
         <item name="navigationPopupSelectedColor">@color/maroon</item>
 
         <item name="appLogoHome">@drawable/cami_logo</item>
-        <item name="homeConventionNameVisibility">gone</item>
-        <item name="homeConventionName">כאמ"י 2015</item>
-        <item name="homeConventionDate">20.08.2015</item>
         <item name="mapHomeImage">@drawable/home_cami_map</item>
         <item name="eventsHomeImage">@drawable/home_cami_events</item>
         <item name="updatesHomeImage">@drawable/home_cami_updates</item>
@@ -52,16 +47,9 @@
 
         <item name="floorBackground">@color/orange</item>
 
-        <item name="eventTypeSpecialColor">@color/dark_orange</item>
-        <item name="eventTypeScreeningColor">@color/orange</item>
-        <item name="eventTypeLectureColor">@color/red</item>
-        <item name="eventTypeWorkshopColor">@color/dark_green</item>
-        <item name="eventTypePanelColor">@color/light_blue</item>
-        <item name="eventTypeGameColor">@color/sky_blue</item>
-        <item name="eventTypeCommunityColor">@color/light_red</item>
-        <item name="eventTypeGuestOfHonorColor">@color/light_green</item>
-
         <item name="nextEventStartTimeBackground">@color/orange</item>
+        <item name="nextEventStartTimeTextColor">@android:color/black</item>
+
 
         <item name="eventDetailsDefaultBackgroundColor">@color/white</item>
         <!-- Note: if you change the theme, these values should be copied manually to file drawable\feedback_highlighted_button.xml
@@ -70,5 +58,28 @@
         <item name="eventFeedbackHighlightedButtonPressedColor">@color/dark_maroon</item>
         <item name="feedbackAnswerButtonColor">@color/maroon</item>
         <item name="feedbackAnswerButtonSelectedColor">@color/dark_orange</item>
+    </style>
+
+    <style name="AppBaseTheme.Harucon2016.Toolbar"/>
+
+    <style name="AppBaseTheme.Harucon2016" parent="AppBaseTheme.Cami2015">
+        <item name="toolbarBackground">@color/dark_blue</item>
+        <item name="toolbarLogo">@drawable/harucon2016_logo_toolbar</item>
+        <item name="toolbarLogoType">bitmap</item>
+        <item name="toolbarIconAccentColor">@color/gold</item>
+        <item name="navigationPopupSelectedColor">@color/dark_blue</item>
+
+        <item name="floorBackground">@color/orange</item>
+
+        <item name="nextEventStartTimeBackground">@color/light_purple</item>
+        <item name="nextEventStartTimeTextColor">@color/white</item>
+
+        <item name="eventDetailsDefaultBackgroundColor">@color/white</item>
+        <!-- Note: if you change the theme, these values should be copied manually to file drawable\feedback_highlighted_button.xml
+         because prior to L it was not supported to reference theme attributes from a drawable xml -->
+        <item name="eventFeedbackHighlightedButtonColor">@color/dark_purple_button</item>
+        <item name="eventFeedbackHighlightedButtonPressedColor">@color/very_dark_purple_button</item>
+        <item name="feedbackAnswerButtonColor">@color/dark_purple</item>
+        <item name="feedbackAnswerButtonSelectedColor">@color/purple</item>
     </style>
 </resources>

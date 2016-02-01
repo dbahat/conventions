@@ -12,7 +12,7 @@
                 <corners android:radius="@dimen/control_corner_material" />
                 <!-- Should be same as ?attr/eventFeedbackHighlightedButtonPressedColor
                 Referencing theme attributes is not supported before L -->
-                <solid android:color="@color/dark_maroon" />
+                <solid android:color="@color/very_dark_purple_button" />
                 <padding android:left="@dimen/button_padding_horizontal_material"
                          android:top="@dimen/button_padding_vertical_material"
                          android:right="@dimen/button_padding_horizontal_material"
@@ -51,7 +51,7 @@
                 <corners android:radius="@dimen/control_corner_material" />
                 <!-- Should be same as ?attr/eventFeedbackHighlightedButtonColor
                 Referencing theme attributes is not supported before L -->
-                <solid android:color="@color/maroon" />
+                <solid android:color="@color/dark_purple_button" />
                 <padding android:left="@dimen/button_padding_horizontal_material"
                          android:top="@dimen/button_padding_vertical_material"
                          android:right="@dimen/button_padding_horizontal_material"

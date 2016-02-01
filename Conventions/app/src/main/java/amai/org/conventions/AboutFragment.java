@@ -38,7 +38,6 @@ public class AboutFragment extends DialogFragment {
 		aboutAppView.setText(Html.fromHtml(aboutAppText));
 		aboutAppView.setMovementMethod(LinkMovementMethod.getInstance());
 
-		// Currently disabled due to an issue fetching BuildConfig.VERSION_NAME in release builds
 		TextView aboutAppVersion = (TextView) view.findViewById(R.id.about_app_version);
 		String versionName = ConventionsApplication.getVersionName();
 		if (versionName == null || versionName.trim().isEmpty()) {
