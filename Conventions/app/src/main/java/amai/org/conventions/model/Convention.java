@@ -37,6 +37,7 @@ public class Convention implements Serializable {
 
     private ReentrantReadWriteLock eventLockObject = new ReentrantReadWriteLock();
     private ConventionStorage conventionStorage;
+	private EventToImageResourceIdMapper imageMapper;
 
     public static Convention getInstance() {
         return convention;
@@ -46,8 +47,13 @@ public class Convention implements Serializable {
         return conventionStorage;
     }
 
+	public EventToImageResourceIdMapper getImageMapper() {
+		return imageMapper;
+	}
+
 	public Convention() {
         this.conventionStorage = new ConventionStorage();
+		this.imageMapper = new EventToImageResourceIdMapper();
 	    this.userInput = new LinkedHashMap<>();
 	    feedback = new Feedback().withQuestions(
 				new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_AGE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS),

@@ -2,15 +2,12 @@ package amai.org.conventions.model;
 
 import android.content.Context;
 
-import com.google.android.gms.analytics.HitBuilders;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.networking.ModelParser;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Objects;
@@ -27,7 +24,7 @@ public class ConventionEvent implements Serializable {
     private Date endTime;
     private EventType type;
     private Hall hall;
-	private List<Integer> images;
+	private List<String> images;
     private String description;
 
 	public ConventionEvent() {
@@ -171,15 +168,15 @@ public class ConventionEvent implements Serializable {
         return this;
     }
 
-	public List<Integer> getImages() {
+	public List<String> getImages() {
 		return images;
 	}
 
-	public void setImages(List<Integer> images) {
+	public void setImages(List<String> images) {
 		this.images = images;
 	}
 
-	public ConventionEvent withImages(List<Integer> images) {
+	public ConventionEvent withImages(List<String> images) {
 		setImages(images);
 		return this;
 	}

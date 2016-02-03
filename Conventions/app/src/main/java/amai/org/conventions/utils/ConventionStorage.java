@@ -16,8 +16,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.lang.reflect.Type;
@@ -39,8 +38,8 @@ public class ConventionStorage {
 
     private static final String EVENT_USER_INPUT_FILE_NAME = "convention_data_user_input.json";
 	private static final String CONVENTION_FEEDBACK_FILE_NAME = "convention_feedback.json";
-    private static final String UPDATES_FILE_NAME = "convention_updates";
-    private static final String EVENTS_FILE_NAME = "convention_events";
+    private static final String UPDATES_FILE_NAME = "convention_updates.json";
+    private static final String EVENTS_FILE_NAME = "convention_events.json";
 
     private static ReentrantReadWriteLock filesystemAccessLock = new ReentrantReadWriteLock();
 
@@ -66,11 +65,22 @@ public class ConventionStorage {
 		    }
 	    }
 
-	    // Save Smiley3PointAnswer according to enum value name instead of toString()
-	    Gson serialzer = new GsonBuilder().registerTypeAdapter(FeedbackQuestion.Smiley3PointAnswer.class,
-			    new EnumSerializer<>()).create();
-	    saveTextFile(serialzer.toJson(userInput), EVENT_USER_INPUT_FILE_NAME);
+	    savePrivateFile(createGsonSerializer().toJson(userInput), EVENT_USER_INPUT_FILE_NAME);
     }
+
+	private static Gson createGsonSerializer() {
+		return new GsonBuilder()
+				.setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+				// Save Smiley3PointAnswer according to enum value name instead of toString()
+				.registerTypeAdapter(FeedbackQuestion.Smiley3PointAnswer.class, new EnumSerializer<>())
+				.create();
+	}
+
+	private static Gson createGsonDeserializer() {
+		return new GsonBuilder()
+				.setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+				.create();
+	}
 
 	public void saveConventionFeedback() {
 		Feedback feedback = Convention.getInstance().getFeedback();
@@ -80,48 +90,48 @@ public class ConventionStorage {
 			throw new RuntimeException(e);
 		}
 		feedback.removeUnansweredQuestions();
-		// Save Smiley3PointAnswer according to enum value name instead of toString()
-		Gson serialzer = new GsonBuilder().registerTypeAdapter(FeedbackQuestion.Smiley3PointAnswer.class,
-				new EnumSerializer<>()).create();
-		saveTextFile(serialzer.toJson(feedback), CONVENTION_FEEDBACK_FILE_NAME);
+		savePrivateFile(createGsonSerializer().toJson(feedback), CONVENTION_FEEDBACK_FILE_NAME);
 	}
 
     public void saveUpdates() {
-        saveCacheFile(Convention.getInstance().getUpdates(), UPDATES_FILE_NAME);
+	    String updatesJson = createGsonSerializer().toJson(Convention.getInstance().getUpdates());
+	    saveCacheFile(updatesJson, UPDATES_FILE_NAME);
     }
 
     public void saveEvents() {
-        filesystemAccessLock.writeLock().lock();
+	    String eventsString = createGsonSerializer().toJson(Convention.getInstance().getEvents());
+	    filesystemAccessLock.writeLock().lock();
         try {
-            saveCacheFile(Convention.getInstance().getEvents(), EVENTS_FILE_NAME);
+            saveCacheFile(eventsString, EVENTS_FILE_NAME);
         } finally {
             filesystemAccessLock.writeLock().unlock();
         }
     }
 
-	private void saveTextFile(String toSave, String fileName) {
+	private void saveAndCloseTextFile(String toSave, OutputStream outputStream) throws IOException {
+		OutputStreamWriter writer = new OutputStreamWriter(outputStream);
+		writer.write(toSave);
+		writer.close();
+		outputStream.close();
+	}
+
+	private void savePrivateFile(String toSave, String fileName) {
 		try {
-			FileOutputStream fos = context.openFileOutput(fileName, Context.MODE_PRIVATE);
-			OutputStreamWriter writer = new OutputStreamWriter(fos);
-			writer.write(toSave);
-			writer.close();
-			fos.close();
+			saveAndCloseTextFile(toSave,
+					context.openFileOutput(fileName, Context.MODE_PRIVATE));
 		} catch (Exception e) {
 			// Nothing we can do... don't crash the app.
 			Log.e(TAG, "File " + fileName + " could not be saved", e);
 		}
 	}
 
-	private void saveCacheFile(Object objectToSave, String fileName) {
+	private void saveCacheFile(String objectToSave, String fileName) {
 		try {
-			FileOutputStream fos = new FileOutputStream(new File(context.getCacheDir(), fileName));
-			ObjectOutputStream os = new ObjectOutputStream(fos);
-			os.writeObject(objectToSave);
-			os.close();
-			fos.close();
+			saveAndCloseTextFile(objectToSave,
+					new FileOutputStream(new File(context.getCacheDir(), fileName)));
 		} catch (Exception e) {
 			// Nothing we can do... don't crash the app.
-			Log.e(TAG, "File " + fileName + " could not be saved", e);
+			Log.e(TAG, "File " + fileName + " could not be saved to cache", e);
 		}
 	}
 
@@ -139,15 +149,12 @@ public class ConventionStorage {
     }
 
     private static boolean tryReadEventsFromCache() {
-        Object result = readCacheFile(EVENTS_FILE_NAME);
-        if (result == null) {
+	    List<ConventionEvent> events = readJsonFromCacheFile(new TypeToken<List<ConventionEvent>>() {}.getType(), EVENTS_FILE_NAME);
+        if (events == null) {
 			// Since we cannot read the cache file, delete it so we won't try to read it again next time
 			tryDeleteCacheFile(EVENTS_FILE_NAME);
             return false;
         }
-
-        @SuppressWarnings("unchecked")
-        List<ConventionEvent> events = (List<ConventionEvent>) result;
         Convention.getInstance().setEvents(events);
         return true;
     }
@@ -155,6 +162,7 @@ public class ConventionStorage {
 	private static void tryDeleteCacheFile(String fileName) {
 		File file = new File(context.getCacheDir(), fileName);
 		if (file.exists()) {
+			//noinspection ResultOfMethodCallIgnored
 			file.delete();
 		}
 	}
@@ -163,7 +171,8 @@ public class ConventionStorage {
         // No need to lock here, since we only read from the resources and only during app launch.
 	    Object result = null;
 	    try {
-	        result = readFile(context.getResources().openRawResource(R.raw.convention_events));
+	        result = readJsonAndClose(new TypeToken<List<ConventionEvent>>() {}.getType(),
+			        context.getResources().openRawResource(R.raw.convention_events));
 	    } catch (Exception e) {
 		    Log.e(TAG, "Could not read initial application events cache", e);
 	    }
@@ -179,25 +188,8 @@ public class ConventionStorage {
     }
 
     private static void readUserInputFromFile() {
-        filesystemAccessLock.readLock().lock();
-	    Reader reader = null;
-	    Map<String, ConventionEvent.UserInput> result = null;
-        try {
-	        reader = openTextFile(EVENT_USER_INPUT_FILE_NAME);
-	        if (reader != null) {
-		        result = new Gson().fromJson(reader, new TypeToken<Map<String, ConventionEvent.UserInput>>() {}.getType());
-	        }
-        } finally {
-	        if (reader != null) {
-		        try {
-			        reader.close();
-		        } catch (IOException e) {
-			        // Nothing we can do about it
-		        }
-	        }
-            filesystemAccessLock.readLock().unlock();
-        }
-
+	    Map<String, ConventionEvent.UserInput> result =
+			    readJsonFromFile(new TypeToken<Map<String, ConventionEvent.UserInput>>() {}.getType(), EVENT_USER_INPUT_FILE_NAME);
         if (result == null) {
             return;
         }
@@ -213,25 +205,7 @@ public class ConventionStorage {
     }
 
 	private static void readConventionFeedbackFromFile() {
-		filesystemAccessLock.readLock().lock();
-		Reader reader = null;
-		Feedback result = null;
-		try {
-			reader = openTextFile(CONVENTION_FEEDBACK_FILE_NAME);
-			if (reader != null) {
-				result = new Gson().fromJson(reader, Feedback.class);
-			}
-		} finally {
-			if (reader != null) {
-				try {
-					reader.close();
-				} catch (IOException e) {
-					// Nothing we can do about it
-				}
-			}
-			filesystemAccessLock.readLock().unlock();
-		}
-
+		Feedback result = readJsonFromFile(Feedback.class, CONVENTION_FEEDBACK_FILE_NAME);
 		if (result == null) {
 			return;
 		}
@@ -240,21 +214,26 @@ public class ConventionStorage {
 		currentFeedback.updateFrom(result);
 	}
 
+	private static <T> T readJsonFromFile(Type type, String fileName) {
+		filesystemAccessLock.readLock().lock();
+		try {
+			return readJsonAndClose(type, openTextFile(fileName));
+		} finally {
+			filesystemAccessLock.readLock().unlock();
+		}
+	}
+
 	private static void readUpdatesFromFile() {
-        Object result = readCacheFile(UPDATES_FILE_NAME);
-        if (result == null) {
+		List<Update> updates = readJsonFromCacheFile(new TypeToken<List<Update>>() {}.getType(), UPDATES_FILE_NAME);
+        if (updates == null) {
             return;
         }
-
-        @SuppressWarnings("unchecked")
-        List<Update> updates = (List<Update>) result;
         Convention.getInstance().setUpdates(updates);
     }
 
-	private static Reader openTextFile(String fileName) {
+	private static InputStream openTextFile(String fileName) {
 		try {
-			FileInputStream inputStream = context.openFileInput(fileName);
-			return new InputStreamReader(inputStream);
+			return context.openFileInput(fileName);
 		} catch (Exception e) {
 			// Ignore - default user input will be created from hard-coded data
 			Log.i(TAG, "Could not read file " + fileName + ": " + e.getMessage());
@@ -262,25 +241,49 @@ public class ConventionStorage {
 		}
 	}
 
-    private static Object readCacheFile(String fileName) {
-        try {
-            return readFile(new FileInputStream(new File(context.getCacheDir(), fileName)));
-        } catch (Exception e) {
-            // Ignore - required file will be created from default hard-coded data
-	        Log.i(TAG, "Could not read file " + fileName + ": " + e.getMessage());
-            return null;
-        }
-    }
+	private static <T> T readJsonFromCacheFile(Type type, String fileName) {
+		filesystemAccessLock.readLock().lock();
+		try {
+			return readJsonAndClose(type, openCacheTextFile(fileName));
+		} finally {
+			filesystemAccessLock.readLock().unlock();
+		}
+	}
 
-	private static Object readFile(InputStream inputStream) throws Exception {
-        ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
+	private static <T> T readJsonAndClose(Type type, InputStream inputStream) {
+		if (inputStream == null) {
+			return null;
+		}
 
-		Object result = objectInputStream.readObject();
-        objectInputStream.close();
-        inputStream.close();
+		T result = null;
+		Reader reader = null;
+		try {
+			reader = new InputStreamReader(inputStream);
+			result = createGsonDeserializer().fromJson(reader, type);
+		} catch (Exception e) {
+			Log.e(TAG, "Could not deserialize file of type " + type.toString() + ": " + e.getMessage());
+			return null;
+		} finally {
+			try {
+				if (reader != null) {
+					reader.close();
+				}
+			} catch (Exception e) {
+				// Nothing we can do about it
+			}
+		}
+		return result;
+	}
 
-        return result;
-    }
+	private static InputStream openCacheTextFile(String fileName) {
+		try {
+			return new FileInputStream(new File(context.getCacheDir(), fileName));
+		} catch (Exception e) {
+			// Ignore - default user input will be created from hard-coded data
+			Log.i(TAG, "Could not read cache file " + fileName + ": " + e.getMessage());
+			return null;
+		}
+	}
 
 	private static class EnumSerializer<T extends Enum> implements JsonSerializer<T> {
 		@Override

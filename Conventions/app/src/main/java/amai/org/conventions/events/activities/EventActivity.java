@@ -462,11 +462,12 @@ public class EventActivity extends NavigationActivity {
 
 	private void setupBackgroundImages(ConventionEvent event) {
         // Add images to the layout
-        List<Integer> images = event.getImages();
+        List<String> images = event.getImages();
         boolean first = true;
 		// This will contain the last image view after the loop
 		AspectRatioImageView imageView = null;
-        for (int imageId : images) {
+        for (String imageId : images) {
+	        int imageResource = Convention.getInstance().getImageMapper().getImageResourceId(imageId);
 			imageView = new AspectRatioImageView(this);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             int topMargin = 0;
@@ -477,7 +478,7 @@ public class EventActivity extends NavigationActivity {
             }
             layoutParams.setMargins(0, topMargin, 0, 0);
             imageView.setLayoutParams(layoutParams);
-            imageView.setImageResource(imageId);
+            imageView.setImageResource(imageResource);
             imagesLayout.addView(imageView);
         }
 

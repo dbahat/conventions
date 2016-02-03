@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import amai.org.conventions.R;
+import amai.org.conventions.utils.CollectionUtils;
 
 /**
  * Allows converting image ids (urls) into the relevant drawable.
@@ -13,8 +14,18 @@ import amai.org.conventions.R;
  * on the client side might result in out-of-memory exceptions.
  */
 public class EventToImageResourceIdMapper {
+	public static class ImageIds {
+		public static final String EVENT_GENERIC = "event_generic";
+		public static final String EVENT_REIKA1 = "event_reika1";
+		public static final String EVENT_REIKA2 = "event_reika2";
+		public static final String EVENT_REIKA3 = "event_reika3";
+		public static final String EVENT_POKEMON = "event_pokemon";
+		public static final String EVENT_COLORIDO_TYPHOON = "event_colorido_typhoon";
+		public static final String EVENT_COLORIDO_SUN = "event_colorido_sun";
+		public static final String EVENT_PANDORA = "event_pandora";
+	}
 
-    // Maps the event identifier (in our case, it's URI) to it's image resource id.
+	// Maps the event identifier (in our case, it's URI) to its image resource id.
     private final Map<String, Integer> eventIdToImageResourceIdMap;
 
     public EventToImageResourceIdMapper() {
@@ -47,7 +58,25 @@ public class EventToImageResourceIdMapper {
         eventIdToImageResourceIdMap.put("http://2015.cami.org.il/wp-content/uploads/sites/4/2015/07/1502446_923383967713249_1082258373542128403_o-678x1024.jpg", R.drawable.event_eatable_cosplay);
         eventIdToImageResourceIdMap.put("http://2015.cami.org.il/wp-content/uploads/sites/4/2015/07/QgCpzHH-1024x741.jpg", R.drawable.event_trivia);
 
+	    // Non-URL IDs
+	    eventIdToImageResourceIdMap.put(ImageIds.EVENT_GENERIC, R.drawable.event_generic);
+	    eventIdToImageResourceIdMap.put(ImageIds.EVENT_REIKA1, R.drawable.event_reika1);
+	    eventIdToImageResourceIdMap.put(ImageIds.EVENT_REIKA2, R.drawable.event_reika2);
+	    eventIdToImageResourceIdMap.put(ImageIds.EVENT_REIKA3, R.drawable.event_reika3);
+	    eventIdToImageResourceIdMap.put(ImageIds.EVENT_POKEMON, R.drawable.event_pokemon);
+	    eventIdToImageResourceIdMap.put(ImageIds.EVENT_COLORIDO_TYPHOON, R.drawable.event_colorido_typhoon);
+	    eventIdToImageResourceIdMap.put(ImageIds.EVENT_COLORIDO_SUN, R.drawable.event_colorido_sun);
+	    eventIdToImageResourceIdMap.put(ImageIds.EVENT_PANDORA, R.drawable.event_pandora);
     }
+
+	public List<String> getImagesList(List<String> eventImageIds) {
+		return CollectionUtils.filter(eventImageIds, new CollectionUtils.Predicate<String>() {
+			@Override
+			public boolean where(String item) {
+				return getImageResourceId(item) != null;
+			}
+		}, new LinkedList<String>());
+	}
 
     public List<Integer> getImageResourceIds(List<String> eventImageIds) {
         List<Integer> imageResourceIds = new LinkedList<>();
@@ -61,7 +90,7 @@ public class EventToImageResourceIdMapper {
         return imageResourceIds;
     }
 
-    private Integer getImageResourceId(String eventImageId) {
+    public Integer getImageResourceId(String eventImageId) {
         return eventIdToImageResourceIdMap.containsKey(eventImageId)
                 ? eventIdToImageResourceIdMap.get(eventImageId)
                 : null;

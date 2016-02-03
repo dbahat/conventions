@@ -16,10 +16,10 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-import amai.org.conventions.R;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.EventToImageResourceIdMapper;
+import amai.org.conventions.model.EventToImageResourceIdMapper.ImageIds;
 import amai.org.conventions.model.EventType;
 import amai.org.conventions.model.Hall;
 import amai.org.conventions.utils.Dates;
@@ -35,7 +35,7 @@ public class ModelParser {
 
     public List<ConventionEvent> parse(InputStreamReader reader) {
         JsonParser jp = new JsonParser();
-        EventToImageResourceIdMapper mapper = new EventToImageResourceIdMapper();
+        EventToImageResourceIdMapper mapper = Convention.getInstance().getImageMapper();
 
         JsonElement root = jp.parse(reader);
         JsonArray events = root.getAsJsonArray();
@@ -81,7 +81,7 @@ public class ModelParser {
                         .withStartTime(startTime)
                         .withEndTime(endTime)
                         .withHall(hall)
-		                .withImages(mapper.getImageResourceIds(eventDescription.getEventIds()))
+		                .withImages(mapper.getImagesList(eventDescription.getEventImageIds()))
 		                .withId(String.format("%d_%d", eventId, internalEventNumber));
 
                 // Some events (like the guest of honor event and the games event) have special pages and are not retrieved from the API
@@ -107,7 +107,7 @@ public class ModelParser {
 
                 // In case some events came up without any images at all, add a generic image to them.
                 if (conventionEvent.getImages().size() == 0) {
-                    conventionEvent.setImages(Collections.singletonList(R.drawable.event_generic));
+                    conventionEvent.setImages(Collections.singletonList(ImageIds.EVENT_GENERIC));
                 }
 
                 eventList.add(conventionEvent);
@@ -167,27 +167,27 @@ public class ModelParser {
 
         return new ParsedDescription()
                 .withDescription(filteredDescription)
-                .withEventIds(eventIds);
+                .withEventImageIds(eventIds);
     }
 
     private class ParsedDescription {
         private String description;
-        private List<String> eventIds;
+        private List<String> eventImageIds;
 
         public String getDescription() {
             return description;
         }
 
-        public List<String> getEventIds() {
-            return eventIds;
+        public List<String> getEventImageIds() {
+            return eventImageIds;
         }
 
         public void setDescription(String description) {
             this.description = description;
         }
 
-        public void setEventIds(List<String> eventIds) {
-            this.eventIds = eventIds;
+        public void setEventImageIds(List<String> eventImageIds) {
+            this.eventImageIds = eventImageIds;
         }
 
         public ParsedDescription withDescription(String description) {
@@ -195,13 +195,13 @@ public class ModelParser {
             return this;
         }
 
-        public ParsedDescription withEventIds(List<String> eventIds) {
-            setEventIds(eventIds);
+        public ParsedDescription withEventImageIds(List<String> eventIds) {
+            setEventImageIds(eventIds);
             return this;
         }
     }
 
-    private final List<Integer> guestOfHonorImageResourceIds = Arrays.asList( R.drawable.event_reika1,  R.drawable.event_reika2,  R.drawable.event_reika3);
+    private final List<String> guestOfHonorImageResourceIds = Arrays.asList(ImageIds.EVENT_REIKA1, ImageIds.EVENT_REIKA2, ImageIds.EVENT_REIKA3);
     private static final String guestOfHonorDescription = "<p>השנה, אנחנו שמחים לארח אורחת מיוחדת – רייקה, קוספליירית ידועה שמגיעה אלינו מאוסאקה שביפן.</p>\n" +
             "<p>רייקה היא קוספליירית יפנית מוכרת, ויש לה כ300 אלף עוקבים <a href=\"https://www.facebook.com/profile.php?id=315573555144954&amp;fref=ts\" target=\"_blank\">בעמוד הפייסבוק שלה</a>.</p>\n" +
             "<p>היא ידועה בעיקר בזכות הקרוספליי (קוספליי שעושה אדם ממין אחד לדמות מהמין השני) שלה, התחפושות המפורטות ומלאות הפרטים ועבודת האיפור המדוייקת.</p>\n" +
@@ -214,7 +214,7 @@ public class ModelParser {
                 .withImages(guestOfHonorImageResourceIds);
     }
 
-    private final List<Integer> gamesImageResources = Arrays.asList( R.drawable.event_pokemon );
+    private final List<String> gamesImageResources = Arrays.asList(ImageIds.EVENT_POKEMON);
     private static final String gamesEventDescription = "<p><b>טורניר TCG – משחק הקלפים של פוקימון</b></p>\n" +
             "<p>משחק הקלפים של פוקימון הוא משחק שולחני הידוע בשם TCG. הוא משלב בתוכו אספנות, החלפה ומשחק בקלפים בנושא פוקימון. יש למשחק הזה חוקים משלו, ואלה מבוססים על משחק הוידאו של פוקימון. המשחק הוא מרתק, מהנה ומלא אסטרטגיה. בעת משחק, כל שחקן אוחז ב-60 קלפים, המורכבים מקלפי פוקימון, קלפי מאמן וקלפי אנרגיה, ובאמצעותם עליו לנצח את היריב. דרך הנצחון נקבעת לפי אחת משלושת הדרכים הבאות:</p>\n" +
             "<ol>\n" +
@@ -242,7 +242,7 @@ public class ModelParser {
                 .withImages(gamesImageResources);
     }
 
-	private final List<Integer> coloridoMoviesImageResources = Arrays.asList(R.drawable.event_colorido_typhoon, R.drawable.event_colorido_sun);
+	private final List<String> coloridoMoviesImageResources = Arrays.asList(ImageIds.EVENT_COLORIDO_TYPHOON, ImageIds.EVENT_COLORIDO_SUN);
 	private final static String coloridoMoviesEventDescription = "<p><span style=\"color: #ffffff;\">סטודיו קולורידו הוא סטודיו קטן אשר ידוע בפירסומות האנימציה והסרטים הקצרים העליזים והצבעוניים אותו הפיק. ברצוננו להודות לסטודיו קולורידו (Studio Colorido) על אישור הקרנת שניים מסרטיו לקהל המבקרים של כאמ&quot;י 2015.</span></p>\n" +
 			"<h3>טייפון נורודה &#8211; Taifuu no Noruda</h3>\n" +
 			"<p><strong>שנה:</strong> 2015 <strong>אורך:</strong> 27 דקות <strong>במאי:</strong> יוג'ירו אראי <strong>אנימציה:</strong> סטודיו Colorido.</p>\n" +
@@ -264,7 +264,7 @@ public class ModelParser {
 				.withImages(coloridoMoviesImageResources);
 	}
 
-	private final List<Integer> pandoraImageResources = Arrays.asList(R.drawable.event_pandora);
+	private final List<String> pandoraImageResources = Arrays.asList(ImageIds.EVENT_PANDORA);
 	private final static String pandoraEventDescription = "<p><b>תקציר:</b></p>\n" +
 			"<p>תארו לעצמכם עולם אנושי, קר ואכזרי, שכולו צבוע בשחור ולבן, בו חלים חוקים מחמירים ועונשים כבדים על כל מי שלא עומד בתקנות. יוקי טאנמי היא נערה רגילה בת 16 אשר לומדת בפנימיית ברקת, ועושה כל שביכולתה כדי לעמוד בציפיות ולשרוד במציאות האפרורית והמדכאת אך בסתר חולמת על מקום טוב יותר.</p>\n" +
 			"<p>תארו לעצמכם ממלכה קסומה, צבעונית ומגוונת בה חיים יצורי קסם מופלאים, אשר נשלטת ביד קשה על ידיי מלך רודן. אניה דה לה פנתגרם השנייה היא הנסיכה בעולם זה, וחולמת על היום בו תהפוך למלכת פנדורה.</p>\n" +
