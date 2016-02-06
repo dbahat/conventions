@@ -45,7 +45,27 @@ public class ConventionStorage {
 
     private static Context context;
 
-    public void saveUserInput() {
+	private String getConventionFileName(String file) {
+		return Convention.getInstance().getId() + "_" + file;
+	}
+
+	private String getConventionFeedbackFileName() {
+		return getConventionFileName(CONVENTION_FEEDBACK_FILE_NAME);
+	}
+
+	private String getEventUserInputFileName() {
+		return getConventionFileName(EVENT_USER_INPUT_FILE_NAME);
+	}
+
+	public String getUpdatesFileName() {
+		return getConventionFileName(UPDATES_FILE_NAME);
+	}
+
+	public String getEventsFileName() {
+		return getConventionFileName(EVENTS_FILE_NAME);
+	}
+
+	public void saveUserInput() {
 	    Map<String, ConventionEvent.UserInput> origUserInput = Convention.getInstance().getUserInput();
 	    Map<String, ConventionEvent.UserInput> userInput = new LinkedHashMap<>();
 	    for (Map.Entry<String, ConventionEvent.UserInput> entry : origUserInput.entrySet()) {
@@ -65,7 +85,7 @@ public class ConventionStorage {
 		    }
 	    }
 
-	    savePrivateFile(createGsonSerializer().toJson(userInput), EVENT_USER_INPUT_FILE_NAME);
+	    savePrivateFile(createGsonSerializer().toJson(userInput), getEventUserInputFileName());
     }
 
 	private static Gson createGsonSerializer() {
@@ -90,19 +110,19 @@ public class ConventionStorage {
 			throw new RuntimeException(e);
 		}
 		feedback.removeUnansweredQuestions();
-		savePrivateFile(createGsonSerializer().toJson(feedback), CONVENTION_FEEDBACK_FILE_NAME);
+		savePrivateFile(createGsonSerializer().toJson(feedback), getConventionFeedbackFileName());
 	}
 
     public void saveUpdates() {
 	    String updatesJson = createGsonSerializer().toJson(Convention.getInstance().getUpdates());
-	    saveCacheFile(updatesJson, UPDATES_FILE_NAME);
+	    saveCacheFile(updatesJson, getUpdatesFileName());
     }
 
     public void saveEvents() {
 	    String eventsString = createGsonSerializer().toJson(Convention.getInstance().getEvents());
 	    filesystemAccessLock.writeLock().lock();
         try {
-            saveCacheFile(eventsString, EVENTS_FILE_NAME);
+            saveCacheFile(eventsString, getEventsFileName());
         } finally {
             filesystemAccessLock.writeLock().unlock();
         }
@@ -135,7 +155,7 @@ public class ConventionStorage {
 		}
 	}
 
-	public static void initFromFile(Context context) {
+	public void initFromFile(Context context) {
         ConventionStorage.context = context;
 
         // First get the convention events data (before reading the user input, as it requires us to have the events set).
@@ -148,11 +168,11 @@ public class ConventionStorage {
         readUpdatesFromFile();
     }
 
-    private static boolean tryReadEventsFromCache() {
-	    List<ConventionEvent> events = readJsonFromCacheFile(new TypeToken<List<ConventionEvent>>() {}.getType(), EVENTS_FILE_NAME);
+    private boolean tryReadEventsFromCache() {
+	    List<ConventionEvent> events = readJsonFromCacheFile(new TypeToken<List<ConventionEvent>>() {}.getType(), getEventsFileName());
         if (events == null) {
 			// Since we cannot read the cache file, delete it so we won't try to read it again next time
-			tryDeleteCacheFile(EVENTS_FILE_NAME);
+			tryDeleteCacheFile(getEventsFileName());
             return false;
         }
         Convention.getInstance().setEvents(events);
@@ -169,27 +189,24 @@ public class ConventionStorage {
 
     private static void readEventsFromLocalResources() {
         // No need to lock here, since we only read from the resources and only during app launch.
-	    Object result = null;
+	    List<ConventionEvent> events = null;
 	    try {
-	        result = readJsonAndClose(new TypeToken<List<ConventionEvent>>() {}.getType(),
+		    events = readJsonAndClose(new TypeToken<List<ConventionEvent>>() {}.getType(),
 			        context.getResources().openRawResource(R.raw.convention_events));
 	    } catch (Exception e) {
 		    Log.e(TAG, "Could not read initial application events cache", e);
 	    }
 
 	    // We will load it from the internet if possible
-        if (result == null) {
-	        result = new ArrayList<ConventionEvent>();
+        if (events == null) {
+	        events = new ArrayList<>();
         }
-
-        @SuppressWarnings("unchecked")
-        List<ConventionEvent> events = (List<ConventionEvent>) result;
         Convention.getInstance().setEvents(events);
     }
 
-    private static void readUserInputFromFile() {
+    private void readUserInputFromFile() {
 	    Map<String, ConventionEvent.UserInput> result =
-			    readJsonFromFile(new TypeToken<Map<String, ConventionEvent.UserInput>>() {}.getType(), EVENT_USER_INPUT_FILE_NAME);
+			    readJsonFromFile(new TypeToken<Map<String, ConventionEvent.UserInput>>() {}.getType(), getEventUserInputFileName());
         if (result == null) {
             return;
         }
@@ -204,8 +221,8 @@ public class ConventionStorage {
 	    }
     }
 
-	private static void readConventionFeedbackFromFile() {
-		Feedback result = readJsonFromFile(Feedback.class, CONVENTION_FEEDBACK_FILE_NAME);
+	private void readConventionFeedbackFromFile() {
+		Feedback result = readJsonFromFile(Feedback.class, getConventionFeedbackFileName());
 		if (result == null) {
 			return;
 		}
@@ -223,8 +240,8 @@ public class ConventionStorage {
 		}
 	}
 
-	private static void readUpdatesFromFile() {
-		List<Update> updates = readJsonFromCacheFile(new TypeToken<List<Update>>() {}.getType(), UPDATES_FILE_NAME);
+	private void readUpdatesFromFile() {
+		List<Update> updates = readJsonFromCacheFile(new TypeToken<List<Update>>() {}.getType(), getUpdatesFileName());
         if (updates == null) {
             return;
         }

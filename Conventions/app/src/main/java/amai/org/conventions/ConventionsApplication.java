@@ -16,7 +16,6 @@ import java.util.Map;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.EventNotification;
-import amai.org.conventions.utils.ConventionStorage;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Settings;
 
@@ -33,7 +32,7 @@ public class ConventionsApplication extends Application {
         super.onCreate();
 
         Locale.setDefault(Dates.getLocale());
-        ConventionStorage.initFromFile(this);
+        Convention.getInstance().getStorage().initFromFile(this);
 
 	    if (!BuildConfig.DEBUG) {
 		    GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);

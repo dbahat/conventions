@@ -5,7 +5,7 @@
     tools:context="amai.org.conventions.map.MapActivity"
     android:orientation="vertical">
 
-    <fr.castorflex.android.verticalviewpager.VerticalViewPager
+    <amai.org.conventions.customviews.NoSwipeVerticalViewPager
         android:id="@+id/map_view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

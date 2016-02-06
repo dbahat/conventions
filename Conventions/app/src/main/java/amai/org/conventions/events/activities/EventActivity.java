@@ -221,10 +221,15 @@ public class EventActivity extends NavigationActivity {
 				userInput.getEventAboutToStartNotification().isEnabled() ||
 				userInput.getEventFeedbackReminderNotification().isEnabled()) {
 		    MenuItem alarmsItem = menu.findItem(R.id.event_configure_notifications);
-			alarmsItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+			// We might have removed the notifications item when entering the screen. In that case, don't display it.
+			if (alarmsItem != null) {
+				alarmsItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+			}
 		} else {
 			MenuItem alarmsItem = menu.findItem(R.id.event_configure_notifications);
-			alarmsItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+			if (alarmsItem != null) {
+				alarmsItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+			}
 		}
 	}
 
@@ -310,7 +315,7 @@ public class EventActivity extends NavigationActivity {
 	        Snackbar.make(this.mainLayout, R.string.event_removed_from_favorites, Snackbar.LENGTH_SHORT).show();
 	    } else {
 	        userInput.setAttending(true);
-						ConventionsApplication.alarmScheduler.scheduleDefaultEventAlarms(conventionEvent);
+			ConventionsApplication.alarmScheduler.scheduleDefaultEventAlarms(conventionEvent);
 	        item.setIcon(getResources().getDrawable(android.R.drawable.btn_star_big_on));
 	        item.setTitle(getResources().getString(R.string.event_remove_from_favorites));
 	        Snackbar.make(this.mainLayout, R.string.event_added_to_favorites, Snackbar.LENGTH_SHORT).show();

@@ -34,6 +34,7 @@ public class Convention implements Serializable {
 
     private ConventionMap map;
     private Calendar date;
+	private String id;
 
     private ReentrantReadWriteLock eventLockObject = new ReentrantReadWriteLock();
     private ConventionStorage conventionStorage;
@@ -66,6 +67,7 @@ public class Convention implements Serializable {
         this.date = Calendar.getInstance();
 	    this.date.clear();
         this.date.set(2016, Calendar.MARCH, 24);
+		this.id = "Harucon2016";
         this.feedbackRecipient = "content@cami.org.il";
 
 	    Hall mainHall = new Hall().withName("אולם ראשי").withOrder(1);
@@ -207,6 +209,10 @@ public class Convention implements Serializable {
     public Calendar getDate() {
         return date;
     }
+
+	public String getId() {
+		return id;
+	}
 
 	public Feedback getFeedback() {
 		return feedback;

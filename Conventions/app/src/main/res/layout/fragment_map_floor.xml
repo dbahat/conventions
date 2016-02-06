@@ -52,33 +52,27 @@
         </FrameLayout>
 
         <!-- This view must have software rendering because the ImageLayout inside it also has
-             software rendering and if it's too big it is not displayed.
-             The layout direction is ltr because of a bug in Jellybean where only the right side
-             of the map was displayed in rtl. -->
-        <HorizontalScrollView
-            android:id="@+id/horizontal_scroll_view"
-            android:visibility="gone"
+             software rendering and if it's too big it is not displayed. -->
+        <pl.polidea.view.ZoomView
+            android:id="@+id/map_zoom_view"
+            android:visibility="invisible"
             android:layerType="software"
-            android:layoutDirection="ltr"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-                <!-- Using match_parent on the height since in default we want the map to
-                appear "zoomed-out", and only redraw with full size if clicking "zoom-in" -->
-                <com.manuelpeinado.imagelayout.ImageLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/map_floor_image"
-                    android:padding="5dp"
-                    android:gravity="center"
-                    custom:image="@drawable/floor1"
-                    custom:fit="auto"
-                    custom:imageWidth="100"
-                    custom:imageHeight="100"
-                    tools:ignore="ScrollViewSize">
-                </com.manuelpeinado.imagelayout.ImageLayout>
-        </HorizontalScrollView>
-
+            <com.manuelpeinado.imagelayout.ImageLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/map_floor_image"
+                android:padding="5dp"
+                android:gravity="center"
+                custom:image="@drawable/floor1"
+                custom:fit="auto"
+                custom:imageWidth="100"
+                custom:imageHeight="100"
+                tools:ignore="ScrollViewSize">
+            </com.manuelpeinado.imagelayout.ImageLayout>
+        </pl.polidea.view.ZoomView>
 
         <amai.org.conventions.customviews.InterceptorLinearLayout
             android:id="@+id/location_details"

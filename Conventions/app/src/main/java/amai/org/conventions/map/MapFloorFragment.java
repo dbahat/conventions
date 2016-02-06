@@ -23,7 +23,6 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -39,8 +38,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import amai.org.conventions.ConventionsApplication;
-import amai.org.conventions.R;
 import amai.org.conventions.ImageHandler;
+import amai.org.conventions.R;
 import amai.org.conventions.customviews.AspectRatioSVGImageView;
 import amai.org.conventions.customviews.InterceptorLinearLayout;
 import amai.org.conventions.events.EventView;
@@ -54,6 +53,7 @@ import amai.org.conventions.model.Hall;
 import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.model.Place;
 import amai.org.conventions.utils.Dates;
+import pl.polidea.view.ZoomView;
 
 /**
  * A fragment showing a single map floor
@@ -63,12 +63,16 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
     private static final String ARGS_FLOOR_NUMBER = "FloorNumber";
 	private static final String STATE_SELECTED_LOCATIONS = "StateSelectedLocation";
 	private static final String STATE_LOCATION_DETAILS_OPEN = "StateLocationDetailsOpen";
-	private static final String STATE_MAP_FLOOR_ZOOMED = "StateMapFloorZoomed";
+	private static final String STATE_MAP_FLOOR_ZOOM_FACTOR = "StateMapFloorZoomFactor";
+	private static final String STATE_MAP_FLOOR_ZOOM_X = "StateMapFloorZoomX";
+	private static final String STATE_MAP_FLOOR_ZOOM_Y = "StateMapFloorZoomY";
 
 	private static boolean showAnimation = true;
 
+	private static float MAX_ZOOM = 2.5f;
+
 	private View progressBar;
-	private HorizontalScrollView scrollView;
+	private ZoomView mapZoomView;
     private ImageLayout mapFloorImage;
     private View upArrow;
     private View downArrow;
@@ -99,46 +103,33 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
         resolveUIElements(view);
 	    initializeLocationDetails();
         initializeUpAndDownButtons();
-	    setMapClickListeners(mapFloorImage);
+	    setMapClickListeners();
         configureMapFloorAndRestoreState(savedInstanceState);
 	    return view;
     }
 
 	private void changeMapZoom(boolean zoomIn) {
-		ViewGroup.LayoutParams layoutParams = mapFloorImage.getLayoutParams();
-		layoutParams.width = zoomIn ? ViewGroup.LayoutParams.WRAP_CONTENT : ViewGroup.LayoutParams.MATCH_PARENT;
-		mapFloorImage.setLayoutParams(layoutParams);
-
 		if (zoomIn) {
-			scrollView.post(new Runnable() {
-				@Override
-				public void run() {
-					// Find a selected marker and center it
-					ImageView view = null;
-					for (Marker marker : floorMarkers) {
-						if (marker.isSelected()) {
-							view = marker.getImageView();
-							break;
-						}
-					}
-
-					if (view == null) {
-						// If no views are selected, show the beginning (right side) of the map.
-						// This is necessary because the HorizontalScrollView displays the left side
-						// by default regardless of the layout direction.
-						scrollView.fullScroll(View.FOCUS_RIGHT);
-					} else {
-						int scrollViewWidth = scrollView.getMeasuredWidth();
-						int scrollX = (view.getLeft() - (scrollViewWidth / 2)) + (view.getWidth() / 2);
-						scrollView.smoothScrollTo(scrollX, scrollView.getScrollY());
-					}
+			// Find a selected marker and center it
+			ImageView view = null;
+			for (Marker marker : floorMarkers) {
+				if (marker.isSelected()) {
+					view = marker.getImageView();
+					break;
 				}
-			});
+			}
+			if (view == null) {
+				mapZoomView.smoothZoomTo(MAX_ZOOM, mapZoomView.getWidth() / 2, mapZoomView.getHeight() / 2);
+			} else {
+				mapZoomView.smoothZoomTo(MAX_ZOOM, view.getX(), view.getY());
+			}
+		} else {
+			mapZoomView.smoothZoomTo(1.0f, mapZoomView.getWidth() / 2, mapZoomView.getHeight() / 2);
 		}
 	}
 
 	private boolean isMapZoomedIn() {
-		return mapFloorImage.getLayoutParams().width == ViewGroup.LayoutParams.WRAP_CONTENT;
+		return mapZoomView.getZoom() > 1.0f;
 	}
 
 	@Override
@@ -174,7 +165,9 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		}
 		outState.putIntegerArrayList(STATE_SELECTED_LOCATIONS, selectedLocationIDs);
 		outState.putBoolean(STATE_LOCATION_DETAILS_OPEN, locationDetails.getVisibility() == View.VISIBLE);
-		outState.putBoolean(STATE_MAP_FLOOR_ZOOMED, isMapZoomedIn());
+		outState.putFloat(STATE_MAP_FLOOR_ZOOM_FACTOR, mapZoomView.getZoom());
+		outState.putFloat(STATE_MAP_FLOOR_ZOOM_X, mapZoomView.getZoomFocusX() / mapZoomView.getWidth());
+		outState.putFloat(STATE_MAP_FLOOR_ZOOM_Y, mapZoomView.getZoomFocusY() / mapZoomView.getHeight());
 
 		super.onSaveInstanceState(outState);
 	}
@@ -227,7 +220,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
     private void resolveUIElements(View view) {
 	    progressBar = view.findViewById(R.id.floor_loading_progress_bar);
-	    scrollView = (HorizontalScrollView) view.findViewById(R.id.horizontal_scroll_view);
+	    mapZoomView = (ZoomView) view.findViewById(R.id.map_zoom_view);
         mapFloorImage = (ImageLayout) view.findViewById(R.id.map_floor_image);
         upArrow = view.findViewById(R.id.map_floor_up);
         downArrow = view.findViewById(R.id.map_floor_down);
@@ -364,6 +357,8 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 	    boolean isBottomFloor = floor.getNumber() == map.getBottomFloor().getNumber();
 	    downArrow.setVisibility(isBottomFloor ? View.GONE : View.VISIBLE);
 
+	    mapZoomView.setMaxZoom(MAX_ZOOM);
+
 	    // Load images in background
 	    new AsyncTask<Void, Void, Boolean>() {
 		    SVG svg = null;
@@ -421,7 +416,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 	            restoreState(savedInstanceState);
 
 			    progressBar.setVisibility(View.GONE);
-			    scrollView.setVisibility(View.VISIBLE);
+			    mapZoomView.setVisibility(View.VISIBLE);
 		    }
 	    }.execute();
     }
@@ -446,8 +441,11 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 				setSelectedLocationDetails(selectedLocation);
 			}
 
-			if (savedInstanceState.getBoolean(STATE_MAP_FLOOR_ZOOMED)) {
-				changeMapZoom(true);
+			float zoomFactor = savedInstanceState.getFloat(STATE_MAP_FLOOR_ZOOM_FACTOR, 1.0f);
+			if (zoomFactor > 1.0f) {
+				float zoomX = savedInstanceState.getFloat(STATE_MAP_FLOOR_ZOOM_X) * mapZoomView.getWidth();
+				float zoomY = savedInstanceState.getFloat(STATE_MAP_FLOOR_ZOOM_Y) * mapZoomView.getHeight();
+				mapZoomView.zoomTo(zoomFactor, zoomX / zoomFactor, zoomY / zoomFactor);
 			}
 		}
 	}
@@ -534,15 +532,9 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		setSelectedLocationDetails(marker.getLocation());
 	}
 
-	private void setMapClickListeners(View view) {
-		view.setOnTouchListener(new View.OnTouchListener() {
+	private void setMapClickListeners() {
+		mapFloorImage.setOnTouchListener(new View.OnTouchListener() {
 			private GestureDetector gestureDetector = new GestureDetector(appContext, new GestureDetector.SimpleOnGestureListener() {
-				@Override
-				public boolean onDoubleTap(MotionEvent e) {
-					changeMapZoom(!isMapZoomedIn());
-					return true;
-				}
-
 				@Override
 				public boolean onSingleTapConfirmed(MotionEvent e) {
 					for (Marker marker : floorMarkers) {
