@@ -14,9 +14,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.MotionEventCompat;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
@@ -71,6 +68,8 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
 	private static float MAX_ZOOM = 2.5f;
 
+	private Floor floor;
+
 	private View progressBar;
 	private ZoomView mapZoomView;
     private ImageLayout mapFloorImage;
@@ -107,6 +106,14 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
         configureMapFloorAndRestoreState(savedInstanceState);
 	    return view;
     }
+
+	public Floor getFloor() {
+		return floor;
+	}
+
+	public void toggleMapZoom() {
+		changeMapZoom(!isMapZoomedIn());
+	}
 
 	private void changeMapZoom(boolean zoomIn) {
 		if (zoomIn) {
@@ -150,8 +157,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
     @Override
     public void onDetach() {
-        super.onDetach();
-
+	    super.onDetach();
         mapArrowClickedListener = null;
     }
 
@@ -171,23 +177,6 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
 		super.onSaveInstanceState(outState);
 	}
-
-	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		super.onCreateOptionsMenu(menu, inflater);
-		inflater.inflate(R.menu.menu_map, menu);
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			case R.id.map_floor_zoom_to_fit:
-				changeMapZoom(!isMapZoomedIn());
-				return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
-
 
 	public static MapFloorFragment newInstance(int floor) {
         MapFloorFragment fragment = new MapFloorFragment();
@@ -348,7 +337,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
     private void configureMapFloorAndRestoreState(final Bundle savedInstanceState) {
         int mapFloor = getArguments().getInt(ARGS_FLOOR_NUMBER);
 	    final ConventionMap map = Convention.getInstance().getMap();
-	    final Floor floor = map.findFloorByNumber(mapFloor);
+	    floor = map.findFloorByNumber(mapFloor);
 
 	    // Add up and down arrows
 	    boolean isTopFloor = floor.getNumber() == map.getTopFloor().getNumber();
@@ -504,6 +493,40 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		} else {
 			// Save it for later use
 			locationToSelect = location;
+		}
+	}
+
+	public void resetState() {
+		for (Marker marker : floorMarkers) {
+			marker.deselect();
+		}
+		setSelectedLocationDetails(null);
+		changeMapZoom(false);
+	}
+
+	public void selectMarkersWithNameAndFloor(List<MapLocation> locations) {
+		if (locations == null || locations.isEmpty()) {
+			for (Marker marker : floorMarkers) {
+				marker.deselect();
+			}
+			return;
+		}
+
+		// Select sent locations and deselect everything else.
+		// Don't deselect then reselect the same marker.
+		MapLocationSearchEquality comparator = new MapLocationSearchEquality();
+		for (Marker marker : floorMarkers) {
+			boolean selected = false;
+			for (MapLocation location : locations) {
+				if (comparator.equals(location, marker.getLocation())) {
+					marker.select();
+					selected = true;
+					break;
+				}
+			}
+			if (!selected) {
+				marker.deselect();
+			}
 		}
 	}
 

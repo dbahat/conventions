@@ -1,5 +1,7 @@
 package amai.org.conventions.model;
 
+import amai.org.conventions.utils.Objects;
+
 public class Floor {
 	private int number;
 	private String name;
@@ -51,5 +53,21 @@ public class Floor {
 	public Floor withMarkerHeight(int markerHeight) {
 		setMarkerHeight(markerHeight);
 		return this;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof Floor)) {
+			return false;
+		}
+
+		Floor other = (Floor) o;
+
+		return other.getNumber() == this.getNumber() && Objects.equals(other.getName(), this.getName());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(getNumber(), getName());
 	}
 }

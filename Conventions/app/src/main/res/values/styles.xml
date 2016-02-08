@@ -1,15 +1,4 @@
 <resources>
-    <style name="MainActivityOverlayText">
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">40dp</item>
-        <item name="android:shadowColor">?toolbarBackground</item>
-        <item name="android:shadowDx">1</item>
-        <item name="android:shadowDy">1</item>
-        <item name="android:shadowRadius">20</item>
-        <item name="android:gravity">center</item>
-    </style>
-
     <style name="ToolbarNavigationButtonStyle" parent="@style/Widget.AppCompat.Toolbar.Button.Navigation">
         <item name="android:scaleType">fitEnd</item>
     </style>

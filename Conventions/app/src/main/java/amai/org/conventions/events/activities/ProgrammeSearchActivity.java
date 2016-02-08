@@ -1,6 +1,5 @@
 package amai.org.conventions.events.activities;
 
-import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,10 +9,7 @@ import android.text.Html;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -31,6 +27,7 @@ import amai.org.conventions.model.ConventionEventComparator;
 import amai.org.conventions.model.EventType;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.CollectionUtils;
+import amai.org.conventions.utils.Views;
 
 public class ProgrammeSearchActivity extends NavigationActivity {
 
@@ -63,7 +60,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 
         applyFiltersInBackground();
 
-        hideKeyboardOnClickOutsideEditText(rootView);
+        Views.hideKeyboardOnClickOutsideEditText(this, rootView);
     }
 
     @Override
@@ -122,12 +119,10 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 
 	        @Override
 	        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
 	        }
 
 	        @Override
 	        public void onTextChanged(CharSequence s, int start, int before, int count) {
-
 	        }
 
 	        @Override
@@ -195,11 +190,6 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 		}
 	}
 
-	private void hideKeyboard(View view) {
-        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-    }
-
     private boolean containsKeywords(ConventionEvent event) {
         boolean result = true;
 
@@ -220,25 +210,5 @@ public class ProgrammeSearchActivity extends NavigationActivity {
                 || event.getLecturer().toLowerCase().contains(keyword)
                 || event.getHall().getName().toLowerCase().contains(keyword)
                 || filteredEventDescription.toLowerCase().contains(keyword);
-    }
-
-    private void hideKeyboardOnClickOutsideEditText(View view) {
-        //Set up touch listener for non-text box views to hide keyboard.
-        if (!(view instanceof EditText)) {
-            view.setOnTouchListener(new View.OnTouchListener() {
-                public boolean onTouch(View v, MotionEvent event) {
-                    hideKeyboard(v);
-                    return false;
-                }
-            });
-        }
-
-        //If a layout container, iterate over children and seed recursion.
-        if (view instanceof ViewGroup) {
-            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
-                View innerView = ((ViewGroup) view).getChildAt(i);
-                hideKeyboardOnClickOutsideEditText(innerView);
-            }
-        }
     }
 }

@@ -119,17 +119,17 @@ public class Convention implements Serializable {
 				                                .withX(49)
 				                                .withY(7),
 		                                new MapLocation()
-				                                .withPlace(auditorium)
-				                                .withMarkerResource(R.raw.schwartz_marker)
-				                                .withSelectedMarkerResource(R.raw.schwartz_marker_selected)
-				                                .withX(30)
-				                                .withY(49),
-		                                new MapLocation()
 				                                .withPlace(eshkol1)
 				                                .withMarkerResource(R.raw.eshkol1_marker)
 				                                .withSelectedMarkerResource(R.raw.eshkol1_marker_selected)
 				                                .withX(26)
 				                                .withY(54),
+		                                new MapLocation()
+				                                .withPlace(auditorium)
+				                                .withMarkerResource(R.raw.schwartz_marker)
+				                                .withSelectedMarkerResource(R.raw.schwartz_marker_selected)
+				                                .withX(30)
+				                                .withY(49),
 		                                new MapLocation()
 				                                .withPlace(new Place().withName("שירותים"))
 				                                .withMarkerResource(R.raw.toilet_marker)
@@ -425,8 +425,10 @@ public class Convention implements Serializable {
 
 	public List<EventType> getEventTypes() {
 		HashSet<EventType> eventTypes = new HashSet<>();
-		for (ConventionEvent event : events) {
-			eventTypes.add(event.getType());
+		if (events != null) {
+			for (ConventionEvent event : events) {
+				eventTypes.add(event.getType());
+			}
 		}
 
 		List<EventType> eventTypeList = new ArrayList<>(eventTypes);

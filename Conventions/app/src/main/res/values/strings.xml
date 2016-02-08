@@ -71,7 +71,7 @@
     <string name="navigate">ניווט</string>
     <string name="display_feedback">הצג פידבק</string>
     <string name="display">הצג</string>
-    <string name="zoom_to_fit">התאם לגודל החלון</string>
+    <string name="zoom_to_fit">שנה גודל</string>
     <string name="no_navigation_activity">לא נמצאה אפליקציה מתאימה לניווט</string>
     <string name="share_no_events">הוסף אירועים כדי לשתף</string>
     <string name="ok">אישור</string>
@@ -106,4 +106,6 @@
     <string name="app_version">גרסה: %s</string>
     <string name="add_anyway">הוסף בכל זאת</string>
     <string name="free_time">זמן פנוי: %s</string>
+    <string name="map_floor_search_title">חיפוש במפה</string>
+    <string name="show_only_halls">הצג אולמות בלבד</string>
 </resources>

@@ -2,9 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/map_floor_search"
+        android:title="@string/map_floor_search_title"
+        android:icon="@drawable/ic_action_search"
+        android:orderInCategory="1"
+        app:showAsAction="always"/>
+    <item
         android:id="@+id/map_floor_zoom_to_fit"
         android:title="@string/zoom_to_fit"
         android:icon="@drawable/zoom_to_fit"
-        android:orderInCategory="1"
+        android:orderInCategory="2"
         app:showAsAction="always"/>
 </menu>
