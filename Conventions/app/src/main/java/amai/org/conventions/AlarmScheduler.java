@@ -115,8 +115,9 @@ public class AlarmScheduler {
     }
 
 	private void scheduleAlarm(long time, PendingIntent pendingIntent, Accuracy accuracy) {
+		// For Kitkat and above, the AlarmService batches notifications to improve battery life at the cost of alarm accuracy
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-			scheduleAlarmKitkat(time, pendingIntent, accuracy);
+			scheduleInaccurateAlarm(time, pendingIntent, accuracy);
 		} else {
 			scheduleAlarm(time, pendingIntent);
 		}
@@ -124,8 +125,7 @@ public class AlarmScheduler {
 
 
 	@TargetApi(Build.VERSION_CODES.KITKAT)
-    private void scheduleAlarmKitkat(long time, PendingIntent pendingIntent, Accuracy accuracy) {
-        // For Kitkat and above, the AlarmService batches notifications to improve battery life at the cost of alarm accuracy.
+    private void scheduleInaccurateAlarm(long time, PendingIntent pendingIntent, Accuracy accuracy) {
         // Since event start notification time is important, schedule them using setWindow, which gives an exact window of time,
         // allowing for some optimization while being accurate enough.
 		long length;

@@ -33,6 +33,8 @@
     <style name="AppBaseTheme.Cami2015.Toolbar"/>
 
     <style name="AppBaseTheme.Cami2015">
+        <item name="notificationSmallIcon">@drawable/cami_logo_small_white</item>
+        <item name="notificationLargeIcon">@drawable/cami_logo_app_icon</item>
         <item name="toolbarBackground">@color/maroon</item>
         <item name="toolbarLogo">@drawable/cami_logo_toolbar</item>
         <item name="toolbarLogoType">bitmap</item>

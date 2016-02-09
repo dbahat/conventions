@@ -46,7 +46,7 @@ public class ImageHandler {
         // Resizing the notification icon, since we don't wish to include an image per screen density, and the notification area doesn't auto-resize
         // the large icon.
         notificationLargeIcon = resizeBitmap(
-                context.getResources().getDrawable(R.drawable.cami_logo_app_icon),
+                ThemeAttributes.getDrawable(context, R.attr.notificationLargeIcon),
                 context.getResources().getDimensionPixelSize(R.dimen.notification_large_icon_size));
         return notificationLargeIcon;
     }
@@ -59,7 +59,7 @@ public class ImageHandler {
         Drawable drawable = ThemeAttributes.getDrawable(context, R.attr.toolbarLogo);
         // The scaling doesn't work properly for the toolbar icon (the width remains the original size)
         // so we have to resize it manually
-        Bitmap bitmapResized = resizeBitmap(drawable, ThemeAttributes.getDimentionSize(context, R.attr.actionBarSize));
+        Bitmap bitmapResized = resizeBitmap(drawable, ThemeAttributes.getDimensionSize(context, R.attr.actionBarSize));
         toolbarLogo = new BitmapDrawable(context.getResources(), bitmapResized);
         return toolbarLogo;
     }

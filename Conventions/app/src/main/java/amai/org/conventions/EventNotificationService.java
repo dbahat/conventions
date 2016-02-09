@@ -37,11 +37,15 @@ public class EventNotificationService extends Service {
         super.onCreate();
 
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+	    // Set the theme programatically because it's not attached by definition to the service's context.
+	    // We need the theme to access image resources for the notification.
+	    setTheme(getApplicationInfo().theme);
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if (intent.getBooleanExtra(EXTRA_IS_END_OF_CONVENTION_NOTIFICATION, false)) {
+	    if (intent.getBooleanExtra(EXTRA_IS_END_OF_CONVENTION_NOTIFICATION, false)) {
             showFillConventionFeedbackNotification();
 
             stopSelf();
@@ -107,7 +111,7 @@ public class EventNotificationService extends Service {
                 .setContentIntent(PendingIntent.getActivity(this, 0, intent, 0));
 
         if (Build.VERSION.SDK_INT >= 20) {
-            builder.setGroup("cami_2015_send_event_feedback");
+            builder.setGroup(Convention.getInstance().getId() + "_send_event_feedback");
         }
 
         Notification notification = new Notification.BigTextStyle(builder)
@@ -125,7 +129,7 @@ public class EventNotificationService extends Service {
                 .putExtra(EventActivity.EXTRA_FOCUS_ON_FEEDBACK, false);
 
         Notification.Builder builder = new Notification.Builder(this)
-                .setSmallIcon(R.drawable.cami_logo_small_white)
+                .setSmallIcon(ThemeAttributes.getResourceId(getBaseContext(), R.attr.notificationSmallIcon))
                 .setLargeIcon(ImageHandler.getNotificationLargeIcon(this))
                 .setContentTitle(getResources().getString(R.string.notification_event_about_to_start_title))
                 .setContentText(getEventAboutToStartNotificationText(event))
@@ -135,7 +139,7 @@ public class EventNotificationService extends Service {
                 .setContentIntent(PendingIntent.getActivity(this, 0, intent, 0));
 
         if (Build.VERSION.SDK_INT >= 20) {
-            builder.setGroup("cami_2015_event_about_to_start");
+            builder.setGroup(Convention.getInstance().getId() + "_event_about_to_start");
         }
 
         Notification notification = new Notification.BigTextStyle(builder)
