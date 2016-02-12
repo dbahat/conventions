@@ -81,13 +81,13 @@ public class EventNotificationService extends Service {
                 .setSmallIcon(R.drawable.cami_logo_small_white)
                 .setLargeIcon(ImageHandler.getNotificationLargeIcon(this))
                 .setContentTitle(getString(R.string.notification_event_ended_title))
-                .setContentText(getString(R.string.notification_feedback_ended_message))
+                .setContentText(getString(R.string.notification_feedback_ended_message, Convention.getInstance().getDisplayName()))
                 .setAutoCancel(true)
                 .setContentIntent(PendingIntent.getActivity(this, 0, intent, 0))
                 .setDefaults(Notification.DEFAULT_VIBRATE);
 
         Notification notification = new Notification.BigTextStyle(builder)
-                .bigText(getString(R.string.notification_feedback_ended_message))
+                .bigText(getString(R.string.notification_feedback_ended_message, Convention.getInstance().getDisplayName()))
                 .build();
 
         notificationManager.notify(FILL_CONVENTION_FEEDBACK_NOTIFICATION_ID, notification);

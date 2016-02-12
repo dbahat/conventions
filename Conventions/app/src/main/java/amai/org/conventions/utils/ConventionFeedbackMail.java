@@ -18,7 +18,7 @@ public class ConventionFeedbackMail extends FeedbackMail {
 
 	@Override
 	protected String getSubject() {
-		return context.getString(R.string.convention_feedback_mail_title);
+		return context.getString(R.string.convention_feedback_mail_title, Convention.getInstance().getDisplayName());
 	}
 
 	@Override

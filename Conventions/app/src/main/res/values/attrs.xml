@@ -33,6 +33,8 @@
         <attr name="eventsHomeImage" format="integer"/>
         <attr name="updatesHomeImage" format="integer"/>
         <attr name="arrivalMethodsHomeImage" format="integer"/>
+        <!-- About screen -->
+        <attr name="amaiLogo" format="integer"/>
         <!-- Event Time -->
         <attr name="eventTypeEndedColor" format="color|reference"/>
         <attr name="eventTypeCurrentColor" format="color|reference"/>

@@ -19,7 +19,7 @@ public class AboutFragment extends DialogFragment {
 			"<p><a href=\"http://2015.cami.org.il/\">לאתר הכנס</a></p>" +
 			"<p><a href=\"http://2015.cami.org.il/%D7%A7%D7%A8%D7%93%D7%99%D7%98%D7%99%D7%9D/\">קרדיטים לאומנים</a></p>";
 
-	private final static String aboutAppText = "האפליקציה פותחה עבור כנס כאמ\"י 2015.<br/>בקשות והצעות ניתן לכתוב <a href=\"market://details?id=amai.org.conventions\">בדף האפליקציה בחנות</a>.";
+	private final static String aboutAppText = "האפליקציה פותחה עבור כנס הארוקון 2016.<br/>בקשות והצעות ניתן לכתוב <a href=\"market://details?id=amai.org.conventions\">בדף האפליקציה בחנות</a>.";
 
 	private WindowManager.LayoutParams layoutParams = null;
 

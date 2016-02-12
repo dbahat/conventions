@@ -35,7 +35,6 @@ public class UpdatesRefresher {
 	private static UpdatesRefresher instance = null;
 
 	private static final String TAG = UpdatesRefresher.class.getSimpleName();
-	private static final String CAMI_EVENT_FEED_PATH = "/cami.org.il/posts";
 	private boolean isRefreshInProgress = false;
 	private boolean enableNotificationAfterUpdate;
 
@@ -80,7 +79,7 @@ public class UpdatesRefresher {
 
 		GraphRequest request = GraphRequest.newGraphPathRequest(
 				accessToken,
-				CAMI_EVENT_FEED_PATH,
+				Convention.getInstance().getFacebookFeedPath(),
 				new GraphRequest.Callback() {
 					@Override
 					public void onCompleted(GraphResponse graphResponse) {

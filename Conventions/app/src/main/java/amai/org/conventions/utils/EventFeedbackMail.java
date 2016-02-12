@@ -3,6 +3,7 @@ package amai.org.conventions.utils;
 import android.content.Context;
 
 import amai.org.conventions.R;
+import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.Feedback;
 
@@ -21,7 +22,7 @@ public class EventFeedbackMail extends FeedbackMail {
 
 	@Override
 	protected String getSubject() {
-		return context.getString(R.string.event_feedback_mail_title) + ": " + event.getTitle();
+		return context.getString(R.string.event_feedback_mail_title, Convention.getInstance().getDisplayName()) + ": " + event.getTitle();
 	}
 
 	@Override

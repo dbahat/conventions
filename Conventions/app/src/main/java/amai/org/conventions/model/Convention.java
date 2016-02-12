@@ -1,6 +1,9 @@
 package amai.org.conventions.model;
 
+import android.content.Context;
+
 import java.io.Serializable;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -15,29 +18,35 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import amai.org.conventions.R;
+import amai.org.conventions.model.conventions.Harucon2016Convention;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 import amai.org.conventions.utils.Dates;
 
-public class Convention implements Serializable {
+public abstract class Convention implements Serializable {
 
-    private static Convention convention = new Convention();
+    private static Convention convention = new Harucon2016Convention();
 
     private List<Hall> halls;
-    private List<ConventionEvent> events;
-    private List<Update> updates;
+	private List<ConventionEvent> events;
+	private List<Update> updates;
 	private Map<String, Update> updatesById;
 	private Map<String, ConventionEvent.UserInput> userInput;
 	private Feedback feedback;
-    private String feedbackRecipient;
+	private String feedbackRecipient;
 
-    private ConventionMap map;
-    private Calendar date;
+	private ConventionMap map;
+	private Calendar date;
 	private String id;
+	private String displayName;
+	private URL modelURL;
+	private String facebookFeedPath;
 
-    private ReentrantReadWriteLock eventLockObject = new ReentrantReadWriteLock();
-    private ConventionStorage conventionStorage;
+	private double longitude;
+	private double latitude;
+
+	private ReentrantReadWriteLock eventLockObject = new ReentrantReadWriteLock();
+	private ConventionStorage conventionStorage;
 	private EventToImageResourceIdMapper imageMapper;
 
     public static Convention getInstance() {
@@ -52,159 +61,70 @@ public class Convention implements Serializable {
 		return imageMapper;
 	}
 
-	public Convention() {
-        this.conventionStorage = new ConventionStorage();
-		this.imageMapper = new EventToImageResourceIdMapper();
-	    this.userInput = new LinkedHashMap<>();
-	    feedback = new Feedback().withQuestions(
+	public URL getModelURL() {
+		return modelURL;
+	}
+
+	public String getFacebookFeedPath() {
+		return facebookFeedPath;
+	}
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+	protected Convention() {
+		this.userInput = new LinkedHashMap<>();
+		updates = new ArrayList<>();
+		updatesById = new HashMap<>();
+
+		initFeedback();
+    }
+
+	private void initFeedback() {
+		feedback = new Feedback().withQuestions(
 				new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_AGE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS),
 				new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_LIKED, FeedbackQuestion.AnswerType.SMILEY_3_POINTS),
 				new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_MAP_SIGNS, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS),
 				new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_CONFLICTING_EVENTS, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO),
 				new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_IMPROVEMENT, FeedbackQuestion.AnswerType.TEXT)
 		);
+	}
 
-        this.date = Calendar.getInstance();
-	    this.date.clear();
-        this.date.set(2016, Calendar.MARCH, 24);
-		this.id = "Harucon2016";
-        this.feedbackRecipient = "content@cami.org.il";
+	public void load(Context context) {
+		this.conventionStorage = initStorage();
+		this.imageMapper = initImageMapper();
+		this.date = initDate();
+		this.id = initID();
+		this.displayName = initDisplayName();
+		this.feedbackRecipient = initFeedbackRecipient();
+		this.modelURL = initModelURL();
+		this.facebookFeedPath = initFacebookFeedPath();
+		// This list can be modified
+		this.halls = new ArrayList<>(initHalls());
+		this.map = initMap();
+		this.longitude = initLongitude();
+		this.latitude = initLatitude();
 
-	    Hall mainHall = new Hall().withName("אולם ראשי").withOrder(1);
-        Hall auditorium = new Hall().withName("אודיטוריום שוורץ").withOrder(2);
-        Hall eshkol1 = new Hall().withName("אשכול 1").withOrder(3);
-        Hall eshkol2 = new Hall().withName("אשכול 2").withOrder(4);
-        Hall games = new Hall().withName("משחקייה").withOrder(5);
-        Hall specialEvents = new Hall().withName("אירועים מיוחדים").withOrder(6);
+		getStorage().initFromFile(context);
+	}
 
-	    // This list can be modified
-        this.halls = new ArrayList<>(Arrays.asList(mainHall, auditorium, eshkol1, eshkol2, games, specialEvents));
-
-        Floor floor1 = new Floor(1).withName("מפלס תחתון וקומת ביניים").withImageResource(R.raw.cami_floor1).withMarkerHeight(13);
-        Floor floor2 = new Floor(2).withName("מפלס עליון").withImageResource(R.raw.cami_floor2).withMarkerHeight(14);
-
-        this.map = new ConventionMap()
-                .withFloors(Arrays.asList(floor1, floor2))
-                .withLocations(
-                        CollectionUtils.flattenList(
-                                inFloor(floor1,
-                                        new MapLocation()
-                                                .withPlace(eshkol2)
-                                                .withMarkerResource(R.raw.eshkol2_marker)
-                                                .withSelectedMarkerResource(R.raw.eshkol2_marker_selected)
-                                                .withX(26)
-                                                .withY(73),
-                                        new MapLocation()
-                                                .withPlace(new Place().withName("החתמות"))
-                                                .withMarkerResource(R.raw.signatures_marker)
-                                                .withSelectedMarkerResource(R.raw.signatures_marker_selected)
-                                                .withX(81)
-                                                .withY(58),
-		                                new MapLocation()
-		                                        .withPlace(new Place().withName("מודיעין"))
-                                                .withMarkerResource(R.raw.information_marker)
-                                                .withSelectedMarkerResource(R.raw.information_marker_selected)
-                                                .withX(41)
-                                                .withY(37),
-		                                new MapLocation()
-				                                .withPlace(new Place().withName("קופות"))
-				                                .withMarkerResource(R.raw.cachiers_marker)
-				                                .withSelectedMarkerResource(R.raw.cachiers_marker_selected)
-				                                .withX(36)
-				                                .withY(19),
-		                                new MapLocation()
-				                                .withPlace(new Place().withName("שירותים"))
-				                                .withMarkerResource(R.raw.toilet_marker)
-				                                .withSelectedMarkerResource(R.raw.toilet_marker_selected)
-				                                .withX(49)
-				                                .withY(7),
-		                                new MapLocation()
-				                                .withPlace(eshkol1)
-				                                .withMarkerResource(R.raw.eshkol1_marker)
-				                                .withSelectedMarkerResource(R.raw.eshkol1_marker_selected)
-				                                .withX(26)
-				                                .withY(54),
-		                                new MapLocation()
-				                                .withPlace(auditorium)
-				                                .withMarkerResource(R.raw.schwartz_marker)
-				                                .withSelectedMarkerResource(R.raw.schwartz_marker_selected)
-				                                .withX(30)
-				                                .withY(49),
-		                                new MapLocation()
-				                                .withPlace(new Place().withName("שירותים"))
-				                                .withMarkerResource(R.raw.toilet_marker)
-				                                .withSelectedMarkerResource(R.raw.toilet_marker_selected)
-				                                .withX(12)
-				                                .withY(46)),
-		                        inFloor(floor2,
-				                        // Keep this location before storage because otherwise when
-				                        // storage is selected, it's displayed behind this location
-				                        new MapLocation()
-						                        .withPlace(new Place().withName("שיפוט קוספליי"))
-						                        .withMarkerResource(R.raw.cosplay_judgement_marker)
-						                        .withSelectedMarkerResource(R.raw.cosplay_judgement_marker_selected)
-						                        .withX(83)
-						                        .withY(75),
-				                        new MapLocation()
-						                        .withPlace(games)
-						                        .withMarkerResource(R.raw.games_marker)
-						                        .withSelectedMarkerResource(R.raw.games_marker_selected)
-						                        .withX(48)
-						                        .withY(79),
-				                        new MapLocation()
-						                        .withPlace(mainHall)
-						                        .withMarkerResource(R.raw.main_hall_marker)
-						                        .withSelectedMarkerResource(R.raw.main_hall_marker_selected)
-						                        .withX(58)
-						                        .withY(57),
-				                        new MapLocation()
-						                        .withPlace(new Place().withName("כניסה פלוס"))
-						                        .withMarkerResource(R.raw.entrance_plus_marker)
-						                        .withSelectedMarkerResource(R.raw.entrance_plus_marker_selected)
-						                        .withX(65)
-						                        .withY(37),
-				                        new MapLocation()
-						                        .withPlace(new Place().withName("פינת צילום"))
-						                        .withMarkerResource(R.raw.photoshoot_corner_marker)
-						                        .withSelectedMarkerResource(R.raw.photoshoot_corner_marker_selected)
-						                        .withX(55)
-						                        .withY(35),
-				                        new MapLocation()
-						                        .withPlace(new Place().withName("תיקון קוספליי"))
-						                        .withMarkerResource(R.raw.cosplay_fixes_marker)
-						                        .withSelectedMarkerResource(R.raw.cosplay_fixes_marker_selected)
-						                        .withX(58)
-						                        .withY(22),
-				                        new MapLocation()
-						                        .withPlace(new Place().withName("שירותים"))
-						                        .withMarkerResource(R.raw.toilet_marker)
-						                        .withSelectedMarkerResource(R.raw.toilet_marker_selected)
-						                        .withX(58)
-						                        .withY(11),
-				                        new MapLocation()
-						                        .withPlace(new Place().withName("שמירת חפצים"))
-						                        .withMarkerResource(R.raw.storage_marker)
-						                        .withSelectedMarkerResource(R.raw.storage_marker_selected)
-						                        .withX(22)
-						                        .withY(65),
-				                        new MapLocation()
-						                        .withPlace(new Place().withName("ווידוא ווקאון"))
-						                        .withMarkerResource(R.raw.walkon_marker)
-						                        .withSelectedMarkerResource(R.raw.walkon_marker_selected)
-						                        .withX(30)
-						                        .withY(58),
-				                        new MapLocation()
-						                        .withPlace(new Place().withName("שירותים"))
-						                        .withMarkerResource(R.raw.toilet_marker)
-						                        .withSelectedMarkerResource(R.raw.toilet_marker_selected)
-						                        .withX(7)
-						                        .withY(61))
-                        )
-                );
-
-        updates = new ArrayList<>();
-	    updatesById = new HashMap<>();
-    }
+	protected abstract ConventionStorage initStorage();
+	protected abstract EventToImageResourceIdMapper initImageMapper();
+	protected abstract Calendar initDate();
+	protected abstract String initID();
+	protected abstract String initDisplayName();
+	protected abstract String initFeedbackRecipient();
+	protected abstract URL initModelURL();
+	protected abstract String initFacebookFeedPath();
+	protected abstract List<Hall> initHalls();
+	protected abstract ConventionMap initMap();
+	protected abstract double initLongitude();
+	protected abstract double initLatitude();
 
     public Calendar getDate() {
         return date;
@@ -214,8 +134,17 @@ public class Convention implements Serializable {
 		return id;
 	}
 
+	public String getDisplayName() {
+		return displayName;
+	}
+
 	public Feedback getFeedback() {
 		return feedback;
+	}
+
+	public ConventionEvent handleSpecialEvent(ConventionEvent event) {
+		// By default, there are no special events
+		return event;
 	}
 
 	public void setEvents(List<ConventionEvent> events) {
@@ -410,7 +339,7 @@ public class Convention implements Serializable {
 		return maxTime;
 	}
 
-    private List<MapLocation> inFloor(Floor floor, MapLocation... locations) {
+    protected List<MapLocation> inFloor(Floor floor, MapLocation... locations) {
         for (MapLocation location : locations) {
             location.setFloor(floor);
         }

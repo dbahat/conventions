@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">כאמ\"י 2015</string>
+    <string name="app_name">הארוקון 2016</string>
 
     <string name="map_floor">קומה</string>
 
@@ -13,7 +13,7 @@
     <string name="event_conflicts_with_several_question">האירוע מתנגש עם %d אירועים אחרים ברשימת האירועים שלך.</string>
     <string name="event_removed_from_favorites">האירוע הוסר מהאירועים שלי</string>
     <string name="cancel">בטל</string>
-    <string name="arrival_methods_marker_name">כאמ\"י 2015 - בנייני האומה</string>
+    <string name="arrival_methods_marker_name">%s - בנייני האומה</string>
 
     <string name="event_navigate_to_map">הצג במפה</string>
     <string name="event_navigate_to_hall">הצג אולם</string>
@@ -27,8 +27,8 @@
 
     <string name="my_events_no_data">הוסף אירוע לאירועים שלי ע\"י לחיצה על הכוכב בדף האירוע או ע\"י גריריתו ברשימת האירועים</string>
     <string name="my_events_share">שתף</string>
-    <string name="my_event_share_title">התוכניה שלי לכאמ\"י 2015:</string>
-    <string name="my_event_share_signature">נוצר באפליקצית כאמ\"י 2015.</string>
+    <string name="my_event_share_title">התוכניה שלי ל%s:</string>
+    <string name="my_event_share_signature">נוצר באפליקצית %s.</string>
     <string name="my_event_share_link">http://play.google.com/store/apps/details?id=amai.org.conventions</string>
     <string name="my_event_share_chooser_dialog_title">שתף את רשימת האירועים</string>
 
@@ -45,8 +45,8 @@
     <string name="send">שלח</string>
     <string name="back">חזור</string>
 
-    <string name="event_feedback_mail_title">מייל אוטומטי - פידבק לכאמ\"י 2015 עבור האירוע</string>
-    <string name="convention_feedback_mail_title">מייל אוטומטי - פידבק לכנס כאמ\"י 2015</string>
+    <string name="event_feedback_mail_title">מייל אוטומטי - פידבק ל%s עבור האירוע</string>
+    <string name="convention_feedback_mail_title">מייל אוטומטי - פידבק לכנס %s</string>
     <string name="feedback_send_mail_failed">לא ניתן לשלוח את הפידבק. נסה שנית מאוחר יותר</string>
     <string name="feedback_sent">הפידבק נשלח. תודה!</string>
     <string name="feedback_sending_time_over">זמן שליחת הפידבק הסתיים</string>
@@ -58,7 +58,7 @@
     <string name="notification_event_about_to_start_message_format">האירוע %1$s עומד להתחיל באולם %2$s</string>
     <string name="notification_event_ended_title">עזור לנו להשתפר</string>
     <string name="notification_event_ended_message_format">נהנת באירוע %s? שלח פידבק למארגני האירוע</string>
-    <string name="notification_feedback_ended_message">כאמ\"י 2015 הסתיים, ואנחנו רוצים לשמוע את דעתך</string>
+    <string name="notification_feedback_ended_message">%s הסתיים, ואנחנו רוצים לשמוע את דעתך</string>
 
     <string name="configure_notification_event_about_to_start_message">שלח תזכורת לפני תחילת האירוע</string>
     <string name="configure_notification_event_feedback_reminder_message">שלח תזכורת למלא פידבק אחרי שהאירוע מסתיים</string>

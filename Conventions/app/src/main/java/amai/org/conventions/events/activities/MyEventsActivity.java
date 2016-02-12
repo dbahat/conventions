@@ -185,7 +185,7 @@ public class MyEventsActivity extends NavigationActivity {
 	private String formatMyEventsToShare(boolean isHtml) {
 		StringBuilder stringBuilder = new StringBuilder();
 
-		stringBuilder.append(getString(R.string.my_event_share_title));
+		stringBuilder.append(getString(R.string.my_event_share_title, Convention.getInstance().getDisplayName()));
 		stringBuilder.append("\n");
 		for (ConventionEvent event : getMyEvents()) {
 			stringBuilder.append(formatEventToShare(event));
@@ -197,9 +197,9 @@ public class MyEventsActivity extends NavigationActivity {
 			stringBuilder.append(
 					String.format(Dates.getLocale(), "<a href=\"%s\">%s</a>",
 							getString(R.string.my_event_share_link),
-							getString(R.string.my_event_share_signature)));
+							getString(R.string.my_event_share_signature, Convention.getInstance().getDisplayName())));
 		} else {
-			stringBuilder.append(getString(R.string.my_event_share_signature));
+			stringBuilder.append(getString(R.string.my_event_share_signature, Convention.getInstance().getDisplayName()));
 			stringBuilder.append("\n");
 			stringBuilder.append(getString(R.string.my_event_share_link));
 		}

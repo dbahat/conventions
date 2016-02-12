@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.List;
 
 import amai.org.conventions.model.Convention;
@@ -14,7 +13,6 @@ import amai.org.conventions.utils.Log;
 public class ModelRefresher {
     private static final String TAG = ModelRefresher.class.getCanonicalName();
 
-    private static final String SERVER_ADDRESS = "http://2015.cami.org.il/wp-admin/admin-ajax.php?action=get_event_list";
     private static final int CONNECT_TIMEOUT = 10000;
 
     /**
@@ -24,9 +22,7 @@ public class ModelRefresher {
      */
     public boolean refreshFromServer() {
         try {
-            URL url = new URL(SERVER_ADDRESS);
-
-            HttpURLConnection request = (HttpURLConnection) url.openConnection();
+            HttpURLConnection request = (HttpURLConnection) Convention.getInstance().getModelURL().openConnection();
             request.setConnectTimeout(CONNECT_TIMEOUT);
             request.connect();
             InputStreamReader reader = null;

@@ -13,13 +13,12 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import amai.org.conventions.model.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 
 public class ArrivalMethodsActivity extends NavigationActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
-	private final static double LATITUDE = 31.786372;
-	private final static double LONGITUDE = 35.202425;
 
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +43,14 @@ public class ArrivalMethodsActivity extends NavigationActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.arrival_methods_navigate:
+				double latitude = Convention.getInstance().getLatitude();
+				double longitude = Convention.getInstance().getLongitude();
 				Intent intent = new Intent(Intent.ACTION_VIEW,
-						Uri.parse("geo:" + LATITUDE + "," + LONGITUDE +
-									"?q=" + LATITUDE + "," + LONGITUDE +
-									"(" + Uri.encode(getString(R.string.arrival_methods_marker_name)) + ")"));
+						Uri.parse("geo:" + latitude + "," + longitude +
+							"?q=" + latitude + "," + longitude +
+							"(" + Uri.encode(
+								getString(R.string.arrival_methods_marker_name, Convention.getInstance().getDisplayName())) +
+							")"));
 				if (intent.resolveActivity(getPackageManager()) != null) {
 					this.startActivity(intent);
 				} else {
@@ -94,14 +97,14 @@ public class ArrivalMethodsActivity extends NavigationActivity {
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
-	    LatLng conventionLocation = new LatLng(LATITUDE, LONGITUDE);
+	    LatLng conventionLocation = new LatLng(Convention.getInstance().getLatitude(), Convention.getInstance().getLongitude());
 
         mMap.addMarker(new MarkerOptions()
                 // TODO - return the custom marker after scaling it to a proper size.
                 //.icon(BitmapDescriptorFactory.fromResource(R.drawable.harucon_logo))
                 .position(conventionLocation)
 		        // Workaround for Hebrew not being displayed - add unicode RTL character before the string
-                .title("\u200e" + getResources().getString(R.string.arrival_methods_marker_name)));
+                .title("\u200e" + getResources().getString(R.string.arrival_methods_marker_name, Convention.getInstance().getDisplayName())));
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(conventionLocation, 16));
     }

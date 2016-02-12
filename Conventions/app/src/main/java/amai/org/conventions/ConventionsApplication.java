@@ -32,7 +32,7 @@ public class ConventionsApplication extends Application {
         super.onCreate();
 
         Locale.setDefault(Dates.getLocale());
-        Convention.getInstance().getStorage().initFromFile(this);
+        Convention.getInstance().load(this);
 
 	    if (!BuildConfig.DEBUG) {
 		    GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
