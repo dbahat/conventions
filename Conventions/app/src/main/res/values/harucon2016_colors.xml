@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="red">#d31307</color>
     <color name="dark_blue">#120d32</color>
     <color name="dark_purple">#43265d</color>
     <color name="gold">#f7d786</color>
@@ -7,4 +8,5 @@
     <color name="dark_purple_button">#2C0D59</color>
     <color name="very_dark_purple_button">#210A43</color>
     <color name="light_purple">#584772</color>
+    <color name="off_white">#FBFBFB</color>
 </resources>

@@ -3,6 +3,7 @@
     <!-- Base application theme. -->
     <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowNoTitle">true</item>
+        <item name="android:layoutDirection">rtl</item>
         <!--We will be using the toolbar so no need to show ActionBar-->
         <item name="android:windowActionBar">false</item>
         <item name="toolbarNavigationButtonStyle">@style/ToolbarNavigationButtonStyle</item>
@@ -43,11 +44,11 @@
         <item name="toolbarIconAccentColor">@color/light_green</item>
         <item name="navigationPopupSelectedColor">@color/maroon</item>
 
-        <item name="appLogoHome">@drawable/cami_logo</item>
-        <item name="mapHomeImage">@drawable/home_cami_map</item>
-        <item name="eventsHomeImage">@drawable/home_cami_events</item>
-        <item name="updatesHomeImage">@drawable/home_cami_updates</item>
-        <item name="arrivalMethodsHomeImage">@drawable/home_cami_arrival_methods</item>
+        <item name="homeScreenlayout">@layout/activity_home_cami2015</item>
+        <item name="aboutTopView">@id/buttons_layout</item>
+        <item name="aboutBottomView">@id/buttons_layout</item>
+        <item name="aboutLeftView">@id/buttons_layout</item>
+        <item name="aboutRightView">@id/buttons_layout</item>
 
         <item name="amaiLogo">@drawable/amai_logo_red</item>
 
@@ -67,7 +68,7 @@
     <style name="AppBaseTheme.Harucon2016.Toolbar"/>
 
     <style name="AppBaseTheme.Harucon2016" parent="AppBaseTheme.Cami2015">
-        <item name="notificationSmallIcon">@drawable/harucon_notification_small</item>
+        <item name="notificationSmallIcon">@drawable/harucon2016_notification_small</item>
         <item name="notificationLargeIcon">@drawable/harucon2016_logo_toolbar</item>
 
         <item name="toolbarBackground">@color/dark_blue</item>
@@ -75,6 +76,12 @@
         <item name="toolbarLogoType">bitmap</item>
         <item name="toolbarIconAccentColor">@color/gold</item>
         <item name="navigationPopupSelectedColor">@color/light_purple</item>
+
+        <item name="homeScreenlayout">@layout/activity_home_harucon2016</item>
+        <item name="aboutTopView">@id/logo</item>
+        <item name="aboutBottomView">@id/home_buttons_bottom</item>
+        <item name="aboutLeftView">@id/home_buttons_bottom</item>
+        <item name="aboutRightView">@id/home_buttons_bottom</item>
 
         <item name="amaiLogo">@drawable/amai_logo_dark_blue</item>
 

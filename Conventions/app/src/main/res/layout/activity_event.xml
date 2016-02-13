@@ -3,7 +3,6 @@
     android:id="@+id/event_main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layoutDirection="rtl"
     android:visibility="invisible"
     tools:context="amai.org.conventions.events.activities.EventActivity">
 

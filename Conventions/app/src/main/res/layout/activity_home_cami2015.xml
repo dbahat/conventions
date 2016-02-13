@@ -6,12 +6,10 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:orientation="vertical"
-    android:layoutDirection="rtl"
     android:id="@+id/home_main_layout"
     android:background="@color/maroon">
 
     <LinearLayout
-        android:id="@+id/home_top_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -20,7 +18,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="115dp"
-            android:src="?appLogoHome"/>
+            android:src="@drawable/cami_logo"/>
 
     </LinearLayout>
 
@@ -51,7 +49,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="?eventsHomeImage"
+                    android:src="@drawable/home_cami_events"
                     android:scaleType="fitCenter"
                     />
             </FrameLayout>
@@ -68,7 +66,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="?mapHomeImage"
+                    android:src="@drawable/home_cami_map"
                     android:scaleType="fitCenter"
                     />
             </FrameLayout>
@@ -93,7 +91,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="?updatesHomeImage"
+                    android:src="@drawable/home_cami_updates"
                     android:scaleType="fitCenter"
                     />
             </FrameLayout>
@@ -110,7 +108,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="?arrivalMethodsHomeImage"
+                    android:src="@drawable/home_cami_arrival_methods"
                     android:scaleType="fitCenter"
                     />
             </FrameLayout>

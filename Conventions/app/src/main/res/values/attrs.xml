@@ -27,12 +27,11 @@
         </attr>
         <attr name="toolbarIconAccentColor" format="color|reference"/>
         <!-- Home Screen -->
-        <attr name="appLogoHome" format="integer"/>
-        <attr name="logoHomeBackground" format="color|reference"/>
-        <attr name="mapHomeImage" format="integer"/>
-        <attr name="eventsHomeImage" format="integer"/>
-        <attr name="updatesHomeImage" format="integer"/>
-        <attr name="arrivalMethodsHomeImage" format="integer"/>
+        <attr name="homeScreenlayout" format="integer"/>
+        <attr name="aboutTopView" format="integer"/>
+        <attr name="aboutBottomView" format="integer"/>
+        <attr name="aboutLeftView" format="integer"/>
+        <attr name="aboutRightView" format="integer"/>
         <!-- About screen -->
         <attr name="amaiLogo" format="integer"/>
         <!-- Event Time -->

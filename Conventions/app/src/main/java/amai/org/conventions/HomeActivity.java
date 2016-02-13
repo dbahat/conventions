@@ -40,7 +40,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
-	    setContentView(R.layout.activity_home);
+	    setContentView(ThemeAttributes.getResourceId(this, R.attr.homeScreenlayout));
 
 	    navigationPages = new NavigationPages(this);
 
@@ -147,11 +147,30 @@ public class HomeActivity extends AppCompatActivity {
 
 	public void onAboutClicked(View view) {
 		ViewGroup mainLayout = (ViewGroup) findViewById(R.id.home_main_layout);
-		View buttonsLayout = findViewById(R.id.buttons_layout);
+		Point coordinates;
+
+		// Top
+		View topView = findViewById(ThemeAttributes.getResourceId(this, R.attr.aboutTopView));
+		coordinates = Views.findCoordinates(mainLayout, topView);
+		int top = coordinates.y;
+
+		// Bottom
+		View bottomView = findViewById(ThemeAttributes.getResourceId(this, R.attr.aboutBottomView));
+		coordinates = Views.findCoordinates(mainLayout, bottomView);
+		int bottom = coordinates.y + bottomView.getMeasuredHeight();
+
+		// Left
+		View leftView = findViewById(ThemeAttributes.getResourceId(this, R.attr.aboutLeftView));
+		coordinates = Views.findCoordinates(mainLayout, leftView);
+		int left = coordinates.x;
+
+		// Right
+		View rightView = findViewById(ThemeAttributes.getResourceId(this, R.attr.aboutRightView));
+		coordinates = Views.findCoordinates(mainLayout, rightView);
+		int right = coordinates.x + rightView.getMeasuredWidth();
 
 		AboutFragment aboutFragment = new AboutFragment();
-		Point coordinates = Views.findCoordinates(mainLayout, buttonsLayout);
-		aboutFragment.setLocation(coordinates.x, coordinates.y, buttonsLayout.getMeasuredWidth(), buttonsLayout.getMeasuredHeight());
+		aboutFragment.setLocation(left, top, right - left, bottom - top);
 		aboutFragment.show(getSupportFragmentManager(), null);
 	}
 }
