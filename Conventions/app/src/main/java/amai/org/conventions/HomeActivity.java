@@ -95,7 +95,7 @@ public class HomeActivity extends AppCompatActivity {
 						   NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 						   Intent intent = new Intent(HomeActivity.this, UpdatesActivity.class);
 						   Notification.Builder notificationBuilder = new Notification.Builder(HomeActivity.this)
-								   .setSmallIcon(R.drawable.cami_logo_small_white)
+								   .setSmallIcon(ThemeAttributes.getResourceId(HomeActivity.this, R.attr.notificationSmallIcon))
 								   .setLargeIcon(ImageHandler.getNotificationLargeIcon(HomeActivity.this))
 								   .setContentTitle(notificationTitle)
 								   .setContentText(notificationMessage)

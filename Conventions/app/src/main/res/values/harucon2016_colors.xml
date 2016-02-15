@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="red">#d31307</color>
+    <color name="pink">#DA1278</color>
     <color name="dark_blue">#120d32</color>
     <color name="dark_purple">#43265d</color>
     <color name="gold">#f7d786</color>
-    <color name="purple">#3C2874</color>
+    <color name="dark_gold">#FFB85A</color>
+    <color name="purple">#402874</color>
     <color name="dark_purple_button">#2C0D59</color>
     <color name="very_dark_purple_button">#210A43</color>
     <color name="light_purple">#584772</color>
     <color name="off_white">#FBFBFB</color>
+    <color name="light_blue">#12c7dd</color>
+    <color name="vibrant_green">#89D4AE</color>
 </resources>

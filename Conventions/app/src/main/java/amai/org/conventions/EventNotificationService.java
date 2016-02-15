@@ -78,7 +78,7 @@ public class EventNotificationService extends Service {
 
         Intent intent = new Intent(this, FeedbackActivity.class);
         Notification.Builder builder = new Notification.Builder(this)
-                .setSmallIcon(R.drawable.cami_logo_small_white)
+                .setSmallIcon(ThemeAttributes.getResourceId(getBaseContext(), R.attr.notificationSmallIcon))
                 .setLargeIcon(ImageHandler.getNotificationLargeIcon(this))
                 .setContentTitle(getString(R.string.notification_event_ended_title))
                 .setContentText(getString(R.string.notification_feedback_ended_message, Convention.getInstance().getDisplayName()))
@@ -102,7 +102,7 @@ public class EventNotificationService extends Service {
                 .putExtra(EventActivity.EXTRA_FOCUS_ON_FEEDBACK, true);
 
         Notification.Builder builder = new Notification.Builder(this)
-                .setSmallIcon(R.drawable.cami_logo_small_white)
+                .setSmallIcon(ThemeAttributes.getResourceId(getBaseContext(), R.attr.notificationSmallIcon))
                 .setLargeIcon(ImageHandler.getNotificationLargeIcon(this))
                 .setContentTitle(getResources().getString(R.string.notification_event_ended_title))
                 .setContentText(getString(R.string.notification_event_ended_message_format, event.getTitle()))

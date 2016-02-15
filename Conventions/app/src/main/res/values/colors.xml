@@ -10,4 +10,7 @@
     <color name="light_yellow">#FEFFC9</color>
     <color name="transparent_light_yellow">#C0FEFFC9</color>
     <color name="yellow">#F8E9AE</color>
+
+    <!-- This color was originally from Cami 2015 but it looks good on the feedback buttons -->
+    <color name="green">#7EC078</color>
 </resources>
