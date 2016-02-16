@@ -12,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 
+
 /**
  * Zooming view.
  */
@@ -174,6 +175,7 @@ public class ZoomView extends FrameLayout {
 		if (listener != null) {
 			listener.onZoomStarted(smoothZoom, x, y);
 		}
+		invalidate();
 	}
 
 	public ZoomViewListener getListener() {
@@ -387,10 +389,11 @@ public class ZoomView extends FrameLayout {
 		}
 
 		// redraw
-		// if (animating) {
-		getRootView().invalidate();
-		invalidate();
-		// }
+		 getRootView().invalidate();
+		 if (animating) {
+			 invalidate();
+		 }
+
 	}
 }
 

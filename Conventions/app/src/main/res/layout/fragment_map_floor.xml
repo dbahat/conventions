@@ -57,6 +57,7 @@
             android:id="@+id/map_zoom_view"
             android:visibility="invisible"
             android:layerType="software"
+            android:animationCache="false"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
