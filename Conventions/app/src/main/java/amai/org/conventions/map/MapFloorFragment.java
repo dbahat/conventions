@@ -396,7 +396,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 				    }
 			    }
 
-					    // Set initially selected location now after we created all the markers
+			    // Set initially selected location now after we created all the markers
 			    if (locationToSelect != null) {
 			        selectLocation(locationToSelect);
 				    locationToSelect = null;

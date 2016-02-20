@@ -31,7 +31,7 @@ dependencies {
     compile 'com.github.castorflex.verticalviewpager:library:19.0.1'
     compile 'com.google.android.gms:play-services-analytics:7.5.0'
     compile 'com.google.android.gms:play-services-maps:7.5.0'
-    compile 'com.caverock:androidsvg:1.2.1'
+    compile 'com.caverock:androidsvg:1.2.2-beta-1'
     compile 'se.emilsjolander:stickylistheaders:2.7.0'
     compile 'com.facebook.android:facebook-android-sdk:4.2.0'
     compile 'com.google.code.gson:gson:2.3.1'
