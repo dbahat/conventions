@@ -251,15 +251,15 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		searchResultsAdapter = new MapLocationsAdapter(Collections.<MapLocation>emptyList());
 		searchResults.setAdapter(searchResultsAdapter);
 
-
 		searchResults.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				closeSearch();
 				MapLocation location = (MapLocation) searchResultsAdapter.getItem(position);
-				// Go to the selected location's floor
+				// Go to the selected location's floor and reset its zoom/selection state
 				if (!Objects.equals(getCurrentFloorFragment().getFloor(), location.getFloor())) {
 					setCurrentFloor(location.getFloor());
+					getCurrentFloorFragment().resetState();
 				}
 				// Set selected marker
 				getCurrentFloorFragment().selectMarkersWithNameAndFloor(Collections.singletonList(location));
