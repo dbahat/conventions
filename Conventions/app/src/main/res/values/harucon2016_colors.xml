@@ -9,7 +9,8 @@
     <color name="purple">#402874</color>
     <color name="dark_purple_button">#2C0D59</color>
     <color name="very_dark_purple_button">#210A43</color>
-    <color name="light_purple">#584772</color>
+    <color name="medium_purple">#584772</color>
+    <color name="light_purple">#90829e</color>
     <color name="off_white">#FBFBFB</color>
     <color name="light_blue">#12c7dd</color>
     <color name="vibrant_green">#89D4AE</color>

@@ -86,7 +86,7 @@
 
         <item name="amaiLogo">@drawable/amai_logo_dark_blue</item>
 
-        <item name="nextEventStartTimeBackground">@color/light_purple</item>
+        <item name="nextEventStartTimeBackground">@color/medium_purple</item>
         <item name="nextEventStartTimeTextColor">@color/white</item>
 
         <!-- Note: if you change the theme, these values should be copied manually to file drawable\feedback_highlighted_button.xml
