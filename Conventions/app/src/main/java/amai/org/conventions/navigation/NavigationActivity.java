@@ -181,7 +181,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(false);
             actionBar.setDisplayShowTitleEnabled(true);
-	        int logoType = ThemeAttributes.getColor(this, R.attr.toolbarLogoType);
+	        int logoType = ThemeAttributes.getInteger(this, R.attr.toolbarLogoType);
 	        Drawable drawable = null;
 	        switch (logoType) {
 		        // bitmap
