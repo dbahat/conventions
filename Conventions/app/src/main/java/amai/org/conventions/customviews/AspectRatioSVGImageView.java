@@ -3,7 +3,6 @@ package amai.org.conventions.customviews;
 import android.content.Context;
 import android.graphics.Point;
 import android.util.AttributeSet;
-import android.widget.ImageView;
 
 import com.caverock.androidsvg.SVGImageView;
 

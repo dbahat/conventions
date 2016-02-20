@@ -396,7 +396,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 				    }
 			    }
 
-			    // Set initially selected location now after we created all the markers
+					    // Set initially selected location now after we created all the markers
 			    if (locationToSelect != null) {
 			        selectLocation(locationToSelect);
 				    locationToSelect = null;
@@ -449,6 +449,10 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		// Set marker image
 		SVG markerSvg = ImageHandler.loadSVG(appContext, location.getMarkerResource());
 		markerImageView.setSVG(markerSvg);
+		// Setting layer type to none to avoid caching the marker views bitmap when in zoomed-out state.
+		// The caching causes the marker image looks pixelized in zoomed-in state.
+		// This has to be done after calling setSVG.
+		markerImageView.setLayerType(View.LAYER_TYPE_NONE, null);
 
 		// Set marker layout parameters and scaling
 		ImageLayout.LayoutParams layoutParams = new ImageLayout.LayoutParams();

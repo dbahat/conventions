@@ -39,7 +39,7 @@ public class ZoomView extends FrameLayout {
 	float smoothZoom = 1.0f;
 	float zoomX, zoomY;
 	float smoothZoomX, smoothZoomY;
-	private boolean scrolling; // NOPMD by karooolek on 29.06.11 11:45
+	private boolean previouslyZooming = false;
 
 	// minimap variables
 	private boolean showMinimap = false;
@@ -172,9 +172,6 @@ public class ZoomView extends FrameLayout {
 		smoothZoom = clamp(1.0f, zoom, maxZoom);
 		smoothZoomX = x;
 		smoothZoomY = y;
-		if (listener != null) {
-			listener.onZoomStarted(smoothZoom, x, y);
-		}
 		invalidate();
 	}
 
@@ -182,7 +179,7 @@ public class ZoomView extends FrameLayout {
 		return listener;
 	}
 
-	public void setListner(final ZoomViewListener listener) {
+	public void setZoomListener(final ZoomViewListener listener) {
 		this.listener = listener;
 	}
 
@@ -319,12 +316,23 @@ public class ZoomView extends FrameLayout {
 
 		zoomX = lerp(bias(zoomX, smoothZoomX, 0.1f), smoothZoomX, 0.35f);
 		zoomY = lerp(bias(zoomY, smoothZoomY, 0.1f), smoothZoomY, 0.35f);
-		if (zoom != smoothZoom && listener != null) {
-			listener.onZooming(zoom, zoomX, zoomY);
-		}
 
 		final boolean animating = Math.abs(zoom - smoothZoom) > 0.0000001f
 				|| Math.abs(zoomX - smoothZoomX) > 0.0000001f || Math.abs(zoomY - smoothZoomY) > 0.0000001f;
+
+		// Notify listener for changes in zoom state
+		boolean isZooming = Math.abs(zoom - smoothZoom) > 0.0000001f;
+		if (listener != null) {
+			if (previouslyZooming && !isZooming) {
+				listener.onZoomEnded(zoom, zoomX, zoomY);
+			} else if (isZooming && !previouslyZooming) {
+				listener.onZoomStarted(zoom, zoomX, zoomY);
+			} else if (isZooming) {
+				listener.onZooming(zoom, zoomX, zoomY);
+			}
+		}
+
+		previouslyZooming = isZooming;
 
 		// nothing to draw
 		if (getChildCount() == 0) {
@@ -340,7 +348,6 @@ public class ZoomView extends FrameLayout {
 		// get view
 		final View v = getChildAt(0);
 		m.preTranslate(v.getLeft(), v.getTop());
-
 		// get drawing cache if available
 		if (animating && ch == null && isAnimationCacheEnabled()) {
 			v.setDrawingCacheEnabled(true);
@@ -389,11 +396,10 @@ public class ZoomView extends FrameLayout {
 		}
 
 		// redraw
-		 getRootView().invalidate();
+		 getRootView().postInvalidateOnAnimation();
 		 if (animating) {
-			 invalidate();
+			 postInvalidateOnAnimation();
 		 }
-
 	}
 }
 

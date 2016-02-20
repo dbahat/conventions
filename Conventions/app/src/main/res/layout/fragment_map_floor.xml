@@ -70,8 +70,7 @@
                 custom:image="@drawable/floor1"
                 custom:fit="auto"
                 custom:imageWidth="100"
-                custom:imageHeight="100"
-                tools:ignore="ScrollViewSize">
+                custom:imageHeight="100">
             </com.manuelpeinado.imagelayout.ImageLayout>
         </pl.polidea.view.ZoomView>
 
