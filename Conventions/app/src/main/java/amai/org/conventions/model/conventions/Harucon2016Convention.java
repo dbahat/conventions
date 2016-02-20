@@ -31,7 +31,7 @@ public class Harucon2016Convention extends Cami2015Convention {
 
 	@Override
 	protected String initFacebookFeedPath() {
-		return super.initFacebookFeedPath();
+		return "/harucon.org.il/posts";
 	}
 
 	@Override
@@ -42,5 +42,11 @@ public class Harucon2016Convention extends Cami2015Convention {
 	@Override
 	protected double initLatitude() {
 		return 31.786372;
+	}
+
+	@Override
+	protected String initFeedbackRecipient() {
+		// Until we have the actual recipient - we don't want to accidently send mails to Cami recipient
+		return null;
 	}
 }

@@ -196,7 +196,6 @@ public class CollapsibleFeedbackView extends FrameLayout {
 	    boolean isSent = feedback.isSent();
 	    questionText.setText(question.getQuestionText(getResources(), isSent));
 
-        Object answer = question.getAnswer();
         View answerView = null;
         int layoutOrientation = LinearLayout.VERTICAL;
 
@@ -418,7 +417,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 
 				for (TextView answerView : answerViews) {
 					if (selectedAnswer == null || selected != answerView) {
-						answerView.setTextAppearance(getContext(), R.style.EventFeedbackButton);
+						answerView.setTextAppearance(getContext(), R.style.EventAnswerButton);
 					}
 				}
 
@@ -438,7 +437,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 				answerButton = new TextView(getContext());
 			}
 			answerViews.add(answerButton);
-			answerButton.setTextAppearance(getContext(), R.style.EventFeedbackButton);
+			answerButton.setTextAppearance(getContext(), R.style.EventAnswerButton);
 			answerButton.setText(answerStringId);
 			int endPadding = padding * 4;
 			int startPadding = padding * 4;
@@ -452,6 +451,8 @@ public class CollapsibleFeedbackView extends FrameLayout {
 				answerButton.setOnClickListener(listener);
 			} else {
 				answerButton.setOnClickListener(null);
+				// Don't allow selecting a radio button after the feedback is already sent
+				answerButton.setEnabled(false);
 			}
 		}
 

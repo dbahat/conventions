@@ -122,7 +122,7 @@ public class Cami2015Convention extends Convention {
 
 	@Override
 	protected String initFacebookFeedPath() {
-		return "/harucon.org.il/posts";
+		return "/cami.org.il/posts";
 	}
 
 	@Override
