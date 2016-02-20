@@ -7,7 +7,6 @@
     app:cardUseCompatPadding="true"
     app:cardElevation="2dp"
     app:cardMaxElevation="2dp"
-    android:layoutDirection="rtl"
     android:id="@+id/eventContainer"
     android:onClick="onConventionEventClicked">
 
@@ -59,7 +58,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Event Title"
-                android:textDirection="rtl"
                 android:gravity="start|top"
                 style="@style/EventViewLargeText"
                 android:maxLines="2"

@@ -2,7 +2,6 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/navigation_item_layout"
-    android:layoutDirection="rtl"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingStart="10dp"

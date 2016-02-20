@@ -10,14 +10,12 @@
         android:layout_height="wrap_content"
         app:cardUseCompatPadding="true"
         app:cardElevation="10dp"
-        app:cardMaxElevation="10dp"
-        android:layoutDirection="rtl">
+        app:cardMaxElevation="10dp">
 
         <ListView
             android:id="@+id/navigation_items"
             android:divider="@android:color/darker_gray"
             android:dividerHeight="1dp"
-            android:layoutDirection="rtl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
         </ListView>

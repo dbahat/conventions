@@ -28,7 +28,6 @@
             android:id="@+id/event_detail_boxes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layoutDirection="rtl"
             android:orientation="vertical">
 
             <LinearLayout
@@ -40,7 +39,6 @@
                     style="@style/TextAppearance.AppCompat.Headline"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textDirection="rtl"
                     android:text="title" />
             </LinearLayout>
 
@@ -53,7 +51,6 @@
                     style="@style/TextAppearance.AppCompat.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textDirection="rtl"
                     android:text="lecturer" />
 
                 <TextView
@@ -61,26 +58,25 @@
                     style="@style/TextAppearance.AppCompat.Subhead"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textDirection="rtl"
                     android:paddingTop="10dp"
                     android:text="hall and time" />
             </LinearLayout>
 
 
-        <LinearLayout
-            android:id="@+id/event_feedback_container"
-            style="@style/EventDetailsBox.Feedback"
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical">
-
-            <amai.org.conventions.events.CollapsibleFeedbackView
-                android:id="@+id/event_feedback_view"
+            <LinearLayout
+                android:id="@+id/event_feedback_container"
+                style="@style/EventDetailsBox.Feedback"
+                android:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <amai.org.conventions.events.CollapsibleFeedbackView
+                    android:id="@+id/event_feedback_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/event_description_box"
@@ -93,7 +89,6 @@
                     style="@style/TextAppearance.AppCompat.Body2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textDirection="rtl"
                     android:text="description" />
             </LinearLayout>
 

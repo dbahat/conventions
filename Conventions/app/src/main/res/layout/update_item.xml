@@ -4,8 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="10dp"
-    android:layoutDirection="rtl">
+    android:paddingTop="10dp">
 
     <!-- The text and date overlap since in code we set the text to indent only for the top lines,
      so it won't overlap with the time -->
@@ -86,7 +85,6 @@
             android:maxLines="7"
             android:autoLink="all"
             android:text="Bla bla bla, bla bla ba, blaBla bla bla, bla bla ba, blaBla bla bla, bla bla ba, blaBla bla bla, bla bla ba, blaBla bla bla, bla bla ba, blaBla bla bla, bla bla ba, bla"
-            android:textDirection="rtl"
             style="@style/TextAppearance.AppCompat.Subhead"/>
 
     </RelativeLayout>

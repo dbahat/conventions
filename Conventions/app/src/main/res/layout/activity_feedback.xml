@@ -21,7 +21,6 @@
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 style="@style/TextAppearance.AppCompat.Headline"
-                android:textDirection="rtl"
                 android:text="@string/events_without_feedback_title"/>
             <FrameLayout
                 android:layout_width="match_parent"
@@ -32,7 +31,6 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/activity_horizontal_margin"
                     android:paddingRight="@dimen/activity_horizontal_margin"
-                    android:textDirection="rtl"
                     android:id="@+id/feedback_no_events_text"
                     style="@style/TextAppearance.AppCompat.Subhead"
                     android:text="@string/events_feedback_no_events"/>
@@ -109,7 +107,6 @@
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 style="@style/TextAppearance.AppCompat.Headline"
-                android:textDirection="rtl"
                 android:text="@string/events_with_feedback_title"/>
             <amai.org.conventions.customviews.NestedListView
                 android:id="@+id/events_with_sent_feedback_list"
@@ -127,7 +124,6 @@
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             style="@style/TextAppearance.AppCompat.Headline"
-            android:textDirection="rtl"
             android:text="@string/convention_feedback_title"/>
         <TextView
             android:layout_width="wrap_content"
@@ -135,7 +131,6 @@
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             style="@style/TextAppearance.AppCompat.Subhead"
-            android:textDirection="rtl"
             android:text="@string/convention_feedback_subtitle"/>
 
         <amai.org.conventions.events.CollapsibleFeedbackView
