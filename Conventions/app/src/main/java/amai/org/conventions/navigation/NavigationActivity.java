@@ -11,6 +11,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PictureDrawable;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -249,11 +250,20 @@ public abstract class NavigationActivity extends AppCompatActivity {
         }
     }
 
+	protected View setContentInContentContainer(int layoutResID) {
+		return setContentInContentContainer(layoutResID, true);
+	}
 
-
-    protected View setContentInContentContainer(int layoutResID) {
+    protected View setContentInContentContainer(int layoutResID, boolean hideToolbarOnScroll) {
         FrameLayout contentContainer = (FrameLayout) findViewById(R.id.navigation_content_view_container);
         getLayoutInflater().inflate(layoutResID, contentContainer, true);
+
+	    if (!hideToolbarOnScroll) {
+		    AppBarLayout.LayoutParams layoutParams = (AppBarLayout.LayoutParams) navigationToolbar.getLayoutParams();
+		    layoutParams.setScrollFlags(0);
+		    navigationToolbar.setLayoutParams(layoutParams);
+	    }
+
 	    return contentContainer;
     }
 

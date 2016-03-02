@@ -4,12 +4,15 @@
     android:versionCode="16"
     android:versionName="1.2.9" >
 
+    <!-- For notifications -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <!-- Required for google maps -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- From here on are "dangerous" permissions -->
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-    <!-- For notifications -->
-    <uses-permission android:name="android.permission.VIBRATE" />
     <!--
  The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but are recommended if we want to display the user's
