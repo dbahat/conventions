@@ -99,6 +99,7 @@ public class Harucon2016Convention extends Convention {
 		imageMapper.addMapping("http://2016.harucon.org.il/wp-content/uploads/sites/7/2015/12/דני-פייגלמן.jpg", R.drawable.event_cosplay_leds);
 		imageMapper.addMapping("http://2016.harucon.org.il/wp-content/uploads/sites/7/2015/12/סבי-איזילוב-1024x701.jpg", R.drawable.event_manga_history);
 		imageMapper.addMapping("http://2016.harucon.org.il/wp-content/uploads/sites/7/2016/02/6.-שיעור-יפנית-למתחילים.jpg", R.drawable.event_japanese);
+		imageMapper.addMapping("http://2016.harucon.org.il/wp-content/uploads/sites/7/2016/02/Crunchyroll-Logo-1-300x120.png", R.drawable.event_crunchyroll_logo);
 
 		// Non-URL IDs
 		imageMapper.addMapping(EventToImageResourceIdMapper.EVENT_GENERIC, R.drawable.harucon2016_cover);

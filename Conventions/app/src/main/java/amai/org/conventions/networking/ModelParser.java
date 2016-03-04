@@ -13,8 +13,11 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
@@ -30,6 +33,9 @@ public class ModelParser {
     private static final String TAG = ModelParser.class.getCanonicalName();
 
     public List<ConventionEvent> parse(InputStreamReader reader) {
+	    Map<Integer, ParsedDescription> contentById = new HashMap<>();
+	    Map<ConventionEvent, Integer> eventsWithSpecialContent = new LinkedHashMap<>();
+
         JsonParser jp = new JsonParser();
         EventToImageResourceIdMapper mapper = Convention.getInstance().getImageMapper();
 
@@ -42,6 +48,18 @@ public class ModelParser {
             JsonObject eventObj = event.getAsJsonObject();
             int eventId = eventObj.get("ID").getAsInt();
             String eventType = eventObj.get("categories-text").getAsJsonObject().get("name").getAsString();
+	        String title = eventObj.get("title").getAsString();
+
+	        // We don't use the description of events that are disabled or point to a different page
+	        boolean ignoreEventDescription = "1".equals(eventObj.get("timetable-disable-url").getAsString()) || !"".equals(eventObj.get("timetable-url").getAsString());
+	        ParsedDescription eventDescription = parseEventDescription(ignoreEventDescription ? null : eventObj.get("content").getAsString());
+
+	        // Check if this event points to a different page (special event)
+	        int specialEventId = 0;
+	        contentById.put(eventId, eventDescription);
+	        if (!"".equals(eventObj.get("timetable-url").getAsString())) {
+		        specialEventId = eventObj.get("timetable-url-pid").getAsInt();
+	        }
 
             int internalEventNumber = 1;
 
@@ -53,8 +71,12 @@ public class ModelParser {
 		            continue;
 	            }
 
-                Date startTime = Dates.parseHourAndMinute(internalEventObj.get("start").getAsString());
-                Date endTime = Dates.parseHourAndMinute(internalEventObj.get("end").getAsString());
+	            // These 2 properties will only exist if there is timetable info, even though they aren't actually inside the timetable info
+	            int bgColor = parseColorFromServer(eventObj.get("timetable-bg").getAsString());
+	            int textColor = parseColorFromServer(eventObj.get("timetable-text-color").getAsString());
+
+	            Date startTime = Dates.parseHourAndMinute(internalEventObj.get("start").getAsString());
+	            Date endTime = Dates.parseHourAndMinute(internalEventObj.get("end").getAsString());
                 String hallName = internalEventObj.get("room").getAsString();
                 Hall hall = Convention.getInstance().findHallByName(hallName);
 
@@ -64,15 +86,11 @@ public class ModelParser {
                     Log.i(TAG, "Found and added new hall with name " + hallName);
                 }
 
-                ParsedDescription eventDescription = parseEventDescription("1".equals(eventObj.get("timetable-disable-url").getAsString()) ? null : eventObj.get("content").getAsString());
-                int bgColor = parseColorFromServer(eventObj.get("timetable-bg").getAsString());
-	            int textColor = parseColorFromServer(eventObj.get("timetable-text-color").getAsString());
-
-                ConventionEvent conventionEvent = new ConventionEvent()
+	            ConventionEvent conventionEvent = new ConventionEvent()
                         .withServerId(eventId)
 		                .withBackgroundColor(bgColor)
 		                .withTextColor(textColor)
-                        .withTitle(eventObj.get("title").getAsString())
+                        .withTitle(title)
                         .withLecturer(internalEventObj.get("before_hour_text").getAsString())
                         .withDescription(eventDescription.getDescription())
                         .withType(new EventType(bgColor, eventType))
@@ -81,6 +99,10 @@ public class ModelParser {
                         .withHall(hall)
 		                .withImages(mapper.getImagesList(eventDescription.getEventImageIds()))
 		                .withId(String.format("%d_%d", eventId, internalEventNumber));
+
+	            if (specialEventId != 0) {
+		            eventsWithSpecialContent.put(conventionEvent, specialEventId);
+	            }
 
                 // Some events (like the guest of honor event and the games event) have special pages and are not retrieved from the API
                 // exposed by the server. For these spacial cases, add special handing of placing hardcoded texts/images.
@@ -95,6 +117,20 @@ public class ModelParser {
                 internalEventNumber++;
             }
         }
+
+	    // Handle special events
+	    for (Map.Entry<ConventionEvent, Integer> eventEntry : eventsWithSpecialContent.entrySet()) {
+		    ParsedDescription parsedDescription = contentById.get(eventEntry.getValue());
+		    if (parsedDescription != null) {
+			    ConventionEvent event = eventEntry.getKey();
+			    event.setDescription(parsedDescription.getDescription());
+			    event.setImages(mapper.getImagesList(parsedDescription.getEventImageIds()));
+
+			    if (event.getImages().size() == 0) {
+				    event.setImages(Collections.singletonList(EventToImageResourceIdMapper.EVENT_GENERIC));
+			    }
+		    }
+	    }
 
         return eventList;
     }
