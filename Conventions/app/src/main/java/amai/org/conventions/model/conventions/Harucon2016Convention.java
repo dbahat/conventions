@@ -23,7 +23,7 @@ public class Harucon2016Convention extends Convention {
 
 	@Override
 	protected ConventionStorage initStorage() {
-		return new ConventionStorage(this, R.raw.harucon_convention_events);
+		return new ConventionStorage(this, R.raw.harucon2016_convention_events);
 	}
 
 	@Override
