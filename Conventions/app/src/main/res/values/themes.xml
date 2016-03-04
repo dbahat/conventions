@@ -33,44 +33,9 @@
         <item name="eventDetailsDefaultBackgroundColor">@color/white</item>
     </style>
 
-    <style name="AppBaseTheme.Cami2015.Toolbar"/>
-
-    <style name="AppBaseTheme.Cami2015">
-        <item name="notificationSmallIcon">@drawable/cami_logo_small_white</item>
-        <item name="notificationLargeIcon">@drawable/cami_logo_app_icon</item>
-
-        <item name="toolbarBackground">@color/maroon</item>
-        <item name="toolbarLogo">@drawable/cami_logo_toolbar</item>
-        <item name="toolbarLogoType">bitmap</item>
-        <item name="toolbarIconAccentColor">@color/light_green</item>
-        <item name="navigationPopupSelectedColor">@color/maroon</item>
-
-        <item name="homeScreenlayout">@layout/activity_home_cami2015</item>
-        <item name="aboutTopView">@id/buttons_layout</item>
-        <item name="aboutBottomView">@id/buttons_layout</item>
-        <item name="aboutLeftView">@id/buttons_layout</item>
-        <item name="aboutRightView">@id/buttons_layout</item>
-
-        <item name="amaiLogo">@drawable/amai_logo_red</item>
-
-        <item name="eventTimeDefaultTextColor">@android:color/black</item>
-
-        <item name="floorBackground">@color/orange</item>
-
-        <item name="nextEventStartTimeBackground">@color/orange</item>
-        <item name="nextEventStartTimeTextColor">@android:color/black</item>
-
-        <!-- Note: if you change the theme, these values should be copied manually to file drawable\feedback_highlighted_button.xml
-         because prior to L it was not supported to reference theme attributes from a drawable xml -->
-        <item name="eventFeedbackHighlightedButtonColor">@color/maroon</item>
-        <item name="eventFeedbackHighlightedButtonPressedColor">@color/dark_maroon</item>
-        <item name="feedbackAnswerButtonColor">@color/maroon</item>
-        <item name="feedbackAnswerButtonSelectedColor">@color/dark_orange</item>
-    </style>
-
     <style name="AppBaseTheme.Harucon2016.Toolbar"/>
 
-    <style name="AppBaseTheme.Harucon2016" parent="AppBaseTheme.Cami2015">
+    <style name="AppBaseTheme.Harucon2016">
         <item name="notificationSmallIcon">@drawable/harucon2016_notification_small</item>
         <item name="notificationLargeIcon">@drawable/harucon2016_logo_toolbar</item>
 
@@ -90,6 +55,8 @@
 
         <item name="eventTimeDefaultTextColor">@color/white</item>
 
+        <item name="floorBackground">@color/white</item>
+
         <item name="nextEventStartTimeBackground">@color/medium_purple</item>
         <item name="nextEventStartTimeTextColor">@color/white</item>
 
@@ -99,6 +66,5 @@
         <item name="eventFeedbackHighlightedButtonPressedColor">@color/very_dark_purple_button</item>
         <item name="feedbackAnswerButtonColor">@color/dark_purple</item>
         <item name="feedbackAnswerButtonSelectedColor">@color/red</item>
-        <item name="eventDetailsDefaultBackgroundColor">@color/white</item>
     </style>
 </resources>

@@ -48,42 +48,6 @@ public class Cami2015Convention extends Convention {
 	@Override
 	protected EventToImageResourceIdMapper initImageMapper() {
 		EventToImageResourceIdMapper imageMapper = new EventToImageResourceIdMapper();
-		imageMapper.addMapping("http://2015.cami.org.il/wp-content/uploads/sites/4/2015/06/שרון-טורנר.jpg", R.drawable.event_history);
-		imageMapper.addMapping("http://2015.cami.org.il/wp-content/uploads/sites/4/2015/06/אמנון-לוי.png", R.drawable.event_school);
-		imageMapper.addMapping("http://2015.cami.org.il/wp-content/uploads/sites/4/2015/01/button-bg1.jpg", R.drawable.event_simon);
-		imageMapper.addMapping("http://2015.cami.org.il/wp-content/uploads/sites/4/2015/07/שירה-אביגד-1024x775.png", R.drawable.event_song);
-		imageMapper.addMapping("http://2015.cami.org.il/wp-content/uploads/sites/4/2015/01/דניאל.png", R.drawable.event_anime);
-		imageMapper.addMapping("http://2015.cami.org.il/wp-content/uploads/sites/4/2015/06/Pok'mon_Trading_Card_Game-300x154.png", R.drawable.event_pokemon);
-		imageMapper.addMapping("http://2015.cami.org.il/wp-content/uploads/sites/4/2015/07/reika-page-5.jpg", R.drawable.event_reika1);
-		imageMapper.addMapping("http://2015.cami.org.il/wp-content/uploads/sites/4/2015/07/reika-page-4.jpg", R.drawable.event_reika2);
-		imageMapper.addMapping("http://2015.cami.org.il/wp-content/uploads/sites/4/2015/07/reika-page-3.jpg", R.drawable.event_reika3);
-		imageMapper.addMapping("http://2015.cami.org.il/wp-content/uploads/sites/4/2015/06/ניבה-קרן-אור-678x1024.jpg", R.drawable.event_bento);
-		imageMapper.addMapping("http://2015.cami.org.il/wp-content/uploads/sites/4/2015/06/שירן-איבניצקי.gif", R.drawable.event_political_manga);
-		imageMapper.addMapping("http://2015.cami.org.il/wp-content/uploads/sites/4/2015/07/קרן-לין.png", R.drawable.event_armor);
-		imageMapper.addMapping("http://2015.cami.org.il/wp-content/uploads/sites/4/2015/07/שרית.jpg", R.drawable.event_sweets);
-		imageMapper.addMapping("http://2015.cami.org.il/wp-content/uploads/sites/4/2015/07/דני-פייגלמן.jpg", R.drawable.event_gundam);
-		imageMapper.addMapping("http://2015.cami.org.il/wp-content/uploads/sites/4/2015/07/ליעד-באטל-רויאל-683x1024.jpg", R.drawable.event_battle_royale);
-		imageMapper.addMapping("http://2015.cami.org.il/wp-content/uploads/sites/4/2015/06/רומן-למפרט.jpg", R.drawable.event_visual_novels);
-		imageMapper.addMapping("http://2015.cami.org.il/wp-content/uploads/sites/4/2015/07/יוני.png", R.drawable.event_kiritsugu);
-		imageMapper.addMapping("http://2015.cami.org.il/wp-content/uploads/sites/4/2015/06/עומר-בן-יוסף.png", R.drawable.event_food);
-		imageMapper.addMapping("http://2015.cami.org.il/wp-content/uploads/sites/4/2015/06/cosplay1-300x169.jpg", R.drawable.event_cosplay1);
-		imageMapper.addMapping("http://2015.cami.org.il/wp-content/uploads/sites/4/2015/06/cosplay3-300x168.jpg", R.drawable.event_cosplay3);
-		imageMapper.addMapping("http://2015.cami.org.il/wp-content/uploads/sites/4/2015/06/cosplay2-300x168.jpg", R.drawable.event_cosplay2);
-		imageMapper.addMapping("http://2015.cami.org.il/wp-content/uploads/sites/4/2015/07/לין-כהן--816x1024.jpg", R.drawable.event_speech);
-		imageMapper.addMapping("http://2015.cami.org.il/wp-content/uploads/sites/4/2015/06/רענן-פיקלר.jpg", R.drawable.event_idols);
-		imageMapper.addMapping("http://2015.cami.org.il/wp-content/uploads/sites/4/2015/06/פאנל-יאוי-724x1024.jpg", R.drawable.event_yaoi);
-		imageMapper.addMapping("http://2015.cami.org.il/wp-content/uploads/sites/4/2015/07/1502446_923383967713249_1082258373542128403_o-678x1024.jpg", R.drawable.event_eatable_cosplay);
-		imageMapper.addMapping("http://2015.cami.org.il/wp-content/uploads/sites/4/2015/07/QgCpzHH-1024x741.jpg", R.drawable.event_trivia);
-
-		// Non-URL IDs
-		imageMapper.addMapping(EventToImageResourceIdMapper.EVENT_GENERIC, R.drawable.event_generic);
-		imageMapper.addMapping(ImageIds.EVENT_REIKA1, R.drawable.event_reika1);
-		imageMapper.addMapping(ImageIds.EVENT_REIKA2, R.drawable.event_reika2);
-		imageMapper.addMapping(ImageIds.EVENT_REIKA3, R.drawable.event_reika3);
-		imageMapper.addMapping(ImageIds.EVENT_POKEMON, R.drawable.event_pokemon);
-		imageMapper.addMapping(ImageIds.EVENT_COLORIDO_TYPHOON, R.drawable.event_colorido_typhoon);
-		imageMapper.addMapping(ImageIds.EVENT_COLORIDO_SUN, R.drawable.event_colorido_sun);
-		imageMapper.addMapping(ImageIds.EVENT_PANDORA, R.drawable.event_pandora);
 
 		return imageMapper;
 	}
