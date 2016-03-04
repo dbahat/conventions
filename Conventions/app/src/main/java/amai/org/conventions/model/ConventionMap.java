@@ -14,6 +14,10 @@ public class ConventionMap {
 	private List<Floor> floors = new ArrayList<>();
 	private List<MapLocation> locations = new ArrayList<>();
 
+	public boolean isAvailable() {
+		return floors != null && floors.size() > 0;
+	}
+
 	public List<Floor> getFloors() {
 		return floors;
 	}

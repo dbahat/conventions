@@ -83,8 +83,8 @@ public class AppBarLayoutSnapBehavior extends AppBarLayout.Behavior {
 	}
 
 	@Override
-	public void onNestedScroll(CoordinatorLayout coordinatorLayout, AppBarLayout child, View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed) {
-		super.onNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed);
-		this.lastScroll = dyConsumed + dyUnconsumed;
+	public void onNestedPreScroll(CoordinatorLayout coordinatorLayout, AppBarLayout child, View target, int dx, int dy, int[] consumed) {
+		super.onNestedPreScroll(coordinatorLayout, child, target, dx, dy, consumed);
+		this.lastScroll = dy;
 	}
 }

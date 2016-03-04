@@ -203,7 +203,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 
     private boolean containsKeyword(ConventionEvent event, String keyword) {
         // Filter out HTML tags from the event description
-        String filteredEventDescription = Html.fromHtml(event.getDescription()).toString();
+        String filteredEventDescription = event.getDescription().isEmpty() ? "" : Html.fromHtml(event.getDescription()).toString();
 
         keyword = keyword.toLowerCase();
         return event.getTitle().toLowerCase().contains(keyword)

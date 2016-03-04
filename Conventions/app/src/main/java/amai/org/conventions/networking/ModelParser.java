@@ -10,6 +10,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
@@ -63,16 +64,18 @@ public class ModelParser {
                     Log.i(TAG, "Found and added new hall with name " + hallName);
                 }
 
-                ParsedDescription eventDescription = parseEventDescription(eventObj.get("content").getAsString());
-                int color = parseColorFromServer(eventObj.get("timetable-bg").getAsString());
+                ParsedDescription eventDescription = parseEventDescription("1".equals(eventObj.get("timetable-disable-url").getAsString()) ? null : eventObj.get("content").getAsString());
+                int bgColor = parseColorFromServer(eventObj.get("timetable-bg").getAsString());
+	            int textColor = parseColorFromServer(eventObj.get("timetable-text-color").getAsString());
 
                 ConventionEvent conventionEvent = new ConventionEvent()
                         .withServerId(eventId)
-		                .withColor(color)
+		                .withBackgroundColor(bgColor)
+		                .withTextColor(textColor)
                         .withTitle(eventObj.get("title").getAsString())
                         .withLecturer(internalEventObj.get("before_hour_text").getAsString())
                         .withDescription(eventDescription.getDescription())
-                        .withType(new EventType(color, eventType))
+                        .withType(new EventType(bgColor, eventType))
                         .withStartTime(startTime)
                         .withEndTime(endTime)
                         .withHall(hall)
@@ -113,6 +116,10 @@ public class ModelParser {
     }
 
     private ParsedDescription parseEventDescription(String rawEventDescription) {
+	    if (rawEventDescription == null) {
+		    return new ParsedDescription();
+	    }
+
         String eventDescription = rawEventDescription
                 // Remove class, style, height and width attributes in tags since they make the element take
                 // up more space than needed and are not supported anyway
@@ -149,8 +156,8 @@ public class ModelParser {
     }
 
     private class ParsedDescription {
-        private String description;
-        private List<String> eventImageIds;
+        private String description = "";
+        private List<String> eventImageIds = new ArrayList<>();
 
         public String getDescription() {
             return description;

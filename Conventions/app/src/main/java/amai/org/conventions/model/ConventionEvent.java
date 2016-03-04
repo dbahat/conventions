@@ -8,6 +8,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import amai.org.conventions.R;
+import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.networking.ModelParser;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Objects;
@@ -17,7 +19,8 @@ public class ConventionEvent implements Serializable {
 
 	private String id;
     private int serverId;
-	private int color;
+	private int backgroundColor;
+	private int textColor;
     private String title;
     private String lecturer;
     private Date startTime;
@@ -31,16 +34,28 @@ public class ConventionEvent implements Serializable {
 		images = new ArrayList<>();
 	}
 
-	public int getColor() {
-		return color;
+	public void setBackgroundColor(int color) {
+		this.backgroundColor = color;
 	}
 
-	public void setColor(int color) {
-		this.color = color;
+	public ConventionEvent withBackgroundColor(int color) {
+		setBackgroundColor(color);
+		return this;
 	}
 
-	public ConventionEvent withColor(int color) {
-		setColor(color);
+	public void setTextColor(int textColor) {
+		this.textColor = textColor;
+	}
+
+	public int getTextColor(Context context) {
+		if (textColor != ModelParser.NO_COLOR) {
+			return textColor;
+		}
+		return ThemeAttributes.getColor(context, R.attr.eventTimeDefaultTextColor);
+	}
+
+	public ConventionEvent withTextColor(int textColor) {
+		setTextColor(textColor);
 		return this;
 	}
 
@@ -140,8 +155,8 @@ public class ConventionEvent implements Serializable {
     }
 
 	public int getBackgroundColor(Context context) {
-		if (color != ModelParser.NO_COLOR) {
-			return color;
+		if (backgroundColor != ModelParser.NO_COLOR) {
+			return backgroundColor;
 		}
 		return getType().getBackgroundColor();
 	}

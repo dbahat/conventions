@@ -279,7 +279,7 @@ public class Cami2015Convention extends Convention {
 
 	@Override
 	public ConventionEvent handleSpecialEvent(ConventionEvent conventionEvent) {
-		if (conventionEvent.getDescription().length() == 0) {
+		if (conventionEvent.getDescription().isEmpty()) {
 			if (conventionEvent.getType().getDescription().equals(GUEST_OF_HONOR)) {
 				conventionEvent = handleGuestOfHonorEvent(conventionEvent);
 			}

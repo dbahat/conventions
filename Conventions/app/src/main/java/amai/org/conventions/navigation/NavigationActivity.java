@@ -95,11 +95,15 @@ public abstract class NavigationActivity extends AppCompatActivity {
 
 		final List<NavigationItem> items = new ArrayList<>(Arrays.asList(
 				new NavigationItem(ProgrammeActivity.class, getString(R.string.programme_title), getResources().getDrawable(R.drawable.events_list)),
-				new NavigationItem(MyEventsActivity.class, getString(R.string.my_events_title), getResources().getDrawable(R.drawable.events_list_with_star)),
-				new NavigationItem(MapActivity.class, getString(R.string.map), getResources().getDrawable(android.R.drawable.ic_dialog_map)),
-				new NavigationItem(UpdatesActivity.class, getString(R.string.updates), getResources().getDrawable(android.R.drawable.stat_notify_sync_noanim)),
-				new NavigationItem(ArrivalMethodsActivity.class, getString(R.string.arrival_methods), getResources().getDrawable(R.drawable.directions))
+				new NavigationItem(MyEventsActivity.class, getString(R.string.my_events_title), getResources().getDrawable(R.drawable.events_list_with_star))
 		));
+
+		// Only add the map if it's available
+		if (Convention.getInstance().getMap().isAvailable()) {
+			items.add(new NavigationItem(MapActivity.class, getString(R.string.map), getResources().getDrawable(android.R.drawable.ic_dialog_map)));
+		}
+		items.add(new NavigationItem(UpdatesActivity.class, getString(R.string.updates), getResources().getDrawable(android.R.drawable.stat_notify_sync_noanim)));
+		items.add(new NavigationItem(ArrivalMethodsActivity.class, getString(R.string.arrival_methods), getResources().getDrawable(R.drawable.directions)));
 
 		if (Convention.getInstance().canFillFeedback()) {
 			items.add(new NavigationItem(FeedbackActivity.class, getString(R.string.feedback), getResources().getDrawable(R.drawable.feedback_menu_icon)));

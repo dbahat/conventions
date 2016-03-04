@@ -104,7 +104,7 @@ public class EventView extends FrameLayout {
 	    setAlarmIconFromEvent(event);
 
         // Keep the description text without any HTML markup, for usage inside setKeywordsHighlighting()
-        searchDescription.setText(Html.fromHtml(event.getDescription()).toString().replace("\n", " "));
+        searchDescription.setText(event.getDescription().isEmpty() ? "" : Html.fromHtml(event.getDescription()).toString().replace("\n", " "));
 
         // Setting the event id inside the view tag, so we can easily extract it from the view when listening to onClick events.
         eventContainer.setTag(event.getId());
@@ -112,6 +112,7 @@ public class EventView extends FrameLayout {
 
     private void setColorsFromEvent(ConventionEvent event) {
         setEventTypeColor(event.getBackgroundColor(getContext()));
+	    setEventTimeTextColor(event.getTextColor(getContext()));
         if (!event.hasStarted()) {
             setEventColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeNotStartedColor));
         } else if (event.hasEnded()) {
@@ -137,6 +138,11 @@ public class EventView extends FrameLayout {
     public void setEventTypeColor(int color) {
         setLayoutColor(timeLayout, color);
     }
+
+	public void setEventTimeTextColor(int color) {
+		startTime.setTextColor(color);
+		endTime.setTextColor(color);
+	}
 
     public void setEventColor(int color) {
         setLayoutColor(eventDescription, color);

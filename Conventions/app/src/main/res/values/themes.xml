@@ -53,6 +53,8 @@
 
         <item name="amaiLogo">@drawable/amai_logo_red</item>
 
+        <item name="eventTimeDefaultTextColor">@android:color/black</item>
+
         <item name="floorBackground">@color/orange</item>
 
         <item name="nextEventStartTimeBackground">@color/orange</item>
@@ -85,6 +87,8 @@
         <item name="aboutRightView">@id/home_buttons_bottom</item>
 
         <item name="amaiLogo">@drawable/amai_logo_dark_blue</item>
+
+        <item name="eventTimeDefaultTextColor">@color/white</item>
 
         <item name="nextEventStartTimeBackground">@color/medium_purple</item>
         <item name="nextEventStartTimeTextColor">@color/white</item>
