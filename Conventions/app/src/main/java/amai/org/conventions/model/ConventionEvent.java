@@ -1,6 +1,7 @@
 package amai.org.conventions.model;
 
 import android.content.Context;
+import android.text.Html;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class ConventionEvent implements Serializable {
     private Hall hall;
 	private List<String> images;
     private String description;
+	private String plainTextDescription;
 
 	public ConventionEvent() {
 		images = new ArrayList<>();
@@ -65,12 +67,17 @@ public class ConventionEvent implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+	    this.plainTextDescription = description.isEmpty() ? "" : Html.fromHtml(description).toString().replace("\n", " ");
     }
 
     public ConventionEvent withDescription(String description) {
         setDescription(description);
         return this;
     }
+
+	public String getPlainTextDescription() {
+		return plainTextDescription;
+	}
 
     public void setId(String id) {
         this.id = id;

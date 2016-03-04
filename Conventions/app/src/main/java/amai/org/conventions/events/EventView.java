@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.CardView;
-import android.text.Html;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
@@ -44,7 +43,10 @@ public class EventView extends FrameLayout {
     private final ViewGroup eventDescription;
     private final CardView eventContainer;
     private final View bottomLayout;
+
+	// Used for keyword highlighting - see setKeywordsHighlighting
     private final TextView searchDescription;
+	private String eventDescriptionContent;
 
     public EventView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -103,8 +105,8 @@ public class EventView extends FrameLayout {
 	    setFeedbackIconFromEvent(event);
 	    setAlarmIconFromEvent(event);
 
-        // Keep the description text without any HTML markup, for usage inside setKeywordsHighlighting()
-        searchDescription.setText(event.getDescription().isEmpty() ? "" : Html.fromHtml(event.getDescription()).toString().replace("\n", " "));
+	    eventDescriptionContent = event.getPlainTextDescription();
+        searchDescription.setText("");
 
         // Setting the event id inside the view tag, so we can easily extract it from the view when listening to onClick events.
         eventContainer.setTag(event.getId());
@@ -280,11 +282,12 @@ public class EventView extends FrameLayout {
     }
 
     public void setKeywordsHighlighting(List<String> keywords) {
-
         // Reset the state of the bottom layout, in case it was changed by recent call to set keyword highlighting
         bottomLayout.setVisibility(VISIBLE);
         searchDescription.setVisibility(GONE);
-        boolean wasDescriptionSnipped = false;
+        boolean isAnyDescriptionKeywordHighlighted = false;
+
+	    String filteredDescriptionText = eventDescriptionContent;
 
         for (String keyword : keywords) {
             if (keyword.length() > 0) {
@@ -294,20 +297,19 @@ public class EventView extends FrameLayout {
                 boolean didHighlightLectureName = tryHighlightKeywordInTextView(lecturerName, lowerCaseKeyword);
                 boolean didHighlightHallName = tryHighlightKeywordInTextView(hallName, lowerCaseKeyword);
 
-                String filteredDescriptionText = searchDescription.getText().toString();
-                boolean isKeywordInDescription = filteredDescriptionText.toLowerCase().contains(lowerCaseKeyword);
-
-                // If the keyword is in the description, hide the lecturer name and hall name and show the description text next to the keyword insead
+                // If the keyword is in the description, hide the lecturer name and hall name and show the description text next to the keyword instead
                 // (assuming there are no highlighted keywords in the views we hid)
-                if (!didHighlightLectureName && !didHighlightHallName && isKeywordInDescription) {
-                    bottomLayout.setVisibility(GONE);
-                    searchDescription.setVisibility(VISIBLE);
-
-                    if (!wasDescriptionSnipped) {
-                        searchDescription.setText(Strings.snipTextNearKeyword(filteredDescriptionText, lowerCaseKeyword));
-                        wasDescriptionSnipped = true;
-                    }
-                    tryHighlightKeywordInTextView(searchDescription, lowerCaseKeyword);
+                if (!didHighlightLectureName && !didHighlightHallName) {
+	                if (filteredDescriptionText.toLowerCase().contains(lowerCaseKeyword)) {
+	                    if (!isAnyDescriptionKeywordHighlighted) {
+		                    bottomLayout.setVisibility(GONE);
+		                    searchDescription.setVisibility(VISIBLE);
+		                    searchDescription.setText(Strings.snipTextNearKeyword(filteredDescriptionText, lowerCaseKeyword));
+		                    filteredDescriptionText = searchDescription.getText().toString();
+	                        isAnyDescriptionKeywordHighlighted = true;
+	                    }
+	                    tryHighlightKeywordInTextView(searchDescription, lowerCaseKeyword);
+	                }
                 }
             }
         }

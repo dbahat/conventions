@@ -82,6 +82,10 @@ public class EventActivity extends NavigationActivity {
 
 		String eventId = getIntent().getStringExtra(EXTRA_EVENT_ID);
 		conventionEvent = Convention.getInstance().findEventById(eventId);
+		if (conventionEvent == null) {
+			throw new RuntimeException("Could not find event with id " + eventId);
+		}
+
 		setToolbarTitle(conventionEvent.getType().getDescription());
 
 		final boolean shouldFocusOnFeedback = getIntent().getBooleanExtra(EXTRA_FOCUS_ON_FEEDBACK, false);

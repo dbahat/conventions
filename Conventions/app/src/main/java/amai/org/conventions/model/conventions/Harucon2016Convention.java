@@ -61,7 +61,6 @@ public class Harucon2016Convention extends Convention {
 
 	@Override
 	protected String initFeedbackRecipient() {
-		// Until we have the actual recipient - we don't want to accidently send mails to Cami recipient
 		return "content@harucon.org.il";
 	}
 
