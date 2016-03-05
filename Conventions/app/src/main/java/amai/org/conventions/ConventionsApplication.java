@@ -2,7 +2,6 @@ package amai.org.conventions;
 
 import android.app.Application;
 import android.content.Context;
-import android.util.Log;
 
 import com.google.android.gms.analytics.ExceptionReporter;
 import com.google.android.gms.analytics.GoogleAnalytics;
@@ -17,6 +16,7 @@ import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.EventNotification;
 import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Settings;
 
 public class ConventionsApplication extends Application {
@@ -107,7 +107,7 @@ public class ConventionsApplication extends Application {
 
             return String.format(Dates.getLocale(), "%s. %s.",
                     description,
-                    Log.getStackTraceString(t));
+                    android.util.Log.getStackTraceString(t));
         }
     }
 

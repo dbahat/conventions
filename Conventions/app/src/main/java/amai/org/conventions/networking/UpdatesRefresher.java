@@ -2,7 +2,6 @@ package amai.org.conventions.networking;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.facebook.AccessToken;
 import com.facebook.FacebookRequestError;
@@ -24,6 +23,7 @@ import java.util.TimeZone;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.Update;
 import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.Log;
 
 public class UpdatesRefresher {
 	public interface OnUpdateFinishedListener {
