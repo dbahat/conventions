@@ -23,10 +23,10 @@ public class AspectRatioMeasurer {
 		int height;
 		if (requestedWidth != WRAP_CONTENT) {
 			width = measuredWidth;
-			height = Math.round(width * drawable.getIntrinsicHeight() / (float) drawable.getIntrinsicWidth());
+			height = (int) Math.ceil(width * drawable.getIntrinsicHeight() / (float) drawable.getIntrinsicWidth());
 		} else {
 			height = measuredHeight;
-			width = Math.round(height * drawable.getIntrinsicWidth() / (float) drawable.getIntrinsicHeight());
+			width = (int) Math.ceil(height * drawable.getIntrinsicWidth() / (float) drawable.getIntrinsicHeight());
 		}
 
 		return new Point(width, height);
