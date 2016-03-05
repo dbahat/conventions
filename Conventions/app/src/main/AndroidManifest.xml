@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="amai.org.conventions"
-    android:versionCode="16"
-    android:versionName="1.2.9" >
+    android:versionCode="17"
+    android:versionName="2.0.0" >
 
     <!-- For notifications -->
     <uses-permission android:name="android.permission.VIBRATE" />
 
-    <!-- Required for google maps -->
+    <!-- Required for google maps, updates and refreshing the programme -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
