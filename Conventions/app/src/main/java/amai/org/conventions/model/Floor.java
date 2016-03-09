@@ -6,7 +6,9 @@ public class Floor {
 	private int number;
 	private String name;
 	private int imageResource;
-	private int markerHeight;
+	private float defaultMarkerHeight;
+	private float imageHeight;
+	private float imageWidth;
 
 	public Floor(int number) {
 		this.number = number;
@@ -42,16 +44,42 @@ public class Floor {
 		return this;
 	}
 
-	public int getMarkerHeight() {
-		return markerHeight;
+	public float getDefaultMarkerHeight() {
+		return defaultMarkerHeight;
 	}
 
-	public void setMarkerHeight(int markerHeight) {
-		this.markerHeight = markerHeight;
+	public void setDefaultMarkerHeight(float defaultMarkerHeight) {
+		this.defaultMarkerHeight = defaultMarkerHeight;
 	}
 
-	public Floor withMarkerHeight(int markerHeight) {
-		setMarkerHeight(markerHeight);
+	public Floor withDefaultMarkerHeight(float markerHeight) {
+		setDefaultMarkerHeight(markerHeight);
+		return this;
+	}
+
+	public float getImageHeight() {
+		return imageHeight;
+	}
+
+	public void setImageHeight(float imageHeight) {
+		this.imageHeight = imageHeight;
+	}
+
+	public Floor withImageHeight(float imageHeight) {
+		setImageHeight(imageHeight);
+		return this;
+	}
+
+	public float getImageWidth() {
+		return imageWidth;
+	}
+
+	public void setImageWidth(float imageWidth) {
+		this.imageWidth = imageWidth;
+	}
+
+	public Floor withImageWidth(float imageWidth) {
+		setImageWidth(imageWidth);
 		return this;
 	}
 

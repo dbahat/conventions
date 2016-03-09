@@ -73,12 +73,13 @@
                 android:layout_weight="0.5"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:onClick="onNavigationButtonClicked"
                 android:tag="0">
 
                 <amai.org.conventions.customviews.AspectRatioImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/harucon2016_map_soon"
+                    android:src="@drawable/harucon2016_map"
                     android:scaleType="fitCenter"
                     />
             </FrameLayout>

@@ -377,7 +377,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
 			    mapFloorImage.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 	            Picture picture = svg.renderToPicture();
-			    mapFloorImage.setImageResourceFromDrawable(new PictureDrawable(picture), 100, 100);
+			    mapFloorImage.setImageResourceFromDrawable(new PictureDrawable(picture), floor.getImageWidth(), floor.getImageHeight());
 
 			    Animation animation = null;
 			    if (showAnimation) {
@@ -458,16 +458,17 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		ImageLayout.LayoutParams layoutParams = new ImageLayout.LayoutParams();
 		// Marker size
 		layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT;
-		layoutParams.height = location.getFloor().getMarkerHeight();
+		layoutParams.height = location.getMarkerHeight();
+
 		// Marker location
 		layoutParams.centerX = location.getX();
-		layoutParams.bottom = 100 - location.getY();
+		layoutParams.bottom = floor.getImageHeight() - location.getY();
 
 		markerImageView.setLayoutParams(layoutParams);
 		markerImageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 
 		// On click handler
-		Marker marker = new Marker(location, markerImageView, markerShadowView, markerImageView.getDrawable(),
+		Marker marker = new Marker(location, markerImageView, markerImageView.getDrawable(),
 				new Marker.DrawableProvider() {
 					Drawable drawable = null;
 					@Override

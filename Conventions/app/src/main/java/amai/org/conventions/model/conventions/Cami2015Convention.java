@@ -118,8 +118,18 @@ public class Cami2015Convention extends Convention {
 		Hall eshkol2 = findHallByName(ESHKOL2_NAME);
 		Hall games = findHallByName(GAMES_HALL_NAME);
 
-		Floor floor1 = new Floor(1).withName("מפלס תחתון וקומת ביניים").withImageResource(R.raw.cami_floor1).withMarkerHeight(13);
-		Floor floor2 = new Floor(2).withName("מפלס עליון").withImageResource(R.raw.cami_floor2).withMarkerHeight(14);
+		Floor floor1 = new Floor(1)
+				.withName("מפלס תחתון וקומת ביניים")
+				.withImageResource(R.raw.cami_floor1)
+				.withImageHeight(100)
+				.withImageWidth(100)
+				.withDefaultMarkerHeight(13);
+		Floor floor2 = new Floor(2)
+				.withName("מפלס עליון")
+				.withImageResource(R.raw.cami_floor2)
+				.withDefaultMarkerHeight(14)
+				.withImageHeight(100)
+				.withImageWidth(100);
 
 		return new ConventionMap()
 				.withFloors(Arrays.asList(floor1, floor2))

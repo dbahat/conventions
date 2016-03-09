@@ -8,35 +8,31 @@ import android.view.animation.BounceInterpolator;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 
+import com.manuelpeinado.imagelayout.ImageLayout;
+
 import amai.org.conventions.model.MapLocation;
 
 public class Marker {
 	private static final float SCALE_FACTOR = 1.3f;
 	private MapLocation location;
 	private ImageView imageView;
-	private View shadowImageView;
 	private boolean selected = false;
 	private Drawable drawable;
-	private int imageWidth;
-	private int imageHeight;
+	private float imageWidth;
+	private float imageHeight;
 	private DrawableProvider selectedDrawableProvider;
-	private int shadowWidth;
-	private int shadowHeight;
 	private MarkerListener clickListener;
+	private int indexInParent = -1;
 
-	public Marker(MapLocation location, ImageView imageView, View shadowImageView, Drawable drawable, DrawableProvider selectedDrawableProvider) {
+	public Marker(MapLocation location, ImageView imageView, Drawable drawable, DrawableProvider selectedDrawableProvider) {
 		this.location = location;
 		this.imageView = imageView;
-		this.shadowImageView = shadowImageView;
 		this.drawable = drawable;
 		this.selectedDrawableProvider = selectedDrawableProvider;
 
-		imageWidth = imageView.getLayoutParams().width;
-		imageHeight = imageView.getLayoutParams().height;
-		if (shadowImageView != null) {
-			shadowWidth = shadowImageView.getLayoutParams().width;
-			shadowHeight = shadowImageView.getLayoutParams().height;
-		}
+		ImageLayout.LayoutParams layoutParams = (ImageLayout.LayoutParams) imageView.getLayoutParams();
+		imageWidth = layoutParams.width;
+		imageHeight = layoutParams.height;
 
 		imageView.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -66,11 +62,15 @@ public class Marker {
 		}
 		selected = true;
 
+		// Bring to front
+		ViewGroup parent = (ViewGroup) imageView.getParent();
+		indexInParent = parent.indexOfChild(imageView);
+		parent.bringChildToFront(imageView);
+
 		// Change the marker image and make it marker bigger. Animate the size change.
 		imageView.setImageDrawable(selectedDrawableProvider.getDrawable());
 
 		scaleAndAnimate(imageView, getScaledSize(imageWidth), getScaledSize(imageHeight), animate);
-		scaleAndAnimate(shadowImageView, getScaledSize(shadowWidth), getScaledSize(shadowHeight), animate);
 	}
 
 	public void deselect() {
@@ -83,40 +83,47 @@ public class Marker {
 		}
 		selected = false;
 
+		// Return to original z-order
+		if (indexInParent != -1) {
+			ViewGroup parent = (ViewGroup) imageView.getParent();
+			parent.removeView(imageView);
+			parent.addView(imageView, indexInParent);
+			indexInParent = -1;
+		}
+
 		// Revert the marker image and size. Animate the size change.
 		imageView.setImageDrawable(drawable);
 
 		scaleAndAnimate(imageView, imageWidth, imageHeight, animate);
-		scaleAndAnimate(shadowImageView, shadowWidth, shadowHeight, animate);
 	}
 
 	public boolean isSelected() {
 		return selected;
 	}
 
-	private int getScaledSize(int size) {
+	private float getScaledSize(float size) {
 		if (size == ViewGroup.LayoutParams.WRAP_CONTENT) {
 			return size;
 		}
-		return (int) (size * SCALE_FACTOR);
+		return size * SCALE_FACTOR;
 	}
 
-	private void scaleAndAnimate(View view, int newWidth, int newHeight, boolean animate) {
+	private void scaleAndAnimate(View view, float newWidth, float newHeight, boolean animate) {
 		if (view == null) {
 			return;
 		}
 
-		ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-		int width = layoutParams.width;
-		int height = layoutParams.height;
+		ImageLayout.LayoutParams layoutParams = (ImageLayout.LayoutParams) view.getLayoutParams();
+		float width = layoutParams.width;
+		float height = layoutParams.height;
 
 		layoutParams.width = newWidth;
 		layoutParams.height = newHeight;
 		view.setLayoutParams(layoutParams);
 
 		if (animate) {
-			float widthScale = width / (float) newWidth;
-			float heightScale = height / (float) newHeight;
+			float widthScale = width / newWidth;
+			float heightScale = height / newHeight;
 			// If one of them is wrap_content, take the scale from the other size
 			if (width == ViewGroup.LayoutParams.WRAP_CONTENT) {
 				// Lint suppress justification: we assign the scale for the width/height, which is ok.

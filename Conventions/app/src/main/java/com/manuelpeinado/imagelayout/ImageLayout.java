@@ -88,8 +88,8 @@ public class ImageLayout extends ViewGroup {
 
 	private ImageResource image;
     private Rect destRect;
-    private int imageWidth;
-    private int imageHeight;
+    private float imageWidth;
+    private float imageHeight;
     private Rect srcRect;
     private ImageFitter fitter;
     private int fitMode = DEFAULT_FIT_MODE;
@@ -161,11 +161,11 @@ public class ImageLayout extends ViewGroup {
     /**
      * Changes the background image and its layout dimensions.
      */
-    public void setImageResource(int imageResource, int imageWidth, int imageHeight) {
+    public void setImageResource(int imageResource, float imageWidth, float imageHeight) {
 	    setImageResourceFromDrawable(getResources().getDrawable(imageResource), imageWidth, imageHeight);
     }
 
-	public void setImageResourceFromDrawable(Drawable image, int imageWidth, int imageHeight) {
+	public void setImageResourceFromDrawable(Drawable image, float imageWidth, float imageHeight) {
 		setImageResource(getImageResourceFromDrawable(image), imageWidth, imageHeight);
 	}
 
@@ -178,7 +178,7 @@ public class ImageLayout extends ViewGroup {
 		throw new RuntimeException("Drawable must be of type \"BitmapDrawable\" or \"PictureDrawable\"");
     }
 
-	public void setImageResource(ImageResource image, int imageWidth, int imageHeight) {
+	public void setImageResource(ImageResource image, float imageWidth, float imageHeight) {
 		this.image = image;
 		srcRect = imageRect(image);
 
@@ -198,24 +198,24 @@ public class ImageLayout extends ViewGroup {
         invalidate();
     }
 
-    private int transformWidthFromImageToView(int w) {
-        float widthRatio = destRect.width() / (float) imageWidth;
-        return (int) (w * widthRatio);
+    private int transformWidthFromImageToView(float w) {
+        float widthRatio = destRect.width() / imageWidth;
+        return Math.round(w * widthRatio);
     }
 
-    private int transformHeightFromImageToView(int h) {
-        float heightRatio = destRect.height() / (float) imageHeight;
-        return (int) (h * heightRatio);
+    private int transformHeightFromImageToView(float h) {
+        float heightRatio = destRect.height() / imageHeight;
+        return Math.round(h * heightRatio);
     }
 
-    private int transformXFromImageToView(int x) {
-        float widthRatio = destRect.width() / (float) imageWidth;
-        return destRect.left + (int) (x * widthRatio);
+    private int transformXFromImageToView(float x) {
+        float widthRatio = destRect.width() / imageWidth;
+        return destRect.left + Math.round(x * widthRatio);
     }
 
-    private int transformYFromImageToView(int y) {
-        float heightRatio = destRect.height() / (float) imageHeight;
-        return destRect.top + (int) (y * heightRatio);
+    private int transformYFromImageToView(float y) {
+        float heightRatio = destRect.height() / imageHeight;
+        return destRect.top + Math.round(y * heightRatio);
     }
 
     @Override
@@ -339,6 +339,7 @@ public class ImageLayout extends ViewGroup {
             hspec = MeasureSpec.makeMeasureSpec(height, MeasureSpec.AT_MOST);
         } else if (layoutParams.height != LayoutParams.WRAP_CONTENT) {
             int height = transformHeightFromImageToView(layoutParams.height);
+	        ((ViewGroup.LayoutParams) layoutParams).height = height;
             hspec = MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY);
         }
         return hspec;
@@ -351,6 +352,7 @@ public class ImageLayout extends ViewGroup {
             wspec = MeasureSpec.makeMeasureSpec(maxWidth, MeasureSpec.AT_MOST);
         } else if (layoutParams.width != LayoutParams.WRAP_CONTENT) {
             int width = transformWidthFromImageToView(layoutParams.width);
+	        ((ViewGroup.LayoutParams) layoutParams).width = width;
             wspec = MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY);
         }
         return wspec;
@@ -361,9 +363,10 @@ public class ImageLayout extends ViewGroup {
 
     public static class LayoutParams extends ViewGroup.LayoutParams {
         // In image coords
-        public int maxWidth = -1, maxHeight = -1;
-        public int left = -1, top = -1, right = -1, bottom = -1;
-        public int centerX = -1, centerY = -1;
+        public float maxWidth = -1, maxHeight = -1;
+        public float left = -1, top = -1, right = -1, bottom = -1;
+        public float centerX = -1, centerY = -1;
+	    public float width = -1, height = -1;
         // In view coords
         Rect transformedRect = new Rect();
 
