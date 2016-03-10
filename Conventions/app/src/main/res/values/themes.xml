@@ -55,7 +55,7 @@
 
         <item name="eventTimeDefaultTextColor">@color/white</item>
 
-        <item name="floorBackground">@color/white</item>
+        <item name="floorBackground">@color/light_purple</item>
 
         <item name="nextEventStartTimeBackground">@color/medium_purple</item>
         <item name="nextEventStartTimeTextColor">@color/white</item>
