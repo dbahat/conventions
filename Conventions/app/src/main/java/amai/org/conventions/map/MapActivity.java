@@ -37,7 +37,7 @@ import amai.org.conventions.utils.Objects;
 import amai.org.conventions.utils.Views;
 import fr.castorflex.android.verticalviewpager.VerticalViewPager;
 
-public class MapActivity extends NavigationActivity implements MapFloorFragment.OnMapArrowClickedListener {
+public class MapActivity extends NavigationActivity implements MapFloorFragment.OnMapFloorEventListener {
 
     public static final String EXTRA_FLOOR_NUMBER = "ExtraFloorNumber";
 	public static final String EXTRA_MAP_LOCATION_ID = "ExtraMapLocationId";
@@ -60,6 +60,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 	private String searchTerm;
 	private boolean showOnlyHalls;
 	private boolean isSearchClosing;
+	private Menu menu;
 
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +89,9 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 		getMenuInflater().inflate(R.menu.menu_map, menu);
+		this.menu = menu;
+		updateZoomMenuItem();
+
 		return true;
 	}
 
@@ -169,6 +173,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		setToolbarTitle(floor.getName());
 		currentFloorNumber = floor.getNumber();
 		map.setLastLookedAtFloor(floor);
+		updateZoomMenuItem();
 	}
 
 	@Override
@@ -180,6 +185,33 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
     public void onDownArrowClicked() {
 		viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
     }
+
+	private void updateZoomMenuItem() {
+		if (menu == null) {
+			return;
+		}
+		MenuItem zoomItem = menu.findItem(R.id.map_floor_zoom_to_fit);
+		if (zoomItem == null) {
+			return;
+		}
+		MapFloorFragment currentFloorFragment = getCurrentFloorFragment();
+		if (currentFloorFragment == null) {
+			return;
+		}
+
+		if (currentFloorFragment.isMapZoomedIn()) {
+			zoomItem.setTitle(getString(R.string.shrink_map));
+			zoomItem.setIcon(R.drawable.shrink);
+		} else {
+			zoomItem.setTitle(getString(R.string.enlarge_map));
+			zoomItem.setIcon(R.drawable.enlarge);
+		}
+	}
+
+	@Override
+	public void onZoomChanged() {
+		updateZoomMenuItem();
+	}
 
 	private class MapFloorAdapter extends FragmentStatePagerAdapter {
         public MapFloorAdapter(FragmentManager fm) {

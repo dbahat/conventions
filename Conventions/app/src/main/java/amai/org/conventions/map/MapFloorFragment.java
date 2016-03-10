@@ -82,7 +82,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 	private EventView locationCurrentEvent;
 	private EventView locationNextEvent;
 
-    private OnMapArrowClickedListener mapArrowClickedListener;
+    private OnMapFloorEventListener mapFloorEventsListener;
 
 	private List<Marker> floorMarkers = new LinkedList<>();
 	private MapLocation locationToSelect;
@@ -101,7 +101,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
         resolveUIElements(view);
 	    initializeLocationDetails();
-        initializeUpAndDownButtons();
+        initializeEventsListener();
 	    setMapClickListeners();
         configureMapFloorAndRestoreState(savedInstanceState);
 	    return view;
@@ -135,7 +135,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		}
 	}
 
-	private boolean isMapZoomedIn() {
+	public boolean isMapZoomedIn() {
 		return mapZoomView.getZoom() > 1.0f;
 	}
 
@@ -143,12 +143,12 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
-        if (!(activity instanceof OnMapArrowClickedListener)) {
+        if (!(activity instanceof OnMapFloorEventListener)) {
             throw new AssertionError("This fragment must be invoked form an activity implementing "
-                    + mapArrowClickedListener.getClass().getSimpleName());
+                    + mapFloorEventsListener.getClass().getSimpleName());
         }
 
-        mapArrowClickedListener = (OnMapArrowClickedListener) activity;
+        mapFloorEventsListener = (OnMapFloorEventListener) activity;
 
 		// The activity might be detached during the lifecycle while we still need a context.
 		// The application context is always valid.
@@ -158,7 +158,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
     @Override
     public void onDetach() {
 	    super.onDetach();
-        mapArrowClickedListener = null;
+        mapFloorEventsListener = null;
     }
 
 	@Override
@@ -187,12 +187,12 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
         return fragment;
     }
 
-    private void initializeUpAndDownButtons() {
+    private void initializeEventsListener() {
         upArrow.setOnClickListener(new View.OnClickListener() {
 	        @Override
 	        public void onClick(View v) {
-		        if (mapArrowClickedListener != null) {
-			        mapArrowClickedListener.onUpArrowClicked();
+		        if (mapFloorEventsListener != null) {
+			        mapFloorEventsListener.onUpArrowClicked();
 		        }
 	        }
         });
@@ -200,11 +200,28 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
         downArrow.setOnClickListener(new View.OnClickListener() {
 	        @Override
 	        public void onClick(View v) {
-		        if (mapArrowClickedListener != null) {
-			        mapArrowClickedListener.onDownArrowClicked();
+		        if (mapFloorEventsListener != null) {
+			        mapFloorEventsListener.onDownArrowClicked();
 		        }
 	        }
         });
+
+	    mapZoomView.setZoomListener(new ZoomView.ZoomViewListener() {
+		    @Override
+		    public void onZoomStarted(float zoom, float zoomx, float zoomy) {
+		    }
+
+		    @Override
+		    public void onZooming(float zoom, float zoomx, float zoomy) {
+		    }
+
+		    @Override
+		    public void onZoomEnded(float zoom, float zoomx, float zoomy) {
+			    if (mapFloorEventsListener != null) {
+				    mapFloorEventsListener.onZoomChanged();
+			    }
+		    }
+	    });
     }
 
     private void resolveUIElements(View view) {
@@ -535,9 +552,10 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		}
 	}
 
-    public interface OnMapArrowClickedListener {
+    public interface OnMapFloorEventListener {
         void onUpArrowClicked();
         void onDownArrowClicked();
+	    void onZoomChanged();
     }
 
 	@Override

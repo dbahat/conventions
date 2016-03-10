@@ -9,8 +9,8 @@
         app:showAsAction="always"/>
     <item
         android:id="@+id/map_floor_zoom_to_fit"
-        android:title="@string/zoom_to_fit"
-        android:icon="@drawable/zoom_to_fit"
+        android:title="@string/enlarge_map"
+        android:icon="@drawable/enlarge"
         android:orderInCategory="2"
         app:showAsAction="always"/>
 </menu>
