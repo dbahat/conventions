@@ -147,6 +147,9 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 
 	        @Override
 	        public void onError(FacebookException e) {
+		        if (loginLayout.getVisibility() == View.VISIBLE) {
+		            Toast.makeText(UpdatesActivity.this, R.string.update_login_error, Toast.LENGTH_SHORT).show();
+		        }
 		        loginLayout.setVisibility(View.VISIBLE);
 	        }
         });

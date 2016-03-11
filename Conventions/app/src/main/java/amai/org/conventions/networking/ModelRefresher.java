@@ -16,7 +16,7 @@ public class ModelRefresher {
     private static final int CONNECT_TIMEOUT = 10000;
 
     /**
-     * Downloads the model from the CAMI server.
+     * Downloads the model from the server.
      *
      * @return true if the model retrieval completed successfully, false otherwise.
      */
