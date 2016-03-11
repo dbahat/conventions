@@ -11,14 +11,18 @@ import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 public class NestedScrollingFrameLayout extends FrameLayout implements NestedScrollingParent, NestedScrollingChild, GestureDetector.OnGestureListener {
+	private static int TOUCH_SLOP = -1;
 	private NestedScrollingChildHelper nestedScrollingChildHelper;
 	private GestureDetectorCompat mDetector;
 	private int[] scrollOffset = new int[2];
 	private boolean dummyScroll = false;
+	private boolean isScrolling = false;
+	private boolean isScrollingVertically = true;
 
 	public NestedScrollingFrameLayout(Context context) {
 		this(context, null);
@@ -33,6 +37,9 @@ public class NestedScrollingFrameLayout extends FrameLayout implements NestedScr
 		mDetector = new GestureDetectorCompat(context, this);
 		nestedScrollingChildHelper = new NestedScrollingChildHelper(this);
 		setNestedScrollingEnabled(true);
+
+		final ViewConfiguration configuration = ViewConfiguration.get(context);
+		TOUCH_SLOP = configuration.getScaledTouchSlop();
 	}
 
 	@Override
@@ -128,8 +135,9 @@ public class NestedScrollingFrameLayout extends FrameLayout implements NestedScr
 		// First handle this the toolbar scroll
 		scrollOffset[0] = scrollOffset[1] = 0;
 		mDetector.onTouchEvent(ev);
-		if (ev.getActionMasked() == MotionEvent.ACTION_UP) {
+		if (ev.getActionMasked() == MotionEvent.ACTION_UP || ev.getActionMasked() == MotionEvent.ACTION_CANCEL) {
 			stopNestedScroll();
+			isScrolling = false;
 		}
 
 		// Fix the current focus of the gesture detector by sending a dummy event
@@ -175,6 +183,16 @@ public class NestedScrollingFrameLayout extends FrameLayout implements NestedScr
 		if (dummyScroll) {
 			return false;
 		}
+
+		if (!isScrolling) {
+			isScrolling = true;
+			isScrollingVertically = Math.abs(distanceY) >= TOUCH_SLOP && Math.abs(distanceY) - Math.abs(distanceX) > 0;
+		}
+
+		if (!isScrollingVertically) {
+			return false;
+		}
+
 		int[] consumed = new int[2];
 		// Nested pre-scroll actually scrolls the toolbar. Consumed array contains the amount scrolled in the
 		// toolbar and scrollOffset array contains the offset of this view after the scroll (we use it to adjust
@@ -194,6 +212,11 @@ public class NestedScrollingFrameLayout extends FrameLayout implements NestedScr
 		if (dummyScroll) {
 			return false;
 		}
+
+		if (!isScrollingVertically) {
+			return false;
+		}
+
 		// For some reason the AppBarLayout decides to show the appbar instead of hiding it on fling
 		// so we have to send the opposite velocity
 		dispatchNestedPreFling(-velocityX, -velocityY);
