@@ -106,7 +106,7 @@ public class Harucon2016Convention extends Convention {
 		imageMapper.addMapping("http://2016.harucon.org.il/wp-content/uploads/sites/7/2016/02/Crunchyroll-Logo-1-300x120.png", R.drawable.event_crunchyroll_logo);
 
 		// Non-URL IDs
-		imageMapper.addMapping(EventToImageResourceIdMapper.EVENT_GENERIC, R.drawable.harucon2016_cover);
+		imageMapper.addMapping(EventToImageResourceIdMapper.EVENT_GENERIC, R.drawable.harucon2016_events_default_cover);
 
 		return imageMapper;
 	}
