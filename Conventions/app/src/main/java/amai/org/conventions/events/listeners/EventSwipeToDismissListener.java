@@ -39,8 +39,13 @@ public class EventSwipeToDismissListener implements Runnable {
 		ConventionsApplication.alarmScheduler.cancelDefaultEventAlarms(viewHolder.getModel());
 
 		int adapterPosition = viewHolder.getAdapterPosition();
-		eventsList.remove(adapterPosition);
-		adapter.notifyItemRemoved(adapterPosition);
+
+		// This could happen if the item has already been removed, the dataset changed or the view recycled
+		// (see RecyclerView#getAdapterPosition)
+		if (adapterPosition != RecyclerView.NO_POSITION) {
+			eventsList.remove(adapterPosition);
+			adapter.notifyItemRemoved(adapterPosition);
+		}
 
 		if (adapter instanceof EventGroupsAdapter) {
 			((EventGroupsAdapter) adapter).updateSlots(adapterPosition, new ArrayList<ConventionEvent>(), true);

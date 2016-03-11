@@ -102,6 +102,15 @@ public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 	 * @param alreadyRemoved was the model already updated with the removal
 	 */
 	public void updateSlots(int adapterPosition, List<ConventionEvent> eventsList, boolean alreadyRemoved) {
+		// This could happen if the item has already been removed, the dataset changed or the view recycled
+		// (see RecyclerView#getAdapterPosition)
+		if (adapterPosition == RecyclerView.NO_POSITION) {
+			eventGroups = MyEventsActivity.getNonConflictingGroups(null, MyEventsActivity.getMyEvents(), null);
+			notifyDataSetChanged();
+			return;
+		}
+
+
 		EventsTimeSlot previousEvents = null;
 		EventsTimeSlot nextEvents = null;
 		boolean hadFreeBefore = false;

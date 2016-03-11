@@ -92,6 +92,12 @@ public class MyEventsActivity extends NavigationActivity {
 				super.onItemRangeRemoved(positionStart, itemCount);
 				updateVisibility(adapter.getItemCount(), eventsList, emptyView);
 			}
+
+			@Override
+			public void onChanged() {
+				super.onChanged();
+				updateVisibility(adapter.getItemCount(), eventsList, emptyView);
+			}
 		});
 
 		adapter.setOnEventRemovedAction(new Runnable() {
@@ -213,7 +219,7 @@ public class MyEventsActivity extends NavigationActivity {
 				event.getTitle());
 	}
 
-    private List<ConventionEvent> getMyEvents() {
+    public static List<ConventionEvent> getMyEvents() {
 	    ArrayList<ConventionEvent> events = CollectionUtils.filter(
 			    Convention.getInstance().getEvents(),
 			    new CollectionUtils.Predicate<ConventionEvent>() {
