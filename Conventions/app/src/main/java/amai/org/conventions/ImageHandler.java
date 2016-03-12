@@ -56,10 +56,11 @@ public class ImageHandler {
             return toolbarLogo;
         }
 
-        Drawable drawable = ThemeAttributes.getDrawable(context, R.attr.toolbarLogo);
         // The scaling doesn't work properly for the toolbar icon (the width remains the original size)
         // so we have to resize it manually
-        Bitmap bitmapResized = resizeBitmap(drawable, ThemeAttributes.getDimensionSize(context, R.attr.actionBarSize));
+        Bitmap bitmapResized = resizeBitmap(
+		        ThemeAttributes.getDrawable(context, R.attr.toolbarLogo),
+		        ThemeAttributes.getDimensionSize(context, R.attr.actionBarSize));
         toolbarLogo = new BitmapDrawable(context.getResources(), bitmapResized);
         return toolbarLogo;
     }
@@ -67,7 +68,15 @@ public class ImageHandler {
     public static void releaseCache() {
         // Release all collected images from the map
         loadedSVGFiles = new HashMap<>();
+
+	    if (notificationLargeIcon != null) {
+		    notificationLargeIcon.recycle();
+	    }
         notificationLargeIcon = null;
+
+	    if (toolbarLogo instanceof BitmapDrawable && ((BitmapDrawable) toolbarLogo).getBitmap() != null) {
+		    ((BitmapDrawable) toolbarLogo).getBitmap().recycle();
+	    }
         toolbarLogo = null;
     }
 
@@ -83,6 +92,10 @@ public class ImageHandler {
     private static Bitmap resizeBitmap(Drawable image, int height) {
         Bitmap originalBitmap = ((BitmapDrawable) image).getBitmap();
         int width = (int) (originalBitmap.getWidth() * height / (float) originalBitmap.getHeight());
-        return Bitmap.createScaledBitmap(originalBitmap, width, height, false);
+	    Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, width, height, false);
+	    if (originalBitmap != scaledBitmap) {
+	        originalBitmap.recycle();
+	    }
+	    return scaledBitmap;
     }
 }
