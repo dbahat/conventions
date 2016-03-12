@@ -535,7 +535,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
                 feedbackContainer.setLayoutParams(layoutParams);
 
                 finalLayoutAfterResize.setVisibility(View.VISIBLE);
-                finalLayoutAfterResize.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fab_in));
+                finalLayoutAfterResize.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.abc_fade_in));
             }
 
             @Override

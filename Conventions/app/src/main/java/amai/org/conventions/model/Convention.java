@@ -142,9 +142,14 @@ public abstract class Convention implements Serializable {
 		return feedback;
 	}
 
-	public ConventionEvent handleSpecialEvent(ConventionEvent event) {
+	/**
+	 * Modify properties of the event as needed for special event
+	 * @param event
+	 * @return whether the event was modified
+	 */
+	public boolean handleSpecialEvent(ConventionEvent event) {
 		// By default, there are no special events
-		return event;
+		return false;
 	}
 
 	public void setEvents(List<ConventionEvent> events) {

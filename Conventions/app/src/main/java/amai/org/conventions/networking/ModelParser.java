@@ -100,13 +100,13 @@ public class ModelParser {
 		                .withImages(mapper.getImagesList(eventDescription.getEventImageIds()))
 		                .withId(String.format("%d_%d", eventId, internalEventNumber));
 
-	            if (specialEventId != 0) {
+                // Some events might have special pages and are not retrieved from the API
+                // exposed by the server. For these spacial cases, add special handing of placing hardcoded texts/images.
+	            boolean handled = Convention.getInstance().handleSpecialEvent(conventionEvent);
+
+	            if (specialEventId != 0 && !handled) {
 		            eventsWithSpecialContent.put(conventionEvent, specialEventId);
 	            }
-
-                // Some events (like the guest of honor event and the games event) have special pages and are not retrieved from the API
-                // exposed by the server. For these spacial cases, add special handing of placing hardcoded texts/images.
-	            conventionEvent = Convention.getInstance().handleSpecialEvent(conventionEvent);
 
                 // In case some events came up without any images at all, add a generic image to them.
                 if (conventionEvent.getImages().size() == 0) {
