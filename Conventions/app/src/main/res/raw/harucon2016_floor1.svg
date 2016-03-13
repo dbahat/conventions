@@ -6,907 +6,814 @@
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:xlink="http://www.w3.org/1999/xlink"
-   version="1.1"
-   x="0px"
-   y="0px"
-   viewBox="0 0 1691.3179 880.61444"
-   xml:space="preserve"
-   id="svg2"
-   width="1691.3179"
-   height="880.61444"><metadata
-     id="metadata1012"><rdf:RDF><cc:Work
-         rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs
-     id="defs1010"><defs
-       id="defs994"><rect
-         id="SVGID_81_"
-         x="-128.60001"
-         y="136.39999"
-         width="1105.5"
-         height="1672.2" /></defs><clipPath
-       id="SVGID_82_"><use
-         xlink:href="#SVGID_81_"
-         style="overflow:visible"
-         id="use998"
-         x="0"
-         y="0"
+   width="552.19623"
+   height="324.59729"
+   viewBox="0 0 552.19623 324.5973"
+   id="svg7067"
+   version="1.1">
+  <defs
+     id="defs7069">
+    <clipPath
+       id="SVGID_4_">
+      <use
+         height="100%"
          width="100%"
-         height="100%" /></clipPath><defs
-       id="defs470"><rect
-         id="SVGID_39_"
-         x="-128.60001"
-         y="136.39999"
-         width="1105.5"
-         height="1672.2" /></defs><clipPath
-       id="SVGID_40_"><use
-         xlink:href="#SVGID_39_"
-         style="overflow:visible"
-         id="use474"
-         x="0"
          y="0"
-         width="100%"
-         height="100%" /></clipPath><defs
-       id="defs506"><rect
-         id="SVGID_41_"
-         x="-128.60001"
-         y="136.39999"
-         width="1105.5"
-         height="1672.2" /></defs><clipPath
-       id="SVGID_42_"><use
-         xlink:href="#SVGID_41_"
-         style="overflow:visible"
-         id="use510"
          x="0"
-         y="0"
-         width="100%"
-         height="100%" /></clipPath><defs
-       id="defs550"><rect
-         id="SVGID_43_"
-         x="-128.60001"
-         y="136.39999"
-         width="1105.5"
-         height="1672.2" /></defs><clipPath
-       id="SVGID_44_"><use
-         xlink:href="#SVGID_43_"
          style="overflow:visible"
-         id="use554"
-         x="0"
-         y="0"
+         xlink:href="#SVGID_3_"
+         overflow="visible"
+         id="use251" />
+    </clipPath>
+    <clipPath
+       id="SVGID_2_">
+      <use
+         height="100%"
          width="100%"
-         height="100%" /></clipPath><defs
-       id="defs570"><rect
-         id="SVGID_45_"
-         x="-128.60001"
-         y="136.39999"
-         width="1105.5"
-         height="1672.2" /></defs><clipPath
-       id="SVGID_46_"><use
-         xlink:href="#SVGID_45_"
+         y="0"
+         x="0"
          style="overflow:visible"
-         id="use574"
-         x="0"
-         y="0"
-         width="100%"
-         height="100%" /></clipPath><defs
-       id="defs600"><rect
-         id="SVGID_47_"
-         x="-128.60001"
-         y="136.39999"
-         width="1105.5"
-         height="1672.2" /></defs><clipPath
-       id="SVGID_48_"><use
-         xlink:href="#SVGID_47_"
-         style="overflow:visible"
-         id="use604"
-         x="0"
-         y="0"
-         width="100%"
-         height="100%" /></clipPath><defs
-       id="defs714"><rect
-         id="SVGID_49_"
-         x="-128.60001"
-         y="136.39999"
-         width="1105.5"
-         height="1672.2" /></defs><clipPath
-       id="SVGID_50_"><use
-         xlink:href="#SVGID_49_"
-         style="overflow:visible"
-         id="use718"
-         x="0"
-         y="0"
-         width="100%"
-         height="100%" /></clipPath></defs><style
-     type="text/css"
-     id="style4">
-	.st0{display:none;}
-	.st1{display:inline;fill:#B5B0C1;}
-	.st2{display:inline;fill:#FFFFFF;}
-	.st3{display:inline;fill:none;stroke:#141032;stroke-width:0.25;}
-	.st4{display:inline;fill:#43255C;}
-	.st5{display:inline;}
-	.st6{clip-path:url(#SVGID_2_);fill:none;stroke:#141032;stroke-width:0.25;}
-	.st7{display:inline;fill:none;stroke:#141032;stroke-width:0.5;}
-	.st8{display:inline;fill:#99AC64;}
-	.st9{clip-path:url(#SVGID_4_);fill:none;stroke:#141032;stroke-width:0.25;}
-	.st10{clip-path:url(#SVGID_6_);fill:#43255C;}
-	.st11{clip-path:url(#SVGID_8_);fill:#FBB65A;}
-	.st12{clip-path:url(#SVGID_8_);fill:none;stroke:#141032;stroke-width:0.5;stroke-miterlimit:10;}
-	.st13{display:inline;fill:#F7D685;}
-	.st14{clip-path:url(#SVGID_10_);fill:#141032;}
-	.st15{display:inline;fill:#141032;}
-	.st16{display:inline;fill:none;stroke:#231F20;stroke-width:0.25;}
-	.st17{clip-path:url(#SVGID_12_);fill:#141032;}
-	.st18{clip-path:url(#SVGID_12_);fill:#FFFFFF;}
-	.st19{clip-path:url(#SVGID_14_);fill:#141032;}
-	.st20{clip-path:url(#SVGID_14_);fill:#FFFFFF;}
-	.st21{display:inline;fill:#D81278;}
-	.st22{clip-path:url(#SVGID_16_);fill:#141032;}
-	.st23{clip-path:url(#SVGID_18_);fill:#141032;}
-	.st24{clip-path:url(#SVGID_18_);fill:#FFFFFF;}
-	.st25{clip-path:url(#SVGID_20_);fill:#141032;}
-	.st26{clip-path:url(#SVGID_22_);fill:#141032;}
-	.st27{clip-path:url(#SVGID_24_);fill:#FFFFFF;}
-	.st28{clip-path:url(#SVGID_26_);fill:#FFFFFF;}
-	.st29{clip-path:url(#SVGID_28_);fill:#141032;}
-	.st30{clip-path:url(#SVGID_30_);fill:#141032;}
-	.st31{clip-path:url(#SVGID_32_);fill:#FFFFFF;}
-	.st32{clip-path:url(#SVGID_34_);fill:#FFFFFF;}
-	.st33{display:inline;fill:#8ACDAB;}
-	.st34{clip-path:url(#SVGID_36_);fill:#141032;}
-	.st35{clip-path:url(#SVGID_38_);fill:#FFFFFF;}
-	.st36{fill:#B5B0C1;}
-	.st37{fill:#2BC0D6;}
-	.st38{fill:#FFFFFF;}
-	.st39{fill:none;stroke:#141032;stroke-width:0.25;}
-	.st40{clip-path:url(#SVGID_40_);fill:none;stroke:#141032;stroke-width:0.25;}
-	.st41{clip-path:url(#SVGID_42_);fill:none;stroke:#141032;stroke-width:0.25;}
-	.st42{clip-path:url(#SVGID_44_);fill:none;stroke:#141032;stroke-width:0.25;}
-	.st43{clip-path:url(#SVGID_46_);fill:none;stroke:#141032;stroke-width:0.25;}
-	.st44{fill:none;stroke:#141032;stroke-width:0.5;}
-	.st45{clip-path:url(#SVGID_48_);fill:#FFFFFF;}
-	.st46{clip-path:url(#SVGID_48_);fill:none;stroke:#141032;stroke-width:0.5;}
-	.st47{clip-path:url(#SVGID_50_);fill:#2BC0D6;}
-	.st48{fill:#F7D685;}
-	.st49{fill:#141032;}
-	.st50{clip-path:url(#SVGID_52_);fill:#141032;}
-	.st51{clip-path:url(#SVGID_54_);fill:#141032;}
-	.st52{clip-path:url(#SVGID_54_);fill:#FFFFFF;}
-	.st53{clip-path:url(#SVGID_56_);fill:#141032;}
-	.st54{clip-path:url(#SVGID_56_);fill:#FFFFFF;}
-	.st55{clip-path:url(#SVGID_58_);fill:#141032;}
-	.st56{clip-path:url(#SVGID_58_);fill:#FFFFFF;}
-	.st57{clip-path:url(#SVGID_60_);fill:#141032;}
-	.st58{font-family:'Alef-Bold';}
-	.st59{font-size:33.113px;}
-	.st60{clip-path:url(#SVGID_64_);fill:#141032;}
-	.st61{clip-path:url(#SVGID_68_);fill:#141032;}
-	.st62{clip-path:url(#SVGID_70_);}
-	.st63{clip-path:url(#SVGID_74_);fill:#141032;}
-	.st64{clip-path:url(#SVGID_76_);}
-	.st65{clip-path:url(#SVGID_80_);fill:#141032;}
-	.st66{clip-path:url(#SVGID_80_);fill:#FFFFFF;}
-	.st67{clip-path:url(#SVGID_82_);fill:#141032;}
-	.st68{clip-path:url(#SVGID_82_);fill:#FFFFFF;}
-</style><polygon
-     style="fill:#b5b0c1"
-     id="polygon438"
-     points="332.5,614.3 215.1,867.3 187.8,820.2 116.8,962.8 207.3,1113.7 249.6,1055.4 299.1,1124.8 331.1,1088 471.6,1205 642.5,1538.2 603.7,1622.8 699.6,1788.4 775,1639 712.9,1496.3 856.2,1162.2 806.9,1059.5 780.4,1113.7 733.1,1014.6 667.1,903.6 804.8,589.1 592.6,137.2 471.6,338.9 539.8,469.6 413.2,728.4 "
-     class="st36"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#2bc0d6"
-     id="polygon440"
-     points="595.3,735.3 532.1,651.9 567,574 624.8,470.8 673.2,554.6 653.4,614.4 "
-     class="st37"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon442"
-     points="797.2,1146.9 688.7,1395.3 720.1,1395.3 829.9,1146.9 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon444"
-     points="797.2,1146.9 688.7,1395.3 720.1,1395.3 829.9,1146.9 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon446"
-     points="487.4,606.3 482.3,592.6 511.7,592.6 519.5,606.3 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon448"
-     points="487.4,606.3 482.3,592.6 511.7,592.6 519.5,606.3 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon450"
-     points="665.2,555.9 576.4,749.3 609.7,749.3 698.1,555.9 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon452"
-     points="665.2,555.9 576.4,749.3 609.7,749.3 698.1,555.9 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon454"
-     points="695.5,903.7 825.7,594.8 800.7,596 665.9,903.7 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon456"
-     points="695.5,903.7 825.7,594.8 800.7,596 665.9,903.7 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon458"
-     points="545.8,636.5 530.8,666.6 576.4,749.6 610.1,749.6 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon460"
-     points="545.8,636.5 530.8,666.6 576.4,749.6 610.1,749.6 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon462"
-     points="829.9,1212.4 704.3,1498.6 730.9,1498.6 858.3,1212.4 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon464"
-     points="829.9,1212.4 704.3,1498.6 730.9,1498.6 858.3,1212.4 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon466"
-     points="471.5,338.9 510.9,338.9 634.4,137.1 592.6,137.1 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     class="st40"
-     points="510.9,338.9 634.4,137.1 592.6,137.1 471.5,338.9 "
-     id="polygon476"
-     clip-path="url(#SVGID_40_)"
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon478"
-     points="573.2,469.6 444.7,728.2 413.1,728.4 539.8,469.6 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon480"
-     points="573.2,469.6 444.7,728.2 413.1,728.4 539.8,469.6 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon482"
-     points="597.3,543.9 582.4,573.9 624.1,646.9 654.8,646.9 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon484"
-     points="597.3,543.9 582.4,573.9 624.1,646.9 654.8,646.9 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><path
-     style="fill:#ffffff"
-     id="path486"
-     d="m 661.57343,727.8 78.9,36.6 11.3,-21.6 -90.3,-42.7 0,27.7 z m -98.6,-74.3 -75.5,-35.7 0,29.2 75.5,35 0,-28.5 z"
-     class="st38" /><path
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="path488"
-     d="m 661.57343,727.8 78.9,36.6 11.3,-21.6 -90.3,-42.7 0,27.7 z m -98.6,-74.3 -75.5,-35.7 0,29.2 75.5,35 0,-28.5 z"
-     class="st39" /><polygon
-     style="fill:#ffffff"
-     id="polygon490"
-     points="187.8,820.2 109.1,959.2 139.8,959.2 215.2,818.8 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon492"
-     points="187.8,820.2 109.1,959.2 139.8,959.2 215.2,818.8 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon494"
-     points="237.2,1035.7 194,1124.8 221.9,1124.8 262.7,1034.6 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon496"
-     points="237.2,1035.7 194,1124.8 221.9,1124.8 262.7,1034.6 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon498"
-     points="315.4,1080.2 284.4,1141.3 315.8,1141.3 347.1,1079.7 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon500"
-     points="315.4,1080.2 284.4,1141.3 315.8,1141.3 347.1,1079.7 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon502"
-     points="700.1,1788.5 713.5,1807.9 790.8,1654.3 767.9,1654.3 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     class="st41"
-     points="713.5,1807.9 790.8,1654.3 767.9,1654.3 700.1,1788.5 "
-     id="polygon512"
-     clip-path="url(#SVGID_42_)"
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon514"
-     points="626.5,1550 589.1,1622.8 616.9,1622.8 653,1550 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon516"
-     points="626.5,1550 589.1,1622.8 616.9,1622.8 653,1550 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon518"
-     points="622.1,432.4 459.2,765.6 489.9,765.6 655.3,432.4 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon520"
-     points="622.1,432.4 459.2,765.6 489.9,765.6 655.3,432.4 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon522"
-     points="361.7,614.3 350.3,639.6 413.2,728.4 444.8,728.2 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon524"
-     points="361.7,614.3 350.3,639.6 413.2,728.4 444.8,728.2 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon526"
-     points="215.1,818.8 200.7,845.1 237.9,916.2 272.7,916.2 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon528"
-     points="215.1,818.8 200.7,845.1 237.9,916.2 272.7,916.2 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon530"
-     points="221.9,1124.8 194.1,1124.8 109.1,959.2 139.8,959.2 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon532"
-     points="221.9,1124.8 194.1,1124.8 109.1,959.2 139.8,959.2 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon534"
-     points="315.8,1141.3 284.5,1141.3 249.6,1063.4 262.7,1034.6 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon536"
-     points="315.8,1141.3 284.5,1141.3 249.6,1063.4 262.7,1034.6 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon538"
-     points="626.3,1550 468.2,1224.7 336.6,1100.3 347,1079.7 497.3,1213.8 653,1550 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon540"
-     points="626.3,1550 468.2,1224.7 336.6,1100.3 347,1079.7 497.3,1213.8 653,1550 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon542"
-     points="648.4,1455.7 503.7,1160.3 446.6,1102.4 478.7,1101.1 532.9,1149.4 675.8,1455.7 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon544"
-     points="648.4,1455.7 503.7,1160.3 446.6,1102.4 478.7,1101.1 532.9,1149.4 675.8,1455.7 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon546"
-     points="589.1,1622.8 685.2,1807.8 713,1807.8 616.9,1622.8 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     class="st42"
-     points="589.1,1622.8 616.9,1622.8 713,1807.8 685.2,1807.8 "
-     id="polygon556"
-     clip-path="url(#SVGID_44_)"
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon558"
-     points="730.5,1498.6 704.3,1498.6 767.8,1654.4 790.8,1654.4 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon560"
-     points="730.5,1498.6 704.3,1498.6 767.8,1654.4 790.8,1654.4 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon562"
-     points="667,903.6 695.5,903.6 755.1,991.7 809,1111 776.3,1113.8 721.9,1002.7 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon564"
-     points="667,903.6 695.5,903.6 755.1,991.7 809,1111 776.3,1113.8 721.9,1002.7 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon566"
-     points="610.3,176.2 800.7,596.1 825.7,594.9 634.3,137.1 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     class="st43"
-     points="800.7,596.1 825.7,594.9 634.3,137.1 610.3,176.2 "
-     id="polygon576"
-     clip-path="url(#SVGID_46_)"
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon578"
-     points="510.9,338.9 471.5,338.9 539.8,469.7 573.2,469.7 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon580"
-     points="510.9,338.9 471.5,338.9 539.8,469.7 573.2,469.7 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon582"
-     points="697.3,555.9 663.8,555.9 628.5,486.8 642.9,457.7 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon584"
-     points="697.3,555.9 663.8,555.9 628.5,486.8 642.9,457.7 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon586"
-     points="519,645.1 509.7,631.4 543.3,631.4 551.1,645.1 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon588"
-     points="519,645.1 509.7,631.4 543.3,631.4 551.1,645.1 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon590"
-     points="459.2,765.6 522.4,882.7 505.4,912.3 533.9,913.6 553,882.7 489.9,765.6 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon592"
-     points="459.2,765.6 522.4,882.7 505.4,912.3 533.9,913.6 553,882.7 489.9,765.6 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon594"
-     points="692.6,975.3 616.6,1151.7 619.2,1167 700.7,992.6 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.5"
-     id="polygon596"
-     points="692.6,975.3 616.6,1151.7 619.2,1167 700.7,992.6 "
-     class="st44"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><path
-     class="st45"
-     d="m 700.7,972.3 -7.2,-17.7 -82.8,183.4 5.9,13.5 c -1.1,0.9 84.1,-179.2 84.1,-179.2"
-     id="path606"
-     clip-path="url(#SVGID_48_)"
-     style="fill:#ffffff"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><path
-     class="st46"
-     d="m 700.7,972.3 -7.2,-17.7 -82.8,183.4 5.9,13.5 c -1.1,0.9 84.1,-179.2 84.1,-179.2 z"
-     id="path608"
-     clip-path="url(#SVGID_48_)"
-     style="fill:none;stroke:#141032;stroke-width:0.5"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon610"
-     points="688.8,925.6 609.3,1106 623.4,1121.3 700.7,950.5 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.5"
-     id="polygon612"
-     points="688.8,925.6 609.3,1106 623.4,1121.3 700.7,950.5 "
-     class="st44"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon614"
-     points="692.6,910.9 610.7,1092.5 616.6,1106.1 700.7,927.7 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.5"
-     id="polygon616"
-     points="692.6,910.9 610.7,1092.5 616.6,1106.1 700.7,927.7 "
-     class="st44"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon618"
-     points="666,835.9 593.7,1008.7 623.4,1078.2 699.6,907.3 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.5"
-     id="polygon620"
-     points="666,835.9 593.7,1008.7 623.4,1078.2 699.6,907.3 "
-     class="st44"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon622"
-     points="670.9,831.7 589.5,1010.8 595.5,1024.3 676.4,845 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.5"
-     id="polygon624"
-     points="670.9,831.7 589.5,1010.8 595.5,1024.3 676.4,845 "
-     class="st44"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon626"
-     points="669.5,808.1 595.1,979 597.7,994.3 677.1,822.8 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.5"
-     id="polygon628"
-     points="669.5,808.1 595.1,979 597.7,994.3 677.1,822.8 "
-     class="st44"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon630"
-     points="670.5,786.4 589.2,965.5 595.1,979 677.1,800.1 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.5"
-     id="polygon632"
-     points="670.5,786.4 589.2,965.5 595.1,979 677.1,800.1 "
-     class="st44"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon634"
-     points="668.6,756.7 587.8,933.3 601.9,948.6 677.1,778.6 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.5"
-     id="polygon636"
-     points="668.6,756.7 587.8,933.3 601.9,948.6 677.1,778.6 "
-     class="st44"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon638"
-     points="670.5,740.7 589.2,919.8 595.1,933.3 676,754 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.5"
-     id="polygon640"
-     points="670.5,740.7 589.2,919.8 595.1,933.3 676,754 "
-     class="st44"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon642"
-     points="602.2,1007.6 609.7,917.1 505.4,912.2 619.3,1167 632.6,1078.1 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon644"
-     points="602.2,1007.6 609.7,917.1 505.4,912.2 619.3,1167 632.6,1078.1 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon646"
-     points="708.3,354.8 694.5,354.8 721,299 735.7,299.5 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon648"
-     points="708.3,354.8 694.5,354.8 721,299 735.7,299.5 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon650"
-     points="712.6,368.8 706.2,359.6 735.7,299.5 742.1,315.5 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon652"
-     points="712.6,368.8 706.2,359.6 735.7,299.5 742.1,315.5 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon654"
-     points="725.3,370.9 712.5,368.8 739.8,310.5 753.1,310.5 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon656"
-     points="725.3,370.9 712.5,368.8 739.8,310.5 753.1,310.5 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon658"
-     points="732.5,383 725.3,370.9 753,310.5 759,326.5 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon660"
-     points="732.5,383 725.3,370.9 753,310.5 759,326.5 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon662"
-     points="746.4,382.9 732.5,382.9 759,326.5 771.2,326.5 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon664"
-     points="746.4,382.9 732.5,382.9 759,326.5 771.2,326.5 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon666"
-     points="639.5,314.8 632.7,301.4 660.6,240.7 668.6,257.3 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon668"
-     points="639.5,314.8 632.7,301.4 660.6,240.7 668.6,257.3 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon670"
-     points="650.4,314.7 638.8,314.7 666.3,252.3 679.5,252.3 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon672"
-     points="650.4,314.7 638.8,314.7 666.3,252.3 679.5,252.3 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon674"
-     points="656.3,326.4 650.6,315 679.5,252.3 685.5,268.3 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon676"
-     points="656.3,326.4 650.6,315 679.5,252.3 685.5,268.3 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon678"
-     points="669,326.3 656.3,326.3 685.5,268.3 697,268.9 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon680"
-     points="669,326.3 656.3,326.3 685.5,268.3 697,268.9 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon682"
-     points="614.8,285.1 602,283 629.3,224.7 642.6,224.7 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon684"
-     points="614.8,285.1 602,283 629.3,224.7 642.6,224.7 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon686"
-     points="622,297.2 614.8,285.1 642.5,224.7 648.5,240.7 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon688"
-     points="622,297.2 614.8,285.1 642.5,224.7 648.5,240.7 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon690"
-     points="635.9,297.2 622,297.2 648.5,240.7 660.7,240.7 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon692"
-     points="635.9,297.2 622,297.2 648.5,240.7 660.7,240.7 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon694"
-     points="675.3,341.1 668.7,326.6 697,268.9 703.4,284.9 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon696"
-     points="675.3,341.1 668.7,326.6 697,268.9 703.4,284.9 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon698"
-     points="688.4,341.1 674.9,341.1 701.8,283 715,283 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon700"
-     points="688.4,341.1 674.9,341.1 701.8,283 715,283 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon702"
-     points="694.7,354.6 688.3,341.1 715,283 721,299 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon704"
-     points="694.7,354.6 688.3,341.1 715,283 721,299 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon706"
-     points="593.8,281.7 614.9,338.9 622.1,432.5 655.3,432.5 646.9,338.9 628.6,281.7 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon708"
-     points="593.8,281.7 614.9,338.9 622.1,432.5 655.3,432.5 646.9,338.9 628.6,281.7 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#b5b0c1"
-     id="polygon710"
-     points="782.7,297.1 771.1,326.5 746.4,382.9 715.2,324.7 691.8,370.7 660.9,434.5 792.9,684.6 860.3,510 "
-     class="st36"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><path
-     class="st47"
-     d="m 810.5,354.1 c 0,0 -23.8,46.2 -23.8,47.6 0,1.4 9.5,36.9 9.5,36.9 l 22.3,38.9 -36.2,89.3 -22.7,51.4 35.8,47.6 21.3,-10.4 c 0,0 54.1,-156.4 54.1,-157.7 0,-1.2 -60.3,-143.6 -60.3,-143.6"
-     id="path720"
-     clip-path="url(#SVGID_50_)"
-     style="fill:#2bc0d6"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon722"
-     points="810.5,297.2 782.3,297.2 859.8,509.1 889,509.1 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon724"
-     points="810.5,297.2 782.3,297.2 859.8,509.1 889,509.1 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon726"
-     points="859.8,509.1 801.5,652.4 818.8,686.9 889.6,509.1 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon728"
-     points="859.8,509.1 801.5,652.4 818.8,686.9 889.6,509.1 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon730"
-     points="834.7,441.3 747.9,610.5 780.5,610.5 863.2,441.3 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon732"
-     points="834.7,441.3 747.9,610.5 780.5,610.5 863.2,441.3 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon734"
-     points="818.8,686.9 786.5,684.6 660.9,434.5 691.8,436.4 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon736"
-     points="818.8,686.9 786.5,684.6 660.9,434.5 691.8,436.4 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#f7d685"
-     id="polygon738"
-     points="728.6,384.6 731.8,379.2 710.8,363.6 720.5,404.5 723.2,396.4 732.4,413.2 738.8,400.8 "
-     class="st48"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon742"
-     points="802.1,348.6 770.6,408 800.1,408 829.1,348.6 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon744"
-     points="802.1,348.6 770.6,408 800.1,408 829.1,348.6 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon746"
-     points="809.5,521.7 804.8,533.2 787.8,533.2 793.3,521.7 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.5"
-     id="polygon748"
-     points="809.5,521.7 804.8,533.2 787.8,533.2 793.3,521.7 "
-     class="st44"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon750"
-     points="800.1,408 770.6,407.9 810.5,490.1 839.8,490.1 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.25"
-     id="polygon752"
-     points="800.1,408 770.6,407.9 810.5,490.1 839.8,490.1 "
-     class="st39"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon754"
-     points="607.2,510.7 599.5,525.2 577.5,525.2 584.7,510.7 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.5"
-     id="polygon756"
-     points="607.2,510.7 599.5,525.2 577.5,525.2 584.7,510.7 "
-     class="st44"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon758"
-     points="565.9,593.3 558.3,607.8 536.2,607.8 543.4,593.3 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.5"
-     id="polygon760"
-     points="565.9,593.3 558.3,607.8 536.2,607.8 543.4,593.3 "
-     class="st44"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:#ffffff"
-     id="polygon762"
-     points="790.6,449 797.2,463.3 813.9,463.3 807.9,449 "
-     class="st38"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><polygon
-     style="fill:none;stroke:#141032;stroke-width:0.5"
-     id="polygon764"
-     points="790.6,449 797.2,463.3 813.9,463.3 807.9,449 "
-     class="st44"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><rect
-     style="fill:#141032"
-     id="rect972"
-     height="138.2"
-     width="26.5"
-     class="st49"
-     y="207.07343"
-     x="-236.59998"
-     transform="matrix(0,-1,1,0,0,0)" /><path
-     style="fill:#f7d685"
-     id="path974"
-     d="m 222.37343,218.2 0,16.4 -3.3,0 0,-13.8 -2.5,0 0,-2.6 5.8,0 z m 8.6,0 0,12.6 -3.3,0 0,-10 -2.1,0 0,-2.6 5.4,0 z m 9,0 0,4.6 c 0,0.4 0,0.8 0,1.1 0,0.3 0,0.6 0,0.8 0,0.2 -0.1,0.5 -0.1,0.7 0,0.2 -0.1,0.5 -0.2,0.8 l -3.3,-0.5 c 0,-0.2 0.1,-0.5 0.1,-0.7 0,-0.2 0.1,-0.4 0.1,-0.6 0,-0.2 0,-0.5 0.1,-0.8 0,-0.3 0,-0.6 0,-1 l 0,-1.8 -2.8,0 0,-2.6 6.1,0 z m 6,-3.6 0,3.5 6.9,0 c 0,0.2 0.1,0.3 0.1,0.5 0,0.1 0.1,0.3 0.1,0.4 0,0.2 0.1,0.4 0.1,0.5 0,0.2 0,0.4 0,0.6 l 0,2.6 c 0,1 -0.2,1.9 -0.6,2.7 -0.4,0.8 -1,1.7 -1.7,2.5 l -3.1,3.4 -2.4,-2 1.4,-1.6 c 0.6,-0.7 1.1,-1.2 1.5,-1.6 0.4,-0.4 0.7,-0.8 0.9,-1.2 0.2,-0.3 0.4,-0.7 0.5,-1 0.1,-0.3 0.2,-0.7 0.2,-1.1 l 0,-2.2 -7.2,0 0,-6.2 3.3,0 z m 17.3,5.6 c 0.1,-0.4 0.2,-0.9 0.4,-1.3 0.1,-0.4 0.3,-0.8 0.4,-1.3 l 4.7,1.2 c 0,0.3 0,0.6 0,0.8 0,0.3 0,0.6 0,0.8 -0.1,0.6 -0.2,1.2 -0.3,1.8 -0.1,0.6 -0.3,1.1 -0.5,1.6 -0.3,0.9 -0.7,1.8 -1.2,2.5 -0.5,0.7 -1,1.4 -1.6,1.9 -0.6,0.6 -1.2,1.1 -1.8,1.5 -0.7,0.4 -1.3,0.8 -2.1,1.1 -0.7,0.3 -1.5,0.6 -2.2,0.9 -0.8,0.2 -1.5,0.5 -2.3,0.7 l -0.9,-2.8 c 0.8,-0.2 1.6,-0.4 2.4,-0.7 0.7,-0.2 1.4,-0.5 2,-0.8 -0.4,-1.1 -0.8,-2.1 -1.2,-3.1 -0.4,-1 -0.8,-2.1 -1.2,-3.1 -0.1,-0.2 -0.2,-0.4 -0.2,-0.5 -0.1,-0.1 -0.1,-0.3 -0.2,-0.3 -0.1,-0.1 -0.2,-0.2 -0.3,-0.2 -0.1,-0.1 -0.2,-0.1 -0.4,-0.2 l -1.5,-0.6 c 0.2,-0.4 0.4,-0.8 0.6,-1.3 0.2,-0.4 0.4,-0.8 0.6,-1.2 0.3,0.1 0.5,0.2 0.8,0.3 0.3,0.1 0.5,0.2 0.8,0.3 0.4,0.2 0.8,0.3 1,0.5 0.3,0.2 0.5,0.3 0.7,0.5 0.2,0.2 0.4,0.4 0.5,0.6 0.1,0.2 0.2,0.5 0.4,0.7 0.2,0.4 0.3,0.8 0.5,1.2 0.2,0.4 0.3,0.8 0.4,1.2 0.2,0.5 0.3,1 0.5,1.6 0.2,0.6 0.4,1.3 0.7,2.2 0.4,-0.4 0.7,-0.7 1,-1.1 0.2,-0.4 0.5,-0.8 0.6,-1.2 0.2,-0.5 0.4,-1.1 0.6,-1.7 0.2,-0.6 0.3,-1.3 0.4,-1.9 l -2.1,-0.6 z m 22.8,-2.1 c 0.5,0 1,0.1 1.5,0.2 0.5,0.1 0.9,0.3 1.3,0.7 0.4,0.3 0.7,0.7 0.9,1.3 0.2,0.6 0.4,1.3 0.4,2.2 0,0.2 0,0.3 0,0.5 0,0.2 0,0.4 0,0.6 0,0.2 0,0.5 0,0.8 0,0.3 0,0.6 0,1 0,0.8 -0.2,1.6 -0.5,2.3 -0.3,0.7 -0.7,1.3 -1.2,1.8 -0.5,0.5 -1.1,0.9 -1.8,1.2 -0.7,0.3 -1.4,0.4 -2.2,0.4 -0.8,0 -1.6,-0.1 -2.2,-0.4 -0.7,-0.3 -1.3,-0.7 -1.8,-1.2 -0.5,-0.5 -0.9,-1.1 -1.2,-1.8 -0.3,-0.7 -0.5,-1.4 -0.5,-2.3 0,-0.1 0,-0.2 0,-0.2 0,-0.1 0,-0.2 0,-0.2 0,-0.4 0,-0.8 0.1,-1.2 0,-0.4 0.1,-0.8 0.2,-1.2 0.1,-0.3 0.2,-0.6 0.3,-0.9 0.1,-0.3 0.3,-0.6 0.5,-0.9 -0.4,0 -0.7,-0.1 -1.1,-0.2 -0.3,-0.1 -0.8,-0.2 -1.2,-0.4 0.1,-0.4 0.3,-0.9 0.4,-1.3 0.1,-0.4 0.3,-0.8 0.4,-1.3 0.4,0.1 0.7,0.2 1,0.2 0.3,0.1 0.5,0.1 0.8,0.1 0.3,0 0.5,0.1 0.8,0.1 0.3,0 0.6,0 0.9,0 l 0.4,0 3.8,0 z m -3.3,2.7 c -0.1,0.2 -0.2,0.4 -0.3,0.6 -0.1,0.2 -0.2,0.4 -0.2,0.6 -0.1,0.4 -0.2,0.8 -0.2,1.3 -0.1,0.4 -0.1,0.9 -0.1,1.3 0,0.2 0,0.5 0,0.7 0,0.2 0,0.4 0.1,0.6 0.1,0.4 0.2,0.7 0.3,1 0.1,0.3 0.3,0.6 0.5,0.8 0.2,0.2 0.5,0.4 0.7,0.5 0.3,0.1 0.6,0.2 0.9,0.2 0.3,0 0.7,-0.1 0.9,-0.2 0.3,-0.1 0.5,-0.3 0.8,-0.5 0.3,-0.2 0.4,-0.5 0.5,-0.8 0.1,-0.3 0.2,-0.6 0.3,-1 0,-0.2 0,-0.4 0,-0.6 0,-0.2 0,-0.4 0,-0.7 0,-0.3 0,-0.5 0,-0.8 0,-0.3 0,-0.5 0,-0.7 0,-0.5 -0.1,-0.9 -0.1,-1.2 0,-0.3 -0.1,-0.6 -0.3,-0.7 -0.1,-0.2 -0.4,-0.3 -0.6,-0.4 -0.3,-0.1 -0.7,-0.1 -1.1,-0.1 l -2.1,0 z m 13.2,-6.2 0,3.5 6.9,0 c 0,0.2 0.1,0.3 0.1,0.5 0,0.1 0.1,0.3 0.1,0.4 0,0.2 0.1,0.4 0.1,0.5 0,0.2 0,0.4 0,0.6 l 0,2.6 c 0,1 -0.2,1.9 -0.6,2.7 -0.4,0.8 -1,1.7 -1.7,2.5 l -3.1,3.4 -2.4,-2 1.4,-1.6 c 0.6,-0.7 1.1,-1.2 1.5,-1.6 0.4,-0.4 0.7,-0.8 0.9,-1.2 0.2,-0.3 0.4,-0.7 0.5,-1 0.1,-0.3 0.2,-0.7 0.2,-1.1 l 0,-2.2 -7.2,0 0,-6.2 3.3,0 z m 12.9,2.8 c 0.8,0.2 1.4,0.4 2,0.5 0.6,0.1 1.1,0.3 1.6,0.4 0.5,0.1 0.9,0.3 1.3,0.4 0.4,0.1 0.8,0.3 1.2,0.4 0.4,0.2 0.8,0.4 1,0.6 0.3,0.2 0.5,0.5 0.7,0.8 0.2,0.3 0.3,0.6 0.4,1 0.1,0.4 0.1,0.8 0.1,1.2 l 0,4.8 c 0,0.2 0,0.4 0,0.6 0,0.2 0,0.4 -0.1,0.6 0,0.2 -0.1,0.5 -0.2,0.8 -0.1,0.3 -0.2,0.7 -0.3,1.2 l -10.9,0 0,-2.6 8.3,0 0,-5 c 0,-0.3 0,-0.5 0,-0.7 0,-0.2 -0.1,-0.4 -0.1,-0.5 -0.1,-0.1 -0.2,-0.3 -0.3,-0.4 -0.1,-0.1 -0.3,-0.2 -0.6,-0.3 -0.3,-0.1 -0.7,-0.2 -1,-0.4 -0.4,-0.1 -0.8,-0.3 -1.3,-0.4 l -1.1,2.4 1.6,0.9 -1.5,2.4 -3.9,-2.3 3.1,-6.4 z m 11.1,1.7 c 0.4,-0.3 0.9,-0.6 1.3,-0.8 0.4,-0.3 0.9,-0.5 1.3,-0.8 0.2,0.3 0.4,0.5 0.5,0.7 0.1,0.2 0.3,0.4 0.4,0.6 0.1,0.2 0.2,0.3 0.3,0.5 0.1,0.2 0.2,0.4 0.2,0.6 0.7,-0.7 1.4,-1.2 2.1,-1.5 0.8,-0.3 1.5,-0.5 2.2,-0.5 0.5,0 1,0.1 1.5,0.2 0.5,0.2 0.9,0.4 1.3,0.7 0.4,0.3 0.7,0.6 1,1.1 0.3,0.4 0.5,0.9 0.6,1.4 0.1,0.4 0.1,0.9 0.2,1.5 0,0.6 0,1.2 0,1.8 0,0.3 0,0.6 0,1 0,0.3 0,0.7 0,1.2 0,0.6 0,1.1 0,1.6 0,0.5 0,0.9 -0.1,1.3 0,0.2 0,0.4 0,0.6 0,0.2 0,0.4 -0.1,0.6 l -6.5,0 0,-2.6 3.2,0 c 0,0 0,-0.1 0,-0.3 0,-0.1 0,-0.3 0,-0.6 0,-0.2 0,-0.6 0,-1 0,-0.4 0,-0.9 0,-1.4 0,-0.2 0,-0.4 0,-0.6 0,-0.2 0,-0.5 0,-0.7 0,-0.3 0,-0.5 0,-0.7 0,-0.2 0,-0.4 0,-0.6 -0.1,-0.7 -0.3,-1.1 -0.6,-1.4 -0.3,-0.3 -0.7,-0.4 -1.3,-0.4 -0.3,0 -0.6,0.1 -0.9,0.2 -0.3,0.1 -0.6,0.3 -1,0.5 -0.2,0.1 -0.4,0.3 -0.5,0.4 -0.2,0.2 -0.3,0.3 -0.5,0.5 -0.1,0.9 -0.3,1.7 -0.4,2.3 -0.1,0.6 -0.2,1.2 -0.3,1.7 -0.1,0.5 -0.1,0.9 -0.2,1.3 -0.1,0.4 -0.1,0.7 -0.2,1.1 -0.1,0.4 -0.1,0.7 -0.2,1.1 -0.1,0.4 -0.1,0.8 -0.2,1.3 l -3.3,0 0.3,-2.1 c 0.1,-0.5 0.1,-1 0.2,-1.5 0.1,-0.5 0.1,-0.9 0.2,-1.4 0.1,-0.5 0.1,-0.9 0.2,-1.4 0.1,-0.5 0.2,-1 0.2,-1.5 0,-0.1 0,-0.3 0,-0.4 0,-0.1 0,-0.2 0,-0.4 0,-0.2 0,-0.4 0,-0.6 0,-0.2 -0.1,-0.3 -0.1,-0.5 -0.1,-0.2 -0.1,-0.3 -0.2,-0.5 -0.1,-0.2 -0.2,-0.4 -0.3,-0.6 l -0.3,-1 z"
-     class="st48" /><path
-     class="st67"
-     d="m 962.4,1466.2 -32.9,0 0,-6.6 27.6,0 0,-5 5.3,0 0,11.6 z m 0,17.2 -25.2,0 0,-6.6 20,0 0,-4.2 5.3,0 0,10.8 z m 0,23.6 c 0,1 -0.1,2 -0.3,3 -0.2,1 -0.7,1.9 -1.3,2.7 -0.6,0.8 -1.5,1.4 -2.5,1.9 -1.1,0.5 -2.5,0.7 -4.2,0.7 l -16.8,0 0,-6.6 15.1,0 c 1,0 1.8,0 2.4,-0.1 0.6,-0.1 1.1,-0.3 1.5,-0.6 0.4,-0.3 0.6,-0.8 0.7,-1.3 0.1,-0.6 0.2,-1.4 0.2,-2.3 l 0,-3.7 c -1.1,-0.5 -2.3,-0.9 -3.6,-1.1 -1.3,-0.2 -2.5,-0.3 -3.8,-0.3 -0.7,0 -1.4,0 -2,0 -0.6,0 -1.2,0.1 -1.8,0.2 -0.6,0.1 -1.2,0.2 -1.8,0.3 -0.6,0.1 -1.2,0.3 -1.8,0.5 l -1.4,0.5 c -0.7,-0.1 -1.3,-0.1 -2,-0.2 -0.6,-0.1 -1.2,-0.2 -1.8,-0.3 l 0,-11.9 5.3,0 0,5.6 c 1.2,-0.4 2.4,-0.7 3.6,-0.9 1.1,-0.2 2.3,-0.3 3.4,-0.3 0.9,0 1.8,0.1 2.7,0.2 0.9,0.1 1.8,0.3 2.7,0.6 0.4,0.1 0.8,0.3 1.2,0.4 0.4,0.1 0.8,0.3 1.2,0.5 0.1,-0.7 0.2,-1.4 0.3,-2.1 0.2,-0.7 0.4,-1.5 0.7,-2.4 0.9,0.3 1.7,0.5 2.6,0.8 0.8,0.3 1.7,0.6 2.5,0.9 -0.2,0.8 -0.4,1.5 -0.5,2.1 -0.1,0.6 -0.2,1.2 -0.3,1.7 -0.1,0.5 -0.1,1.1 -0.1,1.7 0,0.6 0,1.3 0,2.2 l 0,7.6 z m 0,30.8 c 0,1 -0.1,2 -0.3,3 -0.2,1 -0.7,1.9 -1.3,2.7 -0.6,0.8 -1.5,1.4 -2.6,1.9 -1.1,0.5 -2.5,0.7 -4.3,0.7 l -16.8,0 0,-6.6 15.1,0 c 1,0 1.8,0 2.4,-0.1 0.6,-0.1 1.1,-0.3 1.5,-0.6 0.4,-0.3 0.6,-0.8 0.7,-1.3 0.1,-0.6 0.2,-1.4 0.2,-2.3 l 0,-4.9 c -1.1,-0.3 -2.1,-0.4 -3.1,-0.5 -0.9,0 -1.9,-0.1 -2.9,-0.1 l -14,0 0,-6.6 14,0 c 1,0 2,0.1 3.1,0.2 1,0.1 2.1,0.4 3.2,0.6 0.1,-0.6 0.2,-1.1 0.4,-1.7 0.2,-0.6 0.4,-1.3 0.6,-2 0.9,0.3 1.7,0.5 2.6,0.8 0.8,0.3 1.7,0.6 2.5,0.9 -0.2,0.8 -0.4,1.5 -0.5,2.1 -0.1,0.6 -0.2,1.2 -0.3,1.7 -0.1,0.5 -0.1,1.1 -0.1,1.7 0,0.6 0,1.3 0,2.2 l 0,8.2 z m 0,31.6 c 0,1 -0.1,2 -0.3,3 -0.2,1 -0.7,1.9 -1.3,2.7 -0.6,0.8 -1.5,1.4 -2.5,1.9 -1.1,0.5 -2.5,0.7 -4.2,0.7 l -16.8,0 0,-6.6 15.1,0 c 1,0 1.8,0 2.4,-0.1 0.6,-0.1 1.1,-0.3 1.5,-0.6 0.4,-0.3 0.6,-0.8 0.7,-1.3 0.1,-0.6 0.2,-1.4 0.2,-2.3 l 0,-3.7 c -1.1,-0.5 -2.3,-0.9 -3.6,-1.1 -1.3,-0.2 -2.5,-0.3 -3.8,-0.3 -0.7,0 -1.4,0 -2,0 -0.6,0 -1.2,0.1 -1.8,0.2 -0.6,0.1 -1.2,0.2 -1.8,0.3 -0.6,0.1 -1.2,0.3 -1.8,0.5 l -1.4,0.5 c -0.7,-0.1 -1.3,-0.1 -2,-0.2 -0.6,-0.1 -1.2,-0.2 -1.8,-0.3 l 0,-11.9 5.3,0 0,5.6 c 1.2,-0.4 2.4,-0.7 3.6,-0.9 1.1,-0.2 2.3,-0.3 3.4,-0.3 0.9,0 1.8,0.1 2.7,0.2 0.9,0.1 1.8,0.3 2.7,0.6 0.4,0.1 0.8,0.3 1.2,0.4 0.4,0.1 0.8,0.3 1.2,0.5 0.1,-0.7 0.2,-1.4 0.3,-2.1 0.2,-0.7 0.4,-1.5 0.7,-2.4 0.9,0.3 1.7,0.5 2.6,0.8 0.8,0.3 1.7,0.6 2.5,0.9 -0.2,0.8 -0.4,1.5 -0.5,2.1 -0.1,0.6 -0.2,1.2 -0.3,1.7 -0.1,0.5 -0.1,1.1 -0.1,1.7 0,0.6 0,1.3 0,2.2 l 0,7.6 z m 0,43.6 c 0,1 -0.1,2 -0.3,3 -0.2,1 -0.7,1.9 -1.3,2.6 -0.6,0.8 -1.5,1.4 -2.6,1.8 -1.1,0.4 -2.5,0.7 -4.3,0.8 -0.3,0 -0.7,0 -1.1,0 -0.4,0 -0.8,0 -1.3,0 -0.5,0 -1,0 -1.6,0 -0.6,0 -1.3,0 -2.1,0 -1.6,0 -3.1,-0.3 -4.5,-0.9 -1.4,-0.6 -2.6,-1.4 -3.6,-2.4 -1,-1 -1.8,-2.2 -2.4,-3.6 -0.6,-1.4 -0.8,-2.9 -0.8,-4.5 0,-1.6 0.3,-3.1 0.8,-4.5 0.6,-1.4 1.4,-2.6 2.4,-3.6 1,-1 2.2,-1.8 3.6,-2.4 1.4,-0.6 2.9,-0.9 4.5,-1 0.2,0 0.3,0 0.5,0 0.2,0 0.3,0 0.5,0 0.8,0 1.5,0 2.3,0.1 0.8,0.1 1.6,0.3 2.4,0.5 0.6,0.2 1.2,0.4 1.9,0.7 0.6,0.3 1.2,0.6 1.7,0.9 0.1,-0.7 0.2,-1.4 0.3,-2.1 0.2,-0.7 0.4,-1.5 0.7,-2.4 0.9,0.3 1.7,0.5 2.6,0.8 0.8,0.3 1.7,0.6 2.5,0.9 -0.2,0.8 -0.4,1.4 -0.5,2 -0.1,0.5 -0.2,1.1 -0.3,1.6 -0.1,0.5 -0.1,1 -0.1,1.5 0,0.5 0,1.1 0,1.8 l 0,0.8 0,7.6 z m -5.3,-6.5 c -0.4,-0.3 -0.9,-0.5 -1.3,-0.7 -0.4,-0.2 -0.8,-0.3 -1.3,-0.4 -0.8,-0.2 -1.6,-0.4 -2.5,-0.5 -0.9,-0.1 -1.8,-0.2 -2.6,-0.2 -0.5,0 -1,0 -1.4,0 -0.5,0 -0.9,0.1 -1.2,0.1 -0.8,0.1 -1.4,0.3 -2,0.6 -0.6,0.3 -1.1,0.6 -1.6,1.1 -0.4,0.4 -0.8,0.9 -1,1.5 -0.2,0.6 -0.4,1.2 -0.4,1.9 0,0.7 0.1,1.3 0.4,1.9 0.2,0.6 0.6,1.1 1,1.5 0.4,0.4 1,0.8 1.6,1.1 0.6,0.3 1.3,0.4 2,0.5 0.3,0 0.7,0.1 1.2,0.1 0.4,0 0.9,0 1.3,0 0.5,0 1,0 1.6,0 0.5,0 1,0 1.5,-0.1 1,-0.1 1.8,-0.2 2.4,-0.3 0.6,-0.1 1.1,-0.3 1.5,-0.6 0.4,-0.3 0.6,-0.7 0.7,-1.3 0.1,-0.6 0.2,-1.3 0.2,-2.3 l 0,-3.9 z m 12.4,26.4 -7.1,0 0,13.8 c -0.4,0.1 -0.7,0.2 -0.9,0.3 -0.3,0.1 -0.5,0.1 -0.8,0.2 -0.4,0.1 -0.8,0.1 -1.1,0.1 -0.3,0 -0.7,0 -1.2,0 l -5.2,0 c -1.9,0 -3.7,-0.4 -5.4,-1.2 -1.7,-0.8 -3.4,-1.9 -5.1,-3.4 l -6.8,-6.2 4,-4.7 3.1,2.7 c 1.3,1.2 2.4,2.1 3.3,2.9 0.9,0.8 1.6,1.4 2.3,1.9 0.7,0.5 1.4,0.8 2,1 0.6,0.2 1.4,0.3 2.2,0.3 l 4.3,0 0,-14.4 12.3,0 0,6.7 z m -5.6,25.8 c -0.4,1.5 -0.7,2.8 -1,4 -0.3,1.2 -0.6,2.2 -0.8,3.2 -0.3,1 -0.5,1.8 -0.8,2.7 -0.3,0.8 -0.5,1.6 -0.8,2.4 -0.3,0.8 -0.7,1.5 -1.2,2.1 -0.5,0.6 -1,1 -1.6,1.3 -0.6,0.3 -1.2,0.6 -2,0.7 -0.7,0.1 -1.5,0.2 -2.4,0.2 l -9.7,0 c -0.4,0 -0.8,0 -1.2,0 -0.4,0 -0.7,-0.1 -1.2,-0.1 -0.5,-0.1 -1,-0.2 -1.7,-0.3 -0.6,-0.1 -1.5,-0.3 -2.5,-0.6 l 0,-21.8 5.3,0 0,16.6 10,0 c 0.6,0 1,0 1.4,-0.1 0.4,0 0.7,-0.1 1,-0.3 0.3,-0.1 0.5,-0.4 0.7,-0.6 0.2,-0.3 0.4,-0.7 0.6,-1.2 0.2,-0.6 0.5,-1.3 0.7,-2.1 0.2,-0.8 0.5,-1.6 0.8,-2.6 l -4.7,-2.3 -1.9,3.2 -4.8,-2.9 4.6,-7.7 13.2,6.2 z m -3.4,22.2 c 0.6,0.9 1.1,1.7 1.6,2.5 0.5,0.8 1,1.7 1.5,2.6 -0.5,0.4 -1,0.7 -1.4,1 -0.4,0.3 -0.8,0.5 -1.1,0.7 -0.3,0.2 -0.7,0.4 -1,0.6 -0.3,0.2 -0.7,0.3 -1.1,0.5 1.4,1.4 2.4,2.8 3.1,4.3 0.7,1.5 1,3 1,4.4 0,1 -0.2,2 -0.5,2.9 -0.3,0.9 -0.8,1.8 -1.3,2.5 -0.6,0.8 -1.3,1.4 -2.1,1.9 -0.8,0.5 -1.8,0.9 -2.9,1.1 -0.9,0.2 -1.9,0.3 -3,0.3 -1.1,0 -2.3,0.1 -3.6,0.1 -0.6,0 -1.3,0 -1.9,0 -0.7,0 -1.5,0 -2.4,0 -1.1,0 -2.2,0 -3.2,-0.1 -1,0 -1.9,-0.1 -2.5,-0.1 -0.4,0 -0.7,-0.1 -1.1,-0.1 -0.4,0 -0.8,-0.1 -1.2,-0.1 l 0,-12.7 5.3,0 0,6.5 c 0.1,0 0.3,0 0.5,0 0.3,0 0.6,0 1.1,0 0.5,0 1.1,0 1.9,0 0.8,0 1.7,0 2.9,0 0.3,0 0.7,0 1.2,0 0.5,0 1,0 1.5,0 0.5,0 1,0 1.5,0 0.5,0 0.9,0 1.2,-0.1 1.3,-0.2 2.2,-0.6 2.8,-1.2 0.5,-0.6 0.8,-1.5 0.8,-2.6 0,-0.6 -0.1,-1.2 -0.4,-1.8 -0.2,-0.6 -0.6,-1.3 -1,-1.9 -0.3,-0.4 -0.5,-0.7 -0.9,-1.1 -0.3,-0.3 -0.7,-0.7 -1.1,-1 -1.8,-0.3 -3.3,-0.5 -4.6,-0.7 -1.3,-0.2 -2.4,-0.4 -3.4,-0.5 -1,-0.1 -1.8,-0.3 -2.6,-0.4 -0.7,-0.1 -1.5,-0.2 -2.2,-0.3 -0.7,-0.1 -1.4,-0.2 -2.2,-0.3 -0.8,-0.1 -1.6,-0.2 -2.6,-0.4 l 0,-6.6 4.3,0.6 c 1,0.1 2,0.3 2.9,0.4 0.9,0.1 1.9,0.3 2.8,0.4 0.9,0.1 1.9,0.3 2.8,0.4 0.9,0.2 1.9,0.3 3,0.5 0.3,0 0.6,0.1 0.8,0.1 0.2,0 0.5,0 0.7,0 0.5,0 0.9,0 1.2,-0.1 0.4,-0.1 0.7,-0.2 1,-0.3 0.3,-0.1 0.7,-0.3 1,-0.5 0.3,-0.2 0.7,-0.4 1.1,-0.6 l 1.8,-0.8 z"
-     id="path1004"
-     clip-path="url(#SVGID_82_)"
-     style="fill:#141032"
-     transform="matrix(0,-1,1,0,-126.82657,979.5)" /><path
-     style="fill:#141032"
-     id="path1006"
-     d="m 1500.6734,81.2 c -0.6,0 -1.1,0 -1.5,0 -0.4,0 -0.9,0 -1.3,-0.1 -0.4,-0.1 -0.8,-0.1 -1.2,-0.2 -0.4,-0.1 -0.9,-0.3 -1.4,-0.4 0.2,-0.5 0.3,-0.9 0.5,-1.4 0.2,-0.5 0.3,-0.9 0.5,-1.4 0.5,0.2 1,0.3 1.4,0.4 0.4,0.1 0.8,0.2 1.2,0.2 0.4,0 0.8,0.1 1.2,0.1 0.4,0 0.9,0 1.5,0 l 3.7,0 c 0.8,0 1.6,0.1 2.3,0.3 0.8,0.2 1.5,0.5 2.1,1 0.6,0.5 1.1,1.2 1.5,2 0.4,0.9 0.6,2 0.6,3.4 l 0,12.9 -3.3,0 0,-12.6 c 0,-0.8 -0.1,-1.5 -0.2,-2 -0.1,-0.5 -0.3,-1 -0.6,-1.3 -0.3,-0.3 -0.7,-0.5 -1.2,-0.7 -0.5,-0.1 -1.1,-0.2 -1.9,-0.2 l -3.9,0 z m -5,10.8 c 0,-0.6 0,-1.1 0,-1.5 0,-0.4 0,-0.8 0.1,-1.2 0,-0.4 0.1,-0.8 0.2,-1.2 0.1,-0.4 0.2,-0.8 0.3,-1.3 0.5,0.1 1.1,0.2 1.6,0.2 0.5,0.1 1.1,0.2 1.6,0.2 -0.1,0.5 -0.1,0.9 -0.2,1.2 -0.1,0.4 -0.1,0.7 -0.1,1.1 0,0.4 -0.1,0.7 -0.1,1.1 0,0.4 0,0.9 0,1.4 l 0,5.8 -3.3,0 0,-5.8 z m 31.3,-13.7 c 1.1,0 2.1,0.1 3,0.4 0.8,0.3 1.5,0.7 2,1.3 0.4,0.4 0.7,0.9 0.9,1.5 0.2,0.6 0.4,1.2 0.5,1.9 0.1,0.7 0.2,1.3 0.3,2 0,0.7 0.1,1.3 0.1,2 0,1 -0.1,2 -0.2,3 -0.2,1.3 -0.4,2.4 -0.9,3.4 -0.4,1 -1,1.8 -1.7,2.5 -0.7,0.7 -1.5,1.2 -2.4,1.5 -0.9,0.4 -2,0.5 -3.1,0.5 -1.5,0 -2.7,-0.2 -3.8,-0.7 -1.1,-0.5 -1.9,-1.2 -2.5,-2 -0.7,-0.8 -1.1,-1.8 -1.4,-3 -0.3,-1.2 -0.5,-2.4 -0.5,-3.7 0,-0.8 0,-1.5 0.1,-2.3 0.1,-0.8 0.3,-1.6 0.5,-2.5 0.2,-0.5 0.3,-1 0.6,-1.5 0.2,-0.5 0.4,-1 0.7,-1.4 -0.6,0 -1.1,-0.1 -1.6,-0.2 -0.5,-0.1 -1.1,-0.3 -1.7,-0.5 0.2,-0.5 0.3,-0.9 0.5,-1.4 0.2,-0.5 0.3,-0.9 0.5,-1.4 0.5,0.2 1,0.3 1.4,0.4 0.4,0.1 0.8,0.2 1.2,0.2 0.4,0 0.8,0.1 1.2,0.1 0.4,0 0.9,0 1.5,0 l 4.8,0 z m -4.5,2.9 c -0.6,0.8 -1,1.7 -1.3,2.7 -0.3,1 -0.5,1.9 -0.5,2.9 0,0.4 0,0.8 -0.1,1.1 0,0.4 0,0.8 0,1.1 0,0.9 0.1,1.7 0.2,2.4 0.1,0.8 0.4,1.4 0.8,2 0.4,0.6 0.9,1.1 1.6,1.5 0.7,0.3 1.4,0.5 2.3,0.5 0.7,0 1.3,-0.1 1.8,-0.3 0.6,-0.2 1,-0.5 1.5,-0.9 0.4,-0.4 0.8,-0.9 1,-1.5 0.3,-0.6 0.5,-1.3 0.6,-2 0.1,-0.6 0.1,-1.1 0.2,-1.6 0,-0.5 0.1,-1 0.1,-1.4 0,-0.7 0,-1.3 -0.1,-1.9 -0.1,-0.6 -0.1,-1.2 -0.2,-1.9 -0.1,-0.5 -0.2,-1 -0.3,-1.3 -0.1,-0.3 -0.4,-0.6 -0.6,-0.9 -0.3,-0.2 -0.6,-0.4 -1.1,-0.5 -0.4,-0.1 -1,-0.1 -1.6,-0.1 l -4.3,0 z m 22.9,-2.9 0,6.1 c 0,0.7 0,1.2 0,1.7 0,0.5 0,0.9 -0.1,1.2 -0.1,0.3 -0.1,0.7 -0.2,1.1 -0.1,0.4 -0.1,0.7 -0.2,1.2 l -3.2,-0.5 c 0.1,-0.4 0.1,-0.7 0.2,-1 0.1,-0.3 0.1,-0.6 0.1,-1 0,-0.4 0.1,-0.7 0.1,-1.2 0,-0.4 0,-1 0,-1.6 l 0,-3.2 -4.3,0 0,-2.9 7.6,0 z m 13.7,0 0.1,0.6 c 0,0.4 0.1,1 0.2,1.7 0.1,0.7 0.2,1.6 0.3,2.6 0.1,1 0.2,2.1 0.3,3.2 0.1,1.1 0.2,2.3 0.4,3.6 0.1,1.2 0.2,2.5 0.4,3.7 0.1,0.6 0.1,1 0.1,1.4 0,0.4 0,0.7 0,1 0,0.3 0,0.6 0,0.8 0,0.3 -0.1,0.6 -0.1,1 l -11.2,0 0,-2.9 8.2,0 -1.5,-13.9 -4.6,0 0,-2.9 7.4,0 z m 12.1,2.9 c -0.6,0 -1.1,0 -1.5,0 -0.4,0 -0.9,0 -1.3,-0.1 -0.4,-0.1 -0.8,-0.1 -1.2,-0.2 -0.4,-0.1 -0.9,-0.3 -1.4,-0.4 0.2,-0.5 0.3,-0.9 0.5,-1.4 0.2,-0.5 0.3,-0.9 0.5,-1.4 0.5,0.2 1,0.3 1.4,0.4 0.4,0.1 0.8,0.2 1.2,0.2 0.4,0 0.8,0.1 1.2,0.1 0.4,0 0.9,0 1.5,0 l 1.1,0 c 0.8,0 1.5,0.1 2.3,0.3 0.7,0.2 1.4,0.5 2,1 0.6,0.5 1.1,1.2 1.5,2 0.4,0.9 0.6,1.9 0.7,3.3 0,0.7 0.1,1.4 0.1,2.1 0,0.7 0,1.4 0,2.2 0,0.7 0,1.5 0,2.3 0,0.8 0,1.7 0,2.6 0,0.3 0,0.6 0,0.8 0,0.2 0,0.5 -0.1,0.8 0,0.3 -0.1,0.6 -0.2,0.9 -0.1,0.3 -0.2,0.7 -0.3,1.2 l -14.4,0 0,-2.9 11.7,0 c 0,-1.5 0,-3.1 0,-4.8 0,-1.7 -0.1,-3.3 -0.1,-4.9 0,-0.8 -0.1,-1.5 -0.2,-2 -0.1,-0.5 -0.3,-1 -0.6,-1.3 -0.3,-0.3 -0.7,-0.5 -1.1,-0.7 -0.5,-0.1 -1.1,-0.2 -1.9,-0.2 l -1.4,0 z"
-     class="st49" /></svg>
+         xlink:href="#SVGID_1_"
+         overflow="visible"
+         id="use137" />
+    </clipPath>
+  </defs>
+  <metadata
+     id="metadata7072">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     transform="translate(-133.01366,-313.26645)">
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#b6b1c1"
+       points="354.3,706.3 374,720.5 335.4,740 285.4,719.3 291,717.9 205.9,678.4 244.3,651.3 157.2,608.7 113.2,631.6 45.3,590.9 197.4,519.5 303.3,565.8 340.6,543.6 374,527.7 355.7,518.8 390.3,502.2 502.7,550.4 518.1,546 572,573.4 545.3,587.1 516.8,574.1 404.7,631.6 365.3,678.9 377.7,689.6 "
+       id="polygon3" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#2cc1d7"
+       points="185.8,563.7 205.9,570.4 246.6,590 218.6,611.2 192.3,599.5 157.6,580.1 "
+       id="polygon5" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="468.7,548 385.1,511 385.1,522 468.7,558.5 "
+       id="polygon7" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="468.7,548 385.1,511 385.1,522 468.7,558.5 "
+       id="polygon9" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="198.6,618.1 203.2,615.5 203.2,626.3 198.6,628 "
+       id="polygon11" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="198.6,618.1 203.2,615.5 203.2,626.3 198.6,628 "
+       id="polygon13" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="251.3,585.1 186.2,555.4 186.2,566.4 251.3,596.3 "
+       id="polygon15" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="251.3,585.1 186.2,555.4 186.2,566.4 251.3,596.3 "
+       id="polygon17" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="199.8,520.9 303.3,566.2 303.3,556.2 199.4,512.4 "
+       id="polygon19" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="199.8,520.9 303.3,566.2 303.3,556.2 199.4,512.4 "
+       id="polygon21" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="251.4,596.3 251.4,585 213.4,606.6 223.5,611.7 "
+       id="polygon23" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="251.4,596.3 251.4,585 213.4,606.6 223.5,611.7 "
+       id="polygon25" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="503.5,544.3 407.2,501.5 407.2,511 503.5,553.3 "
+       id="polygon27" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="503.5,544.3 407.2,501.5 407.2,511 503.5,553.3 "
+       id="polygon29" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="113.2,618.4 45.3,576.8 45.3,590.9 113.2,631.6 "
+       id="polygon31" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="113.2,618.4 45.3,576.8 45.3,590.9 113.2,631.6 "
+       id="polygon33" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="244.3,651.3 157.2,608.7 157.2,597.4 244.2,640.6 "
+       id="polygon35" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="244.3,651.3 157.2,608.7 157.2,597.4 244.2,640.6 "
+       id="polygon37" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="216.9,580.3 216.9,570 182.2,589.3 192.3,594.3 "
+       id="polygon39" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="216.9,580.3 216.9,570 182.2,589.3 192.3,594.3 "
+       id="polygon41" />
+    <path
+       style="fill:#ffffff"
+       d="m 362.47623,586.16645 26.6,12.3 3.8,-7.3 -30.4,-14.4 0,9.4 z m -33.2,-25 -25.4,-12 0,9.8 25.4,11.8 0,-9.6 z"
+       id="path43" />
+    <path
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       d="m 362.47623,586.16645 26.6,12.3 3.8,-7.3 -30.4,-14.4 0,9.4 z m -33.2,-25 -25.4,-12 0,9.8 25.4,11.8 0,-9.6 z"
+       id="path45" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="377.7,715.6 347.4,701.9 347.7,710.5 377.7,725 "
+       id="polygon47" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="377.7,715.6 347.4,701.9 347.7,710.5 377.7,725 "
+       id="polygon49" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="383.2,684 362.5,673.5 362.7,684.2 383.2,694.6 "
+       id="polygon51" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="383.2,684 362.5,673.5 362.7,684.2 383.2,694.6 "
+       id="polygon53" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="577,568.6 517.6,538.4 517.6,546.1 570.5,573.1 "
+       id="polygon55" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="577,568.6 517.6,538.4 517.6,546.1 570.5,573.1 "
+       id="polygon57" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="545.3,582.7 520.8,570.5 520.8,579.5 545.3,592 "
+       id="polygon59" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="545.3,582.7 520.8,570.5 520.8,579.5 545.3,592 "
+       id="polygon61" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="256.8,625.4 144.7,569.8 144.7,581 256.8,635.7 "
+       id="polygon63" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="256.8,625.4 144.7,569.8 144.7,581 256.8,635.7 "
+       id="polygon65" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="244.3,651.3 244.2,640.6 205.9,668.6 214.4,672.4 "
+       id="polygon67" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="244.3,651.3 244.2,640.6 205.9,668.6 214.4,672.4 "
+       id="polygon69" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="307.5,710.2 307.5,698.5 283.2,713.2 283.2,722.7 "
+       id="polygon71" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="307.5,710.2 307.5,698.5 283.2,713.2 283.2,722.7 "
+       id="polygon73" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="330.5,736.8 283.2,713.4 283.2,722.6 330.5,747.1 "
+       id="polygon75" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="330.5,736.8 283.2,713.4 283.2,722.6 330.5,747.1 "
+       id="polygon77" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="330.5,747.1 330.5,736.8 377.7,715.6 377.7,725 "
+       id="polygon79" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="330.5,747.1 330.5,736.8 377.7,715.6 377.7,725 "
+       id="polygon81" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="357,706.3 347.3,701.9 383.2,684 383.2,694.6 "
+       id="polygon83" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="357,706.3 347.3,701.9 383.2,684 383.2,694.6 "
+       id="polygon85" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="407.6,622.9 520.8,570.5 520.8,579.5 411.3,632.8 369.4,677 362.5,673.5 "
+       id="polygon87" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="407.6,622.9 520.8,570.5 520.8,579.5 411.3,632.8 369.4,677 362.5,673.5 "
+       id="polygon89" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="386,611 489,562.9 489,572.1 389.6,620.8 370.1,640 369.7,629.2 "
+       id="polygon91" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="386,611 489,562.9 489,572.1 389.6,620.8 370.1,640 369.7,629.2 "
+       id="polygon93" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="545.1,592.3 545.1,583 576.6,568.1 576.6,577.5 "
+       id="polygon95" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="545.1,592.3 545.1,583 576.6,568.1 576.6,577.5 "
+       id="polygon97" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="509.2,550.7 509.2,541.7 503.5,544.5 503.5,553.3 "
+       id="polygon99" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="509.2,550.7 509.2,541.7 503.5,544.5 503.5,553.3 "
+       id="polygon101" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="374,529.1 336.6,547.4 303.3,565.8 303.3,556.2 332.9,536.2 373,518.1 "
+       id="polygon103" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="374,529.1 336.6,547.4 303.3,565.8 303.3,556.2 332.9,536.2 373,518.1 "
+       id="polygon105" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="199.8,520.9 199.4,512.4 45.3,576.8 58.5,584.9 "
+       id="polygon107" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="199.8,520.9 199.4,512.4 45.3,576.8 58.5,584.9 "
+       id="polygon109" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="157.2,608.7 157.2,597.4 113.2,618.4 113.2,631.6 "
+       id="polygon111" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="157.2,608.7 157.2,597.4 113.2,618.4 113.2,631.6 "
+       id="polygon113" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="163,578.8 153.2,573.9 186.3,555.6 186.3,566.9 "
+       id="polygon115" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="163,578.8 153.2,573.9 186.3,555.6 186.3,566.9 "
+       id="polygon117" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="211.7,607.5 216.3,604.8 216.3,615.6 211.7,618.8 "
+       id="polygon119" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="211.7,607.5 216.3,604.8 216.3,615.6 211.7,618.8 "
+       id="polygon121" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="296.2,604.2 256.8,625.4 256.8,635.7 296.2,614.5 306.2,620.2 306.6,610.6 "
+       id="polygon123" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="296.2,604.2 256.8,625.4 256.8,635.7 296.2,614.5 306.2,620.2 306.6,610.6 "
+       id="polygon125" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="391.9,581.9 333.2,554.5 327.4,557.2 386.7,582.8 "
+       id="polygon127" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.47999999"
+       points="391.9,581.9 333.2,554.5 327.4,557.2 386.7,582.8 "
+       id="polygon129" />
+    <g
+       transform="translate(97.97623,-119.43355)"
+       id="g131">
+      <defs
+         id="defs133">
+        <rect
+           id="SVGID_1_"
+           x="24.700001"
+           y="79.099998"
+           width="554"
+           height="1157.5" />
+      </defs>
+      <clipPath
+         id="clipPath6769">
+        <use
+           height="100%"
+           width="100%"
+           y="0"
+           x="0"
+           style="overflow:visible"
+           xlink:href="#SVGID_1_"
+           overflow="visible"
+           id="use6771" />
+      </clipPath>
+      <path
+         style="fill:#ffffff"
+         clip-path="url(#SVGID_2_)"
+         d="m 326.4,554.5 -5.9,2.4 61.7,27.9 4.5,-2 c 0.3,0.4 -60.3,-28.3 -60.3,-28.3"
+         id="path139" />
+      <path
+         style="fill:none;stroke:#141132;stroke-width:0.47999999"
+         clip-path="url(#SVGID_2_)"
+         d="m 326.4,554.5 -5.9,2.4 61.7,27.9 4.5,-2 c 0.3,0.4 -60.3,-28.3 -60.3,-28.3 z"
+         id="path141" />
+    </g>
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="376.5,580.5 319,554.5 310.7,558.5 371.4,585.3 "
+       id="polygon143" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.47999999"
+       points="376.5,580.5 319,554.5 310.7,558.5 371.4,585.3 "
+       id="polygon145" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="371.4,582.8 311.4,554.5 305.7,557.2 366.8,584.8 "
+       id="polygon147" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.47999999"
+       points="371.4,582.8 311.4,554.5 305.7,557.2 366.8,584.8 "
+       id="polygon149" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="362,580.5 304.5,554.9 280.5,566.2 338.6,590.5 "
+       id="polygon151" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.47999999"
+       points="362,580.5 304.5,554.9 280.5,566.2 338.6,590.5 "
+       id="polygon153" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="343.9,589.9 283.6,562.7 279.1,564.5 339.3,591.9 "
+       id="polygon155" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.47999999"
+       points="343.9,589.9 283.6,562.7 279.1,564.5 339.3,591.9 "
+       id="polygon157" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="333.8,589.1 276.1,562.5 271.1,565 328.6,590 "
+       id="polygon159" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.47999999"
+       points="333.8,589.1 276.1,562.5 271.1,565 328.6,590 "
+       id="polygon161" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="328.6,590 268.4,562.5 263.8,564.7 324.1,592 "
+       id="polygon163" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.47999999"
+       points="328.6,590 268.4,562.5 263.8,564.7 324.1,592 "
+       id="polygon165" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="318.4,587.7 261.2,562.5 253.8,565.3 313.2,592.5 "
+       id="polygon167" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.47999999"
+       points="318.4,587.7 261.2,562.5 253.8,565.3 313.2,592.5 "
+       id="polygon169" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="313.2,590 252.9,562.8 248.5,564.7 308.7,592 "
+       id="polygon171" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.47999999"
+       points="313.2,590 252.9,562.8 248.5,564.7 308.7,592 "
+       id="polygon173" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="338.2,587.6 307.8,585.1 306.2,620.2 391.9,581.9 362,577.4 "
+       id="polygon175" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="338.2,587.6 307.8,585.1 306.2,620.2 391.9,581.9 362,577.4 "
+       id="polygon177" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="99.8,547.7 100,542.7 118.6,551.9 118.6,556.6 "
+       id="polygon179" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="99.8,547.7 100,542.7 118.6,551.9 118.6,556.6 "
+       id="polygon181" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="100,542.7 105.4,540.6 123.3,550.5 120.2,552.6 "
+       id="polygon183" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="100,542.7 105.4,540.6 123.3,550.5 120.2,552.6 "
+       id="polygon185" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="103.7,541.3 103.7,536.9 124,546.2 123.3,550.5 "
+       id="polygon187" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="103.7,541.3 103.7,536.9 124,546.2 123.3,550.5 "
+       id="polygon189" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="103.7,536.9 109.1,534.9 128.1,543.8 124,546.2 "
+       id="polygon191" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="103.7,536.9 109.1,534.9 128.1,543.8 124,546.2 "
+       id="polygon193" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="109.1,534.9 109.1,530.8 128,539.1 128,543.8 "
+       id="polygon195" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="109.1,534.9 109.1,530.8 128,539.1 128,543.8 "
+       id="polygon197" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="80.2,568 85.8,565.3 105.1,575.1 100.6,577.4 "
+       id="polygon199" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="80.2,568 85.8,565.3 105.1,575.1 100.6,577.4 "
+       id="polygon201" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="84.1,566.1 84.1,561.6 105.1,571.4 105.1,575.3 "
+       id="polygon203" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="84.1,566.1 84.1,561.6 105.1,571.4 105.1,575.3 "
+       id="polygon205" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="84.1,561.6 89.5,559.6 109,569.4 105.2,571.3 "
+       id="polygon207" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="84.1,561.6 89.5,559.6 109,569.4 105.2,571.3 "
+       id="polygon209" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="89.5,559.6 89.7,555.7 109,565.2 109,569.4 "
+       id="polygon211" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="89.5,559.6 89.7,555.7 109,565.2 109,569.4 "
+       id="polygon213" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="74.8,578.5 74.8,574.1 95.1,583.4 94.4,587.7 "
+       id="polygon215" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="74.8,578.5 74.8,574.1 95.1,583.4 94.4,587.7 "
+       id="polygon217" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="74.8,574.1 80.2,572.1 99.2,581 95.1,583.4 "
+       id="polygon219" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="74.8,574.1 80.2,572.1 99.2,581 95.1,583.4 "
+       id="polygon221" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="80.2,572.1 80.2,568 99.2,576.3 99.2,581 "
+       id="polygon223" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="80.2,572.1 80.2,568 99.2,576.3 99.2,581 "
+       id="polygon225" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="89.7,555.8 95.1,553.6 113.9,563 109.1,565.3 "
+       id="polygon227" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="89.7,555.8 95.1,553.6 113.9,563 109.1,565.3 "
+       id="polygon229" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="94.4,554.1 94.4,549.7 114,558.6 114,563.2 "
+       id="polygon231" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="94.4,554.1 94.4,549.7 114,558.6 114,563.2 "
+       id="polygon233" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="94.4,549.7 99.8,547.7 118.5,556.5 114,558.7 "
+       id="polygon235" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="94.4,549.7 99.8,547.7 118.5,556.5 114,558.7 "
+       id="polygon237" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="113.2,572.6 94,578.8 94,590.5 113.2,583.4 144.7,581 144.7,569.8 "
+       id="polygon239" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="113.2,572.6 94,578.8 94,590.5 113.2,583.4 144.7,581 144.7,569.8 "
+       id="polygon241" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#b6b1c1"
+       points="128,539.1 108.5,549.6 123.9,557.5 145.4,567.9 229.5,523.5 170.8,500.8 99.2,526.9 109.1,530.8 "
+       id="polygon243" />
+    <g
+       transform="translate(97.97623,-119.43355)"
+       id="g245">
+      <defs
+         id="defs247">
+        <rect
+           id="SVGID_3_"
+           x="24.700001"
+           y="79.099998"
+           width="554"
+           height="1157.5" />
+      </defs>
+      <clipPath
+         id="clipPath6829">
+        <use
+           height="100%"
+           width="100%"
+           y="0"
+           x="0"
+           style="overflow:visible"
+           xlink:href="#SVGID_3_"
+           overflow="visible"
+           id="use6831" />
+      </clipPath>
+      <path
+         style="fill:#2cc1d7"
+         clip-path="url(#SVGID_4_)"
+         d="m 118.3,517.6 c 0,0 15.5,8 16,8 0.5,0 12.4,-3.2 12.4,-3.2 l 13.1,-7.5 30.1,12.2 17.3,7.7 16,-12 -3.5,-7.2 c 0,0 -52.6,-18.2 -53.1,-18.2 -0.5,0 -48.3,20.2 -48.3,20.2"
+         id="path253" />
+    </g>
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="170.5,501 170.5,491.1 99.2,517.6 99.2,527 "
+       id="polygon255" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="170.5,501 170.5,491.1 99.2,517.6 99.2,527 "
+       id="polygon257" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="230.3,514.8 170.5,491 170.5,501 218.7,520.6 "
+       id="polygon259" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="230.3,514.8 170.5,491 170.5,501 218.7,520.6 "
+       id="polygon261" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="204.6,527.7 147.7,499.8 147.7,509.4 204.6,538.6 "
+       id="polygon263" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="204.6,527.7 147.7,499.8 147.7,509.4 204.6,538.6 "
+       id="polygon265" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="145.4,567.9 146,557.5 230.3,514.8 229.6,525.6 "
+       id="polygon267" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="145.4,567.9 146,557.5 230.3,514.8 229.6,525.6 "
+       id="polygon269" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#f7d786"
+       points="135.3,547.8 132.6,546.9 138.2,543.8 134.1,541.7 128.6,545.1 126.8,544 121.5,551.1 "
+       id="polygon271" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="136.5,521 116.5,511.3 116.5,520.4 136.5,531 "
+       id="polygon273" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="136.5,521 116.5,511.3 116.5,520.4 136.5,531 "
+       id="polygon275" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="178.6,525.2 174.8,523.3 174.8,517.9 178.6,519.5 "
+       id="polygon277" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.47999999"
+       points="178.6,525.2 174.8,523.3 174.8,517.9 178.6,519.5 "
+       id="polygon279" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="164.1,517.6 164.1,507.7 136.5,521 136.5,531 "
+       id="polygon281" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       points="164.1,517.6 164.1,507.7 136.5,521 136.5,531 "
+       id="polygon283" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="175.9,595.9 171,593.5 171,586 175.9,588.5 "
+       id="polygon285" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.47999999"
+       points="175.9,595.9 171,593.5 171,586 175.9,588.5 "
+       id="polygon287" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="203.7,609.8 198.9,607.4 198.9,599.9 203.7,602.4 "
+       id="polygon289" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.47999999"
+       points="203.7,609.8 198.9,607.4 198.9,599.9 203.7,602.4 "
+       id="polygon291" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:#ffffff"
+       points="155.1,516.4 150.3,518.4 150.3,524.2 155.1,522 "
+       id="polygon293" />
+    <polygon
+       transform="translate(97.97623,-119.43355)"
+       style="fill:none;stroke:#141132;stroke-width:0.47999999"
+       points="155.1,516.4 150.3,518.4 150.3,524.2 155.1,522 "
+       id="polygon295" />
+    <rect
+       style="fill:#141132"
+       x="209.47623"
+       y="411.96649"
+       width="46.5"
+       height="8.8999996"
+       id="rect459" />
+    <path
+       style="fill:#f7d786"
+       d="m 214.47623,414.06645 0,5.7 -1.2,0 0,-4.8 -0.9,0 0,-0.9 2.1,0 z m 3,0 0,4.4 -1.2,0 0,-3.5 -0.7,0 0,-0.9 1.9,0 z m 3.1,0 0,1.6 c 0,0.2 0,0.3 0,0.4 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.2 0,0.1 0,0.2 -0.1,0.3 l -1.1,-0.2 c 0,-0.1 0,-0.2 0,-0.2 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.4 l 0,-0.6 -1,0 0,-0.9 2.2,0 z m 2.1,-1.2 0,1.2 2.4,0 c 0,0.1 0,0.1 0,0.2 0,0.1 0,0.1 0,0.1 0,0.1 0,0.1 0,0.2 0,0.1 0,0.1 0,0.2 l 0,0.9 c 0,0.3 -0.1,0.6 -0.2,0.9 -0.1,0.3 -0.3,0.6 -0.6,0.9 l -1.1,1.2 -0.8,-0.7 0.5,-0.5 c 0.2,-0.2 0.4,-0.4 0.5,-0.6 0.1,-0.2 0.2,-0.3 0.3,-0.4 0.1,-0.1 0.1,-0.2 0.2,-0.3 0,-0.1 0.1,-0.2 0.1,-0.4 l 0,-0.8 -2.5,0 0,-2.1 1.2,0 z m 6,1.9 c 0,-0.2 0.1,-0.3 0.1,-0.4 0,-0.1 0.1,-0.3 0.1,-0.4 l 1.6,0.4 c 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 0,0.2 -0.1,0.4 -0.1,0.6 0,0.2 -0.1,0.4 -0.2,0.6 -0.1,0.3 -0.3,0.6 -0.4,0.9 -0.2,0.3 -0.3,0.5 -0.5,0.7 -0.2,0.2 -0.4,0.4 -0.6,0.5 -0.2,0.1 -0.5,0.3 -0.7,0.4 -0.2,0.1 -0.5,0.2 -0.8,0.3 -0.3,0.1 -0.5,0.2 -0.8,0.2 l -0.3,-1 c 0.3,-0.1 0.6,-0.2 0.8,-0.2 0.3,-0.1 0.5,-0.2 0.7,-0.3 -0.1,-0.4 -0.3,-0.7 -0.4,-1.1 -0.1,-0.4 -0.3,-0.7 -0.4,-1.1 0,-0.1 -0.1,-0.1 -0.1,-0.2 0,0 0,-0.1 -0.1,-0.1 0,0 -0.1,-0.1 -0.1,-0.1 0,0 -0.1,0 -0.1,-0.1 l -0.5,-0.2 c 0.1,-0.1 0.1,-0.3 0.2,-0.4 0.1,-0.1 0.1,-0.3 0.2,-0.4 0.1,0 0.2,0.1 0.3,0.1 0.1,0 0.2,0.1 0.3,0.1 0.1,0.1 0.3,0.1 0.4,0.2 0.1,0.1 0.2,0.1 0.3,0.2 0.1,0.1 0.1,0.1 0.2,0.2 0,0.1 0.1,0.2 0.1,0.3 0.1,0.1 0.1,0.3 0.2,0.4 0,0.1 0.1,0.3 0.1,0.4 0.1,0.2 0.1,0.3 0.2,0.6 0.1,0.2 0.2,0.5 0.3,0.8 0.1,-0.1 0.3,-0.3 0.3,-0.4 0.1,-0.1 0.2,-0.3 0.2,-0.4 0.1,-0.2 0.2,-0.4 0.2,-0.6 0.1,-0.2 0.1,-0.4 0.1,-0.7 l -0.8,-0.4 z m 7.9,-0.7 c 0.2,0 0.4,0 0.5,0.1 0.2,0 0.3,0.1 0.5,0.2 0.1,0.1 0.2,0.3 0.3,0.4 0.1,0.2 0.1,0.4 0.1,0.7 0,0.1 0,0.1 0,0.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.4 0,0.3 -0.1,0.5 -0.2,0.8 -0.1,0.2 -0.2,0.4 -0.4,0.6 -0.2,0.2 -0.4,0.3 -0.6,0.4 -0.2,0.1 -0.5,0.1 -0.8,0.1 -0.3,0 -0.5,0 -0.8,-0.1 -0.2,-0.1 -0.4,-0.2 -0.6,-0.4 -0.2,-0.2 -0.3,-0.4 -0.4,-0.6 -0.1,-0.2 -0.2,-0.5 -0.2,-0.8 0,0 0,-0.1 0,-0.1 0,0 0,-0.1 0,-0.1 0,-0.1 0,-0.3 0,-0.4 0,-0.1 0,-0.3 0.1,-0.4 0,-0.1 0.1,-0.2 0.1,-0.3 0,-0.1 0.1,-0.2 0.2,-0.3 -0.1,0 -0.2,0 -0.4,-0.1 -0.1,0 -0.3,-0.1 -0.4,-0.1 0,-0.2 0.1,-0.3 0.1,-0.4 0,-0.1 0.1,-0.3 0.1,-0.4 0.1,0 0.2,0.1 0.3,0.1 0.1,0 0.2,0 0.3,0.1 0.1,0 0.2,0 0.3,0 0.1,0 0.2,0 0.3,0 l 0.1,0 1.5,0 z m -1.1,0.9 c 0,0.1 -0.1,0.2 -0.1,0.2 0,0.1 -0.1,0.1 -0.1,0.2 0,0.1 -0.1,0.3 -0.1,0.4 0,0.2 0,0.3 0,0.5 0,0.1 0,0.2 0,0.2 0,0.1 0,0.2 0,0.2 0,0.1 0.1,0.3 0.1,0.4 0,0.1 0.1,0.2 0.2,0.3 0.1,0.1 0.2,0.1 0.3,0.2 0.1,0 0.2,0.1 0.3,0.1 0.1,0 0.2,0 0.3,-0.1 0.1,0 0.2,-0.1 0.3,-0.2 0.1,-0.1 0.1,-0.2 0.2,-0.3 0.1,-0.1 0.1,-0.2 0.1,-0.4 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.2 0,-0.2 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.3 0,-0.2 0,-0.3 0,-0.4 0,-0.1 0,-0.2 -0.1,-0.3 0,-0.1 -0.1,-0.1 -0.2,-0.1 -0.1,0 -0.2,0 -0.4,0 l -0.8,0 z m 4.6,-2.1 0,1.2 2.4,0 c 0,0.1 0,0.1 0,0.2 0,0 0,0.1 0,0.1 0,0.1 0,0.1 0,0.2 0,0.1 0,0.1 0,0.2 l 0,0.9 c 0,0.3 -0.1,0.6 -0.2,0.9 -0.1,0.3 -0.3,0.6 -0.6,0.9 l -1.1,1.2 -0.8,-0.7 0.5,-0.5 c 0.2,-0.2 0.4,-0.4 0.5,-0.6 0.1,-0.2 0.2,-0.3 0.3,-0.4 0.1,-0.1 0.1,-0.2 0.2,-0.3 0,-0.1 0.1,-0.2 0.1,-0.4 l 0,-0.8 -2.4,0 0,-2.1 1.1,0 z m 4.5,0.9 c 0.3,0.1 0.5,0.1 0.7,0.2 0.2,0.1 0.4,0.1 0.6,0.1 0.2,0 0.3,0.1 0.5,0.1 0.1,0 0.3,0.1 0.4,0.1 0.1,0.1 0.3,0.1 0.4,0.2 0.1,0.1 0.2,0.2 0.2,0.3 0.1,0.1 0.1,0.2 0.1,0.3 0,0.1 0,0.3 0,0.4 l 0,1.7 c 0,0.1 0,0.1 0,0.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.2 -0.1,0.3 0,0.1 -0.1,0.3 -0.1,0.4 l -3.8,0 0,-0.7 2.9,0 0,-1.7 c 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.1 0,-0.2 0,0 -0.1,-0.1 -0.1,-0.1 0,0 -0.1,-0.1 -0.2,-0.1 -0.1,0 -0.2,-0.1 -0.4,-0.1 -0.1,0 -0.3,-0.1 -0.5,-0.1 l -0.4,0.8 0.6,0.3 -0.5,0.8 -1.3,-0.8 1,-2.3 z m 3.9,0.6 c 0.1,-0.1 0.3,-0.2 0.4,-0.3 0.1,-0.1 0.3,-0.2 0.5,-0.3 0.1,0.1 0.1,0.2 0.2,0.2 0,0.1 0.1,0.1 0.1,0.2 0,0.1 0.1,0.1 0.1,0.2 0,0.1 0.1,0.1 0.1,0.2 0.2,-0.2 0.5,-0.4 0.7,-0.5 0.3,-0.1 0.5,-0.2 0.8,-0.2 0.2,0 0.3,0 0.5,0.1 0.2,0.1 0.3,0.1 0.4,0.2 0.1,0.1 0.2,0.2 0.3,0.4 0.1,0.1 0.2,0.3 0.2,0.5 0,0.2 0,0.3 0.1,0.5 0,0.2 0,0.4 0,0.6 0,0.1 0,0.2 0,0.3 0,0.1 0,0.3 0,0.4 0,0.2 0,0.4 0,0.6 0,0.2 0,0.3 0,0.4 0,0.1 0,0.1 0,0.2 0,0.1 0,0.1 0,0.2 l -2.2,0 0,-0.7 1.1,0 c 0,0 0,0 0,-0.1 0,0 0,-0.1 0,-0.2 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.3 0,-0.5 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.1 0,-0.2 0,-0.2 -0.1,-0.4 -0.2,-0.5 -0.1,-0.1 -0.3,-0.1 -0.4,-0.1 -0.1,0 -0.2,0 -0.3,0.1 -0.1,0 -0.2,0.1 -0.3,0.2 -0.1,0 -0.1,0.1 -0.2,0.1 -0.1,0.1 -0.1,0.1 -0.2,0.2 0,0.3 -0.1,0.6 -0.1,0.8 0,0.2 -0.1,0.4 -0.1,0.6 0,0.2 0,0.3 -0.1,0.4 0,0.1 0,0.3 -0.1,0.4 0,0.1 0,0.2 -0.1,0.4 0,0.1 0,0.3 -0.1,0.5 l -1.1,0 0.1,-0.7 c 0,-0.2 0.1,-0.4 0.1,-0.5 0,-0.2 0.1,-0.3 0.1,-0.5 0,-0.2 0.1,-0.3 0.1,-0.5 0,-0.2 0.1,-0.3 0.1,-0.5 0,-0.1 0,-0.1 0,-0.1 0,0 0,-0.1 0,-0.1 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.1 -0.1,-0.2 0,-0.1 0,-0.1 -0.1,-0.2 0,-0.1 -0.1,-0.1 -0.1,-0.2 l -0.2,-0.5 z"
+       id="path461" />
+    <path
+       style="fill:#141132"
+       d="m 558.87623,325.76645 0,11.4 -2.3,0 0,-9.6 -1.7,0 0,-1.8 4,0 z m 6,0 0,8.8 -2.3,0 0,-7 -1.5,0 0,-1.8 3.8,0 z m 8.2,0 c 0.4,0 0.7,0 1,0.1 0.3,0.1 0.7,0.2 0.9,0.4 0.3,0.2 0.5,0.5 0.7,0.9 0.2,0.4 0.3,0.9 0.3,1.5 l 0,5.8 -2.3,0 0,-5.3 c 0,-0.3 0,-0.6 0,-0.9 0,-0.2 -0.1,-0.4 -0.2,-0.5 -0.1,-0.1 -0.3,-0.2 -0.5,-0.3 -0.2,0 -0.5,-0.1 -0.8,-0.1 l -1.3,0 c -0.2,0.4 -0.3,0.8 -0.4,1.2 -0.1,0.4 -0.1,0.9 -0.1,1.3 0,0.2 0,0.5 0,0.7 0,0.2 0,0.4 0.1,0.6 0,0.2 0.1,0.4 0.1,0.6 0,0.2 0.1,0.4 0.2,0.6 l 0.2,0.5 c 0,0.2 0,0.5 -0.1,0.7 0,0.2 -0.1,0.4 -0.1,0.6 l -4.1,0 0,-1.8 1.9,0 c -0.1,-0.4 -0.3,-0.8 -0.3,-1.2 -0.1,-0.4 -0.1,-0.8 -0.1,-1.2 0,-0.3 0,-0.6 0.1,-0.9 0,-0.3 0.1,-0.6 0.2,-0.9 0,-0.1 0.1,-0.3 0.1,-0.4 0,-0.1 0.1,-0.3 0.2,-0.4 -0.2,0 -0.5,-0.1 -0.7,-0.1 -0.2,-0.1 -0.5,-0.1 -0.8,-0.2 0.1,-0.3 0.2,-0.6 0.3,-0.9 0.1,-0.3 0.2,-0.6 0.3,-0.9 0.3,0.1 0.5,0.1 0.7,0.2 0.2,0 0.4,0.1 0.6,0.1 0.2,0 0.4,0 0.6,0 0.2,0 0.5,0 0.8,0 l 2.5,0 z m 10.7,0 c 0.4,0 0.7,0 1,0.1 0.3,0.1 0.7,0.2 0.9,0.4 0.3,0.2 0.5,0.5 0.7,0.9 0.2,0.4 0.3,0.9 0.3,1.5 l 0,5.8 -2.3,0 0,-5.3 c 0,-0.3 0,-0.6 0,-0.9 0,-0.2 -0.1,-0.4 -0.2,-0.5 -0.1,-0.1 -0.3,-0.2 -0.5,-0.3 -0.2,0 -0.5,-0.1 -0.8,-0.1 l -1.7,0 c -0.1,0.4 -0.1,0.7 -0.2,1.1 0,0.3 0,0.7 0,1 l 0,4.9 -2.3,0 0,-4.8 c 0,-0.3 0,-0.7 0.1,-1.1 0,-0.4 0.1,-0.7 0.2,-1.1 -0.2,0 -0.4,-0.1 -0.6,-0.1 -0.2,-0.1 -0.4,-0.1 -0.7,-0.2 0.1,-0.3 0.2,-0.6 0.3,-0.9 0.1,-0.3 0.2,-0.6 0.3,-0.9 0.3,0.1 0.5,0.1 0.7,0.2 0.2,0 0.4,0.1 0.6,0.1 0.2,0 0.4,0 0.6,0 0.2,0 0.5,0 0.8,0 l 2.8,0 z m 11,0 c 0.4,0 0.7,0 1,0.1 0.3,0.1 0.7,0.2 0.9,0.4 0.3,0.2 0.5,0.5 0.7,0.9 0.2,0.4 0.3,0.9 0.3,1.5 l 0,5.8 -2.3,0 0,-5.3 c 0,-0.3 0,-0.6 0,-0.9 0,-0.2 -0.1,-0.4 -0.2,-0.5 -0.1,-0.1 -0.3,-0.2 -0.5,-0.3 -0.2,0 -0.5,-0.1 -0.8,-0.1 l -1.3,0 c -0.2,0.4 -0.3,0.8 -0.4,1.2 -0.1,0.4 -0.1,0.9 -0.1,1.3 0,0.2 0,0.5 0,0.7 0,0.2 0,0.4 0.1,0.6 0,0.2 0.1,0.4 0.1,0.6 0,0.2 0.1,0.4 0.2,0.6 l 0.2,0.5 c 0,0.2 0,0.5 -0.1,0.7 0,0.2 -0.1,0.4 -0.1,0.6 l -4.1,0 0,-1.8 1.9,0 c -0.1,-0.4 -0.3,-0.8 -0.3,-1.2 -0.1,-0.4 -0.1,-0.8 -0.1,-1.2 0,-0.3 0,-0.6 0.1,-0.9 0,-0.3 0.1,-0.6 0.2,-0.9 0,-0.1 0.1,-0.3 0.1,-0.4 0,-0.1 0.1,-0.3 0.2,-0.4 -0.2,0 -0.5,-0.1 -0.7,-0.1 -0.2,-0.1 -0.5,-0.1 -0.8,-0.2 0.1,-0.3 0.2,-0.6 0.3,-0.9 0.1,-0.3 0.2,-0.6 0.3,-0.9 0.3,0.1 0.5,0.1 0.7,0.2 0.2,0 0.4,0.1 0.6,0.1 0.2,0 0.4,0 0.6,0 0.2,0 0.5,0 0.8,0 l 2.5,0 z m 15.2,0 c 0.4,0 0.7,0 1,0.1 0.3,0.1 0.6,0.2 0.9,0.5 0.3,0.2 0.5,0.5 0.6,0.9 0.2,0.4 0.2,0.9 0.3,1.5 0,0.1 0,0.2 0,0.4 0,0.1 0,0.3 0,0.4 0,0.2 0,0.3 0,0.5 0,0.2 0,0.4 0,0.7 0,0.6 -0.1,1.1 -0.3,1.6 -0.2,0.5 -0.5,0.9 -0.8,1.2 -0.4,0.4 -0.8,0.6 -1.3,0.8 -0.5,0.2 -1,0.3 -1.6,0.3 -0.6,0 -1.1,-0.1 -1.6,-0.3 -0.5,-0.2 -0.9,-0.5 -1.2,-0.8 -0.4,-0.4 -0.6,-0.8 -0.8,-1.2 -0.2,-0.5 -0.3,-1 -0.3,-1.6 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.1 0,-0.2 0,-0.3 0,-0.5 0,-0.8 0,-0.3 0.1,-0.6 0.2,-0.9 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.1,-0.2 0.2,-0.4 0.3,-0.6 -0.2,0 -0.5,-0.1 -0.7,-0.1 -0.2,-0.1 -0.5,-0.1 -0.8,-0.3 0.1,-0.3 0.2,-0.6 0.3,-0.9 0.1,-0.3 0.2,-0.6 0.3,-0.9 0.3,0.1 0.5,0.1 0.7,0.2 0.2,0 0.4,0.1 0.5,0.1 0.2,0 0.4,0 0.5,0.1 0.2,0 0.4,0 0.6,0 l 0.3,0 2.7,0 z m -2.3,1.8 c -0.1,0.2 -0.2,0.3 -0.2,0.4 -0.1,0.1 -0.1,0.3 -0.2,0.4 -0.1,0.3 -0.1,0.6 -0.2,0.9 0,0.3 -0.1,0.6 -0.1,0.9 0,0.2 0,0.3 0,0.5 0,0.2 0,0.3 0,0.4 0,0.3 0.1,0.5 0.2,0.7 0.1,0.2 0.2,0.4 0.4,0.5 0.1,0.2 0.3,0.3 0.5,0.4 0.2,0.1 0.4,0.1 0.6,0.1 0.2,0 0.5,0 0.7,-0.1 0.2,-0.1 0.4,-0.2 0.5,-0.4 0.2,-0.2 0.3,-0.3 0.4,-0.5 0.1,-0.2 0.2,-0.4 0.2,-0.7 0,-0.1 0,-0.3 0,-0.4 0,-0.1 0,-0.3 0,-0.5 0,-0.2 0,-0.4 0,-0.5 0,-0.2 0,-0.3 0,-0.5 0,-0.3 -0.1,-0.6 -0.1,-0.9 0,-0.2 -0.1,-0.4 -0.2,-0.5 -0.1,-0.1 -0.2,-0.2 -0.4,-0.3 -0.2,0 -0.5,-0.1 -0.8,-0.1 l -1.3,0 z m 9.2,-4.3 0,2.5 4.8,0 c 0,0.1 0.1,0.2 0.1,0.3 0,0.1 0,0.2 0.1,0.3 0,0.1 0,0.3 0.1,0.4 0,0.1 0,0.3 0,0.4 l 0,1.8 c 0,0.7 -0.1,1.3 -0.4,1.9 -0.3,0.6 -0.7,1.2 -1.2,1.8 l -2.2,2.4 -1.6,-1.4 1,-1.1 c 0.4,-0.5 0.7,-0.8 1,-1.1 0.3,-0.3 0.5,-0.6 0.7,-0.8 0.2,-0.2 0.3,-0.5 0.4,-0.7 0.1,-0.2 0.1,-0.5 0.1,-0.8 l 0,-1.6 -5,0 0,-4.3 2.1,0 z m 9,1.9 c 0.5,0.1 1,0.2 1.4,0.3 0.4,0.1 0.8,0.2 1.1,0.3 0.3,0.1 0.6,0.2 0.9,0.3 0.3,0.1 0.6,0.2 0.8,0.3 0.3,0.1 0.5,0.2 0.7,0.4 0.2,0.2 0.3,0.3 0.5,0.5 0.1,0.2 0.2,0.4 0.2,0.7 0,0.3 0.1,0.5 0.1,0.8 l 0,3.4 c 0,0.1 0,0.3 0,0.4 0,0.1 0,0.3 0,0.4 0,0.2 -0.1,0.4 -0.1,0.6 -0.1,0.2 -0.1,0.5 -0.2,0.9 l -7.6,0 0,-1.8 5.8,0 0,-3.5 c 0,-0.2 0,-0.4 0,-0.5 0,-0.1 0,-0.3 -0.1,-0.4 -0.1,-0.1 -0.1,-0.2 -0.2,-0.3 -0.1,-0.1 -0.2,-0.1 -0.4,-0.2 -0.2,-0.1 -0.5,-0.2 -0.7,-0.2 -0.3,-0.1 -0.6,-0.2 -0.9,-0.3 l -0.8,1.6 1.1,0.7 -1,1.7 -2.7,-1.6 2.1,-4.5 z m 7.7,1.2 c 0.3,-0.2 0.6,-0.4 0.9,-0.6 0.3,-0.2 0.6,-0.4 0.9,-0.5 0.1,0.2 0.3,0.3 0.3,0.5 0.1,0.1 0.2,0.3 0.3,0.4 0.1,0.1 0.1,0.2 0.2,0.4 0.1,0.1 0.1,0.2 0.2,0.4 0.5,-0.5 1,-0.8 1.5,-1.1 0.5,-0.2 1,-0.3 1.5,-0.3 0.4,0 0.7,0.1 1,0.2 0.3,0.1 0.6,0.3 0.9,0.5 0.3,0.2 0.5,0.5 0.7,0.7 0.2,0.3 0.3,0.6 0.4,1 0.1,0.3 0.1,0.6 0.1,1 0,0.4 0,0.8 0,1.3 0,0.2 0,0.4 0,0.7 0,0.2 0,0.5 0,0.9 0,0.4 0,0.8 0,1.1 0,0.4 0,0.6 0,0.9 0,0.1 0,0.3 0,0.4 0,0.1 0,0.3 -0.1,0.4 l -4.4,0 0,-1.8 2.3,0 c 0,0 0,-0.1 0,-0.2 0,-0.1 0,-0.2 0,-0.4 0,-0.2 0,-0.4 0,-0.7 0,-0.3 0,-0.6 0,-1 0,-0.1 0,-0.3 0,-0.4 0,-0.2 0,-0.3 0,-0.5 0,-0.2 0,-0.4 0,-0.5 0,-0.2 0,-0.3 0,-0.4 -0.1,-0.5 -0.2,-0.8 -0.4,-1 -0.2,-0.2 -0.5,-0.3 -0.9,-0.3 -0.2,0 -0.4,0 -0.6,0.1 -0.2,0.1 -0.4,0.2 -0.7,0.4 -0.1,0.1 -0.3,0.2 -0.4,0.3 -0.1,0.1 -0.2,0.2 -0.4,0.4 -0.1,0.6 -0.2,1.2 -0.2,1.6 -0.1,0.5 -0.1,0.8 -0.2,1.2 -0.1,0.3 -0.1,0.6 -0.1,0.9 0,0.3 -0.1,0.5 -0.1,0.8 0,0.2 -0.1,0.5 -0.1,0.8 0,0.3 -0.1,0.6 -0.1,0.9 l -2.3,0 0.2,-1.5 c 0.1,-0.4 0.1,-0.7 0.2,-1 0.1,-0.3 0.1,-0.6 0.2,-1 0.1,-0.3 0.1,-0.6 0.2,-1 0.1,-0.3 0.1,-0.7 0.2,-1 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.2 0,-0.2 0,-0.3 0,-0.4 0,-0.1 -0.1,-0.2 -0.1,-0.4 0,-0.1 -0.1,-0.2 -0.2,-0.4 -0.1,-0.1 -0.1,-0.3 -0.2,-0.4 l -0.7,-0.9 z"
+       id="path491" />
+    <path
+       style="fill:#141132"
+       d="m 615.07623,347.26645 c -0.2,0 -0.4,0 -0.5,0 -0.2,0 -0.3,0 -0.4,0 -0.1,0 -0.3,0 -0.4,-0.1 -0.1,0 -0.3,-0.1 -0.5,-0.2 0.1,-0.2 0.1,-0.3 0.2,-0.5 0.1,-0.2 0.1,-0.3 0.2,-0.5 0.2,0.1 0.3,0.1 0.5,0.1 0.1,0 0.3,0.1 0.4,0.1 0.1,0 0.3,0 0.4,0 0.1,0 0.3,0 0.5,0 l 1.3,0 c 0.3,0 0.5,0 0.8,0.1 0.3,0.1 0.5,0.2 0.7,0.4 0.2,0.2 0.4,0.4 0.5,0.7 0.1,0.3 0.2,0.7 0.2,1.2 l 0,4.5 -1.1,0 0,-4.4 c 0,-0.3 0,-0.5 -0.1,-0.7 0,-0.2 -0.1,-0.3 -0.2,-0.4 -0.1,-0.1 -0.2,-0.2 -0.4,-0.2 -0.2,0 -0.4,-0.1 -0.7,-0.1 l -1.4,0 z m -1.8,3.8 c 0,-0.2 0,-0.4 0,-0.5 0,-0.1 0,-0.3 0,-0.4 0,-0.1 0,-0.3 0.1,-0.4 0,-0.1 0.1,-0.3 0.1,-0.5 0.2,0 0.4,0.1 0.6,0.1 0.2,0 0.4,0.1 0.6,0.1 0,0.2 0,0.3 -0.1,0.4 0,0.1 0,0.2 0,0.4 0,0.1 0,0.3 0,0.4 0,0.1 0,0.3 0,0.5 l 0,2 -1.1,0 0,-2.1 z m 10.9,-4.8 c 0.4,0 0.7,0 1,0.1 0.3,0.1 0.5,0.3 0.7,0.5 0.1,0.1 0.2,0.3 0.3,0.5 0.1,0.2 0.1,0.4 0.2,0.6 0,0.2 0.1,0.5 0.1,0.7 0,0.2 0,0.5 0,0.7 0,0.3 0,0.7 -0.1,1 -0.1,0.4 -0.2,0.8 -0.3,1.2 -0.1,0.4 -0.3,0.6 -0.6,0.9 -0.2,0.2 -0.5,0.4 -0.8,0.5 -0.3,0.1 -0.7,0.2 -1.1,0.2 -0.5,0 -0.9,-0.1 -1.3,-0.3 -0.4,-0.2 -0.7,-0.4 -0.9,-0.7 -0.2,-0.3 -0.4,-0.6 -0.5,-1 -0.1,-0.4 -0.2,-0.8 -0.2,-1.3 0,-0.3 0,-0.5 0,-0.8 0,-0.3 0.1,-0.6 0.2,-0.9 0.1,-0.2 0.1,-0.4 0.2,-0.5 0.1,-0.2 0.2,-0.3 0.3,-0.5 -0.2,0 -0.4,0 -0.6,-0.1 -0.2,0 -0.4,-0.1 -0.6,-0.2 0.1,-0.2 0.1,-0.3 0.2,-0.5 0.1,-0.2 0.1,-0.3 0.2,-0.5 0.2,0.1 0.3,0.1 0.5,0.1 0.1,0 0.3,0.1 0.4,0.1 0.1,0 0.3,0 0.4,0 0.1,0 0.3,0 0.5,0 l 1.8,0 z m -1.6,1 c -0.2,0.3 -0.3,0.6 -0.4,0.9 -0.1,0.3 -0.2,0.7 -0.2,1 0,0.1 0,0.3 0,0.4 0,0.1 0,0.3 0,0.4 0,0.3 0,0.6 0.1,0.8 0,0.3 0.1,0.5 0.3,0.7 0.1,0.2 0.3,0.4 0.6,0.5 0.2,0.1 0.5,0.2 0.8,0.2 0.2,0 0.4,0 0.6,-0.1 0.2,-0.1 0.4,-0.2 0.5,-0.3 0.1,-0.1 0.3,-0.3 0.4,-0.5 0.1,-0.2 0.2,-0.4 0.2,-0.7 0,-0.2 0,-0.4 0.1,-0.5 0,-0.2 0,-0.3 0,-0.5 0,-0.2 0,-0.5 0,-0.7 0,-0.2 0,-0.4 -0.1,-0.6 0,-0.2 -0.1,-0.3 -0.1,-0.5 -0.1,-0.1 -0.1,-0.2 -0.2,-0.3 -0.1,-0.1 -0.2,-0.1 -0.4,-0.2 -0.2,0 -0.3,0 -0.6,0 l -1.6,0 z m 8,-1 0,2.1 c 0,0.2 0,0.4 0,0.6 0,0.2 0,0.3 0,0.4 0,0.1 0,0.3 -0.1,0.4 0,0.1 -0.1,0.3 -0.1,0.4 l -1.1,-0.2 c 0,-0.1 0,-0.3 0.1,-0.4 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.3 0,-0.4 0,-0.2 0,-0.3 0,-0.6 l 0,-1.1 -1.4,0 0,-1 2.6,0 z m 4.8,0 0,0.2 c 0,0.1 0,0.4 0.1,0.6 0,0.3 0.1,0.6 0.1,0.9 0,0.3 0.1,0.7 0.1,1.1 0,0.4 0.1,0.8 0.1,1.2 0,0.4 0.1,0.9 0.1,1.3 0,0.2 0,0.4 0,0.5 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.4 l -3.9,0 0,-1 2.8,0 -0.5,-4.8 -1.6,0 0,-1 2.7,0 z m 4.2,1 c -0.2,0 -0.4,0 -0.5,0 -0.2,0 -0.3,0 -0.4,0 -0.1,0 -0.3,0 -0.4,-0.1 -0.1,0 -0.3,-0.1 -0.5,-0.2 0.1,-0.2 0.1,-0.3 0.2,-0.5 0.1,-0.2 0.1,-0.3 0.2,-0.5 0.2,0.1 0.3,0.1 0.5,0.1 0.1,0 0.3,0.1 0.4,0.1 0.1,0 0.3,0 0.4,0 0.1,0 0.3,0 0.5,0 l 0.4,0 c 0.3,0 0.5,0 0.8,0.1 0.3,0.1 0.5,0.2 0.7,0.4 0.2,0.2 0.4,0.4 0.5,0.7 0.1,0.3 0.2,0.7 0.2,1.1 0,0.2 0,0.5 0,0.7 0,0.2 0,0.5 0,0.8 0,0.3 0,0.5 0,0.8 0,0.3 0,0.6 0,0.9 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 -0.1,0.3 0,0.1 -0.1,0.3 -0.1,0.4 l -5,0 0,-1 4.1,0 c 0,-0.5 0,-1.1 0,-1.7 0,-0.6 0,-1.1 0,-1.7 0,-0.3 0,-0.5 -0.1,-0.7 0,-0.2 -0.1,-0.3 -0.2,-0.4 -0.1,-0.1 -0.2,-0.2 -0.4,-0.2 -0.2,0 -0.4,-0.1 -0.7,-0.1 l -0.5,0 z"
+       id="path493" />
+  </g>
+</svg>
