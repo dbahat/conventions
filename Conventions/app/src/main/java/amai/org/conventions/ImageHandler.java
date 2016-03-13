@@ -68,15 +68,7 @@ public class ImageHandler {
     public static void releaseCache() {
         // Release all collected images from the map
         loadedSVGFiles = new HashMap<>();
-
-	    if (notificationLargeIcon != null) {
-		    notificationLargeIcon.recycle();
-	    }
         notificationLargeIcon = null;
-
-	    if (toolbarLogo instanceof BitmapDrawable && ((BitmapDrawable) toolbarLogo).getBitmap() != null) {
-		    ((BitmapDrawable) toolbarLogo).getBitmap().recycle();
-	    }
         toolbarLogo = null;
     }
 
