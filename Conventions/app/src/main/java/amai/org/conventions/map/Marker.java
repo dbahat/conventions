@@ -1,6 +1,8 @@
 package amai.org.conventions.map;
 
 import android.graphics.drawable.Drawable;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -23,6 +25,7 @@ public class Marker {
 	private DrawableProvider selectedDrawableProvider;
 	private MarkerListener clickListener;
 	private int indexInParent = -1;
+	private GestureDetector detector;
 
 	public Marker(MapLocation location, ImageView imageView, Drawable drawable, DrawableProvider selectedDrawableProvider) {
 		this.location = location;
@@ -34,12 +37,21 @@ public class Marker {
 		imageWidth = layoutParams.width;
 		imageHeight = layoutParams.height;
 
-		imageView.setOnClickListener(new View.OnClickListener() {
+		detector = new GestureDetector(imageView.getContext(), new GestureDetector.SimpleOnGestureListener() {
 			@Override
-			public void onClick(View v) {
+			public boolean onSingleTapConfirmed(MotionEvent e) {
 				if (clickListener != null) {
 					clickListener.onClick(Marker.this);
 				}
+				return true;
+			}
+		});
+
+		imageView.setOnTouchListener(new View.OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				detector.onTouchEvent(event);
+				return true;
 			}
 		});
 	}

@@ -58,7 +58,14 @@ public class ZoomView extends FrameLayout {
 			} else {
 				smoothZoomTo(1.0f, getWidth() / 2.0f, getHeight() / 2.0f);
 			}
-			return true;
+			// We return false here even though we handled the event because otherwise the child view can't
+			// recognize that it's not a single tap. That's because a double tap event is fired in the following
+			// series of touch events: down, up, down
+			// The up event causes the view to "forget" the last touched child, and if we return true here,
+			// a cancel event is sent instead of a down event. And in cancel events, the view doesn't check
+			// which child the cancel event "hits" (it re-uses the previously touched child - which is null here),
+			// and so doesn't propogate it to any children.
+			return false;
 		}
 
 		@Override
@@ -238,12 +245,16 @@ public class ZoomView extends FrameLayout {
 	}
 
 	private void processSingleTouchOutsideMinimap(final MotionEvent ev) {
-		gestureDetector.onTouchEvent(ev);
+		boolean consumed = gestureDetector.onTouchEvent(ev);
 
 		ev.setLocation(zoomX + (ev.getX() - 0.5f * getWidth()) / zoom, zoomY + (ev.getY() - 0.5f * getHeight()) / zoom);
 
 		ev.getX();
 		ev.getY();
+
+		if (consumed) {
+			ev.setAction(MotionEvent.ACTION_CANCEL);
+		}
 
 		super.dispatchTouchEvent(ev);
 	}
