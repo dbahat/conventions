@@ -8,8 +8,8 @@
     <dimen name="navigation_popup_window_offset_y">-15dp</dimen>
     <dimen name="navigation_popup_window_offset_x">10dp</dimen>
 
-    <dimen name="update_extra_text_margin_for_top_update_lines">3dp</dimen>
-    <dimen name="update_time_container_size">82dp</dimen>
+    <dimen name="update_extra_text_margin_for_top_update_lines">2dp</dimen>
+    <dimen name="update_time_container_size">83dp</dimen>
 
     <dimen name="event_details_box_side_margins">30dp</dimen>
     <dimen name="event_details_box_padding">10dp</dimen>

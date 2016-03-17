@@ -8,23 +8,26 @@
 
     <!-- The text and date overlap since in code we set the text to indent only for the top lines,
      so it won't overlap with the time -->
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
+        android:paddingBottom="5dp"
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/update_time_container_size"
             android:layout_height="wrap_content"
+            android:weightSum="1"
             android:orientation="horizontal">
 
-            <!-- Note - Note using wrap_content for the time-box width since we need it
-            for wrapping the test around the time-box. -->
+            <!-- Note - Not using wrap_content for the time-box width since we need it
+            for wrapping the text around the time-box. -->
             <LinearLayout
                 android:id="@+id/update_time_container"
-                android:layout_width="@dimen/update_time_container_size"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:background="?updateTimeColor"
                 android:orientation="vertical">
@@ -76,18 +79,16 @@
          item's collapsed state -->
         <TextView
             android:id="@+id/update_text"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
             android:paddingStart="5dp"
             android:paddingEnd="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLines="7"
-            android:autoLink="all"
+            android:autoLink="web|email"
             android:text="Bla bla bla, bla bla ba, blaBla bla bla, bla bla ba, blaBla bla bla, bla bla ba, blaBla bla bla, bla bla ba, blaBla bla bla, bla bla ba, blaBla bla bla, bla bla ba, bla"
             style="@style/TextAppearance.AppCompat.Subhead"/>
 
-    </RelativeLayout>
+    </FrameLayout>
 
     <FrameLayout
         android:id="@+id/update_show_details_button"

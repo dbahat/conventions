@@ -44,7 +44,7 @@ public class WrappingTextLeadingMarginSpan implements LeadingMarginSpan.LeadingM
     public void drawLeadingMargin(Canvas c, Paint p, int x, int dir, int top, int baseline, int bottom, CharSequence text, int start, int end, boolean first, Layout layout) {
         wasDrawCalled = true;
 
-        // In case the text gets re-drawn (e.g. if in a scroll/recycler view), reset it's state when starting to draw again.
+        // In case the text gets re-drawn (e.g. if in a scroll/recycler view), reset its state when starting to draw again.
         if (start == 0) {
             drawLineCount = 0;
         }

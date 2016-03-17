@@ -139,11 +139,21 @@ public class UpdatesRefresher {
 					simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
 					Date date = simpleDateFormat.parse(dateString);
 
+					String message = post.getString("message");
+
+					// Add the link at the end if it doesn't exist in the message
+					if (post.has("link")) {
+						String link = post.getString("link");
+						if (!message.contains(link)) {
+							message += "\n\n" + link;
+						}
+					}
+
 					Update update = new Update()
 							.withId(post.getString("id"))
 							.withIsNew(true)
 							.withDate(date)
-							.withText(post.getString("message"));
+							.withText(message);
 
 					updates.add(update);
 				}

@@ -138,7 +138,7 @@ public class ModelParser {
     private int parseColorFromServer(String serverColor) {
 
         int color = NO_COLOR;
-        if (serverColor != null) {
+        if (serverColor != null && !serverColor.isEmpty()) {
             try {
                 if (!serverColor.startsWith("#")) {
                     serverColor = "#" + serverColor;

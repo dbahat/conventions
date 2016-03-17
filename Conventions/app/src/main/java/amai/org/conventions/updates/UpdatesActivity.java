@@ -89,7 +89,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         if (accessToken != null) {
-            retrieveUpdatesListFromFacebookApi(accessToken);
+            retrieveUpdatesListFromFacebookApi(accessToken, true);
         } else {
 	        swipeRefreshLayout.setRefreshing(false);
         }
@@ -99,7 +99,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         if (accessToken != null && !accessToken.isExpired()) {
             // If the user has a valid token use it to refresh his updates
-            retrieveUpdatesListFromFacebookApi(accessToken);
+            retrieveUpdatesListFromFacebookApi(accessToken, false);
         } else if (savedInstanceState == null) {
             // If the user has no valid token attempt to perform a silent login.
             //
@@ -135,7 +135,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 		        new Handler().post(new Runnable() {
 			        @Override
 			        public void run() {
-				        retrieveUpdatesListFromFacebookApi(loginResult.getAccessToken());
+				        retrieveUpdatesListFromFacebookApi(loginResult.getAccessToken(), true);
 			        }
 		        });
 	        }
@@ -155,7 +155,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
         });
     }
 
-    private void retrieveUpdatesListFromFacebookApi(final AccessToken accessToken) {
+    private void retrieveUpdatesListFromFacebookApi(final AccessToken accessToken, final boolean showError) {
 	    final UpdatesRefresher refresher = UpdatesRefresher.getInstance(UpdatesActivity.this);
 
         // Workaround (Android issue #77712) - SwipeRefreshLayout indicator does not appear when the `setRefreshing(true)` is called before
@@ -181,13 +181,17 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 		    @Override
 		    public void onError(FacebookRequestError error) {
 			    updateRefreshingFlag();
-			    Toast.makeText(UpdatesActivity.this, R.string.update_refresh_failed, Toast.LENGTH_LONG).show();
+			    if (showError) {
+			        Toast.makeText(UpdatesActivity.this, R.string.update_refresh_failed, Toast.LENGTH_LONG).show();
+			    }
 		    }
 
 		    @Override
 		    public void onInvalidTokenError() {
 			    updateRefreshingFlag();
-			    Toast.makeText(UpdatesActivity.this, R.string.update_refresh_failed, Toast.LENGTH_LONG).show();
+			    if (showError) {
+			        Toast.makeText(UpdatesActivity.this, R.string.update_refresh_failed, Toast.LENGTH_LONG).show();
+			    }
 		    }
 
 		    private void updateRefreshingFlag() {
