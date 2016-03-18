@@ -51,13 +51,14 @@ public class ModelParser {
 	        String title = eventObj.get("title").getAsString();
 
 	        // We don't use the description of events that are disabled or point to a different page
-	        boolean ignoreEventDescription = "1".equals(eventObj.get("timetable-disable-url").getAsString()) || !"".equals(eventObj.get("timetable-url").getAsString());
+	        boolean isSpecialEvent = eventObj.has("timetable-url-pid") && !"0".equals(eventObj.get("timetable-url-pid").getAsString());
+	        boolean ignoreEventDescription = isSpecialEvent || "1".equals(eventObj.get("timetable-disable-url").getAsString());
 	        ParsedDescription eventDescription = parseEventDescription(ignoreEventDescription ? null : eventObj.get("content").getAsString());
 
 	        // Check if this event points to a different page (special event)
 	        int specialEventId = 0;
 	        contentById.put(eventId, eventDescription);
-	        if (!"".equals(eventObj.get("timetable-url").getAsString())) {
+	        if (isSpecialEvent) {
 		        specialEventId = eventObj.get("timetable-url-pid").getAsInt();
 	        }
 

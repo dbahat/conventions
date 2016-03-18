@@ -162,13 +162,6 @@ public class Harucon2016Convention extends Convention {
 												.withX(507.47f)
 												.withY(184.49f),
 										new MapLocation()
-												.withPlace(new Place().withName("ווידוא ווקאון"))
-												.withMarkerResource(R.raw.harucon2016_marker_walkon)
-												.withSelectedMarkerResource(R.raw.harucon2016_marker_walkon_selected)
-												.withMarkerHeight(39.099998f)
-												.withX(452.96f)
-												.withY(174.69f),
-										new MapLocation()
 												.withPlace(specialEvents)
 												.withName("החתמת אורח")
 												.withMarkerResource(R.raw.harucon2016_marker_guest)
@@ -298,6 +291,13 @@ public class Harucon2016Convention extends Convention {
 												.withMarkerHeight(39f)
 												.withX(171.28f)
 												.withY(202.09f),
+										new MapLocation()
+												.withPlace(new Place().withName("ווידוא ווקאון"))
+												.withMarkerResource(R.raw.harucon2016_marker_walkon)
+												.withSelectedMarkerResource(R.raw.harucon2016_marker_walkon_selected)
+												.withMarkerHeight(39.099998f)
+												.withX(121.88f)
+												.withY(182.73f),
 										new MapLocation()
 												.withPlace(new Place().withName("פינת צילום"))
 												.withMarkerResource(R.raw.harucon2016_marker_photoshoots)

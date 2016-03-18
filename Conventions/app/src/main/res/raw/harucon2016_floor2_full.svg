@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -8,369 +6,242 @@
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:xlink="http://www.w3.org/1999/xlink"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="556.52002"
-   height="331.22592"
-   viewBox="0 0 556.52003 331.22591"
-   id="svg5482"
    version="1.1"
-   inkscape:version="0.91 r13725"
-   sodipodi:docname="harucon2016_floor2_full.svg"
-   inkscape:export-filename="F:\conventions app\svg\harucon 2016\map v2\harucon2016_floor2_full.png"
-   inkscape:export-xdpi="264.73001"
-   inkscape:export-ydpi="264.73001">
+   id="svg5482"
+   viewBox="0 0 556.52003 331.22591"
+   height="331.22592"
+   width="556.52002">
   <defs
      id="defs5484">
     <clipPath
        id="SVGID_82_">
       <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         style="overflow:visible"
-         xlink:href="#SVGID_81_"
+         id="use1009"
          overflow="visible"
-         id="use1009" />
+         xlink:href="#SVGID_81_"
+         style="overflow:visible"
+         x="0"
+         y="0"
+         width="100%"
+         height="100%" />
     </clipPath>
     <clipPath
        id="SVGID_80_">
       <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         style="overflow:visible"
-         xlink:href="#SVGID_79_"
+         id="use997"
          overflow="visible"
-         id="use997" />
+         xlink:href="#SVGID_79_"
+         style="overflow:visible"
+         x="0"
+         y="0"
+         width="100%"
+         height="100%" />
     </clipPath>
     <clipPath
        id="SVGID_78_">
       <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         style="overflow:visible"
-         xlink:href="#SVGID_77_"
+         id="use983"
          overflow="visible"
-         id="use983" />
-    </clipPath>
-    <clipPath
-       id="clipPath5159">
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         style="overflow:visible"
          xlink:href="#SVGID_77_"
-         overflow="visible"
-         id="use5161" />
+         style="overflow:visible"
+         x="0"
+         y="0"
+         width="100%"
+         height="100%" />
     </clipPath>
     <clipPath
        id="SVGID_76_">
       <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         style="overflow:visible"
-         xlink:href="#SVGID_75_"
+         id="use971"
          overflow="visible"
-         id="use971" />
+         xlink:href="#SVGID_75_"
+         style="overflow:visible"
+         x="0"
+         y="0"
+         width="100%"
+         height="100%" />
     </clipPath>
     <clipPath
        id="SVGID_58_">
       <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         style="overflow:visible"
-         xlink:href="#SVGID_57_"
+         id="use875"
          overflow="visible"
-         id="use875" />
+         xlink:href="#SVGID_57_"
+         style="overflow:visible"
+         x="0"
+         y="0"
+         width="100%"
+         height="100%" />
     </clipPath>
     <clipPath
        id="SVGID_56_">
       <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         style="overflow:visible"
-         xlink:href="#SVGID_55_"
+         id="use859"
          overflow="visible"
-         id="use859" />
+         xlink:href="#SVGID_55_"
+         style="overflow:visible"
+         x="0"
+         y="0"
+         width="100%"
+         height="100%" />
     </clipPath>
     <clipPath
        id="SVGID_54_">
       <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         style="overflow:visible"
-         xlink:href="#SVGID_53_"
+         id="use845"
          overflow="visible"
-         id="use845" />
+         xlink:href="#SVGID_53_"
+         style="overflow:visible"
+         x="0"
+         y="0"
+         width="100%"
+         height="100%" />
     </clipPath>
     <clipPath
        id="SVGID_52_">
       <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         style="overflow:visible"
-         xlink:href="#SVGID_51_"
+         id="use835"
          overflow="visible"
-         id="use835" />
+         xlink:href="#SVGID_51_"
+         style="overflow:visible"
+         x="0"
+         y="0"
+         width="100%"
+         height="100%" />
     </clipPath>
     <clipPath
        id="SVGID_50_">
       <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         style="overflow:visible"
-         xlink:href="#SVGID_49_"
+         id="use817"
          overflow="visible"
-         id="use817" />
+         xlink:href="#SVGID_49_"
+         style="overflow:visible"
+         x="0"
+         y="0"
+         width="100%"
+         height="100%" />
     </clipPath>
     <clipPath
        id="SVGID_48_">
       <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         style="overflow:visible"
-         xlink:href="#SVGID_47_"
+         id="use803"
          overflow="visible"
-         id="use803" />
+         xlink:href="#SVGID_47_"
+         style="overflow:visible"
+         x="0"
+         y="0"
+         width="100%"
+         height="100%" />
     </clipPath>
     <clipPath
        id="SVGID_42_">
       <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         style="overflow:visible"
-         xlink:href="#SVGID_41_"
+         id="use765"
          overflow="visible"
-         id="use765" />
+         xlink:href="#SVGID_41_"
+         style="overflow:visible"
+         x="0"
+         y="0"
+         width="100%"
+         height="100%" />
     </clipPath>
     <clipPath
        id="SVGID_40_">
       <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         style="overflow:visible"
-         xlink:href="#SVGID_39_"
+         id="use743"
          overflow="visible"
-         id="use743" />
-    </clipPath>
-    <clipPath
-       id="clipPath5181">
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         style="overflow:visible"
          xlink:href="#SVGID_39_"
-         overflow="visible"
-         id="use5183" />
-    </clipPath>
-    <clipPath
-       id="clipPath5185">
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
          style="overflow:visible"
-         xlink:href="#SVGID_39_"
-         overflow="visible"
-         id="use5187" />
-    </clipPath>
-    <clipPath
-       id="clipPath5189">
-      <use
-         height="100%"
-         width="100%"
-         y="0"
          x="0"
-         style="overflow:visible"
-         xlink:href="#SVGID_39_"
-         overflow="visible"
-         id="use5191" />
-    </clipPath>
-    <clipPath
-       id="clipPath5193">
-      <use
-         height="100%"
-         width="100%"
          y="0"
-         x="0"
-         style="overflow:visible"
-         xlink:href="#SVGID_39_"
-         overflow="visible"
-         id="use5195" />
+         width="100%"
+         height="100%" />
     </clipPath>
     <clipPath
        id="SVGID_38_">
       <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         style="overflow:visible"
-         xlink:href="#SVGID_37_"
+         id="use723"
          overflow="visible"
-         id="use723" />
-    </clipPath>
-    <clipPath
-       id="clipPath5199">
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         style="overflow:visible"
          xlink:href="#SVGID_37_"
-         overflow="visible"
-         id="use5201" />
-    </clipPath>
-    <clipPath
-       id="clipPath5203">
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
          style="overflow:visible"
-         xlink:href="#SVGID_37_"
-         overflow="visible"
-         id="use5205" />
-    </clipPath>
-    <clipPath
-       id="clipPath5207">
-      <use
-         height="100%"
-         width="100%"
-         y="0"
          x="0"
-         style="overflow:visible"
-         xlink:href="#SVGID_37_"
-         overflow="visible"
-         id="use5209" />
-    </clipPath>
-    <clipPath
-       id="clipPath5211">
-      <use
-         height="100%"
-         width="100%"
          y="0"
-         x="0"
-         style="overflow:visible"
-         xlink:href="#SVGID_37_"
-         overflow="visible"
-         id="use5213" />
+         width="100%"
+         height="100%" />
     </clipPath>
     <clipPath
        id="SVGID_36_">
       <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         style="overflow:visible"
-         xlink:href="#SVGID_35_"
+         id="use677"
          overflow="visible"
-         id="use677" />
+         xlink:href="#SVGID_35_"
+         style="overflow:visible"
+         x="0"
+         y="0"
+         width="100%"
+         height="100%" />
     </clipPath>
     <clipPath
        id="SVGID_34_">
       <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         style="overflow:visible"
-         xlink:href="#SVGID_33_"
+         id="use657"
          overflow="visible"
-         id="use657" />
-    </clipPath>
-    <clipPath
-       id="clipPath5219">
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         style="overflow:visible"
          xlink:href="#SVGID_33_"
-         overflow="visible"
-         id="use5221" />
+         style="overflow:visible"
+         x="0"
+         y="0"
+         width="100%"
+         height="100%" />
     </clipPath>
     <clipPath
        id="SVGID_32_">
       <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         style="overflow:visible"
-         xlink:href="#SVGID_31_"
+         id="use643"
          overflow="visible"
-         id="use643" />
+         xlink:href="#SVGID_31_"
+         style="overflow:visible"
+         x="0"
+         y="0"
+         width="100%"
+         height="100%" />
     </clipPath>
     <clipPath
        id="SVGID_30_">
+      <use
+         id="use533"
+         overflow="visible"
+         xlink:href="#SVGID_29_"
+         style="overflow:visible"
+         x="0"
+         y="0"
+         width="100%"
+         height="100%" />
+    </clipPath>
+    <clipPath
+       id="SVGID_44_">
       <use
          height="100%"
          width="100%"
          y="0"
          x="0"
          style="overflow:visible"
-         xlink:href="#SVGID_29_"
+         xlink:href="#SVGID_43_"
          overflow="visible"
-         id="use533" />
+         id="use779" />
+    </clipPath>
+    <clipPath
+       id="SVGID_46_">
+      <use
+         height="100%"
+         width="100%"
+         y="0"
+         x="0"
+         style="overflow:visible"
+         xlink:href="#SVGID_45_"
+         overflow="visible"
+         id="use789" />
     </clipPath>
   </defs>
-  <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0.0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="1.979899"
-     inkscape:cx="268.66316"
-     inkscape:cy="181.68357"
-     inkscape:document-units="px"
-     inkscape:current-layer="layer1"
-     showgrid="false"
-     fit-margin-top="10"
-     fit-margin-left="10"
-     fit-margin-right="10"
-     fit-margin-bottom="10"
-     units="px"
-     borderlayer="true"
-     inkscape:window-width="1920"
-     inkscape:window-height="1018"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
-     inkscape:window-maximized="1" />
   <metadata
      id="metadata5487">
     <rdf:RDF>
@@ -384,1153 +255,1184 @@
     </rdf:RDF>
   </metadata>
   <g
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer"
-     id="layer1"
-     transform="translate(-90.311428,-306.74924)">
+     transform="translate(-90.311428,-306.74924)"
+     id="layer1">
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:#b6b1c1"
+       id="polygon495"
        points="220,222.6 400,156.5 311.8,126.3 166,193.9 "
-       id="polygon495" />
-    <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:#ffffff"
-       points="315,119.2 315,131.4 165.3,196 165.3,183.6 "
-       id="polygon497" />
-    <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:none;stroke:#141132;stroke-width:0.23999999"
-       points="315,119.2 315,131.4 165.3,196 165.3,183.6 "
-       id="polygon499" />
-    <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:#ffffff"
-       points="313.2,171.1 305.3,180.9 259.7,155.8 259.7,142.8 "
-       id="polygon501" />
-    <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:none;stroke:#141132;stroke-width:0.23999999"
-       points="313.2,171.1 305.3,180.9 259.7,155.8 259.7,142.8 "
-       id="polygon503" />
-    <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:#ffffff"
-       points="396.6,144.9 396.6,156.5 315,131.4 315,119.2 "
-       id="polygon505" />
-    <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:none;stroke:#141132;stroke-width:0.23999999"
-       points="396.6,144.9 396.6,156.5 315,131.4 315,119.2 "
-       id="polygon507" />
-    <polygon
-       transform="translate(58.131428,235.04924)"
        style="fill:#b6b1c1"
+       transform="translate(58.131428,235.04924)" />
+    <polygon
+       id="polygon497"
+       points="315,119.2 315,131.4 165.3,196 165.3,183.6 "
+       style="fill:#ffffff"
+       transform="translate(58.131428,235.04924)" />
+    <polygon
+       id="polygon499"
+       points="315,119.2 315,131.4 165.3,196 165.3,183.6 "
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       transform="translate(58.131428,235.04924)" />
+    <polygon
+       id="polygon501"
+       points="313.2,171.1 305.3,180.9 259.7,155.8 259.7,142.8 "
+       style="fill:#ffffff"
+       transform="translate(58.131428,235.04924)" />
+    <polygon
+       id="polygon503"
+       points="313.2,171.1 305.3,180.9 259.7,155.8 259.7,142.8 "
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       transform="translate(58.131428,235.04924)" />
+    <polygon
+       id="polygon505"
+       points="396.6,144.9 396.6,156.5 315,131.4 315,119.2 "
+       style="fill:#ffffff"
+       transform="translate(58.131428,235.04924)" />
+    <polygon
+       id="polygon507"
+       points="396.6,144.9 396.6,156.5 315,131.4 315,119.2 "
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       transform="translate(58.131428,235.04924)" />
+    <polygon
+       id="polygon509"
        points="115.4,248.5 98.8,265.1 359.3,390.2 408.7,357 367.9,340 477.4,259.4 578.1,202.9 444.2,136.6 384,157.8 370.7,163.1 284.6,191 285.1,188.6 210.4,213.2 167.9,194.5 132.2,211.1 102.7,200.9 42.3,226.6 69.2,247.1 92.5,236.9 "
-       id="polygon509" />
+       style="fill:#b6b1c1"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
+       id="polygon511"
+       points="112.7,246.8 111.4,251 92.5,241.3 92.5,236.9 "
        style="fill:#ffffff"
-       points="112.7,246.8 111.4,251 92.5,241.3 92.5,236.9 "
-       id="polygon511" />
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
+       id="polygon513"
+       points="112.7,246.8 111.4,251 92.5,241.3 92.5,236.9 "
        style="fill:none;stroke:#141132;stroke-width:0.23999999"
-       points="112.7,246.8 111.4,251 92.5,241.3 92.5,236.9 "
-       id="polygon513" />
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:#44265c"
+       id="polygon515"
        points="363.4,279.5 449.8,234.2 493.1,201.4 420.9,168.5 335.4,190.1 229.3,214.6 "
-       id="polygon515" />
+       style="fill:#44265c"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:#ffffff"
+       id="polygon517"
        points="102.7,251 102.7,256.5 86.3,247.6 86.3,243.5 "
-       id="polygon517" />
-    <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:none;stroke:#141132;stroke-width:0.23999999"
-       points="102.7,251 102.7,256.5 86.3,247.6 86.3,243.5 "
-       id="polygon519" />
-    <polygon
-       transform="translate(58.131428,235.04924)"
        style="fill:#ffffff"
-       points="97.6,258.8 97.6,263.7 80.6,254.6 80.6,249.9 "
-       id="polygon521" />
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
+       id="polygon519"
+       points="102.7,251 102.7,256.5 86.3,247.6 86.3,243.5 "
        style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       transform="translate(58.131428,235.04924)" />
+    <polygon
+       id="polygon521"
        points="97.6,258.8 97.6,263.7 80.6,254.6 80.6,249.9 "
-       id="polygon523" />
+       style="fill:#ffffff"
+       transform="translate(58.131428,235.04924)" />
+    <polygon
+       id="polygon523"
+       points="97.6,258.8 97.6,263.7 80.6,254.6 80.6,249.9 "
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       transform="translate(58.131428,235.04924)" />
     <polyline
-       transform="translate(58.131428,235.04924)"
-       style="fill:#ffffff"
+       id="polyline525"
        points="324.1,362.5 355.6,338 355.7,353.1 361.9,348.5 361.7,333.3 464.1,253.7 578.6,188.6 578.1,202.9   466.6,270.2 361.9,348.5 355,353.6 324.1,376.8 "
-       id="polyline525" />
+       style="fill:#ffffff"
+       transform="translate(58.131428,235.04924)" />
     <g
-       transform="translate(58.131428,235.04924)"
-       id="g527">
+       id="g527"
+       transform="translate(58.131428,235.04924)">
       <defs
          id="defs529">
         <rect
-           id="SVGID_29_"
-           x="24.700001"
-           y="79.099998"
+           height="1157.5"
            width="554"
-           height="1157.5" />
+           y="79.099998"
+           x="24.700001"
+           id="SVGID_29_" />
       </defs>
       <clipPath
          id="clipPath5246">
         <use
-           height="100%"
-           width="100%"
-           y="0"
-           x="0"
-           style="overflow:visible"
-           xlink:href="#SVGID_29_"
+           id="use5248"
            overflow="visible"
-           id="use5248" />
+           xlink:href="#SVGID_29_"
+           style="overflow:visible"
+           x="0"
+           y="0"
+           width="100%"
+           height="100%" />
       </clipPath>
       <polyline
-         style="fill:none;stroke:#141132;stroke-width:0.23999999"
-         clip-path="url(#SVGID_30_)"
+         id="polyline535"
          points="324.1,362.5 355.6,338    355.7,353.1 361.9,348.5 361.7,333.3 464.1,253.7 578.6,188.6 578.1,202.9 466.6,270.2 361.9,348.5 355,353.6 324.1,376.8  "
-         id="polyline535" />
+         clip-path="url(#SVGID_30_)"
+         style="fill:none;stroke:#141132;stroke-width:0.23999999" />
     </g>
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:#ffffff"
+       id="polygon537"
        points="367.6,332.2 368.1,343.9 409,358.7 409,347.6 "
-       id="polygon537" />
+       style="fill:#ffffff"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       id="polygon539"
        points="367.6,332.2 368.1,343.9 409,358.7 409,347.6 "
-       id="polygon539" />
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:#ffffff"
+       id="polygon541"
        points="408.9,359 359.5,392.7 359.4,379.9 408.9,347.9 "
-       id="polygon541" />
+       style="fill:#ffffff"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       id="polygon543"
        points="408.9,359 359.5,392.7 359.4,379.9 408.9,347.9 "
-       id="polygon543" />
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:#ffffff"
+       id="polygon545"
        points="279,239.4 312.6,268.8 301.7,272.5 248.6,248.4 "
-       id="polygon545" />
+       style="fill:#ffffff"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:none;stroke:#141132;stroke-width:0.47999999"
+       id="polygon547"
        points="279,239.4 312.6,268.8 301.7,272.5 248.6,248.4 "
-       id="polygon547" />
+       style="fill:none;stroke:#141132;stroke-width:0.47999999"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:#ffffff"
+       id="polygon549"
        points="229.4,221.3 420.8,168.9 420.8,154.6 229.4,207.5 "
-       id="polygon549" />
+       style="fill:#ffffff"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       id="polygon551"
        points="229.4,221.3 420.8,168.9 420.8,154.6 229.4,207.5 "
-       id="polygon551" />
-    <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:#ffffff"
-       points="111.4,251 106.8,253.7 86.2,243.5 92.5,241.3 "
-       id="polygon553" />
-    <polygon
-       transform="translate(58.131428,235.04924)"
        style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       transform="translate(58.131428,235.04924)" />
+    <polygon
+       id="polygon553"
        points="111.4,251 106.8,253.7 86.2,243.5 92.5,241.3 "
-       id="polygon555" />
-    <polygon
-       transform="translate(58.131428,235.04924)"
        style="fill:#ffffff"
-       points="102.7,256.5 98.9,259.7 80.6,249.9 86.3,247.6 "
-       id="polygon557" />
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
+       id="polygon555"
+       points="111.4,251 106.8,253.7 86.2,243.5 92.5,241.3 "
        style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       transform="translate(58.131428,235.04924)" />
+    <polygon
+       id="polygon557"
        points="102.7,256.5 98.9,259.7 80.6,249.9 86.3,247.6 "
-       id="polygon559" />
-    <polygon
-       transform="translate(58.131428,235.04924)"
        style="fill:#ffffff"
+       transform="translate(58.131428,235.04924)" />
+    <polygon
+       id="polygon559"
+       points="102.7,256.5 98.9,259.7 80.6,249.9 86.3,247.6 "
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       transform="translate(58.131428,235.04924)" />
+    <polygon
+       id="polygon561"
        points="269.9,246.6 315.9,267.5 310.5,269.3 265.1,248.6 "
-       id="polygon561" />
+       style="fill:#ffffff"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:none;stroke:#141132;stroke-width:0.47999999"
+       id="polygon563"
        points="269.9,246.6 315.9,267.5 310.5,269.3 265.1,248.6 "
-       id="polygon563" />
-    <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:#ffffff"
-       points="257.8,249.2 306.1,270.9 310.8,269.3 263.1,247.5 "
-       id="polygon565" />
-    <polygon
-       transform="translate(58.131428,235.04924)"
        style="fill:none;stroke:#141132;stroke-width:0.47999999"
+       transform="translate(58.131428,235.04924)" />
+    <polygon
+       id="polygon565"
        points="257.8,249.2 306.1,270.9 310.8,269.3 263.1,247.5 "
-       id="polygon567" />
-    <polygon
-       transform="translate(58.131428,235.04924)"
        style="fill:#ffffff"
-       points="420.6,169 492.7,203.7 492.7,188 420.6,154.5 "
-       id="polygon569" />
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
+       id="polygon567"
+       points="257.8,249.2 306.1,270.9 310.8,269.3 263.1,247.5 "
        style="fill:none;stroke:#141132;stroke-width:0.47999999"
-       points="420.6,169 492.7,203.7 492.7,188 420.6,154.5 "
-       id="polygon571" />
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:#99ad63"
+       id="polygon569"
+       points="420.6,169 492.7,203.7 492.7,188 420.6,154.5 "
+       style="fill:#ffffff"
+       transform="translate(58.131428,235.04924)" />
+    <polygon
+       id="polygon571"
+       points="420.6,169 492.7,203.7 492.7,188 420.6,154.5 "
+       style="fill:none;stroke:#141132;stroke-width:0.47999999"
+       transform="translate(58.131428,235.04924)" />
+    <polygon
+       id="polygon573"
        points="277.6,244.9 338.5,269.7 329.5,273.2 273,247.5 "
-       id="polygon573" />
+       style="fill:#99ad63"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:#ffffff"
+       id="polygon575"
        points="250.8,249.4 301.4,272.6 306,270.9 255.8,247.8 "
-       id="polygon575" />
+       style="fill:#ffffff"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
+       id="polygon577"
+       points="250.8,249.4 301.4,272.6 306,270.9 255.8,247.8 "
        style="fill:none;stroke:#141132;stroke-width:0.47999999"
-       points="250.8,249.4 301.4,272.6 306,270.9 255.8,247.8 "
-       id="polygon577" />
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:#ffffff"
+       id="polygon579"
        points="123.4,249.4 107.8,256.5 96.7,251 123.1,238.7 "
-       id="polygon579" />
+       style="fill:#ffffff"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       id="polygon581"
        points="123.4,249.4 107.8,256.5 96.7,251 123.1,238.7 "
-       id="polygon581" />
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:#ffffff"
+       id="polygon583"
        points="229.3,221.3 363.4,286.6 363.4,272.4 229.3,207.5 "
-       id="polygon583" />
+       style="fill:#ffffff"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       id="polygon585"
        points="229.3,221.3 363.4,286.6 363.4,272.4 229.3,207.5 "
-       id="polygon585" />
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:#ffffff"
+       id="polygon587"
        points="96.7,265.8 359.3,392.7 359.3,380.1 96.7,251 "
-       id="polygon587" />
+       style="fill:#ffffff"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       id="polygon589"
        points="96.7,265.8 359.3,392.7 359.3,380.1 96.7,251 "
-       id="polygon589" />
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:#ffffff"
+       id="polygon591"
        points="441,159.2 513.7,194.5 513.7,181.3 441,146.4 "
-       id="polygon591" />
+       style="fill:#ffffff"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       id="polygon593"
        points="441,159.2 513.7,194.5 513.7,181.3 441,146.4 "
-       id="polygon593" />
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:#ffffff"
+       id="polygon595"
        points="443.3,136.5 535.8,183.3 535.8,170.5 443.3,124.5 "
-       id="polygon595" />
+       style="fill:#ffffff"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       id="polygon597"
        points="443.3,136.5 535.8,183.3 535.8,170.5 443.3,124.5 "
-       id="polygon597" />
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:#ffffff"
+       id="polygon599"
        points="126.3,202.1 126.3,213.8 102.7,200.9 102.7,190.6 "
-       id="polygon599" />
+       style="fill:#ffffff"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       id="polygon601"
        points="126.3,202.1 126.3,213.8 102.7,200.9 102.7,190.6 "
-       id="polygon601" />
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:#ffffff"
+       id="polygon603"
        points="493.1,204.1 449.8,237.7 363.4,286.6 363.4,272.4 449.8,222.8 493.1,187.9 "
-       id="polygon603" />
+       style="fill:#ffffff"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       id="polygon605"
        points="493.1,204.1 449.8,237.7 363.4,286.6 363.4,272.4 449.8,222.8 493.1,187.9 "
-       id="polygon605" />
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:#ffffff"
+       id="polygon607"
        points="535.8,170.5 535.8,183.2 513.7,194.5 513.7,181.3 "
-       id="polygon607" />
+       style="fill:#ffffff"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       id="polygon609"
        points="535.8,170.5 535.8,183.2 513.7,194.5 513.7,181.3 "
-       id="polygon609" />
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:#ffffff"
+       id="polygon611"
        points="500,152.8 499.6,164.4 489.1,169.8 479,164.6 "
-       id="polygon611" />
+       style="fill:#ffffff"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       id="polygon613"
        points="500,152.8 499.6,164.4 489.1,169.8 479,164.6 "
-       id="polygon613" />
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:#ffffff"
+       id="polygon615"
        points="464.1,146.4 452.8,152.1 441,146.4 464.1,135.1 "
-       id="polygon615" />
+       style="fill:#ffffff"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       id="polygon617"
        points="464.1,146.4 452.8,152.1 441,146.4 464.1,135.1 "
-       id="polygon617" />
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       transform="translate(58.131428,235.04924)" />
     <polyline
-       transform="translate(58.131428,235.04924)"
-       style="fill:#ffffff"
+       id="polyline619"
        points="166.3,195.5 86.3,232.4 86.3,221 166.3,183.2 "
-       id="polyline619" />
+       style="fill:#ffffff"
+       transform="translate(58.131428,235.04924)" />
     <polyline
-       transform="translate(58.131428,235.04924)"
-       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       id="polyline621"
        points="166.3,195.5 86.3,232.4 86.3,221 166.3,183.2 "
-       id="polyline621" />
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:#ffffff"
+       id="polygon623"
        points="73.6,238 61.1,243.5 61.1,232.4 73.6,226.6 "
-       id="polygon623" />
+       style="fill:#ffffff"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       id="polygon625"
        points="73.6,238 61.1,243.5 61.1,232.4 73.6,226.6 "
-       id="polygon625" />
-    <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:#ffffff"
-       points="102.7,190.6 102.7,200.9 42.3,226.6 42.3,217 "
-       id="polygon627" />
-    <polygon
-       transform="translate(58.131428,235.04924)"
        style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       transform="translate(58.131428,235.04924)" />
+    <polygon
+       id="polygon627"
        points="102.7,190.6 102.7,200.9 42.3,226.6 42.3,217 "
-       id="polygon629" />
-    <polygon
-       transform="translate(58.131428,235.04924)"
        style="fill:#ffffff"
-       points="61.1,232.4 61.1,243.5 42.3,228.4 42.3,217 "
-       id="polygon631" />
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
+       id="polygon629"
+       points="102.7,190.6 102.7,200.9 42.3,226.6 42.3,217 "
        style="fill:none;stroke:#141132;stroke-width:0.23999999"
-       points="61.1,232.4 61.1,243.5 42.3,228.4 42.3,217 "
-       id="polygon633" />
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:#44265c"
+       id="polygon631"
+       points="61.1,232.4 61.1,243.5 42.3,228.4 42.3,217 "
+       style="fill:#ffffff"
+       transform="translate(58.131428,235.04924)" />
+    <polygon
+       id="polygon633"
+       points="61.1,232.4 61.1,243.5 42.3,228.4 42.3,217 "
+       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       transform="translate(58.131428,235.04924)" />
+    <polygon
+       id="polygon635"
        points="242.6,232.7 310.4,266.8 322.5,263.1 253.3,229.8 "
-       id="polygon635" />
+       style="fill:#44265c"
+       transform="translate(58.131428,235.04924)" />
     <g
-       transform="translate(58.131428,235.04924)"
-       id="g637">
+       id="g637"
+       transform="translate(58.131428,235.04924)">
       <defs
          id="defs639">
         <rect
-           id="SVGID_31_"
-           x="24.700001"
-           y="79.099998"
+           height="1157.5"
            width="554"
-           height="1157.5" />
+           y="79.099998"
+           x="24.700001"
+           id="SVGID_31_" />
       </defs>
       <clipPath
          id="clipPath5304">
         <use
-           height="100%"
-           width="100%"
-           y="0"
-           x="0"
-           style="overflow:visible"
-           xlink:href="#SVGID_31_"
+           id="use5306"
            overflow="visible"
-           id="use5306" />
+           xlink:href="#SVGID_31_"
+           style="overflow:visible"
+           x="0"
+           y="0"
+           width="100%"
+           height="100%" />
       </clipPath>
       <path
-         style="fill:#44265c"
-         inkscape:connector-curvature="0"
-         clip-path="url(#SVGID_32_)"
+         id="path645"
          d="m 386.2,269.3 -22.9,11.4 c -13.1,-6.5 -49.4,-21.9 -49.4,-21.9 l -3.6,4.5 44.5,23.2 -28,11.6 8.4,3.3 18.4,-7.7 8.2,3.7 37,-24.2 -12.6,-3.9 z"
-         id="path645" />
+         clip-path="url(#SVGID_32_)"
+         style="fill:#44265c" />
     </g>
     <polygon
-       transform="translate(58.131428,235.04924)"
+       id="polygon647"
+       points="356.4,283.8 356.4,288.1 313.1,265.2 312.8,261.8 "
        style="fill:#ffffff"
-       points="356.4,283.8 356.4,288.1 313.1,265.2 312.8,261.8 "
-       id="polygon647" />
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:none;stroke:#141132;stroke-width:0.47999999"
+       id="polygon649"
        points="356.4,283.8 356.4,288.1 313.1,265.2 312.8,261.8 "
-       id="polygon649" />
+       style="fill:none;stroke:#141132;stroke-width:0.47999999"
+       transform="translate(58.131428,235.04924)" />
     <g
-       transform="translate(58.131428,235.04924)"
-       id="g651">
+       id="g651"
+       transform="translate(58.131428,235.04924)">
       <defs
          id="defs653">
         <rect
-           id="SVGID_33_"
-           x="24.700001"
-           y="79.099998"
+           height="1157.5"
            width="554"
-           height="1157.5" />
+           y="79.099998"
+           x="24.700001"
+           id="SVGID_33_" />
       </defs>
       <clipPath
          id="clipPath5314">
         <use
-           height="100%"
-           width="100%"
-           y="0"
-           x="0"
-           style="overflow:visible"
-           xlink:href="#SVGID_33_"
+           id="use5316"
            overflow="visible"
-           id="use5316" />
+           xlink:href="#SVGID_33_"
+           style="overflow:visible"
+           x="0"
+           y="0"
+           width="100%"
+           height="100%" />
       </clipPath>
       <path
-         style="fill:#fcb65a"
-         inkscape:connector-curvature="0"
-         clip-path="url(#SVGID_34_)"
+         id="path659"
          d="m 395.7,184.7 c 0,10.7 -19.3,40 -19.3,40 0,0 -19.3,-29.3 -19.3,-40 0,-10.7 8.7,-19.3 19.3,-19.3 10.7,-0.1 19.3,8.6 19.3,19.3"
-         id="path659" />
-      <path
-         style="fill:none;stroke:#141132;stroke-width:0.47999999;stroke-miterlimit:10"
-         inkscape:connector-curvature="0"
          clip-path="url(#SVGID_34_)"
-         stroke-miterlimit="10"
+         style="fill:#fcb65a" />
+      <path
+         id="path661"
          d="m 395.7,184.7 c 0,10.7 -19.3,40 -19.3,40 0,0 -19.3,-29.3 -19.3,-40 0,-10.7 8.7,-19.3 19.3,-19.3 10.7,-0.1 19.3,8.6 19.3,19.3 z"
-         id="path661" />
+         stroke-miterlimit="10"
+         clip-path="url(#SVGID_34_)"
+         style="fill:none;stroke:#141132;stroke-width:0.47999999;stroke-miterlimit:10" />
     </g>
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:#f7d786"
+       id="polygon663"
        points="79.2,246.1 83.6,239.3 79.6,236.7 75.1,243.7 72.8,242.2 72.9,250.8 81.3,247.4 "
-       id="polygon663" />
+       style="fill:#f7d786"
+       transform="translate(58.131428,235.04924)" />
     <path
-       inkscape:connector-curvature="0"
-       style="fill:#ffffff"
+       id="path665"
        d="m 426.73143,411.84924 c 0.2,0 0.5,0 0.7,0.1 0.2,0.1 0.4,0.2 0.6,0.3 0.2,0.1 0.3,0.3 0.4,0.6 0.1,0.3 0.2,0.6 0.2,1 l 0,3.9 -5.5,0 0,-3.2 c 0,-0.2 0,-0.5 0,-0.7 0,-0.2 0.1,-0.5 0.1,-0.7 -0.1,0 -0.3,0 -0.4,-0.1 -0.1,0 -0.3,-0.1 -0.5,-0.1 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.2,0.1 0.4,0.1 0.5,0.1 0.1,0 0.3,0.1 0.4,0.1 0.1,0 0.3,0 0.4,0 0.1,0 0.3,0 0.5,0 l 2.2,0 z m 0.4,4.7 0,-2.3 c 0,-0.2 0,-0.4 0,-0.6 0,-0.1 -0.1,-0.3 -0.1,-0.3 -0.1,-0.1 -0.2,-0.1 -0.3,-0.2 -0.1,0 -0.3,0 -0.5,0 l -1.3,0 c -0.1,0.3 -0.1,0.5 -0.1,0.7 0,0.2 0,0.4 0,0.7 l 0,2 2.3,0 z m 4.3,-6.3 0,1.6 3.2,0 c 0,0.1 0,0.2 0.1,0.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 l 0,1.2 c 0,0.4 -0.1,0.9 -0.3,1.3 -0.2,0.4 -0.4,0.8 -0.8,1.2 l -1.4,1.6 -1.1,-0.9 0.6,-0.7 c 0.3,-0.3 0.5,-0.6 0.7,-0.8 0.2,-0.2 0.3,-0.4 0.4,-0.5 0.1,-0.2 0.2,-0.3 0.2,-0.5 0,-0.1 0.1,-0.3 0.1,-0.5 l 0,-1 -3.3,0 0,-2.9 1.6,0 z m 7.3,1.6 0,5.8 -1.5,0 0,-4.6 -1,0 0,-1.2 2.5,0 z m 7,2 c -0.1,0.2 -0.1,0.4 -0.2,0.6 -0.1,0.2 -0.1,0.4 -0.2,0.5 -0.1,0.1 -0.2,0.3 -0.3,0.4 -0.1,0.1 -0.3,0.3 -0.4,0.4 l 1.2,1.4 -1,0.9 -2.9,-3.4 c -0.1,0.1 -0.1,0.2 -0.1,0.4 0,0.2 -0.1,0.3 -0.1,0.5 0,0.2 0,0.4 0,0.6 0,0.2 0,0.4 0,0.5 0,0.1 0,0.1 0,0.2 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 l -1.4,0 c 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.3 0,-0.4 0,-0.1 0,-0.3 0,-0.5 0,-0.2 0,-0.4 0,-0.6 0,-0.2 0,-0.4 0,-0.6 0,-0.2 0.1,-0.4 0.1,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.5 0.1,-0.2 0.2,-0.3 0.4,-0.5 -0.1,-0.1 -0.2,-0.2 -0.3,-0.4 -0.1,-0.1 -0.1,-0.2 -0.2,-0.4 -0.1,-0.1 -0.1,-0.3 -0.2,-0.4 -0.1,-0.1 -0.1,-0.3 -0.2,-0.5 0.2,-0.1 0.4,-0.2 0.7,-0.3 0.2,-0.1 0.5,-0.2 0.7,-0.2 0.1,0.2 0.2,0.4 0.2,0.6 0.1,0.2 0.2,0.3 0.2,0.5 0.1,0.1 0.2,0.3 0.3,0.4 0.1,0.1 0.2,0.3 0.4,0.5 l 1.1,1.2 c 0.1,-0.1 0.2,-0.2 0.2,-0.3 0.1,-0.1 0.1,-0.3 0.2,-0.4 0,-0.1 0,-0.1 0.1,-0.2 0.1,-0.1 0,-0.2 0.1,-0.2 l 0.1,-0.7 -0.8,-0.1 0.2,-1.2 2.1,0.4 0,0.7 -0.2,1.1 z"
-       id="path665" />
+       style="fill:#ffffff" />
     <path
-       inkscape:connector-curvature="0"
-       style="fill:#ffffff"
+       id="path667"
        d="m 425.23143,420.54924 0,2.1 c 0,0.2 0,0.4 0,0.5 0,0.1 0,0.3 0,0.4 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 -0.1,0.3 l -1.5,-0.2 c 0,-0.1 0,-0.2 0.1,-0.3 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.4 0,-0.1 0,-0.3 0,-0.5 l 0,-0.8 -1.3,0 0,-1.2 2.8,0 z m 3.2,4.7 c 0.1,0 0.2,0 0.2,0 0.1,0 0.2,0 0.3,0 0.2,0 0.5,0 0.7,-0.1 0.2,0 0.5,-0.1 0.7,-0.2 0.2,-0.1 0.4,-0.2 0.6,-0.4 0.2,-0.2 0.4,-0.4 0.5,-0.7 0.2,-0.4 0.4,-0.8 0.4,-1.2 0.1,-0.4 0.1,-0.8 0.1,-1.2 0,-0.2 0,-0.3 0,-0.5 0,-0.2 0,-0.3 0,-0.5 0.2,0 0.3,-0.1 0.4,-0.1 0.1,0 0.2,-0.1 0.3,-0.1 0.1,0 0.2,0 0.3,-0.1 0.1,0 0.3,0 0.5,-0.1 0,0.2 0.1,0.3 0.1,0.5 0,0.2 0,0.4 0,0.6 0,0.2 0,0.4 0,0.5 0,0.2 0,0.3 0,0.5 -0.2,1.4 -0.7,2.4 -1.5,3.1 -0.8,0.7 -1.9,1 -3.4,1 -0.2,0 -0.5,0 -0.8,0 -0.3,0 -0.5,0 -0.8,-0.1 l -0.3,-3.4 c 0,-0.2 0,-0.4 0,-0.5 0,-0.1 0,-0.3 0,-0.4 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 -0.1,-0.3 0,-0.1 -0.1,-0.2 -0.1,-0.3 0,-0.1 -0.1,-0.2 -0.1,-0.4 0.2,-0.1 0.4,-0.2 0.7,-0.3 0.2,-0.1 0.5,-0.2 0.7,-0.3 0.1,0.2 0.2,0.4 0.2,0.6 0.1,0.2 0.1,0.4 0.1,0.5 0,0.2 0.1,0.4 0.1,0.6 0,0.2 0,0.4 0.1,0.7 l 0.1,2.9 z m 0.6,-2.8 c 0.1,-0.2 0.1,-0.3 0.1,-0.4 0,-0.1 0.1,-0.2 0.1,-0.3 0,-0.1 0,-0.2 0.1,-0.2 0,-0.1 0,-0.2 0,-0.2 0,0 0,-0.1 0,-0.1 0,0 0,-0.1 0,-0.1 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.1 0,-0.2 0.2,-0.1 0.5,-0.1 0.7,-0.2 0.2,-0.1 0.5,-0.1 0.7,-0.2 0,0.2 0.1,0.3 0.1,0.5 0,0.1 0,0.3 0,0.4 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 -0.1,0.4 0,0.1 -0.1,0.3 -0.1,0.4 -0.1,0.1 -0.1,0.3 -0.2,0.5 l -0.4,1 c -0.2,0 -0.3,-0.1 -0.4,-0.1 -0.1,0 -0.2,-0.1 -0.3,-0.1 -0.1,0 -0.2,-0.1 -0.3,-0.1 -0.1,0 -0.2,-0.1 -0.4,-0.2 l 0.4,-0.9 z m 11.3,0 c -0.1,0.2 -0.1,0.4 -0.2,0.6 -0.1,0.2 -0.1,0.4 -0.2,0.5 -0.1,0.1 -0.2,0.3 -0.3,0.4 -0.1,0.1 -0.3,0.3 -0.4,0.4 l 1.2,1.4 -1,0.9 -2.9,-3.4 c -0.1,0.1 -0.1,0.2 -0.1,0.4 0,0.2 -0.1,0.3 -0.1,0.5 0,0.2 0,0.4 0,0.6 0,0.2 0,0.4 0,0.5 0,0.1 0,0.1 0,0.2 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 l -1.4,0 c 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.3 0,-0.4 0,-0.1 0,-0.3 0,-0.5 0,-0.2 0,-0.4 0,-0.6 0,-0.2 0,-0.4 0,-0.6 0,-0.2 0.1,-0.4 0.1,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.5 0.1,-0.2 0.2,-0.3 0.4,-0.5 -0.1,-0.1 -0.2,-0.2 -0.3,-0.4 -0.1,-0.1 -0.1,-0.2 -0.2,-0.4 -0.1,-0.1 -0.1,-0.3 -0.2,-0.4 -0.1,-0.1 -0.1,-0.3 -0.2,-0.5 0.2,-0.1 0.4,-0.2 0.7,-0.3 0.2,-0.1 0.5,-0.2 0.7,-0.2 0.1,0.2 0.2,0.4 0.2,0.6 0.1,0.2 0.2,0.3 0.2,0.5 0.1,0.1 0.2,0.3 0.3,0.4 0.1,0.1 0.2,0.3 0.4,0.5 l 1.1,1.2 c 0.1,-0.1 0.2,-0.2 0.2,-0.3 0.1,-0.1 0.1,-0.3 0.2,-0.4 0,-0.1 0,-0.1 0.1,-0.2 0.1,-0.1 0,-0.2 0.1,-0.2 l 0.1,-0.7 -0.8,-0.1 0.2,-1.2 2.1,0.4 0,0.7 -0.2,1.1 z m 3.2,-0.7 c -0.2,0 -0.4,0 -0.5,0 -0.1,0 -0.3,0 -0.4,0 -0.1,0 -0.3,0 -0.4,-0.1 -0.1,0 -0.3,-0.1 -0.5,-0.1 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.2,0.1 0.4,0.1 0.5,0.1 0.1,0 0.3,0.1 0.4,0.1 0.1,0 0.3,0 0.4,0 0.1,0 0.3,0 0.5,0 l 0.7,0 c 0.2,0 0.5,0 0.7,0.1 0.2,0.1 0.4,0.2 0.6,0.3 0.2,0.1 0.3,0.3 0.4,0.6 0.1,0.3 0.2,0.6 0.2,1 l 0,3.9 -1.5,0 0,-3.5 c 0,-0.2 0,-0.4 0,-0.6 0,-0.1 -0.1,-0.3 -0.1,-0.3 -0.1,-0.1 -0.2,-0.1 -0.3,-0.2 -0.1,0 -0.3,0 -0.5,0 l -0.6,0 z"
-       id="path667" />
+       style="fill:#ffffff" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:#44265c"
+       id="polygon669"
        points="330.6,292.2 333.2,289.5 312.4,262.4 308.9,264.5 "
-       id="polygon669" />
+       style="fill:#44265c"
+       transform="translate(58.131428,235.04924)" />
     <g
-       transform="translate(58.131428,235.04924)"
-       id="g671">
+       id="g671"
+       transform="translate(58.131428,235.04924)">
       <defs
          id="defs673">
         <rect
-           id="SVGID_35_"
-           x="24.700001"
-           y="79.099998"
+           height="1157.5"
            width="554"
-           height="1157.5" />
+           y="79.099998"
+           x="24.700001"
+           id="SVGID_35_" />
       </defs>
       <clipPath
          id="clipPath5327">
         <use
-           height="100%"
-           width="100%"
-           y="0"
-           x="0"
-           style="overflow:visible"
-           xlink:href="#SVGID_35_"
+           id="use5329"
            overflow="visible"
-           id="use5329" />
+           xlink:href="#SVGID_35_"
+           style="overflow:visible"
+           x="0"
+           y="0"
+           width="100%"
+           height="100%" />
       </clipPath>
       <path
-         style="fill:#141132"
-         inkscape:connector-curvature="0"
-         clip-path="url(#SVGID_36_)"
+         id="path679"
          d="m 453.4,84.1 0,11.4 -2.3,0 0,-9.5 -1.7,0 0,-1.8 4,0 z m 6,0 0,8.8 -2.3,0 0,-6.9 -1.5,0 0,-1.8 3.8,0 z m 6.3,0 0,3.2 c 0,0.3 0,0.6 0,0.8 0,0.2 0,0.4 0,0.6 0,0.2 0,0.3 -0.1,0.5 0,0.2 -0.1,0.3 -0.1,0.5 l -2.3,-0.3 c 0,-0.2 0.1,-0.3 0.1,-0.5 0,-0.1 0,-0.3 0.1,-0.4 0,-0.2 0,-0.3 0,-0.5 0,-0.2 0,-0.4 0,-0.7 l 0,-1.3 -1.9,0 0,-1.8 4.2,0 z m 4.1,-2.4 0,2.5 4.8,0 c 0,0.1 0.1,0.2 0.1,0.3 0,0.1 0,0.2 0.1,0.3 0,0.1 0,0.3 0.1,0.4 0,0.1 0,0.3 0,0.4 l 0,1.8 c 0,0.7 -0.1,1.3 -0.4,1.9 -0.3,0.6 -0.7,1.2 -1.2,1.8 l -2.2,2.4 -1.6,-1.4 1,-1.1 c 0.4,-0.5 0.7,-0.8 1,-1.1 0.3,-0.3 0.5,-0.6 0.7,-0.8 0.2,-0.2 0.3,-0.5 0.4,-0.7 0.1,-0.2 0.1,-0.5 0.1,-0.8 l 0,-1.6 -5,0 0,-4.3 2.1,0 z m 12,3.9 c 0.1,-0.3 0.2,-0.6 0.3,-0.9 0.1,-0.3 0.2,-0.6 0.3,-0.9 l 3.3,0.9 c 0,0.2 0,0.4 0,0.6 0,0.2 0,0.4 0,0.6 -0.1,0.4 -0.1,0.9 -0.2,1.2 -0.1,0.4 -0.2,0.8 -0.3,1.1 -0.2,0.6 -0.5,1.2 -0.8,1.7 -0.3,0.5 -0.7,1 -1.1,1.3 -0.4,0.4 -0.8,0.7 -1.3,1 -0.5,0.3 -0.9,0.6 -1.4,0.8 -0.5,0.2 -1,0.4 -1.5,0.6 -0.5,0.2 -1.1,0.3 -1.6,0.5 l -0.6,-1.9 c 0.6,-0.2 1.1,-0.3 1.6,-0.5 0.5,-0.2 1,-0.3 1.4,-0.5 -0.3,-0.7 -0.5,-1.5 -0.8,-2.2 -0.3,-0.7 -0.5,-1.4 -0.8,-2.2 -0.1,-0.1 -0.1,-0.3 -0.2,-0.4 0,-0.1 -0.1,-0.2 -0.2,-0.2 -0.1,-0.1 -0.1,-0.1 -0.2,-0.2 -0.1,0 -0.2,-0.1 -0.3,-0.1 l -1,-0.4 c 0.1,-0.3 0.3,-0.6 0.4,-0.9 0.1,-0.3 0.3,-0.6 0.4,-0.9 0.2,0.1 0.4,0.1 0.5,0.2 0.2,0.1 0.4,0.1 0.5,0.2 0.3,0.1 0.5,0.2 0.7,0.3 0.2,0.1 0.4,0.2 0.5,0.4 0.1,0.1 0.3,0.3 0.3,0.4 0.1,0.1 0.2,0.3 0.2,0.5 0.1,0.3 0.2,0.6 0.3,0.8 0.1,0.3 0.2,0.5 0.3,0.9 0.1,0.3 0.2,0.7 0.4,1.1 0.1,0.4 0.3,0.9 0.5,1.5 0.3,-0.3 0.5,-0.5 0.7,-0.8 0.2,-0.3 0.3,-0.5 0.5,-0.8 0.2,-0.4 0.3,-0.8 0.4,-1.2 0.1,-0.4 0.2,-0.9 0.3,-1.3 l -1.5,-0.3 z m 15.9,-1.5 c 0.4,0 0.7,0 1,0.1 0.3,0.1 0.6,0.2 0.9,0.5 0.3,0.2 0.5,0.5 0.6,0.9 0.2,0.4 0.2,0.9 0.3,1.5 0,0.1 0,0.2 0,0.4 0,0.1 0,0.3 0,0.4 0,0.2 0,0.3 0,0.5 0,0.2 0,0.4 0,0.7 0,0.6 -0.1,1.1 -0.3,1.6 -0.2,0.5 -0.5,0.9 -0.8,1.2 -0.4,0.4 -0.8,0.6 -1.3,0.8 -0.5,0.2 -1,0.3 -1.6,0.3 -0.6,0 -1.1,-0.1 -1.6,-0.3 -0.5,-0.2 -0.9,-0.5 -1.2,-0.8 -0.4,-0.4 -0.6,-0.8 -0.8,-1.2 -0.2,-0.5 -0.3,-1 -0.3,-1.6 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.1 0,-0.2 0,-0.3 0,-0.5 0,-0.8 0,-0.3 0.1,-0.6 0.2,-0.9 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.1,-0.2 0.2,-0.4 0.3,-0.6 -0.2,0 -0.5,-0.1 -0.7,-0.1 -0.2,-0.1 -0.5,-0.1 -0.8,-0.3 0.1,-0.3 0.2,-0.6 0.3,-0.9 0.1,-0.3 0.2,-0.6 0.3,-0.9 0.3,0.1 0.5,0.1 0.7,0.2 0.2,0 0.4,0.1 0.5,0.1 0.2,0 0.4,0 0.5,0.1 0.2,0 0.4,0 0.6,0 l 0.3,0 2.7,0 z m -2.3,1.9 c -0.1,0.2 -0.2,0.3 -0.2,0.4 -0.1,0.1 -0.1,0.3 -0.2,0.4 -0.1,0.3 -0.1,0.6 -0.2,0.9 0,0.3 -0.1,0.6 -0.1,0.9 0,0.2 0,0.3 0,0.5 0,0.2 0,0.3 0,0.4 0,0.3 0.1,0.5 0.2,0.7 0.1,0.2 0.2,0.4 0.4,0.5 0.1,0.2 0.3,0.3 0.5,0.4 0.2,0.1 0.4,0.1 0.6,0.1 0.2,0 0.5,0 0.7,-0.1 0.2,-0.1 0.4,-0.2 0.5,-0.4 0.2,-0.2 0.3,-0.3 0.4,-0.5 0.1,-0.2 0.2,-0.4 0.2,-0.7 0,-0.1 0,-0.3 0,-0.4 0,-0.1 0,-0.3 0,-0.5 0,-0.2 0,-0.4 0,-0.5 0,-0.2 0,-0.3 0,-0.5 0,-0.3 -0.1,-0.6 -0.1,-0.9 0,-0.3 -0.1,-0.4 -0.2,-0.5 -0.1,-0.1 -0.2,-0.2 -0.4,-0.3 -0.2,0 -0.5,-0.1 -0.8,-0.1 l -1.3,0 z m 9.2,-4.3 0,2.5 4.8,0 c 0,0.1 0.1,0.2 0.1,0.3 0,0.1 0,0.2 0.1,0.3 0,0.1 0,0.3 0.1,0.4 0,0.1 0,0.3 0,0.4 l 0,1.8 c 0,0.7 -0.1,1.3 -0.4,1.9 -0.3,0.6 -0.7,1.2 -1.2,1.8 l -2.2,2.4 -1.6,-1.4 1,-1.1 c 0.4,-0.5 0.7,-0.8 1,-1.1 0.3,-0.3 0.5,-0.6 0.7,-0.8 0.2,-0.2 0.3,-0.5 0.4,-0.7 0.1,-0.2 0.1,-0.5 0.1,-0.8 l 0,-1.6 -5,0 0,-4.3 2.1,0 z m 9,1.9 c 0.5,0.1 1,0.2 1.4,0.3 0.4,0.1 0.8,0.2 1.1,0.3 0.3,0.1 0.6,0.2 0.9,0.3 0.3,0.1 0.6,0.2 0.8,0.3 0.3,0.1 0.5,0.2 0.7,0.4 0.2,0.2 0.3,0.3 0.5,0.5 0.1,0.2 0.2,0.4 0.2,0.7 0,0.3 0.1,0.5 0.1,0.8 l 0,3.4 c 0,0.1 0,0.3 0,0.4 0,0.1 0,0.3 0,0.4 0,0.2 -0.1,0.4 -0.1,0.6 -0.1,0.2 -0.1,0.5 -0.2,0.9 l -7.6,0 0,-1.8 5.8,0 0,-3.5 c 0,-0.2 0,-0.4 0,-0.5 0,-0.1 0,-0.3 -0.1,-0.4 -0.1,-0.1 -0.1,-0.2 -0.2,-0.3 -0.1,-0.1 -0.2,-0.1 -0.4,-0.2 -0.2,-0.1 -0.5,-0.2 -0.7,-0.2 -0.3,-0.1 -0.6,-0.2 -0.9,-0.3 l -0.8,1.6 1.1,0.7 -1,1.7 -2.7,-1.6 2.1,-4.5 z m 7.7,1.2 c 0.3,-0.2 0.6,-0.4 0.9,-0.6 0.3,-0.2 0.6,-0.4 0.9,-0.5 0.1,0.2 0.3,0.3 0.3,0.5 0.1,0.1 0.2,0.3 0.3,0.4 0.1,0.1 0.1,0.2 0.2,0.4 0.1,0.1 0.1,0.2 0.2,0.4 0.5,-0.5 1,-0.8 1.5,-1.1 0.5,-0.2 1,-0.3 1.5,-0.3 0.4,0 0.7,0.1 1,0.2 0.3,0.1 0.6,0.3 0.9,0.5 0.3,0.2 0.5,0.5 0.7,0.7 0.2,0.3 0.3,0.6 0.4,1 0.1,0.3 0.1,0.6 0.1,1 0,0.4 0,0.8 0,1.3 0,0.2 0,0.4 0,0.7 0,0.2 0,0.5 0,0.9 0,0.4 0,0.8 0,1.1 0,0.4 0,0.6 0,0.9 0,0.1 0,0.3 0,0.4 0,0.1 0,0.3 -0.1,0.4 l -4.4,0 0,-1.8 2.3,0 c 0,0 0,-0.1 0,-0.2 0,-0.1 0,-0.2 0,-0.4 0,-0.2 0,-0.4 0,-0.7 0,-0.3 0,-0.6 0,-1 0,-0.1 0,-0.3 0,-0.4 0,-0.2 0,-0.3 0,-0.5 0,-0.2 0,-0.4 0,-0.5 0,-0.2 0,-0.3 0,-0.4 -0.1,-0.5 -0.2,-0.8 -0.4,-1 -0.2,-0.2 -0.5,-0.3 -0.9,-0.3 -0.2,0 -0.4,0 -0.6,0.1 -0.2,0.1 -0.4,0.2 -0.7,0.4 -0.1,0.1 -0.3,0.2 -0.4,0.3 -0.1,0.1 -0.2,0.2 -0.4,0.4 -0.1,0.6 -0.2,1.2 -0.2,1.6 -0.1,0.5 -0.1,0.8 -0.2,1.2 -0.1,0.3 -0.1,0.6 -0.1,0.9 0,0.3 -0.1,0.5 -0.1,0.8 0,0.2 -0.1,0.5 -0.1,0.8 0,0.3 -0.1,0.6 -0.1,0.9 l -2.3,0 0.2,-1.5 c 0.1,-0.4 0.1,-0.7 0.2,-1 0.1,-0.3 0.1,-0.6 0.2,-1 0.1,-0.3 0.1,-0.6 0.2,-1 0.1,-0.3 0.1,-0.7 0.2,-1 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.2 0,-0.2 0,-0.3 0,-0.4 0,-0.1 -0.1,-0.2 -0.1,-0.4 0,-0.1 -0.1,-0.2 -0.2,-0.4 -0.1,-0.1 -0.1,-0.3 -0.2,-0.4 l -0.7,-0.9 z"
-         id="path679" />
+         clip-path="url(#SVGID_36_)"
+         style="fill:#141132" />
     </g>
     <path
-       inkscape:connector-curvature="0"
-       style="fill:#141132"
+       id="path681"
        d="m 535.03143,339.74924 0,2.1 c 0,0.2 0,0.4 0,0.6 0,0.2 0,0.3 0,0.4 0,0.1 0,0.3 -0.1,0.4 0,0.1 -0.1,0.3 -0.1,0.4 l -1.1,-0.2 c 0,-0.1 0,-0.3 0.1,-0.4 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.3 0,-0.4 0,-0.2 0,-0.3 0,-0.6 l 0,-1.1 -1.5,0 0,-1 2.7,0 z m 2.2,3.2 c 0,-0.4 -0.1,-0.8 -0.1,-1 0,-0.3 0,-0.5 -0.1,-0.7 0,-0.2 -0.1,-0.4 -0.1,-0.6 0,-0.2 -0.1,-0.4 -0.2,-0.6 0.2,-0.1 0.3,-0.2 0.5,-0.2 0.2,-0.1 0.3,-0.1 0.5,-0.2 0.1,0.2 0.2,0.3 0.2,0.5 0.1,0.1 0.1,0.3 0.1,0.5 0,0.2 0.1,0.4 0.1,0.6 0,0.2 0,0.5 0.1,0.8 l 0.3,3.7 c 0.2,0 0.3,0 0.5,0 0.7,0 1.4,-0.1 1.9,-0.3 0.6,-0.2 1,-0.5 1.4,-1 0.4,-0.4 0.6,-0.9 0.8,-1.5 0.2,-0.6 0.3,-1.2 0.3,-1.9 0,-0.2 0,-0.4 0,-0.6 0,-0.2 0,-0.4 -0.1,-0.6 0.2,0 0.4,-0.1 0.5,-0.1 0.2,0 0.4,-0.1 0.6,-0.1 0,0.2 0.1,0.4 0.1,0.6 0,0.2 0,0.4 0,0.6 0,1 -0.1,1.8 -0.4,2.5 -0.3,0.7 -0.6,1.3 -1.1,1.8 -0.5,0.5 -1.1,0.9 -1.8,1.1 -0.7,0.2 -1.5,0.4 -2.4,0.4 -0.2,0 -0.4,0 -0.7,0 -0.2,0 -0.4,0 -0.7,-0.1 l -0.2,-3.6 z m 4,-3.4 c 0.1,0.2 0.1,0.4 0.1,0.6 0,0.1 0,0.3 0,0.4 0,0.1 0,0.3 -0.1,0.4 -0.1,0.2 -0.1,0.4 -0.2,0.7 -0.1,0.2 -0.2,0.4 -0.3,0.7 l -0.7,1.6 -1,-0.4 0.7,-1.6 c 0.1,-0.3 0.2,-0.5 0.3,-0.7 0.1,-0.2 0.1,-0.3 0.2,-0.5 0,-0.1 0,-0.3 0,-0.4 0,-0.1 0,-0.3 0,-0.5 l 1,-0.3 z m 4.9,7.1 c 0,-0.1 0,-0.3 0,-0.4 0,-0.2 0,-0.3 0,-0.5 0,-0.2 0,-0.4 0,-0.6 0,-0.2 0,-0.4 0,-0.6 0,-0.3 0,-0.6 0.1,-0.9 0,-0.3 0.1,-0.5 0.2,-0.7 0.1,-0.2 0.2,-0.4 0.3,-0.6 0.1,-0.2 0.2,-0.4 0.4,-0.5 -0.2,-0.2 -0.3,-0.4 -0.4,-0.6 -0.1,-0.2 -0.2,-0.3 -0.3,-0.5 -0.1,-0.2 -0.1,-0.3 -0.2,-0.5 0,-0.2 -0.1,-0.3 -0.1,-0.4 0.2,-0.1 0.3,-0.1 0.5,-0.2 0.2,-0.1 0.4,-0.1 0.6,-0.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.1 0,0.2 0,0.1 0.1,0.3 0.1,0.4 0.1,0.1 0.1,0.3 0.2,0.5 0.1,0.2 0.2,0.4 0.3,0.6 0.1,0.2 0.3,0.4 0.5,0.7 0.1,0.1 0.1,0.2 0.2,0.3 0.1,0.1 0.1,0.2 0.2,0.3 0.1,0.1 0.2,0.2 0.3,0.4 0.1,0.2 0.3,0.4 0.5,0.6 l 0,0 c 0.2,-0.1 0.3,-0.2 0.4,-0.4 0.1,-0.1 0.2,-0.3 0.3,-0.4 0.1,-0.1 0.1,-0.3 0.2,-0.5 0.1,-0.2 0.1,-0.3 0.2,-0.5 0,-0.2 0.1,-0.3 0.1,-0.5 0,-0.2 0.1,-0.3 0.1,-0.5 l -1,-0.2 0.2,-0.9 1.8,0.3 0,0.8 c 0,0.2 -0.1,0.4 -0.2,0.7 -0.1,0.2 -0.1,0.5 -0.2,0.7 -0.1,0.3 -0.2,0.5 -0.2,0.7 -0.1,0.2 -0.2,0.4 -0.3,0.5 -0.1,0.2 -0.2,0.3 -0.3,0.5 -0.1,0.1 -0.3,0.3 -0.5,0.4 l 1.6,1.8 -0.8,0.7 -3.5,-4 c -0.1,0.2 -0.2,0.4 -0.3,0.6 -0.1,0.2 -0.1,0.4 -0.1,0.7 0,0.2 0,0.5 0,0.8 0,0.3 0,0.5 0,0.8 0,0.1 0,0.3 0,0.5 0,0.2 0,0.4 0,0.6 l -0.9,0 z m 9.4,-5.9 c -0.2,0 -0.4,0 -0.5,0 -0.2,0 -0.3,0 -0.4,0 -0.1,0 -0.3,0 -0.4,-0.1 -0.1,0 -0.3,-0.1 -0.5,-0.2 0.1,-0.2 0.1,-0.3 0.2,-0.5 0.1,-0.2 0.1,-0.3 0.2,-0.5 0.2,0.1 0.3,0.1 0.5,0.1 0.1,0 0.3,0.1 0.4,0.1 0.1,0 0.3,0 0.4,0 0.1,0 0.3,0 0.5,0 l 0.6,0 c 0.3,0 0.5,0 0.8,0.1 0.3,0.1 0.5,0.2 0.7,0.3 0.2,0.2 0.4,0.4 0.5,0.7 0.1,0.3 0.2,0.7 0.2,1.2 l 0,4.5 -1.1,0 0,-4.4 c 0,-0.3 0,-0.5 -0.1,-0.7 0,-0.2 -0.1,-0.3 -0.2,-0.4 -0.1,-0.1 -0.2,-0.2 -0.4,-0.2 -0.2,0 -0.4,-0.1 -0.6,-0.1 l -0.8,0 z m 8.9,2.2 c 0,-0.2 0,-0.4 0,-0.6 0,-0.2 0,-0.4 0,-0.5 0,-0.1 0.1,-0.3 0.1,-0.5 0,-0.2 0.1,-0.4 0.2,-0.6 -0.1,0 -0.3,0 -0.4,-0.1 -0.1,0 -0.3,-0.1 -0.5,-0.2 0.1,-0.2 0.1,-0.3 0.2,-0.5 0.1,-0.2 0.1,-0.3 0.2,-0.5 0.2,0.1 0.3,0.1 0.5,0.1 0.1,0 0.3,0.1 0.4,0.1 0.1,0 0.3,0 0.4,0 0.1,0 0.3,0 0.5,0 l 1.8,0 c 0.3,0 0.5,0 0.8,0.1 0.3,0.1 0.5,0.2 0.7,0.3 0.2,0.2 0.4,0.4 0.5,0.7 0.1,0.3 0.2,0.7 0.2,1.1 l 0,4.5 -5.6,0 0,-3.4 z m 4.5,-0.8 c 0,-0.3 0,-0.5 -0.1,-0.7 0,-0.2 -0.1,-0.3 -0.2,-0.4 -0.1,-0.1 -0.2,-0.2 -0.4,-0.2 -0.2,0 -0.4,-0.1 -0.6,-0.1 l -1.7,0 c -0.1,0.2 -0.2,0.4 -0.2,0.5 0,0.2 -0.1,0.4 -0.1,0.5 0,0.2 0,0.3 0,0.5 0,0.2 0,0.3 0,0.5 l 0,2.7 3.4,0 0,-3.3 z m 3.8,-4.3 0,1.9 3.8,0 c 0,0.1 0.1,0.3 0.1,0.4 0,0.1 0,0.2 0.1,0.3 0,0.1 0,0.2 0,0.2 0,0.1 0,0.1 0,0.2 l 0,1.4 c 0,0.5 -0.1,1 -0.3,1.5 -0.2,0.5 -0.5,0.9 -0.9,1.4 l -1.6,1.8 -0.8,-0.7 1.5,-1.7 c 0.1,-0.2 0.3,-0.3 0.4,-0.5 0.1,-0.2 0.2,-0.3 0.3,-0.5 0.1,-0.2 0.2,-0.4 0.2,-0.5 0.1,-0.2 0.1,-0.4 0.1,-0.6 l 0,-1.5 -4,0 0,-2.9 1.1,0 z m 7.8,1.9 0,6.8 -1.1,0 0,-5.8 -1.1,0 0,-1 2.2,0 z m 1.9,6.9 c 0,-0.1 0,-0.3 0,-0.4 0,-0.2 0,-0.3 0,-0.5 0,-0.2 0,-0.4 0,-0.6 0,-0.2 0,-0.4 0,-0.6 0,-0.3 0,-0.6 0.1,-0.9 0,-0.3 0.1,-0.5 0.2,-0.7 0.1,-0.2 0.2,-0.4 0.3,-0.6 0.1,-0.2 0.2,-0.4 0.4,-0.5 -0.2,-0.2 -0.3,-0.4 -0.4,-0.6 -0.1,-0.2 -0.2,-0.3 -0.3,-0.5 -0.1,-0.2 -0.1,-0.3 -0.2,-0.5 0,-0.2 -0.1,-0.3 -0.1,-0.4 0.2,-0.1 0.3,-0.1 0.5,-0.2 0.2,-0.1 0.4,-0.1 0.6,-0.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.1 0,0.2 0,0.1 0.1,0.3 0.1,0.4 0.1,0.1 0.1,0.3 0.2,0.5 0.1,0.2 0.2,0.4 0.3,0.6 0.1,0.2 0.3,0.4 0.5,0.7 0.1,0.1 0.1,0.2 0.2,0.3 0.1,0.1 0.1,0.2 0.2,0.3 0.1,0.1 0.2,0.2 0.3,0.4 0.1,0.2 0.3,0.4 0.5,0.6 l 0,0 c 0.2,-0.1 0.3,-0.2 0.4,-0.4 0.1,-0.1 0.2,-0.3 0.3,-0.4 0.1,-0.1 0.1,-0.3 0.2,-0.5 0.1,-0.2 0.1,-0.3 0.2,-0.5 0,-0.2 0.1,-0.3 0.1,-0.5 0,-0.2 0.1,-0.3 0.1,-0.5 l -1,-0.2 0.2,-0.9 1.8,0.3 0,0.8 c 0,0.2 -0.1,0.4 -0.2,0.7 -0.1,0.2 -0.1,0.5 -0.2,0.7 -0.1,0.3 -0.2,0.5 -0.2,0.7 -0.1,0.2 -0.2,0.4 -0.3,0.5 -0.1,0.2 -0.2,0.3 -0.3,0.5 -0.1,0.1 -0.3,0.3 -0.5,0.4 l 1.6,1.8 -0.8,0.7 -3.5,-4 c -0.1,0.2 -0.2,0.4 -0.3,0.6 -0.1,0.2 -0.1,0.4 -0.1,0.7 0,0.3 0,0.5 0,0.8 0,0.3 0,0.5 0,0.8 0,0.1 0,0.3 0,0.5 0,0.2 0,0.4 0,0.6 l -0.9,0 z"
-       id="path681" />
+       style="fill:#141132" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:#ffffff"
+       id="polygon683"
        points="242.3,232.6 253.4,229.7 253.4,227.3 242.3,230.3 "
-       id="polygon683" />
+       style="fill:#ffffff"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:none;stroke:#000000;stroke-width:0.23999999"
+       id="polygon685"
        points="242.3,232.6 253.4,229.7 253.4,227.3 242.3,230.3 "
-       id="polygon685" />
-    <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:#ffffff"
-       points="242.3,233.1 244.7,234.7 244.7,232.2 242.3,230.7 "
-       id="polygon687" />
-    <polygon
-       transform="translate(58.131428,235.04924)"
        style="fill:none;stroke:#000000;stroke-width:0.23999999"
+       transform="translate(58.131428,235.04924)" />
+    <polygon
+       id="polygon687"
        points="242.3,233.1 244.7,234.7 244.7,232.2 242.3,230.7 "
-       id="polygon689" />
-    <polygon
-       transform="translate(58.131428,235.04924)"
        style="fill:#ffffff"
-       points="203.3,237.4 245,234.6 245,232.2 203.3,235.1 "
-       id="polygon691" />
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
+       id="polygon689"
+       points="242.3,233.1 244.7,234.7 244.7,232.2 242.3,230.7 "
        style="fill:none;stroke:#000000;stroke-width:0.23999999"
-       points="203.3,237.4 245,234.6 245,232.2 203.3,235.1 "
-       id="polygon693" />
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
+       id="polygon691"
+       points="203.3,237.4 245,234.6 245,232.2 203.3,235.1 "
        style="fill:#ffffff"
+       transform="translate(58.131428,235.04924)" />
+    <polygon
+       id="polygon693"
+       points="203.3,237.4 245,234.6 245,232.2 203.3,235.1 "
+       style="fill:none;stroke:#000000;stroke-width:0.23999999"
+       transform="translate(58.131428,235.04924)" />
+    <polygon
+       id="polygon695"
        points="203.3,238.9 245,236 310.1,266.8 330.7,292.2 330.4,288.5 310.8,264.5 245,233.7 245,233.6 203.3,236.6 "
-       id="polygon695" />
+       style="fill:#ffffff"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
+       id="polygon697"
+       points="203.3,238.9 245,236 310.1,266.8 330.7,292.2 330.4,288.5 310.8,264.5 245,233.7 245,233.6 203.3,236.6 "
        style="fill:none;stroke:#141132;stroke-width:0.23999999"
-       points="203.3,238.9 245,236 310.1,266.8 330.7,292.2 330.4,288.5 310.8,264.5 245,233.7 245,233.6 203.3,236.6 "
-       id="polygon697" />
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:#ffffff"
+       id="polygon699"
        points="336.5,324 328.5,328.4 328.5,304.9 336.7,301.1 "
-       id="polygon699" />
+       style="fill:#ffffff"
+       transform="translate(58.131428,235.04924)" />
     <polyline
-       transform="translate(58.131428,235.04924)"
-       style="fill:none;stroke:#141132;stroke-width:0.47999999"
+       id="polyline701"
        points="336.7,301.1 336.5,324 328.5,328.4 328.5,304.9 336.7,301.1 "
-       id="polyline701" />
+       style="fill:none;stroke:#141132;stroke-width:0.47999999"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:#ffffff"
+       id="polygon703"
        points="313.2,265.1 333.1,289.3 333.2,286.2 312.7,261.7 "
-       id="polygon703" />
+       style="fill:#ffffff"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
+       id="polygon705"
+       points="313.2,265.1 333.1,289.3 333.2,286.2 312.7,261.7 "
        style="fill:none;stroke:#141132;stroke-width:0.23999999"
-       points="313.2,265.1 333.1,289.3 333.2,286.2 312.7,261.7 "
-       id="polygon705" />
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:#ffffff"
+       id="polygon707"
        points="328.5,328.4 328.5,304.8 316.9,300.1 316.9,322.4 "
-       id="polygon707" />
-    <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:none;stroke:#141132;stroke-width:0.47999999"
-       points="328.5,328.4 328.5,304.8 316.9,300.1 316.9,322.4 "
-       id="polygon709" />
-    <polygon
-       transform="translate(58.131428,235.04924)"
        style="fill:#ffffff"
-       points="336.6,301.1 328.7,304.9 316.9,300.1 325.4,296.7 "
-       id="polygon711" />
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
+       id="polygon709"
+       points="328.5,328.4 328.5,304.8 316.9,300.1 316.9,322.4 "
        style="fill:none;stroke:#141132;stroke-width:0.47999999"
+       transform="translate(58.131428,235.04924)" />
+    <polygon
+       id="polygon711"
        points="336.6,301.1 328.7,304.9 316.9,300.1 325.4,296.7 "
-       id="polygon713" />
+       style="fill:#ffffff"
+       transform="translate(58.131428,235.04924)" />
+    <polygon
+       id="polygon713"
+       points="336.6,301.1 328.7,304.9 316.9,300.1 325.4,296.7 "
+       style="fill:none;stroke:#141132;stroke-width:0.47999999"
+       transform="translate(58.131428,235.04924)" />
     <path
-       inkscape:connector-curvature="0"
-       style="fill:#141132"
+       id="path715"
        d="m 410.73143,582.44924 c 0.2,0 0.3,0 0.5,0.1 0.2,0.1 0.3,0.1 0.4,0.2 0.1,0.1 0.2,0.2 0.3,0.4 0.1,0.2 0.1,0.4 0.1,0.7 l 0,2.6 -3.6,0 0,-2.1 c 0,-0.2 0,-0.3 0,-0.5 0,-0.2 0.1,-0.3 0.1,-0.5 -0.1,0 -0.2,0 -0.3,-0.1 -0.1,0 -0.2,-0.1 -0.3,-0.1 0,-0.1 0.1,-0.3 0.1,-0.4 0,-0.1 0.1,-0.3 0.1,-0.4 0.1,0 0.2,0.1 0.3,0.1 0.1,0 0.2,0 0.3,0 0.1,0 0.2,0 0.3,0 0.1,0 0.2,0 0.3,0 l 1.4,0 z m 0.3,3.1 0,-1.5 c 0,-0.2 0,-0.3 0,-0.4 0,-0.1 0,-0.2 -0.1,-0.2 0,-0.1 -0.1,-0.1 -0.2,-0.1 -0.1,0 -0.2,0 -0.4,0 l -0.8,0 c 0,0.2 -0.1,0.3 -0.1,0.5 0,0.1 0,0.3 0,0.4 l 0,1.4 1.6,0 z m 3.7,-3.1 0,1.4 c 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.2 0,0 0,0.1 0,0.2 0,0.1 0,0.1 0,0.2 l -1,-0.1 c 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.2 0,-0.3 l 0,-0.5 -0.9,0 0,-0.8 1.9,0 z m 3.6,0 c 0.2,0 0.3,0 0.5,0.1 0.2,0 0.3,0.1 0.4,0.2 0.1,0.1 0.2,0.2 0.3,0.4 0.1,0.2 0.1,0.4 0.1,0.7 l 0,2.6 -1,0 0,-2.4 c 0,-0.2 0,-0.3 0,-0.4 0,-0.1 0,-0.2 -0.1,-0.2 0,-0.1 -0.1,-0.1 -0.2,-0.1 -0.1,0 -0.2,0 -0.4,0 l -0.6,0 c -0.1,0.2 -0.1,0.4 -0.2,0.6 0,0.2 0,0.4 0,0.6 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0.1,0.3 0,0.1 0,0.2 0.1,0.3 l 0.1,0.2 c 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 -0.1,0.3 l -1.8,0 0,-0.8 0.9,0 c -0.1,-0.2 -0.1,-0.4 -0.1,-0.6 0,-0.2 0,-0.4 0,-0.5 0,-0.1 0,-0.3 0,-0.4 0,-0.1 0,-0.3 0.1,-0.4 0,-0.1 0,-0.1 0.1,-0.2 0,-0.1 0,-0.1 0.1,-0.2 -0.1,0 -0.2,0 -0.3,-0.1 -0.1,0 -0.2,-0.1 -0.4,-0.1 0,-0.1 0.1,-0.3 0.1,-0.4 0,-0.1 0.1,-0.3 0.1,-0.4 0.1,0 0.2,0.1 0.3,0.1 0.1,0 0.2,0 0.3,0 0.1,0 0.2,0 0.3,0 0.1,0 0.2,0 0.3,0 l 1,0 z m 3.9,0 0,3.9 -1,0 0,-3.1 -0.7,0 0,-0.8 1.7,0 z m 2.1,0.8 c -0.1,0 -0.2,0 -0.3,0 -0.1,0 -0.2,0 -0.3,0 -0.1,0 -0.2,0 -0.3,-0.1 -0.1,0 -0.2,-0.1 -0.3,-0.1 0,-0.1 0.1,-0.3 0.1,-0.4 0,-0.1 0.1,-0.3 0.1,-0.4 0.1,0 0.2,0.1 0.3,0.1 0.1,0 0.2,0 0.3,0 0.1,0 0.2,0 0.3,0 0.1,0 0.2,0 0.3,0 l 0.5,0 c 0.2,0 0.3,0 0.5,0.1 0.2,0 0.3,0.1 0.4,0.2 0.1,0.1 0.2,0.2 0.3,0.4 0.1,0.2 0.1,0.4 0.1,0.7 l 0,2.6 -1,0 0,-2.3 c 0,-0.2 0,-0.3 0,-0.4 0,-0.1 0,-0.2 -0.1,-0.2 0,-0.1 -0.1,-0.1 -0.2,-0.1 -0.1,0 -0.2,0 -0.4,0 l -0.3,0 z m 4.6,-0.8 0,1.4 c 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.2 0,0 0,0.1 0,0.2 0,0.1 0,0.1 0,0.2 l -1,-0.1 c 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.2 0,-0.3 l 0,-0.5 -0.9,0 0,-0.8 1.9,0 z m 2.2,3.2 c 0,0 0.1,0 0.2,0 0.1,0 0.1,0 0.2,0 0.1,0 0.3,0 0.5,0 0.2,0 0.3,-0.1 0.5,-0.1 0.2,-0.1 0.3,-0.2 0.4,-0.3 0.1,-0.1 0.3,-0.3 0.3,-0.4 0.1,-0.3 0.2,-0.5 0.3,-0.8 0.1,-0.3 0.1,-0.5 0.1,-0.8 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.3 0.1,0 0.2,-0.1 0.3,-0.1 0.1,0 0.2,0 0.2,0 0.1,0 0.1,0 0.2,0 0.1,0 0.2,0 0.3,0 0,0.1 0,0.2 0.1,0.4 0,0.1 0,0.3 0,0.4 0,0.1 0,0.2 0,0.4 0,0.1 0,0.2 0,0.3 -0.1,0.9 -0.5,1.6 -1,2.1 -0.5,0.5 -1.3,0.7 -2.3,0.7 -0.2,0 -0.3,0 -0.5,0 -0.2,0 -0.4,0 -0.6,-0.1 l -0.2,-2.3 c 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.1 -0.1,-0.2 0,-0.1 -0.1,-0.2 -0.1,-0.3 0.1,-0.1 0.3,-0.1 0.4,-0.2 0.2,-0.1 0.3,-0.1 0.5,-0.2 0.1,0.1 0.1,0.3 0.2,0.4 0,0.1 0.1,0.2 0.1,0.4 0,0.1 0,0.3 0,0.4 0,0.1 0,0.3 0,0.5 l 0,1.4 z m 0.3,-1.9 c 0,-0.1 0.1,-0.2 0.1,-0.3 0,-0.1 0,-0.1 0.1,-0.2 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.1 0,-0.2 0,0 0,0 0,-0.1 0,0 0,0 0,-0.1 0,0 0,-0.1 0,-0.1 0,0 0,-0.1 0,-0.2 0.2,-0.1 0.3,-0.1 0.5,-0.1 0.2,0 0.3,-0.1 0.5,-0.1 0,0.1 0.1,0.2 0.1,0.3 0,0.1 0,0.2 0,0.3 0,0.1 0,0.1 0,0.2 0,0.1 0,0.2 -0.1,0.2 0,0.1 -0.1,0.2 -0.1,0.3 0,0.1 -0.1,0.2 -0.1,0.3 l -0.3,0.7 c -0.1,0 -0.2,-0.1 -0.3,-0.1 -0.1,0 -0.1,0 -0.2,-0.1 -0.1,0 -0.1,0 -0.2,-0.1 -0.1,0 -0.2,-0.1 -0.2,-0.1 l 0.2,-0.3 z"
-       id="path715" />
+       style="fill:#141132" />
     <g
-       transform="translate(58.131428,235.04924)"
-       id="g717">
+       id="g717"
+       transform="translate(58.131428,235.04924)">
       <defs
          id="defs719">
         <rect
-           id="SVGID_37_"
-           x="24.700001"
-           y="79.099998"
+           height="1157.5"
            width="554"
-           height="1157.5" />
+           y="79.099998"
+           x="24.700001"
+           id="SVGID_37_" />
       </defs>
       <clipPath
          id="clipPath5353">
         <use
-           height="100%"
-           width="100%"
-           y="0"
-           x="0"
-           style="overflow:visible"
-           xlink:href="#SVGID_37_"
+           id="use5355"
            overflow="visible"
-           id="use5355" />
+           xlink:href="#SVGID_37_"
+           style="overflow:visible"
+           x="0"
+           y="0"
+           width="100%"
+           height="100%" />
       </clipPath>
       <path
-         style="fill:#141132"
-         inkscape:connector-curvature="0"
-         clip-path="url(#SVGID_38_)"
+         id="path725"
          d="m 368.8,359.4 c 0,3.4 -6.2,12.8 -6.2,12.8 0,0 -6.2,-9.4 -6.2,-12.8 0,-3.4 2.8,-6.2 6.2,-6.2 3.5,0 6.2,2.8 6.2,6.2"
-         id="path725" />
-      <path
-         style="fill:#ffffff"
-         inkscape:connector-curvature="0"
          clip-path="url(#SVGID_38_)"
+         style="fill:#141132" />
+      <path
+         id="path727"
          d="m 358.9,364 c 0,0.3 0.1,0.4 0.4,0.4 0.3,0 0.4,-0.1 0.4,-0.4 l 0,-3.6 0.4,0 0,3.6 c 0,0.3 0.1,0.4 0.4,0.4 0.3,0 0.4,-0.1 0.4,-0.4 l 0,-6.1 0.2,0 0,2.2 c 0,0.1 0,0.2 0.1,0.3 0.1,0.1 0.2,0.1 0.3,0 0.1,-0.1 0.2,-0.2 0.2,-0.3 l 0,-2.4 c 0,-0.3 -0.1,-0.5 -0.3,-0.6 -0.2,-0.1 -0.4,-0.2 -0.7,-0.2 l -1.6,0 c -0.3,0 -0.5,0.1 -0.7,0.2 -0.2,0.1 -0.3,0.3 -0.3,0.6 l 0,2.5 c 0,0.1 0.1,0.2 0.2,0.2 0.1,0.1 0.2,0.1 0.3,0 0.1,-0.1 0.1,-0.1 0.1,-0.2 l 0,-2.3 0.2,0 0,6.1 z"
-         id="path727" />
-      <path
-         style="fill:#ffffff"
-         inkscape:connector-curvature="0"
          clip-path="url(#SVGID_38_)"
+         style="fill:#ffffff" />
+      <path
+         id="path729"
          d="m 366.7,361.1 -1.1,-3.2 c 0,0 0,0 0,0 0,-0.1 0,-0.1 0.1,-0.1 0,0 0.1,0 0.1,0.1 l 0.8,2 c 0.1,0.1 0.2,0.2 0.4,0.2 0.1,0 0.1,-0.1 0.2,-0.2 0,-0.1 0,-0.2 0,-0.2 l -0.8,-2 c 0,-0.2 -0.1,-0.4 -0.3,-0.6 -0.2,-0.2 -0.4,-0.2 -0.7,-0.2 l -1,0 c -0.3,0 -0.5,0.1 -0.7,0.3 -0.2,0.2 -0.3,0.4 -0.4,0.6 l -0.7,2 c 0,0 0,0.1 0,0.2 0,0.1 0.1,0.2 0.2,0.2 0.2,0 0.4,-0.1 0.4,-0.2 l 0.8,-2.1 c 0,0 0,-0.1 0.1,-0.1 0.1,0 0.1,0 0.1,0.1 l 0,0 -1.1,3.2 0,0.2 c 0,0 0,0.1 0.1,0.1 0.1,0.1 0.1,0.1 0.1,0.1 l 0.7,0 0,2.5 c 0,0.1 0,0.2 0.1,0.3 0.1,0.1 0.2,0.1 0.3,0.1 0.1,0 0.2,0 0.3,-0.1 0.1,-0.1 0.1,-0.2 0.1,-0.3 l 0,-2.5 c 0,0 0,0 0.1,0 0.1,0 0.1,0 0.2,0 0.1,0 0.1,0 0.1,0 l 0,2.5 c 0,0.1 0,0.2 0.1,0.3 0.1,0.1 0.2,0.1 0.3,0.1 0.1,0 0.2,0 0.3,-0.1 0.1,-0.1 0.1,-0.2 0.1,-0.3 l 0,-2.4 0.7,0 c 0,0 0.1,0 0.1,-0.1 0.1,-0.1 0.1,-0.1 0.1,-0.1 l 0,-0.3 z"
-         id="path729" />
-      <path
-         style="fill:#ffffff"
-         inkscape:connector-curvature="0"
          clip-path="url(#SVGID_38_)"
+         style="fill:#ffffff" />
+      <path
+         id="path731"
          d="m 359.1,355.8 c 0,0.2 0.1,0.4 0.2,0.6 0.2,0.2 0.3,0.2 0.6,0.2 0.2,0 0.4,-0.1 0.6,-0.2 0.2,-0.2 0.2,-0.4 0.2,-0.6 0,-0.2 -0.1,-0.4 -0.2,-0.6 -0.2,-0.2 -0.3,-0.2 -0.6,-0.2 -0.2,0 -0.4,0.1 -0.6,0.2 -0.1,0.2 -0.2,0.4 -0.2,0.6"
-         id="path731" />
-      <path
-         style="fill:#ffffff"
-         inkscape:connector-curvature="0"
          clip-path="url(#SVGID_38_)"
+         style="fill:#ffffff" />
+      <path
+         id="path733"
          d="m 364,355.8 c 0,0.2 0.1,0.4 0.2,0.6 0.2,0.2 0.3,0.2 0.6,0.2 0.2,0 0.4,-0.1 0.6,-0.2 0.2,-0.2 0.2,-0.3 0.2,-0.6 0,-0.2 -0.1,-0.4 -0.2,-0.6 -0.2,-0.2 -0.3,-0.2 -0.6,-0.2 -0.2,0 -0.4,0.1 -0.6,0.2 -0.2,0.2 -0.2,0.4 -0.2,0.6"
-         id="path733" />
+         clip-path="url(#SVGID_38_)"
+         style="fill:#ffffff" />
     </g>
     <path
-       inkscape:connector-curvature="0"
-       style="fill:#141132"
+       id="path735"
        d="m 126.13143,429.94924 c 0.2,0 0.3,0 0.5,0.1 0.2,0 0.3,0.1 0.4,0.2 0.1,0.1 0.2,0.2 0.3,0.4 0.1,0.2 0.1,0.4 0.1,0.7 l 0,2.6 -3.6,0 0,-2.1 c 0,-0.2 0,-0.3 0,-0.5 0,-0.2 0.1,-0.3 0.1,-0.5 -0.1,0 -0.2,0 -0.3,-0.1 -0.1,0 -0.2,-0.1 -0.3,-0.1 0,-0.1 0.1,-0.3 0.1,-0.4 0,-0.1 0.1,-0.3 0.1,-0.4 0.1,0 0.2,0.1 0.3,0.1 0.1,0 0.2,0 0.3,0 0.1,0 0.2,0 0.3,0 0.1,0 0.2,0 0.3,0 l 1.4,0 z m 0.3,3 0,-1.5 c 0,-0.2 0,-0.3 0,-0.4 0,-0.1 0,-0.2 -0.1,-0.2 0,-0.1 -0.1,-0.1 -0.2,-0.1 -0.1,0 -0.2,0 -0.4,0 l -0.8,0 c 0,0.2 -0.1,0.3 -0.1,0.5 0,0.1 0,0.3 0,0.4 l 0,1.4 1.6,0 z m 3.7,-3 0,1.4 c 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.1 0,0.2 l -1,-0.1 c 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.2 0,-0.3 l 0,-0.5 -0.9,0 0,-0.8 1.9,0 z m 3.6,0 c 0.2,0 0.3,0 0.5,0.1 0.2,0 0.3,0.1 0.4,0.2 0.1,0.1 0.2,0.2 0.3,0.4 0.1,0.2 0.1,0.4 0.1,0.7 l 0,2.6 -1,0 0,-2.3 c 0,-0.2 0,-0.3 0,-0.4 0,-0.1 0,-0.2 -0.1,-0.2 0,-0.1 -0.1,-0.1 -0.2,-0.1 -0.1,0 -0.2,0 -0.4,0 l -0.6,0 c -0.1,0.2 -0.1,0.4 -0.2,0.6 0,0.2 0,0.4 0,0.6 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0.1,0.3 0,0.1 0,0.2 0.1,0.3 l 0.1,0.2 c 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 -0.1,0.3 l -1.8,0 0,-0.8 0.9,0 c -0.1,-0.2 -0.1,-0.4 -0.1,-0.6 0,-0.2 0,-0.4 0,-0.5 0,-0.1 0,-0.3 0,-0.4 0,-0.1 0,-0.3 0.1,-0.4 0,-0.1 0,-0.1 0.1,-0.2 0,-0.1 0,-0.1 0.1,-0.2 -0.1,0 -0.2,0 -0.3,-0.1 -0.1,0 -0.2,-0.1 -0.4,-0.1 0,-0.1 0.1,-0.3 0.1,-0.4 0,-0.1 0.1,-0.3 0.1,-0.4 0.1,0 0.2,0.1 0.3,0.1 0.1,0 0.2,0 0.3,0 0.1,0 0.2,0 0.3,0 0.1,0 0.2,0 0.3,0 l 1,0 z m 3.9,0 0,3.9 -1,0 0,-3.1 -0.7,0 0,-0.8 1.7,0 z m 2.1,0.8 c -0.1,0 -0.2,0 -0.3,0 -0.1,0 -0.2,0 -0.3,0 -0.1,0 -0.2,0 -0.3,-0.1 -0.1,0 -0.2,-0.1 -0.3,-0.1 0,-0.1 0.1,-0.3 0.1,-0.4 0,-0.1 0.1,-0.3 0.1,-0.4 0.1,0 0.2,0.1 0.3,0.1 0.1,0 0.2,0 0.3,0 0.1,0 0.2,0 0.3,0 0.1,0 0.2,0 0.3,0 l 0.5,0 c 0.2,0 0.3,0 0.5,0.1 0.2,0 0.3,0.1 0.4,0.2 0.1,0.1 0.2,0.2 0.3,0.4 0.1,0.2 0.1,0.4 0.1,0.7 l 0,2.6 -1,0 0,-2.3 c 0,-0.2 0,-0.3 0,-0.4 0,-0.1 0,-0.2 -0.1,-0.2 0,-0.1 -0.1,-0.1 -0.2,-0.1 -0.1,0 -0.2,0 -0.4,0 l -0.3,0 z m 4.7,-0.8 0,1.4 c 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.1 0,0.2 l -1,-0.1 c 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.2 0,-0.3 l 0,-0.5 -0.9,0 0,-0.8 1.9,0 z m 2.1,3.1 c 0,0 0.1,0 0.2,0 0.1,0 0.1,0 0.2,0 0.1,0 0.3,0 0.5,0 0.2,0 0.3,-0.1 0.5,-0.1 0.2,-0.1 0.3,-0.2 0.4,-0.3 0.1,-0.1 0.3,-0.3 0.3,-0.4 0.1,-0.3 0.2,-0.5 0.3,-0.8 0.1,-0.3 0.1,-0.5 0.1,-0.8 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.3 0.1,0 0.2,-0.1 0.3,-0.1 0.1,0 0.2,0 0.2,0 0.1,0 0.2,0 0.2,0 0.1,0 0.2,0 0.3,0 0,0.1 0,0.2 0.1,0.4 0,0.1 0,0.3 0,0.4 0,0.1 0,0.2 0,0.4 0,0.1 0,0.2 0,0.3 -0.1,0.9 -0.5,1.6 -1,2.1 -0.5,0.5 -1.3,0.7 -2.3,0.7 -0.2,0 -0.3,0 -0.5,0 -0.2,0 -0.4,0 -0.6,-0.1 l -0.2,-2.3 c 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.1 -0.1,-0.2 0,-0.1 -0.1,-0.2 -0.1,-0.3 0.1,-0.1 0.3,-0.1 0.4,-0.2 0.2,-0.1 0.3,-0.1 0.5,-0.2 0.1,0.1 0.1,0.3 0.2,0.4 0,0.1 0.1,0.2 0.1,0.4 0,0.1 0,0.3 0,0.4 0,0.1 0,0.3 0,0.5 l 0,1.4 z m 0.3,-1.9 c 0,-0.1 0.1,-0.2 0.1,-0.3 0,-0.1 0,-0.1 0.1,-0.2 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.1 0,-0.2 0,0 0,0 0,-0.1 0,0 0,0 0,-0.1 0,0 0,-0.1 0,-0.1 0,0 0,-0.1 0,-0.2 0.2,-0.1 0.3,-0.1 0.5,-0.1 0.2,0 0.3,-0.1 0.5,-0.1 0,0.1 0.1,0.2 0.1,0.3 0,0.1 0,0.2 0,0.3 0,0.1 0,0.1 0,0.2 0,0.1 0,0.2 -0.1,0.2 -0.1,0 -0.1,0.2 -0.1,0.3 0,0.1 -0.1,0.2 -0.1,0.3 l -0.3,0.7 c -0.1,0 -0.2,-0.1 -0.3,-0.1 -0.1,0 -0.1,0 -0.2,-0.1 -0.1,0 -0.1,0 -0.2,-0.1 -0.1,0 -0.2,-0.1 -0.2,-0.1 l 0.2,-0.3 z"
-       id="path735" />
+       style="fill:#141132" />
     <g
-       transform="translate(58.131428,235.04924)"
-       id="g737">
+       id="g737"
+       transform="translate(58.131428,235.04924)">
       <defs
          id="defs739">
         <rect
-           id="SVGID_39_"
-           x="24.700001"
-           y="79.099998"
+           height="1157.5"
            width="554"
-           height="1157.5" />
+           y="79.099998"
+           x="24.700001"
+           id="SVGID_39_" />
       </defs>
       <clipPath
          id="clipPath5366">
         <use
-           height="100%"
-           width="100%"
-           y="0"
-           x="0"
-           style="overflow:visible"
-           xlink:href="#SVGID_39_"
+           id="use5368"
            overflow="visible"
-           id="use5368" />
+           xlink:href="#SVGID_39_"
+           style="overflow:visible"
+           x="0"
+           y="0"
+           width="100%"
+           height="100%" />
       </clipPath>
       <path
-         style="fill:#141132"
-         inkscape:connector-curvature="0"
-         clip-path="url(#SVGID_40_)"
+         id="path745"
          d="m 84.3,206.8 c 0,3.4 -6.2,12.8 -6.2,12.8 0,0 -6.2,-9.4 -6.2,-12.8 0,-3.4 2.8,-6.2 6.2,-6.2 3.4,0 6.2,2.8 6.2,6.2"
-         id="path745" />
-      <path
-         style="fill:#ffffff"
-         inkscape:connector-curvature="0"
          clip-path="url(#SVGID_40_)"
+         style="fill:#141132" />
+      <path
+         id="path747"
          d="m 74.4,211.5 c 0,0.3 0.1,0.4 0.4,0.4 0.3,0 0.4,-0.1 0.4,-0.4 l 0,-3.6 0.4,0 0,3.6 c 0,0.3 0.1,0.4 0.4,0.4 0.3,0 0.4,-0.1 0.4,-0.4 l 0,-6.1 0.2,0 0,2.2 c 0,0.1 0,0.2 0.1,0.3 0.1,0.1 0.2,0.1 0.3,0 0.1,-0.1 0.2,-0.2 0.2,-0.3 l 0,-2.4 c 0,-0.3 -0.1,-0.5 -0.3,-0.6 -0.2,-0.1 -0.4,-0.2 -0.7,-0.2 l -1.6,0 c -0.3,0 -0.5,0.1 -0.7,0.2 -0.2,0.1 -0.3,0.3 -0.3,0.6 l 0,2.5 c 0,0.1 0.1,0.2 0.2,0.2 0.1,0.1 0.2,0.1 0.3,0 0.1,-0.1 0.1,-0.1 0.1,-0.2 l 0,-2.3 0.2,0 0,6.1 z"
-         id="path747" />
-      <path
-         style="fill:#ffffff"
-         inkscape:connector-curvature="0"
          clip-path="url(#SVGID_40_)"
+         style="fill:#ffffff" />
+      <path
+         id="path749"
          d="M 82.1,208.6 81,205.4 c 0,0 0,0 0,0 0,-0.1 0,-0.1 0.1,-0.1 0,0 0.1,0 0.1,0.1 l 0.8,2 c 0.1,0.1 0.2,0.2 0.4,0.2 0.1,0 0.1,-0.1 0.2,-0.2 0,-0.1 0,-0.2 0,-0.2 l -0.8,-2 c 0,-0.2 -0.1,-0.4 -0.3,-0.6 -0.2,-0.2 -0.4,-0.2 -0.7,-0.2 l -1,0 c -0.3,0 -0.5,0.1 -0.7,0.3 -0.2,0.2 -0.3,0.4 -0.4,0.6 l -0.7,2 c 0,0 0,0.1 0,0.2 0,0.1 0.1,0.2 0.2,0.2 0.2,0 0.4,-0.1 0.4,-0.2 l 0.8,-2.1 c 0,0 0,-0.1 0.1,-0.1 0.1,0 0.1,0 0.1,0.1 l 0,0 -1.1,3.2 0,0.2 c 0,0 0,0.1 0.1,0.1 0.1,0.1 0.1,0.1 0.1,0.1 l 0.7,0 0,2.5 c 0,0.1 0,0.2 0.1,0.3 0.1,0.1 0.2,0.1 0.3,0.1 0.1,0 0.2,0 0.3,-0.1 0.1,-0.1 0.1,-0.2 0.1,-0.3 l 0,-2.5 c 0,0 0,0 0.1,0 0.1,0 0.1,0 0.2,0 0.1,0 0.1,0 0.1,0 l 0,2.5 c 0,0.1 0,0.2 0.1,0.3 0.1,0.1 0.2,0.1 0.3,0.1 0.1,0 0.2,0 0.3,-0.1 0.1,-0.1 0.1,-0.2 0.1,-0.3 l 0,-2.5 0.7,0 c 0,0 0.1,0 0.1,-0.1 0.1,-0.1 0.1,-0.1 0.1,-0.1 l 0,-0.2 z"
-         id="path749" />
-      <path
-         style="fill:#ffffff"
-         inkscape:connector-curvature="0"
          clip-path="url(#SVGID_40_)"
+         style="fill:#ffffff" />
+      <path
+         id="path751"
          d="m 74.5,203.2 c 0,0.2 0.1,0.4 0.2,0.6 0.2,0.2 0.3,0.2 0.6,0.2 0.2,0 0.4,-0.1 0.6,-0.2 0.2,-0.2 0.2,-0.4 0.2,-0.6 0,-0.2 -0.1,-0.4 -0.2,-0.6 -0.2,-0.2 -0.3,-0.2 -0.6,-0.2 -0.2,0 -0.4,0.1 -0.6,0.2 -0.1,0.2 -0.2,0.4 -0.2,0.6"
-         id="path751" />
-      <path
-         style="fill:#ffffff"
-         inkscape:connector-curvature="0"
          clip-path="url(#SVGID_40_)"
+         style="fill:#ffffff" />
+      <path
+         id="path753"
          d="m 79.4,203.2 c 0,0.2 0.1,0.4 0.2,0.6 0.2,0.2 0.3,0.2 0.6,0.2 0.2,0 0.4,-0.1 0.6,-0.2 0.2,-0.2 0.2,-0.3 0.2,-0.6 0,-0.2 -0.1,-0.4 -0.2,-0.6 -0.2,-0.2 -0.3,-0.2 -0.6,-0.2 -0.2,0 -0.4,0.1 -0.6,0.2 -0.1,0.2 -0.2,0.4 -0.2,0.6"
-         id="path753" />
+         clip-path="url(#SVGID_40_)"
+         style="fill:#ffffff" />
     </g>
     <rect
-       style="fill:#141132"
-       x="528.83142"
-       y="370.84924"
-       width="78.800003"
+       id="rect755"
        height="13"
-       id="rect755" />
+       width="78.800003"
+       y="370.84924"
+       x="528.83142"
+       style="fill:#141132" />
     <path
-       inkscape:connector-curvature="0"
-       style="fill:#d91378"
+       id="path757"
        d="m 535.83143,375.34924 0,2.1 c 0,0.2 0,0.4 0,0.5 0,0.1 0,0.3 0,0.4 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 -0.1,0.3 l -1.5,-0.2 c 0,-0.1 0,-0.2 0.1,-0.3 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.4 0,-0.1 0,-0.3 0,-0.5 l 0,-0.8 -1.3,0 0,-1.2 2.8,0 z m 4.1,0 0,2.1 c 0,0.2 0,0.4 0,0.5 0,0.1 0,0.3 0,0.4 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 -0.1,0.3 l -1.5,-0.2 c 0,-0.1 0,-0.2 0.1,-0.3 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.4 0,-0.1 0,-0.3 0,-0.5 l 0,-0.8 -1.3,0 0,-1.2 2.8,0 z m 2.8,-1.6 0,1.6 3.2,0 c 0,0.1 0,0.2 0.1,0.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 l 0,1.2 c 0,0.4 -0.1,0.9 -0.3,1.3 -0.2,0.4 -0.4,0.8 -0.8,1.2 l -1.4,1.6 -1.1,-0.9 0.6,-0.7 c 0.3,-0.3 0.5,-0.6 0.7,-0.8 0.2,-0.2 0.3,-0.4 0.4,-0.5 0.1,-0.2 0.2,-0.3 0.2,-0.5 0,-0.1 0.1,-0.3 0.1,-0.5 l 0,-1 -3.3,0 0,-2.9 1.6,0 z m 6,1.3 c 0.3,0.1 0.7,0.2 0.9,0.2 0.3,0.1 0.5,0.1 0.7,0.2 0.2,0.1 0.4,0.1 0.6,0.2 0.2,0.1 0.4,0.1 0.6,0.2 0.2,0.1 0.4,0.2 0.5,0.3 0.1,0.1 0.2,0.2 0.3,0.4 0.1,0.1 0.1,0.3 0.2,0.5 0,0.2 0,0.4 0,0.5 l 0,2.3 c 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 -0.1,0.4 0,0.1 -0.1,0.3 -0.1,0.6 l -5.1,0 0,-1.2 3.8,0 0,-2.3 c 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 -0.1,-0.2 0,-0.1 -0.1,-0.1 -0.1,-0.2 -0.1,0 -0.2,-0.1 -0.3,-0.1 -0.1,-0.1 -0.3,-0.1 -0.5,-0.2 -0.2,-0.1 -0.4,-0.1 -0.6,-0.2 l -0.5,1.1 0.7,0.4 -0.7,1.1 -1.8,-1.1 1.6,-3.2 z m 8.8,0.3 c 0.2,0 0.5,0 0.7,0.1 0.2,0.1 0.4,0.2 0.6,0.3 0.2,0.1 0.3,0.3 0.4,0.6 0.1,0.3 0.2,0.6 0.2,1 0,0.1 0,0.2 0,0.2 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.4 0,0.1 0,0.3 0,0.5 0,0.4 -0.1,0.7 -0.2,1 -0.1,0.3 -0.3,0.6 -0.6,0.8 -0.2,0.2 -0.5,0.4 -0.8,0.5 -0.3,0.1 -0.7,0.2 -1,0.2 -0.4,0 -0.7,-0.1 -1,-0.2 -0.3,-0.1 -0.6,-0.3 -0.8,-0.5 -0.2,-0.2 -0.4,-0.5 -0.6,-0.8 -0.1,-0.3 -0.2,-0.7 -0.2,-1 0,0 0,-0.1 0,-0.1 0,0 0,-0.1 0,-0.1 0,-0.2 0,-0.4 0,-0.5 0,-0.2 0.1,-0.4 0.1,-0.6 0,-0.1 0.1,-0.3 0.2,-0.4 0.1,-0.1 0.1,-0.3 0.2,-0.4 -0.2,0 -0.3,0 -0.5,-0.1 -0.2,0 -0.3,-0.1 -0.6,-0.2 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.2,0 0.3,0.1 0.5,0.1 0.1,0 0.2,0.1 0.4,0.1 0.1,0 0.2,0 0.4,0 0.1,0 0.3,0 0.4,0 l 0.2,0 1.6,0 z m -1.5,1.2 c -0.1,0.1 -0.1,0.2 -0.2,0.3 0,0.1 -0.1,0.2 -0.1,0.3 -0.1,0.2 -0.1,0.4 -0.1,0.6 0,0.2 0,0.4 0,0.6 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 0,0.2 0.1,0.3 0.1,0.5 0.1,0.1 0.1,0.3 0.2,0.4 0.1,0.1 0.2,0.2 0.3,0.2 0.1,0.1 0.3,0.1 0.4,0.1 0.1,0 0.3,0 0.4,-0.1 0.1,-0.1 0.3,-0.1 0.4,-0.2 0.1,-0.1 0.2,-0.2 0.2,-0.4 0.1,-0.1 0.1,-0.3 0.1,-0.5 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.4 0,-0.1 0,-0.2 0,-0.3 0,-0.2 0,-0.4 -0.1,-0.6 -0.1,-0.2 -0.1,-0.3 -0.1,-0.3 -0.1,-0.1 -0.2,-0.1 -0.3,-0.2 -0.1,0 -0.3,0 -0.5,0 l -0.7,0 z m 7.3,-1.2 0,5.9 -1.5,0 0,-4.6 -1,0 0,-1.2 2.5,0 z m 3.3,1.2 c -0.2,0 -0.4,0 -0.5,0 -0.1,0 -0.3,0 -0.4,0 -0.1,0 -0.3,0 -0.4,-0.1 -0.1,0 -0.3,-0.1 -0.5,-0.1 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.2,0 0.3,0.1 0.5,0.1 0.1,0 0.2,0.1 0.4,0.1 0.1,0 0.2,0 0.4,0 0.1,0 0.3,0 0.4,0 l 0.2,0 3.3,0 c 0,0.1 0,0.1 0.1,0.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 l 0,1.2 c 0,0.2 0,0.4 0,0.6 0,0.2 -0.1,0.3 -0.1,0.5 -0.1,0.2 -0.1,0.3 -0.2,0.5 -0.1,0.2 -0.2,0.3 -0.3,0.5 -0.1,0.1 -0.2,0.3 -0.3,0.5 -0.1,0.2 -0.3,0.4 -0.5,0.6 -0.2,0.2 -0.3,0.4 -0.5,0.6 -0.2,0.2 -0.3,0.3 -0.4,0.5 l -1.1,-0.9 0.8,-0.9 c 0.2,-0.2 0.4,-0.4 0.5,-0.6 0.1,-0.2 0.2,-0.3 0.3,-0.4 0.1,-0.1 0.1,-0.2 0.2,-0.3 0,-0.1 0.1,-0.2 0.1,-0.3 0,-0.1 0,-0.2 0.1,-0.3 0,-0.1 0,-0.2 0,-0.3 l 0,-1 -2.5,0 z m -1.7,2.9 c 0,-0.2 0,-0.3 0,-0.4 0,-0.1 0,-0.3 0,-0.4 0,-0.1 0,-0.2 0,-0.4 0,-0.1 0,-0.2 0.1,-0.4 0.3,0 0.5,0.1 0.8,0.1 0.3,0 0.5,0.1 0.8,0.2 0,0.2 -0.1,0.4 -0.1,0.6 0,0.2 0,0.5 0,0.7 l 0,3.4 -1.5,0 0,-3.4 z m 12.4,-2.2 c 0.1,-0.3 0.2,-0.7 0.3,-1 0.1,-0.4 0.2,-0.7 0.4,-1 0.2,0 0.4,0 0.7,0.1 0.3,0 0.5,0.1 0.8,0.1 0.3,0 0.5,0.1 0.8,0.1 0.3,0 0.5,0.1 0.7,0.2 0.1,0.2 0.1,0.4 0.1,0.7 0,0.2 0,0.5 0,0.7 0,0.6 -0.1,1.1 -0.2,1.6 -0.1,0.5 -0.4,0.9 -0.7,1.3 -0.2,0.3 -0.4,0.5 -0.7,0.7 -0.3,0.2 -0.5,0.3 -0.8,0.4 -0.3,0.1 -0.6,0.2 -0.9,0.2 -0.3,0 -0.6,0.1 -0.9,0.1 -0.2,0 -0.5,0 -0.7,0 -0.2,0 -0.5,-0.1 -0.7,-0.1 l -0.3,-3.4 c 0,-0.2 0,-0.4 0,-0.5 0,-0.1 0,-0.3 0,-0.4 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 -0.1,-0.3 0,-0.1 -0.1,-0.2 -0.1,-0.3 0,-0.1 -0.1,-0.2 -0.1,-0.4 0.2,-0.1 0.4,-0.2 0.7,-0.3 0.2,-0.1 0.5,-0.2 0.7,-0.3 0.1,0.2 0.2,0.4 0.2,0.6 0.1,0.2 0.1,0.4 0.1,0.5 0,0.2 0.1,0.4 0.1,0.6 0,0.2 0,0.4 0.1,0.7 l 0.2,2.6 c 0,0 0.1,0 0.1,0 0,0 0,0 0.1,0 0.3,0 0.5,0 0.8,-0.1 0.2,-0.1 0.5,-0.1 0.7,-0.3 0.2,-0.1 0.4,-0.3 0.5,-0.5 0.2,-0.2 0.3,-0.4 0.4,-0.7 0.1,-0.2 0.2,-0.5 0.2,-0.7 0,-0.3 0.1,-0.5 0.1,-0.8 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.3 -0.1,0 -0.3,-0.1 -0.4,-0.1 -0.1,0 -0.3,0 -0.4,-0.1 -0.1,0.2 -0.1,0.4 -0.2,0.6 -0.1,0.2 -0.1,0.4 -0.2,0.5 l -1.4,-0.1 z m 7.6,-1.9 0,5.9 -1.5,0 0,-4.6 -1,0 0,-1.2 2.5,0 z m 2.8,-0.3 c 0.3,0.1 0.7,0.2 0.9,0.2 0.3,0.1 0.5,0.1 0.7,0.2 0.2,0.1 0.4,0.1 0.6,0.2 0.2,0.1 0.4,0.1 0.6,0.2 0.2,0.1 0.4,0.2 0.5,0.3 0.1,0.1 0.2,0.2 0.3,0.4 0.1,0.1 0.1,0.3 0.2,0.5 0,0.2 0,0.4 0,0.5 l 0,2.3 c 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 -0.1,0.4 0,0.1 -0.1,0.3 -0.1,0.6 l -5.1,0 0,-1.2 3.8,0 0,-2.3 c 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 -0.1,-0.2 0,-0.1 -0.1,-0.1 -0.1,-0.2 -0.1,0 -0.2,-0.1 -0.3,-0.1 -0.1,-0.1 -0.3,-0.1 -0.5,-0.2 -0.2,-0.1 -0.4,-0.1 -0.6,-0.2 l -0.5,1.1 0.7,0.4 -0.7,1.1 -1.8,-1.1 1.6,-3.2 z m 7.8,0.3 0,2.1 c 0,0.2 0,0.4 0,0.5 0,0.1 0,0.3 0,0.4 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 -0.1,0.3 l -1.5,-0.2 c 0,-0.1 0,-0.2 0.1,-0.3 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.4 0,-0.1 0,-0.3 0,-0.5 l 0,-0.8 -1.3,0 0,-1.2 2.8,0 z m 3.2,4.7 c 0.1,0 0.2,0 0.2,0 0.1,0 0.2,0 0.3,0 0.2,0 0.5,0 0.7,-0.1 0.2,0 0.5,-0.1 0.7,-0.2 0.2,-0.1 0.4,-0.2 0.6,-0.4 0.2,-0.2 0.4,-0.4 0.5,-0.7 0.2,-0.4 0.4,-0.8 0.4,-1.2 0.1,-0.4 0.1,-0.8 0.1,-1.2 0,-0.2 0,-0.3 0,-0.5 0,-0.2 0,-0.3 0,-0.5 0.2,0 0.3,-0.1 0.4,-0.1 0.1,0 0.2,-0.1 0.3,-0.1 0.1,0 0.2,0 0.3,-0.1 0.1,0 0.3,0 0.5,-0.1 0,0.2 0.1,0.3 0.1,0.5 0,0.2 0,0.4 0,0.6 0,0.2 0,0.4 0,0.5 0,0.2 0,0.3 0,0.5 -0.2,1.4 -0.7,2.4 -1.5,3.1 -0.8,0.7 -1.9,1 -3.4,1 -0.2,0 -0.5,0 -0.8,0 -0.3,0 -0.5,0 -0.8,-0.1 l -0.3,-3.4 c 0,-0.2 0,-0.4 0,-0.5 0,-0.1 0,-0.3 0,-0.4 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 -0.1,-0.3 0,-0.1 -0.1,-0.2 -0.1,-0.3 0,-0.1 -0.1,-0.2 -0.1,-0.4 0.2,-0.1 0.4,-0.2 0.7,-0.3 0.2,-0.1 0.5,-0.2 0.7,-0.3 0.1,0.2 0.2,0.4 0.2,0.6 0.1,0.2 0.1,0.4 0.1,0.5 0,0.2 0.1,0.4 0.1,0.6 0,0.2 0,0.4 0.1,0.7 l 0.1,2.9 z m 0.6,-2.8 c 0.1,-0.2 0.1,-0.3 0.1,-0.4 0,-0.1 0.1,-0.2 0.1,-0.3 0,-0.1 0,-0.2 0.1,-0.2 0,-0.1 0,-0.2 0,-0.2 0,0 0,-0.1 0,-0.1 0,0 0,-0.1 0,-0.1 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.1 0,-0.2 0.2,-0.1 0.5,-0.1 0.7,-0.2 0.2,-0.1 0.5,-0.1 0.7,-0.2 0,0.2 0.1,0.3 0.1,0.5 0,0.1 0,0.3 0,0.4 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 -0.1,0.4 -0.1,0.2 -0.1,0.3 -0.1,0.4 -0.1,0.1 -0.1,0.3 -0.2,0.5 l -0.4,1 c -0.2,0 -0.3,-0.1 -0.4,-0.1 -0.1,0 -0.2,-0.1 -0.3,-0.1 -0.1,0 -0.2,-0.1 -0.3,-0.1 -0.1,0 -0.2,-0.1 -0.4,-0.2 l 0.4,-0.9 z"
-       id="path757" />
+       style="fill:#d91378" />
     <g
-       transform="translate(58.131428,235.04924)"
-       id="g759">
+       id="g759"
+       transform="translate(58.131428,235.04924)">
       <defs
          id="defs761">
         <rect
-           id="SVGID_41_"
-           x="24.700001"
-           y="79.099998"
+           height="1157.5"
            width="554"
-           height="1157.5" />
+           y="79.099998"
+           x="24.700001"
+           id="SVGID_41_" />
       </defs>
       <clipPath
          id="clipPath5380">
         <use
-           height="100%"
-           width="100%"
-           y="0"
-           x="0"
-           style="overflow:visible"
-           xlink:href="#SVGID_41_"
+           id="use5382"
            overflow="visible"
-           id="use5382" />
+           xlink:href="#SVGID_41_"
+           style="overflow:visible"
+           x="0"
+           y="0"
+           width="100%"
+           height="100%" />
       </clipPath>
       <path
-         style="fill:#141132"
-         inkscape:connector-curvature="0"
-         clip-path="url(#SVGID_42_)"
+         id="path767"
          d="m 517.9,158.8 c 0,4.3 -7.8,16.1 -7.8,16.1 0,0 -7.8,-11.8 -7.8,-16.1 0,-4.3 3.5,-7.8 7.8,-7.8 4.3,0 7.8,3.5 7.8,7.8"
-         id="path767" />
+         clip-path="url(#SVGID_42_)"
+         style="fill:#141132" />
     </g>
     <rect
-       style="fill:#141132"
-       x="432.63144"
-       y="476.24924"
-       width="63.5"
+       id="rect793"
        height="13"
-       id="rect793" />
+       width="63.5"
+       y="476.24924"
+       x="432.63144"
+       style="fill:#141132" />
     <path
-       inkscape:connector-curvature="0"
-       style="fill:#f7d786"
+       id="path795"
        d="m 440.93143,480.64924 c 0.2,0 0.5,0 0.7,0.1 0.2,0.1 0.4,0.2 0.6,0.3 0.2,0.1 0.3,0.3 0.4,0.6 0.1,0.3 0.2,0.6 0.2,1 0,0.1 0,0.2 0,0.2 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.4 0,0.1 0,0.3 0,0.5 0,0.4 -0.1,0.7 -0.2,1 -0.1,0.3 -0.3,0.6 -0.6,0.8 -0.2,0.2 -0.5,0.4 -0.8,0.5 -0.3,0.1 -0.7,0.2 -1,0.2 -0.4,0 -0.7,-0.1 -1,-0.2 -0.3,-0.1 -0.6,-0.3 -0.8,-0.5 -0.2,-0.2 -0.4,-0.5 -0.6,-0.8 -0.1,-0.3 -0.2,-0.7 -0.2,-1 0,0 0,-0.1 0,-0.1 0,0 0,-0.1 0,-0.1 0,-0.2 0,-0.4 0,-0.5 0,-0.2 0.1,-0.4 0.1,-0.6 0,-0.1 0.1,-0.3 0.2,-0.4 0.1,-0.1 0.1,-0.3 0.2,-0.4 -0.2,0 -0.3,0 -0.5,-0.1 -0.2,0 -0.3,-0.1 -0.6,-0.2 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.2,0 0.3,0.1 0.5,0.1 0.1,0 0.2,0.1 0.4,0.1 0.1,0 0.2,0 0.4,0 0.1,0 0.3,0 0.4,0 l 0.2,0 1.6,0 z m -1.5,1.3 c -0.1,0.1 -0.1,0.2 -0.2,0.3 0,0.1 -0.1,0.2 -0.1,0.3 -0.1,0.2 -0.1,0.4 -0.1,0.6 0,0.2 0,0.4 0,0.6 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 0,0.2 0.1,0.3 0.1,0.5 0.1,0.1 0.1,0.3 0.2,0.4 0.1,0.1 0.2,0.2 0.3,0.2 0.1,0.1 0.3,0.1 0.4,0.1 0.1,0 0.3,0 0.4,-0.1 0.1,-0.1 0.3,-0.1 0.4,-0.2 0.1,-0.1 0.2,-0.2 0.2,-0.4 0.1,-0.1 0.1,-0.3 0.1,-0.5 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.4 0,-0.1 0,-0.2 0,-0.3 0,-0.2 0,-0.4 -0.1,-0.6 0,-0.1 -0.1,-0.3 -0.1,-0.3 -0.1,-0.1 -0.2,-0.1 -0.3,-0.2 -0.1,0 -0.3,0 -0.5,0 l -0.7,0 z m 7.3,-1.3 0,5.9 -1.5,0 0,-4.6 -1,0 0,-1.2 2.5,0 z m 2.9,-1.6 0,1.6 3.2,0 c 0,0.1 0,0.2 0.1,0.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 l 0,1.2 c 0,0.4 -0.1,0.9 -0.3,1.3 -0.2,0.4 -0.4,0.8 -0.8,1.2 l -1.4,1.6 -1.1,-0.9 0.6,-0.7 c 0.3,-0.3 0.5,-0.6 0.7,-0.8 0.2,-0.2 0.3,-0.4 0.4,-0.5 0.1,-0.2 0.2,-0.3 0.2,-0.5 0,-0.1 0.1,-0.3 0.1,-0.5 l 0,-1 -3.3,0 0,-3 1.6,0 z m 6,1.3 c 0.3,0.1 0.7,0.2 0.9,0.2 0.3,0.1 0.5,0.1 0.7,0.2 0.2,0.1 0.4,0.1 0.6,0.2 0.2,0.1 0.4,0.1 0.6,0.2 0.2,0.1 0.4,0.2 0.5,0.3 0.1,0.1 0.2,0.2 0.3,0.4 0.1,0.1 0.1,0.3 0.2,0.5 0,0.2 0,0.4 0,0.5 l 0,2.3 c 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 -0.1,0.4 0,0.1 -0.1,0.3 -0.1,0.6 l -5.1,0 0,-1.2 3.8,0 0,-2.3 c 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 -0.1,-0.2 0,-0.1 -0.1,-0.1 -0.1,-0.2 -0.1,0 -0.2,-0.1 -0.3,-0.1 -0.1,-0.1 -0.3,-0.1 -0.5,-0.2 -0.2,-0.1 -0.4,-0.1 -0.6,-0.2 l -0.5,1.1 0.7,0.4 -0.7,1.1 -1.8,-1.1 1.6,-3.2 z m 10.2,1.6 c -0.2,0 -0.4,0 -0.5,0 -0.1,0 -0.3,0 -0.4,0 -0.1,0 -0.3,0 -0.4,-0.1 -0.1,0 -0.3,-0.1 -0.5,-0.1 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.2,0.1 0.4,0.1 0.5,0.1 0.1,0 0.3,0.1 0.4,0.1 0.1,0 0.3,0 0.4,0 0.1,0 0.3,0 0.5,0 l 1.2,0 c 0.2,0 0.5,0 0.7,0.1 0.2,0.1 0.4,0.2 0.6,0.3 0.2,0.1 0.3,0.3 0.4,0.6 0.1,0.3 0.2,0.6 0.2,1 l 0,3.9 -1.5,0 0,-3.6 c 0,-0.2 0,-0.4 0,-0.6 0,-0.1 -0.1,-0.3 -0.1,-0.3 -0.1,-0.1 -0.2,-0.1 -0.3,-0.2 -0.1,0 -0.3,0 -0.5,0 l -1.1,0 z m -1.7,2.9 c 0,-0.2 0,-0.3 0,-0.4 0,-0.1 0,-0.3 0,-0.4 0,-0.1 0,-0.2 0,-0.4 0,-0.1 0,-0.2 0.1,-0.4 0.3,0 0.5,0.1 0.8,0.1 0.3,0 0.5,0.1 0.8,0.2 0,0.2 -0.1,0.4 -0.1,0.6 0,0.2 0,0.5 0,0.7 l 0,1.7 -1.6,0 0,-1.7 z m 10.3,-4.2 c 0.2,0 0.5,0 0.7,0.1 0.2,0.1 0.4,0.2 0.6,0.3 0.2,0.1 0.3,0.3 0.4,0.6 0.1,0.3 0.2,0.6 0.2,1 0,0.1 0,0.2 0,0.2 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.4 0,0.1 0,0.3 0,0.5 0,0.4 -0.1,0.7 -0.2,1 -0.1,0.3 -0.3,0.6 -0.6,0.8 -0.2,0.2 -0.5,0.4 -0.8,0.5 -0.3,0.1 -0.7,0.2 -1,0.2 -0.4,0 -0.7,-0.1 -1,-0.2 -0.3,-0.1 -0.6,-0.3 -0.8,-0.5 -0.2,-0.2 -0.4,-0.5 -0.6,-0.8 -0.1,-0.3 -0.2,-0.7 -0.2,-1 0,0 0,-0.1 0,-0.1 0,0 0,-0.1 0,-0.1 0,-0.2 0,-0.4 0,-0.5 0,-0.2 0.1,-0.4 0.1,-0.6 0,-0.1 0.1,-0.3 0.2,-0.4 0.1,-0.1 0.1,-0.3 0.2,-0.4 -0.2,0 -0.3,0 -0.5,-0.1 -0.2,0 -0.3,-0.1 -0.6,-0.2 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.2,0 0.3,0.1 0.5,0.1 0.1,0 0.2,0.1 0.4,0.1 0.1,0 0.2,0 0.4,0 0.1,0 0.3,0 0.4,0 l 0.2,0 1.6,0 z m -1.6,1.3 c -0.1,0.1 -0.1,0.2 -0.2,0.3 0,0.1 -0.1,0.2 -0.1,0.3 -0.1,0.2 -0.1,0.4 -0.1,0.6 0,0.2 0,0.4 0,0.6 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 0,0.2 0.1,0.3 0.1,0.5 0.1,0.1 0.1,0.3 0.2,0.4 0.1,0.1 0.2,0.2 0.3,0.2 0.1,0.1 0.3,0.1 0.4,0.1 0.1,0 0.3,0 0.4,-0.1 0.1,-0.1 0.3,-0.1 0.4,-0.2 0.1,-0.1 0.2,-0.2 0.2,-0.4 0.1,-0.1 0.1,-0.3 0.1,-0.5 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.4 0,-0.1 0,-0.2 0,-0.3 0,-0.2 0,-0.4 -0.1,-0.6 0,-0.1 -0.1,-0.3 -0.1,-0.3 -0.1,-0.1 -0.2,-0.1 -0.3,-0.2 -0.1,0 -0.3,0 -0.5,0 l -0.7,0 z m 7.5,-1.3 0,2.1 c 0,0.2 0,0.4 0,0.5 0,0.1 0,0.3 0,0.4 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 -0.1,0.3 l -1.5,-0.2 c 0,-0.1 0,-0.2 0.1,-0.3 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.4 0,-0.1 0,-0.3 0,-0.5 l 0,-0.8 -1.3,0 0,-1.2 2.8,0 z m 4.6,0 0,0.8 c 0,0.1 0,0.2 0,0.2 0,0.1 0,0.2 0,0.3 0,0.1 0,0.3 0.1,0.5 0,0.2 0,0.4 0.1,0.7 0,0.3 0.1,0.6 0.1,0.9 0,0.3 0.1,0.7 0.1,1.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.2 0,0.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.2 0,0.3 l -3.8,0 0,-1.2 2.4,0 c 0,-0.1 0,-0.2 0,-0.4 0,-0.2 0,-0.4 -0.1,-0.6 0,-0.2 -0.1,-0.5 -0.1,-0.7 0,-0.3 -0.1,-0.5 -0.1,-0.7 0,-0.2 -0.1,-0.4 -0.1,-0.6 0,-0.2 0,-0.3 0,-0.4 l -1.4,0 0,-1.2 2.8,0 z m 3.6,1.3 c -0.2,0 -0.4,0 -0.5,0 -0.1,0 -0.3,0 -0.4,0 -0.1,0 -0.3,0 -0.4,-0.1 -0.1,0 -0.3,-0.1 -0.5,-0.1 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.2,0.1 0.4,0.1 0.5,0.1 0.1,0 0.3,0.1 0.4,0.1 0.1,0 0.3,0 0.4,0 0.1,0 0.3,0 0.5,0 l 0.5,0 c 0.2,0 0.5,0 0.7,0.1 0.2,0.1 0.4,0.2 0.6,0.3 0.2,0.1 0.3,0.4 0.4,0.6 0.1,0.3 0.2,0.6 0.2,1 0,0.2 0,0.4 0,0.6 0,0.2 0,0.4 0,0.6 0,0.2 0,0.5 0,0.7 0,0.2 0,0.5 0,0.8 0,0.1 0,0.2 0,0.2 0,0.1 0,0.2 0,0.2 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 -0.1,0.4 l -4.9,0 0,-1.2 3.5,0 c 0,-0.2 0,-0.4 0,-0.6 0,-0.2 0,-0.4 0,-0.6 0,-0.2 0,-0.4 0,-0.6 0,-0.2 0,-0.4 0,-0.6 0,-0.2 0,-0.4 0,-0.6 0,-0.1 -0.1,-0.3 -0.1,-0.3 -0.1,-0.1 -0.2,-0.1 -0.3,-0.2 -0.1,0 -0.3,0 -0.5,0 l -0.4,0 z"
-       id="path795" />
+       style="fill:#f7d786" />
     <g
-       transform="translate(58.131428,235.04924)"
-       id="g797">
+       id="g797"
+       transform="translate(58.131428,235.04924)">
       <defs
          id="defs799">
         <rect
-           id="SVGID_47_"
-           x="24.700001"
-           y="79.099998"
+           height="1157.5"
            width="554"
-           height="1157.5" />
+           y="79.099998"
+           x="24.700001"
+           id="SVGID_47_" />
       </defs>
       <clipPath
          id="clipPath5390">
         <use
-           height="100%"
-           width="100%"
-           y="0"
-           x="0"
-           style="overflow:visible"
-           xlink:href="#SVGID_47_"
+           id="use5392"
            overflow="visible"
-           id="use5392" />
+           xlink:href="#SVGID_47_"
+           style="overflow:visible"
+           x="0"
+           y="0"
+           width="100%"
+           height="100%" />
       </clipPath>
       <path
-         style="fill:#141132"
-         inkscape:connector-curvature="0"
-         clip-path="url(#SVGID_48_)"
+         id="path805"
          d="m 414,264.1 c 0,4.3 -7.8,16.1 -7.8,16.1 0,0 -7.8,-11.8 -7.8,-16.1 0,-4.3 3.5,-7.8 7.8,-7.8 4.3,0 7.8,3.5 7.8,7.8"
-         id="path805" />
+         clip-path="url(#SVGID_48_)"
+         style="fill:#141132" />
     </g>
     <rect
-       style="fill:#141132"
-       x="224.63142"
-       y="402.34924"
-       width="78"
+       id="rect807"
        height="13"
-       id="rect807" />
+       width="78"
+       y="402.34924"
+       x="224.63142"
+       style="fill:#141132" />
     <path
-       inkscape:connector-curvature="0"
-       style="fill:#d91378"
+       id="path809"
        d="m 232.93143,405.44924 0,2.1 c 0,0.2 0,0.4 0,0.5 0,0.1 0,0.3 0,0.4 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 -0.1,0.3 l -1.5,-0.2 c 0,-0.1 0,-0.2 0.1,-0.3 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.4 0,-0.1 0,-0.3 0,-0.5 l 0,-0.8 -1.3,0 0,-1.2 2.8,0 z m 4.1,0 0,2.1 c 0,0.2 0,0.4 0,0.5 0,0.1 0,0.3 0,0.4 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 -0.1,0.3 l -1.5,-0.2 c 0,-0.1 0,-0.2 0.1,-0.3 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.4 0,-0.1 0,-0.3 0,-0.5 l 0,-0.8 -1.4,0 0,-1.2 2.9,0 z m 2.7,-1.7 0,1.6 3.2,0 c 0,0.1 0,0.2 0.1,0.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 l 0,1.2 c 0,0.4 -0.1,0.9 -0.3,1.3 -0.2,0.4 -0.4,0.8 -0.8,1.2 l -1.4,1.6 -1.1,-0.9 0.6,-0.7 c 0.3,-0.3 0.5,-0.6 0.7,-0.8 0.2,-0.2 0.3,-0.4 0.4,-0.5 0.1,-0.2 0.2,-0.3 0.2,-0.5 0,-0.1 0.1,-0.3 0.1,-0.5 l 0,-1 -3.3,0 0,-2.9 1.6,0 z m 6,1.3 c 0.3,0.1 0.7,0.2 0.9,0.2 0.3,0.1 0.5,0.1 0.7,0.2 0.2,0.1 0.4,0.1 0.6,0.2 0.2,0.1 0.4,0.1 0.6,0.2 0.2,0.1 0.4,0.2 0.5,0.3 0.1,0.1 0.2,0.2 0.3,0.4 0.1,0.1 0.1,0.3 0.2,0.5 0,0.2 0,0.4 0,0.5 l 0,2.3 c 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 -0.1,0.4 0,0.1 -0.1,0.3 -0.1,0.6 l -5.1,0 0,-1.4 3.8,0 0,-2.3 c 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 -0.1,-0.2 0,-0.1 -0.1,-0.1 -0.1,-0.2 -0.1,0 -0.2,-0.1 -0.3,-0.1 -0.1,-0.1 -0.3,-0.1 -0.5,-0.2 -0.2,-0.1 -0.4,-0.1 -0.6,-0.2 l -0.5,1.1 0.7,0.4 -0.7,1.1 -1.8,-1.1 1.6,-3 z m 8.8,0.4 c 0.2,0 0.5,0 0.7,0.1 0.2,0.1 0.4,0.2 0.6,0.3 0.2,0.1 0.3,0.3 0.4,0.6 0.1,0.3 0.2,0.6 0.2,1 0,0.1 0,0.2 0,0.2 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.4 0,0.1 0,0.3 0,0.5 0,0.4 -0.1,0.7 -0.2,1 -0.1,0.3 -0.3,0.6 -0.6,0.8 -0.2,0.2 -0.5,0.4 -0.8,0.5 -0.3,0.1 -0.7,0.2 -1,0.2 -0.4,0 -0.7,-0.1 -1,-0.2 -0.3,-0.1 -0.6,-0.3 -0.8,-0.5 -0.2,-0.2 -0.4,-0.5 -0.6,-0.8 -0.1,-0.3 -0.2,-0.7 -0.2,-1 0,0 0,-0.1 0,-0.1 0,0 0,-0.1 0,-0.1 0,-0.2 0,-0.4 0,-0.5 0,-0.2 0.1,-0.4 0.1,-0.6 0,-0.1 0.1,-0.3 0.2,-0.4 0.1,-0.1 0.1,-0.3 0.2,-0.4 -0.2,0 -0.3,0 -0.5,-0.1 -0.2,0 -0.3,-0.1 -0.6,-0.2 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.2,0 0.3,0.1 0.5,0.1 0.1,0 0.2,0.1 0.4,0.1 0.1,0 0.2,0 0.4,0 0.1,0 0.3,0 0.4,0 l 0.2,0 1.6,0 z m -1.5,1.2 c -0.1,0.1 -0.1,0.2 -0.2,0.3 0,0.1 -0.1,0.2 -0.1,0.3 -0.1,0.2 -0.1,0.4 -0.1,0.6 0,0.2 0,0.4 0,0.6 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 0,0.2 0.1,0.3 0.1,0.5 0.1,0.1 0.1,0.3 0.2,0.4 0.1,0.1 0.2,0.2 0.3,0.2 0.1,0.1 0.3,0.1 0.4,0.1 0.1,0 0.3,0 0.4,-0.1 0.1,-0.1 0.3,-0.1 0.4,-0.2 0.1,-0.1 0.2,-0.2 0.2,-0.4 0,-0.2 0.1,-0.3 0.1,-0.5 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.4 0,-0.1 0,-0.2 0,-0.3 0,-0.2 0,-0.4 -0.1,-0.6 0,-0.1 -0.1,-0.3 -0.1,-0.3 -0.1,-0.1 -0.2,-0.1 -0.3,-0.2 -0.1,0 -0.3,0 -0.5,0 l -0.7,0 z m 7.3,-1.2 0,5.9 -1.5,0 0,-4.6 -1,0 0,-1.2 2.5,0 z m 3.3,1.2 c -0.2,0 -0.4,0 -0.5,0 -0.1,0 -0.3,0 -0.4,0 -0.1,0 -0.3,0 -0.4,-0.1 -0.1,0 -0.3,-0.1 -0.5,-0.1 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.2,0 0.3,0.1 0.5,0.1 0.1,0 0.2,0.1 0.4,0.1 0.1,0 0.2,0 0.4,0 0.1,0 0.3,0 0.4,0 l 0.2,0 3.3,0 c 0,0.1 0,0.1 0.1,0.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 l 0,1.2 c 0,0.2 0,0.4 0,0.6 0,0.2 -0.1,0.3 -0.1,0.5 -0.1,0.2 -0.1,0.3 -0.2,0.5 -0.1,0.1 -0.2,0.3 -0.3,0.5 -0.1,0.1 -0.2,0.3 -0.3,0.5 -0.1,0.2 -0.3,0.4 -0.5,0.6 -0.2,0.2 -0.3,0.4 -0.5,0.6 -0.2,0.2 -0.3,0.3 -0.4,0.5 l -1.1,-0.9 0.8,-0.9 c 0.2,-0.2 0.4,-0.4 0.5,-0.6 0.1,-0.2 0.2,-0.3 0.3,-0.4 0.1,-0.1 0.1,-0.2 0.2,-0.3 0,-0.1 0.1,-0.2 0.1,-0.3 0,-0.1 0,-0.2 0.1,-0.3 0,-0.1 0,-0.2 0,-0.3 l 0,-1 -2.5,0 z m -1.7,2.9 c 0,-0.2 0,-0.3 0,-0.4 0,-0.1 0,-0.3 0,-0.4 0,-0.1 0,-0.2 0,-0.4 0,-0.1 0,-0.2 0.1,-0.4 0.3,0 0.5,0.1 0.8,0.1 0.3,0 0.5,0.1 0.8,0.2 0,0.2 -0.1,0.4 -0.1,0.6 0,0.2 0,0.5 0,0.7 l 0,3.4 -1.5,0 0,-3.4 z m 12.7,-4.1 0,7.6 -1.5,0 0,-6.4 -1.2,0 0,-1.2 2.7,0 z m 4,0 0,5.9 -1.5,0 0,-4.6 -1,0 0,-1.2 2.5,0 z m 3.3,1.2 c -0.2,0 -0.4,0 -0.5,0 -0.1,0 -0.3,0 -0.4,0 -0.1,0 -0.3,0 -0.4,-0.1 -0.1,0 -0.3,-0.1 -0.5,-0.1 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.2,0 0.3,0.1 0.5,0.1 0.1,0 0.2,0.1 0.4,0.1 0.1,0 0.2,0 0.4,0 0.1,0 0.3,0 0.4,0 l 0.2,0 3.3,0 c 0,0.1 0,0.1 0.1,0.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 l 0,1.2 c 0,0.2 0,0.4 0,0.6 0,0.2 -0.1,0.3 -0.1,0.5 -0.1,0.2 -0.1,0.3 -0.2,0.5 -0.1,0.1 -0.2,0.3 -0.3,0.5 -0.1,0.1 -0.2,0.3 -0.3,0.5 -0.1,0.2 -0.3,0.4 -0.5,0.6 -0.2,0.2 -0.3,0.4 -0.5,0.6 -0.2,0.2 -0.3,0.3 -0.4,0.5 l -1.1,-0.9 0.8,-0.9 c 0.2,-0.2 0.4,-0.4 0.5,-0.6 0.1,-0.2 0.2,-0.3 0.3,-0.4 0.1,-0.1 0.1,-0.2 0.2,-0.3 0,-0.1 0.1,-0.2 0.1,-0.3 0,-0.1 0,-0.2 0.1,-0.3 0,-0.1 0,-0.2 0,-0.3 l 0,-1 -2.5,0 z m -1.7,2.9 c 0,-0.2 0,-0.3 0,-0.4 0,-0.1 0,-0.3 0,-0.4 0,-0.1 0,-0.2 0,-0.4 0,-0.1 0,-0.2 0.1,-0.4 0.3,0 0.5,0.1 0.8,0.1 0.3,0 0.5,0.1 0.8,0.2 0,0.2 -0.1,0.4 -0.1,0.6 0,0.2 0,0.5 0,0.7 l 0,3.4 -1.5,0 0,-3.4 z m 9.6,-4.1 0,2.1 c 0,0.2 0,0.4 0,0.5 0,0.1 0,0.3 0,0.4 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 -0.1,0.3 l -1.5,-0.2 c 0,-0.1 0,-0.2 0.1,-0.3 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.4 0,-0.1 0,-0.3 0,-0.5 l 0,-0.8 -1.3,0 0,-1.2 2.8,0 z m 5.4,0 c 0.2,0 0.5,0 0.7,0.1 0.2,0.1 0.4,0.2 0.6,0.3 0.2,0.1 0.3,0.3 0.4,0.6 0.1,0.3 0.2,0.6 0.2,1 l 0,3.9 -1.5,0 0,-3.5 c 0,-0.2 0,-0.4 0,-0.6 0,-0.1 -0.1,-0.3 -0.1,-0.3 -0.1,-0.1 -0.2,-0.1 -0.3,-0.2 -0.1,0 -0.3,0 -0.5,0 l -0.8,0 c -0.1,0.3 -0.2,0.5 -0.3,0.8 0,0.3 -0.1,0.6 -0.1,0.9 0,0.2 0,0.3 0,0.5 0,0.1 0,0.3 0,0.4 0,0.1 0,0.3 0.1,0.4 0,0.1 0.1,0.3 0.1,0.4 l 0.1,0.3 c 0,0.2 0,0.3 -0.1,0.5 0,0.1 0,0.3 -0.1,0.4 l -2.8,0 0,-1.3 1.3,0 c -0.1,-0.3 -0.2,-0.6 -0.2,-0.8 0,-0.3 -0.1,-0.5 -0.1,-0.8 0,-0.2 0,-0.4 0,-0.6 0,-0.2 0.1,-0.4 0.1,-0.6 0,-0.1 0.1,-0.2 0.1,-0.3 0,-0.1 0.1,-0.2 0.1,-0.3 -0.2,0 -0.3,0 -0.5,-0.1 -0.2,0 -0.3,-0.1 -0.6,-0.2 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.2,0.1 0.4,0.1 0.5,0.1 0.1,0 0.3,0.1 0.4,0.1 0.1,0 0.3,0 0.4,0 0.1,0 0.3,0 0.5,0 l 2,0 z"
-       id="path809" />
+       style="fill:#d91378" />
     <g
-       transform="translate(58.131428,235.04924)"
-       id="g811">
+       id="g811"
+       transform="translate(58.131428,235.04924)">
       <defs
          id="defs813">
         <rect
-           id="SVGID_49_"
-           x="24.700001"
-           y="79.099998"
+           height="1157.5"
            width="554"
-           height="1157.5" />
+           y="79.099998"
+           x="24.700001"
+           id="SVGID_49_" />
       </defs>
       <clipPath
          id="clipPath5400">
         <use
-           height="100%"
-           width="100%"
-           y="0"
-           x="0"
-           style="overflow:visible"
-           xlink:href="#SVGID_49_"
+           id="use5402"
            overflow="visible"
-           id="use5402" />
+           xlink:href="#SVGID_49_"
+           style="overflow:visible"
+           x="0"
+           y="0"
+           width="100%"
+           height="100%" />
       </clipPath>
       <path
-         style="fill:#141132"
-         inkscape:connector-curvature="0"
-         clip-path="url(#SVGID_50_)"
+         id="path819"
          d="m 213.3,190.2 c 0,4.3 -7.8,16.1 -7.8,16.1 0,0 -7.8,-11.8 -7.8,-16.1 0,-4.3 3.5,-7.8 7.8,-7.8 4.3,0 7.8,3.5 7.8,7.8"
-         id="path819" />
+         clip-path="url(#SVGID_50_)"
+         style="fill:#141132" />
     </g>
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:#ffffff"
+       id="polygon821"
        points="166.3,195.5 205,214.4 205,202.1 166.3,183.2 "
-       id="polygon821" />
+       style="fill:#ffffff"
+       transform="translate(58.131428,235.04924)" />
     <polygon
-       transform="translate(58.131428,235.04924)"
-       style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       id="polygon823"
        points="166.3,195.5 205,214.4 205,202.1 166.3,183.2 "
-       id="polygon823" />
-    <path
-       inkscape:connector-curvature="0"
-       style="fill:#ffffff"
-       d="m 296.93143,426.64924 -6.4,1.8 -27.4,8.8 0,12.1 27.7,-8.4 6.1,-1.8 0,-12.5 z m 17,7.5 78.7,-22.8 0,-11.4 -78.7,21.9 0,12.3 z m 187.5,-62.5 0,-12 -84.8,33.6 -8.3,2.3 0,11.3 7.8,-2.2 85.3,-33 z m 0,-12.1 0,0 0.3,0 -0.3,0 z"
-       id="path825" />
-    <path
-       inkscape:connector-curvature="0"
        style="fill:none;stroke:#141132;stroke-width:0.23999999"
+       transform="translate(58.131428,235.04924)" />
+    <path
+       id="path825"
        d="m 296.93143,426.64924 -6.4,1.8 -27.4,8.8 0,12.1 27.7,-8.4 6.1,-1.8 0,-12.5 z m 17,7.5 78.7,-22.8 0,-11.4 -78.7,21.9 0,12.3 z m 187.5,-62.5 0,-12 -84.8,33.6 -8.3,2.3 0,11.3 7.8,-2.2 85.3,-33 z m 0,-12.1 0,0 0.3,0 -0.3,0 z"
-       id="path827" />
+       style="fill:#ffffff" />
+    <path
+       id="path827"
+       d="m 296.93143,426.64924 -6.4,1.8 -27.4,8.8 0,12.1 27.7,-8.4 6.1,-1.8 0,-12.5 z m 17,7.5 78.7,-22.8 0,-11.4 -78.7,21.9 0,12.3 z m 187.5,-62.5 0,-12 -84.8,33.6 -8.3,2.3 0,11.3 7.8,-2.2 85.3,-33 z m 0,-12.1 0,0 0.3,0 -0.3,0 z"
+       style="fill:none;stroke:#141132;stroke-width:0.23999999" />
     <g
-       transform="translate(58.131428,235.04924)"
-       id="g829">
+       id="g829"
+       transform="translate(58.131428,235.04924)">
       <defs
          id="defs831">
         <rect
-           id="SVGID_51_"
-           x="200.7"
-           y="185.5"
+           height="9.8000002"
            width="8.8999996"
-           height="9.8000002" />
+           y="185.5"
+           x="200.7"
+           id="SVGID_51_" />
       </defs>
       <clipPath
          id="clipPath5412">
         <use
-           height="100%"
-           width="100%"
-           y="0"
-           x="0"
-           style="overflow:visible"
-           xlink:href="#SVGID_51_"
+           id="use5414"
            overflow="visible"
-           id="use5414" />
+           xlink:href="#SVGID_51_"
+           style="overflow:visible"
+           x="0"
+           y="0"
+           width="100%"
+           height="100%" />
       </clipPath>
       <path
-         style="fill:#ffffff"
-         inkscape:connector-curvature="0"
-         clip-path="url(#SVGID_52_)"
+         id="path837"
          d="m 207.5,188.8 c -0.4,-0.2 -0.7,-0.4 -1,-0.6 0.2,-0.3 0.6,-0.8 0.5,-1.2 0,-0.1 -0.1,-0.3 -0.2,-0.4 -0.1,-0.1 -0.2,-0.1 -0.3,-0.1 -0.2,0 -0.5,0.2 -0.7,0.3 0,-0.1 0,-0.1 0,-0.2 0.1,-0.5 0.3,-0.9 0.7,-0.9 0,0 0,0 0,0 0.4,0 0.9,0.3 1,0.9 0.3,0.7 0.2,1.4 0,2.2 m -1.3,-0.9 c -0.1,-0.2 -0.2,-0.4 -0.3,-0.6 0.1,-0.3 0.3,-0.5 0.5,-0.5 0.1,0 0.1,0 0.1,0 0.1,0 0.1,0.1 0.1,0.2 0.1,0.3 -0.2,0.6 -0.4,0.9 m -0.5,0.4 -0.3,0.2 0.1,-0.4 c 0,-0.1 0.1,-0.3 0.2,-0.5 0.1,0.1 0.2,0.3 0.3,0.4 -0.2,0.2 -0.3,0.3 -0.3,0.3 m 3.9,3.3 c 0,-0.1 -0.7,-2 -1.6,-2.5 -0.1,0 -0.1,-0.1 -0.2,-0.1 0.3,-0.9 0.4,-1.7 0.2,-2.4 -0.2,-0.7 -0.8,-1.2 -1.4,-1.1 -0.5,0 -0.9,0.5 -1,1.1 0,0.2 0,0.4 0,0.6 -0.1,0.2 -0.2,0.3 -0.2,0.4 l -4.7,7.4 c 0,0.1 -0.1,0.1 0,0.2 l 0,0.1 0.1,0 c 0.1,0 0.1,-0.1 0.2,-0.1 l 5.4,-6.7 c 0.3,0.3 0.8,0.5 1.1,0.7 -0.2,0.5 -0.4,1.1 -0.6,1.7 -0.7,1.7 -0.4,3.1 0.1,3.4 0,0 0.1,0 0.1,0 0,0 0.1,0 0.1,-0.1 0,-0.1 0,-0.2 0,-0.2 -0.4,-0.2 -0.7,-1.5 0,-3 0.3,-0.6 0.5,-1.2 0.6,-1.7 0,0 0.1,0 0.1,0.1 0.8,0.4 1.5,2.3 1.5,2.3 0,0.1 0.1,0.1 0.2,0.1 -0.1,-0.1 0,-0.2 0,-0.2"
-         id="path837" />
+         clip-path="url(#SVGID_52_)"
+         style="fill:#ffffff" />
     </g>
     <g
-       transform="translate(58.131428,235.04924)"
-       id="g839">
+       id="g839"
+       transform="translate(58.131428,235.04924)">
       <defs
          id="defs841">
         <rect
-           id="SVGID_53_"
-           x="400.89999"
-           y="259.39999"
+           height="9.6000004"
            width="10.7"
-           height="9.6000004" />
+           y="259.39999"
+           x="400.89999"
+           id="SVGID_53_" />
       </defs>
       <clipPath
          id="clipPath5420">
         <use
-           height="100%"
-           width="100%"
-           y="0"
-           x="0"
-           style="overflow:visible"
-           xlink:href="#SVGID_53_"
+           id="use5422"
            overflow="visible"
-           id="use5422" />
+           xlink:href="#SVGID_53_"
+           style="overflow:visible"
+           x="0"
+           y="0"
+           width="100%"
+           height="100%" />
       </clipPath>
       <path
-         style="fill:#ffffff"
-         inkscape:connector-curvature="0"
-         clip-path="url(#SVGID_54_)"
+         id="path847"
          d="m 408.2,264.4 -0.5,-0.8 0.5,-0.3 0.5,0.8 -0.5,0.3 z m -1.5,-2.1 0.5,-0.3 0.6,0.8 -0.5,0.3 -0.6,-0.8 z m 2.8,-2 0,0 -0.5,-0.7 c -0.1,-0.2 -0.4,-0.2 -0.5,-0.1 l -2,1.4 0.4,0.6 -0.5,0.3 -0.4,-0.6 -4.9,3.4 c -0.2,0.1 -0.2,0.4 -0.1,0.5 l 2.5,3.6 c 0.1,0.2 0.4,0.2 0.5,0.1 l 4.9,-3.4 -0.4,-0.6 0.5,-0.3 0.4,0.6 2,-1.4 c 0.2,-0.1 0.2,-0.4 0.1,-0.5 l -0.5,-0.7 c 0,0 0,0 0,0"
-         id="path847" />
+         clip-path="url(#SVGID_54_)"
+         style="fill:#ffffff" />
     </g>
     <rect
-       style="fill:#141132"
-       x="101.23143"
-       y="461.54926"
-       width="50.5"
+       id="rect849"
        height="8.8999996"
-       id="rect849" />
+       width="50.5"
+       y="461.54926"
+       x="101.23143"
+       style="fill:#141132" />
     <path
-       inkscape:connector-curvature="0"
-       style="fill:#f7d786"
+       id="path851"
        d="m 106.73143,463.84924 c 0.2,0 0.4,0 0.5,0.1 0.2,0 0.3,0.1 0.5,0.2 0.1,0.1 0.2,0.3 0.3,0.4 0.1,0.2 0.1,0.4 0.1,0.7 l 0,2.9 -4,0 0,-2.4 c 0,-0.2 0,-0.4 0,-0.5 0,-0.2 0.1,-0.4 0.1,-0.6 -0.1,0 -0.2,0 -0.3,-0.1 -0.1,0 -0.2,-0.1 -0.4,-0.1 0,-0.2 0.1,-0.3 0.1,-0.4 0,-0.1 0.1,-0.3 0.1,-0.4 0.1,0 0.3,0.1 0.4,0.1 0.1,0 0.2,0 0.3,0.1 0.1,0 0.2,0 0.3,0 0.1,0 0.2,0 0.4,0 l 1.6,0 z m 0.3,3.5 0,-1.7 c 0,-0.2 0,-0.3 0,-0.4 0,-0.1 0,-0.2 -0.1,-0.3 -0.1,-0.1 -0.1,-0.1 -0.2,-0.1 -0.1,0 -0.2,0 -0.4,0 l -0.9,0 c 0,0.2 -0.1,0.4 -0.1,0.5 0,0.2 0,0.3 0,0.5 l 0,1.5 1.7,0 z m 4.2,-3.5 0,1.6 c 0,0.2 0,0.3 0,0.4 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.2 0,0.1 0,0.2 -0.1,0.3 l -1.1,-0.2 c 0,-0.1 0,-0.2 0,-0.2 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.4 l 0,-0.6 -1,0 0,-0.9 2.2,0 z m 3.1,0 0,1.6 c 0,0.2 0,0.3 0,0.4 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.2 0,0.1 0,0.2 -0.1,0.3 l -1.1,-0.2 c 0,-0.1 0,-0.2 0,-0.2 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.4 l 0,-0.6 -1,0 0,-0.9 2.2,0 z m 3.4,0 0,0.6 c 0,0.1 0,0.1 0,0.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.2 0,0.3 0,0.1 0,0.3 0.1,0.5 0,0.2 0,0.4 0.1,0.7 0,0.3 0.1,0.6 0.1,0.9 0,0 0,0.1 0,0.1 0,0 0,0.1 0,0.1 0,0.1 0,0.1 0,0.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.1 0,0.2 l -2.9,0 0,-0.9 1.8,0 c 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.3 -0.1,-0.5 0,-0.2 0,-0.4 -0.1,-0.5 0,-0.2 0,-0.4 -0.1,-0.5 0,-0.2 0,-0.3 -0.1,-0.4 -0.1,-0.1 0,-0.2 0,-0.3 l -1.1,0 0,-0.9 2.3,0 z m 3.3,0 0,1.6 c 0,0.2 0,0.3 0,0.4 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.2 0,0.1 0,0.2 -0.1,0.3 l -1.1,-0.2 c 0,-0.1 0,-0.2 0,-0.2 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.4 l 0,-0.6 -1,0 0,-0.9 2.2,0 z m 3.3,1.8 c 0,-0.2 0,-0.3 0,-0.4 0,-0.1 0,-0.2 -0.1,-0.3 -0.1,-0.1 -0.1,-0.1 -0.2,-0.1 -0.1,0 -0.2,0 -0.4,0 -0.1,0 -0.3,0 -0.4,0 -0.1,0 -0.2,0 -0.3,0 -0.1,0 -0.2,0 -0.3,-0.1 -0.1,0 -0.2,-0.1 -0.4,-0.1 0,-0.2 0.1,-0.3 0.1,-0.4 0,-0.1 0.1,-0.3 0.1,-0.4 0.1,0 0.3,0.1 0.4,0.1 0.1,0 0.2,0 0.3,0.1 0.1,0 0.2,0 0.3,0 0.1,0 0.2,0 0.4,0 l 0.2,0 c 0.2,0 0.4,0 0.5,0.1 0.2,0 0.3,0.1 0.5,0.2 0.1,0.1 0.2,0.3 0.3,0.4 0.1,0.2 0.1,0.4 0.1,0.7 l 0,2 0.8,0 0,0.9 -4.4,0 0,-0.9 2.4,0 0,-1.8 z m 8,-1.8 c 0.2,0 0.4,0 0.5,0.1 0.2,0 0.3,0.1 0.5,0.2 0.1,0.1 0.2,0.3 0.3,0.4 0.1,0.2 0.1,0.4 0.1,0.7 l 0,2.9 -1.2,0 0,-2.6 c 0,-0.2 0,-0.3 0,-0.4 0,-0.1 0,-0.2 -0.1,-0.3 -0.1,-0.1 -0.1,-0.1 -0.2,-0.1 -0.1,0 -0.2,0 -0.4,0 l -0.6,0 c -0.1,0.2 -0.2,0.4 -0.2,0.6 0,0.2 -0.1,0.4 -0.1,0.7 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0.1,0.3 0,0.1 0.1,0.2 0.1,0.3 l 0.1,0.2 c 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 -0.1,0.3 l -2,0 0,-0.9 1,0 c -0.1,-0.2 -0.1,-0.4 -0.2,-0.6 0,-0.2 -0.1,-0.4 -0.1,-0.6 0,-0.2 0,-0.3 0,-0.5 0,-0.2 0.1,-0.3 0.1,-0.5 0,-0.1 0,-0.1 0.1,-0.2 0,-0.1 0.1,-0.1 0.1,-0.2 -0.1,0 -0.2,0 -0.4,-0.1 -0.1,0 -0.3,-0.1 -0.4,-0.1 0,-0.2 0.1,-0.3 0.1,-0.4 0,-0.1 0.1,-0.3 0.1,-0.4 0.1,0 0.3,0.1 0.4,0.1 0.1,0 0.2,0 0.3,0.1 0.1,0 0.2,0 0.3,0 0.1,0 0.2,0 0.4,0 l 1.4,0 z m 2.5,0.3 c 0.1,-0.1 0.3,-0.2 0.4,-0.3 0.1,-0.1 0.3,-0.2 0.5,-0.3 0.1,0.1 0.1,0.2 0.2,0.2 0,0.1 0.1,0.1 0.1,0.2 0,0.1 0.1,0.1 0.1,0.2 0,0.1 0.1,0.1 0.1,0.2 0.2,-0.2 0.5,-0.4 0.7,-0.5 0.3,-0.1 0.5,-0.2 0.8,-0.2 0.2,0 0.3,0 0.5,0.1 0.2,0.1 0.3,0.1 0.4,0.2 0.1,0.1 0.2,0.2 0.3,0.4 0.1,0.1 0.2,0.3 0.2,0.5 0,0.2 0,0.3 0.1,0.5 0,0.2 0,0.4 0,0.6 0,0.1 0,0.2 0,0.3 0,0.1 0,0.3 0,0.4 0,0.2 0,0.4 0,0.6 0,0.2 0,0.3 0,0.4 0,0.1 0,0.1 0,0.2 0,0.1 0,0.1 0,0.2 l -2.2,0 0,-0.9 1.1,0 c 0,0 0,0 0,-0.1 0,0 0,-0.1 0,-0.2 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.3 0,-0.5 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.1 0,-0.2 0,-0.2 -0.1,-0.4 -0.2,-0.5 -0.1,-0.1 -0.3,-0.1 -0.4,-0.1 -0.1,0 -0.2,0 -0.3,0.1 -0.1,0 -0.2,0.1 -0.3,0.2 -0.1,0 -0.1,0.1 -0.2,0.1 -0.1,0.1 -0.1,0.1 -0.2,0.2 0,0.3 -0.1,0.6 -0.1,0.8 0,0.2 -0.1,0.4 -0.1,0.6 0,0.2 0,0.3 -0.1,0.4 0,0.1 0,0.3 -0.1,0.4 0,0.1 0,0.2 -0.1,0.4 0,0.1 0,0.3 -0.1,0.5 l -1.1,0 0.1,-0.7 c 0,-0.2 0.1,-0.4 0.1,-0.5 0,-0.2 0.1,-0.3 0.1,-0.5 0,-0.2 0.1,-0.3 0.1,-0.5 0,-0.2 0.1,-0.3 0.1,-0.5 0,-0.1 0,-0.1 0,-0.1 0,0 0,-0.1 0,-0.1 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.1 -0.1,-0.2 0,-0.1 0,-0.1 -0.1,-0.2 0,-0.1 -0.1,-0.1 -0.1,-0.2 l -0.2,-0.3 z m 7.3,-0.3 0,4.4 -1.2,0 0,-3.5 -0.7,0 0,-0.9 1.9,0 z m 2.5,0.9 c -0.1,0 -0.3,0 -0.4,0 -0.1,0 -0.2,0 -0.3,0 -0.1,0 -0.2,0 -0.3,-0.1 -0.1,0 -0.2,-0.1 -0.4,-0.1 0,-0.2 0.1,-0.3 0.1,-0.4 0,-0.1 0.1,-0.3 0.1,-0.4 0.1,0 0.2,0.1 0.3,0.1 0.1,0 0.2,0 0.3,0.1 0.1,0 0.2,0 0.3,0 0.1,0 0.2,0 0.3,0 l 0.1,0 2.5,0 c 0,0.1 0,0.1 0,0.1 0,0 0,0.1 0,0.1 0,0.1 0,0.1 0,0.2 0,0.1 0,0.1 0,0.2 l 0,0.9 c 0,0.2 0,0.3 0,0.4 0,0.1 0,0.3 -0.1,0.4 0,0.1 -0.1,0.2 -0.1,0.3 -0.1,0.1 -0.1,0.2 -0.2,0.3 -0.1,0.1 -0.2,0.2 -0.3,0.4 -0.1,0.1 -0.2,0.3 -0.3,0.4 -0.1,0.1 -0.2,0.3 -0.4,0.4 -0.1,0.1 -0.2,0.3 -0.3,0.4 l -0.8,-0.7 0.6,-0.6 c 0.1,-0.2 0.3,-0.3 0.4,-0.4 0.1,-0.1 0.2,-0.2 0.2,-0.3 0.1,-0.1 0.1,-0.2 0.1,-0.2 0,-0.1 0.1,-0.1 0.1,-0.2 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.2 0,-0.3 l 0,-0.8 -1.5,0 z m -1.3,2.2 c 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0.1,-0.3 0.2,0 0.4,0 0.6,0.1 0.2,0 0.4,0.1 0.6,0.1 0,0.2 -0.1,0.3 -0.1,0.5 0,0.2 0,0.3 0,0.6 l 0,2.6 -1.2,0 0,-2.7 z"
-       id="path851" />
+       style="fill:#f7d786" />
     <g
-       transform="translate(58.131428,235.04924)"
-       id="g853">
+       id="g853"
+       transform="translate(58.131428,235.04924)">
       <defs
          id="defs855">
         <rect
-           id="SVGID_55_"
-           x="24.700001"
-           y="79.099998"
+           height="1157.5"
            width="554"
-           height="1157.5" />
+           y="79.099998"
+           x="24.700001"
+           id="SVGID_55_" />
       </defs>
       <clipPath
          id="clipPath5430">
         <use
-           height="100%"
-           width="100%"
-           y="0"
-           x="0"
-           style="overflow:visible"
-           xlink:href="#SVGID_55_"
+           id="use5432"
            overflow="visible"
-           id="use5432" />
+           xlink:href="#SVGID_55_"
+           style="overflow:visible"
+           x="0"
+           y="0"
+           width="100%"
+           height="100%" />
       </clipPath>
       <path
-         style="fill:#ffffff"
-         inkscape:connector-curvature="0"
-         clip-path="url(#SVGID_56_)"
+         id="path861"
          d="m 512.9,156.5 c -0.4,-0.2 -0.7,-0.4 -1,-0.6 0.2,-0.3 0.6,-0.8 0.5,-1.2 0,-0.1 -0.1,-0.3 -0.2,-0.4 -0.1,-0.1 -0.2,-0.1 -0.3,-0.1 -0.2,0 -0.5,0.2 -0.7,0.3 0,-0.1 0,-0.1 0,-0.2 0.1,-0.5 0.3,-0.9 0.7,-0.9 0,0 0,0 0,0 0.4,0 0.9,0.3 1,0.9 0.3,0.6 0.2,1.3 0,2.2 m -1.3,-1 c -0.1,-0.2 -0.2,-0.4 -0.3,-0.6 0.1,-0.3 0.3,-0.5 0.5,-0.5 0.1,0 0.1,0 0.1,0 0.1,0 0.1,0.1 0.1,0.2 0.1,0.4 -0.2,0.7 -0.4,0.9 m -0.5,0.5 -0.3,0.2 0.1,-0.4 c 0,-0.1 0.1,-0.3 0.2,-0.5 0.1,0.1 0.2,0.3 0.3,0.4 -0.2,0.2 -0.3,0.2 -0.3,0.3 m 3.9,3.2 c 0,-0.1 -0.7,-2 -1.6,-2.5 -0.1,0 -0.1,-0.1 -0.2,-0.1 0.3,-0.9 0.4,-1.7 0.2,-2.4 -0.2,-0.7 -0.8,-1.2 -1.4,-1.1 -0.5,0 -0.9,0.5 -1,1.1 0,0.2 0,0.4 0,0.6 -0.1,0.2 -0.2,0.3 -0.2,0.4 l -4.7,7.4 c 0,0.1 -0.1,0.1 0,0.2 l 0,0.1 0.1,0 c 0.1,0 0.1,-0.1 0.2,-0.1 l 5.4,-6.7 c 0.3,0.3 0.8,0.5 1.1,0.7 -0.2,0.5 -0.4,1.1 -0.6,1.7 -0.7,1.7 -0.4,3.1 0.1,3.4 0,0 0.1,0 0.1,0 0,0 0.1,0 0.1,-0.1 0,-0.1 0,-0.2 0,-0.2 -0.4,-0.2 -0.7,-1.5 0,-3 0.3,-0.6 0.5,-1.2 0.6,-1.7 0,0 0.1,0 0.1,0.1 0.8,0.4 1.5,2.3 1.5,2.3 0,0.1 0.1,0.1 0.2,0.1 0,0 0,-0.1 0,-0.2"
-         id="path861" />
+         clip-path="url(#SVGID_56_)"
+         style="fill:#ffffff" />
     </g>
     <rect
-       style="fill:#141132"
-       x="329.83145"
-       y="351.74924"
+       id="rect863"
+       height="13"
        width="104.8"
-       height="13"
-       id="rect863" />
+       y="351.74924"
+       x="329.83145"
+       style="fill:#141132" />
     <rect
-       style="fill:#141132"
-       x="162.73143"
-       y="456.64926"
-       width="62.099998"
+       id="rect865"
        height="13"
-       id="rect865" />
+       width="62.099998"
+       y="456.64926"
+       x="162.73143"
+       style="fill:#141132" />
     <path
-       inkscape:connector-curvature="0"
-       style="fill:#8bceac"
+       id="path867"
        d="m 338.03143,355.54924 c 0.2,0 0.5,0 0.7,0.1 0.2,0.1 0.4,0.2 0.6,0.3 0.2,0.1 0.3,0.3 0.4,0.6 0.1,0.3 0.2,0.6 0.2,1 l 0,3.9 -1.5,0 0,-3.5 c 0,-0.2 0,-0.4 0,-0.6 0,-0.1 -0.1,-0.3 -0.1,-0.3 -0.1,-0.1 -0.2,-0.1 -0.3,-0.2 -0.1,0 -0.3,0 -0.5,0 l -0.8,0 c -0.1,0.3 -0.2,0.5 -0.3,0.8 0,0.3 -0.1,0.6 -0.1,0.9 0,0.2 0,0.3 0,0.5 0,0.1 0,0.3 0,0.4 0,0.1 0,0.3 0.1,0.4 0,0.1 0.1,0.3 0.1,0.4 l 0.1,0.3 c 0,0.2 0,0.3 -0.1,0.5 0,0.1 0,0.3 -0.1,0.4 l -2.8,0 0,-1.2 1.3,0 c -0.1,-0.3 -0.2,-0.6 -0.2,-0.8 0,-0.3 -0.1,-0.5 -0.1,-0.8 0,-0.2 0,-0.4 0,-0.6 0,-0.2 0.1,-0.4 0.1,-0.6 0,-0.1 0.1,-0.2 0.1,-0.3 0,-0.1 0.1,-0.2 0.1,-0.3 -0.2,0 -0.3,0 -0.5,-0.1 -0.2,0 -0.3,-0.1 -0.6,-0.2 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.2,0.1 0.4,0.1 0.5,0.1 0.1,0 0.3,0.1 0.4,0.1 0.1,0 0.3,0 0.4,0 0.1,0 0.3,0 0.5,0 l 2,0 z m 5.8,0 0,5.9 -1.5,0 0,-4.6 -1,0 0,-1.2 2.5,0 z m 2.9,-1.6 0,1.6 3.2,0 c 0,0.1 0,0.2 0.1,0.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 l 0,1.2 c 0,0.4 -0.1,0.9 -0.3,1.3 -0.2,0.4 -0.4,0.8 -0.8,1.2 l -1.4,1.6 -1.1,-0.9 0.6,-0.7 c 0.3,-0.3 0.5,-0.6 0.7,-0.8 0.2,-0.2 0.3,-0.4 0.4,-0.5 0.1,-0.2 0.2,-0.3 0.2,-0.5 0,-0.1 0.1,-0.3 0.1,-0.5 l 0,-1 -3.3,0 0,-2.9 1.6,0 z m 7.3,1.6 0,5.9 -1.5,0 0,-4.6 -1,0 0,-1.2 2.5,0 z m 5.1,0 c 0.2,0 0.5,0 0.7,0.1 0.2,0.1 0.4,0.2 0.6,0.3 0.2,0.1 0.3,0.3 0.4,0.6 0.1,0.3 0.2,0.6 0.2,1 0,0.1 0,0.2 0,0.2 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.4 0,0.1 0,0.3 0,0.5 0,0.4 -0.1,0.7 -0.2,1 -0.1,0.3 -0.3,0.6 -0.6,0.8 -0.2,0.2 -0.5,0.4 -0.8,0.5 -0.3,0.1 -0.7,0.2 -1,0.2 -0.4,0 -0.7,-0.1 -1,-0.2 -0.3,-0.1 -0.6,-0.3 -0.8,-0.5 -0.2,-0.2 -0.4,-0.5 -0.6,-0.8 -0.1,-0.3 -0.2,-0.7 -0.2,-1 0,0 0,-0.1 0,-0.1 0,0 0,-0.1 0,-0.1 0,-0.2 0,-0.4 0,-0.5 0,-0.2 0.1,-0.4 0.1,-0.6 0,-0.1 0.1,-0.3 0.2,-0.4 0.1,-0.1 0.1,-0.3 0.2,-0.4 -0.2,0 -0.3,0 -0.5,-0.1 -0.2,0 -0.3,-0.1 -0.6,-0.2 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.2,0 0.3,0.1 0.5,0.1 0.1,0 0.2,0.1 0.4,0.1 0.1,0 0.2,0 0.4,0 0.1,0 0.3,0 0.4,0 l 0.2,0 1.6,0 z m -1.5,1.2 c -0.1,0.1 -0.1,0.2 -0.2,0.3 0,0.1 -0.1,0.2 -0.1,0.3 -0.1,0.2 -0.1,0.4 -0.1,0.6 0,0.2 0,0.4 0,0.6 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 0,0.2 0.1,0.3 0.1,0.5 0.1,0.1 0.1,0.3 0.2,0.4 0.1,0.1 0.2,0.2 0.3,0.2 0.1,0.1 0.3,0.1 0.4,0.1 0.1,0 0.3,0 0.4,-0.1 0.1,-0.1 0.3,-0.1 0.4,-0.2 0.1,-0.1 0.2,-0.2 0.2,-0.4 0.1,-0.1 0.1,-0.3 0.1,-0.5 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.4 0,-0.1 0,-0.2 0,-0.3 0,-0.2 0,-0.4 -0.1,-0.6 0,-0.1 -0.1,-0.3 -0.1,-0.3 -0.1,-0.1 -0.2,-0.1 -0.3,-0.2 -0.1,0 -0.3,0 -0.5,0 l -0.7,0 z m 7.9,-1.2 0,0.8 c 0,0.1 0,0.2 0,0.2 0,0.1 0,0.2 0,0.3 0,0.1 0,0.3 0.1,0.5 0,0.2 0,0.4 0.1,0.7 0,0.3 0.1,0.6 0.1,0.9 0,0.3 0.1,0.7 0.1,1.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.2 0,0.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.2 0,0.3 l -3.8,0 0,-1.2 2.4,0 c 0,-0.1 0,-0.2 0,-0.4 0,-0.2 0,-0.4 -0.1,-0.6 0,-0.2 -0.1,-0.5 -0.1,-0.7 0,-0.3 -0.1,-0.5 -0.1,-0.7 0,-0.2 -0.1,-0.4 -0.1,-0.6 0,-0.2 0,-0.3 0,-0.4 l -1.4,0 0,-1.2 2.8,0 z m 4.3,0 0,5.9 -1.5,0 0,-4.6 -1,0 0,-1.2 2.5,0 z m 3.3,1.2 c -0.2,0 -0.4,0 -0.5,0 -0.1,0 -0.3,0 -0.4,0 -0.1,0 -0.3,0 -0.4,-0.1 -0.1,0 -0.3,-0.1 -0.5,-0.1 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.2,0 0.3,0.1 0.5,0.1 0.1,0 0.2,0.1 0.4,0.1 0.1,0 0.2,0 0.4,0 0.1,0 0.3,0 0.4,0 l 0.2,0 3.3,0 c 0,0.1 0,0.1 0.1,0.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 l 0,1.2 c 0,0.2 0,0.4 0,0.6 0,0.2 -0.1,0.3 -0.1,0.5 -0.1,0.2 -0.1,0.3 -0.2,0.5 -0.1,0.2 -0.2,0.3 -0.3,0.5 -0.1,0.1 -0.2,0.3 -0.3,0.5 -0.1,0.2 -0.3,0.4 -0.5,0.6 -0.2,0.2 -0.3,0.4 -0.5,0.6 -0.2,0.2 -0.3,0.3 -0.4,0.5 l -1.1,-0.9 0.8,-0.9 c 0.2,-0.2 0.4,-0.4 0.5,-0.6 0.1,-0.2 0.2,-0.3 0.3,-0.4 0.1,-0.1 0.1,-0.2 0.2,-0.3 0,-0.1 0.1,-0.2 0.1,-0.3 0,-0.1 0,-0.2 0.1,-0.3 0,-0.1 0,-0.2 0,-0.3 l 0,-1 -2.5,0 z m -1.7,2.9 c 0,-0.2 0,-0.3 0,-0.4 0,-0.1 0,-0.3 0,-0.4 0,-0.1 0,-0.2 0,-0.4 0,-0.1 0,-0.2 0.1,-0.4 0.3,0 0.5,0.1 0.8,0.1 0.3,0 0.5,0.1 0.8,0.2 0,0.2 -0.1,0.4 -0.1,0.6 0,0.2 0,0.5 0,0.7 l 0,3.4 -1.5,0 0,-3.4 z m 9.4,-4.1 0,5.9 -1.5,0 0,-4.6 -1,0 0,-1.2 2.5,0 z m 6.6,1.2 c -0.2,0 -0.4,0 -0.5,0 -0.1,0 -0.3,0 -0.4,0 -0.1,0 -0.3,0 -0.4,-0.1 -0.1,0 -0.3,-0.1 -0.5,-0.1 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.2,0.1 0.4,0.1 0.5,0.1 0.1,0 0.3,0.1 0.4,0.1 0.1,0 0.3,0 0.4,0 0.1,0 0.3,0 0.5,0 l 1.2,0 c 0.2,0 0.5,0 0.7,0.1 0.2,0.1 0.4,0.2 0.6,0.3 0.2,0.1 0.3,0.3 0.4,0.6 0.1,0.3 0.2,0.6 0.2,1 l 0,3.9 -1.5,0 0,-3.5 c 0,-0.2 0,-0.4 0,-0.6 0,-0.1 -0.1,-0.3 -0.1,-0.3 -0.1,-0.1 -0.2,-0.1 -0.3,-0.2 -0.1,0 -0.3,0 -0.5,0 l -1.1,0 z m -1.8,2.9 c 0,-0.2 0,-0.3 0,-0.4 0,-0.1 0,-0.3 0,-0.4 0,-0.1 0,-0.2 0,-0.4 0,-0.1 0,-0.2 0.1,-0.4 0.3,0 0.5,0.1 0.8,0.1 0.3,0 0.5,0.1 0.8,0.2 0,0.2 -0.1,0.4 -0.1,0.6 0,0.2 0,0.5 0,0.7 l 0,1.7 -1.5,0 0,-1.7 z m 9.4,-4.1 0,2.1 c 0,0.2 0,0.4 0,0.5 0,0.1 0,0.3 0,0.4 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 -0.1,0.3 l -1.5,-0.2 c 0,-0.1 0,-0.2 0.1,-0.3 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.4 0,-0.1 0,-0.3 0,-0.5 l 0,-0.8 -1.3,0 0,-1.2 2.8,0 z m 4.1,0 0,2.1 c 0,0.2 0,0.4 0,0.5 0,0.1 0,0.3 0,0.4 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 -0.1,0.3 l -1.5,-0.2 c 0,-0.1 0,-0.2 0.1,-0.3 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.4 0,-0.1 0,-0.3 0,-0.5 l 0,-0.8 -1.3,0 0,-1.2 2.8,0 z m 3.2,1.2 c -0.2,0 -0.4,0 -0.5,0 -0.1,0 -0.3,0 -0.4,0 -0.1,0 -0.3,0 -0.4,-0.1 -0.1,0 -0.3,-0.1 -0.5,-0.1 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.2,0 0.3,0.1 0.5,0.1 0.1,0 0.2,0.1 0.4,0.1 0.1,0 0.2,0 0.4,0 0.1,0 0.3,0 0.4,0 l 0.2,0 3.3,0 c 0,0.1 0,0.1 0.1,0.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 l 0,1.2 c 0,0.2 0,0.4 0,0.6 0,0.2 -0.1,0.3 -0.1,0.5 -0.1,0.2 -0.1,0.3 -0.2,0.5 -0.1,0.2 -0.2,0.3 -0.3,0.5 -0.1,0.1 -0.2,0.3 -0.3,0.5 -0.1,0.2 -0.3,0.4 -0.5,0.6 -0.2,0.2 -0.3,0.4 -0.5,0.6 -0.2,0.2 -0.3,0.3 -0.4,0.5 l -1.1,-0.9 0.8,-0.9 c 0.2,-0.2 0.4,-0.4 0.5,-0.6 0.1,-0.2 0.2,-0.3 0.3,-0.4 0.1,-0.1 0.1,-0.2 0.2,-0.3 0,-0.1 0.1,-0.2 0.1,-0.3 0,-0.1 0,-0.2 0.1,-0.3 0,-0.1 0,-0.2 0,-0.3 l 0,-1 -2.5,0 z m -1.8,2.9 c 0,-0.2 0,-0.3 0,-0.4 0,-0.1 0,-0.3 0,-0.4 0,-0.1 0,-0.2 0,-0.4 0,-0.1 0,-0.2 0.1,-0.4 0.3,0 0.5,0.1 0.8,0.1 0.3,0 0.5,0.1 0.8,0.2 0,0.2 -0.1,0.4 -0.1,0.6 0,0.2 0,0.5 0,0.7 l 0,3.4 -1.5,0 0,-3.4 z m 10.8,-4.1 c 0.2,0 0.5,0 0.7,0.1 0.2,0.1 0.4,0.2 0.6,0.3 0.2,0.1 0.3,0.3 0.4,0.6 0.1,0.3 0.2,0.6 0.2,1 l 0,3.9 -1.5,0 0,-3.5 c 0,-0.2 0,-0.4 0,-0.6 0,-0.1 -0.1,-0.3 -0.1,-0.3 -0.1,-0.1 -0.2,-0.1 -0.3,-0.2 -0.1,0 -0.3,0 -0.5,0 l -1.1,0 c -0.1,0.3 -0.1,0.5 -0.1,0.7 0,0.2 0,0.4 0,0.7 l 0,3.3 -1.5,0 0,-3.2 c 0,-0.2 0,-0.5 0,-0.7 0,-0.2 0.1,-0.5 0.1,-0.7 -0.1,0 -0.3,0 -0.4,-0.1 -0.1,0 -0.3,-0.1 -0.5,-0.1 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.2,0.1 0.4,0.1 0.5,0.1 0.1,0 0.3,0.1 0.4,0.1 0.1,0 0.3,0 0.4,0 0.1,0 0.3,0 0.5,0 l 1.8,0 z m 5.1,4.7 c 0.1,0 0.2,0 0.2,0 0.1,0 0.2,0 0.3,0 0.2,0 0.5,0 0.7,-0.1 0.2,0 0.5,-0.1 0.7,-0.2 0.2,-0.1 0.4,-0.2 0.6,-0.4 0.2,-0.2 0.4,-0.4 0.5,-0.7 0.2,-0.4 0.4,-0.8 0.4,-1.2 0.1,-0.4 0.1,-0.8 0.1,-1.2 0,-0.2 0,-0.3 0,-0.5 0,-0.2 0,-0.3 0,-0.5 0.2,0 0.3,-0.1 0.4,-0.1 0.1,0 0.2,-0.1 0.3,-0.1 0.1,0 0.2,0 0.3,-0.1 0.1,0 0.3,0 0.5,-0.1 0,0.2 0.1,0.3 0.1,0.5 0,0.2 0,0.4 0,0.6 0,0.2 0,0.4 0,0.5 0,0.2 0,0.3 0,0.5 -0.2,1.4 -0.7,2.4 -1.5,3.1 -0.8,0.7 -1.9,1 -3.4,1 -0.2,0 -0.5,0 -0.8,0 -0.3,0 -0.5,0 -0.8,-0.1 l -0.3,-3.4 c 0,-0.2 0,-0.4 0,-0.5 0,-0.1 0,-0.3 0,-0.4 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 -0.1,-0.3 0,-0.1 -0.1,-0.2 -0.1,-0.3 0,-0.1 -0.1,-0.2 -0.1,-0.4 0.2,-0.1 0.4,-0.2 0.7,-0.3 0.2,-0.1 0.5,-0.2 0.7,-0.3 0.1,0.2 0.2,0.4 0.2,0.6 0.1,0.2 0.1,0.4 0.1,0.5 0,0.2 0.1,0.4 0.1,0.6 0,0.2 0,0.4 0.1,0.7 l 0.1,2.9 z m 0.6,-2.8 c 0.1,-0.2 0.1,-0.3 0.1,-0.4 0,-0.1 0.1,-0.2 0.1,-0.3 0,-0.1 0,-0.2 0.1,-0.2 0,-0.1 0,-0.2 0,-0.2 0,0 0,-0.1 0,-0.1 0,0 0,-0.1 0,-0.1 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.1 0,-0.2 0.2,-0.1 0.5,-0.1 0.7,-0.2 0.2,-0.1 0.5,-0.1 0.7,-0.2 0,0.2 0.1,0.3 0.1,0.5 0,0.1 0,0.3 0,0.4 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 -0.1,0.4 0,0.1 -0.1,0.3 -0.1,0.4 0,0.1 -0.1,0.3 -0.2,0.5 l -0.4,1 c -0.2,0 -0.3,-0.1 -0.4,-0.1 -0.1,0 -0.2,-0.1 -0.3,-0.1 -0.1,0 -0.2,-0.1 -0.3,-0.1 -0.1,0 -0.2,-0.1 -0.4,-0.2 l 0.4,-0.9 z m 5.8,-1.5 c 0.2,-0.1 0.4,-0.3 0.6,-0.4 0.2,-0.1 0.4,-0.2 0.6,-0.4 0.1,0.1 0.2,0.2 0.2,0.3 0.1,0.1 0.1,0.2 0.2,0.3 0,0.1 0.1,0.2 0.1,0.2 0,0.1 0.1,0.2 0.1,0.3 0.3,-0.3 0.6,-0.6 1,-0.7 0.3,-0.2 0.7,-0.2 1,-0.2 0.2,0 0.5,0 0.7,0.1 0.2,0.1 0.4,0.2 0.6,0.3 0.2,0.1 0.3,0.3 0.4,0.5 0.1,0.2 0.2,0.4 0.3,0.7 0,0.2 0.1,0.4 0.1,0.7 0,0.3 0,0.5 0,0.8 0,0.1 0,0.3 0,0.4 0,0.2 0,0.3 0,0.6 0,0.3 0,0.5 0,0.7 0,0.2 0,0.4 0,0.6 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 l -3,0 0,-1.2 1.5,0 c 0,0 0,-0.1 0,-0.1 0,-0.1 0,-0.1 0,-0.3 0,-0.1 0,-0.3 0,-0.4 0,-0.1 0,-0.4 0,-0.7 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.3 0,-0.3 -0.1,-0.5 -0.3,-0.6 -0.1,-0.1 -0.3,-0.2 -0.6,-0.2 -0.1,0 -0.3,0 -0.4,0.1 -0.1,0.1 -0.3,0.1 -0.4,0.2 -0.1,0.1 -0.2,0.1 -0.3,0.2 -0.1,0.1 -0.2,0.2 -0.2,0.3 -0.1,0.4 -0.1,0.8 -0.2,1.1 0,0.3 -0.1,0.6 -0.1,0.8 0,0.2 -0.1,0.4 -0.1,0.6 0,0.2 -0.1,0.3 -0.1,0.5 0,0.2 0,0.3 -0.1,0.5 0,0.2 -0.1,0.4 -0.1,0.6 l -1.5,0 0.1,-1 c 0,-0.2 0.1,-0.5 0.1,-0.7 0,-0.2 0.1,-0.4 0.1,-0.6 0,-0.2 0.1,-0.4 0.1,-0.6 0,-0.2 0.1,-0.5 0.1,-0.7 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 -0.1,-0.2 0,-0.1 -0.1,-0.2 -0.1,-0.2 0,-0.1 -0.1,-0.2 -0.1,-0.3 l -0.2,-0.6 z"
-       id="path867" />
+       style="fill:#8bceac" />
     <g
-       transform="translate(58.131428,235.04924)"
-       id="g869">
+       id="g869"
+       transform="translate(58.131428,235.04924)">
       <defs
          id="defs871">
         <rect
-           id="SVGID_57_"
-           x="24.700001"
-           y="79.099998"
+           height="1157.5"
            width="554"
-           height="1157.5" />
+           y="79.099998"
+           x="24.700001"
+           id="SVGID_57_" />
       </defs>
       <clipPath
          id="clipPath5441">
         <use
-           height="100%"
-           width="100%"
-           y="0"
-           x="0"
-           style="overflow:visible"
-           xlink:href="#SVGID_57_"
+           id="use5443"
            overflow="visible"
-           id="use5443" />
+           xlink:href="#SVGID_57_"
+           style="overflow:visible"
+           x="0"
+           y="0"
+           width="100%"
+           height="100%" />
       </clipPath>
       <path
-         style="fill:#141132"
-         inkscape:connector-curvature="0"
-         clip-path="url(#SVGID_58_)"
+         id="path877"
          d="m 331.1,139.6 c 0,4.3 -7.8,16.1 -7.8,16.1 0,0 -7.8,-11.8 -7.8,-16.1 0,-4.3 3.5,-7.8 7.8,-7.8 4.3,0 7.8,3.5 7.8,7.8"
-         id="path877" />
+         clip-path="url(#SVGID_58_)"
+         style="fill:#141132" />
     </g>
     <g
-       transform="translate(58.131428,235.04924)"
-       id="g965">
+       id="g965"
+       transform="translate(58.131428,235.04924)">
       <defs
          id="defs967">
         <rect
-           id="SVGID_75_"
-           x="24.700001"
-           y="79.099998"
+           height="1157.5"
            width="554"
-           height="1157.5" />
+           y="79.099998"
+           x="24.700001"
+           id="SVGID_75_" />
       </defs>
       <clipPath
          id="clipPath5449">
         <use
-           height="100%"
-           width="100%"
-           y="0"
-           x="0"
-           style="overflow:visible"
-           xlink:href="#SVGID_75_"
+           id="use5451"
            overflow="visible"
-           id="use5451" />
+           xlink:href="#SVGID_75_"
+           style="overflow:visible"
+           x="0"
+           y="0"
+           width="100%"
+           height="100%" />
       </clipPath>
       <path
-         style="fill:#ffffff"
-         inkscape:connector-curvature="0"
-         clip-path="url(#SVGID_76_)"
+         id="path973"
          d="m 326.6,138.3 c -0.4,0 -0.7,-0.3 -0.7,-0.7 0,-0.4 0.3,-0.7 0.7,-0.7 0.4,0 0.7,0.3 0.7,0.7 0,0.4 -0.3,0.7 -0.7,0.7 m -1.3,1.6 c -0.4,0 -0.7,-0.3 -0.7,-0.7 0,-0.4 0.3,-0.7 0.7,-0.7 0.4,0 0.7,0.3 0.7,0.7 0,0.4 -0.3,0.7 -0.7,0.7 m -2.6,-1.3 c 0,0.2 -0.2,0.4 -0.4,0.4 l -0.9,0 0,0.9 c 0,0.2 -0.2,0.4 -0.4,0.4 l -0.3,0 c -0.2,0 -0.4,-0.2 -0.4,-0.4 l 0,-0.9 -0.9,0 c -0.2,0 -0.4,-0.2 -0.4,-0.4 l 0,-0.3 c 0,-0.2 0.2,-0.4 0.4,-0.4 l 0.9,0 0,-0.9 c 0,-0.2 0.2,-0.4 0.4,-0.4 l 0.3,0 c 0.2,0 0.4,0.2 0.4,0.4 l 0,0.9 0.9,0 c 0.2,0 0.4,0.2 0.4,0.4 l 0,0.3 z m 6.5,0.2 c -0.6,-2.7 -1.4,-3.4 -2,-3.7 -0.8,-0.4 -1.8,-0.2 -2.1,0 -0.4,0.2 -0.6,0.5 -1,0.7 -0.4,0.2 -1,0.2 -1.4,0 -0.3,-0.2 -0.6,-0.5 -1.1,-0.7 -0.5,-0.2 -1.4,-0.5 -2.3,0.1 -0.2,0.1 -1.7,1.4 -2.1,5.2 -0.3,2.4 1,3.1 1,3.1 0.3,0.2 1.1,0.6 2.1,0 0.7,-0.4 1.2,-1.3 1.2,-1.3 0,0 0.2,-0.5 0.6,-0.7 0.2,-0.1 0.6,0 0.6,0 l 1.2,0 c 0,0 0.4,0 0.7,0.1 0.3,0.1 0.4,0.4 0.4,0.4 0,0 0.8,1 1.6,1.6 0.3,0.2 1.7,0.5 2.3,-0.3 0.5,-0.5 0.8,-2.2 0.3,-4.5"
-         id="path973" />
+         clip-path="url(#SVGID_76_)"
+         style="fill:#ffffff" />
     </g>
     <path
-       inkscape:connector-curvature="0"
-       style="fill:#d91378"
+       id="path975"
        d="m 172.03143,460.84924 c 0.2,0 0.5,0 0.7,0.1 0.2,0.1 0.4,0.2 0.6,0.3 0.2,0.1 0.3,0.3 0.4,0.6 0.1,0.3 0.2,0.6 0.2,1 l 0,3.9 -5.5,0 0,-3.2 c 0,-0.2 0,-0.5 0,-0.7 0,-0.2 0.1,-0.5 0.1,-0.7 -0.1,0 -0.3,0 -0.4,-0.1 -0.1,0 -0.3,-0.1 -0.5,-0.1 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.2,0.1 0.4,0.1 0.5,0.1 0.1,0 0.3,0.1 0.4,0.1 0.1,0 0.3,0 0.4,0 0.1,0 0.3,0 0.5,0 l 2.2,0 z m 0.4,4.6 0,-2.3 c 0,-0.2 0,-0.4 0,-0.6 0,-0.1 -0.1,-0.3 -0.1,-0.3 -0.1,-0.1 -0.2,-0.1 -0.3,-0.2 -0.1,0 -0.3,0 -0.5,0 l -1.4,0 c -0.1,0.3 -0.1,0.5 -0.1,0.7 0,0.2 0,0.4 0,0.7 l 0,2 2.4,0 z m 5.5,-4.6 0,5.9 -1.5,0 0,-4.7 -1,0 0,-1.2 2.5,0 z m 2.9,-1.7 0,1.6 3.2,0 c 0,0.1 0,0.2 0.1,0.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 l 0,1.2 c 0,0.4 -0.1,0.9 -0.3,1.3 -0.2,0.4 -0.4,0.8 -0.8,1.2 l -1.4,1.6 -1.1,-0.9 0.6,-0.7 c 0.3,-0.3 0.5,-0.6 0.7,-0.8 0.2,-0.2 0.3,-0.4 0.4,-0.5 0.1,-0.2 0.2,-0.3 0.2,-0.5 0,-0.1 0.1,-0.3 0.1,-0.5 l 0,-1 -3.3,0 0,-2.9 1.6,0 z m 7.4,1.7 0,2.1 c 0,0.2 0,0.4 0,0.5 0,0.1 0,0.3 0,0.4 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 -0.1,0.3 l -1.5,-0.2 c 0,-0.1 0,-0.2 0.1,-0.3 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.4 0,-0.1 0,-0.3 0,-0.5 l 0,-0.7 -1.3,0 0,-1.2 2.8,0 z m 6.7,0.2 0,0.7 -0.3,1.1 c 0,0.2 -0.1,0.3 -0.2,0.5 -0.1,0.1 -0.1,0.3 -0.2,0.4 -0.1,0.1 -0.2,0.3 -0.3,0.4 -0.1,0.1 -0.2,0.2 -0.4,0.4 l 0.9,1.1 c 0,0.2 0,0.3 -0.1,0.5 0,0.2 -0.1,0.4 -0.1,0.5 l -4.8,0 0,-1.2 3.1,0 c -0.4,-0.4 -0.7,-0.8 -1.1,-1.2 -0.4,-0.4 -0.7,-0.8 -1.1,-1.2 -0.2,-0.2 -0.3,-0.3 -0.4,-0.5 -0.1,-0.1 -0.2,-0.3 -0.3,-0.4 -0.1,-0.1 -0.2,-0.3 -0.2,-0.5 -0.1,-0.2 -0.2,-0.3 -0.2,-0.6 0.2,-0.1 0.4,-0.2 0.7,-0.3 0.2,-0.1 0.5,-0.2 0.7,-0.2 0.1,0.2 0.2,0.4 0.2,0.6 0.1,0.2 0.2,0.3 0.2,0.5 0.1,0.1 0.2,0.3 0.3,0.4 0.1,0.1 0.2,0.3 0.4,0.5 l 1,1.1 c 0.1,-0.1 0.1,-0.1 0.2,-0.2 0,-0.1 0.1,-0.1 0.1,-0.2 0,-0.1 0.1,-0.2 0.1,-0.3 0,-0.1 0.1,-0.2 0.1,-0.3 l 0.2,-0.7 -0.8,-0.2 0.3,-1.2 2,0.5 z m 8.6,-0.2 c 0.2,0 0.5,0 0.7,0.1 0.2,0.1 0.4,0.2 0.6,0.3 0.2,0.1 0.3,0.3 0.4,0.6 0.1,0.3 0.2,0.6 0.2,1 l 0,3.9 -1.5,0 0,-3.5 c 0,-0.2 0,-0.4 0,-0.6 0,-0.1 -0.1,-0.3 -0.1,-0.3 -0.1,-0.1 -0.2,-0.1 -0.3,-0.2 -0.1,0 -0.3,0 -0.5,0 l -0.8,0 c -0.1,0.3 -0.2,0.5 -0.3,0.8 0,0.3 -0.1,0.6 -0.1,0.9 0,0.2 0,0.3 0,0.5 0,0.1 0,0.3 0,0.4 0,0.1 0,0.3 0.1,0.4 0,0.1 0.1,0.3 0.1,0.4 l 0.1,0.3 c 0,0.2 0,0.3 -0.1,0.5 0,0.1 0,0.3 -0.1,0.4 l -2.8,0 0,-1.2 1.3,0 c -0.1,-0.3 -0.2,-0.6 -0.2,-0.8 0,-0.3 -0.1,-0.5 -0.1,-0.8 0,-0.2 0,-0.4 0,-0.6 0,-0.2 0.1,-0.4 0.1,-0.6 0,-0.1 0.1,-0.2 0.1,-0.3 0,-0.1 0.1,-0.2 0.1,-0.3 -0.2,0 -0.3,0 -0.5,-0.1 -0.2,0 -0.3,-0.1 -0.6,-0.2 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.2,0.1 0.4,0.1 0.5,0.1 0.1,0 0.3,0.1 0.4,0.1 0.1,0 0.3,0 0.4,0 0.1,0 0.3,0 0.5,0 l 2,0 z m 6.5,0 0,0.8 c 0,0.1 0,0.1 0,0.2 0,0.1 0,0.2 0,0.3 0,0.1 0,0.3 0.1,0.5 0,0.2 0,0.4 0.1,0.7 0,0.3 0.1,0.6 0.1,0.9 0,0.3 0.1,0.7 0.1,1.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.2 0,0.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.2 0,0.3 l -3.8,0 0,-1.2 2.4,0 c 0,-0.1 0,-0.2 0,-0.4 0,-0.2 0,-0.4 -0.1,-0.6 0,-0.2 -0.1,-0.5 -0.1,-0.7 0,-0.3 -0.1,-0.5 -0.1,-0.7 0,-0.2 -0.1,-0.4 -0.1,-0.6 0,-0.2 0,-0.3 0,-0.4 l -1.5,0 0,-1.2 2.9,0 z m 4.4,0 0,2.1 c 0,0.2 0,0.4 0,0.5 0,0.1 0,0.3 0,0.4 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 -0.1,0.3 l -1.5,-0.2 c 0,-0.1 0,-0.2 0.1,-0.3 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.4 0,-0.1 0,-0.3 0,-0.5 l 0,-0.7 -1.3,0 0,-1.2 2.8,0 z m 2.6,-0.4 c 0.3,0.1 0.7,0.2 0.9,0.2 0.3,0.1 0.5,0.1 0.7,0.2 0.2,0.1 0.4,0.1 0.6,0.2 0.2,0.1 0.4,0.1 0.6,0.2 0.2,0.1 0.4,0.2 0.5,0.3 0.1,0.1 0.2,0.2 0.3,0.4 0.1,0.1 0.1,0.3 0.2,0.5 0,0.2 0,0.4 0,0.5 l 0,2.3 c 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 -0.1,0.4 0,0.1 -0.1,0.3 -0.1,0.6 l -5.1,0 0,-1.2 3.8,0 0,-2.3 c 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 -0.1,-0.2 0,-0.1 -0.1,-0.1 -0.1,-0.2 -0.1,0 -0.2,-0.1 -0.3,-0.1 -0.1,-0.1 -0.3,-0.1 -0.5,-0.2 -0.2,-0.1 -0.4,-0.1 -0.6,-0.2 l -0.5,1.1 0.7,0.4 -0.7,1.1 -1.8,-1.1 1.6,-3.2 z"
-       id="path975" />
+       style="fill:#d91378" />
     <g
-       transform="translate(58.131428,235.04924)"
-       id="g977">
+       id="g977"
+       transform="translate(58.131428,235.04924)">
       <defs
          id="defs979">
         <rect
-           id="SVGID_77_"
-           x="24.700001"
-           y="79.099998"
+           height="1157.5"
            width="554"
-           height="1157.5" />
+           y="79.099998"
+           x="24.700001"
+           id="SVGID_77_" />
       </defs>
       <clipPath
          id="clipPath5458">
         <use
-           height="100%"
-           width="100%"
-           y="0"
-           x="0"
-           style="overflow:visible"
-           xlink:href="#SVGID_77_"
+           id="use5460"
            overflow="visible"
-           id="use5460" />
+           xlink:href="#SVGID_77_"
+           style="overflow:visible"
+           x="0"
+           y="0"
+           width="100%"
+           height="100%" />
       </clipPath>
       <path
-         style="fill:#141132"
-         inkscape:connector-curvature="0"
-         clip-path="url(#SVGID_78_)"
+         id="path985"
          d="m 144.3,244.9 c 0,4.3 -7.8,16.1 -7.8,16.1 0,0 -7.8,-11.8 -7.8,-16.1 0,-4.3 3.5,-7.8 7.8,-7.8 4.3,0.1 7.8,3.5 7.8,7.8"
-         id="path985" />
-      <path
-         style="fill:#ffffff"
-         inkscape:connector-curvature="0"
          clip-path="url(#SVGID_78_)"
+         style="fill:#141132" />
+      <path
+         id="path987"
          d="m 140.3,243.5 c -0.2,0 -0.4,-0.2 -0.4,-0.4 0,-0.2 0.2,-0.4 0.4,-0.4 0.2,0 0.4,0.2 0.4,0.4 -0.1,0.2 -0.2,0.4 -0.4,0.4 m -3.8,3.9 c -1.4,0 -2.6,-1.2 -2.6,-2.6 0,-1.4 1.2,-2.6 2.6,-2.6 1.4,0 2.6,1.2 2.6,2.6 0,1.4 -1.2,2.6 -2.6,2.6 m 4.1,-5.7 -1.2,0 c -0.2,0 -0.4,-0.1 -0.4,-0.3 l -0.3,-1 c -0.1,-0.2 -0.2,-0.3 -0.4,-0.3 l -3.5,0 c -0.2,0 -0.4,0.1 -0.4,0.3 l -0.3,1 c -0.1,0.2 -0.2,0.3 -0.4,0.3 l -1.2,0 c -0.6,0 -1,0.5 -1,1 l 0,4.7 c 0,0.6 0.5,1 1,1 l 8.3,0 c 0.6,0 1,-0.5 1,-1 l 0,-4.7 c -0.1,-0.5 -0.6,-1 -1.2,-1 m -4.1,1.5 c -0.9,0 -1.6,0.7 -1.6,1.6 0,0.9 0.7,1.6 1.6,1.6 0.9,0 1.6,-0.7 1.6,-1.6 0,-0.9 -0.7,-1.6 -1.6,-1.6"
-         id="path987" />
+         clip-path="url(#SVGID_78_)"
+         style="fill:#ffffff" />
     </g>
     <path
-       inkscape:connector-curvature="0"
-       style="fill:#141132"
+       id="path989"
        d="m 282.63143,384.44924 c 0.2,0 0.5,0 0.7,0.1 0.2,0.1 0.4,0.2 0.6,0.3 0.2,0.1 0.3,0.3 0.4,0.6 0.1,0.3 0.2,0.6 0.2,1 l 0,3.9 -5.4,0 0,-3.3 c 0,-0.2 0,-0.5 0,-0.7 0,-0.2 0.1,-0.5 0.1,-0.7 -0.1,0 -0.3,0 -0.4,-0.1 -0.1,0 -0.3,-0.1 -0.5,-0.1 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.2,0.1 0.4,0.1 0.5,0.1 0.1,0 0.3,0.1 0.4,0.1 0.1,0 0.3,0 0.4,0 0.1,0 0.3,0 0.5,0 l 2.1,0 z m 0.4,4.6 0,-2.3 c 0,-0.2 0,-0.4 0,-0.6 0,-0.1 -0.1,-0.3 -0.1,-0.3 -0.1,-0.1 -0.2,-0.1 -0.3,-0.2 -0.1,0 -0.3,0 -0.5,0 l -1.3,0 c -0.1,0.3 -0.1,0.5 -0.1,0.7 0,0.2 0,0.4 0,0.7 l 0,2 2.3,0 z m 5.6,-4.6 0,2.1 c 0,0.2 0,0.4 0,0.5 0,0.1 0,0.3 0,0.4 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 -0.1,0.3 l -1.5,-0.2 c 0,-0.1 0,-0.2 0.1,-0.3 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.4 0,-0.1 0,-0.3 0,-0.5 l 0,-0.8 -1.3,0 0,-1.2 2.8,0 z m 4.6,0 0,0.8 c 0,0.1 0,0.1 0,0.2 0,0.1 0,0.2 0,0.3 0,0.1 0,0.3 0.1,0.5 0,0.2 0,0.4 0.1,0.7 0,0.3 0.1,0.6 0.1,0.9 0,0.3 0.1,0.7 0.1,1.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.2 0,0.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.2 0,0.3 l -3.8,0 0,-1.3 2.4,0 c 0,-0.1 0,-0.2 0,-0.4 0,-0.2 0,-0.4 -0.1,-0.6 0,-0.2 -0.1,-0.5 -0.1,-0.7 0,-0.3 -0.1,-0.5 -0.1,-0.7 0,-0.2 -0.1,-0.4 -0.1,-0.6 0,-0.2 0,-0.3 0,-0.4 l -1.4,0 0,-1.2 2.8,0 z m 3.7,1.2 c -0.2,0 -0.4,0 -0.5,0 -0.1,0 -0.3,0 -0.4,0 -0.1,0 -0.3,0 -0.4,-0.1 -0.1,0 -0.3,-0.1 -0.5,-0.1 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.2,0.1 0.4,0.1 0.5,0.1 0.1,0 0.3,0.1 0.4,0.1 0.1,0 0.3,0 0.4,0 0.1,0 0.3,0 0.5,0 l 0.5,0 c 0.2,0 0.5,0 0.7,0.1 0.2,0.1 0.4,0.2 0.6,0.3 0.2,0.2 0.3,0.4 0.4,0.6 0.1,0.3 0.2,0.6 0.2,1 0,0.2 0,0.4 0,0.6 0,0.2 0,0.4 0,0.6 0,0.2 0,0.5 0,0.7 0,0.2 0,0.5 0,0.8 0,0.1 0,0.2 0,0.2 0,0.1 0,0.2 0,0.2 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 -0.1,0.4 l -4.9,0 0,-1.2 3.5,0 c 0,-0.2 0,-0.4 0,-0.6 0,-0.2 0,-0.4 0,-0.6 0,-0.2 0,-0.4 0,-0.6 0,-0.2 0,-0.4 0,-0.6 0,-0.2 0,-0.4 0,-0.6 0,-0.1 -0.1,-0.3 -0.1,-0.3 -0.1,-0.1 -0.2,-0.1 -0.3,-0.2 -0.1,0 -0.3,0 -0.5,0 l -0.4,0 z m 6.8,-1.2 0,5.8 -1.6,0 0,-4.6 -1,0 0,-1.2 2.6,0 z m 3.1,1.2 c -0.2,0 -0.4,0 -0.5,0 -0.1,0 -0.3,0 -0.4,0 -0.1,0 -0.3,0 -0.4,-0.1 -0.1,0 -0.3,-0.1 -0.5,-0.1 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.2,0.1 0.4,0.1 0.5,0.1 0.1,0 0.3,0.1 0.4,0.1 0.1,0 0.3,0 0.4,0 0.1,0 0.3,0 0.5,0 l 3.2,0 0,1.2 -1.1,0 0,4.6 -1.5,0 0,-4.6 -1,0 z m 11.6,-1.2 c 0.2,0 0.5,0 0.7,0.1 0.2,0.1 0.4,0.2 0.6,0.3 0.2,0.1 0.3,0.3 0.4,0.6 0.1,0.3 0.2,0.6 0.2,1 l 0,3.9 -5.5,0 0,-3.3 c 0,-0.2 0,-0.5 0,-0.7 0,-0.2 0.1,-0.5 0.1,-0.7 -0.1,0 -0.3,0 -0.4,-0.1 -0.1,0 -0.3,-0.1 -0.5,-0.1 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.2,0.1 0.4,0.1 0.5,0.1 0.1,0 0.3,0.1 0.4,0.1 0.1,0 0.3,0 0.4,0 0.1,0 0.3,0 0.5,0 l 2.2,0 z m 0.4,4.6 0,-2.3 c 0,-0.2 0,-0.4 0,-0.6 0,-0.1 -0.1,-0.3 -0.1,-0.3 -0.1,-0.1 -0.2,-0.1 -0.3,-0.2 -0.1,0 -0.3,0 -0.5,0 l -1.3,0 c -0.1,0.3 -0.1,0.5 -0.1,0.7 0,0.2 0,0.4 0,0.7 l 0,2 2.3,0 z m 6.8,-4.6 c 0.2,0 0.5,0 0.7,0.1 0.2,0.1 0.4,0.2 0.6,0.3 0.2,0.1 0.3,0.3 0.4,0.6 0.1,0.3 0.2,0.6 0.2,1 l 0,3.9 -1.5,0 0,-3.5 c 0,-0.2 0,-0.4 0,-0.6 0,-0.1 -0.1,-0.3 -0.1,-0.3 -0.1,-0.1 -0.2,-0.1 -0.3,-0.2 -0.1,0 -0.3,0 -0.5,0 l -1.1,0 c -0.1,0.3 -0.1,0.5 -0.1,0.7 0,0.2 0,0.4 0,0.7 l 0,3.3 -1.5,0 0,-3.4 c 0,-0.2 0,-0.5 0,-0.7 0,-0.2 0.1,-0.5 0.1,-0.7 -0.1,0 -0.3,0 -0.4,-0.1 -0.1,0 -0.3,-0.1 -0.5,-0.1 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.2,0.1 0.4,0.1 0.5,0.1 0.1,0 0.3,0.1 0.4,0.1 0.1,0 0.3,0 0.4,0 0.1,0 0.3,0 0.5,0 l 1.8,0 z m 7.3,0 c 0.2,0 0.5,0 0.7,0.1 0.2,0.1 0.4,0.2 0.6,0.3 0.2,0.1 0.3,0.3 0.4,0.6 0.1,0.3 0.2,0.6 0.2,1 l 0,3.9 -1.5,0 0,-3.5 c 0,-0.2 0,-0.4 0,-0.6 0,-0.1 -0.1,-0.3 -0.1,-0.3 -0.1,-0.1 -0.2,-0.1 -0.3,-0.2 -0.1,0 -0.3,0 -0.5,0 l -0.8,0 c -0.1,0.3 -0.2,0.5 -0.3,0.8 0,0.3 -0.1,0.6 -0.1,0.9 0,0.2 0,0.3 0,0.5 0,0.1 0,0.3 0,0.4 0,0.1 0,0.3 0.1,0.4 0,0.1 0.1,0.3 0.1,0.4 l 0.1,0.3 c 0,0.2 0,0.3 -0.1,0.5 0,0.1 0,0.3 -0.1,0.4 l -2.8,0 0,-1.3 1.3,0 c -0.1,-0.3 -0.2,-0.6 -0.2,-0.8 0,-0.3 -0.1,-0.5 -0.1,-0.8 0,-0.2 0,-0.4 0,-0.6 0,-0.2 0.1,-0.4 0.1,-0.6 0,-0.1 0.1,-0.2 0.1,-0.3 0,-0.1 0.1,-0.2 0.1,-0.3 -0.2,0 -0.3,0 -0.5,-0.1 -0.2,0 -0.3,-0.1 -0.6,-0.2 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.2,0.1 0.4,0.1 0.5,0.1 0.1,0 0.3,0.1 0.4,0.1 0.1,0 0.3,0 0.4,0 0.1,0 0.3,0 0.5,0 l 2,0 z m 3.3,0.4 c 0.2,-0.1 0.4,-0.3 0.6,-0.4 0.2,-0.1 0.4,-0.2 0.6,-0.4 0.1,0.1 0.2,0.2 0.2,0.3 0.1,0.1 0.1,0.2 0.2,0.3 0,0.1 0.1,0.2 0.1,0.2 0,0.1 0.1,0.2 0.1,0.3 0.3,-0.3 0.6,-0.6 1,-0.7 0.3,-0.2 0.7,-0.2 1,-0.2 0.2,0 0.5,0 0.7,0.1 0.2,0.1 0.4,0.2 0.6,0.3 0.2,0.1 0.3,0.3 0.4,0.5 0.1,0.2 0.2,0.4 0.3,0.7 0,0.2 0.1,0.4 0.1,0.7 0,0.3 0,0.5 0,0.8 0,0.1 0,0.3 0,0.5 0,0.2 0,0.3 0,0.6 0,0.3 0,0.5 0,0.7 0,0.2 0,0.4 0,0.6 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 l -3,0 0,-1.3 1.5,0 c 0,0 0,-0.1 0,-0.1 0,-0.1 0,-0.1 0,-0.3 0,-0.1 0,-0.3 0,-0.4 0,-0.2 0,-0.4 0,-0.7 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.3 0,-0.3 -0.1,-0.5 -0.3,-0.6 -0.1,-0.1 -0.3,-0.2 -0.6,-0.2 -0.1,0 -0.3,0 -0.4,0.1 -0.1,0.1 -0.3,0.1 -0.4,0.2 -0.1,0.1 -0.2,0.1 -0.3,0.2 -0.1,0.1 -0.2,0.2 -0.2,0.3 -0.1,0.4 -0.1,0.8 -0.2,1.1 0,0.3 -0.1,0.6 -0.1,0.8 0,0.2 -0.1,0.4 -0.1,0.6 0,0.2 -0.1,0.3 -0.1,0.5 0,0.2 0,0.3 -0.1,0.5 0,0.2 -0.1,0.4 -0.1,0.6 l -1.5,0 0.1,-1 c 0,-0.2 0.1,-0.5 0.1,-0.7 0,-0.2 0.1,-0.4 0.1,-0.6 0,-0.2 0.1,-0.4 0.1,-0.6 0,-0.2 0.1,-0.4 0.1,-0.7 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 -0.1,-0.2 0,-0.1 -0.1,-0.2 -0.1,-0.2 0,-0.1 -0.1,-0.2 -0.1,-0.3 l -0.2,-0.6 z"
-       id="path989" />
+       style="fill:#141132" />
     <g
-       transform="translate(58.131428,235.04924)"
-       id="g991">
+       id="g991"
+       transform="translate(58.131428,235.04924)">
       <defs
          id="defs993">
         <rect
-           id="SVGID_79_"
-           x="24.700001"
-           y="79.099998"
+           height="1157.5"
            width="554"
-           height="1157.5" />
+           y="79.099998"
+           x="24.700001"
+           id="SVGID_79_" />
       </defs>
       <clipPath
          id="clipPath5468">
         <use
-           height="100%"
-           width="100%"
-           y="0"
-           x="0"
-           style="overflow:visible"
-           xlink:href="#SVGID_79_"
+           id="use5470"
            overflow="visible"
-           id="use5470" />
+           xlink:href="#SVGID_79_"
+           style="overflow:visible"
+           x="0"
+           y="0"
+           width="100%"
+           height="100%" />
       </clipPath>
       <path
-         style="fill:#eb788b"
-         inkscape:connector-curvature="0"
-         clip-path="url(#SVGID_80_)"
+         id="path999"
          d="m 257.7,165 c 0,2.7 -4.8,10 -4.8,10 0,0 -4.8,-7.3 -4.8,-10 0,-2.7 2.2,-4.8 4.8,-4.8 2.6,0 4.8,2.1 4.8,4.8"
-         id="path999" />
+         clip-path="url(#SVGID_80_)"
+         style="fill:#eb788b" />
     </g>
     <path
-       inkscape:connector-curvature="0"
-       style="fill:#141132"
+       id="path1001"
        d="m 259.43143,492.44924 c 0.2,0 0.5,0 0.7,0.1 0.2,0.1 0.4,0.2 0.6,0.3 0.2,0.1 0.3,0.3 0.4,0.6 0.1,0.3 0.2,0.6 0.2,1 l 0,3.9 -5.5,0 0,-3.3 c 0,-0.2 0,-0.5 0,-0.7 0,-0.2 0.1,-0.5 0.1,-0.7 -0.1,0 -0.3,0 -0.4,-0.1 -0.1,0 -0.3,-0.1 -0.5,-0.1 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.2,0.1 0.4,0.1 0.5,0.1 0.1,0 0.3,0.1 0.4,0.1 0.1,0 0.3,0 0.4,0 0.1,0 0.3,0 0.5,0 l 2.2,0 z m 0.4,4.6 0,-2.3 c 0,-0.2 0,-0.4 0,-0.6 0,-0.1 -0.1,-0.3 -0.1,-0.3 -0.1,-0.1 -0.2,-0.1 -0.3,-0.2 -0.1,0 -0.3,0 -0.5,0 l -1.3,0 c -0.1,0.3 -0.1,0.5 -0.1,0.7 0,0.2 0,0.4 0,0.7 l 0,2 2.3,0 z m 5.6,-4.6 0,2.1 c 0,0.2 0,0.4 0,0.5 0,0.1 0,0.3 0,0.4 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 -0.1,0.3 l -1.5,-0.2 c 0,-0.1 0,-0.2 0.1,-0.3 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.4 0,-0.1 0,-0.3 0,-0.5 l 0,-0.8 -1.3,0 0,-1.2 2.8,0 z m 4.6,0 0,0.8 c 0,0.1 0,0.1 0,0.2 0,0.1 0,0.2 0,0.3 0,0.1 0,0.3 0.1,0.5 0,0.2 0,0.4 0.1,0.7 0,0.3 0.1,0.6 0.1,0.9 0,0.3 0.1,0.7 0.1,1.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.2 0,0.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.2 0,0.3 l -3.8,0 0,-1.3 2.4,0 c 0,-0.1 0,-0.2 0,-0.4 0,-0.2 0,-0.4 -0.1,-0.6 0,-0.2 -0.1,-0.5 -0.1,-0.7 0,-0.3 -0.1,-0.5 -0.1,-0.7 0,-0.2 -0.1,-0.4 -0.1,-0.6 0,-0.2 0,-0.3 0,-0.4 l -1.5,0 0,-1.2 2.9,0 z m 3.7,1.2 c -0.2,0 -0.4,0 -0.5,0 -0.1,0 -0.3,0 -0.4,0 -0.1,0 -0.3,0 -0.4,-0.1 -0.1,0 -0.3,-0.1 -0.5,-0.1 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.2,0.1 0.4,0.1 0.5,0.1 0.1,0 0.3,0.1 0.4,0.1 0.1,0 0.3,0 0.4,0 0.1,0 0.3,0 0.5,0 l 0.5,0 c 0.2,0 0.5,0 0.7,0.1 0.2,0.1 0.4,0.2 0.6,0.3 0.2,0.1 0.3,0.4 0.4,0.6 0.1,0.3 0.2,0.6 0.2,1 0,0.2 0,0.4 0,0.6 0,0.2 0,0.4 0,0.6 0,0.2 0,0.5 0,0.7 0,0.2 0,0.5 0,0.8 0,0.1 0,0.2 0,0.2 0,0.1 0,0.2 0,0.2 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 -0.1,0.4 l -4.9,0 0,-1.2 3.5,0 c 0,-0.2 0,-0.4 0,-0.6 0,-0.2 0,-0.4 0,-0.6 0,-0.2 0,-0.4 0,-0.6 0,-0.2 0,-0.4 0,-0.6 0,-0.2 0,-0.4 0,-0.6 0,-0.1 -0.1,-0.3 -0.1,-0.3 -0.1,-0.1 -0.2,-0.1 -0.3,-0.2 -0.1,0 -0.3,0 -0.5,0 l -0.4,0 z m 6.7,-1.2 0,5.9 -1.5,0 0,-4.6 -1,0 0,-1.2 2.5,0 z m 3.2,1.2 c -0.2,0 -0.4,0 -0.5,0 -0.1,0 -0.3,0 -0.4,0 -0.1,0 -0.3,0 -0.4,-0.1 -0.1,0 -0.3,-0.1 -0.5,-0.1 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.2,0.1 0.4,0.1 0.5,0.1 0.1,0 0.3,0.1 0.4,0.1 0.1,0 0.3,0 0.4,0 0.1,0 0.3,0 0.5,0 l 3.2,0 0,1.2 -1.1,0 0,4.6 -1.5,0 0,-4.6 -1,0 z m 11.6,-1.2 c 0.2,0 0.5,0 0.7,0.1 0.2,0.1 0.4,0.2 0.6,0.3 0.2,0.1 0.3,0.3 0.4,0.6 0.1,0.3 0.2,0.6 0.2,1 l 0,3.9 -5.5,0 0,-3.3 c 0,-0.2 0,-0.5 0,-0.7 0,-0.2 0.1,-0.5 0.1,-0.7 -0.1,0 -0.3,0 -0.4,-0.1 -0.1,0 -0.3,-0.1 -0.5,-0.1 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.2,0.1 0.4,0.1 0.5,0.1 0.1,0 0.3,0.1 0.4,0.1 0.1,0 0.3,0 0.4,0 0.1,0 0.3,0 0.5,0 l 2.2,0 z m 0.4,4.6 0,-2.3 c 0,-0.2 0,-0.4 0,-0.6 0,-0.1 -0.1,-0.3 -0.1,-0.3 -0.1,-0.1 -0.2,-0.1 -0.3,-0.2 -0.1,0 -0.3,0 -0.5,0 l -1.3,0 c -0.1,0.3 -0.1,0.5 -0.1,0.7 0,0.2 0,0.4 0,0.7 l 0,2 2.3,0 z m 6.8,-4.6 c 0.2,0 0.5,0 0.7,0.1 0.2,0.1 0.4,0.2 0.6,0.3 0.2,0.1 0.3,0.3 0.4,0.6 0.1,0.3 0.2,0.6 0.2,1 l 0,3.9 -1.5,0 0,-3.5 c 0,-0.2 0,-0.4 0,-0.6 0,-0.1 -0.1,-0.3 -0.1,-0.3 -0.1,-0.1 -0.2,-0.1 -0.3,-0.2 -0.1,0 -0.3,0 -0.5,0 l -1.1,0 c -0.1,0.3 -0.1,0.5 -0.1,0.7 0,0.2 0,0.4 0,0.7 l 0,3.3 -1.5,0 0,-3.4 c 0,-0.2 0,-0.5 0,-0.7 0,-0.2 0.1,-0.5 0.1,-0.7 -0.1,0 -0.3,0 -0.4,-0.1 -0.1,0 -0.3,-0.1 -0.5,-0.1 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.2,0.1 0.4,0.1 0.5,0.1 0.1,0 0.3,0.1 0.4,0.1 0.1,0 0.3,0 0.4,0 0.1,0 0.3,0 0.5,0 l 1.8,0 z m 7.3,0 c 0.2,0 0.5,0 0.7,0.1 0.2,0.1 0.4,0.2 0.6,0.3 0.2,0.1 0.3,0.3 0.4,0.6 0.1,0.3 0.2,0.6 0.2,1 l 0,3.9 -1.5,0 0,-3.5 c 0,-0.2 0,-0.4 0,-0.6 0,-0.1 -0.1,-0.3 -0.1,-0.3 -0.1,-0.1 -0.2,-0.1 -0.3,-0.2 -0.1,0 -0.3,0 -0.5,0 l -0.8,0 c -0.1,0.3 -0.2,0.5 -0.3,0.8 0,0.3 -0.1,0.6 -0.1,0.9 0,0.2 0,0.3 0,0.5 0,0.1 0,0.3 0,0.4 0,0.1 0,0.3 0.1,0.4 0,0.1 0.1,0.3 0.1,0.4 l 0.1,0.3 c 0,0.2 0,0.3 -0.1,0.5 0,0.1 0,0.3 -0.1,0.4 l -2.8,0 0,-1.3 1.3,0 c -0.1,-0.3 -0.2,-0.6 -0.2,-0.8 0,-0.3 -0.1,-0.5 -0.1,-0.8 0,-0.2 0,-0.4 0,-0.6 0,-0.2 0.1,-0.4 0.1,-0.6 0,-0.1 0.1,-0.2 0.1,-0.3 0,-0.1 0.1,-0.2 0.1,-0.3 -0.2,0 -0.3,0 -0.5,-0.1 -0.2,0 -0.3,-0.1 -0.6,-0.2 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.2,0.1 0.4,0.1 0.5,0.1 0.1,0 0.3,0.1 0.4,0.1 0.1,0 0.3,0 0.4,0 0.1,0 0.3,0 0.5,0 l 2,0 z m 3.2,0.4 c 0.2,-0.1 0.4,-0.3 0.6,-0.4 0.2,-0.1 0.4,-0.2 0.6,-0.4 0.1,0.1 0.2,0.2 0.2,0.3 0.1,0.1 0.1,0.2 0.2,0.3 0,0.1 0.1,0.2 0.1,0.2 0,0.1 0.1,0.2 0.1,0.3 0.3,-0.3 0.6,-0.6 1,-0.7 0.3,-0.2 0.7,-0.2 1,-0.2 0.2,0 0.5,0 0.7,0.1 0.2,0.1 0.4,0.2 0.6,0.3 0.2,0.1 0.3,0.3 0.4,0.5 0.1,0.2 0.2,0.4 0.3,0.7 0,0.2 0.1,0.4 0.1,0.7 0,0.3 0,0.5 0,0.8 0,0.1 0,0.3 0,0.4 0,0.2 0,0.3 0,0.6 0,0.3 0,0.5 0,0.7 0,0.2 0,0.4 0,0.6 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 l -3,0 0,-1.2 1.5,0 c 0,0 0,-0.1 0,-0.1 0,-0.1 0,-0.1 0,-0.3 0,-0.1 0,-0.3 0,-0.4 0,-0.1 0,-0.4 0,-0.7 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.3 0,-0.3 -0.1,-0.5 -0.3,-0.6 -0.1,-0.1 -0.3,-0.2 -0.6,-0.2 -0.1,0 -0.3,0 -0.4,0.1 -0.1,0.1 -0.3,0.1 -0.4,0.2 -0.1,0.1 -0.2,0.1 -0.3,0.2 -0.1,0.1 -0.2,0.2 -0.2,0.3 -0.1,0.4 -0.1,0.8 -0.2,1.1 0,0.3 -0.1,0.6 -0.1,0.8 0,0.2 -0.1,0.4 -0.1,0.6 0,0.2 -0.1,0.3 -0.1,0.5 0,0.2 0,0.3 -0.1,0.5 0,0.2 -0.1,0.4 -0.1,0.6 l -1.5,0 0.1,-1 c 0,-0.2 0.1,-0.5 0.1,-0.7 0,-0.2 0.1,-0.4 0.1,-0.6 0,-0.2 0.1,-0.4 0.1,-0.6 0,-0.2 0.1,-0.5 0.1,-0.7 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.1 0,-0.2 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 -0.1,-0.2 0,-0.1 -0.1,-0.2 -0.1,-0.2 0,-0.1 -0.1,-0.2 -0.1,-0.3 l -0.2,-0.6 z"
-       id="path1001" />
+       style="fill:#141132" />
     <g
-       transform="translate(58.131428,235.04924)"
-       id="g1003">
+       id="g1003"
+       transform="translate(58.131428,235.04924)">
       <defs
          id="defs1005">
         <rect
-           id="SVGID_81_"
-           x="24.700001"
-           y="79.099998"
+           height="1157.5"
            width="554"
-           height="1157.5" />
+           y="79.099998"
+           x="24.700001"
+           id="SVGID_81_" />
       </defs>
       <clipPath
          id="clipPath5477">
         <use
-           height="100%"
-           width="100%"
-           y="0"
-           x="0"
-           style="overflow:visible"
-           xlink:href="#SVGID_81_"
+           id="use5479"
            overflow="visible"
-           id="use5479" />
+           xlink:href="#SVGID_81_"
+           style="overflow:visible"
+           x="0"
+           y="0"
+           width="100%"
+           height="100%" />
       </clipPath>
       <path
-         style="fill:#f7d786"
-         inkscape:connector-curvature="0"
-         clip-path="url(#SVGID_82_)"
+         id="path1011"
          d="m 236.3,271.6 c 0,3.1 -5.6,11.7 -5.6,11.7 0,0 -5.6,-8.5 -5.6,-11.7 0,-3.1 2.5,-5.6 5.6,-5.6 3.1,0 5.6,2.5 5.6,5.6"
-         id="path1011" />
+         clip-path="url(#SVGID_82_)"
+         style="fill:#f7d786" />
+    </g>
+    <g
+       id="g4448">
+      <rect
+         id="rect769"
+         height="13"
+         width="71.599998"
+         y="416.14215"
+         x="176.48735"
+         style="fill:#141132" />
+      <path
+         id="path771"
+         d="m 182.5874,420.8421 0,7.6 -1.5,0 0,-6.4 -1.2,0 0,-1.2 2.7,0 z m 4,0 0,5.8 -1.5,0 0,-4.6 -1,0 0,-1.2 2.5,0 z m 7,2 c -0.1,0.2 -0.1,0.4 -0.2,0.6 -0.1,0.2 -0.1,0.4 -0.2,0.5 -0.1,0.1 -0.2,0.3 -0.3,0.4 -0.1,0.1 -0.3,0.3 -0.4,0.4 l 1.2,1.4 -1,0.9 -2.9,-3.4 c -0.1,0.1 -0.1,0.2 -0.1,0.4 0,0.2 -0.1,0.3 -0.1,0.5 0,0.2 0,0.4 0,0.6 0,0.2 0,0.4 0,0.5 0,0.1 0,0.1 0,0.2 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 l -1.4,0 c 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.3 0,-0.4 0,-0.1 0,-0.3 0,-0.5 0,-0.2 0,-0.4 0,-0.6 0,-0.2 0,-0.4 0,-0.6 0,-0.2 0.1,-0.4 0.1,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.5 0.1,-0.2 0.2,-0.3 0.4,-0.5 -0.1,-0.1 -0.2,-0.2 -0.3,-0.4 -0.1,-0.1 -0.1,-0.2 -0.2,-0.4 -0.1,-0.1 -0.1,-0.3 -0.2,-0.4 -0.1,-0.1 -0.1,-0.3 -0.2,-0.5 0.2,-0.1 0.4,-0.2 0.7,-0.3 0.2,-0.1 0.5,-0.2 0.7,-0.2 0.1,0.2 0.2,0.4 0.2,0.6 0.1,0.2 0.2,0.3 0.2,0.5 0.1,0.1 0.2,0.3 0.3,0.4 0.1,0.1 0.2,0.3 0.4,0.5 l 1.1,1.2 c 0.1,-0.1 0.2,-0.2 0.2,-0.3 0.1,-0.1 0.1,-0.3 0.2,-0.4 0,-0.1 0,-0.1 0.1,-0.2 0,-0.1 0,-0.2 0.1,-0.2 l 0.1,-0.7 -0.8,-0.1 0.2,-1.2 2.1,0.4 0,0.7 -0.2,1.1 z m 6.6,0.2 0,1.1 -4.6,0 0,-1.1 4.6,0 z m 3.7,-1 c -0.2,0 -0.4,0 -0.5,0 -0.1,0 -0.3,0 -0.4,0 -0.1,0 -0.3,0 -0.4,-0.1 -0.1,0 -0.3,-0.1 -0.5,-0.1 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.2,0 0.3,0.1 0.5,0.1 0.1,0 0.2,0.1 0.4,0.1 0.1,0 0.2,0 0.4,0 0.1,0 0.3,0 0.4,0 l 0.2,0 3.3,0 c 0,0.1 0,0.1 0.1,0.2 0,0.1 0,0.1 0,0.2 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 l 0,1.2 c 0,0.2 0,0.4 0,0.6 0,0.2 -0.1,0.3 -0.1,0.5 0,0.2 -0.1,0.3 -0.2,0.5 -0.1,0.1 -0.2,0.3 -0.3,0.5 -0.1,0.1 -0.2,0.3 -0.3,0.5 -0.1,0.2 -0.3,0.4 -0.5,0.6 -0.2,0.2 -0.3,0.4 -0.5,0.6 -0.2,0.2 -0.3,0.3 -0.4,0.5 l -1.1,-0.9 0.8,-0.9 c 0.2,-0.2 0.4,-0.4 0.5,-0.6 0.1,-0.2 0.2,-0.3 0.3,-0.4 0.1,-0.1 0.1,-0.2 0.2,-0.3 0,-0.1 0.1,-0.2 0.1,-0.3 0,-0.1 0,-0.2 0.1,-0.3 0,-0.1 0,-0.2 0,-0.3 l 0,-1 -2.5,0 z m -1.7,3 c 0,-0.2 0,-0.3 0,-0.4 0,-0.1 0,-0.3 0,-0.4 0,-0.1 0,-0.2 0,-0.4 0,-0.1 0,-0.2 0.1,-0.4 0.3,0 0.5,0.1 0.8,0.1 0.3,0 0.5,0.1 0.8,0.2 0,0.2 -0.1,0.4 -0.1,0.6 0,0.2 0,0.5 0,0.7 l 0,3.4 -1.6,0 0,-3.4 z m 9.4,-4.2 0,5.8 -1.5,0 0,-4.6 -1,0 0,-1.2 2.5,0 z m 4.1,0 0,5.8 -1.5,0 0,-4.6 -1,0 0,-1.2 2.5,0 z m 10.2,2 c -0.1,0.2 -0.1,0.4 -0.2,0.6 -0.1,0.2 -0.1,0.4 -0.2,0.5 -0.1,0.1 -0.2,0.3 -0.3,0.4 -0.1,0.1 -0.3,0.3 -0.4,0.4 l 1.2,1.4 -1,0.9 -2.9,-3.4 c -0.1,0.1 -0.1,0.2 -0.1,0.4 0,0.2 -0.1,0.3 -0.1,0.5 0,0.2 0,0.4 0,0.6 0,0.2 0,0.4 0,0.5 0,0.1 0,0.1 0,0.2 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 0,0.3 l -1.4,0 c 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.3 0,-0.4 0,-0.1 0,-0.3 0,-0.5 0,-0.2 0,-0.4 0,-0.6 0,-0.2 0,-0.4 0,-0.6 0,-0.2 0.1,-0.4 0.1,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.5 0.1,-0.2 0.2,-0.3 0.4,-0.5 -0.1,-0.1 -0.2,-0.2 -0.3,-0.4 -0.1,-0.1 -0.1,-0.2 -0.2,-0.4 -0.1,-0.1 -0.1,-0.3 -0.2,-0.4 -0.1,-0.1 -0.1,-0.3 -0.2,-0.5 0.2,-0.1 0.4,-0.2 0.7,-0.3 0.2,-0.1 0.5,-0.2 0.7,-0.2 0.1,0.2 0.2,0.4 0.2,0.6 0.1,0.2 0.2,0.3 0.2,0.5 0.1,0.1 0.2,0.3 0.3,0.4 0.1,0.1 0.2,0.3 0.4,0.5 l 1.1,1.2 c 0.1,-0.1 0.2,-0.2 0.2,-0.3 0.1,-0.1 0.1,-0.3 0.2,-0.4 0,-0.1 0,-0.1 0.1,-0.2 0,-0.1 0,-0.2 0.1,-0.2 l 0.1,-0.7 -0.8,-0.1 0.2,-1.2 2.1,0.4 0,0.7 -0.2,1.1 z m 4.2,-2 0,5.8 -1.5,0 0,-4.6 -1,0 0,-1.2 2.5,0 z m 3.2,1.2 c -0.2,0 -0.4,0 -0.5,0 -0.1,0 -0.3,0 -0.4,0 -0.1,0 -0.3,0 -0.4,-0.1 -0.1,0 -0.3,-0.1 -0.5,-0.1 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.1,-0.2 0.1,-0.4 0.2,-0.6 0.2,0.1 0.4,0.1 0.5,0.1 0.1,0 0.3,0.1 0.4,0.1 0.1,0 0.3,0 0.4,0 0.1,0 0.3,0 0.5,0 l 3.2,0 0,1.2 -1.1,0 0,4.6 -1.6,0 0,-4.6 -0.9,0 z m 7.4,-1.2 0,2.1 c 0,0.2 0,0.4 0,0.5 0,0.1 0,0.3 0,0.4 0,0.1 0,0.2 0,0.3 0,0.1 0,0.2 -0.1,0.3 l -1.5,-0.2 c 0,-0.1 0,-0.2 0.1,-0.3 0,-0.1 0,-0.2 0,-0.3 0,-0.1 0,-0.2 0,-0.4 0,-0.1 0,-0.3 0,-0.5 l 0,-0.8 -1.3,0 0,-1.2 2.8,0 z m 3.9,0 0,5.8 -1.5,0 0,-4.6 -1,0 0,-1.2 2.5,0 z"
+         style="fill:#d91378" />
+      <g
+         id="g773"
+         transform="translate(-275.81259,-127.3579)">
+        <defs
+           id="defs775">
+          <rect
+             height="1157.5"
+             width="554"
+             y="79.099998"
+             x="24.700001"
+             id="SVGID_43_" />
+        </defs>
+        <clipPath
+           id="clipPath6995">
+          <use
+             id="use6997"
+             overflow="visible"
+             xlink:href="#SVGID_43_"
+             style="overflow:visible"
+             x="0"
+             y="0"
+             width="100%"
+             height="100%" />
+        </clipPath>
+        <path
+           id="path781"
+           d="m 495.8,566.5 c 0,4.3 -7.8,16.1 -7.8,16.1 0,0 -7.8,-11.8 -7.8,-16.1 0,-4.3 3.5,-7.8 7.8,-7.8 4.4,0 7.8,3.5 7.8,7.8"
+           clip-path="url(#SVGID_44_)"
+           style="fill:#141132" />
+      </g>
+      <g
+         id="g783"
+         transform="translate(-275.81259,-127.3579)">
+        <defs
+           id="defs785">
+          <rect
+             height="9.1000004"
+             width="9.1000004"
+             y="561.79999"
+             x="484.29999"
+             id="SVGID_45_" />
+        </defs>
+        <clipPath
+           id="clipPath7003">
+          <use
+             id="use7005"
+             overflow="visible"
+             xlink:href="#SVGID_45_"
+             style="overflow:visible"
+             x="0"
+             y="0"
+             width="100%"
+             height="100%" />
+        </clipPath>
+        <path
+           id="path791"
+           d="m 491.1,566.1 0,3.7 -5.7,0 0,-5.8 3.7,0 1.1,-1.1 -6,0 0,8 8,0 0,-6 -1.1,1.2 z m -4,0.8 -0.4,1.6 1.6,-0.4 4,-4 -1.2,-1.2 -4,4 z m 6.1,-4.9 c 0.3,0.3 0.3,0.9 0,1.2 l -0.4,0.4 -1.2,-1.2 0.4,-0.4 c 0.3,-0.3 0.8,-0.3 1.2,0"
+           clip-path="url(#SVGID_46_)"
+           style="fill:#ffffff" />
+      </g>
     </g>
   </g>
 </svg>
