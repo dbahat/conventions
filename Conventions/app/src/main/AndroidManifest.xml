@@ -49,7 +49,7 @@
         </activity>
         <activity android:name=".map.MapActivity" >
         </activity>
-        <activity android:name=".events.activities.EventActivity" >
+        <activity android:name=".events.activities.EventActivity" android:windowSoftInputMode="adjustResize" >
         </activity>
         <activity android:name=".ArrivalMethodsActivity" >
         </activity>

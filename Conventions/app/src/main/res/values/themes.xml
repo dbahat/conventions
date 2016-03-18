@@ -3,6 +3,7 @@
     <!-- Base application theme. -->
     <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowNoTitle">true</item>
+        <item name="android:windowSoftInputMode">adjustPan</item>
         <item name="android:layoutDirection">rtl</item>
         <item name="android:textDirection">rtl</item>
         <!--We will be using the toolbar so no need to show ActionBar-->

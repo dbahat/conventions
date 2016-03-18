@@ -21,10 +21,13 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.HitBuilders;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.R;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionMap;
@@ -411,6 +414,10 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		if (isSearchOpen()) {
 			closeSearch();
 		} else {
+			ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
+					.setCategory("Search")
+					.setAction("MapSearchOpened")
+					.build());
 			openSearch();
 		}
 	}

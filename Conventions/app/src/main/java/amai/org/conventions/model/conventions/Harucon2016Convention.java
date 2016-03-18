@@ -24,6 +24,7 @@ public class Harucon2016Convention extends Convention {
 	private static final String ESHKOL1_NAME = "אשכול 1";
 	private static final String ESHKOL2_NAME = "אשכול 2";
 	private static final String ESHKOL3_NAME = "אשכול 3";
+	private static final String SPECIAL_EVENTS_NAME = "אירועים מיוחדים";
 
 	@Override
 	protected ConventionStorage initStorage() {
@@ -104,6 +105,9 @@ public class Harucon2016Convention extends Convention {
 		imageMapper.addMapping("http://2016.harucon.org.il/wp-content/uploads/sites/7/2015/12/סבי-איזילוב-1024x701.jpg", R.drawable.event_manga_history);
 		imageMapper.addMapping("http://2016.harucon.org.il/wp-content/uploads/sites/7/2016/02/6.-שיעור-יפנית-למתחילים.jpg", R.drawable.event_japanese);
 		imageMapper.addMapping("http://2016.harucon.org.il/wp-content/uploads/sites/7/2016/02/Crunchyroll-Logo-1-300x120.png", R.drawable.event_crunchyroll_logo);
+		imageMapper.addMapping("http://2016.harucon.org.il/wp-content/uploads/sites/7/2015/12/3_Seagull_Gadi_Dagon-1-e1457812487499-400x400.jpg", R.drawable.event_q_a_yoram);
+		imageMapper.addMapping("http://2016.harucon.org.il/wp-content/uploads/sites/7/2016/03/e191c4cc-ba21-4b0b-a122-aa0d700a5f6f-1-400x400.jpg", R.drawable.event_q_a_toru);
+		imageMapper.addMapping("http://2016.harucon.org.il/wp-content/uploads/sites/7/2016/03/e191c4cc-ba21-4b0b-a122-aa0d700a5f6f-1.jpg", R.drawable.event_q_a_toru);
 
 		// Non-URL IDs
 		imageMapper.addMapping(EventToImageResourceIdMapper.EVENT_GENERIC, R.drawable.harucon2016_events_default_cover);
@@ -118,8 +122,9 @@ public class Harucon2016Convention extends Convention {
 		Hall eshkol1 = new Hall().withName(ESHKOL1_NAME).withOrder(3);
 		Hall eshkol2 = new Hall().withName(ESHKOL2_NAME).withOrder(4);
 		Hall eshkol3 = new Hall().withName(ESHKOL3_NAME).withOrder(5);
+		Hall specialEvents = new Hall().withName(SPECIAL_EVENTS_NAME).withOrder(6);
 
-		return Arrays.asList(mainHall, auditorium, eshkol1, eshkol2, eshkol3);
+		return Arrays.asList(mainHall, auditorium, eshkol1, eshkol2, eshkol3, specialEvents);
 	}
 
 	@Override
@@ -129,6 +134,7 @@ public class Harucon2016Convention extends Convention {
 		Hall eshkol1 = findHallByName(ESHKOL1_NAME);
 		Hall eshkol2 = findHallByName(ESHKOL2_NAME);
 		Hall eshkol3 = findHallByName(ESHKOL3_NAME);
+		Hall specialEvents = findHallByName(SPECIAL_EVENTS_NAME);
 
 		Floor floor1 = new Floor(1)
 				.withName("מפלס תחתון")
@@ -163,7 +169,8 @@ public class Harucon2016Convention extends Convention {
 												.withX(452.96f)
 												.withY(174.69f),
 										new MapLocation()
-												.withPlace(new Place().withName("החתמת אורח"))
+												.withPlace(specialEvents)
+												.withName("החתמת אורח")
 												.withMarkerResource(R.raw.harucon2016_marker_guest)
 												.withSelectedMarkerResource(R.raw.harucon2016_marker_guest_selected)
 												.withMarkerHeight(38.099964f)
