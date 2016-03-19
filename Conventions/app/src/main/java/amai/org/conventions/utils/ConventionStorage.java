@@ -46,11 +46,13 @@ public class ConventionStorage {
 	private final Convention convention;
 	private boolean hasInitialEventsFile;
 	private int initialEventsFileResource = 0;
+	private int eventsFileVersion = 0;
 
-	public ConventionStorage(Convention convention, int initialEventsFile) {
+	public ConventionStorage(Convention convention, int initialEventsFile, int eventsFileVersion) {
 		this.convention = convention;
 		this.hasInitialEventsFile = true;
 		this.initialEventsFileResource = initialEventsFile;
+		this.eventsFileVersion = eventsFileVersion;
 	}
 
 	public ConventionStorage(Convention convention) {
@@ -75,7 +77,11 @@ public class ConventionStorage {
 	}
 
 	public String getEventsFileName() {
-		return getConventionFileName(EVENTS_FILE_NAME);
+		String fileName = getConventionFileName(EVENTS_FILE_NAME);
+		if (eventsFileVersion > 0) {
+			fileName = eventsFileVersion + "_" + fileName;
+		}
+		return fileName;
 	}
 
 	public void saveUserInput() {
@@ -311,7 +317,13 @@ public class ConventionStorage {
 
 	private static InputStream openCacheTextFile(String fileName) {
 		try {
-			return new FileInputStream(new File(context.getCacheDir(), fileName));
+			File file = new File(context.getCacheDir(), fileName);
+			if (file.exists()) {
+				return new FileInputStream(file);
+			} else {
+				Log.i(TAG, "Cache file " + fileName + " does not exist");
+				return null;
+			}
 		} catch (Exception e) {
 			// Ignore - default user input will be created from hard-coded data
 			Log.i(TAG, "Could not read cache file " + fileName + ": " + e.getMessage());
