@@ -20,11 +20,13 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.analytics.HitBuilders;
 
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.Convention;
@@ -84,6 +86,11 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 
     @Override
     public void onRefresh() {
+	    ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
+			    .setCategory("PullToRefresh")
+			    .setAction("RefreshUpdates")
+			    .build());
+
 	    Convention.getInstance().clearNewFlagFromAllUpdates();
 	    updatesAdapter.notifyItemRangeChanged(0, Convention.getInstance().getUpdates().size());
 

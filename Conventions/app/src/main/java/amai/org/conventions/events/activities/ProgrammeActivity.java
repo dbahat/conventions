@@ -24,6 +24,8 @@ import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.HitBuilders;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -32,6 +34,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.FeedbackActivity;
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
@@ -415,7 +418,12 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
 
     @Override
     public void onRefresh() {
-        new AsyncTask<Void, Void, Boolean>() {
+	    ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
+			    .setCategory("PullToRefresh")
+			    .setAction("RefreshProgramme")
+			    .build());
+
+	    new AsyncTask<Void, Void, Boolean>() {
 
             @Override
             protected Boolean doInBackground(Void... params) {
