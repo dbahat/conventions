@@ -20,6 +20,7 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -41,6 +42,7 @@ import amai.org.conventions.customviews.AspectRatioSVGImageView;
 import amai.org.conventions.customviews.InterceptorLinearLayout;
 import amai.org.conventions.events.EventView;
 import amai.org.conventions.events.activities.HallActivity;
+import amai.org.conventions.events.activities.StandsAreaFragment;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
@@ -49,6 +51,7 @@ import amai.org.conventions.model.Floor;
 import amai.org.conventions.model.Hall;
 import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.model.Place;
+import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.utils.Dates;
 import pl.polidea.view.ZoomView;
 
@@ -81,6 +84,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 	private ImageView locationDetailsCloseImage;
 	private EventView locationCurrentEvent;
 	private EventView locationNextEvent;
+	private Button gotoStandsListButton;
 
     private OnMapFloorEventListener mapFloorEventsListener;
 
@@ -237,6 +241,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 	    locationDetailsCloseImage = (ImageView) view.findViewById(R.id.location_details_close_image);
 	    locationCurrentEvent = (EventView) view.findViewById(R.id.location_current_event);
 	    locationNextEvent = (EventView) view.findViewById(R.id.location_next_event);
+	    gotoStandsListButton = (Button) view.findViewById(R.id.goto_stands_list_button);
     }
 
 	private void initializeLocationDetails() {
@@ -552,6 +557,19 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		}
 	}
 
+	public void selectMarkerByLocation(MapLocation location) {
+		for (Marker marker : floorMarkers) {
+			boolean selected = false;
+			if (location != null && marker.getLocation().getId() == location.getId()) {
+				marker.select();
+				selected = true;
+			}
+			if (!selected) {
+				marker.deselect();
+			}
+		}
+	}
+
     public interface OnMapFloorEventListener {
         void onUpArrowClicked();
         void onDownArrowClicked();
@@ -622,10 +640,43 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		} else {
 			locationDetails.setVisibility(View.VISIBLE);
 			locationTitle.setText(location.getName());
+			locationDetails.setOnClickListener(null);
 
 			// Get current and next events in this location
-			ConventionEvent currEvent = null;
-			ConventionEvent nextEvent = null;
+			setupEventsForLocation(location);
+
+			// Check if it's a stands area
+			setupStandsButtonForLocation(location);
+		}
+	}
+
+	private void setupStandsButtonForLocation(final MapLocation location) {
+		if (location.getPlace() instanceof StandsArea) {
+			gotoStandsListButton.setVisibility(View.VISIBLE);
+			gotoStandsListButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					// Show the list of stands in a dialog
+					Place place = location.getPlace();
+					StandsAreaFragment standsFragment = new StandsAreaFragment();
+
+					Bundle args = new Bundle();
+					args.putInt(StandsAreaFragment.ARGUMENT_STANDS_AREA_ID, ((StandsArea) place).getId());
+					standsFragment.setArguments(args);
+
+					standsFragment.show(getFragmentManager(), null);
+				}
+			});
+		} else {
+			gotoStandsListButton.setVisibility(View.GONE);
+		}
+	}
+
+	private void setupEventsForLocation(final MapLocation location) {
+		ConventionEvent currEvent = null;
+		ConventionEvent nextEvent = null;
+		boolean isHall = location.getPlace() instanceof Hall;
+		if (isHall) {
 			ArrayList<ConventionEvent> events = Convention.getInstance().findEventsByHall(location.getPlace().getName());
 			Collections.sort(events, new ConventionEventComparator());
 			for (ConventionEvent event : events) {
@@ -640,35 +691,35 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 					break;
 				}
 			}
+		}
 
-			if (currEvent == null) {
-				locationCurrentEvent.setVisibility(View.GONE);
-			} else {
-				locationCurrentEvent.setVisibility(View.VISIBLE);
-				locationCurrentEvent.setEvent(currEvent);
-			}
+		if (currEvent == null) {
+			locationCurrentEvent.setVisibility(View.GONE);
+		} else {
+			locationCurrentEvent.setVisibility(View.VISIBLE);
+			locationCurrentEvent.setEvent(currEvent);
+		}
 
-			if (nextEvent == null) {
-				locationNextEvent.setVisibility(View.GONE);
-			} else {
-				locationNextEvent.setVisibility(View.VISIBLE);
-				locationNextEvent.setEvent(nextEvent);
-			}
+		if (nextEvent == null) {
+			locationNextEvent.setVisibility(View.GONE);
+		} else {
+			locationNextEvent.setVisibility(View.VISIBLE);
+			locationNextEvent.setEvent(nextEvent);
+		}
 
+		if (isHall) {
 			locationDetails.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					// Navigate to the hall associated with this location (only if it's a hall)
 					Place place = location.getPlace();
-					if (place instanceof Hall) {
-						Bundle animationBundle = ActivityOptions.makeCustomAnimation(appContext, R.anim.abc_slide_in_bottom, 0).toBundle();
-						Bundle bundle = new Bundle();
-						bundle.putString(HallActivity.EXTRA_HALL_NAME, place.getName());
+					Bundle animationBundle = ActivityOptions.makeCustomAnimation(appContext, R.anim.abc_slide_in_bottom, 0).toBundle();
+					Bundle bundle = new Bundle();
+					bundle.putString(HallActivity.EXTRA_HALL_NAME, place.getName());
 
-						Intent intent = new Intent(getActivity(), HallActivity.class);
-						intent.putExtras(bundle);
-						getActivity().startActivity(intent, animationBundle);
-					}
+					Intent intent = new Intent(getActivity(), HallActivity.class);
+					intent.putExtras(bundle);
+					getActivity().startActivity(intent, animationBundle);
 				}
 			});
 		}

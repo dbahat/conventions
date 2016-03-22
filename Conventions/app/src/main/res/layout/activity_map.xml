@@ -26,6 +26,30 @@
             android:layout_height="match_parent"
             android:background="@color/transparent_white">
 
+            <RadioGroup
+                android:id="@+id/search_type"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1"
+                android:paddingTop="3dp">
+                <RadioButton
+                    android:id="@+id/search_type_locations"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
+                    android:layout_height="wrap_content"
+                    android:text="@string/search_locations"
+                    android:checked="true"/>
+
+                <RadioButton
+                    android:id="@+id/search_type_stands"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
+                    android:layout_height="wrap_content"
+                    android:text="@string/search_stands"/>
+            </RadioGroup>
+
 
             <LinearLayout
                 android:orientation="horizontal"

@@ -33,6 +33,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-maps:8.4.0'
     compile 'com.caverock:androidsvg:1.2.2-beta-1'
     compile 'se.emilsjolander:stickylistheaders:2.7.0'
+    compile 'com.tonicartos:stickygridheaders:1.0.1'
     compile 'com.facebook.android:facebook-android-sdk:4.2.0'
     compile 'com.google.code.gson:gson:2.4'
     compile files('libs/activation.jar')

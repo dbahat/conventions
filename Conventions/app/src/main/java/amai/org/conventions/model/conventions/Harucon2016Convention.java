@@ -14,6 +14,8 @@ import amai.org.conventions.model.Floor;
 import amai.org.conventions.model.Hall;
 import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.model.Place;
+import amai.org.conventions.model.Stand;
+import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 
@@ -170,7 +172,7 @@ public class Harucon2016Convention extends Convention {
 												.withX(410.17f)
 												.withY(155.20f),
 										new MapLocation()
-												.withPlace(new Place().withName("מתחם דוכנים"))
+												.withPlace(new StandsArea().withName("מתחם דוכנים").withStands(getPurpleStands()))
 												.withMarkerResource(R.raw.harucon2016_marker_stalls_purple)
 												.withSelectedMarkerResource(R.raw.harucon2016_marker_stalls_purple_selected)
 												.withMarkerHeight(26.399996f)
@@ -271,14 +273,14 @@ public class Harucon2016Convention extends Convention {
 												.withX(291.12f)
 												.withY(247.23f),
 										new MapLocation()
-												.withPlace(new Place().withName("מתחם דוכנים"))
+												.withPlace(new StandsArea().withName("מתחם דוכנים").withStands(getPinkStands()))
 												.withMarkerResource(R.raw.harucon2016_marker_stalls_pink)
 												.withSelectedMarkerResource(R.raw.harucon2016_marker_stalls_pink_selected)
 												.withMarkerHeight(26f)
 												.withX(220.74f)
 												.withY(227.91f),
 										new MapLocation()
-												.withPlace(new Place().withName("מתחם דוכנים"))
+												.withPlace(new StandsArea().withName("מתחם דוכנים").withStands(getYellowStands()))
 												.withMarkerResource(R.raw.harucon2016_marker_stalls_yellow)
 												.withSelectedMarkerResource(R.raw.harucon2016_marker_stalls_yellow_selected)
 												.withMarkerHeight(26.299999f)
@@ -314,5 +316,121 @@ public class Harucon2016Convention extends Convention {
 												.withY(183.32f))
 						)
 				);
+	}
+
+	private List<Stand> getPurpleStands() {
+		return Arrays.asList(
+				new Stand().withName("אנימה סטור").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("Cosplay Senpai").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("גיק בסטה").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("ProTaku").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("אנימה ווייב").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("PowerfulMerch").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("הדוכן של לי (:").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("Philipopcorn").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("GamerPro").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("Anivid").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("מאי ארט אומנות ותחביב").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("נקסוס").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("Kawaii Stationery").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("קנזאשי").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("IFS").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("אוטאקון").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("אוטאקו שופ").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("Gaming LAND").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("RETRO GAME CENTER").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("לא אנושיט").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("חרבות ספוג").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("Owari no Devil").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("Muhrco").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("היקום המקביל").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("פוגי קומיקס").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("קבוצת יצירת קומיקס").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("סטודיו קארן").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("D & M ARMORY").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("Little Soul").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("דיבס").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("Aurore22").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("WHATEVER").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("האמיגורומי של סנדרה").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("סרוגי").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("כובעי עינב").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("ריוונדל").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("Sam Art").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("נאגטס ברוטב יאק").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("Love Craft").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("Hatz, Lolita and more").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("dor20 studios").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("A&A").withType(Stand.StandType.INDEPENDENT)
+		);
+	}
+
+	private List<Stand> getPinkStands() {
+		return Arrays.asList(
+				new Stand().withName("Blup").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("Anime-express").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("Trollworx").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("Aonobelle").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("baruyer").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("אנימו ומנגו").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("צ׳יפ שופ").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("Crow's Treasure").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("המרכז ללימודי יפנית").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("הקוביה משחקים").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("הדוכן של אור").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("בתוך הקופסה").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("הדוכן של פיצה").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("תביאו פיצות").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("תיקי").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("DARK VIBES").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("הדמיון הוא הגבול").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("R.t").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("הומלס משוגע").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("Fedoraharp Lacquer").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("קומיקס וירקות").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("האוניברסיטה העברית בירושלים").withType(Stand.StandType.DONATION),
+				new Stand().withName("דוכן הפנסאב של KaT").withType(Stand.StandType.DONATION)
+		);
+	}
+
+	private List<Stand> getYellowStands() {
+		return Arrays.asList(
+				new Stand().withName("yutu's").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("Roza's Fluffy Stuff").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("Sharonet Art").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("Dor's Designs").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("Japaneasy").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("בועת מחשבה").withType(Stand.StandType.DONATION),
+				new Stand().withName("Nuta Art").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("Rinska").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("fishiebag").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("skrillbug").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("grisim & mirrorshards").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("MILK").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("דוכן הארט של ליאן ענן ולריסה").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("הגלקסיה").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("Svag").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("קומיקאזה").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("OtakuProjecto").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("AniManga").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("besandiLOVE").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("velvet octopus").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("לימור שטרן תכשיטים").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("איפור").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("עיצובים מהלב").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("Amelia Hats").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("כריות פנדומים").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("cartoonish").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("naamugs").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("Panda Shop").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("הממלכה").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("קארמה").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("Candy Lenses").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("GoZgi").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("Maid Cafe").withType(Stand.StandType.DONATION),
+				new Stand().withName("2Dmusical").withType(Stand.StandType.DONATION),
+				new Stand().withName("Animode").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("שיפודן ישראל").withType(Stand.StandType.COMMERCIAL)
+		);
 	}
 }

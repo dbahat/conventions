@@ -80,6 +80,15 @@ public class ConventionMap {
 		});
 	}
 
+	public List<MapLocation> findLocationsByStandsArea(final StandsArea standsArea) {
+		return CollectionUtils.filter(getLocations(), new CollectionUtils.Predicate<MapLocation>() {
+			@Override
+			public boolean where(MapLocation location) {
+				return location.getPlace() instanceof StandsArea && ((StandsArea) location.getPlace()).getId() == standsArea.getId();
+			}
+		});
+	}
+
 	public MapLocation findClosestLocation(List<MapLocation> locations) {
 		if (locations.size() == 0) {
 			return null;

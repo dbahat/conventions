@@ -104,6 +104,7 @@
     <orderEntry type="library" exported="" name="play-services-maps-8.4.0" level="project" />
     <orderEntry type="library" exported="" name="design-23.2.1" level="project" />
     <orderEntry type="library" exported="" name="bolts-android-1.2.0" level="project" />
+    <orderEntry type="library" exported="" name="stickygridheaders-1.0.1" level="project" />
     <orderEntry type="library" exported="" name="additionnal" level="project" />
     <orderEntry type="library" exported="" name="stickylistheaders-2.7.0" level="project" />
     <orderEntry type="library" exported="" name="facebook-android-sdk-4.2.0" level="project" />

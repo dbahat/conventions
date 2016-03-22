@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -423,5 +424,25 @@ public abstract class Convention implements Serializable {
 		boolean first = firstEvent.getStartTime().before(secondEvent.getStartTime());
 		return (first && firstEvent.getEndTime().after(secondEvent.getStartTime())) ||
 				((!first) && secondEvent.getEndTime().after(firstEvent.getStartTime()));
+	}
+
+	public StandsArea findStandsArea(int id) {
+		for (MapLocation location : map.getLocations()) {
+			if (location.getPlace() instanceof StandsArea && ((StandsArea) location.getPlace()).getId() == id) {
+				return (StandsArea) location.getPlace();
+			}
+		}
+
+		return null;
+	}
+
+	public List<Stand> getStands() {
+		List<Stand> stands = new LinkedList<>();
+		for (MapLocation location : map.getLocations()) {
+			if (location.getPlace() instanceof StandsArea) {
+				stands.addAll(((StandsArea) location.getPlace()).getStands());
+			}
+		}
+		return stands;
 	}
 }

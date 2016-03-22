@@ -19,6 +19,8 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.google.android.gms.analytics.HitBuilders;
@@ -34,32 +36,40 @@ import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.Floor;
 import amai.org.conventions.model.Hall;
 import amai.org.conventions.model.MapLocation;
+import amai.org.conventions.model.Stand;
+import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.CollectionUtils;
+import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Objects;
 import amai.org.conventions.utils.Views;
 import fr.castorflex.android.verticalviewpager.VerticalViewPager;
 
 public class MapActivity extends NavigationActivity implements MapFloorFragment.OnMapFloorEventListener {
-
     public static final String EXTRA_FLOOR_NUMBER = "ExtraFloorNumber";
 	public static final String EXTRA_MAP_LOCATION_ID = "ExtraMapLocationId";
 
 	private static final String STATE_SEARCH_TERM = "StateMapSearchTerm";
-	private static final String STATE_MAP_SEARCH_ONLY_HALLS = "ExtraMapSearchOnlyHalls";
+	private static final String STATE_MAP_SEARCH_ONLY_HALLS = "StateMapSearchOnlyHalls";
+	private static final String STATE_MAP_SEARCH_OPEN = "StateMapSearchOpen";
 
     private static final ConventionMap map = Convention.getInstance().getMap();
+	private static final String TAG = MapActivity.class.getCanonicalName();
 
     private VerticalViewPager viewPager;
 	private int currentFloorNumber;
 
 	// Search
 	private LinearLayout searchContainer;
+	private RadioGroup searchType;
+	private RadioButton searchTypeLocations;
+	private RadioButton searchTypeStands;
 	private TextView noResultsFound;
 	private ListView searchResults;
 	private CheckBox showOnlyHallsCheckbox;
 	private EditText searchText;
-	private MapLocationsAdapter searchResultsAdapter;
+	private MapLocationsAdapter locationsSearchResultsAdapter;
+	private StandsAdapter standsSearchResultsAdapter;
 	private String searchTerm;
 	private boolean showOnlyHalls;
 	private boolean isSearchClosing;
@@ -102,6 +112,10 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.map_floor_zoom_to_fit:
+				ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
+						.setCategory("Map")
+						.setAction("ZoomToFitClicked")
+						.build());
 				closeSearch();
 				getCurrentFloorFragment().toggleMapZoom();
 				return true;
@@ -181,12 +195,12 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 
 	@Override
     public void onUpArrowClicked() {
-	    viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
+	    viewPager.setCurrentItem(viewPager.getCurrentItem() - 1, true);
     }
 
 	@Override
     public void onDownArrowClicked() {
-		viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
+		viewPager.setCurrentItem(viewPager.getCurrentItem() + 1, true);
     }
 
 	private void updateZoomMenuItem() {
@@ -250,10 +264,14 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		outState.putInt(EXTRA_FLOOR_NUMBER, currentFloorNumber);
 		outState.putString(STATE_SEARCH_TERM, searchText.getText().toString());
 		outState.putBoolean(STATE_MAP_SEARCH_ONLY_HALLS, showOnlyHallsCheckbox.isChecked());
+		outState.putBoolean(STATE_MAP_SEARCH_OPEN, isSearchOpen());
 	}
 
 	private void initializeSearch(Bundle savedInstanceState) {
 		searchContainer = (LinearLayout) findViewById(R.id.map_search);
+		searchType = (RadioGroup) findViewById(R.id.search_type);
+		searchTypeLocations = (RadioButton) findViewById(R.id.search_type_locations);
+		searchTypeStands = (RadioButton) findViewById(R.id.search_type_stands);
 		noResultsFound = (TextView) findViewById(R.id.map_search_no_results_found);
 		searchResults = (ListView) findViewById(R.id.map_search_results);
 		showOnlyHallsCheckbox = (CheckBox) findViewById(R.id.map_search_show_only_halls);
@@ -264,6 +282,8 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		// Restore state or use defaults
 		searchTerm = (savedInstanceState != null ? savedInstanceState.getString(STATE_SEARCH_TERM) : null);
 		showOnlyHalls = (savedInstanceState != null ? savedInstanceState.getBoolean(STATE_MAP_SEARCH_ONLY_HALLS) : false);
+		boolean showSearch = (savedInstanceState != null ? savedInstanceState.getBoolean(STATE_MAP_SEARCH_OPEN) : false);
+		searchContainer.setVisibility(showSearch ? View.VISIBLE : View.GONE);
 
 		Views.hideKeyboardOnClickOutsideEditText(this, searchContainer);
 
@@ -282,23 +302,61 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 			}
 		});
 
-		// Setup locations search results list
-		searchResultsAdapter = new MapLocationsAdapter(Collections.<MapLocation>emptyList());
-		searchResults.setAdapter(searchResultsAdapter);
+		// Setup search type (radio button) change
+		searchType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+				if (checkedId == R.id.search_type_locations) {
+					showOnlyHallsCheckbox.setVisibility(View.VISIBLE);
+					searchResults.setAdapter(locationsSearchResultsAdapter);
+				} else {
+					showOnlyHallsCheckbox.setVisibility(View.GONE);
+					searchResults.setAdapter(standsSearchResultsAdapter);
+				}
+				applySearchFiltersInBackground();
+			}
+		});
+
+		// Setup locations and stands search results list
+		locationsSearchResultsAdapter = new MapLocationsAdapter(Collections.<MapLocation>emptyList());
+		if (showSearch) {
+			locationsSearchResultsAdapter.setFloor(map.getLastLookedAtFloor());
+		}
+
+		standsSearchResultsAdapter = new StandsAdapter(Collections.<Stand>emptyList(), false);
+		searchResults.setAdapter(isLocationsSearch() ? locationsSearchResultsAdapter : standsSearchResultsAdapter);
 
 		searchResults.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				closeSearch();
-				MapLocation location = (MapLocation) searchResultsAdapter.getItem(position);
-				// Go to the selected location's floor and reset its zoom/selection state
-				if (!Objects.equals(getCurrentFloorFragment().getFloor(), location.getFloor())) {
-					setCurrentFloor(location.getFloor());
-					getCurrentFloorFragment().resetState();
-				}
-				// Set selected marker
-				getCurrentFloorFragment().selectMarkersWithNameAndFloor(Collections.singletonList(location));
 
+				if (isLocationsSearch()) {
+					MapLocation location = (MapLocation) locationsSearchResultsAdapter.getItem(position);
+					// Go to the selected location's floor and reset its zoom/selection state
+					if (!Objects.equals(getCurrentFloorFragment().getFloor(), location.getFloor())) {
+						setCurrentFloor(location.getFloor());
+						getCurrentFloorFragment().resetState();
+					}
+					// Set selected marker
+					getCurrentFloorFragment().selectMarkersWithNameAndFloor(Collections.singletonList(location));
+				} else {
+					Stand stand = (Stand) standsSearchResultsAdapter.getItem(position);
+					StandsArea standsArea = stand.getStandsArea();
+					List<MapLocation> locations = map.findLocationsByStandsArea(standsArea);
+					if (locations.size() == 1) {
+						MapLocation location = locations.get(0);
+						// Go to selected stand's stand area floor and reset its zoom/selection state
+						if (!Objects.equals(getCurrentFloorFragment().getFloor(), location.getFloor())) {
+							setCurrentFloor(location.getFloor());
+							getCurrentFloorFragment().resetState();
+						}
+						// Set selected marker
+						getCurrentFloorFragment().selectMarkerByLocation(location);
+					} else {
+						Log.e(TAG, "Stands area of " + stand.getName() + ", id " + standsArea.getName() + ", exists in " + locations.size() + " places");
+					}
+				}
 			}
 		});
 
@@ -341,6 +399,10 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		});
 	}
 
+	private boolean isLocationsSearch() {
+		return searchTypeLocations.isChecked();
+	}
+
 	private void setCurrentFloor(Floor floor) {
 		viewPager.setCurrentItem(floorIndexToPagerPosition(map.floorNumberToFloorIndex(floor.getNumber())));
 	}
@@ -353,48 +415,71 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		new AsyncTask<Void, Void, Void>() {
 			@Override
 			protected Void doInBackground(Void... params) {
-				List<MapLocation> locations = Convention.getInstance().getMap().getLocations();
-				locations = CollectionUtils.filter(locations, new CollectionUtils.Predicate<MapLocation>() {
-					@Override
-					public boolean where(MapLocation item) {
-						return (searchTerm == null || searchTerm.isEmpty() || item.getName().contains(searchTerm)) &&
-								((!showOnlyHalls) || item.getPlace() instanceof Hall);
-					}
-				});
-				Collections.sort(locations, new Comparator<MapLocation>() {
-					@Override
-					public int compare(MapLocation lhs, MapLocation rhs) {
-						// Sort order - floor (current floor is first), is hall (halls are first), name
-						if (!Objects.equals(lhs.getFloor(), rhs.getFloor())) {
-							if (Objects.equals(lhs.getFloor(), floor)) {
-								return -1;
-							} else if (Objects.equals(rhs.getFloor(), floor)) {
-								return 1;
+				if (isLocationsSearch()) {
+					List<MapLocation> locations = map.getLocations();
+					locations = CollectionUtils.filter(locations, new CollectionUtils.Predicate<MapLocation>() {
+						@Override
+						public boolean where(MapLocation item) {
+							return (searchTerm == null || searchTerm.isEmpty() || item.getName().toLowerCase().contains(searchTerm.toLowerCase())) &&
+									((!showOnlyHalls) || item.getPlace() instanceof Hall);
+						}
+					});
+					Collections.sort(locations, new Comparator<MapLocation>() {
+						@Override
+						public int compare(MapLocation lhs, MapLocation rhs) {
+							// Sort order - floor (current floor is first), is hall (halls are first), name
+							if (!Objects.equals(lhs.getFloor(), rhs.getFloor())) {
+								if (Objects.equals(lhs.getFloor(), floor)) {
+									return -1;
+								} else if (Objects.equals(rhs.getFloor(), floor)) {
+									return 1;
+								} else {
+									return lhs.getFloor().getNumber() - rhs.getFloor().getNumber();
+								}
+							} else if ((lhs.getPlace() instanceof Hall) != (rhs.getPlace() instanceof Hall)) {
+								if (lhs.getPlace() instanceof Hall) {
+									return -1;
+								} else {
+									return 1;
+								}
 							} else {
-								return lhs.getFloor().getNumber() - rhs.getFloor().getNumber();
+								return lhs.getName().compareTo(rhs.getName());
 							}
-						} else if ((lhs.getPlace() instanceof Hall) != (rhs.getPlace() instanceof Hall)) {
-							if (lhs.getPlace() instanceof Hall) {
-								return -1;
-							} else {
-								return 1;
-							}
-						} else {
+						}
+					});
+					locations = CollectionUtils.unique(locations, new MapLocationSearchEquality());
+					locationsSearchResultsAdapter.setMapLocations(locations);
+				} else {
+					List<Stand> stands = Convention.getInstance().getStands();
+					stands = CollectionUtils.filter(stands, new CollectionUtils.Predicate<Stand>() {
+						@Override
+						public boolean where(Stand item) {
+							return searchTerm == null || searchTerm.isEmpty() || item.getName().toLowerCase().contains(searchTerm.toLowerCase());
+						}
+					});
+					Collections.sort(stands, new Comparator<Stand>() {
+						@Override
+						public int compare(Stand lhs, Stand rhs) {
 							return lhs.getName().compareTo(rhs.getName());
 						}
-					}
-				});
-				locations = CollectionUtils.unique(locations, new MapLocationSearchEquality());
-				searchResultsAdapter.setMapLocations(locations);
+					});
+					standsSearchResultsAdapter.setStands(stands);
+				}
 				return null;
 			}
 
 			@Override
 			protected void onPostExecute(Void aVoid) {
-				searchResultsAdapter.notifyDataSetChanged();
+				boolean locationsSearch = isLocationsSearch();
+				if (locationsSearch) {
+					locationsSearchResultsAdapter.notifyDataSetChanged();
+				} else {
+					standsSearchResultsAdapter.notifyDataSetChanged();
+				}
 
 				// Show the "no results found" message if there are no results after applying the filters
-				if (searchResultsAdapter.getCount() == 0) {
+				if ((locationsSearch && locationsSearchResultsAdapter.getCount() == 0) ||
+					(!locationsSearch && standsSearchResultsAdapter.getCount() == 0)) {
 					noResultsFound.setVisibility(View.VISIBLE);
 					searchResults.setVisibility(View.GONE);
 				} else {
@@ -402,10 +487,12 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 					searchResults.setVisibility(View.VISIBLE);
 				}
 
-				// Select markers (only if a search term was entered or the halls checkbox selected)
-				getCurrentFloorFragment().selectMarkersWithNameAndFloor(
-						(searchTerm == null || searchTerm.isEmpty()) && !showOnlyHalls ?
-								null : searchResultsAdapter.getMapLocations());
+				// Select markers (only if a search term was entered or the halls checkbox selected - and only for locations search)
+				if (locationsSearch) {
+					getCurrentFloorFragment().selectMarkersWithNameAndFloor(
+							(searchTerm == null || searchTerm.isEmpty()) && !showOnlyHalls ?
+									null : locationsSearchResultsAdapter.getMapLocations());
+				}
 			}
 		}.execute();
 	}
@@ -429,7 +516,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 	public void openSearch() {
 		getCurrentFloorFragment().resetState();
 		isSearchClosing = false;
-		searchResultsAdapter.setFloor(getCurrentFloorFragment().getFloor());
+		locationsSearchResultsAdapter.setFloor(getCurrentFloorFragment().getFloor());
 		searchContainer.setVisibility(View.VISIBLE);
 		searchContainer.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in_from_right));
 		applySearchFiltersInBackground();

@@ -118,6 +118,7 @@
                         android:layout_alignParentEnd="true"/>
                 </RelativeLayout>
 
+                <!-- Events - used for halls -->
                 <amai.org.conventions.events.EventView
                     android:id="@+id/location_current_event"
                     android:layout_width="match_parent"
@@ -127,6 +128,16 @@
                     android:id="@+id/location_next_event"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
+
+                <!-- Go to stands list button - used for stand areas -->
+                <Button
+                    android:id="@+id/goto_stands_list_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/feedback_highlighted_button"
+                    android:enabled="true"
+                    android:text="@string/goto_stands_list"
+                    android:textColor="@color/white" />
 
             </LinearLayout>
         </amai.org.conventions.customviews.InterceptorLinearLayout>

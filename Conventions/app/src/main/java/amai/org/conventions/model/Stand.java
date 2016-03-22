@@ -1,0 +1,70 @@
+package amai.org.conventions.model;
+
+import amai.org.conventions.R;
+
+public class Stand {
+	private String name;
+	private StandType type;
+	private StandsArea standsArea;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Stand withName(String name) {
+		setName(name);
+		return this;
+	}
+
+	public StandType getType() {
+		return type;
+	}
+
+	public void setType(StandType type) {
+		this.type = type;
+	}
+
+	public Stand withType(StandType type) {
+		setType(type);
+		return this;
+	}
+
+	public StandsArea getStandsArea() {
+		return standsArea;
+	}
+
+	public void setStandsArea(StandsArea standsArea) {
+		this.standsArea = standsArea;
+	}
+
+	public Stand withStandsArea(StandsArea standsArea) {
+		setStandsArea(standsArea);
+		return this;
+	}
+
+	public enum StandType {
+		COMMERCIAL(R.string.commercial_stand, R.drawable.ic_store_black),
+		INDEPENDENT(R.string.independent_stand, R.drawable.shopping_bag),
+		DONATION(R.string.donation_stand, R.drawable.donation);
+
+		private int title;
+		private int image;
+
+		StandType(int title, int image) {
+			this.title = title;
+			this.image = image;
+		}
+
+		public int getTitle() {
+			return title;
+		}
+
+		public int getImage() {
+			return image;
+		}
+	}
+}
