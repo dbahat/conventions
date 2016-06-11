@@ -1,4 +1,4 @@
-package amai.org.conventions;
+package amai.org.conventions.notifications;
 
 import android.annotation.TargetApi;
 import android.app.AlarmManager;
@@ -10,18 +10,19 @@ import android.os.Build;
 import java.util.Calendar;
 import java.util.Date;
 
+import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.events.ConfigureNotificationsFragment;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.EventNotification;
 import amai.org.conventions.utils.Dates;
 
-public class AlarmScheduler {
+public class LocalNotificationScheduler {
 
 	private Context context;
     private AlarmManager alarmManager;
 
-    public AlarmScheduler(Context context) {
+    public LocalNotificationScheduler(Context context) {
         this.context = context;
         this.alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
     }
@@ -48,7 +49,7 @@ public class AlarmScheduler {
             return;
         }
 
-        PendingIntent pendingIntent = createEventNotificationPendingIntent(event, EventNotification.Type.AboutToStart);
+        PendingIntent pendingIntent = createEventNotificationPendingIntent(event, ShowNotificationService.Type.EventAboutToStart);
 
 	    scheduleAlarm(time, pendingIntent, Accuracy.UP_TO_1_MINUTE_EARLIER);
     }
@@ -59,26 +60,26 @@ public class AlarmScheduler {
             return;
         }
 
-        PendingIntent pendingIntent = createEventNotificationPendingIntent(event, EventNotification.Type.FeedbackReminder);
+        PendingIntent pendingIntent = createEventNotificationPendingIntent(event, ShowNotificationService.Type.EventFeedbackReminder);
         scheduleAlarm(time, pendingIntent, Accuracy.UP_TO_5_MINUTES_LATER);
     }
 
     public void cancelDefaultEventAlarms(ConventionEvent event) {
-        cancelEventAlarm(event, EventNotification.Type.AboutToStart);
-        cancelEventAlarm(event, EventNotification.Type.FeedbackReminder);
+        cancelEventAlarm(event, ShowNotificationService.Type.EventAboutToStart);
+        cancelEventAlarm(event, ShowNotificationService.Type.EventFeedbackReminder);
 
         event.getUserInput().getEventFeedbackReminderNotification().setNotificationTime(null);
         event.getUserInput().getEventAboutToStartNotification().setNotificationTime(null);
         Convention.getInstance().getStorage().saveUserInput();
     }
 
-    public void cancelEventAlarm(ConventionEvent event, EventNotification.Type notificationType) {
+    public void cancelEventAlarm(ConventionEvent event, ShowNotificationService.Type notificationType) {
 	    // Sending the extras due to apparent bug on Lollipop that this exact intent is used when rescheduling it
 	    // (canceling then re-setting it), so it needs the extras or it arrives without parameters and is not displayed
-        Intent intent = new Intent(context, EventNotificationService.class)
+        Intent intent = new Intent(context, ShowNotificationService.class)
                 .setAction(notificationType.toString() + event.getId())
-		        .putExtra(EventNotificationService.EXTRA_EVENT_TO_NOTIFY, event)
-		        .putExtra(EventNotificationService.EXTRA_EVENT_NOTIFICATION_TYPE, notificationType);
+		        .putExtra(ShowNotificationService.EXTRA_EVENT_TO_NOTIFY, event)
+		        .putExtra(ShowNotificationService.EXTRA_NOTIFICATION_TYPE, notificationType);
         PendingIntent pendingIntent = PendingIntent.getService(context, 0, intent, 0);
 
         alarmManager.cancel(pendingIntent);
@@ -100,17 +101,17 @@ public class AlarmScheduler {
         oneDayPostConventionDate.add(Calendar.DATE, 1);
         oneDayPostConventionDate.set(Calendar.HOUR_OF_DAY, 10);
 
-        Intent intent = new Intent(context, EventNotificationService.class)
-                .putExtra(EventNotificationService.EXTRA_IS_END_OF_CONVENTION_NOTIFICATION, true);
+        Intent intent = new Intent(context, ShowNotificationService.class)
+                .putExtra(ShowNotificationService.EXTRA_NOTIFICATION_TYPE, ShowNotificationService.Type.ConventionFeedbackReminder);
         scheduleAlarm(oneDayPostConventionDate.getTimeInMillis(), PendingIntent.getService(context, 0, intent, 0), Accuracy.INACCURATE);
     }
 
-    private PendingIntent createEventNotificationPendingIntent(ConventionEvent event, EventNotification.Type notificationType) {
+    private PendingIntent createEventNotificationPendingIntent(ConventionEvent event, ShowNotificationService.Type notificationType) {
 
-        Intent intent = new Intent(context, EventNotificationService.class)
+        Intent intent = new Intent(context, ShowNotificationService.class)
                 .setAction(notificationType.toString() + event.getId()) // Setting unique action id so different event intents won't collide
-                .putExtra(EventNotificationService.EXTRA_EVENT_TO_NOTIFY, event)
-                .putExtra(EventNotificationService.EXTRA_EVENT_NOTIFICATION_TYPE, notificationType);
+                .putExtra(ShowNotificationService.EXTRA_EVENT_TO_NOTIFY, event)
+                .putExtra(ShowNotificationService.EXTRA_NOTIFICATION_TYPE, notificationType);
         return PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
     }
 
@@ -122,7 +123,6 @@ public class AlarmScheduler {
 			scheduleAlarm(time, pendingIntent);
 		}
 	}
-
 
 	@TargetApi(Build.VERSION_CODES.KITKAT)
     private void scheduleInaccurateAlarm(long time, PendingIntent pendingIntent, Accuracy accuracy) {

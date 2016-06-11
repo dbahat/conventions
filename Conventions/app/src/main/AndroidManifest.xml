@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="amai.org.conventions"
     android:versionCode="21"
-    android:versionName="2.3.0" >
+    android:versionName="2.3.0">
 
     <!-- For notifications -->
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -10,6 +11,12 @@
     <!-- Required for google maps, updates and refreshing the programme -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- Required for google GCM, for push notifications -->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <permission android:name="amai.org.conventions.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+    <uses-permission android:name="amai.org.conventions.permission.C2D_MESSAGE"/>
 
     <uses-feature
         android:name="android.hardware.location"
@@ -21,14 +28,16 @@
         android:name="android.hardware.screen.landscape"
         android:required="false" />
 
+    <!-- Note - if enabling backup, make sure to exclude the GCM registration ID from it -->
     <application
         android:name=".ConventionsApplication"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@drawable/harucon2016_app_logo"
         android:installLocation="auto"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppBaseTheme.Harucon2016.Toolbar" >
+        android:theme="@style/AppBaseTheme.Harucon2016.Toolbar"
+        tools:replace="android:icon, android:allowBackup">
         <activity
             android:name=".HomeActivity"
             android:label="@string/app_name"
@@ -63,7 +72,21 @@
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-        <service android:name=".EventNotificationService" />
+        <service android:name=".notifications.ShowNotificationService" android:exported="false"/>
+        <service android:name=".notifications.AzureNotificationRegistrationService" android:exported="false"/>
+        <service android:name=".notifications.GcmTokenRefreshService" android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID"/>
+            </intent-filter>
+        </service>
+
+        <receiver android:name="com.microsoft.windowsazure.notifications.NotificationsBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="amai.org.conventions" />
+            </intent-filter>
+        </receiver>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

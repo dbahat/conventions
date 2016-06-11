@@ -15,6 +15,7 @@ import java.util.Map;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.EventNotification;
+import amai.org.conventions.notifications.LocalNotificationScheduler;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Settings;
@@ -23,7 +24,7 @@ public class ConventionsApplication extends Application {
 	private final static String TAG = ConventionsApplication.class.getCanonicalName();
 
 	private static Tracker tracker;
-    public static AlarmScheduler alarmScheduler;
+    public static LocalNotificationScheduler alarmScheduler;
     public static Settings settings;
 	private static String versionName;
 
@@ -43,7 +44,7 @@ public class ConventionsApplication extends Application {
 	        tracker.enableAutoActivityTracking(true);
 	    }
 
-        alarmScheduler = new AlarmScheduler(this);
+        alarmScheduler = new LocalNotificationScheduler(this);
         restoreAlarmConfiguration();
 
         // Change uncaught exception parser to include more information

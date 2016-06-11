@@ -21,6 +21,7 @@ import amai.org.conventions.R;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.EventNotification;
+import amai.org.conventions.notifications.ShowNotificationService;
 import amai.org.conventions.utils.Dates;
 
 public class ConfigureNotificationsFragment extends DialogFragment {
@@ -190,7 +191,7 @@ public class ConfigureNotificationsFragment extends DialogFragment {
             feedbackReminder.setNotificationTime(null);
         }
 	    if (!feedbackReminder.isEnabled()) {
-            ConventionsApplication.alarmScheduler.cancelEventAlarm(event, EventNotification.Type.FeedbackReminder);
+            ConventionsApplication.alarmScheduler.cancelEventAlarm(event, ShowNotificationService.Type.EventFeedbackReminder);
 	    }
 
 	    EventNotification eventStartNotification = event.getUserInput().getEventAboutToStartNotification();
@@ -207,7 +208,7 @@ public class ConfigureNotificationsFragment extends DialogFragment {
             eventStartNotification.setNotificationTime(null);
         }
 	    if (!eventStartNotification.isEnabled()) {
-            ConventionsApplication.alarmScheduler.cancelEventAlarm(event, EventNotification.Type.AboutToStart);
+            ConventionsApplication.alarmScheduler.cancelEventAlarm(event, ShowNotificationService.Type.EventAboutToStart);
 	    }
 
         refreshTimeButtonsText();

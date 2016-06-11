@@ -65,6 +65,11 @@
     <string name="configure_notification_event_feedback_reminder_message">שלח תזכורת למלא פידבק אחרי שהאירוע מסתיים</string>
     <string name="configure_notification_time">%d דקות</string>
 
+    <string name="missing_play_services_dialog_title">לא נמצא Google play services</string>
+    <string name="missing_play_services_dialog_message">על מנת לקבל עדכונים חיים במהלך הכנס ולצפות בדרכי הגעה, יש להתקין או לעדכן את Google play services</string>
+    <string name="missing_play_services_ok_button">התקן</string>
+    <string name="missing_play_services_cancel_button">אל תתקין</string>
+
     <string name="yes">כן</string>
     <string name="no">לא</string>
     <string name="floor_down">קומה למטה</string>

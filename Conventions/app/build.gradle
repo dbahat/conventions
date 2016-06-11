@@ -31,11 +31,14 @@ dependencies {
     compile 'com.github.castorflex.verticalviewpager:library:19.0.1'
     compile 'com.google.android.gms:play-services-analytics:9.0.2'
     compile 'com.google.android.gms:play-services-maps:9.0.2'
+    compile 'com.google.android.gms:play-services-gcm:9.0.2'
     compile 'com.caverock:androidsvg:1.2.2-beta-1'
     compile 'se.emilsjolander:stickylistheaders:2.7.0'
     compile 'com.tonicartos:stickygridheaders:1.0.1'
     compile 'com.facebook.android:facebook-android-sdk:4.2.0'
     compile 'com.google.code.gson:gson:2.4'
+    compile 'com.microsoft.azure:notification-hubs-android-sdk:0.4@aar'
+    compile 'com.microsoft.azure:azure-notifications-handler:1.0.1@aar'
     compile files('libs/activation.jar')
     compile files('libs/additionnal.jar')
     compile files('libs/mail.jar')
