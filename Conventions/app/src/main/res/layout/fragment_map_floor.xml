@@ -66,7 +66,6 @@
                 android:id="@+id/map_floor_image"
                 android:padding="5dp"
                 android:gravity="center"
-                custom:image="@drawable/floor1"
                 custom:fit="auto"
                 custom:imageWidth="100"
                 custom:imageHeight="100">

@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -47,12 +48,15 @@ public class ProgrammeSearchActivity extends NavigationActivity {
         setToolbarTitle(getResources().getString(R.string.programme_search_title));
 
         if (savedInstanceState != null) {
-            //noinspection unchecked
-            eventTypeFilter = (LinkedList<EventType>) savedInstanceState.getSerializable(STATE_EVENT_TYPES_FILTER);
+	        Serializable savedEventTypes = savedInstanceState.getSerializable(STATE_EVENT_TYPES_FILTER);
+	        if (savedEventTypes instanceof LinkedList && CollectionUtils.contains((List)savedEventTypes, EventType.class)) {
+                //noinspection unchecked
+	            eventTypeFilter = (LinkedList<EventType>) savedEventTypes;
+	        }
             keywordsFilter = savedInstanceState.getString(STATE_KEYWORDS_FILTER);
         }
 
-        noResultsFoundView = (TextView) findViewById(R.id.search_no_results_found);
+	    noResultsFoundView = (TextView) findViewById(R.id.search_no_results_found);
 
         initializeEventsList();
         initializeKeywordFilter();

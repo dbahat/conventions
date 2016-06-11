@@ -140,7 +140,10 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 	}
 
 	public boolean isMapZoomedIn() {
-		return mapZoomView.getZoom() > 1.0f;
+		// If the fragment is still being initialized the view zoom will be null.
+		// This could happen while the map activity is loading and its onCreateOptionsMenu is called
+		// before this fragment's onCreateView.
+		return mapZoomView != null && mapZoomView.getZoom() > 1.0f;
 	}
 
 	@Override

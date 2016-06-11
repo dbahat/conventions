@@ -75,4 +75,16 @@ public class CollectionUtils {
 		}
 		return newList;
 	}
+
+	/**
+	 * Returns whether all members of the list are either null or of the specific type
+	 */
+	public static boolean contains(List<?> list, Class<?> type) {
+		for (Object member : list) {
+			if (member != null && !(type.isInstance(member))) {
+				return false;
+			}
+		}
+		return true;
+	}
 }

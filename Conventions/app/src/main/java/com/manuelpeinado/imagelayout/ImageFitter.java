@@ -102,6 +102,6 @@ class ImageFitter {
     }
     
     private static float computeImageAspectRatio(ImageLayout.ImageResource image) {
-        return image.getWidth() / (float) image.getHeight();
+        return image == null ? 1 : image.getWidth() / (float) image.getHeight();
     }
 }

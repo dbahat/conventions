@@ -24,11 +24,12 @@ public class ImageHandler {
 
     public static SVG loadSVG(Context context, int resource) {
         try {
-            if (loadedSVGFiles.containsKey(resource)) {
-                return loadedSVGFiles.get(resource);
+	        SVG svg = loadedSVGFiles.get(resource);
+	        if (svg != null) {
+                return svg;
             }
 
-            SVG svg = SVG.getFromResource(context.getResources(), resource);
+            svg = SVG.getFromResource(context.getResources(), resource);
             resolver.setContext(context);
             setSVGProperties(svg);
             loadedSVGFiles.put(resource, svg);
@@ -43,8 +44,7 @@ public class ImageHandler {
             return notificationLargeIcon;
         }
 
-        // Resizing the notification icon, since we don't wish to include an image per screen density, and the notification area doesn't auto-resize
-        // the large icon.
+        // Resizing the notification icon manually since the notification area doesn't auto-resize the icon.
         notificationLargeIcon = resizeBitmap(
                 ThemeAttributes.getDrawable(context, R.attr.notificationLargeIcon),
                 context.getResources().getDimensionPixelSize(R.dimen.notification_large_icon_size));
@@ -84,10 +84,8 @@ public class ImageHandler {
     private static Bitmap resizeBitmap(Drawable image, int height) {
         Bitmap originalBitmap = ((BitmapDrawable) image).getBitmap();
         int width = (int) (originalBitmap.getWidth() * height / (float) originalBitmap.getHeight());
-	    Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, width, height, false);
-	    if (originalBitmap != scaledBitmap) {
-	        originalBitmap.recycle();
-	    }
-	    return scaledBitmap;
+	    // Note: we don't recycle the original drawable because it's inflated against the theme and
+	    // cached. This causes the next call to re-use the same drawable although it's already recycled.
+	    return Bitmap.createScaledBitmap(originalBitmap, width, height, false);
     }
 }

@@ -220,7 +220,9 @@ public class ImageLayout extends ViewGroup {
 
     @Override
     protected void onDraw(Canvas canvas) {
-	    image.draw(canvas, srcRect, destRect);
+	    if (image != null) {
+	        image.draw(canvas, srcRect, destRect);
+	    }
         super.onDraw(canvas);
     }
 
@@ -244,8 +246,10 @@ public class ImageLayout extends ViewGroup {
         int height = heightSpec;
         boolean isExactWidth = widthMode == MeasureSpec.EXACTLY;
         boolean isExactHeight = heightMode == MeasureSpec.EXACTLY;
-        float imageAspectRatio = (image.getWidth() + getPaddingLeft() + getPaddingRight())
-                                    / ((float)image.getHeight() + getPaddingTop() + getPaddingBottom());
+	    int imageWidth = image == null ? 1 : image.getWidth();
+	    int imageHeight = image == null ? 1 : image.getHeight();
+	    float imageAspectRatio = (imageWidth + getPaddingLeft() + getPaddingRight())
+                                    / ((float) imageHeight + getPaddingTop() + getPaddingBottom());
         if (isExactWidth && !isExactHeight) {
             height = (int)(width / imageAspectRatio);
             if (heightMode == MeasureSpec.AT_MOST && height > heightSpec) {
