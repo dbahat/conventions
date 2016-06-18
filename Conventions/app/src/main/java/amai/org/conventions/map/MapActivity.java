@@ -306,6 +306,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		searchType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
+				getCurrentFloorFragment().resetState();
 				if (checkedId == R.id.search_type_locations) {
 					showOnlyHallsCheckbox.setVisibility(View.VISIBLE);
 					searchResults.setAdapter(locationsSearchResultsAdapter);
@@ -412,9 +413,9 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		final boolean showOnlyHalls = this.showOnlyHalls;
 		final Floor floor = getCurrentFloorFragment().getFloor();
 
-		new AsyncTask<Void, Void, Void>() {
+		new AsyncTask<Void, Void, List<?>>() {
 			@Override
-			protected Void doInBackground(Void... params) {
+			protected List<?> doInBackground(Void... params) {
 				if (isLocationsSearch()) {
 					List<MapLocation> locations = map.getLocations();
 					locations = CollectionUtils.filter(locations, new CollectionUtils.Predicate<MapLocation>() {
@@ -448,7 +449,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 						}
 					});
 					locations = CollectionUtils.unique(locations, new MapLocationSearchEquality());
-					locationsSearchResultsAdapter.setMapLocations(locations);
+					return locations;
 				} else {
 					List<Stand> stands = Convention.getInstance().getStands();
 					stands = CollectionUtils.filter(stands, new CollectionUtils.Predicate<Stand>() {
@@ -463,17 +464,20 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 							return lhs.getName().compareTo(rhs.getName());
 						}
 					});
-					standsSearchResultsAdapter.setStands(stands);
+					return stands;
 				}
-				return null;
 			}
 
 			@Override
-			protected void onPostExecute(Void aVoid) {
+			protected void onPostExecute(List<?> searchResult) {
 				boolean locationsSearch = isLocationsSearch();
 				if (locationsSearch) {
+					//noinspection unchecked
+					locationsSearchResultsAdapter.setMapLocations((List<MapLocation>) searchResult);
 					locationsSearchResultsAdapter.notifyDataSetChanged();
 				} else {
+					//noinspection unchecked
+					standsSearchResultsAdapter.setStands((List<Stand>) searchResult);
 					standsSearchResultsAdapter.notifyDataSetChanged();
 				}
 

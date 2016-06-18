@@ -145,22 +145,21 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 		final String keywordsFilter = this.keywordsFilter;
 		final LinkedList<EventType> eventTypeFilter = this.eventTypeFilter;
 
-		new AsyncTask<Void, Void, Void>() {
+		new AsyncTask<Void, Void, List<ConventionEvent>>() {
 			@Override
-			protected Void doInBackground(Void... params) {
-				applyFilters(keywordsFilter, eventTypeFilter);
-				return null;
+			protected List<ConventionEvent> doInBackground(Void... params) {
+				return filterEvents(keywordsFilter, eventTypeFilter);
 			}
 
 			@Override
-			protected void onPostExecute(Void aVoid) {
-				adapter.notifyDataSetChanged();
+			protected void onPostExecute(List<ConventionEvent> events) {
+				adapter.setEventsList(events, true);
 				setNoResultsVisibility(adapter.getItemCount());
 			}
 		}.execute();
 	}
 
-    private void applyFilters(final String keywordsFilter, final List<EventType> eventTypeFilter) {
+    private List<ConventionEvent> filterEvents(final String keywordsFilter, final List<EventType> eventTypeFilter) {
         List<ConventionEvent> events = Convention.getInstance().getEvents();
 
         events = CollectionUtils.filter(events, new CollectionUtils.Predicate<ConventionEvent>() {
@@ -180,7 +179,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
         if (keywordsFilter != null) {
             adapter.setKeywordsHighlighting(Arrays.asList(keywordsFilter.split(" ")));
         }
-        adapter.setEventsList(events, false);
+	    return events;
     }
 
 	private void setNoResultsVisibility(int resultsNumber) {
