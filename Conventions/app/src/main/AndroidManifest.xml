@@ -62,7 +62,7 @@
         </activity>
         <activity android:name=".ArrivalMethodsActivity" >
         </activity>
-        <activity android:name=".FeedbackActivity" >
+        <activity android:name=".FeedbackActivity" android:windowSoftInputMode="adjustResize">
         </activity>
         <activity android:name=".updates.UpdatesActivity" >
         </activity>

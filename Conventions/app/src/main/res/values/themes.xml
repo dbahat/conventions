@@ -61,8 +61,9 @@
         <item name="nextEventStartTimeBackground">@color/medium_purple</item>
         <item name="nextEventStartTimeTextColor">@color/white</item>
 
-        <!-- Note: if you change the theme, these values should be copied manually to file drawable\feedback_highlighted_button.xml
-         because prior to L it was not supported to reference theme attributes from a drawable xml -->
+        <!-- Note: if you change the theme, these values should be copied manually to files
+         drawable\feedback_highlighted_button.xml and drawable/circular_progress_bar.xml because
+         prior to L it was not supported to reference theme attributes from a drawable xml -->
         <item name="eventFeedbackHighlightedButtonColor">@color/dark_purple_button</item>
         <item name="eventFeedbackHighlightedButtonPressedColor">@color/very_dark_purple_button</item>
         <item name="feedbackAnswerButtonColor">@color/dark_purple</item>
