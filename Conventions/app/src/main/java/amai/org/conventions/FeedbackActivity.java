@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Collections;
 import java.util.List;
 
 import amai.org.conventions.events.CollapsibleFeedbackView;
@@ -22,6 +23,7 @@ import amai.org.conventions.events.activities.ProgrammeActivity;
 import amai.org.conventions.events.adapters.EventsViewAdapter;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
+import amai.org.conventions.model.ConventionEventEndTimeComparator;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionFeedbackMail;
@@ -231,6 +233,7 @@ public class FeedbackActivity extends NavigationActivity {
 										item.getUserInput().getFeedback().hasAnsweredQuestions());
 					}
 				});
+		Collections.sort(eventsWithoutFeedback, new ConventionEventEndTimeComparator());
 
 		eventsWithUnsentFeedback = CollectionUtils.filter(eventsWithoutFeedback,
 				new CollectionUtils.Predicate<ConventionEvent>() {
@@ -247,6 +250,7 @@ public class FeedbackActivity extends NavigationActivity {
 						return item.getUserInput().getFeedback().isSent();
 					}
 				});
+		Collections.sort(eventsWithSentFeedback, new ConventionEventEndTimeComparator());
 
 		setupEventsWithoutFeedbackLayout(update);
 		setupEventsWithSentFeedbackLayout(update);
