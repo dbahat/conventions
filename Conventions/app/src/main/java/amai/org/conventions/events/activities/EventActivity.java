@@ -38,7 +38,6 @@ import amai.org.conventions.map.MapActivity;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
-import amai.org.conventions.model.Feedback;
 import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.Dates;
@@ -441,17 +440,14 @@ public class EventActivity extends NavigationActivity {
 		}
 	}
 
-
 	private boolean shouldFeedbackBeClosed() {
 		// Feedback should start as closed in the following cases:
-		// 1. Feedback was sent
-		// 2. Event was not attended and no questions were answered
-		// 3. Feedback sending time is over and no questions were answered
+		// 1. The user shouldn't see the feedback (according to the logic in ConventionEvent)
+		// 2. Feedback sending time is over and no questions were answered
 		// Otherwise it should start as open.
-		Feedback feedback = conventionEvent.getUserInput().getFeedback();
-		return feedback.isSent() ||
-				(!conventionEvent.isAttending() && !feedback.hasAnsweredQuestions()) ||
-				(Convention.getInstance().isFeedbackSendingTimeOver() && !feedback.hasAnsweredQuestions());
+		return !conventionEvent.shouldUserSeeFeedback() ||
+				(Convention.getInstance().isFeedbackSendingTimeOver() &&
+				!conventionEvent.getUserInput().getFeedback().hasAnsweredQuestions());
 	}
 
 

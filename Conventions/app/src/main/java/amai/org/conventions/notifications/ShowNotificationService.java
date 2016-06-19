@@ -10,6 +10,8 @@ import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 
+import java.util.List;
+
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.FeedbackActivity;
 import amai.org.conventions.HomeActivity;
@@ -19,6 +21,7 @@ import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.activities.EventActivity;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
+import amai.org.conventions.utils.CollectionUtils;
 
 import static amai.org.conventions.model.EventNotification.Type.AboutToStart;
 import static amai.org.conventions.model.EventNotification.Type.FeedbackReminder;
@@ -33,6 +36,7 @@ public class ShowNotificationService extends Service {
     public static final String EXTRA_MESSAGE = "EXTRA_MESSAGE";
 
     private static final int FILL_CONVENTION_FEEDBACK_NOTIFICATION_ID = 91235;
+	private static final int FILL_EVENTS_FEEDBACK_NOTIFICATION_ID = 95837;
     private static final String NEXT_PUSH_NOTIFICATION_ID = "NextPushNotificationId";
     private NotificationManager notificationManager;
 
@@ -102,27 +106,64 @@ public class ShowNotificationService extends Service {
     }
 
     private void showEventFeedbackReminderNotification(Intent intent) {
-        ConventionEvent event = (ConventionEvent) intent.getSerializableExtra(EXTRA_EVENT_TO_NOTIFY);
+        final ConventionEvent event = (ConventionEvent) intent.getSerializableExtra(EXTRA_EVENT_TO_NOTIFY);
         if (event == null) {
             return;
         }
 
-        Intent openEventIntent = new Intent(this, EventActivity.class)
-                .setAction(FeedbackReminder.toString() + event.getId())
-                .putExtra(EventActivity.EXTRA_EVENT_ID, event.getId())
-                .putExtra(EventActivity.EXTRA_FOCUS_ON_FEEDBACK, true);
+	    // Check it's still possible to send feedback
+	    if (Convention.getInstance().isFeedbackSendingTimeOver()) {
+		    return;
+	    }
 
+	    // Check the user didn't fill feedback on this event yet
+	    if (event.getUserInput().getFeedback().isSent()) {
+		    return;
+	    }
+
+	    // Check how many other events are waiting for feedback
+	    List<ConventionEvent> otherEventsWithoutFeedback = CollectionUtils.filter(Convention.getInstance().getEvents(),
+		    new CollectionUtils.Predicate<ConventionEvent>() {
+			    @Override
+			    public boolean where(ConventionEvent item) {
+				    return item.shouldUserSeeFeedback() && !event.getId().equals(item.getId());
+			    }
+		    });
+
+	    Intent openIntent;
+	    String notificationText;
+	    int otherEventsNumber = otherEventsWithoutFeedback.size();
+	    if (otherEventsNumber == 0) {
+	        openIntent = new Intent(this, EventActivity.class)
+	            .setAction(FeedbackReminder.toString() + event.getId())
+	            .putExtra(EventActivity.EXTRA_EVENT_ID, event.getId())
+	            .putExtra(EventActivity.EXTRA_FOCUS_ON_FEEDBACK, true);
+		    notificationText = getString(R.string.notification_event_ended_message_format, event.getTitle());
+	    } else {
+		    openIntent = new Intent(this, FeedbackActivity.class).setAction(FeedbackReminder.toString());
+		    if (otherEventsNumber == 1) {
+		        notificationText = getString(R.string.notification_2_events_ended_message_format, event.getTitle());
+		    } else {
+			    notificationText = getString(R.string.notification_several_events_ended_message_format, event.getTitle(), otherEventsNumber);
+		    }
+	    }
+
+	    // A note about the intent action and update flag:
+	    // If we want 2 different notifications to appear at the same time, both pointing to the same activity,
+	    // the intent must have a different action (extras don't affect the equality check - see documentation of PendingIntent).
+	    // In our case we either have a new intent each time (in case it's a a new event displayed) or the same intent of
+	    // opening the FeedbackActivity. If it's the latter we should update it.
         Notification.Builder builder = getDefaultNotificationBuilder()
                 .setContentTitle(getResources().getString(R.string.notification_event_ended_title))
-                .setContentText(getString(R.string.notification_event_ended_message_format, event.getTitle()))
+                .setContentText(notificationText)
                 .setPriority(Notification.PRIORITY_LOW)
-                .setContentIntent(PendingIntent.getActivity(this, 0, openEventIntent, 0));
+                .setContentIntent(PendingIntent.getActivity(this, 0, openIntent, PendingIntent.FLAG_UPDATE_CURRENT));
 
         Notification notification = new Notification.BigTextStyle(builder)
-                .bigText(getString(R.string.notification_event_ended_message_format, event.getTitle()))
+                .bigText(notificationText)
                 .build();
 
-        notificationManager.notify((FeedbackReminder.toString() + event.getId()).hashCode(), notification);
+	    notificationManager.notify(FILL_EVENTS_FEEDBACK_NOTIFICATION_ID, notification);
     }
 
     private void showEventAboutToStartNotification(Intent intent) {

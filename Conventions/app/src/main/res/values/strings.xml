@@ -52,13 +52,15 @@
     <string name="feedback_sent">הפידבק נשלח. תודה!</string>
     <string name="feedback_sending_time_over">זמן שליחת הפידבק הסתיים</string>
 
-    <string name="search_input_search_keyword">הקלד את חיפושך...</string>
+    <string name="search_input_search_keyword">הקלד את חיפושך…</string>
     <string name="search_no_results_found">לא נמצאו תוצאות</string>
 
     <string name="notification_event_about_to_start_title">אירוע עומד להתחיל</string>
     <string name="notification_event_about_to_start_message_format">האירוע %1$s עומד להתחיל באולם %2$s</string>
     <string name="notification_event_ended_title">עזור לנו להשתפר</string>
     <string name="notification_event_ended_message_format">נהנת באירוע %s? שלח פידבק למארגני האירוע</string>
+    <string name="notification_2_events_ended_message_format">נהנת באירוע %s ובאירוע נוסף אחד? שלח פידבק למארגנים</string>
+    <string name="notification_several_events_ended_message_format">נהנת באירוע %1$s וב-%2$d אירועים נוספים? שלח פידבק למארגנים</string>
     <string name="notification_feedback_ended_message">%s הסתיים, ואנחנו רוצים לשמוע את דעתך</string>
 
     <string name="configure_notification_event_about_to_start_message">שלח תזכורת לפני תחילת האירוע</string>

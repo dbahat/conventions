@@ -226,11 +226,7 @@ public class FeedbackActivity extends NavigationActivity {
 				new CollectionUtils.Predicate<ConventionEvent>() {
 					@Override
 					public boolean where(ConventionEvent item) {
-						// Same logic as in EventActivity
-						return item.canFillFeedback() &&
-								(!item.getUserInput().getFeedback().isSent()) &&
-								(item.getUserInput().isAttending() ||
-										item.getUserInput().getFeedback().hasAnsweredQuestions());
+						return item.shouldUserSeeFeedback();
 					}
 				});
 		Collections.sort(eventsWithoutFeedback, new ConventionEventEndTimeComparator());

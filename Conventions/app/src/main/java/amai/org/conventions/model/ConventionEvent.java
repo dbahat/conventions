@@ -224,7 +224,20 @@ public class ConventionEvent implements Serializable {
 		return minimumTimeOfFillingFeedback.getTime().before(Dates.now());
 	}
 
-    public int getServerId() {
+	/**
+	 * The user should see the feedback sending option on the event under the following conditions:
+	 * 1. It's already possible to send feedback (event has ended or is about to end)
+	 * 2. The user didn't send feedback yet on this event
+	 * 3. The user either attended the event or already answered some questions about it
+	 */
+	public boolean shouldUserSeeFeedback() {
+		return this.canFillFeedback() &&
+				(!this.getUserInput().getFeedback().isSent()) &&
+				(this.getUserInput().isAttending() ||
+						this.getUserInput().getFeedback().hasAnsweredQuestions());
+	}
+
+	public int getServerId() {
         return serverId;
     }
 
