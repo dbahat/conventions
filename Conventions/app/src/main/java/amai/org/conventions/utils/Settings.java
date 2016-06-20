@@ -7,6 +7,7 @@ public class Settings {
     private static final String SETTINGS = "settings";
     private static final String WAS_FEEDBACK_NOTIFICATION_SHOWN = "WasFeedbackNotificationShown";
 	private static final String WAS_NAVIGATION_POPUP_OPENED = "WasNavigationPopupOpened";
+	private static final String WAS_PLAY_SERVICES_INSTALLATION_CANCELLED = "WasPlayServicesInstallationCancelled";
     private SharedPreferences sharedPreferences;
 
     public Settings(Context context) {
@@ -27,5 +28,13 @@ public class Settings {
 
 	public void setNavigationPopupOpened() {
 		sharedPreferences.edit().putBoolean(WAS_NAVIGATION_POPUP_OPENED, true).apply();
+	}
+
+	public boolean wasPlayServicesInstallationCancelled() {
+		return sharedPreferences.getBoolean(WAS_PLAY_SERVICES_INSTALLATION_CANCELLED, false);
+	}
+
+	public void setPlayServicesInstallationCancelled() {
+		sharedPreferences.edit().putBoolean(WAS_PLAY_SERVICES_INSTALLATION_CANCELLED, true).apply();
 	}
 }

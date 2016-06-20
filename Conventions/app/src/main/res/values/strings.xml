@@ -71,6 +71,7 @@
     <string name="missing_play_services_dialog_message">על מנת לקבל עדכונים חיים במהלך הכנס ולצפות בדרכי הגעה, יש להתקין או לעדכן את Google play services</string>
     <string name="missing_play_services_ok_button">התקן</string>
     <string name="missing_play_services_cancel_button">אל תתקין</string>
+    <string name="missing_play_services_neutral_button">לא עכשיו</string>
 
     <string name="yes">כן</string>
     <string name="no">לא</string>

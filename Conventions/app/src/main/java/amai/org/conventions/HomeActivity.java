@@ -153,6 +153,9 @@ public class HomeActivity extends AppCompatActivity {
      * the Google Play Store or enable it in the device's system settings.
      */
     private boolean checkPlayServices() {
+	    if (ConventionsApplication.settings.wasPlayServicesInstallationCancelled()) {
+		    return false;
+	    }
         GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
         int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
         if (apiAvailability.isUserResolvableError(resultCode)) {
@@ -170,9 +173,16 @@ public class HomeActivity extends AppCompatActivity {
                     .setNegativeButton(R.string.missing_play_services_cancel_button, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
+	                        ConventionsApplication.settings.setPlayServicesInstallationCancelled();
                             dialogInterface.dismiss();
                         }
                     })
+		            .setNeutralButton(R.string.missing_play_services_neutral_button, new DialogInterface.OnClickListener() {
+			            @Override
+			            public void onClick(DialogInterface dialogInterface, int i) {
+			                dialogInterface.dismiss();
+		                }
+		            })
                     .setCancelable(true)
                     .create()
                     .show();
