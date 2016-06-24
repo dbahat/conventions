@@ -5,12 +5,12 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/nextEventStart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/nextEventStart"
         android:gravity="center"
         android:background="?nextEventStartTimeBackground"
-        android:text="Next event start time"
+        tools:text="Next event start time"
         android:textColor="?nextEventStartTimeTextColor"
         />
 
@@ -33,8 +33,8 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:visibility="gone"
-        android:textSize="@dimen/abc_text_size_large_material"
-        android:textColor="#909090"
+        android:textSize="@dimen/text_size_large_material"
+        android:textColor="@color/hint_gray"
         android:padding="25dp"
         android:text="@string/my_events_no_data" />
 

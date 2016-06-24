@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     app:cardUseCompatPadding="true"
     app:cardElevation="2dp"
     app:cardMaxElevation="2dp"
@@ -35,13 +36,13 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/startTime"
                 style="@style/EventViewLargeText"
-                android:text="Start Time"/>
+                tools:text="Start Time"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/EventViewSmallText"
-                android:text="End Time"
+                tools:text="End Time"
                 android:id="@+id/endTime"/>
 
         </LinearLayout>
@@ -57,7 +58,7 @@
                 android:id="@+id/eventName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Event Title"
+                tools:text="Event Title"
                 android:gravity="start|top"
                 style="@style/EventViewLargeText"
                 android:textColor="@android:color/black"
@@ -86,10 +87,11 @@
                         android:ellipsize="start"
                         style="@style/EventViewSmallText"
                         android:textColor="@android:color/darker_gray"
-                        android:text="Hall name"/>
+                        tools:text="Hall name"/>
 
                     <LinearLayout
                         android:paddingStart="2dp"
+                        android:paddingEnd="0dp"
                         android:orientation="horizontal"
                         android:layout_gravity="end|bottom"
                         android:layout_width="match_parent"
@@ -104,7 +106,7 @@
                             android:layout_weight="1"
                             android:gravity="end"
                             android:layout_height="wrap_content"
-                            android:text="Lecturer name"
+                            tools:text="Lecturer name"
                             android:singleLine="true"
                             android:ellipsize="end"
                             android:textColor="@android:color/darker_gray"

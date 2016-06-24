@@ -2,6 +2,7 @@ package amai.org.conventions.navigation;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -91,6 +92,9 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	}
 
 	private AnimationPopupWindow createNavigationPopup() {
+		// This view is the root view of the popup window. It's not related to the view hierarchy and its layout
+		// parameters are defined by the popup window.
+		@SuppressLint("InflateParams")
 		final View view = LayoutInflater.from(NavigationActivity.this).inflate(R.layout.navigation_menu, null);
 
 		final List<NavigationItem> items = new ArrayList<>(Arrays.asList(
@@ -321,7 +325,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		if (clearBackStack) {
 			overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 		} else {
-			overridePendingTransition(R.anim.abc_grow_fade_in_from_bottom, R.anim.abc_shrink_fade_out_from_bottom);
+			overridePendingTransition(R.anim.grow_fade_in_from_bottom, R.anim.shrink_fade_out_from_bottom);
 		}
 	}
 

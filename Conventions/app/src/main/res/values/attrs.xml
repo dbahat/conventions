@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <declare-styleable name="CompoundTextView">
+        <attr name="compoundDrawableWidth" format="dimension"/>
+        <attr name="compoundDrawableHeight" format="dimension"/>
+    </declare-styleable>
+
     <declare-styleable name="Event">
         <attr name="eventTypeColor" format="color|integer"/>
         <attr name="eventColor" format="color|integer"/>

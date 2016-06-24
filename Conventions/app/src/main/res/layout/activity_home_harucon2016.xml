@@ -27,6 +27,8 @@
             android:layout_height="wrap_content"
             android:src="@drawable/harucon2016_logo_and_title"/>
 
+        <!-- This image should always be on the left side since it's part of the image under it but
+             it's a different ImageView because it's clickable -->
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -34,7 +36,8 @@
             android:padding="15dp"
             android:alpha="0.5"
             android:onClick="onAboutClicked"
-            android:src="@drawable/info"/>
+            android:src="@drawable/info"
+            tools:ignore="RtlHardcoded"/>
 
     </FrameLayout>
 

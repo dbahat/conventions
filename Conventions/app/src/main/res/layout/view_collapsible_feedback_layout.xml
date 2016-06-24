@@ -7,15 +7,5 @@
 
     <include layout="@layout/feedback_layout_collapsed" />
     <include layout="@layout/feedback_layout_expanded" />
-
-    <!-- This text view is displayed when the feedback was already sent -->
-    <TextView
-        android:id="@+id/feedback_sent_text"
-        style="@style/TextAppearance.AppCompat.Subhead"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="@string/feedback_sent"
-        android:visibility="gone" />
 </LinearLayout>
 

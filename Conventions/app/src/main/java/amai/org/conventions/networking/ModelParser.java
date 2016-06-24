@@ -99,7 +99,7 @@ public class ModelParser {
                         .withEndTime(endTime)
                         .withHall(hall)
 		                .withImages(mapper.getImagesList(eventDescription.getEventImageIds()))
-		                .withId(String.format("%d_%d", eventId, internalEventNumber));
+		                .withId(String.format(Dates.getLocale(), "%d_%d", eventId, internalEventNumber));
 
                 // Some events might have special pages and are not retrieved from the API
                 // exposed by the server. For these spacial cases, add special handing of placing hardcoded texts/images.

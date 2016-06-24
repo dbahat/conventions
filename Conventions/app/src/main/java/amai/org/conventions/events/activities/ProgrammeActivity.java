@@ -1,5 +1,6 @@
 package amai.org.conventions.events.activities;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -87,6 +88,9 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
 				    navigateToMyEventsIconModified = true;
 				    final MenuItem item = menu.findItem(R.id.programme_navigate_to_my_events);
 
+				    // This view is set as an action view. Its layout parameters are both wrap_content so it doesn't
+				    // need a root view to resolve them.
+				    @SuppressLint("InflateParams")
 				    View actionView = getLayoutInflater().inflate(R.layout.my_events_icon, null);
 				    ImageView myEventsNonAnimatedIcon = (ImageView) actionView.findViewById(R.id.non_animated_icon);
 

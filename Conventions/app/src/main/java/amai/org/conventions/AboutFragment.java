@@ -1,5 +1,6 @@
 package amai.org.conventions;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.text.Html;
@@ -69,7 +70,11 @@ public class AboutFragment extends DialogFragment {
 		super.onResume();
 		if (layoutParams != null) {
 			Window window = getDialog().getWindow();
-			window.setGravity(Gravity.TOP | Gravity.LEFT);
+			// This is the top left side because x and y always refer to the top and left regardless
+			// of RTL support
+			@SuppressLint("RtlHardcoded")
+			int gravity = Gravity.TOP | Gravity.LEFT;
+			window.setGravity(gravity);
 			WindowManager.LayoutParams windowLayoutParams = window.getAttributes();
 			windowLayoutParams.x = layoutParams.x;
 			windowLayoutParams.y = layoutParams.y;

@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     android:onClick="openFeedback"
     android:orientation="horizontal"
-    android:paddingStart="@dimen/event_details_box_padding">
+    android:paddingStart="@dimen/event_details_box_padding"
+    android:paddingEnd="0dp">
 
     <TextView
         android:id="@+id/collapsed_feedback_title"
@@ -29,6 +30,7 @@
             android:layout_gravity="top|end"
             android:onClick="openFeedback"
             android:paddingEnd="@dimen/event_details_box_padding"
+            android:paddingStart="0dp"
             android:paddingTop="@dimen/event_details_box_padding"
             android:text="@string/add_feedback" />
 

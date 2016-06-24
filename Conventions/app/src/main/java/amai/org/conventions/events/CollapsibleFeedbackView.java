@@ -192,7 +192,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
         questionLayout.setLayoutParams(questionLayoutParams);
 
         TextView questionText = new TextView(getContext());
-        questionText.setTextAppearance(getContext(), R.style.TextAppearance_AppCompat_Body1);
+        questionText.setTextAppearance(getContext(), R.style.FeedbackQuestionTextAppearance);
 	    boolean isSent = feedback.isSent();
 	    questionText.setText(question.getQuestionText(getResources(), isSent));
 
@@ -331,7 +331,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		    TextView textView = new TextView(getContext());
 		    LinearLayout.LayoutParams textViewLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		    textView.setLayoutParams(textViewLayoutParams);
-		    textView.setTextAppearance(getContext(), R.style.TextAppearance_AppCompat_Body1);
+		    textView.setTextAppearance(getContext(), R.style.FeedbackQuestionTextAppearance);
 		    if (answer != null) {
 		        textView.setText(answer.toString());
 		    }
@@ -350,7 +350,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		    );
 		    LinearLayout.LayoutParams editTextLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		    editText.setLayoutParams(editTextLayoutParams);
-		    editText.setTextAppearance(getContext(), R.style.TextAppearance_AppCompat_Body1);
+		    editText.setTextAppearance(getContext(), R.style.FeedbackQuestionTextAppearance);
 		    editText.addTextChangedListener(new TextWatcher() {
 			    @Override
 			    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -469,7 +469,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 	}
 
 	private int calculateExpendedFeedbackHeight() {
-        ViewGroup expendedFeedbackLayout = (ViewGroup) LayoutInflater.from(this.getContext()).inflate(R.layout.feedback_layout_expanded, null);
+        ViewGroup expendedFeedbackLayout = (ViewGroup) LayoutInflater.from(this.getContext()).inflate(R.layout.feedback_layout_expanded, feedbackContainer, false);
 
         // Add all the questions to the view
         LinearLayout questionsLayout = (LinearLayout) expendedFeedbackLayout.findViewById(R.id.questions_layout);
@@ -479,7 +479,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
     }
 
     private int calculateCollapsedFeedbackHeight() {
-        return calculateViewHeight(LayoutInflater.from(this.getContext()).inflate(R.layout.feedback_layout_collapsed, null));
+        return calculateViewHeight(LayoutInflater.from(this.getContext()).inflate(R.layout.feedback_layout_collapsed, feedbackContainer, false));
     }
 
     private int calculateViewHeight(View view) {
@@ -535,7 +535,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
                 feedbackContainer.setLayoutParams(layoutParams);
 
                 finalLayoutAfterResize.setVisibility(View.VISIBLE);
-                finalLayoutAfterResize.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.abc_fade_in));
+                finalLayoutAfterResize.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
             }
 
             @Override

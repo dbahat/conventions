@@ -125,4 +125,5 @@
     <string name="donation_stand">תרומה ושונות</string>
     <string name="search_locations">מתחם</string>
     <string name="search_stands">דוכנים</string>
+    <string name="next_event_start">האירוע הבא מתחיל בעוד %1$s ב%2$s</string>
 </resources>

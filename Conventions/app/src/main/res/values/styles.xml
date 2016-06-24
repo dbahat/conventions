@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <style name="ToolbarNavigationButtonStyle" parent="@style/Widget.AppCompat.Toolbar.Button.Navigation">
         <item name="android:scaleType">fitEnd</item>
     </style>
@@ -23,11 +23,13 @@
     </style>
 
     <style name="EventViewLargeText">
-        <item name="android:textSize">18dp</item>
+        <!-- Setting text size in SP because the entire view's height is pre-determined -->
+        <item name="android:textSize" tools:ignore="SpUsage">18dp</item>
     </style>
 
     <style name="EventViewSmallText">
-        <item name="android:textSize">14dp</item>
+        <!-- Setting text size in SP because the entire view's height is pre-determined -->
+        <item name="android:textSize" tools:ignore="SpUsage">14dp</item>
     </style>
 
     <style name="EventFeedbackButton" parent="@style/Widget.AppCompat.Button.Borderless">
@@ -46,5 +48,9 @@
         <item name="android:textColor">?feedbackAnswerButtonSelectedColor</item>
     </style>
 
-
+    <!-- Values copied from R.style.TextAppearance_AppCompat_Body1 since it's private (for v21 version too) -->
+    <style name="FeedbackQuestionTextAppearance">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">?android:textColorPrimary</item>
+    </style>
 </resources>

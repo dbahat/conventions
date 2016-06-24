@@ -39,7 +39,7 @@ public class MyEventsActivity extends NavigationActivity {
     // Handler for updating the next event start text
     private Handler nextEventStartTextRunner = new Handler();
     private Runnable updateNextEventStartTimeText;
-	private static int NEXT_EVENT_START_TIME_UPDATE_DELAY = 60000; // 1 minute
+	private static final int NEXT_EVENT_START_TIME_UPDATE_DELAY = 60000; // 1 minute
 
     private TextView nextEventStart;
 	private RecyclerView eventsList;
@@ -265,9 +265,9 @@ public class MyEventsActivity extends NavigationActivity {
         nextEventStart.setVisibility(displayNextEventStart ? View.VISIBLE : View.GONE);
 
         if (displayNextEventStart) {
-            nextEventStart.setText("האירוע הבא מתחיל בעוד " +
-                    Dates.toHumanReadableTimeDuration(nextEvent.getStartTime().getTime() - currTime.getTime()) +
-                    " ב" + nextEvent.getHall().getName());
+            nextEventStart.setText(getString(R.string.next_event_start,
+                    Dates.toHumanReadableTimeDuration(nextEvent.getStartTime().getTime() - currTime.getTime()),
+                    nextEvent.getHall().getName()));
 
             if (updateNextEventStartTimeText == null) {
                 updateNextEventStartTimeText = new Runnable() {

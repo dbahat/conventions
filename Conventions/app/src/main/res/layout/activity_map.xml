@@ -91,8 +91,8 @@
                 android:layout_height="match_parent"
                 android:gravity="center|top"
                 android:visibility="gone"
-                android:textSize="@dimen/abc_text_size_medium_material"
-                android:textColor="#909090"
+                android:textSize="@dimen/text_size_medium_material"
+                android:textColor="@color/hint_gray"
                 android:padding="5dp"
                 android:text="@string/search_no_results_found" />
 

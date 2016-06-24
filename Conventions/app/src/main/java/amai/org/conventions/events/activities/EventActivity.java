@@ -381,7 +381,7 @@ public class EventActivity extends NavigationActivity {
                 Dates.formatHoursAndMinutes(event.getStartTime()),
                 Dates.formatHoursAndMinutes(event.getEndTime()),
                 Dates.toHumanReadableTimeDuration(event.getEndTime().getTime() - event.getStartTime().getTime()));
-        time.setText(formattedEventHall + formattedEventTime);
+        time.setText(String.format("%s%s", formattedEventHall, formattedEventTime));
 
 	    setupFeedback(event, false);
 

@@ -623,7 +623,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 	public void setSelectedLocationDetails(final MapLocation location) {
 		if (location == null) {
 			if (locationDetails.getVisibility() != View.GONE) {
-				Animation animation = AnimationUtils.loadAnimation(appContext, R.anim.abc_slide_out_bottom);
+				Animation animation = AnimationUtils.loadAnimation(appContext, R.anim.slide_out_bottom);
 				locationDetails.startAnimation(animation);
 				animation.setAnimationListener(new Animation.AnimationListener() {
 					@Override
@@ -716,7 +716,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 				public void onClick(View v) {
 					// Navigate to the hall associated with this location (only if it's a hall)
 					Place place = location.getPlace();
-					Bundle animationBundle = ActivityOptions.makeCustomAnimation(appContext, R.anim.abc_slide_in_bottom, 0).toBundle();
+					Bundle animationBundle = ActivityOptions.makeCustomAnimation(appContext, R.anim.slide_in_bottom, 0).toBundle();
 					Bundle bundle = new Bundle();
 					bundle.putString(HallActivity.EXTRA_HALL_NAME, place.getName());
 
