@@ -2,6 +2,7 @@ package amai.org.conventions.updates;
 
 import android.content.Context;
 import android.graphics.Point;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.view.Display;
@@ -16,7 +17,7 @@ import amai.org.conventions.utils.Dates;
 
 public class UpdateViewHolder extends RecyclerView.ViewHolder {
     private static final int MAX_LINES_FOR_COLLAPSED_UPDATE = 7;
-    public static final int MAX_LINES_FOR_COLLAPSED_VIEW = 6;
+    private static final int MAX_LINES_FOR_COLLAPSED_VIEW = 6;
 
     private ViewGroup updateContainer;
     private TextView updateTextView;
@@ -46,9 +47,9 @@ public class UpdateViewHolder extends RecyclerView.ViewHolder {
 
 	    // Make new updates highlighted
 	    if (updateViewModel.getUpdate().isNew()) {
-		    updateContainer.setBackgroundColor(itemView.getResources().getColor(R.color.very_light_gray));
+		    updateContainer.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.very_light_gray));
 	    } else {
-		    updateContainer.setBackgroundColor(itemView.getResources().getColor(R.color.white));
+		    updateContainer.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.white));
 	    }
 
         updateTextView.setText(spannedUpdateText);

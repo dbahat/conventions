@@ -153,7 +153,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 
 			@Override
 			protected void onPostExecute(List<ConventionEvent> events) {
-				adapter.setEventsList(events, true);
+				adapter.setEventsList(events);
 				setNoResultsVisibility(adapter.getItemCount());
 			}
 		}.execute();

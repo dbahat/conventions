@@ -1,11 +1,11 @@
 package amai.org.conventions.events;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
@@ -163,9 +163,8 @@ public class EventView extends FrameLayout {
     }
 
     public void setAttending(boolean isAttending) {
-        Resources resources = getContext().getResources();
         int favorite_icon = isAttending ? android.R.drawable.btn_star_big_on : android.R.drawable.btn_star_big_off;
-        faveIcon.setImageDrawable(resources.getDrawable(favorite_icon));
+        faveIcon.setImageDrawable(ContextCompat.getDrawable(getContext(), favorite_icon));
     }
 
     public void setShowHallName(boolean show) {
@@ -218,7 +217,7 @@ public class EventView extends FrameLayout {
 		if (event.getUserInput().getEventAboutToStartNotification().isEnabled() ||
 			event.getUserInput().getEventFeedbackReminderNotification().isEnabled()) {
 			alarmIcon.setVisibility(VISIBLE);
-			alarmIcon.setColorFilter(getResources().getColor(R.color.very_dark_gray));
+			alarmIcon.setColorFilter(ContextCompat.getColor(getContext(), R.color.very_dark_gray));
 		} else {
 			alarmIcon.setVisibility(GONE);
 		}
@@ -231,23 +230,23 @@ public class EventView extends FrameLayout {
 			FeedbackQuestion.Smiley3PointAnswer weightedRating = feedback.getWeightedRating();
 			int filterColor;
 			if (weightedRating != null) {
-				icon = getResources().getDrawable(weightedRating.getImageResourceId());
-				filterColor = getResources().getColor(R.color.yellow);
+				icon = ContextCompat.getDrawable(getContext(), weightedRating.getImageResourceId());
+				filterColor = ContextCompat.getColor(getContext(), R.color.yellow);
 			} else if ((!feedback.isSent()) && feedback.hasAnsweredQuestions() &&
 					!Convention.getInstance().isFeedbackSendingTimeOver()) {
-				icon = getResources().getDrawable(android.R.drawable.ic_dialog_email);
-				filterColor = getResources().getColor(R.color.green);
+				icon = ContextCompat.getDrawable(getContext(), android.R.drawable.ic_dialog_email);
+				filterColor = ContextCompat.getColor(getContext(), R.color.green);
 			} else {
-				icon = getResources().getDrawable(R.drawable.feedback);
+				icon = ContextCompat.getDrawable(getContext(), R.drawable.feedback);
 				// If the user sent the feedback but it did not fill any smiley questions, there won't
 				// be a weighted rating
 				if (feedback.isSent()) {
-					icon = getResources().getDrawable(R.drawable.feedback_sent);
-					filterColor = getResources().getColor(R.color.yellow);
+					icon = ContextCompat.getDrawable(getContext(), R.drawable.feedback_sent);
+					filterColor = ContextCompat.getColor(getContext(), R.color.yellow);
 				} else if (event.isAttending() || feedback.hasAnsweredQuestions()) {
-					filterColor = getResources().getColor(R.color.green);
+					filterColor = ContextCompat.getColor(getContext(), R.color.green);
 				} else {
-					filterColor = getResources().getColor(R.color.very_dark_gray);
+					filterColor = ContextCompat.getColor(getContext(), R.color.very_dark_gray);
 				}
 			}
 

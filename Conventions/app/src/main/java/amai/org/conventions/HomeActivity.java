@@ -139,7 +139,7 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    public void registerWithNotificationHubs() {
+    private void registerWithNotificationHubs() {
         if (checkPlayServices()) {
             // Start IntentService to register this application with GCM.
             Intent intent = new Intent(this, AzureNotificationRegistrationService.class);

@@ -73,8 +73,7 @@ class ImageFitter {
         return fitVertical(w, h, imageAspectRatio);
     }
 
-    private Rect fitHorizontal(int w, int h, float imageAspectRatio) {
-        int destWidth = w;
+    private Rect fitHorizontal(int destWidth, int h, float imageAspectRatio) {
         int destHeight = (int) (destWidth / imageAspectRatio);
         int vGravity = gravity & Gravity.VERTICAL_GRAVITY_MASK;
         int top = 0;
@@ -87,8 +86,7 @@ class ImageFitter {
         return new Rect(0, top, destWidth, top + destHeight);
     }
 
-    private Rect fitVertical(int w, int h, float imageAspectRatio) {
-        int destHeight = h;
+    private Rect fitVertical(int w, int destHeight, float imageAspectRatio) {
         int destWidth = (int) (destHeight * imageAspectRatio);
         int hGravity = gravity & Gravity.HORIZONTAL_GRAVITY_MASK;
         int left = 0;

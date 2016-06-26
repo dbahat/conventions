@@ -23,7 +23,7 @@ public class FeedbackQuestion implements Serializable {
 	public static final int QUESTION_ID_MAP_SIGNS = 9;
 	public static final int QUESTION_ID_CONFLICTING_EVENTS = 10;
 
-	private static Map<Integer, Integer> questions = initQuestions();
+	private static final Map<Integer, Integer> questions = initQuestions();
 
 	private static Map<Integer, Integer> initQuestions() {
 		Map<Integer, Integer> questions = new HashMap<>();

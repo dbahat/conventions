@@ -29,6 +29,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PictureDrawable;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
@@ -162,7 +163,7 @@ public class ImageLayout extends ViewGroup {
      * Changes the background image and its layout dimensions.
      */
     public void setImageResource(int imageResource, float imageWidth, float imageHeight) {
-	    setImageResourceFromDrawable(getResources().getDrawable(imageResource), imageWidth, imageHeight);
+	    setImageResourceFromDrawable(ContextCompat.getDrawable(getContext(), imageResource), imageWidth, imageHeight);
     }
 
 	public void setImageResourceFromDrawable(Drawable image, float imageWidth, float imageHeight) {
@@ -258,17 +259,17 @@ public class ImageLayout extends ViewGroup {
         }
         else if (isExactHeight && !isExactWidth) {
 	        ViewGroup parent = (ViewGroup) getParent();
-	        int parentWiidth = parent.getMeasuredWidth();
+	        int parentWidth = parent.getMeasuredWidth();
 	        switch (getLayoutParams().width) {
 		        case ViewGroup.LayoutParams.MATCH_PARENT:
-			        width = parentWiidth;
+			        width = parentWidth;
 			        break;
 		        default:
 			        // If we have WRAP_CONTENT we want to make the width at least the available
 			        // space in the parent so it will appear centered (it could be more to keep the aspect ratio).
 			        // This is a workaround for this view being inside HorizontalScrollView (because it cannot be
 			        // centered there).
-		            width = Math.max(parentWiidth, (int) (height * imageAspectRatio));
+		            width = Math.max(parentWidth, (int) (height * imageAspectRatio));
 			        break;
 	        }
 

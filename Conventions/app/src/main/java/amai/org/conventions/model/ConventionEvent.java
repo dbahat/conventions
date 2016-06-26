@@ -16,8 +16,6 @@ import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Objects;
 
 public class ConventionEvent implements Serializable {
-	private static final String TAG = ConventionEvent.class.getCanonicalName();
-
 	private String id;
     private int serverId;
 	private int backgroundColor;
@@ -299,7 +297,7 @@ public class ConventionEvent implements Serializable {
 
 		/**
 		 * Update this instance from user input loaded from file
-		 * @param other the deserialized user input
+		 * @param other the de-serialized user input
 		 */
 		public void updateFrom(UserInput other) {
 			if (other == null) {

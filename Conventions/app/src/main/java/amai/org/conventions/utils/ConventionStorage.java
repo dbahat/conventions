@@ -40,7 +40,7 @@ public class ConventionStorage {
     private static final String UPDATES_FILE_NAME = "convention_updates.json";
     private static final String EVENTS_FILE_NAME = "convention_events.json";
 
-    private static ReentrantReadWriteLock filesystemAccessLock = new ReentrantReadWriteLock();
+    private static final ReentrantReadWriteLock filesystemAccessLock = new ReentrantReadWriteLock();
 
     private static Context context;
 	private final Convention convention;
@@ -72,11 +72,11 @@ public class ConventionStorage {
 		return getConventionFileName(EVENT_USER_INPUT_FILE_NAME);
 	}
 
-	public String getUpdatesFileName() {
+	private String getUpdatesFileName() {
 		return getConventionFileName(UPDATES_FILE_NAME);
 	}
 
-	public String getEventsFileName() {
+	private String getEventsFileName() {
 		String fileName = getConventionFileName(EVENTS_FILE_NAME);
 		if (eventsFileVersion > 0) {
 			fileName = eventsFileVersion + "_" + fileName;

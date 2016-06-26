@@ -1,13 +1,10 @@
 package amai.org.conventions.utils;
 
-/**
- * Created by dbahat on 8/7/2015.
- */
 public class Strings {
-    private static final int MAX_SNIPPIT_SIZE = 100;
+    private static final int MAX_SNIPPET_SIZE = 100;
 
     /**
-     * Returns a short snippit of the input text, for the area around the input keyword.
+     * Returns a short snippet of the input text, for the area around the input keyword.
      * For example: for the input text "This is a very long message with a lot of text" and keyword "of", the expected output will look like
      * "...with a lot of text".
      *
@@ -19,12 +16,12 @@ public class Strings {
 	    String lowerCaseText = textToSnip.toLowerCase();
         int startIndex = findIndexOfXWordBefore(lowerCaseText, keyword, 3);
 
-        // Note - trimming the text to be at most MAX_SNIPPIT_SIZE, since textView seem to appear distorted when passing
+        // Note - trimming the text to be at most MAX_SNIPPET_SIZE, since textView seem to appear distorted when passing
         // a much larger text than the max allowed.
         if (startIndex <= 0) {
-            return textToSnip.substring(0, Math.min(textToSnip.length(), MAX_SNIPPIT_SIZE));
+            return textToSnip.substring(0, Math.min(textToSnip.length(), MAX_SNIPPET_SIZE));
         } else {
-            return "..." + textToSnip.substring(startIndex, Math.min(textToSnip.length(), startIndex + MAX_SNIPPIT_SIZE));
+            return "..." + textToSnip.substring(startIndex, Math.min(textToSnip.length(), startIndex + MAX_SNIPPET_SIZE));
         }
     }
 

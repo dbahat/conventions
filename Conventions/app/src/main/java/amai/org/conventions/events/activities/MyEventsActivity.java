@@ -168,7 +168,7 @@ public class MyEventsActivity extends NavigationActivity {
 		List<ResolveInfo> candidates = this.getPackageManager()
 				.queryIntentActivities(template, 0);
 
-		// remove facebook, since they don't allow sharing text inside the sharing intent, causing the app to appear borken.
+		// remove facebook, since they don't allow sharing text inside the sharing intent, causing the app to appear broken.
 		for (ResolveInfo candidate : candidates) {
 			String packageName = candidate.activityInfo.packageName;
 			if (!packageName.equals("com.facebook.katana")) {

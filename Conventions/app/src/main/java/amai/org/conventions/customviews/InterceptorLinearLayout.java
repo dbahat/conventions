@@ -26,11 +26,6 @@ public class InterceptorLinearLayout extends LinearLayout {
     }
 
     @Override
-    public void requestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-        super.requestDisallowInterceptTouchEvent(disallowIntercept);
-    }
-
-    @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
         if (listener != null && listener.onInterceptTouchEvent(event)) {
             return true;

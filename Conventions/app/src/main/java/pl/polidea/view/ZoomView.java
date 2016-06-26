@@ -50,7 +50,7 @@ public class ZoomView extends FrameLayout {
 	private int miniMapCaptionColor = Color.WHITE;
 
 	// touching variables
-	GestureDetector gestureDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
+	private GestureDetector gestureDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
 		@Override
 		public boolean onDoubleTap(MotionEvent e) {
 			if (smoothZoom == 1.0f) {

@@ -6,9 +6,9 @@ import java.util.Date;
 import amai.org.conventions.model.ConventionEvent;
 
 public class EventsTimeSlot {
-	ArrayList<ConventionEvent> events;
-	Date startTime;
-	Date endTime;
+	private ArrayList<ConventionEvent> events;
+	private Date startTime;
+	private Date endTime;
 
 	public EventsTimeSlot() {
 		this.events = new ArrayList<>(1);
@@ -66,6 +66,6 @@ public class EventsTimeSlot {
 	}
 
 	public enum EventsTimeSlotType {
-		NO_EVENTS, SINGLE_EVENT, CONFLICTING_EVENTS;
+		NO_EVENTS, SINGLE_EVENT, CONFLICTING_EVENTS
 	}
 }

@@ -8,6 +8,8 @@ import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.TextViewCompat;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -173,10 +175,10 @@ public class CollapsibleFeedbackView extends FrameLayout {
         FeedbackQuestion.Smiley3PointAnswer weightedRating = feedback.getWeightedRating();
         int filterColor;
         if (weightedRating != null) {
-            icon = getResources().getDrawable(weightedRating.getImageResourceId());
-            filterColor = getResources().getColor(R.color.yellow);
+            icon = ContextCompat.getDrawable(getContext(), weightedRating.getImageResourceId());
+            filterColor = ContextCompat.getColor(getContext(), R.color.yellow);
         } else {
-            icon = getResources().getDrawable(R.drawable.feedback);
+            icon = ContextCompat.getDrawable(getContext(), R.drawable.feedback);
             filterColor = ThemeAttributes.getColor(getContext(), R.attr.eventFeedbackHighlightedButtonColor);
         }
         icon = icon.mutate();
@@ -192,7 +194,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
         questionLayout.setLayoutParams(questionLayoutParams);
 
         TextView questionText = new TextView(getContext());
-        questionText.setTextAppearance(getContext(), R.style.FeedbackQuestionTextAppearance);
+	    TextViewCompat.setTextAppearance(questionText, R.style.FeedbackQuestionTextAppearance);
 	    boolean isSent = feedback.isSent();
 	    questionText.setText(question.getQuestionText(getResources(), isSent));
 
@@ -283,7 +285,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 			    }
 
 			    if (selectedAnswer != null) {
-		            selected.setColorFilter(getResources().getColor(R.color.yellow), PorterDuff.Mode.MULTIPLY);
+		            selected.setColorFilter(ContextCompat.getColor(getContext(), R.color.yellow), PorterDuff.Mode.MULTIPLY);
 			    }
 
 		        question.setAnswer(selectedAnswer);
@@ -331,7 +333,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		    TextView textView = new TextView(getContext());
 		    LinearLayout.LayoutParams textViewLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		    textView.setLayoutParams(textViewLayoutParams);
-		    textView.setTextAppearance(getContext(), R.style.FeedbackQuestionTextAppearance);
+			TextViewCompat.setTextAppearance(textView, R.style.FeedbackQuestionTextAppearance);
 		    if (answer != null) {
 		        textView.setText(answer.toString());
 		    }
@@ -350,7 +352,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		    );
 		    LinearLayout.LayoutParams editTextLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		    editText.setLayoutParams(editTextLayoutParams);
-		    editText.setTextAppearance(getContext(), R.style.FeedbackQuestionTextAppearance);
+			TextViewCompat.setTextAppearance(editText, R.style.FeedbackQuestionTextAppearance);
 		    editText.addTextChangedListener(new TextWatcher() {
 			    @Override
 			    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -398,14 +400,14 @@ public class CollapsibleFeedbackView extends FrameLayout {
 			@Override
 			public void onClick(View v) {
 				TextView selected = (TextView) v;
-				selected.setTextAppearance(getContext(), R.style.EventAnswerButtonHighlighted);
+				TextViewCompat.setTextAppearance(selected, R.style.EventAnswerButtonHighlighted);
 
 				// If the user selected the same answer, deselect it
 				String selectedAnswer = selected.getText().toString();
 				if (selectedAnswer.equals(question.getAnswer())) {
 					selectedAnswer = null;
 				}
-				// Ensure radio buttons are synched with user selection
+				// Ensure radio buttons are synchronized with user selection
 				if (radio) {
 					RadioGroup radioGroup = (RadioGroup) mainView;
 					if (selectedAnswer == null) {
@@ -417,7 +419,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 
 				for (TextView answerView : answerViews) {
 					if (selectedAnswer == null || selected != answerView) {
-						answerView.setTextAppearance(getContext(), R.style.EventAnswerButton);
+						TextViewCompat.setTextAppearance(answerView, R.style.EventAnswerButton);
 					}
 				}
 
@@ -437,7 +439,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 				answerButton = new TextView(getContext());
 			}
 			answerViews.add(answerButton);
-			answerButton.setTextAppearance(getContext(), R.style.EventAnswerButton);
+			TextViewCompat.setTextAppearance(answerButton, R.style.EventAnswerButton);
 			answerButton.setText(answerStringId);
 			int endPadding = padding * 4;
 			int startPadding = padding * 4;
@@ -512,7 +514,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
                 layoutAfterResize = feedbackCollapsed;
                 break;
 	        case ExpandedHeadless:
-		        throw new RuntimeException("ExpendadHeadless state is not supported for animation");
+		        throw new RuntimeException("ExpandedHeadless state is not supported for animation");
         }
 
         ValueAnimator animation = slideAnimator(currentHeight, targetHeight, feedbackContainer);

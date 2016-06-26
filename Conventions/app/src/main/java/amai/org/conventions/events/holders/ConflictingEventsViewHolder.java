@@ -63,7 +63,7 @@ public class ConflictingEventsViewHolder extends RecyclerView.ViewHolder {
 		    adapter.unregisterAdapterDataObserver(eventRemovedListener);
 		    eventRemovedListener = null;
 	    }
-        adapter = new DismissibleEventsViewAdapter(events, true);
+        adapter = new DismissibleEventsViewAdapter(events);
         eventsListView.setAdapter(adapter);
         eventsListView.setLayoutManager(new LinearLayoutManager(context));
         updateListHeight();

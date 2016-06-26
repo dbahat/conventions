@@ -25,7 +25,7 @@ public class EventType implements Serializable {
         return other instanceof EventType && equals((EventType) other);
     }
 
-    public boolean equals(EventType other) {
+    private boolean equals(EventType other) {
         return other.getDescription().equals(getDescription());
     }
 

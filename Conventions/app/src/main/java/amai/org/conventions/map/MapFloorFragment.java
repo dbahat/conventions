@@ -11,6 +11,7 @@ import android.graphics.drawable.PictureDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MotionEventCompat;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -69,7 +70,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
 	private static boolean showAnimation = true;
 
-	private static float MAX_ZOOM = 2.5f;
+	private static final float MAX_ZOOM = 2.5f;
 
 	private Floor floor;
 
@@ -248,7 +249,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
     }
 
 	private void initializeLocationDetails() {
-		locationDetailsCloseImage.setColorFilter(getResources().getColor(android.R.color.black));
+		locationDetailsCloseImage.setColorFilter(ContextCompat.getColor(getContext(), android.R.color.black));
 		locationDetailsCloseImage.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -414,7 +415,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 			    // Add markers
 			    for (final MapLocation location : locations) {
 				    // Add the marker for this location
-				    View markerImageView = createMarkerView(location, null);
+				    View markerImageView = createMarkerView(location);
 				    mapFloorImage.addView(markerImageView);
 				    if (animation != null) {
 				        markerImageView.startAnimation(animation);
@@ -439,12 +440,14 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		if (savedInstanceState != null) {
 			ArrayList<Integer> selectedLocations = savedInstanceState.getIntegerArrayList(STATE_SELECTED_LOCATIONS);
 			MapLocation selectedLocation = null;
-			for (int locationId : selectedLocations) {
-				for (Marker marker : floorMarkers) {
-					if (marker.getLocation().getId() == locationId) {
-						selectedLocation = marker.getLocation();
-						marker.select(false);
-						break;
+			if (selectedLocations != null) {
+				for (int locationId : selectedLocations) {
+					for (Marker marker : floorMarkers) {
+						if (marker.getLocation().getId() == locationId) {
+							selectedLocation = marker.getLocation();
+							marker.select(false);
+							break;
+						}
 					}
 				}
 			}
@@ -464,7 +467,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		}
 	}
 
-	private View createMarkerView(final MapLocation location, View markerShadowView) {
+	private View createMarkerView(final MapLocation location) {
 		// We send the appContext here and not the activity due to reasons stated in onAttach,
 		// this means any activity-specific information (like theme, layout direction etc) is not
 		// passed to this image view. It doesn't make any difference in this case since we don't use

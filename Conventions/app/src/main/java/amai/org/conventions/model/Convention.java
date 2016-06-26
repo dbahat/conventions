@@ -46,7 +46,7 @@ public abstract class Convention implements Serializable {
 	private double longitude;
 	private double latitude;
 
-	private ReentrantReadWriteLock eventLockObject = new ReentrantReadWriteLock();
+	private final ReentrantReadWriteLock eventLockObject = new ReentrantReadWriteLock();
 	private ConventionStorage conventionStorage;
 	private EventToImageResourceIdMapper imageMapper;
 

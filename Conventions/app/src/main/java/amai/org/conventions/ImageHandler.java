@@ -17,7 +17,7 @@ import amai.org.conventions.map.AssetsExternalFileResolver;
  * Handles resizing and caching of images which require resizing at runtime.
  */
 public class ImageHandler {
-    private static AssetsExternalFileResolver resolver = new AssetsExternalFileResolver();
+    private static final AssetsExternalFileResolver resolver = new AssetsExternalFileResolver();
     private static Map<Integer, SVG> loadedSVGFiles = new HashMap<>();
     private static Bitmap notificationLargeIcon;
     private static Drawable toolbarLogo;

@@ -145,7 +145,7 @@ public class NestedScrollingFrameLayout extends FrameLayout implements NestedScr
 		// and the toolbar will flicker up and down
 		if (scrollOffset[1] != 0) {
 			dummyScroll = true;
-			// This must be a differen motion event object because we have to send the original event
+			// This must be a different motion event object because we have to send the original event
 			// to our children (or weird things will happen, like scroll operations ending with tap)
 			MotionEvent dummyEvent = MotionEvent.obtain(ev);
 			dummyEvent.offsetLocation(0, -scrollOffset[1]);
@@ -197,7 +197,7 @@ public class NestedScrollingFrameLayout extends FrameLayout implements NestedScr
 		// Nested pre-scroll actually scrolls the toolbar. Consumed array contains the amount scrolled in the
 		// toolbar and scrollOffset array contains the offset of this view after the scroll (we use it to adjust
 		// the gesture detector's current focus point). I don't think it matters if we send the correct consumed values
-		// during dispatchNestedScroll, but we alredy have them so why not.
+		// during dispatchNestedScroll, but we already have them so why not.
 		dispatchNestedPreScroll(Math.round(distanceX), Math.round(distanceY), consumed, scrollOffset);
 		dispatchNestedScroll(Math.round(distanceX) - consumed[0], Math.round(distanceY) - consumed[1], 0, 0, null);
 		return false;
@@ -227,7 +227,7 @@ public class NestedScrollingFrameLayout extends FrameLayout implements NestedScr
 
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		// Fix issue where this view is not full-size due to bug in AppBarLayout.Behavior onMesureChild method - the sent
+		// Fix issue where this view is not full-size due to bug in AppBarLayout.Behavior onMeasureChild method - the sent
 		// measure mode is AT_MOST instead of EXACTLY even for match_parent children of the CoordinatorLayout.
 		// This was fixed already in the design library but not in the version we currently use (22.2.1).
 		// Note that if any other views use this behavior we should make the same workaround (or better for that case,

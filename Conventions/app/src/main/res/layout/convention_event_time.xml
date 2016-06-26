@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Suppressing overdraw here because while there might be overdraw, it's not for the reason
+     the inspection states. This isn't a root layout of any activity and the activity it's on
+     needs the background color. -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:app="http://schemas.android.com/apk/res-auto"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              xmlns:tools="http://schemas.android.com/tools"
              android:background="?eventTimeHeaderBackground"
-             android:padding="1dp">
+             android:padding="1dp"
+             tools:ignore="Overdraw">
 
     <android.support.v7.widget.CardView
         app:cardUseCompatPadding="true"

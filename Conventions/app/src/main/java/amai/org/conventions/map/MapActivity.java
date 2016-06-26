@@ -61,9 +61,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 
 	// Search
 	private LinearLayout searchContainer;
-	private RadioGroup searchType;
 	private RadioButton searchTypeLocations;
-	private RadioButton searchTypeStands;
 	private TextView noResultsFound;
 	private ListView searchResults;
 	private CheckBox showOnlyHallsCheckbox;
@@ -126,7 +124,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		return super.onOptionsItemSelected(item);
 	}
 
-	public MapFloorFragment getCurrentFloorFragment() {
+	private MapFloorFragment getCurrentFloorFragment() {
 		return (MapFloorFragment) viewPager.getAdapter().instantiateItem(viewPager, viewPager.getCurrentItem());
 	}
 
@@ -268,10 +266,9 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 	}
 
 	private void initializeSearch(Bundle savedInstanceState) {
+		RadioGroup searchType = (RadioGroup) findViewById(R.id.search_type);
 		searchContainer = (LinearLayout) findViewById(R.id.map_search);
-		searchType = (RadioGroup) findViewById(R.id.search_type);
 		searchTypeLocations = (RadioButton) findViewById(R.id.search_type_locations);
-		searchTypeStands = (RadioButton) findViewById(R.id.search_type_stands);
 		noResultsFound = (TextView) findViewById(R.id.map_search_no_results_found);
 		searchResults = (ListView) findViewById(R.id.map_search_results);
 		showOnlyHallsCheckbox = (CheckBox) findViewById(R.id.map_search_show_only_halls);
@@ -501,7 +498,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		}.execute();
 	}
 
-	public void toggleSearch() {
+	private void toggleSearch() {
 		if (isSearchOpen()) {
 			closeSearch();
 		} else {
@@ -517,7 +514,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		return searchContainer.getVisibility() == View.VISIBLE;
 	}
 
-	public void openSearch() {
+	private void openSearch() {
 		getCurrentFloorFragment().resetState();
 		isSearchClosing = false;
 		locationsSearchResultsAdapter.setFloor(getCurrentFloorFragment().getFloor());

@@ -1,8 +1,9 @@
 package amai.org.conventions.map;
 
-import android.content.res.Resources;
+import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
@@ -30,15 +31,15 @@ public class MapLocationViewHolder extends RecyclerView.ViewHolder {
 		} else {
 			locationFloor.setVisibility(View.GONE);
 		}
-		Resources resources = itemView.getContext().getResources();
+		Context context = itemView.getContext();
 		Drawable image;
 		if (location.getPlace() instanceof Hall) {
-			image = resources.getDrawable(R.drawable.events_list);
+			image = ContextCompat.getDrawable(context, R.drawable.events_list);
 		} else {
-			image = resources.getDrawable(R.drawable.ic_action_place);
+			image = ContextCompat.getDrawable(context, R.drawable.ic_action_place);
 		}
 		if (image != null) {
-			image.mutate().setColorFilter(resources.getColor(android.R.color.black), PorterDuff.Mode.SRC_ATOP);
+			image.mutate().setColorFilter(ContextCompat.getColor(context, android.R.color.black), PorterDuff.Mode.SRC_ATOP);
 		}
 		// TODO this should be setCompoundDrawablesRelative(image, null, null, null) but in API 17 and 18 it appears on the wrong side.
 		locationName.setCompoundDrawables(null, null, image, null);

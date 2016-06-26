@@ -4,15 +4,15 @@ import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.LightingColorFilter;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PictureDrawable;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -22,7 +22,6 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.caverock.androidsvg.SVG;
@@ -46,6 +45,7 @@ import amai.org.conventions.events.activities.ProgrammeActivity;
 import amai.org.conventions.map.MapActivity;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.updates.UpdatesActivity;
+import amai.org.conventions.utils.Views;
 
 
 public abstract class NavigationActivity extends AppCompatActivity {
@@ -98,26 +98,26 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		final View view = LayoutInflater.from(NavigationActivity.this).inflate(R.layout.navigation_menu, null);
 
 		final List<NavigationItem> items = new ArrayList<>(Arrays.asList(
-				new NavigationItem(ProgrammeActivity.class, getString(R.string.programme_title), getResources().getDrawable(R.drawable.events_list)),
-				new NavigationItem(MyEventsActivity.class, getString(R.string.my_events_title), getResources().getDrawable(R.drawable.events_list_with_star))
+				new NavigationItem(ProgrammeActivity.class, getString(R.string.programme_title), ContextCompat.getDrawable(this, R.drawable.events_list)),
+				new NavigationItem(MyEventsActivity.class, getString(R.string.my_events_title), ContextCompat.getDrawable(this, R.drawable.events_list_with_star))
 		));
 
 		// Only add the map if it's available
 		if (Convention.getInstance().getMap().isAvailable()) {
-			items.add(new NavigationItem(MapActivity.class, getString(R.string.map), getResources().getDrawable(android.R.drawable.ic_dialog_map)));
+			items.add(new NavigationItem(MapActivity.class, getString(R.string.map), ContextCompat.getDrawable(this, android.R.drawable.ic_dialog_map)));
 		}
-		items.add(new NavigationItem(UpdatesActivity.class, getString(R.string.updates), getResources().getDrawable(android.R.drawable.stat_notify_sync_noanim)));
-		items.add(new NavigationItem(ArrivalMethodsActivity.class, getString(R.string.arrival_methods), getResources().getDrawable(R.drawable.directions)));
+		items.add(new NavigationItem(UpdatesActivity.class, getString(R.string.updates), ContextCompat.getDrawable(this, android.R.drawable.stat_notify_sync_noanim)));
+		items.add(new NavigationItem(ArrivalMethodsActivity.class, getString(R.string.arrival_methods), ContextCompat.getDrawable(this, R.drawable.directions)));
 
 		if (Convention.getInstance().canFillFeedback()) {
-			items.add(new NavigationItem(FeedbackActivity.class, getString(R.string.feedback), getResources().getDrawable(R.drawable.feedback_menu_icon)));
+			items.add(new NavigationItem(FeedbackActivity.class, getString(R.string.feedback), ContextCompat.getDrawable(this, R.drawable.feedback_menu_icon)));
 		}
 
 		ListView navigationItems = (ListView) view.findViewById(R.id.navigation_items);
 		navigationItems.setAdapter(new NavigationItemsAdapter(this, items));
 
 		// Set list width - wrap_content doesn't work due to unknown number of items in the list view
-		navigationItems.getLayoutParams().width = calculateWrapContentWidth(this, navigationItems.getAdapter());
+		navigationItems.getLayoutParams().width = Views.calculateWrapContentWidth(this, navigationItems.getAdapter());
 		navigationItems.setLayoutParams(navigationItems.getLayoutParams());
 
 		final AnimationPopupWindow popup = new AnimationPopupWindow(
@@ -135,7 +135,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		        R.anim.drop_down_reverse);
 
 		// This must be done to enable listening to clicks on the popup window
-		popup.setBackgroundDrawable(new BitmapDrawable());
+		popup.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 		popup.setAnimationStyle(0);
 		popup.setFocusable(true);
 		popup.setOutsideTouchable(true);
@@ -158,26 +158,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		return popup;
 	}
 
-	/**
-	 * Calculates the width of the widest view in an adapter, for use when you need to wrap_content on a ListView.
-	 * Used for ListViews with a known (and small) number of items.
-	 */
-	public static int calculateWrapContentWidth(Context context, ListAdapter adapter) {
-		int maxWidth = 0;
-		View view = null;
-		FrameLayout fakeParent = new FrameLayout(context);
-		for (int i = 0, count = adapter.getCount(); i < count; ++i) {
-			view = adapter.getView(i, view, fakeParent);
-			view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
-			int width = view.getMeasuredWidth();
-			if (width > maxWidth) {
-				maxWidth = width;
-			}
-		}
-		return maxWidth;
-	}
-
-    @Override
+	@Override
     protected void onDestroy() {
         super.onDestroy();
 

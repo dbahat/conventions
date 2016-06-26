@@ -12,7 +12,7 @@ import amai.org.conventions.utils.Log;
 public class Feedback implements Serializable, Cloneable {
 	private static final String TAG = Feedback.class.getCanonicalName();
 	private Map<Integer, FeedbackQuestion> questions;
-	boolean isSent;
+	private boolean isSent;
 
 	public Feedback() {
 		questions = new LinkedHashMap<>();
@@ -27,7 +27,7 @@ public class Feedback implements Serializable, Cloneable {
 
 	/**
 	 * Update this instance from feedback loaded from file
-	 * @param other the deserialized feedback
+	 * @param other the de-serialized feedback
 	 */
 	public void updateFrom(Feedback other) {
 		if (other == null) {

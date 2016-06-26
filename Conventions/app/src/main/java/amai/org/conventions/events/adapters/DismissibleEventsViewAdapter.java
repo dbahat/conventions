@@ -14,11 +14,9 @@ import amai.org.conventions.model.ConventionEvent;
 
 public class DismissibleEventsViewAdapter extends RecyclerView.Adapter<SwipeableEventViewHolder> {
     private List<ConventionEvent> eventsList;
-    private final boolean conflicting;
 
-    public DismissibleEventsViewAdapter(List<ConventionEvent> eventsList, boolean conflicting) {
+    public DismissibleEventsViewAdapter(List<ConventionEvent> eventsList) {
         this.eventsList = eventsList;
-        this.conflicting = conflicting;
     }
 
     @Override
@@ -30,7 +28,7 @@ public class DismissibleEventsViewAdapter extends RecyclerView.Adapter<Swipeable
     @Override
     public void onBindViewHolder(SwipeableEventViewHolder holder, int position) {
 	    holder.reset();
-	    holder.setModel(eventsList.get(position), conflicting);
+	    holder.setModel(eventsList.get(position), true);
 
         EventSwipeToDismissListener listener = new EventSwipeToDismissListener(holder, eventsList, this);
         holder.setOnViewSwipedAction(listener);

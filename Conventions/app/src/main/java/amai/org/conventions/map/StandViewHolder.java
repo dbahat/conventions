@@ -1,8 +1,9 @@
 package amai.org.conventions.map;
 
-import android.content.res.Resources;
+import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
@@ -23,14 +24,14 @@ public class StandViewHolder extends RecyclerView.ViewHolder {
 
 	public void setStand(Stand stand) {
 		standName.setText(stand.getName());
-		Resources resources = itemView.getContext().getResources();
-		Drawable image = resources.getDrawable(stand.getType().getImage());
+		Context context = itemView.getContext();
+		Drawable image = ContextCompat.getDrawable(context, stand.getType().getImage());
 		if (colorImage && image != null) {
-			image.mutate().setColorFilter(ThemeAttributes.getColor(itemView.getContext(), R.attr.navigationPopupSelectedColor), PorterDuff.Mode.SRC_ATOP);
+			image.mutate().setColorFilter(ThemeAttributes.getColor(context, R.attr.navigationPopupSelectedColor), PorterDuff.Mode.SRC_ATOP);
 		}
 		// TODO this should be setCompoundDrawablesRelative(image, null, null, null) but in API 17 and 18 it appears on the wrong side.
-		// After recycling it works. I tried calling setCompoundRelative twice and to change the order of method calls on standName
-		// but it didn't work.
+		// After recycling it works. I tried calling setCompoundRelative twice (with same parameters and with nulls), calling setCompoundDrawables with nulls
+		// and to change the order of method calls on standName but it didn't work.
 		standName.setCompoundDrawables(null, null, image, null);
 	}
 }

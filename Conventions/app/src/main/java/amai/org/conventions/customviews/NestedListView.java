@@ -24,7 +24,7 @@ public class NestedListView extends ListView {
 		if (heightMode != MeasureSpec.EXACTLY) {
 			ListAdapter listAdapter = getAdapter();
 			if (listAdapter != null && !listAdapter.isEmpty()) {
-				int listPosition = 0;
+				int listPosition;
 				for (listPosition = 0; listPosition < listAdapter.getCount(); ++listPosition) {
 					View listItem = listAdapter.getView(listPosition, null, this);
 					listItem.measure(widthMeasureSpec, heightMeasureSpec);

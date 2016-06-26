@@ -76,8 +76,8 @@ public class ModelParser {
 	            int bgColor = parseColorFromServer(eventObj.get("timetable-bg").getAsString());
 	            int textColor = parseColorFromServer(eventObj.get("timetable-text-color").getAsString());
 
-	            Date startTime = Dates.parseHourAndMinute(internalEventObj.get("start").getAsString());
-	            Date endTime = Dates.parseHourAndMinute(internalEventObj.get("end").getAsString());
+	            Date startTime = Dates.parseConventionDateHourAndMinute(internalEventObj.get("start").getAsString());
+	            Date endTime = Dates.parseConventionDateHourAndMinute(internalEventObj.get("end").getAsString());
                 String hallName = internalEventObj.get("room").getAsString();
                 Hall hall = Convention.getInstance().findHallByName(hallName);
 

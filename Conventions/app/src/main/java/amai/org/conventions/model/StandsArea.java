@@ -6,7 +6,7 @@ import java.util.List;
 import amai.org.conventions.utils.Objects;
 
 public class StandsArea extends Place implements Serializable {
-	int id;
+	private int id;
 	private List<Stand> stands;
 
     public StandsArea() {

@@ -95,7 +95,7 @@ public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
 	/**
-	 * Updates the events list after removal of an event. Includes re-calculing what are conflicting events and what are the free slots based on the change.
+	 * Updates the events list after removal of an event. Includes re-calculating what are conflicting events and what are the free slots based on the change.
 	 *
 	 * @param adapterPosition The position of the changed timeslot. In case there are conflicting events, they are treated as a a single slot
 	 * @param eventsList The list of events after the removal. In case there were no conflicting events in the slot, will be empty

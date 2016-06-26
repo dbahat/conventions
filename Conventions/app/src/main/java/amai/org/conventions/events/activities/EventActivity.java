@@ -7,6 +7,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.graphics.Palette;
 import android.text.Html;
@@ -204,7 +205,7 @@ public class EventActivity extends NavigationActivity {
 	    ConventionEvent.UserInput userInput = conventionEvent.getUserInput();
 	    if (userInput.isAttending()) {
             MenuItem favoritesButton = menu.findItem(R.id.event_change_favorite_state);
-            favoritesButton.setIcon(getResources().getDrawable(android.R.drawable.btn_star_big_on));
+            favoritesButton.setIcon(ContextCompat.getDrawable(this, android.R.drawable.btn_star_big_on));
         }
 
 	    setupAlarmsMenuItem(menu, userInput);
@@ -313,13 +314,13 @@ public class EventActivity extends NavigationActivity {
 		if (userInput.isAttending()) {
 	        userInput.setAttending(false);
 						ConventionsApplication.alarmScheduler.cancelDefaultEventAlarms(conventionEvent);
-	        item.setIcon(getResources().getDrawable(R.drawable.star_with_plus));
+	        item.setIcon(ContextCompat.getDrawable(this, R.drawable.star_with_plus));
 	        item.setTitle(getResources().getString(R.string.event_add_to_favorites));
 	        Snackbar.make(this.mainLayout, R.string.event_removed_from_favorites, Snackbar.LENGTH_SHORT).show();
 	    } else {
 	        userInput.setAttending(true);
 			ConventionsApplication.alarmScheduler.scheduleDefaultEventAlarms(conventionEvent);
-	        item.setIcon(getResources().getDrawable(android.R.drawable.btn_star_big_on));
+	        item.setIcon(ContextCompat.getDrawable(this, android.R.drawable.btn_star_big_on));
 	        item.setTitle(getResources().getString(R.string.event_remove_from_favorites));
 	        Snackbar.make(this.mainLayout, R.string.event_added_to_favorites, Snackbar.LENGTH_SHORT).show();
 	    }
@@ -383,7 +384,7 @@ public class EventActivity extends NavigationActivity {
                 Dates.toHumanReadableTimeDuration(event.getEndTime().getTime() - event.getStartTime().getTime()));
         time.setText(String.format("%s%s", formattedEventHall, formattedEventTime));
 
-	    setupFeedback(event, false);
+	    setupFeedback(event);
 
 	    setupEventDescription(event);
 
@@ -391,15 +392,15 @@ public class EventActivity extends NavigationActivity {
 
     }
 
-	private void setupFeedback(ConventionEvent event, boolean animate) {
+	private void setupFeedback(ConventionEvent event) {
 		if (event.canFillFeedback()) {
 			feedbackContainer.setVisibility(View.VISIBLE);
 	        feedbackView.setModel(event.getUserInput().getFeedback());
 
 			if (shouldFeedbackBeClosed()) {
-				feedbackView.setState(CollapsibleFeedbackView.State.Collapsed, animate);
+				feedbackView.setState(CollapsibleFeedbackView.State.Collapsed, false);
 			} else {
-				feedbackView.setState(CollapsibleFeedbackView.State.Expanded, animate);
+				feedbackView.setState(CollapsibleFeedbackView.State.Expanded, false);
 			}
 
 			feedbackView.setSendFeedbackClickListener(feedbackView.new CollapsibleFeedbackViewSendMailListener() {

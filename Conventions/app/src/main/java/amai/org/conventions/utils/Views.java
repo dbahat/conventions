@@ -1,12 +1,15 @@
 package amai.org.conventions.utils;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Point;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ListAdapter;
 
 public class Views {
 	public static Point findCoordinates(ViewGroup parentView, View childView) {
@@ -50,5 +53,25 @@ public class Views {
 	private static void hideKeyboard(Activity activity, View view) {
 		InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
 		inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+	}
+
+
+	/**
+	 * Calculates the width of the widest view in an adapter, for use when you need to wrap_content on a ListView.
+	 * Used for ListViews with a known (and small) number of items.
+	 */
+	public static int calculateWrapContentWidth(Context context, ListAdapter adapter) {
+		int maxWidth = 0;
+		View view = null;
+		FrameLayout fakeParent = new FrameLayout(context);
+		for (int i = 0, count = adapter.getCount(); i < count; ++i) {
+			view = adapter.getView(i, view, fakeParent);
+			view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+			int width = view.getMeasuredWidth();
+			if (width > maxWidth) {
+				maxWidth = width;
+			}
+		}
+		return maxWidth;
 	}
 }

@@ -51,7 +51,7 @@ public final class ParallaxHelper {
                 parallaxDrawable.setParallaxExtraWidthHeight(width, height);
             }
         });
-        view.setBackgroundDrawable(parallaxDrawable);
+        view.setBackground(parallaxDrawable);
         fixParallaxBackgroundPreJBMR1(view, parallaxDrawable);
     }
 
@@ -118,7 +118,7 @@ public final class ParallaxHelper {
             drawable.setCallback(new Drawable.Callback() {
                 @Override
                 public void invalidateDrawable(Drawable who) {
-                    view.setBackgroundDrawable(who);
+                    view.setBackground(who);
                 }
 
                 @Override

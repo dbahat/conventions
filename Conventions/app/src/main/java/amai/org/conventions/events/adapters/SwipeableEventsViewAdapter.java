@@ -16,14 +16,12 @@ import amai.org.conventions.model.ConventionEvent;
 public class SwipeableEventsViewAdapter extends RecyclerView.Adapter<SwipeableEventViewHolder> {
     private List<ConventionEvent> eventsList;
 
-	private View recyclerView;
     private List<String> keywordsToHighlight;
 	private OnEventFavoriteChangedListener listener;
 
 	public SwipeableEventsViewAdapter(List<ConventionEvent> eventsList, View recyclerView) {
         this.eventsList = eventsList;
-		this.recyclerView = recyclerView;
-		this.listener = new DefaultEventFavoriteChangedListener(this.recyclerView);
+		this.listener = new DefaultEventFavoriteChangedListener(recyclerView);
 	}
 
     @Override
@@ -55,11 +53,9 @@ public class SwipeableEventsViewAdapter extends RecyclerView.Adapter<SwipeableEv
         return eventsList.size();
     }
 
-	public void setEventsList(List<ConventionEvent> eventsList, boolean notify) {
+	public void setEventsList(List<ConventionEvent> eventsList) {
 		this.eventsList = eventsList;
-		if (notify) {
-			notifyDataSetChanged();
-		}
+		notifyDataSetChanged();
 	}
 
     public void setKeywordsHighlighting(List<String> keywords) {

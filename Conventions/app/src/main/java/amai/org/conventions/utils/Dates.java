@@ -18,7 +18,7 @@ public class Dates {
         HOUR, MINUTE, SECOND
     }
 
-	private static Locale LOCALE = new Locale("iw", "IL");
+	private static final Locale LOCALE = new Locale("iw", "IL");
     private static Date appStartDate = new Date();
     private static Date initialDate = getInitialDate();
 
@@ -124,7 +124,7 @@ public class Dates {
         return new SimpleDateFormat("HH:mm", getLocale()).format(date);
     }
 
-    public static Date parseHourAndMinute(String date) {
+    public static Date parseConventionDateHourAndMinute(String date) {
         try {
             Date hourAndMinute = new SimpleDateFormat("HH:mm:ss", getLocale()).parse(date);
             Calendar calendar = Calendar.getInstance();
@@ -136,10 +136,11 @@ public class Dates {
         }
     }
 
-	public static void setConventionDate(Calendar calendar) {
-            calendar.set(Convention.getInstance().getDate().get(Calendar.YEAR),
-                    Convention.getInstance().getDate().get(Calendar.MONTH),
-                    Convention.getInstance().getDate().get(Calendar.DAY_OF_MONTH));
+	private static void setConventionDate(Calendar calendar) {
+		Calendar conventionDate = Convention.getInstance().getDate();
+		calendar.set(conventionDate.get(Calendar.YEAR),
+                    conventionDate.get(Calendar.MONTH),
+                    conventionDate.get(Calendar.DAY_OF_MONTH));
 	}
 
 	public static Locale getLocale() {
