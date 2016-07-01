@@ -52,7 +52,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
         }
 
         setToolbarTitle(getResources().getString(R.string.updates));
-        setContentInContentContainer(R.layout.activity_updates);
+        setContentInContentContainer(R.layout.activity_updates, false);
         resolveUiElements();
 
         // Initialize the recycler view.

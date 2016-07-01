@@ -4,9 +4,9 @@
      needs the background color. -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:app="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             xmlns:tools="http://schemas.android.com/tools"
              android:background="?eventTimeHeaderBackground"
              android:padding="1dp"
              tools:ignore="Overdraw">
@@ -15,13 +15,13 @@
         app:cardUseCompatPadding="true"
         app:cardElevation="2dp"
         app:cardMaxElevation="2dp"
+        app:cardBackgroundColor="?eventTimeHeaderColor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?eventTimeHeaderColor"
             android:padding="10dp">
 
             <TextView

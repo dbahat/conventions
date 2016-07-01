@@ -78,7 +78,7 @@ public class EventActivity extends NavigationActivity {
 	@Override
     protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentInContentContainer(R.layout.activity_event);
+		setContentInContentContainer(R.layout.activity_event, false);
 
 		mainLayout = findViewById(R.id.event_main_layout);
 		imagesBackground = findViewById(R.id.images_background);

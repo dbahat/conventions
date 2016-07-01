@@ -2,6 +2,7 @@
 <resources>
     <!-- Base application theme. -->
     <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@null</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowSoftInputMode">adjustPan</item>
         <item name="android:layoutDirection">rtl</item>
@@ -68,9 +69,5 @@
         <item name="eventFeedbackHighlightedButtonPressedColor">@color/very_dark_purple_button</item>
         <item name="feedbackAnswerButtonColor">@color/dark_purple</item>
         <item name="feedbackAnswerButtonSelectedColor">@color/red</item>
-    </style>
-
-    <style name="AppBaseTheme.NoBackgroundColor" parent="AppBaseTheme.Harucon2016.Toolbar">
-        <item name="android:windowBackground">@null</item>
     </style>
 </resources>

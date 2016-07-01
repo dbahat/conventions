@@ -52,8 +52,7 @@
         android:layout_marginEnd="@dimen/event_details_box_padding"
         android:layout_marginStart="@dimen/event_details_box_padding"
         android:layout_marginTop="@dimen/event_details_box_padding"
-        android:alpha="0.1"
-        android:background="@android:color/black" />
+        android:background="@color/transparent_black" />
 
     <FrameLayout
         android:layout_width="wrap_content"

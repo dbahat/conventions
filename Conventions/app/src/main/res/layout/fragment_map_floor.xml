@@ -79,23 +79,23 @@
             android:id="@+id/location_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?locationDetailsBackground"
             android:orientation="vertical"
             android:visibility="gone"
             tools:visibility="visible"
             android:alpha="0.9"
             android:layout_alignParentBottom="true">
 
-            <ImageView
+            <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:src="?locationDetailsTopLineColor"/>
+                android:background="?locationDetailsTopLineColor"/>
 
             <LinearLayout
                 android:padding="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="?locationDetailsBackground">
 
                 <RelativeLayout
                     android:layout_width="match_parent"

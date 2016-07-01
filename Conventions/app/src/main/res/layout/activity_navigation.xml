@@ -7,6 +7,7 @@
 
     <android.support.design.widget.AppBarLayout
         app:layout_behavior="amai.org.conventions.AppBarLayoutSnapBehavior"
+        android:background="@null"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -30,6 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:background="?android:attr/colorBackground"
         android:foreground="@drawable/bottom_shadow"/>
 
 </android.support.design.widget.CoordinatorLayout>

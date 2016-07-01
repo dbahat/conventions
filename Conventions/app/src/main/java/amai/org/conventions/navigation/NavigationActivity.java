@@ -240,10 +240,14 @@ public abstract class NavigationActivity extends AppCompatActivity {
     }
 
 	protected View setContentInContentContainer(int layoutResID) {
-		return setContentInContentContainer(layoutResID, true);
+		return setContentInContentContainer(layoutResID, true, true);
 	}
 
-    protected View setContentInContentContainer(int layoutResID, boolean hideToolbarOnScroll) {
+	protected View setContentInContentContainer(int layoutResID, boolean useDefaultBackground) {
+		return setContentInContentContainer(layoutResID, useDefaultBackground, true);
+	}
+
+    protected View setContentInContentContainer(int layoutResID, boolean useDefaultBackground, boolean hideToolbarOnScroll) {
         FrameLayout contentContainer = (FrameLayout) findViewById(R.id.navigation_content_view_container);
         getLayoutInflater().inflate(layoutResID, contentContainer, true);
 
@@ -251,6 +255,10 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		    AppBarLayout.LayoutParams layoutParams = (AppBarLayout.LayoutParams) navigationToolbar.getLayoutParams();
 		    layoutParams.setScrollFlags(0);
 		    navigationToolbar.setLayoutParams(layoutParams);
+	    }
+
+	    if (!useDefaultBackground) {
+		    contentContainer.setBackground(null);
 	    }
 
 	    return contentContainer;

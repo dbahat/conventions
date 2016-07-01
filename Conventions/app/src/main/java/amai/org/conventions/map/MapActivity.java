@@ -76,7 +76,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentInContentContainer(R.layout.activity_map, false);
+        setContentInContentContainer(R.layout.activity_map, false, false);
 
 	    // Read and initialize parameters from bundle
 	    Bundle bundle = (savedInstanceState != null ? savedInstanceState : getIntent().getExtras());
