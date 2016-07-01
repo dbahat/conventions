@@ -40,8 +40,8 @@ public class ConflictingEventsViewHolder extends RecyclerView.ViewHolder {
 
 	private int calculateEventViewHeight() {
 		Point screenSize = getScreenSize();
-		EventView eventView = new EventView(context, null);
-		eventView.setConflicting(true);
+		EventView eventView = new EventView(context);
+		eventView.setEvent(null, true);
 		eventView.measure(screenSize.x, screenSize.y);
 		return eventView.getMeasuredHeight();
 	}

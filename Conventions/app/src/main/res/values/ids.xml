@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="main_event_view" type="id"/>
+    <item name="hidden_event_view" type="id"/>
+    <item name="hidden_event_view2" type="id"/>
+</resources>

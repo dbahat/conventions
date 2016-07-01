@@ -45,6 +45,7 @@ public class MyEventsActivity extends NavigationActivity {
 	private RecyclerView eventsList;
 	private View emptyView;
 	private AlertDialog noEventsDialog;
+	private EventGroupsAdapter adapter;
 
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +81,11 @@ public class MyEventsActivity extends NavigationActivity {
 
 		// Set up events list
 		ArrayList<EventsTimeSlot> nonConflictingGroups = getNonConflictingGroups(null, events, null);
-		final EventGroupsAdapter adapter = new EventGroupsAdapter(nonConflictingGroups);
+		if (adapter == null) {
+			adapter = new EventGroupsAdapter(nonConflictingGroups);
+		} else {
+			adapter.updateEventGroups(nonConflictingGroups);
+		}
 		eventsList.setAdapter(adapter);
 
 		updateVisibility(nonConflictingGroups.size(), eventsList, emptyView);

@@ -1,10 +1,10 @@
 package amai.org.conventions.events;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.text.SpannableString;
@@ -48,6 +48,10 @@ public class EventView extends FrameLayout {
     private final TextView searchDescription;
 	private String eventDescriptionContent;
 
+	public EventView(Context context) {
+		this(context, null);
+	}
+
     public EventView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -68,73 +72,43 @@ public class EventView extends FrameLayout {
         searchDescription = (TextView) this.findViewById(R.id.search_description);
 
         setConflicting(false);
-        setAttributes(attrs);
     }
 
-    private void setAttributes(AttributeSet attrs) {
-        if (attrs == null) {
-            return;
-        }
-        TypedArray params = getContext().obtainStyledAttributes(attrs, R.styleable.Event);
+	public void setEvent(ConventionEvent event) {
+		setEvent(event, false);
+	}
 
-        setAttending(params.getBoolean(R.styleable.Event_attending, false));
-        setHallName(params.getString(R.styleable.Event_hallName));
-        setShowHallName(params.getBoolean(R.styleable.Event_showHallName, true));
-        setShowFavoriteIcon(params.getBoolean(R.styleable.Event_showFavoriteIcon, true));
-        setStartTime(params.getString(R.styleable.Event_startTime));
-        setEndTime(params.getString(R.styleable.Event_endTime));
-        setEventTitle(params.getString(R.styleable.Event_eventTitle));
-        setLecturerName(params.getString(R.styleable.Event_lecturerName));
-	    setFeedbackIcon(params.getDrawable(R.styleable.Event_feedbackIcon));
+    public void setEvent(ConventionEvent event, boolean conflicting) {
+	    setConflicting(conflicting);
+	    if (event != null) {
+	        setColorsFromEvent(event, conflicting);
+	        setAttending(event.isAttending());
+	        setHallName(event.getHall().getName());
+	        setStartTime(Dates.formatHoursAndMinutes(event.getStartTime()));
+	        setEndTime(Dates.formatHoursAndMinutes(event.getEndTime()));
+	        setEventTitle(event.getTitle());
+	        setLecturerName(event.getLecturer());
+		    setFeedbackIconFromEvent(event);
+		    setAlarmIconFromEvent(event);
+		    eventDescriptionContent = event.getPlainTextDescription();
+	    }
 
-        setColorFromAttributes(timeLayout, params, R.styleable.Event_eventTypeColor);
-        setColorFromAttributes(eventDescription, params, R.styleable.Event_eventColor);
-
-
-        params.recycle();
-    }
-
-    public void setEvent(ConventionEvent event) {
-        setColorsFromEvent(event);
-        setAttending(event.isAttending());
-        setHallName(event.getHall().getName());
-        setStartTime(Dates.formatHoursAndMinutes(event.getStartTime()));
-        setEndTime(Dates.formatHoursAndMinutes(event.getEndTime()));
-        setEventTitle(event.getTitle());
-        setLecturerName(event.getLecturer());
-	    setFeedbackIconFromEvent(event);
-	    setAlarmIconFromEvent(event);
-
-	    eventDescriptionContent = event.getPlainTextDescription();
         searchDescription.setText("");
 
         // Setting the event id inside the view tag, so we can easily extract it from the view when listening to onClick events.
-        eventContainer.setTag(event.getId());
+        eventContainer.setTag(event == null ? null : event.getId());
     }
 
-    private void setColorsFromEvent(ConventionEvent event) {
+    private void setColorsFromEvent(ConventionEvent event, boolean conflicting) {
         setEventTypeColor(event.getBackgroundColor(getContext()));
 	    setEventTimeTextColor(event.getTextColor(getContext()));
         if (!event.hasStarted()) {
-            setEventColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeNotStartedColor));
+            setEventColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeNotStartedColor), conflicting);
         } else if (event.hasEnded()) {
-            setEventColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeEndedColor));
+            setEventColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeEndedColor), conflicting);
         } else {
-            setEventColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeCurrentColor));
+            setEventColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeCurrentColor), conflicting);
         }
-    }
-
-    private void setColorFromAttributes(ViewGroup layout, TypedArray params, int drawableOrColorId) {
-        Drawable drawable = params.getDrawable(drawableOrColorId);
-        if (drawable != null) {
-            setLayoutColor(layout, drawable);
-        } else {
-            setLayoutColor(layout, params.getColor(drawableOrColorId, Color.WHITE));
-        }
-    }
-
-    public void setEventTypeColor(Drawable drawable) {
-        setLayoutColor(timeLayout, drawable);
     }
 
     public void setEventTypeColor(int color) {
@@ -146,16 +120,40 @@ public class EventView extends FrameLayout {
 		endTime.setTextColor(color);
 	}
 
-    public void setEventColor(int color) {
-        setLayoutColor(eventDescription, color);
-    }
-
-    public void setEventColor(Drawable drawable) {
-        setLayoutColor(eventDescription, drawable);
-    }
-
-    private void setLayoutColor(ViewGroup layout, Drawable drawable) {
-        setBackground(layout, drawable);
+    public void setEventColor(int color, boolean conflicting) {
+	    // Card implementation is different before and after Lollipop.
+	    // Before Lollipop the layout inside the card does not cover the entire card area.
+	    // Therefore if the card itself doesn't have a background color, views under it will be
+	    // visible and there might be artifacts in the drawing.
+	    // On the other hand, in order to prevent overdraw we want to draw as little layers as
+	    // possible on the screen.
+	    // The best solution we came up with is:
+	    // 1. If we're post-Lollipop, the card never needs a background and only the layout inside it
+	    //    has a color (time box and event description).
+	    // 2. If we're pre-Lollipop, the card must have a background. We will paint it the color of
+	    //    the event, and the time box will have overdraw. The event description doesn't need a
+	    //    background in this case.
+	    // 3. A special case for pre-Lollipop is when it's a conflicting event. In that case we
+	    //    already know what the background of the card is (a RecyclerView with a dark background)
+	    //    so we can have a transparent card. In that case we make the card itself transparent and
+	    //    only color the event description and time box.
+	    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+		    // 1. post-Lollipop
+		    eventContainer.setCardBackgroundColor(Color.TRANSPARENT);
+		    setLayoutColor(eventDescription, color);
+	    } else if (conflicting) {
+		    // 3. Conflicting event pre-Lollipop
+		    // If we just color the card transparent its shadow is still visible (although the elevation
+		    // is 0), so we remove the background completely. Note that this relies in the inner implementation
+		    // of the card view! (and that due to that implementation it's impossible to return the background
+		    // afterwards)
+		    eventContainer.setBackground(null);
+		    setLayoutColor(eventDescription, color);
+	    } else {
+		    // 2. Non-conflicting event pre-Lollipop
+	        eventContainer.setCardBackgroundColor(color);
+		    setLayoutColor(eventDescription, Color.TRANSPARENT);
+	    }
     }
 
     private void setLayoutColor(ViewGroup layout, int color) {
@@ -258,25 +256,13 @@ public class EventView extends FrameLayout {
 		setFeedbackIcon(icon);
 	}
 
-    private void setBackground(ViewGroup layout, Drawable drawable) {
-        int pL = layout.getPaddingLeft();
-        int pT = layout.getPaddingTop();
-        int pR = layout.getPaddingRight();
-        int pB = layout.getPaddingBottom();
-
-        layout.setBackground(drawable);
-        layout.setPadding(pL, pT, pR, pB);
-    }
-
-    public void setConflicting(boolean conflicting) {
+    private void setConflicting(boolean conflicting) {
         if (conflicting) {
             eventContainer.setCardElevation(0.0f);
             eventContainer.setMaxCardElevation(0.0f);
-            eventContainer.setCardBackgroundColor(ThemeAttributes.getColor(getContext(), R.attr.conflictingEventsBackground));
         } else {
             eventContainer.setCardElevation(6.0f);
             eventContainer.setMaxCardElevation(6.0f);
-            eventContainer.setCardBackgroundColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeNotStartedColor));
         }
     }
 

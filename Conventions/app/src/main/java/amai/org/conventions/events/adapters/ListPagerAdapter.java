@@ -25,8 +25,17 @@ public class ListPagerAdapter extends PagerAdapter {
 
 	@Override
 	public Object instantiateItem(ViewGroup container, int position) {
-		View view = views.get(position);
+		View view = getView(position);
 		container.addView(view);
 		return view;
+	}
+
+	@Override
+	public void destroyItem(ViewGroup container, int position, Object object) {
+		container.removeView((View) object);
+	}
+
+	public View getView(int position) {
+		return views.get(position);
 	}
 }

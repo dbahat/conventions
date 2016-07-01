@@ -18,7 +18,6 @@ public class EventViewHolder extends RecyclerView.ViewHolder {
 	public void setModel(ConventionEvent event) {
 		eventView.setShowFavoriteIcon(true);
 		eventView.setShowHallName(true);
-		eventView.setConflicting(false);
-		eventView.setEvent(event);
+		eventView.setEvent(event, false);
 	}
 }

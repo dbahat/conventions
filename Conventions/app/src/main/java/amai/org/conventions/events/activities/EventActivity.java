@@ -2,8 +2,12 @@ package amai.org.conventions.events.activities;
 
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.Snackbar;
@@ -15,12 +19,14 @@ import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -64,8 +70,10 @@ public class EventActivity extends NavigationActivity {
 	private LinearLayout feedbackContainer;
     private CollapsibleFeedbackView feedbackView;
 
-	private AspectRatioImageView fadingImageView;
+	private ImageView gradientImageView;
+	private ImageView lastImageView;
 	private Menu menu;
+	private View imagesBackground;
 
 	@Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -73,6 +81,7 @@ public class EventActivity extends NavigationActivity {
 		setContentInContentContainer(R.layout.activity_event);
 
 		mainLayout = findViewById(R.id.event_main_layout);
+		imagesBackground = findViewById(R.id.images_background);
 		imagesLayout = (LinearLayout) findViewById(R.id.images_layout);
 		feedbackContainer = (LinearLayout) findViewById(R.id.event_feedback_container);
 		feedbackView = (CollapsibleFeedbackView) findViewById(R.id.event_feedback_view);
@@ -140,10 +149,9 @@ public class EventActivity extends NavigationActivity {
 						if (backgroundHeight < screenHeight) {
 							backgroundToScroll = backgroundHeight;
 							maxParallax = 0.7f;
+							enableFadingEffect();
 						} else {
-							if (fadingImageView != null) {
-								fadingImageView.setBottomFadingEdgeEnabled(false);
-							}
+							disableFadingEffect();
 							backgroundToScroll = backgroundHeight - screenHeight;
 
 							// If foreground height is smaller than background height (and background should be scrolled),
@@ -168,11 +176,9 @@ public class EventActivity extends NavigationActivity {
 				});
 
 				// Set images background color according to last image's color palette
-				if (imagesLayout.getChildCount() > 0) {
-					final View imagesBackground = findViewById(R.id.images_background);
-					ImageView lastImage = (ImageView) imagesLayout.getChildAt(imagesLayout.getChildCount() - 1);
-					if (lastImage.getDrawable() instanceof BitmapDrawable) {
-						Bitmap bitmap = ((BitmapDrawable) lastImage.getDrawable()).getBitmap();
+				if (lastImageView != null) {
+					if (lastImageView.getDrawable() instanceof BitmapDrawable) {
+						Bitmap bitmap = ((BitmapDrawable) lastImageView.getDrawable()).getBitmap();
 
 						Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
 							@Override
@@ -183,7 +189,7 @@ public class EventActivity extends NavigationActivity {
 									swatch = palette.getDarkVibrantSwatch();
 								}
 								if (swatch != null) {
-									imagesBackground.setBackgroundColor(swatch.getRgb());
+									updateBackgroundColor(swatch.getRgb());
 								}
 							}
 						});
@@ -197,7 +203,31 @@ public class EventActivity extends NavigationActivity {
 
 	}
 
-    @Override
+	private int getBackgroundColor() {
+		return ((ColorDrawable) imagesBackground.getBackground()).getColor();
+	}
+
+	private void updateBackgroundColor(int newColor) {
+		imagesBackground.setBackgroundColor(newColor);
+		if (gradientImageView != null) {
+			((GradientDrawable) gradientImageView.getDrawable()).setColors(new int[]{Color.TRANSPARENT, newColor});
+		}
+	}
+
+	private void enableFadingEffect() {
+		if (gradientImageView != null) {
+			((GradientDrawable) gradientImageView.getDrawable()).setColors(new int[]{Color.TRANSPARENT, getBackgroundColor()});
+			gradientImageView.setVisibility(View.VISIBLE);
+		}
+	}
+
+	private void disableFadingEffect() {
+		if (gradientImageView != null) {
+			gradientImageView.setVisibility(View.GONE);
+		}
+	}
+
+	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
 	    this.menu = menu;
 	    getMenuInflater().inflate(R.menu.menu_event, menu);
@@ -469,31 +499,71 @@ public class EventActivity extends NavigationActivity {
 	private void setupBackgroundImages(ConventionEvent event) {
         // Add images to the layout
         List<String> images = event.getImages();
-        boolean first = true;
+		boolean first = true;
 		// This will contain the last image view after the loop
-		AspectRatioImageView imageView = null;
+		FrameLayout lastImageLayout = null;
+		int lastImageHeight = -1;
+		int i = 0;
         for (String imageId : images) {
+	        boolean last = (i == images.size() - 1);
+
+			AspectRatioImageView imageView = new AspectRatioImageView(this);
+	        View viewToAdd = imageView;
+
 	        int imageResource = Convention.getInstance().getImageMapper().getImageResourceId(imageId);
-			imageView = new AspectRatioImageView(this);
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            int topMargin = 0;
+	        imageView.setImageResource(imageResource);
+
+
+	        // Last image - make a frame layout with the image so we can put the gradient on top of it
+	        if (last) {
+		        FrameLayout frameLayout = new FrameLayout(this);
+		        viewToAdd = frameLayout;
+		        lastImageLayout = frameLayout;
+		        lastImageView = imageView;
+
+		        // Add the image view to the frame layout
+		        FrameLayout.LayoutParams imageLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		        imageView.setLayoutParams(imageLayoutParams);
+		        frameLayout.addView(imageView);
+
+		        // Calculate the last image's height
+		        imageView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+		        lastImageHeight = imageView.getMeasuredHeight();
+	        }
+
+	        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+	        int topMargin = 0;
             if (first) {
                 first = false;
             } else {
                 topMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics());
             }
-            layoutParams.setMargins(0, topMargin, 0, 0);
-            imageView.setLayoutParams(layoutParams);
-            imageView.setImageResource(imageResource);
-            imagesLayout.addView(imageView);
+	        layoutParams.setMargins(0, topMargin, 0, 0);
+	        viewToAdd.setLayoutParams(layoutParams);
+	        imagesLayout.addView(viewToAdd);
+
+	        ++i;
         }
 
-		if (imageView != null) {
-			fadingImageView = imageView;
-			fadingImageView.setBottomFadingEdgeEnabled(true);
-			fadingImageView.setFadingEdgeLength((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40, getResources().getDisplayMetrics()));
+		if (lastImageLayout != null) {
+			int gradientHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40, getResources().getDisplayMetrics());
+			if (gradientHeight > lastImageHeight) {
+				gradientHeight = lastImageHeight;
+			}
+			gradientImageView = new ImageView(this);
+			FrameLayout.LayoutParams gradientLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, gradientHeight);
+			gradientImageView.setImageDrawable(createGradient());
+			gradientLayoutParams.gravity = Gravity.BOTTOM;
+			gradientImageView.setLayoutParams(gradientLayoutParams);
+			lastImageLayout.addView(gradientImageView);
+
+			enableFadingEffect();
 		}
     }
+
+	private Drawable createGradient() {
+		return new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, new int[] {Color.TRANSPARENT, getBackgroundColor()});
+	}
 
     public void openFeedback(View view) {
         feedbackView.setState(CollapsibleFeedbackView.State.Expanded);

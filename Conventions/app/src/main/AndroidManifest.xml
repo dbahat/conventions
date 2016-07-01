@@ -60,7 +60,9 @@
         <activity android:name=".map.MapActivity"
           android:theme="@style/AppBaseTheme.NoBackgroundColor">
         </activity>
-        <activity android:name=".events.activities.EventActivity" android:windowSoftInputMode="adjustResize" >
+        <activity android:name=".events.activities.EventActivity"
+          android:windowSoftInputMode="adjustResize"
+          android:theme="@style/AppBaseTheme.NoBackgroundColor">
         </activity>
         <activity android:name=".ArrivalMethodsActivity" >
         </activity>

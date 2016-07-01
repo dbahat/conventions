@@ -39,6 +39,11 @@ public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 	    });
     }
 
+	public void updateEventGroups(ArrayList<EventsTimeSlot> eventGroups) {
+		this.eventGroups = eventGroups;
+		notifyDataSetChanged();
+	}
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 	    switch (viewType) {
@@ -67,11 +72,11 @@ public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public void onBindViewHolder(RecyclerView.ViewHolder eventsViewHolder, final int position) {
 	    EventsTimeSlot timeSlot = eventGroups.get(position);
 	    if (eventsViewHolder instanceof SwipeableEventViewHolder) {
-			final SwipeableEventViewHolder dismissibleEventViewHolder = (SwipeableEventViewHolder) eventsViewHolder;
-		    dismissibleEventViewHolder.setModel(timeSlot.getEvents().get(0));
+			final SwipeableEventViewHolder swipeableEventViewHolder = (SwipeableEventViewHolder) eventsViewHolder;
+		    swipeableEventViewHolder.setModel(timeSlot.getEvents().get(0));
 
-			EventSwipeToDismissListener listener = new EventSwipeToDismissListener(dismissibleEventViewHolder, eventGroups, this);
-			dismissibleEventViewHolder.setOnViewSwipedAction(listener);
+			EventSwipeToDismissListener listener = new EventSwipeToDismissListener(swipeableEventViewHolder, eventGroups, this);
+			swipeableEventViewHolder.setOnViewSwipedAction(listener);
 
 	    } else if (eventsViewHolder instanceof ConflictingEventsViewHolder) {
 		    final ConflictingEventsViewHolder conflictingEventsViewHolder = (ConflictingEventsViewHolder) eventsViewHolder;
@@ -105,11 +110,9 @@ public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 		// This could happen if the item has already been removed, the dataset changed or the view recycled
 		// (see RecyclerView#getAdapterPosition)
 		if (adapterPosition == RecyclerView.NO_POSITION) {
-			eventGroups = MyEventsActivity.getNonConflictingGroups(null, MyEventsActivity.getMyEvents(), null);
-			notifyDataSetChanged();
+			updateEventGroups(MyEventsActivity.getNonConflictingGroups(null, MyEventsActivity.getMyEvents(), null));
 			return;
 		}
-
 
 		EventsTimeSlot previousEvents = null;
 		EventsTimeSlot nextEvents = null;
