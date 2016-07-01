@@ -33,6 +33,7 @@ import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.Update;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.networking.UpdatesRefresher;
+import amai.org.conventions.utils.Log;
 
 public class UpdatesActivity extends NavigationActivity implements SwipeRefreshLayout.OnRefreshListener {
 
@@ -64,9 +65,9 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
         // Initialize the updates list based on the model cache.
         List<Update> updates = Convention.getInstance().getUpdates();
         initializeUpdatesList(updates);
+	    showUpdates();
 
 	    initializeFacebookLoginButton();
-	    loginLayout.setVisibility(View.GONE);
 
 	    loginToFacebookAndRetrieveUpdates(savedInstanceState);
     }
@@ -80,7 +81,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 
         // In case the user canceled his login attempt and he doesn't have any cache, show him the login button
         if (resultCode == Activity.RESULT_CANCELED && updatesAdapter.getItemCount() == 0) {
-            loginLayout.setVisibility(View.VISIBLE);
+	        showLogin();
         }
     }
 
@@ -117,7 +118,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
         } else {
             // If we got here it means we both don't have the token and we already attempted to perform silent sign-in once.
             // In this case, show the login button.
-            loginLayout.setVisibility(View.VISIBLE);
+	        showLogin();
         }
     }
 
@@ -131,13 +132,23 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
         recyclerView = (RecyclerView) findViewById(R.id.updates_list);
     }
 
+	private void showLogin() {
+		loginLayout.setVisibility(View.VISIBLE);
+		recyclerView.setVisibility(View.GONE);
+	}
+
+	private void showUpdates() {
+		loginLayout.setVisibility(View.GONE);
+		recyclerView.setVisibility(View.VISIBLE);
+	}
+
     private void initializeFacebookLoginButton() {
         callbackManager = CallbackManager.Factory.create();
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
 
 	        @Override
 	        public void onSuccess(final LoginResult loginResult) {
-		        loginLayout.setVisibility(View.GONE);
+		        showUpdates();
 
 		        new Handler().post(new Runnable() {
 			        @Override
@@ -149,7 +160,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 
 	        @Override
 	        public void onCancel() {
-		        loginLayout.setVisibility(View.VISIBLE);
+		        showLogin();
 	        }
 
 	        @Override
@@ -157,7 +168,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 		        if (loginLayout.getVisibility() == View.VISIBLE) {
 		            Toast.makeText(UpdatesActivity.this, R.string.update_login_error, Toast.LENGTH_SHORT).show();
 		        }
-		        loginLayout.setVisibility(View.VISIBLE);
+		        showLogin();
 	        }
         });
     }
@@ -208,8 +219,6 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
     }
 
     private void initializeUpdatesList(List<Update> updates) {
-        recyclerView.setVisibility(View.VISIBLE);
-
         Collections.sort(updates, new Comparator<Update>() {
 	        @Override
 	        public int compare(Update lhs, Update rhs) {
