@@ -27,7 +27,7 @@ public class GMailSender extends javax.mail.Authenticator {
         Security.addProvider(new JSSEProvider());
     }
 
-    private String mailhost = "smtp.gmail.com";
+    private static final String MAILHOST = "smtp.gmail.com";
     private String user;
     private String password;
     private Session session;
@@ -38,7 +38,7 @@ public class GMailSender extends javax.mail.Authenticator {
 
         Properties props = new Properties();
         props.setProperty("mail.transport.protocol", "smtp");
-        props.setProperty("mail.host", mailhost);
+        props.setProperty("mail.host", MAILHOST);
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.port", "465");
         props.put("mail.smtp.socketFactory.port", "465");

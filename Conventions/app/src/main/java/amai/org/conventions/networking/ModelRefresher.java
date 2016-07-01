@@ -21,6 +21,10 @@ public class ModelRefresher {
      * @return true if the model retrieval completed successfully, false otherwise.
      */
     public boolean refreshFromServer() {
+	    // Don't download if the convention is over (there won't be any more updates to the events...)
+	    if (Convention.getInstance().hasEnded()) {
+		    return true;
+	    }
         try {
             HttpURLConnection request = (HttpURLConnection) Convention.getInstance().getModelURL().openConnection();
             request.setConnectTimeout(CONNECT_TIMEOUT);
