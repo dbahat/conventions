@@ -1,32 +1,44 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="amai.org.conventions.updates.UpdatesActivity"
-    android:background="?attr/updatesBackground">
+    tools:context="amai.org.conventions.updates.UpdatesActivity">
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/updates_swipe_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/updates_list"
+        <LinearLayout
+            android:id="@+id/updates_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
             android:visibility="gone">
 
-        </android.support.v7.widget.RecyclerView>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/updates_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </android.support.v7.widget.RecyclerView>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/updatesBackground"/>
+
+        </LinearLayout>
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <LinearLayout
         android:id="@+id/login_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
         android:padding="10dp"
         android:orientation="vertical"
+        android:background="?attr/updatesBackground"
         android:visibility="gone">
 
         <TextView
@@ -47,4 +59,4 @@
 
     </LinearLayout>
 
-</RelativeLayout>
+</FrameLayout>

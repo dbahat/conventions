@@ -33,7 +33,6 @@ import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.Update;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.networking.UpdatesRefresher;
-import amai.org.conventions.utils.Log;
 
 public class UpdatesActivity extends NavigationActivity implements SwipeRefreshLayout.OnRefreshListener {
 
@@ -43,6 +42,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
     private RecyclerView recyclerView;
     private UpdatesAdapter updatesAdapter;
     private View loginLayout;
+	private View updatesLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +60,40 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
         updatesAdapter = new UpdatesAdapter();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(updatesAdapter);
-	    recyclerView.setItemAnimator(new DefaultItemAnimator()); // Setting animateLayoutChanges directly on the recycler view causes a crash
+
+	    // Enable animations and listen to when they start and finish to ensure the recycler view
+	    // has a background during the animation
+	    recyclerView.setItemAnimator(new DefaultItemAnimator() {
+		    @Override
+		    public void onAddStarting(RecyclerView.ViewHolder item) {
+			    setUpdatesBackground();
+			    super.onAddStarting(item);
+		    }
+
+		    @Override
+		    public void onChangeStarting(RecyclerView.ViewHolder item, boolean oldItem) {
+			    setUpdatesBackground();
+			    super.onChangeStarting(item, oldItem);
+		    }
+
+		    @Override
+		    public void onMoveStarting(RecyclerView.ViewHolder item) {
+			    setUpdatesBackground();
+			    super.onMoveStarting(item);
+		    }
+
+		    @Override
+		    public void onRemoveStarting(RecyclerView.ViewHolder item) {
+			    setUpdatesBackground();
+			    super.onRemoveStarting(item);
+		    }
+
+		    @Override
+		    public void onAnimationFinished(RecyclerView.ViewHolder viewHolder) {
+			    super.onAnimationFinished(viewHolder);
+			    removeUpdatesBackground();
+		    }
+	    });
 
         // Initialize the updates list based on the model cache.
         List<Update> updates = Convention.getInstance().getUpdates();
@@ -93,6 +126,8 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 			    .build());
 
 	    Convention.getInstance().clearNewFlagFromAllUpdates();
+
+	    setUpdatesBackground();
 	    updatesAdapter.notifyItemRangeChanged(0, Convention.getInstance().getUpdates().size());
 
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
@@ -130,16 +165,17 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
         loginButton = (LoginButton) findViewById(R.id.login_button);
         loginLayout = findViewById(R.id.login_layout);
         recyclerView = (RecyclerView) findViewById(R.id.updates_list);
+	    updatesLayout = findViewById(R.id.updates_layout);
     }
 
 	private void showLogin() {
 		loginLayout.setVisibility(View.VISIBLE);
-		recyclerView.setVisibility(View.GONE);
+		updatesLayout.setVisibility(View.GONE);
 	}
 
 	private void showUpdates() {
 		loginLayout.setVisibility(View.GONE);
-		recyclerView.setVisibility(View.VISIBLE);
+		updatesLayout.setVisibility(View.VISIBLE);
 	}
 
     private void initializeFacebookLoginButton() {
@@ -227,8 +263,29 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 	        }
         });
 
+	    setUpdatesBackground();
         updatesAdapter.setUpdates(updates);
     }
+
+	/**
+	 * This method must be called before recycler view animation starts and adapter updates to prevent flickering
+	 */
+	private void setUpdatesBackground() {
+		updatesLayout.setBackgroundColor(ThemeAttributes.getColor(this, R.attr.updatesBackground));
+	}
+
+	/**
+	 * This method must be called after recycler view animation ends to remove overdraw
+	 */
+	private void removeUpdatesBackground() {
+		// Ensure we only remove the background after the last animation finished running
+		recyclerView.getItemAnimator().isRunning(new RecyclerView.ItemAnimator.ItemAnimatorFinishedListener() {
+			@Override
+			public void onAnimationsFinished() {
+				updatesLayout.setBackground(null);
+			}
+		});
+	}
 
 	@Override
 	protected void onPause() {
