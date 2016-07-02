@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -16,16 +17,22 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
+import amai.org.conventions.notifications.PlayServicesInstallation;
 
-public class ArrivalMethodsActivity extends NavigationActivity {
+public class ArrivalMethodsActivity extends NavigationActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+	private View mapFragment;
+	private View noMapLayout;
 
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentInContentContainer(R.layout.activity_arrival_methods, true, false);
+        setContentInContentContainer(R.layout.activity_arrival_methods, false, false);
         setToolbarTitle(getResources().getString(R.string.arrival_methods));
+
+		mapFragment = findViewById(R.id.map);
+		noMapLayout = findViewById(R.id.no_map);
     }
 
     @Override
@@ -81,21 +88,28 @@ public class ArrivalMethodsActivity extends NavigationActivity {
     private void setUpMapIfNeeded() {
         // Do a null check to confirm that we have not already instantiated the map.
         if (mMap == null) {
-            // Try to obtain the map from the SupportMapFragment.
-            ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
-                .getMapAsync(new OnMapReadyCallback() {
-                    @Override
-                    public void onMapReady(GoogleMap googleMap) {
-	                    mMap = googleMap;
+	        if (PlayServicesInstallation.checkPlayServicesExist(this, false)) {
+		        mapFragment.setVisibility(View.VISIBLE);
+		        noMapLayout.setVisibility(View.GONE);
 
-	                    // Check if we were successful in obtaining the map.
-	                    if (mMap != null) {
-		                    setUpMap();
-	                    }
-                    }
-                });
+	            // Try to obtain the map from the SupportMapFragment.
+	            ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMapAsync(this);
+	        } else {
+		        mapFragment.setVisibility(View.GONE);
+		        noMapLayout.setVisibility(View.VISIBLE);
+	        }
         }
     }
+
+	@Override
+	public void onMapReady(GoogleMap googleMap) {
+		mMap = googleMap;
+
+		// Check if we were successful in obtaining the map.
+		if (mMap != null) {
+			setUpMap();
+		}
+	}
 
     /**
      * This is where we can add markers or lines, add listeners or move the camera. In this case, we
@@ -115,4 +129,8 @@ public class ArrivalMethodsActivity extends NavigationActivity {
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(conventionLocation, 16));
     }
+
+	public void installPlayServices(View view) {
+		PlayServicesInstallation.installPlayServices(this);
+	}
 }

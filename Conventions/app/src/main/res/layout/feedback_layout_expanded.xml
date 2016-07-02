@@ -25,7 +25,7 @@
             android:layout_height="wrap_content">
 
             <Button
-                style="@style/EventFeedbackButton"
+                style="@style/BorderlessButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
@@ -63,10 +63,9 @@
             android:id="@+id/send_feedback_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/feedback_highlighted_button"
+            style="@style/HighlightedButton"
             android:enabled="false"
-            android:text="@string/send"
-            android:textColor="@color/white" />
+            android:text="@string/send" />
 
         <!-- this progress bar gets un-hidden in runtime when the button is clicked -->
         <ProgressBar

@@ -5,21 +5,16 @@ import android.app.ActivityOptions;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Point;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.facebook.FacebookRequestError;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
 import com.microsoft.windowsazure.notifications.NotificationsManager;
 
 import java.util.Collections;
@@ -34,6 +29,7 @@ import amai.org.conventions.navigation.NavigationPages;
 import amai.org.conventions.networking.ModelRefresher;
 import amai.org.conventions.networking.UpdatesRefresher;
 import amai.org.conventions.notifications.AzureNotificationRegistrationService;
+import amai.org.conventions.notifications.PlayServicesInstallation;
 import amai.org.conventions.notifications.PushNotificationHandler;
 import amai.org.conventions.notifications.PushNotificationSettings;
 import amai.org.conventions.updates.UpdatesActivity;
@@ -55,9 +51,6 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(ThemeAttributes.getResourceId(this, R.attr.homeScreenlayout));
 
-        NotificationsManager.handleNotifications(this, PushNotificationSettings.SENDER_ID, PushNotificationHandler.class);
-        registerWithNotificationHubs();
-
         navigationPages = new NavigationPages(this);
 
         // Initiate async downloading of the updated convention info in the background
@@ -72,11 +65,14 @@ public class HomeActivity extends AppCompatActivity {
         }.execute();
 
 
-        // Requests to Facebook must be initialized from the UI thread
         new Handler().post(new Runnable() {
             @Override
             public void run() {
-                final int numberOfUpdatesBeforeRefresh = Convention.getInstance().getUpdates().size();
+	            // Register to notifications handling
+	            registerWithNotificationHubs();
+
+	            // Requests to Facebook must be initialized from the UI thread
+	            final int numberOfUpdatesBeforeRefresh = Convention.getInstance().getUpdates().size();
 
                 // Refresh and ignore all errors
                 UpdatesRefresher.getInstance(HomeActivity.this).refreshFromServer(null, true, new UpdatesRefresher.OnUpdateFinishedListener() {
@@ -140,55 +136,13 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void registerWithNotificationHubs() {
-        if (checkPlayServices()) {
+        if (PlayServicesInstallation.checkPlayServicesExist(this, true)) {
+	        NotificationsManager.handleNotifications(this, PushNotificationSettings.SENDER_ID, PushNotificationHandler.class);
+
             // Start IntentService to register this application with GCM.
             Intent intent = new Intent(this, AzureNotificationRegistrationService.class);
             startService(intent);
         }
-    }
-
-    /**
-     * Check the device to make sure it has the Google Play Services APK. If
-     * it doesn't, display a dialog that allows users to download the APK from
-     * the Google Play Store or enable it in the device's system settings.
-     */
-    private boolean checkPlayServices() {
-	    if (ConventionsApplication.settings.wasPlayServicesInstallationCancelled()) {
-		    return false;
-	    }
-        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
-        int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
-        if (apiAvailability.isUserResolvableError(resultCode)) {
-            new AlertDialog.Builder(this)
-                    .setTitle(R.string.missing_play_services_dialog_title)
-                    .setMessage(R.string.missing_play_services_dialog_message)
-                    .setPositiveButton(R.string.missing_play_services_ok_button, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.google.android.gms"));
-                            startActivity(intent);
-                            dialogInterface.dismiss();
-                        }
-                    })
-                    .setNegativeButton(R.string.missing_play_services_cancel_button, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-	                        ConventionsApplication.settings.setPlayServicesInstallationCancelled();
-                            dialogInterface.dismiss();
-                        }
-                    })
-		            .setNeutralButton(R.string.missing_play_services_neutral_button, new DialogInterface.OnClickListener() {
-			            @Override
-			            public void onClick(DialogInterface dialogInterface, int i) {
-			                dialogInterface.dismiss();
-		                }
-		            })
-                    .setCancelable(true)
-                    .create()
-                    .show();
-        }
-
-        return resultCode == ConnectionResult.SUCCESS;
     }
 
     public void onNavigationButtonClicked(View view) {

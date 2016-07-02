@@ -138,10 +138,9 @@
                     android:id="@+id/goto_stands_list_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/feedback_highlighted_button"
+                    style="@style/HighlightedButton"
                     android:enabled="true"
-                    android:text="@string/goto_stands_list"
-                    android:textColor="@color/white" />
+                    android:text="@string/goto_stands_list" />
 
             </LinearLayout>
         </amai.org.conventions.customviews.InterceptorLinearLayout>

@@ -65,10 +65,9 @@
                             android:id="@+id/send_all_button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/feedback_highlighted_button"
+                            style="@style/HighlightedButton"
                             android:enabled="false"
-                            android:text="@string/send_all"
-                            android:textColor="@color/white" />
+                            android:text="@string/send_all" />
 
                         <!-- this progress bar gets un-hidden in runtime when the button is clicked -->
                         <ProgressBar

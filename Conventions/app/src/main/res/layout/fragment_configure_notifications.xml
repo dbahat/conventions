@@ -28,7 +28,7 @@
             android:layout_width="80dp"
             android:layout_height="match_parent"
             android:text="@string/configure_notification_time"
-            style="@style/EventFeedbackButton"/>
+            style="@style/BorderlessButton"/>
 
     </LinearLayout>
 
@@ -55,7 +55,7 @@
             android:layout_width="80dp"
             android:layout_height="match_parent"
             android:text="@string/configure_notification_time"
-            style="@style/EventFeedbackButton"/>
+            style="@style/BorderlessButton"/>
 
     </LinearLayout>
 
@@ -69,6 +69,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/close"
-        style="@style/EventFeedbackButton"/>
+        style="@style/BorderlessButton"/>
 
 </LinearLayout>
