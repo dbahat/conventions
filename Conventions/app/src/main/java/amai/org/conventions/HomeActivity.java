@@ -37,157 +37,162 @@ import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Views;
 
 public class HomeActivity extends AppCompatActivity {
+	private static final int NEW_UPDATES_NOTIFICATION_ID = 75457;
+	private static int numberOfTimesNavigated = 0;
+	private NavigationPages navigationPages;
 
-    private static final int NEW_UPDATES_NOTIFICATION_ID = 75457;
-    private static int numberOfTimesNavigated = 0;
-    private NavigationPages navigationPages;
+	public static int getNumberOfTimesNavigated() {
+		return numberOfTimesNavigated;
+	}
 
-    public static int getNumberOfTimesNavigated() {
-        return numberOfTimesNavigated;
-    }
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(ThemeAttributes.getResourceId(this, R.attr.homeScreenlayout));
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(ThemeAttributes.getResourceId(this, R.attr.homeScreenlayout));
+		navigationPages = new NavigationPages(this);
 
-        navigationPages = new NavigationPages(this);
+		// Initiate async downloading of the updated convention info in the background
+		new AsyncTask<Void, Void, Void>() {
+			private PlayServicesInstallation.CheckResult checkResult;
+			@Override
+			protected Void doInBackground(Void... params) {
+				ModelRefresher modelRefresher = new ModelRefresher();
+				modelRefresher.refreshFromServer();
 
-        // Initiate async downloading of the updated convention info in the background
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... params) {
-                ModelRefresher modelRefresher = new ModelRefresher();
-                modelRefresher.refreshFromServer();
+				checkResult = registerWithNotificationHubs();
+				return null;
+			}
 
-                return null;
-            }
-        }.execute();
+			@Override
+			protected void onPostExecute(Void aVoid) {
+				if (checkResult == PlayServicesInstallation.CheckResult.USER_ERROR) {
+					PlayServicesInstallation.showInstallationDialog(HomeActivity.this);
+				} else if (checkResult == PlayServicesInstallation.CheckResult.SUCCESS) {
+					// Start IntentService to register this application with GCM.
+					Intent intent = new Intent(HomeActivity.this, AzureNotificationRegistrationService.class);
+					startService(intent);
+				}
+			}
+		}.execute();
+
+		new Handler().post(new Runnable() {
+			@Override
+			public void run() {
+				// Requests to Facebook must be initialized from the UI thread
+				final int numberOfUpdatesBeforeRefresh = Convention.getInstance().getUpdates().size();
+
+				// Refresh and ignore all errors
+				UpdatesRefresher.getInstance(HomeActivity.this).refreshFromServer(null, true, new UpdatesRefresher.OnUpdateFinishedListener() {
+					@Override
+					public void onSuccess(int newUpdatesNumber) {
+						List<Update> newUpdates = CollectionUtils.filter(Convention.getInstance().getUpdates(), new CollectionUtils.Predicate<Update>() {
+							@Override
+							public boolean where(Update item) {
+								return item.isNew();
+							}
+						});
+
+						// We don't want to raise the notification if there are no new updates, or if this is the first time updates are downloaded to cache.
+						if (newUpdatesNumber > 0 && newUpdates.size() > 0 && numberOfUpdatesBeforeRefresh > 0
+								&& UpdatesRefresher.getInstance(HomeActivity.this).shouldEnableNotificationAfterUpdate()) {
+
+							Update latestUpdate = Collections.max(newUpdates, new Comparator<Update>() {
+								@Override
+								public int compare(Update lhs, Update rhs) {
+									return lhs.getDate().compareTo(rhs.getDate());
+								}
+							});
+
+							String notificationTitle = newUpdates.size() == 1
+									? getString(R.string.new_update)
+									: getString(R.string.new_updates, newUpdates.size());
+
+							String notificationMessage = latestUpdate.getText().substring(0, Math.min(200, latestUpdate.getText().length())) + "...";
+
+							NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+							Intent intent = new Intent(HomeActivity.this, UpdatesActivity.class);
+							Notification.Builder notificationBuilder = new Notification.Builder(HomeActivity.this)
+									.setSmallIcon(ThemeAttributes.getResourceId(HomeActivity.this, R.attr.notificationSmallIcon))
+									.setLargeIcon(ImageHandler.getNotificationLargeIcon(HomeActivity.this))
+									.setContentTitle(notificationTitle)
+									.setContentText(notificationMessage)
+									.setAutoCancel(true)
+									.setContentIntent(PendingIntent.getActivity(HomeActivity.this, 0, intent, 0))
+									.setDefaults(Notification.DEFAULT_VIBRATE);
 
 
-        new Handler().post(new Runnable() {
-            @Override
-            public void run() {
-	            // Register to notifications handling
-	            registerWithNotificationHubs();
+							Notification notification = new Notification.BigTextStyle(notificationBuilder)
+									.bigText(notificationMessage)
+									.build();
 
-	            // Requests to Facebook must be initialized from the UI thread
-	            final int numberOfUpdatesBeforeRefresh = Convention.getInstance().getUpdates().size();
+							notificationManager.notify(NEW_UPDATES_NOTIFICATION_ID, notification);
+						}
+					}
 
-                // Refresh and ignore all errors
-                UpdatesRefresher.getInstance(HomeActivity.this).refreshFromServer(null, true, new UpdatesRefresher.OnUpdateFinishedListener() {
-                    @Override
-                    public void onSuccess(int newUpdatesNumber) {
+					@Override
+					public void onError(FacebookRequestError error) {
+					}
 
-                        List<Update> newUpdates = CollectionUtils.filter(Convention.getInstance().getUpdates(), new CollectionUtils.Predicate<Update>() {
-                            @Override
-                            public boolean where(Update item) {
-                                return item.isNew();
-                            }
-                        });
+					@Override
+					public void onInvalidTokenError() {
+					}
+				});
+			}
+		});
+	}
 
-                        // We don't want to raise the notification if there are no new updates, or if this is the first time updates are downloaded to cache.
-                        if (newUpdatesNumber > 0 && newUpdates.size() > 0 && numberOfUpdatesBeforeRefresh > 0
-                                && UpdatesRefresher.getInstance(HomeActivity.this).shouldEnableNotificationAfterUpdate()) {
+	private PlayServicesInstallation.CheckResult registerWithNotificationHubs() {
+		PlayServicesInstallation.CheckResult checkResult = PlayServicesInstallation.checkPlayServicesExist(this);
+		if (checkResult == PlayServicesInstallation.CheckResult.SUCCESS) {
+			NotificationsManager.handleNotifications(this, PushNotificationSettings.SENDER_ID, PushNotificationHandler.class);
+		}
+		return checkResult;
+	}
 
-                            Update latestUpdate = Collections.max(newUpdates, new Comparator<Update>() {
-                                @Override
-                                public int compare(Update lhs, Update rhs) {
-                                    return lhs.getDate().compareTo(rhs.getDate());
-                                }
-                            });
+	public void onNavigationButtonClicked(View view) {
+		++numberOfTimesNavigated;
+		int position = Integer.parseInt(view.getTag().toString());
+		Class<? extends Activity> activityType = navigationPages.getActivityType(position);
+		Intent intent = new Intent(this, activityType);
+		Bundle extras = new Bundle();
+		extras.putBoolean(NavigationActivity.EXTRA_NAVIGATED_FROM_HOME, true);
 
-                            String notificationTitle = newUpdates.size() == 1
-                                    ? getString(R.string.new_update)
-                                    : getString(R.string.new_updates, newUpdates.size());
+		if (activityType == ProgrammeActivity.class) {
+			extras.putInt(ProgrammeActivity.EXTRA_DELAY_SCROLLING, 500);
+		}
 
-                            String notificationMessage = latestUpdate.getText().substring(0, Math.min(200, latestUpdate.getText().length())) + "...";
+		intent.putExtras(extras);
+		ActivityOptions options = ActivityOptions.makeCustomAnimation(this, 0, R.anim.shrink_to_top_right);
+		startActivity(intent, options.toBundle());
+	}
 
-                            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-                            Intent intent = new Intent(HomeActivity.this, UpdatesActivity.class);
-                            Notification.Builder notificationBuilder = new Notification.Builder(HomeActivity.this)
-                                    .setSmallIcon(ThemeAttributes.getResourceId(HomeActivity.this, R.attr.notificationSmallIcon))
-                                    .setLargeIcon(ImageHandler.getNotificationLargeIcon(HomeActivity.this))
-                                    .setContentTitle(notificationTitle)
-                                    .setContentText(notificationMessage)
-                                    .setAutoCancel(true)
-                                    .setContentIntent(PendingIntent.getActivity(HomeActivity.this, 0, intent, 0))
-                                    .setDefaults(Notification.DEFAULT_VIBRATE);
+	public void onAboutClicked(View view) {
+		ViewGroup mainLayout = (ViewGroup) findViewById(R.id.home_main_layout);
+		Point coordinates;
 
+		// Top
+		View topView = findViewById(ThemeAttributes.getResourceId(this, R.attr.aboutTopView));
+		coordinates = Views.findCoordinates(mainLayout, topView);
+		int top = coordinates.y;
 
-                            Notification notification = new Notification.BigTextStyle(notificationBuilder)
-                                    .bigText(notificationMessage)
-                                    .build();
+		// Bottom
+		View bottomView = findViewById(ThemeAttributes.getResourceId(this, R.attr.aboutBottomView));
+		coordinates = Views.findCoordinates(mainLayout, bottomView);
+		int bottom = coordinates.y + bottomView.getMeasuredHeight();
 
-                            notificationManager.notify(NEW_UPDATES_NOTIFICATION_ID, notification);
-                        }
-                    }
+		// Left
+		View leftView = findViewById(ThemeAttributes.getResourceId(this, R.attr.aboutLeftView));
+		coordinates = Views.findCoordinates(mainLayout, leftView);
+		int left = coordinates.x;
 
-                    @Override
-                    public void onError(FacebookRequestError error) {
-                    }
+		// Right
+		View rightView = findViewById(ThemeAttributes.getResourceId(this, R.attr.aboutRightView));
+		coordinates = Views.findCoordinates(mainLayout, rightView);
+		int right = coordinates.x + rightView.getMeasuredWidth();
 
-                    @Override
-                    public void onInvalidTokenError() {
-                    }
-                });
-            }
-        });
-    }
-
-    private void registerWithNotificationHubs() {
-        if (PlayServicesInstallation.checkPlayServicesExist(this, true)) {
-	        NotificationsManager.handleNotifications(this, PushNotificationSettings.SENDER_ID, PushNotificationHandler.class);
-
-            // Start IntentService to register this application with GCM.
-            Intent intent = new Intent(this, AzureNotificationRegistrationService.class);
-            startService(intent);
-        }
-    }
-
-    public void onNavigationButtonClicked(View view) {
-        ++numberOfTimesNavigated;
-        int position = Integer.parseInt(view.getTag().toString());
-        Class<? extends Activity> activityType = navigationPages.getActivityType(position);
-        Intent intent = new Intent(this, activityType);
-        Bundle extras = new Bundle();
-        extras.putBoolean(NavigationActivity.EXTRA_NAVIGATED_FROM_HOME, true);
-
-        if (activityType == ProgrammeActivity.class) {
-            extras.putInt(ProgrammeActivity.EXTRA_DELAY_SCROLLING, 500);
-        }
-
-        intent.putExtras(extras);
-        ActivityOptions options = ActivityOptions.makeCustomAnimation(this, 0, R.anim.shrink_to_top_right);
-        startActivity(intent, options.toBundle());
-    }
-
-    public void onAboutClicked(View view) {
-        ViewGroup mainLayout = (ViewGroup) findViewById(R.id.home_main_layout);
-        Point coordinates;
-
-        // Top
-        View topView = findViewById(ThemeAttributes.getResourceId(this, R.attr.aboutTopView));
-        coordinates = Views.findCoordinates(mainLayout, topView);
-        int top = coordinates.y;
-
-        // Bottom
-        View bottomView = findViewById(ThemeAttributes.getResourceId(this, R.attr.aboutBottomView));
-        coordinates = Views.findCoordinates(mainLayout, bottomView);
-        int bottom = coordinates.y + bottomView.getMeasuredHeight();
-
-        // Left
-        View leftView = findViewById(ThemeAttributes.getResourceId(this, R.attr.aboutLeftView));
-        coordinates = Views.findCoordinates(mainLayout, leftView);
-        int left = coordinates.x;
-
-        // Right
-        View rightView = findViewById(ThemeAttributes.getResourceId(this, R.attr.aboutRightView));
-        coordinates = Views.findCoordinates(mainLayout, rightView);
-        int right = coordinates.x + rightView.getMeasuredWidth();
-
-        AboutFragment aboutFragment = new AboutFragment();
-        aboutFragment.setLocation(left, top, right - left, bottom - top);
-        aboutFragment.show(getSupportFragmentManager(), null);
-    }
+		AboutFragment aboutFragment = new AboutFragment();
+		aboutFragment.setLocation(left, top, right - left, bottom - top);
+		aboutFragment.show(getSupportFragmentManager(), null);
+	}
 }

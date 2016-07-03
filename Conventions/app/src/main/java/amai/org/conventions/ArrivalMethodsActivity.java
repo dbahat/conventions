@@ -22,6 +22,7 @@ import amai.org.conventions.notifications.PlayServicesInstallation;
 public class ArrivalMethodsActivity extends NavigationActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+	private View arrivalMethodsRoot;
 	private View mapFragment;
 	private View noMapLayout;
 
@@ -31,6 +32,7 @@ public class ArrivalMethodsActivity extends NavigationActivity implements OnMapR
         setContentInContentContainer(R.layout.activity_arrival_methods, false, false);
         setToolbarTitle(getResources().getString(R.string.arrival_methods));
 
+		arrivalMethodsRoot = findViewById(R.id.arrival_methods_root);
 		mapFragment = findViewById(R.id.map);
 		noMapLayout = findViewById(R.id.no_map);
     }
@@ -55,10 +57,7 @@ public class ArrivalMethodsActivity extends NavigationActivity implements OnMapR
 				double longitude = Convention.getInstance().getLongitude();
 				Intent intent = new Intent(Intent.ACTION_VIEW,
 						Uri.parse("geo:" + latitude + "," + longitude +
-							"?q=" + latitude + "," + longitude +
-							"(" + Uri.encode(
-								getString(R.string.arrival_methods_marker_name, Convention.getInstance().getDisplayName())) +
-							")"));
+							"?q=" + latitude + "," + longitude));
 				if (intent.resolveActivity(getPackageManager()) != null) {
 					this.startActivity(intent);
 				} else {
@@ -88,13 +87,17 @@ public class ArrivalMethodsActivity extends NavigationActivity implements OnMapR
     private void setUpMapIfNeeded() {
         // Do a null check to confirm that we have not already instantiated the map.
         if (mMap == null) {
-	        if (PlayServicesInstallation.checkPlayServicesExist(this, false)) {
+	        PlayServicesInstallation.CheckResult checkResult = PlayServicesInstallation.checkPlayServicesExist(this);
+	        if (checkResult == PlayServicesInstallation.CheckResult.SUCCESS) {
 		        mapFragment.setVisibility(View.VISIBLE);
 		        noMapLayout.setVisibility(View.GONE);
 
 	            // Try to obtain the map from the SupportMapFragment.
 	            ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMapAsync(this);
 	        } else {
+		        // This will be displayed if the user cancelled or postponed installation when the app first loaded
+		        // and also if play services was not found due to some other error. In the latter case we might want
+		        // to show a different error, but I don't know what the cause might be.
 		        mapFragment.setVisibility(View.GONE);
 		        noMapLayout.setVisibility(View.VISIBLE);
 	        }
@@ -108,6 +111,13 @@ public class ArrivalMethodsActivity extends NavigationActivity implements OnMapR
 		// Check if we were successful in obtaining the map.
 		if (mMap != null) {
 			setUpMap();
+			// Clear the background to prevent overdraw after the map finished loading
+			mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+				@Override
+				public void onMapLoaded() {
+					arrivalMethodsRoot.setBackground(null);
+				}
+			});
 		}
 	}
 
