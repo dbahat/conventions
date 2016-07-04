@@ -66,9 +66,9 @@ public class HomeActivity extends AppCompatActivity {
 
 			@Override
 			protected void onPostExecute(Void aVoid) {
-				if (checkResult == PlayServicesInstallation.CheckResult.USER_ERROR) {
-					PlayServicesInstallation.showInstallationDialog(HomeActivity.this);
-				} else if (checkResult == PlayServicesInstallation.CheckResult.SUCCESS) {
+				if (checkResult.isUserError()) {
+					PlayServicesInstallation.showInstallationDialog(HomeActivity.this, checkResult);
+				} else if (checkResult.isSuccess()) {
 					// Start IntentService to register this application with GCM.
 					Intent intent = new Intent(HomeActivity.this, AzureNotificationRegistrationService.class);
 					startService(intent);
@@ -143,8 +143,8 @@ public class HomeActivity extends AppCompatActivity {
 	}
 
 	private PlayServicesInstallation.CheckResult registerWithNotificationHubs() {
-		PlayServicesInstallation.CheckResult checkResult = PlayServicesInstallation.checkPlayServicesExist(this);
-		if (checkResult == PlayServicesInstallation.CheckResult.SUCCESS) {
+		PlayServicesInstallation.CheckResult checkResult = PlayServicesInstallation.checkPlayServicesExist(this, false);
+		if (checkResult.isSuccess()) {
 			NotificationsManager.handleNotifications(this, PushNotificationSettings.SENDER_ID, PushNotificationHandler.class);
 		}
 		return checkResult;

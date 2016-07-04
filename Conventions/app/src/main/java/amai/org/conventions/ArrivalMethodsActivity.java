@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -25,6 +26,7 @@ public class ArrivalMethodsActivity extends NavigationActivity implements OnMapR
 	private View arrivalMethodsRoot;
 	private View mapFragment;
 	private View noMapLayout;
+	private Button installPlayServicesButton;
 
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class ArrivalMethodsActivity extends NavigationActivity implements OnMapR
 		arrivalMethodsRoot = findViewById(R.id.arrival_methods_root);
 		mapFragment = findViewById(R.id.map);
 		noMapLayout = findViewById(R.id.no_map);
+		installPlayServicesButton = (Button) findViewById(R.id.install_play_services);
     }
 
     @Override
@@ -87,8 +90,8 @@ public class ArrivalMethodsActivity extends NavigationActivity implements OnMapR
     private void setUpMapIfNeeded() {
         // Do a null check to confirm that we have not already instantiated the map.
         if (mMap == null) {
-	        PlayServicesInstallation.CheckResult checkResult = PlayServicesInstallation.checkPlayServicesExist(this);
-	        if (checkResult == PlayServicesInstallation.CheckResult.SUCCESS) {
+	        final PlayServicesInstallation.CheckResult checkResult = PlayServicesInstallation.checkPlayServicesExist(this, true);
+	        if (checkResult.isSuccess()) {
 		        mapFragment.setVisibility(View.VISIBLE);
 		        noMapLayout.setVisibility(View.GONE);
 
@@ -100,6 +103,12 @@ public class ArrivalMethodsActivity extends NavigationActivity implements OnMapR
 		        // to show a different error, but I don't know what the cause might be.
 		        mapFragment.setVisibility(View.GONE);
 		        noMapLayout.setVisibility(View.VISIBLE);
+		        installPlayServicesButton.setOnClickListener(new View.OnClickListener() {
+			        @Override
+			        public void onClick(View v) {
+				        PlayServicesInstallation.resolvePlayServicesError(ArrivalMethodsActivity.this, checkResult);
+			        }
+		        });
 	        }
         }
     }
@@ -139,8 +148,4 @@ public class ArrivalMethodsActivity extends NavigationActivity implements OnMapR
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(conventionLocation, 16));
     }
-
-	public void installPlayServices(View view) {
-		PlayServicesInstallation.installPlayServices(this);
-	}
 }

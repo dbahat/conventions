@@ -30,11 +30,11 @@
             android:text="@string/missing_play_services_dialog_message"
             android:gravity="center"/>
         <Button
+            android:id="@+id/install_play_services"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/HighlightedButton"
             android:enabled="true"
-            android:onClick="installPlayServices"
             android:text="@string/missing_play_services_ok_button" />
     </LinearLayout>
 </FrameLayout>
