@@ -19,4 +19,12 @@
     <dimen name="search_category_margin">1dp</dimen>
 
     <dimen name="notification_large_icon_size">64dp</dimen>
+
+    <dimen name="event_images_margin">2dp</dimen>
+    <dimen name="event_last_image_gradient_max_height">200dp</dimen>
+
+    <dimen name="feedback_question_top_margin">20dp</dimen>
+    <dimen name="feedback_multi_answer_padding">4.5dp</dimen>
+    <dimen name="feedback_smiley_answer_margin">20dp</dimen>
+    <dimen name="feedback_smiley_icon_size">50dp</dimen>
 </resources>

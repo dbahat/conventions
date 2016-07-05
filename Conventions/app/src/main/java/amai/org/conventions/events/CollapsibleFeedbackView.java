@@ -14,7 +14,6 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.util.TypedValue;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -190,7 +189,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
         LinearLayout questionLayout = new LinearLayout(getContext());
 	    questionLayout.setFocusableInTouchMode(true); // Prevent text edit from getting the focus
         LinearLayout.LayoutParams questionLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        questionLayoutParams.setMargins(0, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, getResources().getDisplayMetrics()), 0, 0);
+        questionLayoutParams.setMargins(0, getResources().getDimensionPixelOffset(R.dimen.feedback_question_top_margin), 0, 0);
         questionLayout.setLayoutParams(questionLayoutParams);
 
         TextView questionText = new TextView(getContext());
@@ -230,8 +229,8 @@ public class CollapsibleFeedbackView extends FrameLayout {
 	private View buildSmiley3PointsAnswerView(final FeedbackQuestion question, final Feedback feedback) {
 		LinearLayout imagesLayout = new LinearLayout(getContext());
 		imagesLayout.setOrientation(LinearLayout.HORIZONTAL);
-		int margin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, getResources().getDisplayMetrics());
-		int size = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics());
+		int margin = getResources().getDimensionPixelOffset(R.dimen.feedback_smiley_answer_margin);
+		int size = getResources().getDimensionPixelSize(R.dimen.feedback_smiley_icon_size);
 
 		ColorMatrix matrix = new ColorMatrix();
 		matrix.setSaturation(0);
@@ -429,7 +428,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 			}
 		};
 
-		int padding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4.5f, getResources().getDisplayMetrics());
+		int padding = getResources().getDimensionPixelOffset(R.dimen.feedback_multi_answer_padding);
 		boolean first = true;
 		for (int answerStringId : possibleAnswers) {
 			final TextView answerButton;

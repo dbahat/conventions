@@ -17,7 +17,6 @@ import android.support.v7.graphics.Palette;
 import android.text.Html;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
-import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.Menu;
@@ -536,7 +535,7 @@ public class EventActivity extends NavigationActivity {
             if (first) {
                 first = false;
             } else {
-                topMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics());
+                topMargin =  getResources().getDimensionPixelOffset(R.dimen.event_images_margin);
             }
 	        layoutParams.setMargins(0, topMargin, 0, 0);
 	        viewToAdd.setLayoutParams(layoutParams);
@@ -546,7 +545,7 @@ public class EventActivity extends NavigationActivity {
         }
 
 		if (lastImageLayout != null) {
-			int gradientHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40, getResources().getDisplayMetrics());
+			int gradientHeight =  getResources().getDimensionPixelSize(R.dimen.event_last_image_gradient_max_height);
 			if (gradientHeight > lastImageHeight) {
 				gradientHeight = lastImageHeight;
 			}
