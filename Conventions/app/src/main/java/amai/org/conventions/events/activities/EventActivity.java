@@ -549,6 +549,12 @@ public class EventActivity extends NavigationActivity {
 			if (gradientHeight > lastImageHeight) {
 				gradientHeight = lastImageHeight;
 			}
+			// Note: instead of gradient we could supposedly use fading edges and override getSolidColor of lastImageView
+			// to return the background color. This will cause the same level of overdraw as this solution but will require
+			// much less code and remove the need for a FrameLayout above this image (to make sure it works call
+			// lastImageView.invalidate() in updateBackgroundColor).
+			// However, for some reason the fade effect doesn't look as good - it doesn't start at the right place if the image is
+			// small. So we stick with the gradient.
 			gradientImageView = new ImageView(this);
 			FrameLayout.LayoutParams gradientLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, gradientHeight);
 			gradientImageView.setImageDrawable(createGradient());
