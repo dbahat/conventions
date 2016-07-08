@@ -17,6 +17,8 @@
             <enum name="svg" value="1"/>
         </attr>
         <attr name="toolbarIconAccentColor" format="color|reference"/>
+        <!-- Snackbar -->
+        <attr name="snackbarActionColor" format="color|reference"/>
         <!-- Home Screen -->
         <attr name="homeScreenlayout" format="integer"/>
         <attr name="aboutTopView" format="integer"/>

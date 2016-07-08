@@ -11,6 +11,7 @@ import com.google.android.gms.analytics.HitBuilders;
 
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.R;
+import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.listeners.OnEventFavoriteChangedListener;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
@@ -58,6 +59,7 @@ public class DefaultEventFavoriteChangedListener implements OnEventFavoriteChang
 					}
 				});
 				snackbar.getView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+				snackbar.setActionTextColor(ThemeAttributes.getColor(view.getContext(), R.attr.snackbarActionColor));
 				snackbar.show();
 			} else {
 				Snackbar.make(view, R.string.event_added_to_favorites, Snackbar.LENGTH_SHORT).show();

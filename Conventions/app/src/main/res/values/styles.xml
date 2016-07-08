@@ -7,6 +7,8 @@
         <item name="android:textSize">20sp</item>
     </style>
 
+    <style name="DialogTitle" parent="@style/RtlOverlay.DialogWindowTitle.AppCompat" />
+
     <style name="EventDetailsBox">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

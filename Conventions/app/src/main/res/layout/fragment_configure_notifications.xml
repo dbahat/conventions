@@ -5,6 +5,19 @@
     tools:context="amai.org.conventions.events.ConfigureNotificationsFragment"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/event_configure_notifications"
+        android:textColor="?colorAccent"
+        android:padding="10dp"
+        style="@style/DialogTitle"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?colorAccent"/>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
