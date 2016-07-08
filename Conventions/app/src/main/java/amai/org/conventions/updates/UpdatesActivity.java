@@ -148,8 +148,8 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
             //
             // Note - only attempt to do the silent login once when the activity is initially created, not when it's restored due to config changes.
             // This is to prevent opening the user multiple login dialogs, which is both bad UX and may result in NullPointerException from the facebook SDK side
-            // (since the double dialogs may trigger it's OnActivityResult twice)
-            LoginManager.getInstance().logInWithReadPermissions(this, Collections.singletonList("public_profile"));
+            // (since the double dialogs may trigger its OnActivityResult twice)
+            LoginManager.getInstance().logInWithReadPermissions(this, null);
         } else {
             // If we got here it means we both don't have the token and we already attempted to perform silent sign-in once.
             // In this case, show the login button.
