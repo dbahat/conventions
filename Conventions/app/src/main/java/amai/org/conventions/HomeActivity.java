@@ -48,7 +48,7 @@ public class HomeActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(ThemeAttributes.getResourceId(this, R.attr.homeScreenlayout));
+		setContentView(ThemeAttributes.getResourceId(this, R.attr.homeScreenLayout));
 
 		navigationPages = new NavigationPages(this);
 
@@ -66,7 +66,9 @@ public class HomeActivity extends AppCompatActivity {
 
 			@Override
 			protected void onPostExecute(Void aVoid) {
-				if (checkResult.isUserError()) {
+				// We need to check isFinishing to make sure we don't display a dialog after the activity
+				// is destroyed since it causes an exception
+				if (checkResult.isUserError() && !isFinishing()) {
 					PlayServicesInstallation.showInstallationDialog(HomeActivity.this, checkResult);
 				} else if (checkResult.isSuccess()) {
 					// Start IntentService to register this application with GCM.

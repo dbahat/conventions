@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppBaseTheme.Harucon2016.Toolbar"/>
+
+    <style name="AppBaseTheme.Harucon2016">
+        <item name="android:dialogTheme">@style/AppDialogTheme.Harucon2016</item>
+        <item name="alertDialogTheme">@style/AppAlertDialogTheme.Harucon2016</item>
+        <!--<item name="android:alertDialogTheme">@style/AppAlertDialogTheme.Harucon2016</item>-->
+        <item name="colorAccent">@color/medium_purple</item>
+
+        <item name="notificationSmallIcon">@drawable/harucon2016_notification_small</item>
+        <item name="notificationLargeIcon">@drawable/harucon2016_logo_toolbar</item>
+
+        <item name="toolbarBackground">@color/dark_blue</item>
+        <item name="toolbarLogo">@drawable/harucon2016_logo_toolbar</item>
+        <item name="toolbarLogoType">bitmap</item>
+        <item name="toolbarIconAccentColor">@color/gold</item>
+        <item name="navigationPopupSelectedColor">@color/purple</item>
+
+        <item name="snackbarActionColor">@color/light_purple</item>
+
+        <item name="homeScreenLayout">@layout/activity_home_harucon2016</item>
+        <item name="aboutTopView">@id/logo</item>
+        <item name="aboutBottomView">@id/home_buttons_bottom</item>
+        <item name="aboutLeftView">@id/home_buttons_bottom</item>
+        <item name="aboutRightView">@id/home_buttons_bottom</item>
+
+        <item name="amaiLogo">@drawable/amai_logo_dark_blue</item>
+
+        <item name="eventTimeDefaultTextColor">@color/white</item>
+
+        <item name="floorBackground">@color/light_purple</item>
+
+        <item name="nextEventStartTimeBackground">@color/medium_purple</item>
+        <item name="nextEventStartTimeTextColor">@color/white</item>
+
+        <!-- Note: if you change the theme, these values should be copied manually to files
+         drawable\feedback_highlighted_button.xml and drawable/circular_progress_bar.xml because
+         prior to L it was not supported to reference theme attributes from a drawable xml -->
+        <item name="eventFeedbackHighlightedButtonColor">@color/dark_purple_button</item>
+        <item name="eventFeedbackHighlightedButtonPressedColor">@color/very_dark_purple_button</item>
+        <item name="feedbackAnswerButtonColor">@color/dark_purple</item>
+        <item name="feedbackAnswerButtonSelectedColor">@color/red</item>
+    </style>
+
+    <style name="AppDialogTheme.Harucon2016" parent="Theme.AppCompat.Light.Dialog">
+        <!-- This is the default starting API23. In any case the title is always left-justified so it's best to not use it. -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="colorAccent">@color/medium_purple</item>
+    </style>
+
+    <style name="AppAlertDialogTheme.Harucon2016" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/medium_purple</item>
+    </style>
+</resources>

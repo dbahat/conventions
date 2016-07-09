@@ -17,7 +17,6 @@ import android.support.v7.graphics.Palette;
 import android.text.Html;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
-import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -281,7 +280,7 @@ public class EventActivity extends NavigationActivity {
 		            } else {
 			            message = getString(R.string.event_conflicts_with_several_question, conflictingEvents.size());
 		            }
-		            new AlertDialog.Builder(new ContextThemeWrapper(this, android.R.style.Theme_Holo_Light_Dialog))
+		            new AlertDialog.Builder(this)
 				            .setTitle(R.string.event_add_to_favorites)
 				            .setMessage(message)
 				            .setPositiveButton(R.string.add_anyway, new DialogInterface.OnClickListener() {

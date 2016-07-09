@@ -10,7 +10,6 @@ import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
-import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -260,7 +259,7 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
 	    numberPicker.setWrapSelectorWheel(false);
 	    numberPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
 
-	    AlertDialog dialog = new AlertDialog.Builder(new ContextThemeWrapper(this, android.R.style.Theme_Holo_Light_Dialog))
+	    AlertDialog dialog = new AlertDialog.Builder(this)
 			    .setView(numberPicker)
 			    .setPositiveButton(R.string.select_hour_ok,
 					    new DialogInterface.OnClickListener() {

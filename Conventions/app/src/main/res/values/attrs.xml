@@ -20,7 +20,7 @@
         <!-- Snackbar -->
         <attr name="snackbarActionColor" format="color|reference"/>
         <!-- Home Screen -->
-        <attr name="homeScreenlayout" format="integer"/>
+        <attr name="homeScreenLayout" format="integer"/>
         <attr name="aboutTopView" format="integer"/>
         <attr name="aboutBottomView" format="integer"/>
         <attr name="aboutLeftView" format="integer"/>
