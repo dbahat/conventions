@@ -15,6 +15,8 @@ import amai.org.conventions.R;
 import amai.org.conventions.utils.Log;
 
 public class PlayServicesInstallation {
+	private static final String TAG = PlayServicesInstallation.class.getCanonicalName();
+
 	public static class CheckResult {
 		private int result;
 		private final boolean isCancelled;
@@ -89,7 +91,7 @@ public class PlayServicesInstallation {
 	public static void resolvePlayServicesError(Context context, CheckResult checkResult) {
 		PendingIntent pendingIntent = GoogleApiAvailability.getInstance().getErrorResolutionPendingIntent(context, checkResult.getResult(), 0);
 		if (pendingIntent == null) {
-			Log.e("amai!", "using default action");
+			Log.e(TAG, "resolvePlayServicesError: using default action for result " + checkResult.getResult());
 			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.google.android.gms"));
 			context.startActivity(intent);
 		} else {
