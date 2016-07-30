@@ -53,8 +53,8 @@
         <!-- Event Screen -->
         <attr name="eventDetailsBoxColor" format="color|reference"/>
         <attr name="eventFeedbackBoxColor" format="color|reference"/>
-        <attr name="eventFeedbackHighlightedButtonColor" format="color|reference"/>
-        <attr name="eventFeedbackHighlightedButtonPressedColor" format="color|reference"/>
+        <attr name="buttonColor" format="color|reference"/>
+        <attr name="buttonColorPressed" format="color|reference"/>
         <attr name="eventDetailsDefaultBackgroundColor" format="color|reference"/>
         <attr name="feedbackAnswerButtonColor" format="color|reference"/>
         <attr name="feedbackAnswerButtonSelectedColor" format="color|reference"/>

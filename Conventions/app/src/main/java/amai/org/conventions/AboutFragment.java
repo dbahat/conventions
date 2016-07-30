@@ -17,9 +17,9 @@ import android.widget.TextView;
 
 public class AboutFragment extends DialogFragment {
 	private final static String linksText = "<p><a href=\"http://www.amai.org.il/\">לאתר אמא\"י</a></p>" +
-			"<p><a href=\"http://2016.harucon.org.il/\">לאתר הכנס</a></p>" ;
+			"<p><a href=\"http://2016.cami.org.il/\">לאתר הכנס</a></p>" ;
 
-	private final static String aboutAppText = "האפליקציה פותחה עבור כנס הארוקון 2016.<br/>בקשות והצעות ניתן לכתוב <a href=\"market://details?id=amai.org.conventions\">בדף האפליקציה בחנות</a>.";
+	private final static String aboutAppText = "האפליקציה פותחה עבור כנס כאמ\"י 2016.<br/>בקשות והצעות ניתן לכתוב <a href=\"market://details?id=amai.org.conventions\">בדף האפליקציה בחנות</a>.";
 
 	private WindowManager.LayoutParams layoutParams = null;
 

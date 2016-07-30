@@ -3,13 +3,16 @@ package amai.org.conventions.events;
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.CompoundButtonCompat;
 import android.support.v4.widget.TextViewCompat;
+import android.support.v7.widget.AppCompatRadioButton;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -178,7 +181,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
             filterColor = ContextCompat.getColor(getContext(), R.color.yellow);
         } else {
             icon = ContextCompat.getDrawable(getContext(), R.drawable.feedback);
-            filterColor = ThemeAttributes.getColor(getContext(), R.attr.eventFeedbackHighlightedButtonColor);
+            filterColor = ThemeAttributes.getColor(getContext(), R.attr.buttonColor);
         }
         icon = icon.mutate();
         icon.setColorFilter(filterColor, PorterDuff.Mode.MULTIPLY);
@@ -433,7 +436,17 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		for (int answerStringId : possibleAnswers) {
 			final TextView answerButton;
 			if (radio) {
-				answerButton = new RadioButton(getContext());
+				answerButton = new AppCompatRadioButton(getContext());
+				CompoundButtonCompat.setButtonTintList((RadioButton) answerButton, new ColorStateList(
+					new int[][]{
+						new int[]{ -android.R.attr.state_checked },
+						new int[]{ android.R.attr.state_checked }
+					},
+					new int[]{
+						ThemeAttributes.getColor(getContext(), R.attr.feedbackAnswerButtonColor),
+						ThemeAttributes.getColor(getContext(), R.attr.feedbackAnswerButtonSelectedColor)
+					}
+				));
 			} else {
 				answerButton = new TextView(getContext());
 			}

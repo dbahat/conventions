@@ -109,7 +109,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/update_show_full_text"
-            android:textColor="@android:color/holo_blue_dark"
+            android:textColor="?buttonColor"
             android:layout_gravity="center"
             android:padding="5dp"/>
 

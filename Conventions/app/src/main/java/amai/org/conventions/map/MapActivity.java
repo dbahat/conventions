@@ -299,6 +299,11 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 			}
 		});
 
+		// Check if we can search for stands
+		if (!Convention.getInstance().hasStands()) {
+			searchType.setVisibility(View.GONE);
+		}
+
 		// Setup search type (radio button) change
 		searchType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 			@Override

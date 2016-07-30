@@ -1,13 +1,14 @@
 package amai.org.conventions.model;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 
 import amai.org.conventions.utils.Objects;
 
 public class StandsArea extends Place implements Serializable {
 	private int id;
-	private List<Stand> stands;
+	private List<Stand> stands = Collections.emptyList();
 
     public StandsArea() {
 	    id = ObjectIDs.getNextID();

@@ -27,12 +27,19 @@ public class EventToImageResourceIdMapper {
 	}
 
 	public List<String> getImagesList(List<String> eventImageIds) {
-		return CollectionUtils.filter(eventImageIds, new CollectionUtils.Predicate<String>() {
+		List<String> result = CollectionUtils.filter(eventImageIds, new CollectionUtils.Predicate<String>() {
 			@Override
 			public boolean where(String item) {
 				return getImageResourceId(item) != null;
 			}
 		}, new LinkedList<String>());
+
+		// In case some events came up without any images at all, add a generic image to them.
+		if (result.size() == 0) {
+			result.add(EVENT_GENERIC);
+		}
+
+		return result;
 	}
 
     public Integer getImageResourceId(String eventImageId) {

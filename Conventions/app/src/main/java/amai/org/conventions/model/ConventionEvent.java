@@ -189,7 +189,7 @@ public class ConventionEvent implements Serializable {
     }
 
 	public List<String> getImages() {
-		return images;
+		return Convention.getInstance().getImageMapper().getImagesList(images);
 	}
 
 	public void setImages(List<String> images) {

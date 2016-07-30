@@ -19,14 +19,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import amai.org.conventions.model.conventions.Harucon2016Convention;
+import amai.org.conventions.model.conventions.Cami2016Convention;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 import amai.org.conventions.utils.Dates;
 
 public abstract class Convention implements Serializable {
 
-    private static Convention convention = new Harucon2016Convention();
+    private static Convention convention = new Cami2016Convention();
 
     private List<Hall> halls;
 	private List<ConventionEvent> events;
@@ -434,6 +434,16 @@ public abstract class Convention implements Serializable {
 		}
 
 		return null;
+	}
+
+	public boolean hasStands() {
+		for (MapLocation location : map.getLocations()) {
+			if (location.getPlace() instanceof StandsArea &&
+					((StandsArea) location.getPlace()).getStands().size() > 0) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public List<Stand> getStands() {

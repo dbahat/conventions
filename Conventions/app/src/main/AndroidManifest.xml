@@ -32,11 +32,11 @@
     <application
         android:name=".ConventionsApplication"
         android:allowBackup="false"
-        android:icon="@drawable/harucon2016_app_logo"
+        android:icon="@mipmap/cami2016_app_icon"
         android:installLocation="auto"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppBaseTheme.Harucon2016.Toolbar"
+        android:theme="@style/AppBaseTheme.Cami2016.Toolbar"
         tools:replace="android:icon, android:allowBackup">
         <activity
             android:name=".HomeActivity"

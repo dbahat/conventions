@@ -179,9 +179,16 @@ public class HomeActivity extends AppCompatActivity {
 		int top = coordinates.y;
 
 		// Bottom
-		View bottomView = findViewById(ThemeAttributes.getResourceId(this, R.attr.aboutBottomView));
-		coordinates = Views.findCoordinates(mainLayout, bottomView);
-		int bottom = coordinates.y + bottomView.getMeasuredHeight();
+		int bottomViewId = ThemeAttributes.getResourceId(this, R.attr.aboutBottomView);
+		int height;
+		if (bottomViewId == 0) {
+			height = ViewGroup.LayoutParams.WRAP_CONTENT;
+		} else {
+			View bottomView = findViewById(bottomViewId);
+			coordinates = Views.findCoordinates(mainLayout, bottomView);
+			int bottom = coordinates.y + bottomView.getMeasuredHeight();
+			height = bottom - top;
+		}
 
 		// Left
 		View leftView = findViewById(ThemeAttributes.getResourceId(this, R.attr.aboutLeftView));
@@ -192,9 +199,10 @@ public class HomeActivity extends AppCompatActivity {
 		View rightView = findViewById(ThemeAttributes.getResourceId(this, R.attr.aboutRightView));
 		coordinates = Views.findCoordinates(mainLayout, rightView);
 		int right = coordinates.x + rightView.getMeasuredWidth();
+		int width = right - left;
 
 		AboutFragment aboutFragment = new AboutFragment();
-		aboutFragment.setLocation(left, top, right - left, bottom - top);
+		aboutFragment.setLocation(left, top, width, height);
 		aboutFragment.show(getSupportFragmentManager(), null);
 	}
 }

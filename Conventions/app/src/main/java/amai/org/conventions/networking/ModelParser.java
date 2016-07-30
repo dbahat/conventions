@@ -11,7 +11,6 @@ import com.google.gson.JsonParser;
 
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -98,7 +97,7 @@ public class ModelParser {
                         .withStartTime(startTime)
                         .withEndTime(endTime)
                         .withHall(hall)
-		                .withImages(mapper.getImagesList(eventDescription.getEventImageIds()))
+		                .withImages(eventDescription.getEventImageIds())
 		                .withId(String.format(Dates.getLocale(), "%d_%d", eventId, internalEventNumber));
 
                 // Some events might have special pages and are not retrieved from the API
@@ -108,11 +107,6 @@ public class ModelParser {
 	            if (specialEventId != 0 && !handled) {
 		            eventsWithSpecialContent.put(conventionEvent, specialEventId);
 	            }
-
-                // In case some events came up without any images at all, add a generic image to them.
-                if (conventionEvent.getImages().size() == 0) {
-                    conventionEvent.setImages(Collections.singletonList(EventToImageResourceIdMapper.EVENT_GENERIC));
-                }
 
                 eventList.add(conventionEvent);
                 internalEventNumber++;
@@ -125,11 +119,7 @@ public class ModelParser {
 		    if (parsedDescription != null) {
 			    ConventionEvent event = eventEntry.getKey();
 			    event.setDescription(parsedDescription.getDescription());
-			    event.setImages(mapper.getImagesList(parsedDescription.getEventImageIds()));
-
-			    if (event.getImages().size() == 0) {
-				    event.setImages(Collections.singletonList(EventToImageResourceIdMapper.EVENT_GENERIC));
-			    }
+			    event.setImages(parsedDescription.getEventImageIds());
 		    }
 	    }
 

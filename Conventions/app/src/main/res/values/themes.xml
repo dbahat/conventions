@@ -26,13 +26,13 @@
         <item name="eventTimeHeaderBackground">@drawable/event_time_header_background</item>
 
         <item name="updateTimeColor">@color/ultra_light_gray</item>
-        <item name="updatesBackground">@color/white</item>
+        <item name="updatesBackground">?android:colorBackground</item>
 
         <item name="locationDetailsBackground">@color/white</item>
         <item name="locationDetailsTopLineColor">@android:color/black</item>
 
         <item name="eventDetailsBoxColor">@color/transparent_white</item>
         <item name="eventFeedbackBoxColor">@color/transparent_light_yellow</item>
-        <item name="eventDetailsDefaultBackgroundColor">@color/white</item>
+        <item name="eventDetailsDefaultBackgroundColor">?android:colorBackground</item>
     </style>
 </resources>

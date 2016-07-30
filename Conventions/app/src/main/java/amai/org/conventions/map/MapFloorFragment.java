@@ -657,7 +657,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 	}
 
 	private void setupStandsButtonForLocation(final MapLocation location) {
-		if (location.getPlace() instanceof StandsArea) {
+		if (location.getPlace() instanceof StandsArea && ((StandsArea) location.getPlace()).getStands().size() > 0) {
 			gotoStandsListButton.setVisibility(View.VISIBLE);
 			gotoStandsListButton.setOnClickListener(new View.OnClickListener() {
 				@Override

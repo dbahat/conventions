@@ -42,6 +42,7 @@ public class MyEventsActivity extends NavigationActivity {
 	private static final int NEXT_EVENT_START_TIME_UPDATE_DELAY = 60000; // 1 minute
 
     private TextView nextEventStart;
+	private View nextEventStartBottomLine;
 	private RecyclerView eventsList;
 	private View emptyView;
 	private AlertDialog noEventsDialog;
@@ -54,6 +55,7 @@ public class MyEventsActivity extends NavigationActivity {
         setToolbarTitle(getResources().getString(R.string.my_events_title));
 
         nextEventStart = (TextView) findViewById(R.id.nextEventStart);
+		nextEventStartBottomLine = findViewById(R.id.nextEventStartBottomLine);
 		emptyView = findViewById(R.id.my_events_empty);
 	    eventsList = (RecyclerView) findViewById(R.id.myEventsList);
 	    eventsList.setLayoutManager(new LinearLayoutManager(this));
@@ -267,9 +269,10 @@ public class MyEventsActivity extends NavigationActivity {
                 displayNextEventStart = true;
             }
         }
-        nextEventStart.setVisibility(displayNextEventStart ? View.VISIBLE : View.GONE);
 
         if (displayNextEventStart) {
+            nextEventStart.setVisibility(View.VISIBLE);
+	        nextEventStartBottomLine.setVisibility(View.VISIBLE);
             nextEventStart.setText(getString(R.string.next_event_start,
                     Dates.toHumanReadableTimeDuration(nextEvent.getStartTime().getTime() - currTime.getTime()),
                     nextEvent.getHall().getName()));
@@ -283,6 +286,9 @@ public class MyEventsActivity extends NavigationActivity {
                 };
             }
             nextEventStartTextRunner.postDelayed(updateNextEventStartTimeText, NEXT_EVENT_START_TIME_UPDATE_DELAY);
+        } else {
+	        nextEventStart.setVisibility(View.GONE);
+	        nextEventStartBottomLine.setVisibility(View.GONE);
         }
     }
 
