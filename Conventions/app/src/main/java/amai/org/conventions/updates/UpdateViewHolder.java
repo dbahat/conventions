@@ -13,6 +13,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import amai.org.conventions.R;
+import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.utils.Dates;
 
 public class UpdateViewHolder extends RecyclerView.ViewHolder {
@@ -46,11 +47,13 @@ public class UpdateViewHolder extends RecyclerView.ViewHolder {
                 0, textLength, 0);
 
 	    // Make new updates highlighted
+	    int color;
 	    if (updateViewModel.getUpdate().isNew()) {
-		    updateContainer.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.very_light_gray));
+		    color = ContextCompat.getColor(itemView.getContext(), R.color.very_light_gray);
 	    } else {
-		    updateContainer.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.white));
+		    color = ThemeAttributes.getColor(itemView.getContext(), R.attr.updatesBackground);
 	    }
+	    updateContainer.setBackgroundColor(color);
 
         updateTextView.setText(spannedUpdateText);
         updateTime.setText(Dates.formatHoursAndMinutes(updateViewModel.getUpdate().getDate()));
