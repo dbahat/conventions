@@ -15,7 +15,7 @@ import amai.org.conventions.utils.CollectionUtils;
 public class EventToImageResourceIdMapper {
 	public static final String EVENT_GENERIC = "event_generic";
 
-	// Maps the event identifier (in our case, it's URI) to its image resource id.
+	// Maps the event identifier (in our case, its URI) to its image resource id.
     private final Map<String, Integer> eventIdToImageResourceIdMap;
 
     public EventToImageResourceIdMapper() {

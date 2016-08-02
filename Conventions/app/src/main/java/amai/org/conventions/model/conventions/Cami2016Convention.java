@@ -73,9 +73,7 @@ public class Cami2016Convention extends Convention {
 	@Override
 	protected URL initModelURL() {
 		try {
-			// TODO update to Cami URL once events have categories, colors and lecurer names
-			// http://2016.cami.org.il/wp-admin/admin-ajax.php?action=get_event_list
-			return new URL("http://2016.harucon.org.il/wp-admin/admin-ajax.php?action=get_event_list");
+			return new URL("http://2016.cami.org.il/wp-admin/admin-ajax.php?action=get_event_list");
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
@@ -84,6 +82,32 @@ public class Cami2016Convention extends Convention {
 	@Override
 	protected EventToImageResourceIdMapper initImageMapper() {
 		EventToImageResourceIdMapper imageMapper = new EventToImageResourceIdMapper();
+
+		imageMapper.addMapping("http://2016.cami.org.il/wp-content/uploads/sites/9/2016/07/Youtube-banner-1.jpg", R.drawable.event_2d_musical);
+		imageMapper.addMapping("http://2016.cami.org.il/wp-content/uploads/sites/9/2016/07/פייר_אמבלם-225x300.png", R.drawable.event_fire_emblem);
+		imageMapper.addMapping("http://2016.cami.org.il/wp-content/uploads/sites/9/2016/07/קוספליי-שאלות-ותשובות-768x1024.jpg", R.drawable.event_cosplay_il);
+		imageMapper.addMapping("http://2016.cami.org.il/wp-content/uploads/sites/9/2016/07/תרבות-האוטקו-ממבט-אישי.jpg", R.drawable.event_otaku_culture);
+		imageMapper.addMapping("http://2016.cami.org.il/wp-content/uploads/sites/9/2016/07/13558855_1560989217537372_9143726053987064666_o.jpg", R.drawable.event_taiko);
+		imageMapper.addMapping("http://2016.cami.org.il/wp-content/uploads/sites/9/2016/07/המדריך-לאספן-המתחיל_-פיגרים.jpg", R.drawable.event_figures);
+		imageMapper.addMapping("http://2016.cami.org.il/wp-content/uploads/sites/9/2016/07/ארונות-קוספליי-ואלטעזאכן.jpeg", R.drawable.event_closets);
+		imageMapper.addMapping("http://2016.cami.org.il/wp-content/uploads/sites/9/2016/07/כרומוזום-X-956x1024.jpg", R.drawable.event_chromosome_x);
+		imageMapper.addMapping("http://2016.cami.org.il/wp-content/uploads/sites/9/2016/07/טריוויה-754x1024.png", R.drawable.event_committee);
+		imageMapper.addMapping("http://2016.cami.org.il/wp-content/uploads/sites/9/2016/07/kawaii-or-ready-to-die-101.jpg", R.drawable.event_kawaii);
+		imageMapper.addMapping("http://2016.cami.org.il/wp-content/uploads/sites/9/2016/07/משחקי-אוטומה-237x300.jpg", R.drawable.event_otome_games);
+		imageMapper.addMapping("http://2016.cami.org.il/wp-content/uploads/sites/9/2016/07/בין-הנאה-לשחרור-225x300.jpg", R.drawable.event_yaoi);
+		imageMapper.addMapping("http://2016.cami.org.il/wp-content/uploads/sites/9/2016/07/Aimee.jpg", R.drawable.event_aimee);
+		imageMapper.addMapping("http://2016.cami.org.il/wp-content/uploads/sites/9/2016/07/משל-השועל-300x225.png", R.drawable.event_fox);
+		imageMapper.addMapping("http://2016.cami.org.il/wp-content/uploads/sites/9/2016/07/חומרים-קסומים-225x300.jpg", R.drawable.event_materials);
+		imageMapper.addMapping("http://2016.cami.org.il/wp-content/uploads/sites/9/2016/07/גיישה-וסמוראי-300x241.jpg", R.drawable.event_geisha_samurai);
+		imageMapper.addMapping("http://2016.cami.org.il/wp-content/uploads/sites/9/2016/07/ציור_דמויות_למתחילים.jpg", R.drawable.event_drawing);
+		imageMapper.addMapping("http://2016.cami.org.il/wp-content/uploads/sites/9/2016/07/הגיבורה-בהיעדרה-דמויות-נשיות-בנובלות-ויזואליות-300x225.jpg", R.drawable.event_vn_girls);
+		imageMapper.addMapping("http://2016.cami.org.il/wp-content/uploads/sites/9/2016/07/בנטו-300x300.jpg", R.drawable.event_obento);
+		imageMapper.addMapping("http://2016.cami.org.il/wp-content/uploads/sites/9/2016/06/cosplay2.jpg", R.drawable.event_cosplay);
+		imageMapper.addMapping("http://2016.cami.org.il/wp-content/uploads/sites/9/2016/07/איסקאי-300x225.png", R.drawable.event_isekai);
+		imageMapper.addMapping("http://2016.cami.org.il/wp-content/uploads/sites/9/2016/07/סוף_העולם-300x225.jpg", R.drawable.event_world_end);
+		imageMapper.addMapping("http://2016.cami.org.il/wp-content/uploads/sites/9/2016/07/הנטאי-225x300.jpg", R.drawable.event_hentai);
+		imageMapper.addMapping("http://2016.cami.org.il/wp-content/uploads/sites/9/2016/07/מאדוקה.png", R.drawable.event_madoka);
+		imageMapper.addMapping("http://2016.cami.org.il/wp-content/uploads/sites/9/2016/07/נשים-ביפן.jpg", R.drawable.event_mememe);
 
 		// Non-URL IDs
 		imageMapper.addMapping(EventToImageResourceIdMapper.EVENT_GENERIC, R.drawable.cami2016_events_default_cover);
