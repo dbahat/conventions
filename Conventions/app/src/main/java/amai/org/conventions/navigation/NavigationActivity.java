@@ -57,8 +57,9 @@ public abstract class NavigationActivity extends AppCompatActivity {
     private Toolbar navigationToolbar;
     private AnimationPopupWindow popup;
 	private boolean showHomeScreenOnBack;
+	private FrameLayout contentContainer;
 
-    @Override
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
@@ -248,7 +249,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	}
 
     protected View setContentInContentContainer(int layoutResID, boolean useDefaultBackground, boolean hideToolbarOnScroll) {
-        FrameLayout contentContainer = (FrameLayout) findViewById(R.id.navigation_content_view_container);
+        contentContainer = (FrameLayout) findViewById(R.id.navigation_content_view_container);
         getLayoutInflater().inflate(layoutResID, contentContainer, true);
 
 	    if (!hideToolbarOnScroll) {
@@ -257,12 +258,26 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		    navigationToolbar.setLayoutParams(layoutParams);
 	    }
 
-	    if (!useDefaultBackground) {
-		    contentContainer.setBackground(null);
+	    if (useDefaultBackground) {
+		    // Set the background in code due to an Android bug that if the background is set in the xml
+		    // and then removed, the foreground isn't displayed either and it's not possible to bring it back
+		    contentContainer.setBackgroundColor(ThemeAttributes.getColor(this, android.R.attr.colorBackground));
 	    }
 
 	    return contentContainer;
     }
+
+	protected void setBackgroundColor(int color) {
+		if (contentContainer != null) {
+			contentContainer.setBackgroundColor(color);
+		}
+	}
+
+	protected void removeBackground() {
+		if (contentContainer != null) {
+			contentContainer.setBackground(null);
+		}
+	}
 
     public void onConventionEventClicked(View view) {
 	    Bundle bundle = new Bundle();

@@ -7,16 +7,23 @@
     tools:visibility="visible"
     tools:context="amai.org.conventions.events.activities.EventActivity">
 
+    <!-- The image background starts off as transparent just so we have a color (there is another background behind it
+         coming from NavigationActivity). The background from NavigationActivity is necessary sot that screen doesn't
+         start off as black. The color itself is taken from eventDetailsDefaultBackgroundColor.
+         The color here is necessary since when we create the gradient above the last image we need to have some color
+         specified but we don't know the final background color yet.
+         Note: this causes overdraw, but only for the few seconds until we know the actual background color. -->
     <ScrollView
         android:id="@+id/images_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?eventDetailsDefaultBackgroundColor">
+        android:background="@android:color/transparent">
 
         <LinearLayout
             android:id="@+id/images_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="invisible"
             android:orientation="vertical" />
     </ScrollView>
 

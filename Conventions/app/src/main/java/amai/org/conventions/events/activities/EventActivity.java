@@ -17,12 +17,14 @@ import android.support.v7.graphics.Palette;
 import android.text.Html;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -36,6 +38,7 @@ import java.util.List;
 
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.R;
+import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.AspectRatioImageView;
 import amai.org.conventions.events.CollapsibleFeedbackView;
 import amai.org.conventions.events.ConfigureNotificationsFragment;
@@ -76,7 +79,8 @@ public class EventActivity extends NavigationActivity {
 	@Override
     protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentInContentContainer(R.layout.activity_event, false);
+		setContentInContentContainer(R.layout.activity_event);
+		setBackgroundColor(ThemeAttributes.getColor(this, R.attr.eventDetailsDefaultBackgroundColor));
 
 		mainLayout = findViewById(R.id.event_main_layout);
 		imagesBackground = findViewById(R.id.images_background);
@@ -84,7 +88,6 @@ public class EventActivity extends NavigationActivity {
 		feedbackContainer = (LinearLayout) findViewById(R.id.event_feedback_container);
 		feedbackView = (CollapsibleFeedbackView) findViewById(R.id.event_feedback_view);
 		final View detailBoxes = findViewById(R.id.event_detail_boxes);
-		final View backgroundView = imagesLayout;
 		final ParallaxScrollView scrollView = (ParallaxScrollView) findViewById(R.id.parallax_scroll);
 
 		String eventId = getIntent().getStringExtra(EXTRA_EVENT_ID);
@@ -137,7 +140,7 @@ public class EventActivity extends NavigationActivity {
 					public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
 						// Set parallax
 						int foregroundHeight = detailBoxes.getMeasuredHeight();
-						int backgroundHeight = backgroundView.getMeasuredHeight();
+						int backgroundHeight = imagesLayout.getMeasuredHeight();
 						int screenHeight = mainLayout.getMeasuredHeight();
 						float maxParallax = 1;
 
@@ -168,7 +171,7 @@ public class EventActivity extends NavigationActivity {
 							// If scroll factor is bigger than 1, set it to 1 so the background doesn't move too fast.
 							// This could happen only in case the background is smaller than screen size so we can
 							// still see all the images.
-							scrollView.parallaxViewBy(backgroundView, Math.min(scrollFactor, maxParallax));
+							scrollView.parallaxViewBy(imagesLayout, Math.min(scrollFactor, maxParallax));
 						}
 					}
 				});
@@ -188,7 +191,29 @@ public class EventActivity extends NavigationActivity {
 								}
 								if (swatch != null) {
 									updateBackgroundColor(swatch.getRgb());
+								} else {
+									// Set default background
+									updateBackgroundColor(ThemeAttributes.getColor(EventActivity.this, android.R.attr.colorBackground));
 								}
+
+								// Fade in the images
+								Animation fadeIn = AnimationUtils.loadAnimation(EventActivity.this, R.anim.fade_in);
+								fadeIn.setAnimationListener(new Animation.AnimationListener() {
+									@Override
+									public void onAnimationStart(Animation animation) {
+									}
+									@Override
+									public void onAnimationEnd(Animation animation) {
+										// Replace default background with images layout
+										imagesLayout.setVisibility(View.VISIBLE);
+										removeBackground();
+									}
+									@Override
+									public void onAnimationRepeat(Animation animation) {
+
+									}
+								});
+								imagesLayout.startAnimation(fadeIn);
 							}
 						});
 					}
@@ -502,6 +527,11 @@ public class EventActivity extends NavigationActivity {
 		FrameLayout lastImageLayout = null;
 		int lastImageHeight = -1;
 		int i = 0;
+		// Screen size for calculating last image height
+		Display display = getWindowManager().getDefaultDisplay();
+		Point size = new Point();
+		display.getSize(size);
+		int widthSpec = View.MeasureSpec.makeMeasureSpec(size.x, View.MeasureSpec.EXACTLY);
         for (String imageId : images) {
 	        boolean last = (i == images.size() - 1);
 
@@ -524,8 +554,8 @@ public class EventActivity extends NavigationActivity {
 		        imageView.setLayoutParams(imageLayoutParams);
 		        frameLayout.addView(imageView);
 
-		        // Calculate the last image's height
-		        imageView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+		        // Calculate the last image's height according the screen width
+		        imageView.measure(widthSpec, View.MeasureSpec.UNSPECIFIED);
 		        lastImageHeight = imageView.getMeasuredHeight();
 	        }
 

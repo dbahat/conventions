@@ -33,6 +33,8 @@
 
         <item name="eventDetailsBoxColor">@color/transparent_white</item>
         <item name="eventFeedbackBoxColor">@color/transparent_light_yellow</item>
-        <item name="eventDetailsDefaultBackgroundColor">?android:colorBackground</item>
+        <!-- This color should match eventDetailsBoxColor in a way that eventDetailsBoxColor is not visible
+             on top of this color -->
+        <item name="eventDetailsDefaultBackgroundColor">@color/white</item>
     </style>
 </resources>
