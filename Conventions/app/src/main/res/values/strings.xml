@@ -66,10 +66,11 @@
     <string name="configure_notification_time">%d דקות</string>
 
     <string name="missing_play_services_dialog_title">לא נמצא Google play services</string>
-    <string name="missing_play_services_dialog_message">על מנת לקבל עדכונים חיים במהלך הכנס ולצפות בדרכי הגעה, יש להתקין או לעדכן את Google play services ולוודא שהשירות פעיל</string>
+    <string name="missing_play_services_dialog_message">על מנת לקבל התראות במהלך הכנס ולצפות בדרכי הגעה, יש להתקין או לעדכן את Google play services ולוודא שהשירות פעיל</string>
     <string name="missing_play_services_ok_button">התקן</string>
     <string name="missing_play_services_cancel_button">אל תתקין</string>
     <string name="missing_play_services_neutral_button">לא עכשיו</string>
+    <string name="missing_play_services_map_message">על מנת לצפות בדרכי הגעה יש להתקין או לעדכן את Google play services ולוודא שהשירות פעיל</string>
 
     <string name="yes">כן</string>
     <string name="no">לא</string>
@@ -123,4 +124,20 @@
     <string name="search_locations">מתחם</string>
     <string name="search_stands">דוכנים</string>
     <string name="next_event_start">האירוע הבא מתחיל בעוד %1$s ב%2$s</string>
+    <string name="settings">הגדרות</string>
+    <string name="notifications_preferences">התראות</string>
+    <string name="show_general_notifications_title">כללי</string>
+    <string name="show_general_notifications_summary">הצג התראות כלליות</string>
+    <string name="show_event_notifications_title">אירועים</string>
+    <string name="show_event_notifications_summary">הצג התראות על עדכונים בתוכניה ואירועים</string>
+    <string name="show_cosplay_notifications_title">השתתפות באירוע הקוספליי</string>
+    <string name="show_cosplay_notifications_summary">הצג התראות עבור המשתתפים בתחרות הקוספליי</string>
+    <string name="show_bus_notifications_title">הסעות</string>
+    <string name="show_bus_notifications_summary">הצג התראות על הסעות</string>
+    <string name="reminder_preferences">תזכורות</string>
+    <string name="show_reminder_before_event_starts_title">לפני שאירוע מתחיל</string>
+    <string name="show_reminder_before_event_starts_summary">הצג תזכורת לפני שאירוע שסימנתי מתחיל.\nניתן לשנות הגדרה זו לכל אירוע בנפרד בדף האירוע.</string>
+    <string name="show_event_feedback_reminder_title">פידבק לאירוע</string>
+    <string name="show_event_feedback_reminder_summary">הצג תזכורת לשליחת פידבק אחרי שאירוע שסימנתי מסתיים.\nניתן לשנות הגדרה זו לכל אירוע בנפרד בדף האירוע.</string>
+    <string name="push_registration_failed">לא ניתן לעדכן. בדוק חיבור לאינטרנט</string>
 </resources>

@@ -10,6 +10,7 @@ import android.graphics.Point;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,9 +30,9 @@ import amai.org.conventions.navigation.NavigationPages;
 import amai.org.conventions.networking.ModelRefresher;
 import amai.org.conventions.networking.UpdatesRefresher;
 import amai.org.conventions.notifications.AzureNotificationRegistrationService;
+import amai.org.conventions.notifications.AzurePushNotifications;
 import amai.org.conventions.notifications.PlayServicesInstallation;
 import amai.org.conventions.notifications.PushNotificationHandler;
-import amai.org.conventions.notifications.PushNotificationSettings;
 import amai.org.conventions.updates.UpdatesActivity;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Views;
@@ -49,23 +50,26 @@ public class HomeActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(ThemeAttributes.getResourceId(this, R.attr.homeScreenLayout));
+		PreferenceManager.setDefaultValues(this, R.xml.settings_preferences, false);
 
 		navigationPages = new NavigationPages(this);
 
 		// Initiate async downloading of the updated convention info in the background
-		new AsyncTask<Void, Void, Void>() {
-			private PlayServicesInstallation.CheckResult checkResult;
+		new AsyncTask<Void, Void, PlayServicesInstallation.CheckResult>() {
 			@Override
-			protected Void doInBackground(Void... params) {
+			protected PlayServicesInstallation.CheckResult doInBackground(Void... params) {
 				ModelRefresher modelRefresher = new ModelRefresher();
 				modelRefresher.refreshFromServer();
 
-				checkResult = registerWithNotificationHubs();
-				return null;
+				PlayServicesInstallation.CheckResult checkResult = PlayServicesInstallation.checkPlayServicesExist(HomeActivity.this, false);
+				if (checkResult.isSuccess()) {
+					NotificationsManager.handleNotifications(HomeActivity.this, AzurePushNotifications.SENDER_ID, PushNotificationHandler.class);
+				}
+				return checkResult;
 			}
 
 			@Override
-			protected void onPostExecute(Void aVoid) {
+			protected void onPostExecute(PlayServicesInstallation.CheckResult checkResult) {
 				// We need to check isFinishing to make sure we don't display a dialog after the activity
 				// is destroyed since it causes an exception
 				if (checkResult.isUserError() && !isFinishing()) {
@@ -142,14 +146,6 @@ public class HomeActivity extends AppCompatActivity {
 				});
 			}
 		});
-	}
-
-	private PlayServicesInstallation.CheckResult registerWithNotificationHubs() {
-		PlayServicesInstallation.CheckResult checkResult = PlayServicesInstallation.checkPlayServicesExist(this, false);
-		if (checkResult.isSuccess()) {
-			NotificationsManager.handleNotifications(this, PushNotificationSettings.SENDER_ID, PushNotificationHandler.class);
-		}
-		return checkResult;
 	}
 
 	public void onNavigationButtonClicked(View view) {

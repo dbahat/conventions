@@ -13,9 +13,12 @@ public class GcmTokenRefreshService extends InstanceIDListenerService {
     @Override
     public void onTokenRefresh() {
         Log.i(TAG, "Refreshing GCM Registration Token");
-        Intent intent = new Intent(this, AzureNotificationRegistrationService.class)
-                // Force the registration service to re-register using the new token
-                .putExtra(AzureNotificationRegistrationService.EXTRA_FORCE_REGISTRATION, true);
+
+	    // If the token is expired we will no longer receive notifications
+	    new AzurePushNotifications(this).setRegistered(false);
+
+	    // Register in background thread
+        Intent intent = new Intent(this, AzureNotificationRegistrationService.class);
         startService(intent);
     }
 }

@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size_large_material"
             android:textColor="@color/hint_gray"
-            android:text="@string/missing_play_services_dialog_message"
+            android:text="@string/missing_play_services_map_message"
             android:gravity="center"/>
         <Button
             android:id="@+id/install_play_services"

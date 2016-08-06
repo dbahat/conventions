@@ -5,7 +5,9 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
+import android.preference.PreferenceManager;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -28,17 +30,22 @@ public class LocalNotificationScheduler {
     }
 
     public void scheduleDefaultEventAlarms(ConventionEvent event) {
-        EventNotification eventAboutToStartNotification = event.getUserInput().getEventAboutToStartNotification();
-        Date defaultEventStartNotificationTime = new Date(event.getStartTime().getTime()
-                - ConfigureNotificationsFragment.DEFAULT_PRE_EVENT_START_NOTIFICATION_MINUTES * Dates.MILLISECONDS_IN_MINUTE);
-        eventAboutToStartNotification.setNotificationTime(defaultEventStartNotificationTime);
-        scheduleEventAboutToStartNotification(event, eventAboutToStartNotification.getNotificationTime().getTime());
+	    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+	    if (sharedPreferences.getBoolean("cami2016_event_reminder", false)) {
+	        EventNotification eventAboutToStartNotification = event.getUserInput().getEventAboutToStartNotification();
+	        Date defaultEventStartNotificationTime = new Date(event.getStartTime().getTime()
+	                - ConfigureNotificationsFragment.DEFAULT_PRE_EVENT_START_NOTIFICATION_MINUTES * Dates.MILLISECONDS_IN_MINUTE);
+	        eventAboutToStartNotification.setNotificationTime(defaultEventStartNotificationTime);
+	        scheduleEventAboutToStartNotification(event, eventAboutToStartNotification.getNotificationTime().getTime());
+	    }
 
-        EventNotification eventFeedbackReminderNotification = event.getUserInput().getEventFeedbackReminderNotification();
-        Date defaultEventEndNotificationTime = new Date(event.getEndTime().getTime()
-                + ConfigureNotificationsFragment.DEFAULT_POST_EVENT_START_NOTIFICATION_MINUTES * Dates.MILLISECONDS_IN_MINUTE);
-        eventFeedbackReminderNotification.setNotificationTime(defaultEventEndNotificationTime);
-        scheduleFillFeedbackOnEventNotification(event, eventFeedbackReminderNotification.getNotificationTime().getTime());
+	    if (sharedPreferences.getBoolean("cami2016_feedback_reminder", false)) {
+		    EventNotification eventFeedbackReminderNotification = event.getUserInput().getEventFeedbackReminderNotification();
+		    Date defaultEventEndNotificationTime = new Date(event.getEndTime().getTime()
+				    + ConfigureNotificationsFragment.DEFAULT_POST_EVENT_START_NOTIFICATION_MINUTES * Dates.MILLISECONDS_IN_MINUTE);
+		    eventFeedbackReminderNotification.setNotificationTime(defaultEventEndNotificationTime);
+		    scheduleFillFeedbackOnEventNotification(event, eventFeedbackReminderNotification.getNotificationTime().getTime());
+	    }
 
         Convention.getInstance().getStorage().saveUserInput();
     }

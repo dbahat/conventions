@@ -44,6 +44,7 @@ import amai.org.conventions.events.activities.MyEventsActivity;
 import amai.org.conventions.events.activities.ProgrammeActivity;
 import amai.org.conventions.map.MapActivity;
 import amai.org.conventions.model.Convention;
+import amai.org.conventions.settings.SettingsActivity;
 import amai.org.conventions.updates.UpdatesActivity;
 import amai.org.conventions.utils.Views;
 
@@ -113,6 +114,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		if (Convention.getInstance().canFillFeedback()) {
 			items.add(new NavigationItem(FeedbackActivity.class, getString(R.string.feedback), ContextCompat.getDrawable(this, R.drawable.feedback_menu_icon)));
 		}
+		items.add(new NavigationItem(SettingsActivity.class, getString(R.string.settings), ContextCompat.getDrawable(this, R.drawable.ic_action_settings)));
 
 		ListView navigationItems = (ListView) view.findViewById(R.id.navigation_items);
 		navigationItems.setAdapter(new NavigationItemsAdapter(this, items));
