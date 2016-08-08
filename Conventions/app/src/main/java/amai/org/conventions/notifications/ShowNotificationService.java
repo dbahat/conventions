@@ -34,6 +34,7 @@ public class ShowNotificationService extends Service {
     public static final String EXTRA_EVENT_TO_NOTIFY = "ExtraEventToNotify";
     public static final String EXTRA_NOTIFICATION_TYPE = "EXTRA_NOTIFICATION_TYPE";
     public static final String EXTRA_MESSAGE = "EXTRA_MESSAGE";
+	public static final String EXTRA_TAG = "EXTRA_TAG";
 
     private static final int FILL_CONVENTION_FEEDBACK_NOTIFICATION_ID = 91235;
 	private static final int FILL_EVENTS_FEEDBACK_NOTIFICATION_ID = 95837;
@@ -193,14 +194,17 @@ public class ShowNotificationService extends Service {
     }
 
     private void showPushNotification(Intent intent) {
-
         String message = intent.getStringExtra(EXTRA_MESSAGE);
         if (message == null) {
             return;
         }
+	    String tag = intent.getStringExtra(EXTRA_TAG); // Could be null
 
-        Intent openAppIntent = new Intent(this, HomeActivity.class)
-                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	    int notificationId = getNextPushNotificationId();
+	    Intent openAppIntent = new Intent(this, HomeActivity.class)
+			    .setAction(Type.Push.toString() + notificationId)
+			    .putExtra(HomeActivity.EXTRA_PUSH_NOTIFICATION_MESSAGE, message)
+			    .putExtra(HomeActivity.EXTRA_PUSH_NOTIFICATION_TAG, tag);
 
         Notification.Builder builder = getDefaultNotificationBuilder()
                 .setContentTitle(getString(R.string.app_name)) // Showing the app name as title to be consistent with iOS behavior
@@ -210,7 +214,7 @@ public class ShowNotificationService extends Service {
                 .setContentIntent(PendingIntent.getActivity(this, 0, openAppIntent, 0));
 
         // Assign each push notification with a unique ID, so multiple notifications can display at the same time
-        notificationManager.notify(getNextPushNotificationId(), builder.build());
+	    notificationManager.notify(notificationId, builder.build());
     }
 
     private int getNextPushNotificationId() {

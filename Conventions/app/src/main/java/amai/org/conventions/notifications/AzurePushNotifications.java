@@ -10,7 +10,6 @@ import com.google.android.gms.iid.InstanceID;
 import com.microsoft.windowsazure.messaging.NotificationHub;
 
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
 import amai.org.conventions.utils.CollectionUtils;
@@ -23,12 +22,23 @@ public class AzurePushNotifications {
 
 	private static String TAG = AzurePushNotifications.class.getSimpleName();
 	private static final String IS_REGISTERED = "isRegisteredToAzureNotificationHub";
+
 	// Topics
-	public static final String TOPIC_GENERAL = "cami2016_general";
-	public static final String TOPIC_EVENTS = "cami2016_events";
-	public static final String TOPIC_COSPLAY = "cami2016_cosplay";
-	public static final String TOPIC_BUS = "cami2016_bus";
-	public static final String TOPIC_EMERGENCY = "cami2016_emergency";
+	public enum PushNotificationTopic {
+		TOPIC_GENERAL("cami2016_general"),
+		TOPIC_EVENTS("cami2016_events"),
+		TOPIC_COSPLAY("cami2016_cosplay"),
+		TOPIC_BUS("cami2016_bus"),
+		TOPIC_EMERGENCY("cami2016_emergency");
+
+		private final String topic;
+		PushNotificationTopic(String topic) {
+			this.topic = topic;
+		}
+		public String getTopic() {
+			return topic;
+		}
+	}
 
 	private Context context;
 
@@ -38,17 +48,23 @@ public class AzurePushNotifications {
 
 	public List<String> getNotificationTopics() {
 		final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-		List<String> topics = CollectionUtils.filter(
-				Arrays.asList(TOPIC_GENERAL, TOPIC_EVENTS, TOPIC_COSPLAY, TOPIC_BUS),
-				new CollectionUtils.Predicate<String>() {
+		List<PushNotificationTopic> topics = CollectionUtils.filter(
+				Arrays.asList(PushNotificationTopic.values()),
+				new CollectionUtils.Predicate<PushNotificationTopic>() {
 					@Override
-					public boolean where(String item) {
-						return sharedPreferences.getBoolean(item, false);
+					public boolean where(PushNotificationTopic item) {
+						return item == PushNotificationTopic.TOPIC_EMERGENCY || sharedPreferences.getBoolean(item.getTopic(), false);
 					}
-				}, new LinkedList<String>());
-
-		topics.add(TOPIC_EMERGENCY);
-		return topics;
+				});
+		List<String> topicStrings = CollectionUtils.map(
+				topics,
+				new CollectionUtils.Mapper<PushNotificationTopic, String>() {
+					@Override
+					public String map(PushNotificationTopic item) {
+						return item.getTopic();
+					}
+				});
+		return topicStrings;
 	}
 
 	public void setRegistered(boolean registered) {

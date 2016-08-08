@@ -65,10 +65,7 @@ public class SettingsActivity extends NavigationActivity {
 
 		@Override
 		public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, final String key) {
-			if (key.equals(AzurePushNotifications.TOPIC_GENERAL) ||
-					key.equals(AzurePushNotifications.TOPIC_EVENTS) ||
-					key.equals(AzurePushNotifications.TOPIC_COSPLAY) ||
-					key.equals(AzurePushNotifications.TOPIC_BUS)) {
+			if (isPushNotificationTopic(key)) {
 				final boolean isSelected = sharedPreferences.getBoolean(key, false);
 				notifications.registerAsync(new AzurePushNotifications.RegistrationListener() {
 					@Override
@@ -93,6 +90,15 @@ public class SettingsActivity extends NavigationActivity {
 					}
 				});
 			}
+		}
+
+		private boolean isPushNotificationTopic(String key) {
+			for (AzurePushNotifications.PushNotificationTopic value : AzurePushNotifications.PushNotificationTopic.values()) {
+				if (value.getTopic().equals(key)) {
+					return true;
+				}
+			}
+			return false;
 		}
 	}
 }

@@ -13,6 +13,10 @@ public class CollectionUtils {
 		boolean equals(T lhs, T rhs);
 	}
 
+	public interface Mapper<T, K> {
+		K map(T item);
+	}
+
 	public static <T> List<T> filter(List<T> list, Predicate<T> predicate) {
 		return filter(list, predicate, new LinkedList<T>());
 	}
@@ -25,6 +29,14 @@ public class CollectionUtils {
         }
         return newList;
     }
+
+	public static <T, K> List<K> map(List<T> list, Mapper<T, K> mapper) {
+		List<K> mapped = new LinkedList<>();
+		for (T item : list) {
+			mapped.add(mapper.map(item));
+		}
+		return mapped;
+	}
 
 	public static <T> T findFirst(List<T> list, Predicate<T> predicate) {
 		for (T item : list) {

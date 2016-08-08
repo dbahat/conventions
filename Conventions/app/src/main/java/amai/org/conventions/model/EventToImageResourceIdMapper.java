@@ -1,7 +1,6 @@
 package amai.org.conventions.model;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +31,7 @@ public class EventToImageResourceIdMapper {
 			public boolean where(String item) {
 				return getImageResourceId(item) != null;
 			}
-		}, new LinkedList<String>());
+		});
 
 		// In case some events came up without any images at all, add a generic image to them.
 		if (result.size() == 0) {

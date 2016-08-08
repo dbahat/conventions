@@ -140,4 +140,8 @@
     <string name="show_event_feedback_reminder_title">פידבק לאירוע</string>
     <string name="show_event_feedback_reminder_summary">הצג תזכורת לשליחת פידבק אחרי שאירוע שסימנתי מסתיים.\nניתן לשנות הגדרה זו לכל אירוע בנפרד בדף האירוע.</string>
     <string name="push_registration_failed">לא ניתן לעדכן. בדוק חיבור לאינטרנט</string>
+    <string name="push_notification_title">התראה</string>
+    <string name="change_settings">שנה הגדרות</string>
+    <string name="configure_notifications">הגדר התראות</string>
+    <string name="configure_notifications_dialog_message">באפליקציה זו נשלחות התראות בזמן הכנס. ניתן לשנות את הגדרות קבלת ההתראות בכל זמן.</string>
 </resources>
