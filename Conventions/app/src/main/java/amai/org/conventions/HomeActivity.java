@@ -8,7 +8,9 @@ import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Matrix;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,8 +20,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.facebook.FacebookRequestError;
@@ -55,6 +59,7 @@ public class HomeActivity extends AppCompatActivity {
 	private NavigationPages navigationPages;
 	private AlertDialog pushNotificationDialog;
 	private AlertDialog configureNotificationDialog;
+	private ViewGroup mainLayout;
 
 	public static int getNumberOfTimesNavigated() {
 		return numberOfTimesNavigated;
@@ -64,6 +69,8 @@ public class HomeActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(ThemeAttributes.getResourceId(this, R.attr.homeScreenLayout));
+		mainLayout = (ViewGroup) findViewById(R.id.home_main_layout);
+		setImagesScaling();
 		PreferenceManager.setDefaultValues(this, R.xml.settings_preferences, false);
 
 		showPushNotificationDialog(getIntent());
@@ -210,7 +217,7 @@ public class HomeActivity extends AppCompatActivity {
 			configureNotificationDialog = new AlertDialog.Builder(this)
 					.setTitle(R.string.configure_notifications)
 					.setMessage(R.string.configure_notifications_dialog_message)
-					.setPositiveButton(R.string.close, new DialogInterface.OnClickListener() {
+					.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							configureNotificationDialog.hide();
@@ -251,8 +258,47 @@ public class HomeActivity extends AppCompatActivity {
 		startActivity(intent, options.toBundle());
 	}
 
+	private void setImagesScaling() {
+		DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+		int screenWidth = displayMetrics.widthPixels;
+		int screenHeight = displayMetrics.heightPixels;
+
+		mainLayout.measure(
+				View.MeasureSpec.makeMeasureSpec(screenWidth, View.MeasureSpec.EXACTLY),
+				View.MeasureSpec.makeMeasureSpec(screenHeight, View.MeasureSpec.EXACTLY));
+
+		final ImageView imageView = (ImageView) findViewById(R.id.home_background_image);
+		Drawable drawable = imageView.getDrawable();
+		if (drawable != null) {
+			int dwidth = drawable.getIntrinsicWidth();
+			int dheight = drawable.getIntrinsicHeight();
+
+			Matrix matrix = new Matrix();
+
+			int vwidth = imageView.getMeasuredWidth() - imageView.getPaddingLeft() - imageView.getPaddingRight();
+			int vheight = imageView.getMeasuredHeight() - imageView.getPaddingTop() - imageView.getPaddingBottom();
+
+			float scale;
+			float dx = 0, dy = 0;
+
+			if (dwidth * vheight > vwidth * dheight) {
+				float cropXCenterOffsetPct = 0.5f;
+				scale = (float) vheight / (float) dheight;
+				dx = (vwidth - dwidth * scale) * cropXCenterOffsetPct;
+			} else {
+				float cropYCenterOffsetPct = 0f;
+				scale = (float) vwidth / (float) dwidth;
+				dy = (vheight - dheight * scale) * cropYCenterOffsetPct;
+			}
+
+			matrix.setScale(scale, scale);
+			matrix.postTranslate((int) (dx + 0.5f), (int) (dy + 0.5f));
+
+			imageView.setImageMatrix(matrix);
+		}
+	}
+
 	public void onAboutClicked(View view) {
-		ViewGroup mainLayout = (ViewGroup) findViewById(R.id.home_main_layout);
 		Point coordinates;
 
 		// Top

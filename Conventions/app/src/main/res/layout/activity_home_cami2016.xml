@@ -4,129 +4,154 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity"
     android:orientation="vertical"
-    android:id="@+id/home_main_layout"
-    android:background="@color/light_blue_dark">
+    android:id="@+id/home_main_layout">
 
     <FrameLayout
         android:id="@+id/home_top_bar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
-
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             android:layout_gravity="top"
-            android:src="@drawable/cami2016_cover"/>
-
-        <!-- This image should always be on the left side since it's part of the image under it but
-             it's a different ImageView because it's clickable -->
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="top|left"
-            android:padding="15dp"
-            android:alpha="0.5"
-            android:onClick="onAboutClicked"
-            android:src="@drawable/info"
-            tools:ignore="RtlHardcoded"/>
+            android:src="@drawable/cami2016_home_cover"/>
     </FrameLayout>
 
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:src="@drawable/cami2016_convention_name"
-        android:layout_gravity="center"/>
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp">
-
-        <LinearLayout
+        android:layout_height="wrap_content">
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:baselineAligned="false">
+            android:layout_height="match_parent"
+            android:id="@+id/home_background_image"
+            android:src="@drawable/cami2016_home_background"
+            android:layout_alignTop="@+id/logo_and_buttons"
+            android:layout_alignBottom="@+id/logo_and_buttons"
+            android:scaleType="matrix"/>
 
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_weight="0.5"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:onClick="onNavigationButtonClicked"
-                android:tag="1">
-
-                <amai.org.conventions.customviews.AspectRatioImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/cami2016_home_events"
-                    android:scaleType="fitCenter"
-                    />
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_weight="0.5"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:onClick="onNavigationButtonClicked"
-                android:tag="0">
-
-                <amai.org.conventions.customviews.AspectRatioImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/cami2016_home_map"
-                    android:scaleType="fitCenter"
-                    />
-            </FrameLayout>
-
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/home_buttons_bottom"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:baselineAligned="false">
+            android:id="@+id/logo_and_buttons"
+            android:layout_height="wrap_content">
 
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_weight="0.5"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:onClick="onNavigationButtonClicked"
-                android:tag="2">
+                android:orientation="vertical"
+                android:layout_marginBottom="15dp">
 
-                <amai.org.conventions.customviews.AspectRatioImageView
+                <ImageView
+                    android:id="@+id/logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:src="@drawable/cami2016_home_logo"
+                    android:layout_gravity="center"/>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/cami2016_home_updates"
-                    android:scaleType="fitCenter"
-                    />
-            </FrameLayout>
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp">
 
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_weight="0.5"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:baselineAligned="false">
+
+                        <FrameLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="0.5"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:onClick="onNavigationButtonClicked"
+                            android:tag="1">
+
+                            <amai.org.conventions.customviews.AspectRatioImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/cami2016_home_events"
+                                android:scaleType="fitCenter"
+                                />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="0.5"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:onClick="onNavigationButtonClicked"
+                            android:tag="0">
+
+                            <amai.org.conventions.customviews.AspectRatioImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/cami2016_home_map"
+                                android:scaleType="fitCenter"
+                                />
+                        </FrameLayout>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/home_buttons_bottom"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:baselineAligned="false">
+
+                        <FrameLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="0.5"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:onClick="onNavigationButtonClicked"
+                            android:tag="2">
+
+                            <amai.org.conventions.customviews.AspectRatioImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/cami2016_home_updates"
+                                android:scaleType="fitCenter"
+                                />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="0.5"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:onClick="onNavigationButtonClicked"
+                            android:tag="3">
+
+                            <amai.org.conventions.customviews.AspectRatioImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/cami2016_home_arrival_methods"
+                                android:scaleType="fitCenter"
+                                />
+                        </FrameLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <amai.org.conventions.customviews.AspectRatioImageView
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:onClick="onNavigationButtonClicked"
-                android:tag="3">
+                android:layout_gravity="center|bottom"
+                android:paddingTop="15dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="5dp"
+                android:onClick="onAboutClicked"
+                android:src="@drawable/cami2016_home_info"/>
+        </FrameLayout>
 
-                <amai.org.conventions.customviews.AspectRatioImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/cami2016_home_arrival_methods"
-                    android:scaleType="fitCenter"
-                    />
-            </FrameLayout>
+    </RelativeLayout>
 
-        </LinearLayout>
-    </LinearLayout>
 
 </LinearLayout>
