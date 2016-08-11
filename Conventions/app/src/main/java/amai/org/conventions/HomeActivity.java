@@ -102,7 +102,9 @@ public class HomeActivity extends AppCompatActivity {
 					Intent intent = new Intent(HomeActivity.this, AzureNotificationRegistrationService.class);
 					startService(intent);
 
-					showConfigureNotificationsDialog();
+					if (!isFinishing()) {
+						showConfigureNotificationsDialog();
+					}
 				}
 			}
 		}.execute();
