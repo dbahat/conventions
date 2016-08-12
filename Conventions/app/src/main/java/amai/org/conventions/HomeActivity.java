@@ -30,6 +30,7 @@ import android.widget.TextView;
 import com.facebook.FacebookRequestError;
 import com.microsoft.windowsazure.notifications.NotificationsManager;
 
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -48,6 +49,7 @@ import amai.org.conventions.notifications.PushNotificationHandler;
 import amai.org.conventions.settings.SettingsActivity;
 import amai.org.conventions.updates.UpdatesActivity;
 import amai.org.conventions.utils.CollectionUtils;
+import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Views;
 
 public class HomeActivity extends AppCompatActivity {
@@ -73,6 +75,7 @@ public class HomeActivity extends AppCompatActivity {
 		getWindow().setBackgroundDrawable(null);
 		mainLayout = (ViewGroup) findViewById(R.id.home_main_layout);
 		setImagesScaling();
+		showFeedbackIfNecessary();
 		PreferenceManager.setDefaultValues(this, R.xml.settings_preferences, false);
 
 		showPushNotificationDialog(getIntent());
@@ -314,6 +317,18 @@ public class HomeActivity extends AppCompatActivity {
 			matrix.postTranslate((int) (dx + 0.5f), (int) (dy + 0.5f));
 
 			imageView.setImageMatrix(matrix);
+		}
+	}
+
+	private void showFeedbackIfNecessary() {
+		Calendar oneDayPostConventionDate = Calendar.getInstance();
+		oneDayPostConventionDate.setTime(Convention.getInstance().getDate().getTime());
+		oneDayPostConventionDate.add(Calendar.DATE, 1);
+		oneDayPostConventionDate.set(Calendar.HOUR_OF_DAY, 10);
+
+		if (Dates.now().after(oneDayPostConventionDate.getTime())) {
+			findViewById(R.id.home_arrival_methods_button).setVisibility(View.GONE);
+			findViewById(R.id.home_feedback_button).setVisibility(View.VISIBLE);
 		}
 	}
 
