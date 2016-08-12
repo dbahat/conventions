@@ -38,6 +38,9 @@ public class UpdatesRefresher {
 	private boolean isRefreshInProgress = false;
 	private boolean enableNotificationAfterUpdate;
 
+	/**
+	 * @param context any context
+	 */
 	public static synchronized UpdatesRefresher getInstance(Context context) {
 		if (instance == null) {
 			instance = new UpdatesRefresher(context);

@@ -5,6 +5,7 @@ import android.app.ActivityOptions;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -84,27 +85,30 @@ public class HomeActivity extends AppCompatActivity {
 				ModelRefresher modelRefresher = new ModelRefresher();
 				modelRefresher.refreshFromServer();
 
-				PlayServicesInstallation.CheckResult checkResult = PlayServicesInstallation.checkPlayServicesExist(HomeActivity.this, false);
+				Context appContext = HomeActivity.this.getApplicationContext();
+				PlayServicesInstallation.CheckResult checkResult = PlayServicesInstallation.checkPlayServicesExist(appContext, false);
 				if (checkResult.isSuccess()) {
-					NotificationsManager.handleNotifications(HomeActivity.this, AzurePushNotifications.SENDER_ID, PushNotificationHandler.class);
+					NotificationsManager.handleNotifications(appContext, AzurePushNotifications.SENDER_ID, PushNotificationHandler.class);
 				}
 				return checkResult;
 			}
 
 			@Override
 			protected void onPostExecute(PlayServicesInstallation.CheckResult checkResult) {
-				// We need to check isFinishing to make sure we don't display a dialog after the activity
-				// is destroyed since it causes an exception
-				if (checkResult.isUserError() && !isFinishing()) {
-					PlayServicesInstallation.showInstallationDialog(HomeActivity.this, checkResult);
+				// We use the current activity context and not HomeActivity because it's possible the user
+				// already navigated from it. We can't use a destroyed activity to display a dialog
+				// since it causes an exception.
+				Context currentContext = ConventionsApplication.getCurrentContext();
+				if (currentContext == null) {
+					return;
+				}
+				if (checkResult.isUserError()) {
+					PlayServicesInstallation.showInstallationDialog(currentContext, checkResult);
 				} else if (checkResult.isSuccess()) {
 					// Start IntentService to register this application with GCM.
-					Intent intent = new Intent(HomeActivity.this, AzureNotificationRegistrationService.class);
+					Intent intent = new Intent(currentContext, AzureNotificationRegistrationService.class);
 					startService(intent);
-
-					if (!isFinishing()) {
-						showConfigureNotificationsDialog();
-					}
+					showConfigureNotificationsDialog(currentContext);
 				}
 			}
 		}.execute();
@@ -114,9 +118,10 @@ public class HomeActivity extends AppCompatActivity {
 			public void run() {
 				// Requests to Facebook must be initialized from the UI thread
 				final int numberOfUpdatesBeforeRefresh = Convention.getInstance().getUpdates().size();
+				final Context appContext = HomeActivity.this.getApplicationContext();
 
 				// Refresh and ignore all errors
-				UpdatesRefresher.getInstance(HomeActivity.this).refreshFromServer(null, true, new UpdatesRefresher.OnUpdateFinishedListener() {
+				UpdatesRefresher.getInstance(appContext).refreshFromServer(null, true, new UpdatesRefresher.OnUpdateFinishedListener() {
 					@Override
 					public void onSuccess(int newUpdatesNumber) {
 						List<Update> newUpdates = CollectionUtils.filter(Convention.getInstance().getUpdates(), new CollectionUtils.Predicate<Update>() {
@@ -128,7 +133,7 @@ public class HomeActivity extends AppCompatActivity {
 
 						// We don't want to raise the notification if there are no new updates, or if this is the first time updates are downloaded to cache.
 						if (newUpdatesNumber > 0 && newUpdates.size() > 0 && numberOfUpdatesBeforeRefresh > 0
-								&& UpdatesRefresher.getInstance(HomeActivity.this).shouldEnableNotificationAfterUpdate()) {
+								&& UpdatesRefresher.getInstance(appContext).shouldEnableNotificationAfterUpdate()) {
 
 							Update latestUpdate = Collections.max(newUpdates, new Comparator<Update>() {
 								@Override
@@ -143,15 +148,20 @@ public class HomeActivity extends AppCompatActivity {
 
 							String notificationMessage = latestUpdate.getText().substring(0, Math.min(200, latestUpdate.getText().length())) + "...";
 
+							// The user might have already navigated away from the home activity
+							Context currentContext = ConventionsApplication.getCurrentContext();
+							if (currentContext == null) {
+								return;
+							}
 							NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-							Intent intent = new Intent(HomeActivity.this, UpdatesActivity.class);
-							Notification.Builder notificationBuilder = new Notification.Builder(HomeActivity.this)
-									.setSmallIcon(ThemeAttributes.getResourceId(HomeActivity.this, R.attr.notificationSmallIcon))
-									.setLargeIcon(ImageHandler.getNotificationLargeIcon(HomeActivity.this))
+							Intent intent = new Intent(currentContext, UpdatesActivity.class);
+							Notification.Builder notificationBuilder = new Notification.Builder(currentContext)
+									.setSmallIcon(ThemeAttributes.getResourceId(currentContext, R.attr.notificationSmallIcon))
+									.setLargeIcon(ImageHandler.getNotificationLargeIcon(currentContext))
 									.setContentTitle(notificationTitle)
 									.setContentText(notificationMessage)
 									.setAutoCancel(true)
-									.setContentIntent(PendingIntent.getActivity(HomeActivity.this, 0, intent, 0))
+									.setContentIntent(PendingIntent.getActivity(currentContext, 0, intent, 0))
 									.setDefaults(Notification.DEFAULT_VIBRATE);
 
 
@@ -198,7 +208,7 @@ public class HomeActivity extends AppCompatActivity {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							pushNotificationDialog.hide();
-							navigateTo(SettingsActivity.class);
+							navigateTo(HomeActivity.this, SettingsActivity.class);
 						}
 					})
 					.setCancelable(true)
@@ -213,10 +223,10 @@ public class HomeActivity extends AppCompatActivity {
 		}
 	}
 
-	private void showConfigureNotificationsDialog() {
-		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+	private void showConfigureNotificationsDialog(final Context context) {
+		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 		if (!sharedPreferences.getBoolean(SETTINGS_POPUP_DISPLAYED, false)) {
-			configureNotificationDialog = new AlertDialog.Builder(this)
+			configureNotificationDialog = new AlertDialog.Builder(context)
 					.setTitle(R.string.configure_notifications)
 					.setMessage(R.string.configure_notifications_dialog_message)
 					.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
@@ -229,7 +239,7 @@ public class HomeActivity extends AppCompatActivity {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							configureNotificationDialog.hide();
-							navigateTo(SettingsActivity.class);
+							navigateTo(context, SettingsActivity.class);
 						}
 					})
 					.setCancelable(true)
@@ -243,21 +253,27 @@ public class HomeActivity extends AppCompatActivity {
 		++numberOfTimesNavigated;
 		int position = Integer.parseInt(view.getTag().toString());
 		Class<? extends Activity> activityType = navigationPages.getActivityType(position);
-		navigateTo(activityType);
+		navigateTo(this, activityType);
 	}
 
-	private void navigateTo(Class<? extends Activity> activityType) {
-		Intent intent = new Intent(this, activityType);
+	private void navigateTo(Context context, Class<? extends Activity> activityType) {
+		Intent intent = new Intent(context, activityType);
 		Bundle extras = new Bundle();
-		extras.putBoolean(NavigationActivity.EXTRA_NAVIGATED_FROM_HOME, true);
+
+		// In the rare case that we might be navigating from another activity and not the home screen,
+		// don't put this extra or show the animation
+		ActivityOptions options = null;
+		if (context == this) {
+			extras.putBoolean(NavigationActivity.EXTRA_NAVIGATED_FROM_HOME, true);
+			options = ActivityOptions.makeCustomAnimation(context, 0, R.anim.shrink_to_top_right);
+		}
 
 		if (activityType == ProgrammeActivity.class) {
 			extras.putInt(ProgrammeActivity.EXTRA_DELAY_SCROLLING, 500);
 		}
 
 		intent.putExtras(extras);
-		ActivityOptions options = ActivityOptions.makeCustomAnimation(this, 0, R.anim.shrink_to_top_right);
-		startActivity(intent, options.toBundle());
+		startActivity(intent, options != null ? options.toBundle() : null);
 	}
 
 	private void setImagesScaling() {

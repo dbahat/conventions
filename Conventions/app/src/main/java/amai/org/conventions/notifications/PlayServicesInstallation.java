@@ -45,6 +45,7 @@ public class PlayServicesInstallation {
 	 * Check the device to make sure it has the Google Play Services APK. If
 	 * it doesn't, display a dialog that allows users to download the APK from
 	 * the Google Play Store or enable it in the device's system settings.
+	 * The context sent can be any context object.
 	 */
 	public static CheckResult checkPlayServicesExist(final Context context, boolean ignoreCancelled) {
 		if ((!ignoreCancelled) && ConventionsApplication.settings.wasPlayServicesInstallationCancelled()) {

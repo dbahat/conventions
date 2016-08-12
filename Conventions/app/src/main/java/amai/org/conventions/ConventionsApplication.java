@@ -1,7 +1,9 @@
 package amai.org.conventions;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.os.Bundle;
 
 import com.google.android.gms.analytics.ExceptionReporter;
 import com.google.android.gms.analytics.GoogleAnalytics;
@@ -27,8 +29,9 @@ public class ConventionsApplication extends Application {
     public static LocalNotificationScheduler alarmScheduler;
     public static Settings settings;
 	private static String versionName;
+	private static Context currentContext;
 
-    @Override
+	@Override
     public void onCreate() {
         super.onCreate();
 
@@ -62,6 +65,38 @@ public class ConventionsApplication extends Application {
 	    } catch (Exception e) {
 		    Log.i(TAG, "Could not get version name: " + e.getMessage());
 	    }
+
+	    // Keep reference to current activity for showing dialogs and notifications from any activity
+	    registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
+		    @Override
+		    public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+			    currentContext = activity;
+		    }
+
+		    @Override
+		    public void onActivityStopped(Activity activity) {
+			    if (currentContext == activity) {
+			        currentContext = null;
+			    }
+		    }
+
+		    @Override
+		    public void onActivityStarted(Activity activity) {
+		    }
+		    @Override
+		    public void onActivityResumed(Activity activity) {
+		    }
+		    @Override
+		    public void onActivityPaused(Activity activity) {
+		    }
+
+		    @Override
+		    public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+		    }
+		    @Override
+		    public void onActivityDestroyed(Activity activity) {
+		    }
+	    });
     }
 
     /**
@@ -120,5 +155,9 @@ public class ConventionsApplication extends Application {
 		if (tracker != null) {
 			tracker.send(trackingEvent);
 		}
+	}
+
+	public static Context getCurrentContext() {
+		return currentContext;
 	}
 }
