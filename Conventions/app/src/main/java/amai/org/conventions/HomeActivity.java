@@ -70,6 +70,7 @@ public class HomeActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(ThemeAttributes.getResourceId(this, R.attr.homeScreenLayout));
+		getWindow().setBackgroundDrawable(null);
 		mainLayout = (ViewGroup) findViewById(R.id.home_main_layout);
 		setImagesScaling();
 		PreferenceManager.setDefaultValues(this, R.xml.settings_preferences, false);

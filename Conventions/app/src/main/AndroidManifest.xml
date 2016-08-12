@@ -41,7 +41,8 @@
         <activity
             android:name=".HomeActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppBaseTheme.Cami2016.Toolbar.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

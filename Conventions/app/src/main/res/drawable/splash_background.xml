@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/light_blue_medium_dark"/>
+    <item android:top="@dimen/status_bar_height">
+        <bitmap android:src="@drawable/cami2016_home_background"
+                android:gravity="fill_horizontal|clip_vertical|top"/>
+    </item>
+</layer-list>

@@ -53,4 +53,9 @@
     <style name="AppAlertDialogTheme.Cami2016" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorAccent">@color/red_dark</item>
     </style>
+
+    <style name="AppBaseTheme.Cami2016.Toolbar.Splash">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
+
 </resources>

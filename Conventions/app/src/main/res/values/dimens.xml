@@ -27,4 +27,7 @@
     <dimen name="feedback_multi_answer_padding">4.5dp</dimen>
     <dimen name="feedback_smiley_answer_margin">20dp</dimen>
     <dimen name="feedback_smiley_icon_size">50dp</dimen>
+
+    <!-- Assumed status bar height (the real dimension is private @android:dimen/status_bar_height) -->
+    <dimen name="status_bar_height">25dp</dimen>
 </resources>
