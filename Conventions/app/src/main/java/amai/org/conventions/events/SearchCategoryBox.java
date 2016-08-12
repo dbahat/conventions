@@ -8,7 +8,9 @@ import android.util.AttributeSet;
 import android.widget.CheckedTextView;
 
 import amai.org.conventions.R;
+import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.EventType;
+import amai.org.conventions.networking.ModelParser;
 
 public class SearchCategoryBox extends CheckedTextView {
 
@@ -23,9 +25,13 @@ public class SearchCategoryBox extends CheckedTextView {
 
         Drawable drawable = ContextCompat.getDrawable(getContext(), android.R.drawable.checkbox_off_background);
         if (drawable != null) {
+	        int backgroundColor = eventType.getBackgroundColor();
+	        if (backgroundColor == ModelParser.NO_COLOR) {
+		        backgroundColor = ThemeAttributes.getColor(getContext(), R.attr.eventTimeDefaultBackgroundColor);
+	        }
             drawable.mutate();
-            drawable.setColorFilter(eventType.getBackgroundColor(), PorterDuff.Mode.MULTIPLY);
-            setCompoundDrawablesWithIntrinsicBounds(null, drawable, null, null);
+            drawable.setColorFilter(backgroundColor, PorterDuff.Mode.MULTIPLY);
+	        setCompoundDrawablesWithIntrinsicBounds(null, drawable, null, null);
         }
 
         this.eventType = eventType;

@@ -163,7 +163,11 @@ public class ConventionEvent implements Serializable {
 		if (backgroundColor != ModelParser.NO_COLOR) {
 			return backgroundColor;
 		}
-		return getType().getBackgroundColor();
+		int eventTypeColor = getType().getBackgroundColor();
+		if (eventTypeColor != ModelParser.NO_COLOR) {
+			return eventTypeColor;
+		}
+		return ThemeAttributes.getColor(context, R.attr.eventTimeDefaultBackgroundColor);
 	}
 
     public void setType(EventType type) {
