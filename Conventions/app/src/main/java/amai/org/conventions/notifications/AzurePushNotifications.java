@@ -21,6 +21,7 @@ public class AzurePushNotifications {
     public static final String HUB_LISTEN_CONNECTION_STRING = "Endpoint=sb://conventions.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=hjyET8pIKJ2VZNFkcuvFDt6tZ/aSS57eMSNIU2WofSM=";
 
 	private static String TAG = AzurePushNotifications.class.getSimpleName();
+	public static final String IS_ADVANCED_OPTIONS_ENABLED = "isAdvancedOptionsEnabled";
 	private static final String IS_REGISTERED = "isRegisteredToAzureNotificationHub";
 
 	// Topics
@@ -29,6 +30,7 @@ public class AzurePushNotifications {
 		TOPIC_EVENTS("cami2016_events"),
 		TOPIC_COSPLAY("cami2016_cosplay"),
 		TOPIC_BUS("cami2016_bus"),
+		TOPIC_TEST("cami2016_test"),
 		TOPIC_EMERGENCY("cami2016_emergency");
 
 		private final String topic;
@@ -65,6 +67,21 @@ public class AzurePushNotifications {
 					}
 				});
 		return topicStrings;
+	}
+
+	public boolean isNotificationTopicEnabled(PushNotificationTopic topic) {
+		final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+		return topic == PushNotificationTopic.TOPIC_EMERGENCY || sharedPreferences.getBoolean(topic.getTopic(), false);
+	}
+
+	public void setAdvancedOptionsEnabled(boolean enabled) {
+		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+		sharedPreferences.edit().putBoolean(IS_ADVANCED_OPTIONS_ENABLED, enabled).apply();
+	}
+
+	public boolean isAdvancedOptionsEnabled() {
+		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+		return sharedPreferences.getBoolean(IS_ADVANCED_OPTIONS_ENABLED, false);
 	}
 
 	public void setRegistered(boolean registered) {

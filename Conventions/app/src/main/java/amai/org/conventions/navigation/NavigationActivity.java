@@ -75,6 +75,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 			public void onClick(View v) {
 				showLogoGlow = false;
 				ConventionsApplication.settings.setNavigationPopupOpened();
+				onNavigationButtonClicked();
 				if (popup == null || !popup.isShowing()) {
 					popup = createNavigationPopup();
 					popup.showAsDropDown(navigationToolbar);
@@ -88,6 +89,10 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		});
 
     }
+
+	protected void onNavigationButtonClicked() {
+		// Children can inherit this
+	}
 
 	private boolean shouldShowLogoGlow() {
 		return showLogoGlow && navigatedFromHome && HomeActivity.getNumberOfTimesNavigated() > 1 && !ConventionsApplication.settings.wasNavigationPopupOpened();

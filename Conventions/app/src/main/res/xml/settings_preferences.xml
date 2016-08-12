@@ -43,4 +43,14 @@
             android:defaultValue="true" />
     </PreferenceCategory>
 
+    <PreferenceCategory
+        android:key="advanced"
+        android:title="@string/advanced_preferences">
+        <CheckBoxPreference
+            android:key="cami2016_test"
+            android:title="@string/show_test_notifications_title"
+            android:summary="@string/show_test_notifications_summary"
+            android:defaultValue="false" />
+    </PreferenceCategory>
+
 </PreferenceScreen>
