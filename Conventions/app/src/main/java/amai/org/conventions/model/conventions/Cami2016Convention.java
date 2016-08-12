@@ -25,7 +25,6 @@ public class Cami2016Convention extends Convention {
 	private static final String ESHKOL1_NAME = "אשכול 1";
 	private static final String ESHKOL2_NAME = "אשכול 2";
 	private static final String ESHKOL3_NAME = "אשכול 3";
-	private static final String SPECIAL_EVENTS_NAME = "אירועים מיוחדים";
 
 	@Override
 	protected ConventionStorage initStorage() {
@@ -122,9 +121,8 @@ public class Cami2016Convention extends Convention {
 		Hall eshkol1 = new Hall().withName(ESHKOL1_NAME).withOrder(3);
 		Hall eshkol2 = new Hall().withName(ESHKOL2_NAME).withOrder(4);
 		Hall eshkol3 = new Hall().withName(ESHKOL3_NAME).withOrder(5);
-		Hall specialEvents = new Hall().withName(SPECIAL_EVENTS_NAME).withOrder(6);
 
-		return Arrays.asList(mainHall, auditorium, eshkol1, eshkol2, eshkol3, specialEvents);
+		return Arrays.asList(mainHall, auditorium, eshkol1, eshkol2, eshkol3);
 	}
 
 	@Override
@@ -134,7 +132,6 @@ public class Cami2016Convention extends Convention {
 		Hall eshkol1 = findHallByName(ESHKOL1_NAME);
 		Hall eshkol2 = findHallByName(ESHKOL2_NAME);
 		Hall eshkol3 = findHallByName(ESHKOL3_NAME);
-		Hall specialEvents = findHallByName(SPECIAL_EVENTS_NAME);
 
 		Floor floor1 = new Floor(1)
 				.withName("מפלס תחתון")
@@ -160,8 +157,7 @@ public class Cami2016Convention extends Convention {
 												.withX(507.46f)
 												.withY(184.49f),
 										new MapLocation()
-												.withPlace(specialEvents)
-												.withName("החתמת אורח")
+												.withPlace(new Place().withName("החתמת אורחת"))
 												.withMarkerResource(R.raw.cami2016_marker_guest)
 												.withSelectedMarkerResource(R.raw.cami2016_marker_guest_selected)
 												.withMarkerHeight(38.066f)
