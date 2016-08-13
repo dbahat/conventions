@@ -9,8 +9,11 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.HitBuilders;
+
 import java.util.Date;
 
+import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.R;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.notifications.AzurePushNotifications;
@@ -122,10 +125,23 @@ public class SettingsActivity extends NavigationActivity {
 				notifications.registerAsync(new AzurePushNotifications.RegistrationListener() {
 					@Override
 					public void onSuccess() {
+						ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
+								.setCategory("Notifications")
+								.setAction("Category" + (isSelected ? "Added" : "Removed"))
+								.setLabel(key)
+								.setValue(1) // succeeded
+								.build());
 					}
 
 					@Override
 					public void onError() {
+						ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
+								.setCategory("Notifications")
+								.setAction("Category" + (isSelected ? "Added" : "Removed"))
+								.setLabel(key)
+								.setValue(0) // failed
+								.build());
+
 						// Show error
 						Toast.makeText(getActivity(), R.string.push_registration_failed, Toast.LENGTH_LONG).show();
 
@@ -141,6 +157,15 @@ public class SettingsActivity extends NavigationActivity {
 						}
 					}
 				});
+			} else {
+				if (findPreference(key) != null) {
+					final boolean isSelected = sharedPreferences.getBoolean(key, false);
+					ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
+							.setCategory("Notifications")
+							.setAction("Preference" + (isSelected ? "Selected" : "Deselected"))
+							.setLabel(key)
+							.build());
+				}
 			}
 		}
 
