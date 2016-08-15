@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     tools:context="amai.org.conventions.map.MapActivity">
 
-    <amai.org.conventions.customviews.NoSwipeVerticalViewPager
+    <amai.org.conventions.customviews.ConditionalSwipeVerticalViewPager
         android:id="@+id/map_view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

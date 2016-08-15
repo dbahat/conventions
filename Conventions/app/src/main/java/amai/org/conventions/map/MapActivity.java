@@ -31,6 +31,7 @@ import java.util.List;
 
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.R;
+import amai.org.conventions.customviews.ConditionalSwipeVerticalViewPager;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.Floor;
@@ -43,7 +44,6 @@ import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Objects;
 import amai.org.conventions.utils.Views;
-import fr.castorflex.android.verticalviewpager.VerticalViewPager;
 
 public class MapActivity extends NavigationActivity implements MapFloorFragment.OnMapFloorEventListener {
     public static final String EXTRA_FLOOR_NUMBER = "ExtraFloorNumber";
@@ -56,8 +56,8 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
     private static final ConventionMap map = Convention.getInstance().getMap();
 	private static final String TAG = MapActivity.class.getCanonicalName();
 
-    private VerticalViewPager viewPager;
-	private int currentFloorNumber;
+    private ConditionalSwipeVerticalViewPager viewPager;
+	private int currentFloorNumber = ConventionMap.FLOOR_NOT_FOUND;
 
 	// Search
 	private LinearLayout searchContainer;
@@ -158,7 +158,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 	}
 
 	private void initializeViewPager() {
-        viewPager = (VerticalViewPager) findViewById(R.id.map_view_pager);
+        viewPager = (ConditionalSwipeVerticalViewPager) findViewById(R.id.map_view_pager);
 
         // Configure the view pager
         viewPager.setAdapter(new MapFloorAdapter(getSupportFragmentManager()));
@@ -176,12 +176,19 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 
 	        @Override
 	        public void onPageScrollStateChanged(int state) {
-
 	        }
         });
 
         // Hold all the fragments in memory for best transition performance
         viewPager.setOffscreenPageLimit(viewPager.getAdapter().getCount());
+
+		// Allow to swipe between floors when map is not zoomed in
+		viewPager.setCondition(new ConditionalSwipeVerticalViewPager.Condition() {
+			@Override
+			public boolean shouldSwipe() {
+				return !getCurrentFloorFragment().isMapZoomedIn();
+			}
+		});
     }
 
 	private void updateCurrentFloor(Floor floor) {
