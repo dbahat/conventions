@@ -17,6 +17,7 @@ import java.util.Map;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.EventNotification;
+import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.notifications.LocalNotificationScheduler;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
@@ -70,7 +71,11 @@ public class ConventionsApplication extends Application {
 	    registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
 		    @Override
 		    public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-			    currentContext = activity;
+			    // Important - only keep our activities here! Update when adding new activities if
+			    // they aren't NavigationActivity!
+			    if (activity instanceof NavigationActivity || activity instanceof HomeActivity) {
+			        currentContext = activity;
+			    }
 		    }
 
 		    @Override
