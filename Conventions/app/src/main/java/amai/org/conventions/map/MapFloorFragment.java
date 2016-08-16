@@ -62,13 +62,13 @@ import pl.polidea.view.ZoomView;
 public class MapFloorFragment extends Fragment implements Marker.MarkerListener {
 
     private static final String ARGS_FLOOR_NUMBER = "FloorNumber";
+	private static final String ARGS_SHOW_ANIMATION = "ShowAnimation";
 	private static final String STATE_SELECTED_LOCATIONS = "StateSelectedLocation";
 	private static final String STATE_LOCATION_DETAILS_OPEN = "StateLocationDetailsOpen";
 	private static final String STATE_MAP_FLOOR_ZOOM_FACTOR = "StateMapFloorZoomFactor";
 	private static final String STATE_MAP_FLOOR_ZOOM_X = "StateMapFloorZoomX";
 	private static final String STATE_MAP_FLOOR_ZOOM_Y = "StateMapFloorZoomY";
 
-	private static boolean showAnimation = true;
 
 	private static final float MAX_ZOOM = 2.5f;
 
@@ -186,10 +186,11 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		super.onSaveInstanceState(outState);
 	}
 
-	public static MapFloorFragment newInstance(int floor) {
+	public static MapFloorFragment newInstance(int floor, boolean showAnimation) {
         MapFloorFragment fragment = new MapFloorFragment();
         Bundle args = new Bundle();
         args.putInt(ARGS_FLOOR_NUMBER, floor);
+		args.putBoolean(ARGS_SHOW_ANIMATION, showAnimation);
         fragment.setArguments(args);
 
         return fragment;
@@ -362,6 +363,8 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
     private void configureMapFloorAndRestoreState(final Bundle savedInstanceState) {
         int mapFloor = getArguments().getInt(ARGS_FLOOR_NUMBER);
+	    final boolean showAnimation = getArguments().getBoolean(ARGS_SHOW_ANIMATION);
+	    getArguments().remove(ARGS_SHOW_ANIMATION); // Only show the animation once
 	    final ConventionMap map = Convention.getInstance().getMap();
 	    floor = map.findFloorByNumber(mapFloor);
 
@@ -407,7 +410,6 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
 			    Animation animation = null;
 			    if (showAnimation) {
-			        showAnimation = false;
 				    animation = AnimationUtils.loadAnimation(appContext, R.anim.drop_and_fade_in_from_top);
 				    animation.setStartOffset(100);
 			    }
@@ -519,7 +521,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		if (!floorMarkers.isEmpty()) {
 			for (Marker marker : floorMarkers) {
 				if (marker.getLocation().getId() == location.getId()) {
-					marker.select(false);
+					marker.select(true);
 					break;
 				}
 			}

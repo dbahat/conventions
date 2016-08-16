@@ -56,6 +56,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
     private static final ConventionMap map = Convention.getInstance().getMap();
 	private static final String TAG = MapActivity.class.getCanonicalName();
 
+	private static boolean showAnimation = true;
     private ConditionalSwipeVerticalViewPager viewPager;
 	private int currentFloorNumber = ConventionMap.FLOOR_NOT_FOUND;
 
@@ -90,6 +91,11 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 	    int defaultFloorNumber = initialLocation != null ? initialLocation.getFloor().getNumber() : getDefaultFloorNumber();
 	    int floorNumber = (bundle == null ? defaultFloorNumber : bundle.getInt(EXTRA_FLOOR_NUMBER, defaultFloorNumber));
 
+		// Show animation only if we don't initially show a location
+		// (we animate the initial location so it will look weird with the marker drops)
+		if (initialLocation != null) {
+			showAnimation = false;
+		}
         initializeViewPager();
 	    setFloorInViewPager(floorNumber, initialLocation);
 
@@ -161,7 +167,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
         viewPager = (ConditionalSwipeVerticalViewPager) findViewById(R.id.map_view_pager);
 
         // Configure the view pager
-        viewPager.setAdapter(new MapFloorAdapter(getSupportFragmentManager()));
+        viewPager.setAdapter(new MapFloorAdapter(getSupportFragmentManager(), showAnimation));
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 	        @Override
 	        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -189,6 +195,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 				return !getCurrentFloorFragment().isMapZoomedIn();
 			}
 		});
+		showAnimation = false; // Don't show animation next time this activity is created in this session
     }
 
 	private void updateCurrentFloor(Floor floor) {
@@ -236,13 +243,16 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 	}
 
 	private class MapFloorAdapter extends FragmentStatePagerAdapter {
-        public MapFloorAdapter(FragmentManager fm) {
+		private final boolean showAnimation;
+
+		public MapFloorAdapter(FragmentManager fm, boolean showAnimation) {
             super(fm);
+	        this.showAnimation = showAnimation;
         }
 
         @Override
         public Fragment getItem(int position) {
-	        return MapFloorFragment.newInstance(pagerPositionToFloor(position).getNumber());
+	        return MapFloorFragment.newInstance(pagerPositionToFloor(position).getNumber(), showAnimation);
         }
 
         @Override
