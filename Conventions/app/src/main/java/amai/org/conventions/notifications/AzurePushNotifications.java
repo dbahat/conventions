@@ -24,24 +24,6 @@ public class AzurePushNotifications {
 	public static final String IS_ADVANCED_OPTIONS_ENABLED = "isAdvancedOptionsEnabled";
 	private static final String IS_REGISTERED = "isRegisteredToAzureNotificationHub";
 
-	// Topics
-	public enum PushNotificationTopic {
-		TOPIC_GENERAL("cami2016_general"),
-		TOPIC_EVENTS("cami2016_events"),
-		TOPIC_COSPLAY("cami2016_cosplay"),
-		TOPIC_BUS("cami2016_bus"),
-		TOPIC_TEST("cami2016_test"),
-		TOPIC_EMERGENCY("cami2016_emergency");
-
-		private final String topic;
-		PushNotificationTopic(String topic) {
-			this.topic = topic;
-		}
-		public String getTopic() {
-			return topic;
-		}
-	}
-
 	private Context context;
 
 	public AzurePushNotifications(Context context) {
@@ -49,6 +31,7 @@ public class AzurePushNotifications {
 	}
 
 	public List<String> getNotificationTopics() {
+		// TODO move to ConventionApplication.settings for the next convention
 		final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 		List<PushNotificationTopic> topics = CollectionUtils.filter(
 				Arrays.asList(PushNotificationTopic.values()),
@@ -67,11 +50,6 @@ public class AzurePushNotifications {
 					}
 				});
 		return topicStrings;
-	}
-
-	public boolean isNotificationTopicEnabled(PushNotificationTopic topic) {
-		final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-		return topic == PushNotificationTopic.TOPIC_EMERGENCY || sharedPreferences.getBoolean(topic.getTopic(), false);
 	}
 
 	public void setAdvancedOptionsEnabled(boolean enabled) {

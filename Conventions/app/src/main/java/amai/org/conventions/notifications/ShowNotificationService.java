@@ -34,7 +34,7 @@ public class ShowNotificationService extends Service {
     public static final String EXTRA_EVENT_TO_NOTIFY = "ExtraEventToNotify";
     public static final String EXTRA_NOTIFICATION_TYPE = "EXTRA_NOTIFICATION_TYPE";
     public static final String EXTRA_MESSAGE = "EXTRA_MESSAGE";
-	public static final String EXTRA_TAG = "EXTRA_TAG";
+	public static final String EXTRA_CATEGORY = "EXTRA_CATEGORY";
 
     private static final int FILL_CONVENTION_FEEDBACK_NOTIFICATION_ID = 91235;
 	private static final int FILL_EVENTS_FEEDBACK_NOTIFICATION_ID = 95837;
@@ -198,13 +198,14 @@ public class ShowNotificationService extends Service {
         if (message == null) {
             return;
         }
-	    String tag = intent.getStringExtra(EXTRA_TAG); // Could be null
+	    String category = intent.getStringExtra(EXTRA_CATEGORY); // Could be null
 
 	    int notificationId = getNextPushNotificationId();
 	    Intent openAppIntent = new Intent(this, HomeActivity.class)
 			    .setAction(Type.Push.toString() + notificationId)
+			    .putExtra(HomeActivity.EXTRA_PUSH_NOTIFICATION_ID, notificationId)  // To prevent seeing the same notification twice
 			    .putExtra(HomeActivity.EXTRA_PUSH_NOTIFICATION_MESSAGE, message)
-			    .putExtra(HomeActivity.EXTRA_PUSH_NOTIFICATION_TAG, tag);
+			    .putExtra(HomeActivity.EXTRA_PUSH_NOTIFICATION_CATEGORY, category);
 
         Notification.Builder builder = getDefaultNotificationBuilder()
                 .setContentTitle(getString(R.string.app_name)) // Showing the app name as title to be consistent with iOS behavior

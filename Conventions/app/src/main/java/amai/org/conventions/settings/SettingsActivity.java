@@ -18,6 +18,7 @@ import amai.org.conventions.R;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.notifications.AzurePushNotifications;
 import amai.org.conventions.notifications.PlayServicesInstallation;
+import amai.org.conventions.notifications.PushNotificationTopic;
 import amai.org.conventions.utils.Dates;
 
 public class SettingsActivity extends NavigationActivity {
@@ -170,12 +171,7 @@ public class SettingsActivity extends NavigationActivity {
 		}
 
 		private boolean isPushNotificationTopic(String key) {
-			for (AzurePushNotifications.PushNotificationTopic value : AzurePushNotifications.PushNotificationTopic.values()) {
-				if (value.getTopic().equals(key)) {
-					return true;
-				}
-			}
-			return false;
+			return PushNotificationTopic.getByTopic(key) != null;
 		}
 	}
 }

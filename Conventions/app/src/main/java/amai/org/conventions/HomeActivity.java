@@ -46,17 +46,19 @@ import amai.org.conventions.notifications.AzureNotificationRegistrationService;
 import amai.org.conventions.notifications.AzurePushNotifications;
 import amai.org.conventions.notifications.PlayServicesInstallation;
 import amai.org.conventions.notifications.PushNotificationHandler;
+import amai.org.conventions.notifications.PushNotificationTopic;
 import amai.org.conventions.settings.SettingsActivity;
 import amai.org.conventions.updates.UpdatesActivity;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.Settings;
 import amai.org.conventions.utils.Views;
 
 public class HomeActivity extends AppCompatActivity {
 	public final static String EXTRA_PUSH_NOTIFICATION_MESSAGE = "EXTRA_PUSH_NOTIFICATION_MESSAGE";
-	public final static String EXTRA_PUSH_NOTIFICATION_TAG = "EXTRA_PUSH_NOTIFICATION_TAG";
+	public final static String EXTRA_PUSH_NOTIFICATION_CATEGORY = "EXTRA_PUSH_NOTIFICATION_CATEGORY";
+	public static final String EXTRA_PUSH_NOTIFICATION_ID = "EXTRA_PUSH_NOTIFICATION_ID";
 
-	private static final String SETTINGS_POPUP_DISPLAYED = "SETTINGS_POPUP_DISPLAYED";
 	private static final int NEW_UPDATES_NOTIFICATION_ID = 75457;
 	private static int numberOfTimesNavigated = 0;
 	private NavigationPages navigationPages;
@@ -193,14 +195,34 @@ public class HomeActivity extends AppCompatActivity {
 		// If we got here from a push notification, show it in a popup
 		String pushMessage = intent.getStringExtra(EXTRA_PUSH_NOTIFICATION_MESSAGE);
 		if (pushMessage != null) {
+			// Check if it's really a new push notification in case the last intent will be re-used accidently
+			// (this might be caused if the user pressed back then re-launched the app from the recents).
+			// Note: it could also happen in case the user deletes the app data on an older OS without restarting the phone.
+			// In that case the preferences are deleted so the last notification id will be the same but we also can't tell
+			// if the user already saw this notification. Removing the extra from the intent doesn't work.
+			int lastSeenNotification = ConventionsApplication.settings.getLastSeenPushNotificationId();
+			int notificationId = intent.getIntExtra(EXTRA_PUSH_NOTIFICATION_ID, Settings.NO_PUSH_NOTIFICATION_SEEN);
+			if (lastSeenNotification != Settings.NO_PUSH_NOTIFICATION_SEEN && lastSeenNotification == notificationId) {
+				return; // Already seen this notification
+			}
+			ConventionsApplication.settings.setLastSeenPushNotificationId(notificationId);
+
 			// Allow links
 			final SpannableString messageWithLinks = new SpannableString(pushMessage);
 			Linkify.addLinks(messageWithLinks, Linkify.WEB_URLS);
 
-			String pushTitle = intent.getStringExtra(EXTRA_PUSH_NOTIFICATION_TAG);
+			String pushCategoryTitle = null;
+			String pushCategory = intent.getStringExtra(EXTRA_PUSH_NOTIFICATION_CATEGORY);
+			if (pushCategory != null) {
+				// Convert to category title
+				PushNotificationTopic topic = PushNotificationTopic.getByTopic(pushCategory);
+				if (topic != null) {
+					pushCategoryTitle = getString(topic.getTitleResource());
+				}
+			}
 
 			pushNotificationDialog = new AlertDialog.Builder(this)
-					.setTitle(pushTitle == null ? getString(R.string.push_notification_title) : pushTitle)
+					.setTitle(pushCategoryTitle == null ? getString(R.string.push_notification_title) : pushCategoryTitle)
 					.setMessage(messageWithLinks)
 					.setPositiveButton(R.string.close, new DialogInterface.OnClickListener() {
 						@Override
@@ -229,7 +251,7 @@ public class HomeActivity extends AppCompatActivity {
 
 	private void showConfigureNotificationsDialog(final Context context) {
 		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-		if (!sharedPreferences.getBoolean(SETTINGS_POPUP_DISPLAYED, false)) {
+		if (!ConventionsApplication.settings.wasSettingsPopupDisplayed()) {
 			configureNotificationDialog = new AlertDialog.Builder(context)
 					.setTitle(R.string.configure_notifications)
 					.setMessage(R.string.configure_notifications_dialog_message)
@@ -248,7 +270,7 @@ public class HomeActivity extends AppCompatActivity {
 					})
 					.setCancelable(true)
 					.show();
-			sharedPreferences.edit().putBoolean(SETTINGS_POPUP_DISPLAYED, true).apply();
+			ConventionsApplication.settings.setSettingsPopupAsDisplayed();
 		}
 
 	}
