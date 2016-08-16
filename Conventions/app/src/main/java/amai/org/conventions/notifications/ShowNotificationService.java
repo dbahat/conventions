@@ -202,6 +202,7 @@ public class ShowNotificationService extends Service {
 
 	    int notificationId = getNextPushNotificationId();
 	    Intent openAppIntent = new Intent(this, HomeActivity.class)
+			    .setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
 			    .setAction(Type.Push.toString() + notificationId)
 			    .putExtra(HomeActivity.EXTRA_PUSH_NOTIFICATION_ID, notificationId)  // To prevent seeing the same notification twice
 			    .putExtra(HomeActivity.EXTRA_PUSH_NOTIFICATION_MESSAGE, message)

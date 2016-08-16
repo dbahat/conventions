@@ -191,6 +191,12 @@ public class HomeActivity extends AppCompatActivity {
 		});
 	}
 
+	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
+		showPushNotificationDialog(intent);
+	}
+
 	private void showPushNotificationDialog(Intent intent) {
 		// If we got here from a push notification, show it in a popup
 		String pushMessage = intent.getStringExtra(EXTRA_PUSH_NOTIFICATION_MESSAGE);
