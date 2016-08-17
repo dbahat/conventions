@@ -28,7 +28,7 @@ public class Cami2016Convention extends Convention {
 
 	@Override
 	protected ConventionStorage initStorage() {
-		return new ConventionStorage(this, R.raw.cami2016_convention_events, 0);
+		return new ConventionStorage(this, R.raw.cami2016_convention_events, 1);
 	}
 
 	@Override
