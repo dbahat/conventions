@@ -14,6 +14,7 @@ import amai.org.conventions.FeedbackActivity;
 import amai.org.conventions.R;
 import amai.org.conventions.events.activities.ProgrammeActivity;
 import amai.org.conventions.map.MapActivity;
+import amai.org.conventions.settings.SettingsActivity;
 import amai.org.conventions.updates.UpdatesActivity;
 
 /**
@@ -68,6 +69,7 @@ public class NavigationPages {
         pageIdToFragmentMapInOrder.put(R.string.updates, UpdatesActivity.class);
         pageIdToFragmentMapInOrder.put(R.string.arrival_methods, ArrivalMethodsActivity.class);
 	    pageIdToFragmentMapInOrder.put(R.string.feedback, FeedbackActivity.class);
+	    pageIdToFragmentMapInOrder.put(R.string.settings, SettingsActivity.class);
 
         return pageIdToFragmentMapInOrder;
     }
