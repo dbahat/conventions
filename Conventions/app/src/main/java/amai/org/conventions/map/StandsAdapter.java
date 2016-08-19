@@ -74,7 +74,7 @@ public class StandsAdapter extends BaseAdapter implements StickyGridHeadersSimpl
 			convertView = LayoutInflater.from(parent.getContext()).inflate(android.R.layout.simple_list_item_1, parent, false);
 			holder = new HeaderViewHolder();
 			holder.textView = (TextView) convertView.findViewById(android.R.id.text1);
-			holder.textView.setTextColor(ThemeAttributes.getColor(parent.getContext(), R.attr.navigationPopupSelectedColor));
+			holder.textView.setTextColor(ThemeAttributes.getColor(parent.getContext(), R.attr.standsTypeTitleColor));
 			convertView.setTag(holder);
 		} else {
 			holder = (HeaderViewHolder) convertView.getTag();

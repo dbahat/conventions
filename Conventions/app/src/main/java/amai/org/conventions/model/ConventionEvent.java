@@ -267,6 +267,19 @@ public class ConventionEvent implements Serializable {
 		return false;
 	}
 
+	/**
+	 * Compare all fields to see if this object contains the exact same data
+	 */
+	public boolean same(ConventionEvent other) {
+		// equals checks all other fields except images and plain text description (but both are
+		// calculated from the description)
+		return this.equals(other) &&
+				Objects.equals(this.id, other.id) &&
+				Objects.equals(this.backgroundColor, other.backgroundColor) &&
+				Objects.equals(this.textColor, other.textColor) &&
+				Objects.equals(this.description, other.description);
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(title, lecturer, startTime, endTime, type, hall, serverId);

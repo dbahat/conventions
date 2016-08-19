@@ -119,8 +119,9 @@
     <string name="show_only_halls">הצג אולמות בלבד</string>
     <string name="goto_stands_list">הצג דוכנים</string>
     <string name="commercial_stand">דוכנים מסחריים</string>
-    <string name="independent_stand">דוכנים עצמאיים</string>
-    <string name="donation_stand">תרומה ושונות</string>
+    <string name="independent_stand">קהילה יוצרת</string>
+    <string name="donation_stand">תרומה</string>
+    <string name="other_stand">שונות</string>
     <string name="search_locations">מתחם</string>
     <string name="search_stands">דוכנים</string>
     <string name="next_event_start">האירוע הבא מתחיל בעוד %1$s ב%2$s</string>

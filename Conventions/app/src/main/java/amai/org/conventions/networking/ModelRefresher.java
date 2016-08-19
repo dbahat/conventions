@@ -4,8 +4,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
+import amai.org.conventions.BuildConfig;
 import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.utils.Log;
@@ -33,6 +37,11 @@ public class ModelRefresher {
             try {
                 reader = new InputStreamReader((InputStream) request.getContent());
                 List<ConventionEvent> eventList = new ModelParser().parse(reader);
+
+	            if (BuildConfig.DEBUG) {
+		            notifyIfEventsUpdated(Convention.getInstance().getEvents(), eventList);
+	            }
+
                 Convention.getInstance().setEvents(eventList);
             } finally {
                 if (reader != null) {
@@ -51,4 +60,50 @@ public class ModelRefresher {
 
         return true;
     }
+
+	private void notifyIfEventsUpdated(List<ConventionEvent> currentEvents, List<ConventionEvent> newEvents) {
+		List<String> changes = new LinkedList<>();
+		Map<String, ConventionEvent> currentEventsById = new HashMap<>();
+		for (ConventionEvent event : currentEvents) {
+			currentEventsById.put(event.getId(), event);
+		}
+
+		Map<String, ConventionEvent> newEventsById = new HashMap<>();
+		for (ConventionEvent event : newEvents) {
+			newEventsById.put(event.getId(), event);
+		}
+
+		// Check if there are new events
+		for (ConventionEvent event : newEvents) {
+			if (!currentEventsById.containsKey(event.getId())) {
+				changes.add("New event: " + event.getTitle() + " (" + event.getId() + ")");
+			}
+		}
+
+		// Check if any events were deleted
+		for (ConventionEvent event : currentEvents) {
+			if (!newEventsById.containsKey(event.getId())) {
+				changes.add("Deleted event: " + event.getTitle() + " (" + event.getId() + ")");
+			}
+		}
+
+		// Check for changed events
+		for (ConventionEvent newEvent : newEvents) {
+			ConventionEvent currentEvent = currentEventsById.get(newEvent.getId());
+			if (currentEvent == null) {
+				continue;
+			}
+			if (!newEvent.same(currentEvent)) {
+				changes.add("Changed event: " + newEvent.getTitle() + " (" + newEvent.getId() + ")" +
+						(newEvent.getTitle().equals(currentEvent.getTitle()) ? "" : ", previous name: " + currentEvent.getTitle()));
+			}
+		}
+
+		for (String change : changes) {
+			Log.i(TAG, "Events refresh: " + change);
+		}
+		if (changes.size() == 0) {
+			Log.i(TAG, "Events refresh: No changes");
+		}
+	}
 }
