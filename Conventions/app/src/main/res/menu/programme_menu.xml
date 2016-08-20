@@ -6,13 +6,6 @@
     tools:ignore="AlwaysShowAction">
 
     <item
-        android:id="@+id/programme_navigate_to_search"
-        android:title="@string/programme_search_title"
-        android:icon="@drawable/ic_action_search"
-        android:orderInCategory="1"
-        app:showAsAction="always"/>
-
-    <item
         android:id="@+id/programme_navigate_to_feedback"
         android:title="@string/feedback"
         android:icon="@drawable/feedback_menu_icon"

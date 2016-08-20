@@ -33,4 +33,16 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:foreground="@drawable/bottom_shadow"/>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/action_button"
+        app:layout_behavior="amai.org.conventions.FloatingActionButtonScrollBehavior"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_action_search"
+        app:layout_anchor="@+id/navigation_content_view_container"
+        app:layout_anchorGravity="bottom|end"
+        android:layout_margin="16dp"
+        app:elevation="4dp" />
+
 </android.support.design.widget.CoordinatorLayout>

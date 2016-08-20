@@ -78,8 +78,14 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentInContentContainer(R.layout.activity_map, false, false);
+		setupActionButton(R.drawable.ic_action_search, new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				toggleSearch();
+			}
+		});
 
-	    // Read and initialize parameters from bundle
+		// Read and initialize parameters from bundle
 	    Bundle bundle = (savedInstanceState != null ? savedInstanceState : getIntent().getExtras());
 
 	    int initialLocationId = (bundle == null ? -1 : bundle.getInt(EXTRA_MAP_LOCATION_ID, -1));
@@ -122,9 +128,6 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 						.build());
 				closeSearch();
 				getCurrentFloorFragment().toggleMapZoom();
-				return true;
-			case R.id.map_floor_search:
-				toggleSearch();
 				return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -203,6 +206,14 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		currentFloorNumber = floor.getNumber();
 		map.setLastLookedAtFloor(floor);
 		updateZoomMenuItem();
+
+		// Update action button location after everything has been rendered
+		viewPager.post(new Runnable() {
+			@Override
+			public void run() {
+				updateActionButtonLocation();
+			}
+		});
 	}
 
 	@Override
@@ -543,6 +554,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		searchContainer.setVisibility(View.VISIBLE);
 		searchContainer.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in_from_right));
 		applySearchFiltersInBackground();
+		hideActionButton(null);
 	}
 
 	private void closeSearch() {
@@ -561,11 +573,34 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 			public void onAnimationEnd(Animation animation) {
 				searchContainer.setVisibility(View.GONE);
 				isSearchClosing = false;
+				showActionButton(null);
 			}
 
 			@Override
 			public void onAnimationRepeat(Animation animation) {
 			}
 		});
+	}
+
+	@Override
+	public void onLocationDetailsTopChanged(int top, MapFloorFragment floorFragment) {
+		if (floorFragment != null && floorFragment != getCurrentFloorFragment()) {
+			return;
+		}
+		int parentHeight = viewPager.getMeasuredHeight();
+		int actionButtonHeight = getActionButton().getMeasuredHeight();
+		if (top > parentHeight - actionButtonHeight) {
+			top = parentHeight - actionButtonHeight;
+		}
+		getActionButton().setTranslationY(-top);
+	}
+
+	private void updateActionButtonLocation() {
+		MapFloorFragment currentFloorFragment = getCurrentFloorFragment();
+		if (currentFloorFragment == null) {
+			return;
+		}
+		int baseHeight = currentFloorFragment.getMapHiddenPortionHeight();
+		onLocationDetailsTopChanged(baseHeight, null);
 	}
 }

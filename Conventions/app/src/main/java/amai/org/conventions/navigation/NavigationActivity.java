@@ -12,6 +12,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PictureDrawable;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -59,6 +60,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
     private AnimationPopupWindow popup;
 	private boolean showHomeScreenOnBack;
 	private FrameLayout contentContainer;
+	private FloatingActionButton actionButton;
 
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +89,6 @@ public abstract class NavigationActivity extends AppCompatActivity {
 				}
 			}
 		});
-
     }
 
 	protected void onNavigationButtonClicked() {
@@ -286,7 +287,30 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		}
 	}
 
-    public void onConventionEventClicked(View view) {
+	protected void setupActionButton(int imageResource, View.OnClickListener listener) {
+		actionButton = (FloatingActionButton) findViewById(R.id.action_button);
+		actionButton.setImageResource(imageResource);
+		actionButton.setOnClickListener(listener);
+		actionButton.setVisibility(View.VISIBLE);
+	}
+
+	protected void showActionButton(FloatingActionButton.OnVisibilityChangedListener listener) {
+		if (actionButton != null) {
+			actionButton.show(listener);
+		}
+	}
+
+	protected void hideActionButton(FloatingActionButton.OnVisibilityChangedListener listener) {
+		if (actionButton != null) {
+			actionButton.hide(listener);
+		}
+	}
+
+	public FloatingActionButton getActionButton() {
+		return actionButton;
+	}
+
+	public void onConventionEventClicked(View view) {
 	    Bundle bundle = new Bundle();
         bundle.putString(EventActivity.EXTRA_EVENT_ID, (String) view.getTag());
 	    addCustomEventActivityParameters(bundle);

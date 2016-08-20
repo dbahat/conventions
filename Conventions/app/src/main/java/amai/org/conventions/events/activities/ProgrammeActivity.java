@@ -70,6 +70,13 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
         setContentInContentContainer(R.layout.activity_programme);
         setToolbarTitle(getResources().getString(R.string.programme_title));
 
+		setupActionButton(R.drawable.ic_action_search, new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				navigateToActivity(ProgrammeSearchActivity.class, false, null);
+			}
+		});
+
         swipeLayout = (SwipeRefreshLayout) findViewById(R.id.programme_swipe_layout);
         swipeLayout.setOnRefreshListener(this);
         swipeLayout.setColorSchemeColors(ThemeAttributes.getColor(this, R.attr.toolbarBackground));
@@ -217,9 +224,6 @@ public class ProgrammeActivity extends NavigationActivity implements OnHeaderCli
 	        case R.id.programme_navigate_to_feedback:
 		        navigateToActivity(FeedbackActivity.class);
 				return true;
-			case R.id.programme_navigate_to_search:
-				navigateToActivity(ProgrammeSearchActivity.class, false, null);
-		        return true;
         }
 
         return super.onOptionsItemSelected(item);

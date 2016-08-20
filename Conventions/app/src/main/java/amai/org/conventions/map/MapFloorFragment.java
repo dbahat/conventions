@@ -1,6 +1,10 @@
 package amai.org.conventions.map;
 
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
+import android.animation.TimeInterpolator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
@@ -10,6 +14,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PictureDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MotionEventCompat;
@@ -19,8 +24,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -92,6 +99,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 	private List<Marker> floorMarkers = new LinkedList<>();
 	private MapLocation locationToSelect;
 	private Context appContext;
+	private MapLocation currentLocationDetails;
 
 	public MapFloorFragment() {
         // Required empty public constructor
@@ -109,6 +117,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
         initializeEventsListener();
 	    setMapClickListeners();
         configureMapFloorAndRestoreState(savedInstanceState);
+
 	    return view;
     }
 
@@ -254,7 +263,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		locationDetailsCloseImage.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				setSelectedLocationDetails(null);
+				hideLocationDetails();
 			}
 		});
 
@@ -333,7 +342,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 							locationDetails.callOnClick();
 						}
 					} else {
-						setSelectedLocationDetails(null);
+						hideLocationDetails();
 					}
 				}
 			}
@@ -374,6 +383,9 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
 	    boolean isBottomFloor = floor.getNumber() == map.getBottomFloor().getNumber();
 	    downArrow.setVisibility(isBottomFloor ? View.GONE : View.VISIBLE);
+
+	    // We have to measure for the animations to work
+	    downArrow.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
 
 	    mapZoomView.setMaxZoom(MAX_ZOOM);
 
@@ -457,7 +469,8 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 			boolean locationDetailsOpen = savedInstanceState.getBoolean(STATE_LOCATION_DETAILS_OPEN);
 			if (locationDetailsOpen && selectedLocation != null) {
 				// If the details are open there should only be one location selected so we take the last one
-				setSelectedLocationDetails(selectedLocation);
+				// Don't show animation when restoring
+				showLocationDetails(selectedLocation, false);
 			}
 
 			float zoomFactor = savedInstanceState.getFloat(STATE_MAP_FLOOR_ZOOM_FACTOR, 1.0f);
@@ -535,7 +548,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		for (Marker marker : floorMarkers) {
 			marker.deselect();
 		}
-		setSelectedLocationDetails(null);
+		hideLocationDetails();
 		changeMapZoom(false);
 	}
 
@@ -547,8 +560,11 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 			return;
 		}
 
+		MapLocation locationToDisplay = null;
+
 		// Select sent locations and deselect everything else.
 		// Don't deselect then reselect the same marker.
+		int numOfSelectedMarkers = 0;
 		MapLocationSearchEquality comparator = new MapLocationSearchEquality();
 		for (Marker marker : floorMarkers) {
 			boolean selected = false;
@@ -556,6 +572,8 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 				if (comparator.equals(location, marker.getLocation())) {
 					marker.select();
 					selected = true;
+					++numOfSelectedMarkers;
+					locationToDisplay = location;
 					break;
 				}
 			}
@@ -563,18 +581,30 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 				marker.deselect();
 			}
 		}
+
+		// Show the selected location (in case there's only 1 - it can be more than 1 if there are
+		// several places with the same name in this floor)
+		if (numOfSelectedMarkers == 1) {
+			showLocationDetails(locationToDisplay, true);
+		}
 	}
 
 	public void selectMarkerByLocation(MapLocation location) {
+		int numOfSelectedMarkers = 0;
 		for (Marker marker : floorMarkers) {
 			boolean selected = false;
 			if (location != null && marker.getLocation().getId() == location.getId()) {
 				marker.select();
 				selected = true;
+				++numOfSelectedMarkers;
 			}
 			if (!selected) {
 				marker.deselect();
 			}
+		}
+
+		if (numOfSelectedMarkers == 1) {
+			showLocationDetails(location, true);
 		}
 	}
 
@@ -582,6 +612,12 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
         void onUpArrowClicked();
         void onDownArrowClicked();
 	    void onZoomChanged();
+
+	    /**
+	     * Location details top changed ("top" meaning distance from bottom).
+	     * This method is called during animation.
+	     */
+	    void onLocationDetailsTopChanged(int top, MapFloorFragment floor);
     }
 
 	@Override
@@ -601,7 +637,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
 		// Ensure clicked marker is selected
 		marker.select();
-		setSelectedLocationDetails(marker.getLocation());
+		showLocationDetails(marker.getLocation(), true);
 	}
 
 	private void setMapClickListeners() {
@@ -612,7 +648,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 					for (Marker marker : floorMarkers) {
 						marker.deselect();
 					}
-					setSelectedLocationDetails(null);
+					hideLocationDetails();
 					return true;
 				}
 			});
@@ -625,37 +661,148 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		});
 	}
 
-	public void setSelectedLocationDetails(final MapLocation location) {
-		if (location == null) {
-			if (locationDetails.getVisibility() != View.GONE) {
-				Animation animation = AnimationUtils.loadAnimation(appContext, R.anim.slide_out_bottom);
-				locationDetails.startAnimation(animation);
-				animation.setAnimationListener(new Animation.AnimationListener() {
-					@Override
-					public void onAnimationStart(Animation animation) {
-					}
+	private void hideLocationDetails() {
+		currentLocationDetails = null;
 
-					@Override
-					public void onAnimationEnd(Animation animation) {
-						locationDetails.setVisibility(View.GONE);
-					}
+		if (locationDetails.getVisibility() != View.GONE) {
+			Animator animator = animateLocationDetailsTranslationY(0, 1, new AccelerateInterpolator());
+			animator.addListener(new Animator.AnimatorListener() {
+				@Override
+				public void onAnimationStart(Animator animation) {
+				}
 
+				@Override
+				public void onAnimationEnd(Animator animation) {
+					locationDetails.setVisibility(View.GONE);
+					locationDetails.setTranslationY(0);
+				}
+
+				@Override
+				public void onAnimationCancel(Animator animation) {
+				}
+
+				@Override
+				public void onAnimationRepeat(Animator animation) {
+				}
+			});
+			animator.start();
+		}
+	}
+
+	public int getMapHiddenPortionHeight() {
+		return (downArrow == null) ? 0 :
+				(downArrow.getVisibility() == View.VISIBLE ? downArrow.getMeasuredHeight() : 0) +
+				(locationDetails.getVisibility() == View.VISIBLE ? locationDetails.getMeasuredHeight() : 0);
+	}
+
+	@NonNull
+	private ObjectAnimator animateLocationDetailsTranslationY(float fromFraction, float toFraction, TimeInterpolator interpolator) {
+		// Using ObjectAnimator and not xml animation so we can listen to the animation update and notify the listener
+		// (which updates the location of the floating action button(
+		final int detailsHeight = locationDetails.getMeasuredHeight();
+		ObjectAnimator animator = ObjectAnimator.ofFloat(locationDetails, "translationY", fromFraction * detailsHeight, toFraction * detailsHeight);
+		animator.setInterpolator(interpolator);
+
+		final int baseline = (downArrow.getVisibility() == View.VISIBLE ? downArrow.getMeasuredHeight() : 0);
+		animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+			@Override
+			public void onAnimationUpdate(ValueAnimator animation) {
+				float value = (float) animation.getAnimatedValue();
+				if (mapFloorEventsListener != null) {
+					mapFloorEventsListener.onLocationDetailsTopChanged(detailsHeight - (int) value + baseline, MapFloorFragment.this);
+				}
+			}
+		});
+		animator.setDuration(400);
+		return animator;
+	}
+
+	private void showLocationDetails(final MapLocation location, boolean animate) {
+		// Don't change location details if it's already the displayed location
+		// because we don't want the animation to be displayed in this case
+		if (location == currentLocationDetails || location == null) {
+			return;
+		}
+		currentLocationDetails = location;
+
+		boolean isVisible = locationDetails.getVisibility() == View.VISIBLE;
+		if (isVisible && animate) {
+			// Hide the location details with animation before opening it
+			Animator hideAnimator = animateLocationDetailsTranslationY(0, 1, new DecelerateInterpolator());
+
+			hideAnimator.addListener(new Animator.AnimatorListener() {
+				@Override
+				public void onAnimationStart(Animator animation) {
+				}
+
+				@Override
+				public void onAnimationEnd(Animator animation) {
+					setLocationDetails(location);
+					createShowLocationDetailsAnimator().start();
+				}
+
+				@Override
+				public void onAnimationCancel(Animator animation) {
+				}
+
+				@Override
+				public void onAnimationRepeat(Animator animation) {
+				}
+			});
+			hideAnimator.start();
+		} else {
+			setLocationDetails(location);
+			if (animate) {
+				createShowLocationDetailsAnimator().start();
+			} else {
+				locationDetails.post(new Runnable() {
 					@Override
-					public void onAnimationRepeat(Animation animation) {
+					public void run() {
+						if (mapFloorEventsListener != null) {
+							mapFloorEventsListener.onLocationDetailsTopChanged(getMapHiddenPortionHeight(), MapFloorFragment.this);
+						}
 					}
 				});
 			}
-		} else {
-			locationDetails.setVisibility(View.VISIBLE);
-			locationTitle.setText(location.getName());
-			locationDetails.setOnClickListener(null);
-
-			// Get current and next events in this location
-			setupEventsForLocation(location);
-
-			// Check if it's a stands area
-			setupStandsButtonForLocation(location);
 		}
+	}
+
+	private Animator createShowLocationDetailsAnimator() {
+		final Animator showAnimator = animateLocationDetailsTranslationY(1, 0, new AccelerateInterpolator());
+		showAnimator.addListener(new Animator.AnimatorListener() {
+			@Override
+			public void onAnimationStart(Animator animation) {
+			}
+
+			@Override
+			public void onAnimationEnd(Animator animation) {
+				locationDetails.setTranslationY(0);
+			}
+
+			@Override
+			public void onAnimationCancel(Animator animation) {
+			}
+
+			@Override
+			public void onAnimationRepeat(Animator animation) {
+			}
+		});
+		return showAnimator;
+	}
+
+	private void setLocationDetails(final MapLocation location) {
+		locationDetails.setVisibility(View.VISIBLE);
+		locationTitle.setText(location.getName());
+		locationDetails.setOnClickListener(null);
+
+		// Get current and next events in this location
+		setupEventsForLocation(location);
+
+		// Check if it's a stands area
+		setupStandsButtonForLocation(location);
+
+		// We have to measure for the animations to work (we can't define percentage in ObjectAnimator)
+		locationDetails.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
 	}
 
 	private void setupStandsButtonForLocation(final MapLocation location) {
