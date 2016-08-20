@@ -14,6 +14,7 @@ public class Settings {
 	private static final String WAS_PLAY_SERVICES_INSTALLATION_CANCELLED = "WasPlayServicesInstallationCancelled";
 	private static final String WAS_SETTINGS_POPUP_DISPLAYED = "WasSettingsPopupDisplayed";
 	private static final String LAST_SEEN_PUSH_NOTIFICATION_ID = "LastSeenPushNotificationId";
+	private static final String ADD_MISSING_NOTIFICATIONS = "AddMissingNotifications";
     private SharedPreferences sharedPreferences;
 
     public Settings(Context context) {
@@ -60,4 +61,14 @@ public class Settings {
 	public void setLastSeenPushNotificationId(int notificationId) {
 		sharedPreferences.edit().putInt(LAST_SEEN_PUSH_NOTIFICATION_ID, notificationId).apply();
 	}
+
+	// TODO remove for next convention - this is a workaround for a bug that event alarms were not added
+	public boolean shouldAddMissingNotifications() {
+		return sharedPreferences.getBoolean(ADD_MISSING_NOTIFICATIONS, true);
+	}
+
+	public void disableAddMissingNotifications() {
+		sharedPreferences.edit().putBoolean(ADD_MISSING_NOTIFICATIONS, false).apply();
+	}
+
 }
