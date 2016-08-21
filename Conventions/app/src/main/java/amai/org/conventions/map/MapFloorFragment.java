@@ -889,6 +889,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 					Bundle animationBundle = ActivityOptions.makeCustomAnimation(appContext, R.anim.slide_in_bottom, 0).toBundle();
 					Bundle bundle = new Bundle();
 					bundle.putString(HallActivity.EXTRA_HALL_NAME, place.getName());
+					bundle.putBoolean(HallActivity.EXTRA_USE_SLIDE_OUT_ANIMATION_ON_BACK, true);
 
 					Intent intent = new Intent(getActivity(), HallActivity.class);
 					intent.putExtras(bundle);

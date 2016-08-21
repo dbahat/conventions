@@ -17,12 +17,15 @@ import amai.org.conventions.navigation.NavigationActivity;
 
 public class HallActivity extends NavigationActivity {
     public static final String EXTRA_HALL_NAME = "ExtraHallName";
+	public static final String EXTRA_USE_SLIDE_OUT_ANIMATION_ON_BACK = "ExtraUseSlideOutAnimationOnBack";
+	private boolean useSlideOutAnimationOnBack;
 
-    @Override
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         final String hallName = getIntent().getStringExtra(EXTRA_HALL_NAME);
+	    useSlideOutAnimationOnBack = getIntent().getBooleanExtra(EXTRA_USE_SLIDE_OUT_ANIMATION_ON_BACK, false);
 
         setContentInContentContainer(R.layout.activity_hall);
         setToolbarTitle(hallName);
@@ -34,4 +37,12 @@ public class HallActivity extends NavigationActivity {
         hallEventsList.setAdapter(new SwipeableEventsViewAdapter(events, hallEventsList));
         hallEventsList.setLayoutManager(new LinearLayoutManager(this));
     }
+
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		if (useSlideOutAnimationOnBack) {
+			overridePendingTransition(0, R.anim.slide_out_bottom);
+		}
+	}
 }
