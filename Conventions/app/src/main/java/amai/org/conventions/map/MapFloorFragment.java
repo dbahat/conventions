@@ -100,6 +100,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 	private MapLocation locationToSelect;
 	private Context appContext;
 	private MapLocation currentLocationDetails;
+	private boolean preventFragmentScroll;
 
 	public MapFloorFragment() {
         // Required empty public constructor
@@ -147,6 +148,11 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		} else {
 			mapZoomView.smoothZoomTo(1.0f, mapZoomView.getWidth() / 2, mapZoomView.getHeight() / 2);
 		}
+	}
+
+	public boolean canSwipeToChangeFloor() {
+		// Allow to swipe between floors when map is not zoomed in and location details is not open
+		return !isMapZoomedIn() && !preventFragmentScroll;
 	}
 
 	public boolean isMapZoomedIn() {
@@ -278,17 +284,18 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 				switch (MotionEventCompat.getActionMasked(event)) {
 					case MotionEvent.ACTION_DOWN:
 						// If the user started a scroll on the event details, don't let the view pager
-						// we're in intercept it (so it doesn't scroll to the floor below/above)
-						locationDetails.getParent().requestDisallowInterceptTouchEvent(true);
+						// we're in scroll to the floor below/above
+						preventFragmentScroll = true;
 						resetMotionEventParameters(event);
 						break;
 					case MotionEvent.ACTION_CANCEL:
 					case MotionEvent.ACTION_UP:
-						// Touch event finished, let the view pager intercept events again.
-						// We will only reach here is we didn't intercept this event.
-						locationDetails.getParent().requestDisallowInterceptTouchEvent(false);
+						// Touch events finished, let the view pager intercept events again.
+						if (event.getPointerCount() > 1) {
+							preventFragmentScroll = false;
+						}
 
-						// Touch event ended, don't handle the event. Children who are listening will handle it.
+						// Touch events ended, don't handle the event. Children who are listening will handle it.
 						isDragging = false;
 						break;
 					case MotionEvent.ACTION_MOVE:
@@ -309,15 +316,22 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 				switch (MotionEventCompat.getActionMasked(event)) {
 					case MotionEvent.ACTION_DOWN:
 						// If the user started a scroll on the event details, don't let the view pager
-						// we're in intercept it (so it doesn't scroll to the floor below/above).
-						// We get here only in rare cases (usually onInterceptTouchEvent should consume down event).
-						locationDetails.getParent().requestDisallowInterceptTouchEvent(true);
+						// we're in scroll to the floor below/above
+						preventFragmentScroll = true;
 						resetMotionEventParameters(event);
 						break;
 					case MotionEvent.ACTION_CANCEL:
+						// Touch events finished, let the view pager intercept events again
+						// but since it's cancel, don't perform the click
+						if (event.getPointerCount() > 1) {
+							preventFragmentScroll = false;
+						}
+						break;
 					case MotionEvent.ACTION_UP:
-						// Touch event finished, let the view pager intercept events again
-						v.getParent().requestDisallowInterceptTouchEvent(false);
+						// Touch events finished, let the view pager intercept events again
+						if (event.getPointerCount() > 1) {
+							preventFragmentScroll = false;
+						}
 						// Handle click event for locationDetails (it isn't called because we consume
 						// all motion events)
 						handleClick(event);
@@ -662,6 +676,9 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 	}
 
 	private void hideLocationDetails() {
+		if (currentLocationDetails == null) {
+			return;
+		}
 		currentLocationDetails = null;
 
 		if (locationDetails.getVisibility() != View.GONE) {

@@ -191,11 +191,10 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
         // Hold all the fragments in memory for best transition performance
         viewPager.setOffscreenPageLimit(viewPager.getAdapter().getCount());
 
-		// Allow to swipe between floors when map is not zoomed in
 		viewPager.setCondition(new ConditionalSwipeVerticalViewPager.Condition() {
 			@Override
 			public boolean shouldSwipe() {
-				return !getCurrentFloorFragment().isMapZoomedIn();
+				return getCurrentFloorFragment().canSwipeToChangeFloor();
 			}
 		});
 		showAnimation = false; // Don't show animation next time this activity is created in this session
