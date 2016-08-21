@@ -295,13 +295,17 @@ public class Cami2016Convention extends Convention {
 				new Stand().withName("gaming land").withType(Stand.StandType.COMMERCIAL),
 				new Stand().withName("RETRO GAME CENTER").withType(Stand.StandType.COMMERCIAL),
 				new Stand().withName("בתוך הקופסה").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("נרדגזם/גיק בסטה").withType(Stand.StandType.COMMERCIAL),
 				new Stand().withName("נקסוס").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("Gamer").withType(Stand.StandType.COMMERCIAL),
 				new Stand().withName("אנימה סטור").withType(Stand.StandType.COMMERCIAL),
 				new Stand().withName("Cosplay Senpai").withType(Stand.StandType.COMMERCIAL),
 				new Stand().withName("אוטאקו שופ").withType(Stand.StandType.COMMERCIAL),
 				new Stand().withName("Candy Lenses").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("PowerfulMerch").withType(Stand.StandType.COMMERCIAL),
 				new Stand().withName("וורבלה").withType(Stand.StandType.COMMERCIAL),
 				new Stand().withName("הדוכן המדהים של שלישית הקסם").withType(Stand.StandType.COMMERCIAL),
+				new Stand().withName("animode").withType(Stand.StandType.COMMERCIAL),
 				new Stand().withName("כובעי עינב").withType(Stand.StandType.INDEPENDENT),
 				new Stand().withName("Amelia hats").withType(Stand.StandType.INDEPENDENT),
 				new Stand().withName("כריות פנדומים").withType(Stand.StandType.INDEPENDENT),
@@ -310,6 +314,8 @@ public class Cami2016Convention extends Convention {
 				new Stand().withName("rivendell").withType(Stand.StandType.INDEPENDENT),
 				new Stand().withName("Dor's Designs").withType(Stand.StandType.INDEPENDENT),
 				new Stand().withName("Roza's Fluffy Stuff").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("מאי שירי design & art").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("אמיגורמי").withType(Stand.StandType.INDEPENDENT),
 				new Stand().withName("Dark vibes").withType(Stand.StandType.INDEPENDENT),
 				new Stand().withName("Beadesign").withType(Stand.StandType.INDEPENDENT),
 				new Stand().withName("הציורים של אור").withType(Stand.StandType.INDEPENDENT),
@@ -321,7 +327,9 @@ public class Cami2016Convention extends Convention {
 				new Stand().withName("Japaneasy").withType(Stand.StandType.INDEPENDENT),
 				new Stand().withName("DraMagic").withType(Stand.StandType.DONATION),
 				new Stand().withName("קריספי סאב\\Crispy-Sub!").withType(Stand.StandType.DONATION),
-				new Stand().withName("המרכז ללימודי יפנית").withType(Stand.StandType.OTHER)
+				new Stand().withName("המרכז ללימודי יפנית").withType(Stand.StandType.OTHER),
+				new Stand().withName("Hatz, lolita & more").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("סרוגי").withType(Stand.StandType.INDEPENDENT)
 		);
 	}
 
@@ -349,16 +357,22 @@ public class Cami2016Convention extends Convention {
 				new Stand().withName("Aniart4u").withType(Stand.StandType.INDEPENDENT),
 				new Stand().withName("נגה- ציורים ואומנות").withType(Stand.StandType.INDEPENDENT),
 				new Stand().withName("קבוצת יצירת קומיקס").withType(Stand.StandType.INDEPENDENT),
-				new Stand().withName("Rinska's Booth").withType(Stand.StandType.INDEPENDENT)
+				new Stand().withName("ציורים ופיצ'פקס").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("Rinska's Booth").withType(Stand.StandType.INDEPENDENT),
+				new Stand().withName("Go Japan").withType(Stand.StandType.COMMERCIAL)
 		);
 	}
 
 	private List<Stand> getNesherStands() {
 		return Arrays.asList(
-				new Stand().withName("קוספליי למען מטרה").withType(Stand.StandType.DONATION),
-				new Stand().withName("BrAND Musical - דוכן תרומות").withType(Stand.StandType.DONATION),
 				new Stand().withName("מודיעין").withType(Stand.StandType.OTHER),
-				new Stand().withName("דוכן אמא\"י").withType(Stand.StandType.OTHER)
+				new Stand().withName("דוכן אמא\"י").withType(Stand.StandType.OTHER),
+				new Stand().withName("קוספליי למען מטרה").withType(Stand.StandType.DONATION),
+				new Stand().withName("תא ניפון באוניברסיטה העברית").withType(Stand.StandType.OTHER),
+				new Stand().withName("האגודה לידידות יפן").withType(Stand.StandType.OTHER),
+				new Stand().withName("BrAND Musical - דוכן תרומות").withType(Stand.StandType.DONATION),
+				new Stand().withName("החוג ללימודי אסיה מכללת תל-חי").withType(Stand.StandType.OTHER),
+				new Stand().withName("החוג ללימודי אסיה באוניברסיטת חיפה").withType(Stand.StandType.OTHER)
 		);
 	}
 
