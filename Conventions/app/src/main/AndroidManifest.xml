@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="amai.org.conventions"
-    android:versionCode="25"
-    android:versionName="3.1.1">
+    android:versionCode="26"
+    android:versionName="3.1.2">
 
     <!-- For notifications -->
     <uses-permission android:name="android.permission.VIBRATE" />
