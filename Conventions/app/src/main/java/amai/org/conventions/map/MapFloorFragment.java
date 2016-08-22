@@ -816,16 +816,16 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		locationDetails.setOnClickListener(null);
 
 		// Get current and next events in this location
-		setupEventsForLocation(location);
+		setupHallLocation(location);
 
 		// Check if it's a stands area
-		setupStandsButtonForLocation(location);
+		setupStandsLocation(location);
 
 		// We have to measure for the animations to work (we can't define percentage in ObjectAnimator)
 		locationDetails.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
 	}
 
-	private void setupStandsButtonForLocation(final MapLocation location) {
+	private void setupStandsLocation(final MapLocation location) {
 		// Only show button if there is more than 1 stand
 		if (location.getPlace() instanceof StandsArea && ((StandsArea) location.getPlace()).getStands().size() > 1) {
 			gotoStandsListButton.setVisibility(View.VISIBLE);
@@ -848,7 +848,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		}
 	}
 
-	private void setupEventsForLocation(final MapLocation location) {
+	private void setupHallLocation(final MapLocation location) {
 		ConventionEvent currEvent = null;
 		ConventionEvent nextEvent = null;
 		boolean isHall = location.getPlace() instanceof Hall;
