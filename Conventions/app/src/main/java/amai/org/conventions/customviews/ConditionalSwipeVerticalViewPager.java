@@ -1,6 +1,7 @@
 package amai.org.conventions.customviews;
 
 import android.content.Context;
+import android.support.v4.view.MotionEventCompat;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
@@ -24,8 +25,8 @@ public class ConditionalSwipeVerticalViewPager extends VerticalViewPager {
 	@Override
 	public boolean onInterceptTouchEvent(MotionEvent event) {
 		// Check if we should allow swiping to switch between pages
-		boolean enableSwipe = condition == null ? false : condition.shouldSwipe();
-		if (!enableSwipe) {
+		boolean enableSwipe = condition == null ? true : condition.shouldSwipe();
+		if (!enableSwipe && MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_MOVE) {
 			return false;
 		}
 		return super.onInterceptTouchEvent(event);
@@ -34,8 +35,8 @@ public class ConditionalSwipeVerticalViewPager extends VerticalViewPager {
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		// Check if we should allow swiping to switch between pages
-		boolean enableSwipe = condition == null ? false : condition.shouldSwipe();
-		if (!enableSwipe) {
+		boolean enableSwipe = condition == null ? true : condition.shouldSwipe();
+		if (!enableSwipe && MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_MOVE) {
 			return false;
 		}
 		return super.onTouchEvent(event);

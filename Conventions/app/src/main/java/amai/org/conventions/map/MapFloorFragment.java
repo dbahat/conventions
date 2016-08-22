@@ -285,22 +285,17 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 					case MotionEvent.ACTION_DOWN:
 						// If the user started a scroll on the event details, don't let the view pager
 						// we're in scroll to the floor below/above
-						preventFragmentScroll = true;
+						handleTouchEventsStarted(event);
 						resetMotionEventParameters(event);
 						break;
 					case MotionEvent.ACTION_CANCEL:
 					case MotionEvent.ACTION_UP:
-						// Touch events finished, let the view pager intercept events again.
-						if (event.getPointerCount() > 1) {
-							preventFragmentScroll = false;
-						}
-
-						// Touch events ended, don't handle the event. Children who are listening will handle it.
-						isDragging = false;
+						// Touch events finished, let the view pager and children intercept events again.
+						handleTouchEventsFinished(event);
 						break;
 					case MotionEvent.ACTION_MOVE:
 						if (isDragging || movePassesThreshold(event)) {
-							// The view is being dragged, so it should handle the event
+							// The view is being dragged, so it should handle the event (and not its children)
 							isDragging = true;
 							return true;
 						}
@@ -315,23 +310,15 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 			public boolean onTouch(View v, MotionEvent event) {
 				switch (MotionEventCompat.getActionMasked(event)) {
 					case MotionEvent.ACTION_DOWN:
-						// If the user started a scroll on the event details, don't let the view pager
-						// we're in scroll to the floor below/above
-						preventFragmentScroll = true;
+						handleTouchEventsStarted(event);
 						resetMotionEventParameters(event);
 						break;
 					case MotionEvent.ACTION_CANCEL:
-						// Touch events finished, let the view pager intercept events again
-						// but since it's cancel, don't perform the click
-						if (event.getPointerCount() > 1) {
-							preventFragmentScroll = false;
-						}
+						// It's cancel so don't perform a click
+						handleTouchEventsFinished(event);
 						break;
 					case MotionEvent.ACTION_UP:
-						// Touch events finished, let the view pager intercept events again
-						if (event.getPointerCount() > 1) {
-							preventFragmentScroll = false;
-						}
+						handleTouchEventsFinished(event);
 						// Handle click event for locationDetails (it isn't called because we consume
 						// all motion events)
 						handleClick(event);
@@ -372,9 +359,25 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 			}
 
 			private void resetMotionEventParameters(MotionEvent event) {
-				isDragging = false;
-				performedDragUpAction = false;
-				startPointY = event.getY();
+				if (event.getPointerCount() == 1) {
+					isDragging = false;
+					performedDragUpAction = false;
+					startPointY = event.getY();
+				}
+			}
+
+			private void handleTouchEventsFinished(MotionEvent event) {
+				// Touch events finished, let the view pager intercept events again
+				if (event.getPointerCount() == 1) {
+					preventFragmentScroll = false;
+					isDragging = false;
+				}
+			}
+
+			private void handleTouchEventsStarted(MotionEvent event) {
+				// If the user started a scroll on the event details, don't let the view pager
+				// we're in scroll to the floor below/above
+				preventFragmentScroll = true;
 			}
 		};
 
