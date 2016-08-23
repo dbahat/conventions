@@ -14,6 +14,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PictureDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -59,6 +60,7 @@ import amai.org.conventions.model.Floor;
 import amai.org.conventions.model.Hall;
 import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.model.Place;
+import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.utils.Dates;
 import pl.polidea.view.ZoomView;
@@ -78,6 +80,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
 
 	private static final float MAX_ZOOM = 2.5f;
+	private static final int LOCATION_DETAILS_OPEN_CLOSE_DURATION = 300;
 
 	private Floor floor;
 
@@ -606,7 +609,8 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		}
 	}
 
-	public void selectMarkerByLocation(MapLocation location) {
+	public void selectStandByLocation(final MapLocation location, final Stand stand) {
+		int delayOpenStandsLocation = 200;
 		int numOfSelectedMarkers = 0;
 		for (Marker marker : floorMarkers) {
 			boolean selected = false;
@@ -622,7 +626,15 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
 		if (numOfSelectedMarkers == 1) {
 			showLocationDetails(location, true);
+			delayOpenStandsLocation += LOCATION_DETAILS_OPEN_CLOSE_DURATION;
 		}
+
+		new Handler().postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				showStandsArea(location, stand);
+			}
+		}, delayOpenStandsLocation);
 	}
 
     public interface OnMapFloorEventListener {
@@ -733,7 +745,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 				}
 			}
 		});
-		animator.setDuration(400);
+		animator.setDuration(LOCATION_DETAILS_OPEN_CLOSE_DURATION);
 		return animator;
 	}
 
@@ -832,20 +844,28 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 			gotoStandsListButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					// Show the list of stands in a dialog
-					Place place = location.getPlace();
-					StandsAreaFragment standsFragment = new StandsAreaFragment();
-
-					Bundle args = new Bundle();
-					args.putInt(StandsAreaFragment.ARGUMENT_STANDS_AREA_ID, ((StandsArea) place).getId());
-					standsFragment.setArguments(args);
-
-					standsFragment.show(getFragmentManager(), null);
+					showStandsArea(location, null);
 				}
 			});
 		} else {
 			gotoStandsListButton.setVisibility(View.GONE);
 		}
+	}
+
+	private void showStandsArea(MapLocation location, Stand stand) {
+		// Show the list of stands in a dialog
+		Place place = location.getPlace();
+		StandsAreaFragment standsFragment = new StandsAreaFragment();
+
+		Bundle args = new Bundle();
+		args.putInt(StandsAreaFragment.ARGUMENT_STANDS_AREA_ID, ((StandsArea) place).getId());
+		if (stand != null) {
+			// Select the stand inside the area
+			args.putString(StandsAreaFragment.ARGUMENT_STAND_NAME, stand.getName());
+		}
+		standsFragment.setArguments(args);
+
+		standsFragment.show(getFragmentManager(), null);
 	}
 
 	private void setupHallLocation(final MapLocation location) {

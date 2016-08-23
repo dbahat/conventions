@@ -8,6 +8,7 @@ import amai.org.conventions.utils.Objects;
 
 public class StandsArea extends Place implements Serializable {
 	private int id;
+	private Integer imageResource;
 	private List<Stand> stands = Collections.emptyList();
 
     public StandsArea() {
@@ -21,6 +22,23 @@ public class StandsArea extends Place implements Serializable {
 	@Override
 	public StandsArea withName(String name) {
 		super.withName(name);
+		return this;
+	}
+
+	public boolean hasImageResource() {
+		return imageResource != null;
+	}
+
+	public void setImageResource(int imageResource) {
+		this.imageResource = imageResource;
+	}
+
+	public int getImageResource() {
+		return imageResource;
+	}
+
+	public StandsArea withImageResource(int imageResource) {
+		setImageResource(imageResource);
 		return this;
 	}
 

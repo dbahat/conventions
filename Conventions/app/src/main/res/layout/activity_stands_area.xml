@@ -5,6 +5,21 @@
     android:orientation="vertical"
     tools:context=".events.activities.StandsAreaFragment">
 
+    <pl.polidea.view.ZoomView
+        android:id="@+id/stands_area_zoom"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <amai.org.conventions.customviews.AspectRatioImageView
+            android:id="@+id/stands_area_map"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </pl.polidea.view.ZoomView>
+
     <com.tonicartos.widget.stickygridheaders.StickyGridHeadersGridView
         android:id="@+id/standsList"
         android:layout_width="match_parent"

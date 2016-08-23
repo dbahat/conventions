@@ -41,7 +41,6 @@ import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.CollectionUtils;
-import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Objects;
 import amai.org.conventions.utils.Views;
 
@@ -353,7 +352,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 			locationsSearchResultsAdapter.setFloor(map.getLastLookedAtFloor());
 		}
 
-		standsSearchResultsAdapter = new StandsAdapter(Collections.<Stand>emptyList(), false);
+		standsSearchResultsAdapter = new StandsAdapter(Collections.<Stand>emptyList(), false, false, null);
 		searchResults.setAdapter(isLocationsSearch() ? locationsSearchResultsAdapter : standsSearchResultsAdapter);
 
 		searchResults.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -374,7 +373,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 					Stand stand = (Stand) standsSearchResultsAdapter.getItem(position);
 					StandsArea standsArea = stand.getStandsArea();
 					List<MapLocation> locations = map.findLocationsByStandsArea(standsArea);
-					if (locations.size() == 1) {
+					if (locations.size() >= 1) {
 						MapLocation location = locations.get(0);
 						// Go to selected stand's stand area floor and reset its zoom/selection state
 						if (!Objects.equals(getCurrentFloorFragment().getFloor(), location.getFloor())) {
@@ -382,9 +381,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 							getCurrentFloorFragment().resetState();
 						}
 						// Set selected marker
-						getCurrentFloorFragment().selectMarkerByLocation(location);
-					} else {
-						Log.e(TAG, "Stands area of " + stand.getName() + ", id " + standsArea.getName() + ", exists in " + locations.size() + " places");
+						getCurrentFloorFragment().selectStandByLocation(location, stand);
 					}
 				}
 			}

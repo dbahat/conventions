@@ -15,12 +15,16 @@ import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.Stand;
 
 public class StandsAdapter extends BaseAdapter implements StickyGridHeadersSimpleAdapter {
+	private final boolean showLocations;
 	private List<Stand> stands;
 	private boolean colorImages;
+	private String selectedStandName;
 
-	public StandsAdapter(List<Stand> stands, boolean colorImages) {
+	public StandsAdapter(List<Stand> stands, boolean colorImages, boolean showLocations, String selectedStandName) {
 		this.stands = stands;
 		this.colorImages = colorImages;
+		this.showLocations = showLocations;
+		this.selectedStandName = selectedStandName;
 	}
 
 	public void setStands(List<Stand> stands) {
@@ -51,14 +55,14 @@ public class StandsAdapter extends BaseAdapter implements StickyGridHeadersSimpl
 		final StandViewHolder holder;
 		if (convertView == null) {
 			convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.stand_view_holder, parent, false);
-			holder = new StandViewHolder(convertView, colorImages);
+			holder = new StandViewHolder(convertView, colorImages, showLocations);
 			convertView.setTag(holder);
 		} else {
 			holder = (StandViewHolder) convertView.getTag();
 		}
 
 		Stand stand = stands.get(position);
-		holder.setStand(stand);
+		holder.setStand(stand, selectedStandName != null && selectedStandName.equals(stand.getName()));
 		return convertView;
 	}
 

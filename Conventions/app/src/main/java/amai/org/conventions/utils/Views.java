@@ -3,9 +3,11 @@ package amai.org.conventions.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Point;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -73,5 +75,13 @@ public class Views {
 			}
 		}
 		return maxWidth;
+	}
+
+	public static Point getScreenSize(Context context) {
+		WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+		Display display = wm.getDefaultDisplay();
+		Point size = new Point();
+		display.getSize(size);
+		return size;
 	}
 }

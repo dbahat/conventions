@@ -6,6 +6,7 @@ public class Stand {
 	private String name;
 	private StandType type;
 	private StandsArea standsArea;
+	private String locationName;
 
 	public String getName() {
 		return name;
@@ -43,6 +44,19 @@ public class Stand {
 
 	public Stand withStandsArea(StandsArea standsArea) {
 		setStandsArea(standsArea);
+		return this;
+	}
+
+	public String getLocationName() {
+		return locationName;
+	}
+
+	public void setLocationName(String locationName) {
+		this.locationName = locationName;
+	}
+
+	public Stand withLocationName(String locationName) {
+		setLocationName(locationName);
 		return this;
 	}
 

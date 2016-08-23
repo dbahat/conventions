@@ -17,11 +17,9 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -46,6 +44,7 @@ import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.Feedback;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.utils.FeedbackMail;
+import amai.org.conventions.utils.Views;
 
 public class CollapsibleFeedbackView extends FrameLayout {
 
@@ -497,7 +496,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
     }
 
     private int calculateViewHeight(View view) {
-        Point screenSize = getScreenSize();
+        Point screenSize = Views.getScreenSize(getContext());
 
         view.measure(screenSize.x, screenSize.y);
         return view.getMeasuredHeight();
@@ -582,14 +581,6 @@ public class CollapsibleFeedbackView extends FrameLayout {
 	        }
         });
         return animator;
-    }
-
-    private Point getScreenSize() {
-        WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        return size;
     }
 
     public enum State {

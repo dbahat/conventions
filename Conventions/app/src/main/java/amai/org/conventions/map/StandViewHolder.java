@@ -15,17 +15,29 @@ import amai.org.conventions.model.Stand;
 
 public class StandViewHolder extends RecyclerView.ViewHolder {
 	private final TextView standName;
+	private final boolean showLocation;
 	private boolean colorImage;
 
-	public StandViewHolder(View itemView, boolean colorImage) {
+	public StandViewHolder(View itemView, boolean colorImage, boolean showLocation) {
 		super(itemView);
 		standName = (TextView) itemView.findViewById(R.id.stand_name);
 		this.colorImage = colorImage;
+		this.showLocation = showLocation;
 	}
 
-	public void setStand(Stand stand) {
-		standName.setText(stand.getName());
+	public void setStand(Stand stand, boolean isSelected) {
+		String name = stand.getName();
+		String locationName = stand.getLocationName();
 		Context context = itemView.getContext();
+		if (showLocation && locationName != null && !locationName.isEmpty()) {
+			name += " (" + locationName + ")";
+		}
+		standName.setText(name);
+		if (isSelected) {
+			standName.setTextColor(ThemeAttributes.getColor(context, R.attr.standsTypeTitleColor));
+		} else {
+			standName.setTextColor(Color.BLACK);
+		}
 		Drawable image = ContextCompat.getDrawable(context, stand.getType().getImage());
 		if (image != null) {
 			int color;

@@ -17,6 +17,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import amai.org.conventions.model.conventions.Cami2016Convention;
@@ -447,10 +448,15 @@ public abstract class Convention implements Serializable {
 	}
 
 	public List<Stand> getStands() {
+		Set<Integer> foundStandAreas = new HashSet<>();
 		List<Stand> stands = new LinkedList<>();
 		for (MapLocation location : map.getLocations()) {
 			if (location.getPlace() instanceof StandsArea) {
-				stands.addAll(((StandsArea) location.getPlace()).getStands());
+				StandsArea area = (StandsArea) location.getPlace();
+				if (!foundStandAreas.contains(area.getId())) {
+					stands.addAll(area.getStands());
+					foundStandAreas.add(area.getId());
+				}
 			}
 		}
 		return stands;
