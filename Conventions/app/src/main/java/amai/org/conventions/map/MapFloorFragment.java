@@ -19,7 +19,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MotionEventCompat;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -63,6 +62,7 @@ import amai.org.conventions.model.Place;
 import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.Views;
 import pl.polidea.view.ZoomView;
 
 /**
@@ -670,24 +670,15 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 	}
 
 	private void setMapClickListeners() {
-		mapFloorImage.setOnTouchListener(new View.OnTouchListener() {
-			private GestureDetector gestureDetector = new GestureDetector(appContext, new GestureDetector.SimpleOnGestureListener() {
-				@Override
-				public boolean onSingleTapConfirmed(MotionEvent e) {
-					for (Marker marker : floorMarkers) {
-						marker.deselect();
-					}
-					hideLocationDetails();
-					return true;
-				}
-			});
-
+		mapFloorImage.setOnTouchListener(Views.createOnSingleTapConfirmedListener(appContext, new Runnable() {
 			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				gestureDetector.onTouchEvent(event);
-				return true;
+			public void run() {
+				for (Marker marker : floorMarkers) {
+					marker.deselect();
+				}
+				hideLocationDetails();
 			}
-		});
+		}));
 	}
 
 	private void hideLocationDetails() {

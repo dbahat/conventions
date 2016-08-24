@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Point;
 import android.view.Display;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,5 +84,22 @@ public class Views {
 		Point size = new Point();
 		display.getSize(size);
 		return size;
+	}
+
+	public static View.OnTouchListener createOnSingleTapConfirmedListener(final Context context, final Runnable action) {
+		return new View.OnTouchListener() {
+			private GestureDetector gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
+				@Override
+				public boolean onSingleTapConfirmed(MotionEvent e) {
+					action.run();
+					return true;
+				}
+			});
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				gestureDetector.onTouchEvent(event);
+				return true;
+			}
+		};
 	}
 }

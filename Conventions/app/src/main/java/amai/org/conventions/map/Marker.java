@@ -2,7 +2,6 @@ package amai.org.conventions.map;
 
 import android.graphics.drawable.Drawable;
 import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -13,6 +12,7 @@ import android.widget.ImageView;
 import com.manuelpeinado.imagelayout.ImageLayout;
 
 import amai.org.conventions.model.MapLocation;
+import amai.org.conventions.utils.Views;
 
 public class Marker {
 	private static final float SCALE_FACTOR = 1.3f;
@@ -37,23 +37,14 @@ public class Marker {
 		imageWidth = layoutParams.width;
 		imageHeight = layoutParams.height;
 
-		detector = new GestureDetector(imageView.getContext(), new GestureDetector.SimpleOnGestureListener() {
+		imageView.setOnTouchListener(Views.createOnSingleTapConfirmedListener(imageView.getContext(), new Runnable() {
 			@Override
-			public boolean onSingleTapConfirmed(MotionEvent e) {
+			public void run() {
 				if (clickListener != null) {
 					clickListener.onClick(Marker.this);
 				}
-				return true;
 			}
-		});
-
-		imageView.setOnTouchListener(new View.OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				detector.onTouchEvent(event);
-				return true;
-			}
-		});
+		}));
 	}
 
 	public MapLocation getLocation() {

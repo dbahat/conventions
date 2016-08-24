@@ -166,8 +166,8 @@ public class Cami2016Convention extends Convention {
 												.withMarkerResource(R.raw.cami2016_marker_information)
 												.withSelectedMarkerResource(R.raw.cami2016_marker_information_selected)
 												.withMarkerHeight(46.766f)
-												.withX(249.86f)
-												.withY(111.20f),
+												.withX(347.67f)
+												.withY(113.62f),
 										new MapLocation()
 												.withPlace(nesher)
 												.withName("החתמת אורחת")

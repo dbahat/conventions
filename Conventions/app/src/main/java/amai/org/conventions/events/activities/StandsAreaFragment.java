@@ -26,6 +26,7 @@ import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.utils.Objects;
+import amai.org.conventions.utils.Views;
 import pl.polidea.view.ZoomView;
 
 public class StandsAreaFragment extends DialogFragment {
@@ -60,12 +61,12 @@ public class StandsAreaFragment extends DialogFragment {
 				image.setImageResource(area.getImageResource());
 				zoom.setVisibility(View.VISIBLE);
 				zoom.setMaxZoom(3);
-				image.setOnClickListener(new View.OnClickListener() {
+				image.setOnTouchListener(Views.createOnSingleTapConfirmedListener(getActivity(), new Runnable() {
 					@Override
-					public void onClick(View v) {
+					public void run() {
 						openStandsMap();
 					}
-				});
+				}));
 			}
 
 			List<Stand> stands = new ArrayList<>(area.getStands());
@@ -159,12 +160,12 @@ public class StandsAreaFragment extends DialogFragment {
 			layoutParams.dimAmount = 0.7f;
 			dialog.getWindow().setAttributes(layoutParams);
 
-			view.setOnClickListener(new View.OnClickListener() {
+			view.setOnTouchListener(Views.createOnSingleTapConfirmedListener(getActivity(), new Runnable() {
 				@Override
-				public void onClick(View v) {
+				public void run() {
 					dialog.dismiss();
 				}
-			});
+			}));
 
 			return dialog;
 		}
