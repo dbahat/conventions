@@ -24,6 +24,7 @@ import amai.org.conventions.model.conventions.Cami2016Convention;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.Objects;
 
 public abstract class Convention implements Serializable {
 
@@ -241,7 +242,7 @@ public abstract class Convention implements Serializable {
                 new CollectionUtils.Predicate<ConventionEvent>() {
                     @Override
                     public boolean where(ConventionEvent event) {
-                        return hallName.equals(event.getHall().getName());
+                        return event.getHall() != null && Objects.equals(hallName, event.getHall().getName());
                     }
                 },
                 new ArrayList<ConventionEvent>()
