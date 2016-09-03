@@ -1,6 +1,7 @@
 package amai.org.conventions.settings;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -144,7 +145,12 @@ public class SettingsActivity extends NavigationActivity {
 								.build());
 
 						// Show error
-						Toast.makeText(getActivity(), R.string.push_registration_failed, Toast.LENGTH_LONG).show();
+						// Use the current context because this method is called asynchronously, so
+						// we could be in a different activity now and getActivity() could return null
+						Context context = ConventionsApplication.getCurrentContext();
+						if (context != null) {
+							Toast.makeText(context, R.string.push_registration_failed, Toast.LENGTH_LONG).show();
+						}
 
 						// Revert (while not listening to changes to prevent infinite loop)
 						sharedPreferences.unregisterOnSharedPreferenceChangeListener(SettingsFragment.this);
