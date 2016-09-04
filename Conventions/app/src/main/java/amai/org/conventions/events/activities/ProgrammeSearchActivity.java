@@ -22,7 +22,7 @@ import java.util.List;
 import amai.org.conventions.R;
 import amai.org.conventions.events.SearchCategoriesLayout;
 import amai.org.conventions.events.adapters.SwipeableEventsViewAdapter;
-import amai.org.conventions.model.Convention;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
 import amai.org.conventions.model.EventType;

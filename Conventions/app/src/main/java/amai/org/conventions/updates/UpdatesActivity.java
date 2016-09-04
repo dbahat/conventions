@@ -29,7 +29,7 @@ import java.util.List;
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
-import amai.org.conventions.model.Convention;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.Update;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.networking.UpdatesRefresher;

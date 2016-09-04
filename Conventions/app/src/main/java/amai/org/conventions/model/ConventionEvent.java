@@ -11,6 +11,7 @@ import java.util.List;
 
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.networking.ModelParser;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Objects;

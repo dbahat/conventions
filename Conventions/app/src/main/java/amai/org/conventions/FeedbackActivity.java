@@ -21,7 +21,7 @@ import amai.org.conventions.events.CollapsibleFeedbackView;
 import amai.org.conventions.events.activities.EventActivity;
 import amai.org.conventions.events.activities.ProgrammeActivity;
 import amai.org.conventions.events.adapters.EventsViewAdapter;
-import amai.org.conventions.model.Convention;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventEndTimeComparator;
 import amai.org.conventions.navigation.NavigationActivity;

@@ -14,7 +14,7 @@ import java.util.Collection;
 import java.util.Locale;
 import java.util.Map;
 
-import amai.org.conventions.model.Convention;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.EventNotification;
 import amai.org.conventions.navigation.NavigationActivity;

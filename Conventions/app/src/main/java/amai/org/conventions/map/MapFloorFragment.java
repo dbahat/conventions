@@ -51,7 +51,7 @@ import amai.org.conventions.customviews.InterceptorLinearLayout;
 import amai.org.conventions.events.EventView;
 import amai.org.conventions.events.activities.HallActivity;
 import amai.org.conventions.events.activities.StandsAreaFragment;
-import amai.org.conventions.model.Convention;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
 import amai.org.conventions.model.ConventionMap;

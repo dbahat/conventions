@@ -3,7 +3,7 @@ package amai.org.conventions.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import amai.org.conventions.model.Convention;
+import amai.org.conventions.model.conventions.Convention;
 
 public class Settings {
 	public static final int NO_PUSH_NOTIFICATION_SEEN = -1;

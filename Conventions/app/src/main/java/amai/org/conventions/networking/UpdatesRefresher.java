@@ -20,7 +20,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.TimeZone;
 
-import amai.org.conventions.model.Convention;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.Update;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;

@@ -9,7 +9,7 @@ import java.util.Collections;
 
 import amai.org.conventions.R;
 import amai.org.conventions.events.adapters.SwipeableEventsViewAdapter;
-import amai.org.conventions.model.Convention;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
 import amai.org.conventions.navigation.NavigationActivity;

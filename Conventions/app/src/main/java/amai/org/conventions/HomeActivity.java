@@ -36,7 +36,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import amai.org.conventions.events.activities.ProgrammeActivity;
-import amai.org.conventions.model.Convention;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.Update;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.navigation.NavigationPages;

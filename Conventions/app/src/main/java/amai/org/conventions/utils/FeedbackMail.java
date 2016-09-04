@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 import amai.org.conventions.R;
-import amai.org.conventions.model.Convention;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.Feedback;
 import amai.org.conventions.model.FeedbackQuestion;
 

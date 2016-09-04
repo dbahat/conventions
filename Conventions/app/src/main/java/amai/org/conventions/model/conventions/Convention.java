@@ -1,4 +1,4 @@
-package amai.org.conventions.model;
+package amai.org.conventions.model.conventions;
 
 import android.content.Context;
 
@@ -20,7 +20,17 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import amai.org.conventions.model.conventions.Cami2016Convention;
+import amai.org.conventions.model.ConventionEvent;
+import amai.org.conventions.model.ConventionMap;
+import amai.org.conventions.model.EventType;
+import amai.org.conventions.model.Feedback;
+import amai.org.conventions.model.FeedbackQuestion;
+import amai.org.conventions.model.Floor;
+import amai.org.conventions.model.Hall;
+import amai.org.conventions.model.MapLocation;
+import amai.org.conventions.model.Stand;
+import amai.org.conventions.model.StandsArea;
+import amai.org.conventions.model.Update;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 import amai.org.conventions.utils.Dates;
@@ -28,7 +38,7 @@ import amai.org.conventions.utils.Objects;
 
 public abstract class Convention implements Serializable {
 
-    private static Convention convention = new Cami2016Convention();
+    private static Convention convention = new Icon2016Convention();
 
     private List<Hall> halls;
 	private List<ConventionEvent> events;
@@ -50,7 +60,7 @@ public abstract class Convention implements Serializable {
 
 	private final ReentrantReadWriteLock eventLockObject = new ReentrantReadWriteLock();
 	private ConventionStorage conventionStorage;
-	private EventToImageResourceIdMapper imageMapper;
+
 
     public static Convention getInstance() {
         return convention;
@@ -59,10 +69,6 @@ public abstract class Convention implements Serializable {
     public ConventionStorage getStorage() {
         return conventionStorage;
     }
-
-	public EventToImageResourceIdMapper getImageMapper() {
-		return imageMapper;
-	}
 
 	public URL getModelURL() {
 		return modelURL;
@@ -100,7 +106,6 @@ public abstract class Convention implements Serializable {
 
 	public void load(Context context) {
 		this.conventionStorage = initStorage();
-		this.imageMapper = initImageMapper();
 		this.date = initDate();
 		this.id = initID();
 		this.displayName = initDisplayName();
@@ -117,7 +122,6 @@ public abstract class Convention implements Serializable {
 	}
 
 	protected abstract ConventionStorage initStorage();
-	protected abstract EventToImageResourceIdMapper initImageMapper();
 	protected abstract Calendar initDate();
 	protected abstract String initID();
 	protected abstract String initDisplayName();

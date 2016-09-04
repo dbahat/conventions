@@ -7,7 +7,6 @@ import java.util.Calendar;
 import java.util.List;
 
 import amai.org.conventions.R;
-import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.EventToImageResourceIdMapper;
 import amai.org.conventions.model.Floor;
@@ -19,7 +18,7 @@ import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 
-public class Cami2016Convention extends Convention {
+public class Cami2016Convention extends AmaiConvention {
 	// Hall names
 	private static final String MAIN_HALL_NAME = "אולם ראשי";
 	private static final String SCHWARTZ_NAME = "אודיטוריום שוורץ";
