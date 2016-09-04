@@ -18,26 +18,23 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.ConventionEvent;
-import amai.org.conventions.model.EventToImageResourceIdMapper;
 import amai.org.conventions.model.EventType;
 import amai.org.conventions.model.Hall;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
 
-public class ModelParser {
+public class AmaiModelParser {
     public static final int NO_COLOR = Color.TRANSPARENT; // Assuming we will never get this from the server...
 
-    private static final String TAG = ModelParser.class.getCanonicalName();
+    private static final String TAG = AmaiModelParser.class.getCanonicalName();
 
     public List<ConventionEvent> parse(InputStreamReader reader) {
 	    Map<Integer, ParsedDescription> contentById = new HashMap<>();
 	    Map<ConventionEvent, Integer> eventsWithSpecialContent = new LinkedHashMap<>();
 
         JsonParser jp = new JsonParser();
-        EventToImageResourceIdMapper mapper = Convention.getInstance().getImageMapper();
-
         JsonElement root = jp.parse(reader);
         JsonArray events = root.getAsJsonArray();
 

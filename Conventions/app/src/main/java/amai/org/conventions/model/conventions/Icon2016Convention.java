@@ -2,18 +2,20 @@ package amai.org.conventions.model.conventions;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import amai.org.conventions.R;
 import amai.org.conventions.model.ConventionMap;
+import amai.org.conventions.model.EventToImageResourceIdMapper;
 import amai.org.conventions.model.Hall;
 import amai.org.conventions.utils.ConventionStorage;
 
 public class Icon2016Convention extends SffConvention {
     @Override
     protected ConventionStorage initStorage() {
-        return new ConventionStorage(this, R.raw.cami2016_convention_events, 1);
+        return new ConventionStorage(this, R.raw.icon2016_convention_events, 1);
     }
 
     @Override
@@ -41,12 +43,12 @@ public class Icon2016Convention extends SffConvention {
 
     @Override
     protected List<Hall> initHalls() {
-        return null;
+        return new ArrayList<>();
     }
 
     @Override
     protected ConventionMap initMap() {
-        return null;
+        return new ConventionMap();
     }
 
     @Override
@@ -60,6 +62,11 @@ public class Icon2016Convention extends SffConvention {
     }
 
     @Override
+    protected EventToImageResourceIdMapper initImageMapper() {
+        return new EventToImageResourceIdMapper();
+    }
+
+    @Override
     protected String initFeedbackRecipient() {
         return "";
     }
@@ -67,7 +74,7 @@ public class Icon2016Convention extends SffConvention {
     @Override
     protected URL initModelURL() {
         try {
-            return new URL("");
+            return new URL("https://api.sf-f.org.il/program/list_events.php?slug=icon2016");
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }

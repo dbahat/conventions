@@ -22,6 +22,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
+import amai.org.conventions.model.EventToImageResourceIdMapper;
 import amai.org.conventions.model.EventType;
 import amai.org.conventions.model.Feedback;
 import amai.org.conventions.model.FeedbackQuestion;
@@ -54,6 +55,7 @@ public abstract class Convention implements Serializable {
 	private String displayName;
 	private URL modelURL;
 	private String facebookFeedPath;
+	private EventToImageResourceIdMapper imageMapper;
 
 	private double longitude;
 	private double latitude;
@@ -117,6 +119,7 @@ public abstract class Convention implements Serializable {
 		this.map = initMap();
 		this.longitude = initLongitude();
 		this.latitude = initLatitude();
+		this.imageMapper = initImageMapper();
 
 		getStorage().initFromFile(context);
 	}
@@ -132,6 +135,7 @@ public abstract class Convention implements Serializable {
 	protected abstract ConventionMap initMap();
 	protected abstract double initLongitude();
 	protected abstract double initLatitude();
+	protected abstract EventToImageResourceIdMapper initImageMapper();
 
     public Calendar getDate() {
         return date;
@@ -147,6 +151,10 @@ public abstract class Convention implements Serializable {
 
 	public Feedback getFeedback() {
 		return feedback;
+	}
+
+	public EventToImageResourceIdMapper getImageMapper() {
+		return imageMapper;
 	}
 
 	/**
@@ -333,12 +341,13 @@ public abstract class Convention implements Serializable {
 	}
 
 	public boolean hasEnded() {
-		Date lastEventEndTime = getLastEventEndTime();
-		if (lastEventEndTime == null) {
-			// Problem reading events
-			return false;
-		}
-		return Dates.now().after(lastEventEndTime);
+		return false;
+//		Date lastEventEndTime = getLastEventEndTime();
+//		if (lastEventEndTime == null) {
+//			// Problem reading events
+//			return false;
+//		}
+//		return Dates.now().after(lastEventEndTime);
 	}
 
 	private Date getLastEventEndTime() {

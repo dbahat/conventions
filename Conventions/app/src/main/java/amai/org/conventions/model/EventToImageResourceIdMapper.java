@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import amai.org.conventions.R;
 import amai.org.conventions.utils.CollectionUtils;
 
 /**
@@ -28,8 +29,8 @@ public class EventToImageResourceIdMapper {
 	public List<String> getImagesList(List<String> eventImageIds) {
 		List<String> result = CollectionUtils.filter(eventImageIds, new CollectionUtils.Predicate<String>() {
 			@Override
-			public boolean where(String item) {
-				return getImageResourceId(item) != null;
+			public boolean where(String eventImageId) {
+				return eventIdToImageResourceIdMap.containsKey(eventImageId);
 			}
 		});
 
@@ -41,9 +42,9 @@ public class EventToImageResourceIdMapper {
 		return result;
 	}
 
-    public Integer getImageResourceId(String eventImageId) {
+    public int getImageResourceId(String eventImageId) {
         return eventIdToImageResourceIdMap.containsKey(eventImageId)
-                ? eventIdToImageResourceIdMap.get(eventImageId)
-                : null;
+				? eventIdToImageResourceIdMap.get(eventImageId)
+				: R.drawable.cami2016_events_default_cover;
     }
 }

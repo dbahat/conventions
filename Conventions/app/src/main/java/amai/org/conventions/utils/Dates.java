@@ -12,6 +12,8 @@ import amai.org.conventions.model.conventions.Convention;
 
 public class Dates {
 
+    private static final String SFF_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:SS";
+    
 	public static final long MILLISECONDS_IN_MINUTE = 60 * 1000;
 
 	public enum TimeUnit {
@@ -19,29 +21,18 @@ public class Dates {
     }
 
 	private static final Locale LOCALE = new Locale("iw", "IL");
-    private static Date appStartDate = new Date();
-    private static Date initialDate = getInitialDate();
 
-    private static Date getInitialDate() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm", Dates.getLocale());
+    public static Date parseSffFormat(String sffFormat) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(SFF_DATE_FORMAT, Dates.getLocale());
         try {
-            return dateFormat.parse("24.03.2016 17:10");
+            return dateFormat.parse(sffFormat);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
     }
 
     public static Date now() {
-	    // Now
 	    return new Date(System.currentTimeMillis());
-
-	    // Fixed startup date
-//        return new Date(System.currentTimeMillis() - appStartDate.getTime() + initialDate.getTime());
-
-	    // Current time at the convention's date
-//	    Calendar currDate = Calendar.getInstance();
-//	    setConventionDate(currDate);
-//	    return currDate.getTime();
     }
 
     public static String toHumanReadableTimeDuration(long milliseconds) {

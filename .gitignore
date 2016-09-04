@@ -28,3 +28,6 @@ proguard/
 
 # Android studio project settings
 .idea/
+/Conventions/gradle/caches
+/Conventions/gradle/daemon
+/Conventions/gradle/native

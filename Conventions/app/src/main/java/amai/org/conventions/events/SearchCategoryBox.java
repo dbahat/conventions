@@ -10,7 +10,7 @@ import android.widget.CheckedTextView;
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.EventType;
-import amai.org.conventions.networking.ModelParser;
+import amai.org.conventions.networking.AmaiModelParser;
 
 public class SearchCategoryBox extends CheckedTextView {
 
@@ -26,7 +26,7 @@ public class SearchCategoryBox extends CheckedTextView {
         Drawable drawable = ContextCompat.getDrawable(getContext(), android.R.drawable.checkbox_off_background);
         if (drawable != null) {
 	        int backgroundColor = eventType.getBackgroundColor();
-	        if (backgroundColor == ModelParser.NO_COLOR) {
+	        if (backgroundColor == AmaiModelParser.NO_COLOR) {
 		        backgroundColor = ThemeAttributes.getColor(getContext(), R.attr.eventTimeDefaultBackgroundColor);
 	        }
             drawable.mutate();

@@ -1,6 +1,8 @@
 package amai.org.conventions.utils;
 
 import android.content.Context;
+import android.support.annotation.IdRes;
+import android.support.annotation.RawRes;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -48,7 +50,7 @@ public class ConventionStorage {
 	private int initialEventsFileResource = 0;
 	private int eventsFileVersion = 0;
 
-	public ConventionStorage(Convention convention, int initialEventsFile, int eventsFileVersion) {
+	public ConventionStorage(Convention convention, @RawRes int initialEventsFile, int eventsFileVersion) {
 		this.convention = convention;
 		this.hasInitialEventsFile = true;
 		this.initialEventsFileResource = initialEventsFile;
