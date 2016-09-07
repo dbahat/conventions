@@ -2,14 +2,20 @@
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Removing elevation so we can show the tab layout in the same elevation and still be backwards compatible.
+         Instead of elevation we add a shadow in the content container foreground. -->
     <android.support.design.widget.AppBarLayout
         app:layout_behavior="amai.org.conventions.AppBarLayoutSnapBehavior"
         android:background="@null"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:elevation="0dp"
+        app:elevation="0dp"
+        tools:ignore="UnusedAttribute">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/navigation_toolbar"

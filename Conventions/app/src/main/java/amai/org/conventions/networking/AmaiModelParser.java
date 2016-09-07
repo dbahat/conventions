@@ -10,7 +10,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.io.InputStreamReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -72,8 +75,8 @@ public class AmaiModelParser {
 	            int bgColor = parseColorFromServer(eventObj.get("timetable-bg").getAsString());
 	            int textColor = parseColorFromServer(eventObj.get("timetable-text-color").getAsString());
 
-	            Date startTime = Dates.parseConventionDateHourAndMinute(internalEventObj.get("start").getAsString());
-	            Date endTime = Dates.parseConventionDateHourAndMinute(internalEventObj.get("end").getAsString());
+	            Date startTime = parseEventTime(internalEventObj.get("start").getAsString());
+	            Date endTime = parseEventTime(internalEventObj.get("end").getAsString());
                 String hallName = internalEventObj.get("room").getAsString();
                 Hall hall = Convention.getInstance().findHallByName(hallName);
 
@@ -122,6 +125,25 @@ public class AmaiModelParser {
 
         return eventList;
     }
+
+	public static Date parseEventTime(String date) {
+		try {
+			Date hourAndMinute = new SimpleDateFormat("HH:mm:ss", Dates.getLocale()).parse(date);
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(hourAndMinute);
+			setConventionDate(calendar);
+			return calendar.getTime();
+		} catch (ParseException e) {
+			return new Date();
+		}
+	}
+
+	private static void setConventionDate(Calendar calendar) {
+		Calendar conventionDate = Convention.getInstance().getStartDate();
+		calendar.set(conventionDate.get(Calendar.YEAR),
+				conventionDate.get(Calendar.MONTH),
+				conventionDate.get(Calendar.DAY_OF_MONTH));
+	}
 
     private int parseColorFromServer(String serverColor) {
 

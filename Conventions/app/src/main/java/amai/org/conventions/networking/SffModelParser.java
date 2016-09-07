@@ -9,6 +9,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.io.InputStreamReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -39,8 +41,8 @@ public class SffModelParser {
             String eventDescription = parseEventDescription(eventObj.get("description").getAsString());
 
             JsonObject timeObject = eventObj.get("time").getAsJsonObject();
-            Date startTime = Dates.parseSffFormat(timeObject.get("start").getAsString());
-            Date endTime = Dates.parseSffFormat(timeObject.get("end").getAsString());
+            Date startTime = parseEventTime(timeObject.get("start").getAsString());
+            Date endTime = parseEventTime(timeObject.get("end").getAsString());
             JsonArray speakers = eventObj.get("speakers").getAsJsonArray();
             String firstSpeaker = speakers.size() > 0 ? TextUtils.join(", ", getSpeakers(speakers)) : "";
 
@@ -65,6 +67,15 @@ public class SffModelParser {
 
         return eventList;
     }
+
+	public static Date parseEventTime(String sffFormat) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SS", Dates.getLocale());
+		try {
+			return dateFormat.parse(sffFormat);
+		} catch (ParseException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
     private List<String> getSpeakers(JsonArray speakers) {
         LinkedList<String> result = new LinkedList<>();

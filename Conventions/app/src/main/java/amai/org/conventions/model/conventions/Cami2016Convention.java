@@ -17,6 +17,7 @@ import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
+import amai.org.conventions.utils.Dates;
 
 public class Cami2016Convention extends AmaiConvention {
 	// Hall names
@@ -33,10 +34,7 @@ public class Cami2016Convention extends AmaiConvention {
 
 	@Override
 	protected Calendar initDate() {
-		Calendar date = Calendar.getInstance();
-		date.clear();
-		date.set(2016, Calendar.AUGUST, 25);
-		return date;
+		return Dates.createDate(2016, Calendar.AUGUST, 25);
 	}
 
 	@Override

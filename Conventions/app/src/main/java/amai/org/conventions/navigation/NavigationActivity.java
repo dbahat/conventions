@@ -287,6 +287,12 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		}
 	}
 
+	protected void removeForeground() {
+		if (contentContainer != null) {
+			contentContainer.setForeground(null);
+		}
+	}
+
 	protected void setupActionButton(int imageResource, View.OnClickListener listener) {
 		actionButton = (FloatingActionButton) findViewById(R.id.action_button);
 		actionButton.setImageResource(imageResource);

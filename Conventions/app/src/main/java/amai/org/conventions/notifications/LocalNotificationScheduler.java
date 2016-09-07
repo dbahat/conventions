@@ -96,7 +96,7 @@ public class LocalNotificationScheduler {
 
     public void scheduleNotificationToFillConventionFeedback() {
         Calendar twoWeeksPostConventionDate = Calendar.getInstance();
-        twoWeeksPostConventionDate.setTime(Convention.getInstance().getDate().getTime());
+        twoWeeksPostConventionDate.setTime(Convention.getInstance().getEndDate().getTime());
         twoWeeksPostConventionDate.add(Calendar.DATE, 14);
 
         if (Convention.getInstance().getFeedback().isSent()
@@ -106,7 +106,7 @@ public class LocalNotificationScheduler {
         }
 
         Calendar oneDayPostConventionDate = Calendar.getInstance();
-        oneDayPostConventionDate.setTime(Convention.getInstance().getDate().getTime());
+        oneDayPostConventionDate.setTime(Convention.getInstance().getEndDate().getTime());
         oneDayPostConventionDate.add(Calendar.DATE, 1);
         oneDayPostConventionDate.set(Calendar.HOUR_OF_DAY, 10);
 

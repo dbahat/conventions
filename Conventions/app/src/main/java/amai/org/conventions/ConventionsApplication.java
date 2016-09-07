@@ -3,6 +3,7 @@ package amai.org.conventions;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import com.google.android.gms.analytics.ExceptionReporter;
@@ -104,7 +105,14 @@ public class ConventionsApplication extends Application {
 	    });
     }
 
-    /**
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		// Screen rotation apparently returns the locale to the device default
+		Locale.setDefault(Dates.getLocale());
+	}
+
+	/**
      * Since the Android AlarmManager gets reset whenever the device reboots, we re-schedule all the notifications when the app is launched.
      */
     private void restoreAlarmConfiguration() {

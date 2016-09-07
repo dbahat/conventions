@@ -350,7 +350,7 @@ public class HomeActivity extends AppCompatActivity {
 
 	private void showFeedbackIfNecessary() {
 		Calendar oneDayPostConventionDate = Calendar.getInstance();
-		oneDayPostConventionDate.setTime(Convention.getInstance().getDate().getTime());
+		oneDayPostConventionDate.setTime(Convention.getInstance().getEndDate().getTime());
 		oneDayPostConventionDate.add(Calendar.DATE, 1);
 		oneDayPostConventionDate.set(Calendar.HOUR_OF_DAY, 10);
 

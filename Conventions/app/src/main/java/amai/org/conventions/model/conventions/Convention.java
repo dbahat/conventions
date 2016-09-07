@@ -50,7 +50,8 @@ public abstract class Convention implements Serializable {
 	private String feedbackRecipient;
 
 	private ConventionMap map;
-	private Calendar date;
+	private Calendar startDate;
+	private Calendar endDate;
 	private String id;
 	private String displayName;
 	private URL modelURL;
@@ -108,7 +109,8 @@ public abstract class Convention implements Serializable {
 
 	public void load(Context context) {
 		this.conventionStorage = initStorage();
-		this.date = initDate();
+		this.startDate = initStartDate();
+		this.endDate = initEndDate();
 		this.id = initID();
 		this.displayName = initDisplayName();
 		this.feedbackRecipient = initFeedbackRecipient();
@@ -125,7 +127,8 @@ public abstract class Convention implements Serializable {
 	}
 
 	protected abstract ConventionStorage initStorage();
-	protected abstract Calendar initDate();
+	protected abstract Calendar initStartDate();
+	protected abstract Calendar initEndDate();
 	protected abstract String initID();
 	protected abstract String initDisplayName();
 	protected abstract String initFeedbackRecipient();
@@ -137,9 +140,13 @@ public abstract class Convention implements Serializable {
 	protected abstract double initLatitude();
 	protected abstract EventToImageResourceIdMapper initImageMapper();
 
-    public Calendar getDate() {
-        return date;
+    public Calendar getStartDate() {
+        return startDate;
     }
+
+	public Calendar getEndDate() {
+		return endDate;
+	}
 
 	public String getId() {
 		return id;
@@ -325,7 +332,7 @@ public abstract class Convention implements Serializable {
 	public boolean isFeedbackSendingTimeOver() {
 		// Only allow to send feedback for 2 weeks after the convention is over
 		Calendar lastFeedbackSendTime = Calendar.getInstance();
-		lastFeedbackSendTime.setTime(this.date.getTime());
+		lastFeedbackSendTime.setTime(this.endDate.getTime());
 		lastFeedbackSendTime.add(Calendar.DATE, 14);
 		return lastFeedbackSendTime.getTime().before(Dates.now());
 	}

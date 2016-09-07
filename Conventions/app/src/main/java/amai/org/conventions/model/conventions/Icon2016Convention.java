@@ -11,6 +11,7 @@ import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.EventToImageResourceIdMapper;
 import amai.org.conventions.model.Hall;
 import amai.org.conventions.utils.ConventionStorage;
+import amai.org.conventions.utils.Dates;
 
 public class Icon2016Convention extends SffConvention {
     @Override
@@ -19,14 +20,16 @@ public class Icon2016Convention extends SffConvention {
     }
 
     @Override
-    protected Calendar initDate() {
-        Calendar date = Calendar.getInstance();
-        date.clear();
-        date.set(2016, Calendar.OCTOBER, 18);
-        return date;
+    protected Calendar initStartDate() {
+	    return Dates.createDate(2016, Calendar.OCTOBER, 18);
     }
 
-    @Override
+	@Override
+	protected Calendar initEndDate() {
+		return Dates.createDate(2016, Calendar.OCTOBER, 20);
+	}
+
+	@Override
     protected String initID() {
         return "Icon2016";
     }
