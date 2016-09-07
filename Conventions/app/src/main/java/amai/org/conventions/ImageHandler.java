@@ -20,7 +20,6 @@ public class ImageHandler {
     private static final AssetsExternalFileResolver resolver = new AssetsExternalFileResolver();
     private static Map<Integer, SVG> loadedSVGFiles = new HashMap<>();
     private static Bitmap notificationLargeIcon;
-    private static Drawable toolbarLogo;
 
     public static SVG loadSVG(Context context, int resource) {
         try {
@@ -52,24 +51,13 @@ public class ImageHandler {
     }
 
     public static Drawable getToolbarLogo(Context context) {
-        if (toolbarLogo != null) {
-            return toolbarLogo;
-        }
-
-        // The scaling doesn't work properly for the toolbar icon (the width remains the original size)
-        // so we have to resize it manually
-        Bitmap bitmapResized = resizeBitmap(
-		        ThemeAttributes.getDrawable(context, R.attr.toolbarLogo),
-		        ThemeAttributes.getDimensionSize(context, R.attr.actionBarSize));
-        toolbarLogo = new BitmapDrawable(context.getResources(), bitmapResized);
-        return toolbarLogo;
+        return ThemeAttributes.getDrawable(context, R.attr.toolbarLogo);
     }
 
     public static void releaseCache() {
         // Release all collected images from the map
         loadedSVGFiles = new HashMap<>();
         notificationLargeIcon = null;
-        toolbarLogo = null;
     }
 
     private static void setSVGProperties(SVG svg) throws SVGParseException {

@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        applicationId "amai.org.conventions"
+        applicationId "sff.org.conventions"
         minSdkVersion 17
         targetSdkVersion 24
     }

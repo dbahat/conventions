@@ -43,7 +43,7 @@ public class ConventionsApplication extends Application {
 		    GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
 	        analytics.setLocalDispatchPeriod(1800);
 
-	        tracker = analytics.newTracker("UA-65293055-1");
+	        tracker = analytics.newTracker("UA-65293055-2");
 	        tracker.enableExceptionReporting(true);
 	        tracker.enableAutoActivityTracking(true);
 	    }
