@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppBaseTheme.Cami2016.Toolbar"/>
+    <style name="AppBaseTheme.Icon2016.Toolbar"/>
 
-    <style name="AppBaseTheme.Cami2016">
-        <item name="android:dialogTheme">@style/AppDialogTheme.Cami2016</item>
-        <item name="alertDialogTheme">@style/AppAlertDialogTheme.Cami2016</item>
+    <style name="AppBaseTheme.Icon2016">
+        <item name="android:dialogTheme">@style/AppDialogTheme.Icon2016</item>
+        <item name="alertDialogTheme">@style/AppAlertDialogTheme.Icon2016</item>
         <item name="colorAccent">@color/red_dark</item>
         <item name="android:colorBackground">@color/light_orange_bright</item>
 
@@ -47,17 +47,17 @@
         <item name="feedbackAnswerButtonSelectedColor">@color/red</item>
     </style>
 
-    <style name="AppDialogTheme.Cami2016" parent="Theme.AppCompat.Light.Dialog">
+    <style name="AppDialogTheme.Icon2016" parent="Theme.AppCompat.Light.Dialog">
         <!-- This is the default starting API23. In any case the title is always left-justified so it's best to not use it. -->
         <item name="android:windowNoTitle">true</item>
         <item name="colorAccent">@color/red_dark</item>
     </style>
 
-    <style name="AppAlertDialogTheme.Cami2016" parent="Theme.AppCompat.Light.Dialog.Alert">
+    <style name="AppAlertDialogTheme.Icon2016" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorAccent">@color/red_dark</item>
     </style>
 
-    <style name="AppBaseTheme.Cami2016.Toolbar.Splash">
+    <style name="AppBaseTheme.Icon2016.Toolbar.Splash">
         <item name="android:windowBackground">@drawable/splash_background</item>
     </style>
 

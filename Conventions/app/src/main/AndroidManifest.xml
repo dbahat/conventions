@@ -36,7 +36,7 @@
         android:installLocation="auto"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppBaseTheme.Cami2016.Toolbar"
+        android:theme="@style/AppBaseTheme.Icon2016.Toolbar"
         tools:replace="android:icon, android:allowBackup">
         <activity android:name=".events.activities.HallActivity" >
         </activity>
