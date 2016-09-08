@@ -1,43 +1,46 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="amai.org.conventions.events.activities.MyEventsActivity"
-    android:orientation="vertical">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              tools:context="amai.org.conventions.events.activities.MyEventsActivity"
+              android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/nextEventStart"
+    <android.support.design.widget.TabLayout
+        android:id="@+id/my_events_days_tabs"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:background="?toolbarBackground"
+        android:minHeight="?attr/actionBarSize"
+        app:tabGravity="fill"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:background="?nextEventStartTimeBackground"
-        tools:text="Next event start time"
-        android:textColor="?nextEventStartTimeTextColor"
-        />
+        android:layout_height="wrap_content"/>
 
-    <View
-        android:id="@+id/nextEventStartBottomLine"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?nextEventStartTimeBottomLineColor"
-        />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/myEventsList"
+    <LinearLayout
+        android:foreground="@drawable/bottom_shadow"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
+        <TextView
+            android:id="@+id/nextEventStart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="?nextEventStartTimeBackground"
+            tools:text="Next event start time"
+            android:textColor="?nextEventStartTimeTextColor"
+            />
 
-    <TextView
-        android:id="@+id/my_events_empty"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:visibility="gone"
-        android:textSize="@dimen/text_size_large_material"
-        android:textColor="@color/hint_gray"
-        android:padding="25dp"
-        android:text="@string/my_events_no_data" />
+        <View
+            android:id="@+id/nextEventStartBottomLine"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?nextEventStartTimeBottomLineColor"
+            />
 
+        <klogi.com.RtlViewPager
+            android:id="@+id/my_events_days_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
 </LinearLayout>

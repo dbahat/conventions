@@ -351,9 +351,10 @@ public abstract class NavigationActivity extends AppCompatActivity {
 			// If the user presses back when the back stack is clear we want to show the home screen
 			// instead of existing.
 			// This flag only has a meaning if we're navigating to a NavigationActivity.
-			if (NavigationActivity.class.isAssignableFrom(activityToNavigateTo)) {
-				intent.putExtra(EXTRA_SHOW_HOME_SCREEN_ON_BACK, true);
-			}
+			// This is only relevant when we have a home activity!
+//			if (NavigationActivity.class.isAssignableFrom(activityToNavigateTo)) {
+//				intent.putExtra(EXTRA_SHOW_HOME_SCREEN_ON_BACK, true);
+//			}
 			finish();
 		}
 

@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,13 +21,13 @@ import android.widget.Toast;
 
 import com.google.android.gms.analytics.HitBuilders;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.FeedbackActivity;
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
+import amai.org.conventions.events.adapters.DayFragmentAdapter;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
@@ -42,7 +41,7 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 	private static final String STATE_SELECTED_DATE_INDEX = "StateSelectedDateIndex";
 	private final static int SELECT_CURRENT_DATE = -1;
 
-	private static final int MAX_DAYS_NUMBER = 5;
+	public static final int MAX_DAYS_NUMBER = 5;
 
 	private TabLayout daysTabLayout;
 	private ViewPager daysPager;
@@ -260,39 +259,17 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 	public void onTabReselected(TabLayout.Tab tab) {
 	}
 
-	private class ProgrammeDayAdapter extends FragmentStatePagerAdapter {
+	private class ProgrammeDayAdapter extends DayFragmentAdapter {
 		private final int delayScrolling;
-		private final Calendar startDate;
-		private final int days;
 
 		public ProgrammeDayAdapter(FragmentManager fm, int delayAnimation, Calendar startDate, int days) {
-			super(fm);
+			super(fm, startDate, days);
 			this.delayScrolling = delayAnimation;
-			this.startDate = startDate;
-			this.days = days;
-		}
-
-		private Calendar getDate(int position) {
-			Calendar date = Calendar.getInstance();
-			date.setTime(startDate.getTime());
-			date.add(Calendar.DATE, position);
-			return date;
 		}
 
 		@Override
 		public Fragment getItem(int position) {
 			return ProgrammeDayFragment.newInstance(getDate(position), delayScrolling);
-		}
-
-		@Override
-		public CharSequence getPageTitle(int position) {
-			SimpleDateFormat sdf = new SimpleDateFormat("EEE (dd.MM)", Dates.getLocale());
-			return sdf.format(getDate(position).getTime());
-		}
-
-		@Override
-		public int getCount() {
-			return days;
 		}
 	}
 }

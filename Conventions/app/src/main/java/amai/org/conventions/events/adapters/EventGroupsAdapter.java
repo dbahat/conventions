@@ -11,6 +11,7 @@ import java.util.List;
 import amai.org.conventions.R;
 import amai.org.conventions.events.activities.EventsTimeSlot;
 import amai.org.conventions.events.activities.MyEventsActivity;
+import amai.org.conventions.events.activities.MyEventsDayFragment;
 import amai.org.conventions.events.holders.ConflictingEventsViewHolder;
 import amai.org.conventions.events.holders.SwipeableEventViewHolder;
 import amai.org.conventions.events.listeners.EventSwipeToDismissListener;
@@ -110,7 +111,7 @@ public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 		// This could happen if the item has already been removed, the dataset changed or the view recycled
 		// (see RecyclerView#getAdapterPosition)
 		if (adapterPosition == RecyclerView.NO_POSITION) {
-			updateEventGroups(MyEventsActivity.getNonConflictingGroups(null, MyEventsActivity.getMyEvents(), null));
+			updateEventGroups(MyEventsDayFragment.getNonConflictingGroups(null, MyEventsActivity.getMyEvents(), null));
 			return;
 		}
 
@@ -142,7 +143,7 @@ public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 		}
 
 		// Get the new groups, including possible free slots before and after it (in case they were updated)
-		ArrayList<EventsTimeSlot> groups = MyEventsActivity.getNonConflictingGroups(previousEvents, eventsList, nextEvents);
+		ArrayList<EventsTimeSlot> groups = MyEventsDayFragment.getNonConflictingGroups(previousEvents, eventsList, nextEvents);
 
 		// This is the position in the slots list where we will insert the new items.
 		// It should be the smallest position we removed items from.
