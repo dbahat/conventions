@@ -200,6 +200,7 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 		int minValue = events.get(0).getTimeSection().get(Calendar.HOUR_OF_DAY);
 		int maxValue = events.get(events.size() - 1).getTimeSection().get(Calendar.HOUR_OF_DAY);
 		numberPicker.setMinValue(minValue);
+		maxValue = maxValue >= minValue ? maxValue : 23; // Only show hours until 11PM
 		numberPicker.setMaxValue(maxValue);
 		List<String> values = new ArrayList<>(maxValue - minValue + 1);
 
@@ -282,15 +283,15 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 		for (ConventionEvent event : events) {
 			Calendar startTime = Calendar.getInstance();
 			startTime.setTime(event.getStartTime());
-			Calendar endTime = Calendar.getInstance();
-			endTime.setTime(event.getEndTime());
-			// Only show this day's events
-			if (!Dates.isSameDate(date, startTime) && !Dates.isSameDate(date, endTime)) {
+			// Only show events starting on this day
+			if (!Dates.isSameDate(date, startTime)) {
 				continue;
 			}
 			// Convert the event start time to hourly time sections, and duplicate it if needed (e.g. if an event started at 13:30 and ended at 15:00, its
-			// time sections are 13:00 and 14:00)
-			int eventDurationInHours = getEndHour(event.getEndTime()) - getHour(event.getStartTime()) + 1;
+			// time sections are 13:00 and 14:00).
+			// We subtract an extra minute since the first minute of the next hour is considered this hour. For example, an event
+			// ending at 12:00 is only considered to run during hour 11:00.
+			int eventDurationInHours = (int) ((event.getEndTime().getTime() - Dates.MILLISECONDS_IN_MINUTE - event.getStartTime().getTime()) / Dates.MILLISECONDS_IN_HOUR) + 1;
 			for (int i = 0; i < eventDurationInHours; i++) {
 				Calendar calendar = Calendar.getInstance();
 				calendar.setTime(event.getStartTime());
@@ -319,23 +320,6 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 		});
 
 		return programmeEvents;
-	}
-
-	private static int getHour(Date date) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(date);
-		return calendar.get(Calendar.HOUR_OF_DAY);
-	}
-
-	private static int getEndHour(Date endTime) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(endTime);
-		int hour = calendar.get(Calendar.HOUR_OF_DAY);
-		int minute = calendar.get(Calendar.MINUTE);
-
-		// The first minute of the next hour is considered this hour. For example, an event
-		// ending at 12:00 is only considered to run during hour 11:00.
-		return minute > 0 ? hour : hour - 1;
 	}
 
 	private void scrollToPosition(final int position, final boolean shouldApplyFavoriteReminderAnimation) {

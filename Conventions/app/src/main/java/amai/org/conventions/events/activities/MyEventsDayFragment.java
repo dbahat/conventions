@@ -124,8 +124,8 @@ public class MyEventsDayFragment extends Fragment {
 				Calendar endTime = Calendar.getInstance();
 				endTime.setTime(event.getEndTime());
 
-				// Filter out events not on this day
-				return Dates.isSameDate(date, startTime) || Dates.isSameDate(date, endTime);
+				// Filter out events not starting on this day
+				return Dates.isSameDate(date, startTime);
 			}
 		});
 		return events;

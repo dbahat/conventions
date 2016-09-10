@@ -38,7 +38,7 @@ import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.networking.ModelRefresher;
 import amai.org.conventions.utils.Dates;
 
-public class ProgrammeActivity extends NavigationActivity implements ProgrammeDayFragment.EventsListener, TabLayout.OnTabSelectedListener {
+public class ProgrammeActivity extends NavigationActivity implements ProgrammeDayFragment.EventsListener {
 
 	public static final String EXTRA_DELAY_SCROLLING = "DelayScrollingExtra";
 	private static final String STATE_NAVIGATE_ICON_MODIFIED = "StateNavigateIconModified";
@@ -133,7 +133,6 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 
 		// Setup tabs
 		daysTabLayout.setupWithViewPager(daysPager, false);
-		daysTabLayout.addOnTabSelectedListener(this);
 
 		int selectedDateIndex = dateIndexToSelect;
 		// Find the current date's index if requested
@@ -259,6 +258,11 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
     @Override
     public void onRefresh() {
 	    isRefreshing = true;
+	    for (int i = 0; i < daysPager.getAdapter().getCount(); ++i) {
+		    ProgrammeDayFragment fragment = getDayFragment(i);
+		    fragment.setRefreshing(true);
+	    }
+
 	    ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
 			    .setCategory("PullToRefresh")
 			    .setAction("RefreshProgramme")
@@ -274,11 +278,12 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
             @Override
             protected void onPostExecute(Boolean isSuccess) {
 	            isRefreshing = false;
-                ProgrammeDayFragment fragment = getCurrentDayFragment();
-	            fragment.setRefreshing(false);
                 if (isSuccess) {
-	                // TODO update all fragments
-	                fragment.updateEvents();
+	                for (int i = 0; i < daysPager.getAdapter().getCount(); ++i) {
+		                ProgrammeDayFragment fragment = getDayFragment(i);
+		                fragment.setRefreshing(false);
+	                    fragment.updateEvents();
+	                }
                 } else {
                     Toast.makeText(ProgrammeActivity.this, R.string.update_refresh_failed, Toast.LENGTH_SHORT).show();
                 }
@@ -286,20 +291,8 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
         }.execute();
     }
 
-	private ProgrammeDayFragment getCurrentDayFragment() {
-		return (ProgrammeDayFragment) daysPager.getAdapter().instantiateItem(daysPager, daysPager.getCurrentItem());
-	}
-
-	@Override
-	public void onTabSelected(TabLayout.Tab tab) {
-		getCurrentDayFragment().setRefreshing(isRefreshing);
-	}
-
-	@Override
-	public void onTabUnselected(TabLayout.Tab tab) {
-	}
-	@Override
-	public void onTabReselected(TabLayout.Tab tab) {
+	private ProgrammeDayFragment getDayFragment(int i) {
+		return (ProgrammeDayFragment) daysPager.getAdapter().instantiateItem(daysPager, i);
 	}
 
 	private class ProgrammeDayAdapter extends DayFragmentAdapter {
