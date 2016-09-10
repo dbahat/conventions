@@ -5,28 +5,17 @@
         android:key="push_notifications"
         android:title="@string/notifications_preferences">
         <CheckBoxPreference
-            android:key="cami2016_general"
+            android:key="icon2016_general"
             android:title="@string/show_general_notifications_title"
             android:summary="@string/show_general_notifications_summary"
             android:defaultValue="true" />
 
         <CheckBoxPreference
-            android:key="cami2016_events"
+            android:key="icon2016_events"
             android:title="@string/show_event_notifications_title"
             android:summary="@string/show_event_notifications_summary"
             android:defaultValue="true" />
 
-        <CheckBoxPreference
-            android:key="cami2016_cosplay"
-            android:title="@string/show_cosplay_notifications_title"
-            android:summary="@string/show_cosplay_notifications_summary"
-            android:defaultValue="false" />
-
-        <CheckBoxPreference
-            android:key="cami2016_bus"
-            android:title="@string/show_bus_notifications_title"
-            android:summary="@string/show_bus_notifications_summary"
-            android:defaultValue="false" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/reminder_preferences">
