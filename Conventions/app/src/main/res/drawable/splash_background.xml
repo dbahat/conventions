@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@color/light_blue_medium_dark"/>
-    <item android:top="@dimen/status_bar_height">
-        <bitmap android:src="@drawable/cami2016_home_background"
-                android:gravity="fill_horizontal|clip_vertical|top"/>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" android:opacity="opaque">
+    <item android:drawable="@color/white"/>
+    <item android:top="@dimen/status_bar_height" android:drawable="@color/brown_dark2"/>
+    <item android:top="@dimen/status_bar_and_toolbar_and_tabs_height" android:drawable="@color/white"/>
+    <item android:top="@dimen/status_bar_and_toolbar_and_tabs_height">
+        <nine-patch android:src="@drawable/bottom_shadow"/>
     </item>
 </layer-list>

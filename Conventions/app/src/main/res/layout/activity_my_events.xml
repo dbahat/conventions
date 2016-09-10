@@ -15,32 +15,36 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <LinearLayout
+    <FrameLayout
         android:foreground="@drawable/bottom_shadow"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/nextEventStart"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:background="?nextEventStartTimeBackground"
-            tools:text="Next event start time"
-            android:textColor="?nextEventStartTimeTextColor"
-            />
+            android:layout_height="match_parent">
 
-        <View
-            android:id="@+id/nextEventStartBottomLine"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?nextEventStartTimeBottomLineColor"
-            />
+            <TextView
+                android:id="@+id/nextEventStart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:background="?nextEventStartTimeBackground"
+                tools:text="Next event start time"
+                android:textColor="?nextEventStartTimeTextColor"
+                />
 
-        <klogi.com.RtlViewPager
-            android:id="@+id/my_events_days_pager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </LinearLayout>
+            <View
+                android:id="@+id/nextEventStartBottomLine"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?nextEventStartTimeBottomLineColor"
+                />
+
+            <klogi.com.RtlViewPager
+                android:id="@+id/my_events_days_pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+    </FrameLayout>
 </LinearLayout>

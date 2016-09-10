@@ -193,8 +193,8 @@ public class ConventionEvent implements Serializable {
         return this;
     }
 
-	public List<String> getImages() {
-		return Convention.getInstance().getImageMapper().getImagesList(images);
+	public List<Integer> getImageResources() {
+		return Convention.getInstance().getImageMapper().getImageResourcesList(images);
 	}
 
 	public void setImages(List<String> images) {

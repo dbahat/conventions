@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="AppBaseTheme.Icon2016.Toolbar">
-        <item name="android:colorPrimaryDark">@color/purple</item>
+        <item name="android:colorPrimaryDark">@color/brown_dark3</item>
     </style>
 </resources>

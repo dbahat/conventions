@@ -521,7 +521,7 @@ public class EventActivity extends NavigationActivity {
 
 	private void setupBackgroundImages(ConventionEvent event) {
         // Add images to the layout
-        List<String> images = event.getImages();
+        List<Integer> images = event.getImageResources();
 		boolean first = true;
 		// This will contain the last image view after the loop
 		FrameLayout lastImageLayout = null;
@@ -532,15 +532,12 @@ public class EventActivity extends NavigationActivity {
 		Point size = new Point();
 		display.getSize(size);
 		int widthSpec = View.MeasureSpec.makeMeasureSpec(size.x, View.MeasureSpec.EXACTLY);
-        for (String imageId : images) {
+        for (Integer imageResource : images) {
 	        boolean last = (i == images.size() - 1);
 
 			AspectRatioImageView imageView = new AspectRatioImageView(this);
 	        View viewToAdd = imageView;
-
-	        int imageResource = Convention.getInstance().getImageMapper().getImageResourceId(imageId);
 	        imageView.setImageResource(imageResource);
-
 
 	        // Last image - make a frame layout with the image so we can put the gradient on top of it
 	        if (last) {

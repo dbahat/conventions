@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import amai.org.conventions.R;
 import amai.org.conventions.utils.CollectionUtils;
 
 /**
@@ -26,8 +25,8 @@ public class EventToImageResourceIdMapper {
 		eventIdToImageResourceIdMap.put(id, resource);
 	}
 
-	public List<String> getImagesList(List<String> eventImageIds) {
-		List<String> result = CollectionUtils.filter(eventImageIds, new CollectionUtils.Predicate<String>() {
+	public List<Integer> getImageResourcesList(List<String> eventImageIds) {
+		List<String> existingImages = CollectionUtils.filter(eventImageIds, new CollectionUtils.Predicate<String>() {
 			@Override
 			public boolean where(String eventImageId) {
 				return eventIdToImageResourceIdMap.containsKey(eventImageId);
@@ -35,16 +34,25 @@ public class EventToImageResourceIdMapper {
 		});
 
 		// In case some events came up without any images at all, add a generic image to them.
-		if (result.size() == 0) {
-			result.add(EVENT_GENERIC);
+		if (existingImages.size() == 0) {
+			existingImages.add(EVENT_GENERIC);
 		}
+
+		List<Integer> result = CollectionUtils.map(existingImages, new CollectionUtils.Mapper<String, Integer>() {
+			@Override
+			public Integer map(String item) {
+				return getImageResourceId(item);
+			}
+		});
 
 		return result;
 	}
 
     public int getImageResourceId(String eventImageId) {
-        return eventIdToImageResourceIdMap.containsKey(eventImageId)
-				? eventIdToImageResourceIdMap.get(eventImageId)
-				: R.drawable.cami2016_events_default_cover;
+	    if (eventIdToImageResourceIdMap.containsKey(eventImageId)) {
+		    return eventIdToImageResourceIdMap.get(eventImageId);
+	    } else {
+		    throw new RuntimeException("Image id not found: " + eventImageId);
+	    }
     }
 }

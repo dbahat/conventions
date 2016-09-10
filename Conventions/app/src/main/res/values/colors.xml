@@ -3,6 +3,7 @@
     <color name="transparent_white">#C0FFFFFF</color>
     <color name="white">#FFFFFF</color>
     <color name="ultra_light_gray">#EBEBEB</color>
+    <color name="ultra_light_gray2">#E1E1E1</color>
     <color name="very_light_gray">#DCDCDC</color>
     <color name="gray">#D6D7D7</color>
     <color name="dark_gray">#D2D3D5</color>

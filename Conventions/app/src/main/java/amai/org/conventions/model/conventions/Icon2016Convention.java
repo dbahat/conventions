@@ -66,7 +66,11 @@ public class Icon2016Convention extends SffConvention {
 
     @Override
     protected EventToImageResourceIdMapper initImageMapper() {
-        return new EventToImageResourceIdMapper();
+	    EventToImageResourceIdMapper imageMapper = new EventToImageResourceIdMapper();
+
+	    imageMapper.addMapping(EventToImageResourceIdMapper.EVENT_GENERIC, R.drawable.icon2016_event_background);
+
+	    return imageMapper;
     }
 
     @Override

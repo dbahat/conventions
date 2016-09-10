@@ -5,56 +5,57 @@
     <style name="AppBaseTheme.Icon2016">
         <item name="android:dialogTheme">@style/AppDialogTheme.Icon2016</item>
         <item name="alertDialogTheme">@style/AppAlertDialogTheme.Icon2016</item>
-        <item name="colorAccent">@color/red_dark</item>
-        <item name="android:colorBackground">@color/light_orange_bright</item>
+        <item name="colorAccent">@color/brown</item>
+        <!-- This should be synched with the color in event_time_header_background -->
+        <item name="android:colorBackground">@color/white</item>
 
-        <item name="notificationSmallIcon">@drawable/cami2016_notification_small</item>
-        <item name="notificationLargeIcon">@drawable/cami2016_notification_large</item>
+        <item name="notificationSmallIcon">@drawable/icon2016_notification_small</item>
+        <item name="notificationLargeIcon">@mipmap/icon2016_app_icon</item>
 
-        <item name="toolbarBackground">@color/purple_bright</item>
+        <item name="toolbarBackground">@color/brown_dark2</item>
         <item name="toolbarLogo">@drawable/ic_menu_white_24dp</item>
         <item name="toolbarLogoType">bitmap</item>
-        <item name="toolbarIconAccentColor">@color/gold</item>
-        <item name="navigationPopupSelectedColor">@color/red_dark</item>
+        <item name="toolbarIconAccentColor">@color/yellow_bright</item>
+        <item name="navigationPopupSelectedColor">@color/brown_dark</item>
 
-        <item name="snackbarActionColor">@color/red_bright</item>
+        <item name="snackbarActionColor">@color/brown_bright</item>
 
         <item name="homeScreenLayout">@layout/activity_home_cami2016</item>
         <!-- Note: this isn't really the top point of the about screen since we didn't give a bottom
              view so it will be wrap_content -->
-        <item name="aboutTopView">@id/home_buttons_bottom</item>
-        <item name="aboutLeftView">@id/home_buttons_bottom</item>
-        <item name="aboutRightView">@id/home_buttons_bottom</item>
+        <item name="aboutTopView">@id/home_buttons_bottom</item><!-- unchanged -->
+        <item name="aboutLeftView">@id/home_buttons_bottom</item><!-- unchanged -->
+        <item name="aboutRightView">@id/home_buttons_bottom</item><!-- unchanged -->
 
-        <item name="amaiLogo">@drawable/amai_logo_black</item>
+        <item name="amaiLogo">@drawable/amai_logo_black</item><!-- unchanged -->
 
         <item name="eventTimeDefaultTextColor">@color/black</item>
-        <item name="eventTimeDefaultBackgroundColor">@color/light_pink</item>
+        <item name="eventTimeDefaultBackgroundColor">@color/ultra_light_gray2</item>
 
-        <item name="floorBackground">@color/very_light_yellow</item>
-        <item name="standIconColor">@color/purple_bright</item>
-        <item name="standsTypeTitleColor">@color/red_dark</item>
+        <item name="floorBackground">@color/white</item>
+        <item name="standIconColor">@color/brown</item>
+        <item name="standsTypeTitleColor">@color/brown_dark2</item>
 
-        <item name="nextEventStartTimeBackground">@color/gold_bright</item>
+        <item name="nextEventStartTimeBackground">@color/yellow_medium</item>
         <item name="nextEventStartTimeTextColor">@color/black</item>
 
         <!-- Note: if you change the theme, these values should be copied manually to files
          drawable\highlighted_button.xml and drawable/circular_progress_bar.xml because
          prior to L it was not supported to reference theme attributes from a drawable xml -->
-        <item name="buttonColor">@color/red_dark</item>
-        <item name="buttonColorPressed">@color/red</item>
-        <item name="feedbackAnswerButtonColor">@color/red_dark</item>
-        <item name="feedbackAnswerButtonSelectedColor">@color/red</item>
+        <item name="buttonColor">@color/brown_dark2</item>
+        <item name="buttonColorPressed">@color/brown</item>
+        <item name="feedbackAnswerButtonColor">@color/brown_dark2</item>
+        <item name="feedbackAnswerButtonSelectedColor">@color/brown_bright</item>
     </style>
 
     <style name="AppDialogTheme.Icon2016" parent="Theme.AppCompat.Light.Dialog">
         <!-- This is the default starting API23. In any case the title is always left-justified so it's best to not use it. -->
         <item name="android:windowNoTitle">true</item>
-        <item name="colorAccent">@color/red_dark</item>
+        <item name="colorAccent">@color/brown</item>
     </style>
 
     <style name="AppAlertDialogTheme.Icon2016" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="colorAccent">@color/red_dark</item>
+        <item name="colorAccent">@color/brown</item>
     </style>
 
     <style name="AppBaseTheme.Icon2016.Toolbar.Splash">
