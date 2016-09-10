@@ -32,7 +32,7 @@ public class LocalNotificationScheduler {
     public void scheduleDefaultEventAlarms(ConventionEvent event) {
 	    // TODO move to ConventionApplication.settings for the next convention and use convention id prefix instead of hard-coded
 	    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-	    if (sharedPreferences.getBoolean("cami2016_event_starting_reminder", false)) {
+	    if (sharedPreferences.getBoolean("icon2016_event_starting_reminder", false)) {
 	        EventNotification eventAboutToStartNotification = event.getUserInput().getEventAboutToStartNotification();
 	        Date defaultEventStartNotificationTime = new Date(event.getStartTime().getTime()
 	                - ConfigureNotificationsFragment.DEFAULT_PRE_EVENT_START_NOTIFICATION_MINUTES * Dates.MILLISECONDS_IN_MINUTE);
@@ -41,7 +41,7 @@ public class LocalNotificationScheduler {
 	    }
 
 	    // TODO move to ConventionApplication.settings for the next convention and use convention id prefix instead of hard-coded
-	    if (sharedPreferences.getBoolean("cami2016_event_feedback_reminder", false)) {
+	    if (sharedPreferences.getBoolean("icon2016_event_feedback_reminder", false)) {
 		    EventNotification eventFeedbackReminderNotification = event.getUserInput().getEventFeedbackReminderNotification();
 		    Date defaultEventEndNotificationTime = new Date(event.getEndTime().getTime()
 				    + ConfigureNotificationsFragment.DEFAULT_POST_EVENT_START_NOTIFICATION_MINUTES * Dates.MILLISECONDS_IN_MINUTE);

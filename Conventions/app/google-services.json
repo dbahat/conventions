@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "377234495790",
+    "firebase_url": "https://sff-conventions.firebaseio.com",
+    "project_id": "sff-conventions",
+    "storage_bucket": "sff-conventions.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:377234495790:android:d2ff041601be5128",
+        "android_client_info": {
+          "package_name": "sff.org.conventions"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "377234495790-m5bjqq9715ov2g7p211m7asajebegokp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCSm7fJJEQUIitGOKsyhBfs-9TjcTGNaA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

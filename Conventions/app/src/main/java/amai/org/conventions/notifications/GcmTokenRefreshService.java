@@ -2,11 +2,11 @@ package amai.org.conventions.notifications;
 
 import android.content.Intent;
 
-import com.google.android.gms.iid.InstanceIDListenerService;
+import com.google.firebase.iid.FirebaseInstanceIdService;
 
 import amai.org.conventions.utils.Log;
 
-public class GcmTokenRefreshService extends InstanceIDListenerService {
+public class GcmTokenRefreshService extends FirebaseInstanceIdService {
 
     private static final String TAG = GcmTokenRefreshService.class.getSimpleName();
 

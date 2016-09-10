@@ -5,8 +5,8 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 
-import com.google.android.gms.gcm.GoogleCloudMessaging;
-import com.google.android.gms.iid.InstanceID;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.microsoft.windowsazure.messaging.NotificationHub;
 
 import java.util.Arrays;
@@ -99,8 +99,7 @@ public class AzurePushNotifications {
 		// If an exception happens while trying to register, this makes sure we'll try it again
 		// next time
 		setRegistered(false);
-		InstanceID instanceID = InstanceID.getInstance(context);
-		String token = instanceID.getToken(SENDER_ID, GoogleCloudMessaging.INSTANCE_ID_SCOPE);
+		String token = FirebaseInstanceId.getInstance().getToken(SENDER_ID, FirebaseMessaging.INSTANCE_ID_SCOPE);
 		NotificationHub hub = new NotificationHub(HUB_NAME, HUB_LISTEN_CONNECTION_STRING, context);
 
 		List<String> notificationTopics = getNotificationTopics();
