@@ -44,9 +44,13 @@ public class SffModelParser {
             Date startTime = parseEventTime(timeObject.get("start").getAsString());
             Date endTime = parseEventTime(timeObject.get("end").getAsString());
             JsonArray speakers = eventObj.get("speakers").getAsJsonArray();
-            String firstSpeaker = speakers.size() > 0 ? TextUtils.join(", ", getSpeakers(speakers)) : "";
+            String allSpeakers = speakers.size() > 0 ? TextUtils.join(", ", getSpeakers(speakers)) : "";
 
             String hallName = eventObj.get("location").isJsonNull() ? "" : eventObj.get("location").getAsString();
+            if (TextUtils.isEmpty(hallName)) {
+                // Some SF-F events came up corrupted without hall name. Ignore them during parsing.
+                continue;
+            }
             // TODO - switch to using Convention.getInstance().findHallByName(hallName) if/when we add icon map support.
             Hall hall = new Hall().withName(hallName).withOrder(1);
 
@@ -56,7 +60,7 @@ public class SffModelParser {
             ConventionEvent conventionEvent = new ConventionEvent()
                     .withServerId(eventId)
                     .withTitle(title)
-                    .withLecturer(firstSpeaker)
+                    .withLecturer(allSpeakers)
                     .withType(new EventType(0, eventType))
                     .withDescription(eventDescription)
                     .withStartTime(startTime)
