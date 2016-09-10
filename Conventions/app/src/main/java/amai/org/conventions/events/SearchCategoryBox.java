@@ -7,7 +7,7 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import amai.org.conventions.R;
+import sff.org.conventions.R;
 
 public class SearchCategoryBox extends LinearLayout {
 

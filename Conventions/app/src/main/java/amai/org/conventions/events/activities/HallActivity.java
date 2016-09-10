@@ -10,7 +10,7 @@ import android.view.View;
 
 import java.util.Calendar;
 
-import amai.org.conventions.R;
+import sff.org.conventions.R;
 import amai.org.conventions.events.adapters.DayFragmentAdapter;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;

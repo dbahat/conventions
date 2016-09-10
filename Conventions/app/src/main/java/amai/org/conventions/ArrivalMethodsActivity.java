@@ -19,6 +19,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.notifications.PlayServicesInstallation;
+import sff.org.conventions.R;
 
 public class ArrivalMethodsActivity extends NavigationActivity implements OnMapReadyCallback {
 

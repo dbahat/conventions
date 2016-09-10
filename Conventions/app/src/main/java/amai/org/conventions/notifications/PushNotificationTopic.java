@@ -1,6 +1,6 @@
 package amai.org.conventions.notifications;
 
-import amai.org.conventions.R;
+import sff.org.conventions.R;
 
 public enum PushNotificationTopic {
 	TOPIC_GENERAL("icon2016_general", R.string.push_notification_title),

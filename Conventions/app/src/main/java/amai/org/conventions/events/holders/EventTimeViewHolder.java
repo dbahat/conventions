@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import amai.org.conventions.R;
+import sff.org.conventions.R;
 import amai.org.conventions.utils.Dates;
 
 public class EventTimeViewHolder extends RecyclerView.ViewHolder {

@@ -11,7 +11,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
 import amai.org.conventions.ConventionsApplication;
-import amai.org.conventions.R;
+import sff.org.conventions.R;
 import amai.org.conventions.utils.Log;
 
 public class PlayServicesInstallation {

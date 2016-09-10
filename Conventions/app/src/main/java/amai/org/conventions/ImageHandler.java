@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import amai.org.conventions.map.AssetsExternalFileResolver;
+import sff.org.conventions.R;
 
 /**
  * Handles resizing and caching of images which require resizing at runtime.

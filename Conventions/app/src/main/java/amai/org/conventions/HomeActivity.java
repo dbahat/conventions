@@ -36,8 +36,8 @@ import java.util.Comparator;
 import java.util.List;
 
 import amai.org.conventions.events.activities.ProgrammeActivity;
-import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.Update;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.navigation.NavigationPages;
 import amai.org.conventions.networking.ModelRefresher;
@@ -53,6 +53,7 @@ import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Settings;
 import amai.org.conventions.utils.Views;
+import sff.org.conventions.R;
 
 public class HomeActivity extends AppCompatActivity {
 	public final static String EXTRA_PUSH_NOTIFICATION_MESSAGE = "EXTRA_PUSH_NOTIFICATION_MESSAGE";

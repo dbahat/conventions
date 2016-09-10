@@ -10,7 +10,7 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-import amai.org.conventions.R;
+import sff.org.conventions.R;
 
 public class CompoundTextView extends TextView {
 	private int mDrawableWidth;

@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import java.util.Calendar;
 import java.util.List;
 
-import amai.org.conventions.R;
+import sff.org.conventions.R;
 import amai.org.conventions.events.ProgrammeConventionEvent;
 import amai.org.conventions.events.holders.EventTimeViewHolder;
 import amai.org.conventions.events.holders.SwipeableEventViewHolder;

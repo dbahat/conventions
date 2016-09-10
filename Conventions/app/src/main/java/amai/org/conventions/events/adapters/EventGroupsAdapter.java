@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import amai.org.conventions.R;
+import sff.org.conventions.R;
 import amai.org.conventions.events.activities.EventsTimeSlot;
 import amai.org.conventions.events.activities.MyEventsActivity;
 import amai.org.conventions.events.activities.MyEventsDayFragment;

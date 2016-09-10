@@ -15,7 +15,7 @@ import com.google.android.gms.analytics.HitBuilders;
 import java.util.Date;
 
 import amai.org.conventions.ConventionsApplication;
-import amai.org.conventions.R;
+import sff.org.conventions.R;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.notifications.AzurePushNotifications;
 import amai.org.conventions.notifications.PlayServicesInstallation;

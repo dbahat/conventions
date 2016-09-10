@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import amai.org.conventions.R;
+import sff.org.conventions.R;
 import amai.org.conventions.utils.Objects;
 
 public class FeedbackQuestion implements Serializable {

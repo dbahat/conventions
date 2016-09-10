@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import amai.org.conventions.R;
+import sff.org.conventions.R;
 import amai.org.conventions.model.Update;
 
 public class UpdatesAdapter extends RecyclerView.Adapter<UpdateViewHolder> {

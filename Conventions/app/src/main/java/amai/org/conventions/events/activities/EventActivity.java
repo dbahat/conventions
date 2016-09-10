@@ -39,7 +39,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import amai.org.conventions.ConventionsApplication;
-import amai.org.conventions.R;
+import sff.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.AspectRatioImageView;
 import amai.org.conventions.events.CollapsibleFeedbackView;

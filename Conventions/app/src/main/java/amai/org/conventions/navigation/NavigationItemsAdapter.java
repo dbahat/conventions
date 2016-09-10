@@ -7,7 +7,7 @@ import android.widget.BaseAdapter;
 
 import java.util.List;
 
-import amai.org.conventions.R;
+import sff.org.conventions.R;
 
 class NavigationItemsAdapter extends BaseAdapter {
 	private NavigationActivity currentActivity;

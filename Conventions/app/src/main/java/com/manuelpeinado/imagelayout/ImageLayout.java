@@ -35,7 +35,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 
-import amai.org.conventions.R;
+import sff.org.conventions.R;
 
 /**
  * A layout that arranges its children in relation to a background image. The

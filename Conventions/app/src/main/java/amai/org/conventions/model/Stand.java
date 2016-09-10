@@ -1,6 +1,6 @@
 package amai.org.conventions.model;
 
-import amai.org.conventions.R;
+import sff.org.conventions.R;
 
 public class Stand {
 	private String name;

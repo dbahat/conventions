@@ -18,7 +18,7 @@ import android.widget.Toast;
 import java.util.Date;
 
 import amai.org.conventions.ConventionsApplication;
-import amai.org.conventions.R;
+import sff.org.conventions.R;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.EventNotification;

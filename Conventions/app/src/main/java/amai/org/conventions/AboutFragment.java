@@ -14,6 +14,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
+import sff.org.conventions.R;
+
 
 public class AboutFragment extends DialogFragment {
 	private final static String linksText = "<p><a href=\"http://www.amai.org.il/\">לאתר אמא\"י</a></p>" +

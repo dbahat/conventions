@@ -21,15 +21,16 @@ import amai.org.conventions.events.CollapsibleFeedbackView;
 import amai.org.conventions.events.activities.EventActivity;
 import amai.org.conventions.events.activities.ProgrammeActivity;
 import amai.org.conventions.events.adapters.EventsViewAdapter;
-import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventEndTimeComparator;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionFeedbackMail;
 import amai.org.conventions.utils.EventFeedbackMail;
 import amai.org.conventions.utils.FeedbackMail;
 import amai.org.conventions.utils.Log;
+import sff.org.conventions.R;
 
 
 public class FeedbackActivity extends NavigationActivity {

@@ -10,7 +10,7 @@ import android.widget.ListView;
 import com.google.android.gms.analytics.HitBuilders;
 
 import amai.org.conventions.ConventionsApplication;
-import amai.org.conventions.R;
+import sff.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.listeners.OnEventFavoriteChangedListener;
 import amai.org.conventions.model.conventions.Convention;

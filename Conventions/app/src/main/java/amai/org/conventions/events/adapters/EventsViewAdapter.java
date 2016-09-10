@@ -7,7 +7,7 @@ import android.widget.BaseAdapter;
 
 import java.util.List;
 
-import amai.org.conventions.R;
+import sff.org.conventions.R;
 import amai.org.conventions.events.holders.EventViewHolder;
 import amai.org.conventions.model.ConventionEvent;
 

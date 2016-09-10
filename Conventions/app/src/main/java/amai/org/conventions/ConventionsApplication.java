@@ -15,14 +15,15 @@ import java.util.Collection;
 import java.util.Locale;
 import java.util.Map;
 
-import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.EventNotification;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.notifications.LocalNotificationScheduler;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Settings;
+import sff.org.conventions.BuildConfig;
 
 public class ConventionsApplication extends Application {
 	private final static String TAG = ConventionsApplication.class.getCanonicalName();

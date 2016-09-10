@@ -2,7 +2,7 @@ package amai.org.conventions.utils;
 
 import android.content.Context;
 
-import amai.org.conventions.R;
+import sff.org.conventions.R;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.Feedback;

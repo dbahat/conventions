@@ -1,6 +1,6 @@
 package amai.org.conventions.utils;
 
-import amai.org.conventions.BuildConfig;
+import sff.org.conventions.BuildConfig;
 
 /**
  * Thin wrapper around the android logcat.
