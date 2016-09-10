@@ -1,54 +1,46 @@
 package amai.org.conventions.events;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
-import android.widget.CheckedTextView;
+import android.view.LayoutInflater;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import amai.org.conventions.R;
-import amai.org.conventions.ThemeAttributes;
-import amai.org.conventions.model.EventType;
-import amai.org.conventions.networking.AmaiModelParser;
 
-public class SearchCategoryBox extends CheckedTextView {
+public class SearchCategoryBox extends LinearLayout {
 
-    private EventType eventType;
+    private String searchCategory;
+    private CheckBox checkBox;
+    private TextView textView;
 
     public SearchCategoryBox(Context context, AttributeSet attrs) {
         super(context, attrs);
+
+        LayoutInflater.from(this.getContext()).inflate(R.layout.search_category_box, this, true);
+        checkBox = (CheckBox) this.findViewById(R.id.search_category_checkbox);
+        textView = (TextView) this.findViewById(R.id.search_category_text);
     }
 
-    public void setEventType(EventType eventType) {
-        setText(eventType.getDescription());
-
-        Drawable drawable = ContextCompat.getDrawable(getContext(), android.R.drawable.checkbox_off_background);
-        if (drawable != null) {
-	        int backgroundColor = eventType.getBackgroundColor();
-	        if (backgroundColor == AmaiModelParser.NO_COLOR) {
-		        backgroundColor = ThemeAttributes.getColor(getContext(), R.attr.eventTimeDefaultBackgroundColor);
-	        }
-            drawable.mutate();
-            drawable.setColorFilter(backgroundColor, PorterDuff.Mode.MULTIPLY);
-	        setCompoundDrawablesWithIntrinsicBounds(null, drawable, null, null);
-        }
-
-        this.eventType = eventType;
+    public void setSearchCategory(String searchCategory) {
+        textView.setText(searchCategory);
+        this.searchCategory = searchCategory;
     }
 
-    public EventType getEventType() {
-        return eventType;
+    public String getSearchCategory() {
+        return searchCategory;
     }
 
-    @Override
     public void toggle() {
-        super.toggle();
+        checkBox.setChecked(!checkBox.isChecked());
+    }
 
-        if (isChecked()) {
-            setBackgroundColor(ContextCompat.getColor(getContext(), R.color.dark_gray));
-        } else {
-            setBackgroundColor(ContextCompat.getColor(getContext(), android.R.color.transparent));
-        }
+    public void check() {
+        checkBox.setChecked(true);
+    }
+
+    public boolean isChecked() {
+        return checkBox.isChecked();
     }
 }

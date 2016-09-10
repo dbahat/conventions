@@ -20,10 +20,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+import amai.org.conventions.map.AggregatedEventTypes;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.EventToImageResourceIdMapper;
-import amai.org.conventions.model.EventType;
 import amai.org.conventions.model.Feedback;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.Floor;
@@ -146,6 +146,10 @@ public abstract class Convention implements Serializable {
 
 	public Calendar getEndDate() {
 		return endDate;
+	}
+
+	public int getLengthInDays() {
+		return (int) ((endDate.getTime().getTime() - startDate.getTime().getTime()) / Dates.MILLISECONDS_IN_DAY) + 1;
 	}
 
 	public String getId() {
@@ -380,22 +384,43 @@ public abstract class Convention implements Serializable {
 		return hall;
 	}
 
-	public List<EventType> getEventTypes() {
-		HashSet<EventType> eventTypes = new HashSet<>();
+	public List<String> getAggregatedSearchCategories() {
+		List<SearchCategory> categories = new LinkedList<>();
+		AggregatedEventTypes aggregatedEventTypes = new AggregatedEventTypes();
 		if (events != null) {
 			for (ConventionEvent event : events) {
-				eventTypes.add(event.getType());
+				// Count the number of occurrences of each event per type
+				final String aggregatedEventType = aggregatedEventTypes.get(event.getType());
+				SearchCategory category = CollectionUtils.findFirst(categories, new CollectionUtils.Predicate<SearchCategory>() {
+					@Override
+					public boolean where(SearchCategory item) {
+						return item.getSearchCategory().equals(aggregatedEventType);
+					}
+				});
+
+				if (category != null) {
+					category.increase();
+				} else {
+					categories.add(new SearchCategory(aggregatedEventType));
+				}
 			}
 		}
 
-		List<EventType> eventTypeList = new ArrayList<>(eventTypes);
-		Collections.sort(eventTypeList, new Comparator<EventType>() {
+		// Ensure the result is sorted by occurrences, so the most popular event type is first
+		Collections.sort(categories, new Comparator<SearchCategory>() {
 			@Override
-			public int compare(EventType lhs, EventType rhs) {
-				return lhs.getDescription().compareTo(rhs.getDescription());
+			public int compare(SearchCategory category1, SearchCategory category2) {
+				return category2.getCount() - category1.getCount();
 			}
 		});
-		return eventTypeList;
+
+		// Flatten the list again now that it's sorted
+		return CollectionUtils.map(categories, new CollectionUtils.Mapper<SearchCategory, String>() {
+			@Override
+			public String map(SearchCategory item) {
+				return item.getSearchCategory();
+			}
+		});
 	}
 
 	private int getHighestHallOrder() {
@@ -481,5 +506,27 @@ public abstract class Convention implements Serializable {
 			}
 		}
 		return stands;
+	}
+
+	private static class SearchCategory {
+		private String searchCategory;
+		private int count;
+
+		public SearchCategory(String searchCategory) {
+			this.searchCategory = searchCategory;
+			this.count = 1;
+		}
+
+		public String getSearchCategory() {
+			return searchCategory;
+		}
+
+		public void increase() {
+			count++;
+		}
+
+		public int getCount() {
+			return count;
+		}
 	}
 }

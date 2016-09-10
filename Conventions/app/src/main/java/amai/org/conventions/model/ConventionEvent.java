@@ -30,6 +30,7 @@ public class ConventionEvent implements Serializable {
 	private List<String> images;
     private String description;
 	private String plainTextDescription;
+	private String category;
 
 	public ConventionEvent() {
 		images = new ArrayList<>();
@@ -203,6 +204,15 @@ public class ConventionEvent implements Serializable {
 
 	public ConventionEvent withImages(List<String> images) {
 		setImages(images);
+		return this;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public ConventionEvent withCategory(String category) {
+		this.category = category;
 		return this;
 	}
 

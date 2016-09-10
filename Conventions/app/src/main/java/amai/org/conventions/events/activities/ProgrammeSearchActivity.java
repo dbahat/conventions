@@ -20,12 +20,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 import amai.org.conventions.R;
-import amai.org.conventions.events.SearchCategoriesLayout;
 import amai.org.conventions.events.adapters.SwipeableEventsViewAdapter;
-import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
 import amai.org.conventions.model.EventType;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Views;
@@ -101,20 +100,22 @@ public class ProgrammeSearchActivity extends NavigationActivity {
     }
 
     private void initializeSearchCategories() {
-        final SearchCategoriesLayout searchCategoriesLayout = (SearchCategoriesLayout) findViewById(R.id.search_categories_layout);
-        searchCategoriesLayout.setOnFilterSelectedListener(new SearchCategoriesLayout.OnFilterSelectedListener() {
-	        @Override
-	        public void onFilterSelected(final List<EventType> selectedEventTypes) {
-		        eventTypeFilter = new LinkedList<>(selectedEventTypes);
-		        applyFiltersInBackground();
-	        }
-        });
-
-        if (eventTypeFilter != null) {
-            for (EventType eventType : eventTypeFilter) {
-                searchCategoriesLayout.toggleEventType(eventType);
-            }
-        }
+        // TODO - replace this with drawer filters
+//        final SearchCategoriesLayout searchCategoriesLayout = (SearchCategoriesLayout) findViewById(R.id.search_categories_layout);
+//        searchCategoriesLayout.setEventTypes(Convention.getInstance().getEventTypes());
+//        searchCategoriesLayout.setOnFilterSelectedListener(new SearchCategoriesLayout.OnFilterSelectedListener() {
+//	        @Override
+//	        public void onFilterSelected(final List<EventType> selectedEventTypes) {
+//		        eventTypeFilter = new LinkedList<>(selectedEventTypes);
+//		        applyFiltersInBackground();
+//	        }
+//        });
+//
+//        if (eventTypeFilter != null) {
+//            for (EventType eventType : eventTypeFilter) {
+//                searchCategoriesLayout.toggleEventType(eventType);
+//            }
+//        }
     }
 
     private void initializeKeywordFilter() {

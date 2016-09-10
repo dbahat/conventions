@@ -50,6 +50,9 @@ public class SffModelParser {
             // TODO - switch to using Convention.getInstance().findHallByName(hallName) if/when we add icon map support.
             Hall hall = new Hall().withName(hallName).withOrder(1);
 
+            JsonArray categories = eventObj.get("categories").getAsJsonArray();
+            String category = categories.size() > 0 ? TextUtils.join(", ", categories) : "";
+
             ConventionEvent conventionEvent = new ConventionEvent()
                     .withServerId(eventId)
                     .withTitle(title)
@@ -59,11 +62,11 @@ public class SffModelParser {
                     .withStartTime(startTime)
                     .withEndTime(endTime)
                     .withHall(hall)
-                    .withId(String.valueOf(eventId));
+                    .withId(String.valueOf(eventId))
+                    .withCategory(category);
 
             eventList.add(conventionEvent);
         }
-
 
         return eventList;
     }

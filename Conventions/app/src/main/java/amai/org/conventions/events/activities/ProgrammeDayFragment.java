@@ -1,6 +1,6 @@
 package amai.org.conventions.events.activities;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,7 +33,9 @@ import amai.org.conventions.events.ViewPagerAnimator;
 import amai.org.conventions.events.adapters.SwipeableEventsViewOrHourAdapter;
 import amai.org.conventions.events.holders.EventTimeViewHolder;
 import amai.org.conventions.model.ConventionEvent;
+import amai.org.conventions.model.EventType;
 import amai.org.conventions.model.conventions.Convention;
+import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
@@ -41,22 +43,25 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 	private static final String ARGS_DATE = "ArgDate";
 	private static final String ARGS_DELAY_SCROLLING = "ArgDelayScrolling";
 	private static final String STATE_PREVENT_SCROLLING = "StatePreventScrolling";
+	private static final String ARGS_EVENT_TYPES_FILTER = "ArgsEventTypesFilter";
 
 	private SwipeRefreshLayout swipeLayout;
 	private SwipeableEventsViewOrHourAdapter adapter;
 	private StickyListHeadersListView listView;
 	private List<ProgrammeConventionEvent> events;
 	private EventsListener listener;
+	private List<EventType> eventTypesFilter;
 
 	private boolean cancelScroll;
 	private Calendar date;
 
 
-	public static ProgrammeDayFragment newInstance(Calendar date, int delayScrolling) {
+	public static ProgrammeDayFragment newInstance(Calendar date, int delayScrolling, List<EventType> eventTypesFilter) {
 		ProgrammeDayFragment fragment = new ProgrammeDayFragment();
 		Bundle args = new Bundle();
 		args.putLong(ARGS_DATE, date.getTimeInMillis());
 		args.putInt(ARGS_DELAY_SCROLLING, delayScrolling);
+		args.putSerializable(ARGS_EVENT_TYPES_FILTER, new ArrayList<>(eventTypesFilter) /* wrapping in ArrayList for serialization */);
 		fragment.setArguments(args);
 
 		return fragment;
@@ -69,6 +74,10 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 
 		date = Calendar.getInstance();
 		date.setTimeInMillis(getArguments().getLong(ARGS_DATE));
+
+		// Doing unsafe cast since we know the expected type of the argument
+		// noinspection unchecked
+		eventTypesFilter = (ArrayList<EventType>) getArguments().getSerializable(ARGS_EVENT_TYPES_FILTER);
 
 		swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.programme_swipe_layout);
 		swipeLayout.setOnRefreshListener(this);
@@ -129,10 +138,10 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 	}
 
 	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
-		if (activity instanceof EventsListener) {
-			listener = (EventsListener) activity;
+	public void onAttach(Context context) {
+		super.onAttach(context);
+		if (context instanceof EventsListener) {
+			listener = (EventsListener) context;
 		}
 	}
 
@@ -174,6 +183,11 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 
 	public void updateEvents() {
 		adapter.setItems(getEventsList());
+	}
+
+	public void setEventTypesFilter(List<EventType> eventTypesFilter) {
+		this.eventTypesFilter = eventTypesFilter;
+		updateEvents();
 	}
 
 	@Override
@@ -255,7 +269,14 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 	}
 
 	private List<ProgrammeConventionEvent> getEventsList() {
-		List<ConventionEvent> events = new ArrayList<>(Convention.getInstance().getEvents());
+		final List<ConventionEvent> events = CollectionUtils.filter(Convention.getInstance().getEvents(),
+				new CollectionUtils.Predicate<ConventionEvent>() {
+					@Override
+					public boolean where(ConventionEvent item) {
+						return eventTypesFilter == null || eventTypesFilter.size() == 0 || eventTypesFilter.contains(item.getType());
+					}
+		});
+
 		List<ProgrammeConventionEvent> programmeEvents = new LinkedList<>();
 
 		for (ConventionEvent event : events) {

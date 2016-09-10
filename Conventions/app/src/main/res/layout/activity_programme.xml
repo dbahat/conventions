@@ -16,14 +16,26 @@
         android:layout_height="wrap_content"/>
 
     <FrameLayout
-        android:foreground="@drawable/bottom_shadow"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:foreground="@drawable/bottom_shadow">
 
-        <klogi.com.RtlViewPager
-            android:id="@+id/programme_days_pager"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <amai.org.conventions.events.SearchCategoriesLayout
+                android:id="@+id/programme_search_categories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <klogi.com.RtlViewPager
+                android:id="@+id/programme_days_pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+
     </FrameLayout>
 
 </LinearLayout>

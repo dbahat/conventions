@@ -3,6 +3,12 @@ package amai.org.conventions.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import amai.org.conventions.model.conventions.Convention;
 
 public class Settings {
@@ -71,4 +77,17 @@ public class Settings {
 		sharedPreferences.edit().putBoolean(ADD_MISSING_NOTIFICATIONS, false).apply();
 	}
 
+	private static final String PROGRAMME_SEARCH_CATEGORIES = "123";
+
+	public void setProgrammeSearchCategories(List<String> categories) {
+		sharedPreferences.edit().putStringSet(PROGRAMME_SEARCH_CATEGORIES, new HashSet<>(categories)).apply();
+	}
+
+	public List<String> getProgrammeSearchCategories() {
+		Set<String> categories = sharedPreferences.getStringSet(PROGRAMME_SEARCH_CATEGORIES, null);
+		if (categories == null) {
+			return Arrays.asList("הרצאות", "הקרנות ומופעים", "אחר");
+		}
+		return new ArrayList<>(categories);
+	}
 }

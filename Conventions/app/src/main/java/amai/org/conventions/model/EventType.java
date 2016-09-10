@@ -7,6 +7,10 @@ public class EventType implements Serializable {
     private int backgroundColor;
 	private String description;
 
+    public EventType(String description) {
+        this(0, description);
+    }
+
     public EventType(int backgroundColor, String description) {
         this.backgroundColor = backgroundColor;
 	    this.description = description;

@@ -22,13 +22,17 @@ import android.widget.Toast;
 import com.google.android.gms.analytics.HitBuilders;
 
 import java.util.Calendar;
+import java.util.List;
 
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.FeedbackActivity;
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.adapters.DayFragmentAdapter;
+import amai.org.conventions.events.SearchCategoriesLayout;
+import amai.org.conventions.map.AggregatedEventTypes;
 import amai.org.conventions.model.ConventionEvent;
+import amai.org.conventions.model.EventType;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.networking.ModelRefresher;
@@ -70,15 +74,51 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 		if (savedInstanceState != null && savedInstanceState.getBoolean(STATE_NAVIGATE_ICON_MODIFIED, false)) {
 			navigateToMyEventsIconModified = true;
 		}
+
+		initializeSearchCategories();
     }
+
+	private void initializeSearchCategories() {
+		final SearchCategoriesLayout searchCategoriesLayout = (SearchCategoriesLayout) findViewById(R.id.programme_search_categories);
+
+		// Wait for the layout to finish before configuring the checkbox.
+		// Seems to be needed since otherwise after config change, the state of the UI components in the layout changes.
+		searchCategoriesLayout.post(new Runnable() {
+			@Override
+			public void run() {
+
+				// Set a low number of search categories, since we don't want scrollbar inside this activity
+				searchCategoriesLayout.setMaxDisplayedCategories(3);
+
+				searchCategoriesLayout.setSearchCategories(Convention.getInstance().getAggregatedSearchCategories());
+				searchCategoriesLayout.setOnFilterSelectedListener(new SearchCategoriesLayout.OnFilterSelectedListener() {
+					@Override
+					public void onFilterSelected(List<String> selectedSearchCategories) {
+						List<EventType> eventTypes = new AggregatedEventTypes().get(selectedSearchCategories);
+
+						// Update all the day fragments to use the new filter
+						for (int i=0; i< Convention.getInstance().getLengthInDays(); i++) {
+							ProgrammeDayFragment fragment = (ProgrammeDayFragment) daysPager.getAdapter().instantiateItem(daysPager, i);
+							fragment.setEventTypesFilter(eventTypes);
+						}
+						ConventionsApplication.settings.setProgrammeSearchCategories(selectedSearchCategories);
+					}
+				});
+
+				List<String> categories = ConventionsApplication.settings.getProgrammeSearchCategories();
+				for (String category : categories) {
+					searchCategoriesLayout.checkSearchCategory(category);
+				}
+			}
+		});
+
+	}
 
 	private void setupDays(int dateIndexToSelect) {
 		daysTabLayout = (TabLayout) findViewById(R.id.programme_days_tabs);
 		daysPager = (ViewPager) findViewById(R.id.programme_days_pager);
-		Calendar startDate = Convention.getInstance().getStartDate();
-		Calendar endDate = Convention.getInstance().getEndDate();
 
-		int days = (int) ((endDate.getTime().getTime() - startDate.getTime().getTime()) / Dates.MILLISECONDS_IN_DAY) + 1;
+		int days = Convention.getInstance().getLengthInDays();
 		if (days == 1) {
 			daysTabLayout.setVisibility(View.GONE);
 		} else if (days > MAX_DAYS_NUMBER) {
@@ -100,6 +140,9 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 		if (dateIndexToSelect == SELECT_CURRENT_DATE) {
 			Calendar currDate = Calendar.getInstance();
 			Calendar today = Dates.toCalendar(Dates.now());
+
+			Calendar startDate = Convention.getInstance().getStartDate();
+			Calendar endDate = Convention.getInstance().getEndDate();
 			int i = 0;
 			for (currDate.setTime(startDate.getTime()); !currDate.after(endDate); currDate.add(Calendar.DATE, 1), ++i) {
 				if (Dates.isSameDate(currDate, today)) {
@@ -269,7 +312,9 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 
 		@Override
 		public Fragment getItem(int position) {
-			return ProgrammeDayFragment.newInstance(getDate(position), delayScrolling);
+			return ProgrammeDayFragment.newInstance(getDate(position),
+					delayScrolling,
+					new AggregatedEventTypes().get(ConventionsApplication.settings.getProgrammeSearchCategories()));
 		}
 	}
 }
