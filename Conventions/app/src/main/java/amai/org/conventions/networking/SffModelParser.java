@@ -18,9 +18,12 @@ import java.util.List;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.EventType;
 import amai.org.conventions.model.Hall;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.Log;
 
 public class SffModelParser {
+	private static final String TAG = SffModelParser.class.getCanonicalName();
 
     public List<ConventionEvent> parse(InputStreamReader reader) {
         JsonParser jp = new JsonParser();
@@ -51,8 +54,13 @@ public class SffModelParser {
                 // Some SF-F events came up corrupted without hall name. Ignore them during parsing.
                 continue;
             }
-            // TODO - switch to using Convention.getInstance().findHallByName(hallName) if/when we add icon map support.
-            Hall hall = new Hall().withName(hallName).withOrder(1);
+
+	        Hall hall = Convention.getInstance().findHallByName(hallName);
+	        if (hall == null) {
+		        // Add a new hall to the convention
+		        hall = Convention.getInstance().addHall(hallName);
+		        Log.i(TAG, "Found and added new hall with name " + hallName);
+	        }
 
             JsonArray categories = eventObj.get("categories").getAsJsonArray();
             String category = categories.size() > 0 ? TextUtils.join(", ", categories) : "";

@@ -2,7 +2,7 @@ package amai.org.conventions.model.conventions;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -46,7 +46,31 @@ public class Icon2016Convention extends SffConvention {
 
     @Override
     protected List<Hall> initHalls() {
-        return new ArrayList<>();
+        return Arrays.asList(
+		        new Hall().withName("סינמטק 1").withOrder(1),
+		        new Hall().withName("סינמטק 2").withOrder(2),
+		        new Hall().withName("אשכול 1").withOrder(3),
+		        new Hall().withName("אשכול 2").withOrder(4),
+		        new Hall().withName("אשכול 3").withOrder(5),
+		        new Hall().withName("אשכול 4").withOrder(6),
+		        new Hall().withName("אשכול 5").withOrder(7),
+		        new Hall().withName("אשכול 6").withOrder(8),
+		        new Hall().withName("חדר סדנאות 1").withOrder(9),
+		        new Hall().withName("חדר סדנאות 2").withOrder(10),
+		        new Hall().withName("ארועים מיוחדים").withOrder(11),
+		        new Hall().withName("עירוני 1").withOrder(12),
+		        new Hall().withName("עירוני 2").withOrder(13),
+		        new Hall().withName("עירוני 3").withOrder(14),
+		        new Hall().withName("עירוני 4").withOrder(15),
+		        new Hall().withName("עירוני 5").withOrder(16),
+		        new Hall().withName("עירוני 6").withOrder(17),
+		        new Hall().withName("עירוני 7").withOrder(18),
+		        new Hall().withName("עירוני 8").withOrder(19),
+		        new Hall().withName("עירוני 9").withOrder(20),
+		        new Hall().withName("עירוני 10").withOrder(21),
+		        new Hall().withName("עירוני 11").withOrder(22),
+		        new Hall().withName("עירוני 12").withOrder(23)
+        );
     }
 
     @Override
@@ -56,12 +80,12 @@ public class Icon2016Convention extends SffConvention {
 
     @Override
     protected double initLongitude() {
-        return 35.202425;
+        return 34.7845003;
     }
 
     @Override
     protected double initLatitude() {
-        return 31.786372;
+        return 32.0707265;
     }
 
     @Override

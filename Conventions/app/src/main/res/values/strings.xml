@@ -11,7 +11,7 @@
     <string name="event_conflicts_with_several_question">האירוע מתנגש עם %d אירועים אחרים ברשימת האירועים שלך.</string>
     <string name="event_removed_from_favorites">האירוע הוסר מהאירועים שלי</string>
     <string name="cancel">בטל</string>
-    <string name="arrival_methods_marker_name">%s - בנייני האומה</string>
+    <string name="arrival_methods_marker_name">%s - אשכול פיס</string>
 
     <string name="event_navigate_to_map">הצג במפה</string>
     <string name="event_navigate_to_hall">הצג אולם</string>

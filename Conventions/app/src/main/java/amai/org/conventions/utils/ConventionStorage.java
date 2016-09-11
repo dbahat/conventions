@@ -1,7 +1,6 @@
 package amai.org.conventions.utils;
 
 import android.content.Context;
-import android.support.annotation.IdRes;
 import android.support.annotation.RawRes;
 
 import com.google.gson.Gson;
@@ -28,11 +27,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.Feedback;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.Update;
+import amai.org.conventions.model.conventions.Convention;
 
 public class ConventionStorage {
 	private static final String TAG = ConventionStorage.class.getCanonicalName();

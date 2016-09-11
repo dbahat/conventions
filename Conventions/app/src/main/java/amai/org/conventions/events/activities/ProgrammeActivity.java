@@ -278,13 +278,14 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
             @Override
             protected void onPostExecute(Boolean isSuccess) {
 	            isRefreshing = false;
-                if (isSuccess) {
-	                for (int i = 0; i < daysPager.getAdapter().getCount(); ++i) {
-		                ProgrammeDayFragment fragment = getDayFragment(i);
-		                fragment.setRefreshing(false);
-	                    fragment.updateEvents();
-	                }
-                } else {
+	            for (int i = 0; i < daysPager.getAdapter().getCount(); ++i) {
+		            ProgrammeDayFragment fragment = getDayFragment(i);
+		            fragment.setRefreshing(false);
+		            if (isSuccess) {
+			            fragment.updateEvents();
+		            }
+	            }
+	            if (!isSuccess) {
                     Toast.makeText(ProgrammeActivity.this, R.string.update_refresh_failed, Toast.LENGTH_SHORT).show();
                 }
             }

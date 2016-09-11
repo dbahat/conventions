@@ -140,11 +140,8 @@ public class ArrivalMethodsActivity extends NavigationActivity implements OnMapR
 	    LatLng conventionLocation = new LatLng(Convention.getInstance().getLatitude(), Convention.getInstance().getLongitude());
 
         mMap.addMarker(new MarkerOptions()
-                // TODO - return the custom marker after scaling it to a proper size.
-                //.icon(BitmapDescriptorFactory.fromResource(R.drawable.harucon_logo))
                 .position(conventionLocation)
-		        // Workaround for Hebrew not being displayed - add unicode RTL character before the string
-                .title("\u200e" + getResources().getString(R.string.arrival_methods_marker_name, Convention.getInstance().getDisplayName())));
+                .title(getResources().getString(R.string.arrival_methods_marker_name, Convention.getInstance().getDisplayName())));
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(conventionLocation, 16));
     }
