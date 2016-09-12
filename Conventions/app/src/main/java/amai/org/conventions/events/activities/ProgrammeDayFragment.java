@@ -2,6 +2,7 @@ package amai.org.conventions.events.activities;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -84,7 +85,7 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 		swipeLayout.setColorSchemeColors(ThemeAttributes.getColor(container.getContext(), R.attr.toolbarBackground));
 
 		listView = (StickyListHeadersListView) view.findViewById(R.id.programmeList);
-		events = getEventsList();
+		events = getEventsList(eventTypesFilter);
 		adapter = new SwipeableEventsViewOrHourAdapter(events);
 		listView.setAdapter(adapter);
 		adapter.setOnEventFavoriteChangedListener(new DefaultEventFavoriteChangedListener(listView) {
@@ -182,12 +183,34 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 	}
 
 	public void updateEvents() {
-		adapter.setItems(getEventsList());
+		updateEvents(eventTypesFilter);
+	}
+
+	public void updateEvents(final List<EventType> eventTypesFilter) {
+		new AsyncTask<Void, Void, List<ProgrammeConventionEvent>>() {
+			@Override
+			protected List<ProgrammeConventionEvent> doInBackground(Void... params) {
+				return getEventsList(eventTypesFilter);
+			}
+
+			@Override
+			protected void onPostExecute(final List<ProgrammeConventionEvent> events) {
+				// This must be done in postDelayed because if setItems runs during the checkbox
+				// toggle animation it makes it not smooth, so we need to ensure it runs after it ends
+				listView.postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						adapter.setItems(events);
+					}
+				}, 200);
+
+			}
+		}.execute();
 	}
 
 	public void setEventTypesFilter(List<EventType> eventTypesFilter) {
 		this.eventTypesFilter = eventTypesFilter;
-		updateEvents();
+		updateEvents(eventTypesFilter);
 	}
 
 	@Override
@@ -269,7 +292,7 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 		return -1;
 	}
 
-	private List<ProgrammeConventionEvent> getEventsList() {
+	private List<ProgrammeConventionEvent> getEventsList(final List<EventType> eventTypesFilter) {
 		final List<ConventionEvent> events = CollectionUtils.filter(Convention.getInstance().getEvents(),
 				new CollectionUtils.Predicate<ConventionEvent>() {
 					@Override

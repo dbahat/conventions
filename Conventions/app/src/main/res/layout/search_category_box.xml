@@ -23,7 +23,7 @@
         android:id="@+id/search_category_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="12dp"
+        android:textSize="12sp"
         tools:text="test category"
         android:gravity="center"
         />
