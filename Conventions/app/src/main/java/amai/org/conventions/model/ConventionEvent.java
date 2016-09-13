@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import amai.org.conventions.R;
@@ -31,9 +32,13 @@ public class ConventionEvent implements Serializable {
     private String description;
 	private String plainTextDescription;
 	private String category;
+	private List<String> tags;
+	private int price;
+	private String websiteUrl;
 
 	public ConventionEvent() {
 		images = new ArrayList<>();
+		tags = new LinkedList<>();
 	}
 
 	public void setBackgroundColor(int color) {
@@ -216,6 +221,49 @@ public class ConventionEvent implements Serializable {
 		return this;
 	}
 
+	public List<String> getTags() {
+		return tags;
+	}
+
+	public void setTags(List<String> tags) {
+		this.tags = tags;
+	}
+
+	public ConventionEvent withTags(List<String> tags) {
+		setTags(tags);
+		return this;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public int getDiscountPrice() {
+		return price >= 10 ? price - 10 : 0;
+	}
+
+	public ConventionEvent withPrice(int price) {
+		setPrice(price);
+		return this;
+	}
+
+	public String getWebsiteUrl() {
+		return websiteUrl;
+	}
+
+	public void setWebsiteUrl(String websiteUrl) {
+		this.websiteUrl = websiteUrl;
+	}
+
+	public ConventionEvent withWebsiteUrl(String websiteUrl) {
+		setWebsiteUrl(websiteUrl);
+		return this;
+	}
+
 	public UserInput getUserInput() {
 		return Convention.getInstance().getEventUserInput(getId());
 	}
@@ -288,7 +336,11 @@ public class ConventionEvent implements Serializable {
 				Objects.equals(this.id, other.id) &&
 				Objects.equals(this.backgroundColor, other.backgroundColor) &&
 				Objects.equals(this.textColor, other.textColor) &&
-				Objects.equals(this.description, other.description);
+				Objects.equals(this.description, other.description) &&
+				Objects.equals(this.category, other.category) &&
+				Objects.equals(this.price, other.price) &&
+				Objects.equals(this.websiteUrl, other.websiteUrl) &&
+				Objects.equals(this.tags, other.tags);
 	}
 
 	@Override

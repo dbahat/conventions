@@ -200,6 +200,7 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 				listView.postDelayed(new Runnable() {
 					@Override
 					public void run() {
+						ProgrammeDayFragment.this.events = events;
 						adapter.setItems(events);
 					}
 				}, 200);

@@ -28,7 +28,7 @@ import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
 
-public class AmaiModelParser {
+public class AmaiModelParser implements ModelParser {
     public static final int NO_COLOR = Color.TRANSPARENT; // Assuming we will never get this from the server...
 
     private static final String TAG = AmaiModelParser.class.getCanonicalName();

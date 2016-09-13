@@ -32,6 +32,7 @@ import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.model.Update;
+import amai.org.conventions.networking.ModelParser;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 import amai.org.conventions.utils.Dates;
@@ -507,6 +508,8 @@ public abstract class Convention implements Serializable {
 		}
 		return stands;
 	}
+
+	public abstract ModelParser getModelParser();
 
 	private static class SearchCategory {
 		private String searchCategory;

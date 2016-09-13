@@ -150,4 +150,7 @@
     <string name="show_test_notifications_title">בדיקות</string>
     <string name="show_test_notifications_summary">הצג התראות בדיקה</string>
     <string name="advanced_options_enabled">אפשרויות מתקדמות אופשרו</string>
+    <string name="event_price_free">מחיר: חינם</string>
+    <string name="event_prices">מחיר: %1$d ש\"ח, תעריף עמותות מארגנות: %2$d ש\"ח</string>
+    <string name="tags">תגיות: %s</string>
 </resources>

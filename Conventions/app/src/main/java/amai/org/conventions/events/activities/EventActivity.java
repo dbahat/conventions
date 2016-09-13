@@ -16,6 +16,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.graphics.Palette;
 import android.text.Html;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.view.Display;
 import android.view.Gravity;
@@ -34,6 +35,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.analytics.HitBuilders;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import amai.org.conventions.ConventionsApplication;
@@ -413,6 +415,25 @@ public class EventActivity extends NavigationActivity {
     }
 
     private void setEvent(ConventionEvent event) {
+	    boolean showSeparator = true;
+	    TextView type = (TextView) findViewById(R.id.event_type);
+	    if (event.getType() == null || TextUtils.isEmpty(event.getType().getDescription())) {
+		    showSeparator = false;
+		    type.setVisibility(View.GONE);
+	    } else {
+	        type.setText(event.getType().getDescription());
+	    }
+	    TextView category = (TextView) findViewById(R.id.event_category);
+	    if (TextUtils.isEmpty(event.getCategory())) {
+		    showSeparator = false;
+		    category.setVisibility(View.GONE);
+	    } else {
+		    category.setText(event.getCategory());
+	    }
+	    if (!showSeparator) {
+		    findViewById(R.id.event_type_and_category_separator).setVisibility(View.GONE);
+	    }
+
         TextView title = (TextView) findViewById(R.id.event_title);
         title.setText(event.getTitle());
 
@@ -431,11 +452,28 @@ public class EventActivity extends NavigationActivity {
 		    formattedEventHall = String.format("%s, ", event.getHall().getName());
 	    }
 
-        String formattedEventTime = String.format("%s - %s (%s)",
+	    SimpleDateFormat sdf = new SimpleDateFormat("EEE dd.MM", Dates.getLocale());
+        String formattedEventTime = String.format("%s, %s - %s (%s)",
+		        sdf.format(event.getStartTime()),
                 Dates.formatHoursAndMinutes(event.getStartTime()),
                 Dates.formatHoursAndMinutes(event.getEndTime()),
                 Dates.toHumanReadableTimeDuration(event.getEndTime().getTime() - event.getStartTime().getTime()));
         time.setText(String.format("%s%s", formattedEventHall, formattedEventTime));
+
+	    TextView prices = (TextView) findViewById(R.id.event_prices);
+	    if (event.getPrice() == 0) {
+		    prices.setText(getString(R.string.event_price_free));
+	    } else {
+		    prices.setText(getString(R.string.event_prices, event.getPrice(), event.getDiscountPrice()));
+	    }
+
+	    TextView tags = (TextView) findViewById(R.id.event_tags);
+	    List<String> eventTags = event.getTags();
+	    if (eventTags == null || eventTags.size() == 0) {
+		    tags.setVisibility(View.GONE);
+	    } else {
+		    tags.setText(getString(R.string.tags, TextUtils.join(", ", eventTags)));
+	    }
 
 	    setupFeedback(event);
 

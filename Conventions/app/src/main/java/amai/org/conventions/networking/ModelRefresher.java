@@ -36,7 +36,7 @@ public class ModelRefresher {
             InputStreamReader reader = null;
             try {
                 reader = new InputStreamReader((InputStream) request.getContent());
-                List<ConventionEvent> eventList = new SffModelParser().parse(reader);
+                List<ConventionEvent> eventList = Convention.getInstance().getModelParser().parse(reader);
 
 	            if (BuildConfig.DEBUG) {
 		            notifyIfEventsUpdated(Convention.getInstance().getEvents(), eventList);
@@ -62,6 +62,7 @@ public class ModelRefresher {
     }
 
 	private void notifyIfEventsUpdated(List<ConventionEvent> currentEvents, List<ConventionEvent> newEvents) {
+		Log.i(TAG, "Events refresh: Checking if events are updated");
 		List<String> changes = new LinkedList<>();
 		Map<String, ConventionEvent> currentEventsById = new HashMap<>();
 		for (ConventionEvent event : currentEvents) {

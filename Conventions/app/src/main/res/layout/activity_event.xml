@@ -42,7 +42,35 @@
 
             <LinearLayout
                 style="@style/EventDetailsBox">
-
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/event_category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/black"
+                        tools:text="Event Category"
+                        />
+                    <TextView
+                        android:id="@+id/event_type_and_category_separator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:text=" – "
+                        style="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/black"/>
+                    <TextView
+                        android:id="@+id/event_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/black"
+                        tools:text="Event Type"
+                        />
+                </LinearLayout>
                 <TextView
                     android:id="@+id/event_title"
                     style="@style/TextAppearance.AppCompat.Headline"
@@ -69,6 +97,24 @@
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
                     tools:text="hall and time" />
+
+                <TextView
+                    android:id="@+id/event_prices"
+                    style="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    tools:text="prices" />
+
+                <TextView
+                    android:id="@+id/event_tags"
+                    style="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    tools:text="tags" />
             </LinearLayout>
 
 
