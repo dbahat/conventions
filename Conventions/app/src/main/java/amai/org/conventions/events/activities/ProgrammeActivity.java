@@ -1,6 +1,7 @@
 package amai.org.conventions.events.activities;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -26,6 +27,7 @@ import java.util.List;
 
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.FeedbackActivity;
+import amai.org.conventions.notifications.PushNotificationDialogPresenter;
 import sff.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.adapters.DayFragmentAdapter;
@@ -76,7 +78,16 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 		}
 
 		initializeSearchCategories();
+
+		// Needed here since in sff conventions this is the initial activity
+		new PushNotificationDialogPresenter().present(this, getIntent());
     }
+
+	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
+		new PushNotificationDialogPresenter().present(this, intent);
+	}
 
 	private void initializeSearchCategories() {
 		final SearchCategoriesLayout searchCategoriesLayout = (SearchCategoriesLayout) findViewById(R.id.programme_search_categories);

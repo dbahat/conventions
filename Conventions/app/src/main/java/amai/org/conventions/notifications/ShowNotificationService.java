@@ -14,14 +14,14 @@ import java.util.List;
 
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.FeedbackActivity;
-import amai.org.conventions.HomeActivity;
 import amai.org.conventions.ImageHandler;
-import sff.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.activities.EventActivity;
-import amai.org.conventions.model.conventions.Convention;
+import amai.org.conventions.events.activities.ProgrammeActivity;
 import amai.org.conventions.model.ConventionEvent;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.CollectionUtils;
+import sff.org.conventions.R;
 
 import static amai.org.conventions.model.EventNotification.Type.AboutToStart;
 import static amai.org.conventions.model.EventNotification.Type.FeedbackReminder;
@@ -201,12 +201,12 @@ public class ShowNotificationService extends Service {
 	    String category = intent.getStringExtra(EXTRA_CATEGORY); // Could be null
 
 	    int notificationId = getNextPushNotificationId();
-	    Intent openAppIntent = new Intent(this, HomeActivity.class)
+	    Intent openAppIntent = new Intent(this, ProgrammeActivity.class)
 			    .setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
 			    .setAction(Type.Push.toString() + notificationId)
-			    .putExtra(HomeActivity.EXTRA_PUSH_NOTIFICATION_ID, notificationId)  // To prevent seeing the same notification twice
-			    .putExtra(HomeActivity.EXTRA_PUSH_NOTIFICATION_MESSAGE, message)
-			    .putExtra(HomeActivity.EXTRA_PUSH_NOTIFICATION_CATEGORY, category);
+			    .putExtra(PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION_ID, notificationId)  // To prevent seeing the same notification twice
+			    .putExtra(PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION_MESSAGE, message)
+			    .putExtra(PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION_CATEGORY, category);
 
         Notification.Builder builder = getDefaultNotificationBuilder()
                 .setContentTitle(getString(R.string.app_name)) // Showing the app name as title to be consistent with iOS behavior
