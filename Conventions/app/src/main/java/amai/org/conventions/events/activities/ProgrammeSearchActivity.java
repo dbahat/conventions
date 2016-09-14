@@ -40,6 +40,8 @@ public class ProgrammeSearchActivity extends NavigationActivity {
     private RecyclerView recyclerView;
     private TextView noResultsFoundView;
 
+    private AsyncTask<Void, Void, List<ConventionEvent>> currentFilterProcessingTask;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -146,7 +148,14 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 		final String keywordsFilter = this.keywordsFilter;
 		final LinkedList<EventType> eventTypeFilter = this.eventTypeFilter;
 
-		new AsyncTask<Void, Void, List<ConventionEvent>>() {
+        // Canceling the previous async task so the UI won't be refreshed with outdated search results in case the user
+        // is in the middle of typing. Since we use a thread pool, this can also result in the user seeing wrong results
+        // (in case an outdated filtering task finish after the latest one).
+        if (currentFilterProcessingTask != null && currentFilterProcessingTask.getStatus() != AsyncTask.Status.FINISHED) {
+            currentFilterProcessingTask.cancel(false);
+        }
+
+        currentFilterProcessingTask = new AsyncTask<Void, Void, List<ConventionEvent>>() {
 			@Override
 			protected List<ConventionEvent> doInBackground(Void... params) {
 				return filterEvents(keywordsFilter, eventTypeFilter);
