@@ -141,7 +141,7 @@ public class FeedbackActivity extends NavigationActivity {
 						}
 					}
 
-				}.execute();
+				}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
 			}
 		});

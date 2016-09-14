@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -26,7 +27,6 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-import sff.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.DefaultEventFavoriteChangedListener;
 import amai.org.conventions.events.ProgrammeConventionEvent;
@@ -39,6 +39,7 @@ import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
+import sff.org.conventions.R;
 
 public class ProgrammeDayFragment extends Fragment implements StickyListHeadersListView.OnHeaderClickListener, SwipeRefreshLayout.OnRefreshListener {
 	private static final String ARGS_DATE = "ArgDate";
@@ -206,7 +207,7 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 				}, 200);
 
 			}
-		}.execute();
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public void setEventTypesFilter(List<EventType> eventTypesFilter) {

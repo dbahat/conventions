@@ -92,7 +92,7 @@ public class AzurePushNotifications {
 					listener.onError();
 				}
 			}
-		}.execute();
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public void register() throws Exception {

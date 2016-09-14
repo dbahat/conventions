@@ -53,7 +53,7 @@ public class ApplicationInitializer {
                 modelRefresher.refreshFromServer();
                 return null;
             }
-        }.execute();
+        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
     }
 
@@ -117,7 +117,7 @@ public class ApplicationInitializer {
                 }
 
             }
-        }.execute();
+        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     private void refreshUpdatesAndNotifyIfNewUpdatesAreAvailable(final Context context) {

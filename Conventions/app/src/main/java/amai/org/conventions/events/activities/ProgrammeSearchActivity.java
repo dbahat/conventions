@@ -157,7 +157,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 				adapter.setEventsList(events);
 				setNoResultsVisibility(adapter.getItemCount());
 			}
-		}.execute();
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
     private List<ConventionEvent> filterEvents(final String keywordsFilter, final List<EventType> eventTypeFilter) {

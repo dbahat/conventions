@@ -129,7 +129,7 @@ public abstract class FeedbackMail {
 					}
 				}
 
-			}.execute();
+			}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
 		}
 	}

@@ -524,7 +524,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 									null : locationsSearchResultsAdapter.getMapLocations());
 				}
 			}
-		}.execute();
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private void toggleSearch() {

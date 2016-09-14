@@ -467,7 +467,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 			    progressBar.setVisibility(View.GONE);
 			    mapZoomView.setVisibility(View.VISIBLE);
 		    }
-	    }.execute();
+	    }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
 	private void restoreState(Bundle savedInstanceState) {

@@ -27,18 +27,18 @@ import java.util.List;
 
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.FeedbackActivity;
-import amai.org.conventions.notifications.PushNotificationDialogPresenter;
-import sff.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
-import amai.org.conventions.events.adapters.DayFragmentAdapter;
 import amai.org.conventions.events.SearchCategoriesLayout;
+import amai.org.conventions.events.adapters.DayFragmentAdapter;
 import amai.org.conventions.map.AggregatedEventTypes;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.EventType;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.networking.ModelRefresher;
+import amai.org.conventions.notifications.PushNotificationDialogPresenter;
 import amai.org.conventions.utils.Dates;
+import sff.org.conventions.R;
 
 public class ProgrammeActivity extends NavigationActivity implements ProgrammeDayFragment.EventsListener {
 
@@ -300,7 +300,7 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
                     Toast.makeText(ProgrammeActivity.this, R.string.update_refresh_failed, Toast.LENGTH_SHORT).show();
                 }
             }
-        }.execute();
+        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
 	private ProgrammeDayFragment getDayFragment(int i) {
