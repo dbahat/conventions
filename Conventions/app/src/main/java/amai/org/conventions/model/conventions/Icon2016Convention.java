@@ -99,7 +99,7 @@ public class Icon2016Convention extends SffConvention {
 
     @Override
     protected String initFeedbackRecipient() {
-        return "";
+        return "feedback@iconfestival.org.il";
     }
 
     @Override
