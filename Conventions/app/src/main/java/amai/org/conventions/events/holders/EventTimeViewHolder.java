@@ -22,7 +22,11 @@ public class EventTimeViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void setTime(Date date) {
-        timeTextView.setText(new SimpleDateFormat("HH:SS", Dates.getLocale()).format(date));
+        setTime(date, "HH:SS");
+    }
+
+    public void setTime(Date date, String timeFormat) {
+        timeTextView.setText(new SimpleDateFormat(timeFormat, Dates.getLocale()).format(date));
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);

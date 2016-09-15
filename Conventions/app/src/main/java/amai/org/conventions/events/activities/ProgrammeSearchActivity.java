@@ -13,13 +13,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration;
+
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import sff.org.conventions.R;
 import amai.org.conventions.events.adapters.SwipeableEventsViewAdapter;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
@@ -28,6 +29,7 @@ import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Views;
+import sff.org.conventions.R;
 
 public class ProgrammeSearchActivity extends NavigationActivity {
 
@@ -99,6 +101,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
         adapter = new SwipeableEventsViewAdapter(Collections.<ConventionEvent>emptyList(), recyclerView);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new StickyRecyclerHeadersDecoration(adapter));
     }
 
     private void initializeSearchCategories() {
