@@ -28,7 +28,7 @@
     <string name="my_events_share">שתף</string>
     <string name="my_event_share_title">התוכניה שלי ל%s:</string>
     <string name="my_event_share_signature">נוצר באפליקצית %s.</string>
-    <string name="my_event_share_link">http://play.google.com/store/apps/details?id=amai.org.conventions</string>
+    <string name="my_event_share_link">http://play.google.com/store/apps/details?id=sff.org.conventions</string>
     <string name="my_event_share_chooser_dialog_title">שתף את רשימת האירועים</string>
 
     <string name="select_hour_ok">הצג שעה</string>

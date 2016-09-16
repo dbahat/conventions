@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.analytics.HitBuilders;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -197,11 +198,19 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 	private String formatMyEventsToShare(boolean isHtml) {
 		StringBuilder stringBuilder = new StringBuilder();
 
-		stringBuilder.append(getString(R.string.my_event_share_title, Convention.getInstance().getDisplayName()));
-		stringBuilder.append("\n");
+		stringBuilder.append(getString(R.string.my_event_share_title, Convention.getInstance().getDisplayName())).append("\n");
+		Calendar eventDate = null;
 		for (ConventionEvent event : getMyEvents()) {
-			stringBuilder.append(formatEventToShare(event));
-			stringBuilder.append("\n");
+			Calendar eventStart = Dates.toCalendar(event.getStartTime());
+			boolean newDate = (eventDate == null || !Dates.isSameDate(eventDate, eventStart));
+			eventDate = eventStart;
+
+			if (newDate) {
+				SimpleDateFormat sdf = new SimpleDateFormat("EEEE (dd.MM)", Dates.getLocale());
+				stringBuilder.append("\n").append(sdf.format(eventDate.getTime())).append("\n");
+			}
+
+			stringBuilder.append(formatEventToShare(event)).append("\n");
 		}
 		stringBuilder.append("\n");
 
@@ -209,9 +218,9 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 			stringBuilder.append(
 					String.format(Dates.getLocale(), "<a href=\"%s\">%s</a>",
 							getString(R.string.my_event_share_link),
-							getString(R.string.my_event_share_signature, Convention.getInstance().getDisplayName())));
+							getString(R.string.my_event_share_signature, getString(R.string.app_name))));
 		} else {
-			stringBuilder.append(getString(R.string.my_event_share_signature, Convention.getInstance().getDisplayName()));
+			stringBuilder.append(getString(R.string.my_event_share_signature, getString(R.string.app_name)));
 			stringBuilder.append("\n");
 			stringBuilder.append(getString(R.string.my_event_share_link));
 		}

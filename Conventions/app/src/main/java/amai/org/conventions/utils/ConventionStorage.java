@@ -209,7 +209,7 @@ public class ConventionStorage {
 
     private void readEventsFromLocalResources() {
 	    if (!hasInitialEventsFile) {
-		    throw new RuntimeException("Convention " + convention.getDisplayName() + " has no initial events file");
+		    throw new RuntimeException("Convention " + convention.getId() + " has no initial events file");
 	    }
 
         // No need to lock here, since we only read from the resources and only during app launch.
