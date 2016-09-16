@@ -30,7 +30,11 @@ public class AggregatedEventTypes {
         );
     }
 
-    public String get(EventType eventType) {
+	public List<AggregatedType> getAggregatedEventTypes() {
+		return aggregatedEventTypes;
+	}
+
+	public String get(EventType eventType) {
         for (AggregatedType aggregatedType : aggregatedEventTypes) {
             if (aggregatedType.contains(eventType)) {
                 return aggregatedType.getName();

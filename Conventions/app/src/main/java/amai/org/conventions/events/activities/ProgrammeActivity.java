@@ -116,7 +116,7 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 					}
 				});
 
-				List<String> categories = ConventionsApplication.settings.getProgrammeSearchCategories();
+				List<String> categories = ConventionsApplication.settings.getProgrammeSearchCategories(ProgrammeActivity.this);
 				for (String category : categories) {
 					searchCategoriesLayout.checkSearchCategory(category);
 				}
@@ -319,7 +319,7 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 		public Fragment getItem(int position) {
 			return ProgrammeDayFragment.newInstance(getDate(position),
 					delayScrolling,
-					new AggregatedEventTypes().get(ConventionsApplication.settings.getProgrammeSearchCategories()));
+					new AggregatedEventTypes().get(ConventionsApplication.settings.getProgrammeSearchCategories(getApplicationContext())));
 		}
 	}
 }

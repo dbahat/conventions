@@ -10,7 +10,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,6 +18,7 @@ import android.view.ViewTreeObserver;
 import android.widget.AbsListView;
 import android.widget.NumberPicker;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -218,28 +218,45 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 	@Override
 	public void onHeaderClick(StickyListHeadersListView stickyListHeadersListView, View view, int i, long l, boolean b) {
 		EventTimeViewHolder eventTimeViewHolder = (EventTimeViewHolder) view.getTag();
-		int selectedTimeSectionHour = eventTimeViewHolder.getCurrentHour();
+		Calendar selectedTimeSectionTime = eventTimeViewHolder.getTime();
 
 		// Setup number picker dialog
 		final NumberPicker numberPicker = new NumberPicker(getActivity());
-		int minValue = events.get(0).getTimeSection().get(Calendar.HOUR_OF_DAY);
-		int maxValue = events.get(events.size() - 1).getTimeSection().get(Calendar.HOUR_OF_DAY);
-		numberPicker.setMinValue(minValue);
-		maxValue = maxValue >= minValue ? maxValue : 23; // Only show hours until 11PM
-		numberPicker.setMaxValue(maxValue);
-		List<String> values = new ArrayList<>(maxValue - minValue + 1);
 
-		for (int value = minValue; value <= maxValue; ++value) {
-			String hour = String.valueOf(value);
-			if (hour.length() == 1) {
-				hour = "0" + hour;
+		final List<Calendar> timeSections = new LinkedList<>();
+
+		int previousHour = -1;
+		int currValue = 0;
+		int selectedValue = 0;
+		for (ProgrammeConventionEvent event : events) {
+			int hour = event.getTimeSection().get(Calendar.HOUR_OF_DAY);
+			if (hour != previousHour) {
+				previousHour = hour;
+				timeSections.add(event.getTimeSection());
+
+				// Check if this is the time the user clicked on
+				if (hour == selectedTimeSectionTime.get(Calendar.HOUR_OF_DAY) &&
+						Dates.isSameDate(event.getTimeSection(), selectedTimeSectionTime)) {
+					selectedValue = currValue;
+				}
 			}
-			hour += ":00";
-			values.add(hour);
+			++currValue;
 		}
-		numberPicker.setDisplayedValues(values.toArray(new String[values.size()]));
-		numberPicker.setValue(selectedTimeSectionHour);
+
+		List<String> formattedSections = CollectionUtils.map(timeSections, new CollectionUtils.Mapper<Calendar, String>() {
+			@Override
+			public String map(Calendar item) {
+				SimpleDateFormat sdf = new SimpleDateFormat("HH:00", Dates.getLocale());
+				return sdf.format(item.getTime());
+			}
+		});
+
+		numberPicker.setMinValue(0);
+		numberPicker.setMaxValue(timeSections.size() - 1);
+		numberPicker.setDisplayedValues(formattedSections.toArray(new String[formattedSections.size()]));
+		numberPicker.setValue(selectedValue);
 		numberPicker.setWrapSelectorWheel(false);
+
 		numberPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
 
 		AlertDialog dialog = new AlertDialog.Builder(getActivity())
@@ -247,7 +264,8 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 				.setPositiveButton(R.string.select_hour_ok,
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int whichButton) {
-								int position = findHourPosition(numberPicker.getValue());
+								Calendar timeSection = timeSections.get(numberPicker.getValue());
+								int position = findHourPosition(timeSection);
 								if (position != -1) {
 									cancelScroll = false;
 									scrollToPosition(position, false);
@@ -258,18 +276,18 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 		dialog.show();
 	}
 
-	private int findHourPosition(int hour) {
+	private int findHourPosition(Calendar timeSection) {
+		if (timeSection == null) {
+			return -1;
+		}
+
 		int i = 0;
 		for (ProgrammeConventionEvent event : events) {
-			// This is called from the hour popup, the date is not relevant in this case
-			if (event.getTimeSection().get(Calendar.HOUR_OF_DAY) >= hour) {
+			if (!event.getTimeSection().before(timeSection)) {
 				return i;
 			}
 			i++;
 		}
-
-		// If we got here it means the user selected an hour later then the last event. In this case,
-		// return the last position (which is i-1, since it's a zero based count)
 		return -1;
 	}
 
@@ -312,18 +330,10 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 			if (!Dates.isSameDate(date, startTime)) {
 				continue;
 			}
-			// Convert the event start time to hourly time sections, and duplicate it if needed (e.g. if an event started at 13:30 and ended at 15:00, its
-			// time sections are 13:00 and 14:00).
-			// We subtract an extra minute since the first minute of the next hour is considered this hour. For example, an event
-			// ending at 12:00 is only considered to run during hour 11:00.
-			int eventDurationInHours = (int) ((event.getEndTime().getTime() - Dates.MILLISECONDS_IN_MINUTE - event.getStartTime().getTime()) / Dates.MILLISECONDS_IN_HOUR) + 1;
-			for (int i = 0; i < eventDurationInHours; i++) {
-				Calendar calendar = Calendar.getInstance();
-				calendar.setTime(event.getStartTime());
-				calendar.add(Calendar.HOUR_OF_DAY, i);
-				calendar.clear(Calendar.MINUTE);
-				programmeEvents.add(new ProgrammeConventionEvent(event, calendar));
-			}
+			Calendar startHour = Calendar.getInstance();
+			startHour.setTime(event.getStartTime());
+			startHour.clear(Calendar.MINUTE);
+			programmeEvents.add(new ProgrammeConventionEvent(event, startHour));
 		}
 
 		Collections.sort(programmeEvents, new Comparator<ProgrammeConventionEvent>() {

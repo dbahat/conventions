@@ -13,7 +13,7 @@ import amai.org.conventions.utils.Dates;
 
 public class EventTimeViewHolder extends RecyclerView.ViewHolder {
     private TextView timeTextView;
-    private int currentHour;
+    private Calendar time;
 
     public EventTimeViewHolder(View itemView) {
         super(itemView);
@@ -22,7 +22,7 @@ public class EventTimeViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void setTime(Date date) {
-        setTime(date, "HH:SS");
+        setTime(date, "HH:00");
     }
 
     public void setTime(Date date, String timeFormat) {
@@ -30,10 +30,10 @@ public class EventTimeViewHolder extends RecyclerView.ViewHolder {
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
-        currentHour = calendar.get(Calendar.HOUR_OF_DAY);
+        time = calendar;
     }
 
-    public int getCurrentHour() {
-        return currentHour;
+    public Calendar getTime() {
+        return time;
     }
 }

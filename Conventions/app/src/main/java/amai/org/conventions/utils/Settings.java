@@ -4,12 +4,13 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import amai.org.conventions.map.AggregatedEventTypes;
 import amai.org.conventions.model.conventions.Convention;
+import sff.org.conventions.R;
 
 public class Settings {
 	public static final int NO_PUSH_NOTIFICATION_SEEN = -1;
@@ -21,6 +22,7 @@ public class Settings {
 	private static final String WAS_SETTINGS_POPUP_DISPLAYED = "WasSettingsPopupDisplayed";
 	private static final String LAST_SEEN_PUSH_NOTIFICATION_ID = "LastSeenPushNotificationId";
 	private static final String ADD_MISSING_NOTIFICATIONS = "AddMissingNotifications";
+	private static final String PROGRAMME_SEARCH_CATEGORIES = "ProgrammeSearchCategories";
     private SharedPreferences sharedPreferences;
 
     public Settings(Context context) {
@@ -68,25 +70,22 @@ public class Settings {
 		sharedPreferences.edit().putInt(LAST_SEEN_PUSH_NOTIFICATION_ID, notificationId).apply();
 	}
 
-	// TODO remove for next convention - this is a workaround for a bug that event alarms were not added
-	public boolean shouldAddMissingNotifications() {
-		return sharedPreferences.getBoolean(ADD_MISSING_NOTIFICATIONS, true);
-	}
-
-	public void disableAddMissingNotifications() {
-		sharedPreferences.edit().putBoolean(ADD_MISSING_NOTIFICATIONS, false).apply();
-	}
-
-	private static final String PROGRAMME_SEARCH_CATEGORIES = "123";
-
 	public void setProgrammeSearchCategories(List<String> categories) {
 		sharedPreferences.edit().putStringSet(PROGRAMME_SEARCH_CATEGORIES, new HashSet<>(categories)).apply();
 	}
 
-	public List<String> getProgrammeSearchCategories() {
+	public List<String> getProgrammeSearchCategories(Context context) {
 		Set<String> categories = sharedPreferences.getStringSet(PROGRAMME_SEARCH_CATEGORIES, null);
 		if (categories == null) {
-			return Arrays.asList("הרצאות", "הקרנות ומופעים", "אחר");
+			List<String> allCategories = CollectionUtils.map(new AggregatedEventTypes().getAggregatedEventTypes(),
+				new CollectionUtils.Mapper<AggregatedEventTypes.AggregatedType, String>() {
+					@Override
+					public String map(AggregatedEventTypes.AggregatedType item) {
+						return item.getName();
+					}
+			});
+			allCategories.add(context.getString(R.string.other));
+			return allCategories;
 		}
 		return new ArrayList<>(categories);
 	}

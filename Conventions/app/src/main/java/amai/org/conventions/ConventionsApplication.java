@@ -117,16 +117,6 @@ public class ConventionsApplication extends Application {
      * Since the Android AlarmManager gets reset whenever the device reboots, we re-schedule all the notifications when the app is launched.
      */
     private void restoreAlarmConfiguration() {
-	    // TODO remove for next convention - workaround for a bug that notifications were not set when adding event to favorites
-	    if (settings.shouldAddMissingNotifications()) {
-		    for (ConventionEvent event : Convention.getInstance().getEvents()) {
-			    if (event.isAttending()) {
-			        alarmScheduler.scheduleDefaultEventAlarms(event);
-			    }
-		    }
-		    settings.disableAddMissingNotifications();
-	    }
-
         for (ConventionEvent event : Convention.getInstance().getEvents()) {
             restoreAlarmConfiguration(event, event.getUserInput().getEventAboutToStartNotification());
 	        restoreAlarmConfiguration(event, event.getUserInput().getEventFeedbackReminderNotification());
