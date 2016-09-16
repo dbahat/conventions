@@ -4,7 +4,6 @@
     <color name="yellow_medium">#f6eace</color>
     <color name="brown">#bf9200</color>
     <color name="brown_bright">#d8ac00</color>
-    <color name="brown_dark">#ab7e00</color>
-    <color name="brown_dark2">#8c6e26</color>
-    <color name="brown_dark3">#886100</color>
+    <color name="brown_dark">#8c6300</color>
+    <color name="brown_darker">#7a5700</color>
 </resources>

@@ -12,7 +12,7 @@
         <item name="notificationSmallIcon">@drawable/icon2016_notification_small</item>
         <item name="notificationLargeIcon">@mipmap/icon2016_app_icon</item>
 
-        <item name="toolbarBackground">@color/brown_dark2</item>
+        <item name="toolbarBackground">@color/brown_dark</item>
         <item name="toolbarLogo">@drawable/ic_menu_white_24dp</item>
         <item name="toolbarLogoType">bitmap</item>
         <item name="toolbarIconAccentColor">@color/yellow_bright</item>
@@ -34,7 +34,7 @@
 
         <item name="floorBackground">@color/white</item>
         <item name="standIconColor">@color/brown</item>
-        <item name="standsTypeTitleColor">@color/brown_dark2</item>
+        <item name="standsTypeTitleColor">@color/brown_dark</item>
 
         <item name="nextEventStartTimeBackground">@color/yellow_medium</item>
         <item name="nextEventStartTimeTextColor">@color/black</item>
@@ -42,9 +42,9 @@
         <!-- Note: if you change the theme, these values should be copied manually to files
          drawable\highlighted_button.xml and drawable/circular_progress_bar.xml because
          prior to L it was not supported to reference theme attributes from a drawable xml -->
-        <item name="buttonColor">@color/brown_dark2</item>
+        <item name="buttonColor">@color/brown_dark</item>
         <item name="buttonColorPressed">@color/brown</item>
-        <item name="feedbackAnswerButtonColor">@color/brown_dark2</item>
+        <item name="feedbackAnswerButtonColor">@color/brown_dark</item>
         <item name="feedbackAnswerButtonSelectedColor">@color/brown_bright</item>
     </style>
 

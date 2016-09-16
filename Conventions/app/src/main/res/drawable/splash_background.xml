@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" android:opacity="opaque">
     <item android:drawable="@color/white"/>
-    <item android:top="@dimen/status_bar_height" android:drawable="@color/brown_dark2"/>
+    <item android:top="@dimen/status_bar_height" android:drawable="@color/brown_dark"/>
     <item android:top="@dimen/status_bar_and_toolbar_and_tabs_height" android:drawable="@color/white"/>
     <item android:top="@dimen/status_bar_and_toolbar_and_tabs_height">
         <nine-patch android:src="@drawable/bottom_shadow"/>

@@ -22,7 +22,7 @@
 
         <item name="navigationPopupNotSelectedColor">@android:color/black</item>
 
-        <item name="eventTimeHeaderColor">@color/very_light_gray</item>
+        <item name="eventTimeHeaderColor">@color/ultra_light_gray2</item>
         <item name="eventTimeHeaderBackground">@drawable/event_time_header_background</item>
 
         <item name="updateTimeColor">@color/ultra_light_gray</item>
