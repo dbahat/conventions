@@ -15,7 +15,7 @@
         <item name="toolbarBackground">@color/brown_dark</item>
         <item name="toolbarLogo">@drawable/ic_menu_white_24dp</item>
         <item name="toolbarLogoType">bitmap</item>
-        <item name="toolbarIconAccentColor">@color/yellow_bright</item>
+        <item name="toolbarIconAccentColor">@color/aquamarine</item>
         <item name="navigationPopupSelectedColor">@color/brown_dark</item>
 
         <item name="snackbarActionColor">@color/brown_bright</item>
