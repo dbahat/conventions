@@ -37,7 +37,7 @@ import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.FeedbackActivity;
 import amai.org.conventions.HomeActivity;
 import amai.org.conventions.ImageHandler;
-import sff.org.conventions.R;
+import amai.org.conventions.SplashActivity;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.AnimationPopupWindow;
 import amai.org.conventions.events.activities.EventActivity;
@@ -48,17 +48,18 @@ import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.settings.SettingsActivity;
 import amai.org.conventions.updates.UpdatesActivity;
 import amai.org.conventions.utils.Views;
+import sff.org.conventions.R;
 
 
 public abstract class NavigationActivity extends AppCompatActivity {
 	public static final String EXTRA_NAVIGATED_FROM_HOME = "ExtraNavigatedFromHome";
-	private static final String EXTRA_SHOW_HOME_SCREEN_ON_BACK = "ExtraShowHomeScreenOnBack";
+	public static final String EXTRA_EXIT_ON_BACK = "ExtraExitOnBack";
 
 	private static boolean showLogoGlow = true;
 	private boolean navigatedFromHome;
     private Toolbar navigationToolbar;
     private AnimationPopupWindow popup;
-	private boolean showHomeScreenOnBack;
+	private boolean exitOnBack;
 	private FrameLayout contentContainer;
 	private FloatingActionButton actionButton;
 
@@ -68,7 +69,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_navigation);
 
 	    navigatedFromHome = getIntent().getBooleanExtra(EXTRA_NAVIGATED_FROM_HOME, false);
-	    showHomeScreenOnBack = getIntent().getBooleanExtra(EXTRA_SHOW_HOME_SCREEN_ON_BACK, false);
+	    exitOnBack = getIntent().getBooleanExtra(EXTRA_EXIT_ON_BACK, false);
 
 	    navigationToolbar = (Toolbar) findViewById(R.id.navigation_toolbar);
         setupActionBar(navigationToolbar);
@@ -348,13 +349,14 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		Intent intent = new Intent(this, activityToNavigateTo);
 		if (clearBackStack) {
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-			// If the user presses back when the back stack is clear we want to show the home screen
-			// instead of existing.
+			// If the user presses back when the back stack is clear we want to exit the application.
+			// For some reason the splash activity remains on the back stack even with these flags
+			// (it's probably a good thing due to the issue described in SplashActivity)
+			// so we must explicitly handle the back in this case.
 			// This flag only has a meaning if we're navigating to a NavigationActivity.
-			// This is only relevant when we have a home activity!
-//			if (NavigationActivity.class.isAssignableFrom(activityToNavigateTo)) {
-//				intent.putExtra(EXTRA_SHOW_HOME_SCREEN_ON_BACK, true);
-//			}
+			if (NavigationActivity.class.isAssignableFrom(activityToNavigateTo)) {
+				intent.putExtra(EXTRA_EXIT_ON_BACK, true);
+			}
 			finish();
 		}
 
@@ -379,8 +381,17 @@ public abstract class NavigationActivity extends AppCompatActivity {
 
 	@Override
 	public void onBackPressed() {
-		if (showHomeScreenOnBack) {
-			navigateToActivity(HomeActivity.class, true, null);
+		if (exitOnBack) {
+			// We want to exist when pressing back because the SplashActivity is still in the back stack
+			// and will be displayed if we don't tell it to finish. See SplashActivity onCreate for the
+			// reason it's in the back stack instead of being finished.
+			Bundle bundle = new Bundle();
+			bundle.putBoolean(SplashActivity.EXTRA_FINISH, true);
+			Intent intent = new Intent(this, SplashActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+			finish();
+			intent.putExtras(bundle);
+			startActivity(intent);
 			return;
 		}
 		super.onBackPressed();
