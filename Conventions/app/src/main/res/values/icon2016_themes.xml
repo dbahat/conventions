@@ -20,15 +20,6 @@
 
         <item name="snackbarActionColor">@color/brown_bright</item>
 
-        <item name="homeScreenLayout">@layout/activity_home_cami2016</item>
-        <!-- Note: this isn't really the top point of the about screen since we didn't give a bottom
-             view so it will be wrap_content -->
-        <item name="aboutTopView">@id/home_buttons_bottom</item><!-- unchanged -->
-        <item name="aboutLeftView">@id/home_buttons_bottom</item><!-- unchanged -->
-        <item name="aboutRightView">@id/home_buttons_bottom</item><!-- unchanged -->
-
-        <item name="amaiLogo">@drawable/amai_logo_black</item><!-- unchanged -->
-
         <item name="eventTimeDefaultTextColor">@color/black</item>
         <item name="eventTimeDefaultBackgroundColor">@color/ultra_light_gray2</item>
 

@@ -75,7 +75,7 @@ public class ApplicationInitializer {
 
             @Override
             protected void onPostExecute(PlayServicesInstallation.CheckResult checkResult) {
-                // We use the current activity context and not HomeActivity because it's possible the user
+                // We use the current activity context and not the initial activity because it's possible the user
                 // already navigated from it. We can't use a destroyed activity to display a dialog
                 // since it causes an exception.
                 Context currentContext = ConventionsApplication.getCurrentContext();

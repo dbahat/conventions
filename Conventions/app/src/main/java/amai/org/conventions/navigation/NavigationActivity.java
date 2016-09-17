@@ -35,7 +35,6 @@ import java.util.List;
 import amai.org.conventions.ArrivalMethodsActivity;
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.FeedbackActivity;
-import amai.org.conventions.HomeActivity;
 import amai.org.conventions.ImageHandler;
 import amai.org.conventions.SplashActivity;
 import amai.org.conventions.ThemeAttributes;
@@ -97,7 +96,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	}
 
 	private boolean shouldShowLogoGlow() {
-		return showLogoGlow && navigatedFromHome && HomeActivity.getNumberOfTimesNavigated() > 1 && !ConventionsApplication.settings.wasNavigationPopupOpened();
+		return false;
 	}
 
 	private AnimationPopupWindow createNavigationPopup() {
