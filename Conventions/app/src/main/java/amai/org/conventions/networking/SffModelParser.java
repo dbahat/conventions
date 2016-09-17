@@ -67,8 +67,7 @@ public class SffModelParser implements ModelParser {
 	        // We convert the categories to a single string because there is only 1 category
 	        // except in the case of attractions/fandom that always come together
             JsonArray categories = eventObj.get("categories").getAsJsonArray();
-	        List<String> stringCategories = convertToStringList(categories);
-            String category = categories.size() > 0 ? TextUtils.join(", ", stringCategories) : "";
+            String category = categories.size() > 0 ? categories.get(0).getAsString() : "";
 
 	        // Tags are returned as an object: {1: "tag1", 2: "tag2"} or a string: "tag1"
 	        List<String> tags;
@@ -117,17 +116,6 @@ public class SffModelParser implements ModelParser {
 		// Using deprecated fromHtml() overload, since fromHtml(string, int) is only supported from api level 17
 		// noinspection deprecation
 		return Html.fromHtml(string).toString();
-	}
-
-	@NonNull
-	private List<String> convertToStringList(JsonArray jsonStringArray) {
-		List<String> stringList = new LinkedList<>();
-		for (JsonElement jsonStringElement : jsonStringArray) {
-			if (jsonStringElement != null && jsonStringElement.isJsonPrimitive() && !TextUtils.isEmpty(jsonStringElement.getAsString())) {
-			    stringList.add(decodeHtml(jsonStringElement.getAsString()));
-			}
-		}
-		return stringList;
 	}
 
 	@NonNull

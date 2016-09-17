@@ -29,6 +29,7 @@ import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.Floor;
 import amai.org.conventions.model.Hall;
 import amai.org.conventions.model.MapLocation;
+import amai.org.conventions.model.SearchFilter;
 import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.model.Update;
@@ -383,6 +384,66 @@ public abstract class Convention implements Serializable {
 		Hall hall = new Hall().withName(name).withOrder(getHighestHallOrder() + 1);
 		halls.add(hall);
 		return hall;
+	}
+
+	public List<SearchFilter> getEventTypesSearchFilters() {
+		List<SearchFilter> filters = CollectionUtils.map(events, new CollectionUtils.Mapper<ConventionEvent, SearchFilter>() {
+			@Override
+			public SearchFilter map(ConventionEvent event) {
+				return new SearchFilter().withName(event.getType().getDescription()).withType(SearchFilter.Type.EventType);
+			}
+		});
+
+		Collections.sort(filters, new Comparator<SearchFilter>() {
+			@Override
+			public int compare(SearchFilter searchFilter, SearchFilter other) {
+				return searchFilter.getName().compareTo(other.getName());
+			}
+		});
+
+		return CollectionUtils.unique(filters, new CollectionUtils.EqualityPredicate<SearchFilter>() {
+			@Override
+			public boolean equals(SearchFilter lhs, SearchFilter rhs) {
+				return lhs.getName().equals(rhs.getName());
+			}
+		});
+	}
+
+	public List<SearchFilter> getCategorySearchFilters() {
+		List<SearchFilter> filters = CollectionUtils.map(events, new CollectionUtils.Mapper<ConventionEvent, SearchFilter>() {
+			@Override
+			public SearchFilter map(ConventionEvent event) {
+				return new SearchFilter().withName(event.getCategory()).withType(SearchFilter.Type.Category);
+			}
+		});
+
+		Collections.sort(filters, new Comparator<SearchFilter>() {
+			@Override
+			public int compare(SearchFilter searchFilter, SearchFilter other) {
+				return searchFilter.getName().compareTo(other.getName());
+			}
+		});
+
+		return CollectionUtils.unique(filters, new CollectionUtils.EqualityPredicate<SearchFilter>() {
+			@Override
+			public boolean equals(SearchFilter lhs, SearchFilter rhs) {
+				return lhs.getName().equals(rhs.getName());
+			}
+		});
+	}
+
+	public List<SearchFilter> getKeywordsSearchFilters() {
+		Set<String> allTags = new HashSet<>();
+		for (ConventionEvent event : events) {
+			allTags.addAll(event.getTags());
+		}
+
+		return CollectionUtils.map(new ArrayList<>(allTags), new CollectionUtils.Mapper<String, SearchFilter>() {
+			@Override
+			public SearchFilter map(String tag) {
+				return new SearchFilter().withName(tag).withType(SearchFilter.Type.Tag);
+			}
+		});
 	}
 
 	public List<String> getAggregatedSearchCategories() {
