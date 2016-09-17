@@ -20,6 +20,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration;
+import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersTouchListener;
 import com.tonicartos.widget.stickygridheaders.StickyGridHeadersGridView;
 
 import java.io.Serializable;
@@ -216,7 +217,17 @@ public class ProgrammeSearchActivity extends NavigationActivity {
         adapter = new SwipeableEventsViewAdapter(Collections.<ConventionEvent>emptyList(), recyclerView);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.addItemDecoration(new StickyRecyclerHeadersDecoration(adapter));
+        StickyRecyclerHeadersDecoration headersDecoration = new StickyRecyclerHeadersDecoration(adapter);
+        recyclerView.addItemDecoration(headersDecoration);
+
+        StickyRecyclerHeadersTouchListener headersTouchListener = new StickyRecyclerHeadersTouchListener(recyclerView, headersDecoration);
+        headersTouchListener.setOnHeaderClickListener(new StickyRecyclerHeadersTouchListener.OnHeaderClickListener() {
+            @Override
+            public void onHeaderClick(View header, int position, long headerId) {
+                // make headers non-clickable
+            }
+        });
+        recyclerView.addOnItemTouchListener(headersTouchListener);
     }
 
     private void initializeKeywordFilter() {
