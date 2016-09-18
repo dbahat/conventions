@@ -11,6 +11,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PictureDrawable;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
@@ -32,6 +33,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import amai.org.conventions.ApplicationInitializer;
 import amai.org.conventions.ArrivalMethodsActivity;
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.FeedbackActivity;
@@ -52,6 +54,7 @@ import sff.org.conventions.R;
 
 public abstract class NavigationActivity extends AppCompatActivity {
 	public static final String EXTRA_NAVIGATED_FROM_HOME = "ExtraNavigatedFromHome";
+	public static final String EXTRA_INITIALIZE = "ExtraInitialize";
 	public static final String EXTRA_EXIT_ON_BACK = "ExtraExitOnBack";
 
 	private static boolean showLogoGlow = true;
@@ -69,6 +72,11 @@ public abstract class NavigationActivity extends AppCompatActivity {
 
 	    navigatedFromHome = getIntent().getBooleanExtra(EXTRA_NAVIGATED_FROM_HOME, false);
 	    exitOnBack = getIntent().getBooleanExtra(EXTRA_EXIT_ON_BACK, false);
+
+		if (getIntent().getBooleanExtra(EXTRA_INITIALIZE, false) &&
+				!(savedInstanceState != null && savedInstanceState.getBoolean(EXTRA_INITIALIZE, true))) {
+			new ApplicationInitializer().initialize(this.getApplicationContext());
+		}
 
 	    navigationToolbar = (Toolbar) findViewById(R.id.navigation_toolbar);
         setupActionBar(navigationToolbar);
@@ -90,6 +98,12 @@ public abstract class NavigationActivity extends AppCompatActivity {
 			}
 		});
     }
+
+	@Override
+	public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+		outState.putBoolean(EXTRA_INITIALIZE, false); // Prevent re-initializing
+		super.onSaveInstanceState(outState, outPersistentState);
+	}
 
 	protected void onNavigationButtonClicked() {
 		// Children can inherit this

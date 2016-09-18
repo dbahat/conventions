@@ -75,7 +75,7 @@ public class ConventionsApplication extends Application {
 		    public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
 			    // Important - only keep our activities here! Update when adding new activities if
 			    // they aren't NavigationActivity!
-			    if (activity instanceof NavigationActivity) {
+			    if (activity instanceof NavigationActivity || activity instanceof SplashActivity) {
 			        currentContext = activity;
 			    }
 		    }

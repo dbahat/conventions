@@ -23,10 +23,9 @@ public class SplashActivity extends AppCompatActivity {
 			return;
 		}
 
-		new ApplicationInitializer().initialize(this.getApplicationContext());
-
 		Intent intent = new Intent(SplashActivity.this, ProgrammeActivity.class);
 		Bundle extras = new Bundle();
+		extras.putBoolean(NavigationActivity.EXTRA_INITIALIZE, true);
 		extras.putBoolean(NavigationActivity.EXTRA_EXIT_ON_BACK, true);
 		intent.putExtras(extras);
 		startActivity(intent);
