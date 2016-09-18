@@ -2,6 +2,7 @@ package amai.org.conventions.model;
 
 import android.content.Context;
 import android.text.Html;
+import android.text.TextUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -232,6 +233,10 @@ public class ConventionEvent implements Serializable {
 	public ConventionEvent withTags(List<String> tags) {
 		setTags(tags);
 		return this;
+	}
+
+	public String getTagsAsString() {
+		return TextUtils.join(", ", getTags());
 	}
 
 	public void setPrice(int price) {

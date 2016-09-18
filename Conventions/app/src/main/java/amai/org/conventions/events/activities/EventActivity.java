@@ -472,7 +472,7 @@ public class EventActivity extends NavigationActivity {
 	    if (eventTags == null || eventTags.size() == 0) {
 		    tags.setVisibility(View.GONE);
 	    } else {
-		    tags.setText(getString(R.string.tags, TextUtils.join(", ", eventTags)));
+		    tags.setText(getString(R.string.tags, event.getTagsAsString()));
 	    }
 
 	    setupFeedback(event);

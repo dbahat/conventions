@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.text.SpannableString;
@@ -20,14 +21,14 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import sff.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
-import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.Feedback;
 import amai.org.conventions.model.FeedbackQuestion;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Strings;
+import sff.org.conventions.R;
 
 public class EventView extends FrameLayout {
 
@@ -47,6 +48,7 @@ public class EventView extends FrameLayout {
 	// Used for keyword highlighting - see setKeywordsHighlighting
     private final TextView searchDescription;
 	private String eventDescriptionContent;
+	private String eventTags;
 
 	public EventView(Context context) {
 		this(context, null);
@@ -91,6 +93,7 @@ public class EventView extends FrameLayout {
 		    setFeedbackIconFromEvent(event);
 		    setAlarmIconFromEvent(event);
 		    eventDescriptionContent = event.getPlainTextDescription();
+		    eventTags = getContext().getString(R.string.tags, event.getTagsAsString());
 	    }
 
         searchDescription.setText("");
@@ -273,6 +276,7 @@ public class EventView extends FrameLayout {
         boolean isAnyDescriptionKeywordHighlighted = false;
 
 	    String filteredDescriptionText = eventDescriptionContent;
+	    String filteredTagsText = eventTags;
 
         for (String keyword : keywords) {
             if (keyword.length() > 0) {
@@ -282,35 +286,51 @@ public class EventView extends FrameLayout {
                 boolean didHighlightLectureName = tryHighlightKeywordInTextView(lecturerName, lowerCaseKeyword);
                 boolean didHighlightHallName = tryHighlightKeywordInTextView(hallName, lowerCaseKeyword);
 
-                // If the keyword is in the description, hide the lecturer name and hall name and show the description text next to the keyword instead
-                // (assuming there are no highlighted keywords in the views we hid)
+                // If the keyword is in the description or tags, hide the lecturer name and hall name and show the
+	            // description/tags text next to the keyword instead (assuming there are no highlighted keywords in the views we hid)
                 if (!didHighlightLectureName && !didHighlightHallName) {
-	                if (filteredDescriptionText.toLowerCase().contains(lowerCaseKeyword)) {
+	                boolean highlightDescription = true;
+	                if (filteredTagsText.toLowerCase().contains(lowerCaseKeyword)) {
+		                if (!isAnyDescriptionKeywordHighlighted) {
+			                filteredTagsText = showBottomHighlightedText(filteredTagsText, lowerCaseKeyword);
+			                isAnyDescriptionKeywordHighlighted = true;
+		                }
+	                } else if (filteredDescriptionText.toLowerCase().contains(lowerCaseKeyword)) {
 	                    if (!isAnyDescriptionKeywordHighlighted) {
-		                    bottomLayout.setVisibility(GONE);
-		                    searchDescription.setVisibility(VISIBLE);
-		                    searchDescription.setText(Strings.snipTextNearKeyword(filteredDescriptionText, lowerCaseKeyword));
-		                    filteredDescriptionText = searchDescription.getText().toString();
+		                    filteredDescriptionText = showBottomHighlightedText(filteredDescriptionText, lowerCaseKeyword);
 	                        isAnyDescriptionKeywordHighlighted = true;
 	                    }
-	                    tryHighlightKeywordInTextView(searchDescription, lowerCaseKeyword);
+	                } else {
+		                highlightDescription = false;
+	                }
+	                if (highlightDescription) {
+                        tryHighlightKeywordInTextView(searchDescription, lowerCaseKeyword);
 	                }
                 }
             }
         }
     }
 
-    private boolean tryHighlightKeywordInTextView(TextView textView, String keyword) {
+	@NonNull
+	private String showBottomHighlightedText(String text, String lowerCaseKeyword) {
+		bottomLayout.setVisibility(GONE);
+		searchDescription.setVisibility(VISIBLE);
+		searchDescription.setText(Strings.snipTextNearKeyword(text, lowerCaseKeyword));
+		text = searchDescription.getText().toString();
+		return text;
+	}
+
+	private boolean tryHighlightKeywordInTextView(TextView textView, String keyword) {
         CharSequence originalText = textView.getText();
 
         String textToHighlight = originalText.toString().toLowerCase();
-        SpannableString highlightedText = originalText instanceof SpannableString
-                ? (SpannableString) originalText
-                : new SpannableString(originalText);
-
         if (!textToHighlight.contains(keyword)) {
             return false;
         }
+
+	    SpannableString highlightedText = originalText instanceof SpannableString
+			    ? (SpannableString) originalText
+			    : new SpannableString(originalText);
 
         int currentKeywordIndex = textToHighlight.indexOf(keyword);
         while (currentKeywordIndex != -1) {

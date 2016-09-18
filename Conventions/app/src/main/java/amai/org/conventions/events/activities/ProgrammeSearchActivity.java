@@ -396,7 +396,8 @@ public class ProgrammeSearchActivity extends NavigationActivity {
         return event.getTitle().toLowerCase().contains(keyword)
                 || event.getLecturer().toLowerCase().contains(keyword)
                 || event.getHall().getName().toLowerCase().contains(keyword)
-                || filteredEventDescription.toLowerCase().contains(keyword);
+                || filteredEventDescription.toLowerCase().contains(keyword)
+		        || event.getTagsAsString().toLowerCase().contains(keyword);
     }
 
     public void onFilterClicked(View view) {
