@@ -9,13 +9,14 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import amai.org.conventions.AboutActivity;
 import amai.org.conventions.ArrivalMethodsActivity;
 import amai.org.conventions.FeedbackActivity;
-import sff.org.conventions.R;
 import amai.org.conventions.events.activities.ProgrammeActivity;
 import amai.org.conventions.map.MapActivity;
 import amai.org.conventions.settings.SettingsActivity;
 import amai.org.conventions.updates.UpdatesActivity;
+import sff.org.conventions.R;
 
 /**
  * Container class for accessing data regarding the main navigation pages.
@@ -70,6 +71,7 @@ public class NavigationPages {
         pageIdToFragmentMapInOrder.put(R.string.arrival_methods, ArrivalMethodsActivity.class);
 	    pageIdToFragmentMapInOrder.put(R.string.feedback, FeedbackActivity.class);
 	    pageIdToFragmentMapInOrder.put(R.string.settings, SettingsActivity.class);
+	    pageIdToFragmentMapInOrder.put(R.string.about, AboutActivity.class);
 
         return pageIdToFragmentMapInOrder;
     }

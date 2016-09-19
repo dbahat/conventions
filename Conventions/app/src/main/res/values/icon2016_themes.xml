@@ -8,9 +8,10 @@
         <item name="colorAccent">@color/brown</item>
         <!-- This should be synched with the color in event_time_header_background -->
         <item name="android:colorBackground">@color/white</item>
-
         <item name="notificationSmallIcon">@drawable/icon2016_notification_small</item>
         <item name="notificationLargeIcon">@mipmap/icon2016_app_icon</item>
+
+        <item name="aboutLogo">@drawable/icon_logo</item>
 
         <item name="toolbarBackground">@color/brown_dark</item>
         <item name="toolbarLogo">@drawable/ic_menu_white_24dp</item>

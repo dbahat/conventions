@@ -26,7 +26,7 @@
         <attr name="aboutLeftView" format="integer"/>
         <attr name="aboutRightView" format="integer"/>
         <!-- About screen -->
-        <attr name="amaiLogo" format="integer"/>
+        <attr name="aboutLogo" format="integer"/>
         <!-- Event Time -->
         <attr name="eventTypeEndedColor" format="color|reference"/>
         <attr name="eventTypeCurrentColor" format="color|reference"/>
