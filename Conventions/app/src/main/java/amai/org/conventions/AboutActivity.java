@@ -12,10 +12,6 @@ import sff.org.conventions.R;
 
 
 public class AboutActivity extends NavigationActivity {
-	private final static String linksText = "<p><a href=\"http://2016.iconfestival.org.il/\">לאתר הפסטיבל</a></p>" ;
-
-	private final static String aboutAppText = "האפליקציה פותחה עבור פסטיבל אייקון.<br/>בקשות והצעות ניתן לכתוב <a href=\"market://details?id=sff.org.conventions\">בדף האפליקציה בחנות</a>.";
-
 	private WindowManager.LayoutParams layoutParams = null;
 
 	@Override
@@ -29,11 +25,11 @@ public class AboutActivity extends NavigationActivity {
 		aboutView.setMovementMethod(LinkMovementMethod.getInstance());
 
 		TextView linksView = (TextView) findViewById(R.id.about_links);
-		linksView.setText(Html.fromHtml(linksText));
+		linksView.setText(Html.fromHtml(getString(R.string.about_links)));
 		linksView.setMovementMethod(LinkMovementMethod.getInstance());
 
 		TextView aboutAppView = (TextView) findViewById(R.id.about_app_content);
-		aboutAppView.setText(Html.fromHtml(aboutAppText));
+		aboutAppView.setText(Html.fromHtml(getString(R.string.about_app_content)));
 		aboutAppView.setMovementMethod(LinkMovementMethod.getInstance());
 
 		TextView aboutAppVersion = (TextView) findViewById(R.id.about_app_version);
