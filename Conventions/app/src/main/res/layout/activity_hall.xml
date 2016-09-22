@@ -9,6 +9,7 @@
     <android.support.design.widget.TabLayout
         android:id="@+id/hall_days_tabs"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        style="@style/TabStyle"
         android:background="?toolbarBackground"
         app:tabGravity="fill"
         android:layout_width="match_parent"

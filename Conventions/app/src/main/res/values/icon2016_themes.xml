@@ -21,8 +21,9 @@
 
         <item name="snackbarActionColor">@color/brown_bright</item>
 
+        <item name="eventTimeHeaderColor">@color/very_light_blue</item>
         <item name="eventTimeDefaultTextColor">@color/black</item>
-        <item name="eventTimeDefaultBackgroundColor">@color/ultra_light_gray2</item>
+        <item name="eventTimeDefaultBackgroundColor">@color/very_light_blue</item>
 
         <item name="floorBackground">@color/white</item>
         <item name="standIconColor">@color/brown</item>

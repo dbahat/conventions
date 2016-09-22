@@ -5,6 +5,10 @@
     <style name="ToolbarTitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">20sp</item>
     </style>
+    
+    <style name="TabStyle" parent="Base.Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">@color/brown_bright</item>
+    </style>
 
     <style name="DialogTitle" parent="@style/RtlOverlay.DialogWindowTitle.AppCompat" />
 
