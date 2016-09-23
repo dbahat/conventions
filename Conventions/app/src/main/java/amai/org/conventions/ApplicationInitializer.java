@@ -7,11 +7,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 
-import com.facebook.FacebookRequestError;
 import com.microsoft.windowsazure.notifications.NotificationsManager;
 
 import java.util.Collections;
@@ -32,12 +30,13 @@ import amai.org.conventions.utils.CollectionUtils;
 import sff.org.conventions.R;
 
 public class ApplicationInitializer {
+	private static final int NEW_UPDATES_NOTIFICATION_ID = 75457;
 
     public void initialize(final Context context) {
 
         PreferenceManager.setDefaultValues(context, R.xml.settings_preferences, false);
 
-        // TODO - refresh the model / facebook only if certain time threshold has passed since last refresh
+        // TODO - refresh the model / updates only if certain time threshold has passed since last refresh
         refreshModel();
         initializeAzureNotificationHubIfPossible(context);
         refreshUpdatesAndNotifyIfNewUpdatesAreAvailable(context);
@@ -121,75 +120,64 @@ public class ApplicationInitializer {
     }
 
     private void refreshUpdatesAndNotifyIfNewUpdatesAreAvailable(final Context context) {
-        new Handler().post(new Runnable() {
-            private static final int NEW_UPDATES_NOTIFICATION_ID = 75457;
+        // Updates refresher must be called from the UI thread
+        final int numberOfUpdatesBeforeRefresh = Convention.getInstance().getUpdates().size();
 
+        // Refresh and ignore all errors
+        UpdatesRefresher.getInstance(context).refreshFromServer(true, new UpdatesRefresher.OnUpdateFinishedListener() {
             @Override
-            public void run() {
-                // Requests to Facebook must be initialized from the UI thread
-                final int numberOfUpdatesBeforeRefresh = Convention.getInstance().getUpdates().size();
-
-                // Refresh and ignore all errors
-                UpdatesRefresher.getInstance(context).refreshFromServer(null, true, new UpdatesRefresher.OnUpdateFinishedListener() {
+            public void onSuccess(int newUpdatesNumber) {
+                List<Update> newUpdates = CollectionUtils.filter(Convention.getInstance().getUpdates(), new CollectionUtils.Predicate<Update>() {
                     @Override
-                    public void onSuccess(int newUpdatesNumber) {
-                        List<Update> newUpdates = CollectionUtils.filter(Convention.getInstance().getUpdates(), new CollectionUtils.Predicate<Update>() {
-                            @Override
-                            public boolean where(Update item) {
-                                return item.isNew();
-                            }
-                        });
-
-                        // We don't want to raise the notification if there are no new updates, or if this is the first time updates are downloaded to cache.
-                        if (newUpdatesNumber > 0 && newUpdates.size() > 0 && numberOfUpdatesBeforeRefresh > 0
-                                && UpdatesRefresher.getInstance(context).shouldEnableNotificationAfterUpdate()) {
-
-                            Update latestUpdate = Collections.max(newUpdates, new Comparator<Update>() {
-                                @Override
-                                public int compare(Update lhs, Update rhs) {
-                                    return lhs.getDate().compareTo(rhs.getDate());
-                                }
-                            });
-
-                            String notificationTitle = newUpdates.size() == 1
-                                    ? context.getString(R.string.new_update)
-                                    : context.getString(R.string.new_updates, newUpdates.size());
-
-                            String notificationMessage = latestUpdate.getText().substring(0, Math.min(200, latestUpdate.getText().length())) + "...";
-
-                            // The user might have already navigated away from the home activity
-                            Context currentContext = ConventionsApplication.getCurrentContext();
-                            if (currentContext == null) {
-                                return;
-                            }
-                            NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-                            Intent intent = new Intent(currentContext, UpdatesActivity.class);
-                            Notification.Builder notificationBuilder = new Notification.Builder(currentContext)
-                                    .setSmallIcon(ThemeAttributes.getResourceId(currentContext, R.attr.notificationSmallIcon))
-                                    .setLargeIcon(ImageHandler.getNotificationLargeIcon(currentContext))
-                                    .setContentTitle(notificationTitle)
-                                    .setContentText(notificationMessage)
-                                    .setAutoCancel(true)
-                                    .setContentIntent(PendingIntent.getActivity(currentContext, 0, intent, 0))
-                                    .setDefaults(Notification.DEFAULT_VIBRATE);
-
-
-                            Notification notification = new Notification.BigTextStyle(notificationBuilder)
-                                    .bigText(notificationMessage)
-                                    .build();
-
-                            notificationManager.notify(NEW_UPDATES_NOTIFICATION_ID, notification);
-                        }
-                    }
-
-                    @Override
-                    public void onError(FacebookRequestError error) {
-                    }
-
-                    @Override
-                    public void onInvalidTokenError() {
+                    public boolean where(Update item) {
+                        return item.isNew();
                     }
                 });
+
+                // We don't want to raise the notification if there are no new updates, or if this is the first time updates are downloaded to cache.
+                if (newUpdatesNumber > 0 && newUpdates.size() > 0 && numberOfUpdatesBeforeRefresh > 0
+                        && UpdatesRefresher.getInstance(context).shouldEnableNotificationAfterUpdate()) {
+
+                    Update latestUpdate = Collections.max(newUpdates, new Comparator<Update>() {
+                        @Override
+                        public int compare(Update lhs, Update rhs) {
+                            return lhs.getDate().compareTo(rhs.getDate());
+                        }
+                    });
+
+                    String notificationTitle = newUpdates.size() == 1
+                            ? context.getString(R.string.new_update)
+                            : context.getString(R.string.new_updates, newUpdates.size());
+
+                    String notificationMessage = latestUpdate.getText().substring(0, Math.min(200, latestUpdate.getText().length())) + "...";
+
+                    // The user might have already navigated away from the home activity
+                    Context currentContext = ConventionsApplication.getCurrentContext();
+                    if (currentContext == null) {
+                        return;
+                    }
+                    NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                    Intent intent = new Intent(currentContext, UpdatesActivity.class);
+                    Notification.Builder notificationBuilder = new Notification.Builder(currentContext)
+                            .setSmallIcon(ThemeAttributes.getResourceId(currentContext, R.attr.notificationSmallIcon))
+                            .setLargeIcon(ImageHandler.getNotificationLargeIcon(currentContext))
+                            .setContentTitle(notificationTitle)
+                            .setContentText(notificationMessage)
+                            .setAutoCancel(true)
+                            .setContentIntent(PendingIntent.getActivity(currentContext, 0, intent, 0))
+                            .setDefaults(Notification.DEFAULT_VIBRATE);
+
+
+                    Notification notification = new Notification.BigTextStyle(notificationBuilder)
+                            .bigText(notificationMessage)
+                            .build();
+
+                    notificationManager.notify(NEW_UPDATES_NOTIFICATION_ID, notification);
+                }
+            }
+
+            @Override
+            public void onError(Exception error) {
             }
         });
     }

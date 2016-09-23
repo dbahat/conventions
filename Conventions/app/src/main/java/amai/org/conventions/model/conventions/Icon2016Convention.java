@@ -40,11 +40,6 @@ public class Icon2016Convention extends SffConvention {
     }
 
     @Override
-    protected String initFacebookFeedPath() {
-        return "/Festival.Icon/posts";
-    }
-
-    @Override
     protected List<Hall> initHalls() {
         return Arrays.asList(
 		        new Hall().withName("סינמטק 1").withOrder(1),
@@ -110,4 +105,13 @@ public class Icon2016Convention extends SffConvention {
             throw new RuntimeException(e);
         }
     }
+
+	@Override
+	protected URL initUpdatesURL() {
+		try {
+			return new URL("https://api.sf-f.org.il/announcements/get.php?slug=icon2016"); // use test_con for tests
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }

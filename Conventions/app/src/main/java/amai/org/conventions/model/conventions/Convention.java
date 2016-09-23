@@ -57,7 +57,7 @@ public abstract class Convention implements Serializable {
 	private String id;
 	private String displayName;
 	private URL modelURL;
-	private String facebookFeedPath;
+	private URL updatesURL;
 	private EventToImageResourceIdMapper imageMapper;
 
 	private double longitude;
@@ -79,8 +79,8 @@ public abstract class Convention implements Serializable {
 		return modelURL;
 	}
 
-	public String getFacebookFeedPath() {
-		return facebookFeedPath;
+	public URL getUpdatesURL() {
+		return updatesURL;
 	}
 
 	public double getLongitude() {
@@ -117,7 +117,7 @@ public abstract class Convention implements Serializable {
 		this.displayName = initDisplayName();
 		this.feedbackRecipient = initFeedbackRecipient();
 		this.modelURL = initModelURL();
-		this.facebookFeedPath = initFacebookFeedPath();
+		this.updatesURL = initUpdatesURL();
 		// This list can be modified
 		this.halls = new ArrayList<>(initHalls());
 		this.map = initMap();
@@ -135,7 +135,7 @@ public abstract class Convention implements Serializable {
 	protected abstract String initDisplayName();
 	protected abstract String initFeedbackRecipient();
 	protected abstract URL initModelURL();
-	protected abstract String initFacebookFeedPath();
+	protected abstract URL initUpdatesURL();
 	protected abstract List<Hall> initHalls();
 	protected abstract ConventionMap initMap();
 	protected abstract double initLongitude();

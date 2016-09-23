@@ -38,7 +38,6 @@ dependencies {
     compile 'se.emilsjolander:stickylistheaders:2.7.0'
     compile 'com.tonicartos:stickygridheaders:1.0.1'
     compile 'com.timehop.stickyheadersrecyclerview:library:0.4.3'
-    compile 'com.facebook.android:facebook-android-sdk:4.2.0'
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.microsoft.azure:notification-hubs-android-sdk:0.4@aar'
     compile 'com.microsoft.azure:azure-notifications-handler:1.0.1@aar'
