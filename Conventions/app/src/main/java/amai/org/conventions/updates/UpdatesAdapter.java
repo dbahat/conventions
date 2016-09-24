@@ -9,14 +9,17 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import amai.org.conventions.utils.Objects;
 import sff.org.conventions.R;
 import amai.org.conventions.model.Update;
 
 public class UpdatesAdapter extends RecyclerView.Adapter<UpdateViewHolder> {
 
-    private List<UpdateViewModel> updates;
+	public static final int UPDATE_NOT_FOUND = -1;
+	private List<UpdateViewModel> updates;
+	private String focusedUpdateId = null;
 
-    public UpdatesAdapter() {
+	public UpdatesAdapter() {
         updates = new ArrayList<>();
     }
 
@@ -66,5 +69,28 @@ public class UpdatesAdapter extends RecyclerView.Adapter<UpdateViewHolder> {
 		    }
 		    ++position;
 	    }
+	    markFocusedUpdate();
     }
+
+	public int focusOn(String updateId) {
+		focusedUpdateId = updateId;
+		return markFocusedUpdate();
+	}
+
+	private int markFocusedUpdate() {
+		if (focusedUpdateId == null) {
+			return UPDATE_NOT_FOUND;
+		}
+		int position = 0;
+		for (UpdateViewModel updateModel : updates) {
+			if (Objects.equals(updateModel.getUpdate().getId(), focusedUpdateId)) {
+				updateModel.setCollapsed(false);
+				updateModel.setFocused(true);
+				notifyItemChanged(position);
+				return position;
+			}
+			++position;
+		}
+		return UPDATE_NOT_FOUND;
+	}
 }

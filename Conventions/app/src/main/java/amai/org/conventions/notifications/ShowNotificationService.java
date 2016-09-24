@@ -17,9 +17,9 @@ import amai.org.conventions.FeedbackActivity;
 import amai.org.conventions.ImageHandler;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.activities.EventActivity;
-import amai.org.conventions.events.activities.ProgrammeActivity;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.conventions.Convention;
+import amai.org.conventions.updates.UpdatesActivity;
 import amai.org.conventions.utils.CollectionUtils;
 import sff.org.conventions.R;
 
@@ -35,6 +35,7 @@ public class ShowNotificationService extends Service {
     public static final String EXTRA_NOTIFICATION_TYPE = "EXTRA_NOTIFICATION_TYPE";
     public static final String EXTRA_MESSAGE = "EXTRA_MESSAGE";
 	public static final String EXTRA_CATEGORY = "EXTRA_CATEGORY";
+	public static final String EXTRA_ID = "EXTRA_ID";
 
     private static final int FILL_CONVENTION_FEEDBACK_NOTIFICATION_ID = 91235;
 	private static final int FILL_EVENTS_FEEDBACK_NOTIFICATION_ID = 95837;
@@ -199,12 +200,14 @@ public class ShowNotificationService extends Service {
             return;
         }
 	    String category = intent.getStringExtra(EXTRA_CATEGORY); // Could be null
+	    String messageId = intent.getStringExtra(EXTRA_ID); // Could be null
 
 	    int notificationId = getNextPushNotificationId();
-	    Intent openAppIntent = new Intent(this, ProgrammeActivity.class)
+	    Intent openAppIntent = new Intent(this, UpdatesActivity.class)
 			    .setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-			    .setAction(Type.Push.toString() + notificationId)
+			    .setAction(Type.Push.toString() + messageId + "_" + notificationId)
 			    .putExtra(PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION_ID, notificationId)  // To prevent seeing the same notification twice
+			    .putExtra(PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION_MESSAGE_ID, messageId)
 			    .putExtra(PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION_MESSAGE, message)
 			    .putExtra(PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION_CATEGORY, category);
 

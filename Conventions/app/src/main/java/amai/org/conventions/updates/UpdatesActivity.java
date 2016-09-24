@@ -1,5 +1,6 @@
 package amai.org.conventions.updates;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -20,6 +21,7 @@ import amai.org.conventions.model.Update;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.networking.UpdatesRefresher;
+import amai.org.conventions.notifications.PushNotificationDialogPresenter;
 import sff.org.conventions.R;
 
 public class UpdatesActivity extends NavigationActivity implements SwipeRefreshLayout.OnRefreshListener {
@@ -82,9 +84,18 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
         initializeUpdatesList(updates);
 	    setUpdatesVisibility();
 	    retrieveUpdatesList(false);
+
+		// Show push notification if it arrived
+		showPushNotification(getIntent());
     }
 
-    @Override
+	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
+		showPushNotification(intent);
+	}
+
+	@Override
     public void onRefresh() {
 	    ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
 			    .setCategory("PullToRefresh")
@@ -190,5 +201,20 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 		super.onPause();
 		// Remove new flag for viewed updates
 		Convention.getInstance().clearNewFlagFromAllUpdates();
+	}
+
+	private void showPushNotification(Intent intent) {
+		String messageId = intent.getStringExtra(PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION_MESSAGE_ID);
+		int updatePosition = UpdatesAdapter.UPDATE_NOT_FOUND;
+		if (messageId != null) {
+			updatePosition = updatesAdapter.focusOn(messageId);
+		}
+
+		if (updatePosition == UpdatesAdapter.UPDATE_NOT_FOUND) {
+			new PushNotificationDialogPresenter().present(this, intent);
+		} else {
+			// Scroll to update
+			recyclerView.scrollToPosition(updatePosition);
+		}
 	}
 }

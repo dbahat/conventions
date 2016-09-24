@@ -29,6 +29,8 @@
         <item name="standIconColor">@color/brown</item>
         <item name="standsTypeTitleColor">@color/brown_dark</item>
 
+        <item name="focusedUpdateBackground">@color/yellow_medium</item>
+
         <item name="nextEventStartTimeBackground">@color/yellow_medium</item>
         <item name="nextEventStartTimeTextColor">@color/black</item>
 

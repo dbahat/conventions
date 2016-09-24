@@ -13,7 +13,8 @@ public class PushNotificationHandler extends NotificationsHandler {
         Intent intent = new Intent(context, ShowNotificationService.class)
                 .putExtra(ShowNotificationService.EXTRA_NOTIFICATION_TYPE, ShowNotificationService.Type.Push)
 	            .putExtra(ShowNotificationService.EXTRA_MESSAGE, bundle.getString("message"))
-                .putExtra(ShowNotificationService.EXTRA_CATEGORY, bundle.getString("category"));
+                .putExtra(ShowNotificationService.EXTRA_CATEGORY, bundle.getString("category"))
+                .putExtra(ShowNotificationService.EXTRA_ID, bundle.getString("id"));
 
         context.startService(intent);
     }

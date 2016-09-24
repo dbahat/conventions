@@ -23,6 +23,7 @@ public class PushNotificationDialogPresenter {
     public final static String EXTRA_PUSH_NOTIFICATION_MESSAGE = "EXTRA_PUSH_NOTIFICATION_MESSAGE";
     public final static String EXTRA_PUSH_NOTIFICATION_CATEGORY = "EXTRA_PUSH_NOTIFICATION_CATEGORY";
     public final static String EXTRA_PUSH_NOTIFICATION_ID = "EXTRA_PUSH_NOTIFICATION_ID";
+	public final static String EXTRA_PUSH_NOTIFICATION_MESSAGE_ID = "EXTRA_PUSH_NOTIFICATION_MESSAGE_ID";
 
     private AlertDialog pushNotificationDialog;
 
