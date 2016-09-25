@@ -6,8 +6,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
@@ -19,8 +17,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration;
-import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersTouchListener;
 import com.tonicartos.widget.stickygridheaders.StickyGridHeadersGridView;
 
 import java.io.Serializable;
@@ -33,7 +29,7 @@ import java.util.List;
 
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.adapters.SearchFiltersAdapter;
-import amai.org.conventions.events.adapters.SwipeableEventsViewAdapter;
+import amai.org.conventions.events.adapters.SwipeableEventsViewListAdapter;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
 import amai.org.conventions.model.EventType;
@@ -42,6 +38,7 @@ import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Views;
+import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 import sff.org.conventions.R;
 
 public class ProgrammeSearchActivity extends NavigationActivity {
@@ -53,8 +50,8 @@ public class ProgrammeSearchActivity extends NavigationActivity {
     private HashSet<SearchFilter> searchFilters;
 
     private String keywordsFilter;
-    private SwipeableEventsViewAdapter adapter;
-    private RecyclerView recyclerView;
+    private SwipeableEventsViewListAdapter adapter;
+    private StickyListHeadersListView listView;
     private TextView noResultsFoundView;
     private DrawerLayout drawerLayout;
     private ImageButton filterButton;
@@ -212,22 +209,10 @@ public class ProgrammeSearchActivity extends NavigationActivity {
     }
 
     private void initializeEventsList() {
-        recyclerView = (RecyclerView) findViewById(R.id.searchEventsList);
+        listView = (StickyListHeadersListView) findViewById(R.id.searchEventsList);
 
-        adapter = new SwipeableEventsViewAdapter(Collections.<ConventionEvent>emptyList(), recyclerView);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        StickyRecyclerHeadersDecoration headersDecoration = new StickyRecyclerHeadersDecoration(adapter);
-        recyclerView.addItemDecoration(headersDecoration);
-
-        StickyRecyclerHeadersTouchListener headersTouchListener = new StickyRecyclerHeadersTouchListener(recyclerView, headersDecoration);
-        headersTouchListener.setOnHeaderClickListener(new StickyRecyclerHeadersTouchListener.OnHeaderClickListener() {
-            @Override
-            public void onHeaderClick(View header, int position, long headerId) {
-                // make headers non-clickable
-            }
-        });
-        recyclerView.addOnItemTouchListener(headersTouchListener);
+        adapter = new SwipeableEventsViewListAdapter(Collections.<ConventionEvent>emptyList(), listView);
+        listView.setAdapter(adapter);
     }
 
     private void initializeKeywordFilter() {
@@ -278,8 +263,8 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 
 			@Override
 			protected void onPostExecute(List<ConventionEvent> events) {
-				adapter.setEventsList(events);
-				setNoResultsVisibility(adapter.getItemCount());
+				adapter.setItems(events);
+				setNoResultsVisibility(adapter.getCount());
 
                 refreshFilterButton();
 			}
@@ -370,10 +355,10 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 		// Show the "no results found" message if there are no results after applying the filters
 		if (resultsNumber == 0) {
 		    noResultsFoundView.setVisibility(View.VISIBLE);
-		    recyclerView.setVisibility(View.GONE);
+		    listView.setVisibility(View.GONE);
 		} else {
 		    noResultsFoundView.setVisibility(View.GONE);
-		    recyclerView.setVisibility(View.VISIBLE);
+		    listView.setVisibility(View.VISIBLE);
 		}
 	}
 

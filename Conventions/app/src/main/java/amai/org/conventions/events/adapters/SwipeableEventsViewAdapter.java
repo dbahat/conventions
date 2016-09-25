@@ -5,19 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter;
-
-import java.util.Calendar;
 import java.util.List;
 
 import amai.org.conventions.events.DefaultEventFavoriteChangedListener;
-import amai.org.conventions.events.holders.EventTimeViewHolder;
 import amai.org.conventions.events.holders.SwipeableEventViewHolder;
 import amai.org.conventions.events.listeners.OnEventFavoriteChangedListener;
 import amai.org.conventions.model.ConventionEvent;
 import sff.org.conventions.R;
 
-public class SwipeableEventsViewAdapter extends RecyclerView.Adapter<SwipeableEventViewHolder> implements StickyRecyclerHeadersAdapter<EventTimeViewHolder> {
+public class SwipeableEventsViewAdapter extends RecyclerView.Adapter<SwipeableEventViewHolder> {
     private List<ConventionEvent> eventsList;
 
     private List<String> keywordsToHighlight;
@@ -55,27 +51,6 @@ public class SwipeableEventsViewAdapter extends RecyclerView.Adapter<SwipeableEv
     @Override
     public int getItemCount() {
         return eventsList.size();
-    }
-
-
-    @Override
-    public long getHeaderId(int position) {
-        ConventionEvent event = eventsList.get(position);
-        Calendar eventStartTime = Calendar.getInstance();
-        eventStartTime.setTime(event.getStartTime());
-        return eventStartTime.get(Calendar.DAY_OF_MONTH);
-    }
-
-    @Override
-    public EventTimeViewHolder onCreateHeaderViewHolder(ViewGroup parent) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.convention_event_time, parent, false);
-        return new EventTimeViewHolder(view);
-    }
-
-    @Override
-    public void onBindHeaderViewHolder(EventTimeViewHolder holder, int position) {
-        ConventionEvent event = eventsList.get(position);
-        holder.setTime(event.getStartTime(), "EEE (dd.MM)");
     }
 
 	public void setEventsList(List<ConventionEvent> eventsList) {

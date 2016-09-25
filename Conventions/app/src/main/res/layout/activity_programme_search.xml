@@ -58,12 +58,12 @@
             android:layout_height="1dp"
             android:background="@android:color/black"/>
 
-        <android.support.v7.widget.RecyclerView
+        <se.emilsjolander.stickylistheaders.StickyListHeadersListView
             android:id="@+id/searchEventsList"
+            android:divider="@null"
+            android:dividerHeight="0dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </android.support.v7.widget.RecyclerView>
+            android:layout_height="match_parent"/>
 
         <TextView
             android:id="@+id/search_no_results_found"
