@@ -1,12 +1,9 @@
 package amai.org.conventions.navigation;
 
-import android.animation.Animator;
-import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.LightingColorFilter;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PictureDrawable;
@@ -21,9 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.caverock.androidsvg.SVG;
@@ -58,7 +53,6 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	public static final String EXTRA_INITIALIZE = "ExtraInitialize";
 	public static final String EXTRA_EXIT_ON_BACK = "ExtraExitOnBack";
 
-	private static boolean showLogoGlow = true;
 	private boolean navigatedFromHome;
     private Toolbar navigationToolbar;
     private AnimationPopupWindow popup;
@@ -84,21 +78,32 @@ public abstract class NavigationActivity extends AppCompatActivity {
         navigationToolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				showLogoGlow = false;
-				ConventionsApplication.settings.setNavigationPopupOpened();
 				onNavigationButtonClicked();
-				if (popup == null || !popup.isShowing()) {
-					popup = createNavigationPopup();
-					popup.showAsDropDown(navigationToolbar);
+				ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
+						.setCategory("Navigation")
+						.setAction("ButtonClicked")
+						.build());
+				openNavigationPopup();
+			}
+		});
 
-					ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
-							.setCategory("Navigation")
-							.setAction("ButtonClicked")
-							.build());
+		navigationToolbar.post(new Runnable() {
+			@Override
+			public void run() {
+				if (!ConventionsApplication.settings.wasNavigationPopupOpened()) {
+					openNavigationPopup();
+					ConventionsApplication.settings.setNavigationPopupOpened();
 				}
 			}
 		});
     }
+
+	private void openNavigationPopup() {
+		if (popup == null || !popup.isShowing()) {
+			popup = createNavigationPopup();
+			popup.showAsDropDown(navigationToolbar);
+		}
+	}
 
 	@Override
 	public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
@@ -108,10 +113,6 @@ public abstract class NavigationActivity extends AppCompatActivity {
 
 	protected void onNavigationButtonClicked() {
 		// Children can inherit this
-	}
-
-	private boolean shouldShowLogoGlow() {
-		return false;
 	}
 
 	private AnimationPopupWindow createNavigationPopup() {
@@ -211,56 +212,6 @@ public abstract class NavigationActivity extends AppCompatActivity {
 			        break;
 	        }
             toolbar.setNavigationIcon(drawable);
-
-	        if (shouldShowLogoGlow()) {
-				// Getting the toolbar imageView by iterating over the toolbar children, since the toolbar imageView has no ID.
-		        for (int i = 0; i < toolbar.getChildCount(); ++i) {
-			        View view = toolbar.getChildAt(i);
-			        if (view instanceof ImageView && ((ImageView) view).getDrawable() == drawable) {
-				        final ImageView image = (ImageView) view;
-				        final ValueAnimator animator = ValueAnimator.ofInt(255, 100, 255);
-				        animator.setInterpolator(new AccelerateDecelerateInterpolator());
-				        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-					        @Override
-					        public void onAnimationUpdate(ValueAnimator animation) {
-						        int value = (int) animation.getAnimatedValue();
-						        int mul = Color.argb(0, value, value, value);
-						        int add = Color.argb(0, 255 - value, 255 - value, 255 - value);
-						        image.setColorFilter(new LightingColorFilter(mul, add));
-					        }
-				        });
-				        animator.addListener(new Animator.AnimatorListener() {
-					        // This is necessary because if I call animation.cancel() on animation start
-					        // it calls onAnimationStart again, causing an infinite recursion
-					        private boolean cancelled = false;
-
-					        @Override
-					        public void onAnimationStart(Animator animation) {
-						        if (!shouldShowLogoGlow() && !cancelled) {
-							        cancelled = true;
-							        animation.cancel();
-						        }
-					        }
-
-					        @Override
-					        public void onAnimationEnd(Animator animation) {
-						        image.setColorFilter(null);
-					        }
-
-					        @Override
-					        public void onAnimationCancel(Animator animation) {
-						        image.setColorFilter(null);
-					        }
-
-					        @Override
-					        public void onAnimationRepeat(Animator animation) {
-					        }
-				        });
-				        animator.setDuration(1500).setStartDelay(3000);
-				        animator.start();
-			        }
-		        }
-	        }
         }
     }
 
