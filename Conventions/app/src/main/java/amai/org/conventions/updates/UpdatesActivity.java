@@ -92,6 +92,8 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 	@Override
 	protected void onNewIntent(Intent intent) {
 		super.onNewIntent(intent);
+		// Add extras to the original intent so we will focus on the same update on screen rotation
+		getIntent().putExtras(intent.getExtras());
 		showPushNotification(intent);
 	}
 

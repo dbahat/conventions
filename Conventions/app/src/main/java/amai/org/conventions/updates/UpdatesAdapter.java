@@ -73,8 +73,24 @@ public class UpdatesAdapter extends RecyclerView.Adapter<UpdateViewHolder> {
     }
 
 	public int focusOn(String updateId) {
+		unmarkFocusedUpdate();
 		focusedUpdateId = updateId;
 		return markFocusedUpdate();
+	}
+
+	private void unmarkFocusedUpdate() {
+		if (focusedUpdateId == null) {
+			return;
+		}
+		int position = 0;
+		for (UpdateViewModel updateModel : updates) {
+			if (Objects.equals(updateModel.getUpdate().getId(), focusedUpdateId)) {
+				updateModel.setFocused(false);
+				notifyItemChanged(position);
+				break;
+			}
+			++position;
+		}
 	}
 
 	private int markFocusedUpdate() {
