@@ -407,4 +407,13 @@ public class ProgrammeSearchActivity extends NavigationActivity {
             drawerLayout.openDrawer(GravityCompat.END);
         }
     }
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+
+		// Always redraw the list during onResume, since it's a fast operation, and this ensures the data is up to date in case the activity got paused
+		// (including going into an event, adding it to favorites and then returning)
+		adapter.notifyDataSetChanged();
+	}
 }

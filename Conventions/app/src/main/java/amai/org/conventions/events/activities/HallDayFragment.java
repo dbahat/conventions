@@ -24,6 +24,7 @@ import amai.org.conventions.utils.Dates;
 public class HallDayFragment extends Fragment {
 	private static final String ARGS_HALL_NAME = "ArgHallName";
 	private static final String ARGS_DATE = "ArgDate";
+	private SwipeableEventsViewAdapter adapter;
 
 	public static HallDayFragment newInstance(String hallName, Calendar date) {
 		HallDayFragment fragment = new HallDayFragment();
@@ -60,9 +61,19 @@ public class HallDayFragment extends Fragment {
 
 		Collections.sort(events, new ConventionEventComparator());
 
-		hallEventsList.setAdapter(new SwipeableEventsViewAdapter(events, hallEventsList));
+		adapter = new SwipeableEventsViewAdapter(events, hallEventsList);
+		hallEventsList.setAdapter(adapter);
 		hallEventsList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 		return view;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+
+		// Always redraw the list during onResume, since it's a fast operation, and this ensures the data is up to date in case the activity got paused
+		// (including going into an event, adding it to favorites and returning)
+		adapter.notifyDataSetChanged();
 	}
 }
