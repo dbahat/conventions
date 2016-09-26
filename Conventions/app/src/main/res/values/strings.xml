@@ -76,7 +76,7 @@
     <string name="missing_play_services_ok_button">התקן</string>
     <string name="missing_play_services_cancel_button">אל תתקין</string>
     <string name="missing_play_services_neutral_button">לא עכשיו</string>
-    <string name="missing_play_services_map_message">על מנת לצפות בדרכי הגעה יש להתקין או לעדכן את Google play services ולוודא שהשירות פעיל</string>
+    <string name="missing_play_services_map_message">על מנת לצפות במפת דרכי ההגעה יש להתקין או לעדכן את Google play services ולוודא שהשירות פעיל</string>
 
     <string name="yes">כן</string>
     <string name="no">לא</string>
@@ -177,4 +177,28 @@
     <string name="tags">תגיות: %s</string>
     <string name="about">אודות</string>
     <string name="no_updates_found">לא נמצאו עדכונים</string>
+    <!-- Copied from http://2016.iconfestival.org.il/info/transportation-and-parking/
+    <ul>, </ul>, </li> tag were removed and <li> tag was replaced with "• " and added a <br/> at the end of the line -->
+    <string name="arrival_method_description"><![CDATA[
+<h1 class="entry-title post-title">דרכי הגעה וחניה</h1>
+				<div class="post-entry">
+					<p dir="RTL">כתובת הפסטיבל: סינמטק תל אביב ומתחם אשכול הפיס, רחוב הארבעה (פינת שפרינצק 4) תל אביב. הכניסה למתחם מרחוב הארבעה.</p>
+<h2>תחבורה ציבורית:</h2>
+<p dir="RTL"><b>מתחנת רכבת השלום</b> אפשר להגיע באמצעות קו 63 של דן (ירידה בתחנת החשמונאים). אפשר גם להגיע רגלית, תחנת הרכבת נמצאת במרחק 15 דקות הליכה ממתחם הפסטיבל. אפשר גם לנסוע תחנה אחת דרומה בקווים 60 או 160 ולהמשיך ברגל כחמש דקות הליכה.</p>
+<p dir="RTL"><b>מהתחנה המרכזית החדשה</b> בתל אביב: קווים 26, 70 של דן (תחנת ירידה באבן גבירול) או קו 5 של דן (תחנת ירידה בשדרות רוטשילד פינת מרמורק, מרחק עשר דקות הליכה ממתחם הפסטיבל).</p>
+<h3>קווי לילה:</h3>
+<p dir="RTL">במהלך חול המועד סוכות יפעלו קווי לילה מיוחדים בתוך תל אביב וקווים בין-עירוניים לכל הערים המרכזיות בארץ ובתוכן. באתר קווי לילה אפשר להתעדכן בחברות המפעילות את השירות (כולל אגד, דן, ויאוליה, מטרופוליטן, קוים, מטרודן, נתיב אקספרס) בפריסה ארצית.</p>
+<h3>רכבות:</h3>
+<p dir="RTL">מידע על שעות פעילות הרכבת בלילה אפשר למצוא באתר רכבת ישראל. המתחם נמצא במרחק 15 דקות הליכה מתחנת רכבת השלום, ואפשר להגיע אליו גם באוטובוס מתחנה זו (קו 63) ומתחנות נוספות.</p>
+<p dir="RTL">לנוחיותכם הנכם מוזמנים לבדוק דרכי הגעה נוספות באתרים הבאים:</p>
+<p dir="RTL"><a href="http://www.moovit.co.il">www.moovit.co.il</a></p>
+<p dir="RTL"><a href="http://www.bus.co.il">www.bus.co.il</a></p>
+<p dir="RTL"><a href="http://www.callkav.gov.il">www.callkav.gov.il</a></p>
+<h3>חניה:</h3>
+<p dir="RTL">מגרשי חניה הסמוכים למתחם הפסטיבל:</p>
+• חניון הארבעה (רחוב החשמונאים)<br/>
+• חניון ארניה (רחוב ארניה)<br/>
+• חניון שפרינצק (רחוב שפרינצק)<br/>
+• חניון גבעון / TLV (רחוב הארבעה) שמציע <a href="http://2016.iconfestival.org.il/info/discounts/" target="_blank">הנחה לבאי הפסטיבל</a> בשעות הערב<br/>
+]]></string>
 </resources>

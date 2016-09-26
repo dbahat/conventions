@@ -3,10 +3,13 @@ package amai.org.conventions;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -39,6 +42,10 @@ public class ArrivalMethodsActivity extends NavigationActivity implements OnMapR
 		mapFragment = findViewById(R.id.map);
 		noMapLayout = findViewById(R.id.no_map);
 		installPlayServicesButton = (Button) findViewById(R.id.install_play_services);
+
+		TextView arrivalMethodsDescription = (TextView) findViewById(R.id.arrival_methods_description);
+		arrivalMethodsDescription.setText(Html.fromHtml(getString(R.string.arrival_method_description)));
+		arrivalMethodsDescription.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     @Override
