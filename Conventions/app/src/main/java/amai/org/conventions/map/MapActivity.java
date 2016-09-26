@@ -2,6 +2,7 @@ package amai.org.conventions.map;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -77,12 +78,14 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentInContentContainer(R.layout.activity_map, false, false);
-		setupActionButton(R.drawable.ic_action_search, new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				toggleSearch();
-			}
-		});
+		if (map.getLocations().size() > 0) {
+			setupActionButton(R.drawable.ic_action_search, new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					toggleSearch();
+				}
+			});
+		}
 
 		// Read and initialize parameters from bundle
 	    Bundle bundle = (savedInstanceState != null ? savedInstanceState : getIntent().getExtras());
@@ -584,11 +587,15 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 			return;
 		}
 		int parentHeight = viewPager.getMeasuredHeight();
-		int actionButtonHeight = getActionButton().getMeasuredHeight();
-		if (top > parentHeight - actionButtonHeight) {
-			top = parentHeight - actionButtonHeight;
+		// The action button might be null if there are no locations
+		FloatingActionButton actionButton = getActionButton();
+		if (actionButton != null) {
+			int actionButtonHeight = actionButton.getMeasuredHeight();
+			if (top > parentHeight - actionButtonHeight) {
+				top = parentHeight - actionButtonHeight;
+			}
+			actionButton.setTranslationY(-top);
 		}
-		getActionButton().setTranslationY(-top);
 	}
 
 	private void updateActionButtonLocation() {

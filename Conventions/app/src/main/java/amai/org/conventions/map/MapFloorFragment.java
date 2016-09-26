@@ -45,13 +45,11 @@ import java.util.List;
 
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.ImageHandler;
-import sff.org.conventions.R;
 import amai.org.conventions.customviews.AspectRatioSVGImageView;
 import amai.org.conventions.customviews.InterceptorLinearLayout;
 import amai.org.conventions.events.EventView;
 import amai.org.conventions.events.activities.HallActivity;
 import amai.org.conventions.events.activities.StandsAreaFragment;
-import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
 import amai.org.conventions.model.ConventionMap;
@@ -61,9 +59,11 @@ import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.model.Place;
 import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.StandsArea;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Views;
 import pl.polidea.view.ZoomView;
+import sff.org.conventions.R;
 
 /**
  * A fragment showing a single map floor
@@ -416,8 +416,9 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
 		    @Override
 		    protected Boolean doInBackground(Void... params) {
-			    // Load svg image for the map floor
-			    svg = ImageHandler.loadSVG(appContext, floor.getImageResource());
+			    if (floor.isImageSVG()) {
+				    svg = ImageHandler.loadSVG(appContext, floor.getImageResource());
+			    }
 
 			    // Find location markers and load their svg images (the views are created in the UI thread)
 			    locations = map.findLocationsByFloor(floor);
@@ -437,8 +438,12 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 			    }
 
 			    mapFloorImage.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-	            Picture picture = svg.renderToPicture();
-			    mapFloorImage.setImageResourceFromDrawable(new PictureDrawable(picture), floor.getImageWidth(), floor.getImageHeight());
+			    if (floor.isImageSVG()) {
+		            Picture picture = svg.renderToPicture();
+				    mapFloorImage.setImageResourceFromDrawable(new PictureDrawable(picture), floor.getImageWidth(), floor.getImageHeight());
+			    } else {
+				    mapFloorImage.setImageResource(floor.getImageResource(), floor.getImageWidth(), floor.getImageHeight());
+			    }
 
 			    Animation animation = null;
 			    if (showAnimation) {

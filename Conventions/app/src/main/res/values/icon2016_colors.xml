@@ -2,6 +2,7 @@
 <resources>
     <color name="aquamarine">#aaffec</color>
     <color name="yellow_medium">#f6eace</color>
+    <color name="yellow_dark">#ffcd02</color>
     <color name="brown_bright">#d8ac00</color>
     <color name="brown">#bf9200</color>
     <color name="brown_dark">#af7800</color>

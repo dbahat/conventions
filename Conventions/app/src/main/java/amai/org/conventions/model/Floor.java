@@ -9,6 +9,7 @@ public class Floor {
 	private float defaultMarkerHeight;
 	private float imageHeight;
 	private float imageWidth;
+	private boolean isImageSVG;
 
 	public Floor(int number) {
 		this.number = number;
@@ -35,12 +36,17 @@ public class Floor {
 		return imageResource;
 	}
 
-	public void setImageResource(int imageResource) {
-		this.imageResource = imageResource;
+	public boolean isImageSVG() {
+		return isImageSVG;
 	}
 
-	public Floor withImageResource(int imageResource) {
-		setImageResource(imageResource);
+	public void setImageResource(int imageResource, boolean isImageSVG) {
+		this.imageResource = imageResource;
+		this.isImageSVG = isImageSVG;
+	}
+
+	public Floor withImageResource(int imageResource, boolean isImageSVG) {
+		setImageResource(imageResource, isImageSVG);
 		return this;
 	}
 

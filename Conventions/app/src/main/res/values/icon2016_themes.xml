@@ -25,7 +25,7 @@
         <item name="eventTimeDefaultTextColor">@color/black</item>
         <item name="eventTimeDefaultBackgroundColor">@color/very_light_blue</item>
 
-        <item name="floorBackground">@color/white</item>
+        <item name="floorBackground">@color/yellow_dark</item>
         <item name="standIconColor">@color/brown</item>
         <item name="standsTypeTitleColor">@color/brown_dark</item>
 

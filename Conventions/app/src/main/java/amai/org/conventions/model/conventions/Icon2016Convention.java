@@ -4,14 +4,16 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
-import sff.org.conventions.R;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.EventToImageResourceIdMapper;
+import amai.org.conventions.model.Floor;
 import amai.org.conventions.model.Hall;
 import amai.org.conventions.utils.ConventionStorage;
 import amai.org.conventions.utils.Dates;
+import sff.org.conventions.R;
 
 public class Icon2016Convention extends SffConvention {
     @Override
@@ -70,7 +72,14 @@ public class Icon2016Convention extends SffConvention {
 
     @Override
     protected ConventionMap initMap() {
-        return new ConventionMap();
+	    return new ConventionMap()
+			    .withFloors(Collections.singletonList(
+					    new Floor(1)
+							    .withName("מפת התמצאות")
+							    .withImageResource(R.drawable.icon2016_map, false)
+							    .withImageHeight(1303)
+							    .withImageWidth(920)
+			    ));
     }
 
     @Override
