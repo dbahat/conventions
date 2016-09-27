@@ -1,10 +1,7 @@
 package amai.org.conventions.navigation;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PictureDrawable;
 import android.os.Bundle;
@@ -12,12 +9,12 @@ import android.os.PersistableBundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 
@@ -37,7 +34,6 @@ import amai.org.conventions.FeedbackActivity;
 import amai.org.conventions.ImageHandler;
 import amai.org.conventions.SplashActivity;
 import amai.org.conventions.ThemeAttributes;
-import amai.org.conventions.customviews.AnimationPopupWindow;
 import amai.org.conventions.events.activities.EventActivity;
 import amai.org.conventions.events.activities.MyEventsActivity;
 import amai.org.conventions.events.activities.ProgrammeActivity;
@@ -45,7 +41,6 @@ import amai.org.conventions.map.MapActivity;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.settings.SettingsActivity;
 import amai.org.conventions.updates.UpdatesActivity;
-import amai.org.conventions.utils.Views;
 import sff.org.conventions.R;
 
 
@@ -56,10 +51,10 @@ public abstract class NavigationActivity extends AppCompatActivity {
 
 	private boolean navigatedFromHome;
     private Toolbar navigationToolbar;
-    private AnimationPopupWindow popup;
 	private boolean exitOnBack;
 	private FrameLayout contentContainer;
 	private FloatingActionButton actionButton;
+	private DrawerLayout navigationDrawer;
 
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +70,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		}
 
 	    navigationToolbar = (Toolbar) findViewById(R.id.navigation_toolbar);
+		navigationDrawer = (DrawerLayout) findViewById(R.id.navigation_drawer);
         setupActionBar(navigationToolbar);
         navigationToolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
@@ -84,7 +80,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 						.setCategory("Navigation")
 						.setAction("ButtonClicked")
 						.build());
-				openNavigationPopup();
+				openNavigationDrawer(true);
 			}
 		});
 
@@ -92,18 +88,18 @@ public abstract class NavigationActivity extends AppCompatActivity {
 			@Override
 			public void run() {
 				if (!ConventionsApplication.settings.wasNavigationPopupOpened()) {
-					openNavigationPopup();
+					openNavigationDrawer(false);
 					ConventionsApplication.settings.setNavigationPopupOpened();
 				}
 			}
 		});
+
+		initializeNavigationDrawer(); // In case it was already open
     }
 
-	private void openNavigationPopup() {
-		if (popup == null || !popup.isShowing()) {
-			popup = createNavigationPopup();
-			popup.showAsDropDown(navigationToolbar);
-		}
+	private void openNavigationDrawer(boolean animate) {
+		initializeNavigationDrawer();
+		navigationDrawer.openDrawer(GravityCompat.START, animate);
 	}
 
 	@Override
@@ -116,12 +112,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		// Children can inherit this
 	}
 
-	private AnimationPopupWindow createNavigationPopup() {
-		// This view is the root view of the popup window. It's not related to the view hierarchy and its layout
-		// parameters are defined by the popup window.
-		@SuppressLint("InflateParams")
-		final View view = LayoutInflater.from(NavigationActivity.this).inflate(R.layout.navigation_menu, null);
-
+	private void initializeNavigationDrawer() {
 		final List<NavigationItem> items = new ArrayList<>(Arrays.asList(
 				new NavigationItem(ProgrammeActivity.class, getString(R.string.programme_title), ContextCompat.getDrawable(this, R.drawable.events_list)),
 				new NavigationItem(MyEventsActivity.class, getString(R.string.my_events_title), ContextCompat.getDrawable(this, R.drawable.events_list_with_star))
@@ -137,61 +128,13 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		if (Convention.getInstance().canFillFeedback()) {
 			items.add(new NavigationItem(FeedbackActivity.class, getString(R.string.feedback), ContextCompat.getDrawable(this, R.drawable.feedback_menu_icon)));
 		}
-		items.add(new NavigationItem(SettingsActivity.class, getString(R.string.settings), ContextCompat.getDrawable(this, R.drawable.ic_settings)));
 		items.add(new NavigationItem(DiscountsActivity.class, getString(R.string.discounts), ContextCompat.getDrawable(this, R.drawable.ic_card_giftcard_white)));
 		items.add(new NavigationItem(AboutActivity.class, getString(R.string.about), ContextCompat.getDrawable(this, R.drawable.ic_action_about)));
+		items.add(new NavigationItem(SettingsActivity.class, getString(R.string.settings), ContextCompat.getDrawable(this, R.drawable.ic_settings)));
 
-		ListView navigationItems = (ListView) view.findViewById(R.id.navigation_items);
+		ListView navigationItems = (ListView) findViewById(R.id.navigation_items);
 		navigationItems.setAdapter(new NavigationItemsAdapter(this, items));
-
-		// Set list width - wrap_content doesn't work due to unknown number of items in the list view
-		navigationItems.getLayoutParams().width = Views.calculateWrapContentWidth(this, navigationItems.getAdapter());
-		navigationItems.setLayoutParams(navigationItems.getLayoutParams());
-
-		final AnimationPopupWindow popup = new AnimationPopupWindow(
-		        view,
-	            // Sending toolbar width to support Jelly Bean version: the popup window does not align to
-	            // the right automatically so we set the width to full screen and inside it, the card view is
-	            // wrap_content with layout direction is ltr so it looks ok.
-				// Also there is a bug in KitKat where if we set the width to match_parent it takes up the whole
-				// width INCLUDING THE BUTTONS BAR and the content gets cut off on the right side. For this
-				// reason we also can't just set the offset of the popup window to the far right (since it gets
-				// cut off).
-				navigationToolbar.getWidth(),
-		        ViewGroup.LayoutParams.WRAP_CONTENT,
-		        R.anim.drop_down,
-		        R.anim.drop_down_reverse);
-
-		// This must be done to enable listening to clicks on the popup window
-		popup.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-		popup.setAnimationStyle(0);
-		popup.setFocusable(true);
-		popup.setOutsideTouchable(true);
-
-		// Now, because the popup is the full width of the screen, we must capture a touch event outside
-		// the card view and dismiss it.
-		view.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				popup.dismiss();
-			}
-		});
-
-		// Move the inner view to the top start corner of the toolbar.
-		// This is required because inside it is a card view with elevation (which uses padding for
-		// the elevation and shadow) so we have to move it to the start point of the popup window.
-		view.setY(getResources().getDimension(R.dimen.navigation_popup_window_offset_y));
-		view.setX(getResources().getDimension(R.dimen.navigation_popup_window_offset_x));
-
-		return popup;
 	}
-
-	@Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        dismissPopupIfNeeded();
-    }
 
     private void setupActionBar(Toolbar toolbar) {
         this.setSupportActionBar(toolbar);
@@ -306,8 +249,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
     }
 
     protected void navigateToActivity(Class<? extends Activity> activityToNavigateTo, boolean clearBackStack, Bundle extras) {
-
-		dismissPopupIfNeeded();
+		closeDrawerIfNeeded();
 
 		// In case we were asked to navigate to the activity we're already in, ignore the request
 		if (activityToNavigateTo == this.getClass()) {
@@ -341,10 +283,10 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		}
 	}
 
-    private void dismissPopupIfNeeded() {
-        if (popup != null && popup.isShowing()) {
-            popup.dismissNow();
-        }
+    private void closeDrawerIfNeeded() {
+	    if (navigationDrawer.isDrawerOpen(GravityCompat.START)) {
+		    navigationDrawer.closeDrawer(GravityCompat.START, false);
+	    }
     }
 
 	@Override
