@@ -32,6 +32,7 @@ import amai.org.conventions.AboutActivity;
 import amai.org.conventions.ApplicationInitializer;
 import amai.org.conventions.ArrivalMethodsActivity;
 import amai.org.conventions.ConventionsApplication;
+import amai.org.conventions.DiscountsActivity;
 import amai.org.conventions.FeedbackActivity;
 import amai.org.conventions.ImageHandler;
 import amai.org.conventions.SplashActivity;
@@ -137,6 +138,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 			items.add(new NavigationItem(FeedbackActivity.class, getString(R.string.feedback), ContextCompat.getDrawable(this, R.drawable.feedback_menu_icon)));
 		}
 		items.add(new NavigationItem(SettingsActivity.class, getString(R.string.settings), ContextCompat.getDrawable(this, R.drawable.ic_settings)));
+		items.add(new NavigationItem(DiscountsActivity.class, getString(R.string.discounts), ContextCompat.getDrawable(this, R.drawable.ic_card_giftcard_white)));
 		items.add(new NavigationItem(AboutActivity.class, getString(R.string.about), ContextCompat.getDrawable(this, R.drawable.ic_action_about)));
 
 		ListView navigationItems = (ListView) view.findViewById(R.id.navigation_items);

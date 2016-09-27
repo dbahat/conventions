@@ -111,6 +111,31 @@
     <string name="cannot_set_past_alarm">לא ניתן לקבוע תזכורת בעבר</string>
     <string name="close">סגור</string>
     <string name="other">אחר</string>
+    <!-- Copied from http://2016.iconfestival.org.il/info/discounts/
+    Changes: changed h1 to h2 in first title, removed some white space after the title (<p> tags in the first paragraph), removed images and table tags and <p> tags around restaurant addresses -->
+    <string name="discounts_content" formatted="false">"<![CDATA[
+					<h2>מועדון ההנחות של יריד הדוכנים בפסטיבל אייקון</h2>
+מגוון דוכנים יעניקו 10% הנחה למציגים כרטיס חבר תקף במועדון העמותה למשחקי תפקידים בישראל ובאגודה ישראלית למדע בדיוני ולפנטסיה. הדוכנים המשתתפים במבצע:
+<p><strong>מו&#8221;ח &#8211; משחקים וחושבים, פריק, לימור שטרן תכשיטים, הממלכה, שושנה טלר, קסניה נזרוב, תעתועים &#8211; קעקועים זמניים, אבירי השולחן העגול, פוגי קומיקס, Molly&#8217;s Mugs, חגילר קומיקס, אוקיינוס הוצאה לאור, Colors of Life &#8211; דוכן ציורי פנים, טל ונועה חרוזים, Jen Schu Art, גיק בסטה, אסתי &#8211; איפור קסום ציורי פנים וגוף, Aurore22, Hatz, Lolita and More, The Enchanted Wool, Amelia Hats, Fedoraharp Lacquer, מאי שירי דיזיין וארט, נגה ציורים ואומנות, ComiXunity, Orr&#8217;s Art, סמארט זון, Dor20 Studios, סתיו ארועטי, תומר פוסטרים, Crow&#8217;s Treasure, Eilafashion, תומיקס קומיקס, קומיקאזה, קומיקס וירוקתו, כריות פנדומים, אנימה סטור, אנימה ווייב, דוכן התרומות של שיפודן ישראל, זבנג, מריונטה, אובנטו ועוד בתוך הקופסה, גיימינג לנד, יורי שקלנקו, Roy Sherez Designs, נקסוס, הגלקסיה.</strong></p>
+<p><strong> </strong></p>
+<h2>חניה במחיר מסובסד</h2>
+<p>חניון גבעון / TLV הממוקם ברחוב הארבעה מעניק תעריף חניה מופחת של 8 ש&#8221;ח למגיעים בין השעות 16:00 ועד 06:00 למחרת. לצורך קבלת ההטבה יש לקודד את כרטיס החנייה במכונת הקידוד הנמצאת בסמוך לכניסה הראשית לסינמטק תל-אביב ולשלם את הכרטיס במכונת התשלום (ההנחה לא תינתן בעת תשלום במחסום הממוקם ביציאה מן החניון).</p>
+<p><strong> </strong></p>
+<h2>הנחות במסעדות</h2>
+<p>המסעדות הבאות יעניקו 10% הנחה למבקרי הפסטיבל בהצגת כרטיס לאחד מארועי הפסטיבל או תג של הפסטיבל:</p>
+<h2>סודוך</h2>
+קרליבך 20. כשר<br/>
+<h2>BBB</h2>
+הארבעה 12. לא כשר<br/>
+<h2>צ׳ופ צ׳ופ</h2>
+אבן גבירול 20. לא כשר<br/>
+<h2>לאבורטוריו די פסטה</h2>
+החשמונאים 91. כשר<br/>
+<h2>קרליביס</h2>
+קרליבך 20. לא כשר<br/>
+<h2>אייסברג</h2>
+הארבעה 4. לא כשר<br/>
+]]>"</string>
     <string name="about_app_title">אודות האפליקציה</string>
     <!-- Taken from icon website: http://2016.iconfestival.org.il/about/
          The only difference is using "&#8209;" instead of "-" at [<a href="http://www.sf-f.org.il/">www.sf&#8209;f.org.il</a>] to prevent a linebreak in the link to sff website  -->
@@ -201,4 +226,5 @@
 • חניון שפרינצק (רחוב שפרינצק)<br/>
 • חניון גבעון / TLV (רחוב הארבעה) שמציע <a href="http://2016.iconfestival.org.il/info/discounts/" target="_blank">הנחה לבאי הפסטיבל</a> בשעות הערב<br/>
 ]]></string>
+    <string name="discounts">הטבות</string>
 </resources>

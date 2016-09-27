@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.TextView;
 
 import amai.org.conventions.navigation.NavigationActivity;
@@ -12,8 +11,6 @@ import sff.org.conventions.R;
 
 
 public class AboutActivity extends NavigationActivity {
-	private WindowManager.LayoutParams layoutParams = null;
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
