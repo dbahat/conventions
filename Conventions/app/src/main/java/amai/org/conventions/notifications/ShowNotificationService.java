@@ -19,6 +19,7 @@ import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.activities.EventActivity;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.conventions.Convention;
+import amai.org.conventions.networking.UpdatesRefresher;
 import amai.org.conventions.updates.UpdatesActivity;
 import amai.org.conventions.utils.CollectionUtils;
 import sff.org.conventions.R;
@@ -220,6 +221,16 @@ public class ShowNotificationService extends Service {
 
         // Assign each push notification with a unique ID, so multiple notifications can display at the same time
 	    notificationManager.notify(notificationId, builder.build());
+
+	    // Retrieve new updates so this message will appear in the updates screen
+	    UpdatesRefresher.getInstance(this).refreshFromServer(false, true, new UpdatesRefresher.OnUpdateFinishedListener() {
+		    @Override
+		    public void onSuccess(int newUpdatesNumber) {
+		    }
+		    @Override
+		    public void onError(Exception error) {
+		    }
+	    });
     }
 
     private int getNextPushNotificationId() {
