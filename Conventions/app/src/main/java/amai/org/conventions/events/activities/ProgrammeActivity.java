@@ -272,7 +272,7 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
             @Override
             protected Boolean doInBackground(Void... params) {
                 ModelRefresher modelRefresher = new ModelRefresher();
-                return modelRefresher.refreshFromServer();
+                return modelRefresher.refreshFromServer(true);
             }
 
             @Override

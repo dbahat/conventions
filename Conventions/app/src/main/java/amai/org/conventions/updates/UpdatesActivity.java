@@ -140,8 +140,9 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 	        }
         });
 
-        // Refresh, and don't allow new updates notification to occur due to this refresh
-	    refresher.refreshFromServer(false, new UpdatesRefresher.OnUpdateFinishedListener() {
+        // Refresh, and don't allow new updates notification to occur due to this refresh.
+	    // Only force refresh if it's due to user interaction (in that case we also show an error).
+	    refresher.refreshFromServer(false, showError, new UpdatesRefresher.OnUpdateFinishedListener() {
 		    @Override
 		    public void onSuccess(int newUpdatesNumber) {
 			    updateRefreshingFlag();

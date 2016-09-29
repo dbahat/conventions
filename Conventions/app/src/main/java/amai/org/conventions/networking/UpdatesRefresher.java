@@ -18,12 +18,15 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.model.Update;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
 
 public class UpdatesRefresher {
+	private static final long MINIMUM_REFRESH_TIME = Dates.MILLISECONDS_IN_HOUR;
+
 	public interface OnUpdateFinishedListener {
 		void onSuccess(int newUpdatesNumber);
 		void onError(Exception error);
@@ -57,7 +60,17 @@ public class UpdatesRefresher {
 		return isRefreshInProgress;
 	}
 
-	public void refreshFromServer(boolean enableNotificationAfterUpdate, final OnUpdateFinishedListener listener) {
+	public void refreshFromServer(boolean enableNotificationAfterUpdate, boolean force, final OnUpdateFinishedListener listener) {
+		if (!force) {
+			// Don't download if we recently updated the events
+			Date lastUpdate = ConventionsApplication.settings.getLastUpdatesUpdateDate();
+			if (lastUpdate != null && Dates.now().getTime() - lastUpdate.getTime() < MINIMUM_REFRESH_TIME) {
+				isRefreshInProgress = false;
+				listener.onSuccess(0);
+				return;
+			}
+		}
+
 		this.enableNotificationAfterUpdate = enableNotificationAfterUpdate;
 		isRefreshInProgress = true;
 
@@ -86,6 +99,7 @@ public class UpdatesRefresher {
 						// Update the model, so next time we can read them from cache.
 						Convention.getInstance().addUpdates(updatesFromResponse);
 						Convention.getInstance().getStorage().saveUpdates();
+						ConventionsApplication.settings.setLastUpdatesUpdatedDate();
 						isRefreshInProgress = false;
 						return newUpdatesNumber;
 					} finally {

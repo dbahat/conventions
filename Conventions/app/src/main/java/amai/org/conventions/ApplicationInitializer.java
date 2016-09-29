@@ -49,7 +49,7 @@ public class ApplicationInitializer {
             @Override
             protected Void doInBackground(Void... voids) {
                 ModelRefresher modelRefresher = new ModelRefresher();
-                modelRefresher.refreshFromServer();
+                modelRefresher.refreshFromServer(false);
                 return null;
             }
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -124,7 +124,7 @@ public class ApplicationInitializer {
         final int numberOfUpdatesBeforeRefresh = Convention.getInstance().getUpdates().size();
 
         // Refresh and ignore all errors
-        UpdatesRefresher.getInstance(context).refreshFromServer(true, new UpdatesRefresher.OnUpdateFinishedListener() {
+        UpdatesRefresher.getInstance(context).refreshFromServer(true, false, new UpdatesRefresher.OnUpdateFinishedListener() {
             @Override
             public void onSuccess(int newUpdatesNumber) {
                 List<Update> newUpdates = CollectionUtils.filter(Convention.getInstance().getUpdates(), new CollectionUtils.Predicate<Update>() {

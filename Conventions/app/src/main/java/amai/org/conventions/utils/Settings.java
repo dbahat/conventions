@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -15,28 +16,30 @@ import sff.org.conventions.R;
 public class Settings {
 	public static final int NO_PUSH_NOTIFICATION_SEEN = -1;
 
-    private static final String SETTINGS_SUFFIX = "settings";
-    private static final String WAS_FEEDBACK_NOTIFICATION_SHOWN = "WasFeedbackNotificationShown";
+	private static final String SETTINGS_SUFFIX = "settings";
+	private static final String WAS_FEEDBACK_NOTIFICATION_SHOWN = "WasFeedbackNotificationShown";
 	private static final String WAS_NAVIGATION_POPUP_OPENED = "WasNavigationPopupOpened";
 	private static final String WAS_PLAY_SERVICES_INSTALLATION_CANCELLED = "WasPlayServicesInstallationCancelled";
 	private static final String WAS_SETTINGS_POPUP_DISPLAYED = "WasSettingsPopupDisplayed";
 	private static final String LAST_SEEN_PUSH_NOTIFICATION_ID = "LastSeenPushNotificationId";
-	private static final String ADD_MISSING_NOTIFICATIONS = "AddMissingNotifications";
 	private static final String PROGRAMME_SEARCH_CATEGORIES = "ProgrammeSearchCategories";
-    private SharedPreferences sharedPreferences;
+	private static final String LAST_EVENTS_UPDATE_DATE = "LastEventsUpdateDate";
+	private static final String LAST_UPDATES_UPDATE_DATE = "LastUpdatesUpdateDate";
 
-    public Settings(Context context) {
-	    String preferencesName = Convention.getInstance().getId() + "_" + SETTINGS_SUFFIX;
-	    sharedPreferences = context.getSharedPreferences(preferencesName, Context.MODE_PRIVATE);
-    }
+	private SharedPreferences sharedPreferences;
 
-    public boolean wasConventionFeedbackNotificationShown() {
-        return sharedPreferences.getBoolean(WAS_FEEDBACK_NOTIFICATION_SHOWN, false);
-    }
+	public Settings(Context context) {
+		String preferencesName = Convention.getInstance().getId() + "_" + SETTINGS_SUFFIX;
+		sharedPreferences = context.getSharedPreferences(preferencesName, Context.MODE_PRIVATE);
+	}
 
-    public void setFeedbackNotificationAsShown() {
-        sharedPreferences.edit().putBoolean(WAS_FEEDBACK_NOTIFICATION_SHOWN, true).apply();
-    }
+	public boolean wasConventionFeedbackNotificationShown() {
+		return sharedPreferences.getBoolean(WAS_FEEDBACK_NOTIFICATION_SHOWN, false);
+	}
+
+	public void setFeedbackNotificationAsShown() {
+		sharedPreferences.edit().putBoolean(WAS_FEEDBACK_NOTIFICATION_SHOWN, true).apply();
+	}
 
 	public boolean wasNavigationPopupOpened() {
 		return sharedPreferences.getBoolean(WAS_NAVIGATION_POPUP_OPENED, false);
@@ -78,15 +81,40 @@ public class Settings {
 		Set<String> categories = sharedPreferences.getStringSet(PROGRAMME_SEARCH_CATEGORIES, null);
 		if (categories == null) {
 			List<String> allCategories = CollectionUtils.map(new AggregatedEventTypes().getAggregatedEventTypes(),
-				new CollectionUtils.Mapper<AggregatedEventTypes.AggregatedType, String>() {
-					@Override
-					public String map(AggregatedEventTypes.AggregatedType item) {
-						return item.getName();
-					}
-			});
+					new CollectionUtils.Mapper<AggregatedEventTypes.AggregatedType, String>() {
+						@Override
+						public String map(AggregatedEventTypes.AggregatedType item) {
+							return item.getName();
+						}
+					});
 			allCategories.add(context.getString(R.string.other));
 			return allCategories;
 		}
 		return new ArrayList<>(categories);
+	}
+
+	public Date getLastEventsUpdateDate() {
+		long date = sharedPreferences.getLong(LAST_EVENTS_UPDATE_DATE, -1);
+		if (date == -1) {
+			return null;
+		}
+		return new Date(date);
+	}
+
+	public void setLastEventsUpdatedDate() {
+		sharedPreferences.edit().putLong(LAST_EVENTS_UPDATE_DATE, Dates.now().getTime()).apply();
+	}
+
+	public Date getLastUpdatesUpdateDate() {
+		long date = sharedPreferences.getLong(LAST_UPDATES_UPDATE_DATE, -1);
+		if (date == -1) {
+			return null;
+		}
+		return new Date(date);
+	}
+
+	public void setLastUpdatesUpdatedDate() {
+		sharedPreferences.edit().putLong(LAST_UPDATES_UPDATE_DATE, Dates.now().getTime()).apply();
+
 	}
 }

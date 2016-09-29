@@ -4,31 +4,43 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import sff.org.conventions.BuildConfig;
-import amai.org.conventions.model.conventions.Convention;
+import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.model.ConventionEvent;
+import amai.org.conventions.model.conventions.Convention;
+import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
+import sff.org.conventions.BuildConfig;
 
 public class ModelRefresher {
     private static final String TAG = ModelRefresher.class.getCanonicalName();
 
     private static final int CONNECT_TIMEOUT = 10000;
+	private static final long MINIMUM_REFRESH_TIME = Dates.MILLISECONDS_IN_HOUR;
 
-    /**
+	/**
      * Downloads the model from the server.
      *
      * @return true if the model retrieval completed successfully, false otherwise.
      */
-    public boolean refreshFromServer() {
-	    // Don't download if the convention is over (there won't be any more updates to the events...)
-	    if (Convention.getInstance().hasEnded()) {
-		    return true;
+    public boolean refreshFromServer(boolean force) {
+	    if (!force) {
+	        // Don't download if the convention is over (there won't be any more updates to the events...)
+		    if (Convention.getInstance().hasEnded()) {
+			    return true;
+		    }
+		    // Also don't download if we recently updated the events
+		    Date lastUpdate = ConventionsApplication.settings.getLastEventsUpdateDate();
+		    if (lastUpdate != null && Dates.now().getTime() - lastUpdate.getTime() < MINIMUM_REFRESH_TIME) {
+			    return true;
+		    }
 	    }
+	    
         try {
             HttpURLConnection request = (HttpURLConnection) Convention.getInstance().getModelURL().openConnection();
             request.setConnectTimeout(CONNECT_TIMEOUT);
@@ -43,6 +55,7 @@ public class ModelRefresher {
 	            }
 
                 Convention.getInstance().setEvents(eventList);
+	            ConventionsApplication.settings.setLastEventsUpdatedDate();
             } finally {
                 if (reader != null) {
                     reader.close();
