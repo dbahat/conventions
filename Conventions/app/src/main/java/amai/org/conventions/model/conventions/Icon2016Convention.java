@@ -19,7 +19,31 @@ import amai.org.conventions.utils.Dates;
 import sff.org.conventions.R;
 
 public class Icon2016Convention extends SffConvention {
-    @Override
+	private static final String HALL_NAME_CINEMATHEQUE_1 = "סינמטק 1";
+	private static final String HALL_NAME_CINEMATHEQUE_2 = "סינמטק 2";
+	private static final String HALL_NAME_ESHKOL_1 = "אשכול 1";
+	private static final String HALL_NAME_ESHKOL_2 = "אשכול 2";
+	private static final String HALL_NAME_ESHKOL_3 = "אשכול 3";
+	private static final String HALL_NAME_ESHKOL_4 = "אשכול 4";
+	private static final String HALL_NAME_ESHKOL_5 = "אשכול 5";
+	private static final String HALL_NAME_ESHKOL_6 = "אשכול 6";
+	private static final String HALL_NAME_WORKSHOPS_1 = "חדר סדנאות 1";
+	private static final String HALL_NAME_WORKSHOPS_2 = "חדר סדנאות 2";
+	private static final String HALL_NAME_SPECIAL_EVENTS = "ארועים מיוחדים";
+	private static final String HALL_NAME_IRONI_1 = "עירוני 1";
+	private static final String HALL_NAME_IRONI_2 = "עירוני 2";
+	private static final String HALL_NAME_IRONI_3 = "עירוני 3";
+	private static final String HALL_NAME_IRONI_4 = "עירוני 4";
+	private static final String HALL_NAME_IRONI_5 = "עירוני 5";
+	private static final String HALL_NAME_IRONI_6 = "עירוני 6";
+	private static final String HALL_NAME_IRONI_7 = "עירוני 7";
+	private static final String HALL_NAME_IRONI_8 = "עירוני 8";
+	private static final String HALL_NAME_IRONI_9 = "עירוני 9";
+	private static final String HALL_NAME_IRONI_10 = "עירוני 10";
+	private static final String HALL_NAME_IRONI_11 = "עירוני 11";
+	private static final String HALL_NAME_IRONI_12 = "עירוני 12";
+
+	@Override
     protected ConventionStorage initStorage() {
         return new ConventionStorage(this, R.raw.icon2016_convention_events, 1);
     }
@@ -46,35 +70,58 @@ public class Icon2016Convention extends SffConvention {
 
     @Override
     protected List<Hall> initHalls() {
-        return Arrays.asList(
-		        new Hall().withName("סינמטק 1").withOrder(1),
-		        new Hall().withName("סינמטק 2").withOrder(2),
-		        new Hall().withName("אשכול 1").withOrder(3),
-		        new Hall().withName("אשכול 2").withOrder(4),
-		        new Hall().withName("אשכול 3").withOrder(5),
-		        new Hall().withName("אשכול 4").withOrder(6),
-		        new Hall().withName("אשכול 5").withOrder(7),
-		        new Hall().withName("אשכול 6").withOrder(8),
-		        new Hall().withName("חדר סדנאות 1").withOrder(9),
-		        new Hall().withName("חדר סדנאות 2").withOrder(10),
-		        new Hall().withName("ארועים מיוחדים").withOrder(11),
-		        new Hall().withName("עירוני 1").withOrder(12),
-		        new Hall().withName("עירוני 2").withOrder(13),
-		        new Hall().withName("עירוני 3").withOrder(14),
-		        new Hall().withName("עירוני 4").withOrder(15),
-		        new Hall().withName("עירוני 5").withOrder(16),
-		        new Hall().withName("עירוני 6").withOrder(17),
-		        new Hall().withName("עירוני 7").withOrder(18),
-		        new Hall().withName("עירוני 8").withOrder(19),
-		        new Hall().withName("עירוני 9").withOrder(20),
-		        new Hall().withName("עירוני 10").withOrder(21),
-		        new Hall().withName("עירוני 11").withOrder(22),
-		        new Hall().withName("עירוני 12").withOrder(23)
+	    return Arrays.asList(
+		        new Hall().withName(HALL_NAME_CINEMATHEQUE_1).withOrder(1),
+		        new Hall().withName(HALL_NAME_CINEMATHEQUE_2).withOrder(2),
+		        new Hall().withName(HALL_NAME_ESHKOL_1).withOrder(3),
+		        new Hall().withName(HALL_NAME_ESHKOL_2).withOrder(4),
+		        new Hall().withName(HALL_NAME_ESHKOL_3).withOrder(5),
+		        new Hall().withName(HALL_NAME_ESHKOL_4).withOrder(6),
+		        new Hall().withName(HALL_NAME_ESHKOL_5).withOrder(7),
+		        new Hall().withName(HALL_NAME_ESHKOL_6).withOrder(8),
+		        new Hall().withName(HALL_NAME_WORKSHOPS_1).withOrder(9),
+		        new Hall().withName(HALL_NAME_WORKSHOPS_2).withOrder(10),
+		        new Hall().withName(HALL_NAME_SPECIAL_EVENTS).withOrder(11),
+		        new Hall().withName(HALL_NAME_IRONI_1).withOrder(12),
+		        new Hall().withName(HALL_NAME_IRONI_2).withOrder(13),
+		        new Hall().withName(HALL_NAME_IRONI_3).withOrder(14),
+		        new Hall().withName(HALL_NAME_IRONI_4).withOrder(15),
+		        new Hall().withName(HALL_NAME_IRONI_5).withOrder(16),
+		        new Hall().withName(HALL_NAME_IRONI_6).withOrder(17),
+		        new Hall().withName(HALL_NAME_IRONI_7).withOrder(18),
+		        new Hall().withName(HALL_NAME_IRONI_8).withOrder(19),
+		        new Hall().withName(HALL_NAME_IRONI_9).withOrder(20),
+		        new Hall().withName(HALL_NAME_IRONI_10).withOrder(21),
+		        new Hall().withName(HALL_NAME_IRONI_11).withOrder(22),
+		        new Hall().withName(HALL_NAME_IRONI_12).withOrder(23)
         );
     }
 
     @Override
     protected ConventionMap initMap() {
+	    Hall cinematheque1 = findHallByName(HALL_NAME_CINEMATHEQUE_1);
+	    Hall cinematheque2 = findHallByName(HALL_NAME_CINEMATHEQUE_2);
+	    Hall eshkol1 = findHallByName(HALL_NAME_ESHKOL_1);
+	    Hall eshkol2 = findHallByName(HALL_NAME_ESHKOL_2);
+	    Hall eshkol3 = findHallByName(HALL_NAME_ESHKOL_3);
+	    Hall eshkol4 = findHallByName(HALL_NAME_ESHKOL_4);
+	    Hall eshkol5 = findHallByName(HALL_NAME_ESHKOL_5);
+	    Hall eshkol6 = findHallByName(HALL_NAME_ESHKOL_6);
+	    Hall workshops1 = findHallByName(HALL_NAME_WORKSHOPS_1);
+	    Hall workshops2 = findHallByName(HALL_NAME_WORKSHOPS_2);
+	    Hall ironi1 = findHallByName(HALL_NAME_IRONI_1);
+	    Hall ironi2 = findHallByName(HALL_NAME_IRONI_2);
+	    Hall ironi3 = findHallByName(HALL_NAME_IRONI_3);
+	    Hall ironi4 = findHallByName(HALL_NAME_IRONI_4);
+	    Hall ironi5 = findHallByName(HALL_NAME_IRONI_5);
+	    Hall ironi6 = findHallByName(HALL_NAME_IRONI_6);
+	    Hall ironi7 = findHallByName(HALL_NAME_IRONI_7);
+	    Hall ironi8 = findHallByName(HALL_NAME_IRONI_8);
+	    Hall ironi9 = findHallByName(HALL_NAME_IRONI_9);
+	    Hall ironi10 = findHallByName(HALL_NAME_IRONI_10);
+	    Hall ironi11 = findHallByName(HALL_NAME_IRONI_11);
+	    Hall ironi12 = findHallByName(HALL_NAME_IRONI_12);
+
 	    Floor floor = new Floor(1)
 			    .withName("מפת התמצאות")
 			    .withImageResource(R.drawable.icon2016_map, false)
@@ -137,14 +184,14 @@ public class Icon2016Convention extends SffConvention {
 										    .withY(901)
 										    .withMarkerHeight(50),
 								    new MapLocation()
-										    .withPlace(new Place().withName("אשכול 1"))
+										    .withPlace(eshkol1)
 										    .withMarkerResource(R.drawable.ic_action_place, false)
 										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
 										    .withX(678)
 										    .withY(789)
 										    .withMarkerHeight(100),
 								    new MapLocation()
-										    .withPlace(new Place().withName("אשכול 2"))
+										    .withPlace(eshkol2)
 										    .withMarkerResource(R.drawable.ic_action_place, false)
 										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
 										    .withX(826)
@@ -242,7 +289,8 @@ public class Icon2016Convention extends SffConvention {
 										    .withY(1052)
 										    .withMarkerHeight(50),
 								    new MapLocation()
-										    .withPlace(new Place().withName("כניסה לעירוני"))
+										    .withName("כניסה לעירוני")
+										    .withPlaces(Arrays.asList(ironi1, ironi2, ironi3, ironi4, ironi5, ironi6, ironi7, ironi8, ironi9, ironi10, ironi11, ironi12))
 										    .withMarkerResource(R.drawable.ic_action_place, false)
 										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
 										    .withX(257)
@@ -270,14 +318,14 @@ public class Icon2016Convention extends SffConvention {
 										    .withY(980)
 										    .withMarkerHeight(50),
 								    new MapLocation()
-										    .withPlace(new Place().withName("חדר סדנאות 1"))
+										    .withPlace(workshops1)
 										    .withMarkerResource(R.drawable.ic_action_place, false)
 										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
 										    .withX(51)
 										    .withY(920)
 										    .withMarkerHeight(50),
 								    new MapLocation()
-										    .withPlace(new Place().withName("חדר סדנאות 2"))
+										    .withPlace(workshops2)
 										    .withMarkerResource(R.drawable.ic_action_place, false)
 										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
 										    .withX(51)
@@ -333,24 +381,27 @@ public class Icon2016Convention extends SffConvention {
 										    .withY(265)
 										    .withMarkerHeight(50),
 								    new MapLocation()
-										    .withPlace(new Place().withName("מדרגות לאולמות אשכול 3-6"))
+										    .withName("מדרגות לאולמות אשכול 3-6")
+										    .withPlaces(Arrays.asList(eshkol3, eshkol4, eshkol5, eshkol6))
 										    .withMarkerResource(R.drawable.ic_action_place, false)
 										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
 										    .withX(554)
 										    .withY(949)
 										    .withMarkerHeight(50),
 								    new MapLocation()
-										    .withPlace(new Place().withName("מדרגות לאולמות אשכול 3-6"))
+										    .withName("מדרגות לאולמות אשכול 3-6")
+										    .withPlaces(Arrays.asList(eshkol3, eshkol4, eshkol5, eshkol6))
 										    .withMarkerResource(R.drawable.ic_action_place, false)
 										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
 										    .withX(808)
 										    .withY(949)
 										    .withMarkerHeight(50),
 								    new MapLocation()
-										    .withPlace(new Place().withName("לסינמטק תל אביב"))
+										    .withName("לסינמטק תל אביב")
+										    .withPlaces(Arrays.asList(cinematheque1, cinematheque2))
 										    .withMarkerResource(R.drawable.ic_action_place, false)
 										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
-										    .withX(640)
+										    .withX(898)
 										    .withY(141)
 										    .withMarkerHeight(50)
 						    )

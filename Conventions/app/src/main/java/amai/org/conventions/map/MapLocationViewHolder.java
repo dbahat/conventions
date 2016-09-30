@@ -8,9 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import sff.org.conventions.R;
-import amai.org.conventions.model.Hall;
 import amai.org.conventions.model.MapLocation;
+import sff.org.conventions.R;
 
 public class MapLocationViewHolder extends RecyclerView.ViewHolder {
 	private final TextView locationName;
@@ -33,7 +32,7 @@ public class MapLocationViewHolder extends RecyclerView.ViewHolder {
 		}
 		Context context = itemView.getContext();
 		Drawable image;
-		if (location.getPlace() instanceof Hall) {
+		if (location.areAllPlacesHalls()) {
 			image = ContextCompat.getDrawable(context, R.drawable.events_list);
 		} else {
 			image = ContextCompat.getDrawable(context, R.drawable.ic_action_place);

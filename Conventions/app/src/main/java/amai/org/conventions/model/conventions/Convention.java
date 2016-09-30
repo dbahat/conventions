@@ -29,6 +29,7 @@ import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.Floor;
 import amai.org.conventions.model.Hall;
 import amai.org.conventions.model.MapLocation;
+import amai.org.conventions.model.Place;
 import amai.org.conventions.model.SearchFilter;
 import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.StandsArea;
@@ -537,8 +538,14 @@ public abstract class Convention implements Serializable {
 
 	public StandsArea findStandsArea(int id) {
 		for (MapLocation location : map.getLocations()) {
-			if (location.getPlace() instanceof StandsArea && ((StandsArea) location.getPlace()).getId() == id) {
-				return (StandsArea) location.getPlace();
+			List<? extends Place> places = location.getPlaces();
+			if (places == null) {
+				continue;
+			}
+			for (Place place : places) {
+				if (place instanceof StandsArea && ((StandsArea) place).getId() == id) {
+					return (StandsArea) place;
+				}
 			}
 		}
 
@@ -547,9 +554,15 @@ public abstract class Convention implements Serializable {
 
 	public boolean hasStands() {
 		for (MapLocation location : map.getLocations()) {
-			if (location.getPlace() instanceof StandsArea &&
-					((StandsArea) location.getPlace()).getStands().size() > 0) {
-				return true;
+			List<? extends Place> places = location.getPlaces();
+			if (places == null) {
+				continue;
+			}
+			for (Place place : places) {
+				if (place instanceof StandsArea &&
+						((StandsArea) place).getStands().size() > 0) {
+					return true;
+				}
 			}
 		}
 		return false;
@@ -559,11 +572,14 @@ public abstract class Convention implements Serializable {
 		Set<Integer> foundStandAreas = new HashSet<>();
 		List<Stand> stands = new LinkedList<>();
 		for (MapLocation location : map.getLocations()) {
-			if (location.getPlace() instanceof StandsArea) {
-				StandsArea area = (StandsArea) location.getPlace();
-				if (!foundStandAreas.contains(area.getId())) {
-					stands.addAll(area.getStands());
-					foundStandAreas.add(area.getId());
+			List<? extends Place> places = location.getPlaces();
+			for (Place place : places) {
+				if (place instanceof StandsArea) {
+					StandsArea area = (StandsArea) place;
+					if (!foundStandAreas.contains(area.getId())) {
+						stands.addAll(area.getStands());
+						foundStandAreas.add(area.getId());
+					}
 				}
 			}
 		}

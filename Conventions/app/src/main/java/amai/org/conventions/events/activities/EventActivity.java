@@ -39,16 +39,15 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import amai.org.conventions.ConventionsApplication;
-import sff.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.AspectRatioImageView;
 import amai.org.conventions.events.CollapsibleFeedbackView;
 import amai.org.conventions.events.ConfigureNotificationsFragment;
 import amai.org.conventions.map.MapActivity;
-import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.MapLocation;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.EventFeedbackMail;
@@ -56,6 +55,7 @@ import amai.org.conventions.utils.FeedbackMail;
 import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Views;
 import fi.iki.kuitsi.listtest.ListTagHandler;
+import sff.org.conventions.R;
 import uk.co.chrisjenx.paralloid.views.ParallaxScrollView;
 
 
@@ -328,10 +328,13 @@ public class EventActivity extends NavigationActivity {
                 Bundle floorBundle = new Bundle();
                 ConventionMap map = Convention.getInstance().getMap();
                 List<MapLocation> locations = map.findLocationsByHall(conventionEvent.getHall());
-                MapLocation location = map.findClosestLocation(locations);
-                if (location != null) {
-                    floorBundle.putInt(MapActivity.EXTRA_MAP_LOCATION_ID, location.getId());
-                }
+	            int[] locationIds = new int[locations.size()];
+	            int i = 0;
+	            for (MapLocation location : locations) {
+		            locationIds[i] = location.getId();
+		            ++i;
+	            }
+                floorBundle.putIntArray(MapActivity.EXTRA_MAP_LOCATION_IDS, locationIds);
 
                 navigateToActivity(MapActivity.class, false, floorBundle);
                 return true;
@@ -408,8 +411,7 @@ public class EventActivity extends NavigationActivity {
     private void hideNavigateToMapButtonIfNoLocationExists(Menu menu) {
         ConventionMap map = Convention.getInstance().getMap();
         List<MapLocation> locations = map.findLocationsByHall(conventionEvent.getHall());
-        MapLocation location = map.findClosestLocation(locations);
-        if (location == null) {
+        if (locations.size() == 0) {
             menu.findItem(R.id.event_navigate_to_map).setVisible(false);
         }
     }
