@@ -8,7 +8,9 @@ public class MapLocation {
 	private Place place;
 	private String name;
 	private int markerResource;
+	private boolean isMarkerResourceSVG;
 	private int selectedMarkerResource;
+	private boolean isSelectedMarkerResourceSVG;
 	private float markerHeight = -1;
 
 	public MapLocation() {
@@ -104,25 +106,35 @@ public class MapLocation {
 		return markerResource;
 	}
 
-	public void setMarkerResource(int markerResource) {
+	public void setMarkerResource(int markerResource, boolean isMarkerResourceSVG) {
 		this.markerResource = markerResource;
+		this.isMarkerResourceSVG = isMarkerResourceSVG;
 	}
 
-	public MapLocation withMarkerResource(int markerResource) {
-		setMarkerResource(markerResource);
+	public MapLocation withMarkerResource(int markerResource, boolean isMarkerResourceSVG) {
+		setMarkerResource(markerResource, isMarkerResourceSVG);
 		return this;
+	}
+
+	public boolean isMarkerResourceSVG() {
+		return isMarkerResourceSVG;
 	}
 
 	public int getSelectedMarkerResource() {
 		return selectedMarkerResource;
 	}
 
-	public void setSelectedMarkerResource(int selectedMarkerResource) {
+	public void setSelectedMarkerResource(int selectedMarkerResource, boolean isSelectedMarkerResourceSVG) {
 		this.selectedMarkerResource = selectedMarkerResource;
+		this.isSelectedMarkerResourceSVG = isSelectedMarkerResourceSVG;
 	}
 
-	public MapLocation withSelectedMarkerResource(int selectedMarkerResource) {
-		setSelectedMarkerResource(selectedMarkerResource);
+	public MapLocation withSelectedMarkerResource(int selectedMarkerResource, boolean isSelectedMarkerResourceSVG) {
+		setSelectedMarkerResource(selectedMarkerResource, isSelectedMarkerResourceSVG);
 		return this;
+	}
+
+	public boolean isSelectedMarkerResourceSVG() {
+		return isSelectedMarkerResourceSVG;
 	}
 }

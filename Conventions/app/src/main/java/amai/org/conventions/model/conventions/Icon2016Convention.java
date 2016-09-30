@@ -11,6 +11,9 @@ import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.EventToImageResourceIdMapper;
 import amai.org.conventions.model.Floor;
 import amai.org.conventions.model.Hall;
+import amai.org.conventions.model.MapLocation;
+import amai.org.conventions.model.Place;
+import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 import amai.org.conventions.utils.Dates;
 import sff.org.conventions.R;
@@ -72,14 +75,287 @@ public class Icon2016Convention extends SffConvention {
 
     @Override
     protected ConventionMap initMap() {
+	    Floor floor = new Floor(1)
+			    .withName("מפת התמצאות")
+			    .withImageResource(R.drawable.icon2016_map, false)
+			    .withImageHeight(1303)
+			    .withImageWidth(920);
+
 	    return new ConventionMap()
-			    .withFloors(Collections.singletonList(
-					    new Floor(1)
-							    .withName("מפת התמצאות")
-							    .withImageResource(R.drawable.icon2016_map, false)
-							    .withImageHeight(1303)
-							    .withImageWidth(920)
-			    ));
+		    .withFloors(Collections.singletonList(floor))
+		    .withLocations(
+				    CollectionUtils.flattenList(
+						    inFloor(floor,
+								    new MapLocation()
+										    .withPlace(new Place().withName("כניסה"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(672)
+										    .withY(1182)
+										    .withMarkerHeight(50),
+								    new MapLocation()
+										    .withPlace(new Place().withName("מיניאטורות"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(836)
+										    .withY(1073)
+										    .withMarkerHeight(50),
+								    new MapLocation()
+										    .withPlace(new Place().withName("מיניאטורות"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(545)
+										    .withY(1052)
+										    .withMarkerHeight(50),
+
+								    new MapLocation()
+										    .withPlace(new Place().withName("דוכנים"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(680)
+										    .withY(1042)
+										    .withMarkerHeight(50),
+								    new MapLocation()
+										    .withPlace(new Place().withName("דוכנים"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(680)
+										    .withY(899)
+										    .withMarkerHeight(50),
+								    new MapLocation()
+										    .withPlace(new Place().withName("שירותי בנים"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(855)
+										    .withY(901)
+										    .withMarkerHeight(50),
+								    new MapLocation()
+										    .withPlace(new Place().withName("שירותי בנות"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(507)
+										    .withY(901)
+										    .withMarkerHeight(50),
+								    new MapLocation()
+										    .withPlace(new Place().withName("אשכול 1"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(678)
+										    .withY(789)
+										    .withMarkerHeight(100),
+								    new MapLocation()
+										    .withPlace(new Place().withName("אשכול 2"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(826)
+										    .withY(789)
+										    .withMarkerHeight(100),
+								    new MapLocation()
+										    .withPlace(new Place().withName("מתחם יד שניה וחולצות הפסטיבל"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(487)
+										    .withY(804)
+										    .withMarkerHeight(50),
+								    new MapLocation()
+										    .withPlace(new Place().withName("הפונדק שבין העולמות"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(846)
+										    .withY(575)
+										    .withMarkerHeight(50),
+								    new MapLocation()
+										    .withPlace(new Place().withName("קולוסיאום"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(711)
+										    .withY(498)
+										    .withMarkerHeight(50),
+								    new MapLocation()
+										    .withPlace(new Place().withName("כניסה מרחוב הארבעה"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(885)
+										    .withY(379)
+										    .withMarkerHeight(50),
+								    new MapLocation()
+										    .withPlace(new Place().withName("מודיעין"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(835)
+										    .withY(298)
+										    .withMarkerHeight(50),
+								    new MapLocation()
+										    .withPlace(new Place().withName("קופות ואיסוף הזמנה מראש"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(712)
+										    .withY(311)
+										    .withMarkerHeight(50),
+								    new MapLocation()
+										    .withPlace(new Place().withName("אגודה ישראלית למדע בדיוני ולפנטזיה"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(596)
+										    .withY(293)
+										    .withMarkerHeight(50),
+								    new MapLocation()
+										    .withPlace(new Place().withName("גיבורים הוצאה לאור"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(516)
+										    .withY(285)
+										    .withMarkerHeight(50),
+								    new MapLocation()
+										    .withPlace(new Place().withName("איסוף הזמנות מראש ומתחם השקות"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(406)
+										    .withY(331)
+										    .withMarkerHeight(50),
+								    new MapLocation()
+										    .withPlace(new Place().withName("דוכנים"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(506)
+										    .withY(592)
+										    .withMarkerHeight(50),
+								    new MapLocation()
+										    .withPlace(new Place().withName("דוכנים"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(273)
+										    .withY(1140)
+										    .withMarkerHeight(50),
+								    new MapLocation()
+										    .withPlace(new Place().withName("אולם הספורט"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(304)
+										    .withY(196)
+										    .withMarkerHeight(50),
+								    new MapLocation()
+										    .withPlace(new Place().withName("דוכנים"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(184)
+										    .withY(1052)
+										    .withMarkerHeight(50),
+								    new MapLocation()
+										    .withPlace(new Place().withName("כניסה לעירוני"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(257)
+										    .withY(493)
+										    .withMarkerHeight(50),
+								    new MapLocation()
+										    .withPlace(new Place().withName("מתחם משחקי לוח"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(180)
+										    .withY(148)
+										    .withMarkerHeight(50),
+								    new MapLocation()
+										    .withPlace(new Place().withName("כניסה לעירוני"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(51)
+										    .withY(1054)
+										    .withMarkerHeight(50),
+								    new MapLocation()
+										    .withPlace(new Place().withName("שירותים"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(51)
+										    .withY(980)
+										    .withMarkerHeight(50),
+								    new MapLocation()
+										    .withPlace(new Place().withName("חדר סדנאות 1"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(51)
+										    .withY(920)
+										    .withMarkerHeight(50),
+								    new MapLocation()
+										    .withPlace(new Place().withName("חדר סדנאות 2"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(51)
+										    .withY(862)
+										    .withMarkerHeight(50),
+								    new MapLocation()
+										    .withPlace(new Place().withName("הוביטון"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(51)
+										    .withY(799)
+										    .withMarkerHeight(50),
+								    new MapLocation()
+										    .withPlace(new Place().withName("חדר סגל"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(51)
+										    .withY(737)
+										    .withMarkerHeight(50),
+								    new MapLocation()
+										    .withPlace(new Place().withName("אפסנאות"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(51)
+										    .withY(675)
+										    .withMarkerHeight(50),
+								    new MapLocation()
+										    .withPlace(new Place().withName("שירותים"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(70)
+										    .withY(533)
+										    .withMarkerHeight(50),
+								    new MapLocation()
+										    .withPlace(new Place().withName("חדר קוספליי"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(70)
+										    .withY(468)
+										    .withMarkerHeight(50),
+								    new MapLocation()
+										    .withPlace(new Place().withName("חדר מפגשים"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(70)
+										    .withY(387)
+										    .withMarkerHeight(50),
+								    new MapLocation()
+										    .withPlace(new Place().withName("שמירת חפצים"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(70)
+										    .withY(265)
+										    .withMarkerHeight(50),
+								    new MapLocation()
+										    .withPlace(new Place().withName("מדרגות לאולמות אשכול 3-6"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(554)
+										    .withY(949)
+										    .withMarkerHeight(50),
+								    new MapLocation()
+										    .withPlace(new Place().withName("מדרגות לאולמות אשכול 3-6"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(808)
+										    .withY(949)
+										    .withMarkerHeight(50),
+								    new MapLocation()
+										    .withPlace(new Place().withName("לסינמטק תל אביב"))
+										    .withMarkerResource(R.drawable.ic_action_place, false)
+										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
+										    .withX(640)
+										    .withY(141)
+										    .withMarkerHeight(50)
+						    )
+				    )
+		    );
     }
 
     @Override

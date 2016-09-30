@@ -424,7 +424,9 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 			    locations = map.findLocationsByFloor(floor);
 			    for (final MapLocation location : locations) {
 			        // We don't save the result because it's saved in a cache for quicker access in the UI thread
-				    ImageHandler.loadSVG(appContext, location.getMarkerResource());
+				    if (location.isMarkerResourceSVG()) {
+				        ImageHandler.loadSVG(appContext, location.getMarkerResource());
+				    }
 			    }
 
 			    return true;
@@ -515,8 +517,13 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		final SVGImageView markerImageView = new AspectRatioSVGImageView(appContext);
 
 		// Set marker image
-		SVG markerSvg = ImageHandler.loadSVG(appContext, location.getMarkerResource());
-		markerImageView.setSVG(markerSvg);
+		if (location.isMarkerResourceSVG()) {
+			SVG markerSvg = ImageHandler.loadSVG(appContext, location.getMarkerResource());
+			markerImageView.setSVG(markerSvg);
+		} else {
+			markerImageView.setImageDrawable(ContextCompat.getDrawable(appContext, location.getMarkerResource()));
+		}
+
 		// Setting layer type to none to avoid caching the marker views bitmap when in zoomed-out state.
 		// The caching causes the marker image looks pixelized in zoomed-in state.
 		// This has to be done after calling setSVG.
@@ -542,8 +549,12 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 					@Override
 					public Drawable getDrawable() {
 						if (drawable == null) {
-							SVG markerSelectedSvg = ImageHandler.loadSVG(appContext, location.getSelectedMarkerResource());
-							drawable = new PictureDrawable(markerSelectedSvg.renderToPicture());
+							if (location.isSelectedMarkerResourceSVG()) {
+								SVG markerSelectedSvg = ImageHandler.loadSVG(appContext, location.getSelectedMarkerResource());
+								drawable = new PictureDrawable(markerSelectedSvg.renderToPicture());
+							} else {
+								drawable = ContextCompat.getDrawable(appContext, location.getSelectedMarkerResource());
+							}
 						}
 						return drawable;
 					}
