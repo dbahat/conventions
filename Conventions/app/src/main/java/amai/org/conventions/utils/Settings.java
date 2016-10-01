@@ -9,9 +9,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import amai.org.conventions.map.AggregatedEventTypes;
 import amai.org.conventions.model.conventions.Convention;
-import sff.org.conventions.R;
 
 public class Settings {
 	public static final int NO_PUSH_NOTIFICATION_SEEN = -1;
@@ -89,15 +87,7 @@ public class Settings {
 	public List<String> getProgrammeSearchCategories(Context context) {
 		Set<String> categories = sharedPreferences.getStringSet(PROGRAMME_SEARCH_CATEGORIES, null);
 		if (categories == null) {
-			List<String> allCategories = CollectionUtils.map(new AggregatedEventTypes().getAggregatedEventTypes(),
-					new CollectionUtils.Mapper<AggregatedEventTypes.AggregatedType, String>() {
-						@Override
-						public String map(AggregatedEventTypes.AggregatedType item) {
-							return item.getName();
-						}
-					});
-			allCategories.add(context.getString(R.string.other));
-			return allCategories;
+			return Convention.getInstance().getAggregatedSearchCategories();
 		}
 		return new ArrayList<>(categories);
 	}

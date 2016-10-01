@@ -19,7 +19,6 @@ import android.widget.AbsListView;
 import android.widget.NumberPicker;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
@@ -27,12 +26,14 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.DefaultEventFavoriteChangedListener;
 import amai.org.conventions.events.ProgrammeConventionEvent;
 import amai.org.conventions.events.ViewPagerAnimator;
 import amai.org.conventions.events.adapters.SwipeableEventsViewOrHourAdapter;
 import amai.org.conventions.events.holders.EventTimeViewHolder;
+import amai.org.conventions.map.AggregatedEventTypes;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.EventType;
 import amai.org.conventions.model.conventions.Convention;
@@ -45,7 +46,6 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 	private static final String ARGS_DATE = "ArgDate";
 	private static final String ARGS_DELAY_SCROLLING = "ArgDelayScrolling";
 	private static final String STATE_PREVENT_SCROLLING = "StatePreventScrolling";
-	private static final String ARGS_EVENT_TYPES_FILTER = "ArgsEventTypesFilter";
 
 	private SwipeRefreshLayout swipeLayout;
 	private SwipeableEventsViewOrHourAdapter adapter;
@@ -58,12 +58,11 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 	private Calendar date;
 
 
-	public static ProgrammeDayFragment newInstance(Calendar date, int delayScrolling, List<EventType> eventTypesFilter) {
+	public static ProgrammeDayFragment newInstance(Calendar date, int delayScrolling) {
 		ProgrammeDayFragment fragment = new ProgrammeDayFragment();
 		Bundle args = new Bundle();
 		args.putLong(ARGS_DATE, date.getTimeInMillis());
 		args.putInt(ARGS_DELAY_SCROLLING, delayScrolling);
-		args.putSerializable(ARGS_EVENT_TYPES_FILTER, new ArrayList<>(eventTypesFilter) /* wrapping in ArrayList for serialization */);
 		fragment.setArguments(args);
 
 		return fragment;
@@ -77,9 +76,7 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 		date = Calendar.getInstance();
 		date.setTimeInMillis(getArguments().getLong(ARGS_DATE));
 
-		// Doing unsafe cast since we know the expected type of the argument
-		// noinspection unchecked
-		eventTypesFilter = (ArrayList<EventType>) getArguments().getSerializable(ARGS_EVENT_TYPES_FILTER);
+		eventTypesFilter = new AggregatedEventTypes().get(ConventionsApplication.settings.getProgrammeSearchCategories(container.getContext()));
 
 		swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.programme_swipe_layout);
 		swipeLayout.setOnRefreshListener(this);

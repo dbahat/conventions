@@ -306,9 +306,7 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 
 		@Override
 		public Fragment getItem(int position) {
-			return ProgrammeDayFragment.newInstance(getDate(position),
-					delayScrolling,
-					new AggregatedEventTypes().get(ConventionsApplication.settings.getProgrammeSearchCategories(getApplicationContext())));
+			return ProgrammeDayFragment.newInstance(getDate(position), delayScrolling);
 		}
 	}
 }
