@@ -67,8 +67,11 @@ public class ShowNotificationService extends Service {
             Type notificationType = (Type) typeObj;
             switch (notificationType) {
                 case ConventionFeedbackReminder:
-                    showFillConventionFeedbackNotification();
+                    showFillConventionFeedbackNotification(false);
                     break;
+	            case ConventionFeedbackLastChanceReminder:
+		            showFillConventionFeedbackNotification(true);
+		            break;
                 case EventAboutToStart:
                     showEventAboutToStartNotification(intent);
                     break;
@@ -85,7 +88,7 @@ public class ShowNotificationService extends Service {
         return START_NOT_STICKY;
     }
 
-    private void showFillConventionFeedbackNotification() {
+    private void showFillConventionFeedbackNotification(boolean lastChance) {
 
         // In case the user already sent convention feedback, no need to show him the notification
         if (Convention.getInstance().getFeedback().isSent()) {
@@ -93,19 +96,27 @@ public class ShowNotificationService extends Service {
         }
 
         Intent intent = new Intent(this, FeedbackActivity.class);
-        Notification.Builder builder = getDefaultNotificationBuilder()
-                .setContentTitle(getString(R.string.notification_event_ended_title))
-                .setContentText(getString(R.string.notification_feedback_ended_message, Convention.getInstance().getDisplayName()))
+	    String title = lastChance ? getString(R.string.notification_feedback_last_chance_title) : getString(R.string.notification_event_ended_title);
+	    String message = lastChance ? getString(R.string.notification_feedback_last_chance_message, Convention.getInstance().getDisplayName()) :
+			    getString(R.string.notification_feedback_ended_message, Convention.getInstance().getDisplayName());
+
+	    Notification.Builder builder = getDefaultNotificationBuilder()
+                .setContentTitle(title)
+                .setContentText(message)
                 .setContentIntent(PendingIntent.getActivity(this, 0, intent, 0))
                 .setDefaults(Notification.DEFAULT_VIBRATE);
 
         Notification notification = new Notification.BigTextStyle(builder)
-                .bigText(getString(R.string.notification_feedback_ended_message, Convention.getInstance().getDisplayName()))
+                .bigText(message)
                 .build();
 
         notificationManager.notify(FILL_CONVENTION_FEEDBACK_NOTIFICATION_ID, notification);
 
-        ConventionsApplication.settings.setFeedbackNotificationAsShown();
+	    if (lastChance) {
+		    ConventionsApplication.settings.setLastChanceFeedbackNotificationAsShown();
+	    } else {
+            ConventionsApplication.settings.setFeedbackNotificationAsShown();
+	    }
     }
 
     private void showEventFeedbackReminderNotification(Intent intent) {
@@ -260,6 +271,7 @@ public class ShowNotificationService extends Service {
         EventAboutToStart,
         EventFeedbackReminder,
         ConventionFeedbackReminder,
+	    ConventionFeedbackLastChanceReminder,
         Push
     }
 }

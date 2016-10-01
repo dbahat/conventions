@@ -18,6 +18,7 @@ public class Settings {
 
 	private static final String SETTINGS_SUFFIX = "settings";
 	private static final String WAS_FEEDBACK_NOTIFICATION_SHOWN = "WasFeedbackNotificationShown";
+	private static final String WAS_LAST_CHANCE_FEEDBACK_NOTIFICATION_SHOWN = "WasLastChanceFeedbackNotificationShown";
 	private static final String WAS_NAVIGATION_POPUP_OPENED = "WasNavigationPopupOpened";
 	private static final String WAS_PLAY_SERVICES_INSTALLATION_CANCELLED = "WasPlayServicesInstallationCancelled";
 	private static final String WAS_SETTINGS_POPUP_DISPLAYED = "WasSettingsPopupDisplayed";
@@ -39,6 +40,14 @@ public class Settings {
 
 	public void setFeedbackNotificationAsShown() {
 		sharedPreferences.edit().putBoolean(WAS_FEEDBACK_NOTIFICATION_SHOWN, true).apply();
+	}
+
+	public boolean wasConventionLastChanceFeedbackNotificationShown() {
+		return sharedPreferences.getBoolean(WAS_LAST_CHANCE_FEEDBACK_NOTIFICATION_SHOWN, false);
+	}
+
+	public void setLastChanceFeedbackNotificationAsShown() {
+		sharedPreferences.edit().putBoolean(WAS_LAST_CHANCE_FEEDBACK_NOTIFICATION_SHOWN, true).apply();
 	}
 
 	public boolean wasNavigationPopupOpened() {

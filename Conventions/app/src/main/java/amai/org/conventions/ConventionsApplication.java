@@ -61,7 +61,7 @@ public class ConventionsApplication extends Application {
             exceptionReporter.setExceptionParser(new ExtendedExceptionParser(this, null));
         }
 
-        alarmScheduler.scheduleNotificationToFillConventionFeedback();
+        alarmScheduler.scheduleNotificationsToFillConventionFeedback();
 
 	    try {
 		    versionName = this.getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;

@@ -66,6 +66,8 @@
     <string name="notification_2_events_ended_message_format">נהנת באירוע %s ובאירוע נוסף אחד? שלח פידבק למארגנים</string>
     <string name="notification_several_events_ended_message_format">נהנת באירוע %1$s וב-%2$d אירועים נוספים? שלח פידבק למארגנים</string>
     <string name="notification_feedback_ended_message">%s הסתיים, ואנחנו רוצים לשמוע את דעתך</string>
+    <string name="notification_feedback_last_chance_title">הזדמנות אחרונה להשפיע</string>
+    <string name="notification_feedback_last_chance_message">נהניתם ב%s? נשארו רק עוד 4 ימים למלא פידבק!</string>
 
     <string name="configure_notification_event_about_to_start_message">שלח תזכורת לפני תחילת האירוע</string>
     <string name="configure_notification_event_feedback_reminder_message">שלח תזכורת למלא פידבק אחרי שהאירוע מסתיים</string>
@@ -152,7 +154,7 @@
 ]]></string>
     <string name="about_app_content"><![CDATA[
 האפליקציה פותחה על ידי דוד בהט וטל ספן עבור פסטיבל אייקון. בקשות והצעות ניתן לכתוב <a href="market://details?id=sff.org.conventions">בדף האפליקציה בחנות</a>.
-<br/>תודות: גליה בהט, דמיאן הופמן, חננאל לבנה, תומר שלו.
+<br/>תודות: גליה בהט, דמיאן הופמן, חננאל לבנה, עומרי רוזנברג, תומר שלו.
 ]]></string>
     <string name="question_map_signs">האם המפה והשילוט היו ברורים ושימושיים?</string>
     <string name="question_conflicting_events">אם היה אירוע שרצית ללכת אליו ולא הלכת, מה הסיבה לכך?</string>
