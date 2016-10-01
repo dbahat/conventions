@@ -229,12 +229,16 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	}
 
 	public void onConventionEventClicked(View view) {
-	    Bundle bundle = new Bundle();
-        bundle.putString(EventActivity.EXTRA_EVENT_ID, (String) view.getTag());
-	    addCustomEventActivityParameters(bundle);
-	    navigateToActivity(EventActivity.class, false, bundle);
-	    overridePendingTransition(0, 0);
+		navigateToEvent((String) view.getTag());
     }
+
+	protected void navigateToEvent(String id) {
+		Bundle bundle = new Bundle();
+		bundle.putString(EventActivity.EXTRA_EVENT_ID, id);
+		addCustomEventActivityParameters(bundle);
+		navigateToActivity(EventActivity.class, false, bundle);
+		overridePendingTransition(0, 0);
+	}
 
 	protected void addCustomEventActivityParameters(Bundle bundle) {
 	}
@@ -252,7 +256,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		closeDrawerIfNeeded();
 
 		// In case we were asked to navigate to the activity we're already in, ignore the request
-		if (activityToNavigateTo == this.getClass()) {
+		if (activityToNavigateTo == this.getClass() && extras == null) {
 			return;
 		}
 

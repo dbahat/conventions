@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
+import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.EventToImageResourceIdMapper;
 import amai.org.conventions.model.Floor;
@@ -449,5 +450,14 @@ public class Icon2016Convention extends SffConvention {
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	@Override
+	public ConventionEvent findEventByURL(String url) {
+		// Event URLs in event descriptions can point to an alternate URL
+		if (url.startsWith("http://program.iconfestival.org.il/")) {
+			url = "http://iconfestival.com/" + url.substring("http://program.iconfestival.org.il/".length());
+		}
+		return super.findEventByURL(url);
 	}
 }

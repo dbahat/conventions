@@ -22,6 +22,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.notifications.PlayServicesInstallation;
+import fi.iki.kuitsi.listtest.ListTagHandler;
 import sff.org.conventions.R;
 
 public class ArrivalMethodsActivity extends NavigationActivity implements OnMapReadyCallback {
@@ -44,7 +45,7 @@ public class ArrivalMethodsActivity extends NavigationActivity implements OnMapR
 		installPlayServicesButton = (Button) findViewById(R.id.install_play_services);
 
 		TextView arrivalMethodsDescription = (TextView) findViewById(R.id.arrival_methods_description);
-		arrivalMethodsDescription.setText(Html.fromHtml(getString(R.string.arrival_method_description)));
+		arrivalMethodsDescription.setText(Html.fromHtml(getString(R.string.arrival_method_description), null, new ListTagHandler()));
 		arrivalMethodsDescription.setMovementMethod(LinkMovementMethod.getInstance());
     }
 

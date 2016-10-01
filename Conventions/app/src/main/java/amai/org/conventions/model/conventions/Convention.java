@@ -275,6 +275,15 @@ public abstract class Convention implements Serializable {
         );
     }
 
+	public ConventionEvent findEventByURL(String url) {
+		for (ConventionEvent event : getEvents()) {
+			if (url.equalsIgnoreCase(event.getWebsiteUrl())) {
+				return event;
+			}
+		}
+		return null;
+	}
+
     public void setUpdates(List<Update> updates) {
         this.updates = updates;
 	    refreshUpdatesMap();

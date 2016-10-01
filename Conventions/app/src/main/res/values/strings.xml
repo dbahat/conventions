@@ -222,11 +222,12 @@
 <p dir="RTL"><a href="http://www.bus.co.il">www.bus.co.il</a></p>
 <p dir="RTL"><a href="http://www.callkav.gov.il">www.callkav.gov.il</a></p>
 <h3>חניה:</h3>
-<p dir="RTL">מגרשי חניה הסמוכים למתחם הפסטיבל:</p>
-• חניון הארבעה (רחוב החשמונאים)<br/>
-• חניון ארניה (רחוב ארניה)<br/>
-• חניון שפרינצק (רחוב שפרינצק)<br/>
-• חניון גבעון / TLV (רחוב הארבעה) שמציע <a href="http://2016.iconfestival.org.il/info/discounts/" target="_blank">הנחה לבאי הפסטיבל</a> בשעות הערב<br/>
+<p dir="RTL">מגרשי חניה הסמוכים למתחם הפסטיבל:</p><ul>
+<li>חניון הארבעה (רחוב החשמונאים)</li>
+<li>חניון ארניה (רחוב ארניה)</li>
+<li>חניון שפרינצק (רחוב שפרינצק)</li>
+<li>חניון גבעון / TLV (רחוב הארבעה) שמציע <a href="http://2016.iconfestival.org.il/info/discounts/" target="_blank">הנחה לבאי הפסטיבל</a> בשעות הערב<br/></li>
+</ul>
 ]]></string>
     <string name="discounts">הטבות</string>
 </resources>

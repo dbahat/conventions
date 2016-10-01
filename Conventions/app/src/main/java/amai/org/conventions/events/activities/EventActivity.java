@@ -15,9 +15,12 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.graphics.Palette;
 import android.text.Html;
+import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.text.style.URLSpan;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.Menu;
@@ -556,6 +559,20 @@ public class EventActivity extends NavigationActivity {
 
 			Spanned spanned = Html.fromHtml(eventDescription, null, new ListTagHandler());
 			description.setText(spanned);
+
+			// Intercept clicks on links to other events
+			if (description.getText() instanceof SpannableString) {
+				SpannableString spannable = (SpannableString) description.getText();
+				URLSpan[] spans = spannable.getSpans(0, spanned.length(), URLSpan.class);
+				for (URLSpan span : spans) {
+					int spanStart = spannable.getSpanStart(span);
+					int spanEnd = spannable.getSpanEnd(span);
+					int spanFlags = spannable.getSpanFlags(span);
+					spannable.removeSpan(span);
+					spannable.setSpan(new EventURLSpan(span), spanStart, spanEnd, spanFlags);
+				}
+				description.setText(spannable);
+			}
 		}
 	}
 
@@ -644,4 +661,22 @@ public class EventActivity extends NavigationActivity {
         feedbackView.setState(CollapsibleFeedbackView.State.Collapsed);
     }
 
+	private class EventURLSpan extends ClickableSpan {
+		private final URLSpan urlSpan;
+
+		public EventURLSpan(URLSpan span) {
+			this.urlSpan = span;
+		}
+
+		@Override
+		public void onClick(View view) {
+			ConventionEvent event = Convention.getInstance().findEventByURL(urlSpan.getURL());
+			// Go to the event in case of a link to an event. Otherwise go to the original URL.
+			if (event != null) {
+				navigateToEvent(event.getId());
+			} else {
+				urlSpan.onClick(view);
+			}
+		}
+	}
 }
