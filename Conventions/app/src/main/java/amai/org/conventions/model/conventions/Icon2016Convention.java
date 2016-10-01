@@ -233,7 +233,7 @@ public class Icon2016Convention extends SffConvention {
 										    .withY(298)
 										    .withMarkerHeight(50),
 								    new MapLocation()
-										    .withPlace(new Place().withName("קופות ואיסוף הזמנה מראש"))
+										    .withPlace(new Place().withName("קופות ואיסוף הזמנות מראש"))
 										    .withMarkerResource(R.drawable.ic_action_place, false)
 										    .withSelectedMarkerResource(R.drawable.ic_action_place_opaque_green, false)
 										    .withX(712)
