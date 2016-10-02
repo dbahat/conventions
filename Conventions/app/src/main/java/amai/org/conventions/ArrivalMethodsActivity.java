@@ -64,18 +64,35 @@ public class ArrivalMethodsActivity extends NavigationActivity implements OnMapR
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-			case R.id.arrival_methods_navigate:
+			case R.id.arrival_methods_navigate: {
 				double latitude = Convention.getInstance().getLatitude();
 				double longitude = Convention.getInstance().getLongitude();
 				Intent intent = new Intent(Intent.ACTION_VIEW,
 						Uri.parse("geo:" + latitude + "," + longitude +
-							"?q=" + latitude + "," + longitude));
+								"?q=" + latitude + "," + longitude));
 				if (intent.resolveActivity(getPackageManager()) != null) {
 					this.startActivity(intent);
 				} else {
 					Toast.makeText(this, getString(R.string.no_navigation_activity), Toast.LENGTH_LONG).show();
 				}
 				return true;
+			}
+			case R.id.arrival_methods_navigate_bus: {
+				double latitude = Convention.getInstance().getLatitude();
+				double longitude = Convention.getInstance().getLongitude();
+				Intent intent = new Intent(Intent.ACTION_VIEW,
+						Uri.parse("moovit://directions?dest_lat=" + latitude + "&dest_lon=" + longitude + "&partner_id=" + this.getPackageName()));
+				if (intent.resolveActivity(getPackageManager()) == null) {
+					intent = new Intent(Intent.ACTION_VIEW,
+							Uri.parse("https://web.moovitapp.com/tripplan?customerId=4480&metroId=1&tll=" + latitude + "_" + longitude));
+				}
+				if (intent.resolveActivity(getPackageManager()) != null) {
+					this.startActivity(intent);
+				} else {
+					Toast.makeText(this, getString(R.string.no_navigation_activity), Toast.LENGTH_LONG).show();
+				}
+				return true;
+			}
 		}
 
 		return super.onOptionsItemSelected(item);
