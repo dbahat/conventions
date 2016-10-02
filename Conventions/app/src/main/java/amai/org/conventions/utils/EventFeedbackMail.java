@@ -29,7 +29,7 @@ public class EventFeedbackMail extends FeedbackMail {
 	protected String getBody(String formattedQuestions, String deviceId) {
 		return String.format(Dates.getLocale(), "%s\n%s, %s\n\n%s\n\t\n\t\n\t\nDeviceId:\n%s",
 				event.getTitle(),
-				Dates.formatHoursAndMinutes(event.getStartTime()),
+				Dates.formatDateAndTime(event.getStartTime()),
 				event.getHall().getName(),
 				formattedQuestions,
 				deviceId

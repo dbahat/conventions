@@ -136,6 +136,10 @@ public class Dates {
         return new SimpleDateFormat("HH:mm", getLocale()).format(date);
     }
 
+	public static String formatDateAndTime(Date date) {
+		return new SimpleDateFormat("dd.MM.yyyy HH:mm", getLocale()).format(date);
+	}
+
 	public static Locale getLocale() {
 		return LOCALE;
 	}

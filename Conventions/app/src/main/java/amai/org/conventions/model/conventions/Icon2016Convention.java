@@ -66,7 +66,7 @@ public class Icon2016Convention extends SffConvention {
 
     @Override
     protected String initDisplayName() {
-        return "אייקון 2016";
+        return "פסטיבל אייקון 2016";
     }
 
     @Override
