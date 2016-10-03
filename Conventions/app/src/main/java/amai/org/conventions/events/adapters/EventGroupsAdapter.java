@@ -49,7 +49,7 @@ public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 	    switch (viewType) {
 		    case ITEM_VIEW_TYPE_FREE_SLOT : {
-			    View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.free_time_slot_view, viewGroup, false);
+			    View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.small_text_view, viewGroup, false);
 			    return new FreeTimeSlotViewHolder(view);
 		    }
 		    case ITEM_VIEW_TYPE_REGULAR : {

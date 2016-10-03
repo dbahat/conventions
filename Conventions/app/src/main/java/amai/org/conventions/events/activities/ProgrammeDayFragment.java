@@ -32,7 +32,7 @@ import amai.org.conventions.events.DefaultEventFavoriteChangedListener;
 import amai.org.conventions.events.ProgrammeConventionEvent;
 import amai.org.conventions.events.ViewPagerAnimator;
 import amai.org.conventions.events.adapters.SwipeableEventsViewOrHourAdapter;
-import amai.org.conventions.events.holders.EventTimeViewHolder;
+import amai.org.conventions.events.holders.TimeViewHolder;
 import amai.org.conventions.map.AggregatedEventTypes;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.EventType;
@@ -214,7 +214,7 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 
 	@Override
 	public void onHeaderClick(StickyListHeadersListView stickyListHeadersListView, View view, int i, long l, boolean b) {
-		EventTimeViewHolder eventTimeViewHolder = (EventTimeViewHolder) view.getTag();
+		TimeViewHolder eventTimeViewHolder = (TimeViewHolder) view.getTag();
 		Calendar selectedTimeSectionTime = eventTimeViewHolder.getTime();
 
 		// Setup number picker dialog

@@ -8,21 +8,16 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import sff.org.conventions.R;
 import amai.org.conventions.utils.Dates;
 
-public class EventTimeViewHolder extends RecyclerView.ViewHolder {
+public class TimeViewHolder extends RecyclerView.ViewHolder {
     private TextView timeTextView;
-    private Calendar time;
+    private Calendar date;
 
-    public EventTimeViewHolder(View itemView) {
+    public TimeViewHolder(View itemView, int timeTextViewResourceId) {
         super(itemView);
 
-        timeTextView = (TextView) itemView.findViewById(R.id.event_time_text_view);
-    }
-
-    public void setTime(Date date) {
-        setTime(date, "HH:00");
+        timeTextView = (TextView) itemView.findViewById(timeTextViewResourceId);
     }
 
     public void setTime(Date date, String timeFormat) {
@@ -30,10 +25,10 @@ public class EventTimeViewHolder extends RecyclerView.ViewHolder {
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
-        time = calendar;
+        this.date = calendar;
     }
 
     public Calendar getTime() {
-        return time;
+        return date;
     }
 }

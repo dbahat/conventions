@@ -20,7 +20,7 @@ import java.util.List;
 import amai.org.conventions.events.CollapsibleFeedbackView;
 import amai.org.conventions.events.activities.EventActivity;
 import amai.org.conventions.events.activities.ProgrammeActivity;
-import amai.org.conventions.events.adapters.EventsViewAdapter;
+import amai.org.conventions.events.adapters.EventsViewWithDateHeaderAdapter;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventEndTimeComparator;
 import amai.org.conventions.model.conventions.Convention;
@@ -145,6 +145,11 @@ public class FeedbackActivity extends NavigationActivity {
 
 			}
 		});
+
+		// Set focusable to false to prevent the list view from stealing the focus from the scrollview.
+		// For some reason this only works in code and not in the xml.
+		eventsWithoutFeedbackList.setFocusable(false);
+		eventsWithSentFeedbackList.setFocusable(false);
 	}
 
 	private void setSendAllProgressBarVisibility(boolean visible) {
@@ -170,9 +175,9 @@ public class FeedbackActivity extends NavigationActivity {
 			eventsWithSentFeedbackLayout.setVisibility(View.VISIBLE);
 
 			if (update && eventsWithSentFeedbackList.getAdapter() != null) {
-				((EventsViewAdapter) eventsWithSentFeedbackList.getAdapter()).setEventsList(eventsWithSentFeedback);
+				((EventsViewWithDateHeaderAdapter) eventsWithSentFeedbackList.getAdapter()).setEventsList(eventsWithSentFeedback);
 			} else {
-				eventsWithSentFeedbackList.setAdapter(new EventsViewAdapter(eventsWithSentFeedback));
+				eventsWithSentFeedbackList.setAdapter(new EventsViewWithDateHeaderAdapter(eventsWithSentFeedback));
 			}
 		}
 	}
@@ -195,9 +200,9 @@ public class FeedbackActivity extends NavigationActivity {
 			eventsWithoutFeedbackListLayout.setVisibility(View.VISIBLE);
 
 			if (update && eventsWithoutFeedbackList.getAdapter() != null) {
-				((EventsViewAdapter) eventsWithoutFeedbackList.getAdapter()).setEventsList(eventsWithoutFeedback);
+				((EventsViewWithDateHeaderAdapter) eventsWithoutFeedbackList.getAdapter()).setEventsList(eventsWithoutFeedback);
 			} else {
-				eventsWithoutFeedbackList.setAdapter(new EventsViewAdapter(eventsWithoutFeedback));
+				eventsWithoutFeedbackList.setAdapter(new EventsViewWithDateHeaderAdapter(eventsWithoutFeedback));
 			}
 
 			if (Convention.getInstance().isFeedbackSendingTimeOver()) {
