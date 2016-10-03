@@ -6,7 +6,6 @@ import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
-import android.os.PersistableBundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -28,7 +27,6 @@ import java.util.Date;
 import java.util.List;
 
 import amai.org.conventions.ConventionsApplication;
-import sff.org.conventions.R;
 import amai.org.conventions.events.adapters.DayFragmentAdapter;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
@@ -36,6 +34,7 @@ import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
+import sff.org.conventions.R;
 
 
 public class MyEventsActivity extends NavigationActivity implements MyEventsDayFragment.EventsListener {
@@ -307,10 +306,10 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+	protected void onSaveInstanceState(Bundle outState) {
 		// We must re-set the current page since the rtl view pager has a bug that it doesn't remember it
 		outState.putInt(STATE_SELECTED_DATE_INDEX, daysPager.getCurrentItem());
-		super.onSaveInstanceState(outState, outPersistentState);
+		super.onSaveInstanceState(outState);
 	}
 
 	@Override

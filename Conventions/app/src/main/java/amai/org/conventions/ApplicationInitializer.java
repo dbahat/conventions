@@ -33,14 +33,10 @@ public class ApplicationInitializer {
 	private static final int NEW_UPDATES_NOTIFICATION_ID = 75457;
 
     public void initialize(final Context context) {
-
         PreferenceManager.setDefaultValues(context, R.xml.settings_preferences, false);
-
-        // TODO - refresh the model / updates only if certain time threshold has passed since last refresh
         refreshModel();
         initializeAzureNotificationHubIfPossible(context);
         refreshUpdatesAndNotifyIfNewUpdatesAreAvailable(context);
-
     }
 
     private void refreshModel() {

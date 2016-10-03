@@ -1,7 +1,6 @@
 package amai.org.conventions.events.activities;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,11 +9,11 @@ import android.view.View;
 
 import java.util.Calendar;
 
-import sff.org.conventions.R;
 import amai.org.conventions.events.adapters.DayFragmentAdapter;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.Dates;
+import sff.org.conventions.R;
 
 
 public class HallActivity extends NavigationActivity {
@@ -94,10 +93,10 @@ public class HallActivity extends NavigationActivity {
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+	protected void onSaveInstanceState(Bundle outState) {
 		// We must re-set the current page since the rtl view pager has a bug that it doesn't remember it
 		outState.putInt(STATE_SELECTED_DATE_INDEX, daysPager.getCurrentItem());
-		super.onSaveInstanceState(outState, outPersistentState);
+		super.onSaveInstanceState(outState);
 	}
 
 	private class HallDayAdapter extends DayFragmentAdapter {

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PictureDrawable;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
@@ -103,9 +102,9 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+	protected void onSaveInstanceState(Bundle outState) {
 		outState.putBoolean(EXTRA_INITIALIZE, false); // Prevent re-initializing
-		super.onSaveInstanceState(outState, outPersistentState);
+		super.onSaveInstanceState(outState);
 	}
 
 	protected void onNavigationButtonClicked() {

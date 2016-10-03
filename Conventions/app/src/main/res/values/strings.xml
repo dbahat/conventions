@@ -40,7 +40,7 @@
     <string name="event_has_ended">האירוע נגמר</string>
     <string name="add_feedback">מלא פידבק</string>
     <string name="feedback">פידבק</string>
-    <string name="close_feedback">הסתר</string>
+    <string name="hide">הסתר</string>
     <string name="send">שלח</string>
     <string name="back">חזור</string>
 
