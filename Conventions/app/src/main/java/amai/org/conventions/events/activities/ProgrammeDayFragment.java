@@ -223,7 +223,6 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 		final List<Calendar> timeSections = new LinkedList<>();
 
 		int previousHour = -1;
-		int currValue = 0;
 		int selectedValue = 0;
 		for (ProgrammeConventionEvent event : events) {
 			int hour = event.getTimeSection().get(Calendar.HOUR_OF_DAY);
@@ -234,10 +233,9 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 				// Check if this is the time the user clicked on
 				if (hour == selectedTimeSectionTime.get(Calendar.HOUR_OF_DAY) &&
 						Dates.isSameDate(event.getTimeSection(), selectedTimeSectionTime)) {
-					selectedValue = currValue;
+					selectedValue = timeSections.size() - 1;
 				}
 			}
-			++currValue;
 		}
 
 		List<String> formattedSections = CollectionUtils.map(timeSections, new CollectionUtils.Mapper<Calendar, String>() {
