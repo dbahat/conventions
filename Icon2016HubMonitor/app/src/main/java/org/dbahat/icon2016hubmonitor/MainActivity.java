@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void sendAndroidNotificationButtonOnClick(View view) {
-        showAreYouSureDialogAndSend(new SendNotificationTask() {
+        showAreYouSureDialogAndSend(DialogType.Android, new SendNotificationTask() {
             @Override
             public void run(String tag) {
                 sendGcmRequest(tag);
@@ -96,10 +96,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void sendiOSNotificationButtonOnClick(View view) {
-        showAreYouSureDialogAndSend(new SendNotificationTask() {
+        showAreYouSureDialogAndSend(DialogType.iOS, new SendNotificationTask() {
             @Override
             public void run(String tag) {
                 sendApnRequest(tag);
+            }
+        });
+    }
+
+    public void sendBothNotificationButtonOnClick(View view) {
+        showAreYouSureDialogAndSend(DialogType.Both, new SendNotificationTask() {
+            @Override
+            public void run(String tag) {
+                sendApnRequest(tag);
+                sendGcmRequest(tag);
             }
         });
     }
@@ -108,7 +118,13 @@ public class MainActivity extends AppCompatActivity {
         void run(String tag);
     }
 
-    private void showAreYouSureDialogAndSend(final SendNotificationTask sendNotificationTask) {
+    private enum DialogType {
+        iOS,
+        Android,
+        Both
+    }
+
+    private void showAreYouSureDialogAndSend(final DialogType dialogType, final SendNotificationTask sendNotificationTask) {
         int checkedRadioButtonId = ((RadioGroup)findViewById(R.id.radio_group)).getCheckedRadioButtonId();
         if(checkedRadioButtonId == -1) {
             Toast.makeText(this, "יש לבחור קטגוריה", Toast.LENGTH_SHORT).show();
@@ -123,9 +139,12 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "מתחיל לשלוח...", Toast.LENGTH_SHORT).show();
                 new RegistrationsPerTagRetriever(requestQueue).retrieve(tag, new RegistrationsPerTagRetriever.Callback() {
                     public void onComplete(Registrations registrations) {
+                        int numberOfDevices = dialogType == DialogType.Both ? registrations.getTotal()
+                                : dialogType == DialogType.iOS ? registrations.getiOS()
+                                : registrations.getAndroid();
                         new AlertDialog.Builder(MainActivity.this)
                                 .setTitle("הודעה בקטגורית " + editTextView)
-                                .setMessage("ההודעה תישלח ל " + registrations.getTotal() + " מכשירים. האם אתה בטוח? ")
+                                .setMessage("ההודעה תישלח ל " + numberOfDevices + " מכשירים. האם אתה בטוח? ")
                                 .setPositiveButton("שלח", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface var1, int var2) {
                                         sendNotificationTask.run(tag);
@@ -149,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void sendApnRequest(final String tag) {
-        final EditText editText = (EditText) findViewById(R.id.editText);
+        EditText editText = (EditText) findViewById(R.id.editText);
         String message = editText.getText().toString();
         final String serializedMessage = new Gson().toJson(
                 new ApnMessage()
@@ -162,7 +181,6 @@ public class MainActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, ApiUrl, new Response.Listener<String>() {
             public void onResponse(String response) {
                 Toast.makeText(MainActivity.this, "הצלחה!", Toast.LENGTH_SHORT).show();
-                editText.setText("");
             }
         }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
