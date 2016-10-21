@@ -32,21 +32,27 @@ import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.analytics.HitBuilders;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import sff.org.conventions.R;
+import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.AspectRatioImageView;
-import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.Feedback;
 import amai.org.conventions.model.FeedbackQuestion;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.FeedbackMail;
+import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Views;
+import sff.org.conventions.R;
 
 public class CollapsibleFeedbackView extends FrameLayout {
+	private static final String TAG = CollapsibleFeedbackView.class.getCanonicalName();
 
     private State state;
     private TextView collapsedFeedbackTitle;
@@ -595,6 +601,14 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		protected void onSuccess() {
 			// Refresh the feedback UI so interactions will now be disabled in it
 			refresh();
+			sendUserSentFeedbackTelemetry(true, null);
+		}
+
+		@Override
+		protected void onFailure(Exception exception) {
+			Log.w(TAG, "Failed to send feedback mail. Reason: " + exception.getClass().getSimpleName() + ": " + exception.getMessage());
+			Toast.makeText(getContext(), R.string.feedback_send_mail_failed, Toast.LENGTH_LONG).show();
+			sendUserSentFeedbackTelemetry(false, exception);
 		}
 
 		@Override
@@ -616,6 +630,19 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		@Override
 		protected void afterEnd(Exception exception) {
 			setProgressBarVisibility(false);
+		}
+
+		private void sendUserSentFeedbackTelemetry(boolean success, Exception e) {
+			String message = success ? "success" : "failure";
+			if (e != null) {
+				message += " - " + e.getClass().getSimpleName() + ": " + e.getMessage();
+			}
+
+			ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
+					.setCategory("Feedback")
+					.setAction("SendAttempt")
+					.setLabel(message)
+					.build());
 		}
 	}
 }

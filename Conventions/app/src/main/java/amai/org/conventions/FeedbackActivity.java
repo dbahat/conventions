@@ -17,6 +17,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.HitBuilders;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -106,9 +108,10 @@ public class FeedbackActivity extends NavigationActivity {
 
 								Convention.getInstance().getStorage().saveUserInput();
 								event.getUserInput().getFeedback().resetChangedAnswers();
-
+								sendUserSentFeedbackTelemetry(true, null);
 							} catch (Exception e) {
 								exception = e;
+								sendUserSentFeedbackTelemetry(false, e);
 							}
 							publishProgress();
 						}
@@ -141,9 +144,22 @@ public class FeedbackActivity extends NavigationActivity {
 						setupEventLists(true);
 
 						if (exception != null) {
-							Log.w(TAG, "Failed to send feedback mail. Reason: " + exception.getMessage());
+							Log.w(TAG, "Failed to send feedback mail. Reason: " + exception.getClass().getSimpleName() + ": " + exception.getMessage());
 							Toast.makeText(FeedbackActivity.this, R.string.feedback_send_mail_failed, Toast.LENGTH_LONG).show();
 						}
+					}
+
+					private void sendUserSentFeedbackTelemetry(boolean success, Exception e) {
+						String message = success ? "success" : "failure";
+						if (e != null) {
+							message += " - " + e.getClass().getSimpleName() + ": " + e.getMessage();
+						}
+
+						ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
+								.setCategory("Feedback")
+								.setAction("SendAttempt")
+								.setLabel(message)
+								.build());
 					}
 
 				}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -290,12 +306,6 @@ public class FeedbackActivity extends NavigationActivity {
 			@Override
 			protected void saveFeedback() {
 				saveConventionFeedback();
-			}
-
-			@Override
-			protected void onFailure(Exception exception) {
-				Log.w(TAG, "Failed to send feedback mail. Reason: " + exception.getMessage());
-				Toast.makeText(FeedbackActivity.this, R.string.feedback_send_mail_failed, Toast.LENGTH_LONG).show();
 			}
 		});
 	}

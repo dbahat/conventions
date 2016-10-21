@@ -431,7 +431,7 @@ public class Icon2016Convention extends SffConvention {
 
     @Override
     protected String initFeedbackRecipient() {
-        return "feedback@iconfestival.org.il";
+        return "sff.conventions.feedback@gmail.com";
     }
 
     @Override

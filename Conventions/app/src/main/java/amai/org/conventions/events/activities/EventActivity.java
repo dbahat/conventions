@@ -34,7 +34,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.analytics.HitBuilders;
 
@@ -55,7 +54,6 @@ import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.EventFeedbackMail;
 import amai.org.conventions.utils.FeedbackMail;
-import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Views;
 import fi.iki.kuitsi.listtest.ListTagHandler;
 import sff.org.conventions.R;
@@ -67,7 +65,6 @@ public class EventActivity extends NavigationActivity {
     public static final String EXTRA_EVENT_ID = "EventIdExtra";
 	public static final String EXTRA_FOCUS_ON_FEEDBACK = "ExtraFocusOnFeedback";
 
-    private static final String TAG = EventActivity.class.getCanonicalName();
     private static final String STATE_FEEDBACK_OPEN = "StateFeedbackOpen";
 
 	private View mainLayout;
@@ -511,25 +508,9 @@ public class EventActivity extends NavigationActivity {
 				}
 
 				@Override
-				protected void onFailure(Exception exception) {
-					Log.w(TAG, "Failed to send feedback mail. Reason: " + exception.getMessage());
-					Toast.makeText(EventActivity.this, R.string.feedback_send_mail_failed, Toast.LENGTH_LONG).show();
-					sendUserSentFeedbackTelemetry(false);
-				}
-
-				@Override
 				protected void onSuccess() {
 					super.onSuccess();
 					feedbackView.setState(CollapsibleFeedbackView.State.Collapsed, true);
-					sendUserSentFeedbackTelemetry(true);
-				}
-
-				private void sendUserSentFeedbackTelemetry(boolean success) {
-					ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
-							.setCategory("Feedback")
-							.setAction("SendAttempt")
-							.setLabel(success ? "success" : "failure")
-							.build());
 				}
 			});
 		} else {
