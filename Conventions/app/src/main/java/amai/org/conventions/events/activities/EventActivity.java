@@ -441,10 +441,10 @@ public class EventActivity extends NavigationActivity {
 			formattedEventHall = String.format("%s, ", event.getHall().getName());
 		}
 
-		// TODO: Remove the date from the format in case of single day convention
-		SimpleDateFormat sdf = new SimpleDateFormat("EEE dd.MM", Dates.getLocale());
-		String formattedEventTime = String.format("%s, %s - %s (%s)",
-				sdf.format(event.getStartTime()),
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE dd.MM, ", Dates.getLocale());
+		String formattedEventTime = String.format("%s%s - %s (%s)",
+				// In case of single day convention, don't show the date
+				Convention.getInstance().getLengthInDays() == 1 ? "" : simpleDateFormat.format(event.getStartTime()),
 				Dates.formatHoursAndMinutes(event.getStartTime()),
 				Dates.formatHoursAndMinutes(event.getEndTime()),
 				Dates.toHumanReadableTimeDuration(event.getEndTime().getTime() - event.getStartTime().getTime()));

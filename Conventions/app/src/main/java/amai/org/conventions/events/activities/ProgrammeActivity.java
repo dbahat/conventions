@@ -77,9 +77,6 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 		int days = Convention.getInstance().getLengthInDays();
 		if (days == 1) {
 			daysTabLayout.setVisibility(View.GONE);
-		} else if (days > MAX_DAYS_NUMBER) {
-			// TODO too many days, need to use scrollable tabs
-			days = MAX_DAYS_NUMBER;
 		}
 
 		// Setup view pager

@@ -89,9 +89,6 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		int days = (int) ((endDate.getTime().getTime() - startDate.getTime().getTime()) / Dates.MILLISECONDS_IN_DAY) + 1;
 		if (days == 1) {
 			daysTabLayout.setVisibility(View.GONE);
-		} else if (days > MAX_DAYS_NUMBER) {
-			// TODO too many days, need to use scrollable tabs
-			days = MAX_DAYS_NUMBER;
 		}
 
 		// Setup view pager

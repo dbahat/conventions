@@ -22,7 +22,6 @@ public class HallActivity extends NavigationActivity {
 
 	private static final String STATE_SELECTED_DATE_INDEX = "StateSelectedDateIndex";
 	private static final int SELECT_CURRENT_DATE = -1;
-	private static final int MAX_DAYS_NUMBER = 5;
 
 	private ViewPager daysPager;
 
@@ -61,9 +60,6 @@ public class HallActivity extends NavigationActivity {
 		int days = (int) ((endDate.getTime().getTime() - startDate.getTime().getTime()) / Dates.MILLISECONDS_IN_DAY) + 1;
 		if (days == 1) {
 			daysTabLayout.setVisibility(View.GONE);
-		} else if (days > MAX_DAYS_NUMBER) {
-			// TODO too many days, need to use scrollable tabs
-			days = MAX_DAYS_NUMBER;
 		}
 
 		// Setup view pager
