@@ -44,6 +44,10 @@ public abstract class Convention implements Serializable {
 
     private static Convention convention = new Icon2016Convention();
 
+	// Currently supporting conventions of up to 5 days (UI restriction, since the programme is set
+	// to fit up to 5 days in it's tab bar).
+	private static final int MAX_CONVENTION_LENGTH_IN_DAYS = 5;
+
     private List<Hall> halls;
 	private List<ConventionEvent> events;
 	private List<Update> updates;
@@ -127,6 +131,10 @@ public abstract class Convention implements Serializable {
 		this.imageMapper = initImageMapper();
 
 		getStorage().initFromFile(context);
+
+		if (getLengthInDays() > MAX_CONVENTION_LENGTH_IN_DAYS) {
+			throw new RuntimeException("Conventions with over " + MAX_CONVENTION_LENGTH_IN_DAYS + " days are currently un-supported.");
+		}
 	}
 
 	protected abstract ConventionStorage initStorage();

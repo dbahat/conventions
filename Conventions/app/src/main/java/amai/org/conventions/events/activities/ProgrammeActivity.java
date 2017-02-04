@@ -45,8 +45,6 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 	private static final String STATE_SELECTED_DATE_INDEX = "StateSelectedDateIndex";
 	private final static int SELECT_CURRENT_DATE = -1;
 
-	public static final int MAX_DAYS_NUMBER = 5;
-
 	private TabLayout daysTabLayout;
 	private ViewPager daysPager;
 
@@ -121,9 +119,6 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 		int days = Convention.getInstance().getLengthInDays();
 		if (days == 1) {
 			daysTabLayout.setVisibility(View.GONE);
-		} else if (days > MAX_DAYS_NUMBER) {
-			// TODO too many days, need to use scrollable tabs
-			days = MAX_DAYS_NUMBER;
 		}
 
 		// Setup view pager
