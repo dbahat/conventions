@@ -20,15 +20,17 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.TimeZone;
 
-import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.Update;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
 
 public class UpdatesRefresher {
 	public interface OnUpdateFinishedListener {
 		void onSuccess(int newUpdatesNumber);
+
 		void onError(FacebookRequestError error);
+
 		void onInvalidTokenError();
 	}
 
@@ -97,7 +99,7 @@ public class UpdatesRefresher {
 								Update currentUpdate = Convention.getInstance().getUpdate(responseUpdate.getId());
 								if (currentUpdate == null) {
 									++newUpdatesNumber;
-								} else  {
+								} else {
 									responseUpdate.setIsNew(currentUpdate.isNew());
 								}
 							}

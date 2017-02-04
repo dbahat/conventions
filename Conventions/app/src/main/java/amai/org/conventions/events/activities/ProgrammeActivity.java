@@ -25,6 +25,7 @@ import java.util.Calendar;
 
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.FeedbackActivity;
+import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.adapters.DayFragmentAdapter;
 import amai.org.conventions.model.ConventionEvent;
@@ -32,17 +33,14 @@ import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.networking.ModelRefresher;
 import amai.org.conventions.utils.Dates;
-import amai.org.conventions.R;
 
 public class ProgrammeActivity extends NavigationActivity implements ProgrammeDayFragment.EventsListener {
 
 	public static final String EXTRA_DELAY_SCROLLING = "DelayScrollingExtra";
+	public static final int MAX_DAYS_NUMBER = 5;
 	private static final String STATE_NAVIGATE_ICON_MODIFIED = "StateNavigateIconModified";
 	private static final String STATE_SELECTED_DATE_INDEX = "StateSelectedDateIndex";
 	private final static int SELECT_CURRENT_DATE = -1;
-
-	public static final int MAX_DAYS_NUMBER = 5;
-
 	private TabLayout daysTabLayout;
 	private ViewPager daysPager;
 
@@ -51,10 +49,10 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 	private boolean isRefreshing = false;
 
 	@Override
-    protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentInContentContainer(R.layout.activity_programme);
-        setToolbarTitle(getResources().getString(R.string.programme_title));
+	protected void onCreate(final Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentInContentContainer(R.layout.activity_programme);
+		setToolbarTitle(getResources().getString(R.string.programme_title));
 		removeForeground();
 
 		setupActionButton(R.drawable.ic_action_search, new View.OnClickListener() {
@@ -70,7 +68,7 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 		if (savedInstanceState != null && savedInstanceState.getBoolean(STATE_NAVIGATE_ICON_MODIFIED, false)) {
 			navigateToMyEventsIconModified = true;
 		}
-    }
+	}
 
 	private void setupDays(int dateIndexToSelect) {
 		daysTabLayout = (TabLayout) findViewById(R.id.programme_days_tabs);
@@ -115,25 +113,25 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 		daysPager.setCurrentItem(selectedDateIndex, false);
 	}
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-	    this.menu = menu;
-        getMenuInflater().inflate(R.menu.programme_menu, menu);
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		this.menu = menu;
+		getMenuInflater().inflate(R.menu.programme_menu, menu);
 
-	    if (navigateToMyEventsIconModified) {
-		    MenuItem item = menu.findItem(R.id.programme_navigate_to_my_events);
-		    changeIconColor(item);
-	    }
+		if (navigateToMyEventsIconModified) {
+			MenuItem item = menu.findItem(R.id.programme_navigate_to_my_events);
+			changeIconColor(item);
+		}
 
-	    Convention convention = Convention.getInstance();
-	    if (!convention.canFillFeedback()) {
-		    menu.removeItem(R.id.programme_navigate_to_feedback);
-	    } else if (convention.hasEnded() && !convention.getFeedback().isSent() && !convention.isFeedbackSendingTimeOver()) {
-		    MenuItem item = menu.findItem(R.id.programme_navigate_to_feedback);
-		    changeIconColor(item);
-	    }
-        return true;
-    }
+		Convention convention = Convention.getInstance();
+		if (!convention.canFillFeedback()) {
+			menu.removeItem(R.id.programme_navigate_to_feedback);
+		} else if (convention.hasEnded() && !convention.getFeedback().isSent() && !convention.isFeedbackSendingTimeOver()) {
+			MenuItem item = menu.findItem(R.id.programme_navigate_to_feedback);
+			changeIconColor(item);
+		}
+		return true;
+	}
 
 	@Override
 	public void onEventFavoriteChanged(ConventionEvent updatedEvent) {
@@ -179,6 +177,7 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 
 	/**
 	 * Change color of menu item icon to be accented
+	 *
 	 * @param item the menu item
 	 * @return The new color
 	 */
@@ -189,21 +188,21 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 		return accentColor;
 	}
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.programme_navigate_to_my_events:
-	            navigateToMyEventsIconModified = false;
-	            item.getIcon().clearColorFilter();
-	            navigateToActivity(MyEventsActivity.class);
-                return true;
-	        case R.id.programme_navigate_to_feedback:
-		        navigateToActivity(FeedbackActivity.class);
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.programme_navigate_to_my_events:
+				navigateToMyEventsIconModified = false;
+				item.getIcon().clearColorFilter();
+				navigateToActivity(MyEventsActivity.class);
 				return true;
-        }
+			case R.id.programme_navigate_to_feedback:
+				navigateToActivity(FeedbackActivity.class);
+				return true;
+		}
 
-        return super.onOptionsItemSelected(item);
-    }
+		return super.onOptionsItemSelected(item);
+	}
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
@@ -213,42 +212,42 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 		super.onSaveInstanceState(outState);
 	}
 
-    @Override
-    public void onRefresh() {
-	    isRefreshing = true;
-	    for (int i = 0; i < daysPager.getAdapter().getCount(); ++i) {
-		    ProgrammeDayFragment fragment = getDayFragment(i);
-		    fragment.setRefreshing(true);
-	    }
+	@Override
+	public void onRefresh() {
+		isRefreshing = true;
+		for (int i = 0; i < daysPager.getAdapter().getCount(); ++i) {
+			ProgrammeDayFragment fragment = getDayFragment(i);
+			fragment.setRefreshing(true);
+		}
 
-	    ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
-			    .setCategory("PullToRefresh")
-			    .setAction("RefreshProgramme")
-			    .build());
+		ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
+				.setCategory("PullToRefresh")
+				.setAction("RefreshProgramme")
+				.build());
 
-	    new AsyncTask<Void, Void, Boolean>() {
-            @Override
-            protected Boolean doInBackground(Void... params) {
-                ModelRefresher modelRefresher = new ModelRefresher();
-                return modelRefresher.refreshFromServer(true);
-            }
+		new AsyncTask<Void, Void, Boolean>() {
+			@Override
+			protected Boolean doInBackground(Void... params) {
+				ModelRefresher modelRefresher = new ModelRefresher();
+				return modelRefresher.refreshFromServer(true);
+			}
 
-            @Override
-            protected void onPostExecute(Boolean isSuccess) {
-	            isRefreshing = false;
-	            for (int i = 0; i < daysPager.getAdapter().getCount(); ++i) {
-		            ProgrammeDayFragment fragment = getDayFragment(i);
-		            fragment.setRefreshing(false);
-		            if (isSuccess) {
-			            fragment.updateEvents();
-		            }
-	            }
-	            if (!isSuccess) {
-                    Toast.makeText(ProgrammeActivity.this, R.string.update_refresh_failed, Toast.LENGTH_SHORT).show();
-                }
-            }
-        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-    }
+			@Override
+			protected void onPostExecute(Boolean isSuccess) {
+				isRefreshing = false;
+				for (int i = 0; i < daysPager.getAdapter().getCount(); ++i) {
+					ProgrammeDayFragment fragment = getDayFragment(i);
+					fragment.setRefreshing(false);
+					if (isSuccess) {
+						fragment.updateEvents();
+					}
+				}
+				if (!isSuccess) {
+					Toast.makeText(ProgrammeActivity.this, R.string.update_refresh_failed, Toast.LENGTH_SHORT).show();
+				}
+			}
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
 
 	private ProgrammeDayFragment getDayFragment(int i) {
 		return (ProgrammeDayFragment) daysPager.getAdapter().instantiateItem(daysPager, i);

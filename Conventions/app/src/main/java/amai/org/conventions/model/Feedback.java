@@ -27,6 +27,7 @@ public class Feedback implements Serializable, Cloneable {
 
 	/**
 	 * Update this instance from feedback loaded from file
+	 *
 	 * @param other the de-serialized feedback
 	 */
 	public void updateFrom(Feedback other) {

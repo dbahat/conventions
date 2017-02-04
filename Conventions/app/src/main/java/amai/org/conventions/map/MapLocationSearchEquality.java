@@ -1,6 +1,5 @@
 package amai.org.conventions.map;
 
-import amai.org.conventions.model.Hall;
 import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Objects;

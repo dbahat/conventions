@@ -42,9 +42,9 @@ import amai.org.conventions.utils.Objects;
 
 public abstract class Convention implements Serializable {
 
-    private static Convention convention = new Cami2016Convention();
+	private static Convention convention = new Cami2016Convention();
 
-    private List<Hall> halls;
+	private List<Hall> halls;
 	private List<ConventionEvent> events;
 	private List<Update> updates;
 	private Map<String, Update> updatesById;
@@ -68,13 +68,13 @@ public abstract class Convention implements Serializable {
 	private ConventionStorage conventionStorage;
 
 
-    public static Convention getInstance() {
-        return convention;
-    }
+	public static Convention getInstance() {
+		return convention;
+	}
 
-    public ConventionStorage getStorage() {
-        return conventionStorage;
-    }
+	public ConventionStorage getStorage() {
+		return conventionStorage;
+	}
 
 	public URL getModelURL() {
 		return modelURL;
@@ -98,7 +98,7 @@ public abstract class Convention implements Serializable {
 		updatesById = new HashMap<>();
 
 		initFeedback();
-    }
+	}
 
 	private void initFeedback() {
 		feedback = new Feedback().withQuestions(
@@ -130,22 +130,34 @@ public abstract class Convention implements Serializable {
 	}
 
 	protected abstract ConventionStorage initStorage();
+
 	protected abstract Calendar initStartDate();
+
 	protected abstract Calendar initEndDate();
+
 	protected abstract String initID();
+
 	protected abstract String initDisplayName();
+
 	protected abstract String initFeedbackRecipient();
+
 	protected abstract URL initModelURL();
+
 	protected abstract String initFacebookFeedPath();
+
 	protected abstract List<Hall> initHalls();
+
 	protected abstract ConventionMap initMap();
+
 	protected abstract double initLongitude();
+
 	protected abstract double initLatitude();
+
 	protected abstract EventToImageResourceIdMapper initImageMapper();
 
-    public Calendar getStartDate() {
-        return startDate;
-    }
+	public Calendar getStartDate() {
+		return startDate;
+	}
 
 	public Calendar getEndDate() {
 		return endDate;
@@ -173,6 +185,7 @@ public abstract class Convention implements Serializable {
 
 	/**
 	 * Modify properties of the event as needed for special event
+	 *
 	 * @param event
 	 * @return whether the event was modified
 	 */
@@ -182,34 +195,34 @@ public abstract class Convention implements Serializable {
 	}
 
 	public void setEvents(List<ConventionEvent> events) {
-        eventLockObject.writeLock().lock();
-        try {
-            this.events = events;
-	        updateUserInputFromEvents();
-        } finally {
-            eventLockObject.writeLock().unlock();
-        }
+		eventLockObject.writeLock().lock();
+		try {
+			this.events = events;
+			updateUserInputFromEvents();
+		} finally {
+			eventLockObject.writeLock().unlock();
+		}
 	}
 
 	public List<ConventionEvent> getEvents() {
-        eventLockObject.readLock().lock();
-        try {
-            return events;
-        } finally {
-            eventLockObject.readLock().unlock();
-        }
-    }
+		eventLockObject.readLock().lock();
+		try {
+			return events;
+		} finally {
+			eventLockObject.readLock().unlock();
+		}
+	}
 
-    public boolean hasFavorites() {
-        List<ConventionEvent> events = getEvents();
-        for (ConventionEvent event : events) {
-	        if (event.isAttending()) {
-		        return true;
-	        }
-        }
+	public boolean hasFavorites() {
+		List<ConventionEvent> events = getEvents();
+		for (ConventionEvent event : events) {
+			if (event.isAttending()) {
+				return true;
+			}
+		}
 
-        return false;
-    }
+		return false;
+	}
 
 	public Map<String, ConventionEvent.UserInput> getUserInput() {
 		return userInput;
@@ -235,8 +248,8 @@ public abstract class Convention implements Serializable {
 	}
 
 	public List<Hall> getHalls() {
-        return halls;
-    }
+		return halls;
+	}
 
 	public Hall findHallByName(String name) {
 		for (Hall hall : getHalls()) {
@@ -248,41 +261,41 @@ public abstract class Convention implements Serializable {
 		return null;
 	}
 
-    public ConventionMap getMap() {
-        return map;
-    }
+	public ConventionMap getMap() {
+		return map;
+	}
 
-    public ConventionEvent findEventById(String eventId) {
-        for (ConventionEvent event : getEvents()) {
-            if (eventId.equals(event.getId())) {
-                return event;
-            }
-        }
+	public ConventionEvent findEventById(String eventId) {
+		for (ConventionEvent event : getEvents()) {
+			if (eventId.equals(event.getId())) {
+				return event;
+			}
+		}
 
-        return null;
-    }
+		return null;
+	}
 
-    public ArrayList<ConventionEvent> findEventsByHall(final String hallName) {
-        return CollectionUtils.filter(
-                getEvents(),
-                new CollectionUtils.Predicate<ConventionEvent>() {
-                    @Override
-                    public boolean where(ConventionEvent event) {
-                        return event.getHall() != null && Objects.equals(hallName, event.getHall().getName());
-                    }
-                },
-                new ArrayList<ConventionEvent>()
-        );
-    }
+	public ArrayList<ConventionEvent> findEventsByHall(final String hallName) {
+		return CollectionUtils.filter(
+				getEvents(),
+				new CollectionUtils.Predicate<ConventionEvent>() {
+					@Override
+					public boolean where(ConventionEvent event) {
+						return event.getHall() != null && Objects.equals(hallName, event.getHall().getName());
+					}
+				},
+				new ArrayList<ConventionEvent>()
+		);
+	}
 
-    public void setUpdates(List<Update> updates) {
-        this.updates = updates;
-	    refreshUpdatesMap();
-    }
+	public void setUpdates(List<Update> updates) {
+		this.updates = updates;
+		refreshUpdatesMap();
+	}
 
-    public List<Update> getUpdates() {
-        return updates;
-    }
+	public List<Update> getUpdates() {
+		return updates;
+	}
 
 	private void refreshUpdatesMap() {
 		updatesById.clear();
@@ -295,7 +308,7 @@ public abstract class Convention implements Serializable {
 		for (Update update : newUpdates) {
 			if (updatesById.containsKey(update.getId())) {
 				// Remove the existing update
-				for (Iterator<Update> iter = updates.iterator(); iter.hasNext();) {
+				for (Iterator<Update> iter = updates.iterator(); iter.hasNext(); ) {
 					Update currUpdate = iter.next();
 					if (currUpdate.getId().equals(update.getId())) {
 						iter.remove();
@@ -318,9 +331,9 @@ public abstract class Convention implements Serializable {
 		}
 	}
 
-    public String getFeedbackRecipient() {
-        return feedbackRecipient;
-    }
+	public String getFeedbackRecipient() {
+		return feedbackRecipient;
+	}
 
 	public boolean canFillFeedback() {
 		// Check if the convention started at least 2 hours ago
@@ -373,12 +386,12 @@ public abstract class Convention implements Serializable {
 		return maxTime;
 	}
 
-    protected List<MapLocation> inFloor(Floor floor, MapLocation... locations) {
-        for (MapLocation location : locations) {
-            location.setFloor(floor);
-        }
-        return Arrays.asList(locations);
-    }
+	protected List<MapLocation> inFloor(Floor floor, MapLocation... locations) {
+		for (MapLocation location : locations) {
+			location.setFloor(floor);
+		}
+		return Arrays.asList(locations);
+	}
 
 	public Hall addHall(String name) {
 		Hall hall = new Hall().withName(name).withOrder(getHighestHallOrder() + 1);

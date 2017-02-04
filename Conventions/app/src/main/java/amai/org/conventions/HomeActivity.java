@@ -2,58 +2,25 @@ package amai.org.conventions;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Matrix;
-import android.graphics.Point;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.preference.PreferenceManager;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.SpannableString;
-import android.text.method.LinkMovementMethod;
-import android.text.util.Linkify;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.facebook.FacebookRequestError;
-import com.microsoft.windowsazure.notifications.NotificationsManager;
 
 import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 
 import amai.org.conventions.events.activities.ProgrammeActivity;
 import amai.org.conventions.model.conventions.Convention;
-import amai.org.conventions.model.Update;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.navigation.NavigationPages;
-import amai.org.conventions.networking.ModelRefresher;
-import amai.org.conventions.networking.UpdatesRefresher;
-import amai.org.conventions.notifications.AzureNotificationRegistrationService;
-import amai.org.conventions.notifications.AzurePushNotifications;
-import amai.org.conventions.notifications.PlayServicesInstallation;
 import amai.org.conventions.notifications.PushNotificationDialogPresenter;
-import amai.org.conventions.notifications.PushNotificationHandler;
-import amai.org.conventions.notifications.PushNotificationTopic;
-import amai.org.conventions.settings.SettingsActivity;
-import amai.org.conventions.updates.UpdatesActivity;
-import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
-import amai.org.conventions.utils.Settings;
-import amai.org.conventions.utils.Views;
 
 public class HomeActivity extends AppCompatActivity {
 	public final static String EXTRA_PUSH_NOTIFICATION_MESSAGE = "EXTRA_PUSH_NOTIFICATION_MESSAGE";

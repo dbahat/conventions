@@ -2,12 +2,10 @@ package amai.org.conventions.navigation;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.LightingColorFilter;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PictureDrawable;
 import android.os.Bundle;
@@ -19,9 +17,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -49,7 +45,6 @@ import amai.org.conventions.map.MapActivity;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.settings.SettingsActivity;
 import amai.org.conventions.updates.UpdatesActivity;
-import amai.org.conventions.utils.Views;
 
 
 public abstract class NavigationActivity extends AppCompatActivity {
@@ -58,37 +53,37 @@ public abstract class NavigationActivity extends AppCompatActivity {
 
 	private static boolean showLogoGlow = true;
 	private boolean navigatedFromHome;
-    private Toolbar navigationToolbar;
+	private Toolbar navigationToolbar;
 	private boolean showHomeScreenOnBack;
 	private FrameLayout contentContainer;
 	private FloatingActionButton actionButton;
 	private DrawerLayout navigationDrawer;
 
 	@Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_navigation);
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_navigation);
 
-	    navigatedFromHome = getIntent().getBooleanExtra(EXTRA_NAVIGATED_FROM_HOME, false);
-	    showHomeScreenOnBack = getIntent().getBooleanExtra(EXTRA_SHOW_HOME_SCREEN_ON_BACK, false);
+		navigatedFromHome = getIntent().getBooleanExtra(EXTRA_NAVIGATED_FROM_HOME, false);
+		showHomeScreenOnBack = getIntent().getBooleanExtra(EXTRA_SHOW_HOME_SCREEN_ON_BACK, false);
 
-	    navigationToolbar = (Toolbar) findViewById(R.id.navigation_toolbar);
+		navigationToolbar = (Toolbar) findViewById(R.id.navigation_toolbar);
 		navigationDrawer = (DrawerLayout) findViewById(R.id.navigation_drawer);
-        setupActionBar(navigationToolbar);
-        navigationToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+		setupActionBar(navigationToolbar);
+		navigationToolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				onNavigationButtonClicked();
-					ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
-							.setCategory("Navigation")
-							.setAction("ButtonClicked")
-							.build());
+				ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
+						.setCategory("Navigation")
+						.setAction("ButtonClicked")
+						.build());
 				openNavigationDrawer(true);
 			}
 		});
 
 		initializeNavigationDrawer(); // In case it was already open
-    }
+	}
 
 	private void openNavigationDrawer(boolean animate) {
 		initializeNavigationDrawer();
@@ -125,81 +120,81 @@ public abstract class NavigationActivity extends AppCompatActivity {
 
 		ListView navigationItems = (ListView) findViewById(R.id.navigation_items);
 		navigationItems.setAdapter(new NavigationItemsAdapter(this, items));
-    }
+	}
 
-    private void setupActionBar(Toolbar toolbar) {
-        this.setSupportActionBar(toolbar);
-        ActionBar actionBar = this.getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(false);
-            actionBar.setDisplayShowTitleEnabled(true);
-	        int logoType = ThemeAttributes.getInteger(this, R.attr.toolbarLogoType);
-	        Drawable drawable = null;
-	        switch (logoType) {
-		        // bitmap
-		        case 0:
-			        drawable = ImageHandler.getToolbarLogo(this);
-			        break;
-		        // svg
-		        case 1:
-			        toolbar.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-	                SVG logoSVG = ImageHandler.loadSVG(this, ThemeAttributes.getResourceId(this, R.attr.toolbarLogo));
-			        drawable = new PictureDrawable(logoSVG.renderToPicture());
-			        break;
-	        }
-            toolbar.setNavigationIcon(drawable);
+	private void setupActionBar(Toolbar toolbar) {
+		this.setSupportActionBar(toolbar);
+		ActionBar actionBar = this.getSupportActionBar();
+		if (actionBar != null) {
+			actionBar.setDisplayHomeAsUpEnabled(false);
+			actionBar.setDisplayShowTitleEnabled(true);
+			int logoType = ThemeAttributes.getInteger(this, R.attr.toolbarLogoType);
+			Drawable drawable = null;
+			switch (logoType) {
+				// bitmap
+				case 0:
+					drawable = ImageHandler.getToolbarLogo(this);
+					break;
+				// svg
+				case 1:
+					toolbar.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+					SVG logoSVG = ImageHandler.loadSVG(this, ThemeAttributes.getResourceId(this, R.attr.toolbarLogo));
+					drawable = new PictureDrawable(logoSVG.renderToPicture());
+					break;
+			}
+			toolbar.setNavigationIcon(drawable);
 
-	        if (shouldShowLogoGlow()) {
+			if (shouldShowLogoGlow()) {
 				// Getting the toolbar imageView by iterating over the toolbar children, since the toolbar imageView has no ID.
-		        for (int i = 0; i < toolbar.getChildCount(); ++i) {
-			        View view = toolbar.getChildAt(i);
-			        if (view instanceof ImageView && ((ImageView) view).getDrawable() == drawable) {
-				        final ImageView image = (ImageView) view;
-				        final ValueAnimator animator = ValueAnimator.ofInt(255, 100, 255);
-				        animator.setInterpolator(new AccelerateDecelerateInterpolator());
-				        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-					        @Override
-					        public void onAnimationUpdate(ValueAnimator animation) {
-						        int value = (int) animation.getAnimatedValue();
-						        int mul = Color.argb(0, value, value, value);
-						        int add = Color.argb(0, 255 - value, 255 - value, 255 - value);
-						        image.setColorFilter(new LightingColorFilter(mul, add));
-					        }
-				        });
-				        animator.addListener(new Animator.AnimatorListener() {
-					        // This is necessary because if I call animation.cancel() on animation start
-					        // it calls onAnimationStart again, causing an infinite recursion
-					        private boolean cancelled = false;
+				for (int i = 0; i < toolbar.getChildCount(); ++i) {
+					View view = toolbar.getChildAt(i);
+					if (view instanceof ImageView && ((ImageView) view).getDrawable() == drawable) {
+						final ImageView image = (ImageView) view;
+						final ValueAnimator animator = ValueAnimator.ofInt(255, 100, 255);
+						animator.setInterpolator(new AccelerateDecelerateInterpolator());
+						animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+							@Override
+							public void onAnimationUpdate(ValueAnimator animation) {
+								int value = (int) animation.getAnimatedValue();
+								int mul = Color.argb(0, value, value, value);
+								int add = Color.argb(0, 255 - value, 255 - value, 255 - value);
+								image.setColorFilter(new LightingColorFilter(mul, add));
+							}
+						});
+						animator.addListener(new Animator.AnimatorListener() {
+							// This is necessary because if I call animation.cancel() on animation start
+							// it calls onAnimationStart again, causing an infinite recursion
+							private boolean cancelled = false;
 
-					        @Override
-					        public void onAnimationStart(Animator animation) {
-						        if (!shouldShowLogoGlow() && !cancelled) {
-							        cancelled = true;
-							        animation.cancel();
-						        }
-					        }
+							@Override
+							public void onAnimationStart(Animator animation) {
+								if (!shouldShowLogoGlow() && !cancelled) {
+									cancelled = true;
+									animation.cancel();
+								}
+							}
 
-					        @Override
-					        public void onAnimationEnd(Animator animation) {
-						        image.setColorFilter(null);
-					        }
+							@Override
+							public void onAnimationEnd(Animator animation) {
+								image.setColorFilter(null);
+							}
 
-					        @Override
-					        public void onAnimationCancel(Animator animation) {
-						        image.setColorFilter(null);
-					        }
+							@Override
+							public void onAnimationCancel(Animator animation) {
+								image.setColorFilter(null);
+							}
 
-					        @Override
-					        public void onAnimationRepeat(Animator animation) {
-					        }
-				        });
-				        animator.setDuration(1500).setStartDelay(3000);
-				        animator.start();
-			        }
-		        }
-	        }
-        }
-    }
+							@Override
+							public void onAnimationRepeat(Animator animation) {
+							}
+						});
+						animator.setDuration(1500).setStartDelay(3000);
+						animator.start();
+					}
+				}
+			}
+		}
+	}
 
 	protected View setContentInContentContainer(int layoutResID) {
 		return setContentInContentContainer(layoutResID, true, true);
@@ -209,24 +204,24 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		return setContentInContentContainer(layoutResID, useDefaultBackground, true);
 	}
 
-    protected View setContentInContentContainer(int layoutResID, boolean useDefaultBackground, boolean hideToolbarOnScroll) {
-        contentContainer = (FrameLayout) findViewById(R.id.navigation_content_view_container);
-        getLayoutInflater().inflate(layoutResID, contentContainer, true);
+	protected View setContentInContentContainer(int layoutResID, boolean useDefaultBackground, boolean hideToolbarOnScroll) {
+		contentContainer = (FrameLayout) findViewById(R.id.navigation_content_view_container);
+		getLayoutInflater().inflate(layoutResID, contentContainer, true);
 
-	    if (!hideToolbarOnScroll) {
-		    AppBarLayout.LayoutParams layoutParams = (AppBarLayout.LayoutParams) navigationToolbar.getLayoutParams();
-		    layoutParams.setScrollFlags(0);
-		    navigationToolbar.setLayoutParams(layoutParams);
-	    }
+		if (!hideToolbarOnScroll) {
+			AppBarLayout.LayoutParams layoutParams = (AppBarLayout.LayoutParams) navigationToolbar.getLayoutParams();
+			layoutParams.setScrollFlags(0);
+			navigationToolbar.setLayoutParams(layoutParams);
+		}
 
-	    if (useDefaultBackground) {
-		    // Set the background in code due to an Android bug that if the background is set in the xml
-		    // and then removed, the foreground isn't displayed either and it's not possible to bring it back
-		    contentContainer.setBackgroundColor(ThemeAttributes.getColor(this, android.R.attr.colorBackground));
-	    }
+		if (useDefaultBackground) {
+			// Set the background in code due to an Android bug that if the background is set in the xml
+			// and then removed, the foreground isn't displayed either and it's not possible to bring it back
+			contentContainer.setBackgroundColor(ThemeAttributes.getColor(this, android.R.attr.colorBackground));
+		}
 
-	    return contentContainer;
-    }
+		return contentContainer;
+	}
 
 	protected void setBackgroundColor(int color) {
 		if (contentContainer != null) {
@@ -271,7 +266,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 
 	public void onConventionEventClicked(View view) {
 		navigateToEvent((String) view.getTag());
-    }
+	}
 
 	protected void navigateToEvent(String id) {
 		Bundle bundle = new Bundle();
@@ -284,16 +279,16 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	protected void addCustomEventActivityParameters(Bundle bundle) {
 	}
 
-    protected void setToolbarTitle(String titleText) {
-        getSupportActionBar().setTitle(titleText);
-    }
+	protected void setToolbarTitle(String titleText) {
+		getSupportActionBar().setTitle(titleText);
+	}
 
-    protected void navigateToActivity(Class<? extends Activity> activityToNavigateTo) {
-        // When navigating using the main popup window, clear the activity stack so the back button would return to the home screen
-        navigateToActivity(activityToNavigateTo, true, null);
-    }
+	protected void navigateToActivity(Class<? extends Activity> activityToNavigateTo) {
+		// When navigating using the main popup window, clear the activity stack so the back button would return to the home screen
+		navigateToActivity(activityToNavigateTo, true, null);
+	}
 
-    protected void navigateToActivity(Class<? extends Activity> activityToNavigateTo, boolean clearBackStack, Bundle extras) {
+	protected void navigateToActivity(Class<? extends Activity> activityToNavigateTo, boolean clearBackStack, Bundle extras) {
 		closeDrawerIfNeeded();
 
 		// In case we were asked to navigate to the activity we're already in, ignore the request
@@ -326,11 +321,11 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		}
 	}
 
-    private void closeDrawerIfNeeded() {
-	    if (navigationDrawer.isDrawerOpen(GravityCompat.START)) {
-		    navigationDrawer.closeDrawer(GravityCompat.START, false);
-	    }
-    }
+	private void closeDrawerIfNeeded() {
+		if (navigationDrawer.isDrawerOpen(GravityCompat.START)) {
+			navigationDrawer.closeDrawer(GravityCompat.START, false);
+		}
+	}
 
 	@Override
 	public void onBackPressed() {

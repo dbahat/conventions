@@ -95,6 +95,7 @@ public class Views {
 					return true;
 				}
 			});
+
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				gestureDetector.onTouchEvent(event);

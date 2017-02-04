@@ -27,7 +27,6 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.DefaultEventFavoriteChangedListener;
@@ -35,9 +34,7 @@ import amai.org.conventions.events.ProgrammeConventionEvent;
 import amai.org.conventions.events.ViewPagerAnimator;
 import amai.org.conventions.events.adapters.SwipeableEventsViewOrHourAdapter;
 import amai.org.conventions.events.holders.TimeViewHolder;
-import amai.org.conventions.map.AggregatedEventTypes;
 import amai.org.conventions.model.ConventionEvent;
-import amai.org.conventions.model.EventType;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
@@ -68,6 +65,23 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 		return fragment;
 	}
 
+	private static int getHour(Date date) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		return calendar.get(Calendar.HOUR_OF_DAY);
+	}
+
+	private static int getEndHour(Date endTime) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(endTime);
+		int hour = calendar.get(Calendar.HOUR_OF_DAY);
+		int minute = calendar.get(Calendar.MINUTE);
+
+		// The first minute of the next hour is considered this hour. For example, an event
+		// ending at 12:00 is only considered to run during hour 11:00.
+		return minute > 0 ? hour : hour - 1;
+	}
+
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -82,7 +96,7 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 		swipeLayout.setColorSchemeColors(ThemeAttributes.getColor(container.getContext(), R.attr.toolbarBackground));
 
 		listView = (StickyListHeadersListView) view.findViewById(R.id.programmeList);
-        events = getEventsList();
+		events = getEventsList();
 		adapter = new SwipeableEventsViewOrHourAdapter(events);
 		listView.setAdapter(adapter);
 		adapter.setOnEventFavoriteChangedListener(new DefaultEventFavoriteChangedListener(listView) {
@@ -201,7 +215,6 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 			}
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
-
 
 	@Override
 	public void onHeaderClick(StickyListHeadersListView stickyListHeadersListView, View view, int i, long l, boolean b) {
@@ -342,23 +355,6 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 		return programmeEvents;
 	}
 
-	private static int getHour(Date date) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(date);
-		return calendar.get(Calendar.HOUR_OF_DAY);
-	}
-
-	private static int getEndHour(Date endTime) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(endTime);
-		int hour = calendar.get(Calendar.HOUR_OF_DAY);
-		int minute = calendar.get(Calendar.MINUTE);
-
-		// The first minute of the next hour is considered this hour. For example, an event
-		// ending at 12:00 is only considered to run during hour 11:00.
-		return minute > 0 ? hour : hour - 1;
-	}
-
 	private void scrollToPosition(final int position, final boolean shouldApplyFavoriteReminderAnimation) {
 		if (!cancelScroll) {
 			listView.smoothScrollToPositionFromTop(position, 0, 500);
@@ -414,6 +410,7 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 
 	public interface EventsListener {
 		void onEventFavoriteChanged(ConventionEvent updatedEvent);
+
 		void onRefresh();
 	}
 }

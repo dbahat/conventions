@@ -8,14 +8,14 @@ import com.microsoft.windowsazure.notifications.NotificationsHandler;
 
 public class PushNotificationHandler extends NotificationsHandler {
 
-    @Override
-    public void onReceive(Context context, Bundle bundle) {
-        Intent intent = new Intent(context, ShowNotificationService.class)
-                .putExtra(ShowNotificationService.EXTRA_NOTIFICATION_TYPE, ShowNotificationService.Type.Push)
-	            .putExtra(ShowNotificationService.EXTRA_MESSAGE, bundle.getString("message"))
-                .putExtra(ShowNotificationService.EXTRA_CATEGORY, bundle.getString("category"));
+	@Override
+	public void onReceive(Context context, Bundle bundle) {
+		Intent intent = new Intent(context, ShowNotificationService.class)
+				.putExtra(ShowNotificationService.EXTRA_NOTIFICATION_TYPE, ShowNotificationService.Type.Push)
+				.putExtra(ShowNotificationService.EXTRA_MESSAGE, bundle.getString("message"))
+				.putExtra(ShowNotificationService.EXTRA_CATEGORY, bundle.getString("category"));
 
-        context.startService(intent);
-    }
+		context.startService(intent);
+	}
 
 }

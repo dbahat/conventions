@@ -31,7 +31,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.analytics.HitBuilders;
 
@@ -45,15 +44,14 @@ import amai.org.conventions.customviews.AspectRatioImageView;
 import amai.org.conventions.events.CollapsibleFeedbackView;
 import amai.org.conventions.events.ConfigureNotificationsFragment;
 import amai.org.conventions.map.MapActivity;
-import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.MapLocation;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.EventFeedbackMail;
 import amai.org.conventions.utils.FeedbackMail;
-import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Views;
 import fi.iki.kuitsi.listtest.ListTagHandler;
 import uk.co.chrisjenx.paralloid.views.ParallaxScrollView;
@@ -61,17 +59,17 @@ import uk.co.chrisjenx.paralloid.views.ParallaxScrollView;
 
 public class EventActivity extends NavigationActivity {
 
-    public static final String EXTRA_EVENT_ID = "EventIdExtra";
+	public static final String EXTRA_EVENT_ID = "EventIdExtra";
 	public static final String EXTRA_FOCUS_ON_FEEDBACK = "ExtraFocusOnFeedback";
 
-    private static final String TAG = EventActivity.class.getCanonicalName();
-    private static final String STATE_FEEDBACK_OPEN = "StateFeedbackOpen";
+	private static final String TAG = EventActivity.class.getCanonicalName();
+	private static final String STATE_FEEDBACK_OPEN = "StateFeedbackOpen";
 
 	private View mainLayout;
-    private ConventionEvent conventionEvent;
-    private LinearLayout imagesLayout;
+	private ConventionEvent conventionEvent;
+	private LinearLayout imagesLayout;
 	private LinearLayout feedbackContainer;
-    private CollapsibleFeedbackView feedbackView;
+	private CollapsibleFeedbackView feedbackView;
 
 	private ImageView gradientImageView;
 	private ImageView lastImageView;
@@ -79,7 +77,7 @@ public class EventActivity extends NavigationActivity {
 	private View imagesBackground;
 
 	@Override
-    protected void onCreate(final Bundle savedInstanceState) {
+	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentInContentContainer(R.layout.activity_event);
 		setBackgroundColor(ThemeAttributes.getColor(this, R.attr.eventDetailsDefaultBackgroundColor));
@@ -204,12 +202,14 @@ public class EventActivity extends NavigationActivity {
 									@Override
 									public void onAnimationStart(Animation animation) {
 									}
+
 									@Override
 									public void onAnimationEnd(Animation animation) {
 										// Replace default background with images layout
 										imagesLayout.setVisibility(View.VISIBLE);
 										removeBackground();
 									}
+
 									@Override
 									public void onAnimationRepeat(Animation animation) {
 
@@ -253,33 +253,33 @@ public class EventActivity extends NavigationActivity {
 	}
 
 	@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-	    this.menu = menu;
-	    getMenuInflater().inflate(R.menu.menu_event, menu);
+	public boolean onCreateOptionsMenu(Menu menu) {
+		this.menu = menu;
+		getMenuInflater().inflate(R.menu.menu_event, menu);
 
-	    ConventionEvent.UserInput userInput = conventionEvent.getUserInput();
-	    if (userInput.isAttending()) {
-            MenuItem favoritesButton = menu.findItem(R.id.event_change_favorite_state);
-            favoritesButton.setIcon(ContextCompat.getDrawable(this, android.R.drawable.btn_star_big_on));
-        }
+		ConventionEvent.UserInput userInput = conventionEvent.getUserInput();
+		if (userInput.isAttending()) {
+			MenuItem favoritesButton = menu.findItem(R.id.event_change_favorite_state);
+			favoritesButton.setIcon(ContextCompat.getDrawable(this, android.R.drawable.btn_star_big_on));
+		}
 
-	    setupAlarmsMenuItem(menu, userInput);
+		setupAlarmsMenuItem(menu, userInput);
 
-	    hideNavigateToMapButtonIfNoLocationExists(menu);
+		hideNavigateToMapButtonIfNoLocationExists(menu);
 
-        return true;
-    }
+		return true;
+	}
 
 	private void setupAlarmsMenuItem(Menu menu, ConventionEvent.UserInput userInput) {
 		// Remove alarms button for ended events (unless they still have a feedback reminder)
 		if (conventionEvent.hasEnded() && !userInput.getEventFeedbackReminderNotification().isEnabled()) {
 			menu.removeItem(R.id.event_configure_notifications);
-		// Hide alarms in the overflow menu if the event is over or there are no alarms for this event
-		// and it isn't in the favorites
+			// Hide alarms in the overflow menu if the event is over or there are no alarms for this event
+			// and it isn't in the favorites
 		} else if (userInput.isAttending() ||
 				userInput.getEventAboutToStartNotification().isEnabled() ||
 				userInput.getEventFeedbackReminderNotification().isEnabled()) {
-		    MenuItem alarmsItem = menu.findItem(R.id.event_configure_notifications);
+			MenuItem alarmsItem = menu.findItem(R.id.event_configure_notifications);
 			// We might have removed the notifications item when entering the screen. In that case, don't display it.
 			if (alarmsItem != null) {
 				alarmsItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
@@ -293,58 +293,58 @@ public class EventActivity extends NavigationActivity {
 	}
 
 	@Override
-    public boolean onOptionsItemSelected(final MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.event_change_favorite_state:
+	public boolean onOptionsItemSelected(final MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.event_change_favorite_state:
 				ConventionEvent.UserInput userInput = conventionEvent.getUserInput();
 
-	            // In the user is adding this event and it conflicts with another favorite event, ask the user what to do
-	            if ((!userInput.isAttending()) && Convention.getInstance().conflictsWithOtherFavoriteEvent(conventionEvent)) {
-		            final List<ConventionEvent> conflictingEvents = Convention.getInstance().getFavoriteConflictingEvents(conventionEvent);
-		            String message;
-		            if (conflictingEvents.size() == 1) {
-			            message = getString(R.string.event_conflicts_with_one_question, conflictingEvents.get(0).getTitle());
-		            } else {
-			            message = getString(R.string.event_conflicts_with_several_question, conflictingEvents.size());
-		            }
-		            new AlertDialog.Builder(this)
-				            .setTitle(R.string.event_add_to_favorites)
-				            .setMessage(message)
-				            .setPositiveButton(R.string.add_anyway, new DialogInterface.OnClickListener() {
-					            @Override
-					            public void onClick(DialogInterface dialog, int which) {
-						            changeEventFavoriteState(item);
-					            }
-				            })
-				            .setNegativeButton(R.string.cancel, null)
-				            .show();
-		            return true;
-	            }
+				// In the user is adding this event and it conflicts with another favorite event, ask the user what to do
+				if ((!userInput.isAttending()) && Convention.getInstance().conflictsWithOtherFavoriteEvent(conventionEvent)) {
+					final List<ConventionEvent> conflictingEvents = Convention.getInstance().getFavoriteConflictingEvents(conventionEvent);
+					String message;
+					if (conflictingEvents.size() == 1) {
+						message = getString(R.string.event_conflicts_with_one_question, conflictingEvents.get(0).getTitle());
+					} else {
+						message = getString(R.string.event_conflicts_with_several_question, conflictingEvents.size());
+					}
+					new AlertDialog.Builder(this)
+							.setTitle(R.string.event_add_to_favorites)
+							.setMessage(message)
+							.setPositiveButton(R.string.add_anyway, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									changeEventFavoriteState(item);
+								}
+							})
+							.setNegativeButton(R.string.cancel, null)
+							.show();
+					return true;
+				}
 
-	            changeEventFavoriteState(item);
-                return true;
-            case R.id.event_navigate_to_map:
-                // Navigate to the map floor associated with this event
-                Bundle floorBundle = new Bundle();
-                ConventionMap map = Convention.getInstance().getMap();
-                List<MapLocation> locations = map.findLocationsByHall(conventionEvent.getHall());
-	            int[] locationIds = new int[locations.size()];
-	            int i = 0;
-	            for (MapLocation location : locations) {
-		            locationIds[i] = location.getId();
-		            ++i;
-	            }
-                floorBundle.putIntArray(MapActivity.EXTRA_MAP_LOCATION_IDS, locationIds);
+				changeEventFavoriteState(item);
+				return true;
+			case R.id.event_navigate_to_map:
+				// Navigate to the map floor associated with this event
+				Bundle floorBundle = new Bundle();
+				ConventionMap map = Convention.getInstance().getMap();
+				List<MapLocation> locations = map.findLocationsByHall(conventionEvent.getHall());
+				int[] locationIds = new int[locations.size()];
+				int i = 0;
+				for (MapLocation location : locations) {
+					locationIds[i] = location.getId();
+					++i;
+				}
+				floorBundle.putIntArray(MapActivity.EXTRA_MAP_LOCATION_IDS, locationIds);
 
-                navigateToActivity(MapActivity.class, false, floorBundle);
-                return true;
-            case R.id.event_navigate_to_hall:
-                // Navigate to the hall associated with this event
-                Bundle bundle = new Bundle();
-                bundle.putString(HallActivity.EXTRA_HALL_NAME, conventionEvent.getHall().getName());
+				navigateToActivity(MapActivity.class, false, floorBundle);
+				return true;
+			case R.id.event_navigate_to_hall:
+				// Navigate to the hall associated with this event
+				Bundle bundle = new Bundle();
+				bundle.putString(HallActivity.EXTRA_HALL_NAME, conventionEvent.getHall().getName());
 
-                navigateToActivity(HallActivity.class, false, bundle);
-                return true;
+				navigateToActivity(HallActivity.class, false, bundle);
+				return true;
 			case R.id.event_configure_notifications:
 
 				ConfigureNotificationsFragment configureNotificationsFragment = ConfigureNotificationsFragment.newInstance(conventionEvent.getId());
@@ -356,10 +356,10 @@ public class EventActivity extends NavigationActivity {
 						.build());
 
 				return true;
-        }
+		}
 
-        return super.onOptionsItemSelected(item);
-    }
+		return super.onOptionsItemSelected(item);
+	}
 
 	private void changeEventFavoriteState(MenuItem item) {
 		ConventionEvent.UserInput userInput = conventionEvent.getUserInput();
@@ -370,98 +370,98 @@ public class EventActivity extends NavigationActivity {
 				.build());
 
 		if (userInput.isAttending()) {
-	        userInput.setAttending(false);
-						ConventionsApplication.alarmScheduler.cancelDefaultEventAlarms(conventionEvent);
-	        item.setIcon(ContextCompat.getDrawable(this, R.drawable.star_with_plus));
-	        item.setTitle(getResources().getString(R.string.event_add_to_favorites));
-	        Snackbar.make(this.mainLayout, R.string.event_removed_from_favorites, Snackbar.LENGTH_SHORT).show();
-	    } else {
-	        userInput.setAttending(true);
+			userInput.setAttending(false);
+			ConventionsApplication.alarmScheduler.cancelDefaultEventAlarms(conventionEvent);
+			item.setIcon(ContextCompat.getDrawable(this, R.drawable.star_with_plus));
+			item.setTitle(getResources().getString(R.string.event_add_to_favorites));
+			Snackbar.make(this.mainLayout, R.string.event_removed_from_favorites, Snackbar.LENGTH_SHORT).show();
+		} else {
+			userInput.setAttending(true);
 			ConventionsApplication.alarmScheduler.scheduleDefaultEventAlarms(conventionEvent);
-	        item.setIcon(ContextCompat.getDrawable(this, android.R.drawable.btn_star_big_on));
-	        item.setTitle(getResources().getString(R.string.event_remove_from_favorites));
-	        Snackbar.make(this.mainLayout, R.string.event_added_to_favorites, Snackbar.LENGTH_SHORT).show();
-	    }
+			item.setIcon(ContextCompat.getDrawable(this, android.R.drawable.btn_star_big_on));
+			item.setTitle(getResources().getString(R.string.event_remove_from_favorites));
+			Snackbar.make(this.mainLayout, R.string.event_added_to_favorites, Snackbar.LENGTH_SHORT).show();
+		}
 		setupAlarmsMenuItem(menu, userInput);
 		saveUserInput();
 	}
 
 	@Override
-    protected void onPause() {
-        super.onPause();
-        if (feedbackView.isFeedbackChanged()) {
-	        saveUserInput();
-        }
-    }
+	protected void onPause() {
+		super.onPause();
+		if (feedbackView.isFeedbackChanged()) {
+			saveUserInput();
+		}
+	}
 
 	private void saveUserInput() {
 		Convention.getInstance().getStorage().saveUserInput();
 		conventionEvent.getUserInput().getFeedback().resetChangedAnswers();
 	}
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-	    if (feedbackContainer.getVisibility() == View.VISIBLE) {
-            outState.putBoolean(STATE_FEEDBACK_OPEN, feedbackView.getState() == CollapsibleFeedbackView.State.Expanded);
-	    }
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		if (feedbackContainer.getVisibility() == View.VISIBLE) {
+			outState.putBoolean(STATE_FEEDBACK_OPEN, feedbackView.getState() == CollapsibleFeedbackView.State.Expanded);
+		}
 
-        super.onSaveInstanceState(outState);
-    }
+		super.onSaveInstanceState(outState);
+	}
 
-    private void hideNavigateToMapButtonIfNoLocationExists(Menu menu) {
-        ConventionMap map = Convention.getInstance().getMap();
-        List<MapLocation> locations = map.findLocationsByHall(conventionEvent.getHall());
-        if (locations.size() == 0) {
-            menu.findItem(R.id.event_navigate_to_map).setVisible(false);
-        }
-    }
+	private void hideNavigateToMapButtonIfNoLocationExists(Menu menu) {
+		ConventionMap map = Convention.getInstance().getMap();
+		List<MapLocation> locations = map.findLocationsByHall(conventionEvent.getHall());
+		if (locations.size() == 0) {
+			menu.findItem(R.id.event_navigate_to_map).setVisible(false);
+		}
+	}
 
-    private void setEvent(ConventionEvent event) {
-	    TextView type = (TextView) findViewById(R.id.event_type);
-	    if (event.getType() == null || TextUtils.isEmpty(event.getType().getDescription())) {
-		    type.setVisibility(View.GONE);
-	    } else {
-	        type.setText(event.getType().getDescription());
-	    }
-        TextView title = (TextView) findViewById(R.id.event_title);
-        title.setText(event.getTitle());
+	private void setEvent(ConventionEvent event) {
+		TextView type = (TextView) findViewById(R.id.event_type);
+		if (event.getType() == null || TextUtils.isEmpty(event.getType().getDescription())) {
+			type.setVisibility(View.GONE);
+		} else {
+			type.setText(event.getType().getDescription());
+		}
+		TextView title = (TextView) findViewById(R.id.event_title);
+		title.setText(event.getTitle());
 
-        TextView lecturerName = (TextView) findViewById(R.id.event_lecturer);
-        String lecturer = event.getLecturer();
-        if (lecturer == null || lecturer.length() == 0) {
-            lecturerName.setVisibility(View.GONE);
-        } else {
-            lecturerName.setText(lecturer);
-        }
+		TextView lecturerName = (TextView) findViewById(R.id.event_lecturer);
+		String lecturer = event.getLecturer();
+		if (lecturer == null || lecturer.length() == 0) {
+			lecturerName.setVisibility(View.GONE);
+		} else {
+			lecturerName.setText(lecturer);
+		}
 
-        TextView time = (TextView) findViewById(R.id.event_hall_and_time);
+		TextView time = (TextView) findViewById(R.id.event_hall_and_time);
 
-	    String formattedEventHall = "";
-	    if (event.getHall() != null) {
-		    formattedEventHall = String.format("%s, ", event.getHall().getName());
-	    }
+		String formattedEventHall = "";
+		if (event.getHall() != null) {
+			formattedEventHall = String.format("%s, ", event.getHall().getName());
+		}
 
 		// TODO: Remove the date from the format in case of single day convention
-	    SimpleDateFormat sdf = new SimpleDateFormat("EEE dd.MM", Dates.getLocale());
-        String formattedEventTime = String.format("%s, %s - %s (%s)",
-		        sdf.format(event.getStartTime()),
-                Dates.formatHoursAndMinutes(event.getStartTime()),
-                Dates.formatHoursAndMinutes(event.getEndTime()),
-                Dates.toHumanReadableTimeDuration(event.getEndTime().getTime() - event.getStartTime().getTime()));
-        time.setText(String.format("%s%s", formattedEventHall, formattedEventTime));
+		SimpleDateFormat sdf = new SimpleDateFormat("EEE dd.MM", Dates.getLocale());
+		String formattedEventTime = String.format("%s, %s - %s (%s)",
+				sdf.format(event.getStartTime()),
+				Dates.formatHoursAndMinutes(event.getStartTime()),
+				Dates.formatHoursAndMinutes(event.getEndTime()),
+				Dates.toHumanReadableTimeDuration(event.getEndTime().getTime() - event.getStartTime().getTime()));
+		time.setText(String.format("%s%s", formattedEventHall, formattedEventTime));
 
-	    setupFeedback(event);
+		setupFeedback(event);
 
-	    setupEventDescription(event);
+		setupEventDescription(event);
 
-        setupBackgroundImages(event);
+		setupBackgroundImages(event);
 
-    }
+	}
 
 	private void setupFeedback(ConventionEvent event) {
 		if (event.canFillFeedback()) {
 			feedbackContainer.setVisibility(View.VISIBLE);
-	        feedbackView.setModel(event.getUserInput().getFeedback());
+			feedbackView.setModel(event.getUserInput().getFeedback());
 
 			if (shouldFeedbackBeClosed()) {
 				feedbackView.setState(CollapsibleFeedbackView.State.Collapsed, false);
@@ -498,7 +498,7 @@ public class EventActivity extends NavigationActivity {
 		// Otherwise it should start as open.
 		return !conventionEvent.shouldUserSeeFeedback() ||
 				(Convention.getInstance().isFeedbackSendingTimeOver() &&
-				!conventionEvent.getUserInput().getFeedback().hasAnsweredQuestions());
+						!conventionEvent.getUserInput().getFeedback().hasAnsweredQuestions());
 	}
 
 
@@ -517,8 +517,8 @@ public class EventActivity extends NavigationActivity {
 	}
 
 	private void setupBackgroundImages(ConventionEvent event) {
-        // Add images to the layout
-        List<Integer> images = event.getImageResources();
+		// Add images to the layout
+		List<Integer> images = event.getImageResources();
 		boolean first = true;
 		// This will contain the last image view after the loop
 		FrameLayout lastImageLayout = null;
@@ -529,46 +529,46 @@ public class EventActivity extends NavigationActivity {
 		Point size = new Point();
 		display.getSize(size);
 		int widthSpec = View.MeasureSpec.makeMeasureSpec(size.x, View.MeasureSpec.EXACTLY);
-        for (Integer imageResource : images) {
-	        boolean last = (i == images.size() - 1);
+		for (Integer imageResource : images) {
+			boolean last = (i == images.size() - 1);
 
 			AspectRatioImageView imageView = new AspectRatioImageView(this);
-	        View viewToAdd = imageView;
-	        imageView.setImageResource(imageResource);
+			View viewToAdd = imageView;
+			imageView.setImageResource(imageResource);
 
-	        // Last image - make a frame layout with the image so we can put the gradient on top of it
-	        if (last) {
-		        FrameLayout frameLayout = new FrameLayout(this);
-		        viewToAdd = frameLayout;
-		        lastImageLayout = frameLayout;
-		        lastImageView = imageView;
+			// Last image - make a frame layout with the image so we can put the gradient on top of it
+			if (last) {
+				FrameLayout frameLayout = new FrameLayout(this);
+				viewToAdd = frameLayout;
+				lastImageLayout = frameLayout;
+				lastImageView = imageView;
 
-		        // Add the image view to the frame layout
-		        FrameLayout.LayoutParams imageLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		        imageView.setLayoutParams(imageLayoutParams);
-		        frameLayout.addView(imageView);
+				// Add the image view to the frame layout
+				FrameLayout.LayoutParams imageLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+				imageView.setLayoutParams(imageLayoutParams);
+				frameLayout.addView(imageView);
 
-		        // Calculate the last image's height according the screen width
-		        imageView.measure(widthSpec, View.MeasureSpec.UNSPECIFIED);
-		        lastImageHeight = imageView.getMeasuredHeight();
-	        }
+				// Calculate the last image's height according the screen width
+				imageView.measure(widthSpec, View.MeasureSpec.UNSPECIFIED);
+				lastImageHeight = imageView.getMeasuredHeight();
+			}
 
-	        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-	        int topMargin = 0;
-            if (first) {
-                first = false;
-            } else {
-                topMargin =  getResources().getDimensionPixelOffset(R.dimen.event_images_margin);
-            }
-	        layoutParams.setMargins(0, topMargin, 0, 0);
-	        viewToAdd.setLayoutParams(layoutParams);
-	        imagesLayout.addView(viewToAdd);
+			LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+			int topMargin = 0;
+			if (first) {
+				first = false;
+			} else {
+				topMargin = getResources().getDimensionPixelOffset(R.dimen.event_images_margin);
+			}
+			layoutParams.setMargins(0, topMargin, 0, 0);
+			viewToAdd.setLayoutParams(layoutParams);
+			imagesLayout.addView(viewToAdd);
 
-	        ++i;
-        }
+			++i;
+		}
 
 		if (lastImageLayout != null) {
-			int gradientHeight =  getResources().getDimensionPixelSize(R.dimen.event_last_image_gradient_max_height);
+			int gradientHeight = getResources().getDimensionPixelSize(R.dimen.event_last_image_gradient_max_height);
 			if (gradientHeight > lastImageHeight) {
 				gradientHeight = lastImageHeight;
 			}
@@ -587,18 +587,18 @@ public class EventActivity extends NavigationActivity {
 
 			enableFadingEffect();
 		}
-    }
-
-	private Drawable createGradient() {
-		return new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, new int[] {Color.TRANSPARENT, getBackgroundColor()});
 	}
 
-    public void openFeedback(View view) {
-        feedbackView.setState(CollapsibleFeedbackView.State.Expanded);
-    }
+	private Drawable createGradient() {
+		return new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, new int[]{Color.TRANSPARENT, getBackgroundColor()});
+	}
 
-    public void closeFeedback(View view) {
-        feedbackView.setState(CollapsibleFeedbackView.State.Collapsed);
-    }
+	public void openFeedback(View view) {
+		feedbackView.setState(CollapsibleFeedbackView.State.Expanded);
+	}
+
+	public void closeFeedback(View view) {
+		feedbackView.setState(CollapsibleFeedbackView.State.Collapsed);
+	}
 
 }

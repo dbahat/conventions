@@ -4,37 +4,37 @@ import java.io.Serializable;
 
 public class EventType implements Serializable {
 
-    private int backgroundColor;
+	private int backgroundColor;
 	private String description;
 
-    public EventType(String description) {
-        this(0, description);
-    }
+	public EventType(String description) {
+		this(0, description);
+	}
 
-    public EventType(int backgroundColor, String description) {
-        this.backgroundColor = backgroundColor;
-	    this.description = description;
-    }
+	public EventType(int backgroundColor, String description) {
+		this.backgroundColor = backgroundColor;
+		this.description = description;
+	}
 
-    public int getBackgroundColor() {
-        return backgroundColor;
-    }
+	public int getBackgroundColor() {
+		return backgroundColor;
+	}
 
 	public String getDescription() {
 		return description;
 	}
 
-    @Override
-    public boolean equals(Object other) {
-        return other instanceof EventType && equals((EventType) other);
-    }
+	@Override
+	public boolean equals(Object other) {
+		return other instanceof EventType && equals((EventType) other);
+	}
 
-    private boolean equals(EventType other) {
-        return other.getDescription().equals(getDescription());
-    }
+	private boolean equals(EventType other) {
+		return other.getDescription().equals(getDescription());
+	}
 
-    @Override
-    public int hashCode() {
-        return getDescription().hashCode();
-    }
+	@Override
+	public int hashCode() {
+		return getDescription().hashCode();
+	}
 }

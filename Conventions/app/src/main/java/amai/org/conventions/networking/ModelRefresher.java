@@ -12,67 +12,67 @@ import java.util.Map;
 
 import amai.org.conventions.BuildConfig;
 import amai.org.conventions.ConventionsApplication;
-import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.ConventionEvent;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
 
 public class ModelRefresher {
-    private static final String TAG = ModelRefresher.class.getCanonicalName();
+	private static final String TAG = ModelRefresher.class.getCanonicalName();
 
-    private static final int CONNECT_TIMEOUT = 10000;
+	private static final int CONNECT_TIMEOUT = 10000;
 	private static final long MINIMUM_REFRESH_TIME = Dates.MILLISECONDS_IN_HOUR;
 
-    /**
-     * Downloads the model from the server.
-     *
-     * @return true if the model retrieval completed successfully, false otherwise.
-     */
-    public boolean refreshFromServer(boolean force) {
-	    if (!force) {
-	        // Don't download if the convention is over (there won't be any more updates to the events...)
-		    if (Convention.getInstance().hasEnded()) {
-			    return true;
-		    }
-		    // Also don't download if we recently updated the events
-		    Date lastUpdate = ConventionsApplication.settings.getLastEventsUpdateDate();
-		    if (lastUpdate != null && Dates.now().getTime() - lastUpdate.getTime() < MINIMUM_REFRESH_TIME) {
-			    return true;
-		    }
-	    }
-	    
-        try {
-            HttpURLConnection request = (HttpURLConnection) Convention.getInstance().getModelURL().openConnection();
-            request.setConnectTimeout(CONNECT_TIMEOUT);
-            request.connect();
-            InputStreamReader reader = null;
-            try {
-                reader = new InputStreamReader((InputStream) request.getContent());
-                List<ConventionEvent> eventList = Convention.getInstance().getModelParser().parse(reader);
+	/**
+	 * Downloads the model from the server.
+	 *
+	 * @return true if the model retrieval completed successfully, false otherwise.
+	 */
+	public boolean refreshFromServer(boolean force) {
+		if (!force) {
+			// Don't download if the convention is over (there won't be any more updates to the events...)
+			if (Convention.getInstance().hasEnded()) {
+				return true;
+			}
+			// Also don't download if we recently updated the events
+			Date lastUpdate = ConventionsApplication.settings.getLastEventsUpdateDate();
+			if (lastUpdate != null && Dates.now().getTime() - lastUpdate.getTime() < MINIMUM_REFRESH_TIME) {
+				return true;
+			}
+		}
 
-	            if (BuildConfig.DEBUG) {
-		            notifyIfEventsUpdated(Convention.getInstance().getEvents(), eventList);
-	            }
+		try {
+			HttpURLConnection request = (HttpURLConnection) Convention.getInstance().getModelURL().openConnection();
+			request.setConnectTimeout(CONNECT_TIMEOUT);
+			request.connect();
+			InputStreamReader reader = null;
+			try {
+				reader = new InputStreamReader((InputStream) request.getContent());
+				List<ConventionEvent> eventList = Convention.getInstance().getModelParser().parse(reader);
 
-                Convention.getInstance().setEvents(eventList);
-	            ConventionsApplication.settings.setLastEventsUpdatedDate();
-            } finally {
-                if (reader != null) {
-                    reader.close();
-                }
-                request.disconnect();
-            }
-            Convention.getInstance().getStorage().saveEvents();
-        } catch (IOException e) {
-            Log.i(TAG, "Could not retrieve model due to IOException: " + e.getMessage());
-            return false;
-        } catch (Exception e) {
-            Log.e(TAG, "Could not retrieve model: " + e.getMessage(), e);
-            return false;
-        }
+				if (BuildConfig.DEBUG) {
+					notifyIfEventsUpdated(Convention.getInstance().getEvents(), eventList);
+				}
 
-        return true;
-    }
+				Convention.getInstance().setEvents(eventList);
+				ConventionsApplication.settings.setLastEventsUpdatedDate();
+			} finally {
+				if (reader != null) {
+					reader.close();
+				}
+				request.disconnect();
+			}
+			Convention.getInstance().getStorage().saveEvents();
+		} catch (IOException e) {
+			Log.i(TAG, "Could not retrieve model due to IOException: " + e.getMessage());
+			return false;
+		} catch (Exception e) {
+			Log.e(TAG, "Could not retrieve model: " + e.getMessage(), e);
+			return false;
+		}
+
+		return true;
+	}
 
 	private void notifyIfEventsUpdated(List<ConventionEvent> currentEvents, List<ConventionEvent> newEvents) {
 		List<String> changes = new LinkedList<>();

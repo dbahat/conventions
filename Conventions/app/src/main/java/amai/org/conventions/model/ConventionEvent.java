@@ -13,23 +13,22 @@ import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.networking.AmaiModelParser;
-import amai.org.conventions.networking.ModelParser;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Objects;
 
 public class ConventionEvent implements Serializable {
 	private String id;
-    private int serverId;
+	private int serverId;
 	private int backgroundColor;
 	private int textColor;
-    private String title;
-    private String lecturer;
-    private Date startTime;
-    private Date endTime;
-    private EventType type;
-    private Hall hall;
+	private String title;
+	private String lecturer;
+	private Date startTime;
+	private Date endTime;
+	private EventType type;
+	private Hall hall;
 	private List<String> images;
-    private String description;
+	private String description;
 	private String plainTextDescription;
 
 	public ConventionEvent() {
@@ -62,104 +61,104 @@ public class ConventionEvent implements Serializable {
 	}
 
 	public String getDescription() {
-        return description;
-    }
+		return description;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-	    this.plainTextDescription = description.isEmpty() ? "" : Html.fromHtml(description).toString().replace("\n", " ");
-    }
+	public void setDescription(String description) {
+		this.description = description;
+		this.plainTextDescription = description.isEmpty() ? "" : Html.fromHtml(description).toString().replace("\n", " ");
+	}
 
-    public ConventionEvent withDescription(String description) {
-        setDescription(description);
-        return this;
-    }
+	public ConventionEvent withDescription(String description) {
+		setDescription(description);
+		return this;
+	}
 
 	public String getPlainTextDescription() {
 		return plainTextDescription;
 	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public String getId() {
+	public String getId() {
 		return id;
 	}
 
-    public ConventionEvent withId(String id) {
-        setId(id);
-        return this;
-    }
+	public ConventionEvent withId(String id) {
+		setId(id);
+		return this;
+	}
 
 	public String getTitle() {
-        return title;
-    }
+		return title;
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public ConventionEvent withTitle(String title) {
-        setTitle(title);
-        return this;
-    }
+	public ConventionEvent withTitle(String title) {
+		setTitle(title);
+		return this;
+	}
 
-    public String getLecturer() {
-        return lecturer;
-    }
+	public String getLecturer() {
+		return lecturer;
+	}
 
-    public void setLecturer(String lecturer) {
-        this.lecturer = lecturer;
-    }
+	public void setLecturer(String lecturer) {
+		this.lecturer = lecturer;
+	}
 
-    public ConventionEvent withLecturer(String lecturer) {
-        setLecturer(lecturer);
-        return this;
-    }
+	public ConventionEvent withLecturer(String lecturer) {
+		setLecturer(lecturer);
+		return this;
+	}
 
-    public boolean isAttending() {
-        return getUserInput().isAttending();
-    }
+	public boolean isAttending() {
+		return getUserInput().isAttending();
+	}
 
-    public void setAttending(boolean attending) {
-        getUserInput().setAttending(attending);
-    }
+	public void setAttending(boolean attending) {
+		getUserInput().setAttending(attending);
+	}
 
-    public ConventionEvent withAttending(boolean attending) {
-        setAttending(attending);
-        return this;
-    }
+	public ConventionEvent withAttending(boolean attending) {
+		setAttending(attending);
+		return this;
+	}
 
-    public Date getStartTime() {
-        return startTime;
-    }
+	public Date getStartTime() {
+		return startTime;
+	}
 
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
-    }
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
 
-    public ConventionEvent withStartTime(Date startTime) {
-        setStartTime(startTime);
-        return this;
-    }
+	public ConventionEvent withStartTime(Date startTime) {
+		setStartTime(startTime);
+		return this;
+	}
 
-    public Date getEndTime() {
-        return endTime;
-    }
+	public Date getEndTime() {
+		return endTime;
+	}
 
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
-    }
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
+	}
 
-    public ConventionEvent withEndTime(Date endTime) {
-        setEndTime(endTime);
-        return this;
-    }
+	public ConventionEvent withEndTime(Date endTime) {
+		setEndTime(endTime);
+		return this;
+	}
 
-    public EventType getType() {
-        return type;
-    }
+	public EventType getType() {
+		return type;
+	}
 
 	public int getBackgroundColor(Context context) {
 		if (backgroundColor != AmaiModelParser.NO_COLOR) {
@@ -172,27 +171,27 @@ public class ConventionEvent implements Serializable {
 		return ThemeAttributes.getColor(context, R.attr.eventTimeDefaultBackgroundColor);
 	}
 
-    public void setType(EventType type) {
-        this.type = type;
-    }
+	public void setType(EventType type) {
+		this.type = type;
+	}
 
-    public ConventionEvent withType(EventType type) {
-        setType(type);
-        return this;
-    }
+	public ConventionEvent withType(EventType type) {
+		setType(type);
+		return this;
+	}
 
-    public Hall getHall() {
-        return hall;
-    }
+	public Hall getHall() {
+		return hall;
+	}
 
-    public void setHall(Hall hall) {
-        this.hall = hall;
-    }
+	public void setHall(Hall hall) {
+		this.hall = hall;
+	}
 
-    public ConventionEvent withHall(Hall hall) {
-        setHall(hall);
-        return this;
-    }
+	public ConventionEvent withHall(Hall hall) {
+		setHall(hall);
+		return this;
+	}
 
 	public List<Integer> getImageResources() {
 		return Convention.getInstance().getImageMapper().getImageResourcesList(images);
@@ -242,19 +241,19 @@ public class ConventionEvent implements Serializable {
 	}
 
 	public int getServerId() {
-        return serverId;
-    }
+		return serverId;
+	}
 
-    public void setServerId(int serverId) {
-        this.serverId = serverId;
-    }
+	public void setServerId(int serverId) {
+		this.serverId = serverId;
+	}
 
-    public ConventionEvent withServerId(int serverId) {
-        setServerId(serverId);
-        return this;
-    }
+	public ConventionEvent withServerId(int serverId) {
+		setServerId(serverId);
+		return this;
+	}
 
-    @Override
+	@Override
 	public boolean equals(Object o) {
 		if (o instanceof ConventionEvent) {
 			ConventionEvent other = (ConventionEvent) o;
@@ -264,7 +263,7 @@ public class ConventionEvent implements Serializable {
 					Objects.equals(endTime, other.endTime) &&
 					Objects.equals(type, other.type) &&
 					Objects.equals(hall, other.hall) &&
-                    Objects.equals(serverId, other.serverId);
+					Objects.equals(serverId, other.serverId);
 		}
 		return false;
 	}
@@ -289,7 +288,7 @@ public class ConventionEvent implements Serializable {
 
 	public static class UserInput implements Serializable, Cloneable {
 		private boolean attending;
-        private Feedback feedback;
+		private Feedback feedback;
 		private EventNotification eventAboutToStartNotification;
 		private EventNotification eventFeedbackReminderNotification;
 
@@ -316,6 +315,7 @@ public class ConventionEvent implements Serializable {
 
 		/**
 		 * Update this instance from user input loaded from file
+		 *
 		 * @param other the de-serialized user input
 		 */
 		public void updateFrom(UserInput other) {

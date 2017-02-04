@@ -22,57 +22,57 @@ import amai.org.conventions.updates.UpdatesActivity;
  * Container class for accessing data regarding the main navigation pages.
  */
 public class NavigationPages {
-    private Context context;
-    private LinkedHashMap<Integer, Class<? extends Activity>> pageIdToActivityTypeMapInOrder;
-    private ArrayList<Integer> pageIdsInOrder;
+	private Context context;
+	private LinkedHashMap<Integer, Class<? extends Activity>> pageIdToActivityTypeMapInOrder;
+	private ArrayList<Integer> pageIdsInOrder;
 
-    public NavigationPages(Context context) {
-        this.context = context;
+	public NavigationPages(Context context) {
+		this.context = context;
 
-        pageIdToActivityTypeMapInOrder = createPageIdToActivityTypeMap();
-        pageIdsInOrder = new ArrayList<>(pageIdToActivityTypeMapInOrder.keySet());
-    }
+		pageIdToActivityTypeMapInOrder = createPageIdToActivityTypeMap();
+		pageIdsInOrder = new ArrayList<>(pageIdToActivityTypeMapInOrder.keySet());
+	}
 
-    public Class<? extends Activity> getActivityType(int position) {
-        if (position > pageIdToActivityTypeMapInOrder.size() || position < 0) {
-            throw new AssertionError("No navigation page for position " + position);
-        }
+	public Class<? extends Activity> getActivityType(int position) {
+		if (position > pageIdToActivityTypeMapInOrder.size() || position < 0) {
+			throw new AssertionError("No navigation page for position " + position);
+		}
 
-        int navigationPageId = pageIdsInOrder.get(position);
-        return pageIdToActivityTypeMapInOrder.get(navigationPageId);
-    }
+		int navigationPageId = pageIdsInOrder.get(position);
+		return pageIdToActivityTypeMapInOrder.get(navigationPageId);
+	}
 
-    public String[] getPagesTitle() {
-        List<String> pageTitles = new LinkedList<>();
-        for (Integer pageId : pageIdsInOrder) {
-            pageTitles.add(getString(pageId));
-        }
+	public String[] getPagesTitle() {
+		List<String> pageTitles = new LinkedList<>();
+		for (Integer pageId : pageIdsInOrder) {
+			pageTitles.add(getString(pageId));
+		}
 
-        return pageTitles.toArray(new String[pageTitles.size()]);
-    }
+		return pageTitles.toArray(new String[pageTitles.size()]);
+	}
 
-    public int getPosition(String pageTitle) {
-        List<String> pageTitles = Arrays.asList(getPagesTitle());
-        if (!pageTitles.contains(pageTitle)) {
-            throw new AssertionError("No navigation page for page title " + pageTitle);
-        }
-        return pageTitles.indexOf(pageTitle);
-    }
+	public int getPosition(String pageTitle) {
+		List<String> pageTitles = Arrays.asList(getPagesTitle());
+		if (!pageTitles.contains(pageTitle)) {
+			throw new AssertionError("No navigation page for page title " + pageTitle);
+		}
+		return pageTitles.indexOf(pageTitle);
+	}
 
-    protected String getString(int stringResourceId) {
-        return context.getResources().getString(stringResourceId);
-    }
+	protected String getString(int stringResourceId) {
+		return context.getResources().getString(stringResourceId);
+	}
 
-    private LinkedHashMap<Integer, Class<? extends Activity>> createPageIdToActivityTypeMap() {
-        LinkedHashMap<Integer, Class<? extends Activity>> pageIdToFragmentMapInOrder = new LinkedHashMap<>();
-        pageIdToFragmentMapInOrder.put(R.string.map, MapActivity.class);
-        pageIdToFragmentMapInOrder.put(R.string.events, ProgrammeActivity.class);
-        pageIdToFragmentMapInOrder.put(R.string.updates, UpdatesActivity.class);
-        pageIdToFragmentMapInOrder.put(R.string.arrival_methods, ArrivalMethodsActivity.class);
-	    pageIdToFragmentMapInOrder.put(R.string.feedback, FeedbackActivity.class);
-	    pageIdToFragmentMapInOrder.put(R.string.settings, SettingsActivity.class);
-	    pageIdToFragmentMapInOrder.put(R.string.about, AboutActivity.class);
+	private LinkedHashMap<Integer, Class<? extends Activity>> createPageIdToActivityTypeMap() {
+		LinkedHashMap<Integer, Class<? extends Activity>> pageIdToFragmentMapInOrder = new LinkedHashMap<>();
+		pageIdToFragmentMapInOrder.put(R.string.map, MapActivity.class);
+		pageIdToFragmentMapInOrder.put(R.string.events, ProgrammeActivity.class);
+		pageIdToFragmentMapInOrder.put(R.string.updates, UpdatesActivity.class);
+		pageIdToFragmentMapInOrder.put(R.string.arrival_methods, ArrivalMethodsActivity.class);
+		pageIdToFragmentMapInOrder.put(R.string.feedback, FeedbackActivity.class);
+		pageIdToFragmentMapInOrder.put(R.string.settings, SettingsActivity.class);
+		pageIdToFragmentMapInOrder.put(R.string.about, AboutActivity.class);
 
-        return pageIdToFragmentMapInOrder;
-    }
+		return pageIdToFragmentMapInOrder;
+	}
 }

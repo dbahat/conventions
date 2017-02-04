@@ -3,9 +3,9 @@ package amai.org.conventions.events.listeners;
 import android.support.v4.view.ViewPager;
 
 public class OnSwipeListener implements ViewPager.OnPageChangeListener {
+	private final Runnable action;
 	private ViewPager viewPager;
 	private int mainViewPosition;
-	private final Runnable action;
 	private boolean dismiss;
 	private boolean pageSelected;
 	private Runnable delayedSwipeActionPerformer = new Runnable() {

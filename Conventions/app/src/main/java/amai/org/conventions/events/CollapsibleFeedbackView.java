@@ -44,9 +44,9 @@ import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.AspectRatioImageView;
-import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.Feedback;
 import amai.org.conventions.model.FeedbackQuestion;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.FeedbackMail;
 import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Views;
@@ -54,92 +54,92 @@ import amai.org.conventions.utils.Views;
 public class CollapsibleFeedbackView extends FrameLayout {
 	private static final String TAG = CollapsibleFeedbackView.class.getCanonicalName();
 
-    private State state;
-    private TextView collapsedFeedbackTitle;
-    private Button openFeedbackButton;
-    private Button sendFeedbackButton;
-    private ImageView feedbackIcon;
-    private TextView feedbackSentText;
-    private ViewGroup feedbackCollapsed;
-    private ViewGroup feedbackExpended;
-    private ViewGroup feedbackContainer;
-    private ProgressBar progressBar;
+	private State state;
+	private TextView collapsedFeedbackTitle;
+	private Button openFeedbackButton;
+	private Button sendFeedbackButton;
+	private ImageView feedbackIcon;
+	private TextView feedbackSentText;
+	private ViewGroup feedbackCollapsed;
+	private ViewGroup feedbackExpended;
+	private ViewGroup feedbackContainer;
+	private ProgressBar progressBar;
 
-    private Feedback feedback;
-    private boolean feedbackChanged;
+	private Feedback feedback;
+	private boolean feedbackChanged;
 
-    public CollapsibleFeedbackView(Context context, AttributeSet attrs) {
-        super(context, attrs);
+	public CollapsibleFeedbackView(Context context, AttributeSet attrs) {
+		super(context, attrs);
 
-        LayoutInflater.from(this.getContext()).inflate(R.layout.view_collapsible_feedback_layout, this, true);
+		LayoutInflater.from(this.getContext()).inflate(R.layout.view_collapsible_feedback_layout, this, true);
 
-        state = State.Collapsed;
-        feedbackChanged = false;
+		state = State.Collapsed;
+		feedbackChanged = false;
 
-        collapsedFeedbackTitle = (TextView) findViewById(R.id.collapsed_feedback_title);
-        openFeedbackButton = (Button) findViewById(R.id.open_feedback_button);
-        feedbackIcon = (ImageView) findViewById(R.id.feedback_icon);
-        feedbackContainer = (ViewGroup) findViewById(R.id.feedback_container);
-        sendFeedbackButton = (Button) findViewById(R.id.send_feedback_button);
-        feedbackSentText = (TextView) findViewById(R.id.feedback_sent_text);
-        feedbackCollapsed = (ViewGroup) findViewById(R.id.feedback_collapsed);
-        feedbackExpended = (ViewGroup) findViewById(R.id.feedback_expended);
-        progressBar = (ProgressBar) findViewById(R.id.feedback_progress_bar);
-    }
-
-	public void setState(State state, boolean animate) {
-		 if (animate) {
-			 setState(state);
-		 } else {
-			 setStateWithoutAnimation(state);
-		 }
+		collapsedFeedbackTitle = (TextView) findViewById(R.id.collapsed_feedback_title);
+		openFeedbackButton = (Button) findViewById(R.id.open_feedback_button);
+		feedbackIcon = (ImageView) findViewById(R.id.feedback_icon);
+		feedbackContainer = (ViewGroup) findViewById(R.id.feedback_container);
+		sendFeedbackButton = (Button) findViewById(R.id.send_feedback_button);
+		feedbackSentText = (TextView) findViewById(R.id.feedback_sent_text);
+		feedbackCollapsed = (ViewGroup) findViewById(R.id.feedback_collapsed);
+		feedbackExpended = (ViewGroup) findViewById(R.id.feedback_expended);
+		progressBar = (ProgressBar) findViewById(R.id.feedback_progress_bar);
 	}
 
-    public void setState(State state) {
-        this.state = state;
+	public void setState(State state, boolean animate) {
+		if (animate) {
+			setState(state);
+		} else {
+			setStateWithoutAnimation(state);
+		}
+	}
 
-        resizeFeedbackContainer(state);
-    }
+	public State getState() {
+		return state;
+	}
 
-    public State getState() {
-        return state;
-    }
+	public void setState(State state) {
+		this.state = state;
 
-    public void setProgressBarVisibility(boolean visible) {
-        if (visible) {
-            progressBar.setVisibility(VISIBLE);
-            sendFeedbackButton.setVisibility(GONE);
-        } else {
-            progressBar.setVisibility(GONE);
-            sendFeedbackButton.setVisibility(VISIBLE);
-        }
-    }
+		resizeFeedbackContainer(state);
+	}
+
+	public void setProgressBarVisibility(boolean visible) {
+		if (visible) {
+			progressBar.setVisibility(VISIBLE);
+			sendFeedbackButton.setVisibility(GONE);
+		} else {
+			progressBar.setVisibility(GONE);
+			sendFeedbackButton.setVisibility(VISIBLE);
+		}
+	}
 
 	public void refresh() {
 		setModel(feedback);
 	}
 
-    public void setModel(Feedback feedback) {
-        this.feedback = feedback;
+	public void setModel(Feedback feedback) {
+		this.feedback = feedback;
 
-        if (feedback.isSent()) {
-            collapsedFeedbackTitle.setText(getContext().getString(R.string.feedback_sent));
-            openFeedbackButton.setText(getContext().getString(R.string.display_feedback));
-            sendFeedbackButton.setVisibility(View.GONE);
-            feedbackSentText.setVisibility(View.VISIBLE);
-        } else if (Convention.getInstance().isFeedbackSendingTimeOver()) {
-	        collapsedFeedbackTitle.setText(getContext().getString(R.string.feedback_sending_time_over));
-	        openFeedbackButton.setText(getContext().getString(R.string.display));
-	        sendFeedbackButton.setVisibility(View.GONE);
-	        feedbackSentText.setVisibility(View.VISIBLE);
-	        feedbackSentText.setText(getContext().getString(R.string.feedback_sending_time_over));
-        }
+		if (feedback.isSent()) {
+			collapsedFeedbackTitle.setText(getContext().getString(R.string.feedback_sent));
+			openFeedbackButton.setText(getContext().getString(R.string.display_feedback));
+			sendFeedbackButton.setVisibility(View.GONE);
+			feedbackSentText.setVisibility(View.VISIBLE);
+		} else if (Convention.getInstance().isFeedbackSendingTimeOver()) {
+			collapsedFeedbackTitle.setText(getContext().getString(R.string.feedback_sending_time_over));
+			openFeedbackButton.setText(getContext().getString(R.string.display));
+			sendFeedbackButton.setVisibility(View.GONE);
+			feedbackSentText.setVisibility(View.VISIBLE);
+			feedbackSentText.setText(getContext().getString(R.string.feedback_sending_time_over));
+		}
 
-        setFeedbackIcon(feedback);
+		setFeedbackIcon(feedback);
 
 		LinearLayout questionsLayout = (LinearLayout) findViewById(R.id.questions_layout);
-	    buildQuestionsLayout(questionsLayout, feedback);
-    }
+		buildQuestionsLayout(questionsLayout, feedback);
+	}
 
 	public void setSendFeedbackClickListener(OnClickListener listener) {
 		sendFeedbackButton.setOnClickListener(listener);
@@ -148,91 +148,91 @@ public class CollapsibleFeedbackView extends FrameLayout {
 	private void buildQuestionsLayout(LinearLayout questionsLayout, Feedback feedback) {
 		questionsLayout.removeAllViews();
 		for (FeedbackQuestion question : feedback.getQuestions()) {
-		    questionsLayout.addView(buildQuestionView(question, feedback));
+			questionsLayout.addView(buildQuestionView(question, feedback));
 		}
 		sendFeedbackButton.setEnabled(feedback.hasAnsweredQuestions());
 	}
 
 	public boolean isFeedbackChanged() {
-        return feedbackChanged;
-    }
+		return feedbackChanged;
+	}
 
-    private void setStateWithoutAnimation(State state) {
-        this.state = state;
+	private void setStateWithoutAnimation(State state) {
+		this.state = state;
 
-        switch (state) {
-            case Collapsed:
-                feedbackExpended.setVisibility(GONE);
-                feedbackCollapsed.setVisibility(VISIBLE);
-                break;
-	        case ExpandedHeadless:
-		        findViewById(R.id.feedback_expanded_title).setVisibility(GONE);
-		        feedbackExpended.setVisibility(VISIBLE);
-		        feedbackCollapsed.setVisibility(GONE);
-		        break;
-            case Expanded:
-	            findViewById(R.id.feedback_expanded_title).setVisibility(VISIBLE);
-                feedbackExpended.setVisibility(VISIBLE);
-                feedbackCollapsed.setVisibility(GONE);
-        }
-    }
+		switch (state) {
+			case Collapsed:
+				feedbackExpended.setVisibility(GONE);
+				feedbackCollapsed.setVisibility(VISIBLE);
+				break;
+			case ExpandedHeadless:
+				findViewById(R.id.feedback_expanded_title).setVisibility(GONE);
+				feedbackExpended.setVisibility(VISIBLE);
+				feedbackCollapsed.setVisibility(GONE);
+				break;
+			case Expanded:
+				findViewById(R.id.feedback_expanded_title).setVisibility(VISIBLE);
+				feedbackExpended.setVisibility(VISIBLE);
+				feedbackCollapsed.setVisibility(GONE);
+		}
+	}
 
-    private void setFeedbackIcon(Feedback feedback) {
-        Drawable icon;
-        FeedbackQuestion.Smiley3PointAnswer weightedRating = feedback.getWeightedRating();
-        int filterColor;
-        if (weightedRating != null) {
-            icon = ContextCompat.getDrawable(getContext(), weightedRating.getImageResourceId());
-            filterColor = ContextCompat.getColor(getContext(), R.color.yellow);
-        } else {
-            icon = ContextCompat.getDrawable(getContext(), R.drawable.feedback);
-            filterColor = ThemeAttributes.getColor(getContext(), R.attr.buttonColor);
-        }
-        icon = icon.mutate();
-        icon.setColorFilter(filterColor, PorterDuff.Mode.MULTIPLY);
-        feedbackIcon.setImageDrawable(icon);
-    }
+	private void setFeedbackIcon(Feedback feedback) {
+		Drawable icon;
+		FeedbackQuestion.Smiley3PointAnswer weightedRating = feedback.getWeightedRating();
+		int filterColor;
+		if (weightedRating != null) {
+			icon = ContextCompat.getDrawable(getContext(), weightedRating.getImageResourceId());
+			filterColor = ContextCompat.getColor(getContext(), R.color.yellow);
+		} else {
+			icon = ContextCompat.getDrawable(getContext(), R.drawable.feedback);
+			filterColor = ThemeAttributes.getColor(getContext(), R.attr.buttonColor);
+		}
+		icon = icon.mutate();
+		icon.setColorFilter(filterColor, PorterDuff.Mode.MULTIPLY);
+		feedbackIcon.setImageDrawable(icon);
+	}
 
-    private View buildQuestionView(final FeedbackQuestion question, final Feedback feedback) {
-        LinearLayout questionLayout = new LinearLayout(getContext());
-	    questionLayout.setFocusableInTouchMode(true); // Prevent text edit from getting the focus
-        LinearLayout.LayoutParams questionLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        questionLayoutParams.setMargins(0, getResources().getDimensionPixelOffset(R.dimen.feedback_question_top_margin), 0, 0);
-        questionLayout.setLayoutParams(questionLayoutParams);
+	private View buildQuestionView(final FeedbackQuestion question, final Feedback feedback) {
+		LinearLayout questionLayout = new LinearLayout(getContext());
+		questionLayout.setFocusableInTouchMode(true); // Prevent text edit from getting the focus
+		LinearLayout.LayoutParams questionLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		questionLayoutParams.setMargins(0, getResources().getDimensionPixelOffset(R.dimen.feedback_question_top_margin), 0, 0);
+		questionLayout.setLayoutParams(questionLayoutParams);
 
-        TextView questionText = new TextView(getContext());
-	    TextViewCompat.setTextAppearance(questionText, R.style.FeedbackQuestionTextAppearance);
-	    boolean isSent = feedback.isSent();
-	    questionText.setText(question.getQuestionText(getResources(), isSent));
+		TextView questionText = new TextView(getContext());
+		TextViewCompat.setTextAppearance(questionText, R.style.FeedbackQuestionTextAppearance);
+		boolean isSent = feedback.isSent();
+		questionText.setText(question.getQuestionText(getResources(), isSent));
 
-        View answerView = null;
-        int layoutOrientation = LinearLayout.VERTICAL;
+		View answerView = null;
+		int layoutOrientation = LinearLayout.VERTICAL;
 
-        switch (question.getAnswerType()) {
-            case TEXT: {
-	            answerView = buildTextAnswerView(question, feedback);
-	            break;
-            }
-            case SMILEY_3_POINTS: {
-	            answerView = buildSmiley3PointsAnswerView(question, feedback);
-                break;
-            }
-	        case MULTIPLE_ANSWERS: {
-		        answerView = buildMultiAnswerView(question, feedback, question.getMultipleAnswers(), false);
-		        break;
-	        }
-	        case MULTIPLE_ANSWERS_RADIO: {
-		        answerView = buildMultiAnswerView(question, feedback, question.getMultipleAnswers(), true);
-		        break;
-	        }
-        }
+		switch (question.getAnswerType()) {
+			case TEXT: {
+				answerView = buildTextAnswerView(question, feedback);
+				break;
+			}
+			case SMILEY_3_POINTS: {
+				answerView = buildSmiley3PointsAnswerView(question, feedback);
+				break;
+			}
+			case MULTIPLE_ANSWERS: {
+				answerView = buildMultiAnswerView(question, feedback, question.getMultipleAnswers(), false);
+				break;
+			}
+			case MULTIPLE_ANSWERS_RADIO: {
+				answerView = buildMultiAnswerView(question, feedback, question.getMultipleAnswers(), true);
+				break;
+			}
+		}
 
-        questionLayout.setOrientation(layoutOrientation);
-        questionLayout.addView(questionText);
-        questionLayout.addView(answerView);
+		questionLayout.setOrientation(layoutOrientation);
+		questionLayout.addView(questionText);
+		questionLayout.addView(answerView);
 
-        return questionLayout;
-    }
+		return questionLayout;
+	}
 
 	private View buildSmiley3PointsAnswerView(final FeedbackQuestion question, final Feedback feedback) {
 		LinearLayout imagesLayout = new LinearLayout(getContext());
@@ -269,65 +269,65 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		imagesLayout.addView(veryPositiveRating);
 
 		OnClickListener listener = new OnClickListener() {
-		    @Override
-		    public void onClick(View v) {
-		        List<ImageView> allImages = new ArrayList<>(Arrays.asList(negativeRating, positiveRating, veryPositiveRating));
-		        for (ImageView otherImage : allImages) {
-		            otherImage.setColorFilter(grayscale);
-		        }
+			@Override
+			public void onClick(View v) {
+				List<ImageView> allImages = new ArrayList<>(Arrays.asList(negativeRating, positiveRating, veryPositiveRating));
+				for (ImageView otherImage : allImages) {
+					otherImage.setColorFilter(grayscale);
+				}
 
-		        ImageView selected = (ImageView) v;
-		        Object selectedAnswer = null;
-		        if (selected == negativeRating) {
-		            selectedAnswer = FeedbackQuestion.Smiley3PointAnswer.NEGATIVE;
-		        } else if (selected == positiveRating) {
-		            selectedAnswer = FeedbackQuestion.Smiley3PointAnswer.POSITIVE;
-		        } else if (selected == veryPositiveRating) {
-		            selectedAnswer = FeedbackQuestion.Smiley3PointAnswer.VERY_POSITIVE;
-		        }
+				ImageView selected = (ImageView) v;
+				Object selectedAnswer = null;
+				if (selected == negativeRating) {
+					selectedAnswer = FeedbackQuestion.Smiley3PointAnswer.NEGATIVE;
+				} else if (selected == positiveRating) {
+					selectedAnswer = FeedbackQuestion.Smiley3PointAnswer.POSITIVE;
+				} else if (selected == veryPositiveRating) {
+					selectedAnswer = FeedbackQuestion.Smiley3PointAnswer.VERY_POSITIVE;
+				}
 
-			    // If the user clicked on the same answer, remove the answer
-			    if (selectedAnswer == question.getAnswer()) {
-				    selectedAnswer = null;
-			    }
+				// If the user clicked on the same answer, remove the answer
+				if (selectedAnswer == question.getAnswer()) {
+					selectedAnswer = null;
+				}
 
-			    if (selectedAnswer != null) {
-		            selected.setColorFilter(ContextCompat.getColor(getContext(), R.color.yellow), PorterDuff.Mode.MULTIPLY);
-			    }
+				if (selectedAnswer != null) {
+					selected.setColorFilter(ContextCompat.getColor(getContext(), R.color.yellow), PorterDuff.Mode.MULTIPLY);
+				}
 
-		        question.setAnswer(selectedAnswer);
-		        feedbackChanged |= question.isAnswerChanged();
-		        sendFeedbackButton.setEnabled(feedback.hasAnsweredQuestions());
-		    }
+				question.setAnswer(selectedAnswer);
+				feedbackChanged |= question.isAnswerChanged();
+				sendFeedbackButton.setEnabled(feedback.hasAnsweredQuestions());
+			}
 		};
 
 		if (!feedback.isSent()) {
-		    negativeRating.setOnClickListener(listener);
-		    positiveRating.setOnClickListener(listener);
-		    veryPositiveRating.setOnClickListener(listener);
+			negativeRating.setOnClickListener(listener);
+			positiveRating.setOnClickListener(listener);
+			veryPositiveRating.setOnClickListener(listener);
 		} else {
-		    negativeRating.setOnClickListener(null);
-		    positiveRating.setOnClickListener(null);
-		    veryPositiveRating.setOnClickListener(null);
+			negativeRating.setOnClickListener(null);
+			positiveRating.setOnClickListener(null);
+			veryPositiveRating.setOnClickListener(null);
 		}
 
 		Object answer = question.getAnswer();
 		if (answer != null) {
-		    FeedbackQuestion.Smiley3PointAnswer smileyAnswer = FeedbackQuestion.Smiley3PointAnswer.getByAnswerText(answer.toString());
-		    if (smileyAnswer != null) {
-			    question.setAnswer(null); // Needed so onClick won't cancel the answer selection
-		        switch (smileyAnswer) {
-		            case NEGATIVE:
-		                listener.onClick(negativeRating);
-		                break;
-		            case POSITIVE:
-		                listener.onClick(positiveRating);
-		                break;
-		            case VERY_POSITIVE:
-		                listener.onClick(veryPositiveRating);
-		                break;
-		        }
-		    }
+			FeedbackQuestion.Smiley3PointAnswer smileyAnswer = FeedbackQuestion.Smiley3PointAnswer.getByAnswerText(answer.toString());
+			if (smileyAnswer != null) {
+				question.setAnswer(null); // Needed so onClick won't cancel the answer selection
+				switch (smileyAnswer) {
+					case NEGATIVE:
+						listener.onClick(negativeRating);
+						break;
+					case POSITIVE:
+						listener.onClick(positiveRating);
+						break;
+					case VERY_POSITIVE:
+						listener.onClick(veryPositiveRating);
+						break;
+				}
+			}
 		}
 		return imagesLayout;
 	}
@@ -336,52 +336,52 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		Object answer = question.getAnswer();
 		View answerView;
 		if (feedback.isSent()) {
-		    // Display in a text view
-		    TextView textView = new TextView(getContext());
-		    LinearLayout.LayoutParams textViewLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		    textView.setLayoutParams(textViewLayoutParams);
+			// Display in a text view
+			TextView textView = new TextView(getContext());
+			LinearLayout.LayoutParams textViewLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+			textView.setLayoutParams(textViewLayoutParams);
 			TextViewCompat.setTextAppearance(textView, R.style.FeedbackQuestionTextAppearance);
-		    if (answer != null) {
-		        textView.setText(answer.toString());
-		    }
+			if (answer != null) {
+				textView.setText(answer.toString());
+			}
 
-		    answerView = textView;
+			answerView = textView;
 		} else {
-		    // Display in an editable text
-		    EditText editText = new EditText(getContext());
-		    editText.setFreezesText(true);
-		    editText.setInputType(
-		            InputType.TYPE_CLASS_TEXT |
-		                    InputType.TYPE_TEXT_FLAG_AUTO_CORRECT |
-		                    InputType.TYPE_TEXT_VARIATION_LONG_MESSAGE |
-		                    InputType.TYPE_TEXT_FLAG_MULTI_LINE |
-		                    InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS
-		    );
-		    LinearLayout.LayoutParams editTextLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		    editText.setLayoutParams(editTextLayoutParams);
+			// Display in an editable text
+			EditText editText = new EditText(getContext());
+			editText.setFreezesText(true);
+			editText.setInputType(
+					InputType.TYPE_CLASS_TEXT |
+							InputType.TYPE_TEXT_FLAG_AUTO_CORRECT |
+							InputType.TYPE_TEXT_VARIATION_LONG_MESSAGE |
+							InputType.TYPE_TEXT_FLAG_MULTI_LINE |
+							InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS
+			);
+			LinearLayout.LayoutParams editTextLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+			editText.setLayoutParams(editTextLayoutParams);
 			TextViewCompat.setTextAppearance(editText, R.style.FeedbackQuestionTextAppearance);
-		    editText.addTextChangedListener(new TextWatcher() {
-			    @Override
-			    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-			    }
+			editText.addTextChangedListener(new TextWatcher() {
+				@Override
+				public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+				}
 
-			    @Override
-			    public void onTextChanged(CharSequence s, int start, int before, int count) {
-			    }
+				@Override
+				public void onTextChanged(CharSequence s, int start, int before, int count) {
+				}
 
-			    @Override
-			    public void afterTextChanged(Editable s) {
-				    question.setAnswer(s.toString());
-				    sendFeedbackButton.setEnabled(feedback.hasAnsweredQuestions());
-				    feedbackChanged |= question.isAnswerChanged();
-			    }
-		    });
+				@Override
+				public void afterTextChanged(Editable s) {
+					question.setAnswer(s.toString());
+					sendFeedbackButton.setEnabled(feedback.hasAnsweredQuestions());
+					feedbackChanged |= question.isAnswerChanged();
+				}
+			});
 
-		    if (answer != null) {
-			    editText.setText(answer.toString());
-		    }
+			if (answer != null) {
+				editText.setText(answer.toString());
+			}
 
-		    answerView = editText;
+			answerView = editText;
 		}
 		return answerView;
 	}
@@ -443,14 +443,14 @@ public class CollapsibleFeedbackView extends FrameLayout {
 			if (radio) {
 				answerButton = new AppCompatRadioButton(getContext());
 				CompoundButtonCompat.setButtonTintList((RadioButton) answerButton, new ColorStateList(
-					new int[][]{
-						new int[]{ -android.R.attr.state_checked },
-						new int[]{ android.R.attr.state_checked }
-					},
-					new int[]{
-						ThemeAttributes.getColor(getContext(), R.attr.feedbackAnswerButtonColor),
-						ThemeAttributes.getColor(getContext(), R.attr.feedbackAnswerButtonSelectedColor)
-					}
+						new int[][]{
+								new int[]{-android.R.attr.state_checked},
+								new int[]{android.R.attr.state_checked}
+						},
+						new int[]{
+								ThemeAttributes.getColor(getContext(), R.attr.feedbackAnswerButtonColor),
+								ThemeAttributes.getColor(getContext(), R.attr.feedbackAnswerButtonSelectedColor)
+						}
 				));
 			} else {
 				answerButton = new TextView(getContext());
@@ -488,112 +488,112 @@ public class CollapsibleFeedbackView extends FrameLayout {
 	}
 
 	private int calculateExpendedFeedbackHeight() {
-        ViewGroup expendedFeedbackLayout = (ViewGroup) LayoutInflater.from(this.getContext()).inflate(R.layout.feedback_layout_expanded, feedbackContainer, false);
+		ViewGroup expendedFeedbackLayout = (ViewGroup) LayoutInflater.from(this.getContext()).inflate(R.layout.feedback_layout_expanded, feedbackContainer, false);
 
-        // Add all the questions to the view
-        LinearLayout questionsLayout = (LinearLayout) expendedFeedbackLayout.findViewById(R.id.questions_layout);
-	    buildQuestionsLayout(questionsLayout, feedback);
+		// Add all the questions to the view
+		LinearLayout questionsLayout = (LinearLayout) expendedFeedbackLayout.findViewById(R.id.questions_layout);
+		buildQuestionsLayout(questionsLayout, feedback);
 
-        return calculateViewHeight(expendedFeedbackLayout);
-    }
+		return calculateViewHeight(expendedFeedbackLayout);
+	}
 
-    private int calculateCollapsedFeedbackHeight() {
-        return calculateViewHeight(LayoutInflater.from(this.getContext()).inflate(R.layout.feedback_layout_collapsed, feedbackContainer, false));
-    }
+	private int calculateCollapsedFeedbackHeight() {
+		return calculateViewHeight(LayoutInflater.from(this.getContext()).inflate(R.layout.feedback_layout_collapsed, feedbackContainer, false));
+	}
 
-    private int calculateViewHeight(View view) {
-        Point screenSize = Views.getScreenSize(getContext());
+	private int calculateViewHeight(View view) {
+		Point screenSize = Views.getScreenSize(getContext());
 
-        view.measure(screenSize.x, screenSize.y);
-        return view.getMeasuredHeight();
-    }
+		view.measure(screenSize.x, screenSize.y);
+		return view.getMeasuredHeight();
+	}
 
-    private void resizeFeedbackContainer(State state) {
-        int currentHeight = feedbackContainer.getHeight();
-        int targetHeight = 0;
-        ViewGroup layoutBeforeResize = null;
-        ViewGroup layoutAfterResize = null;
+	private void resizeFeedbackContainer(State state) {
+		int currentHeight = feedbackContainer.getHeight();
+		int targetHeight = 0;
+		ViewGroup layoutBeforeResize = null;
+		ViewGroup layoutAfterResize = null;
 
-        // Calculate the heights of the collapsed/expended states of the feedback view, since they are dynamic (based on the number of questions), and
-        // we need the heights pre-calculated before the animation to be able to properly animate the transitions and restructure of the layout.
-        // Note -
-        // The calculation is done by re-inflating the layout (which is not very efficient), since only one of the collapsed/expended layouts is visible
-        // at any given time, and the other is in GONE state so the rest of the views will be positioned properly.
-        switch (state) {
-            case Expanded:
-                targetHeight = calculateExpendedFeedbackHeight();
-                layoutBeforeResize = feedbackCollapsed;
-                layoutAfterResize = feedbackExpended;
-                break;
-            case Collapsed:
-                targetHeight = calculateCollapsedFeedbackHeight();
-                layoutBeforeResize = feedbackExpended;
-                layoutAfterResize = feedbackCollapsed;
-                break;
-	        case ExpandedHeadless:
-		        throw new RuntimeException("ExpandedHeadless state is not supported for animation");
-        }
+		// Calculate the heights of the collapsed/expended states of the feedback view, since they are dynamic (based on the number of questions), and
+		// we need the heights pre-calculated before the animation to be able to properly animate the transitions and restructure of the layout.
+		// Note -
+		// The calculation is done by re-inflating the layout (which is not very efficient), since only one of the collapsed/expended layouts is visible
+		// at any given time, and the other is in GONE state so the rest of the views will be positioned properly.
+		switch (state) {
+			case Expanded:
+				targetHeight = calculateExpendedFeedbackHeight();
+				layoutBeforeResize = feedbackCollapsed;
+				layoutAfterResize = feedbackExpended;
+				break;
+			case Collapsed:
+				targetHeight = calculateCollapsedFeedbackHeight();
+				layoutBeforeResize = feedbackExpended;
+				layoutAfterResize = feedbackCollapsed;
+				break;
+			case ExpandedHeadless:
+				throw new RuntimeException("ExpandedHeadless state is not supported for animation");
+		}
 
-        ValueAnimator animation = slideAnimator(currentHeight, targetHeight, feedbackContainer);
-        animation.setDuration(300);
+		ValueAnimator animation = slideAnimator(currentHeight, targetHeight, feedbackContainer);
+		animation.setDuration(300);
 
-        final ViewGroup finalLayoutBeforeResize = layoutBeforeResize;
-        final ViewGroup finalLayoutAfterResize = layoutAfterResize;
+		final ViewGroup finalLayoutBeforeResize = layoutBeforeResize;
+		final ViewGroup finalLayoutAfterResize = layoutAfterResize;
 
-        animation.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
+		animation.addListener(new Animator.AnimatorListener() {
+			@Override
+			public void onAnimationStart(Animator animation) {
 
-            }
+			}
 
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                finalLayoutBeforeResize.setVisibility(View.GONE);
-                ViewGroup.LayoutParams layoutParams = feedbackContainer.getLayoutParams();
-                layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-                feedbackContainer.setLayoutParams(layoutParams);
+			@Override
+			public void onAnimationEnd(Animator animation) {
+				finalLayoutBeforeResize.setVisibility(View.GONE);
+				ViewGroup.LayoutParams layoutParams = feedbackContainer.getLayoutParams();
+				layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+				feedbackContainer.setLayoutParams(layoutParams);
 
-                finalLayoutAfterResize.setVisibility(View.VISIBLE);
-                finalLayoutAfterResize.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
-            }
+				finalLayoutAfterResize.setVisibility(View.VISIBLE);
+				finalLayoutAfterResize.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
+			}
 
-            @Override
-            public void onAnimationCancel(Animator animation) {
+			@Override
+			public void onAnimationCancel(Animator animation) {
 
-            }
+			}
 
-            @Override
-            public void onAnimationRepeat(Animator animation) {
+			@Override
+			public void onAnimationRepeat(Animator animation) {
 
-            }
-        });
-        animation.start();
-    }
+			}
+		});
+		animation.start();
+	}
 
-    private ValueAnimator slideAnimator(int start, int end, final View viewToResize) {
+	private ValueAnimator slideAnimator(int start, int end, final View viewToResize) {
 
-        ValueAnimator animator = ValueAnimator.ofInt(start, end);
-        animator.setInterpolator(new AccelerateDecelerateInterpolator());
+		ValueAnimator animator = ValueAnimator.ofInt(start, end);
+		animator.setInterpolator(new AccelerateDecelerateInterpolator());
 
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-	        @Override
-	        public void onAnimationUpdate(ValueAnimator valueAnimator) {
-		        //Update Height
-		        int value = (Integer) valueAnimator.getAnimatedValue();
+		animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+			@Override
+			public void onAnimationUpdate(ValueAnimator valueAnimator) {
+				//Update Height
+				int value = (Integer) valueAnimator.getAnimatedValue();
 
-		        ViewGroup.LayoutParams layoutParams = viewToResize.getLayoutParams();
-		        layoutParams.height = value;
-		        viewToResize.setLayoutParams(layoutParams);
-	        }
-        });
-        return animator;
-    }
+				ViewGroup.LayoutParams layoutParams = viewToResize.getLayoutParams();
+				layoutParams.height = value;
+				viewToResize.setLayoutParams(layoutParams);
+			}
+		});
+		return animator;
+	}
 
-    public enum State {
-        Collapsed,
-	    Expanded,
-	    ExpandedHeadless
-    }
+	public enum State {
+		Collapsed,
+		Expanded,
+		ExpandedHeadless
+	}
 
 	public abstract class CollapsibleFeedbackViewSendMailListener extends FeedbackMail.SendEventMailOnClickListener {
 		protected abstract void saveFeedback();

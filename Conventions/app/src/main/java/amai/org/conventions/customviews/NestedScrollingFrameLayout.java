@@ -43,13 +43,13 @@ public class NestedScrollingFrameLayout extends FrameLayout implements NestedScr
 	}
 
 	@Override
-	public void setNestedScrollingEnabled(boolean enabled) {
-		nestedScrollingChildHelper.setNestedScrollingEnabled(enabled);
+	public boolean isNestedScrollingEnabled() {
+		return nestedScrollingChildHelper.isNestedScrollingEnabled();
 	}
 
 	@Override
-	public boolean isNestedScrollingEnabled() {
-		return nestedScrollingChildHelper.isNestedScrollingEnabled();
+	public void setNestedScrollingEnabled(boolean enabled) {
+		nestedScrollingChildHelper.setNestedScrollingEnabled(enabled);
 	}
 
 	@Override

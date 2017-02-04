@@ -5,9 +5,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class CollectionUtils {
-    public interface Predicate<T> {
-        boolean where(T item);
-    }
+	public interface Predicate<T> {
+		boolean where(T item);
+	}
 
 	public interface EqualityPredicate<T> {
 		boolean equals(T lhs, T rhs);
@@ -21,14 +21,14 @@ public class CollectionUtils {
 		return filter(list, predicate, new LinkedList<T>());
 	}
 
-    public static <T, K extends List<T>> K filter(List<T> list, Predicate<T> predicate, K newList) {
-        for (T item : list) {
-            if (predicate.where(item)) {
-                newList.add(item);
-            }
-        }
-        return newList;
-    }
+	public static <T, K extends List<T>> K filter(List<T> list, Predicate<T> predicate, K newList) {
+		for (T item : list) {
+			if (predicate.where(item)) {
+				newList.add(item);
+			}
+		}
+		return newList;
+	}
 
 	public static <T, K> List<K> map(List<T> list, Mapper<T, K> mapper) {
 		List<K> mapped = new LinkedList<>();

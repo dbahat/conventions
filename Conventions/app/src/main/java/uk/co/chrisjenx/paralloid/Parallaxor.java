@@ -17,7 +17,7 @@ public interface Parallaxor {
      * @param view       View to move when this moves
      * @param multiplier 1.0f is the normal amount, a 1:1 ratio, 0.5f would move at half the distance of this view etc..
      */
-    public void parallaxViewBy(View view, float multiplier);
+    void parallaxViewBy(View view, float multiplier);
 
     /**
      * Which view we want to move by.
@@ -28,7 +28,7 @@ public interface Parallaxor {
      * @param transformer how do we want to move the view? (null default to {@link uk.co.chrisjenx.paralloid.transform.LinearTransformer})
      * @param multiplier  1.0f is the normal amount, a 1:1 ratio, 0.5f would move at half the distance of this view etc..
      */
-    public void parallaxViewBy(View view, Transformer transformer, float multiplier);
+    void parallaxViewBy(View view, Transformer transformer, float multiplier);
 
     /**
      * This does a bit more than move the background, it will make it fit the view in a way that
@@ -38,5 +38,5 @@ public interface Parallaxor {
      * @param multiplier How much to move it by, 1 would be a 1:1 relationship. 0.5 would move the
      *                   background and half the rate of the scrolling.
      */
-    public void parallaxViewBackgroundBy(View view, Drawable drawable, float multiplier);
+    void parallaxViewBackgroundBy(View view, Drawable drawable, float multiplier);
 }

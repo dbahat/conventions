@@ -15,8 +15,10 @@
     <!-- Required for google GCM, for push notifications -->
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
-    <permission android:name="amai.org.conventions.permission.C2D_MESSAGE" android:protectionLevel="signature" />
-    <uses-permission android:name="amai.org.conventions.permission.C2D_MESSAGE"/>
+    <permission
+        android:name="amai.org.conventions.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="amai.org.conventions.permission.C2D_MESSAGE" />
 
     <uses-feature
         android:name="android.hardware.location"
@@ -49,44 +51,43 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".events.activities.HallActivity" >
-        </activity>
-        <activity android:name=".events.activities.MyEventsActivity" >
-        </activity>
-        <activity android:name=".events.activities.ProgrammeActivity" >
-        </activity>
-        <activity android:name=".events.activities.ProgrammeSearchActivity" >
-        </activity>
-        <activity android:name=".map.MapActivity">
-        </activity>
-        <activity android:name=".events.activities.EventActivity"
-          android:windowSoftInputMode="adjustResize">
-        </activity>
-        <activity android:name=".ArrivalMethodsActivity" >
-        </activity>
-        <activity android:name=".FeedbackActivity" android:windowSoftInputMode="adjustResize">
-        </activity>
-        <activity android:name=".updates.UpdatesActivity">
-        </activity>
-        <activity android:name=".settings.SettingsActivity">
-        </activity>
-        <activity android:name=".AboutActivity">
-        </activity>
+        <activity android:name=".events.activities.HallActivity"></activity>
+        <activity android:name=".events.activities.MyEventsActivity"></activity>
+        <activity android:name=".events.activities.ProgrammeActivity"></activity>
+        <activity android:name=".events.activities.ProgrammeSearchActivity"></activity>
+        <activity android:name=".map.MapActivity"></activity>
+        <activity
+            android:name=".events.activities.EventActivity"
+            android:windowSoftInputMode="adjustResize"></activity>
+        <activity android:name=".ArrivalMethodsActivity"></activity>
+        <activity
+            android:name=".FeedbackActivity"
+            android:windowSoftInputMode="adjustResize"></activity>
+        <activity android:name=".updates.UpdatesActivity"></activity>
+        <activity android:name=".settings.SettingsActivity"></activity>
+        <activity android:name=".AboutActivity"></activity>
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-        <service android:name=".notifications.ShowNotificationService" android:exported="false"/>
-        <service android:name=".notifications.AzureNotificationRegistrationService" android:exported="false"/>
-        <service android:name=".notifications.GcmTokenRefreshService" android:exported="false">
+        <service
+            android:name=".notifications.ShowNotificationService"
+            android:exported="false" />
+        <service
+            android:name=".notifications.AzureNotificationRegistrationService"
+            android:exported="false" />
+        <service
+            android:name=".notifications.GcmTokenRefreshService"
+            android:exported="false">
             <intent-filter>
-                <action android:name="com.google.android.gms.iid.InstanceID"/>
+                <action android:name="com.google.android.gms.iid.InstanceID" />
             </intent-filter>
         </service>
 
-        <receiver android:name="com.microsoft.windowsazure.notifications.NotificationsBroadcastReceiver"
+        <receiver
+            android:name="com.microsoft.windowsazure.notifications.NotificationsBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />

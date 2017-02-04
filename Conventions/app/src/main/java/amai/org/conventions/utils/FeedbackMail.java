@@ -9,9 +9,9 @@ import java.io.IOException;
 import java.util.Properties;
 
 import amai.org.conventions.R;
-import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.Feedback;
 import amai.org.conventions.model.FeedbackQuestion;
+import amai.org.conventions.model.conventions.Convention;
 
 public abstract class FeedbackMail {
 	protected Context context;
@@ -58,7 +58,9 @@ public abstract class FeedbackMail {
 	}
 
 	protected abstract Feedback getFeedback();
+
 	protected abstract String getSubject();
+
 	protected abstract String getBody(String formattedQuestions, String deviceId);
 
 	protected String getMailRecipient() {
@@ -84,17 +86,35 @@ public abstract class FeedbackMail {
 
 	public static abstract class SendEventMailOnClickListener implements View.OnClickListener {
 
-		/** Called on UI thread before starting the background task */
-		protected void beforeStart() {}
-		/** Called before sending the mail, in the background */
-		protected void beforeSend() {}
-		/** Called after sending the mail, in the background. The feedback state is updated before calling this method. */
-		protected void afterSend() {}
-		/** Called on UI thread after the mail is sent, before onSuccess and onFailure calls. */
-		protected void afterEnd(Exception exception) {}
+		/**
+		 * Called on UI thread before starting the background task
+		 */
+		protected void beforeStart() {
+		}
 
-		protected void onFailure(Exception exception) {}
-		protected void onSuccess() {}
+		/**
+		 * Called before sending the mail, in the background
+		 */
+		protected void beforeSend() {
+		}
+
+		/**
+		 * Called after sending the mail, in the background. The feedback state is updated before calling this method.
+		 */
+		protected void afterSend() {
+		}
+
+		/**
+		 * Called on UI thread after the mail is sent, before onSuccess and onFailure calls.
+		 */
+		protected void afterEnd(Exception exception) {
+		}
+
+		protected void onFailure(Exception exception) {
+		}
+
+		protected void onSuccess() {
+		}
 
 		protected abstract FeedbackMail getFeedbackMail();
 

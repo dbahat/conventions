@@ -19,202 +19,200 @@ import java.util.Date;
 
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.R;
-import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.EventNotification;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.notifications.ShowNotificationService;
 import amai.org.conventions.utils.Dates;
 
 public class ConfigureNotificationsFragment extends DialogFragment {
-    private static final String EventId = "EventId";
+	public static final int DEFAULT_PRE_EVENT_START_NOTIFICATION_MINUTES = 10;
+	public static final int DEFAULT_POST_EVENT_START_NOTIFICATION_MINUTES = 5;
+	private static final String EventId = "EventId";
+	private ConventionEvent event;
+	private int numberOfMinutesBeforeEventNotification;
+	private int numberOfMinutesAfterEventNotification;
 
-    public static final int DEFAULT_PRE_EVENT_START_NOTIFICATION_MINUTES = 10;
-    public static final int DEFAULT_POST_EVENT_START_NOTIFICATION_MINUTES = 5;
+	private Button beforeEventStartTimeButton;
+	private Button afterEventEndTimeButton;
+	private CheckBox beforeEventStartEnabledCheckbox;
+	private CheckBox afterEventEndEnabledCheckbox;
 
-    private ConventionEvent event;
-    private int numberOfMinutesBeforeEventNotification;
-    private int numberOfMinutesAfterEventNotification;
+	public ConfigureNotificationsFragment() {
+		// Required empty public constructor
+	}
 
-    private Button beforeEventStartTimeButton;
-    private Button afterEventEndTimeButton;
-    private CheckBox beforeEventStartEnabledCheckbox;
-    private CheckBox afterEventEndEnabledCheckbox;
+	public static ConfigureNotificationsFragment newInstance(String eventId) {
+		ConfigureNotificationsFragment fragment = new ConfigureNotificationsFragment();
+		Bundle args = new Bundle();
+		args.putString(EventId, eventId);
+		fragment.setArguments(args);
+		return fragment;
+	}
 
-    public static ConfigureNotificationsFragment newInstance(String eventId) {
-        ConfigureNotificationsFragment fragment = new ConfigureNotificationsFragment();
-        Bundle args = new Bundle();
-        args.putString(EventId, eventId);
-        fragment.setArguments(args);
-        return fragment;
-    }
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		if (getArguments() != null) {
+			String eventId = getArguments().getString(EventId);
+			if (eventId != null) {
+				event = Convention.getInstance().findEventById(eventId);
+			}
+		}
+	}
 
-    public ConfigureNotificationsFragment() {
-        // Required empty public constructor
-    }
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	                         Bundle savedInstanceState) {
+		getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            String eventId = getArguments().getString(EventId);
-            if (eventId != null) {
-                event = Convention.getInstance().findEventById(eventId);
-            }
-        }
-    }
+		// Inflate the layout for this fragment
+		View view = inflater.inflate(R.layout.fragment_configure_notifications, container, false);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-	    getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
+		Button dismissButton = (Button) view.findViewById(R.id.configure_notification_dismiss);
+		dismissButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dismiss();
+			}
+		});
 
-	    // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_configure_notifications, container, false);
+		beforeEventStartTimeButton = (Button) view.findViewById(R.id.configure_notification_before_event_start_time);
+		afterEventEndTimeButton = (Button) view.findViewById(R.id.configure_notification_after_event_end_time);
 
-        Button dismissButton = (Button) view.findViewById(R.id.configure_notification_dismiss);
-        dismissButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
-            }
-        });
+		beforeEventStartEnabledCheckbox = (CheckBox) view.findViewById(R.id.configure_notification_before_event_start_enabled);
+		afterEventEndEnabledCheckbox = (CheckBox) view.findViewById(R.id.configure_notification_after_event_end_enabled);
 
-        beforeEventStartTimeButton = (Button) view.findViewById(R.id.configure_notification_before_event_start_time);
-        afterEventEndTimeButton = (Button) view.findViewById(R.id.configure_notification_after_event_end_time);
+		EventNotification eventAboutToStartNotification = event.getUserInput().getEventAboutToStartNotification();
+		EventNotification eventEndedNotification = event.getUserInput().getEventFeedbackReminderNotification();
 
-        beforeEventStartEnabledCheckbox = (CheckBox) view.findViewById(R.id.configure_notification_before_event_start_enabled);
-        afterEventEndEnabledCheckbox = (CheckBox) view.findViewById(R.id.configure_notification_after_event_end_enabled);
+		configureCheckboxOnClickListener(beforeEventStartEnabledCheckbox, eventAboutToStartNotification);
+		configureCheckboxOnClickListener(afterEventEndEnabledCheckbox, eventEndedNotification);
 
-        EventNotification eventAboutToStartNotification = event.getUserInput().getEventAboutToStartNotification();
-        EventNotification eventEndedNotification = event.getUserInput().getEventFeedbackReminderNotification();
+		numberOfMinutesBeforeEventNotification = eventAboutToStartNotification.isEnabled()
+				? (int) (event.getStartTime().getTime() - eventAboutToStartNotification.getNotificationTime().getTime()) / 1000 / 60
+				: DEFAULT_PRE_EVENT_START_NOTIFICATION_MINUTES;
 
-        configureCheckboxOnClickListener(beforeEventStartEnabledCheckbox, eventAboutToStartNotification);
-        configureCheckboxOnClickListener(afterEventEndEnabledCheckbox, eventEndedNotification);
+		numberOfMinutesAfterEventNotification = eventEndedNotification.isEnabled()
+				? (int) (eventEndedNotification.getNotificationTime().getTime() - event.getEndTime().getTime()) / 1000 / 60
+				: DEFAULT_POST_EVENT_START_NOTIFICATION_MINUTES;
 
-        numberOfMinutesBeforeEventNotification = eventAboutToStartNotification.isEnabled()
-                ? (int) (event.getStartTime().getTime() - eventAboutToStartNotification.getNotificationTime().getTime()) / 1000 / 60
-                : DEFAULT_PRE_EVENT_START_NOTIFICATION_MINUTES;
+		refreshTimeButtonsText();
 
-        numberOfMinutesAfterEventNotification = eventEndedNotification.isEnabled()
-                ? (int) (eventEndedNotification.getNotificationTime().getTime() - event.getEndTime().getTime()) / 1000 / 60
-                : DEFAULT_POST_EVENT_START_NOTIFICATION_MINUTES;
+		afterEventEndTimeButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				final NumberPicker numberPicker = createNumberPicker(numberOfMinutesAfterEventNotification);
 
-        refreshTimeButtonsText();
+				new AlertDialog.Builder(getActivity())
+						.setView(numberPicker)
+						.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								numberOfMinutesAfterEventNotification = numberPicker.getValue() * 5;
+								afterEventEndEnabledCheckbox.setChecked(true);
+								updateNotificationSettings();
+								dialog.dismiss();
+							}
+						})
+						.show();
+			}
+		});
 
-        afterEventEndTimeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final NumberPicker numberPicker = createNumberPicker(numberOfMinutesAfterEventNotification);
+		beforeEventStartTimeButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				final NumberPicker numberPicker = createNumberPicker(numberOfMinutesBeforeEventNotification);
 
-                new AlertDialog.Builder(getActivity())
-                        .setView(numberPicker)
-                        .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                numberOfMinutesAfterEventNotification = numberPicker.getValue() * 5;
-                                afterEventEndEnabledCheckbox.setChecked(true);
-                                updateNotificationSettings();
-                                dialog.dismiss();
-                            }
-                        })
-                        .show();
-            }
-        });
+				new AlertDialog.Builder(getActivity())
+						.setView(numberPicker)
+						.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								numberOfMinutesBeforeEventNotification = numberPicker.getValue() * 5;
+								beforeEventStartEnabledCheckbox.setChecked(true);
+								updateNotificationSettings();
+								dialog.dismiss();
+							}
+						})
+						.show();
+			}
+		});
 
-        beforeEventStartTimeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final NumberPicker numberPicker = createNumberPicker(numberOfMinutesBeforeEventNotification);
+		return view;
+	}
 
-                new AlertDialog.Builder(getActivity())
-                        .setView(numberPicker)
-                        .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                numberOfMinutesBeforeEventNotification = numberPicker.getValue() * 5;
-                                beforeEventStartEnabledCheckbox.setChecked(true);
-                                updateNotificationSettings();
-                                dialog.dismiss();
-                            }
-                        })
-                        .show();
-            }
-        });
+	private NumberPicker createNumberPicker(int initialValue) {
+		NumberPicker numberPicker = new NumberPicker(getActivity());
 
-        return view;
-    }
+		// Configure the picker values to be 0 to 59 in 5min steps
+		numberPicker.setMinValue(0);
+		numberPicker.setMaxValue(11);
 
-    private NumberPicker createNumberPicker(int initialValue) {
-        NumberPicker numberPicker = new NumberPicker(getActivity());
+		String[] values = new String[12];
+		for (int i = 0; i < 12; i++) {
+			values[i] = Integer.toString(i * 5);
+		}
 
-        // Configure the picker values to be 0 to 59 in 5min steps
-        numberPicker.setMinValue(0);
-        numberPicker.setMaxValue(11);
+		numberPicker.setDisplayedValues(values);
+		numberPicker.setValue(initialValue != 0 ? initialValue / 5 : 0);
+		numberPicker.setWrapSelectorWheel(true);
+		numberPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+		return numberPicker;
+	}
 
-        String[] values = new String[12];
-        for (int i=0;i<12;i++) {
-            values[i] = Integer.toString(i*5);
-        }
+	private void refreshTimeButtonsText() {
+		beforeEventStartTimeButton.setText(getString(R.string.configure_notification_time, numberOfMinutesBeforeEventNotification));
+		afterEventEndTimeButton.setText(getString(R.string.configure_notification_time, numberOfMinutesAfterEventNotification));
+	}
 
-        numberPicker.setDisplayedValues(values);
-        numberPicker.setValue(initialValue != 0 ? initialValue / 5 : 0);
-        numberPicker.setWrapSelectorWheel(true);
-        numberPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
-        return numberPicker;
-    }
+	private void configureCheckboxOnClickListener(CheckBox checkBox, final EventNotification eventNotification) {
+		checkBox.setChecked(eventNotification.isEnabled());
+		checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				updateNotificationSettings();
+			}
+		});
+	}
 
-    private void refreshTimeButtonsText() {
-        beforeEventStartTimeButton.setText(getString(R.string.configure_notification_time, numberOfMinutesBeforeEventNotification));
-        afterEventEndTimeButton.setText(getString(R.string.configure_notification_time, numberOfMinutesAfterEventNotification));
-    }
+	private void updateNotificationSettings() {
+		EventNotification feedbackReminder = event.getUserInput().getEventFeedbackReminderNotification();
+		if (afterEventEndEnabledCheckbox.isChecked()) {
+			Date afterEventNotificationTime = new Date(event.getEndTime().getTime() + numberOfMinutesAfterEventNotification * Dates.MILLISECONDS_IN_MINUTE);
+			if (afterEventNotificationTime.before(new Date())) {
+				Toast.makeText(getActivity(), R.string.cannot_set_past_alarm, Toast.LENGTH_SHORT).show();
+				feedbackReminder.setNotificationTime(null);
+				afterEventEndEnabledCheckbox.setChecked(false);
+			}
+			feedbackReminder.setNotificationTime(afterEventNotificationTime);
+			ConventionsApplication.alarmScheduler.scheduleFillFeedbackOnEventNotification(event, afterEventNotificationTime.getTime());
+		} else {
+			feedbackReminder.setNotificationTime(null);
+		}
+		if (!feedbackReminder.isEnabled()) {
+			ConventionsApplication.alarmScheduler.cancelEventAlarm(event, ShowNotificationService.Type.EventFeedbackReminder);
+		}
 
-    private void configureCheckboxOnClickListener(CheckBox checkBox, final EventNotification eventNotification) {
-        checkBox.setChecked(eventNotification.isEnabled());
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                updateNotificationSettings();
-            }
-        });
-    }
+		EventNotification eventStartNotification = event.getUserInput().getEventAboutToStartNotification();
+		if (beforeEventStartEnabledCheckbox.isChecked()) {
+			Date beforeEventNotificationTime = new Date(event.getStartTime().getTime() - numberOfMinutesBeforeEventNotification * Dates.MILLISECONDS_IN_MINUTE);
+			if (beforeEventNotificationTime.before(new Date())) {
+				Toast.makeText(getActivity(), R.string.cannot_set_past_alarm, Toast.LENGTH_SHORT).show();
+				eventStartNotification.setNotificationTime(null);
+				beforeEventStartEnabledCheckbox.setChecked(false);
+			}
+			eventStartNotification.setNotificationTime(beforeEventNotificationTime);
+			ConventionsApplication.alarmScheduler.scheduleEventAboutToStartNotification(event, beforeEventNotificationTime.getTime());
+		} else {
+			eventStartNotification.setNotificationTime(null);
+		}
+		if (!eventStartNotification.isEnabled()) {
+			ConventionsApplication.alarmScheduler.cancelEventAlarm(event, ShowNotificationService.Type.EventAboutToStart);
+		}
 
-    private void updateNotificationSettings() {
-	    EventNotification feedbackReminder = event.getUserInput().getEventFeedbackReminderNotification();
-	    if (afterEventEndEnabledCheckbox.isChecked()) {
-            Date afterEventNotificationTime = new Date(event.getEndTime().getTime() + numberOfMinutesAfterEventNotification * Dates.MILLISECONDS_IN_MINUTE);
-	        if (afterEventNotificationTime.before(new Date())) {
-		        Toast.makeText(getActivity(), R.string.cannot_set_past_alarm, Toast.LENGTH_SHORT).show();
-		        feedbackReminder.setNotificationTime(null);
-		        afterEventEndEnabledCheckbox.setChecked(false);
-	        }
-            feedbackReminder.setNotificationTime(afterEventNotificationTime);
-            ConventionsApplication.alarmScheduler.scheduleFillFeedbackOnEventNotification(event, afterEventNotificationTime.getTime());
-        } else {
-            feedbackReminder.setNotificationTime(null);
-        }
-	    if (!feedbackReminder.isEnabled()) {
-            ConventionsApplication.alarmScheduler.cancelEventAlarm(event, ShowNotificationService.Type.EventFeedbackReminder);
-	    }
+		refreshTimeButtonsText();
+		Convention.getInstance().getStorage().saveUserInput();
 
-	    EventNotification eventStartNotification = event.getUserInput().getEventAboutToStartNotification();
-	    if (beforeEventStartEnabledCheckbox.isChecked()) {
-            Date beforeEventNotificationTime = new Date(event.getStartTime().getTime() - numberOfMinutesBeforeEventNotification * Dates.MILLISECONDS_IN_MINUTE);
-		    if (beforeEventNotificationTime.before(new Date())) {
-			    Toast.makeText(getActivity(), R.string.cannot_set_past_alarm, Toast.LENGTH_SHORT).show();
-			    eventStartNotification.setNotificationTime(null);
-			    beforeEventStartEnabledCheckbox.setChecked(false);
-		    }
-		    eventStartNotification.setNotificationTime(beforeEventNotificationTime);
-            ConventionsApplication.alarmScheduler.scheduleEventAboutToStartNotification(event, beforeEventNotificationTime.getTime());
-        } else {
-            eventStartNotification.setNotificationTime(null);
-        }
-	    if (!eventStartNotification.isEnabled()) {
-            ConventionsApplication.alarmScheduler.cancelEventAlarm(event, ShowNotificationService.Type.EventAboutToStart);
-	    }
-
-        refreshTimeButtonsText();
-        Convention.getInstance().getStorage().saveUserInput();
-
-    }
+	}
 }

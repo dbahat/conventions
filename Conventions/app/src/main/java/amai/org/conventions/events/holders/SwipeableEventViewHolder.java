@@ -21,15 +21,13 @@ import amai.org.conventions.model.ConventionEvent;
  */
 public class SwipeableEventViewHolder extends RecyclerView.ViewHolder {
 
-    private ViewPager viewPager;
-    private EventView mainEventView;
-    private EventView hiddenEventView;
+	private final static int MAIN_VIEW_POSITION = 1;
+	private ViewPager viewPager;
+	private EventView mainEventView;
+	private EventView hiddenEventView;
 	private EventView hiddenEventView2;
-
 	private ViewPager.OnPageChangeListener listener;
 	private ConventionEvent event;
-
-	private final static int MAIN_VIEW_POSITION = 1;
 	private boolean dismiss;
 
 	public SwipeableEventViewHolder(View itemView, boolean dismiss) {
@@ -58,10 +56,10 @@ public class SwipeableEventViewHolder extends RecyclerView.ViewHolder {
 		ApplyBounceAnimationListener listener = new ApplyBounceAnimationListener();
 		mainEventView.setOnFavoritesButtonClickedListener(listener);
 		mainEventView.setOnLongClickListener(listener);
-    }
+	}
 
 	private EventView createEventView(Context context, int id) {
-		EventView eventView =  new EventView(context);
+		EventView eventView = new EventView(context);
 		eventView.setId(id);
 		ViewPager.LayoutParams params = new ViewPager.LayoutParams();
 		params.width = ViewGroup.LayoutParams.MATCH_PARENT;
@@ -75,25 +73,25 @@ public class SwipeableEventViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	public void setModel(ConventionEvent event) {
-        setModel(event, false);
-    }
+		setModel(event, false);
+	}
 
-    public void setModel(ConventionEvent event, boolean conflicting) {
-	    this.reset();
+	public void setModel(ConventionEvent event, boolean conflicting) {
+		this.reset();
 
-	    this.event = event;
-	    setEventInEventView(mainEventView, event, conflicting);
+		this.event = event;
+		setEventInEventView(mainEventView, event, conflicting);
 
-	    if (!dismiss) {
-	        setEventInEventView(hiddenEventView, event, conflicting);
-	        setEventInEventView(hiddenEventView2, event, conflicting);
+		if (!dismiss) {
+			setEventInEventView(hiddenEventView, event, conflicting);
+			setEventInEventView(hiddenEventView2, event, conflicting);
 
-	        // Set the hidden event views to have the opposite attending icon state, so that swiping will
-	        // feel like changing the attending state.
-	        hiddenEventView.setAttending(!event.isAttending());
-	        hiddenEventView2.setAttending(!event.isAttending());
-	    }
-    }
+			// Set the hidden event views to have the opposite attending icon state, so that swiping will
+			// feel like changing the attending state.
+			hiddenEventView.setAttending(!event.isAttending());
+			hiddenEventView2.setAttending(!event.isAttending());
+		}
+	}
 
 	private void setEventInEventView(EventView view, ConventionEvent event, boolean conflicting) {
 		view.setShowFavoriteIcon(true);
@@ -102,21 +100,21 @@ public class SwipeableEventViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	public void setOnViewSwipedAction(final Runnable action) {
-	    removeOnPageChangeListener();
+		removeOnPageChangeListener();
 
-	    this.listener = new OnSwipeListener(viewPager, MAIN_VIEW_POSITION, action, dismiss);
+		this.listener = new OnSwipeListener(viewPager, MAIN_VIEW_POSITION, action, dismiss);
 		viewPager.clearOnPageChangeListeners();
-	    viewPager.addOnPageChangeListener(listener);
-    }
+		viewPager.addOnPageChangeListener(listener);
+	}
 
-    public void reset() {
-	    removeOnPageChangeListener();
-	    viewPager.setCurrentItem(MAIN_VIEW_POSITION, false);
-    }
+	public void reset() {
+		removeOnPageChangeListener();
+		viewPager.setCurrentItem(MAIN_VIEW_POSITION, false);
+	}
 
 	private void removeOnPageChangeListener() {
 		if (listener != null) {
-		    viewPager.removeOnPageChangeListener(listener);
+			viewPager.removeOnPageChangeListener(listener);
 		}
 	}
 

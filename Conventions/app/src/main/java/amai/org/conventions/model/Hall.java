@@ -5,10 +5,10 @@ import java.io.Serializable;
 import amai.org.conventions.utils.Objects;
 
 public class Hall extends Place implements Serializable {
-    private int order;
+	private int order;
 
-    public Hall() {
-    }
+	public Hall() {
+	}
 
 	@Override
 	public Hall withName(String name) {
@@ -17,17 +17,17 @@ public class Hall extends Place implements Serializable {
 	}
 
 	public int getOrder() {
-        return order;
-    }
+		return order;
+	}
 
-    public void setOrder(int order) {
-        this.order = order;
-    }
+	public void setOrder(int order) {
+		this.order = order;
+	}
 
-    public Hall withOrder(int order) {
-        setOrder(order);
-        return this;
-    }
+	public Hall withOrder(int order) {
+		setOrder(order);
+		return this;
+	}
 
 	@Override
 	public boolean equals(Object o) {

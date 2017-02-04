@@ -27,15 +27,19 @@ public class PlayServicesInstallation {
 			this.isCancelled = isCancelled;
 			this.isUserError = isUserError;
 		}
+
 		public boolean isSuccess() {
 			return result == ConnectionResult.SUCCESS;
 		}
+
 		public boolean isCancelled() {
 			return isCancelled;
 		}
+
 		public boolean isUserError() {
 			return isUserError;
 		}
+
 		public int getResult() {
 			return result;
 		}

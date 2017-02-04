@@ -41,31 +41,44 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 	private static final String STATE_SELECTED_DATE_INDEX = "StateSelectedDateIndex";
 	private static final int SELECT_CURRENT_DATE = -1;
 	private static final int MAX_DAYS_NUMBER = 5;
-
-	// Handler for updating the next event start text
-    private Handler nextEventStartTextRunner = new Handler();
-    private Runnable updateNextEventStartTimeText;
 	private static final int NEXT_EVENT_START_TIME_UPDATE_DELAY = 60000; // 1 minute
-
-    private TextView nextEventStart;
+	// Handler for updating the next event start text
+	private Handler nextEventStartTextRunner = new Handler();
+	private Runnable updateNextEventStartTimeText;
+	private TextView nextEventStart;
 	private View nextEventStartBottomLine;
 	private TabLayout daysTabLayout;
 	private ViewPager daysPager;
 	private AlertDialog noEventsDialog;
 
+	public static List<ConventionEvent> getMyEvents() {
+		ArrayList<ConventionEvent> events = CollectionUtils.filter(
+				Convention.getInstance().getEvents(),
+				new CollectionUtils.Predicate<ConventionEvent>() {
+					@Override
+					public boolean where(ConventionEvent event) {
+						return event.isAttending();
+					}
+				},
+				new ArrayList<ConventionEvent>()
+		);
+		Collections.sort(events, new ConventionEventComparator());
+		return events;
+	}
+
 	@Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentInContentContainer(R.layout.activity_my_events);
-        setToolbarTitle(getResources().getString(R.string.my_events_title));
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentInContentContainer(R.layout.activity_my_events);
+		setToolbarTitle(getResources().getString(R.string.my_events_title));
 		removeForeground();
 
-        nextEventStart = (TextView) findViewById(R.id.nextEventStart);
+		nextEventStart = (TextView) findViewById(R.id.nextEventStart);
 		nextEventStartBottomLine = findViewById(R.id.nextEventStartBottomLine);
 
 		int dateIndexToSelect = savedInstanceState == null ? SELECT_CURRENT_DATE : savedInstanceState.getInt(STATE_SELECTED_DATE_INDEX, SELECT_CURRENT_DATE);
 		setupDays(dateIndexToSelect);
-    }
+	}
 
 	private void setupDays(int dateIndexToSelect) {
 		daysTabLayout = (TabLayout) findViewById(R.id.my_events_days_tabs);
@@ -126,19 +139,19 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 	}
 
 	@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.my_events_menu, menu);
-        return true;
-    }
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.my_events_menu, menu);
+		return true;
+	}
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId()) {
-            case R.id.my_events_navigate_to_programme:
-                navigateToActivity(ProgrammeActivity.class);
+		switch (item.getItemId()) {
+			case R.id.my_events_navigate_to_programme:
+				navigateToActivity(ProgrammeActivity.class);
 
-                return true;
+				return true;
 			case R.id.my_events_share:
 				ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
 						.setCategory("MyEvents")
@@ -162,10 +175,10 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 				}
 
 				return true;
-        }
+		}
 
-        return super.onOptionsItemSelected(item);
-    }
+		return super.onOptionsItemSelected(item);
+	}
 
 	private Intent createSharingIntent() {
 		// get available share intents
@@ -234,69 +247,54 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 				event.getTitle());
 	}
 
-    public static List<ConventionEvent> getMyEvents() {
-	    ArrayList<ConventionEvent> events = CollectionUtils.filter(
-			    Convention.getInstance().getEvents(),
-			    new CollectionUtils.Predicate<ConventionEvent>() {
-				    @Override
-				    public boolean where(ConventionEvent event) {
-					    return event.isAttending();
-				    }
-			    },
-			    new ArrayList<ConventionEvent>()
-	    );
-	    Collections.sort(events, new ConventionEventComparator());
-	    return events;
-    }
+	private void setNextEventStartText(final List<ConventionEvent> events) {
+		// Remove existing callback
+		if (updateNextEventStartTimeText != null) {
+			nextEventStartTextRunner.removeCallbacks(updateNextEventStartTimeText);
+		}
 
-    private void setNextEventStartText(final List<ConventionEvent> events) {
-	    // Remove existing callback
-	    if (updateNextEventStartTimeText != null) {
-		    nextEventStartTextRunner.removeCallbacks(updateNextEventStartTimeText);
-	    }
+		ConventionEvent nextEvent = null;
+		Date currTime = Dates.now();
+		for (ConventionEvent curr : events) {
+			if (curr.getStartTime().after(currTime)) {
+				nextEvent = curr;
+				break;
+			}
+		}
 
-        ConventionEvent nextEvent = null;
-        Date currTime = Dates.now();
-        for (ConventionEvent curr : events) {
-            if (curr.getStartTime().after(currTime)) {
-                nextEvent = curr;
-                break;
-            }
-        }
+		// Only display it if it's on the same day
+		boolean displayNextEventStart = false;
+		if (nextEvent != null) {
+			Calendar startTime = Calendar.getInstance();
+			startTime.setTime(nextEvent.getStartTime());
+			Calendar now = Calendar.getInstance();
+			now.setTime(currTime);
+			if (Dates.isSameDate(startTime, now)) {
+				displayNextEventStart = true;
+			}
+		}
 
-        // Only display it if it's on the same day
-        boolean displayNextEventStart = false;
-        if (nextEvent != null) {
-            Calendar startTime = Calendar.getInstance();
-	        startTime.setTime(nextEvent.getStartTime());
-            Calendar now = Calendar.getInstance();
-            now.setTime(currTime);
-            if (Dates.isSameDate(startTime, now)) {
-                displayNextEventStart = true;
-            }
-        }
+		if (displayNextEventStart) {
+			nextEventStart.setVisibility(View.VISIBLE);
+			nextEventStartBottomLine.setVisibility(View.VISIBLE);
+			nextEventStart.setText(getString(R.string.next_event_start,
+					Dates.toHumanReadableTimeDuration(nextEvent.getStartTime().getTime() - currTime.getTime()),
+					nextEvent.getHall().getName()));
 
-        if (displayNextEventStart) {
-            nextEventStart.setVisibility(View.VISIBLE);
-	        nextEventStartBottomLine.setVisibility(View.VISIBLE);
-            nextEventStart.setText(getString(R.string.next_event_start,
-                    Dates.toHumanReadableTimeDuration(nextEvent.getStartTime().getTime() - currTime.getTime()),
-                    nextEvent.getHall().getName()));
-
-            if (updateNextEventStartTimeText == null) {
-                updateNextEventStartTimeText = new Runnable() {
-                    @Override
-                    public void run() {
-	                    MyEventsActivity.this.setNextEventStartText(events);
-                    }
-                };
-            }
-            nextEventStartTextRunner.postDelayed(updateNextEventStartTimeText, NEXT_EVENT_START_TIME_UPDATE_DELAY);
-        } else {
-	        nextEventStart.setVisibility(View.GONE);
-	        nextEventStartBottomLine.setVisibility(View.GONE);
-        }
-    }
+			if (updateNextEventStartTimeText == null) {
+				updateNextEventStartTimeText = new Runnable() {
+					@Override
+					public void run() {
+						MyEventsActivity.this.setNextEventStartText(events);
+					}
+				};
+			}
+			nextEventStartTextRunner.postDelayed(updateNextEventStartTimeText, NEXT_EVENT_START_TIME_UPDATE_DELAY);
+		} else {
+			nextEventStart.setVisibility(View.GONE);
+			nextEventStartBottomLine.setVisibility(View.GONE);
+		}
+	}
 
 	@Override
 	protected void onDestroy() {

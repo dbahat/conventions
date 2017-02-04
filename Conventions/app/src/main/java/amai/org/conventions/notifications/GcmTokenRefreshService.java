@@ -8,17 +8,17 @@ import amai.org.conventions.utils.Log;
 
 public class GcmTokenRefreshService extends FirebaseInstanceIdService {
 
-    private static final String TAG = GcmTokenRefreshService.class.getSimpleName();
+	private static final String TAG = GcmTokenRefreshService.class.getSimpleName();
 
-    @Override
-    public void onTokenRefresh() {
-        Log.i(TAG, "Refreshing GCM Registration Token");
+	@Override
+	public void onTokenRefresh() {
+		Log.i(TAG, "Refreshing GCM Registration Token");
 
-	    // If the token is expired we will no longer receive notifications
-	    new AzurePushNotifications(this).setRegistered(false);
+		// If the token is expired we will no longer receive notifications
+		new AzurePushNotifications(this).setRegistered(false);
 
-	    // Register in background thread
-        Intent intent = new Intent(this, AzureNotificationRegistrationService.class);
-        startService(intent);
-    }
+		// Register in background thread
+		Intent intent = new Intent(this, AzureNotificationRegistrationService.class);
+		startService(intent);
+	}
 }

@@ -11,9 +11,9 @@ public class StandsArea extends Place implements Serializable {
 	private Integer imageResource;
 	private List<Stand> stands = Collections.emptyList();
 
-    public StandsArea() {
-	    id = ObjectIDs.getNextID();
-    }
+	public StandsArea() {
+		id = ObjectIDs.getNextID();
+	}
 
 	public int getId() {
 		return id;

@@ -15,11 +15,11 @@ public class EventToImageResourceIdMapper {
 	public static final String EVENT_GENERIC = "event_generic";
 
 	// Maps the event identifier (in our case, its URI) to its image resource id.
-    private final Map<String, Integer> eventIdToImageResourceIdMap;
+	private final Map<String, Integer> eventIdToImageResourceIdMap;
 
-    public EventToImageResourceIdMapper() {
-        eventIdToImageResourceIdMap = new HashMap<>();
-    }
+	public EventToImageResourceIdMapper() {
+		eventIdToImageResourceIdMap = new HashMap<>();
+	}
 
 	public void addMapping(String id, int resource) {
 		eventIdToImageResourceIdMap.put(id, resource);
@@ -48,11 +48,11 @@ public class EventToImageResourceIdMapper {
 		return result;
 	}
 
-    public int getImageResourceId(String eventImageId) {
-	    if (eventIdToImageResourceIdMap.containsKey(eventImageId)) {
-		    return eventIdToImageResourceIdMap.get(eventImageId);
-	    } else {
-		    throw new RuntimeException("Image id not found: " + eventImageId);
-	    }
-    }
+	public int getImageResourceId(String eventImageId) {
+		if (eventIdToImageResourceIdMap.containsKey(eventImageId)) {
+			return eventIdToImageResourceIdMap.get(eventImageId);
+		} else {
+			throw new RuntimeException("Image id not found: " + eventImageId);
+		}
+	}
 }
