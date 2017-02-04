@@ -1,0 +1,45 @@
+{
+  "project_info": {
+    "project_number": "458203975509",
+    "firebase_url": "https://starlit-brand-95018.firebaseio.com",
+    "project_id": "starlit-brand-95018",
+    "storage_bucket": "starlit-brand-95018.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:458203975509:android:094ef81b4464ff0f",
+        "android_client_info": {
+          "package_name": "amai.org.conventions"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "458203975509-qghf2og9qjhlt8hmd8pv1d2ttra5pk8h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKJYwC7UeHyBpcVqvXABRxhEQmLiK2TRo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-65293055-1"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

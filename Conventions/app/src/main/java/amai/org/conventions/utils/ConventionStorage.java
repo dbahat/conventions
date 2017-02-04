@@ -1,6 +1,7 @@
 package amai.org.conventions.utils;
 
 import android.content.Context;
+import android.support.annotation.RawRes;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -26,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import amai.org.conventions.model.Convention;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.Feedback;
 import amai.org.conventions.model.FeedbackQuestion;
@@ -48,7 +49,7 @@ public class ConventionStorage {
 	private int initialEventsFileResource = 0;
 	private int eventsFileVersion = 0;
 
-	public ConventionStorage(Convention convention, int initialEventsFile, int eventsFileVersion) {
+	public ConventionStorage(Convention convention, @RawRes int initialEventsFile, int eventsFileVersion) {
 		this.convention = convention;
 		this.hasInitialEventsFile = true;
 		this.initialEventsFileResource = initialEventsFile;
@@ -208,7 +209,7 @@ public class ConventionStorage {
 
     private void readEventsFromLocalResources() {
 	    if (!hasInitialEventsFile) {
-		    throw new RuntimeException("Convention " + convention.getDisplayName() + " has no initial events file");
+		    throw new RuntimeException("Convention " + convention.getId() + " has no initial events file");
 	    }
 
         // No need to lock here, since we only read from the resources and only during app launch.

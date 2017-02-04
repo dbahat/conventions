@@ -16,6 +16,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.graphics.Palette;
 import android.text.Html;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.view.Display;
 import android.view.Gravity;
@@ -34,6 +35,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.analytics.HitBuilders;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import amai.org.conventions.ConventionsApplication;
@@ -43,7 +45,7 @@ import amai.org.conventions.customviews.AspectRatioImageView;
 import amai.org.conventions.events.CollapsibleFeedbackView;
 import amai.org.conventions.events.ConfigureNotificationsFragment;
 import amai.org.conventions.map.MapActivity;
-import amai.org.conventions.model.Convention;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.MapLocation;
@@ -326,10 +328,13 @@ public class EventActivity extends NavigationActivity {
                 Bundle floorBundle = new Bundle();
                 ConventionMap map = Convention.getInstance().getMap();
                 List<MapLocation> locations = map.findLocationsByHall(conventionEvent.getHall());
-                MapLocation location = map.findClosestLocation(locations);
-                if (location != null) {
-                    floorBundle.putInt(MapActivity.EXTRA_MAP_LOCATION_ID, location.getId());
-                }
+	            int[] locationIds = new int[locations.size()];
+	            int i = 0;
+	            for (MapLocation location : locations) {
+		            locationIds[i] = location.getId();
+		            ++i;
+	            }
+                floorBundle.putIntArray(MapActivity.EXTRA_MAP_LOCATION_IDS, locationIds);
 
                 navigateToActivity(MapActivity.class, false, floorBundle);
                 return true;
@@ -406,13 +411,18 @@ public class EventActivity extends NavigationActivity {
     private void hideNavigateToMapButtonIfNoLocationExists(Menu menu) {
         ConventionMap map = Convention.getInstance().getMap();
         List<MapLocation> locations = map.findLocationsByHall(conventionEvent.getHall());
-        MapLocation location = map.findClosestLocation(locations);
-        if (location == null) {
+        if (locations.size() == 0) {
             menu.findItem(R.id.event_navigate_to_map).setVisible(false);
         }
     }
 
     private void setEvent(ConventionEvent event) {
+	    TextView type = (TextView) findViewById(R.id.event_type);
+	    if (event.getType() == null || TextUtils.isEmpty(event.getType().getDescription())) {
+		    type.setVisibility(View.GONE);
+	    } else {
+	        type.setText(event.getType().getDescription());
+	    }
         TextView title = (TextView) findViewById(R.id.event_title);
         title.setText(event.getTitle());
 
@@ -431,7 +441,10 @@ public class EventActivity extends NavigationActivity {
 		    formattedEventHall = String.format("%s, ", event.getHall().getName());
 	    }
 
-        String formattedEventTime = String.format("%s - %s (%s)",
+		// TODO: Remove the date from the format in case of single day convention
+	    SimpleDateFormat sdf = new SimpleDateFormat("EEE dd.MM", Dates.getLocale());
+        String formattedEventTime = String.format("%s, %s - %s (%s)",
+		        sdf.format(event.getStartTime()),
                 Dates.formatHoursAndMinutes(event.getStartTime()),
                 Dates.formatHoursAndMinutes(event.getEndTime()),
                 Dates.toHumanReadableTimeDuration(event.getEndTime().getTime() - event.getStartTime().getTime()));
@@ -468,25 +481,9 @@ public class EventActivity extends NavigationActivity {
 				}
 
 				@Override
-				protected void onFailure(Exception exception) {
-					Log.w(TAG, "Failed to send feedback mail. Reason: " + exception.getMessage());
-					Toast.makeText(EventActivity.this, R.string.feedback_send_mail_failed, Toast.LENGTH_LONG).show();
-					sendUserSentFeedbackTelemetry(false);
-				}
-
-				@Override
 				protected void onSuccess() {
 					super.onSuccess();
 					feedbackView.setState(CollapsibleFeedbackView.State.Collapsed, true);
-					sendUserSentFeedbackTelemetry(true);
-				}
-
-				private void sendUserSentFeedbackTelemetry(boolean success) {
-					ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
-							.setCategory("Feedback")
-							.setAction("SendAttempt")
-							.setLabel(success ? "success" : "failure")
-							.build());
 				}
 			});
 		} else {
@@ -521,7 +518,7 @@ public class EventActivity extends NavigationActivity {
 
 	private void setupBackgroundImages(ConventionEvent event) {
         // Add images to the layout
-        List<String> images = event.getImages();
+        List<Integer> images = event.getImageResources();
 		boolean first = true;
 		// This will contain the last image view after the loop
 		FrameLayout lastImageLayout = null;
@@ -532,15 +529,12 @@ public class EventActivity extends NavigationActivity {
 		Point size = new Point();
 		display.getSize(size);
 		int widthSpec = View.MeasureSpec.makeMeasureSpec(size.x, View.MeasureSpec.EXACTLY);
-        for (String imageId : images) {
+        for (Integer imageResource : images) {
 	        boolean last = (i == images.size() - 1);
 
 			AspectRatioImageView imageView = new AspectRatioImageView(this);
 	        View viewToAdd = imageView;
-
-	        int imageResource = Convention.getInstance().getImageMapper().getImageResourceId(imageId);
 	        imageView.setImageResource(imageResource);
-
 
 	        // Last image - make a frame layout with the image so we can put the gradient on top of it
 	        if (last) {

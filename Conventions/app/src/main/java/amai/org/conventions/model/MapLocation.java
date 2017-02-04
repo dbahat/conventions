@@ -1,14 +1,19 @@
 package amai.org.conventions.model;
 
+import java.util.Collections;
+import java.util.List;
+
 public class MapLocation {
 	private int id;
 	private Floor floor;
 	private float x;
 	private float y;
-	private Place place;
+	private List<? extends Place> places;
 	private String name;
 	private int markerResource;
+	private boolean isMarkerResourceSVG;
 	private int selectedMarkerResource;
+	private boolean isSelectedMarkerResourceSVG;
 	private float markerHeight = -1;
 
 	public MapLocation() {
@@ -71,12 +76,25 @@ public class MapLocation {
 		return this;
 	}
 
-	public Place getPlace() {
-		return place;
+	public boolean hasSinglePlace() {
+		return places != null && places.size() == 1;
+	}
+
+	public List<? extends Place> getPlaces() {
+		return places;
+	}
+
+	public void setPlaces(List<? extends Place> places) {
+		this.places = places;
+	}
+
+	public MapLocation withPlaces(List<? extends Place> places) {
+		setPlaces(places);
+		return this;
 	}
 
 	public void setPlace(Place place) {
-		this.place = place;
+		this.places = Collections.singletonList(place);
 	}
 
 	public MapLocation withPlace(Place place) {
@@ -88,7 +106,10 @@ public class MapLocation {
 		if (name != null) {
 			return name;
 		}
-		return getPlace().getName();
+		if (places != null && places.size() > 0) {
+			return places.get(0).getName();
+		}
+		return "";
 	}
 
 	public void setName(String name) {
@@ -104,25 +125,47 @@ public class MapLocation {
 		return markerResource;
 	}
 
-	public void setMarkerResource(int markerResource) {
+	public void setMarkerResource(int markerResource, boolean isMarkerResourceSVG) {
 		this.markerResource = markerResource;
+		this.isMarkerResourceSVG = isMarkerResourceSVG;
 	}
 
-	public MapLocation withMarkerResource(int markerResource) {
-		setMarkerResource(markerResource);
+	public MapLocation withMarkerResource(int markerResource, boolean isMarkerResourceSVG) {
+		setMarkerResource(markerResource, isMarkerResourceSVG);
 		return this;
+	}
+
+	public boolean isMarkerResourceSVG() {
+		return isMarkerResourceSVG;
 	}
 
 	public int getSelectedMarkerResource() {
 		return selectedMarkerResource;
 	}
 
-	public void setSelectedMarkerResource(int selectedMarkerResource) {
+	public void setSelectedMarkerResource(int selectedMarkerResource, boolean isSelectedMarkerResourceSVG) {
 		this.selectedMarkerResource = selectedMarkerResource;
+		this.isSelectedMarkerResourceSVG = isSelectedMarkerResourceSVG;
 	}
 
-	public MapLocation withSelectedMarkerResource(int selectedMarkerResource) {
-		setSelectedMarkerResource(selectedMarkerResource);
+	public MapLocation withSelectedMarkerResource(int selectedMarkerResource, boolean isSelectedMarkerResourceSVG) {
+		setSelectedMarkerResource(selectedMarkerResource, isSelectedMarkerResourceSVG);
 		return this;
+	}
+
+	public boolean isSelectedMarkerResourceSVG() {
+		return isSelectedMarkerResourceSVG;
+	}
+
+	public boolean areAllPlacesHalls() {
+		if (places == null || places.size() == 0) {
+			return false;
+		}
+		for (Place place : places) {
+			if (!(place instanceof Hall)) {
+				return false;
+			}
+		}
+		return true;
 	}
 }

@@ -8,11 +8,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import amai.org.conventions.model.Convention;
+import amai.org.conventions.model.conventions.Convention;
 
 public class Dates {
-
-	public static final long MILLISECONDS_IN_MINUTE = 60 * 1000;
+	public static final long MILLISECONDS_IN_MINUTE = java.util.concurrent.TimeUnit.MINUTES.toMillis(1);
+	public static final long MILLISECONDS_IN_HOUR = java.util.concurrent.TimeUnit.HOURS.toMillis(1);
+	public static final long MILLISECONDS_IN_DAY = java.util.concurrent.TimeUnit.DAYS.toMillis(1);
 
 	public enum TimeUnit {
         HOUR, MINUTE, SECOND
@@ -35,6 +36,7 @@ public class Dates {
 	    // Now
 	    return new Date(System.currentTimeMillis());
 
+	    // Used for testing
 	    // Fixed startup date
 //        return new Date(System.currentTimeMillis() - appStartDate.getTime() + initialDate.getTime());
 
@@ -43,6 +45,18 @@ public class Dates {
 //	    setConventionDate(currDate);
 //	    return currDate.getTime();
     }
+
+	public static Calendar toCalendar(Date date) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		return calendar;
+	}
+
+	public static boolean isSameDate(Calendar first, Calendar second) {
+		return first.get(Calendar.DATE) == second.get(Calendar.DATE) &&
+			first.get(Calendar.MONTH) == second.get(Calendar.MONTH) &&
+			first.get(Calendar.YEAR) == second.get(Calendar.YEAR);
+	}
 
     public static String toHumanReadableTimeDuration(long milliseconds) {
         return toHumanReadableTimeDuration(milliseconds, TimeUnit.MINUTE);
@@ -124,26 +138,18 @@ public class Dates {
         return new SimpleDateFormat("HH:mm", getLocale()).format(date);
     }
 
-    public static Date parseConventionDateHourAndMinute(String date) {
-        try {
-            Date hourAndMinute = new SimpleDateFormat("HH:mm:ss", getLocale()).parse(date);
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(hourAndMinute);
-	        setConventionDate(calendar);
-            return calendar.getTime();
-        } catch (ParseException e) {
-            return new Date();
-        }
-    }
-
-	private static void setConventionDate(Calendar calendar) {
-		Calendar conventionDate = Convention.getInstance().getDate();
-		calendar.set(conventionDate.get(Calendar.YEAR),
-                    conventionDate.get(Calendar.MONTH),
-                    conventionDate.get(Calendar.DAY_OF_MONTH));
+	public static String formatDateAndTime(Date date) {
+		return new SimpleDateFormat("dd.MM.yyyy HH:mm", getLocale()).format(date);
 	}
 
 	public static Locale getLocale() {
 		return LOCALE;
+	}
+
+	public static Calendar createDate(int year, int month, int day) {
+		Calendar date = Calendar.getInstance();
+		date.clear();
+		date.set(year, month, day);
+		return date;
 	}
 }

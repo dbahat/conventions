@@ -22,7 +22,7 @@ import java.util.List;
 
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
-import amai.org.conventions.model.Convention;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.Feedback;
 import amai.org.conventions.model.FeedbackQuestion;
@@ -304,13 +304,13 @@ public class EventView extends FrameLayout {
         CharSequence originalText = textView.getText();
 
         String textToHighlight = originalText.toString().toLowerCase();
-        SpannableString highlightedText = originalText instanceof SpannableString
-                ? (SpannableString) originalText
-                : new SpannableString(originalText);
-
         if (!textToHighlight.contains(keyword)) {
             return false;
         }
+
+	    SpannableString highlightedText = originalText instanceof SpannableString
+			    ? (SpannableString) originalText
+			    : new SpannableString(originalText);
 
         int currentKeywordIndex = textToHighlight.indexOf(keyword);
         while (currentKeywordIndex != -1) {

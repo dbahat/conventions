@@ -7,7 +7,6 @@ import java.util.Calendar;
 import java.util.List;
 
 import amai.org.conventions.R;
-import amai.org.conventions.model.Convention;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.EventToImageResourceIdMapper;
 import amai.org.conventions.model.Floor;
@@ -19,7 +18,7 @@ import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 
-public class Cami2016Convention extends Convention {
+public class Cami2016Convention extends AmaiConvention {
 	// Hall names
 	private static final String MAIN_HALL_NAME = "אולם ראשי";
 	private static final String SCHWARTZ_NAME = "אודיטוריום שוורץ";
@@ -136,12 +135,12 @@ public class Cami2016Convention extends Convention {
 
 		Floor floor1 = new Floor(1)
 				.withName("מפלס תחתון")
-				.withImageResource(R.raw.cami2016_floor1)
+				.withImageResource(R.raw.cami2016_floor1, true)
 				.withImageWidth(552.20001f)
 				.withImageHeight(324.60001f);
 		Floor floor2 = new Floor(2)
 				.withName("מפלס עליון")
-				.withImageResource(R.raw.cami2016_floor2)
+				.withImageResource(R.raw.cami2016_floor2, true)
 				.withImageWidth(848.39502f)
 				.withImageHeight(502.86401f);
 
@@ -155,139 +154,139 @@ public class Cami2016Convention extends Convention {
 								inFloor(floor1,
 										new MapLocation()
 												.withPlace(new Place().withName("שירותים"))
-												.withMarkerResource(R.raw.cami2016_marker_toilet)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_toilet_floor1_selected)
+												.withMarkerResource(R.raw.cami2016_marker_toilet, true)
+												.withSelectedMarkerResource(R.raw.cami2016_marker_toilet_floor1_selected, true)
 												.withMarkerHeight(25.066f)
 												.withX(507.46f)
 												.withY(184.49f),
 										new MapLocation() // This is before the guest sign post so it will be selected as the stands area
 												.withName("מודיעין ודוכן אמא\"י")
 												.withPlace(nesher)
-												.withMarkerResource(R.raw.cami2016_marker_information)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_information_selected)
+												.withMarkerResource(R.raw.cami2016_marker_information, true)
+												.withSelectedMarkerResource(R.raw.cami2016_marker_information_selected, true)
 												.withMarkerHeight(46.766f)
 												.withX(347.67f)
 												.withY(113.62f),
 										new MapLocation()
 												.withPlace(nesher)
 												.withName("החתמת אורחת")
-												.withMarkerResource(R.raw.cami2016_marker_guest)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_guest_selected)
+												.withMarkerResource(R.raw.cami2016_marker_guest, true)
+												.withSelectedMarkerResource(R.raw.cami2016_marker_guest_selected, true)
 												.withMarkerHeight(38.066f)
 												.withX(410.17f)
 												.withY(155.19f),
 										new MapLocation()
 												.withName("מתחם דוכנים")
 												.withPlace(pinkus)
-												.withMarkerResource(R.raw.cami2016_marker_stalls_pink)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_stalls_pink_selected)
+												.withMarkerResource(R.raw.cami2016_marker_stalls_pink, true)
+												.withSelectedMarkerResource(R.raw.cami2016_marker_stalls_pink_selected, true)
 												.withMarkerHeight(26.366f)
 												.withX(352.06f)
 												.withY(194.29f),
 										new MapLocation()
 												.withPlace(new Place().withName("שמירת חפצים"))
-												.withMarkerResource(R.raw.cami2016_marker_storage)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_storage_selected)
+												.withMarkerResource(R.raw.cami2016_marker_storage, true)
+												.withSelectedMarkerResource(R.raw.cami2016_marker_storage_selected, true)
 												.withMarkerHeight(39.667f)
 												.withX(314.06f)
 												.withY(73.50f),
 										new MapLocation()
 												.withPlace(new Place().withName("שירותים"))
-												.withMarkerResource(R.raw.cami2016_marker_toilet)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_toilet_floor1_selected)
+												.withMarkerResource(R.raw.cami2016_marker_toilet, true)
+												.withSelectedMarkerResource(R.raw.cami2016_marker_toilet_floor1_selected, true)
 												.withMarkerHeight(25.066f)
 												.withX(291.36f)
 												.withY(26.89f),
 										new MapLocation()
 												.withPlace(eshkol1)
-												.withMarkerResource(R.raw.cami2016_marker_eshkol1)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_eshkol1_selected)
+												.withMarkerResource(R.raw.cami2016_marker_eshkol1, true)
+												.withSelectedMarkerResource(R.raw.cami2016_marker_eshkol1_selected, true)
 												.withMarkerHeight(39.466f)
 												.withX(148.36f)
 												.withY(177.50f),
 										new MapLocation()
 												.withPlace(schwatrz)
-												.withMarkerResource(R.raw.cami2016_marker_schwartz)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_schwartz_selected)
+												.withMarkerResource(R.raw.cami2016_marker_schwartz, true)
+												.withSelectedMarkerResource(R.raw.cami2016_marker_schwartz_selected, true)
 												.withMarkerHeight(38.566f)
 												.withX(195.86f)
 												.withY(162.39f),
 										new MapLocation()
 												.withPlace(eshkol3)
-												.withMarkerResource(R.raw.cami2016_marker_eshkol3)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_eshkol3_selected)
+												.withMarkerResource(R.raw.cami2016_marker_eshkol3, true)
+												.withSelectedMarkerResource(R.raw.cami2016_marker_eshkol3_selected, true)
 												.withMarkerHeight(39.766f)
 												.withX(103.36f)
 												.withY(239.70f),
 										new MapLocation()
 												.withPlace(eshkol2)
-												.withMarkerResource(R.raw.cami2016_marker_eshkol2)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_eshkol2_selected)
+												.withMarkerResource(R.raw.cami2016_marker_eshkol2, true)
+												.withSelectedMarkerResource(R.raw.cami2016_marker_eshkol2_selected, true)
 												.withMarkerHeight(39.766f)
 												.withX(159.16f)
 												.withY(239.69f),
 										new MapLocation()
 												.withPlace(new Place().withName("שירותים"))
-												.withMarkerResource(R.raw.cami2016_marker_toilet)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_toilet_floor1_selected)
+												.withMarkerResource(R.raw.cami2016_marker_toilet, true)
+												.withSelectedMarkerResource(R.raw.cami2016_marker_toilet_floor1_selected, true)
 												.withMarkerHeight(25.066f)
 												.withX(81.36f)
 												.withY(147.39f)),
 								inFloor(floor2,
 										new MapLocation()
 												.withPlace(new Place().withName("שיפוט קוספליי"))
-												.withMarkerResource(R.raw.cami2016_marker_cosplay_judgement)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_cosplay_judgement_selected)
+												.withMarkerResource(R.raw.cami2016_marker_cosplay_judgement, true)
+												.withSelectedMarkerResource(R.raw.cami2016_marker_cosplay_judgement_selected, true)
 												.withMarkerHeight(59.226f)
 												.withX(729.53f)
 												.withY(345.00f),
 										new MapLocation()
 												.withPlace(new Place().withName("כניסה פלוס"))
-												.withMarkerResource(R.raw.cami2016_marker_entrance_plus)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_entrance_plus_selected)
+												.withMarkerResource(R.raw.cami2016_marker_entrance_plus, true)
+												.withSelectedMarkerResource(R.raw.cami2016_marker_entrance_plus_selected, true)
 												.withMarkerHeight(59.074f)
 												.withX(572.36f)
 												.withY(185.70f),
 										new MapLocation()
 												.withPlace(mainHall)
-												.withMarkerResource(R.raw.cami2016_marker_main_hall)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_main_hall_selected)
+												.withMarkerResource(R.raw.cami2016_marker_main_hall, true)
+												.withSelectedMarkerResource(R.raw.cami2016_marker_main_hall_selected, true)
 												.withMarkerHeight(91.121f)
 												.withX(527.28f)
 												.withY(268.68f),
 										new MapLocation()
 												.withPlace(new Place().withName("שירותים"))
-												.withMarkerResource(R.raw.cami2016_marker_toilet)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_toilet_floor2_selected)
+												.withMarkerResource(R.raw.cami2016_marker_toilet, true)
+												.withSelectedMarkerResource(R.raw.cami2016_marker_toilet_floor2_selected, true)
 												.withMarkerHeight(38.046f)
 												.withX(506.39f)
 												.withY(46.52f),
 										new MapLocation()
 												.withPlace(new Place().withName("מתחם קוספליי"))
-												.withMarkerResource(R.raw.cami2016_marker_cosplay_area)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_cosplay_area_selected)
+												.withMarkerResource(R.raw.cami2016_marker_cosplay_area, true)
+												.withSelectedMarkerResource(R.raw.cami2016_marker_cosplay_area_selected, true)
 												.withMarkerHeight(59.074f)
 												.withX(433.93f)
 												.withY(371.32f),
 										new MapLocation()
 												.withPlace(new Place().withName("משחקייה וקונסולות"))
-												.withMarkerResource(R.raw.cami2016_marker_games)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_games_selected)
+												.withMarkerResource(R.raw.cami2016_marker_games, true)
+												.withSelectedMarkerResource(R.raw.cami2016_marker_games_selected, true)
 												.withMarkerHeight(59.074f)
 												.withX(306.85f)
 												.withY(332.30f),
 										new MapLocation()
 												.withName("מתחם דוכנים")
 												.withPlace(agam)
-												.withMarkerResource(R.raw.cami2016_marker_stalls_red)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_stalls_red_selected)
+												.withMarkerResource(R.raw.cami2016_marker_stalls_red, true)
+												.withSelectedMarkerResource(R.raw.cami2016_marker_stalls_red_selected, true)
 												.withMarkerHeight(39.860f)
 												.withX(306.85f)
 												.withY(181.00f),
 										new MapLocation()
 												.withPlace(new Place().withName("שירותים"))
-												.withMarkerResource(R.raw.cami2016_marker_toilet)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_toilet_floor2_selected)
+												.withMarkerResource(R.raw.cami2016_marker_toilet, true)
+												.withSelectedMarkerResource(R.raw.cami2016_marker_toilet_floor2_selected, true)
 												.withMarkerHeight(38.044f)
 												.withX(75.99f)
 												.withY(277.38f))

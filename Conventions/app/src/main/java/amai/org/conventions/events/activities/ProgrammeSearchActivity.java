@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.tonicartos.widget.stickygridheaders.StickyGridHeadersGridView;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collections;
@@ -22,13 +23,16 @@ import java.util.List;
 import amai.org.conventions.R;
 import amai.org.conventions.events.SearchCategoriesLayout;
 import amai.org.conventions.events.adapters.SwipeableEventsViewAdapter;
-import amai.org.conventions.model.Convention;
+import amai.org.conventions.events.adapters.SwipeableEventsViewListAdapter;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
 import amai.org.conventions.model.EventType;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.CollectionUtils;
+import amai.org.conventions.utils.Strings;
 import amai.org.conventions.utils.Views;
+import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
 public class ProgrammeSearchActivity extends NavigationActivity {
 
@@ -37,10 +41,11 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 
     private LinkedList<EventType> eventTypeFilter;
     private String keywordsFilter;
-    private SwipeableEventsViewAdapter adapter;
-    private RecyclerView recyclerView;
+    private SwipeableEventsViewListAdapter adapter;
+    private StickyListHeadersListView listView;
     private TextView noResultsFoundView;
 
+    private AsyncTask<Void, Void, List<ConventionEvent>> currentFilterProcessingTask;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +59,8 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 	            eventTypeFilter = (LinkedList<EventType>) savedEventTypes;
 	        }
             keywordsFilter = savedInstanceState.getString(STATE_KEYWORDS_FILTER);
+        } else {
+            eventTypeFilter = new LinkedList<>();
         }
 
 	    noResultsFoundView = (TextView) findViewById(R.id.search_no_results_found);
@@ -84,7 +91,8 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.programme_search_back) {
+        switch (item.getItemId()) {
+            case R.id.programme_search_back:
             supportFinishAfterTransition();
             return true;
         }
@@ -93,28 +101,48 @@ public class ProgrammeSearchActivity extends NavigationActivity {
     }
 
     private void initializeEventsList() {
-        recyclerView = (RecyclerView) findViewById(R.id.searchEventsList);
+        listView = (StickyListHeadersListView) findViewById(R.id.searchEventsList);
 
-        adapter = new SwipeableEventsViewAdapter(Collections.<ConventionEvent>emptyList(), recyclerView);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new SwipeableEventsViewListAdapter(Collections.<ConventionEvent>emptyList(), listView);
+        listView.setAdapter(adapter);
     }
 
     private void initializeSearchCategories() {
         final SearchCategoriesLayout searchCategoriesLayout = (SearchCategoriesLayout) findViewById(R.id.search_categories_layout);
-        searchCategoriesLayout.setOnFilterSelectedListener(new SearchCategoriesLayout.OnFilterSelectedListener() {
-	        @Override
-	        public void onFilterSelected(final List<EventType> selectedEventTypes) {
-		        eventTypeFilter = new LinkedList<>(selectedEventTypes);
-		        applyFiltersInBackground();
-	        }
-        });
+        // Wait for the layout to finish before configuring the checkbox.
+        // Seems to be needed since otherwise after config change, the state of the UI components in the layout changes.
+        searchCategoriesLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                List<String> searchCategories = CollectionUtils.map(Convention.getInstance().getEventTypes(), new CollectionUtils.Mapper<EventType, String>() {
+                    @Override
+                    public String map(EventType item) {
+                        return item.getDescription();
+                    }
+                });
+                searchCategoriesLayout.setMaxDisplayedCategories(10);
+                searchCategoriesLayout.setSearchCategories(searchCategories);
+                searchCategoriesLayout.setOnFilterSelectedListener(new SearchCategoriesLayout.OnFilterSelectedListener() {
+                    @Override
+                    public void onFilterSelected(List<String> selectedSearchCategories) {
+                        eventTypeFilter = new LinkedList<>(CollectionUtils.map(selectedSearchCategories, new CollectionUtils.Mapper<String, EventType>() {
+                            @Override
+                            public EventType map(String item) {
+                                return new EventType(item);
+                            }
+                        }));
 
-        if (eventTypeFilter != null) {
-            for (EventType eventType : eventTypeFilter) {
-                searchCategoriesLayout.toggleEventType(eventType);
+                        applyFiltersInBackground();
+                    }
+                });
+
+                if (eventTypeFilter.size() > 0) {
+                    for (EventType eventType : eventTypeFilter) {
+                        searchCategoriesLayout.checkSearchCategory(eventType.getDescription());
+                    }
+                }
             }
-        }
+        });
     }
 
     private void initializeKeywordFilter() {
@@ -145,7 +173,14 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 		final String keywordsFilter = this.keywordsFilter;
 		final LinkedList<EventType> eventTypeFilter = this.eventTypeFilter;
 
-		new AsyncTask<Void, Void, List<ConventionEvent>>() {
+        // Canceling the previous async task so the UI won't be refreshed with outdated search results in case the user
+        // is in the middle of typing. Since we use a thread pool, this can also result in the user seeing wrong results
+        // (in case an outdated filtering task finish after the latest one).
+        if (currentFilterProcessingTask != null && currentFilterProcessingTask.getStatus() != AsyncTask.Status.FINISHED) {
+            currentFilterProcessingTask.cancel(false);
+        }
+
+        currentFilterProcessingTask = new AsyncTask<Void, Void, List<ConventionEvent>>() {
 			@Override
 			protected List<ConventionEvent> doInBackground(Void... params) {
 				return filterEvents(keywordsFilter, eventTypeFilter);
@@ -153,10 +188,10 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 
 			@Override
 			protected void onPostExecute(List<ConventionEvent> events) {
-				adapter.setEventsList(events);
-				setNoResultsVisibility(adapter.getItemCount());
+				adapter.setItems(events);
+				setNoResultsVisibility(adapter.getCount());
 			}
-		}.execute();
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
     private List<ConventionEvent> filterEvents(final String keywordsFilter, final List<EventType> eventTypeFilter) {
@@ -164,13 +199,13 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 
         events = CollectionUtils.filter(events, new CollectionUtils.Predicate<ConventionEvent>() {
             @Override
-            public boolean where(ConventionEvent item) {
+            public boolean where(ConventionEvent event) {
                 boolean result = true;
 	            if (keywordsFilter != null && keywordsFilter.length() > 0) {
-                    result = containsKeywords(item);
+                    result = containsKeywords(event);
                 }
                 if (eventTypeFilter != null && eventTypeFilter.size() > 0) {
-                    result &= eventTypeFilter.contains(item.getType());
+                    result &= eventTypeFilter.contains(event.getType());
                 }
                 return result;
             }
@@ -186,10 +221,10 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 		// Show the "no results found" message if there are no results after applying the filters
 		if (resultsNumber == 0) {
 		    noResultsFoundView.setVisibility(View.VISIBLE);
-		    recyclerView.setVisibility(View.GONE);
+		    listView.setVisibility(View.GONE);
 		} else {
 		    noResultsFoundView.setVisibility(View.GONE);
-		    recyclerView.setVisibility(View.VISIBLE);
+		    listView.setVisibility(View.VISIBLE);
 		}
 	}
 
@@ -214,4 +249,12 @@ public class ProgrammeSearchActivity extends NavigationActivity {
                 || event.getHall().getName().toLowerCase().contains(keyword)
                 || filteredEventDescription.toLowerCase().contains(keyword);
     }
+	@Override
+	protected void onResume() {
+		super.onResume();
+
+		// Always redraw the list during onResume, since it's a fast operation, and this ensures the data is up to date in case the activity got paused
+		// (including going into an event, adding it to favorites and then returning)
+		adapter.notifyDataSetChanged();
+	}
 }

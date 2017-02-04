@@ -14,7 +14,7 @@ import java.util.Date;
 
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.events.ConfigureNotificationsFragment;
-import amai.org.conventions.model.Convention;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.EventNotification;
 import amai.org.conventions.utils.Dates;
@@ -94,25 +94,39 @@ public class LocalNotificationScheduler {
         alarmManager.cancel(pendingIntent);
     }
 
-    public void scheduleNotificationToFillConventionFeedback() {
+    public void scheduleNotificationsToFillConventionFeedback() {
         Calendar twoWeeksPostConventionDate = Calendar.getInstance();
-        twoWeeksPostConventionDate.setTime(Convention.getInstance().getDate().getTime());
+        twoWeeksPostConventionDate.setTime(Convention.getInstance().getEndDate().getTime());
         twoWeeksPostConventionDate.add(Calendar.DATE, 14);
 
         if (Convention.getInstance().getFeedback().isSent()
-                || ConventionsApplication.settings.wasConventionFeedbackNotificationShown()
                 || Calendar.getInstance().getTimeInMillis() >= twoWeeksPostConventionDate.getTimeInMillis()) {
             return;
         }
 
-        Calendar oneDayPostConventionDate = Calendar.getInstance();
-        oneDayPostConventionDate.setTime(Convention.getInstance().getDate().getTime());
-        oneDayPostConventionDate.add(Calendar.DATE, 1);
-        oneDayPostConventionDate.set(Calendar.HOUR_OF_DAY, 10);
+	    if (!ConventionsApplication.settings.wasConventionFeedbackNotificationShown()) {
+	        Calendar oneDayPostConventionDate = Calendar.getInstance();
+	        oneDayPostConventionDate.setTime(Convention.getInstance().getEndDate().getTime());
+	        oneDayPostConventionDate.add(Calendar.DATE, 1);
+	        oneDayPostConventionDate.set(Calendar.HOUR_OF_DAY, 10);
 
-        Intent intent = new Intent(context, ShowNotificationService.class)
-                .putExtra(ShowNotificationService.EXTRA_NOTIFICATION_TYPE, ShowNotificationService.Type.ConventionFeedbackReminder);
-        scheduleAlarm(oneDayPostConventionDate.getTimeInMillis(), PendingIntent.getService(context, 0, intent, 0), Accuracy.INACCURATE);
+	        Intent intent = new Intent(context, ShowNotificationService.class)
+			        .setAction(ShowNotificationService.Type.ConventionFeedbackReminder.toString())
+	                .putExtra(ShowNotificationService.EXTRA_NOTIFICATION_TYPE, ShowNotificationService.Type.ConventionFeedbackReminder);
+	        scheduleAlarm(oneDayPostConventionDate.getTimeInMillis(), PendingIntent.getService(context, 0, intent, 0), Accuracy.INACCURATE);
+	    }
+
+	    if (!ConventionsApplication.settings.wasConventionLastChanceFeedbackNotificationShown()) {
+		    Calendar tenDaysPostConventionDate = Calendar.getInstance();
+		    tenDaysPostConventionDate.setTime(Convention.getInstance().getEndDate().getTime());
+		    tenDaysPostConventionDate.add(Calendar.DATE, 10);
+		    tenDaysPostConventionDate.set(Calendar.HOUR_OF_DAY, 10);
+
+		    Intent intent = new Intent(context, ShowNotificationService.class)
+				    .setAction(ShowNotificationService.Type.ConventionFeedbackLastChanceReminder.toString())
+				    .putExtra(ShowNotificationService.EXTRA_NOTIFICATION_TYPE, ShowNotificationService.Type.ConventionFeedbackLastChanceReminder);
+		    scheduleAlarm(tenDaysPostConventionDate.getTimeInMillis(), PendingIntent.getService(context, 0, intent, 0), Accuracy.INACCURATE);
+	    }
     }
 
     private PendingIntent createEventNotificationPendingIntent(ConventionEvent event, ShowNotificationService.Type notificationType) {

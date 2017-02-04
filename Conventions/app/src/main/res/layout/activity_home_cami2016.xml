@@ -17,17 +17,6 @@
             android:scaleType="centerCrop"
             android:layout_gravity="top"
             android:src="@drawable/cami2016_home_cover"/>
-
-        <!-- This image should always be on the left side since it's part of the image under it -->
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_gravity="top|left"
-            android:padding="15dp"
-            android:onClick="onAboutClicked"
-            android:tag="5"
-            android:src="@drawable/cami2016_home_info"
-            tools:ignore="RtlHardcoded"/>
     </FrameLayout>
 
     <RelativeLayout

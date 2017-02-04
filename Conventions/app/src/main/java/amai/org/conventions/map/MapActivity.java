@@ -2,6 +2,7 @@ package amai.org.conventions.map;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -27,12 +28,13 @@ import com.google.android.gms.analytics.HitBuilders;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.R;
 import amai.org.conventions.customviews.ConditionalSwipeVerticalViewPager;
-import amai.org.conventions.model.Convention;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.Floor;
 import amai.org.conventions.model.Hall;
@@ -46,7 +48,7 @@ import amai.org.conventions.utils.Views;
 
 public class MapActivity extends NavigationActivity implements MapFloorFragment.OnMapFloorEventListener {
     public static final String EXTRA_FLOOR_NUMBER = "ExtraFloorNumber";
-	public static final String EXTRA_MAP_LOCATION_ID = "ExtraMapLocationId";
+	public static final String EXTRA_MAP_LOCATION_IDS = "ExtraMapLocationId";
 
 	private static final String STATE_SEARCH_TERM = "StateMapSearchTerm";
 	private static final String STATE_MAP_SEARCH_ONLY_HALLS = "StateMapSearchOnlyHalls";
@@ -77,32 +79,36 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentInContentContainer(R.layout.activity_map, false, false);
-		setupActionButton(R.drawable.ic_action_search, new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				toggleSearch();
-			}
-		});
+		if (map.getLocations().size() > 0) {
+			setupActionButton(R.drawable.ic_action_search, new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					toggleSearch();
+				}
+			});
+		}
 
 		// Read and initialize parameters from bundle
 	    Bundle bundle = (savedInstanceState != null ? savedInstanceState : getIntent().getExtras());
 
-	    int initialLocationId = (bundle == null ? -1 : bundle.getInt(EXTRA_MAP_LOCATION_ID, -1));
-	    MapLocation initialLocation = null;
-	    if (initialLocationId != -1) {
-		    initialLocation = map.findLocationById(initialLocationId);
+	    int[] initialLocationIds = (bundle == null ? null : bundle.getIntArray(EXTRA_MAP_LOCATION_IDS));
+	    List<MapLocation> initialLocations = new LinkedList<>();
+	    if (initialLocationIds != null) {
+		    for (int initialLocationId : initialLocationIds) {
+		        initialLocations.add(map.findLocationById(initialLocationId));
+		    }
 	    }
 
-	    int defaultFloorNumber = initialLocation != null ? initialLocation.getFloor().getNumber() : getDefaultFloorNumber();
+	    int defaultFloorNumber = initialLocations.size() > 0 ? initialLocations.get(0).getFloor().getNumber() : getDefaultFloorNumber();
 	    int floorNumber = (bundle == null ? defaultFloorNumber : bundle.getInt(EXTRA_FLOOR_NUMBER, defaultFloorNumber));
 
 		// Show animation only if we don't initially show a location
 		// (we animate the initial location so it will look weird with the marker drops)
-		if (initialLocation != null) {
+		if (initialLocations.size() > 0) {
 			showAnimation = false;
 		}
         initializeViewPager();
-	    setFloorInViewPager(floorNumber, initialLocation);
+	    setFloorInViewPager(floorNumber, initialLocations);
 
 		initializeSearch(savedInstanceState);
     }
@@ -136,7 +142,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		return (MapFloorFragment) viewPager.getAdapter().instantiateItem(viewPager, viewPager.getCurrentItem());
 	}
 
-	private void setFloorInViewPager(int floorNumber, MapLocation initialLocation) {
+	private void setFloorInViewPager(int floorNumber, List<MapLocation> initialLocations) {
 		int floorIndex = ConventionMap.FLOOR_NOT_FOUND;
 		if (floorNumber != ConventionMap.FLOOR_NOT_FOUND) {
 		    floorIndex = map.floorNumberToFloorIndex(floorNumber);
@@ -147,9 +153,9 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		}
 
 		viewPager.setCurrentItem(floorIndexToPagerPosition(floorIndex));
-		if (initialLocation != null) {
+		if (initialLocations.size() > 0) {
 			MapFloorFragment currentFragment = getCurrentFloorFragment();
-			currentFragment.selectLocation(initialLocation);
+			currentFragment.selectLocations(initialLocations);
 		}
 
 		Floor currentFloor = map.getFloors().get(floorIndex);
@@ -448,7 +454,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 						@Override
 						public boolean where(MapLocation item) {
 							return (searchTerm == null || searchTerm.isEmpty() || item.getName().toLowerCase().contains(searchTerm.toLowerCase())) &&
-									((!showOnlyHalls) || item.getPlace() instanceof Hall);
+									((!showOnlyHalls) || item.areAllPlacesHalls());
 						}
 					});
 					Collections.sort(locations, new Comparator<MapLocation>() {
@@ -463,8 +469,8 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 								} else {
 									return lhs.getFloor().getNumber() - rhs.getFloor().getNumber();
 								}
-							} else if ((lhs.getPlace() instanceof Hall) != (rhs.getPlace() instanceof Hall)) {
-								if (lhs.getPlace() instanceof Hall) {
+							} else if (lhs.areAllPlacesHalls() != rhs.areAllPlacesHalls()) {
+								if (lhs.areAllPlacesHalls()) {
 									return -1;
 								} else {
 									return 1;
@@ -524,7 +530,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 									null : locationsSearchResultsAdapter.getMapLocations());
 				}
 			}
-		}.execute();
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private void toggleSearch() {
@@ -584,11 +590,15 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 			return;
 		}
 		int parentHeight = viewPager.getMeasuredHeight();
-		int actionButtonHeight = getActionButton().getMeasuredHeight();
-		if (top > parentHeight - actionButtonHeight) {
-			top = parentHeight - actionButtonHeight;
+		// The action button might be null if there are no locations
+		FloatingActionButton actionButton = getActionButton();
+		if (actionButton != null) {
+			int actionButtonHeight = actionButton.getMeasuredHeight();
+			if (top > parentHeight - actionButtonHeight) {
+				top = parentHeight - actionButtonHeight;
+			}
+			actionButton.setTranslationY(-top);
 		}
-		getActionButton().setTranslationY(-top);
 	}
 
 	private void updateActionButtonLocation() {

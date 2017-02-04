@@ -3,18 +3,21 @@ package amai.org.conventions.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import amai.org.conventions.model.Convention;
+import java.util.Date;
+
+import amai.org.conventions.model.conventions.Convention;
 
 public class Settings {
 	public static final int NO_PUSH_NOTIFICATION_SEEN = -1;
 
     private static final String SETTINGS_SUFFIX = "settings";
     private static final String WAS_FEEDBACK_NOTIFICATION_SHOWN = "WasFeedbackNotificationShown";
+	private static final String WAS_LAST_CHANCE_FEEDBACK_NOTIFICATION_SHOWN = "WasLastChanceFeedbackNotificationShown";
 	private static final String WAS_NAVIGATION_POPUP_OPENED = "WasNavigationPopupOpened";
 	private static final String WAS_PLAY_SERVICES_INSTALLATION_CANCELLED = "WasPlayServicesInstallationCancelled";
 	private static final String WAS_SETTINGS_POPUP_DISPLAYED = "WasSettingsPopupDisplayed";
 	private static final String LAST_SEEN_PUSH_NOTIFICATION_ID = "LastSeenPushNotificationId";
-	private static final String ADD_MISSING_NOTIFICATIONS = "AddMissingNotifications";
+	private static final String LAST_EVENTS_UPDATE_DATE = "LastEventsUpdateDate";
     private SharedPreferences sharedPreferences;
 
     public Settings(Context context) {
@@ -28,7 +31,15 @@ public class Settings {
 
     public void setFeedbackNotificationAsShown() {
         sharedPreferences.edit().putBoolean(WAS_FEEDBACK_NOTIFICATION_SHOWN, true).apply();
-    }
+	}
+
+	public boolean wasConventionLastChanceFeedbackNotificationShown() {
+		return sharedPreferences.getBoolean(WAS_LAST_CHANCE_FEEDBACK_NOTIFICATION_SHOWN, false);
+	}
+
+	public void setLastChanceFeedbackNotificationAsShown() {
+		sharedPreferences.edit().putBoolean(WAS_LAST_CHANCE_FEEDBACK_NOTIFICATION_SHOWN, true).apply();
+	}
 
 	public boolean wasNavigationPopupOpened() {
 		return sharedPreferences.getBoolean(WAS_NAVIGATION_POPUP_OPENED, false);
@@ -62,13 +73,17 @@ public class Settings {
 		sharedPreferences.edit().putInt(LAST_SEEN_PUSH_NOTIFICATION_ID, notificationId).apply();
 	}
 
-	// TODO remove for next convention - this is a workaround for a bug that event alarms were not added
-	public boolean shouldAddMissingNotifications() {
-		return sharedPreferences.getBoolean(ADD_MISSING_NOTIFICATIONS, true);
+
+	public Date getLastEventsUpdateDate() {
+		long date = sharedPreferences.getLong(LAST_EVENTS_UPDATE_DATE, -1);
+		if (date == -1) {
+			return null;
+		}
+		return new Date(date);
 	}
 
-	public void disableAddMissingNotifications() {
-		sharedPreferences.edit().putBoolean(ADD_MISSING_NOTIFICATIONS, false).apply();
+	public void setLastEventsUpdatedDate() {
+		sharedPreferences.edit().putLong(LAST_EVENTS_UPDATE_DATE, Dates.now().getTime()).apply();
 	}
 
 }

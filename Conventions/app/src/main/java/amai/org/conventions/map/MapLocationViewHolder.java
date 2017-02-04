@@ -33,7 +33,7 @@ public class MapLocationViewHolder extends RecyclerView.ViewHolder {
 		}
 		Context context = itemView.getContext();
 		Drawable image;
-		if (location.getPlace() instanceof Hall) {
+		if (location.areAllPlacesHalls()) {
 			image = ContextCompat.getDrawable(context, R.drawable.events_list);
 		} else {
 			image = ContextCompat.getDrawable(context, R.drawable.ic_action_place);

@@ -1,12 +1,15 @@
 package amai.org.conventions;
 
+import android.animation.Animator;
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.ListView;
@@ -14,14 +17,16 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.HitBuilders;
+
 import java.util.Collections;
 import java.util.List;
 
 import amai.org.conventions.events.CollapsibleFeedbackView;
 import amai.org.conventions.events.activities.EventActivity;
 import amai.org.conventions.events.activities.ProgrammeActivity;
-import amai.org.conventions.events.adapters.EventsViewAdapter;
-import amai.org.conventions.model.Convention;
+import amai.org.conventions.events.adapters.EventsViewWithDateHeaderAdapter;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventEndTimeComparator;
 import amai.org.conventions.navigation.NavigationActivity;
@@ -36,6 +41,7 @@ public class FeedbackActivity extends NavigationActivity {
 	private final static String TAG = FeedbackActivity.class.getCanonicalName();
 
 	private final static int ITEM_PROGRESS = 100;
+	private static final String STATE_SENT_FEEDBACK_OPEN = "StateEventsWithSentFeedbackOpen";
 
 	private CollapsibleFeedbackView feedbackView;
 	private ListView eventsWithoutFeedbackList;
@@ -54,6 +60,7 @@ public class FeedbackActivity extends NavigationActivity {
 	private List<ConventionEvent> eventsWithoutFeedback;
 	private List<ConventionEvent> eventsWithSentFeedback;
 	private List<ConventionEvent> eventsWithUnsentFeedback;
+	private Button showHideEventsWithSentFeedback;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -100,9 +107,10 @@ public class FeedbackActivity extends NavigationActivity {
 
 								Convention.getInstance().getStorage().saveUserInput();
 								event.getUserInput().getFeedback().resetChangedAnswers();
-
+								sendUserSentFeedbackTelemetry(true, null);
 							} catch (Exception e) {
 								exception = e;
+								sendUserSentFeedbackTelemetry(false, e);
 							}
 							publishProgress();
 						}
@@ -135,15 +143,41 @@ public class FeedbackActivity extends NavigationActivity {
 						setupEventLists(true);
 
 						if (exception != null) {
-							Log.w(TAG, "Failed to send feedback mail. Reason: " + exception.getMessage());
+							Log.w(TAG, "Failed to send feedback mail. Reason: " + exception.getClass().getSimpleName() + ": " + exception.getMessage());
 							Toast.makeText(FeedbackActivity.this, R.string.feedback_send_mail_failed, Toast.LENGTH_LONG).show();
 						}
 					}
 
-				}.execute();
+					private void sendUserSentFeedbackTelemetry(boolean success, Exception e) {
+						String message = success ? "success" : "failure";
+						if (e != null) {
+							message += " - " + e.getClass().getSimpleName() + ": " + e.getMessage();
+						}
+
+						ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
+								.setCategory("Feedback")
+								.setAction("SendAttempt")
+								.setLabel(message)
+								.build());
+					}
+
+				}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
 			}
 		});
+
+		showHideEventsWithSentFeedback = (Button) findViewById(R.id.show_hide_events_with_sent_feedback);
+
+		// Set focusable to false to prevent the list view from stealing the focus from the scrollview.
+		// For some reason this only works in code and not in the xml.
+		eventsWithoutFeedbackList.setFocusable(false);
+		eventsWithSentFeedbackList.setFocusable(false);
+
+		if (savedInstanceState != null) {
+			boolean open = savedInstanceState.getBoolean(STATE_SENT_FEEDBACK_OPEN, true);
+			eventsWithSentFeedbackList.setVisibility(open ? View.VISIBLE : View.GONE);
+			showHideEventsWithSentFeedback.setText(open ? R.string.hide : R.string.display);
+		}
 	}
 
 	private void setSendAllProgressBarVisibility(boolean visible) {
@@ -162,6 +196,12 @@ public class FeedbackActivity extends NavigationActivity {
 		setupEventLists(false);
 	}
 
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		outState.putBoolean(STATE_SENT_FEEDBACK_OPEN, eventsWithSentFeedbackList.getVisibility() == View.VISIBLE);
+		super.onSaveInstanceState(outState);
+	}
+
 	private void setupEventsWithSentFeedbackLayout(boolean update) {
 		if (eventsWithSentFeedback.size() == 0) {
 			eventsWithSentFeedbackLayout.setVisibility(View.GONE);
@@ -169,9 +209,9 @@ public class FeedbackActivity extends NavigationActivity {
 			eventsWithSentFeedbackLayout.setVisibility(View.VISIBLE);
 
 			if (update && eventsWithSentFeedbackList.getAdapter() != null) {
-				((EventsViewAdapter) eventsWithSentFeedbackList.getAdapter()).setEventsList(eventsWithSentFeedback);
+				((EventsViewWithDateHeaderAdapter) eventsWithSentFeedbackList.getAdapter()).setEventsList(eventsWithSentFeedback);
 			} else {
-				eventsWithSentFeedbackList.setAdapter(new EventsViewAdapter(eventsWithSentFeedback));
+				eventsWithSentFeedbackList.setAdapter(new EventsViewWithDateHeaderAdapter(eventsWithSentFeedback));
 			}
 		}
 	}
@@ -194,9 +234,9 @@ public class FeedbackActivity extends NavigationActivity {
 			eventsWithoutFeedbackListLayout.setVisibility(View.VISIBLE);
 
 			if (update && eventsWithoutFeedbackList.getAdapter() != null) {
-				((EventsViewAdapter) eventsWithoutFeedbackList.getAdapter()).setEventsList(eventsWithoutFeedback);
+				((EventsViewWithDateHeaderAdapter) eventsWithoutFeedbackList.getAdapter()).setEventsList(eventsWithoutFeedback);
 			} else {
-				eventsWithoutFeedbackList.setAdapter(new EventsViewAdapter(eventsWithoutFeedback));
+				eventsWithoutFeedbackList.setAdapter(new EventsViewWithDateHeaderAdapter(eventsWithoutFeedback));
 			}
 
 			if (Convention.getInstance().isFeedbackSendingTimeOver()) {
@@ -266,12 +306,6 @@ public class FeedbackActivity extends NavigationActivity {
 			protected void saveFeedback() {
 				saveConventionFeedback();
 			}
-
-			@Override
-			protected void onFailure(Exception exception) {
-				Log.w(TAG, "Failed to send feedback mail. Reason: " + exception.getMessage());
-				Toast.makeText(FeedbackActivity.this, R.string.feedback_send_mail_failed, Toast.LENGTH_LONG).show();
-			}
 		});
 	}
 
@@ -308,5 +342,82 @@ public class FeedbackActivity extends NavigationActivity {
 		if (feedbackView.isFeedbackChanged()) {
 			saveConventionFeedback();
 		}
+	}
+
+	public void toggleEventsWithSentFeedback(View view) {
+		if (eventsWithSentFeedbackList.getVisibility() == View.VISIBLE) {
+			// Hide the list
+			Animator animator = createResizeAnimator(eventsWithSentFeedbackList.getMeasuredHeight(), 0,
+					eventsWithSentFeedbackList, new Runnable() {
+						@Override
+						public void run() {
+							showHideEventsWithSentFeedback.setText(R.string.display);
+							eventsWithSentFeedbackList.setVisibility(View.GONE);
+						}
+					});
+			animator.setDuration(300).start();
+		} else {
+			// Show the list
+			eventsWithSentFeedbackList.setVisibility(View.VISIBLE);
+
+			// Calculate the list's full height
+			eventsWithSentFeedbackList.measure(
+					View.MeasureSpec.makeMeasureSpec(eventsWithSentFeedbackLayout.getMeasuredWidth(), View.MeasureSpec.EXACTLY),
+					View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+			int fullHeight = eventsWithSentFeedbackList.getMeasuredHeight();
+
+			// Animate showing the list
+			Animator animator = createResizeAnimator(0, fullHeight,
+					eventsWithSentFeedbackList, new Runnable() {
+						@Override
+						public void run() {
+							ViewGroup.LayoutParams layoutParams = eventsWithSentFeedbackList.getLayoutParams();
+							layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+							eventsWithSentFeedbackList.setLayoutParams(layoutParams);
+							showHideEventsWithSentFeedback.setText(R.string.hide);
+						}
+					});
+			animator.setDuration(300).start();
+		}
+	}
+
+	private Animator createResizeAnimator(int start, int end, final View viewToResize, final Runnable onAnimationEnd) {
+		ValueAnimator animator = ValueAnimator.ofInt(start, end);
+		animator.setInterpolator(new AccelerateDecelerateInterpolator());
+
+		animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+			@Override
+			public void onAnimationUpdate(ValueAnimator valueAnimator) {
+				//Update Height
+				int value = (Integer) valueAnimator.getAnimatedValue();
+
+				ViewGroup.LayoutParams layoutParams = viewToResize.getLayoutParams();
+				layoutParams.height = value;
+				viewToResize.setLayoutParams(layoutParams);
+			}
+		});
+		if (onAnimationEnd != null) {
+			animator.addListener(new Animator.AnimatorListener() {
+				@Override
+				public void onAnimationStart(Animator animator) {
+				}
+
+				@Override
+				public void onAnimationEnd(Animator animator) {
+					onAnimationEnd.run();
+				}
+
+				@Override
+				public void onAnimationCancel(Animator animator) {
+
+				}
+
+				@Override
+				public void onAnimationRepeat(Animator animator) {
+
+				}
+			});
+		}
+		return animator;
 	}
 }

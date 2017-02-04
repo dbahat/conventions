@@ -12,29 +12,28 @@
         android:inputType="textFilter"
         android:hint="@string/search_input_search_keyword"/>
 
-    <ScrollView
+    <HorizontalScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <amai.org.conventions.events.SearchCategoriesLayout
             android:id="@+id/search_categories_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-    </ScrollView>
+    </HorizontalScrollView>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@android:color/black"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/searchEventsList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </android.support.v7.widget.RecyclerView>
+        <se.emilsjolander.stickylistheaders.StickyListHeadersListView
+            android:id="@+id/searchEventsList"
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
     <TextView
         android:id="@+id/search_no_results_found"

@@ -10,7 +10,7 @@ import java.util.List;
 
 import amai.org.conventions.R;
 import amai.org.conventions.events.ProgrammeConventionEvent;
-import amai.org.conventions.events.holders.EventTimeViewHolder;
+import amai.org.conventions.events.holders.TimeViewHolder;
 import amai.org.conventions.events.holders.SwipeableEventViewHolder;
 import amai.org.conventions.events.listeners.OnEventFavoriteChangedListener;
 import amai.org.conventions.model.ConventionEvent;
@@ -78,17 +78,17 @@ public class SwipeableEventsViewOrHourAdapter extends BaseAdapter implements Sti
 
     @Override
     public View getHeaderView(int position, View convertView, ViewGroup parent) {
-        EventTimeViewHolder holder;
+        TimeViewHolder holder;
         if (convertView == null) {
             View eventTimeView = LayoutInflater.from(parent.getContext()).inflate(R.layout.convention_event_time, parent, false);
-            holder = new EventTimeViewHolder(eventTimeView);
+            holder = new TimeViewHolder(eventTimeView, R.id.event_time_text_view);
             convertView = eventTimeView;
             convertView.setTag(holder);
         } else {
-            holder = (EventTimeViewHolder) convertView.getTag();
+            holder = (TimeViewHolder) convertView.getTag();
         }
 
-        holder.setTime(events.get(position).getTimeSection().getTime());
+        holder.setTime(events.get(position).getTimeSection().getTime(), "HH:00");
         return convertView;
     }
 

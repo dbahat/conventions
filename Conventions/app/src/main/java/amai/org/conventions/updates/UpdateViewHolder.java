@@ -42,13 +42,12 @@ public class UpdateViewHolder extends RecyclerView.ViewHolder {
         SpannableString spannedUpdateText = new SpannableString(updateViewModel.getUpdate().getText());
         int extra_margin_for_top_lines = updateTextView.getResources().getDimensionPixelOffset(R.dimen.update_extra_text_margin_for_top_update_lines);
 	    int textLength = updateViewModel.getUpdate().getText().length();
-	    spannedUpdateText.setSpan(
-                new WrappingTextLeadingMarginSpan(4, timeContainerSize + extra_margin_for_top_lines),
-                0, textLength, 0);
 
-	    // Make new updates highlighted
+	    // Make new/focused updates highlighted
 	    int color;
-	    if (updateViewModel.getUpdate().isNew()) {
+	    if (updateViewModel.isFocused()) {
+		    color = ThemeAttributes.getColor(itemView.getContext(), R.attr.focusedUpdateBackground);
+	    } else if (updateViewModel.getUpdate().isNew()) {
 		    color = ContextCompat.getColor(itemView.getContext(), R.color.very_light_gray);
 	    } else {
 		    color = ThemeAttributes.getColor(itemView.getContext(), R.attr.updatesBackground);

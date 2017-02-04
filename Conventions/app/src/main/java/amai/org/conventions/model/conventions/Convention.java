@@ -1,4 +1,4 @@
-package amai.org.conventions.model;
+package amai.org.conventions.model.conventions;
 
 import android.content.Context;
 
@@ -20,7 +20,21 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import amai.org.conventions.model.conventions.Cami2016Convention;
+import amai.org.conventions.map.AggregatedEventTypes;
+import amai.org.conventions.model.ConventionEvent;
+import amai.org.conventions.model.ConventionMap;
+import amai.org.conventions.model.EventToImageResourceIdMapper;
+import amai.org.conventions.model.EventType;
+import amai.org.conventions.model.Feedback;
+import amai.org.conventions.model.FeedbackQuestion;
+import amai.org.conventions.model.Floor;
+import amai.org.conventions.model.Hall;
+import amai.org.conventions.model.MapLocation;
+import amai.org.conventions.model.Place;
+import amai.org.conventions.model.Stand;
+import amai.org.conventions.model.StandsArea;
+import amai.org.conventions.model.Update;
+import amai.org.conventions.networking.ModelParser;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 import amai.org.conventions.utils.Dates;
@@ -39,18 +53,20 @@ public abstract class Convention implements Serializable {
 	private String feedbackRecipient;
 
 	private ConventionMap map;
-	private Calendar date;
+	private Calendar startDate;
+	private Calendar endDate;
 	private String id;
 	private String displayName;
 	private URL modelURL;
 	private String facebookFeedPath;
+	private EventToImageResourceIdMapper imageMapper;
 
 	private double longitude;
 	private double latitude;
 
 	private final ReentrantReadWriteLock eventLockObject = new ReentrantReadWriteLock();
 	private ConventionStorage conventionStorage;
-	private EventToImageResourceIdMapper imageMapper;
+
 
     public static Convention getInstance() {
         return convention;
@@ -59,10 +75,6 @@ public abstract class Convention implements Serializable {
     public ConventionStorage getStorage() {
         return conventionStorage;
     }
-
-	public EventToImageResourceIdMapper getImageMapper() {
-		return imageMapper;
-	}
 
 	public URL getModelURL() {
 		return modelURL;
@@ -100,8 +112,8 @@ public abstract class Convention implements Serializable {
 
 	public void load(Context context) {
 		this.conventionStorage = initStorage();
-		this.imageMapper = initImageMapper();
-		this.date = initDate();
+		this.startDate = initStartDate();
+		this.endDate = initEndDate();
 		this.id = initID();
 		this.displayName = initDisplayName();
 		this.feedbackRecipient = initFeedbackRecipient();
@@ -112,13 +124,14 @@ public abstract class Convention implements Serializable {
 		this.map = initMap();
 		this.longitude = initLongitude();
 		this.latitude = initLatitude();
+		this.imageMapper = initImageMapper();
 
 		getStorage().initFromFile(context);
 	}
 
 	protected abstract ConventionStorage initStorage();
-	protected abstract EventToImageResourceIdMapper initImageMapper();
-	protected abstract Calendar initDate();
+	protected abstract Calendar initStartDate();
+	protected abstract Calendar initEndDate();
 	protected abstract String initID();
 	protected abstract String initDisplayName();
 	protected abstract String initFeedbackRecipient();
@@ -128,10 +141,19 @@ public abstract class Convention implements Serializable {
 	protected abstract ConventionMap initMap();
 	protected abstract double initLongitude();
 	protected abstract double initLatitude();
+	protected abstract EventToImageResourceIdMapper initImageMapper();
 
-    public Calendar getDate() {
-        return date;
+    public Calendar getStartDate() {
+        return startDate;
     }
+
+	public Calendar getEndDate() {
+		return endDate;
+	}
+
+	public int getLengthInDays() {
+		return (int) ((endDate.getTime().getTime() - startDate.getTime().getTime()) / Dates.MILLISECONDS_IN_DAY) + 1;
+	}
 
 	public String getId() {
 		return id;
@@ -143,6 +165,10 @@ public abstract class Convention implements Serializable {
 
 	public Feedback getFeedback() {
 		return feedback;
+	}
+
+	public EventToImageResourceIdMapper getImageMapper() {
+		return imageMapper;
 	}
 
 	/**
@@ -313,7 +339,7 @@ public abstract class Convention implements Serializable {
 	public boolean isFeedbackSendingTimeOver() {
 		// Only allow to send feedback for 2 weeks after the convention is over
 		Calendar lastFeedbackSendTime = Calendar.getInstance();
-		lastFeedbackSendTime.setTime(this.date.getTime());
+		lastFeedbackSendTime.setTime(this.endDate.getTime());
 		lastFeedbackSendTime.add(Calendar.DATE, 14);
 		return lastFeedbackSendTime.getTime().before(Dates.now());
 	}
@@ -378,6 +404,45 @@ public abstract class Convention implements Serializable {
 		return eventTypeList;
 	}
 
+	public List<String> getAggregatedSearchCategories() {
+		List<SearchCategory> categories = new LinkedList<>();
+		AggregatedEventTypes aggregatedEventTypes = new AggregatedEventTypes();
+		if (events != null) {
+			for (ConventionEvent event : events) {
+				// Count the number of occurrences of each event per type
+				final String aggregatedEventType = aggregatedEventTypes.get(event.getType());
+				SearchCategory category = CollectionUtils.findFirst(categories, new CollectionUtils.Predicate<SearchCategory>() {
+					@Override
+					public boolean where(SearchCategory item) {
+						return item.getSearchCategory().equals(aggregatedEventType);
+					}
+				});
+
+				if (category != null) {
+					category.increase();
+				} else {
+					categories.add(new SearchCategory(aggregatedEventType));
+				}
+			}
+		}
+
+		// Ensure the result is sorted by occurrences, so the most popular event type is first
+		Collections.sort(categories, new Comparator<SearchCategory>() {
+			@Override
+			public int compare(SearchCategory category1, SearchCategory category2) {
+				return category2.getCount() - category1.getCount();
+			}
+		});
+
+		// Flatten the list again now that it's sorted
+		return CollectionUtils.map(categories, new CollectionUtils.Mapper<SearchCategory, String>() {
+			@Override
+			public String map(SearchCategory item) {
+				return item.getSearchCategory();
+			}
+		});
+	}
+
 	private int getHighestHallOrder() {
 		int maxHallOrder = -1;
 		for (Hall hall : getHalls()) {
@@ -430,8 +495,14 @@ public abstract class Convention implements Serializable {
 
 	public StandsArea findStandsArea(int id) {
 		for (MapLocation location : map.getLocations()) {
-			if (location.getPlace() instanceof StandsArea && ((StandsArea) location.getPlace()).getId() == id) {
-				return (StandsArea) location.getPlace();
+			List<? extends Place> places = location.getPlaces();
+			if (places == null) {
+				continue;
+			}
+			for (Place place : places) {
+				if (place instanceof StandsArea && ((StandsArea) place).getId() == id) {
+					return (StandsArea) place;
+				}
 			}
 		}
 
@@ -440,9 +511,15 @@ public abstract class Convention implements Serializable {
 
 	public boolean hasStands() {
 		for (MapLocation location : map.getLocations()) {
-			if (location.getPlace() instanceof StandsArea &&
-					((StandsArea) location.getPlace()).getStands().size() > 0) {
-				return true;
+			List<? extends Place> places = location.getPlaces();
+			if (places == null) {
+				continue;
+			}
+			for (Place place : places) {
+				if (place instanceof StandsArea &&
+						((StandsArea) place).getStands().size() > 0) {
+					return true;
+				}
 			}
 		}
 		return false;
@@ -452,14 +529,41 @@ public abstract class Convention implements Serializable {
 		Set<Integer> foundStandAreas = new HashSet<>();
 		List<Stand> stands = new LinkedList<>();
 		for (MapLocation location : map.getLocations()) {
-			if (location.getPlace() instanceof StandsArea) {
-				StandsArea area = (StandsArea) location.getPlace();
-				if (!foundStandAreas.contains(area.getId())) {
-					stands.addAll(area.getStands());
-					foundStandAreas.add(area.getId());
+			List<? extends Place> places = location.getPlaces();
+			for (Place place : places) {
+				if (place instanceof StandsArea) {
+					StandsArea area = (StandsArea) place;
+					if (!foundStandAreas.contains(area.getId())) {
+						stands.addAll(area.getStands());
+						foundStandAreas.add(area.getId());
+					}
 				}
 			}
 		}
 		return stands;
+	}
+
+	public abstract ModelParser getModelParser();
+
+	private static class SearchCategory {
+		private String searchCategory;
+		private int count;
+
+		public SearchCategory(String searchCategory) {
+			this.searchCategory = searchCategory;
+			this.count = 1;
+		}
+
+		public String getSearchCategory() {
+			return searchCategory;
+		}
+
+		public void increase() {
+			count++;
+		}
+
+		public int getCount() {
+			return count;
+		}
 	}
 }

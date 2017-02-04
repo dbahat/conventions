@@ -3,6 +3,7 @@
     <color name="transparent_white">#C0FFFFFF</color>
     <color name="white">#FFFFFF</color>
     <color name="ultra_light_gray">#EBEBEB</color>
+    <color name="ultra_light_gray2">#E1E1E1</color>
     <color name="very_light_gray">#DCDCDC</color>
     <color name="gray">#D6D7D7</color>
     <color name="dark_gray">#D2D3D5</color>
@@ -13,6 +14,7 @@
     <color name="hint_gray">#909090</color>
     <color name="black">#000000</color>
     <color name="transparent_black">#1A000000</color>
+    <color name="yellow_medium">#f6eace</color>
 
     <!-- This color was originally from Cami 2015 but it looks good on the feedback buttons -->
     <color name="green">#7EC078</color>

@@ -11,6 +11,8 @@ import java.util.List;
 
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
+import amai.org.conventions.model.conventions.Convention;
+import amai.org.conventions.networking.AmaiModelParser;
 import amai.org.conventions.networking.ModelParser;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Objects;
@@ -48,7 +50,7 @@ public class ConventionEvent implements Serializable {
 	}
 
 	public int getTextColor(Context context) {
-		if (textColor != ModelParser.NO_COLOR) {
+		if (textColor != AmaiModelParser.NO_COLOR) {
 			return textColor;
 		}
 		return ThemeAttributes.getColor(context, R.attr.eventTimeDefaultTextColor);
@@ -160,11 +162,11 @@ public class ConventionEvent implements Serializable {
     }
 
 	public int getBackgroundColor(Context context) {
-		if (backgroundColor != ModelParser.NO_COLOR) {
+		if (backgroundColor != AmaiModelParser.NO_COLOR) {
 			return backgroundColor;
 		}
 		int eventTypeColor = getType().getBackgroundColor();
-		if (eventTypeColor != ModelParser.NO_COLOR) {
+		if (eventTypeColor != AmaiModelParser.NO_COLOR) {
 			return eventTypeColor;
 		}
 		return ThemeAttributes.getColor(context, R.attr.eventTimeDefaultBackgroundColor);
@@ -192,8 +194,8 @@ public class ConventionEvent implements Serializable {
         return this;
     }
 
-	public List<String> getImages() {
-		return Convention.getInstance().getImageMapper().getImagesList(images);
+	public List<Integer> getImageResources() {
+		return Convention.getInstance().getImageMapper().getImageResourcesList(images);
 	}
 
 	public void setImages(List<String> images) {

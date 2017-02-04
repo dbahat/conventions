@@ -42,7 +42,19 @@
 
             <LinearLayout
                 style="@style/EventDetailsBox">
-
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/event_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/black"
+                        tools:text="Event Type"
+                        />
+                </LinearLayout>
                 <TextView
                     android:id="@+id/event_title"
                     style="@style/TextAppearance.AppCompat.Headline"

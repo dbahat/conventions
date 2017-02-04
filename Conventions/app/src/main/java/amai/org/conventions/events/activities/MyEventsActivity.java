@@ -6,10 +6,12 @@ import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.ShareCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.analytics.HitBuilders;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -25,46 +28,84 @@ import java.util.List;
 
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.R;
-import amai.org.conventions.events.adapters.EventGroupsAdapter;
-import amai.org.conventions.model.Convention;
+import amai.org.conventions.events.adapters.DayFragmentAdapter;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
 
 
-public class MyEventsActivity extends NavigationActivity {
+public class MyEventsActivity extends NavigationActivity implements MyEventsDayFragment.EventsListener {
+	private static final String STATE_SELECTED_DATE_INDEX = "StateSelectedDateIndex";
+	private static final int SELECT_CURRENT_DATE = -1;
+	private static final int MAX_DAYS_NUMBER = 5;
 
-    // Handler for updating the next event start text
+	// Handler for updating the next event start text
     private Handler nextEventStartTextRunner = new Handler();
     private Runnable updateNextEventStartTimeText;
 	private static final int NEXT_EVENT_START_TIME_UPDATE_DELAY = 60000; // 1 minute
 
     private TextView nextEventStart;
 	private View nextEventStartBottomLine;
-	private RecyclerView eventsList;
-	private View emptyView;
+	private TabLayout daysTabLayout;
+	private ViewPager daysPager;
 	private AlertDialog noEventsDialog;
-	private EventGroupsAdapter adapter;
 
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentInContentContainer(R.layout.activity_my_events);
         setToolbarTitle(getResources().getString(R.string.my_events_title));
+		removeForeground();
 
         nextEventStart = (TextView) findViewById(R.id.nextEventStart);
 		nextEventStartBottomLine = findViewById(R.id.nextEventStartBottomLine);
-		emptyView = findViewById(R.id.my_events_empty);
-	    eventsList = (RecyclerView) findViewById(R.id.myEventsList);
-	    eventsList.setLayoutManager(new LinearLayoutManager(this));
+
+		int dateIndexToSelect = savedInstanceState == null ? SELECT_CURRENT_DATE : savedInstanceState.getInt(STATE_SELECTED_DATE_INDEX, SELECT_CURRENT_DATE);
+		setupDays(dateIndexToSelect);
     }
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-		updateDataset();
+	private void setupDays(int dateIndexToSelect) {
+		daysTabLayout = (TabLayout) findViewById(R.id.my_events_days_tabs);
+		daysPager = (ViewPager) findViewById(R.id.my_events_days_pager);
+		Calendar startDate = Convention.getInstance().getStartDate();
+		Calendar endDate = Convention.getInstance().getEndDate();
+
+		int days = (int) ((endDate.getTime().getTime() - startDate.getTime().getTime()) / Dates.MILLISECONDS_IN_DAY) + 1;
+		if (days == 1) {
+			daysTabLayout.setVisibility(View.GONE);
+		} else if (days > MAX_DAYS_NUMBER) {
+			// TODO too many days, need to use scrollable tabs
+			days = MAX_DAYS_NUMBER;
+		}
+
+		// Setup view pager
+		daysPager.setAdapter(new MyEventsDayAdapter(getSupportFragmentManager(), Convention.getInstance().getStartDate(), days));
+		daysPager.setOffscreenPageLimit(days); // Load all dates for smooth scrolling
+
+		// Setup tabs
+		daysTabLayout.setupWithViewPager(daysPager, false);
+
+		int selectedDateIndex = dateIndexToSelect;
+		// Find the current date's index if requested
+		if (dateIndexToSelect == SELECT_CURRENT_DATE) {
+			Calendar currDate = Calendar.getInstance();
+			Calendar today = Dates.toCalendar(Dates.now());
+			int i = 0;
+			for (currDate.setTime(startDate.getTime()); !currDate.after(endDate); currDate.add(Calendar.DATE, 1), ++i) {
+				if (Dates.isSameDate(currDate, today)) {
+					selectedDateIndex = i;
+				}
+			}
+		}
+
+		// Default - first day
+		if (selectedDateIndex < 0) {
+			selectedDateIndex = 0;
+		}
+		daysPager.setCurrentItem(selectedDateIndex, false);
 	}
 
 	@Override
@@ -75,54 +116,13 @@ public class MyEventsActivity extends NavigationActivity {
 		}
 	}
 
-	private void updateDataset() {
-		final List<ConventionEvent> events = getMyEvents();
+	@Override
+	protected void onResume() {
+		super.onResume();
 
 		// Set up text view for next event start
+		final List<ConventionEvent> events = getMyEvents();
 		setNextEventStartText(events);
-
-		// Set up events list
-		ArrayList<EventsTimeSlot> nonConflictingGroups = getNonConflictingGroups(null, events, null);
-		if (adapter == null) {
-			adapter = new EventGroupsAdapter(nonConflictingGroups);
-		} else {
-			adapter.updateEventGroups(nonConflictingGroups);
-		}
-		eventsList.setAdapter(adapter);
-
-		updateVisibility(nonConflictingGroups.size(), eventsList, emptyView);
-
-		// Register for dataset update events, in case we need to return the empty layout view after all items were dismissed.
-		adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
-			@Override
-			public void onItemRangeRemoved(int positionStart, int itemCount) {
-				super.onItemRangeRemoved(positionStart, itemCount);
-				updateVisibility(adapter.getItemCount(), eventsList, emptyView);
-			}
-
-			@Override
-			public void onChanged() {
-				super.onChanged();
-				updateVisibility(adapter.getItemCount(), eventsList, emptyView);
-			}
-		});
-
-		adapter.setOnEventRemovedAction(new Runnable() {
-			@Override
-			public void run() {
-				setNextEventStartText(getMyEvents());
-			}
-		});
-	}
-
-	private void updateVisibility(int datasetSize, RecyclerView eventsList, View emptyView) {
-		if (datasetSize > 0) {
-			eventsList.setVisibility(View.VISIBLE);
-			emptyView.setVisibility(View.GONE);
-		} else {
-			eventsList.setVisibility(View.GONE);
-			emptyView.setVisibility(View.VISIBLE);
-		}
 	}
 
 	@Override
@@ -198,11 +198,19 @@ public class MyEventsActivity extends NavigationActivity {
 	private String formatMyEventsToShare(boolean isHtml) {
 		StringBuilder stringBuilder = new StringBuilder();
 
-		stringBuilder.append(getString(R.string.my_event_share_title, Convention.getInstance().getDisplayName()));
-		stringBuilder.append("\n");
+		stringBuilder.append(getString(R.string.my_event_share_title, Convention.getInstance().getDisplayName())).append("\n");
+		Calendar eventDate = null;
 		for (ConventionEvent event : getMyEvents()) {
-			stringBuilder.append(formatEventToShare(event));
-			stringBuilder.append("\n");
+			Calendar eventStart = Dates.toCalendar(event.getStartTime());
+			boolean newDate = (eventDate == null || !Dates.isSameDate(eventDate, eventStart));
+			eventDate = eventStart;
+
+			if (newDate) {
+				SimpleDateFormat sdf = new SimpleDateFormat("EEEE (dd.MM)", Dates.getLocale());
+				stringBuilder.append("\n").append(sdf.format(eventDate.getTime())).append("\n");
+			}
+
+			stringBuilder.append(formatEventToShare(event)).append("\n");
 		}
 		stringBuilder.append("\n");
 
@@ -210,9 +218,9 @@ public class MyEventsActivity extends NavigationActivity {
 			stringBuilder.append(
 					String.format(Dates.getLocale(), "<a href=\"%s\">%s</a>",
 							getString(R.string.my_event_share_link),
-							getString(R.string.my_event_share_signature, Convention.getInstance().getDisplayName())));
+							getString(R.string.my_event_share_signature, getString(R.string.app_name))));
 		} else {
-			stringBuilder.append(getString(R.string.my_event_share_signature, Convention.getInstance().getDisplayName()));
+			stringBuilder.append(getString(R.string.my_event_share_signature, getString(R.string.app_name)));
 			stringBuilder.append("\n");
 			stringBuilder.append(getString(R.string.my_event_share_link));
 		}
@@ -263,9 +271,7 @@ public class MyEventsActivity extends NavigationActivity {
 	        startTime.setTime(nextEvent.getStartTime());
             Calendar now = Calendar.getInstance();
             now.setTime(currTime);
-            if (startTime.get(Calendar.DATE) == now.get(Calendar.DATE) &&
-                    startTime.get(Calendar.MONTH) == now.get(Calendar.MONTH) &&
-                    startTime.get(Calendar.YEAR) == now.get(Calendar.YEAR)) {
+            if (Dates.isSameDate(startTime, now)) {
                 displayNextEventStart = true;
             }
         }
@@ -292,64 +298,34 @@ public class MyEventsActivity extends NavigationActivity {
         }
     }
 
-	/**
-	 * Split events to conflicting groups. A conflict between 2 events happens when one of events starts
-	 * after the other event's start time and before its end time.
-	 * @param events - list of events sorted by start time
-	 * @return a list of event groups. Each event group is a list of events, with the same sort order as
-	 * sent, where each event conflicts with at least one other event in the group. Events from different
-	 * groups do not conflict with each other. The groups are ordered by the first event's start time.
-	 */
-	public static ArrayList<EventsTimeSlot> getNonConflictingGroups(EventsTimeSlot previous, List<ConventionEvent> events, EventsTimeSlot next) {
-		ArrayList<EventsTimeSlot> nonConflictingTimeSlots = new ArrayList<>();
-
-		Date currGroupEndTime = (previous != null ? previous.getEndTime() : null);
-		EventsTimeSlot currSlot = previous;
-		for (ConventionEvent event : events) {
-			// Non-conflicting event - it's either the first event or it starts after
-			// (or at the same time as) the current group ends.
-			if (currSlot == null || !event.getStartTime().before(currGroupEndTime)) {
-				// If we have a previous group, add it to the groups list
-				if (currSlot != null) {
-					if (currSlot != previous) {
-						nonConflictingTimeSlots.add(currSlot);
-					}
-
-					// If there are at least 30 minutes between this group and the next, add a free time slot
-					if (event.getStartTime().getTime() - currGroupEndTime.getTime() >= 30 * Dates.MILLISECONDS_IN_MINUTE) {
-						EventsTimeSlot freeSlot = new EventsTimeSlot(currGroupEndTime, event.getStartTime());
-						nonConflictingTimeSlots.add(freeSlot);
-					}
-				}
-				currSlot = new EventsTimeSlot();
-				currGroupEndTime = null;
-			}
-			currSlot.addEvent(event);
-			if (currGroupEndTime == null || event.getEndTime().after(currGroupEndTime)) {
-				currGroupEndTime = event.getEndTime();
-			}
-		}
-
-		// Add the last group
-		if (currSlot != null) {
-			if (currSlot != previous) {
-				nonConflictingTimeSlots.add(currSlot);
-			}
-
-			if (next != null && next.getStartTime().getTime() - currGroupEndTime.getTime() >= 30 * Dates.MILLISECONDS_IN_MINUTE) {
-				EventsTimeSlot freeSlot = new EventsTimeSlot(currGroupEndTime, next.getStartTime());
-				nonConflictingTimeSlots.add(freeSlot);
-			}
-		}
-
-		return nonConflictingTimeSlots;
-	}
-
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 		if (noEventsDialog != null && noEventsDialog.isShowing()) {
 			noEventsDialog.dismiss();
+		}
+	}
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		// We must re-set the current page since the rtl view pager has a bug that it doesn't remember it
+		outState.putInt(STATE_SELECTED_DATE_INDEX, daysPager.getCurrentItem());
+		super.onSaveInstanceState(outState);
+	}
+
+	@Override
+	public void onEventRemoved() {
+		setNextEventStartText(getMyEvents());
+	}
+
+	private class MyEventsDayAdapter extends DayFragmentAdapter {
+		public MyEventsDayAdapter(FragmentManager fm, Calendar startDate, int days) {
+			super(fm, startDate, days);
+		}
+
+		@Override
+		public Fragment getItem(int position) {
+			return MyEventsDayFragment.newInstance(getDate(position));
 		}
 	}
 }

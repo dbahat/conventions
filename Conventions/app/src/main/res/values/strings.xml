@@ -40,7 +40,7 @@
     <string name="event_has_ended">האירוע נגמר</string>
     <string name="add_feedback">מלא פידבק</string>
     <string name="feedback">פידבק</string>
-    <string name="close_feedback">הסתר</string>
+    <string name="hide">הסתר</string>
     <string name="send">שלח</string>
     <string name="back">חזור</string>
 
@@ -60,6 +60,8 @@
     <string name="notification_2_events_ended_message_format">נהנת באירוע %s ובאירוע נוסף אחד? שלח פידבק למארגנים</string>
     <string name="notification_several_events_ended_message_format">נהנת באירוע %1$s וב-%2$d אירועים נוספים? שלח פידבק למארגנים</string>
     <string name="notification_feedback_ended_message">%s הסתיים, ואנחנו רוצים לשמוע את דעתך</string>
+    <string name="notification_feedback_last_chance_title">הזדמנות אחרונה להשפיע</string>
+    <string name="notification_feedback_last_chance_message">נהניתם ב%s? נשארו רק עוד 4 ימים למלא פידבק!</string>
 
     <string name="configure_notification_event_about_to_start_message">שלח תזכורת לפני תחילת האירוע</string>
     <string name="configure_notification_event_feedback_reminder_message">שלח תזכורת למלא פידבק אחרי שהאירוע מסתיים</string>
@@ -70,7 +72,7 @@
     <string name="missing_play_services_ok_button">התקן</string>
     <string name="missing_play_services_cancel_button">אל תתקין</string>
     <string name="missing_play_services_neutral_button">לא עכשיו</string>
-    <string name="missing_play_services_map_message">על מנת לצפות בדרכי הגעה יש להתקין או לעדכן את Google play services ולוודא שהשירות פעיל</string>
+    <string name="missing_play_services_map_message">על מנת לצפות במפת דרכי ההגעה יש להתקין או לעדכן את Google play services ולוודא שהשירות פעיל</string>
 
     <string name="yes">כן</string>
     <string name="no">לא</string>
@@ -104,8 +106,15 @@
     <string name="new_update">יש עדכון חדש</string>
     <string name="cannot_set_past_alarm">לא ניתן לקבוע תזכורת בעבר</string>
     <string name="close">סגור</string>
+    <string name="other">אחר</string>
     <string name="about_app_title">אודות האפליקציה</string>
     <string name="about_content">אמא\"י – ארגון מנגה ואנימה ישראל, הוא ארגון בת של האגודה הישראלית למדע בדיוני ופנטסיה. הארגון הוקם במאי 2007 על ידי קבוצת חברים בקהילת חובבי המנגה, אנימה ותרבות יפן ופועל למען קהילת חובבים זו.</string>
+    <string name="about_links"><![CDATA[
+<p><a href="http://www.amai.org.il/">לאתר אמא"י</a></p><p><a href="http://2016.cami.org.il/">לאתר הכנס</a></p>
+]]></string>
+    <string name="about_app_content"><![CDATA[
+ האפליקציה פותחה עבור כנס כאמ"י 2016.<br/>בקשות והצעות ניתן לכתוב <a href="market://details?id=amai.org.conventions">בדף האפליקציה בחנות</a>.
+]]></string>
     <string name="question_map_signs">האם המפה והשילוט היו ברורים ושימושיים?</string>
     <string name="question_conflicting_events">אם היה אירוע שרצית ללכת אליו ולא הלכת, מה הסיבה לכך?</string>
     <string name="answer_event_conflicted">האירוע התנגש עם אירוע אחר שהלכתי אליו</string>
@@ -149,4 +158,8 @@
     <string name="show_test_notifications_title">בדיקות</string>
     <string name="show_test_notifications_summary">הצג התראות בדיקה</string>
     <string name="advanced_options_enabled">אפשרויות מתקדמות אופשרו</string>
+    <string name="about">אודות</string>
+    <string name="arrival_method_description"><![CDATA[
+]]></string>
+    <string name="navigate_public_transportation">ניווט בתחבורה ציבורית</string>
 </resources>

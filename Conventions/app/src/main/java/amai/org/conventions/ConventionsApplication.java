@@ -3,6 +3,7 @@ package amai.org.conventions;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import com.google.android.gms.analytics.ExceptionReporter;
@@ -14,7 +15,7 @@ import java.util.Collection;
 import java.util.Locale;
 import java.util.Map;
 
-import amai.org.conventions.model.Convention;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.EventNotification;
 import amai.org.conventions.navigation.NavigationActivity;
@@ -59,7 +60,7 @@ public class ConventionsApplication extends Application {
             exceptionReporter.setExceptionParser(new ExtendedExceptionParser(this, null));
         }
 
-        alarmScheduler.scheduleNotificationToFillConventionFeedback();
+        alarmScheduler.scheduleNotificationsToFillConventionFeedback();
 
 	    try {
 		    versionName = this.getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
@@ -104,20 +105,17 @@ public class ConventionsApplication extends Application {
 	    });
     }
 
-    /**
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		// Screen rotation apparently returns the locale to the device default
+		Locale.setDefault(Dates.getLocale());
+	}
+
+	/**
      * Since the Android AlarmManager gets reset whenever the device reboots, we re-schedule all the notifications when the app is launched.
      */
     private void restoreAlarmConfiguration() {
-	    // TODO remove for next convention - workaround for a bug that notifications were not set when adding event to favorites
-	    if (settings.shouldAddMissingNotifications()) {
-		    for (ConventionEvent event : Convention.getInstance().getEvents()) {
-			    if (event.isAttending()) {
-			        alarmScheduler.scheduleDefaultEventAlarms(event);
-			    }
-		    }
-		    settings.disableAddMissingNotifications();
-	    }
-
         for (ConventionEvent event : Convention.getInstance().getEvents()) {
             restoreAlarmConfiguration(event, event.getUserInput().getEventAboutToStartNotification());
 	        restoreAlarmConfiguration(event, event.getUserInput().getEventFeedbackReminderNotification());

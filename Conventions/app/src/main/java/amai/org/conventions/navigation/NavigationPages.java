@@ -9,6 +9,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import amai.org.conventions.AboutActivity;
 import amai.org.conventions.ArrivalMethodsActivity;
 import amai.org.conventions.FeedbackActivity;
 import amai.org.conventions.R;
@@ -70,6 +71,7 @@ public class NavigationPages {
         pageIdToFragmentMapInOrder.put(R.string.arrival_methods, ArrivalMethodsActivity.class);
 	    pageIdToFragmentMapInOrder.put(R.string.feedback, FeedbackActivity.class);
 	    pageIdToFragmentMapInOrder.put(R.string.settings, SettingsActivity.class);
+	    pageIdToFragmentMapInOrder.put(R.string.about, AboutActivity.class);
 
         return pageIdToFragmentMapInOrder;
     }

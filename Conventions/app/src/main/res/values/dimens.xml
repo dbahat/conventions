@@ -30,4 +30,8 @@
 
     <!-- Assumed status bar height (the real dimension is private @android:dimen/status_bar_height) -->
     <dimen name="status_bar_height">25dp</dimen>
+    <!-- Assumed height of status bar + toolbar + tabs. Real height of toolbar and tabs is
+         ?attr/actionBarSize which can only be accessed in runtime, and not before the activity is created.
+         This is not correct for all devices but as close as it can be. -->
+    <dimen name="status_bar_and_toolbar_and_tabs_height">137dp</dimen>
 </resources>

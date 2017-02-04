@@ -22,7 +22,7 @@ import java.util.List;
 
 import amai.org.conventions.R;
 import amai.org.conventions.map.StandsAdapter;
-import amai.org.conventions.model.Convention;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.utils.Objects;

@@ -34,7 +34,7 @@
                 android:paddingEnd="@dimen/event_details_box_padding"
                 android:paddingStart="0dp"
                 android:paddingTop="@dimen/event_details_box_padding"
-                android:text="@string/close_feedback" />
+                android:text="@string/hide" />
 
         </FrameLayout>
     </LinearLayout>

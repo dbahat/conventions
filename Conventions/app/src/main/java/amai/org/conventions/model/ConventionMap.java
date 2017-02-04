@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.CollectionUtils;
 
 public class ConventionMap {
@@ -75,7 +76,16 @@ public class ConventionMap {
 		return CollectionUtils.filter(getLocations(), new CollectionUtils.Predicate<MapLocation>() {
 			@Override
 			public boolean where(MapLocation location) {
-				return location.getPlace().getName().equals(hall.getName());
+				List<? extends Place> places = location.getPlaces();
+				if (places == null) {
+					return false;
+				}
+				for (Place place : places) {
+					if (place.getName().equals(hall.getName())) {
+						return true;
+					}
+				}
+				return false;
 			}
 		});
 	}
@@ -84,7 +94,16 @@ public class ConventionMap {
 		return CollectionUtils.filter(getLocations(), new CollectionUtils.Predicate<MapLocation>() {
 			@Override
 			public boolean where(MapLocation location) {
-				return location.getPlace() instanceof StandsArea && ((StandsArea) location.getPlace()).getId() == standsArea.getId();
+				List<? extends Place> places = location.getPlaces();
+				if (places == null) {
+					return false;
+				}
+				for (Place place : places) {
+					if (place instanceof StandsArea && ((StandsArea) place).getId() == standsArea.getId()) {
+						return true;
+					}
+				}
+				return false;
 			}
 		});
 	}

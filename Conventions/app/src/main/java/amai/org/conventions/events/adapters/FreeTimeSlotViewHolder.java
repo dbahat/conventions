@@ -13,7 +13,7 @@ public class FreeTimeSlotViewHolder extends RecyclerView.ViewHolder {
 
 	public FreeTimeSlotViewHolder(View view) {
 		super(view);
-		textView = (TextView) view.findViewById(R.id.free_time_slot_text);
+		textView = (TextView) view.findViewById(R.id.small_text);
 	}
 
 	public void setModel(EventsTimeSlot slot) {

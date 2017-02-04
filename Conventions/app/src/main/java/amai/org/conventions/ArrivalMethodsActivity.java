@@ -3,10 +3,13 @@ package amai.org.conventions;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -16,9 +19,10 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import amai.org.conventions.model.Convention;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.notifications.PlayServicesInstallation;
+import fi.iki.kuitsi.listtest.ListTagHandler;
 
 public class ArrivalMethodsActivity extends NavigationActivity implements OnMapReadyCallback {
 
@@ -38,6 +42,10 @@ public class ArrivalMethodsActivity extends NavigationActivity implements OnMapR
 		mapFragment = findViewById(R.id.map);
 		noMapLayout = findViewById(R.id.no_map);
 		installPlayServicesButton = (Button) findViewById(R.id.install_play_services);
+
+		TextView arrivalMethodsDescription = (TextView) findViewById(R.id.arrival_methods_description);
+		arrivalMethodsDescription.setText(Html.fromHtml(getString(R.string.arrival_method_description), null, new ListTagHandler()));
+		arrivalMethodsDescription.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     @Override
@@ -55,7 +63,7 @@ public class ArrivalMethodsActivity extends NavigationActivity implements OnMapR
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-			case R.id.arrival_methods_navigate:
+			case R.id.arrival_methods_navigate: {
 				double latitude = Convention.getInstance().getLatitude();
 				double longitude = Convention.getInstance().getLongitude();
 				Intent intent = new Intent(Intent.ACTION_VIEW,
@@ -67,6 +75,23 @@ public class ArrivalMethodsActivity extends NavigationActivity implements OnMapR
 					Toast.makeText(this, getString(R.string.no_navigation_activity), Toast.LENGTH_LONG).show();
 				}
 				return true;
+			}
+			case R.id.arrival_methods_navigate_bus: {
+				double latitude = Convention.getInstance().getLatitude();
+				double longitude = Convention.getInstance().getLongitude();
+				Intent intent = new Intent(Intent.ACTION_VIEW,
+						Uri.parse("moovit://directions?dest_lat=" + latitude + "&dest_lon=" + longitude + "&partner_id=" + this.getPackageName()));
+				if (intent.resolveActivity(getPackageManager()) == null) {
+					intent = new Intent(Intent.ACTION_VIEW,
+							Uri.parse("https://web.moovitapp.com/tripplan?customerId=4480&metroId=1&tll=" + latitude + "_" + longitude));
+				}
+				if (intent.resolveActivity(getPackageManager()) != null) {
+					this.startActivity(intent);
+				} else {
+					Toast.makeText(this, getString(R.string.no_navigation_activity), Toast.LENGTH_LONG).show();
+				}
+				return true;
+			}
 		}
 
 		return super.onOptionsItemSelected(item);
@@ -140,11 +165,8 @@ public class ArrivalMethodsActivity extends NavigationActivity implements OnMapR
 	    LatLng conventionLocation = new LatLng(Convention.getInstance().getLatitude(), Convention.getInstance().getLongitude());
 
         mMap.addMarker(new MarkerOptions()
-                // TODO - return the custom marker after scaling it to a proper size.
-                //.icon(BitmapDescriptorFactory.fromResource(R.drawable.harucon_logo))
                 .position(conventionLocation)
-		        // Workaround for Hebrew not being displayed - add unicode RTL character before the string
-                .title("\u200e" + getResources().getString(R.string.arrival_methods_marker_name, Convention.getInstance().getDisplayName())));
+                .title(getResources().getString(R.string.arrival_methods_marker_name, Convention.getInstance().getDisplayName())));
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(conventionLocation, 16));
     }

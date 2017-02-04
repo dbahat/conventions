@@ -11,25 +11,25 @@ import java.util.Date;
 import amai.org.conventions.R;
 import amai.org.conventions.utils.Dates;
 
-public class EventTimeViewHolder extends RecyclerView.ViewHolder {
+public class TimeViewHolder extends RecyclerView.ViewHolder {
     private TextView timeTextView;
-    private int currentHour;
+    private Calendar date;
 
-    public EventTimeViewHolder(View itemView) {
+    public TimeViewHolder(View itemView, int timeTextViewResourceId) {
         super(itemView);
 
-        timeTextView = (TextView) itemView.findViewById(R.id.event_time_text_view);
+        timeTextView = (TextView) itemView.findViewById(timeTextViewResourceId);
     }
 
-    public void setTime(Date date) {
-        timeTextView.setText(new SimpleDateFormat("HH:SS", Dates.getLocale()).format(date));
+    public void setTime(Date date, String timeFormat) {
+        timeTextView.setText(new SimpleDateFormat(timeFormat, Dates.getLocale()).format(date));
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
-        currentHour = calendar.get(Calendar.HOUR_OF_DAY);
+        this.date = calendar;
     }
 
-    public int getCurrentHour() {
-        return currentHour;
+    public Calendar getTime() {
+        return date;
     }
 }
