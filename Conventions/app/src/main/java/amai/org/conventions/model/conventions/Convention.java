@@ -364,13 +364,12 @@ public abstract class Convention implements Serializable {
 	}
 
 	public boolean hasEnded() {
-		return false;
-//		Date lastEventEndTime = getLastEventEndTime();
-//		if (lastEventEndTime == null) {
-//			// Problem reading events
-//			return false;
-//		}
-//		return Dates.now().after(lastEventEndTime);
+		Date lastEventEndTime = getLastEventEndTime();
+		if (lastEventEndTime == null) {
+			// Problem reading events
+			return false;
+		}
+		return Dates.now().after(lastEventEndTime);
 	}
 
 	private Date getLastEventEndTime() {
