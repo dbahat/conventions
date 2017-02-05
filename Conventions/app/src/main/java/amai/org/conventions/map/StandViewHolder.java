@@ -48,7 +48,7 @@ public class StandViewHolder extends RecyclerView.ViewHolder {
 			}
 			image.mutate().setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
 		}
-		// TODO this should be setCompoundDrawablesRelative(image, null, null, null) but in API 17 and 18 it appears on the wrong side.
+		// this should be setCompoundDrawablesRelative(image, null, null, null) but in API 17 and 18 it appears on the wrong side.
 		// After recycling it works. I tried calling setCompoundRelative twice (with same parameters and with nulls), calling setCompoundDrawables with nulls
 		// and to change the order of method calls on standName but it didn't work.
 		standName.setCompoundDrawables(null, null, image, null);
