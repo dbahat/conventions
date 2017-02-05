@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <color name="harucon2017_orange">#d95826</color>
+    <color name="harucon2017_red">#b73432</color>
+    <color name="harucon2017_turquoise">#649f9f</color>
+    <color name="harucon2017_grayish">#b6c6c4</color>
+    <color name="harucon2017_dark_blue">#13171e</color>
+    <color name="harucon2017_blue">#19333c</color>
+
+    <!-- TODO: translate all the below colors to use the new palate -->
     <color name="light_orange_bright">#fffdf7</color>
     <color name="light_orange">#fff5df</color>
     <color name="light_orange_dark">#ffe2a1</color>
 
     <color name="gold_bright">#ffdf98</color>
     <color name="gold">#ffca58</color>
-    <color name="gold_dark">#d09921</color>
 
     <!-- button text - white -->
     <color name="red_bright">#ff7f8f</color>

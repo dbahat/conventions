@@ -3,12 +3,12 @@ package amai.org.conventions.notifications;
 import amai.org.conventions.R;
 
 public enum PushNotificationTopic {
-	TOPIC_GENERAL("cami2016_general", R.string.push_notification_title),
-	TOPIC_EVENTS("cami2016_events", R.string.show_event_notifications_title),
-	TOPIC_COSPLAY("cami2016_cosplay", R.string.show_cosplay_notifications_title),
-	TOPIC_BUS("cami2016_bus", R.string.show_bus_notifications_title),
-	TOPIC_TEST("cami2016_test", R.string.show_test_notifications_title),
-	TOPIC_EMERGENCY("cami2016_emergency", R.string.push_notification_title);
+	TOPIC_GENERAL("harucon2017_general", R.string.push_notification_title),
+	TOPIC_EVENTS("harucon2017_events", R.string.show_event_notifications_title),
+	TOPIC_COSPLAY("harucon2017_cosplay", R.string.show_cosplay_notifications_title),
+	TOPIC_BUS("harucon2017_bus", R.string.show_bus_notifications_title),
+	TOPIC_TEST("harucon2017_test", R.string.show_test_notifications_title),
+	TOPIC_EMERGENCY("harucon2017_emergency", R.string.push_notification_title);
 
 	private final String topic;
 	private final int titleResource;

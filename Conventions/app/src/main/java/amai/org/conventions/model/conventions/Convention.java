@@ -42,7 +42,7 @@ import amai.org.conventions.utils.Objects;
 
 public abstract class Convention implements Serializable {
 
-	private static Convention convention = new Cami2016Convention();
+	private static Convention convention = new Harucon2017Convention();
 
 	// Currently supporting conventions of up to 5 days (UI restriction, since the programme is set
 	// to fit up to 5 days in it's tab bar).

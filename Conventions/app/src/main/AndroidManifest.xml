@@ -34,7 +34,7 @@
     <application
         android:name=".ConventionsApplication"
         android:allowBackup="false"
-        android:icon="@mipmap/cami2016_app_icon"
+        android:icon="@mipmap/harucon2017_app_icon"
         android:installLocation="auto"
         android:label="@string/app_name"
         android:supportsRtl="true"
