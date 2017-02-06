@@ -2,13 +2,15 @@ package amai.org.conventions.model;
 
 import java.io.Serializable;
 
+import amai.org.conventions.networking.AmaiModelParser;
+
 public class EventType implements Serializable {
 
 	private int backgroundColor;
 	private String description;
 
 	public EventType(String description) {
-		this(0, description);
+		this(AmaiModelParser.NO_COLOR, description);
 	}
 
 	public EventType(int backgroundColor, String description) {
@@ -18,6 +20,10 @@ public class EventType implements Serializable {
 
 	public int getBackgroundColor() {
 		return backgroundColor;
+	}
+
+	public boolean hasBackgroundColor() {
+		return backgroundColor != AmaiModelParser.NO_COLOR;
 	}
 
 	public String getDescription() {

@@ -33,6 +33,8 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 
 	private static final String STATE_KEYWORDS_FILTER = "KeywordsFilter";
 	private static final String STATE_EVENT_TYPES_FILTER = "EventTypesFilter";
+	public static final int NO_DELAY = 0;
+	public static final int CHECKBOX_ANIMATION_TIME = 200;
 
 	private LinkedList<EventType> eventTypeFilter;
 	private String keywordsFilter;
@@ -65,7 +67,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 		initializeKeywordFilter();
 		initializeSearchCategories();
 
-		applyFiltersInBackground();
+		applyFiltersInBackground(NO_DELAY);
 
 		Views.hideKeyboardOnClickOutsideEditText(this, rootView);
 	}
@@ -110,14 +112,8 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 		searchCategoriesLayout.post(new Runnable() {
 			@Override
 			public void run() {
-				List<String> searchCategories = CollectionUtils.map(Convention.getInstance().getEventTypes(), new CollectionUtils.Mapper<EventType, String>() {
-					@Override
-					public String map(EventType item) {
-						return item.getDescription();
-					}
-				});
-				searchCategoriesLayout.setMaxDisplayedCategories(10);
-				searchCategoriesLayout.setSearchCategories(searchCategories);
+				searchCategoriesLayout.setMaxDisplayedCategories(5);
+				searchCategoriesLayout.setSearchCategories(Convention.getInstance().getEventTypes());
 				searchCategoriesLayout.setOnFilterSelectedListener(new SearchCategoriesLayout.OnFilterSelectedListener() {
 					@Override
 					public void onFilterSelected(List<String> selectedSearchCategories) {
@@ -127,8 +123,9 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 								return new EventType(item);
 							}
 						}));
-
-						applyFiltersInBackground();
+						// We must delay the UI update here because if adapter.setItems runs during the checkbox
+						// toggle animation it makes it not smooth, so we need to ensure it runs after it ends
+						applyFiltersInBackground(CHECKBOX_ANIMATION_TIME);
 					}
 				});
 
@@ -156,7 +153,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 			@Override
 			public void afterTextChanged(Editable s) {
 				keywordsFilter = s.toString();
-				applyFiltersInBackground();
+				applyFiltersInBackground(NO_DELAY);
 			}
 		});
 
@@ -165,7 +162,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 		}
 	}
 
-	private void applyFiltersInBackground() {
+	private void applyFiltersInBackground(final long uiUpdateDelayTime) {
 		final String keywordsFilter = this.keywordsFilter;
 		final LinkedList<EventType> eventTypeFilter = this.eventTypeFilter;
 
@@ -183,9 +180,14 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 			}
 
 			@Override
-			protected void onPostExecute(List<ConventionEvent> events) {
-				adapter.setItems(events);
-				setNoResultsVisibility(adapter.getCount());
+			protected void onPostExecute(final List<ConventionEvent> events) {
+				listView.postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						adapter.setItems(events);
+						setNoResultsVisibility(adapter.getCount());
+					}
+				}, uiUpdateDelayTime);
 			}
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
