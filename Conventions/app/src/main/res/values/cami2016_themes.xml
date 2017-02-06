@@ -12,8 +12,7 @@
         <item name="notificationLargeIcon">@drawable/cami2016_notification_large</item>
 
         <item name="toolbarBackground">@color/purple_bright</item>
-        <item name="toolbarLogo">@drawable/cami2016_logo_toolbar</item>
-        <item name="toolbarLogoType">bitmap</item>
+        <item name="toolbarLogo">@drawable/ic_menu_black_24dp</item>
         <item name="toolbarIconAccentColor">@color/gold</item>
         <item name="navigationPopupSelectedColor">@color/red_dark</item>
 

@@ -12,10 +12,6 @@
         <!-- Toolbar -->
         <attr name="toolbarBackground" format="color|reference"/>
         <attr name="toolbarLogo" format="integer|reference"/>
-        <attr name="toolbarLogoType" format="enum">
-            <enum name="bitmap" value="0"/>
-            <enum name="svg" value="1"/>
-        </attr>
         <attr name="toolbarIconAccentColor" format="color|reference"/>
         <!-- Snackbar -->
         <attr name="snackbarActionColor" format="color|reference"/>
