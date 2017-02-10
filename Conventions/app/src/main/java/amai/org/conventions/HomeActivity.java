@@ -23,10 +23,6 @@ import amai.org.conventions.notifications.PushNotificationDialogPresenter;
 import amai.org.conventions.utils.Dates;
 
 public class HomeActivity extends AppCompatActivity {
-	public final static String EXTRA_PUSH_NOTIFICATION_MESSAGE = "EXTRA_PUSH_NOTIFICATION_MESSAGE";
-	public final static String EXTRA_PUSH_NOTIFICATION_CATEGORY = "EXTRA_PUSH_NOTIFICATION_CATEGORY";
-	public static final String EXTRA_PUSH_NOTIFICATION_ID = "EXTRA_PUSH_NOTIFICATION_ID";
-
 	private static int numberOfTimesNavigated = 0;
 	private NavigationPages navigationPages;
 	private ViewGroup mainLayout;
