@@ -19,11 +19,13 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 public class SwipeableEventsViewListAdapter extends BaseAdapter implements StickyListHeadersAdapter {
 
 	private List<ConventionEvent> events;
+	private final boolean showHeaders;
 	private List<String> keywordsToHighlight;
 	private OnEventFavoriteChangedListener listener;
 
-	public SwipeableEventsViewListAdapter(List<ConventionEvent> events, View listView) {
+	public SwipeableEventsViewListAdapter(List<ConventionEvent> events, View listView, boolean showHeaders) {
 		this.events = events;
+		this.showHeaders = showHeaders;
 		this.listener = new DefaultEventFavoriteChangedListener(listView);
 	}
 
@@ -92,6 +94,15 @@ public class SwipeableEventsViewListAdapter extends BaseAdapter implements Stick
 
 		ConventionEvent event = events.get(position);
 		holder.setTime(event.getStartTime(), "EEE (dd.MM)");
+		// Hide the header view if we don't want to show headers.
+		// This is the only possible way to do this except using a different list view which is not sticky.
+		// Setting the view visibility to GONE or giving it height = 0 doesn't work, and returning a null view
+		// throws NPE.
+		if (!showHeaders) {
+			convertView.setVisibility(View.INVISIBLE);
+			convertView.getLayoutParams().height = 1;
+			convertView.setLayoutParams(convertView.getLayoutParams());
+		}
 		return convertView;
 	}
 

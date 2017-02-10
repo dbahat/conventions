@@ -211,7 +211,7 @@ public class FeedbackActivity extends NavigationActivity {
 			if (update && eventsWithSentFeedbackList.getAdapter() != null) {
 				((EventsViewWithDateHeaderAdapter) eventsWithSentFeedbackList.getAdapter()).setEventsList(eventsWithSentFeedback);
 			} else {
-				eventsWithSentFeedbackList.setAdapter(new EventsViewWithDateHeaderAdapter(eventsWithSentFeedback));
+				eventsWithSentFeedbackList.setAdapter(new EventsViewWithDateHeaderAdapter(eventsWithSentFeedback, shouldShowEventHeaders()));
 			}
 		}
 	}
@@ -236,7 +236,7 @@ public class FeedbackActivity extends NavigationActivity {
 			if (update && eventsWithoutFeedbackList.getAdapter() != null) {
 				((EventsViewWithDateHeaderAdapter) eventsWithoutFeedbackList.getAdapter()).setEventsList(eventsWithoutFeedback);
 			} else {
-				eventsWithoutFeedbackList.setAdapter(new EventsViewWithDateHeaderAdapter(eventsWithoutFeedback));
+				eventsWithoutFeedbackList.setAdapter(new EventsViewWithDateHeaderAdapter(eventsWithoutFeedback, shouldShowEventHeaders()));
 			}
 
 			if (Convention.getInstance().isFeedbackSendingTimeOver()) {
@@ -259,6 +259,11 @@ public class FeedbackActivity extends NavigationActivity {
 				}
 			}
 		}
+	}
+
+	private boolean shouldShowEventHeaders() {
+		// Only show headers for conventions lasting more than 1 day
+		return Convention.getInstance().getLengthInDays() > 1;
 	}
 
 	private void setupEventLists(boolean update) {

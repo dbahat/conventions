@@ -14,16 +14,17 @@ import amai.org.conventions.R;
 import amai.org.conventions.events.holders.EventViewHolder;
 import amai.org.conventions.events.holders.TimeViewHolder;
 import amai.org.conventions.model.ConventionEvent;
-import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Dates;
 
 public class EventsViewWithDateHeaderAdapter extends BaseAdapter {
 	private static final int ITEM_TYPE_EVENT = 0;
 	private static final int ITEM_TYPE_DATE = 1;
+	private final boolean showHeaders;
 
 	private List<Object> eventsAndDates;
 
-	public EventsViewWithDateHeaderAdapter(List<ConventionEvent> eventsList) {
+	public EventsViewWithDateHeaderAdapter(List<ConventionEvent> eventsList, boolean showHeaders) {
+		this.showHeaders = showHeaders;
 		eventsAndDates = calculateItems(eventsList);
 	}
 
@@ -88,7 +89,7 @@ public class EventsViewWithDateHeaderAdapter extends BaseAdapter {
 
 	private List<Object> calculateItems(List<ConventionEvent> eventList) {
 		// For single day conventions no need to insert dates into the list.
-		if (Convention.getInstance().getLengthInDays() == 1) {
+		if (!showHeaders) {
 			return new ArrayList<Object>(eventList);
 		}
 

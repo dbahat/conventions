@@ -101,7 +101,8 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 	private void initializeEventsList() {
 		listView = (StickyListHeadersListView) findViewById(R.id.searchEventsList);
 
-		adapter = new SwipeableEventsViewListAdapter(Collections.<ConventionEvent>emptyList(), listView);
+		boolean showHeaders = Convention.getInstance().getLengthInDays() > 1;
+		adapter = new SwipeableEventsViewListAdapter(Collections.<ConventionEvent>emptyList(), listView, showHeaders);
 		listView.setAdapter(adapter);
 	}
 
