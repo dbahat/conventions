@@ -43,7 +43,6 @@
         <attr name="navigationPopupNotSelectedColor" format="color|reference"/>
         <!-- Programme Screen -->
         <attr name="eventTimeHeaderColor" format="color|reference"/>
-        <attr name="eventTimeHeaderBackground" format="color|reference"/>
         <!-- Updates Screen -->
         <attr name="updateTimeColor" format="color|reference"/>
         <attr name="updatesBackground" format="color|reference"/>

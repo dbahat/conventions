@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- The color in drawable must be the same as the theme's backgroundColor -->
-<inset xmlns:android="http://schemas.android.com/apk/res/android"
-    android:drawable="@color/light_orange_bright"
-    android:insetBottom="4dp">
-</inset>
