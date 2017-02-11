@@ -8,8 +8,8 @@
         <item name="colorAccent">@color/red_dark</item>
         <item name="android:colorBackground">@null</item>
 
-        <item name="notificationSmallIcon">@drawable/cami2016_notification_small</item>
-        <item name="notificationLargeIcon">@drawable/cami2016_notification_large</item>
+        <item name="notificationSmallIcon">@drawable/harucon2017_notification_small</item>
+        <item name="notificationLargeIcon">@mipmap/harucon2017_app_icon</item>
 
         <item name="toolbarBackground">@null</item>
         <item name="toolbarLogo">@drawable/ic_menu_black_24dp</item>
