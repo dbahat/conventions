@@ -40,11 +40,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppBaseTheme.Harucon2017.Toolbar"
         tools:replace="android:icon, android:allowBackup">
-        <activity
-            android:name=".HomeActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppBaseTheme.Harucon2017.Toolbar.Splash">
+        <activity android:name="amai.org.conventions.SplashActivity" android:theme="@style/AppBaseTheme.Harucon2017.Toolbar.Splash"
+                  android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -66,6 +63,7 @@
         <activity android:name=".updates.UpdatesActivity"></activity>
         <activity android:name=".settings.SettingsActivity"></activity>
         <activity android:name=".AboutActivity"></activity>
+        <activity android:name=".HomeActivity"/>
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"

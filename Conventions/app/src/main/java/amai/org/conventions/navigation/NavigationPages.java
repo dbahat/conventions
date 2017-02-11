@@ -12,6 +12,7 @@ import java.util.List;
 import amai.org.conventions.AboutActivity;
 import amai.org.conventions.ArrivalMethodsActivity;
 import amai.org.conventions.FeedbackActivity;
+import amai.org.conventions.HomeActivity;
 import amai.org.conventions.R;
 import amai.org.conventions.events.activities.ProgrammeActivity;
 import amai.org.conventions.map.MapActivity;
@@ -65,6 +66,7 @@ public class NavigationPages {
 
 	private LinkedHashMap<Integer, Class<? extends Activity>> createPageIdToActivityTypeMap() {
 		LinkedHashMap<Integer, Class<? extends Activity>> pageIdToFragmentMapInOrder = new LinkedHashMap<>();
+		pageIdToFragmentMapInOrder.put(R.string.home, HomeActivity.class);
 		pageIdToFragmentMapInOrder.put(R.string.map, MapActivity.class);
 		pageIdToFragmentMapInOrder.put(R.string.events, ProgrammeActivity.class);
 		pageIdToFragmentMapInOrder.put(R.string.updates, UpdatesActivity.class);

@@ -19,12 +19,6 @@
         <attr name="shadowForeground" format="integer|reference"/>
         <!-- Snackbar -->
         <attr name="snackbarActionColor" format="color|reference"/>
-        <!-- Home Screen -->
-        <attr name="homeScreenLayout" format="integer"/>
-        <attr name="aboutTopView" format="integer"/>
-        <attr name="aboutBottomView" format="integer"/>
-        <attr name="aboutLeftView" format="integer"/>
-        <attr name="aboutRightView" format="integer"/>
         <!-- About screen -->
         <attr name="aboutLogo" format="integer"/>
         <!-- Event Time -->

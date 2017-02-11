@@ -9,6 +9,7 @@
     tools:context="amai.org.conventions.navigation.NavigationActivity">
 
     <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/toolbarAndContentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?activitiesBackground">

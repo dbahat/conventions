@@ -18,13 +18,6 @@
 
         <item name="snackbarActionColor">@color/red_bright</item>
 
-        <item name="homeScreenLayout">@layout/activity_home_cami2016</item>
-        <!-- Note: this isn't really the top point of the about screen since we didn't give a bottom
-             view so it will be wrap_content -->
-        <item name="aboutTopView">@id/home_buttons_bottom</item>
-        <item name="aboutLeftView">@id/home_buttons_bottom</item>
-        <item name="aboutRightView">@id/home_buttons_bottom</item>
-
         <item name="aboutLogo">@drawable/amai_logo_black</item>
 
         <item name="eventTimeDefaultTextColor">@color/black</item>
@@ -68,7 +61,7 @@
     </style>
 
     <style name="AppBaseTheme.Harucon2017.Toolbar.Splash">
-        <item name="android:windowBackground">@drawable/splash_background</item>
+        <item name="android:windowBackground">@drawable/harucon2017_page_background</item>
     </style>
 
 </resources>

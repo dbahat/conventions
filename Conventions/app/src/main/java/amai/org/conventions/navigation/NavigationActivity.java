@@ -2,6 +2,7 @@ package amai.org.conventions.navigation;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -22,28 +23,30 @@ import java.util.Arrays;
 import java.util.List;
 
 import amai.org.conventions.AboutActivity;
+import amai.org.conventions.ApplicationInitializer;
 import amai.org.conventions.ArrivalMethodsActivity;
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.FeedbackActivity;
 import amai.org.conventions.HomeActivity;
 import amai.org.conventions.R;
+import amai.org.conventions.SplashActivity;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.activities.EventActivity;
 import amai.org.conventions.events.activities.MyEventsActivity;
 import amai.org.conventions.events.activities.ProgrammeActivity;
 import amai.org.conventions.map.MapActivity;
 import amai.org.conventions.model.conventions.Convention;
+import amai.org.conventions.notifications.PushNotificationDialogPresenter;
 import amai.org.conventions.settings.SettingsActivity;
 import amai.org.conventions.updates.UpdatesActivity;
 
 
 public abstract class NavigationActivity extends AppCompatActivity {
-	public static final String EXTRA_NAVIGATED_FROM_HOME = "ExtraNavigatedFromHome";
-	private static final String EXTRA_SHOW_HOME_SCREEN_ON_BACK = "ExtraShowHomeScreenOnBack";
+	public static final String EXTRA_INITIALIZE = "ExtraInitialize";
+	public static final String EXTRA_EXIT_ON_BACK = "ExtraExitOnBack";
 
-	private boolean navigatedFromHome;
 	private Toolbar navigationToolbar;
-	private boolean showHomeScreenOnBack;
+	private boolean exitOnBack;
 	private FrameLayout contentContainer;
 	private FloatingActionButton actionButton;
 	private DrawerLayout navigationDrawer;
@@ -53,8 +56,12 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_navigation);
 
-		navigatedFromHome = getIntent().getBooleanExtra(EXTRA_NAVIGATED_FROM_HOME, false);
-		showHomeScreenOnBack = getIntent().getBooleanExtra(EXTRA_SHOW_HOME_SCREEN_ON_BACK, false);
+		exitOnBack = getIntent().getBooleanExtra(EXTRA_EXIT_ON_BACK, false);
+
+		if (getIntent().getBooleanExtra(EXTRA_INITIALIZE, false) &&
+				!(savedInstanceState != null && savedInstanceState.getBoolean(EXTRA_INITIALIZE, true))) {
+			new ApplicationInitializer().initialize(this.getApplicationContext());
+		}
 
 		navigationToolbar = (Toolbar) findViewById(R.id.navigation_toolbar);
 		navigationDrawer = (DrawerLayout) findViewById(R.id.navigation_drawer);
@@ -72,12 +79,19 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		});
 
 		initializeNavigationDrawer(); // In case it was already open
+
+		new PushNotificationDialogPresenter().present(this, getIntent());
 	}
 
 	private void openNavigationDrawer(boolean animate) {
 		initializeNavigationDrawer();
 		navigationDrawer.openDrawer(GravityCompat.START, animate);
-		ConventionsApplication.settings.setNavigationPopupOpened();
+	}
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		outState.putBoolean(EXTRA_INITIALIZE, false); // Prevent re-initializing
+		super.onSaveInstanceState(outState);
 	}
 
 	protected void onNavigationButtonClicked() {
@@ -86,6 +100,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 
 	private void initializeNavigationDrawer() {
 		final List<NavigationItem> items = new ArrayList<>(Arrays.asList(
+				new NavigationItem(HomeActivity.class, getString(R.string.home), ContextCompat.getDrawable(this, R.drawable.events_list)),
 				new NavigationItem(ProgrammeActivity.class, getString(R.string.programme_title), ContextCompat.getDrawable(this, R.drawable.events_list)),
 				new NavigationItem(MyEventsActivity.class, getString(R.string.my_events_title), ContextCompat.getDrawable(this, R.drawable.events_list_with_star))
 		));
@@ -143,6 +158,11 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		}
 
 		return contentContainer;
+	}
+
+	protected void setToolbarAndContentContainerBackground(Drawable drawable) {
+		View toolbarAndContentContainer = findViewById(R.id.toolbarAndContentContainer);
+		toolbarAndContentContainer.setBackground(drawable);
 	}
 
 	protected void setBackgroundColor(int color) {
@@ -221,11 +241,13 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		Intent intent = new Intent(this, activityToNavigateTo);
 		if (clearBackStack) {
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-			// If the user presses back when the back stack is clear we want to show the home screen
-			// instead of existing.
+			// If the user presses back when the back stack is clear we want to exit the application.
+			// For some reason the splash activity remains on the back stack even with these flags
+			// (it's probably a good thing due to the issue described in SplashActivity)
+			// so we must explicitly handle the back in this case.
 			// This flag only has a meaning if we're navigating to a NavigationActivity.
 			if (NavigationActivity.class.isAssignableFrom(activityToNavigateTo)) {
-				intent.putExtra(EXTRA_SHOW_HOME_SCREEN_ON_BACK, true);
+				intent.putExtra(EXTRA_EXIT_ON_BACK, true);
 			}
 			finish();
 		}
@@ -251,8 +273,17 @@ public abstract class NavigationActivity extends AppCompatActivity {
 
 	@Override
 	public void onBackPressed() {
-		if (showHomeScreenOnBack) {
-			navigateToActivity(HomeActivity.class, true, null);
+		if (exitOnBack) {
+			// We want to exist when pressing back because the SplashActivity is still in the back stack
+			// and will be displayed if we don't tell it to finish. See SplashActivity onCreate for the
+			// reason it's in the back stack instead of being finished.
+			Bundle bundle = new Bundle();
+			bundle.putBoolean(SplashActivity.EXTRA_FINISH, true);
+			Intent intent = new Intent(this, SplashActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+			finish();
+			intent.putExtras(bundle);
+			startActivity(intent);
 			return;
 		}
 		super.onBackPressed();
