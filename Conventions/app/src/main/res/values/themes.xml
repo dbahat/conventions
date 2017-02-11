@@ -34,6 +34,9 @@
         <!-- This color should match eventDetailsBoxColor in a way that eventDetailsBoxColor is not visible
              on top of this color -->
         <item name="eventDetailsDefaultBackgroundColor">@color/white</item>
+
+        <item name="shadowForeground">@drawable/bottom_shadow</item>
+        <item name="activitiesBackground">@null</item>
     </style>
 
     <style name="FullScreenDialog" parent="android:Theme.Dialog">

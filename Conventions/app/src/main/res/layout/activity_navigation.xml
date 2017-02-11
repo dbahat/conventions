@@ -10,7 +10,8 @@
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="?activitiesBackground">
 
         <!-- Removing elevation so we can show the tab layout in the same elevation and still be backwards compatible.
              Instead of elevation we add a shadow in the content container foreground. -->
@@ -43,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:foreground="@drawable/bottom_shadow"/>
+            android:foreground="?attr/shadowForeground"/>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/action_button"

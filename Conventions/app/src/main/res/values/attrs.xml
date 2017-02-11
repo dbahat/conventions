@@ -6,6 +6,8 @@
     </declare-styleable>
 
     <declare-styleable name="ApplicationTheme">
+        <!-- Activities -->
+        <attr name="activitiesBackground" format="color|reference"/>
         <!-- Notifications -->
         <attr name="notificationSmallIcon" format="integer"/>
         <attr name="notificationLargeIcon" format="integer"/>
@@ -13,6 +15,8 @@
         <attr name="toolbarBackground" format="color|reference"/>
         <attr name="toolbarLogo" format="integer|reference"/>
         <attr name="toolbarIconAccentColor" format="color|reference"/>
+        <!-- Days Tab Layout -->
+        <attr name="shadowForeground" format="integer|reference"/>
         <!-- Snackbar -->
         <attr name="snackbarActionColor" format="color|reference"/>
         <!-- Home Screen -->

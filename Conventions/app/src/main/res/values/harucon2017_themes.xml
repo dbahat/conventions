@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppBaseTheme.Cami2016.Toolbar"/>
+    <style name="AppBaseTheme.Harucon2017.Toolbar" parent="AppBaseTheme.Harucon2017"/>
 
-    <style name="AppBaseTheme.Cami2016">
+    <style name="AppBaseTheme.Harucon2017">
         <item name="android:dialogTheme">@style/AppDialogTheme.Cami2016</item>
         <item name="alertDialogTheme">@style/AppAlertDialogTheme.Cami2016</item>
         <item name="colorAccent">@color/red_dark</item>
-        <item name="android:colorBackground">@color/light_orange_bright</item>
+        <item name="android:colorBackground">@null</item>
 
         <item name="notificationSmallIcon">@drawable/cami2016_notification_small</item>
         <item name="notificationLargeIcon">@drawable/cami2016_notification_large</item>
 
-        <item name="toolbarBackground">@color/purple_bright</item>
+        <item name="toolbarBackground">@null</item>
         <item name="toolbarLogo">@drawable/ic_menu_black_24dp</item>
         <item name="toolbarIconAccentColor">@color/gold</item>
         <item name="navigationPopupSelectedColor">@color/red_dark</item>
@@ -30,6 +30,12 @@
         <item name="eventTimeDefaultTextColor">@color/black</item>
         <item name="eventTimeDefaultBackgroundColor">@color/light_pink</item>
 
+        <item name="eventTimeHeaderColor">@android:color/transparent</item>
+
+        <item name="eventTypeEndedColor">@null</item>
+        <item name="eventTypeCurrentColor">@null</item>
+        <item name="eventTypeNotStartedColor">@null</item>
+
         <item name="floorBackground">@color/very_light_yellow</item>
         <item name="standIconColor">@color/purple_bright</item>
         <item name="standsTypeTitleColor">@color/red_dark</item>
@@ -46,6 +52,9 @@
         <item name="buttonColorPressed">@color/red</item>
         <item name="feedbackAnswerButtonColor">@color/red_dark</item>
         <item name="feedbackAnswerButtonSelectedColor">@color/red</item>
+
+        <item name="shadowForeground">@null</item>
+        <item name="activitiesBackground">@drawable/harucon2017_page_background</item>
     </style>
 
     <style name="AppDialogTheme.Cami2016" parent="Theme.AppCompat.Light.Dialog">
@@ -58,7 +67,7 @@
         <item name="colorAccent">@color/red_dark</item>
     </style>
 
-    <style name="AppBaseTheme.Cami2016.Toolbar.Splash">
+    <style name="AppBaseTheme.Harucon2017.Toolbar.Splash">
         <item name="android:windowBackground">@drawable/splash_background</item>
     </style>
 
