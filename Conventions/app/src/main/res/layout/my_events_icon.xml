@@ -12,9 +12,8 @@
     android:paddingRight="8dip"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- ImageView size copied from ActionMenuItemView (constant MAX_ICON_SIZE) -->
     <amai.org.conventions.customviews.AspectRatioImageView
-        android:layout_width="32dp"
+        android:layout_width="@dimen/action_bar_item_width"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:id="@+id/non_animated_icon"

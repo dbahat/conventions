@@ -34,7 +34,26 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="?toolbarBackground"
                 app:layout_scrollFlags="scroll|enterAlways"
-                app:contentInsetStart="0dp"/>
+                app:contentInsetStart="0dp">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <!-- Using a custom textView for the toolbar title for better customization (allow centering the title, allow showing an image
+                     instead of text) -->
+                    <TextView
+                        android:id="@+id/navigation_toolbar_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        tools:text="title"
+                        android:textColor="@color/black"
+                        android:textSize="20dp"
+                        tools:ignore="SpUsage" /> <!-- using DP since larger toolbar title may overlap with toolbar action items -->
+
+                </FrameLayout>
+            </android.support.v7.widget.Toolbar>
 
         </android.support.design.widget.AppBarLayout>
 

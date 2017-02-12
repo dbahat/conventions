@@ -253,7 +253,7 @@ public class EventActivity extends NavigationActivity {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onCreateCustomOptionsMenu(Menu menu) {
 		this.menu = menu;
 		getMenuInflater().inflate(R.menu.menu_event, menu);
 

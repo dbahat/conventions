@@ -113,8 +113,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		super.onCreateOptionsMenu(menu);
+	public boolean onCreateCustomOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.menu_map, menu);
 		this.menu = menu;
 		updateZoomMenuItem();

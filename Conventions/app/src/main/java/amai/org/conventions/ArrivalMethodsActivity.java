@@ -55,7 +55,7 @@ public class ArrivalMethodsActivity extends NavigationActivity implements OnMapR
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onCreateCustomOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.arrival_methods_menu, menu);
 		return true;
 	}

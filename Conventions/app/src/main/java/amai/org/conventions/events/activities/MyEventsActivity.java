@@ -136,7 +136,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onCreateCustomOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.my_events_menu, menu);
 		return true;
 	}

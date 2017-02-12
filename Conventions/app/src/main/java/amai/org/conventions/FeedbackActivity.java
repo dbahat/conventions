@@ -315,7 +315,7 @@ public class FeedbackActivity extends NavigationActivity {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onCreateCustomOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.menu_feedback, menu);
 		return true;
 	}

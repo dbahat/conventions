@@ -73,7 +73,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onCreateCustomOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.menu_programme_search, menu);
 
 		return true;

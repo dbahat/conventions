@@ -12,9 +12,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.android.gms.analytics.HitBuilders;
 
@@ -45,6 +47,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	public static final String EXTRA_INITIALIZE = "ExtraInitialize";
 	public static final String EXTRA_EXIT_ON_BACK = "ExtraExitOnBack";
 
+	private TextView navigationToolbarTitle;
 	private Toolbar navigationToolbar;
 	private boolean exitOnBack;
 	private FrameLayout contentContainer;
@@ -64,6 +67,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		}
 
 		navigationToolbar = (Toolbar) findViewById(R.id.navigation_toolbar);
+		navigationToolbarTitle = (TextView) findViewById(R.id.navigation_toolbar_title);
 		navigationDrawer = (DrawerLayout) findViewById(R.id.navigation_drawer);
 		setupActionBar(navigationToolbar);
 		navigationToolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -92,6 +96,38 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	protected void onSaveInstanceState(Bundle outState) {
 		outState.putBoolean(EXTRA_INITIALIZE, false); // Prevent re-initializing
 		super.onSaveInstanceState(outState);
+	}
+
+	// Overriding onCreateOptionsMenu so we can tell when extending classes completed inflating the options menu.
+	// In order for extending classes to create an options menu, override onCreateCustomOptionsMenu();
+	// Needed so we can take actions based on the number of actions the activity defined (e.g. adjust the toolbar title margin to be centered).
+	@Override
+	public final boolean onCreateOptionsMenu(Menu menu) {
+		boolean onCreateCustomOptionsMenuResult = onCreateCustomOptionsMenu(menu);
+
+		// Since we use a custom toolbar title centered between the action items, it's position is expected to shift based on the number
+		// of action items to it's start / end:
+		// On the title's start, we'll always have the navigation action.
+		// On the title's end, we'll have a changing amount of action items.
+		//
+		// If the number of items to the title's start/end isn't symmetrical, the title won't appear centered, so we need to add margin to it's
+		// start to "balance" the space taken by the action items.
+		// For example:
+		// If the menu has no items, it means we need to add a margin to the title's end by 1 action item size
+		// If the menu has 2 items, it means we need to add a margin to the title's start by 2 action time size
+		int numberOfActionItemsToShiftTitleStartMargin = menu.size() - 1;
+		int startMarginToAdd = getResources().getDimensionPixelSize(R.dimen.action_bar_item_width) * numberOfActionItemsToShiftTitleStartMargin;
+
+		FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams)navigationToolbarTitle.getLayoutParams();
+		layoutParams.setMarginStart(startMarginToAdd);
+		navigationToolbarTitle.setLayoutParams(layoutParams);
+
+		return onCreateCustomOptionsMenuResult;
+	}
+
+	// Alternative callback for creating the options menu for derived classes to implement.
+	protected boolean onCreateCustomOptionsMenu(Menu menu) {
+		return super.onCreateOptionsMenu(menu);
 	}
 
 	protected void onNavigationButtonClicked() {
@@ -222,7 +258,11 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	}
 
 	protected void setToolbarTitle(String titleText) {
-		getSupportActionBar().setTitle(titleText);
+		navigationToolbarTitle.setText(titleText);
+	}
+
+	protected void setToolbarTitle(Drawable drawable) {
+		navigationToolbarTitle.setBackground(drawable);
 	}
 
 	protected void navigateToActivity(Class<? extends Activity> activityToNavigateTo) {

@@ -11,5 +11,6 @@ public class HomeActivity extends NavigationActivity {
 		setContentInContentContainer(R.layout.activity_home, false, false);
 
 		setToolbarAndContentContainerBackground(getResources().getDrawable(R.drawable.harucon2017_home_background));
+		setToolbarTitle(getResources().getDrawable(R.drawable.harucon_2017_title_black));
 	}
 }

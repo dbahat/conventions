@@ -111,7 +111,7 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onCreateCustomOptionsMenu(Menu menu) {
 		this.menu = menu;
 		getMenuInflater().inflate(R.menu.programme_menu, menu);
 
