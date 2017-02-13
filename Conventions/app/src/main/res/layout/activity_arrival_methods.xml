@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     tools:context="amai.org.conventions.ArrivalMethodsActivity"
-    android:background="@color/white"> <!-- over-drawing here since the google map starts transparent,
+    > <!-- over-drawing here since the google map starts transparent,
     and becomes solid. After it's solid we remove the background here to reduce overdraw. -->
     <FrameLayout
         android:layout_width="match_parent"
@@ -54,8 +54,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/white">
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
