@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:background="@color/harucon2017_dark_blue">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/harucon_2017_title_white"
+            tools:ignore="ContentDescription" />
+
+        <amai.org.conventions.customviews.NestedListView
+            android:id="@+id/navigation_items"
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            android:animateLayoutChanges="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <amai.org.conventions.customviews.AspectRatioImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
+            android:src="@drawable/harucon2017_navigation_drawer_image"/>
+
+    </LinearLayout>
+
+</ScrollView>

@@ -14,7 +14,7 @@
         <item name="toolbarBackground">@null</item>
         <item name="toolbarLogo">@drawable/ic_menu_black_24dp</item>
         <item name="toolbarIconAccentColor">@color/gold</item>
-        <item name="navigationPopupSelectedColor">@color/red_dark</item>
+        <item name="navigationPopupSelectedColor">@color/harucon2017_turquoise</item>
 
         <item name="snackbarActionColor">@color/red_bright</item>
 
@@ -48,6 +48,8 @@
 
         <item name="shadowForeground">@null</item>
         <item name="activitiesBackground">@drawable/harucon2017_page_background</item>
+
+        <item name="navigationPopupNotSelectedColor">@android:color/white</item>
     </style>
 
     <style name="AppDialogTheme.Cami2016" parent="Theme.AppCompat.Light.Dialog">
