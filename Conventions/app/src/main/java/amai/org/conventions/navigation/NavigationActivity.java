@@ -2,6 +2,7 @@ package amai.org.conventions.navigation;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -121,6 +122,11 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams)navigationToolbarTitle.getLayoutParams();
 		layoutParams.setMarginStart(startMarginToAdd);
 		navigationToolbarTitle.setLayoutParams(layoutParams);
+
+		// Change the color of all menu items to fit the theme color. Done since the action bar doesn't seem to expose such a configurable attribute.
+		for (int i=0; i<menu.size(); i++) {
+			menu.getItem(i).getIcon().mutate().setColorFilter(ThemeAttributes.getColor(this, R.attr.toolbarIconColor), PorterDuff.Mode.MULTIPLY);
+		}
 
 		return onCreateCustomOptionsMenuResult;
 	}

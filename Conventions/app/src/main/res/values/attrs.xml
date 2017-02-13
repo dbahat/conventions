@@ -14,6 +14,7 @@
         <!-- Toolbar -->
         <attr name="toolbarBackground" format="color|reference"/>
         <attr name="toolbarLogo" format="integer|reference"/>
+        <attr name="toolbarIconColor" format="color|reference"/>
         <attr name="toolbarIconAccentColor" format="color|reference"/>
         <!-- Days Tab Layout -->
         <attr name="shadowForeground" format="integer|reference"/>

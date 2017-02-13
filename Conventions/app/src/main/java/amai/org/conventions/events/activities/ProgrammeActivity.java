@@ -190,7 +190,8 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 		switch (item.getItemId()) {
 			case R.id.programme_navigate_to_my_events:
 				navigateToMyEventsIconModified = false;
-				item.getIcon().clearColorFilter();
+				// Revert the icon color back to the default theme color
+				item.getIcon().setColorFilter(ThemeAttributes.getColor(this, R.attr.toolbarIconColor), PorterDuff.Mode.MULTIPLY);
 				navigateToActivity(MyEventsActivity.class);
 				return true;
 			case R.id.programme_navigate_to_feedback:
