@@ -26,8 +26,8 @@
         <se.emilsjolander.stickylistheaders.StickyListHeadersListView
             android:id="@+id/searchEventsList"
             app:isDrawingListUnderStickyHeader="false"
-            android:divider="@null"
-            android:dividerHeight="0dp"
+            android:divider="@drawable/event_list_divider"
+            android:dividerHeight="@dimen/event_divider_height"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 

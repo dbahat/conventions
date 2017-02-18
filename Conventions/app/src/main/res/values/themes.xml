@@ -12,9 +12,13 @@
         <item name="android:colorBackground">@color/white</item>
         <item name="stickyListHeadersListViewStyle">@style/Widget.AppCompat.ListView</item>
 
-        <item name="eventTypeEndedColor">@color/ultra_light_gray</item>
+        <item name="eventTypeEndedColor">@color/gray</item>
         <item name="eventTypeCurrentColor">@color/light_yellow</item>
         <item name="eventTypeNotStartedColor">@color/white</item>
+        <item name="eventNameKeywordHighlightColor">@color/black</item>
+        <item name="eventKeywordHighlightColor">@color/black</item>
+        <item name="eventDetailsColor">@color/dark_gray</item>
+        <item name="eventSendFeedbackColor">@color/green</item>
 
         <item name="nextEventStartTimeBottomLineColor">@android:color/black</item>
         <item name="conflictingEventsBackground">@color/dark_gray</item>

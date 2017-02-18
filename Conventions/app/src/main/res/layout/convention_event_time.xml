@@ -2,37 +2,38 @@
 <!-- Suppressing overdraw here because while there might be overdraw, it's not for the reason
      the inspection states. This isn't a root layout of any activity and the activity it's on
      needs the background color. -->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:padding="1dp"
-             tools:ignore="Overdraw">
+<LinearLayout
+     xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:orientation="vertical"
+     tools:ignore="Overdraw">
 
-    <android.support.v7.widget.CardView
-        app:cardUseCompatPadding="true"
-        app:cardElevation="2dp"
-        app:cardMaxElevation="2dp"
-        app:cardBackgroundColor="?eventTimeHeaderColor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <FrameLayout
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/flat_event_time_background"
+        android:layout_marginTop="10dp"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
 
-        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/event_time_text_view"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp">
-
-            <TextView
-                android:id="@+id/event_time_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                tools:text="14:00"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        </FrameLayout>
-
-    </android.support.v7.widget.CardView>
-
-</FrameLayout>
+            android:layout_gravity="center"
+            tools:text="14:00"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+    </FrameLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/event_list_divider"/>
+</LinearLayout>

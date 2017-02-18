@@ -1,153 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardUseCompatPadding="true"
-    app:cardElevation="2dp"
-    app:cardMaxElevation="2dp"
     android:id="@+id/eventContainer"
-    android:onClick="onConventionEventClicked">
+    android:onClick="onConventionEventClicked"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/event_height"
+    android:weightSum="1">
 
     <LinearLayout
-        android:id="@+id/parentLayout"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/event_height">
+        android:id="@+id/timeLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/timeLayout"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:id="@+id/startTime"
+            style="@style/EventViewSmallText"
+            tools:text="Start Time"/>
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:id="@+id/faveIcon"
-                android:src="@android:drawable/btn_star_big_on"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/EventViewExtraSmallText"
+            android:text="@string/dash"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/startTime"
-                style="@style/EventViewLargeText"
-                tools:text="Start Time"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/EventViewSmallText"
+            tools:text="End Time"
+            android:id="@+id/endTime"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/EventViewSmallText"
-                tools:text="End Time"
-                android:id="@+id/endTime"/>
+    </LinearLayout>
 
-        </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/eventDescription"
+        android:layout_marginStart="5dp"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="20dp"
+        android:padding="5dp">
+
 
         <LinearLayout
-            android:id="@+id/eventDescription"
+            android:id="@+id/bottom_layout"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="5dp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:gravity="bottom">
 
+            <!-- singleLine attribute is ued instead of maxLines because maxLines="1" cuts words
+                 in the space between them when ellipsis is used instead of showing all the characters
+                 there is room for -->
             <TextView
-                android:id="@+id/eventName"
+                android:id="@+id/hallName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Event Title"
-                android:gravity="start|top"
-                style="@style/EventViewLargeText"
-                android:textColor="@android:color/black"
-                android:maxLines="2"
-                android:ellipsize="end"/>
+                android:singleLine="true"
+                android:ellipsize="start"
+                style="@style/EventViewSmallText"
+                android:textColor="?eventDetailsColor"
+                tools:text="Hall name"
+                tools:ignore="Deprecated"/>
 
-            <FrameLayout
+            <LinearLayout
+                android:paddingStart="5dp"
+                android:paddingEnd="4dp"
+                android:orientation="horizontal"
+                android:layout_gravity="end|bottom"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
-                <LinearLayout
-                    android:id="@+id/bottom_layout"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="bottom">
-
-                    <!-- singleLine attribute is ued instead of maxLines because maxLines="1" cuts words
-                         in the space between them when ellipsis is used instead of showing all the characters
-                         there is room for -->
-                    <TextView
-                        android:id="@+id/hallName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:singleLine="true"
-                        android:ellipsize="start"
-                        style="@style/EventViewSmallText"
-                        android:textColor="@android:color/darker_gray"
-                        tools:text="Hall name"/>
-
-                    <LinearLayout
-                        android:paddingStart="2dp"
-                        android:paddingEnd="0dp"
-                        android:orientation="horizontal"
-                        android:layout_gravity="end|bottom"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <!-- singleLine attribute is ued instead of maxLines because maxLines="1" cuts words
-                             in the space between them when ellipsis is used instead of showing all the characters
-                             there is room for -->
-                        <TextView
-                            android:id="@+id/lecturerName"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:gravity="end"
-                            android:layout_height="wrap_content"
-                            tools:text="Lecturer name"
-                            android:singleLine="true"
-                            android:ellipsize="end"
-                            android:textColor="@android:color/darker_gray"
-                            style="@style/EventViewSmallText"/>
-
-                        <amai.org.conventions.customviews.AspectRatioImageView
-                            android:layout_marginStart="5dp"
-                            android:id="@+id/alarm_icon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="18dp"
-                            android:src="@drawable/ic_action_alarms"
-                            android:visibility="gone"
-                            />
-
-                        <amai.org.conventions.customviews.AspectRatioImageView
-                            android:layout_marginStart="5dp"
-                            android:id="@+id/feedback_icon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="18dp"
-                            android:src="@drawable/feedback"
-                            android:visibility="gone"
-                            />
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <!-- The below layout will replace the bottom layout at runtime if the user is
-                 performing a search in the event description -->
+                <!-- singleLine attribute is ued instead of maxLines because maxLines="1" cuts words
+                     in the space between them when ellipsis is used instead of showing all the characters
+                     there is room for -->
                 <TextView
-                    android:id="@+id/search_description"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:maxLines="1"
+                    android:id="@+id/lecturerName"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:layout_height="wrap_content"
+                    tools:text="Lecturer name"
+                    android:singleLine="true"
                     android:ellipsize="end"
-                    android:gravity="bottom"
-                    android:textColor="@android:color/darker_gray"
-                    android:visibility="gone"
-                    style="@style/EventViewSmallText"/>
+                    android:textColor="?eventDetailsColor"
+                    style="@style/EventViewSmallText"
+                    tools:ignore="Deprecated"/>
 
-            </FrameLayout>
+                <amai.org.conventions.customviews.AspectRatioImageView
+                    android:layout_marginStart="5dp"
+                    android:id="@+id/alarm_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_action_alarms"
+                    android:visibility="gone"
+                    />
+
+                <amai.org.conventions.customviews.AspectRatioImageView
+                    android:layout_marginStart="5dp"
+                    android:id="@+id/feedback_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="18dp"
+                    android:src="@drawable/feedback"
+                    android:visibility="gone"
+                    />
+            </LinearLayout>
 
         </LinearLayout>
-    </LinearLayout>
-</android.support.v7.widget.CardView>
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:id="@+id/faveIcon"
+            android:layout_above="@+id/bottom_layout"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_star_white_24dp"/>
+
+        <TextView
+            android:id="@+id/eventName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@id/faveIcon"
+            tools:text="Event Title"
+            android:gravity="start|top"
+            style="@style/EventViewLargeText"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:maxLines="2"
+            android:ellipsize="end"/>
+
+
+        <!-- The below layout will replace the bottom layout at runtime if the user is
+         performing a search in the event description -->
+        <TextView
+            android:id="@+id/search_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/eventName"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@+id/faveIcon"
+            android:layout_alignParentBottom="true"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:gravity="bottom"
+            android:textColor="?eventDetailsColor"
+            android:visibility="gone"
+            tools:visibility="visible"
+            tools:text="Event search description which can be fairly long"
+            style="@style/EventViewSmallText"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

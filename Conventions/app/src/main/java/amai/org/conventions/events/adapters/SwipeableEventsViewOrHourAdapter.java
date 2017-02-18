@@ -54,6 +54,12 @@ public class SwipeableEventsViewOrHourAdapter extends BaseAdapter implements Sti
 		final ConventionEvent event = events.get(position).getEvent();
 		holder.setModel(event);
 
+		boolean isLastInNonLastSection = false;
+		if (position < events.size() - 1 && getHeaderId(position) != getHeaderId(position + 1)) {
+			isLastInNonLastSection = true;
+		}
+		holder.setBottomDividerVisible(isLastInNonLastSection);
+
 		// Register to swipe open events to add/remove the item from favorites
 		holder.setOnViewSwipedAction(new Runnable() {
 			@Override

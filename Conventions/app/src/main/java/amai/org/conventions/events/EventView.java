@@ -1,12 +1,9 @@
 package amai.org.conventions.events;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.CardView;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
@@ -41,7 +38,7 @@ public class EventView extends FrameLayout {
 	private final ImageView alarmIcon;
 	private final ViewGroup timeLayout;
 	private final ViewGroup eventDescription;
-	private final CardView eventContainer;
+	private final ViewGroup eventContainer;
 	private final View bottomLayout;
 
 	// Used for keyword highlighting - see setKeywordsHighlighting
@@ -67,7 +64,7 @@ public class EventView extends FrameLayout {
 		feedbackIcon = (ImageView) this.findViewById(R.id.feedback_icon);
 		alarmIcon = (ImageView) this.findViewById(R.id.alarm_icon);
 		eventDescription = (ViewGroup) this.findViewById(R.id.eventDescription);
-		eventContainer = (CardView) this.findViewById(R.id.eventContainer);
+		eventContainer = (ViewGroup) this.findViewById(R.id.eventContainer);
 		bottomLayout = this.findViewById(R.id.bottom_layout);
 		searchDescription = (TextView) this.findViewById(R.id.search_description);
 
@@ -121,39 +118,7 @@ public class EventView extends FrameLayout {
 	}
 
 	public void setEventColor(int color, boolean conflicting) {
-		// Card implementation is different before and after Lollipop.
-		// Before Lollipop the layout inside the card does not cover the entire card area.
-		// Therefore if the card itself doesn't have a background color, views under it will be
-		// visible and there might be artifacts in the drawing.
-		// On the other hand, in order to prevent overdraw we want to draw as little layers as
-		// possible on the screen.
-		// The best solution we came up with is:
-		// 1. If we're post-Lollipop, the card never needs a background and only the layout inside it
-		//    has a color (time box and event description).
-		// 2. If we're pre-Lollipop, the card must have a background. We will paint it the color of
-		//    the event, and the time box will have overdraw. The event description doesn't need a
-		//    background in this case.
-		// 3. A special case for pre-Lollipop is when it's a conflicting event. In that case we
-		//    already know what the background of the card is (a RecyclerView with a dark background)
-		//    so we can have a transparent card. In that case we make the card itself transparent and
-		//    only color the event description and time box.
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-			// 1. post-Lollipop
-			eventContainer.setCardBackgroundColor(Color.TRANSPARENT);
-			setLayoutColor(eventDescription, color);
-		} else if (conflicting) {
-			// 3. Conflicting event pre-Lollipop
-			// If we just color the card transparent its shadow is still visible (although the elevation
-			// is 0), so we remove the background completely. Note that this relies in the inner implementation
-			// of the card view! (and that due to that implementation it's impossible to return the background
-			// afterwards)
-			eventContainer.setBackground(null);
-			setLayoutColor(eventDescription, color);
-		} else {
-			// 2. Non-conflicting event pre-Lollipop
-			eventContainer.setCardBackgroundColor(color);
-			setLayoutColor(eventDescription, Color.TRANSPARENT);
-		}
+		eventName.setTextColor(color);
 	}
 
 	private void setLayoutColor(ViewGroup layout, int color) {
@@ -161,8 +126,12 @@ public class EventView extends FrameLayout {
 	}
 
 	public void setAttending(boolean isAttending) {
-		int favorite_icon = isAttending ? android.R.drawable.btn_star_big_on : android.R.drawable.btn_star_big_off;
-		faveIcon.setImageDrawable(ContextCompat.getDrawable(getContext(), favorite_icon));
+		faveIcon.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_star_white_24dp));
+		if (isAttending) {
+			faveIcon.setColorFilter(ContextCompat.getColor(getContext(), R.color.gold));
+		} else {
+			faveIcon.setColorFilter(ContextCompat.getColor(getContext(), R.color.black));
+		}
 	}
 
 	public void setShowHallName(boolean show) {
@@ -174,7 +143,7 @@ public class EventView extends FrameLayout {
 	}
 
 	public void setOnFavoritesButtonClickedListener(OnClickListener listener) {
-		timeLayout.setOnClickListener(listener);
+		faveIcon.setOnClickListener(listener);
 	}
 
 	@Override
@@ -215,7 +184,7 @@ public class EventView extends FrameLayout {
 		if (event.getUserInput().getEventAboutToStartNotification().isEnabled() ||
 				event.getUserInput().getEventFeedbackReminderNotification().isEnabled()) {
 			alarmIcon.setVisibility(VISIBLE);
-			alarmIcon.setColorFilter(ContextCompat.getColor(getContext(), R.color.very_dark_gray));
+			alarmIcon.setColorFilter(ThemeAttributes.getColor(getContext(), R.attr.eventDetailsColor));
 		} else {
 			alarmIcon.setVisibility(GONE);
 		}
@@ -233,7 +202,7 @@ public class EventView extends FrameLayout {
 			} else if ((!feedback.isSent()) && feedback.hasAnsweredQuestions() &&
 					!Convention.getInstance().isFeedbackSendingTimeOver()) {
 				icon = ContextCompat.getDrawable(getContext(), android.R.drawable.ic_dialog_email);
-				filterColor = ContextCompat.getColor(getContext(), R.color.green);
+				filterColor = ThemeAttributes.getColor(getContext(), R.attr.eventSendFeedbackColor);
 			} else {
 				icon = ContextCompat.getDrawable(getContext(), R.drawable.feedback);
 				// If the user sent the feedback but it did not fill any smiley questions, there won't
@@ -242,9 +211,9 @@ public class EventView extends FrameLayout {
 					icon = ContextCompat.getDrawable(getContext(), R.drawable.feedback_sent);
 					filterColor = ContextCompat.getColor(getContext(), R.color.yellow);
 				} else if (event.isAttending() || feedback.hasAnsweredQuestions()) {
-					filterColor = ContextCompat.getColor(getContext(), R.color.green);
+					filterColor = ThemeAttributes.getColor(getContext(), R.attr.eventSendFeedbackColor);
 				} else {
-					filterColor = ContextCompat.getColor(getContext(), R.color.very_dark_gray);
+					filterColor = ThemeAttributes.getColor(getContext(), R.attr.eventDetailsColor);
 				}
 			}
 
@@ -257,13 +226,6 @@ public class EventView extends FrameLayout {
 	}
 
 	private void setConflicting(boolean conflicting) {
-		if (conflicting) {
-			eventContainer.setCardElevation(0.0f);
-			eventContainer.setMaxCardElevation(0.0f);
-		} else {
-			eventContainer.setCardElevation(6.0f);
-			eventContainer.setMaxCardElevation(6.0f);
-		}
 	}
 
 	public void setKeywordsHighlighting(List<String> keywords) {
@@ -274,13 +236,16 @@ public class EventView extends FrameLayout {
 
 		String filteredDescriptionText = eventDescriptionContent;
 
+		int eventNameHighlightColor = ThemeAttributes.getColor(getContext(), R.attr.eventNameKeywordHighlightColor);
+		int eventHighlightColor = ThemeAttributes.getColor(getContext(), R.attr.eventKeywordHighlightColor);
+
 		for (String keyword : keywords) {
 			if (keyword.length() > 0) {
 				String lowerCaseKeyword = keyword.toLowerCase();
-				tryHighlightKeywordInTextView(eventName, lowerCaseKeyword);
+				tryHighlightKeywordInTextView(eventName, lowerCaseKeyword, eventNameHighlightColor);
 
-				boolean didHighlightLectureName = tryHighlightKeywordInTextView(lecturerName, lowerCaseKeyword);
-				boolean didHighlightHallName = tryHighlightKeywordInTextView(hallName, lowerCaseKeyword);
+				boolean didHighlightLectureName = tryHighlightKeywordInTextView(lecturerName, lowerCaseKeyword, eventHighlightColor);
+				boolean didHighlightHallName = tryHighlightKeywordInTextView(hallName, lowerCaseKeyword, eventHighlightColor);
 
 				// If the keyword is in the description, hide the lecturer name and hall name and show the description text next to the keyword instead
 				// (assuming there are no highlighted keywords in the views we hid)
@@ -293,14 +258,14 @@ public class EventView extends FrameLayout {
 							filteredDescriptionText = searchDescription.getText().toString();
 							isAnyDescriptionKeywordHighlighted = true;
 						}
-						tryHighlightKeywordInTextView(searchDescription, lowerCaseKeyword);
+						tryHighlightKeywordInTextView(searchDescription, lowerCaseKeyword, eventHighlightColor);
 					}
 				}
 			}
 		}
 	}
 
-	private boolean tryHighlightKeywordInTextView(TextView textView, String keyword) {
+	private boolean tryHighlightKeywordInTextView(TextView textView, String keyword, int color) {
 		CharSequence originalText = textView.getText();
 
 		String textToHighlight = originalText.toString().toLowerCase();
@@ -316,7 +281,7 @@ public class EventView extends FrameLayout {
 		while (currentKeywordIndex != -1) {
 			// Highlight the keyword
 			highlightedText.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), currentKeywordIndex, currentKeywordIndex + keyword.length(), 0);
-			highlightedText.setSpan(new ForegroundColorSpan(Color.BLACK), currentKeywordIndex, currentKeywordIndex + keyword.length(), 0);
+			highlightedText.setSpan(new ForegroundColorSpan(color), currentKeywordIndex, currentKeywordIndex + keyword.length(), 0);
 
 			// Now move to highlight the next word
 			currentKeywordIndex = textToHighlight.indexOf(keyword, currentKeywordIndex + keyword.length());

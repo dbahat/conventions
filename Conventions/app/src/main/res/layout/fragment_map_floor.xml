@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="5dp"
-        android:background="@color/very_light_gray"
+        android:background="@color/transparent_black"
         android:orientation="vertical">
 
         <amai.org.conventions.customviews.AspectRatioImageView
@@ -152,7 +152,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="5dp"
-        android:background="@color/very_light_gray"
+        android:background="@color/transparent_black"
         android:orientation="vertical">
 
         <View

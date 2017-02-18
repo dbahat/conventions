@@ -58,6 +58,12 @@ public class SwipeableEventsViewListAdapter extends BaseAdapter implements Stick
 		final ConventionEvent event = events.get(position);
 		holder.setModel(event);
 
+		boolean isLastInNonLastSection = false;
+		if (position < events.size() - 1 && getHeaderId(position) != getHeaderId(position + 1)) {
+			isLastInNonLastSection = true;
+		}
+		holder.setBottomDividerVisible(isLastInNonLastSection);
+
 		if (keywordsToHighlight != null) {
 			holder.setKeywordsHighlighting(keywordsToHighlight);
 		}

@@ -22,12 +22,16 @@
         <attr name="snackbarActionColor" format="color|reference"/>
         <!-- About screen -->
         <attr name="aboutLogo" format="integer"/>
-        <!-- Event Time -->
+        <!-- Event View -->
         <attr name="eventTypeEndedColor" format="color|reference"/>
         <attr name="eventTypeCurrentColor" format="color|reference"/>
         <attr name="eventTypeNotStartedColor" format="color|reference"/>
+        <attr name="eventNameKeywordHighlightColor" format="color|reference"/>
+        <attr name="eventKeywordHighlightColor" format="color|reference"/>
         <attr name="eventTimeDefaultTextColor" format="color|reference"/>
         <attr name="eventTimeDefaultBackgroundColor" format="color|reference"/>
+        <attr name="eventDetailsColor" format="color|reference"/>
+        <attr name="eventSendFeedbackColor" format="color|reference"/>
         <!-- MyEvents Screen -->
         <attr name="nextEventStartTimeBackground" format="color|reference"/>
         <attr name="nextEventStartTimeTextColor" format="color|reference"/>

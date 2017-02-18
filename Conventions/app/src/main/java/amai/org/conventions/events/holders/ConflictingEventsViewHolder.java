@@ -5,8 +5,10 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Point;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Display;
@@ -36,6 +38,10 @@ public class ConflictingEventsViewHolder extends RecyclerView.ViewHolder {
 		if (eventViewHeight < 0) {
 			eventViewHeight = calculateEventViewHeight();
 		}
+		DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(context,
+				DividerItemDecoration.VERTICAL);
+		dividerItemDecoration.setDrawable(ContextCompat.getDrawable(context, R.drawable.conflicting_event_list_divider));
+		eventsListView.addItemDecoration(dividerItemDecoration);
 	}
 
 	private static Animator getHeightChangeAnimator(final View view, int initialHeight, int targetHeight) {
@@ -132,6 +138,10 @@ public class ConflictingEventsViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	private int getListHeight(Resources resources, int items) {
-		return (items * eventViewHeight);
+		return (items * eventViewHeight) + (getDividerHeight(resources) * (items > 0 ? items - 1 : 0));
+	}
+
+	private int getDividerHeight(Resources resources) {
+		return resources.getDimensionPixelSize(R.dimen.event_divider_height);
 	}
 }

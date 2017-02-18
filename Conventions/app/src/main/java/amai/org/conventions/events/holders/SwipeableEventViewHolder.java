@@ -123,4 +123,12 @@ public class SwipeableEventViewHolder extends RecyclerView.ViewHolder {
 		hiddenEventView.setKeywordsHighlighting(keywords);
 		hiddenEventView2.setKeywordsHighlighting(keywords);
 	}
+
+	public void setBottomDividerVisible(boolean visible) {
+		if (visible) {
+			itemView.findViewById(R.id.event_bottom_divider).setVisibility(View.VISIBLE);
+		} else {
+			itemView.findViewById(R.id.event_bottom_divider).setVisibility(View.GONE);
+		}
+	}
 }

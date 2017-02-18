@@ -24,7 +24,7 @@ public class Dates {
 	private static Date getInitialDate() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm", Dates.getLocale());
 		try {
-			return dateFormat.parse("24.03.2016 17:10");
+			return dateFormat.parse("12.03.2017 13:10");
 		} catch (ParseException e) {
 			throw new RuntimeException(e);
 		}
@@ -38,9 +38,12 @@ public class Dates {
 		// Fixed startup date
 //        return new Date(System.currentTimeMillis() - appStartDate.getTime() + initialDate.getTime());
 
-		// Current time at the convention's date
+		// Current time at the convention's start date
 //	    Calendar currDate = Calendar.getInstance();
-//	    setConventionDate(currDate);
+//		Calendar conventionStartDate = Convention.getInstance().getStartDate();
+//		currDate.set(conventionStartDate.get(Calendar.YEAR),
+//				conventionStartDate.get(Calendar.MONTH),
+//				conventionStartDate.get(Calendar.DAY_OF_MONTH));
 //	    return currDate.getTime();
 	}
 

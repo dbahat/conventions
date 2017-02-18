@@ -1,9 +1,13 @@
 package amai.org.conventions.events.adapters;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +54,10 @@ public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 		switch (viewType) {
 			case ITEM_VIEW_TYPE_FREE_SLOT: {
 				View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.small_text_view, viewGroup, false);
+				TextView textView = (TextView) view.findViewById(R.id.small_text);
+				textView.setTextColor(Color.WHITE);
+				((FrameLayout.LayoutParams) textView.getLayoutParams()).gravity = Gravity.CENTER_HORIZONTAL;
+				textView.setLayoutParams(textView.getLayoutParams());
 				return new FreeTimeSlotViewHolder(view);
 			}
 			case ITEM_VIEW_TYPE_REGULAR: {
