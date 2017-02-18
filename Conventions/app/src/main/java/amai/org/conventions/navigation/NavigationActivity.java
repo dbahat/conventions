@@ -125,7 +125,10 @@ public abstract class NavigationActivity extends AppCompatActivity {
 
 		// Change the color of all menu items to fit the theme color. Done since the action bar doesn't seem to expose such a configurable attribute.
 		for (int i=0; i<menu.size(); i++) {
-			menu.getItem(i).getIcon().mutate().setColorFilter(ThemeAttributes.getColor(this, R.attr.toolbarIconColor), PorterDuff.Mode.MULTIPLY);
+			Drawable icon = menu.getItem(i).getIcon();
+			if (icon != null) {
+				icon.mutate().setColorFilter(ThemeAttributes.getColor(this, R.attr.toolbarIconColor), PorterDuff.Mode.MULTIPLY);
+			}
 		}
 
 		return onCreateCustomOptionsMenuResult;
