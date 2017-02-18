@@ -5,7 +5,7 @@
     <style name="AppBaseTheme.Harucon2017">
         <item name="android:dialogTheme">@style/AppDialogTheme.Cami2016</item>
         <item name="alertDialogTheme">@style/AppAlertDialogTheme.Cami2016</item>
-        <item name="colorAccent">@color/red_dark</item>
+        <item name="colorAccent">@color/cami2016_red_dark</item>
         <item name="android:colorBackground">@null</item>
 
         <item name="notificationSmallIcon">@drawable/harucon2017_notification_small</item>
@@ -13,40 +13,40 @@
 
         <item name="toolbarBackground">@null</item>
         <item name="toolbarLogo">@drawable/ic_menu_black_24dp</item>
-        <item name="toolbarIconAccentColor">@color/gold</item>
+        <item name="toolbarIconAccentColor">@color/cami2016_gold</item>
         <item name="navigationPopupSelectedColor">@color/harucon2017_turquoise</item>
 
-        <item name="snackbarActionColor">@color/red_bright</item>
+        <item name="snackbarActionColor">@color/cami2016_red_bright</item>
 
         <item name="aboutLogo">@drawable/amai_logo_black</item>
 
         <item name="eventTypeEndedColor">@color/hint_gray</item>
         <item name="eventTimeDefaultTextColor">@color/black</item>
-        <item name="eventTimeDefaultBackgroundColor">@color/light_pink</item>
-        <item name="eventNameKeywordHighlightColor">@color/gold</item>
+        <item name="eventTimeDefaultBackgroundColor">@color/harucon2017_turquoise</item>
+        <item name="eventNameKeywordHighlightColor">@color/cami2016_gold</item>
         <item name="eventDetailsColor">@color/even_darker_gray</item>
-        <item name="eventSendFeedbackColor">@color/gold</item>
+        <item name="eventSendFeedbackColor">@color/cami2016_gold</item>
 
         <item name="eventTimeHeaderColor">@android:color/transparent</item>
 
         <item name="locationDetailsBackground">@color/transparent_black</item>
         <item name="floorBackground">@drawable/harucon2017_page_background</item>
-        <item name="standIconColor">@color/purple_bright</item>
-        <item name="standsTypeTitleColor">@color/red_dark</item>
+        <item name="standIconColor">@color/cami2016_purple_bright</item>
+        <item name="standsTypeTitleColor">@color/cami2016_red_dark</item>
 
         <item name="focusedUpdateBackground">@color/yellow_medium</item>
 
-        <item name="nextEventStartTimeBackground">@color/gold_bright</item>
+        <item name="nextEventStartTimeBackground">@color/transparent_black</item>
         <item name="nextEventStartTimeTextColor">@color/black</item>
         <item name="conflictingEventsBackground">@color/transparent_black</item>
 
         <!-- Note: if you change the theme, these values should be copied manually to files
          drawable\highlighted_button.xml and drawable/circular_progress_bar.xml because
          prior to L it was not supported to reference theme attributes from a drawable xml -->
-        <item name="buttonColor">@color/red_dark</item>
-        <item name="buttonColorPressed">@color/red</item>
-        <item name="feedbackAnswerButtonColor">@color/red_dark</item>
-        <item name="feedbackAnswerButtonSelectedColor">@color/red</item>
+        <item name="buttonColor">@color/cami2016_red_dark</item>
+        <item name="buttonColorPressed">@color/cami2016_red</item>
+        <item name="feedbackAnswerButtonColor">@color/cami2016_red_dark</item>
+        <item name="feedbackAnswerButtonSelectedColor">@color/cami2016_red</item>
 
         <item name="shadowForeground">@null</item>
         <item name="activitiesBackground">@drawable/harucon2017_page_background</item>
@@ -58,11 +58,11 @@
     <style name="AppDialogTheme.Cami2016" parent="Theme.AppCompat.Light.Dialog">
         <!-- This is the default starting API23. In any case the title is always left-justified so it's best to not use it. -->
         <item name="android:windowNoTitle">true</item>
-        <item name="colorAccent">@color/red_dark</item>
+        <item name="colorAccent">@color/cami2016_red_dark</item>
     </style>
 
     <style name="AppAlertDialogTheme.Cami2016" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="colorAccent">@color/red_dark</item>
+        <item name="colorAccent">@color/cami2016_red_dark</item>
     </style>
 
     <style name="AppBaseTheme.Harucon2017.Toolbar.Splash">

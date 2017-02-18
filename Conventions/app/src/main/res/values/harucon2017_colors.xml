@@ -9,27 +9,14 @@
     <color name="harucon2017_blue">#19333c</color>
 
     <!-- TODO: translate all the below colors to use the new palate -->
-    <color name="light_orange_bright">#fffdf7</color>
-    <color name="light_orange">#fff5df</color>
-    <color name="light_orange_dark">#ffe2a1</color>
-
-    <color name="gold_bright">#ffdf98</color>
-    <color name="gold">#ffca58</color>
+    <color name="cami2016_gold_bright">#ffdf98</color>
+    <color name="cami2016_gold">#ffca58</color>
 
     <!-- button text - white -->
-    <color name="red_bright">#ff7f8f</color>
-    <color name="red">#f55368</color>
-    <color name="red_dark">#b92136</color>
+    <color name="cami2016_red_bright">#ff7f8f</color>
+    <color name="cami2016_red">#f55368</color>
+    <color name="cami2016_red_dark">#b92136</color>
 
-    <color name="light_blue_bright">#79f0fe</color>
-    <color name="light_blue">#63d9e7</color>
-    <color name="light_blue_medium_dark">#31c9dd</color>
-    <color name="light_blue_dark">#15a5b6</color>
-
-    <color name="purple_bright">#7a3d59</color>
-    <color name="purple">#5b253e</color>
-    <color name="purple_dark">#3a0b20</color>
-
-    <color name="very_light_yellow">#fdf3de</color>
-    <color name="light_pink">#efcfdc</color>
+    <color name="cami2016_purple_bright">#7a3d59</color>
+    <color name="cami2016_purple">#5b253e</color>
 </resources>
