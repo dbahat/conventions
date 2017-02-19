@@ -38,7 +38,9 @@
 
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="14dp"> <!-- by default Android seems to leave 14dp margin from the nav bar to the toolbar layout.
+                    adding 14dp margin between the frame and the action items section so the title can be centered. -->
 
                     <!-- Using a custom textView for the toolbar title for better customization (allow centering the title, allow showing an image
                      instead of text) -->

@@ -172,7 +172,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		ActionBar actionBar = this.getSupportActionBar();
 		if (actionBar != null) {
 			actionBar.setDisplayHomeAsUpEnabled(false);
-			actionBar.setDisplayShowTitleEnabled(true);
+			actionBar.setDisplayShowTitleEnabled(false);
 			toolbar.setNavigationIcon(ThemeAttributes.getDrawable(this, R.attr.toolbarLogo));
 		}
 	}
