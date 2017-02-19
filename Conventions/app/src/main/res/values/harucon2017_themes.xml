@@ -8,6 +8,9 @@
         <item name="colorAccent">@color/cami2016_red_dark</item>
         <item name="android:colorBackground">@null</item>
 
+        <!-- not using android:actionOverflowButtonStyle since it doesn't seem to work in Jellybean -->
+        <item name="actionOverflowButtonStyle">@style/OverflowMenu.Harucon2016</item>
+
         <item name="notificationSmallIcon">@drawable/harucon2017_notification_small</item>
         <item name="notificationLargeIcon">@mipmap/harucon2017_app_icon</item>
 
@@ -67,6 +70,10 @@
 
     <style name="AppBaseTheme.Harucon2017.Toolbar.Splash">
         <item name="android:windowBackground">@drawable/harucon2017_page_background</item>
+    </style>
+
+    <style name="OverflowMenu.Harucon2016" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_more_vert_black_24dp</item>
     </style>
 
 </resources>
