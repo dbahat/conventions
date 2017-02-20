@@ -268,7 +268,6 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 	}
 
 	private void initializeLocationDetails() {
-		locationDetailsCloseImage.setColorFilter(ContextCompat.getColor(getContext(), android.R.color.black));
 		locationDetailsCloseImage.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

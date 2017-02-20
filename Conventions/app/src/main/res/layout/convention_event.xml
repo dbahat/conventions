@@ -128,7 +128,7 @@
             android:id="@+id/faveIcon"
             android:layout_above="@+id/bottom_layout"
             android:layout_alignParentEnd="true"
-            android:src="@drawable/ic_star_white_24dp"/>
+            android:src="@drawable/ic_star_black_24dp"/>
 
         <TextView
             android:id="@+id/eventName"

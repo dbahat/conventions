@@ -126,11 +126,11 @@ public class EventView extends FrameLayout {
 	}
 
 	public void setAttending(boolean isAttending) {
-		faveIcon.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_star_white_24dp));
+		faveIcon.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_star_black_24dp));
 		if (isAttending) {
-			faveIcon.setColorFilter(ContextCompat.getColor(getContext(), R.color.cami2016_gold));
+			faveIcon.setColorFilter(ContextCompat.getColor(getContext(), R.color.cami2016_gold), PorterDuff.Mode.SRC_ATOP);
 		} else {
-			faveIcon.setColorFilter(ContextCompat.getColor(getContext(), R.color.black));
+			faveIcon.setColorFilter(ContextCompat.getColor(getContext(), R.color.black), PorterDuff.Mode.SRC_ATOP);
 		}
 	}
 

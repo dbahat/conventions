@@ -55,7 +55,6 @@
         <item name="activitiesBackground">@drawable/harucon2017_page_background</item>
 
         <item name="navigationPopupNotSelectedColor">@android:color/white</item>
-        <item name="toolbarIconColor">@color/black</item>
     </style>
 
     <style name="AppDialogTheme.Cami2016" parent="Theme.AppCompat.Light.Dialog">

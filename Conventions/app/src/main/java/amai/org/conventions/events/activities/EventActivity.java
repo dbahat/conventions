@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -266,7 +267,7 @@ public class EventActivity extends NavigationActivity {
 		ConventionEvent.UserInput userInput = conventionEvent.getUserInput();
 		if (userInput.isAttending()) {
 			MenuItem favoritesButton = menu.findItem(R.id.event_change_favorite_state);
-			favoritesButton.setIcon(ContextCompat.getDrawable(this, android.R.drawable.btn_star_big_on));
+			changeFavoriteMenuIcon(true, favoritesButton);
 		}
 
 		setupAlarmsMenuItem(menu, userInput);
@@ -378,18 +379,28 @@ public class EventActivity extends NavigationActivity {
 		if (userInput.isAttending()) {
 			userInput.setAttending(false);
 			ConventionsApplication.alarmScheduler.cancelDefaultEventAlarms(conventionEvent);
-			item.setIcon(ContextCompat.getDrawable(this, R.drawable.star_with_plus));
-			item.setTitle(getResources().getString(R.string.event_add_to_favorites));
+			changeFavoriteMenuIcon(false, item);
 			Snackbar.make(this.mainLayout, R.string.event_removed_from_favorites, Snackbar.LENGTH_SHORT).show();
 		} else {
 			userInput.setAttending(true);
 			ConventionsApplication.alarmScheduler.scheduleDefaultEventAlarms(conventionEvent);
-			item.setIcon(ContextCompat.getDrawable(this, android.R.drawable.btn_star_big_on));
-			item.setTitle(getResources().getString(R.string.event_remove_from_favorites));
+			changeFavoriteMenuIcon(true, item);
 			Snackbar.make(this.mainLayout, R.string.event_added_to_favorites, Snackbar.LENGTH_SHORT).show();
 		}
 		setupAlarmsMenuItem(menu, userInput);
 		saveUserInput();
+	}
+
+	private void changeFavoriteMenuIcon(boolean isAttending, MenuItem favoriteItem) {
+		if (isAttending) {
+			Drawable icon = ContextCompat.getDrawable(this, R.drawable.ic_star_black_24dp);
+			icon.setColorFilter(ContextCompat.getColor(this, R.color.cami2016_gold), PorterDuff.Mode.SRC_ATOP);
+			favoriteItem.setIcon(icon);
+			favoriteItem.setTitle(getResources().getString(R.string.event_remove_from_favorites));
+		} else {
+			favoriteItem.setIcon(ContextCompat.getDrawable(this, R.drawable.star_with_plus));
+			favoriteItem.setTitle(getResources().getString(R.string.event_add_to_favorites));
+		}
 	}
 
 	@Override

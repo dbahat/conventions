@@ -143,7 +143,7 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 			ImageView myEventsNonAnimatedIcon = (ImageView) actionView.findViewById(R.id.non_animated_icon);
 
 			int accentColor = ThemeAttributes.getColor(ProgrammeActivity.this, R.attr.toolbarIconAccentColor);
-			myEventsNonAnimatedIcon.setColorFilter(accentColor, PorterDuff.Mode.MULTIPLY);
+			myEventsNonAnimatedIcon.setColorFilter(accentColor, PorterDuff.Mode.SRC_ATOP);
 
 			final ImageView myEventsAnimatedIcon = (ImageView) actionView.findViewById(R.id.icon_to_animate);
 
@@ -181,7 +181,7 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 	private int changeIconColor(MenuItem item) {
 		Drawable icon = item.getIcon().mutate();
 		int accentColor = ThemeAttributes.getColor(ProgrammeActivity.this, R.attr.toolbarIconAccentColor);
-		icon.setColorFilter(accentColor, PorterDuff.Mode.MULTIPLY);
+		icon.setColorFilter(accentColor, PorterDuff.Mode.SRC_ATOP);
 		return accentColor;
 	}
 
@@ -190,8 +190,6 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 		switch (item.getItemId()) {
 			case R.id.programme_navigate_to_my_events:
 				navigateToMyEventsIconModified = false;
-				// Revert the icon color back to the default theme color
-				item.getIcon().setColorFilter(ThemeAttributes.getColor(this, R.attr.toolbarIconColor), PorterDuff.Mode.MULTIPLY);
 				navigateToActivity(MyEventsActivity.class);
 				return true;
 			case R.id.programme_navigate_to_feedback:

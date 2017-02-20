@@ -1,6 +1,5 @@
 package amai.org.conventions.map;
 
-import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -34,7 +33,6 @@ import java.util.List;
 
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.R;
-import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.ConditionalSwipeVerticalViewPager;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.Floor;
@@ -250,9 +248,6 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 			zoomItem.setTitle(getString(R.string.enlarge_map));
 			zoomItem.setIcon(R.drawable.enlarge);
 		}
-
-		// Since we've just modified the icon, fix it's color to fit the theme's color
-		zoomItem.getIcon().mutate().setColorFilter(ThemeAttributes.getColor(this, R.attr.toolbarIconColor), PorterDuff.Mode.MULTIPLY);
 	}
 
 	@Override
