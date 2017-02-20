@@ -13,6 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -116,12 +117,20 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		// For example:
 		// If the menu has no items, it means we need to add a margin to the title's end by 1 action item size
 		// If the menu has 2 items, it means we need to add a margin to the title's start by 2 action time size
+		//
+		// NOTE -
+		// The calculation here assumes there's no overflow menu in the action bar. Such a menu causes a problem, since it causes the number of
+		// views in the ActionBar to be different then the number of MenuItems.
+		// Since we almost never use the overflow menu in the app, leaving this as a known issue to be handled by specific activities if required.
 		int numberOfActionItemsToShiftTitleStartMargin = menu.size() - 1;
 		int startMarginToAdd = getResources().getDimensionPixelSize(R.dimen.action_bar_item_width) * numberOfActionItemsToShiftTitleStartMargin;
 
 		FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams)navigationToolbarTitle.getLayoutParams();
-		layoutParams.setMarginStart(startMarginToAdd);
-		navigationToolbarTitle.setLayoutParams(layoutParams);
+		// Only adjust the margin if the title is set to the center. This can be modified by calling setToolbarTitleGravity().
+		if (layoutParams.gravity == Gravity.CENTER) {
+			layoutParams.setMarginStart(startMarginToAdd);
+			navigationToolbarTitle.setLayoutParams(layoutParams);
+		}
 
 		// Change the color of all menu items to fit the theme color. Done since the action bar doesn't seem to expose such a configurable attribute.
 		for (int i=0; i<menu.size(); i++) {
@@ -272,6 +281,12 @@ public abstract class NavigationActivity extends AppCompatActivity {
 
 	protected void setToolbarTitle(Drawable drawable) {
 		navigationToolbarTitle.setBackground(drawable);
+	}
+
+	protected void setToolbarGravity(int gravity) {
+		FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) navigationToolbarTitle.getLayoutParams();
+		layoutParams.gravity = gravity;
+		navigationToolbarTitle.setLayoutParams(layoutParams);
 	}
 
 	protected void navigateToActivity(Class<? extends Activity> activityToNavigateTo) {

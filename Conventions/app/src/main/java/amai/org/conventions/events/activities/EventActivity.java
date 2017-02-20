@@ -98,6 +98,12 @@ public class EventActivity extends NavigationActivity {
 
 		setToolbarTitle(conventionEvent.getType().getDescription());
 
+		// In this activity we have many items in the navigation bar (including overflow menu). They create 2 problems with a centered title design:
+		// 1. The code for centering the title based on the number of action items assumes there's no overflow menu.
+		// 2. The amount of action items doesn't leave enough room for the title text.
+		// In order to avoid these issues, we align the title to the start in this activity only.
+		setToolbarGravity(Gravity.START | Gravity.CENTER_VERTICAL);
+
 		final boolean shouldFocusOnFeedback = getIntent().getBooleanExtra(EXTRA_FOCUS_ON_FEEDBACK, false);
 
 		// Do the rest after the layout loads, since loading all the assets of this activity (which include images) can get long, we want the activity to first

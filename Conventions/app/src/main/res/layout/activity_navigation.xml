@@ -52,6 +52,7 @@
                         tools:text="title"
                         android:textColor="@color/black"
                         android:textSize="20dp"
+                        android:ellipsize="end"
                         tools:ignore="SpUsage" /> <!-- using DP since larger toolbar title may overlap with toolbar action items -->
 
                 </FrameLayout>
