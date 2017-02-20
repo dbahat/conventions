@@ -23,7 +23,7 @@
 
         <item name="aboutLogo">@drawable/amai_logo_black</item>
 
-        <item name="eventTypeEndedColor">@color/hint_gray</item>
+        <item name="eventTypeEndedColor">@color/ultra_light_gray</item>
         <item name="eventTimeDefaultTextColor">@color/black</item>
         <item name="eventTimeDefaultBackgroundColor">@color/harucon2017_turquoise</item>
         <item name="eventNameKeywordHighlightColor">@color/cami2016_gold</item>

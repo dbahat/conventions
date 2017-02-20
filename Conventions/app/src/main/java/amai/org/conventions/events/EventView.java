@@ -100,11 +100,11 @@ public class EventView extends FrameLayout {
 		setEventTypeColor(event.getBackgroundColor(getContext()));
 		setEventTimeTextColor(event.getTextColor(getContext()));
 		if (!event.hasStarted()) {
-			setEventColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeNotStartedColor), conflicting);
+			setEventNameColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeNotStartedColor), conflicting);
 		} else if (event.hasEnded()) {
-			setEventColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeEndedColor), conflicting);
+			setEventNameColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeEndedColor), conflicting);
 		} else {
-			setEventColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeCurrentColor), conflicting);
+			setEventNameColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeCurrentColor), conflicting);
 		}
 	}
 
@@ -117,7 +117,7 @@ public class EventView extends FrameLayout {
 		endTime.setTextColor(color);
 	}
 
-	public void setEventColor(int color, boolean conflicting) {
+	public void setEventNameColor(int color, boolean conflicting) {
 		eventName.setTextColor(color);
 	}
 
