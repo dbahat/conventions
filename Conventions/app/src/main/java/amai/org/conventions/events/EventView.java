@@ -28,7 +28,8 @@ import amai.org.conventions.utils.Strings;
 
 public class EventView extends FrameLayout {
 
-	private final ImageView faveIcon;
+	private final ImageView favoriteIcon;
+	private final View favoriteIconTouchArea;
 	private final TextView hallName;
 	private final TextView startTime;
 	private final TextView endTime;
@@ -38,7 +39,7 @@ public class EventView extends FrameLayout {
 	private final ImageView alarmIcon;
 	private final ViewGroup timeLayout;
 	private final ViewGroup eventDescription;
-	private final ViewGroup eventContainer;
+	private final View eventMainTouchArea;
 	private final View bottomLayout;
 
 	// Used for keyword highlighting - see setKeywordsHighlighting
@@ -55,7 +56,8 @@ public class EventView extends FrameLayout {
 		LayoutInflater.from(this.getContext()).inflate(R.layout.convention_event, this, true);
 
 		timeLayout = (ViewGroup) this.findViewById(R.id.timeLayout);
-		faveIcon = (ImageView) this.findViewById(R.id.faveIcon);
+		favoriteIcon = (ImageView) this.findViewById(R.id.eventFavoriteIcon);
+		favoriteIconTouchArea = this.findViewById(R.id.eventFavoriteIconTouchArea);
 		hallName = (TextView) this.findViewById(R.id.hallName);
 		startTime = (TextView) this.findViewById(R.id.startTime);
 		endTime = (TextView) this.findViewById(R.id.endTime);
@@ -64,7 +66,7 @@ public class EventView extends FrameLayout {
 		feedbackIcon = (ImageView) this.findViewById(R.id.feedback_icon);
 		alarmIcon = (ImageView) this.findViewById(R.id.alarm_icon);
 		eventDescription = (ViewGroup) this.findViewById(R.id.eventDescription);
-		eventContainer = (ViewGroup) this.findViewById(R.id.eventContainer);
+		eventMainTouchArea = this.findViewById(R.id.eventMainTouchArea);
 		bottomLayout = this.findViewById(R.id.bottom_layout);
 		searchDescription = (TextView) this.findViewById(R.id.search_description);
 
@@ -93,7 +95,7 @@ public class EventView extends FrameLayout {
 		searchDescription.setText("");
 
 		// Setting the event id inside the view tag, so we can easily extract it from the view when listening to onClick events.
-		eventContainer.setTag(event == null ? null : event.getId());
+		eventMainTouchArea.setTag(event == null ? null : event.getId());
 	}
 
 	private void setColorsFromEvent(ConventionEvent event, boolean conflicting) {
@@ -126,11 +128,11 @@ public class EventView extends FrameLayout {
 	}
 
 	public void setAttending(boolean isAttending) {
-		faveIcon.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_star_black_24dp));
+		favoriteIcon.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_star_black_24dp));
 		if (isAttending) {
-			faveIcon.setColorFilter(ContextCompat.getColor(getContext(), R.color.cami2016_gold), PorterDuff.Mode.SRC_ATOP);
+			favoriteIcon.setColorFilter(ContextCompat.getColor(getContext(), R.color.cami2016_gold), PorterDuff.Mode.SRC_ATOP);
 		} else {
-			faveIcon.setColorFilter(ContextCompat.getColor(getContext(), R.color.black), PorterDuff.Mode.SRC_ATOP);
+			favoriteIcon.setColorFilter(ContextCompat.getColor(getContext(), R.color.black), PorterDuff.Mode.SRC_ATOP);
 		}
 	}
 
@@ -139,16 +141,16 @@ public class EventView extends FrameLayout {
 	}
 
 	public void setShowFavoriteIcon(boolean show) {
-		faveIcon.setVisibility(show ? VISIBLE : GONE);
+		favoriteIcon.setVisibility(show ? VISIBLE : GONE);
 	}
 
 	public void setOnFavoritesButtonClickedListener(OnClickListener listener) {
-		faveIcon.setOnClickListener(listener);
+		favoriteIconTouchArea.setOnClickListener(listener);
 	}
 
 	@Override
 	public void setOnLongClickListener(OnLongClickListener listener) {
-		eventContainer.setOnLongClickListener(listener);
+		eventMainTouchArea.setOnLongClickListener(listener);
 	}
 
 	protected void setHallName(String name) {
