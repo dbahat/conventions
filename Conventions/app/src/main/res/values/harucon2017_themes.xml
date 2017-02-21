@@ -3,9 +3,9 @@
     <style name="AppBaseTheme.Harucon2017.Toolbar" parent="AppBaseTheme.Harucon2017"/>
 
     <style name="AppBaseTheme.Harucon2017">
-        <item name="android:dialogTheme">@style/AppDialogTheme.Cami2016</item>
-        <item name="alertDialogTheme">@style/AppAlertDialogTheme.Cami2016</item>
-        <item name="colorAccent">@color/cami2016_red_dark</item>
+        <item name="android:dialogTheme">@style/AppDialogTheme.Harucon2017</item>
+        <item name="alertDialogTheme">@style/AppAlertDialogTheme.Harucon2017</item>
+        <item name="colorAccent">@color/harucon2017_turquoise</item>
         <item name="android:colorBackground">@null</item>
 
         <!-- not using android:actionOverflowButtonStyle since it doesn't seem to work in Jellybean -->
@@ -16,26 +16,27 @@
 
         <item name="toolbarBackground">@null</item>
         <item name="toolbarLogo">@drawable/ic_menu_black_24dp</item>
-        <item name="toolbarIconAccentColor">@color/cami2016_gold</item>
+        <item name="toolbarIconAccentColor">@color/gold</item>
+        <item name="swipeToRefreshColor">@color/harucon2017_turquoise</item>
         <item name="navigationPopupSelectedColor">@color/harucon2017_turquoise</item>
 
-        <item name="snackbarActionColor">@color/cami2016_red_bright</item>
+        <item name="snackbarActionColor">@color/harucon2017_turquoise</item>
 
         <item name="aboutLogo">@drawable/amai_logo_black</item>
 
         <item name="eventTypeEndedColor">@color/ultra_light_gray</item>
         <item name="eventTimeDefaultTextColor">@color/black</item>
         <item name="eventTimeDefaultBackgroundColor">@color/harucon2017_turquoise</item>
-        <item name="eventNameKeywordHighlightColor">@color/cami2016_gold</item>
+        <item name="eventNameKeywordHighlightColor">@color/gold</item>
         <item name="eventDetailsColor">@color/even_darker_gray</item>
-        <item name="eventSendFeedbackColor">@color/cami2016_gold</item>
+        <item name="eventSendFeedbackColor">@color/gold</item>
 
         <item name="eventTimeHeaderColor">@android:color/transparent</item>
 
         <item name="locationDetailsBackground">@color/transparent_black</item>
         <item name="floorBackground">@drawable/harucon2017_page_background</item>
-        <item name="standIconColor">@color/cami2016_purple_bright</item>
-        <item name="standsTypeTitleColor">@color/cami2016_red_dark</item>
+        <item name="standIconColor">@color/harucon2017_turquoise</item>
+        <item name="standsTypeTitleColor">@color/harucon2017_turquoise</item>
 
         <item name="focusedUpdateBackground">@color/yellow_medium</item>
 
@@ -46,10 +47,10 @@
         <!-- Note: if you change the theme, these values should be copied manually to files
          drawable\highlighted_button.xml and drawable/circular_progress_bar.xml because
          prior to L it was not supported to reference theme attributes from a drawable xml -->
-        <item name="buttonColor">@color/cami2016_red_dark</item>
-        <item name="buttonColorPressed">@color/cami2016_red</item>
-        <item name="feedbackAnswerButtonColor">@color/cami2016_red_dark</item>
-        <item name="feedbackAnswerButtonSelectedColor">@color/cami2016_red</item>
+        <item name="buttonColor">@color/harucon2017_turquoise</item>
+        <item name="buttonColorPressed">@color/harucon2017_turquoise_bright</item>
+        <item name="feedbackAnswerButtonColor">@color/harucon2017_red</item>
+        <item name="feedbackAnswerButtonSelectedColor">@color/harucon2017_orange</item>
 
         <item name="shadowForeground">@null</item>
         <item name="activitiesBackground">@drawable/harucon2017_page_background</item>
@@ -57,14 +58,14 @@
         <item name="navigationPopupNotSelectedColor">@android:color/white</item>
     </style>
 
-    <style name="AppDialogTheme.Cami2016" parent="Theme.AppCompat.Light.Dialog">
+    <style name="AppDialogTheme.Harucon2017" parent="Theme.AppCompat.Light.Dialog">
         <!-- This is the default starting API23. In any case the title is always left-justified so it's best to not use it. -->
         <item name="android:windowNoTitle">true</item>
-        <item name="colorAccent">@color/cami2016_red_dark</item>
+        <item name="colorAccent">@color/harucon2017_turquoise</item>
     </style>
 
-    <style name="AppAlertDialogTheme.Cami2016" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="colorAccent">@color/cami2016_red_dark</item>
+    <style name="AppAlertDialogTheme.Harucon2017" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/harucon2017_turquoise</item>
     </style>
 
     <style name="AppBaseTheme.Harucon2017.Toolbar.Splash">

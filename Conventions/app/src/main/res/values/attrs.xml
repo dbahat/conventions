@@ -19,6 +19,8 @@
         <attr name="shadowForeground" format="integer|reference"/>
         <!-- Snackbar -->
         <attr name="snackbarActionColor" format="color|reference"/>
+        <!-- Swipe to Refresh -->
+        <attr name="swipeToRefreshColor" format="color|reference"/>
         <!-- About screen -->
         <attr name="aboutLogo" format="integer"/>
         <!-- Event View -->

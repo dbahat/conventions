@@ -130,7 +130,7 @@ public class EventView extends FrameLayout {
 	public void setAttending(boolean isAttending) {
 		favoriteIcon.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_star_black_24dp));
 		if (isAttending) {
-			favoriteIcon.setColorFilter(ContextCompat.getColor(getContext(), R.color.cami2016_gold), PorterDuff.Mode.SRC_ATOP);
+			favoriteIcon.setColorFilter(ContextCompat.getColor(getContext(), R.color.gold), PorterDuff.Mode.SRC_ATOP);
 		} else {
 			favoriteIcon.setColorFilter(ContextCompat.getColor(getContext(), R.color.black), PorterDuff.Mode.SRC_ATOP);
 		}
