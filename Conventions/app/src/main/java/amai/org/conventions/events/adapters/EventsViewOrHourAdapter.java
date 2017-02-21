@@ -10,18 +10,18 @@ import java.util.List;
 
 import amai.org.conventions.R;
 import amai.org.conventions.events.ProgrammeConventionEvent;
-import amai.org.conventions.events.holders.SwipeableEventViewHolder;
+import amai.org.conventions.events.holders.EventViewHolder;
 import amai.org.conventions.events.holders.TimeViewHolder;
 import amai.org.conventions.events.listeners.OnEventFavoriteChangedListener;
 import amai.org.conventions.model.ConventionEvent;
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
-public class SwipeableEventsViewOrHourAdapter extends BaseAdapter implements StickyListHeadersAdapter {
+public class EventsViewOrHourAdapter extends BaseAdapter implements StickyListHeadersAdapter {
 
 	private List<ProgrammeConventionEvent> events;
 	private OnEventFavoriteChangedListener eventFavoriteChangedListener;
 
-	public SwipeableEventsViewOrHourAdapter(List<ProgrammeConventionEvent> events) {
+	public EventsViewOrHourAdapter(List<ProgrammeConventionEvent> events) {
 		this.events = events;
 	}
 
@@ -42,33 +42,29 @@ public class SwipeableEventsViewOrHourAdapter extends BaseAdapter implements Sti
 
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
-		final SwipeableEventViewHolder holder;
+		final EventViewHolder holder;
 		if (convertView == null) {
-			convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.swipeable_event_view, parent, false);
-			holder = new SwipeableEventViewHolder(convertView, false);
+			convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.convention_event_view_holder, parent, false);
+			holder = new EventViewHolder(convertView);
 			convertView.setTag(holder);
 		} else {
-			holder = (SwipeableEventViewHolder) convertView.getTag();
+			holder = (EventViewHolder) convertView.getTag();
 		}
 
 		final ConventionEvent event = events.get(position).getEvent();
 		holder.setModel(event);
+		holder.getEventView().setOnFavoritesButtonClickedListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				eventFavoriteChangedListener.onEventFavoriteChanged(holder.getEvent());
+			}
+		});
 
 		boolean isLastInNonLastSection = false;
 		if (position < events.size() - 1 && getHeaderId(position) != getHeaderId(position + 1)) {
 			isLastInNonLastSection = true;
 		}
 		holder.setBottomDividerVisible(isLastInNonLastSection);
-
-		// Register to swipe open events to add/remove the item from favorites
-		holder.setOnViewSwipedAction(new Runnable() {
-			@Override
-			public void run() {
-				if (eventFavoriteChangedListener != null) {
-					eventFavoriteChangedListener.onEventFavoriteChanged(event);
-				}
-			}
-		});
 
 		return convertView;
 	}

@@ -19,7 +19,7 @@ import java.util.List;
 
 import amai.org.conventions.R;
 import amai.org.conventions.events.SearchCategoriesLayout;
-import amai.org.conventions.events.adapters.SwipeableEventsViewListAdapter;
+import amai.org.conventions.events.adapters.EventsViewListAdapter;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
 import amai.org.conventions.model.EventType;
@@ -38,7 +38,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 
 	private LinkedList<EventType> eventTypeFilter;
 	private String keywordsFilter;
-	private SwipeableEventsViewListAdapter adapter;
+	private EventsViewListAdapter adapter;
 	private StickyListHeadersListView listView;
 	private TextView noResultsFoundView;
 
@@ -102,7 +102,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 		listView = (StickyListHeadersListView) findViewById(R.id.searchEventsList);
 
 		boolean showHeaders = Convention.getInstance().getLengthInDays() > 1;
-		adapter = new SwipeableEventsViewListAdapter(Collections.<ConventionEvent>emptyList(), listView, showHeaders);
+		adapter = new EventsViewListAdapter(Collections.<ConventionEvent>emptyList(), listView, showHeaders);
 		listView.setAdapter(adapter);
 	}
 

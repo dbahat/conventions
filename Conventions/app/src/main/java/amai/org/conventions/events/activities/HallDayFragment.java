@@ -16,7 +16,7 @@ import java.util.Collections;
 import java.util.List;
 
 import amai.org.conventions.R;
-import amai.org.conventions.events.adapters.SwipeableEventsViewAdapter;
+import amai.org.conventions.events.adapters.EventsViewAdapter;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
 import amai.org.conventions.model.conventions.Convention;
@@ -26,7 +26,7 @@ import amai.org.conventions.utils.Dates;
 public class HallDayFragment extends Fragment {
 	private static final String ARGS_HALL_NAME = "ArgHallName";
 	private static final String ARGS_DATE = "ArgDate";
-	private SwipeableEventsViewAdapter adapter;
+	private EventsViewAdapter adapter;
 
 	public static HallDayFragment newInstance(String hallName, Calendar date) {
 		HallDayFragment fragment = new HallDayFragment();
@@ -64,7 +64,7 @@ public class HallDayFragment extends Fragment {
 
 		Collections.sort(events, new ConventionEventComparator());
 
-		adapter = new SwipeableEventsViewAdapter(events, hallEventsList);
+		adapter = new EventsViewAdapter(events, hallEventsList);
 		hallEventsList.setAdapter(adapter);
 		hallEventsList.setLayoutManager(new LinearLayoutManager(getActivity()));
 		DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(),

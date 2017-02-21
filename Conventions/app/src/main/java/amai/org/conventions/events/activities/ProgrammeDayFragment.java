@@ -32,7 +32,7 @@ import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.DefaultEventFavoriteChangedListener;
 import amai.org.conventions.events.ProgrammeConventionEvent;
 import amai.org.conventions.events.ViewPagerAnimator;
-import amai.org.conventions.events.adapters.SwipeableEventsViewOrHourAdapter;
+import amai.org.conventions.events.adapters.EventsViewOrHourAdapter;
 import amai.org.conventions.events.holders.TimeViewHolder;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.conventions.Convention;
@@ -46,7 +46,7 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 	private static final String STATE_PREVENT_SCROLLING = "StatePreventScrolling";
 
 	private SwipeRefreshLayout swipeLayout;
-	private SwipeableEventsViewOrHourAdapter adapter;
+	private EventsViewOrHourAdapter adapter;
 	private StickyListHeadersListView listView;
 	private List<ProgrammeConventionEvent> events;
 	private EventsListener listener;
@@ -97,7 +97,7 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 
 		listView = (StickyListHeadersListView) view.findViewById(R.id.programmeList);
 		events = getEventsList();
-		adapter = new SwipeableEventsViewOrHourAdapter(events);
+		adapter = new EventsViewOrHourAdapter(events);
 		listView.setAdapter(adapter);
 		adapter.setOnEventFavoriteChangedListener(new DefaultEventFavoriteChangedListener(listView) {
 			@Override

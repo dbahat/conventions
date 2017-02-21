@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical" android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
 
     <amai.org.conventions.events.EventView
         android:id="@+id/eventElement"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
+        android:layout_height="wrap_content"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:id="@+id/event_bottom_divider"
+        android:visibility="gone"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/event_list_divider"/>
 </LinearLayout>

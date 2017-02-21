@@ -10,20 +10,20 @@ import java.util.List;
 
 import amai.org.conventions.R;
 import amai.org.conventions.events.DefaultEventFavoriteChangedListener;
-import amai.org.conventions.events.holders.SwipeableEventViewHolder;
+import amai.org.conventions.events.holders.EventViewHolder;
 import amai.org.conventions.events.holders.TimeViewHolder;
 import amai.org.conventions.events.listeners.OnEventFavoriteChangedListener;
 import amai.org.conventions.model.ConventionEvent;
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
-public class SwipeableEventsViewListAdapter extends BaseAdapter implements StickyListHeadersAdapter {
+public class EventsViewListAdapter extends BaseAdapter implements StickyListHeadersAdapter {
 
 	private List<ConventionEvent> events;
 	private final boolean showHeaders;
 	private List<String> keywordsToHighlight;
 	private OnEventFavoriteChangedListener listener;
 
-	public SwipeableEventsViewListAdapter(List<ConventionEvent> events, View listView, boolean showHeaders) {
+	public EventsViewListAdapter(List<ConventionEvent> events, View listView, boolean showHeaders) {
 		this.events = events;
 		this.showHeaders = showHeaders;
 		this.listener = new DefaultEventFavoriteChangedListener(listView);
@@ -46,13 +46,13 @@ public class SwipeableEventsViewListAdapter extends BaseAdapter implements Stick
 
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
-		final SwipeableEventViewHolder holder;
+		final EventViewHolder holder;
 		if (convertView == null) {
-			convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.swipeable_event_view, parent, false);
-			holder = new SwipeableEventViewHolder(convertView, false);
+			convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.convention_event_view_holder, parent, false);
+			holder = new EventViewHolder(convertView);
 			convertView.setTag(holder);
 		} else {
-			holder = (SwipeableEventViewHolder) convertView.getTag();
+			holder = (EventViewHolder) convertView.getTag();
 		}
 
 		final ConventionEvent event = events.get(position);
@@ -65,16 +65,13 @@ public class SwipeableEventsViewListAdapter extends BaseAdapter implements Stick
 		holder.setBottomDividerVisible(isLastInNonLastSection);
 
 		if (keywordsToHighlight != null) {
-			holder.setKeywordsHighlighting(keywordsToHighlight);
+			holder.getEventView().setKeywordsHighlighting(keywordsToHighlight);
 		}
 
-		// Register to swipe open events to add/remove the item from favorites
-		holder.setOnViewSwipedAction(new Runnable() {
+		holder.getEventView().setOnFavoritesButtonClickedListener(new View.OnClickListener() {
 			@Override
-			public void run() {
-				if (listener != null) {
-					listener.onEventFavoriteChanged(event);
-				}
+			public void onClick(View v) {
+				listener.onEventFavoriteChanged(event);
 			}
 		});
 
