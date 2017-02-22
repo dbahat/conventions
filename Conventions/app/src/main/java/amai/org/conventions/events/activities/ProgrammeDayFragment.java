@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -31,7 +30,6 @@ import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.DefaultEventFavoriteChangedListener;
 import amai.org.conventions.events.ProgrammeConventionEvent;
-import amai.org.conventions.events.ViewPagerAnimator;
 import amai.org.conventions.events.adapters.EventsViewOrHourAdapter;
 import amai.org.conventions.events.holders.TimeViewHolder;
 import amai.org.conventions.model.ConventionEvent;
@@ -378,7 +376,6 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 								listView.postDelayed(new Runnable() {
 									@Override
 									public void run() {
-										triggerBounceAnimationIfNeeded();
 										listView.setOnTouchListener(null);
 									}
 								}, 1500);
@@ -393,18 +390,6 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 				public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 				}
 			});
-		}
-	}
-
-	private void triggerBounceAnimationIfNeeded() {
-		if (!Convention.getInstance().hasFavorites() && !cancelScroll) {
-			if (listView.getListChildCount() > 1) {
-				// Apply the animation on the second listView child, since the first will always be hidden by a sticky header
-				View currentEvent = listView.getListChildAt(1);
-
-				ViewPager currentEventViewPager = (ViewPager) currentEvent.findViewById(R.id.swipe_pager);
-				ViewPagerAnimator.applyBounceAnimation(currentEventViewPager);
-			}
 		}
 	}
 
