@@ -6,14 +6,17 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import amai.org.conventions.R;
+import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.ProgrammeConventionEvent;
 import amai.org.conventions.events.holders.EventViewHolder;
 import amai.org.conventions.events.holders.TimeViewHolder;
 import amai.org.conventions.events.listeners.OnEventFavoriteChangedListener;
 import amai.org.conventions.model.ConventionEvent;
+import amai.org.conventions.utils.Dates;
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
 public class EventsViewOrHourAdapter extends BaseAdapter implements StickyListHeadersAdapter {
@@ -90,8 +93,24 @@ public class EventsViewOrHourAdapter extends BaseAdapter implements StickyListHe
 			holder = (TimeViewHolder) convertView.getTag();
 		}
 
-		holder.setTime(events.get(position).getTimeSection().getTime(), "HH:00");
+		Date time = events.get(position).getTimeSection().getTime();
+		holder.setTime(time, "HH:00");
+		holder.setTextColor(getTimeColor(holder, time));
 		return convertView;
+	}
+
+	private int getTimeColor(TimeViewHolder holder, Date startTime) {
+		Calendar endTimeCalendar = Calendar.getInstance();
+		endTimeCalendar.setTimeInMillis(startTime.getTime() + Dates.MILLISECONDS_IN_HOUR);
+		Date endTime = endTimeCalendar.getTime();
+
+		if (!startTime.before(Dates.now())) {
+			return ThemeAttributes.getColor(holder.itemView.getContext(), R.attr.eventTypeNotStartedColor);
+		} else if (endTime.before(Dates.now())) {
+			return ThemeAttributes.getColor(holder.itemView.getContext(), R.attr.eventTypeEndedColor);
+		} else {
+			return ThemeAttributes.getColor(holder.itemView.getContext(), R.attr.eventTypeCurrentColor);
+		}
 	}
 
 	@Override

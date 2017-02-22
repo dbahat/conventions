@@ -31,4 +31,8 @@ public class TimeViewHolder extends RecyclerView.ViewHolder {
 	public Calendar getTime() {
 		return date;
 	}
+
+	public void setTextColor(int color) {
+		timeTextView.setTextColor(color);
+	}
 }
