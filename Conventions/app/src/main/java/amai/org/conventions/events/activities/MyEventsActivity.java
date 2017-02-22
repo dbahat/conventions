@@ -74,7 +74,6 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		removeForeground();
 
 		nextEventStart = (TextView) findViewById(R.id.nextEventStart);
-		nextEventStartBottomLine = findViewById(R.id.nextEventStartBottomLine);
 
 		int dateIndexToSelect = savedInstanceState == null ? SELECT_CURRENT_DATE : savedInstanceState.getInt(STATE_SELECTED_DATE_INDEX, SELECT_CURRENT_DATE);
 		setupDays(dateIndexToSelect);
@@ -273,7 +272,6 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 
 		if (displayNextEventStart) {
 			nextEventStart.setVisibility(View.VISIBLE);
-			nextEventStartBottomLine.setVisibility(View.VISIBLE);
 			nextEventStart.setText(getString(R.string.next_event_start,
 					Dates.toHumanReadableTimeDuration(nextEvent.getStartTime().getTime() - currTime.getTime()),
 					nextEvent.getHall().getName()));
@@ -289,7 +287,6 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 			nextEventStartTextRunner.postDelayed(updateNextEventStartTimeText, NEXT_EVENT_START_TIME_UPDATE_DELAY);
 		} else {
 			nextEventStart.setVisibility(View.GONE);
-			nextEventStartBottomLine.setVisibility(View.GONE);
 		}
 	}
 

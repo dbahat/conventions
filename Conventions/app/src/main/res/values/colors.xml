@@ -12,10 +12,11 @@
     <color name="light_yellow">#FEFFC9</color>
     <color name="transparent_light_yellow">#C0FEFFC9</color>
     <color name="yellow">#F8E9AE</color>
-    <color name="hint_gray">#909090</color>
+    <color name="hint_gray">#797979</color>
     <color name="black">#000000</color>
     <color name="transparent_black">#1A000000</color>
     <color name="yellow_medium">#f6eace</color>
+    <color name="transparent_yellow">#c0f6eace</color>
 
     <color name="green">#7EC078</color>
     <color name="gold">#ffca58</color>

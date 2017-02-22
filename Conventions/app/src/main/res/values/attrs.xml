@@ -46,6 +46,7 @@
         <!-- Updates Screen -->
         <attr name="updateTimeColor" format="color|reference"/>
         <attr name="updatesBackground" format="color|reference"/>
+        <attr name="newUpdateBackground" format="color|reference"/>
         <attr name="focusedUpdateBackground" format="color|reference"/>
         <!-- Map Screen -->
         <attr name="locationDetailsBackground" format="color|reference"/>

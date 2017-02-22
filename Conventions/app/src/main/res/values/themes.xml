@@ -30,6 +30,7 @@
 
         <item name="updateTimeColor">@color/ultra_light_gray</item>
         <item name="updatesBackground">?android:colorBackground</item>
+        <item name="newUpdateBackground">@color/very_light_gray</item>
 
         <item name="locationDetailsBackground">@color/white</item>
         <item name="locationDetailsTopLineColor">@android:color/black</item>

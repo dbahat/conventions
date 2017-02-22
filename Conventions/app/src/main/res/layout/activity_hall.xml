@@ -19,10 +19,14 @@
         android:foreground="?attr/shadowForeground"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black"/>
 
-            <klogi.com.RtlViewPager
-                android:id="@+id/hall_days_pager"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+        <klogi.com.RtlViewPager
+            android:id="@+id/hall_days_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
     </FrameLayout>
 </LinearLayout>

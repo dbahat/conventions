@@ -38,7 +38,9 @@
         <item name="standIconColor">@color/harucon2017_turquoise</item>
         <item name="standsTypeTitleColor">@color/harucon2017_turquoise</item>
 
-        <item name="focusedUpdateBackground">@color/yellow_medium</item>
+        <item name="focusedUpdateBackground">@color/transparent_yellow</item>
+        <item name="newUpdateBackground">@color/transparent_black</item>
+        <item name="updateTimeColor">@color/harucon2017_transparent_grayish</item>
 
         <item name="nextEventStartTimeBackground">@color/transparent_black</item>
         <item name="nextEventStartTimeTextColor">@color/black</item>

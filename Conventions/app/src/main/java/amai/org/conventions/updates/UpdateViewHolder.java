@@ -2,7 +2,6 @@ package amai.org.conventions.updates;
 
 import android.content.Context;
 import android.graphics.Point;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.view.Display;
@@ -48,7 +47,7 @@ public class UpdateViewHolder extends RecyclerView.ViewHolder {
 		if (updateViewModel.isFocused()) {
 			color = ThemeAttributes.getColor(itemView.getContext(), R.attr.focusedUpdateBackground);
 		} else if (updateViewModel.getUpdate().isNew()) {
-			color = ContextCompat.getColor(itemView.getContext(), R.color.very_light_gray);
+			color = ThemeAttributes.getColor(itemView.getContext(), R.attr.newUpdateBackground);
 		} else {
 			color = ThemeAttributes.getColor(itemView.getContext(), R.attr.updatesBackground);
 		}
