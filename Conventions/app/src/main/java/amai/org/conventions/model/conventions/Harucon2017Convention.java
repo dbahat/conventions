@@ -109,7 +109,7 @@ public class Harucon2017Convention extends AmaiConvention {
 		imageMapper.addMapping("http://2016.cami.org.il/wp-content/uploads/sites/9/2016/07/נשים-ביפן.jpg", R.drawable.event_mememe);
 
 		// Non-URL IDs
-		imageMapper.addMapping(EventToImageResourceIdMapper.EVENT_GENERIC, R.drawable.harucon2017_home_background);
+		imageMapper.addMapping(EventToImageResourceIdMapper.EVENT_GENERIC, R.drawable.harucon2017_event_default_image);
 
 		return imageMapper;
 	}
