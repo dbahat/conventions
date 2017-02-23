@@ -56,6 +56,7 @@
         <attr name="standIconColor" format="color|reference"/>
         <attr name="standsTypeTitleColor" format="color|reference"/>
         <!-- Event Screen -->
+        <attr name="eventToolbarColor" format="color|reference"/>
         <attr name="eventDetailsBoxColor" format="color|reference"/>
         <attr name="eventFeedbackBoxColor" format="color|reference"/>
         <attr name="buttonColor" format="color|reference"/>

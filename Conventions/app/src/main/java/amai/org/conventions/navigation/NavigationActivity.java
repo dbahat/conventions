@@ -210,6 +210,10 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		toolbarAndContentContainer.setBackground(drawable);
 	}
 
+	protected void setToolbarBackgroundColor(int color) {
+		navigationToolbar.setBackgroundColor(color);
+	}
+
 	protected void setBackgroundColor(int color) {
 		if (contentContainer != null) {
 			contentContainer.setBackgroundColor(color);

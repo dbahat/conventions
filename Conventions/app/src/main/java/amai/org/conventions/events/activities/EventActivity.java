@@ -53,6 +53,7 @@ import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.EventFeedbackMail;
 import amai.org.conventions.utils.FeedbackMail;
+import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Views;
 import fi.iki.kuitsi.listtest.ListTagHandler;
 import uk.co.chrisjenx.paralloid.views.ParallaxScrollView;
@@ -94,10 +95,14 @@ public class EventActivity extends NavigationActivity {
 		String eventId = getIntent().getStringExtra(EXTRA_EVENT_ID);
 		conventionEvent = Convention.getInstance().findEventById(eventId);
 		if (conventionEvent == null) {
-			throw new RuntimeException("Could not find event with id " + eventId);
+			Log.e(TAG, "Could not find event with id " + eventId);
+			finish();
+			return;
 		}
 
 		setToolbarTitle(conventionEvent.getType().getDescription());
+		setToolbarAndContentContainerBackground(null);
+		setToolbarBackgroundColor(ThemeAttributes.getColor(this, R.attr.eventToolbarColor));
 
 		// In this activity we have many items in the navigation bar (including overflow menu). They create 2 problems with a centered title design:
 		// 1. The code for centering the title based on the number of action items assumes there's no overflow menu.
