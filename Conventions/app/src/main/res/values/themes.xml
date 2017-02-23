@@ -43,6 +43,7 @@
 
         <item name="shadowForeground">@drawable/bottom_shadow</item>
         <item name="activitiesBackground">@null</item>
+        <item name="actionButtonColor">?colorAccent</item>
     </style>
 
     <style name="FullScreenDialog" parent="android:Theme.Dialog">

@@ -8,6 +8,7 @@
     <declare-styleable name="ApplicationTheme">
         <!-- Activities -->
         <attr name="activitiesBackground" format="color|reference"/>
+        <attr name="actionButtonColor" format="color|reference"/>
         <!-- Notifications -->
         <attr name="notificationSmallIcon" format="integer"/>
         <attr name="notificationLargeIcon" format="integer"/>

@@ -7,6 +7,7 @@
         <item name="alertDialogTheme">@style/AppAlertDialogTheme.Harucon2017</item>
         <item name="colorAccent">@color/harucon2017_turquoise</item>
         <item name="android:colorBackground">@null</item>
+        <item name="android:textColorLink">@color/harucon2017_red</item>
 
         <!-- not using android:actionOverflowButtonStyle since it doesn't seem to work in Jellybean -->
         <item name="actionOverflowButtonStyle">@style/OverflowMenu.Harucon2016</item>
@@ -19,6 +20,7 @@
         <item name="toolbarIconAccentColor">@color/gold</item>
         <item name="swipeToRefreshColor">@color/harucon2017_turquoise</item>
         <item name="navigationPopupSelectedColor">@color/harucon2017_turquoise</item>
+        <item name="actionButtonColor">@color/harucon2017_turquoise</item>
 
         <item name="snackbarActionColor">@color/harucon2017_turquoise</item>
 
