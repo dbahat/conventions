@@ -12,7 +12,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -104,34 +103,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	// Needed so we can take actions based on the number of actions the activity defined (e.g. adjust the toolbar title margin to be centered).
 	@Override
 	public final boolean onCreateOptionsMenu(Menu menu) {
-		boolean onCreateCustomOptionsMenuResult = onCreateCustomOptionsMenu(menu);
-
-		// Since we use a custom toolbar title centered between the action items, it's position is expected to shift based on the number
-		// of action items to it's start / end:
-		// On the title's start, we'll always have the navigation action.
-		// On the title's end, we'll have a changing amount of action items.
-		//
-		// If the number of items to the title's start/end isn't symmetrical, the title won't appear centered, so we need to add margin to it's
-		// start to "balance" the space taken by the action items.
-		// For example:
-		// If the menu has no items, it means we need to add a margin to the title's end by 1 action item size
-		// If the menu has 2 items, it means we need to add a margin to the title's start by 2 action time size
-		//
-		// NOTE -
-		// The calculation here assumes there's no overflow menu in the action bar. Such a menu causes a problem, since it causes the number of
-		// views in the ActionBar to be different then the number of MenuItems.
-		// Since we almost never use the overflow menu in the app, leaving this as a known issue to be handled by specific activities if required.
-		int numberOfActionItemsToShiftTitleStartMargin = menu.size() - 1;
-		int startMarginToAdd = getResources().getDimensionPixelSize(R.dimen.action_bar_item_width) * numberOfActionItemsToShiftTitleStartMargin;
-
-		FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams)navigationToolbarTitle.getLayoutParams();
-		// Only adjust the margin if the title is set to the center. This can be modified by calling setToolbarTitleGravity().
-		if (layoutParams.gravity == Gravity.CENTER) {
-			layoutParams.setMarginStart(startMarginToAdd);
-			navigationToolbarTitle.setLayoutParams(layoutParams);
-		}
-
-		return onCreateCustomOptionsMenuResult;
+		return onCreateCustomOptionsMenu(menu);
 	}
 
 	// Alternative callback for creating the options menu for derived classes to implement.

@@ -30,17 +30,18 @@
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:titleTextAppearance="@style/ToolbarTitle"
+                android:titleMargin="0dp"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="?toolbarBackground"
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:contentInsetStart="0dp">
 
-                <FrameLayout
+                <amai.org.conventions.customviews.CenterInToolbarFrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginEnd="14dp"> <!-- by default Android seems to leave 14dp margin from the nav bar to the toolbar layout.
-                    adding 14dp margin between the frame and the action items section so the title can be centered. -->
+                    android:layout_marginEnd="16dp"> <!-- by default Android seems to leave 16dp margin from the nav bar to the toolbar layout.
+                    This margin is not included in the size of the nav bar so we can't find it when calculating the size of hte nav bar. -->
 
                     <!-- Using a custom textView for the toolbar title for better customization (allow centering the title, allow showing an image
                      instead of text) -->
@@ -49,13 +50,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:textAlignment="center"
                         tools:text="title"
                         android:textColor="@color/black"
                         android:textSize="20dp"
                         android:ellipsize="end"
                         tools:ignore="SpUsage" /> <!-- using DP since larger toolbar title may overlap with toolbar action items -->
 
-                </FrameLayout>
+                </amai.org.conventions.customviews.CenterInToolbarFrameLayout>
             </android.support.v7.widget.Toolbar>
 
         </android.support.design.widget.AppBarLayout>
