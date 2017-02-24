@@ -65,6 +65,7 @@
         <attr name="buttonColor" format="color|reference"/>
         <attr name="buttonColorPressed" format="color|reference"/>
         <attr name="eventDetailsDefaultBackgroundColor" format="color|reference"/>
+        <attr name="feedbackButtonColor" format="color|reference"/>
         <attr name="eventFeedbackTextColor" format="color|reference"/>
         <attr name="conventionFeedbackTextColor" format="color|reference"/>
         <attr name="feedbackAnswerButtonColor" format="color|reference"/>

@@ -53,6 +53,7 @@
          prior to L it was not supported to reference theme attributes from a drawable xml -->
         <item name="buttonColor">@color/harucon2017_turquoise</item>
         <item name="buttonColorPressed">@color/harucon2017_turquoise_bright</item>
+        <item name="feedbackButtonColor">@color/white</item>
         <item name="feedbackAnswerButtonColor">@color/harucon2017_red</item>
         <item name="feedbackAnswerButtonSelectedColor">@color/harucon2017_orange</item>
 
@@ -63,7 +64,7 @@
 
         <item name="eventToolbarColor">@color/harucon2017_gray</item>
         <item name="eventDetailsBoxColor">@color/transparent_dark_black</item>
-        <item name="eventFeedbackBoxColor">@color/transparent_dark_yellow</item>
+        <item name="eventFeedbackBoxColor">@color/transparent_orange</item>
         <item name="eventDetailsTextColor">@color/black</item>
         <item name="eventDescriptionTextColor">@color/dark_gray</item>
         <item name="eventTitleTextColor">@color/white</item>

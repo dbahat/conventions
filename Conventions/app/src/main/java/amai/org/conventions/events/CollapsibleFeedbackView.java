@@ -207,7 +207,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 			filterColor = ContextCompat.getColor(getContext(), R.color.yellow);
 		} else {
 			icon = ContextCompat.getDrawable(getContext(), R.drawable.feedback);
-			filterColor = ThemeAttributes.getColor(getContext(), R.attr.buttonColor);
+			filterColor = ThemeAttributes.getColor(getContext(), R.attr.feedbackButtonColor);
 		}
 		icon = icon.mutate();
 		icon.setColorFilter(filterColor, PorterDuff.Mode.MULTIPLY);
