@@ -38,6 +38,7 @@ import com.google.android.gms.analytics.HitBuilders;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 import amai.org.conventions.ConventionsApplication;
@@ -51,10 +52,13 @@ import amai.org.conventions.utils.FeedbackMail;
 import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Views;
 
+import static amai.org.conventions.networking.AmaiModelParser.NO_COLOR;
+
 public class CollapsibleFeedbackView extends FrameLayout {
 	private static final String TAG = CollapsibleFeedbackView.class.getCanonicalName();
 
 	private State state;
+	private TextView feedbackLayoutTitle;
 	private TextView collapsedFeedbackTitle;
 	private Button openFeedbackButton;
 	private Button sendFeedbackButton;
@@ -64,9 +68,11 @@ public class CollapsibleFeedbackView extends FrameLayout {
 	private ViewGroup feedbackExpended;
 	private ViewGroup feedbackContainer;
 	private ProgressBar progressBar;
+	private List<TextView> generatedQuestionTextViews = new LinkedList<>();
 
 	private Feedback feedback;
 	private boolean feedbackChanged;
+	private int textColor = NO_COLOR;
 
 	public CollapsibleFeedbackView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -76,6 +82,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		state = State.Collapsed;
 		feedbackChanged = false;
 
+		feedbackLayoutTitle = (TextView) findViewById(R.id.feedback_layout_title);
 		collapsedFeedbackTitle = (TextView) findViewById(R.id.collapsed_feedback_title);
 		openFeedbackButton = (Button) findViewById(R.id.open_feedback_button);
 		feedbackIcon = (ImageView) findViewById(R.id.feedback_icon);
@@ -139,6 +146,19 @@ public class CollapsibleFeedbackView extends FrameLayout {
 
 		LinearLayout questionsLayout = (LinearLayout) findViewById(R.id.questions_layout);
 		buildQuestionsLayout(questionsLayout, feedback);
+		setTextColor(textColor);
+	}
+
+	public void setTextColor(int color) {
+		textColor = color;
+		if (color != NO_COLOR) {
+			collapsedFeedbackTitle.setTextColor(color);
+			feedbackSentText.setTextColor(color);
+			feedbackLayoutTitle.setTextColor(color);
+			for (TextView textView : generatedQuestionTextViews) {
+				textView.setTextColor(color);
+			}
+		}
 	}
 
 	public void setSendFeedbackClickListener(OnClickListener listener) {
@@ -146,6 +166,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 	}
 
 	private void buildQuestionsLayout(LinearLayout questionsLayout, Feedback feedback) {
+		generatedQuestionTextViews.clear();
 		questionsLayout.removeAllViews();
 		for (FeedbackQuestion question : feedback.getQuestions()) {
 			questionsLayout.addView(buildQuestionView(question, feedback));
@@ -201,6 +222,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		questionLayout.setLayoutParams(questionLayoutParams);
 
 		TextView questionText = new TextView(getContext());
+		generatedQuestionTextViews.add(questionText);
 		TextViewCompat.setTextAppearance(questionText, R.style.FeedbackQuestionTextAppearance);
 		boolean isSent = feedback.isSent();
 		questionText.setText(question.getQuestionText(getResources(), isSent));
@@ -338,6 +360,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		if (feedback.isSent()) {
 			// Display in a text view
 			TextView textView = new TextView(getContext());
+			generatedQuestionTextViews.add(textView);
 			LinearLayout.LayoutParams textViewLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 			textView.setLayoutParams(textViewLayoutParams);
 			TextViewCompat.setTextAppearance(textView, R.style.FeedbackQuestionTextAppearance);
@@ -349,6 +372,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		} else {
 			// Display in an editable text
 			EditText editText = new EditText(getContext());
+			generatedQuestionTextViews.add(editText);
 			editText.setFreezesText(true);
 			editText.setInputType(
 					InputType.TYPE_CLASS_TEXT |

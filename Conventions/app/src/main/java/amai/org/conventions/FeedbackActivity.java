@@ -301,6 +301,7 @@ public class FeedbackActivity extends NavigationActivity {
 		feedbackView = (CollapsibleFeedbackView) findViewById(R.id.convention_feedback_view);
 		feedbackView.setState(CollapsibleFeedbackView.State.ExpandedHeadless, false);
 		feedbackView.setModel(Convention.getInstance().getFeedback());
+		feedbackView.setTextColor(ThemeAttributes.getColor(this, R.attr.conventionFeedbackTextColor));
 		feedbackView.setSendFeedbackClickListener(feedbackView.new CollapsibleFeedbackViewSendMailListener() {
 			@Override
 			protected FeedbackMail getFeedbackMail() {

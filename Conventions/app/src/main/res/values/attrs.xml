@@ -58,10 +58,15 @@
         <!-- Event Screen -->
         <attr name="eventToolbarColor" format="color|reference"/>
         <attr name="eventDetailsBoxColor" format="color|reference"/>
+        <attr name="eventDescriptionTextColor" format="color|reference"/>
+        <attr name="eventTitleTextColor" format="color|reference"/>
+        <attr name="eventDetailsTextColor" format="color|reference"/>
         <attr name="eventFeedbackBoxColor" format="color|reference"/>
         <attr name="buttonColor" format="color|reference"/>
         <attr name="buttonColorPressed" format="color|reference"/>
         <attr name="eventDetailsDefaultBackgroundColor" format="color|reference"/>
+        <attr name="eventFeedbackTextColor" format="color|reference"/>
+        <attr name="conventionFeedbackTextColor" format="color|reference"/>
         <attr name="feedbackAnswerButtonColor" format="color|reference"/>
         <attr name="feedbackAnswerButtonSelectedColor" format="color|reference"/>
     </declare-styleable>

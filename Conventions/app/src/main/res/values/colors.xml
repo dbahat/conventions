@@ -11,12 +11,15 @@
     <color name="even_darker_gray">#5F5F5F</color>
     <color name="light_yellow">#FEFFC9</color>
     <color name="transparent_light_yellow">#C0FEFFC9</color>
+    <color name="transparent_dark_yellow">#c04a4a20</color>
     <color name="yellow">#F8E9AE</color>
     <color name="hint_gray">#797979</color>
     <color name="black">#000000</color>
     <color name="transparent_black">#1A000000</color>
+    <color name="transparent_dark_black">#89000000</color>
     <color name="yellow_medium">#f6eace</color>
     <color name="transparent_yellow">#c0f6eace</color>
+    <color name="more_transparent_white">#20FFFFFF</color>
 
     <color name="green">#7EC078</color>
     <color name="gold">#ffca58</color>

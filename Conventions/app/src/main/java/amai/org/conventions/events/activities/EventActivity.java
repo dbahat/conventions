@@ -110,6 +110,8 @@ public class EventActivity extends NavigationActivity {
 		// In order to avoid these issues, we align the title to the start in this activity only.
 		setToolbarGravity(Gravity.START | Gravity.CENTER_VERTICAL);
 
+		feedbackView.setTextColor(ThemeAttributes.getColor(this, R.attr.eventFeedbackTextColor));
+
 		final boolean shouldFocusOnFeedback = getIntent().getBooleanExtra(EXTRA_FOCUS_ON_FEEDBACK, false);
 
 		// Do the rest after the layout loads, since loading all the assets of this activity (which include images) can get long, we want the activity to first
@@ -456,21 +458,23 @@ public class EventActivity extends NavigationActivity {
 			lecturerName.setText(lecturer);
 		}
 
-		TextView time = (TextView) findViewById(R.id.event_hall_and_time);
+		TextView hall = (TextView) findViewById(R.id.event_hall);
+		TextView time = (TextView) findViewById(R.id.event_time);
 
-		String formattedEventHall = "";
 		if (event.getHall() != null) {
-			formattedEventHall = String.format("%s, ", event.getHall().getName());
+			hall.setText(event.getHall().getName());
+		} else {
+			hall.setVisibility(View.GONE);
 		}
 
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE dd.MM, ", Dates.getLocale());
-		String formattedEventTime = String.format("%s%s - %s (%s)",
+		String formattedEventTime = String.format("%s%s-%s (%s)",
 				// In case of single day convention, don't show the date
 				Convention.getInstance().getLengthInDays() == 1 ? "" : simpleDateFormat.format(event.getStartTime()),
 				Dates.formatHoursAndMinutes(event.getStartTime()),
 				Dates.formatHoursAndMinutes(event.getEndTime()),
 				Dates.toHumanReadableTimeDuration(event.getEndTime().getTime() - event.getStartTime().getTime()));
-		time.setText(String.format("%s%s", formattedEventHall, formattedEventTime));
+		time.setText(formattedEventTime);
 
 		setupFeedback(event);
 

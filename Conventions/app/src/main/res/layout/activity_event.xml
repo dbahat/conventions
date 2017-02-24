@@ -41,52 +41,67 @@
             android:orientation="vertical">
 
             <LinearLayout
-                style="@style/EventDetailsBox">
-                <LinearLayout
-                    android:layout_width="match_parent"
+                style="@style/EventDetailsHeaderBox">
+                <TextView
+                    android:id="@+id/event_type"
+                    android:textColor="?eventTitleTextColor"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:id="@+id/event_type"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@color/black"
-                        tools:text="Event Type"
-                        />
-                </LinearLayout>
+                    style="@style/TextAppearance.AppCompat.Small"
+                    tools:text="Event Type"
+                    android:gravity="center"
+                    />
                 <TextView
                     android:id="@+id/event_title"
                     style="@style/TextAppearance.AppCompat.Headline"
+                    android:textColor="?eventTitleTextColor"
+                    android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     tools:text="title" />
             </LinearLayout>
 
             <LinearLayout
                 style="@style/EventDetailsBox"
+                android:gravity="center"
                 android:layout_marginTop="10dp">
 
                 <TextView
                     android:id="@+id/event_lecturer"
                     style="@style/TextAppearance.AppCompat.Title"
+                    android:textColor="?attr/eventDetailsTextColor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     tools:text="lecturer" />
 
                 <TextView
-                    android:id="@+id/event_hall_and_time"
+                    android:id="@+id/event_hall"
                     style="@style/TextAppearance.AppCompat.Subhead"
+                    android:textColor="?attr/eventDetailsTextColor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
-                    tools:text="hall and time" />
+                    android:paddingTop="5dp"
+                    android:gravity="center"
+                    tools:text="hall" />
+
+                <TextView
+                    android:id="@+id/event_time"
+                    style="@style/TextAppearance.AppCompat.Title"
+                    android:textStyle="bold"
+                    android:textColor="?attr/eventDetailsTextColor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="5dp"
+                    android:gravity="center"
+                    tools:text="time" />
             </LinearLayout>
 
 
             <LinearLayout
                 android:id="@+id/event_feedback_container"
-                style="@style/EventDetailsBox.Feedback"
+                style="@style/EventDescriptionBox.Feedback"
                 android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -101,12 +116,13 @@
 
             <LinearLayout
                 android:id="@+id/event_description_box"
-                style="@style/EventDetailsBox"
+                style="@style/EventDescriptionBox"
                 android:layout_marginTop="10dp">
 
                 <TextView
                     android:id="@+id/event_description"
                     style="@style/TextAppearance.AppCompat.Body2"
+                    android:textColor="?attr/eventDescriptionTextColor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="description" />

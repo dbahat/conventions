@@ -62,6 +62,11 @@
         <item name="navigationPopupNotSelectedColor">@android:color/white</item>
 
         <item name="eventToolbarColor">@color/harucon2017_gray</item>
+        <item name="eventDetailsBoxColor">@color/transparent_dark_black</item>
+        <item name="eventFeedbackBoxColor">@color/transparent_dark_yellow</item>
+        <item name="eventDetailsTextColor">@color/black</item>
+        <item name="eventDescriptionTextColor">@color/dark_gray</item>
+        <item name="eventTitleTextColor">@color/white</item>
     </style>
 
     <style name="AppDialogTheme.Harucon2017" parent="Theme.AppCompat.Light.Dialog">

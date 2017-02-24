@@ -37,10 +37,15 @@
 
         <item name="eventToolbarColor">?toolbarBackground</item>
         <item name="eventDetailsBoxColor">@color/transparent_white</item>
+        <item name="eventDescriptionTextColor">?android:textColorPrimary</item>
+        <item name="eventDetailsTextColor">?android:textColorPrimary</item>
+        <item name="eventTitleTextColor">?android:textColorPrimary</item>
         <item name="eventFeedbackBoxColor">@color/transparent_light_yellow</item>
+        <item name="eventFeedbackTextColor">?attr/eventDescriptionTextColor</item>
         <!-- This color should match eventDetailsBoxColor in a way that eventDetailsBoxColor is not visible
              on top of this color -->
         <item name="eventDetailsDefaultBackgroundColor">@color/white</item>
+        <item name="conventionFeedbackTextColor">?android:textColorPrimary</item>
 
         <item name="shadowForeground">@drawable/bottom_shadow</item>
         <item name="activitiesBackground">@null</item>
