@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import amai.org.conventions.BuildConfig;
 import amai.org.conventions.utils.CollectionUtils;
+import amai.org.conventions.utils.Log;
 
 /**
  * Allows converting image ids (urls) into the relevant drawable.
@@ -13,6 +15,7 @@ import amai.org.conventions.utils.CollectionUtils;
  */
 public class EventToImageResourceIdMapper {
 	public static final String EVENT_GENERIC = "event_generic";
+	private static final String TAG = EventToImageResourceIdMapper.class.getCanonicalName();
 
 	// Maps the event identifier (in our case, its URI) to its image resource id.
 	private final Map<String, Integer> eventIdToImageResourceIdMap;
@@ -29,7 +32,11 @@ public class EventToImageResourceIdMapper {
 		List<String> existingImages = CollectionUtils.filter(eventImageIds, new CollectionUtils.Predicate<String>() {
 			@Override
 			public boolean where(String eventImageId) {
-				return eventIdToImageResourceIdMap.containsKey(eventImageId);
+				boolean imageExists = eventIdToImageResourceIdMap.containsKey(eventImageId);
+				if (BuildConfig.DEBUG && !imageExists) {
+					Log.i(TAG, "Unknown image: " + eventImageId);
+				}
+				return imageExists;
 			}
 		});
 
