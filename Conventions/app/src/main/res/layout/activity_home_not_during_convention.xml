@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_gravity="bottom"
+    android:layout_margin="24dp"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/harucon2017_dark_blue"
+        android:padding="8dp">
+        <TextView
+            android:id="@+id/home_content_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="32sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_gravity="center"/>
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@color/harucon2017_orange">
+
+        <TextView
+            android:id="@+id/home_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="עוד 10 ימים!"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="70sp"
+            android:textAlignment="center"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="13dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/home_buttons_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <Button
+            style="?borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/programme_title"
+            android:textColor="@color/white"
+            android:textSize="23sp"
+            android:layout_weight="1"
+            android:background="@color/harucon2017_dark_blue"
+            android:layout_marginEnd="16dp"
+            android:onClick="onGoToProgrammeClicked"/>
+
+        <Button
+            style="?borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/updates"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:id="@+id/textView"
+            android:layout_weight="1"
+            android:background="@color/harucon2017_dark_blue"
+            android:onClick="onGoToUpdatesClicked"/>
+
+    </LinearLayout>
+
+</LinearLayout>

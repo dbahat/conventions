@@ -245,4 +245,9 @@
     <string name="navigate_public_transportation">ניווט בתחבורה ציבורית</string>
     <string name="home">בית</string>
     <string name="dash">–</string>
+
+    <string name="home_convention_start_time">עוד %d ימים!</string>
+    <string name="home_help_us_improve">עזור לנו להשתפר</string>
+    <string name="home_send_feedback">לשליחת פידבק</string>
+    <string name="home_show_feedback">הצג פידבק</string>
 </resources>

@@ -23,7 +23,7 @@ public class SplashActivity extends AppCompatActivity {
 			return;
 		}
 
-		Intent intent = new Intent(SplashActivity.this, ProgrammeActivity.class)
+		Intent intent = new Intent(SplashActivity.this, HomeActivity.class)
 				.putExtra(NavigationActivity.EXTRA_INITIALIZE, true)
 				.putExtra(NavigationActivity.EXTRA_EXIT_ON_BACK, true);
 

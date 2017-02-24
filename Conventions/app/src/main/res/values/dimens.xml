@@ -38,4 +38,6 @@
          ?attr/actionBarSize which can only be accessed in runtime, and not before the activity is created.
          This is not correct for all devices but as close as it can be. -->
     <dimen name="status_bar_and_toolbar_and_tabs_height">137dp</dimen>
+
+    <dimen name="home_show_feedback_text_view_margins">80dp</dimen>
 </resources>

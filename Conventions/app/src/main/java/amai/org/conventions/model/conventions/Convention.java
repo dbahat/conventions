@@ -375,6 +375,10 @@ public abstract class Convention implements Serializable {
 		return minTime;
 	}
 
+	public boolean hasStarted() {
+		return Dates.now().after(getStartDate().getTime());
+	}
+
 	public boolean hasEnded() {
 		Date lastEventEndTime = getLastEventEndTime();
 		if (lastEventEndTime == null) {
