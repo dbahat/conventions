@@ -19,11 +19,13 @@
         android:orderInCategory="2"
         app:showAsAction="ifRoom"/>
 
+    <!-- TODO - Return the map once it's adjusted to Harucon 2017 -->
     <item
         android:id="@+id/event_navigate_to_map"
         android:title="@string/event_navigate_to_map"
         android:icon="@drawable/ic_dialog_map_black"
         android:orderInCategory="3"
+        android:visible="false"
         app:showAsAction="always"/>
 
     <item

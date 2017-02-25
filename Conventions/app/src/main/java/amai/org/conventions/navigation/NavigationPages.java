@@ -15,7 +15,6 @@ import amai.org.conventions.FeedbackActivity;
 import amai.org.conventions.HomeActivity;
 import amai.org.conventions.R;
 import amai.org.conventions.events.activities.ProgrammeActivity;
-import amai.org.conventions.map.MapActivity;
 import amai.org.conventions.settings.SettingsActivity;
 import amai.org.conventions.updates.UpdatesActivity;
 
@@ -67,7 +66,10 @@ public class NavigationPages {
 	private LinkedHashMap<Integer, Class<? extends Activity>> createPageIdToActivityTypeMap() {
 		LinkedHashMap<Integer, Class<? extends Activity>> pageIdToFragmentMapInOrder = new LinkedHashMap<>();
 		pageIdToFragmentMapInOrder.put(R.string.home, HomeActivity.class);
-		pageIdToFragmentMapInOrder.put(R.string.map, MapActivity.class);
+
+		// TODO - Return the map once it's adjusted to Harucon 2017
+//		pageIdToFragmentMapInOrder.put(R.string.map, MapActivity.class);
+
 		pageIdToFragmentMapInOrder.put(R.string.events, ProgrammeActivity.class);
 		pageIdToFragmentMapInOrder.put(R.string.updates, UpdatesActivity.class);
 		pageIdToFragmentMapInOrder.put(R.string.arrival_methods, ArrivalMethodsActivity.class);
