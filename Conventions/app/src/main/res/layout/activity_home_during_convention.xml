@@ -76,6 +76,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/home_go_to_my_events_button"
         android:textColor="@color/white"
         android:text="@string/home_go_to_my_events"
         android:textSize="23sp"

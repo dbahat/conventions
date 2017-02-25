@@ -163,6 +163,8 @@ public abstract class NavigationActivity extends AppCompatActivity {
 
 	protected View setContentInContentContainer(int layoutResID, boolean useDefaultBackground, boolean hideToolbarOnScroll) {
 		contentContainer = (FrameLayout) findViewById(R.id.navigation_content_view_container);
+		// Removing all previous views before attaching the newly inflated layout to support calling setContentInContentContainer() more then once
+		contentContainer.removeAllViews();
 		getLayoutInflater().inflate(layoutResID, contentContainer, true);
 
 		if (!hideToolbarOnScroll) {

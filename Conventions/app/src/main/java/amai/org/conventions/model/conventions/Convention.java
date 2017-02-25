@@ -388,11 +388,30 @@ public abstract class Convention implements Serializable {
 		return Dates.now().after(lastEventEndTime);
 	}
 
+	public boolean haveAllEventsStarted() {
+		Date lastEventStartTime = getLastEventStartTime();
+		if (lastEventStartTime == null) {
+			// Problem reading events
+			return false;
+		}
+		return Dates.now().after(lastEventStartTime);
+	}
+
 	private Date getLastEventEndTime() {
 		Date maxTime = null;
 		for (ConventionEvent event : getEvents()) {
 			if (maxTime == null || maxTime.before(event.getEndTime())) {
 				maxTime = event.getEndTime();
+			}
+		}
+		return maxTime;
+	}
+
+	private Date getLastEventStartTime() {
+		Date maxTime = null;
+		for (ConventionEvent event : getEvents()) {
+			if (maxTime == null || maxTime.before(event.getStartTime())) {
+				maxTime = event.getStartTime();
 			}
 		}
 		return maxTime;

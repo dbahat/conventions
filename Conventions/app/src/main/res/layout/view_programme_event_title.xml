@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              tools:background="@color/harucon2017_orange">
+
+    <TextView
+        android:id="@+id/programme_event_title_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="'פחד' באנימציה לילדים"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:layout_margin="8dp"
+        />
+
+    <View
+        android:id="@+id/programme_event_title_divider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/event_divider_height"
+        android:background="@drawable/event_list_divider"/>
+
+</LinearLayout>
