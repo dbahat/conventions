@@ -250,4 +250,7 @@
     <string name="home_help_us_improve">עזור לנו להשתפר</string>
     <string name="home_send_feedback">לשליחת פידבק</string>
     <string name="home_show_feedback">הצג פידבק</string>
+    <string name="home_go_to_my_events">עבור לאירועים שלי</string>
+    <string name="home_now_showing">כעת: %s</string>
+    <string name="home_upcoming_event_time">בעוד %s</string>
 </resources>
