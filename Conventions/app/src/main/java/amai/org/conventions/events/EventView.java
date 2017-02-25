@@ -254,7 +254,7 @@ public class EventView extends FrameLayout {
 				if (!didHighlightLectureName && !didHighlightHallName) {
 					if (filteredDescriptionText.toLowerCase().contains(lowerCaseKeyword)) {
 						if (!isAnyDescriptionKeywordHighlighted) {
-							bottomLayout.setVisibility(GONE);
+							bottomLayout.setVisibility(INVISIBLE); // This can't be GONE because it will mess up the favorite icon alignment
 							searchDescription.setVisibility(VISIBLE);
 							searchDescription.setText(Strings.snipTextNearKeyword(filteredDescriptionText, lowerCaseKeyword));
 							filteredDescriptionText = searchDescription.getText().toString();
