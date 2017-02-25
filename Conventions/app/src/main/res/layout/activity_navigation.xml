@@ -53,9 +53,9 @@
                         android:textAlignment="center"
                         tools:text="title"
                         android:textColor="@color/black"
-                        android:textSize="20dp"
                         android:ellipsize="end"
-                        tools:ignore="SpUsage" /> <!-- using DP since larger toolbar title may overlap with toolbar action items -->
+                        android:maxLines="2"
+                        style="@style/ToolbarTitle"/>
 
                 </amai.org.conventions.customviews.CenterInToolbarFrameLayout>
             </android.support.v7.widget.Toolbar>
