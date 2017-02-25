@@ -46,10 +46,12 @@ import amai.org.conventions.updates.UpdatesActivity;
 public abstract class NavigationActivity extends AppCompatActivity {
 	public static final String EXTRA_INITIALIZE = "ExtraInitialize";
 	public static final String EXTRA_EXIT_ON_BACK = "ExtraExitOnBack";
+	public static final String EXTRA_SHOW_HOME_ON_BACK = "ExtraShowHomeOnBack";
 
 	private TextView navigationToolbarTitle;
 	private Toolbar navigationToolbar;
 	private boolean exitOnBack;
+	private boolean showHomeOnBack;
 	private FrameLayout contentContainer;
 	private FloatingActionButton actionButton;
 	private DrawerLayout navigationDrawer;
@@ -60,6 +62,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_navigation);
 
 		exitOnBack = getIntent().getBooleanExtra(EXTRA_EXIT_ON_BACK, false);
+		showHomeOnBack = getIntent().getBooleanExtra(EXTRA_SHOW_HOME_ON_BACK, false);
 
 		if (getIntent().getBooleanExtra(EXTRA_INITIALIZE, false) &&
 				!(savedInstanceState != null && savedInstanceState.getBoolean(EXTRA_INITIALIZE, true))) {
@@ -272,13 +275,19 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		Intent intent = new Intent(this, activityToNavigateTo);
 		if (clearBackStack) {
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-			// If the user presses back when the back stack is clear we want to exit the application.
+			// If the user presses back when the back stack is clear and the current screen is the home activity
+			// we want to exit the application.
 			// For some reason the splash activity remains on the back stack even with these flags
 			// (it's probably a good thing due to the issue described in SplashActivity)
 			// so we must explicitly handle the back in this case.
 			// This flag only has a meaning if we're navigating to a NavigationActivity.
-			if (NavigationActivity.class.isAssignableFrom(activityToNavigateTo)) {
+			if (activityToNavigateTo.equals(HomeActivity.class)) {
 				intent.putExtra(EXTRA_EXIT_ON_BACK, true);
+			} else if (NavigationActivity.class.isAssignableFrom(activityToNavigateTo)) {
+				// When the user presses back and the back stack is clear, and we're not in the home activity,
+				// we should go back to the home activity.
+				// This flag only has a meaning if we're navigating to a NavigationActivity.
+				intent.putExtra(EXTRA_SHOW_HOME_ON_BACK, true);
 			}
 			finish();
 		}
@@ -305,7 +314,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	@Override
 	public void onBackPressed() {
 		if (exitOnBack) {
-			// We want to exist when pressing back because the SplashActivity is still in the back stack
+			// We want to exit when pressing back because the SplashActivity is still in the back stack
 			// and will be displayed if we don't tell it to finish. See SplashActivity onCreate for the
 			// reason it's in the back stack instead of being finished.
 			Bundle bundle = new Bundle();
@@ -316,6 +325,8 @@ public abstract class NavigationActivity extends AppCompatActivity {
 			intent.putExtras(bundle);
 			startActivity(intent);
 			return;
+		} else if (showHomeOnBack) {
+			navigateToActivity(HomeActivity.class);
 		}
 		super.onBackPressed();
 	}

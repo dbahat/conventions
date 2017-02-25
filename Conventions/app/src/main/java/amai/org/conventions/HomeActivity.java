@@ -49,7 +49,7 @@ public class HomeActivity extends NavigationActivity {
 			contentView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					startActivity(new Intent(HomeActivity.this, FeedbackActivity.class));
+					navigateToActivity(FeedbackActivity.class);
 				}
 			});
 			findViewById(R.id.home_buttons_layout).setVisibility(View.GONE);
@@ -80,10 +80,10 @@ public class HomeActivity extends NavigationActivity {
 	}
 
 	public void onGoToProgrammeClicked(View view) {
-		startActivity(new Intent(this, ProgrammeActivity.class));
+		navigateToActivity(ProgrammeActivity.class);
 	}
 
 	public void onGoToUpdatesClicked(View view) {
-		startActivity(new Intent(this, UpdatesActivity.class));
+		navigateToActivity(UpdatesActivity.class);
 	}
 }
