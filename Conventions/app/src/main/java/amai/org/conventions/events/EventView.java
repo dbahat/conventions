@@ -43,6 +43,7 @@ public class EventView extends FrameLayout {
 	private final View bottomLayout;
 
 	// Used for keyword highlighting - see setKeywordsHighlighting
+	private final View searchDescriptionContainer;
 	private final TextView searchDescription;
 	private String eventDescriptionContent;
 
@@ -68,6 +69,7 @@ public class EventView extends FrameLayout {
 		eventDescription = (ViewGroup) this.findViewById(R.id.eventDescription);
 		eventMainTouchArea = this.findViewById(R.id.eventMainTouchArea);
 		bottomLayout = this.findViewById(R.id.bottom_layout);
+		searchDescriptionContainer = this.findViewById(R.id.search_description_container);
 		searchDescription = (TextView) this.findViewById(R.id.search_description);
 
 		setConflicting(false);
@@ -233,7 +235,7 @@ public class EventView extends FrameLayout {
 	public void setKeywordsHighlighting(List<String> keywords) {
 		// Reset the state of the bottom layout, in case it was changed by recent call to set keyword highlighting
 		bottomLayout.setVisibility(VISIBLE);
-		searchDescription.setVisibility(GONE);
+		searchDescriptionContainer.setVisibility(GONE);
 		boolean isAnyDescriptionKeywordHighlighted = false;
 
 		String filteredDescriptionText = eventDescriptionContent;
@@ -255,7 +257,7 @@ public class EventView extends FrameLayout {
 					if (filteredDescriptionText.toLowerCase().contains(lowerCaseKeyword)) {
 						if (!isAnyDescriptionKeywordHighlighted) {
 							bottomLayout.setVisibility(INVISIBLE); // This can't be GONE because it will mess up the favorite icon alignment
-							searchDescription.setVisibility(VISIBLE);
+							searchDescriptionContainer.setVisibility(VISIBLE);
 							searchDescription.setText(Strings.snipTextNearKeyword(filteredDescriptionText, lowerCaseKeyword));
 							filteredDescriptionText = searchDescription.getText().toString();
 							isAnyDescriptionKeywordHighlighted = true;
