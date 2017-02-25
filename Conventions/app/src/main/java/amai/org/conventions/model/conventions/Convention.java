@@ -23,7 +23,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import amai.org.conventions.map.AggregatedEventTypes;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
-import amai.org.conventions.model.EventToImageResourceIdMapper;
+import amai.org.conventions.model.ImageIdToImageResourceMapper;
 import amai.org.conventions.model.EventType;
 import amai.org.conventions.model.Feedback;
 import amai.org.conventions.model.FeedbackQuestion;
@@ -63,7 +63,7 @@ public abstract class Convention implements Serializable {
 	private String displayName;
 	private URL modelURL;
 	private String facebookFeedPath;
-	private EventToImageResourceIdMapper imageMapper;
+	private ImageIdToImageResourceMapper imageMapper;
 
 	private double longitude;
 	private double latitude;
@@ -161,7 +161,7 @@ public abstract class Convention implements Serializable {
 
 	protected abstract double initLatitude();
 
-	protected abstract EventToImageResourceIdMapper initImageMapper();
+	protected abstract ImageIdToImageResourceMapper initImageMapper();
 
 	public Calendar getStartDate() {
 		return startDate;
@@ -187,7 +187,7 @@ public abstract class Convention implements Serializable {
 		return feedback;
 	}
 
-	public EventToImageResourceIdMapper getImageMapper() {
+	public ImageIdToImageResourceMapper getImageMapper() {
 		return imageMapper;
 	}
 

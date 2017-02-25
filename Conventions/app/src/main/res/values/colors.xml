@@ -18,7 +18,7 @@
     <color name="transparent_dark_black">#89000000</color>
     <color name="yellow_medium">#f6eace</color>
     <color name="transparent_yellow">#c0f6eace</color>
-    <color name="more_transparent_white">#20FFFFFF</color>
+    <color name="transparent_black_50">#5A000000</color>
 
     <color name="green">#7EC078</color>
     <color name="gold">#ffca58</color>

@@ -70,7 +70,7 @@
                 <TextView
                     android:id="@+id/event_lecturer"
                     style="@style/TextAppearance.AppCompat.Title"
-                    android:textColor="?attr/eventDetailsTextColor"
+                    android:textColor="?attr/eventDescriptionTextColor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -79,7 +79,7 @@
                 <TextView
                     android:id="@+id/event_hall"
                     style="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="?attr/eventDetailsTextColor"
+                    android:textColor="?attr/eventDescriptionTextColor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="5dp"
@@ -90,7 +90,7 @@
                     android:id="@+id/event_time"
                     style="@style/TextAppearance.AppCompat.Title"
                     android:textStyle="bold"
-                    android:textColor="?attr/eventDetailsTextColor"
+                    android:textColor="?attr/eventDescriptionTextColor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="5dp"
