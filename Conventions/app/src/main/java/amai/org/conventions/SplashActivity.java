@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import amai.org.conventions.events.activities.ProgrammeActivity;
 import amai.org.conventions.navigation.NavigationActivity;
 
 /**
@@ -26,11 +25,6 @@ public class SplashActivity extends AppCompatActivity {
 		Intent intent = new Intent(SplashActivity.this, HomeActivity.class)
 				.putExtra(NavigationActivity.EXTRA_INITIALIZE, true)
 				.putExtra(NavigationActivity.EXTRA_EXIT_ON_BACK, true);
-
-		// propagate the extras from this activity to the next one, since they may contain push notification related extras.
-		if (getIntent().getExtras() != null) {
-			intent.putExtras(getIntent().getExtras());
-		}
 
 		startActivity(intent);
 

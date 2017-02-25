@@ -90,6 +90,14 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		new PushNotificationDialogPresenter().present(this, getIntent());
 	}
 
+	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
+		// In case the user clicked a push notification while inside the activity, have the activity
+		// show the push notification (as we won't re-create it, not to create an extra copy of it on the activity stack)
+		new PushNotificationDialogPresenter().present(this, intent);
+	}
+
 	private void openNavigationDrawer(boolean animate) {
 		initializeNavigationDrawer();
 		navigationDrawer.openDrawer(GravityCompat.START, animate);

@@ -14,9 +14,9 @@ import java.util.List;
 
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.FeedbackActivity;
+import amai.org.conventions.HomeActivity;
 import amai.org.conventions.ImageHandler;
 import amai.org.conventions.R;
-import amai.org.conventions.SplashActivity;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.activities.EventActivity;
 import amai.org.conventions.model.ConventionEvent;
@@ -212,7 +212,7 @@ public class ShowNotificationService extends Service {
 		String category = intent.getStringExtra(EXTRA_CATEGORY); // Could be null
 
 		int notificationId = getNextPushNotificationId();
-		Intent openAppIntent = new Intent(this, SplashActivity.class)
+		Intent openAppIntent = new Intent(this, HomeActivity.class)
 				.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
 				.setAction(Type.Push.toString() + notificationId)
 				.putExtra(PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION_ID, notificationId)  // To prevent seeing the same notification twice
