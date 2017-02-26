@@ -21,7 +21,7 @@
             android:textColor="@color/white"
             android:textStyle="bold"
             android:layout_gravity="center"
-            tools:text="12/3/2017"/>
+            tools:text="12.03.2017"/>
     </FrameLayout>
 
     <LinearLayout
