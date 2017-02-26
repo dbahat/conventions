@@ -8,6 +8,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -30,7 +31,6 @@ import amai.org.conventions.updates.UpdatesActivity;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
 
-import static amai.org.conventions.R.id.home_upcoming_event_time;
 import static amai.org.conventions.utils.CollectionUtils.filter;
 
 public class HomeActivity extends NavigationActivity {
@@ -70,7 +70,7 @@ public class HomeActivity extends NavigationActivity {
 		setContentInContentContainer(R.layout.activity_home_during_convention, false, false);
 
 		TextView currentEventTitle = (TextView)findViewById(R.id.home_current_event_title);
-		TextView upcomingEventTime = (TextView)findViewById(home_upcoming_event_time);
+		TextView upcomingEventTime = (TextView)findViewById(R.id.home_upcoming_event_time);
 		TextView upcomingEventTitle = (TextView)findViewById(R.id.home_upcoming_event_title);
 		TextView upcomingEventHall = (TextView)findViewById(R.id.home_upcoming_event_hall);
 
@@ -121,7 +121,7 @@ public class HomeActivity extends NavigationActivity {
 				: Dates.now(); // error case - if we don't have any upcoming events we shouldn't have reached here. Add some default non-crashing behavior.
 
 		upcomingProgrammeEventsTitle.setText(getString(R.string.home_upcoming_programme_events, Dates.formatHoursAndMinutes(upcomingEventsTime)));
-		upcomingEventsListView.setAdapter(new BaseAdapter() {
+		final BaseAdapter adapter = new BaseAdapter() {
 			@Override
 			public int getCount() {
 				return upcomingEvents.size();
@@ -148,14 +148,38 @@ public class HomeActivity extends NavigationActivity {
 					viewHolder = (ProgrammeEventTitleViewHolder)convertView.getTag();
 				}
 
-				String upcomingEventTitle = upcomingEvents.get(position).getTitle();
-				viewHolder.bind(upcomingEventTitle, position < getCount() - 1);
+				ConventionEvent upcomingEvent = upcomingEvents.get(position);
+				viewHolder.bind(upcomingEvent.getTitle(), position < getCount() - 1);
 				return convertView;
+			}
+		};
+		upcomingEventsListView.setAdapter(adapter);
+		upcomingEventsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				ConventionEvent event = (ConventionEvent) adapter.getItem(position);
+				navigateToEvent(event.getId());
 			}
 		});
 	}
 
-	private static class ProgrammeEventTitleViewHolder extends RecyclerView.ViewHolder {
+	public void onCurrentEventClicked(View view) {
+		ConventionEvent currentEvent = getCurrentFavoriteEvent();
+		if (currentEvent != null) {
+			navigateToEvent(currentEvent.getId());
+		}
+	}
+
+	public void onUpcomingEventClicked(View view) {
+		ConventionEvent upcomingFavoriteEvent = getUpcomingFavoriteEvent();
+		if (upcomingFavoriteEvent != null) {
+			navigateToEvent(upcomingFavoriteEvent.getId());
+		} else {
+			onCurrentEventClicked(view);
+		}
+	}
+
+	private class ProgrammeEventTitleViewHolder extends RecyclerView.ViewHolder {
 
 		private TextView title;
 		private View divider;
