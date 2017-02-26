@@ -20,7 +20,8 @@
             android:textSize="32sp"
             android:textColor="@color/white"
             android:textStyle="bold"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            tools:text="12/3/2017"/>
     </FrameLayout>
 
     <LinearLayout

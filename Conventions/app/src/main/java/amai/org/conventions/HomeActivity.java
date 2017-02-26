@@ -265,6 +265,7 @@ public class HomeActivity extends NavigationActivity {
 			} else {
 				contentView.setText(getString(R.string.home_convention_start_time, daysUntilConventionStarts));
 			}
+			titleView.setText(R.string.home_convention_date);
 		} else {
 			contentView.setForeground(ThemeAttributes.getDrawable(this, R.attr.selectableItemBackground));
 			contentView.setClickable(true);
@@ -278,7 +279,7 @@ public class HomeActivity extends NavigationActivity {
 
 			if (Convention.getInstance().getFeedback().isSent() || Convention.getInstance().isFeedbackSendingTimeOver()) {
 				// The feedback filling time is over or feedback was sent. Allow the user to see his feedback
-				titleView.setText("");
+				titleView.setText(R.string.home_convention_ended);
 				contentView.setText(R.string.home_show_feedback);
 				contentView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 50);
 				ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) contentView.getLayoutParams();
