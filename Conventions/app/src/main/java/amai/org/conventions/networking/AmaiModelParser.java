@@ -173,6 +173,8 @@ public class AmaiModelParser implements ModelParser {
 				.replaceAll("style=\"[^\"]*\"", "")
 				.replaceAll("width=\"[^\"]*\"", "")
 				.replaceAll("height=\"[^\"]*\"", "")
+				// TODO: This change was added as a workaround to Harucon2017 Cosplay Event page parsing. Should be dropped after Harucon is over.
+				.replace("target=\"_self\"><img", "target=\"_self\"><br/><br/><img")
 				// Replace divs and images with some other unsupported (and therefore ignored)
 				.replace("<div", "<xdiv")
 				.replace("/div>", "/xdiv>")
