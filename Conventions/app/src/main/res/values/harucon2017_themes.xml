@@ -63,6 +63,7 @@
         <item name="navigationPopupNotSelectedColor">@android:color/white</item>
 
         <item name="eventToolbarColor">@color/harucon2017_gray</item>
+        <item name="eventDetailsDefaultBackgroundColor">@color/harucon2017_gray</item>
         <item name="eventDetailsBoxColor">@color/transparent_dark_black</item>
         <item name="eventFeedbackBoxColor">@color/transparent_orange</item>
         <item name="eventDetailsTextColor">@color/black</item>

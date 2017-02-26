@@ -25,6 +25,8 @@ public class Harucon2017Convention extends AmaiConvention {
 	private static final String ESHKOL1_NAME = "אשכול 1";
 	private static final String ESHKOL2_NAME = "אשכול 2";
 	private static final String ESHKOL3_NAME = "אשכול 3";
+	private static final String GAMES_NAME = "משחקיה";
+	private static final String SIGNING_NAME = "אזור החתמות";
 
 	@Override
 	protected ConventionStorage initStorage() {
@@ -125,8 +127,10 @@ public class Harucon2017Convention extends AmaiConvention {
 		Hall eshkol1 = new Hall().withName(ESHKOL1_NAME).withOrder(3);
 		Hall eshkol2 = new Hall().withName(ESHKOL2_NAME).withOrder(4);
 		Hall eshkol3 = new Hall().withName(ESHKOL3_NAME).withOrder(5);
+		Hall games = new Hall().withName(GAMES_NAME).withOrder(5);
+		Hall signing = new Hall().withName(SIGNING_NAME).withOrder(5);
 
-		return Arrays.asList(mainHall, auditorium, eshkol1, eshkol2, eshkol3);
+		return Arrays.asList(mainHall, auditorium, eshkol1, eshkol2, eshkol3, games, signing);
 	}
 
 	@Override
@@ -136,6 +140,8 @@ public class Harucon2017Convention extends AmaiConvention {
 		Hall eshkol1 = findHallByName(ESHKOL1_NAME);
 		Hall eshkol2 = findHallByName(ESHKOL2_NAME);
 		Hall eshkol3 = findHallByName(ESHKOL3_NAME);
+		Hall games = findHallByName(GAMES_NAME);
+		Hall signing = findHallByName(SIGNING_NAME);
 
 		Floor floor1 = new Floor(1)
 				.withName("מפלס תחתון")
