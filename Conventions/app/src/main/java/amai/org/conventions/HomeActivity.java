@@ -49,10 +49,12 @@ public class HomeActivity extends NavigationActivity {
 
 		// Creating the page layout during onResume (and not onCreate) since the layout is time-driven, and we want it refreshed in case the activity was paused
 		// and got resumed.
-		if (!Convention.getInstance().hasStarted() || Convention.getInstance().haveAllEventsStarted()) {
-			setContentForBeforeOrAfterConventionDate();
-		} else {
+		if (Dates.now().after(Convention.getInstance().getStartDate().getTime()) &&
+				// Checking for haveAllEventsStarted() since we only show events that have not yet started
+				!Convention.getInstance().haveAllEventsStarted()) {
 			setContentForDuringConvention();
+		} else {
+			setContentForBeforeOrAfterConventionDate();
 		}
 	}
 
@@ -260,18 +262,8 @@ public class HomeActivity extends NavigationActivity {
 		TextView contentView = (TextView)findViewById(R.id.home_content);
 		FrameLayout contentViewContainer = (FrameLayout)findViewById(R.id.home_content_container);
 
-		if (!Convention.getInstance().haveAllEventsStarted()) {
-			// before the convention started, show the days until it starts.
-			int daysUntilConventionStarts = getDaysUntilConventionStart();
-			if (daysUntilConventionStarts == 1) {
-				contentView.setText("מחר!");
-			} else if (daysUntilConventionStarts == 2) {
-				contentView.setText("עוד יומיים!");
-			} else {
-				contentView.setText(getString(R.string.home_convention_start_time, daysUntilConventionStarts));
-			}
-			titleView.setText(R.string.home_convention_date);
-		} else {
+		if (Convention.getInstance().haveAllEventsStarted()) {
+			// All the events are already in-progress or finished. Show the user to the feedback screen.
 			contentViewContainer.setForeground(ThemeAttributes.getDrawable(this, R.attr.selectableItemBackground));
 			contentViewContainer.setClickable(true);
 			contentViewContainer.setOnClickListener(new View.OnClickListener() {
@@ -297,6 +289,17 @@ public class HomeActivity extends NavigationActivity {
 				titleView.setText(R.string.home_help_us_improve);
 				contentView.setText(R.string.home_send_feedback);
 			}
+		} else {
+			// the convention didn't start yet. Show the user the number of days until it starts.
+			int daysUntilConventionStarts = getDaysUntilConventionStart();
+			if (daysUntilConventionStarts == 1) {
+				contentView.setText("מחר!");
+			} else if (daysUntilConventionStarts == 2) {
+				contentView.setText("עוד יומיים!");
+			} else {
+				contentView.setText(getString(R.string.home_convention_start_time, daysUntilConventionStarts));
+			}
+			titleView.setText(R.string.home_convention_date);
 		}
 	}
 
