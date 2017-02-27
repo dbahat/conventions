@@ -177,15 +177,15 @@
     </LinearLayout>
 
     <!-- defining separate layouts to be used for intercepting touch events so that the touch areas won't ve affected by the view hierarchy-->
-    <LinearLayout
+    <!-- the layouts are set as overlapping since we want the ripple effect when touching the main touch area to apply for all the view -->
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
         <View
             android:id="@+id/eventMainTouchArea"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:onClick="onConventionEventClicked"
             android:background="?selectableItemBackground"
@@ -195,9 +195,9 @@
             android:id="@+id/eventFavoriteIconTouchArea"
             android:layout_width="70dp"
             android:layout_height="match_parent"
-            android:background="?selectableItemBackground"
+            android:layout_gravity="end"
             />
 
-    </LinearLayout>
+    </FrameLayout>
 
 </FrameLayout>
