@@ -35,6 +35,10 @@ import amai.org.conventions.utils.Dates;
 import static amai.org.conventions.utils.CollectionUtils.filter;
 
 public class HomeActivity extends NavigationActivity {
+	// These are used for consistent navigation
+	private ConventionEvent currentFavoriteEvent;
+	private ConventionEvent upcomingFavoriteEvent;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -59,11 +63,11 @@ public class HomeActivity extends NavigationActivity {
 	}
 
 	private void setContentForDuringConvention() {
-		ConventionEvent currentEvent = getCurrentFavoriteEvent();
-		ConventionEvent upcomingEvent = getUpcomingFavoriteEvent();
+		currentFavoriteEvent = getCurrentFavoriteEvent();
+		upcomingFavoriteEvent = getUpcomingFavoriteEvent();
 
-		if (currentEvent != null || upcomingEvent != null) {
-			setContentWithUpcomingFavorites(currentEvent, upcomingEvent);
+		if (currentFavoriteEvent != null || upcomingFavoriteEvent != null) {
+			setContentWithUpcomingFavorites(currentFavoriteEvent, upcomingFavoriteEvent);
 		} else {
 			setContentForNoUpcomingFavorites();
 		}
@@ -170,14 +174,12 @@ public class HomeActivity extends NavigationActivity {
 	}
 
 	public void onCurrentEventClicked(View view) {
-		ConventionEvent currentEvent = getCurrentFavoriteEvent();
-		if (currentEvent != null) {
-			navigateToEvent(currentEvent.getId());
+		if (currentFavoriteEvent != null) {
+			navigateToEvent(currentFavoriteEvent.getId());
 		}
 	}
 
 	public void onUpcomingEventClicked(View view) {
-		ConventionEvent upcomingFavoriteEvent = getUpcomingFavoriteEvent();
 		if (upcomingFavoriteEvent != null) {
 			navigateToEvent(upcomingFavoriteEvent.getId());
 		} else {
