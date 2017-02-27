@@ -70,7 +70,9 @@ public class HomeActivity extends NavigationActivity {
 	private void setContentWithUpcomingFavorites(ConventionEvent currentEvent, ConventionEvent upcomingEvent) {
 		setContentInContentContainer(R.layout.activity_home_during_convention, false, false);
 
+		View currentEventContainer = findViewById(R.id.home_current_event_container);
 		TextView currentEventTitle = (TextView)findViewById(R.id.home_current_event_title);
+		View upcomingEventContainer = findViewById(R.id.home_upcoming_event_container);
 		TextView upcomingEventTime = (TextView)findViewById(R.id.home_upcoming_event_time);
 		TextView upcomingEventTitle = (TextView)findViewById(R.id.home_upcoming_event_title);
 		TextView upcomingEventHall = (TextView)findViewById(R.id.home_upcoming_event_hall);
@@ -88,7 +90,7 @@ public class HomeActivity extends NavigationActivity {
 			if (currentEvent != null) {
 				currentEventTitle.setText(getString(R.string.home_now_showing, currentEvent.getTitle()));
 			} else {
-				currentEventTitle.setVisibility(View.GONE);
+				currentEventContainer.setVisibility(View.GONE);
 			}
 		} else {
 			// no upcoming event to show, but there's an event currently showing - show the current event at the upcoming event layout
@@ -96,6 +98,7 @@ public class HomeActivity extends NavigationActivity {
 			upcomingEventTitle.setText(currentEvent.getTitle());
 			upcomingEventTime.setText(getString(R.string.home_now_showing, ""));
 			upcomingEventHall.setText(currentEvent.getHall().getName());
+			upcomingEventContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.harucon2017_red));
 
 			// In this case, we want the 'go to my events' to go to the programme instead, since the user has no more favorite events.
 			Button goToMyEventsButton = (Button)findViewById(R.id.home_go_to_my_events_button);

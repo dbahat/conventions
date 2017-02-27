@@ -25,39 +25,41 @@
     </FrameLayout>
 
     <FrameLayout
+        android:id="@+id/home_current_event_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:foreground="?selectableItemBackground"
-        android:onClick="onUpcomingEventClicked">
+        android:gravity="center"
+        android:onClick="onCurrentEventClicked">
+        <!-- This view is inside a FrameLayout because in previous API levels foreground was not available for other views -->
+        <TextView
+            android:id="@+id/home_current_event_title"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="כעת: תחרות השירה"
+            android:background="@color/harucon2017_red"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:paddingBottom="8dp"
+            />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/home_upcoming_event_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?selectableItemBackground"
+        android:paddingTop="8dp"
+        android:onClick="onUpcomingEventClicked"
+        android:background="@color/harucon2017_orange">
         <!-- This layout is inside a FrameLayout because in previous API levels foreground was not available for other views -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:gravity="center"
-            android:background="@color/harucon2017_orange">
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:foreground="?selectableItemBackground"
-                android:onClick="onCurrentEventClicked">
-                <!-- This view is inside a FrameLayout because in previous API levels foreground was not available for other views -->
-                <TextView
-                    android:id="@+id/home_current_event_title"
-                    android:visibility="visible"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:text="כעת: תחרות השירה"
-                    android:background="@color/harucon2017_red"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:paddingBottom="8dp"
-                    />
-            </FrameLayout>
-
+            android:orientation="vertical">
             <TextView
                 android:id="@+id/home_upcoming_event_time"
                 android:layout_width="wrap_content"
@@ -86,7 +88,6 @@
                 android:textColor="@color/white"
                 android:textSize="23sp"
                 android:layout_marginBottom="8dp"/>
-
         </LinearLayout>
     </FrameLayout>
 
