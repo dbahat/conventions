@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -254,6 +255,7 @@ public class HomeActivity extends NavigationActivity {
 
 		TextView titleView = (TextView)findViewById(R.id.home_content_title);
 		TextView contentView = (TextView)findViewById(R.id.home_content);
+		FrameLayout contentViewContainer = (FrameLayout)findViewById(R.id.home_content_container);
 
 		if (!Convention.getInstance().haveAllEventsStarted()) {
 			// before the convention started, show the days until it starts.
@@ -267,9 +269,9 @@ public class HomeActivity extends NavigationActivity {
 			}
 			titleView.setText(R.string.home_convention_date);
 		} else {
-			contentView.setForeground(ThemeAttributes.getDrawable(this, R.attr.selectableItemBackground));
-			contentView.setClickable(true);
-			contentView.setOnClickListener(new View.OnClickListener() {
+			contentViewContainer.setForeground(ThemeAttributes.getDrawable(this, R.attr.selectableItemBackground));
+			contentViewContainer.setClickable(true);
+			contentViewContainer.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					navigateToActivity(FeedbackActivity.class);

@@ -24,60 +24,71 @@
             android:layout_gravity="center"/>
     </FrameLayout>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:background="@color/harucon2017_orange"
         android:foreground="?selectableItemBackground"
         android:onClick="onUpcomingEventClicked">
-
-        <TextView
-            android:id="@+id/home_current_event_title"
-            android:visibility="visible"
+        <!-- This layout is inside a FrameLayout because in previous API levels foreground was not available for other views -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="כעת: תחרות השירה"
-            android:background="@color/harucon2017_red"
-            android:foreground="?selectableItemBackground"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:paddingBottom="8dp"
-            android:layout_marginBottom="8dp"
-            android:onClick="onCurrentEventClicked"/>
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@color/harucon2017_orange">
 
-        <TextView
-            android:id="@+id/home_upcoming_event_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="כעת"
-            android:textColor="@color/white"
-            android:textSize="20sp"/>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:foreground="?selectableItemBackground"
+                android:onClick="onCurrentEventClicked">
+                <!-- This view is inside a FrameLayout because in previous API levels foreground was not available for other views -->
+                <TextView
+                    android:id="@+id/home_current_event_title"
+                    android:visibility="visible"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="כעת: תחרות השירה"
+                    android:background="@color/harucon2017_red"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:paddingBottom="8dp"
+                    />
+            </FrameLayout>
 
-        <TextView
-            android:id="@+id/home_upcoming_event_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="2D Musical"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textSize="28sp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"/>
+            <TextView
+                android:id="@+id/home_upcoming_event_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="כעת"
+                android:textColor="@color/white"
+                android:textSize="20sp"/>
 
-        <TextView
-            android:id="@+id/home_upcoming_event_hall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="אולם ראשי"
-            android:textColor="@color/white"
-            android:textSize="23sp"
-            android:layout_marginBottom="8dp"/>
+            <TextView
+                android:id="@+id/home_upcoming_event_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="2D Musical"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="28sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"/>
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/home_upcoming_event_hall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="אולם ראשי"
+                android:textColor="@color/white"
+                android:textSize="23sp"
+                android:layout_marginBottom="8dp"/>
+
+        </LinearLayout>
+    </FrameLayout>
 
     <Button
         android:id="@+id/home_go_to_my_events_button"

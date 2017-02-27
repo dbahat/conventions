@@ -376,6 +376,7 @@ public abstract class Convention implements Serializable {
 	}
 
 	public boolean hasStarted() {
+		// We consider the convention 'started' if we are now during or after the date it starts
 		return Dates.now().after(getStartDate().getTime());
 	}
 
