@@ -32,11 +32,20 @@ public class SearchCategoryBox extends LinearLayout {
 		textView.setText(searchCategory.getDescription());
 		int color;
 		if (searchCategory.hasBackgroundColor()) {
-			color = darkenColor(searchCategory.getBackgroundColor());
+			color = darkenColor(searchCategory.getBackgroundColor(), 1);
 		} else {
 			color = ThemeAttributes.getColor(getContext(), R.attr.eventTimeDefaultBackgroundColor);
 		}
-		CompoundButtonCompat.setButtonTintList(this.checkBox, ColorStateList.valueOf(color));
+		ColorStateList checkboxColors = new ColorStateList(
+			new int[][]{
+				new int[]{-android.R.attr.state_checked},
+				new int[]{android.R.attr.state_checked}
+			},
+			new int[]{
+				darkenColor(color, 2),
+				color
+		});
+		CompoundButtonCompat.setButtonTintList(this.checkBox, checkboxColors);
 		this.searchCategory = searchCategory;
 	}
 
@@ -56,10 +65,12 @@ public class SearchCategoryBox extends LinearLayout {
 		return checkBox.isChecked();
 	}
 
-	private int darkenColor(int color) {
+	private int darkenColor(int color, int factor) {
 		float[] hsv = new float[3];
 		Color.colorToHSV(color, hsv);
-		hsv[2] *= 0.9f;
+		for (int i = 0; i < factor; ++i) {
+			hsv[2] *= 0.9f;
+		}
 		color = Color.HSVToColor(hsv);
 		return color;
 	}
