@@ -37,7 +37,7 @@
         android:textSize="23sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/harucon2017_dark_blue"
+        android:background="@drawable/harucon2017_home_activity_button"
         android:onClick="onGoToProgrammeClicked"/>
 
 </LinearLayout>
