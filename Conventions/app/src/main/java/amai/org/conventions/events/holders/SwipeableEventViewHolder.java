@@ -55,7 +55,6 @@ public class SwipeableEventViewHolder extends RecyclerView.ViewHolder {
 
 		ApplyBounceAnimationListener listener = new ApplyBounceAnimationListener();
 		mainEventView.setOnFavoritesButtonClickedListener(listener);
-		mainEventView.setOnLongClickListener(listener);
 	}
 
 	private EventView createEventView(Context context, int id) {

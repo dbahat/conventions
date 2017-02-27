@@ -150,11 +150,6 @@ public class EventView extends FrameLayout {
 		favoriteIconTouchArea.setOnClickListener(listener);
 	}
 
-	@Override
-	public void setOnLongClickListener(OnLongClickListener listener) {
-		eventMainTouchArea.setOnLongClickListener(listener);
-	}
-
 	protected void setHallName(String name) {
 		hallName.setText(name);
 	}

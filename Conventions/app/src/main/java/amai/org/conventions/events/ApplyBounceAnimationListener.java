@@ -4,16 +4,10 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewParent;
 
-public class ApplyBounceAnimationListener implements View.OnClickListener, View.OnLongClickListener {
+public class ApplyBounceAnimationListener implements View.OnClickListener {
 	@Override
 	public void onClick(View view) {
 		applyBounceAnimation(view);
-	}
-
-	@Override
-	public boolean onLongClick(View view) {
-		applyBounceAnimation(view);
-		return true;
 	}
 
 	private void applyBounceAnimation(View view) {
