@@ -51,11 +51,16 @@ public class HomeActivity extends NavigationActivity {
 	protected void onResume() {
 		super.onResume();
 
+		currentFavoriteEvent = getCurrentFavoriteEvent();
+
 		// Creating the page layout during onResume (and not onCreate) since the layout is time-driven, and we want it refreshed in case the activity was paused
 		// and got resumed.
 		if (Dates.now().after(Convention.getInstance().getStartDate().getTime()) &&
-				// Checking for haveAllEventsStarted() since we only show events that have not yet started
-				!Convention.getInstance().haveAllEventsStarted()) {
+				// We show the user the convention-in-progress experience in 2 cases:
+				// 1. Today's the convention day and there are still events that didn't start
+				// or
+				// 2. Today's the convention day and there's a favorite event in progress
+				(!Convention.getInstance().haveAllEventsStarted() || currentFavoriteEvent != null)) {
 			setContentForDuringConvention();
 		} else {
 			setContentForBeforeOrAfterConventionDate();
