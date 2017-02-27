@@ -127,8 +127,8 @@ public class Harucon2017Convention extends AmaiConvention {
 		Hall eshkol1 = new Hall().withName(ESHKOL1_NAME).withOrder(3);
 		Hall eshkol2 = new Hall().withName(ESHKOL2_NAME).withOrder(4);
 		Hall eshkol3 = new Hall().withName(ESHKOL3_NAME).withOrder(5);
-		Hall games = new Hall().withName(GAMES_NAME).withOrder(5);
-		Hall signing = new Hall().withName(SIGNING_NAME).withOrder(5);
+		Hall games = new Hall().withName(GAMES_NAME).withOrder(6);
+		Hall signing = new Hall().withName(SIGNING_NAME).withOrder(7);
 
 		return Arrays.asList(mainHall, auditorium, eshkol1, eshkol2, eshkol3, games, signing);
 	}
