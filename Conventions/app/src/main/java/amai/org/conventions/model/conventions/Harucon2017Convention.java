@@ -145,14 +145,14 @@ public class Harucon2017Convention extends AmaiConvention {
 
 		Floor floor1 = new Floor(1)
 				.withName("מפלס תחתון")
-				.withImageResource(R.raw.cami2016_floor1, true)
-				.withImageWidth(552.20001f)
-				.withImageHeight(324.60001f);
+				.withImageResource(R.raw.harucon2017_floor1, true)
+				.withImageWidth(1224.31995f)
+				.withImageHeight(626.5155f);
 		Floor floor2 = new Floor(2)
 				.withName("מפלס עליון")
-				.withImageResource(R.raw.cami2016_floor2, true)
-				.withImageWidth(848.39502f)
-				.withImageHeight(502.86401f);
+				.withImageResource(R.raw.harucon2017_floor2, true)
+				.withImageWidth(1382.21216f)
+				.withImageHeight(780.93359f);
 
 		StandsArea agam = new StandsArea().withName("טרקלין אגם").withStands(getAgamStands()).withImageResource(R.drawable.agam);
 		StandsArea pinkus = new StandsArea().withName("אולם פינקוס").withStands(getPinkusStands()).withImageResource(R.drawable.pinkus);
@@ -164,238 +164,232 @@ public class Harucon2017Convention extends AmaiConvention {
 								inFloor(floor1,
 										new MapLocation()
 												.withPlace(new Place().withName("שירותים"))
-												.withMarkerResource(R.raw.cami2016_marker_toilet, true)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_toilet_floor1_selected, true)
-												.withMarkerHeight(25.066f)
-												.withX(507.46f)
-												.withY(184.49f),
+												.withMarkerResource(R.raw.harucon2017_marker_toilet, true)
+												.withSelectedMarkerResource(R.raw.harucon2017_marker_toilet_selected, true)
+												.withMarkerHeight(73.2f)
+												.withX(1132.71f)
+												.withY(405.1f),
 										new MapLocation() // This is before the guest sign post so it will be selected as the stands area
 												.withName("מודיעין ודוכן אמא\"י")
 												.withPlace(nesher)
-												.withMarkerResource(R.raw.cami2016_marker_information, true)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_information_selected, true)
-												.withMarkerHeight(46.766f)
-												.withX(347.67f)
-												.withY(113.62f),
+												.withMarkerResource(R.raw.harucon2017_marker_information, true)
+												.withSelectedMarkerResource(R.raw.harucon2017_marker_information_selected, true)
+												.withMarkerHeight(108.6f)
+												.withX(552.12f)
+												.withY(241.39f),
 										new MapLocation()
-												.withPlace(nesher)
-												.withName("החתמת אורחת")
-												.withMarkerResource(R.raw.cami2016_marker_guest, true)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_guest_selected, true)
-												.withMarkerHeight(38.066f)
-												.withX(410.17f)
-												.withY(155.19f),
+												.withPlace(signing)
+												.withName("אזור החתמות")
+												.withMarkerResource(R.raw.harucon2017_marker_signing, true)
+												.withSelectedMarkerResource(R.raw.harucon2017_marker_signing_selected, true)
+												.withMarkerHeight(84.9f)
+												.withX(909.42f)
+												.withY(339.51f),
 										new MapLocation()
 												.withName("מתחם דוכנים")
 												.withPlace(pinkus)
-												.withMarkerResource(R.raw.cami2016_marker_stalls_pink, true)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_stalls_pink_selected, true)
-												.withMarkerHeight(26.366f)
-												.withX(352.06f)
-												.withY(194.29f),
+												.withMarkerResource(R.raw.harucon2017_marker_stands_pink, true)
+												.withSelectedMarkerResource(R.raw.harucon2017_marker_stands_pink_selected, true)
+												.withMarkerHeight(71.1f)
+												.withX(779.92f)
+												.withY(426.69f),
 										new MapLocation()
 												.withPlace(new Place().withName("שמירת חפצים"))
-												.withMarkerResource(R.raw.cami2016_marker_storage, true)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_storage_selected, true)
-												.withMarkerHeight(39.667f)
-												.withX(314.06f)
-												.withY(73.50f),
+												.withMarkerResource(R.raw.harucon2017_marker_storage, true)
+												.withSelectedMarkerResource(R.raw.harucon2017_marker_storage_selected, true)
+												.withMarkerHeight(88.4f)
+												.withX(695.22f)
+												.withY(157.41f),
 										new MapLocation()
 												.withPlace(new Place().withName("שירותים"))
-												.withMarkerResource(R.raw.cami2016_marker_toilet, true)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_toilet_floor1_selected, true)
-												.withMarkerHeight(25.066f)
-												.withX(291.36f)
-												.withY(26.89f),
+												.withMarkerResource(R.raw.harucon2017_marker_toilet, true)
+												.withSelectedMarkerResource(R.raw.harucon2017_marker_toilet_selected, true)
+												.withMarkerHeight(73.2f)
+												.withX(667.23f)
+												.withY(79.01f),
 										new MapLocation()
 												.withPlace(eshkol1)
-												.withMarkerResource(R.raw.cami2016_marker_eshkol1, true)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_eshkol1_selected, true)
-												.withMarkerHeight(39.466f)
-												.withX(148.36f)
-												.withY(177.50f),
+												.withMarkerResource(R.raw.harucon2017_marker_eshkol1, true)
+												.withSelectedMarkerResource(R.raw.harucon2017_marker_eshkol1_selected, true)
+												.withMarkerHeight(88f)
+												.withX(317.81f)
+												.withY(389.2f),
 										new MapLocation()
 												.withPlace(schwatrz)
-												.withMarkerResource(R.raw.cami2016_marker_schwartz, true)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_schwartz_selected, true)
-												.withMarkerHeight(38.566f)
-												.withX(195.86f)
-												.withY(162.39f),
+												.withMarkerResource(R.raw.harucon2017_marker_schwartz, true)
+												.withSelectedMarkerResource(R.raw.harucon2017_marker_schwartz_selected, true)
+												.withMarkerHeight(85.9f)
+												.withX(431.62f)
+												.withY(355.62f),
 										new MapLocation()
 												.withPlace(eshkol3)
-												.withMarkerResource(R.raw.cami2016_marker_eshkol3, true)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_eshkol3_selected, true)
-												.withMarkerHeight(39.766f)
-												.withX(103.36f)
-												.withY(239.70f),
+												.withMarkerResource(R.raw.harucon2017_marker_eshkol3, true)
+												.withSelectedMarkerResource(R.raw.harucon2017_marker_eshkol3_selected, true)
+												.withMarkerHeight(88.6f)
+												.withX(225.52f)
+												.withY(527.91f),
 										new MapLocation()
 												.withPlace(eshkol2)
-												.withMarkerResource(R.raw.cami2016_marker_eshkol2, true)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_eshkol2_selected, true)
-												.withMarkerHeight(39.766f)
-												.withX(159.16f)
-												.withY(239.69f),
+												.withMarkerResource(R.raw.harucon2017_marker_eshkol2, true)
+												.withSelectedMarkerResource(R.raw.harucon2017_marker_eshkol2_selected, true)
+												.withMarkerHeight(88.6f)
+												.withX(349.92f)
+												.withY(527.91f),
 										new MapLocation()
 												.withPlace(new Place().withName("שירותים"))
-												.withMarkerResource(R.raw.cami2016_marker_toilet, true)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_toilet_floor1_selected, true)
-												.withMarkerHeight(25.066f)
-												.withX(81.36f)
-												.withY(147.39f)),
+												.withMarkerResource(R.raw.harucon2017_marker_toilet, true)
+												.withSelectedMarkerResource(R.raw.harucon2017_marker_toilet_selected, true)
+												.withMarkerHeight(73.1f)
+												.withX(176.72f)
+												.withY(322.41f)),
 								inFloor(floor2,
 										new MapLocation()
 												.withPlace(new Place().withName("שיפוט קוספליי"))
-												.withMarkerResource(R.raw.cami2016_marker_cosplay_judgement, true)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_cosplay_judgement_selected, true)
-												.withMarkerHeight(59.226f)
-												.withX(729.53f)
-												.withY(345.00f),
-										new MapLocation()
-												.withPlace(new Place().withName("כניסה פלוס"))
-												.withMarkerResource(R.raw.cami2016_marker_entrance_plus, true)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_entrance_plus_selected, true)
-												.withMarkerHeight(59.074f)
-												.withX(572.36f)
-												.withY(185.70f),
+												.withMarkerResource(R.raw.harucon2017_marker_cosplay_judgement, true)
+												.withSelectedMarkerResource(R.raw.harucon2017_marker_cosplay_judgement_selected, true)
+												.withMarkerHeight(93.6f)
+												.withX(1070.19f)
+												.withY(599.92f),
 										new MapLocation()
 												.withPlace(mainHall)
-												.withMarkerResource(R.raw.cami2016_marker_main_hall, true)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_main_hall_selected, true)
-												.withMarkerHeight(91.121f)
-												.withX(527.28f)
-												.withY(268.68f),
+												.withMarkerResource(R.raw.harucon2017_marker_main_hall, true)
+												.withSelectedMarkerResource(R.raw.harucon2017_marker_main_hall_selected, true)
+												.withMarkerHeight(142.303f)
+												.withX(866.19f)
+												.withY(429.06f),
 										new MapLocation()
 												.withPlace(new Place().withName("שירותים"))
-												.withMarkerResource(R.raw.cami2016_marker_toilet, true)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_toilet_floor2_selected, true)
-												.withMarkerHeight(38.046f)
-												.withX(506.39f)
-												.withY(46.52f),
+												.withMarkerResource(R.raw.harucon2017_marker_toilet, true)
+												.withSelectedMarkerResource(R.raw.harucon2017_marker_toilet_selected, true)
+												.withMarkerHeight(73.2f)
+												.withX(875.59f)
+												.withY(125.93f),
 										new MapLocation()
 												.withPlace(new Place().withName("מתחם קוספליי"))
-												.withMarkerResource(R.raw.cami2016_marker_cosplay_area, true)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_cosplay_area_selected, true)
-												.withMarkerHeight(59.074f)
-												.withX(433.93f)
-												.withY(371.32f),
+												.withMarkerResource(R.raw.harucon2017_marker_cosplay_area, true)
+												.withSelectedMarkerResource(R.raw.harucon2017_marker_cosplay_area_selected, true)
+												.withMarkerHeight(180.5f)
+												.withX(718.07f)
+												.withY(590.39f),
 										new MapLocation()
-												.withPlace(new Place().withName("משחקייה וקונסולות"))
-												.withMarkerResource(R.raw.cami2016_marker_games, true)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_games_selected, true)
-												.withMarkerHeight(59.074f)
-												.withX(306.85f)
-												.withY(332.30f),
+												.withPlace(games)
+												.withName("משחקייה")
+												.withMarkerResource(R.raw.harucon2017_marker_games, true)
+												.withSelectedMarkerResource(R.raw.harucon2017_marker_games_selected, true)
+												.withMarkerHeight(93.7f)
+												.withX(516.5f)
+												.withY(528.43f),
 										new MapLocation()
-												.withName("מתחם דוכנים")
+												.withName("סמטת האמנים")
 												.withPlace(agam)
-												.withMarkerResource(R.raw.cami2016_marker_stalls_red, true)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_stalls_red_selected, true)
-												.withMarkerHeight(39.860f)
-												.withX(306.85f)
-												.withY(181.00f),
+												.withMarkerResource(R.raw.harucon2017_marker_artist_alley, true)
+												.withSelectedMarkerResource(R.raw.harucon2017_marker_artist_alley_selected, true)
+												.withMarkerHeight(79.3f)
+												.withX(516.6f)
+												.withY(288.43f),
 										new MapLocation()
 												.withPlace(new Place().withName("שירותים"))
-												.withMarkerResource(R.raw.cami2016_marker_toilet, true)
-												.withSelectedMarkerResource(R.raw.cami2016_marker_toilet_floor2_selected, true)
-												.withMarkerHeight(38.044f)
-												.withX(75.99f)
-												.withY(277.38f))
+												.withMarkerResource(R.raw.harucon2017_marker_toilet, true)
+												.withSelectedMarkerResource(R.raw.harucon2017_marker_toilet_selected, true)
+												.withMarkerHeight(73.2f)
+												.withX(181.77f)
+												.withY(472.02f))
 						)
 				);
 	}
 
 	private List<Stand> getPinkusStands() {
 		return Arrays.asList(
-				new Stand().withName("אוטאקו שופ").withType(Stand.StandType.COMMERCIAL).withLocationName("c-01-04"),
-				new Stand().withName("RETRO GAME CENTER").withType(Stand.StandType.COMMERCIAL).withLocationName("c-05-08"),
-				new Stand().withName("נקסוס").withType(Stand.StandType.COMMERCIAL).withLocationName("c-09-12"),
-				new Stand().withName("EDHD☆shirt").withType(Stand.StandType.INDEPENDENT).withLocationName("c-13"),
-				new Stand().withName("קריספי סאב\\Crispy-Sub!").withType(Stand.StandType.DONATION).withLocationName("c-14"),
-				new Stand().withName("Candy Lenses").withType(Stand.StandType.COMMERCIAL).withLocationName("c-15-20"),
-				new Stand().withName("Gamer").withType(Stand.StandType.COMMERCIAL).withLocationName("c-21"),
-				new Stand().withName("SVAG").withType(Stand.StandType.COMMERCIAL).withLocationName("c-23-24"),
-				new Stand().withName("PowerfulMerch").withType(Stand.StandType.COMMERCIAL).withLocationName("c-25-26"),
-				new Stand().withName("הדוכן של אור").withType(Stand.StandType.INDEPENDENT).withLocationName("c-27-28"),
-				new Stand().withName("Cosplay Senpai").withType(Stand.StandType.COMMERCIAL).withLocationName("c-29-30"),
-				new Stand().withName("אנימה סטור").withType(Stand.StandType.COMMERCIAL).withLocationName("c-31-36"),
-				new Stand().withName("הקובייה משחקים בע\"מ").withType(Stand.StandType.COMMERCIAL).withLocationName("c-37-38"),
-				new Stand().withName("Uranophobia ccg").withType(Stand.StandType.COMMERCIAL).withLocationName("c-39-41"),
-				new Stand().withName("Worbla").withType(Stand.StandType.COMMERCIAL).withLocationName("c-42"),
-				new Stand().withName("Gaming Land").withType(Stand.StandType.COMMERCIAL).withLocationName("c-43-48"),
-				new Stand().withName("המרכז ללימודי יפנית").withType(Stand.StandType.OTHER).withLocationName("c-49-50"),
-				new Stand().withName("waterdew").withType(Stand.StandType.INDEPENDENT).withLocationName("d-01-02"),
-				new Stand().withName("הגלריה של איתי").withType(Stand.StandType.INDEPENDENT).withLocationName("d-03"),
-				new Stand().withName("Beadesign").withType(Stand.StandType.INDEPENDENT).withLocationName("d-04"),
-				new Stand().withName("מושיק גולסט").withType(Stand.StandType.INDEPENDENT).withLocationName("d-05-06"),
-				new Stand().withName("Shironeko Pony").withType(Stand.StandType.INDEPENDENT).withLocationName("d-07-08"),
-				new Stand().withName("DraMagic").withType(Stand.StandType.DONATION).withLocationName("d-10"),
-				new Stand().withName("Dor's Designs").withType(Stand.StandType.INDEPENDENT).withLocationName("d-11-12"),
-				new Stand().withName("הדוכן המדהים של שלישית הקסם").withType(Stand.StandType.COMMERCIAL).withLocationName("d-13-14"),
-				new Stand().withName("Roza's Fluffy Stuff").withType(Stand.StandType.INDEPENDENT).withLocationName("d-15-16"),
-				new Stand().withName("Dark vibes").withType(Stand.StandType.INDEPENDENT).withLocationName("d-17-18"),
-				new Stand().withName("Amelia hats").withType(Stand.StandType.INDEPENDENT).withLocationName("d-19"),
-				new Stand().withName("כריות פנדומים").withType(Stand.StandType.INDEPENDENT).withLocationName("d-20-21"),
-				new Stand().withName("Japaneasy").withType(Stand.StandType.INDEPENDENT).withLocationName("d-22"),
-				new Stand().withName("velvet octopus").withType(Stand.StandType.INDEPENDENT).withLocationName("d-23-24"),
-				new Stand().withName("Rivendell").withType(Stand.StandType.INDEPENDENT).withLocationName("e-01"),
-				new Stand().withName("Compoco").withType(Stand.StandType.INDEPENDENT).withLocationName("e-02-03"),
-				new Stand().withName("לא אנושיט - Low Eno Shit").withType(Stand.StandType.INDEPENDENT).withLocationName("e-05"),
-				new Stand().withName("נרדגזם/גיק בסטה").withType(Stand.StandType.COMMERCIAL).withLocationName("e-06"),
-				new Stand().withName("Crow's Treasure").withType(Stand.StandType.INDEPENDENT).withLocationName("e-07-08"),
-				new Stand().withName("סרוגי").withType(Stand.StandType.INDEPENDENT).withLocationName("e-09-10"),
-				new Stand().withName("KawaiiStickers").withType(Stand.StandType.INDEPENDENT).withLocationName("e-11-12"),
-				new Stand().withName("בועת מחשבה - מגזין אנימה, מנגה ותרבות האוטקו").withType(Stand.StandType.INDEPENDENT).withLocationName("e-13"),
-				new Stand().withName("הדוכן של לי").withType(Stand.StandType.COMMERCIAL).withLocationName("e-14"),
-				new Stand().withName("Hatz, lolita & more").withType(Stand.StandType.INDEPENDENT).withLocationName("e-15"),
-				new Stand().withName("בתוך הקופסה").withType(Stand.StandType.COMMERCIAL).withLocationName("e-16-17"),
-				new Stand().withName("לימור שטרן תכשיטים").withType(Stand.StandType.COMMERCIAL).withLocationName("e-18-20"),
-				new Stand().withName("אמיגורמי").withType(Stand.StandType.INDEPENDENT).withLocationName("e-21"),
-				new Stand().withName("כובעי עינב").withType(Stand.StandType.INDEPENDENT).withLocationName("e-22-23")
+//				new Stand().withName("אוטאקו שופ").withType(Stand.StandType.COMMERCIAL).withLocationName("c-01-04"),
+//				new Stand().withName("RETRO GAME CENTER").withType(Stand.StandType.COMMERCIAL).withLocationName("c-05-08"),
+//				new Stand().withName("נקסוס").withType(Stand.StandType.COMMERCIAL).withLocationName("c-09-12"),
+//				new Stand().withName("EDHD☆shirt").withType(Stand.StandType.INDEPENDENT).withLocationName("c-13"),
+//				new Stand().withName("קריספי סאב\\Crispy-Sub!").withType(Stand.StandType.DONATION).withLocationName("c-14"),
+//				new Stand().withName("Candy Lenses").withType(Stand.StandType.COMMERCIAL).withLocationName("c-15-20"),
+//				new Stand().withName("Gamer").withType(Stand.StandType.COMMERCIAL).withLocationName("c-21"),
+//				new Stand().withName("SVAG").withType(Stand.StandType.COMMERCIAL).withLocationName("c-23-24"),
+//				new Stand().withName("PowerfulMerch").withType(Stand.StandType.COMMERCIAL).withLocationName("c-25-26"),
+//				new Stand().withName("הדוכן של אור").withType(Stand.StandType.INDEPENDENT).withLocationName("c-27-28"),
+//				new Stand().withName("Cosplay Senpai").withType(Stand.StandType.COMMERCIAL).withLocationName("c-29-30"),
+//				new Stand().withName("אנימה סטור").withType(Stand.StandType.COMMERCIAL).withLocationName("c-31-36"),
+//				new Stand().withName("הקובייה משחקים בע\"מ").withType(Stand.StandType.COMMERCIAL).withLocationName("c-37-38"),
+//				new Stand().withName("Uranophobia ccg").withType(Stand.StandType.COMMERCIAL).withLocationName("c-39-41"),
+//				new Stand().withName("Worbla").withType(Stand.StandType.COMMERCIAL).withLocationName("c-42"),
+//				new Stand().withName("Gaming Land").withType(Stand.StandType.COMMERCIAL).withLocationName("c-43-48"),
+//				new Stand().withName("המרכז ללימודי יפנית").withType(Stand.StandType.OTHER).withLocationName("c-49-50"),
+//				new Stand().withName("waterdew").withType(Stand.StandType.INDEPENDENT).withLocationName("d-01-02"),
+//				new Stand().withName("הגלריה של איתי").withType(Stand.StandType.INDEPENDENT).withLocationName("d-03"),
+//				new Stand().withName("Beadesign").withType(Stand.StandType.INDEPENDENT).withLocationName("d-04"),
+//				new Stand().withName("מושיק גולסט").withType(Stand.StandType.INDEPENDENT).withLocationName("d-05-06"),
+//				new Stand().withName("Shironeko Pony").withType(Stand.StandType.INDEPENDENT).withLocationName("d-07-08"),
+//				new Stand().withName("DraMagic").withType(Stand.StandType.DONATION).withLocationName("d-10"),
+//				new Stand().withName("Dor's Designs").withType(Stand.StandType.INDEPENDENT).withLocationName("d-11-12"),
+//				new Stand().withName("הדוכן המדהים של שלישית הקסם").withType(Stand.StandType.COMMERCIAL).withLocationName("d-13-14"),
+//				new Stand().withName("Roza's Fluffy Stuff").withType(Stand.StandType.INDEPENDENT).withLocationName("d-15-16"),
+//				new Stand().withName("Dark vibes").withType(Stand.StandType.INDEPENDENT).withLocationName("d-17-18"),
+//				new Stand().withName("Amelia hats").withType(Stand.StandType.INDEPENDENT).withLocationName("d-19"),
+//				new Stand().withName("כריות פנדומים").withType(Stand.StandType.INDEPENDENT).withLocationName("d-20-21"),
+//				new Stand().withName("Japaneasy").withType(Stand.StandType.INDEPENDENT).withLocationName("d-22"),
+//				new Stand().withName("velvet octopus").withType(Stand.StandType.INDEPENDENT).withLocationName("d-23-24"),
+//				new Stand().withName("Rivendell").withType(Stand.StandType.INDEPENDENT).withLocationName("e-01"),
+//				new Stand().withName("Compoco").withType(Stand.StandType.INDEPENDENT).withLocationName("e-02-03"),
+//				new Stand().withName("לא אנושיט - Low Eno Shit").withType(Stand.StandType.INDEPENDENT).withLocationName("e-05"),
+//				new Stand().withName("נרדגזם/גיק בסטה").withType(Stand.StandType.COMMERCIAL).withLocationName("e-06"),
+//				new Stand().withName("Crow's Treasure").withType(Stand.StandType.INDEPENDENT).withLocationName("e-07-08"),
+//				new Stand().withName("סרוגי").withType(Stand.StandType.INDEPENDENT).withLocationName("e-09-10"),
+//				new Stand().withName("KawaiiStickers").withType(Stand.StandType.INDEPENDENT).withLocationName("e-11-12"),
+//				new Stand().withName("בועת מחשבה - מגזין אנימה, מנגה ותרבות האוטקו").withType(Stand.StandType.INDEPENDENT).withLocationName("e-13"),
+//				new Stand().withName("הדוכן של לי").withType(Stand.StandType.COMMERCIAL).withLocationName("e-14"),
+//				new Stand().withName("Hatz, lolita & more").withType(Stand.StandType.INDEPENDENT).withLocationName("e-15"),
+//				new Stand().withName("בתוך הקופסה").withType(Stand.StandType.COMMERCIAL).withLocationName("e-16-17"),
+//				new Stand().withName("לימור שטרן תכשיטים").withType(Stand.StandType.COMMERCIAL).withLocationName("e-18-20"),
+//				new Stand().withName("אמיגורמי").withType(Stand.StandType.INDEPENDENT).withLocationName("e-21"),
+//				new Stand().withName("כובעי עינב").withType(Stand.StandType.INDEPENDENT).withLocationName("e-22-23")
 		);
 	}
 
 	private List<Stand> getAgamStands() {
 		return Arrays.asList(
-				new Stand().withName("נגה- ציורים ואומנות").withType(Stand.StandType.INDEPENDENT).withLocationName("b-20-21"),
-				new Stand().withName("הדוכן של פיצה").withType(Stand.StandType.INDEPENDENT).withLocationName("b-22-23"),
-				new Stand().withName("הדוכן של בר").withType(Stand.StandType.INDEPENDENT).withLocationName("b-24"),
-				new Stand().withName("dor20 studios").withType(Stand.StandType.INDEPENDENT).withLocationName("b-25-26"),
-				new Stand().withName("היקום המקביל").withType(Stand.StandType.INDEPENDENT).withLocationName("b-27"),
-				new Stand().withName("Aniart4u").withType(Stand.StandType.INDEPENDENT).withLocationName("b-28"),
-				new Stand().withName("קבוצת יצירת קומיקס").withType(Stand.StandType.INDEPENDENT).withLocationName("b-29-30"),
-				new Stand().withName("פוגי קומיקס").withType(Stand.StandType.INDEPENDENT).withLocationName("b-01"),
-				new Stand().withName("Anime Fanarts").withType(Stand.StandType.INDEPENDENT).withLocationName("b-11"),
-				new Stand().withName("ציורים ופיצ'פקס").withType(Stand.StandType.INDEPENDENT).withLocationName("b-12"),
-				new Stand().withName("Ella's Art").withType(Stand.StandType.INDEPENDENT).withLocationName("b-13"),
-				new Stand().withName("Rinska's Booth").withType(Stand.StandType.INDEPENDENT).withLocationName("b-14-15"),
-				new Stand().withName("fishiebug").withType(Stand.StandType.INDEPENDENT).withLocationName("b-16-17"),
-				new Stand().withName("Grisim & Mirrorshards").withType(Stand.StandType.INDEPENDENT).withLocationName("b-18-19"),
-				new Stand().withName("הגלקסיה").withType(Stand.StandType.COMMERCIAL).withLocationName("a-21-24"),
-				new Stand().withName("קומיקאזה 2.0").withType(Stand.StandType.COMMERCIAL).withLocationName("a-27-30"),
-				new Stand().withName("Panda shop").withType(Stand.StandType.COMMERCIAL).withLocationName("a-31-33"),
-				new Stand().withName("אנימה ווייב").withType(Stand.StandType.COMMERCIAL).withLocationName("a-33-38"),
-				new Stand().withName("Halo's Art").withType(Stand.StandType.COMMERCIAL).withLocationName("a-39-40"),
-				new Stand().withName("Anime Chudoku").withType(Stand.StandType.COMMERCIAL).withLocationName("a-41-42"),
-				new Stand().withName("מאי ארט").withType(Stand.StandType.COMMERCIAL).withLocationName("a-01-04"),
-				new Stand().withName("אנימו ומנגו").withType(Stand.StandType.COMMERCIAL).withLocationName("a-05-06"),
-				new Stand().withName("GoZgi").withType(Stand.StandType.COMMERCIAL).withLocationName("a-07-08"),
-				new Stand().withName("הממלכה").withType(Stand.StandType.COMMERCIAL).withLocationName("a-09"),
-				new Stand().withName("קומיקום").withType(Stand.StandType.COMMERCIAL).withLocationName("a-10"),
-				new Stand().withName("קומיקס וירקות").withType(Stand.StandType.COMMERCIAL).withLocationName("a-11-14"),
-				new Stand().withName("שיפודן ישראל").withType(Stand.StandType.COMMERCIAL).withLocationName("a-15-20")
+//				new Stand().withName("נגה- ציורים ואומנות").withType(Stand.StandType.INDEPENDENT).withLocationName("b-20-21"),
+//				new Stand().withName("הדוכן של פיצה").withType(Stand.StandType.INDEPENDENT).withLocationName("b-22-23"),
+//				new Stand().withName("הדוכן של בר").withType(Stand.StandType.INDEPENDENT).withLocationName("b-24"),
+//				new Stand().withName("dor20 studios").withType(Stand.StandType.INDEPENDENT).withLocationName("b-25-26"),
+//				new Stand().withName("היקום המקביל").withType(Stand.StandType.INDEPENDENT).withLocationName("b-27"),
+//				new Stand().withName("Aniart4u").withType(Stand.StandType.INDEPENDENT).withLocationName("b-28"),
+//				new Stand().withName("קבוצת יצירת קומיקס").withType(Stand.StandType.INDEPENDENT).withLocationName("b-29-30"),
+//				new Stand().withName("פוגי קומיקס").withType(Stand.StandType.INDEPENDENT).withLocationName("b-01"),
+//				new Stand().withName("Anime Fanarts").withType(Stand.StandType.INDEPENDENT).withLocationName("b-11"),
+//				new Stand().withName("ציורים ופיצ'פקס").withType(Stand.StandType.INDEPENDENT).withLocationName("b-12"),
+//				new Stand().withName("Ella's Art").withType(Stand.StandType.INDEPENDENT).withLocationName("b-13"),
+//				new Stand().withName("Rinska's Booth").withType(Stand.StandType.INDEPENDENT).withLocationName("b-14-15"),
+//				new Stand().withName("fishiebug").withType(Stand.StandType.INDEPENDENT).withLocationName("b-16-17"),
+//				new Stand().withName("Grisim & Mirrorshards").withType(Stand.StandType.INDEPENDENT).withLocationName("b-18-19"),
+//				new Stand().withName("הגלקסיה").withType(Stand.StandType.COMMERCIAL).withLocationName("a-21-24"),
+//				new Stand().withName("קומיקאזה 2.0").withType(Stand.StandType.COMMERCIAL).withLocationName("a-27-30"),
+//				new Stand().withName("Panda shop").withType(Stand.StandType.COMMERCIAL).withLocationName("a-31-33"),
+//				new Stand().withName("אנימה ווייב").withType(Stand.StandType.COMMERCIAL).withLocationName("a-33-38"),
+//				new Stand().withName("Halo's Art").withType(Stand.StandType.COMMERCIAL).withLocationName("a-39-40"),
+//				new Stand().withName("Anime Chudoku").withType(Stand.StandType.COMMERCIAL).withLocationName("a-41-42"),
+//				new Stand().withName("מאי ארט").withType(Stand.StandType.COMMERCIAL).withLocationName("a-01-04"),
+//				new Stand().withName("אנימו ומנגו").withType(Stand.StandType.COMMERCIAL).withLocationName("a-05-06"),
+//				new Stand().withName("GoZgi").withType(Stand.StandType.COMMERCIAL).withLocationName("a-07-08"),
+//				new Stand().withName("הממלכה").withType(Stand.StandType.COMMERCIAL).withLocationName("a-09"),
+//				new Stand().withName("קומיקום").withType(Stand.StandType.COMMERCIAL).withLocationName("a-10"),
+//				new Stand().withName("קומיקס וירקות").withType(Stand.StandType.COMMERCIAL).withLocationName("a-11-14"),
+//				new Stand().withName("שיפודן ישראל").withType(Stand.StandType.COMMERCIAL).withLocationName("a-15-20")
 		);
 	}
 
 	private List<Stand> getNesherStands() {
 		return Arrays.asList(
-				new Stand().withName("מודיעין ודוכן אמא\"י").withType(Stand.StandType.OTHER),
-				new Stand().withName("דוכן אורחת הכנס - איימי בלאקשלגר").withType(Stand.StandType.OTHER).withLocationName("F-11-12"),
-				new Stand().withName("שגרירות יפן").withType(Stand.StandType.OTHER).withLocationName("F-07-08"),
-				new Stand().withName("קוספליי למען מטרה").withType(Stand.StandType.DONATION).withLocationName("F-05"),
-				new Stand().withName("תא ניפון באוניברסיטה העברית").withType(Stand.StandType.OTHER).withLocationName("F-04"),
-				new Stand().withName("האגודה לידידות יפן").withType(Stand.StandType.OTHER).withLocationName("F-02-03"),
-				new Stand().withName("BrAND Musical - דוכן תרומות").withType(Stand.StandType.DONATION).withLocationName("F-09-10"),
-				new Stand().withName("החוג ללימודי אסיה באוניברסיטת חיפה").withType(Stand.StandType.OTHER).withLocationName("F-01")
+//				new Stand().withName("מודיעין ודוכן אמא\"י").withType(Stand.StandType.OTHER),
+//				new Stand().withName("דוכן אורחת הכנס - איימי בלאקשלגר").withType(Stand.StandType.OTHER).withLocationName("F-11-12"),
+//				new Stand().withName("שגרירות יפן").withType(Stand.StandType.OTHER).withLocationName("F-07-08"),
+//				new Stand().withName("קוספליי למען מטרה").withType(Stand.StandType.DONATION).withLocationName("F-05"),
+//				new Stand().withName("תא ניפון באוניברסיטה העברית").withType(Stand.StandType.OTHER).withLocationName("F-04"),
+//				new Stand().withName("האגודה לידידות יפן").withType(Stand.StandType.OTHER).withLocationName("F-02-03"),
+//				new Stand().withName("BrAND Musical - דוכן תרומות").withType(Stand.StandType.DONATION).withLocationName("F-09-10"),
+//				new Stand().withName("החוג ללימודי אסיה באוניברסיטת חיפה").withType(Stand.StandType.OTHER).withLocationName("F-01")
 		);
 	}
 }

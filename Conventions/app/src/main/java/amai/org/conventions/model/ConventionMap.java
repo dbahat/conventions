@@ -16,8 +16,7 @@ public class ConventionMap {
 	private List<MapLocation> locations = new ArrayList<>();
 
 	public boolean isAvailable() {
-		// TODO - Return the map once it's adjusted to Harucon 2017
-		return false;//floors != null && floors.size() > 0;
+		return floors != null && floors.size() > 0;
 	}
 
 	public List<Floor> getFloors() {
