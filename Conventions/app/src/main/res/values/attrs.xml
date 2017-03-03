@@ -52,6 +52,7 @@
         <!-- Map Screen -->
         <attr name="locationDetailsBackground" format="color|reference"/>
         <attr name="locationDetailsTopLineColor" format="color|reference"/>
+        <attr name="locationDetailsTitleColor" format="color|reference"/>
         <attr name="floorBackground" format="color|reference"/>
         <attr name="standIconColor" format="color|reference"/>
         <attr name="standsTypeTitleColor" format="color|reference"/>

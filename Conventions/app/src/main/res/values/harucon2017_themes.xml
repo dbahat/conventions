@@ -36,6 +36,7 @@
         <item name="eventTimeHeaderColor">@android:color/transparent</item>
 
         <item name="locationDetailsBackground">@color/transparent_black</item>
+        <item name="locationDetailsTitleColor">@color/white</item>
         <item name="floorBackground">@drawable/harucon2017_page_background</item>
         <item name="standIconColor">@color/harucon2017_turquoise</item>
         <item name="standsTypeTitleColor">@color/harucon2017_turquoise</item>

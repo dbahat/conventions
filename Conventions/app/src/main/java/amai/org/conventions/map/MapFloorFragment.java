@@ -94,6 +94,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 	private TextView locationTitle;
 	private ImageView locationDetailsCloseImage;
 	private EventView locationCurrentEvent;
+	private View locationEventsDivider;
 	private EventView locationNextEvent;
 	private Button gotoStandsListButton;
 
@@ -263,6 +264,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		locationTitle = (TextView) view.findViewById(R.id.location_title);
 		locationDetailsCloseImage = (ImageView) view.findViewById(R.id.location_details_close_image);
 		locationCurrentEvent = (EventView) view.findViewById(R.id.location_current_event);
+		locationEventsDivider = view.findViewById(R.id.location_events_divider);
 		locationNextEvent = (EventView) view.findViewById(R.id.location_next_event);
 		gotoStandsListButton = (Button) view.findViewById(R.id.goto_stands_list_button);
 	}
@@ -912,6 +914,12 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		} else {
 			locationNextEvent.setVisibility(View.VISIBLE);
 			locationNextEvent.setEvent(nextEvent);
+		}
+
+		if (currEvent != null && nextEvent != null) {
+			locationEventsDivider.setVisibility(View.VISIBLE);
+		} else {
+			locationEventsDivider.setVisibility(View.GONE);
 		}
 
 		if (isSingleHall) {
