@@ -506,8 +506,8 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 					return;
 				}
 
-				mapFloorImage.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 				if (floor.isImageSVG()) {
+					mapFloorImage.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 					Picture picture = svg.renderToPicture();
 					mapFloorImage.setImageResourceFromDrawable(new PictureDrawable(picture), floor.getImageWidth(), floor.getImageHeight());
 				} else {
@@ -587,6 +587,11 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		if (location.isMarkerResourceSVG()) {
 			SVG markerSvg = ImageHandler.loadSVG(appContext, location.getMarkerResource());
 			markerImageView.setSVG(markerSvg);
+
+			// Setting layer type to none to avoid caching the marker views bitmap when in zoomed-out state.
+			// The caching causes the marker image looks pixelized in zoomed-in state.
+			// This has to be done after calling setSVG.
+			markerImageView.setLayerType(View.LAYER_TYPE_NONE, null);
 		} else {
 			Drawable drawable = ContextCompat.getDrawable(appContext, location.getMarkerResource());
 			if (location.getMarkerTintColorResource() != MapLocation.NO_TINT) {
@@ -594,11 +599,6 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 			}
 			markerImageView.setImageDrawable(drawable);
 		}
-
-		// Setting layer type to none to avoid caching the marker views bitmap when in zoomed-out state.
-		// The caching causes the marker image looks pixelized in zoomed-in state.
-		// This has to be done after calling setSVG.
-		markerImageView.setLayerType(View.LAYER_TYPE_NONE, null);
 
 		// Set marker layout parameters and scaling
 		ImageLayout.LayoutParams layoutParams = new ImageLayout.LayoutParams();
