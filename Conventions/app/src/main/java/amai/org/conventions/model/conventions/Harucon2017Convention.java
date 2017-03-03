@@ -103,12 +103,17 @@ public class Harucon2017Convention extends AmaiConvention {
 		imageMapper.addMapping("http://2017.harucon.org.il/wp-content/uploads/sites/11/2016/06/טכניקות-קומיקס.jpg", R.drawable.event_comics);
 		imageMapper.addMapping("http://2017.harucon.org.il/wp-content/uploads/sites/11/2016/06/מסע-בזמן.png", R.drawable.event_time_travel);
 		imageMapper.addMapping("http://2017.harucon.org.il/wp-content/uploads/sites/11/2016/06/2D-הסרט.jpg", R.drawable.event_2d_movie);
+		imageMapper.addMapping("http://2017.harucon.org.il/wp-content/uploads/sites/11/2016/06/14195417_524560747755018_332506590212759241_o.jpg", R.drawable.event_taiko_life);
 
 		// Non-URL IDs
 		imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.harucon2017_event_default_image);
 
 		// Excluded IDs - mostly for debug purposes (don't show messages about these when entering an event that has them)
-		imageMapper.addExcludedId("http://2017.harucon.org.il/wp-content/uploads/sites/11/2016/06/11219643_10207384743566314_4164409570104231506_n.jpg"); // Not displayed due to bad quality
+		// Not displayed due to bad quality
+		imageMapper.addExcludedId("http://2017.harucon.org.il/wp-content/uploads/sites/11/2016/06/11219643_10207384743566314_4164409570104231506_n.jpg");
+		// It's a logo, it doesn't fit in the background
+		imageMapper.addExcludedId("http://2017.harucon.org.il/wp-content/uploads/sites/11/2017/02/EOJ_Logo_LONG.png");
+		// Cosplay event judges
 		imageMapper.addExcludedId("http://2017.harucon.org.il/wp-content/uploads/sites/11/2016/06/DafnaShaulson-150x150.jpg");
 		imageMapper.addExcludedId("http://2017.harucon.org.il/wp-content/uploads/sites/11/2016/06/ofirKertes-150x150.jpg");
 		imageMapper.addExcludedId("http://2017.harucon.org.il/wp-content/uploads/sites/11/2016/06/oded-150x150.jpg");
