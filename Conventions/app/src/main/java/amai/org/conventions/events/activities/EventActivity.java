@@ -15,7 +15,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.graphics.Palette;
-import android.text.Html;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
@@ -55,7 +54,6 @@ import amai.org.conventions.utils.EventFeedbackMail;
 import amai.org.conventions.utils.FeedbackMail;
 import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Views;
-import fi.iki.kuitsi.listtest.ListTagHandler;
 import uk.co.chrisjenx.paralloid.views.ParallaxScrollView;
 
 
@@ -536,8 +534,7 @@ public class EventActivity extends NavigationActivity {
 			// Enable internal links from HTML <a> tags within the description textView.
 			TextView description = (TextView) findViewById(R.id.event_description);
 			description.setMovementMethod(LinkMovementMethod.getInstance());
-
-			Spanned spanned = Html.fromHtml(eventDescription, null, new ListTagHandler());
+			Spanned spanned = event.getSpannedDescription();
 			description.setText(spanned);
 		}
 	}

@@ -167,9 +167,10 @@ public class AmaiModelParser implements ModelParser {
 		}
 
 		String eventDescription = rawEventDescription
-				// Remove class, style, height and width attributes in tags since they make the element take
-				// up more space than needed and are not supported anyway
-				.replaceAll("class=\"[^\"]*\"", "")
+				// Remove style, height and width attributes in tags since they make the element take
+				// up more space than needed and are not supported anyway.
+				// Note: class was also removed but we now need it to recognize google forms and it doesn't
+				// seem to make a difference.
 				.replaceAll("style=\"[^\"]*\"", "")
 				.replaceAll("width=\"[^\"]*\"", "")
 				.replaceAll("height=\"[^\"]*\"", "")

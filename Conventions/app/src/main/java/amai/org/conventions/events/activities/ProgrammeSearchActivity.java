@@ -3,7 +3,6 @@ package amai.org.conventions.events.activities;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.Html;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -240,7 +239,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 
 	private boolean containsKeyword(ConventionEvent event, String keyword) {
 		// Filter out HTML tags from the event description
-		String filteredEventDescription = event.getDescription().isEmpty() ? "" : Html.fromHtml(event.getDescription()).toString();
+		String filteredEventDescription = event.getPlainTextDescription();
 
 		keyword = keyword.toLowerCase();
 		return event.getTitle().toLowerCase().contains(keyword)

@@ -1,20 +1,30 @@
 package amai.org.conventions.model;
 
 import android.content.Context;
-import android.text.Html;
+import android.text.Editable;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.TextUtils;
+import android.text.style.URLSpan;
+
+import org.xml.sax.Attributes;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.ListIterator;
+import java.util.Stack;
 
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.networking.AmaiModelParser;
 import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.HtmlParser;
 import amai.org.conventions.utils.Objects;
+import fi.iki.kuitsi.listtest.ListTagHandler;
 
 public class ConventionEvent implements Serializable {
 	private String id;
@@ -66,7 +76,7 @@ public class ConventionEvent implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
-		this.plainTextDescription = description.isEmpty() ? "" : Html.fromHtml(description).toString().replace("\n", " ");
+		this.plainTextDescription = description.isEmpty() ? "" : getSpannedDescription().toString().replace("\n", " ");
 	}
 
 	public ConventionEvent withDescription(String description) {
@@ -251,6 +261,110 @@ public class ConventionEvent implements Serializable {
 	public ConventionEvent withServerId(int serverId) {
 		setServerId(serverId);
 		return this;
+	}
+
+	public Spanned getSpannedDescription() {
+		String eventDescription = this.getDescription();
+		final ListTagHandler listTagHandler = new ListTagHandler();
+		Spanned spanned = HtmlParser.fromHtml(eventDescription, null, new HtmlParser.TagHandler() {
+			private Stack<DivSpan> spans = new Stack<>();
+			@Override
+			public boolean handleTag(boolean opening, String tag, Editable output, Attributes attributes) {
+				listTagHandler.handleTag(opening, tag, output, null);
+				if (tag.equals("xdiv") || tag.equals("div")) {
+					int length = output.length();
+					if (opening) {
+						DivSpan span;
+						String classStyle = HtmlParser.getValue(attributes, "class");
+						if ("ss-form-container".equals(classStyle)) {
+							span = new GoogleFormSpan();
+						} else {
+							span = new DivSpan();
+						}
+						span.setStart(length);
+						spans.push(span);
+					} else {
+						DivSpan span = spans.pop();
+						span.setEnd(length);
+						if (span instanceof GoogleFormSpan) {
+							output.setSpan(span, span.getStart(), length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+						}
+					}
+				} else if (opening && tag.equals("form") && attributes != null) {
+					// Add the url to the google form (only if this form is inside the google form,
+					// meaning the form wasn't attached to the output yet so it's still in the spans stack).
+					// We go over the stack in reverse order because the current form was added last.
+					GoogleFormSpan span = null;
+					DivSpan currentSpan = null;
+					for (ListIterator<DivSpan> iter = spans.listIterator(spans.size()); iter.hasPrevious(); currentSpan = iter.previous()) {
+						if (currentSpan instanceof GoogleFormSpan) {
+							span = (GoogleFormSpan) currentSpan;
+							break;
+						}
+					}
+					if (span != null) {
+						String url = HtmlParser.getValue(attributes, "action");
+						span.setUrl(url);
+					}
+				}
+				return false;
+			}
+		});
+		GoogleFormSpan[] forms = spanned.getSpans(0, spanned.length(), GoogleFormSpan.class);
+		for (GoogleFormSpan span : forms) {
+			int spanStart = span.getStart();
+			int spanEnd = span.getEnd();
+			SpannableStringBuilder linkToForm = new SpannableStringBuilder();
+			if (span.getUrl() != null) {
+				linkToForm.append("לטופס");
+				linkToForm.setSpan(new FormURLSpan(span.getUrl()), 0, linkToForm.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+			}
+			spanned = (Spanned) TextUtils.concat(spanned.subSequence(0, spanStart), linkToForm, spanned.subSequence(spanEnd, spanned.length()));
+		}
+		for (URLSpan urlSpan : spanned.getSpans(0, spanned.length(), URLSpan.class)) {
+			if (urlSpan.getURL().startsWith("https://docs.google.com/forms") && !(urlSpan instanceof FormURLSpan)) {
+				int spanStart = spanned.getSpanStart(urlSpan);
+				int spanEnd = spanned.getSpanEnd(urlSpan);
+				spanned = (Spanned) TextUtils.concat(spanned.subSequence(0, spanStart), spanned.subSequence(spanEnd, spanned.length()));
+			}
+		}
+		return spanned;
+	}
+
+	private static class DivSpan {
+		int start = -1;
+		int end = -1;
+
+		public void setStart(int start) {
+			this.start = start;
+		}
+		public int getStart() {
+			return start;
+		}
+
+		public void setEnd(int end) {
+			this.end = end;
+		}
+
+		public int getEnd() {
+			return end;
+		}
+	}
+	private static class GoogleFormSpan extends DivSpan {
+		private String url = null;
+
+		public void setUrl(String url) {
+			this.url = url;
+		}
+
+		public String getUrl() {
+			return url;
+		}
+	}
+	private static class FormURLSpan extends URLSpan {
+		public FormURLSpan(String url) {
+			super(url);
+		}
 	}
 
 	@Override
