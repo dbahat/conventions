@@ -61,10 +61,8 @@ public class Stand {
 	}
 
 	public enum StandType {
-		COMMERCIAL(R.string.commercial_stand, R.drawable.ic_shopping_basket),
-		INDEPENDENT(R.string.independent_stand, R.drawable.ic_color_lens),
-		DONATION(R.string.donation_stand, R.drawable.ic_monetization),
-		OTHER(R.string.other_stand, R.drawable.book);
+		REGULAR_STAND(R.string.regular_stand, R.drawable.ic_shopping_basket),
+		ARTIST_STAND(R.string.artist_stand, R.drawable.ic_color_lens);
 
 		private int title;
 		private int image;

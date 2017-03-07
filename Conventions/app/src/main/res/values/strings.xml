@@ -127,8 +127,8 @@
     <string name="map_floor_search_title">חיפוש במפה</string>
     <string name="show_only_halls">הצג אולמות בלבד</string>
     <string name="goto_stands_list">הצג דוכנים</string>
-    <string name="commercial_stand">דוכנים מסחריים</string>
-    <string name="independent_stand">קהילה יוצרת</string>
+    <string name="regular_stand">דוכנים</string>
+    <string name="artist_stand">סמטת האמנים</string>
     <string name="donation_stand">תרומה</string>
     <string name="other_stand">שונות</string>
     <string name="search_locations">מתחם</string>
