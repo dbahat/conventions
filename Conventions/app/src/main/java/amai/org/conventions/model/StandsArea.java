@@ -9,6 +9,8 @@ import amai.org.conventions.utils.Objects;
 public class StandsArea extends Place implements Serializable {
 	private int id;
 	private Integer imageResource;
+	private float imageWidth;
+	private float imageHeight;
 	private List<Stand> stands = Collections.emptyList();
 
 	public StandsArea() {
@@ -71,5 +73,31 @@ public class StandsArea extends Place implements Serializable {
 	@Override
 	public int hashCode() {
 		return Objects.hash(name, stands);
+	}
+
+	public float getImageWidth() {
+		return imageWidth;
+	}
+
+	public void setImageWidth(float imageWidth) {
+		this.imageWidth = imageWidth;
+	}
+
+	public StandsArea withImageWidth(float imageWidth) {
+		setImageWidth(imageWidth);
+		return this;
+	}
+
+	public float getImageHeight() {
+		return imageHeight;
+	}
+
+	public void setImageHeight(float imageHeight) {
+		this.imageHeight = imageHeight;
+	}
+
+	public StandsArea withImageHeight(float imageHeight) {
+		setImageHeight(imageHeight);
+		return this;
 	}
 }
