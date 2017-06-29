@@ -1,4 +1,4 @@
-package amai.org.conventions.utils;
+package amai.org.conventions.feedback.mail;
 
 import android.content.Context;
 
@@ -6,10 +6,11 @@ import java.io.IOException;
 import java.util.Properties;
 
 import amai.org.conventions.R;
+import amai.org.conventions.feedback.FeedbackSender;
 import amai.org.conventions.model.Feedback;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.conventions.Convention;
-import amai.org.conventions.feedback.FeedbackSender;
+import amai.org.conventions.utils.Dates;
 
 public abstract class FeedbackMail extends FeedbackSender {
 	private static GMailSender sender;

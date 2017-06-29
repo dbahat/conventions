@@ -1,4 +1,4 @@
-package amai.org.conventions.utils;
+package amai.org.conventions.feedback.mail;
 
 import org.apache.harmony.xnet.provider.jsse.JSSEProvider;
 

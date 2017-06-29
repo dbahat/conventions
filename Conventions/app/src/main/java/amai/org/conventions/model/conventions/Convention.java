@@ -37,10 +37,10 @@ import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.model.Update;
 import amai.org.conventions.networking.ModelParser;
 import amai.org.conventions.utils.CollectionUtils;
-import amai.org.conventions.utils.ConventionFeedbackMail;
+import amai.org.conventions.feedback.mail.ConventionFeedbackMail;
 import amai.org.conventions.utils.ConventionStorage;
 import amai.org.conventions.utils.Dates;
-import amai.org.conventions.utils.EventFeedbackMail;
+import amai.org.conventions.feedback.mail.EventFeedbackMail;
 import amai.org.conventions.utils.Objects;
 
 public abstract class Convention implements Serializable {
