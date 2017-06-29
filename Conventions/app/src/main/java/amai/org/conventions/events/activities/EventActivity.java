@@ -43,6 +43,7 @@ import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.AspectRatioImageView;
 import amai.org.conventions.events.CollapsibleFeedbackView;
 import amai.org.conventions.events.ConfigureNotificationsFragment;
+import amai.org.conventions.feedback.FeedbackSender;
 import amai.org.conventions.map.MapActivity;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
@@ -50,8 +51,6 @@ import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.Dates;
-import amai.org.conventions.utils.EventFeedbackMail;
-import amai.org.conventions.utils.FeedbackMail;
 import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Views;
 import uk.co.chrisjenx.paralloid.views.ParallaxScrollView;
@@ -493,15 +492,15 @@ public class EventActivity extends NavigationActivity {
 				feedbackView.setState(CollapsibleFeedbackView.State.Expanded, false);
 			}
 
-			feedbackView.setSendFeedbackClickListener(feedbackView.new CollapsibleFeedbackViewSendMailListener() {
+			feedbackView.setSendFeedbackClickListener(feedbackView.new CollapsibleFeedbackViewSendListener() {
 				@Override
 				protected void saveFeedback() {
 					saveUserInput();
 				}
 
 				@Override
-				protected FeedbackMail getFeedbackMail() {
-					return new EventFeedbackMail(EventActivity.this, conventionEvent);
+				protected FeedbackSender getFeedbackSender() {
+					return Convention.getInstance().getEventFeedbackSender(EventActivity.this, conventionEvent);
 				}
 
 				@Override

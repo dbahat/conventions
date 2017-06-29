@@ -45,10 +45,10 @@ import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.AspectRatioImageView;
+import amai.org.conventions.feedback.FeedbackSender;
 import amai.org.conventions.model.Feedback;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.conventions.Convention;
-import amai.org.conventions.utils.FeedbackMail;
 import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Views;
 
@@ -619,7 +619,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		ExpandedHeadless
 	}
 
-	public abstract class CollapsibleFeedbackViewSendMailListener extends FeedbackMail.SendEventMailOnClickListener {
+	public abstract class CollapsibleFeedbackViewSendListener extends FeedbackSender.SendFeedbackOnClickListener {
 		protected abstract void saveFeedback();
 
 		protected void onSuccess() {
@@ -630,8 +630,8 @@ public class CollapsibleFeedbackView extends FrameLayout {
 
 		@Override
 		protected void onFailure(Exception exception) {
-			Log.w(TAG, "Failed to send feedback mail. Reason: " + exception.getClass().getSimpleName() + ": " + exception.getMessage());
-			Toast.makeText(getContext(), R.string.feedback_send_mail_failed, Toast.LENGTH_LONG).show();
+			Log.w(TAG, "Failed to send feedback. Reason: " + exception.getClass().getSimpleName() + ": " + exception.getMessage());
+			Toast.makeText(getContext(), R.string.feedback_send_failed, Toast.LENGTH_LONG).show();
 			sendUserSentFeedbackTelemetry(false, exception);
 		}
 

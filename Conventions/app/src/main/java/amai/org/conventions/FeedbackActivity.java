@@ -26,14 +26,12 @@ import amai.org.conventions.events.CollapsibleFeedbackView;
 import amai.org.conventions.events.activities.EventActivity;
 import amai.org.conventions.events.activities.ProgrammeActivity;
 import amai.org.conventions.events.adapters.EventsViewWithDateHeaderAdapter;
+import amai.org.conventions.feedback.FeedbackSender;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventEndTimeComparator;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.CollectionUtils;
-import amai.org.conventions.utils.ConventionFeedbackMail;
-import amai.org.conventions.utils.EventFeedbackMail;
-import amai.org.conventions.utils.FeedbackMail;
 import amai.org.conventions.utils.Log;
 
 
@@ -102,8 +100,8 @@ public class FeedbackActivity extends NavigationActivity {
 						for (ConventionEvent event : eventsWithUnsentFeedback) {
 							try {
 
-								FeedbackMail mail = new EventFeedbackMail(FeedbackActivity.this, event);
-								mail.send();
+								FeedbackSender feedbackSender = Convention.getInstance().getEventFeedbackSender(FeedbackActivity.this, event);
+								feedbackSender.send();
 
 								Convention.getInstance().getStorage().saveUserInput();
 								event.getUserInput().getFeedback().resetChangedAnswers();
@@ -124,7 +122,7 @@ public class FeedbackActivity extends NavigationActivity {
 							progressAnimation.cancel();
 						}
 						progressAnimation = ObjectAnimator.ofInt(sendAllProgress, "progress", progress, progress + ITEM_PROGRESS);
-						// Assuming sending a mail takes less than 5 seconds on average, we set the animation to be long enough
+						// Assuming sending the feedback takes less than 5 seconds on average, we set the animation to be long enough
 						// that it wil run until the next update. Even if we update it again before it's finished it will appear
 						// smooth because we always start from the previous value.
 						progressAnimation.setDuration(5000);
@@ -143,8 +141,8 @@ public class FeedbackActivity extends NavigationActivity {
 						setupEventLists(true);
 
 						if (exception != null) {
-							Log.w(TAG, "Failed to send feedback mail. Reason: " + exception.getClass().getSimpleName() + ": " + exception.getMessage());
-							Toast.makeText(FeedbackActivity.this, R.string.feedback_send_mail_failed, Toast.LENGTH_LONG).show();
+							Log.w(TAG, "Failed to send feedback. Reason: " + exception.getClass().getSimpleName() + ": " + exception.getMessage());
+							Toast.makeText(FeedbackActivity.this, R.string.feedback_send_failed, Toast.LENGTH_LONG).show();
 						}
 					}
 
@@ -302,10 +300,10 @@ public class FeedbackActivity extends NavigationActivity {
 		feedbackView.setState(CollapsibleFeedbackView.State.ExpandedHeadless, false);
 		feedbackView.setModel(Convention.getInstance().getFeedback());
 		feedbackView.setTextColor(ThemeAttributes.getColor(this, R.attr.conventionFeedbackTextColor));
-		feedbackView.setSendFeedbackClickListener(feedbackView.new CollapsibleFeedbackViewSendMailListener() {
+		feedbackView.setSendFeedbackClickListener(feedbackView.new CollapsibleFeedbackViewSendListener() {
 			@Override
-			protected FeedbackMail getFeedbackMail() {
-				return new ConventionFeedbackMail(FeedbackActivity.this);
+			protected FeedbackSender getFeedbackSender() {
+				return Convention.getInstance().getConventionFeedbackSender(FeedbackActivity.this);
 			}
 
 			@Override

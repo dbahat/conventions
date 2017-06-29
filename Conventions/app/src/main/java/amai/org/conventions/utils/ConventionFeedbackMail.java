@@ -7,13 +7,16 @@ import amai.org.conventions.model.Feedback;
 import amai.org.conventions.model.conventions.Convention;
 
 public class ConventionFeedbackMail extends FeedbackMail {
-	public ConventionFeedbackMail(Context context) {
+	private Convention convention;
+
+	public ConventionFeedbackMail(Context context, Convention convention) {
 		super(context);
+		this.convention = convention;
 	}
 
 	@Override
 	protected Feedback getFeedback() {
-		return Convention.getInstance().getFeedback();
+		return convention.getFeedback();
 	}
 
 	@Override

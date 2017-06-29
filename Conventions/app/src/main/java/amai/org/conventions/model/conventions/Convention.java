@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+import amai.org.conventions.feedback.FeedbackSender;
 import amai.org.conventions.map.AggregatedEventTypes;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
@@ -36,8 +37,10 @@ import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.model.Update;
 import amai.org.conventions.networking.ModelParser;
 import amai.org.conventions.utils.CollectionUtils;
+import amai.org.conventions.utils.ConventionFeedbackMail;
 import amai.org.conventions.utils.ConventionStorage;
 import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.EventFeedbackMail;
 import amai.org.conventions.utils.Objects;
 
 public abstract class Convention implements Serializable {
@@ -589,6 +592,14 @@ public abstract class Convention implements Serializable {
 	}
 
 	public abstract ModelParser getModelParser();
+
+	public FeedbackSender getConventionFeedbackSender(Context context) {
+		return new ConventionFeedbackMail(context, this);
+	}
+
+	public FeedbackSender getEventFeedbackSender(Context context, ConventionEvent event) {
+		return new EventFeedbackMail(context, event);
+	}
 
 	private static class SearchCategory {
 		private String searchCategory;

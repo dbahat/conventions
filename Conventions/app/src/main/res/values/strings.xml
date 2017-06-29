@@ -46,7 +46,7 @@
 
     <string name="event_feedback_mail_title">מייל אוטומטי - פידבק ל%s עבור האירוע</string>
     <string name="convention_feedback_mail_title">מייל אוטומטי - פידבק לכנס %s</string>
-    <string name="feedback_send_mail_failed">לא ניתן לשלוח את הפידבק. נסה שנית מאוחר יותר</string>
+    <string name="feedback_send_failed">לא ניתן לשלוח את הפידבק. נסה שנית מאוחר יותר</string>
     <string name="feedback_sent">הפידבק נשלח. תודה!</string>
     <string name="feedback_sending_time_over">זמן שליחת הפידבק הסתיים</string>
 
