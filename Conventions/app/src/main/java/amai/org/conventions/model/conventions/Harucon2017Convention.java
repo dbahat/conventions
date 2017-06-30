@@ -7,7 +7,10 @@ import java.util.Calendar;
 import java.util.List;
 
 import amai.org.conventions.R;
+import amai.org.conventions.feedback.forms.EventFeedbackForm;
+import amai.org.conventions.feedback.forms.FeedbackForm;
 import amai.org.conventions.model.ConventionMap;
+import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.Floor;
 import amai.org.conventions.model.Hall;
 import amai.org.conventions.model.ImageIdToImageResourceMapper;
@@ -68,7 +71,49 @@ public class Harucon2017Convention extends AmaiConvention {
 
 	@Override
 	protected String initFeedbackRecipient() {
-		return "content@harucon.org.il";
+		return null;
+	}
+
+	@Override
+	protected EventFeedbackForm initEventFeedbackForm() {
+		EventFeedbackForm eventFeedbackForm = null;
+		try {
+			eventFeedbackForm = (EventFeedbackForm) new EventFeedbackForm()
+                    .withEventTitleEntry("entry.1847107867")
+                    .withEventTimeEntry("entry.1648362575")
+                    .withHallEntry("entry.1510105148")
+                    .withConventionNameEntry("entry.1882876736")
+                    .withDeviceIdEntry("entry.312890800")
+                    .withTestEntry("entry.791883029")
+					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_ENJOYMENT, "entry.415572741")
+					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_LECTURER_QUALITY, "entry.1327236956")
+					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_SIMILAR_EVENTS, "entry.1416969956")
+					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_ADDITIONAL_INFO, "entry.1582215667")
+                    .withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSf0qSN1DreR4h93k1QJWf_flL2LFrLCOvnp6HTZOvK_iLZHGA/formResponse"));
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
+		return eventFeedbackForm;
+	}
+
+	@Override
+	protected FeedbackForm initConventionFeedbackForm() {
+		FeedbackForm feedbackForm = null;
+		try {
+			feedbackForm = new FeedbackForm()
+					.withConventionNameEntry("entry.1882876736")
+					.withDeviceIdEntry("entry.312890800")
+					.withTestEntry("entry.791883029")
+					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_AGE, "entry.415572741")
+					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_LIKED, "entry.1327236956")
+					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_MAP_SIGNS, "entry.1416969956")
+					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_CONFLICTING_EVENTS, "entry.1582215667")
+					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_IMPROVEMENT, "entry.993320932")
+					.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSdadoDGXMriFVgW1Lki22OcrOGQoJVIlW8cU29DfkJRvAPWUQ/formResponse"));
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
+		return feedbackForm;
 	}
 
 	@Override

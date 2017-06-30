@@ -20,16 +20,21 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+import amai.org.conventions.BuildConfig;
 import amai.org.conventions.feedback.FeedbackSender;
+import amai.org.conventions.feedback.forms.ConventionFeedbackFormSender;
+import amai.org.conventions.feedback.forms.EventFeedbackForm;
+import amai.org.conventions.feedback.forms.EventFeedbackFormSender;
+import amai.org.conventions.feedback.forms.FeedbackForm;
 import amai.org.conventions.map.AggregatedEventTypes;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
-import amai.org.conventions.model.ImageIdToImageResourceMapper;
 import amai.org.conventions.model.EventType;
 import amai.org.conventions.model.Feedback;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.Floor;
 import amai.org.conventions.model.Hall;
+import amai.org.conventions.model.ImageIdToImageResourceMapper;
 import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.model.Place;
 import amai.org.conventions.model.Stand;
@@ -37,10 +42,8 @@ import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.model.Update;
 import amai.org.conventions.networking.ModelParser;
 import amai.org.conventions.utils.CollectionUtils;
-import amai.org.conventions.feedback.mail.ConventionFeedbackMail;
 import amai.org.conventions.utils.ConventionStorage;
 import amai.org.conventions.utils.Dates;
-import amai.org.conventions.feedback.mail.EventFeedbackMail;
 import amai.org.conventions.utils.Objects;
 
 public abstract class Convention implements Serializable {
@@ -58,6 +61,8 @@ public abstract class Convention implements Serializable {
 	private Map<String, ConventionEvent.UserInput> userInput;
 	private Feedback feedback;
 	private String feedbackRecipient;
+	private FeedbackForm conventionFeedbackForm;
+	private EventFeedbackForm eventFeedbackForm;
 
 	private ConventionMap map;
 	private Calendar startDate;
@@ -124,6 +129,8 @@ public abstract class Convention implements Serializable {
 		this.id = initID();
 		this.displayName = initDisplayName();
 		this.feedbackRecipient = initFeedbackRecipient();
+		this.conventionFeedbackForm = initConventionFeedbackForm();
+		this.eventFeedbackForm = initEventFeedbackForm();
 		this.modelURL = initModelURL();
 		this.facebookFeedPath = initFacebookFeedPath();
 		// This list can be modified
@@ -137,6 +144,12 @@ public abstract class Convention implements Serializable {
 
 		if (getLengthInDays() > MAX_CONVENTION_LENGTH_IN_DAYS) {
 			throw new RuntimeException("Conventions with over " + MAX_CONVENTION_LENGTH_IN_DAYS + " days are currently un-supported.");
+		}
+
+		if (BuildConfig.DEBUG) {
+			if (!conventionFeedbackForm.canFillFeedback(feedback)) {
+				throw new RuntimeException("Bad convention feedback form");
+			}
 		}
 	}
 
@@ -165,6 +178,10 @@ public abstract class Convention implements Serializable {
 	protected abstract double initLatitude();
 
 	protected abstract ImageIdToImageResourceMapper initImageMapper();
+
+	protected abstract EventFeedbackForm initEventFeedbackForm();
+
+	protected abstract FeedbackForm initConventionFeedbackForm();
 
 	public Calendar getStartDate() {
 		return startDate;
@@ -594,11 +611,11 @@ public abstract class Convention implements Serializable {
 	public abstract ModelParser getModelParser();
 
 	public FeedbackSender getConventionFeedbackSender(Context context) {
-		return new ConventionFeedbackMail(context, this);
+		return new ConventionFeedbackFormSender(context, conventionFeedbackForm, this);
 	}
 
 	public FeedbackSender getEventFeedbackSender(Context context, ConventionEvent event) {
-		return new EventFeedbackMail(context, event);
+		return new EventFeedbackFormSender(context, eventFeedbackForm, this, event);
 	}
 
 	private static class SearchCategory {
