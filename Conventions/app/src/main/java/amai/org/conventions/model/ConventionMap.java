@@ -1,11 +1,8 @@
 package amai.org.conventions.model;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
-import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.CollectionUtils;
 
 public class ConventionMap {
@@ -106,30 +103,6 @@ public class ConventionMap {
 				return false;
 			}
 		});
-	}
-
-	public MapLocation findClosestLocation(List<MapLocation> locations) {
-		if (locations.size() == 0) {
-			return null;
-		} else if (locations.size() == 1) {
-			return locations.get(0);
-		} else {
-			final ConventionMap map = Convention.getInstance().getMap();
-			Floor currMapFloor = map.getLastLookedAtFloor();
-			if (currMapFloor != null) {
-				final int currMapFloorIndex = map.floorNumberToFloorIndex(currMapFloor.getNumber());
-				Collections.sort(locations, new Comparator<MapLocation>() {
-					@Override
-					public int compare(MapLocation lhs, MapLocation rhs) {
-						// Return the closest location to the last looked at floor
-						int distanceFromLeft = Math.abs(currMapFloorIndex - map.floorNumberToFloorIndex(lhs.getFloor().getNumber()));
-						int distanceFromRight = Math.abs(currMapFloorIndex - map.floorNumberToFloorIndex(rhs.getFloor().getNumber()));
-						return distanceFromLeft - distanceFromRight;
-					}
-				});
-			}
-			return locations.get(0);
-		}
 	}
 
 	public int floorNumberToFloorIndex(int floorNumber) {
