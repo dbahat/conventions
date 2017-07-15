@@ -24,6 +24,10 @@ android {
             versionNameSuffix ".debug"
         }
     }
+    // TODO - Drop this once we have dependency injection framework to mock out SDK references (such as the Log, Html and Color classes)
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 configurations.all {

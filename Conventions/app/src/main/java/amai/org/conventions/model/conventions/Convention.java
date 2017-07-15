@@ -108,6 +108,7 @@ public abstract class Convention implements Serializable {
 		this.userInput = new LinkedHashMap<>();
 		updates = new ArrayList<>();
 		updatesById = new HashMap<>();
+		halls = new ArrayList<>();
 
 		initFeedback();
 	}

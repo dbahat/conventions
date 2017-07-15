@@ -2,7 +2,7 @@ package amai.org.conventions.model;
 
 import java.io.Serializable;
 
-import amai.org.conventions.networking.AmaiModelParser;
+import amai.org.conventions.networking.AmaiModelConverter;
 
 public class EventType implements Serializable {
 
@@ -10,7 +10,7 @@ public class EventType implements Serializable {
 	private String description;
 
 	public EventType(String description) {
-		this(AmaiModelParser.NO_COLOR, description);
+		this(AmaiModelConverter.NO_COLOR, description);
 	}
 
 	public EventType(int backgroundColor, String description) {
@@ -23,7 +23,7 @@ public class EventType implements Serializable {
 	}
 
 	public boolean hasBackgroundColor() {
-		return backgroundColor != AmaiModelParser.NO_COLOR;
+		return backgroundColor != AmaiModelConverter.NO_COLOR;
 	}
 
 	public String getDescription() {

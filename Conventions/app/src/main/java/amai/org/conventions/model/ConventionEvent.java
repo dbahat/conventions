@@ -20,6 +20,7 @@ import java.util.Stack;
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.conventions.Convention;
+import amai.org.conventions.networking.AmaiModelConverter;
 import amai.org.conventions.networking.AmaiModelParser;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.HtmlParser;
@@ -59,7 +60,7 @@ public class ConventionEvent implements Serializable {
 	}
 
 	public int getTextColor(Context context) {
-		if (textColor != AmaiModelParser.NO_COLOR) {
+		if (textColor != AmaiModelConverter.NO_COLOR) {
 			return textColor;
 		}
 		return ThemeAttributes.getColor(context, R.attr.eventTimeDefaultTextColor);
@@ -76,7 +77,10 @@ public class ConventionEvent implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
-		this.plainTextDescription = description.isEmpty() ? "" : getSpannedDescription().toString().replace("\n", " ");
+
+		// spannedDescription will be null in unit tests, since it uses Android SDK APIs underline, which aren't currently mocked in unit tests
+		Spanned spannedDescription = getSpannedDescription();
+		this.plainTextDescription = description.isEmpty() || spannedDescription == null ? "" : spannedDescription.toString().replace("\n", " ");
 	}
 
 	public ConventionEvent withDescription(String description) {
@@ -171,11 +175,11 @@ public class ConventionEvent implements Serializable {
 	}
 
 	public int getBackgroundColor(Context context) {
-		if (backgroundColor != AmaiModelParser.NO_COLOR) {
+		if (backgroundColor != AmaiModelConverter.NO_COLOR) {
 			return backgroundColor;
 		}
 		int eventTypeColor = getType().getBackgroundColor();
-		if (eventTypeColor != AmaiModelParser.NO_COLOR) {
+		if (eventTypeColor != AmaiModelConverter.NO_COLOR) {
 			return eventTypeColor;
 		}
 		return ThemeAttributes.getColor(context, R.attr.eventTimeDefaultBackgroundColor);
@@ -310,6 +314,11 @@ public class ConventionEvent implements Serializable {
 				return false;
 			}
 		});
+
+		if (spanned == null) {
+			return null;
+		}
+
 		GoogleFormSpan[] forms = spanned.getSpans(0, spanned.length(), GoogleFormSpan.class);
 		for (GoogleFormSpan span : forms) {
 			int spanStart = span.getStart();

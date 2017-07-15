@@ -49,10 +49,9 @@ import amai.org.conventions.feedback.FeedbackSender;
 import amai.org.conventions.model.Feedback;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.conventions.Convention;
+import amai.org.conventions.networking.AmaiModelConverter;
 import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Views;
-
-import static amai.org.conventions.networking.AmaiModelParser.NO_COLOR;
 
 public class CollapsibleFeedbackView extends FrameLayout {
 	private static final String TAG = CollapsibleFeedbackView.class.getCanonicalName();
@@ -72,7 +71,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 
 	private Feedback feedback;
 	private boolean feedbackChanged;
-	private int textColor = NO_COLOR;
+	private int textColor = AmaiModelConverter.NO_COLOR;
 
 	public CollapsibleFeedbackView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -151,7 +150,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 
 	public void setTextColor(int color) {
 		textColor = color;
-		if (color != NO_COLOR) {
+		if (color != AmaiModelConverter.NO_COLOR) {
 			collapsedFeedbackTitle.setTextColor(color);
 			feedbackSentText.setTextColor(color);
 			feedbackLayoutTitle.setTextColor(color);
