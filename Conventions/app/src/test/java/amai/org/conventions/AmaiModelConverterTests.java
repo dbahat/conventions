@@ -3,6 +3,11 @@ package amai.org.conventions;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.stubbing.Answer;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,12 +24,31 @@ import amai.org.conventions.model.Halls;
 import amai.org.conventions.networking.AmaiEventContract;
 import amai.org.conventions.networking.AmaiModelConverter;
 
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+@RunWith(MockitoJUnitRunner.class)
 public class AmaiModelConverterTests {
 	private AmaiModelConverter amaiModelConverter;
 
+	@Mock
+	private Halls hallsMock;
+
 	@Before
 	public void setup() {
-		amaiModelConverter = new AmaiModelConverter(new Halls(new ArrayList<Hall>()), Calendar.getInstance());
+		amaiModelConverter = new AmaiModelConverter(hallsMock, Calendar.getInstance());
+
+		// Simulate the default behavior of adding a hall, which is common for most tests
+		doAnswer(new Answer() {
+			@Override
+			public Object answer(InvocationOnMock invocation) throws Throwable {
+				return new Hall().withName(invocation.getArguments()[0].toString());
+			}
+		}).when(hallsMock).add(anyString());
 	}
 
 	@Test
@@ -150,6 +174,27 @@ public class AmaiModelConverterTests {
 		Assert.assertEquals(2, eventList.size());
 		// The description of the 2nd (special) event should be null, since it's pointing to non-existing event #3
 		Assert.assertNull(eventList.get(1).getDescription());
+	}
+
+	@Test
+	public void Convert_Adds_New_Hall_If_Event_Has_Undefined_Hall_Name() {
+		AmaiEventContract.TimetableInfoInstance instanceContract = generateTimetableInfoInstance(0);
+		amaiModelConverter.convert(Collections.singletonList(generateEventContract(0, Collections.singletonList(instanceContract))));
+		verify(hallsMock, times(1)).add(eq(instanceContract.getRoom()));
+	}
+
+	@Test
+	public void Convert_Uses_Existing_Hall_If_Event_Has_Predefined_Hall_Name() {
+		AmaiEventContract.TimetableInfoInstance instanceContract = generateTimetableInfoInstance(0);
+
+		// Configure an existing hall
+		Hall expectedHall = new Hall();
+		when(hallsMock.findByName(eq(instanceContract.getRoom()))).thenReturn(expectedHall);
+
+		List<ConventionEvent> eventList = amaiModelConverter.convert(Collections.singletonList(generateEventContract(0, Collections.singletonList(instanceContract))));
+
+		verify(hallsMock, times(0)).add(anyString());
+		Assert.assertEquals(expectedHall, eventList.get(0).getHall());
 	}
 
 	private AmaiEventContract.TimetableInfoInstance generateTimetableInfoInstance(int index) {
