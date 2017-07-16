@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Locale;
 
 import amai.org.conventions.model.ConventionEvent;
+import amai.org.conventions.model.Hall;
+import amai.org.conventions.model.Halls;
 import amai.org.conventions.networking.AmaiEventContract;
 import amai.org.conventions.networking.AmaiModelConverter;
 
@@ -22,7 +24,7 @@ public class AmaiModelConverterTests {
 
 	@Before
 	public void setup() {
-		amaiModelConverter = new AmaiModelConverter(Calendar.getInstance());
+		amaiModelConverter = new AmaiModelConverter(new Halls(new ArrayList<Hall>()), Calendar.getInstance());
 	}
 
 	@Test

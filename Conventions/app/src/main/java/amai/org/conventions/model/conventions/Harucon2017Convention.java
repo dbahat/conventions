@@ -13,6 +13,7 @@ import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.Floor;
 import amai.org.conventions.model.Hall;
+import amai.org.conventions.model.Halls;
 import amai.org.conventions.model.ImageIdToImageResourceMapper;
 import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.model.Place;
@@ -30,6 +31,18 @@ public class Harucon2017Convention extends AmaiConvention {
 	private static final String ESHKOL3_NAME = "אשכול 3";
 	private static final String GAMES_NAME = "משחקיה";
 	private static final String SIGNING_NAME = "אזור החתמות";
+
+	protected Harucon2017Convention() {
+		super(new Halls(Arrays.asList(
+				new Hall().withName(MAIN_HALL_NAME).withOrder(1),
+				new Hall().withName(SCHWARTZ_NAME).withOrder(2),
+				new Hall().withName(ESHKOL1_NAME).withOrder(3),
+				new Hall().withName(ESHKOL2_NAME).withOrder(4),
+				new Hall().withName(ESHKOL3_NAME).withOrder(5),
+				new Hall().withName(GAMES_NAME).withOrder(6),
+				new Hall().withName(SIGNING_NAME).withOrder(7)
+		)));
+	}
 
 	@Override
 	protected ConventionStorage initStorage() {
@@ -171,27 +184,14 @@ public class Harucon2017Convention extends AmaiConvention {
 	}
 
 	@Override
-	protected List<Hall> initHalls() {
-		Hall mainHall = new Hall().withName(MAIN_HALL_NAME).withOrder(1);
-		Hall auditorium = new Hall().withName(SCHWARTZ_NAME).withOrder(2);
-		Hall eshkol1 = new Hall().withName(ESHKOL1_NAME).withOrder(3);
-		Hall eshkol2 = new Hall().withName(ESHKOL2_NAME).withOrder(4);
-		Hall eshkol3 = new Hall().withName(ESHKOL3_NAME).withOrder(5);
-		Hall games = new Hall().withName(GAMES_NAME).withOrder(6);
-		Hall signing = new Hall().withName(SIGNING_NAME).withOrder(7);
-
-		return Arrays.asList(mainHall, auditorium, eshkol1, eshkol2, eshkol3, games, signing);
-	}
-
-	@Override
 	protected ConventionMap initMap() {
-		Hall mainHall = findHallByName(MAIN_HALL_NAME);
-		Hall schwatrz = findHallByName(SCHWARTZ_NAME);
-		Hall eshkol1 = findHallByName(ESHKOL1_NAME);
-		Hall eshkol2 = findHallByName(ESHKOL2_NAME);
-		Hall eshkol3 = findHallByName(ESHKOL3_NAME);
-		Hall games = findHallByName(GAMES_NAME);
-		Hall signing = findHallByName(SIGNING_NAME);
+		Hall mainHall = getHalls().findByName(MAIN_HALL_NAME);
+		Hall schwatrz = getHalls().findByName(SCHWARTZ_NAME);
+		Hall eshkol1 = getHalls().findByName(ESHKOL1_NAME);
+		Hall eshkol2 = getHalls().findByName(ESHKOL2_NAME);
+		Hall eshkol3 = getHalls().findByName(ESHKOL3_NAME);
+		Hall games = getHalls().findByName(GAMES_NAME);
+		Hall signing = getHalls().findByName(SIGNING_NAME);
 
 		Floor floor1 = new Floor(1)
 				.withName("מפלס תחתון")

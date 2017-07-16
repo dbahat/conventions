@@ -16,7 +16,7 @@ import java.util.Map;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.EventType;
 import amai.org.conventions.model.Hall;
-import amai.org.conventions.model.conventions.Convention;
+import amai.org.conventions.model.Halls;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
@@ -27,9 +27,11 @@ public class AmaiModelConverter {
 	private static final String TAG = AmaiModelConverter.class.getCanonicalName();
 
 	private Calendar conventionStartDate;
+	private Halls halls;
 
-	public AmaiModelConverter(Calendar conventionStartDate) {
+	public AmaiModelConverter(Halls halls, Calendar conventionStartDate) {
 		this.conventionStartDate = conventionStartDate;
+		this.halls = halls;
 	}
 
 	public List<ConventionEvent> convert(List<AmaiEventContract> eventContracts) {
@@ -136,12 +138,11 @@ public class AmaiModelConverter {
 	}
 
 	private Hall convertHall(String hallName) {
-		// TODO - Extract Halls to a separate dependency consumed by the model converter
-		Hall hall = Convention.getInstance().findHallByName(hallName);
+		Hall hall = halls.findByName(hallName);
 
 		if (hall == null) {
 			// Add a new hall to the convention
-			hall = Convention.getInstance().addHall(hallName);
+			hall = halls.add(hallName);
 			Log.i(TAG, "Found and added new hall with name " + hallName);
 		}
 

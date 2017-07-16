@@ -33,7 +33,7 @@ import amai.org.conventions.model.EventType;
 import amai.org.conventions.model.Feedback;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.Floor;
-import amai.org.conventions.model.Hall;
+import amai.org.conventions.model.Halls;
 import amai.org.conventions.model.ImageIdToImageResourceMapper;
 import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.model.Place;
@@ -54,7 +54,7 @@ public abstract class Convention implements Serializable {
 	// to fit up to 5 days in it's tab bar).
 	private static final int MAX_CONVENTION_LENGTH_IN_DAYS = 5;
 
-	private List<Hall> halls;
+	private Halls halls;
 	private List<ConventionEvent> events;
 	private List<Update> updates;
 	private Map<String, Update> updatesById;
@@ -104,11 +104,11 @@ public abstract class Convention implements Serializable {
 		return latitude;
 	}
 
-	protected Convention() {
+	protected Convention(Halls halls) {
+		this.halls = halls;
 		this.userInput = new LinkedHashMap<>();
 		updates = new ArrayList<>();
 		updatesById = new HashMap<>();
-		halls = new ArrayList<>();
 
 		initFeedback();
 	}
@@ -134,8 +134,6 @@ public abstract class Convention implements Serializable {
 		this.eventFeedbackForm = initEventFeedbackForm();
 		this.modelURL = initModelURL();
 		this.facebookFeedPath = initFacebookFeedPath();
-		// This list can be modified
-		this.halls = new ArrayList<>(initHalls());
 		this.map = initMap();
 		this.longitude = initLongitude();
 		this.latitude = initLatitude();
@@ -169,8 +167,6 @@ public abstract class Convention implements Serializable {
 	protected abstract URL initModelURL();
 
 	protected abstract String initFacebookFeedPath();
-
-	protected abstract List<Hall> initHalls();
 
 	protected abstract ConventionMap initMap();
 
@@ -210,6 +206,10 @@ public abstract class Convention implements Serializable {
 
 	public ImageIdToImageResourceMapper getImageMapper() {
 		return imageMapper;
+	}
+
+	public Halls getHalls() {
+		return halls;
 	}
 
 	/**
@@ -274,20 +274,6 @@ public abstract class Convention implements Serializable {
 			}
 		}
 		// TODO remove user input for deleted events?
-	}
-
-	public List<Hall> getHalls() {
-		return halls;
-	}
-
-	public Hall findHallByName(String name) {
-		for (Hall hall : getHalls()) {
-			if (hall.getName().compareToIgnoreCase(name) == 0) {
-				return hall;
-			}
-		}
-
-		return null;
 	}
 
 	public ConventionMap getMap() {
@@ -446,12 +432,6 @@ public abstract class Convention implements Serializable {
 		return Arrays.asList(locations);
 	}
 
-	public Hall addHall(String name) {
-		Hall hall = new Hall().withName(name).withOrder(getHighestHallOrder() + 1);
-		halls.add(hall);
-		return hall;
-	}
-
 	public List<EventType> getEventTypes() {
 		HashSet<EventType> eventTypes = new HashSet<>();
 		if (events != null) {
@@ -507,15 +487,6 @@ public abstract class Convention implements Serializable {
 				return item.getSearchCategory();
 			}
 		});
-	}
-
-	private int getHighestHallOrder() {
-		int maxHallOrder = -1;
-		for (Hall hall : getHalls()) {
-			maxHallOrder = Math.max(maxHallOrder, hall.getOrder());
-		}
-
-		return maxHallOrder;
 	}
 
 	public Date getNewestUpdateTime() {

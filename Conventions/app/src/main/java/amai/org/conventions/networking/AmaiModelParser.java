@@ -23,6 +23,9 @@ public class AmaiModelParser implements ModelParser {
 		Type typeOfT = new TypeToken<List<AmaiEventContract>>(){}.getType();
 		List<AmaiEventContract> eventsContract = gson.fromJson(reader, typeOfT);
 
-		return new AmaiModelConverter(Convention.getInstance().getStartDate()).convert(eventsContract);
+		return new AmaiModelConverter(
+				Convention.getInstance().getHalls(),
+				Convention.getInstance().getStartDate()
+		).convert(eventsContract);
 	}
 }
