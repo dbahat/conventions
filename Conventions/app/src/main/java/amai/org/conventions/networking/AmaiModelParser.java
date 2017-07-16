@@ -7,12 +7,21 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
+import java.util.Calendar;
 import java.util.List;
 
 import amai.org.conventions.model.ConventionEvent;
-import amai.org.conventions.model.conventions.Convention;
+import amai.org.conventions.model.Halls;
 
 public class AmaiModelParser implements ModelParser {
+	private Halls halls;
+	private Calendar conventionStartDate;
+
+	public AmaiModelParser(Halls halls, Calendar conventionStartDate) {
+		this.halls = halls;
+		this.conventionStartDate = conventionStartDate;
+	}
+
 	@Override
 	public List<ConventionEvent> parse(InputStreamReader reader) {
 
@@ -24,8 +33,8 @@ public class AmaiModelParser implements ModelParser {
 		List<AmaiEventContract> eventsContract = gson.fromJson(reader, typeOfT);
 
 		return new AmaiModelConverter(
-				Convention.getInstance().getHalls(),
-				Convention.getInstance().getStartDate()
+				halls,
+				conventionStartDate
 		).convert(eventsContract);
 	}
 }
