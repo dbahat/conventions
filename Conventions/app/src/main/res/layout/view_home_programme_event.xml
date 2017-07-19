@@ -4,10 +4,10 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              tools:background="@color/harucon2017_orange">
+              tools:background="@color/green">
 
     <TextView
-        android:id="@+id/programme_event_title_text"
+        android:id="@+id/home_programme_event_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="'פחד' באנימציה לילדים"
@@ -17,9 +17,9 @@
         />
 
     <View
-        android:id="@+id/programme_event_title_divider"
+        android:id="@+id/home_programme_event_divider"
         android:layout_width="match_parent"
         android:layout_height="@dimen/event_divider_height"
-        android:background="@drawable/event_list_divider"/>
+        android:background="@drawable/home_event_list_divider"/>
 
 </LinearLayout>

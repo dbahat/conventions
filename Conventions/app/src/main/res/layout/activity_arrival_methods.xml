@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_size_large_material"
-                android:textColor="@color/hint_gray"
+                android:textColor="?hintTextColor"
                 android:text="@string/missing_play_services_map_message"
                 android:gravity="center"/>
             <Button

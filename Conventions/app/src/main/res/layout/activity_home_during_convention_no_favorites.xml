@@ -11,7 +11,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/harucon2017_dark_blue"
+        android:background="?homeTitleBackground"
         android:padding="8dp">
         <TextView
             android:id="@+id/home_upcoming_programme_events_title"
@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             tools:text="אירועים שמתחילים ב-11:00"
             android:textSize="20sp"
-            android:textColor="@color/white"
+            android:textColor="?homeTitleText"
             android:textStyle="bold"
             android:layout_gravity="center"/>
     </FrameLayout>
@@ -28,16 +28,15 @@
         android:id="@+id/home_upcoming_programme_events_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/harucon2017_orange"
+        android:background="?homeUpcomingEventBackground"
         android:divider="@null"/>
 
     <Button
-        android:textColor="@color/white"
         android:text="@string/home_go_to_programme"
         android:textSize="23sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/harucon2017_home_activity_button"
+        style="@style/HomeButton"
         android:onClick="onGoToProgrammeClicked"/>
 
 </LinearLayout>

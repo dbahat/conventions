@@ -26,7 +26,7 @@
         <se.emilsjolander.stickylistheaders.StickyListHeadersListView
             android:id="@+id/searchEventsList"
             app:isDrawingListUnderStickyHeader="false"
-            android:divider="@drawable/event_list_divider"
+            android:divider="?eventListDivider"
             android:dividerHeight="@dimen/event_divider_height"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
@@ -35,10 +35,11 @@
         android:id="@+id/search_no_results_found"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="50dp"
         android:visibility="gone"
         android:textSize="@dimen/text_size_large_material"
-        android:textColor="@color/hint_gray"
+        android:textColor="?hintTextColor"
         android:padding="25dp"
         android:text="@string/search_no_results_found" />
 

@@ -42,7 +42,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@android:color/darker_gray"
+            android:background="?attr/updateItemBorder"
             android:layout_gravity="end"/>
 
         <!-- Note - the max lines of this textView is set dynamically in code, based on the
@@ -70,13 +70,13 @@
             android:layout_width="300dp"
             android:layout_height="1dp"
             android:layout_gravity="center|top"
-            android:background="@android:color/darker_gray" />
+            android:background="?attr/updateItemBorder" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/update_show_full_text"
-            android:textColor="?buttonColor"
+            android:textColor="?borderlessButtonColor"
             android:layout_gravity="center"
             android:padding="5dp"/>
 

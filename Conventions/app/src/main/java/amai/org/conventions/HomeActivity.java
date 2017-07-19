@@ -2,7 +2,6 @@ package amai.org.conventions;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -15,6 +14,7 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -43,8 +43,8 @@ public class HomeActivity extends NavigationActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setToolbarAndContentContainerBackground(ContextCompat.getDrawable(this, R.drawable.harucon2017_home_background));
-		setToolbarTitle(ContextCompat.getDrawable(this, R.drawable.harucon_2017_title_black));
+		setToolbarAndContentContainerBackground(ThemeAttributes.getDrawable(this, R.attr.homeBackground));
+		setToolbarTitle(ThemeAttributes.getDrawable(this, R.attr.homeToolbarTitle));
 	}
 
 	@Override
@@ -53,17 +53,16 @@ public class HomeActivity extends NavigationActivity {
 
 		currentFavoriteEvent = getCurrentFavoriteEvent();
 
-		// Creating the page layout during onResume (and not onCreate) since the layout is time-driven, and we want it refreshed in case the activity was paused
-		// and got resumed.
-		if (Dates.now().after(Convention.getInstance().getStartDate().getTime()) &&
-				// We show the user the convention-in-progress experience in 2 cases:
-				// 1. Today's the convention day and there are still events that didn't start
-				// or
-				// 2. Today's the convention day and there's a favorite event in progress
-				(!Convention.getInstance().haveAllEventsStarted() || currentFavoriteEvent != null)) {
-			setContentForDuringConvention();
+		// Creating the page layout during onResume (and not onCreate) since the layout is time-driven,
+		// and we want it refreshed in case the activity was paused and got resumed.
+		if (Dates.now().before(Convention.getInstance().getStartDate().getTime())) {
+			setContentForBeforeConventionStarted();
+		// We consider the convention as "ended" here if there is no current event the user is attending and
+		// all events have already started (this could be during the convention date or after it)
+		} else if (Convention.getInstance().haveAllEventsStarted() && currentFavoriteEvent == null) {
+			setContentForAfterConventionEnded();
 		} else {
-			setContentForBeforeOrAfterConventionDate();
+			setContentForDuringConvention();
 		}
 	}
 
@@ -109,7 +108,7 @@ public class HomeActivity extends NavigationActivity {
 			upcomingEventTitle.setText(currentEvent.getTitle());
 			upcomingEventTime.setText(getString(R.string.home_now_showing, ""));
 			upcomingEventHall.setText(currentEvent.getHall().getName());
-			upcomingEventContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.harucon2017_red));
+			upcomingEventContainer.setBackgroundColor(ThemeAttributes.getColor(this, R.attr.homeCurrentEventBackground));
 
 			// In this case, we want the 'go to my events' to go to the programme instead, since the user has no more favorite events.
 			Button goToMyEventsButton = (Button)findViewById(R.id.home_go_to_my_events_button);
@@ -156,7 +155,7 @@ public class HomeActivity extends NavigationActivity {
 			public View getView(int position, View convertView, ViewGroup parent) {
 				ProgrammeEventTitleViewHolder viewHolder;
 				if (convertView == null) {
-					convertView = LayoutInflater.from(HomeActivity.this).inflate(R.layout.view_programme_event_title, parent, false);
+					convertView = LayoutInflater.from(HomeActivity.this).inflate(R.layout.view_home_programme_event, parent, false);
 					viewHolder = new ProgrammeEventTitleViewHolder(convertView);
 					convertView.setTag(viewHolder);
 				} else {
@@ -200,8 +199,8 @@ public class HomeActivity extends NavigationActivity {
 		ProgrammeEventTitleViewHolder(View itemView) {
 			super(itemView);
 
-			title = (TextView)itemView.findViewById(R.id.programme_event_title_text);
-			divider = itemView.findViewById(R.id.programme_event_title_divider);
+			title = (TextView)itemView.findViewById(R.id.home_programme_event_title);
+			divider = itemView.findViewById(R.id.home_programme_event_divider);
 		}
 
 		void bind(String upcomingEventTitle, boolean shouldShowDivider) {
@@ -262,51 +261,52 @@ public class HomeActivity extends NavigationActivity {
 		return upcomingFavoriteEvents.get(0);
 	}
 
-	private void setContentForBeforeOrAfterConventionDate() {
-		setContentInContentContainer(R.layout.activity_home_not_during_convention, false, false);
-
+	private void setContentForBeforeConventionStarted() {
+		setContentInContentContainer(R.layout.activity_home_before_convention, false, false);
 		TextView titleView = (TextView)findViewById(R.id.home_content_title);
 		TextView contentView = (TextView)findViewById(R.id.home_content);
-		FrameLayout contentViewContainer = (FrameLayout)findViewById(R.id.home_content_container);
 
-		if (Convention.getInstance().haveAllEventsStarted()) {
-			// All the events are already in-progress or finished. Show the user to the feedback screen.
-			contentViewContainer.setForeground(ThemeAttributes.getDrawable(this, R.attr.selectableItemBackground));
-			contentViewContainer.setClickable(true);
-			contentViewContainer.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					navigateToActivity(FeedbackActivity.class);
-				}
-			});
-			findViewById(R.id.home_buttons_layout).setVisibility(View.GONE);
-
-			if (Convention.getInstance().getFeedback().isSent() || Convention.getInstance().isFeedbackSendingTimeOver()) {
-				// The feedback filling time is over or feedback was sent. Allow the user to see his feedback
-				titleView.setText(R.string.home_convention_ended);
-				contentView.setText(R.string.home_show_feedback);
-				contentView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 50);
-				ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) contentView.getLayoutParams();
-				int margins = getResources().getDimensionPixelOffset(R.dimen.home_show_feedback_text_view_margins);
-				layoutParams.setMarginStart(margins);
-				layoutParams.setMarginEnd(margins);
-				contentView.setLayoutParams(layoutParams);
-			} else {
-				// Ask the user to fill feedback
-				titleView.setText(R.string.home_help_us_improve);
-				contentView.setText(R.string.home_send_feedback);
-			}
+		// the convention didn't start yet. Show the user the number of days until it starts.
+		int daysUntilConventionStarts = getDaysUntilConventionStart();
+		if (daysUntilConventionStarts == 1) {
+			contentView.setText("מחר!");
+		} else if (daysUntilConventionStarts == 2) {
+			contentView.setText("עוד יומיים!");
 		} else {
-			// the convention didn't start yet. Show the user the number of days until it starts.
-			int daysUntilConventionStarts = getDaysUntilConventionStart();
-			if (daysUntilConventionStarts == 1) {
-				contentView.setText("מחר!");
-			} else if (daysUntilConventionStarts == 2) {
-				contentView.setText("עוד יומיים!");
-			} else {
-				contentView.setText(getString(R.string.home_convention_start_time, daysUntilConventionStarts));
+			contentView.setText(getString(R.string.home_convention_start_time, daysUntilConventionStarts));
+		}
+		Calendar startDate = Convention.getInstance().getStartDate();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Dates.getLocale());
+		titleView.setText(sdf.format(startDate.getTime()));
+	}
+
+	private void setContentForAfterConventionEnded() {
+		setContentInContentContainer(R.layout.activity_home_after_convention, false, false);
+		FrameLayout contentViewContainer = (FrameLayout)findViewById(R.id.home_content_container);
+		TextView titleView = (TextView)findViewById(R.id.home_content_title);
+		TextView contentView = (TextView)findViewById(R.id.home_content);
+		// All the events are already in-progress or finished. Show the user to the feedback screen.
+		contentViewContainer.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				navigateToActivity(FeedbackActivity.class);
 			}
-			titleView.setText(R.string.home_convention_date);
+		});
+
+		if (Convention.getInstance().getFeedback().isSent() || Convention.getInstance().isFeedbackSendingTimeOver()) {
+			// The feedback filling time is over or feedback was sent. Allow the user to see his feedback
+			titleView.setText(R.string.home_convention_ended);
+			contentView.setText(R.string.home_show_feedback);
+			contentView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 50);
+			ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) contentView.getLayoutParams();
+			int margins = getResources().getDimensionPixelOffset(R.dimen.home_show_feedback_text_view_margins);
+			layoutParams.setMarginStart(margins);
+			layoutParams.setMarginEnd(margins);
+			contentView.setLayoutParams(layoutParams);
+		} else {
+			// Ask the user to fill feedback
+			titleView.setText(R.string.home_help_us_improve);
+			contentView.setText(R.string.home_send_feedback);
 		}
 	}
 

@@ -32,6 +32,7 @@ public class EventView extends FrameLayout {
 	private final View favoriteIconTouchArea;
 	private final TextView hallName;
 	private final TextView startTime;
+	private final TextView timeBoxTo;
 	private final TextView endTime;
 	private final TextView eventName;
 	private final TextView lecturerName;
@@ -61,6 +62,7 @@ public class EventView extends FrameLayout {
 		favoriteIconTouchArea = this.findViewById(R.id.eventFavoriteIconTouchArea);
 		hallName = (TextView) this.findViewById(R.id.hallName);
 		startTime = (TextView) this.findViewById(R.id.startTime);
+		timeBoxTo = (TextView) this.findViewById(R.id.timeBoxTo);
 		endTime = (TextView) this.findViewById(R.id.endTime);
 		eventName = (TextView) this.findViewById(R.id.eventName);
 		lecturerName = (TextView) this.findViewById(R.id.lecturerName);
@@ -118,6 +120,7 @@ public class EventView extends FrameLayout {
 
 	public void setEventTimeTextColor(int color) {
 		startTime.setTextColor(color);
+		timeBoxTo.setTextColor(color);
 		endTime.setTextColor(color);
 	}
 
@@ -130,11 +133,11 @@ public class EventView extends FrameLayout {
 	}
 
 	public void setAttending(boolean isAttending) {
-		favoriteIcon.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_star_black_24dp));
+		favoriteIcon.setImageDrawable(ThemeAttributes.getDrawable(getContext(), R.attr.eventFavoriteIcon));
 		if (isAttending) {
-			favoriteIcon.setColorFilter(ContextCompat.getColor(getContext(), R.color.gold), PorterDuff.Mode.SRC_ATOP);
+			favoriteIcon.setColorFilter(ThemeAttributes.getColor(getContext(), R.attr.eventFavoriteColor), PorterDuff.Mode.SRC_ATOP);
 		} else {
-			favoriteIcon.setColorFilter(ContextCompat.getColor(getContext(), R.color.black), PorterDuff.Mode.SRC_ATOP);
+			favoriteIcon.setColorFilter(ThemeAttributes.getColor(getContext(), R.attr.eventNonFavoriteColor), PorterDuff.Mode.SRC_ATOP);
 		}
 	}
 

@@ -12,7 +12,9 @@
         <item name="android:colorBackground">@color/white</item>
         <item name="swipeToRefreshColor">?toolbarBackground</item>
         <item name="stickyListHeadersListViewStyle">@style/Widget.AppCompat.ListView</item>
+        <item name="hintTextColor">@color/hint_gray</item>
 
+        <item name="eventTimeHeaderBackground">@drawable/flat_event_time_background</item>
         <item name="eventTypeEndedColor">@color/gray</item>
         <item name="eventTypeCurrentColor">@color/light_yellow</item>
         <item name="eventTypeNotStartedColor">@color/white</item>
@@ -25,10 +27,10 @@
         <item name="conflictingEventsBackground">@color/dark_gray</item>
 
         <item name="navigationPopupNotSelectedColor">@android:color/black</item>
-
-        <item name="eventTimeHeaderColor">@color/ultra_light_gray2</item>
+        <item name="navigationPopupSeparatorColor">?navigationPopupNotSelectedColor</item>
 
         <item name="updateTimeColor">@color/ultra_light_gray</item>
+        <item name="updateItemBorder">@android:color/darker_gray</item>
         <item name="updatesBackground">?android:colorBackground</item>
         <item name="newUpdateBackground">@color/very_light_gray</item>
 
@@ -40,7 +42,7 @@
         <item name="eventDetailsBoxColor">@color/transparent_white</item>
         <item name="eventDescriptionTextColor">?android:textColorPrimary</item>
         <item name="eventDetailsTextColor">?android:textColorPrimary</item>
-        <item name="feedbackButtonColor">?buttonColor</item>
+        <item name="feedbackButtonColor">?borderlessButtonColor</item>
         <item name="eventTitleTextColor">?android:textColorPrimary</item>
         <item name="eventFeedbackBoxColor">@color/transparent_light_yellow</item>
         <item name="eventFeedbackTextColor">?attr/eventDescriptionTextColor</item>
@@ -52,6 +54,7 @@
         <item name="shadowForeground">@drawable/bottom_shadow</item>
         <item name="activitiesBackground">@null</item>
         <item name="actionButtonColor">?colorAccent</item>
+        <item name="borderlessButtonColor">?buttonColor</item>
     </style>
 
     <style name="FullScreenDialog" parent="android:Theme.Dialog">

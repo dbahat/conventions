@@ -48,7 +48,7 @@ import amai.org.conventions.utils.Objects;
 
 public abstract class Convention implements Serializable {
 
-	private static Convention convention = new Harucon2017Convention();
+	private static Convention convention = new Cami2017Convention();
 
 	// Currently supporting conventions of up to 5 days (UI restriction, since the programme is set
 	// to fit up to 5 days in it's tab bar).
@@ -104,8 +104,7 @@ public abstract class Convention implements Serializable {
 		return latitude;
 	}
 
-	protected Convention(Halls halls) {
-		this.halls = halls;
+	protected Convention() {
 		this.userInput = new LinkedHashMap<>();
 		updates = new ArrayList<>();
 		updatesById = new HashMap<>();
@@ -134,6 +133,7 @@ public abstract class Convention implements Serializable {
 		this.eventFeedbackForm = initEventFeedbackForm();
 		this.modelURL = initModelURL();
 		this.facebookFeedPath = initFacebookFeedPath();
+		this.halls = initHalls();
 		this.map = initMap();
 		this.longitude = initLongitude();
 		this.latitude = initLatitude();
@@ -167,6 +167,8 @@ public abstract class Convention implements Serializable {
 	protected abstract URL initModelURL();
 
 	protected abstract String initFacebookFeedPath();
+
+	protected abstract Halls initHalls();
 
 	protected abstract ConventionMap initMap();
 
@@ -206,10 +208,6 @@ public abstract class Convention implements Serializable {
 
 	public ImageIdToImageResourceMapper getImageMapper() {
 		return imageMapper;
-	}
-
-	public Halls getHalls() {
-		return halls;
 	}
 
 	/**
@@ -274,6 +272,10 @@ public abstract class Convention implements Serializable {
 			}
 		}
 		// TODO remove user input for deleted events?
+	}
+
+	public Halls getHalls() {
+		return halls;
 	}
 
 	public ConventionMap getMap() {

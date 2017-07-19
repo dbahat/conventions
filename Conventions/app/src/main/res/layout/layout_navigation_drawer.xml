@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/harucon2017_dark_blue">
+    android:background="?navigationPopupBackground">
 
     <LinearLayout
         android:orientation="vertical"
@@ -18,7 +18,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:src="@drawable/harucon_2017_title_white"
+            android:layout_gravity="center_horizontal"
+            android:src="?navigationPopupTitle"
             tools:ignore="ContentDescription" />
 
         <amai.org.conventions.customviews.NestedListView
@@ -31,9 +32,9 @@
         <amai.org.conventions.customviews.AspectRatioImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="30dp"
-            android:paddingEnd="30dp"
-            android:src="@drawable/harucon2017_navigation_drawer_image"/>
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:src="?navigationPopupBottomImage"/>
 
     </LinearLayout>
 

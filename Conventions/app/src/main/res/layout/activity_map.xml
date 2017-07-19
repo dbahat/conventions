@@ -92,7 +92,7 @@
                 android:gravity="center|top"
                 android:visibility="gone"
                 android:textSize="@dimen/text_size_medium_material"
-                android:textColor="@color/hint_gray"
+                android:textColor="?hintTextColor"
                 android:padding="5dp"
                 android:text="@string/search_no_results_found"
                 android:background="@color/transparent_white"/>

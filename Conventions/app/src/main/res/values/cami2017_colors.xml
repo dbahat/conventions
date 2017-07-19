@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="cami2017_blue">#25418a</color>
+    <color name="cami2017_blue_bright">#527ae2</color>
+    <color name="cami2017_blue_dark">#001d69</color>
+    <color name="cami2017_dark_blue">#1d3750</color>
+    <color name="cami2017_dark_blue_bright">#6288ab</color>
+    <color name="cami2017_dark_blue_dark">#002241</color>
+    <color name="cami2017_very_dark_blue">#0a1723</color>
+    <color name="cami2017_very_dark_blue_bright">#627585</color>
+    <color name="cami2017_very_dark_blue_dark">#000e1b</color>
+    <color name="cami2017_red">#c8094c</color>
+    <color name="cami2017_pink">#ff4a8a</color>
+    <color name="cami2017_red_dark">#7d002c</color>
+    <color name="cami2017_dark_purple">#5e596f</color>
+    <color name="cami2017_dark_purple_bright">#9891b2</color>
+    <color name="cami2017_dark_purple_dark">#322b4c</color>
+    <color name="cami2017_purple">#aa9aa5</color>
+    <color name="cami2017_purple_bright">#d3bbcc</color>
+    <color name="cami2017_purple_dark">#6d5566</color>
+    <color name="cami2017_gray">#A9B8BE</color>
+    <color name="cami2017_transparent_red">#c07d002c</color>
+    <color name="cami2017_darkest_blue">#051620</color>
+    <color name="cami2017_transparent_dark_blue">#951d3750</color>
+    <color name="cami2017_transparent_very_dark_blue">#950a1723</color>
+</resources>

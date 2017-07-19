@@ -1,5 +1,6 @@
 package amai.org.conventions.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import amai.org.conventions.utils.CollectionUtils;
@@ -8,7 +9,9 @@ public class Halls {
 	private List<Hall> halls;
 
 	public Halls(List<Hall> halls) {
-		this.halls = halls;
+		// The halls list can be modified, and we don't know if the sent halls list is mutable,
+		// so we copy it to a new array list
+		this.halls = new ArrayList<>(halls);
 	}
 
 	public List<Hall> getHalls() {

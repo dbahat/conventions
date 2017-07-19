@@ -5,7 +5,6 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Point;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -20,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import amai.org.conventions.R;
+import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.EventView;
 import amai.org.conventions.events.adapters.DismissibleEventsViewAdapter;
 import amai.org.conventions.model.ConventionEvent;
@@ -40,7 +40,7 @@ public class ConflictingEventsViewHolder extends RecyclerView.ViewHolder {
 		}
 		DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(context,
 				DividerItemDecoration.VERTICAL);
-		dividerItemDecoration.setDrawable(ContextCompat.getDrawable(context, R.drawable.conflicting_event_list_divider));
+		dividerItemDecoration.setDrawable(ThemeAttributes.getDrawable(context, R.attr.eventListDivider));
 		eventsListView.addItemDecoration(dividerItemDecoration);
 	}
 

@@ -37,7 +37,7 @@
         <item name="android:layout_marginLeft">@dimen/event_details_box_side_margins</item>
         <item name="android:layout_marginRight">@dimen/event_details_box_side_margins</item>
         <item name="android:padding">8dp</item>
-        <item name="android:background">@drawable/event_title_background</item>
+        <item name="android:background">?eventTitleBackground</item>
         <item name="android:gravity">center</item>
         <item name="android:layout_gravity">center</item>
     </style>
@@ -63,7 +63,7 @@
     </style>
 
     <style name="BorderlessButton" parent="@style/Widget.AppCompat.Button.Borderless">
-        <item name="android:textColor">?buttonColor</item>
+        <item name="android:textColor">?borderlessButtonColor</item>
         <item name="android:minHeight">@null</item>
         <item name="android:minWidth">@null</item>
         <item name="android:padding">@null</item>
@@ -72,7 +72,7 @@
     </style>
 
     <style name="HighlightedButton">
-        <item name="android:background">@drawable/highlighted_button</item>
+        <item name="android:background">?highlightedButtonBackground</item>
         <item name="android:textColor">@color/white</item>
     </style>
 
@@ -87,5 +87,10 @@
     <style name="FeedbackQuestionTextAppearance">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">?android:textColorPrimary</item>
+    </style>
+
+    <style name="HomeButton">
+        <item name="android:background">?homeButtonBackground</item>
+        <item name="android:textColor">?homeButtonText</item>
     </style>
 </resources>

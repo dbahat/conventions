@@ -22,7 +22,7 @@ import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 
-public class Harucon2017Convention extends AmaiConvention {
+public class Cami2017Convention extends AmaiConvention {
 	// Hall names
 	private static final String MAIN_HALL_NAME = "אולם ראשי";
 	private static final String SCHWARTZ_NAME = "אודיטוריום שוורץ";
@@ -32,44 +32,32 @@ public class Harucon2017Convention extends AmaiConvention {
 	private static final String GAMES_NAME = "משחקיה";
 	private static final String SIGNING_NAME = "אזור החתמות";
 
-	protected Harucon2017Convention() {
-		super(new Halls(Arrays.asList(
-				new Hall().withName(MAIN_HALL_NAME).withOrder(1),
-				new Hall().withName(SCHWARTZ_NAME).withOrder(2),
-				new Hall().withName(ESHKOL1_NAME).withOrder(3),
-				new Hall().withName(ESHKOL2_NAME).withOrder(4),
-				new Hall().withName(ESHKOL3_NAME).withOrder(5),
-				new Hall().withName(GAMES_NAME).withOrder(6),
-				new Hall().withName(SIGNING_NAME).withOrder(7)
-		)));
-	}
-
 	@Override
 	protected ConventionStorage initStorage() {
-		return new ConventionStorage(this, R.raw.harucon2017_convention_events, 1);
+		return new ConventionStorage(this, R.raw.cami2017_convention_events, 0);
 	}
 
 	@Override
 	protected Calendar initDate() {
 		Calendar date = Calendar.getInstance();
 		date.clear();
-		date.set(2017, Calendar.MARCH, 12);
+		date.set(2017, Calendar.AUGUST, 24);
 		return date;
 	}
 
 	@Override
 	protected String initID() {
-		return "Harucon2017";
+		return "Cami2017";
 	}
 
 	@Override
 	protected String initDisplayName() {
-		return "הארוקון 2017";
+		return "כאמ\"י 2017";
 	}
 
 	@Override
 	protected String initFacebookFeedPath() {
-		return "/harucon.org.il/posts";
+		return "/cami.org.il/posts";
 	}
 
 	@Override
@@ -132,7 +120,7 @@ public class Harucon2017Convention extends AmaiConvention {
 	@Override
 	protected URL initModelURL() {
 		try {
-			return new URL("http://2017.harucon.org.il/wp-admin/admin-ajax.php?action=get_event_list");
+			return new URL("http://2017.cami.org.il/wp-admin/admin-ajax.php?action=get_event_list");
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
@@ -140,58 +128,47 @@ public class Harucon2017Convention extends AmaiConvention {
 
 	@Override
 	protected ImageIdToImageResourceMapper initImageMapper() {
+		// TODO change for cami 2017
 		ImageIdToImageResourceMapper imageMapper = new ImageIdToImageResourceMapper();
 
-		imageMapper.addMapping("http://2017.harucon.org.il/wp-content/uploads/sites/11/2017/02/מנגה-קפה-חברתי.jpg", R.drawable.event_manga_cafe);
-		imageMapper.addMapping("http://2017.harucon.org.il/wp-content/uploads/sites/11/2016/06/אומנויות-לחימה.jpg", R.drawable.event_martial_arts);
-		imageMapper.addMapping("http://2017.harucon.org.il/wp-content/uploads/sites/11/2016/06/קריסטינה.jpg", R.drawable.event_small_details);
-		imageMapper.addMapping("http://2017.harucon.org.il/wp-content/uploads/sites/11/2016/06/אובנטו-יפני-טעים-קאוואי-וקל-להכנה-הרצאה-מעשית-לאוטאקו-הרעב.jpg", R.drawable.event_obento);
-		imageMapper.addMapping("http://2017.harucon.org.il/wp-content/uploads/sites/11/2016/06/kuroshitsuji.jpg", R.drawable.event_kuroshitsuji);
-		imageMapper.addMapping("http://2017.harucon.org.il/wp-content/uploads/sites/11/2016/06/סטודיו-טריגר.jpg", R.drawable.event_studio_trigger);
-		imageMapper.addMapping("http://2017.harucon.org.il/wp-content/uploads/sites/11/2016/06/WCS.png", R.drawable.event_wcs);
-		imageMapper.addMapping("http://2017.harucon.org.il/wp-content/uploads/sites/11/2016/06/דוגינשי.jpg", R.drawable.event_doujinshi);
-		imageMapper.addMapping("http://2017.harucon.org.il/wp-content/uploads/sites/11/2016/06/Revolutionary-Girl-Utnea.png", R.drawable.event_utena);
-		imageMapper.addMapping("http://2017.harucon.org.il/wp-content/uploads/sites/11/2016/06/16651726_10206778877070918_1169167867_n.png", R.drawable.event_harucomedy_central);
-		imageMapper.addMapping("http://2017.harucon.org.il/wp-content/uploads/sites/11/2016/06/פיינל-פנטזי.jpg", R.drawable.event_final_fantasy);
-		imageMapper.addMapping("http://2017.harucon.org.il/wp-content/uploads/sites/11/2016/06/מה-אתם-הייתם-עושים-שחף-עדן.jpg", R.drawable.event_what_would_you_do);
-		imageMapper.addMapping("http://2017.harucon.org.il/wp-content/uploads/sites/11/2016/06/Cover_Image_GITS_Manga.png", R.drawable.event_cyberpunk);
-		imageMapper.addMapping("http://2017.harucon.org.il/wp-content/uploads/sites/11/2016/06/מאגדה-לאנימה.png", R.drawable.event_legends);
-		imageMapper.addMapping("http://2017.harucon.org.il/wp-content/uploads/sites/11/2016/06/בין-הראש-לדף.png", R.drawable.event_head_paper);
-		imageMapper.addMapping("http://2017.harucon.org.il/wp-content/uploads/sites/11/2016/06/יוני-ההרפתקה-המבעיתה-של-גוגו.png", R.drawable.event_jojo);
-		imageMapper.addMapping("http://2017.harucon.org.il/wp-content/uploads/sites/11/2016/06/טכניקות-קומיקס.jpg", R.drawable.event_comics);
-		imageMapper.addMapping("http://2017.harucon.org.il/wp-content/uploads/sites/11/2016/06/מסע-בזמן.png", R.drawable.event_time_travel);
-		imageMapper.addMapping("http://2017.harucon.org.il/wp-content/uploads/sites/11/2016/06/2D-הסרט.jpg", R.drawable.event_2d_movie);
-		imageMapper.addMapping("http://2017.harucon.org.il/wp-content/uploads/sites/11/2016/06/14195417_524560747755018_332506590212759241_o.jpg", R.drawable.event_taiko_life);
+		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/11/2017/02/מנגה-קפה-חברתי.jpg", R.drawable.event_manga_cafe);
 
 		// Non-URL IDs
-		imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.harucon2017_event_default_image);
+		imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.cami2017_event_default_image);
 
 		// Excluded IDs - mostly for debug purposes (don't show messages about these when entering an event that has them)
 		// Not displayed due to bad quality
-		imageMapper.addExcludedId("http://2017.harucon.org.il/wp-content/uploads/sites/11/2016/06/11219643_10207384743566314_4164409570104231506_n.jpg");
-		// It's a logo, it doesn't fit in the background
-		imageMapper.addExcludedId("http://2017.harucon.org.il/wp-content/uploads/sites/11/2017/02/EOJ_Logo_LONG.png");
+		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/11/2016/06/11219643_10207384743566314_4164409570104231506_n.jpg");
 		// Cosplay event judges
-		imageMapper.addExcludedId("http://2017.harucon.org.il/wp-content/uploads/sites/11/2016/06/DafnaShaulson-150x150.jpg");
-		imageMapper.addExcludedId("http://2017.harucon.org.il/wp-content/uploads/sites/11/2016/06/ofirKertes-150x150.jpg");
-		imageMapper.addExcludedId("http://2017.harucon.org.il/wp-content/uploads/sites/11/2016/06/oded-150x150.jpg");
-		imageMapper.addExcludedId("http://2017.harucon.org.il/wp-content/uploads/sites/11/2016/06/netta-150x150.jpg");
-		imageMapper.addExcludedId("http://2017.harucon.org.il/wp-content/uploads/sites/11/2016/06/shachar-1-150x150.jpg");
-		imageMapper.addExcludedId("http://2017.harucon.org.il/wp-content/uploads/sites/11/2016/07/yaelgeller-150x150.jpg");
-		imageMapper.addExcludedId("http://2017.harucon.org.il/wp-content/uploads/sites/11/2016/07/nimrodgold-150x150.jpg");
+		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/11/2016/07/nimrodgold-150x150.jpg");
 
 		return imageMapper;
 	}
 
 	@Override
+	protected Halls initHalls() {
+		// TODO change for cami 2017
+		Hall mainHall = new Hall().withName(MAIN_HALL_NAME).withOrder(1);
+		Hall auditorium = new Hall().withName(SCHWARTZ_NAME).withOrder(2);
+		Hall eshkol1 = new Hall().withName(ESHKOL1_NAME).withOrder(3);
+		Hall eshkol2 = new Hall().withName(ESHKOL2_NAME).withOrder(4);
+		Hall eshkol3 = new Hall().withName(ESHKOL3_NAME).withOrder(5);
+		Hall games = new Hall().withName(GAMES_NAME).withOrder(6);
+		Hall signing = new Hall().withName(SIGNING_NAME).withOrder(7);
+
+		return new Halls(Arrays.asList(mainHall, auditorium, eshkol1, eshkol2, eshkol3, games, signing));
+	}
+
+	@Override
 	protected ConventionMap initMap() {
-		Hall mainHall = getHalls().findByName(MAIN_HALL_NAME);
-		Hall schwatrz = getHalls().findByName(SCHWARTZ_NAME);
-		Hall eshkol1 = getHalls().findByName(ESHKOL1_NAME);
-		Hall eshkol2 = getHalls().findByName(ESHKOL2_NAME);
-		Hall eshkol3 = getHalls().findByName(ESHKOL3_NAME);
-		Hall games = getHalls().findByName(GAMES_NAME);
-		Hall signing = getHalls().findByName(SIGNING_NAME);
+		// TODO change for cami 2017
+		Hall mainHall = this.getHalls().findByName(MAIN_HALL_NAME);
+		Hall schwatrz = this.getHalls().findByName(SCHWARTZ_NAME);
+		Hall eshkol1 = this.getHalls().findByName(ESHKOL1_NAME);
+		Hall eshkol2 = this.getHalls().findByName(ESHKOL2_NAME);
+		Hall eshkol3 = this.getHalls().findByName(ESHKOL3_NAME);
+		Hall games = this.getHalls().findByName(GAMES_NAME);
+		Hall signing = this.getHalls().findByName(SIGNING_NAME);
 
 		Floor floor1 = new Floor(1)
 				.withName("מפלס תחתון")

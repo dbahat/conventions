@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +17,7 @@ import java.util.Date;
 import java.util.List;
 
 import amai.org.conventions.R;
+import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.adapters.EventGroupsAdapter;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.utils.CollectionUtils;
@@ -109,7 +109,7 @@ public class MyEventsDayFragment extends Fragment {
 		eventsList.setLayoutManager(new LinearLayoutManager(getActivity()));
 		DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(),
 				DividerItemDecoration.VERTICAL);
-		dividerItemDecoration.setDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.event_list_divider));
+		dividerItemDecoration.setDrawable(ThemeAttributes.getDrawable(getActivity(), R.attr.eventListDivider));
 		eventsList.addItemDecoration(dividerItemDecoration);
 
 		return view;

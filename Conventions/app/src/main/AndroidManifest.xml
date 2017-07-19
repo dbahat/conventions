@@ -34,13 +34,13 @@
     <application
         android:name=".ConventionsApplication"
         android:allowBackup="false"
-        android:icon="@mipmap/harucon2017_app_icon"
+        android:icon="@mipmap/cami2017_app_icon"
         android:installLocation="auto"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppBaseTheme.Harucon2017.Toolbar"
+        android:theme="@style/AppBaseTheme.Cami2017.Toolbar"
         tools:replace="android:icon, android:allowBackup">
-        <activity android:name="amai.org.conventions.SplashActivity" android:theme="@style/AppBaseTheme.Harucon2017.Toolbar.Splash"
+        <activity android:name="amai.org.conventions.SplashActivity" android:theme="@style/AppBaseTheme.Cami2017.Toolbar.Splash"
                   android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -60,7 +60,7 @@
         <activity
             android:name=".FeedbackActivity"
             android:windowSoftInputMode="adjustResize"></activity>
-        <activity android:name=".updates.UpdatesActivity"></activity>
+        <activity android:name=".updates.UpdatesActivity" android:theme="@style/AppBaseTheme.Cami2017.Toolbar.Updates"></activity>
         <activity android:name=".settings.SettingsActivity"></activity>
         <activity android:name=".AboutActivity"></activity>
         <activity android:name=".HomeActivity" android:screenOrientation="portrait"/>

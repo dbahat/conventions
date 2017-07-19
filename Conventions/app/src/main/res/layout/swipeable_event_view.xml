@@ -15,5 +15,5 @@
         android:visibility="gone"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/event_list_divider"/>
+        android:background="?eventListDivider"/>
 </LinearLayout>
