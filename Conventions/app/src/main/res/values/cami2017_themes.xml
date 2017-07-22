@@ -11,13 +11,13 @@
         <!-- General -->
         <item name="colorAccent">@color/cami2017_red</item>
         <item name="android:colorBackground">@null</item>
-        <item name="android:textColorLink">@color/cami2017_red</item>
+        <item name="android:textColorLink">@color/cami2017_red_dark</item>
         <item name="actionButtonColor">@color/cami2017_red</item>
         <item name="hintTextColor">@color/cami2017_very_dark_blue_bright</item>
         <item name="swipeToRefreshColor">@color/cami2017_red</item>
         <item name="snackbarActionColor">@color/cami2017_pink</item>
         <item name="highlightedButtonBackground">@drawable/cami2017_highlighted_button</item>
-        <item name="borderlessButtonColor">@color/cami2017_red</item>
+        <item name="borderlessButtonColor">@color/cami2017_red_dark</item>
         <item name="feedbackButtonColor">@color/white</item>
         <item name="feedbackAnswerButtonColor">@color/cami2017_red_dark</item>
         <item name="feedbackAnswerButtonSelectedColor">@color/cami2017_red</item>
@@ -98,19 +98,20 @@
         <item name="eventTimeHeaderBackground">@null</item>
     </style>
 
-    <style name="AppBaseTheme.Cami2017.Toolbar.Updates" parent="AppBaseTheme.Cami2017.Toolbar">
-        <item name="android:textColorLink">@color/cami2017_red_dark</item>
-        <item name="borderlessButtonColor">@color/cami2017_red_dark</item>
+    <style name="AppBaseTheme.Cami2017.Toolbar.Event" parent="AppBaseTheme.Cami2017.Toolbar">
+        <item name="android:textColorLink">@color/cami2017_red</item>
     </style>
 
     <style name="AppDialogTheme.Cami2017" parent="Theme.AppCompat.Light.Dialog">
         <!-- This is the default starting API23. In any case the title is always left-justified so it's best to not use it. -->
         <item name="android:windowNoTitle">true</item>
         <item name="colorAccent">@color/cami2017_red</item>
+        <item name="borderlessButtonColor">@color/cami2017_red</item>
     </style>
 
     <style name="AppAlertDialogTheme.Cami2017" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorAccent">@color/cami2017_red</item>
+        <item name="borderlessButtonColor">@color/cami2017_red</item>
     </style>
 
     <style name="AppBaseTheme.Cami2017.Toolbar.Splash">

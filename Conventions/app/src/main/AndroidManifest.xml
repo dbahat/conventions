@@ -55,12 +55,13 @@
         <activity android:name=".map.MapActivity"></activity>
         <activity
             android:name=".events.activities.EventActivity"
+            android:theme="@style/AppBaseTheme.Cami2017.Toolbar.Event"
             android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name=".ArrivalMethodsActivity"></activity>
         <activity
             android:name=".FeedbackActivity"
             android:windowSoftInputMode="adjustResize"></activity>
-        <activity android:name=".updates.UpdatesActivity" android:theme="@style/AppBaseTheme.Cami2017.Toolbar.Updates"></activity>
+        <activity android:name=".updates.UpdatesActivity"></activity>
         <activity android:name=".settings.SettingsActivity"></activity>
         <activity android:name=".AboutActivity"></activity>
         <activity android:name=".HomeActivity" android:screenOrientation="portrait"/>
