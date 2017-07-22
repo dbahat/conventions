@@ -18,6 +18,9 @@ public class HtmlParser implements Html.TagHandler, ContentHandler {
 	}
 
 	public static Spanned fromHtml(String html, Html.ImageGetter imageGetter, TagHandler handler) {
+		if (html == null) {
+			return null;
+		}
 		// add a tag at the start that is not handled by default,
 		// allowing custom tag handler to replace xmlReader contentHandler
 		return Html.fromHtml("<inject/>" + html, imageGetter, new HtmlParser(handler));
