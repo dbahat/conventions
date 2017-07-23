@@ -184,7 +184,9 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		if (useDefaultBackground) {
 			// Set the background in code due to an Android bug that if the background is set in the xml
 			// and then removed, the foreground isn't displayed either and it's not possible to bring it back
-			contentContainer.setBackgroundColor(ThemeAttributes.getColor(this, android.R.attr.colorBackground));
+			setBackgroundColor(ThemeAttributes.getColor(this, android.R.attr.colorBackground));
+		} else {
+			removeBackground();
 		}
 
 		return contentContainer;

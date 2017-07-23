@@ -33,6 +33,7 @@ import java.util.List;
 
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.R;
+import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.ConditionalSwipeVerticalViewPager;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.Floor;
@@ -78,6 +79,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentInContentContainer(R.layout.activity_map, false, false);
+		setToolbarAndContentContainerBackground(ThemeAttributes.getDrawable(this, R.attr.mapBackground));
 		if (map.getLocations().size() > 0) {
 			setupActionButton(R.drawable.ic_action_search, new View.OnClickListener() {
 				@Override

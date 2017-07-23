@@ -34,6 +34,7 @@
         <item name="updatesBackground">?android:colorBackground</item>
         <item name="newUpdateBackground">@color/very_light_gray</item>
 
+        <item name="mapBackground">?activitiesBackground</item>
         <item name="locationDetailsBackground">@color/white</item>
         <item name="locationDetailsTopLineColor">@android:color/black</item>
         <item name="locationDetailsTitleColor">?android:textColorPrimary</item>

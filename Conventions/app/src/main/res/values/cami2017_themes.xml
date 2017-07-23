@@ -71,8 +71,8 @@
         <item name="eventFavoriteColor">@color/cami2017_red</item>
         <!-- Map Screen -->
         <item name="locationDetailsBackground">@color/transparent_black</item>
-        <item name="locationDetailsTitleColor">@color/white</item>
-        <item name="floorBackground">@drawable/cami2017_page_background</item>
+        <item name="locationDetailsTitleColor">@color/cami2017_dark_blue</item>
+        <item name="mapBackground">@drawable/cami2017_page_background</item>
         <item name="standIconColor">@color/cami2017_red_dark</item>
         <item name="standsTypeTitleColor">@color/cami2017_red_dark</item>
         <!-- Updates Screen -->
