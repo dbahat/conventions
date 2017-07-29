@@ -887,17 +887,21 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		boolean isSingleHall = location.hasSinglePlace() && location.getPlaces().get(0) instanceof Hall;
 		if (isSingleHall) {
 			ArrayList<ConventionEvent> events = Convention.getInstance().findEventsByHall(location.getPlaces().get(0).getName());
-			Collections.sort(events, new ConventionEventComparator());
-			for (ConventionEvent event : events) {
-				Date now = Dates.now();
-				if (currEvent == null && event.getStartTime().before(now) && event.getEndTime().after(now)) {
-					currEvent = event;
-				}
-				if (nextEvent == null && event.getStartTime().after(now)) {
-					nextEvent = event;
-				}
-				if (currEvent != null && nextEvent != null) {
-					break;
+			if (events.size() == 0) {
+				isSingleHall = false;
+			} else {
+				Collections.sort(events, new ConventionEventComparator());
+				for (ConventionEvent event : events) {
+					Date now = Dates.now();
+					if (currEvent == null && event.getStartTime().before(now) && event.getEndTime().after(now)) {
+						currEvent = event;
+					}
+					if (nextEvent == null && event.getStartTime().after(now)) {
+						nextEvent = event;
+					}
+					if (currEvent != null && nextEvent != null) {
+						break;
+					}
 				}
 			}
 		}
