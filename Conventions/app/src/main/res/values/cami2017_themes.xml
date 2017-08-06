@@ -61,7 +61,8 @@
         <item name="eventTypeEndedColor">@color/cami2017_purple_dark</item>
         <item name="eventTypeCurrentColor">@color/cami2017_red_dark</item>
         <item name="eventTypeNotStartedColor">@color/cami2017_blue_dark</item>
-        <item name="eventNameKeywordHighlightColor">@color/gold</item>
+        <item name="eventNameKeywordHighlightColor">@color/cami2017_red</item>
+        <item name="eventKeywordHighlightColor">@color/cami2017_red</item>
         <item name="eventTimeDefaultTextColor">@color/white</item>
         <item name="eventTimeDefaultBackgroundColor">@color/cami2017_very_dark_blue_bright</item>
         <item name="eventDetailsColor">@color/cami2017_blue_dark</item>
