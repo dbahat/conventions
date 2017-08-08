@@ -44,7 +44,10 @@ public class SearchCategoriesLayout extends LinearLayout {
 
 		// In case there are more categories then the maximum allowed, group all remaining categories under "other".
 		if (maxDisplayedCategories > 0 && searchCategories.size() > maxDisplayedCategories) {
-			addView(createAndInitializeSearchCategoryBox(new EventType(getContext().getString(R.string.other))));
+			addView(createAndInitializeSearchCategoryBox(new EventType(
+					// Have the other category color the same as the first category to get aggregated into it
+					searchCategories.get(maxDisplayedCategories - 1).getBackgroundColor() ,
+					getContext().getString(R.string.other))));
 		}
 	}
 

@@ -435,21 +435,37 @@ public abstract class Convention implements Serializable {
 	}
 
 	public List<EventType> getEventTypes() {
-		HashSet<EventType> eventTypes = new HashSet<>();
+		List<SearchCategory> categories = new LinkedList<>();
 		if (events != null) {
-			for (ConventionEvent event : events) {
-				eventTypes.add(event.getType());
+			for (final ConventionEvent event : events) {
+				SearchCategory category = CollectionUtils.findFirst(categories, new CollectionUtils.Predicate<SearchCategory>() {
+					@Override
+					public boolean where(SearchCategory item) {
+						return item.getEventType().getDescription().equals(event.getType().getDescription());
+					}
+				});
+
+				if (category != null) {
+					category.increase();
+				} else {
+					categories.add(new SearchCategory(event.getType()));
+				}
 			}
 		}
 
-		List<EventType> eventTypeList = new ArrayList<>(eventTypes);
-		Collections.sort(eventTypeList, new Comparator<EventType>() {
+		Collections.sort(categories, new Comparator<SearchCategory>() {
 			@Override
-			public int compare(EventType lhs, EventType rhs) {
-				return lhs.getDescription().compareTo(rhs.getDescription());
+			public int compare(SearchCategory o1, SearchCategory o2) {
+				return o2.getCount() - o1.getCount();
 			}
 		});
-		return eventTypeList;
+
+		return CollectionUtils.map(categories, new CollectionUtils.Mapper<SearchCategory, EventType>() {
+			@Override
+			public EventType map(SearchCategory item) {
+				return item.getEventType();
+			}
+		});
 	}
 
 	public List<String> getAggregatedSearchCategories() {
@@ -462,14 +478,14 @@ public abstract class Convention implements Serializable {
 				SearchCategory category = CollectionUtils.findFirst(categories, new CollectionUtils.Predicate<SearchCategory>() {
 					@Override
 					public boolean where(SearchCategory item) {
-						return item.getSearchCategory().equals(aggregatedEventType);
+						return item.getEventType().getDescription().equals(aggregatedEventType);
 					}
 				});
 
 				if (category != null) {
 					category.increase();
 				} else {
-					categories.add(new SearchCategory(aggregatedEventType));
+					categories.add(new SearchCategory(new EventType(aggregatedEventType)));
 				}
 			}
 		}
@@ -486,7 +502,7 @@ public abstract class Convention implements Serializable {
 		return CollectionUtils.map(categories, new CollectionUtils.Mapper<SearchCategory, String>() {
 			@Override
 			public String map(SearchCategory item) {
-				return item.getSearchCategory();
+				return item.getEventType().getDescription();
 			}
 		});
 	}
@@ -593,16 +609,16 @@ public abstract class Convention implements Serializable {
 	}
 
 	private static class SearchCategory {
-		private String searchCategory;
+		private EventType eventType;
 		private int count;
 
-		public SearchCategory(String searchCategory) {
-			this.searchCategory = searchCategory;
+		public SearchCategory(EventType eventType) {
+			this.eventType = eventType;
 			this.count = 1;
 		}
 
-		public String getSearchCategory() {
-			return searchCategory;
+		public EventType getEventType() {
+			return eventType;
 		}
 
 		public void increase() {
