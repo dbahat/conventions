@@ -81,7 +81,7 @@ public class SearchCategoriesLayout extends LinearLayout {
 				SearchCategoryBox searchCategoryBox = (SearchCategoryBox) child;
 				if (searchCategoryBox.isChecked()) {
 					if (searchCategoryBox.getSearchCategory().getDescription().equals(getContext().getString(R.string.other))) {
-						for (int j = maxDisplayedCategories; j < searchCategories.size(); j++) {
+						for (int j = maxDisplayedCategories - 1; j < searchCategories.size(); j++) {
 							selectedSearchCategories.add(searchCategories.get(j).getDescription());
 						}
 					} else {
