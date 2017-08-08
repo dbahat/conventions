@@ -54,6 +54,8 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 			if (savedEventTypes instanceof LinkedList && CollectionUtils.contains((List) savedEventTypes, EventType.class)) {
 				//noinspection unchecked
 				eventTypeFilter = (LinkedList<EventType>) savedEventTypes;
+			} else {
+				eventTypeFilter = new LinkedList<>();
 			}
 			keywordsFilter = savedInstanceState.getString(STATE_KEYWORDS_FILTER);
 		} else {
