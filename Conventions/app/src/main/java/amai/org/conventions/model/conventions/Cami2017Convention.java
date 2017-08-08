@@ -29,7 +29,7 @@ public class Cami2017Convention extends AmaiConvention {
 	private static final String ESHKOL1_NAME = "אשכול 1";
 	private static final String ESHKOL2_NAME = "אשכול 2";
 	private static final String ESHKOL3_NAME = "אשכול 3";
-	private static final String GAMES_NAME = "משחקיה";
+	private static final String GAMES_NAME = "משחקייה";
 
 	@Override
 	protected ConventionStorage initStorage() {
@@ -130,16 +130,69 @@ public class Cami2017Convention extends AmaiConvention {
 		// TODO change for cami 2017
 		ImageIdToImageResourceMapper imageMapper = new ImageIdToImageResourceMapper();
 
-		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/11/2017/02/מנגה-קפה-חברתי.jpg", R.drawable.event_manga_cafe);
+		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/VsiH1TU.jpg", R.drawable.event_manga_cafe);
+		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/singing-contest.jpg", R.drawable.event_singing_contest);
+		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/כאמידי-סנטרל-600x800.png", R.drawable.event_camidi_central);
+		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/סתיו-וביאטריס-Kuroshitsuji-Mysteries-take-2.png", R.drawable.event_kuroshitsuji); // TODO take better image
+		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/דש-מאמריקה-וחזרה.jpg", R.drawable.event_america);
+		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/שיבוטים.jpg", R.drawable.event_clones);
+		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/קנדו-ונגינאטה-החרב-או-החנית.png", R.drawable.event_kendo);
+		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/אחד-בשביל-כולם-כולם-בשביל-כולם.jpg", R.drawable.event_one_for_all);
+		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/קרוספליי.png", R.drawable.event_crossplay);
+		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/08/להתגבר-ולהתבגר-אנימות-ספורט.jpg", R.drawable.event_sports_anime);
+		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/cool-japan-600x800-1.jpg", R.drawable.event_cool_japan);
+		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/JRPG-מא-ועד-ת.jpg", R.drawable.event_jrpg);
+		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/תעשיית-המדבבים-ביפן-לא-מה-שחשבתם1.jpg", R.drawable.event_voice_actors);
+		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/pop-in-q-screen1.jpg", R.drawable.event_pop_in_q_screenshot1);
+		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/pop-in-q-screen5.jpg", R.drawable.event_pop_in_q_screenshot2);
+		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/pop-in-q-screen3.jpg", R.drawable.event_pop_in_q_screenshot3);
+		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/pop-in-q-screen4.jpg", R.drawable.event_pop_in_q_screenshot4);
+		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/שיעור-יפנית.jpg", R.drawable.event_japanese_lesson);
+		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/פולקלור-יהודי-בפוקימון1-1.jpeg", R.drawable.event_jewish_pokemon);
+		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/Sound-Horizon-1.jpg", R.drawable.event_sound_horizon);
+		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/WabiSabi-600x800-1.jpeg", R.drawable.event_wabisabi);
+		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/giyaro-600x800.jpg", R.drawable.event_gyaru);
+		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/דוקומונוגטארי-1.png", R.drawable.event_documonogatari);
+		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/12345-sd-nkuj.jpg", R.drawable.event_showcase1);
+		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/צליינות-מעריצים-600x800-1.jpg", R.drawable.event_conventions);
+		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/פיינאל-פאנטאזי-1.jpg", R.drawable.event_final_fantasy);
+		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/גנגסטרים-אלכימאים-ובני-אלמוות-1.jpg", R.drawable.event_baccano);
+		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2016/01/cosplay2.jpg", R.drawable.event_cosplay1);
+		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2016/01/cosplay3.jpg", R.drawable.event_cosplay2);
+		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/אנימה-מעבר-לסדרות-מצויירות-1.jpg", R.drawable.event_anime_beyond_animation);
+		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/על-דרקונים-וכוונות-טובות-יוקו-טארו-על-אלימות-במשחקי-וידאו-1.png", R.drawable.event_dragons);
+		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/פאנסאב-לא-מה-שחשבתם.png", R.drawable.event_fansub);
+		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/פאנל-יאוי-אקדמי.jpg", R.drawable.event_bl);
+		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/objection-פיניקס-רייט-נגד-קאפקום.jpg", R.drawable.event_ace_attorney);
 
 		// Non-URL IDs
 		imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.cami2017_event_default_image);
 
 		// Excluded IDs - mostly for debug purposes (don't show messages about these when entering an event that has them)
-		// Not displayed due to bad quality
-		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/11/2016/06/11219643_10207384743566314_4164409570104231506_n.jpg");
-		// Cosplay event judges
-		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/11/2016/07/nimrodgold-150x150.jpg");
+		// Foreground text is not readable
+		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/kumodesuga_edited-1.jpg");
+		// Unnecessary images in events that have other images
+		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2016/01/cosplay1.jpg");
+		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/photo_2017-07-29_19-49-50.jpg");
+		// Musical logo
+		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2016/02/photo6023616020196993341.jpg");
+		// Toei logo
+		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/toei-logo.png");
+		// Singing contest judges
+		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/arielle-baum.png");
+		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/11800145_1143784582315108_9123802292981015631_n.png");
+		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/17192456_1476939775671681_1554553118023902314_o.jpg");
+		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/18055649_1521589434540048_4612985064956143749_o.jpg");
+		// Showcase judges
+		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/WhatsApp-Image-2017-07-29-at-20.48.44.jpeg");
+		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/WhatsApp-Image-2017-07-29-at-20.49.18.jpeg");
+		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/photo_2017-07-29_19-48-55.jpg");
+		// Cosplay judges
+		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2016/01/עינב-לוי.jpg");
+		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2016/01/סיוון-מגן.jpg");
+		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2016/01/ליאור-מוסקוביץ.jpg");
+		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2016/01/נועה-ירון.jpg");
+		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2016/01/טל-חזן.jpg");
 
 		return imageMapper;
 	}
@@ -176,9 +229,9 @@ public class Cami2017Convention extends AmaiConvention {
 				.withImageWidth(1403.06506f)
 				.withImageHeight(788.26996f);
 
-		StandsArea agam = new StandsArea().withName("טרקלין אגם").withStands(getAgamStands()).withImageResource(R.drawable.stands_agam).withImageWidth(2700).withImageHeight(1504);
-		StandsArea pinkus = new StandsArea().withName("אולם פינקוס").withStands(getPinkusStands()).withImageResource(R.drawable.stands_pinkus).withImageWidth(2700).withImageHeight(1708);
-		StandsArea nesher = new StandsArea().withName("רחבת הכניסה").withStands(getNesherStands()).withImageResource(R.drawable.stands_nesher).withImageWidth(2588).withImageHeight(1588);
+		StandsArea agam = new StandsArea().withName("טרקלין אגם").withStands(getAgamStands())/*.withImageResource(R.drawable.stands_agam).withImageWidth(2700).withImageHeight(1504)*/;
+		StandsArea pinkus = new StandsArea().withName("אולם פינקוס").withStands(getPinkusStands())/*.withImageResource(R.drawable.stands_pinkus).withImageWidth(2700).withImageHeight(1708)*/;
+		StandsArea nesher = new StandsArea().withName("רחבת הכניסה").withStands(getNesherStands())/*.withImageResource(R.drawable.stands_nesher).withImageWidth(2588).withImageHeight(1588)*/;
 		return new ConventionMap()
 				.withFloors(Arrays.asList(floor1, floor2))
 				.withLocations(
