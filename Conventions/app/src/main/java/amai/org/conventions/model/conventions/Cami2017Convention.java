@@ -178,7 +178,7 @@ public class Cami2017Convention extends AmaiConvention {
 		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2016/02/photo6023616020196993341.jpg");
 		// Toei logo
 		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/toei-logo.png");
-		// ICon logo
+		// SFF logo
 		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2016/02/scififi-logo.png");
 		// Singing contest judges
 		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/arielle-baum.png");
