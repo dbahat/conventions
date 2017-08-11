@@ -143,10 +143,7 @@ public class Cami2017Convention extends AmaiConvention {
 		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/cool-japan-600x800-1.jpg", R.drawable.event_cool_japan);
 		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/JRPG-מא-ועד-ת.jpg", R.drawable.event_jrpg);
 		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/תעשיית-המדבבים-ביפן-לא-מה-שחשבתם1.jpg", R.drawable.event_voice_actors);
-		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/pop-in-q-screen1.jpg", R.drawable.event_pop_in_q_screenshot1);
-		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/pop-in-q-screen5.jpg", R.drawable.event_pop_in_q_screenshot2);
-		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/pop-in-q-screen3.jpg", R.drawable.event_pop_in_q_screenshot3);
-		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/pop-in-q-screen4.jpg", R.drawable.event_pop_in_q_screenshot4);
+		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/pop-in-q-screen1.jpg", R.drawable.event_pop_in_q);
 		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/שיעור-יפנית.jpg", R.drawable.event_japanese_lesson);
 		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/פולקלור-יהודי-בפוקימון1-1.jpeg", R.drawable.event_jewish_pokemon);
 		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/Sound-Horizon-1.jpg", R.drawable.event_sound_horizon);
@@ -174,6 +171,9 @@ public class Cami2017Convention extends AmaiConvention {
 		// Unnecessary images in events that have other images
 		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2016/01/cosplay1.jpg");
 		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/photo_2017-07-29_19-49-50.jpg");
+		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/pop-in-q-screen5.jpg");
+		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/pop-in-q-screen3.jpg");
+		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/pop-in-q-screen4.jpg");
 		// Musical logo
 		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2016/02/photo6023616020196993341.jpg");
 		// Toei logo
