@@ -37,6 +37,7 @@ import com.google.android.gms.analytics.HitBuilders;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import amai.org.conventions.BuildConfig;
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
@@ -477,6 +478,8 @@ public class EventActivity extends NavigationActivity {
 
 		setupEventDescription(event);
 
+		setupLogoImage(event);
+
 		setupBackgroundImages(event);
 
 	}
@@ -535,6 +538,20 @@ public class EventActivity extends NavigationActivity {
 			description.setMovementMethod(LinkMovementMethod.getInstance());
 			Spanned spanned = event.getSpannedDescription();
 			description.setText(spanned);
+		}
+	}
+
+	private void setupLogoImage(ConventionEvent event) {
+		ImageView logoImageView = (ImageView) findViewById(R.id.event_logo);
+		List<Integer> images = event.getLogoImageResources();
+		if (images.size() == 0) {
+			logoImageView.setVisibility(View.GONE);
+		} else {
+			logoImageView.setVisibility(View.VISIBLE);
+			logoImageView.setImageResource(images.get(0));
+			if (BuildConfig.DEBUG && images.size() > 1) {
+				Log.e(TAG, images.size() + " logo images found in event " + event.getTitle() + "; using first image");
+			}
 		}
 	}
 

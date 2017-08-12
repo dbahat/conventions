@@ -127,7 +127,6 @@ public class Cami2017Convention extends AmaiConvention {
 
 	@Override
 	protected ImageIdToImageResourceMapper initImageMapper() {
-		// TODO change for cami 2017
 		ImageIdToImageResourceMapper imageMapper = new ImageIdToImageResourceMapper();
 
 		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/VsiH1TU.jpg", R.drawable.event_manga_cafe);
@@ -165,19 +164,21 @@ public class Cami2017Convention extends AmaiConvention {
 		// Non-URL IDs
 		imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.cami2017_event_default_image);
 
+		// Logo images
+		imageMapper.addLogoMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/pop-in-q-screen5.jpg", R.drawable.event_pop_in_q_logo);
+
 		// Excluded IDs - mostly for debug purposes (don't show messages about these when entering an event that has them)
 		// Foreground text is not readable
 		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/kumodesuga_edited-1.jpg");
 		// Unnecessary images in events that have other images
 		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2016/01/cosplay1.jpg");
 		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/photo_2017-07-29_19-49-50.jpg");
-		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/pop-in-q-screen5.jpg");
 		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/pop-in-q-screen3.jpg");
 		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/pop-in-q-screen4.jpg");
-		// Musical logo
-		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2016/02/photo6023616020196993341.jpg");
 		// Toei logo
 		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/toei-logo.png");
+		// Musical logo
+		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2016/02/photo6023616020196993341.jpg");
 		// SFF logo
 		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2016/02/scififi-logo.png");
 		// Singing contest judges

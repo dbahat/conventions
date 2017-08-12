@@ -62,6 +62,16 @@
                     tools:text="title" />
             </LinearLayout>
 
+            <amai.org.conventions.customviews.AspectRatioImageView
+                android:id="@+id/event_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/event_details_box_side_margins"
+                android:layout_marginRight="@dimen/event_details_box_side_margins"
+                android:padding="8dp"
+                android:visibility="gone"
+                android:layout_gravity="center"/>
+
             <LinearLayout
                 style="@style/EventDetailsBox"
                 android:gravity="center"
