@@ -17,7 +17,7 @@ public class EventFeedbackMail extends FeedbackMail {
 	}
 
 	@Override
-	protected Survey getFeedback() {
+	protected Survey getSurvey() {
 		return event.getUserInput().getFeedback();
 	}
 

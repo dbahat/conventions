@@ -44,7 +44,7 @@ import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.AspectRatioImageView;
 import amai.org.conventions.events.CollapsibleFeedbackView;
 import amai.org.conventions.events.ConfigureNotificationsFragment;
-import amai.org.conventions.feedback.FeedbackSender;
+import amai.org.conventions.feedback.SurveySender;
 import amai.org.conventions.map.MapActivity;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
@@ -502,7 +502,7 @@ public class EventActivity extends NavigationActivity {
 				}
 
 				@Override
-				protected FeedbackSender getFeedbackSender() {
+				protected SurveySender getSurveySender() {
 					return Convention.getInstance().getEventFeedbackSender(EventActivity.this, conventionEvent);
 				}
 

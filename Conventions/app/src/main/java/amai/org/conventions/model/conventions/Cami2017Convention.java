@@ -100,7 +100,7 @@ public class Cami2017Convention extends AmaiConvention {
 	protected FeedbackForm initConventionFeedbackForm() {
 		FeedbackForm feedbackForm = null;
 		try {
-			feedbackForm = new FeedbackForm()
+			feedbackForm = (FeedbackForm) new FeedbackForm()
 					.withConventionNameEntry("entry.1882876736")
 					.withDeviceIdEntry("entry.312890800")
 					.withTestEntry("entry.791883029")

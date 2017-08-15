@@ -45,7 +45,7 @@ import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.AspectRatioImageView;
-import amai.org.conventions.feedback.FeedbackSender;
+import amai.org.conventions.feedback.SurveySender;
 import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.conventions.Convention;
@@ -618,7 +618,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		ExpandedHeadless
 	}
 
-	public abstract class CollapsibleFeedbackViewSendListener extends FeedbackSender.SendFeedbackOnClickListener {
+	public abstract class CollapsibleFeedbackViewSendListener extends SurveySender.SendSurveyOnClickListener {
 		protected abstract void saveFeedback();
 
 		protected void onSuccess() {

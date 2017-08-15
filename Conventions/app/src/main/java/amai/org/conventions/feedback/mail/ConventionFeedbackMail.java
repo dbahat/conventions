@@ -16,7 +16,7 @@ public class ConventionFeedbackMail extends FeedbackMail {
 	}
 
 	@Override
-	protected Survey getFeedback() {
+	protected Survey getSurvey() {
 		return convention.getFeedback();
 	}
 

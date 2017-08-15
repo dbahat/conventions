@@ -14,7 +14,7 @@ import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Dates;
 
 
-public class EventFeedbackFormSender extends FeedbackFormSender {
+public class EventFeedbackFormSender extends SurveyFormSender {
 	private final Convention convention;
 	private ConventionEvent event;
     private EventFeedbackForm form;
@@ -46,7 +46,7 @@ public class EventFeedbackFormSender extends FeedbackFormSender {
         }
 
         // Questions
-        List<FeedbackQuestion> questions = getFeedback().getQuestions();
+        List<FeedbackQuestion> questions = getSurvey().getQuestions();
         for (FeedbackQuestion question : questions) {
             if (question.hasAnswer()) {
                 answers.put(form.getQuestionEntry(question.getQuestionId()), question.getAnswer().toString());
@@ -56,7 +56,7 @@ public class EventFeedbackFormSender extends FeedbackFormSender {
     }
 
     @Override
-    protected Survey getFeedback() {
+    protected Survey getSurvey() {
         return event.getUserInput().getFeedback();
     }
 }

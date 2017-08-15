@@ -7,29 +7,29 @@ import android.view.View;
 
 import amai.org.conventions.model.Survey;
 
-public abstract class FeedbackSender {
+public abstract class SurveySender {
     protected Context context;
 
-    public FeedbackSender(Context context) {
+    public SurveySender(Context context) {
         this.context = context;
     }
 
     public void send() throws Exception {
-        Survey feedback = getFeedback();
-        sendFeedback(feedback);
-        feedback.setIsSent(true);
-        feedback.removeUnansweredQuestions();
+        Survey survey = getSurvey();
+        sendSurvey(survey);
+        survey.setIsSent(true);
+        survey.removeUnansweredQuestions();
     }
 
-    protected abstract void sendFeedback(Survey feedback) throws Exception;
+    protected abstract void sendSurvey(Survey survey) throws Exception;
 
-    protected abstract Survey getFeedback();
+    protected abstract Survey getSurvey();
 
     protected String getDeviceId() {
         return Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
     }
 
-    public static abstract class SendFeedbackOnClickListener implements View.OnClickListener {
+    public static abstract class SendSurveyOnClickListener implements View.OnClickListener {
 
         /**
          * Called on UI thread before starting the background task
@@ -38,19 +38,19 @@ public abstract class FeedbackSender {
         }
 
         /**
-         * Called before sending the feedback, in the background
+         * Called before sending the survey, in the background
          */
         protected void beforeSend() {
         }
 
         /**
-         * Called after sending the feedback, in the background. The feedback state is updated before calling this method.
+         * Called after sending the survey, in the background. The survey state is updated before calling this method.
          */
         protected void afterSend() {
         }
 
         /**
-         * Called on UI thread after the feedback is sent, before onSuccess and onFailure calls.
+         * Called on UI thread after the survey is sent, before onSuccess and onFailure calls.
          */
         protected void afterEnd(Exception exception) {
         }
@@ -61,7 +61,7 @@ public abstract class FeedbackSender {
         protected void onSuccess() {
         }
 
-        protected abstract FeedbackSender getFeedbackSender();
+        protected abstract SurveySender getSurveySender();
 
         @Override
         public void onClick(View v) {
@@ -73,7 +73,7 @@ public abstract class FeedbackSender {
                 protected Exception doInBackground(Void... params) {
                     try {
                         beforeSend();
-                        getFeedbackSender().send();
+                        getSurveySender().send();
                         afterSend();
 
                         // In case everything finished successfully, pass null to onPostExecute.

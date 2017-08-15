@@ -21,7 +21,7 @@ import java.util.Set;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import amai.org.conventions.BuildConfig;
-import amai.org.conventions.feedback.FeedbackSender;
+import amai.org.conventions.feedback.SurveySender;
 import amai.org.conventions.feedback.forms.ConventionFeedbackFormSender;
 import amai.org.conventions.feedback.forms.EventFeedbackForm;
 import amai.org.conventions.feedback.forms.EventFeedbackFormSender;
@@ -600,11 +600,11 @@ public abstract class Convention implements Serializable {
 
 	public abstract ModelParser getModelParser();
 
-	public FeedbackSender getConventionFeedbackSender(Context context) {
+	public SurveySender getConventionFeedbackSender(Context context) {
 		return new ConventionFeedbackFormSender(context, conventionFeedbackForm, this);
 	}
 
-	public FeedbackSender getEventFeedbackSender(Context context, ConventionEvent event) {
+	public SurveySender getEventFeedbackSender(Context context, ConventionEvent event) {
 		return new EventFeedbackFormSender(context, eventFeedbackForm, this, event);
 	}
 

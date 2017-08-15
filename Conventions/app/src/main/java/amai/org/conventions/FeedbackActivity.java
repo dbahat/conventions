@@ -26,7 +26,7 @@ import amai.org.conventions.events.CollapsibleFeedbackView;
 import amai.org.conventions.events.activities.EventActivity;
 import amai.org.conventions.events.activities.ProgrammeActivity;
 import amai.org.conventions.events.adapters.EventsViewWithDateHeaderAdapter;
-import amai.org.conventions.feedback.FeedbackSender;
+import amai.org.conventions.feedback.SurveySender;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventEndTimeComparator;
 import amai.org.conventions.model.conventions.Convention;
@@ -100,7 +100,7 @@ public class FeedbackActivity extends NavigationActivity {
 						for (ConventionEvent event : eventsWithUnsentFeedback) {
 							try {
 
-								FeedbackSender feedbackSender = Convention.getInstance().getEventFeedbackSender(FeedbackActivity.this, event);
+								SurveySender feedbackSender = Convention.getInstance().getEventFeedbackSender(FeedbackActivity.this, event);
 								feedbackSender.send();
 
 								Convention.getInstance().getStorage().saveUserInput();
@@ -302,7 +302,7 @@ public class FeedbackActivity extends NavigationActivity {
 		feedbackView.setTextColor(ThemeAttributes.getColor(this, R.attr.conventionFeedbackTextColor));
 		feedbackView.setSendFeedbackClickListener(feedbackView.new CollapsibleFeedbackViewSendListener() {
 			@Override
-			protected FeedbackSender getFeedbackSender() {
+			protected SurveySender getSurveySender() {
 				return Convention.getInstance().getConventionFeedbackSender(FeedbackActivity.this);
 			}
 

@@ -1,32 +1,11 @@
 package amai.org.conventions.feedback.forms;
 
-import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import amai.org.conventions.model.Survey;
-import amai.org.conventions.model.FeedbackQuestion;
 
-public class FeedbackForm {
-    private URL sendUrl;
+public class FeedbackForm extends SurveyForm {
     private String conventionNameEntry;
     private String deviceIdEntry;
     private String testEntry;
-    private Map<Integer, String> questionIdToFormEntry = new HashMap<>();
-
-    public URL getSendUrl() {
-        return sendUrl;
-    }
-
-    public void setSendUrl(URL sendUrl) {
-        this.sendUrl = sendUrl;
-    }
-
-    public FeedbackForm withSendUrl(URL sendUrl) {
-        setSendUrl(sendUrl);
-        return this;
-    }
 
     public String getConventionNameEntry() {
         return conventionNameEntry;
@@ -67,15 +46,6 @@ public class FeedbackForm {
         return this;
     }
 
-    public FeedbackForm withQuestionEntry(int questionId, String entry) {
-        questionIdToFormEntry.put(questionId, entry);
-        return this;
-    }
-
-    public String getQuestionEntry(int questionId) {
-        return questionIdToFormEntry.get(questionId);
-    }
-
     public boolean canFillFeedback(Survey feedback) {
         if (getSendUrl() == null) {
             return false;
@@ -89,12 +59,6 @@ public class FeedbackForm {
         if (getTestEntry() == null) {
             return false;
         }
-        List<FeedbackQuestion> questions = feedback.getQuestions();
-        for (FeedbackQuestion question : questions) {
-            if (getQuestionEntry(question.getQuestionId()) == null) {
-                return false;
-            }
-        }
-        return true;
+        return super.canFillFeedback(feedback);
     }
 }

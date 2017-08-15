@@ -11,32 +11,45 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 
-import amai.org.conventions.feedback.FeedbackSender;
+import amai.org.conventions.feedback.SurveySender;
+import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.Survey;
 import amai.org.conventions.utils.Log;
 
-public abstract class FeedbackFormSender extends FeedbackSender {
-	private final static String TAG = FeedbackFormSender.class.getCanonicalName();
+public abstract class SurveyFormSender extends SurveySender {
+	private final static String TAG = SurveyFormSender.class.getCanonicalName();
 	private static final int TIMEOUT = 10000;
-	private FeedbackForm form;
+	private SurveyForm form;
 
-	public FeedbackFormSender(Context context, FeedbackForm form) {
+	public SurveyFormSender(Context context, SurveyForm form) {
 		super(context);
 		this.form = form;
 	}
 
-	protected FeedbackForm getForm() {
+	protected SurveyForm getForm() {
 		return form;
 	}
 
-	protected abstract Map<String, String> getAnswers();
+	protected Map<String, String> getAnswers() {
+		Map<String, String> answers = new HashMap<>();
+		// Questions
+		List<FeedbackQuestion> questions = getSurvey().getQuestions();
+		for (FeedbackQuestion question : questions) {
+			if (question.hasAnswer()) {
+				answers.put(form.getQuestionEntry(question.getQuestionId()), question.getAnswer().toString());
+			}
+		}
+		return answers;
+	}
 
 	@Override
-	protected void sendFeedback(Survey feedback) throws Exception {
+	protected void sendSurvey(Survey survey) throws Exception {
 		Map<String, String> questionsAndAnswers = getAnswers();
 		StringBuilder postDataBuilder = new StringBuilder();
 		boolean first = true;

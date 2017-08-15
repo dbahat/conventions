@@ -6,13 +6,13 @@ import java.io.IOException;
 import java.util.Properties;
 
 import amai.org.conventions.R;
-import amai.org.conventions.feedback.FeedbackSender;
+import amai.org.conventions.feedback.SurveySender;
 import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Dates;
 
-public abstract class FeedbackMail extends FeedbackSender {
+public abstract class FeedbackMail extends SurveySender {
 	private static GMailSender sender;
 
 	public FeedbackMail(Context context) {
@@ -36,7 +36,7 @@ public abstract class FeedbackMail extends FeedbackSender {
 		return new GMailSender(mail, password);
 	}
 
-	protected void sendFeedback(Survey feedback) throws Exception {
+	protected void sendSurvey(Survey feedback) throws Exception {
 		getSender().sendMail(
 				getSubject(),
 				getBody(getFormattedQuestions(feedback), getDeviceId()),
