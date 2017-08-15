@@ -4,7 +4,7 @@ import android.content.Context;
 
 import amai.org.conventions.R;
 import amai.org.conventions.model.ConventionEvent;
-import amai.org.conventions.model.Feedback;
+import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Dates;
 
@@ -17,7 +17,7 @@ public class EventFeedbackMail extends FeedbackMail {
 	}
 
 	@Override
-	protected Feedback getFeedback() {
+	protected Survey getFeedback() {
 		return event.getUserInput().getFeedback();
 	}
 

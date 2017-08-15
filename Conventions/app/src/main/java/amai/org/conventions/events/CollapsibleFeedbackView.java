@@ -46,7 +46,7 @@ import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.AspectRatioImageView;
 import amai.org.conventions.feedback.FeedbackSender;
-import amai.org.conventions.model.Feedback;
+import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.networking.AmaiModelConverter;
@@ -69,7 +69,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 	private ProgressBar progressBar;
 	private List<TextView> generatedQuestionTextViews = new LinkedList<>();
 
-	private Feedback feedback;
+	private Survey feedback;
 	private boolean feedbackChanged;
 	private int textColor = AmaiModelConverter.NO_COLOR;
 
@@ -125,7 +125,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		setModel(feedback);
 	}
 
-	public void setModel(Feedback feedback) {
+	public void setModel(Survey feedback) {
 		this.feedback = feedback;
 
 		if (feedback.isSent()) {
@@ -164,7 +164,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		sendFeedbackButton.setOnClickListener(listener);
 	}
 
-	private void buildQuestionsLayout(LinearLayout questionsLayout, Feedback feedback) {
+	private void buildQuestionsLayout(LinearLayout questionsLayout, Survey feedback) {
 		generatedQuestionTextViews.clear();
 		questionsLayout.removeAllViews();
 		for (FeedbackQuestion question : feedback.getQuestions()) {
@@ -197,7 +197,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		}
 	}
 
-	private void setFeedbackIcon(Feedback feedback) {
+	private void setFeedbackIcon(Survey feedback) {
 		Drawable icon;
 		FeedbackQuestion.Smiley3PointAnswer weightedRating = feedback.getWeightedRating();
 		int filterColor;
@@ -213,7 +213,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		feedbackIcon.setImageDrawable(icon);
 	}
 
-	private View buildQuestionView(final FeedbackQuestion question, final Feedback feedback) {
+	private View buildQuestionView(final FeedbackQuestion question, final Survey feedback) {
 		LinearLayout questionLayout = new LinearLayout(getContext());
 		questionLayout.setFocusableInTouchMode(true); // Prevent text edit from getting the focus
 		LinearLayout.LayoutParams questionLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -255,7 +255,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		return questionLayout;
 	}
 
-	private View buildSmiley3PointsAnswerView(final FeedbackQuestion question, final Feedback feedback) {
+	private View buildSmiley3PointsAnswerView(final FeedbackQuestion question, final Survey feedback) {
 		LinearLayout imagesLayout = new LinearLayout(getContext());
 		imagesLayout.setOrientation(LinearLayout.HORIZONTAL);
 		int margin = getResources().getDimensionPixelOffset(R.dimen.feedback_smiley_answer_margin);
@@ -353,7 +353,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		return imagesLayout;
 	}
 
-	private View buildTextAnswerView(final FeedbackQuestion question, final Feedback feedback) {
+	private View buildTextAnswerView(final FeedbackQuestion question, final Survey feedback) {
 		Object answer = question.getAnswer();
 		View answerView;
 		if (feedback.isSent()) {
@@ -409,7 +409,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		return answerView;
 	}
 
-	private View buildMultiAnswerView(final FeedbackQuestion question, final Feedback feedback, List<Integer> possibleAnswers, final boolean radio) {
+	private View buildMultiAnswerView(final FeedbackQuestion question, final Survey feedback, List<Integer> possibleAnswers, final boolean radio) {
 		Object answer = question.getAnswer();
 		LinearLayout buttonsLayout;
 		final ViewGroup mainView;

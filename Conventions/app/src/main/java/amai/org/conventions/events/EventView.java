@@ -20,7 +20,7 @@ import java.util.List;
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.ConventionEvent;
-import amai.org.conventions.model.Feedback;
+import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Dates;
@@ -195,7 +195,7 @@ public class EventView extends FrameLayout {
 	protected void setFeedbackIconFromEvent(ConventionEvent event) {
 		Drawable icon = null;
 		if (event.canFillFeedback()) {
-			Feedback feedback = event.getUserInput().getFeedback();
+			Survey feedback = event.getUserInput().getFeedback();
 			FeedbackQuestion.Smiley3PointAnswer weightedRating = feedback.getWeightedRating();
 			int filterColor;
 			if (weightedRating != null) {

@@ -1,6 +1,6 @@
 package amai.org.conventions.feedback.forms;
 
-import amai.org.conventions.model.Feedback;
+import amai.org.conventions.model.Survey;
 
 public class EventFeedbackForm extends FeedbackForm {
     private String eventTitleEntry;
@@ -47,7 +47,7 @@ public class EventFeedbackForm extends FeedbackForm {
     }
 
     @Override
-    public boolean canFillFeedback(Feedback feedback) {
+    public boolean canFillFeedback(Survey feedback) {
         if (getEventTimeEntry() == null) {
             return false;
         }

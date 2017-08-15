@@ -19,6 +19,7 @@ import java.util.Stack;
 
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
+import amai.org.conventions.feedback.FeedbackSender;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.networking.AmaiModelConverter;
 import amai.org.conventions.utils.Dates;
@@ -40,6 +41,7 @@ public class ConventionEvent implements Serializable {
 	private List<String> images;
 	private String description;
 	private String plainTextDescription;
+	private FeedbackSender voteSurveySender;
 
 	public ConventionEvent() {
 		images = new ArrayList<>();
@@ -271,6 +273,14 @@ public class ConventionEvent implements Serializable {
 		return this;
 	}
 
+	public void setVoteSurveySender(FeedbackSender voteSurveySender) {
+		this.voteSurveySender = voteSurveySender;
+	}
+
+	public FeedbackSender getVoteSurveySender() {
+		return voteSurveySender;
+	}
+
 	public Spanned getSpannedDescription() {
 		String eventDescription = this.getDescription();
 		final ListTagHandler listTagHandler = new ListTagHandler();
@@ -415,12 +425,13 @@ public class ConventionEvent implements Serializable {
 
 	public static class UserInput implements Serializable, Cloneable {
 		private boolean attending;
-		private Feedback feedback;
+		private Survey feedback;
+		private Survey voteSurvey;
 		private EventNotification eventAboutToStartNotification;
 		private EventNotification eventFeedbackReminderNotification;
 
 		public UserInput() {
-			feedback = new Feedback().withQuestions(
+			feedback = new Survey().withQuestions(
 					new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_ENJOYMENT, FeedbackQuestion.AnswerType.SMILEY_3_POINTS),
 					new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_LECTURER_QUALITY, FeedbackQuestion.AnswerType.SMILEY_3_POINTS),
 					new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_SIMILAR_EVENTS, FeedbackQuestion.AnswerType.SMILEY_3_POINTS),
@@ -468,7 +479,7 @@ public class ConventionEvent implements Serializable {
 			return this;
 		}
 
-		public Feedback getFeedback() {
+		public Survey getFeedback() {
 			return feedback;
 		}
 
@@ -478,6 +489,14 @@ public class ConventionEvent implements Serializable {
 
 		public EventNotification getEventFeedbackReminderNotification() {
 			return eventFeedbackReminderNotification;
+		}
+
+		public Survey getVoteSurvey() {
+			return voteSurvey;
+		}
+
+		public void setVoteSurvey(Survey voteSurvey) {
+			this.voteSurvey = voteSurvey;
 		}
 
 		@Override

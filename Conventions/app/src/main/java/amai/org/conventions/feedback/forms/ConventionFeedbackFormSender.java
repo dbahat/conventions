@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import amai.org.conventions.BuildConfig;
-import amai.org.conventions.model.Feedback;
+import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.conventions.Convention;
 
@@ -20,7 +20,7 @@ public class ConventionFeedbackFormSender extends FeedbackFormSender {
 	}
 
 	@Override
-	protected Feedback getFeedback() {
+	protected Survey getFeedback() {
 		return convention.getFeedback();
 	}
 

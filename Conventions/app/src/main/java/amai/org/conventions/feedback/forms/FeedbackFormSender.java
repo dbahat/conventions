@@ -16,7 +16,7 @@ import java.util.Map;
 import javax.net.ssl.HttpsURLConnection;
 
 import amai.org.conventions.feedback.FeedbackSender;
-import amai.org.conventions.model.Feedback;
+import amai.org.conventions.model.Survey;
 import amai.org.conventions.utils.Log;
 
 public abstract class FeedbackFormSender extends FeedbackSender {
@@ -36,7 +36,7 @@ public abstract class FeedbackFormSender extends FeedbackSender {
 	protected abstract Map<String, String> getAnswers();
 
 	@Override
-	protected void sendFeedback(Feedback feedback) throws Exception {
+	protected void sendFeedback(Survey feedback) throws Exception {
 		Map<String, String> questionsAndAnswers = getAnswers();
 		StringBuilder postDataBuilder = new StringBuilder();
 		boolean first = true;

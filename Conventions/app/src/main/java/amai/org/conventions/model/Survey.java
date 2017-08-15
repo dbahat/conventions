@@ -9,18 +9,18 @@ import java.util.Map;
 
 import amai.org.conventions.utils.Log;
 
-public class Feedback implements Serializable, Cloneable {
-	private static final String TAG = Feedback.class.getCanonicalName();
+public class Survey implements Serializable, Cloneable {
+	private static final String TAG = Survey.class.getCanonicalName();
 	private Map<Integer, FeedbackQuestion> questions;
 	private boolean isSent;
 
-	public Feedback() {
+	public Survey() {
 		questions = new LinkedHashMap<>();
 	}
 
 	@Override
-	public Feedback clone() throws CloneNotSupportedException {
-		Feedback newFeedback = (Feedback) super.clone();
+	public Survey clone() throws CloneNotSupportedException {
+		Survey newFeedback = (Survey) super.clone();
 		newFeedback.questions = new LinkedHashMap<>(questions);
 		return newFeedback;
 	}
@@ -30,7 +30,7 @@ public class Feedback implements Serializable, Cloneable {
 	 *
 	 * @param other the de-serialized feedback
 	 */
-	public void updateFrom(Feedback other) {
+	public void updateFrom(Survey other) {
 		if (other == null) {
 			return;
 		}
@@ -72,7 +72,7 @@ public class Feedback implements Serializable, Cloneable {
 		return new ArrayList<>(questions.values());
 	}
 
-	public Feedback withQuestions(FeedbackQuestion... newQuestions) {
+	public Survey withQuestions(FeedbackQuestion... newQuestions) {
 		questions.clear();
 		for (FeedbackQuestion question : newQuestions) {
 			questions.put(question.getQuestionId(), question);
@@ -98,7 +98,7 @@ public class Feedback implements Serializable, Cloneable {
 		this.isSent = isSent;
 	}
 
-	public Feedback withSent(boolean isSent) {
+	public Survey withSent(boolean isSent) {
 		setIsSent(isSent);
 		return this;
 	}

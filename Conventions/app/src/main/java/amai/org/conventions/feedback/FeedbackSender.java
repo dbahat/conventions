@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 import android.provider.Settings;
 import android.view.View;
 
-import amai.org.conventions.model.Feedback;
+import amai.org.conventions.model.Survey;
 
 public abstract class FeedbackSender {
     protected Context context;
@@ -15,15 +15,15 @@ public abstract class FeedbackSender {
     }
 
     public void send() throws Exception {
-        Feedback feedback = getFeedback();
+        Survey feedback = getFeedback();
         sendFeedback(feedback);
         feedback.setIsSent(true);
         feedback.removeUnansweredQuestions();
     }
 
-    protected abstract void sendFeedback(Feedback feedback) throws Exception;
+    protected abstract void sendFeedback(Survey feedback) throws Exception;
 
-    protected abstract Feedback getFeedback();
+    protected abstract Survey getFeedback();
 
     protected String getDeviceId() {
         return Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);

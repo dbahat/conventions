@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import amai.org.conventions.model.Feedback;
+import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.FeedbackQuestion;
 
 public class FeedbackForm {
@@ -76,7 +76,7 @@ public class FeedbackForm {
         return questionIdToFormEntry.get(questionId);
     }
 
-    public boolean canFillFeedback(Feedback feedback) {
+    public boolean canFillFeedback(Survey feedback) {
         if (getSendUrl() == null) {
             return false;
         }

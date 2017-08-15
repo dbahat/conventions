@@ -28,7 +28,7 @@ import java.util.Map;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import amai.org.conventions.model.ConventionEvent;
-import amai.org.conventions.model.Feedback;
+import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.Update;
 import amai.org.conventions.model.conventions.Convention;
@@ -123,7 +123,7 @@ public class ConventionStorage {
 	}
 
 	public void saveConventionFeedback() {
-		Feedback feedback = convention.getFeedback();
+		Survey feedback = convention.getFeedback();
 		try {
 			feedback = feedback.clone();
 		} catch (CloneNotSupportedException e) {
@@ -249,12 +249,12 @@ public class ConventionStorage {
 	}
 
 	private void readConventionFeedbackFromFile() {
-		Feedback result = readJsonFromFile(Feedback.class, getConventionFeedbackFileName());
+		Survey result = readJsonFromFile(Survey.class, getConventionFeedbackFileName());
 		if (result == null) {
 			return;
 		}
 
-		Feedback currentFeedback = convention.getFeedback();
+		Survey currentFeedback = convention.getFeedback();
 		currentFeedback.updateFrom(result);
 	}
 

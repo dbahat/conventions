@@ -30,7 +30,7 @@ import amai.org.conventions.map.AggregatedEventTypes;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.EventType;
-import amai.org.conventions.model.Feedback;
+import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.Floor;
 import amai.org.conventions.model.Halls;
@@ -59,7 +59,7 @@ public abstract class Convention implements Serializable {
 	private List<Update> updates;
 	private Map<String, Update> updatesById;
 	private Map<String, ConventionEvent.UserInput> userInput;
-	private Feedback feedback;
+	private Survey feedback;
 	private String feedbackRecipient;
 	private FeedbackForm conventionFeedbackForm;
 	private EventFeedbackForm eventFeedbackForm;
@@ -113,7 +113,7 @@ public abstract class Convention implements Serializable {
 	}
 
 	private void initFeedback() {
-		feedback = new Feedback().withQuestions(
+		feedback = new Survey().withQuestions(
 				new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_AGE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS),
 				new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_LIKED, FeedbackQuestion.AnswerType.SMILEY_3_POINTS),
 				new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_MAP_SIGNS, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS),
@@ -202,7 +202,7 @@ public abstract class Convention implements Serializable {
 		return displayName;
 	}
 
-	public Feedback getFeedback() {
+	public Survey getFeedback() {
 		return feedback;
 	}
 

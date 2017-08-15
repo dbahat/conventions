@@ -7,7 +7,7 @@ import java.util.Properties;
 
 import amai.org.conventions.R;
 import amai.org.conventions.feedback.FeedbackSender;
-import amai.org.conventions.model.Feedback;
+import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Dates;
@@ -36,7 +36,7 @@ public abstract class FeedbackMail extends FeedbackSender {
 		return new GMailSender(mail, password);
 	}
 
-	protected void sendFeedback(Feedback feedback) throws Exception {
+	protected void sendFeedback(Survey feedback) throws Exception {
 		getSender().sendMail(
 				getSubject(),
 				getBody(getFormattedQuestions(feedback), getDeviceId()),
@@ -59,7 +59,7 @@ public abstract class FeedbackMail extends FeedbackSender {
 		return Convention.getInstance().getFeedbackRecipient();
 	}
 
-	protected String getFormattedQuestions(Feedback feedback) {
+	protected String getFormattedQuestions(Survey feedback) {
 		StringBuilder stringBuilder = new StringBuilder();
 		for (FeedbackQuestion question : feedback.getQuestions()) {
 			if (question.hasAnswer()) {
