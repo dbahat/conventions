@@ -2,7 +2,6 @@ package amai.org.conventions.model;
 
 import android.content.res.Resources;
 
-import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -13,7 +12,8 @@ import amai.org.conventions.R;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Objects;
 
-public class FeedbackQuestion implements Serializable {
+public class FeedbackQuestion {
+	// The IDs are needed since questions get serialized, and we cannot serialize the question string resource Ids (as they change each build).
 	public static final int QUESTION_ID_ENJOYMENT = 1;
 	public static final int QUESTION_ID_LECTURER_QUALITY = 2;
 	public static final int QUESTION_ID_SIMILAR_EVENTS = 3;
@@ -60,7 +60,10 @@ public class FeedbackQuestion implements Serializable {
 	}
 
 	private int questionId;
-	private String text; // If feedback was already sent, this is the displayed text
+
+	// If feedback was already sent, this is the displayed text. Needed since it's possible the hardcoded questions will change per convention,
+	// but a user will wish to see the original texts he previously answered.
+	private String text;
 	private AnswerType answerType;
 	private Object answer;
 	private transient List<String> possibleMultipleAnswers; // No need to serialize this field
