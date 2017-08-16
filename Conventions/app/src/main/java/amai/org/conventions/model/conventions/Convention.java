@@ -30,6 +30,7 @@ import amai.org.conventions.map.AggregatedEventTypes;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.EventType;
+import amai.org.conventions.model.SpecialEventsProcessor;
 import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.Floor;
@@ -51,7 +52,7 @@ public abstract class Convention implements Serializable {
 	private static Convention convention = new Cami2017Convention();
 
 	// Currently supporting conventions of up to 5 days (UI restriction, since the programme is set
-	// to fit up to 5 days in it's tab bar).
+	// to fit up to 5 days in its tab bar).
 	private static final int MAX_CONVENTION_LENGTH_IN_DAYS = 5;
 
 	private Halls halls;
@@ -210,15 +211,8 @@ public abstract class Convention implements Serializable {
 		return imageMapper;
 	}
 
-	/**
-	 * Modify properties of the event as needed for special event
-	 *
-	 * @param event
-	 * @return whether the event was modified
-	 */
-	public boolean handleSpecialEvent(ConventionEvent event) {
-		// By default, there are no special events
-		return false;
+	public SpecialEventsProcessor getSpecialEventsProcessor() {
+		return new SpecialEventsProcessor();
 	}
 
 	public void setEvents(List<ConventionEvent> events) {
@@ -600,12 +594,16 @@ public abstract class Convention implements Serializable {
 
 	public abstract ModelParser getModelParser();
 
-	public SurveySender getConventionFeedbackSender(Context context) {
-		return new ConventionFeedbackFormSender(context, conventionFeedbackForm, this);
+	public SurveySender getConventionFeedbackSender() {
+		return new ConventionFeedbackFormSender(conventionFeedbackForm, this);
 	}
 
-	public SurveySender getEventFeedbackSender(Context context, ConventionEvent event) {
-		return new EventFeedbackFormSender(context, eventFeedbackForm, this, event);
+	public SurveySender getEventFeedbackSender(ConventionEvent event) {
+		return new EventFeedbackFormSender(eventFeedbackForm, this, event);
+	}
+
+	public SurveySender getEventVoteSender(ConventionEvent event) {
+		return null;
 	}
 
 	private static class SearchCategory {

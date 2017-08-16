@@ -168,6 +168,9 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		generatedQuestionTextViews.clear();
 		questionsLayout.removeAllViews();
 		for (FeedbackQuestion question : feedback.getQuestions()) {
+			if (question.getAnswerType() == FeedbackQuestion.AnswerType.HIDDEN) {
+				continue;
+			}
 			questionsLayout.addView(buildQuestionView(question, feedback));
 		}
 		sendFeedbackButton.setEnabled(feedback.hasAnsweredQuestions());

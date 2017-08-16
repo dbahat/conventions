@@ -19,7 +19,6 @@ import java.util.Stack;
 
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
-import amai.org.conventions.feedback.SurveySender;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.networking.AmaiModelConverter;
 import amai.org.conventions.utils.Dates;
@@ -41,7 +40,6 @@ public class ConventionEvent implements Serializable {
 	private List<String> images;
 	private String description;
 	private String plainTextDescription;
-	private SurveySender voteSurveySender;
 
 	public ConventionEvent() {
 		images = new ArrayList<>();
@@ -273,13 +271,6 @@ public class ConventionEvent implements Serializable {
 		return this;
 	}
 
-	public void setVoteSurveySender(SurveySender voteSurveySender) {
-		this.voteSurveySender = voteSurveySender;
-	}
-
-	public SurveySender getVoteSurveySender() {
-		return voteSurveySender;
-	}
 
 	public Spanned getSpannedDescription() {
 		String eventDescription = this.getDescription();
@@ -448,6 +439,7 @@ public class ConventionEvent implements Serializable {
 			newInput.feedback = feedback.clone();
 			newInput.eventFeedbackReminderNotification = eventFeedbackReminderNotification.clone();
 			newInput.eventAboutToStartNotification = eventAboutToStartNotification.clone();
+			newInput.voteSurvey = voteSurvey.clone();
 			return newInput;
 		}
 
@@ -462,6 +454,7 @@ public class ConventionEvent implements Serializable {
 			}
 			attending = other.attending;
 			feedback.updateFrom(other.feedback);
+			voteSurvey = other.voteSurvey;
 			eventAboutToStartNotification = other.eventAboutToStartNotification;
 			eventFeedbackReminderNotification = other.eventFeedbackReminderNotification;
 		}

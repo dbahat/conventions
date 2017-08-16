@@ -12,14 +12,17 @@ import java.util.List;
 
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.Halls;
+import amai.org.conventions.model.SpecialEventsProcessor;
 
 public class AmaiModelParser implements ModelParser {
 	private Halls halls;
 	private Calendar conventionStartDate;
+	private SpecialEventsProcessor specialEventsProcessor;
 
-	public AmaiModelParser(Halls halls, Calendar conventionStartDate) {
+	public AmaiModelParser(Halls halls, Calendar conventionStartDate, SpecialEventsProcessor specialEventsProcessor) {
 		this.halls = halls;
 		this.conventionStartDate = conventionStartDate;
+		this.specialEventsProcessor = specialEventsProcessor;
 	}
 
 	@Override
@@ -34,7 +37,8 @@ public class AmaiModelParser implements ModelParser {
 
 		return new AmaiModelConverter(
 				halls,
-				conventionStartDate
+				conventionStartDate,
+				specialEventsProcessor
 		).convert(eventsContract);
 	}
 }

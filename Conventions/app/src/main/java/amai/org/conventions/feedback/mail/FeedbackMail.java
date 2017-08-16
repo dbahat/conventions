@@ -14,9 +14,10 @@ import amai.org.conventions.utils.Dates;
 
 public abstract class FeedbackMail extends SurveySender {
 	private static GMailSender sender;
+	protected Context context;
 
 	public FeedbackMail(Context context) {
-		super(context);
+		this.context = context;
 	}
 
 	private static GMailSender createGMailSender(Context context) {

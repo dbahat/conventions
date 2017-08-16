@@ -503,7 +503,7 @@ public class EventActivity extends NavigationActivity {
 
 				@Override
 				protected SurveySender getSurveySender() {
-					return Convention.getInstance().getEventFeedbackSender(EventActivity.this, conventionEvent);
+					return Convention.getInstance().getEventFeedbackSender(conventionEvent);
 				}
 
 				@Override

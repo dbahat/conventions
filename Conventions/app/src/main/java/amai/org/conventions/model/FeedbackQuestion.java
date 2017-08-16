@@ -39,6 +39,13 @@ public class FeedbackQuestion implements Serializable {
 		return questions;
 	}
 
+	public static void addQuestion(int id, int stringResourceId) {
+		if (questions.containsKey(id)) {
+			throw new RuntimeException("Question ID already exists: " + id);
+		}
+		questions.put(id, stringResourceId);
+	}
+
 	private int questionId;
 	private String text; // If feedback was already sent, this is the displayed text
 	private AnswerType answerType;
@@ -115,7 +122,7 @@ public class FeedbackQuestion implements Serializable {
 
 	// This enum must be backwards compatible - don't remove or rename any values from it
 	public enum AnswerType {
-		TEXT, SMILEY_3_POINTS, MULTIPLE_ANSWERS, MULTIPLE_ANSWERS_RADIO
+		TEXT, SMILEY_3_POINTS, MULTIPLE_ANSWERS, MULTIPLE_ANSWERS_RADIO, HIDDEN
 	}
 
 	// This enum must be backwards compatible - don't remove or rename any values from it

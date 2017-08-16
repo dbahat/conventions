@@ -17,6 +17,7 @@ import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.EventType;
 import amai.org.conventions.model.Hall;
 import amai.org.conventions.model.Halls;
+import amai.org.conventions.model.SpecialEventsProcessor;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
@@ -28,10 +29,12 @@ public class AmaiModelConverter {
 
 	private Calendar conventionStartDate;
 	private Halls halls;
+	private SpecialEventsProcessor specialEventsProcessor;
 
-	public AmaiModelConverter(Halls halls, Calendar conventionStartDate) {
+	public AmaiModelConverter(Halls halls, Calendar conventionStartDate, SpecialEventsProcessor specialEventsProcessor) {
 		this.conventionStartDate = conventionStartDate;
 		this.halls = halls;
+		this.specialEventsProcessor = specialEventsProcessor;
 	}
 
 	public List<ConventionEvent> convert(List<AmaiEventContract> eventContracts) {
@@ -46,7 +49,7 @@ public class AmaiModelConverter {
 		for (AmaiEventContract eventContract : eventContracts) {
 			int instanceIndex = 1;
 
-			// In case the same event shows in multiple times, it's contact will have multiple TimetableInfo objects.
+			// In case the same event shows in multiple times, its contact will have multiple TimetableInfo objects.
 			// During convection, treat each event instance as a separate ConventionEvent
 			for (AmaiEventContract.TimetableInfoInstance eventInstance : eventContract.getTimetableInfo()) {
 				if ("hidden".equals(eventInstance.getTooltip())) {
@@ -68,18 +71,22 @@ public class AmaiModelConverter {
 						.withHall(convertHall(eventInstance.getRoom()))
 						.withImages(extractEventImageUrls(eventContract.getContent()));
 
-				// See above of explanation about events with special content.
-				boolean isEventWithSpecialContent = eventContract.getTimetableUrlPid() > 0;
-				if (isEventWithSpecialContent) {
-					eventsWithSpecialContent.put(event, eventContract.getTimetableUrlPid());
-				}
+				boolean stopProcessingEventDescription = specialEventsProcessor.processSpecialEvent(event);
 
-				boolean ignoreEventDescription = isEventWithSpecialContent
-						// TimetableDisableUrl marks events that have temporary or partial description, which shouldn't be shown
-						|| eventContract.getTimetableDisableUrl() == 1;
+				if (!stopProcessingEventDescription) {
+					// See above of explanation about events with special content.
+					boolean isEventWithSpecialContent = eventContract.getTimetableUrlPid() > 0;
+					if (isEventWithSpecialContent) {
+						eventsWithSpecialContent.put(event, eventContract.getTimetableUrlPid());
+					}
 
-				if (!ignoreEventDescription) {
-					event = event.withDescription(convertEventDescription(eventContract.getContent()));
+					boolean ignoreEventDescription = isEventWithSpecialContent
+							// TimetableDisableUrl marks events that have temporary or partial description, which shouldn't be shown
+							|| eventContract.getTimetableDisableUrl() == 1;
+
+					if (!ignoreEventDescription) {
+						event = event.withDescription(convertEventDescription(eventContract.getContent()));
+					}
 				}
 
 				result.add(event);

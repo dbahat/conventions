@@ -32,10 +32,12 @@ public class ConventionsApplication extends Application {
 	public static Settings settings;
 	private static String versionName;
 	private static Context currentContext;
+	private static Context appContext;
 
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		appContext = this;
 
 		Locale.setDefault(Dates.getLocale());
 		Convention.getInstance().load(this);
@@ -113,6 +115,10 @@ public class ConventionsApplication extends Application {
 		super.onConfigurationChanged(newConfig);
 		// Screen rotation apparently returns the locale to the device default
 		Locale.setDefault(Dates.getLocale());
+	}
+
+	public static Context getAppContext() {
+		return appContext;
 	}
 
 	/**

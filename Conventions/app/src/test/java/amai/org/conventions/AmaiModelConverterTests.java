@@ -21,6 +21,7 @@ import java.util.Locale;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.Hall;
 import amai.org.conventions.model.Halls;
+import amai.org.conventions.model.SpecialEventsProcessor;
 import amai.org.conventions.networking.AmaiEventContract;
 import amai.org.conventions.networking.AmaiModelConverter;
 
@@ -40,7 +41,7 @@ public class AmaiModelConverterTests {
 
 	@Before
 	public void setup() {
-		amaiModelConverter = new AmaiModelConverter(hallsMock, Calendar.getInstance());
+		amaiModelConverter = new AmaiModelConverter(hallsMock, Calendar.getInstance(), new SpecialEventsProcessor());
 
 		// Simulate the default behavior of adding a hall, which is common for most tests
 		doAnswer(new Answer() {

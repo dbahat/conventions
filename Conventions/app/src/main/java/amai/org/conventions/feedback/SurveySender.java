@@ -1,17 +1,15 @@
 package amai.org.conventions.feedback;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.provider.Settings;
 import android.view.View;
 
+import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.model.Survey;
 
 public abstract class SurveySender {
-    protected Context context;
 
-    public SurveySender(Context context) {
-        this.context = context;
+    public SurveySender() {
     }
 
     public void send() throws Exception {
@@ -25,8 +23,8 @@ public abstract class SurveySender {
 
     protected abstract Survey getSurvey();
 
-    protected String getDeviceId() {
-        return Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+    public static String getDeviceId() {
+        return Settings.Secure.getString(ConventionsApplication.getAppContext().getContentResolver(), Settings.Secure.ANDROID_ID);
     }
 
     public static abstract class SendSurveyOnClickListener implements View.OnClickListener {

@@ -1,7 +1,5 @@
 package amai.org.conventions.feedback.forms;
 
-import android.content.Context;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStream;
@@ -27,13 +25,8 @@ public abstract class SurveyFormSender extends SurveySender {
 	private static final int TIMEOUT = 10000;
 	private SurveyForm form;
 
-	public SurveyFormSender(Context context, SurveyForm form) {
-		super(context);
+	public SurveyFormSender(SurveyForm form) {
 		this.form = form;
-	}
-
-	protected SurveyForm getForm() {
-		return form;
 	}
 
 	protected Map<String, String> getAnswers() {

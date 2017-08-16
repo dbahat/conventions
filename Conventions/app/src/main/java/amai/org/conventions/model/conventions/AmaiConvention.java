@@ -20,6 +20,6 @@ public abstract class AmaiConvention extends Convention {
 
 	@Override
 	public ModelParser getModelParser() {
-		return new AmaiModelParser(getHalls(), getStartDate());
+		return new AmaiModelParser(getHalls(), getStartDate(), getSpecialEventsProcessor());
 	}
 }

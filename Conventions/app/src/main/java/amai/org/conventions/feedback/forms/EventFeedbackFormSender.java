@@ -1,15 +1,13 @@
 package amai.org.conventions.feedback.forms;
 
-import android.content.Context;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import amai.org.conventions.BuildConfig;
 import amai.org.conventions.model.ConventionEvent;
-import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.FeedbackQuestion;
+import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Dates;
 
@@ -19,8 +17,8 @@ public class EventFeedbackFormSender extends SurveyFormSender {
 	private ConventionEvent event;
     private EventFeedbackForm form;
 
-    public EventFeedbackFormSender(Context context, EventFeedbackForm form, Convention convention, ConventionEvent event) {
-        super(context, form);
+    public EventFeedbackFormSender(EventFeedbackForm form, Convention convention, ConventionEvent event) {
+        super(form);
 		this.convention = convention;
 		this.event = event;
         this.form = form;

@@ -7,8 +7,12 @@ import java.util.Calendar;
 import java.util.List;
 
 import amai.org.conventions.R;
+import amai.org.conventions.feedback.SurveySender;
 import amai.org.conventions.feedback.forms.EventFeedbackForm;
 import amai.org.conventions.feedback.forms.FeedbackForm;
+import amai.org.conventions.feedback.forms.SurveyForm;
+import amai.org.conventions.feedback.forms.SurveyFormSender;
+import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.Floor;
@@ -17,8 +21,10 @@ import amai.org.conventions.model.Halls;
 import amai.org.conventions.model.ImageIdToImageResourceMapper;
 import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.model.Place;
+import amai.org.conventions.model.SpecialEventsProcessor;
 import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.StandsArea;
+import amai.org.conventions.model.Survey;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 
@@ -30,6 +36,21 @@ public class Cami2017Convention extends AmaiConvention {
 	private static final String ESHKOL2_NAME = "אשכול 2";
 	private static final String ESHKOL3_NAME = "אשכול 3";
 	private static final String GAMES_NAME = "משחקייה";
+
+	// Vote questions
+	private static final int QUESTION_ID_NAME = 1001;
+	private static final int QUESTION_ID_SINGING_CONTEST_VOTE = 1002;
+	private static final int QUESTION_ID_SHOWCASE_VOTE = 1003;
+
+	// Special events server id
+	public static final int EVENT_ID_SHOWCASE = 3039;
+	public static final int EVENT_ID_SINGING_CONTEST = 2984;
+
+	static {
+		FeedbackQuestion.addQuestion(QUESTION_ID_SINGING_CONTEST_VOTE, R.string.singing_contest_vote_question);
+		FeedbackQuestion.addQuestion(QUESTION_ID_SHOWCASE_VOTE, R.string.singing_showcase_vote_question);
+	}
+
 
 	@Override
 	protected ConventionStorage initStorage() {
@@ -461,5 +482,65 @@ public class Cami2017Convention extends AmaiConvention {
 //				new Stand().withName("שגרירות יפן").withType(Stand.StandType.REGULAR_STAND).withImageX(1112).withImageY(1000),
 //				new Stand().withName("ידידות יפן").withType(Stand.StandType.REGULAR_STAND).withImageX(878).withImageY(1000)
 		);
+	}
+
+	@Override
+	public SurveySender getEventVoteSender(final ConventionEvent event) {
+		if (event.getUserInput().getVoteSurvey() == null) {
+			return null;
+		}
+		try {
+			if (event.getServerId() == EVENT_ID_SHOWCASE) {
+				SurveyForm form = new SurveyForm()
+						.withQuestionEntry(QUESTION_ID_NAME, "entry.1893333202")
+						.withQuestionEntry(QUESTION_ID_SHOWCASE_VOTE, "entry.1772924702")
+						.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSf4m0Azy1HFovoPF7VXY0IFLM1s0z0o18SDHfjZKw6c6UXvcw/formResponse"));
+				return new SurveyFormSender(form) {
+					@Override
+					protected Survey getSurvey() {
+						return event.getUserInput().getVoteSurvey();
+					}
+				};
+			} else if (event.getServerId() == EVENT_ID_SINGING_CONTEST) {
+				SurveyForm form = new SurveyForm()
+						.withQuestionEntry(QUESTION_ID_NAME, "entry.1893333202") // TODO change to real question id
+						.withQuestionEntry(QUESTION_ID_SINGING_CONTEST_VOTE, "entry.1772924702") // TODO change to real question id
+						.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLScyynW3kBT4blxsiEBzdEbMV-6pEuKhjux0PesVteOUTqffWA/formResponse"));
+				return new SurveyFormSender(form) {
+					@Override
+					protected Survey getSurvey() {
+						return event.getUserInput().getVoteSurvey();
+					}
+				};
+			}
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
+		return super.getEventVoteSender(event);
+	}
+
+	@Override
+	public SpecialEventsProcessor getSpecialEventsProcessor() {
+		return new SpecialEventsProcessor() {
+			@Override
+			public boolean processSpecialEvent(ConventionEvent event) {
+				if (event.getServerId() == EVENT_ID_SHOWCASE) {
+					FeedbackQuestion nameQuestion = new FeedbackQuestion(QUESTION_ID_NAME, FeedbackQuestion.AnswerType.HIDDEN);
+					nameQuestion.setAnswer(SurveySender.getDeviceId());
+					event.getUserInput().setVoteSurvey(new Survey().withQuestions(
+							nameQuestion,
+							new FeedbackQuestion(QUESTION_ID_SHOWCASE_VOTE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO)
+					));
+				} else if (event.getServerId() == EVENT_ID_SINGING_CONTEST) {
+					FeedbackQuestion nameQuestion = new FeedbackQuestion(QUESTION_ID_NAME, FeedbackQuestion.AnswerType.HIDDEN);
+					nameQuestion.setAnswer(SurveySender.getDeviceId());
+					event.getUserInput().setVoteSurvey(new Survey().withQuestions(
+							nameQuestion,
+							new FeedbackQuestion(QUESTION_ID_SINGING_CONTEST_VOTE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO)
+					));
+				}
+				return false; // Description processing should continue as usual
+			}
+		};
 	}
 }

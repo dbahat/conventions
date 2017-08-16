@@ -255,4 +255,6 @@
     <string name="home_upcoming_event_time">בעוד %s</string>
     <string name="home_upcoming_programme_events">אירועים שמתחילים ב-%s</string>
     <string name="home_convention_ended">הכנס נגמר</string>
+    <string name="singing_contest_vote_question">באירוע זה ניתן להצביע לחביב הקהל מבין המתמודדים הכתובים ברשימה. שימו לב - ניתן להצביע פעם אחת בלבד!</string>
+    <string name="singing_showcase_vote_question">באירוע זה ניתן להצביע לחביב הקהל מבין המתמודדים הכתובים ברשימה. למי תרצה להצביע?</string>
 </resources>

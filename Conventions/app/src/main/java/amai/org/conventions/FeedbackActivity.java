@@ -100,7 +100,7 @@ public class FeedbackActivity extends NavigationActivity {
 						for (ConventionEvent event : eventsWithUnsentFeedback) {
 							try {
 
-								SurveySender feedbackSender = Convention.getInstance().getEventFeedbackSender(FeedbackActivity.this, event);
+								SurveySender feedbackSender = Convention.getInstance().getEventFeedbackSender(event);
 								feedbackSender.send();
 
 								Convention.getInstance().getStorage().saveUserInput();
@@ -303,7 +303,7 @@ public class FeedbackActivity extends NavigationActivity {
 		feedbackView.setSendFeedbackClickListener(feedbackView.new CollapsibleFeedbackViewSendListener() {
 			@Override
 			protected SurveySender getSurveySender() {
-				return Convention.getInstance().getConventionFeedbackSender(FeedbackActivity.this);
+				return Convention.getInstance().getConventionFeedbackSender();
 			}
 
 			@Override
