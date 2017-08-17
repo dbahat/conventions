@@ -48,7 +48,7 @@ public class Cami2017Convention extends AmaiConvention {
 
 	static {
 		FeedbackQuestion.addQuestion(QUESTION_ID_SINGING_CONTEST_VOTE, R.string.singing_contest_vote_question);
-		FeedbackQuestion.addQuestion(QUESTION_ID_SHOWCASE_VOTE, R.string.singing_showcase_vote_question);
+		FeedbackQuestion.addQuestion(QUESTION_ID_SHOWCASE_VOTE, R.string.showcase_vote_question);
 	}
 
 
@@ -503,8 +503,8 @@ public class Cami2017Convention extends AmaiConvention {
 				};
 			} else if (event.getServerId() == EVENT_ID_SINGING_CONTEST) {
 				SurveyForm form = new SurveyForm()
-						.withQuestionEntry(QUESTION_ID_NAME, "entry.1893333202") // TODO change to real question id
-						.withQuestionEntry(QUESTION_ID_SINGING_CONTEST_VOTE, "entry.1772924702") // TODO change to real question id
+						.withQuestionEntry(QUESTION_ID_NAME, "entry.109802680")
+						.withQuestionEntry(QUESTION_ID_SINGING_CONTEST_VOTE, "entry.1600353678")
 						.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLScyynW3kBT4blxsiEBzdEbMV-6pEuKhjux0PesVteOUTqffWA/formResponse"));
 				return new SurveyFormSender(form) {
 					@Override
