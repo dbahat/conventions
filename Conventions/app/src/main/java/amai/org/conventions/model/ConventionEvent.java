@@ -439,7 +439,7 @@ public class ConventionEvent implements Serializable {
 			newInput.feedback = feedback.clone();
 			newInput.eventFeedbackReminderNotification = eventFeedbackReminderNotification.clone();
 			newInput.eventAboutToStartNotification = eventAboutToStartNotification.clone();
-			newInput.voteSurvey = voteSurvey.clone();
+			newInput.voteSurvey = voteSurvey == null ? null : voteSurvey.clone();
 			return newInput;
 		}
 
@@ -455,6 +455,9 @@ public class ConventionEvent implements Serializable {
 			attending = other.attending;
 			feedback.updateFrom(other.feedback);
 			voteSurvey = other.voteSurvey;
+			if (voteSurvey != null) {
+				voteSurvey.updateFrom(voteSurvey); // Convert question format if necessary
+			}
 			eventAboutToStartNotification = other.eventAboutToStartNotification;
 			eventFeedbackReminderNotification = other.eventFeedbackReminderNotification;
 		}
