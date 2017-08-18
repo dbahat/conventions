@@ -551,10 +551,10 @@ public class Cami2017Convention extends AmaiConvention {
 	public SurveyAnswersRetriever createSurveyAnswersRetriever(FeedbackQuestion question) {
 		switch (question.getQuestionId()) {
 			case QUESTION_ID_SHOWCASE_VOTE: {
-				return new SurveyAnswersRetriever.GoogleSpreadSheet("1Zqd6-hNGw7lqcyk9rONdQbFX6BnSlQ7gPr0_THPYmrc");
+				return new SurveyAnswersRetriever.GoogleSpreadSheet("1zpNagg3Rmf7CGolTV5D8253cWgnbfVHAFE0gvBYHzEw");
 			}
 			case QUESTION_ID_SINGING_CONTEST_VOTE: {
-				return new SurveyAnswersRetriever.GoogleSpreadSheet("1zpNagg3Rmf7CGolTV5D8253cWgnbfVHAFE0gvBYHzEw");
+				return new SurveyAnswersRetriever.GoogleSpreadSheet("1Zqd6-hNGw7lqcyk9rONdQbFX6BnSlQ7gPr0_THPYmrc");
 			}
 		}
 
