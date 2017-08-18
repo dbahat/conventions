@@ -37,17 +37,20 @@ public class Cami2017Convention extends AmaiConvention {
 	private static final String ESHKOL3_NAME = "אשכול 3";
 	private static final String GAMES_NAME = "משחקייה";
 
-	// Vote questions
-	private static final int QUESTION_ID_NAME = 1001;
+	// Vote questions - these values are serialized, don't change them!
+	private static final int QUESTION_ID_SINGING_CONTEST_NAME = 1001;
 	private static final int QUESTION_ID_SINGING_CONTEST_VOTE = 1002;
-	private static final int QUESTION_ID_SHOWCASE_VOTE = 1003;
+	private static final int QUESTION_ID_SHOWCASE_NAME = 1003;
+	private static final int QUESTION_ID_SHOWCASE_VOTE = 1004;
 
 	// Special events server id
-	public static final int EVENT_ID_SHOWCASE = 3039;
-	public static final int EVENT_ID_SINGING_CONTEST = 2984;
+	private static final int EVENT_ID_SHOWCASE = 3039;
+	private static final int EVENT_ID_SINGING_CONTEST = 2984;
 
 	static {
+		FeedbackQuestion.addQuestion(QUESTION_ID_SINGING_CONTEST_NAME, R.string.singing_contest_name_question);
 		FeedbackQuestion.addQuestion(QUESTION_ID_SINGING_CONTEST_VOTE, R.string.singing_contest_vote_question);
+		FeedbackQuestion.addQuestion(QUESTION_ID_SHOWCASE_NAME, R.string.showcase_name_question);
 		FeedbackQuestion.addQuestion(QUESTION_ID_SHOWCASE_VOTE, R.string.showcase_vote_question);
 	}
 
@@ -492,7 +495,7 @@ public class Cami2017Convention extends AmaiConvention {
 		try {
 			if (event.getServerId() == EVENT_ID_SHOWCASE) {
 				SurveyForm form = new SurveyForm()
-						.withQuestionEntry(QUESTION_ID_NAME, "entry.1893333202")
+						.withQuestionEntry(QUESTION_ID_SHOWCASE_NAME, "entry.1893333202")
 						.withQuestionEntry(QUESTION_ID_SHOWCASE_VOTE, "entry.1772924702")
 						.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSf4m0Azy1HFovoPF7VXY0IFLM1s0z0o18SDHfjZKw6c6UXvcw/formResponse"));
 				return new SurveyFormSender(form) {
@@ -503,7 +506,7 @@ public class Cami2017Convention extends AmaiConvention {
 				};
 			} else if (event.getServerId() == EVENT_ID_SINGING_CONTEST) {
 				SurveyForm form = new SurveyForm()
-						.withQuestionEntry(QUESTION_ID_NAME, "entry.109802680")
+						.withQuestionEntry(QUESTION_ID_SINGING_CONTEST_NAME, "entry.109802680")
 						.withQuestionEntry(QUESTION_ID_SINGING_CONTEST_VOTE, "entry.1600353678")
 						.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLScyynW3kBT4blxsiEBzdEbMV-6pEuKhjux0PesVteOUTqffWA/formResponse"));
 				return new SurveyFormSender(form) {
@@ -525,17 +528,13 @@ public class Cami2017Convention extends AmaiConvention {
 			@Override
 			public boolean processSpecialEvent(ConventionEvent event) {
 				if (event.getServerId() == EVENT_ID_SHOWCASE) {
-					FeedbackQuestion nameQuestion = new FeedbackQuestion(QUESTION_ID_NAME, FeedbackQuestion.AnswerType.TEXT);
-					nameQuestion.setAnswer(SurveySender.getDeviceId());
 					event.getUserInput().setVoteSurvey(new Survey().withQuestions(
-							nameQuestion,
+							new FeedbackQuestion(QUESTION_ID_SHOWCASE_NAME, FeedbackQuestion.AnswerType.TEXT),
 							new FeedbackQuestion(QUESTION_ID_SHOWCASE_VOTE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO)
 					));
 				} else if (event.getServerId() == EVENT_ID_SINGING_CONTEST) {
-					FeedbackQuestion nameQuestion = new FeedbackQuestion(QUESTION_ID_NAME, FeedbackQuestion.AnswerType.TEXT);
-					nameQuestion.setAnswer(SurveySender.getDeviceId());
 					event.getUserInput().setVoteSurvey(new Survey().withQuestions(
-							nameQuestion,
+							new FeedbackQuestion(QUESTION_ID_SINGING_CONTEST_NAME, FeedbackQuestion.AnswerType.TEXT),
 							new FeedbackQuestion(QUESTION_ID_SINGING_CONTEST_VOTE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO)
 					));
 				}
