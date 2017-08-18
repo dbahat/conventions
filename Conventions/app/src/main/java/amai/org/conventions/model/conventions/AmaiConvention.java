@@ -22,4 +22,9 @@ public abstract class AmaiConvention extends Convention {
 	public ModelParser getModelParser() {
 		return new AmaiModelParser(getHalls(), getStartDate(), getSpecialEventsProcessor());
 	}
+
+	@Override
+	public String getGoogleSpreadsheetsApiKey() {
+		return "AIzaSyAKJYwC7UeHyBpcVqvXABRxhEQmLiK2TRo";
+	}
 }

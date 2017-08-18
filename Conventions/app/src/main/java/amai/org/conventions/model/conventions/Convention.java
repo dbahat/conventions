@@ -183,6 +183,8 @@ public abstract class Convention implements Serializable {
 
 	protected abstract FeedbackForm initConventionFeedbackForm();
 
+	public abstract String getGoogleSpreadsheetsApiKey();
+
 	public Calendar getStartDate() {
 		return startDate;
 	}

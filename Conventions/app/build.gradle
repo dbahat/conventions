@@ -57,13 +57,20 @@ dependencies {
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.microsoft.azure:notification-hubs-android-sdk:0.4@aar'
     compile 'com.microsoft.azure:azure-notifications-handler:1.0.1@aar'
+    compile('com.google.api-client:google-api-client-android:1.22.0') {
+        exclude group: 'org.apache.httpcomponents'
+    }
+    compile('com.google.apis:google-api-services-sheets:v4-rev483-1.22.0') {
+        exclude group: 'org.apache.httpcomponents'
+    }
     compile files('libs/activation.jar')
     compile files('libs/additionnal.jar')
     compile files('libs/mail.jar')
+
     testCompile 'junit:junit:4.12'
-    testCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
-    testCompile 'com.android.support.test:runner:0.5'
     testCompile 'org.mockito:mockito-core:1.10.19'
+    androidTestCompile 'junit:junit:4.12'
+    androidTestCompile 'com.android.support.test:runner:0.5'
 }
 
 apply plugin: 'com.google.gms.google-services'
