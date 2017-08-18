@@ -1,5 +1,7 @@
 package amai.org.conventions.model.conventions;
 
+import android.support.annotation.Nullable;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
@@ -25,6 +27,7 @@ import amai.org.conventions.model.SpecialEventsProcessor;
 import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.model.Survey;
+import amai.org.conventions.networking.SurveyAnswersRetriever;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 
@@ -541,5 +544,20 @@ public class Cami2017Convention extends AmaiConvention {
 				return false; // Description processing should continue as usual
 			}
 		};
+	}
+
+	@Override
+	@Nullable
+	public SurveyAnswersRetriever createSurveyAnswersRetriever(FeedbackQuestion question) {
+		switch (question.getQuestionId()) {
+			case QUESTION_ID_SHOWCASE_VOTE: {
+				return new SurveyAnswersRetriever.GoogleSpreadSheet("1Zqd6-hNGw7lqcyk9rONdQbFX6BnSlQ7gPr0_THPYmrc");
+			}
+			case QUESTION_ID_SINGING_CONTEST_VOTE: {
+				return new SurveyAnswersRetriever.GoogleSpreadSheet("1zpNagg3Rmf7CGolTV5D8253cWgnbfVHAFE0gvBYHzEw");
+			}
+		}
+
+		return null;
 	}
 }

@@ -1,6 +1,7 @@
 package amai.org.conventions.model.conventions;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 
 import java.io.Serializable;
 import java.net.URL;
@@ -42,6 +43,7 @@ import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.model.Update;
 import amai.org.conventions.networking.ModelParser;
+import amai.org.conventions.networking.SurveyAnswersRetriever;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 import amai.org.conventions.utils.Dates;
@@ -216,6 +218,12 @@ public abstract class Convention implements Serializable {
 	public SpecialEventsProcessor getSpecialEventsProcessor() {
 		return new SpecialEventsProcessor();
 	}
+
+	/**
+	 * @return the survey answers retriever associated with this question, or null of no such retriever was defined.
+	 */
+	@Nullable
+	public abstract SurveyAnswersRetriever createSurveyAnswersRetriever(FeedbackQuestion question);
 
 	public void setEvents(List<ConventionEvent> events) {
 		eventLockObject.writeLock().lock();
