@@ -90,6 +90,7 @@
         <item name="eventDetailsDefaultBackgroundColor">@color/cami2017_gray</item>
         <item name="eventDetailsBoxColor">@color/cami2017_transparent_very_dark_blue</item>
         <item name="eventFeedbackBoxColor">@color/cami2017_transparent_red</item>
+        <item name="eventVoteBoxColor">@color/cami2017_transparent_purple_bright</item>
         <item name="eventDescriptionTextColor">@color/cami2017_purple_bright</item>
         <item name="eventTitleBackground">@drawable/cami2017_event_title_background</item>
         <item name="eventTitleTextColor">@color/cami2017_purple_bright</item>

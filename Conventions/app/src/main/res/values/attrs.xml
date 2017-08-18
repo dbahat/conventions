@@ -83,6 +83,7 @@
         <attr name="eventTitleBackground" format="integer|reference"/>
         <attr name="eventTitleTextColor" format="color|reference"/>
         <attr name="eventDetailsTextColor" format="color|reference"/>
+        <attr name="eventVoteBoxColor" format="color|reference"/>
         <attr name="eventFeedbackBoxColor" format="color|reference"/>
         <attr name="eventDetailsDefaultBackgroundColor" format="color|reference"/>
         <attr name="eventFeedbackTextColor" format="color|reference"/>

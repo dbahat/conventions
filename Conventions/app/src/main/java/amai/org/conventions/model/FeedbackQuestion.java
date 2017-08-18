@@ -66,7 +66,7 @@ public class FeedbackQuestion {
 	private String text;
 	private AnswerType answerType;
 	private Object answer;
-	private transient List<String> possibleMultipleAnswers; // No need to serialize this field
+	private List<String> possibleMultipleAnswers;
 	private transient boolean answerChanged = false; // No need to serialize this field
 
 	public FeedbackQuestion(int questionId, AnswerType answerType) {

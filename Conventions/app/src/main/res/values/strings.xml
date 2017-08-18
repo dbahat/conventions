@@ -259,4 +259,8 @@
     <string name="singing_contest_vote_question">מי המתמודד/ת החביב/ה עליך?</string>
     <string name="showcase_name_question">שם</string>
     <string name="showcase_vote_question">למי תרצה להצביע?</string>
+    <string name="to_vote_survey">להצבעה</string>
+    <string name="survey_vote_details">באירוע זה ניתן להצביע עבור חביב הקהל.</string>
+    <string name="survey_vote_note">שימו לב! ניתן להצביע פעם אחת בלבד, ורק לאחר שכל המתמודדים עלו לבמה.</string>
+    <string name="vote_survey_retrieve_answers_error">לא ניתן להציג את טופס ההצבעה. בדוק שחיבור האינטרנט תקין ונסה שנית מאוחר יותר.</string>
 </resources>

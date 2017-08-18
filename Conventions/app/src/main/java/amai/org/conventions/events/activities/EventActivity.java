@@ -9,6 +9,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.Snackbar;
@@ -27,14 +28,18 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.analytics.HitBuilders;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import amai.org.conventions.BuildConfig;
@@ -48,9 +53,12 @@ import amai.org.conventions.feedback.SurveySender;
 import amai.org.conventions.map.MapActivity;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
+import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.MapLocation;
+import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
+import amai.org.conventions.networking.SurveyAnswersRetriever;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Views;
@@ -69,6 +77,9 @@ public class EventActivity extends NavigationActivity {
 	private ConventionEvent conventionEvent;
 	private LinearLayout imagesLayout;
 	private LinearLayout feedbackContainer;
+	private View voteSurveyOpenerContainer;
+	private Button voteSurveyOpener;
+	private ProgressBar voteSurveyOpenerProgress;
 	private CollapsibleFeedbackView feedbackView;
 
 	private ImageView gradientImageView;
@@ -86,6 +97,9 @@ public class EventActivity extends NavigationActivity {
 		imagesBackground = findViewById(R.id.images_background);
 		imagesLayout = (LinearLayout) findViewById(R.id.images_layout);
 		feedbackContainer = (LinearLayout) findViewById(R.id.event_feedback_container);
+		voteSurveyOpenerContainer = findViewById(R.id.event_vote_opener_container);
+		voteSurveyOpener = (Button) findViewById(R.id.event_open_vote_survey_button);
+		voteSurveyOpenerProgress = (ProgressBar) findViewById(R.id.event_open_vote_survey_progress_bar);
 		feedbackView = (CollapsibleFeedbackView) findViewById(R.id.event_feedback_view);
 		final View detailBoxes = findViewById(R.id.event_detail_boxes);
 		final ParallaxScrollView scrollView = (ParallaxScrollView) findViewById(R.id.parallax_scroll);
@@ -238,6 +252,14 @@ public class EventActivity extends NavigationActivity {
 			}
 		}, 50);
 
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		// This view is time-sensitive (it is visible or invisible according to the time)
+		// so it should be updated more frequently
+		setupVoteSurvey(conventionEvent);
 	}
 
 	private int getBackgroundColor() {
@@ -482,6 +504,75 @@ public class EventActivity extends NavigationActivity {
 
 		setupBackgroundImages(event);
 
+	}
+
+	private void setupVoteSurvey(ConventionEvent event) {
+		final Survey voteSurvey = event.getUserInput().getVoteSurvey();
+		if (voteSurvey == null) {
+			voteSurveyOpenerContainer.setVisibility(View.GONE);
+		} else {
+			Calendar eventEnd = Calendar.getInstance();
+			eventEnd.setTime(event.getEndTime());
+
+			// Allow until half an hour after event ended to vote (in case there's a delay)
+			eventEnd.add(Calendar.MINUTE, 30);
+
+			if (!event.hasStarted() || (eventEnd.before(Dates.now()) && !voteSurvey.isSent())) {
+				voteSurveyOpenerContainer.setVisibility(View.GONE);
+			} else {
+				voteSurveyOpenerContainer.setVisibility(View.VISIBLE);
+				voteSurveyOpenerProgress.setVisibility(View.GONE);
+				voteSurveyOpener.setVisibility(View.VISIBLE);
+				voteSurveyOpener.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						voteSurveyOpener.setVisibility(View.GONE);
+						voteSurveyOpenerProgress.setVisibility(View.VISIBLE);
+						new AsyncTask<Void, Void, Exception>() {
+							@Override
+							protected Exception doInBackground(Void... params) {
+								// No need to retrieve the answers if the user already sent the vote
+								if (voteSurvey.isSent()) {
+									return null;
+								}
+								try {
+									for (FeedbackQuestion question : voteSurvey.getQuestions()) {
+										SurveyAnswersRetriever retriever = Convention.getInstance().createSurveyAnswersRetriever(question);
+										if (retriever != null) {
+											List<String> answers = retriever.getAnswers();
+											if (answers == null || answers.size() == 0) {
+												// No answers found - throw exception
+												throw new RuntimeException("No answers found for question " + question.getQuestionId());
+											}
+											question.setPossibleMultipleAnswers(answers);
+										}
+									}
+									// In case everything finished successfully, pass null to onPostExecute.
+									return null;
+								} catch (Exception e) {
+									return e;
+								}
+							}
+
+							@Override
+							protected void onPostExecute(Exception exception) {
+								voteSurveyOpenerProgress.setVisibility(View.GONE);
+								voteSurveyOpener.setVisibility(View.VISIBLE);
+								if (exception != null) {
+									Toast.makeText(EventActivity.this, R.string.vote_survey_retrieve_answers_error, Toast.LENGTH_LONG).show();
+									Log.e(TAG, "Error retrieving answers", exception);
+								} else {
+									for (FeedbackQuestion question : voteSurvey.getQuestions()) {
+										List<String> answers = question.getPossibleMultipleAnswers(getResources());
+										Log.i(TAG, "answers for question " + question.getQuestionText(getResources(), false) + ": " + answers);
+									}
+								}
+							}
+						}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					}
+				});
+			}
+		}
 	}
 
 	private void setupFeedback(ConventionEvent event) {

@@ -8,7 +8,7 @@
     tools:context="amai.org.conventions.events.activities.EventActivity">
 
     <!-- The image background starts off as transparent just so we have a color (there is another background behind it
-         coming from NavigationActivity). The background from NavigationActivity is necessary sot that screen doesn't
+         coming from NavigationActivity). The background from NavigationActivity is necessary so that screen doesn't
          start off as black. The color itself is taken from eventDetailsDefaultBackgroundColor.
          The color here is necessary since when we create the gradient above the last image we need to have some color
          specified but we don't know the final background color yet.
@@ -108,11 +108,60 @@
                     tools:text="time" />
             </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/event_vote_opener_container"
+            style="@style/EventDescriptionBox.Vote"
+            android:visibility="visible"
+            tools:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/event_vote_description"
+                style="@style/TextAppearance.AppCompat.Subhead"
+                android:textColor="?attr/eventDescriptionTextColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/survey_vote_details" />
 
-            <LinearLayout
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <Button
+                    android:id="@+id/event_open_vote_survey_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/HighlightedButton"
+                    android:enabled="true"
+                    android:text="@string/to_vote_survey" />
+
+                <!-- this progress bar gets un-hidden in runtime when the button is clicked -->
+                <ProgressBar
+                    android:id="@+id/event_open_vote_survey_progress_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/event_vote_note"
+                style="@style/TextAppearance.AppCompat.Body2"
+                android:textColor="?attr/eventDescriptionTextColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/survey_vote_note" />
+        </LinearLayout>
+
+
+        <LinearLayout
                 android:id="@+id/event_feedback_container"
                 style="@style/EventDescriptionBox.Feedback"
                 android:visibility="gone"
+                tools:visibility="visible"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
