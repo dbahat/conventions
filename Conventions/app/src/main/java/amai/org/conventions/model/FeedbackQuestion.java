@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import amai.org.conventions.R;
+import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Objects;
 
 public class FeedbackQuestion implements Serializable {
@@ -24,6 +25,7 @@ public class FeedbackQuestion implements Serializable {
 	public static final int QUESTION_ID_CONFLICTING_EVENTS = 10;
 
 	private static final Map<Integer, Integer> questions = initQuestions();
+	private static final Map<Integer, List<Integer>> questionToMultipleAnswers = initMultipleAnswers();
 
 	private static Map<Integer, Integer> initQuestions() {
 		Map<Integer, Integer> questions = new HashMap<>();
@@ -39,6 +41,17 @@ public class FeedbackQuestion implements Serializable {
 		return questions;
 	}
 
+	private static Map<Integer, List<Integer>> initMultipleAnswers() {
+		Map<Integer, List<Integer>> questionToMultipleAnswers = new HashMap<>();
+		questionToMultipleAnswers.put(QUESTION_ID_AGE,
+				Arrays.asList(R.string.age_less_than_12, R.string.age_12_to_17, R.string.age_18_to_25, R.string.age_more_than_25));
+		questionToMultipleAnswers.put(QUESTION_ID_MAP_SIGNS,
+				Arrays.asList(R.string.yes, R.string.no));
+		questionToMultipleAnswers.put(QUESTION_ID_CONFLICTING_EVENTS,
+				Arrays.asList(R.string.answer_event_conflicted, R.string.answer_no_room, R.string.answer_too_early_or_late, R.string.answer_other_reason));
+		return questionToMultipleAnswers;
+	}
+
 	public static void addQuestion(int id, int stringResourceId) {
 		if (questions.containsKey(id)) {
 			throw new RuntimeException("Question ID already exists: " + id);
@@ -50,6 +63,7 @@ public class FeedbackQuestion implements Serializable {
 	private String text; // If feedback was already sent, this is the displayed text
 	private AnswerType answerType;
 	private Object answer;
+	private transient List<String> possibleMultipleAnswers; // No need to serialize this field
 	private transient boolean answerChanged = false; // No need to serialize this field
 
 	public FeedbackQuestion(int questionId, AnswerType answerType) {
@@ -104,25 +118,33 @@ public class FeedbackQuestion implements Serializable {
 		return answerChanged;
 	}
 
+	public void setPossibleMultipleAnswers(List<String> possibleAnswers) {
+		this.possibleMultipleAnswers = possibleAnswers;
+	}
+
 	public void setAnswerChanged(boolean answerChanged) {
 		this.answerChanged = answerChanged;
 	}
 
-	public List<Integer> getMultipleAnswers() {
-		switch (questionId) {
-			case QUESTION_ID_AGE:
-				return Arrays.asList(R.string.age_less_than_12, R.string.age_12_to_17, R.string.age_18_to_25, R.string.age_more_than_25);
-			case QUESTION_ID_MAP_SIGNS:
-				return Arrays.asList(R.string.yes, R.string.no);
-			case QUESTION_ID_CONFLICTING_EVENTS:
-				return Arrays.asList(R.string.answer_event_conflicted, R.string.answer_no_room, R.string.answer_too_early_or_late, R.string.answer_other_reason);
+	public List<String> getPossibleMultipleAnswers(final Resources resources) {
+		if (possibleMultipleAnswers != null) {
+			return possibleMultipleAnswers;
 		}
-		return Collections.emptyList();
+		List<Integer> answers = questionToMultipleAnswers.get(questionId);
+		if (answers == null) {
+			return Collections.emptyList();
+		}
+		return CollectionUtils.map(answers, new CollectionUtils.Mapper<Integer, String>() {
+			@Override
+			public String map(Integer item) {
+				return resources.getString(item);
+			}
+		});
 	}
 
 	// This enum must be backwards compatible - don't remove or rename any values from it
 	public enum AnswerType {
-		TEXT, SMILEY_3_POINTS, MULTIPLE_ANSWERS, MULTIPLE_ANSWERS_RADIO, HIDDEN
+		TEXT, SINGLE_LINE_TEXT, SMILEY_3_POINTS, MULTIPLE_ANSWERS, MULTIPLE_ANSWERS_RADIO, HIDDEN
 	}
 
 	// This enum must be backwards compatible - don't remove or rename any values from it

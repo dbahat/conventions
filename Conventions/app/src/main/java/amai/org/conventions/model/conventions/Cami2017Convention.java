@@ -525,14 +525,14 @@ public class Cami2017Convention extends AmaiConvention {
 			@Override
 			public boolean processSpecialEvent(ConventionEvent event) {
 				if (event.getServerId() == EVENT_ID_SHOWCASE) {
-					FeedbackQuestion nameQuestion = new FeedbackQuestion(QUESTION_ID_NAME, FeedbackQuestion.AnswerType.HIDDEN);
+					FeedbackQuestion nameQuestion = new FeedbackQuestion(QUESTION_ID_NAME, FeedbackQuestion.AnswerType.TEXT);
 					nameQuestion.setAnswer(SurveySender.getDeviceId());
 					event.getUserInput().setVoteSurvey(new Survey().withQuestions(
 							nameQuestion,
 							new FeedbackQuestion(QUESTION_ID_SHOWCASE_VOTE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO)
 					));
 				} else if (event.getServerId() == EVENT_ID_SINGING_CONTEST) {
-					FeedbackQuestion nameQuestion = new FeedbackQuestion(QUESTION_ID_NAME, FeedbackQuestion.AnswerType.HIDDEN);
+					FeedbackQuestion nameQuestion = new FeedbackQuestion(QUESTION_ID_NAME, FeedbackQuestion.AnswerType.TEXT);
 					nameQuestion.setAnswer(SurveySender.getDeviceId());
 					event.getUserInput().setVoteSurvey(new Survey().withQuestions(
 							nameQuestion,

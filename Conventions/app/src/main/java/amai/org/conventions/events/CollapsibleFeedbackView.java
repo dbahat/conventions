@@ -233,8 +233,9 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		int layoutOrientation = LinearLayout.VERTICAL;
 
 		switch (question.getAnswerType()) {
-			case TEXT: {
-				answerView = buildTextAnswerView(question, feedback);
+			case TEXT:
+			case SINGLE_LINE_TEXT: {
+				answerView = buildTextAnswerView(question, feedback, (question.getAnswerType() == FeedbackQuestion.AnswerType.TEXT));
 				break;
 			}
 			case SMILEY_3_POINTS: {
@@ -242,11 +243,11 @@ public class CollapsibleFeedbackView extends FrameLayout {
 				break;
 			}
 			case MULTIPLE_ANSWERS: {
-				answerView = buildMultiAnswerView(question, feedback, question.getMultipleAnswers(), false);
+				answerView = buildMultiAnswerView(question, feedback, question.getPossibleMultipleAnswers(getResources()), false);
 				break;
 			}
 			case MULTIPLE_ANSWERS_RADIO: {
-				answerView = buildMultiAnswerView(question, feedback, question.getMultipleAnswers(), true);
+				answerView = buildMultiAnswerView(question, feedback, question.getPossibleMultipleAnswers(getResources()), true);
 				break;
 			}
 		}
@@ -356,7 +357,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		return imagesLayout;
 	}
 
-	private View buildTextAnswerView(final FeedbackQuestion question, final Survey feedback) {
+	private View buildTextAnswerView(final FeedbackQuestion question, final Survey feedback, boolean multiline) {
 		Object answer = question.getAnswer();
 		View answerView;
 		if (feedback.isSent()) {
@@ -376,13 +377,16 @@ public class CollapsibleFeedbackView extends FrameLayout {
 			EditText editText = new EditText(getContext());
 			generatedQuestionTextViews.add(editText);
 			editText.setFreezesText(true);
-			editText.setInputType(
-					InputType.TYPE_CLASS_TEXT |
-							InputType.TYPE_TEXT_FLAG_AUTO_CORRECT |
-							InputType.TYPE_TEXT_VARIATION_LONG_MESSAGE |
-							InputType.TYPE_TEXT_FLAG_MULTI_LINE |
-							InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS
-			);
+			int type = InputType.TYPE_CLASS_TEXT |
+					InputType.TYPE_TEXT_FLAG_AUTO_CORRECT |
+					InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS;
+			if (multiline) {
+				type |= InputType.TYPE_TEXT_VARIATION_LONG_MESSAGE |
+						InputType.TYPE_TEXT_FLAG_MULTI_LINE;
+			} else {
+				type |= InputType.TYPE_TEXT_VARIATION_NORMAL;
+			}
+			editText.setInputType(type);
 			LinearLayout.LayoutParams editTextLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 			editText.setLayoutParams(editTextLayoutParams);
 			TextViewCompat.setTextAppearance(editText, R.style.FeedbackQuestionTextAppearance);
@@ -412,7 +416,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		return answerView;
 	}
 
-	private View buildMultiAnswerView(final FeedbackQuestion question, final Survey feedback, List<Integer> possibleAnswers, final boolean radio) {
+	private View buildMultiAnswerView(final FeedbackQuestion question, final Survey feedback, List<String> possibleAnswers, final boolean radio) {
 		Object answer = question.getAnswer();
 		LinearLayout buttonsLayout;
 		final ViewGroup mainView;
@@ -464,7 +468,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 
 		int padding = getResources().getDimensionPixelOffset(R.dimen.feedback_multi_answer_padding);
 		boolean first = true;
-		for (int answerStringId : possibleAnswers) {
+		for (String answerString : possibleAnswers) {
 			final TextView answerButton;
 			if (radio) {
 				answerButton = new AppCompatRadioButton(getContext());
@@ -483,7 +487,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 			}
 			answerViews.add(answerButton);
 			TextViewCompat.setTextAppearance(answerButton, R.style.EventAnswerButton);
-			answerButton.setText(answerStringId);
+			answerButton.setText(answerString);
 			int endPadding = padding * 4;
 			int startPadding = padding * 4;
 			if ((!radio) && first) {
