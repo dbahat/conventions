@@ -11,6 +11,9 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.HitBuilders;
+
+import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.feedback.SurveySender;
@@ -92,6 +95,16 @@ public class EventVoteSurveyFragment extends DialogFragment {
 			@Override
 			protected SurveySender getSurveySender() {
 				return Convention.getInstance().getEventVoteSender(event);
+			}
+
+			@Override
+			protected void beforeSend() {
+				super.beforeSend();
+				ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
+						.setCategory("EventVote")
+						.setAction("send")
+						.setLabel(event.getTitle())
+						.build());
 			}
 		});
 	}

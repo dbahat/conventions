@@ -562,7 +562,17 @@ public class EventActivity extends NavigationActivity {
 								if (exception != null) {
 									Toast.makeText(EventActivity.this, R.string.vote_survey_retrieve_answers_error, Toast.LENGTH_LONG).show();
 									Log.e(TAG, "Error retrieving answers", exception);
+									ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
+											.setCategory("EventVote")
+											.setAction("openFailed")
+											.setLabel(exception.getMessage())
+											.build());
 								} else {
+									ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
+											.setCategory("EventVote")
+											.setAction("openSuccess")
+											.setLabel(conventionEvent.getTitle())
+											.build());
 									EventVoteSurveyFragment eventVoteSurveyFragment = EventVoteSurveyFragment.newInstance(conventionEvent.getId());
 									eventVoteSurveyFragment.show(getSupportFragmentManager(), null);
 								}

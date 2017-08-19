@@ -664,6 +664,8 @@ public class CollapsibleFeedbackView extends FrameLayout {
 						? getContext().getString(R.string.vote_send_error)
 						: surveyDisabledException.getDisabledErrorMessage();
 				Toast.makeText(getContext(), toastMessage, Toast.LENGTH_LONG).show();
+				// Using success because the problem here is not in the application
+				sendUserSentFeedbackTelemetry(true, exception);
 				return;
 			}
 
