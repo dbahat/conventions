@@ -255,7 +255,7 @@
     <string name="home_upcoming_event_time">בעוד %s</string>
     <string name="home_upcoming_programme_events">אירועים שמתחילים ב-%s</string>
     <string name="home_convention_ended">הכנס נגמר</string>
-    <string name="singing_contest_name_question">איך קוראים לך?\nשדה זה ישמש לצורך וידוא כי לא התבצעו הצבעות כפולות במידת הצורך.</string>
+    <string name="singing_contest_name_question">איך קוראים לך?</string>
     <string name="singing_contest_vote_question">מי המתמודד/ת החביב/ה עליך?</string>
     <string name="showcase_name_question">שם</string>
     <string name="showcase_vote_question">למי תרצה להצביע?</string>
