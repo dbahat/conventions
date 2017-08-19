@@ -63,7 +63,7 @@ public class Cami2017Convention extends AmaiConvention {
 
 	@Override
 	protected ConventionStorage initStorage() {
-		return new ConventionStorage(this, R.raw.cami2017_convention_events, 0);
+		return new ConventionStorage(this, R.raw.cami2017_convention_events, 1);
 	}
 
 	@Override
