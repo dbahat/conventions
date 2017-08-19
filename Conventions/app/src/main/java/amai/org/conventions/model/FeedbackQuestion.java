@@ -64,14 +64,19 @@ public class FeedbackQuestion {
 	// If feedback was already sent, this is the displayed text. Needed since it's possible the hardcoded questions will change per convention,
 	// but a user will wish to see the original texts he previously answered.
 	private String text;
+	private boolean required = false;
 	private AnswerType answerType;
 	private Object answer;
 	private List<String> possibleMultipleAnswers;
 	private transient boolean answerChanged = false; // No need to serialize this field
 
-	public FeedbackQuestion(int questionId, AnswerType answerType) {
+	public FeedbackQuestion(int questionId, AnswerType answerType, boolean required) {
 		this.questionId = questionId;
 		this.answerType = answerType;
+		this.required = required;
+	}
+	public FeedbackQuestion(int questionId, AnswerType answerType) {
+		this(questionId, answerType, false);
 	}
 
 	public int getQuestionId() {
@@ -88,6 +93,10 @@ public class FeedbackQuestion {
 			}
 		}
 		return text;
+	}
+
+	public boolean isRequired() {
+		return required;
 	}
 
 	public AnswerType getAnswerType() {

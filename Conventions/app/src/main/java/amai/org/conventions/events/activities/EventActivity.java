@@ -49,6 +49,7 @@ import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.AspectRatioImageView;
 import amai.org.conventions.events.CollapsibleFeedbackView;
 import amai.org.conventions.events.ConfigureNotificationsFragment;
+import amai.org.conventions.events.EventVoteSurveyFragment;
 import amai.org.conventions.feedback.SurveySender;
 import amai.org.conventions.map.MapActivity;
 import amai.org.conventions.model.ConventionEvent;
@@ -517,7 +518,7 @@ public class EventActivity extends NavigationActivity {
 			// Allow until half an hour after event ended to vote (in case there's a delay)
 			eventEnd.add(Calendar.MINUTE, 30);
 
-			if (!event.hasStarted() || (eventEnd.before(Dates.now()) && !voteSurvey.isSent())) {
+			if (!event.hasStarted() || (eventEnd.getTime().before(Dates.now()) && !voteSurvey.isSent())) {
 				voteSurveyOpenerContainer.setVisibility(View.GONE);
 			} else {
 				voteSurveyOpenerContainer.setVisibility(View.VISIBLE);
@@ -562,10 +563,8 @@ public class EventActivity extends NavigationActivity {
 									Toast.makeText(EventActivity.this, R.string.vote_survey_retrieve_answers_error, Toast.LENGTH_LONG).show();
 									Log.e(TAG, "Error retrieving answers", exception);
 								} else {
-									for (FeedbackQuestion question : voteSurvey.getQuestions()) {
-										List<String> answers = question.getPossibleMultipleAnswers(getResources());
-										Log.i(TAG, "answers for question " + question.getQuestionText(getResources(), false) + ": " + answers);
-									}
+									EventVoteSurveyFragment eventVoteSurveyFragment = EventVoteSurveyFragment.newInstance(conventionEvent.getId());
+									eventVoteSurveyFragment.show(getSupportFragmentManager(), null);
 								}
 							}
 						}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);

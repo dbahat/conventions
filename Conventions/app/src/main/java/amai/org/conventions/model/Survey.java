@@ -112,6 +112,15 @@ public class Survey implements Serializable, Cloneable {
 		return false;
 	}
 
+	public boolean areAllRequiredQuestionsAnswered() {
+		for (FeedbackQuestion question : questions.values()) {
+			if (question.isRequired() && !question.hasAnswer()) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	public void resetChangedAnswers() {
 		for (FeedbackQuestion question : getQuestions()) {
 			question.setAnswerChanged(false);

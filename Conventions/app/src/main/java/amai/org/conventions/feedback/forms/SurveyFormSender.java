@@ -107,16 +107,19 @@ public abstract class SurveyFormSender extends SurveySender {
 			while ((output = reader.readLine()) != null) {
 				responseBuilder.append(output);
 			}
-			String resopnseBody = responseBuilder.toString();
+			String responseBody = responseBuilder.toString();
 
 			// Check if the form was sent successfully
 			// Unfortunately, even for unsuccessful send we get a 200 response, so we need to check the output.
 			// There is no indication of error messages, but the "form was sent" message has class "freebirdFormviewerViewResponseConfirmationMessage"
-			// so we check if it exists (the success message itself is localized so we can't check its text).
-			// There is no error in case a field with a non-existing id was sent, but there is if a required field was not sent and if the form is
-			// not accepting answers. In case a non-existing form ID is used the response code is 404.
-			if (responseCode != HttpsURLConnection.HTTP_OK || !resopnseBody.contains("\"freebirdFormviewerViewResponseConfirmationMessage\"")) {
-				throw new RuntimeException("Could not send feedback, response code: " + responseCode + ", response body:\n" + resopnseBody);
+			// in case of a new form and "ss-resp-message" in case of an old form so we check if one of them exists (the success message itself is
+			// localized so we can't check its text).
+			// There is no error in case a field with a non-existing id was sent, there is if the form is not accepting answers.
+			// For new forms there is an error if a required field was not sent.
+			// In case a non-existing form ID is used the response code is 404.
+			if (responseCode != HttpsURLConnection.HTTP_OK ||
+					(!responseBody.contains("\"freebirdFormviewerViewResponseConfirmationMessage\"") && !responseBody.contains("ss-resp-message"))) {
+				throw new RuntimeException("Could not send feedback, response code: " + responseCode + ", response body:\n" + responseBody);
 			}
 		} finally {
 			try {

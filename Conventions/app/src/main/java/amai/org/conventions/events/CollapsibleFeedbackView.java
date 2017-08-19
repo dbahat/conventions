@@ -9,6 +9,7 @@ import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.CompoundButtonCompat;
 import android.support.v4.widget.TextViewCompat;
@@ -72,6 +73,8 @@ public class CollapsibleFeedbackView extends FrameLayout {
 	private Survey feedback;
 	private boolean feedbackChanged;
 	private int textColor = AmaiModelConverter.NO_COLOR;
+	private int feedbackSentTextResource = R.string.feedback_sent;
+	private int feedbackSendErrorMessage = R.string.feedback_send_failed;
 
 	public CollapsibleFeedbackView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -127,12 +130,16 @@ public class CollapsibleFeedbackView extends FrameLayout {
 
 	public void setModel(Survey feedback) {
 		this.feedback = feedback;
+		if (feedback == null) {
+			return;
+		}
 
 		if (feedback.isSent()) {
 			collapsedFeedbackTitle.setText(getContext().getString(R.string.feedback_sent));
 			openFeedbackButton.setText(getContext().getString(R.string.display_feedback));
 			sendFeedbackButton.setVisibility(View.GONE);
 			feedbackSentText.setVisibility(View.VISIBLE);
+			feedbackSentText.setText(feedbackSentTextResource);
 		} else if (Convention.getInstance().isFeedbackSendingTimeOver()) {
 			collapsedFeedbackTitle.setText(getContext().getString(R.string.feedback_sending_time_over));
 			openFeedbackButton.setText(getContext().getString(R.string.display));
@@ -146,6 +153,15 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		LinearLayout questionsLayout = (LinearLayout) findViewById(R.id.questions_layout);
 		buildQuestionsLayout(questionsLayout, feedback);
 		setTextColor(textColor);
+	}
+
+	public void setFeedbackSentText(@StringRes int stringResource) {
+		feedbackSentTextResource = stringResource;
+		refresh();
+	}
+
+	public void setFeedbackSendErrorMessage(@StringRes int stringResource) {
+		feedbackSendErrorMessage = stringResource;
 	}
 
 	public void setTextColor(int color) {
@@ -173,7 +189,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 			}
 			questionsLayout.addView(buildQuestionView(question, feedback));
 		}
-		sendFeedbackButton.setEnabled(feedback.hasAnsweredQuestions());
+		updateSendButtonEnabledState(feedback);
 	}
 
 	public boolean isFeedbackChanged() {
@@ -322,7 +338,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 
 				question.setAnswer(selectedAnswer);
 				feedbackChanged |= question.isAnswerChanged();
-				sendFeedbackButton.setEnabled(feedback.hasAnsweredQuestions());
+				updateSendButtonEnabledState(feedback);
 			}
 		};
 
@@ -402,7 +418,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 				@Override
 				public void afterTextChanged(Editable s) {
 					question.setAnswer(s.toString());
-					sendFeedbackButton.setEnabled(feedback.hasAnsweredQuestions());
+					updateSendButtonEnabledState(feedback);
 					feedbackChanged |= question.isAnswerChanged();
 				}
 			});
@@ -462,7 +478,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 
 				question.setAnswer(selectedAnswer);
 				feedbackChanged |= question.isAnswerChanged();
-				sendFeedbackButton.setEnabled(feedback.hasAnsweredQuestions());
+				updateSendButtonEnabledState(feedback);
 			}
 		};
 
@@ -515,6 +531,10 @@ public class CollapsibleFeedbackView extends FrameLayout {
 			}
 		}
 		return mainView;
+	}
+
+	private void updateSendButtonEnabledState(Survey feedback) {
+		sendFeedbackButton.setEnabled(feedback.hasAnsweredQuestions() && feedback.areAllRequiredQuestionsAnswered());
 	}
 
 	private int calculateExpendedFeedbackHeight() {
@@ -637,7 +657,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		@Override
 		protected void onFailure(Exception exception) {
 			Log.w(TAG, "Failed to send feedback. Reason: " + exception.getClass().getSimpleName() + ": " + exception.getMessage());
-			Toast.makeText(getContext(), R.string.feedback_send_failed, Toast.LENGTH_LONG).show();
+			Toast.makeText(getContext(), feedbackSendErrorMessage, Toast.LENGTH_LONG).show();
 			sendUserSentFeedbackTelemetry(false, exception);
 		}
 

@@ -553,13 +553,13 @@ public class Cami2017Convention extends AmaiConvention {
 		if (userInput.getVoteSurvey() == null) {
 			if (event.getServerId() == EVENT_ID_SHOWCASE) {
 				userInput.setVoteSurvey(new Survey().withQuestions(
-						new FeedbackQuestion(QUESTION_ID_SHOWCASE_NAME, FeedbackQuestion.AnswerType.TEXT),
-						new FeedbackQuestion(QUESTION_ID_SHOWCASE_VOTE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO)
+						new FeedbackQuestion(QUESTION_ID_SHOWCASE_NAME, FeedbackQuestion.AnswerType.TEXT, true),
+						new FeedbackQuestion(QUESTION_ID_SHOWCASE_VOTE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO, true)
 				));
 			} else if (event.getServerId() == EVENT_ID_SINGING_CONTEST) {
 				userInput.setVoteSurvey(new Survey().withQuestions(
-						new FeedbackQuestion(QUESTION_ID_SINGING_CONTEST_NAME, FeedbackQuestion.AnswerType.TEXT),
-						new FeedbackQuestion(QUESTION_ID_SINGING_CONTEST_VOTE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO)
+						new FeedbackQuestion(QUESTION_ID_SINGING_CONTEST_NAME, FeedbackQuestion.AnswerType.TEXT, true),
+						new FeedbackQuestion(QUESTION_ID_SINGING_CONTEST_VOTE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO, true)
 				));
 			}
 		}
