@@ -2,8 +2,6 @@ package amai.org.conventions;
 
 import android.support.test.runner.AndroidJUnit4;
 
-import com.google.api.client.googleapis.json.GoogleJsonResponseException;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,12 +37,12 @@ public class GoogleSpreadSheetSurveyDataRetrieverTests {
 		Assert.assertEquals("The sudoku is over!", result);
 	}
 
-	@Test(expected = GoogleJsonResponseException.class)
+	@Test(expected = IOException.class)
 	public void RetrieveAnswers_Throws_When_Using_Non_Existing_SpreadsheetId() throws IOException {
 		new SurveyDataRetriever.GoogleSpreadSheet("InvalidId").retrieveAnswers();
 	}
 
-	@Test(expected = GoogleJsonResponseException.class)
+	@Test(expected = IOException.class)
 	public void RetrieveClosedMessage_Throws_When_Using_Non_Existing_SpreadsheetId() throws IOException {
 		new SurveyDataRetriever.GoogleSpreadSheet("InvalidId").retrieveClosedMessage();
 	}

@@ -42,7 +42,6 @@ dependencies {
     compile "com.android.support:appcompat-v7:${supportLibVersion}"
     compile "com.android.support:palette-v7:${supportLibVersion}"
     compile "com.android.support:recyclerview-v7:${supportLibVersion}"
-    compile "com.android.support:cardview-v7:${supportLibVersion}"
     compile "com.android.support:design:${supportLibVersion}"
     compile 'com.github.castorflex.verticalviewpager:library:19.0.1'
     compile 'klogi.com:rtlviewpager:1.0.0'
@@ -57,15 +56,19 @@ dependencies {
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.microsoft.azure:notification-hubs-android-sdk:0.4@aar'
     compile 'com.microsoft.azure:azure-notifications-handler:1.0.1@aar'
-    compile('com.google.api-client:google-api-client-android:1.22.0') {
-        exclude group: 'org.apache.httpcomponents'
-    }
-    compile('com.google.apis:google-api-services-sheets:v4-rev483-1.22.0') {
-        exclude group: 'org.apache.httpcomponents'
-    }
     compile files('libs/activation.jar')
     compile files('libs/additionnal.jar')
     compile files('libs/mail.jar')
+
+    // Google spreadsheet API currently commented out due to 64k method limit in a single DEX file.
+    // TODO: return this SDK once we have a tested solution for the 64K method limit (enable multidex, proguard, etc...)
+    //
+    //compile('com.google.api-client:google-api-client-android:1.22.0') {
+    //    exclude group: 'org.apache.httpcomponents'
+    //}
+    //compile('com.google.apis:google-api-services-sheets:v4-rev483-1.22.0') {
+    //    exclude group: 'org.apache.httpcomponents'
+    //}
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:1.10.19'

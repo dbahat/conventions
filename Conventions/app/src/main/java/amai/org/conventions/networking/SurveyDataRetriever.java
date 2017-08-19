@@ -2,11 +2,12 @@ package amai.org.conventions.networking;
 
 import android.support.annotation.Nullable;
 
-import com.google.api.client.extensions.android.http.AndroidHttp;
-import com.google.api.client.json.jackson2.JacksonFactory;
-import com.google.api.services.sheets.v4.Sheets;
+import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,18 +85,30 @@ public interface SurveyDataRetriever {
 		}
 
 		private static List<List<Object>> retrieveValuesForRange(String spreadsheetId, String a1NotationRange) throws IOException {
-			return createSheetsServiceClient()
-					.spreadsheets()
-					.values()
-					.get(spreadsheetId, a1NotationRange)
-					.setKey(Convention.getInstance().getGoogleSpreadsheetsApiKey())
-					.execute()
-					.getValues();
-		}
 
-		private static Sheets createSheetsServiceClient() {
-			return new Sheets.Builder(AndroidHttp.newCompatibleTransport(), JacksonFactory.getDefaultInstance(), null)
-					.build();
+			int TIMEOUT = 10000;
+
+			// NOTE - not using the google spreadsheet Android SDK since it brings us to > 64k methods, and we don't currently want to enable multidex
+			URL url = new URL(String.format("https://sheets.googleapis.com/v4/spreadsheets/%s/values/%s?key=%s",
+					spreadsheetId,
+					a1NotationRange,
+					Convention.getInstance().getGoogleSpreadsheetsApiKey()));
+			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+			connection.setReadTimeout(TIMEOUT);
+			connection.setConnectTimeout(TIMEOUT);
+			connection.setRequestMethod("GET");
+
+			InputStreamReader streamReader = null;
+			try {
+				streamReader = new InputStreamReader(connection.getInputStream());
+				GoogleSpreadsheetGetRangeContract contract = new GsonBuilder().create().fromJson(streamReader, GoogleSpreadsheetGetRangeContract.class);
+				return contract.getValues();
+			} finally {
+				if (streamReader != null) {
+					streamReader.close();
+				}
+			}
 		}
 	}
 }
