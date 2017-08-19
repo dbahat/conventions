@@ -285,7 +285,7 @@ public abstract class Convention implements Serializable {
 	}
 
 	// "Upgrade" mechanism for user input
-	protected void convertUserInputForEvent(ConventionEvent.UserInput input, ConventionEvent event) {
+	public void convertUserInputForEvent(ConventionEvent.UserInput input, ConventionEvent event) {
 	}
 
 	public Halls getHalls() {

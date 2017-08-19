@@ -549,9 +549,9 @@ public class Cami2017Convention extends AmaiConvention {
 	}
 
 	@Override
-	protected void convertUserInputForEvent(ConventionEvent.UserInput userInput, ConventionEvent event) {
+	public void convertUserInputForEvent(ConventionEvent.UserInput userInput, ConventionEvent event) {
 		super.convertUserInputForEvent(userInput, event);
-		if (userInput.getVoteSurvey() == null) {
+		if (userInput.getVoteSurvey() == null && event != null) {
 			if (event.getServerId() == EVENT_ID_SHOWCASE) {
 				userInput.setVoteSurvey(new Survey().withQuestions(
 						new FeedbackQuestion(QUESTION_ID_SHOWCASE_NAME, FeedbackQuestion.AnswerType.TEXT, true),

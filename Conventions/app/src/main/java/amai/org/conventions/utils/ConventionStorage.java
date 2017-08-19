@@ -244,6 +244,7 @@ public class ConventionStorage {
 			// Ignore non-existing events
 			if (currentInput != null) {
 				currentInput.updateFrom(entry.getValue());
+				convention.convertUserInputForEvent(currentInput, convention.findEventById(entry.getKey()));
 			}
 		}
 	}
