@@ -82,10 +82,12 @@ public class HomeActivity extends NavigationActivity {
 
 		View currentEventContainer = findViewById(R.id.home_current_event_container);
 		TextView currentEventTitle = (TextView)findViewById(R.id.home_current_event_title);
+		TextView currentEventVoteText = (TextView)findViewById(R.id.home_current_event_vote);
 		View upcomingEventContainer = findViewById(R.id.home_upcoming_event_container);
 		TextView upcomingEventTime = (TextView)findViewById(R.id.home_upcoming_event_time);
 		TextView upcomingEventTitle = (TextView)findViewById(R.id.home_upcoming_event_title);
 		TextView upcomingEventHall = (TextView)findViewById(R.id.home_upcoming_event_hall);
+		TextView upcomingEventVoteText = (TextView)findViewById(R.id.home_upcoming_event_vote);
 
 		if (upcomingEvent != null) {
 			// There's an upcoming event - show it
@@ -99,6 +101,11 @@ public class HomeActivity extends NavigationActivity {
 			// if there's a current event, show it as well
 			if (currentEvent != null) {
 				currentEventTitle.setText(getString(R.string.home_now_showing, currentEvent.getTitle()));
+				if (currentEvent.getUserInput().getVoteSurvey() != null) {
+					currentEventVoteText.setVisibility(View.VISIBLE);
+				} else {
+					currentEventVoteText.setVisibility(View.GONE);
+				}
 			} else {
 				currentEventContainer.setVisibility(View.GONE);
 			}
@@ -109,6 +116,11 @@ public class HomeActivity extends NavigationActivity {
 			upcomingEventTime.setText(getString(R.string.home_now_showing, ""));
 			upcomingEventHall.setText(currentEvent.getHall().getName());
 			upcomingEventContainer.setBackgroundColor(ThemeAttributes.getColor(this, R.attr.homeCurrentEventBackground));
+			if (currentEvent.getUserInput().getVoteSurvey() != null) {
+				upcomingEventVoteText.setVisibility(View.VISIBLE);
+			} else {
+				upcomingEventVoteText.setVisibility(View.GONE);
+			}
 
 			// In this case, we want the 'go to my events' to go to the programme instead, since the user has no more favorite events.
 			Button goToMyEventsButton = (Button)findViewById(R.id.home_go_to_my_events_button);

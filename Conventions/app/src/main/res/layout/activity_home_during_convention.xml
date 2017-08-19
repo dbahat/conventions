@@ -32,18 +32,36 @@
         android:gravity="center"
         android:onClick="onCurrentEventClicked">
         <!-- This view is inside a FrameLayout because in previous API levels foreground was not available for other views -->
-        <TextView
-            android:id="@+id/home_current_event_title"
-            android:visibility="visible"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="כעת: תחרות השירה"
+            android:padding="5dp"
             android:background="?homeCurrentEventBackground"
-            android:textAlignment="center"
-            android:textColor="?homeMessageText"
-            android:textSize="20sp"
-            android:paddingBottom="8dp"
-            />
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/home_current_event_title"
+                android:visibility="visible"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="כעת: תחרות השירה"
+                android:textAlignment="center"
+                android:textColor="?homeMessageText"
+                android:textSize="20sp"
+                android:paddingBottom="8dp"
+                />
+            <TextView
+                android:id="@+id/home_current_event_vote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:text="@string/home_current_event_vote_possible"
+                android:textColor="?homeMessageText"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:paddingBottom="8dp"
+                />
+        </LinearLayout>
     </FrameLayout>
 
     <FrameLayout
@@ -52,6 +70,7 @@
         android:layout_height="wrap_content"
         android:foreground="?selectableItemBackground"
         android:paddingTop="8dp"
+        android:padding="5dp"
         android:onClick="onUpcomingEventClicked"
         android:background="?homeUpcomingEventBackground">
         <!-- This layout is inside a FrameLayout because in previous API levels foreground was not available for other views -->
@@ -88,6 +107,19 @@
                 android:textColor="?homeMessageText"
                 android:textSize="23sp"
                 android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/home_upcoming_event_vote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:text="@string/home_current_event_vote_possible"
+                android:textColor="?homeMessageText"
+                android:textAlignment="center"
+                android:textSize="22sp"
+                android:paddingBottom="8dp"
+                />
         </LinearLayout>
     </FrameLayout>
 
