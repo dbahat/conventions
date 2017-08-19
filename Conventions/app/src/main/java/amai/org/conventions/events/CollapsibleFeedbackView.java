@@ -16,6 +16,7 @@ import android.support.v4.widget.TextViewCompat;
 import android.support.v7.widget.AppCompatRadioButton;
 import android.text.Editable;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -47,6 +48,7 @@ import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.AspectRatioImageView;
 import amai.org.conventions.feedback.SurveySender;
+import amai.org.conventions.feedback.forms.SurveyDisabledException;
 import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.conventions.Convention;
@@ -656,6 +658,15 @@ public class CollapsibleFeedbackView extends FrameLayout {
 
 		@Override
 		protected void onFailure(Exception exception) {
+			if (exception instanceof SurveyDisabledException) {
+				SurveyDisabledException surveyDisabledException = (SurveyDisabledException) exception;
+				String toastMessage = TextUtils.isEmpty(surveyDisabledException.getDisabledErrorMessage())
+						? getContext().getString(R.string.vote_send_error)
+						: surveyDisabledException.getDisabledErrorMessage();
+				Toast.makeText(getContext(), toastMessage, Toast.LENGTH_LONG).show();
+				return;
+			}
+
 			Log.w(TAG, "Failed to send feedback. Reason: " + exception.getClass().getSimpleName() + ": " + exception.getMessage());
 			Toast.makeText(getContext(), feedbackSendErrorMessage, Toast.LENGTH_LONG).show();
 			sendUserSentFeedbackTelemetry(false, exception);

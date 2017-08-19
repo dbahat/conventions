@@ -68,6 +68,7 @@ public abstract class SurveyFormSender extends SurveySender {
 			connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 			connection.setDoInput(true);
 			connection.setDoOutput(true);
+			connection.setInstanceFollowRedirects(false);
 
 			outputStream = connection.getOutputStream();
 			writer = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
@@ -90,7 +91,7 @@ public abstract class SurveyFormSender extends SurveySender {
 
 	}
 
-	private void verifyResponse(HttpURLConnection connection) throws Exception {
+	protected void verifyResponse(HttpURLConnection connection) throws Exception {
 		InputStream inputStream = null;
 		BufferedReader reader = null;
 		try {
