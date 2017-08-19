@@ -11,9 +11,9 @@ import java.util.List;
 import amai.org.conventions.R;
 import amai.org.conventions.feedback.SurveySender;
 import amai.org.conventions.feedback.forms.EventFeedbackForm;
+import amai.org.conventions.feedback.forms.EventVoteSurveyFormSender;
 import amai.org.conventions.feedback.forms.FeedbackForm;
 import amai.org.conventions.feedback.forms.SurveyForm;
-import amai.org.conventions.feedback.forms.SurveyFormSender;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.FeedbackQuestion;
@@ -48,6 +48,10 @@ public class Cami2017Convention extends AmaiConvention {
 	// Special events server id
 	private static final int EVENT_ID_SHOWCASE = 3039;
 	private static final int EVENT_ID_SINGING_CONTEST = 2984;
+
+	// Ids of google spreadsheets associated with the special events
+	private static final String SHOWCASE_SPREADSHEET_ID = "1zpNagg3Rmf7CGolTV5D8253cWgnbfVHAFE0gvBYHzEw";
+	private static final String SINGING_CONTEST_SPREADSHEET_ID = "1Zqd6-hNGw7lqcyk9rONdQbFX6BnSlQ7gPr0_THPYmrc";
 
 	static {
 		FeedbackQuestion.addQuestion(QUESTION_ID_SINGING_CONTEST_NAME, R.string.singing_contest_name_question);
@@ -500,28 +504,40 @@ public class Cami2017Convention extends AmaiConvention {
 						.withQuestionEntry(QUESTION_ID_SHOWCASE_NAME, "entry.1893333202")
 						.withQuestionEntry(QUESTION_ID_SHOWCASE_VOTE, "entry.1772924702")
 						.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSf4m0Azy1HFovoPF7VXY0IFLM1s0z0o18SDHfjZKw6c6UXvcw/formResponse"));
-				return new SurveyFormSender(form) {
-					@Override
-					protected Survey getSurvey() {
-						return event.getUserInput().getVoteSurvey();
-					}
-				};
+
+				SurveyDataRetriever.DisabledMessage disabledMessageRetriever = new SurveyDataRetriever.GoogleSpreadSheet(SHOWCASE_SPREADSHEET_ID);
+
+				return new EventVoteSurveyFormSender(form, event.getUserInput().getVoteSurvey(), disabledMessageRetriever);
+
 			} else if (event.getServerId() == EVENT_ID_SINGING_CONTEST) {
 				SurveyForm form = new SurveyForm()
 						.withQuestionEntry(QUESTION_ID_SINGING_CONTEST_NAME, "entry.109802680")
 						.withQuestionEntry(QUESTION_ID_SINGING_CONTEST_VOTE, "entry.1600353678")
 						.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLScyynW3kBT4blxsiEBzdEbMV-6pEuKhjux0PesVteOUTqffWA/formResponse"));
-				return new SurveyFormSender(form) {
-					@Override
-					protected Survey getSurvey() {
-						return event.getUserInput().getVoteSurvey();
-					}
-				};
+
+				SurveyDataRetriever.DisabledMessage disabledMessageRetriever = new SurveyDataRetriever.GoogleSpreadSheet(SINGING_CONTEST_SPREADSHEET_ID);
+
+				return new EventVoteSurveyFormSender(form, event.getUserInput().getVoteSurvey(), disabledMessageRetriever);
 			}
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
 		return super.getEventVoteSender(event);
+	}
+
+	@Override
+	@Nullable
+	public SurveyDataRetriever.Answers createSurveyAnswersRetriever(FeedbackQuestion question) {
+		switch (question.getQuestionId()) {
+			case QUESTION_ID_SHOWCASE_VOTE: {
+				return new SurveyDataRetriever.GoogleSpreadSheet(SHOWCASE_SPREADSHEET_ID);
+			}
+			case QUESTION_ID_SINGING_CONTEST_VOTE: {
+				return new SurveyDataRetriever.GoogleSpreadSheet(SINGING_CONTEST_SPREADSHEET_ID);
+			}
+		}
+
+		return null;
 	}
 
 	@Override
@@ -547,20 +563,5 @@ public class Cami2017Convention extends AmaiConvention {
 				));
 			}
 		}
-	}
-
-	@Override
-	@Nullable
-	public SurveyDataRetriever.Answers createSurveyAnswersRetriever(FeedbackQuestion question) {
-		switch (question.getQuestionId()) {
-			case QUESTION_ID_SHOWCASE_VOTE: {
-				return new SurveyDataRetriever.GoogleSpreadSheet("1zpNagg3Rmf7CGolTV5D8253cWgnbfVHAFE0gvBYHzEw");
-			}
-			case QUESTION_ID_SINGING_CONTEST_VOTE: {
-				return new SurveyDataRetriever.GoogleSpreadSheet("1Zqd6-hNGw7lqcyk9rONdQbFX6BnSlQ7gPr0_THPYmrc");
-			}
-		}
-
-		return null;
 	}
 }

@@ -58,7 +58,7 @@ import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
-import amai.org.conventions.networking.SurveyAnswersRetriever;
+import amai.org.conventions.networking.SurveyDataRetriever;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Views;
@@ -537,9 +537,9 @@ public class EventActivity extends NavigationActivity {
 								}
 								try {
 									for (FeedbackQuestion question : voteSurvey.getQuestions()) {
-										SurveyAnswersRetriever retriever = Convention.getInstance().createSurveyAnswersRetriever(question);
+										SurveyDataRetriever.Answers retriever = Convention.getInstance().createSurveyAnswersRetriever(question);
 										if (retriever != null) {
-											List<String> answers = retriever.getAnswers();
+											List<String> answers = retriever.retrieveAnswers();
 											if (answers == null || answers.size() == 0) {
 												// No answers found - throw exception
 												throw new RuntimeException("No answers found for question " + question.getQuestionId());
