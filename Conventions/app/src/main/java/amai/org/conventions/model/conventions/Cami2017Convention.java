@@ -190,6 +190,7 @@ public class Cami2017Convention extends AmaiConvention {
 		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/פאנסאב-לא-מה-שחשבתם.png", R.drawable.event_fansub);
 		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/פאנל-יאוי-אקדמי.jpg", R.drawable.event_bl);
 		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/objection-פיניקס-רייט-נגד-קאפקום.jpg", R.drawable.event_ace_attorney);
+		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/08/pokemon-tournament.png", R.drawable.event_pokemon_tournament);
 
 		// Non-URL IDs
 		imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.cami2017_event_default_image);
@@ -200,7 +201,6 @@ public class Cami2017Convention extends AmaiConvention {
 		// Excluded IDs - mostly for debug purposes (don't show messages about these when entering an event that has them)
 		// Foreground text is not readable
 		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/kumodesuga_edited-1.jpg");
-		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/08/pokemon-tournament.png");
 		// Unnecessary images in events that have other images
 		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2016/01/cosplay1.jpg");
 		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/photo_2017-07-29_19-49-50.jpg");
