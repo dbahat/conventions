@@ -272,10 +272,20 @@ public abstract class Convention implements Serializable {
 		// Add user input for new events
 		for (ConventionEvent event : events) {
 			if (!userInput.containsKey(event.getId())) {
-				userInput.put(event.getId(), new ConventionEvent.UserInput());
+				userInput.put(event.getId(), createUserInputForEvent(event));
+			} else {
+				convertUserInputForEvent(userInput.get(event.getId()), event);
 			}
 		}
 		// TODO remove user input for deleted events?
+	}
+
+	protected ConventionEvent.UserInput createUserInputForEvent(ConventionEvent event) {
+		return new ConventionEvent.UserInput();
+	}
+
+	// "Upgrade" mechanism for user input
+	protected void convertUserInputForEvent(ConventionEvent.UserInput input, ConventionEvent event) {
 	}
 
 	public Halls getHalls() {

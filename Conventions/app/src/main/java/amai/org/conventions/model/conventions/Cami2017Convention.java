@@ -23,7 +23,6 @@ import amai.org.conventions.model.Halls;
 import amai.org.conventions.model.ImageIdToImageResourceMapper;
 import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.model.Place;
-import amai.org.conventions.model.SpecialEventsProcessor;
 import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.model.Survey;
@@ -526,24 +525,28 @@ public class Cami2017Convention extends AmaiConvention {
 	}
 
 	@Override
-	public SpecialEventsProcessor getSpecialEventsProcessor() {
-		return new SpecialEventsProcessor() {
-			@Override
-			public boolean processSpecialEvent(ConventionEvent event) {
-				if (event.getServerId() == EVENT_ID_SHOWCASE) {
-					event.getUserInput().setVoteSurvey(new Survey().withQuestions(
-							new FeedbackQuestion(QUESTION_ID_SHOWCASE_NAME, FeedbackQuestion.AnswerType.TEXT),
-							new FeedbackQuestion(QUESTION_ID_SHOWCASE_VOTE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO)
-					));
-				} else if (event.getServerId() == EVENT_ID_SINGING_CONTEST) {
-					event.getUserInput().setVoteSurvey(new Survey().withQuestions(
-							new FeedbackQuestion(QUESTION_ID_SINGING_CONTEST_NAME, FeedbackQuestion.AnswerType.TEXT),
-							new FeedbackQuestion(QUESTION_ID_SINGING_CONTEST_VOTE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO)
-					));
-				}
-				return false; // Description processing should continue as usual
+	protected ConventionEvent.UserInput createUserInputForEvent(ConventionEvent event) {
+		ConventionEvent.UserInput userInput = super.createUserInputForEvent(event);
+		convertUserInputForEvent(userInput, event);
+		return userInput;
+	}
+
+	@Override
+	protected void convertUserInputForEvent(ConventionEvent.UserInput userInput, ConventionEvent event) {
+		super.convertUserInputForEvent(userInput, event);
+		if (userInput.getVoteSurvey() == null) {
+			if (event.getServerId() == EVENT_ID_SHOWCASE) {
+				userInput.setVoteSurvey(new Survey().withQuestions(
+						new FeedbackQuestion(QUESTION_ID_SHOWCASE_NAME, FeedbackQuestion.AnswerType.TEXT),
+						new FeedbackQuestion(QUESTION_ID_SHOWCASE_VOTE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO)
+				));
+			} else if (event.getServerId() == EVENT_ID_SINGING_CONTEST) {
+				userInput.setVoteSurvey(new Survey().withQuestions(
+						new FeedbackQuestion(QUESTION_ID_SINGING_CONTEST_NAME, FeedbackQuestion.AnswerType.TEXT),
+						new FeedbackQuestion(QUESTION_ID_SINGING_CONTEST_VOTE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO)
+				));
 			}
-		};
+		}
 	}
 
 	@Override
