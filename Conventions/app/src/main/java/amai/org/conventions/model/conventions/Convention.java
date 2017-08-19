@@ -31,19 +31,19 @@ import amai.org.conventions.map.AggregatedEventTypes;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.EventType;
-import amai.org.conventions.model.SpecialEventsProcessor;
-import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.Floor;
 import amai.org.conventions.model.Halls;
 import amai.org.conventions.model.ImageIdToImageResourceMapper;
 import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.model.Place;
+import amai.org.conventions.model.SpecialEventsProcessor;
 import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.StandsArea;
+import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.Update;
 import amai.org.conventions.networking.ModelParser;
-import amai.org.conventions.networking.SurveyAnswersRetriever;
+import amai.org.conventions.networking.SurveyDataRetriever;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 import amai.org.conventions.utils.Dates;
@@ -223,7 +223,7 @@ public abstract class Convention implements Serializable {
 	 * @return the survey answers retriever associated with this question, or null of no such retriever was defined.
 	 */
 	@Nullable
-	public abstract SurveyAnswersRetriever createSurveyAnswersRetriever(FeedbackQuestion question);
+	public abstract SurveyDataRetriever.Answers createSurveyAnswersRetriever(FeedbackQuestion question);
 
 	public void setEvents(List<ConventionEvent> events) {
 		eventLockObject.writeLock().lock();
