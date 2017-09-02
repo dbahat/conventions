@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import amai.org.conventions.events.activities.ProgrammeActivity;
 import amai.org.conventions.navigation.NavigationActivity;
 
 /**
@@ -23,12 +22,12 @@ public class SplashActivity extends AppCompatActivity {
 			return;
 		}
 
-		Intent intent = new Intent(SplashActivity.this, ProgrammeActivity.class);
-		Bundle extras = new Bundle();
-		extras.putBoolean(NavigationActivity.EXTRA_INITIALIZE, true);
-		extras.putBoolean(NavigationActivity.EXTRA_EXIT_ON_BACK, true);
-		intent.putExtras(extras);
+		Intent intent = new Intent(SplashActivity.this, HomeActivity.class)
+				.putExtra(NavigationActivity.EXTRA_INITIALIZE, true)
+				.putExtra(NavigationActivity.EXTRA_EXIT_ON_BACK, true);
+
 		startActivity(intent);
+
 		// Important - don't call finish() here because for some reason it causes a black screen
 		// to appear when navigating between NavigationActivities. This activity must remain in the back
 		// stack until we exit the application.

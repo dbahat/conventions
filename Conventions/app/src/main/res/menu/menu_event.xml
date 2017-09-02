@@ -15,14 +15,14 @@
     <item
         android:id="@+id/event_configure_notifications"
         android:title="@string/event_configure_notifications"
-        android:icon="@drawable/ic_action_alarms"
+        android:icon="@drawable/ic_action_alarms_black"
         android:orderInCategory="2"
         app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/event_navigate_to_map"
         android:title="@string/event_navigate_to_map"
-        android:icon="@android:drawable/ic_dialog_map"
+        android:icon="@drawable/ic_dialog_map_black"
         android:orderInCategory="3"
         app:showAsAction="always"/>
 

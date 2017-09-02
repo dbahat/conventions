@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppBaseTheme.Icon2017.Toolbar"/>
+
+    <style name="AppBaseTheme.Icon2017">
+        <!-- Sub-themes -->
+        <item name="android:dialogTheme">@style/AppDialogTheme.Icon2017</item>
+        <item name="alertDialogTheme">@style/AppAlertDialogTheme.Icon2017</item>
+        <!-- not using android:actionOverflowButtonStyle since it doesn't seem to work in Jellybean -->
+        <item name="actionOverflowButtonStyle">@style/OverflowMenu.Icon2017</item>
+        <!-- General -->
+        <item name="colorAccent">@color/icon2017_red</item> <!--@color/brown-->
+        <item name="android:colorBackground">@null</item>
+        <item name="android:textColorLink">@color/icon2017_red_dark</item>
+        <item name="actionButtonColor">@color/icon2017_red</item>
+        <item name="hintTextColor">@color/icon2017_very_dark_blue_bright</item>
+        <item name="swipeToRefreshColor">@color/icon2017_red</item>
+        <item name="snackbarActionColor">@color/icon2017_pink</item> <!--@color/brown_bright-->
+        <item name="highlightedButtonBackground">@drawable/icon2017_highlighted_button</item>
+        <item name="borderlessButtonColor">@color/icon2017_red_dark</item>
+        <item name="feedbackButtonColor">@color/white</item>
+        <item name="feedbackAnswerButtonColor">@color/icon2017_red_dark</item> <!--@color/brown_dark-->
+        <item name="feedbackAnswerButtonSelectedColor">@color/icon2017_red</item> <!--@color/brown_bright-->
+        <item name="shadowForeground">@null</item>
+        <item name="activitiesBackground">@drawable/icon2017_page_background</item>
+        <item name="eventListDivider">@drawable/icon2017_event_list_divider</item>
+        <!-- Note: if you change the theme, these values should be copied manually to file
+         ?highlightedButtonBackground (non-v21) because prior to L it was not supported to reference
+         theme attributes from a drawable xml -->
+        <item name="buttonColor">@color/icon2017_very_dark_blue</item> <!--@color/brown_dark-->
+        <item name="buttonColorPressed">@color/icon2017_very_dark_blue_bright</item> <!--@color/brown-->
+
+        <!-- Notifications -->
+        <item name="notificationSmallIcon">@drawable/icon2017_notification_small</item>
+        <item name="notificationLargeIcon">@mipmap/icon2016_app_icon</item>
+        <!-- Toolbar -->
+        <item name="toolbarBackground">@null</item>
+        <item name="toolbarLogo">@drawable/ic_menu_black_24dp</item>
+        <item name="toolbarIconAccentColor">@color/aquamarine</item>
+        <!-- Navigation Popup -->
+        <item name="navigationPopupBackground">@color/icon2017_darkest_blue</item>
+        <item name="navigationPopupTitle">@drawable/icon_logo</item>
+        <item name="navigationPopupBottomImage">@null</item>
+        <item name="navigationPopupNotSelectedColor">@color/white</item>
+        <item name="navigationPopupSelectedColor">@color/icon2017_pink</item> <!--@color/brown_dark-->
+        <item name="navigationPopupSeparatorColor">@android:color/transparent</item>
+        <!-- About Screen -->
+        <item name="aboutLogo">@drawable/icon_logo</item>
+        <!-- Home Screen -->
+        <item name="homeBackground">@drawable/icon2017_page_background</item>
+        <item name="homeToolbarTitle">@drawable/icon_logo</item>
+        <item name="homeTitleBackground">@color/icon2017_dark_blue_dark</item>
+        <item name="homeTitleText">@color/icon2017_purple_bright</item>
+        <item name="homeMessageBackground">@color/icon2017_dark_blue</item>
+        <item name="homeMessageText">@color/icon2017_purple_bright</item>
+        <item name="homeCurrentEventBackground">?homeMessageBackground</item>
+        <item name="homeUpcomingEventBackground">@color/icon2017_red_dark</item>
+        <item name="homeButtonBackground">@drawable/icon2017_home_activity_button</item>
+        <item name="homeButtonText">@color/icon2017_purple_bright</item>
+        <!-- Event View -->
+        <item name="eventTypeEndedColor">@color/icon2017_purple_dark</item>
+        <item name="eventTypeCurrentColor">@color/icon2017_red_dark</item>
+        <item name="eventTypeNotStartedColor">@color/icon2017_blue_dark</item>
+        <item name="eventNameKeywordHighlightColor">@color/icon2017_red</item>
+        <item name="eventKeywordHighlightColor">@color/icon2017_red</item>
+        <item name="eventTimeDefaultTextColor">@color/white</item>
+        <item name="eventTimeDefaultBackgroundColor">@color/icon2017_very_dark_blue_bright</item>
+        <item name="eventDetailsColor">@color/icon2017_blue_dark</item>
+        <item name="eventSendFeedbackColor">@color/icon2017_red</item>
+        <item name="eventFavoriteIcon">@drawable/ic_star_black_24dp</item>
+        <item name="eventNonFavoriteColor">@color/icon2017_blue_dark</item>
+        <item name="eventFavoriteColor">@color/icon2017_red</item>
+        <!-- Map Screen -->
+        <item name="locationDetailsBackground">@color/transparent_black</item>
+        <item name="locationDetailsTitleColor">@color/icon2017_dark_blue</item>
+        <item name="mapBackground">@color/yellow_dark</item>
+        <item name="standIconColor">@color/icon2017_red_dark</item>
+        <item name="standsTypeTitleColor">@color/icon2017_red_dark</item>
+        <!-- Updates Screen -->
+        <item name="focusedUpdateBackground">@color/transparent_yellow</item>
+        <item name="newUpdateBackground">@color/transparent_black</item>
+        <item name="updateTimeColor">@color/icon2017_gray</item>
+        <item name="updateItemBorder">@color/icon2017_dark_purple_bright</item>
+        <!-- My Events Screen -->
+        <item name="nextEventStartTimeBackground">@color/transparent_black</item>
+        <item name="nextEventStartTimeTextColor">@color/black</item>
+        <item name="conflictingEventsBackground">@color/transparent_black</item>
+        <!-- Event Screen -->
+        <item name="eventToolbarColor">@color/icon2017_gray</item>
+        <item name="eventDetailsDefaultBackgroundColor">@color/icon2017_gray</item>
+        <item name="eventDetailsBoxColor">@color/icon2017_transparent_very_dark_blue</item>
+        <item name="eventFeedbackBoxColor">@color/icon2017_transparent_red</item>
+        <item name="eventVoteBoxColor">@color/icon2017_transparent_purple_bright</item>
+        <item name="eventDescriptionTextColor">@color/icon2017_purple_bright</item>
+        <item name="eventTitleBackground">@drawable/icon2017_event_title_background</item>
+        <item name="eventTitleTextColor">@color/icon2017_purple_bright</item>
+        <!-- Feedback Screen -->
+        <item name="progressBarDrawable">@drawable/icon2017_rotating_circular_progress_bar</item>
+        <!-- Programme Screen -->
+        <item name="eventTimeHeaderBackground">@null</item>
+    </style>
+
+    <style name="AppBaseTheme.Icon2017.Toolbar.Event" parent="AppBaseTheme.Icon2017.Toolbar">
+    </style>
+
+
+    <style name="AppDialogTheme.Icon2017" parent="Theme.AppCompat.Light.Dialog">
+        <!-- This is the default starting API23. In any case the title is always left-justified so it's best to not use it. -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="colorAccent">@color/brown</item>
+    </style>
+
+    <style name="AppAlertDialogTheme.Icon2017" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/brown</item>
+    </style>
+
+    <style name="AppBaseTheme.Icon2017.Toolbar.Splash">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
+    <style name="OverflowMenu.Icon2017" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_more_vert_black_24dp</item>
+    </style>
+</resources>

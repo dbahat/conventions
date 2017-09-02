@@ -8,21 +8,21 @@ import android.content.Intent;
  * See https://azure.microsoft.com/en-us/documentation/articles/notification-hubs-android-get-started/
  */
 public class AzureNotificationRegistrationService extends IntentService {
-    private static final String TAG = AzureNotificationRegistrationService.class.getSimpleName();
+	private static final String TAG = AzureNotificationRegistrationService.class.getSimpleName();
 
-    public AzureNotificationRegistrationService() {
-        super(TAG);
-    }
+	public AzureNotificationRegistrationService() {
+		super(TAG);
+	}
 
-    @Override
-    protected void onHandleIntent(Intent intent) {
-        AzurePushNotifications notifications = new AzurePushNotifications(this);
-        if (!notifications.isRegistered()) {
-	        try {
-		        notifications.register();
-	        } catch (Exception e) {
-		        // Nothing we can do about it from here... we'll try again next time
-	        }
-        }
-    }
+	@Override
+	protected void onHandleIntent(Intent intent) {
+		AzurePushNotifications notifications = new AzurePushNotifications(this);
+		if (!notifications.isRegistered()) {
+			try {
+				notifications.register();
+			} catch (Exception e) {
+				// Nothing we can do about it from here... we'll try again next time
+			}
+		}
+	}
 }

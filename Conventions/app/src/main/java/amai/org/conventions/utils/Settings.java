@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import amai.org.conventions.events.SearchCategory;
 import amai.org.conventions.model.conventions.Convention;
 
 public class Settings {
@@ -87,7 +88,14 @@ public class Settings {
 	public List<String> getProgrammeSearchCategories(Context context) {
 		Set<String> categories = sharedPreferences.getStringSet(PROGRAMME_SEARCH_CATEGORIES, null);
 		if (categories == null) {
-			return Convention.getInstance().getAggregatedSearchCategories();
+			List<SearchCategory> searchCategories = Convention.getInstance().getAggregatedEventTypesSearchCategories(context);
+			// Flatten the list
+			return CollectionUtils.map(searchCategories, new CollectionUtils.Mapper<SearchCategory, String>() {
+				@Override
+				public String map(SearchCategory item) {
+					return item.getName();
+				}
+			});
 		}
 		return new ArrayList<>(categories);
 	}

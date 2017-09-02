@@ -218,10 +218,8 @@ public class ShowNotificationService extends Service {
 	    Intent openAppIntent = new Intent(this, UpdatesActivity.class)
 			    .setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
 			    .setAction(Type.Push.toString() + messageId + "_" + notificationId)
-			    .putExtra(PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION_ID, notificationId)  // To prevent seeing the same notification twice
-			    .putExtra(PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION_MESSAGE_ID, messageId)
-			    .putExtra(PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION_MESSAGE, message)
-			    .putExtra(PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION_CATEGORY, category);
+				// notificationId is used to prevent seeing the same notification twice
+				.putExtra(PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION, new PushNotification(notificationId, messageId, message, category));
 
         Notification.Builder builder = getDefaultNotificationBuilder()
                 .setContentTitle(getString(R.string.app_name)) // Showing the app name as title to be consistent with iOS behavior

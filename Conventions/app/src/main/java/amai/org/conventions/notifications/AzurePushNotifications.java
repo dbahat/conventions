@@ -16,9 +16,9 @@ import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Log;
 
 public class AzurePushNotifications {
-    public static final String SENDER_ID = "377234495790";
-    public static final String HUB_NAME = "conventions";
-    public static final String HUB_LISTEN_CONNECTION_STRING = "Endpoint=sb://sff-conventions.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=dCrJSDNwpotcGHGwLo4EKObl8cAtVVagaUO3CtPuMSo=";
+	public static final String SENDER_ID = "377234495790";
+	public static final String HUB_NAME = "conventions";
+	public static final String HUB_LISTEN_CONNECTION_STRING = "Endpoint=sb://sff-conventions.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=dCrJSDNwpotcGHGwLo4EKObl8cAtVVagaUO3CtPuMSo=";
 
 	private static String TAG = AzurePushNotifications.class.getSimpleName();
 	public static final String IS_ADVANCED_OPTIONS_ENABLED = "isAdvancedOptionsEnabled";
@@ -111,6 +111,7 @@ public class AzurePushNotifications {
 
 	public interface RegistrationListener {
 		void onSuccess();
+
 		void onError();
 	}
 }

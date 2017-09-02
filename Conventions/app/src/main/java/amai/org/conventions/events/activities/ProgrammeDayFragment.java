@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -30,8 +29,7 @@ import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.DefaultEventFavoriteChangedListener;
 import amai.org.conventions.events.ProgrammeConventionEvent;
-import amai.org.conventions.events.ViewPagerAnimator;
-import amai.org.conventions.events.adapters.SwipeableEventsViewOrHourAdapter;
+import amai.org.conventions.events.adapters.EventsViewOrHourAdapter;
 import amai.org.conventions.events.holders.TimeViewHolder;
 import amai.org.conventions.map.AggregatedEventTypes;
 import amai.org.conventions.model.ConventionEvent;
@@ -48,7 +46,7 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 	private static final String STATE_PREVENT_SCROLLING = "StatePreventScrolling";
 
 	private SwipeRefreshLayout swipeLayout;
-	private SwipeableEventsViewOrHourAdapter adapter;
+	private EventsViewOrHourAdapter adapter;
 	private StickyListHeadersListView listView;
 	private List<ProgrammeConventionEvent> events;
 	private EventsListener listener;
@@ -80,11 +78,11 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 
 		swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.programme_swipe_layout);
 		swipeLayout.setOnRefreshListener(this);
-		swipeLayout.setColorSchemeColors(ThemeAttributes.getColor(container.getContext(), R.attr.toolbarBackground));
+		swipeLayout.setColorSchemeColors(ThemeAttributes.getColor(container.getContext(), R.attr.swipeToRefreshColor));
 
 		listView = (StickyListHeadersListView) view.findViewById(R.id.programmeList);
 		events = getEventsList(eventTypesFilter);
-		adapter = new SwipeableEventsViewOrHourAdapter(events);
+		adapter = new EventsViewOrHourAdapter(events);
 		listView.setAdapter(adapter);
 		adapter.setOnEventFavoriteChangedListener(new DefaultEventFavoriteChangedListener(listView) {
 			@Override
@@ -106,7 +104,7 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 				listView.setOnTouchListener(new View.OnTouchListener() {
 					@Override
 					public boolean onTouch(View v, MotionEvent event) {
-						// For some reason if the user touches the list view after scrolling ends (before bounce), there is no down event
+						// For some reason if the user touches the list view after scrolling ends, there is no down event
 						if (event.getActionMasked() == MotionEvent.ACTION_DOWN || event.getActionMasked() == MotionEvent.ACTION_MOVE) {
 							cancelScroll = true;
 							listView.setOnTouchListener(null);
@@ -375,7 +373,6 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 								listView.postDelayed(new Runnable() {
 									@Override
 									public void run() {
-										triggerBounceAnimationIfNeeded();
 										listView.setOnTouchListener(null);
 									}
 								}, 1500);
@@ -393,20 +390,9 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 		}
 	}
 
-	private void triggerBounceAnimationIfNeeded() {
-		if (!Convention.getInstance().hasFavorites() && !cancelScroll) {
-			if (listView.getListChildCount() > 1) {
-				// Apply the animation on the second listView child, since the first will always be hidden by a sticky header
-				View currentEvent = listView.getListChildAt(1);
-
-				ViewPager currentEventViewPager = (ViewPager) currentEvent.findViewById(R.id.swipe_pager);
-				ViewPagerAnimator.applyBounceAnimation(currentEventViewPager);
-			}
-		}
-	}
-
 	public interface EventsListener {
 		void onEventFavoriteChanged(ConventionEvent updatedEvent);
+
 		void onRefresh();
 	}
 }

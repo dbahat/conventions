@@ -3,6 +3,7 @@ package amai.org.conventions.events.activities;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,7 +15,8 @@ import java.util.Collections;
 import java.util.List;
 
 import sff.org.conventions.R;
-import amai.org.conventions.events.adapters.SwipeableEventsViewAdapter;
+import amai.org.conventions.ThemeAttributes;
+import amai.org.conventions.events.adapters.EventsViewAdapter;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
 import amai.org.conventions.model.conventions.Convention;
@@ -24,7 +26,7 @@ import amai.org.conventions.utils.Dates;
 public class HallDayFragment extends Fragment {
 	private static final String ARGS_HALL_NAME = "ArgHallName";
 	private static final String ARGS_DATE = "ArgDate";
-	private SwipeableEventsViewAdapter adapter;
+	private EventsViewAdapter adapter;
 
 	public static HallDayFragment newInstance(String hallName, Calendar date) {
 		HallDayFragment fragment = new HallDayFragment();
@@ -45,6 +47,7 @@ public class HallDayFragment extends Fragment {
 		String hallName = getArguments().getString(ARGS_HALL_NAME);
 
 		RecyclerView hallEventsList = (RecyclerView) view.findViewById(R.id.hallEventsList);
+
 		List<ConventionEvent> events = Convention.getInstance().findEventsByHall(hallName);
 		events = CollectionUtils.filter(events, new CollectionUtils.Predicate<ConventionEvent>() {
 			@Override
@@ -61,9 +64,13 @@ public class HallDayFragment extends Fragment {
 
 		Collections.sort(events, new ConventionEventComparator());
 
-		adapter = new SwipeableEventsViewAdapter(events, hallEventsList);
+		adapter = new EventsViewAdapter(events, hallEventsList);
 		hallEventsList.setAdapter(adapter);
 		hallEventsList.setLayoutManager(new LinearLayoutManager(getActivity()));
+		DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(),
+				DividerItemDecoration.VERTICAL);
+		dividerItemDecoration.setDrawable(ThemeAttributes.getDrawable(getActivity(), R.attr.eventListDivider));
+		hallEventsList.addItemDecoration(dividerItemDecoration);
 
 		return view;
 	}

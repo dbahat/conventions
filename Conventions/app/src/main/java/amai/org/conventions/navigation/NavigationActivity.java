@@ -3,7 +3,6 @@ package amai.org.conventions.navigation;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.PictureDrawable;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -13,13 +12,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
-import com.caverock.androidsvg.SVG;
 import com.google.android.gms.analytics.HitBuilders;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,7 +31,7 @@ import amai.org.conventions.ArrivalMethodsActivity;
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.DiscountsActivity;
 import amai.org.conventions.FeedbackActivity;
-import amai.org.conventions.ImageHandler;
+import amai.org.conventions.HomeActivity;
 import amai.org.conventions.SplashActivity;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.activities.EventActivity;
@@ -38,40 +39,47 @@ import amai.org.conventions.events.activities.MyEventsActivity;
 import amai.org.conventions.events.activities.ProgrammeActivity;
 import amai.org.conventions.map.MapActivity;
 import amai.org.conventions.model.conventions.Convention;
+import amai.org.conventions.notifications.PushNotification;
+import amai.org.conventions.notifications.PushNotificationDialogPresenter;
 import amai.org.conventions.settings.SettingsActivity;
 import amai.org.conventions.updates.UpdatesActivity;
 import sff.org.conventions.R;
 
+import static amai.org.conventions.notifications.PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION;
+
 
 public abstract class NavigationActivity extends AppCompatActivity {
-	public static final String EXTRA_NAVIGATED_FROM_HOME = "ExtraNavigatedFromHome";
 	public static final String EXTRA_INITIALIZE = "ExtraInitialize";
 	public static final String EXTRA_EXIT_ON_BACK = "ExtraExitOnBack";
+	public static final String EXTRA_SHOW_HOME_ON_BACK = "ExtraShowHomeOnBack";
 
-	private boolean navigatedFromHome;
-    private Toolbar navigationToolbar;
+	private TextView navigationToolbarTitle;
+	private Toolbar navigationToolbar;
 	private boolean exitOnBack;
+	private boolean showHomeOnBack;
 	private FrameLayout contentContainer;
 	private FloatingActionButton actionButton;
 	private DrawerLayout navigationDrawer;
+	private PushNotification receivedPushNotification;
 
 	@Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_navigation);
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_navigation);
 
-	    navigatedFromHome = getIntent().getBooleanExtra(EXTRA_NAVIGATED_FROM_HOME, false);
-	    exitOnBack = getIntent().getBooleanExtra(EXTRA_EXIT_ON_BACK, false);
+		exitOnBack = getIntent().getBooleanExtra(EXTRA_EXIT_ON_BACK, false);
+		showHomeOnBack = getIntent().getBooleanExtra(EXTRA_SHOW_HOME_ON_BACK, false);
 
 		if (getIntent().getBooleanExtra(EXTRA_INITIALIZE, false) &&
 				!(savedInstanceState != null && savedInstanceState.getBoolean(EXTRA_INITIALIZE, true))) {
 			new ApplicationInitializer().initialize(this.getApplicationContext());
 		}
 
-	    navigationToolbar = (Toolbar) findViewById(R.id.navigation_toolbar);
+		navigationToolbar = (Toolbar) findViewById(R.id.navigation_toolbar);
+		navigationToolbarTitle = (TextView) findViewById(R.id.navigation_toolbar_title);
 		navigationDrawer = (DrawerLayout) findViewById(R.id.navigation_drawer);
-        setupActionBar(navigationToolbar);
-        navigationToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+		setupActionBar(navigationToolbar);
+		navigationToolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				onNavigationButtonClicked();
@@ -83,18 +91,48 @@ public abstract class NavigationActivity extends AppCompatActivity {
 			}
 		});
 
-		navigationToolbar.post(new Runnable() {
-			@Override
-			public void run() {
-				if (!ConventionsApplication.settings.wasNavigationPopupOpened()) {
-					openNavigationDrawer(false);
-					ConventionsApplication.settings.setNavigationPopupOpened();
-				}
-			}
-		});
-
 		initializeNavigationDrawer(); // In case it was already open
-    }
+
+		// We will display the notification once during onResume to let child activities override it safely
+		// (after their onCreate is called)
+		this.receivedPushNotification = getNotificationFromIntent(getIntent());
+	}
+
+	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
+		// Add extras to the original intent so we will focus on the same update on screen rotation
+		getIntent().putExtras(intent.getExtras());
+
+		// In case the user clicked a push notification while inside the activity, have the activity
+		// show the push notification (as we won't re-create the activity, not to create an extra copy of it on the activity stack)
+		showPushNotificationIfReceived(getNotificationFromIntent(intent));
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		showPushNotificationIfReceived(this.receivedPushNotification);
+		this.receivedPushNotification = null;
+	}
+
+	private PushNotification getNotificationFromIntent(Intent intent) {
+		Serializable pushNotification = intent.getSerializableExtra(EXTRA_PUSH_NOTIFICATION);
+		if (pushNotification instanceof PushNotification) {
+			return (PushNotification) pushNotification;
+		}
+		return null;
+	}
+
+	private void showPushNotificationIfReceived(PushNotification pushNotification) {
+		if (pushNotification != null) {
+			onPushNotificationReceived(pushNotification);
+		}
+	}
+
+	protected void onPushNotificationReceived(PushNotification pushNotification) {
+		new PushNotificationDialogPresenter().present(this, pushNotification);
+	}
 
 	private void openNavigationDrawer(boolean animate) {
 		initializeNavigationDrawer();
@@ -107,12 +145,26 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		super.onSaveInstanceState(outState);
 	}
 
+	// Overriding onCreateOptionsMenu so we can tell when extending classes completed inflating the options menu.
+	// In order for extending classes to create an options menu, override onCreateCustomOptionsMenu();
+	// Needed so we can take actions based on the number of actions the activity defined (e.g. adjust the toolbar title margin to be centered).
+	@Override
+	public final boolean onCreateOptionsMenu(Menu menu) {
+		return onCreateCustomOptionsMenu(menu);
+	}
+
+	// Alternative callback for creating the options menu for derived classes to implement.
+	protected boolean onCreateCustomOptionsMenu(Menu menu) {
+		return super.onCreateOptionsMenu(menu);
+	}
+
 	protected void onNavigationButtonClicked() {
 		// Children can inherit this
 	}
 
 	private void initializeNavigationDrawer() {
 		final List<NavigationItem> items = new ArrayList<>(Arrays.asList(
+				new NavigationItem(HomeActivity.class, getString(R.string.home), ContextCompat.getDrawable(this, R.drawable.ic_home_white_36dp)),
 				new NavigationItem(ProgrammeActivity.class, getString(R.string.programme_title), ContextCompat.getDrawable(this, R.drawable.events_list)),
 				new NavigationItem(MyEventsActivity.class, getString(R.string.my_events_title), ContextCompat.getDrawable(this, R.drawable.events_list_with_star))
 		));
@@ -135,29 +187,16 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		navigationItems.setAdapter(new NavigationItemsAdapter(this, items));
 	}
 
-    private void setupActionBar(Toolbar toolbar) {
-        this.setSupportActionBar(toolbar);
-        ActionBar actionBar = this.getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(false);
-            actionBar.setDisplayShowTitleEnabled(true);
-	        int logoType = ThemeAttributes.getInteger(this, R.attr.toolbarLogoType);
-	        Drawable drawable = null;
-	        switch (logoType) {
-		        // bitmap
-		        case 0:
-			        drawable = ImageHandler.getToolbarLogo(this);
-			        break;
-		        // svg
-		        case 1:
-			        toolbar.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-	                SVG logoSVG = ImageHandler.loadSVG(this, ThemeAttributes.getResourceId(this, R.attr.toolbarLogo));
-			        drawable = new PictureDrawable(logoSVG.renderToPicture());
-			        break;
-	        }
-            toolbar.setNavigationIcon(drawable);
-        }
-    }
+	private void setupActionBar(Toolbar toolbar) {
+		this.setSupportActionBar(toolbar);
+		ActionBar actionBar = this.getSupportActionBar();
+		if (actionBar != null) {
+			actionBar.setDisplayHomeAsUpEnabled(false);
+			actionBar.setDisplayShowTitleEnabled(false);
+			toolbar.setNavigationIcon(ThemeAttributes.getDrawable(this, R.attr.toolbarLogo));
+		}
+	}
+
 
 	protected View setContentInContentContainer(int layoutResID) {
 		return setContentInContentContainer(layoutResID, true, true);
@@ -167,24 +206,37 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		return setContentInContentContainer(layoutResID, useDefaultBackground, true);
 	}
 
-    protected View setContentInContentContainer(int layoutResID, boolean useDefaultBackground, boolean hideToolbarOnScroll) {
-        contentContainer = (FrameLayout) findViewById(R.id.navigation_content_view_container);
-        getLayoutInflater().inflate(layoutResID, contentContainer, true);
+	protected View setContentInContentContainer(int layoutResID, boolean useDefaultBackground, boolean hideToolbarOnScroll) {
+		contentContainer = (FrameLayout) findViewById(R.id.navigation_content_view_container);
+		// Removing all previous views before attaching the newly inflated layout to support calling setContentInContentContainer() more then once
+		contentContainer.removeAllViews();
+		getLayoutInflater().inflate(layoutResID, contentContainer, true);
 
-	    if (!hideToolbarOnScroll) {
-		    AppBarLayout.LayoutParams layoutParams = (AppBarLayout.LayoutParams) navigationToolbar.getLayoutParams();
-		    layoutParams.setScrollFlags(0);
-		    navigationToolbar.setLayoutParams(layoutParams);
-	    }
+		if (!hideToolbarOnScroll) {
+			AppBarLayout.LayoutParams layoutParams = (AppBarLayout.LayoutParams) navigationToolbar.getLayoutParams();
+			layoutParams.setScrollFlags(0);
+			navigationToolbar.setLayoutParams(layoutParams);
+		}
 
-	    if (useDefaultBackground) {
-		    // Set the background in code due to an Android bug that if the background is set in the xml
-		    // and then removed, the foreground isn't displayed either and it's not possible to bring it back
-		    contentContainer.setBackgroundColor(ThemeAttributes.getColor(this, android.R.attr.colorBackground));
-	    }
+		if (useDefaultBackground) {
+			// Set the background in code due to an Android bug that if the background is set in the xml
+			// and then removed, the foreground isn't displayed either and it's not possible to bring it back
+			setBackgroundColor(ThemeAttributes.getColor(this, android.R.attr.colorBackground));
+		} else {
+			removeBackground();
+		}
 
-	    return contentContainer;
-    }
+		return contentContainer;
+	}
+
+	protected void setToolbarAndContentContainerBackground(Drawable drawable) {
+		View toolbarAndContentContainer = findViewById(R.id.toolbarAndContentContainer);
+		toolbarAndContentContainer.setBackground(drawable);
+	}
+
+	protected void setToolbarBackgroundColor(int color) {
+		navigationToolbar.setBackgroundColor(color);
+	}
 
 	protected void setBackgroundColor(int color) {
 		if (contentContainer != null) {
@@ -229,7 +281,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 
 	public void onConventionEventClicked(View view) {
 		navigateToEvent((String) view.getTag());
-    }
+	}
 
 	protected void navigateToEvent(String id) {
 		Bundle bundle = new Bundle();
@@ -242,16 +294,26 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	protected void addCustomEventActivityParameters(Bundle bundle) {
 	}
 
-    protected void setToolbarTitle(String titleText) {
-        getSupportActionBar().setTitle(titleText);
-    }
+	protected void setToolbarTitle(String titleText) {
+		navigationToolbarTitle.setText(titleText);
+	}
 
-    protected void navigateToActivity(Class<? extends Activity> activityToNavigateTo) {
-        // When navigating using the main popup window, clear the activity stack so the back button would return to the home screen
-        navigateToActivity(activityToNavigateTo, true, null);
-    }
+	protected void setToolbarTitle(Drawable drawable) {
+		navigationToolbarTitle.setBackground(drawable);
+	}
 
-    protected void navigateToActivity(Class<? extends Activity> activityToNavigateTo, boolean clearBackStack, Bundle extras) {
+	protected void setToolbarGravity(int gravity) {
+		FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) navigationToolbarTitle.getLayoutParams();
+		layoutParams.gravity = gravity;
+		navigationToolbarTitle.setLayoutParams(layoutParams);
+	}
+
+	protected void navigateToActivity(Class<? extends Activity> activityToNavigateTo) {
+		// When navigating using the main popup window, clear the activity stack so the back button would return to the home screen
+		navigateToActivity(activityToNavigateTo, true, null);
+	}
+
+	protected void navigateToActivity(Class<? extends Activity> activityToNavigateTo, boolean clearBackStack, Bundle extras) {
 		closeDrawerIfNeeded();
 
 		// In case we were asked to navigate to the activity we're already in, ignore the request
@@ -262,13 +324,19 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		Intent intent = new Intent(this, activityToNavigateTo);
 		if (clearBackStack) {
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-			// If the user presses back when the back stack is clear we want to exit the application.
+			// If the user presses back when the back stack is clear and the current screen is the home activity
+			// we want to exit the application.
 			// For some reason the splash activity remains on the back stack even with these flags
 			// (it's probably a good thing due to the issue described in SplashActivity)
 			// so we must explicitly handle the back in this case.
 			// This flag only has a meaning if we're navigating to a NavigationActivity.
-			if (NavigationActivity.class.isAssignableFrom(activityToNavigateTo)) {
+			if (activityToNavigateTo.equals(HomeActivity.class)) {
 				intent.putExtra(EXTRA_EXIT_ON_BACK, true);
+			} else if (NavigationActivity.class.isAssignableFrom(activityToNavigateTo)) {
+				// When the user presses back and the back stack is clear, and we're not in the home activity,
+				// we should go back to the home activity.
+				// This flag only has a meaning if we're navigating to a NavigationActivity.
+				intent.putExtra(EXTRA_SHOW_HOME_ON_BACK, true);
 			}
 			finish();
 		}
@@ -286,16 +354,16 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		}
 	}
 
-    private void closeDrawerIfNeeded() {
-	    if (navigationDrawer.isDrawerOpen(GravityCompat.START)) {
-		    navigationDrawer.closeDrawer(GravityCompat.START, false);
-	    }
-    }
+	private void closeDrawerIfNeeded() {
+		if (navigationDrawer.isDrawerOpen(GravityCompat.START)) {
+			navigationDrawer.closeDrawer(GravityCompat.START, false);
+		}
+	}
 
 	@Override
 	public void onBackPressed() {
 		if (exitOnBack) {
-			// We want to exist when pressing back because the SplashActivity is still in the back stack
+			// We want to exit when pressing back because the SplashActivity is still in the back stack
 			// and will be displayed if we don't tell it to finish. See SplashActivity onCreate for the
 			// reason it's in the back stack instead of being finished.
 			Bundle bundle = new Bundle();
@@ -306,6 +374,8 @@ public abstract class NavigationActivity extends AppCompatActivity {
 			intent.putExtras(bundle);
 			startActivity(intent);
 			return;
+		} else if (showHomeOnBack) {
+			navigateToActivity(HomeActivity.class);
 		}
 		super.onBackPressed();
 	}

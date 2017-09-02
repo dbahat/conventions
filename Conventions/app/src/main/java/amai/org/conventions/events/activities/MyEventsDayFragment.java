@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import java.util.Date;
 import java.util.List;
 
 import sff.org.conventions.R;
+import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.adapters.EventGroupsAdapter;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.utils.CollectionUtils;
@@ -40,6 +42,60 @@ public class MyEventsDayFragment extends Fragment {
 		return fragment;
 	}
 
+	/**
+	 * Split events to conflicting groups. A conflict between 2 events happens when one of events starts
+	 * after the other event's start time and before its end time.
+	 *
+	 * @param events - list of events sorted by start time
+	 * @return a list of event groups. Each event group is a list of events, with the same sort order as
+	 * sent, where each event conflicts with at least one other event in the group. Events from different
+	 * groups do not conflict with each other. The groups are ordered by the first event's start time.
+	 */
+	public static ArrayList<EventsTimeSlot> getNonConflictingGroups(EventsTimeSlot previous, List<ConventionEvent> events, EventsTimeSlot next) {
+		ArrayList<EventsTimeSlot> nonConflictingTimeSlots = new ArrayList<>();
+
+		Date currGroupEndTime = (previous != null ? previous.getEndTime() : null);
+		EventsTimeSlot currSlot = previous;
+		for (ConventionEvent event : events) {
+			// Non-conflicting event - it's either the first event or it starts after
+			// (or at the same time as) the current group ends.
+			if (currSlot == null || !event.getStartTime().before(currGroupEndTime)) {
+				// If we have a previous group, add it to the groups list
+				if (currSlot != null) {
+					if (currSlot != previous) {
+						nonConflictingTimeSlots.add(currSlot);
+					}
+
+					// If there are at least 30 minutes between this group and the next, add a free time slot
+					if (event.getStartTime().getTime() - currGroupEndTime.getTime() >= 30 * Dates.MILLISECONDS_IN_MINUTE) {
+						EventsTimeSlot freeSlot = new EventsTimeSlot(currGroupEndTime, event.getStartTime());
+						nonConflictingTimeSlots.add(freeSlot);
+					}
+				}
+				currSlot = new EventsTimeSlot();
+				currGroupEndTime = null;
+			}
+			currSlot.addEvent(event);
+			if (currGroupEndTime == null || event.getEndTime().after(currGroupEndTime)) {
+				currGroupEndTime = event.getEndTime();
+			}
+		}
+
+		// Add the last group
+		if (currSlot != null) {
+			if (currSlot != previous) {
+				nonConflictingTimeSlots.add(currSlot);
+			}
+
+			if (next != null && next.getStartTime().getTime() - currGroupEndTime.getTime() >= 30 * Dates.MILLISECONDS_IN_MINUTE) {
+				EventsTimeSlot freeSlot = new EventsTimeSlot(currGroupEndTime, next.getStartTime());
+				nonConflictingTimeSlots.add(freeSlot);
+			}
+		}
+
+		return nonConflictingTimeSlots;
+	}
+
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,6 +107,10 @@ public class MyEventsDayFragment extends Fragment {
 		emptyView = view.findViewById(R.id.my_events_empty);
 		eventsList = (RecyclerView) view.findViewById(R.id.myEventsList);
 		eventsList.setLayoutManager(new LinearLayoutManager(getActivity()));
+		DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(),
+				DividerItemDecoration.VERTICAL);
+		dividerItemDecoration.setDrawable(ThemeAttributes.getDrawable(getActivity(), R.attr.eventListDivider));
+		eventsList.addItemDecoration(dividerItemDecoration);
 
 		return view;
 	}
@@ -129,59 +189,6 @@ public class MyEventsDayFragment extends Fragment {
 			}
 		});
 		return events;
-	}
-
-	/**
-	 * Split events to conflicting groups. A conflict between 2 events happens when one of events starts
-	 * after the other event's start time and before its end time.
-	 * @param events - list of events sorted by start time
-	 * @return a list of event groups. Each event group is a list of events, with the same sort order as
-	 * sent, where each event conflicts with at least one other event in the group. Events from different
-	 * groups do not conflict with each other. The groups are ordered by the first event's start time.
-	 */
-	public static ArrayList<EventsTimeSlot> getNonConflictingGroups(EventsTimeSlot previous, List<ConventionEvent> events, EventsTimeSlot next) {
-		ArrayList<EventsTimeSlot> nonConflictingTimeSlots = new ArrayList<>();
-
-		Date currGroupEndTime = (previous != null ? previous.getEndTime() : null);
-		EventsTimeSlot currSlot = previous;
-		for (ConventionEvent event : events) {
-			// Non-conflicting event - it's either the first event or it starts after
-			// (or at the same time as) the current group ends.
-			if (currSlot == null || !event.getStartTime().before(currGroupEndTime)) {
-				// If we have a previous group, add it to the groups list
-				if (currSlot != null) {
-					if (currSlot != previous) {
-						nonConflictingTimeSlots.add(currSlot);
-					}
-
-					// If there are at least 30 minutes between this group and the next, add a free time slot
-					if (event.getStartTime().getTime() - currGroupEndTime.getTime() >= 30 * Dates.MILLISECONDS_IN_MINUTE) {
-						EventsTimeSlot freeSlot = new EventsTimeSlot(currGroupEndTime, event.getStartTime());
-						nonConflictingTimeSlots.add(freeSlot);
-					}
-				}
-				currSlot = new EventsTimeSlot();
-				currGroupEndTime = null;
-			}
-			currSlot.addEvent(event);
-			if (currGroupEndTime == null || event.getEndTime().after(currGroupEndTime)) {
-				currGroupEndTime = event.getEndTime();
-			}
-		}
-
-		// Add the last group
-		if (currSlot != null) {
-			if (currSlot != previous) {
-				nonConflictingTimeSlots.add(currSlot);
-			}
-
-			if (next != null && next.getStartTime().getTime() - currGroupEndTime.getTime() >= 30 * Dates.MILLISECONDS_IN_MINUTE) {
-				EventsTimeSlot freeSlot = new EventsTimeSlot(currGroupEndTime, next.getStartTime());
-				nonConflictingTimeSlots.add(freeSlot);
-			}
-		}
-
-		return nonConflictingTimeSlots;
 	}
 
 	private void updateVisibility(int datasetSize, RecyclerView eventsList, View emptyView) {

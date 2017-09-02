@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="sff.org.conventions"
-          xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    package="sff.org.conventions"
     android:versionCode="13"
     android:versionName="1.0.7">
 
@@ -12,6 +12,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <!-- Required for google GCM, for push notifications -->
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <uses-feature
@@ -32,47 +33,38 @@
         android:installLocation="auto"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppBaseTheme.Icon2016.Toolbar"
+        android:theme="@style/AppBaseTheme.Icon2017.Toolbar"
         tools:replace="android:icon, android:allowBackup">
-        <activity android:name="amai.org.conventions.SplashActivity" android:theme="@style/AppBaseTheme.Icon2016.Toolbar.Splash"
+        <activity android:name="amai.org.conventions.SplashActivity" android:theme="@style/AppBaseTheme.Icon2017.Toolbar.Splash"
                   android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="amai.org.conventions.events.activities.HallActivity" >
-        </activity>
-        <activity android:name="amai.org.conventions.events.activities.MyEventsActivity" >
-        </activity>
-        <activity android:name="amai.org.conventions.events.activities.ProgrammeActivity" >
-        </activity>
-        <activity android:name="amai.org.conventions.events.activities.ProgrammeSearchActivity" >
-        </activity>
-        <activity android:name="amai.org.conventions.map.MapActivity">
-        </activity>
+        <activity android:name="amai.org.conventions.events.activities.HallActivity"></activity>
+        <activity android:name="amai.org.conventions.events.activities.MyEventsActivity"></activity>
+        <activity android:name="amai.org.conventions.events.activities.ProgrammeActivity"></activity>
+        <activity android:name="amai.org.conventions.events.activities.ProgrammeSearchActivity"></activity>
+        <activity android:name="amai.org.conventions.map.MapActivity"></activity>
         <activity
             android:name="amai.org.conventions.events.activities.EventActivity"
-          android:windowSoftInputMode="adjustResize">
-        </activity>
-        <activity android:name="amai.org.conventions.ArrivalMethodsActivity" >
-        </activity>
+            android:theme="@style/AppBaseTheme.Icon2017.Toolbar.Event"
+            android:windowSoftInputMode="adjustResize"></activity>
+        <activity android:name="amai.org.conventions.ArrivalMethodsActivity"></activity>
         <activity
             android:name="amai.org.conventions.FeedbackActivity"
-            android:windowSoftInputMode="adjustResize">
-        </activity>
-        <activity android:name="amai.org.conventions.updates.UpdatesActivity">
-        </activity>
-        <activity android:name="amai.org.conventions.settings.SettingsActivity">
-        </activity>
-        <activity android:name="amai.org.conventions.DiscountsActivity">
-        </activity>
-        <activity android:name="amai.org.conventions.AboutActivity">
-        </activity>
+            android:windowSoftInputMode="adjustResize"></activity>
+        <activity android:name="amai.org.conventions.updates.UpdatesActivity"></activity>
+        <activity android:name="amai.org.conventions.settings.SettingsActivity"></activity>
+        <activity android:name="amai.org.conventions.DiscountsActivity"></activity>
+        <activity android:name="amai.org.conventions.AboutActivity"></activity>
+        <activity android:name="amai.org.conventions.HomeActivity" android:screenOrientation="portrait"/>
 
         <service
             android:name="amai.org.conventions.notifications.ShowNotificationService"
-            android:exported="false"/>
+            android:exported="false" />
         <service
             android:name="amai.org.conventions.notifications.AzureNotificationRegistrationService"
             android:exported="false"/>

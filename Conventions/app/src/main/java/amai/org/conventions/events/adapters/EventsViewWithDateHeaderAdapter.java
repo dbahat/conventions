@@ -10,24 +10,26 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import sff.org.conventions.R;
 import amai.org.conventions.events.holders.EventViewHolder;
 import amai.org.conventions.events.holders.TimeViewHolder;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.utils.Dates;
-import sff.org.conventions.R;
 
 public class EventsViewWithDateHeaderAdapter extends BaseAdapter {
 	private static final int ITEM_TYPE_EVENT = 0;
 	private static final int ITEM_TYPE_DATE = 1;
-	private List<Date> datesList;
+	private final boolean showHeaders;
+
 	private List<Object> eventsAndDates;
 
-	public EventsViewWithDateHeaderAdapter(List<ConventionEvent> eventsList) {
-		calculateItems(eventsList);
+	public EventsViewWithDateHeaderAdapter(List<ConventionEvent> eventsList, boolean showHeaders) {
+		this.showHeaders = showHeaders;
+		eventsAndDates = calculateItems(eventsList);
 	}
 
 	public void setEventsList(List<ConventionEvent> eventsList) {
-		calculateItems(eventsList);
+		eventsAndDates = calculateItems(eventsList);
 		notifyDataSetChanged();
 	}
 
@@ -85,8 +87,13 @@ public class EventsViewWithDateHeaderAdapter extends BaseAdapter {
 		return 2; // event and date
 	}
 
-	private void calculateItems(List<ConventionEvent> eventList) {
-		eventsAndDates = new ArrayList<>(eventList.size() + 1);
+	private List<Object> calculateItems(List<ConventionEvent> eventList) {
+		// For single day conventions no need to insert dates into the list.
+		if (!showHeaders) {
+			return new ArrayList<Object>(eventList);
+		}
+
+		List<Object> eventsAndDates = new ArrayList<>(eventList.size() + 1);
 		Date currHeader = null;
 		for (ConventionEvent event : eventList) {
 			Date header = getHeader(event);
@@ -96,6 +103,7 @@ public class EventsViewWithDateHeaderAdapter extends BaseAdapter {
 			eventsAndDates.add(event);
 			currHeader = header;
 		}
+		return eventsAndDates;
 	}
 
 	private Date getHeader(ConventionEvent event) {

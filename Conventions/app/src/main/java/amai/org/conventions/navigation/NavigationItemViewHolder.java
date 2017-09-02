@@ -38,7 +38,7 @@ public class NavigationItemViewHolder extends RecyclerView.ViewHolder {
 			});
 		}
 
-		// TODO this should be setCompoundDrawablesRelative(icon, null, null, null) but in API 17 and 18 it appears on the wrong side.
+		// this should be setCompoundDrawablesRelative(icon, null, null, null) but in API 17 and 18 it appears on the wrong side.
 		// I tried to fix it by setting the layout direction to RTL directly on the textview but it didn't work.
 		textView.setCompoundDrawables(null, null, icon, null);
 	}

@@ -4,9 +4,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="event_height">73dp</dimen>
-
-    <dimen name="navigation_popup_window_offset_y">-15dp</dimen>
-    <dimen name="navigation_popup_window_offset_x">10dp</dimen>
+    <dimen name="event_divider_height">1dp</dimen>
 
     <dimen name="update_extra_text_margin_for_top_update_lines">2dp</dimen>
     <dimen name="update_time_container_size">83dp</dimen>
@@ -28,10 +26,15 @@
     <dimen name="feedback_smiley_answer_margin">20dp</dimen>
     <dimen name="feedback_smiley_icon_size">50dp</dimen>
 
+    <!-- action bar item width copied from ActionMenuItemView (constant MAX_ICON_SIZE) -->
+    <dimen name="action_bar_item_width">32dp</dimen>
+
     <!-- Assumed status bar height (the real dimension is private @android:dimen/status_bar_height) -->
     <dimen name="status_bar_height">25dp</dimen>
     <!-- Assumed height of status bar + toolbar + tabs. Real height of toolbar and tabs is
          ?attr/actionBarSize which can only be accessed in runtime, and not before the activity is created.
          This is not correct for all devices but as close as it can be. -->
     <dimen name="status_bar_and_toolbar_and_tabs_height">137dp</dimen>
+
+    <dimen name="home_show_feedback_text_view_margins">80dp</dimen>
 </resources>

@@ -46,7 +46,7 @@
 
     <string name="event_feedback_mail_title">מייל אוטומטי - פידבק ל%s עבור האירוע</string>
     <string name="convention_feedback_mail_title">מייל אוטומטי - פידבק לפסטיבל %s</string>
-    <string name="feedback_send_mail_failed">לא ניתן לשלוח את הפידבק. נסה שנית מאוחר יותר</string>
+    <string name="feedback_send_failed">לא ניתן לשלוח את הפידבק. נסה שנית מאוחר יותר</string>
     <string name="feedback_sent">הפידבק נשלח. תודה!</string>
     <string name="feedback_sending_time_over">זמן שליחת הפידבק הסתיים</string>
 
@@ -166,10 +166,8 @@
     <string name="map_floor_search_title">חיפוש במפה</string>
     <string name="show_only_halls">הצג אולמות בלבד</string>
     <string name="goto_stands_list">הצג דוכנים</string>
-    <string name="commercial_stand">דוכנים מסחריים</string>
-    <string name="independent_stand">קהילה יוצרת</string>
-    <string name="donation_stand">תרומה</string>
-    <string name="other_stand">שונות</string>
+    <string name="regular_stand">דוכנים</string>
+    <string name="artist_stand">סמטת האמנים</string>
     <string name="search_locations">מתחם</string>
     <string name="search_stands">דוכנים</string>
     <string name="next_event_start">האירוע הבא מתחיל בעוד %1$s ב%2$s</string>
@@ -229,4 +227,26 @@
 ]]></string>
     <string name="discounts">הטבות</string>
     <string name="navigate_public_transportation">ניווט בתחבורה ציבורית</string>
+    <string name="home">בית</string>
+    <string name="dash">–</string>
+    <string name="dash_with_spaces">\u0020–\u0020</string>
+
+    <string name="home_convention_start_time">עוד %d ימים!</string>
+    <string name="home_help_us_improve">עזור לנו להשתפר</string>
+    <string name="home_send_feedback">לשליחת פידבק</string>
+    <string name="home_show_feedback">הצג פידבק</string>
+    <string name="home_go_to_my_events">עבור לאירועים שלי</string>
+    <string name="home_go_to_programme">לכל האירועים</string>
+    <string name="home_now_showing">כעת: %s</string>
+    <string name="home_upcoming_event_time">בעוד %s</string>
+    <string name="home_upcoming_programme_events">אירועים שמתחילים ב-%s</string>
+    <string name="home_convention_ended">הכנס נגמר</string>
+    <string name="to_vote_survey">להצבעה</string>
+    <string name="survey_vote_details">באירוע זה ניתן להצביע עבור חביב הקהל.</string>
+    <string name="survey_vote_note">שימו לב! ניתן להצביע פעם אחת בלבד, ורק לאחר שכל המתמודדים עלו לבמה.</string>
+    <string name="vote_survey_retrieve_answers_error">לא ניתן להציג את טופס ההצבעה. בדוק שחיבור האינטרנט תקין ונסה שנית מאוחר יותר.</string>
+    <string name="event_vote_survey_title">הצבעה לאירוע %s</string>
+    <string name="event_vote_survey_sent">ההצבעה נשלחה. תודה!</string>
+    <string name="vote_send_error">לא ניתן להצביע. נסה שנית מאוחר יותר.</string>
+    <string name="home_current_event_vote_possible">לחץ להצבעה עבור חביב הקהל!</string>
 </resources>

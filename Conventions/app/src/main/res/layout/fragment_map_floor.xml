@@ -6,7 +6,6 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              android:background="?floorBackground"
               tools:context="amai.org.conventions.map.MapFloorFragment"
               tools:ignore="Overdraw">
 
@@ -15,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="5dp"
-        android:background="@color/very_light_gray"
+        android:background="@color/transparent_black"
         android:orientation="vertical">
 
         <amai.org.conventions.customviews.AspectRatioImageView
@@ -91,13 +90,16 @@
                 android:background="?locationDetailsTopLineColor"/>
 
             <LinearLayout
-                android:padding="5dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:background="?locationDetailsBackground">
 
                 <RelativeLayout
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -108,6 +110,7 @@
                         android:layout_height="wrap_content"
                         style="@style/TextAppearance.AppCompat.Title"
                         android:layout_alignParentStart="true"
+                        android:textColor="?locationDetailsTitleColor"
                         tools:text="Hall name"/>
 
                     <ImageView
@@ -128,6 +131,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
+                <View
+                    android:id="@+id/location_events_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/event_divider_height"
+                    android:background="?eventListDivider"/>
+
                 <amai.org.conventions.events.EventView
                     android:id="@+id/location_next_event"
                     android:layout_width="match_parent"
@@ -135,6 +144,8 @@
 
                 <!-- Go to stands list button - used for stand areas -->
                 <Button
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
                     android:id="@+id/goto_stands_list_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -152,7 +163,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="5dp"
-        android:background="@color/very_light_gray"
+        android:background="@color/transparent_black"
         android:orientation="vertical">
 
         <View

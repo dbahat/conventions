@@ -45,6 +45,7 @@ import java.util.List;
 
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.ImageHandler;
+import sff.org.conventions.R;
 import amai.org.conventions.customviews.AspectRatioSVGImageView;
 import amai.org.conventions.customviews.InterceptorLinearLayout;
 import amai.org.conventions.events.EventView;
@@ -63,14 +64,13 @@ import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Views;
 import pl.polidea.view.ZoomView;
-import sff.org.conventions.R;
 
 /**
  * A fragment showing a single map floor
  */
 public class MapFloorFragment extends Fragment implements Marker.MarkerListener {
 
-    private static final String ARGS_FLOOR_NUMBER = "FloorNumber";
+	private static final String ARGS_FLOOR_NUMBER = "FloorNumber";
 	private static final String ARGS_SHOW_ANIMATION = "ShowAnimation";
 	private static final String STATE_SELECTED_LOCATIONS = "StateSelectedLocation";
 	private static final String STATE_LOCATION_DETAILS_OPEN = "StateLocationDetailsOpen";
@@ -86,18 +86,19 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
 	private View progressBar;
 	private ZoomView mapZoomView;
-    private ImageLayout mapFloorImage;
-    private View upArrow;
-    private View downArrow;
+	private ImageLayout mapFloorImage;
+	private View upArrow;
+	private View downArrow;
 
 	private InterceptorLinearLayout locationDetails;
 	private TextView locationTitle;
 	private ImageView locationDetailsCloseImage;
 	private EventView locationCurrentEvent;
+	private View locationEventsDivider;
 	private EventView locationNextEvent;
 	private Button gotoStandsListButton;
 
-    private OnMapFloorEventListener mapFloorEventsListener;
+	private OnMapFloorEventListener mapFloorEventsListener;
 
 	private List<Marker> floorMarkers = new LinkedList<>();
 	private List<MapLocation> locationsToSelect;
@@ -106,24 +107,24 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 	private boolean preventFragmentScroll;
 
 	public MapFloorFragment() {
-        // Required empty public constructor
-    }
+		// Required empty public constructor
+	}
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-	    setHasOptionsMenu(true);
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_map_floor, container, false);
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	                         Bundle savedInstanceState) {
+		setHasOptionsMenu(true);
+		// Inflate the layout for this fragment
+		View view = inflater.inflate(R.layout.fragment_map_floor, container, false);
 
-        resolveUIElements(view);
-	    initializeLocationDetails();
-        initializeEventsListener();
-	    setMapClickListeners();
-        configureMapFloorAndRestoreState(savedInstanceState);
+		resolveUIElements(view);
+		initializeLocationDetails();
+		initializeEventsListener();
+		setMapClickListeners();
+		configureMapFloorAndRestoreState(savedInstanceState);
 
-	    return view;
-    }
+		return view;
+	}
 
 	public Floor getFloor() {
 		return floor;
@@ -166,26 +167,26 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 	}
 
 	@Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
 
-        if (!(activity instanceof OnMapFloorEventListener)) {
-            throw new AssertionError("This fragment must be invoked form an activity implementing "
-                    + mapFloorEventsListener.getClass().getSimpleName());
-        }
+		if (!(activity instanceof OnMapFloorEventListener)) {
+			throw new AssertionError("This fragment must be invoked form an activity implementing "
+					+ mapFloorEventsListener.getClass().getSimpleName());
+		}
 
-        mapFloorEventsListener = (OnMapFloorEventListener) activity;
+		mapFloorEventsListener = (OnMapFloorEventListener) activity;
 
 		// The activity might be detached during the lifecycle while we still need a context.
 		// The application context is always valid.
 		appContext = activity.getApplicationContext();
-    }
+	}
 
-    @Override
-    public void onDetach() {
-	    super.onDetach();
-        mapFloorEventsListener = null;
-    }
+	@Override
+	public void onDetach() {
+		super.onDetach();
+		mapFloorEventsListener = null;
+	}
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
@@ -205,70 +206,70 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 	}
 
 	public static MapFloorFragment newInstance(int floor, boolean showAnimation) {
-        MapFloorFragment fragment = new MapFloorFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARGS_FLOOR_NUMBER, floor);
+		MapFloorFragment fragment = new MapFloorFragment();
+		Bundle args = new Bundle();
+		args.putInt(ARGS_FLOOR_NUMBER, floor);
 		args.putBoolean(ARGS_SHOW_ANIMATION, showAnimation);
-        fragment.setArguments(args);
+		fragment.setArguments(args);
 
-        return fragment;
-    }
+		return fragment;
+	}
 
-    private void initializeEventsListener() {
-        upArrow.setOnClickListener(new View.OnClickListener() {
-	        @Override
-	        public void onClick(View v) {
-		        if (mapFloorEventsListener != null) {
-			        mapFloorEventsListener.onUpArrowClicked();
-		        }
-	        }
-        });
+	private void initializeEventsListener() {
+		upArrow.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (mapFloorEventsListener != null) {
+					mapFloorEventsListener.onUpArrowClicked();
+				}
+			}
+		});
 
-        downArrow.setOnClickListener(new View.OnClickListener() {
-	        @Override
-	        public void onClick(View v) {
-		        if (mapFloorEventsListener != null) {
-			        mapFloorEventsListener.onDownArrowClicked();
-		        }
-	        }
-        });
+		downArrow.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (mapFloorEventsListener != null) {
+					mapFloorEventsListener.onDownArrowClicked();
+				}
+			}
+		});
 
-	    mapZoomView.setZoomListener(new ZoomView.ZoomViewListener() {
-		    @Override
-		    public void onZoomStarted(float zoom, float zoomx, float zoomy) {
-		    }
+		mapZoomView.setZoomListener(new ZoomView.ZoomViewListener() {
+			@Override
+			public void onZoomStarted(float zoom, float zoomx, float zoomy) {
+			}
 
-		    @Override
-		    public void onZooming(float zoom, float zoomx, float zoomy) {
-		    }
+			@Override
+			public void onZooming(float zoom, float zoomx, float zoomy) {
+			}
 
-		    @Override
-		    public void onZoomEnded(float zoom, float zoomx, float zoomy) {
-			    if (mapFloorEventsListener != null) {
-				    mapFloorEventsListener.onZoomChanged();
-			    }
-		    }
-	    });
-    }
+			@Override
+			public void onZoomEnded(float zoom, float zoomx, float zoomy) {
+				if (mapFloorEventsListener != null) {
+					mapFloorEventsListener.onZoomChanged();
+				}
+			}
+		});
+	}
 
-    private void resolveUIElements(View view) {
-	    progressBar = view.findViewById(R.id.floor_loading_progress_bar);
-	    mapZoomView = (ZoomView) view.findViewById(R.id.map_zoom_view);
-        mapFloorImage = (ImageLayout) view.findViewById(R.id.map_floor_image);
-        upArrow = view.findViewById(R.id.map_floor_up);
-        downArrow = view.findViewById(R.id.map_floor_down);
+	private void resolveUIElements(View view) {
+		progressBar = view.findViewById(R.id.floor_loading_progress_bar);
+		mapZoomView = (ZoomView) view.findViewById(R.id.map_zoom_view);
+		mapFloorImage = (ImageLayout) view.findViewById(R.id.map_floor_image);
+		upArrow = view.findViewById(R.id.map_floor_up);
+		downArrow = view.findViewById(R.id.map_floor_down);
 
-	    // Current selected location details
-	    locationDetails = (InterceptorLinearLayout) view.findViewById(R.id.location_details);
-	    locationTitle = (TextView) view.findViewById(R.id.location_title);
-	    locationDetailsCloseImage = (ImageView) view.findViewById(R.id.location_details_close_image);
-	    locationCurrentEvent = (EventView) view.findViewById(R.id.location_current_event);
-	    locationNextEvent = (EventView) view.findViewById(R.id.location_next_event);
-	    gotoStandsListButton = (Button) view.findViewById(R.id.goto_stands_list_button);
-    }
+		// Current selected location details
+		locationDetails = (InterceptorLinearLayout) view.findViewById(R.id.location_details);
+		locationTitle = (TextView) view.findViewById(R.id.location_title);
+		locationDetailsCloseImage = (ImageView) view.findViewById(R.id.location_details_close_image);
+		locationCurrentEvent = (EventView) view.findViewById(R.id.location_current_event);
+		locationEventsDivider = view.findViewById(R.id.location_events_divider);
+		locationNextEvent = (EventView) view.findViewById(R.id.location_next_event);
+		gotoStandsListButton = (Button) view.findViewById(R.id.goto_stands_list_button);
+	}
 
 	private void initializeLocationDetails() {
-		locationDetailsCloseImage.setColorFilter(ContextCompat.getColor(getContext(), android.R.color.black));
 		locationDetailsCloseImage.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -390,92 +391,92 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		locationDetails.setOnTouchListener(touchListener);
 	}
 
-    private void configureMapFloorAndRestoreState(final Bundle savedInstanceState) {
-        int mapFloor = getArguments().getInt(ARGS_FLOOR_NUMBER);
-	    final boolean showAnimation = getArguments().getBoolean(ARGS_SHOW_ANIMATION);
-	    getArguments().remove(ARGS_SHOW_ANIMATION); // Only show the animation once
-	    final ConventionMap map = Convention.getInstance().getMap();
-	    floor = map.findFloorByNumber(mapFloor);
+	private void configureMapFloorAndRestoreState(final Bundle savedInstanceState) {
+		int mapFloor = getArguments().getInt(ARGS_FLOOR_NUMBER);
+		final boolean showAnimation = getArguments().getBoolean(ARGS_SHOW_ANIMATION);
+		getArguments().remove(ARGS_SHOW_ANIMATION); // Only show the animation once
+		final ConventionMap map = Convention.getInstance().getMap();
+		floor = map.findFloorByNumber(mapFloor);
 
-	    // Add up and down arrows
-	    boolean isTopFloor = floor.getNumber() == map.getTopFloor().getNumber();
-	    upArrow.setVisibility(isTopFloor ? View.GONE : View.VISIBLE);
+		// Add up and down arrows
+		boolean isTopFloor = floor.getNumber() == map.getTopFloor().getNumber();
+		upArrow.setVisibility(isTopFloor ? View.GONE : View.VISIBLE);
 
-	    boolean isBottomFloor = floor.getNumber() == map.getBottomFloor().getNumber();
-	    downArrow.setVisibility(isBottomFloor ? View.GONE : View.VISIBLE);
+		boolean isBottomFloor = floor.getNumber() == map.getBottomFloor().getNumber();
+		downArrow.setVisibility(isBottomFloor ? View.GONE : View.VISIBLE);
 
-	    // We have to measure for the animations to work
-	    downArrow.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+		// We have to measure for the animations to work
+		downArrow.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
 
-	    mapZoomView.setMaxZoom(MAX_ZOOM);
+		mapZoomView.setMaxZoom(MAX_ZOOM);
 
-	    // Load images in background
-	    new AsyncTask<Void, Void, Boolean>() {
-		    SVG svg = null;
-		    List<MapLocation> locations = null;
+		// Load images in background
+		new AsyncTask<Void, Void, Boolean>() {
+			SVG svg = null;
+			List<MapLocation> locations = null;
 
-		    @Override
-		    protected Boolean doInBackground(Void... params) {
-			    if (floor.isImageSVG()) {
-				    svg = ImageHandler.loadSVG(appContext, floor.getImageResource());
-			    }
+			@Override
+			protected Boolean doInBackground(Void... params) {
+				if (floor.isImageSVG()) {
+					svg = ImageHandler.loadSVG(appContext, floor.getImageResource());
+				}
 
-			    // Find location markers and load their svg images (the views are created in the UI thread)
-			    locations = map.findLocationsByFloor(floor);
-			    for (final MapLocation location : locations) {
-			        // We don't save the result because it's saved in a cache for quicker access in the UI thread
-				    if (location.isMarkerResourceSVG()) {
-				        ImageHandler.loadSVG(appContext, location.getMarkerResource());
-				    }
-			    }
+				// Find location markers and load their svg images (the views are created in the UI thread)
+				locations = map.findLocationsByFloor(floor);
+				for (final MapLocation location : locations) {
+					// We don't save the result because it's saved in a cache for quicker access in the UI thread
+					if (location.isMarkerResourceSVG()) {
+						ImageHandler.loadSVG(appContext, location.getMarkerResource());
+					}
+				}
 
-			    return true;
-		    }
+				return true;
+			}
 
-		    @Override
-		    protected void onPostExecute(Boolean successful) {
-			    // Check the background method finished successfully
-			    if (!successful) {
-				    return;
-			    }
+			@Override
+			protected void onPostExecute(Boolean successful) {
+				// Check the background method finished successfully
+				if (!successful) {
+					return;
+				}
 
-			    mapFloorImage.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-			    if (floor.isImageSVG()) {
-		            Picture picture = svg.renderToPicture();
-				    mapFloorImage.setImageResourceFromDrawable(new PictureDrawable(picture), floor.getImageWidth(), floor.getImageHeight());
-			    } else {
-				    mapFloorImage.setImageResource(floor.getImageResource(), floor.getImageWidth(), floor.getImageHeight());
-			    }
+				mapFloorImage.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+				if (floor.isImageSVG()) {
+					Picture picture = svg.renderToPicture();
+					mapFloorImage.setImageResourceFromDrawable(new PictureDrawable(picture), floor.getImageWidth(), floor.getImageHeight());
+				} else {
+					mapFloorImage.setImageResource(floor.getImageResource(), floor.getImageWidth(), floor.getImageHeight());
+				}
 
-			    Animation animation = null;
-			    if (showAnimation) {
-				    animation = AnimationUtils.loadAnimation(appContext, R.anim.drop_and_fade_in_from_top);
-				    animation.setStartOffset(100);
-			    }
+				Animation animation = null;
+				if (showAnimation) {
+					animation = AnimationUtils.loadAnimation(appContext, R.anim.drop_and_fade_in_from_top);
+					animation.setStartOffset(100);
+				}
 
-			    // Add markers
-			    for (final MapLocation location : locations) {
-				    // Add the marker for this location
-				    View markerImageView = createMarkerView(location);
-				    mapFloorImage.addView(markerImageView);
-				    if (animation != null) {
-				        markerImageView.startAnimation(animation);
-				    }
-			    }
+				// Add markers
+				for (final MapLocation location : locations) {
+					// Add the marker for this location
+					View markerImageView = createMarkerView(location);
+					mapFloorImage.addView(markerImageView);
+					if (animation != null) {
+						markerImageView.startAnimation(animation);
+					}
+				}
 
-			    // Set initially selected location now after we created all the markers
-			    if (locationsToSelect != null) {
-			        selectLocations(locationsToSelect);
-				    locationsToSelect = null;
-			    }
+				// Set initially selected location now after we created all the markers
+				if (locationsToSelect != null) {
+					selectLocations(locationsToSelect);
+					locationsToSelect = null;
+				}
 
-	            restoreState(savedInstanceState);
+				restoreState(savedInstanceState);
 
-			    progressBar.setVisibility(View.GONE);
-			    mapZoomView.setVisibility(View.VISIBLE);
-		    }
-	    }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-    }
+				progressBar.setVisibility(View.GONE);
+				mapZoomView.setVisibility(View.VISIBLE);
+			}
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
 
 	private void restoreState(Bundle savedInstanceState) {
 		if (savedInstanceState != null) {
@@ -546,6 +547,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		Marker marker = new Marker(location, markerImageView, markerImageView.getDrawable(),
 				new Marker.DrawableProvider() {
 					Drawable drawable = null;
+
 					@Override
 					public Drawable getDrawable() {
 						if (drawable == null) {
@@ -655,17 +657,19 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		}, delayOpenStandsLocation);
 	}
 
-    public interface OnMapFloorEventListener {
-        void onUpArrowClicked();
-        void onDownArrowClicked();
-	    void onZoomChanged();
+	public interface OnMapFloorEventListener {
+		void onUpArrowClicked();
 
-	    /**
-	     * Location details top changed ("top" meaning distance from bottom).
-	     * This method is called during animation.
-	     */
-	    void onLocationDetailsTopChanged(int top, MapFloorFragment floor);
-    }
+		void onDownArrowClicked();
+
+		void onZoomChanged();
+
+		/**
+		 * Location details top changed ("top" meaning distance from bottom).
+		 * This method is called during animation.
+		 */
+		void onLocationDetailsTopChanged(int top, MapFloorFragment floor);
+	}
 
 	@Override
 	public void onClick(Marker marker) {
@@ -733,7 +737,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 	public int getMapHiddenPortionHeight() {
 		return (downArrow == null) ? 0 :
 				(downArrow.getVisibility() == View.VISIBLE ? downArrow.getMeasuredHeight() : 0) +
-				(locationDetails.getVisibility() == View.VISIBLE ? locationDetails.getMeasuredHeight() : 0);
+						(locationDetails.getVisibility() == View.VISIBLE ? locationDetails.getMeasuredHeight() : 0);
 	}
 
 	@NonNull
@@ -883,17 +887,21 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		boolean isSingleHall = location.hasSinglePlace() && location.getPlaces().get(0) instanceof Hall;
 		if (isSingleHall) {
 			ArrayList<ConventionEvent> events = Convention.getInstance().findEventsByHall(location.getPlaces().get(0).getName());
-			Collections.sort(events, new ConventionEventComparator());
-			for (ConventionEvent event : events) {
-				Date now = Dates.now();
-				if (currEvent == null && event.getStartTime().before(now) && event.getEndTime().after(now)) {
-					currEvent = event;
-				}
-				if (nextEvent == null && event.getStartTime().after(now)) {
-					nextEvent = event;
-				}
-				if (currEvent != null && nextEvent != null) {
-					break;
+			if (events.size() == 0) {
+				isSingleHall = false;
+			} else {
+				Collections.sort(events, new ConventionEventComparator());
+				for (ConventionEvent event : events) {
+					Date now = Dates.now();
+					if (currEvent == null && event.getStartTime().before(now) && event.getEndTime().after(now)) {
+						currEvent = event;
+					}
+					if (nextEvent == null && event.getStartTime().after(now)) {
+						nextEvent = event;
+					}
+					if (currEvent != null && nextEvent != null) {
+						break;
+					}
 				}
 			}
 		}
@@ -910,6 +918,12 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		} else {
 			locationNextEvent.setVisibility(View.VISIBLE);
 			locationNextEvent.setEvent(nextEvent);
+		}
+
+		if (currEvent != null && nextEvent != null) {
+			locationEventsDivider.setVisibility(View.VISIBLE);
+		} else {
+			locationEventsDivider.setVisibility(View.GONE);
 		}
 
 		if (isSingleHall) {

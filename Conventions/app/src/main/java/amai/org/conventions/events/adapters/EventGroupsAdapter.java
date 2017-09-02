@@ -1,14 +1,16 @@
 package amai.org.conventions.events.adapters;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import sff.org.conventions.R;
 import amai.org.conventions.events.activities.EventsTimeSlot;
 import amai.org.conventions.events.activities.MyEventsActivity;
 import amai.org.conventions.events.activities.MyEventsDayFragment;
@@ -16,6 +18,7 @@ import amai.org.conventions.events.holders.ConflictingEventsViewHolder;
 import amai.org.conventions.events.holders.SwipeableEventViewHolder;
 import amai.org.conventions.events.listeners.EventSwipeToDismissListener;
 import amai.org.conventions.model.ConventionEvent;
+import sff.org.conventions.R;
 
 public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 	private static final int ITEM_VIEW_TYPE_REGULAR = 1;
@@ -25,87 +28,90 @@ public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 	private ArrayList<EventsTimeSlot> eventGroups;
 	private Runnable onEventRemovedAction;
 
-    public EventGroupsAdapter(ArrayList<EventsTimeSlot> eventGroups) {
-        this.eventGroups = eventGroups;
+	public EventGroupsAdapter(ArrayList<EventsTimeSlot> eventGroups) {
+		this.eventGroups = eventGroups;
 
-	    registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
-		    @Override
-		    public void onItemRangeRemoved(int positionStart, int itemCount) {
-			    super.onItemRangeRemoved(positionStart, itemCount);
+		registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+			@Override
+			public void onItemRangeRemoved(int positionStart, int itemCount) {
+				super.onItemRangeRemoved(positionStart, itemCount);
 
-			    if (onEventRemovedAction != null) {
-			        onEventRemovedAction.run();
-			    }
-		    }
-	    });
-    }
+				if (onEventRemovedAction != null) {
+					onEventRemovedAction.run();
+				}
+			}
+		});
+	}
 
 	public void updateEventGroups(ArrayList<EventsTimeSlot> eventGroups) {
 		this.eventGroups = eventGroups;
 		notifyDataSetChanged();
 	}
 
-    @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-	    switch (viewType) {
-		    case ITEM_VIEW_TYPE_FREE_SLOT : {
-			    View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.small_text_view, viewGroup, false);
-			    return new FreeTimeSlotViewHolder(view);
-		    }
-		    case ITEM_VIEW_TYPE_REGULAR : {
-			    View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.swipeable_event_view, viewGroup, false);
-			    return new SwipeableEventViewHolder(view, true);
-		    }
-		    case ITEM_VIEW_TYPE_CONFLICTING : {
-		        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.conflicting_events_view, viewGroup, false);
-		        return new ConflictingEventsViewHolder(view, viewGroup.getContext());
-		    }
-	    }
-	    throw new RuntimeException("Unexpected view type " + viewType);
-    }
+	@Override
+	public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+		switch (viewType) {
+			case ITEM_VIEW_TYPE_FREE_SLOT: {
+				View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.small_text_view, viewGroup, false);
+				TextView textView = (TextView) view.findViewById(R.id.small_text);
+				((FrameLayout.LayoutParams) textView.getLayoutParams()).gravity = Gravity.CENTER_HORIZONTAL;
+				textView.setLayoutParams(textView.getLayoutParams());
+				return new FreeTimeSlotViewHolder(view);
+			}
+			case ITEM_VIEW_TYPE_REGULAR: {
+				View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.swipeable_event_view, viewGroup, false);
+				return new SwipeableEventViewHolder(view, true);
+			}
+			case ITEM_VIEW_TYPE_CONFLICTING: {
+				View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.conflicting_events_view, viewGroup, false);
+				return new ConflictingEventsViewHolder(view, viewGroup.getContext());
+			}
+		}
+		throw new RuntimeException("Unexpected view type " + viewType);
+	}
 
-    @Override
-    public int getItemCount() {
-        return eventGroups.size();
-    }
+	@Override
+	public int getItemCount() {
+		return eventGroups.size();
+	}
 
-    @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder eventsViewHolder, final int position) {
-	    EventsTimeSlot timeSlot = eventGroups.get(position);
-	    if (eventsViewHolder instanceof SwipeableEventViewHolder) {
+	@Override
+	public void onBindViewHolder(RecyclerView.ViewHolder eventsViewHolder, final int position) {
+		EventsTimeSlot timeSlot = eventGroups.get(position);
+		if (eventsViewHolder instanceof SwipeableEventViewHolder) {
 			final SwipeableEventViewHolder swipeableEventViewHolder = (SwipeableEventViewHolder) eventsViewHolder;
-		    swipeableEventViewHolder.setModel(timeSlot.getEvents().get(0));
+			swipeableEventViewHolder.setModel(timeSlot.getEvents().get(0));
 
 			EventSwipeToDismissListener listener = new EventSwipeToDismissListener(swipeableEventViewHolder, eventGroups, this);
 			swipeableEventViewHolder.setOnViewSwipedAction(listener);
 
-	    } else if (eventsViewHolder instanceof ConflictingEventsViewHolder) {
-		    final ConflictingEventsViewHolder conflictingEventsViewHolder = (ConflictingEventsViewHolder) eventsViewHolder;
-		    conflictingEventsViewHolder.setModel(timeSlot.getEvents());
-		    conflictingEventsViewHolder.setEventRemovedListener(new Runnable() {
-			    @Override
-			    public void run() {
-				    int adapterPosition = conflictingEventsViewHolder.getAdapterPosition();
-				    List<ConventionEvent> eventsList = conflictingEventsViewHolder.getModel();
+		} else if (eventsViewHolder instanceof ConflictingEventsViewHolder) {
+			final ConflictingEventsViewHolder conflictingEventsViewHolder = (ConflictingEventsViewHolder) eventsViewHolder;
+			conflictingEventsViewHolder.setModel(timeSlot.getEvents());
+			conflictingEventsViewHolder.setEventRemovedListener(new Runnable() {
+				@Override
+				public void run() {
+					int adapterPosition = conflictingEventsViewHolder.getAdapterPosition();
+					List<ConventionEvent> eventsList = conflictingEventsViewHolder.getModel();
 
-				    updateSlots(adapterPosition, eventsList, false);
+					updateSlots(adapterPosition, eventsList, false);
 
-				    if (onEventRemovedAction != null) {
-					    onEventRemovedAction.run();
-				    }
-			    }
-		    });
-	    } else if (eventsViewHolder instanceof FreeTimeSlotViewHolder) {
-		    ((FreeTimeSlotViewHolder) eventsViewHolder).setModel(timeSlot);
-	    }
-    }
+					if (onEventRemovedAction != null) {
+						onEventRemovedAction.run();
+					}
+				}
+			});
+		} else if (eventsViewHolder instanceof FreeTimeSlotViewHolder) {
+			((FreeTimeSlotViewHolder) eventsViewHolder).setModel(timeSlot);
+		}
+	}
 
 	/**
 	 * Updates the events list after removal of an event. Includes re-calculating what are conflicting events and what are the free slots based on the change.
 	 *
 	 * @param adapterPosition The position of the changed timeslot. In case there are conflicting events, they are treated as a a single slot
-	 * @param eventsList The list of events after the removal. In case there were no conflicting events in the slot, will be empty
-	 * @param alreadyRemoved was the model already updated with the removal
+	 * @param eventsList      The list of events after the removal. In case there were no conflicting events in the slot, will be empty
+	 * @param alreadyRemoved  was the model already updated with the removal
 	 */
 	public void updateSlots(int adapterPosition, List<ConventionEvent> eventsList, boolean alreadyRemoved) {
 		// This could happen if the item has already been removed, the dataset changed or the view recycled

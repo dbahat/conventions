@@ -1,154 +1,241 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/event_main_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:visibility="invisible"
-    tools:visibility="visible"
-    tools:context="amai.org.conventions.events.activities.EventActivity">
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/event_main_layout"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:visibility="invisible"
+	tools:visibility="visible"
+	tools:context="amai.org.conventions.events.activities.EventActivity">
 
-    <!-- The image background starts off as transparent just so we have a color (there is another background behind it
-         coming from NavigationActivity). The background from NavigationActivity is necessary sot that screen doesn't
-         start off as black. The color itself is taken from eventDetailsDefaultBackgroundColor.
-         The color here is necessary since when we create the gradient above the last image we need to have some color
-         specified but we don't know the final background color yet.
-         Note: this causes overdraw, but only for the few seconds until we know the actual background color. -->
-    <ScrollView
-        android:id="@+id/images_background"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/transparent">
+	<!-- The image background starts off as transparent just so we have a color (there is another background behind it
+		 coming from NavigationActivity). The background from NavigationActivity is necessary so that screen doesn't
+		 start off as black. The color itself is taken from eventDetailsDefaultBackgroundColor.
+		 The color here is necessary since when we create the gradient above the last image we need to have some color
+		 specified but we don't know the final background color yet.
+		 Note: this causes overdraw, but only for the few seconds until we know the actual background color. -->
+	<ScrollView
+		android:id="@+id/images_background"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="@android:color/transparent">
 
-        <LinearLayout
-            android:id="@+id/images_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="invisible"
-            android:orientation="vertical" />
-    </ScrollView>
+		<LinearLayout
+			android:id="@+id/images_layout"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:visibility="invisible"
+			android:orientation="vertical" />
+	</ScrollView>
 
-    <uk.co.chrisjenx.paralloid.views.ParallaxScrollView
-        android:id="@+id/parallax_scroll"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+	<uk.co.chrisjenx.paralloid.views.ParallaxScrollView
+		android:id="@+id/parallax_scroll"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/event_detail_boxes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp"
-            android:orientation="vertical">
+		<LinearLayout
+			android:id="@+id/event_detail_boxes"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingTop="20dp"
+			android:paddingBottom="20dp"
+			android:orientation="vertical">
 
-            <LinearLayout
-                style="@style/EventDetailsBox">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:id="@+id/event_category"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@color/black"
-                        tools:text="Event Category"
-                        />
-                    <TextView
-                        android:id="@+id/event_type_and_category_separator"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:text=" – "
-                        style="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@color/black"/>
-                    <TextView
-                        android:id="@+id/event_type"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@color/black"
-                        tools:text="Event Type"
-                        />
-                </LinearLayout>
-                <TextView
-                    android:id="@+id/event_title"
-                    style="@style/TextAppearance.AppCompat.Headline"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="title" />
-            </LinearLayout>
+			<LinearLayout
+				style="@style/EventDetailsHeaderBox">
+				<LinearLayout
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:gravity="center_horizontal"
+					android:layout_gravity="center_horizontal">
+					<TextView
+						android:id="@+id/event_category"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						style="@style/TextAppearance.AppCompat.Small"
+						android:textColor="?eventTitleTextColor"
+						tools:text="Event Category"
+						/>
+					<TextView
+						android:id="@+id/event_type_and_category_separator"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:gravity="center_horizontal"
+						android:text="@string/dash_with_spaces"
+						style="@style/TextAppearance.AppCompat.Small"
+						android:textColor="?eventTitleTextColor"/>
+					<TextView
+						android:id="@+id/event_type"
+						android:textColor="?eventTitleTextColor"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						style="@style/TextAppearance.AppCompat.Small"
+						tools:text="Event Type"
+						android:gravity="center"
+						/>
+				</LinearLayout>
+				<TextView
+					android:id="@+id/event_title"
+					style="@style/TextAppearance.AppCompat.Headline"
+					android:textColor="?eventTitleTextColor"
+					android:textStyle="bold"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:gravity="center"
+					tools:text="title" />
+			</LinearLayout>
 
-            <LinearLayout
-                style="@style/EventDetailsBox"
-                android:layout_marginTop="10dp">
+			<amai.org.conventions.customviews.AspectRatioImageView
+				android:id="@+id/event_logo"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="@dimen/event_details_box_side_margins"
+				android:layout_marginRight="@dimen/event_details_box_side_margins"
+				android:padding="8dp"
+				android:visibility="gone"
+				android:layout_gravity="center"/>
 
-                <TextView
-                    android:id="@+id/event_lecturer"
-                    style="@style/TextAppearance.AppCompat.Title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="lecturer" />
+			<LinearLayout
+				style="@style/EventDetailsBox"
+				android:layout_marginTop="10dp">
 
-                <TextView
-                    android:id="@+id/event_hall_and_time"
-                    style="@style/TextAppearance.AppCompat.Subhead"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
-                    tools:text="hall and time" />
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:orientation="vertical"
+					android:gravity="center">
 
-                <TextView
-                    android:id="@+id/event_prices"
-                    style="@style/TextAppearance.AppCompat.Small"
-                    android:textColor="@color/black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
-                    tools:text="prices" />
+					<TextView
+						android:id="@+id/event_lecturer"
+						style="@style/TextAppearance.AppCompat.Title"
+						android:textColor="?attr/eventDescriptionTextColor"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:gravity="center"
+						tools:text="lecturer" />
 
-                <TextView
-                    android:id="@+id/event_tags"
-                    style="@style/TextAppearance.AppCompat.Small"
-                    android:textColor="@color/black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
-                    tools:text="tags" />
-            </LinearLayout>
+					<TextView
+						android:id="@+id/event_hall"
+						style="@style/TextAppearance.AppCompat.Subhead"
+						android:textColor="?attr/eventDescriptionTextColor"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:paddingTop="5dp"
+						android:gravity="center"
+						tools:text="hall" />
 
+					<TextView
+						android:id="@+id/event_time"
+						style="@style/TextAppearance.AppCompat.Title"
+						android:textStyle="bold"
+						android:textColor="?attr/eventDescriptionTextColor"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:paddingTop="5dp"
+						android:gravity="center"
+						tools:text="time" />
+				</LinearLayout>
+					
+				<TextView
+					android:id="@+id/event_prices"
+					style="@style/TextAppearance.AppCompat.Small"
+					android:textColor="?eventTitleTextColor"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:paddingTop="10dp"
+					tools:text="prices" />
+					
+				<TextView
+					android:id="@+id/event_tags"
+					style="@style/TextAppearance.AppCompat.Small"
+					android:textColor="?eventTitleTextColor"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:paddingTop="10dp"
+					tools:text="tags" />
+			</LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/event_feedback_container"
-                style="@style/EventDetailsBox.Feedback"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical">
+			<LinearLayout
+				android:id="@+id/event_vote_opener_container"
+				style="@style/EventDescriptionBox.Vote"
+				android:visibility="visible"
+				tools:visibility="visible"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_marginTop="10dp"
+				android:orientation="vertical">
+				<TextView
+					android:id="@+id/event_vote_description"
+					style="@style/TextAppearance.AppCompat.Subhead"
+					android:textColor="?attr/eventDescriptionTextColor"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:text="@string/survey_vote_details" />
 
-                <amai.org.conventions.events.CollapsibleFeedbackView
-                    android:id="@+id/event_feedback_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
+				<FrameLayout
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center">
 
-            <LinearLayout
-                android:id="@+id/event_description_box"
-                style="@style/EventDetailsBox"
-                android:layout_marginTop="10dp">
+					<Button
+						android:id="@+id/event_open_vote_survey_button"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						style="@style/HighlightedButton"
+						android:enabled="true"
+						android:text="@string/to_vote_survey" />
 
-                <TextView
-                    android:id="@+id/event_description"
-                    style="@style/TextAppearance.AppCompat.Body2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:text="description" />
-            </LinearLayout>
+					<!-- this progress bar gets un-hidden in runtime when the button is clicked -->
+					<ProgressBar
+						android:id="@+id/event_open_vote_survey_progress_bar"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:visibility="gone" />
 
-        </LinearLayout>
+				</FrameLayout>
 
-    </uk.co.chrisjenx.paralloid.views.ParallaxScrollView>
+				<TextView
+					android:id="@+id/event_vote_note"
+					style="@style/TextAppearance.AppCompat.Body2"
+					android:textColor="?attr/eventDescriptionTextColor"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:text="@string/survey_vote_note" />
+			</LinearLayout>
+
+			<LinearLayout
+				android:id="@+id/event_feedback_container"
+				style="@style/EventDescriptionBox.Feedback"
+				android:visibility="gone"
+				tools:visibility="visible"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_marginTop="10dp"
+				android:orientation="vertical">
+
+				<amai.org.conventions.events.CollapsibleFeedbackView
+					android:id="@+id/event_feedback_view"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"/>
+			</LinearLayout>
+
+			<LinearLayout
+				android:id="@+id/event_description_box"
+				style="@style/EventDescriptionBox"
+				android:layout_marginTop="10dp">
+
+				<TextView
+					android:id="@+id/event_description"
+					style="@style/TextAppearance.AppCompat.Body2"
+					android:textColor="?attr/eventDescriptionTextColor"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					tools:text="description" />
+			</LinearLayout>
+
+		</LinearLayout>
+
+	</uk.co.chrisjenx.paralloid.views.ParallaxScrollView>
 
 
 </FrameLayout>

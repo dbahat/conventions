@@ -5,9 +5,7 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    tools:context="amai.org.conventions.ArrivalMethodsActivity"
-    android:background="@color/white"> <!-- over-drawing here since the google map starts transparent,
-    and becomes solid. After it's solid we remove the background here to reduce overdraw. -->
+    tools:context="amai.org.conventions.ArrivalMethodsActivity">
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -33,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_size_large_material"
-                android:textColor="@color/hint_gray"
+                android:textColor="?hintTextColor"
                 android:text="@string/missing_play_services_map_message"
                 android:gravity="center"/>
             <Button
@@ -54,8 +52,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/white">
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"

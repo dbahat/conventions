@@ -17,7 +17,7 @@ import sff.org.conventions.R;
 
 
 public class HallActivity extends NavigationActivity {
-    public static final String EXTRA_HALL_NAME = "ExtraHallName";
+	public static final String EXTRA_HALL_NAME = "ExtraHallName";
 	public static final String EXTRA_USE_SLIDE_OUT_ANIMATION_ON_BACK = "ExtraUseSlideOutAnimationOnBack";
 
 	private static final String STATE_SELECTED_DATE_INDEX = "StateSelectedDateIndex";
@@ -29,19 +29,19 @@ public class HallActivity extends NavigationActivity {
 	private String hallName;
 
 	@Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 
-        hallName = getIntent().getStringExtra(EXTRA_HALL_NAME);
-	    useSlideOutAnimationOnBack = getIntent().getBooleanExtra(EXTRA_USE_SLIDE_OUT_ANIMATION_ON_BACK, false);
+		hallName = getIntent().getStringExtra(EXTRA_HALL_NAME);
+		useSlideOutAnimationOnBack = getIntent().getBooleanExtra(EXTRA_USE_SLIDE_OUT_ANIMATION_ON_BACK, false);
 
-        setContentInContentContainer(R.layout.activity_hall);
-        setToolbarTitle(hallName);
+		setContentInContentContainer(R.layout.activity_hall);
+		setToolbarTitle(hallName);
 		removeForeground();
 
 		int dateIndexToSelect = savedInstanceState == null ? SELECT_CURRENT_DATE : savedInstanceState.getInt(STATE_SELECTED_DATE_INDEX, SELECT_CURRENT_DATE);
 		setupDays(dateIndexToSelect);
-    }
+	}
 
 	@Override
 	public void onBackPressed() {

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:layout_margin="24dp"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?homeTitleBackground"
+        android:padding="8dp">
+        <TextView
+            android:id="@+id/home_upcoming_programme_events_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="אירועים שמתחילים ב-11:00"
+            android:textSize="20sp"
+            android:textColor="?homeTitleText"
+            android:textStyle="bold"
+            android:layout_gravity="center"/>
+    </FrameLayout>
+
+    <amai.org.conventions.customviews.NestedListView
+        android:id="@+id/home_upcoming_programme_events_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?homeUpcomingEventBackground"
+        android:divider="@null"/>
+
+    <Button
+        android:text="@string/home_go_to_programme"
+        android:textSize="23sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/HomeButton"
+        android:onClick="onGoToProgrammeClicked"/>
+
+</LinearLayout>

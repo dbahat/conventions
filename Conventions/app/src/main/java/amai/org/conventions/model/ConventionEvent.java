@@ -1,8 +1,13 @@
 package amai.org.conventions.model;
 
 import android.content.Context;
-import android.text.Html;
+import android.text.Editable;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.URLSpan;
+
+import org.xml.sax.Attributes;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,27 +15,30 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
+import java.util.Stack;
 
 import sff.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.conventions.Convention;
-import amai.org.conventions.networking.AmaiModelParser;
 import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.HtmlParser;
 import amai.org.conventions.utils.Objects;
+import fi.iki.kuitsi.listtest.ListTagHandler;
 
 public class ConventionEvent implements Serializable {
 	private String id;
-    private int serverId;
+	private int serverId;
 	private int backgroundColor;
 	private int textColor;
-    private String title;
-    private String lecturer;
-    private Date startTime;
-    private Date endTime;
-    private EventType type;
-    private Hall hall;
+	private String title;
+	private String lecturer;
+	private Date startTime;
+	private Date endTime;
+	private EventType type;
+	private Hall hall;
 	private List<String> images;
-    private String description;
+	private String description;
 	private String plainTextDescription;
 	private String category;
 	private List<String> tags;
@@ -39,6 +47,7 @@ public class ConventionEvent implements Serializable {
 
 	public ConventionEvent() {
 		images = new ArrayList<>();
+		plainTextDescription = "";
 		tags = new LinkedList<>();
 	}
 
@@ -56,7 +65,7 @@ public class ConventionEvent implements Serializable {
 	}
 
 	public int getTextColor(Context context) {
-		if (textColor != AmaiModelParser.NO_COLOR) {
+		if (textColor != Convention.NO_COLOR) {
 			return textColor;
 		}
 		return ThemeAttributes.getColor(context, R.attr.eventTimeDefaultTextColor);
@@ -68,140 +77,147 @@ public class ConventionEvent implements Serializable {
 	}
 
 	public String getDescription() {
-        return description;
-    }
+		return description;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-	    this.plainTextDescription = description.isEmpty() ? "" : Html.fromHtml(description).toString().replace("\n", " ");
-    }
+	public void setDescription(String description) {
+		this.description = description;
 
-    public ConventionEvent withDescription(String description) {
-        setDescription(description);
-        return this;
-    }
+		// spannedDescription will be null in unit tests, since it uses Android SDK APIs underline, which aren't currently mocked in unit tests
+		Spanned spannedDescription = getSpannedDescription();
+		this.plainTextDescription = description.isEmpty() || spannedDescription == null ? "" : spannedDescription.toString().replace("\n", " ");
+	}
+
+	public ConventionEvent withDescription(String description) {
+		setDescription(description);
+		return this;
+	}
 
 	public String getPlainTextDescription() {
 		return plainTextDescription;
 	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public String getId() {
+	public String getId() {
 		return id;
 	}
 
-    public ConventionEvent withId(String id) {
-        setId(id);
-        return this;
-    }
+	public ConventionEvent withId(String id) {
+		setId(id);
+		return this;
+	}
 
 	public String getTitle() {
-        return title;
-    }
+		return title;
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public ConventionEvent withTitle(String title) {
-        setTitle(title);
-        return this;
-    }
+	public ConventionEvent withTitle(String title) {
+		setTitle(title);
+		return this;
+	}
 
-    public String getLecturer() {
-        return lecturer;
-    }
+	public String getLecturer() {
+		return lecturer;
+	}
 
-    public void setLecturer(String lecturer) {
-        this.lecturer = lecturer;
-    }
+	public void setLecturer(String lecturer) {
+		this.lecturer = lecturer;
+	}
 
-    public ConventionEvent withLecturer(String lecturer) {
-        setLecturer(lecturer);
-        return this;
-    }
+	public ConventionEvent withLecturer(String lecturer) {
+		setLecturer(lecturer);
+		return this;
+	}
 
-    public boolean isAttending() {
-        return getUserInput().isAttending();
-    }
+	public boolean isAttending() {
+		return getUserInput().isAttending();
+	}
 
-    public void setAttending(boolean attending) {
-        getUserInput().setAttending(attending);
-    }
+	public void setAttending(boolean attending) {
+		getUserInput().setAttending(attending);
+	}
 
-    public ConventionEvent withAttending(boolean attending) {
-        setAttending(attending);
-        return this;
-    }
+	public ConventionEvent withAttending(boolean attending) {
+		setAttending(attending);
+		return this;
+	}
 
-    public Date getStartTime() {
-        return startTime;
-    }
+	public Date getStartTime() {
+		return startTime;
+	}
 
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
-    }
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
 
-    public ConventionEvent withStartTime(Date startTime) {
-        setStartTime(startTime);
-        return this;
-    }
+	public ConventionEvent withStartTime(Date startTime) {
+		setStartTime(startTime);
+		return this;
+	}
 
-    public Date getEndTime() {
-        return endTime;
-    }
+	public Date getEndTime() {
+		return endTime;
+	}
 
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
-    }
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
+	}
 
-    public ConventionEvent withEndTime(Date endTime) {
-        setEndTime(endTime);
-        return this;
-    }
+	public ConventionEvent withEndTime(Date endTime) {
+		setEndTime(endTime);
+		return this;
+	}
 
-    public EventType getType() {
-        return type;
-    }
+	public EventType getType() {
+		return type;
+	}
 
 	public int getBackgroundColor(Context context) {
-		if (backgroundColor != AmaiModelParser.NO_COLOR) {
+		if (backgroundColor != Convention.NO_COLOR) {
 			return backgroundColor;
 		}
 		int eventTypeColor = getType().getBackgroundColor();
-		if (eventTypeColor != AmaiModelParser.NO_COLOR) {
+		if (eventTypeColor != Convention.NO_COLOR) {
 			return eventTypeColor;
 		}
 		return ThemeAttributes.getColor(context, R.attr.eventTimeDefaultBackgroundColor);
 	}
 
-    public void setType(EventType type) {
-        this.type = type;
-    }
+	public void setType(EventType type) {
+		this.type = type;
+	}
 
-    public ConventionEvent withType(EventType type) {
-        setType(type);
-        return this;
-    }
+	public ConventionEvent withType(EventType type) {
+		setType(type);
+		return this;
+	}
 
-    public Hall getHall() {
-        return hall;
-    }
+	public Hall getHall() {
+		return hall;
+	}
 
-    public void setHall(Hall hall) {
-        this.hall = hall;
-    }
+	public void setHall(Hall hall) {
+		this.hall = hall;
+	}
 
-    public ConventionEvent withHall(Hall hall) {
-        setHall(hall);
-        return this;
-    }
+	public ConventionEvent withHall(Hall hall) {
+		setHall(hall);
+		return this;
+	}
 
 	public List<Integer> getImageResources() {
 		return Convention.getInstance().getImageMapper().getImageResourcesList(images);
+	}
+
+	public List<Integer> getLogoImageResources() {
+		return Convention.getInstance().getImageMapper().getLogoResources(images);
 	}
 
 	public void setImages(List<String> images) {
@@ -304,19 +320,129 @@ public class ConventionEvent implements Serializable {
 	}
 
 	public int getServerId() {
-        return serverId;
-    }
+		return serverId;
+	}
 
-    public void setServerId(int serverId) {
-        this.serverId = serverId;
-    }
+	public void setServerId(int serverId) {
+		this.serverId = serverId;
+	}
 
-    public ConventionEvent withServerId(int serverId) {
-        setServerId(serverId);
-        return this;
-    }
+	public ConventionEvent withServerId(int serverId) {
+		setServerId(serverId);
+		return this;
+	}
 
-    @Override
+
+	public Spanned getSpannedDescription() {
+		String eventDescription = this.getDescription();
+		final ListTagHandler listTagHandler = new ListTagHandler();
+		Spanned spanned = HtmlParser.fromHtml(eventDescription, null, new HtmlParser.TagHandler() {
+			private Stack<DivSpan> spans = new Stack<>();
+			@Override
+			public boolean handleTag(boolean opening, String tag, Editable output, Attributes attributes) {
+				listTagHandler.handleTag(opening, tag, output, null);
+				if (tag.equals("xdiv") || tag.equals("div")) {
+					int length = output.length();
+					if (opening) {
+						DivSpan span;
+						String classStyle = HtmlParser.getValue(attributes, "class");
+						if ("ss-form-container".equals(classStyle)) {
+							span = new GoogleFormSpan();
+						} else {
+							span = new DivSpan();
+						}
+						span.setStart(length);
+						spans.push(span);
+					} else {
+						DivSpan span = spans.pop();
+						span.setEnd(length);
+						if (span instanceof GoogleFormSpan) {
+							output.setSpan(span, span.getStart(), length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+						}
+					}
+				} else if (opening && tag.equals("form") && attributes != null) {
+					// Add the url to the google form (only if this form is inside the google form,
+					// meaning the form wasn't attached to the output yet so it's still in the spans stack).
+					// We go over the stack in reverse order because the current form was added last.
+					GoogleFormSpan span = null;
+					DivSpan currentSpan = null;
+					for (ListIterator<DivSpan> iter = spans.listIterator(spans.size()); iter.hasPrevious(); currentSpan = iter.previous()) {
+						if (currentSpan instanceof GoogleFormSpan) {
+							span = (GoogleFormSpan) currentSpan;
+							break;
+						}
+					}
+					if (span != null) {
+						String url = HtmlParser.getValue(attributes, "action");
+						span.setUrl(url);
+					}
+				}
+				return false;
+			}
+		});
+
+		if (spanned == null) {
+			return null;
+		}
+
+		GoogleFormSpan[] forms = spanned.getSpans(0, spanned.length(), GoogleFormSpan.class);
+		for (GoogleFormSpan span : forms) {
+			int spanStart = span.getStart();
+			int spanEnd = span.getEnd();
+			SpannableStringBuilder linkToForm = new SpannableStringBuilder();
+			if (span.getUrl() != null) {
+				linkToForm.append("לטופס");
+				linkToForm.setSpan(new FormURLSpan(span.getUrl()), 0, linkToForm.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+			}
+			spanned = (Spanned) TextUtils.concat(spanned.subSequence(0, spanStart), linkToForm, spanned.subSequence(spanEnd, spanned.length()));
+		}
+		for (URLSpan urlSpan : spanned.getSpans(0, spanned.length(), URLSpan.class)) {
+			if (urlSpan.getURL().startsWith("https://docs.google.com/forms") && !(urlSpan instanceof FormURLSpan)) {
+				int spanStart = spanned.getSpanStart(urlSpan);
+				int spanEnd = spanned.getSpanEnd(urlSpan);
+				spanned = (Spanned) TextUtils.concat(spanned.subSequence(0, spanStart), spanned.subSequence(spanEnd, spanned.length()));
+			}
+		}
+		return spanned;
+	}
+
+	private static class DivSpan {
+		int start = -1;
+		int end = -1;
+
+		public void setStart(int start) {
+			this.start = start;
+		}
+		public int getStart() {
+			return start;
+		}
+
+		public void setEnd(int end) {
+			this.end = end;
+		}
+
+		public int getEnd() {
+			return end;
+		}
+	}
+	private static class GoogleFormSpan extends DivSpan {
+		private String url = null;
+
+		public void setUrl(String url) {
+			this.url = url;
+		}
+
+		public String getUrl() {
+			return url;
+		}
+	}
+	private static class FormURLSpan extends URLSpan {
+		public FormURLSpan(String url) {
+			super(url);
+		}
+	}
+
+	@Override
 	public boolean equals(Object o) {
 		if (o instanceof ConventionEvent) {
 			ConventionEvent other = (ConventionEvent) o;
@@ -326,7 +452,7 @@ public class ConventionEvent implements Serializable {
 					Objects.equals(endTime, other.endTime) &&
 					Objects.equals(type, other.type) &&
 					Objects.equals(hall, other.hall) &&
-                    Objects.equals(serverId, other.serverId);
+					Objects.equals(serverId, other.serverId);
 		}
 		return false;
 	}
@@ -355,12 +481,13 @@ public class ConventionEvent implements Serializable {
 
 	public static class UserInput implements Serializable, Cloneable {
 		private boolean attending;
-        private Feedback feedback;
+		private Survey feedback;
+		private Survey voteSurvey;
 		private EventNotification eventAboutToStartNotification;
 		private EventNotification eventFeedbackReminderNotification;
 
 		public UserInput() {
-			feedback = new Feedback().withQuestions(
+			feedback = new Survey().withQuestions(
 					new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_ENJOYMENT, FeedbackQuestion.AnswerType.SMILEY_3_POINTS),
 					new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_LECTURER_QUALITY, FeedbackQuestion.AnswerType.SMILEY_3_POINTS),
 					new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_SIMILAR_EVENTS, FeedbackQuestion.AnswerType.SMILEY_3_POINTS),
@@ -377,11 +504,13 @@ public class ConventionEvent implements Serializable {
 			newInput.feedback = feedback.clone();
 			newInput.eventFeedbackReminderNotification = eventFeedbackReminderNotification.clone();
 			newInput.eventAboutToStartNotification = eventAboutToStartNotification.clone();
+			newInput.voteSurvey = voteSurvey == null ? null : voteSurvey.clone();
 			return newInput;
 		}
 
 		/**
 		 * Update this instance from user input loaded from file
+		 *
 		 * @param other the de-serialized user input
 		 */
 		public void updateFrom(UserInput other) {
@@ -390,6 +519,10 @@ public class ConventionEvent implements Serializable {
 			}
 			attending = other.attending;
 			feedback.updateFrom(other.feedback);
+			voteSurvey = other.voteSurvey;
+			if (voteSurvey != null) {
+				voteSurvey.updateFrom(voteSurvey); // Convert question format if necessary
+			}
 			eventAboutToStartNotification = other.eventAboutToStartNotification;
 			eventFeedbackReminderNotification = other.eventFeedbackReminderNotification;
 		}
@@ -407,7 +540,7 @@ public class ConventionEvent implements Serializable {
 			return this;
 		}
 
-		public Feedback getFeedback() {
+		public Survey getFeedback() {
 			return feedback;
 		}
 
@@ -417,6 +550,14 @@ public class ConventionEvent implements Serializable {
 
 		public EventNotification getEventFeedbackReminderNotification() {
 			return eventFeedbackReminderNotification;
+		}
+
+		public Survey getVoteSurvey() {
+			return voteSurvey;
+		}
+
+		public void setVoteSurvey(Survey voteSurvey) {
+			this.voteSurvey = voteSurvey;
 		}
 
 		@Override

@@ -11,5 +11,5 @@ public interface ParallaxorListener extends Parallaxor, OnScrollChangedListener 
      *
      * @param onScrollChangedListener Null is valid (it will remove it if set).
      */
-    public void setOnScrollListener(OnScrollChangedListener onScrollChangedListener);
+    void setOnScrollListener(OnScrollChangedListener onScrollChangedListener);
 }

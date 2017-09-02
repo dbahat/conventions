@@ -12,83 +12,85 @@ import amai.org.conventions.utils.CollectionUtils;
  * Aggregates multiple event types into small subset of aggregated types
  */
 public class AggregatedEventTypes {
-    private List<AggregatedType> aggregatedEventTypes;
+	private List<AggregatedType> aggregatedEventTypes;
 
-    public AggregatedEventTypes() {
-        aggregatedEventTypes = Arrays.asList(
-                new AggregatedType("הרצאות", Arrays.asList(
-                        new EventType("הרצאה"),
-                        new EventType("פאנל"))),
-                new AggregatedType("משחקים", Arrays.asList(
-                        new EventType("משחק שולחני"),
-                        new EventType("משחק תפקידים חי"),
-                        new EventType("מיוחד"),
-                        new EventType("טורניר"))),
-                new AggregatedType("הקרנות ומופעים", Arrays.asList(
-                        new EventType("הקרנה"),
-                        new EventType("מופע")))
-        );
-    }
+	public AggregatedEventTypes() {
+		aggregatedEventTypes = Arrays.asList(
+				new AggregatedType("הרצאות", Arrays.asList(
+						new EventType("הרצאה"),
+						new EventType("פאנל"))),
+				new AggregatedType("משחקים", Arrays.asList(
+						new EventType("משחק שולחני"),
+						new EventType("משחק תפקידים חי"),
+						new EventType("מיוחד"),
+						new EventType("טורניר"))),
+				new AggregatedType("סדנאות", Arrays.asList(
+						new EventType("סדנה"))),
+				new AggregatedType("הקרנות ומופעים", Arrays.asList(
+						new EventType("הקרנה"),
+						new EventType("מופע")))
+		);
+	}
 
 	public List<AggregatedType> getAggregatedEventTypes() {
 		return aggregatedEventTypes;
 	}
 
-	public String get(EventType eventType) {
-        for (AggregatedType aggregatedType : aggregatedEventTypes) {
-            if (aggregatedType.contains(eventType)) {
-                return aggregatedType.getName();
-            }
-        }
+	public String getForEventType(EventType eventType) {
+		for (AggregatedType aggregatedType : aggregatedEventTypes) {
+			if (aggregatedType.contains(eventType)) {
+				return aggregatedType.getName();
+			}
+		}
 
-        // If we couldn't find an aggregated type, return the description of the existing event
-        return eventType.getDescription();
-    }
+		// If we couldn't find an aggregated type, return the description of the existing event
+		return eventType.getDescription();
+	}
 
-    public List<EventType> get(final String aggregatedEventType) {
-        AggregatedType aggregatedType = CollectionUtils.findFirst(aggregatedEventTypes, new CollectionUtils.Predicate<AggregatedType>() {
-            @Override
-            public boolean where(AggregatedType item) {
-                return item.getName().equals(aggregatedEventType);
-            }
-        });
+	public List<EventType> get(final String aggregatedEventType) {
+		AggregatedType aggregatedType = CollectionUtils.findFirst(aggregatedEventTypes, new CollectionUtils.Predicate<AggregatedType>() {
+			@Override
+			public boolean where(AggregatedType item) {
+				return item.getName().equals(aggregatedEventType);
+			}
+		});
 
-        if (aggregatedType != null) {
-            return aggregatedType.getEventTypes();
-        }
+		if (aggregatedType != null) {
+			return aggregatedType.getEventTypes();
+		}
 
-        return Collections.singletonList(new EventType(aggregatedEventType));
-    }
+		return Collections.singletonList(new EventType(aggregatedEventType));
+	}
 
-    public List<EventType> get(List<String> aggregatedEventTypes) {
-        List<EventType> eventTypes = new LinkedList<>();
+	public List<EventType> get(List<String> aggregatedEventTypes) {
+		List<EventType> eventTypes = new LinkedList<>();
 
-        for (String searchCategory : aggregatedEventTypes) {
-            eventTypes.addAll(get(searchCategory));
-        }
+		for (String aggregatedEventType : aggregatedEventTypes) {
+			eventTypes.addAll(get(aggregatedEventType));
+		}
 
-        return eventTypes;
-    }
+		return eventTypes;
+	}
 
-    public static class AggregatedType {
-        private List<EventType> eventTypes;
-        private String name;
+	public static class AggregatedType {
+		private List<EventType> eventTypes;
+		private String name;
 
-        public AggregatedType(String name, List<EventType> eventTypes) {
-            this.name = name;
-            this.eventTypes = eventTypes;
-        }
+		public AggregatedType(String name, List<EventType> eventTypes) {
+			this.name = name;
+			this.eventTypes = eventTypes;
+		}
 
-        public boolean contains(EventType eventType) {
-            return eventTypes.contains(eventType);
-        }
+		public boolean contains(EventType eventType) {
+			return eventTypes.contains(eventType);
+		}
 
-        public String getName() {
-            return name;
-        }
+		public String getName() {
+			return name;
+		}
 
-        public List<EventType> getEventTypes() {
-            return eventTypes;
-        }
-    }
+		public List<EventType> getEventTypes() {
+			return eventTypes;
+		}
+	}
 }

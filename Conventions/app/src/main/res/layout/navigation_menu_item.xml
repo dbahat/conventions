@@ -1,17 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<amai.org.conventions.customviews.CompoundTextView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/navigation_item_text"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:compoundDrawableWidth="24dp"
-    app:compoundDrawableHeight="24dp"
-    android:drawablePadding="5dp"
-    android:textColor="?navigationPopupNotSelectedColor"
-    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-    android:paddingStart="10dp"
-    android:paddingEnd="30dp"
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp"
-    />
+    android:orientation="vertical">
+
+    <amai.org.conventions.customviews.CompoundTextView
+        android:id="@+id/navigation_item_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:compoundDrawableWidth="24dp"
+        app:compoundDrawableHeight="24dp"
+        android:drawablePadding="5dp"
+        android:textColor="?navigationPopupNotSelectedColor"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:paddingTop="16dp"
+        android:paddingBottom="4dp"
+        />
+
+    <View
+        android:layout_height="1dp"
+        android:layout_width="match_parent"
+        android:background="?navigationPopupSeparatorColor"/>
+
+</LinearLayout>

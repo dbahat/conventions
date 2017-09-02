@@ -13,8 +13,8 @@ import amai.org.conventions.ConventionsApplication;
 import sff.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.listeners.OnEventFavoriteChangedListener;
-import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.ConventionEvent;
+import amai.org.conventions.model.conventions.Convention;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
 public class DefaultEventFavoriteChangedListener implements OnEventFavoriteChangedListener {

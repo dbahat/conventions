@@ -7,6 +7,8 @@ public class Stand {
 	private StandType type;
 	private StandsArea standsArea;
 	private String locationName;
+	private float imageX;
+	private float imageY;
 
 	public String getName() {
 		return name;
@@ -60,11 +62,39 @@ public class Stand {
 		return this;
 	}
 
+	public boolean hasImageCoordinates() {
+		return getImageX() != 0 || getImageY() != 0; // Assuming there are no stands at (0, 0)
+	}
+
+	public float getImageX() {
+		return imageX;
+	}
+
+	public void setImageX(float imageX) {
+		this.imageX = imageX;
+	}
+
+	public Stand withImageX(float imageX) {
+		setImageX(imageX);
+		return this;
+	}
+
+	public float getImageY() {
+		return imageY;
+	}
+
+	public void setImageY(float imageY) {
+		this.imageY = imageY;
+	}
+
+	public Stand withImageY(float imageY) {
+		setImageY(imageY);
+		return this;
+	}
+
 	public enum StandType {
-		COMMERCIAL(R.string.commercial_stand, R.drawable.ic_shopping_basket),
-		INDEPENDENT(R.string.independent_stand, R.drawable.ic_color_lens),
-		DONATION(R.string.donation_stand, R.drawable.ic_monetization),
-		OTHER(R.string.other_stand, R.drawable.book);
+		REGULAR_STAND(R.string.regular_stand, R.drawable.ic_shopping_basket),
+		ARTIST_STAND(R.string.artist_stand, R.drawable.ic_color_lens);
 
 		private int title;
 		private int image;

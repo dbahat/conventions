@@ -10,8 +10,8 @@ import java.util.List;
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.events.adapters.EventGroupsAdapter;
 import amai.org.conventions.events.holders.SwipeableEventViewHolder;
-import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.ConventionEvent;
+import amai.org.conventions.model.conventions.Convention;
 
 public class EventSwipeToDismissListener implements Runnable {
 

@@ -32,6 +32,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import amai.org.conventions.ConventionsApplication;
+import sff.org.conventions.R;
+import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.ConditionalSwipeVerticalViewPager;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.Floor;
@@ -43,21 +45,20 @@ import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Objects;
 import amai.org.conventions.utils.Views;
-import sff.org.conventions.R;
 
 public class MapActivity extends NavigationActivity implements MapFloorFragment.OnMapFloorEventListener {
-    public static final String EXTRA_FLOOR_NUMBER = "ExtraFloorNumber";
+	public static final String EXTRA_FLOOR_NUMBER = "ExtraFloorNumber";
 	public static final String EXTRA_MAP_LOCATION_IDS = "ExtraMapLocationId";
 
 	private static final String STATE_SEARCH_TERM = "StateMapSearchTerm";
 	private static final String STATE_MAP_SEARCH_ONLY_HALLS = "StateMapSearchOnlyHalls";
 	private static final String STATE_MAP_SEARCH_OPEN = "StateMapSearchOpen";
 
-    private static final ConventionMap map = Convention.getInstance().getMap();
+	private static final ConventionMap map = Convention.getInstance().getMap();
 	private static final String TAG = MapActivity.class.getCanonicalName();
 
 	private static boolean showAnimation = true;
-    private ConditionalSwipeVerticalViewPager viewPager;
+	private ConditionalSwipeVerticalViewPager viewPager;
 	private int currentFloorNumber = ConventionMap.FLOOR_NOT_FOUND;
 
 	// Search
@@ -75,9 +76,10 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 	private Menu menu;
 
 	@Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentInContentContainer(R.layout.activity_map, false, false);
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentInContentContainer(R.layout.activity_map, false, false);
+		setToolbarAndContentContainerBackground(ThemeAttributes.getDrawable(this, R.attr.mapBackground));
 		if (map.getLocations().size() > 0) {
 			setupActionButton(R.drawable.ic_action_search, new View.OnClickListener() {
 				@Override
@@ -88,33 +90,32 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		}
 
 		// Read and initialize parameters from bundle
-	    Bundle bundle = (savedInstanceState != null ? savedInstanceState : getIntent().getExtras());
+		Bundle bundle = (savedInstanceState != null ? savedInstanceState : getIntent().getExtras());
 
-	    int[] initialLocationIds = (bundle == null ? null : bundle.getIntArray(EXTRA_MAP_LOCATION_IDS));
-	    List<MapLocation> initialLocations = new LinkedList<>();
-	    if (initialLocationIds != null) {
-		    for (int initialLocationId : initialLocationIds) {
-		        initialLocations.add(map.findLocationById(initialLocationId));
-		    }
-	    }
+		int[] initialLocationIds = (bundle == null ? null : bundle.getIntArray(EXTRA_MAP_LOCATION_IDS));
+		List<MapLocation> initialLocations = new LinkedList<>();
+		if (initialLocationIds != null) {
+			for (int initialLocationId : initialLocationIds) {
+				initialLocations.add(map.findLocationById(initialLocationId));
+			}
+		}
 
-	    int defaultFloorNumber = initialLocations.size() > 0 ? initialLocations.get(0).getFloor().getNumber() : getDefaultFloorNumber();
-	    int floorNumber = (bundle == null ? defaultFloorNumber : bundle.getInt(EXTRA_FLOOR_NUMBER, defaultFloorNumber));
+		int defaultFloorNumber = initialLocations.size() > 0 ? initialLocations.get(0).getFloor().getNumber() : getDefaultFloorNumber();
+		int floorNumber = (bundle == null ? defaultFloorNumber : bundle.getInt(EXTRA_FLOOR_NUMBER, defaultFloorNumber));
 
 		// Show animation only if we don't initially show a location
 		// (we animate the initial location so it will look weird with the marker drops)
 		if (initialLocations.size() > 0) {
 			showAnimation = false;
 		}
-        initializeViewPager();
-	    setFloorInViewPager(floorNumber, initialLocations);
+		initializeViewPager();
+		setFloorInViewPager(floorNumber, initialLocations);
 
 		initializeSearch(savedInstanceState);
-    }
+	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		super.onCreateOptionsMenu(menu);
+	public boolean onCreateCustomOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.menu_map, menu);
 		this.menu = menu;
 		updateZoomMenuItem();
@@ -144,7 +145,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 	private void setFloorInViewPager(int floorNumber, List<MapLocation> initialLocations) {
 		int floorIndex = ConventionMap.FLOOR_NOT_FOUND;
 		if (floorNumber != ConventionMap.FLOOR_NOT_FOUND) {
-		    floorIndex = map.floorNumberToFloorIndex(floorNumber);
+			floorIndex = map.floorNumberToFloorIndex(floorNumber);
 		}
 		// If no floor was sent or looked at or the floor was not found, view the first floor
 		if (floorIndex == ConventionMap.FLOOR_NOT_FOUND) {
@@ -171,29 +172,29 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 	}
 
 	private void initializeViewPager() {
-        viewPager = (ConditionalSwipeVerticalViewPager) findViewById(R.id.map_view_pager);
+		viewPager = (ConditionalSwipeVerticalViewPager) findViewById(R.id.map_view_pager);
 
-        // Configure the view pager
-        viewPager.setAdapter(new MapFloorAdapter(getSupportFragmentManager(), showAnimation));
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-	        @Override
-	        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+		// Configure the view pager
+		viewPager.setAdapter(new MapFloorAdapter(getSupportFragmentManager(), showAnimation));
+		viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+			@Override
+			public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-	        }
+			}
 
-	        @Override
-	        public void onPageSelected(int position) {
-		        Floor floor = pagerPositionToFloor(viewPager.getCurrentItem());
-		        updateCurrentFloor(floor);
-	        }
+			@Override
+			public void onPageSelected(int position) {
+				Floor floor = pagerPositionToFloor(viewPager.getCurrentItem());
+				updateCurrentFloor(floor);
+			}
 
-	        @Override
-	        public void onPageScrollStateChanged(int state) {
-	        }
-        });
+			@Override
+			public void onPageScrollStateChanged(int state) {
+			}
+		});
 
-        // Hold all the fragments in memory for best transition performance
-        viewPager.setOffscreenPageLimit(viewPager.getAdapter().getCount());
+		// Hold all the fragments in memory for best transition performance
+		viewPager.setOffscreenPageLimit(viewPager.getAdapter().getCount());
 
 		viewPager.setCondition(new ConditionalSwipeVerticalViewPager.Condition() {
 			@Override
@@ -202,7 +203,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 			}
 		});
 		showAnimation = false; // Don't show animation next time this activity is created in this session
-    }
+	}
 
 	private void updateCurrentFloor(Floor floor) {
 		setToolbarTitle(floor.getName());
@@ -220,14 +221,14 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 	}
 
 	@Override
-    public void onUpArrowClicked() {
-	    viewPager.setCurrentItem(viewPager.getCurrentItem() - 1, true);
-    }
+	public void onUpArrowClicked() {
+		viewPager.setCurrentItem(viewPager.getCurrentItem() - 1, true);
+	}
 
 	@Override
-    public void onDownArrowClicked() {
+	public void onDownArrowClicked() {
 		viewPager.setCurrentItem(viewPager.getCurrentItem() + 1, true);
-    }
+	}
 
 	private void updateZoomMenuItem() {
 		if (menu == null) {
@@ -260,20 +261,20 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		private final boolean showAnimation;
 
 		public MapFloorAdapter(FragmentManager fm, boolean showAnimation) {
-            super(fm);
-	        this.showAnimation = showAnimation;
-        }
+			super(fm);
+			this.showAnimation = showAnimation;
+		}
 
-        @Override
-        public Fragment getItem(int position) {
-	        return MapFloorFragment.newInstance(pagerPositionToFloor(position).getNumber(), showAnimation);
-        }
+		@Override
+		public Fragment getItem(int position) {
+			return MapFloorFragment.newInstance(pagerPositionToFloor(position).getNumber(), showAnimation);
+		}
 
-        @Override
-        public int getCount() {
-	        return map.getFloors().size();
-        }
-    }
+		@Override
+		public int getCount() {
+			return map.getFloors().size();
+		}
+	}
 
 	private int floorIndexToPagerPosition(int index) {
 		// View pager positions are opposite of the floor numbers because the first
@@ -281,11 +282,11 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		return map.getFloors().size() - 1 - index;
 	}
 
-    private Floor pagerPositionToFloor(int position) {
-	    // View pager positions are opposite of the floor numbers because the first
-	    // position is the top while floors start at the bottom
-        return map.getFloors().get(map.getFloors().size() - 1 - position);
-    }
+	private Floor pagerPositionToFloor(int position) {
+		// View pager positions are opposite of the floor numbers because the first
+		// position is the top while floors start at the bottom
+		return map.getFloors().get(map.getFloors().size() - 1 - position);
+	}
 
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
@@ -309,8 +310,8 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 
 		// Restore state or use defaults
 		searchTerm = (savedInstanceState != null ? savedInstanceState.getString(STATE_SEARCH_TERM) : null);
-		showOnlyHalls = (savedInstanceState != null ? savedInstanceState.getBoolean(STATE_MAP_SEARCH_ONLY_HALLS) : false);
-		boolean showSearch = (savedInstanceState != null ? savedInstanceState.getBoolean(STATE_MAP_SEARCH_OPEN) : false);
+		showOnlyHalls = (savedInstanceState != null && savedInstanceState.getBoolean(STATE_MAP_SEARCH_ONLY_HALLS));
+		boolean showSearch = (savedInstanceState != null && savedInstanceState.getBoolean(STATE_MAP_SEARCH_OPEN));
 		searchContainer.setVisibility(showSearch ? View.VISIBLE : View.GONE);
 
 		Views.hideKeyboardOnClickOutsideEditText(this, searchContainer);
@@ -514,7 +515,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 
 				// Show the "no results found" message if there are no results after applying the filters
 				if ((locationsSearch && locationsSearchResultsAdapter.getCount() == 0) ||
-					(!locationsSearch && standsSearchResultsAdapter.getCount() == 0)) {
+						(!locationsSearch && standsSearchResultsAdapter.getCount() == 0)) {
 					noResultsFound.setVisibility(View.VISIBLE);
 					searchResults.setVisibility(View.GONE);
 				} else {

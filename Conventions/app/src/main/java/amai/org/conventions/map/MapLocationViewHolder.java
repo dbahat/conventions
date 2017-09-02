@@ -40,7 +40,7 @@ public class MapLocationViewHolder extends RecyclerView.ViewHolder {
 		if (image != null) {
 			image.mutate().setColorFilter(ContextCompat.getColor(context, android.R.color.black), PorterDuff.Mode.SRC_ATOP);
 		}
-		// TODO this should be setCompoundDrawablesRelative(image, null, null, null) but in API 17 and 18 it appears on the wrong side.
+		// this should be setCompoundDrawablesRelative(image, null, null, null) but in API 17 and 18 it appears on the wrong side.
 		locationName.setCompoundDrawables(null, null, image, null);
 	}
 }

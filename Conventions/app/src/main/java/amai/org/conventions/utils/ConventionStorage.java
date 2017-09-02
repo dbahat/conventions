@@ -28,7 +28,7 @@ import java.util.Map;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import amai.org.conventions.model.ConventionEvent;
-import amai.org.conventions.model.Feedback;
+import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.Update;
 import amai.org.conventions.model.conventions.Convention;
@@ -36,14 +36,14 @@ import amai.org.conventions.model.conventions.Convention;
 public class ConventionStorage {
 	private static final String TAG = ConventionStorage.class.getCanonicalName();
 
-    private static final String EVENT_USER_INPUT_FILE_NAME = "convention_data_user_input.json";
+	private static final String EVENT_USER_INPUT_FILE_NAME = "convention_data_user_input.json";
 	private static final String CONVENTION_FEEDBACK_FILE_NAME = "convention_feedback.json";
-    private static final String UPDATES_FILE_NAME = "convention_updates.json";
-    private static final String EVENTS_FILE_NAME = "convention_events.json";
+	private static final String UPDATES_FILE_NAME = "convention_updates.json";
+	private static final String EVENTS_FILE_NAME = "convention_events.json";
 
-    private static final ReentrantReadWriteLock filesystemAccessLock = new ReentrantReadWriteLock();
+	private static final ReentrantReadWriteLock filesystemAccessLock = new ReentrantReadWriteLock();
 
-    private static Context context;
+	private static Context context;
 	private final Convention convention;
 	private boolean hasInitialEventsFile;
 	private int initialEventsFileResource = 0;
@@ -86,27 +86,27 @@ public class ConventionStorage {
 	}
 
 	public void saveUserInput() {
-	    Map<String, ConventionEvent.UserInput> origUserInput = convention.getUserInput();
-	    Map<String, ConventionEvent.UserInput> userInput = new LinkedHashMap<>();
-	    for (Map.Entry<String, ConventionEvent.UserInput> entry : origUserInput.entrySet()) {
-		    ConventionEvent.UserInput input = entry.getValue();
-		    if (input.isAttending()
+		Map<String, ConventionEvent.UserInput> origUserInput = convention.getUserInput();
+		Map<String, ConventionEvent.UserInput> userInput = new LinkedHashMap<>();
+		for (Map.Entry<String, ConventionEvent.UserInput> entry : origUserInput.entrySet()) {
+			ConventionEvent.UserInput input = entry.getValue();
+			if (input.isAttending()
 					|| input.getFeedback().hasAnsweredQuestions()
 					|| input.getEventAboutToStartNotification().isEnabled()
 					|| input.getEventFeedbackReminderNotification().isEnabled()) {
-			    try {
-				    // Copy the input and remove unanswered questions
-				    input = input.clone();
-				    input.getFeedback().removeUnansweredQuestions();
-			    } catch (CloneNotSupportedException e) {
-				    throw new RuntimeException(e);
-			    }
-			    userInput.put(entry.getKey(), input);
-		    }
-	    }
+				try {
+					// Copy the input and remove unanswered questions
+					input = input.clone();
+					input.getFeedback().removeUnansweredQuestions();
+				} catch (CloneNotSupportedException e) {
+					throw new RuntimeException(e);
+				}
+				userInput.put(entry.getKey(), input);
+			}
+		}
 
-	    savePrivateFile(createGsonSerializer().toJson(userInput), getEventUserInputFileName());
-    }
+		savePrivateFile(createGsonSerializer().toJson(userInput), getEventUserInputFileName());
+	}
 
 	private static Gson createGsonSerializer() {
 		return new GsonBuilder()
@@ -123,7 +123,7 @@ public class ConventionStorage {
 	}
 
 	public void saveConventionFeedback() {
-		Feedback feedback = convention.getFeedback();
+		Survey feedback = convention.getFeedback();
 		try {
 			feedback = feedback.clone();
 		} catch (CloneNotSupportedException e) {
@@ -133,20 +133,20 @@ public class ConventionStorage {
 		savePrivateFile(createGsonSerializer().toJson(feedback), getConventionFeedbackFileName());
 	}
 
-    public void saveUpdates() {
-	    String updatesJson = createGsonSerializer().toJson(convention.getUpdates());
-	    saveCacheFile(updatesJson, getUpdatesFileName());
-    }
+	public void saveUpdates() {
+		String updatesJson = createGsonSerializer().toJson(convention.getUpdates());
+		saveCacheFile(updatesJson, getUpdatesFileName());
+	}
 
-    public void saveEvents() {
-	    String eventsString = createGsonSerializer().toJson(convention.getEvents());
-	    filesystemAccessLock.writeLock().lock();
-        try {
-            saveCacheFile(eventsString, getEventsFileName());
-        } finally {
-            filesystemAccessLock.writeLock().unlock();
-        }
-    }
+	public void saveEvents() {
+		String eventsString = createGsonSerializer().toJson(convention.getEvents());
+		filesystemAccessLock.writeLock().lock();
+		try {
+			saveCacheFile(eventsString, getEventsFileName());
+		} finally {
+			filesystemAccessLock.writeLock().unlock();
+		}
+	}
 
 	private void saveAndCloseTextFile(String toSave, OutputStream outputStream) throws IOException {
 		OutputStreamWriter writer = new OutputStreamWriter(outputStream);
@@ -176,28 +176,29 @@ public class ConventionStorage {
 	}
 
 	public void initFromFile(Context context) {
-        ConventionStorage.context = context;
+		ConventionStorage.context = context;
 
-        // First get the convention events data (before reading the user input, as it requires us to have the events set).
-        if (!tryReadEventsFromCache()) {
-            readEventsFromLocalResources();
-        }
+		// First get the convention events data (before reading the user input, as it requires us to have the events set).
+		if (!tryReadEventsFromCache()) {
+			readEventsFromLocalResources();
+		}
 
-        readUserInputFromFile();
+		readUserInputFromFile();
 		readConventionFeedbackFromFile();
-        readUpdatesFromFile();
-    }
+		readUpdatesFromFile();
+	}
 
-    private boolean tryReadEventsFromCache() {
-	    List<ConventionEvent> events = readJsonFromCacheFile(new TypeToken<List<ConventionEvent>>() {}.getType(), getEventsFileName());
-        if (events == null) {
+	private boolean tryReadEventsFromCache() {
+		List<ConventionEvent> events = readJsonFromCacheFile(new TypeToken<List<ConventionEvent>>() {
+		}.getType(), getEventsFileName());
+		if (events == null) {
 			// Since we cannot read the cache file, delete it so we won't try to read it again next time
 			tryDeleteCacheFile(getEventsFileName());
-            return false;
-        }
-        convention.setEvents(events);
-        return true;
-    }
+			return false;
+		}
+		convention.setEvents(events);
+		return true;
+	}
 
 	private static void tryDeleteCacheFile(String fileName) {
 		File file = new File(context.getCacheDir(), fileName);
@@ -207,51 +208,54 @@ public class ConventionStorage {
 		}
 	}
 
-    private void readEventsFromLocalResources() {
-	    if (!hasInitialEventsFile) {
-		    throw new RuntimeException("Convention " + convention.getId() + " has no initial events file");
-	    }
+	private void readEventsFromLocalResources() {
+		if (!hasInitialEventsFile) {
+			throw new RuntimeException("Convention " + convention.getId() + " has no initial events file");
+		}
 
-        // No need to lock here, since we only read from the resources and only during app launch.
-	    List<ConventionEvent> events = null;
-	    try {
-		    events = readJsonAndClose(new TypeToken<List<ConventionEvent>>() {}.getType(),
-			        context.getResources().openRawResource(initialEventsFileResource));
-	    } catch (Exception e) {
-		    Log.e(TAG, "Could not read initial application events cache", e);
-	    }
+		// No need to lock here, since we only read from the resources and only during app launch.
+		List<ConventionEvent> events = null;
+		try {
+			events = readJsonAndClose(new TypeToken<List<ConventionEvent>>() {
+					}.getType(),
+					context.getResources().openRawResource(initialEventsFileResource));
+		} catch (Exception e) {
+			Log.e(TAG, "Could not read initial application events cache", e);
+		}
 
-	    // We will load it from the internet if possible
-        if (events == null) {
-	        events = new ArrayList<>();
-        }
-        Convention.getInstance().setEvents(events);
-    }
+		// We will load it from the internet if possible
+		if (events == null) {
+			events = new ArrayList<>();
+		}
+		Convention.getInstance().setEvents(events);
+	}
 
-    private void readUserInputFromFile() {
-	    Map<String, ConventionEvent.UserInput> result =
-			    readJsonFromFile(new TypeToken<Map<String, ConventionEvent.UserInput>>() {}.getType(), getEventUserInputFileName());
-        if (result == null) {
-            return;
-        }
-
-	    Map<String, ConventionEvent.UserInput> currentUserInput = convention.getUserInput();
-	    for (Map.Entry<String, ConventionEvent.UserInput> entry : result.entrySet()) {
-		    ConventionEvent.UserInput currentInput = currentUserInput.get(entry.getKey());
-		    // Ignore non-existing events
-		    if (currentInput != null) {
-			    currentInput.updateFrom(entry.getValue());
-		    }
-	    }
-    }
-
-	private void readConventionFeedbackFromFile() {
-		Feedback result = readJsonFromFile(Feedback.class, getConventionFeedbackFileName());
+	private void readUserInputFromFile() {
+		Map<String, ConventionEvent.UserInput> result =
+				readJsonFromFile(new TypeToken<Map<String, ConventionEvent.UserInput>>() {
+				}.getType(), getEventUserInputFileName());
 		if (result == null) {
 			return;
 		}
 
-		Feedback currentFeedback = convention.getFeedback();
+		Map<String, ConventionEvent.UserInput> currentUserInput = convention.getUserInput();
+		for (Map.Entry<String, ConventionEvent.UserInput> entry : result.entrySet()) {
+			ConventionEvent.UserInput currentInput = currentUserInput.get(entry.getKey());
+			// Ignore non-existing events
+			if (currentInput != null) {
+				currentInput.updateFrom(entry.getValue());
+				convention.convertUserInputForEvent(currentInput, convention.findEventById(entry.getKey()));
+			}
+		}
+	}
+
+	private void readConventionFeedbackFromFile() {
+		Survey result = readJsonFromFile(Survey.class, getConventionFeedbackFileName());
+		if (result == null) {
+			return;
+		}
+
+		Survey currentFeedback = convention.getFeedback();
 		currentFeedback.updateFrom(result);
 	}
 
@@ -265,12 +269,13 @@ public class ConventionStorage {
 	}
 
 	private void readUpdatesFromFile() {
-		List<Update> updates = readJsonFromCacheFile(new TypeToken<List<Update>>() {}.getType(), getUpdatesFileName());
-        if (updates == null) {
-            return;
-        }
-        convention.setUpdates(updates);
-    }
+		List<Update> updates = readJsonFromCacheFile(new TypeToken<List<Update>>() {
+		}.getType(), getUpdatesFileName());
+		if (updates == null) {
+			return;
+		}
+		convention.setUpdates(updates);
+	}
 
 	private static InputStream openTextFile(String fileName) {
 		try {

@@ -28,86 +28,88 @@ import amai.org.conventions.utils.Log;
 public class SffModelParser implements ModelParser {
 	private static final String TAG = SffModelParser.class.getCanonicalName();
 
-    public List<ConventionEvent> parse(InputStreamReader reader) {
-        JsonParser jp = new JsonParser();
-        JsonElement root = jp.parse(reader);
-        JsonArray events = root.getAsJsonArray();
+	public List<ConventionEvent> parse(InputStreamReader reader) {
+		JsonParser jp = new JsonParser();
+		JsonElement root = jp.parse(reader);
+		JsonArray events = root.getAsJsonArray();
 
-        List<ConventionEvent> eventList = new LinkedList<>();
+		List<ConventionEvent> eventList = new LinkedList<>();
 
-        for (JsonElement event : events) {
-            JsonObject eventObj = event.getAsJsonObject();
-            int eventId = eventObj.get("id").getAsInt();
-            String eventType = decodeHtml(eventObj.get("track").getAsString());
+		for (JsonElement event : events) {
+			JsonObject eventObj = event.getAsJsonObject();
+			int eventId = eventObj.get("id").getAsInt();
+			String eventType = decodeHtml(eventObj.get("track").getAsString());
 
 
-	        String title = decodeHtml(eventObj.get("title").getAsString());
+			String title = decodeHtml(eventObj.get("title").getAsString());
 
-            String eventDescription = parseEventDescription(eventObj.get("description").getAsString());
+			String eventDescription = parseEventDescription(eventObj.get("description").getAsString());
 
-            JsonObject timeObject = eventObj.get("time").getAsJsonObject();
-            Date startTime = parseEventTime(timeObject.get("start").getAsString());
-            Date endTime = parseEventTime(timeObject.get("end").getAsString());
-            JsonArray speakers = eventObj.get("speakers").getAsJsonArray();
-            String allSpeakers = speakers.size() > 0 ? TextUtils.join(", ", getSpeakers(speakers)) : "";
+			JsonObject timeObject = eventObj.get("time").getAsJsonObject();
+			Date startTime = parseEventTime(timeObject.get("start").getAsString());
+			Date endTime = parseEventTime(timeObject.get("end").getAsString());
+			JsonArray speakers = eventObj.get("speakers").getAsJsonArray();
+			String allSpeakers = speakers.size() > 0 ? TextUtils.join(", ", getSpeakers(speakers)) : "";
 
-            String hallName = eventObj.get("location").isJsonNull() ? "" : decodeHtml(eventObj.get("location").getAsString());
-            if (TextUtils.isEmpty(hallName)) {
-                // Some SF-F events came up corrupted without hall name. Ignore them during parsing.
-                continue;
-            }
+			String hallName = eventObj.get("location").isJsonNull() ? "" : decodeHtml(eventObj.get("location").getAsString());
+			if (TextUtils.isEmpty(hallName)) {
+				// Some SF-F events came up corrupted without hall name. Ignore them during parsing.
+				continue;
+			}
 
-	        Hall hall = Convention.getInstance().findHallByName(hallName);
-	        if (hall == null) {
-		        // Add a new hall to the convention
-		        hall = Convention.getInstance().addHall(hallName);
-		        Log.i(TAG, "Found and added new hall with name " + hallName);
-	        }
+			Hall hall = Convention.getInstance().getHalls().findByName(hallName);
+			if (hall == null) {
+				// Add a new hall to the convention
+				hall = Convention.getInstance().getHalls().add(hallName);
+				Log.i(TAG, "Found and added new hall with name " + hallName);
+			}
 
-	        // We convert the categories to a single string because there is only 1 category
-	        // except in the case of attractions/fandom that always come together
-            JsonArray categories = eventObj.get("categories").getAsJsonArray();
-            String category = categories.size() > 0 ? categories.get(0).getAsString() : "";
+			// We convert the categories to a single string because there is only 1 category
+			// except in the case of attractions/fandom that always come together
+			JsonArray categories = eventObj.get("categories").getAsJsonArray();
+			String category = categories.size() > 0 ? categories.get(0).getAsString() : "";
 
-	        // Tags are returned as an object: {1: "tag1", 2: "tag2"} or a string: "tag1"
-	        List<String> tags;
-	        JsonElement tagsElement = eventObj.get("tags");
-	        if (tagsElement.isJsonObject()) {
-	            tags = convertValuesToStringList(tagsElement.getAsJsonObject());
-	        } else {
-		        tags = Collections.singletonList(decodeHtml(tagsElement.getAsString()));
-	        }
+			// Tags are returned as an object: {1: "tag1", 2: "tag2"} or a string: "tag1"
+			List<String> tags;
+			JsonElement tagsElement = eventObj.get("tags");
+			if (tagsElement == null) {
+				tags = Collections.emptyList();
+			} else if (tagsElement.isJsonObject()) {
+				tags = convertValuesToStringList(tagsElement.getAsJsonObject());
+			} else {
+				tags = Collections.singletonList(decodeHtml(tagsElement.getAsString()));
+			}
 
-	        int price;
-	        JsonElement priceElement = eventObj.get("price");
-	        if (priceElement.getAsString().equals("חינם")) {
-		        price = 0;
-	        } else {
-	            price = priceElement.getAsInt();
-	        }
+			int price;
+			JsonElement priceElement = eventObj.get("price");
+			if (priceElement.getAsString().equals("חינם")) {
+				price = 0;
+			} else {
+				price = priceElement.getAsInt();
+			}
 
-	        String websiteUrl = eventObj.get("url").getAsString();
+			String websiteUrl = eventObj.get("url").getAsString();
 
-	        ConventionEvent conventionEvent = new ConventionEvent()
-                    .withServerId(eventId)
-                    .withTitle(title)
-                    .withLecturer(allSpeakers)
-                    .withType(new EventType(eventType))
-                    .withDescription(eventDescription)
-                    .withStartTime(startTime)
-                    .withEndTime(endTime)
-                    .withHall(hall)
-                    .withId(String.valueOf(eventId))
-                    .withCategory(category)
-		            .withTags(tags)
-			        .withPrice(price)
-			        .withWebsiteUrl(websiteUrl);
+			ConventionEvent conventionEvent = new ConventionEvent()
+					.withServerId(eventId)
+					.withTitle(title)
+					.withLecturer(allSpeakers)
+					.withType(new EventType(eventType))
+					.withDescription(eventDescription)
+					.withStartTime(startTime)
+					.withEndTime(endTime)
+					.withHall(hall)
+					.withId(String.valueOf(eventId))
+					.withCategory(category)
+					.withTags(tags)
+					.withPrice(price)
+					.withWebsiteUrl(websiteUrl);
 
-            eventList.add(conventionEvent);
-        }
+			eventList.add(conventionEvent);
+		}
 
-        return eventList;
-    }
+		return eventList;
+	}
 
 	private String decodeHtml(String string) {
 		if (string == null) {
@@ -139,30 +141,30 @@ public class SffModelParser implements ModelParser {
 		}
 	}
 
-    private List<String> getSpeakers(JsonArray speakers) {
-        LinkedList<String> result = new LinkedList<>();
-        for (JsonElement speaker : speakers) {
-            result.add(decodeHtml(speaker.getAsString()));
-        }
-        return result;
-    }
+	private List<String> getSpeakers(JsonArray speakers) {
+		LinkedList<String> result = new LinkedList<>();
+		for (JsonElement speaker : speakers) {
+			result.add(decodeHtml(speaker.getAsString()));
+		}
+		return result;
+	}
 
-    private String parseEventDescription(String rawEventDescription) {
-	    if (rawEventDescription == null) {
-		    return "";
-	    }
+	private String parseEventDescription(String rawEventDescription) {
+		if (rawEventDescription == null) {
+			return "";
+		}
 
-        return rawEventDescription
-                // Remove class, style, height and width attributes in tags since they make the element take
-                // up more space than needed and are not supported anyway
-                .replaceAll("class=\"[^\"]*\"", "")
-                .replaceAll("style=\"[^\"]*\"", "")
-                .replaceAll("width=\"[^\"]*\"", "")
-                .replaceAll("height=\"[^\"]*\"", "")
-                        // Replace divs and images with some other unsupported (and therefore ignored)
-                .replace("<div", "<xdiv")
-                .replace("/div>", "/xdiv>")
-                        // Remove tabs because they are not treated as whitespace and mess up the formatting
-                .replace("\t", "    ");
-    }
+		return rawEventDescription
+				// Remove class, style, height and width attributes in tags since they make the element take
+				// up more space than needed and are not supported anyway
+				.replaceAll("class=\"[^\"]*\"", "")
+				.replaceAll("style=\"[^\"]*\"", "")
+				.replaceAll("width=\"[^\"]*\"", "")
+				.replaceAll("height=\"[^\"]*\"", "")
+						// Replace divs and images with some other unsupported (and therefore ignored)
+				.replace("<div", "<xdiv")
+				.replace("/div>", "/xdiv>")
+						// Remove tabs because they are not treated as whitespace and mess up the formatting
+				.replace("\t", "	");
+	}
 }

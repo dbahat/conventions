@@ -9,8 +9,10 @@
     tools:context="amai.org.conventions.navigation.NavigationActivity">
 
     <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/toolbarAndContentContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="?activitiesBackground">
 
         <!-- Removing elevation so we can show the tab layout in the same elevation and still be backwards compatible.
              Instead of elevation we add a shadow in the content container foreground. -->
@@ -28,11 +30,35 @@
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:titleTextAppearance="@style/ToolbarTitle"
+                android:titleMargin="0dp"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="?toolbarBackground"
                 app:layout_scrollFlags="scroll|enterAlways"
-                app:contentInsetStart="0dp"/>
+                app:contentInsetStart="0dp">
+
+                <amai.org.conventions.customviews.CenterInToolbarFrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="16dp"> <!-- by default Android seems to leave 16dp margin from the nav bar to the toolbar layout.
+                    This margin is not included in the size of the nav bar so we can't find it when calculating the size of the nav bar. -->
+
+                    <!-- Using a custom textView for the toolbar title for better customization (allow centering the title, allow showing an image
+                     instead of text) -->
+                    <TextView
+                        android:id="@+id/navigation_toolbar_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
+                        tools:text="title"
+                        android:textColor="@color/black"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        style="@style/ToolbarTitle"/>
+
+                </amai.org.conventions.customviews.CenterInToolbarFrameLayout>
+            </android.support.v7.widget.Toolbar>
 
         </android.support.design.widget.AppBarLayout>
 
@@ -43,7 +69,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:foreground="@drawable/bottom_shadow"/>
+            android:foreground="?attr/shadowForeground"/>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/action_button"
@@ -55,18 +81,14 @@
             app:layout_anchor="@+id/navigation_content_view_container"
             app:layout_anchorGravity="bottom|end"
             android:layout_margin="16dp"
-            app:elevation="4dp" />
+            app:elevation="4dp"
+            app:backgroundTint="?actionButtonColor"/>
 
     </android.support.design.widget.CoordinatorLayout>
 
-    <ListView
-        android:id="@+id/navigation_items"
+    <include layout="@layout/layout_navigation_drawer"
         android:layout_gravity="start"
-        android:divider="@android:color/darker_gray"
-        android:background="@color/white"
-        android:dividerHeight="1dp"
         android:layout_width="250dp"
-        android:layout_height="match_parent">
-    </ListView>
+        android:layout_height="match_parent"/>
 
 </android.support.v4.widget.DrawerLayout>

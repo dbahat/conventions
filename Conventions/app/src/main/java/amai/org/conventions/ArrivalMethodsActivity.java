@@ -27,17 +27,17 @@ import sff.org.conventions.R;
 
 public class ArrivalMethodsActivity extends NavigationActivity implements OnMapReadyCallback {
 
-    private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+	private GoogleMap mMap; // Might be null if Google Play services APK is not available.
 	private View arrivalMethodsRoot;
 	private View mapFragment;
 	private View noMapLayout;
 	private Button installPlayServicesButton;
 
 	@Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentInContentContainer(R.layout.activity_arrival_methods, false, false);
-        setToolbarTitle(getResources().getString(R.string.arrival_methods));
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentInContentContainer(R.layout.activity_arrival_methods, false, false);
+		setToolbarTitle(getResources().getString(R.string.arrival_methods));
 
 		arrivalMethodsRoot = findViewById(R.id.arrival_methods_root);
 		mapFragment = findViewById(R.id.map);
@@ -47,16 +47,16 @@ public class ArrivalMethodsActivity extends NavigationActivity implements OnMapR
 		TextView arrivalMethodsDescription = (TextView) findViewById(R.id.arrival_methods_description);
 		arrivalMethodsDescription.setText(Html.fromHtml(getString(R.string.arrival_method_description), null, new ListTagHandler()));
 		arrivalMethodsDescription.setMovementMethod(LinkMovementMethod.getInstance());
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        setUpMapIfNeeded();
-    }
+	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	protected void onResume() {
+		super.onResume();
+		setUpMapIfNeeded();
+	}
+
+	@Override
+	public boolean onCreateCustomOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.arrival_methods_menu, menu);
 		return true;
 	}
@@ -99,45 +99,45 @@ public class ArrivalMethodsActivity extends NavigationActivity implements OnMapR
 	}
 
 	/**
-     * Sets up the map if it is possible to do so (i.e., the Google Play services APK is correctly
-     * installed) and the map has not already been instantiated.. This will ensure that we only ever
-     * call {@link #setUpMap()} once when {@link #mMap} is not null.
-     * <p/>
-     * If it isn't installed {@link SupportMapFragment} (and
-     * {@link com.google.android.gms.maps.MapView MapView}) will show a prompt for the user to
-     * install/update the Google Play services APK on their device.
-     * <p/>
-     * A user can return to this FragmentActivity after following the prompt and correctly
-     * installing/updating/enabling the Google Play services. Since the FragmentActivity may not
-     * have been completely destroyed during this process (it is likely that it would only be
-     * stopped or paused), {@link #onCreate(Bundle)} may not be called again so we should call this
-     * method in {@link #onResume()} to guarantee that it will be called.
-     */
-    private void setUpMapIfNeeded() {
-        // Do a null check to confirm that we have not already instantiated the map.
-        if (mMap == null) {
-	        final PlayServicesInstallation.CheckResult checkResult = PlayServicesInstallation.checkPlayServicesExist(this, true);
-	        if (checkResult.isSuccess()) {
-		        mapFragment.setVisibility(View.VISIBLE);
-		        noMapLayout.setVisibility(View.GONE);
+	 * Sets up the map if it is possible to do so (i.e., the Google Play services APK is correctly
+	 * installed) and the map has not already been instantiated.. This will ensure that we only ever
+	 * call {@link #setUpMap()} once when {@link #mMap} is not null.
+	 * <p/>
+	 * If it isn't installed {@link SupportMapFragment} (and
+	 * {@link com.google.android.gms.maps.MapView MapView}) will show a prompt for the user to
+	 * install/update the Google Play services APK on their device.
+	 * <p/>
+	 * A user can return to this FragmentActivity after following the prompt and correctly
+	 * installing/updating/enabling the Google Play services. Since the FragmentActivity may not
+	 * have been completely destroyed during this process (it is likely that it would only be
+	 * stopped or paused), {@link #onCreate(Bundle)} may not be called again so we should call this
+	 * method in {@link #onResume()} to guarantee that it will be called.
+	 */
+	private void setUpMapIfNeeded() {
+		// Do a null check to confirm that we have not already instantiated the map.
+		if (mMap == null) {
+			final PlayServicesInstallation.CheckResult checkResult = PlayServicesInstallation.checkPlayServicesExist(this, true);
+			if (checkResult.isSuccess()) {
+				mapFragment.setVisibility(View.VISIBLE);
+				noMapLayout.setVisibility(View.GONE);
 
-	            // Try to obtain the map from the SupportMapFragment.
-	            ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMapAsync(this);
-	        } else {
-		        // This will be displayed if the user cancelled or postponed installation when the app first loaded
-		        // and also if play services was not found due to some other error. In the latter case we might want
-		        // to show a different error, but I don't know what the cause might be.
-		        mapFragment.setVisibility(View.GONE);
-		        noMapLayout.setVisibility(View.VISIBLE);
-		        installPlayServicesButton.setOnClickListener(new View.OnClickListener() {
-			        @Override
-			        public void onClick(View v) {
-				        PlayServicesInstallation.resolvePlayServicesError(ArrivalMethodsActivity.this, checkResult);
-			        }
-		        });
-	        }
-        }
-    }
+				// Try to obtain the map from the SupportMapFragment.
+				((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMapAsync(this);
+			} else {
+				// This will be displayed if the user cancelled or postponed installation when the app first loaded
+				// and also if play services was not found due to some other error. In the latter case we might want
+				// to show a different error, but I don't know what the cause might be.
+				mapFragment.setVisibility(View.GONE);
+				noMapLayout.setVisibility(View.VISIBLE);
+				installPlayServicesButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						PlayServicesInstallation.resolvePlayServicesError(ArrivalMethodsActivity.this, checkResult);
+					}
+				});
+			}
+		}
+	}
 
 	@Override
 	public void onMapReady(GoogleMap googleMap) {
@@ -156,19 +156,19 @@ public class ArrivalMethodsActivity extends NavigationActivity implements OnMapR
 		}
 	}
 
-    /**
-     * This is where we can add markers or lines, add listeners or move the camera. In this case, we
-     * just add a marker near Africa.
-     * <p/>
-     * This should only be called once and when we are sure that {@link #mMap} is not null.
-     */
-    private void setUpMap() {
-	    LatLng conventionLocation = new LatLng(Convention.getInstance().getLatitude(), Convention.getInstance().getLongitude());
+	/**
+	 * This is where we can add markers or lines, add listeners or move the camera. In this case, we
+	 * just add a marker near Africa.
+	 * <p/>
+	 * This should only be called once and when we are sure that {@link #mMap} is not null.
+	 */
+	private void setUpMap() {
+		LatLng conventionLocation = new LatLng(Convention.getInstance().getLatitude(), Convention.getInstance().getLongitude());
 
-        mMap.addMarker(new MarkerOptions()
-                .position(conventionLocation)
-                .title(getResources().getString(R.string.arrival_methods_marker_name, Convention.getInstance().getDisplayName())));
+		mMap.addMarker(new MarkerOptions()
+				.position(conventionLocation)
+				.title(getResources().getString(R.string.arrival_methods_marker_name, Convention.getInstance().getDisplayName())));
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(conventionLocation, 16));
-    }
+		mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(conventionLocation, 16));
+	}
 }

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_gravity="bottom"
+    android:layout_margin="24dp"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?homeTitleBackground"
+        android:padding="8dp">
+        <TextView
+            android:id="@+id/home_content_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="32sp"
+            android:textColor="?homeTitleText"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            tools:text="@string/home_help_us_improve"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/home_content_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:foreground="?selectableItemBackground"
+        android:clickable="true"
+        android:background="?homeMessageBackground">
+
+        <TextView
+            android:id="@+id/home_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="@string/home_send_feedback"
+            android:textColor="?homeMessageText"
+            android:textStyle="bold"
+            android:textSize="70sp"
+            android:textAlignment="center"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="13dp"/>
+
+    </FrameLayout>
+</LinearLayout>

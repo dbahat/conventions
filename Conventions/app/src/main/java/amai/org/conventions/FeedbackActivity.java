@@ -26,14 +26,12 @@ import amai.org.conventions.events.CollapsibleFeedbackView;
 import amai.org.conventions.events.activities.EventActivity;
 import amai.org.conventions.events.activities.ProgrammeActivity;
 import amai.org.conventions.events.adapters.EventsViewWithDateHeaderAdapter;
+import amai.org.conventions.feedback.SurveySender;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventEndTimeComparator;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.CollectionUtils;
-import amai.org.conventions.utils.ConventionFeedbackMail;
-import amai.org.conventions.utils.EventFeedbackMail;
-import amai.org.conventions.utils.FeedbackMail;
 import amai.org.conventions.utils.Log;
 import sff.org.conventions.R;
 
@@ -103,8 +101,8 @@ public class FeedbackActivity extends NavigationActivity {
 						for (ConventionEvent event : eventsWithUnsentFeedback) {
 							try {
 
-								FeedbackMail mail = new EventFeedbackMail(FeedbackActivity.this, event);
-								mail.send();
+								SurveySender feedbackSender = Convention.getInstance().getEventFeedbackSender(event);
+								feedbackSender.send();
 
 								Convention.getInstance().getStorage().saveUserInput();
 								event.getUserInput().getFeedback().resetChangedAnswers();
@@ -125,7 +123,7 @@ public class FeedbackActivity extends NavigationActivity {
 							progressAnimation.cancel();
 						}
 						progressAnimation = ObjectAnimator.ofInt(sendAllProgress, "progress", progress, progress + ITEM_PROGRESS);
-						// Assuming sending a mail takes less than 5 seconds on average, we set the animation to be long enough
+						// Assuming sending the feedback takes less than 5 seconds on average, we set the animation to be long enough
 						// that it wil run until the next update. Even if we update it again before it's finished it will appear
 						// smooth because we always start from the previous value.
 						progressAnimation.setDuration(5000);
@@ -144,8 +142,8 @@ public class FeedbackActivity extends NavigationActivity {
 						setupEventLists(true);
 
 						if (exception != null) {
-							Log.w(TAG, "Failed to send feedback mail. Reason: " + exception.getClass().getSimpleName() + ": " + exception.getMessage());
-							Toast.makeText(FeedbackActivity.this, R.string.feedback_send_mail_failed, Toast.LENGTH_LONG).show();
+							Log.w(TAG, "Failed to send feedback. Reason: " + exception.getClass().getSimpleName() + ": " + exception.getMessage());
+							Toast.makeText(FeedbackActivity.this, R.string.feedback_send_failed, Toast.LENGTH_LONG).show();
 						}
 					}
 
@@ -212,7 +210,7 @@ public class FeedbackActivity extends NavigationActivity {
 			if (update && eventsWithSentFeedbackList.getAdapter() != null) {
 				((EventsViewWithDateHeaderAdapter) eventsWithSentFeedbackList.getAdapter()).setEventsList(eventsWithSentFeedback);
 			} else {
-				eventsWithSentFeedbackList.setAdapter(new EventsViewWithDateHeaderAdapter(eventsWithSentFeedback));
+				eventsWithSentFeedbackList.setAdapter(new EventsViewWithDateHeaderAdapter(eventsWithSentFeedback, shouldShowEventHeaders()));
 			}
 		}
 	}
@@ -237,7 +235,7 @@ public class FeedbackActivity extends NavigationActivity {
 			if (update && eventsWithoutFeedbackList.getAdapter() != null) {
 				((EventsViewWithDateHeaderAdapter) eventsWithoutFeedbackList.getAdapter()).setEventsList(eventsWithoutFeedback);
 			} else {
-				eventsWithoutFeedbackList.setAdapter(new EventsViewWithDateHeaderAdapter(eventsWithoutFeedback));
+				eventsWithoutFeedbackList.setAdapter(new EventsViewWithDateHeaderAdapter(eventsWithoutFeedback, shouldShowEventHeaders()));
 			}
 
 			if (Convention.getInstance().isFeedbackSendingTimeOver()) {
@@ -260,6 +258,11 @@ public class FeedbackActivity extends NavigationActivity {
 				}
 			}
 		}
+	}
+
+	private boolean shouldShowEventHeaders() {
+		// Only show headers for conventions lasting more than 1 day
+		return Convention.getInstance().getLengthInDays() > 1;
 	}
 
 	private void setupEventLists(boolean update) {
@@ -297,10 +300,11 @@ public class FeedbackActivity extends NavigationActivity {
 		feedbackView = (CollapsibleFeedbackView) findViewById(R.id.convention_feedback_view);
 		feedbackView.setState(CollapsibleFeedbackView.State.ExpandedHeadless, false);
 		feedbackView.setModel(Convention.getInstance().getFeedback());
-		feedbackView.setSendFeedbackClickListener(feedbackView.new CollapsibleFeedbackViewSendMailListener() {
+		feedbackView.setTextColor(ThemeAttributes.getColor(this, R.attr.conventionFeedbackTextColor));
+		feedbackView.setSendFeedbackClickListener(feedbackView.new CollapsibleFeedbackViewSendListener() {
 			@Override
-			protected FeedbackMail getFeedbackMail() {
-				return new ConventionFeedbackMail(FeedbackActivity.this);
+			protected SurveySender getSurveySender() {
+				return Convention.getInstance().getConventionFeedbackSender();
 			}
 
 			@Override
@@ -311,7 +315,7 @@ public class FeedbackActivity extends NavigationActivity {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onCreateCustomOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.menu_feedback, menu);
 		return true;
 	}

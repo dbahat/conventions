@@ -29,82 +29,87 @@ public class ConventionsApplication extends Application {
 	private final static String TAG = ConventionsApplication.class.getCanonicalName();
 
 	private static Tracker tracker;
-    public static LocalNotificationScheduler alarmScheduler;
-    public static Settings settings;
+	public static LocalNotificationScheduler alarmScheduler;
+	public static Settings settings;
 	private static String versionName;
 	private static Context currentContext;
+	private static Context appContext;
 
 	@Override
-    public void onCreate() {
-        super.onCreate();
+	public void onCreate() {
+		super.onCreate();
+		appContext = this;
 
-        Locale.setDefault(Dates.getLocale());
-        Convention.getInstance().load(this);
+		Locale.setDefault(Dates.getLocale());
+		Convention.getInstance().load(this);
 
-	    if (!BuildConfig.DEBUG) {
-		    GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
-	        analytics.setLocalDispatchPeriod(1800);
+		if (!BuildConfig.DEBUG) {
+			GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
+			analytics.setLocalDispatchPeriod(1800);
 
-	        tracker = analytics.newTracker("UA-65293055-2");
-	        tracker.enableExceptionReporting(true);
-	        tracker.enableAutoActivityTracking(true);
-	    }
+			tracker = analytics.newTracker("UA-65293055-2");
+			tracker.enableExceptionReporting(true);
+			tracker.enableAutoActivityTracking(true);
+		}
 
 		settings = new Settings(this);
-        alarmScheduler = new LocalNotificationScheduler(this);
-        restoreAlarmConfiguration();
+		alarmScheduler = new LocalNotificationScheduler(this);
+		restoreAlarmConfiguration();
 
-        // Change uncaught exception parser to include more information
-        Thread.UncaughtExceptionHandler uncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
-        if (uncaughtExceptionHandler instanceof ExceptionReporter) {
-            ExceptionReporter exceptionReporter = (ExceptionReporter) uncaughtExceptionHandler;
-            exceptionReporter.setExceptionParser(new ExtendedExceptionParser(this, null));
-        }
+		// Change uncaught exception parser to include more information
+		Thread.UncaughtExceptionHandler uncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
+		if (uncaughtExceptionHandler instanceof ExceptionReporter) {
+			ExceptionReporter exceptionReporter = (ExceptionReporter) uncaughtExceptionHandler;
+			exceptionReporter.setExceptionParser(new ExtendedExceptionParser(this, null));
+		}
 
-        alarmScheduler.scheduleNotificationsToFillConventionFeedback();
+		alarmScheduler.scheduleNotificationsToFillConventionFeedback();
 
-	    try {
-		    versionName = this.getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
-	    } catch (Exception e) {
-		    Log.i(TAG, "Could not get version name: " + e.getMessage());
-	    }
+		try {
+			versionName = this.getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
+		} catch (Exception e) {
+			Log.i(TAG, "Could not get version name: " + e.getMessage());
+		}
 
-	    // Keep reference to current activity for showing dialogs and notifications from any activity
-	    registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
-		    @Override
-		    public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-			    // Important - only keep our activities here! Update when adding new activities if
-			    // they aren't NavigationActivity!
-			    if (activity instanceof NavigationActivity || activity instanceof SplashActivity) {
-			        currentContext = activity;
-			    }
-		    }
+		// Keep reference to current activity for showing dialogs and notifications from any activity
+		registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
+			@Override
+			public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+				// Important - only keep our activities here! Update when adding new activities if
+				// they aren't NavigationActivity!
+				if (activity instanceof NavigationActivity || activity instanceof SplashActivity) {
+					currentContext = activity;
+				}
+			}
 
-		    @Override
-		    public void onActivityStopped(Activity activity) {
-			    if (currentContext == activity) {
-			        currentContext = null;
-			    }
-		    }
+			@Override
+			public void onActivityStopped(Activity activity) {
+				if (currentContext == activity) {
+					currentContext = null;
+				}
+			}
 
-		    @Override
-		    public void onActivityStarted(Activity activity) {
-		    }
-		    @Override
-		    public void onActivityResumed(Activity activity) {
-		    }
-		    @Override
-		    public void onActivityPaused(Activity activity) {
-		    }
+			@Override
+			public void onActivityStarted(Activity activity) {
+			}
 
-		    @Override
-		    public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
-		    }
-		    @Override
-		    public void onActivityDestroyed(Activity activity) {
-		    }
-	    });
-    }
+			@Override
+			public void onActivityResumed(Activity activity) {
+			}
+
+			@Override
+			public void onActivityPaused(Activity activity) {
+			}
+
+			@Override
+			public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+			}
+
+			@Override
+			public void onActivityDestroyed(Activity activity) {
+			}
+		});
+	}
 
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
@@ -113,53 +118,57 @@ public class ConventionsApplication extends Application {
 		Locale.setDefault(Dates.getLocale());
 	}
 
+	public static Context getAppContext() {
+		return appContext;
+	}
+
 	/**
-     * Since the Android AlarmManager gets reset whenever the device reboots, we re-schedule all the notifications when the app is launched.
-     */
-    private void restoreAlarmConfiguration() {
-        for (ConventionEvent event : Convention.getInstance().getEvents()) {
-            restoreAlarmConfiguration(event, event.getUserInput().getEventAboutToStartNotification());
-	        restoreAlarmConfiguration(event, event.getUserInput().getEventFeedbackReminderNotification());
-        }
-    }
+	 * Since the Android AlarmManager gets reset whenever the device reboots, we re-schedule all the notifications when the app is launched.
+	 */
+	private void restoreAlarmConfiguration() {
+		for (ConventionEvent event : Convention.getInstance().getEvents()) {
+			restoreAlarmConfiguration(event, event.getUserInput().getEventAboutToStartNotification());
+			restoreAlarmConfiguration(event, event.getUserInput().getEventFeedbackReminderNotification());
+		}
+	}
 
-    private void restoreAlarmConfiguration(ConventionEvent event, EventNotification eventNotification) {
-        if (eventNotification != null && eventNotification.isEnabled()) {
-            switch (eventNotification.getType()) {
-                case AboutToStart:
-                    alarmScheduler.scheduleEventAboutToStartNotification(event, eventNotification.getNotificationTime().getTime());
-                    break;
-                case FeedbackReminder:
-                    alarmScheduler.scheduleFillFeedbackOnEventNotification(event, eventNotification.getNotificationTime().getTime());
-                    break;
-            }
-        }
-    }
+	private void restoreAlarmConfiguration(ConventionEvent event, EventNotification eventNotification) {
+		if (eventNotification != null && eventNotification.isEnabled()) {
+			switch (eventNotification.getType()) {
+				case AboutToStart:
+					alarmScheduler.scheduleEventAboutToStartNotification(event, eventNotification.getNotificationTime().getTime());
+					break;
+				case FeedbackReminder:
+					alarmScheduler.scheduleFillFeedbackOnEventNotification(event, eventNotification.getNotificationTime().getTime());
+					break;
+			}
+		}
+	}
 
-    @Override
-    public void onTrimMemory(int level) {
-        // Release memory when low
-        if (level >= TRIM_MEMORY_RUNNING_LOW) {
-            ImageHandler.releaseCache();
-        }
-        super.onTrimMemory(level);
-    }
+	@Override
+	public void onTrimMemory(int level) {
+		// Release memory when low
+		if (level >= TRIM_MEMORY_RUNNING_LOW) {
+			ImageHandler.releaseCache();
+		}
+		super.onTrimMemory(level);
+	}
 
-    private static class ExtendedExceptionParser extends StandardExceptionParser {
+	private static class ExtendedExceptionParser extends StandardExceptionParser {
 
-        public ExtendedExceptionParser(Context context, Collection<String> additionalPackages) {
-            super(context, additionalPackages);
-        }
+		public ExtendedExceptionParser(Context context, Collection<String> additionalPackages) {
+			super(context, additionalPackages);
+		}
 
-        @Override
-        public String getDescription(String threadName, Throwable t) {
-            String description = super.getDescription(threadName, t);
+		@Override
+		public String getDescription(String threadName, Throwable t) {
+			String description = super.getDescription(threadName, t);
 
-            return String.format(Dates.getLocale(), "%s. %s.",
-                    description,
-                    android.util.Log.getStackTraceString(t));
-        }
-    }
+			return String.format(Dates.getLocale(), "%s. %s.",
+					description,
+					android.util.Log.getStackTraceString(t));
+		}
+	}
 
 	public static String getVersionName() {
 		return versionName;

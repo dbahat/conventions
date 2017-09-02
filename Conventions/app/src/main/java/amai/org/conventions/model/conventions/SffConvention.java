@@ -8,4 +8,9 @@ public abstract class SffConvention extends Convention {
 	public ModelParser getModelParser() {
 		return new SffModelParser();
 	}
+
+	@Override
+	public String getGoogleSpreadsheetsApiKey() {
+		return "AIzaSyAKJYwC7UeHyBpcVqvXABRxhEQmLiK2TRo";
+	}
 }

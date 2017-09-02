@@ -5,8 +5,8 @@ import java.util.Date;
 
 public class Update implements Serializable {
 	private String id;
-    private String text;
-    private Date date;
+	private String text;
+	private Date date;
 	private boolean isNew;
 
 	public String getId() {
@@ -36,28 +36,28 @@ public class Update implements Serializable {
 	}
 
 	public String getText() {
-        return text;
-    }
+		return text;
+	}
 
-    public void setText(String text) {
-        this.text = text;
-    }
+	public void setText(String text) {
+		this.text = text;
+	}
 
-    public Date getDate() {
-        return date;
-    }
+	public Date getDate() {
+		return date;
+	}
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+	public void setDate(Date date) {
+		this.date = date;
+	}
 
-    public Update withText(String text) {
-        setText(text);
-        return this;
-    }
+	public Update withText(String text) {
+		setText(text);
+		return this;
+	}
 
-    public Update withDate(Date date) {
-        setDate(date);
-        return this;
-    }
+	public Update withDate(Date date) {
+		setDate(date);
+		return this;
+	}
 }

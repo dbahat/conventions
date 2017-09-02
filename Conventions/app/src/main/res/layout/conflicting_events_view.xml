@@ -1,28 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/conflictingEventsLayout"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:foreground="@drawable/conflicting_events_list_border"
+    android:layout_margin="3dp">
 
-    <android.support.v7.widget.CardView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/conflictingEventsList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/conflictingEventsCard"
-        app:cardUseCompatPadding="true"
-        app:cardElevation="2dp"
-        app:cardMaxElevation="2dp"
-        app:cardBackgroundColor="?conflictingEventsBackground">
+        android:layout_height="180dp"
+        android:visibility="visible"
+        android:background="?conflictingEventsBackground">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/conflictingEventsList"
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:visibility="visible">
+    </android.support.v7.widget.RecyclerView>
 
-        </android.support.v7.widget.RecyclerView>
-
-    </android.support.v7.widget.CardView>
-
-</LinearLayout>
+</FrameLayout>

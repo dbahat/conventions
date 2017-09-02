@@ -4,17 +4,18 @@ import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.graphics.Palette;
-import android.text.Html;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -30,14 +31,18 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.analytics.HitBuilders;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import amai.org.conventions.ConventionsApplication;
@@ -45,33 +50,41 @@ import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.AspectRatioImageView;
 import amai.org.conventions.events.CollapsibleFeedbackView;
 import amai.org.conventions.events.ConfigureNotificationsFragment;
+import amai.org.conventions.events.EventVoteSurveyFragment;
+import amai.org.conventions.feedback.SurveySender;
 import amai.org.conventions.map.MapActivity;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
+import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.MapLocation;
+import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
+import amai.org.conventions.networking.SurveyDataRetriever;
 import amai.org.conventions.utils.Dates;
-import amai.org.conventions.utils.EventFeedbackMail;
-import amai.org.conventions.utils.FeedbackMail;
+import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Views;
-import fi.iki.kuitsi.listtest.ListTagHandler;
+import sff.org.conventions.BuildConfig;
 import sff.org.conventions.R;
 import uk.co.chrisjenx.paralloid.views.ParallaxScrollView;
 
 
 public class EventActivity extends NavigationActivity {
 
-    public static final String EXTRA_EVENT_ID = "EventIdExtra";
+	public static final String EXTRA_EVENT_ID = "EventIdExtra";
 	public static final String EXTRA_FOCUS_ON_FEEDBACK = "ExtraFocusOnFeedback";
 
-    private static final String STATE_FEEDBACK_OPEN = "StateFeedbackOpen";
+	private static final String TAG = EventActivity.class.getCanonicalName();
+	private static final String STATE_FEEDBACK_OPEN = "StateFeedbackOpen";
 
 	private View mainLayout;
-    private ConventionEvent conventionEvent;
-    private LinearLayout imagesLayout;
+	private ConventionEvent conventionEvent;
+	private LinearLayout imagesLayout;
 	private LinearLayout feedbackContainer;
-    private CollapsibleFeedbackView feedbackView;
+	private View voteSurveyOpenerContainer;
+	private Button voteSurveyOpener;
+	private ProgressBar voteSurveyOpenerProgress;
+	private CollapsibleFeedbackView feedbackView;
 
 	private ImageView gradientImageView;
 	private ImageView lastImageView;
@@ -79,7 +92,7 @@ public class EventActivity extends NavigationActivity {
 	private View imagesBackground;
 
 	@Override
-    protected void onCreate(final Bundle savedInstanceState) {
+	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentInContentContainer(R.layout.activity_event);
 		setBackgroundColor(ThemeAttributes.getColor(this, R.attr.eventDetailsDefaultBackgroundColor));
@@ -88,6 +101,9 @@ public class EventActivity extends NavigationActivity {
 		imagesBackground = findViewById(R.id.images_background);
 		imagesLayout = (LinearLayout) findViewById(R.id.images_layout);
 		feedbackContainer = (LinearLayout) findViewById(R.id.event_feedback_container);
+		voteSurveyOpenerContainer = findViewById(R.id.event_vote_opener_container);
+		voteSurveyOpener = (Button) findViewById(R.id.event_open_vote_survey_button);
+		voteSurveyOpenerProgress = (ProgressBar) findViewById(R.id.event_open_vote_survey_progress_bar);
 		feedbackView = (CollapsibleFeedbackView) findViewById(R.id.event_feedback_view);
 		final View detailBoxes = findViewById(R.id.event_detail_boxes);
 		final ParallaxScrollView scrollView = (ParallaxScrollView) findViewById(R.id.parallax_scroll);
@@ -95,10 +111,22 @@ public class EventActivity extends NavigationActivity {
 		String eventId = getIntent().getStringExtra(EXTRA_EVENT_ID);
 		conventionEvent = Convention.getInstance().findEventById(eventId);
 		if (conventionEvent == null) {
-			throw new RuntimeException("Could not find event with id " + eventId);
+			Log.e(TAG, "Could not find event with id " + eventId);
+			finish();
+			return;
 		}
 
 		setToolbarTitle(conventionEvent.getType().getDescription());
+		setToolbarAndContentContainerBackground(null);
+		setToolbarBackgroundColor(ThemeAttributes.getColor(this, R.attr.eventToolbarColor));
+
+		// In this activity we have many items in the navigation bar (including overflow menu). They create 2 problems with a centered title design:
+		// 1. The code for centering the title based on the number of action items assumes there's no overflow menu.
+		// 2. The amount of action items doesn't leave enough room for the title text.
+		// In order to avoid these issues, we align the title to the start in this activity only.
+		setToolbarGravity(Gravity.START | Gravity.CENTER_VERTICAL);
+
+		feedbackView.setTextColor(ThemeAttributes.getColor(this, R.attr.eventFeedbackTextColor));
 
 		final boolean shouldFocusOnFeedback = getIntent().getBooleanExtra(EXTRA_FOCUS_ON_FEEDBACK, false);
 
@@ -204,12 +232,14 @@ public class EventActivity extends NavigationActivity {
 									@Override
 									public void onAnimationStart(Animation animation) {
 									}
+
 									@Override
 									public void onAnimationEnd(Animation animation) {
 										// Replace default background with images layout
 										imagesLayout.setVisibility(View.VISIBLE);
 										removeBackground();
 									}
+
 									@Override
 									public void onAnimationRepeat(Animation animation) {
 
@@ -226,6 +256,14 @@ public class EventActivity extends NavigationActivity {
 			}
 		}, 50);
 
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		// This view is time-sensitive (it is visible or invisible according to the time)
+		// so it should be updated more frequently
+		setupVoteSurvey(conventionEvent);
 	}
 
 	private int getBackgroundColor() {
@@ -253,33 +291,33 @@ public class EventActivity extends NavigationActivity {
 	}
 
 	@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-	    this.menu = menu;
-	    getMenuInflater().inflate(R.menu.menu_event, menu);
+	public boolean onCreateCustomOptionsMenu(Menu menu) {
+		this.menu = menu;
+		getMenuInflater().inflate(R.menu.menu_event, menu);
 
-	    ConventionEvent.UserInput userInput = conventionEvent.getUserInput();
-	    if (userInput.isAttending()) {
-            MenuItem favoritesButton = menu.findItem(R.id.event_change_favorite_state);
-            favoritesButton.setIcon(ContextCompat.getDrawable(this, android.R.drawable.btn_star_big_on));
-        }
+		ConventionEvent.UserInput userInput = conventionEvent.getUserInput();
+		if (userInput.isAttending()) {
+			MenuItem favoritesButton = menu.findItem(R.id.event_change_favorite_state);
+			changeFavoriteMenuIcon(true, favoritesButton);
+		}
 
-	    setupAlarmsMenuItem(menu, userInput);
+		setupAlarmsMenuItem(menu, userInput);
 
-	    hideNavigateToMapButtonIfNoLocationExists(menu);
+		hideNavigateToMapButtonIfNoLocationExists(menu);
 
-        return true;
-    }
+		return true;
+	}
 
 	private void setupAlarmsMenuItem(Menu menu, ConventionEvent.UserInput userInput) {
 		// Remove alarms button for ended events (unless they still have a feedback reminder)
 		if (conventionEvent.hasEnded() && !userInput.getEventFeedbackReminderNotification().isEnabled()) {
 			menu.removeItem(R.id.event_configure_notifications);
-		// Hide alarms in the overflow menu if the event is over or there are no alarms for this event
-		// and it isn't in the favorites
+			// Hide alarms in the overflow menu if the event is over or there are no alarms for this event
+			// and it isn't in the favorites
 		} else if (userInput.isAttending() ||
 				userInput.getEventAboutToStartNotification().isEnabled() ||
 				userInput.getEventFeedbackReminderNotification().isEnabled()) {
-		    MenuItem alarmsItem = menu.findItem(R.id.event_configure_notifications);
+			MenuItem alarmsItem = menu.findItem(R.id.event_configure_notifications);
 			// We might have removed the notifications item when entering the screen. In that case, don't display it.
 			if (alarmsItem != null) {
 				alarmsItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
@@ -293,58 +331,58 @@ public class EventActivity extends NavigationActivity {
 	}
 
 	@Override
-    public boolean onOptionsItemSelected(final MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.event_change_favorite_state:
+	public boolean onOptionsItemSelected(final MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.event_change_favorite_state:
 				ConventionEvent.UserInput userInput = conventionEvent.getUserInput();
 
-	            // In the user is adding this event and it conflicts with another favorite event, ask the user what to do
-	            if ((!userInput.isAttending()) && Convention.getInstance().conflictsWithOtherFavoriteEvent(conventionEvent)) {
-		            final List<ConventionEvent> conflictingEvents = Convention.getInstance().getFavoriteConflictingEvents(conventionEvent);
-		            String message;
-		            if (conflictingEvents.size() == 1) {
-			            message = getString(R.string.event_conflicts_with_one_question, conflictingEvents.get(0).getTitle());
-		            } else {
-			            message = getString(R.string.event_conflicts_with_several_question, conflictingEvents.size());
-		            }
-		            new AlertDialog.Builder(this)
-				            .setTitle(R.string.event_add_to_favorites)
-				            .setMessage(message)
-				            .setPositiveButton(R.string.add_anyway, new DialogInterface.OnClickListener() {
-					            @Override
-					            public void onClick(DialogInterface dialog, int which) {
-						            changeEventFavoriteState(item);
-					            }
-				            })
-				            .setNegativeButton(R.string.cancel, null)
-				            .show();
-		            return true;
-	            }
+				// In the user is adding this event and it conflicts with another favorite event, ask the user what to do
+				if ((!userInput.isAttending()) && Convention.getInstance().conflictsWithOtherFavoriteEvent(conventionEvent)) {
+					final List<ConventionEvent> conflictingEvents = Convention.getInstance().getFavoriteConflictingEvents(conventionEvent);
+					String message;
+					if (conflictingEvents.size() == 1) {
+						message = getString(R.string.event_conflicts_with_one_question, conflictingEvents.get(0).getTitle());
+					} else {
+						message = getString(R.string.event_conflicts_with_several_question, conflictingEvents.size());
+					}
+					new AlertDialog.Builder(this)
+							.setTitle(R.string.event_add_to_favorites)
+							.setMessage(message)
+							.setPositiveButton(R.string.add_anyway, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									changeEventFavoriteState(item);
+								}
+							})
+							.setNegativeButton(R.string.cancel, null)
+							.show();
+					return true;
+				}
 
-	            changeEventFavoriteState(item);
-                return true;
-            case R.id.event_navigate_to_map:
-                // Navigate to the map floor associated with this event
-                Bundle floorBundle = new Bundle();
-                ConventionMap map = Convention.getInstance().getMap();
-                List<MapLocation> locations = map.findLocationsByHall(conventionEvent.getHall());
-	            int[] locationIds = new int[locations.size()];
-	            int i = 0;
-	            for (MapLocation location : locations) {
-		            locationIds[i] = location.getId();
-		            ++i;
-	            }
-                floorBundle.putIntArray(MapActivity.EXTRA_MAP_LOCATION_IDS, locationIds);
+				changeEventFavoriteState(item);
+				return true;
+			case R.id.event_navigate_to_map:
+				// Navigate to the map floor associated with this event
+				Bundle floorBundle = new Bundle();
+				ConventionMap map = Convention.getInstance().getMap();
+				List<MapLocation> locations = map.findLocationsByHall(conventionEvent.getHall());
+				int[] locationIds = new int[locations.size()];
+				int i = 0;
+				for (MapLocation location : locations) {
+					locationIds[i] = location.getId();
+					++i;
+				}
+				floorBundle.putIntArray(MapActivity.EXTRA_MAP_LOCATION_IDS, locationIds);
 
-                navigateToActivity(MapActivity.class, false, floorBundle);
-                return true;
-            case R.id.event_navigate_to_hall:
-                // Navigate to the hall associated with this event
-                Bundle bundle = new Bundle();
-                bundle.putString(HallActivity.EXTRA_HALL_NAME, conventionEvent.getHall().getName());
+				navigateToActivity(MapActivity.class, false, floorBundle);
+				return true;
+			case R.id.event_navigate_to_hall:
+				// Navigate to the hall associated with this event
+				Bundle bundle = new Bundle();
+				bundle.putString(HallActivity.EXTRA_HALL_NAME, conventionEvent.getHall().getName());
 
-                navigateToActivity(HallActivity.class, false, bundle);
-                return true;
+				navigateToActivity(HallActivity.class, false, bundle);
+				return true;
 			case R.id.event_configure_notifications:
 
 				ConfigureNotificationsFragment configureNotificationsFragment = ConfigureNotificationsFragment.newInstance(conventionEvent.getId());
@@ -356,10 +394,10 @@ public class EventActivity extends NavigationActivity {
 						.build());
 
 				return true;
-        }
+		}
 
-        return super.onOptionsItemSelected(item);
-    }
+		return super.onOptionsItemSelected(item);
+	}
 
 	private void changeEventFavoriteState(MenuItem item) {
 		ConventionEvent.UserInput userInput = conventionEvent.getUserInput();
@@ -370,125 +408,216 @@ public class EventActivity extends NavigationActivity {
 				.build());
 
 		if (userInput.isAttending()) {
-	        userInput.setAttending(false);
-						ConventionsApplication.alarmScheduler.cancelDefaultEventAlarms(conventionEvent);
-	        item.setIcon(ContextCompat.getDrawable(this, R.drawable.star_with_plus));
-	        item.setTitle(getResources().getString(R.string.event_add_to_favorites));
-	        Snackbar.make(this.mainLayout, R.string.event_removed_from_favorites, Snackbar.LENGTH_SHORT).show();
-	    } else {
-	        userInput.setAttending(true);
+			userInput.setAttending(false);
+			ConventionsApplication.alarmScheduler.cancelDefaultEventAlarms(conventionEvent);
+			changeFavoriteMenuIcon(false, item);
+			Snackbar.make(this.mainLayout, R.string.event_removed_from_favorites, Snackbar.LENGTH_SHORT).show();
+		} else {
+			userInput.setAttending(true);
 			ConventionsApplication.alarmScheduler.scheduleDefaultEventAlarms(conventionEvent);
-	        item.setIcon(ContextCompat.getDrawable(this, android.R.drawable.btn_star_big_on));
-	        item.setTitle(getResources().getString(R.string.event_remove_from_favorites));
-	        Snackbar.make(this.mainLayout, R.string.event_added_to_favorites, Snackbar.LENGTH_SHORT).show();
-	    }
+			changeFavoriteMenuIcon(true, item);
+			Snackbar.make(this.mainLayout, R.string.event_added_to_favorites, Snackbar.LENGTH_SHORT).show();
+		}
 		setupAlarmsMenuItem(menu, userInput);
 		saveUserInput();
 	}
 
+	private void changeFavoriteMenuIcon(boolean isAttending, MenuItem favoriteItem) {
+		if (isAttending) {
+			Drawable icon = ContextCompat.getDrawable(this, R.drawable.ic_star_black_24dp);
+			icon.setColorFilter(ContextCompat.getColor(this, R.color.gold), PorterDuff.Mode.SRC_ATOP);
+			favoriteItem.setIcon(icon);
+			favoriteItem.setTitle(getResources().getString(R.string.event_remove_from_favorites));
+		} else {
+			favoriteItem.setIcon(ContextCompat.getDrawable(this, R.drawable.star_with_plus));
+			favoriteItem.setTitle(getResources().getString(R.string.event_add_to_favorites));
+		}
+	}
+
 	@Override
-    protected void onPause() {
-        super.onPause();
-        if (feedbackView.isFeedbackChanged()) {
-	        saveUserInput();
-        }
-    }
+	protected void onPause() {
+		super.onPause();
+		if (feedbackView.isFeedbackChanged()) {
+			saveUserInput();
+		}
+	}
 
 	private void saveUserInput() {
 		Convention.getInstance().getStorage().saveUserInput();
 		conventionEvent.getUserInput().getFeedback().resetChangedAnswers();
 	}
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-	    if (feedbackContainer.getVisibility() == View.VISIBLE) {
-            outState.putBoolean(STATE_FEEDBACK_OPEN, feedbackView.getState() == CollapsibleFeedbackView.State.Expanded);
-	    }
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		if (feedbackContainer.getVisibility() == View.VISIBLE) {
+			outState.putBoolean(STATE_FEEDBACK_OPEN, feedbackView.getState() == CollapsibleFeedbackView.State.Expanded);
+		}
 
-        super.onSaveInstanceState(outState);
-    }
+		super.onSaveInstanceState(outState);
+	}
 
-    private void hideNavigateToMapButtonIfNoLocationExists(Menu menu) {
-        ConventionMap map = Convention.getInstance().getMap();
-        List<MapLocation> locations = map.findLocationsByHall(conventionEvent.getHall());
-        if (locations.size() == 0) {
-            menu.findItem(R.id.event_navigate_to_map).setVisible(false);
-        }
-    }
+	private void hideNavigateToMapButtonIfNoLocationExists(Menu menu) {
+		ConventionMap map = Convention.getInstance().getMap();
+		List<MapLocation> locations = map.findLocationsByHall(conventionEvent.getHall());
+		if (locations.size() == 0) {
+			menu.findItem(R.id.event_navigate_to_map).setVisible(false);
+		}
+	}
 
-    private void setEvent(ConventionEvent event) {
-	    boolean showSeparator = true;
-	    TextView type = (TextView) findViewById(R.id.event_type);
-	    if (event.getType() == null || TextUtils.isEmpty(event.getType().getDescription())) {
-		    showSeparator = false;
-		    type.setVisibility(View.GONE);
-	    } else {
-	        type.setText(event.getType().getDescription());
-	    }
-	    TextView category = (TextView) findViewById(R.id.event_category);
-	    if (TextUtils.isEmpty(event.getCategory())) {
-		    showSeparator = false;
-		    category.setVisibility(View.GONE);
-	    } else {
-		    category.setText(event.getCategory());
-	    }
-	    if (!showSeparator) {
-		    findViewById(R.id.event_type_and_category_separator).setVisibility(View.GONE);
-	    }
+	private void setEvent(ConventionEvent event) {
+		boolean showSeparator = true;
+		TextView type = (TextView) findViewById(R.id.event_type);
+		if (event.getType() == null || TextUtils.isEmpty(event.getType().getDescription())) {
+			showSeparator = false;
+			type.setVisibility(View.GONE);
+		} else {
+			type.setText(event.getType().getDescription());
+		}
+		TextView category = (TextView) findViewById(R.id.event_category);
+		if (TextUtils.isEmpty(event.getCategory())) {
+			showSeparator = false;
+			category.setVisibility(View.GONE);
+		} else {
+			category.setText(event.getCategory());
+		}
+		if (!showSeparator) {
+			findViewById(R.id.event_type_and_category_separator).setVisibility(View.GONE);
+		}
 
-        TextView title = (TextView) findViewById(R.id.event_title);
-        title.setText(event.getTitle());
+		TextView title = (TextView) findViewById(R.id.event_title);
+		title.setText(event.getTitle());
 
-        TextView lecturerName = (TextView) findViewById(R.id.event_lecturer);
-        String lecturer = event.getLecturer();
-        if (lecturer == null || lecturer.length() == 0) {
-            lecturerName.setVisibility(View.GONE);
-        } else {
-            lecturerName.setText(lecturer);
-        }
+		TextView lecturerName = (TextView) findViewById(R.id.event_lecturer);
+		String lecturer = event.getLecturer();
+		if (lecturer == null || lecturer.length() == 0) {
+			lecturerName.setVisibility(View.GONE);
+		} else {
+			lecturerName.setText(lecturer);
+		}
 
-        TextView time = (TextView) findViewById(R.id.event_hall_and_time);
+		TextView hall = (TextView) findViewById(R.id.event_hall);
+		TextView time = (TextView) findViewById(R.id.event_time);
 
-	    String formattedEventHall = "";
-	    if (event.getHall() != null) {
-		    formattedEventHall = String.format("%s, ", event.getHall().getName());
-	    }
+		if (event.getHall() != null) {
+			hall.setText(event.getHall().getName());
+		} else {
+			hall.setVisibility(View.GONE);
+		}
 
-	    SimpleDateFormat sdf = new SimpleDateFormat("EEE dd.MM", Dates.getLocale());
-        String formattedEventTime = String.format("%s, %s - %s (%s)",
-		        sdf.format(event.getStartTime()),
-                Dates.formatHoursAndMinutes(event.getStartTime()),
-                Dates.formatHoursAndMinutes(event.getEndTime()),
-                Dates.toHumanReadableTimeDuration(event.getEndTime().getTime() - event.getStartTime().getTime()));
-        time.setText(String.format("%s%s", formattedEventHall, formattedEventTime));
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE dd.MM, ", Dates.getLocale());
+		String formattedEventTime = String.format("%s%s-%s (%s)",
+				// In case of single day convention, don't show the date
+				Convention.getInstance().getLengthInDays() == 1 ? "" : simpleDateFormat.format(event.getStartTime()),
+				Dates.formatHoursAndMinutes(event.getStartTime()),
+				Dates.formatHoursAndMinutes(event.getEndTime()),
+				Dates.toHumanReadableTimeDuration(event.getEndTime().getTime() - event.getStartTime().getTime()));
+		time.setText(formattedEventTime);
+		
+		TextView prices = (TextView) findViewById(R.id.event_prices);
+		if (event.getPrice() == 0) {
+			prices.setText(getString(R.string.event_price_free));
+		} else {
+			prices.setText(getString(R.string.event_prices, event.getPrice(), event.getDiscountPrice()));
+		}
+		
+		TextView tags = (TextView) findViewById(R.id.event_tags);
+		List<String> eventTags = event.getTags();
+		if (eventTags == null || eventTags.size() == 0) {
+			tags.setVisibility(View.GONE);
+		} else {
+			tags.setText(getString(R.string.tags, event.getTagsAsString()));
+		}
 
-	    TextView prices = (TextView) findViewById(R.id.event_prices);
-	    if (event.getPrice() == 0) {
-		    prices.setText(getString(R.string.event_price_free));
-	    } else {
-		    prices.setText(getString(R.string.event_prices, event.getPrice(), event.getDiscountPrice()));
-	    }
+		setupFeedback(event);
 
-	    TextView tags = (TextView) findViewById(R.id.event_tags);
-	    List<String> eventTags = event.getTags();
-	    if (eventTags == null || eventTags.size() == 0) {
-		    tags.setVisibility(View.GONE);
-	    } else {
-		    tags.setText(getString(R.string.tags, event.getTagsAsString()));
-	    }
+		setupEventDescription(event);
 
-	    setupFeedback(event);
+		setupLogoImage(event);
 
-	    setupEventDescription(event);
+		setupBackgroundImages(event);
+	}
 
-        setupBackgroundImages(event);
+	private void setupVoteSurvey(ConventionEvent event) {
+		final Survey voteSurvey = event.getUserInput().getVoteSurvey();
+		if (voteSurvey == null) {
+			voteSurveyOpenerContainer.setVisibility(View.GONE);
+		} else {
+			Calendar eventEnd = Calendar.getInstance();
+			eventEnd.setTime(event.getEndTime());
 
-    }
+			// Allow until half an hour after event ended to vote (in case there's a delay)
+			eventEnd.add(Calendar.MINUTE, 30);
+
+			if (!event.hasStarted() || (eventEnd.getTime().before(Dates.now()) && !voteSurvey.isSent())) {
+				voteSurveyOpenerContainer.setVisibility(View.GONE);
+			} else {
+				voteSurveyOpenerContainer.setVisibility(View.VISIBLE);
+				voteSurveyOpenerProgress.setVisibility(View.GONE);
+				voteSurveyOpener.setVisibility(View.VISIBLE);
+				voteSurveyOpener.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						voteSurveyOpener.setVisibility(View.GONE);
+						voteSurveyOpenerProgress.setVisibility(View.VISIBLE);
+						new AsyncTask<Void, Void, Exception>() {
+							@Override
+							protected Exception doInBackground(Void... params) {
+								// No need to retrieve the answers if the user already sent the vote
+								if (voteSurvey.isSent()) {
+									return null;
+								}
+								try {
+									for (FeedbackQuestion question : voteSurvey.getQuestions()) {
+										SurveyDataRetriever.Answers retriever = Convention.getInstance().createSurveyAnswersRetriever(question);
+										if (retriever != null) {
+											List<String> answers = retriever.retrieveAnswers();
+											if (answers == null || answers.size() == 0) {
+												// No answers found - throw exception
+												throw new RuntimeException("No answers found for question " + question.getQuestionId());
+											}
+											question.setPossibleMultipleAnswers(answers);
+										}
+									}
+									// In case everything finished successfully, pass null to onPostExecute.
+									return null;
+								} catch (Exception e) {
+									return e;
+								}
+							}
+
+							@Override
+							protected void onPostExecute(Exception exception) {
+								voteSurveyOpenerProgress.setVisibility(View.GONE);
+								voteSurveyOpener.setVisibility(View.VISIBLE);
+								if (exception != null) {
+									Toast.makeText(EventActivity.this, R.string.vote_survey_retrieve_answers_error, Toast.LENGTH_LONG).show();
+									Log.e(TAG, "Error retrieving answers", exception);
+									ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
+											.setCategory("EventVote")
+											.setAction("openFailed")
+											.setLabel(exception.getMessage())
+											.build());
+								} else {
+									ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
+											.setCategory("EventVote")
+											.setAction("openSuccess")
+											.setLabel(conventionEvent.getTitle())
+											.build());
+									EventVoteSurveyFragment eventVoteSurveyFragment = EventVoteSurveyFragment.newInstance(conventionEvent.getId());
+									eventVoteSurveyFragment.show(getSupportFragmentManager(), null);
+								}
+							}
+						}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					}
+				});
+			}
+		}
+	}
 
 	private void setupFeedback(ConventionEvent event) {
 		if (event.canFillFeedback()) {
 			feedbackContainer.setVisibility(View.VISIBLE);
-	        feedbackView.setModel(event.getUserInput().getFeedback());
+			feedbackView.setModel(event.getUserInput().getFeedback());
 
 			if (shouldFeedbackBeClosed()) {
 				feedbackView.setState(CollapsibleFeedbackView.State.Collapsed, false);
@@ -496,15 +625,15 @@ public class EventActivity extends NavigationActivity {
 				feedbackView.setState(CollapsibleFeedbackView.State.Expanded, false);
 			}
 
-			feedbackView.setSendFeedbackClickListener(feedbackView.new CollapsibleFeedbackViewSendMailListener() {
+			feedbackView.setSendFeedbackClickListener(feedbackView.new CollapsibleFeedbackViewSendListener() {
 				@Override
 				protected void saveFeedback() {
 					saveUserInput();
 				}
 
 				@Override
-				protected FeedbackMail getFeedbackMail() {
-					return new EventFeedbackMail(EventActivity.this, conventionEvent);
+				protected SurveySender getSurveySender() {
+					return Convention.getInstance().getEventFeedbackSender(conventionEvent);
 				}
 
 				@Override
@@ -525,7 +654,7 @@ public class EventActivity extends NavigationActivity {
 		// Otherwise it should start as open.
 		return !conventionEvent.shouldUserSeeFeedback() ||
 				(Convention.getInstance().isFeedbackSendingTimeOver() &&
-				!conventionEvent.getUserInput().getFeedback().hasAnsweredQuestions());
+						!conventionEvent.getUserInput().getFeedback().hasAnsweredQuestions());
 	}
 
 
@@ -537,10 +666,9 @@ public class EventActivity extends NavigationActivity {
 			// Enable internal links from HTML <a> tags within the description textView.
 			TextView description = (TextView) findViewById(R.id.event_description);
 			description.setMovementMethod(LinkMovementMethod.getInstance());
-
-			Spanned spanned = Html.fromHtml(eventDescription, null, new ListTagHandler());
+			Spanned spanned = event.getSpannedDescription();
 			description.setText(spanned);
-
+			
 			// Intercept clicks on links to other events
 			if (description.getText() instanceof SpannableString) {
 				SpannableString spannable = (SpannableString) description.getText();
@@ -557,9 +685,23 @@ public class EventActivity extends NavigationActivity {
 		}
 	}
 
+	private void setupLogoImage(ConventionEvent event) {
+		ImageView logoImageView = (ImageView) findViewById(R.id.event_logo);
+		List<Integer> images = event.getLogoImageResources();
+		if (images.size() == 0) {
+			logoImageView.setVisibility(View.GONE);
+		} else {
+			logoImageView.setVisibility(View.VISIBLE);
+			logoImageView.setImageResource(images.get(0));
+			if (BuildConfig.DEBUG && images.size() > 1) {
+				Log.e(TAG, images.size() + " logo images found in event " + event.getTitle() + "; using first image");
+			}
+		}
+	}
+
 	private void setupBackgroundImages(ConventionEvent event) {
-        // Add images to the layout
-        List<Integer> images = event.getImageResources();
+		// Add images to the layout
+		List<Integer> images = event.getImageResources();
 		boolean first = true;
 		// This will contain the last image view after the loop
 		FrameLayout lastImageLayout = null;
@@ -570,46 +712,46 @@ public class EventActivity extends NavigationActivity {
 		Point size = new Point();
 		display.getSize(size);
 		int widthSpec = View.MeasureSpec.makeMeasureSpec(size.x, View.MeasureSpec.EXACTLY);
-        for (Integer imageResource : images) {
-	        boolean last = (i == images.size() - 1);
+		for (Integer imageResource : images) {
+			boolean last = (i == images.size() - 1);
 
 			AspectRatioImageView imageView = new AspectRatioImageView(this);
-	        View viewToAdd = imageView;
-	        imageView.setImageResource(imageResource);
+			View viewToAdd = imageView;
+			imageView.setImageResource(imageResource);
 
-	        // Last image - make a frame layout with the image so we can put the gradient on top of it
-	        if (last) {
-		        FrameLayout frameLayout = new FrameLayout(this);
-		        viewToAdd = frameLayout;
-		        lastImageLayout = frameLayout;
-		        lastImageView = imageView;
+			// Last image - make a frame layout with the image so we can put the gradient on top of it
+			if (last) {
+				FrameLayout frameLayout = new FrameLayout(this);
+				viewToAdd = frameLayout;
+				lastImageLayout = frameLayout;
+				lastImageView = imageView;
 
-		        // Add the image view to the frame layout
-		        FrameLayout.LayoutParams imageLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		        imageView.setLayoutParams(imageLayoutParams);
-		        frameLayout.addView(imageView);
+				// Add the image view to the frame layout
+				FrameLayout.LayoutParams imageLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+				imageView.setLayoutParams(imageLayoutParams);
+				frameLayout.addView(imageView);
 
-		        // Calculate the last image's height according the screen width
-		        imageView.measure(widthSpec, View.MeasureSpec.UNSPECIFIED);
-		        lastImageHeight = imageView.getMeasuredHeight();
-	        }
+				// Calculate the last image's height according the screen width
+				imageView.measure(widthSpec, View.MeasureSpec.UNSPECIFIED);
+				lastImageHeight = imageView.getMeasuredHeight();
+			}
 
-	        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-	        int topMargin = 0;
-            if (first) {
-                first = false;
-            } else {
-                topMargin =  getResources().getDimensionPixelOffset(R.dimen.event_images_margin);
-            }
-	        layoutParams.setMargins(0, topMargin, 0, 0);
-	        viewToAdd.setLayoutParams(layoutParams);
-	        imagesLayout.addView(viewToAdd);
+			LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+			int topMargin = 0;
+			if (first) {
+				first = false;
+			} else {
+				topMargin = getResources().getDimensionPixelOffset(R.dimen.event_images_margin);
+			}
+			layoutParams.setMargins(0, topMargin, 0, 0);
+			viewToAdd.setLayoutParams(layoutParams);
+			imagesLayout.addView(viewToAdd);
 
-	        ++i;
-        }
+			++i;
+		}
 
 		if (lastImageLayout != null) {
-			int gradientHeight =  getResources().getDimensionPixelSize(R.dimen.event_last_image_gradient_max_height);
+			int gradientHeight = getResources().getDimensionPixelSize(R.dimen.event_last_image_gradient_max_height);
 			if (gradientHeight > lastImageHeight) {
 				gradientHeight = lastImageHeight;
 			}
@@ -628,19 +770,19 @@ public class EventActivity extends NavigationActivity {
 
 			enableFadingEffect();
 		}
-    }
-
-	private Drawable createGradient() {
-		return new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, new int[] {Color.TRANSPARENT, getBackgroundColor()});
 	}
 
-    public void openFeedback(View view) {
-        feedbackView.setState(CollapsibleFeedbackView.State.Expanded);
-    }
+	private Drawable createGradient() {
+		return new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, new int[]{Color.TRANSPARENT, getBackgroundColor()});
+	}
 
-    public void closeFeedback(View view) {
-        feedbackView.setState(CollapsibleFeedbackView.State.Collapsed);
-    }
+	public void openFeedback(View view) {
+		feedbackView.setState(CollapsibleFeedbackView.State.Expanded);
+	}
+
+	public void closeFeedback(View view) {
+		feedbackView.setState(CollapsibleFeedbackView.State.Collapsed);
+	}
 
 	private class EventURLSpan extends ClickableSpan {
 		private final URLSpan urlSpan;

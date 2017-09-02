@@ -16,7 +16,7 @@
         android:gravity="center"
         android:visibility="gone"
         android:textSize="@dimen/text_size_large_material"
-        android:textColor="@color/hint_gray"
+        android:textColor="?hintTextColor"
         android:padding="25dp"
         android:text="@string/my_events_no_data" />
 </FrameLayout>

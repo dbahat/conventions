@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -22,9 +23,9 @@ import java.util.List;
 
 import sff.org.conventions.R;
 import amai.org.conventions.map.StandsAdapter;
-import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.StandsArea;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Objects;
 import amai.org.conventions.utils.Views;
 import pl.polidea.view.ZoomView;
@@ -50,24 +51,13 @@ public class StandsAreaFragment extends DialogFragment {
 
 		View view = inflater.inflate(R.layout.activity_stands_area, container, false);
 
-		StickyGridHeadersGridView standsList = (StickyGridHeadersGridView) view.findViewById(R.id.standsList);
+		final StickyGridHeadersGridView standsList = (StickyGridHeadersGridView) view.findViewById(R.id.standsList);
 		standsList.setAreHeadersSticky(false);
 		area = Convention.getInstance().findStandsArea(standsAreaID);
 		if (area != null) {
-			ZoomView zoom = (ZoomView) view.findViewById(R.id.stands_area_zoom);
-			ImageView image = (ImageView) view.findViewById(R.id.stands_area_map);
-
-			if (area.hasImageResource()) {
-				image.setImageResource(area.getImageResource());
-				zoom.setVisibility(View.VISIBLE);
-				zoom.setMaxZoom(3);
-				image.setOnTouchListener(Views.createOnSingleTapConfirmedListener(getActivity(), new Runnable() {
-					@Override
-					public void run() {
-						openStandsMap();
-					}
-				}));
-			}
+			AdapterView.OnItemClickListener listener = null;
+			final ZoomView zoom = (ZoomView) view.findViewById(R.id.stands_area_zoom);
+			final ImageView image = (ImageView) view.findViewById(R.id.stands_area_map);
 
 			List<Stand> stands = new ArrayList<>(area.getStands());
 			Collections.sort(stands, new Comparator<Stand>() {
@@ -81,7 +71,34 @@ public class StandsAreaFragment extends DialogFragment {
 				}
 			});
 
-			standsList.setAdapter(new StandsAdapter(stands, true, area.hasImageResource(), selectedStandName));
+			final StandsAdapter adapter = new StandsAdapter(stands, true, area.hasImageResource(), selectedStandName);
+			standsList.setAdapter(adapter);
+
+			if (area.hasImageResource()) {
+				image.setImageResource(area.getImageResource());
+				zoom.setVisibility(View.VISIBLE);
+				zoom.setMaxZoom(3);
+				image.setOnTouchListener(Views.createOnSingleTapConfirmedListener(getActivity(), new Runnable() {
+					@Override
+					public void run() {
+						openStandsMap();
+					}
+				}));
+				listener = new AdapterView.OnItemClickListener() {
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+						Object item = adapter.getItem(position);
+						if (item instanceof Stand && ((Stand) item).hasImageCoordinates()) {
+							Stand stand = (Stand) item;
+							zoom.smoothZoomTo(zoom.getMaxZoom(),
+									stand.getImageX() / area.getImageWidth() * image.getWidth(),
+									stand.getImageY() / area.getImageHeight() * image.getHeight());
+						}
+					}
+				};
+			}
+
+			standsList.setOnItemClickListener(listener);
 			if (selectedStandName != null) {
 				int foundPosition = -1;
 				int currPosition = 0;

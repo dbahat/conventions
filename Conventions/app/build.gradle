@@ -1,13 +1,19 @@
 apply plugin: 'com.android.application'
 
+ext {
+    supportLibVersion = "25.3.1"
+    googlePlayServicesVersion = "11.0.1"
+}
+
 android {
-    compileSdkVersion 24
-    buildToolsVersion "23.0.3"
+    compileSdkVersion 25
+    buildToolsVersion '25.0.2'
 
     defaultConfig {
         applicationId "sff.org.conventions"
         minSdkVersion 17
-        targetSdkVersion 24
+        targetSdkVersion 25
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -18,22 +24,31 @@ android {
             versionNameSuffix ".debug"
         }
     }
+    // TODO - Drop this once we have dependency injection framework to mock out SDK references (such as the Log, Html and Color classes)
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+}
+
+configurations.all {
+    resolutionStrategy {
+        force "com.android.support:support-annotations:${supportLibVersion}"
+    }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:support-v4:24.2.1'
-    compile 'com.android.support:appcompat-v7:24.2.1'
-    compile 'com.android.support:palette-v7:24.2.1'
-    compile 'com.android.support:recyclerview-v7:24.2.1'
-    compile 'com.android.support:cardview-v7:24.2.1'
-    compile 'com.android.support:design:24.2.1'
+    compile "com.android.support:support-v4:${supportLibVersion}"
+    compile "com.android.support:appcompat-v7:${supportLibVersion}"
+    compile "com.android.support:palette-v7:${supportLibVersion}"
+    compile "com.android.support:recyclerview-v7:${supportLibVersion}"
+    compile "com.android.support:design:${supportLibVersion}"
     compile 'com.github.castorflex.verticalviewpager:library:19.0.1'
     compile 'klogi.com:rtlviewpager:1.0.0'
-    compile 'com.google.android.gms:play-services-analytics:9.4.0'
-    compile 'com.google.android.gms:play-services-maps:9.4.0'
-    compile 'com.google.firebase:firebase-messaging:9.4.0'
-    compile 'com.google.android.gms:play-services-gcm:9.4.0'
+    compile "com.google.android.gms:play-services-analytics:${googlePlayServicesVersion}"
+    compile "com.google.android.gms:play-services-maps:${googlePlayServicesVersion}"
+    compile "com.google.firebase:firebase-messaging:${googlePlayServicesVersion}"
+    compile "com.google.android.gms:play-services-gcm:${googlePlayServicesVersion}"
     compile 'com.caverock:androidsvg:1.2.2-beta-1'
     compile 'se.emilsjolander:stickylistheaders:2.7.0'
     compile 'com.tonicartos:stickygridheaders:1.0.1'
@@ -43,6 +58,21 @@ dependencies {
     compile files('libs/activation.jar')
     compile files('libs/additionnal.jar')
     compile files('libs/mail.jar')
+
+    // Google spreadsheet API currently commented out due to 64k method limit in a single DEX file.
+    // TODO: return this SDK once we have a tested solution for the 64K method limit (enable multidex, proguard, etc...)
+    //
+    //compile('com.google.api-client:google-api-client-android:1.22.0') {
+    //    exclude group: 'org.apache.httpcomponents'
+    //}
+    //compile('com.google.apis:google-api-services-sheets:v4-rev483-1.22.0') {
+    //    exclude group: 'org.apache.httpcomponents'
+    //}
+
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:1.10.19'
+    androidTestCompile 'junit:junit:4.12'
+    androidTestCompile 'com.android.support.test:runner:0.5'
 }
 
 apply plugin: 'com.google.gms.google-services'

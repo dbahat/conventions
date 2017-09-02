@@ -44,7 +44,6 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 	private static final String STATE_NAVIGATE_ICON_MODIFIED = "StateNavigateIconModified";
 	private static final String STATE_SELECTED_DATE_INDEX = "StateSelectedDateIndex";
 	private final static int SELECT_CURRENT_DATE = -1;
-
 	private TabLayout daysTabLayout;
 	private ViewPager daysPager;
 
@@ -53,10 +52,10 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 	private boolean isRefreshing = false;
 
 	@Override
-    protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentInContentContainer(R.layout.activity_programme);
-        setToolbarTitle(getResources().getString(R.string.programme_title));
+	protected void onCreate(final Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentInContentContainer(R.layout.activity_programme);
+		setToolbarTitle(getResources().getString(R.string.programme_title));
 		removeForeground();
 
 		setupActionButton(R.drawable.ic_action_search, new View.OnClickListener() {
@@ -86,9 +85,9 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 			public void run() {
 
 				// Set a low number of search categories, since we don't want scrollbar inside this activity
-				searchCategoriesLayout.setMaxDisplayedCategories(3);
+				searchCategoriesLayout.setMaxDisplayedCategories(4);
 
-				searchCategoriesLayout.setSearchCategories(Convention.getInstance().getAggregatedSearchCategories());
+				searchCategoriesLayout.setSearchCategories(Convention.getInstance().getAggregatedEventTypesSearchCategories(ProgrammeActivity.this));
 				searchCategoriesLayout.setOnFilterSelectedListener(new SearchCategoriesLayout.OnFilterSelectedListener() {
 					@Override
 					public void onFilterSelected(List<String> selectedSearchCategories) {
@@ -152,25 +151,25 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 		daysPager.setCurrentItem(selectedDateIndex, false);
 	}
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-	    this.menu = menu;
-        getMenuInflater().inflate(R.menu.programme_menu, menu);
+	@Override
+	public boolean onCreateCustomOptionsMenu(Menu menu) {
+		this.menu = menu;
+		getMenuInflater().inflate(R.menu.programme_menu, menu);
 
-	    if (navigateToMyEventsIconModified) {
-		    MenuItem item = menu.findItem(R.id.programme_navigate_to_my_events);
-		    changeIconColor(item);
-	    }
+		if (navigateToMyEventsIconModified) {
+			MenuItem item = menu.findItem(R.id.programme_navigate_to_my_events);
+			changeIconColor(item);
+		}
 
-	    Convention convention = Convention.getInstance();
-	    if (!convention.canFillFeedback()) {
-		    menu.removeItem(R.id.programme_navigate_to_feedback);
-	    } else if (convention.hasEnded() && !convention.getFeedback().isSent() && !convention.isFeedbackSendingTimeOver()) {
-		    MenuItem item = menu.findItem(R.id.programme_navigate_to_feedback);
-		    changeIconColor(item);
-	    }
-        return true;
-    }
+		Convention convention = Convention.getInstance();
+		if (!convention.canFillFeedback()) {
+			menu.removeItem(R.id.programme_navigate_to_feedback);
+		} else if (convention.hasEnded() && !convention.getFeedback().isSent() && !convention.isFeedbackSendingTimeOver()) {
+			MenuItem item = menu.findItem(R.id.programme_navigate_to_feedback);
+			changeIconColor(item);
+		}
+		return true;
+	}
 
 	@Override
 	public void onEventFavoriteChanged(ConventionEvent updatedEvent) {
@@ -185,7 +184,7 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 			ImageView myEventsNonAnimatedIcon = (ImageView) actionView.findViewById(R.id.non_animated_icon);
 
 			int accentColor = ThemeAttributes.getColor(ProgrammeActivity.this, R.attr.toolbarIconAccentColor);
-			myEventsNonAnimatedIcon.setColorFilter(accentColor, PorterDuff.Mode.MULTIPLY);
+			myEventsNonAnimatedIcon.setColorFilter(accentColor, PorterDuff.Mode.SRC_ATOP);
 
 			final ImageView myEventsAnimatedIcon = (ImageView) actionView.findViewById(R.id.icon_to_animate);
 
@@ -216,31 +215,32 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 
 	/**
 	 * Change color of menu item icon to be accented
+	 *
 	 * @param item the menu item
 	 * @return The new color
 	 */
 	private int changeIconColor(MenuItem item) {
 		Drawable icon = item.getIcon().mutate();
 		int accentColor = ThemeAttributes.getColor(ProgrammeActivity.this, R.attr.toolbarIconAccentColor);
-		icon.setColorFilter(accentColor, PorterDuff.Mode.MULTIPLY);
+		icon.setColorFilter(accentColor, PorterDuff.Mode.SRC_ATOP);
 		return accentColor;
 	}
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.programme_navigate_to_my_events:
-	            navigateToMyEventsIconModified = false;
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.programme_navigate_to_my_events:
+				navigateToMyEventsIconModified = false;
 	            item.getIcon().clearColorFilter();
-	            navigateToActivity(MyEventsActivity.class);
-                return true;
-	        case R.id.programme_navigate_to_feedback:
-		        navigateToActivity(FeedbackActivity.class);
+				navigateToActivity(MyEventsActivity.class);
 				return true;
-        }
+			case R.id.programme_navigate_to_feedback:
+				navigateToActivity(FeedbackActivity.class);
+				return true;
+		}
 
-        return super.onOptionsItemSelected(item);
-    }
+		return super.onOptionsItemSelected(item);
+	}
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
@@ -250,42 +250,42 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 		super.onSaveInstanceState(outState);
 	}
 
-    @Override
-    public void onRefresh() {
-	    isRefreshing = true;
-	    for (int i = 0; i < daysPager.getAdapter().getCount(); ++i) {
-		    ProgrammeDayFragment fragment = getDayFragment(i);
-		    fragment.setRefreshing(true);
-	    }
+	@Override
+	public void onRefresh() {
+		isRefreshing = true;
+		for (int i = 0; i < daysPager.getAdapter().getCount(); ++i) {
+			ProgrammeDayFragment fragment = getDayFragment(i);
+			fragment.setRefreshing(true);
+		}
 
-	    ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
-			    .setCategory("PullToRefresh")
-			    .setAction("RefreshProgramme")
-			    .build());
+		ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
+				.setCategory("PullToRefresh")
+				.setAction("RefreshProgramme")
+				.build());
 
-	    new AsyncTask<Void, Void, Boolean>() {
-            @Override
-            protected Boolean doInBackground(Void... params) {
-                ModelRefresher modelRefresher = new ModelRefresher();
-                return modelRefresher.refreshFromServer(true);
-            }
+		new AsyncTask<Void, Void, Boolean>() {
+			@Override
+			protected Boolean doInBackground(Void... params) {
+				ModelRefresher modelRefresher = new ModelRefresher();
+				return modelRefresher.refreshFromServer(true);
+			}
 
-            @Override
-            protected void onPostExecute(Boolean isSuccess) {
-	            isRefreshing = false;
-	            for (int i = 0; i < daysPager.getAdapter().getCount(); ++i) {
-		            ProgrammeDayFragment fragment = getDayFragment(i);
-		            fragment.setRefreshing(false);
-		            if (isSuccess) {
-			            fragment.updateEvents();
-		            }
-	            }
-	            if (!isSuccess) {
-                    Toast.makeText(ProgrammeActivity.this, R.string.update_refresh_failed, Toast.LENGTH_SHORT).show();
-                }
-            }
-        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-    }
+			@Override
+			protected void onPostExecute(Boolean isSuccess) {
+				isRefreshing = false;
+				for (int i = 0; i < daysPager.getAdapter().getCount(); ++i) {
+					ProgrammeDayFragment fragment = getDayFragment(i);
+					fragment.setRefreshing(false);
+					if (isSuccess) {
+						fragment.updateEvents();
+					}
+				}
+				if (!isSuccess) {
+					Toast.makeText(ProgrammeActivity.this, R.string.update_refresh_failed, Toast.LENGTH_SHORT).show();
+				}
+			}
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
 
 	private ProgrammeDayFragment getDayFragment(int i) {
 		return (ProgrammeDayFragment) daysPager.getAdapter().instantiateItem(daysPager, i);

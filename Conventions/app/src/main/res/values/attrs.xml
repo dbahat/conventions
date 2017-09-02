@@ -6,61 +6,99 @@
     </declare-styleable>
 
     <declare-styleable name="ApplicationTheme">
+        <!-- Events Lists -->
+        <attr name="eventListDivider" format="color|reference"/>
+        <!-- Activities -->
+        <attr name="activitiesBackground" format="color|reference"/>
+        <attr name="actionButtonColor" format="color|reference"/>
+        <attr name="hintTextColor" format="color|reference"/>
         <!-- Notifications -->
         <attr name="notificationSmallIcon" format="integer"/>
         <attr name="notificationLargeIcon" format="integer"/>
         <!-- Toolbar -->
         <attr name="toolbarBackground" format="color|reference"/>
         <attr name="toolbarLogo" format="integer|reference"/>
-        <attr name="toolbarLogoType" format="enum">
-            <enum name="bitmap" value="0"/>
-            <enum name="svg" value="1"/>
-        </attr>
         <attr name="toolbarIconAccentColor" format="color|reference"/>
+        <!-- Days Tab Layout -->
+        <attr name="shadowForeground" format="integer|reference"/>
         <!-- Snackbar -->
         <attr name="snackbarActionColor" format="color|reference"/>
-        <!-- Home Screen -->
-        <attr name="homeScreenLayout" format="integer"/>
-        <attr name="aboutTopView" format="integer"/>
-        <attr name="aboutBottomView" format="integer"/>
-        <attr name="aboutLeftView" format="integer"/>
-        <attr name="aboutRightView" format="integer"/>
-        <!-- About screen -->
-        <attr name="aboutLogo" format="integer"/>
-        <!-- Event Time -->
+        <!-- Swipe to Refresh -->
+        <attr name="swipeToRefreshColor" format="color|reference"/>
+        <!-- Event View -->
         <attr name="eventTypeEndedColor" format="color|reference"/>
         <attr name="eventTypeCurrentColor" format="color|reference"/>
         <attr name="eventTypeNotStartedColor" format="color|reference"/>
+        <attr name="eventNameKeywordHighlightColor" format="color|reference"/>
+        <attr name="eventKeywordHighlightColor" format="color|reference"/>
         <attr name="eventTimeDefaultTextColor" format="color|reference"/>
         <attr name="eventTimeDefaultBackgroundColor" format="color|reference"/>
-        <!-- MyEvents Screen -->
+        <attr name="eventFavoriteIcon" format="integer|reference"/>
+        <attr name="eventNonFavoriteColor" format="color|reference"/>
+        <attr name="eventFavoriteColor" format="color|reference"/>
+        <attr name="eventDetailsColor" format="color|reference"/>
+        <attr name="eventSendFeedbackColor" format="color|reference"/>
+        <!-- About screen -->
+        <attr name="aboutLogo" format="integer"/>
+        <!-- Home screen -->
+        <attr name="homeBackground" format="color|reference"/>
+        <attr name="homeToolbarTitle" format="integer|reference"/>
+        <attr name="homeTitleBackground" format="color|reference"/>
+        <attr name="homeTitleText" format="color|reference"/>
+        <attr name="homeMessageBackground" format="color|reference"/>
+        <attr name="homeMessageText" format="color|reference"/>
+        <attr name="homeCurrentEventBackground" format="color|reference"/>
+        <attr name="homeUpcomingEventBackground" format="color|reference"/>
+        <attr name="homeButtonBackground" format="color|reference"/>
+        <attr name="homeButtonText" format="color|reference"/>
+        <!-- My Events Screen -->
         <attr name="nextEventStartTimeBackground" format="color|reference"/>
         <attr name="nextEventStartTimeTextColor" format="color|reference"/>
         <attr name="nextEventStartTimeBottomLineColor" format="color|reference"/>
         <attr name="conflictingEventsBackground" format="color|reference"/>
-        <!-- Navigation Popup -->
+        <!-- Navigation Drawer -->
+        <attr name="navigationPopupBackground" format="color|reference"/>
+        <attr name="navigationPopupTitle" format="integer|reference"/>
+        <attr name="navigationPopupBottomImage" format="integer|reference"/>
         <attr name="navigationPopupSelectedColor" format="color|reference"/>
         <attr name="navigationPopupNotSelectedColor" format="color|reference"/>
-        <!-- Programme Screen -->
-        <attr name="eventTimeHeaderColor" format="color|reference"/>
-        <attr name="eventTimeHeaderBackground" format="color|reference"/>
+        <attr name="navigationPopupSeparatorColor" format="color|reference"/>
         <!-- Updates Screen -->
         <attr name="updateTimeColor" format="color|reference"/>
+        <attr name="updateItemBorder" format="color|reference"/>
         <attr name="updatesBackground" format="color|reference"/>
+        <attr name="newUpdateBackground" format="color|reference"/>
         <attr name="focusedUpdateBackground" format="color|reference"/>
         <!-- Map Screen -->
         <attr name="locationDetailsBackground" format="color|reference"/>
         <attr name="locationDetailsTopLineColor" format="color|reference"/>
-        <attr name="floorBackground" format="color|reference"/>
+        <attr name="locationDetailsTitleColor" format="color|reference"/>
+        <attr name="mapBackground" format="color|reference"/>
         <attr name="standIconColor" format="color|reference"/>
         <attr name="standsTypeTitleColor" format="color|reference"/>
         <!-- Event Screen -->
+        <attr name="eventToolbarColor" format="color|reference"/>
         <attr name="eventDetailsBoxColor" format="color|reference"/>
+        <attr name="eventDescriptionTextColor" format="color|reference"/>
+        <attr name="eventTitleBackground" format="integer|reference"/>
+        <attr name="eventTitleTextColor" format="color|reference"/>
+        <attr name="eventDetailsTextColor" format="color|reference"/>
+        <attr name="eventVoteBoxColor" format="color|reference"/>
         <attr name="eventFeedbackBoxColor" format="color|reference"/>
+        <attr name="eventDetailsDefaultBackgroundColor" format="color|reference"/>
+        <attr name="eventFeedbackTextColor" format="color|reference"/>
+        <!-- Buttons -->
+        <attr name="highlightedButtonBackground" format="integer|reference"/>
         <attr name="buttonColor" format="color|reference"/>
         <attr name="buttonColorPressed" format="color|reference"/>
-        <attr name="eventDetailsDefaultBackgroundColor" format="color|reference"/>
+        <attr name="borderlessButtonColor" format="color|reference"/>
+        <attr name="feedbackButtonColor" format="color|reference"/>
         <attr name="feedbackAnswerButtonColor" format="color|reference"/>
         <attr name="feedbackAnswerButtonSelectedColor" format="color|reference"/>
+        <!-- Feedback Screen -->
+        <attr name="progressBarDrawable" format="integer|reference"/>
+        <attr name="conventionFeedbackTextColor" format="color|reference"/>
+        <!-- Programme Screen -->
+        <attr name="eventTimeHeaderBackground" format="color|reference"/>
     </declare-styleable>
 </resources>

@@ -132,7 +132,7 @@ public final class ParallaxHelper {
         }
     }
 
-    static interface ScrollableWidthHeightCallback {
+    interface ScrollableWidthHeightCallback {
         void onScrollableWidthHeight(float width, float height);
     }
 

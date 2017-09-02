@@ -25,7 +25,7 @@ public class ConditionalSwipeVerticalViewPager extends VerticalViewPager {
 	@Override
 	public boolean onInterceptTouchEvent(MotionEvent event) {
 		// Check if we should allow swiping to switch between pages
-		boolean enableSwipe = condition == null ? true : condition.shouldSwipe();
+		boolean enableSwipe = condition == null || condition.shouldSwipe();
 		if (!enableSwipe && MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_MOVE) {
 			return false;
 		}
@@ -35,7 +35,7 @@ public class ConditionalSwipeVerticalViewPager extends VerticalViewPager {
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		// Check if we should allow swiping to switch between pages
-		boolean enableSwipe = condition == null ? true : condition.shouldSwipe();
+		boolean enableSwipe = condition == null || condition.shouldSwipe();
 		if (!enableSwipe && MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_MOVE) {
 			return false;
 		}
