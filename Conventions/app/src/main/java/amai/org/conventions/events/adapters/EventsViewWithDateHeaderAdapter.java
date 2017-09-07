@@ -1,20 +1,23 @@
 package amai.org.conventions.events.adapters;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import sff.org.conventions.R;
 import amai.org.conventions.events.holders.EventViewHolder;
 import amai.org.conventions.events.holders.TimeViewHolder;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.utils.Dates;
+import sff.org.conventions.R;
 
 public class EventsViewWithDateHeaderAdapter extends BaseAdapter {
 	private static final int ITEM_TYPE_EVENT = 0;
@@ -66,6 +69,9 @@ public class EventsViewWithDateHeaderAdapter extends BaseAdapter {
 			final TimeViewHolder holder;
 			if (convertView == null) {
 				convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.small_text_view, parent, false);
+				TextView textView = (TextView) convertView.findViewById(R.id.small_text);
+				((FrameLayout.LayoutParams) textView.getLayoutParams()).gravity = Gravity.CENTER_HORIZONTAL;
+				textView.setLayoutParams(textView.getLayoutParams());
 				holder = new TimeViewHolder(convertView, R.id.small_text);
 				convertView.setTag(holder);
 			} else {

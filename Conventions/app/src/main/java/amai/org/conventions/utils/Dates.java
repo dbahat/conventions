@@ -14,7 +14,7 @@ public class Dates {
 	public static final long MILLISECONDS_IN_DAY = java.util.concurrent.TimeUnit.DAYS.toMillis(1);
 
 	public enum TimeUnit {
-		HOUR, MINUTE, SECOND
+		DAY, HOUR, MINUTE, SECOND
 	}
 
 	private static final Locale LOCALE = new Locale("iw", "IL");
@@ -24,7 +24,7 @@ public class Dates {
 	private static Date getInitialDate() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm", Dates.getLocale());
 		try {
-			return dateFormat.parse("08.10.2017 12:10");
+			return dateFormat.parse("08.10.2017 15:10");
 		} catch (ParseException e) {
 			throw new RuntimeException(e);
 		}
@@ -70,8 +70,13 @@ public class Dates {
 		int minutes = (int) (x % 60);
 		x /= 60;
 		int hours = (int) (x % 24);
+		x /= 24;
+		int days = (int) x;
 
 		switch (smallestUnit) {
+			case DAY:
+				// Fallthrough
+				hours = 0;
 			case HOUR:
 				minutes = 0;
 				// Fallthrough
@@ -82,11 +87,19 @@ public class Dates {
 				break;
 		}
 
-		return toHumanReadableTimeDuration(hours, minutes, seconds);
+		return toHumanReadableTimeDuration(days, hours, minutes, seconds);
 	}
 
-	public static String toHumanReadableTimeDuration(int hours, int minutes, int seconds) {
+	public static String toHumanReadableTimeDuration(int days, int hours, int minutes, int seconds) {
 		List<String> parts = new ArrayList<>(3);
+		if (days > 2) {
+			parts.add(hours + " ימים");
+		} else if (days == 2) {
+			parts.add("יומיים");
+		} else if (days == 1) {
+			parts.add("יום אחד");
+		}
+
 		if (hours > 2) {
 			parts.add(hours + " שעות");
 		} else if (hours == 2) {

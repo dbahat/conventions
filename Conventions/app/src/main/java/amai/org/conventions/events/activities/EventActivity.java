@@ -220,11 +220,17 @@ public class EventActivity extends NavigationActivity {
 									// Try vibrant swatch
 									swatch = palette.getDarkVibrantSwatch();
 								}
+								// Don't fade from custom background color if the images don't fade to it
+								final boolean setBackgroundBeforeAnimation = isFadingEffectEnabled();
+								final int backgroundColor;
 								if (swatch != null) {
-									updateBackgroundColor(swatch.getRgb());
+									backgroundColor = swatch.getRgb();
 								} else {
-									// Set default background
-									updateBackgroundColor(ThemeAttributes.getColor(EventActivity.this, android.R.attr.colorBackground));
+									// Use default background
+									backgroundColor = ThemeAttributes.getColor(EventActivity.this, R.attr.eventDetailsDefaultBackgroundColor);
+								}
+								if (setBackgroundBeforeAnimation) {
+									updateBackgroundColor(backgroundColor);
 								}
 
 								// Fade in the images
@@ -238,6 +244,9 @@ public class EventActivity extends NavigationActivity {
 									public void onAnimationEnd(Animation animation) {
 										// Replace default background with images layout
 										imagesLayout.setVisibility(View.VISIBLE);
+										if (!setBackgroundBeforeAnimation) {
+											updateBackgroundColor(backgroundColor);
+										}
 										removeBackground();
 									}
 
@@ -289,6 +298,10 @@ public class EventActivity extends NavigationActivity {
 		if (gradientImageView != null) {
 			gradientImageView.setVisibility(View.GONE);
 		}
+	}
+
+	private boolean isFadingEffectEnabled() {
+		return gradientImageView != null && gradientImageView.getVisibility() == View.VISIBLE;
 	}
 
 	@Override
@@ -657,7 +670,6 @@ public class EventActivity extends NavigationActivity {
 				(Convention.getInstance().isFeedbackSendingTimeOver() &&
 						!conventionEvent.getUserInput().getFeedback().hasAnsweredQuestions());
 	}
-
 
 	private void setupEventDescription(ConventionEvent event) {
 		String eventDescription = event.getDescription();

@@ -235,6 +235,7 @@
     <string name="home">בית</string>
     <string name="dash">–</string>
     <string name="dash_with_spaces">\u0020–\u0020</string>
+    <string name="dash_with_values">%1$s – %2$s</string>
 
     <string name="home_convention_start_time">עוד %d ימים!</string>
     <string name="home_help_us_improve">עזור לנו להשתפר</string>

@@ -290,7 +290,13 @@ public class HomeActivity extends NavigationActivity {
 		}
 		Calendar startDate = Convention.getInstance().getStartDate();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Dates.getLocale());
-		titleView.setText(sdf.format(startDate.getTime()));
+		String dateTitle = sdf.format(startDate.getTime());
+		Calendar endDate = Convention.getInstance().getEndDate();
+		if (!Dates.isSameDate(startDate, endDate)) {
+			dateTitle = getString(R.string.dash_with_values, dateTitle, sdf.format(endDate.getTime()));
+			titleView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+		}
+		titleView.setText(dateTitle);
 	}
 
 	private void setContentForAfterConventionEnded() {

@@ -1,136 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="bottom"
-    android:layout_margin="24dp"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <FrameLayout
+    <amai.org.conventions.customviews.AspectRatioImageView
+        android:id="@+id/home_logo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?homeTitleBackground"
-        android:padding="8dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/my_events_title"
-            android:textSize="32sp"
-            android:textColor="?homeTitleText"
-            android:textStyle="bold"
-            android:layout_gravity="center"/>
-    </FrameLayout>
+        android:layout_margin="10dp"
+        android:layout_alignParentTop="true"
+        android:src="?homeLogo"/>
 
-    <FrameLayout
-        android:id="@+id/home_current_event_container"
+    <amai.org.conventions.customviews.AspectRatioImageView
+        android:id="@+id/home_bottom_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:foreground="?selectableItemBackground"
-        android:gravity="center"
-        android:onClick="onCurrentEventClicked">
-        <!-- This view is inside a FrameLayout because in previous API levels foreground was not available for other views -->
+        android:src="?homeBottomImage"
+        android:layout_alignParentBottom="true"/>
+
+    <!-- This FrameLayout is required to allow the LinearLayout to be aligned to the bottom -->
+    <FrameLayout
+        android:id="@+id/home_info_box"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/home_logo"
+        android:layout_above="@+id/home_bottom_image">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="5dp"
-            android:paddingEnd="5dp"
-            android:background="?homeCurrentEventBackground"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/home_current_event_title"
-                android:visibility="visible"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:orientation="vertical"
+            tools:ignore="UselessParent">
+
+
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="כעת: תחרות השירה"
-                android:textAlignment="center"
-                android:textColor="?homeMessageText"
-                android:textSize="20sp"
-                android:paddingBottom="8dp"
-                />
-            <TextView
-                android:id="@+id/home_current_event_vote"
+                android:background="?homeTitleBackground"
+                android:padding="8dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/my_events_title"
+                    android:textSize="32sp"
+                    android:textColor="?homeTitleText"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/home_current_event_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                tools:visibility="visible"
-                android:text="@string/home_current_event_vote_possible"
-                android:textColor="?homeMessageText"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                android:paddingBottom="8dp"
-                />
-        </LinearLayout>
-    </FrameLayout>
+                android:foreground="?selectableItemBackground"
+                android:gravity="center"
+                android:onClick="onCurrentEventClicked">
+                <!-- This view is inside a FrameLayout because in previous API levels foreground was not available for other views -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:background="?homeCurrentEventBackground"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/home_current_event_title"
+                        android:visibility="visible"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:text="כעת: תחרות השירה"
+                        android:textAlignment="center"
+                        android:textColor="?homeMessageText"
+                        android:textSize="20sp"
+                        android:paddingBottom="8dp"
+                        />
+                    <TextView
+                        android:id="@+id/home_current_event_vote"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        tools:visibility="visible"
+                        android:text="@string/home_current_event_vote_possible"
+                        android:textColor="?homeMessageText"
+                        android:textAlignment="center"
+                        android:textSize="20sp"
+                        android:paddingBottom="8dp"
+                        />
+                </LinearLayout>
+            </FrameLayout>
 
-    <FrameLayout
-        android:id="@+id/home_upcoming_event_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:foreground="?selectableItemBackground"
-        android:paddingTop="8dp"
-        android:padding="5dp"
-        android:onClick="onUpcomingEventClicked"
-        android:background="?homeUpcomingEventBackground">
-        <!-- This layout is inside a FrameLayout because in previous API levels foreground was not available for other views -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/home_upcoming_event_time"
-                android:layout_width="wrap_content"
+            <FrameLayout
+                android:id="@+id/home_upcoming_event_container"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="כעת"
-                android:textColor="?homeMessageText"
-                android:textSize="20sp"/>
+                android:foreground="?selectableItemBackground"
+                android:paddingTop="8dp"
+                android:padding="5dp"
+                android:onClick="onUpcomingEventClicked"
+                android:background="?homeUpcomingEventBackground">
+                <!-- This layout is inside a FrameLayout because in previous API levels foreground was not available for other views -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/home_upcoming_event_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="כעת"
+                        android:textColor="?homeMessageText"
+                        android:textSize="20sp"/>
 
-            <TextView
-                android:id="@+id/home_upcoming_event_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="2D Musical"
-                android:textAlignment="center"
-                android:textColor="?homeMessageText"
-                android:textStyle="bold"
-                android:textSize="28sp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"/>
+                    <TextView
+                        android:id="@+id/home_upcoming_event_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="2D Musical"
+                        android:textAlignment="center"
+                        android:textColor="?homeMessageText"
+                        android:textStyle="bold"
+                        android:textSize="28sp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"/>
 
-            <TextView
-                android:id="@+id/home_upcoming_event_hall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="אולם ראשי"
-                android:textColor="?homeMessageText"
+                    <TextView
+                        android:id="@+id/home_upcoming_event_hall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="אולם ראשי"
+                        android:textColor="?homeMessageText"
+                        android:textSize="23sp"
+                        android:layout_marginBottom="8dp"/>
+
+                    <TextView
+                        android:id="@+id/home_upcoming_event_vote"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        tools:visibility="visible"
+                        android:text="@string/home_current_event_vote_possible"
+                        android:textColor="?homeMessageText"
+                        android:textAlignment="center"
+                        android:textSize="22sp"
+                        android:paddingBottom="8dp"
+                        />
+                </LinearLayout>
+            </FrameLayout>
+
+            <Button
+                android:id="@+id/home_go_to_my_events_button"
+                android:text="@string/home_go_to_my_events"
                 android:textSize="23sp"
-                android:layout_marginBottom="8dp"/>
-
-            <TextView
-                android:id="@+id/home_upcoming_event_vote"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                tools:visibility="visible"
-                android:text="@string/home_current_event_vote_possible"
-                android:textColor="?homeMessageText"
-                android:textAlignment="center"
-                android:textSize="22sp"
-                android:paddingBottom="8dp"
-                />
+                style="@style/HomeButton"
+                android:onClick="onGoToMyEventsClicked"/>
+
         </LinearLayout>
     </FrameLayout>
-
-    <Button
-        android:id="@+id/home_go_to_my_events_button"
-        android:text="@string/home_go_to_my_events"
-        android:textSize="23sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/HomeButton"
-        android:onClick="onGoToMyEventsClicked"/>
-
-</LinearLayout>
+</RelativeLayout>

@@ -40,7 +40,7 @@ public class ConflictingEventsViewHolder extends RecyclerView.ViewHolder {
 		}
 		DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(context,
 				DividerItemDecoration.VERTICAL);
-		dividerItemDecoration.setDrawable(ThemeAttributes.getDrawable(context, R.attr.eventListDivider));
+		dividerItemDecoration.setDrawable(ThemeAttributes.getDrawable(context, R.attr.conflictingEventListDivider));
 		eventsListView.addItemDecoration(dividerItemDecoration);
 	}
 

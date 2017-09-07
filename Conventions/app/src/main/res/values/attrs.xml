@@ -8,6 +8,7 @@
     <declare-styleable name="ApplicationTheme">
         <!-- Events Lists -->
         <attr name="eventListDivider" format="color|reference"/>
+        <attr name="conflictingEventListDivider" format="color|reference"/>
         <!-- Activities -->
         <attr name="activitiesBackground" format="color|reference"/>
         <attr name="actionButtonColor" format="color|reference"/>
@@ -43,6 +44,8 @@
         <!-- Home screen -->
         <attr name="homeBackground" format="color|reference"/>
         <attr name="homeToolbarTitle" format="integer|reference"/>
+        <attr name="homeLogo" format="integer|reference"/>
+        <attr name="homeBottomImage" format="integer|reference"/>
         <attr name="homeTitleBackground" format="color|reference"/>
         <attr name="homeTitleText" format="color|reference"/>
         <attr name="homeMessageBackground" format="color|reference"/>

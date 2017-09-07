@@ -1,29 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="aquamarine">#aaffec</color>
-    <color name="yellow_dark">#ffcd02</color>
-    <color name="brown_bright">#d8ac00</color>
-    <color name="brown">#bf9200</color>
-    <color name="brown_dark">#af7800</color>
-    <color name="brown_darker">#7a5700</color>
-    <color name="very_light_blue">#E5EBF7</color>
+    <color name="icon2017_light_green">#A6B6B3</color>
+    <color name="icon2017_blue">#5c78a8</color>
+    <color name="icon2017_dark_red">#a45a5b</color>
+    <color name="icon2017_dark_green">#495d5b</color>
+    <color name="icon2017_green">#41937d</color>
+    <color name="icon2017_brown">#8f7777</color>
+    <color name="icon2017_yellow">#baad78</color>
+    <color name="icon2017_purple">#a47ea7</color>
 
-    <!-- From cami 2017 -->
-    <color name="icon2017_blue_dark">#001d69</color>
-    <color name="icon2017_dark_blue">#1d3750</color>
-    <color name="icon2017_dark_blue_dark">#002241</color>
-    <color name="icon2017_very_dark_blue">#0a1723</color>
-    <color name="icon2017_very_dark_blue_bright">#627585</color>
-    <color name="icon2017_red">#c8094c</color>
-    <color name="icon2017_pink">#ff4a8a</color>
-    <color name="icon2017_red_dark">#7d002c</color>
-    <color name="icon2017_dark_purple_bright">#9891b2</color>
-    <color name="icon2017_purple_bright">#d3bbcc</color>
-    <color name="icon2017_purple_dark">#6d5566</color>
-    <color name="icon2017_gray">#A9B8BE</color>
-    <color name="icon2017_transparent_red">#c07d002c</color>
-    <color name="icon2017_transparent_purple_bright">#c0322b4c</color>
-    <color name="icon2017_darkest_blue">#051620</color>
-    <color name="icon2017_transparent_dark_blue">#951d3750</color>
-    <color name="icon2017_transparent_very_dark_blue">#950a1723</color>
+    <color name="icon2017_very_dark_green">#141a19</color>
+    <color name="icon2017_transparent_dark_green">#95495d5b</color>
+    <color name="icon2017_transparent_dark_red">#c0a45a5b</color>
+    
+    <!-- From icon 2016 -->
+    <color name="yellow_dark">#ffcd02</color>
 </resources>

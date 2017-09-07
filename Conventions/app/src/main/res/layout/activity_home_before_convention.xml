@@ -1,78 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_gravity="bottom"
-    android:layout_margin="24dp"
-    android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <FrameLayout
+    <amai.org.conventions.customviews.AspectRatioImageView
+        android:id="@+id/home_logo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?homeTitleBackground"
-        android:padding="8dp">
-        <TextView
-            android:id="@+id/home_content_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="32sp"
-            android:textColor="?homeTitleText"
-            android:textStyle="bold"
-            android:layout_gravity="center"
-            tools:text="12.03.2017"/>
-    </FrameLayout>
+        android:layout_margin="10dp"
+        android:layout_alignParentTop="true"
+        android:src="?homeLogo"/>
 
-    <FrameLayout
-        android:id="@+id/home_content_container"
+    <amai.org.conventions.customviews.AspectRatioImageView
+        android:id="@+id/home_bottom_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:background="?homeMessageBackground">
+        android:src="?homeBottomImage"
+        android:layout_alignParentBottom="true"/>
 
-        <TextView
-            android:id="@+id/home_content"
+    <!-- This FrameLayout is required to allow the LinearLayout to be aligned to the bottom -->
+    <FrameLayout
+        android:id="@+id/home_info_box"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/home_logo"
+        android:layout_above="@+id/home_bottom_image">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="עוד 10 ימים!"
-            android:textColor="?homeMessageText"
-            android:textStyle="bold"
-            android:textSize="70sp"
-            android:textAlignment="center"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="13dp"/>
+            android:layout_gravity="bottom"
+            android:layout_margin="24dp"
+            android:orientation="vertical"
+            tools:ignore="UselessParent">
 
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?homeTitleBackground"
+                android:padding="8dp">
+                <!-- Using ltr text direction because it's dates in this title -->
+                <TextView
+                    android:id="@+id/home_content_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="32sp"
+                    android:textColor="?homeTitleText"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textDirection="ltr"
+                    tools:text="12.03.2017"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/home_content_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="?homeMessageBackground">
+
+                <TextView
+                    android:id="@+id/home_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="עוד 10 ימים!"
+                    android:textColor="?homeMessageText"
+                    android:textStyle="bold"
+                    android:textSize="70sp"
+                    android:textAlignment="center"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="13dp"/>
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:id="@+id/home_buttons_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
+
+                <Button
+                    style="@style/HomeButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/programme_title"
+                    android:textSize="23sp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="16dp"
+                    android:onClick="onGoToProgrammeClicked"/>
+
+                <Button
+                    style="@style/HomeButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/updates"
+                    android:textSize="20sp"
+                    android:id="@+id/textView"
+                    android:layout_weight="1"
+                    android:onClick="onGoToUpdatesClicked"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
     </FrameLayout>
-
-    <LinearLayout
-        android:id="@+id/home_buttons_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="16dp">
-
-        <Button
-            style="@style/HomeButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/programme_title"
-            android:textSize="23sp"
-            android:layout_weight="1"
-            android:layout_marginEnd="16dp"
-            android:onClick="onGoToProgrammeClicked"/>
-
-        <Button
-            style="@style/HomeButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/updates"
-            android:textSize="20sp"
-            android:id="@+id/textView"
-            android:layout_weight="1"
-            android:onClick="onGoToUpdatesClicked"/>
-
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>
