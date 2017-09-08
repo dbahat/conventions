@@ -246,6 +246,7 @@ public class EventActivity extends NavigationActivity {
 										imagesLayout.setVisibility(View.VISIBLE);
 										if (!setBackgroundBeforeAnimation) {
 											updateBackgroundColor(backgroundColor);
+
 										}
 										removeBackground();
 									}
@@ -540,6 +541,20 @@ public class EventActivity extends NavigationActivity {
 			tags.setVisibility(View.GONE);
 		} else {
 			tags.setText(getString(R.string.tags, event.getTagsAsString()));
+		}
+
+		TextView avilableTickets = (TextView) findViewById(R.id.event_available_tickets);
+		int eventAvailableTickets = event.getAvailableTickets();
+		String ticketsNumber;
+		if (eventAvailableTickets < 0) {
+			avilableTickets.setVisibility(View.GONE);
+		} else {
+			if (eventAvailableTickets == 0) {
+				ticketsNumber = getString(R.string.sold_out);
+			} else {
+				ticketsNumber = getString(R.string.available_tickets, eventAvailableTickets);
+			}
+			avilableTickets.setText(ticketsNumber);
 		}
 
 		setupFeedback(event);

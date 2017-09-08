@@ -43,6 +43,7 @@ public class ConventionEvent implements Serializable {
 	private String category;
 	private List<String> tags;
 	private int price;
+	private int availableTickets = -1; // No ticket info available
 	private String websiteUrl;
 
 	public ConventionEvent() {
@@ -269,6 +270,19 @@ public class ConventionEvent implements Serializable {
 
 	public ConventionEvent withPrice(int price) {
 		setPrice(price);
+		return this;
+	}
+
+	public void setAvailableTickets(int availableTickets) {
+		this.availableTickets = availableTickets;
+	}
+
+	public int getAvailableTickets() {
+		return availableTickets;
+	}
+
+	public ConventionEvent withAvailableTickets(int availableTickets) {
+		setAvailableTickets(availableTickets);
 		return this;
 	}
 

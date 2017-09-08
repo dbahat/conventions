@@ -256,4 +256,6 @@
     <string name="vote_send_error">לא ניתן להצביע. נסה שנית מאוחר יותר.</string>
     <string name="home_current_event_vote_possible">לחץ להצבעה עבור חביב הקהל!</string>
     <string name="event_not_found">האירוע לא נמצא</string>
+    <string name="sold_out">לא נותרו כרטיסים</string>
+    <string name="available_tickets">נותרו %d כרטיסים</string>
 </resources>

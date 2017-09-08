@@ -88,6 +88,14 @@ public class SffModelParser implements ModelParser {
 				price = priceElement.getAsInt();
 			}
 
+			int availableTickets;
+			JsonElement availableTicketsElement = eventObj.get("available_tickets");
+			if (availableTicketsElement == null) {
+				availableTickets = -1;
+			} else {
+				availableTickets = availableTicketsElement.getAsInt();
+			}
+
 			String websiteUrl = eventObj.get("url").getAsString();
 
 			ConventionEvent conventionEvent = new ConventionEvent()
@@ -103,6 +111,7 @@ public class SffModelParser implements ModelParser {
 					.withCategory(category)
 					.withTags(tags)
 					.withPrice(price)
+					.withAvailableTickets(availableTickets)
 					.withWebsiteUrl(websiteUrl);
 
 			eventList.add(conventionEvent);
