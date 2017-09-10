@@ -121,7 +121,7 @@ public class ShowNotificationService extends Service {
 
     private void showEventFeedbackReminderNotification(Intent intent) {
         final ConventionEvent event = (ConventionEvent) intent.getSerializableExtra(EXTRA_EVENT_TO_NOTIFY);
-        if (event == null) {
+        if (event == null || event.getUserInput() == null) { // This can happen if the event was deleted
             return;
         }
 
@@ -183,7 +183,7 @@ public class ShowNotificationService extends Service {
     private void showEventAboutToStartNotification(Intent intent) {
 
         ConventionEvent event = (ConventionEvent) intent.getSerializableExtra(EXTRA_EVENT_TO_NOTIFY);
-        if (event == null) {
+        if (event == null || Convention.getInstance().getEventById(event.getId()) == null) { // This can happen if the event was deleted
             return;
         }
 

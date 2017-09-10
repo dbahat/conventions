@@ -21,7 +21,7 @@ public class ViewPagerAnimator {
 
 			public void onAnimationUpdate(ValueAnimator animation) {
 				float value = (float) animation.getAnimatedValue();
-				if (value != previousDragValue) {
+				if (value != previousDragValue && pager.getCurrentItem() >= 0) {
 					// If the view is touched while being dragged and we don't call beginFakeDrag() before
 					// it there is a NullPointerException in android code - see https://github.com/JakeWharton/ViewPagerIndicator/pull/257
 					pager.beginFakeDrag();
@@ -30,8 +30,8 @@ public class ViewPagerAnimator {
 					// pager to fake drag by a small margin during each animation frame.
 					float amountToDrag = value - previousDragValue;
 					pager.fakeDragBy(amountToDrag);
+					previousDragValue = value;
 				}
-				previousDragValue = value;
 			}
 		};
 

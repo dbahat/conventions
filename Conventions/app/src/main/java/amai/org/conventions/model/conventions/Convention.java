@@ -249,6 +249,15 @@ public abstract class Convention implements Serializable {
 		}
 	}
 
+	public ConventionEvent getEventById(final String id) {
+		return CollectionUtils.findFirst(getEvents(), new CollectionUtils.Predicate<ConventionEvent>() {
+			@Override
+			public boolean where(ConventionEvent item) {
+				return Objects.equals(item.getId(), id);
+			}
+		});
+	}
+
 	public boolean hasFavorites() {
 		List<ConventionEvent> events = getEvents();
 		for (ConventionEvent event : events) {
