@@ -1,18 +1,18 @@
 apply plugin: 'com.android.application'
 
 ext {
-    supportLibVersion = "25.3.1"
+    supportLibVersion = "26.0.0"
     googlePlayServicesVersion = "11.0.1"
 }
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.2'
+    compileSdkVersion 26
+    buildToolsVersion '26.0.0'
 
     defaultConfig {
         applicationId "sff.org.conventions"
         minSdkVersion 17
-        targetSdkVersion 25
+        targetSdkVersion 26
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -73,6 +73,15 @@ dependencies {
     testCompile 'org.mockito:mockito-core:1.10.19'
     androidTestCompile 'junit:junit:4.12'
     androidTestCompile 'com.android.support.test:runner:0.5'
+}
+
+// REQUIRED: Google's new Maven repo is required for the latest
+// support library that is compatible with Android 8.0
+repositories {
+    maven {
+        url 'https://maven.google.com'
+        // Alternative URL is 'https://dl.google.com/dl/android/maven2/'
+    }
 }
 
 apply plugin: 'com.google.gms.google-services'
