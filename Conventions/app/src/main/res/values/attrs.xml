@@ -5,6 +5,10 @@
         <attr name="compoundDrawableHeight" format="dimension"/>
     </declare-styleable>
 
+    <declare-styleable name="FrameLayoutWithMaxHeight">
+        <attr name="maxHeight" format="dimension"/>
+    </declare-styleable>
+
     <declare-styleable name="ApplicationTheme">
         <!-- Events Lists -->
         <attr name="eventListDivider" format="color|reference"/>

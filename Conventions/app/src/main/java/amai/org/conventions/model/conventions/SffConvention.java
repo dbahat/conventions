@@ -11,6 +11,6 @@ public abstract class SffConvention extends Convention {
 
 	@Override
 	public String getGoogleSpreadsheetsApiKey() {
-		return "AIzaSyAKJYwC7UeHyBpcVqvXABRxhEQmLiK2TRo";
+		return null;
 	}
 }
