@@ -22,13 +22,16 @@ public class AggregatedEventTypes {
 				new AggregatedType("משחקים", Arrays.asList(
 						new EventType("משחק שולחני"),
 						new EventType("משחק תפקידים חי"),
+						new EventType("משחק תפקידים לילדים"),
 						new EventType("מיוחד"),
 						new EventType("טורניר"))),
 				new AggregatedType("סדנאות", Arrays.asList(
 						new EventType("סדנה"))),
 				new AggregatedType("הקרנות ומופעים", Arrays.asList(
 						new EventType("הקרנה"),
-						new EventType("מופע")))
+						new EventType("הקרנה מונחית"),
+						new EventType("מופע"),
+						new EventType("מופע מוזיקלי")))
 		);
 	}
 
