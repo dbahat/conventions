@@ -43,6 +43,7 @@
         <item name="eventDetailsBoxColor">@color/transparent_white</item>
         <item name="eventDescriptionTextColor">?android:textColorPrimary</item>
         <item name="eventDetailsTextColor">?android:textColorPrimary</item>
+        <item name="eventDetailsHighlightedTextColor">?eventDetailsTextColor</item>
         <item name="feedbackButtonColor">?borderlessButtonColor</item>
         <item name="eventTitleTextColor">?android:textColorPrimary</item>
         <item name="eventFeedbackBoxColor">@color/transparent_light_yellow</item>
