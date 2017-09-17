@@ -35,7 +35,7 @@
 
     <string name="question_enjoyment">האם נהנית באירוע?</string>
     <string name="question_lecturer_quality">ההנחיה באירוע היתה:</string>
-    <string name="question_similar_events">האם תרצה לבוא לאירועים דומים בעתיד?</string>
+    <string name="question_similar_events">האם תרצה לבוא לאירועים בנושאים דומים בעתיד?</string>
     <string name="question_additional_info">עוד משהו?</string>
     <string name="event_has_ended">האירוע נגמר</string>
     <string name="add_feedback">מלא פידבק</string>
@@ -114,7 +114,7 @@
     <string name="close">סגור</string>
     <string name="other">אחר</string>
     <!-- Copied from http://2016.iconfestival.org.il/info/discounts/
-    Changes: changed h1 to h2 in first title, removed some white space after the title (<p> tags in the first paragraph), removed images and table tags and <p> tags around restaurant addresses -->
+    Changes: changed h1 tƒo h2 in first title, removed some white space after the title (<p> tags in the first paragraph), removed images and table tags and <p> tags around restaurant addresses -->
     <string name="discounts_content" formatted="false">"<![CDATA[
 					<h2>מועדון ההנחות של יריד הדוכנים בפסטיבל אייקון</h2>
 מגוון דוכנים יעניקו 10% הנחה למציגים כרטיס חבר תקף במועדון העמותה למשחקי תפקידים בישראל ובאגודה ישראלית למדע בדיוני ולפנטסיה. הדוכנים המשתתפים במבצע:
