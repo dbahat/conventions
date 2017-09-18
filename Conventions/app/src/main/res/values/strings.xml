@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">פסטיבל אייקון</string>
 
-    <string name="programme_title">תוכניה</string>
+    <string name="programme_title">תוכנייה</string>
     <string name="my_events_title">האירועים שלי</string>
     <string name="programme_search_title">חיפוש אירועים</string>
 
@@ -26,7 +26,7 @@
 
     <string name="my_events_no_data">הוסף אירוע לאירועים שלי ע\"י לחיצה על הכוכב בדף האירוע או ע\"י גריריתו ברשימת האירועים</string>
     <string name="my_events_share">שתף</string>
-    <string name="my_event_share_title">התוכניה שלי ל%s:</string>
+    <string name="my_event_share_title">התוכנייה שלי ל%s:</string>
     <string name="my_event_share_signature">נוצר באפליקצית %s.</string>
     <string name="my_event_share_link">http://play.google.com/store/apps/details?id=sff.org.conventions</string>
     <string name="my_event_share_chooser_dialog_title">שתף את רשימת האירועים</string>
@@ -93,7 +93,7 @@
     <string name="share_no_events">הוסף אירועים כדי לשתף</string>
     <string name="ok">אישור</string>
     <string name="events_without_feedback_title">מלא פידבק על אירועים</string>
-    <string name="events_feedback_no_events">בחר אירועים שהיית בהם דרך התוכניה ומלא עליהם פידבק.</string>
+    <string name="events_feedback_no_events">בחר אירועים שהיית בהם דרך התוכנייה ומלא עליהם פידבק.</string>
     <string name="events_with_feedback_title">פידבק שמילאת על אירועים</string>
     <string name="convention_feedback_title">פידבק על הפסטיבל</string>
     <string name="convention_feedback_subtitle">מלא פידבק כללי על הפסטיבל - קופות, יריד הדוכנים, הפונדק, אוהל המשחקים וכל דבר אחר.</string>
@@ -176,7 +176,7 @@
     <string name="show_general_notifications_title">כללי</string>
     <string name="show_general_notifications_summary">הצג התראות כלליות</string>
     <string name="show_event_notifications_title">אירועים</string>
-    <string name="show_event_notifications_summary">הצג התראות על עדכונים בתוכניה ואירועים</string>
+    <string name="show_event_notifications_summary">הצג התראות על עדכונים בתוכנייה ואירועים</string>
     <string name="show_cosplay_notifications_title">השתתפות באירוע הקוספליי</string>
     <string name="show_cosplay_notifications_summary">הצג התראות עבור המשתתפים בתחרות הקוספליי</string>
     <string name="show_bus_notifications_title">הסעות</string>
@@ -257,7 +257,6 @@
     <string name="home_current_event_vote_possible">לחץ להצבעה עבור חביב הקהל!</string>
     <string name="event_not_found">האירוע לא נמצא</string>
     <string name="tickets_sold_out">לא נותרו כרטיסים</string>
-    <string name="tickets_available_with_number">נותרו %d כרטיסים</string>
     <string name="tickets_are_available">יש כרטיסים</string>
     <string name="some_tickets_available">נותרו מעט כרטיסים</string>
     <string name="last_tickets_available">נותרו כרטיסים אחרונים</string>
