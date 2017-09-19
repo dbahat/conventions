@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="icon2017_light_green">#A6B6B3</color>
+    <color name="icon2017_lighter_green">#B1BDB8</color>
     <color name="icon2017_blue">#5c78a8</color>
     <color name="icon2017_dark_red">#a45a5b</color>
     <color name="icon2017_dark_green">#495d5b</color>
@@ -10,9 +11,7 @@
     <color name="icon2017_purple">#a47ea7</color>
 
     <color name="icon2017_very_dark_green">#141a19</color>
+    <color name="icon2017_transparent_green">#e0A6B6B3</color>
     <color name="icon2017_transparent_dark_green">#95495d5b</color>
     <color name="icon2017_transparent_dark_red">#c0a45a5b</color>
-    
-    <!-- From icon 2016 -->
-    <color name="yellow_dark">#ffcd02</color>
 </resources>
