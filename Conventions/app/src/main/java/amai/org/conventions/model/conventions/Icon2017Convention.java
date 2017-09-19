@@ -359,7 +359,7 @@ public class Icon2017Convention extends SffConvention {
 												.withY(426),
 										new MapLocation()
 												.withName("כניסה לעירוני")
-												.withPlaces(Arrays.asList(ironi1, ironi2, ironi3, ironi4, ironi5, ironi6, ironi7, ironi8, ironi9, ironi10, ironi11, ironi12, ironi13, ironi14, ironi15))
+												.withPlaces(Arrays.asList(workshops2, ironi1, ironi2, ironi3, ironi4, ironi5, ironi6, ironi7, ironi8, ironi9, ironi10, ironi11, ironi12, ironi13, ironi14, ironi15))
 												.withMarkerResource(R.drawable.ic_action_place, false)
 												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
 												.withX(576)
@@ -388,6 +388,12 @@ public class Icon2017Convention extends SffConvention {
 												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
 												.withX(1574)
 												.withY(901),
+										new MapLocation()
+												.withPlace(outside)
+												.withMarkerResource(R.drawable.ic_action_place, false)
+												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+												.withX(1316)
+												.withY(831),
 										new MapLocation()
 												.withPlace(new Place().withName("כניסה מרחוב הארבעה"))
 												.withMarkerResource(R.drawable.ic_action_place, false)
