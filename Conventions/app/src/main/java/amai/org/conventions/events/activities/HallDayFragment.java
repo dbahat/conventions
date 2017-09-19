@@ -14,7 +14,6 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
-import sff.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.adapters.EventsViewAdapter;
 import amai.org.conventions.model.ConventionEvent;
@@ -22,6 +21,7 @@ import amai.org.conventions.model.ConventionEventComparator;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
+import sff.org.conventions.R;
 
 public class HallDayFragment extends Fragment {
 	private static final String ARGS_HALL_NAME = "ArgHallName";
@@ -47,6 +47,7 @@ public class HallDayFragment extends Fragment {
 		String hallName = getArguments().getString(ARGS_HALL_NAME);
 
 		RecyclerView hallEventsList = (RecyclerView) view.findViewById(R.id.hallEventsList);
+		View hallNoEvents = view.findViewById(R.id.hall_no_events_found);
 
 		List<ConventionEvent> events = Convention.getInstance().findEventsByHall(hallName);
 		events = CollectionUtils.filter(events, new CollectionUtils.Predicate<ConventionEvent>() {
@@ -62,15 +63,23 @@ public class HallDayFragment extends Fragment {
 			}
 		});
 
-		Collections.sort(events, new ConventionEventComparator());
+		if (events.size() > 0) {
+			hallEventsList.setVisibility(View.VISIBLE);
+			hallNoEvents.setVisibility(View.GONE);
+			Collections.sort(events, new ConventionEventComparator());
 
-		adapter = new EventsViewAdapter(events, hallEventsList);
-		hallEventsList.setAdapter(adapter);
-		hallEventsList.setLayoutManager(new LinearLayoutManager(getActivity()));
-		DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(),
-				DividerItemDecoration.VERTICAL);
-		dividerItemDecoration.setDrawable(ThemeAttributes.getDrawable(getActivity(), R.attr.eventListDivider));
-		hallEventsList.addItemDecoration(dividerItemDecoration);
+			adapter = new EventsViewAdapter(events, hallEventsList);
+			hallEventsList.setAdapter(adapter);
+			hallEventsList.setLayoutManager(new LinearLayoutManager(getActivity()));
+			DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(),
+					DividerItemDecoration.VERTICAL);
+			dividerItemDecoration.setDrawable(ThemeAttributes.getDrawable(getActivity(), R.attr.eventListDivider));
+			hallEventsList.addItemDecoration(dividerItemDecoration);
+		} else {
+			hallEventsList.setVisibility(View.GONE);
+			hallNoEvents.setVisibility(View.VISIBLE);
+		}
+
 
 		return view;
 	}
@@ -81,6 +90,8 @@ public class HallDayFragment extends Fragment {
 
 		// Always redraw the list during onResume, since it's a fast operation, and this ensures the data is up to date in case the activity got paused
 		// (including going into an event, adding it to favorites and returning)
-		adapter.notifyDataSetChanged();
+		if (adapter != null) {
+			adapter.notifyDataSetChanged();
+		}
 	}
 }

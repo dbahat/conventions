@@ -44,8 +44,8 @@
                     This margin is not included in the size of the nav bar so we can't find it when calculating the size of the nav bar. -->
 
                     <!-- Using a custom textView for the toolbar title for better customization (allow centering the title, allow showing an image
-                     instead of text) -->
-                    <TextView
+                     instead of text, allow automatic resize) -->
+                    <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/navigation_toolbar_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -55,6 +55,10 @@
                         android:textColor="@color/black"
                         android:ellipsize="end"
                         android:maxLines="2"
+                        app:autoSizeTextType="uniform"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeMaxTextSize="20sp"
+                        app:autoSizeStepGranularity="2sp"
                         style="@style/ToolbarTitle"/>
 
                 </amai.org.conventions.customviews.CenterInToolbarFrameLayout>
