@@ -139,7 +139,7 @@
 				<TextView
 					android:id="@+id/event_prices"
 					style="@style/TextAppearance.AppCompat.Small"
-					android:textColor="?eventTitleTextColor"
+					android:textColor="?attr/eventDescriptionTextColor"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:paddingTop="10dp"
@@ -148,16 +148,17 @@
 				<TextView
 					android:id="@+id/event_available_tickets"
 					style="@style/TextAppearance.AppCompat.Small"
-					android:textColor="?eventTitleTextColor"
+					android:textColor="?attr/eventDescriptionTextColor"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:paddingTop="10dp"
 					tools:text="@string/tickets_are_available"/>
 
+
 				<TextView
 					android:id="@+id/event_tags"
 					style="@style/TextAppearance.AppCompat.Small"
-					android:textColor="?eventTitleTextColor"
+					android:textColor="?attr/eventDescriptionTextColor"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:paddingTop="10dp"
