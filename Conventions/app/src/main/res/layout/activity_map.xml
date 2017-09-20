@@ -25,6 +25,11 @@
             android:id="@+id/map_search_pane"
             android:layout_height="match_parent">
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/black"/>
+
             <RadioGroup
                 android:id="@+id/search_type"
                 android:background="@color/white"
