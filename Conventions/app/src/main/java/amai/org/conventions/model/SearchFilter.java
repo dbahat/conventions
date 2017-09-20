@@ -59,6 +59,7 @@ public class SearchFilter implements Serializable {
 
 
     public enum Type {
+        Tickets,
         EventType,
         Category,
         Tag;
@@ -66,6 +67,8 @@ public class SearchFilter implements Serializable {
         @StringRes
         public int getDescriptionStringId() {
             switch (this) {
+                case Tickets:
+                    return R.string.tickets;
                 case EventType:
                     return R.string.search_filter_by_event_type;
                 case Category:

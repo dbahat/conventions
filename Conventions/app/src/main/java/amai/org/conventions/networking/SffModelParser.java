@@ -40,7 +40,6 @@ public class SffModelParser implements ModelParser {
 			int eventId = eventObj.get("id").getAsInt();
 			String eventType = decodeHtml(eventObj.get("track").getAsString());
 
-
 			String title = decodeHtml(eventObj.get("title").getAsString());
 
 			String eventDescription = parseEventDescription(eventObj.get("description").getAsString());
@@ -53,7 +52,9 @@ public class SffModelParser implements ModelParser {
 
 			String hallName = eventObj.get("location").isJsonNull() ? "" : decodeHtml(eventObj.get("location").getAsString());
 			if (TextUtils.isEmpty(hallName)) {
-				// Some SF-F events came up corrupted without hall name. Ignore them during parsing.
+				// Some SF-F events came up corrupted without a location.
+				// Ignore them - they don't appear in the programme in the site either.
+				Log.w(TAG, "Skipping event with no hall: " + title + " (" + eventId + ")");
 				continue;
 			}
 

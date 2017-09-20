@@ -92,6 +92,8 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 		filterButton = (ImageButton) findViewById(R.id.search_filter_button);
 		refreshFilterButton();
 
+		SearchFilter soldOutFilter = new SearchFilter().withName(getString(R.string.show_sold_out_events)).withType(SearchFilter.Type.Tickets);
+
 		List<SearchFilter> eventTypesSearchFilters = Convention.getInstance().getEventTypesSearchFilters();
 		totalEventTypeSearchFiltersCount = eventTypesSearchFilters.size();
 
@@ -102,6 +104,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 		totalTagSearchFiltersCount = tagFilters.size();
 
 		if (searchFilters.size() == 0) {
+			searchFilters.add(soldOutFilter);
 			searchFilters.addAll(eventTypesSearchFilters);
 			searchFilters.addAll(categoryFilters);
 			searchFilters.addAll(tagFilters);
@@ -284,6 +287,17 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 					result = containsKeywords(event);
 				}
 
+				SearchFilter soldOutTicketsFilter = CollectionUtils.findFirst(filters, new CollectionUtils.Predicate<SearchFilter>() {
+					@Override
+					public boolean where(SearchFilter item) {
+						return item.getType() == SearchFilter.Type.Tickets;
+					}
+				});
+				// If the filter is active the user doesn't want to show sold out events
+				if (soldOutTicketsFilter != null) {
+					result &= event.getAvailableTickets() != 0; // tickets<0 means there is no info about the number of tickets
+				}
+
 				List<SearchFilter> eventTypeFilters = CollectionUtils.filter(filters, new CollectionUtils.Predicate<SearchFilter>() {
 					@Override
 					public boolean where(SearchFilter filter) {
@@ -299,7 +313,6 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 				if (eventTypes.size() > 0 && eventTypes.size() < totalEventTypeSearchFiltersCount) {
 					result &= !eventTypes.contains(event.getType());
 				}
-
 
 				List<SearchFilter> categoryFilters = CollectionUtils.filter(filters, new CollectionUtils.Predicate<SearchFilter>() {
 					@Override

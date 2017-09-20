@@ -262,4 +262,6 @@
     <string name="tickets_are_available">יש כרטיסים</string>
     <string name="some_tickets_available">נותרו מעט כרטיסים</string>
     <string name="last_tickets_available">נותרו כרטיסים אחרונים</string>
+    <string name="tickets">כרטיסים</string>
+    <string name="show_sold_out_events">אירועים ללא כרטיסים</string>
 </resources>
