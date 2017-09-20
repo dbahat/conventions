@@ -352,11 +352,14 @@ public class EventActivity extends NavigationActivity {
 			case R.id.event_change_favorite_state:
 				ConventionEvent.UserInput userInput = conventionEvent.getUserInput();
 
-				// In the user is adding this event and it conflicts with another favorite event, ask the user what to do
-				if ((!userInput.isAttending()) && Convention.getInstance().conflictsWithOtherFavoriteEvent(conventionEvent)) {
+				// In the user is adding this event and it conflicts with another favorite event or sold out, ask the user what to do
+				if ((!userInput.isAttending()) && (Convention.getInstance().conflictsWithOtherFavoriteEvent(conventionEvent) || conventionEvent.getAvailableTickets() == 0)) {
 					final List<ConventionEvent> conflictingEvents = Convention.getInstance().getFavoriteConflictingEvents(conventionEvent);
 					String message;
-					if (conflictingEvents.size() == 1) {
+					// If the event is sold out it can help the user decide if they want to add it more than if it conflicts with other events
+					if (conventionEvent.getAvailableTickets() == 0) {
+						message = getString(R.string.event_tickets_sold_out_are_you_sure);
+					} else if (conflictingEvents.size() == 1) {
 						message = getString(R.string.event_conflicts_with_one_question, conflictingEvents.get(0).getTitle());
 					} else {
 						message = getString(R.string.event_conflicts_with_several_question, conflictingEvents.size());

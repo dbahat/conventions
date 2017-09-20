@@ -1,6 +1,8 @@
 package amai.org.conventions.events;
 
+import android.content.DialogInterface;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.BaseAdapter;
@@ -10,12 +12,12 @@ import android.widget.ListView;
 import com.google.android.gms.analytics.HitBuilders;
 
 import amai.org.conventions.ConventionsApplication;
-import sff.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.listeners.OnEventFavoriteChangedListener;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.conventions.Convention;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
+import sff.org.conventions.R;
 
 public class DefaultEventFavoriteChangedListener implements OnEventFavoriteChangedListener {
 	private View view;
@@ -26,6 +28,27 @@ public class DefaultEventFavoriteChangedListener implements OnEventFavoriteChang
 
 	@Override
 	public void onEventFavoriteChanged(final ConventionEvent updatedEvent) {
+		final boolean newAttending = !updatedEvent.isAttending();
+		// For sold out event, ask user if they're sure they want to add it
+		if (newAttending && updatedEvent.getAvailableTickets() == 0) {
+			new AlertDialog.Builder(view.getContext())
+					.setTitle(R.string.event_add_to_favorites)
+					.setMessage(R.string.event_tickets_sold_out_are_you_sure)
+					.setPositiveButton(R.string.add_anyway, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							changeEventFavoriteState(updatedEvent);
+						}
+					})
+					.setNegativeButton(R.string.cancel, null)
+					.show();
+		} else {
+			changeEventFavoriteState(updatedEvent);
+		}
+
+	}
+
+	private void changeEventFavoriteState(final ConventionEvent updatedEvent) {
 		// Update the favorite state in the model
 		final boolean newAttending = !updatedEvent.isAttending();
 
