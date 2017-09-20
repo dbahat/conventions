@@ -8,6 +8,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import amai.org.conventions.model.ConventionEvent;
@@ -26,7 +27,7 @@ public class AmaiModelParser implements ModelParser {
 	}
 
 	@Override
-	public List<ConventionEvent> parse(InputStreamReader reader) {
+	public List<ConventionEvent> parse(Date modifiedDate, InputStreamReader reader) {
 
 		Gson gson = new GsonBuilder()
 				.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_DASHES)

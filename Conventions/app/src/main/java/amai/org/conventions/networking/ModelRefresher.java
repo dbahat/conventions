@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -42,13 +43,15 @@ public class ModelRefresher {
 		}
 
 		try {
+			Date ticketsModifiedDate = getTicketsModifiedDate();
+
 			HttpURLConnection request = (HttpURLConnection) Convention.getInstance().getModelURL().openConnection();
 			request.setConnectTimeout(CONNECT_TIMEOUT);
 			request.connect();
 			InputStreamReader reader = null;
 			try {
 				reader = new InputStreamReader((InputStream) request.getContent());
-				List<ConventionEvent> eventList = Convention.getInstance().getModelParser().parse(reader);
+				List<ConventionEvent> eventList = Convention.getInstance().getModelParser().parse(ticketsModifiedDate, reader);
 
 				if (BuildConfig.DEBUG) {
 					notifyIfEventsUpdated(Convention.getInstance().getEvents(), eventList);
@@ -119,5 +122,62 @@ public class ModelRefresher {
 		if (changes.size() == 0) {
 			Log.i(TAG, "Events refresh: No changes");
 		}
+	}
+
+	private Date getTicketsModifiedDate() {
+		URL ticketsLastUpdateURL = Convention.getInstance().getTicketsLastUpdateURL();
+		if (ticketsLastUpdateURL == null) {
+			return null;
+		}
+		Date modifiedDate = null;
+		try {
+			HttpURLConnection request = (HttpURLConnection) ticketsLastUpdateURL.openConnection();
+			request.setConnectTimeout(CONNECT_TIMEOUT);
+			request.connect();
+			long lastModifiedAsLong = request.getHeaderFieldDate("Last-Modified", -1);
+			if (lastModifiedAsLong > -1) {
+				modifiedDate = new Date(lastModifiedAsLong);
+			}
+			return modifiedDate;
+		} catch (IOException e) {
+			Log.e(TAG, "Could not get tickets modified date: " + e.getMessage());
+			return null;
+		}
+	}
+
+	public boolean refreshTicketsForEvent(ConventionEvent event) {
+		try {
+			HttpURLConnection request = (HttpURLConnection) Convention.getInstance().getEventTicketsNumberURL(event).openConnection();
+			request.setConnectTimeout(CONNECT_TIMEOUT);
+			request.connect();
+
+			Date modifiedDate = null;
+			long lastModifiedAsLong = request.getHeaderFieldDate("Last-Modified", -1);
+			if (lastModifiedAsLong > -1) {
+				modifiedDate = new Date(lastModifiedAsLong);
+			}
+
+			InputStreamReader reader = null;
+			try {
+				reader = new InputStreamReader((InputStream) request.getContent());
+				int eventTicketsNumber = Convention.getInstance().getEventTicketsParser().parse(reader);
+				event.setAvailableTickets(eventTicketsNumber);
+				event.setTicketsLastModifiedDate(modifiedDate);
+			} finally {
+				if (reader != null) {
+					reader.close();
+				}
+				request.disconnect();
+			}
+			Convention.getInstance().getStorage().saveEvents();
+		} catch (IOException e) {
+			Log.i(TAG, "Could not retrieve tickets number for event " + event.getId() + " due to IOException: " + e.getMessage());
+			return false;
+		} catch (Exception e) {
+			Log.e(TAG, "Could not retrieve tickets number for event" + event.getId() + ": " + e.getMessage(), e);
+			return false;
+		}
+
+		return true;
 	}
 }

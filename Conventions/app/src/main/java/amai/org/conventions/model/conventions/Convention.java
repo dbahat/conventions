@@ -43,6 +43,7 @@ import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.Update;
+import amai.org.conventions.networking.EventTicketsParser;
 import amai.org.conventions.networking.ModelParser;
 import amai.org.conventions.networking.SurveyDataRetriever;
 import amai.org.conventions.utils.CollectionUtils;
@@ -76,6 +77,7 @@ public abstract class Convention implements Serializable {
 	private String id;
 	private String displayName;
 	private URL modelURL;
+	private URL ticketsLastUpdateURL;
 	private URL updatesURL;
 	private ImageIdToImageResourceMapper imageMapper;
 
@@ -96,6 +98,10 @@ public abstract class Convention implements Serializable {
 
 	public URL getModelURL() {
 		return modelURL;
+	}
+
+	public URL getTicketsLastUpdateURL() {
+		return ticketsLastUpdateURL;
 	}
 
 	public URL getUpdatesURL() {
@@ -138,6 +144,7 @@ public abstract class Convention implements Serializable {
 		this.conventionFeedbackForm = initConventionFeedbackForm();
 		this.eventFeedbackForm = initEventFeedbackForm();
 		this.modelURL = initModelURL();
+		this.ticketsLastUpdateURL = initTicketsLastUpdateURL();
 		this.updatesURL = initUpdatesURL();
 		this.halls = initHalls();
 		this.map = initMap();
@@ -174,6 +181,8 @@ public abstract class Convention implements Serializable {
 
 	protected abstract URL initModelURL();
 
+	protected abstract URL initTicketsLastUpdateURL();
+
 	protected abstract Halls initHalls();
 
 	protected abstract ConventionMap initMap();
@@ -189,6 +198,10 @@ public abstract class Convention implements Serializable {
 	protected abstract FeedbackForm initConventionFeedbackForm();
 
 	public abstract String getGoogleSpreadsheetsApiKey();
+
+	public abstract URL getEventTicketsNumberURL(ConventionEvent event);
+
+	public abstract EventTicketsParser getEventTicketsParser();
 
 	public Calendar getStartDate() {
 		return startDate;

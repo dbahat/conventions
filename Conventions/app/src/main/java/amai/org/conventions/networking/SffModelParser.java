@@ -28,7 +28,8 @@ import amai.org.conventions.utils.Log;
 public class SffModelParser implements ModelParser {
 	private static final String TAG = SffModelParser.class.getCanonicalName();
 
-	public List<ConventionEvent> parse(InputStreamReader reader) {
+	@Override
+	public List<ConventionEvent> parse(Date modifiedDate, InputStreamReader reader) {
 		JsonParser jp = new JsonParser();
 		JsonElement root = jp.parse(reader);
 		JsonArray events = root.getAsJsonArray();
@@ -113,6 +114,7 @@ public class SffModelParser implements ModelParser {
 					.withTags(tags)
 					.withPrice(price)
 					.withAvailableTickets(availableTickets)
+					.withTicketsLastModifiedDate(modifiedDate)
 					.withWebsiteUrl(websiteUrl);
 
 			eventList.add(conventionEvent);

@@ -44,6 +44,7 @@ public class ConventionEvent implements Serializable {
 	private List<String> tags;
 	private int price;
 	private int availableTickets = -1; // No ticket info available
+	private Date ticketsLastModifiedDate;
 	private String websiteUrl;
 
 	public ConventionEvent() {
@@ -283,6 +284,19 @@ public class ConventionEvent implements Serializable {
 
 	public ConventionEvent withAvailableTickets(int availableTickets) {
 		setAvailableTickets(availableTickets);
+		return this;
+	}
+
+	public void setTicketsLastModifiedDate(Date ticketsLastModifiedDate) {
+		this.ticketsLastModifiedDate = ticketsLastModifiedDate;
+	}
+
+	public Date getTicketsLastModifiedDate() {
+		return ticketsLastModifiedDate;
+	}
+
+	public ConventionEvent withTicketsLastModifiedDate(Date ticketsLastModifiedDate) {
+		setTicketsLastModifiedDate(ticketsLastModifiedDate);;
 		return this;
 	}
 

@@ -531,11 +531,29 @@ public class Icon2017Convention extends SffConvention {
 	}
 
 	@Override
+	protected URL initTicketsLastUpdateURL() {
+		try {
+			return new URL("https://api.sf-f.org.il/program/cache_get_last_updated.php?which=available_tickets&slug=icon2017");
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@Override
 	protected URL initUpdatesURL() {
 		try {
 			return new URL("https://api.sf-f.org.il/announcements/get.php?slug=icon2017"); // use test_con for tests
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
+		}
+	}
+
+	@Override
+	public URL getEventTicketsNumberURL(ConventionEvent event) {
+		try {
+			return new URL("https://api.sf-f.org.il/program/available_tickets_per_event.php?slug=icon2017&id=" + event.getServerId()); // use test_con for tests
+		} catch (MalformedURLException e) {
+			return null;
 		}
 	}
 

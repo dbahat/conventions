@@ -44,6 +44,7 @@ import com.google.android.gms.analytics.HitBuilders;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import amai.org.conventions.ConventionsApplication;
@@ -61,6 +62,7 @@ import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
+import amai.org.conventions.networking.ModelRefresher;
 import amai.org.conventions.networking.SurveyDataRetriever;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
@@ -532,39 +534,7 @@ public class EventActivity extends NavigationActivity {
 				Dates.toHumanReadableTimeDuration(event.getEndTime().getTime() - event.getStartTime().getTime()));
 		time.setText(formattedEventTime);
 
-		TextView availableTickets = (TextView) findViewById(R.id.event_available_tickets);
-		int eventAvailableTickets = event.getAvailableTickets();
-		String ticketsNumber;
-		boolean soldOut = false;
-		if (eventAvailableTickets < 0) {
-			availableTickets.setVisibility(View.GONE);
-		} else {
-			if (eventAvailableTickets == 0) {
-				ticketsNumber = getString(R.string.tickets_sold_out);
-				availableTickets.setTypeface(availableTickets.getTypeface(), Typeface.BOLD);
-				availableTickets.setTextColor(ThemeAttributes.getColor(this, R.attr.eventDetailsHighlightedTextColor));
-				soldOut = true;
-			} else if (eventAvailableTickets < 10) {
-				ticketsNumber = getString(R.string.last_tickets_available);
-			} else if (eventAvailableTickets < 30) {
-				ticketsNumber = getString(R.string.some_tickets_available);
-			} else {
-				ticketsNumber = getString(R.string.tickets_are_available);
-			}
-			if (BuildConfig.DEBUG && !soldOut) {
-				ticketsNumber += " (" + eventAvailableTickets + ")";
-			}
-			availableTickets.setText(ticketsNumber);
-		}
-
-		TextView prices = (TextView) findViewById(R.id.event_prices);
-		if (soldOut) {
-			prices.setVisibility(View.GONE);
-		} else if (event.getPrice() == 0) {
-			prices.setText(getString(R.string.event_price_free));
-		} else {
-			prices.setText(getString(R.string.event_prices, event.getPrice(), event.getDiscountPrice()));
-		}
+		setupEventTicketsAndPrices(event);
 		
 		TextView tags = (TextView) findViewById(R.id.event_tags);
 		List<String> eventTags = event.getTags();
@@ -581,6 +551,93 @@ public class EventActivity extends NavigationActivity {
 		setupLogoImage(event);
 
 		setupBackgroundImages(event);
+	}
+
+	private void setupEventTicketsAndPrices(final ConventionEvent event) {
+		ViewGroup ticketsLayout = (ViewGroup) findViewById(R.id.event_tickets);
+		int eventAvailableTickets = event.getAvailableTickets();
+		boolean soldOut = (eventAvailableTickets == 0);
+		if (eventAvailableTickets < 0) {
+			ticketsLayout.setVisibility(View.GONE);
+		} else {
+			updateTicketsText(event);
+
+			final View updateTicketsButton = findViewById(R.id.event_check_tickets_update);
+			updateTicketsButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					final Animation rotateAnimation = AnimationUtils.loadAnimation(EventActivity.this, R.anim.rotate);
+					updateTicketsButton.startAnimation(rotateAnimation);
+					new AsyncTask<Void, Void, Boolean>() {
+						@Override
+						protected Boolean doInBackground(Void... params) {
+							ModelRefresher modelRefresher = new ModelRefresher();
+							return modelRefresher.refreshTicketsForEvent(event);
+						}
+
+						@Override
+						protected void onPostExecute(Boolean isSuccess) {
+							// Stop the animation after the next cycle finishes (so it won't jump to the original position)
+							rotateAnimation.setRepeatCount(0);
+							updateTicketsText(event);
+							if (!isSuccess) {
+								Toast.makeText(EventActivity.this, R.string.update_refresh_failed, Toast.LENGTH_SHORT).show();
+							}
+						}
+					}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				}
+			});
+		}
+
+		TextView prices = (TextView) findViewById(R.id.event_prices);
+		if (soldOut) {
+			prices.setVisibility(View.GONE);
+		} else if (event.getPrice() == 0) {
+			prices.setText(getString(R.string.event_price_free));
+		} else {
+			prices.setText(getString(R.string.event_prices, event.getPrice(), event.getDiscountPrice()));
+		}
+	}
+
+	private void updateTicketsText(ConventionEvent event) {
+		String ticketsText;
+		TextView availableTickets = (TextView) findViewById(R.id.event_available_tickets);
+		int eventAvailableTickets = event.getAvailableTickets();
+		// Setup font
+		if (eventAvailableTickets == 0) {
+			availableTickets.setTypeface(availableTickets.getTypeface(), Typeface.BOLD);
+			availableTickets.setTextColor(ThemeAttributes.getColor(this, R.attr.eventDetailsHighlightedTextColor));
+		} else {
+			availableTickets.setTypeface(availableTickets.getTypeface(), Typeface.NORMAL);
+			availableTickets.setTextColor(ThemeAttributes.getColor(this, R.attr.eventDescriptionTextColor));
+		}
+
+		// Setup text
+		if (eventAvailableTickets == 0) {
+			ticketsText = getString(R.string.tickets_sold_out);
+		} else if (eventAvailableTickets < 10) {
+			ticketsText = getString(R.string.last_tickets_available);
+		} else if (eventAvailableTickets < 30) {
+			ticketsText = getString(R.string.some_tickets_available);
+		} else {
+			ticketsText = getString(R.string.tickets_are_available);
+		}
+		if (BuildConfig.DEBUG && eventAvailableTickets > 0) {
+			ticketsText += " (" + eventAvailableTickets + ")";
+		}
+
+		Date ticketsModifiedDate = event.getTicketsLastModifiedDate();
+		if (ticketsModifiedDate != null) {
+			String formattedLastModifiedDate;
+			if (Dates.isSameDate(Dates.toCalendar(ticketsModifiedDate), Dates.toCalendar(Dates.now()))) {
+				formattedLastModifiedDate = Dates.formatHoursAndMinutes(ticketsModifiedDate);
+			} else {
+				formattedLastModifiedDate = Dates.formatDateAndTime(ticketsModifiedDate);
+			}
+			ticketsText += ". " + getString(R.string.last_modified, formattedLastModifiedDate);
+		}
+
+		availableTickets.setText(ticketsText);
 	}
 
 	private void setupVoteSurvey(ConventionEvent event) {
