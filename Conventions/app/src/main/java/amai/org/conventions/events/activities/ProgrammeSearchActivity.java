@@ -173,7 +173,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 
 		// In case all (or none) of the filters are active, show an empty filter icon (since we don't apply any filters in such cases)
 		Drawable filterIcon = getResources().getDrawable(numberOfActiveFilters == 0
-				|| numberOfActiveFilters == totalCategorySearchFiltersCount + totalEventTypeSearchFiltersCount + totalTagSearchFiltersCount
+				|| numberOfActiveFilters == totalCategorySearchFiltersCount + totalEventTypeSearchFiltersCount + totalTagSearchFiltersCount + 1
 				? R.drawable.filter
 				: R.drawable.filter_full);
 		filterIcon.mutate();
