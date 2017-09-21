@@ -43,6 +43,7 @@ dependencies {
     compile "com.android.support:palette-v7:${supportLibVersion}"
     compile "com.android.support:recyclerview-v7:${supportLibVersion}"
     compile "com.android.support:design:${supportLibVersion}"
+    compile 'com.google.android:flexbox:0.3.0'
     compile 'com.github.castorflex.verticalviewpager:library:19.0.1'
     compile 'klogi.com:rtlviewpager:1.0.0'
     compile "com.google.android.gms:play-services-analytics:${googlePlayServicesVersion}"

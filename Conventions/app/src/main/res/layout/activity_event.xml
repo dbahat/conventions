@@ -1,4 +1,5 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/event_main_layout"
 	android:layout_width="match_parent"
@@ -145,33 +146,28 @@
 					android:paddingTop="10dp"
 					tools:text="prices" />
 
-				<LinearLayout
+				<com.google.android.flexbox.FlexboxLayout
 					android:id="@+id/event_tickets"
-					android:layout_width="wrap_content"
+					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:paddingTop="10dp"
-					android:orientation="horizontal">
+					app:flexWrap="wrap">
 					<TextView
 						android:id="@+id/event_available_tickets"
 						style="@style/TextAppearance.AppCompat.Small"
-						android:textColor="?attr/eventDescriptionTextColor"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						tools:text="@string/tickets_are_available"/>
-					<FrameLayout
-						android:layout_width="wrap_content"
-						android:layout_height="match_parent"
-						android:clickable="true"
-						android:layout_marginStart="5dp"
-						android:foreground="?selectableItemBackground">
+						android:textColor="?attr/eventDescriptionTextColor"
+						android:layout_marginEnd="5dp"
+						tools:text="there are tickets (700)"/>
 
-						<amai.org.conventions.customviews.AspectRatioImageView
-							android:id="@+id/event_check_tickets_update"
-							android:layout_width="wrap_content"
-							android:layout_height="match_parent"
-							android:src="@android:drawable/stat_notify_sync_noanim"/>
-					</FrameLayout>
-				</LinearLayout>
+					<amai.org.conventions.customviews.AspectRatioImageView
+						android:id="@+id/event_check_tickets_update"
+						android:layout_width="20dp"
+						android:layout_height="wrap_content"
+						android:src="@android:drawable/stat_notify_sync_noanim"/>
+
+				</com.google.android.flexbox.FlexboxLayout>
 
 				<TextView
 					android:id="@+id/event_tags"

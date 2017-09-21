@@ -48,10 +48,10 @@
     </declare-styleable>
 
     <declare-styleable name="ImageLayout_Layout">
-        <attr name="layout_width" format="integer" />
-        <attr name="layout_height" format="integer" />
-        <attr name="layout_maxWidth" format="integer" />
-        <attr name="layout_maxHeight" format="integer" />
+        <attr name="layout_width" format="dimension" />
+        <attr name="layout_height" format="dimension" />
+        <attr name="layout_maxWidth" format="dimension" />
+        <attr name="layout_maxHeight" format="dimension" />
         <attr name="layout_centerX" format="integer" />
         <attr name="layout_centerY" format="integer" />
         <attr name="layout_left" format="integer" />
