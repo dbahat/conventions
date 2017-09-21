@@ -173,10 +173,11 @@ public class SffModelParser implements ModelParser {
 				.replaceAll("style=\"[^\"]*\"", "")
 				.replaceAll("width=\"[^\"]*\"", "")
 				.replaceAll("height=\"[^\"]*\"", "")
-						// Replace divs and images with some other unsupported (and therefore ignored)
+				.replaceAll("font\\s+color=\"[^\"]*\"", "font") // Remove font colors - they won't match the theme
+				// Replace divs and images with some other unsupported (and therefore ignored)
 				.replace("<div", "<xdiv")
 				.replace("/div>", "/xdiv>")
-						// Remove tabs because they are not treated as whitespace and mess up the formatting
+				// Remove tabs because they are not treated as whitespace and mess up the formatting
 				.replace("\t", "	");
 	}
 }
