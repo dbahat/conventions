@@ -896,7 +896,8 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 					if (currEvent == null && event.getStartTime().before(now) && event.getEndTime().after(now)) {
 						currEvent = event;
 					}
-					if (nextEvent == null && event.getStartTime().after(now)) {
+					// Only show events from today
+					if (nextEvent == null && event.getStartTime().after(now) && Dates.isSameDate(event.getStartTime(), now)) {
 						nextEvent = event;
 					}
 					if (currEvent != null && nextEvent != null) {

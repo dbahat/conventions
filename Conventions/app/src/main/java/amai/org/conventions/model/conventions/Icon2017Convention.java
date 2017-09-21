@@ -160,7 +160,7 @@ public class Icon2017Convention extends SffConvention {
 						CollectionUtils.flattenList(
 								inFloor(floor,
 										new MapLocation()
-												.withPlace(new Place().withName("כניסה"))
+												.withPlace(new Place().withName("כניסה מרחוב ליאונרדו דה וינצ'י"))
 												.withMarkerResource(R.drawable.ic_action_place, false)
 												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
 												.withX(1510)
@@ -311,13 +311,7 @@ public class Icon2017Convention extends SffConvention {
 												.withMarkerResource(R.drawable.ic_action_place, false)
 												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
 												.withX(186)
-												.withY(1525),
-										new MapLocation()
-												.withPlace(new Place().withName("אפסנאות"))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(186)
-												.withY(1366),
+												.withY(1435),
 										new MapLocation()
 												.withPlace(new Place().withName("שירותים"))
 												.withMarkerResource(R.drawable.ic_action_place, false)
@@ -365,7 +359,7 @@ public class Icon2017Convention extends SffConvention {
 												.withX(576)
 												.withY(970),
 										new MapLocation()
-												.withPlace(new Place().withName("כניסה אחורית לעירוני"))
+												.withPlace(new Place().withName("כניסה נגישה לעירוני"))
 												.withMarkerResource(R.drawable.ic_action_place, false)
 												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
 												.withX(46)
@@ -425,7 +419,8 @@ public class Icon2017Convention extends SffConvention {
 												.withX(1238)
 												.withY(363),
 										new MapLocation()
-												.withPlace(new Place().withName("הזמנות מראש השקות וקהילה"))
+												.withName("מפגשים, הזמנות מראש, השקות וקהילה")
+												.withPlace(meetings)
 												.withMarkerResource(R.drawable.ic_action_place, false)
 												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
 												.withX(960)
@@ -440,7 +435,7 @@ public class Icon2017Convention extends SffConvention {
 												.withPlace(new Place().withName("מתחם משחקי לוח"))
 												.withMarkerResource(R.drawable.ic_action_place, false)
 												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(190)
+												.withX(285)
 												.withY(161),
 										new MapLocation()
 												.withName("לסינמטק תל אביב")

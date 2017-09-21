@@ -629,7 +629,7 @@ public class EventActivity extends NavigationActivity {
 		Date ticketsModifiedDate = event.getTicketsLastModifiedDate();
 		if (ticketsModifiedDate != null) {
 			String formattedLastModifiedDate;
-			if (Dates.isSameDate(Dates.toCalendar(ticketsModifiedDate), Dates.toCalendar(Dates.now()))) {
+			if (Dates.isSameDate(ticketsModifiedDate, Dates.now())) {
 				formattedLastModifiedDate = Dates.formatHoursAndMinutes(ticketsModifiedDate);
 			} else {
 				formattedLastModifiedDate = Dates.formatDateAndTime(ticketsModifiedDate);

@@ -59,6 +59,10 @@ public class Dates {
 				first.get(Calendar.YEAR) == second.get(Calendar.YEAR);
 	}
 
+	public static boolean isSameDate(Date first, Date second) {
+		return isSameDate(toCalendar(first), toCalendar(second));
+	}
+
 	public static String toHumanReadableTimeDuration(long milliseconds) {
 		return toHumanReadableTimeDuration(milliseconds, TimeUnit.MINUTE);
 	}

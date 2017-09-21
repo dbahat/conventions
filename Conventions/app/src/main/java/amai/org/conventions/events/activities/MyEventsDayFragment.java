@@ -181,8 +181,6 @@ public class MyEventsDayFragment extends Fragment {
 			public boolean where(ConventionEvent event) {
 				Calendar startTime = Calendar.getInstance();
 				startTime.setTime(event.getStartTime());
-				Calendar endTime = Calendar.getInstance();
-				endTime.setTime(event.getEndTime());
 
 				// Filter out events not starting on this day
 				return Dates.isSameDate(date, startTime);

@@ -208,15 +208,14 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		StringBuilder stringBuilder = new StringBuilder();
 
 		stringBuilder.append(getString(R.string.my_event_share_title, Convention.getInstance().getDisplayName())).append("\n");
-		Calendar eventDate = null;
+		Date eventDate = null;
 		for (ConventionEvent event : getMyEvents()) {
-			Calendar eventStart = Dates.toCalendar(event.getStartTime());
-			boolean newDate = (eventDate == null || !Dates.isSameDate(eventDate, eventStart));
-			eventDate = eventStart;
+			boolean newDate = (eventDate == null || !Dates.isSameDate(eventDate, event.getStartTime()));
+			eventDate = event.getStartTime();
 
 			if (newDate) {
 				SimpleDateFormat sdf = new SimpleDateFormat("EEEE (dd.MM)", Dates.getLocale());
-				stringBuilder.append("\n").append(sdf.format(eventDate.getTime())).append("\n");
+				stringBuilder.append("\n").append(sdf.format(eventDate)).append("\n");
 			}
 
 			stringBuilder.append(formatEventToShare(event)).append("\n");
@@ -261,11 +260,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		// Only display it if it's on the same day
 		boolean displayNextEventStart = false;
 		if (nextEvent != null) {
-			Calendar startTime = Calendar.getInstance();
-			startTime.setTime(nextEvent.getStartTime());
-			Calendar now = Calendar.getInstance();
-			now.setTime(currTime);
-			if (Dates.isSameDate(startTime, now)) {
+			if (Dates.isSameDate(nextEvent.getStartTime(), currTime)) {
 				displayNextEventStart = true;
 			}
 		}
