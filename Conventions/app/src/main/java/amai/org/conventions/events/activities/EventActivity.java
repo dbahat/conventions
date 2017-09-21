@@ -568,6 +568,12 @@ public class EventActivity extends NavigationActivity {
 				public void onClick(View view) {
 					final Animation rotateAnimation = AnimationUtils.loadAnimation(EventActivity.this, R.anim.rotate);
 					updateTicketsButton.startAnimation(rotateAnimation);
+					ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
+							.setCategory("EventTicketsUpdate")
+							.setAction("ButtonClicked")
+							.setValue(event.getAvailableTickets())
+							.setLabel(event.getTitle())
+							.build());
 					new AsyncTask<Void, Void, Boolean>() {
 						@Override
 						protected Boolean doInBackground(Void... params) {
