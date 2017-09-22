@@ -326,10 +326,10 @@ public class ConventionEvent implements Serializable {
 	}
 
 	public boolean canFillFeedback() {
-		// Check if the event will end in 15 minutes or less
+		// Check if the event started at least 30 minutes ago
 		Calendar minimumTimeOfFillingFeedback = Calendar.getInstance();
-		minimumTimeOfFillingFeedback.setTime(endTime);
-		minimumTimeOfFillingFeedback.add(Calendar.MINUTE, -15);
+		minimumTimeOfFillingFeedback.setTime(startTime);
+		minimumTimeOfFillingFeedback.add(Calendar.MINUTE, 30);
 
 		return minimumTimeOfFillingFeedback.getTime().before(Dates.now());
 	}

@@ -117,7 +117,7 @@ public class LocalNotificationScheduler {
 		if (!ConventionsApplication.settings.wasConventionLastChanceFeedbackNotificationShown()) {
 			Calendar tenDaysPostConventionDate = Calendar.getInstance();
 			tenDaysPostConventionDate.setTime(Convention.getInstance().getEndDate().getTime());
-			tenDaysPostConventionDate.add(Calendar.DATE, 10);
+			tenDaysPostConventionDate.add(Calendar.DATE, 4);
 			tenDaysPostConventionDate.set(Calendar.HOUR_OF_DAY, 10);
 
 			Intent intent = new Intent(context, ShowNotificationService.class)
