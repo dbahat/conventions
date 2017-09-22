@@ -259,12 +259,10 @@ public class CollapsibleFeedbackView extends FrameLayout {
 				answerView = buildSmiley3PointsAnswerView(question, feedback);
 				break;
 			}
-			case MULTIPLE_ANSWERS: {
-				answerView = buildMultiAnswerView(question, feedback, question.getPossibleMultipleAnswers(getResources()), false);
-				break;
-			}
+			case MULTIPLE_ANSWERS:
 			case MULTIPLE_ANSWERS_RADIO: {
-				answerView = buildMultiAnswerView(question, feedback, question.getPossibleMultipleAnswers(getResources()), true);
+				answerView = buildMultiAnswerView(question, feedback, question.getPossibleMultipleAnswers(getResources()),
+						(question.getAnswerType() == FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO));
 				break;
 			}
 		}
