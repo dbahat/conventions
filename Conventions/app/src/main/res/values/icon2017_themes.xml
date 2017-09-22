@@ -68,7 +68,7 @@
         <item name="eventNonFavoriteColor">@color/black</item>
         <item name="eventFavoriteColor">@color/gold</item>
         <!-- Map Screen -->
-        <item name="locationDetailsBackground">@color/icon2017_transparent_green</item>
+        <item name="locationDetailsBackground">@color/icon2017_light_green</item>
         <item name="locationDetailsTitleColor">@color/white</item>
         <item name="mapBackground">@color/icon2017_lighter_green</item>
         <item name="standIconColor">@color/icon2017_dark_green</item>
