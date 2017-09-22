@@ -105,8 +105,7 @@ public class LocalNotificationScheduler {
 		if (!ConventionsApplication.settings.wasConventionFeedbackNotificationShown()) {
 			Calendar oneDayPostConventionDate = Calendar.getInstance();
 			oneDayPostConventionDate.setTime(Convention.getInstance().getEndDate().getTime());
-			oneDayPostConventionDate.add(Calendar.DATE, 1);
-			oneDayPostConventionDate.set(Calendar.HOUR_OF_DAY, 10);
+			oneDayPostConventionDate.set(Calendar.HOUR_OF_DAY, 22);
 
 			Intent intent = new Intent(context, ShowNotificationService.class)
 					.setAction(ShowNotificationService.Type.ConventionFeedbackReminder.toString())

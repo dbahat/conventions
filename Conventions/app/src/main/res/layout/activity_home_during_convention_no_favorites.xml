@@ -27,6 +27,7 @@
         android:layout_gravity="bottom"
         android:layout_margin="24dp"
         android:orientation="vertical"
+        android:gravity="bottom"
         android:layout_below="@+id/home_logo"
         android:layout_above="@+id/home_bottom_image">
 

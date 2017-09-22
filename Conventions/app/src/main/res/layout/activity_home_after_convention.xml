@@ -65,6 +65,7 @@
                 android:layout_height="match_parent"
                 tools:text="@string/home_send_feedback"
                 android:textColor="?homeMessageText"
+                android:gravity="center"
                 android:textStyle="bold"
                 app:autoSizeTextType="uniform"
                 app:autoSizeMinTextSize="32sp"
