@@ -60,6 +60,7 @@
         <activity android:name="amai.org.conventions.settings.SettingsActivity"></activity>
         <activity android:name="amai.org.conventions.DiscountsActivity"></activity>
         <activity android:name="amai.org.conventions.AboutActivity"></activity>
+        <activity android:name="amai.org.conventions.IconKidsActivity"></activity>
         <activity android:name="amai.org.conventions.HomeActivity" android:screenOrientation="portrait"/>
 
         <service
