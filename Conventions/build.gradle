@@ -3,9 +3,6 @@
 buildscript {
     repositories {
         jcenter()
-        maven {
-            url "http://dl.bintray.com/microsoftazuremobile/SDK"
-        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.3'
@@ -19,5 +16,7 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        maven { url "http://dl.bintray.com/microsoftazuremobile/SDK" }
+        maven { url 'https://jitpack.io' }
     }
 }

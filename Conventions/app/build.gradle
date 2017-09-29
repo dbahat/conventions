@@ -51,7 +51,8 @@ dependencies {
     compile "com.google.firebase:firebase-messaging:${googlePlayServicesVersion}"
     compile "com.google.android.gms:play-services-gcm:${googlePlayServicesVersion}"
     compile 'com.caverock:androidsvg:1.2.2-beta-1'
-    compile 'se.emilsjolander:stickylistheaders:2.7.0'
+    // Using a fork of se.emilsjolander:stickylistheaders due to an open issue in Android 8. See https://github.com/emilsjolander/StickyListHeaders/issues/477.
+    compile 'com.github.mtotschnig:StickyListHeaders:2.7.1'
     compile 'com.tonicartos:stickygridheaders:1.0.1'
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.microsoft.azure:notification-hubs-android-sdk:0.4@aar'
