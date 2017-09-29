@@ -179,7 +179,7 @@
     <string name="show_general_notifications_title">כללי</string>
     <string name="show_general_notifications_summary">הצג התראות כלליות</string>
     <string name="show_event_notifications_title">אירועים</string>
-    <string name="show_event_notifications_summary">הצג התראות על עדכונים בתוכנייה ואירועים</string>
+    <string name="show_event_notifications_summary">הצג התראות על עדכונים בתוכנייה ואירועים. לקבלת התראות לאירועים ספציפים יש להוסיף אותם לרשימת האירועים שלי.</string>
     <string name="show_cosplay_notifications_title">השתתפות באירוע הקוספליי</string>
     <string name="show_cosplay_notifications_summary">הצג התראות עבור המשתתפים בתחרות הקוספליי</string>
     <string name="show_bus_notifications_title">הסעות</string>

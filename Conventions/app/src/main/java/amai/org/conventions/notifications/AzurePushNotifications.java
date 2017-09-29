@@ -84,7 +84,9 @@ public class AzurePushNotifications {
 		NotificationHub hub = new NotificationHub(HUB_NAME, HUB_LISTEN_CONNECTION_STRING, context);
 
 		List<String> notificationTopics = getNotificationTopics();
-		notificationTopics.addAll(getMyEventsTags());
+		if (notificationTopics.contains(PushNotificationTopic.TOPIC_EVENTS.getTopic())) {
+			notificationTopics.addAll(getMyEventsTags());
+		}
 		Log.i(TAG, "Attempting to register with Azure notification hub using token " + token + "\ntags: " + notificationTopics.toString());
 		String regID = hub.register(token, notificationTopics.toArray(new String[notificationTopics.size()])).getRegistrationId();
 		Log.i(TAG, "Registered Successfully, registration id: " + regID);
