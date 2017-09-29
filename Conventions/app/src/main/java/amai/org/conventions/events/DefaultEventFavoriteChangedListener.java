@@ -1,6 +1,7 @@
 package amai.org.conventions.events;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +17,8 @@ import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.listeners.OnEventFavoriteChangedListener;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.conventions.Convention;
+import amai.org.conventions.notifications.AzureNotificationRegistrationService;
+import amai.org.conventions.notifications.AzurePushNotifications;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 import sff.org.conventions.R;
 
@@ -71,6 +74,10 @@ public class DefaultEventFavoriteChangedListener implements OnEventFavoriteChang
 		// If the view is a list, notify view to redraw the UI so the new favorite icon state will apply
 		// for all views of this event
 		notifyDatasetChanged();
+
+		// Renew push notification registration based on the new favorites state
+		AzurePushNotifications notifications = new AzurePushNotifications(view.getContext());
+		notifications.registerAsync(new AzurePushNotifications.RegistrationListener.DoNothing());
 
 		if (newAttending) {
 			// Check if the new favorite event conflicts with other events

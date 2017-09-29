@@ -9,9 +9,12 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.microsoft.windowsazure.messaging.NotificationHub;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import amai.org.conventions.model.ConventionEvent;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Log;
 
@@ -22,34 +25,12 @@ public class AzurePushNotifications {
 
 	private static String TAG = AzurePushNotifications.class.getSimpleName();
 	public static final String IS_ADVANCED_OPTIONS_ENABLED = "isAdvancedOptionsEnabled";
-	private static final String IS_REGISTERED = "isRegisteredToAzureNotificationHub";
+	private static final String IS_REGISTERED = "isRegistered";
 
 	private Context context;
 
 	public AzurePushNotifications(Context context) {
 		this.context = context;
-	}
-
-	public List<String> getNotificationTopics() {
-		// TODO move to ConventionApplication.settings for the next convention
-		final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-		List<PushNotificationTopic> topics = CollectionUtils.filter(
-				Arrays.asList(PushNotificationTopic.values()),
-				new CollectionUtils.Predicate<PushNotificationTopic>() {
-					@Override
-					public boolean where(PushNotificationTopic item) {
-						return item == PushNotificationTopic.TOPIC_EMERGENCY || sharedPreferences.getBoolean(item.getTopic(), false);
-					}
-				});
-		List<String> topicStrings = CollectionUtils.map(
-				topics,
-				new CollectionUtils.Mapper<PushNotificationTopic, String>() {
-					@Override
-					public String map(PushNotificationTopic item) {
-						return item.getTopic();
-					}
-				});
-		return topicStrings;
 	}
 
 	public void setAdvancedOptionsEnabled(boolean enabled) {
@@ -103,15 +84,68 @@ public class AzurePushNotifications {
 		NotificationHub hub = new NotificationHub(HUB_NAME, HUB_LISTEN_CONNECTION_STRING, context);
 
 		List<String> notificationTopics = getNotificationTopics();
-		Log.i(TAG, "Attempting to register with Azure notification hub using token " + token + "\ntopics: " + notificationTopics.toString());
+		notificationTopics.addAll(getMyEventsTags());
+		Log.i(TAG, "Attempting to register with Azure notification hub using token " + token + "\ntags: " + notificationTopics.toString());
 		String regID = hub.register(token, notificationTopics.toArray(new String[notificationTopics.size()])).getRegistrationId();
 		Log.i(TAG, "Registered Successfully, registration id: " + regID);
 		setRegistered(true);
+	}
+
+	private List<String> getNotificationTopics() {
+		final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+		List<PushNotificationTopic> topics = CollectionUtils.filter(
+				Arrays.asList(PushNotificationTopic.values()),
+				new CollectionUtils.Predicate<PushNotificationTopic>() {
+					@Override
+					public boolean where(PushNotificationTopic item) {
+						return item == PushNotificationTopic.TOPIC_EMERGENCY || sharedPreferences.getBoolean(item.getTopic(), false);
+					}
+				});
+		return CollectionUtils.map(
+				topics,
+				new CollectionUtils.Mapper<PushNotificationTopic, String>() {
+					@Override
+					public String map(PushNotificationTopic item) {
+						return item.getTopic();
+					}
+				});
+	}
+
+	private List<String> getMyEventsTags() {
+		ArrayList<ConventionEvent> events = CollectionUtils.filter(
+				Convention.getInstance().getEvents(),
+				new CollectionUtils.Predicate<ConventionEvent>() {
+					@Override
+					public boolean where(ConventionEvent event) {
+						return event.isAttending();
+					}
+				},
+				new ArrayList<ConventionEvent>()
+		);
+		return CollectionUtils.map(events, new CollectionUtils.Mapper<ConventionEvent, String>() {
+			@Override
+			public String map(ConventionEvent item) {
+				return String.valueOf(Convention.getInstance().getId().toLowerCase() + "_event_" + item.getServerId());
+			}
+		});
 	}
 
 	public interface RegistrationListener {
 		void onSuccess();
 
 		void onError();
+
+		class DoNothing implements RegistrationListener {
+
+			@Override
+			public void onSuccess() {
+
+			}
+
+			@Override
+			public void onError() {
+
+			}
+		}
 	}
 }
