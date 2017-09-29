@@ -14,11 +14,11 @@ public class GcmTokenRefreshService extends FirebaseInstanceIdService {
 	public void onTokenRefresh() {
 		Log.i(TAG, "Refreshing GCM Registration Token");
 
-		// If the token is expired we will no longer receive notifications
-		new AzurePushNotifications(this).setRegistered(false);
-
-		// Register in background thread
-		Intent intent = new Intent(this, AzureNotificationRegistrationService.class);
-		startService(intent);
+		AzurePushNotifications notifications = new AzurePushNotifications(this);
+		try {
+			notifications.register();
+		} catch (Exception e) {
+			Log.e(TAG, "failed to register. error: " + android.util.Log.getStackTraceString(e));
+		}
 	}
 }

@@ -67,9 +67,6 @@
             android:name="amai.org.conventions.notifications.ShowNotificationService"
             android:exported="false" />
         <service
-            android:name="amai.org.conventions.notifications.AzureNotificationRegistrationService"
-            android:exported="false"/>
-        <service
             android:name="amai.org.conventions.notifications.GcmTokenRefreshService"
             android:exported="false">
             <intent-filter>

@@ -17,7 +17,6 @@ import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.listeners.OnEventFavoriteChangedListener;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.conventions.Convention;
-import amai.org.conventions.notifications.AzureNotificationRegistrationService;
 import amai.org.conventions.notifications.AzurePushNotifications;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 import sff.org.conventions.R;
