@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.ListViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -79,6 +80,12 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 		swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.programme_swipe_layout);
 		swipeLayout.setOnRefreshListener(this);
 		swipeLayout.setColorSchemeColors(ThemeAttributes.getColor(container.getContext(), R.attr.swipeToRefreshColor));
+		swipeLayout.setOnChildScrollUpCallback(new SwipeRefreshLayout.OnChildScrollUpCallback() {
+			@Override
+			public boolean canChildScrollUp(SwipeRefreshLayout parent, @Nullable View child) {
+				return ListViewCompat.canScrollList(listView.getWrappedList(), -1);
+			}
+		});
 
 		listView = (StickyListHeadersListView) view.findViewById(R.id.programmeList);
 		events = getEventsList(eventTypesFilter);

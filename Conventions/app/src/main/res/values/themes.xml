@@ -52,6 +52,13 @@
         <item name="eventDetailsDefaultBackgroundColor">@color/white</item>
         <item name="conventionFeedbackTextColor">?android:textColorPrimary</item>
 
+        <item name="secondHandFormOpenColor">?eventTypeNotStartedColor</item>
+        <item name="secondHandFormClosedColor">?eventTypeEndedColor</item>
+        <item name="secondHandItemDefaultColor">?android:textColorSecondary</item>
+        <item name="secondHandItemNotSoldColor">?secondHandItemDefaultColor</item>
+        <item name="secondHandItemSoldColor">?secondHandItemDefaultColor</item>
+        <item name="secondHandItemMissingColor">?secondHandItemDefaultColor</item>
+
         <item name="shadowForeground">@drawable/bottom_shadow</item>
         <item name="activitiesBackground">@null</item>
         <item name="actionButtonColor">?colorAccent</item>

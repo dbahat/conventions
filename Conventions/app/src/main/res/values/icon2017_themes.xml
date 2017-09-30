@@ -95,6 +95,10 @@
         <item name="progressBarDrawable">@drawable/icon2017_rotating_circular_progress_bar</item>
         <!-- Programme Screen -->
         <item name="eventTimeHeaderBackground">@null</item>
+        <!-- Second Hand Screen -->
+        <item name="secondHandFormClosedColor">@color/dark_gray</item>
+        <item name="secondHandItemSoldColor">@color/icon2017_green</item>
+        <item name="secondHandItemMissingColor">@color/icon2017_dark_red</item>
     </style>
 
     <style name="AppBaseTheme.Icon2017.Toolbar.Event" parent="AppBaseTheme.Icon2017.Toolbar">

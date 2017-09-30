@@ -1,7 +1,9 @@
 package amai.org.conventions.model.conventions;
 
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
@@ -548,6 +550,15 @@ public class Icon2017Convention extends SffConvention {
 		try {
 			return new URL("https://api.sf-f.org.il/program/available_tickets_per_event.php?slug=icon2017&id=" + event.getServerId()); // use test_con for tests
 		} catch (MalformedURLException e) {
+			return null;
+		}
+	}
+
+	@Override
+	public URL getSecondHandFormURL(String id) {
+		try {
+			return new URL("https://calm-dawn-51174.herokuapp.com/getAllItemsByForm?itemFormId=" + URLEncoder.encode(id, "UTF-8"));
+		} catch (MalformedURLException|UnsupportedEncodingException e) {
 			return null;
 		}
 	}

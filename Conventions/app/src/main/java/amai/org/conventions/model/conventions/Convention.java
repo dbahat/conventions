@@ -38,6 +38,7 @@ import amai.org.conventions.model.ImageIdToImageResourceMapper;
 import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.model.Place;
 import amai.org.conventions.model.SearchFilter;
+import amai.org.conventions.model.SecondHand;
 import amai.org.conventions.model.SpecialEventsProcessor;
 import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.StandsArea;
@@ -80,6 +81,7 @@ public abstract class Convention implements Serializable {
 	private URL ticketsLastUpdateURL;
 	private URL updatesURL;
 	private ImageIdToImageResourceMapper imageMapper;
+	private SecondHand secondHand;
 
 	private double longitude;
 	private double latitude;
@@ -202,6 +204,8 @@ public abstract class Convention implements Serializable {
 	public abstract URL getEventTicketsNumberURL(ConventionEvent event);
 
 	public abstract EventTicketsParser getEventTicketsParser();
+
+	public abstract URL getSecondHandFormURL(String id);
 
 	public Calendar getStartDate() {
 		return startDate;
@@ -708,6 +712,13 @@ public abstract class Convention implements Serializable {
 
 	public SurveySender getEventVoteSender(ConventionEvent event) {
 		return null;
+	}
+
+	public SecondHand getSecondHand() {
+		if (secondHand == null) {
+			secondHand = new SecondHand(conventionStorage);
+		}
+		return secondHand;
 	}
 
 }

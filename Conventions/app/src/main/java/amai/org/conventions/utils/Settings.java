@@ -25,6 +25,7 @@ public class Settings {
 	private static final String PROGRAMME_SEARCH_CATEGORIES = "ProgrammeSearchCategories";
 	private static final String LAST_EVENTS_UPDATE_DATE = "LastEventsUpdateDate";
 	private static final String LAST_UPDATES_UPDATE_DATE = "LastUpdatesUpdateDate";
+	private static final String LAST_SECOND_HAND_UPDATE_DATE = "LastSecondHandUpdateDate";
 
 	private SharedPreferences sharedPreferences;
 
@@ -122,6 +123,17 @@ public class Settings {
 
 	public void setLastUpdatesUpdatedDate() {
 		sharedPreferences.edit().putLong(LAST_UPDATES_UPDATE_DATE, Dates.now().getTime()).apply();
+	}
 
+	public Date getLastSecondHandUpdateDate() {
+		long date = sharedPreferences.getLong(LAST_SECOND_HAND_UPDATE_DATE, -1);
+		if (date == -1) {
+			return null;
+		}
+		return new Date(date);
+	}
+
+	public void setLastSecondHandUpdatedDate() {
+		sharedPreferences.edit().putLong(LAST_SECOND_HAND_UPDATE_DATE, Dates.now().getTime()).apply();
 	}
 }

@@ -267,8 +267,23 @@
     <string name="tickets">כרטיסים</string>
     <string name="show_sold_out_events">אירועים ללא כרטיסים</string>
     <string name="last_modified">עודכן: %s</string>
-
     <string name="icon_kids_description">מתחם הילדים החדש של פסטיבל אייקון מתארח בסינמטק תל אביב! בכל בוקר יפעל בלובי החדש של הסינמטק מתחם הפעלות חינמי הכולל סדנת יצירה, "ממלכת קרטוניה" - מבוך בתים גמדיים מקרטון, ופינת ניסויים מדעיים.</string>
     <string name="icon_kids_tickets_info">מגוון סדנאות קולנוע לילדים וסרטים מדובבים יתקיימו באולמות הסינמטק. את הכרטיסים אליהם ניתן לרכוש באתר ובקופות הסינמטק.</string>
     <string name="icon_kids_buy_tickets">לפרטים ורכישת כרטיסים</string>
+    <string name="second_hand">יד שנייה</string>
+    <string name="second_hand_no_forms">הוסף את הטפסים שקיבלת במסירת הפריטים לדוכן יד שנייה כדי לראות את מצב הפריטים</string>
+    <string name="delete">מחק</string>
+    <string name="second_hand_form_delete">מחיקת טופס</string>
+    <string name="second_hand_form_delete_out_are_you_sure">למחוק את טופס מספר %s?</string>
+    <string name="second_hand_form_name">טופס מספר %s</string>
+    <string name="second_hand_form_closed">(סגור)</string>
+    <string name="second_hand_item_sold">נמכר</string>
+    <string name="second_hand_item_not_sold">לא נמכר</string>
+    <string name="second_hand_item_missing">חסר</string>
+    <string name="second_hand_item_title">פריט %d</string>
+    <string name="add_form">הוספת טופס</string>
+    <string name="add">הוסף</string>
+    <string name="add_form_instructions">הכנס את מספר הטופס:</string>
+    <string name="form_not_found">הטופס לא נמצא</string>
+    <string name="second_hand_form_already_exists">הטופס כבר קיים ברשימה</string>
 </resources>

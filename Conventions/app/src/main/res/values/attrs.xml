@@ -108,5 +108,12 @@
         <attr name="conventionFeedbackTextColor" format="color|reference"/>
         <!-- Programme Screen -->
         <attr name="eventTimeHeaderBackground" format="color|reference"/>
+        <!-- Second Hand Screen -->
+        <attr name="secondHandFormOpenColor" format="color|reference"/>
+        <attr name="secondHandFormClosedColor" format="color|reference"/>
+        <attr name="secondHandItemDefaultColor" format="color|reference"/>
+        <attr name="secondHandItemNotSoldColor" format="color|reference"/>
+        <attr name="secondHandItemSoldColor" format="color|reference"/>
+        <attr name="secondHandItemMissingColor" format="color|reference"/>
     </declare-styleable>
 </resources>
