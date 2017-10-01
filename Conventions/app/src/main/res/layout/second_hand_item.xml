@@ -7,13 +7,25 @@
       android:paddingStart="20dp"
       android:paddingEnd="20dp">
 
-    <TextView
-        android:id="@+id/second_hand_item_name"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="The title - volume 1 (book)"
-        android:textSize="14sp"
-        android:padding="5dp"/>
+        android:orientation="horizontal">
+        <amai.org.conventions.customviews.AspectRatioImageView
+            android:id="@+id/second_hand_item_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="4dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_edit_white"/>
+        <TextView
+            android:id="@+id/second_hand_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="The title - volume 1 (book)"
+            android:textSize="14sp"
+            android:padding="5dp"/>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

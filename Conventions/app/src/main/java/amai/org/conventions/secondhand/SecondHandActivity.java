@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.ListViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
+import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -73,8 +74,9 @@ public class SecondHandActivity extends NavigationActivity implements SwipeRefre
 		this.setupActionButton(R.drawable.ic_add_white, new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				View dialogView = getLayoutInflater().inflate(R.layout.add_second_hand_form, null, false);
-				final EditText formIdText = dialogView.findViewById(R.id.add_second_hand_form_id);
+				View dialogView = getLayoutInflater().inflate(R.layout.dialog_edit_text_layout, null, false);
+				final EditText formIdText = dialogView.findViewById(R.id.dialog_edit_text);
+				formIdText.setInputType(InputType.TYPE_CLASS_NUMBER);
 				AlertDialog dialog = new AlertDialog.Builder(SecondHandActivity.this)
 						.setTitle(R.string.add_form)
 						.setMessage(R.string.add_form_instructions)

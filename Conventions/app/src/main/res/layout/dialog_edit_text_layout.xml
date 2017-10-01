@@ -4,7 +4,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
     <EditText
-        android:id="@+id/add_second_hand_form_id"
+        android:id="@+id/dialog_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="number"

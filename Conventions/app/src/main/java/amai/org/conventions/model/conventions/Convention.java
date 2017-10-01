@@ -207,6 +207,8 @@ public abstract class Convention implements Serializable {
 
 	public abstract URL getSecondHandFormURL(String id);
 
+	public abstract URL getSecondHandFormsURL(List<String> ids);
+
 	public Calendar getStartDate() {
 		return startDate;
 	}

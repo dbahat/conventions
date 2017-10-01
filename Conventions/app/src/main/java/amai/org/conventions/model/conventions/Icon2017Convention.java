@@ -1,5 +1,7 @@
 package amai.org.conventions.model.conventions;
 
+import android.text.TextUtils;
+
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -7,6 +9,7 @@ import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.List;
 
 import amai.org.conventions.feedback.forms.EventFeedbackForm;
 import amai.org.conventions.feedback.forms.FeedbackForm;
@@ -559,6 +562,25 @@ public class Icon2017Convention extends SffConvention {
 		try {
 			return new URL("https://calm-dawn-51174.herokuapp.com/getAllItemsByForm?itemFormId=" + URLEncoder.encode(id, "UTF-8"));
 		} catch (MalformedURLException|UnsupportedEncodingException e) {
+			return null;
+		}
+	}
+
+	@Override
+	public URL getSecondHandFormsURL(List<String> ids) {
+		try {
+			String idsParam = TextUtils.join(",", CollectionUtils.map(ids, new CollectionUtils.Mapper<String, String>() {
+				@Override
+				public String map(String item) {
+					try {
+						return URLEncoder.encode(item, "UTF-8");
+					} catch (UnsupportedEncodingException e) {
+						throw new RuntimeException(e);
+					}
+				}
+			}));
+			return new URL("https://calm-dawn-51174.herokuapp.com/getMultipleItemsByForm?itemFormIds=" + idsParam);
+		} catch (MalformedURLException|RuntimeException e) {
 			return null;
 		}
 	}

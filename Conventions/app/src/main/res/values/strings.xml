@@ -286,4 +286,7 @@
     <string name="add_form_instructions">הכנס את מספר הטופס:</string>
     <string name="form_not_found">הטופס לא נמצא</string>
     <string name="second_hand_form_already_exists">הטופס כבר קיים ברשימה</string>
+    <string name="second_hand_item_edit">עריכת פריט</string>
+    <string name="second_hand_item_edit_instructions">הכנס שם חדש לפריט:</string>
+    <string name="cancel2">ביטול</string>
 </resources>
