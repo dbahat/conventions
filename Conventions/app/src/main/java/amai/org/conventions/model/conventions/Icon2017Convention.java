@@ -2,7 +2,12 @@ package amai.org.conventions.model.conventions;
 
 import android.text.TextUtils;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -583,6 +588,31 @@ public class Icon2017Convention extends SffConvention {
 		} catch (MalformedURLException|RuntimeException e) {
 			return null;
 		}
+	}
+
+	@Override
+	public HttpURLConnection getUserPurchasedEventsRequest(String user, String password) throws IOException {
+		URL url = new URL("https://api.sf-f.org.il/program/events_per_user.php?slug=icon2017&email=" +
+				URLEncoder.encode(user, "UTF-8") + "&pass=" + URLEncoder.encode(password, "UTF-8"));
+		HttpURLConnection request = (HttpURLConnection) url.openConnection();
+		request.setConnectTimeout(10000);
+		request.setRequestMethod("POST");
+		request.setDoInput(true);
+		request.setDoOutput(true);
+		OutputStream os = request.getOutputStream();
+		BufferedWriter writer = null;
+		try {
+			writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+			writer.write("slug=icon2017&email=" +
+					URLEncoder.encode(user, "UTF-8") + "&pass=" + URLEncoder.encode(password, "UTF-8"));
+			writer.flush();
+		} finally {
+			if (writer != null) {
+				writer.close();
+			}
+			os.close();
+		}
+		return request;
 	}
 
 	@Override

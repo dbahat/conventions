@@ -146,11 +146,6 @@ public class ConventionEvent implements Serializable {
 		getUserInput().setAttending(attending);
 	}
 
-	public ConventionEvent withAttending(boolean attending) {
-		setAttending(attending);
-		return this;
-	}
-
 	public Date getStartTime() {
 		return startTime;
 	}

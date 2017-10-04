@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import amai.org.conventions.events.activities.EventsTimeSlot;
-import amai.org.conventions.events.activities.MyEventsActivity;
 import amai.org.conventions.events.activities.MyEventsDayFragment;
 import amai.org.conventions.events.holders.ConflictingEventsViewHolder;
 import amai.org.conventions.events.holders.SwipeableEventViewHolder;
@@ -25,26 +24,28 @@ public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 	private static final int ITEM_VIEW_TYPE_CONFLICTING = 2;
 	private static final int ITEM_VIEW_TYPE_FREE_SLOT = 3;
 
+	private final Callback<ArrayList<EventsTimeSlot>> eventGroupsCallback;
 	private ArrayList<EventsTimeSlot> eventGroups;
-	private Runnable onEventRemovedAction;
+	private Runnable onEventListChangedAction;
 
-	public EventGroupsAdapter(ArrayList<EventsTimeSlot> eventGroups) {
-		this.eventGroups = eventGroups;
+	public EventGroupsAdapter(Callback<ArrayList<EventsTimeSlot>> eventGroupsCallback) {
+		this.eventGroupsCallback = eventGroupsCallback;
+		this.eventGroups = eventGroupsCallback.call();
 
 		registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
 			@Override
 			public void onItemRangeRemoved(int positionStart, int itemCount) {
 				super.onItemRangeRemoved(positionStart, itemCount);
 
-				if (onEventRemovedAction != null) {
-					onEventRemovedAction.run();
+				if (onEventListChangedAction != null) {
+					onEventListChangedAction.run();
 				}
 			}
 		});
 	}
 
-	public void updateEventGroups(ArrayList<EventsTimeSlot> eventGroups) {
-		this.eventGroups = eventGroups;
+	public void updateEventGroups() {
+		this.eventGroups = eventGroupsCallback.call();
 		notifyDataSetChanged();
 	}
 
@@ -88,16 +89,24 @@ public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 		} else if (eventsViewHolder instanceof ConflictingEventsViewHolder) {
 			final ConflictingEventsViewHolder conflictingEventsViewHolder = (ConflictingEventsViewHolder) eventsViewHolder;
 			conflictingEventsViewHolder.setModel(timeSlot.getEvents());
-			conflictingEventsViewHolder.setEventRemovedListener(new Runnable() {
+			conflictingEventsViewHolder.setEventRemovedListener(new ConflictingEventsViewHolder.OnEventListChangedListener() {
 				@Override
-				public void run() {
+				public void onEventRemoved() {
 					int adapterPosition = conflictingEventsViewHolder.getAdapterPosition();
 					List<ConventionEvent> eventsList = conflictingEventsViewHolder.getModel();
 
 					updateSlots(adapterPosition, eventsList, false);
 
-					if (onEventRemovedAction != null) {
-						onEventRemovedAction.run();
+					if (onEventListChangedAction != null) {
+						onEventListChangedAction.run();
+					}
+				}
+
+				@Override
+				public void onEventListChanged() {
+					updateEventGroups();
+					if (onEventListChangedAction != null) {
+						onEventListChangedAction.run();
 					}
 				}
 			});
@@ -117,7 +126,7 @@ public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 		// This could happen if the item has already been removed, the dataset changed or the view recycled
 		// (see RecyclerView#getAdapterPosition)
 		if (adapterPosition == RecyclerView.NO_POSITION) {
-			updateEventGroups(MyEventsDayFragment.getNonConflictingGroups(null, MyEventsActivity.getMyEvents(), null));
+			updateEventGroups();
 			return;
 		}
 
@@ -227,8 +236,8 @@ public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 		}
 	}
 
-	public void setOnEventRemovedAction(final Runnable onEventRemovedAction) {
-		this.onEventRemovedAction = onEventRemovedAction;
+	public void setOnEventListChangedAction(final Runnable onEventListChangedAction) {
+		this.onEventListChangedAction = onEventListChangedAction;
 	}
 
 	@Override
@@ -241,5 +250,9 @@ public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 			default:
 				return ITEM_VIEW_TYPE_CONFLICTING;
 		}
+	}
+
+	public static interface Callback<T> {
+		T call();
 	}
 }

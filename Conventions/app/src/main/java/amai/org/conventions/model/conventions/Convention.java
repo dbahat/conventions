@@ -4,7 +4,9 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.Nullable;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -209,6 +211,8 @@ public abstract class Convention implements Serializable {
 
 	public abstract URL getSecondHandFormsURL(List<String> ids);
 
+	public abstract HttpURLConnection getUserPurchasedEventsRequest(String user, String password) throws IOException;
+
 	public Calendar getStartDate() {
 		return startDate;
 	}
@@ -332,6 +336,16 @@ public abstract class Convention implements Serializable {
 	public ConventionEvent findEventById(String eventId) {
 		for (ConventionEvent event : getEvents()) {
 			if (eventId.equals(event.getId())) {
+				return event;
+			}
+		}
+
+		return null;
+	}
+
+	public ConventionEvent findEventByServerId(int eventServerId) {
+		for (ConventionEvent event : getEvents()) {
+			if (event.getServerId() == eventServerId) {
 				return event;
 			}
 		}

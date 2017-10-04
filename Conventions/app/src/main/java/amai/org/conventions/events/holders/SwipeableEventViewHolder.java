@@ -9,12 +9,12 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import sff.org.conventions.R;
 import amai.org.conventions.events.ApplyBounceAnimationListener;
 import amai.org.conventions.events.EventView;
 import amai.org.conventions.events.adapters.ListPagerAdapter;
 import amai.org.conventions.events.listeners.OnSwipeListener;
 import amai.org.conventions.model.ConventionEvent;
+import sff.org.conventions.R;
 
 /**
  * ViewHolder for an event view that allow swipe to add/remove from favorites
@@ -99,10 +99,16 @@ public class SwipeableEventViewHolder extends RecyclerView.ViewHolder {
 		view.setEvent(event, conflicting);
 	}
 
-	public void setOnViewSwipedAction(final Runnable action) {
+	public void setOnViewSwipedAction(final OnEventSwipedListener action) {
 		removeOnPageChangeListener();
 
-		this.listener = new OnSwipeListener(viewPager, MAIN_VIEW_POSITION, action, dismiss);
+		Runnable runnable = new Runnable() {
+			@Override
+			public void run() {
+				action.onEventSwiped(event);
+			}
+		};
+		this.listener = new OnSwipeListener(viewPager, MAIN_VIEW_POSITION, runnable, dismiss);
 		viewPager.clearOnPageChangeListeners();
 		viewPager.addOnPageChangeListener(listener);
 	}
@@ -130,5 +136,9 @@ public class SwipeableEventViewHolder extends RecyclerView.ViewHolder {
 		} else {
 			itemView.findViewById(R.id.event_bottom_divider).setVisibility(View.GONE);
 		}
+	}
+
+	public static interface OnEventSwipedListener {
+		void onEventSwiped(ConventionEvent event);
 	}
 }

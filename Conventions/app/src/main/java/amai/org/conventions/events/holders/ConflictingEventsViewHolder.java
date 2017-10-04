@@ -116,7 +116,7 @@ public class ConflictingEventsViewHolder extends RecyclerView.ViewHolder {
 		});
 	}
 
-	public void setEventRemovedListener(final Runnable action) {
+	public void setEventRemovedListener(final OnEventListChangedListener listener) {
 		if (eventRemovedListener != null) {
 			adapter.unregisterAdapterDataObserver(eventRemovedListener);
 			eventRemovedListener = null;
@@ -126,7 +126,13 @@ public class ConflictingEventsViewHolder extends RecyclerView.ViewHolder {
 			@Override
 			public void onItemRangeRemoved(int positionStart, int itemCount) {
 				super.onItemRangeRemoved(positionStart, itemCount);
-				action.run();
+				listener.onEventRemoved();
+			}
+
+			@Override
+			public void onChanged() {
+				super.onChanged();
+				listener.onEventListChanged();
 			}
 		};
 		adapter.registerAdapterDataObserver(eventRemovedListener);
@@ -143,5 +149,10 @@ public class ConflictingEventsViewHolder extends RecyclerView.ViewHolder {
 
 	private int getDividerHeight(Resources resources) {
 		return resources.getDimensionPixelSize(R.dimen.event_divider_height);
+	}
+
+	public static interface OnEventListChangedListener {
+		void onEventRemoved();
+		void onEventListChanged();
 	}
 }

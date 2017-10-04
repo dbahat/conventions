@@ -1,7 +1,6 @@
 package amai.org.conventions.events;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
@@ -47,7 +46,6 @@ public class DefaultEventFavoriteChangedListener implements OnEventFavoriteChang
 		} else {
 			changeEventFavoriteState(updatedEvent);
 		}
-
 	}
 
 	private void changeEventFavoriteState(final ConventionEvent updatedEvent) {

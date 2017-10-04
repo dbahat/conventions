@@ -289,4 +289,14 @@
     <string name="second_hand_item_edit">עריכת פריט</string>
     <string name="second_hand_item_edit_instructions">הכנס שם חדש לפריט:</string>
     <string name="cancel2">ביטול</string>
+    <string name="add_events">הוספת אירועים מאתר אייקון</string>
+    <string name="add_events_instructions">הכנס שם משתמש וסיסמא לאתר אייקון על מנת להוסיף את האירועים להם קנית כרטיסים מראש.</string>
+    <string name="add_events_failed">לא ניתן להוסיף אירועים, בדוק חיבור לאינטרנט</string>
+    <string name="several_events_added">נוספו %d אירועים</string>
+    <string name="one_event_added">נוסף אירוע אחד</string>
+    <string name="user_name">שם משתמש</string>
+    <string name="password">סיסמא</string>
+    <string name="wrong_user_or_password">שם משתמש או סיסמא לא נכונים</string>
+    <string name="no_events_added">לא נוספו אירועים</string>
+    <string name="loading_events">מייבא אירועים...</string>
 </resources>

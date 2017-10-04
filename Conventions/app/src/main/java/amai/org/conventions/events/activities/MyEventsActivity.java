@@ -1,8 +1,10 @@
 package amai.org.conventions.events.activities;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
@@ -15,10 +17,19 @@ import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.analytics.HitBuilders;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,10 +45,12 @@ import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.Log;
 import sff.org.conventions.R;
 
 
 public class MyEventsActivity extends NavigationActivity implements MyEventsDayFragment.EventsListener {
+	private static final String TAG = MyEventsActivity.class.getCanonicalName();
 	private static final String STATE_SELECTED_DATE_INDEX = "StateSelectedDateIndex";
 	private static final int SELECT_CURRENT_DATE = -1;
 	private static final int NEXT_EVENT_START_TIME_UPDATE_DELAY = 60000; // 1 minute
@@ -77,6 +90,119 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 
 		int dateIndexToSelect = savedInstanceState == null ? SELECT_CURRENT_DATE : savedInstanceState.getInt(STATE_SELECTED_DATE_INDEX, SELECT_CURRENT_DATE);
 		setupDays(dateIndexToSelect);
+
+		setupActionButton(R.drawable.ic_add_white, new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				View dialogView = getLayoutInflater().inflate(R.layout.login_layout, null, false);
+				final EditText userNameTextView = dialogView.findViewById(R.id.user_name);
+				final EditText passwordTextView = dialogView.findViewById(R.id.password);
+				AlertDialog dialog = new AlertDialog.Builder(MyEventsActivity.this)
+						.setTitle(R.string.add_events)
+						.setMessage(R.string.add_events_instructions)
+						.setView(dialogView)
+						.setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialogInterface, int i) {
+								final String user = userNameTextView.getText().toString();
+								final String password = passwordTextView.getText().toString();
+								final ProgressDialog progressDialog = new ProgressDialog(MyEventsActivity.this);
+								progressDialog.setMessage(getString(R.string.loading_events));
+								progressDialog.setCancelable(false);
+								progressDialog.setCanceledOnTouchOutside(false);
+								progressDialog.show();
+								new AsyncTask<Void, Void, Exception>() {
+									private int newFavoriteEventsNumber = 0;
+									@Override
+									protected Exception doInBackground(Void... params) {
+										try {
+											newFavoriteEventsNumber = addFavoriteEventsFromWebsite(user, password);
+											return null;
+										} catch (Exception e) {
+											return e;
+										}
+									}
+
+									@Override
+									protected void onPostExecute(Exception exception) {
+										progressDialog.dismiss();
+										if (exception == null) {
+											// Refresh favorite events in all days
+											for (int i = 0; i < daysPager.getAdapter().getCount(); ++i) {
+												MyEventsDayFragment fragment = (MyEventsDayFragment) daysPager.getAdapter().instantiateItem(daysPager, i);
+												fragment.updateDataset();
+											}
+											setNextEventStartText(getMyEvents());
+											String message;
+											if (newFavoriteEventsNumber == 0) {
+												message = getString(R.string.no_events_added);
+											} else if (newFavoriteEventsNumber == 1) {
+												message = getString(R.string.one_event_added);
+											} else {
+												message = getString(R.string.several_events_added, newFavoriteEventsNumber);
+											}
+											Toast.makeText(MyEventsActivity.this, message, Toast.LENGTH_LONG).show();
+										} else {
+											int messageId = R.string.add_events_failed;
+											if (exception instanceof AuthenticationException) {
+												messageId = R.string.wrong_user_or_password;
+											}
+											Log.e(TAG, exception.getMessage(), exception);
+											Toast.makeText(MyEventsActivity.this, messageId, Toast.LENGTH_LONG).show();
+										}
+									}
+								}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+							}
+						})
+						.setNegativeButton(R.string.cancel, null)
+						.create();
+				dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+					@Override
+					public void onShow(DialogInterface dialogInterface) {
+						userNameTextView.requestFocus();
+					}
+				});
+				dialog.show();
+			}
+		});
+	}
+
+	private int addFavoriteEventsFromWebsite(String user, String password) throws IOException {
+		HttpURLConnection request = Convention.getInstance().getUserPurchasedEventsRequest(user, password);
+		request.connect();
+		InputStreamReader reader = null;
+		boolean changed = false;
+		int newFavoriteEvents = 0;
+		try {
+			int responseCode = request.getResponseCode();
+			if (responseCode == 400 || responseCode == 401) {
+				throw new AuthenticationException();
+			} else if (responseCode != 200) {
+				throw new RuntimeException("Could not read user purchased events, error code: " + responseCode);
+			}
+			reader = new InputStreamReader((InputStream) request.getContent());
+			JsonParser jp = new JsonParser();
+			JsonElement root = jp.parse(reader);
+			JsonArray eventsArray = root.getAsJsonArray();
+			for (int i = 0; i < eventsArray.size(); ++i) {
+				int eventServerId = eventsArray.get(i).getAsInt();
+				ConventionEvent event = Convention.getInstance().findEventByServerId(eventServerId);
+				if (event != null && !event.isAttending()) {
+					changed = true;
+					event.setAttending(true);
+					++newFavoriteEvents;
+				}
+			}
+			if (changed) {
+				Convention.getInstance().getStorage().saveUserInput();
+			}
+		} finally {
+			if (reader != null) {
+				reader.close();
+			}
+			request.disconnect();
+		}
+		return newFavoriteEvents;
 	}
 
 	private void setupDays(int dateIndexToSelect) {
@@ -303,7 +429,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 	}
 
 	@Override
-	public void onEventRemoved() {
+	public void onEventListChanged() {
 		setNextEventStartText(getMyEvents());
 	}
 
@@ -317,4 +443,6 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 			return MyEventsDayFragment.newInstance(getDate(position));
 		}
 	}
+
+	private static class AuthenticationException extends RuntimeException {}
 }
