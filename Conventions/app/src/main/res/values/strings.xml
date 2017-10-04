@@ -259,7 +259,7 @@
     <string name="vote_send_error">לא ניתן להצביע. נסה שנית מאוחר יותר.</string>
     <string name="home_current_event_vote_possible">לחץ להצבעה עבור חביב הקהל!</string>
     <string name="event_not_found">האירוע לא נמצא</string>
-    <string name="event_tickets_sold_out_are_you_sure">אזלו הכרטיסים. במידה ולא קנית כרטיסים מראש לא תוכל ללכת לאירוע.</string>
+    <string name="event_tickets_sold_out_are_you_sure">אזלו הכרטיסים. במידה ולא קנית כרטיסים מראש לא תוכל ללכת לאירוע.\nניתן להוסיף אירועים שקנית אליהם כרטיסים מראש דרך מסך האירועים שלי.</string>
     <string name="tickets_sold_out">אזלו הכרטיסים</string>
     <string name="tickets_are_available">יש כרטיסים</string>
     <string name="some_tickets_available">נותרו מעט כרטיסים</string>
