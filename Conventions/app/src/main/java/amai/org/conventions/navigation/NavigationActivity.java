@@ -167,8 +167,8 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		final List<NavigationItem> items = new ArrayList<>(Arrays.asList(
 				new NavigationItem(HomeActivity.class, getString(R.string.home), ContextCompat.getDrawable(this, R.drawable.ic_home_white_36dp)),
 				new NavigationItem(ProgrammeActivity.class, getString(R.string.programme_title), ContextCompat.getDrawable(this, R.drawable.events_list)),
-				new NavigationItem(IconKidsActivity.class, getString(R.string.icon_kids_title), ContextCompat.getDrawable(this, R.drawable.ic_face_white_24dp)),
-				new NavigationItem(MyEventsActivity.class, getString(R.string.my_events_title), ContextCompat.getDrawable(this, R.drawable.events_list_with_star))
+				new NavigationItem(MyEventsActivity.class, getString(R.string.my_events_title), ContextCompat.getDrawable(this, R.drawable.events_list_with_star)),
+				new NavigationItem(IconKidsActivity.class, getString(R.string.icon_kids_title), ContextCompat.getDrawable(this, R.drawable.ic_face_white_24dp))
 		));
 
 		// Only add the map if it's available
