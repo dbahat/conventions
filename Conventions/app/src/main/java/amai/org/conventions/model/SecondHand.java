@@ -146,7 +146,11 @@ public class SecondHand {
 			JsonElement priceJson = itemJson.get("price");
 			item.setPrice(-1);
 			if (priceJson.isJsonPrimitive() && !priceJson.getAsString().isEmpty()) {
-				item.setPrice(priceJson.getAsInt());
+				try {
+					item.setPrice(priceJson.getAsInt());
+				} catch (NumberFormatException e) {
+					Log.e(TAG, "Price is not a number in item " + item.getId() + ": " + priceJson.getAsString());
+				}
 			}
 			item.setNumber(itemJson.get("formItemNumber").getAsInt());
 			items.add(item);
