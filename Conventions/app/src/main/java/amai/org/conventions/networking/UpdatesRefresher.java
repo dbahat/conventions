@@ -97,7 +97,7 @@ public class UpdatesRefresher {
 							}
 						}
 						// Update the model, so next time we can read them from cache.
-						Convention.getInstance().addUpdates(updatesFromResponse);
+						Convention.getInstance().addUpdates(updatesFromResponse, true);
 						Convention.getInstance().getStorage().saveUpdates();
 						ConventionsApplication.settings.setLastUpdatesUpdatedDate();
 						isRefreshInProgress = false;

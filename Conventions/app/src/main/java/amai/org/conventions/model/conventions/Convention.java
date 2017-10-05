@@ -391,7 +391,8 @@ public abstract class Convention implements Serializable {
 		}
 	}
 
-	public List<Update> addUpdates(List<Update> newUpdates) {
+	public List<Update> addUpdates(List<Update> newUpdates, boolean removeOldUpdates) {
+		Set<String> newUpdateIDs = new HashSet<>();
 		for (Update update : newUpdates) {
 			if (updatesById.containsKey(update.getId())) {
 				// Remove the existing update
@@ -404,6 +405,18 @@ public abstract class Convention implements Serializable {
 			}
 			updates.add(update);
 			updatesById.put(update.getId(), update);
+			if (removeOldUpdates) {
+				newUpdateIDs.add(update.getId());
+			}
+		}
+		if (removeOldUpdates) {
+			for (Iterator<Update> iter = updates.iterator(); iter.hasNext(); ) {
+				Update update = iter.next();
+				if (!newUpdateIDs.contains(update.getId())) {
+					iter.remove();
+					updatesById.remove(update.getId());
+				}
+			}
 		}
 		return updates;
 	}

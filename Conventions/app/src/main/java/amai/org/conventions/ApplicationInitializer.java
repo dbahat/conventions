@@ -120,7 +120,8 @@ public class ApplicationInitializer {
 		final int numberOfUpdatesBeforeRefresh = Convention.getInstance().getUpdates().size();
 
 		// Refresh and ignore all errors
-		UpdatesRefresher.getInstance(context).refreshFromServer(true, false, new UpdatesRefresher.OnUpdateFinishedListener() {
+		final UpdatesRefresher updatesRefresher = UpdatesRefresher.getInstance(context);
+		updatesRefresher.refreshFromServer(true, false, new UpdatesRefresher.OnUpdateFinishedListener() {
 			@Override
 			public void onSuccess(int newUpdatesNumber) {
 				List<Update> newUpdates = CollectionUtils.filter(Convention.getInstance().getUpdates(), new CollectionUtils.Predicate<Update>() {
@@ -132,7 +133,7 @@ public class ApplicationInitializer {
 
 				// We don't want to raise the notification if there are no new updates, or if this is the first time updates are downloaded to cache.
 				if (newUpdatesNumber > 0 && newUpdates.size() > 0 && numberOfUpdatesBeforeRefresh > 0
-						&& UpdatesRefresher.getInstance(context).shouldEnableNotificationAfterUpdate()) {
+						&& updatesRefresher.shouldEnableNotificationAfterUpdate()) {
 
 					Update latestUpdate = Collections.max(newUpdates, new Comparator<Update>() {
 						@Override
@@ -141,9 +142,9 @@ public class ApplicationInitializer {
 						}
 					});
 
-					String notificationTitle = newUpdates.size() == 1
+					String notificationTitle = newUpdatesNumber == 1
 							? context.getString(R.string.new_update)
-							: context.getString(R.string.new_updates, newUpdates.size());
+							: context.getString(R.string.new_updates, newUpdatesNumber);
 
 					String notificationMessage = latestUpdate.getText().substring(0, Math.min(200, latestUpdate.getText().length())) + "...";
 
