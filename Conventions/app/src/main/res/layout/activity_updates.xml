@@ -39,7 +39,7 @@
             <FrameLayout
                 android:id="@+id/no_updates"
                 android:background="?attr/updatesBackground"
-                android:gravity="center"
+                android:layout_marginTop="50dp"
                 android:padding="10dp"
                 android:visibility="gone"
                 tools:visibility="visible"
@@ -49,9 +49,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/text_size_large_material"
-                    android:textColor="@color/hint_gray"
+                    android:textColor="?hintTextColor"
                     android:text="@string/no_updates_found"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center_horizontal"/>
             </FrameLayout>
         </FrameLayout>
     </android.support.v4.widget.SwipeRefreshLayout>

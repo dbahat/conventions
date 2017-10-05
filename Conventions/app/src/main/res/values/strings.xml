@@ -26,7 +26,7 @@
     <string name="update_not_logged_in">כדי לצפות בעדכונים יש להתחבר לפייסבוק</string>
     <string name="update_login_error">לא ניתן להתחבר לפייסבוק. בדוק חיבור לאינטרנט</string>
 
-    <string name="my_events_no_data">הוסף אירוע לאירועים שלי ע\"י לחיצה על הכוכב בדף האירוע או ע\"י גריריתו ברשימת האירועים</string>
+    <string name="my_events_no_data">הוסף אירוע לאירועים שלי ע\"י לחיצה על הכוכב בדף האירוע או ברשימת האירועים, או ע\"י יבוא מאתר אייקון</string>
     <string name="my_events_share">שתף</string>
     <string name="my_event_share_title">התוכנייה שלי ל%s:</string>
     <string name="my_event_share_signature">נוצר באפליקצית %s.</string>
@@ -298,5 +298,5 @@
     <string name="password">סיסמא</string>
     <string name="wrong_user_or_password">שם משתמש או סיסמא לא נכונים</string>
     <string name="no_events_added">לא נוספו אירועים</string>
-    <string name="loading_events">מייבא אירועים...</string>
+    <string name="loading_events">מייבא אירועים…</string>
 </resources>
