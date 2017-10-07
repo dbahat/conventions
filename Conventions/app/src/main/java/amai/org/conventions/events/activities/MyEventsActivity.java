@@ -26,6 +26,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -43,9 +44,11 @@ import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
+import amai.org.conventions.notifications.AzurePushNotifications;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
+import sff.org.conventions.BuildConfig;
 import sff.org.conventions.R;
 
 
@@ -126,6 +129,12 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 									@Override
 									protected void onPostExecute(Exception exception) {
 										progressDialog.dismiss();
+										ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
+												.setCategory("Favorites")
+												.setAction(exception == null ? "success" : "failure")
+												.setLabel("AddFromWebsite")
+												.build());
+
 										if (exception == null) {
 											// Refresh favorite events in all days
 											for (int i = 0; i < daysPager.getAdapter().getCount(); ++i) {
@@ -178,6 +187,16 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 			if (responseCode == 400 || responseCode == 401) {
 				throw new AuthenticationException();
 			} else if (responseCode != 200) {
+				if (BuildConfig.DEBUG) {
+					BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(request.getErrorStream()));
+					StringBuilder responseBuilder = new StringBuilder();
+					String output;
+					while ((output = bufferedReader.readLine()) != null) {
+						responseBuilder.append(output);
+					}
+					String responseBody = responseBuilder.toString();
+					Log.e(TAG, "Could not read user purchased events, response is: " + responseBody);
+				}
 				throw new RuntimeException("Could not read user purchased events, error code: " + responseCode);
 			}
 			reader = new InputStreamReader((InputStream) request.getContent());
@@ -188,9 +207,17 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 				int eventServerId = eventsArray.get(i).getAsInt();
 				ConventionEvent event = Convention.getInstance().findEventByServerId(eventServerId);
 				if (event != null && !event.isAttending()) {
-					changed = true;
 					event.setAttending(true);
 					++newFavoriteEvents;
+				}
+				// TODO this should be inside the if !event.isAttending(), but due to a bug
+				// in version 2.2.1 the alarms were not scheduled and the events were not registered
+				// for notifications
+				if (event != null) {
+					changed = true;
+					ConventionsApplication.alarmScheduler.scheduleDefaultEventAlarms(event);
+					AzurePushNotifications notifications = new AzurePushNotifications(this);
+					notifications.registerAsync(new AzurePushNotifications.RegistrationListener.DoNothing());
 				}
 			}
 			if (changed) {
