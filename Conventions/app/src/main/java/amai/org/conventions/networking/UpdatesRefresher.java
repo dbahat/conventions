@@ -104,7 +104,7 @@ public class UpdatesRefresher {
 								}
 							}
 							// Update the model, so next time we can read them from cache.
-							Convention.getInstance().addUpdates(updatesFromResponse);
+							Convention.getInstance().addUpdates(updatesFromResponse, false);
 							Convention.getInstance().getStorage().saveUpdates();
 							isRefreshInProgress = false;
 							listener.onSuccess(newUpdatesNumber);

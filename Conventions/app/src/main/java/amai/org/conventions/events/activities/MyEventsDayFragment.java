@@ -135,19 +135,21 @@ public class MyEventsDayFragment extends Fragment {
 		updateDataset();
 	}
 
-	private void updateDataset() {
-		final List<ConventionEvent> events = getMyEvents();
-
-		// Set up events list
-		ArrayList<EventsTimeSlot> nonConflictingGroups = getNonConflictingGroups(null, events, null);
+	public void updateDataset() {
+		// Set up events list adapter
 		if (adapter == null) {
-			adapter = new EventGroupsAdapter(nonConflictingGroups);
+			adapter = new EventGroupsAdapter(new EventGroupsAdapter.Callback<ArrayList<EventsTimeSlot>>() {
+				@Override
+				public ArrayList<EventsTimeSlot> call() {
+					return getNonConflictingGroups(null, getMyEvents(), null);
+				}
+			});
 		} else {
-			adapter.updateEventGroups(nonConflictingGroups);
+			adapter.updateEventGroups();
 		}
 		eventsList.setAdapter(adapter);
 
-		updateVisibility(nonConflictingGroups.size(), eventsList, emptyView);
+		updateVisibility(adapter.getItemCount(), eventsList, emptyView);
 
 		// Register for dataset update events, in case we need to return the empty layout view after all items were dismissed.
 		adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
@@ -164,11 +166,11 @@ public class MyEventsDayFragment extends Fragment {
 			}
 		});
 
-		adapter.setOnEventRemovedAction(new Runnable() {
+		adapter.setOnEventListChangedAction(new Runnable() {
 			@Override
 			public void run() {
 				if (listener != null) {
-					listener.onEventRemoved();
+					listener.onEventListChanged();
 				}
 			}
 		});
@@ -181,8 +183,6 @@ public class MyEventsDayFragment extends Fragment {
 			public boolean where(ConventionEvent event) {
 				Calendar startTime = Calendar.getInstance();
 				startTime.setTime(event.getStartTime());
-				Calendar endTime = Calendar.getInstance();
-				endTime.setTime(event.getEndTime());
 
 				// Filter out events not starting on this day
 				return Dates.isSameDate(date, startTime);
@@ -202,7 +202,7 @@ public class MyEventsDayFragment extends Fragment {
 	}
 
 	public interface EventsListener {
-		void onEventRemoved();
+		void onEventListChanged();
 	}
 
 }

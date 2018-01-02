@@ -37,10 +37,7 @@ public class UpdateViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	public void setContent(UpdateViewModel updateViewModel) {
-		int timeContainerSize = updateTextView.getContext().getResources().getDimensionPixelSize(R.dimen.update_time_container_size);
 		SpannableString spannedUpdateText = new SpannableString(updateViewModel.getUpdate().getText());
-		int extra_margin_for_top_lines = updateTextView.getResources().getDimensionPixelOffset(R.dimen.update_extra_text_margin_for_top_update_lines);
-		int textLength = updateViewModel.getUpdate().getText().length();
 
 		// Make new/focused updates highlighted
 		int color;

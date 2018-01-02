@@ -21,7 +21,6 @@ import amai.org.conventions.model.Update;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.networking.ModelRefresher;
 import amai.org.conventions.networking.UpdatesRefresher;
-import amai.org.conventions.notifications.AzureNotificationRegistrationService;
 import amai.org.conventions.notifications.AzurePushNotifications;
 import amai.org.conventions.notifications.PlayServicesInstallation;
 import amai.org.conventions.notifications.PushNotificationHandler;
@@ -80,9 +79,10 @@ public class ApplicationInitializer {
 				if (checkResult.isUserError()) {
 					PlayServicesInstallation.showInstallationDialog(currentContext, checkResult);
 				} else if (checkResult.isSuccess()) {
-					// Start IntentService to register this application with GCM.
-					Intent intent = new Intent(currentContext, AzureNotificationRegistrationService.class);
-					context.startService(intent);
+					AzurePushNotifications notifications = new AzurePushNotifications(context);
+					if (!notifications.isRegistered()) {
+						notifications.registerAsync(new AzurePushNotifications.RegistrationListener.DoNothing());
+					}
 					showConfigureNotificationsDialog(currentContext);
 				}
 			}

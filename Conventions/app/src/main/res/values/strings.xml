@@ -26,7 +26,7 @@
 
     <string name="my_events_no_data">הוסף אירוע לאירועים שלי ע\"י לחיצה על הכוכב בדף האירוע או ברשימת האירועים</string>
     <string name="my_events_share">שתף</string>
-    <string name="my_event_share_title">התוכניה שלי ל%s:</string>
+    <string name="my_event_share_title">התוכנייה שלי ל%s:</string>
     <string name="my_event_share_signature">נוצר באפליקצית %s.</string>
     <string name="my_event_share_link">http://play.google.com/store/apps/details?id=amai.org.conventions</string>
     <string name="my_event_share_chooser_dialog_title">שתף את רשימת האירועים</string>
@@ -52,10 +52,17 @@
 
     <string name="search_input_search_keyword">הקלד את חיפושך…</string>
     <string name="search_no_results_found">לא נמצאו תוצאות</string>
+    <string name="no_events_found">לא נמצאו אירועים</string>
+    <string name="search_filter">סינון</string>
+    <string name="search_filter_by_event_type">סוג האירוע</string>
+    <string name="search_filter_by_category">רצועות תוכן</string>
+    <string name="search_filter_by_tag">תגיות</string>
+    <string name="search_filter_select_all">בחר הכל</string>
+    <string name="search_filter_clear_all">נקה הכל</string>
 
     <string name="notification_event_about_to_start_title">אירוע עומד להתחיל</string>
     <string name="notification_event_about_to_start_message_format">האירוע %1$s עומד להתחיל באולם %2$s</string>
-    <string name="notification_event_ended_title">עזור לנו להשתפר</string>
+    <string name="notification_event_ended_title">עזרו לנו להשתפר</string>
     <string name="notification_event_ended_message_format">נהנת באירוע %s? שלח פידבק למארגני האירוע</string>
     <string name="notification_2_events_ended_message_format">נהנת באירוע %s ובאירוע נוסף אחד? שלח פידבק למארגנים</string>
     <string name="notification_several_events_ended_message_format">נהנת באירוע %1$s וב-%2$d אירועים נוספים? שלח פידבק למארגנים</string>
@@ -87,12 +94,12 @@
     <string name="share_no_events">הוסף אירועים כדי לשתף</string>
     <string name="ok">אישור</string>
     <string name="events_without_feedback_title">מלא פידבק על אירועים</string>
-    <string name="events_feedback_no_events">בחר אירועים שהיית בהם דרך התוכניה ומלא עליהם פידבק.</string>
+    <string name="events_feedback_no_events">בחר אירועים שהיית בהם דרך התוכנייה ומלא עליהם פידבק.</string>
     <string name="events_with_feedback_title">פידבק שמילאת על אירועים</string>
     <string name="convention_feedback_title">פידבק על הכנס</string>
     <string name="convention_feedback_subtitle">מלא פידבק כללי על הכנס - קופות, דוכנים, משחקייה, עמדת צילום וכל דבר אחר.</string>
     <string name="question_liked">עד כמה נהנית בכנס?</string>
-    <string name="question_improvement">הצעות לשיפור ודברים לשימור</string>
+    <string name="question_improvement">הצעות לשיפור ונושאים לשימור</string>
     <string name="question_age">גיל</string>
     <string name="age_less_than_12">פחות מ-12</string>
     <string name="age_12_to_17">12–17</string>
@@ -267,4 +274,6 @@
     <string name="event_vote_survey_sent">ההצבעה נשלחה. תודה!</string>
     <string name="vote_send_error">לא ניתן להצביע. נסה שנית מאוחר יותר.</string>
     <string name="home_current_event_vote_possible">לחץ להצבעה עבור חביב הקהל!</string>
+    <string name="event_not_found">האירוע לא נמצא</string>
+    <string name="tickets">כרטיסים</string>
 </resources>

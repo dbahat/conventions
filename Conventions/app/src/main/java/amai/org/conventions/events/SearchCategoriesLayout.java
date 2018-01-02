@@ -10,23 +10,22 @@ import java.util.LinkedList;
 import java.util.List;
 
 import amai.org.conventions.R;
-import amai.org.conventions.model.EventType;
 import amai.org.conventions.utils.CollectionUtils;
 
 /**
- * Layout which expands all the values defined in {@link EventType} as views of type {@link SearchCategoryBox}.
+ * Layout which expands all the values defined in {@link SearchCategory} as views of type {@link SearchCategoryBox}.
  */
 public class SearchCategoriesLayout extends LinearLayout {
 
 	private OnFilterSelectedListener onFilterSelectedListener;
 	private int maxDisplayedCategories;
-	private List<EventType> searchCategories;
+	private List<SearchCategory> searchCategories;
 
 	public SearchCategoriesLayout(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
 
-	public void setSearchCategories(List<EventType> searchCategories) {
+	public void setSearchCategories(List<SearchCategory> searchCategories) {
 		removeAllViews();
 		this.searchCategories = searchCategories;
 		int actualCategoriesNumber = maxDisplayedCategories < searchCategories.size() ? maxDisplayedCategories - 1 : maxDisplayedCategories;
@@ -37,17 +36,17 @@ public class SearchCategoriesLayout extends LinearLayout {
 				continue;
 			}
 
-			EventType searchCategory = searchCategories.get(i);
+			SearchCategory searchCategory = searchCategories.get(i);
 			SearchCategoryBox searchCategoryBox = createAndInitializeSearchCategoryBox(searchCategory);
 			addView(searchCategoryBox);
 		}
 
 		// In case there are more categories then the maximum allowed, group all remaining categories under "other".
 		if (maxDisplayedCategories > 0 && searchCategories.size() > maxDisplayedCategories) {
-			addView(createAndInitializeSearchCategoryBox(new EventType(
+			addView(createAndInitializeSearchCategoryBox(new SearchCategory(
+					getContext().getString(R.string.other),
 					// Have the other category color the same as the first category to get aggregated into it
-					searchCategories.get(maxDisplayedCategories - 1).getBackgroundColor() ,
-					getContext().getString(R.string.other))));
+					searchCategories.get(maxDisplayedCategories - 1).getColor())));
 		}
 	}
 
@@ -55,7 +54,7 @@ public class SearchCategoriesLayout extends LinearLayout {
 		this.maxDisplayedCategories = maxDisplayedCategories;
 	}
 
-	private SearchCategoryBox createAndInitializeSearchCategoryBox(EventType searchCategory) {
+	private SearchCategoryBox createAndInitializeSearchCategoryBox(SearchCategory searchCategory) {
 		final SearchCategoryBox searchCategoryBox = new SearchCategoryBox(getContext(), null);
 		searchCategoryBox.setSearchCategory(searchCategory);
 
@@ -83,12 +82,12 @@ public class SearchCategoriesLayout extends LinearLayout {
 			if (child instanceof SearchCategoryBox) {
 				SearchCategoryBox searchCategoryBox = (SearchCategoryBox) child;
 				if (searchCategoryBox.isChecked()) {
-					if (searchCategoryBox.getSearchCategory().getDescription().equals(getContext().getString(R.string.other))) {
+					if (searchCategoryBox.getSearchCategory().getName().equals(getContext().getString(R.string.other))) {
 						for (int j = maxDisplayedCategories - 1; j < searchCategories.size(); j++) {
-							selectedSearchCategories.add(searchCategories.get(j).getDescription());
+							selectedSearchCategories.add(searchCategories.get(j).getName());
 						}
 					} else {
-						selectedSearchCategories.add(searchCategoryBox.getSearchCategory().getDescription());
+						selectedSearchCategories.add(searchCategoryBox.getSearchCategory().getName());
 					}
 				}
 			}
@@ -103,7 +102,7 @@ public class SearchCategoriesLayout extends LinearLayout {
 
 	public void checkSearchCategory(String searchCategoryDescription) {
 		// In case we got a category which is a part of the "other" category, check the "other" category instead
-		EventType searchCategory = getSearchCategoryByDescription(searchCategories, searchCategoryDescription);
+		SearchCategory searchCategory = getSearchCategoryByDescription(searchCategories, searchCategoryDescription);
 		if (searchCategory != null && searchCategories.indexOf(searchCategory) >= maxDisplayedCategories) {
 			View child = getChildAt(getChildCount() - 1);
 			if (child instanceof SearchCategoryBox) {
@@ -117,7 +116,7 @@ public class SearchCategoriesLayout extends LinearLayout {
 			View child = getChildAt(i);
 			if (child instanceof SearchCategoryBox) {
 				SearchCategoryBox searchCategoryBox = (SearchCategoryBox) child;
-				if (searchCategoryBox.getSearchCategory().getDescription().equals(searchCategoryDescription)) {
+				if (searchCategoryBox.getSearchCategory().getName().equals(searchCategoryDescription)) {
 					searchCategoryBox.check();
 					break;
 				}
@@ -125,11 +124,11 @@ public class SearchCategoriesLayout extends LinearLayout {
 		}
 	}
 
-	private EventType getSearchCategoryByDescription(List<EventType> searchCategories, final String searchCategory) {
-		return CollectionUtils.findFirst(searchCategories, new CollectionUtils.Predicate<EventType>() {
+	private SearchCategory getSearchCategoryByDescription(List<SearchCategory> searchCategories, final String searchCategory) {
+		return CollectionUtils.findFirst(searchCategories, new CollectionUtils.Predicate<SearchCategory>() {
 			@Override
-			public boolean where(EventType item) {
-				return item.getDescription().equals(searchCategory);
+			public boolean where(SearchCategory item) {
+				return item.getName().equals(searchCategory);
 			}
 		});
 	}

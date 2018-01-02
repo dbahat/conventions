@@ -16,7 +16,7 @@ import amai.org.conventions.model.EventType;
 
 public class SearchCategoryBox extends LinearLayout {
 
-	private EventType searchCategory;
+	private SearchCategory searchCategory;
 	private AppCompatCheckBox checkBox;
 	private TextView textView;
 
@@ -28,11 +28,11 @@ public class SearchCategoryBox extends LinearLayout {
 		textView = (TextView) this.findViewById(R.id.search_category_text);
 	}
 
-	public void setSearchCategory(EventType searchCategory) {
-		textView.setText(searchCategory.getDescription());
+	public void setSearchCategory(SearchCategory searchCategory) {
+		textView.setText(searchCategory.getName());
 		int color;
-		if (searchCategory.hasBackgroundColor()) {
-			color = darkenColor(searchCategory.getBackgroundColor(), 1);
+		if (searchCategory.hasColor()) {
+			color = darkenColor(searchCategory.getColor(), 1);
 		} else {
 			color = ThemeAttributes.getColor(getContext(), R.attr.eventTimeDefaultBackgroundColor);
 		}
@@ -49,7 +49,7 @@ public class SearchCategoryBox extends LinearLayout {
 		this.searchCategory = searchCategory;
 	}
 
-	public EventType getSearchCategory() {
+	public SearchCategory getSearchCategory() {
 		return searchCategory;
 	}
 

@@ -1,6 +1,7 @@
 package amai.org.conventions.model.conventions;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.Nullable;
 
 import java.io.Serializable;
@@ -21,7 +22,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import amai.org.conventions.BuildConfig;
+import amai.org.conventions.events.SearchCategory;
 import amai.org.conventions.feedback.SurveySender;
 import amai.org.conventions.feedback.forms.ConventionFeedbackFormSender;
 import amai.org.conventions.feedback.forms.EventFeedbackForm;
@@ -30,13 +31,13 @@ import amai.org.conventions.feedback.forms.FeedbackForm;
 import amai.org.conventions.map.AggregatedEventTypes;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
-import amai.org.conventions.model.EventType;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.Floor;
 import amai.org.conventions.model.Halls;
 import amai.org.conventions.model.ImageIdToImageResourceMapper;
 import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.model.Place;
+import amai.org.conventions.model.SearchFilter;
 import amai.org.conventions.model.SpecialEventsProcessor;
 import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.StandsArea;
@@ -48,10 +49,12 @@ import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Objects;
+import amai.org.conventions.BuildConfig;
 
 public abstract class Convention implements Serializable {
 
 	private static Convention convention = new Cami2017Convention();
+	public static final int NO_COLOR = Color.TRANSPARENT; // Assuming we will never get this from the server...
 
 	// Currently supporting conventions of up to 5 days (UI restriction, since the programme is set
 	// to fit up to 5 days in its tab bar).
@@ -223,7 +226,9 @@ public abstract class Convention implements Serializable {
 	 * @return the survey answers retriever associated with this question, or null of no such retriever was defined.
 	 */
 	@Nullable
-	public abstract SurveyDataRetriever.Answers createSurveyAnswersRetriever(FeedbackQuestion question);
+	public SurveyDataRetriever.Answers createSurveyAnswersRetriever(FeedbackQuestion question) {
+		return null;
+	}
 
 	public void setEvents(List<ConventionEvent> events) {
 		eventLockObject.writeLock().lock();
@@ -242,6 +247,15 @@ public abstract class Convention implements Serializable {
 		} finally {
 			eventLockObject.readLock().unlock();
 		}
+	}
+
+	public ConventionEvent getEventById(final String id) {
+		return CollectionUtils.findFirst(getEvents(), new CollectionUtils.Predicate<ConventionEvent>() {
+			@Override
+			public boolean where(ConventionEvent item) {
+				return Objects.equals(item.getId(), id);
+			}
+		});
 	}
 
 	public boolean hasFavorites() {
@@ -306,6 +320,16 @@ public abstract class Convention implements Serializable {
 		return null;
 	}
 
+	public ConventionEvent findEventByServerId(int eventServerId) {
+		for (ConventionEvent event : getEvents()) {
+			if (event.getServerId() == eventServerId) {
+				return event;
+			}
+		}
+
+		return null;
+	}
+
 	public ArrayList<ConventionEvent> findEventsByHall(final String hallName) {
 		return CollectionUtils.filter(
 				getEvents(),
@@ -335,7 +359,8 @@ public abstract class Convention implements Serializable {
 		}
 	}
 
-	public List<Update> addUpdates(List<Update> newUpdates) {
+	public List<Update> addUpdates(List<Update> newUpdates, boolean removeOldUpdates) {
+		Set<String> newUpdateIDs = new HashSet<>();
 		for (Update update : newUpdates) {
 			if (updatesById.containsKey(update.getId())) {
 				// Remove the existing update
@@ -348,6 +373,18 @@ public abstract class Convention implements Serializable {
 			}
 			updates.add(update);
 			updatesById.put(update.getId(), update);
+			if (removeOldUpdates) {
+				newUpdateIDs.add(update.getId());
+			}
+		}
+		if (removeOldUpdates) {
+			for (Iterator<Update> iter = updates.iterator(); iter.hasNext(); ) {
+				Update update = iter.next();
+				if (!newUpdateIDs.contains(update.getId())) {
+					iter.remove();
+					updatesById.remove(update.getId());
+				}
+			}
 		}
 		return updates;
 	}
@@ -381,10 +418,10 @@ public abstract class Convention implements Serializable {
 	}
 
 	public boolean isFeedbackSendingTimeOver() {
-		// Only allow to send feedback for 2 weeks after the convention is over
+		// Only allow to send feedback for a week after the convention is over
 		Calendar lastFeedbackSendTime = Calendar.getInstance();
 		lastFeedbackSendTime.setTime(this.endDate.getTime());
-		lastFeedbackSendTime.add(Calendar.DATE, 14);
+		lastFeedbackSendTime.add(Calendar.DATE, 7);
 		return lastFeedbackSendTime.getTime().before(Dates.now());
 	}
 
@@ -448,21 +485,21 @@ public abstract class Convention implements Serializable {
 		return Arrays.asList(locations);
 	}
 
-	public List<EventType> getEventTypes() {
+	public List<SearchCategory> getEventTypesSearchCategories() {
 		List<SearchCategory> categories = new LinkedList<>();
 		if (events != null) {
 			for (final ConventionEvent event : events) {
 				SearchCategory category = CollectionUtils.findFirst(categories, new CollectionUtils.Predicate<SearchCategory>() {
 					@Override
 					public boolean where(SearchCategory item) {
-						return item.getEventType().getDescription().equals(event.getType().getDescription());
+						return item.getName().equals(event.getType().getDescription());
 					}
 				});
 
 				if (category != null) {
 					category.increase();
 				} else {
-					categories.add(new SearchCategory(event.getType()));
+					categories.add(new SearchCategory(event.getType().getDescription(), event.getType().getBackgroundColor()));
 				}
 			}
 		}
@@ -474,32 +511,61 @@ public abstract class Convention implements Serializable {
 			}
 		});
 
-		return CollectionUtils.map(categories, new CollectionUtils.Mapper<SearchCategory, EventType>() {
+		return categories;
+	}
+
+	public List<SearchFilter> getEventTypesSearchFilters() {
+		List<SearchFilter> filters = CollectionUtils.map(events, new CollectionUtils.Mapper<ConventionEvent, SearchFilter>() {
+					@Override
+			public SearchFilter map(ConventionEvent event) {
+				return new SearchFilter().withName(event.getType().getDescription()).withType(SearchFilter.Type.EventType);
+					}
+				});
+
+		return normalizeSearchFilters(filters);
+	}
+
+	private List<SearchFilter> normalizeSearchFilters(List<SearchFilter> filters) {
+		Collections.sort(filters, new Comparator<SearchFilter>() {
 			@Override
-			public EventType map(SearchCategory item) {
-				return item.getEventType();
+			public int compare(SearchFilter searchFilter, SearchFilter other) {
+				return searchFilter.getName().compareTo(other.getName());
+			}
+		});
+
+		filters = CollectionUtils.unique(filters, new CollectionUtils.EqualityPredicate<SearchFilter>() {
+			@Override
+			public boolean equals(SearchFilter lhs, SearchFilter rhs) {
+				return lhs.getName().equals(rhs.getName());
+			}
+		});
+
+		return CollectionUtils.filter(filters, new CollectionUtils.Predicate<SearchFilter>() {
+			@Override
+			public boolean where(SearchFilter item) {
+				return !"".equals(item.getName().trim());
 			}
 		});
 	}
 
-	public List<String> getAggregatedSearchCategories() {
+	public List<SearchCategory> getAggregatedEventTypesSearchCategories(Context context) {
 		List<SearchCategory> categories = new LinkedList<>();
-		AggregatedEventTypes aggregatedEventTypes = new AggregatedEventTypes();
+		final AggregatedEventTypes aggregatedEventTypes = new AggregatedEventTypes();
 		if (events != null) {
 			for (ConventionEvent event : events) {
 				// Count the number of occurrences of each event per type
-				final String aggregatedEventType = aggregatedEventTypes.get(event.getType());
+				final String aggregatedEventType = aggregatedEventTypes.getForEventType(event.getType());
 				SearchCategory category = CollectionUtils.findFirst(categories, new CollectionUtils.Predicate<SearchCategory>() {
 					@Override
 					public boolean where(SearchCategory item) {
-						return item.getEventType().getDescription().equals(aggregatedEventType);
+						return item.getName().equals(aggregatedEventType);
 					}
 				});
 
 				if (category != null) {
 					category.increase();
 				} else {
-					categories.add(new SearchCategory(new EventType(aggregatedEventType)));
+					categories.add(new SearchCategory(aggregatedEventType, event.getBackgroundColor(context)));
 				}
 			}
 		}
@@ -512,13 +578,7 @@ public abstract class Convention implements Serializable {
 			}
 		});
 
-		// Flatten the list again now that it's sorted
-		return CollectionUtils.map(categories, new CollectionUtils.Mapper<SearchCategory, String>() {
-			@Override
-			public String map(SearchCategory item) {
-				return item.getEventType().getDescription();
-			}
-		});
+		return categories;
 	}
 
 	public Date getNewestUpdateTime() {
@@ -624,27 +684,5 @@ public abstract class Convention implements Serializable {
 
 	public SurveySender getEventVoteSender(ConventionEvent event) {
 		return null;
-	}
-
-	private static class SearchCategory {
-		private EventType eventType;
-		private int count;
-
-		public SearchCategory(EventType eventType) {
-			this.eventType = eventType;
-			this.count = 1;
-		}
-
-		public EventType getEventType() {
-			return eventType;
-		}
-
-		public void increase() {
-			count++;
-		}
-
-		public int getCount() {
-			return count;
-		}
 	}
 }

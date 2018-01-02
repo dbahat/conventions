@@ -1,9 +1,12 @@
 package amai.org.conventions.events.adapters;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -66,6 +69,9 @@ public class EventsViewWithDateHeaderAdapter extends BaseAdapter {
 			final TimeViewHolder holder;
 			if (convertView == null) {
 				convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.small_text_view, parent, false);
+				TextView textView = (TextView) convertView.findViewById(R.id.small_text);
+				((FrameLayout.LayoutParams) textView.getLayoutParams()).gravity = Gravity.CENTER_HORIZONTAL;
+				textView.setLayoutParams(textView.getLayoutParams());
 				holder = new TimeViewHolder(convertView, R.id.small_text);
 				convertView.setTag(holder);
 			} else {

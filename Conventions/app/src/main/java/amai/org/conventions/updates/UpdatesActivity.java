@@ -97,7 +97,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 
 		// Initialize the updates list based on the model cache.
 		List<Update> updates = Convention.getInstance().getUpdates();
-		initializeUpdatesList(updates);
+		initializeUpdatesList(updates, updates.size()); // All items are new in this list
 		showUpdates();
 
 		initializeFacebookLoginButton();
@@ -227,7 +227,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 			@Override
 			public void onSuccess(int newUpdatesNumber) {
 				updateRefreshingFlag();
-				initializeUpdatesList(Convention.getInstance().getUpdates());
+				initializeUpdatesList(Convention.getInstance().getUpdates(), newUpdatesNumber);
 				// If we don't do that, the recycler view will show the previous items and the user will have to scroll manually
 				recyclerView.scrollToPosition(0);
 			}
@@ -254,7 +254,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 		});
 	}
 
-	private void initializeUpdatesList(List<Update> updates) {
+	private void initializeUpdatesList(List<Update> updates, int newItemsNumber) {
 		Collections.sort(updates, new Comparator<Update>() {
 			@Override
 			public int compare(Update lhs, Update rhs) {
@@ -264,7 +264,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 		});
 
 		setUpdatesBackground();
-		updatesAdapter.setUpdates(updates);
+		updatesAdapter.setUpdates(updates, newItemsNumber);
 	}
 
 	/**

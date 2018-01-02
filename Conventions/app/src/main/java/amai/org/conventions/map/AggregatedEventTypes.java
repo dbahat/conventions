@@ -34,7 +34,7 @@ public class AggregatedEventTypes {
 		return aggregatedEventTypes;
 	}
 
-	public String get(EventType eventType) {
+	public String getForEventType(EventType eventType) {
 		for (AggregatedType aggregatedType : aggregatedEventTypes) {
 			if (aggregatedType.contains(eventType)) {
 				return aggregatedType.getName();
@@ -63,8 +63,8 @@ public class AggregatedEventTypes {
 	public List<EventType> get(List<String> aggregatedEventTypes) {
 		List<EventType> eventTypes = new LinkedList<>();
 
-		for (String searchCategory : aggregatedEventTypes) {
-			eventTypes.addAll(get(searchCategory));
+		for (String aggregatedEventType : aggregatedEventTypes) {
+			eventTypes.addAll(get(aggregatedEventType));
 		}
 
 		return eventTypes;

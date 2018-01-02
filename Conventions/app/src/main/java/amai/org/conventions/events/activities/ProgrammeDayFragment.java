@@ -136,7 +136,7 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 						new Handler().postDelayed(new Runnable() {
 							@Override
 							public void run() {
-								scrollToPosition(position, true);
+								scrollToPosition(position);
 							}
 						}, delay);
 					}
@@ -265,7 +265,7 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 								int position = findHourPosition(timeSection);
 								if (position != -1) {
 									cancelScroll = false;
-									scrollToPosition(position, false);
+									scrollToPosition(position);
 								}
 							}
 						})
@@ -353,7 +353,7 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 		return programmeEvents;
 	}
 
-	private void scrollToPosition(final int position, final boolean shouldApplyFavoriteReminderAnimation) {
+	private void scrollToPosition(final int position) {
 		if (!cancelScroll) {
 			listView.smoothScrollToPositionFromTop(position, 0, 500);
 
@@ -369,19 +369,7 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 						listView.setOnScrollListener(null);
 						if (!cancelScroll) {
 							listView.smoothScrollToPositionFromTop(position, 0, 500);
-
-							// In some cases we'll want to show bounce animation to the scrolled view, to make it easier for users
-							// to understand the views are swipeable.
-							if (shouldApplyFavoriteReminderAnimation) {
-								listView.postDelayed(new Runnable() {
-									@Override
-									public void run() {
-										listView.setOnTouchListener(null);
-									}
-								}, 1500);
-							} else {
-								listView.setOnTouchListener(null);
-							}
+							listView.setOnTouchListener(null);
 						}
 					}
 				}

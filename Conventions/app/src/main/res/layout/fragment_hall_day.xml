@@ -8,4 +8,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/hall_no_events_found"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:visibility="gone"
+        android:textSize="@dimen/text_size_large_material"
+        android:textColor="?hintTextColor"
+        android:padding="25dp"
+        android:text="@string/no_events_found" />
 </FrameLayout>

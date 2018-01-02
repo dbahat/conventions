@@ -74,7 +74,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 
 	private Survey feedback;
 	private boolean feedbackChanged;
-	private int textColor = AmaiModelConverter.NO_COLOR;
+	private int textColor = Convention.NO_COLOR;
 	private int feedbackSentTextResource = R.string.feedback_sent;
 	private int feedbackSendErrorMessage = R.string.feedback_send_failed;
 
@@ -168,7 +168,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 
 	public void setTextColor(int color) {
 		textColor = color;
-		if (color != AmaiModelConverter.NO_COLOR) {
+		if (color != Convention.NO_COLOR) {
 			collapsedFeedbackTitle.setTextColor(color);
 			feedbackSentText.setTextColor(color);
 			feedbackLayoutTitle.setTextColor(color);
@@ -260,12 +260,10 @@ public class CollapsibleFeedbackView extends FrameLayout {
 				answerView = buildSmiley3PointsAnswerView(question, feedback);
 				break;
 			}
-			case MULTIPLE_ANSWERS: {
-				answerView = buildMultiAnswerView(question, feedback, question.getPossibleMultipleAnswers(getResources()), false);
-				break;
-			}
+			case MULTIPLE_ANSWERS:
 			case MULTIPLE_ANSWERS_RADIO: {
-				answerView = buildMultiAnswerView(question, feedback, question.getPossibleMultipleAnswers(getResources()), true);
+				answerView = buildMultiAnswerView(question, feedback, question.getPossibleMultipleAnswers(getResources()),
+						(question.getAnswerType() == FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO));
 				break;
 			}
 		}

@@ -38,9 +38,9 @@ import amai.org.conventions.utils.Dates;
 
 
 public class MyEventsActivity extends NavigationActivity implements MyEventsDayFragment.EventsListener {
+	private static final String TAG = MyEventsActivity.class.getCanonicalName();
 	private static final String STATE_SELECTED_DATE_INDEX = "StateSelectedDateIndex";
 	private static final int SELECT_CURRENT_DATE = -1;
-	private static final int MAX_DAYS_NUMBER = 5;
 	private static final int NEXT_EVENT_START_TIME_UPDATE_DELAY = 60000; // 1 minute
 	// Handler for updating the next event start text
 	private Handler nextEventStartTextRunner = new Handler();
@@ -74,6 +74,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		removeForeground();
 
 		nextEventStart = (TextView) findViewById(R.id.nextEventStart);
+		nextEventStartBottomLine = findViewById(R.id.nextEventStartBottomLine);
 
 		int dateIndexToSelect = savedInstanceState == null ? SELECT_CURRENT_DATE : savedInstanceState.getInt(STATE_SELECTED_DATE_INDEX, SELECT_CURRENT_DATE);
 		setupDays(dateIndexToSelect);
@@ -208,15 +209,14 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		StringBuilder stringBuilder = new StringBuilder();
 
 		stringBuilder.append(getString(R.string.my_event_share_title, Convention.getInstance().getDisplayName())).append("\n");
-		Calendar eventDate = null;
+		Date eventDate = null;
 		for (ConventionEvent event : getMyEvents()) {
-			Calendar eventStart = Dates.toCalendar(event.getStartTime());
-			boolean newDate = (eventDate == null || !Dates.isSameDate(eventDate, eventStart));
-			eventDate = eventStart;
+			boolean newDate = (eventDate == null || !Dates.isSameDate(eventDate, event.getStartTime()));
+			eventDate = event.getStartTime();
 
 			if (newDate) {
 				SimpleDateFormat sdf = new SimpleDateFormat("EEEE (dd.MM)", Dates.getLocale());
-				stringBuilder.append("\n").append(sdf.format(eventDate.getTime())).append("\n");
+				stringBuilder.append("\n").append(sdf.format(eventDate)).append("\n");
 			}
 
 			stringBuilder.append(formatEventToShare(event)).append("\n");
@@ -261,17 +261,14 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		// Only display it if it's on the same day
 		boolean displayNextEventStart = false;
 		if (nextEvent != null) {
-			Calendar startTime = Calendar.getInstance();
-			startTime.setTime(nextEvent.getStartTime());
-			Calendar now = Calendar.getInstance();
-			now.setTime(currTime);
-			if (Dates.isSameDate(startTime, now)) {
+			if (Dates.isSameDate(nextEvent.getStartTime(), currTime)) {
 				displayNextEventStart = true;
 			}
 		}
 
 		if (displayNextEventStart) {
 			nextEventStart.setVisibility(View.VISIBLE);
+	        nextEventStartBottomLine.setVisibility(View.VISIBLE);
 			nextEventStart.setText(getString(R.string.next_event_start,
 					Dates.toHumanReadableTimeDuration(nextEvent.getStartTime().getTime() - currTime.getTime()),
 					nextEvent.getHall().getName()));
@@ -287,6 +284,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 			nextEventStartTextRunner.postDelayed(updateNextEventStartTimeText, NEXT_EVENT_START_TIME_UPDATE_DELAY);
 		} else {
 			nextEventStart.setVisibility(View.GONE);
+	        nextEventStartBottomLine.setVisibility(View.GONE);
 		}
 	}
 
@@ -306,7 +304,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 	}
 
 	@Override
-	public void onEventRemoved() {
+	public void onEventListChanged() {
 		setNextEventStartText(getMyEvents());
 	}
 

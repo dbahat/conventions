@@ -15,11 +15,6 @@
     <!-- Required for google GCM, for push notifications -->
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
-    <permission
-        android:name="amai.org.conventions.permission.C2D_MESSAGE"
-        android:protectionLevel="signature" />
-    <uses-permission android:name="amai.org.conventions.permission.C2D_MESSAGE" />
-
     <uses-feature
         android:name="android.hardware.location"
         android:required="false" />
@@ -75,13 +70,10 @@
             android:name=".notifications.ShowNotificationService"
             android:exported="false" />
         <service
-            android:name=".notifications.AzureNotificationRegistrationService"
-            android:exported="false" />
-        <service
             android:name=".notifications.GcmTokenRefreshService"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.google.android.gms.iid.InstanceID" />
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
             </intent-filter>
         </service>
 

@@ -47,6 +47,8 @@
         <!-- About Screen -->
         <item name="aboutLogo">@drawable/amai_logo_black</item>
         <!-- Home Screen -->
+        <item name="homeLogo">@null</item>
+        <item name="homeBottomImage">@null</item>
         <item name="homeBackground">@drawable/cami2017_home_background</item>
         <item name="homeToolbarTitle">@drawable/cami2017_title_white</item>
         <item name="homeTitleBackground">@color/cami2017_dark_blue_dark</item>
