@@ -15,7 +15,6 @@ import java.util.List;
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.FeedbackActivity;
 import amai.org.conventions.HomeActivity;
-import amai.org.conventions.ImageHandler;
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.activities.EventActivity;
@@ -248,7 +247,6 @@ public class ShowNotificationService extends Service {
 
 		return new Notification.Builder(this)
 				.setSmallIcon(ThemeAttributes.getResourceId(getBaseContext(), R.attr.notificationSmallIcon))
-				.setLargeIcon(ImageHandler.getNotificationLargeIcon(this))
 				.setContentTitle(getResources().getString(R.string.notification_event_about_to_start_title))
 				.setAutoCancel(true);
 	}

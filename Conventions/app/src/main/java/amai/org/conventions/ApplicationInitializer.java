@@ -11,7 +11,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 
 import com.facebook.FacebookRequestError;
-import com.microsoft.windowsazure.notifications.NotificationsManager;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -21,9 +21,7 @@ import amai.org.conventions.model.Update;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.networking.ModelRefresher;
 import amai.org.conventions.networking.UpdatesRefresher;
-import amai.org.conventions.notifications.AzurePushNotifications;
 import amai.org.conventions.notifications.PlayServicesInstallation;
-import amai.org.conventions.notifications.PushNotificationHandler;
 import amai.org.conventions.settings.SettingsActivity;
 import amai.org.conventions.updates.UpdatesActivity;
 import amai.org.conventions.utils.CollectionUtils;
@@ -34,7 +32,12 @@ public class ApplicationInitializer {
 	public void initialize(final Context context) {
 		PreferenceManager.setDefaultValues(context, R.xml.settings_preferences, false);
 		refreshModel();
-		initializeAzureNotificationHubIfPossible(context);
+		checkGooglePlayServicesAndShowNotificationsWarnings(context);
+
+		for (String topic : ConventionsApplication.settings.getNotificationTopics()) {
+			FirebaseMessaging.getInstance().subscribeToTopic(topic);
+		}
+
 		refreshUpdatesAndNotifyIfNewUpdatesAreAvailable(context);
 	}
 
@@ -51,20 +54,16 @@ public class ApplicationInitializer {
 
 	}
 
-	// Since push notifications cannot work without google play services, first check for play services existence, and if
-	// they don't exist show a proper message to the user instead.
-	// After initialization, inform the user he can change push notification settings in a dialog (one time).
-	private void initializeAzureNotificationHubIfPossible(final Context context) {
+	// Since push notifications cannot work without google play services, check for play services existence, and if
+	// they don't exist show a proper message to the user.
+	// After the check, inform the user he can change push notification settings in a dialog (one time).
+	private void checkGooglePlayServicesAndShowNotificationsWarnings(final Context context) {
 		new AsyncTask<Void, Void, PlayServicesInstallation.CheckResult>() {
 			private AlertDialog configureNotificationDialog;
 
 			@Override
 			protected PlayServicesInstallation.CheckResult doInBackground(Void... params) {
-				PlayServicesInstallation.CheckResult checkResult = PlayServicesInstallation.checkPlayServicesExist(context, false);
-				if (checkResult.isSuccess()) {
-					NotificationsManager.handleNotifications(context, AzurePushNotifications.SENDER_ID, PushNotificationHandler.class);
-				}
-				return checkResult;
+				return PlayServicesInstallation.checkPlayServicesExist(context, false);
 			}
 
 			@Override
@@ -79,10 +78,6 @@ public class ApplicationInitializer {
 				if (checkResult.isUserError()) {
 					PlayServicesInstallation.showInstallationDialog(currentContext, checkResult);
 				} else if (checkResult.isSuccess()) {
-					AzurePushNotifications notifications = new AzurePushNotifications(context);
-					if (!notifications.isRegistered()) {
-						notifications.registerAsync(new AzurePushNotifications.RegistrationListener.DoNothing());
-					}
 					showConfigureNotificationsDialog(currentContext);
 				}
 			}
@@ -156,7 +151,6 @@ public class ApplicationInitializer {
 					Intent intent = new Intent(currentContext, UpdatesActivity.class);
 					Notification.Builder notificationBuilder = new Notification.Builder(currentContext)
 							.setSmallIcon(ThemeAttributes.getResourceId(currentContext, R.attr.notificationSmallIcon))
-							.setLargeIcon(ImageHandler.getNotificationLargeIcon(currentContext))
 							.setContentTitle(notificationTitle)
 							.setContentText(notificationMessage)
 							.setAutoCancel(true)

@@ -19,7 +19,6 @@
         <attr name="hintTextColor" format="color|reference"/>
         <!-- Notifications -->
         <attr name="notificationSmallIcon" format="integer"/>
-        <attr name="notificationLargeIcon" format="integer"/>
         <!-- Toolbar -->
         <attr name="toolbarBackground" format="color|reference"/>
         <attr name="toolbarLogo" format="integer|reference"/>

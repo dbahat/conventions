@@ -32,7 +32,6 @@
 
         <!-- Notifications -->
         <item name="notificationSmallIcon">@drawable/cami2017_notification_small</item>
-        <item name="notificationLargeIcon">@mipmap/cami2017_app_icon</item>
         <!-- Toolbar -->
         <item name="toolbarBackground">@null</item>
         <item name="toolbarLogo">@drawable/ic_menu_black_24dp</item>

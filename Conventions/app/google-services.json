@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "458203975509-n8naaft9fn02phqbukdtftjemtpn85it.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "amai.org.conventions",
+            "certificate_hash": "be937b5158a856ca48a2302ab434a48985e73d3a"
+          }
+        },
+        {
           "client_id": "458203975509-qghf2og9qjhlt8hmd8pv1d2ttra5pk8h.apps.googleusercontent.com",
           "client_type": 3
         }

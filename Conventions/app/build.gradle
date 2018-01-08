@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 ext {
     supportLibVersion = "26.0.0"
-    googlePlayServicesVersion = "11.0.1"
+    googlePlayServicesVersion = "11.8.0"
 }
 
 android {
@@ -44,17 +44,14 @@ dependencies {
     compile "com.android.support:design:${supportLibVersion}"
     compile 'com.github.castorflex.verticalviewpager:library:19.0.1'
     compile 'klogi.com:rtlviewpager:1.0.0'
-    compile "com.google.android.gms:play-services-analytics:${googlePlayServicesVersion}"
-    compile "com.google.android.gms:play-services-maps:${googlePlayServicesVersion}"
-    compile "com.google.firebase:firebase-messaging:${googlePlayServicesVersion}"
-    compile "com.google.android.gms:play-services-gcm:${googlePlayServicesVersion}"
+    implementation "com.google.android.gms:play-services-analytics:${googlePlayServicesVersion}"
+    implementation "com.google.android.gms:play-services-maps:${googlePlayServicesVersion}"
+    implementation "com.google.firebase:firebase-messaging:${googlePlayServicesVersion}"
     compile 'com.caverock:androidsvg:1.2.2-beta-1'
     compile 'se.emilsjolander:stickylistheaders:2.7.0'
     compile 'com.tonicartos:stickygridheaders:1.0.1'
     compile 'com.facebook.android:facebook-android-sdk:4.2.0'
     compile 'com.google.code.gson:gson:2.7'
-    compile 'com.microsoft.azure:notification-hubs-android-sdk:0.4@aar'
-    compile 'com.microsoft.azure:azure-notifications-handler:1.0.1@aar'
     compile files('libs/activation.jar')
     compile files('libs/additionnal.jar')
     compile files('libs/mail.jar')
