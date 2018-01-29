@@ -3,7 +3,6 @@ package amai.org.conventions;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -309,12 +308,6 @@ public class HomeActivity extends NavigationActivity {
 			// The feedback filling time is over or feedback was sent. Allow the user to see his feedback
 			titleView.setText(R.string.home_convention_ended);
 			contentView.setText(R.string.home_show_feedback);
-			contentView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 50);
-			ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) contentView.getLayoutParams();
-			int margins = getResources().getDimensionPixelOffset(R.dimen.home_show_feedback_text_view_margins);
-			layoutParams.setMarginStart(margins);
-			layoutParams.setMarginEnd(margins);
-			contentView.setLayoutParams(layoutParams);
 		} else {
 			// Ask the user to fill feedback
 			titleView.setText(R.string.home_help_us_improve);
