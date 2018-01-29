@@ -30,7 +30,7 @@ import amai.org.conventions.networking.SurveyDataRetriever;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 
-public class Cami2017Convention extends AmaiConvention {
+public class Harucon2018Convention extends AmaiConvention {
 	// Hall names
 	private static final String MAIN_HALL_NAME = "אולם ראשי";
 	private static final String SCHWARTZ_NAME = "אודיטוריום שוורץ";
@@ -76,17 +76,17 @@ public class Cami2017Convention extends AmaiConvention {
 
 	@Override
 	protected String initID() {
-		return "Cami2017";
+		return "Harucon2018";
 	}
 
 	@Override
 	protected String initDisplayName() {
-		return "כאמ\"י 2017";
+		return "הארוקון 2018";
 	}
 
 	@Override
 	protected String initFacebookFeedPath() {
-		return "/cami.org.il/posts";
+		return "/harucon.org.il/posts";
 	}
 
 	@Override
@@ -149,7 +149,7 @@ public class Cami2017Convention extends AmaiConvention {
 	@Override
 	protected URL initModelURL() {
 		try {
-			return new URL("http://2017.cami.org.il/wp-admin/admin-ajax.php?action=get_event_list");
+			return new URL("http://2018.harucon.org.il/wp-admin/admin-ajax.php?action=get_event_list");
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
