@@ -70,7 +70,7 @@ public class Harucon2018Convention extends AmaiConvention {
 	protected Calendar initDate() {
 		Calendar date = Calendar.getInstance();
 		date.clear();
-		date.set(2017, Calendar.AUGUST, 24);
+		date.set(2018, Calendar.MARCH, 1);
 		return date;
 	}
 
@@ -119,7 +119,7 @@ public class Harucon2018Convention extends AmaiConvention {
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_LECTURER_QUALITY, "entry.1327236956")
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_SIMILAR_EVENTS, "entry.1416969956")
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_ADDITIONAL_INFO, "entry.1582215667")
-                    .withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSf0qSN1DreR4h93k1QJWf_flL2LFrLCOvnp6HTZOvK_iLZHGA/formResponse"));
+                    .withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSev7UVt5A635xh9t_DnQ5tSIiCmbEwAPydz05xbvZn-7hGWwA/formResponse"));
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
@@ -139,7 +139,7 @@ public class Harucon2018Convention extends AmaiConvention {
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_MAP_SIGNS, "entry.1416969956")
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_CONFLICTING_EVENTS, "entry.1582215667")
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_IMPROVEMENT, "entry.993320932")
-					.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSdadoDGXMriFVgW1Lki22OcrOGQoJVIlW8cU29DfkJRvAPWUQ/formResponse"));
+					.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSeWy8GieIo8YPKKz6MF3H63UMIhlN-XVc6myGN4Xk7leiVD2Q/formResponse"));
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
