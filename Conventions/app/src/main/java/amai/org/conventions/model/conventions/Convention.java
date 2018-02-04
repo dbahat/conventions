@@ -3,6 +3,7 @@ package amai.org.conventions.model.conventions;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 
 import java.io.Serializable;
 import java.net.URL;
@@ -89,6 +90,12 @@ public abstract class Convention implements Serializable {
 	public static Convention getInstance() {
 		return convention;
 	}
+
+	@VisibleForTesting
+	public static void setConvention(Convention convention) {
+		Convention.convention = convention;
+	}
+
 
 	public ConventionStorage getStorage() {
 		return conventionStorage;
