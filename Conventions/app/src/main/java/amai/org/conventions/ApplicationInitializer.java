@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 
 import com.facebook.FacebookRequestError;
@@ -30,7 +29,6 @@ public class ApplicationInitializer {
 	private static final int NEW_UPDATES_NOTIFICATION_ID = 75457;
 
 	public void initialize(final Context context) {
-		PreferenceManager.setDefaultValues(context, R.xml.settings_preferences, false);
 		refreshModel();
 		checkGooglePlayServicesAndShowNotificationsWarnings(context);
 
