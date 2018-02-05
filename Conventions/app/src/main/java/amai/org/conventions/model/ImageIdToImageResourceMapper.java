@@ -1,5 +1,6 @@
 package amai.org.conventions.model;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -49,6 +50,10 @@ public class ImageIdToImageResourceMapper {
 		if (BuildConfig.DEBUG && imageIdToImageResourceIdMap.containsKey(id)) {
 			Log.e(TAG, "Logo image added to both logo and mapped lists: " + id);
 		}
+	}
+
+	public void addExcludedIds(String... args) {
+		excludeIds.addAll(Arrays.asList(args));
 	}
 
 	public void addExcludedId(String id) {

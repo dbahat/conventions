@@ -159,74 +159,55 @@ public class Harucon2018Convention extends AmaiConvention {
 	protected ImageIdToImageResourceMapper initImageMapper() {
 		ImageIdToImageResourceMapper imageMapper = new ImageIdToImageResourceMapper();
 
-		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/VsiH1TU.jpg", R.drawable.event_manga_cafe);
-		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/singing-contest.jpg", R.drawable.event_singing_contest);
-		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/כאמידי-סנטרל-600x800.png", R.drawable.event_camidi_central);
-		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/סתיו-וביאטריס-Kuroshitsuji-Mysteries-take-2.png", R.drawable.event_kuroshitsuji); // TODO take better image
-		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/דש-מאמריקה-וחזרה.jpg", R.drawable.event_america);
-		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/שיבוטים.jpg", R.drawable.event_clones);
-		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/קנדו-ונגינאטה-החרב-או-החנית.png", R.drawable.event_kendo);
-		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/אחד-בשביל-כולם-כולם-בשביל-כולם.jpg", R.drawable.event_one_for_all);
-		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/קרוספליי.png", R.drawable.event_crossplay);
-		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/08/להתגבר-ולהתבגר-אנימות-ספורט.jpg", R.drawable.event_sports_anime);
-		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/cool-japan-600x800-1.jpg", R.drawable.event_cool_japan);
-		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/JRPG-מא-ועד-ת.jpg", R.drawable.event_jrpg);
-		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/תעשיית-המדבבים-ביפן-לא-מה-שחשבתם1.jpg", R.drawable.event_voice_actors);
-		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/pop-in-q-screen1.jpg", R.drawable.event_pop_in_q);
-		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/שיעור-יפנית.jpg", R.drawable.event_japanese_lesson);
-		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/פולקלור-יהודי-בפוקימון1-1.jpeg", R.drawable.event_jewish_pokemon);
-		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/Sound-Horizon-1.jpg", R.drawable.event_sound_horizon);
-		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/WabiSabi-600x800-1.jpeg", R.drawable.event_wabisabi);
-		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/giyaro-600x800.jpg", R.drawable.event_gyaru);
-		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/דוקומונוגטארי-1.png", R.drawable.event_documonogatari);
-		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/12345-sd-nkuj.jpg", R.drawable.event_showcase1);
-		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/צליינות-מעריצים-600x800-1.jpg", R.drawable.event_conventions);
-		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/פיינאל-פאנטאזי-1.jpg", R.drawable.event_final_fantasy);
-		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/גנגסטרים-אלכימאים-ובני-אלמוות-1.jpg", R.drawable.event_baccano);
-		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2016/01/cosplay2.jpg", R.drawable.event_cosplay1);
-		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2016/01/cosplay3.jpg", R.drawable.event_cosplay2);
-		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/אנימה-מעבר-לסדרות-מצויירות-1.jpg", R.drawable.event_anime_beyond_animation);
-		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/על-דרקונים-וכוונות-טובות-יוקו-טארו-על-אלימות-במשחקי-וידאו-1.png", R.drawable.event_dragons);
-		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/פאנסאב-לא-מה-שחשבתם.png", R.drawable.event_fansub);
-		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/פאנל-יאוי-אקדמי.jpg", R.drawable.event_bl);
-		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/objection-פיניקס-רייט-נגד-קאפקום.jpg", R.drawable.event_ace_attorney);
-		imageMapper.addMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/08/pokemon-tournament.png", R.drawable.event_pokemon_tournament);
-
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/משחקי-קצב-101-מDDR-עד-פופ_נ-מיוזיק.png", R.drawable.event_ddr);
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/אמנזיה-וזהות-זכרונות-בנובלות-ויזואליות-ומדיה-יפנית.jpg", R.drawable.event_visual_noval);
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/המדריך-לאספן-המנגה.jpg", R.drawable.event_manga_collector);
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/החיים-הם-כמו-קופסה-של-וואיפוז-לאפליקציה.jpg", R.drawable.event_gatcha_games);
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/פיינל-פנטזי-15-החלקים-החסרים.jpg", R.drawable.event_ff15);
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/הסוכן-החשאי-של-יפן.jpg", R.drawable.event_detective);
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/קוואי-פמיניסטי.jpg", R.drawable.event_kawai);
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/היסטוריית-הגו-מאלף-ה-2-לפנה_ס-ועד-אלפא-גו.png", R.drawable.event_go_history);
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/גיבורי-על-כסף.jpg", R.drawable.event_money_heros);
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/אנימה-בזכוכית-מגדלת.jpg", R.drawable.event_anime_glass);
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/אנטומיה-במנגה-וקומיקס.jpg", R.drawable.event_manga_and_comics);
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/קוספליי-למתחילים-.jpeg", R.drawable.event_beginner_cosplay);
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/Southpark.jpg", R.drawable.event_southpark);
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/MATSURI-אמיתי-–-פסטיבלים-ביפן.jpg", R.drawable.event_matsuri);
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/איך-להתחיל-ולהישאר-בחיים-הדלת-אל-עולם-האנימה.jpg", R.drawable.event_anime_door);
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/kyotoAnimation.jpg", R.drawable.event_kyoto_animation);
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/מסע-האנטי-גיבור.png", R.drawable.event_anti_hero);
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/טורניר-פוקימון-לאפליקציה.jpg", R.drawable.event_pokemon);
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/מנגה-קפה-לאפליקציה.jpg", R.drawable.event_manga_cafe);
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/02/סקיטים-לאתר-אפשרות-2.jpg", R.drawable.event_skits);
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/02/Death-in-anime-combined.png", R.drawable.event_death_in_anime);
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/מפאנסאב-אנלוגי-ועד-אנימה-בכבלים-סיפורה-של-ADV-ואנימה-במערב.png", R.drawable.event_fansub);
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/הצללות-בקוספליי-ואיך-לעשותן.jpg", R.drawable.event_cosplay_shadow);
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/אקאשי-מורקאמי-מקנייה-ועד-וורסאי.jpg", R.drawable.event_murakami);
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/אנימה-על-הספקטרום.jpg", R.drawable.event_anime_spectrum);
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/02/יפן-בראי-האנימה-לאתר-הכנס.jpg", R.drawable.event_anime_mirror_app);
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/שיעור-יפנית.jpg", R.drawable.event_japanease);
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/02/הדגמת-קנדאמה-Kendama.jpg", R.drawable.event_kendama);
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/02/יוקאי-לאתר.jpg", R.drawable.event_yokai);
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/02/מחזמר-תמונה-לאתר.jpg", R.drawable.event_musical);
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/02/At-Site-Code-Geass02.jpg", R.drawable.event_geass);
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/קוף-הדרך-המסע-למערב-בין-האנימה-לסין.jpg", R.drawable.event_goku);
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/Whose-Manga-is-it-ANYWAY.png", R.drawable.event_manga_anyway);
 		// Non-URL IDs
 		imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.cami2017_event_default_image);
 
-		// Logo images
-		imageMapper.addLogoMapping("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/pop-in-q-screen5.jpg", R.drawable.event_pop_in_q_logo);
-
 		// Excluded IDs - mostly for debug purposes (don't show messages about these when entering an event that has them)
 		// Foreground text is not readable
-		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/kumodesuga_edited-1.jpg");
-		// Unnecessary images in events that have other images
-		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2016/01/cosplay1.jpg");
-		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/photo_2017-07-29_19-49-50.jpg");
-		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/pop-in-q-screen3.jpg");
-		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/pop-in-q-screen4.jpg");
-		// Toei logo
-		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/toei-logo.png");
-		// Musical logo
-		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2016/02/photo6023616020196993341.jpg");
-		// SFF logo
-		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2016/02/scififi-logo.png");
-		// Singing contest judges
-		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/arielle-baum.png");
-		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/11800145_1143784582315108_9123802292981015631_n.png");
-		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/17192456_1476939775671681_1554553118023902314_o.jpg");
-		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/18055649_1521589434540048_4612985064956143749_o.jpg");
-		// Showcase judges
-		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/WhatsApp-Image-2017-07-29-at-20.48.44.jpeg");
-		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/WhatsApp-Image-2017-07-29-at-20.49.18.jpeg");
-		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2017/07/photo_2017-07-29_19-48-55.jpg");
-		// Cosplay judges
-		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2016/01/עינב-לוי.jpg");
-		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2016/01/סיוון-מגן.jpg");
-		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2016/01/ליאור-מוסקוביץ.jpg");
-		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2016/01/נועה-ירון.jpg");
-		imageMapper.addExcludedId("http://2017.cami.org.il/wp-content/uploads/sites/13/2016/01/טל-חזן.jpg");
+
+		imageMapper.addExcludedIds(
+				// Cosplay / showcase judges
+				"http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/סער-שמר-150x150.jpg",
+				"http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/-מגן-e1515991217865-150x150.jpg",
+				"http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/-סימנובסקי-e1515990944672-150x150.png",
+				"http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/-גלר-e1515991138586-150x150.jpg",
+				"http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/אלי-פודוליאק-150x150.jpg",
+				"http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/אופיר-לוטן-150x150.jpg",
+				"http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/נטע-וייס-150x150.png"
+		);
 
 		return imageMapper;
 	}
