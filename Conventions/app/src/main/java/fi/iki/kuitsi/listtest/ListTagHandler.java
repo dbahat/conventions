@@ -17,16 +17,15 @@
 
 package fi.iki.kuitsi.listtest;
 
-import java.util.Stack;
-
-import org.xml.sax.XMLReader;
-
 import android.text.Editable;
 import android.text.Html;
 import android.text.Spanned;
 import android.text.style.BulletSpan;
 import android.text.style.LeadingMarginSpan;
-import android.util.Log;
+
+import org.xml.sax.XMLReader;
+
+import java.util.Stack;
 
 /**
  * Implements support for ordered and unordered lists in to Android TextView.
@@ -115,8 +114,6 @@ public class ListTagHandler implements Html.TagHandler {
 						new LeadingMarginSpan.Standard(numberMargin));
 				}
 			}
-		} else {
-			if (opening) Log.d("TagHandler", "Found an unsupported tag " + tag);
 		}
 	}
 
