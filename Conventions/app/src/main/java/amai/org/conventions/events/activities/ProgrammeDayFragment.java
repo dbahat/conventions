@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -220,7 +221,7 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 		Calendar selectedTimeSectionTime = eventTimeViewHolder.getTime();
 
 		// Setup number picker dialog
-		final NumberPicker numberPicker = new NumberPicker(getActivity());
+		final NumberPicker numberPicker = new NumberPicker(new ContextThemeWrapper(getActivity(), ThemeAttributes.getResourceId(getActivity(), R.attr.numberPickerTheme)));
 
 		final List<Calendar> timeSections = new LinkedList<>();
 

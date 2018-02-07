@@ -1,61 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Base application theme. -->
-    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <!-- Since there is no multiple inheritance with themes, we have to copy basic attributes to have
+         similar light and dark themes.
+         The attributes defined in this theme (except for the parent) should be exactly the same as in
+         AppBaseTheme.Light.Base -->
+    <style name="AppBaseTheme.Dark.Base" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@null</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowSoftInputMode">adjustPan</item>
         <item name="android:layoutDirection">rtl</item>
         <item name="android:textDirection">rtl</item>
-        <!--We will be using the toolbar so no need to show ActionBar-->
+        <!--We use the toolbar so no need to show ActionBar-->
         <item name="android:windowActionBar">false</item>
-        <item name="android:colorBackground">@color/white</item>
+        <item name="android:colorBackground">@null</item>
+
+        <!-- General attributes -->
         <item name="swipeToRefreshColor">?toolbarBackground</item>
         <item name="stickyListHeadersListViewStyle">@style/Widget.AppCompat.ListView</item>
-        <item name="hintTextColor">@color/hint_gray</item>
+        <item name="activitiesBackground">@null</item>
+        <item name="actionButtonColor">?colorAccent</item>
+        <item name="borderlessButtonColor">?buttonColor</item>
 
+        <!-- Toolbar -->
+        <item name="toolbarTitleColor">?android:textColorPrimary</item>
+
+        <!-- Event list activities -->
         <item name="eventTimeHeaderBackground">@drawable/flat_event_time_background</item>
         <item name="eventTypeEndedColor">@color/gray</item>
         <item name="eventTypeCurrentColor">@color/light_yellow</item>
         <item name="eventTypeNotStartedColor">@color/white</item>
-        <item name="eventNameKeywordHighlightColor">@color/black</item>
-        <item name="eventKeywordHighlightColor">@color/black</item>
-        <item name="eventDetailsColor">@color/dark_gray</item>
         <item name="eventSendFeedbackColor">@color/green</item>
 
-        <item name="nextEventStartTimeBottomLineColor">@android:color/black</item>
-        <item name="conflictingEventsBackground">@color/dark_gray</item>
-
-        <item name="navigationPopupNotSelectedColor">@android:color/black</item>
+        <!-- Navigation popup -->
         <item name="navigationPopupSeparatorColor">?navigationPopupNotSelectedColor</item>
 
-        <item name="updateTimeColor">@color/ultra_light_gray</item>
-        <item name="updateItemBorder">@android:color/darker_gray</item>
-        <item name="updatesBackground">?android:colorBackground</item>
-        <item name="newUpdateBackground">@color/very_light_gray</item>
+        <!-- Home -->
+        <item name="homeBoxTopMargin">0dp</item>
+        <item name="homeSingleButtonTopMargin">0dp</item>
+        <item name="homeSingleButtonStyle">@style/HomeButton.Single</item>
 
+        <!-- Updates -->
+        <item name="updatesBackground">?android:colorBackground</item>
+
+        <!-- Map -->
         <item name="mapBackground">?activitiesBackground</item>
         <item name="locationDetailsBackground">@color/white</item>
         <item name="locationDetailsTopLineColor">@android:color/black</item>
         <item name="locationDetailsTitleColor">?android:textColorPrimary</item>
 
+        <!-- Event activity -->
         <item name="eventToolbarColor">?toolbarBackground</item>
-        <item name="eventDetailsBoxColor">@color/transparent_white</item>
         <item name="eventDescriptionTextColor">?android:textColorPrimary</item>
         <item name="eventDetailsTextColor">?android:textColorPrimary</item>
         <item name="feedbackButtonColor">?borderlessButtonColor</item>
         <item name="eventTitleTextColor">?android:textColorPrimary</item>
-        <item name="eventFeedbackBoxColor">@color/transparent_light_yellow</item>
         <item name="eventFeedbackTextColor">?attr/eventDescriptionTextColor</item>
         <!-- This color should match eventDetailsBoxColor in a way that eventDetailsBoxColor is not visible
              on top of this color -->
-        <item name="eventDetailsDefaultBackgroundColor">@color/white</item>
         <item name="conventionFeedbackTextColor">?android:textColorPrimary</item>
+    </style>
 
-        <item name="shadowForeground">@drawable/bottom_shadow</item>
+    <!-- Since there is no multiple inheritance with themes, we have to copy basic attributes to have
+         similar light and dark themes.
+         The attributes defined in this theme (except for the parent) should be exactly the same as in
+         AppBaseTheme.Dark.Base -->
+    <style name="AppBaseTheme.Light.Base" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowSoftInputMode">adjustPan</item>
+        <item name="android:layoutDirection">rtl</item>
+        <item name="android:textDirection">rtl</item>
+        <!--We use the toolbar so no need to show ActionBar-->
+        <item name="android:windowActionBar">false</item>
+        <item name="android:colorBackground">@null</item>
+
+        <!-- General attributes -->
+        <item name="swipeToRefreshColor">?toolbarBackground</item>
+        <item name="stickyListHeadersListViewStyle">@style/Widget.AppCompat.ListView</item>
         <item name="activitiesBackground">@null</item>
         <item name="actionButtonColor">?colorAccent</item>
         <item name="borderlessButtonColor">?buttonColor</item>
+
+        <!-- Toolbar -->
+        <item name="toolbarTitleColor">?android:textColorPrimary</item>
+
+        <!-- Event list activities -->
+        <item name="eventTimeHeaderBackground">@drawable/flat_event_time_background</item>
+        <item name="eventTypeEndedColor">@color/gray</item>
+        <item name="eventTypeCurrentColor">@color/light_yellow</item>
+        <item name="eventTypeNotStartedColor">@color/white</item>
+        <item name="eventSendFeedbackColor">@color/green</item>
+
+        <!-- Navigation popup -->
+        <item name="navigationPopupSeparatorColor">?navigationPopupNotSelectedColor</item>
+
+        <!-- Home -->
+        <item name="homeBoxTopMargin">0dp</item>
+        <item name="homeSingleButtonTopMargin">0dp</item>
+        <item name="homeSingleButtonStyle">@style/HomeButton.Single</item>
+
+        <!-- Updates -->
+        <item name="updatesBackground">?android:colorBackground</item>
+
+        <!-- Map -->
+        <item name="mapBackground">?activitiesBackground</item>
+        <item name="locationDetailsBackground">@color/white</item>
+        <item name="locationDetailsTopLineColor">@android:color/black</item>
+        <item name="locationDetailsTitleColor">?android:textColorPrimary</item>
+
+        <!-- Event activity -->
+        <item name="eventToolbarColor">?toolbarBackground</item>
+        <item name="eventDescriptionTextColor">?android:textColorPrimary</item>
+        <item name="eventDetailsTextColor">?android:textColorPrimary</item>
+        <item name="feedbackButtonColor">?borderlessButtonColor</item>
+        <item name="eventTitleTextColor">?android:textColorPrimary</item>
+        <item name="eventFeedbackTextColor">?attr/eventDescriptionTextColor</item>
+        <!-- This color should match eventDetailsBoxColor in a way that eventDetailsBoxColor is not visible
+             on top of this color -->
+        <item name="conventionFeedbackTextColor">?android:textColorPrimary</item>
+    </style>
+
+    <!-- Additional default attributes for dark themes. Inherit the actual theme from this one for dark themes. -->
+    <style name="AppBaseTheme.Dark" parent="AppBaseTheme.Dark.Base">
+        <item name="hintTextColor">@color/hint_gray</item>
+        <item name="eventNameKeywordHighlightColor">@color/white</item>
+        <item name="eventKeywordHighlightColor">@color/white</item>
+        <item name="eventDetailsColor">@color/white</item>
+        <item name="nextEventStartTimeBottomLineColor">@android:color/white</item>
+        <item name="conflictingEventsBackground">@color/transparent_white</item>
+        <item name="navigationPopupNotSelectedColor">@android:color/white</item>
+        <item name="updateTimeColor">@color/transparent_white</item>
+        <item name="updateItemBorder">@android:color/white</item>
+        <item name="newUpdateBackground">@color/transparent_white</item>
+        <item name="eventDetailsBoxColor">@color/transparent_black</item>
+        <item name="eventFeedbackBoxColor">@color/transparent_black</item>
+        <item name="eventDetailsDefaultBackgroundColor">@color/black</item>
+        <item name="separatorColor">@color/white</item>
+        <item name="iconAddToFavorites">@drawable/star_with_plus_white</item>
+        <item name="iconShrink">@drawable/shrink_white</item>
+        <item name="iconEnlarge">@drawable/enlarge_white</item>
+        <item name="iconFavorites">@drawable/events_list_with_star</item>
+        <item name="iconDirections">@drawable/ic_directions_white_36dp</item>
+        <item name="iconTransport">@drawable/ic_directions_bus_white_36dp</item>
+        <item name="iconAlarm">@drawable/ic_action_alarms</item>
+        <item name="iconProgramme">@drawable/events_list</item>
+        <item name="iconClear">@drawable/ic_clear_white_24dp</item>
+        <item name="iconShare">@drawable/ic_action_share_white</item>
+        <item name="iconFeedback">@drawable/feedback_menu_icon</item>
+        <item name="iconMap">@drawable/ic_dialog_map</item>
+    </style>
+
+    <!-- Additional default attributes for light themes. Inherit the actual theme from this one for light themes. -->
+    <style name="AppBaseTheme.Light" parent="AppBaseTheme.Light.Base">
+        <item name="hintTextColor">@color/hint_gray</item>
+        <item name="eventNameKeywordHighlightColor">@color/black</item>
+        <item name="eventKeywordHighlightColor">@color/black</item>
+        <item name="eventDetailsColor">@color/dark_gray</item>
+        <item name="nextEventStartTimeBottomLineColor">@android:color/black</item>
+        <item name="conflictingEventsBackground">@color/dark_gray</item>
+        <item name="navigationPopupNotSelectedColor">@android:color/black</item>
+        <item name="updateTimeColor">@color/ultra_light_gray</item>
+        <item name="updateItemBorder">@android:color/darker_gray</item>
+        <item name="newUpdateBackground">@color/very_light_gray</item>
+        <item name="eventDetailsBoxColor">@color/transparent_white</item>
+        <item name="eventFeedbackBoxColor">@color/transparent_light_yellow</item>
+        <item name="eventDetailsDefaultBackgroundColor">@color/white</item>
+        <item name="separatorColor">@color/black</item>
+        <item name="iconAddToFavorites">@drawable/star_with_plus</item>
+        <item name="iconShrink">@drawable/shrink_black</item>
+        <item name="iconEnlarge">@drawable/enlarge_black</item>
+        <item name="iconFavorites">@drawable/events_list_with_star_black</item>
+        <item name="iconDirections">@drawable/ic_directions</item>
+        <item name="iconTransport">@drawable/ic_directions_bus</item>
+        <item name="iconAlarm">@drawable/ic_action_alarms_black</item>
+        <item name="iconProgramme">@drawable/events_list_black</item>
+        <item name="iconClear">@drawable/ic_clear_black</item>
+        <item name="iconShare">@drawable/ic_action_share_black</item>
+        <item name="iconFeedback">@drawable/feedback_menu_icon_black</item>
+        <item name="iconMap">@drawable/ic_dialog_map_black</item>
     </style>
 
     <style name="FullScreenDialog" parent="android:Theme.Dialog">

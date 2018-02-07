@@ -427,7 +427,7 @@ public class EventActivity extends NavigationActivity {
 			favoriteItem.setIcon(icon);
 			favoriteItem.setTitle(getResources().getString(R.string.event_remove_from_favorites));
 		} else {
-			favoriteItem.setIcon(ContextCompat.getDrawable(this, R.drawable.star_with_plus));
+			favoriteItem.setIcon(ThemeAttributes.getDrawable(this, R.attr.iconAddToFavorites));
 			favoriteItem.setTitle(getResources().getString(R.string.event_add_to_favorites));
 		}
 	}

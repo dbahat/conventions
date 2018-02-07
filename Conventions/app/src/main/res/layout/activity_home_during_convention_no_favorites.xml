@@ -53,14 +53,13 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="?homeUpcomingEventBackground"
+            android:layout_marginTop="?homeBoxTopMargin"
             android:divider="@null"/>
 
         <Button
             android:text="@string/home_go_to_programme"
-            android:textSize="23sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/HomeButton"
+            android:layout_marginTop="?homeSingleButtonTopMargin"
+            style="?homeSingleButtonStyle"
             android:onClick="onGoToProgrammeClicked"/>
 
     </LinearLayout>

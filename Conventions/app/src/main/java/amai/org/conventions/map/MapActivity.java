@@ -245,10 +245,10 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 
 		if (currentFloorFragment.isMapZoomedIn()) {
 			zoomItem.setTitle(getString(R.string.shrink_map));
-			zoomItem.setIcon(R.drawable.shrink);
+			zoomItem.setIcon(ThemeAttributes.getDrawable(this, R.attr.iconShrink));
 		} else {
 			zoomItem.setTitle(getString(R.string.enlarge_map));
-			zoomItem.setIcon(R.drawable.enlarge);
+			zoomItem.setIcon(ThemeAttributes.getDrawable(this, R.attr.iconEnlarge));
 		}
 	}
 

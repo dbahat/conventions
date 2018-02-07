@@ -55,6 +55,7 @@
             app:maxHeight="190dp"
             android:orientation="vertical"
             android:gravity="center"
+            android:layout_marginTop="?homeBoxTopMargin"
             android:foreground="?selectableItemBackground"
             android:clickable="true"
             android:background="?homeMessageBackground">

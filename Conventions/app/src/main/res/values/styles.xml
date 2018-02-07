@@ -100,5 +100,16 @@
     <style name="HomeButton">
         <item name="android:background">?homeButtonBackground</item>
         <item name="android:textColor">?homeButtonText</item>
+        <item name="android:minHeight">@null</item>
+        <item name="android:minWidth">@null</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:layout_margin">@null</item>
+        <item name="android:gravity">top|center</item>
+    </style>
+
+    <style name="HomeButton.Single">
+        <item name="android:textSize">23sp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
     </style>
 </resources>

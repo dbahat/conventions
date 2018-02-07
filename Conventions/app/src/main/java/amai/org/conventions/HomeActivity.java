@@ -114,7 +114,7 @@ public class HomeActivity extends NavigationActivity {
 			upcomingEventTitle.setText(currentEvent.getTitle());
 			upcomingEventTime.setText(getString(R.string.home_now_showing, ""));
 			upcomingEventHall.setText(currentEvent.getHall().getName());
-			upcomingEventContainer.setBackgroundColor(ThemeAttributes.getColor(this, R.attr.homeCurrentEventBackground));
+			upcomingEventContainer.setBackground(ThemeAttributes.getDrawable(this, R.attr.homeCurrentEventBackground));
 			if (currentEvent.getUserInput().getVoteSurvey() != null) {
 				upcomingEventVoteText.setVisibility(View.VISIBLE);
 			} else {

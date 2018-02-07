@@ -8,21 +8,21 @@
     <item
         android:id="@+id/event_change_favorite_state"
         android:title="@string/event_add_to_favorites"
-        android:icon="@drawable/star_with_plus"
+        android:icon="?iconAddToFavorites"
         android:orderInCategory="1"
         app:showAsAction="always"/>
 
     <item
         android:id="@+id/event_configure_notifications"
         android:title="@string/event_configure_notifications"
-        android:icon="@drawable/ic_action_alarms_black"
+        android:icon="?iconAlarm"
         android:orderInCategory="2"
         app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/event_navigate_to_map"
         android:title="@string/event_navigate_to_map"
-        android:icon="@drawable/ic_dialog_map_black"
+        android:icon="?iconMap"
         android:orderInCategory="3"
         app:showAsAction="always"/>
 
