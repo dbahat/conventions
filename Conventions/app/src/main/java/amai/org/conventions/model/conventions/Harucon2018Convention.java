@@ -58,7 +58,7 @@ public class Harucon2018Convention extends AmaiConvention {
 
 	@Override
 	protected ConventionStorage initStorage() {
-		return new ConventionStorage(this, R.raw.cami2017_convention_events, 1);
+		return new ConventionStorage(this, R.raw.harucon2018_convention_events, 0);
 	}
 
 	@Override
