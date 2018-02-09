@@ -9,6 +9,8 @@
     <color name="harucon2018_blue_dark">#3585b1</color>
     <color name="harucon2018_red_dark">#ab1532</color>
 
+    <color name="harucon2018_gray">#6c6c6c</color>
+    <color name="harucon2018_transparent_dark_blue">#803000b4</color>
     <color name="harucon2018_very_transparent_white">#30FFFFFF</color>
     <color name="harucon2018_transparent_black">#9504041d</color>
     <color name="harucon2018_transparent_red_dark">#c0ab1532</color>

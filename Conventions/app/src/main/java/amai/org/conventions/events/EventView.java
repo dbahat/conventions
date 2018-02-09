@@ -23,6 +23,7 @@ import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.conventions.Convention;
+import amai.org.conventions.networking.AmaiModelConverter;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Strings;
 
@@ -39,7 +40,7 @@ public class EventView extends FrameLayout {
 	private final ImageView feedbackIcon;
 	private final ImageView alarmIcon;
 	private final ViewGroup timeLayout;
-	private final ViewGroup eventDescription;
+	private final ViewGroup eventContainer;
 	private final View eventMainTouchArea;
 	private final View bottomLayout;
 
@@ -68,7 +69,7 @@ public class EventView extends FrameLayout {
 		lecturerName = (TextView) this.findViewById(R.id.lecturerName);
 		feedbackIcon = (ImageView) this.findViewById(R.id.feedback_icon);
 		alarmIcon = (ImageView) this.findViewById(R.id.alarm_icon);
-		eventDescription = (ViewGroup) this.findViewById(R.id.eventDescription);
+		eventContainer = (ViewGroup) this.findViewById(R.id.eventContainer);
 		eventMainTouchArea = this.findViewById(R.id.eventMainTouchArea);
 		bottomLayout = this.findViewById(R.id.bottom_layout);
 		searchDescriptionContainer = this.findViewById(R.id.search_description_container);
@@ -103,14 +104,18 @@ public class EventView extends FrameLayout {
 	}
 
 	private void setColorsFromEvent(ConventionEvent event, boolean conflicting) {
-		setEventTypeColor(event.getBackgroundColor(getContext()));
+		int eventTypeColor = event.getBackgroundColor(getContext());
+		setEventTypeColor(eventTypeColor);
 		setEventTimeTextColor(event.getTextColor(getContext()));
 		if (!event.hasStarted()) {
-			setEventNameColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeNotStartedColor), conflicting);
+			setEventNameColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeNotStartedColor), eventTypeColor);
+			setEventBackgroundColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeNotStartedBackgroundColor));
 		} else if (event.hasEnded()) {
-			setEventNameColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeEndedColor), conflicting);
+			setEventNameColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeEndedColor), eventTypeColor);
+			setEventBackgroundColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeEndedBackgroundColor));
 		} else {
-			setEventNameColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeCurrentColor), conflicting);
+			setEventNameColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeCurrentColor), eventTypeColor);
+			setEventBackgroundColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeCurrentBackgroundColor));
 		}
 	}
 
@@ -124,8 +129,16 @@ public class EventView extends FrameLayout {
 		endTime.setTextColor(color);
 	}
 
-	public void setEventNameColor(int color, boolean conflicting) {
-		eventName.setTextColor(color);
+	public void setEventNameColor(int eventNameColor, int eventTypeColor) {
+		// If no color is specified for the event name, use the same color from the event type
+		if (eventNameColor == AmaiModelConverter.NO_COLOR) {
+			eventNameColor = eventTypeColor;
+		}
+		eventName.setTextColor(eventNameColor);
+	}
+
+	public void setEventBackgroundColor(int color) {
+		setLayoutColor(eventContainer, color);
 	}
 
 	private void setLayoutColor(ViewGroup layout, int color) {

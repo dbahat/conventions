@@ -16,6 +16,7 @@ import amai.org.conventions.events.holders.EventViewHolder;
 import amai.org.conventions.events.holders.TimeViewHolder;
 import amai.org.conventions.events.listeners.OnEventFavoriteChangedListener;
 import amai.org.conventions.model.ConventionEvent;
+import amai.org.conventions.networking.AmaiModelConverter;
 import amai.org.conventions.utils.Dates;
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
@@ -103,14 +104,19 @@ public class EventsViewOrHourAdapter extends BaseAdapter implements StickyListHe
 		Calendar endTimeCalendar = Calendar.getInstance();
 		endTimeCalendar.setTimeInMillis(startTime.getTime() + Dates.MILLISECONDS_IN_HOUR);
 		Date endTime = endTimeCalendar.getTime();
+		int color;
 
 		if (!startTime.before(Dates.now())) {
-			return ThemeAttributes.getColor(holder.itemView.getContext(), R.attr.eventTypeNotStartedColor);
+			color = ThemeAttributes.getColor(holder.itemView.getContext(), R.attr.eventTypeNotStartedColor);
 		} else if (endTime.before(Dates.now())) {
-			return ThemeAttributes.getColor(holder.itemView.getContext(), R.attr.eventTypeEndedColor);
+			color = ThemeAttributes.getColor(holder.itemView.getContext(), R.attr.eventTypeEndedColor);
 		} else {
-			return ThemeAttributes.getColor(holder.itemView.getContext(), R.attr.eventTypeCurrentColor);
+			color = ThemeAttributes.getColor(holder.itemView.getContext(), R.attr.eventTypeCurrentColor);
 		}
+		if (color == AmaiModelConverter.NO_COLOR) {
+			color = ThemeAttributes.getColor(holder.itemView.getContext(), R.attr.eventTimeHeaderDefaultTextColor);
+		}
+		return color;
 	}
 
 	@Override

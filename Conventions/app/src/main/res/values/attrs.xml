@@ -35,6 +35,9 @@
         <attr name="eventTypeEndedColor" format="color|reference"/>
         <attr name="eventTypeCurrentColor" format="color|reference"/>
         <attr name="eventTypeNotStartedColor" format="color|reference"/>
+        <attr name="eventTypeEndedBackgroundColor" format="color|reference"/>
+        <attr name="eventTypeCurrentBackgroundColor" format="color|reference"/>
+        <attr name="eventTypeNotStartedBackgroundColor" format="color|reference"/>
         <attr name="eventNameKeywordHighlightColor" format="color|reference"/>
         <attr name="eventKeywordHighlightColor" format="color|reference"/>
         <attr name="eventTimeDefaultTextColor" format="color|reference"/>
@@ -112,6 +115,7 @@
         <attr name="conventionFeedbackTextColor" format="color|reference"/>
         <!-- Programme Screen -->
         <attr name="eventTimeHeaderBackground" format="color|reference"/>
+        <attr name="eventTimeHeaderDefaultTextColor" format="color|reference"/>
         <!-- Icons -->
         <attr name="iconAddToFavorites" format="integer|reference"/>
         <attr name="iconShrink" format="integer|reference"/>

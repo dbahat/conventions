@@ -62,9 +62,10 @@
         <item name="homeSingleButtonTopMargin">10dp</item>
         <item name="homeSingleButtonStyle">@style/HomeButton.Single.Harucon2018</item>
         <!-- Event View -->
-        <item name="eventTypeEndedColor">@color/ultra_light_gray2</item>
-        <item name="eventTypeCurrentColor">@color/harucon2018_blue</item>
-        <item name="eventTypeNotStartedColor">@color/white</item>
+        <item name="eventTypeEndedColor">@color/harucon2018_gray</item>
+        <item name="eventTypeCurrentColor">@null</item>
+        <item name="eventTypeCurrentBackgroundColor">@color/harucon2018_transparent_dark_blue</item>
+        <item name="eventTypeNotStartedColor">@null</item>
         <item name="eventNameKeywordHighlightColor">@color/harucon2018_gold</item>
         <item name="eventKeywordHighlightColor">@color/harucon2018_gold</item>
         <item name="eventTimeDefaultTextColor">@color/white</item>
@@ -81,7 +82,7 @@
         <item name="standIconColor">@color/harucon2018_red_dark</item>
         <item name="standsTypeTitleColor">@color/harucon2018_red_dark</item>
         <!-- Updates Screen -->
-        <item name="focusedUpdateBackground">@color/transparent_yellow</item> <!-- TODO put the highlight blue here when we have it -->
+        <item name="focusedUpdateBackground">@color/harucon2018_transparent_dark_blue</item>
         <item name="newUpdateBackground">@color/harucon2018_very_transparent_white</item>
         <item name="updateTimeColor">@color/harucon2018_very_transparent_white</item>
         <item name="updateItemBorder">@color/white</item>
@@ -102,6 +103,7 @@
         <item name="progressBarDrawable">@drawable/harucon2018_rotating_circular_progress_bar</item>
         <!-- Programme Screen -->
         <item name="eventTimeHeaderBackground">@drawable/harucon2018_event_time_header_background</item>
+        <item name="eventTimeHeaderDefaultTextColor">@color/white</item>
     </style>
 
     <style name="AppBaseTheme.Harucon2018.Toolbar.Event" parent="AppBaseTheme.Harucon2018.Toolbar">

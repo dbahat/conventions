@@ -29,6 +29,10 @@
         <item name="eventTypeEndedColor">@color/gray</item>
         <item name="eventTypeCurrentColor">@color/light_yellow</item>
         <item name="eventTypeNotStartedColor">@color/white</item>
+        <item name="eventTypeEndedBackgroundColor">@null</item>
+        <item name="eventTypeCurrentBackgroundColor">@null</item>
+        <item name="eventTypeNotStartedBackgroundColor">@null</item>
+        <item name="eventTimeDefaultBackgroundColor">@null</item>
         <item name="eventSendFeedbackColor">@color/green</item>
 
         <!-- Navigation popup -->
@@ -89,6 +93,10 @@
         <item name="eventTypeEndedColor">@color/gray</item>
         <item name="eventTypeCurrentColor">@color/light_yellow</item>
         <item name="eventTypeNotStartedColor">@color/white</item>
+        <item name="eventTypeEndedBackgroundColor">@null</item>
+        <item name="eventTypeCurrentBackgroundColor">@null</item>
+        <item name="eventTypeNotStartedBackgroundColor">@null</item>
+        <item name="eventTimeDefaultBackgroundColor">@null</item>
         <item name="eventSendFeedbackColor">@color/green</item>
 
         <!-- Navigation popup -->
