@@ -35,23 +35,19 @@ public class Harucon2018Convention extends AmaiConvention {
 	private static final String GAMES_NAME = "משחקייה";
 
 	// Vote questions - these values are serialized, don't change them!
-	private static final int QUESTION_ID_SINGING_CONTEST_NAME = 1001;
-	private static final int QUESTION_ID_SINGING_CONTEST_VOTE = 1002;
-	private static final int QUESTION_ID_SHOWCASE_NAME = 1003;
+	private static final int QUESTION_ID_COSPLAY_VOTE = 1002;
 	private static final int QUESTION_ID_SHOWCASE_VOTE = 1004;
 
 	// Special events server id
-	private static final int EVENT_ID_SHOWCASE = 3039;
-	private static final int EVENT_ID_SINGING_CONTEST = 2984;
+	private static final int EVENT_ID_SHOWCASE = 4612;
+	private static final int EVENT_ID_COSPLAY = 4610;
 
 	// Ids of google spreadsheets associated with the special events
-	private static final String SHOWCASE_SPREADSHEET_ID = "1zpNagg3Rmf7CGolTV5D8253cWgnbfVHAFE0gvBYHzEw";
-	private static final String SINGING_CONTEST_SPREADSHEET_ID = "1Zqd6-hNGw7lqcyk9rONdQbFX6BnSlQ7gPr0_THPYmrc";
+	private static final String SHOWCASE_SPREADSHEET_ID = "1QRRw453cyzIDPgnFXah735J2BDd2GebThjCIlI6o5UM";
+	private static final String COSPLAY_SPREADSHEET_ID = "1su0vTI4rvaN_B7cAgzME-5mfKKyHEyzCICPLHbNsGUM";
 
 	static {
-		FeedbackQuestion.addQuestion(QUESTION_ID_SINGING_CONTEST_NAME, R.string.singing_contest_name_question);
-		FeedbackQuestion.addQuestion(QUESTION_ID_SINGING_CONTEST_VOTE, R.string.singing_contest_vote_question);
-		FeedbackQuestion.addQuestion(QUESTION_ID_SHOWCASE_NAME, R.string.showcase_name_question);
+		FeedbackQuestion.addQuestion(QUESTION_ID_COSPLAY_VOTE, R.string.cosplay_vote_question);
 		FeedbackQuestion.addQuestion(QUESTION_ID_SHOWCASE_VOTE, R.string.showcase_vote_question);
 	}
 
@@ -480,21 +476,19 @@ public class Harucon2018Convention extends AmaiConvention {
 		try {
 			if (event.getServerId() == EVENT_ID_SHOWCASE) {
 				SurveyForm form = new SurveyForm()
-						.withQuestionEntry(QUESTION_ID_SHOWCASE_NAME, "entry.1893333202")
-						.withQuestionEntry(QUESTION_ID_SHOWCASE_VOTE, "entry.1772924702")
-						.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSf4m0Azy1HFovoPF7VXY0IFLM1s0z0o18SDHfjZKw6c6UXvcw/formResponse"));
+						.withQuestionEntry(QUESTION_ID_SHOWCASE_VOTE, "entry.774724773")
+						.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSf8YA74ASQ3MXcd5Fjl2iWS2epA-RLTTS5iSI7FSedw-jjT3w/formResponse"));
 
 				SurveyDataRetriever.DisabledMessage disabledMessageRetriever = new SurveyDataRetriever.GoogleSpreadSheet(SHOWCASE_SPREADSHEET_ID);
 
 				return new EventVoteSurveyFormSender(form, event.getUserInput().getVoteSurvey(), disabledMessageRetriever);
 
-			} else if (event.getServerId() == EVENT_ID_SINGING_CONTEST) {
+			} else if (event.getServerId() == EVENT_ID_COSPLAY) {
 				SurveyForm form = new SurveyForm()
-						.withQuestionEntry(QUESTION_ID_SINGING_CONTEST_NAME, "entry.109802680")
-						.withQuestionEntry(QUESTION_ID_SINGING_CONTEST_VOTE, "entry.1600353678")
-						.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLScyynW3kBT4blxsiEBzdEbMV-6pEuKhjux0PesVteOUTqffWA/formResponse"));
+						.withQuestionEntry(QUESTION_ID_COSPLAY_VOTE, "entry.751291262")
+						.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSeT-yAg5y3CUXC36THZxrpH7jeM9ozQ8JeQE79PuHabw64gIA/formResponse"));
 
-				SurveyDataRetriever.DisabledMessage disabledMessageRetriever = new SurveyDataRetriever.GoogleSpreadSheet(SINGING_CONTEST_SPREADSHEET_ID);
+				SurveyDataRetriever.DisabledMessage disabledMessageRetriever = new SurveyDataRetriever.GoogleSpreadSheet(COSPLAY_SPREADSHEET_ID);
 
 				return new EventVoteSurveyFormSender(form, event.getUserInput().getVoteSurvey(), disabledMessageRetriever);
 			}
@@ -511,8 +505,8 @@ public class Harucon2018Convention extends AmaiConvention {
 			case QUESTION_ID_SHOWCASE_VOTE: {
 				return new SurveyDataRetriever.GoogleSpreadSheet(SHOWCASE_SPREADSHEET_ID);
 			}
-			case QUESTION_ID_SINGING_CONTEST_VOTE: {
-				return new SurveyDataRetriever.GoogleSpreadSheet(SINGING_CONTEST_SPREADSHEET_ID);
+			case QUESTION_ID_COSPLAY_VOTE: {
+				return new SurveyDataRetriever.GoogleSpreadSheet(COSPLAY_SPREADSHEET_ID);
 			}
 		}
 
@@ -532,13 +526,11 @@ public class Harucon2018Convention extends AmaiConvention {
 		if (userInput.getVoteSurvey() == null && event != null) {
 			if (event.getServerId() == EVENT_ID_SHOWCASE) {
 				userInput.setVoteSurvey(new Survey().withQuestions(
-						new FeedbackQuestion(QUESTION_ID_SHOWCASE_NAME, FeedbackQuestion.AnswerType.TEXT, true),
 						new FeedbackQuestion(QUESTION_ID_SHOWCASE_VOTE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO, true)
 				));
-			} else if (event.getServerId() == EVENT_ID_SINGING_CONTEST) {
+			} else if (event.getServerId() == EVENT_ID_COSPLAY) {
 				userInput.setVoteSurvey(new Survey().withQuestions(
-						new FeedbackQuestion(QUESTION_ID_SINGING_CONTEST_NAME, FeedbackQuestion.AnswerType.TEXT, true),
-						new FeedbackQuestion(QUESTION_ID_SINGING_CONTEST_VOTE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO, true)
+						new FeedbackQuestion(QUESTION_ID_COSPLAY_VOTE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO, true)
 				));
 			}
 		}

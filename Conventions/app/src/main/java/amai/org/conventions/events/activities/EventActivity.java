@@ -516,8 +516,8 @@ public class EventActivity extends NavigationActivity {
 			Calendar eventEnd = Calendar.getInstance();
 			eventEnd.setTime(event.getEndTime());
 
-			// Allow until half an hour after event ended to vote (in case there's a delay)
-			eventEnd.add(Calendar.MINUTE, 30);
+			// Allow until some time after the event ended to vote (in case there's a delay in the schedule)
+			eventEnd.add(Calendar.HOUR, 2);
 
 			if (!event.hasStarted() || (eventEnd.getTime().before(Dates.now()) && !voteSurvey.isSent())) {
 				voteSurveyOpenerContainer.setVisibility(View.GONE);

@@ -95,7 +95,7 @@
         <item name="eventDetailsDefaultBackgroundColor">@color/harucon2018_black</item>
         <item name="eventDetailsBoxColor">@color/harucon2018_transparent_black</item>
         <item name="eventFeedbackBoxColor">@color/harucon2018_transparent_red_dark</item>
-        <item name="eventVoteBoxColor">@color/harucon2018_transparent_blue</item>
+        <item name="eventVoteBoxColor">@color/harucon2018_transparent_dark_blue</item>
         <item name="eventDescriptionTextColor">@color/white</item>
         <item name="eventTitleBackground">@drawable/harucon2018_event_title_background</item>
         <item name="eventTitleTextColor">@color/white</item>
