@@ -153,7 +153,7 @@ public class Harucon2018Convention extends AmaiConvention {
 		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/משחקי-קצב-101-מDDR-עד-פופ_נ-מיוזיק.png", R.drawable.event_ddr);
 		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/אמנזיה-וזהות-זכרונות-בנובלות-ויזואליות-ומדיה-יפנית.jpg", R.drawable.event_visual_noval);
 		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/המדריך-לאספן-המנגה.jpg", R.drawable.event_manga_collector);
-		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/החיים-הם-כמו-קופסה-של-וואיפוז-לאפליקציה.jpg", R.drawable.event_gatcha_games);
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/ניסיון-וויפוז.jpg", R.drawable.event_gatcha_games);
 		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/פיינל-פנטזי-15-החלקים-החסרים.jpg", R.drawable.event_ff15);
 		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/הסוכן-החשאי-של-יפן.jpg", R.drawable.event_detective);
 		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/קוואי-פמיניסטי.jpg", R.drawable.event_kawai);
@@ -168,7 +168,7 @@ public class Harucon2018Convention extends AmaiConvention {
 		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/kyotoAnimation.jpg", R.drawable.event_kyoto_animation);
 		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/מסע-האנטי-גיבור.png", R.drawable.event_anti_hero);
 		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/טורניר-פוקימון-לאפליקציה.jpg", R.drawable.event_pokemon);
-		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/מנגה-קפה-לאפליקציה.jpg", R.drawable.event_manga_cafe);
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/מנגה-קפה-לאתר.jpg", R.drawable.event_manga_cafe);
 		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/02/סקיטים-לאתר-אפשרות-2.jpg", R.drawable.event_skits);
 		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/02/Death-in-anime-combined.png", R.drawable.event_death_in_anime);
 		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/מפאנסאב-אנלוגי-ועד-אנימה-בכבלים-סיפורה-של-ADV-ואנימה-במערב.png", R.drawable.event_fansub);
@@ -191,13 +191,15 @@ public class Harucon2018Convention extends AmaiConvention {
 
 		imageMapper.addExcludedIds(
 				// Cosplay / showcase judges
-				"http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/סער-שמר-150x150.jpg",
-				"http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/-מגן-e1515991217865-150x150.jpg",
-				"http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/-סימנובסקי-e1515990944672-150x150.png",
-				"http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/-גלר-e1515991138586-150x150.jpg",
-				"http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/אלי-פודוליאק-150x150.jpg",
-				"http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/אופיר-לוטן-150x150.jpg",
-				"http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/נטע-וייס-150x150.png"
+				"http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/יעל-גלר.jpg",
+				"http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/אלי-פודוליאק.jpg",
+				"http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/02/IMG_9671.jpg",
+				"http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/02/MG_8954.jpg",
+				"http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/סער-שמר.jpg",
+				"http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/סיון-מגן.jpg",
+				"http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/נסטיה-סימנובסקי.png",
+				"http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/אופיר-לוטן.jpg",
+				"http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/נטע-וייס.png"
 		);
 
 		return imageMapper;

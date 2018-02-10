@@ -71,7 +71,7 @@ public class ImageIdToImageResourceMapper {
 			@Override
 			public boolean where(String imageId) {
 				boolean imageExists = imageIdToImageResourceIdMap.containsKey(imageId) && !excludeIds.contains(imageId);
-				if (BuildConfig.DEBUG && !imageExists && !excludeIds.contains(imageId)) {
+				if (BuildConfig.DEBUG && !imageExists && !excludeIds.contains(imageId) && !imageIdToLogoImageResourceIdMap.containsKey(imageId)) {
 					Log.i(TAG, "Unknown image: " + imageId);
 				}
 				return imageExists;
@@ -98,7 +98,7 @@ public class ImageIdToImageResourceMapper {
 			@Override
 			public boolean where(String imageId) {
 				boolean imageExists = imageIdToLogoImageResourceIdMap.containsKey(imageId) && !excludeIds.contains(imageId);
-				if (BuildConfig.DEBUG && !imageExists && !excludeIds.contains(imageId)) {
+				if (BuildConfig.DEBUG && !imageExists && !excludeIds.contains(imageId) && !imageIdToImageResourceIdMap.containsKey(imageId)) {
 					Log.i(TAG, "Unknown image: " + imageId);
 				}
 				return imageExists;
