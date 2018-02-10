@@ -76,9 +76,8 @@
         <item name="eventNonFavoriteColor">@color/white</item>
         <item name="eventFavoriteColor">@color/harucon2018_gold</item>
         <!-- Map Screen -->
-        <item name="locationDetailsBackground">@color/transparent_black</item>
-        <item name="locationDetailsTitleColor">@color/harucon2018_black</item>
-        <item name="mapBackground">@drawable/cami2017_map_background</item>
+        <item name="locationDetailsBackground">@color/transparent_dark_black</item>
+        <item name="mapBackground">@drawable/harucon2018_map_background</item>
         <item name="standIconColor">@color/harucon2018_red_dark</item>
         <item name="standsTypeTitleColor">@color/harucon2018_red_dark</item>
         <!-- Updates Screen -->
