@@ -17,12 +17,17 @@ import amai.org.conventions.feedback.forms.SurveyForm;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.FeedbackQuestion;
+import amai.org.conventions.model.Floor;
 import amai.org.conventions.model.Hall;
 import amai.org.conventions.model.Halls;
 import amai.org.conventions.model.ImageIdToImageResourceMapper;
+import amai.org.conventions.model.MapLocation;
+import amai.org.conventions.model.Place;
 import amai.org.conventions.model.Stand;
+import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.model.Survey;
 import amai.org.conventions.networking.SurveyDataRetriever;
+import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 
 public class Harucon2018Convention extends AmaiConvention {
@@ -32,7 +37,8 @@ public class Harucon2018Convention extends AmaiConvention {
 	private static final String ESHKOL1_NAME = "אשכול 1";
 	private static final String ESHKOL2_NAME = "אשכול 2";
 	private static final String ESHKOL3_NAME = "אשכול 3";
-	private static final String GAMES_NAME = "משחקייה";
+	private static final String WORKSHOPS_NAME = "חדר סדנאות";
+	private static final String GAMES_NAME = "משחקיה";
 
 	// Vote questions - these values are serialized, don't change them!
 	private static final int QUESTION_ID_COSPLAY_VOTE = 1002;
@@ -212,171 +218,193 @@ public class Harucon2018Convention extends AmaiConvention {
 		Hall eshkol1 = new Hall().withName(ESHKOL1_NAME).withOrder(3);
 		Hall eshkol2 = new Hall().withName(ESHKOL2_NAME).withOrder(4);
 		Hall eshkol3 = new Hall().withName(ESHKOL3_NAME).withOrder(5);
-		Hall games = new Hall().withName(GAMES_NAME).withOrder(6);
+		Hall workshops = new Hall().withName(WORKSHOPS_NAME).withOrder(6);
+		Hall games = new Hall().withName(GAMES_NAME).withOrder(7);
 
-		return new Halls(Arrays.asList(mainHall, auditorium, eshkol1, eshkol2, eshkol3, games));
+		return new Halls(Arrays.asList(mainHall, auditorium, eshkol1, eshkol2, eshkol3, workshops, games));
 	}
 
 	@Override
 	protected ConventionMap initMap() {
-		// Empty map until the map for the current convention is set.
-		return new ConventionMap();
-//		Hall mainHall = this.getHalls().findByName(MAIN_HALL_NAME);
-//		Hall schwatrz = this.getHalls().findByName(SCHWARTZ_NAME);
-//		Hall eshkol1 = this.getHalls().findByName(ESHKOL1_NAME);
-//		Hall eshkol2 = this.getHalls().findByName(ESHKOL2_NAME);
-//		Hall eshkol3 = this.getHalls().findByName(ESHKOL3_NAME);
-//		Hall games = this.getHalls().findByName(GAMES_NAME);
-//
-//		Floor floor1 = new Floor(1)
-//				.withName("מפלס תחתון")
-//				.withImageResource(R.raw.cami2017_floor1, true)
-//				.withImageWidth(1319.99646f)
-//				.withImageHeight(678.39734f);
-//		Floor floor2 = new Floor(2)
-//				.withName("מפלס עליון")
-//				.withImageResource(R.raw.cami2017_floor2, true)
-//				.withImageWidth(1403.06506f)
-//				.withImageHeight(788.26996f);
-//
-//		StandsArea agam = new StandsArea().withName("טרקלין אגם").withStands(getAgamStands())/*.withImageResource(R.drawable.stands_agam).withImageWidth(2700).withImageHeight(1504)*/;
-//		StandsArea pinkus = new StandsArea().withName("אולם פינקוס").withStands(getPinkusStands())/*.withImageResource(R.drawable.stands_pinkus).withImageWidth(2700).withImageHeight(1708)*/;
-//		StandsArea nesher = new StandsArea().withName("רחבת הכניסה").withStands(getNesherStands())/*.withImageResource(R.drawable.stands_nesher).withImageWidth(2588).withImageHeight(1588)*/;
-//		return new ConventionMap()
-//				.withFloors(Arrays.asList(floor1, floor2))
-//				.withLocations(
-//						CollectionUtils.flattenList(
-//								inFloor(floor1,
-//										new MapLocation()
-//												.withPlace(new Place().withName("שירותים"))
-//												.withMarkerResource(R.raw.cami2017_marker_toilet, true)
-//												.withSelectedMarkerResource(R.raw.cami2017_marker_toilet_selected, true)
-//												.withMarkerHeight(80.3f)
-//												.withX(1232.263f)
-//												.withY(436.397f),
-//										new MapLocation() // This is before the guest sign post so it will be selected as the stands area
-//												.withName("מודיעין ודוכן אמא\"י")
-//												.withPlace(nesher)
-//												.withMarkerResource(R.raw.cami2017_marker_information, true)
-//												.withSelectedMarkerResource(R.raw.cami2017_marker_information_selected, true)
-//												.withMarkerHeight(119f)
-//												.withX(595.763f)
-//												.withY(257.197f),
-//										new MapLocation()
-//												.withName("מתחם דוכנים")
-//												.withPlace(pinkus)
-//												.withMarkerResource(R.raw.cami2017_marker_stands, true)
-//												.withSelectedMarkerResource(R.raw.cami2017_marker_stands_selected, true)
-//												.withMarkerHeight(78.1f)
-//												.withX(845.563f)
-//												.withY(460.197f),
-//										new MapLocation()
-//												.withPlace(new Place().withName("שמירת חפצים"))
-//												.withMarkerResource(R.raw.cami2017_marker_storage, true)
-//												.withSelectedMarkerResource(R.raw.cami2017_marker_storage_selected, true)
-//												.withMarkerHeight(96.9f)
-//												.withX(752.663f)
-//												.withY(164.997f),
-//										new MapLocation()
-//												.withPlace(new Place().withName("שירותים"))
-//												.withMarkerResource(R.raw.cami2017_marker_toilet, true)
-//												.withSelectedMarkerResource(R.raw.cami2017_marker_toilet_selected, true)
-//												.withMarkerHeight(80.3f)
-//												.withX(721.963f)
-//												.withY(78.997f),
-//										new MapLocation()
-//												.withPlace(eshkol1)
-//												.withMarkerResource(R.raw.cami2017_marker_eshkol1, true)
-//												.withSelectedMarkerResource(R.raw.cami2017_marker_eshkol1_selected, true)
-//												.withMarkerHeight(96.4f)
-//												.withX(347.663f)
-//												.withY(419.197f),
-//										new MapLocation()
-//												.withPlace(schwatrz)
-//												.withMarkerResource(R.raw.cami2017_marker_schwartz, true)
-//												.withSelectedMarkerResource(R.raw.cami2017_marker_schwartz_selected, true)
-//												.withMarkerHeight(94.2f)
-//												.withX(480.135f)
-//												.withY(388.333f),
-//										new MapLocation()
-//												.withPlace(eshkol3)
-//												.withMarkerResource(R.raw.cami2017_marker_eshkol3, true)
-//												.withSelectedMarkerResource(R.raw.cami2017_marker_eshkol3_selected, true)
-//												.withMarkerHeight(97.2f)
-//												.withX(237.763f)
-//												.withY(571.197f),
-//										new MapLocation()
-//												.withPlace(eshkol2)
-//												.withMarkerResource(R.raw.cami2017_marker_eshkol2, true)
-//												.withSelectedMarkerResource(R.raw.cami2017_marker_eshkol2_selected, true)
-//												.withMarkerHeight(97.2f)
-//												.withX(374.063f)
-//												.withY(571.197f),
-//										new MapLocation()
-//												.withPlace(new Place().withName("שירותים"))
-//												.withMarkerResource(R.raw.cami2017_marker_toilet, true)
-//												.withSelectedMarkerResource(R.raw.cami2017_marker_toilet_selected, true)
-//												.withMarkerHeight(80.3f)
-//												.withX(184.263f)
-//												.withY(345.797f)),
-//								inFloor(floor2,
-//										new MapLocation()
-//												.withPlace(new Place().withName("שיפוט קוספליי"))
-//												.withMarkerResource(R.raw.cami2017_marker_cosplay_judgement, true)
-//												.withSelectedMarkerResource(R.raw.cami2017_marker_cosplay_judgement_selected, true)
-//												.withMarkerHeight(96.5f)
-//												.withX(1102.9f)
-//												.withY(601.97f),
-//										new MapLocation()
-//												.withPlace(mainHall)
-//												.withMarkerResource(R.raw.cami2017_marker_main_hall, true)
-//												.withSelectedMarkerResource(R.raw.cami2017_marker_main_hall_selected, true)
-//												.withMarkerHeight(146.703f)
-//												.withX(892.7f)
-//												.withY(425.87f),
-//										new MapLocation()
-//												.withPlace(new Place().withName("שירותים"))
-//												.withMarkerResource(R.raw.cami2017_marker_toilet, true)
-//												.withSelectedMarkerResource(R.raw.cami2017_marker_toilet_selected, true)
-//												.withMarkerHeight(75.5f)
-//												.withX(902.4f)
-//												.withY(113.37f),
-//										new MapLocation()
-//												.withPlace(new Place().withName("מתחם קוספליי"))
-//												.withMarkerResource(R.raw.cami2017_marker_cosplay_area, true)
-//												.withSelectedMarkerResource(R.raw.cami2017_marker_cosplay_area_selected, true)
-//												.withMarkerHeight(186.1f)
-//												.withX(740f)
-//												.withY(592.17f),
-//										new MapLocation()
-//												.withPlace(games)
-//												.withName("משחקייה")
-//												.withMarkerResource(R.raw.cami2017_marker_games, true)
-//												.withSelectedMarkerResource(R.raw.cami2017_marker_games_selected, true)
-//												.withMarkerHeight(96.6f)
-//												.withX(532.2f)
-//												.withY(528.37f),
-//										new MapLocation()
-//												.withName("סמטת האמנים")
-//												.withPlace(agam)
-//												.withMarkerResource(R.raw.cami2017_marker_artist_alley, true)
-//												.withSelectedMarkerResource(R.raw.cami2017_marker_artist_alley_selected, true)
-//												.withMarkerHeight(81.7f)
-//												.withX(532.2f)
-//												.withY(280.97f),
-//										new MapLocation()
-//												.withPlace(new Place().withName("שירותים"))
-//												.withMarkerResource(R.raw.cami2017_marker_toilet, true)
-//												.withSelectedMarkerResource(R.raw.cami2017_marker_toilet_selected, true)
-//												.withMarkerHeight(75.5f)
-//												.withX(187.2f)
-//												.withY(470.17f))
-//						)
-//				);
+		Hall mainHall = this.getHalls().findByName(MAIN_HALL_NAME);
+		Hall schwatrz = this.getHalls().findByName(SCHWARTZ_NAME);
+		Hall eshkol1 = this.getHalls().findByName(ESHKOL1_NAME);
+		Hall eshkol2 = this.getHalls().findByName(ESHKOL2_NAME);
+		Hall eshkol3 = this.getHalls().findByName(ESHKOL3_NAME);
+		Hall workshops = this.getHalls().findByName(WORKSHOPS_NAME);
+		Hall games = this.getHalls().findByName(GAMES_NAME);
+
+		Floor floor1 = new Floor(1)
+				.withName("קומה 1")
+				.withImageResource(R.raw.harucon2018_floor1, true)
+				.withImageWidth(2230.06241f)
+				.withImageHeight(1164.26335f);
+		Floor floor2 = new Floor(2)
+				.withName("קומה 2")
+				.withImageResource(R.raw.harucon2018_floor2, true)
+				.withImageWidth(2224.61499f)
+				.withImageHeight(1478.37012f);
+
+		StandsArea agam = new StandsArea().withName("טרקלין אגם").withStands(getAgamStands())/*.withImageResource(R.drawable.stands_agam).withImageWidth(2700).withImageHeight(1504)*/;
+		StandsArea pinkus = new StandsArea().withName("אולם פינקוס").withStands(getPinkusStands())/*.withImageResource(R.drawable.stands_pinkus).withImageWidth(2700).withImageHeight(1708)*/;
+		StandsArea nesher = new StandsArea().withName("רחבת הכניסה").withStands(getNesherStands())/*.withImageResource(R.drawable.stands_nesher).withImageWidth(2588).withImageHeight(1588)*/;
+		return new ConventionMap()
+				.withFloors(Arrays.asList(floor1, floor2))
+				.withLocations(
+						CollectionUtils.flattenList(
+								inFloor(floor1,
+										new MapLocation()
+												.withPlace(new Place().withName("שירותים"))
+												.withMarkerResource(R.raw.harucon2018_marker_toilet, true)
+												.withSelectedMarkerResource(R.raw.harucon2018_marker_toilet_selected, true)
+												.withMarkerHeight(133.4f)
+												.withX(2065.696f)
+												.withY(743.43f),
+										new MapLocation() // This is before the guest sign post so it will be selected as the stands area
+												.withName("מודיעין ודוכן אמא\"י")
+												.withPlace(nesher)
+												.withMarkerResource(R.raw.harucon2018_marker_information, true)
+												.withSelectedMarkerResource(R.raw.harucon2018_marker_information_selected, true)
+												.withMarkerHeight(197.7f)
+												.withX(1008.296f)
+												.withY(445.73f),
+										new MapLocation()
+												.withName("איזור החתמות")
+												.withPlace(nesher)
+												.withMarkerResource(R.raw.harucon2018_marker_signing, true)
+												.withSelectedMarkerResource(R.raw.harucon2018_marker_signing_selected, true)
+												.withMarkerHeight(154.5f)
+												.withX(1659.196f)
+												.withY(624.43f),
+										new MapLocation()
+												.withName("מתחם דוכנים")
+												.withPlace(pinkus)
+												.withMarkerResource(R.raw.harucon2018_marker_stands, true)
+												.withSelectedMarkerResource(R.raw.harucon2018_marker_stands_selected, true)
+												.withMarkerHeight(129.6f)
+												.withX(1423.196f)
+												.withY(783.13f),
+										new MapLocation()
+												.withPlace(new Place().withName("שמירת חפצים"))
+												.withMarkerResource(R.raw.harucon2018_marker_storage, true)
+												.withSelectedMarkerResource(R.raw.harucon2018_marker_storage_selected, true)
+												.withMarkerHeight(161f)
+												.withX(1268.996f)
+												.withY(292.73f),
+										new MapLocation()
+												.withPlace(new Place().withName("שירותים"))
+												.withMarkerResource(R.raw.harucon2018_marker_toilet, true)
+												.withSelectedMarkerResource(R.raw.harucon2018_marker_toilet_selected, true)
+												.withMarkerHeight(133.4f)
+												.withX(1217.996f)
+												.withY(149.83f),
+										new MapLocation()
+												.withPlace(eshkol1)
+												.withMarkerResource(R.raw.harucon2018_marker_eshkol1, true)
+												.withSelectedMarkerResource(R.raw.harucon2018_marker_eshkol1_selected, true)
+												.withMarkerHeight(160.1f)
+												.withX(596.196f)
+												.withY(715.03f),
+										new MapLocation()
+												.withPlace(schwatrz)
+												.withMarkerResource(R.raw.harucon2018_marker_schwartz, true)
+												.withSelectedMarkerResource(R.raw.harucon2018_marker_schwartz_selected, true)
+												.withMarkerHeight(156.5f)
+												.withX(789.096f)
+												.withY(653.73f),
+										new MapLocation()
+												.withPlace(eshkol3)
+												.withMarkerResource(R.raw.harucon2018_marker_eshkol3, true)
+												.withSelectedMarkerResource(R.raw.harucon2018_marker_eshkol3_selected, true)
+												.withMarkerHeight(161.3f)
+												.withX(413.596f)
+												.withY(967.53f),
+										new MapLocation()
+												.withPlace(eshkol2)
+												.withMarkerResource(R.raw.harucon2018_marker_eshkol2, true)
+												.withSelectedMarkerResource(R.raw.harucon2018_marker_eshkol2_selected, true)
+												.withMarkerHeight(161.3f)
+												.withX(640.146f)
+												.withY(967.53f),
+										new MapLocation()
+												.withPlace(new Place().withName("שירותים"))
+												.withMarkerResource(R.raw.harucon2018_marker_toilet, true)
+												.withSelectedMarkerResource(R.raw.harucon2018_marker_toilet_selected, true)
+												.withMarkerHeight(133.4f)
+												.withX(324.796f)
+												.withY(593.03f)),
+								inFloor(floor2,
+										new MapLocation()
+												.withPlace(workshops)
+												.withMarkerResource(R.raw.harucon2018_marker_workshops, true)
+												.withSelectedMarkerResource(R.raw.harucon2018_marker_workshops_selected, true)
+												.withMarkerHeight(162.3f)
+												.withX(1846.75f)
+												.withY(1306.07f),
+										new MapLocation()
+												.withPlace(new Place().withName("חדר בריחה"))
+												.withMarkerResource(R.raw.harucon2018_marker_escape_room, true)
+												.withSelectedMarkerResource(R.raw.harucon2018_marker_escape_room_selected, true)
+												.withMarkerHeight(155f)
+												.withX(1628.25f)
+												.withY(1195.77f),
+										new MapLocation()
+												.withPlace(new Place().withName("שיפוט קוספליי"))
+												.withMarkerResource(R.raw.harucon2018_marker_cosplay_judgement, true)
+												.withSelectedMarkerResource(R.raw.harucon2018_marker_cosplay_judgement_selected, true)
+												.withMarkerHeight(160.3f)
+												.withX(1732.75f)
+												.withY(993.17f),
+										new MapLocation()
+												.withPlace(mainHall)
+												.withMarkerResource(R.raw.harucon2018_marker_main_hall, true)
+												.withSelectedMarkerResource(R.raw.harucon2018_marker_main_hall_selected, true)
+												.withMarkerHeight(243.707f)
+												.withX(1383.65f)
+												.withY(700.57f),
+										new MapLocation()
+												.withPlace(new Place().withName("שירותים"))
+												.withMarkerResource(R.raw.harucon2018_marker_toilet, true)
+												.withSelectedMarkerResource(R.raw.harucon2018_marker_toilet_selected, true)
+												.withMarkerHeight(125.4f)
+												.withX(1399.65f)
+												.withY(181.57f),
+										new MapLocation()
+												.withPlace(new Place().withName("מתחם קוספליי"))
+												.withMarkerResource(R.raw.harucon2018_marker_cosplay_area, true)
+												.withSelectedMarkerResource(R.raw.harucon2018_marker_cosplay_area_selected, true)
+												.withMarkerHeight(309.2f)
+												.withX(1129.85f)
+												.withY(976.87f),
+										new MapLocation()
+												.withPlace(games)
+												.withName("משחקייה")
+												.withMarkerResource(R.raw.harucon2018_marker_gaming, true)
+												.withSelectedMarkerResource(R.raw.harucon2018_marker_gaming_selected, true)
+												.withMarkerHeight(160.4f)
+												.withX(784.65f)
+												.withY(870.97f),
+										new MapLocation()
+												.withName("סמטת האמנים")
+												.withPlace(agam)
+												.withMarkerResource(R.raw.harucon2018_marker_artist_alley, true)
+												.withSelectedMarkerResource(R.raw.harucon2018_marker_artist_alley_selected, true)
+												.withMarkerHeight(135.7f)
+												.withX(784.75f)
+												.withY(459.97f),
+										new MapLocation()
+												.withPlace(new Place().withName("שירותים"))
+												.withMarkerResource(R.raw.harucon2018_marker_toilet, true)
+												.withSelectedMarkerResource(R.raw.harucon2018_marker_toilet_selected, true)
+												.withMarkerHeight(125.4f)
+												.withX(211.65f)
+												.withY(774.27f))
+						)
+				);
 	}
 
 	private List<Stand> getPinkusStands() {
-		// TODO update stands for cami 2017
+		// TODO update stands for harucon 2018
 		return Arrays.asList(
 //				new Stand().withName("otaku shop").withType(Stand.StandType.REGULAR_STAND).withLocationName("c01-c04").withImageX(825).withImageY(535),
 //				new Stand().withName("retro game center").withType(Stand.StandType.REGULAR_STAND).withLocationName("c05-c08").withImageX(1016).withImageY(535),
@@ -426,7 +454,7 @@ public class Harucon2018Convention extends AmaiConvention {
 	}
 
 	private List<Stand> getAgamStands() {
-		// TODO update stands for cami 2017
+		// TODO update stands for harucon 2018
 		return Arrays.asList(
 //				new Stand().withName("Besandilove - להתלבש בתשוקה").withType(Stand.StandType.REGULAR_STAND).withLocationName("a01").withImageX(396).withImageY(441),
 //				new Stand().withName("גברת וודו").withType(Stand.StandType.REGULAR_STAND).withLocationName("a02").withImageX(445).withImageY(441),
@@ -462,7 +490,7 @@ public class Harucon2018Convention extends AmaiConvention {
 	}
 
 	private List<Stand> getNesherStands() {
-		// TODO update stands for cami 2017
+		// TODO update stands for harucon 2018
 		return Arrays.asList(
 //				new Stand().withName("מודיעין ודוכן אמא\"י").withType(Stand.StandType.REGULAR_STAND).withImageX(1276).withImageY(948),
 //				new Stand().withName("שגרירות יפן").withType(Stand.StandType.REGULAR_STAND).withImageX(1112).withImageY(1000),

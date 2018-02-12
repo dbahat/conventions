@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   id="svg5784"
+   viewBox="0 0 161.5 154.99998"
+   height="43.744438mm"
+   width="45.578888mm">
+  <defs
+     id="defs5786" />
+  <metadata
+     id="metadata5789">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(-233.53572,-523.43365)"
+     id="layer1">
+    <rect
+       id="rect475_2_"
+       x="233.53572"
+       y="523.43365"
+       class="st13"
+       width="161.5"
+       height="49.700001"
+       style="fill:#6f4d80" />
+    <g
+       transform="translate(-2384.8643,325.23363)"
+       id="XMLID_4_">
+      <path
+         id="XMLID_27_"
+         class="st5"
+         d="m 2636.3,217.8 0.6,-2 3.7,0 0,10.2 -4.3,0 0,-8.2 z m 10,-3.5 c 0,-1.5 -0.7,-2.2 -2,-2.2 l -7.8,0 0,-3.2 9,0 c 1.6,0 2.9,0.5 3.8,1.4 0.9,0.9 1.4,2.3 1.4,4.3 l 0,11.4 -4.3,0 0,-11.7 z"
+         style="fill:#ffffff" />
+      <path
+         id="XMLID_30_"
+         class="st5"
+         d="m 2666.9,210.4 c 0.9,1 1.4,2.4 1.4,4.3 l 0,11.3 -4.3,0 0,-11.5 c 0,-1.6 -0.7,-2.3 -2,-2.3 l -4,0 0,13.8 -4.3,0 0,-15.1 0,-1.9 9.5,0 c 1.5,-0.1 2.8,0.4 3.7,1.4 z"
+         style="fill:#ffffff" />
+      <path
+         id="XMLID_34_"
+         class="st5"
+         d="m 2671.6,212.4 -0.4,-3.5 4.3,0 0.4,3.5 0,4.7 0,1.9 -4.3,0.7 0,-7.3 z"
+         style="fill:#ffffff" />
+      <path
+         id="XMLID_37_"
+         class="st5"
+         d="m 2686.2,214.3 c 0,-1.5 -0.7,-2.2 -2,-2.2 l -5.8,0 0,-3.2 7,0 c 1.6,0 2.9,0.5 3.8,1.4 0.9,0.9 1.4,2.3 1.4,4.3 l 0,11.4 -4.3,0 0,-11.7 z"
+         style="fill:#ffffff" />
+      <path
+         id="XMLID_39_"
+         class="st5"
+         d="m 2707.5,222.8 0,3.2 -6.3,0 -7.9,0 0,-3.2 7.9,0 0,-8.4 c 0,-1.5 -0.7,-2.2 -2,-2.2 l -5.9,0 0,-3.2 7.1,0 c 1.6,0 2.8,0.5 3.8,1.4 0.9,0.9 1.4,2.3 1.4,4.3 l 0,8.2 1.9,0 z"
+         style="fill:#ffffff" />
+      <path
+         id="XMLID_43_"
+         class="st5"
+         d="m 2723,214.3 c 0,-1.5 -0.7,-2.2 -2,-2.2 l -5.8,0 0,-3.2 7,0 c 1.6,0 2.9,0.5 3.8,1.4 0.9,0.9 1.4,2.3 1.4,4.3 l 0,11.4 -4.3,0 0,-11.7 z"
+         style="fill:#ffffff" />
+      <path
+         id="XMLID_45_"
+         class="st5"
+         d="m 2736.8,215.7 c 0,-0.8 0.1,-1.4 0.2,-2 0.1,-0.6 0.4,-1.1 0.6,-1.5 l -7.7,0 0,-3.2 14,0 0,3.2 -2.3,0 c -0.4,0.9 -0.6,2 -0.6,3.5 l 0,10.3 -4.3,0 0,-10.3 z"
+         style="fill:#ffffff" />
+      <path
+         id="XMLID_50_"
+         class="st5"
+         d="m 2760,210.4 c 0.9,1 1.4,2.4 1.4,4.3 l 0,11.3 -4.3,0 0,-11.5 c 0,-1.6 -0.7,-2.3 -2,-2.3 l -4,0 0,13.8 -4.3,0 0,-15.1 0,-1.9 9.5,0 c 1.6,-0.1 2.8,0.4 3.7,1.4 z"
+         style="fill:#ffffff" />
+    </g>
+    <path
+       id="path819_1_"
+       class="st13"
+       d="m 282.18572,612.33364 c 0,-17.8 14.3,-32.1 32.1,-32.1 17.6,0 32.1,14.5 32.1,32.1 0,17.59999 -32.1,66.09999 -32.1,66.09999 0,0 -32.1,-48.5 -32.1,-66.09999"
+       style="fill:#6f4d80" />
+  </g>
+</svg>
