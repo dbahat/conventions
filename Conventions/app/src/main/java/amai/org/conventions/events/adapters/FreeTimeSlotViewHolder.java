@@ -9,6 +9,7 @@ import java.util.Date;
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.activities.EventsTimeSlot;
+import amai.org.conventions.networking.AmaiModelConverter;
 import amai.org.conventions.utils.Dates;
 
 public class FreeTimeSlotViewHolder extends RecyclerView.ViewHolder {
@@ -33,6 +34,9 @@ public class FreeTimeSlotViewHolder extends RecyclerView.ViewHolder {
 			color = ThemeAttributes.getColor(itemView.getContext(), R.attr.eventTypeEndedColor);
 		} else {
 			color = ThemeAttributes.getColor(itemView.getContext(), R.attr.eventTypeCurrentColor);
+		}
+		if (color == AmaiModelConverter.NO_COLOR) {
+			color = ThemeAttributes.getColor(itemView.getContext(), R.attr.eventTimeHeaderDefaultTextColor);
 		}
 		textView.setTextColor(color);
 	}
