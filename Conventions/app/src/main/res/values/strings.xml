@@ -118,9 +118,11 @@
     <string name="about_content">אמא\"י – ארגון מנגה ואנימה ישראל. הארגון הוקם במאי 2007 על ידי קבוצת חברים בקהילת חובבי המנגה, אנימה ותרבות יפן ופועל למען קהילת חובבים זו.</string>
     <string name="about_links"><![CDATA[
 <p><a href="http://www.amai.org.il/">לאתר אמא\"י</a></p><p><a href="http://2018.harucon.org.il/">לאתר הכנס</a></p>
+<p>איורים: טאה פרנקו<br/><a href="http://ohmilk.tumblr.com">ohmilk.tumblr.com</a></p>
+<p>עיצוב: אניטה קרפל</p>
 ]]></string>
     <string name="about_app_content"><![CDATA[
- האפליקציה פותחה עבור כנס כאמ\"י 2017.<br/>בקשות והצעות ניתן לכתוב <a href="market://details?id=amai.org.conventions">בדף האפליקציה בחנות</a>.
+ האפליקציה פותחה עבור כנס הארוקון 2018.<br/>בקשות והצעות ניתן לכתוב <a href="market://details?id=amai.org.conventions">בדף האפליקציה בחנות</a>.
 ]]></string>
     <string name="question_map_signs">האם המפה והשילוט היו ברורים ושימושיים?</string>
     <string name="question_conflicting_events">אם היה אירוע שרצית ללכת אליו ולא הלכת, מה הסיבה לכך?</string>
@@ -166,7 +168,7 @@
     <string name="show_test_notifications_summary">הצג התראות בדיקה</string>
     <string name="advanced_options_enabled">אפשרויות מתקדמות אופשרו</string>
     <string name="about">אודות</string>
-    <!-- Copied from http://2017.cami.org.il/%d7%9e%d7%99%d7%a7%d7%95%d7%9d-%d7%95%d7%93%d7%a8%d7%9b%d7%99-%d7%94%d7%92%d7%a2%d7%94/
+    <!-- Copied from http://2018.harucon.org.il/%d7%9e%d7%99%d7%a7%d7%95%d7%9d-%d7%95%d7%93%d7%a8%d7%9b%d7%99-%d7%94%d7%92%d7%a2%d7%94/
          with the following changes:
          - Manually added titles for each arrival method category
          - Removed text about using waze (since there is a button for navigation in the activity itself)
@@ -196,6 +198,7 @@
 <p><strong>ראשון לציון:</strong></p>
 <ul>
 <li>קו 433 (אגד, <strong>תחנה מרכזית</strong>, זמן משוערך של שעה ו-35 דקות).</li>
+<li>קו 431 (אגד, <strong>תחנה מרכזית חדשה</strong>, זמן משוער של 50 דק\').</li>
 </ul>
 <p><strong>תל אביב:</strong></p>
 <ul>
