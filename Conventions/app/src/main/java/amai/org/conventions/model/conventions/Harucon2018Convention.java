@@ -39,6 +39,7 @@ public class Harucon2018Convention extends AmaiConvention {
 	private static final String ESHKOL3_NAME = "אשכול 3";
 	private static final String WORKSHOPS_NAME = "חדר סדנאות";
 	private static final String GAMES_NAME = "משחקיה";
+	private static final String SIGNING_AREA_NAME = "אזור החתמות";
 
 	// Vote questions - these values are serialized, don't change them!
 	private static final int QUESTION_ID_COSPLAY_VOTE = 1002;
@@ -189,6 +190,7 @@ public class Harucon2018Convention extends AmaiConvention {
 		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/02/At-Site-Code-Geass02.jpg", R.drawable.event_geass);
 		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/קוף-הדרך-המסע-למערב-בין-האנימה-לסין.jpg", R.drawable.event_goku);
 		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/Whose-Manga-is-it-ANYWAY.png", R.drawable.event_manga_anyway);
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/02/presontation-Yoshimi-Katahira-1.jpg", R.drawable.yoshimi_katahira);
 		// Non-URL IDs
 		imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.harucon2018_home_background);
 
@@ -220,8 +222,8 @@ public class Harucon2018Convention extends AmaiConvention {
 		Hall eshkol3 = new Hall().withName(ESHKOL3_NAME).withOrder(5);
 		Hall workshops = new Hall().withName(WORKSHOPS_NAME).withOrder(6);
 		Hall games = new Hall().withName(GAMES_NAME).withOrder(7);
-
-		return new Halls(Arrays.asList(mainHall, auditorium, eshkol1, eshkol2, eshkol3, workshops, games));
+		Hall singingArea = new Hall().withName(SIGNING_AREA_NAME).withOrder(8);
+		return new Halls(Arrays.asList(mainHall, auditorium, eshkol1, eshkol2, eshkol3, workshops, games, singingArea));
 	}
 
 	@Override
@@ -233,6 +235,7 @@ public class Harucon2018Convention extends AmaiConvention {
 		Hall eshkol3 = this.getHalls().findByName(ESHKOL3_NAME);
 		Hall workshops = this.getHalls().findByName(WORKSHOPS_NAME);
 		Hall games = this.getHalls().findByName(GAMES_NAME);
+		Hall singingArea = this.getHalls().findByName(SIGNING_AREA_NAME);
 
 		Floor floor1 = new Floor(1)
 				.withName("קומה 1")
@@ -270,7 +273,7 @@ public class Harucon2018Convention extends AmaiConvention {
 												.withY(445.73f),
 										new MapLocation()
 												.withName("איזור החתמות")
-												.withPlace(nesher)
+												.withPlace(singingArea)
 												.withMarkerResource(R.raw.harucon2018_marker_signing, true)
 												.withSelectedMarkerResource(R.raw.harucon2018_marker_signing_selected, true)
 												.withMarkerHeight(154.5f)
