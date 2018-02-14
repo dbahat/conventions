@@ -190,7 +190,7 @@ public class Harucon2018Convention extends AmaiConvention {
 		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/02/At-Site-Code-Geass02.jpg", R.drawable.event_geass);
 		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/קוף-הדרך-המסע-למערב-בין-האנימה-לסין.jpg", R.drawable.event_goku);
 		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/Whose-Manga-is-it-ANYWAY.png", R.drawable.event_manga_anyway);
-		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/02/presontation-Yoshimi-Katahira-1.jpg", R.drawable.yoshimi_katahira);
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/02/presontation-Yoshimi-Katahira-1.jpg", R.drawable.event_yoshimi_katahira);
 		// Non-URL IDs
 		imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.harucon2018_home_background);
 
