@@ -377,7 +377,7 @@ public class Harucon2018Convention extends AmaiConvention {
 												.withPlace(new Place().withName("מתחם קוספליי"))
 												.withMarkerResource(R.raw.harucon2018_marker_cosplay_area, true)
 												.withSelectedMarkerResource(R.raw.harucon2018_marker_cosplay_area_selected, true)
-												.withMarkerHeight(309.2f)
+												.withMarkerHeight(301.1f)
 												.withX(1129.85f)
 												.withY(976.87f),
 										new MapLocation()
