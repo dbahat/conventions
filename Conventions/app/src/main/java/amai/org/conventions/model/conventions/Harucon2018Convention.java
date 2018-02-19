@@ -61,7 +61,7 @@ public class Harucon2018Convention extends AmaiConvention {
 
 	@Override
 	protected ConventionStorage initStorage() {
-		return new ConventionStorage(this, R.raw.harucon2018_convention_events, 0);
+		return new ConventionStorage(this, R.raw.harucon2018_convention_events, 1);
 	}
 
 	@Override
@@ -191,6 +191,7 @@ public class Harucon2018Convention extends AmaiConvention {
 		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/קוף-הדרך-המסע-למערב-בין-האנימה-לסין.jpg", R.drawable.event_goku);
 		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/01/Whose-Manga-is-it-ANYWAY.png", R.drawable.event_manga_anyway);
 		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/02/presontation-Yoshimi-Katahira-1.jpg", R.drawable.event_yoshimi_katahira);
+		imageMapper.addMapping("http://2018.harucon.org.il/wp-content/uploads/sites/14/2018/02/16583_271.jpg", R.drawable.event_naginata);
 		// Non-URL IDs
 		imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.harucon2018_home_background);
 
