@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="AppBaseTheme.Icon2017.Toolbar"/>
-    <style name="AppBaseTheme.Icon2017">
+    <style name="AppBaseTheme.Icon2017" parent="AppBaseTheme.Light">
         <!-- Sub-themes -->
         <item name="android:dialogTheme">@style/AppDialogTheme.Icon2017</item>
         <item name="alertDialogTheme">@style/AppAlertDialogTheme.Icon2017</item>
@@ -19,7 +19,6 @@
         <item name="feedbackButtonColor">@color/white</item>
         <item name="feedbackAnswerButtonColor">@color/icon2017_brown</item>
         <item name="feedbackAnswerButtonSelectedColor">@color/icon2017_green</item>
-        <item name="shadowForeground">@null</item>
         <item name="activitiesBackground">@drawable/icon2017_page_background</item>
         <item name="eventListDivider">@drawable/event_list_divider</item>
         <item name="conflictingEventListDivider">@drawable/conflicting_event_list_divider</item>
@@ -31,7 +30,6 @@
 
         <!-- Notifications -->
         <item name="notificationSmallIcon">@drawable/icon2017_notification_small</item>
-        <item name="notificationLargeIcon">@mipmap/icon2017_app_icon</item>
         <!-- Toolbar -->
         <item name="toolbarBackground">@null</item>
         <item name="toolbarLogo">@drawable/ic_menu_black_24dp</item>
@@ -91,6 +89,7 @@
         <item name="eventTitleBackground">@drawable/icon2017_event_title_background</item>
         <item name="eventTitleTextColor">@color/white</item>
         <item name="eventDetailsHighlightedTextColor">@color/light_yellow</item>
+        <item name="eventTimeHeaderDefaultTextColor">@color/black</item>
         <!-- Feedback Screen -->
         <item name="progressBarDrawable">@drawable/icon2017_rotating_circular_progress_bar</item>
         <!-- Programme Screen -->

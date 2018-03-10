@@ -33,7 +33,7 @@ public class PushNotificationDialogPresenter {
             // In that case the preferences are deleted so the last notification id will be the same but we also can't tell
             // if the user already saw this notification. Removing the extra from the intent doesn't work.
             int lastSeenNotification = ConventionsApplication.settings.getLastSeenPushNotificationId();
-            if (lastSeenNotification != Settings.NO_PUSH_NOTIFICATION_SEEN && lastSeenNotification == pushNotification.id) {
+            if (lastSeenNotification != Settings.NO_PUSH_NOTIFICATION_SEEN_NOTIFICATION_ID && lastSeenNotification == pushNotification.id) {
                 return; // Already seen this notification
             }
             ConventionsApplication.settings.setLastSeenPushNotificationId(pushNotification.id);

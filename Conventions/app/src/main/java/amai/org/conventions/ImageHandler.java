@@ -20,7 +20,6 @@ import sff.org.conventions.R;
 public class ImageHandler {
 	private static final AssetsExternalFileResolver resolver = new AssetsExternalFileResolver();
 	private static Map<Integer, SVG> loadedSVGFiles = new HashMap<>();
-	private static Bitmap notificationLargeIcon;
 
 	public static SVG loadSVG(Context context, int resource) {
 		try {
@@ -39,22 +38,9 @@ public class ImageHandler {
 		}
 	}
 
-	public static synchronized Bitmap getNotificationLargeIcon(Context context) {
-		if (notificationLargeIcon != null) {
-			return notificationLargeIcon;
-		}
-
-		// Resizing the notification icon manually since the notification area doesn't auto-resize the icon.
-		notificationLargeIcon = resizeBitmap(
-				ThemeAttributes.getDrawable(context, R.attr.notificationLargeIcon),
-				context.getResources().getDimensionPixelSize(R.dimen.notification_large_icon_size));
-		return notificationLargeIcon;
-	}
-
 	public static void releaseCache() {
 		// Release all collected images from the map
 		loadedSVGFiles = new HashMap<>();
-		notificationLargeIcon = null;
 	}
 
 	private static void setSVGProperties(SVG svg) throws SVGParseException {

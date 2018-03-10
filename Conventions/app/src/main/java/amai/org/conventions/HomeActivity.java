@@ -116,7 +116,7 @@ public class HomeActivity extends NavigationActivity {
 			upcomingEventTitle.setText(currentEvent.getTitle());
 			upcomingEventTime.setText(getString(R.string.home_now_showing, ""));
 			upcomingEventHall.setText(currentEvent.getHall().getName());
-			upcomingEventContainer.setBackgroundColor(ThemeAttributes.getColor(this, R.attr.homeCurrentEventBackground));
+			upcomingEventContainer.setBackground(ThemeAttributes.getDrawable(this, R.attr.homeCurrentEventBackground));
 			if (currentEvent.getUserInput().getVoteSurvey() != null) {
 				upcomingEventVoteText.setVisibility(View.VISIBLE);
 			} else {
@@ -316,12 +316,6 @@ public class HomeActivity extends NavigationActivity {
 			// The feedback filling time is over or feedback was sent. Allow the user to see his feedback
 			titleView.setText(R.string.home_convention_ended);
 			contentView.setText(R.string.home_show_feedback);
-			contentView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 50);
-			ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) contentView.getLayoutParams();
-			int margins = getResources().getDimensionPixelOffset(R.dimen.home_show_feedback_text_view_margins);
-			layoutParams.setMarginStart(margins);
-			layoutParams.setMarginEnd(margins);
-			contentView.setLayoutParams(layoutParams);
 		} else {
 			// Ask the user to fill feedback
 			titleView.setText(R.string.home_help_us_improve);

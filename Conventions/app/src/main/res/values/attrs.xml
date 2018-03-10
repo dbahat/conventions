@@ -10,6 +10,8 @@
     </declare-styleable>
 
     <declare-styleable name="ApplicationTheme">
+        <!-- Sub-themes -->
+        <attr name="numberPickerTheme" format="integer|reference"/>
         <!-- Events Lists -->
         <attr name="eventListDivider" format="color|reference"/>
         <attr name="conflictingEventListDivider" format="color|reference"/>
@@ -17,15 +19,14 @@
         <attr name="activitiesBackground" format="color|reference"/>
         <attr name="actionButtonColor" format="color|reference"/>
         <attr name="hintTextColor" format="color|reference"/>
+        <attr name="separatorColor" format="color|reference"/>
         <!-- Notifications -->
         <attr name="notificationSmallIcon" format="integer"/>
-        <attr name="notificationLargeIcon" format="integer"/>
         <!-- Toolbar -->
+        <attr name="toolbarTitleColor" format="color|reference"/>
         <attr name="toolbarBackground" format="color|reference"/>
         <attr name="toolbarLogo" format="integer|reference"/>
         <attr name="toolbarIconAccentColor" format="color|reference"/>
-        <!-- Days Tab Layout -->
-        <attr name="shadowForeground" format="integer|reference"/>
         <!-- Snackbar -->
         <attr name="snackbarActionColor" format="color|reference"/>
         <!-- Swipe to Refresh -->
@@ -34,6 +35,9 @@
         <attr name="eventTypeEndedColor" format="color|reference"/>
         <attr name="eventTypeCurrentColor" format="color|reference"/>
         <attr name="eventTypeNotStartedColor" format="color|reference"/>
+        <attr name="eventTypeEndedBackgroundColor" format="color|reference"/>
+        <attr name="eventTypeCurrentBackgroundColor" format="color|reference"/>
+        <attr name="eventTypeNotStartedBackgroundColor" format="color|reference"/>
         <attr name="eventNameKeywordHighlightColor" format="color|reference"/>
         <attr name="eventKeywordHighlightColor" format="color|reference"/>
         <attr name="eventTimeDefaultTextColor" format="color|reference"/>
@@ -56,8 +60,12 @@
         <attr name="homeMessageText" format="color|reference"/>
         <attr name="homeCurrentEventBackground" format="color|reference"/>
         <attr name="homeUpcomingEventBackground" format="color|reference"/>
+        <attr name="homeEventNameInList" format="color|reference"/>
         <attr name="homeButtonBackground" format="color|reference"/>
         <attr name="homeButtonText" format="color|reference"/>
+        <attr name="homeBoxTopMargin" format="dimension"/>
+        <attr name="homeSingleButtonTopMargin" format="dimension"/>
+        <attr name="homeSingleButtonStyle" format="integer|reference"/>
         <!-- My Events Screen -->
         <attr name="nextEventStartTimeBackground" format="color|reference"/>
         <attr name="nextEventStartTimeTextColor" format="color|reference"/>
@@ -81,6 +89,8 @@
         <attr name="locationDetailsTopLineColor" format="color|reference"/>
         <attr name="locationDetailsTitleColor" format="color|reference"/>
         <attr name="mapBackground" format="color|reference"/>
+        <attr name="iconFloorUp" format="integer|reference"/>
+        <attr name="iconFloorDown" format="integer|reference"/>
         <attr name="standIconColor" format="color|reference"/>
         <attr name="standsTypeTitleColor" format="color|reference"/>
         <!-- Event Screen -->
@@ -108,6 +118,20 @@
         <attr name="conventionFeedbackTextColor" format="color|reference"/>
         <!-- Programme Screen -->
         <attr name="eventTimeHeaderBackground" format="color|reference"/>
+        <attr name="eventTimeHeaderDefaultTextColor" format="color|reference"/>
+        <!-- Icons -->
+        <attr name="iconAddToFavorites" format="integer|reference"/>
+        <attr name="iconShrink" format="integer|reference"/>
+        <attr name="iconEnlarge" format="integer|reference"/>
+        <attr name="iconFavorites" format="integer|reference"/>
+        <attr name="iconDirections" format="integer|reference"/>
+        <attr name="iconTransport" format="integer|reference"/>
+        <attr name="iconAlarm" format="integer|reference"/>
+        <attr name="iconProgramme" format="integer|reference"/>
+        <attr name="iconClear" format="integer|reference"/>
+        <attr name="iconShare" format="integer|reference"/>
+        <attr name="iconFeedback" format="integer|reference"/>
+        <attr name="iconMap" format="integer|reference"/>
         <!-- Second Hand Screen -->
         <attr name="secondHandFormOpenColor" format="color|reference"/>
         <attr name="secondHandFormClosedColor" format="color|reference"/>

@@ -5,7 +5,7 @@
     <item
         android:id="@+id/programme_search_back"
         android:title="@string/back"
-        android:icon="@drawable/ic_clear"
+        android:icon="?iconClear"
         android:orderInCategory="1"
         app:showAsAction="always"/>
 

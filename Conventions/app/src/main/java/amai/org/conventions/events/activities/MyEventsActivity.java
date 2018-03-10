@@ -44,7 +44,6 @@ import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
-import amai.org.conventions.notifications.AzurePushNotifications;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
@@ -216,8 +215,9 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 				if (event != null) {
 					changed = true;
 					ConventionsApplication.alarmScheduler.scheduleDefaultEventAlarms(event);
-					AzurePushNotifications notifications = new AzurePushNotifications(this);
-					notifications.registerAsync(new AzurePushNotifications.RegistrationListener.DoNothing());
+					// TODO - Register / un-register the event from the per-event category here
+//					AzurePushNotifications notifications = new AzurePushNotifications(this);
+//					notifications.registerAsync(new AzurePushNotifications.RegistrationListener.DoNothing());
 				}
 			}
 			if (changed) {

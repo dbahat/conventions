@@ -15,7 +15,6 @@ import amai.org.conventions.events.adapters.EventGroupsAdapter;
 import amai.org.conventions.events.holders.SwipeableEventViewHolder;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.conventions.Convention;
-import amai.org.conventions.notifications.AzurePushNotifications;
 import sff.org.conventions.R;
 
 public class EventSwipeToDismissListener implements SwipeableEventViewHolder.OnEventSwipedListener {
@@ -43,9 +42,9 @@ public class EventSwipeToDismissListener implements SwipeableEventViewHolder.OnE
 
 		ConventionsApplication.alarmScheduler.cancelDefaultEventAlarms(viewHolder.getModel());
 
-		// Renew push notification registration based on the new favorites state
-		AzurePushNotifications notifications = new AzurePushNotifications(viewHolder.itemView.getContext());
-		notifications.registerAsync(new AzurePushNotifications.RegistrationListener.DoNothing());
+		// TODO Renew push notification registration based on the new favorites state
+//		AzurePushNotifications notifications = new AzurePushNotifications(viewHolder.itemView.getContext());
+//		notifications.registerAsync(new AzurePushNotifications.RegistrationListener.DoNothing());
 
 		int adapterPosition = viewHolder.getAdapterPosition();
 
@@ -67,8 +66,9 @@ public class EventSwipeToDismissListener implements SwipeableEventViewHolder.OnE
 				updatedEvent.setAttending(true);
 				ConventionsApplication.alarmScheduler.scheduleDefaultEventAlarms(updatedEvent);
 				Convention.getInstance().getStorage().saveUserInput();
-				AzurePushNotifications notifications = new AzurePushNotifications(viewHolder.itemView.getContext());
-				notifications.registerAsync(new AzurePushNotifications.RegistrationListener.DoNothing());
+				// TODO - Remove from per-event category here
+//				AzurePushNotifications notifications = new AzurePushNotifications(viewHolder.itemView.getContext());
+//				notifications.registerAsync(new AzurePushNotifications.RegistrationListener.DoNothing());
 				if (adapter instanceof EventGroupsAdapter) {
 					((EventGroupsAdapter) adapter).updateEventGroups();
 				} else {

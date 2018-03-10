@@ -3,6 +3,7 @@ package amai.org.conventions.model.conventions;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -56,8 +57,8 @@ import amai.org.conventions.utils.Objects;
 import sff.org.conventions.BuildConfig;
 
 public abstract class Convention implements Serializable {
-	private static Convention convention = new Icon2017Convention();
 
+	private static Convention convention = new Icon2017Convention();
 	public static final int NO_COLOR = Color.TRANSPARENT; // Assuming we will never get this from the server...
 
 	// Currently supporting conventions of up to 5 days (UI restriction, since the programme is set
@@ -95,6 +96,12 @@ public abstract class Convention implements Serializable {
 	public static Convention getInstance() {
 		return convention;
 	}
+
+	@VisibleForTesting
+	public static void setConvention(Convention convention) {
+		Convention.convention = convention;
+	}
+
 
 	public ConventionStorage getStorage() {
 		return conventionStorage;

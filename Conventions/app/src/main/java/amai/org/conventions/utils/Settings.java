@@ -2,8 +2,10 @@ package amai.org.conventions.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -11,11 +13,14 @@ import java.util.Set;
 
 import amai.org.conventions.events.SearchCategory;
 import amai.org.conventions.model.conventions.Convention;
+import amai.org.conventions.notifications.PushNotificationTopic;
+import sff.org.conventions.R;
 
 public class Settings {
-	public static final int NO_PUSH_NOTIFICATION_SEEN = -1;
+	public static final int NO_PUSH_NOTIFICATION_SEEN_NOTIFICATION_ID = -1;
 
 	private static final String SETTINGS_SUFFIX = "settings";
+	private static final String PREFERENCES_FILE_NAME = Convention.getInstance().getId() + "_" + SETTINGS_SUFFIX;
 	private static final String WAS_FEEDBACK_NOTIFICATION_SHOWN = "WasFeedbackNotificationShown";
 	private static final String WAS_LAST_CHANCE_FEEDBACK_NOTIFICATION_SHOWN = "WasLastChanceFeedbackNotificationShown";
 	private static final String WAS_NAVIGATION_POPUP_OPENED = "WasNavigationPopupOpened";
@@ -27,11 +32,32 @@ public class Settings {
 	private static final String LAST_UPDATES_UPDATE_DATE = "LastUpdatesUpdateDate";
 	private static final String LAST_SECOND_HAND_UPDATE_DATE = "LastSecondHandUpdateDate";
 
-	private SharedPreferences sharedPreferences;
+	private static final String IS_ADVANCED_OPTIONS_ENABLED = "isAdvancedOptionsEnabled";
+
+	private final SharedPreferences sharedPreferences;
 
 	public Settings(Context context) {
-		String preferencesName = Convention.getInstance().getId() + "_" + SETTINGS_SUFFIX;
-		sharedPreferences = context.getSharedPreferences(preferencesName, Context.MODE_PRIVATE);
+		PreferenceManager.setDefaultValues(context, Settings.PREFERENCES_FILE_NAME, Context.MODE_PRIVATE, R.xml.settings_preferences, false);
+		sharedPreferences = context.getSharedPreferences(PREFERENCES_FILE_NAME, Context.MODE_PRIVATE);
+	}
+
+	public List<String> getNotificationTopics() {
+		List<PushNotificationTopic> topics = CollectionUtils.filter(
+				Arrays.asList(PushNotificationTopic.values()),
+				new CollectionUtils.Predicate<PushNotificationTopic>() {
+					@Override
+					public boolean where(PushNotificationTopic item) {
+						return item == PushNotificationTopic.TOPIC_EMERGENCY || sharedPreferences.getBoolean(item.getTopic(), false);
+					}
+				});
+		return CollectionUtils.map(
+				topics,
+				new CollectionUtils.Mapper<PushNotificationTopic, String>() {
+					@Override
+					public String map(PushNotificationTopic item) {
+						return item.getTopic();
+					}
+				});
 	}
 
 	public boolean wasConventionFeedbackNotificationShown() {
@@ -75,7 +101,7 @@ public class Settings {
 	}
 
 	public int getLastSeenPushNotificationId() {
-		return sharedPreferences.getInt(LAST_SEEN_PUSH_NOTIFICATION_ID, NO_PUSH_NOTIFICATION_SEEN);
+		return sharedPreferences.getInt(LAST_SEEN_PUSH_NOTIFICATION_ID, NO_PUSH_NOTIFICATION_SEEN_NOTIFICATION_ID);
 	}
 
 	public void setLastSeenPushNotificationId(int notificationId) {
@@ -119,6 +145,14 @@ public class Settings {
 			return null;
 		}
 		return new Date(date);
+	}
+
+	public void setAdvancedOptionsEnabled(boolean enabled) {
+		sharedPreferences.edit().putBoolean(IS_ADVANCED_OPTIONS_ENABLED, enabled).apply();
+	}
+
+	public boolean isAdvancedOptionsEnabled() {
+		return sharedPreferences.getBoolean(IS_ADVANCED_OPTIONS_ENABLED, false);
 	}
 
 	public void setLastUpdatesUpdatedDate() {

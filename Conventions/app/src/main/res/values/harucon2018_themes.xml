@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--<style name="AppBaseTheme.Harucon2018.Toolbar" parent="AppBaseTheme.Harucon2018"/>-->
+
+    <!--<style name="AppBaseTheme.Harucon2018" parent="AppBaseTheme.Dark">-->
+        <!--&lt;!&ndash; Sub-themes &ndash;&gt;-->
+        <!--<item name="android:dialogTheme">@style/AppDialogTheme.Harucon2018</item>-->
+        <!--<item name="alertDialogTheme">@style/AppAlertDialogTheme.Harucon2018</item>-->
+        <!--<item name="numberPickerTheme">@style/AppBaseTheme.Harucon2018.Toolbar.NumberPickerTheme</item>-->
+        <!--&lt;!&ndash; not using android:actionOverflowButtonStyle since it doesn't seem to work in Jellybean &ndash;&gt;-->
+        <!--<item name="actionOverflowButtonStyle">@style/OverflowMenu.Harucon2018</item>-->
+        <!--&lt;!&ndash; General &ndash;&gt;-->
+        <!--<item name="colorAccent">@color/harucon2018_blue</item>-->
+        <!--<item name="android:textColorLink">@color/harucon2018_blue</item>-->
+        <!--<item name="actionButtonColor">@color/harucon2018_blue</item>-->
+        <!--<item name="hintTextColor">@color/harucon2018_blue</item>-->
+        <!--<item name="swipeToRefreshColor">@color/harucon2018_blue</item>-->
+        <!--<item name="snackbarActionColor">@color/harucon2018_blue</item>-->
+        <!--<item name="highlightedButtonBackground">@drawable/harucon2018_highlighted_button</item>-->
+        <!--<item name="borderlessButtonColor">@color/harucon2018_blue</item>-->
+        <!--<item name="feedbackButtonColor">@color/white</item>-->
+        <!--<item name="feedbackAnswerButtonColor">@color/harucon2018_blue_dark</item>-->
+        <!--<item name="feedbackAnswerButtonSelectedColor">@color/harucon2018_blue</item>-->
+        <!--<item name="activitiesBackground">@drawable/harucon2018_page_background</item>-->
+        <!--<item name="eventListDivider">@drawable/harucon2018_event_list_divider</item>-->
+        <!--&lt;!&ndash; Note: if you change the theme, these values should be copied manually to file-->
+         <!--?highlightedButtonBackground (non-v21) because prior to L it was not supported to reference-->
+         <!--theme attributes from a drawable xml &ndash;&gt;-->
+        <!--<item name="buttonColor">@color/harucon2018_blue</item>-->
+        <!--<item name="buttonColorPressed">@color/harucon2018_blue_dark</item>-->
+
+        <!--&lt;!&ndash; Notifications &ndash;&gt;-->
+        <!--<item name="notificationSmallIcon">@drawable/harucon2018_notification_small</item>-->
+        <!--&lt;!&ndash; Toolbar &ndash;&gt;-->
+        <!--<item name="toolbarBackground">@null</item>-->
+        <!--<item name="toolbarLogo">@drawable/ic_menu_white_24dp</item>-->
+        <!--<item name="toolbarIconAccentColor">@color/harucon2018_gold</item>-->
+        <!--&lt;!&ndash; Navigation Popup &ndash;&gt;-->
+        <!--<item name="navigationPopupBackground">@drawable/harucon2018_navigation_drawer_background</item>-->
+        <!--<item name="navigationPopupTitle">@drawable/harucon2018_title_white</item>-->
+        <!--<item name="navigationPopupBottomImage">@drawable/harucon2018_navigation_image</item>-->
+        <!--<item name="navigationPopupNotSelectedColor">@color/white</item>-->
+        <!--<item name="navigationPopupSelectedColor">@color/harucon2018_blue</item>-->
+        <!--<item name="navigationPopupSeparatorColor">@color/white</item>-->
+        <!--&lt;!&ndash; About Screen &ndash;&gt;-->
+        <!--<item name="aboutLogo">@drawable/amai_logo_white</item>-->
+        <!--&lt;!&ndash; Home Screen &ndash;&gt;-->
+        <!--<item name="homeLogo">@null</item>-->
+        <!--<item name="homeBottomImage">@null</item>-->
+        <!--<item name="homeBackground">@drawable/harucon2018_home_background</item>-->
+        <!--<item name="homeToolbarTitle">@drawable/harucon2018_title_white</item>-->
+        <!--<item name="homeTitleBackground">@drawable/harucon2018_home_title_background</item>-->
+        <!--<item name="homeTitleText">@color/white</item>-->
+        <!--<item name="homeMessageBackground">@drawable/harucon2018_home_message_background</item>-->
+        <!--<item name="homeMessageText">@color/harucon2018_black</item>-->
+        <!--<item name="homeCurrentEventBackground">?homeMessageBackground</item>-->
+        <!--<item name="homeUpcomingEventBackground">@drawable/harucon2018_home_message_background</item>-->
+        <!--<item name="homeButtonBackground">@drawable/harucon2018_home_activity_button</item>-->
+        <!--<item name="homeButtonText">@color/white</item>-->
+        <!--<item name="homeEventNameInList">@color/black</item>-->
+        <!--<item name="homeBoxTopMargin">3dp</item>-->
+        <!--<item name="homeSingleButtonTopMargin">10dp</item>-->
+        <!--<item name="homeSingleButtonStyle">@style/HomeButton.Single.Harucon2018</item>-->
+        <!--&lt;!&ndash; Event View &ndash;&gt;-->
+        <!--<item name="eventTypeEndedColor">@color/harucon2018_gray</item>-->
+        <!--<item name="eventTypeCurrentColor">@null</item>-->
+        <!--<item name="eventTypeCurrentBackgroundColor">@color/harucon2018_transparent_dark_blue</item>-->
+        <!--<item name="eventTypeNotStartedColor">@null</item>-->
+        <!--<item name="eventNameKeywordHighlightColor">@color/white</item>-->
+        <!--<item name="eventKeywordHighlightColor">@color/harucon2018_gold</item>-->
+        <!--<item name="eventTimeDefaultTextColor">@color/white</item>-->
+        <!--<item name="eventTimeDefaultBackgroundColor">@color/harucon2018_red</item>-->
+        <!--<item name="eventDetailsColor">@color/white</item>-->
+        <!--<item name="eventSendFeedbackColor">@color/harucon2018_gold</item>-->
+        <!--<item name="eventFavoriteIcon">@drawable/ic_star_white_24dp</item>-->
+        <!--<item name="eventNonFavoriteColor">@color/white</item>-->
+        <!--<item name="eventFavoriteColor">@color/harucon2018_gold</item>-->
+        <!--&lt;!&ndash; Map Screen &ndash;&gt;-->
+        <!--<item name="locationDetailsBackground">@color/transparent_dark_black</item>-->
+        <!--<item name="mapBackground">@drawable/harucon2018_map_background</item>-->
+        <!--<item name="standIconColor">@color/harucon2018_red_dark</item>-->
+        <!--<item name="standsTypeTitleColor">@color/harucon2018_red_dark</item>-->
+        <!--&lt;!&ndash; Updates Screen &ndash;&gt;-->
+        <!--<item name="focusedUpdateBackground">@color/harucon2018_transparent_dark_blue</item>-->
+        <!--<item name="newUpdateBackground">@color/harucon2018_very_transparent_white</item>-->
+        <!--<item name="updateTimeColor">@color/harucon2018_very_transparent_white</item>-->
+        <!--<item name="updateItemBorder">@color/white</item>-->
+        <!--&lt;!&ndash; My Events Screen &ndash;&gt;-->
+        <!--<item name="nextEventStartTimeBackground">@color/harucon2018_very_transparent_white</item>-->
+        <!--<item name="nextEventStartTimeTextColor">@color/white</item>-->
+        <!--<item name="conflictingEventsBackground">@color/harucon2018_very_transparent_white</item>-->
+        <!--&lt;!&ndash; Event Screen &ndash;&gt;-->
+        <!--<item name="eventToolbarColor">@color/harucon2018_black</item>-->
+        <!--<item name="eventDetailsDefaultBackgroundColor">@color/harucon2018_black</item>-->
+        <!--<item name="eventDetailsBoxColor">@color/harucon2018_transparent_black</item>-->
+        <!--<item name="eventFeedbackBoxColor">@color/harucon2018_transparent_red_dark</item>-->
+        <!--<item name="eventVoteBoxColor">@color/harucon2018_transparent_dark_blue</item>-->
+        <!--<item name="eventDescriptionTextColor">@color/white</item>-->
+        <!--<item name="eventTitleBackground">@drawable/harucon2018_event_title_background</item>-->
+        <!--<item name="eventTitleTextColor">@color/white</item>-->
+        <!--&lt;!&ndash; Feedback Screen &ndash;&gt;-->
+        <!--<item name="progressBarDrawable">@drawable/harucon2018_rotating_circular_progress_bar</item>-->
+        <!--&lt;!&ndash; Programme Screen &ndash;&gt;-->
+        <!--<item name="eventTimeHeaderBackground">@drawable/harucon2018_event_time_header_background</item>-->
+        <!--<item name="eventTimeHeaderDefaultTextColor">@color/white</item>-->
+    <!--</style>-->
+
+    <!--<style name="AppBaseTheme.Harucon2018.Toolbar.Event" parent="AppBaseTheme.Harucon2018.Toolbar">-->
+        <!--<item name="android:textColorLink">@color/harucon2018_blue</item>-->
+    <!--</style>-->
+
+    <!--<style name="AppDialogTheme.Harucon2018" parent="Theme.AppCompat.Light.Dialog">-->
+        <!--&lt;!&ndash; This is the default starting API23. In any case the title is always left-justified so it's best to not use it. &ndash;&gt;-->
+        <!--<item name="android:windowNoTitle">true</item>-->
+        <!--<item name="colorAccent">@color/harucon2018_blue</item>-->
+        <!--<item name="borderlessButtonColor">@color/harucon2018_blue</item>-->
+    <!--</style>-->
+
+    <!--<style name="AppAlertDialogTheme.Harucon2018" parent="Theme.AppCompat.Light.Dialog.Alert">-->
+        <!--<item name="colorAccent">@color/harucon2018_blue</item>-->
+        <!--<item name="borderlessButtonColor">@color/harucon2018_blue</item>-->
+    <!--</style>-->
+
+    <!--<style name="AppBaseTheme.Harucon2018.Toolbar.Splash">-->
+        <!--<item name="android:windowBackground">@drawable/harucon2018_page_background</item>-->
+    <!--</style>-->
+
+    <!--<style name="OverflowMenu.Harucon2018" parent="Widget.AppCompat.ActionButton.Overflow">-->
+        <!--<item name="android:src">@drawable/ic_more_vert_white_24dp</item>-->
+    <!--</style>-->
+
+    <!--&lt;!&ndash; Workaround for number picker font color issue when the theme is dark &ndash;&gt;-->
+    <!--<style name="AppBaseTheme.Harucon2018.Toolbar.NumberPickerTheme" >-->
+        <!--<item name="android:textColorPrimary">@android:color/black</item>-->
+    <!--</style>-->
+
+    <!--<style name="HomeButton.Single.Harucon2018">-->
+        <!--<item name="android:textSize">16sp</item>-->
+        <!--<item name="android:layout_width">wrap_content</item>-->
+        <!--<item name="android:paddingTop">0dp</item>-->
+        <!--<item name="android:layout_gravity">center_horizontal</item>-->
+    <!--</style>-->
+</resources>

@@ -16,7 +16,6 @@ import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.listeners.OnEventFavoriteChangedListener;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.conventions.Convention;
-import amai.org.conventions.notifications.AzurePushNotifications;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 import sff.org.conventions.R;
 
@@ -72,9 +71,9 @@ public class DefaultEventFavoriteChangedListener implements OnEventFavoriteChang
 		// for all views of this event
 		notifyDatasetChanged();
 
-		// Renew push notification registration based on the new favorites state
-		AzurePushNotifications notifications = new AzurePushNotifications(view.getContext());
-		notifications.registerAsync(new AzurePushNotifications.RegistrationListener.DoNothing());
+		// TODO - Renew push notification registration based on the new favorites state
+//		AzurePushNotifications notifications = new AzurePushNotifications(view.getContext());
+//		notifications.registerAsync(new AzurePushNotifications.RegistrationListener.DoNothing());
 
 		if (newAttending) {
 			// Check if the new favorite event conflicts with other events

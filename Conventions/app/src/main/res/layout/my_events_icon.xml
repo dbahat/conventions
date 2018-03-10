@@ -18,13 +18,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:id="@+id/non_animated_icon"
-        android:src="@drawable/events_list_with_star"/>
+        android:src="?iconFavorites"/>
 
     <amai.org.conventions.customviews.AspectRatioImageView
         android:layout_width="32dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:id="@+id/icon_to_animate"
-        android:src="@drawable/events_list_with_star"/>
+        android:src="?iconFavorites"/>
 
 </FrameLayout>

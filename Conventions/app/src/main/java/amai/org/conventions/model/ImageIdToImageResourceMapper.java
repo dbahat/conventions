@@ -1,5 +1,6 @@
 package amai.org.conventions.model;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -51,6 +52,10 @@ public class ImageIdToImageResourceMapper {
 		}
 	}
 
+	public void addExcludedIds(String... args) {
+		excludeIds.addAll(Arrays.asList(args));
+	}
+
 	public void addExcludedId(String id) {
 		excludeIds.add(id);
 		if (BuildConfig.DEBUG && imageIdToImageResourceIdMap.containsKey(id)) {
@@ -66,7 +71,7 @@ public class ImageIdToImageResourceMapper {
 			@Override
 			public boolean where(String imageId) {
 				boolean imageExists = imageIdToImageResourceIdMap.containsKey(imageId) && !excludeIds.contains(imageId);
-				if (BuildConfig.DEBUG && !imageExists && !excludeIds.contains(imageId)) {
+				if (BuildConfig.DEBUG && !imageExists && !excludeIds.contains(imageId) && !imageIdToLogoImageResourceIdMap.containsKey(imageId)) {
 					Log.i(TAG, "Unknown image: " + imageId);
 				}
 				return imageExists;
@@ -93,7 +98,7 @@ public class ImageIdToImageResourceMapper {
 			@Override
 			public boolean where(String imageId) {
 				boolean imageExists = imageIdToLogoImageResourceIdMap.containsKey(imageId) && !excludeIds.contains(imageId);
-				if (BuildConfig.DEBUG && !imageExists && !excludeIds.contains(imageId)) {
+				if (BuildConfig.DEBUG && !imageExists && !excludeIds.contains(imageId) && !imageIdToImageResourceIdMap.containsKey(imageId)) {
 					Log.i(TAG, "Unknown image: " + imageId);
 				}
 				return imageExists;

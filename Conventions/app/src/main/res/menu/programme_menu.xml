@@ -8,14 +8,14 @@
     <item
         android:id="@+id/programme_navigate_to_feedback"
         android:title="@string/feedback"
-        android:icon="@drawable/feedback_menu_icon_black"
+        android:icon="?iconFeedback"
         android:orderInCategory="2"
         app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/programme_navigate_to_my_events"
         android:title="@string/my_events_title"
-        android:icon="@drawable/events_list_with_star_black"
+        android:icon="?iconFavorites"
         android:orderInCategory="3"
         app:showAsAction="always"/>
 

@@ -19,10 +19,10 @@
                 android:orientation="vertical"
                 android:visibility="gone">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@android:color/black"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?separatorColor"/>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/updates_list"

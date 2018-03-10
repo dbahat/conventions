@@ -1,42 +1,36 @@
 package amai.org.conventions.settings;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
 
 import com.google.android.gms.analytics.HitBuilders;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.Date;
 
 import amai.org.conventions.ConventionsApplication;
 import sff.org.conventions.R;
 import amai.org.conventions.navigation.NavigationActivity;
-import amai.org.conventions.notifications.AzurePushNotifications;
 import amai.org.conventions.notifications.PlayServicesInstallation;
 import amai.org.conventions.notifications.PushNotificationTopic;
 import amai.org.conventions.utils.Dates;
 
 public class SettingsActivity extends NavigationActivity {
-	private int NUMBER_OF_CLICKS_TO_OPEN_ADVANCED_OPTIONS = 7;
-	private int MAX_MILLISECONDS_TO_OPEN_ADVANCED_OPTIONS = 20000;
-	private boolean advancedOptionsEnabled = false;
+	private static final int NUMBER_OF_CLICKS_TO_OPEN_ADVANCED_OPTIONS = 7;
+	private static final int MAX_MILLISECONDS_TO_OPEN_ADVANCED_OPTIONS = 20000;
 	private int numberOfTimesNavigationButtonClicked = 0;
 	private Date firstClickTime = null;
-	private AzurePushNotifications notifications;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentInContentContainer(R.layout.activity_settings);
 		setToolbarTitle(getString(R.string.settings));
-		notifications = new AzurePushNotifications(this);
-		advancedOptionsEnabled = notifications.isAdvancedOptionsEnabled();
 	}
 
 	@Override
@@ -48,7 +42,7 @@ public class SettingsActivity extends NavigationActivity {
 
 	@Override
 	protected void onNavigationButtonClicked() {
-		if (advancedOptionsEnabled) {
+		if (ConventionsApplication.settings.isAdvancedOptionsEnabled()) {
 			return;
 		}
 
@@ -65,14 +59,12 @@ public class SettingsActivity extends NavigationActivity {
 	}
 
 	private void showAdvancedOptions() {
-		advancedOptionsEnabled = true;
-		notifications.setAdvancedOptionsEnabled(true);
+		ConventionsApplication.settings.setAdvancedOptionsEnabled(true);
 		Toast.makeText(this, R.string.advanced_options_enabled, Toast.LENGTH_SHORT).show();
 		recreate();
 	}
 
 	public static class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
-		private AzurePushNotifications notifications;
 
 		@Override
 		public void onCreate(Bundle savedInstanceState) {
@@ -84,7 +76,6 @@ public class SettingsActivity extends NavigationActivity {
 		@Override
 		public void onAttach(Activity activity) {
 			super.onAttach(activity);
-			notifications = new AzurePushNotifications(activity);
 			SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
 			sharedPreferences.registerOnSharedPreferenceChangeListener(this);
 		}
@@ -98,7 +89,7 @@ public class SettingsActivity extends NavigationActivity {
 
 		private void setupPreferences() {
 			// Show/hide advanced options
-			if (!notifications.isAdvancedOptionsEnabled()) {
+			if (!ConventionsApplication.settings.isAdvancedOptionsEnabled()) {
 				Preference advanced = findPreference("advanced");
 				getPreferenceScreen().removePreference(advanced);
 			}
@@ -124,46 +115,17 @@ public class SettingsActivity extends NavigationActivity {
 		public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, final String key) {
 			if (isPushNotificationTopic(key)) {
 				final boolean isSelected = sharedPreferences.getBoolean(key, false);
-				notifications.registerAsync(new AzurePushNotifications.RegistrationListener() {
-					@Override
-					public void onSuccess() {
-						ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
-								.setCategory("Notifications")
-								.setAction("Category" + (isSelected ? "Added" : "Removed"))
-								.setLabel(key)
-								.setValue(1) // succeeded
-								.build());
-					}
-
-					@Override
-					public void onError() {
-						ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
-								.setCategory("Notifications")
-								.setAction("Category" + (isSelected ? "Added" : "Removed"))
-								.setLabel(key)
-								.setValue(0) // failed
-								.build());
-
-						// Show error
-						// Use the current context because this method is called asynchronously, so
-						// we could be in a different activity now and getActivity() could return null
-						Context context = ConventionsApplication.getCurrentContext();
-						if (context != null) {
-							Toast.makeText(context, R.string.push_registration_failed, Toast.LENGTH_LONG).show();
-						}
-
-						// Revert (while not listening to changes to prevent infinite loop)
-						sharedPreferences.unregisterOnSharedPreferenceChangeListener(SettingsFragment.this);
-						sharedPreferences.edit().putBoolean(key, !isSelected).apply();
-						sharedPreferences.registerOnSharedPreferenceChangeListener(SettingsFragment.this);
-
-						// Update checkbox
-						Preference preference = SettingsFragment.this.findPreference(key);
-						if (preference instanceof CheckBoxPreference) {
-							((CheckBoxPreference) preference).setChecked(!isSelected);
-						}
-					}
-				});
+				ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
+						.setCategory("Notifications")
+						.setAction("Category" + (isSelected ? "Added" : "Removed"))
+						.setLabel(key)
+						.setValue(1) // succeeded
+						.build());
+				if (isSelected) {
+					FirebaseMessaging.getInstance().subscribeToTopic(key);
+				} else {
+					FirebaseMessaging.getInstance().unsubscribeFromTopic(key);
+				}
 			} else {
 				if (findPreference(key) != null) {
 					final boolean isSelected = sharedPreferences.getBoolean(key, false);

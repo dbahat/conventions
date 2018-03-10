@@ -24,7 +24,7 @@ public class Dates {
 	private static Date getInitialDate() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm", Dates.getLocale());
 		try {
-			return dateFormat.parse("08.10.2017 15:10");
+			return dateFormat.parse("24.08.2017 13:10");
 		} catch (ParseException e) {
 			throw new RuntimeException(e);
 		}

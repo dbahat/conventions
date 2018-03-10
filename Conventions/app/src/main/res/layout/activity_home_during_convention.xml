@@ -51,6 +51,7 @@
             android:id="@+id/home_current_event_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="?homeBoxTopMargin"
             android:foreground="?selectableItemBackground"
             android:gravity="center"
             android:onClick="onCurrentEventClicked">
@@ -92,6 +93,7 @@
             android:id="@+id/home_upcoming_event_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="?homeBoxTopMargin"
             android:foreground="?selectableItemBackground"
             android:paddingTop="8dp"
             android:padding="5dp"
@@ -150,10 +152,8 @@
         <Button
             android:id="@+id/home_go_to_my_events_button"
             android:text="@string/home_go_to_my_events"
-            android:textSize="23sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/HomeButton"
+            android:layout_marginTop="?homeSingleButtonTopMargin"
+            style="?homeSingleButtonStyle"
             android:onClick="onGoToMyEventsClicked"/>
 
     </LinearLayout>

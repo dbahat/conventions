@@ -413,7 +413,7 @@ public class ConventionEvent implements Serializable {
 			int spanStart = span.getStart();
 			int spanEnd = span.getEnd();
 			SpannableStringBuilder linkToForm = new SpannableStringBuilder();
-			if (span.getUrl() != null) {
+			if (!TextUtils.isEmpty(span.getUrl())) {
 				linkToForm.append("לטופס");
 				linkToForm.setSpan(new FormURLSpan(span.getUrl()), 0, linkToForm.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
 			}

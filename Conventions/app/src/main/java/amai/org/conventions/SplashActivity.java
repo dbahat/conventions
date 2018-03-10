@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import amai.org.conventions.navigation.NavigationActivity;
+import amai.org.conventions.notifications.PushNotification;
+import amai.org.conventions.notifications.PushNotificationDialogPresenter;
+import amai.org.conventions.notifications.PushNotificationHandlingService;
 
 /**
  * Splash activity used only when opening the application to show a default background and start
@@ -25,6 +28,17 @@ public class SplashActivity extends AppCompatActivity {
 		Intent intent = new Intent(SplashActivity.this, HomeActivity.class)
 				.putExtra(NavigationActivity.EXTRA_INITIALIZE, true)
 				.putExtra(NavigationActivity.EXTRA_EXIT_ON_BACK, true);
+
+		if (getIntent().hasExtra("message") && getIntent().hasExtra("topic")) {
+			intent
+					.putExtra(PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION, new PushNotification(
+							// TODO - Propogate the ID / Message ID from the notification here
+							0,
+							null,
+							getIntent().getStringExtra(PushNotificationHandlingService.MESSAGE),
+							getIntent().getStringExtra(PushNotificationHandlingService.TOPIC)
+					));
+		}
 
 		startActivity(intent);
 
