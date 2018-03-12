@@ -89,7 +89,7 @@
         <item name="eventTitleBackground">@drawable/icon2017_event_title_background</item>
         <item name="eventTitleTextColor">@color/white</item>
         <item name="eventDetailsHighlightedTextColor">@color/light_yellow</item>
-        <item name="eventTimeHeaderDefaultTextColor">@color/black</item>
+        <item name="eventTimeHeaderDefaultTextColor">@color/white</item>
         <!-- Feedback Screen -->
         <item name="progressBarDrawable">@drawable/icon2017_rotating_circular_progress_bar</item>
         <!-- Programme Screen -->
