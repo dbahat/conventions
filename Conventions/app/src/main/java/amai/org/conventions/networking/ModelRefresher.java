@@ -15,12 +15,12 @@ import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.HttpConnectionCreator;
 import amai.org.conventions.utils.Log;
 
 public class ModelRefresher {
 	private static final String TAG = ModelRefresher.class.getCanonicalName();
 
-	private static final int CONNECT_TIMEOUT = 10000;
 	private static final long MINIMUM_REFRESH_TIME = Dates.MILLISECONDS_IN_HOUR;
 
 	/**
@@ -42,8 +42,7 @@ public class ModelRefresher {
 		}
 
 		try {
-			HttpURLConnection request = (HttpURLConnection) Convention.getInstance().getModelURL().openConnection();
-			request.setConnectTimeout(CONNECT_TIMEOUT);
+			HttpURLConnection request = HttpConnectionCreator.createConnection(Convention.getInstance().getModelURL());
 			request.connect();
 			InputStreamReader reader = null;
 			try {
@@ -75,6 +74,7 @@ public class ModelRefresher {
 	}
 
 	private void notifyIfEventsUpdated(List<ConventionEvent> currentEvents, List<ConventionEvent> newEvents) {
+		Log.i(TAG, "Events refresh: Checking if events are updated");
 		List<String> changes = new LinkedList<>();
 		Map<String, ConventionEvent> currentEventsById = new HashMap<>();
 		for (ConventionEvent event : currentEvents) {

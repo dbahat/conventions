@@ -22,13 +22,13 @@ public class PushNotificationHandlingService extends FirebaseMessagingService {
         if (remoteMessage.getNotification() != null) {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
             Intent intent = new Intent(this, ShowNotificationService.class)
-                    .putExtra(ShowNotificationService.EXTRA_NOTIFICATION_TYPE, ShowNotificationService.Type.Push)
+                    .putExtra(ShowNotificationService.EXTRA_NOTIFICATION_TYPE, ShowNotificationService.Type.Push.toString())
                     .putExtra(ShowNotificationService.EXTRA_MESSAGE, remoteMessage.getNotification().getBody());
 
             if (remoteMessage.getData() != null && remoteMessage.getData().containsKey(TOPIC)) {
                 intent
-						.putExtra(ShowNotificationService.EXTRA_CATEGORY, remoteMessage.getData().get(TOPIC))
-						.putExtra(ShowNotificationService.EXTRA_ID, remoteMessage.getData().get(ID));
+                        .putExtra(ShowNotificationService.EXTRA_CATEGORY, remoteMessage.getData().get(TOPIC))
+                        .putExtra(ShowNotificationService.EXTRA_ID, remoteMessage.getData().get(ID));
             }
 
             startService(intent);

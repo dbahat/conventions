@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 ext {
-    supportLibVersion = "26.0.0"
-    googlePlayServicesVersion = "11.8.0"
+    supportLibVersion = "26.1.0"
+    googlePlayServicesVersion = "12.0.0"
 }
 
 android {
@@ -23,7 +23,7 @@ android {
             versionNameSuffix ".debug"
         }
     }
-    // TODO - Drop this once we have dependency injection framework to mock out SDK references (such as the Log, Html and Color classes)
+    // Required since we have dependency in SDK references (such as the Log, Html and Color classes)
     testOptions {
         unitTests.returnDefaultValues = true
     }
@@ -56,16 +56,6 @@ dependencies {
     compile files('libs/activation.jar')
     compile files('libs/additionnal.jar')
     compile files('libs/mail.jar')
-
-    // Google spreadsheet API currently commented out due to 64k method limit in a single DEX file.
-    // TODO: return this SDK once we have a tested solution for the 64K method limit (enable multidex, proguard, etc...)
-    //
-    //compile('com.google.api-client:google-api-client-android:1.22.0') {
-    //    exclude group: 'org.apache.httpcomponents'
-    //}
-    //compile('com.google.apis:google-api-services-sheets:v4-rev483-1.22.0') {
-    //    exclude group: 'org.apache.httpcomponents'
-    //}
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-android:2.6.3'

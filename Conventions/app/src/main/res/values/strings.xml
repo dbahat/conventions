@@ -35,7 +35,7 @@
 
     <string name="question_enjoyment">האם נהנית באירוע?</string>
     <string name="question_lecturer_quality">ההנחיה באירוע היתה:</string>
-    <string name="question_similar_events">האם תרצה לבוא לאירועים דומים בעתיד?</string>
+    <string name="question_similar_events">האם תרצה לבוא לאירועים בנושאים דומים בעתיד?</string>
     <string name="question_additional_info">עוד משהו?</string>
     <string name="event_has_ended">האירוע נגמר</string>
     <string name="add_feedback">מלא פידבק</string>
@@ -254,6 +254,8 @@
     <string name="navigate_public_transportation">ניווט בתחבורה ציבורית</string>
     <string name="home">בית</string>
     <string name="dash">–</string>
+    <string name="dash_with_spaces">\u0020–\u0020</string>
+    <string name="dash_with_values">%1$s – %2$s</string>
 
     <string name="home_convention_start_time">עוד %d ימים!</string>
     <string name="home_help_us_improve">עזור לנו להשתפר</string>
@@ -277,4 +279,6 @@
     <string name="home_current_event_vote_possible">לחץ להצבעה עבור חביב הקהל!</string>
     <string name="event_not_found">האירוע לא נמצא</string>
     <string name="tickets">כרטיסים</string>
+    <string name="notification_channel_description_notifications">הודעות בזמן אמת מהנהלת הכנס</string>
+    <string name="notification_channel_description_reminders">תזכורות הקשורות לאירועים שסימנת בתוכניה</string>
 </resources>

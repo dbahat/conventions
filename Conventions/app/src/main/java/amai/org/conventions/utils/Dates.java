@@ -64,10 +64,10 @@ public class Dates {
 	}
 
 	public static String toHumanReadableTimeDuration(long milliseconds) {
-		return toHumanReadableTimeDuration(milliseconds, TimeUnit.MINUTE);
+		return toHumanReadableTimeDuration(milliseconds, TimeUnit.MINUTE, true);
 	}
 
-	public static String toHumanReadableTimeDuration(long milliseconds, TimeUnit smallestUnit) {
+	public static String toHumanReadableTimeDuration(long milliseconds, TimeUnit smallestUnit, boolean roundUp) {
 		long x = milliseconds / 1000;
 		int seconds = (int) (x % 60);
 		x /= 60;
@@ -89,6 +89,23 @@ public class Dates {
 				// Fallthrough
 			case SECOND:
 				break;
+		}
+
+		if (roundUp && days == 0 && hours == 0 && minutes == 0 && seconds == 0) {
+			switch (smallestUnit) {
+				case DAY:
+					days = 1;
+					break;
+				case HOUR:
+					hours = 1;
+					break;
+				case MINUTE:
+					minutes = 1;
+					break;
+				case SECOND:
+					seconds = 1;
+					break;
+			}
 		}
 
 		return toHumanReadableTimeDuration(days, hours, minutes, seconds);

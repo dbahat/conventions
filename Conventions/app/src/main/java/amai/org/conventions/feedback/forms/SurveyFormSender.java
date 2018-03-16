@@ -18,11 +18,11 @@ import javax.net.ssl.HttpsURLConnection;
 import amai.org.conventions.feedback.SurveySender;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.Survey;
+import amai.org.conventions.utils.HttpConnectionCreator;
 import amai.org.conventions.utils.Log;
 
 public abstract class SurveyFormSender extends SurveySender {
 	private final static String TAG = SurveyFormSender.class.getCanonicalName();
-	private static final int TIMEOUT = 10000;
 	private SurveyForm form;
 
 	public SurveyFormSender(SurveyForm form) {
@@ -58,12 +58,10 @@ public abstract class SurveyFormSender extends SurveySender {
 
 		URL url = form.getSendUrl();
 
-		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+		HttpURLConnection connection = HttpConnectionCreator.createConnection(url);
 		BufferedWriter writer = null;
 		OutputStream outputStream = null;
 		try {
-			connection.setReadTimeout(TIMEOUT);
-			connection.setConnectTimeout(TIMEOUT);
 			connection.setRequestMethod("POST");
 			connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 			connection.setDoInput(true);

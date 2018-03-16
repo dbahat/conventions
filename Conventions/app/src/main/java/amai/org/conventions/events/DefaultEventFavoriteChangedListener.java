@@ -15,6 +15,7 @@ import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.listeners.OnEventFavoriteChangedListener;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.conventions.Convention;
+import amai.org.conventions.notifications.PushNotificationTopicsSubscriber;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
 public class DefaultEventFavoriteChangedListener implements OnEventFavoriteChangedListener {
@@ -50,6 +51,7 @@ public class DefaultEventFavoriteChangedListener implements OnEventFavoriteChang
 		notifyDatasetChanged();
 
 		if (newAttending) {
+			PushNotificationTopicsSubscriber.subscribe(updatedEvent);
 			// Check if the new favorite event conflicts with other events
 			if (Convention.getInstance().conflictsWithOtherFavoriteEvent(updatedEvent)) {
 				Snackbar snackbar = Snackbar.make(view, R.string.event_added_to_favorites_but_conflicts, Snackbar.LENGTH_LONG).setAction(R.string.cancel, new View.OnClickListener() {
@@ -65,6 +67,7 @@ public class DefaultEventFavoriteChangedListener implements OnEventFavoriteChang
 				Snackbar.make(view, R.string.event_added_to_favorites, Snackbar.LENGTH_SHORT).show();
 			}
 		} else {
+			PushNotificationTopicsSubscriber.unsubscribe(updatedEvent);
 			Snackbar.make(view, R.string.event_removed_from_favorites, Snackbar.LENGTH_SHORT).show();
 		}
 	}

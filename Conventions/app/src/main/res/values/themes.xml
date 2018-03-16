@@ -13,6 +13,7 @@
         <!--We use the toolbar so no need to show ActionBar-->
         <item name="android:windowActionBar">false</item>
         <item name="android:colorBackground">@null</item>
+        <item name="numberPickerTheme">@style/AppBaseTheme.NumberPickerTheme</item>
 
         <!-- General attributes -->
         <item name="swipeToRefreshColor">?toolbarBackground</item>
@@ -20,6 +21,7 @@
         <item name="activitiesBackground">@null</item>
         <item name="actionButtonColor">?colorAccent</item>
         <item name="borderlessButtonColor">?buttonColor</item>
+        <item name="highlightedButtonTextColor">@color/white</item>
 
         <!-- Toolbar -->
         <item name="toolbarTitleColor">?android:textColorPrimary</item>
@@ -45,6 +47,10 @@
 
         <!-- Updates -->
         <item name="updatesBackground">?android:colorBackground</item>
+        <item name="updateItemSeparator">?separatorColor</item>
+        <item name="updateTextColor">?android:textColorPrimary</item>
+        <item name="newUpdateTextColor">?android:textColorPrimary</item>
+        <item name="focusedUpdateTextColor">?android:textColorPrimary</item>
 
         <!-- Map -->
         <item name="mapBackground">?activitiesBackground</item>
@@ -53,14 +59,15 @@
 
         <!-- Event activity -->
         <item name="eventToolbarColor">?toolbarBackground</item>
-        <item name="eventDescriptionTextColor">?android:textColorPrimary</item>
-        <item name="eventDetailsTextColor">?android:textColorPrimary</item>
+        <item name="eventDescriptionTextColor">?eventTitleTextColor</item>
+        <item name="eventDetailsTextColor">?eventTitleTextColor</item>
         <item name="feedbackButtonColor">?borderlessButtonColor</item>
         <item name="eventTitleTextColor">?android:textColorPrimary</item>
         <item name="eventFeedbackTextColor">?attr/eventDescriptionTextColor</item>
+        <item name="eventVoteBoxColor">?eventFeedbackBoxColor</item>
         <!-- This color should match eventDetailsBoxColor in a way that eventDetailsBoxColor is not visible
              on top of this color -->
-        <item name="conventionFeedbackTextColor">?android:textColorPrimary</item>
+        <item name="conventionFeedbackTextColor">?eventTitleTextColor</item>
     </style>
 
     <!-- Since there is no multiple inheritance with themes, we have to copy basic attributes to have
@@ -76,6 +83,7 @@
         <!--We use the toolbar so no need to show ActionBar-->
         <item name="android:windowActionBar">false</item>
         <item name="android:colorBackground">@null</item>
+        <item name="numberPickerTheme">@style/AppBaseTheme.NumberPickerTheme</item>
 
         <!-- General attributes -->
         <item name="swipeToRefreshColor">?toolbarBackground</item>
@@ -83,6 +91,7 @@
         <item name="activitiesBackground">@null</item>
         <item name="actionButtonColor">?colorAccent</item>
         <item name="borderlessButtonColor">?buttonColor</item>
+        <item name="highlightedButtonTextColor">@color/white</item>
 
         <!-- Toolbar -->
         <item name="toolbarTitleColor">?android:textColorPrimary</item>
@@ -108,6 +117,10 @@
 
         <!-- Updates -->
         <item name="updatesBackground">?android:colorBackground</item>
+        <item name="updateItemSeparator">?separatorColor</item>
+        <item name="updateTextColor">?android:textColorPrimary</item>
+        <item name="newUpdateTextColor">?android:textColorPrimary</item>
+        <item name="focusedUpdateTextColor">?android:textColorPrimary</item>
 
         <!-- Map -->
         <item name="mapBackground">?activitiesBackground</item>
@@ -116,18 +129,20 @@
 
         <!-- Event activity -->
         <item name="eventToolbarColor">?toolbarBackground</item>
-        <item name="eventDescriptionTextColor">?android:textColorPrimary</item>
-        <item name="eventDetailsTextColor">?android:textColorPrimary</item>
+        <item name="eventDescriptionTextColor">?eventTitleTextColor</item>
+        <item name="eventDetailsTextColor">?eventTitleTextColor</item>
         <item name="feedbackButtonColor">?borderlessButtonColor</item>
         <item name="eventTitleTextColor">?android:textColorPrimary</item>
         <item name="eventFeedbackTextColor">?attr/eventDescriptionTextColor</item>
+        <item name="eventVoteBoxColor">?eventFeedbackBoxColor</item>
         <!-- This color should match eventDetailsBoxColor in a way that eventDetailsBoxColor is not visible
              on top of this color -->
-        <item name="conventionFeedbackTextColor">?android:textColorPrimary</item>
+        <item name="conventionFeedbackTextColor">?eventTitleTextColor</item>
     </style>
 
     <!-- Additional default attributes for dark themes. Inherit the actual theme from this one for dark themes. -->
     <style name="AppBaseTheme.Dark" parent="AppBaseTheme.Dark.Base">
+        <item name="toolbarTitleColor">@color/white</item>
         <item name="hintTextColor">@color/hint_gray</item>
         <item name="eventNameKeywordHighlightColor">@color/white</item>
         <item name="eventKeywordHighlightColor">@color/white</item>
@@ -157,10 +172,12 @@
         <item name="iconMap">@drawable/ic_dialog_map</item>
         <item name="iconFloorUp">@drawable/arrow_up_wide_white</item>
         <item name="iconFloorDown">@drawable/arrow_down_wide_white</item>
+        <item name="toolbarLogo">@drawable/ic_menu_white_24dp</item>
     </style>
 
     <!-- Additional default attributes for light themes. Inherit the actual theme from this one for light themes. -->
     <style name="AppBaseTheme.Light" parent="AppBaseTheme.Light.Base">
+        <item name="toolbarTitleColor">@color/black</item>
         <item name="hintTextColor">@color/hint_gray</item>
         <item name="eventNameKeywordHighlightColor">@color/black</item>
         <item name="eventKeywordHighlightColor">@color/black</item>
@@ -190,6 +207,7 @@
         <item name="iconMap">@drawable/ic_dialog_map_black</item>
         <item name="iconFloorUp">@drawable/arrow_up_wide</item>
         <item name="iconFloorDown">@drawable/arrow_down_wide</item>
+        <item name="toolbarLogo">@drawable/ic_menu_black_24dp</item>
     </style>
 
     <style name="FullScreenDialog" parent="android:Theme.Dialog">
@@ -200,5 +218,10 @@
         <item name="android:windowBackground">@color/transparent_black</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">false</item>
+    </style>
+
+    <!-- Workaround for number picker font color issue when the theme is dark -->
+    <style name="AppBaseTheme.NumberPickerTheme" parent="AppBaseTheme.Light">
+    <item name="android:textColorPrimary">@android:color/black</item>
     </style>
 </resources>

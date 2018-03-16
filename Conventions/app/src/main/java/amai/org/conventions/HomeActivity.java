@@ -3,6 +3,7 @@ package amai.org.conventions;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.updates.UpdatesActivity;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.Views;
 
 import static amai.org.conventions.utils.CollectionUtils.filter;
 
@@ -131,6 +133,8 @@ public class HomeActivity extends NavigationActivity {
 				}
 			});
 		}
+		Views.fixRadialGradient(findViewById(R.id.home_current_event_container_background));
+		Views.fixRadialGradient(upcomingEventContainer);
 	}
 
 	private void setContentForNoUpcomingFavorites() {
@@ -186,6 +190,8 @@ public class HomeActivity extends NavigationActivity {
 				navigateToEvent(event.getId());
 			}
 		});
+
+		Views.fixRadialGradient(upcomingEventsListView);
 	}
 
 	public void onCurrentEventClicked(View view) {
@@ -276,6 +282,7 @@ public class HomeActivity extends NavigationActivity {
 		setContentInContentContainer(R.layout.activity_home_before_convention, false, false);
 		TextView titleView = (TextView)findViewById(R.id.home_content_title);
 		TextView contentView = (TextView)findViewById(R.id.home_content);
+		Views.fixRadialGradient(findViewById(R.id.home_content_container));
 
 		// the convention didn't start yet. Show the user the number of days until it starts.
 		int daysUntilConventionStarts = getDaysUntilConventionStart();
@@ -288,7 +295,13 @@ public class HomeActivity extends NavigationActivity {
 		}
 		Calendar startDate = Convention.getInstance().getStartDate();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Dates.getLocale());
-		titleView.setText(sdf.format(startDate.getTime()));
+		String dateTitle = sdf.format(startDate.getTime());
+		Calendar endDate = Convention.getInstance().getEndDate();
+		if (!Dates.isSameDate(startDate, endDate)) {
+			dateTitle = getString(R.string.dash_with_values, dateTitle, sdf.format(endDate.getTime()));
+			titleView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+		}
+		titleView.setText(dateTitle);
 	}
 
 	private void setContentForAfterConventionEnded() {
@@ -296,6 +309,7 @@ public class HomeActivity extends NavigationActivity {
 		FrameLayout contentViewContainer = (FrameLayout)findViewById(R.id.home_content_container);
 		TextView titleView = (TextView)findViewById(R.id.home_content_title);
 		TextView contentView = (TextView)findViewById(R.id.home_content);
+		Views.fixRadialGradient(contentViewContainer);
 		// All the events are already in-progress or finished. Show the user to the feedback screen.
 		contentViewContainer.setOnClickListener(new View.OnClickListener() {
 			@Override

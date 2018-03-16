@@ -16,6 +16,7 @@ import amai.org.conventions.events.adapters.EventGroupsAdapter;
 import amai.org.conventions.events.holders.SwipeableEventViewHolder;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.conventions.Convention;
+import amai.org.conventions.notifications.PushNotificationTopicsSubscriber;
 
 public class EventSwipeToDismissListener implements SwipeableEventViewHolder.OnEventSwipedListener {
 
@@ -42,6 +43,7 @@ public class EventSwipeToDismissListener implements SwipeableEventViewHolder.OnE
 
 		ConventionsApplication.alarmScheduler.cancelDefaultEventAlarms(viewHolder.getModel());
 
+		PushNotificationTopicsSubscriber.unsubscribe(event);
 		int adapterPosition = viewHolder.getAdapterPosition();
 
 		// This could happen if the item has already been removed, the dataset changed or the view recycled
@@ -62,7 +64,7 @@ public class EventSwipeToDismissListener implements SwipeableEventViewHolder.OnE
 				updatedEvent.setAttending(true);
 				ConventionsApplication.alarmScheduler.scheduleDefaultEventAlarms(updatedEvent);
 				Convention.getInstance().getStorage().saveUserInput();
-
+				PushNotificationTopicsSubscriber.unsubscribe(event);
 				if (adapter instanceof EventGroupsAdapter) {
 					((EventGroupsAdapter) adapter).updateEventGroups();
 				} else {

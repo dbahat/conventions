@@ -60,6 +60,7 @@ import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.networking.SurveyDataRetriever;
+import amai.org.conventions.notifications.PushNotificationTopicsSubscriber;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Views;
@@ -418,6 +419,13 @@ public class EventActivity extends NavigationActivity {
 		}
 		setupAlarmsMenuItem(menu, userInput);
 		saveUserInput();
+
+		// Not that the event favorite state got updated, update the push notification subscription state
+		if (conventionEvent.isAttending()) {
+			PushNotificationTopicsSubscriber.subscribe(conventionEvent);
+		} else {
+			PushNotificationTopicsSubscriber.unsubscribe(conventionEvent);
+		}
 	}
 
 	private void changeFavoriteMenuIcon(boolean isAttending, MenuItem favoriteItem) {
