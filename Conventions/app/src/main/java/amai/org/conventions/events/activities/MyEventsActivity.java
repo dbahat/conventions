@@ -27,7 +27,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -175,7 +174,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		});
 	}
 
-	private int addFavoriteEventsFromWebsite(String user, String password) throws IOException {
+	private int addFavoriteEventsFromWebsite(String user, String password) throws Exception {
 		HttpURLConnection request = Convention.getInstance().getUserPurchasedEventsRequest(user, password);
 		request.connect();
 		InputStreamReader reader = null;

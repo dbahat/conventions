@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -218,7 +217,7 @@ public abstract class Convention implements Serializable {
 
 	public abstract URL getSecondHandFormsURL(List<String> ids);
 
-	public abstract HttpURLConnection getUserPurchasedEventsRequest(String user, String password) throws IOException;
+	public abstract HttpURLConnection getUserPurchasedEventsRequest(String user, String password) throws Exception;
 
 	public Calendar getStartDate() {
 		return startDate;

@@ -15,13 +15,13 @@ import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.HttpConnectionCreator;
 import amai.org.conventions.utils.Log;
 import sff.org.conventions.BuildConfig;
 
 public class ModelRefresher {
 	private static final String TAG = ModelRefresher.class.getCanonicalName();
 
-	private static final int CONNECT_TIMEOUT = 10000;
 	private static final long MINIMUM_REFRESH_TIME = Dates.MILLISECONDS_IN_HOUR;
 
 	/**
@@ -45,8 +45,7 @@ public class ModelRefresher {
 		try {
 			Date ticketsModifiedDate = getTicketsModifiedDate();
 
-			HttpURLConnection request = (HttpURLConnection) Convention.getInstance().getModelURL().openConnection();
-			request.setConnectTimeout(CONNECT_TIMEOUT);
+			HttpURLConnection request = HttpConnectionCreator.createConnection(Convention.getInstance().getModelURL());
 			request.connect();
 			InputStreamReader reader = null;
 			try {
@@ -131,15 +130,14 @@ public class ModelRefresher {
 		}
 		Date modifiedDate = null;
 		try {
-			HttpURLConnection request = (HttpURLConnection) ticketsLastUpdateURL.openConnection();
-			request.setConnectTimeout(CONNECT_TIMEOUT);
+			HttpURLConnection request = HttpConnectionCreator.createConnection(ticketsLastUpdateURL);
 			request.connect();
 			long lastModifiedAsLong = request.getHeaderFieldDate("Last-Modified", -1);
 			if (lastModifiedAsLong > -1) {
 				modifiedDate = new Date(lastModifiedAsLong);
 			}
 			return modifiedDate;
-		} catch (IOException e) {
+		} catch (Exception e) {
 			Log.e(TAG, "Could not get tickets modified date: " + e.getMessage());
 			return null;
 		}
@@ -147,8 +145,7 @@ public class ModelRefresher {
 
 	public boolean refreshTicketsForEvent(ConventionEvent event) {
 		try {
-			HttpURLConnection request = (HttpURLConnection) Convention.getInstance().getEventTicketsNumberURL(event).openConnection();
-			request.setConnectTimeout(CONNECT_TIMEOUT);
+			HttpURLConnection request = HttpConnectionCreator.createConnection(Convention.getInstance().getEventTicketsNumberURL(event));
 			request.connect();
 
 			Date modifiedDate = null;

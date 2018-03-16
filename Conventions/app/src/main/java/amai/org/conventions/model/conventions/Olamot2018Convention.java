@@ -30,6 +30,7 @@ import amai.org.conventions.model.Place;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.HttpConnectionCreator;
 import sff.org.conventions.R;
 
 public class Olamot2018Convention extends SffConvention {
@@ -526,11 +527,10 @@ public class Olamot2018Convention extends SffConvention {
 	}
 
 	@Override
-	public HttpURLConnection getUserPurchasedEventsRequest(String user, String password) throws IOException {
+	public HttpURLConnection getUserPurchasedEventsRequest(String user, String password) throws Exception {
 		URL url = new URL("https://api.sf-f.org.il/program/events_per_user.php?slug=olamot2018&email=" +
 				URLEncoder.encode(user, "UTF-8") + "&pass=" + URLEncoder.encode(password, "UTF-8"));
-		HttpURLConnection request = (HttpURLConnection) url.openConnection();
-		request.setConnectTimeout(10000);
+		HttpURLConnection request = HttpConnectionCreator.createConnection(url);
 		request.setRequestMethod("POST");
 		request.setDoInput(true);
 		request.setDoOutput(true);

@@ -22,11 +22,11 @@ import java.util.Map;
 
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.ConventionStorage;
+import amai.org.conventions.utils.HttpConnectionCreator;
 import amai.org.conventions.utils.Log;
 
 public class SecondHand {
 	private static final String TAG = SecondHand.class.getCanonicalName();
-	private static final int CONNECT_TIMEOUT = 10000;
 
 	private ConventionStorage storage;
 	private List<SecondHandForm> forms;
@@ -55,8 +55,7 @@ public class SecondHand {
 			for (SecondHandForm form : forms) {
 				formIds.add(form.getId());
 			}
-			HttpURLConnection request = (HttpURLConnection) Convention.getInstance().getSecondHandFormsURL(formIds).openConnection();
-			request.setConnectTimeout(CONNECT_TIMEOUT);
+			HttpURLConnection request = HttpConnectionCreator.createConnection(Convention.getInstance().getSecondHandFormsURL(formIds));
 			request.connect();
 
 			InputStreamReader reader = null;
@@ -95,10 +94,9 @@ public class SecondHand {
 		}
 	}
 
-	private SecondHandForm readForm(String id) throws IOException {
+	private SecondHandForm readForm(String id) throws Exception {
 		id = normalizeFormId(id);
-		HttpURLConnection request = (HttpURLConnection) Convention.getInstance().getSecondHandFormURL(id).openConnection();
-		request.setConnectTimeout(CONNECT_TIMEOUT);
+		HttpURLConnection request = HttpConnectionCreator.createConnection(Convention.getInstance().getSecondHandFormURL(id));
 		request.connect();
 
 		InputStreamReader reader = null;
@@ -190,7 +188,7 @@ public class SecondHand {
 		SecondHandForm form = null;
 		try {
 			form = readForm(id);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 		forms.add(form);

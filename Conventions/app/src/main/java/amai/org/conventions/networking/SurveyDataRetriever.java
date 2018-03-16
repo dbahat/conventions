@@ -4,7 +4,6 @@ import android.support.annotation.Nullable;
 
 import com.google.gson.GsonBuilder;
 
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -12,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import amai.org.conventions.model.conventions.Convention;
+import amai.org.conventions.utils.HttpConnectionCreator;
 
 /**
  * Container for components that retrieve data related to surveys
@@ -21,19 +21,19 @@ public interface SurveyDataRetriever {
 	interface Answers {
 		/**
 		 * @return the possible answers to a survey, or null if no answers were defined.
-		 * @throws IOException in case there was an error retrieving the data.
+		 * @throws Exception in case there was an error retrieving the data.
 		 */
 		@Nullable
-		List<String> retrieveAnswers() throws IOException;
+		List<String> retrieveAnswers() throws Exception;
 	}
 
 	/**
 	 * @return the survey disabled message, or null if no such message was defined.
-	 * @throws IOException in case there was an error retrieving the data.
+	 * @throws Exception in case there was an error retrieving the data.
 	 */
 	interface DisabledMessage {
 		@Nullable
-		String retrieveClosedMessage() throws IOException;
+		String retrieveClosedMessage() throws Exception;
 	}
 
 	/**
@@ -60,7 +60,7 @@ public interface SurveyDataRetriever {
 		}
 
 		@Override
-		public List<String> retrieveAnswers() throws IOException {
+		public List<String> retrieveAnswers() throws Exception {
 			List<List<Object>> values = retrieveValuesForRange(spreadsheetId, ANSWERS_RANGE);
 
 			List<String> result = new ArrayList<>(values.size());
@@ -74,7 +74,7 @@ public interface SurveyDataRetriever {
 		}
 
 		@Override
-		public String retrieveClosedMessage() throws IOException {
+		public String retrieveClosedMessage() throws Exception {
 			List<List<Object>> values = retrieveValuesForRange(spreadsheetId, CLOSED_MESSAGE_RANGE);
 
 			if (values.size() > 0 && values.get(0).size() > 0) {
@@ -84,19 +84,15 @@ public interface SurveyDataRetriever {
 			return null;
 		}
 
-		private static List<List<Object>> retrieveValuesForRange(String spreadsheetId, String a1NotationRange) throws IOException {
-
-			int TIMEOUT = 10000;
+		private static List<List<Object>> retrieveValuesForRange(String spreadsheetId, String a1NotationRange) throws Exception {
 
 			// NOTE - not using the google spreadsheet Android SDK since it brings us to > 64k methods, and we don't currently want to enable multidex
 			URL url = new URL(String.format("https://sheets.googleapis.com/v4/spreadsheets/%s/values/%s?key=%s",
 					spreadsheetId,
 					a1NotationRange,
 					Convention.getInstance().getGoogleSpreadsheetsApiKey()));
-			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+			HttpURLConnection connection = HttpConnectionCreator.createConnection(url);
 
-			connection.setReadTimeout(TIMEOUT);
-			connection.setConnectTimeout(TIMEOUT);
 			connection.setRequestMethod("GET");
 
 			InputStreamReader streamReader = null;

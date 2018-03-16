@@ -22,6 +22,7 @@ import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.model.Update;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.HttpConnectionCreator;
 import amai.org.conventions.utils.Log;
 
 public class UpdatesRefresher {
@@ -32,7 +33,6 @@ public class UpdatesRefresher {
 		void onError(Exception error);
 	}
 
-	private static final int CONNECT_TIMEOUT = 10000;
 	private static UpdatesRefresher instance = null;
 
 	private static final String TAG = UpdatesRefresher.class.getSimpleName();
@@ -80,8 +80,7 @@ public class UpdatesRefresher {
 			@Override
 			protected Integer doInBackground(Void... voids) {
 				try {
-					HttpURLConnection request = (HttpURLConnection) Convention.getInstance().getUpdatesURL().openConnection();
-					request.setConnectTimeout(CONNECT_TIMEOUT);
+					HttpURLConnection request = HttpConnectionCreator.createConnection(Convention.getInstance().getUpdatesURL());
 					request.connect();
 					InputStreamReader reader = null;
 					try {
