@@ -21,6 +21,7 @@
         <item name="activitiesBackground">@null</item>
         <item name="actionButtonColor">?colorAccent</item>
         <item name="borderlessButtonColor">?buttonColor</item>
+        <item name="highlightedButtonTextColor">@color/white</item>
 
         <!-- Toolbar -->
         <item name="toolbarTitleColor">?android:textColorPrimary</item>
@@ -46,6 +47,10 @@
 
         <!-- Updates -->
         <item name="updatesBackground">?android:colorBackground</item>
+        <item name="updateItemSeparator">?separatorColor</item>
+        <item name="updateTextColor">?android:textColorPrimary</item>
+        <item name="newUpdateTextColor">?android:textColorPrimary</item>
+        <item name="focusedUpdateTextColor">?android:textColorPrimary</item>
 
         <!-- Map -->
         <item name="mapBackground">?activitiesBackground</item>
@@ -95,6 +100,7 @@
         <item name="activitiesBackground">@null</item>
         <item name="actionButtonColor">?colorAccent</item>
         <item name="borderlessButtonColor">?buttonColor</item>
+        <item name="highlightedButtonTextColor">@color/white</item>
 
         <!-- Toolbar -->
         <item name="toolbarTitleColor">?android:textColorPrimary</item>
@@ -120,6 +126,10 @@
 
         <!-- Updates -->
         <item name="updatesBackground">?android:colorBackground</item>
+        <item name="updateItemSeparator">?separatorColor</item>
+        <item name="updateTextColor">?android:textColorPrimary</item>
+        <item name="newUpdateTextColor">?android:textColorPrimary</item>
+        <item name="focusedUpdateTextColor">?android:textColorPrimary</item>
 
         <!-- Map -->
         <item name="mapBackground">?activitiesBackground</item>
@@ -180,6 +190,7 @@
         <item name="iconMap">@drawable/ic_dialog_map</item>
         <item name="iconFloorUp">@drawable/arrow_up_wide_white</item>
         <item name="iconFloorDown">@drawable/arrow_down_wide_white</item>
+        <item name="toolbarLogo">@drawable/ic_menu_white_24dp</item>
     </style>
 
     <!-- Additional default attributes for light themes. Inherit the actual theme from this one for light themes. -->
@@ -214,6 +225,7 @@
         <item name="iconMap">@drawable/ic_dialog_map_black</item>
         <item name="iconFloorUp">@drawable/arrow_up_wide</item>
         <item name="iconFloorDown">@drawable/arrow_down_wide</item>
+        <item name="toolbarLogo">@drawable/ic_menu_black_24dp</item>
     </style>
 
     <style name="FullScreenDialog" parent="android:Theme.Dialog">

@@ -14,7 +14,7 @@
         android:paddingEnd="16dp">
 
         <amai.org.conventions.customviews.AspectRatioImageView
-            android:layout_width="120dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"

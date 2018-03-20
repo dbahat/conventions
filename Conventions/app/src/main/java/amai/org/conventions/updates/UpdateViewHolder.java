@@ -40,19 +40,26 @@ public class UpdateViewHolder extends RecyclerView.ViewHolder {
 		SpannableString spannedUpdateText = new SpannableString(updateViewModel.getUpdate().getText());
 
 		// Make new/focused updates highlighted
-		int color;
+		int backgroundColor;
+		int textColor;
 		if (updateViewModel.isFocused()) {
-			color = ThemeAttributes.getColor(itemView.getContext(), R.attr.focusedUpdateBackground);
+			backgroundColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.focusedUpdateBackground);
+			textColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.focusedUpdateTextColor);
 		} else if (updateViewModel.getUpdate().isNew()) {
-			color = ThemeAttributes.getColor(itemView.getContext(), R.attr.newUpdateBackground);
+			backgroundColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.newUpdateBackground);
+			textColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.newUpdateTextColor);
 		} else {
-			color = ThemeAttributes.getColor(itemView.getContext(), R.attr.updatesBackground);
+			backgroundColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.updatesBackground);
+			textColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.updateTextColor);
 		}
-		updateContainer.setBackgroundColor(color);
+		updateContainer.setBackgroundColor(backgroundColor);
 
 		updateTextView.setText(spannedUpdateText);
 		updateTime.setText(Dates.formatHoursAndMinutes(updateViewModel.getUpdate().getDate()));
 		updateDay.setText(Dates.formatDateWithoutTime(updateViewModel.getUpdate().getDate()));
+		updateTextView.setTextColor(textColor);
+		updateTime.setTextColor(textColor);
+		updateDay.setTextColor(textColor);
 
 		expandViewIfNumberOfTextLinesIsSmall(updateViewModel);
 

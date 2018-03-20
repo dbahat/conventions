@@ -1,5 +1,8 @@
 package amai.org.conventions.events.adapters;
 
+import android.content.res.ColorStateList;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.CompoundButtonCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +15,7 @@ import com.tonicartos.widget.stickygridheaders.StickyGridHeadersSimpleAdapter;
 
 import java.util.List;
 
+import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.SearchFilter;
 import sff.org.conventions.R;
 
@@ -105,6 +109,17 @@ public class SearchFiltersAdapter extends BaseAdapter implements StickyGridHeade
 					onFilterChangeListener.onFilterStateChanged(searchFilter);
 				}
 			});
+
+			ColorStateList checkboxColors = new ColorStateList(
+					new int[][]{
+							new int[]{-android.R.attr.state_checked},
+							new int[]{android.R.attr.state_checked}
+					},
+					new int[]{
+							ContextCompat.getColor(itemView.getContext(), R.color.even_darker_gray),
+							ThemeAttributes.getColor(itemView.getContext(), R.attr.colorAccent)
+					});
+			CompoundButtonCompat.setButtonTintList(this.checkBox, checkboxColors);
 		}
 
 		public void bind(SearchFilter searchFilter) {

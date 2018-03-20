@@ -79,7 +79,7 @@
 
     <style name="HighlightedButton">
         <item name="android:background">?highlightedButtonBackground</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">?highlightedButtonTextColor</item>
     </style>
 
     <style name="EventAnswerButton" parent="TextAppearance.AppCompat.Button">

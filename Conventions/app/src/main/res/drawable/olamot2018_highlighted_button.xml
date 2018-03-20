@@ -9,33 +9,24 @@
                android:insetRight="@dimen/button_inset_horizontal_material"
                android:insetBottom="@dimen/button_inset_vertical_material">
             <shape android:shape="rectangle">
-                <corners android:radius="@dimen/control_corner_material" />
-                <!-- Should be same as ?attr/buttonColorPressed
-                Referencing theme attributes is not supported before L -->
-                <solid android:color="@color/icon2017_green" />
+                <corners
+                    android:radius="4dp"/>
+                <gradient
+                    android:angle="45"
+                    android:centerX="0.7"
+                    android:centerY="0.7"
+                    android:startColor="@color/olamot2018_very_dark_blue"
+                    android:centerColor="@color/olamot2018_very_dark_blue"
+                    android:endColor="@color/olamot2018_blue"
+                    android:type="linear"
+                    android:useLevel="false" />
+                <stroke
+                    android:width="1dp"
+                    android:color="@color/white"/>
                 <padding android:left="@dimen/button_padding_horizontal_material"
                          android:top="@dimen/button_padding_vertical_material"
                          android:right="@dimen/button_padding_horizontal_material"
                          android:bottom="@dimen/button_padding_vertical_material" />
-            </shape>
-        </inset>
-    </item>
-
-
-    <!-- Disabled state -->
-    <item android:state_enabled="false">
-        <inset xmlns:android="http://schemas.android.com/apk/res/android"
-            android:insetLeft="@dimen/button_inset_horizontal_material"
-            android:insetTop="@dimen/button_inset_vertical_material"
-            android:insetRight="@dimen/button_inset_horizontal_material"
-            android:insetBottom="@dimen/button_inset_vertical_material">
-            <shape android:shape="rectangle">
-                <corners android:radius="@dimen/control_corner_material" />
-                <solid android:color="@color/very_light_gray" />
-                <padding android:left="@dimen/button_padding_horizontal_material"
-                    android:top="@dimen/button_padding_vertical_material"
-                    android:right="@dimen/button_padding_horizontal_material"
-                    android:bottom="@dimen/button_padding_vertical_material" />
             </shape>
         </inset>
     </item>
@@ -48,10 +39,17 @@
                android:insetRight="@dimen/button_inset_horizontal_material"
                android:insetBottom="@dimen/button_inset_vertical_material">
             <shape android:shape="rectangle">
-                <corners android:radius="@dimen/control_corner_material" />
-                <!-- Should be same as ?attr/buttonColor
-                Referencing theme attributes is not supported before L -->
-                <solid android:color="@color/icon2017_dark_green" />
+                <corners
+                    android:radius="4dp"/>
+                <gradient
+                    android:angle="45"
+                    android:centerX="0.7"
+                    android:centerY="0.7"
+                    android:startColor="@color/olamot2018_very_dark_blue"
+                    android:centerColor="@color/olamot2018_very_dark_blue"
+                    android:endColor="@color/olamot2018_blue"
+                    android:type="linear"
+                    android:useLevel="false"/>
                 <padding android:left="@dimen/button_padding_horizontal_material"
                          android:top="@dimen/button_padding_vertical_material"
                          android:right="@dimen/button_padding_horizontal_material"

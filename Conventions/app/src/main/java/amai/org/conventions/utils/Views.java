@@ -3,6 +3,8 @@ package amai.org.conventions.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Point;
+import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.view.Display;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -13,6 +15,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ListAdapter;
+
+import java.lang.reflect.Field;
 
 public class Views {
 	public static Point findCoordinates(ViewGroup parentView, View childView) {
@@ -103,4 +107,53 @@ public class Views {
 			}
 		};
 	}
+
+	// Radial gradients don't support percentage before Lollipop, so we set the gradient radius in pixels instead
+	// and use it to multiply against the view size in runtime.
+	// Also we take the bigger size of the height and width instead of the smaller size because it makes more sense.
+	public static void fixRadialGradient(final View view) {
+		view.post(new Runnable() {
+			@Override
+			public void run() {
+				// We don't check the gradient type here because this API was only added in SDK version 24
+				// but gradientRadius doesn't do anything anyway for the other types so we can assume it's
+				// a radial gradient if it has a value
+				if (view.getBackground() != null && view.getBackground() instanceof GradientDrawable) {
+					GradientDrawable gradient = (GradientDrawable) view.getBackground();
+					float gradientRadius = getGradientRadius(gradient);
+					if (gradientRadius > 0) {
+						int viewSize;
+						if (view.getMeasuredHeight() < view.getMeasuredWidth()) {
+							viewSize = view.getMeasuredWidth();
+						} else {
+							viewSize = view.getMeasuredHeight();
+						}
+						gradient.mutate();
+						gradient.setGradientRadius(gradientRadius * viewSize);
+					}
+				}
+			}
+		});
+	}
+
+	private static float getGradientRadius(GradientDrawable gradient) {
+		if (Build.VERSION.SDK_INT >= 21) {
+			return gradient.getGradientRadius();
+		}
+		// getGradientRadius was added in Lollipop for some reason so we have to use reflection to get it
+		// prior
+		try {
+			Field mGradientStateField = gradient.getClass().getDeclaredField("mGradientState");
+			mGradientStateField.setAccessible(true);
+			Object gradientState = mGradientStateField.get(gradient);
+			Field mGradientRadiusField = gradientState.getClass().getDeclaredField("mGradientRadius");
+			mGradientRadiusField.setAccessible(true);
+			Object gradientRadius = mGradientRadiusField.get(gradientState);
+			return (Float) gradientRadius;
+		} catch (Exception e) {
+			Log.e("amai", "Could not get gradient radius", e);
+			return 0;
+		}
+	}
+
 }

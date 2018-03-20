@@ -81,9 +81,13 @@
         <!-- Updates Screen -->
         <attr name="updateTimeColor" format="color|reference"/>
         <attr name="updateItemBorder" format="color|reference"/>
+        <attr name="updateItemSeparator" format="color|reference"/>
         <attr name="updatesBackground" format="color|reference"/>
+        <attr name="updateTextColor" format="color|reference"/>
         <attr name="newUpdateBackground" format="color|reference"/>
+        <attr name="newUpdateTextColor" format="color|reference"/>
         <attr name="focusedUpdateBackground" format="color|reference"/>
+        <attr name="focusedUpdateTextColor" format="color|reference"/>
         <!-- Map Screen -->
         <attr name="locationDetailsBackground" format="color|reference"/>
         <attr name="locationDetailsTopLineColor" format="color|reference"/>
@@ -107,6 +111,7 @@
         <attr name="eventFeedbackTextColor" format="color|reference"/>
         <!-- Buttons -->
         <attr name="highlightedButtonBackground" format="integer|reference"/>
+        <attr name="highlightedButtonTextColor" format="integer|reference"/>
         <attr name="buttonColor" format="color|reference"/>
         <attr name="buttonColorPressed" format="color|reference"/>
         <attr name="borderlessButtonColor" format="color|reference"/>

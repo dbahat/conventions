@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppBaseTheme.Olamot2018.Toolbar"/>
+    <style name="AppBaseTheme.Olamot2018" parent="AppBaseTheme.Dark">
+        <!-- Sub-themes -->
+        <item name="android:dialogTheme">@style/AppDialogTheme.Olamot2018</item>
+        <item name="alertDialogTheme">@style/AppAlertDialogTheme.Olamot2018</item>
+        <!-- not using android:actionOverflowButtonStyle since it doesn't seem to work in Jellybean -->
+        <item name="actionOverflowButtonStyle">@style/OverflowMenu.Olamot2018</item>
+        <!-- General -->
+        <item name="colorAccent">@color/olamot2018_dark_red</item>
+        <item name="android:colorBackground">@null</item>
+        <item name="android:textColorLink">@color/olamot2018_dark_red</item>
+        <item name="actionButtonColor">@color/olamot2018_dark_red</item>
+        <item name="swipeToRefreshColor">@color/olamot2018_dark_red</item>
+        <item name="snackbarActionColor">@color/olamot2018_dark_red</item>
+        <item name="highlightedButtonBackground">@drawable/olamot2018_highlighted_button</item>
+        <item name="highlightedButtonTextColor">@drawable/olamot2018_highlighted_button_text</item>
+        <item name="borderlessButtonColor">@color/olamot2018_dark_red</item>
+        <item name="feedbackButtonColor">@color/white</item>
+        <item name="feedbackAnswerButtonColor">@color/olamot2018_light_teal</item>
+        <item name="feedbackAnswerButtonSelectedColor">@color/olamot2018_transparent_teal</item>
+        <item name="activitiesBackground">@drawable/olamot2018_background</item>
+        <item name="eventListDivider">@drawable/event_list_divider</item>
+        <item name="conflictingEventListDivider">@android:color/transparent</item>
+
+        <!-- Notifications -->
+        <item name="notificationSmallIcon">@drawable/olamot2018_notification_small</item>
+        <!-- Toolbar -->
+        <item name="toolbarBackground">@null</item>
+        <item name="toolbarIconAccentColor">@color/gold</item>
+        <!-- Navigation Popup -->
+        <item name="navigationPopupBackground">@color/black</item>
+        <item name="navigationPopupTitle">@drawable/olamot2018_logo</item>
+        <item name="navigationPopupBottomImage">@null</item>
+        <item name="navigationPopupNotSelectedColor">@color/white</item>
+        <item name="navigationPopupSelectedColor">@color/olamot2018_dark_red</item>
+        <item name="navigationPopupSeparatorColor">@color/white</item>
+        <!-- About Screen -->
+        <item name="aboutLogo">@drawable/olamot2018_logo</item>
+        <!-- Home Screen -->
+        <item name="homeBoxTopMargin">2dp</item>
+        <item name="homeSingleButtonTopMargin">10dp</item>
+        <item name="homeBackground">@drawable/olamot2018_background</item>
+        <item name="homeToolbarTitle">@null</item>
+        <item name="homeLogo">@drawable/olamot2018_logo_and_text</item>
+        <item name="homeTitleBackground">@drawable/olamot2018_home_title</item>
+        <item name="homeTitleText">@color/white</item>
+        <item name="homeMessageBackground">@drawable/olamot2018_home_info</item>
+        <item name="homeMessageText">@color/white</item>
+        <item name="homeCurrentEventBackground">@drawable/olamot2018_home_current_event</item>
+        <item name="homeUpcomingEventBackground">@drawable/olamot2018_home_upcoming_event</item>
+        <item name="homeButtonBackground">@drawable/olamot2018_home_activity_button</item>
+        <item name="homeButtonText">@color/white</item>
+        <item name="homeBottomImage">@null</item>
+        <item name="homeEventNameInList">@color/white</item>
+        <!-- Event View -->
+        <item name="eventTypeEndedColor">@color/transparent_white</item>
+        <item name="eventTypeCurrentColor">@color/olamot2018_teal</item>
+        <item name="eventTypeNotStartedColor">@color/white</item>
+        <item name="eventTimeDefaultTextColor">@color/white</item>
+        <item name="eventTimeDefaultBackgroundColor">@color/olamot2018_dark_red</item>
+        <item name="eventDetailsColor">@color/ultra_light_gray</item>
+        <item name="eventSendFeedbackColor">@color/gold</item>
+        <item name="eventFavoriteIcon">@drawable/ic_star_black_24dp</item>
+        <item name="eventNonFavoriteColor">@color/white</item>
+        <item name="eventFavoriteColor">@color/gold</item>
+        <!-- Map Screen -->
+        <item name="locationDetailsBackground">@color/transparent_black</item>
+        <item name="locationDetailsTitleColor">@color/white</item>
+        <item name="mapBackground">@drawable/olamot2018_background</item>
+        <item name="standIconColor">@color/olamot2018_dark_red</item>
+        <item name="standsTypeTitleColor">@color/olamot2018_dark_red</item>
+        <!-- Updates Screen -->
+        <item name="focusedUpdateBackground">@android:color/transparent</item>
+        <item name="newUpdateBackground">@android:color/transparent</item>
+        <item name="updateTimeColor">@android:color/transparent</item>
+        <item name="updateItemBorder">@color/white</item>
+        <item name="newUpdateTextColor">@color/olamot2018_teal</item>
+        <item name="focusedUpdateTextColor">@color/light_yellow</item>
+        <item name="updateItemSeparator">@drawable/olamot2018_divider</item>
+        <!-- My Events Screen -->
+        <item name="nextEventStartTimeBackground">@color/olamot2018_very_transparent_white</item>
+        <item name="nextEventStartTimeTextColor">@color/white</item>
+        <item name="conflictingEventsBackground">@color/olamot2018_very_transparent_white</item>
+        <!-- Event Screen -->
+        <item name="eventToolbarColor">@color/olamot2018_black</item>
+        <item name="eventDetailsDefaultBackgroundColor">@color/olamot2018_black</item>
+        <item name="eventDetailsBoxColor">@color/olamot2018_transparent_black</item>
+        <item name="eventFeedbackBoxColor">@color/olamot2018_transparent_dark_red</item>
+        <item name="eventDescriptionTextColor">@color/white</item>
+        <item name="eventTitleBackground">@null</item>
+        <item name="eventTitleTextColor">@color/white</item>
+        <item name="eventDetailsHighlightedTextColor">@color/light_yellow</item>
+        <!-- Feedback Screen -->
+        <item name="progressBarDrawable">@drawable/olamot2018_rotating_circular_progress_bar</item>
+        <!-- Programme Screen -->
+        <item name="eventTimeHeaderDefaultTextColor">@color/white</item>
+        <item name="eventTimeHeaderBackground">@null</item>
+        <!-- Second Hand Screen -->
+        <item name="secondHandFormClosedColor">@color/dark_gray</item>
+        <item name="secondHandItemSoldColor">@color/olamot2018_transparent_teal</item>
+        <item name="secondHandItemMissingColor">@color/olamot2018_dark_red</item>
+    </style>
+
+    <style name="AppBaseTheme.Olamot2018.Toolbar.Event" parent="AppBaseTheme.Olamot2018.Toolbar">
+    </style>
+
+
+    <style name="AppDialogTheme.Olamot2018" parent="Theme.AppCompat.Light.Dialog">
+        <!-- This is the default starting API23. In any case the title is always left-justified so it's best to not use it. -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="colorAccent">@color/olamot2018_dark_red</item>
+        <item name="android:textColorPrimary">@android:color/black</item>
+    </style>
+
+    <style name="AppAlertDialogTheme.Olamot2018" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/olamot2018_dark_red</item>
+        <item name="android:textColorPrimary">@android:color/black</item>
+    </style>
+
+    <style name="AppBaseTheme.Olamot2018.Toolbar.Splash">
+        <item name="android:windowBackground">@drawable/olamot2018_splash_background</item>
+    </style>
+    <style name="OverflowMenu.Olamot2018" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_more_vert_white_24dp</item>
+    </style>
+</resources>

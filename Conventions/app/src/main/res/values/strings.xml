@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">פסטיבל אייקון</string>
+    <string name="app_name">כנס עולמות</string>
 
     <string name="programme_title">תוכנייה</string>
     <string name="my_events_title">האירועים שלי</string>
@@ -26,7 +26,7 @@
     <string name="update_not_logged_in">כדי לצפות בעדכונים יש להתחבר לפייסבוק</string>
     <string name="update_login_error">לא ניתן להתחבר לפייסבוק. בדוק חיבור לאינטרנט</string>
 
-    <string name="my_events_no_data">הוסף אירוע לאירועים שלי ע\"י לחיצה על הכוכב בדף האירוע או ברשימת האירועים, או ע\"י יבוא מאתר אייקון</string>
+    <string name="my_events_no_data">הוסף אירוע לאירועים שלי ע\"י לחיצה על הכוכב בדף האירוע או ברשימת האירועים, או ע\"י יבוא מאתר עולמות</string>
     <string name="my_events_share">שתף</string>
     <string name="my_event_share_title">התוכנייה שלי ל%s:</string>
     <string name="my_event_share_signature">נוצר באפליקצית %s.</string>
@@ -47,7 +47,7 @@
     <string name="back">חזור</string>
 
     <string name="event_feedback_mail_title">מייל אוטומטי - פידבק ל%s עבור האירוע</string>
-    <string name="convention_feedback_mail_title">מייל אוטומטי - פידבק לפסטיבל %s</string>
+    <string name="convention_feedback_mail_title">מייל אוטומטי - פידבק לכנס %s</string>
     <string name="feedback_send_failed">לא ניתן לשלוח את הפידבק. נסה שנית מאוחר יותר</string>
     <string name="feedback_sent">הפידבק נשלח. תודה!</string>
     <string name="feedback_sending_time_over">זמן שליחת הפידבק הסתיים</string>
@@ -77,7 +77,7 @@
     <string name="configure_notification_time">%d דקות</string>
 
     <string name="missing_play_services_dialog_title">לא נמצא Google play services</string>
-    <string name="missing_play_services_dialog_message">על מנת לקבל התראות במהלך הפסטיבל ולצפות בדרכי הגעה, יש להתקין או לעדכן את Google play services ולוודא שהשירות פעיל</string>
+    <string name="missing_play_services_dialog_message">על מנת לקבל התראות במהלך הכנס ולצפות בדרכי הגעה, יש להתקין או לעדכן את Google play services ולוודא שהשירות פעיל</string>
     <string name="missing_play_services_ok_button">התקן</string>
     <string name="missing_play_services_cancel_button">אל תתקין</string>
     <string name="missing_play_services_neutral_button">לא עכשיו</string>
@@ -98,9 +98,9 @@
     <string name="events_without_feedback_title">מלא פידבק על אירועים</string>
     <string name="events_feedback_no_events">בחר אירועים שהיית בהם דרך התוכנייה ומלא עליהם פידבק.</string>
     <string name="events_with_feedback_title">פידבק שמילאת על אירועים</string>
-    <string name="convention_feedback_title">פידבק על הפסטיבל</string>
-    <string name="convention_feedback_subtitle">מלא פידבק כללי על הפסטיבל - קופות, יריד הדוכנים, הפונדק, אוהל המשחקים וכל דבר אחר.</string>
-    <string name="question_liked">באיזו מידה נהנית מהפסטיבל?</string>
+    <string name="convention_feedback_title">פידבק על הכנס</string>
+    <string name="convention_feedback_subtitle">מלא פידבק כללי על הכנס - קופות, יריד הדוכנים, הפונדק וכל דבר אחר.</string>
+    <string name="question_liked">באיזו מידה נהנית מהכנס?</string>
     <string name="question_improvement">הצעות לשיפור ונושאים לשימור</string>
     <string name="question_age">גיל</string>
     <string name="age_less_than_12">פחות מ-12</string>
@@ -140,22 +140,19 @@
 הארבעה 4. לא כשר<br/>
 ]]>"</string>
     <string name="about_app_title">אודות האפליקציה</string>
-    <!-- Taken from icon website: http://2017.iconfestival.org.il/about/
-         The only difference is using "&#8209;" instead of "-" at [<a href="http://www.sf-f.org.il/">www.sf&#8209;f.org.il</a>] to prevent a linebreak in the link to sff website and escaping the ' character  -->
+    <!-- Taken from olamot website: http://2018.olamot-con.org.il/about/ -->
     <string name="about_content"><![CDATA[
-<p>פסטיבל אייקון הוא פסטיבל ארצי שנתי ל<a href="http://2017.iconfestival.org.il/about/scifi-and-fantasy/">מדע בדיוני, פנטזיה</a> ו<a href="http://2017.iconfestival.org.il/about/roleplaying-games/">משחקי תפקידים</a>, שמתקיים במרכז תל אביב <a href="http://2017.iconfestival.org.il/about/past-icon/">מאז שנת 1998</a>. מדי שנה מושך אליו הפסטיבל קהל של אלפים, צעירים וצעירים ברוחם. השנה יתקיים הפסטיבל זו הפעם ה-21, בתאריכים 10-8 באוקטובר, בחול המועד סוכות.</p>
-<p>הפסטיבל מציע תוכנית ענפה הכוללת מאות אירועים בתחומי הספרות, הטלוויזיה, הקולנוע, הקומיקס, המדע הפופולרי ועוד. בין התכנים המגוונים, המתפרשים על שלושה ימים ושלושה לילות, מציג הפסטיבל מופעי בידור מקוריים, הרצאות, פאנלים, חידונים, תחרות תחפושות, סדנאות מקצועיות, אירוח של יוצרים מהארץ ומהעולם והקרנות סרטים. הפסטיבל כולל כנס אקדמי בהשתתפותם של אנשי אקדמיה משלל אוניברסיטאות ומכוני מחקר.</p>
-<p>הפסטיבל מעניק למבקריו מגוון הזדמנויות למפגשים ולהיכרות עם חובבים אחרים בטווח רחב של גילאים ותחומי עניין וכך תורם לגיבוש קהילות החובבים בתחומי המדע הבדיוני, הפנטזיה ומשחקי התפקידים בישראל. כמו כן מוענקים במהלך הפסטיבל <a href="http://2017.iconfestival.org.il/contests/geffen/">פרס גפן</a> ו<a href="http://2017.iconfestival.org.il/contests/einat/">פרס עינת</a> לעידוד היצירה בתחום המדע הבדיוני והפנטזיה. הפסטיבל מפעיל אולמות רבים במקביל ומציע מתחם ענק של משחקי תפקידים מכל הסוגים, ואת יריד הדוכנים הגדול מסוגו בישראל.</p>
-<p>הפסטיבל מאורגן על ידי האגודה הישראלית למדע בדיוני ולפנטסיה והעמותה למשחקי תפקידים בישראל ובשיתוף פעולה עם המחלקה למופעים, עיריית תל-אביב – יפו.</p>
-<p><a title="האגודה הישראלית למדע בדיוני ולפנטסיה" href="http://www.sf-f.org.il/" target="_blank"><strong>האגודה הישראלית למדע בדיוני ולפנטסיה</strong></a> הינה מוסד ללא כוונת רווח (מלכ&quot;ר) שנוסדה על מנת לקדם את תחום המדע הבדיוני והפנטזיה בישראל. האגודה פועלת ברציפות מאז שנת 1996, ופעילותה עד כה כוללת כנסים רבים (פסטיבל &quot;<a href="http://2017.iconfestival.org.il/">אייקון</a>&quot;, כנס &quot;<a href="http://www.olamot-con.org.il/" target="_blank">עולמות</a>&quot;, כנס &quot;<a href="http://meorot.sf-f.org.il/" target="_blank">מאורות</a>&quot;, ועוד); חלוקת <a href="http://geffen.sf-f.org.il/" target="_blank">הפרס השנתי לספרות מדע בדיוני ופנטזיה ע&quot;ש עמוס גפן ז&quot;ל</a>; חלוקת <a href="http://www.sf-f.org.il/archives/710" target="_blank">מענק שנתי להפקות מקור</a>; הרצאות בנושאי מדע ומדע בדיוני; הקרנות בכורה של סרטי מדע בדיוני ופנטזיה בחסות המפיצים; תרומות ספרים; תחרויות סיפורי מדע בדיוני ופנטסיה מקוריים; מועדון קריאה חודשי; סדנאות כתיבה; הפעלת מגזין מקוון למדע בדיוני ולפנטזיה; <strong>תמיכה בארגוני חובבים נוספים כגון אמא&quot;י (ארגון מנגה ואנימה ישראל) וקהילת ג\'וס ווידון הישראלית</strong>; ופעילויות נוספות. כמו כן מוציאה האגודה לאור מדי שנה את הספר &quot;<a href="http://annual.sf-f.org.il/" target="_blank">היֹה יהיה</a>&quot;: אסופת סיפורי מדע בדיוני ופנטזיה ישראלית מקורית. <strong>כל פעילי האגודה הם מתנדבים המקדישים מזמנם ללא תמורה.</strong> ניתן לקרוא עוד על אודות האגודה, להצטרף ולקרוא כתבות, מאמרים וביקורות בנושאי מדע בדיוני ופנטזיה באתר <a href="http://www.sf-f.org.il/" target="_blank">www.sf&#8209;f.org.il</a></p>
-<p><a title="העמותה למשחקי תפקידים בישראל" href="http://www.roleplay.org.il/" target="_blank"><strong>העמותה למשחקי תפקידים בישראל</strong></a> הוקמה בשנת 1999 על ידי חובבים ישראלים ושמה לה למטרה לקדם את המודעות למשחקי התפקידים – תחביב שמושך כיום עשרות מיליוני צעירים ומבוגרים, נשים וגברים, בכל רחבי העולם. במשך שנות פעילותה קיימה העמותה מאות פעילויות, בעבודה התנדבותית של פעילים מסורים, וכן הוציאה לאור ספרים ובטאון. העמותה מפיקה בחול המועד פסח את כנס &quot;<a href="http://bigor.org.il/" target="_blank">ביגור</a>&quot; ושותפה בארגון פסטיבל אייקון למדע בדיוני, פנטזיה ומשחקי תפקידים. כמו כן היא מספקת ייעוץ בתחומה לגופים מקצועיים ולכלי תקשורת. אתר העמותה: <a href="http://www.roleplay.org.il/" target="_blank">www.roleplay.org.il</a></p>
+<p>כנס &quot;עולמות&quot; הוא כנס למדע בדיוני ולפנטזיה שנערך בארגונן של <a href="http://www.sf-f.org.il/" target="_blank" rel="noopener">האגודה הישראלית למדע בדיוני ולפנטסיה</a> ו<a href="http://tolkien.org.il/" target="_blank" rel="noopener">קהילת טולקין הישראלית</a>.</p>
+<p>מדי שנה מושך אליו הכנס קהל של אלפי אנשים, צעירים וצעירים ברוחם, ומציג להם תוכנית אמנותית ועיונית ענפה בתחומי הספרות, הטלוויזיה, הקולנוע, הקומיקס, המדע הפופולרי, האנימה, הספקנות ועוד. הקהל שמגיע לכנס הוא קהל בוגר, אינטליגנטי ומתוחכם, שתענוג לבנות עבורו הרצאות ודיונים.</p>
+<p>השנה יערך כנס עולמות תחת הנושא &quot;פרידות&quot; בתאריכים 4-3 באפריל 2018. בואו להנות איתנו ביומיים של הרצאות, סדנאות, פאנלים, חידונים, מופעים מכל הסוגים ואירועים נוספים – כל מה שמצית את הדמיון ואת המחשבה.</p>
+<p>להתראות בעולמות!</p>
 ]]></string>
     <string name="about_links"><![CDATA[
-<p><a href=\"http://2017.iconfestival.org.il/\">לאתר הפסטיבל</a></p>
+<p><a href=\"http://2018.olamot-con.org.il/\">לאתר הכנס</a></p>
 ]]></string>
     <string name="about_app_content"><![CDATA[
-האפליקציה פותחה על ידי דוד בהט וטל ספן עבור פסטיבל אייקון. בקשות והצעות ניתן לכתוב <a href="market://details?id=sff.org.conventions">בדף האפליקציה בחנות</a>.
-<br/>תודות: אלי בויום, אניטה קרפל, גיא בכר, גליה בהט, חננאל לבנה, תומר שלו.
+האפליקציה פותחה על ידי דוד בהט וטל ספן עבור כנס עולמות. בקשות והצעות ניתן לכתוב <a href="market://details?id=sff.org.conventions">בדף האפליקציה בחנות</a>.
+<br/>תודות: אלי בויום, גיא בכר, גליה בהט, נאור טביב, קסם ברקוביץ\'.
 ]]></string>
     <string name="question_map_signs">האם המפה והשילוט היו ברורים ושימושיים?</string>
     <string name="question_conflicting_events">אם היה אירוע שרצית ללכת אליו ולא הלכת, מה הסיבה לכך?</string>
@@ -193,7 +190,7 @@
     <string name="push_notification_title">התראה</string>
     <string name="change_settings">שנה הגדרות</string>
     <string name="configure_notifications">הגדר התראות</string>
-    <string name="configure_notifications_dialog_message">באפליקציה זו נשלחות התראות בזמן הפסטיבל. ניתן לשנות את הגדרות קבלת ההתראות בכל זמן.</string>
+    <string name="configure_notifications_dialog_message">באפליקציה זו נשלחות התראות בזמן הכנס. ניתן לשנות את הגדרות קבלת ההתראות בכל זמן.</string>
     <string name="advanced_preferences">אפשרויות מתקדמות</string>
     <string name="show_test_notifications_title">בדיקות</string>
     <string name="show_test_notifications_summary">הצג התראות בדיקה</string>
@@ -203,35 +200,32 @@
     <string name="tags">תגיות: %s</string>
     <string name="about">אודות</string>
     <string name="no_updates_found">לא נמצאו עדכונים</string>
-    <!-- Copied from http://2017.iconfestival.org.il/info/transportation-parking/
-         The only difference is escaping the ' character -->
+    <!-- Copied from http://2018.olamot-con.org.il/info/arrival/
+         The only difference is removing the map iframe -->
     <string name="arrival_method_description"><![CDATA[
-<h1 class="entry-title post-title">דרכי הגעה וחניה</h1>
+<h1 class="entry-title post-title">הגעה וחניה</h1>
 				<div class="post-entry">
-					<p dir="RTL">כתובת הפסטיבל: סינמטק תל אביב ומתחם אשכול הפיס, רחוב הארבעה (פינת שפרינצק 4) תל אביב. הכניסה למתחם מרחוב הארבעה.</p>
+					<p>כתובת הכנס: מתחם אשכול פיס, שפרינצק, 4 תל אביב. הכניסה נמצאת ברחוב הארבעה, ליד החניון.</p>
 <h2>תחבורה ציבורית</h2>
-<p dir="RTL"><b>מתחנת רכבת השלום</b> אפשר להגיע באמצעות קו 63 של דן (ירידה בתחנת החשמונאים). אפשר גם להגיע רגלית, תחנת הרכבת נמצאת במרחק 15 דקות הליכה ממתחם הפסטיבל. אפשר גם לנסוע תחנה אחת דרומה בקווים 60 או 1600 ולהמשיך ברגל כחמש דקות הליכה.</p>
-<p dir="RTL"><b>מהתחנה המרכזית החדשה</b> בתל אביב: קווים 26, 70 של דן (תחנת ירידה באבן גבירול) או קו 5 של דן (תחנת ירידה בשדרות רוטשילד פינת מרמורק, מרחק עשר דקות הליכה ממתחם הפסטיבל).</p>
-<h3>קווי לילה:</h3>
-<p dir="RTL">במהלך חול המועד סוכות יפעלו קווי לילה מיוחדים בתוך תל אביב וקווים בין-עירוניים לכל הערים המרכזיות בארץ ובתוכן. באתר קווי לילה אפשר להתעדכן בחברות המפעילות את השירות (כולל אגד, דן, ויאוליה, מטרופוליטן, קוים, מטרודן, נתיב אקספרס) בפריסה ארצית.</p>
-<h3>רכבות:</h3>
-<p dir="RTL">מידע על שעות פעילות הרכבת בלילה אפשר למצוא באתר רכבת ישראל. המתחם נמצא במרחק 15 דקות הליכה מתחנת רכבת השלום, ואפשר להגיע אליו גם באוטובוס מתחנה זו (קו 63) ומתחנות נוספות.</p>
-<p dir="RTL">לנוחיותכם הנכם מוזמנים לבדוק דרכי הגעה נוספות באתרים הבאים:</p>
-<p dir="RTL"><a href="http://www.moovit.co.il/" target="_blank" rel="noopener">www.moovit.co.il</a></p>
-<p dir="RTL"><a href="http://www.bus.co.il/" target="_blank" rel="noopener">www.bus.co.il</a></p>
-<p dir="RTL"><a href="http://www.callkav.gov.il/" target="_blank" rel="noopener">www.callkav.gov.il</a></p>
-<h2>חניה</h2>
-<p dir="RTL">מגרשי חניה הסמוכים למתחם הפסטיבל:</p>
-<ul>
-<li>חניון הארבעה (רחוב החשמונאים)</li>
-<li>חניון ארניה (רחוב ארניה)</li>
-<li>חניון שפרינצק (רחוב שפרינצק)</li>
-<li>חניון גבעון / TLV (רחוב הארבעה)</li>
-</ul>
+<p>מתחנת רכבת השלום אפשר להגיע בקו 63 של דן (ירידה בתחנת החשמונאים). אפשר גם להגיע ברגל; תחנת הרכבת נמצאת במרחק 15 דקות הליכה לא מאומצת ממתחם הכנס.</p>
+<p>מהתחנה המרכזית החדשה בתל אביב: קווים 26, 70 של דן (תחנת ירידה באבן גבירול) או קו 5 של דן (תחנת ירידה בשדרות רוטשילד פינת מרמורק, מרחק עשר דקות הליכה לא מאומצת ממתחם הכנס).</p>
 <p>&nbsp;</p>
-<p dir="RTL"><b><u><span lang="HE" style="margin: 0px;font-family: 'Arial',sans-serif"><span style="color: #000000">הטבה בחניון גבעון – רח\' הארבעה</span></span></u></b></p>
-<p dir="RTL"><span lang="HE" style="margin: 0px;font-family: 'Arial',sans-serif"><span style="color: #000000">כניסה לחניה החל מהשעה 16:30 ועד למחרת ב-06:00 – בעלות 15 ₪ בלבד. יש לקחת עמכם את כרטיס החניה ולהעבירו במקודד הכרטיסים שנמצא משמאל לקופות הסינמטק. ההטבה ניתנת גם ללא קשר לרכישת כרטיסים.</span></span></p>
-</div>
+<h3>קווי לילה:</h3>
+<p>במהלך חול המועד פסח יפעלו קווי לילה מיוחדים בתוך תל אביב וקווים בין-עירוניים לכל הערים המרכזיות בארץ ובתוכן. ב<a href="http://www.kav-layla.co.il/Web/He/Default.aspx">אתר קווי לילה</a> אפשר להתעדכן בחברות המפעילות את השירות (כולל אגד, דן, ויאוליה, מטרופוליטן, קוים, מטרודן ונתיב אקספרס) בפריסה ארצית ובאפליקציות הסלולריות לתחבורה ציבורית בזמן אמת.</p>
+<h3>רכבות:</h3>
+<p>מידע על שעות פעילות הרכבת בלילה אפשר למצוא ב<a href="https://www.rail.co.il">אתר רכבת ישראל</a>. המתחם נמצא במרחק 15 דקות הליכה לא מאומצת מתחנת רכבת השלום, ואפשר להגיע אליו גם באוטובוס מהתחנה הזו (קו 63) ומתחנות נוספות.</p>
+<p>לנוחותכם, אתם מוזמנים לבדוק דרכי הגעה נוספות באתרים הבאים:</p>
+<p><a href="http://www.moovit.co.il/" target="_blank" rel="noopener">www.moovit.co.il</a></p>
+<p><a href="http://www.bus.co.il/" target="_blank" rel="noopener">www.bus.co.il</a></p>
+<p><a href="http://www.callkav.gov.il/" target="_blank" rel="noopener">www.callkav.gov.il</a></p>
+<p>&nbsp;</p>
+<h2>חניה:</h2>
+<p>מגרשי חניה הסמוכים למתחם הכנס:</p>
+<ul>
+<li>חניון גבעון, לשעבר הארבעה (רחוב החשמונאים)</li>
+<li>חניוני מתחם שרונה (דרך אריה לובה אליאב)</li>
+</ul>
+									</div>
 ]]></string>
     <string name="discounts">הטבות</string>
     <string name="navigate_public_transportation">ניווט בתחבורה ציבורית</string>
@@ -289,8 +283,8 @@
     <string name="second_hand_item_edit">עריכת פריט</string>
     <string name="second_hand_item_edit_instructions">הכנס שם חדש לפריט:</string>
     <string name="cancel2">ביטול</string>
-    <string name="add_events">הוספת אירועים מאתר אייקון</string>
-    <string name="add_events_instructions">הכנס שם משתמש וסיסמא לאתר אייקון על מנת להוסיף את האירועים להם קנית כרטיסים מראש.</string>
+    <string name="add_events">הוספת אירועים מאתר עולמות</string>
+    <string name="add_events_instructions">הכנס שם משתמש וסיסמא לאתר עולמות על מנת להוסיף את האירועים להם קנית כרטיסים מראש.</string>
     <string name="add_events_failed">לא ניתן להוסיף אירועים, בדוק חיבור לאינטרנט</string>
     <string name="several_events_added">נוספו %d אירועים</string>
     <string name="one_event_added">נוסף אירוע אחד</string>

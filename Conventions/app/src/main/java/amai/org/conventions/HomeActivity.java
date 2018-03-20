@@ -31,6 +31,7 @@ import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.updates.UpdatesActivity;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.Views;
 import sff.org.conventions.R;
 
 import static amai.org.conventions.utils.CollectionUtils.filter;
@@ -133,6 +134,8 @@ public class HomeActivity extends NavigationActivity {
 				}
 			});
 		}
+		Views.fixRadialGradient(findViewById(R.id.home_current_event_container_background));
+		Views.fixRadialGradient(upcomingEventContainer);
 	}
 
 	private void setContentForNoUpcomingFavorites() {
@@ -188,6 +191,8 @@ public class HomeActivity extends NavigationActivity {
 				navigateToEvent(event.getId());
 			}
 		});
+
+		Views.fixRadialGradient(upcomingEventsListView);
 	}
 
 	public void onCurrentEventClicked(View view) {
@@ -278,6 +283,7 @@ public class HomeActivity extends NavigationActivity {
 		setContentInContentContainer(R.layout.activity_home_before_convention, false, false);
 		TextView titleView = (TextView)findViewById(R.id.home_content_title);
 		TextView contentView = (TextView)findViewById(R.id.home_content);
+		Views.fixRadialGradient(findViewById(R.id.home_content_container));
 
 		// the convention didn't start yet. Show the user the number of days until it starts.
 		int daysUntilConventionStarts = getDaysUntilConventionStart();
@@ -304,6 +310,7 @@ public class HomeActivity extends NavigationActivity {
 		FrameLayout contentViewContainer = (FrameLayout)findViewById(R.id.home_content_container);
 		TextView titleView = (TextView)findViewById(R.id.home_content_title);
 		TextView contentView = (TextView)findViewById(R.id.home_content);
+		Views.fixRadialGradient(contentViewContainer);
 		// All the events are already in-progress or finished. Show the user to the feedback screen.
 		contentViewContainer.setOnClickListener(new View.OnClickListener() {
 			@Override

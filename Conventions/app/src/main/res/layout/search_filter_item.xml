@@ -30,6 +30,7 @@
         android:layout_toStartOf="@id/search_filter_item_checkbox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         tools:text="הרצאות"
         style="@style/TextAppearance.AppCompat.Small"/>
 

@@ -57,6 +57,7 @@
             android:onClick="onCurrentEventClicked">
             <!-- This view is inside a FrameLayout because in previous API levels foreground was not available for other views -->
             <LinearLayout
+                android:id="@+id/home_current_event_container_background"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="5dp"

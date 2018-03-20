@@ -3,7 +3,6 @@ package amai.org.conventions.model.conventions;
 import android.text.TextUtils;
 
 import java.io.BufferedWriter;
-import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
@@ -407,8 +406,7 @@ public class Olamot2018Convention extends SffConvention {
 	protected ImageIdToImageResourceMapper initImageMapper() {
 		ImageIdToImageResourceMapper imageMapper = new ImageIdToImageResourceMapper();
 
-		// TODO change for olamot 2018
-		imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.icon2017_event_background);
+		imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.olamot2018_background);
 
 		return imageMapper;
 	}
@@ -548,15 +546,5 @@ public class Olamot2018Convention extends SffConvention {
 			os.close();
 		}
 		return request;
-	}
-
-	@Override
-	public ConventionEvent findEventByURL(String url) {
-		// Event URLs in event descriptions can point to an alternate URL
-		// TODO change for olamot 2018
-		if (url.startsWith("http://program.iconfestival.org.il/")) {
-			url = "http://iconfestival.com/" + url.substring("http://program.iconfestival.org.il/".length());
-		}
-		return super.findEventByURL(url);
 	}
 }
