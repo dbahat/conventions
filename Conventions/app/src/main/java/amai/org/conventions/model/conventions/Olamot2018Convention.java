@@ -479,7 +479,7 @@ public class Olamot2018Convention extends SffConvention {
 	@Override
 	protected URL initUpdatesURL() {
 		try {
-			return new URL("https://api.sf-f.org.il/announcements/get.php?slug=olamot2018"); // use test_con for tests
+			return new URL("https://api.sf-f.org.il/announcements/get.php?slug=testcon"); // use test_con for tests
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}

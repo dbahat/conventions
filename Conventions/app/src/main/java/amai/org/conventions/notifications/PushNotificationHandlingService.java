@@ -12,6 +12,7 @@ public class PushNotificationHandlingService extends FirebaseMessagingService {
     // optional extra parameters in the remote message payload for showing the message / topic. Expected to be added to the firebase message data payload.
     public static final String TOPIC = "topic";
     public static final String MESSAGE = "message";
+    public static final String ID = "id";
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -25,7 +26,9 @@ public class PushNotificationHandlingService extends FirebaseMessagingService {
                     .putExtra(ShowNotificationService.EXTRA_MESSAGE, remoteMessage.getNotification().getBody());
 
             if (remoteMessage.getData() != null && remoteMessage.getData().containsKey(TOPIC)) {
-                intent.putExtra(ShowNotificationService.EXTRA_CATEGORY, remoteMessage.getData().get(TOPIC));
+                intent
+                        .putExtra(ShowNotificationService.EXTRA_CATEGORY, remoteMessage.getData().get(TOPIC))
+                        .putExtra(ShowNotificationService.EXTRA_ID, remoteMessage.getData().get(ID));
             }
 
             startService(intent);

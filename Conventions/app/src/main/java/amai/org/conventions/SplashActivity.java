@@ -7,7 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.notifications.PushNotification;
 import amai.org.conventions.notifications.PushNotificationDialogPresenter;
-import amai.org.conventions.notifications.PushNotificationHandlingService;
+import amai.org.conventions.updates.UpdatesActivity;
+
+import static amai.org.conventions.notifications.PushNotificationHandlingService.ID;
+import static amai.org.conventions.notifications.PushNotificationHandlingService.MESSAGE;
+import static amai.org.conventions.notifications.PushNotificationHandlingService.TOPIC;
 
 /**
  * Splash activity used only when opening the application to show a default background and start
@@ -25,21 +29,22 @@ public class SplashActivity extends AppCompatActivity {
 			return;
 		}
 
+		if (getIntent().hasExtra(MESSAGE) && getIntent().hasExtra(TOPIC) && getIntent().hasExtra(ID)) {
+			Intent intent = new Intent(SplashActivity.this, UpdatesActivity.class)
+					.putExtra(PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION, new PushNotification(
+							0,
+							getIntent().getStringExtra(ID),
+							getIntent().getStringExtra(MESSAGE),
+							getIntent().getStringExtra(TOPIC)
+					));
+			startActivity(intent);
+			return;
+		}
+
+
 		Intent intent = new Intent(SplashActivity.this, HomeActivity.class)
 				.putExtra(NavigationActivity.EXTRA_INITIALIZE, true)
 				.putExtra(NavigationActivity.EXTRA_EXIT_ON_BACK, true);
-
-		if (getIntent().hasExtra("message") && getIntent().hasExtra("topic")) {
-			intent
-					.putExtra(PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION, new PushNotification(
-							// TODO - Propogate the ID / Message ID from the notification here
-							0,
-							null,
-							getIntent().getStringExtra(PushNotificationHandlingService.MESSAGE),
-							getIntent().getStringExtra(PushNotificationHandlingService.TOPIC)
-					));
-		}
-
 		startActivity(intent);
 
 		// Important - don't call finish() here because for some reason it causes a black screen
