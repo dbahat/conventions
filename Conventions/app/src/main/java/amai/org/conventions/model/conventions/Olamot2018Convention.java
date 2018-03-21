@@ -497,7 +497,6 @@ public class Olamot2018Convention extends SffConvention {
 	@Override
 	public URL getSecondHandFormURL(String id) {
 		try {
-			// TODO change for olamot 2018
 			return new URL("https://calm-dawn-51174.herokuapp.com/getAllItemsByForm?itemFormId=" + URLEncoder.encode(id, "UTF-8"));
 		} catch (MalformedURLException|UnsupportedEncodingException e) {
 			return null;
@@ -517,7 +516,6 @@ public class Olamot2018Convention extends SffConvention {
 					}
 				}
 			}));
-			// TODO change for olamot 2018
 			return new URL("https://calm-dawn-51174.herokuapp.com/getMultipleItemsByForm?itemFormIds=" + idsParam);
 		} catch (MalformedURLException|RuntimeException e) {
 			return null;
