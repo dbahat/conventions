@@ -5,8 +5,6 @@
     <string name="my_events_title">האירועים שלי</string>
     <string name="programme_search_title">חיפוש אירועים</string>
 
-    <string name="icon_kids_title">אייקון Kids</string>
-
     <string name="event_added_to_favorites">האירוע התווסף לאירועים שלי</string>
     <string name="event_added_to_favorites_but_conflicts">האירוע התווסף לאירועים שלי אך הוא מתנגש עם אירוע אחר ברשימה</string>
     <string name="event_conflicts_with_one_question">האירוע מתנגש עם האירוע: %s מרשימת האירועים שלך.</string>
@@ -261,9 +259,6 @@
     <string name="tickets">כרטיסים</string>
     <string name="show_sold_out_events">אירועים ללא כרטיסים</string>
     <string name="last_modified">עודכן: %s</string>
-    <string name="icon_kids_description">מתחם הילדים החדש של פסטיבל אייקון מתארח בסינמטק תל אביב! בכל בוקר יפעל בלובי החדש של הסינמטק מתחם הפעלות חינמי הכולל סדנת יצירה, "ממלכת קרטוניה" - מבוך בתים גמדיים מקרטון, ופינת ניסויים מדעיים.</string>
-    <string name="icon_kids_tickets_info">מגוון סדנאות קולנוע לילדים וסרטים מדובבים יתקיימו באולמות הסינמטק. את הכרטיסים אליהם ניתן לרכוש באתר ובקופות הסינמטק.</string>
-    <string name="icon_kids_buy_tickets">לפרטים ורכישת כרטיסים</string>
     <string name="second_hand">יד שנייה</string>
     <string name="second_hand_no_forms">הוסף את הטפסים שקיבלת במסירת הפריטים לדוכן יד שנייה כדי לראות את מצב הפריטים</string>
     <string name="delete">מחק</string>
