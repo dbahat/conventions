@@ -288,4 +288,6 @@
     <string name="wrong_user_or_password">שם משתמש או סיסמא לא נכונים</string>
     <string name="no_events_added">לא נוספו אירועים</string>
     <string name="loading_events">מייבא אירועים…</string>
+    <string name="notification_channel_description_notifications">הודעות בזמן אמת מהנהלת הכנס</string>
+    <string name="notification_channel_description_reminders">תזכורות הקשורות לאירועים שסימנת בתוכניה</string>
 </resources>

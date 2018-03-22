@@ -9,6 +9,8 @@ import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
+import android.support.v4.app.NotificationCompat;
 
 import java.util.List;
 
@@ -99,13 +101,13 @@ public class ShowNotificationService extends Service {
 	    String message = lastChance ? getString(R.string.notification_feedback_last_chance_message, Convention.getInstance().getDisplayName()) :
 			    getString(R.string.notification_feedback_ended_message, Convention.getInstance().getDisplayName());
 
-	    Notification.Builder builder = getDefaultNotificationBuilder()
+        NotificationCompat.Builder builder = getDefaultNotificationBuilder(Type.ConventionFeedbackReminder.getChannel())
                 .setContentTitle(title)
                 .setContentText(message)
                 .setContentIntent(PendingIntent.getActivity(this, 0, intent, 0))
                 .setDefaults(Notification.DEFAULT_VIBRATE);
 
-        Notification notification = new Notification.BigTextStyle(builder)
+        Notification notification = new NotificationCompat.BigTextStyle(builder)
                 .bigText(message)
                 .build();
 
@@ -166,13 +168,13 @@ public class ShowNotificationService extends Service {
 	    // the intent must have a different action (extras don't affect the equality check - see documentation of PendingIntent).
 	    // In our case we either have a new intent each time (in case it's a a new event displayed) or the same intent of
 	    // opening the FeedbackActivity. If it's the latter we should update it.
-        Notification.Builder builder = getDefaultNotificationBuilder()
+        NotificationCompat.Builder builder = getDefaultNotificationBuilder(Type.EventFeedbackReminder.getChannel())
                 .setContentTitle(getResources().getString(R.string.notification_event_ended_title))
                 .setContentText(notificationText)
                 .setPriority(Notification.PRIORITY_LOW)
                 .setContentIntent(PendingIntent.getActivity(this, 0, openIntent, PendingIntent.FLAG_UPDATE_CURRENT));
 
-        Notification notification = new Notification.BigTextStyle(builder)
+        Notification notification = new NotificationCompat.BigTextStyle(builder)
                 .bigText(notificationText)
                 .build();
 
@@ -191,14 +193,14 @@ public class ShowNotificationService extends Service {
                 .putExtra(EventActivity.EXTRA_EVENT_ID, event.getId())
                 .putExtra(EventActivity.EXTRA_FOCUS_ON_FEEDBACK, false);
 
-        Notification.Builder builder = getDefaultNotificationBuilder()
+        NotificationCompat.Builder builder = getDefaultNotificationBuilder(Type.EventAboutToStart.getChannel())
                 .setContentTitle(getResources().getString(R.string.notification_event_about_to_start_title))
                 .setContentText(getEventAboutToStartNotificationText(event))
                 .setDefaults(Notification.DEFAULT_VIBRATE)
                 .setPriority(Notification.PRIORITY_HIGH)
                 .setContentIntent(PendingIntent.getActivity(this, 0, openEventIntent, 0));
 
-        Notification notification = new Notification.BigTextStyle(builder)
+        Notification notification = new NotificationCompat.BigTextStyle(builder)
                 .bigText(getEventAboutToStartNotificationText(event))
                 .build();
 
@@ -220,7 +222,7 @@ public class ShowNotificationService extends Service {
 				// notificationId is used to prevent seeing the same notification twice
 				.putExtra(PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION, new PushNotification(notificationId, messageId, message, category));
 
-        Notification.Builder builder = getDefaultNotificationBuilder()
+        NotificationCompat.Builder builder = getDefaultNotificationBuilder(Type.Push.getChannel())
                 .setContentTitle(getString(R.string.app_name)) // Showing the app name as title to be consistent with iOS behavior
                 .setContentText(message)
                 .setDefaults(Notification.DEFAULT_VIBRATE)
@@ -255,9 +257,9 @@ public class ShowNotificationService extends Service {
                 event.getTitle(), event.getHall().getName());
     }
 
-    private Notification.Builder getDefaultNotificationBuilder() {
+    private NotificationCompat.Builder getDefaultNotificationBuilder(Channel channel) {
 
-		return new Notification.Builder(this)
+		return new NotificationCompat.Builder(this, channel.toString())
 				.setSmallIcon(ThemeAttributes.getResourceId(getBaseContext(), R.attr.notificationSmallIcon))
 				.setContentTitle(getResources().getString(R.string.notification_event_about_to_start_title))
 				.setAutoCancel(true);
@@ -268,6 +270,44 @@ public class ShowNotificationService extends Service {
         EventFeedbackReminder,
         ConventionFeedbackReminder,
 	    ConventionFeedbackLastChanceReminder,
-        Push
+        Push;
+
+        public Channel getChannel() {
+            switch (this) {
+                case Push:
+                    return Channel.Reminders;
+                case EventAboutToStart:
+                case EventFeedbackReminder:
+                case ConventionFeedbackReminder:
+                case ConventionFeedbackLastChanceReminder:
+                default:
+                    return Channel.Notifications;
+            }
+        }
+    }
+
+    public enum Channel {
+        Notifications(R.string.notifications_preferences, R.string.notification_channel_description_notifications),
+        Reminders(R.string.reminder_preferences, R.string.notification_channel_description_reminders);
+
+        @StringRes
+        private int displayName;
+        @StringRes
+        private int description;
+
+        Channel(int displayName, int description) {
+            this.displayName = displayName;
+            this.description = description;
+        }
+
+        @StringRes
+        public int getDisplayName() {
+            return displayName;
+        }
+
+        @StringRes
+        public int getDescription() {
+            return description;
+        }
     }
 }
