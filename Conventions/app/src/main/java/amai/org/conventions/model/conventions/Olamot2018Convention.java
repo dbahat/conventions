@@ -12,7 +12,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.List;
 
 import amai.org.conventions.feedback.forms.EventFeedbackForm;
@@ -20,12 +19,9 @@ import amai.org.conventions.feedback.forms.FeedbackForm;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.FeedbackQuestion;
-import amai.org.conventions.model.Floor;
 import amai.org.conventions.model.Hall;
 import amai.org.conventions.model.Halls;
 import amai.org.conventions.model.ImageIdToImageResourceMapper;
-import amai.org.conventions.model.MapLocation;
-import amai.org.conventions.model.Place;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 import amai.org.conventions.utils.Dates;
@@ -89,307 +85,308 @@ public class Olamot2018Convention extends SffConvention {
 
 	@Override
 	protected ConventionMap initMap() {
-		// TODO change for olamot 2018
-		Hall eshkol1 = getHalls().findByName(HALL_NAME_ESHKOL_1);
-		Hall eshkol2 = getHalls().findByName(HALL_NAME_ESHKOL_2);
-		Hall eshkol3 = getHalls().findByName(HALL_NAME_ESHKOL_3);
-		Hall eshkol4 = getHalls().findByName(HALL_NAME_ESHKOL_4);
-		Hall eshkol5 = getHalls().findByName(HALL_NAME_ESHKOL_5);
-		Hall eshkol6 = getHalls().findByName(HALL_NAME_ESHKOL_6);
-		Hall workshops1 = getHalls().findByName(HALL_NAME_WORKSHOPS);
-		Hall meetings = getHalls().findByName(HALL_NAME_MEETINGS);
-		Hall kids = getHalls().findByName(HALL_NAME_KIDS);
-		Hall outside = getHalls().findByName(HALL_NAME_OUTSIDE);
-		Hall ironi1 = getHalls().findByName(HALL_NAME_OUTSIDE_2);
+		return new ConventionMap();
 
-		Floor floor = new Floor(1)
-				.withName("מפת התמצאות")
-				.withImageResource(R.drawable.icon2017_map, false)
-				.withImageHeight(2640)
-				.withImageWidth(2040)
-				.withDefaultMarkerHeight(100);
-		final int BIG_MARKER_HEIGHT = 200;
-		final int SMALL_MARKER_HEIGHT = 70;
-
-		return new ConventionMap()
-				.withFloors(Collections.singletonList(floor))
-				.withLocations(
-						CollectionUtils.flattenList(
-								inFloor(floor,
-										new MapLocation()
-												.withPlace(new Place().withName("כניסה מרחוב ליאונרדו דה וינצ'י"))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(1510)
-												.withY(2423),
-										new MapLocation()
-												.withPlace(new Place().withName("מודיעין"))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(1729)
-												.withY(2395),
-										new MapLocation()
-												.withPlace(new Place().withName("דוכנים"))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(507)
-												.withY(2393),
-										new MapLocation()
-												.withPlace(new Place().withName("מיניאטורות"))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(1813)
-												.withY(2100),
-										new MapLocation()
-												.withPlace(new Place().withName("מיניאטורות"))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(1164)
-												.withY(2204),
-										new MapLocation()
-												.withPlace(new Place().withName("דוכנים"))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(736)
-												.withY(2242),
-										new MapLocation()
-												.withPlace(new Place().withName("דוכנים"))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(324)
-												.withY(2205),
-										new MapLocation()
-												.withPlace(new Place().withName("דוכנים"))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(1550)
-												.withY(2134),
-										new MapLocation()
-												.withName("מדרגות לעלייה לאשכול 3-4")
-												.withPlaces(Arrays.asList(eshkol3, eshkol4))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(1934)
-												.withY(1952),
-										new MapLocation()
-												.withName("מדרגות לעלייה לאשכול 5-6")
-												.withPlaces(Arrays.asList(eshkol5, eshkol6))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(1140)
-												.withY(1952),
-										new MapLocation()
-												.withPlace(new Place().withName("שירותי בנים"))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(1938)
-												.withY(1796)
-												.withMarkerHeight(SMALL_MARKER_HEIGHT),
-										new MapLocation()
-												.withPlace(new Place().withName("דוכנים"))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(1550)
-												.withY(1799),
-										new MapLocation()
-												.withPlace(new Place().withName("שירותי בנות"))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(1135)
-												.withY(1796)
-												.withMarkerHeight(SMALL_MARKER_HEIGHT),
-										new MapLocation()
-												.withPlace(eshkol1)
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(1546)
-												.withY(1538)
-												.withMarkerHeight(BIG_MARKER_HEIGHT),
-										new MapLocation()
-												.withPlace(eshkol2)
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(1882)
-												.withY(1538)
-												.withMarkerHeight(BIG_MARKER_HEIGHT),
-										new MapLocation()
-												.withPlace(new Place().withName("מתחם יד שניה"))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(1189)
-												.withY(1538),
-										new MapLocation()
-												.withPlace(new Place().withName("עמדת משחקי שער"))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(475)
-												.withY(1211),
-										new MapLocation()
-												.withPlace(new Place().withName("כניסה לעירוני"))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(173)
-												.withY(2205),
-										new MapLocation()
-												.withPlace(new Place().withName("סוכה"))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(51)
-												.withY(1993),
-										new MapLocation()
-												.withPlace(new Place().withName("שירותים"))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(186)
-												.withY(1994)
-												.withMarkerHeight(SMALL_MARKER_HEIGHT),
-										new MapLocation()
-												.withPlace(new Place().withName("שירותים"))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(186)
-												.withY(1921)
-												.withMarkerHeight(SMALL_MARKER_HEIGHT),
-										new MapLocation()
-												.withPlace(workshops1)
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(186)
-												.withY(1838)
-												.withMarkerHeight(SMALL_MARKER_HEIGHT),
-										new MapLocation()
-												.withPlace(kids)
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(186)
-												.withY(1681),
-										new MapLocation()
-												.withPlace(new Place().withName("הוביטון"))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(186)
-												.withY(1435),
-										new MapLocation()
-												.withPlace(new Place().withName("שירותים"))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(199)
-												.withY(1076)
-												.withMarkerHeight(SMALL_MARKER_HEIGHT),
-										new MapLocation()
-												.withPlace(new Place().withName("שירותים"))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(199)
-												.withY(990)
-												.withMarkerHeight(SMALL_MARKER_HEIGHT),
-										new MapLocation()
-												.withPlace(new Place().withName("חדר קוספליי 1"))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(199)
-												.withY(913)
-												.withMarkerHeight(SMALL_MARKER_HEIGHT),
-										new MapLocation()
-												.withPlace(new Place().withName("חדר קוספליי 2"))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(199)
-												.withY(755),
-										new MapLocation()
-												.withPlace(new Place().withName("שמירת חפצים"))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(199)
-												.withY(590),
-										new MapLocation()
-												.withPlace(new Place().withName("שמירת חפצים"))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(199)
-												.withY(426),
-										new MapLocation()
-												.withPlace(new Place().withName("כניסה נגישה לעירוני"))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(46)
-												.withY(1149),
-										new MapLocation()
-												.withPlace(new Place().withName("דוכנים"))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(1147)
-												.withY(1045),
-										new MapLocation()
-												.withPlace(new Place().withName("הפונדק החי"))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(1890)
-												.withY(901),
-										new MapLocation()
-												.withPlace(new Place().withName("הקולוסיאום"))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(1574)
-												.withY(901),
-										new MapLocation()
-												.withPlace(outside)
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(1316)
-												.withY(831),
-										new MapLocation()
-												.withPlace(new Place().withName("כניסה מרחוב הארבעה"))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(1982)
-												.withY(649),
-										new MapLocation()
-												.withPlace(new Place().withName("מודיעין"))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(1926)
-												.withY(353),
-										new MapLocation()
-												.withPlace(new Place().withName("אבידות ומציאות"))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(1966)
-												.withY(211),
-										new MapLocation()
-												.withPlace(new Place().withName("קופות"))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(1614)
-												.withY(423),
-										new MapLocation()
-												.withPlace(new Place().withName("האגודה למד\"ב ולפנטסיה"))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(1238)
-												.withY(363),
-										new MapLocation()
-												.withName("מפגשים, הזמנות מראש, השקות וקהילה")
-												.withPlace(meetings)
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(960)
-												.withY(423),
-										new MapLocation()
-												.withPlace(new Place().withName("אולם הספורט"))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(658)
-												.withY(247),
-										new MapLocation()
-												.withPlace(new Place().withName("מתחם משחקי לוח"))
-												.withMarkerResource(R.drawable.ic_action_place, false)
-												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
-												.withX(285)
-												.withY(161)
-								)
-						)
-				);
+//		Hall eshkol1 = getHalls().findByName(HALL_NAME_ESHKOL_1);
+//		Hall eshkol2 = getHalls().findByName(HALL_NAME_ESHKOL_2);
+//		Hall eshkol3 = getHalls().findByName(HALL_NAME_ESHKOL_3);
+//		Hall eshkol4 = getHalls().findByName(HALL_NAME_ESHKOL_4);
+//		Hall eshkol5 = getHalls().findByName(HALL_NAME_ESHKOL_5);
+//		Hall eshkol6 = getHalls().findByName(HALL_NAME_ESHKOL_6);
+//		Hall workshops1 = getHalls().findByName(HALL_NAME_WORKSHOPS);
+//		Hall meetings = getHalls().findByName(HALL_NAME_MEETINGS);
+//		Hall kids = getHalls().findByName(HALL_NAME_KIDS);
+//		Hall outside = getHalls().findByName(HALL_NAME_OUTSIDE);
+//		Hall ironi1 = getHalls().findByName(HALL_NAME_OUTSIDE_2);
+//
+//		Floor floor = new Floor(1)
+//				.withName("מפת התמצאות")
+//				.withImageResource(R.drawable.icon2017_map, false)
+//				.withImageHeight(2640)
+//				.withImageWidth(2040)
+//				.withDefaultMarkerHeight(100);
+//		final int BIG_MARKER_HEIGHT = 200;
+//		final int SMALL_MARKER_HEIGHT = 70;
+//
+//		return new ConventionMap()
+//				.withFloors(Collections.singletonList(floor))
+//				.withLocations(
+//						CollectionUtils.flattenList(
+//								inFloor(floor,
+//										new MapLocation()
+//												.withPlace(new Place().withName("כניסה מרחוב ליאונרדו דה וינצ'י"))
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(1510)
+//												.withY(2423),
+//										new MapLocation()
+//												.withPlace(new Place().withName("מודיעין"))
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(1729)
+//												.withY(2395),
+//										new MapLocation()
+//												.withPlace(new Place().withName("דוכנים"))
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(507)
+//												.withY(2393),
+//										new MapLocation()
+//												.withPlace(new Place().withName("מיניאטורות"))
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(1813)
+//												.withY(2100),
+//										new MapLocation()
+//												.withPlace(new Place().withName("מיניאטורות"))
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(1164)
+//												.withY(2204),
+//										new MapLocation()
+//												.withPlace(new Place().withName("דוכנים"))
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(736)
+//												.withY(2242),
+//										new MapLocation()
+//												.withPlace(new Place().withName("דוכנים"))
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(324)
+//												.withY(2205),
+//										new MapLocation()
+//												.withPlace(new Place().withName("דוכנים"))
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(1550)
+//												.withY(2134),
+//										new MapLocation()
+//												.withName("מדרגות לעלייה לאשכול 3-4")
+//												.withPlaces(Arrays.asList(eshkol3, eshkol4))
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(1934)
+//												.withY(1952),
+//										new MapLocation()
+//												.withName("מדרגות לעלייה לאשכול 5-6")
+//												.withPlaces(Arrays.asList(eshkol5, eshkol6))
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(1140)
+//												.withY(1952),
+//										new MapLocation()
+//												.withPlace(new Place().withName("שירותי בנים"))
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(1938)
+//												.withY(1796)
+//												.withMarkerHeight(SMALL_MARKER_HEIGHT),
+//										new MapLocation()
+//												.withPlace(new Place().withName("דוכנים"))
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(1550)
+//												.withY(1799),
+//										new MapLocation()
+//												.withPlace(new Place().withName("שירותי בנות"))
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(1135)
+//												.withY(1796)
+//												.withMarkerHeight(SMALL_MARKER_HEIGHT),
+//										new MapLocation()
+//												.withPlace(eshkol1)
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(1546)
+//												.withY(1538)
+//												.withMarkerHeight(BIG_MARKER_HEIGHT),
+//										new MapLocation()
+//												.withPlace(eshkol2)
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(1882)
+//												.withY(1538)
+//												.withMarkerHeight(BIG_MARKER_HEIGHT),
+//										new MapLocation()
+//												.withPlace(new Place().withName("מתחם יד שניה"))
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(1189)
+//												.withY(1538),
+//										new MapLocation()
+//												.withPlace(new Place().withName("עמדת משחקי שער"))
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(475)
+//												.withY(1211),
+//										new MapLocation()
+//												.withPlace(new Place().withName("כניסה לעירוני"))
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(173)
+//												.withY(2205),
+//										new MapLocation()
+//												.withPlace(new Place().withName("סוכה"))
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(51)
+//												.withY(1993),
+//										new MapLocation()
+//												.withPlace(new Place().withName("שירותים"))
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(186)
+//												.withY(1994)
+//												.withMarkerHeight(SMALL_MARKER_HEIGHT),
+//										new MapLocation()
+//												.withPlace(new Place().withName("שירותים"))
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(186)
+//												.withY(1921)
+//												.withMarkerHeight(SMALL_MARKER_HEIGHT),
+//										new MapLocation()
+//												.withPlace(workshops1)
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(186)
+//												.withY(1838)
+//												.withMarkerHeight(SMALL_MARKER_HEIGHT),
+//										new MapLocation()
+//												.withPlace(kids)
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(186)
+//												.withY(1681),
+//										new MapLocation()
+//												.withPlace(new Place().withName("הוביטון"))
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(186)
+//												.withY(1435),
+//										new MapLocation()
+//												.withPlace(new Place().withName("שירותים"))
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(199)
+//												.withY(1076)
+//												.withMarkerHeight(SMALL_MARKER_HEIGHT),
+//										new MapLocation()
+//												.withPlace(new Place().withName("שירותים"))
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(199)
+//												.withY(990)
+//												.withMarkerHeight(SMALL_MARKER_HEIGHT),
+//										new MapLocation()
+//												.withPlace(new Place().withName("חדר קוספליי 1"))
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(199)
+//												.withY(913)
+//												.withMarkerHeight(SMALL_MARKER_HEIGHT),
+//										new MapLocation()
+//												.withPlace(new Place().withName("חדר קוספליי 2"))
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(199)
+//												.withY(755),
+//										new MapLocation()
+//												.withPlace(new Place().withName("שמירת חפצים"))
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(199)
+//												.withY(590),
+//										new MapLocation()
+//												.withPlace(new Place().withName("שמירת חפצים"))
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(199)
+//												.withY(426),
+//										new MapLocation()
+//												.withPlace(new Place().withName("כניסה נגישה לעירוני"))
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(46)
+//												.withY(1149),
+//										new MapLocation()
+//												.withPlace(new Place().withName("דוכנים"))
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(1147)
+//												.withY(1045),
+//										new MapLocation()
+//												.withPlace(new Place().withName("הפונדק החי"))
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(1890)
+//												.withY(901),
+//										new MapLocation()
+//												.withPlace(new Place().withName("הקולוסיאום"))
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(1574)
+//												.withY(901),
+//										new MapLocation()
+//												.withPlace(outside)
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(1316)
+//												.withY(831),
+//										new MapLocation()
+//												.withPlace(new Place().withName("כניסה מרחוב הארבעה"))
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(1982)
+//												.withY(649),
+//										new MapLocation()
+//												.withPlace(new Place().withName("מודיעין"))
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(1926)
+//												.withY(353),
+//										new MapLocation()
+//												.withPlace(new Place().withName("אבידות ומציאות"))
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(1966)
+//												.withY(211),
+//										new MapLocation()
+//												.withPlace(new Place().withName("קופות"))
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(1614)
+//												.withY(423),
+//										new MapLocation()
+//												.withPlace(new Place().withName("האגודה למד\"ב ולפנטסיה"))
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(1238)
+//												.withY(363),
+//										new MapLocation()
+//												.withName("מפגשים, הזמנות מראש, השקות וקהילה")
+//												.withPlace(meetings)
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(960)
+//												.withY(423),
+//										new MapLocation()
+//												.withPlace(new Place().withName("אולם הספורט"))
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(658)
+//												.withY(247),
+//										new MapLocation()
+//												.withPlace(new Place().withName("מתחם משחקי לוח"))
+//												.withMarkerResource(R.drawable.ic_action_place, false)
+//												.withSelectedMarkerResource(R.drawable.ic_action_place_green_dark, false)
+//												.withX(285)
+//												.withY(161)
+//								)
+//						)
+//				);
 	}
 
 	@Override
