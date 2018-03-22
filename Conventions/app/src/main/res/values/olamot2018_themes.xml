@@ -59,7 +59,7 @@
         <item name="eventTypeCurrentColor">@color/olamot2018_teal</item>
         <item name="eventTypeNotStartedColor">@color/white</item>
         <item name="eventTimeDefaultTextColor">@color/white</item>
-        <item name="eventTimeDefaultBackgroundColor">@color/olamot2018_dark_red</item>
+        <item name="eventTimeDefaultBackgroundColor">@color/olamot2018_less_transparent_dark_red</item>
         <item name="eventDetailsColor">@color/ultra_light_gray</item>
         <item name="eventSendFeedbackColor">@color/gold</item>
         <item name="eventFavoriteIcon">@drawable/ic_star_black_24dp</item>

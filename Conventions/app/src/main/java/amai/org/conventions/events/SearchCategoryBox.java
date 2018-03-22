@@ -31,7 +31,7 @@ public class SearchCategoryBox extends LinearLayout {
 		textView.setText(searchCategory.getName());
 		int color;
 		if (searchCategory.hasColor()) {
-			color = darkenColor(searchCategory.getColor(), 1);
+			color = searchCategory.getColor();
 		} else {
 			color = ThemeAttributes.getColor(getContext(), R.attr.eventTimeDefaultBackgroundColor);
 		}
