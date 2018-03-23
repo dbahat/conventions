@@ -320,7 +320,7 @@ public abstract class Convention implements Serializable {
 				convertUserInputForEvent(userInput.get(event.getId()), event);
 			}
 		}
-		// TODO remove user input for deleted events?
+		// currently not removing outdated user input for deleted events
 	}
 
 	protected ConventionEvent.UserInput createUserInputForEvent(ConventionEvent event) {

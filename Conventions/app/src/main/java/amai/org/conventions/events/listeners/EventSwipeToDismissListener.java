@@ -15,6 +15,7 @@ import amai.org.conventions.events.adapters.EventGroupsAdapter;
 import amai.org.conventions.events.holders.SwipeableEventViewHolder;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.conventions.Convention;
+import amai.org.conventions.notifications.PushNotificationTopicsSubscriber;
 import sff.org.conventions.R;
 
 public class EventSwipeToDismissListener implements SwipeableEventViewHolder.OnEventSwipedListener {
@@ -42,10 +43,7 @@ public class EventSwipeToDismissListener implements SwipeableEventViewHolder.OnE
 
 		ConventionsApplication.alarmScheduler.cancelDefaultEventAlarms(viewHolder.getModel());
 
-		// TODO Renew push notification registration based on the new favorites state
-//		AzurePushNotifications notifications = new AzurePushNotifications(viewHolder.itemView.getContext());
-//		notifications.registerAsync(new AzurePushNotifications.RegistrationListener.DoNothing());
-
+		PushNotificationTopicsSubscriber.unsubscribe(event);
 		int adapterPosition = viewHolder.getAdapterPosition();
 
 		// This could happen if the item has already been removed, the dataset changed or the view recycled
@@ -66,9 +64,7 @@ public class EventSwipeToDismissListener implements SwipeableEventViewHolder.OnE
 				updatedEvent.setAttending(true);
 				ConventionsApplication.alarmScheduler.scheduleDefaultEventAlarms(updatedEvent);
 				Convention.getInstance().getStorage().saveUserInput();
-				// TODO - Remove from per-event category here
-//				AzurePushNotifications notifications = new AzurePushNotifications(viewHolder.itemView.getContext());
-//				notifications.registerAsync(new AzurePushNotifications.RegistrationListener.DoNothing());
+				PushNotificationTopicsSubscriber.unsubscribe(event);
 				if (adapter instanceof EventGroupsAdapter) {
 					((EventGroupsAdapter) adapter).updateEventGroups();
 				} else {

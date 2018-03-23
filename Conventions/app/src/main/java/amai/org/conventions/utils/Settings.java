@@ -41,21 +41,13 @@ public class Settings {
 		sharedPreferences = context.getSharedPreferences(PREFERENCES_FILE_NAME, Context.MODE_PRIVATE);
 	}
 
-	public List<String> getNotificationTopics() {
-		List<PushNotificationTopic> topics = CollectionUtils.filter(
+	public List<PushNotificationTopic> getNotificationTopics() {
+		return CollectionUtils.filter(
 				Arrays.asList(PushNotificationTopic.values()),
 				new CollectionUtils.Predicate<PushNotificationTopic>() {
 					@Override
 					public boolean where(PushNotificationTopic item) {
 						return item == PushNotificationTopic.TOPIC_EMERGENCY || sharedPreferences.getBoolean(item.getTopic(), false);
-					}
-				});
-		return CollectionUtils.map(
-				topics,
-				new CollectionUtils.Mapper<PushNotificationTopic, String>() {
-					@Override
-					public String map(PushNotificationTopic item) {
-						return item.getTopic();
 					}
 				});
 	}

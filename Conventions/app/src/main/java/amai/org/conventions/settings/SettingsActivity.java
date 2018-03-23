@@ -9,16 +9,16 @@ import android.preference.PreferenceManager;
 import android.widget.Toast;
 
 import com.google.android.gms.analytics.HitBuilders;
-import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.Date;
 
 import amai.org.conventions.ConventionsApplication;
-import sff.org.conventions.R;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.notifications.PlayServicesInstallation;
 import amai.org.conventions.notifications.PushNotificationTopic;
+import amai.org.conventions.notifications.PushNotificationTopicsSubscriber;
 import amai.org.conventions.utils.Dates;
+import sff.org.conventions.R;
 
 public class SettingsActivity extends NavigationActivity {
 	private static final int NUMBER_OF_CLICKS_TO_OPEN_ADVANCED_OPTIONS = 7;
@@ -113,7 +113,8 @@ public class SettingsActivity extends NavigationActivity {
 
 		@Override
 		public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, final String key) {
-			if (isPushNotificationTopic(key)) {
+			PushNotificationTopic topic = PushNotificationTopic.getByTopic(key);
+			if (topic != null) {
 				final boolean isSelected = sharedPreferences.getBoolean(key, false);
 				ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
 						.setCategory("Notifications")
@@ -121,10 +122,11 @@ public class SettingsActivity extends NavigationActivity {
 						.setLabel(key)
 						.setValue(1) // succeeded
 						.build());
+
 				if (isSelected) {
-					FirebaseMessaging.getInstance().subscribeToTopic(key);
+					PushNotificationTopicsSubscriber.subscribe(topic);
 				} else {
-					FirebaseMessaging.getInstance().unsubscribeFromTopic(key);
+					PushNotificationTopicsSubscriber.unsubscribe(topic);
 				}
 			} else {
 				if (findPreference(key) != null) {
@@ -136,10 +138,6 @@ public class SettingsActivity extends NavigationActivity {
 							.build());
 				}
 			}
-		}
-
-		private boolean isPushNotificationTopic(String key) {
-			return PushNotificationTopic.getByTopic(key) != null;
 		}
 	}
 }

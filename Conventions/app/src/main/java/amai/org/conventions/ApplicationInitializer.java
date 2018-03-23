@@ -12,8 +12,6 @@ import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AlertDialog;
 
-import com.google.firebase.messaging.FirebaseMessaging;
-
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -23,6 +21,8 @@ import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.networking.ModelRefresher;
 import amai.org.conventions.networking.UpdatesRefresher;
 import amai.org.conventions.notifications.PlayServicesInstallation;
+import amai.org.conventions.notifications.PushNotificationTopic;
+import amai.org.conventions.notifications.PushNotificationTopicsSubscriber;
 import amai.org.conventions.notifications.ShowNotificationService;
 import amai.org.conventions.settings.SettingsActivity;
 import amai.org.conventions.updates.UpdatesActivity;
@@ -36,8 +36,8 @@ public class ApplicationInitializer {
         refreshModel();
         checkGooglePlayServicesAndShowNotificationsWarnings(context);
 
-        for (String topic : ConventionsApplication.settings.getNotificationTopics()) {
-            FirebaseMessaging.getInstance().subscribeToTopic(topic);
+        for (PushNotificationTopic topic : ConventionsApplication.settings.getNotificationTopics()) {
+            PushNotificationTopicsSubscriber.subscribe(topic);
         }
         for (ShowNotificationService.Channel channel : ShowNotificationService.Channel.values()) {
             registerNotificationChannel(context, channel);
