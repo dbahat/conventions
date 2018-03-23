@@ -85,8 +85,8 @@ public class LocalNotificationScheduler {
 		// (canceling then re-setting it), so it needs the extras or it arrives without parameters and is not displayed
 		Intent intent = new Intent(context, ShowNotificationService.class)
 				.setAction(notificationType.toString() + event.getId())
-				.putExtra(ShowNotificationService.EXTRA_EVENT_TO_NOTIFY, event)
-				.putExtra(ShowNotificationService.EXTRA_NOTIFICATION_TYPE, notificationType);
+				.putExtra(ShowNotificationService.EXTRA_EVENT_ID_TO_NOTIFY, event.getId())
+				.putExtra(ShowNotificationService.EXTRA_NOTIFICATION_TYPE, notificationType.toString());
 		PendingIntent pendingIntent = PendingIntent.getService(context, 0, intent, 0);
 
 		alarmManager.cancel(pendingIntent);
@@ -109,7 +109,7 @@ public class LocalNotificationScheduler {
 
 			Intent intent = new Intent(context, ShowNotificationService.class)
 					.setAction(ShowNotificationService.Type.ConventionFeedbackReminder.toString())
-					.putExtra(ShowNotificationService.EXTRA_NOTIFICATION_TYPE, ShowNotificationService.Type.ConventionFeedbackReminder);
+					.putExtra(ShowNotificationService.EXTRA_NOTIFICATION_TYPE, ShowNotificationService.Type.ConventionFeedbackReminder.toString());
 			scheduleAlarm(oneDayPostConventionDate.getTimeInMillis(), PendingIntent.getService(context, 0, intent, 0), Accuracy.INACCURATE);
 		}
 
@@ -121,7 +121,7 @@ public class LocalNotificationScheduler {
 
 			Intent intent = new Intent(context, ShowNotificationService.class)
 					.setAction(ShowNotificationService.Type.ConventionFeedbackLastChanceReminder.toString())
-					.putExtra(ShowNotificationService.EXTRA_NOTIFICATION_TYPE, ShowNotificationService.Type.ConventionFeedbackLastChanceReminder);
+					.putExtra(ShowNotificationService.EXTRA_NOTIFICATION_TYPE, ShowNotificationService.Type.ConventionFeedbackLastChanceReminder.toString());
 			scheduleAlarm(tenDaysPostConventionDate.getTimeInMillis(), PendingIntent.getService(context, 0, intent, 0), Accuracy.INACCURATE);
 		}
 	}
@@ -130,8 +130,8 @@ public class LocalNotificationScheduler {
 
 		Intent intent = new Intent(context, ShowNotificationService.class)
 				.setAction(notificationType.toString() + event.getId()) // Setting unique action id so different event intents won't collide
-				.putExtra(ShowNotificationService.EXTRA_EVENT_TO_NOTIFY, event)
-				.putExtra(ShowNotificationService.EXTRA_NOTIFICATION_TYPE, notificationType);
+				.putExtra(ShowNotificationService.EXTRA_EVENT_ID_TO_NOTIFY, event.getId())
+				.putExtra(ShowNotificationService.EXTRA_NOTIFICATION_TYPE, notificationType.toString());
 		return PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 	}
 

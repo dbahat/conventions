@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -23,6 +24,7 @@ import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.networking.UpdatesRefresher;
 import amai.org.conventions.updates.UpdatesActivity;
 import amai.org.conventions.utils.CollectionUtils;
+import amai.org.conventions.utils.Log;
 import sff.org.conventions.R;
 
 import static amai.org.conventions.model.EventNotification.Type.AboutToStart;
@@ -33,14 +35,16 @@ import static amai.org.conventions.model.EventNotification.Type.FeedbackReminder
  */
 public class ShowNotificationService extends Service {
 
-    public static final String EXTRA_EVENT_TO_NOTIFY = "ExtraEventToNotify";
+    private static final String TAG = ShowNotificationService.class.getSimpleName();
+
+    public static final String EXTRA_EVENT_ID_TO_NOTIFY = "ExtraEventIdToNotify";
     public static final String EXTRA_NOTIFICATION_TYPE = "EXTRA_NOTIFICATION_TYPE";
     public static final String EXTRA_MESSAGE = "EXTRA_MESSAGE";
-	public static final String EXTRA_CATEGORY = "EXTRA_CATEGORY";
-	public static final String EXTRA_ID = "EXTRA_ID";
+    public static final String EXTRA_CATEGORY = "EXTRA_CATEGORY";
+    public static final String EXTRA_ID = "EXTRA_ID";
 
     private static final int FILL_CONVENTION_FEEDBACK_NOTIFICATION_ID = 91235;
-	private static final int FILL_EVENTS_FEEDBACK_NOTIFICATION_ID = 95837;
+    private static final int FILL_EVENTS_FEEDBACK_NOTIFICATION_ID = 95837;
     private static final String NEXT_PUSH_NOTIFICATION_ID = "NextPushNotificationId";
     private NotificationManager notificationManager;
 
@@ -56,33 +60,41 @@ public class ShowNotificationService extends Service {
 
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
-	    // Set the theme programatically because it's not attached by definition to the service's context.
-	    // We need the theme to access image resources for the notification.
-	    setTheme(getApplicationInfo().theme);
+        // Set the theme programatically because it's not attached by definition to the service's context.
+        // We need the theme to access image resources for the notification.
+        setTheme(getApplicationInfo().theme);
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Object typeObj = intent.getSerializableExtra(EXTRA_NOTIFICATION_TYPE);
-        if (typeObj != null && typeObj instanceof Type) {
-            Type notificationType = (Type) typeObj;
-            switch (notificationType) {
-                case ConventionFeedbackReminder:
-                    showFillConventionFeedbackNotification(false);
-                    break;
-	            case ConventionFeedbackLastChanceReminder:
-		            showFillConventionFeedbackNotification(true);
-		            break;
-                case EventAboutToStart:
-                    showEventAboutToStartNotification(intent);
-                    break;
-                case EventFeedbackReminder:
-                    showEventFeedbackReminderNotification(intent);
-                    break;
-                case Push:
-                    showPushNotification(intent);
-                    break;
-            }
+        // Note - Extras passed to this service must not contain any serialize-able objects.
+        // Required since this service also get PendingIntents scheduled by the AlarmManager, which starting Android N won't pass the bundled parametered
+        // of serializeables. See https://issuetracker.google.com/issues/37097877
+        Bundle extras = intent.getExtras();
+        if (!intent.hasExtra(EXTRA_NOTIFICATION_TYPE)) {
+            Log.w(TAG, "Got a request to show notification a notification type extra. intent action:" + intent.getAction());
+            stopSelf();
+            return START_NOT_STICKY;
+        }
+
+        //noinspection ConstantConditions
+        Type notificationType = Enum.valueOf(Type.class, extras.getString(EXTRA_NOTIFICATION_TYPE));
+        switch (notificationType) {
+            case ConventionFeedbackReminder:
+                showFillConventionFeedbackNotification(false);
+                break;
+            case ConventionFeedbackLastChanceReminder:
+                showFillConventionFeedbackNotification(true);
+                break;
+            case EventAboutToStart:
+                showEventAboutToStartNotification(intent);
+                break;
+            case EventFeedbackReminder:
+                showEventFeedbackReminderNotification(intent);
+                break;
+            case Push:
+                showPushNotification(intent);
+                break;
         }
 
         stopSelf();
@@ -97,9 +109,9 @@ public class ShowNotificationService extends Service {
         }
 
         Intent intent = new Intent(this, FeedbackActivity.class);
-	    String title = lastChance ? getString(R.string.notification_feedback_last_chance_title) : getString(R.string.notification_event_ended_title);
-	    String message = lastChance ? getString(R.string.notification_feedback_last_chance_message, Convention.getInstance().getDisplayName()) :
-			    getString(R.string.notification_feedback_ended_message, Convention.getInstance().getDisplayName());
+        String title = lastChance ? getString(R.string.notification_feedback_last_chance_title) : getString(R.string.notification_event_ended_title);
+        String message = lastChance ? getString(R.string.notification_feedback_last_chance_message, Convention.getInstance().getDisplayName()) :
+                getString(R.string.notification_feedback_ended_message, Convention.getInstance().getDisplayName());
 
         NotificationCompat.Builder builder = getDefaultNotificationBuilder(Type.ConventionFeedbackReminder.getChannel())
                 .setContentTitle(title)
@@ -113,61 +125,63 @@ public class ShowNotificationService extends Service {
 
         notificationManager.notify(FILL_CONVENTION_FEEDBACK_NOTIFICATION_ID, notification);
 
-	    if (lastChance) {
-		    ConventionsApplication.settings.setLastChanceFeedbackNotificationAsShown();
-	    } else {
+        if (lastChance) {
+            ConventionsApplication.settings.setLastChanceFeedbackNotificationAsShown();
+        } else {
             ConventionsApplication.settings.setFeedbackNotificationAsShown();
-	    }
+        }
     }
 
     private void showEventFeedbackReminderNotification(Intent intent) {
-        final ConventionEvent event = (ConventionEvent) intent.getSerializableExtra(EXTRA_EVENT_TO_NOTIFY);
-        if (event == null || event.getUserInput() == null) { // This can happen if the event was deleted
+        String eventId = intent.getStringExtra(EXTRA_EVENT_ID_TO_NOTIFY);
+        final ConventionEvent event = Convention.getInstance().getEventById(eventId);
+        if (event == null) {
+            // This can happen if the event was deleted
             return;
         }
 
-	    // Check it's still possible to send feedback
-	    if (Convention.getInstance().isFeedbackSendingTimeOver()) {
-		    return;
-	    }
+        // Check it's still possible to send feedback
+        if (Convention.getInstance().isFeedbackSendingTimeOver()) {
+            return;
+        }
 
-	    // Check the user didn't fill feedback on this event yet
-	    if (event.getUserInput().getFeedback().isSent()) {
-		    return;
-	    }
+        // Check the user didn't fill feedback on this event yet
+        if (event.getUserInput().getFeedback().isSent()) {
+            return;
+        }
 
-	    // Check how many other events are waiting for feedback
-	    List<ConventionEvent> otherEventsWithoutFeedback = CollectionUtils.filter(Convention.getInstance().getEvents(),
-		    new CollectionUtils.Predicate<ConventionEvent>() {
-			    @Override
-			    public boolean where(ConventionEvent item) {
-				    return item.shouldUserSeeFeedback() && !event.getId().equals(item.getId());
-			    }
-		    });
+        // Check how many other events are waiting for feedback
+        List<ConventionEvent> otherEventsWithoutFeedback = CollectionUtils.filter(Convention.getInstance().getEvents(),
+                new CollectionUtils.Predicate<ConventionEvent>() {
+                    @Override
+                    public boolean where(ConventionEvent item) {
+                        return item.shouldUserSeeFeedback() && !event.getId().equals(item.getId());
+                    }
+                });
 
-	    Intent openIntent;
-	    String notificationText;
-	    int otherEventsNumber = otherEventsWithoutFeedback.size();
-	    if (otherEventsNumber == 0) {
-	        openIntent = new Intent(this, EventActivity.class)
-	            .setAction(FeedbackReminder.toString() + event.getId())
-	            .putExtra(EventActivity.EXTRA_EVENT_ID, event.getId())
-	            .putExtra(EventActivity.EXTRA_FOCUS_ON_FEEDBACK, true);
-		    notificationText = getString(R.string.notification_event_ended_message_format, event.getTitle());
-	    } else {
-		    openIntent = new Intent(this, FeedbackActivity.class).setAction(FeedbackReminder.toString());
-		    if (otherEventsNumber == 1) {
-		        notificationText = getString(R.string.notification_2_events_ended_message_format, event.getTitle());
-		    } else {
-			    notificationText = getString(R.string.notification_several_events_ended_message_format, event.getTitle(), otherEventsNumber);
-		    }
-	    }
+        Intent openIntent;
+        String notificationText;
+        int otherEventsNumber = otherEventsWithoutFeedback.size();
+        if (otherEventsNumber == 0) {
+            openIntent = new Intent(this, EventActivity.class)
+                    .setAction(FeedbackReminder.toString() + event.getId())
+                    .putExtra(EventActivity.EXTRA_EVENT_ID, event.getId())
+                    .putExtra(EventActivity.EXTRA_FOCUS_ON_FEEDBACK, true);
+            notificationText = getString(R.string.notification_event_ended_message_format, event.getTitle());
+        } else {
+            openIntent = new Intent(this, FeedbackActivity.class).setAction(FeedbackReminder.toString());
+            if (otherEventsNumber == 1) {
+                notificationText = getString(R.string.notification_2_events_ended_message_format, event.getTitle());
+            } else {
+                notificationText = getString(R.string.notification_several_events_ended_message_format, event.getTitle(), otherEventsNumber);
+            }
+        }
 
-	    // A note about the intent action and update flag:
-	    // If we want 2 different notifications to appear at the same time, both pointing to the same activity,
-	    // the intent must have a different action (extras don't affect the equality check - see documentation of PendingIntent).
-	    // In our case we either have a new intent each time (in case it's a a new event displayed) or the same intent of
-	    // opening the FeedbackActivity. If it's the latter we should update it.
+        // A note about the intent action and update flag:
+        // If we want 2 different notifications to appear at the same time, both pointing to the same activity,
+        // the intent must have a different action (extras don't affect the equality check - see documentation of PendingIntent).
+        // In our case we either have a new intent each time (in case it's a a new event displayed) or the same intent of
+        // opening the FeedbackActivity. If it's the latter we should update it.
         NotificationCompat.Builder builder = getDefaultNotificationBuilder(Type.EventFeedbackReminder.getChannel())
                 .setContentTitle(getResources().getString(R.string.notification_event_ended_title))
                 .setContentText(notificationText)
@@ -178,13 +192,15 @@ public class ShowNotificationService extends Service {
                 .bigText(notificationText)
                 .build();
 
-	    notificationManager.notify(FILL_EVENTS_FEEDBACK_NOTIFICATION_ID, notification);
+        notificationManager.notify(FILL_EVENTS_FEEDBACK_NOTIFICATION_ID, notification);
     }
 
     private void showEventAboutToStartNotification(Intent intent) {
 
-        ConventionEvent event = (ConventionEvent) intent.getSerializableExtra(EXTRA_EVENT_TO_NOTIFY);
-        if (event == null || Convention.getInstance().getEventById(event.getId()) == null) { // This can happen if the event was deleted
+        String eventId = intent.getStringExtra(EXTRA_EVENT_ID_TO_NOTIFY);
+        ConventionEvent event = Convention.getInstance().getEventById(eventId);
+        if (event == null) {
+            // This can happen if the event was deleted
             return;
         }
 
@@ -212,15 +228,15 @@ public class ShowNotificationService extends Service {
         if (message == null) {
             return;
         }
-	    String category = intent.getStringExtra(EXTRA_CATEGORY); // Could be null
-	    String messageId = intent.getStringExtra(EXTRA_ID); // Could be null
+        String category = intent.getStringExtra(EXTRA_CATEGORY); // Could be null
+        String messageId = intent.getStringExtra(EXTRA_ID); // Could be null
 
-	    int notificationId = getNextPushNotificationId();
-	    Intent openAppIntent = new Intent(this, UpdatesActivity.class)
-			    .setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-			    .setAction(Type.Push.toString() + messageId + "_" + notificationId)
-				// notificationId is used to prevent seeing the same notification twice
-				.putExtra(PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION, new PushNotification(notificationId, messageId, message, category));
+        int notificationId = getNextPushNotificationId();
+        Intent openAppIntent = new Intent(this, UpdatesActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                .setAction(Type.Push.toString() + messageId + "_" + notificationId)
+                // notificationId is used to prevent seeing the same notification twice
+                .putExtra(PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION, new PushNotification(notificationId, messageId, message, category));
 
         NotificationCompat.Builder builder = getDefaultNotificationBuilder(Type.Push.getChannel())
                 .setContentTitle(getString(R.string.app_name)) // Showing the app name as title to be consistent with iOS behavior
@@ -230,17 +246,18 @@ public class ShowNotificationService extends Service {
                 .setContentIntent(PendingIntent.getActivity(this, 0, openAppIntent, 0));
 
         // Assign each push notification with a unique ID, so multiple notifications can display at the same time
-	    notificationManager.notify(notificationId, builder.build());
+        notificationManager.notify(notificationId, builder.build());
 
-	    // Retrieve new updates so this message will appear in the updates screen
-	    UpdatesRefresher.getInstance(this).refreshFromServer(false, true, new UpdatesRefresher.OnUpdateFinishedListener() {
-		    @Override
-		    public void onSuccess(int newUpdatesNumber) {
-		    }
-		    @Override
-		    public void onError(Exception error) {
-		    }
-	    });
+        // Retrieve new updates so this message will appear in the updates screen
+        UpdatesRefresher.getInstance(this).refreshFromServer(false, true, new UpdatesRefresher.OnUpdateFinishedListener() {
+            @Override
+            public void onSuccess(int newUpdatesNumber) {
+            }
+
+            @Override
+            public void onError(Exception error) {
+            }
+        });
     }
 
     private int getNextPushNotificationId() {
@@ -259,29 +276,29 @@ public class ShowNotificationService extends Service {
 
     private NotificationCompat.Builder getDefaultNotificationBuilder(Channel channel) {
 
-		return new NotificationCompat.Builder(this, channel.toString())
-				.setSmallIcon(ThemeAttributes.getResourceId(getBaseContext(), R.attr.notificationSmallIcon))
-				.setContentTitle(getResources().getString(R.string.notification_event_about_to_start_title))
-				.setAutoCancel(true);
-	}
+        return new NotificationCompat.Builder(this, channel.toString())
+                .setSmallIcon(ThemeAttributes.getResourceId(getBaseContext(), R.attr.notificationSmallIcon))
+                .setContentTitle(getResources().getString(R.string.notification_event_about_to_start_title))
+                .setAutoCancel(true);
+    }
 
     public enum Type {
         EventAboutToStart,
         EventFeedbackReminder,
         ConventionFeedbackReminder,
-	    ConventionFeedbackLastChanceReminder,
+        ConventionFeedbackLastChanceReminder,
         Push;
 
         public Channel getChannel() {
             switch (this) {
                 case Push:
-                    return Channel.Reminders;
+                    return Channel.Notifications;
                 case EventAboutToStart:
                 case EventFeedbackReminder:
                 case ConventionFeedbackReminder:
                 case ConventionFeedbackLastChanceReminder:
                 default:
-                    return Channel.Notifications;
+                    return Channel.Reminders;
             }
         }
     }
