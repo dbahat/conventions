@@ -97,6 +97,9 @@
         <!-- Programme Screen -->
         <item name="eventTimeHeaderDefaultTextColor">@color/white</item>
         <item name="eventTimeHeaderBackground">@null</item>
+        <!-- Programme Search Screen -->
+        <item name="eventNameKeywordHighlightColor">@color/olamot2018_dark_red</item>
+        <item name="eventKeywordHighlightColor">@color/olamot2018_dark_red</item>
         <!-- Second Hand Screen -->
         <item name="secondHandFormClosedColor">@color/dark_gray</item>
         <item name="secondHandItemSoldColor">@color/olamot2018_transparent_teal</item>
