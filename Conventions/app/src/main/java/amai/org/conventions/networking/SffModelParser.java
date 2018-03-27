@@ -92,7 +92,7 @@ public class SffModelParser implements ModelParser {
 
 			int availableTickets;
 			JsonElement availableTicketsElement = eventObj.get("available_tickets");
-			if (availableTicketsElement == null) {
+			if (availableTicketsElement == null || eventObj.get("ticket_limit") == null || eventObj.get("ticket_limit").isJsonNull()) {
 				availableTickets = -1;
 			} else {
 				availableTickets = availableTicketsElement.getAsInt();
