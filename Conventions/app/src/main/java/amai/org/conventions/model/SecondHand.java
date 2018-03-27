@@ -8,7 +8,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -111,6 +110,10 @@ public class SecondHand {
 			reader = new InputStreamReader((InputStream) request.getContent());
 			JsonParser jp = new JsonParser();
 			JsonElement root = jp.parse(reader);
+			// The API can also return a json object instead of array when the form number is invalid
+			if (!root.isJsonArray()) {
+				throw new FormNotFoundException();
+			}
 			JsonArray itemsJson = root.getAsJsonArray();
 			return parseForm(itemsJson);
 		} finally {
@@ -188,6 +191,8 @@ public class SecondHand {
 		SecondHandForm form = null;
 		try {
 			form = readForm(id);
+		} catch (RuntimeException e) {
+			throw (RuntimeException) e;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
