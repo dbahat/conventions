@@ -77,6 +77,9 @@
         <item name="secondHandItemNotSoldColor">?secondHandItemDefaultColor</item>
         <item name="secondHandItemSoldColor">?secondHandItemDefaultColor</item>
         <item name="secondHandItemMissingColor">?secondHandItemDefaultColor</item>
+
+        <!-- Discounts activity -->
+        <item name="discountsActivityLayout">@layout/activity_discounts</item>
     </style>
 
     <!-- Since there is no multiple inheritance with themes, we have to copy basic attributes to have
@@ -156,6 +159,9 @@
         <item name="secondHandItemNotSoldColor">?secondHandItemDefaultColor</item>
         <item name="secondHandItemSoldColor">?secondHandItemDefaultColor</item>
         <item name="secondHandItemMissingColor">?secondHandItemDefaultColor</item>
+
+        <!-- Discounts activity -->
+        <item name="discountsActivityLayout">@layout/activity_discounts</item>
     </style>
 
     <!-- Additional default attributes for dark themes. Inherit the actual theme from this one for dark themes. -->

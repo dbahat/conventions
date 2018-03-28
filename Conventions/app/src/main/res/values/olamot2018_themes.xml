@@ -104,6 +104,8 @@
         <item name="secondHandFormClosedColor">@color/dark_gray</item>
         <item name="secondHandItemSoldColor">@color/olamot2018_transparent_teal</item>
         <item name="secondHandItemMissingColor">@color/olamot2018_dark_red</item>
+        <!-- Discounts activity -->
+        <item name="discountsActivityLayout">@layout/olamot2018_activity_discounts</item>
     </style>
 
     <style name="AppBaseTheme.Olamot2018.Toolbar.Event" parent="AppBaseTheme.Olamot2018.Toolbar">

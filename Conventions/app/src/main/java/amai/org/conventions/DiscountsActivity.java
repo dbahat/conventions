@@ -14,11 +14,14 @@ public class DiscountsActivity extends NavigationActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentInContentContainer(R.layout.activity_discounts);
+		int layout = ThemeAttributes.getResourceId(this, R.attr.discountsActivityLayout);
+		setContentInContentContainer(layout);
 		setToolbarTitle(getString(R.string.discounts));
 
 		TextView discountsView = (TextView) findViewById(R.id.discounts_content);
-		discountsView.setText(Html.fromHtml(getString(R.string.discounts_content), null, new ListTagHandler()));
-		discountsView.setMovementMethod(LinkMovementMethod.getInstance());
+		if (discountsView != null) {
+			discountsView.setText(Html.fromHtml(getString(R.string.discounts_content), null, new ListTagHandler()));
+			discountsView.setMovementMethod(LinkMovementMethod.getInstance());
+		}
 	}
 }
