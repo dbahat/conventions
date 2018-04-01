@@ -7,7 +7,7 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 public class PushNotificationHandlingService extends FirebaseMessagingService {
-    private static final String TAG = PushNotificationTopic.class.getSimpleName();
+    private static final String TAG = PushNotificationHandlingService.class.getSimpleName();
 
     // optional extra parameters in the remote message payload for showing the message / topic. Expected to be added to the firebase message data payload.
     public static final String TOPIC = "topic";

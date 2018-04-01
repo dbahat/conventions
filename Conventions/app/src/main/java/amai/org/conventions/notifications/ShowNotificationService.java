@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -223,6 +224,14 @@ public class ShowNotificationService extends Service {
         notificationManager.notify((AboutToStart.toString() + event.getId()).hashCode(), notification);
     }
 
+    public static Intent createIntentForNotification(Context from, String messageId, String message, String category) {
+        return new Intent(from, UpdatesActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                .putExtra(PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION,
+                        // The notification id is used to prevent seeing the same notification twice
+                        new PushNotification(getNextPushNotificationId(from), messageId, message, category));
+    }
+
     private void showPushNotification(Intent intent) {
         String message = intent.getStringExtra(EXTRA_MESSAGE);
         if (message == null) {
@@ -231,12 +240,10 @@ public class ShowNotificationService extends Service {
         String category = intent.getStringExtra(EXTRA_CATEGORY); // Could be null
         String messageId = intent.getStringExtra(EXTRA_ID); // Could be null
 
-        int notificationId = getNextPushNotificationId();
-        Intent openAppIntent = new Intent(this, UpdatesActivity.class)
-                .setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-                .setAction(Type.Push.toString() + messageId + "_" + notificationId)
-                // notificationId is used to prevent seeing the same notification twice
-                .putExtra(PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION, new PushNotification(notificationId, messageId, message, category));
+        Intent openAppIntent = createIntentForNotification(this, messageId, message, category);
+        PushNotification notification = (PushNotification) openAppIntent.getSerializableExtra(PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION);
+        // The action is necessary to ensure a new pending intent is created instead of re-used
+        openAppIntent.setAction(Type.Push.toString() + messageId + "_" + notification.id);
 
         NotificationCompat.Builder builder = getDefaultNotificationBuilder(Type.Push.getChannel())
                 .setContentTitle(getString(R.string.app_name)) // Showing the app name as title to be consistent with iOS behavior
@@ -246,7 +253,7 @@ public class ShowNotificationService extends Service {
                 .setContentIntent(PendingIntent.getActivity(this, 0, openAppIntent, 0));
 
         // Assign each push notification with a unique ID, so multiple notifications can display at the same time
-        notificationManager.notify(notificationId, builder.build());
+        notificationManager.notify(notification.id, builder.build());
 
         // Retrieve new updates so this message will appear in the updates screen
         UpdatesRefresher.getInstance(this).refreshFromServer(false, true, new UpdatesRefresher.OnUpdateFinishedListener() {
@@ -260,8 +267,8 @@ public class ShowNotificationService extends Service {
         });
     }
 
-    private int getNextPushNotificationId() {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+    private static int getNextPushNotificationId(Context context) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         int currentId = sharedPreferences.getInt(NEXT_PUSH_NOTIFICATION_ID, 8000);
         int nextId = currentId + 1;
         sharedPreferences.edit().putInt(NEXT_PUSH_NOTIFICATION_ID, nextId).apply();

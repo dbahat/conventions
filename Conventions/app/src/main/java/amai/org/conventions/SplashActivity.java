@@ -5,9 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import amai.org.conventions.navigation.NavigationActivity;
-import amai.org.conventions.notifications.PushNotification;
-import amai.org.conventions.notifications.PushNotificationDialogPresenter;
-import amai.org.conventions.updates.UpdatesActivity;
+import amai.org.conventions.notifications.ShowNotificationService;
 
 import static amai.org.conventions.notifications.PushNotificationHandlingService.ID;
 import static amai.org.conventions.notifications.PushNotificationHandlingService.MESSAGE;
@@ -29,20 +27,19 @@ public class SplashActivity extends AppCompatActivity {
 			return;
 		}
 
+		Intent intent;
 		if (getIntent().hasExtra(MESSAGE) && getIntent().hasExtra(TOPIC) && getIntent().hasExtra(ID)) {
-			Intent intent = new Intent(SplashActivity.this, UpdatesActivity.class)
-					.putExtra(PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION, new PushNotification(
-							0,
+			intent = ShowNotificationService.createIntentForNotification(this,
 							getIntent().getStringExtra(ID),
 							getIntent().getStringExtra(MESSAGE),
 							getIntent().getStringExtra(TOPIC)
-					));
-			startActivity(intent);
-			return;
+					);
+		} else {
+			intent = new Intent(SplashActivity.this, HomeActivity.class);
 		}
 
 
-		Intent intent = new Intent(SplashActivity.this, HomeActivity.class)
+		intent
 				.putExtra(NavigationActivity.EXTRA_INITIALIZE, true)
 				.putExtra(NavigationActivity.EXTRA_EXIT_ON_BACK, true);
 		startActivity(intent);
