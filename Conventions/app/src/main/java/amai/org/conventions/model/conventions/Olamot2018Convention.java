@@ -129,12 +129,6 @@ public class Olamot2018Convention extends SffConvention {
 												.withPlace(new Place().withName("דוכנים"))
 												.withMarkerResource(DEFAULT_MARKER, false)
 												.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false)
-												.withX(1860)
-												.withY(MAP_HEIGHT - 367),
-										new MapLocation()
-												.withPlace(new Place().withName("דוכנים"))
-												.withMarkerResource(DEFAULT_MARKER, false)
-												.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false)
 												.withX(1570)
 												.withY(MAP_HEIGHT - 321),
 										new MapLocation()
@@ -149,12 +143,6 @@ public class Olamot2018Convention extends SffConvention {
 												.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false)
 												.withX(708)
 												.withY(MAP_HEIGHT - 213),
-										new MapLocation()
-												.withPlace(new Place().withName("דוכנים"))
-												.withMarkerResource(DEFAULT_MARKER, false)
-												.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false)
-												.withX(181)
-												.withY(MAP_HEIGHT - 377),
 										new MapLocation()
 												.withName("מדרגות לעלייה לאשכול 3-6")
 												.withPlaces(Arrays.asList(eshkol3, eshkol4, eshkol5, eshkol6))
