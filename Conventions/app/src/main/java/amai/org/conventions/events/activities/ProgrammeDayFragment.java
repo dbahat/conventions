@@ -274,6 +274,11 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 		dialog.show();
 	}
 
+	@Override
+	public boolean onHeaderLongClick(StickyListHeadersListView l, View header, int itemPosition, long headerId, boolean currentlySticky) {
+		return false;
+	}
+
 	private int findHourPosition(Calendar timeSection) {
 		if (timeSection == null) {
 			return -1;
