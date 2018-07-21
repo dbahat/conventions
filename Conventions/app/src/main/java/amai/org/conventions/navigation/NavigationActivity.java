@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.analytics.HitBuilders;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -38,9 +39,12 @@ import amai.org.conventions.events.activities.MyEventsActivity;
 import amai.org.conventions.events.activities.ProgrammeActivity;
 import amai.org.conventions.map.MapActivity;
 import amai.org.conventions.model.conventions.Convention;
+import amai.org.conventions.notifications.PushNotification;
 import amai.org.conventions.notifications.PushNotificationDialogPresenter;
 import amai.org.conventions.settings.SettingsActivity;
 import amai.org.conventions.updates.UpdatesActivity;
+
+import static amai.org.conventions.notifications.PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION;
 
 
 public abstract class NavigationActivity extends AppCompatActivity {
@@ -55,6 +59,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	private FrameLayout contentContainer;
 	private FloatingActionButton actionButton;
 	private DrawerLayout navigationDrawer;
+	private PushNotification receivedPushNotification;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -87,15 +92,45 @@ public abstract class NavigationActivity extends AppCompatActivity {
 
 		initializeNavigationDrawer(); // In case it was already open
 
-		new PushNotificationDialogPresenter().present(this, getIntent());
+		// We will display the notification once during onResume to let child activities override it safely
+		// (after their onCreate is called)
+		this.receivedPushNotification = getNotificationFromIntent(getIntent());
 	}
 
 	@Override
 	protected void onNewIntent(Intent intent) {
 		super.onNewIntent(intent);
+		// Add extras to the original intent so we will focus on the same update on screen rotation
+		getIntent().putExtras(intent.getExtras());
+
 		// In case the user clicked a push notification while inside the activity, have the activity
-		// show the push notification (as we won't re-create it, not to create an extra copy of it on the activity stack)
-		new PushNotificationDialogPresenter().present(this, intent);
+		// show the push notification (as we won't re-create the activity, not to create an extra copy of it on the activity stack)
+		showPushNotificationIfReceived(getNotificationFromIntent(intent));
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		showPushNotificationIfReceived(this.receivedPushNotification);
+		this.receivedPushNotification = null;
+	}
+
+	private PushNotification getNotificationFromIntent(Intent intent) {
+		Serializable pushNotification = intent.getSerializableExtra(EXTRA_PUSH_NOTIFICATION);
+		if (pushNotification instanceof PushNotification) {
+			return (PushNotification) pushNotification;
+		}
+		return null;
+	}
+
+	private void showPushNotificationIfReceived(PushNotification pushNotification) {
+		if (pushNotification != null) {
+			onPushNotificationReceived(pushNotification);
+		}
+	}
+
+	protected void onPushNotificationReceived(PushNotification pushNotification) {
+		new PushNotificationDialogPresenter().present(this, pushNotification);
 	}
 
 	private void openNavigationDrawer(boolean animate) {

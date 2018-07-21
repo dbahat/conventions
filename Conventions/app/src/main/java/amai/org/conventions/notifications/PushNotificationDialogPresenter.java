@@ -20,38 +20,32 @@ import amai.org.conventions.utils.Settings;
  * Needed since the notification area will only show a small part of the notification in case of long notifications.
  */
 public class PushNotificationDialogPresenter {
-	public final static String EXTRA_PUSH_NOTIFICATION_MESSAGE = "EXTRA_PUSH_NOTIFICATION_MESSAGE";
-	public final static String EXTRA_PUSH_NOTIFICATION_CATEGORY = "EXTRA_PUSH_NOTIFICATION_CATEGORY";
-	public final static String EXTRA_PUSH_NOTIFICATION_ID = "EXTRA_PUSH_NOTIFICATION_ID";
-	public final static String EXTRA_PUSH_NOTIFICATION_MESSAGE_ID = "EXTRA_PUSH_NOTIFICATION_MESSAGE_ID";
+	public final static String EXTRA_PUSH_NOTIFICATION = "EXTRA_PUSH_NOTIFICATION";
 
 	private AlertDialog pushNotificationDialog;
 
-	public void present(final Context context, Intent intent) {
+	public void present(final Context context, PushNotification pushNotification) {
 		// If we got here from a push notification, show it in a popup
-		String pushMessage = intent.getStringExtra(EXTRA_PUSH_NOTIFICATION_MESSAGE);
-		if (pushMessage != null) {
+		if (pushNotification != null) {
 			// Check if it's really a new push notification in case the last intent will be re-used accidentally
 			// (this might be caused if the user pressed back then re-launched the activity from the activity stack).
 			// Note: it could also happen in case the user deletes the app data on an older OS without restarting the phone.
 			// In that case the preferences are deleted so the last notification id will be the same but we also can't tell
 			// if the user already saw this notification. Removing the extra from the intent doesn't work.
 			int lastSeenNotification = ConventionsApplication.settings.getLastSeenPushNotificationId();
-			int notificationId = intent.getIntExtra(EXTRA_PUSH_NOTIFICATION_ID, Settings.NO_PUSH_NOTIFICATION_SEEN_NOTIFICATION_ID);
-			if (lastSeenNotification != Settings.NO_PUSH_NOTIFICATION_SEEN_NOTIFICATION_ID && lastSeenNotification == notificationId) {
+			if (lastSeenNotification != Settings.NO_PUSH_NOTIFICATION_SEEN_NOTIFICATION_ID && lastSeenNotification == pushNotification.id) {
 				return; // Already seen this notification
 			}
-			ConventionsApplication.settings.setLastSeenPushNotificationId(notificationId);
+			ConventionsApplication.settings.setLastSeenPushNotificationId(pushNotification.id);
 
 			// Allow links
-			final SpannableString messageWithLinks = new SpannableString(pushMessage);
+			final SpannableString messageWithLinks = new SpannableString(pushNotification.message);
 			Linkify.addLinks(messageWithLinks, Linkify.WEB_URLS);
 
 			String pushCategoryTitle = null;
-			String pushCategory = intent.getStringExtra(EXTRA_PUSH_NOTIFICATION_CATEGORY);
-			if (pushCategory != null) {
+			if (pushNotification.category != null) {
 				// Convert to category title
-				PushNotificationTopic topic = PushNotificationTopic.getByTopic(pushCategory);
+				PushNotificationTopic topic = PushNotificationTopic.getByTopic(pushNotification.category);
 				if (topic != null) {
 					pushCategoryTitle = context.getString(topic.getTitleResource());
 				}

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import amai.org.conventions.navigation.NavigationActivity;
+import amai.org.conventions.notifications.PushNotification;
 import amai.org.conventions.notifications.PushNotificationDialogPresenter;
 import amai.org.conventions.notifications.PushNotificationHandlingService;
 
@@ -30,8 +31,13 @@ public class SplashActivity extends AppCompatActivity {
 
 		if (getIntent().hasExtra("message") && getIntent().hasExtra("topic")) {
 			intent
-					.putExtra(PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION_MESSAGE, getIntent().getStringExtra(PushNotificationHandlingService.MESSAGE))
-					.putExtra(PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION_CATEGORY, getIntent().getStringExtra(PushNotificationHandlingService.TOPIC));
+					.putExtra(PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION, new PushNotification(
+							// TODO - Propogate the ID / Message ID from the notification here
+							0,
+							null,
+							getIntent().getStringExtra(PushNotificationHandlingService.MESSAGE),
+							getIntent().getStringExtra(PushNotificationHandlingService.TOPIC)
+					));
 		}
 
 		startActivity(intent);
