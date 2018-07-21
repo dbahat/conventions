@@ -424,11 +424,16 @@ public abstract class Convention implements Serializable {
 		return minimumTimeOfFillingFeedback.getTime().before(Dates.now());
 	}
 
-	public boolean isFeedbackSendingTimeOver() {
+	public Calendar getLastFeedbackSendTime() {
 		// Only allow to send feedback for a week after the convention is over
 		Calendar lastFeedbackSendTime = Calendar.getInstance();
 		lastFeedbackSendTime.setTime(this.endDate.getTime());
 		lastFeedbackSendTime.add(Calendar.DATE, 7);
+		return lastFeedbackSendTime;
+	}
+
+	public boolean isFeedbackSendingTimeOver() {
+		Calendar lastFeedbackSendTime = getLastFeedbackSendTime();
 		return lastFeedbackSendTime.getTime().before(Dates.now());
 	}
 

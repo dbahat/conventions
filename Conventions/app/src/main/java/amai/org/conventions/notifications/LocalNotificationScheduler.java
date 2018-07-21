@@ -115,15 +115,14 @@ public class LocalNotificationScheduler {
 		}
 
 		if (!ConventionsApplication.settings.wasConventionLastChanceFeedbackNotificationShown()) {
-			Calendar tenDaysPostConventionDate = Calendar.getInstance();
-			tenDaysPostConventionDate.setTime(Convention.getInstance().getEndDate().getTime());
-			tenDaysPostConventionDate.add(Calendar.DATE, 10);
-			tenDaysPostConventionDate.set(Calendar.HOUR_OF_DAY, 10);
+			Calendar threeDaysBeforeLastSendTime = Convention.getInstance().getLastFeedbackSendTime();
+			threeDaysBeforeLastSendTime.add(Calendar.DATE, -3);
+			threeDaysBeforeLastSendTime.set(Calendar.HOUR_OF_DAY, 10);
 
 			Intent intent = new Intent(context, ShowNotificationService.class)
 					.setAction(ShowNotificationService.Type.ConventionFeedbackLastChanceReminder.toString())
 					.putExtra(ShowNotificationService.EXTRA_NOTIFICATION_TYPE, ShowNotificationService.Type.ConventionFeedbackLastChanceReminder);
-			scheduleAlarm(tenDaysPostConventionDate.getTimeInMillis(), PendingIntent.getService(context, 0, intent, 0), Accuracy.INACCURATE);
+			scheduleAlarm(threeDaysBeforeLastSendTime.getTimeInMillis(), PendingIntent.getService(context, 0, intent, 0), Accuracy.INACCURATE);
 		}
 	}
 
