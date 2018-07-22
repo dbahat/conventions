@@ -30,7 +30,7 @@ public class LocalNotificationScheduler {
 	}
 
 	public void scheduleDefaultEventAlarms(ConventionEvent event) {
-		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+		SharedPreferences sharedPreferences = ConventionsApplication.settings.getSharedPreferences();
 		if (sharedPreferences.getBoolean(Convention.getInstance().getId().toLowerCase() + "_event_starting_reminder", false)) {
 			EventNotification eventAboutToStartNotification = event.getUserInput().getEventAboutToStartNotification();
 			Date defaultEventStartNotificationTime = new Date(event.getStartTime().getTime()

@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v4.app.NotificationCompat;
@@ -18,13 +17,11 @@ import java.util.List;
 
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.FeedbackActivity;
-import amai.org.conventions.HomeActivity;
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.activities.EventActivity;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.conventions.Convention;
-import amai.org.conventions.networking.UpdatesRefresher;
 import amai.org.conventions.updates.UpdatesActivity;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Log;
@@ -258,7 +255,7 @@ public class ShowNotificationService extends Service {
     }
 
     private static int getNextPushNotificationId(Context context) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences sharedPreferences = ConventionsApplication.settings.getSharedPreferences();
         int currentId = sharedPreferences.getInt(NEXT_PUSH_NOTIFICATION_ID, 8000);
         int nextId = currentId + 1;
         sharedPreferences.edit().putInt(NEXT_PUSH_NOTIFICATION_ID, nextId).apply();

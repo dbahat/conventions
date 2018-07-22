@@ -19,7 +19,6 @@ public class Settings {
 	private static final String PREFERENCES_FILE_NAME = Convention.getInstance().getId() + "_" + SETTINGS_SUFFIX;
 	private static final String WAS_FEEDBACK_NOTIFICATION_SHOWN = "WasFeedbackNotificationShown";
 	private static final String WAS_LAST_CHANCE_FEEDBACK_NOTIFICATION_SHOWN = "WasLastChanceFeedbackNotificationShown";
-	private static final String WAS_NAVIGATION_POPUP_OPENED = "WasNavigationPopupOpened";
 	private static final String WAS_PLAY_SERVICES_INSTALLATION_CANCELLED = "WasPlayServicesInstallationCancelled";
 	private static final String WAS_SETTINGS_POPUP_DISPLAYED = "WasSettingsPopupDisplayed";
 	private static final String LAST_SEEN_PUSH_NOTIFICATION_ID = "LastSeenPushNotificationId";
@@ -29,8 +28,17 @@ public class Settings {
 	private final SharedPreferences sharedPreferences;
 
 	public Settings(Context context) {
-		PreferenceManager.setDefaultValues(context, Settings.PREFERENCES_FILE_NAME, Context.MODE_PRIVATE, R.xml.settings_preferences, false);
-		sharedPreferences = context.getSharedPreferences(PREFERENCES_FILE_NAME, Context.MODE_PRIVATE);
+		// readAgain=true so that the default values will be set when the convention id changes
+		PreferenceManager.setDefaultValues(context, getSharedPreferencesName(), Context.MODE_PRIVATE, R.xml.settings_preferences, true);
+		sharedPreferences = context.getSharedPreferences(getSharedPreferencesName(), Context.MODE_PRIVATE);
+	}
+
+	public String getSharedPreferencesName() {
+		return PREFERENCES_FILE_NAME;
+	}
+
+	public SharedPreferences getSharedPreferences() {
+		return sharedPreferences;
 	}
 
 	public List<PushNotificationTopic> getNotificationTopics() {
@@ -58,14 +66,6 @@ public class Settings {
 
 	public void setLastChanceFeedbackNotificationAsShown() {
 		sharedPreferences.edit().putBoolean(WAS_LAST_CHANCE_FEEDBACK_NOTIFICATION_SHOWN, true).apply();
-	}
-
-	public boolean wasNavigationPopupOpened() {
-		return sharedPreferences.getBoolean(WAS_NAVIGATION_POPUP_OPENED, false);
-	}
-
-	public void setNavigationPopupOpened() {
-		sharedPreferences.edit().putBoolean(WAS_NAVIGATION_POPUP_OPENED, true).apply();
 	}
 
 	public boolean wasPlayServicesInstallationCancelled() {
