@@ -776,7 +776,7 @@ public class EventActivity extends NavigationActivity {
 
 	private void setupEventDescription(ConventionEvent event) {
 		String eventDescription = event.getDescription();
-		if (eventDescription == null || eventDescription.isEmpty()) {
+		if (eventDescription == null || eventDescription.isEmpty() || event.getPlainTextDescription().trim().isEmpty()) {
 			findViewById(R.id.event_description_box).setVisibility(View.GONE);
 		} else {
 			// Enable internal links from HTML <a> tags within the description textView.

@@ -49,6 +49,7 @@
         <attr name="eventSendFeedbackColor" format="color|reference"/>
         <!-- About screen -->
         <attr name="aboutLogo" format="integer"/>
+        <attr name="aboutLogoMargins" format="dimension"/>
         <!-- Home screen -->
         <attr name="homeBackground" format="color|reference"/>
         <attr name="homeToolbarTitle" format="integer|reference"/>
@@ -58,9 +59,11 @@
         <attr name="homeTitleText" format="color|reference"/>
         <attr name="homeMessageBackground" format="color|reference"/>
         <attr name="homeMessageText" format="color|reference"/>
+        <attr name="homeEventTimeText" format="color|reference"/>
         <attr name="homeCurrentEventBackground" format="color|reference"/>
         <attr name="homeUpcomingEventBackground" format="color|reference"/>
         <attr name="homeEventNameInList" format="color|reference"/>
+        <attr name="homeEventsListDivider" format="color|reference"/>
         <attr name="homeButtonBackground" format="color|reference"/>
         <attr name="homeButtonText" format="color|reference"/>
         <attr name="homeBoxTopMargin" format="dimension"/>
@@ -78,10 +81,13 @@
         <attr name="navigationPopupSelectedColor" format="color|reference"/>
         <attr name="navigationPopupNotSelectedColor" format="color|reference"/>
         <attr name="navigationPopupSeparatorColor" format="color|reference"/>
+        <attr name="navigationPopupTitleMargins" format="dimension"/>
+        <attr name="navigationPopupBottomImageMargins" format="dimension"/>
         <!-- Updates Screen -->
         <attr name="updateTimeColor" format="color|reference"/>
         <attr name="updateItemBorder" format="color|reference"/>
         <attr name="updateItemSeparator" format="color|reference"/>
+        <attr name="updateItemDateSeparator" format="color|reference"/>
         <attr name="updatesBackground" format="color|reference"/>
         <attr name="updateTextColor" format="color|reference"/>
         <attr name="newUpdateBackground" format="color|reference"/>
@@ -93,6 +99,7 @@
         <attr name="locationDetailsTopLineColor" format="color|reference"/>
         <attr name="locationDetailsTitleColor" format="color|reference"/>
         <attr name="mapBackground" format="color|reference"/>
+        <attr name="mapToolbarColor" format="color|reference"/>
         <attr name="iconFloorUp" format="integer|reference"/>
         <attr name="iconFloorDown" format="integer|reference"/>
         <attr name="standIconColor" format="color|reference"/>

@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import amai.org.conventions.navigation.NavigationActivity;
-import amai.org.conventions.notifications.ShowNotificationService;
+import amai.org.conventions.notifications.ShowNotificationReceiver;
 
 import static amai.org.conventions.notifications.PushNotificationHandlingService.ID;
 import static amai.org.conventions.notifications.PushNotificationHandlingService.MESSAGE;
@@ -29,7 +29,7 @@ public class SplashActivity extends AppCompatActivity {
 
 		Intent intent;
 		if (getIntent().hasExtra(MESSAGE) && getIntent().hasExtra(TOPIC) && getIntent().hasExtra(ID)) {
-			intent = ShowNotificationService.createIntentForNotification(this,
+			intent = ShowNotificationReceiver.createIntentForNotification(this,
 							getIntent().getStringExtra(ID),
 							getIntent().getStringExtra(MESSAGE),
 							getIntent().getStringExtra(TOPIC)

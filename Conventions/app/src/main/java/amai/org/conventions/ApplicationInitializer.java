@@ -21,9 +21,10 @@ import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.networking.ModelRefresher;
 import amai.org.conventions.networking.UpdatesRefresher;
 import amai.org.conventions.notifications.PlayServicesInstallation;
+import amai.org.conventions.notifications.PushNotification;
 import amai.org.conventions.notifications.PushNotificationTopic;
 import amai.org.conventions.notifications.PushNotificationTopicsSubscriber;
-import amai.org.conventions.notifications.ShowNotificationService;
+import amai.org.conventions.notifications.PushNotification;
 import amai.org.conventions.settings.SettingsActivity;
 import amai.org.conventions.updates.UpdatesActivity;
 import amai.org.conventions.utils.CollectionUtils;
@@ -39,14 +40,14 @@ public class ApplicationInitializer {
         for (PushNotificationTopic topic : ConventionsApplication.settings.getNotificationTopics()) {
             PushNotificationTopicsSubscriber.subscribe(topic);
         }
-        for (ShowNotificationService.Channel channel : ShowNotificationService.Channel.values()) {
+        for (PushNotification.Channel channel : PushNotification.Channel.values()) {
             registerNotificationChannel(context, channel);
         }
 
         refreshUpdatesAndNotifyIfNewUpdatesAreAvailable(context);
     }
 
-    private void registerNotificationChannel(Context context, ShowNotificationService.Channel channel) {
+    private void registerNotificationChannel(Context context, PushNotification.Channel channel) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             return;
         }
@@ -172,7 +173,7 @@ public class ApplicationInitializer {
                     }
                     NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
                     Intent intent = new Intent(currentContext, UpdatesActivity.class);
-                    NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(currentContext, ShowNotificationService.Channel.Notifications.toString())
+                    NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(currentContext, PushNotification.Channel.Notifications.toString())
                             .setSmallIcon(ThemeAttributes.getResourceId(currentContext, R.attr.notificationSmallIcon))
                             .setContentTitle(notificationTitle)
                             .setContentText(notificationMessage)

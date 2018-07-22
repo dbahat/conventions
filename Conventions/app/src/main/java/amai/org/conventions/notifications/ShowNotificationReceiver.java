@@ -3,16 +3,13 @@ package amai.org.conventions.notifications;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.IBinder;
-import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
 import android.support.v4.app.NotificationCompat;
+import android.view.ContextThemeWrapper;
 
 import java.util.List;
 
@@ -30,13 +27,15 @@ import sff.org.conventions.R;
 
 import static amai.org.conventions.model.EventNotification.Type.AboutToStart;
 import static amai.org.conventions.model.EventNotification.Type.FeedbackReminder;
+import static android.content.Context.NOTIFICATION_SERVICE;
 
 /**
- * Allow showing notifications using the Android NotificationManager
+ * Responsible for showing notifications using the Android NotificationManager.
+ * Implemented as a BroadcastReceiver and not a Service since starting Android 8, background services are placed with severe restrictions.
  */
-public class ShowNotificationService extends Service {
+public class ShowNotificationReceiver extends BroadcastReceiver {
 
-    private static final String TAG = ShowNotificationService.class.getSimpleName();
+    private static final String TAG = ShowNotificationReceiver.class.getSimpleName();
 
     public static final String EXTRA_EVENT_ID_TO_NOTIFY = "ExtraEventIdToNotify";
     public static final String EXTRA_NOTIFICATION_TYPE = "EXTRA_NOTIFICATION_TYPE";
@@ -48,38 +47,28 @@ public class ShowNotificationService extends Service {
     private static final int FILL_EVENTS_FEEDBACK_NOTIFICATION_ID = 95837;
     private static final String NEXT_PUSH_NOTIFICATION_ID = "NextPushNotificationId";
     private NotificationManager notificationManager;
-
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
-    }
+    private Context context;
 
     @Override
-    public void onCreate() {
-        super.onCreate();
-
-        notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-
-        // Set the theme programatically because it's not attached by definition to the service's context.
+    public void onReceive(Context context, Intent intent) {
+        // Set the theme programmatically because it's not attached to the sent context.
         // We need the theme to access image resources for the notification.
-        setTheme(getApplicationInfo().theme);
-    }
+        this.context = new ContextThemeWrapper(context, context.getApplicationInfo().theme);
 
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
+        notificationManager = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
+
         // Note - Extras passed to this service must not contain any serialize-able objects.
         // Required since this service also get PendingIntents scheduled by the AlarmManager, which starting Android N won't pass the bundled parametered
         // of serializeables. See https://issuetracker.google.com/issues/37097877
         Bundle extras = intent.getExtras();
         if (!intent.hasExtra(EXTRA_NOTIFICATION_TYPE)) {
-            Log.w(TAG, "Got a request to show notification a notification type extra. intent action:" + intent.getAction());
-            stopSelf();
-            return START_NOT_STICKY;
+            Log.w(TAG, "Got a request to show notification without notification type extra. intent action:" + intent.getAction());
+            return;
         }
 
         //noinspection ConstantConditions
-        Type notificationType = Enum.valueOf(Type.class, extras.getString(EXTRA_NOTIFICATION_TYPE));
+        PushNotification.Type notificationType = Enum.valueOf(PushNotification.Type.class, extras.getString(EXTRA_NOTIFICATION_TYPE));
+        Log.v(TAG, "Got a request to show notification of type " + notificationType.toString());
         switch (notificationType) {
             case ConventionFeedbackReminder:
                 showFillConventionFeedbackNotification(false);
@@ -97,9 +86,6 @@ public class ShowNotificationService extends Service {
                 showPushNotification(intent);
                 break;
         }
-
-        stopSelf();
-        return START_NOT_STICKY;
     }
 
     private void showFillConventionFeedbackNotification(boolean lastChance) {
@@ -109,15 +95,15 @@ public class ShowNotificationService extends Service {
             return;
         }
 
-        Intent intent = new Intent(this, FeedbackActivity.class);
-        String title = lastChance ? getString(R.string.notification_feedback_last_chance_title) : getString(R.string.notification_event_ended_title);
-        String message = lastChance ? getString(R.string.notification_feedback_last_chance_message, Convention.getInstance().getDisplayName()) :
-                getString(R.string.notification_feedback_ended_message, Convention.getInstance().getDisplayName());
+        Intent intent = new Intent(context, FeedbackActivity.class);
+        String title = lastChance ? context.getString(R.string.notification_feedback_last_chance_title) : context.getString(R.string.notification_event_ended_title);
+        String message = lastChance ? context.getString(R.string.notification_feedback_last_chance_message, Convention.getInstance().getDisplayName()) :
+                context.getString(R.string.notification_feedback_ended_message, Convention.getInstance().getDisplayName());
 
-        NotificationCompat.Builder builder = getDefaultNotificationBuilder(Type.ConventionFeedbackReminder.getChannel())
+        NotificationCompat.Builder builder = getDefaultNotificationBuilder(PushNotification.Type.ConventionFeedbackReminder.getChannel())
                 .setContentTitle(title)
                 .setContentText(message)
-                .setContentIntent(PendingIntent.getActivity(this, 0, intent, 0))
+                .setContentIntent(PendingIntent.getActivity(context, 0, intent, 0))
                 .setDefaults(Notification.DEFAULT_VIBRATE);
 
         Notification notification = new NotificationCompat.BigTextStyle(builder)
@@ -164,17 +150,17 @@ public class ShowNotificationService extends Service {
         String notificationText;
         int otherEventsNumber = otherEventsWithoutFeedback.size();
         if (otherEventsNumber == 0) {
-            openIntent = new Intent(this, EventActivity.class)
+            openIntent = new Intent(context, EventActivity.class)
                     .setAction(FeedbackReminder.toString() + event.getId())
                     .putExtra(EventActivity.EXTRA_EVENT_ID, event.getId())
                     .putExtra(EventActivity.EXTRA_FOCUS_ON_FEEDBACK, true);
-            notificationText = getString(R.string.notification_event_ended_message_format, event.getTitle());
+            notificationText = context.getString(R.string.notification_event_ended_message_format, event.getTitle());
         } else {
-            openIntent = new Intent(this, FeedbackActivity.class).setAction(FeedbackReminder.toString());
+            openIntent = new Intent(context, FeedbackActivity.class).setAction(FeedbackReminder.toString());
             if (otherEventsNumber == 1) {
-                notificationText = getString(R.string.notification_2_events_ended_message_format, event.getTitle());
+                notificationText = context.getString(R.string.notification_2_events_ended_message_format, event.getTitle());
             } else {
-                notificationText = getString(R.string.notification_several_events_ended_message_format, event.getTitle(), otherEventsNumber);
+                notificationText = context.getString(R.string.notification_several_events_ended_message_format, event.getTitle(), otherEventsNumber);
             }
         }
 
@@ -183,11 +169,11 @@ public class ShowNotificationService extends Service {
         // the intent must have a different action (extras don't affect the equality check - see documentation of PendingIntent).
         // In our case we either have a new intent each time (in case it's a a new event displayed) or the same intent of
         // opening the FeedbackActivity. If it's the latter we should update it.
-        NotificationCompat.Builder builder = getDefaultNotificationBuilder(Type.EventFeedbackReminder.getChannel())
-                .setContentTitle(getResources().getString(R.string.notification_event_ended_title))
+        NotificationCompat.Builder builder = getDefaultNotificationBuilder(PushNotification.Type.EventFeedbackReminder.getChannel())
+                .setContentTitle(context.getResources().getString(R.string.notification_event_ended_title))
                 .setContentText(notificationText)
                 .setPriority(Notification.PRIORITY_LOW)
-                .setContentIntent(PendingIntent.getActivity(this, 0, openIntent, PendingIntent.FLAG_UPDATE_CURRENT));
+                .setContentIntent(PendingIntent.getActivity(context, 0, openIntent, PendingIntent.FLAG_UPDATE_CURRENT));
 
         Notification notification = new NotificationCompat.BigTextStyle(builder)
                 .bigText(notificationText)
@@ -202,26 +188,30 @@ public class ShowNotificationService extends Service {
         ConventionEvent event = Convention.getInstance().getEventById(eventId);
         if (event == null) {
             // This can happen if the event was deleted
+            Log.v(TAG, "Couldn't find event " + eventId + ". Ignoring.");
             return;
         }
 
-        Intent openEventIntent = new Intent(this, EventActivity.class)
+        Log.v(TAG, "Showing event about to start notification for event " + eventId);
+
+        Intent openEventIntent = new Intent(context, EventActivity.class)
                 .setAction(AboutToStart.toString() + event.getId())
                 .putExtra(EventActivity.EXTRA_EVENT_ID, event.getId())
                 .putExtra(EventActivity.EXTRA_FOCUS_ON_FEEDBACK, false);
 
-        NotificationCompat.Builder builder = getDefaultNotificationBuilder(Type.EventAboutToStart.getChannel())
-                .setContentTitle(getResources().getString(R.string.notification_event_about_to_start_title))
+        NotificationCompat.Builder builder = getDefaultNotificationBuilder(PushNotification.Type.EventAboutToStart.getChannel())
+                .setContentTitle(context.getResources().getString(R.string.notification_event_about_to_start_title))
                 .setContentText(getEventAboutToStartNotificationText(event))
                 .setDefaults(Notification.DEFAULT_VIBRATE)
                 .setPriority(Notification.PRIORITY_HIGH)
-                .setContentIntent(PendingIntent.getActivity(this, 0, openEventIntent, 0));
+                .setContentIntent(PendingIntent.getActivity(context, 0, openEventIntent, 0));
 
         Notification notification = new NotificationCompat.BigTextStyle(builder)
                 .bigText(getEventAboutToStartNotificationText(event))
                 .build();
 
         notificationManager.notify((AboutToStart.toString() + event.getId()).hashCode(), notification);
+        Log.v(TAG, "Notification " + AboutToStart.toString() + event.getId() + " created successfully");
     }
 
     public static Intent createIntentForNotification(Context from, String messageId, String message, String category) {
@@ -229,7 +219,7 @@ public class ShowNotificationService extends Service {
                 .setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
                 .putExtra(PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION,
                         // The notification id is used to prevent seeing the same notification twice
-                        new PushNotification(getNextPushNotificationId(from), messageId, message, category));
+                        new PushNotification(getNextPushNotificationId(), messageId, message, category));
     }
 
     private void showPushNotification(Intent intent) {
@@ -240,23 +230,23 @@ public class ShowNotificationService extends Service {
         String category = intent.getStringExtra(EXTRA_CATEGORY); // Could be null
         String messageId = intent.getStringExtra(EXTRA_ID); // Could be null
 
-        Intent openAppIntent = createIntentForNotification(this, messageId, message, category);
+        Intent openAppIntent = createIntentForNotification(context, messageId, message, category);
         PushNotification notification = (PushNotification) openAppIntent.getSerializableExtra(PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION);
         // The action is necessary to ensure a new pending intent is created instead of re-used
-        openAppIntent.setAction(Type.Push.toString() + messageId + "_" + notification.id);
+        openAppIntent.setAction(PushNotification.Type.Push.toString() + messageId + "_" + notification.id);
 
-        NotificationCompat.Builder builder = getDefaultNotificationBuilder(Type.Push.getChannel())
-                .setContentTitle(getString(R.string.app_name)) // Showing the app name as title to be consistent with iOS behavior
+        NotificationCompat.Builder builder = getDefaultNotificationBuilder(PushNotification.Type.Push.getChannel())
+                .setContentTitle(context.getString(R.string.app_name)) // Showing the app name as title to be consistent with iOS behavior
                 .setContentText(message)
                 .setDefaults(Notification.DEFAULT_VIBRATE)
                 .setPriority(Notification.PRIORITY_HIGH)
-                .setContentIntent(PendingIntent.getActivity(this, 0, openAppIntent, 0));
+                .setContentIntent(PendingIntent.getActivity(context, 0, openAppIntent, 0));
 
         // Assign each push notification with a unique ID, so multiple notifications can display at the same time
         notificationManager.notify(notification.id, builder.build());
 
         // Retrieve new updates so this message will appear in the updates screen
-        UpdatesRefresher.getInstance(this).refreshFromServer(false, true, new UpdatesRefresher.OnUpdateFinishedListener() {
+        UpdatesRefresher.getInstance(context).refreshFromServer(false, true, new UpdatesRefresher.OnUpdateFinishedListener() {
             @Override
             public void onSuccess(int newUpdatesNumber) {
             }
@@ -267,8 +257,8 @@ public class ShowNotificationService extends Service {
         });
     }
 
-    private static int getNextPushNotificationId(Context context) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+    private static int getNextPushNotificationId() {
+        SharedPreferences sharedPreferences = ConventionsApplication.settings.getSharedPreferences();
         int currentId = sharedPreferences.getInt(NEXT_PUSH_NOTIFICATION_ID, 8000);
         int nextId = currentId + 1;
         sharedPreferences.edit().putInt(NEXT_PUSH_NOTIFICATION_ID, nextId).apply();
@@ -277,61 +267,16 @@ public class ShowNotificationService extends Service {
     }
 
     private String getEventAboutToStartNotificationText(ConventionEvent event) {
-        return getResources().getString(R.string.notification_event_about_to_start_message_format,
+        return context.getResources().getString(R.string.notification_event_about_to_start_message_format,
                 event.getTitle(), event.getHall().getName());
     }
 
-    private NotificationCompat.Builder getDefaultNotificationBuilder(Channel channel) {
+    private NotificationCompat.Builder getDefaultNotificationBuilder(PushNotification.Channel channel) {
 
-        return new NotificationCompat.Builder(this, channel.toString())
-                .setSmallIcon(ThemeAttributes.getResourceId(getBaseContext(), R.attr.notificationSmallIcon))
-                .setContentTitle(getResources().getString(R.string.notification_event_about_to_start_title))
+        return new NotificationCompat.Builder(context, channel.toString())
+                .setSmallIcon(ThemeAttributes.getResourceId(context, R.attr.notificationSmallIcon))
+                .setContentTitle(context.getResources().getString(R.string.notification_event_about_to_start_title))
                 .setAutoCancel(true);
     }
 
-    public enum Type {
-        EventAboutToStart,
-        EventFeedbackReminder,
-        ConventionFeedbackReminder,
-        ConventionFeedbackLastChanceReminder,
-        Push;
-
-        public Channel getChannel() {
-            switch (this) {
-                case Push:
-                    return Channel.Notifications;
-                case EventAboutToStart:
-                case EventFeedbackReminder:
-                case ConventionFeedbackReminder:
-                case ConventionFeedbackLastChanceReminder:
-                default:
-                    return Channel.Reminders;
-            }
-        }
-    }
-
-    public enum Channel {
-        Notifications(R.string.notifications_preferences, R.string.notification_channel_description_notifications),
-        Reminders(R.string.reminder_preferences, R.string.notification_channel_description_reminders);
-
-        @StringRes
-        private int displayName;
-        @StringRes
-        private int description;
-
-        Channel(int displayName, int description) {
-            this.displayName = displayName;
-            this.description = description;
-        }
-
-        @StringRes
-        public int getDisplayName() {
-            return displayName;
-        }
-
-        @StringRes
-        public int getDescription() {
-            return description;
-        }
-    }
 }

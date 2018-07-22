@@ -39,15 +39,23 @@
 
         <!-- Navigation popup -->
         <item name="navigationPopupSeparatorColor">?navigationPopupNotSelectedColor</item>
+        <item name="navigationPopupBottomImageMargins">31dp</item>
+        <item name="navigationPopupTitleMargins">0dp</item>
 
         <!-- Home -->
         <item name="homeBoxTopMargin">0dp</item>
         <item name="homeSingleButtonTopMargin">0dp</item>
         <item name="homeSingleButtonStyle">@style/HomeButton.Single</item>
+        <item name="homeEventTimeText">?homeMessageText</item>
+        <item name="homeEventsListDivider">@drawable/home_event_list_divider</item>
+
+        <!-- About -->
+        <item name="aboutLogoMargins">20dp</item>
 
         <!-- Updates -->
         <item name="updatesBackground">?android:colorBackground</item>
         <item name="updateItemSeparator">?separatorColor</item>
+        <item name="updateItemDateSeparator">?separatorColor</item>
         <item name="updateTextColor">?android:textColorPrimary</item>
         <item name="newUpdateTextColor">?android:textColorPrimary</item>
         <item name="focusedUpdateTextColor">?android:textColorPrimary</item>
@@ -56,6 +64,7 @@
         <item name="mapBackground">?activitiesBackground</item>
         <item name="locationDetailsBackground">@color/white</item>
         <item name="locationDetailsTitleColor">?android:textColorPrimary</item>
+        <item name="mapToolbarColor">?toolbarBackground</item>
 
         <!-- Event activity -->
         <item name="eventToolbarColor">?toolbarBackground</item>
@@ -121,15 +130,23 @@
 
         <!-- Navigation popup -->
         <item name="navigationPopupSeparatorColor">?navigationPopupNotSelectedColor</item>
+        <item name="navigationPopupBottomImageMargins">31dp</item>
+        <item name="navigationPopupTitleMargins">0dp</item>
 
         <!-- Home -->
         <item name="homeBoxTopMargin">0dp</item>
         <item name="homeSingleButtonTopMargin">0dp</item>
         <item name="homeSingleButtonStyle">@style/HomeButton.Single</item>
+        <item name="homeEventTimeText">?homeMessageText</item>
+        <item name="homeEventsListDivider">@drawable/home_event_list_divider</item>
+
+        <!-- About -->
+        <item name="aboutLogoMargins">20dp</item>
 
         <!-- Updates -->
         <item name="updatesBackground">?android:colorBackground</item>
         <item name="updateItemSeparator">?separatorColor</item>
+        <item name="updateItemDateSeparator">?separatorColor</item>
         <item name="updateTextColor">?android:textColorPrimary</item>
         <item name="newUpdateTextColor">?android:textColorPrimary</item>
         <item name="focusedUpdateTextColor">?android:textColorPrimary</item>
@@ -138,6 +155,7 @@
         <item name="mapBackground">?activitiesBackground</item>
         <item name="locationDetailsBackground">@color/white</item>
         <item name="locationDetailsTitleColor">?android:textColorPrimary</item>
+        <item name="mapToolbarColor">?toolbarBackground</item>
 
         <!-- Event activity -->
         <item name="eventToolbarColor">?toolbarBackground</item>

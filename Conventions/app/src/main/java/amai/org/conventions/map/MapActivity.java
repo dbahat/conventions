@@ -80,6 +80,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		super.onCreate(savedInstanceState);
 		setContentInContentContainer(R.layout.activity_map, false, false);
 		setToolbarAndContentContainerBackground(ThemeAttributes.getDrawable(this, R.attr.mapBackground));
+		setToolbarBackgroundColor(ThemeAttributes.getColor(this, R.attr.mapToolbarColor));
 		if (map.getLocations().size() > 0) {
 			setupActionButton(R.drawable.ic_action_search, new View.OnClickListener() {
 				@Override
@@ -163,12 +164,15 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 	}
 
 	private int getDefaultFloorNumber() {
-		int defaultFloor = ConventionMap.FLOOR_NOT_FOUND;
-		Floor lastFloor = map.getLastLookedAtFloor();
-		if (lastFloor != null) {
-			defaultFloor = lastFloor.getNumber();
+		int defaultFloorNumber = ConventionMap.FLOOR_NOT_FOUND;
+		Floor defaultFloor = map.getLastLookedAtFloor();
+		if (defaultFloor == null) {
+			defaultFloor = map.getDefaultFloor();
 		}
-		return defaultFloor;
+		if (defaultFloor != null) {
+			defaultFloorNumber = defaultFloor.getNumber();
+		}
+		return defaultFloorNumber;
 	}
 
 	private void initializeViewPager() {

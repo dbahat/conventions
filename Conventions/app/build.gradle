@@ -1,17 +1,16 @@
 apply plugin: 'com.android.application'
 
 ext {
-    supportLibVersion = "26.1.0"
-    googlePlayServicesVersion = "12.0.0"
+    supportLibVersion = "27.1.1"
 }
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 27
 
     defaultConfig {
         applicationId "sff.org.conventions"
         minSdkVersion 17
-        targetSdkVersion 26
+        targetSdkVersion 27
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -36,42 +35,31 @@ configurations.all {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile "com.android.support:support-v4:${supportLibVersion}"
-    compile "com.android.support:appcompat-v7:${supportLibVersion}"
-    compile "com.android.support:palette-v7:${supportLibVersion}"
-    compile "com.android.support:recyclerview-v7:${supportLibVersion}"
-    compile "com.android.support:design:${supportLibVersion}"
-    compile 'com.google.android:flexbox:0.3.0'
-    compile 'com.github.castorflex.verticalviewpager:library:19.0.1'
-    compile 'klogi.com:rtlviewpager:1.0.0'
-    implementation "com.google.android.gms:play-services-analytics:${googlePlayServicesVersion}"
-    implementation "com.google.android.gms:play-services-maps:${googlePlayServicesVersion}"
-    implementation "com.google.firebase:firebase-messaging:${googlePlayServicesVersion}"
-    compile 'com.caverock:androidsvg:1.2.2-beta-1'
+    implementation "com.android.support:support-v4:${supportLibVersion}"
+    implementation "com.android.support:appcompat-v7:${supportLibVersion}"
+    implementation "com.android.support:palette-v7:${supportLibVersion}"
+    implementation "com.android.support:recyclerview-v7:${supportLibVersion}"
+    implementation "com.android.support:design:${supportLibVersion}"
+    implementation 'com.google.android:flexbox:0.3.0'
+    implementation 'com.github.castorflex.verticalviewpager:library:19.0.1'
+    implementation 'klogi.com:rtlviewpager:1.0.0'
+    implementation "com.google.android.gms:play-services-analytics:16.0.1"
+    implementation "com.google.android.gms:play-services-maps:15.0.1"
+    implementation 'com.google.firebase:firebase-core:16.0.1'
+    implementation "com.google.firebase:firebase-messaging:17.1.0"
+    implementation 'com.caverock:androidsvg:1.2.2-beta-1'
     // Using a fork of se.emilsjolander:stickylistheaders due to an open issue in Android 8. See https://github.com/emilsjolander/StickyListHeaders/issues/477.
-    compile 'com.github.mtotschnig:StickyListHeaders:2.7.1'
-    compile 'com.tonicartos:stickygridheaders:1.0.1'
-    compile 'com.google.code.gson:gson:2.7'
-    compile files('libs/activation.jar')
-    compile files('libs/additionnal.jar')
-    compile files('libs/mail.jar')
+    implementation 'com.github.mtotschnig:StickyListHeaders:2.7.1'
+    implementation 'com.tonicartos:stickygridheaders:1.0.1'
+    implementation 'com.google.code.gson:gson:2.8.0'
 
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.mockito:mockito-android:2.6.3'
-    androidTestCompile 'com.android.support.test.espresso:espresso-core:3.0.1'
-    androidTestCompile 'com.android.support.test:runner:1.0.1'
-    androidTestCompile 'org.mockito:mockito-android:2.6.3'
-    androidTestCompile 'junit:junit:4.12'
-}
-
-// REQUIRED: Google's new Maven repo is required for the latest
-// support library that is compatible with Android 8.0
-repositories {
-    maven {
-        url 'https://maven.google.com'
-        // Alternative URL is 'https://dl.google.com/dl/android/maven2/'
-    }
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:2.21.0'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'org.mockito:mockito-android:2.21.0'
+    androidTestImplementation 'junit:junit:4.12'
 }
 
 apply plugin: 'com.google.gms.google-services'

@@ -12,6 +12,7 @@ public class ConventionMap {
 	public static final int FLOOR_NOT_FOUND = -1;
 
 	private Floor lastLookedAtFloor = null;
+	private Floor defaultFloor = null;
 	private List<Floor> floors = new ArrayList<>();
 	private List<MapLocation> locations = new ArrayList<>();
 
@@ -53,6 +54,19 @@ public class ConventionMap {
 		if (lastLookedAtFloor != null) {
 			this.lastLookedAtFloor = lastLookedAtFloor;
 		}
+	}
+
+	public Floor getDefaultFloor() {
+		return defaultFloor;
+	}
+
+	public void setDefaultFloor(Floor defaultFloor) {
+		this.defaultFloor = defaultFloor;
+	}
+
+	public ConventionMap withDefaultFloor(Floor defaultFloor) {
+		setDefaultFloor(defaultFloor);
+		return this;
 	}
 
 	public Floor findFloorByNumber(int number) {

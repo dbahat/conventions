@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 import android.widget.Toast;
 
 import com.google.android.gms.analytics.HitBuilders;
@@ -69,6 +68,8 @@ public class SettingsActivity extends NavigationActivity {
 		@Override
 		public void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
+			// Save the preferences in the convention's file
+			getPreferenceManager().setSharedPreferencesName(ConventionsApplication.settings.getSharedPreferencesName());
 			addPreferencesFromResource(R.xml.settings_preferences);
 			setupPreferences(); // This can only be done after loading the preferences
 		}
@@ -76,14 +77,14 @@ public class SettingsActivity extends NavigationActivity {
 		@Override
 		public void onAttach(Activity activity) {
 			super.onAttach(activity);
-			SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
+			SharedPreferences sharedPreferences = ConventionsApplication.settings.getSharedPreferences();
 			sharedPreferences.registerOnSharedPreferenceChangeListener(this);
 		}
 
 		@Override
 		public void onDetach() {
 			super.onDetach();
-			SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+			SharedPreferences sharedPreferences = ConventionsApplication.settings.getSharedPreferences();
 			sharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
 		}
 

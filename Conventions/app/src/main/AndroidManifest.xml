@@ -72,8 +72,8 @@
         <activity android:name="amai.org.conventions.HomeActivity" android:screenOrientation="portrait"/>
         <activity android:name="amai.org.conventions.secondhand.SecondHandActivity" />
 
-        <service
-            android:name="amai.org.conventions.notifications.ShowNotificationService"
+        <receiver
+            android:name="amai.org.conventions.notifications.ShowNotificationReceiver"
             android:exported="false" />
         <service
             android:name="amai.org.conventions.notifications.PushNotificationHandlingService"

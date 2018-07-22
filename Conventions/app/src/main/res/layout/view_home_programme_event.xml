@@ -19,6 +19,6 @@
         android:id="@+id/home_programme_event_divider"
         android:layout_width="match_parent"
         android:layout_height="@dimen/event_divider_height"
-        android:background="@drawable/home_event_list_divider"/>
+        android:background="?homeEventsListDivider"/>
 
 </LinearLayout>
