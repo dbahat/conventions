@@ -223,7 +223,7 @@ public class ShowNotificationService extends Service {
     }
 
     public static Intent createIntentForNotification(Context from, String messageId, String message, String category) {
-        return new Intent(from, UpdatesActivity.class)
+        return new Intent(from, HomeActivity.class)
                 .setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
                 .putExtra(PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION,
                         // The notification id is used to prevent seeing the same notification twice
