@@ -100,7 +100,6 @@ public class Cami2018Convention extends AmaiConvention {
 
 	@Override
 	protected EventFeedbackForm initEventFeedbackForm() {
-		// TODO update for cami 2018
 		EventFeedbackForm eventFeedbackForm = null;
 		try {
 			eventFeedbackForm = (EventFeedbackForm) new EventFeedbackForm()
@@ -114,7 +113,7 @@ public class Cami2018Convention extends AmaiConvention {
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_LECTURER_QUALITY, "entry.1327236956")
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_SIMILAR_EVENTS, "entry.1416969956")
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_ADDITIONAL_INFO, "entry.1582215667")
-                    .withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSev7UVt5A635xh9t_DnQ5tSIiCmbEwAPydz05xbvZn-7hGWwA/formResponse"));
+                    .withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLScI09zCW8w-fUazSoOfZlpJHsEdt3DLPsGMo0TXsJmqx2ksvQ/formResponse"));
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
@@ -123,7 +122,6 @@ public class Cami2018Convention extends AmaiConvention {
 
 	@Override
 	protected FeedbackForm initConventionFeedbackForm() {
-		// TODO update for cami 2018
 		FeedbackForm feedbackForm = null;
 		try {
 			feedbackForm = (FeedbackForm) new FeedbackForm()
@@ -135,7 +133,7 @@ public class Cami2018Convention extends AmaiConvention {
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_MAP_SIGNS, "entry.1416969956")
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_CONFLICTING_EVENTS, "entry.1582215667")
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_IMPROVEMENT, "entry.993320932")
-					.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSeWy8GieIo8YPKKz6MF3H63UMIhlN-XVc6myGN4Xk7leiVD2Q/formResponse"));
+					.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLScvbyNMc4iUD8BsfZFoJZ_u5toUt_fFGlnecdYtmaYOnCgRhQ/formResponse"));
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
