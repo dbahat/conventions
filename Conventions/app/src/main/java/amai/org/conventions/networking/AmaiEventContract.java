@@ -11,7 +11,7 @@ public class AmaiEventContract {
 	private CategoriesText categoriesText;
 	private int timetableUrlPid;
 	private String title;
-	private int timetableDisableUrl;
+	private String timetableDisableUrl;
 	private String content;
 	private List<TimetableInfoInstance> timetableInfo;
 	private String timetableBg;
@@ -33,7 +33,7 @@ public class AmaiEventContract {
 		return title;
 	}
 
-	public int getTimetableDisableUrl() {
+	public String getTimetableDisableUrl() {
 		return timetableDisableUrl;
 	}
 
@@ -73,7 +73,7 @@ public class AmaiEventContract {
 		return this;
 	}
 
-	public AmaiEventContract setTimetableDisableUrl(int timetableDisableUrl) {
+	public AmaiEventContract setTimetableDisableUrl(String timetableDisableUrl) {
 		this.timetableDisableUrl = timetableDisableUrl;
 		return this;
 	}

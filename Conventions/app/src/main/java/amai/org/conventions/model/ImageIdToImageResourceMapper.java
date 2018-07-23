@@ -37,7 +37,7 @@ public class ImageIdToImageResourceMapper {
 		if (BuildConfig.DEBUG && excludeIds.contains(id)) {
 			Log.e(TAG, "Image added to both excluded and mapped lists: " + id);
 		}
-		if (BuildConfig.DEBUG && imageIdToImageResourceIdMap.containsKey(id)) {
+		if (BuildConfig.DEBUG && imageIdToLogoImageResourceIdMap.containsKey(id)) {
 			Log.e(TAG, "Logo image added to both logo and mapped lists: " + id);
 		}
 	}

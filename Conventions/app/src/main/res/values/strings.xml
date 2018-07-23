@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">הארוקון 2018</string>
+    <string name="app_name">כאמ\"י 2018</string>
 
     <string name="programme_title">תוכניה</string>
     <string name="my_events_title">האירועים שלי</string>
@@ -117,12 +117,12 @@
     <string name="about_app_title">אודות האפליקציה</string>
     <string name="about_content">אמא\"י – ארגון מנגה ואנימה ישראל. הארגון הוקם במאי 2007 על ידי קבוצת חברים בקהילת חובבי המנגה, אנימה ותרבות יפן ופועל למען קהילת חובבים זו.</string>
     <string name="about_links"><![CDATA[
-<p><a href="http://www.amai.org.il/">לאתר אמא\"י</a></p><p><a href="http://2018.harucon.org.il/">לאתר הכנס</a></p>
+<p><a href="http://www.amai.org.il/">לאתר אמא\"י</a></p><p><a href="http://2018.cami.org.il/">לאתר הכנס</a></p>
 <p>איורים: טאה פרנקו<br/><a href="http://ohmilk.tumblr.com">ohmilk.tumblr.com</a></p>
 <p>עיצוב: אניטה קרפל</p>
 ]]></string>
     <string name="about_app_content"><![CDATA[
- האפליקציה פותחה עבור כנס הארוקון 2018.<br/>בקשות והצעות ניתן לכתוב <a href="market://details?id=amai.org.conventions">בדף האפליקציה בחנות</a>.
+ האפליקציה פותחה עבור כנס כאמ\"י 2018.<br/>בקשות והצעות ניתן לכתוב <a href="market://details?id=amai.org.conventions">בדף האפליקציה בחנות</a>.
 ]]></string>
     <string name="question_map_signs">האם המפה והשילוט היו ברורים ושימושיים?</string>
     <string name="question_conflicting_events">אם היה אירוע שרצית ללכת אליו ולא הלכת, מה הסיבה לכך?</string>
@@ -168,23 +168,23 @@
     <string name="show_test_notifications_summary">הצג התראות בדיקה</string>
     <string name="advanced_options_enabled">אפשרויות מתקדמות אופשרו</string>
     <string name="about">אודות</string>
-    <!-- Copied from http://2018.harucon.org.il/%d7%9e%d7%99%d7%a7%d7%95%d7%9d-%d7%95%d7%93%d7%a8%d7%9b%d7%99-%d7%94%d7%92%d7%a2%d7%94/
+    <!-- Copied from http://2018.cami.org.il/%D7%9E%D7%99%D7%A7%D7%95%D7%9D-%D7%95%D7%93%D7%A8%D7%9B%D7%99-%D7%94%D7%92%D7%A2%D7%94/
          with the following changes:
          - Manually added titles for each arrival method category
          - Removed text about using waze (since there is a button for navigation in the activity itself)
          - Escaped apostrophes -->
     <string name="arrival_method_description"><![CDATA[
 <p><h3>הגעה ברגל</h3></p>
-<p>הליכה של כ- 5 דקות. התחנה המרכזית ישר עד רחוב שז&quot;ר, ימינה עד למעבר התת קרקעי, ביציאה ממנו שמאלה ולמעלה במדרגות והגעתם.</p>
+<p>הליכה של כ-5 דקות מהתחנה המרכזית בירושלים.<br />
+יוצאים מהתחנה המרכזית, הולכים ישר עד רחוב שז&quot;ר, פונים ימינה וממשיכים עד הגעה למעבר התת קרקעי, דרכו עליכם לעבור. ביציאה מהמעבר פונים שמאלה, ומיד לאחר מכן פונים שמאלה פעם נוספת אל רחוב יוסף הרליץ. עולים במעלה המדרגות משמאלכם. הגעתם!</p>
 <p><h3>הגעה באוטובוס</h3></p>
 <p>
-	<div class="wpb_text_column wpb_content_element  ">
+	<div class="wpb_text_column wpb_content_element  vc_custom_1526296264923 ">
 		<div class="wpb_wrapper">
 			<p>שימו לב, כל הקווים מגיעים לתחנה המרכזית בירושלים, משם בנייני האומה נמצאים במרחק הליכה של 5 דקות.</p>
 
 		</div>
-	</div>
-	<div class="vc_row wpb_row vc_inner wf-container"><div class="wpb_column vc_column_container vc_col-sm-6"><div class="vc_column-inner "><div class="wpb_wrapper">
+	</div> <div class="vc_row wpb_row vc_inner wf-container"><div class="wpb_column vc_column_container vc_col-sm-6"><div class="vc_column-inner "><div class="wpb_wrapper">
 	<div class="wpb_text_column wpb_content_element  ">
 		<div class="wpb_wrapper">
 			<p><strong>באר שבע:</strong></p>
@@ -197,8 +197,8 @@
 </ul>
 <p><strong>ראשון לציון:</strong></p>
 <ul>
-<li>קו 433 (אגד, <strong>תחנה מרכזית</strong>, זמן משוערך של שעה ו-35 דקות).</li>
-<li>קו 431 (אגד, <strong>תחנה מרכזית חדשה</strong>, זמן משוער של 50 דק\').</li>
+<li>קו 433 (אגד, <strong>תחנה מרכזית ישנה</strong>, זמן משוערך של שעה ו-35 דקות).</li>
+<li>קו 431 (אגד, <strong>תחנה מרכזית חדשה</strong>, זמן משוער של 50 דקות).</li>
 </ul>
 <p><strong>תל אביב:</strong></p>
 <ul>
@@ -245,7 +245,7 @@
 <li><strong>מהכניסה לעיר:</strong> יש לפנות ימינה בשדרות שז&quot;ר לכיוון בנייני האומה.</li>
 <li><strong>מכביש בגין:</strong> יש לצאת במחלף קרית משה ולפנות שמאלה מבגין דרום או ימינה מבגין צפון.</li>
 </ol>
-<p>במתחם יש 850 מקומות חנייה בתשלום המתחלקים בין חניון תת קרקעי וחניון חיצוני.</p>
+<p>במתחם קיימים 850 מקומות חנייה בתשלום המתחלקים בין חניון תת קרקעי וחניון חיצוני.</p>
 
 		</div>
 	</div>

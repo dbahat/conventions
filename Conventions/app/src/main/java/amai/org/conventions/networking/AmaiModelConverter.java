@@ -82,7 +82,7 @@ public class AmaiModelConverter {
 
 					boolean ignoreEventDescription = isEventWithSpecialContent
 							// TimetableDisableUrl marks events that have temporary or partial description, which shouldn't be shown
-							|| eventContract.getTimetableDisableUrl() == 1;
+							|| "1".equals(eventContract.getTimetableDisableUrl());
 
 					if (!ignoreEventDescription) {
 						event = event.withDescription(convertEventDescription(eventContract.getContent()));
