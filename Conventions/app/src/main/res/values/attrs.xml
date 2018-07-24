@@ -79,6 +79,8 @@
         <attr name="navigationPopupSelectedColor" format="color|reference"/>
         <attr name="navigationPopupNotSelectedColor" format="color|reference"/>
         <attr name="navigationPopupSeparatorColor" format="color|reference"/>
+        <attr name="navigationPopupTitleMargins" format="dimension"/>
+        <attr name="navigationPopupBottomImageMargins" format="dimension"/>
         <!-- Updates Screen -->
         <attr name="updateTimeColor" format="color|reference"/>
         <attr name="updateItemBorder" format="color|reference"/>

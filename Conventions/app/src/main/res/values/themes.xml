@@ -39,6 +39,8 @@
 
         <!-- Navigation popup -->
         <item name="navigationPopupSeparatorColor">?navigationPopupNotSelectedColor</item>
+        <item name="navigationPopupBottomImageMargins">31dp</item>
+        <item name="navigationPopupTitleMargins">0dp</item>
 
         <!-- Home -->
         <item name="homeBoxTopMargin">0dp</item>
@@ -112,6 +114,8 @@
 
         <!-- Navigation popup -->
         <item name="navigationPopupSeparatorColor">?navigationPopupNotSelectedColor</item>
+        <item name="navigationPopupBottomImageMargins">31dp</item>
+        <item name="navigationPopupTitleMargins">0dp</item>
 
         <!-- Home -->
         <item name="homeBoxTopMargin">0dp</item>

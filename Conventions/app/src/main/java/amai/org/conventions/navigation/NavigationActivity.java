@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -183,6 +184,10 @@ public abstract class NavigationActivity extends AppCompatActivity {
 
 		ListView navigationItems = (ListView) findViewById(R.id.navigation_items);
 		navigationItems.setAdapter(new NavigationItemsAdapter(this, items));
+
+		// Set the minimum height of the navigation drawer content to the height of its parent, so that the bottom image will really be at the bottom
+		ViewGroup navigationDrawerContent = findViewById(R.id.navigation_drawer_content);
+		navigationDrawerContent.setMinimumHeight(navigationDrawer.getHeight());
 	}
 
 	private void setupActionBar(Toolbar toolbar) {
