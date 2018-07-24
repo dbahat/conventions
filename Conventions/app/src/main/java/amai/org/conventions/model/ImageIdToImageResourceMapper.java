@@ -1,5 +1,7 @@
 package amai.org.conventions.model;
 
+import android.support.annotation.DrawableRes;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -32,7 +34,7 @@ public class ImageIdToImageResourceMapper {
 		excludeIds = new HashSet<>();
 	}
 
-	public void addMapping(String id, int resource) {
+	public ImageIdToImageResourceMapper addMapping(String id, @DrawableRes int resource) {
 		imageIdToImageResourceIdMap.put(id, resource);
 		if (BuildConfig.DEBUG && excludeIds.contains(id)) {
 			Log.e(TAG, "Image added to both excluded and mapped lists: " + id);
@@ -40,6 +42,7 @@ public class ImageIdToImageResourceMapper {
 		if (BuildConfig.DEBUG && imageIdToLogoImageResourceIdMap.containsKey(id)) {
 			Log.e(TAG, "Logo image added to both logo and mapped lists: " + id);
 		}
+		return this;
 	}
 
 	public void addLogoMapping(String id, int resource) {
