@@ -44,6 +44,7 @@
         <item name="navigationPopupSeparatorColor">@color/white</item>
         <!-- About Screen -->
         <item name="aboutLogo">@drawable/amai_logo_white</item>
+        <item name="aboutLogoMargins">80dp</item>
         <!-- Home Screen -->
         <item name="homeLogo">@null</item>
         <item name="homeBottomImage">@null</item>

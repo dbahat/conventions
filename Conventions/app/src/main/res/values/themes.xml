@@ -45,6 +45,9 @@
         <item name="homeSingleButtonTopMargin">0dp</item>
         <item name="homeSingleButtonStyle">@style/HomeButton.Single</item>
 
+        <!-- About -->
+        <item name="aboutLogoMargins">20dp</item>
+
         <!-- Updates -->
         <item name="updatesBackground">?android:colorBackground</item>
         <item name="updateItemSeparator">?separatorColor</item>
@@ -114,6 +117,9 @@
         <item name="homeBoxTopMargin">0dp</item>
         <item name="homeSingleButtonTopMargin">0dp</item>
         <item name="homeSingleButtonStyle">@style/HomeButton.Single</item>
+
+        <!-- About -->
+        <item name="aboutLogoMargins">20dp</item>
 
         <!-- Updates -->
         <item name="updatesBackground">?android:colorBackground</item>
