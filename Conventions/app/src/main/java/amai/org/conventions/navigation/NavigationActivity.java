@@ -93,6 +93,14 @@ public abstract class NavigationActivity extends AppCompatActivity {
 
 		initializeNavigationDrawer(); // In case it was already open
 
+		// In case the user opens it manually instead of from the button or it was already open
+		navigationDrawer.post(new Runnable() {
+			@Override
+			public void run() {
+				setNavigationDrawerHeight();
+			}
+		});
+
 		// We will display the notification once during onResume to let child activities override it safely
 		// (after their onCreate is called)
 		this.receivedPushNotification = getNotificationFromIntent(getIntent());
@@ -185,6 +193,10 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		ListView navigationItems = (ListView) findViewById(R.id.navigation_items);
 		navigationItems.setAdapter(new NavigationItemsAdapter(this, items));
 
+		setNavigationDrawerHeight();
+	}
+
+	private void setNavigationDrawerHeight() {
 		// Set the minimum height of the navigation drawer content to the height of its parent, so that the bottom image will really be at the bottom
 		ViewGroup navigationDrawerContent = findViewById(R.id.navigation_drawer_content);
 		navigationDrawerContent.setMinimumHeight(navigationDrawer.getHeight());
