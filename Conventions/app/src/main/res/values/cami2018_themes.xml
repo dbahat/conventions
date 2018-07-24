@@ -36,12 +36,14 @@
         <item name="toolbarLogo">@drawable/ic_menu_white_24dp</item>
         <item name="toolbarIconAccentColor">@color/harucon2018_gold</item>
         <!-- Navigation Popup -->
-        <item name="navigationPopupBackground">@drawable/harucon2018_navigation_drawer_background</item>
+        <item name="navigationPopupBackground">@drawable/cami2018_navigation_background</item>
         <item name="navigationPopupTitle">@drawable/harucon2018_title_white</item>
-        <item name="navigationPopupBottomImage">@drawable/harucon2018_navigation_image</item>
+        <item name="navigationPopupBottomImage">@drawable/cami2018_navigation_image</item>
         <item name="navigationPopupNotSelectedColor">@color/white</item>
         <item name="navigationPopupSelectedColor">@color/harucon2018_blue</item>
         <item name="navigationPopupSeparatorColor">@color/white</item>
+        <item name="navigationPopupBottomImageMargins">0dp</item>
+        <item name="navigationPopupTitleMargins">40dp</item>
         <!-- About Screen -->
         <item name="aboutLogo">@drawable/amai_logo_white</item>
         <item name="aboutLogoMargins">80dp</item>
