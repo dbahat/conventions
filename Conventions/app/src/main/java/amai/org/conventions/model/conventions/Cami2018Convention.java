@@ -163,25 +163,26 @@ public class Cami2018Convention extends AmaiConvention {
 				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/matankahal.png", R.drawable.event_matan)
 				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/doritbentov.png", R.drawable.event_dorit)
 				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/ophirlotan.png", R.drawable.event_ofirloten)
-//				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/omeramsalem.jpg", R.drawable.event_omeramsalem) TODO - return after tinify
+				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/omeramsalem.jpg", R.drawable.event_omeramsalem)
 				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/naginata.jpg", R.drawable.event_naginata)
-				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/adarzaks.jpg", R.drawable.cami2018_home_activity_background)
+				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/adarzaks.jpg", R.drawable.event_adarzaks)
 				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/netapeled.png", R.drawable.event_neta)
-				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/liadandkeren.png", R.drawable.event_liad)
+				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/liadandkeren.png", R.drawable.event_liadandkeren)
+				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/liadbarshilton.png", R.drawable.event_liadbarshilton)
 				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/leaotchitel.jpg", R.drawable.event_leaotchitel)
 				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/guytamir.png", R.drawable.event_guy)
-				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/omerrozencwieg.jpg", R.drawable.cami2018_home_activity_background)
-				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/guymaraton.png", R.drawable.cami2018_home_activity_background)
-				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/inbarchen.jpg", R.drawable.cami2018_home_activity_background)
+				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/omerrozencwieg.jpg", R.drawable.event_omerrozencwieg)
+				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/guymaraton.png", R.drawable.event_guymaraton)
+				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/inbarchen.jpg", R.drawable.event_inbarchen)
 				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/michalefrati.jpg", R.drawable.event_michal)
-				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/amaidolsite.png", R.drawable.cami2018_home_activity_background)
-				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/trivia.jpg", R.drawable.cami2018_home_activity_background)
-				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/socialmanga.jpg", R.drawable.cami2018_home_activity_background)
+				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/amaidolsite.png", R.drawable.event_amaidol)
+				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/socialmanga.jpg", R.drawable.event_manga_cafe)
 				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/leonsolomon.png", R.drawable.event_leon)
 				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/avivtamir.png", R.drawable.event_aviv)
 				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/saritegev.jpg", R.drawable.event_sarit)
 				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/sharonturner.png", R.drawable.event_sharont)
-				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/davidbahat.png", R.drawable.cami2018_home_activity_background);
+				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/trivia.jpg", R.drawable.event_trivia)
+				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/davidbahat.png", R.drawable.event_davidbahat);
 
 		imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.cami2018_home_activity_background);
 
