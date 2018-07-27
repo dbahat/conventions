@@ -165,25 +165,25 @@ public class Cami2018Convention extends AmaiConvention {
 				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/ophirlotan.png", R.drawable.event_ofirloten)
 //				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/omeramsalem.jpg", R.drawable.event_omeramsalem) TODO - return after tinify
 				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/naginata.jpg", R.drawable.event_naginata)
-				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/adarzaks.jpg", R.drawable.harucon2018_home_background)
+				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/adarzaks.jpg", R.drawable.cami2018_home_activity_background)
 				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/netapeled.png", R.drawable.event_neta)
 				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/liadandkeren.png", R.drawable.event_liad)
 				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/leaotchitel.jpg", R.drawable.event_leaotchitel)
 				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/guytamir.png", R.drawable.event_guy)
-				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/omerrozencwieg.jpg", R.drawable.harucon2018_home_background)
-				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/guymaraton.png", R.drawable.harucon2018_home_background)
-				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/inbarchen.jpg", R.drawable.harucon2018_home_background)
+				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/omerrozencwieg.jpg", R.drawable.cami2018_home_activity_background)
+				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/guymaraton.png", R.drawable.cami2018_home_activity_background)
+				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/inbarchen.jpg", R.drawable.cami2018_home_activity_background)
 				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/michalefrati.jpg", R.drawable.event_michal)
-				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/amaidolsite.png", R.drawable.harucon2018_home_background)
-				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/trivia.jpg", R.drawable.harucon2018_home_background)
-				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/socialmanga.jpg", R.drawable.harucon2018_home_background)
+				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/amaidolsite.png", R.drawable.cami2018_home_activity_background)
+				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/trivia.jpg", R.drawable.cami2018_home_activity_background)
+				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/socialmanga.jpg", R.drawable.cami2018_home_activity_background)
 				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/leonsolomon.png", R.drawable.event_leon)
 				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/avivtamir.png", R.drawable.event_aviv)
 				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/saritegev.jpg", R.drawable.event_sarit)
 				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/sharonturner.png", R.drawable.event_sharont)
-				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/davidbahat.png", R.drawable.harucon2018_home_background);
+				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/davidbahat.png", R.drawable.cami2018_home_activity_background);
 
-		imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.harucon2018_home_background);
+		imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.cami2018_home_activity_background);
 
 		// Excluded IDs - mostly for debug purposes (don't show messages about these when entering an event that has them)
 		// Foreground text is not readable
