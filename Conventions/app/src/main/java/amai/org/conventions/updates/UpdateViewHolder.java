@@ -20,6 +20,7 @@ public class UpdateViewHolder extends RecyclerView.ViewHolder {
 	private static final int MAX_LINES_FOR_COLLAPSED_VIEW = 6;
 
 	private ViewGroup updateContainer;
+	private View separator;
 	private TextView updateTextView;
 	private TextView updateTime;
 	private TextView updateDay;
@@ -30,6 +31,7 @@ public class UpdateViewHolder extends RecyclerView.ViewHolder {
 		super(itemView);
 
 		updateContainer = (ViewGroup) itemView.findViewById(R.id.update_container);
+		separator = itemView.findViewById(R.id.update_item_separator);
 		updateTextView = (TextView) itemView.findViewById(R.id.update_text);
 		updateTime = (TextView) itemView.findViewById(R.id.update_time);
 		updateDay = (TextView) itemView.findViewById(R.id.update_day);
@@ -53,6 +55,8 @@ public class UpdateViewHolder extends RecyclerView.ViewHolder {
 			textColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.updateTextColor);
 		}
 		updateContainer.setBackgroundColor(backgroundColor);
+
+		separator.setVisibility((getAdapterPosition() == 0) ? View.GONE : View.VISIBLE);
 
 		updateTextView.setText(spannedUpdateText);
 		updateTime.setText(Dates.formatHoursAndMinutes(updateViewModel.getUpdate().getDate()));

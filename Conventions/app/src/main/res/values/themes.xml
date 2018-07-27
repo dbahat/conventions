@@ -53,6 +53,7 @@
         <!-- Updates -->
         <item name="updatesBackground">?android:colorBackground</item>
         <item name="updateItemSeparator">?separatorColor</item>
+        <item name="updateItemDateSeparator">?separatorColor</item>
         <item name="updateTextColor">?android:textColorPrimary</item>
         <item name="newUpdateTextColor">?android:textColorPrimary</item>
         <item name="focusedUpdateTextColor">?android:textColorPrimary</item>
@@ -128,6 +129,7 @@
         <!-- Updates -->
         <item name="updatesBackground">?android:colorBackground</item>
         <item name="updateItemSeparator">?separatorColor</item>
+        <item name="updateItemDateSeparator">?separatorColor</item>
         <item name="updateTextColor">?android:textColorPrimary</item>
         <item name="newUpdateTextColor">?android:textColorPrimary</item>
         <item name="focusedUpdateTextColor">?android:textColorPrimary</item>

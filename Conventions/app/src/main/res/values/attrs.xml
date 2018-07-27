@@ -85,6 +85,7 @@
         <attr name="updateTimeColor" format="color|reference"/>
         <attr name="updateItemBorder" format="color|reference"/>
         <attr name="updateItemSeparator" format="color|reference"/>
+        <attr name="updateItemDateSeparator" format="color|reference"/>
         <attr name="updatesBackground" format="color|reference"/>
         <attr name="updateTextColor" format="color|reference"/>
         <attr name="newUpdateBackground" format="color|reference"/>
