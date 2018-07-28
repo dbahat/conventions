@@ -59,9 +59,11 @@
         <attr name="homeTitleText" format="color|reference"/>
         <attr name="homeMessageBackground" format="color|reference"/>
         <attr name="homeMessageText" format="color|reference"/>
+        <attr name="homeEventTimeText" format="color|reference"/>
         <attr name="homeCurrentEventBackground" format="color|reference"/>
         <attr name="homeUpcomingEventBackground" format="color|reference"/>
         <attr name="homeEventNameInList" format="color|reference"/>
+        <attr name="homeEventsListDivider" format="color|reference"/>
         <attr name="homeButtonBackground" format="color|reference"/>
         <attr name="homeButtonText" format="color|reference"/>
         <attr name="homeBoxTopMargin" format="dimension"/>

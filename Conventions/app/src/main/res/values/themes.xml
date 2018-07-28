@@ -46,6 +46,8 @@
         <item name="homeBoxTopMargin">0dp</item>
         <item name="homeSingleButtonTopMargin">0dp</item>
         <item name="homeSingleButtonStyle">@style/HomeButton.Single</item>
+        <item name="homeEventTimeText">?homeMessageText</item>
+        <item name="homeEventsListDivider">@drawable/home_event_list_divider</item>
 
         <!-- About -->
         <item name="aboutLogoMargins">20dp</item>
@@ -122,6 +124,8 @@
         <item name="homeBoxTopMargin">0dp</item>
         <item name="homeSingleButtonTopMargin">0dp</item>
         <item name="homeSingleButtonStyle">@style/HomeButton.Single</item>
+        <item name="homeEventTimeText">?homeMessageText</item>
+        <item name="homeEventsListDivider">@drawable/home_event_list_divider</item>
 
         <!-- About -->
         <item name="aboutLogoMargins">20dp</item>
