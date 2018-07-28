@@ -37,7 +37,7 @@
         <item name="toolbarIconAccentColor">@color/gold</item>
         <!-- Navigation Popup -->
         <item name="navigationPopupBackground">@drawable/cami2018_navigation_background</item>
-        <item name="navigationPopupTitle">@drawable/harucon2018_title_white</item>
+        <item name="navigationPopupTitle">@drawable/cami2018_logo_white</item>
         <item name="navigationPopupBottomImage">@drawable/cami2018_navigation_image</item>
         <item name="navigationPopupNotSelectedColor">@color/white</item>
         <item name="navigationPopupSelectedColor">@color/cami2018_red</item>
@@ -51,7 +51,7 @@
         <item name="homeLogo">@null</item>
         <item name="homeBottomImage">@null</item>
         <item name="homeBackground">@drawable/cami2018_home_activity_background</item>
-        <item name="homeToolbarTitle">@drawable/harucon2018_title_white</item>
+        <item name="homeToolbarTitle">@drawable/cami2018_logo_white</item>
         <item name="homeTitleBackground">@drawable/cami2018_home_title_background</item>
         <item name="homeTitleText">@color/cami2018_red</item>
         <item name="homeMessageBackground">@drawable/cami2018_home_message_background</item>
