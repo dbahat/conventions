@@ -3,13 +3,13 @@
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
             <corners android:radius="@dimen/home_box_radius" />
-            <solid android:color="@color/harucon2018_red_dark"/>
+            <solid android:color="@color/cami2018_gray"/>
         </shape>
     </item>
     <item>
         <shape android:shape="rectangle">
             <corners android:radius="@dimen/home_box_radius" />
-            <solid android:color="@color/harucon2018_red"/>
+            <solid android:color="@color/cami2018_white"/>
         </shape>
     </item>
 </selector>
