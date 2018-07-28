@@ -139,7 +139,7 @@ public class ApplicationInitializer {
         final int numberOfUpdatesBeforeRefresh = Convention.getInstance().getUpdates().size();
 
 		// Refresh and ignore all errors
-		UpdatesRefresher.getInstance(context).refreshFromServer(null, false, new UpdatesRefresher.OnUpdateFinishedListener() {
+		UpdatesRefresher.getInstance().refreshFromServer(null, false, new UpdatesRefresher.OnUpdateFinishedListener() {
 			@Override
 			public void onSuccess(int newUpdatesNumber) {
 				List<Update> newUpdates = CollectionUtils.filter(Convention.getInstance().getUpdates(), new CollectionUtils.Predicate<Update>() {
@@ -151,7 +151,7 @@ public class ApplicationInitializer {
 
 				// We don't want to raise the notification if there are no new updates, or if this is the first time updates are downloaded to cache.
 				if (newUpdatesNumber > 0 && newUpdates.size() > 0 && numberOfUpdatesBeforeRefresh > 0
-						&& UpdatesRefresher.getInstance(context).shouldEnableNotificationAfterUpdate()) {
+						&& UpdatesRefresher.getInstance().shouldEnableNotificationAfterUpdate()) {
 
 					Update latestUpdate = Collections.max(newUpdates, new Comparator<Update>() {
 						@Override

@@ -50,7 +50,7 @@ dependencies {
     // Using a fork of se.emilsjolander:stickylistheaders due to an open issue in Android 8. See https://github.com/emilsjolander/StickyListHeaders/issues/477.
     implementation 'com.github.mtotschnig:StickyListHeaders:2.7.1'
     implementation 'com.tonicartos:stickygridheaders:1.0.1'
-    implementation 'com.facebook.android:facebook-android-sdk:4.2.0'
+    implementation 'com.facebook.android:facebook-android-sdk:4.35.0'
     implementation 'com.google.code.gson:gson:2.8.0'
 
     testImplementation 'junit:junit:4.12'

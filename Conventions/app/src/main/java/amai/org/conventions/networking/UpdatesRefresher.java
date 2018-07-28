@@ -40,20 +40,11 @@ public class UpdatesRefresher {
 	private boolean isRefreshInProgress = false;
 	private boolean enableNotificationAfterUpdate;
 
-	/**
-	 * @param context any context
-	 */
-	public static synchronized UpdatesRefresher getInstance(Context context) {
+	public static synchronized UpdatesRefresher getInstance() {
 		if (instance == null) {
-			instance = new UpdatesRefresher(context);
+			instance = new UpdatesRefresher();
 		}
 		return instance;
-	}
-
-	private UpdatesRefresher(Context context) {
-		if (!FacebookSdk.isInitialized()) {
-			FacebookSdk.sdkInitialize(context.getApplicationContext());
-		}
 	}
 
 	public void setIsRefreshInProgress(boolean isRefreshInProgress) {
@@ -112,7 +103,10 @@ public class UpdatesRefresher {
 					}
 				});
 
+
 		Bundle parameters = new Bundle();
+		parameters.putString("fields", "link,message,created_time");
+
 		Date newestUpdateTime = Convention.getInstance().getNewestUpdateTime();
 		if (newestUpdateTime != null) {
 			// Get all the new updates and the updates from 2 days before the last time in case an older post

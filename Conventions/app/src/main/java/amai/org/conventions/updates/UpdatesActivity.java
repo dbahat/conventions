@@ -48,10 +48,6 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		if (!FacebookSdk.isInitialized()) {
-			FacebookSdk.sdkInitialize(getApplicationContext());
-		}
-
 		setToolbarTitle(getResources().getString(R.string.updates));
 		setContentInContentContainer(R.layout.activity_updates, false);
 		resolveUiElements();
@@ -210,7 +206,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 	}
 
 	private void retrieveUpdatesListFromFacebookApi(final AccessToken accessToken, final boolean showError) {
-		final UpdatesRefresher refresher = UpdatesRefresher.getInstance(UpdatesActivity.this);
+		final UpdatesRefresher refresher = UpdatesRefresher.getInstance();
 
 		// Workaround (Android issue #77712) - SwipeRefreshLayout indicator does not appear when the `setRefreshing(true)` is called before
 		// the `SwipeRefreshLayout#onMeasure()`, so we post the setRefreshing call to the layout queue.
