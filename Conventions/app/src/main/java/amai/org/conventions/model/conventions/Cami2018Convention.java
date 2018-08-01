@@ -6,6 +6,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 import amai.org.conventions.R;
@@ -20,6 +21,7 @@ import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.Hall;
 import amai.org.conventions.model.Halls;
 import amai.org.conventions.model.ImageIdToImageResourceMapper;
+import amai.org.conventions.model.SpecialEventsProcessor;
 import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.Survey;
 import amai.org.conventions.networking.SurveyDataRetriever;
@@ -41,9 +43,13 @@ public class Cami2018Convention extends AmaiConvention {
 	private static final int QUESTION_ID_AMAIDOL_VOTE = 1001;
 	// Special events server id
 	private static final int EVENT_ID_AMAIDOL = 5579;
+	private static final int EVENT_ID_MIYAZAKI_MOVIE = 5729;
 
 	// Ids of google spreadsheets associated with the special events
 	private static final String AMAIDOL_SPREADSHEET_ID = "12ckMtCm-OVPmMgDQfLWHJuzyoKP34wu9TmgeHTnwVkc";
+
+	// Special image IDs
+	private static final String MIYAZAKI_MOVIE_IMAGE = "MIYAZAKI_MOVIE_IMAGE";
 
 	static {
 		FeedbackQuestion.addQuestion(QUESTION_ID_AMAIDOL_NAME, R.string.amaidol_name_question);
@@ -53,7 +59,7 @@ public class Cami2018Convention extends AmaiConvention {
 
 	@Override
 	protected ConventionStorage initStorage() {
-		return new ConventionStorage(this, R.raw.cami2018_convention_events, 1);
+		return new ConventionStorage(this, R.raw.cami2018_convention_events, 2);
 	}
 
 	@Override
@@ -178,7 +184,9 @@ public class Cami2018Convention extends AmaiConvention {
 				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/saritegev.jpg", R.drawable.event_sarit)
 				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/sharonturner.png", R.drawable.event_sharont)
 				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/trivia.jpg", R.drawable.event_trivia)
-				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/davidbahat.png", R.drawable.event_davidbahat);
+				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/davidbahat.png", R.drawable.event_davidbahat)
+				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/MV5BNTFmMDZmMDAtZGE3Yi00MzVmLWEwZmQtZjFhN2U2ZjdiODlmL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_.jpg", R.drawable.event_shlomit)
+				.addMapping(MIYAZAKI_MOVIE_IMAGE, R.drawable.event_miyazaki);
 
 		imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.cami2018_home_activity_background);
 
@@ -545,5 +553,19 @@ public class Cami2018Convention extends AmaiConvention {
 				));
 			}
 		}
+	}
+
+	@Override
+	public SpecialEventsProcessor getSpecialEventsProcessor() {
+		return new SpecialEventsProcessor() {
+			@Override
+			public boolean processSpecialEvent(ConventionEvent event) {
+				// The image isn't returned from the server for this event
+				if (event.getServerId() == EVENT_ID_MIYAZAKI_MOVIE) {
+					event.setImages(Collections.singletonList(MIYAZAKI_MOVIE_IMAGE));
+				}
+				return false;
+			}
+		};
 	}
 }
