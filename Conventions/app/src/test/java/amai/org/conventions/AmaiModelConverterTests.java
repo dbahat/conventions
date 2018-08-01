@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 
 import java.text.SimpleDateFormat;
@@ -128,7 +128,7 @@ public class AmaiModelConverterTests {
 	@Test
 	public void Convert_Strips_EventDescription_When_EventContract_Has_DisableUrlFlag() {
 		AmaiEventContract contract = generateEventContract(0, Collections.singletonList(generateTimetableInfoInstance(0)))
-				.setTimetableDisableUrl(1);
+				.setTimetableDisableUrl("1");
 
 		List<ConventionEvent> eventList = amaiModelConverter.convert(Collections.singletonList(contract));
 
