@@ -21,6 +21,7 @@ import amai.org.conventions.model.Hall;
 import amai.org.conventions.model.Halls;
 import amai.org.conventions.model.ImageIdToImageResourceMapper;
 import amai.org.conventions.model.Stand;
+import amai.org.conventions.model.Survey;
 import amai.org.conventions.networking.SurveyDataRetriever;
 import amai.org.conventions.utils.ConventionStorage;
 
@@ -36,22 +37,17 @@ public class Cami2018Convention extends AmaiConvention {
 	private static final String SIGNING_AREA_NAME = "אזור ההחתמות";
 
 	// Vote questions - these values are serialized, don't change them!
-	private static final int QUESTION_ID_COSPLAY_VOTE = 1002;
-	private static final int QUESTION_ID_SHOWCASE_VOTE = 1004;
-
+	private static final int QUESTION_ID_AMAIDOL_NAME = 1000;
+	private static final int QUESTION_ID_AMAIDOL_VOTE = 1001;
 	// Special events server id
-	private static final int EVENT_ID_SHOWCASE = 4612;
-	private static final int EVENT_ID_COSPLAY = 4610;
+	private static final int EVENT_ID_AMAIDOL = 5579;
 
 	// Ids of google spreadsheets associated with the special events
-	// TODO update for cami 2018
-	private static final String SHOWCASE_SPREADSHEET_ID = "1QRRw453cyzIDPgnFXah735J2BDd2GebThjCIlI6o5UM";
-	// TODO update for cami 2018
-	private static final String COSPLAY_SPREADSHEET_ID = "1su0vTI4rvaN_B7cAgzME-5mfKKyHEyzCICPLHbNsGUM";
+	private static final String AMAIDOL_SPREADSHEET_ID = "12ckMtCm-OVPmMgDQfLWHJuzyoKP34wu9TmgeHTnwVkc";
 
 	static {
-		FeedbackQuestion.addQuestion(QUESTION_ID_COSPLAY_VOTE, R.string.cosplay_vote_question);
-		FeedbackQuestion.addQuestion(QUESTION_ID_SHOWCASE_VOTE, R.string.showcase_vote_question);
+		FeedbackQuestion.addQuestion(QUESTION_ID_AMAIDOL_NAME, R.string.amaidol_name_question);
+		FeedbackQuestion.addQuestion(QUESTION_ID_AMAIDOL_VOTE, R.string.amaidol_vote_question);
 	}
 
 
@@ -496,28 +492,20 @@ public class Cami2018Convention extends AmaiConvention {
 
 	@Override
 	public SurveySender getEventVoteSender(final ConventionEvent event) {
-		// TODO update for cami 2018
 		if (event.getUserInput().getVoteSurvey() == null) {
 			return null;
 		}
 		try {
-			if (event.getServerId() == EVENT_ID_SHOWCASE) {
+			if (event.getServerId() == EVENT_ID_AMAIDOL) {
 				SurveyForm form = new SurveyForm()
-						.withQuestionEntry(QUESTION_ID_SHOWCASE_VOTE, "entry.774724773")
-						.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSf8YA74ASQ3MXcd5Fjl2iWS2epA-RLTTS5iSI7FSedw-jjT3w/formResponse"));
+						.withQuestionEntry(QUESTION_ID_AMAIDOL_NAME, "entry.109802680")
+						.withQuestionEntry(QUESTION_ID_AMAIDOL_VOTE, "entry.1600353678")
+						.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLScaw6VMWyggn4hE3iK9KANCGcl0bpW9wgeCSVJP9aXnJajiMw/formResponse"));
 
-				SurveyDataRetriever.DisabledMessage disabledMessageRetriever = new SurveyDataRetriever.GoogleSpreadSheet(SHOWCASE_SPREADSHEET_ID);
+				SurveyDataRetriever.DisabledMessage disabledMessageRetriever = new SurveyDataRetriever.GoogleSpreadSheet(AMAIDOL_SPREADSHEET_ID);
 
 				return new EventVoteSurveyFormSender(form, event.getUserInput().getVoteSurvey(), disabledMessageRetriever);
 
-			} else if (event.getServerId() == EVENT_ID_COSPLAY) {
-				SurveyForm form = new SurveyForm()
-						.withQuestionEntry(QUESTION_ID_COSPLAY_VOTE, "entry.751291262")
-						.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSeT-yAg5y3CUXC36THZxrpH7jeM9ozQ8JeQE79PuHabw64gIA/formResponse"));
-
-				SurveyDataRetriever.DisabledMessage disabledMessageRetriever = new SurveyDataRetriever.GoogleSpreadSheet(COSPLAY_SPREADSHEET_ID);
-
-				return new EventVoteSurveyFormSender(form, event.getUserInput().getVoteSurvey(), disabledMessageRetriever);
 			}
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
@@ -528,13 +516,10 @@ public class Cami2018Convention extends AmaiConvention {
 	@Override
 	@Nullable
 	public SurveyDataRetriever.Answers createSurveyAnswersRetriever(FeedbackQuestion question) {
-		// TODO update for cami 2018
 		switch (question.getQuestionId()) {
-			case QUESTION_ID_SHOWCASE_VOTE: {
-				return new SurveyDataRetriever.GoogleSpreadSheet(SHOWCASE_SPREADSHEET_ID);
-			}
-			case QUESTION_ID_COSPLAY_VOTE: {
-				return new SurveyDataRetriever.GoogleSpreadSheet(COSPLAY_SPREADSHEET_ID);
+			case QUESTION_ID_AMAIDOL_NAME:
+			case QUESTION_ID_AMAIDOL_VOTE: {
+				return new SurveyDataRetriever.GoogleSpreadSheet(AMAIDOL_SPREADSHEET_ID);
 			}
 		}
 
@@ -551,17 +536,14 @@ public class Cami2018Convention extends AmaiConvention {
 	@Override
 	public void convertUserInputForEvent(ConventionEvent.UserInput userInput, ConventionEvent event) {
 		super.convertUserInputForEvent(userInput, event);
-		// TODO update for cami 2018
-//		if (userInput.getVoteSurvey() == null && event != null) {
-//			if (event.getServerId() == EVENT_ID_SHOWCASE) {
-//				userInput.setVoteSurvey(new Survey().withQuestions(
-//						new FeedbackQuestion(QUESTION_ID_SHOWCASE_VOTE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO, true)
-//				));
-//			} else if (event.getServerId() == EVENT_ID_COSPLAY) {
-//				userInput.setVoteSurvey(new Survey().withQuestions(
-//						new FeedbackQuestion(QUESTION_ID_COSPLAY_VOTE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO, true)
-//				));
-//			}
-//		}
+
+		if (userInput.getVoteSurvey() == null && event != null) {
+			if (event.getServerId() == EVENT_ID_AMAIDOL) {
+				userInput.setVoteSurvey(new Survey().withQuestions(
+						new FeedbackQuestion(QUESTION_ID_AMAIDOL_NAME, FeedbackQuestion.AnswerType.SINGLE_LINE_TEXT, true),
+						new FeedbackQuestion(QUESTION_ID_AMAIDOL_VOTE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO, true)
+				));
+			}
+		}
 	}
 }

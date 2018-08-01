@@ -276,8 +276,8 @@
     <string name="home_upcoming_event_time">בעוד %s</string>
     <string name="home_upcoming_programme_events">אירועים שמתחילים ב-%s</string>
     <string name="home_convention_ended">הכנס נגמר</string>
-    <string name="cosplay_vote_question">איזה קוספליי הכי אהבת בתחרות הקוספליי?</string>
-    <string name="showcase_vote_question">איזה קוספליי הכי אהבת באירוע השואוקייס?</string>
+    <string name="amaidol_name_question">איך קוראים לך?</string>
+    <string name="amaidol_vote_question">מי המתמודד/ת החביב/ה עליך?</string>
     <string name="to_vote_survey">להצבעה</string>
     <string name="survey_vote_details">באירוע זה ניתן להצביע עבור חביב הקהל.</string>
     <string name="survey_vote_note">שימו לב! ניתן להצביע פעם אחת בלבד, ורק לאחר שכל המתמודדים עלו לבמה.</string>
