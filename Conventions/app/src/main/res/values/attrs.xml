@@ -129,6 +129,8 @@
         <!-- Programme Screen -->
         <attr name="eventTimeHeaderBackground" format="color|reference"/>
         <attr name="eventTimeHeaderDefaultTextColor" format="color|reference"/>
+        <!-- Event Survey Dialog -->
+        <attr name="eventSurveyTextColor" format="color|reference"/>
         <!-- Icons -->
         <attr name="iconAddToFavorites" format="integer|reference"/>
         <attr name="iconShrink" format="integer|reference"/>

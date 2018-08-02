@@ -85,7 +85,7 @@ public class EventVoteSurveyFragment extends DialogFragment {
 		surveyView.setFeedbackSentText(R.string.event_vote_survey_sent);
 		surveyView.setFeedbackSendErrorMessage(R.string.vote_send_error);
 		surveyView.setModel(event.getUserInput().getVoteSurvey());
-		surveyView.setTextColor(ThemeAttributes.getColor(surveyView.getContext(), R.attr.conventionFeedbackTextColor));
+		surveyView.setTextColor(ThemeAttributes.getColor(surveyView.getContext(), R.attr.eventSurveyTextColor));
 		surveyView.setSendFeedbackClickListener(surveyView.new CollapsibleFeedbackViewSendListener() {
 			@Override
 			protected void saveFeedback() {

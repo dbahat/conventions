@@ -49,10 +49,9 @@ import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.AspectRatioImageView;
 import amai.org.conventions.feedback.SurveySender;
 import amai.org.conventions.feedback.forms.SurveyDisabledException;
-import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.FeedbackQuestion;
+import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.conventions.Convention;
-import amai.org.conventions.networking.AmaiModelConverter;
 import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Views;
 
