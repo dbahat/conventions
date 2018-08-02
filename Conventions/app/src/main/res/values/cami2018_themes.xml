@@ -119,11 +119,13 @@
         <item name="android:windowNoTitle">true</item>
         <item name="colorAccent">@color/cami2018_red</item>
         <item name="borderlessButtonColor">@color/cami2018_red</item>
+        <item name="android:textColorPrimary">@android:color/black</item>
     </style>
 
     <style name="AppAlertDialogTheme.Cami2018" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorAccent">@color/cami2018_red</item>
         <item name="borderlessButtonColor">@color/cami2018_red</item>
+        <item name="android:textColorPrimary">@android:color/black</item>
     </style>
 
     <style name="AppBaseTheme.Cami2018.Toolbar.Splash">
