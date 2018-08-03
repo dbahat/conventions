@@ -88,7 +88,9 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 	private ZoomView mapZoomView;
 	private ImageLayout mapFloorImage;
 	private View upArrow;
+	private TextView upArrowText;
 	private View downArrow;
+	private TextView downArrowText;
 
 	private InterceptorLinearLayout locationDetails;
 	private TextView locationTitle;
@@ -257,7 +259,9 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		mapZoomView = (ZoomView) view.findViewById(R.id.map_zoom_view);
 		mapFloorImage = (ImageLayout) view.findViewById(R.id.map_floor_image);
 		upArrow = view.findViewById(R.id.map_floor_up);
+		upArrowText = view.findViewById(R.id.map_floor_up_text);
 		downArrow = view.findViewById(R.id.map_floor_down);
+		downArrowText = view.findViewById(R.id.map_floor_down_text);
 
 		// Current selected location details
 		locationDetails = (InterceptorLinearLayout) view.findViewById(R.id.location_details);
@@ -400,10 +404,21 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
 		// Add up and down arrows
 		boolean isTopFloor = floor.getNumber() == map.getTopFloor().getNumber();
-		upArrow.setVisibility(isTopFloor ? View.GONE : View.VISIBLE);
+		if (isTopFloor) {
+			upArrow.setVisibility(View.GONE);
+		} else {
+			upArrow.setVisibility(View.VISIBLE);
+			upArrowText.setText(map.getFloors().get(map.floorNumberToFloorIndex(floor.getNumber()) + 1).getName());
+		}
+
 
 		boolean isBottomFloor = floor.getNumber() == map.getBottomFloor().getNumber();
-		downArrow.setVisibility(isBottomFloor ? View.GONE : View.VISIBLE);
+		if (isBottomFloor) {
+			downArrow.setVisibility(View.GONE);
+		} else {
+			downArrow.setVisibility(View.VISIBLE);
+			downArrowText.setText(map.getFloors().get(map.floorNumberToFloorIndex(floor.getNumber()) - 1).getName());
+		}
 
 		// We have to measure for the animations to work
 		downArrow.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
