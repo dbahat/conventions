@@ -15,6 +15,7 @@
     <color name="cami2018_brown">#B69058</color>
 
     <color name="cami2018_transparent_black">#95111818</color>
+    <color name="cami2018_less_transparent_black">#66111818</color>
     <color name="cami2018_transparent_orange">#80D27322</color>
     <color name="cami2018_transparent_dark_red">#899c0f12</color>
 </resources>

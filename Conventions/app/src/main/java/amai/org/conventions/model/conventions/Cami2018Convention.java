@@ -238,12 +238,18 @@ public class Cami2018Convention extends AmaiConvention {
 		Hall games = this.getHalls().findByName(GAMES_NAME);
 		Hall signingArea = this.getHalls().findByName(SIGNING_AREA_NAME);
 
-		Floor floor1 = new Floor(1)
+		Floor entrance = new Floor(1)
+				.withName("מתחם כניסה")
+				.withImageResource(R.drawable.cami2018_entrance_map, false)
+				.withImageHeight(542.20001f)
+				.withImageWidth(796.45038f);
+
+		Floor floor1 = new Floor(2)
 				.withName("קומה 1")
 				.withImageResource(R.raw.cami2018_floor1, true)
 				.withImageWidth(908.495f)
 				.withImageHeight(469.49725f);
-		Floor floor2 = new Floor(2)
+		Floor floor2 = new Floor(3)
 				.withName("קומה 2")
 				.withImageResource(R.raw.cami2018_floor2, true)
 				.withImageWidth(986.86462f)
@@ -253,9 +259,33 @@ public class Cami2018Convention extends AmaiConvention {
 		StandsArea pinkus = new StandsArea().withName("אולם פינקוס").withStands(getPinkusStands())/*.withImageResource(R.drawable.stands_pinkus).withImageWidth(2700).withImageHeight(1708)*/;
 		StandsArea nesher = new StandsArea().withName("רחבת הכניסה").withStands(getNesherStands())/*.withImageResource(R.drawable.stands_nesher).withImageWidth(2588).withImageHeight(1588)*/;
 		return new ConventionMap()
-				.withFloors(Arrays.asList(floor1, floor2))
+				.withFloors(Arrays.asList(entrance, floor1, floor2))
+				.withDefaultFloor(floor1)
 				.withLocations(
 						CollectionUtils.flattenList(
+								inFloor(entrance,
+										new MapLocation()
+												.withPlace(new Place().withName("מתחם הזמנה מראש"))
+												.withMarkerResource(R.raw.cami2018_marker_preorder, true)
+												.withSelectedMarkerResource(R.raw.cami2018_marker_preorder_selected, true)
+												.withMarkerHeight(72.6f)
+												.withX(670.42f)
+												.withY(310.31f),
+										new MapLocation()
+												.withPlace(new Place().withName("עמדת מיוחדים"))
+												.withMarkerResource(R.raw.cami2018_marker_specials, true)
+												.withSelectedMarkerResource(R.raw.cami2018_marker_specials_selected, true)
+												.withMarkerHeight(68.4f)
+												.withX(425.88f)
+												.withY(74.26f),
+										new MapLocation()
+												.withPlace(new Place().withName("מתחם קנייה במקום"))
+												.withMarkerResource(R.raw.cami2018_marker_cashiers, true)
+												.withSelectedMarkerResource(R.raw.cami2018_marker_cashiers_selected, true)
+												.withMarkerHeight(72.6f)
+												.withX(93.06f)
+												.withY(396.9f)
+								),
 								inFloor(floor1,
 										new MapLocation()
 												.withPlace(new Place().withName("שירותים"))
