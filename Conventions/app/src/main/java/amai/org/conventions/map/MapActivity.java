@@ -80,6 +80,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		super.onCreate(savedInstanceState);
 		setContentInContentContainer(R.layout.activity_map, false, false);
 		setToolbarAndContentContainerBackground(ThemeAttributes.getDrawable(this, R.attr.mapBackground));
+		setToolbarBackgroundColor(ThemeAttributes.getColor(this, R.attr.mapToolbarColor));
 		if (map.getLocations().size() > 0) {
 			setupActionButton(R.drawable.ic_action_search, new View.OnClickListener() {
 				@Override

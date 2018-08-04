@@ -64,6 +64,7 @@
         <item name="mapBackground">?activitiesBackground</item>
         <item name="locationDetailsBackground">@color/white</item>
         <item name="locationDetailsTitleColor">?android:textColorPrimary</item>
+        <item name="mapToolbarColor">?toolbarBackground</item>
 
         <!-- Event activity -->
         <item name="eventToolbarColor">?toolbarBackground</item>
@@ -143,6 +144,7 @@
         <item name="mapBackground">?activitiesBackground</item>
         <item name="locationDetailsBackground">@color/white</item>
         <item name="locationDetailsTitleColor">?android:textColorPrimary</item>
+        <item name="mapToolbarColor">?toolbarBackground</item>
 
         <!-- Event activity -->
         <item name="eventToolbarColor">?toolbarBackground</item>
