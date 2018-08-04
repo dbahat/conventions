@@ -87,8 +87,8 @@
             </intent-filter>
         </activity>
 
-        <service
-            android:name=".notifications.ShowNotificationService"
+        <receiver
+            android:name=".notifications.ShowNotificationReceiver"
             android:exported="false" />
         <service
             android:name=".notifications.PushNotificationHandlingService"

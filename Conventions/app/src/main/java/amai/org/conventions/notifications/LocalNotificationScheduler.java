@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
-import android.preference.PreferenceManager;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -56,7 +55,7 @@ public class LocalNotificationScheduler {
 			return;
 		}
 
-		PendingIntent pendingIntent = createEventNotificationPendingIntent(event, ShowNotificationService.Type.EventAboutToStart);
+		PendingIntent pendingIntent = createEventNotificationPendingIntent(event, PushNotification.Type.EventAboutToStart);
 
 		scheduleAlarm(time, pendingIntent, Accuracy.UP_TO_1_MINUTE_EARLIER);
 	}
@@ -67,27 +66,27 @@ public class LocalNotificationScheduler {
 			return;
 		}
 
-		PendingIntent pendingIntent = createEventNotificationPendingIntent(event, ShowNotificationService.Type.EventFeedbackReminder);
+		PendingIntent pendingIntent = createEventNotificationPendingIntent(event, PushNotification.Type.EventFeedbackReminder);
 		scheduleAlarm(time, pendingIntent, Accuracy.UP_TO_5_MINUTES_LATER);
 	}
 
 	public void cancelDefaultEventAlarms(ConventionEvent event) {
-		cancelEventAlarm(event, ShowNotificationService.Type.EventAboutToStart);
-		cancelEventAlarm(event, ShowNotificationService.Type.EventFeedbackReminder);
+		cancelEventAlarm(event, PushNotification.Type.EventAboutToStart);
+		cancelEventAlarm(event, PushNotification.Type.EventFeedbackReminder);
 
 		event.getUserInput().getEventFeedbackReminderNotification().setNotificationTime(null);
 		event.getUserInput().getEventAboutToStartNotification().setNotificationTime(null);
 		Convention.getInstance().getStorage().saveUserInput();
 	}
 
-	public void cancelEventAlarm(ConventionEvent event, ShowNotificationService.Type notificationType) {
+	public void cancelEventAlarm(ConventionEvent event, PushNotification.Type notificationType) {
 		// Sending the extras due to apparent bug on Lollipop that this exact intent is used when rescheduling it
 		// (canceling then re-setting it), so it needs the extras or it arrives without parameters and is not displayed
-		Intent intent = new Intent(context, ShowNotificationService.class)
+		Intent intent = new Intent(context, ShowNotificationReceiver.class)
 				.setAction(notificationType.toString() + event.getId())
-				.putExtra(ShowNotificationService.EXTRA_EVENT_ID_TO_NOTIFY, event.getId())
-				.putExtra(ShowNotificationService.EXTRA_NOTIFICATION_TYPE, notificationType.toString());
-		PendingIntent pendingIntent = PendingIntent.getService(context, 0, intent, 0);
+				.putExtra(ShowNotificationReceiver.EXTRA_EVENT_ID_TO_NOTIFY, event.getId())
+				.putExtra(ShowNotificationReceiver.EXTRA_NOTIFICATION_TYPE, notificationType.toString());
+		PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
 
 		alarmManager.cancel(pendingIntent);
 	}
@@ -107,10 +106,10 @@ public class LocalNotificationScheduler {
 			oneDayPostConventionDate.setTime(Convention.getInstance().getEndDate().getTime());
 			oneDayPostConventionDate.set(Calendar.HOUR_OF_DAY, 22);
 
-			Intent intent = new Intent(context, ShowNotificationService.class)
-					.setAction(ShowNotificationService.Type.ConventionFeedbackReminder.toString())
-					.putExtra(ShowNotificationService.EXTRA_NOTIFICATION_TYPE, ShowNotificationService.Type.ConventionFeedbackReminder.toString());
-			scheduleAlarm(oneDayPostConventionDate.getTimeInMillis(), PendingIntent.getService(context, 0, intent, 0), Accuracy.INACCURATE);
+			Intent intent = new Intent(context, ShowNotificationReceiver.class)
+					.setAction(PushNotification.Type.ConventionFeedbackReminder.toString())
+					.putExtra(ShowNotificationReceiver.EXTRA_NOTIFICATION_TYPE, PushNotification.Type.ConventionFeedbackReminder.toString());
+			scheduleAlarm(oneDayPostConventionDate.getTimeInMillis(), PendingIntent.getBroadcast(context, 0, intent, 0), Accuracy.INACCURATE);
 		}
 
 		if (!ConventionsApplication.settings.wasConventionLastChanceFeedbackNotificationShown()) {
@@ -119,33 +118,45 @@ public class LocalNotificationScheduler {
 			tenDaysPostConventionDate.add(Calendar.DATE, 4);
 			tenDaysPostConventionDate.set(Calendar.HOUR_OF_DAY, 10);
 
-			Intent intent = new Intent(context, ShowNotificationService.class)
-					.setAction(ShowNotificationService.Type.ConventionFeedbackLastChanceReminder.toString())
-					.putExtra(ShowNotificationService.EXTRA_NOTIFICATION_TYPE, ShowNotificationService.Type.ConventionFeedbackLastChanceReminder.toString());
-			scheduleAlarm(tenDaysPostConventionDate.getTimeInMillis(), PendingIntent.getService(context, 0, intent, 0), Accuracy.INACCURATE);
+			Intent intent = new Intent(context, ShowNotificationReceiver.class)
+					.setAction(PushNotification.Type.ConventionFeedbackLastChanceReminder.toString())
+					.putExtra(ShowNotificationReceiver.EXTRA_NOTIFICATION_TYPE, PushNotification.Type.ConventionFeedbackLastChanceReminder.toString());
+			scheduleAlarm(tenDaysPostConventionDate.getTimeInMillis(), PendingIntent.getBroadcast(context, 0, intent, 0), Accuracy.INACCURATE);
 		}
 	}
 
-	private PendingIntent createEventNotificationPendingIntent(ConventionEvent event, ShowNotificationService.Type notificationType) {
+	private PendingIntent createEventNotificationPendingIntent(ConventionEvent event, PushNotification.Type notificationType) {
 
-		Intent intent = new Intent(context, ShowNotificationService.class)
+		Intent intent = new Intent(context, ShowNotificationReceiver.class)
 				.setAction(notificationType.toString() + event.getId()) // Setting unique action id so different event intents won't collide
-				.putExtra(ShowNotificationService.EXTRA_EVENT_ID_TO_NOTIFY, event.getId())
-				.putExtra(ShowNotificationService.EXTRA_NOTIFICATION_TYPE, notificationType.toString());
-		return PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+				.putExtra(ShowNotificationReceiver.EXTRA_EVENT_ID_TO_NOTIFY, event.getId())
+				.putExtra(ShowNotificationReceiver.EXTRA_NOTIFICATION_TYPE, notificationType.toString());
+		return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 	}
 
 	private void scheduleAlarm(long time, PendingIntent pendingIntent, Accuracy accuracy) {
-		// For Kitkat and above, the AlarmService batches notifications to improve battery life at the cost of alarm accuracy
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && accuracy != Accuracy.INACCURATE) {
+			scheduleAlarmWhileInDoze(time, pendingIntent);
+		} else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 			scheduleInaccurateAlarm(time, pendingIntent, accuracy);
 		} else {
 			scheduleAlarm(time, pendingIntent);
 		}
 	}
 
+	@TargetApi(Build.VERSION_CODES.M)
+	private void scheduleAlarmWhileInDoze(long time, PendingIntent pendingIntent) {
+		// Starting Android M the device can enter doze mode, meaning it might not get the notifications in time.
+		// The only API currently available to get the notification to wake up the device is either
+		// the inaccurate setAndAllowWhileIdle() and setExactAndAllowWhileIdle().
+		//
+		// Since there's no option to define a window, we go with the more battery consuming but accurate setExactAndAllowWhileIdle().
+		alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, time, pendingIntent);
+	}
+
 	@TargetApi(Build.VERSION_CODES.KITKAT)
 	private void scheduleInaccurateAlarm(long time, PendingIntent pendingIntent, Accuracy accuracy) {
+		// For Kitkat and above, the AlarmService batches notifications to improve battery life at the cost of alarm accuracy.
 		// Since event start notification time is important, schedule them using setWindow, which gives an exact window of time,
 		// allowing for some optimization while being accurate enough.
 		long length;

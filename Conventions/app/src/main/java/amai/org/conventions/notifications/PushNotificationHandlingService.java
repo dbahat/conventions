@@ -21,17 +21,17 @@ public class PushNotificationHandlingService extends FirebaseMessagingService {
         Log.d(TAG, "got push notification message from " + remoteMessage.getFrom());
         if (remoteMessage.getNotification() != null) {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
-            Intent intent = new Intent(this, ShowNotificationService.class)
-                    .putExtra(ShowNotificationService.EXTRA_NOTIFICATION_TYPE, ShowNotificationService.Type.Push.toString())
-                    .putExtra(ShowNotificationService.EXTRA_MESSAGE, remoteMessage.getNotification().getBody());
+            Intent intent = new Intent(this, ShowNotificationReceiver.class)
+                    .putExtra(ShowNotificationReceiver.EXTRA_NOTIFICATION_TYPE, PushNotification.Type.Push.toString())
+                    .putExtra(ShowNotificationReceiver.EXTRA_MESSAGE, remoteMessage.getNotification().getBody());
 
             if (remoteMessage.getData() != null && remoteMessage.getData().containsKey(TOPIC)) {
                 intent
-                        .putExtra(ShowNotificationService.EXTRA_CATEGORY, remoteMessage.getData().get(TOPIC))
-                        .putExtra(ShowNotificationService.EXTRA_ID, remoteMessage.getData().get(ID));
+                        .putExtra(ShowNotificationReceiver.EXTRA_CATEGORY, remoteMessage.getData().get(TOPIC))
+                        .putExtra(ShowNotificationReceiver.EXTRA_ID, remoteMessage.getData().get(ID));
             }
 
-            startService(intent);
+            sendBroadcast(intent);
         }
     }
 }
