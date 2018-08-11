@@ -241,7 +241,7 @@ public class Cami2018Convention extends AmaiConvention {
 		Floor entrance = new Floor(1)
 				.withName("מתחם כניסה")
 				.withImageResource(R.drawable.cami2018_entrance_map, false)
-				.withImageHeight(542.20001f)
+				.withImageHeight(523.20001f)
 				.withImageWidth(796.45038f);
 
 		Floor floor1 = new Floor(2)
@@ -269,22 +269,15 @@ public class Cami2018Convention extends AmaiConvention {
 												.withMarkerResource(R.raw.cami2018_marker_preorder, true)
 												.withSelectedMarkerResource(R.raw.cami2018_marker_preorder_selected, true)
 												.withMarkerHeight(72.6f)
-												.withX(670.42f)
-												.withY(310.31f),
-										new MapLocation()
-												.withPlace(new Place().withName("עמדת מיוחדים"))
-												.withMarkerResource(R.raw.cami2018_marker_specials, true)
-												.withSelectedMarkerResource(R.raw.cami2018_marker_specials_selected, true)
-												.withMarkerHeight(68.4f)
-												.withX(425.88f)
-												.withY(74.26f),
+												.withX(667.4f)
+												.withY(288.9f),
 										new MapLocation()
 												.withPlace(new Place().withName("מתחם קנייה במקום"))
 												.withMarkerResource(R.raw.cami2018_marker_cashiers, true)
 												.withSelectedMarkerResource(R.raw.cami2018_marker_cashiers_selected, true)
 												.withMarkerHeight(72.6f)
-												.withX(93.06f)
-												.withY(396.9f)
+												.withX(99.05f)
+												.withY(374.9f)
 								),
 								inFloor(floor1,
 										new MapLocation()
