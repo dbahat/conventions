@@ -41,7 +41,8 @@ public class Cami2018Convention extends AmaiConvention {
 	private static final String ESHKOL3_NAME = "אשכול 3";
 	private static final String WORKSHOPS_NAME = "חדר סדנאות";
 	private static final String GAMES_NAME = "משחקייה";
-	private static final String SIGNING_AREA_NAME = "אזור ההחתמות";
+	private static final String SIGNING_AREA_NAME = "אזור החתמות";
+	private static final String COSPLAY_AREA_NAME = "מתחם קוספליי";
 
 	// Vote questions - these values are serialized, don't change them!
 	private static final int QUESTION_ID_AMAIDOL_NAME = 1000;
@@ -64,7 +65,7 @@ public class Cami2018Convention extends AmaiConvention {
 
 	@Override
 	protected ConventionStorage initStorage() {
-		return new ConventionStorage(this, R.raw.cami2018_convention_events, 2);
+		return new ConventionStorage(this, R.raw.cami2018_convention_events, 3);
 	}
 
 	@Override
@@ -224,7 +225,8 @@ public class Cami2018Convention extends AmaiConvention {
 		Hall workshops = new Hall().withName(WORKSHOPS_NAME).withOrder(6);
 		Hall games = new Hall().withName(GAMES_NAME).withOrder(7);
 		Hall signingArea = new Hall().withName(SIGNING_AREA_NAME).withOrder(8);
-		return new Halls(Arrays.asList(mainHall, auditorium, eshkol1, eshkol2, eshkol3, workshops, games, signingArea));
+		Hall cosplayArea = new Hall().withName(COSPLAY_AREA_NAME).withOrder(9);
+		return new Halls(Arrays.asList(mainHall, auditorium, eshkol1, eshkol2, eshkol3, workshops, games, signingArea, cosplayArea));
 	}
 
 	@Override
@@ -237,6 +239,7 @@ public class Cami2018Convention extends AmaiConvention {
 		Hall workshops = this.getHalls().findByName(WORKSHOPS_NAME);
 		Hall games = this.getHalls().findByName(GAMES_NAME);
 		Hall signingArea = this.getHalls().findByName(SIGNING_AREA_NAME);
+		Hall cosplayArea = this.getHalls().findByName(COSPLAY_AREA_NAME);
 
 		Floor entrance = new Floor(1)
 				.withName("מתחם כניסה")
@@ -296,7 +299,6 @@ public class Cami2018Convention extends AmaiConvention {
 												.withX(410.362f)
 												.withY(178.897f),
 										new MapLocation()
-												.withName("איזור החתמות")
 												.withPlace(signingArea)
 												.withMarkerResource(R.raw.cami2018_marker_signings, true)
 												.withSelectedMarkerResource(R.raw.cami2018_marker_signings_selected, true)
@@ -390,7 +392,7 @@ public class Cami2018Convention extends AmaiConvention {
 												.withX(615f)
 												.withY(63.87f),
 										new MapLocation()
-												.withPlace(new Place().withName("מתחם קוספליי"))
+												.withPlace(cosplayArea)
 												.withMarkerResource(R.raw.cami2018_marker_cosplay_corner, true)
 												.withSelectedMarkerResource(R.raw.cami2018_marker_cosplay_corner_selected, true)
 												.withMarkerHeight(167.2f)
