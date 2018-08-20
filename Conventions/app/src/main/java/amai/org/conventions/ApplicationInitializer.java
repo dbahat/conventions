@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AlertDialog;
 
 import com.facebook.FacebookRequestError;
@@ -138,7 +139,7 @@ public class ApplicationInitializer {
         final int numberOfUpdatesBeforeRefresh = Convention.getInstance().getUpdates().size();
 
 		// Refresh and ignore all errors
-		UpdatesRefresher.getInstance().refreshFromServer(null, false, new UpdatesRefresher.OnUpdateFinishedListener() {
+		UpdatesRefresher.getInstance().refreshFromServer(null, true, new UpdatesRefresher.OnUpdateFinishedListener() {
 			@Override
 			public void onSuccess(int newUpdatesNumber) {
 				List<Update> newUpdates = CollectionUtils.filter(Convention.getInstance().getUpdates(), new CollectionUtils.Predicate<Update>() {
@@ -171,8 +172,13 @@ public class ApplicationInitializer {
 						return;
 					}
 					NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+					if (notificationManager == null) {
+					    return;
+                    }
+
 					Intent intent = new Intent(currentContext, UpdatesActivity.class);
-					Notification.Builder notificationBuilder = new Notification.Builder(currentContext)
+                    NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context, PushNotification.Channel.Notifications.toString())
 							.setSmallIcon(ThemeAttributes.getResourceId(currentContext, R.attr.notificationSmallIcon))
 							.setContentTitle(notificationTitle)
 							.setContentText(notificationMessage)
@@ -181,7 +187,7 @@ public class ApplicationInitializer {
 							.setDefaults(Notification.DEFAULT_VIBRATE);
 
 
-					Notification notification = new Notification.BigTextStyle(notificationBuilder)
+					Notification notification = new NotificationCompat.BigTextStyle(notificationBuilder)
 							.bigText(notificationMessage)
 							.build();
 

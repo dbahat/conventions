@@ -58,6 +58,8 @@ public class UpdatesRefresher {
 	public void refreshFromServer(AccessToken accessToken, boolean enableNotificationAfterUpdate, final OnUpdateFinishedListener listener) {
 		this.enableNotificationAfterUpdate = enableNotificationAfterUpdate;
 
+		Log.v(TAG, "Starting to refresh updates. enableNotificationAfterUpdate=" + enableNotificationAfterUpdate);
+
 		if (accessToken == null) {
 			accessToken = AccessToken.getCurrentAccessToken();
 			if (accessToken == null || accessToken.isExpired()) {
@@ -98,6 +100,7 @@ public class UpdatesRefresher {
 							Convention.getInstance().addUpdates(updatesFromResponse, false);
 							Convention.getInstance().getStorage().saveUpdates();
 							isRefreshInProgress = false;
+							Log.v(TAG, "Completed updates refresh. new updates retrieved=" + newUpdatesNumber);
 							listener.onSuccess(newUpdatesNumber);
 						}
 					}
@@ -109,6 +112,7 @@ public class UpdatesRefresher {
 
 		Date newestUpdateTime = Convention.getInstance().getNewestUpdateTime();
 		if (newestUpdateTime != null) {
+			Log.v(TAG, "latest update time detected at " + newestUpdateTime.toString());
 			// Get all the new updates and the updates from 2 days before the last time in case an older post
 			// was updated. The Facebook Graph API since parameter receives unix epoch time which is the number
 			// of seconds instead of milliseconds.
