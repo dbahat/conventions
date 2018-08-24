@@ -1,7 +1,5 @@
 <resources>
-    <string name="app_name">כאמ\"י 2018</string>
-
-    <string name="programme_title">תוכניה</string>
+    <string name="programme_title">תוכנייה</string>
     <string name="my_events_title">האירועים שלי</string>
     <string name="programme_search_title">חיפוש אירועים</string>
 
@@ -11,7 +9,6 @@
     <string name="event_conflicts_with_several_question">האירוע מתנגש עם %d אירועים אחרים ברשימת האירועים שלך.</string>
     <string name="event_removed_from_favorites">האירוע הוסר מהאירועים שלי</string>
     <string name="cancel">בטל</string>
-    <string name="arrival_methods_marker_name">%s - בנייני האומה</string>
 
     <string name="event_navigate_to_map">הצג במפה</string>
     <string name="event_navigate_to_hall">הצג אולם</string>
@@ -24,11 +21,9 @@
     <string name="update_not_logged_in">כדי לצפות בעדכונים יש להתחבר לפייסבוק</string>
     <string name="update_login_error">לא ניתן להתחבר לפייסבוק. בדוק חיבור לאינטרנט</string>
 
-    <string name="my_events_no_data">הוסף אירוע לאירועים שלי ע\"י לחיצה על הכוכב בדף האירוע או ברשימת האירועים</string>
     <string name="my_events_share">שתף</string>
     <string name="my_event_share_title">התוכנייה שלי ל%s:</string>
     <string name="my_event_share_signature">נוצר באפליקצית %s.</string>
-    <string name="my_event_share_link">http://play.google.com/store/apps/details?id=amai.org.conventions</string>
     <string name="my_event_share_chooser_dialog_title">שתף את רשימת האירועים</string>
 
     <string name="select_hour_ok">הצג שעה</string>
@@ -97,8 +92,7 @@
     <string name="events_feedback_no_events">בחר אירועים שהיית בהם דרך התוכנייה ומלא עליהם פידבק.</string>
     <string name="events_with_feedback_title">פידבק שמילאת על אירועים</string>
     <string name="convention_feedback_title">פידבק על הכנס</string>
-    <string name="convention_feedback_subtitle">מלא פידבק כללי על הכנס - קופות, דוכנים, משחקייה, עמדת צילום וכל דבר אחר.</string>
-    <string name="question_liked">עד כמה נהנית בכנס?</string>
+    <string name="question_liked">באיזו מידה נהנית מהכנס?</string>
     <string name="question_improvement">הצעות לשיפור ונושאים לשימור</string>
     <string name="question_age">גיל</string>
     <string name="age_less_than_12">פחות מ-12</string>
@@ -115,24 +109,6 @@
     <string name="close">סגור</string>
     <string name="other">אחר</string>
     <string name="about_app_title">אודות האפליקציה</string>
-    <string name="about_content">אמא\"י – ארגון מנגה ואנימה ישראל. הארגון הוקם במאי 2007 על ידי קבוצת חברים בקהילת חובבי המנגה, אנימה ותרבות יפן ופועל למען קהילת חובבים זו.</string>
-    <string name="about_links"><![CDATA[
-<p><a href="http://www.amai.org.il/">לאתר אמא\"י</a></p><p><a href="http://2018.cami.org.il/">לאתר הכנס</a></p>
-<p>עיצוב וגרפיקה:</p>
-<p>שלי ציפקין<br/><a href="https://www.facebook.com/lientarii/">https://www.facebook.com/lientarii/</a></p>
-<p>אניטה קרפל<br/><a href="https://www.instagram.com/nutaa_nuta/">https://www.instagram.com/nutaa_nuta/</a></p>
-<p>איה יוחאי</p>
-<p>נטע פלדמן<br/><a href="https://www.facebook.com/mentadraws/">https://www.facebook.com/mentadraws/</a></p>
-<p>שירלי לני</p>
-<p>בר מאור נאמן<br/><a href="https://www.facebook.com/B4RMN/">https://www.facebook.com/B4RMN/</a></p>
-<p>יעל גבעון<br/><a href="https://rinska.tumblr.com">rinska.tumblr.com</a></p>
-<p>שלומית שפיר<br/><a href="https://rottendoodles.tumblr.com">rottendoodles.tumblr.com</a></p>
-<p>טאה פרנקו<br/><a href="https://ohmilk.tumblr.com">ohmilk.tumblr.com</a></p>
-<p>טרה ס.ב.<br/><a href="https://www.facebook.com/y4lla/">https://www.facebook.com/y4lla/</a></p>
-]]></string>
-    <string name="about_app_content"><![CDATA[
- האפליקציה פותחה עבור כנס כאמ\"י 2018.<br/>בקשות והצעות ניתן לכתוב <a href="market://details?id=amai.org.conventions">בדף האפליקציה בחנות</a>.
-]]></string>
     <string name="question_map_signs">האם המפה והשילוט היו ברורים ושימושיים?</string>
     <string name="question_conflicting_events">אם היה אירוע שרצית ללכת אליו ולא הלכת, מה הסיבה לכך?</string>
     <string name="answer_event_conflicted">האירוע התנגש עם אירוע אחר שהלכתי אליו</string>
@@ -157,7 +133,7 @@
     <string name="show_general_notifications_title">כללי</string>
     <string name="show_general_notifications_summary">הצג התראות כלליות</string>
     <string name="show_event_notifications_title">אירועים</string>
-    <string name="show_event_notifications_summary">הצג התראות על עדכונים בתוכניה ואירועים</string>
+    <string name="show_event_notifications_summary">הצג התראות על עדכונים בתוכנייה ואירועים. לקבלת התראות לאירועים ספציפים יש להוסיף אותם לרשימת האירועים שלי.</string>
     <string name="show_cosplay_notifications_title">השתתפות באירוע הקוספליי</string>
     <string name="show_cosplay_notifications_summary">הצג התראות עבור המשתתפים בתחרות הקוספליי</string>
     <string name="show_bus_notifications_title">הסעות</string>
@@ -177,89 +153,8 @@
     <string name="show_test_notifications_summary">הצג התראות בדיקה</string>
     <string name="advanced_options_enabled">אפשרויות מתקדמות אופשרו</string>
     <string name="about">אודות</string>
-    <!-- Copied from http://2018.cami.org.il/%D7%9E%D7%99%D7%A7%D7%95%D7%9D-%D7%95%D7%93%D7%A8%D7%9B%D7%99-%D7%94%D7%92%D7%A2%D7%94/
-         with the following changes:
-         - Manually added titles for each arrival method category
-         - Removed text about using waze (since there is a button for navigation in the activity itself)
-         - Escaped apostrophes -->
-    <string name="arrival_method_description"><![CDATA[
-<p><h3>הגעה ברגל</h3></p>
-<p>הליכה של כ-5 דקות מהתחנה המרכזית בירושלים.<br />
-יוצאים מהתחנה המרכזית, הולכים ישר עד רחוב שז&quot;ר, פונים ימינה וממשיכים עד הגעה למעבר התת קרקעי, דרכו עליכם לעבור. ביציאה מהמעבר פונים שמאלה, ומיד לאחר מכן פונים שמאלה פעם נוספת אל רחוב יוסף הרליץ. עולים במעלה המדרגות משמאלכם. הגעתם!</p>
-<p><h3>הגעה באוטובוס</h3></p>
-<p>
-	<div class="wpb_text_column wpb_content_element  vc_custom_1526296264923 ">
-		<div class="wpb_wrapper">
-			<p>שימו לב, כל הקווים מגיעים לתחנה המרכזית בירושלים, משם בנייני האומה נמצאים במרחק הליכה של 5 דקות.</p>
-
-		</div>
-	</div> <div class="vc_row wpb_row vc_inner wf-container"><div class="wpb_column vc_column_container vc_col-sm-6"><div class="vc_column-inner "><div class="wpb_wrapper">
-	<div class="wpb_text_column wpb_content_element  ">
-		<div class="wpb_wrapper">
-			<p><strong>באר שבע:</strong></p>
-<ul>
-<li>קו 470 (אגד, <strong>תחנה מרכזית, </strong>זמן משוערך של שעה ו-40 דקות).</li>
-</ul>
-<p><strong>אשדוד:</strong></p>
-<ul>
-<li>קו 448 (אגד, <strong>תחנה מרכזית, </strong>זמן משוערך של שעה ו-14 דקות).</li>
-</ul>
-<p><strong>ראשון לציון:</strong></p>
-<ul>
-<li>קו 433 (אגד, <strong>תחנה מרכזית ישנה</strong>, זמן משוערך של שעה ו-35 דקות).</li>
-<li>קו 431 (אגד, <strong>תחנה מרכזית חדשה</strong>, זמן משוער של 50 דקות).</li>
-</ul>
-<p><strong>תל אביב:</strong></p>
-<ul>
-<li>קו 480 (אגד, <strong>מסוף ארלוזורוב, </strong>זמן משוערך של 54 דקות).</li>
-<li>קו 405 (אגד, <strong>תחנה מרכזית חדשה, </strong>זמן משוערך של 55 דקות).</li>
-</ul>
-<p><strong>רעננה / כפר סבא:</strong></p>
-<ul>
-<li>קו 947 (אגד, <strong>מסוף רעננה</strong>, זמן משוערך של שעה ו-35 דקות)</li>
-<li>קו 425 (אפיקים, <strong>מסוף רעננה, </strong>זמן משוערך של שעה ו-37 דקות).</li>
-</ul>
-
-		</div>
-	</div> </div></div></div><div class="wpb_column vc_column_container vc_col-sm-6"><div class="vc_column-inner "><div class="wpb_wrapper">
-	<div class="wpb_text_column wpb_content_element  ">
-		<div class="wpb_wrapper">
-			<div class="here">
-<div class="grid_4 omega">
-<p><strong>נתניה:</strong></p>
-<ul>
-<li>קו 947 (אגד, <strong>תחנה מרכזית, </strong>זמן משוערך של שעה ו-55 דקות).</li>
-</ul>
-<p><strong>חיפה:</strong></p>
-<ul>
-<li>קו 960 (אגד, <strong>מרכזית המפרץ, </strong>זמן משוערך של שעתיים ו-14 דקות).</li>
-<li>קו 947, 940 (אגד, <strong>מרכזית חוף הכרמל</strong>, זמן משוערך של שעתיים).</li>
-</ul>
-<p><strong>ירושלים:</strong></p>
-<ul>
-<li>קו 26 (<strong>גן החיות התנכ&quot;י</strong>).</li>
-<li>קו 6, 17, 18, 31 (אגד, <strong>קניון מלחה</strong>).</li>
-</ul>
-</div>
-</div>
-
-		</div>
-	</div> </div></div></div></div>
-</p>
-<p><h3>הגעה ברכב פרטי</h3></p>
-<p><div class="wpb_text_column wpb_content_element  ">
-		<div class="wpb_wrapper">
-			<p>דרך כביש מס\' 1:</p>
-<ol>
-<li><strong>מהכניסה לעיר:</strong> יש לפנות ימינה בשדרות שז&quot;ר לכיוון בנייני האומה.</li>
-<li><strong>מכביש בגין:</strong> יש לצאת במחלף קרית משה ולפנות שמאלה מבגין דרום או ימינה מבגין צפון.</li>
-</ol>
-<p>במתחם קיימים 850 מקומות חנייה בתשלום המתחלקים בין חניון תת קרקעי וחניון חיצוני.</p>
-
-		</div>
-	</div>
-</p>
-]]></string>
+    <string name="no_updates_found">לא נמצאו עדכונים</string>
+    <string name="discounts">הטבות</string>
     <string name="navigate_public_transportation">ניווט בתחבורה ציבורית</string>
     <string name="home">בית</string>
     <string name="dash">–</string>
@@ -267,7 +162,7 @@
     <string name="dash_with_values">%1$s – %2$s</string>
 
     <string name="home_convention_start_time">עוד %d ימים!</string>
-    <string name="home_help_us_improve">עזור לנו להשתפר</string>
+    <string name="home_help_us_improve">עזרו לנו להשתפר</string>
     <string name="home_send_feedback">לשליחת פידבק</string>
     <string name="home_show_feedback">הצג פידבק</string>
     <string name="home_go_to_my_events">עבור לאירועים שלי</string>
