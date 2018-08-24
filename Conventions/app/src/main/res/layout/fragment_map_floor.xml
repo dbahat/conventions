@@ -27,7 +27,6 @@
             android:id="@+id/map_floor_up_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/floor_up"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="?android:textColorPrimary"
             android:layout_gravity="center_horizontal"/>
@@ -176,7 +175,6 @@
             android:id="@+id/map_floor_down_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/floor_down"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="?android:textColorPrimary"
             android:layout_gravity="center_horizontal"/>

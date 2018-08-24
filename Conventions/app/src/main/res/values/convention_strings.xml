@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Relevant to all sf-f conventions -->
+    <string name="arrival_methods_marker_name">%s - אשכול פיס</string>
+    <string name="my_event_share_link">http://play.google.com/store/apps/details?id=sff.org.conventions</string>
+    <string name="convention_feedback_subtitle">מלא פידבק כללי על הכנס - קופות, יריד הדוכנים, הפונדק וכל דבר אחר.</string>
+
+    <!-- Relevant to all Olamot conventions -->
+    <string name="app_name">כנס עולמות</string>
+    <string name="my_events_no_data">הוסף אירוע לאירועים שלי ע\"י לחיצה על הכוכב בדף האירוע או ברשימת האירועים, או ע\"י יבוא מאתר עולמות</string>
+    <string name="add_events">הוספת אירועים מאתר עולמות</string>
+    <string name="add_events_instructions">הכנס שם משתמש וסיסמא לאתר עולמות על מנת להוסיף את האירועים להם קנית כרטיסים מראש.</string>
+
+    <!-- Relevant to this specific convention -->
+    <!-- Taken from olamot website: http://2018.olamot-con.org.il/about/ -->
+    <string name="about_content"><![CDATA[
+<p>כנס &quot;עולמות&quot; הוא כנס למדע בדיוני ולפנטזיה שנערך בארגונן של <a href="http://www.sf-f.org.il/" target="_blank" rel="noopener">האגודה הישראלית למדע בדיוני ולפנטסיה</a> ו<a href="http://tolkien.org.il/" target="_blank" rel="noopener">קהילת טולקין הישראלית</a>.</p>
+<p>מדי שנה מושך אליו הכנס קהל של אלפי אנשים, צעירים וצעירים ברוחם, ומציג להם תוכנית אמנותית ועיונית ענפה בתחומי הספרות, הטלוויזיה, הקולנוע, הקומיקס, המדע הפופולרי, האנימה, הספקנות ועוד. הקהל שמגיע לכנס הוא קהל בוגר, אינטליגנטי ומתוחכם, שתענוג לבנות עבורו הרצאות ודיונים.</p>
+<p>השנה יערך כנס עולמות תחת הנושא &quot;פרידות&quot; בתאריכים 4-3 באפריל 2018. בואו להנות איתנו ביומיים של הרצאות, סדנאות, פאנלים, חידונים, מופעים מכל הסוגים ואירועים נוספים – כל מה שמצית את הדמיון ואת המחשבה.</p>
+<p>להתראות בעולמות!</p>
+]]></string>
+    <string name="about_links"><![CDATA[
+<p><a href=\"http://2018.olamot-con.org.il/\">לאתר הכנס</a></p>
+]]></string>
+    <string name="about_app_content"><![CDATA[
+האפליקציה פותחה על ידי דוד בהט וטל ספן עבור כנס עולמות. בקשות והצעות ניתן לכתוב <a href="market://details?id=sff.org.conventions">בדף האפליקציה בחנות</a>.
+<br/>תודות: אלי בויום, גיא בכר, גליה בהט, נאור טביב, קסם ברקוביץ\'.
+]]></string>
+    <!-- Copied from http://2018.olamot-con.org.il/info/arrival/
+         The only difference is removing the map iframe -->
+    <string name="arrival_method_description"><![CDATA[
+<h1 class="entry-title post-title">הגעה וחניה</h1>
+				<div class="post-entry">
+					<p>כתובת הכנס: מתחם אשכול פיס, שפרינצק, 4 תל אביב. הכניסה נמצאת ברחוב הארבעה, ליד החניון.</p>
+<h2>תחבורה ציבורית</h2>
+<p>מתחנת רכבת השלום אפשר להגיע בקו 63 של דן (ירידה בתחנת החשמונאים). אפשר גם להגיע ברגל; תחנת הרכבת נמצאת במרחק 15 דקות הליכה לא מאומצת ממתחם הכנס.</p>
+<p>מהתחנה המרכזית החדשה בתל אביב: קווים 26, 70 של דן (תחנת ירידה באבן גבירול) או קו 5 של דן (תחנת ירידה בשדרות רוטשילד פינת מרמורק, מרחק עשר דקות הליכה לא מאומצת ממתחם הכנס).</p>
+<p>&nbsp;</p>
+<h3>קווי לילה:</h3>
+<p>במהלך חול המועד פסח יפעלו קווי לילה מיוחדים בתוך תל אביב וקווים בין-עירוניים לכל הערים המרכזיות בארץ ובתוכן. ב<a href="http://www.kav-layla.co.il/Web/He/Default.aspx">אתר קווי לילה</a> אפשר להתעדכן בחברות המפעילות את השירות (כולל אגד, דן, ויאוליה, מטרופוליטן, קוים, מטרודן ונתיב אקספרס) בפריסה ארצית ובאפליקציות הסלולריות לתחבורה ציבורית בזמן אמת.</p>
+<h3>רכבות:</h3>
+<p>מידע על שעות פעילות הרכבת בלילה אפשר למצוא ב<a href="https://www.rail.co.il">אתר רכבת ישראל</a>. המתחם נמצא במרחק 15 דקות הליכה לא מאומצת מתחנת רכבת השלום, ואפשר להגיע אליו גם באוטובוס מהתחנה הזו (קו 63) ומתחנות נוספות.</p>
+<p>לנוחותכם, אתם מוזמנים לבדוק דרכי הגעה נוספות באתרים הבאים:</p>
+<p><a href="http://www.moovit.com/" target="_blank" rel="noopener">www.moovit.com</a></p>
+<p><a href="http://www.bus.co.il/" target="_blank" rel="noopener">www.bus.co.il</a></p>
+<p><a href="http://www.callkav.gov.il/" target="_blank" rel="noopener">www.callkav.gov.il</a></p>
+<p>&nbsp;</p>
+<h2>חניה:</h2>
+<p>מגרשי חניה הסמוכים למתחם הכנס:</p>
+<ul>
+<li>חניון גבעון, לשעבר הארבעה (רחוב החשמונאים)</li>
+<li>חניוני מתחם שרונה (דרך אריה לובה אליאב)</li>
+</ul>
+									</div>
+]]></string>
+    <string name="olamot2018_discounts1">\"עולמות\" מציע לכם הנחות מיוחדות במסעדות הסמוכות למתחם הכנס.\n\nכל ההנחות תקפות במהלך הכנס בלבד בהצגת כרטיס לאחד מאירועי \"עולמות 2018\" או תג.</string>
+    <string name="olamot2018_bbb_info">הארבעה 12 | לא כשר\n10% הנחה</string>
+    <string name="olamot2018_cofix_info">הארבעה 2 | כשר\n2 בקבוקי מים ב-5 שקלים</string>
+</resources>
