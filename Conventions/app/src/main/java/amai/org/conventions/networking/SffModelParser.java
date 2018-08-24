@@ -84,7 +84,9 @@ public class SffModelParser implements ModelParser {
 
 			int price;
 			JsonElement priceElement = eventObj.get("price");
-			if (priceElement.getAsString().equals("חינם")) {
+			if (priceElement.isJsonNull()) {
+				price = -1;
+			} else if (priceElement.getAsString().equals("חינם")) {
 				price = 0;
 			} else {
 				price = priceElement.getAsInt();

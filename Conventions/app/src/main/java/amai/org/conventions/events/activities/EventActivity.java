@@ -604,7 +604,7 @@ public class EventActivity extends NavigationActivity {
 		}
 
 		TextView prices = (TextView) findViewById(R.id.event_prices);
-		if (soldOut) {
+		if (soldOut || event.getPrice() == -1) {
 			prices.setVisibility(View.GONE);
 		} else if (event.getPrice() == 0) {
 			prices.setText(getString(R.string.event_price_free));
