@@ -394,7 +394,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 			editText.setFreezesText(true);
 			int type = InputType.TYPE_CLASS_TEXT |
 					InputType.TYPE_TEXT_FLAG_AUTO_CORRECT |
-					InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS;
+					InputType.TYPE_TEXT_FLAG_CAP_SENTENCES;
 			if (multiline) {
 				type |= InputType.TYPE_TEXT_VARIATION_LONG_MESSAGE |
 						InputType.TYPE_TEXT_FLAG_MULTI_LINE;
