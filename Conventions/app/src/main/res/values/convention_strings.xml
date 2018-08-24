@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Relevant to all non-Icon conventions (convention/festival strings) -->
+    <string name="missing_play_services_dialog_message">על מנת לקבל התראות במהלך הכנס ולצפות בדרכי הגעה, יש להתקין או לעדכן את Google play services ולוודא שהשירות פעיל</string>
+    <string name="convention_feedback_title">פידבק על הכנס</string>
+    <string name="question_liked">באיזו מידה נהנית מהכנס?</string>
+    <string name="configure_notifications_dialog_message">באפליקציה זו נשלחות התראות בזמן הכנס. ניתן לשנות את הגדרות קבלת ההתראות בכל זמן.</string>
+    <string name="home_convention_ended">הכנס נגמר</string>
+    <string name="notification_channel_description_notifications">הודעות בזמן אמת מהנהלת הכנס</string>
+
     <!-- Relevant to all sf-f conventions -->
     <string name="arrival_methods_marker_name">%s - אשכול פיס</string>
     <string name="my_event_share_link">http://play.google.com/store/apps/details?id=sff.org.conventions</string>
-    <string name="convention_feedback_subtitle">מלא פידבק כללי על הכנס - קופות, יריד הדוכנים, הפונדק וכל דבר אחר.</string>
 
     <!-- Relevant to all Olamot conventions -->
     <string name="app_name">כנס עולמות</string>
     <string name="my_events_no_data">הוסף אירוע לאירועים שלי ע\"י לחיצה על הכוכב בדף האירוע או ברשימת האירועים, או ע\"י יבוא מאתר עולמות</string>
     <string name="add_events">הוספת אירועים מאתר עולמות</string>
     <string name="add_events_instructions">הכנס שם משתמש וסיסמא לאתר עולמות על מנת להוסיף את האירועים להם קנית כרטיסים מראש.</string>
+    <string name="convention_feedback_subtitle">מלא פידבק כללי על הכנס - קופות, יריד הדוכנים, הפונדק וכל דבר אחר.</string>
 
     <!-- Relevant to this specific convention -->
     <!-- Taken from olamot website: http://2018.olamot-con.org.il/about/ -->
