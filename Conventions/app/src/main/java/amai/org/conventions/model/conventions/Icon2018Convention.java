@@ -336,11 +336,6 @@ public class Icon2018Convention extends SffConvention {
 	}
 
 	@Override
-	protected String initFeedbackRecipient() {
-		return "sff.conventions.feedback@gmail.com";
-	}
-
-	@Override
 	protected EventFeedbackForm initEventFeedbackForm() {
 		EventFeedbackForm eventFeedbackForm = null;
 		try {

@@ -70,7 +70,6 @@ public abstract class Convention implements Serializable {
 	private Map<String, Update> updatesById;
 	private Map<String, ConventionEvent.UserInput> userInput;
 	private Survey feedback;
-	private String feedbackRecipient;
 	private FeedbackForm conventionFeedbackForm;
 	private EventFeedbackForm eventFeedbackForm;
 
@@ -150,7 +149,6 @@ public abstract class Convention implements Serializable {
 		this.endDate = initEndDate();
 		this.id = initID();
 		this.displayName = initDisplayName();
-		this.feedbackRecipient = initFeedbackRecipient();
 		this.conventionFeedbackForm = initConventionFeedbackForm();
 		this.eventFeedbackForm = initEventFeedbackForm();
 		this.modelURL = initModelURL();
@@ -184,8 +182,6 @@ public abstract class Convention implements Serializable {
 	protected abstract String initID();
 
 	protected abstract String initDisplayName();
-
-	protected abstract String initFeedbackRecipient();
 
 	protected abstract URL initUpdatesURL();
 
@@ -435,10 +431,6 @@ public abstract class Convention implements Serializable {
 		for (Update update : updates) {
 			update.setIsNew(false);
 		}
-	}
-
-	public String getFeedbackRecipient() {
-		return feedbackRecipient;
 	}
 
 	public boolean canFillFeedback() {
