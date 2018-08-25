@@ -54,6 +54,7 @@ public class SecondHandActivity extends NavigationActivity implements SwipeRefre
 		isAddingItem = false;
 		swipeRefreshLayout.setOnRefreshListener(this);
 		swipeRefreshLayout.setColorSchemeColors(ThemeAttributes.getColor(this, R.attr.swipeToRefreshColor));
+		swipeRefreshLayout.setProgressBackgroundColorSchemeColor(ThemeAttributes.getColor(this, R.attr.swipeToRefreshBackgroundColor));
 		// This is necessary because for some reason the swipe refresh layout here doesn't recognize that
 		// the sticky headers list view can scroll up, and when scrolling up it always appears which is annoying
 		swipeRefreshLayout.setOnChildScrollUpCallback(new SwipeRefreshLayout.OnChildScrollUpCallback() {

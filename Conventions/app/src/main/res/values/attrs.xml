@@ -31,6 +31,7 @@
         <attr name="snackbarActionColor" format="color|reference"/>
         <!-- Swipe to Refresh -->
         <attr name="swipeToRefreshColor" format="color|reference"/>
+        <attr name="swipeToRefreshBackgroundColor" format="color|reference"/>
         <!-- Event View -->
         <attr name="eventTypeEndedColor" format="color|reference"/>
         <attr name="eventTypeCurrentColor" format="color|reference"/>

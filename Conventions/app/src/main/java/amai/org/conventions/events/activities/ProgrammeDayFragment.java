@@ -81,6 +81,7 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 		swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.programme_swipe_layout);
 		swipeLayout.setOnRefreshListener(this);
 		swipeLayout.setColorSchemeColors(ThemeAttributes.getColor(container.getContext(), R.attr.swipeToRefreshColor));
+		swipeLayout.setProgressBackgroundColorSchemeColor(ThemeAttributes.getColor(container.getContext(), R.attr.swipeToRefreshBackgroundColor));
 		swipeLayout.setOnChildScrollUpCallback(new SwipeRefreshLayout.OnChildScrollUpCallback() {
 			@Override
 			public boolean canChildScrollUp(SwipeRefreshLayout parent, @Nullable View child) {
