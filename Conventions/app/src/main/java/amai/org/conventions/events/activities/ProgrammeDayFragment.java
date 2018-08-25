@@ -93,6 +93,7 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 		swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.programme_swipe_layout);
 		swipeLayout.setOnRefreshListener(this);
 		swipeLayout.setColorSchemeColors(ThemeAttributes.getColor(container.getContext(), R.attr.swipeToRefreshColor));
+		swipeLayout.setProgressBackgroundColorSchemeColor(ThemeAttributes.getColor(container.getContext(), R.attr.swipeToRefreshBackgroundColor));
 
 		listView = (StickyListHeadersListView) view.findViewById(R.id.programmeList);
 		events = getEventsList();

@@ -157,6 +157,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 		swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.updates_swipe_layout);
 		swipeRefreshLayout.setOnRefreshListener(this);
 		swipeRefreshLayout.setColorSchemeColors(ThemeAttributes.getColor(this, R.attr.swipeToRefreshColor));
+		swipeRefreshLayout.setProgressBackgroundColorSchemeColor(ThemeAttributes.getColor(this, R.attr.swipeToRefreshBackgroundColor));
 
 		loginButton = (LoginButton) findViewById(R.id.login_button);
 		loginLayout = findViewById(R.id.login_layout);
