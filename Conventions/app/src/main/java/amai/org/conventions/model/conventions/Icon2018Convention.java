@@ -33,17 +33,38 @@ import amai.org.conventions.utils.HttpConnectionCreator;
 import sff.org.conventions.R;
 
 public class Icon2018Convention extends SffConvention {
+	private static final String HALL_NAME_CINEMATHEQUE_1 = "סינמטק 1";
+	private static final String HALL_NAME_CINEMATHEQUE_2 = "סינמטק 2";
+	private static final String HALL_NAME_CINEMATHEQUE_5 = "סינמטק 5";
 	private static final String HALL_NAME_ESHKOL_1 = "אשכול 1";
 	private static final String HALL_NAME_ESHKOL_2 = "אשכול 2";
 	private static final String HALL_NAME_ESHKOL_3 = "אשכול 3";
 	private static final String HALL_NAME_ESHKOL_4 = "אשכול 4";
 	private static final String HALL_NAME_ESHKOL_5 = "אשכול 5";
 	private static final String HALL_NAME_ESHKOL_6 = "אשכול 6";
-	private static final String HALL_NAME_WORKSHOPS = "חדר סדנאות";
 	private static final String HALL_NAME_MEETINGS = "חדר מפגשים";
+	private static final String HALL_NAME_WORKSHOPS_1 = "סדנאות 1";
+	private static final String HALL_NAME_WORKSHOPS_2 = "סדנאות 2";
 	private static final String HALL_NAME_KIDS = "חדר ילדים";
 	private static final String HALL_NAME_OUTSIDE = "אירועי חוצות";
-	private static final String HALL_NAME_OUTSIDE_2 = "אירועי חוצות 2";
+	private static final String HALL_NAME_MINIATURES_1 = "מיניאטורות 1";
+	private static final String HALL_NAME_MINIATURES_DEMO = "מיניאטורות: הדגמות";
+	private static final String HALL_NAME_IRONI_1 = "עירוני 1";
+	private static final String HALL_NAME_IRONI_2 = "עירוני 2";
+	private static final String HALL_NAME_IRONI_3 = "עירוני 3";
+	private static final String HALL_NAME_IRONI_4 = "עירוני 4";
+	private static final String HALL_NAME_IRONI_5 = "עירוני 5";
+	private static final String HALL_NAME_TENT_1 = "אוהל 1";
+	private static final String HALL_NAME_TENT_2 = "אוהל 2";
+	private static final String HALL_NAME_TENT_3 = "אוהל 3";
+	private static final String HALL_NAME_TENT_4 = "אוהל 4";
+	private static final String HALL_NAME_TENT_5 = "אוהל 5";
+	private static final String HALL_NAME_TENT_6 = "אוהל 6";
+	private static final String HALL_NAME_TENT_7 = "אוהל 7";
+	private static final String HALL_NAME_TENT_8 = "אוהל 8";
+	private static final String HALL_NAME_ESCAPE_ROOM = "חדר בריחה";
+	private static final String HALL_NAME_ARTEMIS_1 = "ארטמיס 1";
+	private static final String HALL_NAME_ARTEMIS_2 = "ארטמיס 2";
 
 	@Override
 	protected ConventionStorage initStorage() {
@@ -72,19 +93,46 @@ public class Icon2018Convention extends SffConvention {
 
 	@Override
 	protected Halls initHalls() {
-		return new Halls(Arrays.asList(
-				new Hall().withName(HALL_NAME_ESHKOL_1).withOrder(1),
-				new Hall().withName(HALL_NAME_ESHKOL_2).withOrder(2),
-				new Hall().withName(HALL_NAME_ESHKOL_3).withOrder(3),
-				new Hall().withName(HALL_NAME_ESHKOL_4).withOrder(4),
-				new Hall().withName(HALL_NAME_ESHKOL_5).withOrder(5),
-				new Hall().withName(HALL_NAME_ESHKOL_6).withOrder(6),
-				new Hall().withName(HALL_NAME_WORKSHOPS).withOrder(7),
-				new Hall().withName(HALL_NAME_MEETINGS).withOrder(8),
-				new Hall().withName(HALL_NAME_KIDS).withOrder(9),
-				new Hall().withName(HALL_NAME_OUTSIDE).withOrder(10),
-				new Hall().withName(HALL_NAME_OUTSIDE_2).withOrder(11)
-		));
+		List<Hall> halls = Arrays.asList(
+				new Hall().withName(HALL_NAME_CINEMATHEQUE_1),
+				new Hall().withName(HALL_NAME_CINEMATHEQUE_2),
+				new Hall().withName(HALL_NAME_CINEMATHEQUE_5),
+				new Hall().withName(HALL_NAME_ESHKOL_1),
+				new Hall().withName(HALL_NAME_ESHKOL_2),
+				new Hall().withName(HALL_NAME_ESHKOL_3),
+				new Hall().withName(HALL_NAME_ESHKOL_4),
+				new Hall().withName(HALL_NAME_ESHKOL_5),
+				new Hall().withName(HALL_NAME_ESHKOL_6),
+				new Hall().withName(HALL_NAME_MEETINGS),
+				new Hall().withName(HALL_NAME_WORKSHOPS_1),
+				new Hall().withName(HALL_NAME_WORKSHOPS_2),
+				new Hall().withName(HALL_NAME_KIDS),
+				new Hall().withName(HALL_NAME_OUTSIDE),
+				new Hall().withName(HALL_NAME_MINIATURES_1),
+				new Hall().withName(HALL_NAME_MINIATURES_DEMO),
+				new Hall().withName(HALL_NAME_IRONI_1),
+				new Hall().withName(HALL_NAME_IRONI_2),
+				new Hall().withName(HALL_NAME_IRONI_3),
+				new Hall().withName(HALL_NAME_IRONI_4),
+				new Hall().withName(HALL_NAME_IRONI_5),
+				new Hall().withName(HALL_NAME_TENT_1),
+				new Hall().withName(HALL_NAME_TENT_2),
+				new Hall().withName(HALL_NAME_TENT_3),
+				new Hall().withName(HALL_NAME_TENT_4),
+				new Hall().withName(HALL_NAME_TENT_5),
+				new Hall().withName(HALL_NAME_TENT_6),
+				new Hall().withName(HALL_NAME_TENT_7),
+				new Hall().withName(HALL_NAME_TENT_8),
+				new Hall().withName(HALL_NAME_ESCAPE_ROOM),
+				new Hall().withName(HALL_NAME_ARTEMIS_1),
+				new Hall().withName(HALL_NAME_ARTEMIS_2)
+		);
+		int i = 1;
+		for (Hall hall : halls) {
+			hall.setOrder(i);
+			++i;
+		}
+		return new Halls(halls);
 	}
 
 	@Override
@@ -95,11 +143,10 @@ public class Icon2018Convention extends SffConvention {
 		Hall eshkol4 = getHalls().findByName(HALL_NAME_ESHKOL_4);
 		Hall eshkol5 = getHalls().findByName(HALL_NAME_ESHKOL_5);
 		Hall eshkol6 = getHalls().findByName(HALL_NAME_ESHKOL_6);
-		Hall workshops = getHalls().findByName(HALL_NAME_WORKSHOPS);
+		Hall workshops = getHalls().findByName(HALL_NAME_WORKSHOPS_1);
 		Hall meetings = getHalls().findByName(HALL_NAME_MEETINGS);
 		Hall kids = getHalls().findByName(HALL_NAME_KIDS);
 		Hall outside = getHalls().findByName(HALL_NAME_OUTSIDE);
-		Hall outside2 = getHalls().findByName(HALL_NAME_OUTSIDE_2);
 
 		final int MAP_HEIGHT_OFFSET = -20;
 		final int MAP_HEIGHT = 2448 + MAP_HEIGHT_OFFSET;
