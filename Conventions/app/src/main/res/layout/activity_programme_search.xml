@@ -45,16 +45,6 @@
 
         </RelativeLayout>
 
-        <HorizontalScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <amai.org.conventions.events.SearchCategoriesLayout
-                android:id="@+id/search_categories_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </HorizontalScrollView>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
