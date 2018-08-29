@@ -71,7 +71,7 @@
                     android:layout_height="wrap_content"
                     tools:text="כעת: תחרות השירה"
                     android:textAlignment="center"
-                    android:textColor="?homeMessageText"
+                    android:textColor="?homeCurrentEventText"
                     android:textSize="20sp"
                     android:paddingBottom="8dp"
                     />
@@ -82,7 +82,7 @@
                     android:visibility="gone"
                     tools:visibility="visible"
                     android:text="@string/home_current_event_vote_possible"
-                    android:textColor="?homeMessageText"
+                    android:textColor="?homeCurrentEventText"
                     android:textAlignment="center"
                     android:textSize="20sp"
                     android:paddingBottom="8dp"

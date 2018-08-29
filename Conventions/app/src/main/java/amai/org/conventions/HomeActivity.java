@@ -114,11 +114,15 @@ public class HomeActivity extends NavigationActivity {
 			// no upcoming event to show, but there's an event currently showing - show the current event at the upcoming event layout
 			currentEventTitle.setVisibility(View.GONE);
 			upcomingEventTitle.setText(currentEvent.getTitle());
+			upcomingEventTitle.setTextColor(ThemeAttributes.getColor(this, R.attr.homeCurrentEventText));
 			upcomingEventTime.setText(getString(R.string.home_now_showing, ""));
+			upcomingEventTime.setTextColor(ThemeAttributes.getColor(this, R.attr.homeCurrentEventText));
 			upcomingEventHall.setText(currentEvent.getHall().getName());
+			upcomingEventHall.setTextColor(ThemeAttributes.getColor(this, R.attr.homeCurrentEventText));
 			upcomingEventContainer.setBackground(ThemeAttributes.getDrawable(this, R.attr.homeCurrentEventBackground));
 			if (currentEvent.getUserInput().getVoteSurvey() != null) {
 				upcomingEventVoteText.setVisibility(View.VISIBLE);
+				upcomingEventVoteText.setTextColor(ThemeAttributes.getColor(this, R.attr.homeCurrentEventText));
 			} else {
 				upcomingEventVoteText.setVisibility(View.GONE);
 			}

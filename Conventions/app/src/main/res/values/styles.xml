@@ -4,7 +4,11 @@
     </style>
     
     <style name="TabStyle" parent="Base.Widget.Design.TabLayout">
-        <item name="tabIndicatorColor">?snackbarActionColor</item>
+        <item name="tabIndicatorColor">?selectedTabIndicatorColor</item>
+        <item name="tabTextColor">?unselectedTabTextColor</item>
+        <item name="tabSelectedTextColor">?selectedTabTextColor</item>
+        <item name="android:layout_marginStart">?attr/contentStartMargin</item>
+        <item name="android:layout_marginEnd">?attr/contentEndMargin</item>
     </style>
 
     <style name="DialogTitle" parent="@style/RtlOverlay.DialogWindowTitle.AppCompat" />

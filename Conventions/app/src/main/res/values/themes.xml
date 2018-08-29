@@ -23,9 +23,18 @@
         <item name="actionButtonColor">?colorAccent</item>
         <item name="borderlessButtonColor">?buttonColor</item>
         <item name="highlightedButtonTextColor">@color/white</item>
+        <item name="eventStartMargin">0dp</item>
+        <item name="eventEndMargin">0dp</item>
+        <item name="contentStartMargin">0dp</item>
+        <item name="contentEndMargin">0dp</item>
 
         <!-- Toolbar -->
         <item name="toolbarTitleColor">?android:textColorPrimary</item>
+
+        <!-- Tabs -->
+        <item name="selectedTabIndicatorColor">?snackbarActionColor</item>
+        <item name="unselectedTabTextColor">?android:textColorPrimary</item>
+        <item name="selectedTabTextColor">?android:textColorSecondary</item>
 
         <!-- Event list activities -->
         <item name="eventTimeHeaderBackground">@drawable/flat_event_time_background</item>
@@ -46,8 +55,10 @@
         <!-- Home -->
         <item name="homeBoxTopMargin">0dp</item>
         <item name="homeSingleButtonTopMargin">0dp</item>
+        <item name="homeButtonsSideMargin">0dp</item>
         <item name="homeSingleButtonStyle">@style/HomeButton.Single</item>
         <item name="homeEventTimeText">?homeMessageText</item>
+        <item name="homeCurrentEventText">?homeMessageText</item>
         <item name="homeEventsListDivider">@drawable/home_event_list_divider</item>
 
         <!-- About -->
@@ -56,7 +67,6 @@
         <!-- Updates -->
         <item name="updatesBackground">?android:colorBackground</item>
         <item name="updateItemSeparator">?separatorColor</item>
-        <item name="updateItemDateSeparator">?separatorColor</item>
         <item name="updateTextColor">?android:textColorPrimary</item>
         <item name="newUpdateTextColor">?android:textColorPrimary</item>
         <item name="focusedUpdateTextColor">?android:textColorPrimary</item>
@@ -78,6 +88,7 @@
         <!-- This color should match eventDetailsBoxColor in a way that eventDetailsBoxColor is not visible
              on top of this color -->
         <item name="conventionFeedbackTextColor">?eventTitleTextColor</item>
+        <item name="eventActivityFavoriteColor">@color/gold</item>
         <item name="eventSurveyTextColor">@color/black</item>
     </style>
 
@@ -104,9 +115,18 @@
         <item name="actionButtonColor">?colorAccent</item>
         <item name="borderlessButtonColor">?buttonColor</item>
         <item name="highlightedButtonTextColor">@color/white</item>
+        <item name="eventStartMargin">0dp</item>
+        <item name="eventEndMargin">0dp</item>
+        <item name="contentStartMargin">0dp</item>
+        <item name="contentEndMargin">0dp</item>
 
         <!-- Toolbar -->
         <item name="toolbarTitleColor">?android:textColorPrimary</item>
+
+        <!-- Tabs -->
+        <item name="selectedTabIndicatorColor">?snackbarActionColor</item>
+        <item name="unselectedTabTextColor">?android:textColorPrimary</item>
+        <item name="selectedTabTextColor">?android:textColorSecondary</item>
 
         <!-- Event list activities -->
         <item name="eventTimeHeaderBackground">@drawable/flat_event_time_background</item>
@@ -127,8 +147,10 @@
         <!-- Home -->
         <item name="homeBoxTopMargin">0dp</item>
         <item name="homeSingleButtonTopMargin">0dp</item>
+        <item name="homeButtonsSideMargin">0dp</item>
         <item name="homeSingleButtonStyle">@style/HomeButton.Single</item>
         <item name="homeEventTimeText">?homeMessageText</item>
+        <item name="homeCurrentEventText">?homeMessageText</item>
         <item name="homeEventsListDivider">@drawable/home_event_list_divider</item>
 
         <!-- About -->

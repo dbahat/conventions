@@ -13,6 +13,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.R;
 import amai.org.conventions.events.holders.EventViewHolder;
 import amai.org.conventions.events.holders.TimeViewHolder;
@@ -70,6 +71,7 @@ public class EventsViewWithDateHeaderAdapter extends BaseAdapter {
 			if (convertView == null) {
 				convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.small_text_view, parent, false);
 				TextView textView = (TextView) convertView.findViewById(R.id.small_text);
+				textView.setTextColor(ThemeAttributes.getColor(textView.getContext(), R.attr.eventTimeHeaderDefaultTextColor));
 				((FrameLayout.LayoutParams) textView.getLayoutParams()).gravity = Gravity.CENTER_HORIZONTAL;
 				textView.setLayoutParams(textView.getLayoutParams());
 				holder = new TimeViewHolder(convertView, R.id.small_text);

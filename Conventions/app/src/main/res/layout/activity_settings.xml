@@ -7,8 +7,11 @@
     tools:context="amai.org.conventions.settings.SettingsActivity">
 
     <fragment android:name="amai.org.conventions.settings.SettingsActivity$SettingsFragment"
-              android:id="@+id/settings_fragment"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent" />
+        android:id="@+id/settings_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="?contentStartMargin"
+        android:layout_marginEnd="?contentEndMargin"
+        />
 
 </FrameLayout>

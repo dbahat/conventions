@@ -431,7 +431,7 @@ public class EventActivity extends NavigationActivity {
 	private void changeFavoriteMenuIcon(boolean isAttending, MenuItem favoriteItem) {
 		if (isAttending) {
 			Drawable icon = ContextCompat.getDrawable(this, R.drawable.ic_star_black_24dp);
-			icon.setColorFilter(ContextCompat.getColor(this, R.color.gold), PorterDuff.Mode.SRC_ATOP);
+			icon.setColorFilter(ThemeAttributes.getColor(this, R.attr.eventActivityFavoriteColor), PorterDuff.Mode.SRC_ATOP);
 			favoriteItem.setIcon(icon);
 			favoriteItem.setTitle(getResources().getString(R.string.event_remove_from_favorites));
 		} else {
