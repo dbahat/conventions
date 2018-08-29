@@ -66,8 +66,7 @@
 
         </android.support.design.widget.AppBarLayout>
 
-        <!-- The content if each navigation page will be placed in runtime in this container -->
-        <!-- Setting shadow background to simulate shadow effect from the toolbar to the content -->
+        <!-- The content of each navigation page will be placed in runtime in this container -->
         <amai.org.conventions.customviews.NestedScrollingFrameLayout
             android:id="@+id/navigation_content_view_container"
             android:layout_width="match_parent"
