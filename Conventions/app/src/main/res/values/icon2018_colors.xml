@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="icon2018_yellow">#fcb614</color>
+    <color name="icon2018_orange">#ef5223</color>
+    <color name="icon2018_green1">#037759</color>
+    <color name="icon2018_green2">#009676</color>
+    <color name="icon2018_green3">#49bb8e</color>
+    <color name="icon2018_green4">#5bc1aa</color>
+    <color name="icon2018_green5">#a6e8d7</color>
+    <color name="icon2018_purple1">#4d2875</color>
+    <color name="icon2018_purple2">#622d8f</color>
+    <color name="icon2018_purple3">#76489c</color>
+    <color name="icon2018_purple4">#8858a3</color>
+    <color name="icon2018_purple5">#c4a1db</color>
+</resources>

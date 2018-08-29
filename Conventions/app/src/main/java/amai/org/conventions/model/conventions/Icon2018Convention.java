@@ -377,7 +377,7 @@ public class Icon2018Convention extends SffConvention {
 	protected ImageIdToImageResourceMapper initImageMapper() {
 		ImageIdToImageResourceMapper imageMapper = new ImageIdToImageResourceMapper();
 
-		imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.olamot2018_background);
+		imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.icon2018_event_background);
 
 		return imageMapper;
 	}

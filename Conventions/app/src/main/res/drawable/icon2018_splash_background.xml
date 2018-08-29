@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" android:opacity="opaque">
-    <item android:drawable="@drawable/olamot2018_background"/>
+    <item android:drawable="@color/icon2018_yellow"/>
     <item android:top="@dimen/status_bar_height">
-        <bitmap android:src="@drawable/olamot2018_logo"
+        <bitmap android:src="@drawable/icon2018_logo"
                 android:gravity="center"/>
     </item>
 </layer-list>

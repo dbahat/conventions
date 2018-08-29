@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppBaseTheme.Icon2018.Toolbar"/>
+    <style name="AppBaseTheme.Icon2018" parent="AppBaseTheme.Dark">
+        <!-- Sub-themes -->
+        <item name="android:dialogTheme">@style/AppDialogTheme.Icon2018</item>
+        <item name="alertDialogTheme">@style/AppAlertDialogTheme.Icon2018</item>
+        <!-- not using android:actionOverflowButtonStyle since it doesn't seem to work in Jellybean -->
+        <item name="actionOverflowButtonStyle">@style/OverflowMenu.Icon2018</item>
+        <!-- General -->
+        <item name="android:textColorPrimary">@color/icon2018_purple1</item>
+        <item name="colorAccent">@color/icon2018_orange</item>
+        <item name="android:colorBackground">@null</item>
+        <item name="android:textColorLink">@color/icon2018_orange</item>
+        <item name="actionButtonColor">@color/icon2018_orange</item>
+        <item name="swipeToRefreshColor">@color/white</item>
+        <item name="swipeToRefreshBackgroundColor">@color/icon2018_orange</item>
+        <item name="snackbarActionColor">@color/icon2018_orange</item>
+        <item name="highlightedButtonBackground">@drawable/icon2018_highlighted_button</item>
+        <item name="highlightedButtonTextColor">@drawable/icon2018_highlighted_button_text</item>
+        <item name="borderlessButtonColor">@color/icon2018_orange</item>
+        <item name="activitiesBackground">@drawable/icon2018_background</item>
+        <item name="eventListDivider">@drawable/icon2018_event_list_divider</item>
+        <item name="conflictingEventListDivider">@android:color/transparent</item>
+        <item name="hintTextColor">@color/icon2018_purple2</item>
+        <item name="eventStartMargin">5dp</item>
+        <item name="eventEndMargin">25dp</item>
+        <item name="contentStartMargin">50dp</item>
+        <item name="contentEndMargin">50dp</item>
+        <item name="separatorColor">@android:color/transparent</item>
+
+        <!-- Tabs -->
+        <item name="selectedTabIndicatorColor">@color/icon2018_green1</item>
+        <item name="unselectedTabTextColor">@color/icon2018_purple3</item>
+        <item name="selectedTabTextColor">@color/icon2018_purple1</item>
+
+        <!-- Notifications -->
+        <item name="notificationSmallIcon">@drawable/icon2018_notification_small</item>
+        <!-- Toolbar -->
+        <item name="toolbarBackground">@null</item>
+        <item name="toolbarIconAccentColor">@color/icon2018_green1</item>
+        <!-- Navigation Popup -->
+        <item name="navigationPopupBackground">@color/icon2018_purple1</item>
+        <item name="navigationPopupTitle">@drawable/icon2018_logo_wide</item>
+        <item name="navigationPopupBottomImage">@null</item>
+        <item name="navigationPopupNotSelectedColor">@color/icon2018_purple5</item>
+        <item name="navigationPopupSelectedColor">@color/white</item>
+        <item name="navigationPopupSeparatorColor">@color/icon2018_purple5</item>
+        <!-- About Screen -->
+        <item name="aboutLogo">@drawable/icon2018_logo_wide</item>
+        <!-- Home Screen -->
+        <item name="homeBoxTopMargin">0dp</item>
+        <item name="homeSingleButtonTopMargin">0dp</item>
+        <item name="homeButtonsSideMargin">15dp</item>
+        <item name="homeBackground">@color/icon2018_yellow</item>
+        <item name="homeToolbarTitle">@null</item>
+        <item name="homeLogo">@drawable/icon2018_logo_wide</item>
+        <item name="homeTitleBackground">@color/icon2018_green1</item>
+        <item name="homeTitleText">@color/icon2018_green5</item>
+        <item name="homeMessageBackground">@color/icon2018_purple4</item>
+        <item name="homeMessageText">@color/white</item>
+        <item name="homeCurrentEventText">@color/icon2018_purple5</item>
+        <item name="homeCurrentEventBackground">@color/icon2018_purple2</item>
+        <item name="homeUpcomingEventBackground">@color/icon2018_purple4</item>
+        <item name="homeButtonBackground">@drawable/icon2018_home_activity_button</item>
+        <item name="homeButtonText">@color/icon2018_home_button_text_color</item>
+        <item name="homeBottomImage">@drawable/icon2018_home_bottom</item>
+        <item name="homeEventNameInList">@color/white</item>
+        <!-- Event View -->
+        <item name="eventTypeEndedColor">@color/icon2018_purple1</item>
+        <item name="eventTypeCurrentColor">@color/icon2018_purple3</item>
+        <item name="eventTypeNotStartedColor">@color/icon2018_purple4</item>
+        <item name="eventTimeDefaultTextColor">@color/white</item>
+        <item name="eventTimeDefaultBackgroundColor">@color/icon2018_orange</item>
+        <item name="eventDetailsColor">@color/icon2018_purple1</item>
+        <item name="eventSendFeedbackColor">@color/white</item>
+        <item name="eventFavoriteIcon">@drawable/ic_star_black_24dp</item>
+        <item name="eventNonFavoriteColor">@color/icon2018_green1</item>
+        <item name="eventFavoriteColor">@color/white</item>
+        <!-- Map Screen -->
+        <item name="locationDetailsBackground">@color/less_transparent_white</item>
+        <item name="locationDetailsTitleColor">@color/icon2018_purple1</item>
+        <item name="mapBackground">@color/icon2018_yellow</item>
+        <item name="standIconColor">@color/icon2018_purple1</item>
+        <item name="standsTypeTitleColor">@color/icon2018_purple1</item>
+        <!-- Updates Screen -->
+        <item name="focusedUpdateBackground">@android:color/transparent</item>
+        <item name="newUpdateBackground">@android:color/transparent</item>
+        <item name="updateItemBorder">@color/icon2018_purple1</item>
+        <item name="updateTextColor">@color/icon2018_purple1</item>
+        <item name="newUpdateTextColor">@color/icon2018_purple4</item>
+        <item name="focusedUpdateTextColor">@color/icon2018_purple5</item>
+        <item name="updateItemSeparator">@null</item>
+        <item name="updateTimeBackground">@color/icon2018_purple2</item>
+        <item name="updateTimeColor">@color/white</item>
+        <!-- My Events Screen -->
+        <item name="nextEventStartTimeBackground">@color/transparent_black</item>
+        <item name="nextEventStartTimeTextColor">@color/icon2018_purple1</item>
+        <item name="nextEventStartTimeBottomLineColor">@color/icon2018_purple1</item>
+        <item name="conflictingEventsBackground">@color/transparent_black</item>
+        <!-- Event Screen -->
+        <item name="eventToolbarColor">@color/icon2018_yellow</item>
+        <item name="eventDetailsDefaultBackgroundColor">@color/icon2018_yellow</item>
+        <item name="eventDetailsBoxColor">@color/icon2018_green2</item>
+        <item name="eventFeedbackBoxColor">@color/icon2018_purple1</item>
+        <item name="eventFeedbackTextColor">@color/icon2018_purple5</item>
+        <item name="eventDescriptionTextColor">@color/white</item>
+        <item name="eventTitleBackground">@drawable/icon2018_event_title</item>
+        <item name="eventTitleTextColor">@color/icon2018_green5</item>
+        <item name="eventDetailsHighlightedTextColor">@color/light_yellow</item>
+        <item name="eventActivityFavoriteColor">@color/icon2018_green1</item>
+        <!-- Feedback Screen -->
+        <item name="progressBarDrawable">@drawable/icon2018_rotating_circular_progress_bar</item>
+        <item name="feedbackButtonColor">@color/white</item>
+        <item name="feedbackAnswerButtonColor">@color/icon2018_green2</item>
+        <item name="feedbackAnswerButtonSelectedColor">@color/icon2018_purple3</item>
+        <item name="conventionFeedbackTextColor">@color/icon2018_purple1</item>
+        <!-- Programme Screen -->
+        <item name="eventTimeHeaderDefaultTextColor">@color/icon2018_purple1</item>
+        <item name="eventTimeHeaderBackground">@null</item>
+        <!-- Programme Search Screen -->
+        <item name="eventNameKeywordHighlightColor">@color/white</item>
+        <item name="eventKeywordHighlightColor">@color/white</item>
+        <!-- TODO Second Hand Screen -->
+        <item name="secondHandFormClosedColor">@color/dark_gray</item>
+        <item name="secondHandItemSoldColor">@color/icon2018_green3</item>
+        <item name="secondHandItemMissingColor">@color/icon2018_orange</item>
+        <!-- TODO Discounts activity -->
+        <item name="discountsActivityLayout">@layout/olamot2018_activity_discounts</item>
+    </style>
+
+    <style name="AppBaseTheme.Icon2018.Toolbar.Event" parent="AppBaseTheme.Icon2018.Toolbar">
+        <item name="android:textColorLink">@color/icon2018_purple1</item>
+    </style>
+
+    <style name="AppBaseTheme.Icon2018.Toolbar.Settings" parent="AppBaseTheme.Icon2018.Toolbar">
+        <item name="android:textColor">@color/icon2018_purple1</item>
+        <item name="android:textColorSecondary">@color/icon2018_purple1</item>
+    </style>
+
+
+    <style name="AppDialogTheme.Icon2018" parent="Theme.AppCompat.Light.Dialog">
+        <!-- This is the default starting API23. In any case the title is always left-justified so it's best to not use it. -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="colorAccent">@color/icon2018_orange</item>
+        <item name="android:textColorPrimary">@android:color/black</item>
+    </style>
+
+    <style name="AppAlertDialogTheme.Icon2018" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/icon2018_orange</item>
+        <item name="android:textColorPrimary">@android:color/black</item>
+    </style>
+
+    <style name="AppBaseTheme.Icon2018.Toolbar.Splash">
+        <item name="android:windowBackground">@drawable/icon2018_splash_background</item>
+    </style>
+    <style name="OverflowMenu.Icon2018" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_more_vert_white_24dp</item>
+    </style>
+</resources>

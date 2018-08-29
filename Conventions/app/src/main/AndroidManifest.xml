@@ -42,9 +42,9 @@
         android:installLocation="auto"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppBaseTheme.Olamot2018.Toolbar">
+        android:theme="@style/AppBaseTheme.Icon2018.Toolbar">
         <activity
-            android:name="amai.org.conventions.SplashActivity" android:theme="@style/AppBaseTheme.Olamot2018.Toolbar.Splash"
+            android:name="amai.org.conventions.SplashActivity" android:theme="@style/AppBaseTheme.Icon2018.Toolbar.Splash"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -59,14 +59,15 @@
         <activity android:name="amai.org.conventions.map.MapActivity"></activity>
         <activity
             android:name="amai.org.conventions.events.activities.EventActivity"
-            android:theme="@style/AppBaseTheme.Olamot2018.Toolbar.Event"
+            android:theme="@style/AppBaseTheme.Icon2018.Toolbar.Event"
             android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name="amai.org.conventions.ArrivalMethodsActivity"></activity>
         <activity
             android:name="amai.org.conventions.FeedbackActivity"
             android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name="amai.org.conventions.updates.UpdatesActivity"></activity>
-        <activity android:name="amai.org.conventions.settings.SettingsActivity"></activity>
+        <activity android:name="amai.org.conventions.settings.SettingsActivity"
+            android:theme="@style/AppBaseTheme.Icon2018.Toolbar.Settings"></activity>
         <activity android:name="amai.org.conventions.DiscountsActivity"></activity>
         <activity android:name="amai.org.conventions.AboutActivity"></activity>
         <activity android:name="amai.org.conventions.HomeActivity" android:screenOrientation="portrait"/>
@@ -94,7 +95,7 @@
      See README(https://goo.gl/l4GJaQ) for more. -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/olamot2018_notification_small" />
+            android:resource="@drawable/icon2018_notification_small" />
     </application>
 
 </manifest>
