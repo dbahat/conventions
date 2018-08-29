@@ -15,7 +15,9 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="?contentStartMargin"
+            android:layout_marginEnd="?contentEndMargin">
 
             <EditText
                 android:id="@+id/search_keyword_text_box"
@@ -53,11 +55,12 @@
                 android:layout_height="wrap_content" />
 
         </HorizontalScrollView>
-
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="?separatorColor"/>
+            android:background="?separatorColor"
+            android:layout_marginStart="?contentStartMargin"
+            android:layout_marginEnd="?contentEndMargin"/>
 
         <se.emilsjolander.stickylistheaders.StickyListHeadersListView
             android:id="@+id/searchEventsList"
@@ -76,6 +79,8 @@
             android:visibility="gone"
             android:textSize="@dimen/text_size_large_material"
             android:textColor="?hintTextColor"
+            android:layout_marginStart="?contentStartMargin"
+            android:layout_marginEnd="?contentEndMargin"
             android:padding="25dp"
             android:text="@string/search_no_results_found" />
 

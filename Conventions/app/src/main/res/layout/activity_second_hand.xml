@@ -30,6 +30,8 @@
                 android:visibility="gone"
                 android:textSize="@dimen/text_size_large_material"
                 android:textColor="?hintTextColor"
+                android:layout_marginStart="?contentStartMargin"
+                android:layout_marginEnd="?contentEndMargin"
                 android:padding="25dp"
                 android:text="@string/second_hand_no_forms" />
         </FrameLayout>

@@ -20,6 +20,10 @@
         <attr name="actionButtonColor" format="color|reference"/>
         <attr name="hintTextColor" format="color|reference"/>
         <attr name="separatorColor" format="color|reference"/>
+        <attr name="eventStartMargin" format="dimension"/>
+        <attr name="eventEndMargin" format="dimension"/>
+        <attr name="contentStartMargin" format="dimension"/>
+        <attr name="contentEndMargin" format="dimension"/>
         <!-- Notifications -->
         <attr name="notificationSmallIcon" format="integer"/>
         <!-- Toolbar -->
@@ -32,6 +36,10 @@
         <!-- Swipe to Refresh -->
         <attr name="swipeToRefreshColor" format="color|reference"/>
         <attr name="swipeToRefreshBackgroundColor" format="color|reference"/>
+        <!-- Tabs -->
+        <attr name="selectedTabIndicatorColor" format="color|reference"/>
+        <attr name="unselectedTabTextColor" format="color|reference"/>
+        <attr name="selectedTabTextColor" format="color|reference"/>
         <!-- Event View -->
         <attr name="eventTypeEndedColor" format="color|reference"/>
         <attr name="eventTypeCurrentColor" format="color|reference"/>
@@ -60,12 +68,14 @@
         <attr name="homeTitleText" format="color|reference"/>
         <attr name="homeMessageBackground" format="color|reference"/>
         <attr name="homeMessageText" format="color|reference"/>
+        <attr name="homeCurrentEventText" format="color|reference"/>
         <attr name="homeEventTimeText" format="color|reference"/>
         <attr name="homeCurrentEventBackground" format="color|reference"/>
         <attr name="homeUpcomingEventBackground" format="color|reference"/>
         <attr name="homeEventNameInList" format="color|reference"/>
         <attr name="homeEventsListDivider" format="color|reference"/>
         <attr name="homeButtonBackground" format="color|reference"/>
+        <attr name="homeButtonsSideMargin" format="dimension"/>
         <attr name="homeButtonText" format="color|reference"/>
         <attr name="homeBoxTopMargin" format="dimension"/>
         <attr name="homeSingleButtonTopMargin" format="dimension"/>
@@ -86,9 +96,9 @@
         <attr name="navigationPopupBottomImageMargins" format="dimension"/>
         <!-- Updates Screen -->
         <attr name="updateTimeColor" format="color|reference"/>
+        <attr name="updateTimeBackground" format="color|reference"/>
         <attr name="updateItemBorder" format="color|reference"/>
         <attr name="updateItemSeparator" format="color|reference"/>
-        <attr name="updateItemDateSeparator" format="color|reference"/>
         <attr name="updatesBackground" format="color|reference"/>
         <attr name="updateTextColor" format="color|reference"/>
         <attr name="newUpdateBackground" format="color|reference"/>
@@ -117,6 +127,7 @@
         <attr name="eventFeedbackBoxColor" format="color|reference"/>
         <attr name="eventDetailsDefaultBackgroundColor" format="color|reference"/>
         <attr name="eventFeedbackTextColor" format="color|reference"/>
+        <attr name="eventActivityFavoriteColor" format="color|reference"/>
         <!-- Buttons -->
         <attr name="highlightedButtonBackground" format="integer|reference"/>
         <attr name="highlightedButtonTextColor" format="integer|reference"/>

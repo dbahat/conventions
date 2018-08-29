@@ -1,6 +1,7 @@
 package amai.org.conventions.updates;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import amai.org.conventions.ThemeAttributes;
@@ -21,6 +23,7 @@ public class UpdateViewHolder extends RecyclerView.ViewHolder {
 
 	private ViewGroup updateContainer;
 	private View separator;
+	private ImageView updateBottomLine;
 	private TextView updateTextView;
 	private TextView updateTime;
 	private TextView updateDay;
@@ -36,6 +39,7 @@ public class UpdateViewHolder extends RecyclerView.ViewHolder {
 		updateTime = (TextView) itemView.findViewById(R.id.update_time);
 		updateDay = (TextView) itemView.findViewById(R.id.update_day);
 		showDetailsButton = (FrameLayout) itemView.findViewById(R.id.update_show_details_button);
+		updateBottomLine = itemView.findViewById(R.id.update_bottom_line);
 	}
 
 	public void setContent(UpdateViewModel updateViewModel) {
@@ -62,8 +66,19 @@ public class UpdateViewHolder extends RecyclerView.ViewHolder {
 		updateTime.setText(Dates.formatHoursAndMinutes(updateViewModel.getUpdate().getDate()));
 		updateDay.setText(Dates.formatDateWithoutTime(updateViewModel.getUpdate().getDate()));
 		updateTextView.setTextColor(textColor);
-		updateTime.setTextColor(textColor);
-		updateDay.setTextColor(textColor);
+
+		if (updateBottomLine.getDrawable() == null) {
+			updateBottomLine.setVisibility(View.GONE);
+		} else {
+			updateBottomLine.setVisibility(View.VISIBLE);
+		}
+
+		int updateTimeTextColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.updateTimeColor);
+		if (updateTimeTextColor == Color.TRANSPARENT) {
+			updateTimeTextColor = textColor;
+		}
+		updateTime.setTextColor(updateTimeTextColor);
+		updateDay.setTextColor(updateTimeTextColor);
 
 		expandViewIfNumberOfTextLinesIsSmall(updateViewModel);
 

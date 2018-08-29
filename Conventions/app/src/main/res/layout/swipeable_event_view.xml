@@ -4,10 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
+
     <amai.org.conventions.customviews.ViewPagerWithWrapContentHeight
         android:id="@+id/swipe_pager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginStart="?attr/eventStartMargin"
+        android:layout_marginEnd="?attr/eventEndMargin"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -16,4 +19,5 @@
         android:layout_marginTop="2dp"
         android:layout_marginBottom="20dp"
         android:background="?eventListDivider"/>
+
 </LinearLayout>

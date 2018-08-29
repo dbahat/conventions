@@ -27,7 +27,9 @@
             <amai.org.conventions.events.SearchCategoriesLayout
                 android:id="@+id/programme_search_categories"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginStart="?contentStartMargin"
+                android:layout_marginEnd="?contentEndMargin"/>
 
             <klogi.com.RtlViewPager
                 android:id="@+id/programme_days_pager"

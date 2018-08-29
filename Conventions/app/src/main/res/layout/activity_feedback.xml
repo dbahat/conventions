@@ -18,8 +18,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="?contentStartMargin"
+                android:layout_marginEnd="?contentEndMargin"
                 style="@style/TextAppearance.AppCompat.Headline"
                 android:text="@string/events_without_feedback_title"/>
             <FrameLayout
@@ -29,8 +31,10 @@
                     android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="@dimen/activity_horizontal_margin"
-                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="@dimen/activity_horizontal_margin"
+                    android:layout_marginStart="?contentStartMargin"
+                    android:layout_marginEnd="?contentEndMargin"
                     android:id="@+id/feedback_no_events_text"
                     style="@style/TextAppearance.AppCompat.Subhead"
                     android:text="@string/events_feedback_no_events"/>
@@ -49,8 +53,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="@dimen/activity_horizontal_margin"
-                        android:paddingRight="@dimen/activity_horizontal_margin"
+                        android:paddingStart="@dimen/activity_horizontal_margin"
+                        android:paddingEnd="@dimen/activity_horizontal_margin"
+                        android:layout_marginStart="?contentStartMargin"
+                        android:layout_marginEnd="?contentEndMargin"
                         style="@style/TextAppearance.AppCompat.Subhead"
                         android:id="@+id/send_all_explanation"
                         android:text="@string/send_all_explanation_no_events"/>
@@ -58,6 +64,10 @@
                         android:id="@+id/send_all_button_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:paddingStart="@dimen/activity_horizontal_margin"
+                        android:paddingEnd="@dimen/activity_horizontal_margin"
+                        android:layout_marginStart="?contentStartMargin"
+                        android:layout_marginEnd="?contentEndMargin"
                         android:layout_gravity="center">
 
                         <Button
@@ -84,8 +94,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="@color/transparent_black"
-                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        android:paddingStart="@dimen/activity_horizontal_margin"
+                        android:paddingEnd="@dimen/activity_horizontal_margin"
+                        android:layout_marginStart="?contentStartMargin"
+                        android:layout_marginEnd="?contentEndMargin"
                         />
 
                 </LinearLayout>
@@ -103,6 +115,8 @@
                 android:layout_height="match_parent"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="0dp"
+                android:layout_marginStart="?contentStartMargin"
+                android:layout_marginEnd="?contentEndMargin"
                 android:weightSum="1">
                 <TextView
                     android:layout_width="wrap_content"
@@ -131,30 +145,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/transparent_black"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="?contentStartMargin"
+                android:layout_marginEnd="?contentEndMargin"
                 />
         </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="?contentStartMargin"
+            android:layout_marginEnd="?contentEndMargin"
             style="@style/TextAppearance.AppCompat.Headline"
             android:text="@string/convention_feedback_title"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="?contentStartMargin"
+            android:layout_marginEnd="?contentEndMargin"
             style="@style/TextAppearance.AppCompat.Subhead"
             android:text="@string/convention_feedback_subtitle"/>
 
         <amai.org.conventions.events.CollapsibleFeedbackView
             android:id="@+id/convention_feedback_view"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="?contentStartMargin"
+            android:layout_marginEnd="?contentEndMargin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
