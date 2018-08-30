@@ -1,10 +1,10 @@
 package amai.org.conventions.events;
 
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +18,12 @@ import android.widget.Toast;
 import java.util.Date;
 
 import amai.org.conventions.ConventionsApplication;
-import sff.org.conventions.R;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.EventNotification;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.notifications.PushNotification;
 import amai.org.conventions.utils.Dates;
+import sff.org.conventions.R;
 
 public class ConfigureNotificationsFragment extends DialogFragment {
 	public static final int DEFAULT_PRE_EVENT_START_NOTIFICATION_MINUTES = 10;
