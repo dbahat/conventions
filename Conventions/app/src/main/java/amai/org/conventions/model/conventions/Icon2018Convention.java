@@ -68,7 +68,7 @@ public class Icon2018Convention extends SffConvention {
 
 	@Override
 	protected ConventionStorage initStorage() {
-		return new ConventionStorage(this, R.raw.olamot2018_convention_events, 1);
+		return new ConventionStorage(this, R.raw.icon2018_convention_events, 0);
 	}
 
 	@Override
@@ -510,5 +510,13 @@ public class Icon2018Convention extends SffConvention {
 			os.close();
 		}
 		return request;
+	}
+
+	@Override
+	public ConventionEvent findEventByURL(String url) {
+		if (url.startsWith("http://program.iconfestival.org.il/")) {
+			url = "http://iconfestival.com/" + url.substring("http://program.iconfestival.org.il/".length());
+		}
+		return super.findEventByURL(url);
 	}
 }

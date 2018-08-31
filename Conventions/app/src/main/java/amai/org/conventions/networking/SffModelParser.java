@@ -168,6 +168,13 @@ public class SffModelParser implements ModelParser {
 			return "";
 		}
 
+		// Handle events that have an image in base64 instead of description (bug in icon 2018)
+		// This caused the event screen to freeze for a few minutes because of the size of the description
+		// and the image was not displayed at the end.
+		if (rawEventDescription.startsWith("data:image/png;base64,")) {
+			return "";
+		}
+
 		return rawEventDescription
 				// Remove class, style, height and width attributes in tags since they make the element take
 				// up more space than needed and are not supported anyway
