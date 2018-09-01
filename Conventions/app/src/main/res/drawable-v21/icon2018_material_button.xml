@@ -22,26 +22,12 @@
        android:insetRight="@dimen/button_inset_horizontal_material"
        android:insetBottom="@dimen/button_inset_vertical_material">
     <selector>
-        <!-- Disabled state -->
-        <item android:state_enabled="false">
-            <shape android:shape="rectangle"
-                   android:tint="@color/very_light_gray">
-                <corners android:radius="@dimen/control_corner_material" />
-                <solid android:color="@color/very_light_gray" />
-                <padding android:left="@dimen/button_padding_horizontal_material"
-                         android:top="@dimen/button_padding_vertical_material"
-                         android:right="@dimen/button_padding_horizontal_material"
-                         android:bottom="@dimen/button_padding_vertical_material" />
-            </shape>
-
-        </item>
-
         <!-- Normal state -->
         <item>
             <shape android:shape="rectangle"
                    android:tint="?attr/buttonColor">
                 <corners android:radius="@dimen/control_corner_material" />
-                <solid android:color="?attr/buttonColor" />
+                <solid android:color="@color/icon2018_green1" />
                 <padding android:left="@dimen/button_padding_horizontal_material"
                          android:top="@dimen/button_padding_vertical_material"
                          android:right="@dimen/button_padding_horizontal_material"
