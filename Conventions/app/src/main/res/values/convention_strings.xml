@@ -12,7 +12,7 @@
     <string name="arrival_methods_marker_name">%s - אשכול פיס</string>
     <string name="my_event_share_link">http://play.google.com/store/apps/details?id=sff.org.conventions</string>
 
-    <!-- Relevant to all Olamot conventions -->
+    <!-- Relevant to all Icon conventions -->
     <string name="app_name">פסטיבל אייקון</string>
     <string name="my_events_no_data">הוסף אירוע לאירועים שלי ע\"י לחיצה על הכוכב בדף האירוע או ברשימת האירועים, או ע\"י יבוא מאתר אייקון</string>
     <string name="add_events">הוספת אירועים מאתר אייקון</string>
