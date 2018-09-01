@@ -87,8 +87,8 @@
         <item name="newUpdateBackground">@android:color/transparent</item>
         <item name="updateItemBorder">@color/icon2018_purple1</item>
         <item name="updateTextColor">@color/icon2018_purple1</item>
-        <item name="newUpdateTextColor">@color/icon2018_purple4</item>
-        <item name="focusedUpdateTextColor">@color/icon2018_purple5</item>
+        <item name="newUpdateTextColor">@color/icon2018_purple3</item>
+        <item name="focusedUpdateTextColor">@color/icon2018_purple4</item>
         <item name="updateItemSeparator">@null</item>
         <item name="updateTimeBackground">@color/icon2018_purple2</item>
         <item name="updateTimeColor">@color/white</item>
