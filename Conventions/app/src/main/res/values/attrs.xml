@@ -140,6 +140,7 @@
         <!-- Feedback Screen -->
         <attr name="progressBarDrawable" format="integer|reference"/>
         <attr name="conventionFeedbackTextColor" format="color|reference"/>
+        <attr name="feedbackMultiAnswerPadding" format="dimension"/>
         <!-- Programme Screen -->
         <attr name="eventTimeHeaderBackground" format="color|reference"/>
         <attr name="eventTimeHeaderDefaultTextColor" format="color|reference"/>

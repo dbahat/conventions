@@ -481,7 +481,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 			}
 		};
 
-		int padding = getResources().getDimensionPixelOffset(R.dimen.feedback_multi_answer_padding);
+		int padding = ThemeAttributes.getDimensionPixelOffset(getContext(), R.attr.feedbackMultiAnswerPadding);
 		boolean first = true;
 		for (String answerString : possibleAnswers) {
 			final TextView answerButton;
