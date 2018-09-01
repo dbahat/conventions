@@ -74,7 +74,6 @@
         <item name="eventTimeDefaultBackgroundColor">@color/icon2018_orange</item>
         <item name="eventDetailsColor">@color/icon2018_purple1</item>
         <item name="eventSendFeedbackColor">@color/white</item>
-        <item name="eventFavoriteIcon">@drawable/ic_star_black_24dp</item>
         <item name="eventNonFavoriteColor">@color/icon2018_green1</item>
         <item name="eventFavoriteColor">@color/white</item>
         <!-- Map Screen -->
