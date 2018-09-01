@@ -46,6 +46,7 @@
         <item name="eventTypeNotStartedBackgroundColor">@null</item>
         <item name="eventTimeDefaultBackgroundColor">@null</item>
         <item name="eventSendFeedbackColor">@color/green</item>
+        <item name="eventFavoriteIcon">@drawable/ic_star_black_24dp</item>
 
         <!-- Navigation popup -->
         <item name="navigationPopupSeparatorColor">?navigationPopupNotSelectedColor</item>
@@ -138,6 +139,7 @@
         <item name="eventTypeNotStartedBackgroundColor">@null</item>
         <item name="eventTimeDefaultBackgroundColor">@null</item>
         <item name="eventSendFeedbackColor">@color/green</item>
+        <item name="eventFavoriteIcon">@drawable/ic_star_black_24dp</item>
 
         <!-- Navigation popup -->
         <item name="navigationPopupSeparatorColor">?navigationPopupNotSelectedColor</item>
