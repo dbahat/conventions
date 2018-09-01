@@ -114,6 +114,7 @@
         <item name="feedbackAnswerButtonColor">@color/icon2018_green2</item>
         <item name="feedbackAnswerButtonSelectedColor">@color/icon2018_purple3</item>
         <item name="conventionFeedbackTextColor">@color/icon2018_purple1</item>
+        <item name="feedbackMultiAnswerPadding">1.5dp</item>
         <!-- Programme Screen -->
         <item name="eventTimeHeaderDefaultTextColor">@color/icon2018_purple1</item>
         <item name="eventTimeHeaderBackground">@null</item>
