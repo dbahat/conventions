@@ -93,6 +93,7 @@
 
         <!-- Feedback activity -->
         <item name="conventionFeedbackTextColor">?eventTitleTextColor</item>
+        <item name="eventSurveyTextColor">@color/black</item>
         <item name="feedbackMultiAnswerPadding">4.5dp</item>
 
         <!-- Second Hand activity -->
@@ -200,6 +201,7 @@
 
         <!-- Feedback activity -->
         <item name="conventionFeedbackTextColor">?eventTitleTextColor</item>
+        <item name="eventSurveyTextColor">@color/black</item>
         <item name="feedbackMultiAnswerPadding">4.5dp</item>
 
         <!-- Second Hand activity -->
