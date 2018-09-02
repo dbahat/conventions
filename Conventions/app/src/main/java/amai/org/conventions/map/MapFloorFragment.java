@@ -593,6 +593,10 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 					}
 				}
 			}
+			// If exactly 1 location is selected, show its details
+			if (locations.size() == 1) {
+				showLocationDetails(locations.get(0), true);
+			}
 		} else {
 			// Save it for later use
 			locationsToSelect = locations;
