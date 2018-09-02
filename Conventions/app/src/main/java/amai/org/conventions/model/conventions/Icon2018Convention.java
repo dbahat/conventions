@@ -382,7 +382,7 @@ public class Icon2018Convention extends SffConvention {
 												.withY(MARKER_Y_OFFSET + 558),
 										new MapLocation()
 												.withName("כניסה לעירוני")
-												.withPlaces(Arrays.asList(workshops2, ironi1, ironi2, ironi3, ironi4, ironi5, escapeRoom, artemis1, artemis2))
+												.withPlaces(Arrays.asList(meetings, workshops2, ironi1, ironi2, ironi3, ironi4, ironi5, escapeRoom, artemis1, artemis2))
 												.withMarkerResource(DEFAULT_MARKER, false)
 												.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false)
 												.withX(574)
@@ -460,7 +460,8 @@ public class Icon2018Convention extends SffConvention {
 												.withX(828)
 												.withY(MARKER_Y_OFFSET + 346),
 										new MapLocation()
-												.withPlace(new Place().withName("מתחם משחקי לוח"))
+												.withName("אוהל משחקי לוח")
+												.withPlaces(Arrays.asList(tent1, tent2, tent3, tent4, tent5, tent6, tent7, tent8))
 												.withMarkerResource(DEFAULT_MARKER, false)
 												.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false)
 												.withX(328)
