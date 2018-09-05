@@ -16,7 +16,7 @@
                 android:id="@+id/second_hand_form_items_list"
                 app:isDrawingListUnderStickyHeader="false"
                 app:hasStickyHeaders="false"
-                android:divider="@drawable/second_hand_item_list_divider"
+                android:divider="?secondHandItemsDivider"
                 android:dividerHeight="1dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>

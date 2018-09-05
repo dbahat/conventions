@@ -1,35 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:tools="http://schemas.android.com/tools"
-      android:orientation="horizontal"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:paddingTop="10dp"
       android:paddingStart="20dp"
       android:paddingEnd="20dp">
-    <TextView
-        android:id="@+id/second_hand_form_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        tools:text="Form 005"
-        android:padding="5dp"/>
-    <TextView
-        android:id="@+id/second_hand_form_status"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        tools:text="(closed)"
-        android:textSize="18sp"
-        android:padding="5dp"/>
-    <Button
-        android:id="@+id/second_hand_form_delete"
-        style="@style/BorderlessButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:text="@string/delete"
-        android:padding="5dp"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginStart="?contentStartMargin"
+        android:layout_marginEnd="?contentEndMargin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/second_hand_form_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="Form 005"
+            android:padding="5dp"/>
+        <TextView
+            android:id="@+id/second_hand_form_status"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            tools:text="(closed)"
+            android:textSize="18sp"
+            android:padding="5dp"/>
+        <Button
+            android:id="@+id/second_hand_form_delete"
+            style="@style/BorderlessButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="@string/delete"
+            android:padding="5dp"/>
+    </LinearLayout>
 
-</LinearLayout>
+</FrameLayout>

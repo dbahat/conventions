@@ -101,6 +101,10 @@ class SecondHandItemViewHolder extends RecyclerView.ViewHolder {
 		int statusColor;
 		int titleColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandFormOpenColor);
 		switch (newItem.getStatus()) {
+			case CREATED:
+				itemStatusView.setText(R.string.second_hand_item_created);
+				statusColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandItemCreatedColor);
+				break;
 			case SOLD:
 				itemStatusView.setText(R.string.second_hand_item_sold);
 				statusColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandItemSoldColor);

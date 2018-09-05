@@ -191,6 +191,7 @@
     <string name="second_hand_item_sold">נמכר</string>
     <string name="second_hand_item_not_sold">לא נמכר</string>
     <string name="second_hand_item_missing">חסר</string>
+    <string name="second_hand_item_created">הוגש</string>
     <string name="second_hand_item_title">פריט %d</string>
     <string name="add_form">הוספת טופס</string>
     <string name="add">הוסף</string>

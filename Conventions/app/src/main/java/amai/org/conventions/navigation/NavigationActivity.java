@@ -42,6 +42,7 @@ import amai.org.conventions.map.MapActivity;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.notifications.PushNotification;
 import amai.org.conventions.notifications.PushNotificationDialogPresenter;
+import amai.org.conventions.secondhand.SecondHandActivity;
 import amai.org.conventions.settings.SettingsActivity;
 import amai.org.conventions.updates.UpdatesActivity;
 import sff.org.conventions.R;
@@ -184,7 +185,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 			items.add(new NavigationItem(MapActivity.class, getString(R.string.map), ContextCompat.getDrawable(this, android.R.drawable.ic_dialog_map)));
 		}
 		items.add(new NavigationItem(UpdatesActivity.class, getString(R.string.updates), ContextCompat.getDrawable(this, android.R.drawable.stat_notify_sync_noanim)));
-//		items.add(new NavigationItem(SecondHandActivity.class, getString(R.string.second_hand), ContextCompat.getDrawable(this, R.drawable.ic_attach_money_white)));
+		items.add(new NavigationItem(SecondHandActivity.class, getString(R.string.second_hand), ContextCompat.getDrawable(this, R.drawable.ic_attach_money_white)));
 		items.add(new NavigationItem(ArrivalMethodsActivity.class, getString(R.string.arrival_methods), ContextCompat.getDrawable(this, R.drawable.directions)));
 
 		if (Convention.getInstance().canFillFeedback()) {

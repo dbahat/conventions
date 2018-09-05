@@ -114,8 +114,8 @@ public class SecondHand {
 			if (!root.isJsonArray()) {
 				throw new FormNotFoundException();
 			}
-			JsonArray itemsJson = root.getAsJsonArray();
-			return parseForm(itemsJson);
+			JsonArray formJson = root.getAsJsonArray();
+			return parseForm(formJson);
 		} finally {
 			if (reader != null) {
 				reader.close();
@@ -125,36 +125,42 @@ public class SecondHand {
 	}
 
 	@NonNull
-	private SecondHandForm parseForm(JsonArray itemsJson) {
+	private SecondHandForm parseForm(JsonArray formsJson) {
 		SecondHandForm form = new SecondHandForm();
 		List<SecondHandItem> items = new LinkedList<>();
-		boolean first = true;
-		for (int i = 0; i < itemsJson.size(); ++i) {
-			JsonObject itemJson = itemsJson.get(i).getAsJsonObject();
-			if (first) {
-				first = false;
-				String formStatus = itemJson.get("formStatus").getAsString();
-				form.setClosed("closed".equals(formStatus));
-				form.setId(normalizeFormId(itemJson.get("formNumber").getAsString()));
-			}
-			SecondHandItem item = new SecondHandItem();
-			item.setId(itemJson.get("formId").getAsString());
-			if (!itemJson.get("itemDescription").isJsonNull()) {
-				item.setDescription(itemJson.get("itemDescription").getAsString());
-			}
-			item.setStatus(convertItemStatus(itemJson.get("itemStatus").getAsString()));
-			item.setType(itemJson.get("itemCategory").getAsString());
-			JsonElement priceJson = itemJson.get("price");
-			item.setPrice(-1);
-			if (priceJson.isJsonPrimitive() && !priceJson.getAsString().isEmpty()) {
-				try {
-					item.setPrice(priceJson.getAsInt());
-				} catch (NumberFormatException e) {
-					Log.e(TAG, "Price is not a number in item " + item.getId() + ": " + priceJson.getAsString());
+		for (int formIndex = 0; formIndex < formsJson.size(); ++formIndex) {
+			JsonObject formJson = formsJson.get(formIndex).getAsJsonObject();
+			JsonObject formStatusObject = formJson.get("status").getAsJsonObject();
+
+			int formStatusId = formStatusObject.get("id").getAsInt();
+			String formStatusText = formStatusObject.get("text").getAsString();
+			form.setClosed(formStatusId == 3);
+			form.setId(normalizeFormId(formJson.get("id").getAsString()));
+			form.setStatus(formStatusText);
+
+			// Items
+			JsonArray itemsJson = formJson.getAsJsonArray("items");
+			for (int itemIndex = 0; itemIndex < itemsJson.size(); ++itemIndex) {
+				JsonObject itemJson = itemsJson.get(itemIndex).getAsJsonObject();
+				SecondHandItem item = new SecondHandItem();
+				item.setId(itemJson.get("id").getAsString());
+				if (!itemJson.get("description").isJsonNull()) {
+					item.setDescription(itemJson.get("description").getAsString());
 				}
+				item.setStatus(convertItemStatus(itemJson.get("status").getAsJsonObject().get("id").getAsInt()));
+				item.setType(itemJson.get("category").getAsJsonObject().get("text").getAsString());
+				JsonElement priceJson = itemJson.get("price");
+				item.setPrice(-1);
+				if (priceJson.isJsonPrimitive() && !priceJson.getAsString().isEmpty()) {
+					try {
+						item.setPrice(priceJson.getAsInt());
+					} catch (NumberFormatException e) {
+						Log.e(TAG, "Price is not a number in item " + item.getId() + ": " + priceJson.getAsString());
+					}
+				}
+				item.setNumber(itemJson.get("indexInForm").getAsInt());
+				items.add(item);
 			}
-			item.setNumber(itemJson.get("formItemNumber").getAsInt());
-			items.add(item);
 		}
 		if (items.size() == 0) {
 			throw new NoItemsException();
@@ -234,13 +240,15 @@ public class SecondHand {
 		}
 	}
 
-	private SecondHandItem.Status convertItemStatus(String status) {
-		if ("sold".equals(status)) {
+	private SecondHandItem.Status convertItemStatus(int statusId) {
+		if (statusId == 2) { // Not arrived at the stand yet
+			return SecondHandItem.Status.CREATED;
+		} else if (statusId == 3) {
 			return SecondHandItem.Status.SOLD;
-		} else if ("missing".equals(status)) {
+		} else if (statusId == 4) {
 			return SecondHandItem.Status.MISSING;
-		} else { // unsold/withdrawn
-			return SecondHandItem.Status.NOT_SOLD;
+		} else { // in the stand but not sold (or withdrawn)
+			return SecondHandItem.Status.READY;
 		}
 	}
 

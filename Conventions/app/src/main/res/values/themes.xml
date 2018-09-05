@@ -101,8 +101,10 @@
         <item name="secondHandFormClosedColor">?eventTypeEndedColor</item>
         <item name="secondHandItemDefaultColor">?android:textColorSecondary</item>
         <item name="secondHandItemNotSoldColor">?secondHandItemDefaultColor</item>
+        <item name="secondHandItemCreatedColor">?secondHandItemDefaultColor</item>
         <item name="secondHandItemSoldColor">?secondHandItemDefaultColor</item>
         <item name="secondHandItemMissingColor">?secondHandItemDefaultColor</item>
+        <item name="secondHandItemsDivider">@drawable/second_hand_item_list_divider</item>
 
         <!-- Discounts activity -->
         <item name="discountsActivityLayout">@layout/activity_discounts</item>
@@ -209,8 +211,10 @@
         <item name="secondHandFormClosedColor">?eventTypeEndedColor</item>
         <item name="secondHandItemDefaultColor">?android:textColorSecondary</item>
         <item name="secondHandItemNotSoldColor">?secondHandItemDefaultColor</item>
+        <item name="secondHandItemCreatedColor">?secondHandItemDefaultColor</item>
         <item name="secondHandItemSoldColor">?secondHandItemDefaultColor</item>
         <item name="secondHandItemMissingColor">?secondHandItemDefaultColor</item>
+        <item name="secondHandItemsDivider">@drawable/second_hand_item_list_divider</item>
 
         <!-- Discounts activity -->
         <item name="discountsActivityLayout">@layout/activity_discounts</item>

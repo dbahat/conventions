@@ -164,8 +164,10 @@
         <attr name="secondHandFormClosedColor" format="color|reference"/>
         <attr name="secondHandItemDefaultColor" format="color|reference"/>
         <attr name="secondHandItemNotSoldColor" format="color|reference"/>
+        <attr name="secondHandItemCreatedColor" format="color|reference"/>
         <attr name="secondHandItemSoldColor" format="color|reference"/>
         <attr name="secondHandItemMissingColor" format="color|reference"/>
+        <attr name="secondHandItemsDivider" format="color|reference"/>
         <!-- Discounts Screen -->
         <attr name="discountsActivityLayout" format="reference"/>
     </declare-styleable>

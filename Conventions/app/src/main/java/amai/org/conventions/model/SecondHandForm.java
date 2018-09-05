@@ -4,9 +4,10 @@ import java.io.Serializable;
 import java.util.List;
 
 public class SecondHandForm implements Serializable {
-	String id;
-	boolean isClosed;
-	List<SecondHandItem> items;
+	private String id;
+	private boolean isClosed;
+	private List<SecondHandItem> items;
+	private String status;
 
 	public String getId() {
 		return id;
@@ -35,5 +36,13 @@ public class SecondHandForm implements Serializable {
 
 	public List<SecondHandItem> getItems() {
 		return items;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 }

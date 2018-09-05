@@ -68,8 +68,9 @@ public class SecondHandItem implements Serializable {
 	}
 
 	public enum Status {
+		CREATED,
+		READY,
 		SOLD,
-		NOT_SOLD,
 		MISSING;
 	}
 }

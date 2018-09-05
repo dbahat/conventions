@@ -579,7 +579,7 @@ public class Icon2018Convention extends SffConvention {
 	@Override
 	public URL getSecondHandFormURL(String id) {
 		try {
-			return new URL("https://calm-dawn-51174.herokuapp.com/getAllItemsByForm?itemFormId=" + URLEncoder.encode(id, "UTF-8"));
+			return new URL("https://api.sf-f.org.il/yad2/form?formId=" + URLEncoder.encode(id, "UTF-8"));
 		} catch (MalformedURLException|UnsupportedEncodingException e) {
 			return null;
 		}
