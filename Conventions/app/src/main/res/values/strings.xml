@@ -45,13 +45,15 @@
 
     <string name="search_input_search_keyword">הקלד את חיפושך…</string>
     <string name="search_no_results_found">לא נמצאו תוצאות</string>
-    <string name="no_events_found">לא נמצאו אירועים</string>
     <string name="search_filter">סינון</string>
     <string name="search_filter_by_event_type">סוג האירוע</string>
     <string name="search_filter_by_category">רצועות תוכן</string>
     <string name="search_filter_by_tag">תגיות</string>
     <string name="search_filter_select_all">בחר הכל</string>
     <string name="search_filter_clear_all">נקה הכל</string>
+    <string name="no_events_found">לא נמצאו אירועים</string>
+    <string name="events_search_results_number">נמצאו %d אירועים</string>
+    <string name="events_one_search_results_number">נמצא אירוע אחד</string>
 
     <string name="notification_event_about_to_start_title">אירוע עומד להתחיל</string>
     <string name="notification_event_about_to_start_message_format">האירוע %1$s עומד להתחיל באולם %2$s</string>

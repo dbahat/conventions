@@ -16,6 +16,7 @@
 <resources>
     <dimen name="text_size_large_material">22sp</dimen>
     <dimen name="text_size_medium_material">18sp</dimen>
+    <dimen name="text_size_small_material">14sp</dimen>
 
     <!-- Default insets (outer padding) around buttons -->
     <dimen name="button_inset_vertical_material">6dp</dimen>

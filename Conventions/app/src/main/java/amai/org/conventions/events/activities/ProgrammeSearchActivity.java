@@ -49,6 +49,9 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 	private HashSet<SearchFilter> searchFilters;
 
 	private String keywordsFilter;
+	private TextView searchResultsNumber;
+	private TextView searchFilterResultsNumber;
+	private View searchResultsNumberSeparator;
 	private EventsViewListAdapter adapter;
 	private StickyListHeadersListView listView;
 	private TextView noResultsFoundView;
@@ -82,6 +85,8 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 		}
 
 		noResultsFoundView = (TextView) findViewById(R.id.search_no_results_found);
+		searchResultsNumber = findViewById(R.id.search_results_number);
+		searchResultsNumberSeparator = findViewById(R.id.search_results_number_separator);
 		drawerLayout = (DrawerLayout) findViewById(R.id.search_drawer_layout);
 
 		initializeEventsList();
@@ -89,6 +94,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 
 		applyFiltersInBackground();
 
+		searchFilterResultsNumber = findViewById(R.id.search_filter_results_number);
 		filterButton = (ImageButton) findViewById(R.id.search_filter_button);
 		refreshFilterButton();
 
@@ -269,7 +275,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 			@Override
 			protected void onPostExecute(List<ConventionEvent> events) {
 				adapter.setItems(events);
-				setNoResultsVisibility(adapter.getCount());
+				updateSearchResultsNumber(adapter.getCount());
 
 				refreshFilterButton();
 			}
@@ -366,14 +372,27 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 		return events;
 	}
 
-	private void setNoResultsVisibility(int resultsNumber) {
+	private void updateSearchResultsNumber(int resultsNumber) {
 		// Show the "no results found" message if there are no results after applying the filters
 		if (resultsNumber == 0) {
 			noResultsFoundView.setVisibility(View.VISIBLE);
 			listView.setVisibility(View.GONE);
+			searchResultsNumberSeparator.setVisibility(View.GONE);
+			searchResultsNumber.setVisibility(View.GONE);
+			searchFilterResultsNumber.setText(getString(R.string.no_events_found));
 		} else {
 			noResultsFoundView.setVisibility(View.GONE);
 			listView.setVisibility(View.VISIBLE);
+			searchResultsNumberSeparator.setVisibility(View.VISIBLE);
+			searchResultsNumber.setVisibility(View.VISIBLE);
+			String searchResultsText;
+			if (resultsNumber == 1) {
+				searchResultsText = getString(R.string.events_one_search_results_number);
+			} else {
+				searchResultsText = getString(R.string.events_search_results_number, resultsNumber);
+			}
+			searchResultsNumber.setText(searchResultsText);
+			searchFilterResultsNumber.setText(searchResultsText);
 		}
 	}
 

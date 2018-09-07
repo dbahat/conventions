@@ -52,6 +52,24 @@
             android:layout_marginStart="?contentStartMargin"
             android:layout_marginEnd="?contentEndMargin"/>
 
+        <TextView
+            android:id="@+id/search_results_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?android:textColorPrimary"
+            android:layout_marginStart="?contentStartMargin"
+            android:layout_marginEnd="?contentEndMargin"
+            android:textSize="@dimen/text_size_small_material"
+            />
+
+        <View
+            android:id="@+id/search_results_number_separator"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?separatorColor"
+            android:layout_marginStart="?contentStartMargin"
+            android:layout_marginEnd="?contentEndMargin"/>
+
         <se.emilsjolander.stickylistheaders.StickyListHeadersListView
             android:id="@+id/searchEventsList"
             app:isDrawingListUnderStickyHeader="false"
@@ -72,7 +90,7 @@
             android:layout_marginStart="?contentStartMargin"
             android:layout_marginEnd="?contentEndMargin"
             android:padding="25dp"
-            android:text="@string/search_no_results_found" />
+            android:text="@string/no_events_found" />
 
     </LinearLayout>
 
