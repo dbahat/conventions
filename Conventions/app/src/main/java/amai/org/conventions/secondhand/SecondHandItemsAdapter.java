@@ -132,6 +132,14 @@ public class SecondHandItemsAdapter extends BaseAdapter implements StickyListHea
 		}
 	}
 
+	public int getLastFormPosition() {
+		int position = 0;
+		if (forms.size() > 0) {
+			position = items.size() - forms.get(forms.size() - 1).getItems().size();
+		}
+		return position;
+	}
+
 	@Override
 	public void notifyDataSetChanged() {
 		setForms(forms);

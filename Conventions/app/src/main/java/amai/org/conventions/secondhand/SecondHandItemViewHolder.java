@@ -100,21 +100,18 @@ class SecondHandItemViewHolder extends RecyclerView.ViewHolder {
 		});
 		int statusColor;
 		int titleColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandFormOpenColor);
+		itemStatusView.setText(newItem.getStatusText());
 		switch (newItem.getStatus()) {
 			case CREATED:
-				itemStatusView.setText(R.string.second_hand_item_created);
 				statusColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandItemCreatedColor);
 				break;
 			case SOLD:
-				itemStatusView.setText(R.string.second_hand_item_sold);
 				statusColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandItemSoldColor);
 				break;
 			case MISSING:
-				itemStatusView.setText(R.string.second_hand_item_missing);
 				statusColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandItemMissingColor);
 				break;
-			default:
-				itemStatusView.setText(R.string.second_hand_item_not_sold);
+			default: // In the stand or withdrawn
 				statusColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandItemNotSoldColor);
 				break;
 		}

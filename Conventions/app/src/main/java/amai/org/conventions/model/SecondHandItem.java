@@ -9,6 +9,7 @@ public class SecondHandItem implements Serializable {
 	private String userDescription;
 	private int price = -1; // Unknown
 	private Status status;
+	private String statusText;
 	private int number;
 
 	public String getId() {
@@ -41,6 +42,14 @@ public class SecondHandItem implements Serializable {
 
 	public void setStatus(Status status) {
 		this.status = status;
+	}
+
+	public String getStatusText() {
+		return statusText;
+	}
+
+	public void setStatusText(String statusText) {
+		this.statusText = statusText;
 	}
 
 	public int getPrice() {

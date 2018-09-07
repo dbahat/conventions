@@ -147,7 +147,9 @@ public class SecondHand {
 				if (!itemJson.get("description").isJsonNull()) {
 					item.setDescription(itemJson.get("description").getAsString());
 				}
-				item.setStatus(convertItemStatus(itemJson.get("status").getAsJsonObject().get("id").getAsInt()));
+				JsonObject statusObject = itemJson.get("status").getAsJsonObject();
+				item.setStatus(convertItemStatus(statusObject.get("id").getAsInt()));
+				item.setStatusText(statusObject.get("text").getAsString());
 				item.setType(itemJson.get("category").getAsJsonObject().get("text").getAsString());
 				JsonElement priceJson = itemJson.get("price");
 				item.setPrice(-1);

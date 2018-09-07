@@ -86,6 +86,10 @@ public class SecondHandActivity extends NavigationActivity implements SwipeRefre
 							@Override
 							public void onClick(DialogInterface dialogInterface, int i) {
 								final String id = formIdText.getText().toString();
+								if (!isInteger(id)) {
+									Toast.makeText(SecondHandActivity.this, R.string.form_id_not_a_number, Toast.LENGTH_LONG).show();
+									return;
+								}
 								isAddingItem = true;
 								updateRefreshing();
 								new AsyncTask<Void, Void, Exception>() {
@@ -105,13 +109,10 @@ public class SecondHandActivity extends NavigationActivity implements SwipeRefre
 										updateRefreshing();
 										if (exception == null) {
 											adapter.notifyDataSetChanged();
-											// Scrolling to last position because the calculation of the scroll positions
-											// doesn't work well for the sticky headers lis view and the new form will always
-											// be last, and will contain at most 6 items, so they should all show up on the screen
 											listView.post(new Runnable() {
 												@Override
 												public void run() {
-													listView.smoothScrollToPosition(adapter.getCount() - 1);
+													listView.smoothScrollToPosition(adapter.getLastFormPosition());
 												}
 											});
 										} else {
@@ -151,6 +152,15 @@ public class SecondHandActivity extends NavigationActivity implements SwipeRefre
 					onRefresh();
 				}
 			});
+		}
+	}
+
+	private boolean isInteger(String string) {
+		try {
+			Integer.valueOf(string);
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
 		}
 	}
 
