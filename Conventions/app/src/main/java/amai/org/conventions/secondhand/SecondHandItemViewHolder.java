@@ -99,29 +99,36 @@ class SecondHandItemViewHolder extends RecyclerView.ViewHolder {
 			}
 		});
 		int statusColor;
-		int titleColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandFormOpenColor);
+		int titleColor;
+		int itemIdColor;
 		itemStatusView.setText(newItem.getStatusText());
-		switch (newItem.getStatus()) {
-			case CREATED:
-				statusColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandItemCreatedColor);
-				break;
-			case SOLD:
-				statusColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandItemSoldColor);
-				break;
-			case MISSING:
-				statusColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandItemMissingColor);
-				break;
-			default: // In the stand or withdrawn
-				statusColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandItemNotSoldColor);
-				break;
-		}
 		if (isFormClosed) {
-			titleColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandFormClosedColor);
-			statusColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandItemDefaultColor);;
+			int formClosedColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandFormClosedColor);
+			titleColor = formClosedColor;
+			statusColor = formClosedColor;;
+			itemIdColor = formClosedColor;
+		} else {
+			titleColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandFormOpenColor);
+			itemIdColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandItemDefaultColor);
+			switch (newItem.getStatus()) {
+				case CREATED:
+					statusColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandItemCreatedColor);
+					break;
+				case SOLD:
+					statusColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandItemSoldColor);
+					break;
+				case MISSING:
+					statusColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandItemMissingColor);
+					break;
+				default: // In the stand or withdrawn
+					statusColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandItemNotSoldColor);
+					break;
+			}
 		}
 		itemNameView.setTextColor(titleColor);
 		itemEditButton.setColorFilter(titleColor, PorterDuff.Mode.SRC_ATOP);
 		itemStatusView.setTextColor(statusColor);
+		itemIdView.setTextColor(itemIdColor);
 	}
 
 	private void refreshItemNameText() {

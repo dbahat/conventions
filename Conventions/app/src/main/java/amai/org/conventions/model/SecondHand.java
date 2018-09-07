@@ -133,8 +133,9 @@ public class SecondHand {
 			JsonObject formStatusObject = formJson.get("status").getAsJsonObject();
 
 			int formStatusId = formStatusObject.get("id").getAsInt();
-			String formStatusText = formStatusObject.get("text").getAsString();
 			form.setClosed(formStatusId == 3);
+
+			String formStatusText = formStatusObject.get("text").getAsString();
 			form.setId(normalizeFormId(formJson.get("id").getAsString()));
 			form.setStatus(formStatusText);
 

@@ -126,7 +126,7 @@
         <item name="secondHandFormClosedColor">@color/icon2018_green1</item>
         <item name="secondHandItemDefaultColor">@color/icon2018_purple1</item>
         <item name="secondHandItemCreatedColor">@color/icon2018_purple3</item>
-        <item name="secondHandItemSoldColor">@color/icon2018_green3</item>
+        <item name="secondHandItemSoldColor">@color/icon2018_green2</item>
         <item name="secondHandItemMissingColor">@color/icon2018_orange</item>
         <item name="secondHandItemsDivider">@drawable/icon2018_second_hand_item_list_divider</item>
         <!-- TODO Discounts activity -->
