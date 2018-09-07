@@ -40,6 +40,8 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 	private EventsViewListAdapter adapter;
 	private StickyListHeadersListView listView;
 	private TextView noResultsFoundView;
+	private TextView searchResultsNumber;
+	private View searchResultsNumberSeparator;
 
 	private AsyncTask<Void, Void, List<ConventionEvent>> currentFilterProcessingTask;
 
@@ -62,6 +64,8 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 			eventTypeFilter = new LinkedList<>();
 		}
 
+		searchResultsNumber = findViewById(R.id.search_results_number);
+		searchResultsNumberSeparator = findViewById(R.id.search_results_number_separator);
 		noResultsFoundView = (TextView) findViewById(R.id.search_no_results_found);
 
 		initializeEventsList();
@@ -187,7 +191,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 					@Override
 					public void run() {
 						adapter.setItems(events);
-						setNoResultsVisibility(adapter.getCount());
+						updateSearchResultsNumber(adapter.getCount());
 					}
 				}, uiUpdateDelayTime);
 			}
@@ -217,14 +221,25 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 		return events;
 	}
 
-	private void setNoResultsVisibility(int resultsNumber) {
+	private void updateSearchResultsNumber(int resultsNumber) {
 		// Show the "no results found" message if there are no results after applying the filters
 		if (resultsNumber == 0) {
 			noResultsFoundView.setVisibility(View.VISIBLE);
 			listView.setVisibility(View.GONE);
+			searchResultsNumberSeparator.setVisibility(View.GONE);
+			searchResultsNumber.setVisibility(View.GONE);
 		} else {
 			noResultsFoundView.setVisibility(View.GONE);
 			listView.setVisibility(View.VISIBLE);
+			searchResultsNumberSeparator.setVisibility(View.VISIBLE);
+			searchResultsNumber.setVisibility(View.VISIBLE);
+			String searchResultsText;
+			if (resultsNumber == 1) {
+				searchResultsText = getString(R.string.events_one_search_results_number);
+			} else {
+				searchResultsText = getString(R.string.events_search_results_number, resultsNumber);
+			}
+			searchResultsNumber.setText(searchResultsText);
 		}
 	}
 
