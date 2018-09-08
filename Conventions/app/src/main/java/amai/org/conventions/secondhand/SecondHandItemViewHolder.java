@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import amai.org.conventions.ThemeAttributes;
+import amai.org.conventions.model.SecondHandForm;
 import amai.org.conventions.model.SecondHandItem;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Log;
@@ -34,9 +35,11 @@ class SecondHandItemViewHolder extends RecyclerView.ViewHolder {
 		itemStatusView = itemView.findViewById(R.id.second_hand_item_status);
 	}
 
-	public void setItem(SecondHandItem newItem, boolean isFormClosed) {
+	public void setItem(SecondHandItem newItem, SecondHandForm form) {
 		this.item = newItem;
-		itemIdView.setText(newItem.getId());
+		String itemId = itemView.getContext().getString(R.string.second_hand_item_id_format,
+				padWithZeros(form.getId(), 3), padWithZeros(newItem.getNumber(), 2));
+		itemIdView.setText(itemView.getContext().getString(R.string.second_hand_item_id, itemId));
 		refreshItemNameText();
 		itemEditButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -102,7 +105,7 @@ class SecondHandItemViewHolder extends RecyclerView.ViewHolder {
 		int titleColor;
 		int itemIdColor;
 		itemStatusView.setText(newItem.getStatusText());
-		if (isFormClosed) {
+		if (form.isClosed()) {
 			int formClosedColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandFormClosedColor);
 			titleColor = formClosedColor;
 			statusColor = formClosedColor;;
@@ -146,5 +149,18 @@ class SecondHandItemViewHolder extends RecyclerView.ViewHolder {
 			itemName += " (" + item.getType() + ")";
 		}
 		this.itemNameView.setText(itemName);
+	}
+
+	private String padWithZeros(int id, int numberOfDigits) {
+		return padWithZeros("" + id, numberOfDigits);
+	}
+
+	private String padWithZeros(String id, int numberOfCharacters) {
+		StringBuilder idBuilder = new StringBuilder(id);
+		while (idBuilder.length() < numberOfCharacters) {
+			idBuilder.insert(0, "0");
+		}
+		id = idBuilder.toString();
+		return id;
 	}
 }

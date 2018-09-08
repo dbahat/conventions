@@ -109,7 +109,7 @@ public class SecondHandItemsAdapter extends BaseAdapter implements StickyListHea
 			holder = (SecondHandItemViewHolder) convertView.getTag();
 		}
 
-		holder.setItem(items.get(position), itemIndexToForm.get(position).isClosed());
+		holder.setItem(items.get(position), itemIndexToForm.get(position));
 		return convertView;
 	}
 

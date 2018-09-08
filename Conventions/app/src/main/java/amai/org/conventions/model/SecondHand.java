@@ -58,7 +58,7 @@ public class SecondHand {
 			request.connect();
 
 			InputStreamReader reader = null;
-			List<SecondHandForm> newForms = new LinkedList<>();
+			List<SecondHandForm> newForms;
 			try {
 				int responseCode = request.getResponseCode();
 				if (responseCode != 200) {
@@ -68,15 +68,14 @@ public class SecondHand {
 				JsonParser jp = new JsonParser();
 				JsonElement root = jp.parse(reader);
 				JsonArray formsJson = root.getAsJsonArray();
-				for (int i = 0; i < formsJson.size(); ++i) {
-					JsonArray itemsJson = formsJson.get(i).getAsJsonArray();
-					SecondHandForm newForm = parseForm(itemsJson);
-					for (SecondHandItem item : newForm.getItems()) {
+				newForms = parseForms(formsJson);
+				// Set items user descriptions
+				for (SecondHandForm form : newForms) {
+					for (SecondHandItem item : form.getItems()) {
 						if (userDescriptions.get(item.getId()) != null) {
 							item.setUserDescription(userDescriptions.get(item.getId()));
 						}
 					}
-					newForms.add(newForm);
 				}
 			} finally {
 				if (reader != null) {
@@ -115,7 +114,12 @@ public class SecondHand {
 				throw new FormNotFoundException();
 			}
 			JsonArray formJson = root.getAsJsonArray();
-			return parseForm(formJson);
+			List<SecondHandForm> forms = parseForms(formJson);
+			if (forms.size() == 0) {
+				throw new FormNotFoundException();
+			}
+			// Ignoring the case that more than 1 form is returned from this API as it shouldn't happen
+			return forms.get(0);
 		} finally {
 			if (reader != null) {
 				reader.close();
@@ -125,45 +129,35 @@ public class SecondHand {
 	}
 
 	@NonNull
-	private SecondHandForm parseForm(JsonArray formsJson) {
-		SecondHandForm form = new SecondHandForm();
-		List<SecondHandItem> items = new LinkedList<>();
+	private List<SecondHandForm> parseForms(JsonArray formsJson) {
+		List<SecondHandForm> forms = new ArrayList<>(formsJson.size());
 		for (int formIndex = 0; formIndex < formsJson.size(); ++formIndex) {
 			JsonObject formJson = formsJson.get(formIndex).getAsJsonObject();
-			JsonObject formStatusObject = formJson.get("status").getAsJsonObject();
+			SecondHandForm form = parseForm(formJson);
+			forms.add(form);
+		}
+		return forms;
+	}
 
-			int formStatusId = formStatusObject.get("id").getAsInt();
-			form.setClosed(formStatusId == 3);
+	@NonNull
+	private SecondHandForm parseForm(JsonObject formJson) {
+		SecondHandForm form = new SecondHandForm();
+		List<SecondHandItem> items = new LinkedList<>();
+		JsonObject formStatusObject = formJson.get("status").getAsJsonObject();
 
-			String formStatusText = formStatusObject.get("text").getAsString();
-			form.setId(normalizeFormId(formJson.get("id").getAsString()));
-			form.setStatus(formStatusText);
+		int formStatusId = formStatusObject.get("id").getAsInt();
+		form.setClosed(formStatusId == 3);
 
-			// Items
-			JsonArray itemsJson = formJson.getAsJsonArray("items");
-			for (int itemIndex = 0; itemIndex < itemsJson.size(); ++itemIndex) {
-				JsonObject itemJson = itemsJson.get(itemIndex).getAsJsonObject();
-				SecondHandItem item = new SecondHandItem();
-				item.setId(itemJson.get("id").getAsString());
-				if (!itemJson.get("description").isJsonNull()) {
-					item.setDescription(itemJson.get("description").getAsString());
-				}
-				JsonObject statusObject = itemJson.get("status").getAsJsonObject();
-				item.setStatus(convertItemStatus(statusObject.get("id").getAsInt()));
-				item.setStatusText(statusObject.get("text").getAsString());
-				item.setType(itemJson.get("category").getAsJsonObject().get("text").getAsString());
-				JsonElement priceJson = itemJson.get("price");
-				item.setPrice(-1);
-				if (priceJson.isJsonPrimitive() && !priceJson.getAsString().isEmpty()) {
-					try {
-						item.setPrice(priceJson.getAsInt());
-					} catch (NumberFormatException e) {
-						Log.e(TAG, "Price is not a number in item " + item.getId() + ": " + priceJson.getAsString());
-					}
-				}
-				item.setNumber(itemJson.get("indexInForm").getAsInt());
-				items.add(item);
-			}
+		String formStatusText = formStatusObject.get("text").getAsString();
+		form.setId(normalizeFormId(formJson.get("id").getAsString()));
+		form.setStatus(formStatusText);
+
+		// Items
+		JsonArray itemsJson = formJson.getAsJsonArray("items");
+		for (int itemIndex = 0; itemIndex < itemsJson.size(); ++itemIndex) {
+			JsonObject itemJson = itemsJson.get(itemIndex).getAsJsonObject();
+			SecondHandItem item = parseFormItem(itemJson, form);
+			items.add(item);
 		}
 		if (items.size() == 0) {
 			throw new NoItemsException();
@@ -176,6 +170,30 @@ public class SecondHand {
 		});
 		form.setItems(items);
 		return form;
+	}
+
+	@NonNull
+	private SecondHandItem parseFormItem(JsonObject itemJson, SecondHandForm form) {
+		SecondHandItem item = new SecondHandItem();
+		if (!itemJson.get("description").isJsonNull()) {
+			item.setDescription(itemJson.get("description").getAsString());
+		}
+		JsonObject statusObject = itemJson.get("status").getAsJsonObject();
+		item.setStatus(convertItemStatus(statusObject.get("id").getAsInt()));
+		item.setStatusText(statusObject.get("text").getAsString());
+		item.setType(itemJson.get("category").getAsJsonObject().get("text").getAsString());
+		JsonElement priceJson = itemJson.get("price");
+		item.setPrice(-1);
+		if (priceJson.isJsonPrimitive() && !priceJson.getAsString().isEmpty()) {
+			try {
+				item.setPrice(priceJson.getAsInt());
+			} catch (NumberFormatException e) {
+				Log.e(TAG, "Price is not a number in item " + item.getId() + ": " + priceJson.getAsString());
+			}
+		}
+		item.setNumber(itemJson.get("indexInForm").getAsInt());
+		item.setId(itemJson.get("id").getAsString());
+		return item;
 	}
 
 	public void save() {
