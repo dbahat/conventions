@@ -11,6 +11,7 @@ import com.google.gson.JsonParser;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -50,39 +51,50 @@ public class SecondHand {
 				}
 			}
 
+			List<SecondHandForm> newForms;
 			List<String> formIds = new ArrayList<>(forms.size());
 			for (SecondHandForm form : forms) {
 				formIds.add(form.getId());
 			}
-			HttpURLConnection request = HttpConnectionCreator.createConnection(Convention.getInstance().getSecondHandFormsURL(formIds));
-			request.connect();
+			URL refreshURL = Convention.getInstance().getSecondHandFormsURL(formIds);
+			if (refreshURL != null) {
+				HttpURLConnection request = HttpConnectionCreator.createConnection(Convention.getInstance().getSecondHandFormsURL(formIds));
+				request.connect();
 
-			InputStreamReader reader = null;
-			List<SecondHandForm> newForms;
-			try {
-				int responseCode = request.getResponseCode();
-				if (responseCode != 200) {
-					throw new RuntimeException("Could not read forms " + formIds + " , error code: " + responseCode);
+				InputStreamReader reader = null;
+				try {
+					int responseCode = request.getResponseCode();
+					if (responseCode != 200) {
+						throw new RuntimeException("Could not read forms " + formIds + " , error code: " + responseCode);
+					}
+					reader = new InputStreamReader((InputStream) request.getContent());
+					JsonParser jp = new JsonParser();
+					JsonElement root = jp.parse(reader);
+					JsonArray formsJson = root.getAsJsonArray();
+					newForms = parseForms(formsJson);
+				} finally {
+					if (reader != null) {
+						reader.close();
+					}
+					request.disconnect();
 				}
-				reader = new InputStreamReader((InputStream) request.getContent());
-				JsonParser jp = new JsonParser();
-				JsonElement root = jp.parse(reader);
-				JsonArray formsJson = root.getAsJsonArray();
-				newForms = parseForms(formsJson);
-				// Set items user descriptions
-				for (SecondHandForm form : newForms) {
-					for (SecondHandItem item : form.getItems()) {
-						if (userDescriptions.get(item.getId()) != null) {
-							item.setUserDescription(userDescriptions.get(item.getId()));
-						}
+			} else {
+				// Temporary fix for refresh until we have refresh API
+				newForms = new ArrayList<>(forms.size());
+				for (SecondHandForm form : forms) {
+					newForms.add(readForm(form.getId()));
+				}
+			}
+
+			// Set items user descriptions
+			for (SecondHandForm form : newForms) {
+				for (SecondHandItem item : form.getItems()) {
+					if (userDescriptions.get(item.getId()) != null) {
+						item.setUserDescription(userDescriptions.get(item.getId()));
 					}
 				}
-			} finally {
-				if (reader != null) {
-					reader.close();
-				}
-				request.disconnect();
 			}
+
 			forms = newForms;
 			save();
 			return true;
@@ -156,7 +168,7 @@ public class SecondHand {
 		JsonArray itemsJson = formJson.getAsJsonArray("items");
 		for (int itemIndex = 0; itemIndex < itemsJson.size(); ++itemIndex) {
 			JsonObject itemJson = itemsJson.get(itemIndex).getAsJsonObject();
-			SecondHandItem item = parseFormItem(itemJson, form);
+			SecondHandItem item = parseFormItem(itemJson);
 			items.add(item);
 		}
 		if (items.size() == 0) {
@@ -173,7 +185,7 @@ public class SecondHand {
 	}
 
 	@NonNull
-	private SecondHandItem parseFormItem(JsonObject itemJson, SecondHandForm form) {
+	private SecondHandItem parseFormItem(JsonObject itemJson) {
 		SecondHandItem item = new SecondHandItem();
 		if (!itemJson.get("description").isJsonNull()) {
 			item.setDescription(itemJson.get("description").getAsString());
