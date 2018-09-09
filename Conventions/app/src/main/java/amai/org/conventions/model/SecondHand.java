@@ -274,7 +274,7 @@ public class SecondHand {
 	}
 
 	private SecondHandItem.Status convertItemStatus(int statusId) {
-		if (statusId == 2) { // Not arrived at the stand yet
+		if (statusId == 1) { // Not arrived at the stand yet
 			return SecondHandItem.Status.CREATED;
 		} else if (statusId == 3) {
 			return SecondHandItem.Status.SOLD;
