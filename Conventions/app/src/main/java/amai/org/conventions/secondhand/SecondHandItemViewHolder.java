@@ -26,6 +26,7 @@ class SecondHandItemViewHolder extends RecyclerView.ViewHolder {
 	private final ImageView itemEditButton;
 	private final TextView itemNameView;
 	private final TextView itemStatusView;
+	private final TextView itemPriceView;
 
 	public SecondHandItemViewHolder(View itemView) {
 		super(itemView);
@@ -33,13 +34,14 @@ class SecondHandItemViewHolder extends RecyclerView.ViewHolder {
 		itemEditButton = itemView.findViewById(R.id.second_hand_item_edit);
 		itemNameView = itemView.findViewById(R.id.second_hand_item_name);
 		itemStatusView = itemView.findViewById(R.id.second_hand_item_status);
+		itemPriceView = itemView.findViewById(R.id.second_hand_item_price);
 	}
 
 	public void setItem(SecondHandItem newItem, SecondHandForm form) {
 		this.item = newItem;
 		String itemId = itemView.getContext().getString(R.string.second_hand_item_id_format,
 				padWithZeros(form.getId(), 3), padWithZeros(newItem.getNumber(), 2));
-		itemIdView.setText(itemView.getContext().getString(R.string.second_hand_item_id, itemId));
+		itemIdView.setText(itemId);
 		refreshItemNameText();
 		itemEditButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -104,6 +106,12 @@ class SecondHandItemViewHolder extends RecyclerView.ViewHolder {
 		int statusColor;
 		int titleColor;
 		int itemIdColor;
+		if (item.getPrice() == -1) {
+			itemPriceView.setVisibility(View.GONE);
+		} else {
+			itemPriceView.setVisibility(View.VISIBLE);
+			itemPriceView.setText(itemView.getContext().getString(R.string.second_hand_item_price, item.getPrice()));
+		}
 		itemStatusView.setText(newItem.getStatusText());
 		if (form.isClosed()) {
 			int formClosedColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandFormClosedColor);
@@ -132,6 +140,7 @@ class SecondHandItemViewHolder extends RecyclerView.ViewHolder {
 		itemEditButton.setColorFilter(titleColor, PorterDuff.Mode.SRC_ATOP);
 		itemStatusView.setTextColor(statusColor);
 		itemIdView.setTextColor(itemIdColor);
+		itemPriceView.setTextColor(titleColor);
 	}
 
 	private void refreshItemNameText() {
