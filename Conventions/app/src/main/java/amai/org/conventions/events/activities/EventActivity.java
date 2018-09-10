@@ -636,8 +636,12 @@ public class EventActivity extends NavigationActivity {
 		} else {
 			ticketsText = getString(R.string.tickets_are_available);
 		}
-		if (BuildConfig.DEBUG && eventAvailableTickets > 0) {
-			ticketsText += " (" + eventAvailableTickets + ")";
+		if (BuildConfig.DEBUG) {
+			if (event.getTicketsLimit() > -1) {
+				ticketsText += " (" + eventAvailableTickets + "/" + event.getTicketsLimit() + ")";
+			} else {
+				ticketsText += " (" + eventAvailableTickets + ")";
+			}
 		}
 
 		Date ticketsModifiedDate = event.getTicketsLastModifiedDate();

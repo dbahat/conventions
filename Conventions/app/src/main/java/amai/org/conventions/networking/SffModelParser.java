@@ -93,11 +93,15 @@ public class SffModelParser implements ModelParser {
 			}
 
 			int availableTickets;
+			int ticketsLimit;
 			JsonElement availableTicketsElement = eventObj.get("available_tickets");
-			if (availableTicketsElement == null || eventObj.get("ticket_limit") == null || eventObj.get("ticket_limit").isJsonNull()) {
+			JsonElement ticketsLimitElement = eventObj.get("ticket_limit");
+			if (availableTicketsElement == null || ticketsLimitElement == null || ticketsLimitElement.isJsonNull()) {
 				availableTickets = -1;
+				ticketsLimit = -1;
 			} else {
 				availableTickets = availableTicketsElement.getAsInt();
+				ticketsLimit = ticketsLimitElement.getAsInt();
 			}
 
 			String websiteUrl = eventObj.get("url").getAsString();
@@ -116,6 +120,7 @@ public class SffModelParser implements ModelParser {
 					.withTags(tags)
 					.withPrice(price)
 					.withAvailableTickets(availableTickets)
+					.withTicketsLimit(ticketsLimit)
 					.withTicketsLastModifiedDate(modifiedDate)
 					.withWebsiteUrl(websiteUrl);
 
