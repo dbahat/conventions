@@ -7,35 +7,46 @@
       android:paddingStart="20dp"
       android:paddingEnd="20dp">
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_marginStart="?contentStartMargin"
         android:layout_marginEnd="?contentEndMargin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/second_hand_form_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="Form 005"
+                android:padding="5dp"/>
+            <TextView
+                android:id="@+id/second_hand_form_status"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                tools:text="(closed)"
+                android:textSize="18sp"
+                android:padding="5dp"/>
+            <Button
+                android:id="@+id/second_hand_form_delete"
+                style="@style/BorderlessButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="@string/delete"
+                android:padding="5dp"/>
+        </LinearLayout>
         <TextView
-            android:id="@+id/second_hand_form_name"
+            android:id="@+id/second_hand_form_sold_items_total"
+            tools:text="This form has sold items of 50 NIS"
+            android:textSize="12sp"
+            android:padding="5dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            tools:text="Form 005"
-            android:padding="5dp"/>
-        <TextView
-            android:id="@+id/second_hand_form_status"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            tools:text="(closed)"
-            android:textSize="18sp"
-            android:padding="5dp"/>
-        <Button
-            android:id="@+id/second_hand_form_delete"
-            style="@style/BorderlessButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:text="@string/delete"
-            android:padding="5dp"/>
+            android:layout_height="wrap_content" />
     </LinearLayout>
-
 </FrameLayout>

@@ -201,6 +201,11 @@
     <string name="second_hand_item_edit_instructions">הכנס שם חדש לפריט:</string>
     <string name="second_hand_item_id_format">%s/%s</string>
     <string name="second_hand_item_price">%d ש\"ח</string>
+    <string name="second_hand_sold_forms_notification_title">פרטי יד שנייה נמכרו</string>
+    <string name="second_hand_sold_forms_notification">כל הפריטים של טפסים מספר %s נמכרו ב-%d ש\"ח</string>
+    <string name="second_hand_sold_form_notification">כל הפריטים של טופס מספר %s נמכרו ב-%d ש\"ח</string>
+    <string name="second_hand_form_sold_items_total">בטופס זה נמכרו %d פריטים בסך %d ש\"ח</string>
+    <string name="second_hand_form_sold_item_total">בטופס זה נמכר פריט אחד בסך %d ש\"ח</string>
     <string name="cancel2">ביטול</string>
     <string name="add_events_failed">לא ניתן להוסיף אירועים, בדוק חיבור לאינטרנט</string>
     <string name="several_events_added">נוספו %d אירועים</string>

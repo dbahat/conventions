@@ -11,27 +11,24 @@ import android.support.v7.app.AlertDialog;
 import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Date;
-
-import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.SecondHand;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
-import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 import sff.org.conventions.R;
 
 public class SecondHandActivity extends NavigationActivity implements SwipeRefreshLayout.OnRefreshListener {
 	private static final String TAG = SecondHandActivity.class.getCanonicalName();
-	private static final long MINIMUM_REFRESH_TIME = Dates.MILLISECONDS_IN_HOUR;
 
 	private SwipeRefreshLayout swipeRefreshLayout;
 	private View noForms;
 	private StickyListHeadersListView listView;
+	private TextView soldFormsTotal;
 	private SecondHandItemsAdapter adapter;
 	private SecondHand secondHand;
 	private boolean isRefreshing;
@@ -45,10 +42,12 @@ public class SecondHandActivity extends NavigationActivity implements SwipeRefre
 
 		secondHand = Convention.getInstance().getSecondHand();
 		swipeRefreshLayout = findViewById(R.id.second_hand_swipe_layout);
+		soldFormsTotal = findViewById(R.id.second_hand_sold_forms_total);
 		noForms = findViewById(R.id.second_hand_no_forms_found);
 		listView = findViewById(R.id.second_hand_form_items_list);
 		adapter = new SecondHandItemsAdapter(secondHand.getForms());
 		listView.setAdapter(adapter);
+		updateSoldForms();
 
 		isRefreshing = false;
 		isAddingItem = false;
@@ -69,6 +68,7 @@ public class SecondHandActivity extends NavigationActivity implements SwipeRefre
 			@Override
 			public void onChanged() {
 				updateListVisibility();
+				updateSoldForms();
 			}
 		});
 
@@ -143,7 +143,7 @@ public class SecondHandActivity extends NavigationActivity implements SwipeRefre
 			}
 		});
 
-		if (shouldAutoRefresh()) {
+		if (secondHand.shouldAutoRefresh()) {
 			swipeRefreshLayout.post(new Runnable() {
 				@Override
 				public void run() {
@@ -180,7 +180,7 @@ public class SecondHandActivity extends NavigationActivity implements SwipeRefre
 		new AsyncTask<Void, Void, Boolean>() {
 			@Override
 			protected Boolean doInBackground(Void... params) {
-				return secondHand.refresh();
+				return secondHand.refresh(true);
 			}
 
 			@Override
@@ -191,24 +191,19 @@ public class SecondHandActivity extends NavigationActivity implements SwipeRefre
 				adapter.notifyDataSetChanged();
 				if (!success) {
 					Toast.makeText(SecondHandActivity.this, R.string.update_refresh_failed, Toast.LENGTH_LONG).show();
-				} else {
-					ConventionsApplication.settings.setLastSecondHandUpdatedDate();
 				}
 			}
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	private boolean shouldAutoRefresh() {
-		// Don't try to refresh if there is nothing to update
-		if (secondHand.getForms().size() == 0) {
-			return false;
+	private void updateSoldForms() {
+		String soldFormsMessage = secondHand.getSoldFormsMessage(SecondHandActivity.this);
+		if (soldFormsMessage != null && !soldFormsMessage.isEmpty()) {
+			soldFormsTotal.setVisibility(View.VISIBLE);
+			soldFormsTotal.setText(soldFormsMessage);
+		} else {
+			soldFormsTotal.setVisibility(View.GONE);
 		}
-		// Only refresh if it hasn't been an hour since the previous refresh
-		Date lastUpdate = ConventionsApplication.settings.getLastSecondHandUpdateDate();
-		if (lastUpdate != null && Dates.now().getTime() - lastUpdate.getTime() < MINIMUM_REFRESH_TIME) {
-			return false;
-		}
-		return true;
 	}
 
 	private void updateRefreshing() {

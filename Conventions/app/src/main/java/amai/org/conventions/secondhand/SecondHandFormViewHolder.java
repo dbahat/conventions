@@ -13,6 +13,7 @@ class SecondHandFormViewHolder extends RecyclerView.ViewHolder {
 	private FormEventListener formDeletedListener;
 	private final TextView formName;
 	private final TextView formStatus;
+	private final TextView formSoldItemsTotal;
 
 	public SecondHandFormViewHolder(View itemView) {
 		super(itemView);
@@ -26,20 +27,37 @@ class SecondHandFormViewHolder extends RecyclerView.ViewHolder {
 		});
 		formName = itemView.findViewById(R.id.second_hand_form_name);
 		formStatus = itemView.findViewById(R.id.second_hand_form_status);
+		formSoldItemsTotal = itemView.findViewById(R.id.second_hand_form_sold_items_total);
 	}
 
 	public void setForm(SecondHandForm form) {
 		this.form = form;
+		int color;
 		formName.setText(itemView.getContext().getString(R.string.second_hand_form_name, form.getId()));
 		if (form.isClosed()) {
 			formStatus.setVisibility(View.VISIBLE);
 			formStatus.setText(R.string.second_hand_form_closed);
-			int color = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandFormClosedColor);
-			formName.setTextColor(color);
+			color = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandFormClosedColor);
 			formStatus.setTextColor(color);
 		} else {
 			formStatus.setVisibility(View.INVISIBLE); // This must be invisible and not gone to keep the layout correct
-			formName.setTextColor(ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandFormOpenColor));
+			color = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandFormOpenColor);
+		}
+		formName.setTextColor(color);
+		int total = form.getSoldItemsTotalPrice();
+		if (total > 0) {
+			int soldItemsNumber = form.getNumberOfSoldItems();
+			formSoldItemsTotal.setVisibility(View.VISIBLE);
+			String soldItemsMessage;
+			if (soldItemsNumber == 1) {
+				soldItemsMessage = itemView.getContext().getString(R.string.second_hand_form_sold_item_total, total);
+			} else {
+				soldItemsMessage = itemView.getContext().getString(R.string.second_hand_form_sold_items_total, soldItemsNumber, total);
+			}
+			formSoldItemsTotal.setText(soldItemsMessage);
+			formSoldItemsTotal.setTextColor(color);
+		} else {
+			formSoldItemsTotal.setVisibility(View.GONE);
 		}
 	}
 

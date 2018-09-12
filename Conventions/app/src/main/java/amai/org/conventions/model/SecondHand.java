@@ -1,7 +1,9 @@
 package amai.org.conventions.model;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.Html;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -15,18 +17,23 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.ConventionStorage;
+import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.HttpConnectionCreator;
 import amai.org.conventions.utils.Log;
+import sff.org.conventions.R;
 
 public class SecondHand {
 	private static final String TAG = SecondHand.class.getCanonicalName();
+	private static final long MINIMUM_REFRESH_TIME = Dates.MILLISECONDS_IN_HOUR;
 
 	private ConventionStorage storage;
 	private List<SecondHandForm> forms;
@@ -36,10 +43,27 @@ public class SecondHand {
 		load();
 	}
 
-	public boolean refresh() {
+	public boolean shouldAutoRefresh() {
+		// Don't try to refresh if there is nothing to update
+		if (this.getForms().size() == 0) {
+			return false;
+		}
+		// Only refresh if it hasn't been an hour since the previous refresh
+		Date lastUpdate = ConventionsApplication.settings.getLastSecondHandUpdateDate();
+		if (lastUpdate != null && Dates.now().getTime() - lastUpdate.getTime() < MINIMUM_REFRESH_TIME) {
+			return false;
+		}
+		return true;
+	}
+
+	public boolean refresh(boolean force) {
 		if (forms.size() == 0) {
 			return true;
 		}
+		if (!force && !shouldAutoRefresh()) {
+			return true;
+		}
+		Log.i(TAG, "Refreshing second hand");
 		try {
 			// Save user descriptions
 			Map<String, String> userDescriptions = new HashMap<>();
@@ -82,7 +106,12 @@ public class SecondHand {
 				// Temporary fix for refresh until we have refresh API
 				newForms = new ArrayList<>(forms.size());
 				for (SecondHandForm form : forms) {
-					newForms.add(readForm(form.getId()));
+					try {
+						newForms.add(readForm(form.getId()));
+					} catch (FormNotFoundException | NoItemsException e) {
+						// Ignore deleted forms
+						Log.e(TAG, "Second hand form " + form.getItems() + " not found during refresh: " + e.getClass().getSimpleName());
+					}
 				}
 			}
 
@@ -97,9 +126,11 @@ public class SecondHand {
 
 			forms = newForms;
 			save();
+			ConventionsApplication.settings.setLastSecondHandUpdatedDate();
+			Log.i(TAG, "Finished second hand refresh successfully");
 			return true;
 		} catch (Exception e) {
-			Log.e(TAG, "Could not refresh forms list", e);
+			Log.e(TAG, "Could not refresh second hand forms list", e);
 			return false;
 		}
 	}
@@ -188,7 +219,7 @@ public class SecondHand {
 	private SecondHandItem parseFormItem(JsonObject itemJson) {
 		SecondHandItem item = new SecondHandItem();
 		if (!itemJson.get("description").isJsonNull()) {
-			item.setDescription(itemJson.get("description").getAsString());
+			item.setDescription(decodeHtml(itemJson.get("description").getAsString()));
 		}
 		JsonObject statusObject = itemJson.get("status").getAsJsonObject();
 		item.setStatus(convertItemStatus(statusObject.get("id").getAsInt()));
@@ -283,6 +314,44 @@ public class SecondHand {
 		} else { // in the stand but not sold (or withdrawn)
 			return SecondHandItem.Status.READY;
 		}
+	}
+
+	public String getSoldFormsMessage(Context context) {
+		List<SecondHandForm> soldForms = new LinkedList<>();
+		for (SecondHandForm form : getForms()) {
+			if (!form.isClosed() && form.areAllItemsSold()) {
+				soldForms.add(form);
+			}
+		}
+		if (!soldForms.isEmpty()) {
+			int totalPrice = 0;
+			StringBuilder formIdsBuilder = new StringBuilder();
+			boolean first = true;
+			for (SecondHandForm form : soldForms) {
+				if (first) {
+					first = false;
+				} else {
+					formIdsBuilder.append(", ");
+				}
+				formIdsBuilder.append(form.getId());
+				totalPrice += form.getSoldItemsTotalPrice();
+			}
+
+			String notificationMessage = context.getString(
+				forms.size() > 1 ? R.string.second_hand_sold_forms_notification : R.string.second_hand_sold_form_notification,
+				formIdsBuilder.toString(), totalPrice);
+			return notificationMessage;
+		}
+		return null;
+	}
+
+	private String decodeHtml(String string) {
+		if (string == null) {
+			return null;
+		}
+		// Using deprecated fromHtml() overload, since fromHtml(string, int) is only supported from api level 17
+		// noinspection deprecation
+		return Html.fromHtml(string).toString();
 	}
 
 	public static class NoItemsException extends RuntimeException {}

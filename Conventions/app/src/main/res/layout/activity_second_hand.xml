@@ -1,39 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/second_hand_swipe_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <FrameLayout
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-            <se.emilsjolander.stickylistheaders.StickyListHeadersListView
-                android:id="@+id/second_hand_form_items_list"
-                app:isDrawingListUnderStickyHeader="false"
-                app:hasStickyHeaders="false"
-                android:divider="?secondHandItemsDivider"
-                android:dividerHeight="1dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
             <TextView
-                android:id="@+id/second_hand_no_forms_found"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal"
-                android:layout_marginTop="50dp"
-                android:visibility="gone"
-                android:textSize="@dimen/text_size_large_material"
-                android:textColor="?hintTextColor"
+                android:id="@+id/second_hand_sold_forms_total"
+                tools:text="Forms 1, 2 itesm are all sold for 120 NIS"
+                android:textSize="14sp"
+                android:textColor="?secondHandItemSoldColor"
                 android:layout_marginStart="?contentStartMargin"
                 android:layout_marginEnd="?contentEndMargin"
-                android:padding="25dp"
-                android:text="@string/second_hand_no_forms" />
-        </FrameLayout>
+                android:padding="5dp"
+                android:paddingStart="25dp"
+                android:paddingEnd="25dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <se.emilsjolander.stickylistheaders.StickyListHeadersListView
+                    android:id="@+id/second_hand_form_items_list"
+                    app:isDrawingListUnderStickyHeader="false"
+                    android:divider="?secondHandItemsDivider"
+                    android:dividerHeight="1dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+                <TextView
+                    android:id="@+id/second_hand_no_forms_found"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="50dp"
+                    android:visibility="gone"
+                    android:textSize="@dimen/text_size_large_material"
+                    android:textColor="?hintTextColor"
+                    android:layout_marginStart="?contentStartMargin"
+                    android:layout_marginEnd="?contentEndMargin"
+                    android:padding="25dp"
+                    android:text="@string/second_hand_no_forms" />
+            </FrameLayout>
+        </LinearLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
 </FrameLayout>

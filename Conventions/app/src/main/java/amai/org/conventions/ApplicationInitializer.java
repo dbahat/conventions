@@ -14,8 +14,12 @@ import android.support.v7.app.AlertDialog;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import amai.org.conventions.model.SecondHand;
+import amai.org.conventions.model.SecondHandForm;
 import amai.org.conventions.model.Update;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.networking.ModelRefresher;
@@ -24,7 +28,7 @@ import amai.org.conventions.notifications.PlayServicesInstallation;
 import amai.org.conventions.notifications.PushNotification;
 import amai.org.conventions.notifications.PushNotificationTopic;
 import amai.org.conventions.notifications.PushNotificationTopicsSubscriber;
-import amai.org.conventions.notifications.PushNotification;
+import amai.org.conventions.secondhand.SecondHandActivity;
 import amai.org.conventions.settings.SettingsActivity;
 import amai.org.conventions.updates.UpdatesActivity;
 import amai.org.conventions.utils.CollectionUtils;
@@ -32,6 +36,7 @@ import sff.org.conventions.R;
 
 public class ApplicationInitializer {
     private static final int NEW_UPDATES_NOTIFICATION_ID = 75457;
+    private static final int SECOND_HAND_SOLD_FORMS_NOTIFICATION_ID = 75458;
 
     public void initialize(final Context context) {
         refreshModel();
@@ -45,6 +50,8 @@ public class ApplicationInitializer {
         }
 
         refreshUpdatesAndNotifyIfNewUpdatesAreAvailable(context);
+
+        refreshSecondHand(context);
     }
 
     private void registerNotificationChannel(Context context, PushNotification.Channel channel) {
@@ -197,4 +204,64 @@ public class ApplicationInitializer {
             }
         });
     }
+
+    private void refreshSecondHand(final Context context) {
+        final SecondHand secondHand = Convention.getInstance().getSecondHand();
+        new AsyncTask<Void, Void, Boolean>() {
+            private Set<String> openFormsWithUnsoldItems = new HashSet<>();
+            @Override
+            protected Boolean doInBackground(Void... params) {
+                for (SecondHandForm form : secondHand.getForms()) {
+                    if (!form.isClosed() && form.areAllItemsSold()) {
+                        openFormsWithUnsoldItems.add(form.getId());
+                    }
+                }
+                return secondHand.refresh(false);
+            }
+
+            @Override
+            protected void onPostExecute(Boolean success) {
+                if (success) {
+                    // Show notification if there are new open forms whose items are all sold
+                    boolean showNotification = false;
+                    for (SecondHandForm form : secondHand.getForms()) {
+                        if (!openFormsWithUnsoldItems.contains(form.getId()) && !form.isClosed() &&
+                                form.areAllItemsSold()) {
+                            showNotification = true;
+                            break;
+                        }
+                    }
+                    if (showNotification) {
+                        Context currentContext = ConventionsApplication.getCurrentContext();
+                        if (currentContext == null) {
+                            return;
+                        }
+                        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                        if (notificationManager == null) {
+                            return;
+                        }
+                        String notificationMessage = secondHand.getSoldFormsMessage(currentContext);
+
+                        Intent intent = new Intent(currentContext, SecondHandActivity.class);
+                        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(currentContext, PushNotification.Channel.Notifications.toString())
+                                .setSmallIcon(ThemeAttributes.getResourceId(currentContext, R.attr.notificationSmallIcon))
+                                .setContentTitle(currentContext.getString(R.string.second_hand_sold_forms_notification_title))
+                                .setContentText(notificationMessage)
+                                .setAutoCancel(true)
+                                .setContentIntent(PendingIntent.getActivity(currentContext, 0, intent, 0))
+                                .setDefaults(Notification.DEFAULT_VIBRATE);
+
+
+                        Notification notification = new NotificationCompat.BigTextStyle(notificationBuilder)
+                                .bigText(notificationMessage)
+                                .build();
+
+                        notificationManager.notify(SECOND_HAND_SOLD_FORMS_NOTIFICATION_ID, notification);
+                    }
+                }
+            }
+        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+    }
+
+
 }
