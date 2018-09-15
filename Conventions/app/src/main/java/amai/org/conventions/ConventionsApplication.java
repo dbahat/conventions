@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import com.google.android.gms.analytics.ExceptionReporter;
 import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.StandardExceptionParser;
 import com.google.android.gms.analytics.Tracker;
 
@@ -52,10 +53,6 @@ public class ConventionsApplication extends Application {
 			tracker.enableAutoActivityTracking(true);
 		}
 
-		settings = new Settings(this);
-		alarmScheduler = new LocalNotificationScheduler(this);
-		restoreAlarmConfiguration();
-
 		// Change uncaught exception parser to include more information
 		Thread.UncaughtExceptionHandler uncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
 		if (uncaughtExceptionHandler instanceof ExceptionReporter) {
@@ -63,7 +60,20 @@ public class ConventionsApplication extends Application {
 			exceptionReporter.setExceptionParser(new ExtendedExceptionParser(this, null));
 		}
 
-		alarmScheduler.scheduleNotificationsToFillConventionFeedback();
+		settings = new Settings(this);
+		alarmScheduler = new LocalNotificationScheduler(this);
+
+		try {
+			alarmScheduler.scheduleNotificationsToFillConventionFeedback();
+			restoreAlarmConfiguration();
+		} catch (Exception e) {
+			// Added due to a SecurityException when trying to schedule alarms on some devices.
+			// The alarms might not be set in this case, but at least the app won't crash on startup.
+			Log.i(TAG, "Could not schedule alarms", e);
+			sendTrackingEvent(new HitBuilders.ExceptionBuilder()
+					.setDescription(e.getMessage() + "\n" + android.util.Log.getStackTraceString(e))
+					.build());
+		}
 
 		try {
 			versionName = this.getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
