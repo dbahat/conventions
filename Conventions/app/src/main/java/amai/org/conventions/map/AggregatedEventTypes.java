@@ -23,7 +23,8 @@ public class AggregatedEventTypes {
 						new EventType("משחק שולחני"),
 						new EventType("משחק תפקידים חי"),
 						new EventType("משחק תפקידים לילדים"),
-						new EventType("מיוחד"),
+						new EventType("משחק"),
+						new EventType("משחק קלפים"),
 						new EventType("טורניר"))),
 				new AggregatedType("סדנאות", Arrays.asList(
 						new EventType("סדנה"))),
@@ -31,6 +32,7 @@ public class AggregatedEventTypes {
 						new EventType("הקרנה"),
 						new EventType("הקרנה מונחית"),
 						new EventType("מופע"),
+						new EventType("סרט"),
 						new EventType("מופע מוזיקלי")))
 		);
 	}
