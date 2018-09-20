@@ -129,8 +129,8 @@
         <item name="secondHandItemSoldColor">@color/icon2018_green2</item>
         <item name="secondHandItemMissingColor">@color/icon2018_orange</item>
         <item name="secondHandItemsDivider">@drawable/icon2018_second_hand_item_list_divider</item>
-        <!-- TODO Discounts activity -->
-        <item name="discountsActivityLayout">@layout/olamot2018_activity_discounts</item>
+        <!-- Discounts activity -->
+        <item name="discountsActivityLayout">@layout/icon2018_activity_discounts</item>
     </style>
 
     <style name="AppBaseTheme.Icon2018.Toolbar.Event" parent="AppBaseTheme.Icon2018.Toolbar">
