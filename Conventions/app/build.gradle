@@ -1,16 +1,16 @@
 apply plugin: 'com.android.application'
 
 ext {
-    supportLibVersion = "27.1.1"
+    supportLibVersion = "28.0.0"
 }
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
 
     defaultConfig {
         applicationId "amai.org.conventions"
         minSdkVersion 17
-        targetSdkVersion 27
+        targetSdkVersion 28
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -42,16 +42,16 @@ dependencies {
     implementation "com.android.support:design:${supportLibVersion}"
     implementation 'com.github.castorflex.verticalviewpager:library:19.0.1'
     implementation 'klogi.com:rtlviewpager:1.0.0'
-    implementation "com.google.android.gms:play-services-analytics:16.0.1"
-    implementation "com.google.android.gms:play-services-maps:15.0.1"
-    implementation 'com.google.firebase:firebase-core:16.0.1'
-    implementation "com.google.firebase:firebase-messaging:17.1.0"
+    implementation "com.google.android.gms:play-services-analytics:16.0.7"
+    implementation "com.google.android.gms:play-services-maps:16.1.0"
+    implementation 'com.google.firebase:firebase-core:16.0.7'
+    implementation "com.google.firebase:firebase-messaging:17.3.4"
     implementation 'com.caverock:androidsvg:1.2.2-beta-1'
     // Using a fork of se.emilsjolander:stickylistheaders due to an open issue in Android 8. See https://github.com/emilsjolander/StickyListHeaders/issues/477.
     implementation 'com.github.mtotschnig:StickyListHeaders:2.7.1'
     implementation 'com.tonicartos:stickygridheaders:1.0.1'
     implementation 'com.facebook.android:facebook-android-sdk:4.35.0'
-    implementation 'com.google.code.gson:gson:2.8.0'
+    implementation 'com.google.code.gson:gson:2.8.2'
 
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.21.0'
