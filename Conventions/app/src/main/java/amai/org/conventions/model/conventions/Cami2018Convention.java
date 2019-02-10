@@ -102,11 +102,6 @@ public class Cami2018Convention extends AmaiConvention {
 	}
 
 	@Override
-	protected String initFeedbackRecipient() {
-		return null;
-	}
-
-	@Override
 	protected EventFeedbackForm initEventFeedbackForm() {
 		EventFeedbackForm eventFeedbackForm = null;
 		try {
