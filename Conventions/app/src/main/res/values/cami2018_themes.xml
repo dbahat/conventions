@@ -91,6 +91,7 @@
         <item name="newUpdateBackground">@color/very_transparent_white</item>
         <item name="updateTimeColor">@color/very_transparent_white</item>
         <item name="updateItemBorder">@color/white</item>
+        <item name="updateTimeBackground">@color/white</item>
         <!-- My Events Screen -->
         <item name="nextEventStartTimeBackground">@color/very_transparent_white</item>
         <item name="nextEventStartTimeTextColor">@color/white</item>

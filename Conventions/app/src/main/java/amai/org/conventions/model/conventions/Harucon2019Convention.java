@@ -6,15 +6,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.List;
 
 import amai.org.conventions.R;
 import amai.org.conventions.feedback.SurveySender;
 import amai.org.conventions.feedback.forms.EventFeedbackForm;
-import amai.org.conventions.feedback.forms.EventVoteSurveyFormSender;
 import amai.org.conventions.feedback.forms.FeedbackForm;
-import amai.org.conventions.feedback.forms.SurveyForm;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.FeedbackQuestion;
@@ -27,12 +24,11 @@ import amai.org.conventions.model.Place;
 import amai.org.conventions.model.SpecialEventsProcessor;
 import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.StandsArea;
-import amai.org.conventions.model.Survey;
 import amai.org.conventions.networking.SurveyDataRetriever;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 
-public class Cami2018Convention extends AmaiConvention {
+public class Harucon2019Convention extends AmaiConvention {
 	// Hall names
 	private static final String MAIN_HALL_NAME = "אולם ראשי";
 	private static final String SCHWARTZ_NAME = "אודיטוריום שוורץ";
@@ -44,25 +40,6 @@ public class Cami2018Convention extends AmaiConvention {
 	private static final String SIGNING_AREA_NAME = "אזור החתמות";
 	private static final String COSPLAY_AREA_NAME = "מתחם קוספליי";
 
-	// Vote questions - these values are serialized, don't change them!
-	private static final int QUESTION_ID_AMAIDOL_NAME = 1000;
-	private static final int QUESTION_ID_AMAIDOL_VOTE = 1001;
-	// Special events server id
-	private static final int EVENT_ID_AMAIDOL = 5579;
-	private static final int EVENT_ID_MIYAZAKI_MOVIE = 5729;
-
-	// Ids of google spreadsheets associated with the special events
-	private static final String AMAIDOL_SPREADSHEET_ID = "12ckMtCm-OVPmMgDQfLWHJuzyoKP34wu9TmgeHTnwVkc";
-
-	// Special image IDs
-	private static final String MIYAZAKI_MOVIE_IMAGE = "MIYAZAKI_MOVIE_IMAGE";
-
-	static {
-		FeedbackQuestion.addQuestion(QUESTION_ID_AMAIDOL_NAME, R.string.amaidol_name_question);
-		FeedbackQuestion.addQuestion(QUESTION_ID_AMAIDOL_VOTE, R.string.amaidol_vote_question);
-	}
-
-
 	@Override
 	protected ConventionStorage initStorage() {
 		return new ConventionStorage(this, R.raw.cami2018_convention_events, 3);
@@ -72,23 +49,23 @@ public class Cami2018Convention extends AmaiConvention {
 	protected Calendar initDate() {
 		Calendar date = Calendar.getInstance();
 		date.clear();
-		date.set(2018, Calendar.AUGUST, 23);
+		date.set(2019, Calendar.MARCH, 21);
 		return date;
 	}
 
 	@Override
 	protected String initID() {
-		return "Cami2018";
+		return "Harucon2019";
 	}
 
 	@Override
 	protected String initDisplayName() {
-		return "כאמ\" 2018";
+		return "הארוקון 2019";
 	}
 
 	@Override
 	protected String initFacebookFeedPath() {
-		return "/cami.org.il/posts";
+		return "/harucon.org.il/posts";
 	}
 
 	@Override
@@ -116,7 +93,7 @@ public class Cami2018Convention extends AmaiConvention {
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_LECTURER_QUALITY, "entry.1327236956")
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_SIMILAR_EVENTS, "entry.1416969956")
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_ADDITIONAL_INFO, "entry.1582215667")
-                    .withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLScI09zCW8w-fUazSoOfZlpJHsEdt3DLPsGMo0TXsJmqx2ksvQ/formResponse"));
+                    .withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSfJMvk0mtugjOHz7_FWHOe6O8blVh_q0lUxK0G6KTdSxyXNdA/formResponse"));
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
@@ -136,7 +113,7 @@ public class Cami2018Convention extends AmaiConvention {
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_MAP_SIGNS, "entry.1416969956")
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_CONFLICTING_EVENTS, "entry.1582215667")
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_IMPROVEMENT, "entry.993320932")
-					.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLScvbyNMc4iUD8BsfZFoJZ_u5toUt_fFGlnecdYtmaYOnCgRhQ/formResponse"));
+					.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSeGO1_C5buS0tcRmBUk68UnpB_JCYWmuvIG7UuWULfDZZMnnw/formResponse"));
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
@@ -146,7 +123,7 @@ public class Cami2018Convention extends AmaiConvention {
 	@Override
 	protected URL initModelURL() {
 		try {
-			return new URL("http://2018.cami.org.il/wp-admin/admin-ajax.php?action=get_event_list");
+			return new URL("http://2019.harucon.org.il/wp-admin/admin-ajax.php?action=get_event_list");
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
@@ -186,8 +163,7 @@ public class Cami2018Convention extends AmaiConvention {
 				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/sharonturner.png", R.drawable.event_sharont)
 				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/trivia.jpg", R.drawable.event_trivia)
 				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/davidbahat.png", R.drawable.event_davidbahat)
-				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/MV5BNTFmMDZmMDAtZGE3Yi00MzVmLWEwZmQtZjFhN2U2ZjdiODlmL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_.jpg", R.drawable.event_shlomit)
-				.addMapping(MIYAZAKI_MOVIE_IMAGE, R.drawable.event_miyazaki);
+				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/MV5BNTFmMDZmMDAtZGE3Yi00MzVmLWEwZmQtZjFhN2U2ZjdiODlmL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_.jpg", R.drawable.event_shlomit);
 
 		imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.cami2018_home_activity_background);
 
@@ -421,7 +397,6 @@ public class Cami2018Convention extends AmaiConvention {
 	}
 
 	private List<Stand> getPinkusStands() {
-		// TODO update for cami 2018
 		return Arrays.asList(
 //				new Stand().withName("otaku shop").withType(Stand.StandType.REGULAR_STAND).withLocationName("c01-c04").withImageX(825).withImageY(535),
 //				new Stand().withName("retro game center").withType(Stand.StandType.REGULAR_STAND).withLocationName("c05-c08").withImageX(1016).withImageY(535),
@@ -471,7 +446,6 @@ public class Cami2018Convention extends AmaiConvention {
 	}
 
 	private List<Stand> getAgamStands() {
-		// TODO update for cami 2018
 		return Arrays.asList(
 //				new Stand().withName("Besandilove - להתלבש בתשוקה").withType(Stand.StandType.REGULAR_STAND).withLocationName("a01").withImageX(396).withImageY(441),
 //				new Stand().withName("גברת וודו").withType(Stand.StandType.REGULAR_STAND).withLocationName("a02").withImageX(445).withImageY(441),
@@ -517,37 +491,12 @@ public class Cami2018Convention extends AmaiConvention {
 
 	@Override
 	public SurveySender getEventVoteSender(final ConventionEvent event) {
-		if (event.getUserInput().getVoteSurvey() == null) {
-			return null;
-		}
-		try {
-			if (event.getServerId() == EVENT_ID_AMAIDOL) {
-				SurveyForm form = new SurveyForm()
-						.withQuestionEntry(QUESTION_ID_AMAIDOL_NAME, "entry.109802680")
-						.withQuestionEntry(QUESTION_ID_AMAIDOL_VOTE, "entry.1600353678")
-						.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLScaw6VMWyggn4hE3iK9KANCGcl0bpW9wgeCSVJP9aXnJajiMw/formResponse"));
-
-				SurveyDataRetriever.DisabledMessage disabledMessageRetriever = new SurveyDataRetriever.GoogleSpreadSheet(AMAIDOL_SPREADSHEET_ID);
-
-				return new EventVoteSurveyFormSender(form, event.getUserInput().getVoteSurvey(), disabledMessageRetriever);
-
-			}
-		} catch (MalformedURLException e) {
-			throw new RuntimeException(e);
-		}
 		return super.getEventVoteSender(event);
 	}
 
 	@Override
 	@Nullable
 	public SurveyDataRetriever.Answers createSurveyAnswersRetriever(FeedbackQuestion question) {
-		switch (question.getQuestionId()) {
-			case QUESTION_ID_AMAIDOL_NAME:
-			case QUESTION_ID_AMAIDOL_VOTE: {
-				return new SurveyDataRetriever.GoogleSpreadSheet(AMAIDOL_SPREADSHEET_ID);
-			}
-		}
-
 		return null;
 	}
 
@@ -561,15 +510,6 @@ public class Cami2018Convention extends AmaiConvention {
 	@Override
 	public void convertUserInputForEvent(ConventionEvent.UserInput userInput, ConventionEvent event) {
 		super.convertUserInputForEvent(userInput, event);
-
-		if (userInput.getVoteSurvey() == null && event != null) {
-			if (event.getServerId() == EVENT_ID_AMAIDOL) {
-				userInput.setVoteSurvey(new Survey().withQuestions(
-						new FeedbackQuestion(QUESTION_ID_AMAIDOL_NAME, FeedbackQuestion.AnswerType.SINGLE_LINE_TEXT, true),
-						new FeedbackQuestion(QUESTION_ID_AMAIDOL_VOTE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO, true)
-				));
-			}
-		}
 	}
 
 	@Override
@@ -577,10 +517,6 @@ public class Cami2018Convention extends AmaiConvention {
 		return new SpecialEventsProcessor() {
 			@Override
 			public boolean processSpecialEvent(ConventionEvent event) {
-				// The image isn't returned from the server for this event
-				if (event.getServerId() == EVENT_ID_MIYAZAKI_MOVIE) {
-					event.setImages(Collections.singletonList(MIYAZAKI_MOVIE_IMAGE));
-				}
 				return false;
 			}
 		};
