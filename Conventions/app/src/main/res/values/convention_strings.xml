@@ -8,34 +8,28 @@
     <string name="home_convention_ended">הכנס נגמר</string>
     <string name="notification_channel_description_notifications">הודעות בזמן אמת מהנהלת הכנס</string>
 
-    <!-- Relevant to all sf-f conventions -->
+    <!-- Relevant to all conventions -->
     <string name="arrival_methods_marker_name">%s - בנייני האומה</string>
     <string name="my_event_share_link">http://play.google.com/store/apps/details?id=amai.org.conventions</string>
     <string name="convention_feedback_subtitle">מלא פידבק כללי על הכנס - קופות, דוכנים, משחקייה, עמדת צילום וכל דבר אחר.</string>
 
-    <!-- Relevant to all Olamot conventions -->
-    <string name="app_name">כנס כאמ"י 2018</string>
+    <!-- Relevant to all harucon conventions -->
+    <string name="app_name">כנס הארוקון 2019</string>
     <string name="my_events_no_data">הוסף אירוע לאירועים שלי ע\"י לחיצה על הכוכב בדף האירוע או ברשימת האירועים</string>
 
     <!-- Relevant to this specific convention -->
     <!-- Taken from olamot website: http://2018.olamot-con.org.il/about/ -->
     <string name="about_content"><![CDATA[אמא\"י – ארגון מנגה ואנימה ישראל. הארגון הוקם במאי 2007 על ידי קבוצת חברים בקהילת חובבי המנגה, אנימה ותרבות יפן ופועל למען קהילת חובבים זו.]]></string>
     <string name="about_links"><![CDATA[
-<p><a href="http://www.amai.org.il/">לאתר אמא\"י</a></p><p><a href="http://2018.cami.org.il/">לאתר הכנס</a></p>
+<p><a href="http://www.amai.org.il/">לאתר אמא\"י</a></p><p><a href="http://2019.harucon.org.il/">לאתר הכנס</a></p>
 <p>עיצוב וגרפיקה:</p>
-<p>שלי ציפקין<br/><a href="https://www.facebook.com/lientarii/">https://www.facebook.com/lientarii/</a></p>
-<p>אניטה קרפל<br/><a href="https://www.instagram.com/nutaa_nuta/">https://www.instagram.com/nutaa_nuta/</a></p>
-<p>איה יוחאי</p>
-<p>נטע פלדמן<br/><a href="https://www.facebook.com/mentadraws/">https://www.facebook.com/mentadraws/</a></p>
-<p>שירלי לני</p>
-<p>בר מאור נאמן<br/><a href="https://www.facebook.com/B4RMN/">https://www.facebook.com/B4RMN/</a></p>
-<p>יעל גבעון<br/><a href="https://rinska.tumblr.com">rinska.tumblr.com</a></p>
-<p>שלומית שפיר<br/><a href="https://rottendoodles.tumblr.com">rottendoodles.tumblr.com</a></p>
-<p>טאה פרנקו<br/><a href="https://ohmilk.tumblr.com">ohmilk.tumblr.com</a></p>
-<p>טרה ס.ב.<br/><a href="https://www.facebook.com/y4lla/">https://www.facebook.com/y4lla/</a></p>
+<p>לי ציפקין<br/><a href="https://www.facebook.com/lientarii/">https://www.facebook.com/lientarii/</a></p>
+<p>עדן כהן<br/><a href="https://www.instagram.com/eden160393/">https://www.instagram.com/eden160393/</a></p>
+<p>ניב שצ`רב<br/><a href="https://www.facebook.com/NivShcherb">https://www.facebook.com/NivShcherb</a></p>
+<p>עומר אלבז<br/><a href="https://twitter.com/Tod_mugi">https://twitter.com/Tod_mugi</a></p>
 ]]></string>
     <string name="about_app_content"><![CDATA[
-האפליקציה פותחה עבור כנס כאמ\"י 2018.<br/>בקשות והצעות ניתן לכתוב <a href="market://details?id=amai.org.conventions">בדף האפליקציה בחנות</a>.
+האפליקציה פותחה עבור כנס הארוקון 2019.<br/>בקשות והצעות ניתן לכתוב <a href="market://details?id=amai.org.conventions">בדף האפליקציה בחנות</a>.
 ]]></string>
     <!-- Copied from http://2018.olamot-con.org.il/info/arrival/
          The only difference is removing the map iframe -->
@@ -44,79 +38,51 @@
 <p>הליכה של כ-5 דקות מהתחנה המרכזית בירושלים.<br />
 יוצאים מהתחנה המרכזית, הולכים ישר עד רחוב שז&quot;ר, פונים ימינה וממשיכים עד הגעה למעבר התת קרקעי, דרכו עליכם לעבור. ביציאה מהמעבר פונים שמאלה, ומיד לאחר מכן פונים שמאלה פעם נוספת אל רחוב יוסף הרליץ. עולים במעלה המדרגות משמאלכם. הגעתם!</p>
 <p><h3>הגעה באוטובוס</h3></p>
-<p>
-	<div class="wpb_text_column wpb_content_element  vc_custom_1526296264923 ">
-		<div class="wpb_wrapper">
-			<p>שימו לב, כל הקווים מגיעים לתחנה המרכזית בירושלים, משם בנייני האומה נמצאים במרחק הליכה של 5 דקות.</p>
-
-		</div>
-	</div> <div class="vc_row wpb_row vc_inner wf-container"><div class="wpb_column vc_column_container vc_col-sm-6"><div class="vc_column-inner "><div class="wpb_wrapper">
-	<div class="wpb_text_column wpb_content_element  ">
-		<div class="wpb_wrapper">
-			<p><strong>באר שבע:</strong></p>
+<p>שימו לב, כל הקווים מגיעים לתחנה המרכזית בירושלים, משם בנייני האומה נמצאים במרחק הליכה של 5 דקות.</p>
+<p><strong>באר שבע:</strong></p>
 <ul>
-<li>קו 470 (אגד, <strong>תחנה מרכזית, </strong>זמן משוערך של שעה ו-40 דקות).</li>
+<li>קו 470 (אגד, <strong>תחנה מרכזית, </strong>זמן מוערך של שעה ו-40 דקות).</li>
 </ul>
 <p><strong>אשדוד:</strong></p>
 <ul>
-<li>קו 448 (אגד, <strong>תחנה מרכזית, </strong>זמן משוערך של שעה ו-14 דקות).</li>
+<li>קו 448 (אגד, <strong>תחנה מרכזית, </strong>זמן מוערך של שעה ו-14 דקות).</li>
 </ul>
 <p><strong>ראשון לציון:</strong></p>
 <ul>
-<li>קו 433 (אגד, <strong>תחנה מרכזית ישנה</strong>, זמן משוערך של שעה ו-35 דקות).</li>
-<li>קו 431 (אגד, <strong>תחנה מרכזית חדשה</strong>, זמן משוער של 50 דקות).</li>
+<li>קו 433 (אגד, <strong>תחנה מרכזית ישנה</strong>, זמן מוערך של שעה ו-35 דקות).</li>
+<li>קו 431 (אגד, <strong>תחנה מרכזית חדשה</strong>, זמן מוערך של 50 דקות).</li>
 </ul>
 <p><strong>תל אביב:</strong></p>
 <ul>
-<li>קו 480 (אגד, <strong>מסוף ארלוזורוב, </strong>זמן משוערך של 54 דקות).</li>
-<li>קו 405 (אגד, <strong>תחנה מרכזית חדשה, </strong>זמן משוערך של 55 דקות).</li>
+<li>קו 480 (אגד, <strong>מסוף ארלוזורוב, </strong>זמן מוערך של 54 דקות).</li>
+<li>קו 405 (אגד, <strong>תחנה מרכזית חדשה, </strong>זמן מוערך של 55 דקות).</li>
 </ul>
 <p><strong>רעננה / כפר סבא:</strong></p>
 <ul>
-<li>קו 947 (אגד, <strong>מסוף רעננה</strong>, זמן משוערך של שעה ו-35 דקות)</li>
-<li>קו 425 (אפיקים, <strong>מסוף רעננה, </strong>זמן משוערך של שעה ו-37 דקות).</li>
+<li>קו 947 (אגד, <strong>מסוף רעננה</strong>, זמן מוערך של שעה ו-35 דקות)</li>
+<li>קו 425 (אפיקים, <strong>מסוף רעננה, </strong>זמן מוערך של שעה ו-37 דקות).</li>
 </ul>
-
-		</div>
-	</div> </div></div></div><div class="wpb_column vc_column_container vc_col-sm-6"><div class="vc_column-inner "><div class="wpb_wrapper">
-	<div class="wpb_text_column wpb_content_element  ">
-		<div class="wpb_wrapper">
-			<div class="here">
-<div class="grid_4 omega">
 <p><strong>נתניה:</strong></p>
 <ul>
-<li>קו 947 (אגד, <strong>תחנה מרכזית, </strong>זמן משוערך של שעה ו-55 דקות).</li>
+<li>קו 947 (אגד, <strong>תחנה מרכזית, </strong>זמן מוערך של שעה ו-55 דקות).</li>
 </ul>
 <p><strong>חיפה:</strong></p>
 <ul>
-<li>קו 960 (אגד, <strong>מרכזית המפרץ, </strong>זמן משוערך של שעתיים ו-14 דקות).</li>
-<li>קו 947, 940 (אגד, <strong>מרכזית חוף הכרמל</strong>, זמן משוערך של שעתיים).</li>
+<li>קו 960 (אגד, <strong>מרכזית המפרץ, </strong>זמן מוערך של שעתיים ו-14 דקות).</li>
+<li>קו 947, 940 (אגד, <strong>מרכזית חוף הכרמל</strong>, זמן מוערך של שעתיים).</li>
 </ul>
 <p><strong>ירושלים:</strong></p>
 <ul>
 <li>קו 26 (<strong>גן החיות התנכ&quot;י</strong>).</li>
 <li>קו 6, 17, 18, 31 (אגד, <strong>קניון מלחה</strong>).</li>
 </ul>
-</div>
-</div>
-
-		</div>
-	</div> </div></div></div></div>
-</p>
 <p><h3>הגעה ברכב פרטי</h3></p>
-<p><div class="wpb_text_column wpb_content_element  ">
-		<div class="wpb_wrapper">
-			<p>דרך כביש מס\' 1:</p>
+<p>דרך כביש מספר 1:</p>
 <ol>
 <li><strong>מהכניסה לעיר:</strong> יש לפנות ימינה בשדרות שז&quot;ר לכיוון בנייני האומה.</li>
 <li><strong>מכביש בגין:</strong> יש לצאת במחלף קרית משה ולפנות שמאלה מבגין דרום או ימינה מבגין צפון.</li>
 </ol>
+<p>לחלופין, &quot;בנייני האומה&quot; ב-waze יביא אתכם אל המקום.</p>
 <p>במתחם קיימים 850 מקומות חנייה בתשלום המתחלקים בין חניון תת קרקעי וחניון חיצוני.</p>
-
-		</div>
-	</div>
-</p>
 ]]></string>
-    <string name="amaidol_name_question">איך קוראים לך?</string>
-    <string name="amaidol_vote_question">מי המתמודד/ת החביב/ה עליך?</string>
 </resources>
