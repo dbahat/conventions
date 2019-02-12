@@ -30,7 +30,7 @@
         <item name="buttonColorPressed">@color/cami2018_dark_red</item>
 
         <!-- Notifications -->
-        <item name="notificationSmallIcon">@drawable/cami2018_notification_small</item>
+        <item name="notificationSmallIcon">@drawable/harucon_notification_small</item>
         <!-- Toolbar -->
         <item name="toolbarBackground">@null</item>
         <item name="toolbarLogo">@drawable/ic_menu_white_24dp</item>
