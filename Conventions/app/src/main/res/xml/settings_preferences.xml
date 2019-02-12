@@ -5,19 +5,19 @@
         android:key="push_notifications"
         android:title="@string/notifications_preferences">
         <CheckBoxPreference
-            android:key="cami2018_general"
+            android:key="harucon2019_general"
             android:title="@string/show_general_notifications_title"
             android:summary="@string/show_general_notifications_summary"
             android:defaultValue="true" />
 
         <CheckBoxPreference
-            android:key="cami2018_events"
+            android:key="harucon2019_events"
             android:title="@string/show_event_notifications_title"
             android:summary="@string/show_event_notifications_summary"
             android:defaultValue="true" />
 
         <CheckBoxPreference
-            android:key="cami2018_cosplay"
+            android:key="harucon2019_cosplay"
             android:title="@string/show_cosplay_notifications_title"
             android:summary="@string/show_cosplay_notifications_summary"
             android:defaultValue="false" />
@@ -32,13 +32,13 @@
 
     <PreferenceCategory android:title="@string/reminder_preferences">
         <CheckBoxPreference
-            android:key="cami2018_event_starting_reminder"
+            android:key="harucon2019_event_starting_reminder"
             android:title="@string/show_reminder_before_event_starts_title"
             android:summary="@string/show_reminder_before_event_starts_summary"
             android:defaultValue="true" />
 
         <CheckBoxPreference
-            android:key="cami2018_event_feedback_reminder"
+            android:key="harucon2019_event_feedback_reminder"
             android:title="@string/show_event_feedback_reminder_title"
             android:summary="@string/show_event_feedback_reminder_summary"
             android:defaultValue="true" />
@@ -48,7 +48,7 @@
         android:key="advanced"
         android:title="@string/advanced_preferences">
         <CheckBoxPreference
-            android:key="cami2018_test"
+            android:key="harucon2019_test"
             android:title="@string/show_test_notifications_title"
             android:summary="@string/show_test_notifications_summary"
             android:defaultValue="false" />
