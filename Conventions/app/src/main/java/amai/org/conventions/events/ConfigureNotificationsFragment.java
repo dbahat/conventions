@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import java.util.Date;
 
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.R;
+import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.EventNotification;
 import amai.org.conventions.model.conventions.Convention;
@@ -143,7 +145,7 @@ public class ConfigureNotificationsFragment extends DialogFragment {
 	}
 
 	private NumberPicker createNumberPicker(int initialValue) {
-		NumberPicker numberPicker = new NumberPicker(getActivity());
+		NumberPicker numberPicker = new NumberPicker(new ContextThemeWrapper(getActivity(), ThemeAttributes.getResourceId(getActivity(), R.attr.numberPickerTheme)));
 
 		// Configure the picker values to be 0 to 59 in 5min steps
 		numberPicker.setMinValue(0);
