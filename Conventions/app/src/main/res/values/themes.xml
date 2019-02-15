@@ -89,6 +89,7 @@
         <!-- This color should match eventDetailsBoxColor in a way that eventDetailsBoxColor is not visible
              on top of this color -->
         <item name="conventionFeedbackTextColor">?eventTitleTextColor</item>
+        <item name="feedbackMultiAnswerPadding">4.5dp</item>
         <item name="eventActivityFavoriteColor">@color/gold</item>
         <item name="eventSurveyTextColor">@color/black</item>
     </style>
@@ -183,7 +184,7 @@
         <!-- Feedback activity -->
         <item name="conventionFeedbackTextColor">?eventTitleTextColor</item>
         <item name="feedbackMultiAnswerPadding">4.5dp</item>
-
+        <item name="eventActivityFavoriteColor">@color/gold</item>
         <item name="eventSurveyTextColor">@color/black</item>
     </style>
 

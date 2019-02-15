@@ -92,7 +92,7 @@
             android:layout_height="wrap_content"
             android:text="@string/update_show_full_text"
             android:textColor="?borderlessButtonColor"
-            android:layout_gravity="center"
+            android:gravity="center"
             android:padding="5dp"/>
 
     </FrameLayout>
