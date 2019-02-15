@@ -165,7 +165,7 @@ public class Harucon2019Convention extends AmaiConvention {
 				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/davidbahat.png", R.drawable.event_davidbahat)
 				.addMapping("http://2018.cami.org.il/wp-content/uploads/sites/15/2018/07/MV5BNTFmMDZmMDAtZGE3Yi00MzVmLWEwZmQtZjFhN2U2ZjdiODlmL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_.jpg", R.drawable.event_shlomit);
 
-		imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.cami2018_home_activity_background);
+		imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.harucon2019_event_default_background);
 
 		// Excluded IDs - mostly for debug purposes (don't show messages about these when entering an event that has them)
 		// Foreground text is not readable

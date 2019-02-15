@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape android:shape="rectangle"
        xmlns:android="http://schemas.android.com/apk/res/android">
-    <corners android:radius="@dimen/home_box_radius" />
-    <solid android:color="@color/cami2018_white"/>
+    <solid android:color="@color/harucon2019_dark_purple"/>
 </shape>
