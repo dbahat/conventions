@@ -70,13 +70,13 @@
         <!-- Event View -->
         <item name="eventTypeEndedColor">@color/harucon2019_gray</item>
         <item name="eventTypeEndedBackgroundColor">@color/harucon2019_transparent_dark_gray</item>
-        <item name="eventTypeCurrentColor">@null</item>
+        <item name="eventTypeCurrentColor">@color/white</item>
         <item name="eventTypeCurrentBackgroundColor">@color/harucon2019_transparent_red</item>
-        <item name="eventTypeNotStartedColor">@null</item>
-        <item name="eventNameKeywordHighlightColor">@color/white</item>
+        <item name="eventTypeNotStartedColor">@color/white</item>
+        <item name="eventNameKeywordHighlightColor">@color/gold</item>
         <item name="eventKeywordHighlightColor">@color/gold</item>
         <item name="eventTimeDefaultTextColor">@color/white</item>
-        <item name="eventTimeDefaultBackgroundColor">@color/harucon2019_orange</item>
+        <item name="eventTimeDefaultBackgroundColor">@color/harucon2019_red</item>
         <item name="eventDetailsColor">@color/white</item>
         <item name="eventSendFeedbackColor">@color/gold</item>
         <item name="eventFavoriteIcon">@drawable/ic_star_white_24dp</item>
