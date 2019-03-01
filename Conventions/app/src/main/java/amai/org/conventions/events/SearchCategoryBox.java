@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
-import amai.org.conventions.model.EventType;
 
 public class SearchCategoryBox extends LinearLayout {
 
@@ -32,7 +31,7 @@ public class SearchCategoryBox extends LinearLayout {
 		textView.setText(searchCategory.getName());
 		int color;
 		if (searchCategory.hasColor()) {
-			color = darkenColor(searchCategory.getColor(), 1);
+			color = searchCategory.getColor();
 		} else {
 			color = ThemeAttributes.getColor(getContext(), R.attr.eventTimeDefaultBackgroundColor);
 		}
@@ -42,7 +41,7 @@ public class SearchCategoryBox extends LinearLayout {
 				new int[]{android.R.attr.state_checked}
 			},
 			new int[]{
-				darkenColor(color, 2),
+				color,
 				color
 		});
 		CompoundButtonCompat.setButtonTintList(this.checkBox, checkboxColors);
