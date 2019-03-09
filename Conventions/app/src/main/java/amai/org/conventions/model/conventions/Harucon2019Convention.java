@@ -158,22 +158,21 @@ public class Harucon2019Convention extends AmaiConvention {
                 .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/Idol-Voice-1.jpg", R.drawable.event_idol)
                 .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/What-did-they-mean-1.jpg", R.drawable.event_poat)
                 .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/Humor.jpg", R.drawable.event_humor)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/cagliostro-800X600.jpg", R.drawable.event_franch_thief)
+                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/cagliostro-800X600.jpg", R.drawable.event_french_thief)
                 .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/rhythm-games.jpg", R.drawable.event_rhythm_games)
                 .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/sceen-9.png", R.drawable.event_kagura)
                 .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/Character-design-1.jpg", R.drawable.event_design_workshop)
                 .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/japanese-1.jpg", R.drawable.event_adarzaks)
                 .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/Sukeban.jpg", R.drawable.event_like_a_girl)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/sayoasa_final_04-copy.jpg", R.drawable.maquia_japanese)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/sayoasa_final_14-copy.jpg", R.drawable.sayoasa_final_14_copy)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/maquia.jpg", R.drawable.sayoasa_final_09_copy)
+                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/sayoasa_final_04-copy.jpg", R.drawable.event_maquia1)
+                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/sayoasa_final_14-copy.jpg", R.drawable.event_maquia2)
+                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/maquia.jpg", R.drawable.event_maquia3)
+                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/signing-event.jpg", R.drawable.event_signing)
                 ;
 
         imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.harucon2019_event_default_background);
 
         // Excluded IDs - mostly for debug purposes (don't show messages about these when entering an event that has them)
-        // Foreground text is not readable
-
         imageMapper.addExcludedIds(
                 // Nami judges
                 "http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/ram.jpg",
@@ -193,7 +192,9 @@ public class Harucon2019Convention extends AmaiConvention {
                 "http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/hikari-1.jpg",
                 "http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/tal-1.jpg",
                 "http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/sivan-1.jpg",
-                "http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/73C5FCF9-4880-4025-8A0C-ECB8935BCB2C.jpeg"
+                "http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/73C5FCF9-4880-4025-8A0C-ECB8935BCB2C.jpeg",
+                // Image cannot be used due to the text
+                "http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/Manga.png"
         );
 
         return imageMapper;
