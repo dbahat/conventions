@@ -15,15 +15,6 @@
     <!-- Required for google GCM, for push notifications -->
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
-    <!-- These permissions is wrongly added by google play services in version 12.0.0
-         See https://issuetracker.google.com/issues/76024034 -->
-    <uses-permission
-        android:name="android.permission.READ_PHONE_STATE"
-        tools:node="remove" />
-    <uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        tools:node="remove" />
-
     <uses-feature
         android:name="android.hardware.location"
         android:required="false" />
