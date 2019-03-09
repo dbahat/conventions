@@ -157,25 +157,13 @@ public class Harucon2019Convention extends AmaiConvention {
                 .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/Persona-1.jpg", R.drawable.event_persona)
                 .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/Idol-Voice-1.jpg", R.drawable.event_idol)
                 .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/What-did-they-mean-1.jpg", R.drawable.event_poat)
-        ;
-//	.addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/Humor.jpg", null)
-// | ההומור היפני של מגנה ואנימה
-//.addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/cagliostro-800X600.jpg", null) //]
-// | הגנב הצרפתי, הבלש האנגלי והבמאי היפני
-//		http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/rhythm-games.jpg]
-// | משחקי קצב 2: שובו של שטיח הריקוד
-//		http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/sceen-9.png]
-// | כשפעמוני הקאגורה מצלצלים
-//		http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/Manga.png]
-// | של מי המנגה הזאת בכלל?
-//		http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/signing-event.jpg]
-// | אירוע החתמות
-//		http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/Character-design-1.jpg]
-// | סדנת עיצוב דמויות
-//		http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/japanese-1.jpg]
-// | שיעור יפנית למתחילים
-//		http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/Sukeban.jpg]
-// | Fight Like a Girl
+                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/Humor.jpg", R.drawable.event_humor)
+                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/cagliostro-800X600.jpg", R.drawable.event_franch_thief)
+                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/rhythm-games.jpg", R.drawable.event_rhythm_games)
+                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/sceen-9.png", R.drawable.event_kagura)
+                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/Character-design-1.jpg", R.drawable.event_design_workshop)
+                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/japanese-1.jpg", R.drawable.event_adarzaks)
+                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/Sukeban.jpg", R.drawable.event_like_a_girl);
 
         imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.harucon2019_event_default_background);
 
