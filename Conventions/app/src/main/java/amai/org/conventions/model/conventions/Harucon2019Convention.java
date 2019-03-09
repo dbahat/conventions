@@ -225,186 +225,206 @@ public class Harucon2019Convention extends AmaiConvention {
         Hall signingArea = this.getHalls().findByName(SIGNING_AREA_NAME);
         Hall cosplayArea = this.getHalls().findByName(COSPLAY_AREA_NAME);
 
-        Floor entrance = new Floor(1)
-                .withName("מתחם כניסה")
-                .withImageResource(R.drawable.cami2018_entrance_map, false)
-                .withImageHeight(523.20001f)
-                .withImageWidth(796.45038f);
-
-        Floor floor1 = new Floor(2)
+        Floor floor1 = new Floor(1)
                 .withName("קומה 1")
-                .withImageResource(R.raw.cami2018_floor1, true)
-                .withImageWidth(908.495f)
-                .withImageHeight(469.49725f);
-        Floor floor2 = new Floor(3)
+                .withImageResource(R.raw.harucon2019_floor1, true)
+                .withImageWidth(1873.49585f)
+                .withImageHeight(957.69702f);
+        Floor floor2 = new Floor(2)
                 .withName("קומה 2")
-                .withImageResource(R.raw.cami2018_floor2, true)
-                .withImageWidth(986.86462f)
-                .withImageHeight(585.27039f);
+                .withImageResource(R.raw.harucon2019_floor2, true)
+                .withImageWidth(2121.36499f)
+                .withImageHeight(1279.09998f);
 
         StandsArea agam = new StandsArea().withName("טרקלין אגם").withStands(getAgamStands())/*.withImageResource(R.drawable.stands_agam).withImageWidth(2700).withImageHeight(1504)*/;
         StandsArea pinkus = new StandsArea().withName("אולם פינקוס").withStands(getPinkusStands())/*.withImageResource(R.drawable.stands_pinkus).withImageWidth(2700).withImageHeight(1708)*/;
         StandsArea nesher = new StandsArea().withName("רחבת הכניסה").withStands(getNesherStands())/*.withImageResource(R.drawable.stands_nesher).withImageWidth(2588).withImageHeight(1588)*/;
         return new ConventionMap()
-                .withFloors(Arrays.asList(entrance, floor1, floor2))
+                .withFloors(Arrays.asList(floor1, floor2))
                 .withDefaultFloor(floor1)
                 .withLocations(
                         CollectionUtils.flattenList(
-                                inFloor(entrance,
-                                        new MapLocation()
-                                                .withPlace(new Place().withName("מתחם הזמנה מראש"))
-                                                .withMarkerResource(R.raw.cami2018_marker_preorder, true)
-                                                .withSelectedMarkerResource(R.raw.cami2018_marker_preorder_selected, true)
-                                                .withMarkerHeight(72.6f)
-                                                .withX(667.4f)
-                                                .withY(288.9f),
-                                        new MapLocation()
-                                                .withPlace(new Place().withName("מתחם קנייה במקום"))
-                                                .withMarkerResource(R.raw.cami2018_marker_cashiers, true)
-                                                .withSelectedMarkerResource(R.raw.cami2018_marker_cashiers_selected, true)
-                                                .withMarkerHeight(72.6f)
-                                                .withX(99.05f)
-                                                .withY(374.9f)
-                                ),
                                 inFloor(floor1,
                                         new MapLocation()
                                                 .withPlace(new Place().withName("שירותים"))
-                                                .withMarkerResource(R.raw.cami2018_marker_toilet, true)
-                                                .withSelectedMarkerResource(R.raw.cami2018_marker_toilet_selected, true)
-                                                .withMarkerHeight(54.9f)
-                                                .withX(845.362f)
-                                                .withY(301.397f),
+                                                .withMarkerResource(R.raw.harucon2019_marker_toilet, true)
+                                                .withSelectedMarkerResource(R.raw.harucon2019_marker_toilet_selected, true)
+                                                .withMarkerHeight(114.5f)
+                                                .withX(1752.763f)
+                                                .withY(617.797f),
                                         new MapLocation() // This is before the guest sign post so it will be selected as the stands area
                                                 .withName("מודיעין ודוכן אמא\"י")
                                                 .withPlace(nesher)
-                                                .withMarkerResource(R.raw.cami2018_marker_information, true)
-                                                .withSelectedMarkerResource(R.raw.cami2018_marker_information_selected, true)
-                                                .withMarkerHeight(81.4f)
-                                                .withX(410.362f)
-                                                .withY(178.897f),
+                                                .withMarkerResource(R.raw.harucon2019_marker_info, true)
+                                                .withSelectedMarkerResource(R.raw.harucon2019_marker_info_selected, true)
+                                                .withMarkerHeight(169.6f)
+                                                .withX(845.163f)
+                                                .withY(362.297f),
                                         new MapLocation()
                                                 .withPlace(signingArea)
-                                                .withMarkerResource(R.raw.cami2018_marker_signings, true)
-                                                .withSelectedMarkerResource(R.raw.cami2018_marker_signings_selected, true)
-                                                .withMarkerHeight(64.7f)
-                                                .withX(678.062f)
-                                                .withY(252.497f),
+                                                .withMarkerResource(R.raw.harucon2019_marker_signing, true)
+                                                .withSelectedMarkerResource(R.raw.harucon2019_marker_signing_selected, true)
+                                                .withMarkerHeight(135f)
+                                                .withX(1403.863f)
+                                                .withY(515.697f),
                                         new MapLocation()
                                                 .withName("מתחם דוכנים")
                                                 .withPlace(pinkus)
-                                                .withMarkerResource(R.raw.cami2018_marker_stands, true)
-                                                .withSelectedMarkerResource(R.raw.cami2018_marker_stands_selected, true)
-                                                .withMarkerHeight(53.2f)
-                                                .withX(581.062f)
-                                                .withY(317.797f),
+                                                .withMarkerResource(R.raw.harucon2019_marker_stands, true)
+                                                .withSelectedMarkerResource(R.raw.harucon2019_marker_stands_selected, true)
+                                                .withMarkerHeight(111f)
+                                                .withX(1201.363f)
+                                                .withY(651.797f),
                                         new MapLocation()
                                                 .withPlace(new Place().withName("שמירת חפצים"))
-                                                .withMarkerResource(R.raw.cami2018_marker_storage, true)
-                                                .withSelectedMarkerResource(R.raw.cami2018_marker_storage_selected, true)
-                                                .withMarkerHeight(65.4f)
-                                                .withX(517.562f)
-                                                .withY(115.997f),
+                                                .withMarkerResource(R.raw.harucon2019_marker_storage, true)
+                                                .withSelectedMarkerResource(R.raw.harucon2019_marker_storage_selected, true)
+                                                .withMarkerHeight(136.4f)
+                                                .withX(1068.863f)
+                                                .withY(230.897f),
+                                        new MapLocation()
+                                                .withPlace(new Place().withName("מעלית"))
+                                                .withMarkerResource(R.raw.harucon2019_marker_elevator, true)
+                                                .withSelectedMarkerResource(R.raw.harucon2019_marker_elevator_selected, true)
+                                                .withMarkerHeight(111.102f)
+                                                .withX(862.263f)
+                                                .withY(162.997f),
                                         new MapLocation()
                                                 .withPlace(new Place().withName("שירותים"))
-                                                .withMarkerResource(R.raw.cami2018_marker_toilet, true)
-                                                .withSelectedMarkerResource(R.raw.cami2018_marker_toilet_selected, true)
-                                                .withMarkerHeight(54.9f)
-                                                .withX(496.562f)
-                                                .withY(57.197f),
+                                                .withMarkerResource(R.raw.harucon2019_marker_toilet, true)
+                                                .withSelectedMarkerResource(R.raw.harucon2019_marker_toilet_selected, true)
+                                                .withMarkerHeight(114.5f)
+                                                .withX(1025.063f)
+                                                .withY(108.297f),
                                         new MapLocation()
                                                 .withPlace(eshkol1)
-                                                .withMarkerResource(R.raw.cami2018_marker_eshkol1, true)
-                                                .withSelectedMarkerResource(R.raw.cami2018_marker_eshkol1_selected, true)
-                                                .withMarkerHeight(65.5f)
-                                                .withX(240.062f)
-                                                .withY(295.597f),
+                                                .withMarkerResource(R.raw.harucon2019_marker_eshkol1, true)
+                                                .withSelectedMarkerResource(R.raw.harucon2019_marker_eshkol1_selected, true)
+                                                .withMarkerHeight(136.5f)
+                                                .withX(489.863f)
+                                                .withY(605.697f),
                                         new MapLocation()
                                                 .withPlace(schwatrz)
-                                                .withMarkerResource(R.raw.cami2018_marker_schwartz, true)
-                                                .withSelectedMarkerResource(R.raw.cami2018_marker_schwartz_selected, true)
-                                                .withMarkerHeight(64.6f)
-                                                .withX(332.162f)
-                                                .withY(259.997f),
+                                                .withMarkerResource(R.raw.harucon2019_marker_schwartz, true)
+                                                .withSelectedMarkerResource(R.raw.harucon2019_marker_schwartz_selected, true)
+                                                .withMarkerHeight(134.8f)
+                                                .withX(682.163f)
+                                                .withY(531.397f),
                                         new MapLocation()
                                                 .withPlace(eshkol3)
-                                                .withMarkerResource(R.raw.cami2018_marker_eshkol3, true)
-                                                .withSelectedMarkerResource(R.raw.cami2018_marker_eshkol3_selected, true)
-                                                .withMarkerHeight(65.9f)
-                                                .withX(165.712f)
-                                                .withY(393.597f),
+                                                .withMarkerResource(R.raw.harucon2019_marker_eshkol3, true)
+                                                .withSelectedMarkerResource(R.raw.harucon2019_marker_eshkol3_selected, true)
+                                                .withMarkerHeight(137.5f)
+                                                .withX(334.663f)
+                                                .withY(810.197f),
                                         new MapLocation()
                                                 .withPlace(eshkol2)
-                                                .withMarkerResource(R.raw.cami2018_marker_eshkol2, true)
-                                                .withSelectedMarkerResource(R.raw.cami2018_marker_eshkol2_selected, true)
-                                                .withMarkerHeight(65.9f)
-                                                .withX(258.812f)
-                                                .withY(393.597f),
+                                                .withMarkerResource(R.raw.harucon2019_marker_eshkol2, true)
+                                                .withSelectedMarkerResource(R.raw.harucon2019_marker_eshkol2_selected, true)
+                                                .withMarkerHeight(137.5f)
+                                                .withX(529.113f)
+                                                .withY(810.197f),
                                         new MapLocation()
                                                 .withPlace(new Place().withName("שירותים"))
-                                                .withMarkerResource(R.raw.cami2018_marker_toilet, true)
-                                                .withSelectedMarkerResource(R.raw.cami2018_marker_toilet_selected, true)
-                                                .withMarkerHeight(55.4f)
-                                                .withX(129.162f)
-                                                .withY(239.597f)),
+                                                .withMarkerResource(R.raw.harucon2019_marker_toilet, true)
+                                                .withSelectedMarkerResource(R.raw.harucon2019_marker_toilet_selected, true)
+                                                .withMarkerHeight(115.6f)
+                                                .withX(258.363f)
+                                                .withY(488.697f),
+                                        new MapLocation()
+                                                .withPlace(new Place().withName("מעלית"))
+                                                .withMarkerResource(R.raw.harucon2019_marker_elevator, true)
+                                                .withSelectedMarkerResource(R.raw.harucon2019_marker_elevator_selected, true)
+                                                .withMarkerHeight(111.104f)
+                                                .withX(54.163f)
+                                                .withY(591.597f)),
                                 inFloor(floor2,
                                         new MapLocation()
                                                 .withPlace(workshops)
-                                                .withMarkerResource(R.raw.cami2018_marker_workshops, true)
-                                                .withSelectedMarkerResource(R.raw.cami2018_marker_workshops_selected, true)
-                                                .withMarkerHeight(79.1f)
-                                                .withX(825.9f)
-                                                .withY(391.57f),
+                                                .withMarkerResource(R.raw.harucon2019_marker_workshops, true)
+                                                .withSelectedMarkerResource(R.raw.harucon2019_marker_workshops_selected, true)
+                                                .withMarkerHeight(164.1f)
+                                                .withX(1755.5f)
+                                                .withY(1105f),
                                         new MapLocation()
                                                 .withPlace(new Place().withName("שיפוט קוספליי"))
-                                                .withMarkerResource(R.raw.cami2018_marker_cosplay_judgement, true)
-                                                .withSelectedMarkerResource(R.raw.cami2018_marker_cosplay_judgement_selected, true)
-                                                .withMarkerHeight(66.4f)
-                                                .withX(866.7f)
-                                                .withY(368.57f),
+                                                .withMarkerResource(R.raw.harucon2019_marker_cosplay_judgement, true)
+                                                .withSelectedMarkerResource(R.raw.harucon2019_marker_cosplay_judgement_selected, true)
+                                                .withMarkerHeight(136.6f)
+                                                .withX(1593f)
+                                                .withY(1043.7f),
+                                        new MapLocation()
+                                                .withPlace(new Place().withName("חדר הורים"))
+                                                .withMarkerResource(R.raw.harucon2019_marker_parents, true)
+                                                .withSelectedMarkerResource(R.raw.harucon2019_marker_parents_selected, true)
+                                                .withMarkerHeight(138.6f)
+                                                .withX(1881.7f)
+                                                .withY(765.1f),
+                                        new MapLocation()
+                                                .withPlace(new Place().withName("שיפוט WCS"))
+                                                .withMarkerResource(R.raw.harucon2019_marker_wcs, true)
+                                                .withSelectedMarkerResource(R.raw.harucon2019_marker_wcs_selected, true)
+                                                .withMarkerHeight(102.8f)
+                                                .withX(1707.3f)
+                                                .withY(871.3f),
                                         new MapLocation()
                                                 .withPlace(mainHall)
-                                                .withMarkerResource(R.raw.cami2018_marker_main_hall, true)
-                                                .withSelectedMarkerResource(R.raw.cami2018_marker_main_hall_selected, true)
-                                                .withMarkerHeight(100.302f)
-                                                .withX(634.9f)
-                                                .withY(294.37f),
+                                                .withMarkerResource(R.raw.harucon2019_marker_main_hall, true)
+                                                .withSelectedMarkerResource(R.raw.harucon2019_marker_main_hall_selected, true)
+                                                .withMarkerHeight(209.204f)
+                                                .withX(1398f)
+                                                .withY(610.4f),
                                         new MapLocation()
                                                 .withPlace(new Place().withName("שירותים"))
-                                                .withMarkerResource(R.raw.cami2018_marker_toilet, true)
-                                                .withSelectedMarkerResource(R.raw.cami2018_marker_toilet_selected, true)
-                                                .withMarkerHeight(58.9f)
-                                                .withX(615f)
-                                                .withY(63.87f),
+                                                .withMarkerResource(R.raw.harucon2019_marker_toilet, true)
+                                                .withSelectedMarkerResource(R.raw.harucon2019_marker_toilet_selected, true)
+                                                .withMarkerHeight(122.8f)
+                                                .withX(1356.5f)
+                                                .withY(129.3f),
+                                        new MapLocation()
+                                                .withPlace(new Place().withName("מעלית"))
+                                                .withMarkerResource(R.raw.harucon2019_marker_elevator, true)
+                                                .withSelectedMarkerResource(R.raw.harucon2019_marker_elevator_selected, true)
+                                                .withMarkerHeight(111.102f)
+                                                .withX(1205f)
+                                                .withY(151.3f),
                                         new MapLocation()
                                                 .withPlace(cosplayArea)
-                                                .withMarkerResource(R.raw.cami2018_marker_cosplay_corner, true)
-                                                .withSelectedMarkerResource(R.raw.cami2018_marker_cosplay_corner_selected, true)
-                                                .withMarkerHeight(167.2f)
-                                                .withX(530.5f)
-                                                .withY(408.07f),
+                                                .withMarkerResource(R.raw.harucon2019_marker_cosplay_area, true)
+                                                .withSelectedMarkerResource(R.raw.harucon2019_marker_cosplay_area_selected, true)
+                                                .withMarkerHeight(349f)
+                                                .withX(1180.2f)
+                                                .withY(847.5f),
                                         new MapLocation()
                                                 .withPlace(games)
                                                 .withName("משחקייה")
-                                                .withMarkerResource(R.raw.cami2018_marker_games, true)
-                                                .withSelectedMarkerResource(R.raw.cami2018_marker_games_selected, true)
-                                                .withMarkerHeight(166f)
-                                                .withX(388.5f)
-                                                .withY(364.47f),
+                                                .withMarkerResource(R.raw.harucon2019_marker_games, true)
+                                                .withSelectedMarkerResource(R.raw.harucon2019_marker_games_selected, true)
+                                                .withMarkerHeight(346.4f)
+                                                .withX(883.9f)
+                                                .withY(756.5f),
                                         new MapLocation()
-                                                .withName("סמטת האמנים")
+                                                .withName("שדרת ציירים ומתחם דוכנים")
                                                 .withPlace(agam)
-                                                .withMarkerResource(R.raw.cami2018_marker_artists, true)
-                                                .withSelectedMarkerResource(R.raw.cami2018_marker_artists_selected, true)
-                                                .withMarkerHeight(55.8f)
-                                                .withX(388.5f)
-                                                .withY(195.47f),
+                                                .withMarkerResource(R.raw.harucon2019_marker_artists, true)
+                                                .withSelectedMarkerResource(R.raw.harucon2019_marker_artists_selected, true)
+                                                .withMarkerHeight(163.9f)
+                                                .withX(883.9f)
+                                                .withY(403.8f),
                                         new MapLocation()
                                                 .withPlace(new Place().withName("שירותים"))
-                                                .withMarkerResource(R.raw.cami2018_marker_toilet, true)
-                                                .withSelectedMarkerResource(R.raw.cami2018_marker_toilet_selected, true)
-                                                .withMarkerHeight(53.3f)
-                                                .withX(161.5f)
-                                                .withY(316.87f))
+                                                .withMarkerResource(R.raw.harucon2019_marker_toilet, true)
+                                                .withSelectedMarkerResource(R.raw.harucon2019_marker_toilet_selected, true)
+                                                .withMarkerHeight(111.3f)
+                                                .withX(402.5f)
+                                                .withY(557f),
+                                        new MapLocation()
+                                                .withPlace(new Place().withName("מעלית"))
+                                                .withMarkerResource(R.raw.harucon2019_marker_elevator, true)
+                                                .withSelectedMarkerResource(R.raw.harucon2019_marker_elevator_selected, true)
+                                                .withMarkerHeight(111.102f)
+                                                .withX(294f)
+                                                .withY(648.6f))
                         )
                 );
     }
