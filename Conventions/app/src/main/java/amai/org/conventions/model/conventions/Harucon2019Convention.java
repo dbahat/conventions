@@ -163,7 +163,11 @@ public class Harucon2019Convention extends AmaiConvention {
                 .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/sceen-9.png", R.drawable.event_kagura)
                 .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/Character-design-1.jpg", R.drawable.event_design_workshop)
                 .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/japanese-1.jpg", R.drawable.event_adarzaks)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/Sukeban.jpg", R.drawable.event_like_a_girl);
+                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/Sukeban.jpg", R.drawable.event_like_a_girl)
+                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/sayoasa_final_04-copy.jpg", R.drawable.maquia_japanese)
+                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/sayoasa_final_14-copy.jpg", R.drawable.sayoasa_final_14_copy)
+                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/maquia.jpg", R.drawable.sayoasa_final_09_copy)
+                ;
 
         imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.harucon2019_event_default_background);
 
