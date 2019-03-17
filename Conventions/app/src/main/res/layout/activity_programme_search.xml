@@ -59,6 +59,8 @@
             android:textColor="?android:textColorPrimary"
             android:layout_marginStart="?contentStartMargin"
             android:layout_marginEnd="?contentEndMargin"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
             android:textSize="@dimen/text_size_small_material"
             />
 
