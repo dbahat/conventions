@@ -48,8 +48,10 @@ public class SffModelParser implements ModelParser {
 			JsonObject timeObject = eventObj.get("time").getAsJsonObject();
 			Date startTime = parseEventTime(timeObject.get("start").getAsString());
 			Date endTime = parseEventTime(timeObject.get("end").getAsString());
-			JsonArray speakers = eventObj.get("speakers").getAsJsonArray();
-			String allSpeakers = speakers.size() > 0 ? TextUtils.join(", ", getSpeakers(speakers)) : "";
+
+			// In cod 3.0 the speakers seem to return as a string
+//			JsonArray speakers = eventObj.get("speakers").getAsJsonArray();
+			String allSpeakers = eventObj.get("speakers").getAsString();//speakers.size() > 0 ? TextUtils.join(", ", getSpeakers(speakers)) : "";
 
 			String hallName = eventObj.get("location").isJsonNull() ? "" : decodeHtml(eventObj.get("location").getAsString());
 			if (TextUtils.isEmpty(hallName)) {

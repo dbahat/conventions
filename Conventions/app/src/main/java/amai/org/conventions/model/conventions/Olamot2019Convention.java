@@ -32,7 +32,7 @@ import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.HttpConnectionCreator;
 import sff.org.conventions.R;
 
-public class Icon2018Convention extends SffConvention {
+public class Olamot2019Convention extends SffConvention {
 	private static final String HALL_NAME_CINEMATHEQUE_1 = "סינמטק 1";
 	private static final String HALL_NAME_CINEMATHEQUE_2 = "סינמטק 2";
 	private static final String HALL_NAME_CINEMATHEQUE_5 = "סינמטק 5";
@@ -66,6 +66,8 @@ public class Icon2018Convention extends SffConvention {
 	private static final String HALL_NAME_ARTEMIS_1 = "ארטמיס 1";
 	private static final String HALL_NAME_ARTEMIS_2 = "ארטמיס 2";
 
+	private static final String API_SLUG = "olamot2019";
+
 	@Override
 	protected ConventionStorage initStorage() {
 		return new ConventionStorage(this, R.raw.icon2018_convention_events, 3);
@@ -73,22 +75,22 @@ public class Icon2018Convention extends SffConvention {
 
 	@Override
 	protected Calendar initStartDate() {
-		return Dates.createDate(2018, Calendar.SEPTEMBER, 25);
+		return Dates.createDate(2019, Calendar.APRIL, 23);
 	}
 
 	@Override
 	protected Calendar initEndDate() {
-		return Dates.createDate(2018, Calendar.SEPTEMBER, 27);
+		return Dates.createDate(2019, Calendar.APRIL, 24);
 	}
 
 	@Override
 	protected String initID() {
-		return "Icon2018";
+		return "Olamot2019";
 	}
 
 	@Override
 	protected String initDisplayName() {
-		return "פסטיבל אייקון 2018";
+		return "כנס עולמות 2019";
 	}
 
 	@Override
@@ -513,7 +515,7 @@ public class Icon2018Convention extends SffConvention {
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_LECTURER_QUALITY, "entry.1327236956")
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_SIMILAR_EVENTS, "entry.1416969956")
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_ADDITIONAL_INFO, "entry.1582215667")
-					.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLScHMFgN36WPynPBnoOPBQttY2Kylg2VcnAULKKERsG2UxUQZg/formResponse"));
+					.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSdg9wGLPW7XgvUo4EfHg9nDrMJ0fXNTlgqKsLGdDeDte2Gw6g/formResponse"));
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
@@ -533,7 +535,7 @@ public class Icon2018Convention extends SffConvention {
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_MAP_SIGNS, "entry.1416969956")
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_CONFLICTING_EVENTS, "entry.1582215667")
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_IMPROVEMENT, "entry.993320932")
-					.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSewy5mWXDUtmdMN_h7PO899Hkxpzd-zJyHypVLbAYnHPi576Q/formResponse"));
+					.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSfQ_auzBCGYsVjq-n0FA6m9EH-ICDRdvH0wubL0bDKweR8UHw/formResponse"));
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
@@ -543,7 +545,7 @@ public class Icon2018Convention extends SffConvention {
 	@Override
 	protected URL initModelURL() {
 		try {
-			return new URL("https://api.sf-f.org.il/program/list_events.php?slug=icon2018");
+			return new URL("https://api.sf-f.org.il/program/list_events.php?slug=" + API_SLUG);
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
@@ -552,7 +554,7 @@ public class Icon2018Convention extends SffConvention {
 	@Override
 	protected URL initTicketsLastUpdateURL() {
 		try {
-			return new URL("https://api.sf-f.org.il/program/cache_get_last_updated.php?which=available_tickets&slug=icon2018");
+			return new URL("https://api.sf-f.org.il/program/cache_get_last_updated.php?which=available_tickets&slug=" + API_SLUG);
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
@@ -561,7 +563,7 @@ public class Icon2018Convention extends SffConvention {
 	@Override
 	protected URL initUpdatesURL() {
 		try {
-			return new URL("https://api.sf-f.org.il/announcements/get.php?slug=icon2018"); // use test_con for tests
+			return new URL("https://api.sf-f.org.il/announcements/get.php?slug=" + API_SLUG); // use test_con for tests
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
@@ -570,7 +572,7 @@ public class Icon2018Convention extends SffConvention {
 	@Override
 	public URL getEventTicketsNumberURL(ConventionEvent event) {
 		try {
-			return new URL("https://api.sf-f.org.il/program/available_tickets_per_event.php?slug=icon2018&id=" + event.getServerId()); // use test_con for tests
+			return new URL("https://api.sf-f.org.il/program/available_tickets_per_event.php?slug=" + API_SLUG + "&id=" + event.getServerId()); // use test_con for tests
 		} catch (MalformedURLException e) {
 			return null;
 		}
@@ -606,7 +608,7 @@ public class Icon2018Convention extends SffConvention {
 
 	@Override
 	public HttpURLConnection getUserPurchasedEventsRequest(String user, String password) throws Exception {
-		URL url = new URL("https://api.sf-f.org.il/program/events_per_user.php?slug=icon2018&email=" +
+		URL url = new URL("https://api.sf-f.org.il/program/events_per_user.php?slug=" + API_SLUG + "&email=" +
 				URLEncoder.encode(user, "UTF-8") + "&pass=" + URLEncoder.encode(password, "UTF-8"));
 		HttpURLConnection request = HttpConnectionCreator.createConnection(url);
 		request.setRequestMethod("POST");
@@ -616,7 +618,7 @@ public class Icon2018Convention extends SffConvention {
 		BufferedWriter writer = null;
 		try {
 			writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-			writer.write("slug=icon2018&email=" +
+			writer.write("slug=" + API_SLUG + "&email=" +
 					URLEncoder.encode(user, "UTF-8") + "&pass=" + URLEncoder.encode(password, "UTF-8"));
 			writer.flush();
 		} finally {
