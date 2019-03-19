@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="olamot2019_blue">#1B75BB</color>
+    <color name="olamot2019_grey1">#231F20</color>
+    <color name="olamot2019_grey2">#6A6B6C</color>
+    <color name="olamot2019_yellow1">#D3A150</color>
+    <color name="olamot2019_yellow2">#EEC060</color>
+    <color name="olamot2019_yellow3">#F0CB8B</color>
+    <color name="olamot2019_yellow4">#FAE4BF</color>
+    <color name="olamot2019_brown1">#965744</color>
+    <color name="olamot2019_brown2">#A25C4A</color>
+    <color name="olamot2019_brown3">#B2684C</color>
+    <color name="olamot2019_brown4">#D5987E</color>
+</resources>

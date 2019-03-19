@@ -2,22 +2,22 @@
 <resources>
     <!-- Relevant to all Icon conventions (convention/festival strings) -->
     <string name="missing_play_services_dialog_message">על מנת לקבל התראות במהלך הפסטיבל ולצפות בדרכי הגעה, יש להתקין או לעדכן את Google play services ולוודא שהשירות פעיל</string>
-    <string name="convention_feedback_title">פידבק על הפסטיבל</string>
-    <string name="question_liked">באיזו מידה נהנית מהפסטיבל?</string>
-    <string name="configure_notifications_dialog_message">באפליקציה זו נשלחות התראות בזמן הפסטיבל. ניתן לשנות את הגדרות קבלת ההתראות בכל זמן.</string>
-    <string name="home_convention_ended">הפסטיבל נגמר</string>
-    <string name="notification_channel_description_notifications">הודעות בזמן אמת מהנהלת הפסטיבל</string>
+    <string name="convention_feedback_title">פידבק על הכנס</string>
+    <string name="question_liked">באיזו מידה נהנית מהכנס?</string>
+    <string name="configure_notifications_dialog_message">באפליקציה זו נשלחות התראות בזמן הכנס. ניתן לשנות את הגדרות קבלת ההתראות בכל זמן.</string>
+    <string name="home_convention_ended">הכנס נגמר</string>
+    <string name="notification_channel_description_notifications">הודעות בזמן אמת מהנהלת הכנס</string>
 
     <!-- Relevant to all sf-f conventions -->
     <string name="arrival_methods_marker_name">%s - אשכול פיס</string>
     <string name="my_event_share_link">http://play.google.com/store/apps/details?id=sff.org.conventions</string>
 
     <!-- Relevant to all Icon conventions -->
-    <string name="app_name">פסטיבל אייקון</string>
-    <string name="my_events_no_data">הוסף אירוע לאירועים שלי ע\"י לחיצה על הכוכב בדף האירוע או ברשימת האירועים, או ע\"י יבוא מאתר אייקון</string>
-    <string name="add_events">הוספת אירועים מאתר אייקון</string>
-    <string name="add_events_instructions">הכנס שם משתמש וסיסמא לאתר אייקון על מנת להוסיף את האירועים להם קנית כרטיסים מראש.</string>
-    <string name="convention_feedback_subtitle">מלא פידבק כללי על הפסטיבל - קופות, יריד הדוכנים, הפונדק וכל דבר אחר.</string>
+    <string name="app_name">כנס עולמות</string>
+    <string name="my_events_no_data">הוסף אירוע לאירועים שלי ע\"י לחיצה על הכוכב בדף האירוע או ברשימת האירועים, או ע\"י יבוא מאתר עולמות</string>
+    <string name="add_events">הוספת אירועים מאתר עולמות</string>
+    <string name="add_events_instructions">הכנס שם משתמש וסיסמא לאתר עולמות על מנת להוסיף את האירועים להם קנית כרטיסים מראש.</string>
+    <string name="convention_feedback_subtitle">מלא פידבק כללי על הכנס - קופות, יריד הדוכנים, הפונדק וכל דבר אחר.</string>
 
     <!-- Relevant to this specific convention -->
     <string name="icon_kids">מתחם הילדים</string>
@@ -45,7 +45,7 @@
 <p><a title="העמותה למשחקי תפקידים בישראל" href="http://www.roleplay.org.il/" target="_blank" rel="noopener"><strong>העמותה למשחקי תפקידים בישראל</strong></a> הוקמה בשנת 1999 על ידי חובבים ישראלים ושמה לה למטרה לקדם את המודעות למשחקי התפקידים – תחביב שמושך כיום עשרות מיליוני צעירים ומבוגרים, נשים וגברים, בכל רחבי העולם. במשך שנות פעילותה קיימה העמותה מאות פעילויות, בעבודה התנדבותית של פעילים מסורים, וכן הוציאה לאור ספרים ובטאון. העמותה מפיקה בחול המועד פסח את כנס &quot;<a href="http://bigor.org.il/" target="_blank" rel="noopener">ביגור</a>&quot; ושותפה בארגון פסטיבל אייקון למדע בדיוני, פנטזיה ומשחקי תפקידים. כמו כן היא מספקת ייעוץ בתחומה לגופים מקצועיים ולכלי תקשורת. אתר העמותה: <a href="http://www.roleplay.org.il/" target="_blank" rel="noopener">www.roleplay.org.il</a></p>
 ]]></string>
     <string name="about_links"><![CDATA[
-<p><a href=\"http://2018.iconfestival.org.il/\">לאתר הפסטיבל</a></p>
+<p><a href=\"http://2019.olamot-con.org.il/\">לאתר הכנס</a></p>
 ]]></string>
     <string name="about_app_content"><![CDATA[
 האפליקציה פותחה על ידי דוד בהט וטל ספן עבור פסטיבל אייקון. בקשות והצעות ניתן לכתוב <a href="market://details?id=sff.org.conventions">בדף האפליקציה בחנות</a>.

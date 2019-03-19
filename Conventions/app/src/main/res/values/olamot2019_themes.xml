@@ -19,7 +19,7 @@
         <item name="highlightedButtonBackground">@drawable/icon2018_highlighted_button</item>
         <item name="highlightedButtonTextColor">@drawable/icon2018_highlighted_button_text</item>
         <item name="borderlessButtonColor">@color/icon2018_orange</item>
-        <item name="activitiesBackground">@drawable/icon2018_background</item>
+        <item name="activitiesBackground">@drawable/olamot2019_background</item>
         <item name="eventListDivider">@drawable/icon2018_event_list_divider</item>
         <item name="conflictingEventListDivider">@android:color/transparent</item>
         <item name="hintTextColor">@color/icon2018_purple2</item>
@@ -35,26 +35,26 @@
         <item name="selectedTabTextColor">@color/icon2018_purple1</item>
 
         <!-- Notifications -->
-        <item name="notificationSmallIcon">@drawable/icon2018_notification_small</item>
+        <item name="notificationSmallIcon">@drawable/olamot2019_notification_small</item>
         <!-- Toolbar -->
         <item name="toolbarBackground">@null</item>
         <item name="toolbarIconAccentColor">@color/icon2018_green1</item>
         <!-- Navigation Popup -->
         <item name="navigationPopupBackground">@color/icon2018_purple1</item>
-        <item name="navigationPopupTitle">@drawable/icon2018_logo_wide</item>
+        <item name="navigationPopupTitle">@drawable/olamot2019_logo_wide</item>
         <item name="navigationPopupBottomImage">@null</item>
         <item name="navigationPopupNotSelectedColor">@color/icon2018_purple5</item>
         <item name="navigationPopupSelectedColor">@color/white</item>
         <item name="navigationPopupSeparatorColor">@color/icon2018_purple5</item>
         <!-- About Screen -->
-        <item name="aboutLogo">@drawable/icon2018_logo_wide</item>
+        <item name="aboutLogo">@drawable/olamot2019_logo_wide</item>
         <!-- Home Screen -->
         <item name="homeBoxTopMargin">0dp</item>
         <item name="homeSingleButtonTopMargin">0dp</item>
         <item name="homeButtonsSideMargin">15dp</item>
-        <item name="homeBackground">@color/icon2018_yellow</item>
+        <item name="homeBackground">@drawable/olamot2019_home_background</item>
         <item name="homeToolbarTitle">@null</item>
-        <item name="homeLogo">@drawable/icon2018_logo_wide</item>
+        <item name="homeLogo">@null</item>
         <item name="homeTitleBackground">@color/icon2018_green1</item>
         <item name="homeTitleText">@color/icon2018_green5</item>
         <item name="homeMessageBackground">@color/icon2018_purple4</item>
@@ -64,7 +64,7 @@
         <item name="homeUpcomingEventBackground">@color/icon2018_purple4</item>
         <item name="homeButtonBackground">@drawable/icon2018_home_activity_button</item>
         <item name="homeButtonText">@color/icon2018_home_button_text_color</item>
-        <item name="homeBottomImage">@drawable/icon2018_home_bottom</item>
+        <item name="homeBottomImage">@null</item>
         <item name="homeEventNameInList">@color/white</item>
         <!-- Event View -->
         <item name="eventTypeEndedColor">@color/icon2018_purple1</item>
@@ -156,7 +156,7 @@
     </style>
 
     <style name="AppBaseTheme.Icon2018.Toolbar.Splash">
-        <item name="android:windowBackground">@drawable/icon2018_splash_background</item>
+        <item name="android:windowBackground">@drawable/olamot2019_splash_background</item>
     </style>
     <style name="OverflowMenu.Icon2018" parent="Widget.AppCompat.ActionButton.Overflow">
         <item name="android:src">@drawable/ic_more_vert_white_24dp</item>
