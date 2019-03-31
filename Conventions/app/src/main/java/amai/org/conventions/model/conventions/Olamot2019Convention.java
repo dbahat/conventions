@@ -67,10 +67,11 @@ public class Olamot2019Convention extends SffConvention {
 	private static final String HALL_NAME_ARTEMIS_2 = "ארטמיס 2";
 
 	private static final String API_SLUG = "olamot2019";
+	private static final String TEST_API_SLUG = "test_con";
 
 	@Override
 	protected ConventionStorage initStorage() {
-		return new ConventionStorage(this, R.raw.icon2018_convention_events, 3);
+		return new ConventionStorage(this, R.raw.olamot2019_convention_events, 0);
 	}
 
 	@Override
@@ -495,7 +496,7 @@ public class Olamot2019Convention extends SffConvention {
 	protected ImageIdToImageResourceMapper initImageMapper() {
 		ImageIdToImageResourceMapper imageMapper = new ImageIdToImageResourceMapper();
 
-		imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.icon2018_event_background);
+		imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.olamot2019_background);
 
 		return imageMapper;
 	}
@@ -563,7 +564,7 @@ public class Olamot2019Convention extends SffConvention {
 	@Override
 	protected URL initUpdatesURL() {
 		try {
-			return new URL("https://api.sf-f.org.il/announcements/get.php?slug=" + API_SLUG); // use test_con for tests
+			return new URL("https://api.sf-f.org.il/announcements/get.php?slug=" + API_SLUG);
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
@@ -572,7 +573,7 @@ public class Olamot2019Convention extends SffConvention {
 	@Override
 	public URL getEventTicketsNumberURL(ConventionEvent event) {
 		try {
-			return new URL("https://api.sf-f.org.il/program/available_tickets_per_event.php?slug=" + API_SLUG + "&id=" + event.getServerId()); // use test_con for tests
+			return new URL("https://api.sf-f.org.il/program/available_tickets_per_event.php?slug=" + API_SLUG + "&id=" + event.getServerId());
 		} catch (MalformedURLException e) {
 			return null;
 		}

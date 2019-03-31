@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape android:shape="rectangle" xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/icon2018_green1"/>
-    <stroke android:color="@color/white" android:width="3dp"/>
+    <solid android:color="@color/olamot2019_brown4"/>
+    <stroke android:color="@color/black" android:width="3dp"/>
 </shape>

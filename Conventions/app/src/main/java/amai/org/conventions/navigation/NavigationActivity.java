@@ -177,7 +177,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		final List<NavigationItem> items = new ArrayList<>(Arrays.asList(
 				new NavigationItem(HomeActivity.class, getString(R.string.home), ContextCompat.getDrawable(this, R.drawable.ic_home_white_36dp)),
 				new NavigationItem(ProgrammeActivity.class, getString(R.string.programme_title), ContextCompat.getDrawable(this, R.drawable.events_list)),
-				new NavigationItem(IconKidsActivity.class, getString(R.string.icon_kids), ContextCompat.getDrawable(this, R.drawable.ic_face_white_24dp)),
+//				new NavigationItem(IconKidsActivity.class, getString(R.string.icon_kids), ContextCompat.getDrawable(this, R.drawable.ic_face_white_24dp)),
 				new NavigationItem(MyEventsActivity.class, getString(R.string.my_events_title), ContextCompat.getDrawable(this, R.drawable.events_list_with_star))
 		));
 
@@ -192,7 +192,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		if (Convention.getInstance().canFillFeedback()) {
 			items.add(new NavigationItem(FeedbackActivity.class, getString(R.string.feedback), ContextCompat.getDrawable(this, R.drawable.feedback_menu_icon)));
 		}
-		items.add(new NavigationItem(DiscountsActivity.class, getString(R.string.discounts), ContextCompat.getDrawable(this, R.drawable.ic_card_giftcard_white)));
+//		items.add(new NavigationItem(DiscountsActivity.class, getString(R.string.discounts), ContextCompat.getDrawable(this, R.drawable.ic_card_giftcard_white)));
 		items.add(new NavigationItem(AboutActivity.class, getString(R.string.about), ContextCompat.getDrawable(this, R.drawable.ic_action_about)));
 		items.add(new NavigationItem(SettingsActivity.class, getString(R.string.settings), ContextCompat.getDrawable(this, R.drawable.ic_settings)));
 
