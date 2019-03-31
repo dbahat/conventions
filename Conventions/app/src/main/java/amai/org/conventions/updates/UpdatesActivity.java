@@ -35,6 +35,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		setToolbarAndContentContainerBackground(ThemeAttributes.getDrawable(this, R.attr.updatesBackgroundDrawable));
 		setToolbarTitle(getResources().getString(R.string.updates));
 		setContentInContentContainer(R.layout.activity_updates, false);
 		resolveUiElements();
