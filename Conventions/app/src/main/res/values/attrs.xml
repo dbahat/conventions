@@ -101,6 +101,7 @@
         <attr name="updateItemBorder" format="color|reference"/>
         <attr name="updateItemSeparator" format="color|reference"/>
         <attr name="updatesBackground" format="color|reference"/>
+        <attr name="updatesBackgroundDrawable" format="color|reference"/>
         <attr name="updateTextColor" format="color|reference"/>
         <attr name="newUpdateBackground" format="color|reference"/>
         <attr name="newUpdateTextColor" format="color|reference"/>

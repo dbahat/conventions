@@ -67,6 +67,7 @@
         <item name="aboutLogoMargins">20dp</item>
 
         <!-- Updates -->
+        <item name="updatesBackgroundDrawable">?activitiesBackground</item>
         <item name="updatesBackground">?android:colorBackground</item>
         <item name="updateItemSeparator">?separatorColor</item>
         <item name="updateTextColor">?android:textColorPrimary</item>
@@ -162,6 +163,7 @@
         <item name="aboutLogoMargins">20dp</item>
 
         <!-- Updates -->
+        <item name="updatesBackgroundDrawable">?activitiesBackground</item>
         <item name="updatesBackground">?android:colorBackground</item>
         <item name="updateItemSeparator">?separatorColor</item>
         <item name="updateTextColor">?android:textColorPrimary</item>
