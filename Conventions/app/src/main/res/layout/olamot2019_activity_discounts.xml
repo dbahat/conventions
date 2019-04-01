@@ -18,7 +18,7 @@
             android:id="@+id/discounts_content1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/icon2018_discounts1"
+            android:text="@string/olamot2019_discounts1"
             android:layout_marginBottom="20dp"
             android:textSize="14sp"
             android:textColor="?android:textColorPrimary"
@@ -27,81 +27,40 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/icon2018_bbb_logo"
+            android:src="@drawable/olamot2019_suduch_logo"
             android:layout_marginBottom="15dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
             android:textColor="?android:textColorPrimary"
-            android:text="@string/icon2018_bbb_info"
+            android:textSize="14sp"
+            android:text="@string/olamot2019_suduch_info"
             android:layout_marginBottom="30dp"/>
         <amai.org.conventions.customviews.AspectRatioImageView
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/icon2018_b12_logo"
+            android:src="@drawable/olamot2019_joya_logo"
             android:layout_marginBottom="15dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="?android:textColorPrimary"
             android:textSize="14sp"
-            android:text="@string/icon2018_b12_info"
-            android:layout_marginBottom="30dp"/>
-        <amai.org.conventions.customviews.AspectRatioImageView
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:src="@drawable/icon2018_iceberg_logo"
-        android:layout_marginBottom="15dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="?android:textColorPrimary"
-            android:textSize="14sp"
-            android:text="@string/icon2018_iceberg_info"
+            android:text="@string/olamot2019_joya_info"
             android:layout_marginBottom="30dp"/>
         <amai.org.conventions.customviews.AspectRatioImageView
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/icon2018_suduch_logo"
+            android:src="@drawable/olamot2019_bbb_logo"
             android:layout_marginBottom="15dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="?android:textColorPrimary"
             android:textSize="14sp"
-            android:text="@string/icon2018_suduch_info"
-            android:layout_marginBottom="30dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:textColor="?android:textColorPrimary"
-            android:textSize="18sp"
-            android:text="@string/icon2018_stands_title"
-            android:layout_marginBottom="15dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="?android:textColorPrimary"
-            android:textSize="14sp"
-            android:text="@string/icon2018_stands_info"
-            android:layout_marginBottom="30dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="?android:textColorPrimary"
-            android:textSize="18sp"
-            android:text="@string/icon2018_tlv_parking_title"
-            android:layout_marginBottom="15dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="?android:textColorPrimary"
-            android:textSize="14sp"
-            android:text="@string/icon2018_tlv_parking_info"
+            android:text="@string/olamot2019_bbb_info"
             android:layout_marginBottom="30dp"/>
     </LinearLayout>
 </ScrollView>

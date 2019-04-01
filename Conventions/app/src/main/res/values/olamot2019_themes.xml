@@ -127,7 +127,7 @@
         <item name="secondHandItemMissingColor">@color/olamot2019_brown1</item>
         <item name="secondHandItemsDivider">@drawable/olamot2019_second_hand_item_list_divider</item>
         <!-- Discounts activity -->
-        <item name="discountsActivityLayout">@layout/icon2018_activity_discounts</item>
+        <item name="discountsActivityLayout">@layout/olamot2019_activity_discounts</item>
     </style>
 
     <style name="AppBaseTheme.Olamot2019.Toolbar.Event" parent="AppBaseTheme.Olamot2019.Toolbar">
