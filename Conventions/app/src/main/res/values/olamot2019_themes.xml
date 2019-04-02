@@ -49,8 +49,9 @@
         <item name="homeSingleButtonTopMargin">0dp</item>
         <item name="homeButtonsSideMargin">15dp</item>
         <item name="homeBackground">@drawable/olamot2019_home_background</item>
+        <item name="homeLogo">@drawable/olamot2019_home_logo</item>
+        <item name="homeLogoMargin">0dp</item>
         <item name="homeToolbarTitle">@null</item>
-        <item name="homeLogo">@null</item>
         <item name="homeTitleBackground">@color/olamot2019_grey1</item>
         <item name="homeTitleText">@color/white</item>
         <item name="homeMessageBackground">@color/olamot2019_yellow1</item>
