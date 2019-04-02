@@ -61,6 +61,7 @@
         <item name="homeEventTimeText">?homeMessageText</item>
         <item name="homeCurrentEventText">?homeMessageText</item>
         <item name="homeEventsListDivider">@drawable/home_event_list_divider</item>
+        <item name="homeLogoMargin">10dp</item>
 
         <!-- About -->
         <item name="aboutLogoMargins">20dp</item>
@@ -155,6 +156,7 @@
         <item name="homeEventTimeText">?homeMessageText</item>
         <item name="homeCurrentEventText">?homeMessageText</item>
         <item name="homeEventsListDivider">@drawable/home_event_list_divider</item>
+        <item name="homeLogoMargin">10dp</item>
 
         <!-- About -->
         <item name="aboutLogoMargins">20dp</item>
