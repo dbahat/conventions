@@ -30,9 +30,6 @@ import amai.org.conventions.utils.HttpConnectionCreator;
 import sff.org.conventions.R;
 
 public class Olamot2019Convention extends SffConvention {
-	private static final String HALL_NAME_CINEMATHEQUE_1 = "סינמטק 1";
-	private static final String HALL_NAME_CINEMATHEQUE_2 = "סינמטק 2";
-	private static final String HALL_NAME_CINEMATHEQUE_5 = "סינמטק 5";
 	private static final String HALL_NAME_ESHKOL_1 = "אשכול 1";
 	private static final String HALL_NAME_ESHKOL_2 = "אשכול 2";
 	private static final String HALL_NAME_ESHKOL_3 = "אשכול 3";
@@ -40,28 +37,9 @@ public class Olamot2019Convention extends SffConvention {
 	private static final String HALL_NAME_ESHKOL_5 = "אשכול 5";
 	private static final String HALL_NAME_ESHKOL_6 = "אשכול 6";
 	private static final String HALL_NAME_MEETINGS = "חדר מפגשים";
-	private static final String HALL_NAME_WORKSHOPS_1 = "סדנאות 1";
-	private static final String HALL_NAME_WORKSHOPS_2 = "סדנאות 2";
-	private static final String HALL_NAME_KIDS = "חדר ילדים";
-	private static final String HALL_NAME_OUTSIDE = "אירועי חוצות";
-	private static final String HALL_NAME_MINIATURES_1 = "מיניאטורות 1";
-	private static final String HALL_NAME_MINIATURES_DEMO = "מיניאטורות: הדגמות";
-	private static final String HALL_NAME_IRONI_1 = "עירוני 1";
-	private static final String HALL_NAME_IRONI_2 = "עירוני 2";
-	private static final String HALL_NAME_IRONI_3 = "עירוני 3";
-	private static final String HALL_NAME_IRONI_4 = "עירוני 4";
-	private static final String HALL_NAME_IRONI_5 = "עירוני 5";
-	private static final String HALL_NAME_TENT_1 = "אוהל 1";
-	private static final String HALL_NAME_TENT_2 = "אוהל 2";
-	private static final String HALL_NAME_TENT_3 = "אוהל 3";
-	private static final String HALL_NAME_TENT_4 = "אוהל 4";
-	private static final String HALL_NAME_TENT_5 = "אוהל 5";
-	private static final String HALL_NAME_TENT_6 = "אוהל 6";
-	private static final String HALL_NAME_TENT_7 = "אוהל 7";
-	private static final String HALL_NAME_TENT_8 = "אוהל 8";
+	private static final String HALL_NAME_WORKSHOPS = "חדר סדנאות";
 	private static final String HALL_NAME_ESCAPE_ROOM = "חדר בריחה";
-	private static final String HALL_NAME_ARTEMIS_1 = "ארטמיס 1";
-	private static final String HALL_NAME_ARTEMIS_2 = "ארטמיס 2";
+	private static final String HALL_NAME_OTHERS = "אחרים";
 
 	private static final String API_SLUG = "olamot2019";
 	private static final String TEST_API_SLUG = "test_con";
@@ -94,9 +72,6 @@ public class Olamot2019Convention extends SffConvention {
 	@Override
 	protected Halls initHalls() {
 		List<Hall> halls = Arrays.asList(
-				new Hall().withName(HALL_NAME_CINEMATHEQUE_1),
-				new Hall().withName(HALL_NAME_CINEMATHEQUE_2),
-				new Hall().withName(HALL_NAME_CINEMATHEQUE_5),
 				new Hall().withName(HALL_NAME_ESHKOL_1),
 				new Hall().withName(HALL_NAME_ESHKOL_2),
 				new Hall().withName(HALL_NAME_ESHKOL_3),
@@ -104,28 +79,9 @@ public class Olamot2019Convention extends SffConvention {
 				new Hall().withName(HALL_NAME_ESHKOL_5),
 				new Hall().withName(HALL_NAME_ESHKOL_6),
 				new Hall().withName(HALL_NAME_MEETINGS),
-				new Hall().withName(HALL_NAME_WORKSHOPS_1),
-				new Hall().withName(HALL_NAME_WORKSHOPS_2),
-				new Hall().withName(HALL_NAME_KIDS),
-				new Hall().withName(HALL_NAME_OUTSIDE),
-				new Hall().withName(HALL_NAME_MINIATURES_1),
-				new Hall().withName(HALL_NAME_MINIATURES_DEMO),
-				new Hall().withName(HALL_NAME_IRONI_1),
-				new Hall().withName(HALL_NAME_IRONI_2),
-				new Hall().withName(HALL_NAME_IRONI_3),
-				new Hall().withName(HALL_NAME_IRONI_4),
-				new Hall().withName(HALL_NAME_IRONI_5),
-				new Hall().withName(HALL_NAME_TENT_1),
-				new Hall().withName(HALL_NAME_TENT_2),
-				new Hall().withName(HALL_NAME_TENT_3),
-				new Hall().withName(HALL_NAME_TENT_4),
-				new Hall().withName(HALL_NAME_TENT_5),
-				new Hall().withName(HALL_NAME_TENT_6),
-				new Hall().withName(HALL_NAME_TENT_7),
-				new Hall().withName(HALL_NAME_TENT_8),
+				new Hall().withName(HALL_NAME_WORKSHOPS),
 				new Hall().withName(HALL_NAME_ESCAPE_ROOM),
-				new Hall().withName(HALL_NAME_ARTEMIS_1),
-				new Hall().withName(HALL_NAME_ARTEMIS_2)
+				new Hall().withName(HALL_NAME_OTHERS)
 		);
 		int i = 1;
 		for (Hall hall : halls) {
@@ -137,9 +93,6 @@ public class Olamot2019Convention extends SffConvention {
 
 	@Override
 	protected ConventionMap initMap() {
-		Hall cinematheque1 = getHalls().findByName(HALL_NAME_CINEMATHEQUE_1);
-		Hall cinematheque2 = getHalls().findByName(HALL_NAME_CINEMATHEQUE_2);
-		Hall cinematheque5 = getHalls().findByName(HALL_NAME_CINEMATHEQUE_5);
 		Hall eshkol1 = getHalls().findByName(HALL_NAME_ESHKOL_1);
 		Hall eshkol2 = getHalls().findByName(HALL_NAME_ESHKOL_2);
 		Hall eshkol3 = getHalls().findByName(HALL_NAME_ESHKOL_3);
@@ -147,28 +100,8 @@ public class Olamot2019Convention extends SffConvention {
 		Hall eshkol5 = getHalls().findByName(HALL_NAME_ESHKOL_5);
 		Hall eshkol6 = getHalls().findByName(HALL_NAME_ESHKOL_6);
 		Hall meetings = getHalls().findByName(HALL_NAME_MEETINGS);
-		Hall workshops1 = getHalls().findByName(HALL_NAME_WORKSHOPS_1);
-		Hall workshops2 = getHalls().findByName(HALL_NAME_WORKSHOPS_2);
-		Hall kids = getHalls().findByName(HALL_NAME_KIDS);
-		Hall outside = getHalls().findByName(HALL_NAME_OUTSIDE);
-		Hall miniatures1 = getHalls().findByName(HALL_NAME_MINIATURES_1);
-		Hall miniaturesDemo = getHalls().findByName(HALL_NAME_MINIATURES_DEMO);
-		Hall ironi1 = getHalls().findByName(HALL_NAME_IRONI_1);
-		Hall ironi2 = getHalls().findByName(HALL_NAME_IRONI_2);
-		Hall ironi3 = getHalls().findByName(HALL_NAME_IRONI_3);
-		Hall ironi4 = getHalls().findByName(HALL_NAME_IRONI_4);
-		Hall ironi5 = getHalls().findByName(HALL_NAME_IRONI_5);
-		Hall tent1 = getHalls().findByName(HALL_NAME_TENT_1);
-		Hall tent2 = getHalls().findByName(HALL_NAME_TENT_2);
-		Hall tent3 = getHalls().findByName(HALL_NAME_TENT_3);
-		Hall tent4 = getHalls().findByName(HALL_NAME_TENT_4);
-		Hall tent5 = getHalls().findByName(HALL_NAME_TENT_5);
-		Hall tent6 = getHalls().findByName(HALL_NAME_TENT_6);
-		Hall tent7 = getHalls().findByName(HALL_NAME_TENT_7);
-		Hall tent8 = getHalls().findByName(HALL_NAME_TENT_8);
+		Hall workshops1 = getHalls().findByName(HALL_NAME_WORKSHOPS);
 		Hall escapeRoom = getHalls().findByName(HALL_NAME_ESCAPE_ROOM);
-		Hall artemis1 = getHalls().findByName(HALL_NAME_ARTEMIS_1);
-		Hall artemis2 = getHalls().findByName(HALL_NAME_ARTEMIS_2);
 
 		final int MARKER_Y_OFFSET = -15;
 		Floor floor = new Floor(1)
@@ -631,7 +564,7 @@ public class Olamot2019Convention extends SffConvention {
 	@Override
 	public ConventionEvent findEventByURL(String url) {
 		if (url.startsWith("http://program.iconfestival.org.il/")) {
-			url = "http://iconfestival.com/" + url.substring("http://program.iconfestival.org.il/".length());
+			url = "https://newprogram.olamot-con.org.il/" + url.substring("http://program.iconfestival.org.il/".length());
 		}
 		return super.findEventByURL(url);
 	}
