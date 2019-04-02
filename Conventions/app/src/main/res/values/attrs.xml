@@ -63,6 +63,7 @@
         <attr name="homeBackground" format="color|reference"/>
         <attr name="homeToolbarTitle" format="integer|reference"/>
         <attr name="homeLogo" format="integer|reference"/>
+        <attr name="homeLogoMargin" format="dimension"/>
         <attr name="homeBottomImage" format="integer|reference"/>
         <attr name="homeTitleBackground" format="color|reference"/>
         <attr name="homeTitleText" format="color|reference"/>
