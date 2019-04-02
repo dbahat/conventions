@@ -16,7 +16,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.EventType;
@@ -67,20 +66,14 @@ public class SffModelParser implements ModelParser {
 				Log.i(TAG, "Found and added new hall with name " + hallName);
 			}
 
-			// We convert the categories to a single string because there is only 1 category
-			// except in the case of attractions/fandom that always come together
-			JsonArray categories = eventObj.get("categories").getAsJsonArray();
-			String category = categories.size() > 0 ? categories.get(0).getAsString() : "";
-
-			// Tags are returned as an object: {1: "tag1", 2: "tag2"} or a string: "tag1"
+			// Tags are returned as an array, in the "categories" field
 			List<String> tags;
-			JsonElement tagsElement = eventObj.get("tags");
-			if (tagsElement == null) {
-				tags = Collections.emptyList();
-			} else if (tagsElement.isJsonObject()) {
-				tags = convertValuesToStringList(tagsElement.getAsJsonObject());
+			JsonElement tagsElement = eventObj.get("categories");
+			if (tagsElement.isJsonArray()) {
+				tags = convertValuesToStringList(tagsElement.getAsJsonArray());
 			} else {
-				tags = Collections.singletonList(decodeHtml(tagsElement.getAsString()));
+				tags = Collections.emptyList();
+				Log.w(TAG, "Tags list is not an array: " + tagsElement);
 			}
 
 			int price;
@@ -94,15 +87,11 @@ public class SffModelParser implements ModelParser {
 			}
 
 			int availableTickets;
-			int ticketsLimit;
 			JsonElement availableTicketsElement = eventObj.get("available_tickets");
-			JsonElement ticketsLimitElement = eventObj.get("ticket_limit");
-			if (availableTicketsElement == null || ticketsLimitElement == null || ticketsLimitElement.isJsonNull()) {
+			if (availableTicketsElement == null || availableTicketsElement.isJsonNull()) {
 				availableTickets = -1;
-				ticketsLimit = -1;
 			} else {
 				availableTickets = availableTicketsElement.getAsInt();
-				ticketsLimit = ticketsLimitElement.getAsInt();
 			}
 
 			String websiteUrl = eventObj.get("url").getAsString();
@@ -117,11 +106,10 @@ public class SffModelParser implements ModelParser {
 					.withEndTime(endTime)
 					.withHall(hall)
 					.withId(String.valueOf(eventId))
-					.withCategory(category)
 					.withTags(tags)
 					.withPrice(price)
 					.withAvailableTickets(availableTickets)
-					.withTicketsLimit(ticketsLimit)
+					.withTicketsLimit(-1) // Tickets limit is not supported in the new COD API
 					.withTicketsLastModifiedDate(modifiedDate)
 					.withWebsiteUrl(websiteUrl);
 
@@ -141,12 +129,12 @@ public class SffModelParser implements ModelParser {
 	}
 
 	@NonNull
-	private List<String> convertValuesToStringList(JsonObject jsonObject) {
+	private List<String> convertValuesToStringList(JsonArray jsonArray) {
 		List<String> stringList = new LinkedList<>();
-		for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
-			JsonElement jsonStringElement = entry.getValue();
+		for (int i = 0; i < jsonArray.size(); ++i) {
+			JsonElement jsonStringElement = jsonArray.get(i);
 			if (jsonStringElement != null && jsonStringElement.isJsonPrimitive() && !TextUtils.isEmpty(jsonStringElement.getAsString())) {
-				stringList.add(decodeHtml(jsonStringElement.getAsString()));
+				stringList.add(jsonStringElement.getAsString());
 			}
 		}
 		return stringList;
