@@ -567,6 +567,13 @@ public abstract class Convention implements Serializable {
 	}
 
 	private List<SearchFilter> normalizeSearchFilters(List<SearchFilter> filters) {
+		filters = CollectionUtils.filter(filters, new CollectionUtils.Predicate<SearchFilter>() {
+			@Override
+			public boolean where(SearchFilter item) {
+				return item.getName() != null && !"".equals(item.getName().trim());
+			}
+		});
+
 		Collections.sort(filters, new Comparator<SearchFilter>() {
 			@Override
 			public int compare(SearchFilter searchFilter, SearchFilter other) {
@@ -574,17 +581,10 @@ public abstract class Convention implements Serializable {
 			}
 		});
 
-		filters = CollectionUtils.unique(filters, new CollectionUtils.EqualityPredicate<SearchFilter>() {
+		return CollectionUtils.unique(filters, new CollectionUtils.EqualityPredicate<SearchFilter>() {
 			@Override
 			public boolean equals(SearchFilter lhs, SearchFilter rhs) {
 				return lhs.getName().equals(rhs.getName());
-			}
-		});
-
-		return CollectionUtils.filter(filters, new CollectionUtils.Predicate<SearchFilter>() {
-			@Override
-			public boolean where(SearchFilter item) {
-				return !"".equals(item.getName().trim());
 			}
 		});
 	}
@@ -595,12 +595,14 @@ public abstract class Convention implements Serializable {
 			allTags.addAll(event.getTags());
 		}
 
-		return CollectionUtils.map(new ArrayList<>(allTags), new CollectionUtils.Mapper<String, SearchFilter>() {
+		List<SearchFilter> filters = CollectionUtils.map(new ArrayList<>(allTags), new CollectionUtils.Mapper<String, SearchFilter>() {
 			@Override
 			public SearchFilter map(String tag) {
 				return new SearchFilter().withName(tag).withType(SearchFilter.Type.Tag);
 			}
 		});
+
+		return normalizeSearchFilters(filters);
 	}
 
 	public List<SearchCategory> getAggregatedEventTypesSearchCategories(Context context) {
