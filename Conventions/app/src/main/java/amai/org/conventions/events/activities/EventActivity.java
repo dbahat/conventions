@@ -570,7 +570,8 @@ public class EventActivity extends NavigationActivity {
 		} else {
 			updateTicketsText(event);
 
-			final View updateTicketsButton = findViewById(R.id.event_check_tickets_update);
+			final ImageView updateTicketsButton = findViewById(R.id.event_check_tickets_update);
+			updateTicketsButton.setColorFilter(ThemeAttributes.getColor(this, R.attr.eventDescriptionTextColor), PorterDuff.Mode.SRC_ATOP);
 			updateTicketsButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
