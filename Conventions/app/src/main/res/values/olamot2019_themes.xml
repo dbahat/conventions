@@ -77,7 +77,7 @@
         <!-- Map Screen -->
         <item name="locationDetailsBackground">@color/white</item>
         <item name="locationDetailsTitleColor">@color/black</item>
-        <item name="mapBackground">@color/olamot2019_yellow5</item>
+        <item name="mapBackground">@drawable/olamot2019_map_background</item>
         <item name="standIconColor">@color/black</item>
         <item name="standsTypeTitleColor">@color/black</item>
         <!-- Updates Screen -->
