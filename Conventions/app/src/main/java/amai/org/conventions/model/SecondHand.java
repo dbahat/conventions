@@ -338,7 +338,7 @@ public class SecondHand {
 			}
 
 			String notificationMessage = context.getString(
-				forms.size() > 1 ? R.string.second_hand_sold_forms_notification : R.string.second_hand_sold_form_notification,
+				soldForms.size() > 1 ? R.string.second_hand_sold_forms_notification : R.string.second_hand_sold_form_notification,
 				formIdsBuilder.toString(), totalPrice);
 			return notificationMessage;
 		}
