@@ -66,9 +66,9 @@ public class SffModelParser implements ModelParser {
 				Log.i(TAG, "Found and added new hall with name " + hallName);
 			}
 
-			// Tags are returned as an array, in the "categories" field
+			// Tags are returned as an array
 			List<String> tags;
-			JsonElement tagsElement = eventObj.get("categories");
+			JsonElement tagsElement = eventObj.get("tags");
 			if (tagsElement.isJsonArray()) {
 				tags = convertValuesToStringList(tagsElement.getAsJsonArray());
 			} else {
