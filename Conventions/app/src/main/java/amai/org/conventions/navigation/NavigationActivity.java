@@ -104,6 +104,8 @@ public abstract class NavigationActivity extends AppCompatActivity {
 			}
 		});
 
+		actionButton = (FloatingActionButton) findViewById(R.id.action_button);
+
 		// We will display the notification once during onResume to let child activities override it safely
 		// (after their onCreate is called)
 		this.receivedPushNotification = getNotificationFromIntent(getIntent());
@@ -280,10 +282,13 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	}
 
 	protected void setupActionButton(int imageResource, View.OnClickListener listener) {
-		actionButton = (FloatingActionButton) findViewById(R.id.action_button);
 		actionButton.setImageResource(imageResource);
 		actionButton.setOnClickListener(listener);
 		actionButton.setVisibility(View.VISIBLE);
+	}
+
+	protected void removeActionButton() {
+		actionButton.setVisibility(View.GONE);
 	}
 
 	protected void showActionButton(FloatingActionButton.OnVisibilityChangedListener listener) {
