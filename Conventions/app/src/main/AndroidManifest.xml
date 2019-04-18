@@ -63,7 +63,8 @@
         <activity android:name="amai.org.conventions.AboutActivity"></activity>
         <activity android:name="amai.org.conventions.HomeActivity" android:screenOrientation="portrait"/>
         <activity android:name="amai.org.conventions.secondhand.SecondHandActivity" />
-        <activity android:name="amai.org.conventions.IconKidsActivity" />
+        <activity android:name="amai.org.conventions.WebContentActivity$IconKidsActivity" />
+        <activity android:name="amai.org.conventions.WebContentActivity$AccessibilityActivity" />
 
         <receiver
             android:name="amai.org.conventions.notifications.ShowNotificationReceiver"
