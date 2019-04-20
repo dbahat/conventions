@@ -2,7 +2,11 @@ package amai.org.conventions.model;
 
 import java.io.Serializable;
 
+import amai.org.conventions.utils.Log;
+
 public class SecondHandItem implements Serializable {
+	private static final String TAG = SecondHandItem.class.getCanonicalName();
+
 	private String id;
 	private String type;
 	private String description;
@@ -11,6 +15,7 @@ public class SecondHandItem implements Serializable {
 	private Status status;
 	private String statusText;
 	private int number;
+	private String formId;
 
 	public String getId() {
 		return id;
@@ -76,10 +81,41 @@ public class SecondHandItem implements Serializable {
 		this.number = number;
 	}
 
+	public String getFormId() {
+		return formId;
+	}
+
+	public void setFormId(String formId) {
+		this.formId = formId;
+	}
+
 	public enum Status {
-		CREATED,
-		READY,
-		SOLD,
-		MISSING;
+		CREATED(1), // Not arrived at the stand yet
+		READY(2), // In the stand
+		SOLD(3),
+		MISSING(4),
+		RETURNED(5),
+		DONATED(6),
+		UNKNOWN(-1);
+
+		private int serverStatus;
+		Status(int serverStatus) {
+			this.serverStatus = serverStatus;
+		}
+
+		public int getServerStatus() {
+			return serverStatus;
+		}
+
+		static Status getByServerStatus(int serverStatus) {
+			for (Status status : values()) {
+				if (status.getServerStatus() == serverStatus) {
+					return status;
+				}
+			}
+			// This shouldn't happen, but if a new status appears without the application being updated it might
+			Log.e(TAG, "Unknown status for second hand item: " + serverStatus);
+			return UNKNOWN;
+		}
 	}
 }

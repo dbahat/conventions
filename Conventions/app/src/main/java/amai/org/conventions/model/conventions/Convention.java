@@ -40,7 +40,9 @@ import amai.org.conventions.model.ImageIdToImageResourceMapper;
 import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.model.Place;
 import amai.org.conventions.model.SearchFilter;
-import amai.org.conventions.model.SecondHand;
+import amai.org.conventions.model.SecondHandBuy;
+import amai.org.conventions.model.SecondHandItem;
+import amai.org.conventions.model.SecondHandSell;
 import amai.org.conventions.model.SpecialEventsProcessor;
 import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.StandsArea;
@@ -82,7 +84,8 @@ public abstract class Convention implements Serializable {
 	private URL ticketsLastUpdateURL;
 	private URL updatesURL;
 	private ImageIdToImageResourceMapper imageMapper;
-	private SecondHand secondHand;
+	private SecondHandSell secondHandSell;
+	private SecondHandBuy secondHandBuy;
 
 	private double longitude;
 	private double latitude;
@@ -212,6 +215,8 @@ public abstract class Convention implements Serializable {
 	public abstract URL getSecondHandFormURL(String id);
 
 	public abstract URL getSecondHandFormsURL(List<String> ids);
+
+	public abstract URL getSecondHandItemsURL(SecondHandItem.Status status);
 
 	public abstract HttpURLConnection getUserPurchasedEventsRequest(String user, String password) throws Exception;
 
@@ -743,11 +748,17 @@ public abstract class Convention implements Serializable {
 		return null;
 	}
 
-	public SecondHand getSecondHand() {
-		if (secondHand == null) {
-			secondHand = new SecondHand(conventionStorage);
+	public SecondHandSell getSecondHandSell() {
+		if (secondHandSell == null) {
+			secondHandSell = new SecondHandSell(conventionStorage);
 		}
-		return secondHand;
+		return secondHandSell;
 	}
 
+	public SecondHandBuy getSecondHandBuy() {
+		if (secondHandBuy == null) {
+			secondHandBuy = new SecondHandBuy(conventionStorage);
+		}
+		return secondHandBuy;
+	}
 }

@@ -107,6 +107,8 @@
         <item name="secondHandItemSoldColor">?secondHandItemDefaultColor</item>
         <item name="secondHandItemMissingColor">?secondHandItemDefaultColor</item>
         <item name="secondHandItemsDivider">@drawable/second_hand_item_list_divider</item>
+        <item name="secondHandFilterColor">?android:textColorSecondary</item>
+        <item name="secondHandSelectedFilterColor">?colorAccent</item>
 
     </style>
 
@@ -217,6 +219,8 @@
         <item name="secondHandItemSoldColor">?secondHandItemDefaultColor</item>
         <item name="secondHandItemMissingColor">?secondHandItemDefaultColor</item>
         <item name="secondHandItemsDivider">@drawable/second_hand_item_list_divider</item>
+        <item name="secondHandFilterColor">?android:textColorSecondary</item>
+        <item name="secondHandSelectedFilterColor">?colorAccent</item>
 
     </style>
 

@@ -208,6 +208,7 @@
     <string name="second_hand_form_sold_items_total">בטופס זה נמכרו %d פריטים בסך %d ש\"ח</string>
     <string name="second_hand_form_sold_item_total">בטופס זה נמכר פריט אחד בסך %d ש\"ח</string>
     <string name="second_hand_sell">מכירה</string>
+    <string name="second_hand_buy">קנייה</string>
     <string name="cancel2">ביטול</string>
     <string name="add_events_failed">לא ניתן להוסיף אירועים, בדוק חיבור לאינטרנט</string>
     <string name="several_events_added">נוספו %d אירועים</string>
@@ -218,4 +219,16 @@
     <string name="no_events_added">לא נוספו אירועים</string>
     <string name="loading_events">מייבא אירועים…</string>
     <string name="notification_channel_description_reminders">תזכורות הקשורות לאירועים שסימנת בתוכניה</string>
+    <string name="second_hand_buy_name_filter_text">שם</string>
+    <string name="second_hand_buy_price_filter_text">מחיר מקסימלי</string>
+    <string name="unlimited_price">לא מוגבל</string>
+    <string name="second_hand_buy_categories">קטגוריות:</string>
+    <string name="second_hand_sort_by_name">שם</string>
+    <string name="second_hand_sort_by_price">מחיר</string>
+    <string name="second_hand_buy_no_results">לא נמצאו פריטים</string>
+    <string name="second_hand_buy_search_results_number">נמצאו %d פריטים</string>
+    <string name="second_hand_buy_one_search_results_number">נמצא פריט אחד</string>
+    <string name="second_hand_buy_last_update_time">רשימת הפריטים נכונה ל-%s</string>
+    <string name="second_hand_favorites">מועדפים</string>
+    <string name="second_hand_unknown_status">לא בדוכן</string>
 </resources>

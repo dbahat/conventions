@@ -17,30 +17,32 @@ import amai.org.conventions.model.SecondHandForm;
 import amai.org.conventions.model.SecondHandItem;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Log;
+import amai.org.conventions.utils.Strings;
 import sff.org.conventions.R;
 
-class SecondHandItemViewHolder extends RecyclerView.ViewHolder {
-	private static final String TAG = SecondHandItemViewHolder.class.getCanonicalName();
+class SecondHandItemSellViewHolder extends RecyclerView.ViewHolder {
+	private static final String TAG = SecondHandItemSellViewHolder.class.getCanonicalName();
 	private SecondHandItem item;
 	private final TextView itemIdView;
-	private final ImageView itemEditButton;
 	private final TextView itemNameView;
 	private final TextView itemStatusView;
 	private final TextView itemPriceView;
+	private final ImageView itemEditButton;
 
-	public SecondHandItemViewHolder(View itemView) {
+	public SecondHandItemSellViewHolder(View itemView) {
 		super(itemView);
 		itemIdView = itemView.findViewById(R.id.second_hand_item_id);
-		itemEditButton = itemView.findViewById(R.id.second_hand_item_edit);
 		itemNameView = itemView.findViewById(R.id.second_hand_item_name);
 		itemStatusView = itemView.findViewById(R.id.second_hand_item_status);
 		itemPriceView = itemView.findViewById(R.id.second_hand_item_price);
+		itemEditButton = itemView.findViewById(R.id.second_hand_item_edit);
 	}
 
 	public void setItem(SecondHandItem newItem, SecondHandForm form) {
 		this.item = newItem;
+		String formId = form.getId();
 		String itemId = itemView.getContext().getString(R.string.second_hand_item_id_format,
-				padWithZeros(form.getId(), 3), padWithZeros(newItem.getNumber(), 2));
+				Strings.padWithZeros(formId, 3), Strings.padWithZeros(newItem.getNumber(), 2));
 		itemIdView.setText(itemId);
 		refreshItemNameText();
 		itemEditButton.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +69,7 @@ class SecondHandItemViewHolder extends RecyclerView.ViewHolder {
 									protected Exception doInBackground(Void... params) {
 										try {
 											item.setUserDescription(userDescription);
-											Convention.getInstance().getSecondHand().save();
+											Convention.getInstance().getSecondHandSell().save();
 											return null;
 										} catch (Exception e) {
 											return e;
@@ -112,7 +114,11 @@ class SecondHandItemViewHolder extends RecyclerView.ViewHolder {
 			itemPriceView.setVisibility(View.VISIBLE);
 			itemPriceView.setText(itemView.getContext().getString(R.string.second_hand_item_price, item.getPrice()));
 		}
-		itemStatusView.setText(newItem.getStatusText());
+		if (newItem.getStatus() == SecondHandItem.Status.UNKNOWN) {
+			itemStatusView.setText(R.string.second_hand_unknown_status);
+		} else {
+			itemStatusView.setText(newItem.getStatusText());
+		}
 		if (form.isClosed()) {
 			int formClosedColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandFormClosedColor);
 			titleColor = formClosedColor;
@@ -131,7 +137,7 @@ class SecondHandItemViewHolder extends RecyclerView.ViewHolder {
 				case MISSING:
 					statusColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandItemMissingColor);
 					break;
-				default: // In the stand or withdrawn
+				default: // In the stand / withdrawn / donated
 					statusColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandItemNotSoldColor);
 					break;
 			}
@@ -144,8 +150,8 @@ class SecondHandItemViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	private void refreshItemNameText() {
-		itemEditButton.setVisibility(View.VISIBLE);
 		String itemName = item.getDescription();
+		itemEditButton.setVisibility(View.VISIBLE);
 		if (itemName == null || itemName.isEmpty()) {
 			itemName = item.getUserDescription();
 		} else {
@@ -158,18 +164,5 @@ class SecondHandItemViewHolder extends RecyclerView.ViewHolder {
 			itemName += " (" + item.getType() + ")";
 		}
 		this.itemNameView.setText(itemName);
-	}
-
-	private String padWithZeros(int id, int numberOfDigits) {
-		return padWithZeros("" + id, numberOfDigits);
-	}
-
-	private String padWithZeros(String id, int numberOfCharacters) {
-		StringBuilder idBuilder = new StringBuilder(id);
-		while (idBuilder.length() < numberOfCharacters) {
-			idBuilder.insert(0, "0");
-		}
-		id = idBuilder.toString();
-		return id;
 	}
 }

@@ -34,4 +34,17 @@ public class Strings {
 
 		return index;
 	}
+
+	public static String padWithZeros(int id, int numberOfDigits) {
+		return padWithZeros("" + id, numberOfDigits);
+	}
+
+	public static String padWithZeros(String id, int numberOfCharacters) {
+		StringBuilder idBuilder = new StringBuilder(id);
+		while (idBuilder.length() < numberOfCharacters) {
+			idBuilder.insert(0, "0");
+		}
+		id = idBuilder.toString();
+		return id;
+	}
 }

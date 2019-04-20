@@ -52,7 +52,7 @@ public class SecondHandItemsAdapter extends BaseAdapter implements StickyListHea
 					.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							boolean deleted = Convention.getInstance().getSecondHand().deleteForm(form.getId());
+							boolean deleted = Convention.getInstance().getSecondHandSell().deleteForm(form.getId());
 							if (deleted) {
 								notifyDataSetChanged();
 							}
@@ -99,14 +99,14 @@ public class SecondHandItemsAdapter extends BaseAdapter implements StickyListHea
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		final SecondHandItemViewHolder holder;
+		final SecondHandItemSellViewHolder holder;
 		if (convertView == null) {
-			View secondHandItemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.second_hand_item, parent, false);
-			holder = new SecondHandItemViewHolder(secondHandItemView);
+			View secondHandItemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.second_hand_item_sell, parent, false);
+			holder = new SecondHandItemSellViewHolder(secondHandItemView);
 			convertView = secondHandItemView;
 			convertView.setTag(holder);
 		} else {
-			holder = (SecondHandItemViewHolder) convertView.getTag();
+			holder = (SecondHandItemSellViewHolder) convertView.getTag();
 		}
 
 		holder.setItem(items.get(position), itemIndexToForm.get(position));

@@ -170,6 +170,8 @@
         <attr name="secondHandItemSoldColor" format="color|reference"/>
         <attr name="secondHandItemMissingColor" format="color|reference"/>
         <attr name="secondHandItemsDivider" format="color|reference"/>
+        <attr name="secondHandFilterColor" format="color|reference"/>
+        <attr name="secondHandSelectedFilterColor" format="color|reference"/>
         <!-- Discounts Screen -->
         <attr name="discountsActivityLayout" format="reference"/>
     </declare-styleable>

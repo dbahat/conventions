@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/second_hand_buy_swipe_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="?contentStartMargin"
+                android:layout_marginEnd="?contentEndMargin"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/second_hand_buy_name_filter_text"
+                    android:textSize="@dimen/text_size_small_material"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="5dp"/>
+
+                <EditText
+                    android:id="@+id/second_hand_buy_name_text_box"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:inputType="textFilter"
+                    android:textSize="@dimen/text_size_small_material"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/second_hand_buy_price_filter_text"
+                    android:textSize="@dimen/text_size_small_material"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="5dp"/>
+
+                <EditText
+                    android:id="@+id/second_hand_buy_price_text_box"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_small_material"
+                    android:maxLines="1"
+                    android:inputType="number"
+                    android:hint="@string/unlimited_price"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="?contentStartMargin"
+                android:layout_marginEnd="?contentEndMargin"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/second_hand_buy_categories_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/second_hand_buy_categories"
+                    style="@style/BorderlessButton"
+                    android:padding="5dp"
+                    android:textSize="@dimen/text_size_small_material"/>
+                <TextView
+                    android:id="@+id/second_hand_buy_selected_categories"
+                    tools:text="מועדפים, ספר, בובה, DVD, מנגה, קומיקס"
+                    android:textSize="@dimen/text_size_small_material"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="10dp"
+                    android:maxLines="1"
+                    android:ellipsize="end"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="?contentStartMargin"
+                android:layout_marginEnd="?contentEndMargin"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/second_hand_buy_sort_by_name_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/second_hand_sort_by_name"
+                    android:drawableStart="@drawable/ic_action_sort_black"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="15dp"
+                    style="@style/BorderlessButton"
+                    android:padding="5dp"
+                    />
+                <Button
+                    android:id="@+id/second_hand_buy_sort_by_price_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/second_hand_sort_by_price"
+                    android:drawableStart="@drawable/ic_action_sort_black"
+                    style="@style/BorderlessButton"
+                    android:padding="5dp"
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/second_hand_buy_items_last_update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:textColorPrimary"
+                android:layout_marginStart="?contentStartMargin"
+                android:layout_marginEnd="?contentEndMargin"
+                tools:text="רשימת הפריטים נכונה ל-12:51"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="5dp"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_size_small_material"
+                />
+
+            <LinearLayout
+                android:id="@+id/second_hand_buy_results_container"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/second_hand_buy_search_results_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?android:textColorPrimary"
+                    android:layout_marginStart="?contentStartMargin"
+                    android:layout_marginEnd="?contentEndMargin"
+                    tools:text="נמצאו 82 פריטים"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:textSize="@dimen/text_size_small_material"
+                    />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?separatorColor"
+                        android:layout_marginStart="?contentStartMargin"
+                        android:layout_marginEnd="?contentEndMargin"/>
+                </FrameLayout>
+
+                <ListView
+                    android:id="@+id/second_hand_buy_items_list"
+                    android:divider="?secondHandItemsDivider"
+                    android:dividerHeight="1dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/second_hand_buy_no_results_found"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="50dp"
+                android:visibility="gone"
+                android:textSize="@dimen/text_size_large_material"
+                android:textColor="?hintTextColor"
+                android:layout_marginStart="?contentStartMargin"
+                android:layout_marginEnd="?contentEndMargin"
+                android:padding="25dp"
+                android:text="@string/second_hand_buy_no_results" />
+
+        </LinearLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
+</FrameLayout>

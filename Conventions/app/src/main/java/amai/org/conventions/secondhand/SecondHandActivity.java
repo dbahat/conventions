@@ -33,6 +33,7 @@ public class SecondHandActivity extends NavigationActivity {
 
 		// Setup adapter
 		adapter = new TabAdapter(getSupportFragmentManager());
+		adapter.addFragment(new SecondHandBuyFragment(), getString(R.string.second_hand_buy));
 		adapter.addFragment(new SecondHandSellFragment(), getString(R.string.second_hand_sell));
 
 		if (adapter.getCount() == 1) {
@@ -41,7 +42,6 @@ public class SecondHandActivity extends NavigationActivity {
 
 		// Setup view pager
 		viewPager.setAdapter(adapter);
-		viewPager.setOffscreenPageLimit(adapter.getCount()); // Load all fragments for smooth scrolling
 
 		viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 			@Override

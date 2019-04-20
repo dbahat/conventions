@@ -20,7 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import amai.org.conventions.ThemeAttributes;
-import amai.org.conventions.model.SecondHand;
+import amai.org.conventions.model.SecondHandSell;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Log;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
@@ -34,14 +34,14 @@ public class SecondHandSellFragment extends Fragment implements SwipeRefreshLayo
 	private StickyListHeadersListView listView;
 	private TextView soldFormsTotal;
 	private SecondHandItemsAdapter adapter;
-	private SecondHand secondHand;
+	private SecondHandSell secondHandSell;
 	private boolean isRefreshing;
 	private boolean isAddingItem;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		secondHand = Convention.getInstance().getSecondHand();
+		secondHandSell = Convention.getInstance().getSecondHandSell();
 	}
 
 	@Nullable
@@ -54,7 +54,7 @@ public class SecondHandSellFragment extends Fragment implements SwipeRefreshLayo
 		soldFormsTotal = view.findViewById(R.id.second_hand_sold_forms_total);
 		noForms = view.findViewById(R.id.second_hand_no_forms_found);
 		listView = view.findViewById(R.id.second_hand_form_items_list);
-		adapter = new SecondHandItemsAdapter(secondHand.getForms());
+		adapter = new SecondHandItemsAdapter(secondHandSell.getForms());
 		listView.setAdapter(adapter);
 		updateSoldForms();
 
@@ -82,7 +82,7 @@ public class SecondHandSellFragment extends Fragment implements SwipeRefreshLayo
 			}
 		});
 
-		if (secondHand.shouldAutoRefresh()) {
+		if (secondHandSell.shouldAutoRefresh()) {
 			swipeRefreshLayout.post(new Runnable() {
 				@Override
 				public void run() {
@@ -122,7 +122,7 @@ public class SecondHandSellFragment extends Fragment implements SwipeRefreshLayo
 									@Override
 									protected Exception doInBackground(Void... params) {
 										try {
-											secondHand.addForm(id);
+											secondHandSell.addForm(id);
 											return null;
 										} catch (Exception e) {
 											return e;
@@ -143,10 +143,10 @@ public class SecondHandSellFragment extends Fragment implements SwipeRefreshLayo
 											});
 										} else {
 											int messageId = R.string.update_refresh_failed;
-											if (exception instanceof SecondHand.FormNotFoundException ||
-													exception instanceof SecondHand.NoItemsException) {
+											if (exception instanceof SecondHandSell.FormNotFoundException ||
+													exception instanceof SecondHandSell.NoItemsException) {
 												messageId = R.string.form_not_found;
-											} else if (exception instanceof SecondHand.FormAlreadyExists) {
+											} else if (exception instanceof SecondHandSell.FormAlreadyExists) {
 												messageId = R.string.second_hand_form_already_exists;
 											} else {
 												Log.e(TAG, exception.getMessage(), exception);
@@ -180,7 +180,7 @@ public class SecondHandSellFragment extends Fragment implements SwipeRefreshLayo
 	}
 
 	private void updateListVisibility() {
-		if (secondHand.getForms().size() == 0) {
+		if (secondHandSell.getForms().size() == 0) {
 			listView.setVisibility(View.GONE);
 			noForms.setVisibility(View.VISIBLE);
 		} else {
@@ -195,14 +195,14 @@ public class SecondHandSellFragment extends Fragment implements SwipeRefreshLayo
 		new AsyncTask<Void, Void, Boolean>() {
 			@Override
 			protected Boolean doInBackground(Void... params) {
-				return secondHand.refresh(true);
+				return secondHandSell.refresh(true);
 			}
 
 			@Override
 			protected void onPostExecute(Boolean success) {
 				isRefreshing = false;
 				updateRefreshing();
-				adapter.setForms(secondHand.getForms());
+				adapter.setForms(secondHandSell.getForms());
 				adapter.notifyDataSetChanged();
 				if (!success) {
 					Toast.makeText(getActivity(), R.string.update_refresh_failed, Toast.LENGTH_LONG).show();
@@ -212,7 +212,7 @@ public class SecondHandSellFragment extends Fragment implements SwipeRefreshLayo
 	}
 
 	private void updateSoldForms() {
-		String soldFormsMessage = secondHand.getSoldFormsMessage(getContext());
+		String soldFormsMessage = secondHandSell.getSoldFormsMessage(getContext());
 		if (soldFormsMessage != null && !soldFormsMessage.isEmpty()) {
 			soldFormsTotal.setVisibility(View.VISIBLE);
 			soldFormsTotal.setText(soldFormsMessage);

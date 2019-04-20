@@ -543,6 +543,15 @@ public class Olamot2019Convention extends SffConvention {
 	}
 
 	@Override
+	public URL getSecondHandItemsURL(SecondHandItem.Status status) {
+		try {
+			return new URL("https://api.sf-f.org.il/yad2/allItems?status=" + status.getServerStatus());
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@Override
 	public HttpURLConnection getUserPurchasedEventsRequest(String user, String password) throws Exception {
 		URL url = new URL("https://api.sf-f.org.il/program/events_per_user.php?slug=" + API_SLUG + "&email=" +
 				URLEncoder.encode(user, "UTF-8") + "&pass=" + URLEncoder.encode(password, "UTF-8"));

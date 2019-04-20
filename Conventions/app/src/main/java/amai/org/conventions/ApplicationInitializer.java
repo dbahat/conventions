@@ -18,7 +18,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import amai.org.conventions.model.SecondHand;
+import amai.org.conventions.model.SecondHandSell;
 import amai.org.conventions.model.SecondHandForm;
 import amai.org.conventions.model.Update;
 import amai.org.conventions.model.conventions.Convention;
@@ -206,17 +206,17 @@ public class ApplicationInitializer {
     }
 
     private void refreshSecondHand(final Context context) {
-        final SecondHand secondHand = Convention.getInstance().getSecondHand();
+        final SecondHandSell secondHandSell = Convention.getInstance().getSecondHandSell();
         new AsyncTask<Void, Void, Boolean>() {
             private Set<String> openFormsWithUnsoldItems = new HashSet<>();
             @Override
             protected Boolean doInBackground(Void... params) {
-                for (SecondHandForm form : secondHand.getForms()) {
+                for (SecondHandForm form : secondHandSell.getForms()) {
                     if (!form.isClosed() && form.areAllItemsSold()) {
                         openFormsWithUnsoldItems.add(form.getId());
                     }
                 }
-                return secondHand.refresh(false);
+                return secondHandSell.refresh(false);
             }
 
             @Override
@@ -224,7 +224,7 @@ public class ApplicationInitializer {
                 if (success) {
                     // Show notification if there are new open forms whose items are all sold
                     boolean showNotification = false;
-                    for (SecondHandForm form : secondHand.getForms()) {
+                    for (SecondHandForm form : secondHandSell.getForms()) {
                         if (!openFormsWithUnsoldItems.contains(form.getId()) && !form.isClosed() &&
                                 form.areAllItemsSold()) {
                             showNotification = true;
@@ -240,7 +240,7 @@ public class ApplicationInitializer {
                         if (notificationManager == null) {
                             return;
                         }
-                        String notificationMessage = secondHand.getSoldFormsMessage(currentContext);
+                        String notificationMessage = secondHandSell.getSoldFormsMessage(currentContext);
 
                         Intent intent = new Intent(currentContext, SecondHandActivity.class);
                         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(currentContext, PushNotification.Channel.Notifications.toString())
