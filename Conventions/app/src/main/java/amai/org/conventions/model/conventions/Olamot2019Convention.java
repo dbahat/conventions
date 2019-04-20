@@ -26,6 +26,7 @@ import amai.org.conventions.model.Halls;
 import amai.org.conventions.model.ImageIdToImageResourceMapper;
 import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.model.Place;
+import amai.org.conventions.model.SecondHandItem;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 import amai.org.conventions.utils.Dates;
@@ -553,8 +554,7 @@ public class Olamot2019Convention extends SffConvention {
 
 	@Override
 	public HttpURLConnection getUserPurchasedEventsRequest(String user, String password) throws Exception {
-		URL url = new URL("https://api.sf-f.org.il/program/events_per_user.php?slug=" + API_SLUG + "&email=" +
-				URLEncoder.encode(user, "UTF-8") + "&pass=" + URLEncoder.encode(password, "UTF-8"));
+		URL url = new URL("https://api.sf-f.org.il/program/events_per_user.php?slug=" + API_SLUG);
 		HttpURLConnection request = HttpConnectionCreator.createConnection(url);
 		request.setRequestMethod("POST");
 		request.setDoInput(true);
@@ -563,7 +563,7 @@ public class Olamot2019Convention extends SffConvention {
 		BufferedWriter writer = null;
 		try {
 			writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-			writer.write("slug=" + API_SLUG + "&email=" +
+			writer.write("email=" +
 					URLEncoder.encode(user, "UTF-8") + "&pass=" + URLEncoder.encode(password, "UTF-8"));
 			writer.flush();
 		} finally {
