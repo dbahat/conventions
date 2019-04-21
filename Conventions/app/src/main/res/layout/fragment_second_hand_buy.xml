@@ -24,6 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="0dp"
                 android:layout_marginEnd="5dp"
+                android:textColor="?android:textColorPrimary"
                 android:text="@string/second_hand_buy_name_filter_text"
                 android:textSize="@dimen/text_size_small_material" />
 
@@ -33,6 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="0dp"
                 android:layout_marginEnd="10dp"
+                android:textColor="?android:textColorPrimary"
                 android:layout_weight="1"
                 android:inputType="textFilter"
                 android:maxLines="1"
@@ -43,6 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="0dp"
                 android:layout_marginEnd="5dp"
+                android:textColor="?android:textColorPrimary"
                 android:text="@string/second_hand_buy_price_filter_text"
                 android:textSize="@dimen/text_size_small_material" />
 
@@ -51,6 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/unlimited_price"
+                android:textColor="?android:textColorPrimary"
                 android:inputType="number"
                 android:maxLines="1"
                 android:textSize="@dimen/text_size_small_material" />
