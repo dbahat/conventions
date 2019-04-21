@@ -20,7 +20,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -45,7 +44,6 @@ public class SecondHandBuyFragment extends Fragment implements SwipeRefreshLayou
 	private SecondHandBuy secondHandBuy;
 	private SecondHandSearchItemsAdapter adapter;
 
-	private List<SecondHandItem> items;
 	private String keywordsFilter;
 	private String priceFilter;
 	private SortType sortType;
@@ -70,7 +68,6 @@ public class SecondHandBuyFragment extends Fragment implements SwipeRefreshLayou
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		secondHandBuy = Convention.getInstance().getSecondHandBuy();
-		items = Collections.emptyList(); // TODO restore items list from secondHandBuy
 
 		// Restore state
 		if (savedInstanceState != null) {
@@ -93,7 +90,7 @@ public class SecondHandBuyFragment extends Fragment implements SwipeRefreshLayou
 		noResultsFoundView = view.findViewById(R.id.second_hand_buy_no_results_found);
 		resultsContainer = view.findViewById(R.id.second_hand_buy_results_container);
 		lastUpdate = view.findViewById(R.id.second_hand_buy_items_last_update);
-		adapter = new SecondHandSearchItemsAdapter(items, secondHandBuy);
+		adapter = new SecondHandSearchItemsAdapter(Collections.<SecondHandItem>emptyList(), secondHandBuy);
 		listView.setAdapter(adapter);
 		// This is necessary because for some reason the swipe refresh layout here doesn't recognize that
 		// the sticky headers list view can scroll up, and when scrolling up it always appears which is annoying
@@ -265,12 +262,10 @@ public class SecondHandBuyFragment extends Fragment implements SwipeRefreshLayou
 			@Override
 			protected void onPostExecute(Boolean success) {
 				if (!success) {
-					swipeRefreshLayout.setRefreshing(false);
 					Toast.makeText(getContext(), R.string.update_refresh_failed, Toast.LENGTH_SHORT).show();
-					return;
 				}
+				// Even if the refresh wasn't successful we still need to set the items, apply the filters etc
 				updateRefreshTime();
-				SecondHandBuyFragment.this.items = secondHandBuy.getItems();
 				swipeRefreshLayout.setRefreshing(false);
 				applyFiltersInBackground();
 			}
@@ -390,8 +385,9 @@ public class SecondHandBuyFragment extends Fragment implements SwipeRefreshLayou
 	}
 
 	private List<SecondHandItem> filterItems(final String keywordsFilter, String priceFilter, final List<String> categoriesFilter, final boolean showAllFavorites) {
-		if (items == null) {
-			return new ArrayList<>();
+		List<SecondHandItem> items = secondHandBuy.getItems();
+		if (items == null || items.isEmpty()) {
+			return Collections.emptyList();
 		}
 
 		Integer maxPrice = null;
