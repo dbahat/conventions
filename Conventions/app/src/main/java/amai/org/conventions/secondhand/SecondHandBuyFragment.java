@@ -39,6 +39,7 @@ public class SecondHandBuyFragment extends Fragment implements SwipeRefreshLayou
 	private static final String STATE_PRICE_FILTER = "priceFilter";
 	private static final String STATE_KEYWORD_FILTER = "keywordFilter";
 	private static final String STATE_SORT_TYPE = "sortType";
+	private static final String STATE_FAVORITES_FILTER = "showFavoritesFilter";
 
 	private SecondHandBuy secondHandBuy;
 	private SecondHandSearchItemsAdapter adapter;
@@ -68,7 +69,15 @@ public class SecondHandBuyFragment extends Fragment implements SwipeRefreshLayou
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		secondHandBuy = Convention.getInstance().getSecondHandBuy();
-		// TODO setup filters from saved instance state
+		items = Collections.emptyList(); // TODO restore items list from secondHandBuy
+
+		// Restore state
+		if (savedInstanceState != null) {
+			keywordsFilter = savedInstanceState.getString(STATE_KEYWORD_FILTER);
+			priceFilter = savedInstanceState.getString(STATE_PRICE_FILTER);
+			sortType = (SortType) savedInstanceState.getSerializable(STATE_SORT_TYPE);
+			showAllFavorites = savedInstanceState.getBoolean(STATE_FAVORITES_FILTER);
+		}
 	}
 
 	@Nullable
@@ -83,7 +92,7 @@ public class SecondHandBuyFragment extends Fragment implements SwipeRefreshLayou
 		noResultsFoundView = view.findViewById(R.id.second_hand_buy_no_results_found);
 		resultsContainer = view.findViewById(R.id.second_hand_buy_results_container);
 		lastUpdate = view.findViewById(R.id.second_hand_buy_items_last_update);
-		adapter = new SecondHandSearchItemsAdapter(Collections.<SecondHandItem>emptyList(), secondHandBuy); // TODO restore items list from state if available
+		adapter = new SecondHandSearchItemsAdapter(items, secondHandBuy);
 		listView.setAdapter(adapter);
 		// This is necessary because for some reason the swipe refresh layout here doesn't recognize that
 		// the sticky headers list view can scroll up, and when scrolling up it always appears which is annoying
@@ -97,12 +106,6 @@ public class SecondHandBuyFragment extends Fragment implements SwipeRefreshLayou
 		swipeRefreshLayout.setColorSchemeColors(ThemeAttributes.getColor(getActivity(), R.attr.swipeToRefreshColor));
 		swipeRefreshLayout.setProgressBackgroundColorSchemeColor(ThemeAttributes.getColor(getActivity(), R.attr.swipeToRefreshBackgroundColor));
 		swipeRefreshLayout.setOnRefreshListener(this);
-
-		if (savedInstanceState != null) {
-			priceFilter = savedInstanceState.getString(STATE_PRICE_FILTER);
-			keywordsFilter = savedInstanceState.getString(STATE_KEYWORD_FILTER);
-			sortType = (SortType) savedInstanceState.getSerializable(STATE_SORT_TYPE);
-		}
 
 		initializeFiltersAndSort(view);
 //		initializeCategories(view);
@@ -118,6 +121,7 @@ public class SecondHandBuyFragment extends Fragment implements SwipeRefreshLayou
 		outState.putString(STATE_PRICE_FILTER, priceFilter);
 		outState.putString(STATE_KEYWORD_FILTER, keywordsFilter);
 		outState.putSerializable(STATE_SORT_TYPE, sortType);
+		outState.putBoolean(STATE_FAVORITES_FILTER, showAllFavorites);
 	}
 
 	private void initializeFiltersAndSort(View view) {
