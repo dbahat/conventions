@@ -61,34 +61,33 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="?contentStartMargin"
-            android:layout_marginEnd="?contentEndMargin"
-            android:orientation="horizontal"
-            android:visibility="gone">
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="?contentStartMargin"-->
+            <!--android:layout_marginEnd="?contentEndMargin"-->
+            <!--android:orientation="horizontal">-->
 
-            <Button
-                android:id="@+id/second_hand_buy_categories_button"
-                style="@style/BorderlessButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text="@string/second_hand_buy_categories"
-                android:textSize="@dimen/text_size_small_material" />
+            <!--<Button-->
+                <!--android:id="@+id/second_hand_buy_categories_button"-->
+                <!--style="@style/BorderlessButton"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:padding="5dp"-->
+                <!--android:text="@string/second_hand_buy_categories"-->
+                <!--android:textSize="@dimen/text_size_small_material" />-->
 
-            <TextView
-                android:id="@+id/second_hand_buy_selected_categories"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:layout_marginEnd="10dp"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:textSize="@dimen/text_size_small_material"
-                tools:text="מועדפים, ספר, בובה, DVD, מנגה, קומיקס" />
-        </LinearLayout>
+            <!--<TextView-->
+                <!--android:id="@+id/second_hand_buy_selected_categories"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginStart="0dp"-->
+                <!--android:layout_marginEnd="10dp"-->
+                <!--android:ellipsize="end"-->
+                <!--android:maxLines="1"-->
+                <!--android:textSize="@dimen/text_size_small_material"-->
+                <!--tools:text="מועדפים, ספר, בובה, DVD, מנגה, קומיקס" />-->
+        <!--</LinearLayout>-->
 
         <LinearLayout
             android:layout_width="match_parent"
