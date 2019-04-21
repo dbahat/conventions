@@ -137,7 +137,7 @@
         <LinearLayout
             android:id="@+id/second_hand_buy_results_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
@@ -165,34 +165,38 @@
                     android:layout_marginEnd="?contentEndMargin"
                     android:background="?separatorColor" />
             </FrameLayout>
+        </LinearLayout>
 
-            <android.support.v4.widget.SwipeRefreshLayout
-                android:id="@+id/second_hand_buy_swipe_layout"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/second_hand_buy_swipe_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
                 <ListView
                     android:id="@+id/second_hand_buy_items_list"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:divider="?secondHandItemsDivider"
                     android:dividerHeight="1dp" />
-            </android.support.v4.widget.SwipeRefreshLayout>
-        </LinearLayout>
 
-        <TextView
-            android:id="@+id/second_hand_buy_no_results_found"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="?contentStartMargin"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="?contentEndMargin"
-            android:gravity="center_horizontal"
-            android:padding="25dp"
-            android:text="@string/second_hand_buy_no_results"
-            android:textColor="?hintTextColor"
-            android:textSize="@dimen/text_size_large_material"
-            android:visibility="gone" />
+                <TextView
+                    android:id="@+id/second_hand_buy_no_results_found"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="?contentStartMargin"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginEnd="?contentEndMargin"
+                    android:gravity="center_horizontal"
+                    android:padding="25dp"
+                    android:text="@string/second_hand_buy_no_results"
+                    android:textColor="?hintTextColor"
+                    android:textSize="@dimen/text_size_large_material"
+                    android:visibility="gone" />
+            </FrameLayout>
+        </android.support.v4.widget.SwipeRefreshLayout>
 
     </LinearLayout>
 

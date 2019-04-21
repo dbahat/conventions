@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.ListViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -77,6 +78,14 @@ public class SecondHandBuyFragment extends Fragment implements SwipeRefreshLayou
 		lastUpdate = view.findViewById(R.id.second_hand_buy_items_last_update);
 		adapter = new SecondHandSearchItemsAdapter(Collections.<SecondHandItem>emptyList(), secondHandBuy); // TODO restore items list from state if available
 		listView.setAdapter(adapter);
+		// This is necessary because for some reason the swipe refresh layout here doesn't recognize that
+		// the sticky headers list view can scroll up, and when scrolling up it always appears which is annoying
+		swipeRefreshLayout.setOnChildScrollUpCallback(new SwipeRefreshLayout.OnChildScrollUpCallback() {
+			@Override
+			public boolean canChildScrollUp(SwipeRefreshLayout parent, @Nullable View child) {
+				return ListViewCompat.canScrollList(listView, -1);
+			}
+		});
 
 		swipeRefreshLayout.setColorSchemeColors(ThemeAttributes.getColor(getActivity(), R.attr.swipeToRefreshColor));
 		swipeRefreshLayout.setProgressBackgroundColorSchemeColor(ThemeAttributes.getColor(getActivity(), R.attr.swipeToRefreshBackgroundColor));
@@ -323,6 +332,7 @@ public class SecondHandBuyFragment extends Fragment implements SwipeRefreshLayou
 	private void updateSearchResultsNumber(int count) {
 		if (count == 0) {
 			resultsContainer.setVisibility(View.GONE);
+			listView.setVisibility(View.GONE);
 			noResultsFoundView.setVisibility(View.VISIBLE);
 		} else {
 			if (count == 1) {
@@ -331,6 +341,7 @@ public class SecondHandBuyFragment extends Fragment implements SwipeRefreshLayou
 				searchResultsNumber.setText(getString(R.string.second_hand_buy_search_results_number, count));
 			}
 			resultsContainer.setVisibility(View.VISIBLE);
+			listView.setVisibility(View.VISIBLE);
 			noResultsFoundView.setVisibility(View.GONE);
 		}
 	}
