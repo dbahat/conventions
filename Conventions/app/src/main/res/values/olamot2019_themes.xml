@@ -127,6 +127,7 @@
         <item name="secondHandItemSoldColor">@color/olamot2019_blue</item>
         <item name="secondHandItemMissingColor">@color/olamot2019_brown1</item>
         <item name="secondHandItemsDivider">@drawable/olamot2019_second_hand_item_list_divider</item>
+        <item name="secondHandFilterColor">?android:textColorPrimary</item>
         <!-- Discounts activity -->
         <item name="discountsActivityLayout">@layout/olamot2019_activity_discounts</item>
     </style>
