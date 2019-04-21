@@ -30,6 +30,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.SecondHandForm;
+import amai.org.conventions.model.SecondHandItem;
 import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.Update;
 import amai.org.conventions.model.conventions.Convention;
@@ -41,6 +42,7 @@ public class ConventionStorage {
 	private static final String CONVENTION_FEEDBACK_FILE_NAME = "convention_feedback.json";
 	private static final String UPDATES_FILE_NAME = "convention_updates.json";
 	private static final String SECOND_HAND_FILE_NAME = "second_hand.json";
+	private static final String SECOND_HAND_SEARCH_ITEMS_FILE_NAME = "second_hand_search_items.json";
 	private static final String EVENTS_FILE_NAME = "convention_events.json";
 
 	private static final ReentrantReadWriteLock filesystemAccessLock = new ReentrantReadWriteLock();
@@ -89,6 +91,10 @@ public class ConventionStorage {
 
 	private String getSecondHandFileName() {
 		return getConventionFileName(SECOND_HAND_FILE_NAME);
+	}
+
+	private String getSecondHandSearchItemsFileName() {
+		return getConventionFileName(SECOND_HAND_SEARCH_ITEMS_FILE_NAME);
 	}
 
 	public void saveUserInput() {
@@ -159,6 +165,16 @@ public class ConventionStorage {
 		filesystemAccessLock.writeLock().lock();
 		try {
 			savePrivateFile(secondHandFormsString, getSecondHandFileName());
+		} finally {
+			filesystemAccessLock.writeLock().unlock();
+		}
+	}
+
+	public void saveSecondHandSearchItems(List<SecondHandItem> items) {
+		String secondHandFormsString = createGsonSerializer().toJson(items);
+		filesystemAccessLock.writeLock().lock();
+		try {
+			savePrivateFile(secondHandFormsString, getSecondHandSearchItemsFileName());
 		} finally {
 			filesystemAccessLock.writeLock().unlock();
 		}
@@ -294,9 +310,13 @@ public class ConventionStorage {
 	}
 
 	public List<SecondHandForm> readSecondHandFromFile() {
-		List<SecondHandForm> secondHandForms = readJsonFromFile(new TypeToken<List<SecondHandForm>>() {
+		return readJsonFromFile(new TypeToken<List<SecondHandForm>>() {
 		}.getType(), getSecondHandFileName());
-		return secondHandForms;
+	}
+
+	public List<SecondHandItem> readSecondHandSearchItemsFromFile() {
+		return readJsonFromFile(new TypeToken<List<SecondHandItem>>() {
+		}.getType(), getSecondHandSearchItemsFileName());
 	}
 
 	private static InputStream openTextFile(String fileName) {

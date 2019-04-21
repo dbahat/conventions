@@ -9,11 +9,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.ConventionStorage;
 import amai.org.conventions.utils.Dates;
@@ -26,12 +29,31 @@ public class SecondHandBuy extends SecondHand {
 
 	private ConventionStorage storage;
 	private Map<String, SecondHandItem> favoriteItems = new HashMap<>();
+	private List<SecondHandItem> items;
 
 	public SecondHandBuy(ConventionStorage storage) {
 		this.storage = storage;
+		load();
 	}
 
 	public List<SecondHandItem> getItems() {
+		return this.items;
+	}
+
+	private boolean shouldAutoRefresh() {
+		// Only refresh if it hasn't been an hour since the previous refresh
+		Date lastUpdate = ConventionsApplication.settings.getLastSecondHandSearchItemsUpdateDate();
+		if (lastUpdate != null && Dates.now().getTime() - lastUpdate.getTime() < MINIMUM_REFRESH_TIME) {
+			return false;
+		}
+		return true;
+	}
+
+
+	public boolean refresh(boolean force) {
+		if (!force && !shouldAutoRefresh()) {
+			return true;
+		}
 		Log.i(TAG, "Refreshing second hand buy");
 		try {
 			List<SecondHandItem> items = new LinkedList<>();
@@ -65,10 +87,13 @@ public class SecondHandBuy extends SecondHand {
 
 			Log.i(TAG, "Finished second hand buy refresh successfully");
 			syncFavoriteItems(items);
-			return items;
+			this.items = items;
+			ConventionsApplication.settings.setLastSecondHandSearchItemsUpdateDate();
+			save();
+			return true;
 		} catch (Exception e) {
 			Log.e(TAG, "Could not refresh second hand buy items", e);
-			return null;
+			return false;
 		}
 	}
 
@@ -111,11 +136,14 @@ public class SecondHandBuy extends SecondHand {
 	}
 
 	private void save() {
-
+		storage.saveSecondHandSearchItems(items);
 	}
 
 	private void load() {
-
+		items = storage.readSecondHandSearchItemsFromFile();
+		if (items == null) {
+			items = new ArrayList<>();
+		}
 	}
 
 }

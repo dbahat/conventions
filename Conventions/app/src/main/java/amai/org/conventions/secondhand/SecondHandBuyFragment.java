@@ -26,6 +26,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.SecondHandBuy;
 import amai.org.conventions.model.SecondHandItem;
@@ -106,11 +107,12 @@ public class SecondHandBuyFragment extends Fragment implements SwipeRefreshLayou
 		swipeRefreshLayout.setColorSchemeColors(ThemeAttributes.getColor(getActivity(), R.attr.swipeToRefreshColor));
 		swipeRefreshLayout.setProgressBackgroundColorSchemeColor(ThemeAttributes.getColor(getActivity(), R.attr.swipeToRefreshBackgroundColor));
 		swipeRefreshLayout.setOnRefreshListener(this);
+		updateRefreshTime();
 
 		initializeFiltersAndSort(view);
 //		initializeCategories(view);
 
-		refreshItemsListInBackground();
+		refreshItemsListInBackground(false);
 
 		return view;
 	}
@@ -248,27 +250,27 @@ public class SecondHandBuyFragment extends Fragment implements SwipeRefreshLayou
 
 	@Override
 	public void onRefresh() {
-		refreshItemsListInBackground();
+		refreshItemsListInBackground(true);
 	}
 
-	private void refreshItemsListInBackground() {
+	private void refreshItemsListInBackground(final boolean force) {
 		swipeRefreshLayout.setRefreshing(true);
 
-		new AsyncTask<Void, Void, List<SecondHandItem>>() {
+		new AsyncTask<Void, Void, Boolean>() {
 			@Override
-			protected List<SecondHandItem> doInBackground(Void... params) {
-				return secondHandBuy.getItems();
+			protected Boolean doInBackground(Void... params) {
+				return secondHandBuy.refresh(force);
 			}
 
 			@Override
-			protected void onPostExecute(List<SecondHandItem> items) {
-				if (items == null) {
+			protected void onPostExecute(Boolean success) {
+				if (!success) {
 					swipeRefreshLayout.setRefreshing(false);
 					Toast.makeText(getContext(), R.string.update_refresh_failed, Toast.LENGTH_SHORT).show();
 					return;
 				}
-				updateRefreshTime(Dates.now());
-				SecondHandBuyFragment.this.items = items;
+				updateRefreshTime();
+				SecondHandBuyFragment.this.items = secondHandBuy.getItems();
 				swipeRefreshLayout.setRefreshing(false);
 				applyFiltersInBackground();
 			}
@@ -371,12 +373,18 @@ public class SecondHandBuyFragment extends Fragment implements SwipeRefreshLayou
 		}
 	}
 
-	private void updateRefreshTime(Date date) {
+	private void updateRefreshTime() {
+		Date lastRefreshTime = ConventionsApplication.settings.getLastSecondHandSearchItemsUpdateDate();
+		if (lastRefreshTime == null) {
+			lastUpdate.setText("");
+			return;
+		}
+
 		String formattedLastModifiedDate;
-		if (Dates.isSameDate(date, Dates.now())) {
-			formattedLastModifiedDate = Dates.formatHoursAndMinutes(date);
+		if (Dates.isSameDate(lastRefreshTime, Dates.now())) {
+			formattedLastModifiedDate = Dates.formatHoursAndMinutes(lastRefreshTime);
 		} else {
-			formattedLastModifiedDate = Dates.formatDateAndTime(date);
+			formattedLastModifiedDate = Dates.formatDateAndTime(lastRefreshTime);
 		}
 		lastUpdate.setText(getString(R.string.second_hand_buy_last_update_time, formattedLastModifiedDate));
 	}
