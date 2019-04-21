@@ -66,9 +66,4 @@ public class SecondHandSearchItemsAdapter extends BaseAdapter implements ListAda
 	public List<SecondHandItem> getItems() {
 		return items;
 	}
-
-	@Override
-	public boolean isEnabled(int position) {
-		return false;
-	}
 }
