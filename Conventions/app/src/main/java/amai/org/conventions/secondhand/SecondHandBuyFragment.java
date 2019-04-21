@@ -20,6 +20,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -35,12 +36,18 @@ import sff.org.conventions.R;
 
 public class SecondHandBuyFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, SecondHandActivity.OnFragmentSelectedListener {
 
+	private static final String STATE_PRICE_FILTER = "priceFilter";
+	private static final String STATE_KEYWORD_FILTER = "keywordFilter";
+	private static final String STATE_SORT_TYPE = "sortType";
+
 	private SecondHandBuy secondHandBuy;
 	private SecondHandSearchItemsAdapter adapter;
+
 	private List<SecondHandItem> items;
 	private String keywordsFilter;
 	private String priceFilter;
 	private SortType sortType;
+
 	private List<String> categoriesFilter;
 	private boolean showAllFavorites;
 	private AsyncTask<Void, Void, List<SecondHandItem>> currentFilterProcessingTask;
@@ -91,12 +98,26 @@ public class SecondHandBuyFragment extends Fragment implements SwipeRefreshLayou
 		swipeRefreshLayout.setProgressBackgroundColorSchemeColor(ThemeAttributes.getColor(getActivity(), R.attr.swipeToRefreshBackgroundColor));
 		swipeRefreshLayout.setOnRefreshListener(this);
 
+		if (savedInstanceState != null) {
+			priceFilter = savedInstanceState.getString(STATE_PRICE_FILTER);
+			keywordsFilter = savedInstanceState.getString(STATE_KEYWORD_FILTER);
+			sortType = (SortType) savedInstanceState.getSerializable(STATE_SORT_TYPE);
+		}
+
 		initializeFiltersAndSort(view);
 //		initializeCategories(view);
 
 		refreshItemsListInBackground();
 
 		return view;
+	}
+
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putString(STATE_PRICE_FILTER, priceFilter);
+		outState.putString(STATE_KEYWORD_FILTER, keywordsFilter);
+		outState.putSerializable(STATE_SORT_TYPE, sortType);
 	}
 
 	private void initializeFiltersAndSort(View view) {
@@ -357,6 +378,10 @@ public class SecondHandBuyFragment extends Fragment implements SwipeRefreshLayou
 	}
 
 	private List<SecondHandItem> filterItems(final String keywordsFilter, String priceFilter, final List<String> categoriesFilter, final boolean showAllFavorites) {
+		if (items == null) {
+			return new ArrayList<>();
+		}
+
 		Integer maxPrice = null;
 		if (priceFilter != null) {
 			try {
