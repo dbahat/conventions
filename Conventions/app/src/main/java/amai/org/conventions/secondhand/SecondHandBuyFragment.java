@@ -14,6 +14,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -199,6 +200,16 @@ public class SecondHandBuyFragment extends Fragment implements SwipeRefreshLayou
 			}
 		});
 		updateSortButtonsColor();
+
+		final CheckBox showFavoritesCheckBox = view.findViewById(R.id.second_hand_buy_show_favorites);
+		showFavoritesCheckBox.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				showAllFavorites = showFavoritesCheckBox.isChecked();
+				applyFiltersInBackground();
+			}
+		});
+		showFavoritesCheckBox.setChecked(showAllFavorites);
 	}
 
 	private void updateSortButtonsColor() {
@@ -326,9 +337,9 @@ public class SecondHandBuyFragment extends Fragment implements SwipeRefreshLayou
 				if (showAllFavorites) {
 					// Favorites are on top if selected
 					if (secondHandBuy.isFavorite(item1) && !secondHandBuy.isFavorite(item2)) {
-						result = 1;
-					} else if (!secondHandBuy.isFavorite(item1) && secondHandBuy.isFavorite(item2)) {
 						result = -1;
+					} else if (!secondHandBuy.isFavorite(item1) && secondHandBuy.isFavorite(item2)) {
+						result = 1;
 					}
 				}
 				if (result != 0) {
@@ -404,6 +415,12 @@ public class SecondHandBuyFragment extends Fragment implements SwipeRefreshLayou
 			public boolean where(SecondHandItem item) {
 				if (showAllFavorites && secondHandBuy.isFavorite(item)) {
 					return true;
+				}
+				if (item.getStatus() == SecondHandItem.Status.UNKNOWN) {
+					// This could happen if the user had a favorite event which wasn't
+					// found in the search then removed it from the favorites. It will remain in
+					// the list until the next refresh but we won't show it.
+					return false;
 				}
 				if (finalMaxPrice != null && item.getPrice() > finalMaxPrice) {
 					return false;

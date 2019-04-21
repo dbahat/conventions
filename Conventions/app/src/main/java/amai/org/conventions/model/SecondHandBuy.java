@@ -28,7 +28,7 @@ public class SecondHandBuy extends SecondHand {
 	private static final long MINIMUM_REFRESH_TIME = Dates.MILLISECONDS_IN_HOUR;
 
 	private ConventionStorage storage;
-	private Map<String, SecondHandItem> favoriteItems = new HashMap<>();
+	private Map<String, SecondHandItem> favoriteItems;
 	private List<SecondHandItem> items;
 
 	public SecondHandBuy(ConventionStorage storage) {
@@ -89,7 +89,7 @@ public class SecondHandBuy extends SecondHand {
 			syncFavoriteItems(items);
 			this.items = items;
 			ConventionsApplication.settings.setLastSecondHandSearchItemsUpdateDate();
-			save();
+			saveItemsCache();
 			return true;
 		} catch (Exception e) {
 			Log.e(TAG, "Could not refresh second hand buy items", e);
@@ -114,20 +114,20 @@ public class SecondHandBuy extends SecondHand {
 				favoriteItems.put(pair.getKey(), existingItemIDs.get(favoriteItem.getId()));
 			}
 		}
-		save();
+		saveFavorites();
 	}
 
 	public void addFavoriteItem(final SecondHandItem item) {
 		if (!favoriteItems.containsKey(item.getId())) {
 			favoriteItems.put(item.getId(), item);
-			save();
+			saveFavorites();
 		}
 	}
 
 	public void removeFavoriteItem(final SecondHandItem item) {
 		if (favoriteItems.containsKey(item.getId())) {
 			favoriteItems.remove(item.getId());
-			save();
+			saveFavorites();
 		}
 	}
 
@@ -135,14 +135,25 @@ public class SecondHandBuy extends SecondHand {
 		return favoriteItems.containsKey(item.getId());
 	}
 
-	private void save() {
+	private void saveItemsCache() {
 		storage.saveSecondHandSearchItems(items);
+	}
+
+	private void saveFavorites() {
+		storage.saveSecondHandFavorites(new ArrayList<>(favoriteItems.values()));
 	}
 
 	private void load() {
 		items = storage.readSecondHandSearchItemsFromFile();
 		if (items == null) {
 			items = new ArrayList<>();
+		}
+		favoriteItems = new HashMap<>();
+		List<SecondHandItem> favoriteItemsFromStorage = storage.readSecondHandFavoritesFromFile();
+		if (favoriteItemsFromStorage != null) {
+			for (SecondHandItem item : favoriteItemsFromStorage) {
+				favoriteItems.put(item.getId(), item);
+			}
 		}
 	}
 

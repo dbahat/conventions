@@ -13,13 +13,25 @@
     android:focusable="true">
     <!-- setting clickable/focusable so ListView dividers will show. see https://stackoverflow.com/questions/5375138/disappearing-divider-in-listview-when-arrayadapter-isenabled-returns-false -->
 
-    <TextView
-        android:id="@+id/second_hand_item_name"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:textSize="14sp"
-        tools:text="The title - volume 1 (book)" />
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/second_hand_item_name"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:textSize="14sp"
+            tools:text="The title - volume 1 (book)" />
+        <ImageView
+            android:layout_width="29dp"
+            android:layout_height="29dp"
+            android:padding="5dp"
+            android:id="@+id/second_hand_item_favorite"
+            android:src="@drawable/ic_star_black_24dp" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

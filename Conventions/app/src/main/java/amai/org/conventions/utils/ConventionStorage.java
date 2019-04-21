@@ -43,6 +43,7 @@ public class ConventionStorage {
 	private static final String UPDATES_FILE_NAME = "convention_updates.json";
 	private static final String SECOND_HAND_FILE_NAME = "second_hand.json";
 	private static final String SECOND_HAND_SEARCH_ITEMS_FILE_NAME = "second_hand_search_items.json";
+	private static final String SECOND_HAND_SEARCH_FAVORITES_FILE_NAME = "second_hand_search_favorite_items.json";
 	private static final String EVENTS_FILE_NAME = "convention_events.json";
 
 	private static final ReentrantReadWriteLock filesystemAccessLock = new ReentrantReadWriteLock();
@@ -95,6 +96,10 @@ public class ConventionStorage {
 
 	private String getSecondHandSearchItemsFileName() {
 		return getConventionFileName(SECOND_HAND_SEARCH_ITEMS_FILE_NAME);
+	}
+
+	private String getSecondHandFavoritesFileName() {
+		return getConventionFileName(SECOND_HAND_SEARCH_FAVORITES_FILE_NAME);
 	}
 
 	public void saveUserInput() {
@@ -175,6 +180,16 @@ public class ConventionStorage {
 		filesystemAccessLock.writeLock().lock();
 		try {
 			savePrivateFile(secondHandFormsString, getSecondHandSearchItemsFileName());
+		} finally {
+			filesystemAccessLock.writeLock().unlock();
+		}
+	}
+
+	public void saveSecondHandFavorites(List<SecondHandItem> favoriteItems) {
+		String secondHandFavoritesString = createGsonSerializer().toJson(favoriteItems);
+		filesystemAccessLock.writeLock().lock();
+		try {
+			savePrivateFile(secondHandFavoritesString, getSecondHandFavoritesFileName());
 		} finally {
 			filesystemAccessLock.writeLock().unlock();
 		}
@@ -317,6 +332,11 @@ public class ConventionStorage {
 	public List<SecondHandItem> readSecondHandSearchItemsFromFile() {
 		return readJsonFromFile(new TypeToken<List<SecondHandItem>>() {
 		}.getType(), getSecondHandSearchItemsFileName());
+	}
+
+	public List<SecondHandItem> readSecondHandFavoritesFromFile() {
+		return readJsonFromFile(new TypeToken<List<SecondHandItem>>() {
+		}.getType(), getSecondHandFavoritesFileName());
 	}
 
 	private static InputStream openTextFile(String fileName) {

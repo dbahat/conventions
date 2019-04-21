@@ -1,7 +1,9 @@
 package amai.org.conventions.secondhand;
 
+import android.graphics.PorterDuff;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import amai.org.conventions.ThemeAttributes;
@@ -15,12 +17,27 @@ class SecondHandItemSearchViewHolder extends RecyclerView.ViewHolder {
 	private final TextView itemIdView;
 	private final TextView itemNameView;
 	private final TextView itemPriceView;
+	private final ImageView favoriteIcon;
 
 	public SecondHandItemSearchViewHolder(View itemView) {
 		super(itemView);
 		itemIdView = itemView.findViewById(R.id.second_hand_item_id);
 		itemNameView = itemView.findViewById(R.id.second_hand_item_name);
 		itemPriceView = itemView.findViewById(R.id.second_hand_item_price);
+		favoriteIcon = itemView.findViewById(R.id.second_hand_item_favorite);
+	}
+
+	public void setOnFavoriteButtonClickListener(View.OnClickListener listener) {
+		favoriteIcon.setOnClickListener(listener);
+	}
+
+	private void setFavorite(boolean isFavorite) {
+		favoriteIcon.setImageDrawable(ThemeAttributes.getDrawable(itemView.getContext(), R.attr.eventFavoriteIcon));
+		if (isFavorite) {
+			favoriteIcon.setColorFilter(ThemeAttributes.getColor(itemView.getContext(), R.attr.eventFavoriteColor), PorterDuff.Mode.SRC_ATOP);
+		} else {
+			favoriteIcon.setColorFilter(ThemeAttributes.getColor(itemView.getContext(), R.attr.eventNonFavoriteColor), PorterDuff.Mode.SRC_ATOP);
+		}
 	}
 
 	public void setItem(SecondHandItem newItem, boolean isFavorite) {
@@ -46,6 +63,7 @@ class SecondHandItemSearchViewHolder extends RecyclerView.ViewHolder {
 		itemNameView.setTextColor(textColor);
 		itemPriceView.setTextColor(textColor);
 		itemIdView.setTextColor(textColor);
+		setFavorite(isFavorite);
 	}
 
 	private void refreshItemNameText() {
@@ -57,5 +75,9 @@ class SecondHandItemSearchViewHolder extends RecyclerView.ViewHolder {
 			itemName += " (" + item.getType() + ")";
 		}
 		this.itemNameView.setText(itemName);
+	}
+
+	public SecondHandItem getItem() {
+		return item;
 	}
 }

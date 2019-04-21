@@ -50,6 +50,18 @@ public class SecondHandSearchItemsAdapter extends BaseAdapter implements ListAda
 
 		SecondHandItem item = items.get(position);
 		holder.setItem(item, secondHandBuy.isFavorite(item));
+		holder.setOnFavoriteButtonClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				SecondHandItem item = holder.getItem();
+				if (secondHandBuy.isFavorite(item)) {
+					secondHandBuy.removeFavoriteItem(item);
+				} else {
+					secondHandBuy.addFavoriteItem(item);
+				}
+				holder.setItem(item, secondHandBuy.isFavorite(item));
+			}
+		});
 		return convertView;
 	}
 

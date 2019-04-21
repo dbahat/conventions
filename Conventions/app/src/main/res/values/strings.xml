@@ -231,4 +231,5 @@
     <string name="second_hand_buy_last_update_time">רשימת הפריטים נכונה ל-%s</string>
     <string name="second_hand_favorites">מועדפים</string>
     <string name="second_hand_unknown_status">לא בדוכן</string>
+    <string name="second_hand_show_favorites">הצג מועדפים בהתחלה</string>
 </resources>
