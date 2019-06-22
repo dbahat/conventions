@@ -28,7 +28,7 @@ import amai.org.conventions.networking.SurveyDataRetriever;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 
-public class Harucon2019Convention extends AmaiConvention {
+public class Cami2019Convention extends AmaiConvention {
     // Hall names
     private static final String MAIN_HALL_NAME = "אולם ראשי";
     private static final String SCHWARTZ_NAME = "אודיטוריום שוורץ";
@@ -49,23 +49,23 @@ public class Harucon2019Convention extends AmaiConvention {
     protected Calendar initDate() {
         Calendar date = Calendar.getInstance();
         date.clear();
-        date.set(2019, Calendar.MARCH, 21);
+        date.set(2019, Calendar.AUGUST, 1);
         return date;
     }
 
     @Override
     protected String initID() {
-        return "Harucon2019";
+        return "Cami2019";
     }
 
     @Override
     protected String initDisplayName() {
-        return "הארוקון 2019";
+        return "כאמ\"י 2019";
     }
 
     @Override
     protected String initFacebookFeedPath() {
-        return "/harucon.org.il/posts";
+        return "/cami.org.il/posts";
     }
 
     @Override
@@ -93,7 +93,7 @@ public class Harucon2019Convention extends AmaiConvention {
                     .withQuestionEntry(FeedbackQuestion.QUESTION_ID_LECTURER_QUALITY, "entry.1327236956")
                     .withQuestionEntry(FeedbackQuestion.QUESTION_ID_SIMILAR_EVENTS, "entry.1416969956")
                     .withQuestionEntry(FeedbackQuestion.QUESTION_ID_ADDITIONAL_INFO, "entry.1582215667")
-                    .withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSfJMvk0mtugjOHz7_FWHOe6O8blVh_q0lUxK0G6KTdSxyXNdA/formResponse"));
+                    .withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSc8HLV_-SYKWyWfdDEFSEwI6GiKfa900bYlHr_08sgWwYhcDQ/formResponse"));
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
@@ -113,7 +113,7 @@ public class Harucon2019Convention extends AmaiConvention {
                     .withQuestionEntry(FeedbackQuestion.QUESTION_ID_MAP_SIGNS, "entry.1416969956")
                     .withQuestionEntry(FeedbackQuestion.QUESTION_ID_CONFLICTING_EVENTS, "entry.1582215667")
                     .withQuestionEntry(FeedbackQuestion.QUESTION_ID_IMPROVEMENT, "entry.993320932")
-                    .withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSeGO1_C5buS0tcRmBUk68UnpB_JCYWmuvIG7UuWULfDZZMnnw/formResponse"));
+                    .withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSdp4Nw5-H86qyVhMFIbiowbPs2edqAv_gNSIbDvTaB9hvP56g/formResponse"));
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
@@ -123,7 +123,7 @@ public class Harucon2019Convention extends AmaiConvention {
     @Override
     protected URL initModelURL() {
         try {
-            return new URL("http://2019.harucon.org.il/wp-admin/admin-ajax.php?action=get_event_list");
+            return new URL("http://2019.cami.org.il/wp-admin/admin-ajax.php?action=get_event_list");
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
@@ -515,7 +515,6 @@ public class Harucon2019Convention extends AmaiConvention {
     }
 
     private List<Stand> getNesherStands() {
-        // TODO update for cami 2018
         return Arrays.asList(
 //				new Stand().withName("מודיעין ודוכן אמא\"י").withType(Stand.StandType.REGULAR_STAND).withImageX(1276).withImageY(948),
 //				new Stand().withName("שגרירות יפן").withType(Stand.StandType.REGULAR_STAND).withImageX(1112).withImageY(1000),
