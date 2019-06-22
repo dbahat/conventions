@@ -6,7 +6,7 @@
               android:orientation="vertical"
               tools:context="amai.org.conventions.events.activities.ProgrammeActivity">
 
-    <android.support.design.widget.TabLayout
+    <com.google.android.material.tabs.TabLayout
         android:id="@+id/programme_days_tabs"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         style="@style/TabStyle"

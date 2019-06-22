@@ -1,5 +1,7 @@
 package amai.org.conventions.model;
 
+import androidx.annotation.DrawableRes;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;

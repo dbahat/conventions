@@ -2,8 +2,8 @@ package amai.org.conventions.model.conventions;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 
 import java.io.Serializable;
 import java.net.HttpURLConnection;

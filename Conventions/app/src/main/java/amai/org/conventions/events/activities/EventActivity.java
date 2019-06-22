@@ -13,10 +13,10 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.graphics.Palette;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AlertDialog;
+import androidx.palette.graphics.Palette;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -543,7 +543,7 @@ public class EventActivity extends NavigationActivity {
 		time.setText(formattedEventTime);
 
 		setupEventTicketsAndPrices(event);
-		
+
 		TextView tags = (TextView) findViewById(R.id.event_tags);
 		List<String> eventTags = event.getTags();
 		if (eventTags == null || eventTags.size() == 0) {
@@ -789,7 +789,7 @@ public class EventActivity extends NavigationActivity {
 			description.setMovementMethod(LinkMovementMethod.getInstance());
 			Spanned spanned = event.getSpannedDescription();
 			description.setText(spanned);
-			
+
 			// Intercept clicks on links to other events
 			if (description.getText() instanceof SpannableString) {
 				SpannableString spannable = (SpannableString) description.getText();
