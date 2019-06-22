@@ -4,7 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ValueAnimator;
-import android.support.v4.view.ViewPager;
+import androidx.viewpager.widget.ViewPager;
 
 public class ViewPagerAnimator {
 

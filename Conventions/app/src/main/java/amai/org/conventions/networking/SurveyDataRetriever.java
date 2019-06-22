@@ -1,6 +1,6 @@
 package amai.org.conventions.networking;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.google.gson.GsonBuilder;
 

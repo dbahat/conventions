@@ -1,7 +1,6 @@
 package amai.org.conventions.events.adapters;
 
-import android.graphics.Color;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,6 @@ import java.util.List;
 
 import amai.org.conventions.R;
 import amai.org.conventions.events.activities.EventsTimeSlot;
-import amai.org.conventions.events.activities.MyEventsActivity;
 import amai.org.conventions.events.activities.MyEventsDayFragment;
 import amai.org.conventions.events.holders.ConflictingEventsViewHolder;
 import amai.org.conventions.events.holders.SwipeableEventViewHolder;

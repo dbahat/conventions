@@ -9,8 +9,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.support.v4.app.NotificationCompat;
-import android.support.v7.app.AlertDialog;
+import androidx.core.app.NotificationCompat;
+import androidx.appcompat.app.AlertDialog;
 
 import com.facebook.FacebookRequestError;
 
@@ -26,7 +26,6 @@ import amai.org.conventions.notifications.PlayServicesInstallation;
 import amai.org.conventions.notifications.PushNotification;
 import amai.org.conventions.notifications.PushNotificationTopic;
 import amai.org.conventions.notifications.PushNotificationTopicsSubscriber;
-import amai.org.conventions.notifications.ShowNotificationReceiver;
 import amai.org.conventions.settings.SettingsActivity;
 import amai.org.conventions.updates.UpdatesActivity;
 import amai.org.conventions.utils.CollectionUtils;

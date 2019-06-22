@@ -1,8 +1,8 @@
 package amai.org.conventions.customviews;
 
 import android.content.Context;
-import android.support.v7.widget.ActionMenuView;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.ActionMenuView;
+import androidx.appcompat.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;

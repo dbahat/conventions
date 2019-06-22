@@ -1,6 +1,6 @@
 package amai.org.conventions.model.conventions;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import java.net.MalformedURLException;
 import java.net.URL;

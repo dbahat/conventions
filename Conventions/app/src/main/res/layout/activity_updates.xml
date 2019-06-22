@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     tools:context="amai.org.conventions.updates.UpdatesActivity">
 
-    <android.support.v4.widget.SwipeRefreshLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/updates_swipe_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -21,12 +21,12 @@
                 android:layout_height="1dp"
                 android:background="?separatorColor"/>
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/updates_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            </android.support.v7.widget.RecyclerView>
+            </androidx.recyclerview.widget.RecyclerView>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -34,7 +34,7 @@
 
         </LinearLayout>
 
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <LinearLayout
         android:id="@+id/login_layout"

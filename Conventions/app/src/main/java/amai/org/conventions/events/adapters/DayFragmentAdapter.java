@@ -1,7 +1,7 @@
 package amai.org.conventions.events.adapters;
 
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

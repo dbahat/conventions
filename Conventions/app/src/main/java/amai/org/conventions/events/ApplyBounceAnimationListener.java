@@ -1,8 +1,9 @@
 package amai.org.conventions.events;
 
-import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewParent;
+
+import androidx.viewpager.widget.ViewPager;
 
 public class ApplyBounceAnimationListener implements View.OnClickListener {
 	@Override

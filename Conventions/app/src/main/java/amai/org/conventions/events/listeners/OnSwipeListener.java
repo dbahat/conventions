@@ -1,6 +1,6 @@
 package amai.org.conventions.events.listeners;
 
-import android.support.v4.view.ViewPager;
+import androidx.viewpager.widget.ViewPager;
 
 public class OnSwipeListener implements ViewPager.OnPageChangeListener {
 	private final Runnable action;

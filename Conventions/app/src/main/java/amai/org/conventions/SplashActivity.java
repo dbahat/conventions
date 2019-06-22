@@ -2,7 +2,7 @@ package amai.org.conventions;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.notifications.ShowNotificationReceiver;
