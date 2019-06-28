@@ -54,6 +54,7 @@
         <item name="navigationPopupTitleMargins">0dp</item>
 
         <!-- Home -->
+        <item name="homeActivityLayout">@layout/activity_home</item>
         <item name="homeBoxTopMargin">0dp</item>
         <item name="homeSingleButtonTopMargin">0dp</item>
         <item name="homeButtonsSideMargin">0dp</item>
@@ -150,6 +151,7 @@
         <item name="navigationPopupTitleMargins">0dp</item>
 
         <!-- Home -->
+        <item name="homeActivityLayout">@layout/activity_home</item>
         <item name="homeBoxTopMargin">0dp</item>
         <item name="homeSingleButtonTopMargin">0dp</item>
         <item name="homeButtonsSideMargin">0dp</item>

@@ -1,8 +1,6 @@
 package amai.org.conventions;
 
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +30,9 @@ import amai.org.conventions.updates.UpdatesActivity;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Views;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
 import static amai.org.conventions.utils.CollectionUtils.filter;
 
@@ -53,6 +54,7 @@ public class HomeActivity extends NavigationActivity {
 		super.onResume();
 
 		currentFavoriteEvent = getCurrentFavoriteEvent();
+		setContentInContentContainer(ThemeAttributes.getResourceId(this, R.attr.homeActivityLayout), false, false);
 
 		// Creating the page layout during onResume (and not onCreate) since the layout is time-driven,
 		// and we want it refreshed in case the activity was paused and got resumed.
@@ -67,6 +69,13 @@ public class HomeActivity extends NavigationActivity {
 		}
 	}
 
+	private void setInfoBoxContent(@LayoutRes int infoBoxContent) {
+		FrameLayout infoBox = findViewById(R.id.home_info_box);
+		// Removing all previous views before attaching the newly inflated layout to support calling setInfoBoxContent() more then once
+		infoBox.removeAllViews();
+		getLayoutInflater().inflate(infoBoxContent, infoBox, true);
+	}
+
 	private void setContentForDuringConvention() {
 		currentFavoriteEvent = getCurrentFavoriteEvent();
 		upcomingFavoriteEvent = getUpcomingFavoriteEvent();
@@ -79,7 +88,7 @@ public class HomeActivity extends NavigationActivity {
 	}
 
 	private void setContentWithUpcomingFavorites(ConventionEvent currentEvent, ConventionEvent upcomingEvent) {
-		setContentInContentContainer(R.layout.activity_home_during_convention, false, false);
+		setInfoBoxContent(R.layout.home_box_during_convention);
 
 		View currentEventContainer = findViewById(R.id.home_current_event_container);
 		TextView currentEventTitle = (TextView)findViewById(R.id.home_current_event_title);
@@ -142,7 +151,7 @@ public class HomeActivity extends NavigationActivity {
 	}
 
 	private void setContentForNoUpcomingFavorites() {
-		setContentInContentContainer(R.layout.activity_home_during_convention_no_favorites, false, false);
+		setInfoBoxContent(R.layout.home_box_during_convention_no_favorites);
 
 		TextView upcomingProgrammeEventsTitle = (TextView) findViewById(R.id.home_upcoming_programme_events_title);
 		ListView upcomingEventsListView = (ListView) findViewById(R.id.home_upcoming_programme_events_list);
@@ -283,7 +292,7 @@ public class HomeActivity extends NavigationActivity {
 	}
 
 	private void setContentForBeforeConventionStarted() {
-		setContentInContentContainer(R.layout.activity_home_before_convention, false, false);
+		setInfoBoxContent(R.layout.home_box_before_convention);
 		TextView titleView = (TextView)findViewById(R.id.home_content_title);
 		TextView contentView = (TextView)findViewById(R.id.home_content);
 		Views.fixRadialGradient(findViewById(R.id.home_content_container));
@@ -309,7 +318,7 @@ public class HomeActivity extends NavigationActivity {
 	}
 
 	private void setContentForAfterConventionEnded() {
-		setContentInContentContainer(R.layout.activity_home_after_convention, false, false);
+		setInfoBoxContent(R.layout.home_box_after_convention);
 		FrameLayout contentViewContainer = (FrameLayout)findViewById(R.id.home_content_container);
 		TextView titleView = (TextView)findViewById(R.id.home_content_title);
 		TextView contentView = (TextView)findViewById(R.id.home_content);

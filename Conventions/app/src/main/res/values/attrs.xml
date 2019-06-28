@@ -60,6 +60,7 @@
         <attr name="aboutLogo" format="integer"/>
         <attr name="aboutLogoMargins" format="dimension"/>
         <!-- Home screen -->
+        <attr name="homeActivityLayout" format="integer|reference"/>
         <attr name="homeBackground" format="color|reference"/>
         <attr name="homeToolbarTitle" format="integer|reference"/>
         <attr name="homeLogo" format="integer|reference"/>
