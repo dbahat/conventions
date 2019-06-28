@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:weightSum="1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <amai.org.conventions.customviews.AspectRatioImageView
+        android:id="@+id/home_logo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="?homeLogoMargin"
+        android:src="?homeLogo"/>
+
+    <!-- The content of the info box will be placed at runtime inside this layout -->
+    <FrameLayout
+        android:id="@+id/home_info_box"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="24dp"/>
+
+    <amai.org.conventions.customviews.AspectRatioImageView
+        android:id="@+id/home_bottom_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="?homeBottomImage"/>
+</LinearLayout>
