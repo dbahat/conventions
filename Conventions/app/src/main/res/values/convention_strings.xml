@@ -8,20 +8,17 @@
     <string name="home_convention_ended">הכנס נגמר</string>
     <string name="notification_channel_description_notifications">הודעות בזמן אמת מהנהלת הכנס</string>
 
-    <!-- Relevant to all conventions -->
+    <!-- Relevant to all amai conventions -->
     <string name="arrival_methods_marker_name">%s - בנייני האומה</string>
     <string name="my_event_share_link">http://play.google.com/store/apps/details?id=amai.org.conventions</string>
     <string name="convention_feedback_subtitle">מלא פידבק כללי על הכנס - קופות, דוכנים, משחקייה, עמדת צילום וכל דבר אחר.</string>
-
-    <!-- Relevant to all harucon conventions -->
-    <string name="app_name">כנס הארוקון 2019</string>
     <string name="my_events_no_data">הוסף אירוע לאירועים שלי ע\"י לחיצה על הכוכב בדף האירוע או ברשימת האירועים</string>
 
     <!-- Relevant to this specific convention -->
-    <!-- Taken from olamot website: http://2018.olamot-con.org.il/about/ -->
+    <string name="app_name">כנס כאמ\"י 2019</string>
     <string name="about_content"><![CDATA[אמא\"י – ארגון מנגה ואנימה ישראל. הארגון הוקם במאי 2007 על ידי קבוצת חברים בקהילת חובבי המנגה, אנימה ותרבות יפן ופועל למען קהילת חובבים זו.]]></string>
     <string name="about_links"><![CDATA[
-<p><a href="http://www.amai.org.il/">לאתר אמא\"י</a></p><p><a href="http://2019.harucon.org.il/">לאתר הכנס</a></p>
+<p><a href="http://www.amai.org.il/">לאתר אמא\"י</a></p><p><a href="http://2019.cami.org.il/">לאתר הכנס</a></p>
 <p>עיצוב וגרפיקה:</p>
 <p>לי ציפקין<br/><a href="https://www.facebook.com/lientarii/">https://www.facebook.com/lientarii/</a></p>
 <p>עדן כהן<br/><a href="https://www.instagram.com/eden_dun16/">https://www.instagram.com/eden_dun16/</a></p>
@@ -29,10 +26,9 @@
 <p>עומר אלבז<br/><a href="https://twitter.com/Tod_mugi">https://twitter.com/Tod_mugi</a></p>
 ]]></string>
     <string name="about_app_content"><![CDATA[
-האפליקציה פותחה עבור כנס הארוקון 2019.<br/>בקשות והצעות ניתן לכתוב <a href="market://details?id=amai.org.conventions">בדף האפליקציה בחנות</a>.
+האפליקציה פותחה עבור כנס כאמ\"י 2019.<br/>בקשות והצעות ניתן לכתוב <a href="market://details?id=amai.org.conventions">בדף האפליקציה בחנות</a>.
 ]]></string>
-    <!-- Copied from http://2018.olamot-con.org.il/info/arrival/
-         The only difference is removing the map iframe -->
+    <!-- Copied from https://cami.org.il/2019/%d7%9e%d7%99%d7%a7%d7%95%d7%9d-%d7%95%d7%93%d7%a8%d7%9b%d7%99-%d7%94%d7%92%d7%a2%d7%94/ -->
     <string name="arrival_method_description"><![CDATA[
 <p><h3>הגעה ברגל</h3></p>
 <p>הליכה של כ-5 דקות מהתחנה המרכזית בירושלים.<br />

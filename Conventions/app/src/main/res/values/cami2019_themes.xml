@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppBaseTheme.Harucon2019.Toolbar" parent="AppBaseTheme.Harucon2019"/>
+    <style name="AppBaseTheme.Cami2019.Toolbar" parent="AppBaseTheme.Cami2019"/>
 
-    <style name="AppBaseTheme.Harucon2019" parent="AppBaseTheme.Dark">
+    <style name="AppBaseTheme.Cami2019" parent="AppBaseTheme.Dark">
         <!-- Sub-themes -->
-        <item name="android:dialogTheme">@style/AppDialogTheme.Harucon2019</item>
-        <item name="alertDialogTheme">@style/AppAlertDialogTheme.Harucon2019</item>
-        <item name="numberPickerTheme">@style/AppBaseTheme.Harucon2019.Toolbar.NumberPickerTheme</item>
+        <item name="android:dialogTheme">@style/AppDialogTheme.Cami2019</item>
+        <item name="alertDialogTheme">@style/AppAlertDialogTheme.Cami2019</item>
+        <item name="numberPickerTheme">@style/AppBaseTheme.Cami2019.Toolbar.NumberPickerTheme</item>
         <!-- not using android:actionOverflowButtonStyle since it doesn't seem to work in Jellybean -->
-        <item name="actionOverflowButtonStyle">@style/OverflowMenu.Harucon2019</item>
+        <item name="actionOverflowButtonStyle">@style/OverflowMenu.Cami2019</item>
         <!-- General -->
         <item name="colorAccent">@color/harucon2019_orange</item>
         <item name="android:textColorLink">@color/harucon2019_orange</item>
@@ -66,7 +66,7 @@
         <item name="homeEventsListDivider">@drawable/harucon2019_home_event_list_divider</item>
         <item name="homeBoxTopMargin">0dp</item>
         <item name="homeSingleButtonTopMargin">10dp</item>
-        <item name="homeSingleButtonStyle">@style/HomeButton.Single.Harucon2019</item>
+        <item name="homeSingleButtonStyle">@style/HomeButton.Single.Cami2019</item>
         <!-- Event View -->
         <item name="eventTypeEndedColor">@color/harucon2019_gray</item>
         <item name="eventTypeEndedBackgroundColor">@color/harucon2019_transparent_dark_gray</item>
@@ -114,11 +114,11 @@
         <item name="eventTimeHeaderDefaultTextColor">@color/white</item>
     </style>
 
-    <style name="AppBaseTheme.Harucon2019.Toolbar.Event" parent="AppBaseTheme.Harucon2019.Toolbar">
+    <style name="AppBaseTheme.Cami2019.Toolbar.Event" parent="AppBaseTheme.Cami2019.Toolbar">
         <item name="android:textColorLink">@color/harucon2019_orange</item>
     </style>
 
-    <style name="AppDialogTheme.Harucon2019" parent="Theme.AppCompat.Light.Dialog">
+    <style name="AppDialogTheme.Cami2019" parent="Theme.AppCompat.Light.Dialog">
         <!-- This is the default starting API23. In any case the title is always left-justified so it's best to not use it. -->
         <item name="android:windowNoTitle">true</item>
         <item name="colorAccent">@color/harucon2019_orange</item>
@@ -126,26 +126,26 @@
         <item name="android:textColorPrimary">@android:color/black</item>
     </style>
 
-    <style name="AppAlertDialogTheme.Harucon2019" parent="Theme.AppCompat.Light.Dialog.Alert">
+    <style name="AppAlertDialogTheme.Cami2019" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorAccent">@color/harucon2019_orange</item>
         <item name="borderlessButtonColor">@color/harucon2019_orange</item>
         <item name="android:textColorPrimary">@android:color/black</item>
     </style>
 
-    <style name="AppBaseTheme.Harucon2019.Toolbar.Splash">
+    <style name="AppBaseTheme.Cami2019.Toolbar.Splash">
         <item name="android:windowBackground">@drawable/harucon2019_splash_background</item>
     </style>
 
-    <style name="OverflowMenu.Harucon2019" parent="Widget.AppCompat.ActionButton.Overflow">
+    <style name="OverflowMenu.Cami2019" parent="Widget.AppCompat.ActionButton.Overflow">
         <item name="android:src">@drawable/ic_more_vert_white_24dp</item>
     </style>
 
     <!-- Workaround for number picker font color issue when the theme is dark -->
-    <style name="AppBaseTheme.Harucon2019.Toolbar.NumberPickerTheme" >
+    <style name="AppBaseTheme.Cami2019.Toolbar.NumberPickerTheme" >
         <item name="android:textColorPrimary">@android:color/black</item>
     </style>
 
-    <style name="HomeButton.Single.Harucon2019">
+    <style name="HomeButton.Single.Cami2019">
         <item name="android:textSize">16sp</item>
         <item name="android:paddingTop">0dp</item>
         <item name="android:layout_gravity">center_horizontal</item>
