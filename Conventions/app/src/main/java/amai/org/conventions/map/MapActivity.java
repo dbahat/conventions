@@ -2,11 +2,6 @@ package amai.org.conventions.map;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
@@ -25,6 +20,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -45,6 +41,10 @@ import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Objects;
 import amai.org.conventions.utils.Views;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 public class MapActivity extends NavigationActivity implements MapFloorFragment.OnMapFloorEventListener {
 	public static final String EXTRA_FLOOR_NUMBER = "ExtraFloorNumber";
@@ -80,7 +80,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		super.onCreate(savedInstanceState);
 		setContentInContentContainer(R.layout.activity_map, false, false);
 		setToolbarAndContentContainerBackground(ThemeAttributes.getDrawable(this, R.attr.mapBackground));
-		setToolbarBackgroundColor(ThemeAttributes.getColor(this, R.attr.mapToolbarColor));
+		setToolbarBackground(ThemeAttributes.getDrawable(this, R.attr.mapToolbarColor));
 		if (map.getLocations().size() > 0) {
 			setupActionButton(R.drawable.ic_action_search, new View.OnClickListener() {
 				@Override

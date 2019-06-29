@@ -48,6 +48,7 @@ public class HomeActivity extends NavigationActivity {
 
 		setToolbarAndContentContainerBackground(ThemeAttributes.getDrawable(this, R.attr.homeBackground));
 		setToolbarTitle(ThemeAttributes.getDrawable(this, R.attr.homeToolbarTitle));
+		setToolbarBackground(ThemeAttributes.getDrawable(this, R.attr.homeToolbarBackground));
 	}
 
 	@Override
@@ -149,10 +150,22 @@ public class HomeActivity extends NavigationActivity {
 		}
 		Views.fixRadialGradient(findViewById(R.id.home_current_event_container_background));
 		Views.fixRadialGradient(upcomingEventContainer);
+
+		boolean showButtons = ThemeAttributes.getBoolean(this, R.attr.homeShowButtons);
+		if (!showButtons) {
+			View goToMyEventsButton = findViewById(R.id.home_go_to_my_events_button);
+			goToMyEventsButton.setVisibility(View.GONE);
+		}
 	}
 
 	private void setContentForNoUpcomingFavorites() {
 		setInfoBoxContent(R.layout.home_box_during_convention_no_favorites);
+
+		boolean showButtons = ThemeAttributes.getBoolean(this, R.attr.homeShowButtons);
+		if (!showButtons) {
+			View button = findViewById(R.id.home_screen_bottom_button);
+			button.setVisibility(View.GONE);
+		}
 
 		TextView upcomingProgrammeEventsTitle = (TextView) findViewById(R.id.home_upcoming_programme_events_title);
 		ListView upcomingEventsListView = (ListView) findViewById(R.id.home_upcoming_programme_events_list);
@@ -316,6 +329,12 @@ public class HomeActivity extends NavigationActivity {
 			titleView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 		}
 		titleView.setText(dateTitle);
+
+		boolean showButtons = ThemeAttributes.getBoolean(this, R.attr.homeShowButtons);
+		if (!showButtons) {
+			View buttonsLayout = findViewById(R.id.home_buttons_layout);
+			buttonsLayout.setVisibility(View.GONE);
+		}
 	}
 
 	private void setContentForAfterConventionEnded() {
