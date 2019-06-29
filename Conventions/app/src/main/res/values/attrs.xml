@@ -117,6 +117,7 @@
         <attr name="locationDetailsTitleColor" format="color|reference"/>
         <attr name="mapBackground" format="color|reference"/>
         <attr name="mapToolbarColor" format="color|reference"/>
+        <attr name="floorChangeBackground" format="color|reference"/>
         <attr name="iconFloorUp" format="integer|reference"/>
         <attr name="iconFloorDown" format="integer|reference"/>
         <attr name="standIconColor" format="color|reference"/>
