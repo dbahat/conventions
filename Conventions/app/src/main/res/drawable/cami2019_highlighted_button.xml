@@ -3,8 +3,7 @@
 
     <!-- Pressed state -->
     <item android:state_pressed="true">
-        <inset xmlns:android="http://schemas.android.com/apk/res/android"
-               android:insetLeft="@dimen/button_inset_horizontal_material"
+        <inset android:insetLeft="@dimen/button_inset_horizontal_material"
                android:insetTop="@dimen/button_inset_vertical_material"
                android:insetRight="@dimen/button_inset_horizontal_material"
                android:insetBottom="@dimen/button_inset_vertical_material">
@@ -12,7 +11,7 @@
                 <corners android:radius="@dimen/control_corner_material" />
                 <!-- Should be same as ?attr/buttonColorPressed
                 Referencing theme attributes is not supported before L -->
-                <solid android:color="@color/harucon2019_dark_orange" />
+                <solid android:color="@color/cami2019_dark_yellow" />
                 <padding android:left="@dimen/button_padding_horizontal_material"
                          android:top="@dimen/button_padding_vertical_material"
                          android:right="@dimen/button_padding_horizontal_material"
@@ -24,14 +23,13 @@
 
     <!-- Disabled state -->
     <item android:state_enabled="false">
-        <inset xmlns:android="http://schemas.android.com/apk/res/android"
-            android:insetLeft="@dimen/button_inset_horizontal_material"
+        <inset android:insetLeft="@dimen/button_inset_horizontal_material"
             android:insetTop="@dimen/button_inset_vertical_material"
             android:insetRight="@dimen/button_inset_horizontal_material"
             android:insetBottom="@dimen/button_inset_vertical_material">
             <shape android:shape="rectangle">
                 <corners android:radius="@dimen/control_corner_material" />
-                <solid android:color="@color/transparent_white" />
+                <solid android:color="@color/cami2019_dark_gray" />
                 <padding android:left="@dimen/button_padding_horizontal_material"
                     android:top="@dimen/button_padding_vertical_material"
                     android:right="@dimen/button_padding_horizontal_material"
@@ -42,8 +40,7 @@
 
     <!-- Normal state -->
     <item>
-        <inset xmlns:android="http://schemas.android.com/apk/res/android"
-               android:insetLeft="@dimen/button_inset_horizontal_material"
+        <inset android:insetLeft="@dimen/button_inset_horizontal_material"
                android:insetTop="@dimen/button_inset_vertical_material"
                android:insetRight="@dimen/button_inset_horizontal_material"
                android:insetBottom="@dimen/button_inset_vertical_material">
@@ -51,7 +48,7 @@
                 <corners android:radius="@dimen/control_corner_material" />
                 <!-- Should be same as ?attr/buttonColor
                 Referencing theme attributes is not supported before L -->
-                <solid android:color="@color/harucon2019_orange" />
+                <solid android:color="@color/cami2019_yellow" />
                 <padding android:left="@dimen/button_padding_horizontal_material"
                          android:top="@dimen/button_padding_vertical_material"
                          android:right="@dimen/button_padding_horizontal_material"

@@ -25,9 +25,9 @@
         <!-- Disabled state -->
         <item android:state_enabled="false">
             <shape android:shape="rectangle"
-                   android:tint="@color/transparent_white">
+                   android:tint="@color/cami2019_dark_gray">
                 <corners android:radius="@dimen/control_corner_material" />
-                <solid android:color="@color/transparent_white" />
+                <solid android:color="@color/cami2019_dark_gray" />
                 <padding android:left="@dimen/button_padding_horizontal_material"
                          android:top="@dimen/button_padding_vertical_material"
                          android:right="@dimen/button_padding_horizontal_material"

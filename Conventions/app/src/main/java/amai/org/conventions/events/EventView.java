@@ -15,9 +15,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.DrawableRes;
-import androidx.core.content.ContextCompat;
-
 import java.util.List;
 
 import amai.org.conventions.R;
@@ -30,6 +27,8 @@ import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.networking.AmaiModelConverter;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Strings;
+import androidx.annotation.DrawableRes;
+import androidx.core.content.ContextCompat;
 
 public class EventView extends FrameLayout {
 
@@ -244,7 +243,7 @@ public class EventView extends FrameLayout {
                 // be a weighted rating
                 if (feedback.isSent()) {
                     icon = ContextCompat.getDrawable(getContext(), R.drawable.feedback_sent);
-                    filterColor = ContextCompat.getColor(getContext(), R.color.cami2019_yellow2);
+                    filterColor = ContextCompat.getColor(getContext(), R.color.cami2019_yellow);
                 } else if (event.isAttending() || feedback.hasAnsweredQuestions()) {
                     filterColor = ThemeAttributes.getColor(getContext(), R.attr.eventSendFeedbackColor);
                 } else {

@@ -10,24 +10,25 @@
         <!-- not using android:actionOverflowButtonStyle since it doesn't seem to work in Jellybean -->
         <item name="actionOverflowButtonStyle">@style/OverflowMenu.Cami2019</item>
         <!-- General -->
-        <item name="colorAccent">@color/harucon2019_orange</item>
-        <item name="android:textColorLink">@color/harucon2019_orange</item>
+        <item name="colorAccent">@color/cami2019_brown3</item>
+        <item name="android:textColorPrimary">@android:color/black</item>
+        <item name="android:textColorSecondary">@android:color/black</item>
+        <item name="android:textColorHint">@color/very_dark_gray</item>
+        <item name="android:textColorLink">@color/cami2019_teal</item>
         <item name="actionButtonColor">@color/cami2019_brown3</item>
-        <item name="hintTextColor">@color/harucon2019_orange</item>
-        <item name="swipeToRefreshColor">@color/harucon2019_orange</item>
-        <item name="snackbarActionColor">@color/harucon2019_orange</item>
-        <item name="highlightedButtonBackground">@drawable/harucon2019_highlighted_button</item>
-        <item name="borderlessButtonColor">@color/harucon2019_orange</item>
-        <item name="feedbackButtonColor">@color/white</item>
-        <item name="feedbackAnswerButtonColor">@color/harucon2019_dark_orange</item>
-        <item name="feedbackAnswerButtonSelectedColor">@color/harucon2019_orange</item>
+        <item name="hintTextColor">@color/cami2019_brown3</item>
+        <item name="swipeToRefreshColor">@color/cami2019_brown3</item>
+        <item name="snackbarActionColor">@color/cami2019_orange2</item>
+        <item name="highlightedButtonBackground">@drawable/cami2019_highlighted_button</item>
+        <item name="highlightedButtonTextColor">@drawable/cami2019_highlighted_button_text_color</item>
+        <item name="borderlessButtonColor">@color/cami2019_brown3</item>
         <item name="activitiesBackground">@color/white</item>
         <item name="eventListDivider">@drawable/cami2019_event_list_divider</item>
         <!-- Note: if you change the theme, these values should be copied manually to file
          ?highlightedButtonBackground (non-v21) because prior to L it was not supported to reference
          theme attributes from a drawable xml -->
-        <item name="buttonColor">@color/harucon2019_orange</item>
-        <item name="buttonColorPressed">@color/harucon2019_dark_orange</item>
+        <item name="buttonColor">@color/cami2019_yellow</item>
+        <item name="buttonColorPressed">@color/cami2019_dark_yellow</item>
 
         <!-- Notifications -->
         <item name="notificationSmallIcon">@drawable/cami_notification_small</item>
@@ -45,7 +46,7 @@
         <item name="navigationPopupBottomImageMargins">50dp</item>
         <item name="navigationPopupTitleMargins">50dp</item>
         <!-- About Screen -->
-        <item name="aboutLogo">@drawable/amai_logo_white</item>
+        <item name="aboutLogo">@drawable/amai_logo_black</item>
         <item name="aboutLogoMargins">80dp</item>
         <!-- Home Screen -->
         <item name="homeActivityLayout">@layout/cami2019_activity_home</item>
@@ -78,33 +79,40 @@
         <item name="eventTypeCurrentColor">@color/cami2019_tan</item>
         <item name="eventTypeCurrentBackgroundColor">@null</item>
         <item name="eventTypeNotStartedColor">@color/black</item>
-        <item name="eventNameKeywordHighlightColor">@color/gold</item>
-        <item name="eventKeywordHighlightColor">@color/gold</item>
+        <item name="eventNameKeywordHighlightColor">@color/cami2019_dark_yellow</item>
+        <item name="eventKeywordHighlightColor">@color/cami2019_dark_yellow</item>
         <item name="eventTimeDefaultTextColor">@color/black</item>
-        <item name="eventTimeDefaultBackgroundColor">@color/harucon2019_red</item>
+        <item name="eventTimeDefaultBackgroundColor">@color/cami2019_brown3</item>
         <item name="eventDetailsColor">@color/black</item>
-        <item name="eventSendFeedbackColor">@color/cami2019_yellow2</item>
+        <item name="eventSendFeedbackColor">@color/cami2019_yellow</item>
         <item name="eventFavoriteIcon">@null</item>
         <item name="eventNonFavoriteColor">@drawable/cami2019_favorite_empty</item>
         <item name="eventFavoriteColor">@drawable/cami2019_favorite_full</item>
         <!-- Map Screen -->
-        <item name="locationDetailsBackground">@color/white</item>
         <item name="mapBackground">@drawable/cami2019_map_background</item>
-        <item name="mapToolbarColor">@color/cami2018_less_transparent_black</item>
-        <item name="standIconColor">@color/harucon2019_dark_orange</item>
-        <item name="standsTypeTitleColor">@color/harucon2019_dark_orange</item>
+        <item name="standIconColor">@color/cami2019_brown3</item>
+        <item name="standsTypeTitleColor">@color/cami2019_brown3</item>
+        <item name="locationDetailsBackground">@color/white</item>
+        <item name="locationDetailsTopLineColor">@color/black</item>
         <item name="locationDetailsTitleColor">@color/black</item>
         <item name="iconClear">@drawable/ic_clear_black</item>
+        <item name="iconFloorUp">@drawable/arrow_up_wide</item>
+        <item name="iconFloorDown">@drawable/arrow_down_wide</item>
+        <item name="floorChangeBackground">@color/transparent_white</item>
         <!-- Updates Screen -->
-        <item name="focusedUpdateBackground">@color/harucon2019_transparent_red</item>
-        <item name="newUpdateBackground">@color/very_transparent_white</item>
-        <item name="updateTimeColor">@color/white</item>
-        <item name="updateItemBorder">@color/white</item>
-        <item name="updateTimeBackground">@color/very_transparent_white</item>
+        <item name="updateTimeColor">@android:color/transparent</item>
+        <item name="updateTimeBackground">@null</item>
+        <item name="updateItemBorder">@color/black</item>
+        <item name="updateItemSeparator">@color/black</item>
+        <item name="updateTextColor">@color/black</item>
+        <item name="newUpdateTextColor">@color/cami2019_dark_yellow</item>
+        <item name="newUpdateBackground">@null</item>
+        <item name="focusedUpdateTextColor">@color/cami2019_dark_yellow</item>
+        <item name="focusedUpdateBackground">@null</item>
         <!-- My Events Screen -->
-        <item name="nextEventStartTimeBackground">@color/very_transparent_white</item>
-        <item name="nextEventStartTimeTextColor">@color/white</item>
-        <item name="conflictingEventsBackground">@color/very_transparent_white</item>
+        <item name="nextEventStartTimeBackground">@color/transparent_black</item>
+        <item name="nextEventStartTimeTextColor">@color/black</item>
+        <item name="conflictingEventsBackground">@color/transparent_black</item>
         <!-- Event Screen -->
         <item name="eventToolbarColor">@color/harucon2019_dark_blue</item>
         <item name="eventDetailsDefaultBackgroundColor">@color/harucon2019_dark_blue</item>
@@ -114,33 +122,37 @@
         <item name="eventDescriptionTextColor">@color/white</item>
         <item name="eventTitleBackground">@color/harucon2019_transparent_black</item>
         <item name="eventTitleTextColor">@color/white</item>
+        <item name="feedbackButtonColor">@color/white</item>
         <!-- Feedback Screen -->
-        <item name="progressBarDrawable">@drawable/harucon2019_rotating_circular_progress_bar</item>
+        <item name="progressBarDrawable">@drawable/cami2019_rotating_circular_progress_bar</item>
+        <item name="conventionFeedbackTextColor">@color/black</item>
+        <item name="feedbackAnswerButtonColor">@color/cami2019_gray2</item>
+        <item name="feedbackAnswerButtonSelectedColor">@color/cami2019_yellow</item>
         <!-- Programme Screen -->
         <item name="eventTimeHeaderBackground">@color/cami2019_brown3</item>
         <item name="eventTimeHeaderDefaultTextColor">@color/white</item>
     </style>
 
     <style name="AppBaseTheme.Cami2019.Toolbar.Event" parent="AppBaseTheme.Cami2019.Toolbar">
-        <item name="android:textColorLink">@color/harucon2019_orange</item>
+        <item name="android:textColorLink">@color/cami2019_teal</item>
     </style>
 
     <style name="AppDialogTheme.Cami2019" parent="Theme.AppCompat.Light.Dialog">
         <!-- This is the default starting API23. In any case the title is always left-justified so it's best to not use it. -->
         <item name="android:windowNoTitle">true</item>
-        <item name="colorAccent">@color/harucon2019_orange</item>
-        <item name="borderlessButtonColor">@color/harucon2019_orange</item>
+        <item name="colorAccent">@color/cami2019_brown3</item>
+        <item name="borderlessButtonColor">@color/cami2019_brown3</item>
         <item name="android:textColorPrimary">@android:color/black</item>
     </style>
 
     <style name="AppAlertDialogTheme.Cami2019" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="colorAccent">@color/harucon2019_orange</item>
-        <item name="borderlessButtonColor">@color/harucon2019_orange</item>
+        <item name="colorAccent">@color/cami2019_brown3</item>
+        <item name="borderlessButtonColor">@color/cami2019_brown3</item>
         <item name="android:textColorPrimary">@android:color/black</item>
     </style>
 
     <style name="AppBaseTheme.Cami2019.Toolbar.Splash">
-        <item name="android:windowBackground">@drawable/harucon2019_splash_background</item>
+        <item name="android:windowBackground">@drawable/cami2019_splash</item>
     </style>
 
     <style name="OverflowMenu.Cami2019" parent="Widget.AppCompat.ActionButton.Overflow">
