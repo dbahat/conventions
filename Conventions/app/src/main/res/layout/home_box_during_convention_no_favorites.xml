@@ -33,6 +33,7 @@
         android:divider="@null"/>
 
     <Button
+        android:id="@+id/home_screen_bottom_button"
         android:text="@string/home_go_to_programme"
         android:layout_marginTop="?homeSingleButtonTopMargin"
         style="?homeSingleButtonStyle"

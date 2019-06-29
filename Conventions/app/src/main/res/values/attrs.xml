@@ -63,6 +63,7 @@
         <attr name="homeActivityLayout" format="integer|reference"/>
         <attr name="homeBackground" format="color|reference"/>
         <attr name="homeToolbarTitle" format="integer|reference"/>
+        <attr name="homeToolbarBackground" format="integer|reference"/>
         <attr name="homeLogo" format="integer|reference"/>
         <attr name="homeLogoMargin" format="dimension"/>
         <attr name="homeBottomImage" format="integer|reference"/>
@@ -82,6 +83,8 @@
         <attr name="homeBoxTopMargin" format="dimension"/>
         <attr name="homeSingleButtonTopMargin" format="dimension"/>
         <attr name="homeSingleButtonStyle" format="integer|reference"/>
+        <attr name="homeShowButtons" format="boolean"/>
+        <attr name="homeTitleSize" format="dimension"/>
         <!-- My Events Screen -->
         <attr name="nextEventStartTimeBackground" format="color|reference"/>
         <attr name="nextEventStartTimeTextColor" format="color|reference"/>

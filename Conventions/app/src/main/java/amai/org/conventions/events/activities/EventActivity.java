@@ -12,10 +12,6 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import com.google.android.material.snackbar.Snackbar;
-import androidx.core.content.ContextCompat;
-import androidx.appcompat.app.AlertDialog;
-import androidx.palette.graphics.Palette;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
@@ -37,6 +33,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -64,6 +61,9 @@ import amai.org.conventions.notifications.PushNotificationTopicsSubscriber;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Views;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
+import androidx.palette.graphics.Palette;
 import uk.co.chrisjenx.paralloid.views.ParallaxScrollView;
 
 
@@ -117,7 +117,7 @@ public class EventActivity extends NavigationActivity {
 
 		setToolbarTitle(conventionEvent.getType().getDescription());
 		setToolbarAndContentContainerBackground(null);
-		setToolbarBackgroundColor(ThemeAttributes.getColor(this, R.attr.eventToolbarColor));
+		setToolbarBackground(ThemeAttributes.getDrawable(this, R.attr.eventToolbarColor));
 
 		// In this activity we have many items in the navigation bar (including overflow menu). They create 2 problems with a centered title design:
 		// 1. The code for centering the title based on the number of action items assumes there's no overflow menu.

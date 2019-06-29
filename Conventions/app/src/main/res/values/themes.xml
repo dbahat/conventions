@@ -55,6 +55,7 @@
 
         <!-- Home -->
         <item name="homeActivityLayout">@layout/activity_home</item>
+        <item name="homeToolbarBackground">?toolbarBackground</item>
         <item name="homeBoxTopMargin">0dp</item>
         <item name="homeSingleButtonTopMargin">0dp</item>
         <item name="homeButtonsSideMargin">0dp</item>
@@ -63,6 +64,8 @@
         <item name="homeCurrentEventText">?homeMessageText</item>
         <item name="homeEventsListDivider">@drawable/home_event_list_divider</item>
         <item name="homeLogoMargin">10dp</item>
+        <item name="homeShowButtons">true</item>
+        <item name="homeTitleSize">32sp</item>
 
         <!-- About -->
         <item name="aboutLogoMargins">20dp</item>
@@ -152,6 +155,7 @@
 
         <!-- Home -->
         <item name="homeActivityLayout">@layout/activity_home</item>
+        <item name="homeToolbarBackground">?toolbarBackground</item>
         <item name="homeBoxTopMargin">0dp</item>
         <item name="homeSingleButtonTopMargin">0dp</item>
         <item name="homeButtonsSideMargin">0dp</item>
@@ -160,6 +164,8 @@
         <item name="homeCurrentEventText">?homeMessageText</item>
         <item name="homeEventsListDivider">@drawable/home_event_list_divider</item>
         <item name="homeLogoMargin">10dp</item>
+        <item name="homeShowButtons">true</item>
+        <item name="homeTitleSize">32sp</item>
 
         <!-- About -->
         <item name="aboutLogoMargins">20dp</item>
