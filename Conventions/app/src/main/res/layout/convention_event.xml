@@ -1,153 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/event_height">
+    android:layout_height="@dimen/event_height"
+    tools:background="@color/white">
 
     <LinearLayout
         android:id="@+id/eventContainer"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="horizontal"
         android:weightSum="1">
 
-        <LinearLayout
-            android:id="@+id/timeLayout"
+        <amai.org.conventions.customviews.AspectRatioImageView
+            android:id="@+id/eventTypeIcon"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="3dp"
-            android:paddingBottom="3dp"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
-            android:gravity="center_horizontal"
-            android:layout_gravity="center_vertical"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/startTime"
-                style="@style/EventViewSmallText"
-                tools:text="Start Time"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/timeBoxTo"
-                style="@style/EventViewExtraSmallText"
-                android:text="@string/dash"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/EventViewSmallText"
-                tools:text="End Time"
-                android:id="@+id/endTime"/>
-
-        </LinearLayout>
+            android:layout_height="match_parent"
+            android:src="@drawable/cami2019_event_icon_special" />
 
         <RelativeLayout
             android:id="@+id/eventDescription"
-            android:layout_marginStart="5dp"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
             android:layout_marginEnd="20dp"
+            android:layout_weight="1"
             android:padding="5dp">
 
 
             <LinearLayout
                 android:id="@+id/bottom_layout"
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:gravity="bottom">
+                android:gravity="bottom"
+                android:orientation="horizontal"
+                android:paddingStart="5dp"
+                android:paddingEnd="4dp">
 
-                <!-- singleLine attribute is ued instead of maxLines because maxLines="1" cuts words
-                     in the space between them when ellipsis is used instead of showing all the characters
-                     there is room for -->
+                <TextView
+                    android:id="@+id/lecturerName"
+                    style="@style/EventViewSmallText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:gravity="start"
+                    android:singleLine="true"
+                    android:textColor="?eventDetailsColor"
+                    tools:text="Lecturer name"
+                    tools:textColor="@color/black" />
+
                 <TextView
                     android:id="@+id/hallName"
+                    style="@style/EventViewSmallText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:singleLine="true"
+                    android:layout_marginEnd="10dp"
                     android:ellipsize="start"
-                    style="@style/EventViewSmallText"
+                    android:singleLine="true"
                     android:textColor="?eventDetailsColor"
                     tools:text="Hall name"
-                    tools:ignore="Deprecated"/>
+                    tools:textColor="@color/black" />
 
-                <LinearLayout
-                    android:paddingStart="5dp"
-                    android:paddingEnd="4dp"
-                    android:orientation="horizontal"
-                    android:layout_gravity="end|bottom"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/startTime"
+                    style="@style/EventViewSmallText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    tools:text="Start Time"
+                    tools:textColor="@color/black" />
 
-                    <!-- singleLine attribute is ued instead of maxLines because maxLines="1" cuts words
-                         in the space between them when ellipsis is used instead of showing all the characters
-                         there is room for -->
-                    <TextView
-                        android:id="@+id/lecturerName"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:layout_height="wrap_content"
-                        tools:text="Lecturer name"
-                        android:singleLine="true"
-                        android:ellipsize="end"
-                        android:textColor="?eventDetailsColor"
-                        style="@style/EventViewSmallText"
-                        tools:ignore="Deprecated"/>
+                <TextView
+                    android:id="@+id/timeBoxTo"
+                    style="@style/EventViewExtraSmallText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dash"
+                    android:textStyle="bold"
+                    tools:textColor="@color/black" />
 
-                    <amai.org.conventions.customviews.AspectRatioImageView
-                        android:layout_marginStart="5dp"
-                        android:id="@+id/alarm_icon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="18dp"
-                        android:src="@drawable/ic_action_alarms"
-                        android:visibility="gone"
-                        />
-
-                    <amai.org.conventions.customviews.AspectRatioImageView
-                        android:layout_marginStart="5dp"
-                        android:id="@+id/feedback_icon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="18dp"
-                        android:src="@drawable/feedback"
-                        android:visibility="gone"
-                        />
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/endTime"
+                    style="@style/EventViewSmallText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    tools:text="End Time"
+                    tools:textColor="@color/black" />
 
             </LinearLayout>
 
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:id="@+id/eventFavoriteIcon"
-                android:layout_above="@+id/bottom_layout"
+            <LinearLayout
+                android:id="@+id/eventIconsContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:src="@drawable/ic_star_black_24dp"/>
+                android:layout_centerVertical="true"
+                android:orientation="horizontal">
+
+                <amai.org.conventions.customviews.AspectRatioImageView
+                    android:id="@+id/feedback_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="5dp"
+                    android:src="@drawable/feedback"
+                    android:visibility="gone" />
+
+                <amai.org.conventions.customviews.AspectRatioImageView
+                    android:id="@+id/alarm_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="5dp"
+                    android:src="@drawable/cami2019_alerts_icon"
+                    android:visibility="gone" />
+
+                <amai.org.conventions.customviews.AspectRatioImageView
+                    android:id="@+id/eventFavoriteIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/cami2019_favorite_empty" />
+
+            </LinearLayout>
+
 
             <TextView
                 android:id="@+id/eventName"
+                style="@style/EventViewLargeText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_toStartOf="@id/eventFavoriteIcon"
-                tools:text="Event Title"
+                android:layout_toStartOf="@id/eventIconsContainer"
+                android:ellipsize="end"
                 android:gravity="start|top"
-                style="@style/EventViewLargeText"
+                android:maxLines="2"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
-                android:maxLines="2"
-                android:ellipsize="end"/>
+                tools:text="Event Title"
+                tools:textColor="@color/black" />
 
 
             <!-- The below layout will replace the bottom layout at runtime if the user is
@@ -158,20 +153,23 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/eventName"
                 android:layout_alignParentStart="true"
-                android:layout_toStartOf="@+id/eventFavoriteIcon"
                 android:layout_alignParentBottom="true"
+                android:layout_toStartOf="@+id/eventIconsContainer"
                 android:visibility="gone"
                 tools:visibility="visible">
+
                 <TextView
                     android:id="@+id/search_description"
+                    style="@style/EventViewSmallText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxLines="2"
-                    android:ellipsize="end"
                     android:layout_gravity="bottom|start"
+                    android:ellipsize="end"
+                    android:maxLines="2"
                     android:textColor="?eventDetailsColor"
                     tools:text="Event search description which can be fairly long"
-                    style="@style/EventViewSmallText"/>
+                    tools:textColor="@color/black"
+                    tools:visibility="gone" />
             </FrameLayout>
         </RelativeLayout>
 
@@ -188,16 +186,14 @@
             android:id="@+id/eventMainTouchArea"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:onClick="onConventionEventClicked"
             android:background="?selectableItemBackground"
-            />
+            android:onClick="onConventionEventClicked" />
 
         <View
             android:id="@+id/eventFavoriteIconTouchArea"
             android:layout_width="70dp"
             android:layout_height="match_parent"
-            android:layout_gravity="end"
-            />
+            android:layout_gravity="end" />
 
     </FrameLayout>
 

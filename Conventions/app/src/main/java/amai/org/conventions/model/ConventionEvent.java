@@ -60,9 +60,10 @@ public class ConventionEvent implements Serializable {
 	}
 
 	public int getTextColor(Context context) {
-		if (textColor != AmaiModelConverter.NO_COLOR) {
-			return textColor;
-		}
+		// Cami2019 used fixed textColor for all events
+//		if (textColor != AmaiModelConverter.NO_COLOR) {
+//			return textColor;
+//		}
 		return ThemeAttributes.getColor(context, R.attr.eventTimeDefaultTextColor);
 	}
 

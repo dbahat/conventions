@@ -1,10 +1,11 @@
 package amai.org.conventions.events.holders;
 
 import android.content.Context;
-import androidx.viewpager.widget.ViewPager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,7 +96,7 @@ public class SwipeableEventViewHolder extends RecyclerView.ViewHolder {
 	private void setEventInEventView(EventView view, ConventionEvent event, boolean conflicting) {
 		view.setShowFavoriteIcon(true);
 		view.setShowHallName(true);
-		view.setEvent(event, conflicting);
+		view.setEvent(event);
 	}
 
 	public void setOnViewSwipedAction(final OnEventSwipedListener action) {

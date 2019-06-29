@@ -1,7 +1,8 @@
 package amai.org.conventions.events.holders;
 
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import amai.org.conventions.R;
 import amai.org.conventions.events.EventView;
@@ -24,7 +25,7 @@ public class EventViewHolder extends RecyclerView.ViewHolder {
 
 		eventView.setShowFavoriteIcon(true);
 		eventView.setShowHallName(true);
-		eventView.setEvent(event, false);
+		eventView.setEvent(event);
 	}
 
 	public EventView getEventView() {

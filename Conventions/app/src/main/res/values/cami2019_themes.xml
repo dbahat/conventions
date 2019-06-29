@@ -21,8 +21,8 @@
         <item name="feedbackButtonColor">@color/white</item>
         <item name="feedbackAnswerButtonColor">@color/harucon2019_dark_orange</item>
         <item name="feedbackAnswerButtonSelectedColor">@color/harucon2019_orange</item>
-        <item name="activitiesBackground">@drawable/harucon2019_activity_background</item>
-        <item name="eventListDivider">@drawable/harucon2019_event_list_divider</item>
+        <item name="activitiesBackground">@color/white</item>
+        <item name="eventListDivider">@drawable/cami2019_event_list_divider</item>
         <!-- Note: if you change the theme, these values should be copied manually to file
          ?highlightedButtonBackground (non-v21) because prior to L it was not supported to reference
          theme attributes from a drawable xml -->
@@ -32,7 +32,7 @@
         <!-- Notifications -->
         <item name="notificationSmallIcon">@drawable/cami_notification_small</item>
         <!-- Toolbar -->
-        <item name="toolbarBackground">@null</item>
+        <item name="toolbarBackground">@color/cami2019_brown3</item>
         <item name="toolbarLogo">@drawable/ic_menu_white_24dp</item>
         <item name="toolbarIconAccentColor">@color/gold</item>
         <!-- Navigation Popup -->
@@ -68,20 +68,20 @@
         <item name="homeSingleButtonTopMargin">10dp</item>
         <item name="homeSingleButtonStyle">@style/HomeButton.Single.Cami2019</item>
         <!-- Event View -->
-        <item name="eventTypeEndedColor">@color/harucon2019_gray</item>
+        <item name="eventTypeEndedColor">@color/cami2019_teal</item>
         <item name="eventTypeEndedBackgroundColor">@color/harucon2019_transparent_dark_gray</item>
-        <item name="eventTypeCurrentColor">@color/white</item>
+        <item name="eventTypeCurrentColor">@color/cami2019_tan</item>
         <item name="eventTypeCurrentBackgroundColor">@color/harucon2019_transparent_red</item>
-        <item name="eventTypeNotStartedColor">@color/white</item>
+        <item name="eventTypeNotStartedColor">@color/black</item>
         <item name="eventNameKeywordHighlightColor">@color/gold</item>
         <item name="eventKeywordHighlightColor">@color/gold</item>
-        <item name="eventTimeDefaultTextColor">@color/white</item>
+        <item name="eventTimeDefaultTextColor">@color/black</item>
         <item name="eventTimeDefaultBackgroundColor">@color/harucon2019_red</item>
-        <item name="eventDetailsColor">@color/white</item>
+        <item name="eventDetailsColor">@color/black</item>
         <item name="eventSendFeedbackColor">@color/gold</item>
-        <item name="eventFavoriteIcon">@drawable/ic_star_white_24dp</item>
-        <item name="eventNonFavoriteColor">@color/white</item>
-        <item name="eventFavoriteColor">@color/gold</item>
+        <item name="eventFavoriteIcon">@null</item>
+        <item name="eventNonFavoriteColor">@drawable/cami2019_favorite_empty</item>
+        <item name="eventFavoriteColor">@drawable/cami2019_favorite_full</item>
         <!-- Map Screen -->
         <item name="locationDetailsBackground">@color/transparent_dark_black</item>
         <item name="mapBackground">@drawable/harucon2019_map_background</item>

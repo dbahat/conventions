@@ -44,11 +44,6 @@ public class TestConvention extends Convention {
     }
 
     @Override
-    protected String initFeedbackRecipient() {
-        return null;
-    }
-
-    @Override
     protected URL initModelURL() {
         return null;
     }
