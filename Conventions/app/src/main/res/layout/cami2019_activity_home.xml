@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:weightSum="1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <amai.org.conventions.customviews.AspectRatioImageView
+        android:id="@+id/home_logo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="?homeLogoMargin"
+        android:src="?homeLogo"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/home_logo"
+        >
+        <amai.org.conventions.customviews.AspectRatioImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/cami2019_home_stripe"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/updates"
+            style="@style/BorderlessButton"
+            android:textSize="16sp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:textColor="@color/white"
+            android:onClick="onGoToUpdatesClicked"
+            android:gravity="center_vertical"
+            android:layout_gravity="start"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/programme_title"
+            style="@style/BorderlessButton"
+            android:textSize="16sp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:textColor="@color/white"
+            android:onClick="onGoToProgrammeClicked"
+            android:gravity="center_vertical"
+            android:layout_gravity="end"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/home_convention_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/home_logo"
+        android:background="@color/cami2019_orange2">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="@string/cami2019_convention_info"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"/>
+    </FrameLayout>
+
+    <!-- The content of the info box will be placed at runtime inside this layout -->
+    <FrameLayout
+        android:id="@+id/home_info_box"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/home_convention_date"
+        android:layout_above="@+id/home_bottom_image"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"/>
+
+    <amai.org.conventions.customviews.AspectRatioImageView
+        android:id="@+id/home_bottom_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:src="?homeBottomImage"/>
+</RelativeLayout>

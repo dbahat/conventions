@@ -16,6 +16,7 @@
 
     <!-- Relevant to this specific convention -->
     <string name="app_name">כנס כאמ\"י 2019</string>
+    <string name="cami2019_convention_info">01.08.2019 בנייני האומה, ירושלים</string>
     <string name="about_content"><![CDATA[אמא\"י – ארגון מנגה ואנימה ישראל. הארגון הוקם במאי 2007 על ידי קבוצת חברים בקהילת חובבי המנגה, אנימה ותרבות יפן ופועל למען קהילת חובבים זו.]]></string>
     <string name="about_links"><![CDATA[
 <p><a href="http://www.amai.org.il/">לאתר אמא\"י</a></p><p><a href="http://2019.cami.org.il/">לאתר הכנס</a></p>
@@ -81,4 +82,5 @@
 <p>לחלופין, &quot;בנייני האומה&quot; ב-waze יביא אתכם אל המקום.</p>
 <p>במתחם קיימים 850 מקומות חנייה בתשלום המתחלקים בין חניון תת קרקעי וחניון חיצוני.</p>
 ]]></string>
+
 </resources>
