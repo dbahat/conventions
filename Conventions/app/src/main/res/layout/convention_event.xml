@@ -16,6 +16,7 @@
             android:id="@+id/eventTypeIcon"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginStart="3dp"
             android:src="@drawable/cami2019_event_icon_special" />
 
         <RelativeLayout
@@ -23,7 +24,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="5dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="10dp"
             android:layout_weight="1"
             android:padding="5dp">
 

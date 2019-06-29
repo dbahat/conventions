@@ -244,11 +244,11 @@ public class EventView extends FrameLayout {
                 // be a weighted rating
                 if (feedback.isSent()) {
                     icon = ContextCompat.getDrawable(getContext(), R.drawable.feedback_sent);
-                    filterColor = ContextCompat.getColor(getContext(), R.color.yellow);
+                    filterColor = ContextCompat.getColor(getContext(), R.color.cami2019_yellow2);
                 } else if (event.isAttending() || feedback.hasAnsweredQuestions()) {
                     filterColor = ThemeAttributes.getColor(getContext(), R.attr.eventSendFeedbackColor);
                 } else {
-                    filterColor = ThemeAttributes.getColor(getContext(), R.attr.eventDetailsColor);
+                    filterColor = ThemeAttributes.getColor(getContext(), R.attr.eventTypeEndedColor);
                 }
             }
 

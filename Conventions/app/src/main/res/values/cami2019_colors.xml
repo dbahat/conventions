@@ -17,10 +17,12 @@
     <color name="cami2019_orange2">#d16d31</color>
     <color name="cami2019_dark_orange2">#a64b1b</color>
     <color name="cami2019_yellow">#e8b41a</color>
+    <color name="cami2019_yellow2">#e4b408</color>
     <color name="cami2019_dark_yellow">#b87e0e</color>
     <color name="cami2019_light_brown2">#96751d</color>
     <color name="cami2019_brown2">#775110</color>
     <color name="cami2019_brown3">#803F29</color>
+    <color name="cami2019_gray">#acacac</color>
 
     <color name="harucon2019_gray">#e0dfde</color>
     <color name="harucon2019_orange">#f26636</color>

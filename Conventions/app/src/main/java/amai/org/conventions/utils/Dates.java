@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import amai.org.conventions.model.conventions.Convention;
+
 public class Dates {
 	public static final long MILLISECONDS_IN_MINUTE = java.util.concurrent.TimeUnit.MINUTES.toMillis(1);
 	public static final long MILLISECONDS_IN_HOUR = java.util.concurrent.TimeUnit.HOURS.toMillis(1);
@@ -32,19 +34,19 @@ public class Dates {
 
 	public static Date now() {
 		// Now
-		return new Date(System.currentTimeMillis());
+//		return new Date(System.currentTimeMillis());
 
 		// Used for testing
 		// Fixed startup date
 //        return new Date(System.currentTimeMillis() - appStartDate.getTime() + initialDate.getTime());
 
 		// Current time at the convention's start date
-//	    Calendar currDate = Calendar.getInstance();
-//		Calendar conventionStartDate = Convention.getInstance().getStartDate();
-//		currDate.set(conventionStartDate.get(Calendar.YEAR),
-//				conventionStartDate.get(Calendar.MONTH),
-//				conventionStartDate.get(Calendar.DAY_OF_MONTH));
-//	    return currDate.getTime();
+	    Calendar currDate = Calendar.getInstance();
+		Calendar conventionStartDate = Convention.getInstance().getStartDate();
+		currDate.set(conventionStartDate.get(Calendar.YEAR),
+				conventionStartDate.get(Calendar.MONTH),
+				conventionStartDate.get(Calendar.DAY_OF_MONTH));
+	    return currDate.getTime();
 	}
 
 	public static Calendar toCalendar(Date date) {

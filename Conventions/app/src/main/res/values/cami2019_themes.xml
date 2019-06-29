@@ -12,7 +12,7 @@
         <!-- General -->
         <item name="colorAccent">@color/harucon2019_orange</item>
         <item name="android:textColorLink">@color/harucon2019_orange</item>
-        <item name="actionButtonColor">@color/harucon2019_orange</item>
+        <item name="actionButtonColor">@color/cami2019_brown3</item>
         <item name="hintTextColor">@color/harucon2019_orange</item>
         <item name="swipeToRefreshColor">@color/harucon2019_orange</item>
         <item name="snackbarActionColor">@color/harucon2019_orange</item>
@@ -68,26 +68,28 @@
         <item name="homeSingleButtonTopMargin">10dp</item>
         <item name="homeSingleButtonStyle">@style/HomeButton.Single.Cami2019</item>
         <!-- Event View -->
-        <item name="eventTypeEndedColor">@color/cami2019_teal</item>
-        <item name="eventTypeEndedBackgroundColor">@color/harucon2019_transparent_dark_gray</item>
+        <item name="eventTypeEndedColor">@color/cami2019_gray</item>
+        <item name="eventTypeEndedBackgroundColor">@null</item>
         <item name="eventTypeCurrentColor">@color/cami2019_tan</item>
-        <item name="eventTypeCurrentBackgroundColor">@color/harucon2019_transparent_red</item>
+        <item name="eventTypeCurrentBackgroundColor">@null</item>
         <item name="eventTypeNotStartedColor">@color/black</item>
         <item name="eventNameKeywordHighlightColor">@color/gold</item>
         <item name="eventKeywordHighlightColor">@color/gold</item>
         <item name="eventTimeDefaultTextColor">@color/black</item>
         <item name="eventTimeDefaultBackgroundColor">@color/harucon2019_red</item>
         <item name="eventDetailsColor">@color/black</item>
-        <item name="eventSendFeedbackColor">@color/gold</item>
+        <item name="eventSendFeedbackColor">@color/cami2019_yellow2</item>
         <item name="eventFavoriteIcon">@null</item>
         <item name="eventNonFavoriteColor">@drawable/cami2019_favorite_empty</item>
         <item name="eventFavoriteColor">@drawable/cami2019_favorite_full</item>
         <!-- Map Screen -->
-        <item name="locationDetailsBackground">@color/transparent_dark_black</item>
-        <item name="mapBackground">@drawable/harucon2019_map_background</item>
+        <item name="locationDetailsBackground">@color/white</item>
+        <item name="mapBackground">@drawable/cami2019_map_background</item>
         <item name="mapToolbarColor">@color/cami2018_less_transparent_black</item>
         <item name="standIconColor">@color/harucon2019_dark_orange</item>
         <item name="standsTypeTitleColor">@color/harucon2019_dark_orange</item>
+        <item name="locationDetailsTitleColor">@color/black</item>
+        <item name="iconClear">@drawable/ic_clear_black</item>
         <!-- Updates Screen -->
         <item name="focusedUpdateBackground">@color/harucon2019_transparent_red</item>
         <item name="newUpdateBackground">@color/very_transparent_white</item>
@@ -110,7 +112,7 @@
         <!-- Feedback Screen -->
         <item name="progressBarDrawable">@drawable/harucon2019_rotating_circular_progress_bar</item>
         <!-- Programme Screen -->
-        <item name="eventTimeHeaderBackground">@drawable/harucon2019_event_time_header_background</item>
+        <item name="eventTimeHeaderBackground">@color/cami2019_brown3</item>
         <item name="eventTimeHeaderDefaultTextColor">@color/white</item>
     </style>
 
