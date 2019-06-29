@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         android:textSize="12sp"
         tools:text="test category"
+        android:textColor="?android:textColorPrimary"
         android:gravity="center"
         />
 

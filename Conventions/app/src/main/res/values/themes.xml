@@ -83,6 +83,7 @@
         <item name="locationDetailsBackground">@color/white</item>
         <item name="locationDetailsTitleColor">?android:textColorPrimary</item>
         <item name="mapToolbarColor">?toolbarBackground</item>
+        <item name="floorChangeBackground">?locationDetailsBackground</item>
 
         <!-- Event activity -->
         <item name="eventToolbarColor">?toolbarBackground</item>
@@ -199,6 +200,7 @@
         <item name="locationDetailsBackground">@color/white</item>
         <item name="locationDetailsTitleColor">?android:textColorPrimary</item>
         <item name="mapToolbarColor">?toolbarBackground</item>
+        <item name="floorChangeBackground">?locationDetailsBackground</item>
 
         <!-- Event activity -->
         <item name="eventToolbarColor">?toolbarBackground</item>
