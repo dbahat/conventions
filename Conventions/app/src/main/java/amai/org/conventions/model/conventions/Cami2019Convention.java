@@ -12,6 +12,7 @@ import amai.org.conventions.feedback.forms.EventFeedbackForm;
 import amai.org.conventions.feedback.forms.FeedbackForm;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
+import amai.org.conventions.model.EventType;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.Floor;
 import amai.org.conventions.model.Hall;
@@ -552,5 +553,25 @@ public class Cami2019Convention extends AmaiConvention {
                 return false;
             }
         };
+    }
+
+    @Override
+    public int getEventIcon(ConventionEvent event) {
+        EventType type = event.getType();
+        switch (type.getDescription()) {
+            case "הרצאות":
+                return R.drawable.cami2019_event_icon_lectures;
+            case "קוספליי":
+                return R.drawable.cami2019_event_icon_cosplay;
+            case "מיוחד":
+            case "אירועים מיוחדים":
+                return R.drawable.cami2019_event_icon_special;
+            case "פאנל":
+                return R.drawable.cami2019_event_icon_panel;
+            case "סדנה":
+                return  R.drawable.cami2019_event_icon_workshop;
+            default:
+                return R.drawable.cami2019_event_icon_other;
+        }
     }
 }

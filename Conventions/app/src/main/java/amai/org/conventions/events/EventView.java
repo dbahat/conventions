@@ -20,14 +20,12 @@ import java.util.List;
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.ConventionEvent;
-import amai.org.conventions.model.EventType;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.networking.AmaiModelConverter;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Strings;
-import androidx.annotation.DrawableRes;
 import androidx.core.content.ContextCompat;
 
 public class EventView extends FrameLayout {
@@ -100,7 +98,12 @@ public class EventView extends FrameLayout {
     }
 
     private void setColorsFromEvent(ConventionEvent event) {
-        eventTypeIcon.setImageDrawable(ContextCompat.getDrawable(getContext(), getEventTypeIcon(event.getType())));
+        int eventTypeIcon = Convention.getInstance().getEventIcon(event);
+        if (eventTypeIcon != 0) {
+            this.eventTypeIcon.setImageDrawable(ContextCompat.getDrawable(getContext(), eventTypeIcon));
+        } else {
+            this.eventTypeIcon.setImageDrawable(new ColorDrawable(event.getType().getBackgroundColor()));
+        }
         setEventTimeTextColor(event.getTextColor(getContext()));
         if (!event.hasStarted()) {
             setEventNameColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeNotStartedColor), 0);
@@ -111,25 +114,6 @@ public class EventView extends FrameLayout {
         } else {
             setEventNameColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeCurrentColor), 0);
             setEventBackgroundColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeCurrentBackgroundColor));
-        }
-    }
-
-    @DrawableRes
-    private int getEventTypeIcon(EventType type) {
-        switch (type.getDescription()) {
-            case "הרצאות":
-                return R.drawable.cami2019_event_icon_lectures;
-            case "קוספליי":
-                return R.drawable.cami2019_event_icon_cosplay;
-            case "מיוחד":
-            case "אירועים מיוחדים":
-                return R.drawable.cami2019_event_icon_special;
-            case "פאנל":
-                return R.drawable.cami2019_event_icon_panel;
-            case "סדנה":
-                return  R.drawable.cami2019_event_icon_workshop;
-            default:
-                return R.drawable.cami2019_event_icon_other;
         }
     }
 

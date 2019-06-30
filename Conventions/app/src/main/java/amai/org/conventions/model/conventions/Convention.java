@@ -2,8 +2,6 @@ package amai.org.conventions.model.conventions;
 
 import android.content.Context;
 import android.graphics.Color;
-import androidx.annotation.Nullable;
-import androidx.annotation.VisibleForTesting;
 
 import java.io.Serializable;
 import java.net.URL;
@@ -23,6 +21,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+import amai.org.conventions.BuildConfig;
 import amai.org.conventions.events.SearchCategory;
 import amai.org.conventions.feedback.SurveySender;
 import amai.org.conventions.feedback.forms.ConventionFeedbackFormSender;
@@ -50,7 +49,9 @@ import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Objects;
-import amai.org.conventions.BuildConfig;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 
 public abstract class Convention implements Serializable {
 
@@ -688,5 +689,10 @@ public abstract class Convention implements Serializable {
 
 	public SurveySender getEventVoteSender(ConventionEvent event) {
 		return null;
+	}
+
+	@DrawableRes
+	public int getEventIcon(ConventionEvent event) {
+		return 0;
 	}
 }
