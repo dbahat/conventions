@@ -93,8 +93,9 @@
         <item name="eventTitleTextColor">?android:textColorPrimary</item>
         <item name="eventFeedbackTextColor">?attr/eventDescriptionTextColor</item>
         <item name="eventVoteBoxColor">?eventFeedbackBoxColor</item>
-        <!-- This color should match eventDetailsBoxColor in a way that eventDetailsBoxColor is not visible
-             on top of this color -->
+        <item name="eventDescriptionBoxColor">?eventDetailsBoxColor</item>
+
+        <!-- Feedback activity -->
         <item name="conventionFeedbackTextColor">?eventTitleTextColor</item>
         <item name="feedbackMultiAnswerPadding">4.5dp</item>
         <item name="eventActivityFavoriteColor">@color/gold</item>
@@ -194,6 +195,7 @@
         <item name="eventTitleTextColor">?android:textColorPrimary</item>
         <item name="eventFeedbackTextColor">?attr/eventDescriptionTextColor</item>
         <item name="eventVoteBoxColor">?eventFeedbackBoxColor</item>
+        <item name="eventDescriptionBoxColor">?eventDetailsBoxColor</item>
 
         <!-- Feedback activity -->
         <item name="conventionFeedbackTextColor">?eventTitleTextColor</item>

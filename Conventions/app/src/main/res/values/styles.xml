@@ -20,7 +20,7 @@
         <item name="android:layout_marginLeft">@dimen/event_details_box_side_margins</item>
         <item name="android:layout_marginRight">@dimen/event_details_box_side_margins</item>
         <item name="android:padding">@dimen/event_details_box_padding</item>
-        <item name="android:background">?eventDetailsBoxColor</item>
+        <item name="android:background">?eventDescriptionBoxColor</item>
     </style>
 
     <style name="EventDetailsBox">
