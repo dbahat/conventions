@@ -2,24 +2,28 @@ package amai.org.conventions.navigation;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import androidx.core.content.ContextCompat;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -61,6 +65,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	private FloatingActionButton actionButton;
 	private DrawerLayout navigationDrawer;
 	private PushNotification receivedPushNotification;
+	private NavigationTopButtonsLayout navigationTopButtonsLayout;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +95,8 @@ public abstract class NavigationActivity extends AppCompatActivity {
 				openNavigationDrawer(true);
 			}
 		});
+
+		navigationTopButtonsLayout = findViewById(R.id.navigation_drawer_settings_layout);
 
 		initializeNavigationDrawer(); // In case it was already open
 
@@ -172,7 +179,21 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		// Children can inherit this
 	}
 
+	private Drawable getTopButtonsImageDrawable(@DrawableRes int drawableId) {
+		Drawable drawable = ContextCompat.getDrawable(this, drawableId);
+		drawable.mutate();
+		int color = ContextCompat.getColor(this, R.color.cami2019_yellow);
+		drawable.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+		return drawable;
+	}
+
 	private void initializeNavigationDrawer() {
+		navigationTopButtonsLayout.setNavigationItems(this, Arrays.asList(
+				new NavigationItem(AboutActivity.class, getString(R.string.about), getTopButtonsImageDrawable(R.drawable.cami2019_about), getTopButtonsImageDrawable(R.drawable.cami2019_about_full)),
+				new NavigationItem(UpdatesActivity.class, getString(R.string.updates), getTopButtonsImageDrawable(R.drawable.cami2019_updates), getTopButtonsImageDrawable(R.drawable.cami2019_updates_full)),
+				new NavigationItem(SettingsActivity.class, getString(R.string.settings), getTopButtonsImageDrawable(R.drawable.cami2019_settings), getTopButtonsImageDrawable(R.drawable.cami2019_settings_full))
+		));
+
 		final List<NavigationItem> items = new ArrayList<>(Arrays.asList(
 				new NavigationItem(HomeActivity.class, getString(R.string.home), ContextCompat.getDrawable(this, R.drawable.ic_home_white_36dp)),
 				new NavigationItem(ProgrammeActivity.class, getString(R.string.programme_title), ContextCompat.getDrawable(this, R.drawable.events_list)),
@@ -183,14 +204,11 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		if (Convention.getInstance().getMap().isAvailable()) {
 			items.add(new NavigationItem(MapActivity.class, getString(R.string.map), ContextCompat.getDrawable(this, android.R.drawable.ic_dialog_map)));
 		}
-		items.add(new NavigationItem(UpdatesActivity.class, getString(R.string.updates), ContextCompat.getDrawable(this, android.R.drawable.stat_notify_sync_noanim)));
 		items.add(new NavigationItem(ArrivalMethodsActivity.class, getString(R.string.arrival_methods), ContextCompat.getDrawable(this, R.drawable.directions)));
 
 		if (Convention.getInstance().canFillFeedback()) {
 			items.add(new NavigationItem(FeedbackActivity.class, getString(R.string.feedback), ContextCompat.getDrawable(this, R.drawable.feedback_menu_icon)));
 		}
-		items.add(new NavigationItem(AboutActivity.class, getString(R.string.about), ContextCompat.getDrawable(this, R.drawable.ic_action_about)));
-		items.add(new NavigationItem(SettingsActivity.class, getString(R.string.settings), ContextCompat.getDrawable(this, R.drawable.ic_settings)));
 
 		ListView navigationItems = (ListView) findViewById(R.id.navigation_items);
 		navigationItems.setAdapter(new NavigationItemsAdapter(this, items));

@@ -11,6 +11,13 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <amai.org.conventions.navigation.NavigationTopButtonsLayout
+            android:id="@+id/navigation_drawer_settings_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"/>
+
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -21,7 +28,7 @@
             <amai.org.conventions.customviews.AspectRatioImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp"
                 android:layout_gravity="center_horizontal"
                 android:src="?navigationPopupTitle"

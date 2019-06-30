@@ -2,6 +2,7 @@
 <resources>
     <color name="cami2019_dark_gray">#413939</color>
     <color name="cami2019_black">#281d1b</color>
+    <color name="cami2019_black2">#373832</color>
     <color name="cami2019_teal">#738570</color>
     <color name="cami2019_dark_teal">#5b5c3f</color>
     <color name="cami2019_light_brown1">#b9b079</color>

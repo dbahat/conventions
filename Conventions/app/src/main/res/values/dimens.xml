@@ -40,4 +40,7 @@
     <dimen name="home_box_margin">3dp</dimen>
     <dimen name="home_box_button_margin">10dp</dimen>
     <dimen name="home_box_radius">5dp</dimen>
+
+    <dimen name="navigation_settings_button_width">37dp</dimen>
+    <dimen name="navigation_settings_button_padding">5dp</dimen>
 </resources>

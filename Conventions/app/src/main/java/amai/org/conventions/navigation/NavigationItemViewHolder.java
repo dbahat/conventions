@@ -2,9 +2,11 @@ package amai.org.conventions.navigation;
 
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
@@ -22,10 +24,11 @@ public class NavigationItemViewHolder extends RecyclerView.ViewHolder {
 		Drawable icon = item.getIcon();
 
 		if (currentActivity.getClass() == item.getActivity()) {
-			int color = ThemeAttributes.getColor(currentActivity, R.attr.navigationPopupSelectedColor);
+			int color = ThemeAttributes.getColor(currentActivity, R.attr.navigationPopupNotSelectedColor);
 			textView.setTextColor(color);
 			icon.mutate().setColorFilter(color, PorterDuff.Mode.MULTIPLY);
 			textView.setOnClickListener(null);
+			textView.setBackground(ContextCompat.getDrawable(textView.getContext(), R.drawable.cami2019_navigation_item_background_selected));
 		} else {
 			int color = ThemeAttributes.getColor(currentActivity, R.attr.navigationPopupNotSelectedColor);
 			icon.mutate().setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
@@ -40,6 +43,7 @@ public class NavigationItemViewHolder extends RecyclerView.ViewHolder {
 
 		// this should be setCompoundDrawablesRelative(icon, null, null, null) but in API 17 and 18 it appears on the wrong side.
 		// I tried to fix it by setting the layout direction to RTL directly on the textview but it didn't work.
-		textView.setCompoundDrawables(null, null, icon, null);
+		// Cami2019 design didn't include navigation icons
+		//textView.setCompoundDrawables(null, null, icon, null);
 	}
 }

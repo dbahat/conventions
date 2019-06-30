@@ -37,14 +37,14 @@
         <item name="toolbarLogo">@drawable/ic_menu_white_24dp</item>
         <item name="toolbarIconAccentColor">@color/gold</item>
         <!-- Navigation Popup -->
-        <item name="navigationPopupBackground">@drawable/harucon2019_navigation_background</item>
-        <item name="navigationPopupTitle">@drawable/harucon2019_logo</item>
-        <item name="navigationPopupBottomImage">@drawable/harucon2019_navigation_image</item>
+        <item name="navigationPopupBackground">@color/cami2019_black2</item>
+        <item name="navigationPopupTitle">@drawable/cami2019_logo</item>
+        <item name="navigationPopupBottomImage">@drawable/cami2019_navigation_placeholder</item>
         <item name="navigationPopupNotSelectedColor">@color/white</item>
-        <item name="navigationPopupSelectedColor">@color/harucon2019_orange</item>
-        <item name="navigationPopupSeparatorColor">@color/white</item>
-        <item name="navigationPopupBottomImageMargins">50dp</item>
-        <item name="navigationPopupTitleMargins">50dp</item>
+        <item name="navigationPopupSelectedColor">@color/cami2019_orange2</item>
+        <item name="navigationPopupSeparatorColor">@null</item>
+        <item name="navigationPopupBottomImageMargins">0dp</item>
+        <item name="navigationPopupTitleMargins">20dp</item>
         <!-- About Screen -->
         <item name="aboutLogo">@drawable/amai_logo_black</item>
         <item name="aboutLogoMargins">80dp</item>
