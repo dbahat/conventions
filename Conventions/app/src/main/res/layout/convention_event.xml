@@ -16,8 +16,7 @@
             android:id="@+id/eventTypeIcon"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginStart="3dp"
-            android:src="@drawable/cami2019_event_icon_special" />
+            android:layout_marginStart="3dp" />
 
         <RelativeLayout
             android:id="@+id/eventDescription"
@@ -117,14 +116,13 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginEnd="5dp"
-                    android:src="@drawable/cami2019_alerts_icon"
+                    android:src="?eventAlertsIcon"
                     android:visibility="gone" />
 
                 <amai.org.conventions.customviews.AspectRatioImageView
                     android:id="@+id/eventFavoriteIcon"
                     android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/cami2019_favorite_empty" />
+                    android:layout_height="24dp" />
 
             </LinearLayout>
 
