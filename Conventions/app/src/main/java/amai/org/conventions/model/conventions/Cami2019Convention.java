@@ -1,7 +1,5 @@
 package amai.org.conventions.model.conventions;
 
-import androidx.annotation.Nullable;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
@@ -27,6 +25,7 @@ import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.networking.SurveyDataRetriever;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
+import androidx.annotation.Nullable;
 
 public class Cami2019Convention extends AmaiConvention {
     // Hall names
@@ -170,7 +169,7 @@ public class Cami2019Convention extends AmaiConvention {
                 .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/signing-event.jpg", R.drawable.event_signing)
                 ;
 
-        imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.harucon2019_event_default_background);
+        imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.cami2019_event_default_background);
 
         // Excluded IDs - mostly for debug purposes (don't show messages about these when entering an event that has them)
         imageMapper.addExcludedIds(

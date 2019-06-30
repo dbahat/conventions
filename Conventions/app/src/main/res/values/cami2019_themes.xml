@@ -114,14 +114,13 @@
         <item name="nextEventStartTimeTextColor">@color/black</item>
         <item name="conflictingEventsBackground">@color/transparent_black</item>
         <!-- Event Screen -->
-        <item name="eventToolbarColor">@color/harucon2019_dark_blue</item>
-        <item name="eventDetailsDefaultBackgroundColor">@color/harucon2019_dark_blue</item>
-        <item name="eventDetailsBoxColor">@color/harucon2019_transparent_black</item>
-        <item name="eventFeedbackBoxColor">@color/harucon2019_transparent_red</item>
-        <item name="eventVoteBoxColor">@color/harucon2019_transparent_red</item>
-        <item name="eventDescriptionTextColor">@color/white</item>
-        <item name="eventTitleBackground">@color/harucon2019_transparent_black</item>
+        <item name="eventDetailsDefaultBackgroundColor">@color/white</item>
+        <item name="eventTitleBackground">@drawable/cami2019_event_details_background</item>
         <item name="eventTitleTextColor">@color/white</item>
+        <item name="eventDetailsBoxColor">@drawable/cami2019_event_details_background</item>
+        <item name="eventFeedbackBoxColor">@color/cami2019_transparent_green</item>
+        <item name="eventVoteBoxColor">@color/cami2019_transparent_brown</item>
+        <item name="eventDescriptionBoxColor">@drawable/cami2019_event_description_background</item>
         <item name="feedbackButtonColor">@color/white</item>
         <!-- Feedback Screen -->
         <item name="progressBarDrawable">@drawable/cami2019_rotating_circular_progress_bar</item>
