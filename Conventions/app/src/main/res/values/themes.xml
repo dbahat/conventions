@@ -45,6 +45,7 @@
         <item name="eventTypeCurrentBackgroundColor">@null</item>
         <item name="eventTypeNotStartedBackgroundColor">@null</item>
         <item name="eventTimeDefaultBackgroundColor">@null</item>
+        <item name="eventTimeAlwaysUseDefaultBackgroundColor">false</item>
         <item name="eventSendFeedbackColor">@color/green</item>
         <item name="eventSentFeedbackColor">@color/yellow</item>
         <item name="eventFeedbackDefaultColor">?eventDetailsColor</item>
@@ -150,6 +151,7 @@
         <item name="eventTypeCurrentBackgroundColor">@null</item>
         <item name="eventTypeNotStartedBackgroundColor">@null</item>
         <item name="eventTimeDefaultBackgroundColor">@null</item>
+        <item name="eventTimeAlwaysUseDefaultBackgroundColor">false</item>
         <item name="eventSendFeedbackColor">@color/green</item>
         <item name="eventSentFeedbackColor">@color/yellow</item>
         <item name="eventFeedbackDefaultColor">?eventDetailsColor</item>

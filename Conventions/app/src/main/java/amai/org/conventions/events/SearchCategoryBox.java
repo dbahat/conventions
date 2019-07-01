@@ -3,8 +3,6 @@ package amai.org.conventions.events;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import androidx.core.widget.CompoundButtonCompat;
-import androidx.appcompat.widget.AppCompatCheckBox;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
@@ -12,6 +10,8 @@ import android.widget.TextView;
 
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
+import androidx.appcompat.widget.AppCompatCheckBox;
+import androidx.core.widget.CompoundButtonCompat;
 
 public class SearchCategoryBox extends LinearLayout {
 
@@ -30,7 +30,8 @@ public class SearchCategoryBox extends LinearLayout {
 	public void setSearchCategory(SearchCategory searchCategory) {
 		textView.setText(searchCategory.getName());
 		int color;
-		if (searchCategory.hasColor()) {
+		boolean alwaysUseDefaultColor = ThemeAttributes.getBoolean(getContext(), R.attr.eventTimeAlwaysUseDefaultBackgroundColor);
+		if (searchCategory.hasColor() && !alwaysUseDefaultColor) {
 			color = searchCategory.getColor();
 		} else {
 			color = ThemeAttributes.getColor(getContext(), R.attr.eventTimeDefaultBackgroundColor);
