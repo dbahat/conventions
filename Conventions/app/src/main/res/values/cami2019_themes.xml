@@ -63,6 +63,7 @@
         <item name="homeMessageText">@color/white</item>
         <item name="homeEventTimeText">@color/white</item>
         <item name="homeCurrentEventBackground">@drawable/cami2019_current_event</item>
+        <item name="homeCurrentEventOnlyBackground">@drawable/cami2019_current_event_only</item>
         <item name="homeCurrentEventText">@color/white</item>
         <item name="homeUpcomingEventBackground">@drawable/cami2019_upcoming_event</item>
         <item name="homeButtonBackground">@color/white</item>
