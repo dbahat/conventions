@@ -79,6 +79,7 @@
         <attr name="homeEventTimeText" format="color|reference"/>
         <attr name="homeCurrentEventBackground" format="color|reference"/>
         <attr name="homeUpcomingEventBackground" format="color|reference"/>
+        <attr name="homeCurrentEventOnlyBackground" format="color|reference"/>
         <attr name="homeEventNameInList" format="color|reference"/>
         <attr name="homeEventsListDivider" format="color|reference"/>
         <attr name="homeButtonBackground" format="color|reference"/>
