@@ -130,7 +130,7 @@ public class HomeActivity extends NavigationActivity {
 			upcomingEventTime.setTextColor(ThemeAttributes.getColor(this, R.attr.homeCurrentEventText));
 			upcomingEventHall.setText(currentEvent.getHall().getName());
 			upcomingEventHall.setTextColor(ThemeAttributes.getColor(this, R.attr.homeCurrentEventText));
-			upcomingEventContainer.setBackground(ThemeAttributes.getDrawable(this, R.attr.homeCurrentEventBackground));
+			upcomingEventContainer.setBackground(ThemeAttributes.getDrawable(this, R.attr.homeCurrentEventOnlyBackground));
 			if (currentEvent.getUserInput().getVoteSurvey() != null) {
 				upcomingEventVoteText.setVisibility(View.VISIBLE);
 				upcomingEventVoteText.setTextColor(ThemeAttributes.getColor(this, R.attr.homeCurrentEventText));
