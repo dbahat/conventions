@@ -37,7 +37,6 @@ public class Cami2019Convention extends AmaiConvention {
     private static final String ESHKOL3_NAME = "אשכול 3";
     private static final String WORKSHOPS_NAME = "חדר סדנאות";
     private static final String GAMES_NAME = "משחקייה";
-    private static final String SIGNING_AREA_NAME = "אזור החתמות";
     private static final String COSPLAY_AREA_NAME = "מתחם קוספליי";
 
     @Override
@@ -209,9 +208,8 @@ public class Cami2019Convention extends AmaiConvention {
         Hall eshkol3 = new Hall().withName(ESHKOL3_NAME).withOrder(5);
         Hall workshops = new Hall().withName(WORKSHOPS_NAME).withOrder(6);
         Hall games = new Hall().withName(GAMES_NAME).withOrder(7);
-        Hall signingArea = new Hall().withName(SIGNING_AREA_NAME).withOrder(8);
-        Hall cosplayArea = new Hall().withName(COSPLAY_AREA_NAME).withOrder(9);
-        return new Halls(Arrays.asList(mainHall, auditorium, eshkol1, eshkol2, eshkol3, workshops, games, signingArea, cosplayArea));
+        Hall cosplayArea = new Hall().withName(COSPLAY_AREA_NAME).withOrder(8);
+        return new Halls(Arrays.asList(mainHall, auditorium, eshkol1, eshkol2, eshkol3, workshops, games, cosplayArea));
     }
 
     @Override
@@ -223,7 +221,6 @@ public class Cami2019Convention extends AmaiConvention {
         Hall eshkol3 = this.getHalls().findByName(ESHKOL3_NAME);
         Hall workshops = this.getHalls().findByName(WORKSHOPS_NAME);
         Hall games = this.getHalls().findByName(GAMES_NAME);
-        Hall signingArea = this.getHalls().findByName(SIGNING_AREA_NAME);
         Hall cosplayArea = this.getHalls().findByName(COSPLAY_AREA_NAME);
 
         Floor floor1 = new Floor(1)
@@ -261,13 +258,6 @@ public class Cami2019Convention extends AmaiConvention {
                                                 .withMarkerHeight(169.6f)
                                                 .withX(845.163f)
                                                 .withY(362.297f),
-                                        new MapLocation()
-                                                .withPlace(signingArea)
-                                                .withMarkerResource(R.raw.harucon2019_marker_signing, true)
-                                                .withSelectedMarkerResource(R.raw.harucon2019_marker_signing_selected, true)
-                                                .withMarkerHeight(135f)
-                                                .withX(1403.863f)
-                                                .withY(515.697f),
                                         new MapLocation()
                                                 .withName("מתחם דוכנים")
                                                 .withPlace(pinkus)
