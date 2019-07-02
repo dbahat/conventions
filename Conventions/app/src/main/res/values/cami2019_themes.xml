@@ -35,7 +35,7 @@
         <!-- Toolbar -->
         <item name="toolbarBackground">@color/cami2019_brown3</item>
         <item name="toolbarLogo">@drawable/ic_menu_white_24dp</item>
-        <item name="toolbarIconAccentColor">@color/gold</item>
+        <item name="toolbarIconAccentColor">@color/cami2019_gold</item>
         <!-- Navigation Popup -->
         <item name="navigationPopupBackground">@color/cami2019_black2</item>
         <item name="navigationPopupTitle">@drawable/cami2019_logo</item>
