@@ -100,12 +100,12 @@
         <item name="eventFeedbackTextColor">?attr/eventDescriptionTextColor</item>
         <item name="eventVoteBoxColor">?eventFeedbackBoxColor</item>
         <item name="eventDescriptionBoxColor">?eventDetailsBoxColor</item>
+        <item name="eventActivityFavoriteColor">@color/gold</item>
+        <item name="eventSurveyTextColor">@color/black</item>
 
         <!-- Feedback activity -->
         <item name="conventionFeedbackTextColor">?eventTitleTextColor</item>
         <item name="feedbackMultiAnswerPadding">4.5dp</item>
-        <item name="eventActivityFavoriteColor">@color/gold</item>
-        <item name="eventSurveyTextColor">@color/black</item>
 
         <!-- Second Hand activity -->
         <item name="secondHandFormOpenColor">?eventTypeNotStartedColor</item>
@@ -119,6 +119,9 @@
         <item name="secondHandFilterColor">?android:textColorPrimary</item>
         <item name="secondHandSelectedFilterColor">?colorAccent</item>
 
+
+        <!-- Programme Activity -->
+        <item name="fabOnProgrammeTop">false</item>
     </style>
 
     <!-- Since there is no multiple inheritance with themes, we have to copy basic attributes to have
@@ -221,12 +224,12 @@
         <item name="eventFeedbackTextColor">?attr/eventDescriptionTextColor</item>
         <item name="eventVoteBoxColor">?eventFeedbackBoxColor</item>
         <item name="eventDescriptionBoxColor">?eventDetailsBoxColor</item>
+        <item name="eventActivityFavoriteColor">@color/gold</item>
+        <item name="eventSurveyTextColor">@color/black</item>
 
         <!-- Feedback activity -->
         <item name="conventionFeedbackTextColor">?eventTitleTextColor</item>
         <item name="feedbackMultiAnswerPadding">4.5dp</item>
-        <item name="eventActivityFavoriteColor">@color/gold</item>
-        <item name="eventSurveyTextColor">@color/black</item>
 
         <!-- Second Hand activity -->
         <item name="secondHandFormOpenColor">?eventTypeNotStartedColor</item>
@@ -240,6 +243,9 @@
         <item name="secondHandFilterColor">?android:textColorSecondary</item>
         <item name="secondHandSelectedFilterColor">?colorAccent</item>
 
+
+        <!-- Programme Activity -->
+        <item name="fabOnProgrammeTop">false</item>
     </style>
 
     <!-- Additional default attributes for dark themes. Inherit the actual theme from this one for dark themes. -->

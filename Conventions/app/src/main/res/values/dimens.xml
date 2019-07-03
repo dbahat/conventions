@@ -37,4 +37,7 @@
     <dimen name="home_box_margin">3dp</dimen>
     <dimen name="home_box_button_margin">10dp</dimen>
     <dimen name="home_box_radius">5dp</dimen>
+
+    <dimen name="fab_margin">26dp</dimen>
+    <dimen name="fab_margin_anchored_to_top">10dp</dimen>
 </resources>
