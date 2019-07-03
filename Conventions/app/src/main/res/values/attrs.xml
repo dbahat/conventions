@@ -172,5 +172,6 @@
         <attr name="iconShare" format="integer|reference"/>
         <attr name="iconFeedback" format="integer|reference"/>
         <attr name="iconMap" format="integer|reference"/>
+        <attr name="iconClearMap" format="integer|reference"/>
     </declare-styleable>
 </resources>
