@@ -275,6 +275,7 @@
         <item name="iconAlarm">@drawable/ic_action_alarms</item>
         <item name="iconProgramme">@drawable/events_list</item>
         <item name="iconClear">@drawable/ic_clear_white_24dp</item>
+        <item name="iconClearMap">@drawable/ic_clear_white_24dp</item>
         <item name="iconShare">@drawable/ic_action_share_white</item>
         <item name="iconFeedback">@drawable/feedback_menu_icon</item>
         <item name="iconMap">@drawable/ic_dialog_map</item>
@@ -310,6 +311,7 @@
         <item name="iconAlarm">@drawable/ic_action_alarms_black</item>
         <item name="iconProgramme">@drawable/events_list_black</item>
         <item name="iconClear">@drawable/ic_clear_black</item>
+        <item name="iconClearMap">@drawable/ic_clear_black</item>
         <item name="iconShare">@drawable/ic_action_share_black</item>
         <item name="iconFeedback">@drawable/feedback_menu_icon_black</item>
         <item name="iconMap">@drawable/ic_dialog_map_black</item>
