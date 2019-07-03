@@ -78,7 +78,7 @@
             android:src="@drawable/ic_action_search"
             app:layout_anchor="@+id/navigation_content_view_container"
             app:layout_anchorGravity="bottom|end"
-            android:layout_margin="16dp"
+            android:layout_margin="@dimen/fab_margin"
             app:elevation="4dp"
             app:backgroundTint="?actionButtonColor"/>
 

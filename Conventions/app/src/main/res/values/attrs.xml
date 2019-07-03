@@ -156,6 +156,7 @@
         <!-- Programme Screen -->
         <attr name="eventTimeHeaderBackground" format="color|reference"/>
         <attr name="eventTimeHeaderDefaultTextColor" format="color|reference"/>
+        <attr name="fabOnProgrammeTop" format="boolean"/>
         <!-- Event Survey Dialog -->
         <attr name="eventSurveyTextColor" format="color|reference"/>
         <!-- Icons -->

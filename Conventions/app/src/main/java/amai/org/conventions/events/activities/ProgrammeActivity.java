@@ -5,10 +5,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import com.google.android.material.tabs.TabLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.viewpager.widget.ViewPager;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.Calendar;
 
@@ -33,6 +32,10 @@ import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.networking.ModelRefresher;
 import amai.org.conventions.utils.Dates;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.viewpager.widget.ViewPager;
 
 public class ProgrammeActivity extends NavigationActivity implements ProgrammeDayFragment.EventsListener {
 
@@ -61,6 +64,16 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 				navigateToActivity(ProgrammeSearchActivity.class, false, null);
 			}
 		});
+		if (ThemeAttributes.getBoolean(this, R.attr.fabOnProgrammeTop)) {
+			FloatingActionButton actionButton = getActionButton();
+			if (actionButton.getLayoutParams() instanceof CoordinatorLayout.LayoutParams) {
+				CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) actionButton.getLayoutParams();
+				layoutParams.anchorGravity = Gravity.TOP | Gravity.END;
+				layoutParams.topMargin = ThemeAttributes.getDimensionSize(this, android.R.attr.actionBarSize) +
+						getResources().getDimensionPixelOffset(R.dimen.fab_margin_anchored_to_top);
+				actionButton.setLayoutParams(actionButton.getLayoutParams());
+			}
+		}
 
 		int dateIndexToSelect = savedInstanceState == null ? SELECT_CURRENT_DATE : savedInstanceState.getInt(STATE_SELECTED_DATE_INDEX, SELECT_CURRENT_DATE);
 		setupDays(dateIndexToSelect);
