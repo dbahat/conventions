@@ -1,5 +1,7 @@
 package amai.org.conventions.model.conventions;
 
+import androidx.annotation.Nullable;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
@@ -26,7 +28,6 @@ import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.networking.SurveyDataRetriever;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
-import androidx.annotation.Nullable;
 
 public class Cami2019Convention extends AmaiConvention {
     // Hall names
@@ -133,40 +134,18 @@ public class Cami2019Convention extends AmaiConvention {
         ImageIdToImageResourceMapper imageMapper = new ImageIdToImageResourceMapper();
 
         imageMapper
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/Shinze-Basho.jpg", R.drawable.event_gods)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/Virtual-Youtubers.jpg", R.drawable.event_virtualy_outubers)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/nami.png", R.drawable.event_nami)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/int-cosplay-1.jpg", R.drawable.event_international_cosplay)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/WTF-shounen-1.jpg", R.drawable.event_shonen)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/jewish-christian-symbolisms-1.jpg", R.drawable.event_jewish_anime)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/japan-in-gaming-1.jpg", R.drawable.event_games_japanization)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/dark-souls-1.jpg", R.drawable.event_dark_souls)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/animusicals-1.jpg", R.drawable.event_animusicals)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/wonderful-misconception-1.jpg", R.drawable.event_west_in_japan)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/parenting-in-japan-1.jpg", R.drawable.event_japan_family)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/nihonjinron-1.jpg", R.drawable.event_nihonjin)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/Kanzashi-1.jpg", R.drawable.event_kanazashi_workshop)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/second_season_800_600-1.jpg", R.drawable.event_second_session)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/touho-new-1.jpg", R.drawable.event_omri_and_guy)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/opening-1.jpg", R.drawable.event_anime_opening)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/Parasyte-1.jpg", R.drawable.event_parasyte)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/Composers-1.jpg", R.drawable.event_dream_composers)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/Tezuka-1.jpg", R.drawable.event_astroboy)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/Giyaru-1.jpg", R.drawable.event_giyaru)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/Persona-1.jpg", R.drawable.event_persona)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/Idol-Voice-1.jpg", R.drawable.event_idol)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/What-did-they-mean-1.jpg", R.drawable.event_poat)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/Humor.jpg", R.drawable.event_humor)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/cagliostro-800X600.jpg", R.drawable.event_french_thief)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/rhythm-games.jpg", R.drawable.event_rhythm_games)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/sceen-9.png", R.drawable.event_kagura)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/Character-design-1.jpg", R.drawable.event_design_workshop)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/japanese-1.jpg", R.drawable.event_adarzaks)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/Sukeban.jpg", R.drawable.event_like_a_girl)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/sayoasa_final_04-copy.jpg", R.drawable.event_maquia1)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/sayoasa_final_14-copy.jpg", R.drawable.event_maquia2)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/maquia.jpg", R.drawable.event_maquia3)
-                .addMapping("http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/signing-event.jpg", R.drawable.event_signing)
+                .addMapping("https://cami.org.il/2019/wp-content/uploads/sites/20/2019/07/Nathan.png", R.drawable.event_natan)
+                .addMapping("https://cami.org.il/2019/wp-content/uploads/sites/20/2019/06/noa.png", R.drawable.event_noa)
+                .addMapping("https://cami.org.il/2019/wp-content/uploads/sites/20/2019/06/SHAI.png", R.drawable.event_shai)
+                .addMapping("https://cami.org.il/2019/wp-content/uploads/sites/20/2019/06/TOMER.jpg", R.drawable.event_tomer)
+                .addMapping("https://cami.org.il/2019/wp-content/uploads/sites/20/2019/06/OPHIR.jpg", R.drawable.event_ofir)
+                .addMapping("https://cami.org.il/2019/wp-content/uploads/sites/20/2019/06/EFRAT.jpg", R.drawable.event_efrat)
+                .addMapping("https://cami.org.il/2019/wp-content/uploads/sites/20/2019/06/GUY.jpg", R.drawable.event_guy)
+                .addMapping("https://cami.org.il/2019/wp-content/uploads/sites/20/2019/06/OMER.jpg", R.drawable.event_omer)
+                .addMapping("https://cami.org.il/2019/wp-content/uploads/sites/20/2019/06/ODE.jpg", R.drawable.event_ode)
+                .addMapping("https://cami.org.il/2019/wp-content/uploads/sites/20/2019/06/SHANI.jpg", R.drawable.event_shani)
+                .addMapping("https://cami.org.il/2019/wp-content/uploads/sites/20/2019/06/LEON2.jpg", R.drawable.event_leon_fanfic)
+                .addMapping("https://cami.org.il/2019/wp-content/uploads/sites/20/2019/06/LEON1.jpg", R.drawable.event_leon_fighting)
                 ;
 
         imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.cami2019_event_default_background);
