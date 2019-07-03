@@ -135,6 +135,7 @@
         <!-- Programme Screen -->
         <item name="eventTimeHeaderBackground">@color/cami2019_brown3</item>
         <item name="eventTimeHeaderDefaultTextColor">@color/white</item>
+        <item name="fabOnProgrammeTop">true</item>
     </style>
 
     <style name="AppBaseTheme.Cami2019.Toolbar.Event" parent="AppBaseTheme.Cami2019.Toolbar">
