@@ -9,7 +9,6 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -39,6 +38,7 @@ import amai.org.conventions.HomeActivity;
 import amai.org.conventions.R;
 import amai.org.conventions.SplashActivity;
 import amai.org.conventions.ThemeAttributes;
+import amai.org.conventions.AccessibilityActivity;
 import amai.org.conventions.events.activities.EventActivity;
 import amai.org.conventions.events.activities.MyEventsActivity;
 import amai.org.conventions.events.activities.ProgrammeActivity;
@@ -209,6 +209,8 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		if (Convention.getInstance().canFillFeedback()) {
 			items.add(new NavigationItem(FeedbackActivity.class, getString(R.string.feedback), ContextCompat.getDrawable(this, R.drawable.feedback_menu_icon)));
 		}
+		items.add(new NavigationItem(AccessibilityActivity.class, getString(R.string.accessibility),
+				null /* setting an icon since it's not required for Cami2019 */));
 
 		ListView navigationItems = (ListView) findViewById(R.id.navigation_items);
 		navigationItems.setAdapter(new NavigationItemsAdapter(this, items));

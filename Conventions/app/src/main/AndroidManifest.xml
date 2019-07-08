@@ -78,6 +78,13 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
+        <activity android:name=".AccessibilityActivity" >
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.VIEW" />
+                <data android:scheme="org.amai.conventions" />
+            </intent-filter>
+        </activity>
 
         <receiver
             android:name=".notifications.ShowNotificationReceiver"

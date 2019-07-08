@@ -166,6 +166,7 @@
         <item name="navigationPopupSeparatorColor">?navigationPopupNotSelectedColor</item>
         <item name="navigationPopupBottomImageMargins">31dp</item>
         <item name="navigationPopupTitleMargins">0dp</item>
+        <item name="navigationItemsShouldDisplayIcon">true</item>
 
         <!-- Home -->
         <item name="homeActivityLayout">@layout/activity_home</item>

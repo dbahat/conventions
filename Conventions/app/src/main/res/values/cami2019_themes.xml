@@ -45,6 +45,7 @@
         <item name="navigationPopupSeparatorColor">@null</item>
         <item name="navigationPopupBottomImageMargins">0dp</item>
         <item name="navigationPopupTitleMargins">20dp</item>
+        <item name="navigationItemsShouldDisplayIcon">false</item>
         <!-- About Screen -->
         <item name="aboutLogo">@drawable/amai_logo_black</item>
         <item name="aboutLogoMargins">80dp</item>
