@@ -32,6 +32,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
+import androidx.palette.graphics.Palette;
+
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -58,12 +62,10 @@ import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.networking.SurveyDataRetriever;
 import amai.org.conventions.notifications.PushNotificationTopicsSubscriber;
+import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Views;
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.ContextCompat;
-import androidx.palette.graphics.Palette;
 import uk.co.chrisjenx.paralloid.views.ParallaxScrollView;
 
 
@@ -365,12 +367,7 @@ public class EventActivity extends NavigationActivity {
 				Bundle floorBundle = new Bundle();
 				ConventionMap map = Convention.getInstance().getMap();
 				List<MapLocation> locations = map.findLocationsByHall(conventionEvent.getHall());
-				int[] locationIds = new int[locations.size()];
-				int i = 0;
-				for (MapLocation location : locations) {
-					locationIds[i] = location.getId();
-					++i;
-				}
+				int[] locationIds = CollectionUtils.mapToInt(locations, MapLocation::getId);
 				floorBundle.putIntArray(MapActivity.EXTRA_MAP_LOCATION_IDS, locationIds);
 
 				navigateToActivity(MapActivity.class, false, floorBundle);

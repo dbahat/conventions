@@ -8,7 +8,15 @@ import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
 
+import java.util.List;
+
+import amai.org.conventions.map.MapActivity;
+import amai.org.conventions.model.ConventionMap;
+import amai.org.conventions.model.Hall;
+import amai.org.conventions.model.MapLocation;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
+import amai.org.conventions.utils.CollectionUtils;
 import fi.iki.kuitsi.listtest.ListTagHandler;
 
 public class AccessibilityActivity extends NavigationActivity {
@@ -18,19 +26,35 @@ public class AccessibilityActivity extends NavigationActivity {
         setContentInContentContainer(R.layout.activity_accessability);
         setToolbarTitle(getString(R.string.accessibility));
 
+        handleDeepLinks();
+
+        TextView webContentContainer = findViewById(R.id.web_content);
+        if (webContentContainer != null) {
+            webContentContainer.setText(Html.fromHtml(getString(R.string.accessibility_content), null, new ListTagHandler()));
+            webContentContainer.setMovementMethod(LinkMovementMethod.getInstance());
+        }
+    }
+
+    private void handleDeepLinks() {
         Uri intentData = getIntent().getData();
         if (intentData != null && intentData.getHost() != null) {
             switch (intentData.getHost()) {
                 case "open-accessibility":
                     Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
                     startActivity(intent);
+                    break;
+                case "open-map-in-parent-room":
+                    ConventionMap map = Convention.getInstance().getMap();
+                    List<MapLocation> locations = map.findLocationsByHall(new Hall().withName("חדר הורים"));
+                    int[] locationIds = CollectionUtils.mapToInt(locations, MapLocation::getId);
+                    Bundle floorBundle = new Bundle();
+                    floorBundle.putIntArray(MapActivity.EXTRA_MAP_LOCATION_IDS, locationIds);
+                    navigateToActivity(MapActivity.class, false, floorBundle);
+                    break;
+                case "open-map":
+                    navigateToActivity(MapActivity.class, false, null);
+                    break;
             }
-        }
-
-        TextView webContentContainer = findViewById(R.id.web_content);
-        if (webContentContainer != null) {
-            webContentContainer.setText(Html.fromHtml(getString(R.string.accessibility_content), null, new ListTagHandler()));
-            webContentContainer.setMovementMethod(LinkMovementMethod.getInstance());
         }
     }
 }

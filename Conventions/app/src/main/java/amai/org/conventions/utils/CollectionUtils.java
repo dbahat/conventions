@@ -17,6 +17,10 @@ public class CollectionUtils {
 		K map(T item);
 	}
 
+	public interface MapperToInt<T> {
+		int map(T item);
+	}
+
 	public static <T> List<T> filter(List<T> list, Predicate<T> predicate) {
 		return filter(list, predicate, new LinkedList<T>());
 	}
@@ -36,6 +40,16 @@ public class CollectionUtils {
 			mapped.add(mapper.map(item));
 		}
 		return mapped;
+	}
+
+	public static <T> int[] mapToInt(List<T> list, MapperToInt<T> mapperToInt) {
+		int[] result = new int[list.size()];
+		int i = 0;
+		for (T item : list) {
+			result[i] = mapperToInt.map(item);
+			++i;
+		}
+		return result;
 	}
 
 	public static <T> T findFirst(List<T> list, Predicate<T> predicate) {
