@@ -86,7 +86,7 @@ public class ConventionMap {
 		return floors.get(floors.size() - 1);
 	}
 
-	public List<MapLocation> findLocationsByHall(final Hall hall) {
+	public List<MapLocation> findLocationsByName(final String name) {
 		return CollectionUtils.filter(getLocations(), new CollectionUtils.Predicate<MapLocation>() {
 			@Override
 			public boolean where(MapLocation location) {
@@ -95,7 +95,7 @@ public class ConventionMap {
 					return false;
 				}
 				for (Place place : places) {
-					if (place.getName().equals(hall.getName())) {
+					if (place.getName().equals(name)) {
 						return true;
 					}
 				}

@@ -387,7 +387,7 @@ public class EventActivity extends NavigationActivity {
 				// Navigate to the map floor associated with this event
 				Bundle floorBundle = new Bundle();
 				ConventionMap map = Convention.getInstance().getMap();
-				List<MapLocation> locations = map.findLocationsByHall(conventionEvent.getHall());
+				List<MapLocation> locations = map.findLocationsByName(conventionEvent.getHall().getName());
 				int[] locationIds = new int[locations.size()];
 				int i = 0;
 				for (MapLocation location : locations) {
@@ -487,7 +487,7 @@ public class EventActivity extends NavigationActivity {
 
 	private void hideNavigateToMapButtonIfNoLocationExists(Menu menu) {
 		ConventionMap map = Convention.getInstance().getMap();
-		List<MapLocation> locations = map.findLocationsByHall(conventionEvent.getHall());
+		List<MapLocation> locations = map.findLocationsByName(conventionEvent.getHall().getName());
 		if (locations.size() == 0) {
 			menu.findItem(R.id.event_navigate_to_map).setVisible(false);
 		}
