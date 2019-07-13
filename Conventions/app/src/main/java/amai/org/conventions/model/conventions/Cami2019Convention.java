@@ -1,7 +1,5 @@
 package amai.org.conventions.model.conventions;
 
-import androidx.annotation.Nullable;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
@@ -31,6 +29,7 @@ import amai.org.conventions.model.Survey;
 import amai.org.conventions.networking.SurveyDataRetriever;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
+import androidx.annotation.Nullable;
 
 public class Cami2019Convention extends AmaiConvention {
     // Hall names
@@ -42,6 +41,8 @@ public class Cami2019Convention extends AmaiConvention {
     private static final String WORKSHOPS_NAME = "חדר סדנאות";
     private static final String GAMES_NAME = "משחקייה";
     private static final String COSPLAY_AREA_NAME = "מתחם קוספליי";
+    // Location names
+    public static final String PARENTS_ROOM_NAME = "חדר הורים";
 
     // Vote questions - these values are serialized, don't change them!
     private static final int QUESTION_ID_AMAIDOL_VOTE = 1000;
@@ -342,7 +343,7 @@ public class Cami2019Convention extends AmaiConvention {
                                                 .withX(1593f)
                                                 .withY(1043.7f),
                                         new MapLocation()
-                                                .withPlace(new Place().withName("חדר הורים"))
+                                                .withPlace(new Place().withName(PARENTS_ROOM_NAME))
                                                 .withMarkerResource(R.raw.harucon2019_marker_parents, true)
                                                 .withSelectedMarkerResource(R.raw.harucon2019_marker_parents_selected, true)
                                                 .withMarkerHeight(138.6f)
