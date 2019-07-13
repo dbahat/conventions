@@ -16,6 +16,8 @@
 
     <!-- Relevant to this specific convention -->
     <string name="app_name">כנס כאמ\"י 2019</string>
+    <string name="amaidol_name_question">איך קוראים לך?</string>
+    <string name="amaidol_vote_question">מי המתמודד/ת החביב/ה עליך?</string>
     <string name="cami2019_convention_info">01.08.2019 בנייני האומה, ירושלים</string>
     <string name="about_content"><![CDATA[אמא\"י – ארגון מנגה ואנימה ישראל. הארגון הוקם במאי 2007 על ידי קבוצת חברים בקהילת חובבי המנגה, אנימה ותרבות יפן ופועל למען קהילת חובבים זו.]]></string>
     <string name="about_links"><![CDATA[

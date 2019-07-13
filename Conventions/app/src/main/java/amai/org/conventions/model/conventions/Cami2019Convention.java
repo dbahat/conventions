@@ -11,7 +11,9 @@ import java.util.List;
 import amai.org.conventions.R;
 import amai.org.conventions.feedback.SurveySender;
 import amai.org.conventions.feedback.forms.EventFeedbackForm;
+import amai.org.conventions.feedback.forms.EventVoteSurveyFormSender;
 import amai.org.conventions.feedback.forms.FeedbackForm;
+import amai.org.conventions.feedback.forms.SurveyForm;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.EventType;
@@ -25,6 +27,7 @@ import amai.org.conventions.model.Place;
 import amai.org.conventions.model.SpecialEventsProcessor;
 import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.StandsArea;
+import amai.org.conventions.model.Survey;
 import amai.org.conventions.networking.SurveyDataRetriever;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
@@ -39,6 +42,21 @@ public class Cami2019Convention extends AmaiConvention {
     private static final String WORKSHOPS_NAME = "חדר סדנאות";
     private static final String GAMES_NAME = "משחקייה";
     private static final String COSPLAY_AREA_NAME = "מתחם קוספליי";
+
+    // Vote questions - these values are serialized, don't change them!
+    private static final int QUESTION_ID_AMAIDOL_VOTE = 1000;
+    private static final int QUESTION_ID_AMAIDOL_NAME = 1001;
+
+    // Special events server id
+    private static final int EVENT_ID_AMAIDOL = 7661;
+
+    // Ids of google spreadsheets associated with the special events
+    private static final String AMAIDOL_SPREADSHEET_ID = "1u9xu3FNq2gA25oZoVHVguTzJA5HheXWPf2wnUj-iipE";
+
+    static {
+        FeedbackQuestion.addQuestion(QUESTION_ID_AMAIDOL_NAME, R.string.amaidol_name_question);
+        FeedbackQuestion.addQuestion(QUESTION_ID_AMAIDOL_VOTE, R.string.amaidol_vote_question);
+    }
 
     @Override
     protected ConventionStorage initStorage() {
@@ -493,12 +511,36 @@ public class Cami2019Convention extends AmaiConvention {
 
     @Override
     public SurveySender getEventVoteSender(final ConventionEvent event) {
+        if (event.getUserInput().getVoteSurvey() == null) {
+            return null;
+        }
+        try {
+            if (event.getServerId() == EVENT_ID_AMAIDOL) {
+                SurveyForm form = new SurveyForm()
+                        .withQuestionEntry(QUESTION_ID_AMAIDOL_NAME, "entry.109802680")
+                        .withQuestionEntry(QUESTION_ID_AMAIDOL_VOTE, "entry.1600353678")
+                        .withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSf3BlH3jonMmQ-eQo1MeQ76s31ak2824eJVsMcl6IlqueqEDw/formResponse"));
+
+                SurveyDataRetriever.DisabledMessage disabledMessageRetriever = new SurveyDataRetriever.GoogleSpreadSheet(AMAIDOL_SPREADSHEET_ID);
+
+                return new EventVoteSurveyFormSender(form, event.getUserInput().getVoteSurvey(), disabledMessageRetriever);
+
+            }
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
         return super.getEventVoteSender(event);
     }
 
     @Override
     @Nullable
     public SurveyDataRetriever.Answers createSurveyAnswersRetriever(FeedbackQuestion question) {
+        switch (question.getQuestionId()) {
+            case QUESTION_ID_AMAIDOL_VOTE: {
+                return new SurveyDataRetriever.GoogleSpreadSheet(AMAIDOL_SPREADSHEET_ID);
+            }
+        }
+
         return null;
     }
 
@@ -512,6 +554,15 @@ public class Cami2019Convention extends AmaiConvention {
     @Override
     public void convertUserInputForEvent(ConventionEvent.UserInput userInput, ConventionEvent event) {
         super.convertUserInputForEvent(userInput, event);
+
+        if (userInput.getVoteSurvey() == null && event != null) {
+            if (event.getServerId() == EVENT_ID_AMAIDOL) {
+                userInput.setVoteSurvey(new Survey().withQuestions(
+                        new FeedbackQuestion(QUESTION_ID_AMAIDOL_NAME, FeedbackQuestion.AnswerType.SINGLE_LINE_TEXT, true),
+                        new FeedbackQuestion(QUESTION_ID_AMAIDOL_VOTE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO, true)
+                ));
+            }
+        }
     }
 
     @Override
