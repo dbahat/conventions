@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   id="svg3637"
+   viewBox="0 0 299.6 64.230004"
+   height="64.230003"
+   width="299.60001">
+  <defs
+     id="defs3639" />
+  <metadata
+     id="metadata3642">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(-121.0143,-437.39006)"
+     id="layer1">
+    <polygon
+       transform="translate(-1003.7557,182.52006)"
+       class="st943"
+       points="1297.01,291.49 1294.11,264.94 1274.57,319.1 "
+       id="polygon7308"
+       style="fill:#b48e59" />
+    <polygon
+       transform="translate(-1003.7557,182.52006)"
+       class="st944"
+       points="1415.24,254.87 1424.37,292.18 1297.01,291.49 1294.11,264.94 "
+       id="polygon7310"
+       style="fill:#b8af79" />
+    <g
+       transform="translate(-1003.7557,182.52006)"
+       id="g7312">
+      <g
+         id="g7314">
+        <path
+           style="fill:#ffffff"
+           id="path7316"
+           d="m 1314.89,270.1 9.18,0 0,11.5 -9.18,0 0,-11.5 z m 7.37,10.04 0,-8.58 -5.57,0 0,8.58 5.57,0 z"
+           class="st946" />
+        <path
+           style="fill:#ffffff"
+           id="path7318"
+           d="m 1328.98,271.56 -2.11,0 0,-1.46 3.93,0 0,6.42 -1.82,0 0,-4.96 z"
+           class="st946" />
+        <path
+           style="fill:#ffffff"
+           id="path7320"
+           d="m 1339.39,273.58 c 0,-0.63 -0.18,-1.12 -0.55,-1.48 -0.37,-0.36 -0.87,-0.54 -1.51,-0.54 l -3.87,0 0,-1.46 3.93,0 c 0.79,0 1.47,0.14 2.04,0.43 0.57,0.29 1.01,0.7 1.31,1.24 0.3,0.54 0.45,1.19 0.45,1.94 l 0,7.89 -1.81,0 0,-8.02 z"
+           class="st946" />
+        <path
+           style="fill:#ffffff"
+           id="path7322"
+           d="m 1345.5,271.56 -1.34,0 0,-1.46 3.15,0 0,11.5 -1.82,0 0,-10.04 z"
+           class="st946" />
+        <path
+           style="fill:#ffffff"
+           id="path7324"
+           d="m 1358.04,274.39 c 0,-1 -0.22,-1.72 -0.67,-2.16 -0.45,-0.44 -1.17,-0.67 -2.17,-0.67 l -4.17,0 0,-1.46 4.26,0 c 1.5,0 2.64,0.36 3.41,1.09 0.77,0.73 1.16,1.81 1.16,3.24 l 0,7.17 -1.82,0 0,-7.21 z m -6.99,3.29 c 0,-0.59 0.04,-1.06 0.13,-1.4 0.09,-0.34 0.21,-0.69 0.38,-1.03 l 1.48,0 c -0.08,0.3 -0.14,0.63 -0.18,1 -0.04,0.37 -0.06,0.8 -0.06,1.32 l 0,4.04 -1.76,0 0,-3.93 z"
+           class="st946" />
+        <path
+           style="fill:#ffffff"
+           id="path7326"
+           d="m 1373.82,273.58 c 0,-0.63 -0.18,-1.12 -0.55,-1.48 -0.37,-0.36 -0.87,-0.54 -1.51,-0.54 l -3.87,0 0,-1.46 3.93,0 c 0.79,0 1.47,0.14 2.04,0.43 0.57,0.29 1.01,0.7 1.31,1.24 0.3,0.54 0.45,1.19 0.45,1.94 l 0,7.89 -1.81,0 0,-8.02 z"
+           class="st946" />
+        <path
+           style="fill:#ffffff"
+           id="path7328"
+           d="m 1387.41,270.1 0,1.46 -1.92,0 0,10.05 -1.82,0 0,-10.05 -5.47,0 0,-1.46 9.21,0 z"
+           class="st946" />
+        <path
+           style="fill:#ffffff"
+           id="path7330"
+           d="m 1390.32,270.1 4.33,0 c 1.52,0 2.66,0.36 3.41,1.09 0.75,0.73 1.13,1.83 1.13,3.32 l 0,7.1 -1.81,0 0,-7.21 c 0,-1 -0.21,-1.72 -0.64,-2.17 -0.43,-0.45 -1.12,-0.67 -2.07,-0.67 l -2.54,0 -0.01,10.05 -1.81,0 0.01,-11.51 z"
+           class="st946" />
+      </g>
+    </g>
+  </g>
+</svg>
