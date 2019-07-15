@@ -15,10 +15,6 @@ import android.graphics.drawable.PictureDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.core.content.ContextCompat;
-import androidx.core.view.MotionEventCompat;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -63,6 +59,10 @@ import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Views;
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.MotionEventCompat;
+import androidx.fragment.app.Fragment;
 import pl.polidea.view.ZoomView;
 
 /**
@@ -553,7 +553,11 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
 		// Marker location
 		layoutParams.centerX = location.getX();
-		layoutParams.bottom = floor.getImageHeight() - location.getY();
+		if (location.doesMarkerPointUp()) {
+			layoutParams.top = floor.getImageHeight() - location.getY();
+		} else {
+			layoutParams.bottom = floor.getImageHeight() - location.getY();
+		}
 
 		markerImageView.setLayoutParams(layoutParams);
 		markerImageView.setScaleType(ImageView.ScaleType.FIT_CENTER);

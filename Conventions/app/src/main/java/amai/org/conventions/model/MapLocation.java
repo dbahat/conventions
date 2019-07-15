@@ -8,6 +8,7 @@ public class MapLocation {
 	private Floor floor;
 	private float x;
 	private float y;
+	private boolean doesMarkerPointUp = false;
 	private List<? extends Place> places;
 	private String name;
 	private int markerResource;
@@ -67,13 +68,22 @@ public class MapLocation {
 		return y;
 	}
 
-	public void setY(float y) {
+	public void setY(float y, boolean doesMarkerPointUp) {
 		this.y = y;
+		this.doesMarkerPointUp = doesMarkerPointUp;
+	}
+
+	public MapLocation withY(float y, boolean doesMarkerPointUp) {
+		setY(y, doesMarkerPointUp);
+		return this;
 	}
 
 	public MapLocation withY(float y) {
-		setY(y);
-		return this;
+		return withY(y, false);
+	}
+
+	public boolean doesMarkerPointUp() {
+		return doesMarkerPointUp;
 	}
 
 	public boolean hasSinglePlace() {

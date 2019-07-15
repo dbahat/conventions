@@ -15,7 +15,7 @@ import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.utils.Views;
 
 public class Marker {
-	private static final float SCALE_FACTOR = 1.3f;
+	private static final float SCALE_FACTOR = 2f;
 	private MapLocation location;
 	private ImageView imageView;
 	private boolean selected = false;
@@ -136,7 +136,8 @@ public class Marker {
 				//noinspection SuspiciousNameCombination
 				heightScale = widthScale;
 			}
-			ScaleAnimation animation = new ScaleAnimation(widthScale, 1f, heightScale, 1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 1f);
+			float pivotYValue = location.doesMarkerPointUp() ? 0f : 1f;
+			ScaleAnimation animation = new ScaleAnimation(widthScale, 1f, heightScale, 1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, pivotYValue);
 			animation.setInterpolator(new BounceInterpolator());
 			animation.setDuration(500);
 			imageView.startAnimation(animation);
