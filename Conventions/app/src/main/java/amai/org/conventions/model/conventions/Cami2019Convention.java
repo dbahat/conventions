@@ -165,6 +165,7 @@ public class Cami2019Convention extends AmaiConvention {
                 .addMapping("https://cami.org.il/2019/wp-content/uploads/sites/20/2019/06/SHANI.jpg", R.drawable.event_shani)
                 .addMapping("https://cami.org.il/2019/wp-content/uploads/sites/20/2019/06/LEON2.jpg", R.drawable.event_leon_fanfic)
                 .addMapping("https://cami.org.il/2019/wp-content/uploads/sites/20/2019/06/LEON1.jpg", R.drawable.event_leon_fighting)
+                .addMapping("https://cami.org.il/2019/wp-content/uploads/sites/20/2019/06/NIR.png", R.drawable.event_nir)
                 ;
 
         imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.cami2019_event_default_background);
