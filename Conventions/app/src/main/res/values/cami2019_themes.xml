@@ -39,7 +39,7 @@
         <!-- Navigation Popup -->
         <item name="navigationPopupBackground">@color/cami2019_black2</item>
         <item name="navigationPopupTitle">@drawable/cami2019_logo</item>
-        <item name="navigationPopupBottomImage">@drawable/cami2019_navigation_placeholder</item>
+        <item name="navigationPopupBottomImage">@null</item>
         <item name="navigationPopupNotSelectedColor">@color/white</item>
         <item name="navigationPopupSelectedColor">@color/cami2019_orange2</item>
         <item name="navigationPopupSeparatorColor">@null</item>
