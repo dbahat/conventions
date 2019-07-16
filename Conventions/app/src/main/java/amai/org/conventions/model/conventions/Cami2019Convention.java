@@ -232,12 +232,17 @@ public class Cami2019Convention extends AmaiConvention {
         Hall games = this.getHalls().findByName(GAMES_NAME);
         Hall cosplayArea = this.getHalls().findByName(COSPLAY_AREA_NAME);
 
-        Floor floor1 = new Floor(1)
+        Floor entrance = new Floor(1)
+                .withName("מתחם כניסה")
+                .withImageResource(R.drawable.cami2019_entrance, false)
+                .withImageWidth(951.12f)
+                .withImageHeight(583.96002f);
+        Floor floor1 = new Floor(2)
                 .withName("קומת כניסה")
                 .withImageResource(R.drawable.cami2019_floor1, false)
                 .withImageWidth(1337.59998f)
                 .withImageHeight(650.61267f);
-        Floor floor2 = new Floor(2)
+        Floor floor2 = new Floor(3)
                 .withName("קומה עליונה")
                 .withImageResource(R.drawable.cami2019_floor2, false)
                 .withImageWidth(1488.43005f)
@@ -247,10 +252,81 @@ public class Cami2019Convention extends AmaiConvention {
         StandsArea pinkus = new StandsArea().withName("אולם פינקוס").withStands(getPinkusStands())/*.withImageResource(R.drawable.stands_pinkus).withImageWidth(2700).withImageHeight(1708)*/;
         StandsArea nesher = new StandsArea().withName("רחבת הכניסה").withStands(getNesherStands())/*.withImageResource(R.drawable.stands_nesher).withImageWidth(2588).withImageHeight(1588)*/;
         return new ConventionMap()
-                .withFloors(Arrays.asList(floor1, floor2))
+                .withFloors(Arrays.asList(entrance, floor1, floor2))
                 .withDefaultFloor(floor1)
                 .withLocations(
                         CollectionUtils.flattenList(
+                                inFloor(entrance,
+                                        new MapLocation()
+                                                .withPlace(new Place().withName("עמדת מודיעין ומרצ'נדייז כנסי"))
+                                                .withMarkerResource(R.raw.cami2019_marker_information_entrance, true)
+                                                .withSelectedMarkerResource(R.raw.cami2019_marker_information_entrance_selected, true)
+                                                .withMarkerHeight(64.91f)
+                                                .withX(786.3f)
+                                                .withY(493.01f),
+                                        new MapLocation()
+                                                .withPlace(new Place().withName("עמדות צימוד"))
+                                                .withMarkerResource(R.raw.cami2019_marker_bracelets1, true)
+                                                .withSelectedMarkerResource(R.raw.cami2019_marker_bracelets1_selected, true)
+                                                .withMarkerHeight(53.23f)
+                                                .withX(665.6f)
+                                                .withY(142.15f, true),
+                                        new MapLocation()
+                                                .withPlace(new Place().withName("עמדה נגישה"))
+                                                .withMarkerResource(R.raw.cami2019_marker_accessible_station, true)
+                                                .withSelectedMarkerResource(R.raw.cami2019_marker_accessible_station_selected, true)
+                                                .withMarkerHeight(68.62f)
+                                                .withX(532.55f)
+                                                .withY(78.62f, true),
+                                        new MapLocation()
+                                                .withPlace(new Place().withName("מתחם הזמנה מראש"))
+                                                .withMarkerResource(R.raw.cami2019_marker_preorder_area, true)
+                                                .withSelectedMarkerResource(R.raw.cami2019_marker_preorder_area_selected, true)
+                                                .withMarkerHeight(60.54f)
+                                                .withX(498.75f)
+                                                .withY(194.29f),
+                                        new MapLocation()
+                                                .withPlace(new Place().withName("קופה נגישה"))
+                                                .withMarkerResource(R.raw.cami2019_marker_accessible_cashier, true)
+                                                .withSelectedMarkerResource(R.raw.cami2019_marker_accessible_cashier_selected, true)
+                                                .withMarkerHeight(83.37f)
+                                                .withX(560.74f)
+                                                .withY(381.43f),
+                                        new MapLocation()
+                                                .withPlace(new Place().withName("קופות"))
+                                                .withMarkerResource(R.raw.cami2019_marker_cashier1, true)
+                                                .withSelectedMarkerResource(R.raw.cami2019_marker_cashier1_selected, true)
+                                                .withMarkerHeight(52.99f)
+                                                .withX(534.26f)
+                                                .withY(396.49f),
+                                        new MapLocation()
+                                                .withPlace(new Place().withName("עמדות צימוד"))
+                                                .withMarkerResource(R.raw.cami2019_marker_bracelets2, true)
+                                                .withSelectedMarkerResource(R.raw.cami2019_marker_bracelets2_selected, true)
+                                                .withMarkerHeight(64.04f)
+                                                .withX(474.15f)
+                                                .withY(501.43f),
+                                        new MapLocation()
+                                                .withPlace(new Place().withName("קופות"))
+                                                .withMarkerResource(R.raw.cami2019_marker_cashier2, true)
+                                                .withSelectedMarkerResource(R.raw.cami2019_marker_cashier2_selected, true)
+                                                .withMarkerHeight(62.65f)
+                                                .withX(370.13f)
+                                                .withY(480.21f),
+                                        new MapLocation()
+                                                .withPlace(new Place().withName("מעבר נגיש"))
+                                                .withMarkerResource(R.raw.cami2019_marker_accessible_passage, true)
+                                                .withSelectedMarkerResource(R.raw.cami2019_marker_accessible_passage_selected, true)
+                                                .withMarkerHeight(100.11f)
+                                                .withX(201.12f)
+                                                .withY(224.61f, true),
+                                        new MapLocation()
+                                                .withPlace(new Place().withName("מתחם קנייה במקום"))
+                                                .withMarkerResource(R.raw.cami2019_marker_tickets_area, true)
+                                                .withSelectedMarkerResource(R.raw.cami2019_marker_tickets_area_selected, true)
+                                                .withMarkerHeight(65.85f)
+                                                .withX(184.3f)
+                                                .withY(271.33f)),
                                 inFloor(floor1,
                                         new MapLocation()
                                                 .withPlace(new Place().withName("שירותים"))
