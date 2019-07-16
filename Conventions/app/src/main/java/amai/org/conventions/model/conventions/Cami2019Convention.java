@@ -1,5 +1,7 @@
 package amai.org.conventions.model.conventions;
 
+import androidx.annotation.Nullable;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
@@ -29,7 +31,6 @@ import amai.org.conventions.model.Survey;
 import amai.org.conventions.networking.SurveyDataRetriever;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
-import androidx.annotation.Nullable;
 
 public class Cami2019Convention extends AmaiConvention {
     // Hall names
@@ -166,33 +167,42 @@ public class Cami2019Convention extends AmaiConvention {
                 .addMapping("https://cami.org.il/2019/wp-content/uploads/sites/20/2019/06/LEON2.jpg", R.drawable.event_leon_fanfic)
                 .addMapping("https://cami.org.il/2019/wp-content/uploads/sites/20/2019/06/LEON1.jpg", R.drawable.event_leon_fighting)
                 .addMapping("https://cami.org.il/2019/wp-content/uploads/sites/20/2019/06/NIR.png", R.drawable.event_nir)
-                ;
+                .addMapping("https://cami.org.il/2019/wp-content/uploads/sites/20/2019/06/HANA.jpg", R.drawable.event_hana)
+                .addMapping("https://cami.org.il/2019/wp-content/uploads/sites/20/2019/06/Idan.jpg", R.drawable.event_idan)
+                .addMapping("https://cami.org.il/2019/wp-content/uploads/sites/20/2019/06/ODED.png", R.drawable.event_oded)
+        ;
 
         imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.cami2019_event_default_background);
 
         // Excluded IDs - mostly for debug purposes (don't show messages about these when entering an event that has them)
         imageMapper.addExcludedIds(
-                // Nami judges
-                "http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/ram.jpg",
-                "http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/amnon.jpg",
-                "http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/eshter.png",
-                "http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/alon.jpg",
+                // Events without mobile scaled images
+                "https://cami.org.il/2019/wp-content/uploads/sites/20/2019/02/socialmanga.jpg",
+                "https://cami.org.il/2019/wp-content/uploads/sites/20/2018/06/Lior.png",
+                "https://cami.org.il/2019/wp-content/uploads/sites/20/2019/06/PanelsForSite.png",
+                "https://cami.org.il/2019/wp-content/uploads/sites/20/2019/06/yoko.jpg",
+                "https://cami.org.il/2019/wp-content/uploads/sites/20/2018/06/singing-contest1.jpg",
+                // Amaidol judges
+                "https://cami.org.il/2019/wp-content/uploads/sites/20/2019/06/Netta.png",
+                "https://cami.org.il/2019/wp-content/uploads/sites/20/2019/06/Sela.jpg",
+                "https://cami.org.il/2019/wp-content/uploads/sites/20/2018/06/Lior.png",
+                "https://cami.org.il/2019/wp-content/uploads/sites/20/2019/06/Sela.jpg",
+                "https://cami.org.il/2019/wp-content/uploads/sites/20/2018/06/Lior.png",
                 // Cosplay / showcase judges
-                "http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/1600-900-e1551190596352.png",
-                "http://2019.harucon.org.il/wp-content/uploads/sites/17/2018/07/IMG_9671-300x200.jpg",
-                "http://2019.harucon.org.il/wp-content/uploads/sites/17/2018/07/MG_8954-300x200.jpg",
-                "http://2019.harucon.org.il/wp-content/uploads/sites/17/2017/11/יעל-פריד.jpg",
-                "http://2019.harucon.org.il/wp-content/uploads/sites/17/2017/11/ליז-שניידר.jpg",
-                "http://2019.harucon.org.il/wp-content/uploads/sites/17/2018/06/נמרוד-גולד.jpg",
-                "http://2019.harucon.org.il/wp-content/uploads/sites/17/2018/06/אסיא-גרינברג.jpg",
-                "http://2019.harucon.org.il/wp-content/uploads/sites/17/2018/06/-רן-e1548598503701.jpg",
-                "http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/oguri-1.jpg",
-                "http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/hikari-1.jpg",
-                "http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/tal-1.jpg",
-                "http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/sivan-1.jpg",
-                "http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/73C5FCF9-4880-4025-8A0C-ECB8935BCB2C.jpeg",
-                // Image cannot be used due to the text
-                "http://2019.harucon.org.il/wp-content/uploads/sites/17/2019/02/Manga.png"
+                "https://cami.org.il/2019/wp-content/uploads/sites/20/2018/07/IMG_9671-300x200.jpg",
+                "https://cami.org.il/2019/wp-content/uploads/sites/20/2018/07/MG_8954-300x200.jpg",
+                "https://cami.org.il/2019/wp-content/uploads/sites/20/2019/06/טל-חזן.jpg",
+                "https://cami.org.il/2019/wp-content/uploads/sites/20/2019/06/אלכס-רוד.jpg",
+                "https://cami.org.il/2019/wp-content/uploads/sites/20/2019/06/סתיו-גיני.jpg",
+                "https://cami.org.il/2019/wp-content/uploads/sites/20/2019/06/אופיר-לוטן.jpg",
+                "https://cami.org.il/2019/wp-content/uploads/sites/20/2019/06/שחר-אגרנט.jpg",
+                "https://cami.org.il/2019/wp-content/uploads/sites/20/2018/07/IMG_9671-300x200.jpg",
+                "https://cami.org.il/2019/wp-content/uploads/sites/20/2018/07/MG_8954-300x200.jpg",
+                "https://cami.org.il/2019/wp-content/uploads/sites/20/2019/06/טל-חזן.jpg",
+                "https://cami.org.il/2019/wp-content/uploads/sites/20/2019/06/אלכס-רוד.jpg",
+                "https://cami.org.il/2019/wp-content/uploads/sites/20/2019/06/סתיו-גיני.jpg",
+                "https://cami.org.il/2019/wp-content/uploads/sites/20/2019/06/אופיר-לוטן.jpg",
+                "https://cami.org.il/2019/wp-content/uploads/sites/20/2019/06/שחר-אגרנט.jpg"
         );
 
         return imageMapper;
@@ -577,7 +587,7 @@ public class Cami2019Convention extends AmaiConvention {
             case "פאנל":
                 return R.drawable.cami2019_event_icon_panel;
             case "סדנה":
-                return  R.drawable.cami2019_event_icon_workshop;
+                return R.drawable.cami2019_event_icon_workshop;
             default:
                 return R.drawable.cami2019_event_icon_other;
         }
