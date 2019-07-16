@@ -140,7 +140,7 @@
     </style>
 
     <style name="AppBaseTheme.Cami2019.Toolbar.Event" parent="AppBaseTheme.Cami2019.Toolbar">
-        <item name="android:textColorLink">@color/cami2019_teal</item>
+        <item name="android:textColorLink">@color/cami2019_orange1</item>
     </style>
 
     <style name="AppDialogTheme.Cami2019" parent="Theme.AppCompat.Light.Dialog">
