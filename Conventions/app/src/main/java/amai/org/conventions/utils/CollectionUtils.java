@@ -1,7 +1,7 @@
 package amai.org.conventions.utils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -125,7 +125,7 @@ public class CollectionUtils {
 	}
 
 	public static <AggKey, AggVal, T> Map<AggKey, AggVal> groupBy(List<T> list, Mapper<T, AggKey> mapper, Aggregator<T, AggVal> aggregator) {
-		Map<AggKey, AggVal> map = new HashMap<>();
+		Map<AggKey, AggVal> map = new LinkedHashMap<>();
 		for (T item : list) {
 			AggKey key = mapper.map(item);
 			if (map.containsKey(key)) {
