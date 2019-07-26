@@ -61,11 +61,11 @@ public class Cami2019Convention extends AmaiConvention {
 
 	// Stand types
 	private enum StandType implements Stand.StandType {
-		CLOTHES(R.string.clothes_stand, R.drawable.ic_shopping_basket),
+		CLOTHES(R.string.clothes_stand, R.drawable.shirt),
 		MERCH(R.string.merch_stand, R.drawable.ic_shopping_basket),
 		MANGA(R.string.manga_stand, R.drawable.book),
 		COMP_GAMES(R.string.comp_games_stand, R.drawable.videogame_black),
-		TABLETOP_GAMES(R.string.tabletop_games_stand, R.drawable.ic_shopping_basket),
+		TABLETOP_GAMES(R.string.tabletop_games_stand, R.drawable.chess),
 		ARTIST(R.string.artist_stand, R.drawable.ic_color_lens),
 		OTHER(R.string.other, R.drawable.ic_shopping_basket);
 
