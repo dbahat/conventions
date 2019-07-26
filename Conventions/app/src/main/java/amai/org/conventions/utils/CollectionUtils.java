@@ -1,8 +1,10 @@
 package amai.org.conventions.utils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class CollectionUtils {
 	public interface Predicate<T> {
@@ -40,6 +42,14 @@ public class CollectionUtils {
 			mapped.add(mapper.map(item));
 		}
 		return mapped;
+	}
+
+	public static <T> List<T> flatMap(List<List<T>> lists) {
+		List<T> flatList = new LinkedList<>();
+		for (List<T> list : lists) {
+			flatList.addAll(list);
+		}
+		return flatList;
 	}
 
 	public static <T> int[] mapToInt(List<T> list, MapperToInt<T> mapperToInt) {
@@ -112,5 +122,25 @@ public class CollectionUtils {
 			}
 		}
 		return true;
+	}
+
+	public static <AggKey, AggVal, T> Map<AggKey, AggVal> groupBy(List<T> list, Mapper<T, AggKey> mapper, Aggregator<T, AggVal> aggregator) {
+		Map<AggKey, AggVal> map = new HashMap<>();
+		for (T item : list) {
+			AggKey key = mapper.map(item);
+			if (map.containsKey(key)) {
+				AggVal currentValue = map.get(key);
+				map.put(key, aggregator.aggregate(currentValue, item));
+			} else {
+				map.put(key, aggregator.aggregate(null, item));
+			}
+		}
+
+		return map;
+	}
+
+
+	public static interface Aggregator<L, M> {
+		M aggregate(M accumulate, L currentItem);
 	}
 }
