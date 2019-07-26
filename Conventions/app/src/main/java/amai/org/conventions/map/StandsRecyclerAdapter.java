@@ -1,32 +1,74 @@
 package amai.org.conventions.map;
 
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import sff.org.conventions.R;
+import amai.org.conventions.events.activities.StandsSectionedGridRecyclerViewAdapter;
 import amai.org.conventions.model.Stand;
+import amai.org.conventions.utils.CollectionUtils;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import sff.org.conventions.R;
 
 public class StandsRecyclerAdapter extends RecyclerView.Adapter<StandViewHolder> {
     private final boolean showLocations;
     private List<Stand> stands;
+    private List<StandsSectionedGridRecyclerViewAdapter.Section> sections;
     private boolean colorImages;
     private String selectedStandName;
     private OnClickListener onClickListener;
 
-    public StandsRecyclerAdapter(List<Stand> stands, boolean colorImages, boolean showLocations, String selectedStandName) {
-        this.stands = stands;
+    public StandsRecyclerAdapter(List<Stand> stands, boolean colorImages, boolean showLocations, String selectedStandName, Resources resources) {
         this.colorImages = colorImages;
         this.showLocations = showLocations;
         this.selectedStandName = selectedStandName;
+        setStandsAndSections(stands, resources);
+    }
+
+    private void setStandsAndSections(List<Stand> stands, Resources resources) {
+        Map<Stand.StandType, List<Stand>> standTypeToStandsMap = CollectionUtils.groupBy(
+                stands,
+                Stand::getType,
+                (accumulate, currentItem) -> {
+                    if (accumulate == null) {
+                        List<Stand> standList = new ArrayList<Stand>();
+                        standList.add(currentItem);
+                        return standList;
+                    } else {
+                        accumulate.add(currentItem);
+                        return accumulate;
+                    }
+                }
+        );
+        List<Map.Entry<Stand.StandType, List<Stand>>> standTypeToStandsElements = new ArrayList<>(standTypeToStandsMap.entrySet());
+
+        List<StandsSectionedGridRecyclerViewAdapter.Section> sections = new ArrayList<>();
+        int indexInList = 0;
+        for (Map.Entry<Stand.StandType, List<Stand>> entry : standTypeToStandsElements) {
+            sections.add(new StandsSectionedGridRecyclerViewAdapter.Section(
+                    indexInList,
+                    resources.getString(entry.getKey().getTitle())
+            ));
+            indexInList += entry.getValue().size();
+        }
+
+        List<List<Stand>> standsAfterGrouping = CollectionUtils.map(standTypeToStandsElements, Map.Entry::getValue);
+        this.stands = CollectionUtils.flatMap(standsAfterGrouping);
+        this.sections = sections;
     }
 
     public List<Stand> getStands() {
         return stands;
+    }
+
+    public List<StandsSectionedGridRecyclerViewAdapter.Section> getSections() {
+        return sections;
     }
 
     @NonNull

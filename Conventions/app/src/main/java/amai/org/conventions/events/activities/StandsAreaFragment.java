@@ -15,13 +15,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 
 import amai.org.conventions.map.StandsRecyclerAdapter;
 import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.model.conventions.Convention;
-import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Objects;
 import amai.org.conventions.utils.Views;
 import androidx.annotation.NonNull;
@@ -45,8 +43,8 @@ public class StandsAreaFragment extends DialogFragment {
     private RecyclerView standsList;
     private StandsRecyclerAdapter standsAdapter;
     // Using RecyclerView with custom adapter since sticky headers GridView didn't
-    // properly support scrollToPosition,
-    private StandsSectionedGridRecyclerViewAdapter mSectionedAdapter;
+    // properly support scrollToPosition
+    private StandsSectionedGridRecyclerViewAdapter sectionedStandsAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -80,48 +78,17 @@ public class StandsAreaFragment extends DialogFragment {
                 }
             });
 
-//            Collections.sort(stands, (stand, stand2) -> stand.getType().ordinal() - stand2.getType().ordinal());
-
-            Map<Stand.StandType, List<Stand>> standTypeToStandsMap = CollectionUtils.groupBy(
-                    stands,
-                    Stand::getType,
-                    (accumulate, currentItem) -> {
-                        if (accumulate == null) {
-                            List<Stand> standList = new ArrayList<Stand>();
-                            standList.add(currentItem);
-                            return standList;
-                        } else {
-                            accumulate.add(currentItem);
-                            return accumulate;
-                        }
-                    }
-            );
-            List<Map.Entry<Stand.StandType, List<Stand>>> standTypeToStandsElements = new ArrayList<>(standTypeToStandsMap.entrySet());
-
-            List<StandsSectionedGridRecyclerViewAdapter.Section> sections = new ArrayList<>();
-            int indexInList = 0;
-            for (Map.Entry<Stand.StandType, List<Stand>> entry : standTypeToStandsElements) {
-                sections.add(new StandsSectionedGridRecyclerViewAdapter.Section(
-                        indexInList,
-                        getResources().getString(entry.getKey().getTitle())
-                ));
-                indexInList += entry.getValue().size();
-            }
-
-            List<List<Stand>> standsAfterGrouping = CollectionUtils.map(standTypeToStandsElements, Map.Entry::getValue);
-            List<Stand> standsSortedToSections = CollectionUtils.flatMap(standsAfterGrouping);
-
-            standsAdapter = new StandsRecyclerAdapter(standsSortedToSections, true, area.hasImageResource(), selectedStandName);
+            standsAdapter = new StandsRecyclerAdapter(stands, true, area.hasImageResource(), selectedStandName, getResources());
             standsList.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
-            mSectionedAdapter = new
+            sectionedStandsAdapter = new
                     StandsSectionedGridRecyclerViewAdapter(getContext(),
                     android.R.layout.simple_list_item_1, android.R.id.text1, standsList, standsAdapter);
 
-            StandsSectionedGridRecyclerViewAdapter.Section[] sectionArray = new StandsSectionedGridRecyclerViewAdapter.Section[sections.size()];
-            mSectionedAdapter.setSections(sections.toArray(sectionArray));
+            StandsSectionedGridRecyclerViewAdapter.Section[] sectionArray = new StandsSectionedGridRecyclerViewAdapter.Section[standsAdapter.getSections().size()];
+            sectionedStandsAdapter.setSections(standsAdapter.getSections().toArray(sectionArray));
 
-            standsList.setAdapter(mSectionedAdapter);
+            standsList.setAdapter(sectionedStandsAdapter);
 
             if (area.hasImageResource()) {
                 image.setImageResource(area.getImageResource());
@@ -136,7 +103,7 @@ public class StandsAreaFragment extends DialogFragment {
             }
 
             standsAdapter.setOnClickListener(position -> {
-                Stand stand = standsSortedToSections.get(position);
+                Stand stand = standsAdapter.getStands().get(position);
                 zoomToStand(stand);
                 selectedStandName = stand.getName();
                 standsAdapter.setSelectedStandName(selectedStandName);
@@ -190,7 +157,7 @@ public class StandsAreaFragment extends DialogFragment {
             }
 
             RecyclerView.SmoothScroller smoothScroller = new LinearSmoothScroller(getContext());
-            smoothScroller.setTargetPosition(mSectionedAdapter.positionToSectionedPosition(foundPosition));
+            smoothScroller.setTargetPosition(sectionedStandsAdapter.positionToSectionedPosition(foundPosition));
 
             standsList.getLayoutManager().startSmoothScroll(smoothScroller);
         }
