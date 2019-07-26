@@ -1,7 +1,5 @@
 package amai.org.conventions.model;
 
-import amai.org.conventions.R;
-
 public class Stand {
 	private String name;
 	private StandType type;
@@ -92,24 +90,10 @@ public class Stand {
 		return this;
 	}
 
-	public enum StandType {
-		REGULAR_STAND(R.string.regular_stand, R.drawable.ic_shopping_basket),
-		ARTIST_STAND(R.string.artist_stand, R.drawable.ic_color_lens);
-
-		private int title;
-		private int image;
-
-		StandType(int title, int image) {
-			this.title = title;
-			this.image = image;
-		}
-
-		public int getTitle() {
-			return title;
-		}
-
-		public int getImage() {
-			return image;
-		}
+	public interface StandType {
+		int getTitle();
+		int getImage();
+		int ordinal();
+		int compareTo(StandType t);
 	}
 }

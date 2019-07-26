@@ -3,13 +3,12 @@ package amai.org.conventions.events.activities;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -28,6 +27,8 @@ import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Objects;
 import amai.org.conventions.utils.Views;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 import pl.polidea.view.ZoomView;
 
 public class StandsAreaFragment extends DialogFragment {
@@ -36,6 +37,10 @@ public class StandsAreaFragment extends DialogFragment {
 	private int standsAreaID = -1;
 	private String selectedStandName;
 	private StandsArea area;
+	private ZoomView zoom;
+	private ImageView image;
+	private StickyGridHeadersGridView standsList;
+	private StandsAdapter standsAdapter;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -51,13 +56,13 @@ public class StandsAreaFragment extends DialogFragment {
 
 		View view = inflater.inflate(R.layout.activity_stands_area, container, false);
 
-		final StickyGridHeadersGridView standsList = (StickyGridHeadersGridView) view.findViewById(R.id.standsList);
+		standsList = view.findViewById(R.id.standsList);
 		standsList.setAreHeadersSticky(false);
 		area = Convention.getInstance().findStandsArea(standsAreaID);
 		if (area != null) {
 			AdapterView.OnItemClickListener listener = null;
-			final ZoomView zoom = (ZoomView) view.findViewById(R.id.stands_area_zoom);
-			final ImageView image = (ImageView) view.findViewById(R.id.stands_area_map);
+			zoom = view.findViewById(R.id.stands_area_zoom);
+			image = view.findViewById(R.id.stands_area_map);
 
 			List<Stand> stands = new ArrayList<>(area.getStands());
 			Collections.sort(stands, new Comparator<Stand>() {
@@ -71,8 +76,8 @@ public class StandsAreaFragment extends DialogFragment {
 				}
 			});
 
-			final StandsAdapter adapter = new StandsAdapter(stands, true, area.hasImageResource(), selectedStandName);
-			standsList.setAdapter(adapter);
+			standsAdapter = new StandsAdapter(stands, true, area.hasImageResource(), selectedStandName);
+			standsList.setAdapter(standsAdapter);
 
 			if (area.hasImageResource()) {
 				image.setImageResource(area.getImageResource());
@@ -87,12 +92,10 @@ public class StandsAreaFragment extends DialogFragment {
 				listener = new AdapterView.OnItemClickListener() {
 					@Override
 					public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-						Object item = adapter.getItem(position);
+						Object item = standsAdapter.getItem(position);
 						if (item instanceof Stand && ((Stand) item).hasImageCoordinates()) {
 							Stand stand = (Stand) item;
-							zoom.smoothZoomTo(zoom.getMaxZoom(),
-									stand.getImageX() / area.getImageWidth() * image.getWidth(),
-									stand.getImageY() / area.getImageHeight() * image.getHeight());
+							zoomToStand(stand);
 						}
 					}
 				};
@@ -100,18 +103,7 @@ public class StandsAreaFragment extends DialogFragment {
 
 			standsList.setOnItemClickListener(listener);
 			if (selectedStandName != null) {
-				int foundPosition = -1;
-				int currPosition = 0;
-				for (Stand stand : stands) {
-					if (selectedStandName.equals(stand.getName())) {
-						foundPosition = currPosition;
-						break;
-					}
-					++currPosition;
-				}
-				if (foundPosition != -1) {
-					standsList.smoothScrollToPositionFromTop(foundPosition, 0);
-				}
+				scrollToStand(selectedStandName, false);
 			}
 		}
 
@@ -124,6 +116,49 @@ public class StandsAreaFragment extends DialogFragment {
 		});
 
 		return view;
+	}
+
+	private void scrollToStand(String selectedStandName, boolean zoomAfterScroll) {
+		int foundPosition = -1;
+		int currPosition = 0;
+		Stand foundStand = null;
+		for (Stand stand : standsAdapter.getStands()) {
+			if (selectedStandName.equals(stand.getName())) {
+				foundPosition = currPosition;
+				foundStand = stand;
+				break;
+			}
+			++currPosition;
+		}
+		if (foundPosition != -1) {
+			Stand finalFoundStand = foundStand;
+			// After we finish scrolling, zoom to the stand
+			if (zoomAfterScroll) {
+				standsList.setOnScrollListener(new AbsListView.OnScrollListener() {
+					@Override
+					public void onScrollStateChanged(AbsListView standsList, int scrollState) {
+						if (scrollState == SCROLL_STATE_IDLE) {
+							zoomToStand(finalFoundStand);
+							standsList.setOnScrollListener(null);
+						}
+					}
+
+					@Override
+					public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+					}
+				});
+			}
+
+			standsList.smoothScrollToPositionFromTop(foundPosition, 0);
+		}
+	}
+
+	private void zoomToStand(Stand stand) {
+		if (zoom != null) {
+			zoom.smoothZoomTo(zoom.getMaxZoom(),
+					stand.getImageX() / area.getImageWidth() * image.getWidth(),
+					stand.getImageY() / area.getImageHeight() * image.getHeight());
+		}
 	}
 
 	private void openStandsMap() {
