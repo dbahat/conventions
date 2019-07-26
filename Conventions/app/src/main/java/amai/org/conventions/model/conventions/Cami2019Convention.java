@@ -1,7 +1,5 @@
 package amai.org.conventions.model.conventions;
 
-import androidx.annotation.Nullable;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
@@ -31,6 +29,7 @@ import amai.org.conventions.model.Survey;
 import amai.org.conventions.networking.SurveyDataRetriever;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
+import androidx.annotation.Nullable;
 
 public class Cami2019Convention extends AmaiConvention {
     // Hall names
@@ -59,6 +58,41 @@ public class Cami2019Convention extends AmaiConvention {
         FeedbackQuestion.addQuestion(QUESTION_ID_AMAIDOL_NAME, R.string.amaidol_name_question);
         FeedbackQuestion.addQuestion(QUESTION_ID_AMAIDOL_VOTE, R.string.amaidol_vote_question);
     }
+
+	// Stand types
+	private enum StandType implements Stand.StandType {
+		CLOTHES(R.string.clothes_stand, R.drawable.ic_shopping_basket),
+		MERCH(R.string.merch_stand, R.drawable.ic_shopping_basket),
+		MANGA(R.string.manga_stand, R.drawable.book),
+		COMP_GAMES(R.string.comp_games_stand, R.drawable.videogame_black),
+		TABLETOP_GAMES(R.string.tabletop_games_stand, R.drawable.ic_shopping_basket),
+		ARTIST(R.string.artist_stand, R.drawable.ic_color_lens),
+		OTHER(R.string.other, R.drawable.ic_shopping_basket);
+
+		private int title;
+		private int image;
+
+		StandType(int title, int image) {
+			this.title = title;
+			this.image = image;
+		}
+
+		public int getTitle() {
+			return title;
+		}
+
+		public int getImage() {
+			return image;
+		}
+
+		@Override
+		public int compareTo(Stand.StandType standType) {
+			if (!(standType instanceof StandType)) {
+				throw new ClassCastException();
+			}
+			return this.compareTo((StandType) standType);
+		}
+	}
 
     @Override
     protected ConventionStorage initStorage() {
@@ -248,9 +282,8 @@ public class Cami2019Convention extends AmaiConvention {
                 .withImageWidth(1488.43005f)
                 .withImageHeight(821.03003f);
 
-        StandsArea agam = new StandsArea().withName("טרקלין אגם").withStands(getAgamStands())/*.withImageResource(R.drawable.stands_agam).withImageWidth(2700).withImageHeight(1504)*/;
-        StandsArea pinkus = new StandsArea().withName("אולם פינקוס").withStands(getPinkusStands())/*.withImageResource(R.drawable.stands_pinkus).withImageWidth(2700).withImageHeight(1708)*/;
-        StandsArea nesher = new StandsArea().withName("רחבת הכניסה").withStands(getNesherStands())/*.withImageResource(R.drawable.stands_nesher).withImageWidth(2588).withImageHeight(1588)*/;
+        StandsArea agam = new StandsArea().withName("טרקלין אגם").withStands(getAgamStands()).withImageResource(R.drawable.cami2019_stands_map_agam).withImageWidth(2700).withImageHeight(967);
+        StandsArea pinkus = new StandsArea().withName("אולם פינקוס").withStands(getPinkusStands()).withImageResource(R.drawable.cami2019_stands_map_pinkus).withImageWidth(2700).withImageHeight(1706);
         return new ConventionMap()
                 .withFloors(Arrays.asList(entrance, floor1, floor2))
                 .withDefaultFloor(floor1)
@@ -335,9 +368,8 @@ public class Cami2019Convention extends AmaiConvention {
                                                 .withMarkerHeight(66.83f)
                                                 .withX(1240.81f)
                                                 .withY(445.573f),
-                                        new MapLocation() // This is before the guest sign post so it will be selected as the stands area
-                                                .withName("עמדת מודיעין ומרצ'נדייז כנסי")
-                                                .withPlace(nesher)
+                                        new MapLocation()
+                                                .withPlace(new Place().withName("עמדת מודיעין ומרצ'נדייז כנסי"))
                                                 .withMarkerResource(R.raw.cami2019_marker_information, true)
                                                 .withSelectedMarkerResource(R.raw.cami2019_marker_information_selected, true)
                                                 .withMarkerHeight(61.33f)
@@ -493,94 +525,115 @@ public class Cami2019Convention extends AmaiConvention {
 
     private List<Stand> getPinkusStands() {
         return Arrays.asList(
-//				new Stand().withName("otaku shop").withType(Stand.StandType.REGULAR_STAND).withLocationName("c01-c04").withImageX(825).withImageY(535),
-//				new Stand().withName("retro game center").withType(Stand.StandType.REGULAR_STAND).withLocationName("c05-c08").withImageX(1016).withImageY(535),
-//				new Stand().withName("נקסוס").withType(Stand.StandType.REGULAR_STAND).withLocationName("c09-c11").withImageX(1306).withImageY(535),
-//				new Stand().withName("אוטאקו פרוג'קטו").withType(Stand.StandType.REGULAR_STAND).withLocationName("c12").withImageX(1401).withImageY(535),
-//				new Stand().withName("שרז עיצובים").withType(Stand.StandType.REGULAR_STAND).withLocationName("c13-c14").withImageX(1563).withImageY(535),
-//				new Stand().withName("קנדי לנסס").withType(Stand.StandType.REGULAR_STAND).withLocationName("c15-c20").withImageX(1752).withImageY(535),
-//				new Stand().withName("Animestuff").withType(Stand.StandType.REGULAR_STAND).withLocationName("c23").withImageX(2025).withImageY(708),
-//				new Stand().withName("קוספליי סנפאיי").withType(Stand.StandType.REGULAR_STAND).withLocationName("c24-c25").withImageX(2025).withImageY(803),
-//				new Stand().withName("סוואג").withType(Stand.StandType.REGULAR_STAND).withLocationName("c28-c31").withImageX(2025).withImageY(1107),
-//				new Stand().withName("BLUP").withType(Stand.StandType.REGULAR_STAND).withLocationName("c32").withImageX(2068).withImageY(1303),
-//				new Stand().withName("אנימה סטור").withType(Stand.StandType.REGULAR_STAND).withLocationName("c33-c38").withImageX(1959).withImageY(1428),
-//				new Stand().withName("הקוביה").withType(Stand.StandType.REGULAR_STAND).withLocationName("c39-c40").withImageX(1680).withImageY(1416),
-//				new Stand().withName("עדשות COLORVUE ועוד").withType(Stand.StandType.REGULAR_STAND).withLocationName("c41-c42").withImageX(1570).withImageY(1416),
-//				new Stand().withName("וורבלה").withType(Stand.StandType.REGULAR_STAND).withLocationName("c43-c44").withImageX(1470).withImageY(1416),
-//				new Stand().withName("gaming land").withType(Stand.StandType.REGULAR_STAND).withLocationName("c45-c50").withImageX(1087).withImageY(1428),
-//				new Stand().withName("BrandMusical").withType(Stand.StandType.REGULAR_STAND).withLocationName("c51-c52").withImageX(933).withImageY(1500),
-//				new Stand().withName("Geek n' Otaku").withType(Stand.StandType.REGULAR_STAND).withLocationName("d01-d02").withImageX(1427).withImageY(810),
-//				new Stand().withName("מאי שירי design&art").withType(Stand.StandType.REGULAR_STAND).withLocationName("d03").withImageX(1505).withImageY(810),
-//				new Stand().withName("דוכן תרומות עבור הפקת Nmusical").withType(Stand.StandType.REGULAR_STAND).withLocationName("d04").withImageX(1559).withImageY(810),
-//				new Stand().withName("Lynnja's").withType(Stand.StandType.REGULAR_STAND).withLocationName("d06").withImageX(1727).withImageY(810),
-//				new Stand().withName("D&M Armory").withType(Stand.StandType.REGULAR_STAND).withLocationName("d09").withImageX(1755).withImageY(979),
-//				new Stand().withName("ODA").withType(Stand.StandType.REGULAR_STAND).withLocationName("d11").withImageX(1756).withImageY(1099),
-//				new Stand().withName("מריונטה").withType(Stand.StandType.REGULAR_STAND).withLocationName("d15-d16").withImageX(1596).withImageY(1211),
-//				new Stand().withName("ויולה ויל").withType(Stand.StandType.REGULAR_STAND).withLocationName("d17-d18").withImageX(1489).withImageY(1211),
-//				new Stand().withName("המרכז ללימוד יפנית").withType(Stand.StandType.REGULAR_STAND).withLocationName("d19-d20").withImageX(1369).withImageY(1134),
-//				new Stand().withName("Velvet Octopus").withType(Stand.StandType.REGULAR_STAND).withLocationName("d23-d24").withImageX(1369).withImageY(885),
-//				new Stand().withName("rivendell").withType(Stand.StandType.REGULAR_STAND).withLocationName("e01").withImageX(829).withImageY(803),
-//				new Stand().withName("roza's art").withType(Stand.StandType.REGULAR_STAND).withLocationName("e02").withImageX(883).withImageY(803),
-//				new Stand().withName("Lee's Stand").withType(Stand.StandType.REGULAR_STAND).withLocationName("e03-e04").withImageX(963).withImageY(803),
-//				new Stand().withName("סרוגי").withType(Stand.StandType.REGULAR_STAND).withLocationName("e05").withImageX(1105).withImageY(812),
-//				new Stand().withName("dafna's nail art").withType(Stand.StandType.REGULAR_STAND).withLocationName("e06").withImageX(1158).withImageY(812),
-//				new Stand().withName("גיל והחציל המעופף").withType(Stand.StandType.REGULAR_STAND).withLocationName("e07").withImageX(1187).withImageY(858),
-//				new Stand().withName("Aurore22").withType(Stand.StandType.REGULAR_STAND).withLocationName("e08").withImageX(1187).withImageY(918),
-//				new Stand().withName("Compoco").withType(Stand.StandType.REGULAR_STAND).withLocationName("e09-e10").withImageX(1187).withImageY(1012),
-//				new Stand().withName("Crow's Treasure").withType(Stand.StandType.REGULAR_STAND).withLocationName("e11").withImageX(1187).withImageY(1104),
-//				new Stand().withName("Low.Eno.Shit לא אנושיט").withType(Stand.StandType.REGULAR_STAND).withLocationName("e12").withImageX(1187).withImageY(1169),
-//				new Stand().withName("בועת מחשבה").withType(Stand.StandType.REGULAR_STAND).withLocationName("e13").withImageX(1158).withImageY(1213),
-//				new Stand().withName("Hatz lolita & more").withType(Stand.StandType.REGULAR_STAND).withLocationName("e14").withImageX(1106).withImageY(1213),
-//				new Stand().withName("בתוך הקופסה").withType(Stand.StandType.REGULAR_STAND).withLocationName("e15-e16").withImageX(958).withImageY(1204),
-//				new Stand().withName("גיק בסטה").withType(Stand.StandType.REGULAR_STAND).withLocationName("e17").withImageX(884).withImageY(1204),
-//				new Stand().withName("Kawaii Stickers").withType(Stand.StandType.REGULAR_STAND).withLocationName("e18").withImageX(829).withImageY(1204),
-//				new Stand().withName("Harajuku Jewlery").withType(Stand.StandType.REGULAR_STAND).withLocationName("e19").withImageX(800).withImageY(1158),
-//				new Stand().withName("גיקפליז").withType(Stand.StandType.REGULAR_STAND).withLocationName("e20").withImageX(800).withImageY(1096),
-//				new Stand().withName("לימור שטרן").withType(Stand.StandType.REGULAR_STAND).withLocationName("e21-e24").withImageX(800).withImageY(941)
+				new Stand().withName("נקסוס").withType(StandType.TABLETOP_GAMES).withLocationName("c01-c03").withImageX(222).withImageY(152),
+				new Stand().withName("anime store").withType(StandType.MERCH).withLocationName("c04-c05").withImageX(438).withImageY(152),
+				new Stand().withName("Waterdew").withType(StandType.CLOTHES).withLocationName("c06-c07").withImageX(620).withImageY(152),
+				new Stand().withName("BOOBA MACHO").withType(StandType.CLOTHES).withLocationName("c08").withImageX(756).withImageY(152),
+				new Stand().withName("BERNINA").withType(StandType.CLOTHES).withLocationName("c09-c10").withImageX(1064).withImageY(152),
+				new Stand().withName("Fantasy House").withType(StandType.MERCH).withLocationName("c11-c12").withImageX(1246).withImageY(152),
+				new Stand().withName("פופסטופ").withType(StandType.OTHER).withLocationName("c13-c14").withImageX(1582).withImageY(152),
+				new Stand().withName("מחוקים' - מחזמר בלשי מקורי").withType(StandType.OTHER).withLocationName("c15-c16").withImageX(1762).withImageY(152),
+				new Stand().withName("Candy Lenses").withType(StandType.OTHER).withLocationName("c17-c22").withImageX(2120).withImageY(152),
+				new Stand().withName("Svag").withType(StandType.CLOTHES).withLocationName("c23-c28").withImageX(2552).withImageY(684),
+				new Stand().withName("Bar's Pops").withType(StandType.OTHER).withLocationName("c29-c30").withImageX(2552).withImageY(1034),
+				new Stand().withName("poster adir!").withType(StandType.MERCH).withLocationName("c31-c36").withImageX(2164).withImageY(1404),
+				new Stand().withName("קומיקאזה").withType(StandType.MANGA).withLocationName("c39-c42").withImageX(1402).withImageY(1404),
+				new Stand().withName("אקיבה").withType(StandType.OTHER).withLocationName("c43-c48").withImageX(906).withImageY(1404),
+				new Stand().withName("3d my lev").withType(StandType.OTHER).withLocationName("c49-c50").withImageX(598).withImageY(1510),
+				new Stand().withName("TVfox").withType(StandType.ARTIST).withLocationName("d01-d02").withImageX(1954).withImageY(474),
+				new Stand().withName("RETRO GAME CENTER").withType(StandType.COMP_GAMES).withLocationName("d05-d08").withImageX(2088).withImageY(866),
+				new Stand().withName("Lyddar Cosplay").withType(StandType.MANGA).withLocationName("d09").withImageX(2008).withImageY(1082),
+				new Stand().withName("קללת המלאכים").withType(StandType.MANGA).withLocationName("d10").withImageX(1910).withImageY(1082),
+				new Stand().withName("ComiXunity").withType(StandType.MANGA).withLocationName("d11").withImageX(1820).withImageY(1082),
+				new Stand().withName("Velvet Octopus").withType(StandType.CLOTHES).withLocationName("d12").withImageX(1730).withImageY(1082),
+				new Stand().withName("Haruugami").withType(StandType.OTHER).withLocationName("d13-d14").withImageX(1596).withImageY(1082),
+				new Stand().withName("snncomicstore").withType(StandType.MANGA).withLocationName("d15").withImageX(1398).withImageY(1002),
+				new Stand().withName("גברת וודו").withType(StandType.CLOTHES).withLocationName("d16-d17").withImageX(1398).withImageY(868),
+				new Stand().withName("Asfanation").withType(StandType.MANGA).withLocationName("d18").withImageX(1398).withImageY(730),
+				new Stand().withName("גיקפליז").withType(StandType.OTHER).withLocationName("d19-d20").withImageX(1398).withImageY(598),
+				new Stand().withName("איגוד מקצועות האנימציה").withType(StandType.OTHER).withLocationName("d21").withImageX(1492).withImageY(474),
+				new Stand().withName("Āto&sōpu").withType(StandType.OTHER).withLocationName("d22").withImageX(1582).withImageY(474),
+				new Stand().withName("פאצ'יקו").withType(StandType.ARTIST).withLocationName("d23").withImageX(1666).withImageY(474),
+				new Stand().withName("מאי שירי design&ART").withType(StandType.MERCH).withLocationName("d24").withImageX(1754).withImageY(474),
+				new Stand().withName("המרכז ללימודי יפנית").withType(StandType.OTHER).withLocationName("e01-e02").withImageX(1032).withImageY(474),
+				new Stand().withName("Animode").withType(StandType.MERCH).withLocationName("e03-e05").withImageX(1172).withImageY(638),
+				new Stand().withName("קבוצת יצירת קומיקס").withType(StandType.MANGA).withLocationName("e06").withImageX(1172).withImageY(824),
+				new Stand().withName("Panda Shop ").withType(StandType.CLOTHES).withLocationName("e07-e08").withImageX(1172).withImageY(954),
+				new Stand().withName("בלופ").withType(StandType.OTHER).withLocationName("e09-e10").withImageX(1034).withImageY(1082),
+				new Stand().withName("Frozen flawers").withType(StandType.ARTIST).withLocationName("e11-e12").withImageX(788).withImageY(1082),
+				new Stand().withName("Patch-Shop").withType(StandType.CLOTHES).withLocationName("e13-e14").withImageX(610).withImageY(1082),
+				new Stand().withName("LYRA - Magical Stuff").withType(StandType.CLOTHES).withLocationName("e15-e20").withImageX(476).withImageY(776),
+				new Stand().withName("Takara mono").withType(StandType.CLOTHES).withLocationName("e21-e22").withImageX(610).withImageY(474),
+				new Stand().withName("Fairy Kei Lovers ").withType(StandType.CLOTHES).withLocationName("e23").withImageX(744).withImageY(474),
+				new Stand().withName("אמאטרסו").withType(StandType.MERCH).withLocationName("e24").withImageX(838).withImageY(474)
         );
     }
 
     private List<Stand> getAgamStands() {
         return Arrays.asList(
-//				new Stand().withName("Besandilove - להתלבש בתשוקה").withType(Stand.StandType.REGULAR_STAND).withLocationName("a01").withImageX(396).withImageY(441),
-//				new Stand().withName("גברת וודו").withType(Stand.StandType.REGULAR_STAND).withLocationName("a02").withImageX(445).withImageY(441),
-//				new Stand().withName("מאי ארט").withType(Stand.StandType.REGULAR_STAND).withLocationName("a05-a08").withImageX(669).withImageY(441),
-//				new Stand().withName("פנדה שופ").withType(Stand.StandType.REGULAR_STAND).withLocationName("a09-a10").withImageX(837).withImageY(441),
-//				new Stand().withName("קומיקס וירקות").withType(Stand.StandType.REGULAR_STAND).withLocationName("a11-a14").withImageX(986).withImageY(441),
-//				new Stand().withName("שיפודן ישראל").withType(Stand.StandType.REGULAR_STAND).withLocationName("a15-a20").withImageX(1258).withImageY(441),
-//				new Stand().withName("הגלקסיה").withType(Stand.StandType.REGULAR_STAND).withLocationName("a21-a24").withImageX(1530).withImageY(441),
-//				new Stand().withName("go-japan").withType(Stand.StandType.REGULAR_STAND).withLocationName("a25-a26").withImageX(1678).withImageY(441),
-//				new Stand().withName("קומיקאזה").withType(Stand.StandType.REGULAR_STAND).withLocationName("a27-a31").withImageX(1874).withImageY(441),
-//				new Stand().withName("קבוצת יצירת קומיקס").withType(Stand.StandType.REGULAR_STAND).withLocationName("a32").withImageX(2024).withImageY(441),
-//				new Stand().withName("animewave").withType(Stand.StandType.REGULAR_STAND).withLocationName("a33-a38").withImageX(2224).withImageY(441),
-//				new Stand().withName("אנימה צ'ודוקו").withType(Stand.StandType.REGULAR_STAND).withLocationName("a39-a42").withImageX(459).withImageY(837),
-//				new Stand().withName("Mirrorshards").withType(Stand.StandType.ARTIST_STAND).withLocationName("b01").withImageX(1013).withImageY(604),
-//				new Stand().withName("Grisim").withType(Stand.StandType.ARTIST_STAND).withLocationName("b02").withImageX(1073).withImageY(604),
-//				new Stand().withName("BL Palace").withType(Stand.StandType.ARTIST_STAND).withLocationName("b03").withImageX(1123).withImageY(604),
-//				new Stand().withName("דוכן ציור").withType(Stand.StandType.ARTIST_STAND).withLocationName("b04-b05").withImageX(1208).withImageY(604),
-//				new Stand().withName("Landes").withType(Stand.StandType.ARTIST_STAND).withLocationName("b10").withImageX(1564).withImageY(604),
-//				new Stand().withName("אביב ציפין קומיקס").withType(Stand.StandType.ARTIST_STAND).withLocationName("b11").withImageX(1619).withImageY(604),
-//				new Stand().withName("מושיק גולסט").withType(Stand.StandType.ARTIST_STAND).withLocationName("b12-b13").withImageX(1650).withImageY(685),
-//				new Stand().withName("Dor20 Studio").withType(Stand.StandType.ARTIST_STAND).withLocationName("b15").withImageX(1656).withImageY(877),
-//				new Stand().withName("adelistic").withType(Stand.StandType.ARTIST_STAND).withLocationName("b16").withImageX(1621).withImageY(925),
-//				new Stand().withName("YUEvander").withType(Stand.StandType.ARTIST_STAND).withLocationName("b18").withImageX(1512).withImageY(925),
-//				new Stand().withName("מרטין ציורים").withType(Stand.StandType.ARTIST_STAND).withLocationName("b19").withImageX(1453).withImageY(925),
-//				new Stand().withName("Yael's Colors").withType(Stand.StandType.ARTIST_STAND).withLocationName("b20").withImageX(1400).withImageY(925),
-//				new Stand().withName("היקום המקביל").withType(Stand.StandType.ARTIST_STAND).withLocationName("b22").withImageX(1238).withImageY(925),
-//				new Stand().withName("AniArt 4U").withType(Stand.StandType.ARTIST_STAND).withLocationName("b23").withImageX(1181).withImageY(925),
-//				new Stand().withName("Rinska's Booth").withType(Stand.StandType.ARTIST_STAND).withLocationName("b25-b26").withImageX(1043).withImageY(925),
-//				new Stand().withName("Fishibug").withType(Stand.StandType.ARTIST_STAND).withLocationName("b27-b28").withImageX(987).withImageY(843),
-//				new Stand().withName("הדוכן של פיצה").withType(Stand.StandType.ARTIST_STAND).withLocationName("b29").withImageX(987).withImageY(718),
-//				new Stand().withName("Tair Art").withType(Stand.StandType.ARTIST_STAND).withLocationName("b30").withImageX(987).withImageY(655)
-        );
-    }
-
-    private List<Stand> getNesherStands() {
-        return Arrays.asList(
-//				new Stand().withName("מודיעין ודוכן אמא\"י").withType(Stand.StandType.REGULAR_STAND).withImageX(1276).withImageY(948),
-//				new Stand().withName("שגרירות יפן").withType(Stand.StandType.REGULAR_STAND).withImageX(1112).withImageY(1000),
-//				new Stand().withName("ידידות יפן").withType(Stand.StandType.REGULAR_STAND).withImageX(878).withImageY(1000)
-        );
+				new Stand().withName("PopStorm").withType(StandType.OTHER).withLocationName("a01-a02").withImageX(225).withImageY(160),
+				new Stand().withName("הממלכה").withType(StandType.TABLETOP_GAMES).withLocationName("a03-a04").withImageX(340).withImageY(160),
+				new Stand().withName("אביב ציפין קומיקס").withType(StandType.ARTIST).withLocationName("a05").withImageX(429).withImageY(160),
+				new Stand().withName("Ayako Pastel").withType(StandType.ARTIST).withLocationName("a06").withImageX(483).withImageY(160),
+				new Stand().withName("Mini Tokyo ").withType(StandType.MERCH).withLocationName("a07-a08").withImageX(573).withImageY(160),
+				new Stand().withName("Shlomi's ART").withType(StandType.ARTIST).withLocationName("a10-a11").withImageX(777).withImageY(160),
+				new Stand().withName(" החתול הסגול").withType(StandType.OTHER).withLocationName("a12-a14").withImageX(922).withImageY(160),
+				new Stand().withName("ישראל לאופר").withType(StandType.CLOTHES).withLocationName("a15-a16").withImageX(1100).withImageY(160),
+				new Stand().withName("קומיקס וירקות").withType(StandType.MANGA).withLocationName("a17-a20").withImageX(1275).withImageY(160),
+				new Stand().withName("שיפודן ישראל ואנימה ספין").withType(StandType.MERCH).withLocationName("a21-a26").withImageX(1596).withImageY(160),
+				new Stand().withName("gaming land גיימינג לנד").withType(StandType.COMP_GAMES).withLocationName("a28-a32").withImageX(2007).withImageY(160),
+				new Stand().withName("Anime Wave").withType(StandType.MERCH).withLocationName("a33-a38").withImageX(2368).withImageY(160),
+				new Stand().withName("נאגטס ברוטב יאק").withType(StandType.ARTIST).withLocationName("a39").withImageX(120).withImageY(411),
+				new Stand().withName("Cherry Maki’s art").withType(StandType.ARTIST).withLocationName("a40").withImageX(120).withImageY(480),
+				new Stand().withName("D is for Devil Art").withType(StandType.ARTIST).withLocationName("a41").withImageX(120).withImageY(550),
+				new Stand().withName("DUN&YLM").withType(StandType.ARTIST).withLocationName("a42").withImageX(120).withImageY(614),
+				new Stand().withName("hzdoodle").withType(StandType.ARTIST).withLocationName("a43").withImageX(2560).withImageY(411),
+				new Stand().withName("היקום המקביל").withType(StandType.ARTIST).withLocationName("a44").withImageX(2560).withImageY(480),
+				new Stand().withName("Vered Rose Art").withType(StandType.ARTIST).withLocationName("a45-a46").withImageX(2560).withImageY(582),
+				new Stand().withName("ראש בועה").withType(StandType.ARTIST).withLocationName("b01").withImageX(1052).withImageY(507),
+				new Stand().withName("Jewishicequeen").withType(StandType.ARTIST).withLocationName("b02").withImageX(1052).withImageY(572),
+				new Stand().withName("ShinyBoar").withType(StandType.ARTIST).withLocationName("b03").withImageX(1052).withImageY(645),
+				new Stand().withName("0levaot").withType(StandType.ARTIST).withLocationName("b04").withImageX(1052).withImageY(710),
+				new Stand().withName("MaikelKing").withType(StandType.ARTIST).withLocationName("b05").withImageX(964).withImageY(843),
+				new Stand().withName("Smatan Gold").withType(StandType.ARTIST).withLocationName("b06").withImageX(897).withImageY(843),
+				new Stand().withName("מריונטה").withType(StandType.ARTIST).withLocationName("b07-b08").withImageX(794).withImageY(843),
+				new Stand().withName("Kip, Eve & Co.").withType(StandType.ARTIST).withLocationName("b09").withImageX(646).withImageY(777),
+				new Stand().withName("Firefliesjar").withType(StandType.ARTIST).withLocationName("b10").withImageX(646).withImageY(711),
+				new Stand().withName("Paint the poli").withType(StandType.ARTIST).withLocationName("b11").withImageX(646).withImageY(640),
+				new Stand().withName("Meiiior").withType(StandType.ARTIST).withLocationName("b12").withImageX(646).withImageY(572),
+				new Stand().withName("Almogolan Art").withType(StandType.ARTIST).withLocationName("b13-b14").withImageX(646).withImageY(468),
+				new Stand().withName("בועת מחשבה - פאנזין אנימה ישראלי").withType(StandType.MANGA).withLocationName("b15").withImageX(711).withImageY(375),
+				new Stand().withName("Animlilo").withType(StandType.ARTIST).withLocationName("b16").withImageX(780).withImageY(375),
+				new Stand().withName("Yahav-Art").withType(StandType.ARTIST).withLocationName("b17-b18").withImageX(879).withImageY(375),
+				new Stand().withName("Khal tamim").withType(StandType.ARTIST).withLocationName("b19").withImageX(1524).withImageY(510),
+				new Stand().withName("Fishiebug").withType(StandType.ARTIST).withLocationName("b20-b21").withImageX(1524).withImageY(610),
+				new Stand().withName("OHMILK").withType(StandType.ARTIST).withLocationName("b22-b23").withImageX(1524).withImageY(750),
+				new Stand().withName("Galosaur").withType(StandType.ARTIST).withLocationName("b24-b25").withImageX(1425).withImageY(843),
+				new Stand().withName("adelistic").withType(StandType.ARTIST).withLocationName("b26").withImageX(1322).withImageY(843),
+				new Stand().withName("OdeChan Art").withType(StandType.ARTIST).withLocationName("b27").withImageX(1257).withImageY(843),
+				new Stand().withName("Kukeshii").withType(StandType.ARTIST).withLocationName("b28").withImageX(1185).withImageY(734),
+				new Stand().withName("Starving Artists").withType(StandType.ARTIST).withLocationName("b29").withImageX(1185).withImageY(674),
+				new Stand().withName("FoxisDrawing").withType(StandType.ARTIST).withLocationName("b30").withImageX(1185).withImageY(598),
+				new Stand().withName("Ela.ME.art").withType(StandType.ARTIST).withLocationName("b31").withImageX(1185).withImageY(532),
+				new Stand().withName("rexpan's shop").withType(StandType.ARTIST).withLocationName("b32").withImageX(1185).withImageY(465),
+				new Stand().withName("הדוכן של Devo").withType(StandType.ARTIST).withLocationName("b33").withImageX(1256).withImageY(374),
+				new Stand().withName("DorinDraws / Happy Pixel ").withType(StandType.ARTIST).withLocationName("b34").withImageX(1323).withImageY(374),
+				new Stand().withName("Monstergame").withType(StandType.ARTIST).withLocationName("b35").withImageX(1390).withImageY(374),
+				new Stand().withName("AniArt").withType(StandType.ARTIST).withLocationName("b36").withImageX(1461).withImageY(374),
+				new Stand().withName("דוכן האמן של ליאן").withType(StandType.ARTIST).withLocationName("b37").withImageX(1827).withImageY(374),
+				new Stand().withName("Catswing").withType(StandType.ARTIST).withLocationName("b38").withImageX(1899).withImageY(374),
+				new Stand().withName("omriozanart").withType(StandType.ARTIST).withLocationName("b39-b40").withImageX(1996).withImageY(374),
+				new Stand().withName("Shir K art").withType(StandType.ARTIST).withLocationName("b41-b42").withImageX(2097).withImageY(470),
+				new Stand().withName("orchibald art").withType(StandType.ARTIST).withLocationName("b43-b44").withImageX(2097).withImageY(609),
+				new Stand().withName("kirumart + natraingerect").withType(StandType.ARTIST).withLocationName("b45-b46").withImageX(2097).withImageY(741),
+				new Stand().withName("mirrorshards").withType(StandType.ARTIST).withLocationName("b47-b48").withImageX(1946).withImageY(843),
+				new Stand().withName("popatochisp").withType(StandType.ARTIST).withLocationName("b49").withImageX(1846).withImageY(843),
+				new Stand().withName("Bakenekomimi").withType(StandType.ARTIST).withLocationName("b50").withImageX(1779).withImageY(843),
+				new Stand().withName("Inimi draws! Art by Maayan Elbaz").withType(StandType.ARTIST).withLocationName("b51").withImageX(1660).withImageY(710),
+				new Stand().withName("DEWTOOTH").withType(StandType.ARTIST).withLocationName("b52").withImageX(1660).withImageY(642),
+				new Stand().withName("Dinosaur chicken").withType(StandType.ARTIST).withLocationName("b53").withImageX(1660).withImageY(573),
+				new Stand().withName("Demochym").withType(StandType.ARTIST).withLocationName("b54").withImageX(1660).withImageY(504)
+			);
     }
 
     @Override
