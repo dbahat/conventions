@@ -96,8 +96,8 @@
         <item name="eventAlertsIcon">@drawable/cami2019_alerts_icon</item>
         <!-- Map Screen -->
         <item name="mapBackground">@drawable/cami2019_map_background</item>
-        <item name="standIconColor">@color/cami2019_tan</item>
-        <item name="standsTypeTitleColor">@color/cami2019_tan</item>
+        <item name="standIconColor">@color/cami2019_dark_yellow</item>
+        <item name="standsTypeTitleColor">@color/cami2019_dark_yellow</item>
         <item name="locationDetailsBackground">@color/white</item>
         <item name="locationDetailsTopLineColor">@color/black</item>
         <item name="locationDetailsTitleColor">@color/black</item>
