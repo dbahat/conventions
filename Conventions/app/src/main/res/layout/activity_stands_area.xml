@@ -20,17 +20,16 @@
             android:layout_height="wrap_content"/>
     </pl.polidea.view.ZoomView>
 
-    <com.tonicartos.widget.stickygridheaders.StickyGridHeadersGridView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/standsList"
         android:layout_width="match_parent"
-        android:numColumns="2"
         android:horizontalSpacing="5dp"
         android:verticalSpacing="3dp"
         android:gravity="center_vertical"
         android:layout_height="0dp"
         android:layout_weight="1">
 
-    </com.tonicartos.widget.stickygridheaders.StickyGridHeadersGridView>
+    </androidx.recyclerview.widget.RecyclerView>
 
     <View
         android:layout_width="match_parent"

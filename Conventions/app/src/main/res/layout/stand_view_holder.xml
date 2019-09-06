@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/stand_name"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     app:compoundDrawableWidth="24dp"
     app:compoundDrawableHeight="24dp"
     android:drawablePadding="5dp"
