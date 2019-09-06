@@ -110,7 +110,7 @@
                         android:id="@+id/alarm_icon"
                         android:layout_width="wrap_content"
                         android:layout_height="18dp"
-                        android:src="@drawable/ic_action_alarms"
+                        android:src="?eventAlertsIcon"
                         android:visibility="gone"
                         />
 
@@ -126,13 +126,12 @@
 
             </LinearLayout>
 
-            <ImageView
+            <amai.org.conventions.customviews.AspectRatioImageView
+                android:id="@+id/eventFavoriteIcon"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:id="@+id/eventFavoriteIcon"
                 android:layout_above="@+id/bottom_layout"
-                android:layout_alignParentEnd="true"
-                android:src="@drawable/ic_star_black_24dp"/>
+                android:layout_alignParentEnd="true"/>
 
             <TextView
                 android:id="@+id/eventName"

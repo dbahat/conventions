@@ -54,8 +54,11 @@
         <attr name="eventFavoriteIcon" format="integer|reference"/>
         <attr name="eventNonFavoriteColor" format="color|reference"/>
         <attr name="eventFavoriteColor" format="color|reference"/>
+        <attr name="eventAlertsIcon" format="integer|reference"/>
         <attr name="eventDetailsColor" format="color|reference"/>
         <attr name="eventSendFeedbackColor" format="color|reference"/>
+        <attr name="eventSentFeedbackColor" format="color|reference"/>
+        <attr name="eventFeedbackDefaultColor" format="color|reference"/>
         <!-- About screen -->
         <attr name="aboutLogo" format="integer"/>
         <attr name="aboutLogoMargins" format="dimension"/>
