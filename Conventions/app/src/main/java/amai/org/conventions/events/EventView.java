@@ -3,8 +3,6 @@ package amai.org.conventions.events;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
@@ -25,6 +23,8 @@ import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Strings;
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import sff.org.conventions.R;
 
 public class EventView extends FrameLayout {

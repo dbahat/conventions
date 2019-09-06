@@ -3,8 +3,6 @@ package amai.org.conventions.secondhand;
 import android.content.DialogInterface;
 import android.graphics.PorterDuff;
 import android.os.AsyncTask;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +16,8 @@ import amai.org.conventions.model.SecondHandItem;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Strings;
+import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.RecyclerView;
 import sff.org.conventions.R;
 
 class SecondHandItemSellViewHolder extends RecyclerView.ViewHolder {

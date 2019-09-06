@@ -1,12 +1,12 @@
 package amai.org.conventions;
 
 import android.os.Bundle;
-import android.support.annotation.StringRes;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
 
 import amai.org.conventions.navigation.NavigationActivity;
+import androidx.annotation.StringRes;
 import fi.iki.kuitsi.listtest.ListTagHandler;
 import sff.org.conventions.R;
 
@@ -23,7 +23,8 @@ public abstract class WebContentActivity extends NavigationActivity {
 			webContentContainer.setMovementMethod(LinkMovementMethod.getInstance());
 		}
 	}
-	protected abstract @StringRes int getPageTitleResourceId();
+	protected abstract @StringRes
+	int getPageTitleResourceId();
 	protected abstract @StringRes int getWebContentResourceId();
 
 	public static class AccessibilityActivity extends WebContentActivity {

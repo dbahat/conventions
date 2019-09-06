@@ -1,11 +1,11 @@
 package amai.org.conventions.secondhand;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.SecondHandForm;
+import androidx.recyclerview.widget.RecyclerView;
 import sff.org.conventions.R;
 
 class SecondHandFormViewHolder extends RecyclerView.ViewHolder {

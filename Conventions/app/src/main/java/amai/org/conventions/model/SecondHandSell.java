@@ -1,8 +1,6 @@
 package amai.org.conventions.model;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -28,6 +26,8 @@ import amai.org.conventions.utils.ConventionStorage;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.HttpConnectionCreator;
 import amai.org.conventions.utils.Log;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import sff.org.conventions.R;
 
 public class SecondHandSell extends SecondHand {

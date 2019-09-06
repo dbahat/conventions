@@ -1,12 +1,12 @@
 package amai.org.conventions.model;
 
-import android.support.annotation.NonNull;
 import android.text.Html;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import amai.org.conventions.utils.Log;
+import androidx.annotation.NonNull;
 
 class SecondHand {
 	private static final String TAG = SecondHand.class.getCanonicalName();

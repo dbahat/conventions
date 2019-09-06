@@ -2,7 +2,6 @@ package amai.org.conventions.secondhand;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +15,7 @@ import java.util.Map;
 import amai.org.conventions.model.SecondHandForm;
 import amai.org.conventions.model.SecondHandItem;
 import amai.org.conventions.model.conventions.Convention;
+import androidx.appcompat.app.AlertDialog;
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 import sff.org.conventions.R;
 

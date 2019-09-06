@@ -1,9 +1,6 @@
 package amai.org.conventions.events.adapters;
 
 import android.content.res.ColorStateList;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.CompoundButtonCompat;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +14,9 @@ import java.util.List;
 
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.SearchFilter;
+import androidx.core.content.ContextCompat;
+import androidx.core.widget.CompoundButtonCompat;
+import androidx.recyclerview.widget.RecyclerView;
 import sff.org.conventions.R;
 
 public class SearchFiltersAdapter extends BaseAdapter implements StickyGridHeadersSimpleAdapter {

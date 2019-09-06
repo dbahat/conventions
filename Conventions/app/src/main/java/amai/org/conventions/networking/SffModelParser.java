@@ -1,6 +1,5 @@
 package amai.org.conventions.networking;
 
-import android.support.annotation.NonNull;
 import android.text.Html;
 import android.text.TextUtils;
 
@@ -23,6 +22,7 @@ import amai.org.conventions.model.Hall;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
+import androidx.annotation.NonNull;
 
 public class SffModelParser implements ModelParser {
 	private static final String TAG = SffModelParser.class.getCanonicalName();

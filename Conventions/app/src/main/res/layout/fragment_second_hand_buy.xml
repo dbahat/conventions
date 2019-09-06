@@ -174,7 +174,7 @@
             </FrameLayout>
         </LinearLayout>
 
-        <android.support.v4.widget.SwipeRefreshLayout
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/second_hand_buy_swipe_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -203,7 +203,7 @@
                     android:textSize="@dimen/text_size_large_material"
                     android:visibility="gone" />
             </FrameLayout>
-        </android.support.v4.widget.SwipeRefreshLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </LinearLayout>
 

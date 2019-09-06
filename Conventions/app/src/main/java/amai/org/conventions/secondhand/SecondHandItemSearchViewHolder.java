@@ -1,7 +1,6 @@
 package amai.org.conventions.secondhand;
 
 import android.graphics.PorterDuff;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -9,6 +8,7 @@ import android.widget.TextView;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.SecondHandItem;
 import amai.org.conventions.utils.Strings;
+import androidx.recyclerview.widget.RecyclerView;
 import sff.org.conventions.R;
 
 class SecondHandItemSearchViewHolder extends RecyclerView.ViewHolder {
