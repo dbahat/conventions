@@ -9,16 +9,16 @@
         <item name="actionOverflowButtonStyle">@style/OverflowMenu.Icon2019</item>
         <!-- General -->
         <item name="android:textColorPrimary">@color/black</item>
-        <item name="colorAccent">@color/icon2019_pink1</item>
+        <item name="colorAccent">@color/icon2019_pink2</item>
         <item name="android:colorBackground">@null</item>
-        <item name="android:textColorLink">@color/icon2019_pink1</item>
+        <item name="android:textColorLink">@color/icon2019_pink2</item>
         <item name="actionButtonColor">@color/icon2019_pink1</item>
         <item name="swipeToRefreshColor">@color/white</item>
         <item name="swipeToRefreshBackgroundColor">@color/icon2019_pink1</item>
         <item name="snackbarActionColor">@color/icon2019_pink1</item>
         <item name="highlightedButtonBackground">@drawable/icon2019_highlighted_button</item>
         <item name="highlightedButtonTextColor">@color/white</item>
-        <item name="borderlessButtonColor">@color/icon2019_pink1</item>
+        <item name="borderlessButtonColor">@color/icon2019_pink2</item>
         <item name="activitiesBackground">@drawable/icon2019_background</item>
         <item name="eventListDivider">@drawable/icon2019_event_list_divider</item>
         <item name="conflictingEventListDivider">@android:color/transparent</item>
@@ -26,7 +26,7 @@
         <item name="separatorColor">@android:color/black</item>
 
         <!-- Tabs -->
-        <item name="selectedTabIndicatorColor">@color/icon2019_pink1</item>
+        <item name="selectedTabIndicatorColor">@color/icon2019_pink2</item>
         <item name="unselectedTabTextColor">@color/black</item>
         <item name="selectedTabTextColor">@color/black</item>
 
@@ -34,7 +34,7 @@
         <item name="notificationSmallIcon">@drawable/icon2019_notification_small</item>
         <!-- Toolbar -->
         <item name="toolbarBackground">@null</item>
-        <item name="toolbarIconAccentColor">@color/icon2019_pink1</item>
+        <item name="toolbarIconAccentColor">@color/icon2019_pink2</item>
         <!-- Navigation Popup -->
         <item name="navigationPopupBackground">@color/icon2019_cyan1</item>
         <item name="navigationPopupTitle">@drawable/icon2019_navigation_title</item>
@@ -106,7 +106,7 @@
         <item name="eventTitleBackground">@drawable/icon2019_event_title</item>
         <item name="eventTitleTextColor">@color/black</item>
         <item name="eventDetailsHighlightedTextColor">@color/icon2019_pink1</item>
-        <item name="eventActivityFavoriteColor">@color/icon2019_pink1</item>
+        <item name="eventActivityFavoriteColor">@color/icon2019_pink2</item>
         <item name="feedbackButtonColor">@color/white</item>
         <!-- Feedback Screen -->
         <item name="progressBarDrawable">@drawable/icon2019_rotating_circular_progress_bar</item>
@@ -117,8 +117,9 @@
         <item name="eventTimeHeaderDefaultTextColor">@color/black</item>
         <item name="eventTimeHeaderBackground">@null</item>
         <!-- Programme Search Screen -->
-        <item name="eventNameKeywordHighlightColor">@color/icon2019_pink1</item>
-        <item name="eventKeywordHighlightColor">@color/icon2019_pink1</item>
+        <item name="eventNameKeywordHighlightColor">@color/icon2019_violet2</item>
+        <item name="eventKeywordHighlightColor">@color/icon2019_pink2</item>
+        <item name="searchDrawerAccentColor">@color/icon2019_pink1</item>
         <!-- Second Hand Screen -->
         <item name="secondHandFormOpenColor">?eventTypeNotStartedColor</item>
         <item name="secondHandFormClosedColor">?eventTypeEndedColor</item>
@@ -147,11 +148,13 @@
         <item name="android:windowNoTitle">true</item>
         <item name="colorAccent">@color/icon2019_pink1</item>
         <item name="android:textColorPrimary">@color/black</item>
+        <item name="borderlessButtonColor">@color/icon2019_pink1</item>
     </style>
 
     <style name="AppAlertDialogTheme.Icon2019" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorAccent">@color/icon2019_pink1</item>
         <item name="android:textColorPrimary">@color/black</item>
+        <item name="borderlessButtonColor">@color/icon2019_pink1</item>
     </style>
 
     <style name="AppBaseTheme.Icon2019.Toolbar.Splash">

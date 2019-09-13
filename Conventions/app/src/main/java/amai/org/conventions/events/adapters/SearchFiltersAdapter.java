@@ -99,7 +99,7 @@ public class SearchFiltersAdapter extends BaseAdapter implements StickyGridHeade
 			super(itemView);
 
 			filterName = (TextView) itemView.findViewById(R.id.search_filter_item_name);
-			checkBox = (CheckBox) itemView.findViewById(R.id.search_filter_item_checkbox);
+			checkBox = itemView.findViewById(R.id.search_filter_item_checkbox);
 
 			itemView.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -117,7 +117,7 @@ public class SearchFiltersAdapter extends BaseAdapter implements StickyGridHeade
 					},
 					new int[]{
 							ContextCompat.getColor(itemView.getContext(), R.color.even_darker_gray),
-							ThemeAttributes.getColor(itemView.getContext(), R.attr.colorAccent)
+							ThemeAttributes.getColor(itemView.getContext(), R.attr.searchDrawerAccentColor)
 					});
 			CompoundButtonCompat.setButtonTintList(this.checkBox, checkboxColors);
 		}

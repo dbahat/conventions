@@ -158,6 +158,8 @@
         <attr name="eventTimeHeaderBackground" format="color|reference"/>
         <attr name="eventTimeHeaderDefaultTextColor" format="color|reference"/>
         <attr name="fabOnProgrammeTop" format="boolean"/>
+        <!-- Programme Search Screen -->
+        <attr name="searchDrawerAccentColor" format="color|reference"/>
         <!-- Event Survey Dialog -->
         <attr name="eventSurveyTextColor" format="color|reference"/>
         <!-- Icons -->
