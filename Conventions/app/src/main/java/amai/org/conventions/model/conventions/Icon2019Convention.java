@@ -67,6 +67,8 @@ public class Icon2019Convention extends SffConvention {
 
 	private static final String API_SLUG = "icon2019";
 	private static final String TEST_API_SLUG = "test_con";
+	private static final String YAD2_API = "https://api.sf-f.org.il/yad2/";
+	private static final String TEST_YAD2_API = "https://test.api.sf-f.org.il/yad2/";
 
 	@Override
 	protected ConventionStorage initStorage() {
@@ -563,7 +565,7 @@ public class Icon2019Convention extends SffConvention {
 	@Override
 	public URL getSecondHandFormURL(String id) {
 		try {
-			return new URL("https://api.sf-f.org.il/yad2/form?formId=" + URLEncoder.encode(id, "UTF-8"));
+			return new URL(YAD2_API + "form?formId=" + URLEncoder.encode(id, "UTF-8"));
 		} catch (MalformedURLException|UnsupportedEncodingException e) {
 			return null;
 		}
@@ -579,7 +581,7 @@ public class Icon2019Convention extends SffConvention {
 					throw new RuntimeException(e);
 				}
 			}));
-			return new URL("https://api.sf-f.org.il/yad2/form?formIds=" + idsParam);
+			return new URL(YAD2_API + "form?formIds=" + idsParam);
 		} catch (MalformedURLException|RuntimeException e) {
 			return null;
 		}
@@ -588,7 +590,7 @@ public class Icon2019Convention extends SffConvention {
 	@Override
 	public URL getSecondHandItemsURL(SecondHandItem.Status status) {
 		try {
-			return new URL("https://api.sf-f.org.il/yad2/allItems?status=" + status.getServerStatus());
+			return new URL(YAD2_API + "allItems?status=" + status.getServerStatus());
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
