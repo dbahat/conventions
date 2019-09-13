@@ -39,8 +39,8 @@
         <item name="navigationPopupBackground">@color/icon2019_cyan1</item>
         <item name="navigationPopupTitle">@drawable/icon2019_navigation_title</item>
         <item name="navigationPopupBottomImage">@null</item>
-        <item name="navigationPopupNotSelectedColor">@color/white</item>
-        <item name="navigationPopupSelectedColor">@color/black</item>
+        <item name="navigationPopupNotSelectedColor">@color/black</item>
+        <item name="navigationPopupSelectedColor">@color/icon2019_violet2</item>
         <item name="navigationPopupSeparatorColor">@color/black</item>
         <!-- About Screen -->
         <item name="aboutLogo">@drawable/icon2019_home_logo</item>
