@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppBaseTheme.Icon2019.Toolbar"/>
+    <style name="AppBaseTheme.Icon2019" parent="AppBaseTheme.Light">
+        <!-- Sub-themes -->
+        <item name="android:dialogTheme">@style/AppDialogTheme.Icon2019</item>
+        <item name="alertDialogTheme">@style/AppAlertDialogTheme.Icon2019</item>
+        <!-- not using android:actionOverflowButtonStyle since it doesn't seem to work in Jellybean -->
+        <item name="actionOverflowButtonStyle">@style/OverflowMenu.Icon2019</item>
+        <!-- General -->
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="colorAccent">@color/icon2019_pink1</item>
+        <item name="android:colorBackground">@null</item>
+        <item name="android:textColorLink">@color/icon2019_pink1</item>
+        <item name="actionButtonColor">@color/icon2019_pink1</item>
+        <item name="swipeToRefreshColor">@color/white</item>
+        <item name="swipeToRefreshBackgroundColor">@color/icon2019_pink1</item>
+        <item name="snackbarActionColor">@color/icon2019_pink1</item>
+        <item name="highlightedButtonBackground">@drawable/icon2019_highlighted_button</item>
+        <item name="highlightedButtonTextColor">@color/white</item>
+        <item name="borderlessButtonColor">@color/icon2019_pink1</item>
+        <item name="activitiesBackground">@drawable/icon2019_background</item>
+        <item name="eventListDivider">@drawable/icon2019_event_list_divider</item>
+        <item name="conflictingEventListDivider">@android:color/transparent</item>
+        <item name="hintTextColor">@color/white</item>
+        <item name="separatorColor">@android:color/black</item>
+
+        <!-- Tabs -->
+        <item name="selectedTabIndicatorColor">@color/icon2019_pink1</item>
+        <item name="unselectedTabTextColor">@color/black</item>
+        <item name="selectedTabTextColor">@color/black</item>
+
+        <!-- Notifications -->
+        <item name="notificationSmallIcon">@drawable/icon2019_notification_small</item>
+        <!-- Toolbar -->
+        <item name="toolbarBackground">@null</item>
+        <item name="toolbarIconAccentColor">@color/icon2019_pink1</item>
+        <!-- Navigation Popup -->
+        <item name="navigationPopupBackground">@color/icon2019_cyan1</item>
+        <item name="navigationPopupTitle">@drawable/icon2019_navigation_title</item>
+        <item name="navigationPopupBottomImage">@null</item>
+        <item name="navigationPopupNotSelectedColor">@color/white</item>
+        <item name="navigationPopupSelectedColor">@color/black</item>
+        <item name="navigationPopupSeparatorColor">@color/black</item>
+        <!-- About Screen -->
+        <item name="aboutLogo">@drawable/icon2019_home_logo</item>
+        <!-- Home Screen -->
+        <item name="homeBoxTopMargin">0dp</item>
+        <item name="homeSingleButtonTopMargin">10dp</item>
+        <item name="homeButtonsSideMargin">15dp</item>
+        <item name="homeBackground">@drawable/icon2019_background</item>
+        <item name="homeLogo">@drawable/icon2019_home_logo</item>
+        <item name="homeLogoMargin">0dp</item>
+        <item name="homeToolbarTitle">@null</item>
+        <item name="homeTitleBackground">@color/icon2019_pink2</item>
+        <item name="homeTitleText">@color/black</item>
+        <item name="homeMessageBackground">@color/icon2019_violet1</item>
+        <item name="homeMessageText">@color/white</item>
+        <item name="homeCurrentEventText">@color/black</item>
+        <item name="homeCurrentEventBackground">@color/icon2019_cyan2</item>
+        <item name="homeUpcomingEventBackground">@color/icon2019_violet1</item>
+        <item name="homeButtonBackground">@drawable/icon2019_home_activity_button</item>
+        <item name="homeButtonText">@color/white</item>
+        <item name="homeBottomImage">@null</item>
+        <item name="homeEventNameInList">@color/white</item>
+        <item name="homeEventsListDivider">@drawable/icon2019_home_event_list_divider</item>
+        <!-- Event View -->
+        <item name="eventTypeEndedColor">@color/icon2019_violet1</item>
+        <item name="eventTypeCurrentColor">@color/icon2019_pink2</item>
+        <item name="eventTypeNotStartedColor">@color/black</item>
+        <item name="eventTimeDefaultTextColor">@color/white</item>
+        <item name="eventTimeDefaultBackgroundColor">@color/icon2019_violet2</item>
+        <item name="eventDetailsColor">@color/black</item>
+        <item name="eventSendFeedbackColor">@color/icon2019_pink2</item>
+        <item name="eventNonFavoriteColor">@color/black</item>
+        <item name="eventFavoriteColor">@color/icon2019_pink2</item>
+        <!-- Map Screen -->
+        <item name="locationDetailsBackground">@color/white</item>
+        <item name="locationDetailsTitleColor">@color/black</item>
+        <item name="mapBackground">@drawable/icon2019_background</item>
+        <item name="standIconColor">@color/black</item>
+        <item name="standsTypeTitleColor">@color/black</item>
+        <!-- Updates Screen -->
+        <item name="focusedUpdateBackground">@android:color/transparent</item>
+        <item name="newUpdateBackground">@android:color/transparent</item>
+        <item name="updateItemBorder">@color/black</item>
+        <item name="updateTextColor">@color/black</item>
+        <item name="newUpdateTextColor">@color/icon2019_violet1</item>
+        <item name="focusedUpdateTextColor">@color/icon2019_pink2</item>
+        <item name="updateItemSeparator">@null</item>
+        <item name="updateTimeBackground">@color/icon2019_violet2</item>
+        <item name="updateTimeColor">@color/white</item>
+        <item name="updatesBackgroundDrawable">@drawable/icon2019_background</item>
+        <!-- My Events Screen -->
+        <item name="nextEventStartTimeBackground">@color/transparent_black</item>
+        <item name="nextEventStartTimeTextColor">@color/white</item>
+        <item name="nextEventStartTimeBottomLineColor">@android:color/transparent</item>
+        <item name="conflictingEventsBackground">@color/transparent_black</item>
+        <!-- Event Screen -->
+        <item name="eventToolbarColor">@color/icon2019_blue2</item>
+        <item name="eventDetailsDefaultBackgroundColor">@color/icon2019_blue2</item>
+        <item name="eventDetailsBoxColor">@color/icon2019_pink2</item>
+        <item name="eventFeedbackBoxColor">@color/icon2019_pink1</item>
+        <item name="eventFeedbackTextColor">@color/white</item>
+        <item name="eventDescriptionTextColor">@color/black</item>
+        <item name="eventTitleBackground">@drawable/icon2019_event_title</item>
+        <item name="eventTitleTextColor">@color/black</item>
+        <item name="eventDetailsHighlightedTextColor">@color/icon2019_pink1</item>
+        <item name="eventActivityFavoriteColor">@color/icon2019_pink1</item>
+        <item name="feedbackButtonColor">@color/white</item>
+        <!-- Feedback Screen -->
+        <item name="progressBarDrawable">@drawable/icon2019_rotating_circular_progress_bar</item>
+        <item name="feedbackAnswerButtonColor">@color/icon2019_violet2</item>
+        <item name="feedbackAnswerButtonSelectedColor">@color/icon2019_pink2</item>
+        <item name="conventionFeedbackTextColor">@color/black</item>
+        <!-- Programme Screen -->
+        <item name="eventTimeHeaderDefaultTextColor">@color/black</item>
+        <item name="eventTimeHeaderBackground">@null</item>
+        <!-- Programme Search Screen -->
+        <item name="eventNameKeywordHighlightColor">@color/icon2019_pink1</item>
+        <item name="eventKeywordHighlightColor">@color/icon2019_pink1</item>
+        <!-- Second Hand Screen -->
+        <item name="secondHandFormOpenColor">?eventTypeNotStartedColor</item>
+        <item name="secondHandFormClosedColor">?eventTypeEndedColor</item>
+        <item name="secondHandItemDefaultColor">?secondHandFormOpenColor</item>
+        <item name="secondHandItemCreatedColor">?secondHandFormClosedColor</item>
+        <item name="secondHandItemSoldColor">@color/icon2019_pink2</item>
+        <item name="secondHandItemMissingColor">@color/icon2019_pink1</item>
+        <item name="secondHandItemsDivider">@drawable/icon2019_second_hand_item_list_divider</item>
+        <item name="secondHandFilterColor">?android:textColorPrimary</item>
+        <!-- Discounts activity -->
+        <item name="discountsActivityLayout">@layout/olamot2019_activity_discounts</item>
+    </style>
+
+    <style name="AppBaseTheme.Icon2019.Toolbar.Event" parent="AppBaseTheme.Icon2019.Toolbar">
+        <item name="android:textColorLink">@color/icon2019_pink1</item>
+    </style>
+
+    <style name="AppBaseTheme.Icon2019.Toolbar.Settings" parent="AppBaseTheme.Icon2019.Toolbar">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorSecondary">@color/black</item>
+    </style>
+
+
+    <style name="AppDialogTheme.Icon2019" parent="Theme.AppCompat.Light.Dialog">
+        <!-- This is the default starting API23. In any case the title is always left-justified so it's best to not use it. -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="colorAccent">@color/icon2019_pink1</item>
+        <item name="android:textColorPrimary">@color/black</item>
+    </style>
+
+    <style name="AppAlertDialogTheme.Icon2019" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/icon2019_pink1</item>
+        <item name="android:textColorPrimary">@color/black</item>
+    </style>
+
+    <style name="AppBaseTheme.Icon2019.Toolbar.Splash">
+        <item name="android:windowBackground">@drawable/icon2019_background</item>
+    </style>
+    <style name="OverflowMenu.Icon2019" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_more_vert_black_24dp</item>
+    </style>
+</resources>

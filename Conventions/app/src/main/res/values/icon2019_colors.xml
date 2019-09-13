@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="icon2019_blue">#1c1868</color>
+    <color name="icon2019_violet1">#574ace</color>
+    <color name="icon2019_violet2">#8543ff</color>
+    <color name="icon2019_pink1">#d643ff</color>
+    <color name="icon2019_cyan1">#69b2f9</color>
+    <color name="icon2019_cyan2">#a1e2ff</color>
+    <color name="icon2019_pink2">#fcd6e5</color>
+    
+    <color name="icon2019_blue2">#5779d0</color>
+    
     <color name="olamot2019_blue">#1B75BB</color>
     <color name="olamot2019_grey1">#231F20</color>
     <color name="olamot2019_grey2">#6A6B6C</color>
@@ -8,8 +18,6 @@
     <color name="olamot2019_yellow3">#F0CB8B</color>
     <color name="olamot2019_yellow4">#FAE4BF</color>
     <color name="olamot2019_brown1">#965744</color>
-    <color name="olamot2019_brown2">#A25C4A</color>
-    <color name="olamot2019_brown3">#B2684C</color>
     <color name="olamot2019_brown4">#D5987E</color>
 
     <color name="olamot2019_yellow5">#fff5e3</color>

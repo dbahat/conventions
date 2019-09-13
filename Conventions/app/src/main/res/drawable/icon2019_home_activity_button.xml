@@ -2,17 +2,17 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
-            <solid android:color="@color/olamot2019_blue2"/>
+            <solid android:color="@color/icon2019_violet2"/>
         </shape>
     </item>
     <item android:state_enabled="false">
         <shape android:shape="rectangle">
-            <solid android:color="@color/olamot2019_grey2"/>
+            <solid android:color="@color/icon2019_pink2"/>
         </shape>
     </item>
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="@color/olamot2019_blue"/>
+            <solid android:color="@color/icon2019_pink1"/>
         </shape>
     </item>
 </selector>

@@ -9,7 +9,7 @@
                android:insetRight="@dimen/button_inset_horizontal_material"
                android:insetBottom="@dimen/button_inset_vertical_material">
             <shape android:shape="rectangle">
-                <solid android:color="@color/olamot2019_blue2"/>
+                <solid android:color="@color/icon2019_cyan1"/>
                 <padding android:left="@dimen/button_padding_horizontal_material"
                     android:top="@dimen/button_padding_vertical_material"
                     android:right="@dimen/button_padding_horizontal_material"
@@ -26,7 +26,7 @@
             android:insetRight="@dimen/button_inset_horizontal_material"
             android:insetBottom="@dimen/button_inset_vertical_material">
             <shape android:shape="rectangle">
-                <solid android:color="@color/olamot2019_grey2"/>
+                <solid android:color="@color/icon2019_pink2"/>
                 <padding android:left="@dimen/button_padding_horizontal_material"
                     android:top="@dimen/button_padding_vertical_material"
                     android:right="@dimen/button_padding_horizontal_material"
@@ -43,7 +43,7 @@
             android:insetRight="@dimen/button_inset_horizontal_material"
             android:insetBottom="@dimen/button_inset_vertical_material">
             <shape android:shape="rectangle">
-                <solid android:color="@color/olamot2019_blue"/>
+                <solid android:color="@color/icon2019_violet1"/>
                 <padding android:left="@dimen/button_padding_horizontal_material"
                     android:top="@dimen/button_padding_vertical_material"
                     android:right="@dimen/button_padding_horizontal_material"
