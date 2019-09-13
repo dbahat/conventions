@@ -103,7 +103,7 @@
                 android:textColor="?homeMessageText"
                 android:textStyle="bold"
                 app:autoSizeTextType="uniform"
-                app:autoSizeMinTextSize="20sp"
+                app:autoSizeMinTextSize="14sp"
                 app:autoSizeMaxTextSize="70sp"
                 app:autoSizeStepGranularity="2sp"
                 android:layout_marginTop="8dp"
