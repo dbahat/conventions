@@ -50,6 +50,7 @@
     <string name="about_app_content"><![CDATA[
 האפליקציה פותחה על ידי דוד בהט וטל ספן עבור פסטיבל אייקון. בקשות והצעות ניתן לכתוב <a href="market://details?id=sff.org.conventions">בדף האפליקציה בחנות</a>.
 <br/>תודות: איתמר ריינר, אלי בויום, גליה בהט.
+<p><a href=\"http://2019.iconfestival.org.il/app\">להצהרת הפרטיות</a></p>
 ]]></string>
     <!-- Copied from http://2019.iconfestival.org.il/info/transportation-parking/
     The only changes are removing some spans (with style and font-family) and escaping ' -->
