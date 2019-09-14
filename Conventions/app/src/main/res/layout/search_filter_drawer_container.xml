@@ -51,7 +51,7 @@
         android:paddingTop="5dp"
         android:paddingBottom="5dp" />
 
-    <com.tonicartos.widget.stickygridheaders.StickyGridHeadersGridView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_filters_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

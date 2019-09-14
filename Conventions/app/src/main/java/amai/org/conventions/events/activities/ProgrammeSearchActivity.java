@@ -1,5 +1,6 @@
 package amai.org.conventions.events.activities;
 
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -13,8 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
-import com.tonicartos.widget.stickygridheaders.StickyGridHeadersGridView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -37,6 +36,8 @@ import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Views;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 import sff.org.conventions.R;
 
@@ -128,7 +129,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 			}
 		});
 
-		final SearchFiltersAdapter searchFiltersAdapter = new SearchFiltersAdapter(sortedFilters);
+		final SearchFiltersAdapter searchFiltersAdapter = new SearchFiltersAdapter(sortedFilters, getResources());
 		searchFiltersAdapter.setOnFilterChangeListener(new SearchFiltersAdapter.OnFilterChangeListener() {
 					@Override
 					public void onFilterStateChanged(SearchFilter searchFilter) {
@@ -137,10 +138,20 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 					}
 				});
 
-		StickyGridHeadersGridView searchFiltersList = (StickyGridHeadersGridView) findViewById(R.id.search_filters_list);
-		searchFiltersList.setAreHeadersSticky(false);
-		searchFiltersList.setNumColumns(2);
-		searchFiltersList.setAdapter(searchFiltersAdapter);
+		RecyclerView searchFiltersList = findViewById(R.id.search_filters_list);
+		searchFiltersList.setLayoutManager(new GridLayoutManager(this, 2));
+
+		SectionedGridRecyclerViewAdapter sectionedSearchFiltersAdapter = new
+				SectionedGridRecyclerViewAdapter(this,
+				R.layout.search_filter_header, R.id.search_filter_header_title,
+				Color.TRANSPARENT,
+				searchFiltersList, searchFiltersAdapter);
+
+		SectionedGridRecyclerViewAdapter.Section[] sectionArray = new SectionedGridRecyclerViewAdapter.Section[searchFiltersAdapter.getSections().size()];
+		sectionedSearchFiltersAdapter.setSections(searchFiltersAdapter.getSections().toArray(sectionArray));
+
+		searchFiltersList.setAdapter(sectionedSearchFiltersAdapter);
+
 
 		final Button editAllButton = (Button) findViewById(R.id.search_filter_drawer_container_edit_all_button);
 		editAllButton.setOnClickListener(new View.OnClickListener() {

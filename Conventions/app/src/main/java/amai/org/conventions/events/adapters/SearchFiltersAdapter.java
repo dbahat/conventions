@@ -1,31 +1,68 @@
 package amai.org.conventions.events.adapters;
 
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import com.tonicartos.widget.stickygridheaders.StickyGridHeadersSimpleAdapter;
-
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import amai.org.conventions.ThemeAttributes;
+import amai.org.conventions.events.activities.SectionedGridRecyclerViewAdapter;
 import amai.org.conventions.model.SearchFilter;
+import amai.org.conventions.utils.CollectionUtils;
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.CompoundButtonCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import sff.org.conventions.R;
 
-public class SearchFiltersAdapter extends BaseAdapter implements StickyGridHeadersSimpleAdapter {
+public class SearchFiltersAdapter extends RecyclerView.Adapter<SearchFiltersAdapter.ViewHolder> {
 
 	private List<SearchFilter> searchFilters;
 	private OnFilterChangeListener onFilterChangeListener;
+	private List<SectionedGridRecyclerViewAdapter.Section> sections;
 
-	public SearchFiltersAdapter(List<SearchFilter> searchFilters) {
-		this.searchFilters = searchFilters;
+	public SearchFiltersAdapter(List<SearchFilter> searchFilters, Resources resources) {
+		setFiltersAndSections(searchFilters, resources);
+	}
+
+	private void setFiltersAndSections(List<SearchFilter> searchFilters, Resources resources) {
+		Map<SearchFilter.Type, List<SearchFilter>> searchFilterTypeToSearchFilterList = CollectionUtils.groupBy(
+				searchFilters,
+				SearchFilter::getType,
+				(accumulate, currentItem) -> {
+					if (accumulate == null) {
+						List<SearchFilter> searchFiltersList = new ArrayList<>();
+						searchFiltersList.add(currentItem);
+						return searchFiltersList;
+					} else {
+						accumulate.add(currentItem);
+						return accumulate;
+					}
+				}
+		);
+		List<Map.Entry<SearchFilter.Type, List<SearchFilter>>> searchFilterTypeToSearchFilterElements = new ArrayList<>(searchFilterTypeToSearchFilterList.entrySet());
+
+		List<SectionedGridRecyclerViewAdapter.Section> sections = new ArrayList<>();
+		int indexInList = 0;
+		for (Map.Entry<SearchFilter.Type, List<SearchFilter>> entry : searchFilterTypeToSearchFilterElements) {
+			sections.add(new SectionedGridRecyclerViewAdapter.Section(
+					indexInList,
+					resources.getString(entry.getKey().getDescriptionStringId())
+			));
+			indexInList += entry.getValue().size();
+		}
+
+		List<List<SearchFilter>> searchFiltersAfterGrouping = CollectionUtils.map(searchFilterTypeToSearchFilterElements, Map.Entry::getValue);
+		this.searchFilters = CollectionUtils.flatMap(searchFiltersAfterGrouping);
+		this.sections = sections;
+
 	}
 
 	public void setAllFilters(boolean enabled) {
@@ -39,34 +76,8 @@ public class SearchFiltersAdapter extends BaseAdapter implements StickyGridHeade
 		this.onFilterChangeListener = onFilterChangeListener;
 	}
 
-	@Override
-	public long getHeaderId(int position) {
-		return searchFilters.get(position).getType().ordinal();
-	}
-
-	@Override
-	public View getHeaderView(int position, View convertView, ViewGroup parent) {
-		HeaderViewHolder viewHolder;
-		if (convertView == null) {
-			convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_filter_header, parent, false);
-			viewHolder = new HeaderViewHolder(convertView);
-			convertView.setTag(viewHolder);
-		} else {
-			viewHolder = (HeaderViewHolder) convertView.getTag();
-		}
-		viewHolder.bind(searchFilters.get(position).getType());
-
-		return convertView;
-	}
-
-	@Override
-	public int getCount() {
-		return searchFilters.size();
-	}
-
-	@Override
-	public Object getItem(int position) {
-		return searchFilters.get(position);
+	public List<SectionedGridRecyclerViewAdapter.Section> getSections() {
+		return sections;
 	}
 
 	@Override
@@ -74,19 +85,21 @@ public class SearchFiltersAdapter extends BaseAdapter implements StickyGridHeade
 		return position;
 	}
 
+	@NonNull
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		ViewHolder viewHolder;
-		if (convertView == null) {
-			convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_filter_item, parent, false);
-			viewHolder = new ViewHolder(convertView, onFilterChangeListener);
-			convertView.setTag(viewHolder);
-		} else {
-			viewHolder = (ViewHolder) convertView.getTag();
-		}
+	public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_filter_item, parent, false);
+		return new ViewHolder(view, onFilterChangeListener);
+	}
 
-		viewHolder.bind(searchFilters.get(position));
-		return convertView;
+	@Override
+	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+		holder.bind(searchFilters.get(position));
+	}
+
+	@Override
+	public int getItemCount() {
+		return searchFilters.size();
 	}
 
 	public static class ViewHolder extends RecyclerView.ViewHolder {
