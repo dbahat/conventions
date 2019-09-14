@@ -33,6 +33,7 @@ import java.util.Date;
 import java.util.List;
 
 import amai.org.conventions.ConventionsApplication;
+import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.adapters.DayFragmentAdapter;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
@@ -43,6 +44,7 @@ import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.app.ShareCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -96,7 +98,8 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		setupActionButton(R.drawable.ic_add_white, new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				View dialogView = getLayoutInflater().inflate(R.layout.login_layout, null, false);
+				ContextThemeWrapper context = new ContextThemeWrapper(MyEventsActivity.this, ThemeAttributes.getResourceId(MyEventsActivity.this, R.attr.alertDialogTheme));
+				View dialogView = View.inflate(context, R.layout.login_layout, null);
 				final EditText userNameTextView = dialogView.findViewById(R.id.user_name);
 				final EditText passwordTextView = dialogView.findViewById(R.id.password);
 				AlertDialog dialog = new AlertDialog.Builder(MyEventsActivity.this)

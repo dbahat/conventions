@@ -20,6 +20,7 @@ import amai.org.conventions.utils.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.widget.ListViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -101,7 +102,8 @@ public class SecondHandSellFragment extends Fragment implements SwipeRefreshLayo
 		context.setupActionButton(R.drawable.ic_add_white, new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				View dialogView = getLayoutInflater().inflate(R.layout.dialog_edit_text_layout, null, false);
+				ContextThemeWrapper context = new ContextThemeWrapper(getActivity(), ThemeAttributes.getResourceId(getActivity(), R.attr.alertDialogTheme));
+				View dialogView = View.inflate(context, R.layout.dialog_edit_text_layout, null);
 				final EditText formIdText = dialogView.findViewById(R.id.dialog_edit_text);
 				formIdText.setInputType(InputType.TYPE_CLASS_NUMBER);
 				AlertDialog dialog = new AlertDialog.Builder(getActivity())
