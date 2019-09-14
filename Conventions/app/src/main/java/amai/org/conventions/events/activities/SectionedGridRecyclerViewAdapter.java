@@ -1,6 +1,7 @@
 package amai.org.conventions.events.activities;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,17 +11,15 @@ import android.widget.TextView;
 import java.util.Arrays;
 import java.util.Comparator;
 
-import amai.org.conventions.ThemeAttributes;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import sff.org.conventions.R;
 
 /**
  * Copied from https://gist.github.com/gabrielemariotti/e81e126227f8a4bb339c
  *
  * @author Gabriele Mariotti (gabri.mariotti@gmail.com)
  */
-public class StandsSectionedGridRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class SectionedGridRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final Context mContext;
     private static final int SECTION_TYPE = 0;
@@ -28,18 +27,20 @@ public class StandsSectionedGridRecyclerViewAdapter extends RecyclerView.Adapter
     private boolean mValid = true;
     private int mSectionResourceId;
     private int mTextResourceId;
+    private int titleColor;
     private LayoutInflater mLayoutInflater;
     private RecyclerView.Adapter mBaseAdapter;
     private SparseArray<Section> mSections = new SparseArray<Section>();
     private RecyclerView mRecyclerView;
 
 
-    public StandsSectionedGridRecyclerViewAdapter(Context context, int sectionResourceId, int textResourceId, RecyclerView recyclerView,
-                                                  RecyclerView.Adapter baseAdapter) {
+    public SectionedGridRecyclerViewAdapter(Context context, int sectionResourceId, int textResourceId, int titleColor,
+                                            RecyclerView recyclerView, RecyclerView.Adapter baseAdapter) {
 
         mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mSectionResourceId = sectionResourceId;
         mTextResourceId = textResourceId;
+        this.titleColor = titleColor;
         mBaseAdapter = baseAdapter;
         mContext = context;
         mRecyclerView = recyclerView;
@@ -84,11 +85,13 @@ public class StandsSectionedGridRecyclerViewAdapter extends RecyclerView.Adapter
 
         public TextView title;
 
-        public SectionViewHolder(View view, int mTextResourceid) {
+        public SectionViewHolder(View view, int mTextResourceid, int titleColor) {
             super(view);
             title = (TextView) view.findViewById(mTextResourceid);
-            // ** Change from the original sample - get the text color from the theme **
-            title.setTextColor(ThemeAttributes.getColor(view.getContext(), R.attr.standsTypeTitleColor));
+            // ** Change from the original sample - set defined text color if requested **
+            if (titleColor != Color.TRANSPARENT) {
+                title.setTextColor(titleColor);
+            }
         }
     }
 
@@ -96,7 +99,7 @@ public class StandsSectionedGridRecyclerViewAdapter extends RecyclerView.Adapter
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int typeView) {
         if (typeView == SECTION_TYPE) {
             final View view = LayoutInflater.from(mContext).inflate(mSectionResourceId, parent, false);
-            return new SectionViewHolder(view,mTextResourceId);
+            return new SectionViewHolder(view,mTextResourceId, titleColor);
         }else{
             return mBaseAdapter.onCreateViewHolder(parent, typeView -1);
         }

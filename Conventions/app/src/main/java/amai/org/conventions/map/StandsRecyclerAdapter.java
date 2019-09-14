@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import sff.org.conventions.R;
-import amai.org.conventions.events.activities.StandsSectionedGridRecyclerViewAdapter;
+import amai.org.conventions.events.activities.SectionedGridRecyclerViewAdapter;
 import amai.org.conventions.model.Stand;
 import amai.org.conventions.utils.CollectionUtils;
 import androidx.annotation.NonNull;
@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class StandsRecyclerAdapter extends RecyclerView.Adapter<StandViewHolder> {
     private final boolean showLocations;
     private List<Stand> stands;
-    private List<StandsSectionedGridRecyclerViewAdapter.Section> sections;
+    private List<SectionedGridRecyclerViewAdapter.Section> sections;
     private boolean colorImages;
     private String selectedStandName;
     private OnClickListener onClickListener;
@@ -48,10 +48,10 @@ public class StandsRecyclerAdapter extends RecyclerView.Adapter<StandViewHolder>
         );
         List<Map.Entry<Stand.StandType, List<Stand>>> standTypeToStandsElements = new ArrayList<>(standTypeToStandsMap.entrySet());
 
-        List<StandsSectionedGridRecyclerViewAdapter.Section> sections = new ArrayList<>();
+        List<SectionedGridRecyclerViewAdapter.Section> sections = new ArrayList<>();
         int indexInList = 0;
         for (Map.Entry<Stand.StandType, List<Stand>> entry : standTypeToStandsElements) {
-            sections.add(new StandsSectionedGridRecyclerViewAdapter.Section(
+            sections.add(new SectionedGridRecyclerViewAdapter.Section(
                     indexInList,
                     resources.getString(entry.getKey().getTitle())
             ));
@@ -67,7 +67,7 @@ public class StandsRecyclerAdapter extends RecyclerView.Adapter<StandViewHolder>
         return stands;
     }
 
-    public List<StandsSectionedGridRecyclerViewAdapter.Section> getSections() {
+    public List<SectionedGridRecyclerViewAdapter.Section> getSections() {
         return sections;
     }
 
