@@ -4,17 +4,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.TextView;
-
-import com.tonicartos.widget.stickygridheaders.StickyGridHeadersSimpleAdapter;
 
 import java.util.List;
 
-import sff.org.conventions.R;
-import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.Stand;
+import sff.org.conventions.R;
 
-public class StandsAdapter extends BaseAdapter implements StickyGridHeadersSimpleAdapter {
+public class StandsAdapter extends BaseAdapter {
 	private final boolean showLocations;
 	private List<Stand> stands;
 	private boolean colorImages;
@@ -65,32 +61,4 @@ public class StandsAdapter extends BaseAdapter implements StickyGridHeadersSimpl
 		holder.setStand(stand, selectedStandName != null && selectedStandName.equals(stand.getName()));
 		return convertView;
 	}
-
-	@Override
-	public long getHeaderId(int position) {
-		return stands.get(position).getType().ordinal();
-	}
-
-	@Override
-	public View getHeaderView(int position, View convertView, ViewGroup parent) {
-		final HeaderViewHolder holder;
-		if (convertView == null) {
-			convertView = LayoutInflater.from(parent.getContext()).inflate(android.R.layout.simple_list_item_1, parent, false);
-			holder = new HeaderViewHolder();
-			holder.textView = (TextView) convertView.findViewById(android.R.id.text1);
-			holder.textView.setTextColor(ThemeAttributes.getColor(parent.getContext(), R.attr.standsTypeTitleColor));
-			convertView.setTag(holder);
-		} else {
-			holder = (HeaderViewHolder) convertView.getTag();
-		}
-
-		Stand stand = stands.get(position);
-		holder.textView.setText(stand.getType().getTitle());
-		return convertView;
-	}
-
-	protected class HeaderViewHolder {
-		public TextView textView;
-	}
-
 }
