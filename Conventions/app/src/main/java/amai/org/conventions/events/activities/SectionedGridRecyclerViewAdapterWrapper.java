@@ -1,50 +1,39 @@
 package amai.org.conventions.events.activities;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.util.SparseArray;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
+import amai.org.conventions.events.adapters.SectionedRecyclerViewAdapter;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
- * Copied from https://gist.github.com/gabrielemariotti/e81e126227f8a4bb339c
+ * Copied with changes from https://gist.github.com/gabrielemariotti/e81e126227f8a4bb339c
  *
  * @author Gabriele Mariotti (gabri.mariotti@gmail.com)
+ *
+ * Use as the adapter of a sectioned recycler view by wrapping the inner adapter.
  */
-public class SectionedGridRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class SectionedGridRecyclerViewAdapterWrapper<T, S,
+            IVH extends RecyclerView.ViewHolder, SVH extends RecyclerView.ViewHolder,
+            A extends SectionedRecyclerViewAdapter<T, S, IVH, SVH>>
+        extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private final Context mContext;
     private static final int SECTION_TYPE = 0;
 
     private boolean mValid = true;
-    private int mSectionResourceId;
-    private int mTextResourceId;
-    private int titleColor;
-    private LayoutInflater mLayoutInflater;
-    private RecyclerView.Adapter mBaseAdapter;
-    private SparseArray<Section> mSections = new SparseArray<Section>();
-    private RecyclerView mRecyclerView;
+    private A mBaseAdapter;
+    private SparseArray<Section<S>> mSections = new SparseArray<>();
 
 
-    public SectionedGridRecyclerViewAdapter(Context context, int sectionResourceId, int textResourceId, int titleColor,
-                                            RecyclerView recyclerView, RecyclerView.Adapter baseAdapter) {
-
-        mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mSectionResourceId = sectionResourceId;
-        mTextResourceId = textResourceId;
-        this.titleColor = titleColor;
+    public SectionedGridRecyclerViewAdapterWrapper(RecyclerView recyclerView, A baseAdapter) {
         mBaseAdapter = baseAdapter;
-        mContext = context;
-        mRecyclerView = recyclerView;
-
         mBaseAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onChanged() {
@@ -71,15 +60,21 @@ public class SectionedGridRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
             }
         });
 
-        final GridLayoutManager layoutManager = (GridLayoutManager)(mRecyclerView.getLayoutManager());
+        final GridLayoutManager layoutManager = (GridLayoutManager)(recyclerView.getLayoutManager());
         layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
                 return (isSectionHeaderPosition(position))? layoutManager.getSpanCount() : 1 ;
             }
         });
+
+        SectionedGridRecyclerViewAdapterWrapper.Section<S>[] sectionArray = new SectionedGridRecyclerViewAdapterWrapper.Section[mBaseAdapter.getSections().size()];
+        this.setSections(mBaseAdapter.getSections().toArray(sectionArray));
     }
 
+    public A getBaseAdapter() {
+        return mBaseAdapter;
+    }
 
     public static class SectionViewHolder extends RecyclerView.ViewHolder {
 
@@ -96,10 +91,10 @@ public class SectionedGridRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
     }
 
     @Override
+    @NonNull
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int typeView) {
         if (typeView == SECTION_TYPE) {
-            final View view = LayoutInflater.from(mContext).inflate(mSectionResourceId, parent, false);
-            return new SectionViewHolder(view,mTextResourceId, titleColor);
+            return mBaseAdapter.onCreateSectionViewHolder(parent, typeView);
         }else{
             return mBaseAdapter.onCreateViewHolder(parent, typeView -1);
         }
@@ -108,10 +103,9 @@ public class SectionedGridRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder sectionViewHolder, int position) {
         if (isSectionHeaderPosition(position)) {
-            SectionViewHolder viewHolder = (SectionViewHolder) sectionViewHolder;
-            viewHolder.title.setText(mSections.get(position).title);
+            mBaseAdapter.onBindSectionViewHolder((SVH) sectionViewHolder, mSections.get(position).section);
         }else{
-            mBaseAdapter.onBindViewHolder(sectionViewHolder,sectionedPositionToPosition(position));
+            mBaseAdapter.onBindViewHolder((IVH) sectionViewHolder, sectionedPositionToPosition(position));
         }
     }
 
@@ -123,36 +117,27 @@ public class SectionedGridRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
     }
 
 
-    public static class Section {
+    public static class Section<S> {
         int firstPosition;
         int sectionedPosition;
-        CharSequence title;
+        S section;
 
-        public Section(int firstPosition, CharSequence title) {
+        public Section(int firstPosition, S section) {
             this.firstPosition = firstPosition;
-            this.title = title;
-        }
-
-        public CharSequence getTitle() {
-            return title;
+            this.section = section;
         }
     }
 
 
-    public void setSections(Section[] sections) {
+    public void setSections(Section<S>[] sections) {
         mSections.clear();
 
-        Arrays.sort(sections, new Comparator<Section>() {
-            @Override
-            public int compare(Section o, Section o1) {
-                return (o.firstPosition == o1.firstPosition)
-                        ? 0
-                        : ((o.firstPosition < o1.firstPosition) ? -1 : 1);
-            }
-        });
+        Arrays.sort(sections, (o, o1) -> (o.firstPosition == o1.firstPosition)
+                ? 0
+                : ((o.firstPosition < o1.firstPosition) ? -1 : 1));
 
         int offset = 0; // offset positions for the headers we're adding
-        for (Section section : sections) {
+        for (Section<S> section : sections) {
             section.sectionedPosition = section.firstPosition + offset;
             mSections.append(section.sectionedPosition, section);
             ++offset;

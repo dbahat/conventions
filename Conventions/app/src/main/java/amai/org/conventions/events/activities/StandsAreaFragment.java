@@ -16,7 +16,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.map.StandsRecyclerAdapter;
 import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.StandsArea;
@@ -45,7 +44,7 @@ public class StandsAreaFragment extends DialogFragment {
     private StandsRecyclerAdapter standsAdapter;
     // Using RecyclerView with custom adapter since sticky headers GridView didn't
     // properly support scrollToPosition
-    private SectionedGridRecyclerViewAdapter sectionedStandsAdapter;
+    private SectionedGridRecyclerViewAdapterWrapper sectionedStandsAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,18 +78,10 @@ public class StandsAreaFragment extends DialogFragment {
                 }
             });
 
-            standsAdapter = new StandsRecyclerAdapter(stands, true, area.hasImageResource(), selectedStandName, getResources());
+            standsAdapter = new StandsRecyclerAdapter(stands, true, area.hasImageResource(), selectedStandName);
             standsList.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
-            sectionedStandsAdapter = new
-                    SectionedGridRecyclerViewAdapter(getContext(),
-                    android.R.layout.simple_list_item_1, android.R.id.text1,
-                    ThemeAttributes.getColor(view.getContext(), R.attr.standsTypeTitleColor),
-                    standsList, standsAdapter);
-
-            SectionedGridRecyclerViewAdapter.Section[] sectionArray = new SectionedGridRecyclerViewAdapter.Section[standsAdapter.getSections().size()];
-            sectionedStandsAdapter.setSections(standsAdapter.getSections().toArray(sectionArray));
-
+            sectionedStandsAdapter = new SectionedGridRecyclerViewAdapterWrapper<>(standsList, standsAdapter);
             standsList.setAdapter(sectionedStandsAdapter);
 
             if (area.hasImageResource()) {
