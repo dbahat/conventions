@@ -1,6 +1,5 @@
 package amai.org.conventions.events.activities;
 
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -19,7 +18,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
@@ -118,39 +116,24 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 		}
 
 		List<SearchFilter> sortedFilters = new ArrayList<>(searchFilters);
-		Collections.sort(sortedFilters, new Comparator<SearchFilter>() {
-			@Override
-			public int compare(SearchFilter filter, SearchFilter other) {
-				if (filter.getType().equals(other.getType())) {
-					return filter.getName().compareTo(other.getName());
-				}
-
-				return filter.getType().ordinal() - other.getType().ordinal();
+		Collections.sort(sortedFilters, (filter, other) -> {
+			if (filter.getType().equals(other.getType())) {
+				return filter.getName().compareTo(other.getName());
 			}
-		});
 
-		final SearchFiltersAdapter searchFiltersAdapter = new SearchFiltersAdapter(sortedFilters, getResources());
-		searchFiltersAdapter.setOnFilterChangeListener(new SearchFiltersAdapter.OnFilterChangeListener() {
-					@Override
-					public void onFilterStateChanged(SearchFilter searchFilter) {
-						searchFilters.add(searchFilter);
-						applyFiltersInBackground();
-					}
-				});
+			return filter.getType().ordinal() - other.getType().ordinal();
+		});
 
 		RecyclerView searchFiltersList = findViewById(R.id.search_filters_list);
 		searchFiltersList.setLayoutManager(new GridLayoutManager(this, 2));
 
-		SectionedGridRecyclerViewAdapter sectionedSearchFiltersAdapter = new
-				SectionedGridRecyclerViewAdapter(this,
-				R.layout.search_filter_header, R.id.search_filter_header_title,
-				Color.TRANSPARENT,
-				searchFiltersList, searchFiltersAdapter);
+		final SearchFiltersAdapter searchFiltersAdapter = new SearchFiltersAdapter(sortedFilters);
+		searchFiltersAdapter.setOnFilterChangeListener(searchFilter -> {
+			searchFilters.add(searchFilter);
+			applyFiltersInBackground();
+		});
 
-		SectionedGridRecyclerViewAdapter.Section[] sectionArray = new SectionedGridRecyclerViewAdapter.Section[searchFiltersAdapter.getSections().size()];
-		sectionedSearchFiltersAdapter.setSections(searchFiltersAdapter.getSections().toArray(sectionArray));
-
-		searchFiltersList.setAdapter(sectionedSearchFiltersAdapter);
+		searchFiltersList.setAdapter(new SectionedGridRecyclerViewAdapterWrapper<>(searchFiltersList, searchFiltersAdapter));
 
 
 		final Button editAllButton = (Button) findViewById(R.id.search_filter_drawer_container_edit_all_button);

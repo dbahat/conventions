@@ -8,81 +8,34 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import amai.org.conventions.ThemeAttributes;
-import amai.org.conventions.events.activities.SectionedGridRecyclerViewAdapter;
+import amai.org.conventions.events.activities.SectionedGridRecyclerViewAdapterWrapper;
 import amai.org.conventions.model.SearchFilter;
-import amai.org.conventions.utils.CollectionUtils;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.CompoundButtonCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import sff.org.conventions.R;
 
-public class SearchFiltersAdapter extends RecyclerView.Adapter<SearchFiltersAdapter.ViewHolder> {
+public class SearchFiltersAdapter extends SectionedRecyclerViewAdapter<SearchFilter, SearchFilter.Type, SearchFiltersAdapter.ViewHolder, SearchFiltersAdapter.SectionViewHolder> {
 
 	private List<SearchFilter> searchFilters;
 	private OnFilterChangeListener onFilterChangeListener;
-	private List<SectionedGridRecyclerViewAdapter.Section> sections;
+	private List<SectionedGridRecyclerViewAdapterWrapper.Section> sections;
 
-	public SearchFiltersAdapter(List<SearchFilter> searchFilters, Resources resources) {
-		setFiltersAndSections(searchFilters, resources);
+	public SearchFiltersAdapter(List<SearchFilter> searchFilters) {
+		super(searchFilters);
 	}
 
-	private void setFiltersAndSections(List<SearchFilter> searchFilters, Resources resources) {
-		Map<SearchFilter.Type, List<SearchFilter>> searchFilterTypeToSearchFilterList = CollectionUtils.groupBy(
-				searchFilters,
-				SearchFilter::getType,
-				(accumulate, currentItem) -> {
-					if (accumulate == null) {
-						List<SearchFilter> searchFiltersList = new ArrayList<>();
-						searchFiltersList.add(currentItem);
-						return searchFiltersList;
-					} else {
-						accumulate.add(currentItem);
-						return accumulate;
-					}
-				}
-		);
-		List<Map.Entry<SearchFilter.Type, List<SearchFilter>>> searchFilterTypeToSearchFilterElements = new ArrayList<>(searchFilterTypeToSearchFilterList.entrySet());
-
-		List<SectionedGridRecyclerViewAdapter.Section> sections = new ArrayList<>();
-		int indexInList = 0;
-		for (Map.Entry<SearchFilter.Type, List<SearchFilter>> entry : searchFilterTypeToSearchFilterElements) {
-			sections.add(new SectionedGridRecyclerViewAdapter.Section(
-					indexInList,
-					resources.getString(entry.getKey().getDescriptionStringId())
-			));
-			indexInList += entry.getValue().size();
-		}
-
-		List<List<SearchFilter>> searchFiltersAfterGrouping = CollectionUtils.map(searchFilterTypeToSearchFilterElements, Map.Entry::getValue);
-		this.searchFilters = CollectionUtils.flatMap(searchFiltersAfterGrouping);
-		this.sections = sections;
-
-	}
-
-	public void setAllFilters(boolean enabled) {
-		for (SearchFilter filter : searchFilters) {
-			filter.withActive(enabled);
-		}
-		notifyDataSetChanged();
+	@Override
+	protected SearchFilter.Type getSection(SearchFilter item) {
+		return item.getType();
 	}
 
 	public void setOnFilterChangeListener(OnFilterChangeListener onFilterChangeListener) {
 		this.onFilterChangeListener = onFilterChangeListener;
-	}
-
-	public List<SectionedGridRecyclerViewAdapter.Section> getSections() {
-		return sections;
-	}
-
-	@Override
-	public long getItemId(int position) {
-		return position;
 	}
 
 	@NonNull
@@ -94,12 +47,19 @@ public class SearchFiltersAdapter extends RecyclerView.Adapter<SearchFiltersAdap
 
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-		holder.bind(searchFilters.get(position));
+		holder.bind(getItems().get(position));
 	}
 
 	@Override
-	public int getItemCount() {
-		return searchFilters.size();
+	public SectionViewHolder onCreateSectionViewHolder(ViewGroup parent, int typeView) {
+		final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_filter_header, parent, false);
+		return new SectionViewHolder(view, R.id.search_filter_header_title);
+	}
+
+	@Override
+	public void onBindSectionViewHolder(SectionViewHolder sectionViewHolder, SearchFilter.Type section) {
+		Resources resources = sectionViewHolder.title.getResources();
+		sectionViewHolder.title.setText(resources.getString(section.getDescriptionStringId()));
 	}
 
 	public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -114,13 +74,10 @@ public class SearchFiltersAdapter extends RecyclerView.Adapter<SearchFiltersAdap
 			filterName = (TextView) itemView.findViewById(R.id.search_filter_item_name);
 			checkBox = itemView.findViewById(R.id.search_filter_item_checkbox);
 
-			itemView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					searchFilter.withActive(!searchFilter.isActive());
-					checkBox.setChecked(!checkBox.isChecked());
-					onFilterChangeListener.onFilterStateChanged(searchFilter);
-				}
+			itemView.setOnClickListener(view -> {
+				searchFilter.withActive(!searchFilter.isActive());
+				checkBox.setChecked(!checkBox.isChecked());
+				onFilterChangeListener.onFilterStateChanged(searchFilter);
 			});
 
 			ColorStateList checkboxColors = new ColorStateList(
@@ -142,18 +99,12 @@ public class SearchFiltersAdapter extends RecyclerView.Adapter<SearchFiltersAdap
 		}
 	}
 
-	public static class HeaderViewHolder extends RecyclerView.ViewHolder {
+	public static class SectionViewHolder extends RecyclerView.ViewHolder {
+		public TextView title;
 
-		private TextView title;
-
-		public HeaderViewHolder(View itemView) {
-			super(itemView);
-
-			title = (TextView) itemView.findViewById(R.id.search_filter_header_title);
-		}
-
-		public void bind(final SearchFilter.Type searchFilterType) {
-			title.setText(searchFilterType.getDescriptionStringId());
+		public SectionViewHolder(View view, int mTextResourceid) {
+			super(view);
+			title = view.findViewById(mTextResourceid);
 		}
 	}
 
