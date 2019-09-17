@@ -16,6 +16,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -47,7 +49,7 @@ public class SecondHandBuyFragment extends Fragment implements SwipeRefreshLayou
 
 	private String keywordsFilter;
 	private String priceFilter;
-	private SortType sortType;
+	private ArrayList<SortType> sortTypes;
 
 	private List<String> categoriesFilter;
 	private boolean showAllFavorites;
@@ -61,6 +63,7 @@ public class SecondHandBuyFragment extends Fragment implements SwipeRefreshLayou
 	private TextView lastUpdate;
 	private TextView sortByName;
 	private TextView sortByPrice;
+	private TextView sortByType;
 //	private TextView categoriesButton;
 //	private TextView categoriesText;
 
@@ -74,7 +77,10 @@ public class SecondHandBuyFragment extends Fragment implements SwipeRefreshLayou
 		if (savedInstanceState != null) {
 			keywordsFilter = savedInstanceState.getString(STATE_KEYWORD_FILTER);
 			priceFilter = savedInstanceState.getString(STATE_PRICE_FILTER);
-			sortType = (SortType) savedInstanceState.getSerializable(STATE_SORT_TYPE);
+			Serializable sortTypesFromState = savedInstanceState.getSerializable(STATE_SORT_TYPE);
+			if (sortTypesFromState instanceof List) {
+				sortTypes = new ArrayList<>((List<SortType>) sortTypesFromState);
+			}
 			showAllFavorites = savedInstanceState.getBoolean(STATE_FAVORITES_FILTER);
 		}
 	}
@@ -120,7 +126,7 @@ public class SecondHandBuyFragment extends Fragment implements SwipeRefreshLayou
 		super.onSaveInstanceState(outState);
 		outState.putString(STATE_PRICE_FILTER, priceFilter);
 		outState.putString(STATE_KEYWORD_FILTER, keywordsFilter);
-		outState.putSerializable(STATE_SORT_TYPE, sortType);
+		outState.putSerializable(STATE_SORT_TYPE, sortTypes);
 		outState.putBoolean(STATE_FAVORITES_FILTER, showAllFavorites);
 	}
 
@@ -169,36 +175,21 @@ public class SecondHandBuyFragment extends Fragment implements SwipeRefreshLayou
 			priceTextBox.setText(priceFilter);
 		}
 
-		if (sortType == null) {
-			sortType = SortType.BY_NAME;
+		if (sortTypes == null || sortTypes.size() == 0) {
+			sortTypes = new ArrayList<>(3);
+			sortTypes.add(SortType.BY_NAME);
+			sortTypes.add(SortType.BY_PRICE);
+			sortTypes.add(SortType.BY_TYPE);
 		}
 
 		sortByName = view.findViewById(R.id.second_hand_buy_sort_by_name_button);
 		sortByPrice = view.findViewById(R.id.second_hand_buy_sort_by_price_button);
+		sortByType = view.findViewById(R.id.second_hand_buy_sort_by_type_button);
 
-		sortByName.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (sortType == SortType.BY_NAME) {
-					return;
-				}
-				sortType = SortType.BY_NAME;
-				updateSortButtonsColor();
-				applySortInBackground();
-			}
-		});
+		sortByName.setOnClickListener(new SortListener(SortType.BY_NAME));
+		sortByPrice.setOnClickListener(new SortListener(SortType.BY_PRICE));
+		sortByType.setOnClickListener(new SortListener(SortType.BY_TYPE));
 
-		sortByPrice.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (sortType == SortType.BY_PRICE) {
-					return;
-				}
-				sortType = SortType.BY_PRICE;
-				updateSortButtonsColor();
-				applySortInBackground();
-			}
-		});
 		updateSortButtonsColor();
 
 		final CheckBox showFavoritesCheckBox = view.findViewById(R.id.second_hand_buy_show_favorites);
@@ -215,12 +206,21 @@ public class SecondHandBuyFragment extends Fragment implements SwipeRefreshLayou
 	private void updateSortButtonsColor() {
 		int selectedColor = ThemeAttributes.getColor(getActivity(), R.attr.secondHandSelectedFilterColor);
 		int unselectedColor = ThemeAttributes.getColor(getActivity(), R.attr.secondHandFilterColor);
-		if (sortType == SortType.BY_NAME) {
-			setColor(sortByName, selectedColor);
-			setColor(sortByPrice, unselectedColor);
-		} else {
-			setColor(sortByPrice, selectedColor);
-			setColor(sortByName, unselectedColor);
+		switch (sortTypes.get(0)) {
+			case BY_PRICE:
+				setColor(sortByPrice, selectedColor);
+				setColor(sortByName, unselectedColor);
+				setColor(sortByType, unselectedColor);
+				break;
+			case BY_TYPE:
+				setColor(sortByType, selectedColor);
+				setColor(sortByPrice, unselectedColor);
+				setColor(sortByName, unselectedColor);
+				break;
+			default:
+				setColor(sortByName, selectedColor);
+				setColor(sortByPrice, unselectedColor);
+				setColor(sortByType, unselectedColor);
 		}
 	}
 
@@ -325,40 +325,59 @@ public class SecondHandBuyFragment extends Fragment implements SwipeRefreshLayou
 	}
 
 	private void applySort(List<SecondHandItem> items) {
-		final SortType sortType = this.sortType;
-		Collections.sort(items, new Comparator<SecondHandItem>() {
-			@Override
-			public int compare(SecondHandItem item1, SecondHandItem item2) {
-				// Sort order:
-				// 1. if showAllFavorites is selected, favorites are first
-				// 2. Sort type - name or price (according to the selected sort type)
-				// 3. Item ID (to keep a consistent order, since it's unique)
-				int result = 0;
-				if (showAllFavorites) {
-					// Favorites are on top if selected
-					if (secondHandBuy.isFavorite(item1) && !secondHandBuy.isFavorite(item2)) {
-						result = -1;
-					} else if (!secondHandBuy.isFavorite(item1) && secondHandBuy.isFavorite(item2)) {
-						result = 1;
-					}
-				}
-				if (result != 0) {
-					return result;
-				}
+		final List<SortType> sortTypes = new ArrayList<>(this.sortTypes);
+		final List<Comparator<SecondHandItem>> comparators = new ArrayList<>(5);
 
-				if (sortType == SortType.BY_NAME) {
-					String desc1 = item1.getDescription() == null ? "" : item1.getDescription();
-					String desc2 = item2.getDescription() == null ? "" : item2.getDescription();
-					result = desc1.compareTo(desc2);
-				} else {
-					result = item1.getPrice() - item2.getPrice();
+		// Sort order:
+		// 1. if showAllFavorites is selected, favorites are first
+		// 2. Sort type - name, price, type (according to the selected sort order)
+		// 3. Item ID (to keep a consistent order, since it's unique)
+		comparators.add((item1, item2) -> {
+			if (showAllFavorites) {
+				// Favorites are on top if selected
+				if (secondHandBuy.isFavorite(item1) && !secondHandBuy.isFavorite(item2)) {
+					return -1;
+				} else if (!secondHandBuy.isFavorite(item1) && secondHandBuy.isFavorite(item2)) {
+					return 1;
 				}
-				if (result != 0) {
-					return result;
-				}
-
-				return item1.getId().compareTo(item2.getId());
 			}
+			return 0;
+		});
+
+		for (SortType type : sortTypes) {
+			switch (type) {
+				case BY_NAME:
+					comparators.add((item1, item2) -> {
+						String desc1 = item1.getDescription() == null ? "" : item1.getDescription();
+						String desc2 = item2.getDescription() == null ? "" : item2.getDescription();
+						return desc1.compareTo(desc2);
+					});
+					break;
+				case BY_PRICE:
+					comparators.add((item1, item2) -> {
+						return item1.getPrice() - item2.getPrice();
+					});
+					break;
+				case BY_TYPE:
+					comparators.add((item1, item2) -> {
+						String type1 = item1.getType() == null ? "" : item1.getType();
+						String type2 = item2.getType() == null ? "" : item2.getType();
+						return type1.compareTo(type2);
+					});
+					break;
+			}
+		}
+
+		comparators.add((item1, item2) -> item1.getId().compareTo(item2.getId()));
+
+		Collections.sort(items, (item1, item2) -> {
+			for (Comparator<SecondHandItem> comparator : comparators) {
+				int result = comparator.compare(item1, item2);
+				if (result != 0) {
+					return result;
+				}
+			}
+			return 0;
 		});
 	}
 
@@ -455,6 +474,26 @@ public class SecondHandBuyFragment extends Fragment implements SwipeRefreshLayou
 
 	private enum SortType {
 		BY_NAME,
-		BY_PRICE;
+		BY_PRICE,
+		BY_TYPE;
+	}
+
+	private class SortListener implements View.OnClickListener {
+		private SortType type;
+
+		public SortListener(SortType type) {
+			this.type = type;
+		}
+
+		@Override
+		public void onClick(View view) {
+			if (sortTypes.get(0) == type) {
+				return;
+			}
+			sortTypes.remove(type);
+			sortTypes.add(0, type);
+			updateSortButtonsColor();
+			applySortInBackground();
+		}
 	}
 }

@@ -223,11 +223,12 @@
     <string name="second_hand_buy_categories">קטגוריות:</string>
     <string name="second_hand_sort_by_name">שם</string>
     <string name="second_hand_sort_by_price">מחיר</string>
+    <string name="second_hand_sort_by_type">סוג</string>
     <string name="second_hand_buy_no_results">לא נמצאו פריטים</string>
     <string name="second_hand_buy_search_results_number">נמצאו %d פריטים</string>
     <string name="second_hand_buy_one_search_results_number">נמצא פריט אחד</string>
     <string name="second_hand_buy_last_update_time">רשימת הפריטים נכונה ל-%s</string>
     <string name="second_hand_favorites">מועדפים</string>
     <string name="second_hand_unknown_status">לא בדוכן</string>
-    <string name="second_hand_show_favorites">הצג מועדפים בהתחלה</string>
+    <string name="second_hand_show_favorites">מועדפים בהתחלה</string>
 </resources>
