@@ -102,11 +102,11 @@ public class SecondHandSellFragment extends Fragment implements SwipeRefreshLayo
 		context.setupActionButton(R.drawable.ic_add_white, new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				ContextThemeWrapper context = new ContextThemeWrapper(getActivity(), ThemeAttributes.getResourceId(getActivity(), R.attr.alertDialogTheme));
-				View dialogView = View.inflate(context, R.layout.dialog_edit_text_layout, null);
+				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+				View dialogView = View.inflate(builder.getContext(), R.layout.dialog_edit_text_layout, null);
 				final EditText formIdText = dialogView.findViewById(R.id.dialog_edit_text);
 				formIdText.setInputType(InputType.TYPE_CLASS_NUMBER);
-				AlertDialog dialog = new AlertDialog.Builder(getActivity())
+				AlertDialog dialog = builder
 						.setTitle(R.string.add_form)
 						.setMessage(R.string.add_form_instructions)
 						.setView(dialogView)
