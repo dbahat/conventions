@@ -2,17 +2,11 @@ package amai.org.conventions.navigation;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import androidx.core.content.ContextCompat;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -20,6 +14,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -46,6 +42,12 @@ import amai.org.conventions.notifications.PushNotificationDialogPresenter;
 import amai.org.conventions.secondhand.SecondHandActivity;
 import amai.org.conventions.settings.SettingsActivity;
 import amai.org.conventions.updates.UpdatesActivity;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import sff.org.conventions.R;
 
 import static amai.org.conventions.notifications.PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION;
@@ -406,5 +408,19 @@ public abstract class NavigationActivity extends AppCompatActivity {
 			navigateToActivity(HomeActivity.class);
 		}
 		super.onBackPressed();
+	}
+
+
+	/**
+	 * Change color of menu item icon to be accented
+	 *
+	 * @param item the menu item
+	 * @return The new color
+	 */
+	protected int changeIconColor(MenuItem item) {
+		Drawable icon = item.getIcon().mutate();
+		int accentColor = ThemeAttributes.getColor(this, R.attr.toolbarIconAccentColor);
+		icon.setColorFilter(accentColor, PorterDuff.Mode.SRC_ATOP);
+		return accentColor;
 	}
 }
