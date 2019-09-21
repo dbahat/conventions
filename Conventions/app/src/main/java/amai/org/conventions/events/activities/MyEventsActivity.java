@@ -4,10 +4,13 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -44,7 +47,6 @@ import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.app.ShareCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -66,6 +68,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 	private TabLayout daysTabLayout;
 	private ViewPager daysPager;
 	private AlertDialog noEventsDialog;
+	private Menu menu;
 
 	public static List<ConventionEvent> getMyEvents() {
 		ArrayList<ConventionEvent> events = CollectionUtils.filter(
@@ -95,87 +98,134 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		int dateIndexToSelect = savedInstanceState == null ? SELECT_CURRENT_DATE : savedInstanceState.getInt(STATE_SELECTED_DATE_INDEX, SELECT_CURRENT_DATE);
 		setupDays(dateIndexToSelect);
 
-		setupActionButton(R.drawable.ic_add_white, new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				ContextThemeWrapper context = new ContextThemeWrapper(MyEventsActivity.this, ThemeAttributes.getResourceId(MyEventsActivity.this, R.attr.alertDialogTheme));
-				View dialogView = View.inflate(context, R.layout.login_layout, null);
-				final EditText userNameTextView = dialogView.findViewById(R.id.user_name);
-				final EditText passwordTextView = dialogView.findViewById(R.id.password);
-				AlertDialog dialog = new AlertDialog.Builder(MyEventsActivity.this)
-						.setTitle(R.string.add_events)
-						.setMessage(R.string.add_events_instructions)
-						.setView(dialogView)
-						.setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialogInterface, int i) {
-								final String user = userNameTextView.getText().toString();
-								final String password = passwordTextView.getText().toString();
-								final ProgressDialog progressDialog = new ProgressDialog(MyEventsActivity.this);
-								progressDialog.setMessage(getString(R.string.loading_events));
-								progressDialog.setCancelable(false);
-								progressDialog.setCanceledOnTouchOutside(false);
-								progressDialog.show();
-								new AsyncTask<Void, Void, Exception>() {
-									private int newFavoriteEventsNumber = 0;
-									@Override
-									protected Exception doInBackground(Void... params) {
-										try {
-											newFavoriteEventsNumber = addFavoriteEventsFromWebsite(user, password);
-											return null;
-										} catch (Exception e) {
-											return e;
-										}
-									}
+		setupActionButton(R.drawable.ic_add_white, view -> showAddEventsDialog());
+	}
 
-									@Override
-									protected void onPostExecute(Exception exception) {
-										progressDialog.dismiss();
-										ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
-												.setCategory("Favorites")
-												.setAction(exception == null ? "success" : "failure")
-												.setLabel("AddFromWebsite")
-												.build());
-
-										if (exception == null) {
-											// Refresh favorite events in all days
-											for (int i = 0; i < daysPager.getAdapter().getCount(); ++i) {
-												MyEventsDayFragment fragment = (MyEventsDayFragment) daysPager.getAdapter().instantiateItem(daysPager, i);
-												fragment.updateDataset();
-											}
-											setNextEventStartText(getMyEvents());
-											String message;
-											if (newFavoriteEventsNumber == 0) {
-												message = getString(R.string.no_events_added);
-											} else if (newFavoriteEventsNumber == 1) {
-												message = getString(R.string.one_event_added);
-											} else {
-												message = getString(R.string.several_events_added, newFavoriteEventsNumber);
-											}
-											Toast.makeText(MyEventsActivity.this, message, Toast.LENGTH_LONG).show();
-										} else {
-											int messageId = R.string.add_events_failed;
-											if (exception instanceof AuthenticationException) {
-												messageId = R.string.wrong_user_or_password;
-											}
-											Log.e(TAG, exception.getMessage(), exception);
-											Toast.makeText(MyEventsActivity.this, messageId, Toast.LENGTH_LONG).show();
-										}
-									}
-								}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	private void showAddEventsDialog() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(MyEventsActivity.this);
+		View dialogView = View.inflate(builder.getContext(), R.layout.login_layout, null);
+		final EditText userNameTextView = dialogView.findViewById(R.id.user_name);
+		final EditText passwordTextView = dialogView.findViewById(R.id.password);
+		AlertDialog dialog = builder
+				.setTitle(R.string.add_events)
+				.setMessage(R.string.add_events_instructions)
+				.setView(dialogView)
+				.setPositiveButton(R.string.add, (dialogInterface, i) -> {
+					final String user = userNameTextView.getText().toString();
+					final String password = passwordTextView.getText().toString();
+					final ProgressDialog progressDialog = new ProgressDialog(MyEventsActivity.this);
+					progressDialog.setMessage(getString(R.string.loading_events));
+					progressDialog.setCancelable(false);
+					progressDialog.setCanceledOnTouchOutside(false);
+					progressDialog.show();
+					new AsyncTask<Void, Void, Exception>() {
+						private int newFavoriteEventsNumber = 0;
+						private String userId;
+						private Exception userIdException;
+						@Override
+						protected Exception doInBackground(Void... params) {
+							try {
+								newFavoriteEventsNumber = addFavoriteEventsFromWebsite(user, password);
+								// If we can't get the user ID, still let the user know the events were added
+								try {
+									userId = getUserId(user, password);
+									ConventionsApplication.settings.setUserId(userId);
+								} catch (Exception ex) {
+									userIdException = ex;
+								}
+								return null;
+							} catch (Exception e) {
+								return e;
 							}
-						})
-						.setNegativeButton(R.string.cancel, null)
-						.create();
-				dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-					@Override
-					public void onShow(DialogInterface dialogInterface) {
-						userNameTextView.requestFocus();
-					}
-				});
-				dialog.show();
+						}
+
+						@Override
+						protected void onPostExecute(Exception exception) {
+							progressDialog.dismiss();
+							ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
+									.setCategory("Favorites")
+									.setAction(exception == null ? "success" : "failure")
+									.setLabel("AddFromWebsite")
+									.build());
+
+							if (exception == null) {
+								// Refresh favorite events in all days
+								for (int i = 0; i < daysPager.getAdapter().getCount(); ++i) {
+									MyEventsDayFragment fragment = (MyEventsDayFragment) daysPager.getAdapter().instantiateItem(daysPager, i);
+									fragment.updateDataset();
+								}
+								setNextEventStartText(getMyEvents());
+								String message;
+								if (newFavoriteEventsNumber == 0) {
+									message = getString(R.string.no_events_added);
+								} else if (newFavoriteEventsNumber == 1) {
+									message = getString(R.string.one_event_added);
+								} else {
+									message = getString(R.string.several_events_added, newFavoriteEventsNumber);
+								}
+								if (userIdException != null) {
+									Log.e(TAG, userIdException.getMessage(), userIdException);
+								}
+								if (userId == null || userId.isEmpty()) {
+									Toast.makeText(MyEventsActivity.this, message, Toast.LENGTH_LONG).show();
+								} else {
+									changeIconColor(menu.findItem(R.id.my_events_show_user_id));
+									showUserIdDialog(message);
+								}
+							} else {
+								int messageId = R.string.add_events_failed;
+								if (exception instanceof AuthenticationException) {
+									messageId = R.string.wrong_user_or_password;
+								}
+								Log.e(TAG, exception.getMessage(), exception);
+								Toast.makeText(MyEventsActivity.this, messageId, Toast.LENGTH_LONG).show();
+							}
+						}
+					}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				})
+				.setNegativeButton(R.string.cancel, null)
+				.create();
+		dialog.setOnShowListener(dialogInterface -> userNameTextView.requestFocus());
+		dialog.show();
+	}
+
+	private void showUserIdDialog(String firstLineMessage) {
+		String userId = ConventionsApplication.settings.getUserId();
+		if (userId != null && !userId.isEmpty()) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(MyEventsActivity.this);
+			View dialogView = View.inflate(builder.getContext(), R.layout.user_id_layout, null);
+			TextView messageView = dialogView.findViewById(R.id.message);
+			TextView userIdInst = dialogView.findViewById(R.id.show_user_id_inst);
+
+			if (firstLineMessage != null && !firstLineMessage.isEmpty()) {
+				messageView.setText(firstLineMessage);
+			} else {
+				messageView.setVisibility(View.GONE);
+				dialogView.findViewById(R.id.separator).setVisibility(View.GONE);
 			}
-		});
+
+			TextView userIdView = dialogView.findViewById(R.id.user_id);
+			userIdView.setText(userId);
+
+			userIdInst.setText(Html.fromHtml(getString(R.string.inst_user_id_in_toolbar), source -> {
+				Drawable drawable = null;
+				if ("iconUserId".equals(source)) {
+					drawable = ThemeAttributes.getDrawable(MyEventsActivity.this, R.attr.iconUserId);
+				}
+				if (drawable != null) {
+					drawable = drawable.mutate();
+					drawable.setColorFilter(userIdInst.getCurrentTextColor(), PorterDuff.Mode.SRC_ATOP);
+					drawable.setBounds(0, 0, userIdInst.getLineHeight(), userIdInst.getLineHeight());
+				}
+				return drawable;
+			}, null));
+
+			AlertDialog dialog = builder
+					.setView(dialogView)
+					.setPositiveButton(R.string.ok, null)
+					.create();
+			dialog.show();
+		}
 	}
 
 	private int addFavoriteEventsFromWebsite(String user, String password) throws Exception {
@@ -210,20 +260,10 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 				ConventionEvent event = Convention.getInstance().findEventByServerId(eventServerId);
 				if (event != null && !event.isAttending()) {
 					event.setAttending(true);
-					++newFavoriteEvents;
-				}
-				// TODO this should be inside the if !event.isAttending(), but due to a bug
-				// in version 2.2.1 the alarms were not scheduled and the events were not registered
-				// for notifications
-				if (event != null) {
 					changed = true;
 					ConventionsApplication.alarmScheduler.scheduleDefaultEventAlarms(event);
-
-					if (event.isAttending()) {
-						PushNotificationTopicsSubscriber.subscribe(event);
-					} else {
-						PushNotificationTopicsSubscriber.unsubscribe(event);
-					}
+					PushNotificationTopicsSubscriber.subscribe(event);
+					++newFavoriteEvents;
 				}
 			}
 			if (changed) {
@@ -236,6 +276,49 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 			request.disconnect();
 		}
 		return newFavoriteEvents;
+	}
+
+	private String getUserId(String user, String password) throws Exception {
+		HttpURLConnection request = Convention.getInstance().getUserIDRequest(user, password);
+		request.connect();
+		InputStream inputStream = null;
+		BufferedReader reader = null;
+		String userId = null;
+		try {
+			int responseCode = request.getResponseCode();
+			if (responseCode == 400 || responseCode == 401) {
+				throw new AuthenticationException();
+			} else if (responseCode != 200) {
+				if (BuildConfig.DEBUG) {
+					BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(request.getErrorStream()));
+					StringBuilder responseBuilder = new StringBuilder();
+					String output;
+					while ((output = bufferedReader.readLine()) != null) {
+						responseBuilder.append(output);
+					}
+					String responseBody = responseBuilder.toString();
+					Log.e(TAG, "Could not read user ID, response is: " + responseBody);
+				}
+				throw new RuntimeException("Could not read user ID, error code: " + responseCode);
+			}
+			inputStream = (InputStream) request.getContent();
+			reader = new BufferedReader(new InputStreamReader(inputStream));
+			StringBuilder responseBuilder = new StringBuilder();
+			String output;
+			while ((output = reader.readLine()) != null) {
+				responseBuilder.append(output);
+			}
+			userId = responseBuilder.toString();
+		} finally {
+			if (reader != null) {
+				reader.close();
+			}
+			if (inputStream != null) {
+				inputStream.close();
+			}
+			request.disconnect();
+		}
+		return userId;
 	}
 
 	private void setupDays(int dateIndexToSelect) {
@@ -296,6 +379,13 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 	@Override
 	public boolean onCreateCustomOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.my_events_menu, menu);
+		this.menu = menu;
+
+		String userId = ConventionsApplication.settings.getUserId();
+		if (userId != null && !userId.isEmpty()) {
+			changeIconColor(menu.findItem(R.id.my_events_show_user_id));
+		}
+
 		return true;
 	}
 
@@ -330,6 +420,18 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 				}
 
 				return true;
+			case R.id.my_events_show_user_id:
+				ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
+						.setCategory("MyEvents")
+						.setAction("ShowUserIdClicked")
+						.build());
+				String userId = ConventionsApplication.settings.getUserId();
+				if (userId != null && !userId.isEmpty()) {
+					showUserIdDialog(null);
+				} else {
+					showAddEventsDialog();
+				}
+
 		}
 
 		return super.onOptionsItemSelected(item);

@@ -216,6 +216,7 @@
     <string name="wrong_user_or_password">שם משתמש או סיסמא לא נכונים</string>
     <string name="no_events_added">לא נוספו אירועים</string>
     <string name="loading_events">מייבא אירועים…</string>
+    <string name="user_id">מספר משתמש</string>
     <string name="notification_channel_description_reminders">תזכורות הקשורות לאירועים שסימנת בתוכניה</string>
     <string name="second_hand_buy_name_filter_text">שם</string>
     <string name="second_hand_buy_price_filter_text">מחיר מקסימלי</string>
@@ -231,4 +232,9 @@
     <string name="second_hand_favorites">מועדפים</string>
     <string name="second_hand_unknown_status">לא בדוכן</string>
     <string name="second_hand_show_favorites">מועדפים בהתחלה</string>
+    <string name="show_user_id">הצג מספר משתמש</string>
+    <string name="inst_show_user_id">הצג את מספר המשתמש בקופות עבור איסוף מהיר של הכרטיסים:</string>
+    <string name="inst_user_id_in_toolbar"><![CDATA[
+ניתן לגשת למספר ע"י לחיצה על <img src="iconUserId"> בתפריט העליון
+]]></string>
 </resources>

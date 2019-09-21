@@ -619,6 +619,29 @@ public class Icon2019Convention extends SffConvention {
 		return request;
 	}
 
+	@Override
+	public HttpURLConnection getUserIDRequest(String user, String password) throws Exception {
+		URL url = new URL("https://api.sf-f.org.il/program/get_user_id.php?slug=" + API_SLUG);
+		HttpURLConnection request = HttpConnectionCreator.createConnection(url);
+		request.setRequestMethod("POST");
+		request.setDoInput(true);
+		request.setDoOutput(true);
+		OutputStream os = request.getOutputStream();
+		BufferedWriter writer = null;
+		try {
+			writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+			writer.write("email=" +
+					URLEncoder.encode(user, "UTF-8") + "&pass=" + URLEncoder.encode(password, "UTF-8"));
+			writer.flush();
+		} finally {
+			if (writer != null) {
+				writer.close();
+			}
+			os.close();
+		}
+		return request;
+	}
+
 //	@Override
 //	public ConventionEvent findEventByURL(String url) {
 //		if (url.startsWith("http://program.iconfestival.org.il/")) {

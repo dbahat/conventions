@@ -16,7 +16,7 @@
     <string name="app_name">פסטיבל אייקון</string>
     <string name="my_events_no_data">הוסף אירוע לאירועים שלי ע\"י לחיצה על הכוכב בדף האירוע או ברשימת האירועים, או ע\"י יבוא מאתר אייקון</string>
     <string name="add_events">הוספת אירועים מאתר אייקון</string>
-    <string name="add_events_instructions">הכנס שם משתמש וסיסמא לאתר אייקון על מנת להוסיף את האירועים להם קנית כרטיסים מראש.</string>
+    <string name="add_events_instructions">הכנס שם משתמש וסיסמא לאתר אייקון על מנת להוסיף את האירועים להם קנית כרטיסים מראש ולהציג את מספר המשתמש שלך.</string>
     <string name="convention_feedback_subtitle">מלא פידבק כללי על הפסטיבל - קופות, יריד הדוכנים, הפונדק וכל דבר אחר.</string>
 
     <!-- Relevant to this specific convention -->

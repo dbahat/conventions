@@ -31,6 +31,7 @@ public class Settings {
 	private static final String LAST_UPDATES_UPDATE_DATE = "LastUpdatesUpdateDate";
 	private static final String LAST_SECOND_HAND_UPDATE_DATE = "LastSecondHandUpdateDate";
 	private static final String LAST_SECOND_HAND_SEARCH_ITEMS_UPDATE_DATE = "LastSecondHandSearchItemsUpdateDate";
+	private static final String USER_ID = "UserId";
 
 	private static final String IS_ADVANCED_OPTIONS_ENABLED = "isAdvancedOptionsEnabled";
 
@@ -174,5 +175,13 @@ public class Settings {
 
 	public void setLastSecondHandSearchItemsUpdateDate() {
 		sharedPreferences.edit().putLong(LAST_SECOND_HAND_SEARCH_ITEMS_UPDATE_DATE, Dates.now().getTime()).apply();
+	}
+
+	public String getUserId() {
+		return sharedPreferences.getString(USER_ID, null);
+	}
+
+	public void setUserId(String userId) {
+		sharedPreferences.edit().putString(USER_ID, userId).apply();
 	}
 }

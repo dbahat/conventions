@@ -6,6 +6,13 @@
     tools:ignore="AlwaysShowAction">
 
     <item
+        android:id="@+id/my_events_show_user_id"
+        android:title="@string/show_user_id"
+        android:icon="?iconUserId"
+        android:orderInCategory="1"
+        app:showAsAction="always"/>
+
+    <item
         android:id="@+id/my_events_share"
         android:title="@string/my_events_share"
         android:icon="?iconShare"

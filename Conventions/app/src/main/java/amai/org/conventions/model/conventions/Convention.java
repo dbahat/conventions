@@ -2,8 +2,6 @@ package amai.org.conventions.model.conventions;
 
 import android.content.Context;
 import android.graphics.Color;
-import androidx.annotation.Nullable;
-import androidx.annotation.VisibleForTesting;
 
 import java.io.Serializable;
 import java.net.HttpURLConnection;
@@ -55,6 +53,8 @@ import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Objects;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import sff.org.conventions.BuildConfig;
 
 public abstract class Convention implements Serializable {
@@ -219,6 +219,8 @@ public abstract class Convention implements Serializable {
 	public abstract URL getSecondHandItemsURL(SecondHandItem.Status status);
 
 	public abstract HttpURLConnection getUserPurchasedEventsRequest(String user, String password) throws Exception;
+
+	public abstract HttpURLConnection getUserIDRequest(String user, String password) throws Exception;
 
 	public Calendar getStartDate() {
 		return startDate;
