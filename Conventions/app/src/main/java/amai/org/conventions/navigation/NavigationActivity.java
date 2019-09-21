@@ -6,6 +6,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -418,5 +419,19 @@ public abstract class NavigationActivity extends AppCompatActivity {
 			navigateToActivity(HomeActivity.class);
 		}
 		super.onBackPressed();
+	}
+
+
+	/**
+	 * Change color of menu item icon to be accented
+	 *
+	 * @param item the menu item
+	 * @return The new color
+	 */
+	protected int changeIconColor(MenuItem item) {
+		Drawable icon = item.getIcon().mutate();
+		int accentColor = ThemeAttributes.getColor(this, R.attr.toolbarIconAccentColor);
+		icon.setColorFilter(accentColor, PorterDuff.Mode.SRC_ATOP);
+		return accentColor;
 	}
 }

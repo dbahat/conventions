@@ -2,7 +2,6 @@ package amai.org.conventions.events.activities;
 
 import android.annotation.SuppressLint;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -185,18 +184,6 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 		}
 	}
 
-	/**
-	 * Change color of menu item icon to be accented
-	 *
-	 * @param item the menu item
-	 * @return The new color
-	 */
-	private int changeIconColor(MenuItem item) {
-		Drawable icon = item.getIcon().mutate();
-		int accentColor = ThemeAttributes.getColor(ProgrammeActivity.this, R.attr.toolbarIconAccentColor);
-		icon.setColorFilter(accentColor, PorterDuff.Mode.SRC_ATOP);
-		return accentColor;
-	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
