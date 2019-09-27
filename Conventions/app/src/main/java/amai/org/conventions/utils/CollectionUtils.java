@@ -143,4 +143,13 @@ public class CollectionUtils {
 	public static interface Aggregator<L, M> {
 		M aggregate(M accumulate, L currentItem);
 	}
+
+	public static <K, V> K getKeyForValue(Map<K, V> map, V value) {
+		for (Map.Entry<K, V> entry : map.entrySet()) {
+			if (Objects.equals(entry.getValue(), value)) {
+				return entry.getKey();
+			}
+		}
+		return null;
+	}
 }

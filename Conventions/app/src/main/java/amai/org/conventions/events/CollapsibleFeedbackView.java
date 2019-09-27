@@ -9,11 +9,6 @@ import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import androidx.annotation.StringRes;
-import androidx.core.content.ContextCompat;
-import androidx.core.widget.CompoundButtonCompat;
-import androidx.core.widget.TextViewCompat;
-import androidx.appcompat.widget.AppCompatRadioButton;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -39,7 +34,7 @@ import android.widget.Toast;
 import com.google.android.gms.analytics.HitBuilders;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -51,8 +46,14 @@ import amai.org.conventions.feedback.forms.SurveyDisabledException;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.conventions.Convention;
+import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Views;
+import androidx.annotation.StringRes;
+import androidx.appcompat.widget.AppCompatRadioButton;
+import androidx.core.content.ContextCompat;
+import androidx.core.widget.CompoundButtonCompat;
+import androidx.core.widget.TextViewCompat;
 import sff.org.conventions.R;
 
 public class CollapsibleFeedbackView extends FrameLayout {
@@ -284,71 +285,48 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		matrix.setSaturation(0);
 		final ColorMatrixColorFilter grayscale = new ColorMatrixColorFilter(matrix);
 
-		final ImageView negativeRating = new ImageView(getContext());
-		LinearLayout.LayoutParams negativeLayoutParams = new LinearLayout.LayoutParams(size, size);
-		negativeLayoutParams.setMarginEnd(margin);
-		negativeRating.setLayoutParams(negativeLayoutParams);
-		negativeRating.setImageResource(FeedbackQuestion.Smiley3PointAnswer.NEGATIVE.getImageResourceId());
-		negativeRating.setColorFilter(grayscale);
-		imagesLayout.addView(negativeRating);
+		LinkedHashMap<ImageView, FeedbackQuestion.Smiley3PointAnswer> imagesAndAnswers = new LinkedHashMap<>();
+		for (FeedbackQuestion.Smiley3PointAnswer answer : FeedbackQuestion.Smiley3PointAnswer.values()) {
+			ImageView image = new AspectRatioImageView(getContext());
+			LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(size, size);
+			layoutParams.setMarginEnd(margin);
+			image.setLayoutParams(layoutParams);
+			image.setImageResource(answer.getImageResourceId());
+			image.setColorFilter(grayscale);
+			imagesLayout.addView(image);
+			imagesAndAnswers.put(image, answer);
+		}
 
-		final ImageView positiveRating = new AspectRatioImageView(getContext());
-		LinearLayout.LayoutParams positiveLayoutParams = new LinearLayout.LayoutParams(size, size);
-		positiveLayoutParams.setMarginEnd(margin);
-		positiveRating.setLayoutParams(positiveLayoutParams);
-		positiveRating.setImageResource(FeedbackQuestion.Smiley3PointAnswer.POSITIVE.getImageResourceId());
-		positiveRating.setColorFilter(grayscale);
-		imagesLayout.addView(positiveRating);
-
-		final ImageView veryPositiveRating = new AspectRatioImageView(getContext());
-		LinearLayout.LayoutParams veryPositiveLayoutParams = new LinearLayout.LayoutParams(size, size);
-		veryPositiveLayoutParams.setMarginEnd(margin);
-		veryPositiveRating.setLayoutParams(veryPositiveLayoutParams);
-		veryPositiveRating.setImageResource(FeedbackQuestion.Smiley3PointAnswer.VERY_POSITIVE.getImageResourceId());
-		veryPositiveRating.setColorFilter(grayscale);
-		imagesLayout.addView(veryPositiveRating);
-
-		OnClickListener listener = new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				List<ImageView> allImages = new ArrayList<>(Arrays.asList(negativeRating, positiveRating, veryPositiveRating));
-				for (ImageView otherImage : allImages) {
-					otherImage.setColorFilter(grayscale);
-				}
-
-				ImageView selected = (ImageView) v;
-				Object selectedAnswer = null;
-				if (selected == negativeRating) {
-					selectedAnswer = FeedbackQuestion.Smiley3PointAnswer.NEGATIVE;
-				} else if (selected == positiveRating) {
-					selectedAnswer = FeedbackQuestion.Smiley3PointAnswer.POSITIVE;
-				} else if (selected == veryPositiveRating) {
-					selectedAnswer = FeedbackQuestion.Smiley3PointAnswer.VERY_POSITIVE;
-				}
-
-				// If the user clicked on the same answer, remove the answer
-				if (selectedAnswer == question.getAnswer()) {
-					selectedAnswer = null;
-				}
-
-				if (selectedAnswer != null) {
-					selected.setColorFilter(ContextCompat.getColor(getContext(), R.color.yellow), PorterDuff.Mode.MULTIPLY);
-				}
-
-				question.setAnswer(selectedAnswer);
-				feedbackChanged |= question.isAnswerChanged();
-				updateSendButtonEnabledState(feedback);
+		OnClickListener listener = v -> {
+			for (ImageView otherImage : imagesAndAnswers.keySet()) {
+				otherImage.setColorFilter(grayscale);
 			}
+
+			ImageView selected = (ImageView) v;
+			Object selectedAnswer = imagesAndAnswers.get(selected);
+
+			// If the user clicked on the same answer, remove the answer
+			if (selectedAnswer == question.getAnswer()) {
+				selectedAnswer = null;
+			}
+
+			if (selectedAnswer != null) {
+				selected.setColorFilter(ContextCompat.getColor(getContext(), R.color.yellow), PorterDuff.Mode.MULTIPLY);
+			}
+
+			question.setAnswer(selectedAnswer);
+			feedbackChanged |= question.isAnswerChanged();
+			updateSendButtonEnabledState(feedback);
 		};
 
 		if (!feedback.isSent()) {
-			negativeRating.setOnClickListener(listener);
-			positiveRating.setOnClickListener(listener);
-			veryPositiveRating.setOnClickListener(listener);
+			for (ImageView image : imagesAndAnswers.keySet()) {
+				image.setOnClickListener(listener);
+			}
 		} else {
-			negativeRating.setOnClickListener(null);
-			positiveRating.setOnClickListener(null);
-			veryPositiveRating.setOnClickListener(null);
+			for (ImageView image : imagesAndAnswers.keySet()) {
+				image.setOnClickListener(null);
+			}
 		}
 
 		Object answer = question.getAnswer();
@@ -356,16 +334,9 @@ public class CollapsibleFeedbackView extends FrameLayout {
 			FeedbackQuestion.Smiley3PointAnswer smileyAnswer = FeedbackQuestion.Smiley3PointAnswer.getByAnswerText(answer.toString());
 			if (smileyAnswer != null) {
 				question.setAnswer(null); // Needed so onClick won't cancel the answer selection
-				switch (smileyAnswer) {
-					case NEGATIVE:
-						listener.onClick(negativeRating);
-						break;
-					case POSITIVE:
-						listener.onClick(positiveRating);
-						break;
-					case VERY_POSITIVE:
-						listener.onClick(veryPositiveRating);
-						break;
+				ImageView image = CollectionUtils.getKeyForValue(imagesAndAnswers, smileyAnswer);
+				if (image != null) {
+					listener.onClick(image);
 				}
 			}
 		}
