@@ -24,17 +24,26 @@ public class FeedbackQuestion {
 	public static final int QUESTION_ID_MAP_SIGNS = 9;
 	public static final int QUESTION_ID_CONFLICTING_EVENTS = 10;
 
+	public static final int QUESTION_ID_ENJOYMENT_5P = 11;
+	public static final int QUESTION_ID_LECTURER_QUALITY_5P = 12;
+	public static final int QUESTION_ID_SIMILAR_EVENTS_5P = 13;
+	public static final int QUESTION_ID_LIKED_5P = 18;
+
 	private static final Map<Integer, Integer> questions = initQuestions();
 	private static final Map<Integer, List<Integer>> questionToMultipleAnswers = initMultipleAnswers();
 
 	private static Map<Integer, Integer> initQuestions() {
 		Map<Integer, Integer> questions = new HashMap<>();
 		questions.put(QUESTION_ID_ENJOYMENT, R.string.question_enjoyment);
+		questions.put(QUESTION_ID_ENJOYMENT_5P, R.string.question_enjoyment);
 		questions.put(QUESTION_ID_LECTURER_QUALITY, R.string.question_lecturer_quality);
+		questions.put(QUESTION_ID_LECTURER_QUALITY_5P, R.string.question_lecturer_quality);
 		questions.put(QUESTION_ID_SIMILAR_EVENTS, R.string.question_similar_events);
+		questions.put(QUESTION_ID_SIMILAR_EVENTS_5P, R.string.question_similar_events);
 		questions.put(QUESTION_ID_ADDITIONAL_INFO, R.string.question_additional_info);
 		questions.put(QUESTION_ID_AGE, R.string.question_age);
 		questions.put(QUESTION_ID_LIKED, R.string.question_liked);
+		questions.put(QUESTION_ID_LIKED_5P, R.string.question_liked);
 		questions.put(QUESTION_ID_IMPROVEMENT, R.string.question_improvement);
 		questions.put(QUESTION_ID_MAP_SIGNS, R.string.question_map_signs);
 		questions.put(QUESTION_ID_CONFLICTING_EVENTS, R.string.question_conflicting_events);
@@ -156,11 +165,15 @@ public class FeedbackQuestion {
 
 	// This enum must be backwards compatible - don't remove or rename any values from it
 	public enum AnswerType {
-		TEXT, SINGLE_LINE_TEXT, SMILEY_3_POINTS, MULTIPLE_ANSWERS, MULTIPLE_ANSWERS_RADIO, HIDDEN
+		TEXT, SINGLE_LINE_TEXT, SMILEY_3_POINTS, SMILEY_5_POINTS, MULTIPLE_ANSWERS, MULTIPLE_ANSWERS_RADIO, HIDDEN
+	}
+
+	public interface DrawableAnswer {
+		int getImageResourceId();
 	}
 
 	// This enum must be backwards compatible - don't remove or rename any values from it
-	public enum Smiley3PointAnswer {
+	public enum Smiley3PointAnswer implements DrawableAnswer {
 		NEGATIVE("|:", R.drawable.negative_rating),
 		POSITIVE("(:", R.drawable.positive_rating),
 		VERY_POSITIVE(":D", R.drawable.very_positive_rating);
@@ -184,6 +197,41 @@ public class FeedbackQuestion {
 
 		public static Smiley3PointAnswer getByAnswerText(String textAnswer) {
 			for (Smiley3PointAnswer answer : Smiley3PointAnswer.values()) {
+				if (answer.answerText.equals(textAnswer)) {
+					return answer;
+				}
+			}
+			return null;
+		}
+	}
+
+	// This enum must be backwards compatible - don't remove or rename any values from it
+	public enum Smiley5PointAnswer implements DrawableAnswer {
+		VERY_NEGATIVE("\u2639\ufe0f", R.drawable.baseline_sentiment_very_dissatisfied_black_48),
+		NEGATIVE("\uD83D\uDE41", R.drawable.baseline_sentiment_dissatisfied_black_48),
+		NEUTRAL("\uD83D\uDE10", R.drawable.baseline_sentiment_neutral_black_48),
+		POSITIVE("\uD83D\uDE42", R.drawable.baseline_sentiment_satisfied_black_48),
+		VERY_POSITIVE("\uD83D\uDE03", R.drawable.baseline_sentiment_satisfied_alt_black_48);
+
+		private String answerText;
+		private int imageResourceId;
+
+		Smiley5PointAnswer(String answerText, int imageResourceId) {
+			this.answerText = answerText;
+			this.imageResourceId = imageResourceId;
+		}
+
+		@Override
+		public String toString() {
+			return answerText;
+		}
+
+		public int getImageResourceId() {
+			return imageResourceId;
+		}
+
+		public static Smiley5PointAnswer getByAnswerText(String textAnswer) {
+			for (Smiley5PointAnswer answer : Smiley5PointAnswer.values()) {
 				if (answer.answerText.equals(textAnswer)) {
 					return answer;
 				}

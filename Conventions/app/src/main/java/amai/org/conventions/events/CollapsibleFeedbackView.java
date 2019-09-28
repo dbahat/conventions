@@ -234,7 +234,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 
 	private void setFeedbackIcon(Survey feedback) {
 		Drawable icon;
-		FeedbackQuestion.Smiley3PointAnswer weightedRating = feedback.getWeightedRating();
+		FeedbackQuestion.DrawableAnswer weightedRating = feedback.getWeightedRating();
 		int filterColor;
 		if (weightedRating != null) {
 			icon = ContextCompat.getDrawable(getContext(), weightedRating.getImageResourceId());
@@ -272,6 +272,10 @@ public class CollapsibleFeedbackView extends FrameLayout {
 			}
 			case SMILEY_3_POINTS: {
 				answerView = buildSmiley3PointsAnswerView(question, feedback);
+				break;
+			}
+			case SMILEY_5_POINTS: {
+				answerView = buildSmiley5PointsAnswerView(question, feedback);
 				break;
 			}
 			case MULTIPLE_ANSWERS:
@@ -346,6 +350,73 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		Object answer = question.getAnswer();
 		if (answer != null) {
 			FeedbackQuestion.Smiley3PointAnswer smileyAnswer = FeedbackQuestion.Smiley3PointAnswer.getByAnswerText(answer.toString());
+			if (smileyAnswer != null) {
+				question.setAnswer(null); // Needed so onClick won't cancel the answer selection
+				ImageView image = CollectionUtils.getKeyForValue(imagesAndAnswers, smileyAnswer);
+				if (image != null) {
+					listener.onClick(image);
+				}
+			}
+		}
+		return imagesLayout;
+	}
+
+	private View buildSmiley5PointsAnswerView(final FeedbackQuestion question, final Survey feedback) {
+		LinearLayout imagesLayout = new LinearLayout(getContext());
+		imagesLayout.setOrientation(LinearLayout.HORIZONTAL);
+		int margin = getResources().getDimensionPixelOffset(R.dimen.feedback_smiley_answer_margin);
+		int size = getResources().getDimensionPixelSize(R.dimen.feedback_smiley5p_icon_size);
+
+		int unselectedColor = answerColor != Convention.NO_COLOR ? answerColor : ThemeAttributes.getColor(getContext(), R.attr.feedbackAnswerButtonColor);
+		int selectedColor = selectedAnswerColor != Convention.NO_COLOR ? selectedAnswerColor : ThemeAttributes.getColor(getContext(), R.attr.feedbackAnswerButtonSelectedColor);
+
+		LinkedHashMap<ImageView, FeedbackQuestion.Smiley5PointAnswer> imagesAndAnswers = new LinkedHashMap<>();
+		for (FeedbackQuestion.Smiley5PointAnswer answer : FeedbackQuestion.Smiley5PointAnswer.values()) {
+			ImageView image = new AspectRatioImageView(getContext());
+			LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(size, size);
+			layoutParams.setMarginEnd(margin);
+			image.setLayoutParams(layoutParams);
+			image.setImageResource(answer.getImageResourceId());
+			image.setColorFilter(unselectedColor);
+			imagesLayout.addView(image);
+			imagesAndAnswers.put(image, answer);
+		}
+
+		OnClickListener listener = v -> {
+			for (ImageView otherImage : imagesAndAnswers.keySet()) {
+				otherImage.setColorFilter(unselectedColor);
+			}
+
+			ImageView selected = (ImageView) v;
+			Object selectedAnswer = imagesAndAnswers.get(selected);
+
+			// If the user clicked on the same answer, remove the answer
+			if (selectedAnswer == question.getAnswer()) {
+				selectedAnswer = null;
+			}
+
+			if (selectedAnswer != null) {
+				selected.setColorFilter(selectedColor);
+			}
+
+			question.setAnswer(selectedAnswer);
+			feedbackChanged |= question.isAnswerChanged();
+			updateSendButtonEnabledState(feedback);
+		};
+
+		if (!feedback.isSent()) {
+			for (ImageView image : imagesAndAnswers.keySet()) {
+				image.setOnClickListener(listener);
+			}
+		} else {
+			for (ImageView image : imagesAndAnswers.keySet()) {
+				image.setOnClickListener(null);
+			}
+		}
+
+		Object answer = question.getAnswer();
+		if (answer != null) {
+			FeedbackQuestion.Smiley5PointAnswer smileyAnswer = FeedbackQuestion.Smiley5PointAnswer.getByAnswerText(answer.toString());
 			if (smileyAnswer != null) {
 				question.setAnswer(null); // Needed so onClick won't cancel the answer selection
 				ImageView image = CollectionUtils.getKeyForValue(imagesAndAnswers, smileyAnswer);

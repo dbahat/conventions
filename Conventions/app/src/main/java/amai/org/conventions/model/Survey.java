@@ -58,12 +58,18 @@ public class Survey implements Serializable, Cloneable {
 			question.setAnswerType(FeedbackQuestion.AnswerType.TEXT);
 		}
 
-		// Handle enum answer type
+		// Handle enum answer types
 		if (question.hasAnswer() && question.getAnswerType() == FeedbackQuestion.AnswerType.SMILEY_3_POINTS) {
 			try {
 				question.setAnswer(FeedbackQuestion.Smiley3PointAnswer.valueOf(question.getAnswer().toString()));
 			} catch (IllegalArgumentException e) {
-				Log.e(TAG, "Smiley answer with incorrect enum name: " + question.getAnswer().toString());
+				Log.e(TAG, "Smiley answer with incorrect enum name for SMILEY_3_POINTS answer: " + question.getAnswer().toString());
+			}
+		} else if (question.hasAnswer() && question.getAnswerType() == FeedbackQuestion.AnswerType.SMILEY_5_POINTS) {
+			try {
+				question.setAnswer(FeedbackQuestion.Smiley5PointAnswer.valueOf(question.getAnswer().toString()));
+			} catch (IllegalArgumentException e) {
+				Log.e(TAG, "Smiley answer with incorrect enum name for SMILEY_5_POINTS answer: " + question.getAnswer().toString());
 			}
 		}
 	}
@@ -127,11 +133,13 @@ public class Survey implements Serializable, Cloneable {
 		}
 	}
 
-	public FeedbackQuestion.Smiley3PointAnswer getWeightedRating() {
+	public FeedbackQuestion.DrawableAnswer getWeightedRating() {
 		if (isSent()) {
 			for (FeedbackQuestion question : questions.values()) {
 				if (question.hasAnswer() && question.getAnswerType() == FeedbackQuestion.AnswerType.SMILEY_3_POINTS) {
 					return (FeedbackQuestion.Smiley3PointAnswer) question.getAnswer();
+				} else if (question.hasAnswer() && question.getAnswerType() == FeedbackQuestion.AnswerType.SMILEY_5_POINTS) {
+					return (FeedbackQuestion.Smiley5PointAnswer) question.getAnswer();
 				}
 			}
 		}

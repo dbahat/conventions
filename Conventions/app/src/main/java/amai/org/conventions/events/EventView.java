@@ -212,7 +212,7 @@ public class EventView extends FrameLayout {
         Drawable icon = null;
         if (event.canFillFeedback()) {
             Survey feedback = event.getUserInput().getFeedback();
-            FeedbackQuestion.Smiley3PointAnswer weightedRating = feedback.getWeightedRating();
+			FeedbackQuestion.DrawableAnswer weightedRating = feedback.getWeightedRating();
             int filterColor;
             if (weightedRating != null) {
                 icon = ContextCompat.getDrawable(getContext(), weightedRating.getImageResourceId());
