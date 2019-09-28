@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.TypedArray;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Point;
@@ -75,11 +76,24 @@ public class CollapsibleFeedbackView extends FrameLayout {
 	private Survey feedback;
 	private boolean feedbackChanged;
 	private int textColor = Convention.NO_COLOR;
+	private int answerColor = Convention.NO_COLOR;
+	private int selectedAnswerColor = Convention.NO_COLOR;
 	private int feedbackSentTextResource = R.string.feedback_sent;
 	private int feedbackSendErrorMessage = R.string.feedback_send_failed;
 
 	public CollapsibleFeedbackView(Context context, AttributeSet attrs) {
 		super(context, attrs);
+
+		if (attrs != null) {
+			TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.CollapsibleFeedbackView, 0, 0);
+			try {
+				textColor = array.getColor(R.styleable.CollapsibleFeedbackView_textColor, Convention.NO_COLOR);
+				answerColor = array.getColor(R.styleable.CollapsibleFeedbackView_answerColor, Convention.NO_COLOR);
+				selectedAnswerColor = array.getColor(R.styleable.CollapsibleFeedbackView_selectedAnswerColor, Convention.NO_COLOR);
+			} finally {
+				array.recycle();
+			}
+		}
 
 		LayoutInflater.from(this.getContext()).inflate(R.layout.view_collapsible_feedback_layout, this, true);
 
@@ -166,7 +180,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		feedbackSendErrorMessage = stringResource;
 	}
 
-	public void setTextColor(int color) {
+	private void setTextColor(int color) {
 		textColor = color;
 		if (color != Convention.NO_COLOR) {
 			collapsedFeedbackTitle.setTextColor(color);
@@ -419,11 +433,15 @@ public class CollapsibleFeedbackView extends FrameLayout {
 
 		final List<TextView> answerViews = new ArrayList<>(possibleAnswers.size());
 
+		int unselectedColor = answerColor != Convention.NO_COLOR ? answerColor : ThemeAttributes.getColor(getContext(), R.attr.feedbackAnswerButtonColor);
+		int selectedColor = selectedAnswerColor != Convention.NO_COLOR ? selectedAnswerColor : ThemeAttributes.getColor(getContext(), R.attr.feedbackAnswerButtonSelectedColor);
+
 		OnClickListener listener = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				TextView selected = (TextView) v;
-				TextViewCompat.setTextAppearance(selected, R.style.EventAnswerButtonHighlighted);
+				TextViewCompat.setTextAppearance(selected, R.style.EventAnswerButton);
+				selected.setTextColor(selectedColor);
 
 				// If the user selected the same answer, deselect it
 				String selectedAnswer = selected.getText().toString();
@@ -443,6 +461,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 				for (TextView answerView : answerViews) {
 					if (selectedAnswer == null || selected != answerView) {
 						TextViewCompat.setTextAppearance(answerView, R.style.EventAnswerButton);
+						answerView.setTextColor(unselectedColor);
 					}
 				}
 
@@ -464,8 +483,8 @@ public class CollapsibleFeedbackView extends FrameLayout {
 								new int[]{android.R.attr.state_checked}
 						},
 						new int[]{
-								ThemeAttributes.getColor(getContext(), R.attr.feedbackAnswerButtonColor),
-								ThemeAttributes.getColor(getContext(), R.attr.feedbackAnswerButtonSelectedColor)
+								unselectedColor,
+								selectedColor
 						}
 				));
 			} else {
@@ -473,6 +492,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 			}
 			answerViews.add(answerButton);
 			TextViewCompat.setTextAppearance(answerButton, R.style.EventAnswerButton);
+			answerButton.setTextColor(unselectedColor);
 			answerButton.setText(answerString);
 			int endPadding = padding * 4;
 			int startPadding = padding * 4;

@@ -131,8 +131,6 @@ public class EventActivity extends NavigationActivity {
 		// In order to avoid these issues, we align the title to the start in this activity only.
 		setToolbarGravity(Gravity.START | Gravity.CENTER_VERTICAL);
 
-		feedbackView.setTextColor(ThemeAttributes.getColor(this, R.attr.eventFeedbackTextColor));
-
 		final boolean shouldFocusOnFeedback = getIntent().getBooleanExtra(EXTRA_FOCUS_ON_FEEDBACK, false);
 
 		// Do the rest after the layout loads, since loading all the assets of this activity (which include images) can get long, we want the activity to first

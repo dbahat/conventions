@@ -239,6 +239,9 @@
 
 				<amai.org.conventions.events.CollapsibleFeedbackView
 					android:id="@+id/event_feedback_view"
+					app:textColor="?eventFeedbackTextColor"
+					app:answerColor="?eventFeedbackAnswerColor"
+					app:selectedAnswerColor="?eventFeedbackSelectedAnswerColor"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"/>
 			</LinearLayout>
