@@ -1,7 +1,6 @@
 package amai.org.conventions.utils;
 
 import android.content.Context;
-import androidx.annotation.RawRes;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -34,6 +33,7 @@ import amai.org.conventions.model.SecondHandItem;
 import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.Update;
 import amai.org.conventions.model.conventions.Convention;
+import androidx.annotation.RawRes;
 
 public class ConventionStorage {
 	private static final String TAG = ConventionStorage.class.getCanonicalName();
@@ -128,8 +128,9 @@ public class ConventionStorage {
 	private static Gson createGsonSerializer() {
 		return new GsonBuilder()
 				.setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
-				// Save Smiley3PointAnswer according to enum value name instead of toString()
+				// Save smiley answers according to enum value name instead of toString()
 				.registerTypeAdapter(FeedbackQuestion.Smiley3PointAnswer.class, new EnumSerializer<>())
+				.registerTypeAdapter(FeedbackQuestion.Smiley5PointAnswer.class, new EnumSerializer<>())
 				.create();
 	}
 
