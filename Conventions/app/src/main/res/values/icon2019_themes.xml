@@ -108,6 +108,8 @@
         <item name="eventDetailsHighlightedTextColor">@color/icon2019_pink1</item>
         <item name="eventActivityFavoriteColor">@color/icon2019_pink2</item>
         <item name="feedbackButtonColor">@color/white</item>
+        <item name="eventFeedbackAnswerColor">@color/icon2019_pink2</item>
+        <item name="eventFeedbackSelectedAnswerColor">@color/icon2019_violet2</item>
         <!-- Feedback Screen -->
         <item name="progressBarDrawable">@drawable/icon2019_rotating_circular_progress_bar</item>
         <item name="feedbackAnswerButtonColor">@color/icon2019_violet2</item>

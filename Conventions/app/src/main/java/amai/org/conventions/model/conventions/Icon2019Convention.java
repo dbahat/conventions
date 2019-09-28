@@ -495,9 +495,9 @@ public class Icon2019Convention extends SffConvention {
 					.withConventionNameEntry("entry.1882876736")
 					.withDeviceIdEntry("entry.312890800")
 					.withTestEntry("entry.791883029")
-					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_ENJOYMENT, "entry.415572741")
-					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_LECTURER_QUALITY, "entry.1327236956")
-					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_SIMILAR_EVENTS, "entry.1416969956")
+					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_ENJOYMENT_5P, "entry.415572741")
+					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_LECTURER_QUALITY_5P, "entry.1327236956")
+					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_SIMILAR_EVENTS_5P, "entry.1416969956")
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_ADDITIONAL_INFO, "entry.1582215667")
 					.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSfraYvfQm83clQrqyQ_F9QGK2Qv5-fXQRilMClSiV0EB5-EKA/formResponse"));
 		} catch (MalformedURLException e) {
@@ -515,7 +515,7 @@ public class Icon2019Convention extends SffConvention {
 					.withDeviceIdEntry("entry.312890800")
 					.withTestEntry("entry.791883029")
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_AGE, "entry.415572741")
-					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_LIKED, "entry.1327236956")
+					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_LIKED_5P, "entry.1327236956")
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_MAP_SIGNS, "entry.1416969956")
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_CONFLICTING_EVENTS, "entry.1582215667")
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_IMPROVEMENT, "entry.993320932")
