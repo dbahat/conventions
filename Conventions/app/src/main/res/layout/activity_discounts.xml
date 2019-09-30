@@ -62,5 +62,20 @@
             android:textSize="14sp"
             android:text="@string/discounts_shnizel_company_info"
             android:layout_marginBottom="30dp"/>
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="15dp"
+            android:textColor="?android:textColorPrimary"
+            android:text="@string/discounts_parking"
+            android:textSize="16sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="14sp"
+            android:text="@string/discounts_parking_details"
+            android:layout_marginBottom="30dp"/>
     </LinearLayout>
 </ScrollView>
