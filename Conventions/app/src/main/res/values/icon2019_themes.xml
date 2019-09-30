@@ -75,9 +75,10 @@
         <item name="eventNonFavoriteColor">@color/black</item>
         <item name="eventFavoriteColor">@color/icon2019_pink2</item>
         <!-- Map Screen -->
-        <item name="locationDetailsBackground">@color/white</item>
+        <item name="locationDetailsBackground">@color/icon2019_cyan1</item>
         <item name="locationDetailsTitleColor">@color/black</item>
         <item name="mapBackground">@drawable/icon2019_background</item>
+        <item name="floorChangeBackground">@color/very_transparent_white</item>
         <item name="standIconColor">@color/black</item>
         <item name="standsTypeTitleColor">@color/black</item>
         <!-- Updates Screen -->

@@ -20,6 +20,7 @@ import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.Floor;
+import amai.org.conventions.model.FloorLocation;
 import amai.org.conventions.model.Hall;
 import amai.org.conventions.model.Halls;
 import amai.org.conventions.model.ImageIdToImageResourceMapper;
@@ -181,7 +182,7 @@ public class Icon2019Convention extends SffConvention {
 		Hall miniaturesWorkshop = getHalls().findByName(HALL_NAME_MINIATURES_WORKSHOP);
 
 		Floor overview = new Floor(1)
-				.withName("מפת מתחם")
+				.withName("מפת המתחם")
 				.withImageResource(R.drawable.icon2019_map_overview, false)
 				.withImageWidth(2894.71069f)
 				.withImageHeight(2378.15063f);
@@ -219,7 +220,7 @@ public class Icon2019Convention extends SffConvention {
 												.withX(2276.299f)
 												.withY(1846.814f),
 										new MapLocation()
-												.withPlace(new Place().withName("עירוני"))
+												.withPlace(new FloorLocation().withName("עירוני").withFloor(ironiFloor1))
 												.withMarkerResource(R.raw.icon2019_marker_ironi, true)
 												.withSelectedMarkerResource(R.raw.icon2019_marker_ironi_selected, true)
 												.withMarkerHeight(280.509f)
@@ -297,7 +298,7 @@ public class Icon2019Convention extends SffConvention {
 												.withX(1313.712f)
 												.withY(1621.241f),
 										new MapLocation()
-												.withPlace(new Place().withName("אשכול"))
+												.withPlace(new FloorLocation().withName("אשכול").withFloor(eshkolFloor1))
 												.withMarkerResource(R.raw.icon2019_marker_eshkol, true)
 												.withSelectedMarkerResource(R.raw.icon2019_marker_eshkol_selected, true)
 												.withMarkerHeight(280.508f)
@@ -400,7 +401,7 @@ public class Icon2019Convention extends SffConvention {
 												.withX(1953.621f)
 												.withY(964.208f),
 										new MapLocation()
-												.withPlace(new Place().withName("עלייה לאשכול 5-6"))
+												.withPlace(new FloorLocation().withName("עלייה לאשכול 5-6").withFloor(eshkolFloor2))
 												.withMarkerResource(R.drawable.icon2019_marker_stairs_eshkol5_6, false)
 												.withSelectedMarkerResource(R.drawable.icon2019_marker_stairs_eshkol5_6_selected, false)
 												.withMarkerHeight(200.454f)
@@ -414,7 +415,7 @@ public class Icon2019Convention extends SffConvention {
 												.withX(1224.364f)
 												.withY(1104.463f),
 										new MapLocation()
-												.withPlace(new Place().withName("עלייה לאשכול 3-4"))
+												.withPlace(new FloorLocation().withName("עלייה לאשכול 3-4").withFloor(eshkolFloor2))
 												.withMarkerResource(R.raw.icon2019_marker_stairs_eshkol3_4, true)
 												.withSelectedMarkerResource(R.raw.icon2019_marker_stairs_eshkol3_4_selected, true)
 												.withMarkerHeight(200.454f)
@@ -496,7 +497,7 @@ public class Icon2019Convention extends SffConvention {
 												.withX(680.566f)
 												.withY(2129.796f),
 										new MapLocation()
-												.withPlace(new Place().withName("מדרגות לקומות 2,3"))
+												.withPlace(new FloorLocation().withName("מדרגות לקומות 2,3").withFloor(ironiFloor2))
 												.withMarkerResource(R.raw.icon2019_marker_stairs_ironi2_3, true)
 												.withSelectedMarkerResource(R.raw.icon2019_marker_stairs_ironi2_3_selected, true)
 												.withMarkerHeight(233.773f)
