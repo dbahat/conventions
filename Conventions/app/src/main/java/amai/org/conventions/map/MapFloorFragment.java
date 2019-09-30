@@ -41,6 +41,7 @@ import java.util.List;
 
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.ImageHandler;
+import amai.org.conventions.model.FloorLocation;
 import amai.org.conventions.R;
 import amai.org.conventions.customviews.AspectRatioSVGImageView;
 import amai.org.conventions.customviews.InterceptorLinearLayout;
@@ -99,6 +100,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 	private View locationEventsDivider;
 	private EventView locationNextEvent;
 	private Button gotoStandsListButton;
+	private Button gotoFloorButton;
 
 	private OnMapFloorEventListener mapFloorEventsListener;
 
@@ -271,6 +273,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		locationEventsDivider = view.findViewById(R.id.location_events_divider);
 		locationNextEvent = (EventView) view.findViewById(R.id.location_next_event);
 		gotoStandsListButton = (Button) view.findViewById(R.id.goto_stands_list_button);
+		gotoFloorButton = view.findViewById(R.id.goto_floor_button);
 	}
 
 	private void initializeLocationDetails() {
@@ -408,7 +411,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 			upArrow.setVisibility(View.GONE);
 		} else {
 			upArrow.setVisibility(View.VISIBLE);
-			upArrowText.setText(map.getFloors().get(map.floorNumberToFloorIndex(floor.getNumber()) + 1).getName());
+			upArrowText.setText(getString(R.string.goto_floor, map.getFloors().get(map.floorNumberToFloorIndex(floor.getNumber()) + 1).getName()));
 		}
 
 
@@ -417,7 +420,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 			downArrow.setVisibility(View.GONE);
 		} else {
 			downArrow.setVisibility(View.VISIBLE);
-			downArrowText.setText(map.getFloors().get(map.floorNumberToFloorIndex(floor.getNumber()) - 1).getName());
+			downArrowText.setText(getString(R.string.goto_floor, map.getFloors().get(map.floorNumberToFloorIndex(floor.getNumber()) - 1).getName()));
 		}
 
 		// We have to measure for the animations to work
@@ -692,6 +695,8 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		 * This method is called during animation.
 		 */
 		void onLocationDetailsTopChanged(int top, MapFloorFragment floor);
+
+		void onShowFloorClicked(Floor floor);
 	}
 
 	@Override
@@ -869,6 +874,9 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		// Check if it's a stands area
 		setupStandsLocation(location);
 
+		// Check if it's a floor location
+		setupFloorLocation(location);
+
 		// We have to measure for the animations to work (we can't define percentage in ObjectAnimator)
 		locationDetails.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
 	}
@@ -880,11 +888,28 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 			gotoStandsListButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
+
 					showStandsArea(location, null);
 				}
 			});
 		} else {
 			gotoStandsListButton.setVisibility(View.GONE);
+		}
+	}
+
+	private void setupFloorLocation(final MapLocation location) {
+		// Only show button if there is a floor set
+		if (location.hasSinglePlace() && location.getPlaces().get(0) instanceof FloorLocation && ((FloorLocation) location.getPlaces().get(0)).getFloor() != null) {
+			Floor floor = ((FloorLocation) location.getPlaces().get(0)).getFloor();
+			gotoFloorButton.setVisibility(View.VISIBLE);
+			gotoFloorButton.setText(getString(R.string.goto_floor, floor.getName()));
+			gotoFloorButton.setOnClickListener(v -> {
+				if (mapFloorEventsListener != null) {
+					mapFloorEventsListener.onShowFloorClicked(floor);
+				}
+			});
+		} else {
+			gotoFloorButton.setVisibility(View.GONE);
 		}
 	}
 

@@ -122,6 +122,7 @@
     <string name="goto_stands_list">הצג דוכנים</string>
     <string name="search_locations">מתחם</string>
     <string name="search_stands">דוכנים</string>
+    <string name="goto_floor">עבור ל%s</string>
     <string name="next_event_start">האירוע הבא מתחיל בעוד %1$s ב%2$s</string>
     <string name="settings">הגדרות</string>
     <string name="notifications_preferences">התראות</string>
