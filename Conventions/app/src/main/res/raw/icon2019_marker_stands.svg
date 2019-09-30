@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   id="svg3414"
+   version="1.1"
+   viewBox="0 0 81.845148 40.317207"
+   height="152.37999"
+   width="309.336">
+  <defs
+     id="defs3408">
+    <linearGradient
+       xlink:href="#a"
+       y2="2129.251"
+       x2="2768.4189"
+       y1="2204.4871"
+       x1="2779.2581"
+       id="as" />
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(-1,0,0,1,5113,0)"
+       y2="1232.389"
+       x2="3496.207"
+       y1="1163.078"
+       x1="3484.449"
+       id="a">
+      <stop
+         id="stop4"
+         stop-color="#574ace"
+         offset="0" />
+      <stop
+         id="stop6"
+         stop-color="#8543ff"
+         offset="1" />
+    </linearGradient>
+    <linearGradient
+       xlink:href="#a"
+       y2="2128.676"
+       x2="2649.7581"
+       y1="2208.6941"
+       x1="2639.5569"
+       id="ar" />
+    <linearGradient
+       xlink:href="#a"
+       y2="2195.9109"
+       x2="2702.1951"
+       y1="2124.501"
+       x1="2690.0811"
+       id="aq" />
+  </defs>
+  <metadata
+     id="metadata3411">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(-34.622087,-123.38307)"
+     id="layer1">
+    <polygon
+       style="fill:url(#aq)"
+       id="polygon394"
+       points="2657.974,2110.692 2759.67,2129.82 2775.928,2216.214 2649.047,2217.808 2638.298,2233.586 "
+       class="az"
+       transform="matrix(0.26458333,0,0,0.26458333,-620.28145,-431.86569)" />
+    <polygon
+       style="fill:url(#ar)"
+       id="polygon396"
+       points="2657.974,2110.692 2638.298,2233.586 2629.894,2250.958 2647.673,2098.578 "
+       class="ba"
+       transform="matrix(0.26458333,0,0,0.26458333,-620.28145,-431.86569)" />
+    <polygon
+       style="fill:#8543ff"
+       id="polygon398"
+       points="2776.589,2124.661 2647.673,2098.578 2657.974,2110.692 2759.67,2129.82 "
+       class="e"
+       transform="matrix(0.26458333,0,0,0.26458333,-620.28145,-431.86569)" />
+    <polygon
+       style="fill:url(#as)"
+       id="polygon400"
+       points="2775.928,2216.214 2759.67,2129.82 2776.589,2124.661 2784.562,2227.372 "
+       class="bb"
+       transform="matrix(0.26458333,0,0,0.26458333,-620.28145,-431.86569)" />
+    <polygon
+       style="fill:#574ace"
+       id="polygon402"
+       points="2775.928,2216.214 2649.047,2217.808 2638.298,2233.586 2629.894,2250.958 2659.219,2223.982 2783.324,2225.772 "
+       class="g"
+       transform="matrix(0.26458333,0,0,0.26458333,-620.28145,-431.86569)" />
+    <path
+       style="fill:#ffffff;stroke-width:0.26458332"
+       id="path404"
+       d="m 82.914113,142.4918 h 4.84452 v 6.07087 h -4.84452 z m 3.890962,5.29776 V 143.2591 H 83.8682 v 4.52993 z"
+       class="aj" />
+    <path
+       style="fill:#ffffff;stroke-width:0.26458332"
+       id="path406"
+       d="m 90.08776,143.2591 h -1.113102 v -0.7673 h 2.071688 v 3.38667 H 90.08776 Z"
+       class="aj" />
+    <path
+       style="fill:#ffffff;stroke-width:0.26458332"
+       id="path408"
+       d="m 92.185377,148.55235 0.02646,-0.74718 a 3.851275,3.851275 0 0 0 0.752475,0.0669 0.79666042,0.79666042 0 0 0 0.635,-0.2421 1.1154833,1.1154833 0 0 0 0.211667,-0.74718 v -3.62373 h -1.190625 v -0.7673 H 94.7693 v 4.46802 a 1.781175,1.781175 0 0 1 -0.412221,1.27 1.5546917,1.5546917 0 0 1 -1.185333,0.43551 4.5341646,4.5341646 0 0 1 -0.986367,-0.11298 z"
+       class="aj" />
+    <path
+       style="fill:#ffffff;stroke-width:0.26458332"
+       id="path410"
+       d="m 96.117615,148.3772 0.154516,-0.7165 a 5.6448854,5.6448854 0 0 0 1.453092,0.22173 1.857375,1.857375 0 0 0 1.311804,-0.4199 1.5642167,1.5642167 0 0 0 0.449792,-1.20332 v -3.00011 h -3.159125 v -0.7673 h 4.112686 v 3.56103 q 0,1.28852 -0.685538,1.94284 a 2.6490083,2.6490083 0 0 1 -1.906852,0.65458 6.3373,6.3373 0 0 1 -1.730375,-0.27305 z"
+       class="aj" />
+    <path
+       style="fill:#ffffff;stroke-width:0.26458332"
+       id="path412"
+       d="m 102.59541,143.2591 h -0.70591 v -0.7673 h 1.66449 v 6.07087 h -0.95858 z"
+       class="aj" />
+    <path
+       style="fill:#ffffff;stroke-width:0.26458332"
+       id="path414"
+       d="m 109.65555,142.4918 v 0.7673 h -1.01521 v 5.30304 h -0.95858 v -5.30304 h -2.88581 v -0.7673 z"
+       class="aj" />
+  </g>
+</svg>
