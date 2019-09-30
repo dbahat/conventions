@@ -444,6 +444,11 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		viewPager.setCurrentItem(floorIndexToPagerPosition(map.floorNumberToFloorIndex(floor.getNumber())));
 	}
 
+	@Override
+	public void onShowFloorClicked(Floor floor) {
+		setCurrentFloor(floor);
+	}
+
 	private void applySearchFiltersInBackground() {
 		final String searchTerm = this.searchTerm;
 		final boolean showOnlyHalls = this.showOnlyHalls;

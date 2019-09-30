@@ -153,6 +153,17 @@
                     android:enabled="true"
                     android:text="@string/goto_stands_list" />
 
+                <!-- Go to floor button - used for floor locations -->
+                <Button
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:id="@+id/goto_floor_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/HighlightedButton"
+                    android:enabled="true"
+                    tools:text="עבור לקומה 2" />
+
             </LinearLayout>
         </amai.org.conventions.customviews.InterceptorLinearLayout>
 
