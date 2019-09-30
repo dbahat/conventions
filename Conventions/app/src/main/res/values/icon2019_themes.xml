@@ -133,7 +133,7 @@
         <item name="secondHandItemsDivider">@drawable/icon2019_second_hand_item_list_divider</item>
         <item name="secondHandFilterColor">?android:textColorPrimary</item>
         <!-- Discounts activity -->
-        <item name="discountsActivityLayout">@layout/olamot2019_activity_discounts</item>
+        <item name="discountsActivityLayout">@layout/activity_discounts</item>
     </style>
 
     <style name="AppBaseTheme.Icon2019.Toolbar.Event" parent="AppBaseTheme.Icon2019.Toolbar">

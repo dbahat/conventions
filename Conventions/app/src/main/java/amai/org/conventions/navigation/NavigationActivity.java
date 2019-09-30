@@ -197,7 +197,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 			items.add(new NavigationItem(FeedbackActivity.class, getString(R.string.feedback), ContextCompat.getDrawable(this, R.drawable.feedback_menu_icon)));
 		}
 		// disabled if/until discounts are decided for Icon
-//		items.add(new NavigationItem(DiscountsActivity.class, getString(R.string.discounts), ContextCompat.getDrawable(this, R.drawable.ic_card_giftcard_white)));
+		items.add(new NavigationItem(DiscountsActivity.class, getString(R.string.discounts), ContextCompat.getDrawable(this, R.drawable.ic_card_giftcard_white)));
 		items.add(new NavigationItem(WebContentActivity.AccessibilityActivity.class, getString(R.string.accessibility), ContextCompat.getDrawable(this, R.drawable.baseline_accessibility_new_white_18)));
 
 		items.add(new NavigationItem(AboutActivity.class, getString(R.string.about), ContextCompat.getDrawable(this, R.drawable.ic_action_about)));
