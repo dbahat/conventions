@@ -242,6 +242,7 @@
 					app:textColor="?eventFeedbackTextColor"
 					app:answerColor="?eventFeedbackAnswerColor"
 					app:selectedAnswerColor="?eventFeedbackSelectedAnswerColor"
+					app:linkColor="?eventFeedbackAnswerColor"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"/>
 			</LinearLayout>

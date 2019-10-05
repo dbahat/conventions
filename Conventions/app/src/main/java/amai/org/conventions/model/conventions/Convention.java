@@ -763,4 +763,12 @@ public abstract class Convention implements Serializable {
 		}
 		return secondHandBuy;
 	}
+
+	public URL getAdditionalConventionFeedbackURL() {
+		return null;
+	}
+
+	public URL getAdditionalEventFeedbackURL(ConventionEvent event) {
+		return null;
+	}
 }

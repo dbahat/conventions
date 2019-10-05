@@ -299,6 +299,7 @@ public class FeedbackActivity extends NavigationActivity {
 	private void setupConventionFeedbackView() {
 		feedbackView = (CollapsibleFeedbackView) findViewById(R.id.convention_feedback_view);
 		feedbackView.setState(CollapsibleFeedbackView.State.ExpandedHeadless, false);
+		feedbackView.setAdditionalFeedbackURL(Convention.getInstance().getAdditionalConventionFeedbackURL());
 		feedbackView.setModel(Convention.getInstance().getFeedback());
 		feedbackView.setSendFeedbackClickListener(feedbackView.new CollapsibleFeedbackViewSendListener() {
 			@Override

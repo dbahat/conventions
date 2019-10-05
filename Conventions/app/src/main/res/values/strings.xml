@@ -42,6 +42,9 @@
     <string name="feedback_send_failed">לא ניתן לשלוח את הפידבק. נסה שנית מאוחר יותר</string>
     <string name="feedback_sent">הפידבק נשלח. תודה!</string>
     <string name="feedback_sending_time_over">זמן שליחת הפידבק הסתיים</string>
+    <string name="additional_feedback"><![CDATA[
+<a href="%s">רוצה להרחיב? לתת משוב נוסף? לחץ כאן</a>
+]]></string>
 
     <string name="search_input_search_keyword">הקלד את חיפושך…</string>
     <string name="search_no_results_found">לא נמצאו תוצאות</string>

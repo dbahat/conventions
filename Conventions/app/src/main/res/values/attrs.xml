@@ -13,6 +13,7 @@
         <attr name="textColor" format="integer|reference"/>
         <attr name="answerColor" format="integer|reference"/>
         <attr name="selectedAnswerColor" format="integer|reference"/>
+        <attr name="linkColor" format="integer|reference"/>
     </declare-styleable>
 
     <declare-styleable name="ApplicationTheme">
