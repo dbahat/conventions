@@ -197,9 +197,6 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 			}
 		});
 
-		// Hold all the fragments in memory for best transition performance
-		viewPager.setOffscreenPageLimit(viewPager.getAdapter().getCount());
-
 		viewPager.setCondition(new ConditionalSwipeVerticalViewPager.Condition() {
 			@Override
 			public boolean shouldSwipe() {
@@ -262,7 +259,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 	}
 
 	private class MapFloorAdapter extends FragmentStatePagerAdapter {
-		private final boolean showAnimation;
+		private boolean showAnimation;
 
 		public MapFloorAdapter(FragmentManager fm, boolean showAnimation) {
 			super(fm);
@@ -271,7 +268,9 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 
 		@Override
 		public Fragment getItem(int position) {
-			return MapFloorFragment.newInstance(pagerPositionToFloor(position).getNumber(), showAnimation);
+			MapFloorFragment mapFloorFragment = MapFloorFragment.newInstance(pagerPositionToFloor(position).getNumber(), showAnimation);
+			showAnimation = false; // The animation should only be displayed once
+			return mapFloorFragment;
 		}
 
 		@Override
