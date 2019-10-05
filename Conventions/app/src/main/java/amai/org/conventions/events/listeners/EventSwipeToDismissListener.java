@@ -1,10 +1,9 @@
 package amai.org.conventions.events.listeners;
 
-import com.google.android.material.snackbar.Snackbar;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
 import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +15,7 @@ import amai.org.conventions.events.holders.SwipeableEventViewHolder;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.notifications.PushNotificationTopicsSubscriber;
+import androidx.recyclerview.widget.RecyclerView;
 import sff.org.conventions.R;
 
 public class EventSwipeToDismissListener implements SwipeableEventViewHolder.OnEventSwipedListener {
@@ -57,23 +57,27 @@ public class EventSwipeToDismissListener implements SwipeableEventViewHolder.OnE
 			((EventGroupsAdapter) adapter).updateSlots(adapterPosition, new ArrayList<ConventionEvent>(), true);
 		}
 
-		Snackbar snackbar = Snackbar.make(viewHolder.itemView, R.string.event_removed_from_favorites, Snackbar.LENGTH_LONG).setAction(R.string.cancel, new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				ConventionEvent updatedEvent = viewHolder.getModel();
-				updatedEvent.setAttending(true);
-				ConventionsApplication.alarmScheduler.scheduleDefaultEventAlarms(updatedEvent);
-				Convention.getInstance().getStorage().saveUserInput();
-				PushNotificationTopicsSubscriber.unsubscribe(event);
-				if (adapter instanceof EventGroupsAdapter) {
-					((EventGroupsAdapter) adapter).updateEventGroups();
-				} else {
-					adapter.notifyDataSetChanged();
+		try {
+			Snackbar snackbar = Snackbar.make(viewHolder.itemView, R.string.event_removed_from_favorites, Snackbar.LENGTH_LONG).setAction(R.string.cancel, new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					ConventionEvent updatedEvent = viewHolder.getModel();
+					updatedEvent.setAttending(true);
+					ConventionsApplication.alarmScheduler.scheduleDefaultEventAlarms(updatedEvent);
+					Convention.getInstance().getStorage().saveUserInput();
+					PushNotificationTopicsSubscriber.unsubscribe(event);
+					if (adapter instanceof EventGroupsAdapter) {
+						((EventGroupsAdapter) adapter).updateEventGroups();
+					} else {
+						adapter.notifyDataSetChanged();
+					}
 				}
-			}
-		});
-		snackbar.getView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
-		snackbar.setActionTextColor(ThemeAttributes.getColor(viewHolder.itemView.getContext(), R.attr.snackbarActionColor));
-		snackbar.show();
+			});
+			snackbar.getView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+			snackbar.setActionTextColor(ThemeAttributes.getColor(viewHolder.itemView.getContext(), R.attr.snackbarActionColor));
+			snackbar.show();
+		} catch (IllegalArgumentException e) {
+			// Could happen when the user moved to a different screen, in that case don't show the snackbar
+		}
 	}
 }
