@@ -11,9 +11,11 @@ import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.text.Editable;
+import android.text.Html;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.text.method.LinkMovementMethod;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +36,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.analytics.HitBuilders;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -71,6 +74,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 	private ViewGroup feedbackExpended;
 	private ViewGroup feedbackContainer;
 	private ProgressBar progressBar;
+	private TextView additionalFeedbackLink;
 	private List<TextView> generatedQuestionTextViews = new LinkedList<>();
 
 	private Survey feedback;
@@ -78,8 +82,10 @@ public class CollapsibleFeedbackView extends FrameLayout {
 	private int textColor = Convention.NO_COLOR;
 	private int answerColor = Convention.NO_COLOR;
 	private int selectedAnswerColor = Convention.NO_COLOR;
+	private int linkColor = Convention.NO_COLOR;
 	private int feedbackSentTextResource = R.string.feedback_sent;
 	private int feedbackSendErrorMessage = R.string.feedback_send_failed;
+	private URL additionalFeedbackURL;
 
 	public CollapsibleFeedbackView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -90,6 +96,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 				textColor = array.getColor(R.styleable.CollapsibleFeedbackView_textColor, Convention.NO_COLOR);
 				answerColor = array.getColor(R.styleable.CollapsibleFeedbackView_answerColor, Convention.NO_COLOR);
 				selectedAnswerColor = array.getColor(R.styleable.CollapsibleFeedbackView_selectedAnswerColor, Convention.NO_COLOR);
+				linkColor = array.getColor(R.styleable.CollapsibleFeedbackView_linkColor, Convention.NO_COLOR);
 			} finally {
 				array.recycle();
 			}
@@ -110,6 +117,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		feedbackCollapsed = (ViewGroup) findViewById(R.id.feedback_collapsed);
 		feedbackExpended = (ViewGroup) findViewById(R.id.feedback_expended);
 		progressBar = (ProgressBar) findViewById(R.id.feedback_progress_bar);
+		additionalFeedbackLink = findViewById(R.id.additional_feedback_link);
 	}
 
 	public void setState(State state, boolean animate) {
@@ -165,10 +173,28 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		}
 
 		setFeedbackIcon(feedback);
+		setupAdditionalFeedback();
 
 		LinearLayout questionsLayout = (LinearLayout) findViewById(R.id.questions_layout);
 		buildQuestionsLayout(questionsLayout, feedback);
 		setTextColor(textColor);
+	}
+
+	/** This must be called before setModel or refresh */
+	public void setAdditionalFeedbackURL(URL additionalFeedbackURL) {
+		this.additionalFeedbackURL = additionalFeedbackURL;
+	}
+
+	private void setupAdditionalFeedback() {
+		if (additionalFeedbackURL == null) {
+			additionalFeedbackLink.setVisibility(GONE);
+		} else {
+			int linkColor = this.linkColor != Convention.NO_COLOR ? this.linkColor : ThemeAttributes.getColor(getContext(), R.attr.feedbackAnswerButtonColor);
+			additionalFeedbackLink.setVisibility(VISIBLE);
+			additionalFeedbackLink.setText(Html.fromHtml(getContext().getString(R.string.additional_feedback, additionalFeedbackURL.toString())));
+			additionalFeedbackLink.setMovementMethod(LinkMovementMethod.getInstance());
+			additionalFeedbackLink.setLinkTextColor(linkColor);
+		}
 	}
 
 	public void setFeedbackSentText(@StringRes int stringResource) {

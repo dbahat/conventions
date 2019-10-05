@@ -590,6 +590,7 @@ public class EventActivity extends NavigationActivity {
 	private void setupFeedback(ConventionEvent event) {
 		if (event.canFillFeedback()) {
 			feedbackContainer.setVisibility(View.VISIBLE);
+			feedbackView.setAdditionalFeedbackURL(Convention.getInstance().getAdditionalEventFeedbackURL(event));
 			feedbackView.setModel(event.getUserInput().getFeedback());
 
 			if (shouldFeedbackBeClosed()) {

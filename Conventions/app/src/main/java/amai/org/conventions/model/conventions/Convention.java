@@ -695,4 +695,12 @@ public abstract class Convention implements Serializable {
 	public int getEventIcon(ConventionEvent event) {
 		return 0;
 	}
+
+	public URL getAdditionalConventionFeedbackURL() {
+		return null;
+	}
+
+	public URL getAdditionalEventFeedbackURL(ConventionEvent event) {
+		return null;
+	}
 }
