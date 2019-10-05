@@ -20,7 +20,6 @@ import amai.org.conventions.utils.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.widget.ListViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -135,6 +134,10 @@ public class SecondHandSellFragment extends Fragment implements SwipeRefreshLayo
 									protected void onPostExecute(Exception exception) {
 										isAddingItem = false;
 										updateRefreshing();
+
+										if (getActivity() == null) {
+											return;
+										}
 										if (exception == null) {
 											adapter.notifyDataSetChanged();
 											listView.post(new Runnable() {
@@ -204,6 +207,10 @@ public class SecondHandSellFragment extends Fragment implements SwipeRefreshLayo
 			protected void onPostExecute(Boolean success) {
 				isRefreshing = false;
 				updateRefreshing();
+
+				if (getActivity() == null) {
+					return;
+				}
 				adapter.setForms(secondHandSell.getForms());
 				adapter.notifyDataSetChanged();
 				if (!success) {

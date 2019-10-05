@@ -272,12 +272,17 @@ public class SecondHandBuyFragment extends Fragment implements SwipeRefreshLayou
 
 			@Override
 			protected void onPostExecute(Boolean success) {
+				swipeRefreshLayout.setRefreshing(false);
+
+				// This could happen if the user moved to a different activity
+				if (getContext() == null) {
+					return;
+				}
 				if (!success) {
 					Toast.makeText(getContext(), R.string.update_refresh_failed, Toast.LENGTH_SHORT).show();
 				}
 				// Even if the refresh wasn't successful we still need to set the items, apply the filters etc
 				updateRefreshTime();
-				swipeRefreshLayout.setRefreshing(false);
 				applyFiltersInBackground();
 			}
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
