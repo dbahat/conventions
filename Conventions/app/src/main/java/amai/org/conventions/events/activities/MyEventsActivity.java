@@ -498,8 +498,9 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 	}
 
 	private String formatEventToShare(ConventionEvent event) {
-		return String.format(Dates.getLocale(), "%s: %s",
+		return String.format(Dates.getLocale(), "%s-%s: %s",
 				Dates.formatHoursAndMinutes(event.getStartTime()),
+				Dates.formatHoursAndMinutes(event.getEndTime()),
 				event.getTitle());
 	}
 
