@@ -6,18 +6,13 @@ import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
-import com.google.android.material.tabs.TabLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.core.app.ShareCompat;
-import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.material.tabs.TabLayout;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,6 +30,11 @@ import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ShareCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.viewpager.widget.ViewPager;
 
 
 public class MyEventsActivity extends NavigationActivity implements MyEventsDayFragment.EventsListener {
@@ -238,8 +238,9 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 	}
 
 	private String formatEventToShare(ConventionEvent event) {
-		return String.format(Dates.getLocale(), "%s: %s",
+		return String.format(Dates.getLocale(), "%s-%s: %s",
 				Dates.formatHoursAndMinutes(event.getStartTime()),
+				Dates.formatHoursAndMinutes(event.getEndTime()),
 				event.getTitle());
 	}
 
