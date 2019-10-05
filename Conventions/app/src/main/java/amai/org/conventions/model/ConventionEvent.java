@@ -526,8 +526,6 @@ public class ConventionEvent implements Serializable {
 		public UserInput() {
 			feedback = new Survey().withQuestions(
 					new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_ENJOYMENT_5P, FeedbackQuestion.AnswerType.SMILEY_5_POINTS),
-					new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_LECTURER_QUALITY_5P, FeedbackQuestion.AnswerType.SMILEY_5_POINTS),
-					new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_SIMILAR_EVENTS_5P, FeedbackQuestion.AnswerType.SMILEY_5_POINTS),
 					new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_ADDITIONAL_INFO, FeedbackQuestion.AnswerType.TEXT)
 			);
 

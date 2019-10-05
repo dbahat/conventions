@@ -31,7 +31,7 @@
     <string name="question_enjoyment">האם נהנית באירוע?</string>
     <string name="question_lecturer_quality">ההנחיה באירוע היתה:</string>
     <string name="question_similar_events">האם תרצה לבוא לאירועים בנושאים דומים בעתיד?</string>
-    <string name="question_additional_info">עוד משהו?</string>
+    <string name="question_additional_info">נשמח לדעת למה</string>
     <string name="event_has_ended">האירוע נגמר</string>
     <string name="add_feedback">מלא פידבק</string>
     <string name="feedback">פידבק</string>
