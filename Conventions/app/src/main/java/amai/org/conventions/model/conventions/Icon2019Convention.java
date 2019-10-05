@@ -809,4 +809,27 @@ public class Icon2019Convention extends SffConvention {
 //		}
 //		return super.findEventByURL(url);
 //	}
+
+	@Override
+	public URL getAdditionalConventionFeedbackURL() {
+		try {
+			return new URL("https://docs.google.com/forms/d/e/1FAIpQLScAhC6xcSDmexSAMyVnGIEApiRC0jUBXVfvAxv2E9wvLoZeHg/viewform");
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@Override
+	public URL getAdditionalEventFeedbackURL(ConventionEvent event) {
+		try {
+			return new URL("https://docs.google.com/forms/d/e/1FAIpQLSdqH12zcrWijR56WbQsu1w6HtMSAOT3UG2mefNJr0ubLMPEbg/viewform?usp=pp_url" +
+					"&entry.1572016508=" + URLEncoder.encode(event.getTitle(), "UTF-8") +
+					"&entry.1917108492=" + URLEncoder.encode(event.getLecturer(), "UTF-8") +
+					"&entry.10889808=" + URLEncoder.encode(event.getHall().getName(), "UTF-8") +
+					"&entry.1131737302=" + URLEncoder.encode(Dates.formatDateAndTime(event.getStartTime()), "UTF-8")
+			);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
 }
