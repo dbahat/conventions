@@ -9,7 +9,6 @@ import android.widget.TextView;
 import java.util.List;
 
 import amai.org.conventions.ThemeAttributes;
-import amai.org.conventions.events.activities.SectionedGridRecyclerViewAdapterWrapper;
 import amai.org.conventions.events.adapters.SectionedRecyclerViewAdapter;
 import amai.org.conventions.model.Stand;
 import androidx.annotation.NonNull;
@@ -19,13 +18,13 @@ import sff.org.conventions.R;
 public class StandsRecyclerAdapter extends SectionedRecyclerViewAdapter<Stand, Stand.StandType, StandViewHolder, StandsRecyclerAdapter.SectionViewHolder> {
     private final boolean showLocations;
     private List<Stand> stands;
-    private List<SectionedGridRecyclerViewAdapterWrapper.Section> sections;
     private boolean colorImages;
     private String selectedStandName;
     private OnClickListener onClickListener;
 
     public StandsRecyclerAdapter(List<Stand> stands, boolean colorImages, boolean showLocations, String selectedStandName) {
         super(stands);
+        this.stands = stands;
         this.colorImages = colorImages;
         this.showLocations = showLocations;
         this.selectedStandName = selectedStandName;
