@@ -2,7 +2,6 @@ package amai.org.conventions.events;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
@@ -15,6 +14,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
 import java.util.List;
 
 import amai.org.conventions.R;
@@ -26,7 +27,6 @@ import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.networking.AmaiModelConverter;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Strings;
-import androidx.core.content.ContextCompat;
 
 public class EventView extends FrameLayout {
 
@@ -40,6 +40,7 @@ public class EventView extends FrameLayout {
     private final TextView lecturerName;
     private final ImageView feedbackIcon;
     private final ImageView alarmIcon;
+    private final ViewGroup timeLayout;
     private final ViewGroup eventContainer;
     private final View eventMainTouchArea;
     private final View bottomLayout;
@@ -48,7 +49,6 @@ public class EventView extends FrameLayout {
     private final View searchDescriptionContainer;
     private final TextView searchDescription;
     private String eventDescriptionContent;
-    private ImageView eventTypeIcon;
 
     public EventView(Context context) {
         this(context, null);
@@ -59,6 +59,7 @@ public class EventView extends FrameLayout {
 
         LayoutInflater.from(this.getContext()).inflate(R.layout.convention_event, this, true);
 
+        timeLayout = (ViewGroup) this.findViewById(R.id.timeLayout);
         favoriteIcon = (ImageView) this.findViewById(R.id.eventFavoriteIcon);
         favoriteIconTouchArea = this.findViewById(R.id.eventFavoriteIconTouchArea);
         hallName = (TextView) this.findViewById(R.id.hallName);
@@ -74,12 +75,15 @@ public class EventView extends FrameLayout {
         bottomLayout = this.findViewById(R.id.bottom_layout);
         searchDescriptionContainer = this.findViewById(R.id.search_description_container);
         searchDescription = (TextView) this.findViewById(R.id.search_description);
-        eventTypeIcon = findViewById(R.id.eventTypeIcon);
     }
 
     public void setEvent(ConventionEvent event) {
+        setEvent(event, false);
+    }
+
+    public void setEvent(ConventionEvent event, boolean conflicting) {
         if (event != null) {
-            setColorsFromEvent(event);
+            setColorsFromEvent(event, conflicting);
             setAttending(event.isAttending());
             setHallName(event.getHall().getName());
             setStartTime(Dates.formatHoursAndMinutes(event.getStartTime()));
@@ -97,24 +101,24 @@ public class EventView extends FrameLayout {
         eventMainTouchArea.setTag(event == null ? null : event.getId());
     }
 
-    private void setColorsFromEvent(ConventionEvent event) {
-        int eventTypeIcon = Convention.getInstance().getEventIcon(event);
-        if (eventTypeIcon != 0) {
-            this.eventTypeIcon.setImageDrawable(ContextCompat.getDrawable(getContext(), eventTypeIcon));
-        } else {
-            this.eventTypeIcon.setImageDrawable(new ColorDrawable(event.getType().getBackgroundColor()));
-        }
+    private void setColorsFromEvent(ConventionEvent event, boolean conflicting) {
+        int eventTypeColor = event.getBackgroundColor(getContext());
+        setEventTypeColor(eventTypeColor);
         setEventTimeTextColor(event.getTextColor(getContext()));
         if (!event.hasStarted()) {
-            setEventNameColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeNotStartedColor), 0);
+            setEventNameColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeNotStartedColor), eventTypeColor);
             setEventBackgroundColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeNotStartedBackgroundColor));
         } else if (event.hasEnded()) {
-            setEventNameColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeEndedColor), 0);
+            setEventNameColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeEndedColor), eventTypeColor);
             setEventBackgroundColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeEndedBackgroundColor));
         } else {
-            setEventNameColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeCurrentColor), 0);
+            setEventNameColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeCurrentColor), eventTypeColor);
             setEventBackgroundColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeCurrentBackgroundColor));
         }
+    }
+
+    public void setEventTypeColor(int color) {
+        setLayoutColor(timeLayout, color);
     }
 
     public void setEventTimeTextColor(int color) {
@@ -140,18 +144,12 @@ public class EventView extends FrameLayout {
     }
 
     public void setAttending(boolean isAttending) {
-        Drawable attendingDrawable = ThemeAttributes.getDrawable(getContext(), R.attr.eventFavoriteColor);
-        Drawable notAttendingDrawable = ThemeAttributes.getDrawable(getContext(), R.attr.eventNonFavoriteColor);
-
-        Drawable currentStateDrawable = isAttending ? attendingDrawable : notAttendingDrawable;
-
-        if (attendingDrawable instanceof ColorDrawable) {
-            favoriteIcon.setImageDrawable(ThemeAttributes.getDrawable(getContext(), R.attr.eventFavoriteIcon));
-            favoriteIcon.setColorFilter(((ColorDrawable) currentStateDrawable).getColor(), PorterDuff.Mode.SRC_ATOP);
+        favoriteIcon.setImageDrawable(ThemeAttributes.getDrawable(getContext(), R.attr.eventFavoriteIcon));
+        if (isAttending) {
+            favoriteIcon.setColorFilter(ThemeAttributes.getColor(getContext(), R.attr.eventFavoriteColor), PorterDuff.Mode.SRC_ATOP);
         } else {
-            favoriteIcon.setImageDrawable(currentStateDrawable);
+            favoriteIcon.setColorFilter(ThemeAttributes.getColor(getContext(), R.attr.eventNonFavoriteColor), PorterDuff.Mode.SRC_ATOP);
         }
-
     }
 
     public void setShowHallName(boolean show) {
@@ -199,10 +197,7 @@ public class EventView extends FrameLayout {
         if (event.getUserInput().getEventAboutToStartNotification().isEnabled() ||
                 event.getUserInput().getEventFeedbackReminderNotification().isEnabled()) {
             alarmIcon.setVisibility(VISIBLE);
-            Drawable favDrawable = ThemeAttributes.getDrawable(getContext(), R.attr.eventFavoriteColor);
-            if (favDrawable instanceof ColorDrawable) {
-                alarmIcon.setColorFilter(((ColorDrawable) favDrawable).getColor());
-            };
+            alarmIcon.setColorFilter(ThemeAttributes.getColor(getContext(), R.attr.eventDetailsColor));
         } else {
             alarmIcon.setVisibility(GONE);
         }
@@ -227,11 +222,11 @@ public class EventView extends FrameLayout {
                 // be a weighted rating
                 if (feedback.isSent()) {
                     icon = ContextCompat.getDrawable(getContext(), R.drawable.feedback_sent);
-                    filterColor = ThemeAttributes.getColor(getContext(), R.attr.eventSentFeedbackColor);
+                    filterColor = ContextCompat.getColor(getContext(), R.color.yellow);
                 } else if (event.isAttending() || feedback.hasAnsweredQuestions()) {
                     filterColor = ThemeAttributes.getColor(getContext(), R.attr.eventSendFeedbackColor);
                 } else {
-                    filterColor = ThemeAttributes.getColor(getContext(), R.attr.eventFeedbackDefaultColor);
+                    filterColor = ThemeAttributes.getColor(getContext(), R.attr.eventDetailsColor);
                 }
             }
 

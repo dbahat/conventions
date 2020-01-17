@@ -90,9 +90,9 @@
         <item name="eventSendFeedbackColor">@color/cami2019_yellow</item>
         <item name="eventSentFeedbackColor">@color/cami2019_yellow</item>
         <item name="eventFeedbackDefaultColor">?eventTypeEndedColor</item>
-        <item name="eventFavoriteIcon">@null</item>
-        <item name="eventNonFavoriteColor">@drawable/cami2019_favorite_empty</item>
-        <item name="eventFavoriteColor">@drawable/cami2019_favorite_full</item>
+        <item name="eventFavoriteIcon">@drawable/ic_star_white_24dp</item>
+        <item name="eventNonFavoriteColor">@color/white</item>
+        <item name="eventFavoriteColor">@color/gold</item>
         <item name="eventAlertsIcon">@drawable/cami2019_alerts_icon</item>
         <!-- Map Screen -->
         <item name="mapBackground">@drawable/cami2019_map_background</item>

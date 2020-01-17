@@ -3,15 +3,15 @@
      the inspection states. This isn't a root layout of any activity and the activity it's on
      needs the background color. -->
 <LinearLayout
-     xmlns:android="http://schemas.android.com/apk/res/android"
-     xmlns:tools="http://schemas.android.com/tools"
-     android:layout_width="match_parent"
-     android:layout_height="wrap_content"
-     android:orientation="vertical"
-     tools:ignore="Overdraw">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:ignore="Overdraw">
 
     <FrameLayout
-        android:layout_gravity="start"
+        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?eventTimeHeaderBackground"
@@ -29,12 +29,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             tools:text="14:00"
-            android:textSize="40sp"
             android:textAppearance="?android:attr/textAppearanceLarge" />
     </FrameLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="10dp"
         android:background="?eventListDivider"/>
 </LinearLayout>

@@ -107,9 +107,7 @@ public class EventsViewOrHourAdapter extends BaseAdapter implements StickyListHe
 		int color;
 
 		if (!startTime.before(Dates.now())) {
-			// Specifically for Cami2019 the header color should be different then the EventNotStarted color
-			color = ThemeAttributes.getColor(holder.itemView.getContext(), R.attr.eventTimeHeaderDefaultTextColor);
-//			color = ThemeAttributes.getColor(holder.itemView.getContext(), R.attr.eventTypeNotStartedColor);
+			color = ThemeAttributes.getColor(holder.itemView.getContext(), R.attr.eventTypeNotStartedColor);
 		} else
 			if (endTime.before(Dates.now())) {
 			color = ThemeAttributes.getColor(holder.itemView.getContext(), R.attr.eventTypeEndedColor);
