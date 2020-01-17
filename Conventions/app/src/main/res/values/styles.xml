@@ -87,12 +87,6 @@
     <style name="EventAnswerButton" parent="TextAppearance.AppCompat.Button">
         <item name="textAllCaps">false</item>
         <item name="android:textAllCaps">false</item>
-        <item name="android:textColor">?feedbackAnswerButtonColor</item>
-    </style>
-    <style name="EventAnswerButtonHighlighted" parent="TextAppearance.AppCompat.Button">
-        <item name="textAllCaps">false</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="android:textColor">?feedbackAnswerButtonSelectedColor</item>
     </style>
 
     <!-- Values copied from R.style.TextAppearance_AppCompat_Body1 since it's private (for v21 version too) -->

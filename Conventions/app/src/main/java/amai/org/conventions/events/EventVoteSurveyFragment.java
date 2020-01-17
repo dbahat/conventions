@@ -2,8 +2,6 @@ package amai.org.conventions.events;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +13,11 @@ import com.google.android.gms.analytics.HitBuilders;
 
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.R;
-import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.feedback.SurveySender;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.conventions.Convention;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 
 public class EventVoteSurveyFragment extends DialogFragment {
 	private static final String EventId = "EventId";
@@ -85,7 +84,6 @@ public class EventVoteSurveyFragment extends DialogFragment {
 		surveyView.setFeedbackSentText(R.string.event_vote_survey_sent);
 		surveyView.setFeedbackSendErrorMessage(R.string.vote_send_error);
 		surveyView.setModel(event.getUserInput().getVoteSurvey());
-		surveyView.setTextColor(ThemeAttributes.getColor(surveyView.getContext(), R.attr.eventSurveyTextColor));
 		surveyView.setSendFeedbackClickListener(surveyView.new CollapsibleFeedbackViewSendListener() {
 			@Override
 			protected void saveFeedback() {

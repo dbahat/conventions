@@ -1,5 +1,6 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/event_main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -169,6 +170,9 @@
 
                 <amai.org.conventions.events.CollapsibleFeedbackView
                     android:id="@+id/event_feedback_view"
+					app:textColor="?eventFeedbackTextColor"
+					app:answerColor="?eventFeedbackAnswerColor"
+					app:selectedAnswerColor="?eventFeedbackSelectedAnswerColor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
             </LinearLayout>

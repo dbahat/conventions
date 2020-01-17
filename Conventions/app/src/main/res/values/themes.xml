@@ -97,10 +97,14 @@
         <item name="feedbackButtonColor">?borderlessButtonColor</item>
         <item name="eventTitleTextColor">?android:textColorPrimary</item>
         <item name="eventFeedbackTextColor">?attr/eventDescriptionTextColor</item>
+        <item name="eventFeedbackAnswerColor">?feedbackAnswerButtonColor</item>
+        <item name="eventFeedbackSelectedAnswerColor">?feedbackAnswerButtonSelectedColor</item>
         <item name="eventVoteBoxColor">?eventFeedbackBoxColor</item>
         <item name="eventDescriptionBoxColor">?eventDetailsBoxColor</item>
         <item name="eventActivityFavoriteColor">@color/gold</item>
         <item name="eventSurveyTextColor">@color/black</item>
+        <item name="eventSurveyAnswerColor">?feedbackAnswerButtonColor</item>
+        <item name="eventSurveySelectedAnswerColor">?feedbackAnswerButtonSelectedColor</item>
 
         <!-- Feedback activity -->
         <item name="conventionFeedbackTextColor">?eventTitleTextColor</item>
@@ -208,10 +212,14 @@
         <item name="feedbackButtonColor">?borderlessButtonColor</item>
         <item name="eventTitleTextColor">?android:textColorPrimary</item>
         <item name="eventFeedbackTextColor">?attr/eventDescriptionTextColor</item>
+        <item name="eventFeedbackAnswerColor">?feedbackAnswerButtonColor</item>
+        <item name="eventFeedbackSelectedAnswerColor">?feedbackAnswerButtonSelectedColor</item>
         <item name="eventVoteBoxColor">?eventFeedbackBoxColor</item>
         <item name="eventDescriptionBoxColor">?eventDetailsBoxColor</item>
         <item name="eventActivityFavoriteColor">@color/gold</item>
         <item name="eventSurveyTextColor">@color/black</item>
+        <item name="eventSurveyAnswerColor">?feedbackAnswerButtonColor</item>
+        <item name="eventSurveySelectedAnswerColor">?feedbackAnswerButtonSelectedColor</item>
 
         <!-- Feedback activity -->
         <item name="conventionFeedbackTextColor">?eventTitleTextColor</item>

@@ -9,6 +9,12 @@
         <attr name="maxHeight" format="dimension"/>
     </declare-styleable>
 
+    <declare-styleable name="CollapsibleFeedbackView">
+        <attr name="textColor" format="integer|reference"/>
+        <attr name="answerColor" format="integer|reference"/>
+        <attr name="selectedAnswerColor" format="integer|reference"/>
+    </declare-styleable>
+
     <declare-styleable name="ApplicationTheme">
         <!-- Sub-themes -->
         <attr name="numberPickerTheme" format="integer|reference"/>
@@ -140,6 +146,8 @@
         <attr name="eventFeedbackBoxColor" format="color|reference"/>
         <attr name="eventDetailsDefaultBackgroundColor" format="color|reference"/>
         <attr name="eventFeedbackTextColor" format="color|reference"/>
+        <attr name="eventFeedbackAnswerColor" format="color|reference"/>
+        <attr name="eventFeedbackSelectedAnswerColor" format="color|reference"/>
         <attr name="eventActivityFavoriteColor" format="color|reference"/>
         <!-- Buttons -->
         <attr name="highlightedButtonBackground" format="integer|reference"/>
@@ -160,6 +168,8 @@
         <attr name="fabOnProgrammeTop" format="boolean"/>
         <!-- Event Survey Dialog -->
         <attr name="eventSurveyTextColor" format="color|reference"/>
+        <attr name="eventSurveyAnswerColor" format="color|reference"/>
+        <attr name="eventSurveySelectedAnswerColor" format="color|reference"/>
         <!-- Icons -->
         <attr name="iconAddToFavorites" format="integer|reference"/>
         <attr name="iconShrink" format="integer|reference"/>
