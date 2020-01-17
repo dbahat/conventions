@@ -106,6 +106,8 @@
         <attr name="navigationPopupBackground" format="color|reference"/>
         <attr name="navigationPopupTitle" format="integer|reference"/>
         <attr name="navigationPopupBottomImage" format="integer|reference"/>
+        <attr name="navigationPopupTopSelectedColor" format="color|reference"/>
+        <attr name="navigationPopupTopNotSelectedColor" format="color|reference"/>
         <attr name="navigationPopupSelectedColor" format="color|reference"/>
         <attr name="navigationPopupNotSelectedColor" format="color|reference"/>
         <attr name="navigationPopupSeparatorColor" format="color|reference"/>

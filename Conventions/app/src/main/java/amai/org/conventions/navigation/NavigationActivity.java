@@ -3,6 +3,7 @@ package amai.org.conventions.navigation;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
@@ -180,19 +181,10 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		// Children can inherit this
 	}
 
-	private Drawable getTopButtonsImageDrawable(@DrawableRes int drawableId) {
-		Drawable drawable = ContextCompat.getDrawable(this, drawableId);
-		drawable.mutate();
-		int color = ContextCompat.getColor(this, R.color.cami2019_yellow);
-		drawable.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
-		return drawable;
-	}
-
 	private void initializeNavigationDrawer() {
 		navigationTopButtonsLayout.setNavigationItems(this, Arrays.asList(
-				new NavigationItem(AboutActivity.class, getString(R.string.about), getTopButtonsImageDrawable(R.drawable.cami2019_about), getTopButtonsImageDrawable(R.drawable.cami2019_about_full)),
-				new NavigationItem(UpdatesActivity.class, getString(R.string.updates), getTopButtonsImageDrawable(R.drawable.cami2019_updates), getTopButtonsImageDrawable(R.drawable.cami2019_updates_full)),
-				new NavigationItem(SettingsActivity.class, getString(R.string.settings), getTopButtonsImageDrawable(R.drawable.cami2019_settings), getTopButtonsImageDrawable(R.drawable.cami2019_settings_full))
+				new NavigationItem(AboutActivity.class, getString(R.string.about), ContextCompat.getDrawable(this, R.drawable.cami2019_about), ContextCompat.getDrawable(this, R.drawable.cami2019_about_full)),
+				new NavigationItem(SettingsActivity.class, getString(R.string.settings), ContextCompat.getDrawable(this, R.drawable.cami2019_settings), ContextCompat.getDrawable(this, R.drawable.cami2019_settings_full))
 		));
 
 		final List<NavigationItem> items = new ArrayList<>(Arrays.asList(
@@ -205,13 +197,13 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		if (Convention.getInstance().getMap().isAvailable()) {
 			items.add(new NavigationItem(MapActivity.class, getString(R.string.map), ContextCompat.getDrawable(this, android.R.drawable.ic_dialog_map)));
 		}
+		items.add(new NavigationItem(UpdatesActivity.class, getString(R.string.updates), ContextCompat.getDrawable(this, android.R.drawable.stat_notify_sync_noanim)));
 		items.add(new NavigationItem(ArrivalMethodsActivity.class, getString(R.string.arrival_methods), ContextCompat.getDrawable(this, R.drawable.directions)));
 
 		if (Convention.getInstance().canFillFeedback()) {
 			items.add(new NavigationItem(FeedbackActivity.class, getString(R.string.feedback), ContextCompat.getDrawable(this, R.drawable.feedback_menu_icon)));
 		}
-		items.add(new NavigationItem(AccessibilityActivity.class, getString(R.string.accessibility),
-				null /* setting an icon since it's not required for Cami2019 */));
+		items.add(new NavigationItem(AccessibilityActivity.class, getString(R.string.accessibility), ContextCompat.getDrawable(this, R.drawable.baseline_accessibility_new_white_18)));
 
 		ListView navigationItems = (ListView) findViewById(R.id.navigation_items);
 		navigationItems.setAdapter(new NavigationItemsAdapter(this, items));

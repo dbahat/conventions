@@ -11,18 +11,15 @@
         android:id="@+id/navigation_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/cami2019_navigation_item_background"
         android:drawablePadding="5dp"
-        android:gravity="center"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="4dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="?navigationPopupNotSelectedColor"
         app:compoundDrawableHeight="24dp"
         app:compoundDrawableWidth="24dp"
         tools:text="Topic 1"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"/>
+        />
 
     <View
         android:layout_width="match_parent"

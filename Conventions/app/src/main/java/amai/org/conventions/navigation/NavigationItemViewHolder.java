@@ -6,11 +6,9 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.RecyclerView;
-
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class NavigationItemViewHolder extends RecyclerView.ViewHolder {
 	private final TextView textView;
@@ -26,21 +24,13 @@ public class NavigationItemViewHolder extends RecyclerView.ViewHolder {
 		configureDrawableIfNeeded(currentActivity, isCurrentItemSelected, item.getIcon());
 
 		if (isCurrentItemSelected) {
-			int color = ThemeAttributes.getColor(currentActivity, R.attr.navigationPopupNotSelectedColor);
+			int color = ThemeAttributes.getColor(currentActivity, R.attr.navigationPopupSelectedColor);
 			textView.setTextColor(color);
-
 			textView.setOnClickListener(null);
-			textView.setBackground(ContextCompat.getDrawable(textView.getContext(), R.drawable.cami2019_navigation_item_background_selected));
 		} else {
 			int color = ThemeAttributes.getColor(currentActivity, R.attr.navigationPopupNotSelectedColor);
-
 			textView.setTextColor(color);
-			textView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					currentActivity.navigateToActivity(item.getActivity());
-				}
-			});
+			textView.setOnClickListener(v -> currentActivity.navigateToActivity(item.getActivity()));
 		}
 	}
 
@@ -50,13 +40,14 @@ public class NavigationItemViewHolder extends RecyclerView.ViewHolder {
 			return;
 		}
 
+		int color;
 		if (isCurrentItemSelected) {
-			int color = ThemeAttributes.getColor(context, R.attr.navigationPopupNotSelectedColor);
-			icon.mutate().setColorFilter(color, PorterDuff.Mode.MULTIPLY);
+			color = ThemeAttributes.getColor(context, R.attr.navigationPopupSelectedColor);
 		} else {
-			int color = ThemeAttributes.getColor(context, R.attr.navigationPopupNotSelectedColor);
-			icon.mutate().setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+			color = ThemeAttributes.getColor(context, R.attr.navigationPopupNotSelectedColor);
 		}
+		icon.mutate().setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+
 		// this should be setCompoundDrawablesRelative(icon, null, null, null) but in API 17 and 18 it appears on the wrong side.
 		// I tried to fix it by setting the layout direction to RTL directly on the textview but it didn't work.
 		textView.setCompoundDrawables(null, null, icon, null);

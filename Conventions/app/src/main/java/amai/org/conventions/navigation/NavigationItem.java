@@ -3,24 +3,21 @@ package amai.org.conventions.navigation;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 
-import androidx.annotation.Nullable;
-
 public class NavigationItem {
 	private final Class<? extends Activity> activity;
 	private final String text;
 	private final Drawable icon;
-	@Nullable
-	private final Drawable selectedItemIcon;
+	private final Drawable selectedIcon;
 
 	public NavigationItem(Class<? extends Activity> activity, String text, Drawable icon) {
 		this(activity, text, icon, null);
 	}
 
-	public NavigationItem(Class<? extends Activity> activity, String text, Drawable icon, Drawable selectedItemIcon) {
+	public NavigationItem(Class<? extends Activity> activity, String text, Drawable icon, Drawable selectedIcon) {
 		this.activity = activity;
 		this.text = text;
 		this.icon = icon;
-		this.selectedItemIcon = selectedItemIcon;
+		this.selectedIcon = selectedIcon;
 	}
 
 	public Class<? extends Activity> getActivity() {
@@ -35,8 +32,7 @@ public class NavigationItem {
 		return icon;
 	}
 
-	@Nullable
-	public Drawable getSelectedItemIcon() {
-		return selectedItemIcon;
+	public Drawable getSelectedIcon() {
+		return selectedIcon;
 	}
 }
