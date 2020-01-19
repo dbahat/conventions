@@ -9,10 +9,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
-import androidx.core.app.NotificationCompat;
-import androidx.appcompat.app.AlertDialog;
 
-import com.facebook.FacebookRequestError;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.NotificationCompat;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -138,9 +137,9 @@ public class ApplicationInitializer {
         final int numberOfUpdatesBeforeRefresh = Convention.getInstance().getUpdates().size();
 
 		// Refresh and ignore all errors
-		UpdatesRefresher.getInstance().refreshFromServer(null, true, new UpdatesRefresher.OnUpdateFinishedListener() {
-			@Override
-			public void onSuccess(int newUpdatesNumber) {
+		UpdatesRefresher.getInstance(context).refreshFromServer(true, false, new UpdatesRefresher.OnUpdateFinishedListener() {
+            @Override
+            public void onSuccess(int newUpdatesNumber) {
 				List<Update> newUpdates = CollectionUtils.filter(Convention.getInstance().getUpdates(), new CollectionUtils.Predicate<Update>() {
 					@Override
 					public boolean where(Update item) {
@@ -150,7 +149,7 @@ public class ApplicationInitializer {
 
 				// We don't want to raise the notification if there are no new updates, or if this is the first time updates are downloaded to cache.
 				if (newUpdatesNumber > 0 && newUpdates.size() > 0 && numberOfUpdatesBeforeRefresh > 0
-						&& UpdatesRefresher.getInstance().shouldEnableNotificationAfterUpdate()) {
+						&& UpdatesRefresher.getInstance(context).shouldEnableNotificationAfterUpdate()) {
 
 					Update latestUpdate = Collections.max(newUpdates, new Comparator<Update>() {
 						@Override
@@ -194,15 +193,10 @@ public class ApplicationInitializer {
 				}
 			}
 
-			@Override
-			public void onError(FacebookRequestError error) {
+            @Override
+            public void onError(Exception error) {
 
-			}
-
-			@Override
-			public void onInvalidTokenError() {
-
-			}
+            }
 		});
 	}
 }

@@ -1,5 +1,7 @@
 package amai.org.conventions.model.conventions;
 
+import androidx.annotation.Nullable;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
@@ -29,7 +31,6 @@ import amai.org.conventions.model.Survey;
 import amai.org.conventions.networking.SurveyDataRetriever;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
-import androidx.annotation.Nullable;
 
 public class Cami2019Convention extends AmaiConvention {
     // Hall names
@@ -118,8 +119,12 @@ public class Cami2019Convention extends AmaiConvention {
     }
 
     @Override
-    protected String initFacebookFeedPath() {
-        return "/cami.org.il/posts";
+    protected URL initUpdatesURL() {
+        try {
+            return new URL("https://amai.org.il/wp-content/plugins/GetHaruconFeed.php");
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

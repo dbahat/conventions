@@ -1,24 +1,14 @@
 package amai.org.conventions.updates;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
-import com.facebook.AccessToken;
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.FacebookRequestError;
-import com.facebook.login.LoginManager;
-import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.google.android.gms.analytics.HitBuilders;
 
 import java.util.Collections;
@@ -32,15 +22,14 @@ import amai.org.conventions.model.Update;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.networking.UpdatesRefresher;
+import amai.org.conventions.notifications.PushNotification;
 
 public class UpdatesActivity extends NavigationActivity implements SwipeRefreshLayout.OnRefreshListener {
 
-	private CallbackManager callbackManager;
 	private SwipeRefreshLayout swipeRefreshLayout;
-	private LoginButton loginButton;
 	private RecyclerView recyclerView;
 	private UpdatesAdapter updatesAdapter;
-	private View loginLayout;
+	private View noUpdates;
 	private View updatesLayout;
 
 	@Override
@@ -94,24 +83,8 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 		// Initialize the updates list based on the model cache.
 		List<Update> updates = Convention.getInstance().getUpdates();
 		initializeUpdatesList(updates, updates.size()); // All items are new in this list
-		showUpdates();
-
-		initializeFacebookLoginButton();
-
-		loginToFacebookAndRetrieveUpdates(savedInstanceState);
-	}
-
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-		if (callbackManager != null) {
-			callbackManager.onActivityResult(requestCode, resultCode, data);
-		}
-
-		// In case the user canceled his login attempt and he doesn't have any cache, show him the login button
-		if (resultCode == Activity.RESULT_CANCELED && updatesAdapter.getItemCount() == 0) {
-			showLogin();
-		}
+	    setUpdatesVisibility();
+	    retrieveUpdatesList(false);
 	}
 
 	@Override
@@ -125,32 +98,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 
 		setUpdatesBackground();
 		updatesAdapter.notifyItemRangeChanged(0, Convention.getInstance().getUpdates().size());
-
-		AccessToken accessToken = AccessToken.getCurrentAccessToken();
-		if (accessToken != null) {
-			retrieveUpdatesListFromFacebookApi(accessToken, true);
-		} else {
-			swipeRefreshLayout.setRefreshing(false);
-		}
-	}
-
-	private void loginToFacebookAndRetrieveUpdates(Bundle savedInstanceState) {
-		AccessToken accessToken = AccessToken.getCurrentAccessToken();
-		if (accessToken != null && !accessToken.isExpired()) {
-			// If the user has a valid token use it to refresh his updates
-			retrieveUpdatesListFromFacebookApi(accessToken, false);
-		} else if (savedInstanceState == null) {
-			// If the user has no valid token attempt to perform a silent login.
-			//
-			// Note - only attempt to do the silent login once when the activity is initially created, not when it's restored due to config changes.
-			// This is to prevent opening the user multiple login dialogs, which is both bad UX and may result in NullPointerException from the facebook SDK side
-			// (since the double dialogs may trigger its OnActivityResult twice)
-			LoginManager.getInstance().logInWithReadPermissions(this, null);
-		} else {
-			// If we got here it means we both don't have the token and we already attempted to perform silent sign-in once.
-			// In this case, show the login button.
-			showLogin();
-		}
+        retrieveUpdatesList(true);
 	}
 
 	private void resolveUiElements() {
@@ -159,55 +107,19 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 		swipeRefreshLayout.setColorSchemeColors(ThemeAttributes.getColor(this, R.attr.swipeToRefreshColor));
 		swipeRefreshLayout.setProgressBackgroundColorSchemeColor(ThemeAttributes.getColor(this, R.attr.swipeToRefreshBackgroundColor));
 
-		loginButton = (LoginButton) findViewById(R.id.login_button);
-		loginLayout = findViewById(R.id.login_layout);
+	    noUpdates = findViewById(R.id.no_updates);
 		recyclerView = (RecyclerView) findViewById(R.id.updates_list);
 		updatesLayout = findViewById(R.id.updates_layout);
 	}
 
-	private void showLogin() {
-		loginLayout.setVisibility(View.VISIBLE);
-		updatesLayout.setVisibility(View.GONE);
+	private void setUpdatesVisibility() {
+		boolean showMessage = updatesAdapter.getItemCount() == 0;
+		noUpdates.setVisibility(showMessage ? View.VISIBLE : View.GONE);
+		updatesLayout.setVisibility(showMessage ? View.GONE : View.VISIBLE);
 	}
 
-	private void showUpdates() {
-		loginLayout.setVisibility(View.GONE);
-		updatesLayout.setVisibility(View.VISIBLE);
-	}
-
-	private void initializeFacebookLoginButton() {
-		callbackManager = CallbackManager.Factory.create();
-		loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-
-			@Override
-			public void onSuccess(final LoginResult loginResult) {
-				showUpdates();
-
-				new Handler().post(new Runnable() {
-					@Override
-					public void run() {
-						retrieveUpdatesListFromFacebookApi(loginResult.getAccessToken(), true);
-					}
-				});
-			}
-
-			@Override
-			public void onCancel() {
-				showLogin();
-			}
-
-			@Override
-			public void onError(FacebookException e) {
-				if (loginLayout.getVisibility() == View.VISIBLE) {
-					Toast.makeText(UpdatesActivity.this, R.string.update_login_error, Toast.LENGTH_SHORT).show();
-				}
-				showLogin();
-			}
-		});
-	}
-
-	private void retrieveUpdatesListFromFacebookApi(final AccessToken accessToken, final boolean showError) {
-		final UpdatesRefresher refresher = UpdatesRefresher.getInstance();
+    private void retrieveUpdatesList(final boolean showError) {
+		final UpdatesRefresher refresher = UpdatesRefresher.getInstance(UpdatesActivity.this);
 
 		// Workaround (Android issue #77712) - SwipeRefreshLayout indicator does not appear when the `setRefreshing(true)` is called before
 		// the `SwipeRefreshLayout#onMeasure()`, so we post the setRefreshing call to the layout queue.
@@ -219,26 +131,20 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 			}
 		});
 
-		// Refresh, and don't allow new updates notification to occur due to this refresh
-		refresher.refreshFromServer(accessToken, false, new UpdatesRefresher.OnUpdateFinishedListener() {
+        // Refresh, and don't allow new updates notification to occur due to this refresh.
+	    // Only force refresh if it's due to user interaction (in that case we also show an error).
+	    refresher.refreshFromServer(false, showError, new UpdatesRefresher.OnUpdateFinishedListener() {
 			@Override
 			public void onSuccess(int newUpdatesNumber) {
 				updateRefreshingFlag();
 				initializeUpdatesList(Convention.getInstance().getUpdates(), newUpdatesNumber);
+			    setUpdatesVisibility();
 				// If we don't do that, the recycler view will show the previous items and the user will have to scroll manually
 				recyclerView.scrollToPosition(0);
 			}
 
 			@Override
-			public void onError(FacebookRequestError error) {
-				updateRefreshingFlag();
-				if (showError) {
-					Toast.makeText(UpdatesActivity.this, R.string.update_refresh_failed, Toast.LENGTH_LONG).show();
-				}
-			}
-
-			@Override
-			public void onInvalidTokenError() {
+		    public void onError(Exception error) {
 				updateRefreshingFlag();
 				if (showError) {
 					Toast.makeText(UpdatesActivity.this, R.string.update_refresh_failed, Toast.LENGTH_LONG).show();
@@ -289,5 +195,21 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 		super.onPause();
 		// Remove new flag for viewed updates
 		Convention.getInstance().clearNewFlagFromAllUpdates();
+	}
+
+	@Override
+	protected void onPushNotificationReceived(PushNotification pushNotification) {
+		String messageId = pushNotification.messageId;
+		int updatePosition = UpdatesAdapter.UPDATE_NOT_FOUND;
+		if (messageId != null) {
+			updatePosition = updatesAdapter.focusOn(messageId);
+		}
+
+		if (updatePosition == UpdatesAdapter.UPDATE_NOT_FOUND) {
+			super.onPushNotificationReceived(pushNotification); // Default implementation (popup)
+		} else {
+			// Scroll to update
+			recyclerView.scrollToPosition(updatePosition);
+		}
 	}
 }

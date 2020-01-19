@@ -1,37 +1,36 @@
 package amai.org.conventions.networking;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.os.Bundle;
+import android.net.Uri;
+import android.os.AsyncTask;
 
-import com.facebook.AccessToken;
-import com.facebook.FacebookRequestError;
-import com.facebook.FacebookSdk;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
+import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.SerializedName;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.TimeZone;
 
+import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.model.Update;
 import amai.org.conventions.model.conventions.Convention;
+import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.HttpConnectionCreator;
 import amai.org.conventions.utils.Log;
 
 public class UpdatesRefresher {
+	private static final long MINIMUM_REFRESH_TIME = Dates.MILLISECONDS_IN_HOUR;
+
 	public interface OnUpdateFinishedListener {
 		void onSuccess(int newUpdatesNumber);
-
-		void onError(FacebookRequestError error);
-
-		void onInvalidTokenError();
+		void onError(Exception error);
 	}
 
 	private static UpdatesRefresher instance = null;
@@ -40,11 +39,17 @@ public class UpdatesRefresher {
 	private boolean isRefreshInProgress = false;
 	private boolean enableNotificationAfterUpdate;
 
-	public static synchronized UpdatesRefresher getInstance() {
+	/**
+	 * @param context any context
+	 */
+	public static synchronized UpdatesRefresher getInstance(Context context) {
 		if (instance == null) {
-			instance = new UpdatesRefresher();
+			instance = new UpdatesRefresher(context);
 		}
 		return instance;
+	}
+
+	private UpdatesRefresher(Context context) {
 	}
 
 	public void setIsRefreshInProgress(boolean isRefreshInProgress) {
@@ -55,116 +60,159 @@ public class UpdatesRefresher {
 		return isRefreshInProgress;
 	}
 
-	public void refreshFromServer(AccessToken accessToken, boolean enableNotificationAfterUpdate, final OnUpdateFinishedListener listener) {
-		this.enableNotificationAfterUpdate = enableNotificationAfterUpdate;
-
-		Log.v(TAG, "Starting to refresh updates. enableNotificationAfterUpdate=" + enableNotificationAfterUpdate);
-
-		if (accessToken == null) {
-			accessToken = AccessToken.getCurrentAccessToken();
-			if (accessToken == null || accessToken.isExpired()) {
-				// Try to fetch a new token if the previous one is invalid
-				accessToken = AccessToken.getCurrentAccessToken();
-				if (accessToken == null || accessToken.isExpired()) {
-					isRefreshInProgress = false;
-					listener.onInvalidTokenError();
-					return;
-				}
+	@SuppressLint("StaticFieldLeak")
+	public void refreshFromServer(boolean enableNotificationAfterUpdate, boolean force, final OnUpdateFinishedListener listener) {
+		if (!force) {
+			// Don't download if we recently updated the events
+			Date lastUpdate = ConventionsApplication.settings.getLastUpdatesUpdateDate();
+			if (lastUpdate != null && Dates.now().getTime() - lastUpdate.getTime() < MINIMUM_REFRESH_TIME) {
+				isRefreshInProgress = false;
+				listener.onSuccess(0);
+				return;
 			}
 		}
 
+		this.enableNotificationAfterUpdate = enableNotificationAfterUpdate;
 		isRefreshInProgress = true;
 
-		GraphRequest request = GraphRequest.newGraphPathRequest(
-				accessToken,
-				Convention.getInstance().getFacebookFeedPath(),
-				new GraphRequest.Callback() {
-					@Override
-					public void onCompleted(GraphResponse graphResponse) {
-						if (graphResponse.getError() != null) {
-							Log.i(TAG, "Updates refresh failed. Reason: " + graphResponse.getError().toString());
-							isRefreshInProgress = false;
-							listener.onError(graphResponse.getError());
-						} else {
-							List<Update> updatesFromResponse = parseAndFilterFacebookFeedResult(graphResponse);
-							int newUpdatesNumber = 0;
-							for (Update responseUpdate : updatesFromResponse) {
-								Update currentUpdate = Convention.getInstance().getUpdate(responseUpdate.getId());
-								if (currentUpdate == null) {
-									++newUpdatesNumber;
-								} else {
-									responseUpdate.setIsNew(currentUpdate.isNew());
-								}
+		new AsyncTask<Void, Void, Integer>() {
+			private Exception exception;
+
+			@Override
+			protected Integer doInBackground(Void... voids) {
+				try {
+					URL updatesURL = getUpdatesURL();
+					Log.i(TAG, "Fetching updates using URL: " + updatesURL);
+					HttpURLConnection request = HttpConnectionCreator.createConnection(updatesURL);
+					request.connect();
+					try (InputStreamReader reader = new InputStreamReader((InputStream) request.getContent())) {
+						List<Update> updatesFromResponse = parseUpdates(reader);
+						int newUpdatesNumber = 0;
+						for (Update responseUpdate : updatesFromResponse) {
+							Update currentUpdate = Convention.getInstance().getUpdate(responseUpdate.getId());
+							if (currentUpdate == null) {
+								++newUpdatesNumber;
+							} else {
+								responseUpdate.setIsNew(currentUpdate.isNew());
 							}
-							// Update the model, so next time we can read them from cache.
-							Convention.getInstance().addUpdates(updatesFromResponse, false);
-							Convention.getInstance().getStorage().saveUpdates();
-							isRefreshInProgress = false;
-							Log.v(TAG, "Completed updates refresh. new updates retrieved=" + newUpdatesNumber);
-							listener.onSuccess(newUpdatesNumber);
 						}
+						// Update the model, so next time we can read them from cache.
+						Convention.getInstance().addUpdates(updatesFromResponse,
+								// Since facebook has a unique ID per event, we can perform an incremental model update
+								false);
+						Convention.getInstance().getStorage().saveUpdates();
+						ConventionsApplication.settings.setLastUpdatesUpdatedDate();
+						isRefreshInProgress = false;
+						return newUpdatesNumber;
+					} finally {
+						request.disconnect();
 					}
-				});
+				} catch (IOException e) {
+					exception = e;
+					Log.i(TAG, "Could not retrieve updates due to IOException: " + e.getMessage());
+					isRefreshInProgress = false;
+				} catch (Exception e) {
+					exception = e;
+					Log.e(TAG, "Could not retrieve updates: " + e.getMessage(), e);
+					isRefreshInProgress = false;
+				}
+				return -1;
+			}
 
+            private URL getUpdatesURL() {
+				Date newestUpdateTime = Convention.getInstance().getNewestUpdateTime();
+				if (newestUpdateTime == null) {
+					return Convention.getInstance().getUpdatesURL();
+				}
 
-		Bundle parameters = new Bundle();
-		parameters.putString("fields", "link,message,created_time");
+				// Get all the new updates and the updates from 2 days before the last time in case an older post
+				// was updated. The Facebook Graph API since parameter receives unix epoch time which is the number
+				// of seconds instead of milliseconds.
+				long timeToUpdateSince = (newestUpdateTime.getTime() / 1000) - (2 * 24 * 60 * 60);
+                try {
+                    return new URL(Uri.parse(Convention.getInstance().getUpdatesURL().toString())
+                            .buildUpon()
+                            .appendQueryParameter("since", String.valueOf(timeToUpdateSince))
+                            .build()
+                    .toString());
+                } catch (MalformedURLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
 
-		Date newestUpdateTime = Convention.getInstance().getNewestUpdateTime();
-		if (newestUpdateTime != null) {
-			Log.v(TAG, "latest update time detected at " + newestUpdateTime.toString());
-			// Get all the new updates and the updates from 2 days before the last time in case an older post
-			// was updated. The Facebook Graph API since parameter receives unix epoch time which is the number
-			// of seconds instead of milliseconds.
-			parameters.putLong("since", (newestUpdateTime.getTime() / 1000) - (2 * 24 * 60 * 60));
-		}
-		request.setParameters(parameters);
-		request.executeAsync();
+            @Override
+			protected void onPostExecute(Integer newUpdatesNumber) {
+				if (exception == null) {
+					listener.onSuccess(newUpdatesNumber);
+				} else {
+					listener.onError(exception);
+				}
+			}
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public boolean shouldEnableNotificationAfterUpdate() {
 		return enableNotificationAfterUpdate;
 	}
 
-	private List<Update> parseAndFilterFacebookFeedResult(GraphResponse graphResponse) {
-		List<Update> updates = new LinkedList<>();
+	private List<Update> parseUpdates(InputStreamReader reader) {
+		List<UpdateDto> updateDtos = new GsonBuilder()
+				.setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+				.create()
+				.fromJson(reader, UpdatesResponseDto.class).getData();
 
-		JSONObject response = graphResponse.getJSONObject();
-		try {
-			JSONArray data = response.getJSONArray("data");
-			for (int i = 0; i < data.length(); i++) {
-				JSONObject post = data.getJSONObject(i);
-				if (post.has("id") && post.has("message") && post.has("created_time")) {
+		return CollectionUtils
+				.map(updateDtos, item -> new Update()
+						.withId(item.getId())
+						.withText(item.getMessage())
+						.withDate(item.getCreatedTime())
+                        .withIsNew(true));
+	}
 
-					String dateString = post.getString("created_time");
-					SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Dates.getLocale());
-					// Note: facebook dates are returns in UTC always
-					simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-					Date date = simpleDateFormat.parse(dateString);
+	public static class UpdatesResponseDto {
+		private List<UpdateDto> data;
 
-					String message = post.getString("message");
-
-					// Add the link at the end if it doesn't exist in the message
-					if (post.has("link")) {
-						String link = post.getString("link");
-						if (!message.contains(link)) {
-							message += "\n\n" + link;
-						}
-					}
-
-					Update update = new Update()
-							.withId(post.getString("id"))
-							.withIsNew(true)
-							.withDate(date)
-							.withText(message);
-
-					updates.add(update);
-				}
-			}
-		} catch (JSONException | ParseException e) {
-			e.printStackTrace();
+		public List<UpdateDto> getData() {
+			return data;
 		}
 
-		return updates;
+		public UpdatesResponseDto setData(List<UpdateDto> data) {
+			this.data = data;
+			return this;
+		}
+	}
+
+	public static class UpdateDto {
+		private String id;
+		private String message;
+		@SerializedName("created_time")
+		private Date createdTime;
+
+		public String getId() {
+			return id;
+		}
+
+		public UpdateDto setId(String id) {
+			this.id = id;
+			return this;
+		}
+
+		public String getMessage() {
+			return message;
+		}
+
+		public UpdateDto setMessage(String message) {
+			this.message = message;
+			return this;
+		}
+
+		public Date getCreatedTime() {
+			return createdTime;
+		}
+
+		public UpdateDto setCreatedTime(Date createdTime) {
+			this.createdTime = createdTime;
+			return this;
+		}
 	}
 }

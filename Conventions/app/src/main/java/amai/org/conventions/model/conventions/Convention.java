@@ -3,6 +3,10 @@ package amai.org.conventions.model.conventions;
 import android.content.Context;
 import android.graphics.Color;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
+
 import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
@@ -49,9 +53,6 @@ import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Objects;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.Nullable;
-import androidx.annotation.VisibleForTesting;
 
 public abstract class Convention implements Serializable {
 
@@ -77,7 +78,7 @@ public abstract class Convention implements Serializable {
 	private String id;
 	private String displayName;
 	private URL modelURL;
-	private String facebookFeedPath;
+	private URL updatesURL;
 	private ImageIdToImageResourceMapper imageMapper;
 
 	private double longitude;
@@ -105,8 +106,8 @@ public abstract class Convention implements Serializable {
 		return modelURL;
 	}
 
-	public String getFacebookFeedPath() {
-		return facebookFeedPath;
+	public URL getUpdatesURL() {
+		return updatesURL;
 	}
 
 	public double getLongitude() {
@@ -144,7 +145,7 @@ public abstract class Convention implements Serializable {
 		this.conventionFeedbackForm = initConventionFeedbackForm();
 		this.eventFeedbackForm = initEventFeedbackForm();
 		this.modelURL = initModelURL();
-		this.facebookFeedPath = initFacebookFeedPath();
+		this.updatesURL = initUpdatesURL();
 		this.halls = initHalls();
 		this.map = initMap();
 		this.longitude = initLongitude();
@@ -174,9 +175,9 @@ public abstract class Convention implements Serializable {
 
 	protected abstract String initDisplayName();
 
-	protected abstract URL initModelURL();
+	protected abstract URL initUpdatesURL();
 
-	protected abstract String initFacebookFeedPath();
+	protected abstract URL initModelURL();
 
 	protected abstract Halls initHalls();
 

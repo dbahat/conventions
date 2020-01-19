@@ -23,6 +23,7 @@ public class Settings {
 	private static final String WAS_SETTINGS_POPUP_DISPLAYED = "WasSettingsPopupDisplayed";
 	private static final String LAST_SEEN_PUSH_NOTIFICATION_ID = "LastSeenPushNotificationId";
 	private static final String LAST_EVENTS_UPDATE_DATE = "LastEventsUpdateDate";
+	private static final String LAST_UPDATES_UPDATE_DATE = "LastUpdatesUpdateDate";
 	private static final String IS_ADVANCED_OPTIONS_ENABLED = "isAdvancedOptionsEnabled";
 
 	private final SharedPreferences sharedPreferences;
@@ -105,6 +106,14 @@ public class Settings {
 		sharedPreferences.edit().putLong(LAST_EVENTS_UPDATE_DATE, Dates.now().getTime()).apply();
 	}
 
+	public Date getLastUpdatesUpdateDate() {
+		long date = sharedPreferences.getLong(LAST_UPDATES_UPDATE_DATE, -1);
+		if (date == -1) {
+			return null;
+		}
+		return new Date(date);
+	}
+
 	public void setAdvancedOptionsEnabled(boolean enabled) {
 		sharedPreferences.edit().putBoolean(IS_ADVANCED_OPTIONS_ENABLED, enabled).apply();
 	}
@@ -113,5 +122,8 @@ public class Settings {
 		return sharedPreferences.getBoolean(IS_ADVANCED_OPTIONS_ENABLED, false);
 	}
 
+	public void setLastUpdatesUpdatedDate() {
+		sharedPreferences.edit().putLong(LAST_UPDATES_UPDATE_DATE, Dates.now().getTime()).apply();
+	}
 
 }
