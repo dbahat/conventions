@@ -29,22 +29,84 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAKJYwC7UeHyBpcVqvXABRxhEQmLiK2TRo"
+          "current_key": "AIzaSyAXItZJdwfvtf4df0u4tLaN0PFPiQnvLRg"
+        },
+        {
+          "current_key": "AIzaSyAD4VkVJEOsU6OvTu2sv-4dGrfBnQZG1Ls"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 2,
-          "analytics_property": {
-            "tracking_id": "UA-65293055-1"
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "458203975509-qghf2og9qjhlt8hmd8pv1d2ttra5pk8h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "458203975509-6gse3d9p6ivovv37hn1jqhc2veb6c9rh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "AMAI.Conventions",
+                "app_store_id": "1092678215"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:458203975509:android:1d81098cc74d144a",
+        "android_client_info": {
+          "package_name": "amai.org.pushnotificationsender"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "458203975509-srhrefcc9b9f0jimm6i8ri6i0m5kc26l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "amai.org.pushnotificationsender",
+            "certificate_hash": "154834815d8915f619a83552a3a4c8cd70ca64c2"
           }
         },
-        "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+        {
+          "client_id": "458203975509-qoh79rk8sokpo5gqfnmikqqkub63dv0p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "amai.org.pushnotificationsender",
+            "certificate_hash": "be937b5158a856ca48a2302ab434a48985e73d3a"
+          }
         },
-        "ads_service": {
-          "status": 2
+        {
+          "client_id": "458203975509-qghf2og9qjhlt8hmd8pv1d2ttra5pk8h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXItZJdwfvtf4df0u4tLaN0PFPiQnvLRg"
+        },
+        {
+          "current_key": "AIzaSyAD4VkVJEOsU6OvTu2sv-4dGrfBnQZG1Ls"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "458203975509-qghf2og9qjhlt8hmd8pv1d2ttra5pk8h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "458203975509-6gse3d9p6ivovv37hn1jqhc2veb6c9rh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "AMAI.Conventions",
+                "app_store_id": "1092678215"
+              }
+            }
+          ]
         }
       }
     }

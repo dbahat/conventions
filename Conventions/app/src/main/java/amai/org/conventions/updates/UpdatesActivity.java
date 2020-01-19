@@ -9,13 +9,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.google.android.gms.analytics.HitBuilders;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.Update;
@@ -89,10 +88,9 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 
 	@Override
 	public void onRefresh() {
-		ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
-				.setCategory("PullToRefresh")
-				.setAction("RefreshUpdates")
-				.build());
+		FirebaseAnalytics
+				.getInstance(this)
+				.logEvent("pull_to_refresh", null);
 
 		Convention.getInstance().clearNewFlagFromAllUpdates();
 

@@ -19,15 +19,19 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.google.android.gms.analytics.HitBuilders;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
-import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.ConditionalSwipeVerticalViewPager;
@@ -41,10 +45,6 @@ import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Objects;
 import amai.org.conventions.utils.Views;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 
 public class MapActivity extends NavigationActivity implements MapFloorFragment.OnMapFloorEventListener {
 	public static final String EXTRA_FLOOR_NUMBER = "ExtraFloorNumber";
@@ -128,10 +128,10 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.map_floor_zoom_to_fit:
-				ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
-						.setCategory("Map")
-						.setAction("ZoomToFitClicked")
-						.build());
+				FirebaseAnalytics
+						.getInstance(this)
+						.logEvent("zoom_to_fit_clicked", null);
+
 				closeSearch();
 				getCurrentFloorFragment().toggleMapZoom();
 				return true;
@@ -545,10 +545,10 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		if (isSearchOpen()) {
 			closeSearch();
 		} else {
-			ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
-					.setCategory("Search")
-					.setAction("MapSearchOpened")
-					.build());
+			FirebaseAnalytics
+					.getInstance(this)
+					.logEvent("map_search_opened", null);
+
 			openSearch();
 		}
 	}

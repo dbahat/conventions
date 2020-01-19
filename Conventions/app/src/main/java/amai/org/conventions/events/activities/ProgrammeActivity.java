@@ -15,13 +15,17 @@ import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.android.gms.analytics.HitBuilders;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.viewpager.widget.ViewPager;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.Calendar;
 
-import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.FeedbackActivity;
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
@@ -31,10 +35,6 @@ import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.networking.ModelRefresher;
 import amai.org.conventions.utils.Dates;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.viewpager.widget.ViewPager;
 
 public class ProgrammeActivity extends NavigationActivity implements ProgrammeDayFragment.EventsListener {
 
@@ -216,10 +216,9 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 			fragment.setRefreshing(true);
 		}
 
-		ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
-				.setCategory("PullToRefresh")
-				.setAction("RefreshProgramme")
-				.build());
+		FirebaseAnalytics
+				.getInstance(this)
+				.logEvent("pull_to_refresh", null);
 
 		new AsyncTask<Void, Void, Boolean>() {
 			@Override

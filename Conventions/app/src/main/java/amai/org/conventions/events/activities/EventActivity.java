@@ -32,8 +32,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.analytics.HitBuilders;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
+import androidx.palette.graphics.Palette;
+
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -58,13 +62,11 @@ import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.networking.SurveyDataRetriever;
 import amai.org.conventions.notifications.PushNotificationTopicsSubscriber;
+import amai.org.conventions.utils.BundleBuilder;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Views;
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.ContextCompat;
-import androidx.palette.graphics.Palette;
 import uk.co.chrisjenx.paralloid.views.ParallaxScrollView;
 
 
@@ -381,10 +383,12 @@ public class EventActivity extends NavigationActivity {
 				ConfigureNotificationsFragment configureNotificationsFragment = ConfigureNotificationsFragment.newInstance(conventionEvent.getId());
 				configureNotificationsFragment.show(getSupportFragmentManager(), null);
 
-				ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
-						.setCategory("Notifications")
-						.setAction("EditClicked")
-						.build());
+				FirebaseAnalytics
+						.getInstance(this)
+						.logEvent("event_notification", new BundleBuilder()
+								.putString("action", "EditClicked")
+								.build()
+						);
 
 				return true;
 		}
@@ -394,11 +398,9 @@ public class EventActivity extends NavigationActivity {
 
 	private void changeEventFavoriteState(MenuItem item) {
 		ConventionEvent.UserInput userInput = conventionEvent.getUserInput();
-		ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
-				.setCategory("Favorites")
-				.setAction(!userInput.isAttending() ? "Add" : "Remove")
-				.setLabel("EventActivity")
-				.build());
+		FirebaseAnalytics
+				.getInstance(this)
+				.logEvent("favorites_" + (!userInput.isAttending() ? "added" : "removed"), null);
 
 		if (userInput.isAttending()) {
 			userInput.setAttending(false);
@@ -565,17 +567,21 @@ public class EventActivity extends NavigationActivity {
 								if (exception != null) {
 									Toast.makeText(EventActivity.this, R.string.vote_survey_retrieve_answers_error, Toast.LENGTH_LONG).show();
 									Log.e(TAG, "Error retrieving answers", exception);
-									ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
-											.setCategory("EventVote")
-											.setAction("openFailed")
-											.setLabel(exception.getMessage())
-											.build());
+									FirebaseAnalytics
+											.getInstance(EventActivity.this)
+											.logEvent("vote", new BundleBuilder()
+													.putString("success", "false")
+													.putString("error_message", exception.getMessage())
+													.build()
+											);
 								} else {
-									ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
-											.setCategory("EventVote")
-											.setAction("openSuccess")
-											.setLabel(conventionEvent.getTitle())
-											.build());
+									FirebaseAnalytics
+											.getInstance(EventActivity.this)
+											.logEvent("vote", new BundleBuilder()
+													.putString("success", "true")
+													.putString("event_title", conventionEvent.getTitle())
+													.build()
+											);
 									EventVoteSurveyFragment eventVoteSurveyFragment = EventVoteSurveyFragment.newInstance(conventionEvent.getId());
 									eventVoteSurveyFragment.show(getSupportFragmentManager(), null);
 								}

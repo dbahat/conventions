@@ -34,7 +34,13 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.analytics.HitBuilders;
+import androidx.annotation.StringRes;
+import androidx.appcompat.widget.AppCompatRadioButton;
+import androidx.core.content.ContextCompat;
+import androidx.core.widget.CompoundButtonCompat;
+import androidx.core.widget.TextViewCompat;
+
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -42,7 +48,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-import amai.org.conventions.ConventionsApplication;
+import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.AspectRatioImageView;
 import amai.org.conventions.feedback.SurveySender;
@@ -50,15 +56,10 @@ import amai.org.conventions.feedback.forms.SurveyDisabledException;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.conventions.Convention;
+import amai.org.conventions.utils.BundleBuilder;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Views;
-import androidx.annotation.StringRes;
-import androidx.appcompat.widget.AppCompatRadioButton;
-import androidx.core.content.ContextCompat;
-import androidx.core.widget.CompoundButtonCompat;
-import androidx.core.widget.TextViewCompat;
-import amai.org.conventions.R;
 
 public class CollapsibleFeedbackView extends FrameLayout {
 	private static final String TAG = CollapsibleFeedbackView.class.getCanonicalName();
@@ -786,11 +787,12 @@ public class CollapsibleFeedbackView extends FrameLayout {
 				message += " - " + e.getClass().getSimpleName() + ": " + e.getMessage();
 			}
 
-			ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
-					.setCategory("Feedback")
-					.setAction("SendAttempt")
-					.setLabel(message)
-					.build());
+			FirebaseAnalytics
+					.getInstance(getContext())
+					.logEvent("feedback_send", new BundleBuilder()
+							.putString("message", message)
+							.build()
+					);
 		}
 	}
 }

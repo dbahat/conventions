@@ -11,8 +11,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.google.android.gms.analytics.HitBuilders;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ShareCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.viewpager.widget.ViewPager;
+
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,20 +27,15 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.R;
 import amai.org.conventions.events.adapters.DayFragmentAdapter;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
+import amai.org.conventions.utils.BundleBuilder;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.ShareCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.viewpager.widget.ViewPager;
 
 
 public class MyEventsActivity extends NavigationActivity implements MyEventsDayFragment.EventsListener {
@@ -150,11 +151,12 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 
 				return true;
 			case R.id.my_events_share:
-				ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
-						.setCategory("MyEvents")
-						.setAction("ShareClicked")
-						.setValue(getMyEvents().size())
-						.build());
+				FirebaseAnalytics
+						.getInstance(this)
+						.logEvent("share_clicked", new BundleBuilder()
+								.putString("number_of_events", String.valueOf(getMyEvents().size()))
+								.build()
+						);
 
 				if (getMyEvents().size() > 0) {
 					startActivity(createSharingIntent());

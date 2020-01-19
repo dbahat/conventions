@@ -1,13 +1,14 @@
 package amai.org.conventions.events;
 
-import com.google.android.material.snackbar.Snackbar;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import com.google.android.gms.analytics.HitBuilders;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.R;
@@ -16,6 +17,7 @@ import amai.org.conventions.events.listeners.OnEventFavoriteChangedListener;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.notifications.PushNotificationTopicsSubscriber;
+import amai.org.conventions.utils.BundleBuilder;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
 public class DefaultEventFavoriteChangedListener implements OnEventFavoriteChangedListener {
@@ -30,11 +32,13 @@ public class DefaultEventFavoriteChangedListener implements OnEventFavoriteChang
 		// Update the favorite state in the model
 		final boolean newAttending = !updatedEvent.isAttending();
 
-		ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
-				.setCategory("Favorites")
-				.setAction(newAttending ? "Add" : "Remove")
-				.setLabel("SwipeToEdit")
-				.build());
+		FirebaseAnalytics
+				.getInstance(view.getContext())
+				.logEvent("favorites", new BundleBuilder()
+						.putString("action", newAttending ? "Add" : "Remove")
+						.putString("label", "SwipeToEdit")
+						.build()
+				);
 
 		updatedEvent.setAttending(newAttending);
 		if (newAttending) {

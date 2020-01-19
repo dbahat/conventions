@@ -3,7 +3,6 @@ package amai.org.conventions.navigation;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,7 +13,6 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import androidx.annotation.DrawableRes;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -22,9 +20,9 @@ import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -32,15 +30,14 @@ import java.util.Arrays;
 import java.util.List;
 
 import amai.org.conventions.AboutActivity;
+import amai.org.conventions.AccessibilityActivity;
 import amai.org.conventions.ApplicationInitializer;
 import amai.org.conventions.ArrivalMethodsActivity;
-import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.FeedbackActivity;
 import amai.org.conventions.HomeActivity;
 import amai.org.conventions.R;
 import amai.org.conventions.SplashActivity;
 import amai.org.conventions.ThemeAttributes;
-import amai.org.conventions.AccessibilityActivity;
 import amai.org.conventions.events.activities.EventActivity;
 import amai.org.conventions.events.activities.MyEventsActivity;
 import amai.org.conventions.events.activities.ProgrammeActivity;
@@ -50,6 +47,7 @@ import amai.org.conventions.notifications.PushNotification;
 import amai.org.conventions.notifications.PushNotificationDialogPresenter;
 import amai.org.conventions.settings.SettingsActivity;
 import amai.org.conventions.updates.UpdatesActivity;
+import amai.org.conventions.utils.BundleBuilder;
 
 import static amai.org.conventions.notifications.PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION;
 
@@ -90,10 +88,6 @@ public abstract class NavigationActivity extends AppCompatActivity {
 			@Override
 			public void onClick(View v) {
 				onNavigationButtonClicked();
-				ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
-						.setCategory("Navigation")
-						.setAction("ButtonClicked")
-						.build());
 				openNavigationDrawer(true);
 			}
 		});

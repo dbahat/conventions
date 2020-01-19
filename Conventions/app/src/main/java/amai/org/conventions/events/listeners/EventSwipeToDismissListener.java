@@ -1,10 +1,11 @@
 package amai.org.conventions.events.listeners;
 
-import com.google.android.material.snackbar.Snackbar;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
-import com.google.android.gms.analytics.HitBuilders;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,11 +33,9 @@ public class EventSwipeToDismissListener implements SwipeableEventViewHolder.OnE
 
 	@Override
 	public void onEventSwiped(final ConventionEvent event) {
-		ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
-				.setCategory("Favorites")
-				.setAction("Remove")
-				.setLabel("SwipeToDismiss")
-				.build());
+		FirebaseAnalytics
+				.getInstance(viewHolder.itemView.getContext())
+				.logEvent("swipe_to_dismiss", null);
 
 		viewHolder.getModel().setAttending(false);
 		Convention.getInstance().getStorage().saveUserInput();

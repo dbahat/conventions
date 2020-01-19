@@ -6,21 +6,16 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 
-import com.google.android.gms.analytics.ExceptionReporter;
-import com.google.android.gms.analytics.GoogleAnalytics;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.StandardExceptionParser;
-import com.google.android.gms.analytics.Tracker;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
-import java.util.Collection;
 import java.util.Locale;
-import java.util.Map;
 
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.EventNotification;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.notifications.LocalNotificationScheduler;
+import amai.org.conventions.utils.BundleBuilder;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Settings;
@@ -28,7 +23,6 @@ import amai.org.conventions.utils.Settings;
 public class ConventionsApplication extends Application {
 	private final static String TAG = ConventionsApplication.class.getCanonicalName();
 
-	private static Tracker tracker;
 	public static LocalNotificationScheduler alarmScheduler;
 	public static Settings settings;
 	private static String versionName;
@@ -43,22 +37,6 @@ public class ConventionsApplication extends Application {
 		Locale.setDefault(Dates.getLocale());
 		Convention.getInstance().load(this);
 
-		if (!BuildConfig.DEBUG) {
-			GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
-			analytics.setLocalDispatchPeriod(1800);
-
-			tracker = analytics.newTracker("UA-65293055-1");
-			tracker.enableExceptionReporting(true);
-			tracker.enableAutoActivityTracking(true);
-		}
-
-		// Change uncaught exception parser to include more information
-		Thread.UncaughtExceptionHandler uncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
-		if (uncaughtExceptionHandler instanceof ExceptionReporter) {
-			ExceptionReporter exceptionReporter = (ExceptionReporter) uncaughtExceptionHandler;
-			exceptionReporter.setExceptionParser(new ExtendedExceptionParser(this, null));
-		}
-
 		settings = new Settings(this);
 		alarmScheduler = new LocalNotificationScheduler(this);
 
@@ -69,9 +47,10 @@ public class ConventionsApplication extends Application {
 			// Added due to a SecurityException when trying to schedule alarms on some devices.
 			// The alarms might not be set in this case, but at least the app won't crash on startup.
 			Log.i(TAG, "Could not schedule alarms", e);
-			sendTrackingEvent(new HitBuilders.ExceptionBuilder()
-					.setDescription(e.getMessage() + "\n" + android.util.Log.getStackTraceString(e))
-					.build());
+			FirebaseAnalytics.getInstance(this).logEvent("alarms_disabled", new BundleBuilder()
+					.putString("exception_message", e.getMessage() + "\n" + android.util.Log.getStackTraceString(e))
+					.build()
+			);
 		}
 
 		try {
@@ -163,30 +142,8 @@ public class ConventionsApplication extends Application {
 		super.onTrimMemory(level);
 	}
 
-	private static class ExtendedExceptionParser extends StandardExceptionParser {
-
-		public ExtendedExceptionParser(Context context, Collection<String> additionalPackages) {
-			super(context, additionalPackages);
-		}
-
-		@Override
-		public String getDescription(String threadName, Throwable t) {
-			String description = super.getDescription(threadName, t);
-
-			return String.format(Dates.getLocale(), "%s. %s.",
-					description,
-					android.util.Log.getStackTraceString(t));
-		}
-	}
-
 	public static String getVersionName() {
 		return versionName;
-	}
-
-	public static void sendTrackingEvent(Map<String, String> trackingEvent) {
-		if (tracker != null) {
-			tracker.send(trackingEvent);
-		}
 	}
 
 	public static Context getCurrentContext() {
