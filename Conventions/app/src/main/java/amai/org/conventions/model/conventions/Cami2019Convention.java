@@ -182,7 +182,7 @@ public class Cami2019Convention extends AmaiConvention {
     @Override
     protected URL initModelURL() {
         try {
-            return new URL("http://2019.cami.org.il/wp-admin/admin-ajax.php?action=get_event_list");
+            return new URL("https://cami.org.il/2019/wp-admin/admin-ajax.php?action=get_event_list");
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
