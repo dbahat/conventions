@@ -24,7 +24,7 @@ public class Dates {
 	private static Date getInitialDate() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm", Dates.getLocale());
 		try {
-			return dateFormat.parse("01.08.2019 12:10");
+			return dateFormat.parse("10.03.2020 12:10");
 		} catch (ParseException e) {
 			throw new RuntimeException(e);
 		}

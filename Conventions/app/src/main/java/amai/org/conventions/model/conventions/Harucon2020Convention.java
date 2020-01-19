@@ -1,7 +1,5 @@
 package amai.org.conventions.model.conventions;
 
-import androidx.annotation.Nullable;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
@@ -16,7 +14,6 @@ import amai.org.conventions.feedback.forms.FeedbackForm;
 import amai.org.conventions.feedback.forms.SurveyForm;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
-import amai.org.conventions.model.EventType;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.Floor;
 import amai.org.conventions.model.Hall;
@@ -31,8 +28,9 @@ import amai.org.conventions.model.Survey;
 import amai.org.conventions.networking.SurveyDataRetriever;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
+import androidx.annotation.Nullable;
 
-public class Cami2019Convention extends AmaiConvention {
+public class Harucon2020Convention extends AmaiConvention {
     // Hall names
     private static final String MAIN_HALL_NAME = "אולם ראשי";
     private static final String SCHWARTZ_NAME = "אודיטוריום שוורץ";
@@ -97,25 +95,25 @@ public class Cami2019Convention extends AmaiConvention {
 
     @Override
     protected ConventionStorage initStorage() {
-        return new ConventionStorage(this, R.raw.cami2019_convention_events, 0);
+        return new ConventionStorage(this, R.raw.harucon2020_convention_events, 0);
     }
 
     @Override
     protected Calendar initDate() {
         Calendar date = Calendar.getInstance();
         date.clear();
-        date.set(2019, Calendar.AUGUST, 1);
+        date.set(2020, Calendar.MARCH, 10);
         return date;
     }
 
     @Override
     protected String initID() {
-        return "Cami2019";
+        return "Harucon2020";
     }
 
     @Override
     protected String initDisplayName() {
-        return "כאמ\"י 2019";
+        return "הארוקון 2020";
     }
 
     @Override
@@ -182,7 +180,7 @@ public class Cami2019Convention extends AmaiConvention {
     @Override
     protected URL initModelURL() {
         try {
-            return new URL("https://cami.org.il/2019/wp-admin/admin-ajax.php?action=get_event_list");
+            return new URL("https://harucon.org.il/2020/wp-admin/admin-ajax.php?action=get_event_list");
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
@@ -705,25 +703,5 @@ public class Cami2019Convention extends AmaiConvention {
                 return false;
             }
         };
-    }
-
-    @Override
-    public int getEventIcon(ConventionEvent event) {
-        EventType type = event.getType();
-        switch (type.getDescription()) {
-            case "הרצאות":
-                return R.drawable.cami2019_event_icon_lectures;
-            case "קוספליי":
-                return R.drawable.cami2019_event_icon_cosplay;
-            case "מיוחד":
-            case "אירועים מיוחדים":
-                return R.drawable.cami2019_event_icon_special;
-            case "פאנל":
-                return R.drawable.cami2019_event_icon_panel;
-            case "סדנה":
-                return R.drawable.cami2019_event_icon_workshop;
-            default:
-                return R.drawable.cami2019_event_icon_other;
-        }
     }
 }

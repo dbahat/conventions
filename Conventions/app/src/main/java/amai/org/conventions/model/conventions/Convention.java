@@ -3,10 +3,6 @@ package amai.org.conventions.model.conventions;
 import android.content.Context;
 import android.graphics.Color;
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.Nullable;
-import androidx.annotation.VisibleForTesting;
-
 import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
@@ -53,10 +49,12 @@ import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Objects;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 
 public abstract class Convention implements Serializable {
 
-	private static Convention convention = new Cami2019Convention();
+	private static Convention convention = new Harucon2020Convention();
 	public static final int NO_COLOR = Color.TRANSPARENT; // Assuming we will never get this from the server...
 
 	// Currently supporting conventions of up to 5 days (UI restriction, since the programme is set
@@ -690,11 +688,6 @@ public abstract class Convention implements Serializable {
 
 	public SurveySender getEventVoteSender(ConventionEvent event) {
 		return null;
-	}
-
-	@DrawableRes
-	public int getEventIcon(ConventionEvent event) {
-		return 0;
 	}
 
 	public URL getAdditionalConventionFeedbackURL() {
