@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
 
 android {
     compileSdkVersion 28
@@ -41,6 +42,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:17.2.2'
     implementation "com.google.firebase:firebase-messaging:20.1.0"
     implementation 'com.google.firebase:firebase-analytics:17.2.2'
+    implementation 'com.google.firebase:firebase-crashlytics:17.0.0-beta01'
     implementation 'com.caverock:androidsvg:1.2.2-beta-1'
     // Using a fork of se.emilsjolander:stickylistheaders due to an open issue in Android 8. See https://github.com/emilsjolander/StickyListHeaders/issues/477.
     implementation 'com.github.mtotschnig:StickyListHeaders:2.7.1'
@@ -54,5 +56,3 @@ dependencies {
     androidTestImplementation 'org.mockito:mockito-android:2.21.0'
     androidTestImplementation 'junit:junit:4.12'
 }
-
-apply plugin: 'com.google.gms.google-services'
