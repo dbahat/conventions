@@ -1,5 +1,7 @@
 package amai.org.conventions.model.conventions;
 
+import androidx.annotation.Nullable;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
@@ -28,7 +30,6 @@ import amai.org.conventions.model.Survey;
 import amai.org.conventions.networking.SurveyDataRetriever;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
-import androidx.annotation.Nullable;
 
 public class Harucon2020Convention extends AmaiConvention {
     // Hall names
@@ -150,7 +151,7 @@ public class Harucon2020Convention extends AmaiConvention {
                     .withQuestionEntry(FeedbackQuestion.QUESTION_ID_LECTURER_QUALITY, "entry.1327236956")
                     .withQuestionEntry(FeedbackQuestion.QUESTION_ID_SIMILAR_EVENTS, "entry.1416969956")
                     .withQuestionEntry(FeedbackQuestion.QUESTION_ID_ADDITIONAL_INFO, "entry.1582215667")
-                    .withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSc8HLV_-SYKWyWfdDEFSEwI6GiKfa900bYlHr_08sgWwYhcDQ/formResponse"));
+                    .withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSdNt0smJ77qdnLdZuX53m6YqBXxW7fKxzn2n-3EnW7zQIbTZg/formResponse"));
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
@@ -170,7 +171,7 @@ public class Harucon2020Convention extends AmaiConvention {
                     .withQuestionEntry(FeedbackQuestion.QUESTION_ID_MAP_SIGNS, "entry.1416969956")
                     .withQuestionEntry(FeedbackQuestion.QUESTION_ID_CONFLICTING_EVENTS, "entry.1582215667")
                     .withQuestionEntry(FeedbackQuestion.QUESTION_ID_IMPROVEMENT, "entry.993320932")
-                    .withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSdp4Nw5-H86qyVhMFIbiowbPs2edqAv_gNSIbDvTaB9hvP56g/formResponse"));
+                    .withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSfWhoCDzTz83jA87HGEudl1nnBlQoURifdvllPxwZBX6uA-Pw/formResponse"));
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
