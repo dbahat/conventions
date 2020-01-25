@@ -22,7 +22,6 @@
             android:summary="@string/show_cosplay_notifications_summary"
             android:defaultValue="false" />
 
-        <!-- Cami2018 does't have bus notifications -->
         <!--<CheckBoxPreference-->
             <!--android:key="cami2018_bus"-->
             <!--android:title="@string/show_bus_notifications_title"-->
