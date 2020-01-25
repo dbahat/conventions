@@ -177,8 +177,8 @@ public abstract class NavigationActivity extends AppCompatActivity {
 
 	private void initializeNavigationDrawer() {
 		navigationTopButtonsLayout.setNavigationItems(this, Arrays.asList(
-				new NavigationItem(AboutActivity.class, getString(R.string.about), ContextCompat.getDrawable(this, R.drawable.cami2019_about), ContextCompat.getDrawable(this, R.drawable.cami2019_about_full)),
-				new NavigationItem(SettingsActivity.class, getString(R.string.settings), ContextCompat.getDrawable(this, R.drawable.cami2019_settings), ContextCompat.getDrawable(this, R.drawable.cami2019_settings_full))
+				new NavigationItem(AboutActivity.class, getString(R.string.about), ContextCompat.getDrawable(this, R.drawable.harucon2020_about)),
+				new NavigationItem(SettingsActivity.class, getString(R.string.settings), ContextCompat.getDrawable(this, R.drawable.harucon2020_settings))
 		));
 
 		final List<NavigationItem> items = new ArrayList<>(Arrays.asList(

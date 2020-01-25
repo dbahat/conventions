@@ -29,15 +29,15 @@
     <application
         android:name=".ConventionsApplication"
         android:allowBackup="false"
-        android:icon="@mipmap/cami_app_icon"
+        android:icon="@mipmap/harucon_app_icon"
         android:installLocation="auto"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppBaseTheme.Cami2019.Toolbar">
+        android:theme="@style/AppBaseTheme.Harucon2020.Toolbar">
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppBaseTheme.Cami2019.Toolbar.Splash">
+            android:theme="@style/AppBaseTheme.Harucon2020.Toolbar.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -51,7 +51,7 @@
         <activity android:name=".map.MapActivity" />
         <activity
             android:name=".events.activities.EventActivity"
-            android:theme="@style/AppBaseTheme.Cami2019.Toolbar.Event"
+            android:theme="@style/AppBaseTheme.Harucon2020.Toolbar.Event"
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".ArrivalMethodsActivity" />
         <activity
@@ -96,7 +96,7 @@
      See README(https://goo.gl/l4GJaQ) for more. -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/cami_notification_small" />
+            android:resource="@drawable/harucon_notification_small" />
     </application>
 
 </manifest>

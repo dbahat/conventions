@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <gradient
-        android:startColor="@color/cami2019_tan"
-        android:endColor="@color/cami2019_dark_gray"
-        android:type="radial"
-        android:gradientRadius="0.78"
-        android:useLevel="false" />
-</shape>

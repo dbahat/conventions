@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppBaseTheme.Harucon2020.Toolbar">
+        <item name="android:colorPrimaryDark">@color/black</item>
+    </style>
+</resources>

@@ -28,7 +28,7 @@
 האפליקציה פותחה עבור כנס הארוקון 2020.<br/>בקשות והצעות ניתן לכתוב <a href="market://details?id=amai.org.conventions">בדף האפליקציה בחנות</a>.
 <p><a href="http://cami.org.il/2019/app-privacy/">למדיניות הפרטיות של האפליקציה</a></p>
 ]]></string>
-    <!-- Copied from https://cami.org.il/2019/%d7%9e%d7%99%d7%a7%d7%95%d7%9d-%d7%95%d7%93%d7%a8%d7%9b%d7%99-%d7%94%d7%92%d7%a2%d7%94/ -->
+    <!-- Copied from https://harucon.org.il/2020/%d7%9e%d7%99%d7%a7%d7%95%d7%9d-%d7%95%d7%93%d7%a8%d7%9b%d7%99-%d7%94%d7%92%d7%a2%d7%94/ -->
     <string name="arrival_method_description"><![CDATA[
 <p>אנא דאגו לבדוק לגבי שיבושים בתחבורה הציבורית ובגישה לאזור עקב עבודות תשתית.</p>
 <p><h3>הגעה ברגל</h3></p>
@@ -82,7 +82,7 @@
 <p>לחלופין, &quot;בנייני האומה&quot; ב-waze יביא אתכם אל המקום.</p>
 <p>במתחם קיימים 850 מקומות חנייה בתשלום המתחלקים בין חניון תת קרקעי וחניון חיצוני.</p>
 ]]></string>
-    <!-- Text about convention accessibility taken from https://cami.org.il/2019/%d7%a0%d7%92%d7%99%d7%a9%d7%95%d7%aa-%d7%91%d7%9b%d7%a0%d7%a1/ -->
+    <!-- Text about convention accessibility taken from https://harucon.org.il/2020/%d7%a0%d7%92%d7%99%d7%a9%d7%95%d7%aa-%d7%91%d7%9b%d7%a0%d7%a1/ -->
     <!-- Accessible programme link was: <a href="https://cami.org.il/2019/wp-content/uploads/sites/20/2019/07/תוכנייה-כאמי-19.txt" target="_blank" rel="noopener noreferrer"> -->
     <!-- Accessible cashier deep link was: <a href="org.amai.conventions://open-map-in-accessible-cashiers">לחצו כאן לצפיה במיקום הקופות הנגישות במפה</a>. -->
     <!-- Parents room deep link was: <a href="org.amai.conventions://open-map-in-parent-room">לחצו כאן לצפיה במיקום החדר במפה</a>. -->

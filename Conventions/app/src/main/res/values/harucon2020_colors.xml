@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="harucon2020_light_blue">#2CA5E8</color>
+    <color name="harucon2020_dark_blue">#152259</color>
+    <color name="harucon2020_white">#FFFFFD</color>
+    <color name="harucon2020_gray">#6C6C6C</color>
+    <color name="harucon2020_tan">#FDF0DD</color>
+    <color name="harucon2020_light_gray">#F6F3EA</color>
+    <color name="harucon2020_red">#FE0000</color>
+    <color name="harucon2020_dark_red">#B73432</color>
+    <color name="harucon2020_black">#04041D</color>
+    <color name="harucon2020_black2">#13171E</color>
+    <color name="harucon2020_orange">#E93213</color>
+    <color name="harucon2020_brown">#D95826</color>
+    <color name="harucon2020_pink">#F85D91</color>
+
+    <color name="harucon2020_dark_pink">#ff6060</color>
+
+    <!-- This should be #CCFE0000 according to the design but it's too strong -->
+    <color name="harucon2020_transparent_red">#8FFE0000</color>
+    <color name="harucon2020_transparent_white">#8FFFFFFD</color>
+    <color name="harucon2020_transparent_black">#8F04041D</color>
+
+</resources>

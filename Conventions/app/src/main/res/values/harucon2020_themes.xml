@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppBaseTheme.Harucon2020.Toolbar" parent="AppBaseTheme.Harucon2020"/>
+
+    <style name="AppBaseTheme.Harucon2020" parent="AppBaseTheme.Dark">
+        <!-- Sub-themes -->
+        <item name="android:dialogTheme">@style/AppDialogTheme.Harucon2020</item>
+        <item name="alertDialogTheme">@style/AppAlertDialogTheme.Harucon2020</item>
+        <!-- not using android:actionOverflowButtonStyle since it doesn't seem to work in Jellybean -->
+        <item name="actionOverflowButtonStyle">@style/OverflowMenu.Harucon2020</item>
+        <!-- General -->
+        <item name="colorAccent">@color/harucon2020_dark_blue</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
+        <item name="android:textColorHint">@color/harucon2020_white</item>
+        <item name="android:textColorLink">@color/harucon2020_dark_blue</item>
+        <item name="actionButtonColor">@color/harucon2020_dark_blue</item>
+        <item name="hintTextColor">@color/harucon2020_white</item>
+        <item name="swipeToRefreshColor">@color/harucon2020_red</item>
+        <item name="snackbarActionColor">@color/harucon2020_red</item>
+        <item name="highlightedButtonBackground">@drawable/harucon2020_highlighted_button</item>
+        <item name="highlightedButtonTextColor">@drawable/harucon2020_highlighted_button_text_color</item>
+        <item name="borderlessButtonColor">@color/harucon2020_dark_blue</item>
+        <item name="activitiesBackground">@drawable/harucon2020_background</item>
+        <item name="eventListDivider">@drawable/harucon2020_event_list_divider</item>
+        <!-- Note: if you change the theme, these values should be copied manually to file
+         ?highlightedButtonBackground (non-v21) because prior to L it was not supported to reference
+         theme attributes from a drawable xml -->
+        <item name="buttonColor">@color/harucon2020_dark_blue</item>
+        <item name="buttonColorPressed">@color/harucon2020_light_blue</item>
+
+        <!-- Notifications -->
+        <item name="notificationSmallIcon">@drawable/harucon_notification_small</item>
+        <!-- Toolbar -->
+        <item name="toolbarBackground">@android:color/transparent</item>
+        <item name="toolbarIconAccentColor">@color/harucon2020_dark_blue</item>
+        <!-- Navigation Drawer -->
+        <item name="navigationPopupBackground">@drawable/harucon2020_menu_background</item>
+        <item name="navigationPopupTitle">@drawable/harucon2020_logo</item>
+        <item name="navigationPopupBottomImage">@drawable/harucon2020_menu_bottom_image</item>
+        <item name="navigationPopupTopSelectedColor">@color/harucon2020_dark_blue</item>
+        <item name="navigationPopupTopNotSelectedColor">@color/white</item>
+        <item name="navigationPopupNotSelectedColor">@color/white</item>
+        <item name="navigationPopupSelectedColor">@color/harucon2020_dark_blue</item>
+        <item name="navigationPopupSeparatorColor">@null</item>
+        <item name="navigationPopupBottomImageMargins">0dp</item>
+        <item name="navigationPopupTitleWidth">130dp</item>
+        <item name="navigationItemsShouldDisplayIcon">false</item>
+        <item name="navigationPopupItemPaddingTop">5dp</item>
+        <!-- About Screen -->
+        <item name="aboutLogo">@drawable/amai_logo_white</item>
+        <item name="aboutLogoMargins">80dp</item>
+        <!-- Home Screen -->
+        <item name="homeLogoMargin">50dp</item>
+        <item name="homeLogo">@null</item>
+        <item name="homeBottomImage">@null</item>
+        <item name="homeBackground">@drawable/harucon2020_home_background</item>
+        <item name="homeToolbarTitle">@drawable/harucon2020_logo_small</item>
+        <item name="homeTitleBackground">@drawable/harucon2020_home_title</item>
+        <item name="homeTitleText">@color/white</item>
+        <item name="homeMessageBackground">@drawable/harucon2020_home_info</item>
+        <item name="homeMessageText">@color/harucon2020_red</item>
+        <item name="homeEventTimeText">@color/harucon2020_dark_blue</item>
+        <item name="homeCurrentEventBackground">@drawable/harucon2020_current_event</item>
+        <item name="homeCurrentEventText">@color/white</item>
+        <item name="homeUpcomingEventBackground">@drawable/harucon2020_home_info</item>
+        <item name="homeButtonBackground">@drawable/harucon2020_home_button</item>
+        <item name="homeButtonText">@color/white</item>
+        <item name="homeEventNameInList">@color/harucon2020_red</item>
+        <item name="homeEventsListDivider">@drawable/harucon2020_home_event_list_divider</item>
+        <item name="homeBoxTopMargin">10dp</item>
+        <item name="homeSingleButtonTopMargin">10dp</item>
+        <!-- Event View -->
+        <item name="eventTypeEndedColor">@color/harucon2020_gray</item>
+        <item name="eventTypeEndedBackgroundColor">@color/harucon2020_transparent_white</item>
+        <item name="eventTypeCurrentColor">@color/harucon2020_light_gray</item>
+        <item name="eventTypeCurrentBackgroundColor">@color/harucon2020_transparent_red</item>
+        <item name="eventTypeNotStartedColor">@color/harucon2020_dark_blue</item>
+        <item name="eventNameKeywordHighlightColor">@color/harucon2020_light_blue</item>
+        <item name="eventKeywordHighlightColor">@color/harucon2020_light_blue</item>
+        <item name="eventTimeDefaultTextColor">@color/white</item>
+        <item name="eventTimeDefaultBackgroundColor">@color/harucon2020_dark_blue</item>
+        <item name="eventDetailsColorEnded">?eventTypeEndedColor</item>
+        <item name="eventDetailsColorCurrent">?eventTypeCurrentColor</item>
+        <item name="eventDetailsColorNotStarted">@color/harucon2020_red</item>
+        <item name="eventSendFeedbackColor">@color/harucon2020_dark_blue</item>
+        <item name="eventSentFeedbackColor">@color/harucon2020_light_blue</item>
+        <item name="eventNonFavoriteColor">@color/white</item>
+        <item name="eventFavoriteColor">@color/harucon2020_dark_blue</item>
+        <!-- Map Screen -->
+        <item name="mapBackground">@drawable/harucon2020_background</item>
+        <item name="standIconColor">@color/harucon2020_red</item>
+        <item name="standsTypeTitleColor">@color/harucon2020_red</item>
+        <item name="locationDetailsBackground">@color/harucon2020_light_gray</item>
+        <item name="locationDetailsTopLineColor">@color/black</item>
+        <item name="locationDetailsTitleColor">@color/black</item>
+        <item name="iconClearMap">@drawable/ic_clear_black</item>
+        <item name="iconFloorUp">@drawable/arrow_up_wide</item>
+        <item name="iconFloorDown">@drawable/arrow_down_wide</item>
+        <item name="floorChangeBackground">@color/transparent_white</item>
+        <item name="floorUpDownTextColor">@color/black</item>
+        <!-- Updates Screen -->
+        <item name="updateTimeColor">@android:color/transparent</item>
+        <item name="updateTimeBackground">@null</item>
+        <item name="updateItemBorder">@color/white</item>
+        <item name="updateItemSeparator">@color/white</item>
+        <item name="updateTextColor">@color/white</item>
+        <item name="newUpdateTextColor">@color/harucon2020_dark_blue</item>
+        <item name="newUpdateBackground">@null</item>
+        <item name="focusedUpdateTextColor">@color/harucon2020_light_blue</item>
+        <item name="focusedUpdateBackground">@null</item>
+        <!-- My Events Screen -->
+        <item name="nextEventStartTimeBackground">@color/transparent_black</item>
+        <item name="nextEventStartTimeTextColor">@color/white</item>
+        <item name="conflictingEventsBackground">@null</item>
+        <!-- Event Screen -->
+        <item name="eventToolbarColor">@color/harucon2020_dark_pink</item>
+        <item name="eventDetailsDefaultBackgroundColor">@color/white</item>
+        <item name="eventTitleBackground">@color/harucon2020_transparent_black</item>
+        <item name="eventTitleTextColor">@color/white</item>
+        <item name="eventDetailsBoxColor">@color/harucon2020_transparent_black</item>
+        <item name="eventFeedbackBoxColor">@color/harucon2020_transparent_red</item>
+        <item name="eventVoteBoxColor">@color/harucon2020_transparent_white</item>
+        <item name="eventVoteTextColor">@color/harucon2020_dark_blue</item>
+        <item name="eventDescriptionBoxColor">@color/harucon2020_transparent_black</item>
+        <item name="feedbackButtonColor">@color/white</item>
+        <!-- Feedback Screen -->
+        <item name="progressBarDrawable">@drawable/harucon2020_rotating_circular_progress_bar</item>
+        <item name="conventionFeedbackTextColor">@color/white</item>
+        <item name="feedbackAnswerButtonColor">@color/harucon2020_dark_blue</item>
+        <item name="feedbackAnswerButtonSelectedColor">@color/harucon2020_red</item>
+        <!-- Programme Screen -->
+        <item name="eventTimeHeaderBackground">@drawable/harucon2020_event_time_header_background</item>
+        <item name="eventTimeHeaderAlwaysUseDefaultTextColor">true</item>
+        <item name="eventTimeHeaderDefaultTextColor">@color/white</item>
+        <item name="eventTimeHeaderMarginTop">20dp</item>
+        <item name="eventTimeHeaderMarginBottom">10dp</item>
+        <item name="marginBetweenEventsListAndNextHeader">0dp</item>
+        <item name="fabOnProgrammeTop">true</item>
+    </style>
+
+    <style name="AppBaseTheme.Harucon2020.Toolbar.Event" parent="AppBaseTheme.Harucon2020.Toolbar">
+        <item name="android:textColorLink">@color/harucon2020_red</item>
+    </style>
+
+    <style name="AppDialogTheme.Harucon2020" parent="Theme.AppCompat.Light.Dialog">
+        <!-- This is the default starting API23. In any case the title is always left-justified so it's best to not use it. -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="colorAccent">@color/harucon2020_red</item>
+        <item name="borderlessButtonColor">@color/harucon2020_red</item>
+        <item name="android:textColorPrimary">@android:color/black</item>
+    </style>
+
+    <style name="AppAlertDialogTheme.Harucon2020" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/harucon2020_red</item>
+        <item name="borderlessButtonColor">@color/harucon2020_red</item>
+        <item name="android:textColorPrimary">@android:color/black</item>
+    </style>
+
+    <style name="AppBaseTheme.Harucon2020.Toolbar.Splash">
+        <item name="android:windowBackground">@drawable/harucon2020_splash</item>
+    </style>
+
+    <style name="OverflowMenu.Harucon2020" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_more_vert_white_24dp</item>
+    </style>
+</resources>

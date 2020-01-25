@@ -49,7 +49,7 @@ public class Harucon2020Convention extends AmaiConvention {
     private static final int QUESTION_ID_AMAIDOL_NAME = 1001;
 
     // Special events server id
-    private static final int EVENT_ID_AMAIDOL = 7661;
+    private static final int EVENT_ID_AMAIDOL = 8651;
 
     // Ids of google spreadsheets associated with the special events
     private static final String AMAIDOL_SPREADSHEET_ID = "1u9xu3FNq2gA25oZoVHVguTzJA5HheXWPf2wnUj-iipE";
@@ -210,7 +210,7 @@ public class Harucon2020Convention extends AmaiConvention {
                 .addMapping("https://cami.org.il/2019/wp-content/uploads/sites/20/2019/06/ODED.png", R.drawable.event_oded)
         ;
 
-        imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.cami2019_event_default_background);
+        imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.harucon2020_event_default_background);
 
         // Excluded IDs - mostly for debug purposes (don't show messages about these when entering an event that has them)
         imageMapper.addExcludedIds(
