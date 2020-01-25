@@ -114,7 +114,7 @@ public class EventsViewOrHourAdapter extends BaseAdapter implements StickyListHe
 		} else {
 			color = ThemeAttributes.getColor(holder.itemView.getContext(), R.attr.eventTypeCurrentColor);
 		}
-		if (color == AmaiModelConverter.NO_COLOR) {
+		if (color == AmaiModelConverter.NO_COLOR || ThemeAttributes.getBoolean(holder.itemView.getContext(), R.attr.eventTimeHeaderAlwaysUseDefaultTextColor)) {
 			color = ThemeAttributes.getColor(holder.itemView.getContext(), R.attr.eventTimeHeaderDefaultTextColor);
 		}
 		return color;

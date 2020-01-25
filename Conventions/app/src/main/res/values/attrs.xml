@@ -63,10 +63,12 @@
         <attr name="eventNonFavoriteColor" format="color|reference"/>
         <attr name="eventFavoriteColor" format="color|reference"/>
         <attr name="eventAlertsIcon" format="integer|reference"/>
-        <attr name="eventDetailsColor" format="color|reference"/>
+        <attr name="eventDetailsColorEnded" format="color|reference"/>
+        <attr name="eventDetailsColorCurrent" format="color|reference"/>
+        <attr name="eventDetailsColorNotStarted" format="color|reference"/>
         <attr name="eventSendFeedbackColor" format="color|reference"/>
         <attr name="eventSentFeedbackColor" format="color|reference"/>
-        <attr name="eventFeedbackDefaultColor" format="color|reference"/>
+        <attr name="eventFeedbackColorOverride" format="color|reference"/>
         <!-- About screen -->
         <attr name="aboutLogo" format="integer"/>
         <attr name="aboutLogoMargins" format="dimension"/>
@@ -111,6 +113,12 @@
         <attr name="navigationPopupSelectedColor" format="color|reference"/>
         <attr name="navigationPopupNotSelectedColor" format="color|reference"/>
         <attr name="navigationPopupSeparatorColor" format="color|reference"/>
+        <attr name="navigationPopupTitleWidth" format="dimension|reference">
+            <!-- This allows to use match_parent as a value for this attribute -->
+            <enum name="match_parent" value="-1" />
+        </attr>
+        <attr name="navigationPopupItemPaddingTop" format="dimension" />
+        <attr name="navigationPopupItemPaddingBottom" format="dimension" />
         <attr name="navigationPopupTitleMargins" format="dimension"/>
         <attr name="navigationPopupBottomImageMargins" format="dimension"/>
         <attr name="navigationItemsShouldDisplayIcon" format="boolean"/>
@@ -135,6 +143,7 @@
         <attr name="floorChangeBackground" format="color|reference"/>
         <attr name="iconFloorUp" format="integer|reference"/>
         <attr name="iconFloorDown" format="integer|reference"/>
+        <attr name="floorUpDownTextColor" format="color|reference"/>
         <attr name="standIconColor" format="color|reference"/>
         <attr name="standsTypeTitleColor" format="color|reference"/>
         <!-- Event Screen -->
@@ -146,6 +155,7 @@
         <attr name="eventTitleTextColor" format="color|reference"/>
         <attr name="eventDetailsTextColor" format="color|reference"/>
         <attr name="eventVoteBoxColor" format="color|reference"/>
+        <attr name="eventVoteTextColor" format="color|reference"/>
         <attr name="eventFeedbackBoxColor" format="color|reference"/>
         <attr name="eventDetailsDefaultBackgroundColor" format="color|reference"/>
         <attr name="eventFeedbackTextColor" format="color|reference"/>
@@ -168,6 +178,10 @@
         <!-- Programme Screen -->
         <attr name="eventTimeHeaderBackground" format="color|reference"/>
         <attr name="eventTimeHeaderDefaultTextColor" format="color|reference"/>
+        <attr name="eventTimeHeaderAlwaysUseDefaultTextColor" format="boolean"/>
+        <attr name="eventTimeHeaderMarginTop" format="dimension" />
+        <attr name="eventTimeHeaderMarginBottom" format="dimension" />
+        <attr name="marginBetweenEventsListAndNextHeader" format="dimension" />
         <attr name="fabOnProgrammeTop" format="boolean"/>
         <!-- Event Survey Dialog -->
         <attr name="eventSurveyTextColor" format="color|reference"/>

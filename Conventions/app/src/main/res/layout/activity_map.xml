@@ -34,22 +34,24 @@
                 android:orientation="horizontal"
                 android:weightSum="1"
                 android:paddingTop="3dp">
-                <RadioButton
+                <androidx.appcompat.widget.AppCompatRadioButton
                     android:id="@+id/search_type_locations"
                     android:layout_width="0dp"
                     android:layout_weight="0.5"
                     android:layout_height="wrap_content"
                     android:text="@string/search_locations"
                     android:textColor="@color/black"
+                    app:buttonTint="@color/black"
                     android:checked="true"/>
 
-                <RadioButton
+                <androidx.appcompat.widget.AppCompatRadioButton
                     android:id="@+id/search_type_stands"
                     android:layout_width="0dp"
                     android:layout_weight="0.5"
                     android:layout_height="wrap_content"
                     android:text="@string/search_stands"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black"
+                    app:buttonTint="@color/black"/>
             </RadioGroup>
 
 

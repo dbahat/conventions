@@ -2,6 +2,7 @@ package amai.org.conventions.events;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
@@ -14,8 +15,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.core.content.ContextCompat;
-
 import java.util.List;
 
 import amai.org.conventions.R;
@@ -27,6 +26,7 @@ import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.networking.AmaiModelConverter;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Strings;
+import androidx.core.content.ContextCompat;
 
 public class EventView extends FrameLayout {
 
@@ -78,12 +78,8 @@ public class EventView extends FrameLayout {
     }
 
     public void setEvent(ConventionEvent event) {
-        setEvent(event, false);
-    }
-
-    public void setEvent(ConventionEvent event, boolean conflicting) {
         if (event != null) {
-            setColorsFromEvent(event, conflicting);
+            setColorsFromEvent(event);
             setAttending(event.isAttending());
             setHallName(event.getHall().getName());
             setStartTime(Dates.formatHoursAndMinutes(event.getStartTime()));
@@ -101,7 +97,7 @@ public class EventView extends FrameLayout {
         eventMainTouchArea.setTag(event == null ? null : event.getId());
     }
 
-    private void setColorsFromEvent(ConventionEvent event, boolean conflicting) {
+    private void setColorsFromEvent(ConventionEvent event) {
         int eventTypeColor = event.getBackgroundColor(getContext());
         setEventTypeColor(eventTypeColor);
         setEventTimeTextColor(event.getTextColor(getContext()));
@@ -115,6 +111,24 @@ public class EventView extends FrameLayout {
             setEventNameColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeCurrentColor), eventTypeColor);
             setEventBackgroundColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeCurrentBackgroundColor));
         }
+        setEventDetailsColor(getEventDetailsColor(event));
+    }
+
+    private int getEventDetailsColor(ConventionEvent event) {
+        int eventDetailsColor;
+        int eventTypeColor = event.getBackgroundColor(getContext());
+        if (!event.hasStarted()) {
+            eventDetailsColor = ThemeAttributes.getColor(getContext(), R.attr.eventDetailsColorNotStarted);
+        } else if (event.hasEnded()) {
+            eventDetailsColor = ThemeAttributes.getColor(getContext(), R.attr.eventDetailsColorEnded);
+        } else {
+            eventDetailsColor = ThemeAttributes.getColor(getContext(), R.attr.eventDetailsColorCurrent);
+        }
+        // If no color is specified, use the same color from the event type
+        if (eventDetailsColor == AmaiModelConverter.NO_COLOR) {
+            eventDetailsColor = eventTypeColor;
+        }
+        return eventDetailsColor;
     }
 
     public void setEventTypeColor(int color) {
@@ -135,6 +149,12 @@ public class EventView extends FrameLayout {
         eventName.setTextColor(eventNameColor);
     }
 
+    public void setEventDetailsColor(int eventDetailsColor) {
+        hallName.setTextColor(eventDetailsColor);
+        lecturerName.setTextColor(eventDetailsColor);
+        searchDescription.setTextColor(eventDetailsColor);
+    }
+
     public void setEventBackgroundColor(int color) {
         setLayoutColor(eventContainer, color);
     }
@@ -144,12 +164,18 @@ public class EventView extends FrameLayout {
     }
 
     public void setAttending(boolean isAttending) {
+        Drawable attendingDrawable = ThemeAttributes.getDrawable(getContext(), R.attr.eventFavoriteColor);
+        Drawable notAttendingDrawable = ThemeAttributes.getDrawable(getContext(), R.attr.eventNonFavoriteColor);
+
+        Drawable currentStateDrawable = isAttending ? attendingDrawable : notAttendingDrawable;
+
+        if (attendingDrawable instanceof ColorDrawable) {
         favoriteIcon.setImageDrawable(ThemeAttributes.getDrawable(getContext(), R.attr.eventFavoriteIcon));
-        if (isAttending) {
-            favoriteIcon.setColorFilter(ThemeAttributes.getColor(getContext(), R.attr.eventFavoriteColor), PorterDuff.Mode.SRC_ATOP);
+            favoriteIcon.setColorFilter(((ColorDrawable) currentStateDrawable).getColor(), PorterDuff.Mode.SRC_ATOP);
         } else {
-            favoriteIcon.setColorFilter(ThemeAttributes.getColor(getContext(), R.attr.eventNonFavoriteColor), PorterDuff.Mode.SRC_ATOP);
+            favoriteIcon.setImageDrawable(currentStateDrawable);
         }
+
     }
 
     public void setShowHallName(boolean show) {
@@ -197,7 +223,10 @@ public class EventView extends FrameLayout {
         if (event.getUserInput().getEventAboutToStartNotification().isEnabled() ||
                 event.getUserInput().getEventFeedbackReminderNotification().isEnabled()) {
             alarmIcon.setVisibility(VISIBLE);
-            alarmIcon.setColorFilter(ThemeAttributes.getColor(getContext(), R.attr.eventDetailsColor));
+            Drawable favDrawable = ThemeAttributes.getDrawable(getContext(), R.attr.eventFavoriteColor);
+            if (favDrawable instanceof ColorDrawable) {
+                alarmIcon.setColorFilter(((ColorDrawable) favDrawable).getColor());
+            }
         } else {
             alarmIcon.setVisibility(GONE);
         }
@@ -222,11 +251,16 @@ public class EventView extends FrameLayout {
                 // be a weighted rating
                 if (feedback.isSent()) {
                     icon = ContextCompat.getDrawable(getContext(), R.drawable.feedback_sent);
-                    filterColor = ContextCompat.getColor(getContext(), R.color.yellow);
+                    filterColor = ThemeAttributes.getColor(getContext(), R.attr.eventSentFeedbackColor);
                 } else if (event.isAttending() || feedback.hasAnsweredQuestions()) {
                     filterColor = ThemeAttributes.getColor(getContext(), R.attr.eventSendFeedbackColor);
                 } else {
-                    filterColor = ThemeAttributes.getColor(getContext(), R.attr.eventDetailsColor);
+                    int feedbackColorOverride = ThemeAttributes.getColor(getContext(), R.attr.eventFeedbackColorOverride);
+                    if (feedbackColorOverride != AmaiModelConverter.NO_COLOR) {
+                        filterColor = feedbackColorOverride;
+                    } else {
+                        filterColor = getEventDetailsColor(event);
+                    }
                 }
             }
 

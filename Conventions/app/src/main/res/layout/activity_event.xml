@@ -121,7 +121,7 @@
                 <TextView
                     android:id="@+id/event_vote_description"
                     style="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="?attr/eventDescriptionTextColor"
+                    android:textColor="?attr/eventVoteTextColor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/survey_vote_details" />
@@ -151,7 +151,7 @@
                 <TextView
                     android:id="@+id/event_vote_note"
                     style="@style/TextAppearance.AppCompat.Body2"
-                    android:textColor="?attr/eventDescriptionTextColor"
+                    android:textColor="?attr/eventVoteTextColor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/survey_vote_note" />

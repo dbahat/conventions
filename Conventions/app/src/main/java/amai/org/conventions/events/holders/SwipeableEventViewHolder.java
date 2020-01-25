@@ -4,9 +4,6 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +13,8 @@ import amai.org.conventions.events.EventView;
 import amai.org.conventions.events.adapters.ListPagerAdapter;
 import amai.org.conventions.events.listeners.OnSwipeListener;
 import amai.org.conventions.model.ConventionEvent;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 /**
  * ViewHolder for an event view that allow swipe to add/remove from favorites
@@ -121,20 +120,6 @@ public class SwipeableEventViewHolder extends RecyclerView.ViewHolder {
 	private void removeOnPageChangeListener() {
 		if (listener != null) {
 			viewPager.removeOnPageChangeListener(listener);
-		}
-	}
-
-	public void setKeywordsHighlighting(List<String> keywords) {
-		mainEventView.setKeywordsHighlighting(keywords);
-		hiddenEventView.setKeywordsHighlighting(keywords);
-		hiddenEventView2.setKeywordsHighlighting(keywords);
-	}
-
-	public void setBottomDividerVisible(boolean visible) {
-		if (visible) {
-			itemView.findViewById(R.id.event_bottom_divider).setVisibility(View.VISIBLE);
-		} else {
-			itemView.findViewById(R.id.event_bottom_divider).setVisibility(View.GONE);
 		}
 	}
 
