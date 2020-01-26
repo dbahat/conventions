@@ -172,8 +172,8 @@ public class AmaiModelConverter {
 				.replace("/div>", "/xdiv>")
 				// Remove tabs because they are not treated as whitespace and mess up the formatting
 				.replace("\t", "    ")
-				// Replace img tags and remove src attribute since we don't want images to appear in the description
-				.replaceAll("src=\"[^\"]*\"", "")
+				// Replace img tags and rename src attribute since we don't want images to appear in the description
+				.replaceAll("src=(\"[^\"]*\")", "xsrc=$1")
 				.replace("<img", "<ximg")
 				.replace("/img>", "/ximg>");
 	}
