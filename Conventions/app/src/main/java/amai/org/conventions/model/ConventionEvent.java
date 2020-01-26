@@ -374,10 +374,17 @@ public class ConventionEvent implements Serializable {
 		String eventDescription = this.getDescription();
 		final ListTagHandler listTagHandler = new ListTagHandler();
 		Spanned spanned = HtmlParser.fromHtml(eventDescription, null, new HtmlParser.TagHandler() {
-			private Stack<DivSpan> spans = new Stack<>();
+			private Stack<DivSpan> divSpans = new Stack<>();
+			private Stack<IFrameSpan> iframeSpans = new Stack<>();
+
 			@Override
 			public boolean handleTag(boolean opening, String tag, Editable output, Attributes attributes) {
 				listTagHandler.handleTag(opening, tag, output, null);
+
+				// Mark embedded google form with a GoogleFormSpan:
+				// An embedded google forms is a div that has a form inside it.
+				// We keep a stack of div objects so we can track when the google form's div is closed,
+				// and set its URL when we reach the form element inside it
 				if (tag.equals("xdiv") || tag.equals("div")) {
 					int length = output.length();
 					if (opening) {
@@ -389,9 +396,9 @@ public class ConventionEvent implements Serializable {
 							span = new DivSpan();
 						}
 						span.setStart(length);
-						spans.push(span);
+						divSpans.push(span);
 					} else {
-						DivSpan span = spans.pop();
+						DivSpan span = divSpans.pop();
 						span.setEnd(length);
 						if (span instanceof GoogleFormSpan) {
 							output.setSpan(span, span.getStart(), length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -399,11 +406,11 @@ public class ConventionEvent implements Serializable {
 					}
 				} else if (opening && tag.equals("form") && attributes != null) {
 					// Add the url to the google form (only if this form is inside the google form,
-					// meaning the form wasn't attached to the output yet so it's still in the spans stack).
+					// meaning the form wasn't attached to the output yet so it's still in the divSpans stack).
 					// We go over the stack in reverse order because the current form was added last.
 					GoogleFormSpan span = null;
 					DivSpan currentSpan = null;
-					for (ListIterator<DivSpan> iter = spans.listIterator(spans.size()); iter.hasPrevious(); currentSpan = iter.previous()) {
+					for (ListIterator<DivSpan> iter = divSpans.listIterator(divSpans.size()); iter.hasPrevious(); currentSpan = iter.previous()) {
 						if (currentSpan instanceof GoogleFormSpan) {
 							span = (GoogleFormSpan) currentSpan;
 							break;
@@ -412,6 +419,26 @@ public class ConventionEvent implements Serializable {
 					if (span != null) {
 						String url = HtmlParser.getValue(attributes, "action");
 						span.setUrl(url);
+					}
+				} else if (tag.equals("iframe")) {
+					// Handle iframes
+					// There are currently 2 iframe types we support: youtube videos and google forms (the previous handling for google form is via an unsupported wordpress plugin so we have to support this type as well).
+					// Here we just mark the iframe with its content, later on we check for each iframe type what the URL is and add a link.
+					int length = output.length();
+					if (opening) {
+						IFrameSpan span = new IFrameSpan();
+						span.setStart(length);
+						// We replace all src attributes with xsrc in amai but not in sff
+						String url = HtmlParser.getValue(attributes, "xsrc");
+						if (url == null) {
+							url = HtmlParser.getValue(attributes, "src");
+						}
+						span.setUrl(url);
+						iframeSpans.push(span);
+					} else {
+						IFrameSpan span = iframeSpans.pop();
+						span.setEnd(length);
+						output.setSpan(span, span.getStart(), length, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
 					}
 				}
 				return false;
@@ -422,6 +449,26 @@ public class ConventionEvent implements Serializable {
 			return null;
 		}
 
+		// Convert iframes to CustomURLSpans by removing the original (iframe) content and adding a link
+		IFrameSpan[] iframes = spanned.getSpans(0, spanned.length(), IFrameSpan.class);
+		for (IFrameSpan span : iframes) {
+			int spanStart = span.getStart();
+			int spanEnd = span.getEnd();
+			SpannableStringBuilder link = new SpannableStringBuilder();
+			if (!TextUtils.isEmpty(span.getUrl())) {
+				String linkText = "למידע נוסף";
+				if (span.getUrl().startsWith("https://www.youtube.com/")) {
+					linkText = "לסרטון";
+				} else if (span.getUrl().startsWith("https://docs.google.com/forms/")) {
+					linkText = "לטופס";
+				}
+				link.append(linkText);
+				link.setSpan(new CustomURLSpan(span.getUrl()), 0, link.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+			}
+			spanned = (Spanned) TextUtils.concat(spanned.subSequence(0, spanStart), link, spanned.subSequence(spanEnd, spanned.length()));
+		}
+
+		// Convert google form spans to CustomURLSpan by removing the original (div) content and adding a link to the form
 		GoogleFormSpan[] forms = spanned.getSpans(0, spanned.length(), GoogleFormSpan.class);
 		for (GoogleFormSpan span : forms) {
 			int spanStart = span.getStart();
@@ -429,12 +476,13 @@ public class ConventionEvent implements Serializable {
 			SpannableStringBuilder linkToForm = new SpannableStringBuilder();
 			if (!TextUtils.isEmpty(span.getUrl())) {
 				linkToForm.append("לטופס");
-				linkToForm.setSpan(new FormURLSpan(span.getUrl()), 0, linkToForm.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+				linkToForm.setSpan(new CustomURLSpan(span.getUrl()), 0, linkToForm.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
 			}
 			spanned = (Spanned) TextUtils.concat(spanned.subSequence(0, spanStart), linkToForm, spanned.subSequence(spanEnd, spanned.length()));
 		}
+		// Remove any links to google forms (since they were handled previously)
 		for (URLSpan urlSpan : spanned.getSpans(0, spanned.length(), URLSpan.class)) {
-			if (urlSpan.getURL().startsWith("https://docs.google.com/forms") && !(urlSpan instanceof FormURLSpan)) {
+			if (urlSpan.getURL().startsWith("https://docs.google.com/forms/") && !(urlSpan instanceof CustomURLSpan)) {
 				int spanStart = spanned.getSpanStart(urlSpan);
 				int spanEnd = spanned.getSpanEnd(urlSpan);
 				spanned = (Spanned) TextUtils.concat(spanned.subSequence(0, spanStart), spanned.subSequence(spanEnd, spanned.length()));
@@ -473,9 +521,20 @@ public class ConventionEvent implements Serializable {
 			return url;
 		}
 	}
-	private static class FormURLSpan extends URLSpan {
-		public FormURLSpan(String url) {
+	private static class CustomURLSpan extends URLSpan {
+		public CustomURLSpan(String url) {
 			super(url);
+		}
+	}
+	private static class IFrameSpan extends DivSpan {
+		private String url = null;
+
+		public void setUrl(String url) {
+			this.url = url;
+		}
+
+		public String getUrl() {
+			return url;
 		}
 	}
 
