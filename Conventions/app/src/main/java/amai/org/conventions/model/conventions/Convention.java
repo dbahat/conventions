@@ -146,6 +146,9 @@ public abstract class Convention implements Serializable {
 		this.updatesURL = initUpdatesURL();
 		this.halls = initHalls();
 		this.map = initMap();
+		if (this.map == null) {
+			this.map = new ConventionMap();
+		}
 		this.longitude = initLongitude();
 		this.latitude = initLatitude();
 		this.imageMapper = initImageMapper();
