@@ -36,7 +36,7 @@ public class Harucon2020Convention extends AmaiConvention {
     private static final String ESHKOL3_NAME = "אשכול 3";
     private static final String WORKSHOPS_NAME = "חדר סדנאות";
     private static final String GAMES_NAME = "משחקייה";
-    private static final String COSPLAY_AREA_NAME = "מתחם קוספליי";
+    private static final String COSPLAY_AREA_NAME = "מתחם הקוספליי";
     // Location names
     public static final String PARENTS_ROOM_NAME = "חדר הורים";
 
@@ -250,9 +250,9 @@ public class Harucon2020Convention extends AmaiConvention {
         Hall eshkol2 = new Hall().withName(ESHKOL2_NAME).withOrder(4);
         Hall eshkol3 = new Hall().withName(ESHKOL3_NAME).withOrder(5);
         Hall workshops = new Hall().withName(WORKSHOPS_NAME).withOrder(6);
-        Hall games = new Hall().withName(GAMES_NAME).withOrder(7);
-        Hall cosplayArea = new Hall().withName(COSPLAY_AREA_NAME).withOrder(8);
-        return new Halls(Arrays.asList(mainHall, auditorium, eshkol1, eshkol2, eshkol3, workshops, games, cosplayArea));
+        Hall cosplayArea = new Hall().withName(COSPLAY_AREA_NAME).withOrder(7);
+        Hall games = new Hall().withName(GAMES_NAME).withOrder(8);
+        return new Halls(Arrays.asList(mainHall, auditorium, eshkol1, eshkol2, eshkol3, workshops, cosplayArea, games));
     }
 
     @Override
