@@ -257,6 +257,11 @@ public class Harucon2020Convention extends AmaiConvention {
 
     @Override
     protected ConventionMap initMap() {
+//    	return createMap();
+    	return null;
+	}
+
+    private ConventionMap createMap() {
         Hall mainHall = this.getHalls().findByName(MAIN_HALL_NAME);
         Hall schwatrz = this.getHalls().findByName(SCHWARTZ_NAME);
         Hall eshkol1 = this.getHalls().findByName(ESHKOL1_NAME);
