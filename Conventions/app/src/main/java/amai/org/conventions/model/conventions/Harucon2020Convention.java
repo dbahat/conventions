@@ -1,7 +1,5 @@
 package amai.org.conventions.model.conventions;
 
-import androidx.annotation.Nullable;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
@@ -11,9 +9,7 @@ import java.util.List;
 import amai.org.conventions.R;
 import amai.org.conventions.feedback.SurveySender;
 import amai.org.conventions.feedback.forms.EventFeedbackForm;
-import amai.org.conventions.feedback.forms.EventVoteSurveyFormSender;
 import amai.org.conventions.feedback.forms.FeedbackForm;
-import amai.org.conventions.feedback.forms.SurveyForm;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.FeedbackQuestion;
@@ -26,10 +22,10 @@ import amai.org.conventions.model.Place;
 import amai.org.conventions.model.SpecialEventsProcessor;
 import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.StandsArea;
-import amai.org.conventions.model.Survey;
 import amai.org.conventions.networking.SurveyDataRetriever;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
+import androidx.annotation.Nullable;
 
 public class Harucon2020Convention extends AmaiConvention {
     // Hall names
@@ -645,32 +641,32 @@ public class Harucon2020Convention extends AmaiConvention {
         if (event.getUserInput().getVoteSurvey() == null) {
             return null;
         }
-        try {
-            if (event.getServerId() == EVENT_ID_AMAIDOL) {
-                SurveyForm form = new SurveyForm()
-                        .withQuestionEntry(QUESTION_ID_AMAIDOL_NAME, "entry.109802680")
-                        .withQuestionEntry(QUESTION_ID_AMAIDOL_VOTE, "entry.1600353678")
-                        .withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSf3BlH3jonMmQ-eQo1MeQ76s31ak2824eJVsMcl6IlqueqEDw/formResponse"));
-
-                SurveyDataRetriever.DisabledMessage disabledMessageRetriever = new SurveyDataRetriever.GoogleSpreadSheet(AMAIDOL_SPREADSHEET_ID);
-
-                return new EventVoteSurveyFormSender(form, event.getUserInput().getVoteSurvey(), disabledMessageRetriever);
-
-            }
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            if (event.getServerId() == EVENT_ID_AMAIDOL) {
+//                SurveyForm form = new SurveyForm()
+//                        .withQuestionEntry(QUESTION_ID_AMAIDOL_NAME, "entry.109802680")
+//                        .withQuestionEntry(QUESTION_ID_AMAIDOL_VOTE, "entry.1600353678")
+//                        .withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSf3BlH3jonMmQ-eQo1MeQ76s31ak2824eJVsMcl6IlqueqEDw/formResponse"));
+//
+//                SurveyDataRetriever.DisabledMessage disabledMessageRetriever = new SurveyDataRetriever.GoogleSpreadSheet(AMAIDOL_SPREADSHEET_ID);
+//
+//                return new EventVoteSurveyFormSender(form, event.getUserInput().getVoteSurvey(), disabledMessageRetriever);
+//
+//            }
+//        } catch (MalformedURLException e) {
+//            throw new RuntimeException(e);
+//        }
         return super.getEventVoteSender(event);
     }
 
     @Override
     @Nullable
     public SurveyDataRetriever.Answers createSurveyAnswersRetriever(FeedbackQuestion question) {
-        switch (question.getQuestionId()) {
-            case QUESTION_ID_AMAIDOL_VOTE: {
-                return new SurveyDataRetriever.GoogleSpreadSheet(AMAIDOL_SPREADSHEET_ID);
-            }
-        }
+//        switch (question.getQuestionId()) {
+//            case QUESTION_ID_AMAIDOL_VOTE: {
+//                return new SurveyDataRetriever.GoogleSpreadSheet(AMAIDOL_SPREADSHEET_ID);
+//            }
+//        }
 
         return null;
     }
@@ -686,14 +682,14 @@ public class Harucon2020Convention extends AmaiConvention {
     public void convertUserInputForEvent(ConventionEvent.UserInput userInput, ConventionEvent event) {
         super.convertUserInputForEvent(userInput, event);
 
-        if (userInput.getVoteSurvey() == null && event != null) {
-            if (event.getServerId() == EVENT_ID_AMAIDOL) {
-                userInput.setVoteSurvey(new Survey().withQuestions(
-                        new FeedbackQuestion(QUESTION_ID_AMAIDOL_NAME, FeedbackQuestion.AnswerType.SINGLE_LINE_TEXT, true),
-                        new FeedbackQuestion(QUESTION_ID_AMAIDOL_VOTE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO, true)
-                ));
-            }
-        }
+//        if (userInput.getVoteSurvey() == null && event != null) {
+//            if (event.getServerId() == EVENT_ID_AMAIDOL) {
+//                userInput.setVoteSurvey(new Survey().withQuestions(
+//                        new FeedbackQuestion(QUESTION_ID_AMAIDOL_NAME, FeedbackQuestion.AnswerType.SINGLE_LINE_TEXT, true),
+//                        new FeedbackQuestion(QUESTION_ID_AMAIDOL_VOTE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO, true)
+//                ));
+//            }
+//        }
     }
 
     @Override
