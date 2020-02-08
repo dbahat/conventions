@@ -32,10 +32,10 @@ android {
 
 dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.palette:palette:1.0.0'
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'com.google.android.material:material:1.1.0'
     implementation 'com.google.android:flexbox:0.3.0'
     implementation 'com.github.castorflex.verticalviewpager:library:19.0.1'
     implementation 'klogi.com:rtlviewpager:1.0.0'
@@ -47,7 +47,7 @@ dependencies {
     implementation 'com.caverock:androidsvg:1.2.2-beta-1'
     // Using a fork of se.emilsjolander:stickylistheaders due to an open issue in Android 8. See https://github.com/emilsjolander/StickyListHeaders/issues/477.
     implementation 'com.github.mtotschnig:StickyListHeaders:2.7.1'
-    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.google.code.gson:gson:2.8.5'
 
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.21.0'
