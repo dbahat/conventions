@@ -44,12 +44,12 @@ public class TestConvention extends Convention {
     }
 
     @Override
-    protected URL initModelURL() {
+    protected URL initUpdatesURL() {
         return null;
     }
 
     @Override
-    protected String initFacebookFeedPath() {
+    protected URL initModelURL() {
         return null;
     }
 
