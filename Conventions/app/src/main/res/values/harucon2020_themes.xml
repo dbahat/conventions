@@ -76,8 +76,8 @@
         <item name="eventTypeCurrentColor">@color/harucon2020_light_gray</item>
         <item name="eventTypeCurrentBackgroundColor">@color/harucon2020_transparent_red</item>
         <item name="eventTypeNotStartedColor">@color/harucon2020_dark_blue</item>
-        <item name="eventNameKeywordHighlightColor">@color/harucon2020_light_blue</item>
-        <item name="eventKeywordHighlightColor">@color/harucon2020_light_blue</item>
+        <item name="eventNameKeywordHighlightColor">@color/dark_gold</item>
+        <item name="eventKeywordHighlightColor">@color/dark_gold</item>
         <item name="eventTimeDefaultTextColor">@color/white</item>
         <item name="eventTimeDefaultBackgroundColor">@color/harucon2020_dark_blue</item>
         <item name="eventDetailsColorEnded">?eventTypeEndedColor</item>
