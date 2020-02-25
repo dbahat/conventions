@@ -28,32 +28,32 @@ import amai.org.conventions.utils.ConventionStorage;
 import androidx.annotation.Nullable;
 
 public class Harucon2020Convention extends AmaiConvention {
-    // Hall names
-    private static final String MAIN_HALL_NAME = "אולם ראשי";
-    private static final String SCHWARTZ_NAME = "אודיטוריום שוורץ";
-    private static final String ESHKOL1_NAME = "אשכול 1";
-    private static final String ESHKOL2_NAME = "אשכול 2";
-    private static final String ESHKOL3_NAME = "אשכול 3";
-    private static final String WORKSHOPS_NAME = "חדר סדנאות";
-    private static final String GAMES_NAME = "משחקייה";
-    private static final String COSPLAY_AREA_NAME = "מתחם הקוספליי";
-    // Location names
-    public static final String PARENTS_ROOM_NAME = "חדר הורים";
+	// Hall names
+	private static final String MAIN_HALL_NAME = "אולם ראשי";
+	private static final String SCHWARTZ_NAME = "אודיטוריום שוורץ";
+	private static final String ESHKOL1_NAME = "אשכול 1";
+	private static final String ESHKOL2_NAME = "אשכול 2";
+	private static final String ESHKOL3_NAME = "אשכול 3";
+	private static final String WORKSHOPS_NAME = "חדר סדנאות";
+	private static final String GAMES_NAME = "משחקייה";
+	private static final String COSPLAY_AREA_NAME = "מתחם הקוספליי";
+	// Location names
+	public static final String PARENTS_ROOM_NAME = "חדר הורים";
 
-    // Vote questions - these values are serialized, don't change them!
-    private static final int QUESTION_ID_AMAIDOL_VOTE = 1000;
-    private static final int QUESTION_ID_AMAIDOL_NAME = 1001;
+	// Vote questions - these values are serialized, don't change them!
+	private static final int QUESTION_ID_AMAIDOL_VOTE = 1000;
+	private static final int QUESTION_ID_AMAIDOL_NAME = 1001;
 
-    // Special events server id
-    private static final int EVENT_ID_AMAIDOL = 8651;
+	// Special events server id
+	private static final int EVENT_ID_AMAIDOL = 8651;
 
-    // Ids of google spreadsheets associated with the special events
-    private static final String AMAIDOL_SPREADSHEET_ID = "1u9xu3FNq2gA25oZoVHVguTzJA5HheXWPf2wnUj-iipE";
+	// Ids of google spreadsheets associated with the special events
+	private static final String AMAIDOL_SPREADSHEET_ID = "1u9xu3FNq2gA25oZoVHVguTzJA5HheXWPf2wnUj-iipE";
 
-    static {
-        FeedbackQuestion.addQuestion(QUESTION_ID_AMAIDOL_NAME, R.string.amaidol_name_question);
-        FeedbackQuestion.addQuestion(QUESTION_ID_AMAIDOL_VOTE, R.string.amaidol_vote_question);
-    }
+	static {
+		FeedbackQuestion.addQuestion(QUESTION_ID_AMAIDOL_NAME, R.string.amaidol_name_question);
+		FeedbackQuestion.addQuestion(QUESTION_ID_AMAIDOL_VOTE, R.string.amaidol_vote_question);
+	}
 
 	// Stand types
 	private enum StandType implements Stand.StandType {
@@ -90,151 +90,151 @@ public class Harucon2020Convention extends AmaiConvention {
 		}
 	}
 
-    @Override
-    protected ConventionStorage initStorage() {
-        return new ConventionStorage(this, R.raw.harucon2020_convention_events, 0);
-    }
+	@Override
+	protected ConventionStorage initStorage() {
+		return new ConventionStorage(this, R.raw.harucon2020_convention_events, 0);
+	}
 
-    @Override
-    protected Calendar initDate() {
-        Calendar date = Calendar.getInstance();
-        date.clear();
-        date.set(2020, Calendar.MARCH, 10);
-        return date;
-    }
+	@Override
+	protected Calendar initDate() {
+		Calendar date = Calendar.getInstance();
+		date.clear();
+		date.set(2020, Calendar.MARCH, 10);
+		return date;
+	}
 
-    @Override
-    protected String initID() {
-        return "Harucon2020";
-    }
+	@Override
+	protected String initID() {
+		return "Harucon2020";
+	}
 
-    @Override
-    protected String initDisplayName() {
-        return "הארוקון 2020";
-    }
+	@Override
+	protected String initDisplayName() {
+		return "הארוקון 2020";
+	}
 
-    @Override
-    protected URL initUpdatesURL() {
-        try {
-            return new URL("https://amai.org.il/wp-content/plugins/GetHaruconFeed.php");
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
-    }
+	@Override
+	protected URL initUpdatesURL() {
+		try {
+			return new URL("https://amai.org.il/wp-content/plugins/GetHaruconFeed.php");
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
-    @Override
-    protected double initLongitude() {
-        return 35.202425;
-    }
+	@Override
+	protected double initLongitude() {
+		return 35.202425;
+	}
 
-    @Override
-    protected double initLatitude() {
-        return 31.786372;
-    }
+	@Override
+	protected double initLatitude() {
+		return 31.786372;
+	}
 
-    @Override
-    protected EventFeedbackForm initEventFeedbackForm() {
-        EventFeedbackForm eventFeedbackForm = null;
-        try {
-            eventFeedbackForm = (EventFeedbackForm) new EventFeedbackForm()
-                    .withEventTitleEntry("entry.1847107867")
-                    .withEventTimeEntry("entry.1648362575")
-                    .withHallEntry("entry.1510105148")
-                    .withConventionNameEntry("entry.1882876736")
-                    .withDeviceIdEntry("entry.312890800")
-                    .withTestEntry("entry.791883029")
-                    .withQuestionEntry(FeedbackQuestion.QUESTION_ID_ENJOYMENT, "entry.415572741")
-                    .withQuestionEntry(FeedbackQuestion.QUESTION_ID_LECTURER_QUALITY, "entry.1327236956")
-                    .withQuestionEntry(FeedbackQuestion.QUESTION_ID_SIMILAR_EVENTS, "entry.1416969956")
-                    .withQuestionEntry(FeedbackQuestion.QUESTION_ID_ADDITIONAL_INFO, "entry.1582215667")
-                    .withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSdNt0smJ77qdnLdZuX53m6YqBXxW7fKxzn2n-3EnW7zQIbTZg/formResponse"));
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
-        return eventFeedbackForm;
-    }
+	@Override
+	protected EventFeedbackForm initEventFeedbackForm() {
+		EventFeedbackForm eventFeedbackForm = null;
+		try {
+			eventFeedbackForm = (EventFeedbackForm) new EventFeedbackForm()
+					.withEventTitleEntry("entry.1847107867")
+					.withEventTimeEntry("entry.1648362575")
+					.withHallEntry("entry.1510105148")
+					.withConventionNameEntry("entry.1882876736")
+					.withDeviceIdEntry("entry.312890800")
+					.withTestEntry("entry.791883029")
+					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_ENJOYMENT, "entry.415572741")
+					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_LECTURER_QUALITY, "entry.1327236956")
+					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_SIMILAR_EVENTS, "entry.1416969956")
+					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_ADDITIONAL_INFO, "entry.1582215667")
+					.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSdNt0smJ77qdnLdZuX53m6YqBXxW7fKxzn2n-3EnW7zQIbTZg/formResponse"));
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
+		return eventFeedbackForm;
+	}
 
-    @Override
-    protected FeedbackForm initConventionFeedbackForm() {
-        FeedbackForm feedbackForm = null;
-        try {
-            feedbackForm = (FeedbackForm) new FeedbackForm()
-                    .withConventionNameEntry("entry.1882876736")
-                    .withDeviceIdEntry("entry.312890800")
-                    .withTestEntry("entry.791883029")
-                    .withQuestionEntry(FeedbackQuestion.QUESTION_ID_AGE, "entry.415572741")
-                    .withQuestionEntry(FeedbackQuestion.QUESTION_ID_LIKED, "entry.1327236956")
-                    .withQuestionEntry(FeedbackQuestion.QUESTION_ID_MAP_SIGNS, "entry.1416969956")
-                    .withQuestionEntry(FeedbackQuestion.QUESTION_ID_CONFLICTING_EVENTS, "entry.1582215667")
-                    .withQuestionEntry(FeedbackQuestion.QUESTION_ID_IMPROVEMENT, "entry.993320932")
-                    .withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSfWhoCDzTz83jA87HGEudl1nnBlQoURifdvllPxwZBX6uA-Pw/formResponse"));
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
-        return feedbackForm;
-    }
+	@Override
+	protected FeedbackForm initConventionFeedbackForm() {
+		FeedbackForm feedbackForm = null;
+		try {
+			feedbackForm = (FeedbackForm) new FeedbackForm()
+					.withConventionNameEntry("entry.1882876736")
+					.withDeviceIdEntry("entry.312890800")
+					.withTestEntry("entry.791883029")
+					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_AGE, "entry.415572741")
+					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_LIKED, "entry.1327236956")
+					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_MAP_SIGNS, "entry.1416969956")
+					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_CONFLICTING_EVENTS, "entry.1582215667")
+					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_IMPROVEMENT, "entry.993320932")
+					.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSfWhoCDzTz83jA87HGEudl1nnBlQoURifdvllPxwZBX6uA-Pw/formResponse"));
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
+		return feedbackForm;
+	}
 
-    @Override
-    protected URL initModelURL() {
-        try {
-            return new URL("https://harucon.org.il/2020/wp-admin/admin-ajax.php?action=get_event_list");
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
-    }
+	@Override
+	protected URL initModelURL() {
+		try {
+			return new URL("https://harucon.org.il/2020/wp-admin/admin-ajax.php?action=get_event_list");
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
-    @Override
-    protected ImageIdToImageResourceMapper initImageMapper() {
-        ImageIdToImageResourceMapper imageMapper = new ImageIdToImageResourceMapper();
+	@Override
+	protected ImageIdToImageResourceMapper initImageMapper() {
+		ImageIdToImageResourceMapper imageMapper = new ImageIdToImageResourceMapper();
 
-        imageMapper
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/54398045_2304783192875510_4248499860140982272_o-e1579101907870.jpg", R.drawable.event_cosplay)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/GuyTamir.jpg", R.drawable.event_guytamir)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/nami.jpg", R.drawable.event_nami)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/Amaidol.jpg", R.drawable.event_amaidol)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/Calligraphy.jpg", R.drawable.event_calligraphy)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/DalitBloch.jpg", R.drawable.event_dalitbloch)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/DannyOrbach.jpg", R.drawable.event_dannyorbach)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/EfratPahima.jpg", R.drawable.event_efratpahima)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/EranBenAsher.jpg", R.drawable.event_eranbenasher)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/GuyLenman1.jpg", R.drawable.event_guylenman1)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/HapoelTokyo.jpg", R.drawable.event_hapoeltokyo)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/Hikari.jpg", R.drawable.event_hikarigreen)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/InbarEitan.jpg", R.drawable.event_inbareitan)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/Japaneasy.png", R.drawable.event_japaneasy)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/KerenHaim.jpg", R.drawable.event_kerenhaim)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/KristinaMartynenko.jpg", R.drawable.event_kristinamartynenko)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/LeahUchitel.jpg", R.drawable.event_leahuchitel)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/LironAfriat.jpg", R.drawable.event_lironafriat)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/Manga.png", R.drawable.event_manga)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/MatanKachel-scaled.jpg", R.drawable.event_matankachel)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/MichalLevin.jpg", R.drawable.event_michallevin)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/NirGerber.jpg", R.drawable.event_nirgerber)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/OdedCohen.jpg", R.drawable.event_odedcohen)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/OmerCohen.jpg", R.drawable.event_omercohen)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/OmerKedem.jpg", R.drawable.event_omerkedem)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/OmerMessinger-scaled.jpg", R.drawable.event_omermessinger)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/OmerRozencwieg.jpg", R.drawable.event_omerrozencwieg)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/OraRakov.jpg", R.drawable.event_orarakov)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/PazGlebotzki.jpg", R.drawable.event_pazglebotzki)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/PieceOfMind.jpg", R.drawable.event_pieceofmind)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/RanWolf.jpg", R.drawable.event_ranwolf)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/RazGreenberg.jpg", R.drawable.event_razgreenberg)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/KimiNami.jpg", R.drawable.event_rideyourwave)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/RomanLempert.jpg", R.drawable.event_romanlempert)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/SheliVikniansky.jpg", R.drawable.event_shelivikniansky)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/TalHazan.jpg", R.drawable.event_talhazan)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/YaelStein.jpg", R.drawable.event_yaelstein)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/YoutubePanel.jpg", R.drawable.event_youtubepanel)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/69382648_611083972753199_4254163118118141952_o.jpg", R.drawable.event_runway)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2019/12/GameMangaCafe.jpg", R.drawable.event_manga_cafe)
-                .addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/LeonSalomon.jpeg", R.drawable.event_leonsalomon)
-        ;
+		imageMapper
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/54398045_2304783192875510_4248499860140982272_o-e1579101907870.jpg", R.drawable.event_cosplay)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/GuyTamir.jpg", R.drawable.event_guytamir)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/nami.jpg", R.drawable.event_nami)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/Amaidol.jpg", R.drawable.event_amaidol)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/Calligraphy.jpg", R.drawable.event_calligraphy)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/DalitBloch.jpg", R.drawable.event_dalitbloch)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/DannyOrbach.jpg", R.drawable.event_dannyorbach)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/EfratPahima.jpg", R.drawable.event_efratpahima)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/EranBenAsher.jpg", R.drawable.event_eranbenasher)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/GuyLenman1.jpg", R.drawable.event_guylenman1)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/HapoelTokyo.jpg", R.drawable.event_hapoeltokyo)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/Hikari.jpg", R.drawable.event_hikarigreen)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/InbarEitan.jpg", R.drawable.event_inbareitan)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/Japaneasy.png", R.drawable.event_japaneasy)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/KerenHaim.jpg", R.drawable.event_kerenhaim)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/KristinaMartynenko.jpg", R.drawable.event_kristinamartynenko)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/LeahUchitel.jpg", R.drawable.event_leahuchitel)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/LironAfriat.jpg", R.drawable.event_lironafriat)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/Manga.png", R.drawable.event_manga)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/MatanKachel-scaled.jpg", R.drawable.event_matankachel)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/MichalLevin.jpg", R.drawable.event_michallevin)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/NirGerber.jpg", R.drawable.event_nirgerber)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/OdedCohen.jpg", R.drawable.event_odedcohen)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/OmerCohen.jpg", R.drawable.event_omercohen)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/OmerKedem.jpg", R.drawable.event_omerkedem)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/OmerMessinger-scaled.jpg", R.drawable.event_omermessinger)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/OmerRozencwieg.jpg", R.drawable.event_omerrozencwieg)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/OraRakov.jpg", R.drawable.event_orarakov)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/PazGlebotzki.jpg", R.drawable.event_pazglebotzki)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/PieceOfMind.jpg", R.drawable.event_pieceofmind)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/RanWolf.jpg", R.drawable.event_ranwolf)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/RazGreenberg.jpg", R.drawable.event_razgreenberg)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/KimiNami.jpg", R.drawable.event_rideyourwave)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/RomanLempert.jpg", R.drawable.event_romanlempert)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/SheliVikniansky.jpg", R.drawable.event_shelivikniansky)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/TalHazan.jpg", R.drawable.event_talhazan)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/YaelStein.jpg", R.drawable.event_yaelstein)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/YoutubePanel.jpg", R.drawable.event_youtubepanel)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/69382648_611083972753199_4254163118118141952_o.jpg", R.drawable.event_runway)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2019/12/GameMangaCafe.jpg", R.drawable.event_manga_cafe)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/LeonSalomon.jpeg", R.drawable.event_leonsalomon)
+		;
 
-        imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.harucon2020_event_default_background);
+		imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.harucon2020_event_default_background);
 
-        // Excluded IDs - mostly for debug purposes (don't show messages about these when entering an event that has them)
-        imageMapper.addExcludedIds(
+		// Excluded IDs - mostly for debug purposes (don't show messages about these when entering an event that has them)
+		imageMapper.addExcludedIds(
 				// Games room
 				"https://harucon.org.il/2020/wp-content/uploads/sites/21/2019/07/IMG_3812.png",
 				"https://harucon.org.il/2020/wp-content/uploads/sites/21/2019/12/GameGunpla.jpg",
@@ -258,308 +258,308 @@ public class Harucon2020Convention extends AmaiConvention {
 				"https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/01-בוריס-רודמן.png",
 				"https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/02-מעיין-אלבז.png",
 				"https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/57504481_2350322358321593_8123707843250487296_o.jpg"
-        );
+		);
 
-        return imageMapper;
-    }
+		return imageMapper;
+	}
 
-    @Override
-    protected Halls initHalls() {
-        Hall mainHall = new Hall().withName(MAIN_HALL_NAME).withOrder(1);
-        Hall auditorium = new Hall().withName(SCHWARTZ_NAME).withOrder(2);
-        Hall eshkol1 = new Hall().withName(ESHKOL1_NAME).withOrder(3);
-        Hall eshkol2 = new Hall().withName(ESHKOL2_NAME).withOrder(4);
-        Hall eshkol3 = new Hall().withName(ESHKOL3_NAME).withOrder(5);
-        Hall workshops = new Hall().withName(WORKSHOPS_NAME).withOrder(6);
-        Hall cosplayArea = new Hall().withName(COSPLAY_AREA_NAME).withOrder(7);
-        Hall games = new Hall().withName(GAMES_NAME).withOrder(8);
-        return new Halls(Arrays.asList(mainHall, auditorium, eshkol1, eshkol2, eshkol3, workshops, cosplayArea, games));
-    }
+	@Override
+	protected Halls initHalls() {
+		Hall mainHall = new Hall().withName(MAIN_HALL_NAME).withOrder(1);
+		Hall auditorium = new Hall().withName(SCHWARTZ_NAME).withOrder(2);
+		Hall eshkol1 = new Hall().withName(ESHKOL1_NAME).withOrder(3);
+		Hall eshkol2 = new Hall().withName(ESHKOL2_NAME).withOrder(4);
+		Hall eshkol3 = new Hall().withName(ESHKOL3_NAME).withOrder(5);
+		Hall workshops = new Hall().withName(WORKSHOPS_NAME).withOrder(6);
+		Hall cosplayArea = new Hall().withName(COSPLAY_AREA_NAME).withOrder(7);
+		Hall games = new Hall().withName(GAMES_NAME).withOrder(8);
+		return new Halls(Arrays.asList(mainHall, auditorium, eshkol1, eshkol2, eshkol3, workshops, cosplayArea, games));
+	}
 
-    @Override
-    protected ConventionMap initMap() {
-        return createMap();
-    }
+	@Override
+	protected ConventionMap initMap() {
+		return createMap();
+	}
 
-    private ConventionMap createMap() {
-        Hall mainHall = this.getHalls().findByName(MAIN_HALL_NAME);
-        Hall schwatrz = this.getHalls().findByName(SCHWARTZ_NAME);
-        Hall eshkol1 = this.getHalls().findByName(ESHKOL1_NAME);
-        Hall eshkol2 = this.getHalls().findByName(ESHKOL2_NAME);
-        Hall eshkol3 = this.getHalls().findByName(ESHKOL3_NAME);
-        Hall workshops = this.getHalls().findByName(WORKSHOPS_NAME);
-        Hall games = this.getHalls().findByName(GAMES_NAME);
-        Hall cosplayArea = this.getHalls().findByName(COSPLAY_AREA_NAME);
+	private ConventionMap createMap() {
+		Hall mainHall = this.getHalls().findByName(MAIN_HALL_NAME);
+		Hall schwatrz = this.getHalls().findByName(SCHWARTZ_NAME);
+		Hall eshkol1 = this.getHalls().findByName(ESHKOL1_NAME);
+		Hall eshkol2 = this.getHalls().findByName(ESHKOL2_NAME);
+		Hall eshkol3 = this.getHalls().findByName(ESHKOL3_NAME);
+		Hall workshops = this.getHalls().findByName(WORKSHOPS_NAME);
+		Hall games = this.getHalls().findByName(GAMES_NAME);
+		Hall cosplayArea = this.getHalls().findByName(COSPLAY_AREA_NAME);
 
-        Floor entrance = new Floor(1)
-                .withName("מתחם כניסה")
-                .withImageResource(R.raw.harucon2020_floor_entrance, true)
-                .withImageWidth(1297.96997f)
-                .withImageHeight(804.69f);
-        Floor floor1 = new Floor(2)
-                .withName("קומה 1")
-                .withImageResource(R.raw.harucon2020_floor1, true)
-                .withImageWidth(1886.83997f)
-                .withImageHeight(1024.06604f);
-        Floor floor2 = new Floor(3)
-                .withName("קומה 2")
-                .withImageResource(R.raw.harucon2020_floor2, true)
-                .withImageWidth(2121.07007f)
-                .withImageHeight(1268.43005f);
+		Floor entrance = new Floor(1)
+				.withName("מתחם כניסה")
+				.withImageResource(R.raw.harucon2020_floor_entrance, true)
+				.withImageWidth(1297.96997f)
+				.withImageHeight(804.69f);
+		Floor floor1 = new Floor(2)
+				.withName("קומה 1")
+				.withImageResource(R.raw.harucon2020_floor1, true)
+				.withImageWidth(1886.83997f)
+				.withImageHeight(1024.06604f);
+		Floor floor2 = new Floor(3)
+				.withName("קומה 2")
+				.withImageResource(R.raw.harucon2020_floor2, true)
+				.withImageWidth(2121.07007f)
+				.withImageHeight(1268.43005f);
 
-        StandsArea agam = new StandsArea().withName("טרקלין אגם").withStands(getAgamStands()).withImageResource(R.drawable.cami2019_stands_map_agam).withImageWidth(2700).withImageHeight(967);
-        StandsArea pinkus = new StandsArea().withName("אולם פינקוס").withStands(getPinkusStands()).withImageResource(R.drawable.cami2019_stands_map_pinkus).withImageWidth(2700).withImageHeight(1706);
-        return new ConventionMap()
-                .withFloors(Arrays.asList(entrance, floor1, floor2))
-                .withDefaultFloor(floor1)
-                .withLocations(
-                        CollectionUtils.flattenList(
-                                inFloor(entrance,
-                                        new MapLocation()
-                                                .withPlace(new Place().withName("עמדת מודיעין ומרצ'נדייז כנסי"))
-                                                .withMarkerResource(R.raw.harucon2020_marker_information, true)
-                                                .withSelectedMarkerResource(R.raw.harucon2020_marker_information_selected, true)
-                                                .withMarkerHeight(136.51f)
-                                                .withX(1047.39f)
-                                                .withY(658.18f),
-                                        new MapLocation()
-                                                .withPlace(new Place().withName("עמדות צימוד"))
-                                                .withMarkerResource(R.raw.harucon2020_marker_bracelets, true)
-                                                .withSelectedMarkerResource(R.raw.harucon2020_marker_bracelets_selected, true)
-                                                .withMarkerHeight(104.76f)
-                                                .withX(661.73f)
-                                                .withY(674.37f),
-                                        new MapLocation()
-                                                .withPlace(new Place().withName("קופות"))
-                                                .withMarkerResource(R.raw.harucon2020_marker_cashiers, true)
-                                                .withSelectedMarkerResource(R.raw.harucon2020_marker_cashiers_selected, true)
-                                                .withMarkerHeight(104.76f)
-                                                .withX(498.6f)
-                                                .withY(634.04f),
-                                        new MapLocation()
-                                                .withPlace(new Place().withName("קופה נגישה"))
-                                                .withMarkerResource(R.raw.harucon2020_marker_accessible_cashier, true)
-                                                .withSelectedMarkerResource(R.raw.harucon2020_marker_accessible_cashier_selected, true)
-                                                .withMarkerHeight(104.76f)
-                                                .withX(670.84f)
-                                                .withY(521.85f),
-                                        new MapLocation()
-                                                .withPlace(new Place().withName("מתחם הזמנה מראש"))
-                                                .withMarkerResource(R.raw.harucon2020_marker_preorders, true)
-                                                .withSelectedMarkerResource(R.raw.harucon2020_marker_preorders_selected, true)
-                                                .withMarkerHeight(104.75f)
-                                                .withX(722.45f)
-                                                .withY(237.4f),
-                                        new MapLocation()
-                                                .withPlace(new Place().withName("מתחם קנייה במקום"))
-                                                .withMarkerResource(R.raw.harucon2020_marker_tickets_area, true)
-                                                .withSelectedMarkerResource(R.raw.harucon2020_marker_tickets_area_selected, true)
-                                                .withMarkerHeight(104.76f)
-                                                .withX(220.69f)
-                                                .withY(369.84f),
-                                        new MapLocation()
-                                                .withPlace(new Place().withName("מעבר נגיש"))
-                                                .withMarkerResource(R.raw.harucon2020_marker_accessible_passage, true)
-                                                .withSelectedMarkerResource(R.raw.harucon2020_marker_accessible_passage_selected, true)
-                                                .withMarkerHeight(104.76f)
-                                                .withX(195.73f)
-                                                .withY(258.36f)
-                                ),
-                                inFloor(floor1,
-                                        new MapLocation()
-                                                .withPlace(new Place().withName("שירותים"))
-                                                .withMarkerResource(R.raw.harucon2020_marker_toilet, true)
-                                                .withSelectedMarkerResource(R.raw.harucon2020_marker_toilet_selected, true)
-                                                .withMarkerHeight(114.51f)
-                                                .withX(1766.375f)
-                                                .withY(617.61f),
-                                        new MapLocation()
-                                                .withPlace(new Place().withName("אורנים 4"))
-                                                .withMarkerResource(R.raw.harucon2020_marker_oranim4, true)
-                                                .withSelectedMarkerResource(R.raw.harucon2020_marker_oranim4_selected, true)
-                                                .withMarkerHeight(137.35f)
-                                                .withX(1515.21f)
-                                                .withY(773.53f),
-                                        new MapLocation()
-                                                .withPlace(new Place().withName("אורנים 3 - מתחם קונסולות - נינטנדו"))
-                                                .withMarkerResource(R.raw.harucon2020_marker_oranim3, true)
-                                                .withSelectedMarkerResource(R.raw.harucon2020_marker_oranim3_selected, true)
-                                                .withMarkerHeight(188.926f)
-                                                .withX(1394.149f)
-                                                .withY(825.14f),
-                                        new MapLocation()
-                                                .withName("מתחם דוכנים")
-                                                .withPlace(pinkus)
-                                                .withMarkerResource(R.raw.harucon2020_marker_stands, true)
-                                                .withSelectedMarkerResource(R.raw.harucon2020_marker_stands_selected, true)
-                                                .withMarkerHeight(111f)
-                                                .withX(1214.895f)
-                                                .withY(651.69f),
-                                        new MapLocation()
-                                                .withPlace(new Place().withName("שמירת חפצים"))
-                                                .withMarkerResource(R.raw.harucon2020_marker_storage, true)
-                                                .withSelectedMarkerResource(R.raw.harucon2020_marker_storage_selected, true)
-                                                .withMarkerHeight(136.31f)
-                                                .withX(1082.46f)
-                                                .withY(230.81f),
-                                        new MapLocation()
-                                                .withPlace(new Place().withName("שירותים"))
-                                                .withMarkerResource(R.raw.harucon2020_marker_toilet, true)
-                                                .withSelectedMarkerResource(R.raw.harucon2020_marker_toilet_selected, true)
-                                                .withMarkerHeight(114.5f)
-                                                .withX(1038.645f)
-                                                .withY(108.11f),
-                                        new MapLocation()
-                                                .withPlace(new Place().withName("מעלית"))
-                                                .withMarkerResource(R.raw.harucon2020_marker_elevator, true)
-                                                .withSelectedMarkerResource(R.raw.harucon2020_marker_elevator_selected, true)
-                                                .withMarkerHeight(111.203f)
-                                                .withX(875.795f)
-                                                .withY(162.73f),
-                                        new MapLocation()
-                                                .withPlace(new Place().withName("מודיעין ודוכן אמא\"י"))
-                                                .withMarkerResource(R.raw.harucon2020_marker_information_amai, true)
-                                                .withSelectedMarkerResource(R.raw.harucon2020_marker_information_amai_selected, true)
-                                                .withMarkerHeight(169.65f)
-                                                .withX(858.685f)
-                                                .withY(362.12f),
-                                        new MapLocation()
-                                                .withPlace(eshkol1)
-                                                .withMarkerResource(R.raw.harucon2020_marker_eshkol1, true)
-                                                .withSelectedMarkerResource(R.raw.harucon2020_marker_eshkol1_selected, true)
-                                                .withMarkerHeight(137.35f)
-                                                .withX(492.835f)
-                                                .withY(595.31f),
-                                        new MapLocation()
-                                                .withPlace(schwatrz)
-                                                .withMarkerResource(R.raw.harucon2020_marker_schwartz, true)
-                                                .withSelectedMarkerResource(R.raw.harucon2020_marker_schwartz_selected, true)
-                                                .withMarkerHeight(136.61f)
-                                                .withX(658.125f)
-                                                .withY(524.45f),
-                                        new MapLocation()
-                                                .withPlace(eshkol3)
-                                                .withMarkerResource(R.raw.harucon2020_marker_eshkol3, true)
-                                                .withSelectedMarkerResource(R.raw.harucon2020_marker_eshkol3_selected, true)
-                                                .withMarkerHeight(137.51f)
-                                                .withX(348.18f)
-                                                .withY(810.02f),
-                                        new MapLocation()
-                                                .withPlace(eshkol2)
-                                                .withMarkerResource(R.raw.harucon2020_marker_eshkol2, true)
-                                                .withSelectedMarkerResource(R.raw.harucon2020_marker_eshkol2_selected, true)
-                                                .withMarkerHeight(137.51f)
-                                                .withX(542.615f)
-                                                .withY(810.02f),
-                                        new MapLocation()
-                                                .withPlace(new Place().withName("שירותים"))
-                                                .withMarkerResource(R.raw.harucon2020_marker_toilet, true)
-                                                .withSelectedMarkerResource(R.raw.harucon2020_marker_toilet_selected, true)
-                                                .withMarkerHeight(115.61f)
-                                                .withX(271.885f)
-                                                .withY(488.56f),
-                                        new MapLocation()
-                                                .withPlace(new Place().withName("מעלית"))
-                                                .withMarkerResource(R.raw.harucon2020_marker_elevator, true)
-                                                .withSelectedMarkerResource(R.raw.harucon2020_marker_elevator_selected, true)
-                                                .withMarkerHeight(111.153f)
-                                                .withX(67.675f)
-                                                .withY(591.42f)
-                                ),
-                                inFloor(floor2,
-                                        new MapLocation()
-                                                .withPlace(workshops)
-                                                .withMarkerResource(R.raw.harucon2020_marker_workshops, true)
-                                                .withSelectedMarkerResource(R.raw.harucon2020_marker_workshops_selected, true)
-                                                .withMarkerHeight(157.17f)
-                                                .withX(1755.43f)
-                                                .withY(1101.26f),
-                                        new MapLocation()
-                                                .withPlace(new Place().withName("שיפוט קוספליי"))
-                                                .withMarkerResource(R.raw.harucon2020_marker_cosplay_judgement, true)
-                                                .withSelectedMarkerResource(R.raw.harucon2020_marker_cosplay_judgement_selected, true)
-                                                .withMarkerHeight(136.57f)
-                                                .withX(1592.98f)
-                                                .withY(1040.06f),
-                                        new MapLocation()
-                                                .withPlace(new Place().withName(PARENTS_ROOM_NAME))
-                                                .withMarkerResource(R.raw.harucon2020_marker_parents, true)
-                                                .withSelectedMarkerResource(R.raw.harucon2020_marker_parents_selected, true)
-                                                .withMarkerHeight(111.25f)
-                                                .withX(1735.405f)
-                                                .withY(838.33f),
-                                        new MapLocation()
-                                                .withPlace(new Place().withName("שירותים"))
-                                                .withMarkerResource(R.raw.harucon2020_marker_toilet, true)
-                                                .withSelectedMarkerResource(R.raw.harucon2020_marker_toilet_selected, true)
-                                                .withMarkerHeight(116.24f)
-                                                .withX(2005.02f)
-                                                .withY(689.35f),
-                                        new MapLocation()
-                                                .withPlace(mainHall)
-                                                .withMarkerResource(R.raw.harucon2020_marker_main_hall, true)
-                                                .withSelectedMarkerResource(R.raw.harucon2020_marker_main_hall_selected, true)
-                                                .withMarkerHeight(209.174f)
-                                                .withX(1397.95f)
-                                                .withY(606.68f),
-                                        new MapLocation()
-                                                .withPlace(new Place().withName("שירותים"))
-                                                .withMarkerResource(R.raw.harucon2020_marker_toilet, true)
-                                                .withSelectedMarkerResource(R.raw.harucon2020_marker_toilet_selected, true)
-                                                .withMarkerHeight(118.9f)
-                                                .withX(1356.515f)
-                                                .withY(125.51f),
-                                        new MapLocation()
-                                                .withPlace(new Place().withName("מעלית"))
-                                                .withMarkerResource(R.raw.harucon2020_marker_elevator, true)
-                                                .withSelectedMarkerResource(R.raw.harucon2020_marker_elevator_selected, true)
-                                                .withMarkerHeight(111.143f)
-                                                .withX(1205f)
-                                                .withY(147.49f),
-                                        new MapLocation()
-                                                .withPlace(cosplayArea)
-                                                .withMarkerResource(R.raw.harucon2020_marker_cosplay_area, true)
-                                                .withSelectedMarkerResource(R.raw.harucon2020_marker_cosplay_area_selected, true)
-                                                .withMarkerHeight(307.85f)
-                                                .withX(1180.215f)
-                                                .withY(843.82f),
-                                        new MapLocation()
-                                                .withPlace(games)
-                                                .withName("משחקייה")
-                                                .withMarkerResource(R.raw.harucon2020_marker_games, true)
-                                                .withSelectedMarkerResource(R.raw.harucon2020_marker_games_selected, true)
-                                                .withMarkerHeight(355.411f)
-                                                .withX(883.865f)
-                                                .withY(752.84f),
-                                        new MapLocation()
-                                                .withName("שדרת ציירים ומתחם דוכנים")
-                                                .withPlace(agam)
-                                                .withMarkerResource(R.raw.harucon2020_marker_artists, true)
-                                                .withSelectedMarkerResource(R.raw.harucon2020_marker_artists_selected, true)
-                                                .withMarkerHeight(163.97f)
-                                                .withX(883.915f)
-                                                .withY(400.05f),
-                                        new MapLocation()
-                                                .withPlace(new Place().withName("שירותים"))
-                                                .withMarkerResource(R.raw.harucon2020_marker_toilet, true)
-                                                .withSelectedMarkerResource(R.raw.harucon2020_marker_toilet_selected, true)
-                                                .withMarkerHeight(111.25f)
-                                                .withX(402.49f)
-                                                .withY(553.29f),
-                                        new MapLocation()
-                                                .withPlace(new Place().withName("מעלית"))
-                                                .withMarkerResource(R.raw.harucon2020_marker_elevator, true)
-                                                .withSelectedMarkerResource(R.raw.harucon2020_marker_elevator_selected, true)
-                                                .withMarkerHeight(111.203f)
-                                                .withX(293.99f)
-                                                .withY(644.75f)
-                                )
-                        )
-                );
-    }
+		StandsArea agam = new StandsArea().withName("טרקלין אגם").withStands(getAgamStands()).withImageResource(R.drawable.cami2019_stands_map_agam).withImageWidth(2700).withImageHeight(967);
+		StandsArea pinkus = new StandsArea().withName("אולם פינקוס").withStands(getPinkusStands()).withImageResource(R.drawable.cami2019_stands_map_pinkus).withImageWidth(2700).withImageHeight(1706);
+		return new ConventionMap()
+				.withFloors(Arrays.asList(entrance, floor1, floor2))
+				.withDefaultFloor(floor1)
+				.withLocations(
+						CollectionUtils.flattenList(
+								inFloor(entrance,
+										new MapLocation()
+												.withPlace(new Place().withName("עמדת מודיעין ומרצ'נדייז כנסי"))
+												.withMarkerResource(R.raw.harucon2020_marker_information, true)
+												.withSelectedMarkerResource(R.raw.harucon2020_marker_information_selected, true)
+												.withMarkerHeight(136.51f)
+												.withX(1047.39f)
+												.withY(658.18f),
+										new MapLocation()
+												.withPlace(new Place().withName("עמדות צימוד"))
+												.withMarkerResource(R.raw.harucon2020_marker_bracelets, true)
+												.withSelectedMarkerResource(R.raw.harucon2020_marker_bracelets_selected, true)
+												.withMarkerHeight(104.76f)
+												.withX(661.73f)
+												.withY(674.37f),
+										new MapLocation()
+												.withPlace(new Place().withName("קופות"))
+												.withMarkerResource(R.raw.harucon2020_marker_cashiers, true)
+												.withSelectedMarkerResource(R.raw.harucon2020_marker_cashiers_selected, true)
+												.withMarkerHeight(104.76f)
+												.withX(498.6f)
+												.withY(634.04f),
+										new MapLocation()
+												.withPlace(new Place().withName("קופה נגישה"))
+												.withMarkerResource(R.raw.harucon2020_marker_accessible_cashier, true)
+												.withSelectedMarkerResource(R.raw.harucon2020_marker_accessible_cashier_selected, true)
+												.withMarkerHeight(104.76f)
+												.withX(670.84f)
+												.withY(521.85f),
+										new MapLocation()
+												.withPlace(new Place().withName("מתחם הזמנה מראש"))
+												.withMarkerResource(R.raw.harucon2020_marker_preorders, true)
+												.withSelectedMarkerResource(R.raw.harucon2020_marker_preorders_selected, true)
+												.withMarkerHeight(104.75f)
+												.withX(722.45f)
+												.withY(237.4f),
+										new MapLocation()
+												.withPlace(new Place().withName("מתחם קנייה במקום"))
+												.withMarkerResource(R.raw.harucon2020_marker_tickets_area, true)
+												.withSelectedMarkerResource(R.raw.harucon2020_marker_tickets_area_selected, true)
+												.withMarkerHeight(104.76f)
+												.withX(220.69f)
+												.withY(369.84f),
+										new MapLocation()
+												.withPlace(new Place().withName("מעבר נגיש"))
+												.withMarkerResource(R.raw.harucon2020_marker_accessible_passage, true)
+												.withSelectedMarkerResource(R.raw.harucon2020_marker_accessible_passage_selected, true)
+												.withMarkerHeight(104.76f)
+												.withX(195.73f)
+												.withY(258.36f)
+								),
+								inFloor(floor1,
+										new MapLocation()
+												.withPlace(new Place().withName("שירותים"))
+												.withMarkerResource(R.raw.harucon2020_marker_toilet, true)
+												.withSelectedMarkerResource(R.raw.harucon2020_marker_toilet_selected, true)
+												.withMarkerHeight(114.51f)
+												.withX(1766.375f)
+												.withY(617.61f),
+										new MapLocation()
+												.withPlace(new Place().withName("אורנים 4"))
+												.withMarkerResource(R.raw.harucon2020_marker_oranim4, true)
+												.withSelectedMarkerResource(R.raw.harucon2020_marker_oranim4_selected, true)
+												.withMarkerHeight(137.35f)
+												.withX(1515.21f)
+												.withY(773.53f),
+										new MapLocation()
+												.withPlace(new Place().withName("אורנים 3 - מתחם קונסולות - נינטנדו"))
+												.withMarkerResource(R.raw.harucon2020_marker_oranim3, true)
+												.withSelectedMarkerResource(R.raw.harucon2020_marker_oranim3_selected, true)
+												.withMarkerHeight(188.926f)
+												.withX(1394.149f)
+												.withY(825.14f),
+										new MapLocation()
+												.withName("מתחם דוכנים")
+												.withPlace(pinkus)
+												.withMarkerResource(R.raw.harucon2020_marker_stands, true)
+												.withSelectedMarkerResource(R.raw.harucon2020_marker_stands_selected, true)
+												.withMarkerHeight(111f)
+												.withX(1214.895f)
+												.withY(651.69f),
+										new MapLocation()
+												.withPlace(new Place().withName("שמירת חפצים"))
+												.withMarkerResource(R.raw.harucon2020_marker_storage, true)
+												.withSelectedMarkerResource(R.raw.harucon2020_marker_storage_selected, true)
+												.withMarkerHeight(136.31f)
+												.withX(1082.46f)
+												.withY(230.81f),
+										new MapLocation()
+												.withPlace(new Place().withName("שירותים"))
+												.withMarkerResource(R.raw.harucon2020_marker_toilet, true)
+												.withSelectedMarkerResource(R.raw.harucon2020_marker_toilet_selected, true)
+												.withMarkerHeight(114.5f)
+												.withX(1038.645f)
+												.withY(108.11f),
+										new MapLocation()
+												.withPlace(new Place().withName("מעלית"))
+												.withMarkerResource(R.raw.harucon2020_marker_elevator, true)
+												.withSelectedMarkerResource(R.raw.harucon2020_marker_elevator_selected, true)
+												.withMarkerHeight(111.203f)
+												.withX(875.795f)
+												.withY(162.73f),
+										new MapLocation()
+												.withPlace(new Place().withName("מודיעין ודוכן אמא\"י"))
+												.withMarkerResource(R.raw.harucon2020_marker_information_amai, true)
+												.withSelectedMarkerResource(R.raw.harucon2020_marker_information_amai_selected, true)
+												.withMarkerHeight(169.65f)
+												.withX(858.685f)
+												.withY(362.12f),
+										new MapLocation()
+												.withPlace(eshkol1)
+												.withMarkerResource(R.raw.harucon2020_marker_eshkol1, true)
+												.withSelectedMarkerResource(R.raw.harucon2020_marker_eshkol1_selected, true)
+												.withMarkerHeight(137.35f)
+												.withX(492.835f)
+												.withY(595.31f),
+										new MapLocation()
+												.withPlace(schwatrz)
+												.withMarkerResource(R.raw.harucon2020_marker_schwartz, true)
+												.withSelectedMarkerResource(R.raw.harucon2020_marker_schwartz_selected, true)
+												.withMarkerHeight(136.61f)
+												.withX(658.125f)
+												.withY(524.45f),
+										new MapLocation()
+												.withPlace(eshkol3)
+												.withMarkerResource(R.raw.harucon2020_marker_eshkol3, true)
+												.withSelectedMarkerResource(R.raw.harucon2020_marker_eshkol3_selected, true)
+												.withMarkerHeight(137.51f)
+												.withX(348.18f)
+												.withY(810.02f),
+										new MapLocation()
+												.withPlace(eshkol2)
+												.withMarkerResource(R.raw.harucon2020_marker_eshkol2, true)
+												.withSelectedMarkerResource(R.raw.harucon2020_marker_eshkol2_selected, true)
+												.withMarkerHeight(137.51f)
+												.withX(542.615f)
+												.withY(810.02f),
+										new MapLocation()
+												.withPlace(new Place().withName("שירותים"))
+												.withMarkerResource(R.raw.harucon2020_marker_toilet, true)
+												.withSelectedMarkerResource(R.raw.harucon2020_marker_toilet_selected, true)
+												.withMarkerHeight(115.61f)
+												.withX(271.885f)
+												.withY(488.56f),
+										new MapLocation()
+												.withPlace(new Place().withName("מעלית"))
+												.withMarkerResource(R.raw.harucon2020_marker_elevator, true)
+												.withSelectedMarkerResource(R.raw.harucon2020_marker_elevator_selected, true)
+												.withMarkerHeight(111.153f)
+												.withX(67.675f)
+												.withY(591.42f)
+								),
+								inFloor(floor2,
+										new MapLocation()
+												.withPlace(workshops)
+												.withMarkerResource(R.raw.harucon2020_marker_workshops, true)
+												.withSelectedMarkerResource(R.raw.harucon2020_marker_workshops_selected, true)
+												.withMarkerHeight(157.17f)
+												.withX(1755.43f)
+												.withY(1101.26f),
+										new MapLocation()
+												.withPlace(new Place().withName("שיפוט קוספליי"))
+												.withMarkerResource(R.raw.harucon2020_marker_cosplay_judgement, true)
+												.withSelectedMarkerResource(R.raw.harucon2020_marker_cosplay_judgement_selected, true)
+												.withMarkerHeight(136.57f)
+												.withX(1592.98f)
+												.withY(1040.06f),
+										new MapLocation()
+												.withPlace(new Place().withName(PARENTS_ROOM_NAME))
+												.withMarkerResource(R.raw.harucon2020_marker_parents, true)
+												.withSelectedMarkerResource(R.raw.harucon2020_marker_parents_selected, true)
+												.withMarkerHeight(111.25f)
+												.withX(1735.405f)
+												.withY(838.33f),
+										new MapLocation()
+												.withPlace(new Place().withName("שירותים"))
+												.withMarkerResource(R.raw.harucon2020_marker_toilet, true)
+												.withSelectedMarkerResource(R.raw.harucon2020_marker_toilet_selected, true)
+												.withMarkerHeight(116.24f)
+												.withX(2005.02f)
+												.withY(689.35f),
+										new MapLocation()
+												.withPlace(mainHall)
+												.withMarkerResource(R.raw.harucon2020_marker_main_hall, true)
+												.withSelectedMarkerResource(R.raw.harucon2020_marker_main_hall_selected, true)
+												.withMarkerHeight(209.174f)
+												.withX(1397.95f)
+												.withY(606.68f),
+										new MapLocation()
+												.withPlace(new Place().withName("שירותים"))
+												.withMarkerResource(R.raw.harucon2020_marker_toilet, true)
+												.withSelectedMarkerResource(R.raw.harucon2020_marker_toilet_selected, true)
+												.withMarkerHeight(118.9f)
+												.withX(1356.515f)
+												.withY(125.51f),
+										new MapLocation()
+												.withPlace(new Place().withName("מעלית"))
+												.withMarkerResource(R.raw.harucon2020_marker_elevator, true)
+												.withSelectedMarkerResource(R.raw.harucon2020_marker_elevator_selected, true)
+												.withMarkerHeight(111.143f)
+												.withX(1205f)
+												.withY(147.49f),
+										new MapLocation()
+												.withPlace(cosplayArea)
+												.withMarkerResource(R.raw.harucon2020_marker_cosplay_area, true)
+												.withSelectedMarkerResource(R.raw.harucon2020_marker_cosplay_area_selected, true)
+												.withMarkerHeight(307.85f)
+												.withX(1180.215f)
+												.withY(843.82f),
+										new MapLocation()
+												.withPlace(games)
+												.withName("משחקייה")
+												.withMarkerResource(R.raw.harucon2020_marker_games, true)
+												.withSelectedMarkerResource(R.raw.harucon2020_marker_games_selected, true)
+												.withMarkerHeight(355.411f)
+												.withX(883.865f)
+												.withY(752.84f),
+										new MapLocation()
+												.withName("שדרת ציירים ומתחם דוכנים")
+												.withPlace(agam)
+												.withMarkerResource(R.raw.harucon2020_marker_artists, true)
+												.withSelectedMarkerResource(R.raw.harucon2020_marker_artists_selected, true)
+												.withMarkerHeight(163.97f)
+												.withX(883.915f)
+												.withY(400.05f),
+										new MapLocation()
+												.withPlace(new Place().withName("שירותים"))
+												.withMarkerResource(R.raw.harucon2020_marker_toilet, true)
+												.withSelectedMarkerResource(R.raw.harucon2020_marker_toilet_selected, true)
+												.withMarkerHeight(111.25f)
+												.withX(402.49f)
+												.withY(553.29f),
+										new MapLocation()
+												.withPlace(new Place().withName("מעלית"))
+												.withMarkerResource(R.raw.harucon2020_marker_elevator, true)
+												.withSelectedMarkerResource(R.raw.harucon2020_marker_elevator_selected, true)
+												.withMarkerHeight(111.203f)
+												.withX(293.99f)
+												.withY(644.75f)
+								)
+						)
+				);
+	}
 
-    private List<Stand> getPinkusStands() {
-        return Arrays.asList(
+	private List<Stand> getPinkusStands() {
+		return Arrays.asList(
 //				new Stand().withName("נקסוס").withType(StandType.TABLETOP_GAMES).withLocationName("c01-c03").withImageX(222).withImageY(152),
 //				new Stand().withName("anime store").withType(StandType.MERCH).withLocationName("c04-c05").withImageX(438).withImageY(152),
 //				new Stand().withName("Waterdew").withType(StandType.CLOTHES).withLocationName("c06-c07").withImageX(620).withImageY(152),
@@ -601,11 +601,11 @@ public class Harucon2020Convention extends AmaiConvention {
 //				new Stand().withName("Takara mono").withType(StandType.CLOTHES).withLocationName("e21-e22").withImageX(610).withImageY(474),
 //				new Stand().withName("Fairy Kei Lovers ").withType(StandType.CLOTHES).withLocationName("e23").withImageX(744).withImageY(474),
 //				new Stand().withName("אמאטרסו").withType(StandType.MERCH).withLocationName("e24").withImageX(838).withImageY(474)
-        );
-    }
+		);
+	}
 
-    private List<Stand> getAgamStands() {
-        return Arrays.asList(
+	private List<Stand> getAgamStands() {
+		return Arrays.asList(
 //				new Stand().withName("PopStorm").withType(StandType.OTHER).withLocationName("a01-a02").withImageX(225).withImageY(160),
 //				new Stand().withName("הממלכה").withType(StandType.TABLETOP_GAMES).withLocationName("a03-a04").withImageX(340).withImageY(160),
 //				new Stand().withName("אביב ציפין קומיקס").withType(StandType.ARTIST).withLocationName("a05").withImageX(429).withImageY(160),
@@ -668,14 +668,14 @@ public class Harucon2020Convention extends AmaiConvention {
 //				new Stand().withName("DEWTOOTH").withType(StandType.ARTIST).withLocationName("b52").withImageX(1660).withImageY(642),
 //				new Stand().withName("Dinosaur chicken").withType(StandType.ARTIST).withLocationName("b53").withImageX(1660).withImageY(573),
 //				new Stand().withName("Demochym").withType(StandType.ARTIST).withLocationName("b54").withImageX(1660).withImageY(504)
-			);
-    }
+		);
+	}
 
-    @Override
-    public SurveySender getEventVoteSender(final ConventionEvent event) {
-        if (event.getUserInput().getVoteSurvey() == null) {
-            return null;
-        }
+	@Override
+	public SurveySender getEventVoteSender(final ConventionEvent event) {
+		if (event.getUserInput().getVoteSurvey() == null) {
+			return null;
+		}
 //        try {
 //            if (event.getServerId() == EVENT_ID_AMAIDOL) {
 //                SurveyForm form = new SurveyForm()
@@ -691,31 +691,31 @@ public class Harucon2020Convention extends AmaiConvention {
 //        } catch (MalformedURLException e) {
 //            throw new RuntimeException(e);
 //        }
-        return super.getEventVoteSender(event);
-    }
+		return super.getEventVoteSender(event);
+	}
 
-    @Override
-    @Nullable
-    public SurveyDataRetriever.Answers createSurveyAnswersRetriever(FeedbackQuestion question) {
+	@Override
+	@Nullable
+	public SurveyDataRetriever.Answers createSurveyAnswersRetriever(FeedbackQuestion question) {
 //        switch (question.getQuestionId()) {
 //            case QUESTION_ID_AMAIDOL_VOTE: {
 //                return new SurveyDataRetriever.GoogleSpreadSheet(AMAIDOL_SPREADSHEET_ID);
 //            }
 //        }
 
-        return null;
-    }
+		return null;
+	}
 
-    @Override
-    protected ConventionEvent.UserInput createUserInputForEvent(ConventionEvent event) {
-        ConventionEvent.UserInput userInput = super.createUserInputForEvent(event);
-        convertUserInputForEvent(userInput, event);
-        return userInput;
-    }
+	@Override
+	protected ConventionEvent.UserInput createUserInputForEvent(ConventionEvent event) {
+		ConventionEvent.UserInput userInput = super.createUserInputForEvent(event);
+		convertUserInputForEvent(userInput, event);
+		return userInput;
+	}
 
-    @Override
-    public void convertUserInputForEvent(ConventionEvent.UserInput userInput, ConventionEvent event) {
-        super.convertUserInputForEvent(userInput, event);
+	@Override
+	public void convertUserInputForEvent(ConventionEvent.UserInput userInput, ConventionEvent event) {
+		super.convertUserInputForEvent(userInput, event);
 
 //        if (userInput.getVoteSurvey() == null && event != null) {
 //            if (event.getServerId() == EVENT_ID_AMAIDOL) {
@@ -725,15 +725,15 @@ public class Harucon2020Convention extends AmaiConvention {
 //                ));
 //            }
 //        }
-    }
+	}
 
-    @Override
-    public SpecialEventsProcessor getSpecialEventsProcessor() {
-        return new SpecialEventsProcessor() {
-            @Override
-            public boolean processSpecialEvent(ConventionEvent event) {
-                return false;
-            }
-        };
-    }
+	@Override
+	public SpecialEventsProcessor getSpecialEventsProcessor() {
+		return new SpecialEventsProcessor() {
+			@Override
+			public boolean processSpecialEvent(ConventionEvent event) {
+				return false;
+			}
+		};
+	}
 }
