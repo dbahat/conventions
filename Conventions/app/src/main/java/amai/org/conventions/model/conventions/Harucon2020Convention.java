@@ -57,13 +57,9 @@ public class Harucon2020Convention extends AmaiConvention {
 
 	// Stand types
 	private enum StandType implements Stand.StandType {
-		CLOTHES(R.string.clothes_stand, R.drawable.shirt),
-		MERCH(R.string.merch_stand, R.drawable.ic_shopping_basket),
-		MANGA(R.string.manga_stand, R.drawable.book),
-		COMP_GAMES(R.string.comp_games_stand, R.drawable.videogame_black),
-		TABLETOP_GAMES(R.string.tabletop_games_stand, R.drawable.chess),
+		GENERAL(R.string.general_stand, R.drawable.ic_shopping_basket),
 		ARTIST(R.string.artist_stand, R.drawable.ic_color_lens),
-		OTHER(R.string.other, R.drawable.ic_shopping_basket);
+		DONATION(R.string.donation_stand, R.drawable.ic_monetization);
 
 		private int title;
 		private int image;
@@ -92,7 +88,7 @@ public class Harucon2020Convention extends AmaiConvention {
 
 	@Override
 	protected ConventionStorage initStorage() {
-		return new ConventionStorage(this, R.raw.harucon2020_convention_events, 0);
+		return new ConventionStorage(this, R.raw.harucon2020_convention_events, 1);
 	}
 
 	@Override
@@ -561,38 +557,38 @@ public class Harucon2020Convention extends AmaiConvention {
 	private List<Stand> getPinkusStands() {
 		return Arrays.asList(
 //				new Stand().withName("נקסוס").withType(StandType.TABLETOP_GAMES).withLocationName("c01-c03").withImageX(222).withImageY(152),
-//				new Stand().withName("anime store").withType(StandType.MERCH).withLocationName("c04-c05").withImageX(438).withImageY(152),
+//				new Stand().withName("anime store").withType(StandType.GENERAL).withLocationName("c04-c05").withImageX(438).withImageY(152),
 //				new Stand().withName("Waterdew").withType(StandType.CLOTHES).withLocationName("c06-c07").withImageX(620).withImageY(152),
 //				new Stand().withName("BOOBA MACHO").withType(StandType.CLOTHES).withLocationName("c08").withImageX(756).withImageY(152),
 //				new Stand().withName("BERNINA").withType(StandType.CLOTHES).withLocationName("c09-c10").withImageX(1064).withImageY(152),
-//				new Stand().withName("Fantasy House").withType(StandType.MERCH).withLocationName("c11-c12").withImageX(1246).withImageY(152),
+//				new Stand().withName("Fantasy House").withType(StandType.GENERAL).withLocationName("c11-c12").withImageX(1246).withImageY(152),
 //				new Stand().withName("פופסטופ").withType(StandType.OTHER).withLocationName("c13-c14").withImageX(1582).withImageY(152),
 //				new Stand().withName("מחוקים' - מחזמר בלשי מקורי").withType(StandType.OTHER).withLocationName("c15-c16").withImageX(1762).withImageY(152),
 //				new Stand().withName("Candy Lenses").withType(StandType.OTHER).withLocationName("c17-c22").withImageX(2120).withImageY(152),
 //				new Stand().withName("Svag").withType(StandType.CLOTHES).withLocationName("c23-c28").withImageX(2552).withImageY(684),
 //				new Stand().withName("Bar's Pops").withType(StandType.OTHER).withLocationName("c29-c30").withImageX(2552).withImageY(1034),
-//				new Stand().withName("poster adir!").withType(StandType.MERCH).withLocationName("c31-c36").withImageX(2164).withImageY(1404),
-//				new Stand().withName("קומיקאזה").withType(StandType.MANGA).withLocationName("c39-c42").withImageX(1402).withImageY(1404),
+//				new Stand().withName("poster adir!").withType(StandType.GENERAL).withLocationName("c31-c36").withImageX(2164).withImageY(1404),
+//				new Stand().withName("קומיקאזה").withType(StandType.DONATION).withLocationName("c39-c42").withImageX(1402).withImageY(1404),
 //				new Stand().withName("אקיבה").withType(StandType.OTHER).withLocationName("c43-c48").withImageX(906).withImageY(1404),
 //				new Stand().withName("3d my lev").withType(StandType.OTHER).withLocationName("c49-c50").withImageX(598).withImageY(1510),
 //				new Stand().withName("TVfox").withType(StandType.ARTIST).withLocationName("d01-d02").withImageX(1954).withImageY(474),
 //				new Stand().withName("RETRO GAME CENTER").withType(StandType.COMP_GAMES).withLocationName("d05-d08").withImageX(2088).withImageY(866),
-//				new Stand().withName("Lyddar Cosplay").withType(StandType.MANGA).withLocationName("d09").withImageX(2008).withImageY(1082),
-//				new Stand().withName("קללת המלאכים").withType(StandType.MANGA).withLocationName("d10").withImageX(1910).withImageY(1082),
-//				new Stand().withName("ComiXunity").withType(StandType.MANGA).withLocationName("d11").withImageX(1820).withImageY(1082),
+//				new Stand().withName("Lyddar Cosplay").withType(StandType.DONATION).withLocationName("d09").withImageX(2008).withImageY(1082),
+//				new Stand().withName("קללת המלאכים").withType(StandType.DONATION).withLocationName("d10").withImageX(1910).withImageY(1082),
+//				new Stand().withName("ComiXunity").withType(StandType.DONATION).withLocationName("d11").withImageX(1820).withImageY(1082),
 //				new Stand().withName("Velvet Octopus").withType(StandType.CLOTHES).withLocationName("d12").withImageX(1730).withImageY(1082),
 //				new Stand().withName("Haruugami").withType(StandType.OTHER).withLocationName("d13-d14").withImageX(1596).withImageY(1082),
-//				new Stand().withName("snncomicstore").withType(StandType.MANGA).withLocationName("d15").withImageX(1398).withImageY(1002),
+//				new Stand().withName("snncomicstore").withType(StandType.DONATION).withLocationName("d15").withImageX(1398).withImageY(1002),
 //				new Stand().withName("גברת וודו").withType(StandType.CLOTHES).withLocationName("d16-d17").withImageX(1398).withImageY(868),
-//				new Stand().withName("Asfanation").withType(StandType.MANGA).withLocationName("d18").withImageX(1398).withImageY(730),
+//				new Stand().withName("Asfanation").withType(StandType.DONATION).withLocationName("d18").withImageX(1398).withImageY(730),
 //				new Stand().withName("גיקפליז").withType(StandType.OTHER).withLocationName("d19-d20").withImageX(1398).withImageY(598),
 //				new Stand().withName("איגוד מקצועות האנימציה").withType(StandType.OTHER).withLocationName("d21").withImageX(1492).withImageY(474),
 //				new Stand().withName("Āto&sōpu").withType(StandType.OTHER).withLocationName("d22").withImageX(1582).withImageY(474),
 //				new Stand().withName("פאצ'יקו").withType(StandType.ARTIST).withLocationName("d23").withImageX(1666).withImageY(474),
-//				new Stand().withName("מאי שירי design&ART").withType(StandType.MERCH).withLocationName("d24").withImageX(1754).withImageY(474),
+//				new Stand().withName("מאי שירי design&ART").withType(StandType.GENERAL).withLocationName("d24").withImageX(1754).withImageY(474),
 //				new Stand().withName("המרכז ללימודי יפנית").withType(StandType.OTHER).withLocationName("e01-e02").withImageX(1032).withImageY(474),
-//				new Stand().withName("Animode").withType(StandType.MERCH).withLocationName("e03-e05").withImageX(1172).withImageY(638),
-//				new Stand().withName("קבוצת יצירת קומיקס").withType(StandType.MANGA).withLocationName("e06").withImageX(1172).withImageY(824),
+//				new Stand().withName("Animode").withType(StandType.GENERAL).withLocationName("e03-e05").withImageX(1172).withImageY(638),
+//				new Stand().withName("קבוצת יצירת קומיקס").withType(StandType.DONATION).withLocationName("e06").withImageX(1172).withImageY(824),
 //				new Stand().withName("Panda Shop ").withType(StandType.CLOTHES).withLocationName("e07-e08").withImageX(1172).withImageY(954),
 //				new Stand().withName("בלופ").withType(StandType.OTHER).withLocationName("e09-e10").withImageX(1034).withImageY(1082),
 //				new Stand().withName("Frozen flawers").withType(StandType.ARTIST).withLocationName("e11-e12").withImageX(788).withImageY(1082),
@@ -600,7 +596,7 @@ public class Harucon2020Convention extends AmaiConvention {
 //				new Stand().withName("LYRA - Magical Stuff").withType(StandType.CLOTHES).withLocationName("e15-e20").withImageX(476).withImageY(776),
 //				new Stand().withName("Takara mono").withType(StandType.CLOTHES).withLocationName("e21-e22").withImageX(610).withImageY(474),
 //				new Stand().withName("Fairy Kei Lovers ").withType(StandType.CLOTHES).withLocationName("e23").withImageX(744).withImageY(474),
-//				new Stand().withName("אמאטרסו").withType(StandType.MERCH).withLocationName("e24").withImageX(838).withImageY(474)
+//				new Stand().withName("אמאטרסו").withType(StandType.GENERAL).withLocationName("e24").withImageX(838).withImageY(474)
 		);
 	}
 
@@ -610,14 +606,14 @@ public class Harucon2020Convention extends AmaiConvention {
 //				new Stand().withName("הממלכה").withType(StandType.TABLETOP_GAMES).withLocationName("a03-a04").withImageX(340).withImageY(160),
 //				new Stand().withName("אביב ציפין קומיקס").withType(StandType.ARTIST).withLocationName("a05").withImageX(429).withImageY(160),
 //				new Stand().withName("Ayako Pastel").withType(StandType.ARTIST).withLocationName("a06").withImageX(483).withImageY(160),
-//				new Stand().withName("Mini Tokyo ").withType(StandType.MERCH).withLocationName("a07-a08").withImageX(573).withImageY(160),
+//				new Stand().withName("Mini Tokyo ").withType(StandType.GENERAL).withLocationName("a07-a08").withImageX(573).withImageY(160),
 //				new Stand().withName("Shlomi's ART").withType(StandType.ARTIST).withLocationName("a10-a11").withImageX(777).withImageY(160),
 //				new Stand().withName(" החתול הסגול").withType(StandType.OTHER).withLocationName("a12-a14").withImageX(922).withImageY(160),
 //				new Stand().withName("ישראל לאופר").withType(StandType.CLOTHES).withLocationName("a15-a16").withImageX(1100).withImageY(160),
-//				new Stand().withName("קומיקס וירקות").withType(StandType.MANGA).withLocationName("a17-a20").withImageX(1275).withImageY(160),
-//				new Stand().withName("שיפודן ישראל ואנימה ספין").withType(StandType.MERCH).withLocationName("a21-a26").withImageX(1596).withImageY(160),
+//				new Stand().withName("קומיקס וירקות").withType(StandType.DONATION).withLocationName("a17-a20").withImageX(1275).withImageY(160),
+//				new Stand().withName("שיפודן ישראל ואנימה ספין").withType(StandType.GENERAL).withLocationName("a21-a26").withImageX(1596).withImageY(160),
 //				new Stand().withName("gaming land גיימינג לנד").withType(StandType.COMP_GAMES).withLocationName("a28-a32").withImageX(2007).withImageY(160),
-//				new Stand().withName("Anime Wave").withType(StandType.MERCH).withLocationName("a33-a38").withImageX(2368).withImageY(160),
+//				new Stand().withName("Anime Wave").withType(StandType.GENERAL).withLocationName("a33-a38").withImageX(2368).withImageY(160),
 //				new Stand().withName("נאגטס ברוטב יאק").withType(StandType.ARTIST).withLocationName("a39").withImageX(120).withImageY(411),
 //				new Stand().withName("Cherry Maki’s art").withType(StandType.ARTIST).withLocationName("a40").withImageX(120).withImageY(480),
 //				new Stand().withName("D is for Devil Art").withType(StandType.ARTIST).withLocationName("a41").withImageX(120).withImageY(550),
@@ -637,7 +633,7 @@ public class Harucon2020Convention extends AmaiConvention {
 //				new Stand().withName("Paint the poli").withType(StandType.ARTIST).withLocationName("b11").withImageX(646).withImageY(640),
 //				new Stand().withName("Meiiior").withType(StandType.ARTIST).withLocationName("b12").withImageX(646).withImageY(572),
 //				new Stand().withName("Almogolan Art").withType(StandType.ARTIST).withLocationName("b13-b14").withImageX(646).withImageY(468),
-//				new Stand().withName("בועת מחשבה - פאנזין אנימה ישראלי").withType(StandType.MANGA).withLocationName("b15").withImageX(711).withImageY(375),
+//				new Stand().withName("בועת מחשבה - פאנזין אנימה ישראלי").withType(StandType.DONATION).withLocationName("b15").withImageX(711).withImageY(375),
 //				new Stand().withName("Animlilo").withType(StandType.ARTIST).withLocationName("b16").withImageX(780).withImageY(375),
 //				new Stand().withName("Yahav-Art").withType(StandType.ARTIST).withLocationName("b17-b18").withImageX(879).withImageY(375),
 //				new Stand().withName("Khal tamim").withType(StandType.ARTIST).withLocationName("b19").withImageX(1524).withImageY(510),
