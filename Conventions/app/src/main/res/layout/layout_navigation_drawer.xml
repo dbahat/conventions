@@ -11,6 +11,17 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <amai.org.conventions.navigation.NavigationTopButtonsLayout
+            android:id="@+id/navigation_drawer_settings_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layoutDirection="ltr"
+            android:paddingTop="5dp"
+            android:paddingStart="11dp"
+            android:paddingEnd="11dp"
+            android:orientation="horizontal"/>
+
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"

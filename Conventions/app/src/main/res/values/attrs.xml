@@ -106,11 +106,14 @@
         <attr name="navigationPopupBackground" format="color|reference"/>
         <attr name="navigationPopupTitle" format="integer|reference"/>
         <attr name="navigationPopupBottomImage" format="integer|reference"/>
+        <attr name="navigationPopupTopSelectedColor" format="color|reference"/>
+        <attr name="navigationPopupTopNotSelectedColor" format="color|reference"/>
         <attr name="navigationPopupSelectedColor" format="color|reference"/>
         <attr name="navigationPopupNotSelectedColor" format="color|reference"/>
         <attr name="navigationPopupSeparatorColor" format="color|reference"/>
         <attr name="navigationPopupTitleMargins" format="dimension"/>
         <attr name="navigationPopupBottomImageMargins" format="dimension"/>
+        <attr name="navigationItemsShouldDisplayIcon" format="boolean"/>
         <!-- Updates Screen -->
         <attr name="updateTimeColor" format="color|reference"/>
         <attr name="updateTimeBackground" format="color|reference"/>

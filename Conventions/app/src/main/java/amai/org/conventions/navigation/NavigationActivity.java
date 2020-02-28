@@ -13,7 +13,6 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -25,7 +24,6 @@ import java.util.List;
 import amai.org.conventions.AboutActivity;
 import amai.org.conventions.ApplicationInitializer;
 import amai.org.conventions.ArrivalMethodsActivity;
-import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.DiscountsActivity;
 import amai.org.conventions.FeedbackActivity;
 import amai.org.conventions.HomeActivity;
@@ -66,6 +64,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	private FloatingActionButton actionButton;
 	private DrawerLayout navigationDrawer;
 	private PushNotification receivedPushNotification;
+	private NavigationTopButtonsLayout navigationTopButtonsLayout;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -88,13 +87,11 @@ public abstract class NavigationActivity extends AppCompatActivity {
 			@Override
 			public void onClick(View v) {
 				onNavigationButtonClicked();
-				ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
-						.setCategory("Navigation")
-						.setAction("ButtonClicked")
-						.build());
 				openNavigationDrawer(true);
 			}
 		});
+
+		navigationTopButtonsLayout = findViewById(R.id.navigation_drawer_settings_layout);
 
 		initializeNavigationDrawer(); // In case it was already open
 
@@ -178,6 +175,11 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	}
 
 	private void initializeNavigationDrawer() {
+		navigationTopButtonsLayout.setNavigationItems(this, Arrays.asList(
+				new NavigationItem(AboutActivity.class, getString(R.string.about), ContextCompat.getDrawable(this, R.drawable.about)),
+				new NavigationItem(SettingsActivity.class, getString(R.string.settings), ContextCompat.getDrawable(this, R.drawable.settings))
+		));
+
 		final List<NavigationItem> items = new ArrayList<>(Arrays.asList(
 				new NavigationItem(HomeActivity.class, getString(R.string.home), ContextCompat.getDrawable(this, R.drawable.ic_home_white_36dp)),
 				new NavigationItem(ProgrammeActivity.class, getString(R.string.programme_title), ContextCompat.getDrawable(this, R.drawable.events_list)),
@@ -199,9 +201,6 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		// disabled if/until discounts are decided for Icon
 		items.add(new NavigationItem(DiscountsActivity.class, getString(R.string.discounts), ContextCompat.getDrawable(this, R.drawable.ic_card_giftcard_white)));
 		items.add(new NavigationItem(WebContentActivity.AccessibilityActivity.class, getString(R.string.accessibility), ContextCompat.getDrawable(this, R.drawable.baseline_accessibility_new_white_18)));
-
-		items.add(new NavigationItem(AboutActivity.class, getString(R.string.about), ContextCompat.getDrawable(this, R.drawable.ic_action_about)));
-		items.add(new NavigationItem(SettingsActivity.class, getString(R.string.settings), ContextCompat.getDrawable(this, R.drawable.ic_settings)));
 
 		ListView navigationItems = (ListView) findViewById(R.id.navigation_items);
 		navigationItems.setAdapter(new NavigationItemsAdapter(this, items));

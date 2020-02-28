@@ -36,9 +36,8 @@
 
     <dimen name="home_show_feedback_text_view_margins">80dp</dimen>
 
-    <dimen name="home_box_margin">3dp</dimen>
-    <dimen name="home_box_button_margin">10dp</dimen>
-    <dimen name="home_box_radius">5dp</dimen>
+    <dimen name="navigation_settings_button_width">30dp</dimen>
+    <dimen name="navigation_settings_button_padding">5dp</dimen>
 
     <dimen name="fab_margin">26dp</dimen>
     <dimen name="fab_margin_anchored_to_top">10dp</dimen>

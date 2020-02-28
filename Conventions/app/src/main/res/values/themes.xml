@@ -56,6 +56,9 @@
         <item name="navigationPopupSeparatorColor">?navigationPopupNotSelectedColor</item>
         <item name="navigationPopupBottomImageMargins">31dp</item>
         <item name="navigationPopupTitleMargins">0dp</item>
+        <item name="navigationItemsShouldDisplayIcon">true</item>
+        <item name="navigationPopupTopSelectedColor">?navigationPopupSelectedColor</item>
+        <item name="navigationPopupTopNotSelectedColor">?navigationPopupNotSelectedColor</item>
 
         <!-- Home -->
         <item name="homeActivityLayout">@layout/activity_home</item>
@@ -186,6 +189,9 @@
         <item name="navigationPopupSeparatorColor">?navigationPopupNotSelectedColor</item>
         <item name="navigationPopupBottomImageMargins">31dp</item>
         <item name="navigationPopupTitleMargins">0dp</item>
+        <item name="navigationItemsShouldDisplayIcon">true</item>
+        <item name="navigationPopupTopSelectedColor">?navigationPopupSelectedColor</item>
+        <item name="navigationPopupTopNotSelectedColor">?navigationPopupNotSelectedColor</item>
 
         <!-- Home -->
         <item name="homeActivityLayout">@layout/activity_home</item>
