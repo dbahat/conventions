@@ -167,11 +167,15 @@ public class ApplicationInitializer {
                         }
                     });
 
-                    String notificationTitle = newUpdatesNumber == 1
+					// Notify with the number of new updates we got now, not all unread updates
+					String notificationTitle = newUpdatesNumber == 1
                             ? context.getString(R.string.new_update)
-                            : context.getString(R.string.new_updates, newUpdatesNumber);
+							: context.getString(R.string.new_updates, newUpdatesNumber);
 
-                    String notificationMessage = latestUpdate.getText().substring(0, Math.min(200, latestUpdate.getText().length())) + "...";
+					String notificationMessage = latestUpdate.getText();
+					if (latestUpdate.getText().length() > 200) {
+						notificationMessage = latestUpdate.getText().substring(0, 199) + "…";
+					}
 
                     // The user might have already navigated away from the home activity
                     Context currentContext = ConventionsApplication.getCurrentContext();
