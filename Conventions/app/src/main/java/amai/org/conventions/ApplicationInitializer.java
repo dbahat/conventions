@@ -10,9 +10,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.NotificationCompat;
-
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -28,6 +25,8 @@ import amai.org.conventions.notifications.PushNotificationTopicsSubscriber;
 import amai.org.conventions.settings.SettingsActivity;
 import amai.org.conventions.updates.UpdatesActivity;
 import amai.org.conventions.utils.CollectionUtils;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.NotificationCompat;
 
 public class ApplicationInitializer {
     private static final int NEW_UPDATES_NOTIFICATION_ID = 75457;
@@ -158,11 +157,15 @@ public class ApplicationInitializer {
 						}
 					});
 
-					String notificationTitle = newUpdates.size() == 1
+					// Notify with the number of new updates we got now, not all unread updates
+					String notificationTitle = newUpdatesNumber == 1
 							? context.getString(R.string.new_update)
-							: context.getString(R.string.new_updates, newUpdates.size());
+							: context.getString(R.string.new_updates, newUpdatesNumber);
 
-					String notificationMessage = latestUpdate.getText().substring(0, Math.min(200, latestUpdate.getText().length())) + "...";
+					String notificationMessage = latestUpdate.getText();
+					if (latestUpdate.getText().length() > 200) {
+						notificationMessage = latestUpdate.getText().substring(0, 199) + "…";
+					}
 
 					// The user might have already navigated away from the home activity
 					Context currentContext = ConventionsApplication.getCurrentContext();
