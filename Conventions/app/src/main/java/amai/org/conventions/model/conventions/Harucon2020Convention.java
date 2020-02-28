@@ -1,5 +1,7 @@
 package amai.org.conventions.model.conventions;
 
+import androidx.annotation.Nullable;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
@@ -25,7 +27,6 @@ import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.networking.SurveyDataRetriever;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
-import androidx.annotation.Nullable;
 
 public class Harucon2020Convention extends AmaiConvention {
 	// Hall names
@@ -225,6 +226,8 @@ public class Harucon2020Convention extends AmaiConvention {
 				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/69382648_611083972753199_4254163118118141952_o.jpg", R.drawable.event_runway)
 				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2019/12/GameMangaCafe.jpg", R.drawable.event_manga_cafe)
 				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/LeonSalomon.jpeg", R.drawable.event_leonsalomon)
+				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/02/SemLecture.jpg", R.drawable.event_semlectureapp)
+
 		;
 
 		imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.harucon2020_event_default_background);
