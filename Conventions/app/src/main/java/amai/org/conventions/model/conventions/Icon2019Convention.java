@@ -147,6 +147,11 @@ public class Icon2019Convention extends SffConvention {
 
 	@Override
 	protected ConventionMap initMap() {
+		return createMap();
+//		return null;
+	}
+
+	private ConventionMap createMap() {
 		Hall cinematheque1_3_4 = getHalls().findByName(HALL_NAME_CINEMATHEQUE_1_3_4);
 		Hall cinematheque2 = getHalls().findByName(HALL_NAME_CINEMATHEQUE_2);
 		Hall cinematheque5 = getHalls().findByName(HALL_NAME_CINEMATHEQUE_5);
