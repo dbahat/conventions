@@ -136,6 +136,11 @@ public class TestConvention extends Convention {
     }
 
     @Override
+    public HttpURLConnection getUserIDRequest(String user, String password) throws Exception {
+        return null;
+    }
+
+    @Override
     public ModelParser getModelParser() {
         return null;
     }
