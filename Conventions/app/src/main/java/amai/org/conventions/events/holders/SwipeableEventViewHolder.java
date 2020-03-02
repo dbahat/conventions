@@ -96,7 +96,7 @@ public class SwipeableEventViewHolder extends RecyclerView.ViewHolder {
 	private void setEventInEventView(EventView view, ConventionEvent event, boolean conflicting) {
 		view.setShowFavoriteIcon(true);
 		view.setShowHallName(true);
-		view.setEvent(event, conflicting);
+		view.setEvent(event);
 	}
 
 	public void setOnViewSwipedAction(final OnEventSwipedListener action) {
@@ -121,20 +121,6 @@ public class SwipeableEventViewHolder extends RecyclerView.ViewHolder {
 	private void removeOnPageChangeListener() {
 		if (listener != null) {
 			viewPager.removeOnPageChangeListener(listener);
-		}
-	}
-
-	public void setKeywordsHighlighting(List<String> keywords) {
-		mainEventView.setKeywordsHighlighting(keywords);
-		hiddenEventView.setKeywordsHighlighting(keywords);
-		hiddenEventView2.setKeywordsHighlighting(keywords);
-	}
-
-	public void setBottomDividerVisible(boolean visible) {
-		if (visible) {
-			itemView.findViewById(R.id.event_bottom_divider).setVisibility(View.VISIBLE);
-		} else {
-			itemView.findViewById(R.id.event_bottom_divider).setVisibility(View.GONE);
 		}
 	}
 

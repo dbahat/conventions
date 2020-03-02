@@ -70,7 +70,7 @@
         <item name="eventTypeNotStartedColor">@color/black</item>
         <item name="eventTimeDefaultTextColor">@color/white</item>
         <item name="eventTimeDefaultBackgroundColor">@color/icon2019_violet2</item>
-        <item name="eventDetailsColor">@color/black</item>
+        <item name="eventDetailsColorNotStarted">@color/black</item>
         <item name="eventSendFeedbackColor">@color/icon2019_pink2</item>
         <item name="eventNonFavoriteColor">@color/black</item>
         <item name="eventFavoriteColor">@color/icon2019_pink2</item>

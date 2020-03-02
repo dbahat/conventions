@@ -38,6 +38,9 @@
 
         <!-- Event list activities -->
         <item name="eventTimeHeaderBackground">@drawable/flat_event_time_background</item>
+        <item name="eventTimeHeaderAlwaysUseDefaultTextColor">true</item>
+        <item name="eventTimeHeaderMarginTop">10dp</item>
+        <item name="eventTimeHeaderMarginBottom">0dp</item>
         <item name="eventTypeEndedColor">@color/gray</item>
         <item name="eventTypeCurrentColor">@color/light_yellow</item>
         <item name="eventTypeNotStartedColor">@color/white</item>
@@ -48,7 +51,7 @@
         <item name="eventTimeAlwaysUseDefaultBackgroundColor">false</item>
         <item name="eventSendFeedbackColor">@color/green</item>
         <item name="eventSentFeedbackColor">@color/yellow</item>
-        <item name="eventFeedbackDefaultColor">?eventDetailsColor</item>
+        <item name="eventFeedbackColorOverride">@android:color/transparent</item>
         <item name="eventFavoriteIcon">@drawable/ic_star_black_24dp</item>
         <item name="eventAlertsIcon">@drawable/ic_action_alarms</item>
 
@@ -56,9 +59,12 @@
         <item name="navigationPopupSeparatorColor">?navigationPopupNotSelectedColor</item>
         <item name="navigationPopupBottomImageMargins">31dp</item>
         <item name="navigationPopupTitleMargins">0dp</item>
+        <item name="navigationPopupTitleWidth">match_parent</item>
         <item name="navigationItemsShouldDisplayIcon">true</item>
         <item name="navigationPopupTopSelectedColor">?navigationPopupSelectedColor</item>
         <item name="navigationPopupTopNotSelectedColor">?navigationPopupNotSelectedColor</item>
+        <item name="navigationPopupItemPaddingTop">16dp</item>
+        <item name="navigationPopupItemPaddingBottom">4dp</item>
 
         <!-- Home -->
         <item name="homeActivityLayout">@layout/activity_home</item>
@@ -92,11 +98,14 @@
         <item name="locationDetailsTitleColor">?android:textColorPrimary</item>
         <item name="mapToolbarColor">?toolbarBackground</item>
         <item name="floorChangeBackground">?locationDetailsBackground</item>
+        <item name="floorUpDownTextColor">?android:textColorPrimary</item>
 
         <!-- Event activity -->
         <item name="eventToolbarColor">?toolbarBackground</item>
         <item name="eventDescriptionTextColor">?eventTitleTextColor</item>
         <item name="eventDetailsTextColor">?eventTitleTextColor</item>
+        <item name="eventDetailsColorCurrent">?eventDetailsColorNotStarted</item>
+        <item name="eventDetailsColorEnded">?eventDetailsColorNotStarted</item>
         <item name="eventDetailsHighlightedTextColor">?eventDetailsTextColor</item>
         <item name="feedbackButtonColor">?borderlessButtonColor</item>
         <item name="eventTitleTextColor">?android:textColorPrimary</item>
@@ -104,6 +113,7 @@
         <item name="eventFeedbackAnswerColor">?feedbackAnswerButtonColor</item>
         <item name="eventFeedbackSelectedAnswerColor">?feedbackAnswerButtonSelectedColor</item>
         <item name="eventVoteBoxColor">?eventFeedbackBoxColor</item>
+        <item name="eventVoteTextColor">?eventDescriptionTextColor</item>
         <item name="eventDescriptionBoxColor">?eventDetailsBoxColor</item>
         <item name="eventActivityFavoriteColor">@color/gold</item>
         <item name="eventSurveyTextColor">@color/black</item>
@@ -127,6 +137,7 @@
         <item name="secondHandSelectedFilterColor">?colorAccent</item>
 
         <!-- Programme Activity -->
+        <item name="marginBetweenEventsListAndNextHeader">20dp</item>
         <item name="fabOnProgrammeTop">false</item>
 
         <!-- Programme Search Activity -->
@@ -171,6 +182,9 @@
 
         <!-- Event list activities -->
         <item name="eventTimeHeaderBackground">@drawable/flat_event_time_background</item>
+        <item name="eventTimeHeaderAlwaysUseDefaultTextColor">true</item>
+        <item name="eventTimeHeaderMarginTop">10dp</item>
+        <item name="eventTimeHeaderMarginBottom">0dp</item>
         <item name="eventTypeEndedColor">@color/gray</item>
         <item name="eventTypeCurrentColor">@color/light_yellow</item>
         <item name="eventTypeNotStartedColor">@color/white</item>
@@ -181,7 +195,7 @@
         <item name="eventTimeAlwaysUseDefaultBackgroundColor">false</item>
         <item name="eventSendFeedbackColor">@color/green</item>
         <item name="eventSentFeedbackColor">@color/yellow</item>
-        <item name="eventFeedbackDefaultColor">?eventDetailsColor</item>
+        <item name="eventFeedbackColorOverride">@android:color/transparent</item>
         <item name="eventFavoriteIcon">@drawable/ic_star_black_24dp</item>
         <item name="eventAlertsIcon">@drawable/ic_action_alarms</item>
 
@@ -189,9 +203,12 @@
         <item name="navigationPopupSeparatorColor">?navigationPopupNotSelectedColor</item>
         <item name="navigationPopupBottomImageMargins">31dp</item>
         <item name="navigationPopupTitleMargins">0dp</item>
+        <item name="navigationPopupTitleWidth">match_parent</item>
         <item name="navigationItemsShouldDisplayIcon">true</item>
         <item name="navigationPopupTopSelectedColor">?navigationPopupSelectedColor</item>
         <item name="navigationPopupTopNotSelectedColor">?navigationPopupNotSelectedColor</item>
+        <item name="navigationPopupItemPaddingTop">16dp</item>
+        <item name="navigationPopupItemPaddingBottom">4dp</item>
 
         <!-- Home -->
         <item name="homeActivityLayout">@layout/activity_home</item>
@@ -225,11 +242,14 @@
         <item name="locationDetailsTitleColor">?android:textColorPrimary</item>
         <item name="mapToolbarColor">?toolbarBackground</item>
         <item name="floorChangeBackground">?locationDetailsBackground</item>
+        <item name="floorUpDownTextColor">?android:textColorPrimary</item>
 
         <!-- Event activity -->
         <item name="eventToolbarColor">?toolbarBackground</item>
         <item name="eventDescriptionTextColor">?eventTitleTextColor</item>
         <item name="eventDetailsTextColor">?eventTitleTextColor</item>
+        <item name="eventDetailsColorCurrent">?eventDetailsColorNotStarted</item>
+        <item name="eventDetailsColorEnded">?eventDetailsColorNotStarted</item>
         <item name="eventDetailsHighlightedTextColor">?eventDetailsTextColor</item>
         <item name="feedbackButtonColor">?borderlessButtonColor</item>
         <item name="eventTitleTextColor">?android:textColorPrimary</item>
@@ -237,6 +257,7 @@
         <item name="eventFeedbackAnswerColor">?feedbackAnswerButtonColor</item>
         <item name="eventFeedbackSelectedAnswerColor">?feedbackAnswerButtonSelectedColor</item>
         <item name="eventVoteBoxColor">?eventFeedbackBoxColor</item>
+        <item name="eventVoteTextColor">?eventDescriptionTextColor</item>
         <item name="eventDescriptionBoxColor">?eventDetailsBoxColor</item>
         <item name="eventActivityFavoriteColor">@color/gold</item>
         <item name="eventSurveyTextColor">@color/black</item>
@@ -260,6 +281,7 @@
         <item name="secondHandSelectedFilterColor">?colorAccent</item>
 
         <!-- Programme Activity -->
+        <item name="marginBetweenEventsListAndNextHeader">20dp</item>
         <item name="fabOnProgrammeTop">false</item>
 
         <!-- Programme Search Activity -->
@@ -272,7 +294,7 @@
         <item name="hintTextColor">@color/hint_gray</item>
         <item name="eventNameKeywordHighlightColor">@color/white</item>
         <item name="eventKeywordHighlightColor">@color/white</item>
-        <item name="eventDetailsColor">@color/white</item>
+        <item name="eventDetailsColorNotStarted">@color/white</item>
         <item name="nextEventStartTimeBottomLineColor">@android:color/white</item>
         <item name="conflictingEventsBackground">@color/transparent_white</item>
         <item name="navigationPopupNotSelectedColor">@android:color/white</item>
@@ -309,7 +331,7 @@
         <item name="hintTextColor">@color/hint_gray</item>
         <item name="eventNameKeywordHighlightColor">@color/black</item>
         <item name="eventKeywordHighlightColor">@color/black</item>
-        <item name="eventDetailsColor">@color/dark_gray</item>
+        <item name="eventDetailsColorNotStarted">@color/dark_gray</item>
         <item name="nextEventStartTimeBottomLineColor">@android:color/black</item>
         <item name="conflictingEventsBackground">@color/dark_gray</item>
         <item name="navigationPopupNotSelectedColor">@android:color/black</item>

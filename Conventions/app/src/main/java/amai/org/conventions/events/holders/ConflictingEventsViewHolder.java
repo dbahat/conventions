@@ -5,11 +5,6 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Point;
-import androidx.core.view.ViewCompat;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +17,11 @@ import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.EventView;
 import amai.org.conventions.events.adapters.DismissibleEventsViewAdapter;
 import amai.org.conventions.model.ConventionEvent;
+import androidx.core.view.ViewCompat;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import sff.org.conventions.R;
 
 public class ConflictingEventsViewHolder extends RecyclerView.ViewHolder {
@@ -64,7 +64,7 @@ public class ConflictingEventsViewHolder extends RecyclerView.ViewHolder {
 	private int calculateEventViewHeight() {
 		Point screenSize = getScreenSize();
 		EventView eventView = new EventView(context);
-		eventView.setEvent(null, true);
+		eventView.setEvent(null);
 		eventView.measure(screenSize.x, screenSize.y);
 		return eventView.getMeasuredHeight();
 	}
