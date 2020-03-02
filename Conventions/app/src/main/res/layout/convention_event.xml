@@ -127,9 +127,9 @@
             </LinearLayout>
 
             <amai.org.conventions.customviews.AspectRatioImageView
-                android:id="@+id/eventFavoriteIcon"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
+                android:id="@+id/eventFavoriteIcon"
                 android:layout_above="@+id/bottom_layout"
                 android:layout_alignParentEnd="true"/>
 

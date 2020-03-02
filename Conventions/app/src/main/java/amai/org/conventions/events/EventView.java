@@ -78,8 +78,6 @@ public class EventView extends FrameLayout {
 		bottomLayout = this.findViewById(R.id.bottom_layout);
 		searchDescriptionContainer = this.findViewById(R.id.search_description_container);
 		searchDescription = (TextView) this.findViewById(R.id.search_description);
-
-		setConflicting(false);
 	}
 
     public void setEvent(ConventionEvent event) {
@@ -276,9 +274,6 @@ public class EventView extends FrameLayout {
 			}
 		}
 		setFeedbackIcon(icon);
-	}
-
-	private void setConflicting(boolean conflicting) {
 	}
 
 	public void setKeywordsHighlighting(List<String> keywords) {
