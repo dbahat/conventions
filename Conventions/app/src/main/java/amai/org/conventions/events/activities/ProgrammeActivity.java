@@ -15,9 +15,9 @@ import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.Calendar;
 import java.util.List;
@@ -258,10 +258,9 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 			fragment.setRefreshing(true);
 		}
 
-		ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
-				.setCategory("PullToRefresh")
-				.setAction("RefreshProgramme")
-				.build());
+		FirebaseAnalytics
+				.getInstance(this)
+				.logEvent("pull_to_refresh", null);
 
 		new AsyncTask<Void, Void, Boolean>() {
 			@Override

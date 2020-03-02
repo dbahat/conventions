@@ -30,7 +30,7 @@ import android.widget.TextView;
 
 import com.caverock.androidsvg.SVG;
 import com.caverock.androidsvg.SVGImageView;
-import com.google.android.gms.analytics.HitBuilders;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.manuelpeinado.imagelayout.ImageLayout;
 
 import java.util.ArrayList;
@@ -39,7 +39,6 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.ImageHandler;
 import amai.org.conventions.model.FloorLocation;
 import sff.org.conventions.R;
@@ -58,6 +57,7 @@ import amai.org.conventions.model.Place;
 import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.model.conventions.Convention;
+import amai.org.conventions.utils.BundleBuilder;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Views;
 import androidx.annotation.NonNull;
@@ -701,11 +701,12 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
 	@Override
 	public void onClick(Marker marker) {
-		ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
-				.setCategory("Map")
-				.setAction("MarkerClicked")
-				.setLabel(marker.getLocation().getName())
-				.build());
+		FirebaseAnalytics
+				.getInstance(getContext())
+				.logEvent("map_marker_clicked", new BundleBuilder()
+						.putString("location", marker.getLocation().getName())
+						.build()
+				);
 
 		// Deselect all markers except the clicked marker
 		for (Marker currMarker : floorMarkers) {

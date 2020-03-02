@@ -9,15 +9,15 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.android.gms.analytics.HitBuilders;
+import com.google.firebase.analytics.FirebaseAnalytics;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 
-import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.feedback.SurveySender;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.conventions.Convention;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 import sff.org.conventions.R;
+import amai.org.conventions.utils.BundleBuilder;
 
 public class EventVoteSurveyFragment extends DialogFragment {
 	private static final String EventId = "EventId";
@@ -98,11 +98,12 @@ public class EventVoteSurveyFragment extends DialogFragment {
 			@Override
 			protected void beforeSend() {
 				super.beforeSend();
-				ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
-						.setCategory("EventVote")
-						.setAction("send")
-						.setLabel(event.getTitle())
-						.build());
+				FirebaseAnalytics
+						.getInstance(getContext())
+						.logEvent("vote", new BundleBuilder()
+								.putString("event_title", event.getTitle())
+								.build()
+						);
 			}
 		});
 	}

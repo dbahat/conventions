@@ -18,11 +18,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -43,6 +43,7 @@ import amai.org.conventions.model.ConventionEventComparator;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.notifications.PushNotificationTopicsSubscriber;
+import amai.org.conventions.utils.BundleBuilder;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
@@ -142,11 +143,13 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 						@Override
 						protected void onPostExecute(Exception exception) {
 							progressDialog.dismiss();
-							ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
-									.setCategory("Favorites")
-									.setAction(exception == null ? "success" : "failure")
-									.setLabel("AddFromWebsite")
-									.build());
+							FirebaseAnalytics
+									.getInstance(MyEventsActivity.this)
+									.logEvent("favorites", new BundleBuilder()
+											.putString("action", exception == null ? "success" : "failure")
+											.putString("label", "AddFromWebsite")
+											.build()
+									);
 
 							if (exception == null) {
 								// Refresh favorite events in all days
@@ -398,11 +401,12 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 
 				return true;
 			case R.id.my_events_share:
-				ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
-						.setCategory("MyEvents")
-						.setAction("ShareClicked")
-						.setValue(getMyEvents().size())
-						.build());
+				FirebaseAnalytics
+						.getInstance(this)
+						.logEvent("share_clicked", new BundleBuilder()
+								.putString("number_of_events", String.valueOf(getMyEvents().size()))
+								.build()
+						);
 
 				if (getMyEvents().size() > 0) {
 					startActivity(createSharingIntent());
@@ -421,10 +425,9 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 
 				return true;
 			case R.id.my_events_show_user_id:
-				ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
-						.setCategory("MyEvents")
-						.setAction("ShowUserIdClicked")
-						.build());
+				FirebaseAnalytics
+						.getInstance(MyEventsActivity.this)
+						.logEvent("show_user_id_clicked", null);
 				String userId = ConventionsApplication.settings.getUserId();
 				if (userId != null && !userId.isEmpty()) {
 					showUserIdDialog(null);

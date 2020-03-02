@@ -17,7 +17,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.analytics.HitBuilders;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.Collections;
 import java.util.List;
@@ -31,6 +31,7 @@ import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventEndTimeComparator;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
+import amai.org.conventions.utils.BundleBuilder;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Log;
 import sff.org.conventions.R;
@@ -153,11 +154,12 @@ public class FeedbackActivity extends NavigationActivity {
 							message += " - " + e.getClass().getSimpleName() + ": " + e.getMessage();
 						}
 
-						ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
-								.setCategory("Feedback")
-								.setAction("SendAttempt")
-								.setLabel(message)
-								.build());
+						FirebaseAnalytics
+								.getInstance(FeedbackActivity.this)
+								.logEvent("feedback_send", new BundleBuilder()
+										.putString("message", message)
+										.build()
+								);
 					}
 
 				}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);

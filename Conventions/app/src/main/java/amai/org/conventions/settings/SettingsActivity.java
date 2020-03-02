@@ -7,7 +7,7 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.widget.Toast;
 
-import com.google.android.gms.analytics.HitBuilders;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.Date;
 
@@ -16,6 +16,7 @@ import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.notifications.PlayServicesInstallation;
 import amai.org.conventions.notifications.PushNotificationTopic;
 import amai.org.conventions.notifications.PushNotificationTopicsSubscriber;
+import amai.org.conventions.utils.BundleBuilder;
 import amai.org.conventions.utils.Dates;
 import sff.org.conventions.R;
 
@@ -117,12 +118,12 @@ public class SettingsActivity extends NavigationActivity {
 			PushNotificationTopic topic = PushNotificationTopic.getByTopic(key);
 			if (topic != null) {
 				final boolean isSelected = sharedPreferences.getBoolean(key, false);
-				ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
-						.setCategory("Notifications")
-						.setAction("Category" + (isSelected ? "Added" : "Removed"))
-						.setLabel(key)
-						.setValue(1) // succeeded
-						.build());
+				FirebaseAnalytics
+						.getInstance(getActivity())
+						.logEvent("notification_" + (isSelected ? "added" : "removed"), new BundleBuilder()
+								.putString("notification_topic", key)
+								.build()
+						);
 
 				if (isSelected) {
 					PushNotificationTopicsSubscriber.subscribe(topic);
@@ -132,11 +133,12 @@ public class SettingsActivity extends NavigationActivity {
 			} else {
 				if (findPreference(key) != null) {
 					final boolean isSelected = sharedPreferences.getBoolean(key, false);
-					ConventionsApplication.sendTrackingEvent(new HitBuilders.EventBuilder()
-							.setCategory("Notifications")
-							.setAction("Preference" + (isSelected ? "Selected" : "Deselected"))
-							.setLabel(key)
-							.build());
+					FirebaseAnalytics
+							.getInstance(getActivity())
+							.logEvent("notification_" + (isSelected ? "added" : "removed"), new BundleBuilder()
+									.putString("notification_topic", key)
+									.build()
+							);
 				}
 			}
 		}
