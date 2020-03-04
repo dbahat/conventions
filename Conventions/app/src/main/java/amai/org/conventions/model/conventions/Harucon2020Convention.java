@@ -1,7 +1,5 @@
 package amai.org.conventions.model.conventions;
 
-import androidx.annotation.Nullable;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
@@ -27,6 +25,7 @@ import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.networking.SurveyDataRetriever;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
+import androidx.annotation.Nullable;
 
 public class Harucon2020Convention extends AmaiConvention {
 	// Hall names
@@ -372,20 +371,20 @@ public class Harucon2020Convention extends AmaiConvention {
 												.withMarkerHeight(114.51f)
 												.withX(1766.375f)
 												.withY(617.61f),
-										new MapLocation()
-												.withPlace(new Place().withName("אורנים 4"))
-												.withMarkerResource(R.raw.harucon2020_marker_oranim4, true)
-												.withSelectedMarkerResource(R.raw.harucon2020_marker_oranim4_selected, true)
-												.withMarkerHeight(137.35f)
-												.withX(1515.21f)
-												.withY(773.53f),
-										new MapLocation()
-												.withPlace(new Place().withName("אורנים 3 - מתחם קונסולות - נינטנדו"))
-												.withMarkerResource(R.raw.harucon2020_marker_oranim3, true)
-												.withSelectedMarkerResource(R.raw.harucon2020_marker_oranim3_selected, true)
-												.withMarkerHeight(188.926f)
-												.withX(1394.149f)
-												.withY(825.14f),
+//										new MapLocation()
+//												.withPlace(new Place().withName("אורנים 4"))
+//												.withMarkerResource(R.raw.harucon2020_marker_oranim4, true)
+//												.withSelectedMarkerResource(R.raw.harucon2020_marker_oranim4_selected, true)
+//												.withMarkerHeight(137.35f)
+//												.withX(1515.21f)
+//												.withY(773.53f),
+//										new MapLocation()
+//												.withPlace(new Place().withName("אורנים 3 - מתחם קונסולות - נינטנדו"))
+//												.withMarkerResource(R.raw.harucon2020_marker_oranim3, true)
+//												.withSelectedMarkerResource(R.raw.harucon2020_marker_oranim3_selected, true)
+//												.withMarkerHeight(188.926f)
+//												.withX(1394.149f)
+//												.withY(825.14f),
 										new MapLocation()
 												.withName("מתחם דוכנים")
 												.withPlace(pinkus)
@@ -568,14 +567,14 @@ public class Harucon2020Convention extends AmaiConvention {
 				new Stand().withName("פופסטופ").withType(StandType.GENERAL).withLocationName("c13-16").withImageX(1612).withImageY(170),
 				new Stand().withName("Candy Lenses").withType(StandType.GENERAL).withLocationName("c17-22").withImageX(2032).withImageY(170),
 				new Stand().withName("nevetx").withType(StandType.GENERAL).withLocationName("c23").withImageX(2410).withImageY(454),
-				new Stand().withName("BOOBA MACHO").withType(StandType.GENERAL).withLocationName("c24").withImageX(2410).withImageY(536),
+//				new Stand().withName("BOOBA MACHO").withType(StandType.GENERAL).withLocationName("c24").withImageX(2410).withImageY(536),
 				new Stand().withName("המרכז ללימודי יפנית").withType(StandType.GENERAL).withLocationName("c25-26").withImageX(2410).withImageY(658),
 				new Stand().withName("Svag").withType(StandType.GENERAL).withLocationName("c27-30").withImageX(2410).withImageY(910),
 				new Stand().withName("gaming land").withType(StandType.GENERAL).withLocationName("c31-34").withImageX(2166).withImageY(1308),
 				new Stand().withName("Bar's Pops").withType(StandType.GENERAL).withLocationName("c35-36").withImageX(1912).withImageY(1308),
 				new Stand().withName("אנימה סטור").withType(StandType.GENERAL).withLocationName("c37-42").withImageX(1486).withImageY(1308),
 				new Stand().withName("גיקפליז").withType(StandType.GENERAL).withLocationName("c43-44").withImageX(1102).withImageY(1308),
-				new Stand().withName("נינטנדו").withType(StandType.GENERAL).withLocationName("c45-48").withImageX(850).withImageY(1308),
+//				new Stand().withName("נינטנדו").withType(StandType.GENERAL).withLocationName("c45-48").withImageX(850).withImageY(1308),
 				new Stand().withName("Panda shop").withType(StandType.GENERAL).withLocationName("c49-50").withImageX(636).withImageY(1438),
 				new Stand().withName("Lyddar Cosplay").withType(StandType.GENERAL).withLocationName("d1-2").withImageX(1870).withImageY(438),
 				new Stand().withName("Velvet Octopus").withType(StandType.GENERAL).withLocationName("d3-4").withImageX(1998).withImageY(568),
