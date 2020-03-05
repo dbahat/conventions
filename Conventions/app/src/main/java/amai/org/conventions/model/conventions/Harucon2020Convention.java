@@ -602,7 +602,7 @@ public class Harucon2020Convention extends AmaiConvention {
 				new Stand().withName("Frozen Flowers").withType(StandType.CLOTHES).withLocationName("e9-10").withImageX(1034).withImageY(1028),
 				new Stand().withName("בלופ").withType(StandType.MANGA).withLocationName("e11-14").withImageX(734).withImageY(1028),
 				new Stand().withName("LYRA - Magical Stuff").withType(StandType.CLOTHES).withLocationName("e15-20").withImageX(520).withImageY(734),
-				new Stand().withName("דוכן יד 2").withType(StandType.MERCH).withLocationName("e21").withImageX(612).withImageY(438),
+//				new Stand().withName("דוכן יד 2").withType(StandType.MERCH).withLocationName("e21").withImageX(612).withImageY(438),
 				new Stand().withName("Hatz Lolita & More").withType(StandType.CLOTHES).withLocationName("e22").withImageX(692).withImageY(438),
 				new Stand().withName("FlyFox Art").withType(StandType.OTHER).withLocationName("e23-24").withImageX(826).withImageY(438)
 		);
