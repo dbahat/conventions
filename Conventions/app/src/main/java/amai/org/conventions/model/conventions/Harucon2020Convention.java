@@ -585,7 +585,7 @@ public class Harucon2020Convention extends AmaiConvention {
 				new Stand().withName("RETRO GAME CENTER").withType(StandType.COMP_GAMES).withLocationName("d5-8").withImageX(1998).withImageY(820),
 				new Stand().withName("סומקי").withType(StandType.MERCH).withLocationName("d9-10").withImageX(1868).withImageY(1028),
 				new Stand().withName("תכשיטי הסניץ' המוזהב").withType(StandType.CLOTHES).withLocationName("d11").withImageX(1734).withImageY(1028),
-				new Stand().withName("AkinaPaz").withType(StandType.MERCH).withLocationName("d12").withImageX(1654).withImageY(1028),
+//				new Stand().withName("AkinaPaz").withType(StandType.MERCH).withLocationName("d12").withImageX(1654).withImageY(1028),
 				new Stand().withName("Kawaii-Land Shop").withType(StandType.CLOTHES).withLocationName("d13").withImageX(1570).withImageY(1028),
 				new Stand().withName("Japaneasy").withType(StandType.OTHER).withLocationName("d14").withImageX(1484).withImageY(1028),
 				new Stand().withName("הסיכות של גברת וודו").withType(StandType.OTHER).withLocationName("d15-16").withImageX(1362).withImageY(900),
