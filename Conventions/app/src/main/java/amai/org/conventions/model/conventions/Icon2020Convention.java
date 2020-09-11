@@ -2,6 +2,8 @@ package amai.org.conventions.model.conventions;
 
 import android.text.TextUtils;
 
+import com.google.gson.JsonObject;
+
 import java.io.BufferedWriter;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -23,6 +25,8 @@ import amai.org.conventions.model.Hall;
 import amai.org.conventions.model.Halls;
 import amai.org.conventions.model.ImageIdToImageResourceMapper;
 import amai.org.conventions.model.SecondHandItem;
+import amai.org.conventions.networking.ModelParser;
+import amai.org.conventions.networking.SffModelParser;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 import amai.org.conventions.utils.Dates;
@@ -842,5 +846,15 @@ public class Icon2020Convention extends SffConvention {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	@Override
+	public ModelParser getModelParser() {
+		return new SffModelParser() {
+			@Override
+			protected int getEventPrice(JsonObject eventObj) {
+				return -1;
+			}
+		};
 	}
 }
