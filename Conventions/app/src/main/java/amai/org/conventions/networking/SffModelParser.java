@@ -76,15 +76,7 @@ public class SffModelParser implements ModelParser {
 				Log.w(TAG, "Tags list is not an array: " + tagsElement);
 			}
 
-			int price;
-			JsonElement priceElement = eventObj.get("price");
-			if (priceElement.isJsonNull()) {
-				price = -1;
-			} else if (priceElement.getAsString().equals("חינם")) {
-				price = 0;
-			} else {
-				price = priceElement.getAsInt();
-			}
+			int price = getEventPrice(eventObj);
 
 			int availableTickets;
 			JsonElement availableTicketsElement = eventObj.get("available_tickets");
@@ -117,6 +109,19 @@ public class SffModelParser implements ModelParser {
 		}
 
 		return eventList;
+	}
+
+	protected int getEventPrice(JsonObject eventObj) {
+		int price;
+		JsonElement priceElement = eventObj.get("price");
+		if (priceElement.isJsonNull()) {
+			price = -1;
+		} else if (priceElement.getAsString().equals("חינם")) {
+			price = 0;
+		} else {
+			price = priceElement.getAsInt();
+		}
+		return price;
 	}
 
 	private String decodeHtml(String string) {
