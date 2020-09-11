@@ -27,7 +27,7 @@
             <shape android:shape="rectangle"
                 android:tint="?attr/buttonColor">
                 <corners android:radius="@dimen/control_corner_material" />
-                <solid android:color="@color/icon2019_pink2" />
+                <solid android:color="@color/icon2020_beige" />
                 <padding android:left="@dimen/button_padding_horizontal_material"
                     android:top="@dimen/button_padding_vertical_material"
                     android:right="@dimen/button_padding_horizontal_material"
@@ -40,7 +40,7 @@
             <shape android:shape="rectangle"
                    android:tint="?attr/buttonColor">
                 <corners android:radius="@dimen/control_corner_material" />
-                <solid android:color="@color/icon2019_violet1" />
+                <solid android:color="@color/icon2020_red" />
                 <padding android:left="@dimen/button_padding_horizontal_material"
                          android:top="@dimen/button_padding_vertical_material"
                          android:right="@dimen/button_padding_horizontal_material"

@@ -2,17 +2,17 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
-            <solid android:color="@color/icon2019_violet2"/>
+            <solid android:color="@color/icon2020_dark_red"/>
         </shape>
     </item>
     <item android:state_enabled="false">
         <shape android:shape="rectangle">
-            <solid android:color="@color/icon2019_pink2"/>
+            <solid android:color="@color/icon2020_beige"/>
         </shape>
     </item>
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="@color/icon2019_pink1"/>
+            <solid android:color="@color/icon2020_red"/>
         </shape>
     </item>
 </selector>

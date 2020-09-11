@@ -29,13 +29,13 @@
     <application
         android:name="amai.org.conventions.ConventionsApplication"
         android:allowBackup="false"
-        android:icon="@mipmap/icon2019_app_icon"
+        android:icon="@mipmap/icon2020_app_icon"
         android:installLocation="auto"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppBaseTheme.Icon2019.Toolbar">
+        android:theme="@style/AppBaseTheme.Icon2020.Toolbar">
         <activity
-            android:name="amai.org.conventions.SplashActivity" android:theme="@style/AppBaseTheme.Icon2019.Toolbar.Splash"
+            android:name="amai.org.conventions.SplashActivity" android:theme="@style/AppBaseTheme.Icon2020.Toolbar.Splash"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -50,7 +50,7 @@
         <activity android:name="amai.org.conventions.map.MapActivity"></activity>
         <activity
             android:name="amai.org.conventions.events.activities.EventActivity"
-            android:theme="@style/AppBaseTheme.Icon2019.Toolbar.Event"
+            android:theme="@style/AppBaseTheme.Icon2020.Toolbar.Event"
             android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name="amai.org.conventions.ArrivalMethodsActivity"></activity>
         <activity
@@ -58,7 +58,7 @@
             android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name="amai.org.conventions.updates.UpdatesActivity"></activity>
         <activity android:name="amai.org.conventions.settings.SettingsActivity"
-            android:theme="@style/AppBaseTheme.Icon2019.Toolbar.Settings"></activity>
+            android:theme="@style/AppBaseTheme.Icon2020.Toolbar.Settings"></activity>
         <activity android:name="amai.org.conventions.DiscountsActivity"></activity>
         <activity android:name="amai.org.conventions.AboutActivity"></activity>
         <activity android:name="amai.org.conventions.HomeActivity" android:screenOrientation="portrait"/>
@@ -91,7 +91,7 @@
      See README(https://goo.gl/l4GJaQ) for more. -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/icon2019_notification_small" />
+            android:resource="@drawable/icon2020_notification_small" />
     </application>
 
 </manifest>
