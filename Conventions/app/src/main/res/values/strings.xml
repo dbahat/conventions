@@ -18,8 +18,6 @@
 
     <string name="update_show_full_text">הצג עדכון מלא</string>
     <string name="update_refresh_failed">לא ניתן לעדכן. בדוק חיבור לאינטרנט</string>
-    <string name="update_not_logged_in">כדי לצפות בעדכונים יש להתחבר לפייסבוק</string>
-    <string name="update_login_error">לא ניתן להתחבר לפייסבוק. בדוק חיבור לאינטרנט</string>
 
     <string name="my_events_share">שתף</string>
     <string name="my_event_share_title">התוכנייה שלי ל%s:</string>
