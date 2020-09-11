@@ -361,7 +361,11 @@ public class EventActivity extends NavigationActivity {
 					String message;
 					// If the event is sold out it can help the user decide if they want to add it more than if it conflicts with other events
 					if (conventionEvent.getAvailableTickets() == 0) {
-						message = getString(R.string.event_tickets_sold_out_are_you_sure);
+						message = getString(
+							Convention.getInstance().canUserLogin() ?
+								R.string.event_tickets_sold_out_are_you_sure :
+								R.string.event_tickets_sold_out_are_you_sure_no_login
+						);
 					} else if (conflictingEvents.size() == 1) {
 						message = getString(R.string.event_conflicts_with_one_question, conflictingEvents.get(0).getTitle());
 					} else {

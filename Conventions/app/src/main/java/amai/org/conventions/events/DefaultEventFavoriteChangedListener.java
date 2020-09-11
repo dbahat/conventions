@@ -1,13 +1,10 @@
 package amai.org.conventions.events;
 
+import android.content.DialogInterface;
 import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-
-import androidx.recyclerview.widget.RecyclerView;
-import android.content.DialogInterface;
-import androidx.appcompat.app.AlertDialog;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -19,6 +16,8 @@ import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.notifications.PushNotificationTopicsSubscriber;
 import amai.org.conventions.utils.BundleBuilder;
+import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.RecyclerView;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 import sff.org.conventions.R;
 
@@ -36,7 +35,11 @@ public class DefaultEventFavoriteChangedListener implements OnEventFavoriteChang
 		if (newAttending && updatedEvent.getAvailableTickets() == 0) {
 			new AlertDialog.Builder(view.getContext())
 					.setTitle(R.string.event_add_to_favorites)
-					.setMessage(R.string.event_tickets_sold_out_are_you_sure)
+					.setMessage(
+						Convention.getInstance().canUserLogin() ?
+							R.string.event_tickets_sold_out_are_you_sure :
+							R.string.event_tickets_sold_out_are_you_sure_no_login
+					)
 					.setPositiveButton(R.string.add_anyway, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
