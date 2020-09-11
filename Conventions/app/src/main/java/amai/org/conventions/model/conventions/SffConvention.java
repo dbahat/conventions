@@ -20,4 +20,9 @@ public abstract class SffConvention extends Convention {
 	public String getGoogleSpreadsheetsApiKey() {
 		return null;
 	}
+
+	@Override
+	public boolean canUserLogin() {
+		return true;
+	}
 }

@@ -99,7 +99,9 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		int dateIndexToSelect = savedInstanceState == null ? SELECT_CURRENT_DATE : savedInstanceState.getInt(STATE_SELECTED_DATE_INDEX, SELECT_CURRENT_DATE);
 		setupDays(dateIndexToSelect);
 
-		setupActionButton(R.drawable.ic_add_white, view -> showAddEventsDialog());
+		if (Convention.getInstance().canUserLogin()) {
+			setupActionButton(R.drawable.ic_add_white, view -> showAddEventsDialog());
+		}
 	}
 
 	private void showAddEventsDialog() {
@@ -384,9 +386,13 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		getMenuInflater().inflate(R.menu.my_events_menu, menu);
 		this.menu = menu;
 
-		String userId = ConventionsApplication.settings.getUserId();
-		if (userId != null && !userId.isEmpty()) {
-			changeIconColor(menu.findItem(R.id.my_events_show_user_id));
+		if (Convention.getInstance().canUserLogin()) {
+			String userId = ConventionsApplication.settings.getUserId();
+			if (userId != null && !userId.isEmpty()) {
+				changeIconColor(menu.findItem(R.id.my_events_show_user_id));
+			}
+		} else {
+			this.menu.removeItem(R.id.my_events_show_user_id);
 		}
 
 		return true;

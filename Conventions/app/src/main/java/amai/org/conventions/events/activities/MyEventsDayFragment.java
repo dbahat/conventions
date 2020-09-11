@@ -2,33 +2,35 @@ package amai.org.conventions.events.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import sff.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.adapters.EventGroupsAdapter;
 import amai.org.conventions.model.ConventionEvent;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import sff.org.conventions.R;
 
 public class MyEventsDayFragment extends Fragment {
 	private static final String ARGS_DATE = "ArgDate";
 	private Calendar date;
 
 	private RecyclerView eventsList;
-	private View emptyView;
+	private TextView emptyView;
 	private EventGroupsAdapter adapter;
 
 	private EventsListener listener;
@@ -105,6 +107,11 @@ public class MyEventsDayFragment extends Fragment {
 		date.setTimeInMillis(getArguments().getLong(ARGS_DATE));
 
 		emptyView = view.findViewById(R.id.my_events_empty);
+		if (Convention.getInstance().canUserLogin()) {
+			emptyView.setText(R.string.my_events_no_data);
+		} else {
+			emptyView.setText(R.string.my_events_no_data_no_login);
+		}
 		eventsList = (RecyclerView) view.findViewById(R.id.myEventsList);
 		eventsList.setLayoutManager(new LinearLayoutManager(getActivity()));
 		DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(),

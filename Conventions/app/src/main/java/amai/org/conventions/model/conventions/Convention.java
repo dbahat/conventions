@@ -771,4 +771,6 @@ public abstract class Convention implements Serializable {
 	public URL getAdditionalEventFeedbackURL(ConventionEvent event) {
 		return null;
 	}
+
+	public abstract boolean canUserLogin();
 }

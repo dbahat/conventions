@@ -27,4 +27,9 @@ public abstract class AmaiConvention extends Convention {
 	public String getGoogleSpreadsheetsApiKey() {
 		return "AIzaSyAKJYwC7UeHyBpcVqvXABRxhEQmLiK2TRo";
 	}
+
+	@Override
+	public boolean canUserLogin() {
+		return false;
+	}
 }
