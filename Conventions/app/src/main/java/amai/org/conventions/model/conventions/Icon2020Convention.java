@@ -857,4 +857,9 @@ public class Icon2020Convention extends SffConvention {
 			}
 		};
 	}
+
+	@Override
+	public boolean canUserLogin() {
+		return false;
+	}
 }
