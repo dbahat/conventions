@@ -1,5 +1,6 @@
 package amai.org.conventions;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -70,7 +71,11 @@ public class ArrivalMethodsActivity extends NavigationActivity implements OnMapR
 						Uri.parse("geo:" + latitude + "," + longitude +
 								"?q=" + latitude + "," + longitude));
 				if (intent.resolveActivity(getPackageManager()) != null) {
-					this.startActivity(intent);
+					try {
+						this.startActivity(intent);
+					} catch (ActivityNotFoundException e) {
+						Toast.makeText(this, getString(R.string.no_navigation_activity), Toast.LENGTH_LONG).show();
+					}
 				} else {
 					Toast.makeText(this, getString(R.string.no_navigation_activity), Toast.LENGTH_LONG).show();
 				}
@@ -86,7 +91,11 @@ public class ArrivalMethodsActivity extends NavigationActivity implements OnMapR
 							Uri.parse("https://web.moovitapp.com/tripplan?customerId=4480&metroId=1&tll=" + latitude + "_" + longitude));
 				}
 				if (intent.resolveActivity(getPackageManager()) != null) {
-					this.startActivity(intent);
+					try {
+						this.startActivity(intent);
+					} catch (ActivityNotFoundException e) {
+						Toast.makeText(this, getString(R.string.no_navigation_activity), Toast.LENGTH_LONG).show();
+					}
 				} else {
 					Toast.makeText(this, getString(R.string.no_navigation_activity), Toast.LENGTH_LONG).show();
 				}

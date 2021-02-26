@@ -131,7 +131,7 @@ public class SettingsActivity extends NavigationActivity {
 					PushNotificationTopicsSubscriber.unsubscribe(topic);
 				}
 			} else {
-				if (findPreference(key) != null) {
+				if (key != null && findPreference(key) != null) {
 					final boolean isSelected = sharedPreferences.getBoolean(key, false);
 					FirebaseAnalytics
 							.getInstance(getActivity())

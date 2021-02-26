@@ -25,6 +25,13 @@
         android:name="android.hardware.screen.landscape"
         android:required="false" />
 
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.SEND" />
+            <data android:mimeType="text/plain" />
+        </intent>
+    </queries>
+
     <!-- Note - if enabling backup, make sure to exclude the GCM registration ID from it -->
     <application
         android:name=".ConventionsApplication"

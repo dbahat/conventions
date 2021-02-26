@@ -1,6 +1,7 @@
 package amai.org.conventions.notifications;
 
 import android.app.PendingIntent;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -98,7 +99,11 @@ public class PlayServicesInstallation {
 		if (pendingIntent == null) {
 			Log.e(TAG, "resolvePlayServicesError: using default action for result " + checkResult.getResult());
 			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.google.android.gms"));
-			context.startActivity(intent);
+			try {
+				context.startActivity(intent);
+			} catch (ActivityNotFoundException e) {
+				// Nothing to do if even this intent is not found
+			}
 		} else {
 			try {
 				pendingIntent.send(0);
