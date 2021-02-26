@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="sff.org.conventions"
     android:versionCode="41"
     android:versionName="7.0">
@@ -24,6 +23,13 @@
     <uses-feature
         android:name="android.hardware.screen.landscape"
         android:required="false" />
+
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.SEND" />
+            <data android:mimeType="text/plain" />
+        </intent>
+    </queries>
 
     <!-- Note - if enabling backup, make sure to exclude the GCM registration ID from it -->
     <application
