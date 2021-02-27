@@ -33,7 +33,7 @@ import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.HttpConnectionCreator;
 import sff.org.conventions.R;
 
-public class Icon2020Convention extends SffConvention {
+public class Olamot2021Convention extends SffConvention {
 //	private static final String HALL_NAME_CINEMATHEQUE_1_3_4 = "סינמטק 1, 3, 4";
 //	private static final String HALL_NAME_CINEMATHEQUE_2 = "סינמטק 2";
 //	private static final String HALL_NAME_CINEMATHEQUE_5 = "סינמטק 5";
@@ -86,22 +86,22 @@ public class Icon2020Convention extends SffConvention {
 
 	@Override
 	protected Calendar initStartDate() {
-		return Dates.createDate(2020, Calendar.OCTOBER, 5);
+		return Dates.createDate(2021, Calendar.MARCH, 29);
 	}
 
 	@Override
 	protected Calendar initEndDate() {
-		return Dates.createDate(2020, Calendar.OCTOBER, 8);
+		return Dates.createDate(2021, Calendar.APRIL, 1);
 	}
 
 	@Override
 	protected String initID() {
-		return "Icon2020";
+		return "Olamot2021";
 	}
 
 	@Override
 	protected String initDisplayName() {
-		return "פסטיבל אייקון 2020";
+		return "כנס עולמות 2021";
 	}
 
 	@Override
@@ -654,7 +654,7 @@ public class Icon2020Convention extends SffConvention {
 	protected ImageIdToImageResourceMapper initImageMapper() {
 		ImageIdToImageResourceMapper imageMapper = new ImageIdToImageResourceMapper();
 
-		imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.icon2020_background);
+		imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.olamot2021_background);
 
 		return imageMapper;
 	}
@@ -674,7 +674,7 @@ public class Icon2020Convention extends SffConvention {
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_LECTURER_QUALITY_5P, "entry.1327236956")
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_SIMILAR_EVENTS_5P, "entry.1416969956")
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_ADDITIONAL_INFO, "entry.1582215667")
-					.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSecoPbHneUr2fZre9eXv00vjan_muNejb9VwJ_9UV2PFv4DJg/formResponse"));
+					.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSf-gAJ_0cJHws4B5LZ-lujqaklYePE_MsiqNOz_yf18Xfnrpg/formResponse"));
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
@@ -694,7 +694,7 @@ public class Icon2020Convention extends SffConvention {
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_MAP_SIGNS, "entry.1416969956")
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_CONFLICTING_EVENTS, "entry.1582215667")
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_IMPROVEMENT, "entry.993320932")
-					.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSf-zkgmGqL7TLejddzsWX_zA1eMz721kvZoYdKm9N_WAuUOPQ/formResponse"));
+					.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLScGwP6Tj_3ax6X0UZAJVrG9BtDVLF69aU9y8UaKfuXVaYBu6A/formResponse"));
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
