@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="olamot2021_red1">#2C0000</color>
+    <color name="olamot2021_red2">#710101</color>
+    <color name="olamot2021_red3">#9E2214</color>
+    <color name="olamot2021_grey1">#D5D5D5</color>
+    <color name="olamot2021_grey2">#707070</color>
+    <color name="olamot2021_grey3">#3F3E39</color>
+    <color name="olamot2021_yellow1">#F49519</color>
+    <color name="olamot2021_yellow2">#FBB03B</color>
+
+
+    <color name="icon2020_blue">#0A125B</color>
+    <color name="icon2020_teal">#6AB1C3</color>
+    <color name="icon2020_beige">#DDE9CC</color>
+    <color name="icon2020_red">#DD2428</color>
+    <color name="icon2020_dark_red">#7F171F</color>
+    <color name="icon2020_green">#7EA39F</color>
+</resources>

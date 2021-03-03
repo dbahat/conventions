@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="@color/icon2020_dark_red">
-    <item android:drawable="@drawable/icon2020_material_button" />
-</ripple>
