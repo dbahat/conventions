@@ -207,11 +207,11 @@ public class FeedbackQuestion {
 
 	// This enum must be backwards compatible - don't remove or rename any values from it
 	public enum Smiley5PointAnswer implements DrawableAnswer {
-		VERY_NEGATIVE("\u2639\ufe0f", R.drawable.baseline_sentiment_very_dissatisfied_black_48),
-		NEGATIVE("\uD83D\uDE41", R.drawable.baseline_sentiment_dissatisfied_black_48),
-		NEUTRAL("\uD83D\uDE10", R.drawable.baseline_sentiment_neutral_black_48),
-		POSITIVE("\uD83D\uDE42", R.drawable.baseline_sentiment_satisfied_black_48),
-		VERY_POSITIVE("\uD83D\uDE03", R.drawable.baseline_sentiment_satisfied_alt_black_48);
+		VERY_NEGATIVE("\u2639\ufe0f", R.drawable.baseline_sentiment_very_dissatisfied_white_48),
+		NEGATIVE("\uD83D\uDE41", R.drawable.baseline_sentiment_dissatisfied_white_48),
+		NEUTRAL("\uD83D\uDE10", R.drawable.baseline_sentiment_neutral_white_48),
+		POSITIVE("\uD83D\uDE42", R.drawable.baseline_sentiment_satisfied_white_48),
+		VERY_POSITIVE("\uD83D\uDE03", R.drawable.baseline_sentiment_satisfied_alt_white_48);
 
 		private String answerText;
 		private int imageResourceId;

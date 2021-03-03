@@ -129,6 +129,7 @@
         <attr name="updateItemSeparator" format="color|reference"/>
         <attr name="updatesBackground" format="color|reference"/>
         <attr name="updatesBackgroundDrawable" format="color|reference"/>
+        <attr name="updatesSeparatorColor" format="color|reference"/>
         <attr name="updateTextColor" format="color|reference"/>
         <attr name="newUpdateBackground" format="color|reference"/>
         <attr name="newUpdateTextColor" format="color|reference"/>
@@ -183,6 +184,7 @@
         <attr name="eventTimeHeaderMarginBottom" format="dimension" />
         <attr name="marginBetweenEventsListAndNextHeader" format="dimension" />
         <attr name="fabOnProgrammeTop" format="boolean"/>
+        <attr name="searchCategoriesColor" format="color|reference" />
         <!-- Event Survey Dialog -->
         <attr name="eventSurveyTextColor" format="color|reference"/>
         <attr name="eventSurveyAnswerColor" format="color|reference"/>

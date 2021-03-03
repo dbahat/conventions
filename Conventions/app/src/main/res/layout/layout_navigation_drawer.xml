@@ -22,31 +22,26 @@
             android:paddingEnd="11dp"
             android:orientation="horizontal"/>
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
+        <amai.org.conventions.customviews.AspectRatioImageView
+            android:layout_width="?navigationPopupTitleWidth"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="start"
+            android:src="?navigationPopupTitle"
+            android:layout_marginStart="?navigationPopupTitleMargins"
+            android:layout_marginEnd="?navigationPopupTitleMargins"
+            tools:ignore="ContentDescription" />
+
+
+        <amai.org.conventions.customviews.NestedListView
+            android:id="@+id/navigation_items"
+            android:divider="@null"
+            android:dividerHeight="0dp"
             android:paddingStart="16dp"
-            android:paddingEnd="16dp">
-
-            <amai.org.conventions.customviews.AspectRatioImageView
-                android:layout_width="?navigationPopupTitleWidth"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
-                android:layout_gravity="start"
-                android:src="?navigationPopupTitle"
-                android:layout_marginStart="?navigationPopupTitleMargins"
-                android:layout_marginEnd="?navigationPopupTitleMargins"
-                tools:ignore="ContentDescription" />
-
-            <amai.org.conventions.customviews.NestedListView
-                android:id="@+id/navigation_items"
-                android:divider="@null"
-                android:dividerHeight="0dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
+            android:paddingEnd="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
         <!-- Add a space with weight=1 to ensure the image is at the very bottom
              (because using gravity=bottom with vertical linear layout doesn't work) -->
