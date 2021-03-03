@@ -58,7 +58,7 @@
         <!-- Navigation popup -->
         <item name="navigationPopupSeparatorColor">?navigationPopupNotSelectedColor</item>
         <item name="navigationPopupBottomImageMargins">31dp</item>
-        <item name="navigationPopupTitleMargins">0dp</item>
+        <item name="navigationPopupTitleMargins">16dp</item>
         <item name="navigationPopupTitleWidth">match_parent</item>
         <item name="navigationItemsShouldDisplayIcon">true</item>
         <item name="navigationPopupTopSelectedColor">?navigationPopupSelectedColor</item>
@@ -82,11 +82,12 @@
         <item name="homeTitleSize">32sp</item>
 
         <!-- About -->
-        <item name="aboutLogoMargins">20dp</item>
+        <item name="aboutLogoMargins">36dp</item>
 
         <!-- Updates -->
         <item name="updatesBackgroundDrawable">?activitiesBackground</item>
         <item name="updatesBackground">?android:colorBackground</item>
+        <item name="updatesSeparatorColor">?separatorColor</item>
         <item name="updateItemSeparator">?separatorColor</item>
         <item name="updateTextColor">?android:textColorPrimary</item>
         <item name="newUpdateTextColor">?android:textColorPrimary</item>
@@ -202,7 +203,7 @@
         <!-- Navigation popup -->
         <item name="navigationPopupSeparatorColor">?navigationPopupNotSelectedColor</item>
         <item name="navigationPopupBottomImageMargins">31dp</item>
-        <item name="navigationPopupTitleMargins">0dp</item>
+        <item name="navigationPopupTitleMargins">16dp</item>
         <item name="navigationPopupTitleWidth">match_parent</item>
         <item name="navigationItemsShouldDisplayIcon">true</item>
         <item name="navigationPopupTopSelectedColor">?navigationPopupSelectedColor</item>
@@ -226,11 +227,12 @@
         <item name="homeTitleSize">32sp</item>
 
         <!-- About -->
-        <item name="aboutLogoMargins">20dp</item>
+        <item name="aboutLogoMargins">36dp</item>
 
         <!-- Updates -->
         <item name="updatesBackgroundDrawable">?activitiesBackground</item>
         <item name="updatesBackground">?android:colorBackground</item>
+        <item name="updatesSeparatorColor">?separatorColor</item>
         <item name="updateItemSeparator">?separatorColor</item>
         <item name="updateTextColor">?android:textColorPrimary</item>
         <item name="newUpdateTextColor">?android:textColorPrimary</item>
