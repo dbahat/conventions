@@ -68,20 +68,20 @@ public class Olamot2021Convention extends SffConvention {
 //	private static final String HALL_NAME_MINIATURES_2 = "מיניאטורות 2";
 //	private static final String HALL_NAME_MINIATURES_DEMO = "הדגמות מיניאטורות";
 //	private static final String HALL_NAME_MINIATURES_WORKSHOP = "סדנאות מיניאטורות";
-	private static final String HALL_NAME_GAMES_1 = "משחקים 1";
-	private static final String HALL_NAME_GAMES_2 = "משחקים 2";
-	private static final String HALL_NAME_GAMES_3 = "משחקים 3";
-	private static final String HALL_NAME_GAMES_4 = "משחקים 4";
-	private static final String HALL_NAME_MEETINGS = "מפגשים";
+//	private static final String HALL_NAME_GAMES_1 = "משחקים 1";
+//	private static final String HALL_NAME_GAMES_2 = "משחקים 2";
+//	private static final String HALL_NAME_GAMES_3 = "משחקים 3";
+//	private static final String HALL_NAME_GAMES_4 = "משחקים 4";
+	private static final String HALL_NAME_MEETINGS = "מפגשים/סדנאות";
 
-	private static final String API_SLUG = "icon2020";
+	private static final String API_SLUG = "olamot2021";
 	private static final String TEST_API_SLUG = "test_con";
 	private static final String YAD2_API = "https://api.sf-f.org.il/yad2/";
 	private static final String TEST_YAD2_API = "https://test.api.sf-f.org.il/yad2/";
 
 	@Override
 	protected ConventionStorage initStorage() {
-		return new ConventionStorage(this, R.raw.icon2020_convention_events, 2);
+		return new ConventionStorage(this, R.raw.olamot2021_convention_events, 0);
 	}
 
 	@Override
@@ -141,10 +141,10 @@ public class Olamot2021Convention extends SffConvention {
 //				new Hall().withName(HALL_NAME_MINIATURES_2),
 //				new Hall().withName(HALL_NAME_MINIATURES_DEMO),
 //				new Hall().withName(HALL_NAME_MINIATURES_WORKSHOP)
-				new Hall().withName(HALL_NAME_GAMES_1),
-				new Hall().withName(HALL_NAME_GAMES_2),
-				new Hall().withName(HALL_NAME_GAMES_3),
-				new Hall().withName(HALL_NAME_GAMES_4),
+//				new Hall().withName(HALL_NAME_GAMES_1),
+//				new Hall().withName(HALL_NAME_GAMES_2),
+//				new Hall().withName(HALL_NAME_GAMES_3),
+//				new Hall().withName(HALL_NAME_GAMES_4),
 				new Hall().withName(HALL_NAME_MEETINGS)
 		);
 		int i = 1;
