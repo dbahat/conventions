@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
+import java.util.Date;
 import java.util.Locale;
 
 import amai.org.conventions.model.ConventionEvent;
@@ -18,6 +19,7 @@ import amai.org.conventions.notifications.LocalNotificationScheduler;
 import amai.org.conventions.utils.BundleBuilder;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
+import amai.org.conventions.utils.Objects;
 import amai.org.conventions.utils.Settings;
 
 public class ConventionsApplication extends Application {
@@ -27,7 +29,7 @@ public class ConventionsApplication extends Application {
 	public static Settings settings;
 	private static String versionName;
 	private static Context currentContext;
-	private static Context appContext;
+	private static ConventionsApplication appContext;
 
 	@Override
 	public void onCreate() {
@@ -106,7 +108,7 @@ public class ConventionsApplication extends Application {
 		Locale.setDefault(Dates.getLocale());
 	}
 
-	public static Context getAppContext() {
+	public static ConventionsApplication getAppContext() {
 		return appContext;
 	}
 
@@ -115,9 +117,58 @@ public class ConventionsApplication extends Application {
 	 */
 	private void restoreAlarmConfiguration() {
 		for (ConventionEvent event : Convention.getInstance().getEvents()) {
-			restoreAlarmConfiguration(event, event.getUserInput().getEventAboutToStartNotification());
-			restoreAlarmConfiguration(event, event.getUserInput().getEventFeedbackReminderNotification());
+			scheduleEventAlarms(event);
 		}
+	}
+
+	public boolean rescheduleChangedEventAlarms(ConventionEvent event, ConventionEvent previousEvent) {
+		boolean alarmsChanged = false;
+		EventNotification aboutToStartNotification = event.getUserInput().getEventAboutToStartNotification();
+		if (
+			aboutToStartNotification != null &&
+			aboutToStartNotification.getNotificationTime() != null &&
+			!Objects.equals(event.getStartTime(), previousEvent.getStartTime()) &&
+			event.getStartTime() != null && previousEvent.getStartTime() != null
+		) {
+			// Calculate the new notification time. It should be keep the time difference.
+			// For example, if the user set the notification to be 3 minutes before the event start time,
+			// the new time should be 3 minutes before the new event start time.
+			aboutToStartNotification.setNotificationTime(new Date(
+				aboutToStartNotification.getNotificationTime().getTime() -
+				previousEvent.getStartTime().getTime() +
+				event.getStartTime().getTime()
+			));
+			alarmsChanged = true;
+		}
+
+		EventNotification feedbackNotification = event.getUserInput().getEventFeedbackReminderNotification();
+		if (
+			feedbackNotification != null &&
+			feedbackNotification.getNotificationTime() != null &&
+			!Objects.equals(event.getEndTime(), previousEvent.getEndTime()) &&
+			event.getEndTime() != null && previousEvent.getEndTime() != null
+		) {
+			// Calculate the new notification time. It should be keep the time difference.
+			// For example, if the user set the notification to be 3 minutes after the event end time,
+			// the new time should be 3 minutes after the new event end time.
+			feedbackNotification.setNotificationTime(new Date(
+				feedbackNotification.getNotificationTime().getTime() -
+				previousEvent.getEndTime().getTime() +
+				event.getEndTime().getTime()
+			));
+			alarmsChanged = true;
+		}
+
+		if (alarmsChanged) {
+			Log.i(TAG, "Rescheduling alarms for event " + event.getTitle() + " (" + event.getId() + ")");
+			scheduleEventAlarms(event);
+		}
+		return alarmsChanged;
+	}
+
+	private void scheduleEventAlarms(ConventionEvent event) {
+		restoreAlarmConfiguration(event, event.getUserInput().getEventAboutToStartNotification());
+		restoreAlarmConfiguration(event, event.getUserInput().getEventFeedbackReminderNotification());
 	}
 
 	private void restoreAlarmConfiguration(ConventionEvent event, EventNotification eventNotification) {
