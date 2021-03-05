@@ -1,26 +1,37 @@
 package amai.org.conventions.model;
 
 import java.io.Serializable;
-import java.util.Date;
+
+import androidx.annotation.Nullable;
 
 public class EventNotification implements Serializable, Cloneable {
-	private Date notificationTime;
-	private Type type;
+	/**
+	 * Time difference in milliseconds between the relevant event time (start/end) and the notification.
+	 * Null means the notification is disabled.
+	 */
+	@Nullable
+	private Long timeDiffInMillis;
+	private final Type type;
 
 	public EventNotification(Type type) {
 		this.type = type;
 	}
 
-	public void setNotificationTime(Date notificationTime) {
-		this.notificationTime = notificationTime;
+	public void setTimeDiffInMillis(long timeDiffInMillis) {
+		this.timeDiffInMillis = timeDiffInMillis;
 	}
 
-	public Date getNotificationTime() {
-		return notificationTime;
+	public void disable() {
+		this.timeDiffInMillis = null;
+	}
+
+	@Nullable
+	public Long getTimeDiffInMillis() {
+		return timeDiffInMillis;
 	}
 
 	public boolean isEnabled() {
-		return notificationTime != null && notificationTime.after(new Date());
+		return timeDiffInMillis != null;
 	}
 
 	public Type getType() {

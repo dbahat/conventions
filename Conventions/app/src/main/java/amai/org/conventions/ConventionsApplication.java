@@ -8,7 +8,6 @@ import android.os.Bundle;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
-import java.util.Date;
 import java.util.Locale;
 
 import amai.org.conventions.model.ConventionEvent;
@@ -121,41 +120,23 @@ public class ConventionsApplication extends Application {
 		}
 	}
 
-	public boolean rescheduleChangedEventAlarms(ConventionEvent event, ConventionEvent previousEvent) {
+	public void rescheduleChangedEventAlarms(ConventionEvent event, ConventionEvent previousEvent) {
 		boolean alarmsChanged = false;
 		EventNotification aboutToStartNotification = event.getUserInput().getEventAboutToStartNotification();
 		if (
 			aboutToStartNotification != null &&
-			aboutToStartNotification.getNotificationTime() != null &&
-			!Objects.equals(event.getStartTime(), previousEvent.getStartTime()) &&
-			event.getStartTime() != null && previousEvent.getStartTime() != null
+			aboutToStartNotification.isEnabled() &&
+			!Objects.equals(event.getStartTime(), previousEvent.getStartTime())
 		) {
-			// Calculate the new notification time. It should be keep the time difference.
-			// For example, if the user set the notification to be 3 minutes before the event start time,
-			// the new time should be 3 minutes before the new event start time.
-			aboutToStartNotification.setNotificationTime(new Date(
-				aboutToStartNotification.getNotificationTime().getTime() -
-				previousEvent.getStartTime().getTime() +
-				event.getStartTime().getTime()
-			));
 			alarmsChanged = true;
 		}
 
 		EventNotification feedbackNotification = event.getUserInput().getEventFeedbackReminderNotification();
 		if (
 			feedbackNotification != null &&
-			feedbackNotification.getNotificationTime() != null &&
-			!Objects.equals(event.getEndTime(), previousEvent.getEndTime()) &&
-			event.getEndTime() != null && previousEvent.getEndTime() != null
+			feedbackNotification.isEnabled() &&
+			!Objects.equals(event.getEndTime(), previousEvent.getEndTime())
 		) {
-			// Calculate the new notification time. It should be keep the time difference.
-			// For example, if the user set the notification to be 3 minutes after the event end time,
-			// the new time should be 3 minutes after the new event end time.
-			feedbackNotification.setNotificationTime(new Date(
-				feedbackNotification.getNotificationTime().getTime() -
-				previousEvent.getEndTime().getTime() +
-				event.getEndTime().getTime()
-			));
 			alarmsChanged = true;
 		}
 
@@ -163,24 +144,25 @@ public class ConventionsApplication extends Application {
 			Log.i(TAG, "Rescheduling alarms for event " + event.getTitle() + " (" + event.getId() + ")");
 			scheduleEventAlarms(event);
 		}
-		return alarmsChanged;
 	}
 
 	private void scheduleEventAlarms(ConventionEvent event) {
-		restoreAlarmConfiguration(event, event.getUserInput().getEventAboutToStartNotification());
-		restoreAlarmConfiguration(event, event.getUserInput().getEventFeedbackReminderNotification());
+		restoreAlarmConfiguration(event, EventNotification.Type.AboutToStart);
+		restoreAlarmConfiguration(event, EventNotification.Type.FeedbackReminder);
 	}
 
-	private void restoreAlarmConfiguration(ConventionEvent event, EventNotification eventNotification) {
-		if (eventNotification != null && eventNotification.isEnabled()) {
-			switch (eventNotification.getType()) {
-				case AboutToStart:
-					alarmScheduler.scheduleEventAboutToStartNotification(event, eventNotification.getNotificationTime().getTime());
-					break;
-				case FeedbackReminder:
-					alarmScheduler.scheduleFillFeedbackOnEventNotification(event, eventNotification.getNotificationTime().getTime());
-					break;
-			}
+	private void restoreAlarmConfiguration(ConventionEvent event, EventNotification.Type eventNotificationType) {
+		switch (eventNotificationType) {
+			case AboutToStart:
+				if (event.getEventAboutToStartNotificationTime() != null) {
+					alarmScheduler.scheduleEventAboutToStartNotification(event, event.getEventAboutToStartNotificationTime().getTime());
+				}
+				break;
+			case FeedbackReminder:
+				if (event.getEventFeedbackReminderNotificationTime() != null) {
+					alarmScheduler.scheduleFillFeedbackOnEventNotification(event, event.getEventFeedbackReminderNotificationTime().getTime());
+				}
+				break;
 		}
 	}
 

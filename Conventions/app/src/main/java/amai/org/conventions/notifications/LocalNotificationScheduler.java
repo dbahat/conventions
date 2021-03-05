@@ -9,7 +9,6 @@ import android.content.SharedPreferences;
 import android.os.Build;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.events.ConfigureNotificationsFragment;
@@ -32,18 +31,17 @@ public class LocalNotificationScheduler {
 		SharedPreferences sharedPreferences = ConventionsApplication.settings.getSharedPreferences();
 		if (sharedPreferences.getBoolean(Convention.getInstance().getId().toLowerCase() + "_event_starting_reminder", false)) {
 			EventNotification eventAboutToStartNotification = event.getUserInput().getEventAboutToStartNotification();
-			Date defaultEventStartNotificationTime = new Date(event.getStartTime().getTime()
-					- ConfigureNotificationsFragment.DEFAULT_PRE_EVENT_START_NOTIFICATION_MINUTES * Dates.MILLISECONDS_IN_MINUTE);
-			eventAboutToStartNotification.setNotificationTime(defaultEventStartNotificationTime);
-			scheduleEventAboutToStartNotification(event, eventAboutToStartNotification.getNotificationTime().getTime());
+			eventAboutToStartNotification.setTimeDiffInMillis(
+				- ConfigureNotificationsFragment.DEFAULT_PRE_EVENT_START_NOTIFICATION_MINUTES * Dates.MILLISECONDS_IN_MINUTE);
+			scheduleEventAboutToStartNotification(event, event.getEventAboutToStartNotificationTime().getTime());
 		}
 
 		if (sharedPreferences.getBoolean(Convention.getInstance().getId().toLowerCase() + "_event_feedback_reminder", false)) {
 			EventNotification eventFeedbackReminderNotification = event.getUserInput().getEventFeedbackReminderNotification();
-			Date defaultEventEndNotificationTime = new Date(event.getEndTime().getTime()
-					+ ConfigureNotificationsFragment.DEFAULT_POST_EVENT_START_NOTIFICATION_MINUTES * Dates.MILLISECONDS_IN_MINUTE);
-			eventFeedbackReminderNotification.setNotificationTime(defaultEventEndNotificationTime);
-			scheduleFillFeedbackOnEventNotification(event, eventFeedbackReminderNotification.getNotificationTime().getTime());
+			eventFeedbackReminderNotification.setTimeDiffInMillis(
+				ConfigureNotificationsFragment.DEFAULT_POST_EVENT_START_NOTIFICATION_MINUTES * Dates.MILLISECONDS_IN_MINUTE
+			);
+			scheduleFillFeedbackOnEventNotification(event, event.getEventFeedbackReminderNotificationTime().getTime());
 		}
 
 		Convention.getInstance().getStorage().saveUserInput();
@@ -56,7 +54,6 @@ public class LocalNotificationScheduler {
 		}
 
 		PendingIntent pendingIntent = createEventNotificationPendingIntent(event, PushNotification.Type.EventAboutToStart);
-
 		scheduleAlarm(time, pendingIntent, Accuracy.UP_TO_1_MINUTE_EARLIER);
 	}
 
@@ -74,8 +71,8 @@ public class LocalNotificationScheduler {
 		cancelEventAlarm(event, PushNotification.Type.EventAboutToStart);
 		cancelEventAlarm(event, PushNotification.Type.EventFeedbackReminder);
 
-		event.getUserInput().getEventFeedbackReminderNotification().setNotificationTime(null);
-		event.getUserInput().getEventAboutToStartNotification().setNotificationTime(null);
+		event.getUserInput().getEventFeedbackReminderNotification().disable();
+		event.getUserInput().getEventAboutToStartNotification().disable();
 		Convention.getInstance().getStorage().saveUserInput();
 	}
 

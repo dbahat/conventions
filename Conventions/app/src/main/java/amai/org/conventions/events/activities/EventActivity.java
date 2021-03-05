@@ -329,10 +329,12 @@ public class EventActivity extends NavigationActivity {
 
 	private void setupAlarmsMenuItem(Menu menu, ConventionEvent.UserInput userInput) {
 		// Remove alarms button for ended events (unless they still have a feedback reminder)
-		if (conventionEvent.hasEnded() && !userInput.getEventFeedbackReminderNotification().isEnabled()) {
+		if (conventionEvent.hasEnded() &&
+				!(conventionEvent.getEventFeedbackReminderNotificationTime() != null &&
+				  conventionEvent.getEventFeedbackReminderNotificationTime().after(Dates.now()))) {
 			menu.removeItem(R.id.event_configure_notifications);
-			// Hide alarms in the overflow menu if the event is over or there are no alarms for this event
-			// and it isn't in the favorites
+		// Hide alarms in the overflow menu if the event is over or there are no alarms for this event
+		// and it isn't in the favorites
 		} else if (userInput.isAttending() ||
 				userInput.getEventAboutToStartNotification().isEnabled() ||
 				userInput.getEventFeedbackReminderNotification().isEnabled()) {
