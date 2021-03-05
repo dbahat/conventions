@@ -47,21 +47,18 @@ public class ModelRefresher {
 
 			HttpURLConnection request = HttpConnectionCreator.createConnection(Convention.getInstance().getModelURL());
 			request.connect();
-			InputStreamReader reader = null;
-			try {
-				reader = new InputStreamReader((InputStream) request.getContent());
+			try (InputStreamReader reader = new InputStreamReader((InputStream) request.getContent())) {
 				List<ConventionEvent> eventList = Convention.getInstance().getModelParser().parse(ticketsModifiedDate, reader);
 
 				if (BuildConfig.DEBUG) {
 					notifyIfEventsUpdated(Convention.getInstance().getEvents(), eventList);
 				}
 
+				rescheduleChangedEventNotifications(Convention.getInstance().getEvents(), eventList);
+
 				Convention.getInstance().setEvents(eventList);
 				ConventionsApplication.settings.setLastEventsUpdatedDate();
 			} finally {
-				if (reader != null) {
-					reader.close();
-				}
 				request.disconnect();
 			}
 			Convention.getInstance().getStorage().saveEvents();
@@ -74,6 +71,31 @@ public class ModelRefresher {
 		}
 
 		return true;
+	}
+
+	private void rescheduleChangedEventNotifications(List<ConventionEvent> currentEvents, List<ConventionEvent> newEvents) {
+		Log.i(TAG, "Events refresh: Rescheduling alarms for events whose start or end time changed");
+		Map<String, ConventionEvent> currentEventsById = new HashMap<>();
+		for (ConventionEvent event : currentEvents) {
+			currentEventsById.put(event.getId(), event);
+		}
+
+		boolean changed = false;
+		for (ConventionEvent event : newEvents) {
+			ConventionEvent currentEvent = currentEventsById.get(event.getId());
+			if (currentEvent == null) {
+				// If this is a new event, the current event would be null, and there are no alarms to schedule
+				continue;
+			}
+			boolean thisEventChanged = ConventionsApplication.getAppContext().rescheduleChangedEventAlarms(event, currentEvent);
+			changed = changed || thisEventChanged;
+		}
+		if (changed) {
+			Convention.getInstance().getStorage().saveUserInput();
+		} else {
+			Log.i(TAG, "Events refresh: no alarms were updated");
+		}
+
 	}
 
 	private void notifyIfEventsUpdated(List<ConventionEvent> currentEvents, List<ConventionEvent> newEvents) {
