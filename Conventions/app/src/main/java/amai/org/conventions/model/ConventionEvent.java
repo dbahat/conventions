@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Stack;
 
+import androidx.annotation.Nullable;
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.conventions.Convention;
@@ -269,6 +270,24 @@ public class ConventionEvent implements Serializable {
 	public ConventionEvent withServerId(int serverId) {
 		setServerId(serverId);
 		return this;
+	}
+
+	@Nullable
+	public Date getEventAboutToStartNotificationTime() {
+		Long diff = getUserInput().getEventAboutToStartNotification().getTimeDiffInMillis();
+		if (diff == null) {
+			return null;
+		}
+		return new Date(getStartTime().getTime() + diff);
+	}
+
+	@Nullable
+	public Date getEventFeedbackReminderNotificationTime() {
+		Long diff = getUserInput().getEventFeedbackReminderNotification().getTimeDiffInMillis();
+		if (diff == null) {
+			return null;
+		}
+		return new Date(getEndTime().getTime() + diff);
 	}
 
 
@@ -568,5 +587,4 @@ public class ConventionEvent implements Serializable {
 			return Objects.hash(attending);
 		}
 	}
-
 }

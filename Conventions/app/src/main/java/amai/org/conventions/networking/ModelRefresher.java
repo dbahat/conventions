@@ -45,7 +45,7 @@ public class ModelRefresher {
 			HttpURLConnection request = HttpConnectionCreator.createConnection(Convention.getInstance().getModelURL());
 			request.connect();
 			try (InputStreamReader reader = new InputStreamReader((InputStream) request.getContent())) {
-				List<ConventionEvent> eventList = Convention.getInstance().getModelParser().parse(ticketsModifiedDate, reader);
+				List<ConventionEvent> eventList = Convention.getInstance().getModelParser().parse(reader);
 
 				if (BuildConfig.DEBUG) {
 					notifyIfEventsUpdated(Convention.getInstance().getEvents(), eventList);
@@ -77,22 +77,15 @@ public class ModelRefresher {
 			currentEventsById.put(event.getId(), event);
 		}
 
-		boolean changed = false;
 		for (ConventionEvent event : newEvents) {
 			ConventionEvent currentEvent = currentEventsById.get(event.getId());
 			if (currentEvent == null) {
 				// If this is a new event, the current event would be null, and there are no alarms to schedule
 				continue;
 			}
-			boolean thisEventChanged = ConventionsApplication.getAppContext().rescheduleChangedEventAlarms(event, currentEvent);
-			changed = changed || thisEventChanged;
+			ConventionsApplication.getAppContext().rescheduleChangedEventAlarms(event, currentEvent);
 		}
-		if (changed) {
-			Convention.getInstance().getStorage().saveUserInput();
-		} else {
-			Log.i(TAG, "Events refresh: no alarms were updated");
-		}
-
+		Log.i(TAG, "Events refresh: finished updating alarms");
 	}
 
 	private void notifyIfEventsUpdated(List<ConventionEvent> currentEvents, List<ConventionEvent> newEvents) {

@@ -20,6 +20,7 @@ import java.util.List;
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.ConventionEvent;
+import amai.org.conventions.model.EventNotification;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.conventions.Convention;
@@ -219,10 +220,20 @@ public class EventView extends FrameLayout {
         }
     }
 
-    protected void setAlarmIconFromEvent(ConventionEvent event) {
-        if (event.getUserInput().getEventAboutToStartNotification().isEnabled() ||
-                event.getUserInput().getEventFeedbackReminderNotification().isEnabled()) {
-            alarmIcon.setVisibility(VISIBLE);
+	protected boolean isNotificationAlarmScheduled(ConventionEvent event, EventNotification.Type type) {
+		switch (type) {
+			case AboutToStart:
+				return event.getEventAboutToStartNotificationTime() != null && event.getEventAboutToStartNotificationTime().after(Dates.now());
+			case FeedbackReminder:
+				return event.getEventFeedbackReminderNotificationTime() != null && event.getEventFeedbackReminderNotificationTime().after(Dates.now());
+		}
+		return false;
+	}
+
+	protected void setAlarmIconFromEvent(ConventionEvent event) {
+		if (isNotificationAlarmScheduled(event, EventNotification.Type.AboutToStart) ||
+				isNotificationAlarmScheduled(event, EventNotification.Type.FeedbackReminder)) {
+			alarmIcon.setVisibility(VISIBLE);
             Drawable favDrawable = ThemeAttributes.getDrawable(getContext(), R.attr.eventFavoriteColor);
             if (favDrawable instanceof ColorDrawable) {
                 alarmIcon.setColorFilter(((ColorDrawable) favDrawable).getColor());
