@@ -79,6 +79,9 @@
         <attr name="homeToolbarBackground" format="integer|reference"/>
         <attr name="homeLogo" format="integer|reference"/>
         <attr name="homeLogoMargin" format="dimension"/>
+        <attr name="homeFrameMargins" format="dimension" />
+        <attr name="homeFrameTopMargin" format="dimension" />
+        <attr name="homeFrameBottomMargin" format="dimension" />
         <attr name="homeBottomImage" format="integer|reference"/>
         <attr name="homeTitleBackground" format="color|reference"/>
         <attr name="homeTitleText" format="color|reference"/>
