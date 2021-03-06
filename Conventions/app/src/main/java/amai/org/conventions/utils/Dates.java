@@ -36,7 +36,7 @@ public class Dates {
 
 		// Used for testing
 		// Fixed startup date
-//        return new Date(System.currentTimeMillis() - appStartDate.getTime() + initialDate.getTime());
+//		return new Date(System.currentTimeMillis() - appStartDate.getTime() + initialDate.getTime());
 	}
 
 	public static Calendar toCalendar(Date date) {

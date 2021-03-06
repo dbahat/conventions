@@ -97,7 +97,7 @@
      See README(https://goo.gl/l4GJaQ) for more. -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/icon2020_notification_small" />
+            android:resource="@drawable/olamot2021_notification_icon_transparent" />
     </application>
 
 </manifest>
