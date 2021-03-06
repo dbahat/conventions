@@ -1,6 +1,8 @@
 package amai.org.conventions.events.activities;
 
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
@@ -10,6 +12,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -39,6 +42,8 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -88,8 +93,11 @@ public class EventActivity extends NavigationActivity {
 	private LinearLayout imagesLayout;
 	private LinearLayout feedbackContainer;
 	private View voteSurveyOpenerContainer;
+	private View voteSurveyOpenerLayout;
 	private Button voteSurveyOpener;
 	private ProgressBar voteSurveyOpenerProgress;
+	private View viewEventLayout;
+	private Button viewEventButton;
 	private CollapsibleFeedbackView feedbackView;
 
 	private ImageView gradientImageView;
@@ -108,8 +116,11 @@ public class EventActivity extends NavigationActivity {
 		imagesLayout = (LinearLayout) findViewById(R.id.images_layout);
 		feedbackContainer = (LinearLayout) findViewById(R.id.event_feedback_container);
 		voteSurveyOpenerContainer = findViewById(R.id.event_vote_opener_container);
+		voteSurveyOpenerLayout = findViewById(R.id.event_vote_opener_layout);
 		voteSurveyOpener = (Button) findViewById(R.id.event_open_vote_survey_button);
 		voteSurveyOpenerProgress = (ProgressBar) findViewById(R.id.event_open_vote_survey_progress_bar);
+		viewEventLayout = findViewById(R.id.event_view_layout);
+		viewEventButton = findViewById(R.id.event_view_button);
 		feedbackView = (CollapsibleFeedbackView) findViewById(R.id.event_feedback_view);
 		final View detailBoxes = findViewById(R.id.event_detail_boxes);
 		final ParallaxScrollView scrollView = (ParallaxScrollView) findViewById(R.id.parallax_scroll);
@@ -278,7 +289,7 @@ public class EventActivity extends NavigationActivity {
 		super.onResume();
 		// This view is time-sensitive (it is visible or invisible according to the time)
 		// so it should be updated more frequently
-		setupVoteSurvey(conventionEvent);
+		setupVoteSurveyAndEventView(conventionEvent);
 	}
 
 	private int getBackgroundColor() {
@@ -661,84 +672,141 @@ public class EventActivity extends NavigationActivity {
 		availableTickets.setText(ticketsText);
 	}
 
-	private void setupVoteSurvey(ConventionEvent event) {
+	private boolean shouldShowEventSurvey(ConventionEvent event) {
 		final Survey voteSurvey = event.getUserInput().getVoteSurvey();
 		if (voteSurvey == null) {
+			return false;
+		}
+
+		Calendar eventSurveyEnd = Calendar.getInstance();
+		eventSurveyEnd.setTime(event.getEndTime());
+
+		// Allow until some time after the event ended to vote (in case there's a delay in the schedule)
+		eventSurveyEnd.add(Calendar.HOUR, 2);
+
+		return event.hasStarted() && (eventSurveyEnd.getTime().after(Dates.now()) || voteSurvey.isSent());
+	}
+
+	private boolean shouldShowViewEvent(ConventionEvent event) {
+		URL eventViewURL = Convention.getInstance().getEventViewURL(event);
+		if (eventViewURL == null) {
+			return false;
+		}
+		try {
+			eventViewURL.toURI();
+		} catch (Exception e) {
+			Log.e(TAG, "Event URL cannot be parsed to URI: " + eventViewURL, e);
+		}
+		// We only show the button while the event is on
+		return event.hasStarted() && !event.hasEnded();
+	}
+
+	private void setupVoteSurveyAndEventView(ConventionEvent event) {
+		boolean shouldShowSurvey = shouldShowEventSurvey(event);
+		boolean shouldShowView = shouldShowViewEvent(event);
+
+		if (!shouldShowSurvey && !shouldShowView) {
 			voteSurveyOpenerContainer.setVisibility(View.GONE);
+			return;
 		} else {
-			Calendar eventEnd = Calendar.getInstance();
-			eventEnd.setTime(event.getEndTime());
+			voteSurveyOpenerContainer.setVisibility(View.VISIBLE);
+		}
 
-			// Allow until some time after the event ended to vote (in case there's a delay in the schedule)
-			eventEnd.add(Calendar.HOUR, 2);
-
-			if (!event.hasStarted() || (eventEnd.getTime().before(Dates.now()) && !voteSurvey.isSent())) {
-				voteSurveyOpenerContainer.setVisibility(View.GONE);
-			} else {
-				voteSurveyOpenerContainer.setVisibility(View.VISIBLE);
-				voteSurveyOpenerProgress.setVisibility(View.GONE);
-				voteSurveyOpener.setVisibility(View.VISIBLE);
-				voteSurveyOpener.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						voteSurveyOpener.setVisibility(View.GONE);
-						voteSurveyOpenerProgress.setVisibility(View.VISIBLE);
-						new AsyncTask<Void, Void, Exception>() {
-							@Override
-							protected Exception doInBackground(Void... params) {
-								// No need to retrieve the answers if the user already sent the vote
-								if (voteSurvey.isSent()) {
-									return null;
-								}
-								try {
-									for (FeedbackQuestion question : voteSurvey.getQuestions()) {
-										SurveyDataRetriever.Answers retriever = Convention.getInstance().createSurveyAnswersRetriever(question);
-										if (retriever != null) {
-											List<String> answers = retriever.retrieveAnswers();
-											if (answers == null || answers.size() == 0) {
-												// No answers found - throw exception
-												throw new RuntimeException("No answers found for question " + question.getQuestionId());
-											}
-											question.setPossibleMultipleAnswers(answers);
+		// Setup votes
+		if (!shouldShowSurvey) {
+			voteSurveyOpenerLayout.setVisibility(View.GONE);
+		} else {
+			final Survey voteSurvey = event.getUserInput().getVoteSurvey();
+			voteSurveyOpenerLayout.setVisibility(View.VISIBLE);
+			voteSurveyOpenerProgress.setVisibility(View.GONE);
+			voteSurveyOpener.setVisibility(View.VISIBLE);
+			voteSurveyOpener.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					voteSurveyOpener.setVisibility(View.GONE);
+					voteSurveyOpenerProgress.setVisibility(View.VISIBLE);
+					new AsyncTask<Void, Void, Exception>() {
+						@Override
+						protected Exception doInBackground(Void... params) {
+							// No need to retrieve the answers if the user already sent the vote
+							if (voteSurvey.isSent()) {
+								return null;
+							}
+							try {
+								for (FeedbackQuestion question : voteSurvey.getQuestions()) {
+									SurveyDataRetriever.Answers retriever = Convention.getInstance().createSurveyAnswersRetriever(question);
+									if (retriever != null) {
+										List<String> answers = retriever.retrieveAnswers();
+										if (answers == null || answers.size() == 0) {
+											// No answers found - throw exception
+											throw new RuntimeException("No answers found for question " + question.getQuestionId());
 										}
+										question.setPossibleMultipleAnswers(answers);
 									}
-									// In case everything finished successfully, pass null to onPostExecute.
-									return null;
-								} catch (Exception e) {
-									return e;
 								}
+								// In case everything finished successfully, pass null to onPostExecute.
+								return null;
+							} catch (Exception e) {
+								return e;
 							}
+						}
 
-							@Override
-							protected void onPostExecute(Exception exception) {
-								voteSurveyOpenerProgress.setVisibility(View.GONE);
-								voteSurveyOpener.setVisibility(View.VISIBLE);
-								if (exception != null) {
-									Toast.makeText(EventActivity.this, R.string.vote_survey_retrieve_answers_error, Toast.LENGTH_LONG).show();
-									Log.e(TAG, "Error retrieving answers", exception);
-									FirebaseAnalytics
-											.getInstance(EventActivity.this)
-											.logEvent("vote", new BundleBuilder()
-													.putString("success", "false")
-													.putString("error_message", exception.getMessage())
-													.build()
-											);
-								} else {
-									FirebaseAnalytics
-											.getInstance(EventActivity.this)
-											.logEvent("vote", new BundleBuilder()
-													.putString("success", "true")
-													.putString("event_title", conventionEvent.getTitle())
-													.build()
-											);
-									EventVoteSurveyFragment eventVoteSurveyFragment = EventVoteSurveyFragment.newInstance(conventionEvent.getId());
-									eventVoteSurveyFragment.show(getSupportFragmentManager(), null);
-								}
+						@Override
+						protected void onPostExecute(Exception exception) {
+							voteSurveyOpenerProgress.setVisibility(View.GONE);
+							voteSurveyOpener.setVisibility(View.VISIBLE);
+							if (exception != null) {
+								Toast.makeText(EventActivity.this, R.string.vote_survey_retrieve_answers_error, Toast.LENGTH_LONG).show();
+								Log.e(TAG, "Error retrieving answers", exception);
+								FirebaseAnalytics
+										.getInstance(EventActivity.this)
+										.logEvent("vote", new BundleBuilder()
+												.putString("success", "false")
+												.putString("error_message", exception.getMessage())
+												.build()
+										);
+							} else {
+								FirebaseAnalytics
+										.getInstance(EventActivity.this)
+										.logEvent("vote", new BundleBuilder()
+												.putString("success", "true")
+												.putString("event_title", conventionEvent.getTitle())
+												.build()
+										);
+								EventVoteSurveyFragment eventVoteSurveyFragment = EventVoteSurveyFragment.newInstance(conventionEvent.getId());
+								eventVoteSurveyFragment.show(getSupportFragmentManager(), null);
 							}
-						}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+						}
+					}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				}
+			});
+		}
+
+		// Setup event view
+		if (!shouldShowView) {
+			viewEventLayout.setVisibility(View.GONE);
+		} else {
+			URL eventViewURL = Convention.getInstance().getEventViewURL(event);
+			viewEventLayout.setVisibility(View.VISIBLE);
+			viewEventButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					try {
+						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(eventViewURL.toURI().toString()));
+						if (intent.resolveActivity(getPackageManager()) != null) {
+							try {
+								EventActivity.this.startActivity(intent);
+							} catch (ActivityNotFoundException e) {
+								Toast.makeText(EventActivity.this, getString(R.string.view_event_error), Toast.LENGTH_LONG).show();
+							}
+						} else {
+							Toast.makeText(EventActivity.this, getString(R.string.view_event_error), Toast.LENGTH_LONG).show();
+						}
+					} catch (URISyntaxException e) {
+						// We already checked this before
 					}
-				});
-			}
+				}
+			});
 		}
 	}
 

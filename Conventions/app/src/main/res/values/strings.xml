@@ -173,8 +173,13 @@
     <string name="vote_survey_retrieve_answers_error">לא ניתן להציג את טופס ההצבעה. בדוק שחיבור האינטרנט תקין ונסה שנית מאוחר יותר.</string>
     <string name="event_vote_survey_title">הצבעה לאירוע %s</string>
     <string name="event_vote_survey_sent">ההצבעה נשלחה. תודה!</string>
+    <string name="event_view_details">ניתן לצפות באירוע זה בשידור ישיר.</string>
+    <string name="view_event">לצפיה באירוע</string>
+    <string name="view_event_error">לא ניתן לצפות באירוע. וודא שמותקן דפדפן אינטרנט ונסה שנית.</string>
     <string name="vote_send_error">לא ניתן להצביע. נסה שנית מאוחר יותר.</string>
     <string name="home_current_event_vote_possible">לחץ להצבעה עבור חביב הקהל!</string>
+    <string name="home_current_event_vote_or_view_possible">לחץ לצפיה באירוע ולהצבעה עבור חביב הקהל!</string>
+    <string name="home_current_event_view_possible">לחץ לצפיה באירוע!</string>
     <string name="event_not_found">האירוע לא נמצא</string>
     <string name="event_tickets_sold_out_are_you_sure">אזלו הכרטיסים. במידה ולא קנית כרטיסים מראש לא תוכל ללכת לאירוע.\nניתן להוסיף אירועים שקנית אליהם כרטיסים מראש דרך מסך האירועים שלי.</string>
     <string name="event_tickets_sold_out_are_you_sure_no_login">אזלו הכרטיסים. במידה ולא קנית כרטיסים מראש לא תוכל ללכת לאירוע.</string>

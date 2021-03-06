@@ -117,7 +117,7 @@
         <item name="eventFeedbackAnswerColor">?feedbackAnswerButtonColor</item>
         <item name="eventFeedbackSelectedAnswerColor">?feedbackAnswerButtonSelectedColor</item>
         <item name="eventVoteBoxColor">?eventFeedbackBoxColor</item>
-        <item name="eventVoteTextColor">?eventDescriptionTextColor</item>
+        <item name="eventVoteTextColor">?eventFeedbackTextColor</item>
         <item name="eventDescriptionBoxColor">?eventDetailsBoxColor</item>
         <item name="eventActivityFavoriteColor">@color/gold</item>
         <item name="eventSurveyTextColor">@color/black</item>
@@ -265,7 +265,7 @@
         <item name="eventFeedbackAnswerColor">?feedbackAnswerButtonColor</item>
         <item name="eventFeedbackSelectedAnswerColor">?feedbackAnswerButtonSelectedColor</item>
         <item name="eventVoteBoxColor">?eventFeedbackBoxColor</item>
-        <item name="eventVoteTextColor">?eventDescriptionTextColor</item>
+        <item name="eventVoteTextColor">?eventFeedbackTextColor</item>
         <item name="eventDescriptionBoxColor">?eventDetailsBoxColor</item>
         <item name="eventActivityFavoriteColor">@color/gold</item>
         <item name="eventSurveyTextColor">@color/black</item>
