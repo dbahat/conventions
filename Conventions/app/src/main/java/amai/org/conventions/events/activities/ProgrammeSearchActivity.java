@@ -32,6 +32,7 @@ import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Views;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -172,7 +173,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 		}).size();
 
 		// In case all (or none) of the filters are active, show an empty filter icon (since we don't apply any filters in such cases)
-		Drawable filterIcon = getResources().getDrawable(numberOfActiveFilters == 0
+		Drawable filterIcon = ContextCompat.getDrawable(this, numberOfActiveFilters == 0
 				|| numberOfActiveFilters == totalCategorySearchFiltersCount + totalEventTypeSearchFiltersCount + totalTagSearchFiltersCount + 1
 				? R.drawable.filter
 				: R.drawable.filter_full);
