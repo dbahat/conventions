@@ -98,8 +98,6 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 		filterButton = (ImageButton) findViewById(R.id.search_filter_button);
 		refreshFilterButton();
 
-		SearchFilter soldOutFilter = new SearchFilter().withName(getString(R.string.show_sold_out_events)).withType(SearchFilter.Type.Tickets);
-
 		List<SearchFilter> eventTypesSearchFilters = Convention.getInstance().getEventTypesSearchFilters();
 		totalEventTypeSearchFiltersCount = eventTypesSearchFilters.size();
 
@@ -110,7 +108,10 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 		totalTagSearchFiltersCount = tagFilters.size();
 
 		if (searchFilters.size() == 0) {
-			searchFilters.add(soldOutFilter);
+			if (hasEventsWithTicketsInfo()) {
+				SearchFilter soldOutFilter = new SearchFilter().withName(getString(R.string.show_sold_out_events)).withType(SearchFilter.Type.Tickets);
+				searchFilters.add(soldOutFilter);
+			}
 			searchFilters.addAll(eventTypesSearchFilters);
 			searchFilters.addAll(categoryFilters);
 			searchFilters.addAll(tagFilters);
@@ -162,6 +163,15 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 
 
 		Views.hideKeyboardOnClickOutsideEditText(this, rootView);
+	}
+
+	private boolean hasEventsWithTicketsInfo() {
+		return CollectionUtils.findFirst(Convention.getInstance().getEvents(), new CollectionUtils.Predicate<ConventionEvent>() {
+			@Override
+			public boolean where(ConventionEvent item) {
+				return item.getAvailableTickets() >= 0;
+			}
+		}) != null;
 	}
 
 	private void refreshFilterButton() {
