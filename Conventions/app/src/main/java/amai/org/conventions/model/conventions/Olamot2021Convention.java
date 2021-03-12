@@ -828,23 +828,23 @@ public class Olamot2021Convention extends SffConvention {
 	@Override
 	public URL getAdditionalConventionFeedbackURL() {
 		try {
-			return new URL("https://docs.google.com/forms/d/1MAqMB8vRxOULJ4-aqj8uIutFrIUQMbpD7hCjQJEuKPg/viewform");
-		} catch (MalformedURLException e) {
-			throw new RuntimeException(e);
+			return new URL("https://docs.google.com/forms/d/e/1FAIpQLSd0ppYWffXNunk97MzPXT3qwE2vWhg3D1A2zYDX6VO1GmZdyA/viewform");
+		} catch (Exception e) {
+			return null;
 		}
 	}
 
 	@Override
 	public URL getAdditionalEventFeedbackURL(ConventionEvent event) {
 		try {
-			return new URL("https://docs.google.com/forms/d/1qLklELbgNMi9c4KXVz8IVUznb4KK7_DmDM6irmtcujA/viewform?usp=pp_url" +
-					"&entry.1572016508=" + URLEncoder.encode(event.getTitle(), "UTF-8") +
+			return new URL("https://docs.google.com/forms/d/e/1FAIpQLSfsRaPSOVmkeazFuFCmr2Q319nh8kw0eOxc76YBtGoYF1cz3g/viewform" +
+					"?entry.1572016508=" + URLEncoder.encode(event.getTitle(), "UTF-8") +
 					"&entry.1917108492=" + URLEncoder.encode(event.getLecturer(), "UTF-8") +
 					"&entry.10889808=" + URLEncoder.encode(event.getHall().getName(), "UTF-8") +
 					"&entry.1131737302=" + URLEncoder.encode(Dates.formatDateAndTime(event.getStartTime()), "UTF-8")
 			);
 		} catch (Exception e) {
-			throw new RuntimeException(e);
+			return null;
 		}
 	}
 
