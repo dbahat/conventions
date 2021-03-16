@@ -862,4 +862,22 @@ public class Olamot2021Convention extends SffConvention {
 	public boolean canUserLogin() {
 		return false;
 	}
+
+	@Override
+	public URL getEventViewURL(ConventionEvent event) {
+		try {
+			// Only events in eshkol 1-3 are available from the convention website
+			if (HALL_NAME_ESHKOL_1.equals(event.getHall().getName())) {
+				return new URL("https://olamot2021.virtualcon.org.il/%D7%90%D7%95%D7%9C%D7%9E%D7%95%D7%AA-%D7%94%D7%AA%D7%95%D7%9B%D7%9F/hall1/");
+			} else if (HALL_NAME_ESHKOL_2.equals(event.getHall().getName())) {
+				return new URL("https://olamot2021.virtualcon.org.il/%D7%90%D7%95%D7%9C%D7%9E%D7%95%D7%AA-%D7%94%D7%AA%D7%95%D7%9B%D7%9F/hall2/");
+			} else if (HALL_NAME_ESHKOL_3.equals(event.getHall().getName())) {
+				return new URL("https://olamot2021.virtualcon.org.il/%D7%90%D7%95%D7%9C%D7%9E%D7%95%D7%AA-%D7%94%D7%AA%D7%95%D7%9B%D7%9F/hall3/");
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			return null;
+		}
+	}
 }
