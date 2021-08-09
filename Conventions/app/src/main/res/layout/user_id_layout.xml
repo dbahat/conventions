@@ -32,14 +32,34 @@
         android:textSize="16sp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp">
+        <ImageView
+            android:id="@+id/user_id_qr"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"/>
+        <TextView
+            android:id="@+id/user_id_qr_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red"
+            android:text="@string/inst_qr_error"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:visibility="gone"
+            android:textSize="14sp"/>
+    </FrameLayout>
     <TextView
         android:id="@+id/user_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        tools:text="1234"
-        android:gravity="center"
-        android:textSize="30sp"
+        tools:text="מספר משתמש: 1234"
+        android:textSize="16sp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"/>
     <TextView

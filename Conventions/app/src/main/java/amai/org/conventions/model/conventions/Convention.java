@@ -222,6 +222,8 @@ public abstract class Convention implements Serializable {
 
 	public abstract HttpURLConnection getUserIDRequest(String user, String password) throws Exception;
 
+	public abstract HttpURLConnection getUserQRRequest(String user) throws Exception;
+
 	public Calendar getStartDate() {
 		return startDate;
 	}

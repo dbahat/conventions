@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -15,14 +16,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -133,6 +135,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 								try {
 									userId = getUserId(user, password);
 									ConventionsApplication.settings.setUserId(userId);
+									saveUserQR(user);
 								} catch (Exception ex) {
 									userIdException = ex;
 								}
@@ -209,8 +212,20 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 				dialogView.findViewById(R.id.separator).setVisibility(View.GONE);
 			}
 
+			ImageView userIdQRImageView = dialogView.findViewById(R.id.user_id_qr);
+			TextView userIdQRErrorText = dialogView.findViewById(R.id.user_id_qr_error);
+			InputStream userQRInputStream = Convention.getInstance().getStorage().getUserQRInputStream();
+			if (userQRInputStream == null) {
+				userIdQRErrorText.setVisibility(View.VISIBLE);
+				userIdQRImageView.setVisibility(View.GONE);
+			} else {
+				userIdQRErrorText.setVisibility(View.GONE);
+				userIdQRImageView.setVisibility(View.VISIBLE);
+				userIdQRImageView.setImageDrawable(new BitmapDrawable(getResources(), userQRInputStream));
+			}
+
 			TextView userIdView = dialogView.findViewById(R.id.user_id);
-			userIdView.setText(userId);
+			userIdView.setText(getString(R.string.inst_user_id, userId));
 
 			userIdInst.setText(Html.fromHtml(getString(R.string.inst_user_id_in_toolbar), source -> {
 				Drawable drawable = null;
@@ -324,6 +339,35 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 			request.disconnect();
 		}
 		return userId;
+	}
+
+	private void saveUserQR(String user) throws Exception {
+		// First, delete the existing file (since a new user ID was set, we don't want leftovers from the previous user ID)
+		Convention.getInstance().getStorage().deleteUserIDQR();
+
+		HttpURLConnection request = Convention.getInstance().getUserQRRequest(user);
+		request.connect();
+		InputStream inputStream = null;
+		try {
+			int responseCode = request.getResponseCode();
+			if (responseCode != 200) {
+				if (BuildConfig.DEBUG) {
+					BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(request.getErrorStream()));
+					StringBuilder responseBuilder = new StringBuilder();
+					String output;
+					while ((output = bufferedReader.readLine()) != null) {
+						responseBuilder.append(output);
+					}
+					String responseBody = responseBuilder.toString();
+					Log.e(TAG, "Could not read user QR, response is: " + responseBody);
+				}
+				throw new RuntimeException("Could not read user QR, error code: " + responseCode);
+			}
+			inputStream = (InputStream) request.getContent();
+			Convention.getInstance().getStorage().saveUserIDQR(inputStream);
+		} finally {
+			request.disconnect();
+		}
 	}
 
 	private void setupDays(int dateIndexToSelect) {

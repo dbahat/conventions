@@ -45,6 +45,7 @@ public class ConventionStorage {
 	private static final String SECOND_HAND_SEARCH_ITEMS_FILE_NAME = "second_hand_search_items.json";
 	private static final String SECOND_HAND_SEARCH_FAVORITES_FILE_NAME = "second_hand_search_favorite_items.json";
 	private static final String EVENTS_FILE_NAME = "convention_events.json";
+	private static final String USER_QR_IMAGE = "user_qr_image.png";
 
 	private static final ReentrantReadWriteLock filesystemAccessLock = new ReentrantReadWriteLock();
 
@@ -100,6 +101,10 @@ public class ConventionStorage {
 
 	private String getSecondHandFavoritesFileName() {
 		return getConventionFileName(SECOND_HAND_SEARCH_FAVORITES_FILE_NAME);
+	}
+
+	private String getUserQRFileName() {
+		return getConventionFileName(USER_QR_IMAGE);
 	}
 
 	public void saveUserInput() {
@@ -193,6 +198,47 @@ public class ConventionStorage {
 			savePrivateFile(secondHandFavoritesString, getSecondHandFavoritesFileName());
 		} finally {
 			filesystemAccessLock.writeLock().unlock();
+		}
+	}
+
+	public void deleteUserIDQR() {
+		filesystemAccessLock.writeLock().lock();
+		try {
+			context.deleteFile(getUserQRFileName());
+		} finally {
+			filesystemAccessLock.writeLock().unlock();
+		}
+	}
+
+	public void saveUserIDQR(InputStream input) {
+		filesystemAccessLock.writeLock().lock();
+		try {
+			saveAndClosePrivateBinaryFile(input, getUserQRFileName());
+		} finally {
+			filesystemAccessLock.writeLock().unlock();
+		}
+	}
+
+	private void saveAndClosePrivateBinaryFile(InputStream input, String fileName) {
+		try {
+			// Save new file data
+			try {
+				try (OutputStream output = context.openFileOutput(fileName, Context.MODE_PRIVATE)) {
+					byte[] buffer = new byte[4 * 1024];
+					int read;
+
+					while ((read = input.read(buffer)) != -1) {
+						output.write(buffer, 0, read);
+					}
+
+					output.flush();
+				}
+			} finally {
+				input.close();
+			}
+		} catch (Exception e) {
+			// Nothing we can do... don't crash the app.
+			Log.e(TAG, "File " + fileName + " could not be saved", e);
 		}
 	}
 
@@ -338,6 +384,13 @@ public class ConventionStorage {
 	public List<SecondHandItem> readSecondHandFavoritesFromFile() {
 		return readJsonFromFile(new TypeToken<List<SecondHandItem>>() {
 		}.getType(), getSecondHandFavoritesFileName());
+	}
+
+	public InputStream getUserQRInputStream() {
+		// Note: we don't use a lock here because we return the input stream itself and
+		// we don't know when it's closed (it's used in an ImageView).
+		// According to the flow, this file should not be updated while the image is displayed.
+		return openTextFile(getUserQRFileName());
 	}
 
 	private static InputStream openTextFile(String fileName) {

@@ -241,8 +241,10 @@
     <string name="second_hand_unknown_status">לא בדוכן</string>
     <string name="second_hand_show_favorites">מועדפים בהתחלה</string>
     <string name="show_user_id">הצג מספר משתמש</string>
-    <string name="inst_show_user_id">הצג את מספר המשתמש בקופות עבור איסוף מהיר של הכרטיסים:</string>
+    <string name="inst_show_user_id">הצג את קוד ה-QR בקופות עבור איסוף מהיר של הכרטיסים:</string>
+    <string name="inst_qr_error">לא ניתן להציג את קוד ה-QR. יש להתחבר שנית דרך כפתור יבוא כרטיסים.</string>
+    <string name="inst_user_id">מספר משתמש: %s</string>
     <string name="inst_user_id_in_toolbar"><![CDATA[
-ניתן לגשת למספר ע"י לחיצה על <img src="iconUserId"> בתפריט העליון
+ניתן לגשת לקוד ע\"י לחיצה על <img src="iconUserId"> בתפריט העליון
 ]]></string>
 </resources>
