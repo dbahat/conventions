@@ -673,7 +673,7 @@ public class Icon2021Convention extends SffConvention {
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_LECTURER_QUALITY_5P, "entry.1327236956")
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_SIMILAR_EVENTS_5P, "entry.1416969956")
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_ADDITIONAL_INFO, "entry.1582215667")
-					.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSf-gAJ_0cJHws4B5LZ-lujqaklYePE_MsiqNOz_yf18Xfnrpg/formResponse"));
+					.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSfoz56q8nlspshth17qkkFkTxbgjCAXrIgirPemZPk7ZWvwsw/formResponse"));
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
@@ -693,7 +693,7 @@ public class Icon2021Convention extends SffConvention {
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_MAP_SIGNS, "entry.1416969956")
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_CONFLICTING_EVENTS, "entry.1582215667")
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_IMPROVEMENT, "entry.993320932")
-					.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLScGwP6Tj_3ax6X0UZAJVrG9BtDVLF69aU9y8UaKfuXVaYBu6A/formResponse"));
+					.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSdUrN2YEaonwI-AvlCKnKxt9D1DovWNM6bZNQpysDK6t4ClWA/formResponse"));
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
