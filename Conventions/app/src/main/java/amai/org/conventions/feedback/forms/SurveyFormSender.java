@@ -8,7 +8,6 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +19,7 @@ import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.Survey;
 import amai.org.conventions.utils.HttpConnectionCreator;
 import amai.org.conventions.utils.Log;
+import amai.org.conventions.utils.URLUtils;
 
 public abstract class SurveyFormSender extends SurveySender {
 	private final static String TAG = SurveyFormSender.class.getCanonicalName();
@@ -50,9 +50,9 @@ public abstract class SurveyFormSender extends SurveySender {
 			if (!first) {
 				postDataBuilder.append("&");
 			}
-			postDataBuilder.append(URLEncoder.encode(questionAndAnswer.getKey(), "UTF-8"))
+			postDataBuilder.append(URLUtils.encodeURLParameterValue(questionAndAnswer.getKey()))
 					.append("=")
-					.append(URLEncoder.encode(questionAndAnswer.getValue(), "UTF-8"));
+					.append(URLUtils.encodeURLParameterValue(questionAndAnswer.getValue()));
 			first = false;
 		}
 
