@@ -23,6 +23,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.notifications.PlayServicesInstallation;
+import amai.org.conventions.utils.URLUtils;
 import fi.iki.kuitsi.listtest.ListTagHandler;
 
 public class ArrivalMethodsActivity extends NavigationActivity implements OnMapReadyCallback {
@@ -87,8 +88,10 @@ public class ArrivalMethodsActivity extends NavigationActivity implements OnMapR
 				Intent intent = new Intent(Intent.ACTION_VIEW,
 						Uri.parse("moovit://directions?dest_lat=" + latitude + "&dest_lon=" + longitude + "&partner_id=" + this.getPackageName()));
 				if (intent.resolveActivity(getPackageManager()) == null) {
+					String encodedLocationName = URLUtils.encodeURLPath(Convention.getInstance().getDisplayName());
 					intent = new Intent(Intent.ACTION_VIEW,
-							Uri.parse("https://web.moovitapp.com/tripplan?customerId=4480&metroId=1&tll=" + latitude + "_" + longitude));
+							Uri.parse("https://moovitapp.com/israel-1/poi/" + encodedLocationName + "/t/he?tll=" + latitude + "_" + longitude)
+					);
 				}
 				if (intent.resolveActivity(getPackageManager()) != null) {
 					try {
