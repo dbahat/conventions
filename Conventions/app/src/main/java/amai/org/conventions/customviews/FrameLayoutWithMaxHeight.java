@@ -1,16 +1,14 @@
 package amai.org.conventions.customviews;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.os.Build;
+import android.util.AttributeSet;
+import android.widget.FrameLayout;
+
 import androidx.annotation.AttrRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
-import android.util.AttributeSet;
-import android.widget.FrameLayout;
-
 import sff.org.conventions.R;
 
 public class FrameLayoutWithMaxHeight extends FrameLayout {
@@ -30,7 +28,6 @@ public class FrameLayoutWithMaxHeight extends FrameLayout {
 		init(context, attrs, defStyleAttr, 0);
 	}
 
-	@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 	public FrameLayoutWithMaxHeight(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr, @StyleRes int defStyleRes) {
 		super(context, attrs, defStyleAttr, defStyleRes);
 		init(context, attrs, defStyleAttr, defStyleRes);

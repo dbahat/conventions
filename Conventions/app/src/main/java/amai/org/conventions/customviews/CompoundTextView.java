@@ -32,7 +32,6 @@ public class CompoundTextView extends TextView {
 		init(context, attrs, defStyleAttr, 0);
 	}
 
-	@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 	public CompoundTextView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
 		super(context, attrs, defStyleAttr, defStyleRes);
 		init(context, attrs, defStyleAttr, defStyleRes);

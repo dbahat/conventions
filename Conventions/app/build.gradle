@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         applicationId "sff.org.conventions"
-        minSdkVersion 17
+        minSdkVersion 21
         targetSdkVersion 30
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
