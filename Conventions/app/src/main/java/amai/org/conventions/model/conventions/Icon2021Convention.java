@@ -7,11 +7,9 @@ import com.google.gson.JsonObject;
 import java.io.BufferedWriter;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
@@ -31,9 +29,10 @@ import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.HttpConnectionCreator;
+import amai.org.conventions.utils.URLUtils;
 import sff.org.conventions.R;
 
-public class Olamot2021Convention extends SffConvention {
+public class Icon2021Convention extends SffConvention {
 //	private static final String HALL_NAME_CINEMATHEQUE_1_3_4 = "סינמטק 1, 3, 4";
 //	private static final String HALL_NAME_CINEMATHEQUE_2 = "סינמטק 2";
 //	private static final String HALL_NAME_CINEMATHEQUE_5 = "סינמטק 5";
@@ -86,22 +85,22 @@ public class Olamot2021Convention extends SffConvention {
 
 	@Override
 	protected Calendar initStartDate() {
-		return Dates.createDate(2021, Calendar.MARCH, 29);
+		return Dates.createDate(2021, Calendar.SEPTEMBER, 22);
 	}
 
 	@Override
 	protected Calendar initEndDate() {
-		return Dates.createDate(2021, Calendar.APRIL, 1);
+		return Dates.createDate(2021, Calendar.SEPTEMBER, 26);
 	}
 
 	@Override
 	protected String initID() {
-		return "Olamot2021";
+		return "Icon2021";
 	}
 
 	@Override
 	protected String initDisplayName() {
-		return "כנס עולמות 2021";
+		return "פסטיבל אייקון 2021";
 	}
 
 	@Override
@@ -740,8 +739,8 @@ public class Olamot2021Convention extends SffConvention {
 	@Override
 	public URL getSecondHandFormURL(String id) {
 		try {
-			return new URL(YAD2_API + "form?formId=" + URLEncoder.encode(id, "UTF-8"));
-		} catch (MalformedURLException|UnsupportedEncodingException e) {
+			return new URL(YAD2_API + "form?formId=" + URLUtils.encodeURLParameterValue(id));
+		} catch (Exception e) {
 			return null;
 		}
 	}
@@ -749,13 +748,7 @@ public class Olamot2021Convention extends SffConvention {
 	@Override
 	public URL getSecondHandFormsURL(List<String> ids) {
 		try {
-			String idsParam = TextUtils.join(",", CollectionUtils.map(ids, item -> {
-				try {
-					return URLEncoder.encode(item, "UTF-8");
-				} catch (UnsupportedEncodingException e) {
-					throw new RuntimeException(e);
-				}
-			}));
+			String idsParam = TextUtils.join(",", CollectionUtils.map(ids, URLUtils::encodeURLParameterValue));
 			return new URL(YAD2_API + "form?formIds=" + idsParam);
 		} catch (MalformedURLException|RuntimeException e) {
 			return null;
@@ -783,7 +776,7 @@ public class Olamot2021Convention extends SffConvention {
 		try {
 			writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
 			writer.write("email=" +
-					URLEncoder.encode(user, "UTF-8") + "&pass=" + URLEncoder.encode(password, "UTF-8"));
+					URLUtils.encodeURLParameterValue(user) + "&pass=" + URLUtils.encodeURLParameterValue(password));
 			writer.flush();
 		} finally {
 			if (writer != null) {
@@ -806,7 +799,7 @@ public class Olamot2021Convention extends SffConvention {
 		try {
 			writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
 			writer.write("email=" +
-					URLEncoder.encode(user, "UTF-8") + "&pass=" + URLEncoder.encode(password, "UTF-8"));
+					URLUtils.encodeURLParameterValue(user) + "&pass=" + URLUtils.encodeURLParameterValue(password));
 			writer.flush();
 		} finally {
 			if (writer != null) {
@@ -838,10 +831,10 @@ public class Olamot2021Convention extends SffConvention {
 	public URL getAdditionalEventFeedbackURL(ConventionEvent event) {
 		try {
 			return new URL("https://docs.google.com/forms/d/e/1FAIpQLSfsRaPSOVmkeazFuFCmr2Q319nh8kw0eOxc76YBtGoYF1cz3g/viewform" +
-					"?entry.1572016508=" + URLEncoder.encode(event.getTitle(), "UTF-8") +
-					"&entry.1917108492=" + URLEncoder.encode(event.getLecturer(), "UTF-8") +
-					"&entry.10889808=" + URLEncoder.encode(event.getHall().getName(), "UTF-8") +
-					"&entry.1131737302=" + URLEncoder.encode(Dates.formatDateAndTime(event.getStartTime()), "UTF-8")
+					"?entry.1572016508=" + URLUtils.encodeURLParameterValue(event.getTitle()) +
+					"&entry.1917108492=" + URLUtils.encodeURLParameterValue(event.getLecturer()) +
+					"&entry.10889808=" + URLUtils.encodeURLParameterValue(event.getHall().getName()) +
+					"&entry.1131737302=" + URLUtils.encodeURLParameterValue(Dates.formatDateAndTime(event.getStartTime()))
 			);
 		} catch (Exception e) {
 			return null;
@@ -860,7 +853,7 @@ public class Olamot2021Convention extends SffConvention {
 
 	@Override
 	public boolean canUserLogin() {
-		return false;
+		return true;
 	}
 
 	@Override
