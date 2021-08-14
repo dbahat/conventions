@@ -1,6 +1,9 @@
 package amai.org.conventions;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
@@ -17,6 +20,8 @@ public abstract class WebContentActivity extends NavigationActivity {
 		setContentInContentContainer(R.layout.activity_web_content);
 		setToolbarTitle(getString(getPageTitleResourceId()));
 
+		handleDeepLinks();
+
 		TextView webContentContainer = findViewById(R.id.web_content);
 		if (webContentContainer != null) {
 			webContentContainer.setText(Html.fromHtml(getString(getWebContentResourceId()), null, new ListTagHandler()));
@@ -26,6 +31,19 @@ public abstract class WebContentActivity extends NavigationActivity {
 	protected abstract @StringRes
 	int getPageTitleResourceId();
 	protected abstract @StringRes int getWebContentResourceId();
+
+	private void handleDeepLinks() {
+		Uri intentData = getIntent().getData();
+		if (intentData != null && intentData.getHost() != null) {
+			switch (intentData.getHost().intern()) {
+				case "open-accessibility": {
+					Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
+					startActivity(intent);
+					break;
+				}
+			}
+		}
+	}
 
 	public static class AccessibilityActivity extends WebContentActivity {
 
