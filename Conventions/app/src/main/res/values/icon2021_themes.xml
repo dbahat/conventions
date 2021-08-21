@@ -105,7 +105,7 @@
         <item name="nextEventStartTimeBottomLineColor">@android:color/transparent</item>
         <item name="conflictingEventsBackground">@color/transparent_black</item>
         <!-- Event Screen -->
-        <item name="eventToolbarColor">@color/icon2021_blue3</item>
+        <item name="eventToolbarColor">@color/icon2021_light_blue</item>
         <item name="eventActivityFavoriteColor">@color/icon2021_yellow1</item>
         <item name="eventDetailsDefaultBackgroundColor">@color/icon2021_blue3</item>
         <item name="eventTitleBackground">@color/icon2021_blue1</item>
