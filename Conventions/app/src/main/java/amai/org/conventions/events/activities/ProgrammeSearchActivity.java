@@ -61,6 +61,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 	private int totalEventTypeSearchFiltersCount;
 	private int totalCategorySearchFiltersCount;
 	private int totalTagSearchFiltersCount;
+	private int totalEventLocationTypeFiltersCount;
 
 	private AsyncTask<Void, Void, List<ConventionEvent>> currentFilterProcessingTask;
 
@@ -107,10 +108,17 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 		List<SearchFilter> tagFilters = Convention.getInstance().getKeywordsSearchFilters();
 		totalTagSearchFiltersCount = tagFilters.size();
 
+		List<SearchFilter> eventLocationTypeFilters = Convention.getInstance().getEventLocationTypeFilters(getResources());
+		// Only show this filter if there is more than 1 event location type
+		totalEventLocationTypeFiltersCount = eventLocationTypeFilters.size() > 1 ? eventLocationTypeFilters.size() : 0;
+
 		if (searchFilters.size() == 0) {
 			if (hasEventsWithTicketsInfo()) {
 				SearchFilter soldOutFilter = new SearchFilter().withName(getString(R.string.show_sold_out_events)).withType(SearchFilter.Type.Tickets);
 				searchFilters.add(soldOutFilter);
+			}
+			if (eventLocationTypeFilters.size() > 1) {
+				searchFilters.addAll(eventLocationTypeFilters);
 			}
 			searchFilters.addAll(eventTypesSearchFilters);
 			searchFilters.addAll(categoryFilters);
@@ -184,7 +192,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 
 		// In case all (or none) of the filters are active, show an empty filter icon (since we don't apply any filters in such cases)
 		Drawable filterIcon = ContextCompat.getDrawable(this, numberOfActiveFilters == 0
-				|| numberOfActiveFilters == totalCategorySearchFiltersCount + totalEventTypeSearchFiltersCount + totalTagSearchFiltersCount + 1
+				|| numberOfActiveFilters == totalCategorySearchFiltersCount + totalEventTypeSearchFiltersCount + totalTagSearchFiltersCount + totalEventLocationTypeFiltersCount + 1
 				? R.drawable.filter
 				: R.drawable.filter_full);
 		filterIcon.mutate();
@@ -307,6 +315,24 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 				// If the filter is active the user doesn't want to show sold out events
 				if (soldOutTicketsFilter != null) {
 					result &= event.getAvailableTickets() != 0; // tickets<0 means there is no info about the number of tickets
+				}
+
+				if (totalEventLocationTypeFiltersCount > 0) {
+					List<SearchFilter> eventLocationTypeFilters = CollectionUtils.filter(filters, new CollectionUtils.Predicate<SearchFilter>() {
+						@Override
+						public boolean where(SearchFilter filter) {
+							return filter.getType() == SearchFilter.Type.EventLocationType;
+						}
+					});
+					List<String> eventLocationTypes = CollectionUtils.map(eventLocationTypeFilters, new CollectionUtils.Mapper<SearchFilter, String>() {
+						@Override
+						public String map(SearchFilter item) {
+							return item.getName();
+						}
+					});
+					if (eventLocationTypes.size() > 0 && eventLocationTypes.size() < totalEventLocationTypeFiltersCount) {
+						result &= !eventLocationTypes.contains(getResources().getString(event.getEventLocationType().getDescriptionStringId()));
+					}
 				}
 
 				List<SearchFilter> eventTypeFilters = CollectionUtils.filter(filters, new CollectionUtils.Predicate<SearchFilter>() {

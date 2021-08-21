@@ -1,9 +1,8 @@
 package amai.org.conventions.model;
 
-import androidx.annotation.StringRes;
-
 import java.io.Serializable;
 
+import androidx.annotation.StringRes;
 import sff.org.conventions.R;
 
 public class SearchFilter implements Serializable {
@@ -60,6 +59,7 @@ public class SearchFilter implements Serializable {
 
     public enum Type {
         Tickets,
+        EventLocationType,
         EventType,
         Category,
         Tag;
@@ -69,6 +69,8 @@ public class SearchFilter implements Serializable {
             switch (this) {
                 case Tickets:
                     return R.string.tickets;
+                case EventLocationType:
+                    return R.string.search_filter_by_event_location_type;
                 case EventType:
                     return R.string.search_filter_by_event_type;
                 case Category:

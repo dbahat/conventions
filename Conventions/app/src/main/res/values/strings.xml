@@ -47,6 +47,7 @@
     <string name="search_input_search_keyword">הקלד את חיפושך…</string>
     <string name="search_no_results_found">לא נמצאו תוצאות</string>
     <string name="search_filter">סינון</string>
+    <string name="search_filter_by_event_location_type">מיקום האירוע</string>
     <string name="search_filter_by_event_type">סוג האירוע</string>
     <string name="search_filter_by_category">רצועות תוכן</string>
     <string name="search_filter_by_tag">תגיות</string>
@@ -189,6 +190,8 @@
     <string name="last_tickets_available">נותרו כרטיסים אחרונים</string>
     <string name="tickets">כרטיסים</string>
     <string name="show_sold_out_events">אירועים ללא כרטיסים</string>
+    <string name="physical_event">אירוע פיזי</string>
+    <string name="virtual_event">אירוע וירטואלי</string>
     <string name="last_modified">עודכן: %s</string>
     <string name="second_hand">יד שנייה</string>
     <string name="second_hand_no_forms">הוסף את הטפסים שמילאת באתר או במסירת הפריטים לדוכן יד שנייה כדי לראות את מצב הפרטים</string>
