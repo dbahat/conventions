@@ -74,6 +74,8 @@
         <item name="eventTypeNotStartedColor">@color/icon2021_yellow1</item>
         <item name="eventTimeDefaultTextColor">@color/white</item>
         <item name="eventTimeDefaultBackgroundColor">@color/icon2021_yellow1</item>
+        <item name="eventTimeVirtualTextColor">@color/black</item>
+        <item name="eventTimeVirtualBackgroundColor">@color/icon2021_yellow3</item>
         <item name="eventDetailsColorNotStarted">@color/icon2021_yellow1</item>
         <item name="eventDetailsColorCurrent">@color/icon2021_blue1</item>
         <item name="eventDetailsColorEnded">@color/icon2021_blue2</item>

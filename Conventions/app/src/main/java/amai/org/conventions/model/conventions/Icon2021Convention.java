@@ -873,4 +873,12 @@ public class Icon2021Convention extends SffConvention {
 			return null;
 		}
 	}
+
+	@Override
+	public ConventionEvent.EventLocationType getEventLocationType(ConventionEvent event) {
+//		if (HALL_NAME_ESHKOL_2.equals(event.getHall().getName())) {
+//			return ConventionEvent.EventLocationType.VIRTUAL;
+//		};
+		return ConventionEvent.EventLocationType.PHYSICAL;
+	}
 }
