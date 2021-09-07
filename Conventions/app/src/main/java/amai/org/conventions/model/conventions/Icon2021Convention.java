@@ -4,9 +4,6 @@ import android.text.TextUtils;
 
 import com.google.gson.JsonObject;
 
-import java.io.BufferedWriter;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -782,49 +779,32 @@ public class Icon2021Convention extends SffConvention {
 	}
 
 	@Override
-	public HttpURLConnection getUserPurchasedEventsRequest(String user, String password) throws Exception {
-		URL url = new URL("https://api.sf-f.org.il/program/events_per_user.php?slug=" + API_SLUG);
+	public HttpURLConnection getUserPurchasedEventsRequest(String token) throws Exception {
+		URL url = new URL("https://api.sf-f.org.il/program/cod3/events_per_user_sso/?slug=" + API_SLUG);
 		HttpURLConnection request = HttpConnectionCreator.createConnection(url);
-		request.setRequestMethod("POST");
-		request.setDoInput(true);
+		request.setRequestMethod("GET");
+		request.addRequestProperty("Authorization", "Bearer " + token);
 		request.setDoOutput(true);
-		OutputStream os = request.getOutputStream();
-		BufferedWriter writer = null;
-		try {
-			writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-			writer.write("email=" +
-					URLUtils.encodeURLParameterValue(user) + "&pass=" + URLUtils.encodeURLParameterValue(password));
-			writer.flush();
-		} finally {
-			if (writer != null) {
-				writer.close();
-			}
-			os.close();
-		}
 		return request;
 	}
 
 	@Override
-	public HttpURLConnection getUserIDRequest(String user, String password) throws Exception {
-		URL url = new URL("https://api.sf-f.org.il/program/get_user_id.php?slug=" + API_SLUG);
+	public HttpURLConnection getUserIDRequest(String token) throws Exception {
+		URL url = new URL("https://api.sf-f.org.il/program/cod3/get_user_id_sso/?slug=" + API_SLUG);
 		HttpURLConnection request = HttpConnectionCreator.createConnection(url);
-		request.setRequestMethod("POST");
-		request.setDoInput(true);
+		request.setRequestMethod("GET");
+		request.addRequestProperty("Authorization", "Bearer " + token);
 		request.setDoOutput(true);
-		OutputStream os = request.getOutputStream();
-		BufferedWriter writer = null;
-		try {
-			writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-			writer.write("email=" +
-					URLUtils.encodeURLParameterValue(user) + "&pass=" + URLUtils.encodeURLParameterValue(password));
-			writer.flush();
-		} finally {
-			if (writer != null) {
-				writer.close();
-			}
-			os.close();
-		}
 		return request;
+	}
+
+	@Override
+	public URL getOAuthURL() {
+		try {
+			return new URL("https://sso.sf-f.org.il/auth/realms/sf-f/protocol/openid-connect/token");
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 //	@Override

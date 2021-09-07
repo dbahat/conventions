@@ -131,18 +131,33 @@ public class TestConvention extends Convention {
     }
 
     @Override
-    public HttpURLConnection getUserPurchasedEventsRequest(String user, String password) throws Exception {
+    public URL getOAuthURL() {
         return null;
     }
 
     @Override
-    public HttpURLConnection getUserIDRequest(String user, String password) throws Exception {
+    public HttpURLConnection getUserPurchasedEventsRequest(String token) throws Exception {
+        return null;
+    }
+
+    @Override
+    public HttpURLConnection getUserIDRequest(String token) throws Exception {
+        return null;
+    }
+
+    @Override
+    public HttpURLConnection getUserQRRequest(String user) throws Exception {
         return null;
     }
 
     @Override
     public ModelParser getModelParser() {
         return null;
+    }
+
+    @Override
+    public boolean canUserLogin() {
+        return false;
     }
 
     @Override

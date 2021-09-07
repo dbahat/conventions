@@ -44,6 +44,7 @@ import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
+import amai.org.conventions.networking.OAuthAuthentication;
 import amai.org.conventions.notifications.PushNotificationTopicsSubscriber;
 import amai.org.conventions.utils.BundleBuilder;
 import amai.org.conventions.utils.CollectionUtils;
@@ -130,10 +131,11 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 						@Override
 						protected Exception doInBackground(Void... params) {
 							try {
-								newFavoriteEventsNumber = addFavoriteEventsFromWebsite(user, password);
+								String token = OAuthAuthentication.getInstance().authenticate(user, password);
+								newFavoriteEventsNumber = addFavoriteEventsFromWebsite(token);
 								// If we can't get the user ID, still let the user know the events were added
 								try {
-									userId = getUserId(user, password);
+									userId = getUserId(token);
 									ConventionsApplication.settings.setUserId(userId);
 									saveUserQR(user);
 								} catch (Exception ex) {
@@ -182,7 +184,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 								}
 							} else {
 								int messageId = R.string.add_events_failed;
-								if (exception instanceof AuthenticationException) {
+								if (exception instanceof OAuthAuthentication.AuthenticationException) {
 									messageId = R.string.wrong_user_or_password;
 								}
 								Log.e(TAG, exception.getMessage(), exception);
@@ -248,8 +250,8 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		}
 	}
 
-	private int addFavoriteEventsFromWebsite(String user, String password) throws Exception {
-		HttpURLConnection request = Convention.getInstance().getUserPurchasedEventsRequest(user, password);
+	private int addFavoriteEventsFromWebsite(String token) throws Exception {
+		HttpURLConnection request = Convention.getInstance().getUserPurchasedEventsRequest(token);
 		request.connect();
 		InputStreamReader reader = null;
 		boolean changed = false;
@@ -257,7 +259,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		try {
 			int responseCode = request.getResponseCode();
 			if (responseCode == 400 || responseCode == 401) {
-				throw new AuthenticationException();
+				throw new OAuthAuthentication.AuthenticationException();
 			} else if (responseCode != 200) {
 				if (BuildConfig.DEBUG) {
 					BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(request.getErrorStream()));
@@ -298,17 +300,17 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		return newFavoriteEvents;
 	}
 
-	private String getUserId(String user, String password) throws Exception {
-		HttpURLConnection request = Convention.getInstance().getUserIDRequest(user, password);
+	private String getUserId(String token) throws Exception {
+		HttpURLConnection request = Convention.getInstance().getUserIDRequest(token);
 		request.connect();
 		InputStream inputStream = null;
 		BufferedReader reader = null;
 		String userId = null;
 		try {
 			int responseCode = request.getResponseCode();
-			if (responseCode == 400 || responseCode == 401) {
-				throw new AuthenticationException();
-			} else if (responseCode != 200) {
+			if (responseCode == HttpURLConnection.HTTP_UNAUTHORIZED) {
+				throw new OAuthAuthentication.AuthenticationException();
+			} else if (responseCode != HttpURLConnection.HTTP_OK) {
 				if (BuildConfig.DEBUG) {
 					BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(request.getErrorStream()));
 					StringBuilder responseBuilder = new StringBuilder();
@@ -624,6 +626,4 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 			return MyEventsDayFragment.newInstance(getDate(position));
 		}
 	}
-
-	private static class AuthenticationException extends RuntimeException {}
 }
