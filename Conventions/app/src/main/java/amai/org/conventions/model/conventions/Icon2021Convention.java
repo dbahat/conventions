@@ -856,7 +856,7 @@ public class Icon2021Convention extends SffConvention {
 	@Override
 	public URL getEventViewURL(ConventionEvent event) {
 		try {
-			// Only events in eshkol 1-3 are available from the convention website
+			// Only events in eshkol 3-4 are available from the convention website
 			if (HALL_NAME_ESHKOL_3_VIRTUAL.equals(event.getHall().getName())) {
 				return new URL("https://icon2021.virtualcon.org.il/%D7%90%D7%95%D7%9C%D7%9E%D7%95%D7%AA-%D7%94%D7%AA%D7%95%D7%9B%D7%9F/hall1/");
 			} else if (HALL_NAME_ESHKOL_4_VIRTUAL.equals(event.getHall().getName())) {
@@ -871,6 +871,11 @@ public class Icon2021Convention extends SffConvention {
 
 	@Override
 	public ConventionEvent.EventLocationType getEventLocationType(ConventionEvent event) {
+		if (event.getLocationType() == ConventionEvent.EventLocationType.VIRTUAL) {
+			return ConventionEvent.EventLocationType.VIRTUAL;
+		}
+
+		// Some virtual events return as physical from the server because they have a ticket limit (this is a bug)
 		String hallName = event.getHall().getName();
 		if (hallName != null && hallName.endsWith(VIRTUAL_HALL_SUFFIX)) {
 			return ConventionEvent.EventLocationType.VIRTUAL;
