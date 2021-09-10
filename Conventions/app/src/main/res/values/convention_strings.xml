@@ -80,11 +80,11 @@
 <p dir="RTL">כניסה לחניה החל מהשעה 16:30 ועד למחרת ב-06:00 – בעלות 12 ₪ בלבד. יש לקחת עמכם את כרטיס החניה ולהעבירו במקודד הכרטיסים שנמצא משמאל לקופות הסינמטק. ההטבה ניתנת גם ללא קשר לרכישת כרטיסים.</p>
 ]]></string>
     <!-- App accessibility link added and title changed for con accessibility. A link to "this page" was added inside the text (pointing to the website). The rest copied from https://2021.iconfestival.org.il/info/access/ -->
-    <!-- To add: accessible programme link (from the progamme page), accessible map link when they are available. Previously this was:
-<p><a href="https://newprogram.icon.org.il/icon2019/axx/">לתוכניה נגישה</a></p>
+    <!-- To add: accessible map link when it's available. Previously this was:
 <p><a href="http://2019.iconfestival.org.il/%d7%9e%d7%a4%d7%aa-%d7%94%d7%9e%d7%aa%d7%97%d7%9d/">למפה נגישה</a></p>
      -->
     <string name="accessibility_content"><![CDATA[
+<p><a href="https://newprogram.icon.org.il/icon2021/axx/">לתוכניה נגישה</a></p>
 <h1>נגישות באפליקציה</h1>
 <p>מערכת ההפעלה אנדרואיד מאפשרת להפעיל אפשרויות נגישות שונות באפליקציות. <a href="sff.org.conventions://open-accessibility">לחצו כאן להפעלת אפשרויות הנגישות</a>.</p>
 <h1>נגישות במתחם הפסטיבל</h1>
