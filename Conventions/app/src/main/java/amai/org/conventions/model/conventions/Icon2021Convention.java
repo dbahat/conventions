@@ -818,7 +818,7 @@ public class Icon2021Convention extends SffConvention {
 	@Override
 	public URL getAdditionalConventionFeedbackURL() {
 		try {
-			return new URL("https://docs.google.com/forms/d/e/1FAIpQLSd0ppYWffXNunk97MzPXT3qwE2vWhg3D1A2zYDX6VO1GmZdyA/viewform");
+			return new URL("https://docs.google.com/forms/d/e/1FAIpQLSemzbkybjgdigQOBKM625vKAp5-WJY_U64U2ANk5xjgI4CohA/viewform");
 		} catch (Exception e) {
 			return null;
 		}
@@ -827,7 +827,7 @@ public class Icon2021Convention extends SffConvention {
 	@Override
 	public URL getAdditionalEventFeedbackURL(ConventionEvent event) {
 		try {
-			return new URL("https://docs.google.com/forms/d/e/1FAIpQLSfsRaPSOVmkeazFuFCmr2Q319nh8kw0eOxc76YBtGoYF1cz3g/viewform" +
+			return new URL("https://docs.google.com/forms/d/e/1FAIpQLSdalflMANwYLg1YwYzeSmq5HYdgj-vXc3FIXicZncUvH4zMWw/viewform" +
 					"?entry.1572016508=" + URLUtils.encodeURLParameterValue(event.getTitle()) +
 					"&entry.1917108492=" + URLUtils.encodeURLParameterValue(event.getLecturer()) +
 					"&entry.10889808=" + URLUtils.encodeURLParameterValue(event.getHall().getName()) +
