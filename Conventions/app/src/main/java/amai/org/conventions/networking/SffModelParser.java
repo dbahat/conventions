@@ -88,6 +88,8 @@ public class SffModelParser implements ModelParser {
 
 			String websiteUrl = eventObj.get("url").getAsString();
 
+			boolean isVirtual = eventObj.get("is_virtual").getAsBoolean();
+
 			ConventionEvent conventionEvent = new ConventionEvent()
 					.withServerId(eventId)
 					.withTitle(title)
@@ -103,7 +105,9 @@ public class SffModelParser implements ModelParser {
 					.withAvailableTickets(availableTickets)
 					.withTicketsLimit(-1) // Tickets limit is not supported in the new COD API
 					.withTicketsLastModifiedDate(modifiedDate)
-					.withWebsiteUrl(websiteUrl);
+					.withWebsiteUrl(websiteUrl)
+					// Currently an event can be either virtual or physical (and not both or other types)
+					.withLocationType(isVirtual ? ConventionEvent.EventLocationType.VIRTUAL : ConventionEvent.EventLocationType.PHYSICAL);
 
 			eventList.add(conventionEvent);
 		}

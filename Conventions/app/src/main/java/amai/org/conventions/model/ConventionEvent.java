@@ -49,6 +49,7 @@ public class ConventionEvent implements Serializable {
 	private int ticketsLimit = -1; // No ticket info available
 	private Date ticketsLastModifiedDate;
 	private String websiteUrl;
+	private EventLocationType locationType;
 
 	public ConventionEvent() {
 		images = new ArrayList<>();
@@ -327,6 +328,19 @@ public class ConventionEvent implements Serializable {
 
 	public ConventionEvent withWebsiteUrl(String websiteUrl) {
 		setWebsiteUrl(websiteUrl);
+		return this;
+	}
+
+	public EventLocationType getLocationType() {
+		return locationType;
+	}
+
+	public void setLocationType(EventLocationType locationType) {
+		this.locationType = locationType;
+	}
+
+	public ConventionEvent withLocationType(EventLocationType locationType) {
+		setLocationType(locationType);
 		return this;
 	}
 
@@ -699,6 +713,7 @@ public class ConventionEvent implements Serializable {
 		}
 	}
 
+	// This enum must be backwards compatible - don't remove or rename any values from it
 	public enum EventLocationType {
 		PHYSICAL,
 		VIRTUAL;
