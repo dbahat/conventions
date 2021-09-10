@@ -624,7 +624,7 @@ public class EventActivity extends NavigationActivity {
 						protected void onPostExecute(Boolean isSuccess) {
 							// Stop the animation after the next cycle finishes (so it won't jump to the original position)
 							rotateAnimation.setRepeatCount(0);
-							updateTicketsText(event);
+							setupEventTicketsAndPrices(event);
 							if (!isSuccess) {
 								Toast.makeText(EventActivity.this, R.string.update_refresh_failed, Toast.LENGTH_SHORT).show();
 							}
