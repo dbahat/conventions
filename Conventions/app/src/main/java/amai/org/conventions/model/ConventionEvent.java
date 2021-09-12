@@ -74,7 +74,7 @@ public class ConventionEvent implements Serializable {
 		if (textColor != Convention.NO_COLOR) {
 			return textColor;
 		}
-		if (this.getEventLocationType() == EventLocationType.VIRTUAL) {
+		if (Convention.getInstance().getEventLocationType(this) == EventLocationType.VIRTUAL) {
 			return ThemeAttributes.getColor(context, R.attr.eventTimeVirtualTextColor);
 		}
 		return ThemeAttributes.getColor(context, R.attr.eventTimeDefaultTextColor);
@@ -191,7 +191,7 @@ public class ConventionEvent implements Serializable {
 		if (eventTypeColor != Convention.NO_COLOR) {
 			return eventTypeColor;
 		}
-		if (this.getEventLocationType() == EventLocationType.VIRTUAL) {
+		if (Convention.getInstance().getEventLocationType(this) == EventLocationType.VIRTUAL) {
 			return ThemeAttributes.getColor(context, R.attr.eventTimeVirtualBackgroundColor);
 		}
 		return ThemeAttributes.getColor(context, R.attr.eventTimeDefaultBackgroundColor);
@@ -331,6 +331,7 @@ public class ConventionEvent implements Serializable {
 		return this;
 	}
 
+	/** Use Convention.getInstance().getEventLocationType(event) */
 	public EventLocationType getLocationType() {
 		return locationType;
 	}
@@ -408,11 +409,6 @@ public class ConventionEvent implements Serializable {
 		}
 		return new Date(getEndTime().getTime() + diff);
 	}
-
-	public EventLocationType getEventLocationType() {
-		return Convention.getInstance().getEventLocationType(this);
-	}
-
 
 	public Spanned getSpannedDescription() {
 		String eventDescription = this.getDescription();

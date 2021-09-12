@@ -301,6 +301,8 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 		events = CollectionUtils.filter(events, new CollectionUtils.Predicate<ConventionEvent>() {
 			@Override
 			public boolean where(ConventionEvent event) {
+				// filters - list of currently active filters (active filter = unchecked)
+				// result - should we keep the event
 				boolean result = true;
 				if (keywordsFilter != null && keywordsFilter.length() > 0) {
 					result = containsKeywords(event);
@@ -331,7 +333,9 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 						}
 					});
 					if (eventLocationTypes.size() > 0 && eventLocationTypes.size() < totalEventLocationTypeFiltersCount) {
-						result &= !eventLocationTypes.contains(getResources().getString(event.getEventLocationType().getDescriptionStringId()));
+						ConventionEvent.EventLocationType eventLocationType = Convention.getInstance().getEventLocationType(event);
+						// Only keep events with a location type, if only certain location types are requested
+						result &= eventLocationType != null && !eventLocationTypes.contains(getResources().getString(eventLocationType.getDescriptionStringId()));
 					}
 				}
 
