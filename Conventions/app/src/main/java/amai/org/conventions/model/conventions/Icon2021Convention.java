@@ -67,8 +67,8 @@ public class Icon2021Convention extends SffConvention {
 	private static final String HALL_NAME_IRONI_6_VIRTUAL = "עירוני 6 (וירטואלי)";
 	private static final String HALL_NAME_IRONI_7 = "עירוני 7";
 	private static final String HALL_NAME_IRONI_7_VIRTUAL = "עירוני 7 (וירטואלי)";
-	private static final String HALL_NAME_IRONI_8_VIRTUAL = "עירוני 9 (וירטואלי)";
-	private static final String HALL_NAME_IRONI_9_VIRTUAL = "עירוני 8 (וירטואלי)";
+	private static final String HALL_NAME_IRONI_8_VIRTUAL = "עירוני 8 (וירטואלי)";
+	private static final String HALL_NAME_IRONI_9_VIRTUAL = "עירוני 9 (וירטואלי)";
 //	private static final String HALL_NAME_ARTEMIS = "ארטמיס";
 //	private static final String HALL_NAME_MINIATURES_1 = "מיניאטורות 1";
 //	private static final String HALL_NAME_MINIATURES_2 = "מיניאטורות 2";
@@ -78,7 +78,6 @@ public class Icon2021Convention extends SffConvention {
 //	private static final String HALL_NAME_GAMES_2 = "משחקים 2";
 //	private static final String HALL_NAME_GAMES_3 = "משחקים 3";
 //	private static final String HALL_NAME_GAMES_4 = "משחקים 4";
-	private static final String VIRTUAL_HALL_SUFFIX = "(וירטואלי)";
 
 	private static final String API_SLUG = "icon2021";
 	private static final String TEST_API_SLUG = "test_con";
@@ -871,15 +870,6 @@ public class Icon2021Convention extends SffConvention {
 
 	@Override
 	public ConventionEvent.EventLocationType getEventLocationType(ConventionEvent event) {
-		if (event.getLocationType() == ConventionEvent.EventLocationType.VIRTUAL) {
-			return ConventionEvent.EventLocationType.VIRTUAL;
-		}
-
-		// Some virtual events return as physical from the server because they have a ticket limit (this is a bug)
-		String hallName = event.getHall().getName();
-		if (hallName != null && hallName.endsWith(VIRTUAL_HALL_SUFFIX)) {
-			return ConventionEvent.EventLocationType.VIRTUAL;
-		};
-		return ConventionEvent.EventLocationType.PHYSICAL;
+		return event.getLocationType();
 	}
 }
