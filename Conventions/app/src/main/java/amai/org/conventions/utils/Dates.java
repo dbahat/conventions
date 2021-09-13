@@ -24,7 +24,7 @@ public class Dates {
 	private static Date getInitialDate() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm", Dates.getLocale());
 		try {
-			return dateFormat.parse("30.03.2021 17:10");
+			return dateFormat.parse("22.09.2021 18:10");
 		} catch (ParseException e) {
 			throw new RuntimeException(e);
 		}

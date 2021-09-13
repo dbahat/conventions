@@ -857,9 +857,9 @@ public class Icon2021Convention extends SffConvention {
 		try {
 			// Only events in eshkol 3-4 are available from the convention website
 			if (HALL_NAME_ESHKOL_3_VIRTUAL.equals(event.getHall().getName())) {
-				return new URL("https://icon2021.virtualcon.org.il/%D7%90%D7%95%D7%9C%D7%9E%D7%95%D7%AA-%D7%94%D7%AA%D7%95%D7%9B%D7%9F/hall1/");
+				return new URL("https://icon2021.virtualcon.org.il/room-a");
 			} else if (HALL_NAME_ESHKOL_4_VIRTUAL.equals(event.getHall().getName())) {
-				return new URL("https://icon2021.virtualcon.org.il/%D7%90%D7%95%D7%9C%D7%9E%D7%95%D7%AA-%D7%94%D7%AA%D7%95%D7%9B%D7%9F/hall2/");
+				return new URL("https://icon2021.virtualcon.org.il/room-b");
 			} else {
 				return null;
 			}
