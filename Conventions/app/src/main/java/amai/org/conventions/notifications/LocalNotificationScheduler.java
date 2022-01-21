@@ -134,10 +134,8 @@ public class LocalNotificationScheduler {
 	private void scheduleAlarm(long time, PendingIntent pendingIntent, Accuracy accuracy) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && accuracy != Accuracy.INACCURATE) {
 			scheduleAlarmWhileInDoze(time, pendingIntent);
-		} else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-			scheduleInaccurateAlarm(time, pendingIntent, accuracy);
 		} else {
-			scheduleAlarm(time, pendingIntent);
+			scheduleInaccurateAlarm(time, pendingIntent, accuracy);
 		}
 	}
 

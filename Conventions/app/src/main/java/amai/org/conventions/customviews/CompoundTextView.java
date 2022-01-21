@@ -1,6 +1,5 @@
 package amai.org.conventions.customviews;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Point;
@@ -32,7 +31,6 @@ public class CompoundTextView extends TextView {
 		init(context, attrs, defStyleAttr, 0);
 	}
 
-	@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 	public CompoundTextView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
 		super(context, attrs, defStyleAttr, defStyleRes);
 		init(context, attrs, defStyleAttr, defStyleRes);
