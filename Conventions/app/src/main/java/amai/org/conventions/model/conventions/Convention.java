@@ -66,6 +66,7 @@ public abstract class Convention implements Serializable {
 	private List<Update> updates;
 	private Map<String, Update> updatesById;
 	private Map<String, ConventionEvent.UserInput> userInput;
+	private Calendar[] eventDates;
 	private Survey feedback;
 	private FeedbackForm conventionFeedbackForm;
 	private EventFeedbackForm eventFeedbackForm;
@@ -205,7 +206,11 @@ public abstract class Convention implements Serializable {
 	}
 
 	public int getLengthInDays() {
-		return (int) ((endDate.getTime().getTime() - startDate.getTime().getTime()) / Dates.MILLISECONDS_IN_DAY) + 1;
+		return getEventDates().length;
+	}
+
+	public Calendar[] getEventDates() {
+		return eventDates;
 	}
 
 	public String getId() {
@@ -241,6 +246,7 @@ public abstract class Convention implements Serializable {
 		try {
 			this.events = events;
 			updateUserInputFromEvents();
+			updateEventDates();
 		} finally {
 			eventLockObject.writeLock().unlock();
 		}
@@ -298,6 +304,25 @@ public abstract class Convention implements Serializable {
 			}
 		}
 		// currently not removing outdated user input for deleted events
+	}
+
+	private void updateEventDates() {
+		Set<Calendar> foundDates = new HashSet<>();
+		for (ConventionEvent event : events) {
+			Calendar eventStartTime = Dates.toCalendar(event.getStartTime());
+			Calendar eventDate = Dates.createDate(eventStartTime.get(Calendar.YEAR), eventStartTime.get(Calendar.MONTH), eventStartTime.get(Calendar.DATE));
+			foundDates.add(eventDate);
+		}
+
+		// We can't not show any dates. If there are no events, the day will be empty but at least it will be displayed.
+		if (foundDates.isEmpty()) {
+			foundDates.add(Convention.getInstance().getStartDate());
+		}
+
+		eventDates = foundDates.toArray(new Calendar[]{});
+
+		// Sort the found event dates
+		Arrays.sort(eventDates);
 	}
 
 	protected ConventionEvent.UserInput createUserInputForEvent(ConventionEvent event) {

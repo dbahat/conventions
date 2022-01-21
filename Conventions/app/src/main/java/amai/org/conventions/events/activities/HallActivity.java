@@ -54,16 +54,15 @@ public class HallActivity extends NavigationActivity {
 	private void setupDays(int dateIndexToSelect) {
 		TabLayout daysTabLayout = (TabLayout) findViewById(R.id.hall_days_tabs);
 		daysPager = (ViewPager) findViewById(R.id.hall_days_pager);
-		Calendar startDate = Convention.getInstance().getStartDate();
-		Calendar endDate = Convention.getInstance().getEndDate();
 
-		int days = (int) ((endDate.getTime().getTime() - startDate.getTime().getTime()) / Dates.MILLISECONDS_IN_DAY) + 1;
+		int days = Convention.getInstance().getLengthInDays();
 		if (days == 1) {
 			daysTabLayout.setVisibility(View.GONE);
 		}
 
 		// Setup view pager
-		daysPager.setAdapter(new HallDayAdapter(getSupportFragmentManager(), Convention.getInstance().getStartDate(), days));
+		HallDayAdapter adapter = new HallDayAdapter(getSupportFragmentManager(), Convention.getInstance().getEventDates());
+		daysPager.setAdapter(adapter);
 		daysPager.setOffscreenPageLimit(days); // Load all dates for smooth scrolling
 
 		// Setup tabs
@@ -72,14 +71,7 @@ public class HallActivity extends NavigationActivity {
 		int selectedDateIndex = dateIndexToSelect;
 		// Find the current date's index if requested
 		if (dateIndexToSelect == SELECT_CURRENT_DATE) {
-			Calendar currDate = Calendar.getInstance();
-			Calendar today = Dates.toCalendar(Dates.now());
-			int i = 0;
-			for (currDate.setTime(startDate.getTime()); !currDate.after(endDate); currDate.add(Calendar.DATE, 1), ++i) {
-				if (Dates.isSameDate(currDate, today)) {
-					selectedDateIndex = i;
-				}
-			}
+			selectedDateIndex = adapter.getItemToDisplayForDate(Dates.toCalendar(Dates.now()));
 		}
 
 		// Default - first day
@@ -97,8 +89,8 @@ public class HallActivity extends NavigationActivity {
 	}
 
 	private class HallDayAdapter extends DayFragmentAdapter {
-		public HallDayAdapter(FragmentManager fm, Calendar startDate, int days) {
-			super(fm, startDate, days);
+		public HallDayAdapter(FragmentManager fm, Calendar[] eventDates) {
+			super(fm, eventDates);
 		}
 
 		@Override

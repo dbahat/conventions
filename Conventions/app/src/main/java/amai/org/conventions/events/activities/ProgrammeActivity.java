@@ -93,7 +93,8 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 
 		// Setup view pager
 		int delay = getIntent().getIntExtra(EXTRA_DELAY_SCROLLING, 0);
-		daysPager.setAdapter(new ProgrammeDayAdapter(getSupportFragmentManager(), delay, Convention.getInstance().getStartDate(), days));
+		ProgrammeDayAdapter adapter = new ProgrammeDayAdapter(getSupportFragmentManager(), delay, Convention.getInstance().getEventDates());
+		daysPager.setAdapter(adapter);
 		daysPager.setOffscreenPageLimit(days); // Load all dates for smooth scrolling
 
 		// Setup tabs
@@ -102,17 +103,7 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 		int selectedDateIndex = dateIndexToSelect;
 		// Find the current date's index if requested
 		if (dateIndexToSelect == SELECT_CURRENT_DATE) {
-			Calendar currDate = Calendar.getInstance();
-			Calendar today = Dates.toCalendar(Dates.now());
-
-			Calendar startDate = Convention.getInstance().getStartDate();
-			Calendar endDate = Convention.getInstance().getEndDate();
-			int i = 0;
-			for (currDate.setTime(startDate.getTime()); !currDate.after(endDate); currDate.add(Calendar.DATE, 1), ++i) {
-				if (Dates.isSameDate(currDate, today)) {
-					selectedDateIndex = i;
-				}
-			}
+			selectedDateIndex = adapter.getItemToDisplayForDate(Dates.toCalendar(Dates.now()));
 		}
 
 		// Default - first day
@@ -251,8 +242,8 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 	private class ProgrammeDayAdapter extends DayFragmentAdapter {
 		private final int delayScrolling;
 
-		public ProgrammeDayAdapter(FragmentManager fm, int delayAnimation, Calendar startDate, int days) {
-			super(fm, startDate, days);
+		public ProgrammeDayAdapter(FragmentManager fm, int delayAnimation, Calendar[] eventDates) {
+			super(fm, eventDates);
 			this.delayScrolling = delayAnimation;
 		}
 
