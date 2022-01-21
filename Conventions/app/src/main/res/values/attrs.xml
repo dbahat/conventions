@@ -58,6 +58,8 @@
         <attr name="eventKeywordHighlightColor" format="color|reference"/>
         <attr name="eventTimeDefaultTextColor" format="color|reference"/>
         <attr name="eventTimeDefaultBackgroundColor" format="color|reference"/>
+        <attr name="eventTimeVirtualTextColor" format="color|reference"/>
+        <attr name="eventTimeVirtualBackgroundColor" format="color|reference"/>
         <attr name="eventTimeAlwaysUseDefaultBackgroundColor" format="boolean"/>
         <attr name="eventFavoriteIcon" format="integer|reference"/>
         <attr name="eventNonFavoriteColor" format="color|reference"/>

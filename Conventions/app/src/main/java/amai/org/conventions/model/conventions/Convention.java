@@ -1,6 +1,7 @@
 package amai.org.conventions.model.conventions;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 
 import java.io.Serializable;
@@ -67,6 +68,7 @@ public abstract class Convention implements Serializable {
 	private Map<String, Update> updatesById;
 	private Map<String, ConventionEvent.UserInput> userInput;
 	private Calendar[] eventDates;
+	private List<ConventionEvent.EventLocationType> eventLocationTypes;
 	private Survey feedback;
 	private FeedbackForm conventionFeedbackForm;
 	private EventFeedbackForm eventFeedbackForm;
@@ -213,6 +215,10 @@ public abstract class Convention implements Serializable {
 		return eventDates;
 	}
 
+	public List<ConventionEvent.EventLocationType> getEventLocationTypes() {
+		return eventLocationTypes;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -247,6 +253,7 @@ public abstract class Convention implements Serializable {
 			this.events = events;
 			updateUserInputFromEvents();
 			updateEventDates();
+			updateEventLocationTypes();
 		} finally {
 			eventLockObject.writeLock().unlock();
 		}
@@ -323,6 +330,14 @@ public abstract class Convention implements Serializable {
 
 		// Sort the found event dates
 		Arrays.sort(eventDates);
+	}
+
+	private void updateEventLocationTypes() {
+		Set<ConventionEvent.EventLocationType> locationTypes = new HashSet<>();
+		for (ConventionEvent event : events) {
+			locationTypes.add(event.getEventLocationType());
+		}
+		eventLocationTypes = new ArrayList<>(locationTypes);
 	}
 
 	protected ConventionEvent.UserInput createUserInputForEvent(ConventionEvent event) {
@@ -580,6 +595,24 @@ public abstract class Convention implements Serializable {
 		});
 	}
 
+	public List<SearchFilter> getEventLocationTypeFilters(Resources resources) {
+		List<SearchFilter> filters = CollectionUtils.map(getEventLocationTypes(), new CollectionUtils.Mapper<ConventionEvent.EventLocationType, SearchFilter>() {
+			@Override
+			public SearchFilter map(ConventionEvent.EventLocationType item) {
+				return new SearchFilter().withName(resources.getString(item.getDescriptionStringId())).withType(SearchFilter.Type.EventLocationType);
+			}
+		});
+
+		Collections.sort(filters, new Comparator<SearchFilter>() {
+			@Override
+			public int compare(SearchFilter searchFilter, SearchFilter other) {
+				return searchFilter.getName().compareTo(other.getName());
+			}
+		});
+
+		return filters;
+	}
+
 	public List<SearchCategory> getAggregatedEventTypesSearchCategories(Context context) {
 		List<SearchCategory> categories = new LinkedList<>();
 		final AggregatedEventTypes aggregatedEventTypes = new AggregatedEventTypes();
@@ -728,5 +761,9 @@ public abstract class Convention implements Serializable {
 
 	public URL getEventViewURL(ConventionEvent event) {
 		return null;
+	}
+
+	public ConventionEvent.EventLocationType getEventLocationType(ConventionEvent event) {
+		return ConventionEvent.EventLocationType.PHYSICAL;
 	}
 }

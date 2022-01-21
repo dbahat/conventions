@@ -25,6 +25,7 @@ import amai.org.conventions.networking.AmaiModelConverter;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.HtmlParser;
 import amai.org.conventions.utils.Objects;
+import androidx.annotation.StringRes;
 import fi.iki.kuitsi.listtest.ListTagHandler;
 
 public class ConventionEvent implements Serializable {
@@ -63,6 +64,9 @@ public class ConventionEvent implements Serializable {
 	public int getTextColor(Context context) {
 		if (textColor != AmaiModelConverter.NO_COLOR) {
 			return textColor;
+		}
+		if (this.getEventLocationType() == EventLocationType.VIRTUAL) {
+			return ThemeAttributes.getColor(context, R.attr.eventTimeVirtualTextColor);
 		}
 		return ThemeAttributes.getColor(context, R.attr.eventTimeDefaultTextColor);
 	}
@@ -183,6 +187,9 @@ public class ConventionEvent implements Serializable {
 		if (eventTypeColor != AmaiModelConverter.NO_COLOR) {
 			return eventTypeColor;
 		}
+		if (this.getEventLocationType() == EventLocationType.VIRTUAL) {
+			return ThemeAttributes.getColor(context, R.attr.eventTimeVirtualBackgroundColor);
+		}
 		return ThemeAttributes.getColor(context, R.attr.eventTimeDefaultBackgroundColor);
 	}
 
@@ -288,6 +295,10 @@ public class ConventionEvent implements Serializable {
 			return null;
 		}
 		return new Date(getEndTime().getTime() + diff);
+	}
+
+	public EventLocationType getEventLocationType() {
+		return Convention.getInstance().getEventLocationType(this);
 	}
 
 
@@ -585,6 +596,22 @@ public class ConventionEvent implements Serializable {
 		@Override
 		public int hashCode() {
 			return Objects.hash(attending);
+		}
+	}
+
+	public enum EventLocationType {
+		PHYSICAL,
+		VIRTUAL;
+
+		@StringRes
+		public int getDescriptionStringId() {
+			switch (this) {
+				case PHYSICAL:
+					return R.string.physical_event;
+				case VIRTUAL:
+					return R.string.virtual_event;
+			}
+			throw new RuntimeException("missing description for event location type " + this.toString());
 		}
 	}
 }

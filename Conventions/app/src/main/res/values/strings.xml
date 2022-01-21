@@ -49,6 +49,7 @@
     <string name="search_input_search_keyword">הקלד את חיפושך…</string>
     <string name="search_no_results_found">לא נמצאו תוצאות</string>
     <string name="search_filter">סינון</string>
+    <string name="search_filter_by_event_location_type">מיקום האירוע</string>
     <string name="search_filter_by_event_type">סוג האירוע</string>
     <string name="search_filter_by_category">רצועות תוכן</string>
     <string name="search_filter_by_tag">תגיות</string>
@@ -181,6 +182,8 @@
     <string name="home_current_event_view_possible">לחץ לצפיה באירוע!</string>
     <string name="event_not_found">האירוע לא נמצא</string>
     <string name="tickets">כרטיסים</string>
+    <string name="physical_event">אירוע פיזי</string>
+    <string name="virtual_event">אירוע וירטואלי</string>
     <string name="notification_channel_description_reminders">תזכורות הקשורות לאירועים שסימנת בתוכניה</string>
 
     <string name="accessibility">נגישות</string>
