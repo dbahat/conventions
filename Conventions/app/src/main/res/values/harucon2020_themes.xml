@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppBaseTheme.Harucon2020.Toolbar" parent="AppBaseTheme.Harucon2020"/>
-
     <style name="AppBaseTheme.Harucon2020" parent="AppBaseTheme.Dark">
         <!-- Sub-themes -->
         <item name="android:dialogTheme">@style/AppDialogTheme.Harucon2020</item>
@@ -9,6 +7,7 @@
         <!-- not using android:actionOverflowButtonStyle since it doesn't seem to work in Jellybean -->
         <item name="actionOverflowButtonStyle">@style/OverflowMenu.Harucon2020</item>
         <!-- General -->
+        <item name="android:colorPrimaryDark">@color/black</item> <!-- Toolbar color -->
         <item name="colorAccent">@color/harucon2020_dark_blue</item>
         <item name="android:textColorPrimary">@android:color/white</item>
         <item name="android:textColorSecondary">@android:color/white</item>
@@ -139,7 +138,7 @@
         <item name="fabOnProgrammeTop">true</item>
     </style>
 
-    <style name="AppBaseTheme.Harucon2020.Toolbar.Event" parent="AppBaseTheme.Harucon2020.Toolbar">
+    <style name="AppBaseTheme.Harucon2020.Event" parent="AppBaseTheme.Harucon2020">
         <item name="android:textColorLink">@color/harucon2020_red</item>
     </style>
 
@@ -157,7 +156,7 @@
         <item name="android:textColorPrimary">@android:color/black</item>
     </style>
 
-    <style name="AppBaseTheme.Harucon2020.Toolbar.Splash">
+    <style name="AppBaseTheme.Harucon2020.Splash">
         <item name="android:windowBackground">@drawable/harucon2020_splash</item>
     </style>
 
