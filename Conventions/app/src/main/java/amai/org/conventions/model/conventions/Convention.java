@@ -700,4 +700,8 @@ public abstract class Convention implements Serializable {
 	public URL getAdditionalEventFeedbackURL(ConventionEvent event) {
 		return null;
 	}
+
+	public URL getEventViewURL(ConventionEvent event) {
+		return null;
+	}
 }

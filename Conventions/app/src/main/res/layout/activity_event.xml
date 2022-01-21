@@ -109,53 +109,80 @@
                     tools:text="time" />
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/event_vote_opener_container"
-                style="@style/EventDescriptionBox.Vote"
-                android:visibility="visible"
-                tools:visibility="visible"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical">
-                <TextView
-                    android:id="@+id/event_vote_description"
-                    style="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="?attr/eventVoteTextColor"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/survey_vote_details" />
+			<LinearLayout
+				android:id="@+id/event_vote_opener_container"
+				style="@style/EventDescriptionBox.Vote"
+				android:visibility="visible"
+				tools:visibility="visible"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_marginTop="10dp"
+				android:orientation="vertical">
+				<LinearLayout
+					android:id="@+id/event_view_layout"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical">
+					<TextView
+						android:id="@+id/event_view_description"
+						style="@style/TextAppearance.AppCompat.Subhead"
+						android:textColor="?attr/eventVoteTextColor"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:text="@string/event_view_details" />
+					<Button
+						android:id="@+id/event_view_button"
+						android:layout_gravity="center"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						style="@style/HighlightedButton"
+						android:enabled="true"
+						android:text="@string/view_event" />
+				</LinearLayout>
+				<LinearLayout
+					android:id="@+id/event_vote_opener_layout"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical">
+					<TextView
+						android:id="@+id/event_vote_description"
+						style="@style/TextAppearance.AppCompat.Subhead"
+						android:textColor="?attr/eventVoteTextColor"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:text="@string/survey_vote_details" />
 
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center">
+					<FrameLayout
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center">
 
-                    <Button
-                        android:id="@+id/event_open_vote_survey_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style="@style/HighlightedButton"
-                        android:enabled="true"
-                        android:text="@string/to_vote_survey" />
+						<Button
+							android:id="@+id/event_open_vote_survey_button"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							style="@style/HighlightedButton"
+							android:enabled="true"
+							android:text="@string/to_vote_survey" />
 
-                    <!-- this progress bar gets un-hidden in runtime when the button is clicked -->
-                    <ProgressBar
-                        android:id="@+id/event_open_vote_survey_progress_bar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone" />
+						<!-- this progress bar gets un-hidden in runtime when the button is clicked -->
+						<ProgressBar
+							android:id="@+id/event_open_vote_survey_progress_bar"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:visibility="gone" />
 
-                </FrameLayout>
+					</FrameLayout>
 
-                <TextView
-                    android:id="@+id/event_vote_note"
-                    style="@style/TextAppearance.AppCompat.Body2"
-                    android:textColor="?attr/eventVoteTextColor"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/survey_vote_note" />
-            </LinearLayout>
+					<TextView
+						android:id="@+id/event_vote_note"
+						style="@style/TextAppearance.AppCompat.Body2"
+						android:textColor="?attr/eventVoteTextColor"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:text="@string/survey_vote_note" />
+				</LinearLayout>
+			</LinearLayout>
 
 
             <LinearLayout

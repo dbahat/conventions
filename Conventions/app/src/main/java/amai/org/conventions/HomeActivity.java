@@ -88,6 +88,23 @@ public class HomeActivity extends NavigationActivity {
 		}
 	}
 
+	private boolean setupVoteOrViewText(ConventionEvent currentEvent, TextView textView) {
+		if (currentEvent.getUserInput().getVoteSurvey() != null || Convention.getInstance().getEventViewURL(currentEvent) != null) {
+			if (Convention.getInstance().getEventViewURL(currentEvent) == null) {
+				textView.setText(R.string.home_current_event_vote_possible);
+			} else if (currentEvent.getUserInput().getVoteSurvey() == null) {
+				textView.setText(R.string.home_current_event_view_possible);
+			} else {
+				textView.setText(R.string.home_current_event_vote_or_view_possible);
+			}
+			textView.setVisibility(View.VISIBLE);
+			return true;
+		} else {
+			textView.setVisibility(View.GONE);
+			return false;
+		}
+	}
+
 	private void setContentWithUpcomingFavorites(ConventionEvent currentEvent, ConventionEvent upcomingEvent) {
 		setInfoBoxContent(R.layout.home_box_during_convention);
 
@@ -112,11 +129,7 @@ public class HomeActivity extends NavigationActivity {
 			// if there's a current event, show it as well
 			if (currentEvent != null) {
 				currentEventTitle.setText(getString(R.string.home_now_showing, currentEvent.getTitle()));
-				if (currentEvent.getUserInput().getVoteSurvey() != null) {
-					currentEventVoteText.setVisibility(View.VISIBLE);
-				} else {
-					currentEventVoteText.setVisibility(View.GONE);
-				}
+				setupVoteOrViewText(currentEvent, currentEventVoteText);
 			} else {
 				currentEventContainer.setVisibility(View.GONE);
 			}
@@ -130,11 +143,9 @@ public class HomeActivity extends NavigationActivity {
 			upcomingEventHall.setText(currentEvent.getHall().getName());
 			upcomingEventHall.setTextColor(ThemeAttributes.getColor(this, R.attr.homeCurrentEventText));
 			upcomingEventContainer.setBackground(ThemeAttributes.getDrawable(this, R.attr.homeCurrentEventOnlyBackground));
-			if (currentEvent.getUserInput().getVoteSurvey() != null) {
-				upcomingEventVoteText.setVisibility(View.VISIBLE);
+			boolean isVisible = setupVoteOrViewText(currentEvent, upcomingEventVoteText);
+			if (isVisible) {
 				upcomingEventVoteText.setTextColor(ThemeAttributes.getColor(this, R.attr.homeCurrentEventText));
-			} else {
-				upcomingEventVoteText.setVisibility(View.GONE);
 			}
 
 			// In this case, we want the 'go to my events' to go to the programme instead, since the user has no more favorite events.
