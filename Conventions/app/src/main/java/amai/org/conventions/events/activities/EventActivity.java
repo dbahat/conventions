@@ -480,12 +480,29 @@ public class EventActivity extends NavigationActivity {
 	}
 
 	private void setEvent(ConventionEvent event) {
+		boolean showLocationTypeSeparator = true;
 		TextView type = (TextView) findViewById(R.id.event_type);
 		if (event.getType() == null || TextUtils.isEmpty(event.getType().getDescription())) {
+			showLocationTypeSeparator = false;
 			type.setVisibility(View.GONE);
 		} else {
 			type.setText(event.getType().getDescription());
 		}
+
+
+		TextView locationType = findViewById(R.id.event_location_type);
+		ConventionEvent.EventLocationType eventLocationType = Convention.getInstance().getEventLocationType(event);
+		if (eventLocationType != null && Convention.getInstance().getEventLocationTypes().size() > 1) {
+			locationType.setText(eventLocationType.getDescriptionStringId());
+		} else {
+			showLocationTypeSeparator = false;
+			locationType.setVisibility(View.GONE);
+		}
+
+		if (!showLocationTypeSeparator) {
+			findViewById(R.id.event_type_and_location_type_separator).setVisibility(View.GONE);
+		}
+
 		TextView title = (TextView) findViewById(R.id.event_title);
 		title.setText(event.getTitle());
 

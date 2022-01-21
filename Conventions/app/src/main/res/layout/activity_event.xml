@@ -43,6 +43,12 @@
 
             <LinearLayout
                 style="@style/EventDetailsHeaderBox">
+				<LinearLayout
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:gravity="center_horizontal"
+					android:layout_gravity="center_horizontal">
                 <TextView
                     android:id="@+id/event_type"
                     android:textColor="?eventTitleTextColor"
@@ -52,6 +58,24 @@
                     tools:text="Event Type"
                     android:gravity="center"
                     />
+					<TextView
+						android:id="@+id/event_type_and_location_type_separator"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:gravity="center_horizontal"
+						android:text="@string/dash_with_spaces"
+						style="@style/TextAppearance.AppCompat.Small"
+						android:textColor="?eventTitleTextColor"/>
+					<TextView
+						android:id="@+id/event_location_type"
+						android:textColor="?eventTitleTextColor"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						style="@style/TextAppearance.AppCompat.Small"
+						tools:text="Event Location Type"
+						android:gravity="center"
+						/>
+				</LinearLayout>
                 <TextView
                     android:id="@+id/event_title"
                     style="@style/TextAppearance.AppCompat.Headline"
