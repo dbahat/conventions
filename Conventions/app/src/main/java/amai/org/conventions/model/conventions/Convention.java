@@ -335,7 +335,9 @@ public abstract class Convention implements Serializable {
 	private void updateEventLocationTypes() {
 		Set<ConventionEvent.EventLocationType> locationTypes = new HashSet<>();
 		for (ConventionEvent event : events) {
-			locationTypes.add(event.getEventLocationType());
+			if (this.getEventLocationType(event) != null) {
+				locationTypes.add(this.getEventLocationType(event));
+			}
 		}
 		eventLocationTypes = new ArrayList<>(locationTypes);
 	}
