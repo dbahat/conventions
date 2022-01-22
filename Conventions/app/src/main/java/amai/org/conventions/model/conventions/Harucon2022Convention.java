@@ -178,7 +178,7 @@ public class Harucon2022Convention extends AmaiConvention {
 	@Override
 	protected URL initModelURL() {
 		try {
-			return new URL("https://harucon.org.il/2022/wp-admin/admin-ajax.php?action=get_event_list");
+			return new URL("https://harucon.org.il/2020/wp-admin/admin-ajax.php?action=get_event_list");
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
@@ -186,84 +186,21 @@ public class Harucon2022Convention extends AmaiConvention {
 
 	@Override
 	protected ImageIdToImageResourceMapper initImageMapper() {
-		ImageIdToImageResourceMapper imageMapper = new ImageIdToImageResourceMapper();
 
-		imageMapper
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/54398045_2304783192875510_4248499860140982272_o-e1579101907870.jpg", R.drawable.event_cosplay)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/GuyTamir.jpg", R.drawable.event_guytamir)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/nami.jpg", R.drawable.event_nami)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/Amaidol.jpg", R.drawable.event_amaidol)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/Calligraphy.jpg", R.drawable.event_calligraphy)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/DalitBloch.jpg", R.drawable.event_dalitbloch)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/DannyOrbach.jpg", R.drawable.event_dannyorbach)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/EfratPahima.jpg", R.drawable.event_efratpahima)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/EranBenAsher.jpg", R.drawable.event_eranbenasher)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/GuyLenman1.jpg", R.drawable.event_guylenman1)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/HapoelTokyo.jpg", R.drawable.event_hapoeltokyo)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/Hikari.jpg", R.drawable.event_hikarigreen)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/InbarEitan.jpg", R.drawable.event_inbareitan)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/Japaneasy.png", R.drawable.event_japaneasy)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/KerenHaim.jpg", R.drawable.event_kerenhaim)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/KristinaMartynenko.jpg", R.drawable.event_kristinamartynenko)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/LeahUchitel.jpg", R.drawable.event_leahuchitel)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/LironAfriat.jpg", R.drawable.event_lironafriat)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/Manga.png", R.drawable.event_manga)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/MatanKachel-scaled.jpg", R.drawable.event_matankachel)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/MichalLevin.jpg", R.drawable.event_michallevin)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/NirGerber.jpg", R.drawable.event_nirgerber)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/OdedCohen.jpg", R.drawable.event_odedcohen)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/OmerCohen.jpg", R.drawable.event_omercohen)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/OmerKedem.jpg", R.drawable.event_omerkedem)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/OmerMessinger-scaled.jpg", R.drawable.event_omermessinger)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/OmerRozencwieg.jpg", R.drawable.event_omerrozencwieg)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/OraRakov.jpg", R.drawable.event_orarakov)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/PazGlebotzki.jpg", R.drawable.event_pazglebotzki)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/PieceOfMind.jpg", R.drawable.event_pieceofmind)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/RanWolf.jpg", R.drawable.event_ranwolf)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/RazGreenberg.jpg", R.drawable.event_razgreenberg)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/KimiNami.jpg", R.drawable.event_rideyourwave)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/RomanLempert.jpg", R.drawable.event_romanlempert)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/SheliVikniansky.jpg", R.drawable.event_shelivikniansky)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/TalHazan.jpg", R.drawable.event_talhazan)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/YaelStein.jpg", R.drawable.event_yaelstein)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/YoutubePanel.jpg", R.drawable.event_youtubepanel)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/69382648_611083972753199_4254163118118141952_o.jpg", R.drawable.event_runway)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2019/12/GameMangaCafe.jpg", R.drawable.event_manga_cafe)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/LeonSalomon.jpeg", R.drawable.event_leonsalomon)
-				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/02/SemLecture.jpg", R.drawable.event_semlectureapp)
+		// In case the convention has custom images per event, map them like this
+//		imageMapper
+//				.addMapping("https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/GuyTamir.jpg", R.drawable.event_guytamir)
+//		;
 
-		;
 
-		imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.harucon2020_event_default_background);
+		// In case the convention has Excluded IDs images per event, map them like this
+//		imageMapper.addExcludedIds(
+//				// Games room
+//				"https://harucon.org.il/2020/wp-content/uploads/sites/21/2019/07/IMG_3812.png"
+//		);
 
-		// Excluded IDs - mostly for debug purposes (don't show messages about these when entering an event that has them)
-		imageMapper.addExcludedIds(
-				// Games room
-				"https://harucon.org.il/2020/wp-content/uploads/sites/21/2019/07/IMG_3812.png",
-				"https://harucon.org.il/2020/wp-content/uploads/sites/21/2019/12/GameGunpla.jpg",
-				"https://harucon.org.il/2020/wp-content/uploads/sites/21/2019/12/GameBoard.jpg",
-				"https://harucon.org.il/2020/wp-content/uploads/sites/21/2019/12/GameGo.jpg",
-				"https://harucon.org.il/2020/wp-content/uploads/sites/21/2019/12/GameNinjaWar.jpg",
-				// Ride your wave unused pictures
-				"https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/Mr.MasaakiYuasa_photo.jpg",
-				"https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/Kiminami_0161718.jpg",
-				"https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/Nami_c295.jpg",
-				"https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/Nami_c142_01.jpg",
-				"https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/Nami_c313_01.jpg",
-				// Amaidol unused pictures
-				"https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/Arielle.png",
-				"https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/Aviv.png",
-				"https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/43462148_2050555078367760_2980978848436322304_o.jpg",
-				"https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/photo_2019-12-21_21-24-40.jpg",
-				// Runway unused pictures
-				"https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/03-ירדן-לבני.png",
-				// Cosplay unused pictures
-				"https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/01-בוריס-רודמן.png",
-				"https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/02-מעיין-אלבז.png",
-				"https://harucon.org.il/2020/wp-content/uploads/sites/21/2020/01/57504481_2350322358321593_8123707843250487296_o.jpg"
-		);
-
-		return imageMapper;
+		return new ImageIdToImageResourceMapper()
+				.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.harucon2022_event_default_background);
 	}
 
 	@Override
