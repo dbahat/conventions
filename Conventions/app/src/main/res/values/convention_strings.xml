@@ -15,7 +15,7 @@
     <string name="my_events_no_data">הוסף אירוע לאירועים שלי ע\"י לחיצה על הכוכב בדף האירוע או ברשימת האירועים</string>
 
     <!-- Relevant to this specific convention -->
-    <string name="app_name">הארוקון 2020</string>
+    <string name="app_name">הארוקון 2022</string>
     <string name="amaidol_name_question">איך קוראים לך?</string>
     <string name="amaidol_vote_question">מי המתמודד/ת החביב/ה עליך?</string>
     <string name="about_content"><![CDATA[אמא\"י – ארגון מנגה ואנימה ישראל. הארגון הוקם במאי 2007 על ידי קבוצת חברים בקהילת חובבי המנגה, אנימה ותרבות יפן ופועל למען קהילת חובבים זו.]]></string>
@@ -25,8 +25,8 @@
 <p><a href="https://harucon.org.il/2020/%d7%90%d7%9e%d7%a0%d7%99-%d7%94%d7%9b%d7%a0%d7%a1/">אמני הכנס</a></p>
 ]]></string>
     <string name="about_app_content"><![CDATA[
-האפליקציה פותחה עבור כנס הארוקון 2020.<br/>בקשות והצעות ניתן לכתוב <a href="market://details?id=amai.org.conventions">בדף האפליקציה בחנות</a>.
-<p><a href="http://cami.org.il/2019/app-privacy/">למדיניות הפרטיות של האפליקציה</a></p>
+האפליקציה פותחה עבור כנס הארוקון 2022.<br/>בקשות והצעות ניתן לכתוב <a href="market://details?id=amai.org.conventions">בדף האפליקציה בחנות</a>.
+<p><a href="http://cami.org.il/2022/app-privacy/">למדיניות הפרטיות של האפליקציה</a></p>
 ]]></string>
     <!-- Copied from https://harucon.org.il/2020/%d7%9e%d7%99%d7%a7%d7%95%d7%9d-%d7%95%d7%93%d7%a8%d7%9b%d7%99-%d7%94%d7%92%d7%a2%d7%94/ -->
     <string name="arrival_method_description"><![CDATA[

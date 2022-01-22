@@ -13,7 +13,7 @@ import java.util.List;
 import amai.org.conventions.map.MapActivity;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.MapLocation;
-import amai.org.conventions.model.conventions.Harucon2020Convention;
+import amai.org.conventions.model.conventions.Harucon2022Convention;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.CollectionUtils;
@@ -46,7 +46,7 @@ public class AccessibilityActivity extends NavigationActivity {
                 }
                 case "open-map-in-parent-room": {
                     ConventionMap map = Convention.getInstance().getMap();
-                    List<MapLocation> locations = map.findLocationsByName(Harucon2020Convention.PARENTS_ROOM_NAME);
+                    List<MapLocation> locations = map.findLocationsByName(Harucon2022Convention.PARENTS_ROOM_NAME);
                     int[] locationIds = CollectionUtils.mapToInt(locations, MapLocation::getId);
                     Bundle floorBundle = new Bundle();
                     floorBundle.putIntArray(MapActivity.EXTRA_MAP_LOCATION_IDS, locationIds);

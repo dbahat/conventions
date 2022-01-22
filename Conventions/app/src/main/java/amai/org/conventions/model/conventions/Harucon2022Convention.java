@@ -1,5 +1,7 @@
 package amai.org.conventions.model.conventions;
 
+import androidx.annotation.Nullable;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
@@ -25,9 +27,8 @@ import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.networking.SurveyDataRetriever;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
-import androidx.annotation.Nullable;
 
-public class Harucon2020Convention extends AmaiConvention {
+public class Harucon2022Convention extends AmaiConvention {
 	// Hall names
 	private static final String MAIN_HALL_NAME = "אולם ראשי";
 	private static final String SCHWARTZ_NAME = "אודיטוריום שוורץ";
@@ -99,18 +100,18 @@ public class Harucon2020Convention extends AmaiConvention {
 	protected Calendar initDate() {
 		Calendar date = Calendar.getInstance();
 		date.clear();
-		date.set(2020, Calendar.MARCH, 10);
+		date.set(2022, Calendar.MARCH, 17);
 		return date;
 	}
 
 	@Override
 	protected String initID() {
-		return "Harucon2020";
+		return "Harucon2022";
 	}
 
 	@Override
 	protected String initDisplayName() {
-		return "הארוקון 2020";
+		return "הארוקון 2022";
 	}
 
 	@Override
@@ -147,7 +148,7 @@ public class Harucon2020Convention extends AmaiConvention {
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_LECTURER_QUALITY, "entry.1327236956")
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_SIMILAR_EVENTS, "entry.1416969956")
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_ADDITIONAL_INFO, "entry.1582215667")
-					.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSdNt0smJ77qdnLdZuX53m6YqBXxW7fKxzn2n-3EnW7zQIbTZg/formResponse"));
+					.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSdYbpAdyjPiwDYWY3GrJKTvf4uwkUSZ97YEhkyQdUPOlF3gKA/formResponse"));
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
@@ -167,7 +168,7 @@ public class Harucon2020Convention extends AmaiConvention {
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_MAP_SIGNS, "entry.1416969956")
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_CONFLICTING_EVENTS, "entry.1582215667")
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_IMPROVEMENT, "entry.993320932")
-					.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSfWhoCDzTz83jA87HGEudl1nnBlQoURifdvllPxwZBX6uA-Pw/formResponse"));
+					.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSde5_3LNnhJhRDlhU-pyVUQR3ENYCQpCA-PzVitLcKZ_MgR_A/formResponse"));
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
@@ -177,7 +178,7 @@ public class Harucon2020Convention extends AmaiConvention {
 	@Override
 	protected URL initModelURL() {
 		try {
-			return new URL("https://harucon.org.il/2020/wp-admin/admin-ajax.php?action=get_event_list");
+			return new URL("https://harucon.org.il/2022/wp-admin/admin-ajax.php?action=get_event_list");
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
