@@ -17,10 +17,10 @@
         android:background="?eventTimeHeaderBackground"
         android:layout_marginTop="?eventTimeHeaderMarginTop"
         android:layout_marginBottom="?eventTimeHeaderMarginBottom"
-        android:paddingStart="30dp"
-        android:paddingEnd="30dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp">
+        android:paddingStart="?eventTimeHeaderPaddingHorizontal"
+        android:paddingEnd="?eventTimeHeaderPaddingHorizontal"
+        android:paddingTop="?eventTimeHeaderPaddingVertical"
+        android:paddingBottom="?eventTimeHeaderPaddingVertical">
 
         <TextView
             android:id="@+id/event_time_text_view"

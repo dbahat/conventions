@@ -171,7 +171,7 @@ public class EventView extends FrameLayout {
         Drawable currentStateDrawable = isAttending ? attendingDrawable : notAttendingDrawable;
 
         if (attendingDrawable instanceof ColorDrawable) {
-        favoriteIcon.setImageDrawable(ThemeAttributes.getDrawable(getContext(), R.attr.eventFavoriteIcon));
+            favoriteIcon.setImageDrawable(ThemeAttributes.getDrawable(getContext(), R.attr.eventFavoriteIcon));
             favoriteIcon.setColorFilter(((ColorDrawable) currentStateDrawable).getColor(), PorterDuff.Mode.SRC_ATOP);
         } else {
             favoriteIcon.setImageDrawable(currentStateDrawable);
@@ -234,9 +234,9 @@ public class EventView extends FrameLayout {
 		if (isNotificationAlarmScheduled(event, EventNotification.Type.AboutToStart) ||
 				isNotificationAlarmScheduled(event, EventNotification.Type.FeedbackReminder)) {
 			alarmIcon.setVisibility(VISIBLE);
-            Drawable favDrawable = ThemeAttributes.getDrawable(getContext(), R.attr.eventFavoriteColor);
-            if (favDrawable instanceof ColorDrawable) {
-                alarmIcon.setColorFilter(((ColorDrawable) favDrawable).getColor());
+            Drawable alertColorDrawable = ThemeAttributes.getDrawable(getContext(), R.attr.eventAlertsIconColor);
+            if (alertColorDrawable instanceof ColorDrawable) {
+                alarmIcon.setColorFilter(((ColorDrawable) alertColorDrawable).getColor());
             }
         } else {
             alarmIcon.setVisibility(GONE);

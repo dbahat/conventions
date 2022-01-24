@@ -46,6 +46,7 @@
         <!-- Add a space with weight=1 to ensure the image is at the very bottom
              (because using gravity=bottom with vertical linear layout doesn't work) -->
         <Space
+            android:visibility="?navigationPopupSpaceVisibility"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"/>
@@ -55,6 +56,7 @@
             android:layout_height="wrap_content"
             android:paddingStart="?navigationPopupBottomImageMargins"
             android:paddingEnd="?navigationPopupBottomImageMargins"
+            android:layout_marginTop="?navigationPopupBottomImageTopMargin"
             android:src="?navigationPopupBottomImage"/>
     </LinearLayout>
 

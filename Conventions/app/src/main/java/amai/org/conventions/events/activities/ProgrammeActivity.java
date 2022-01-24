@@ -57,7 +57,7 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 		setToolbarTitle(getResources().getString(R.string.programme_title));
 		removeForeground();
 
-		setupActionButton(R.drawable.ic_action_search, new View.OnClickListener() {
+		setupActionButton(ThemeAttributes.getDrawable(this, R.attr.actionButtonIcon), new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				navigateToActivity(ProgrammeSearchActivity.class, false, null);
