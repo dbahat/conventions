@@ -22,7 +22,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -47,7 +46,6 @@ import amai.org.conventions.notifications.PushNotification;
 import amai.org.conventions.notifications.PushNotificationDialogPresenter;
 import amai.org.conventions.settings.SettingsActivity;
 import amai.org.conventions.updates.UpdatesActivity;
-import amai.org.conventions.utils.BundleBuilder;
 
 import static amai.org.conventions.notifications.PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION;
 
@@ -177,8 +175,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 
 	private void initializeNavigationDrawer() {
 		navigationTopButtonsLayout.setNavigationItems(this, Arrays.asList(
-				new NavigationItem(AboutActivity.class, getString(R.string.about), ContextCompat.getDrawable(this, R.drawable.harucon2020_about)),
-				new NavigationItem(SettingsActivity.class, getString(R.string.settings), ContextCompat.getDrawable(this, R.drawable.harucon2020_settings))
+				new NavigationItem(SettingsActivity.class, getString(R.string.settings), ContextCompat.getDrawable(this, R.drawable.harucon2022_settings))
 		));
 
 		final List<NavigationItem> items = new ArrayList<>(Arrays.asList(
@@ -198,6 +195,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 			items.add(new NavigationItem(FeedbackActivity.class, getString(R.string.feedback), ContextCompat.getDrawable(this, R.drawable.feedback_menu_icon)));
 		}
 		items.add(new NavigationItem(AccessibilityActivity.class, getString(R.string.accessibility), ContextCompat.getDrawable(this, R.drawable.baseline_accessibility_new_white_18)));
+		items.add(new NavigationItem(AboutActivity.class, getString(R.string.about), ContextCompat.getDrawable(this, R.drawable.ic_action_about)));
 
 		ListView navigationItems = (ListView) findViewById(R.id.navigation_items);
 		navigationItems.setAdapter(new NavigationItemsAdapter(this, items));
