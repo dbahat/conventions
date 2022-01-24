@@ -236,9 +236,9 @@ public class EventView extends FrameLayout {
 		if (isNotificationAlarmScheduled(event, EventNotification.Type.AboutToStart) ||
 				isNotificationAlarmScheduled(event, EventNotification.Type.FeedbackReminder)) {
 			alarmIcon.setVisibility(VISIBLE);
-            Drawable favDrawable = ThemeAttributes.getDrawable(getContext(), R.attr.eventFavoriteColor);
-            if (favDrawable instanceof ColorDrawable) {
-                alarmIcon.setColorFilter(((ColorDrawable) favDrawable).getColor());
+            Drawable alertColorDrawable = ThemeAttributes.getDrawable(getContext(), R.attr.eventAlertsIconColor);
+            if (alertColorDrawable instanceof ColorDrawable) {
+                alarmIcon.setColorFilter(((ColorDrawable) alertColorDrawable).getColor());
             }
 		} else {
 			alarmIcon.setVisibility(GONE);

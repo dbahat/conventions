@@ -25,6 +25,7 @@
         <!-- Activities -->
         <attr name="activitiesBackground" format="color|reference"/>
         <attr name="actionButtonColor" format="color|reference"/>
+        <attr name="actionButtonIcon" format="integer|reference"/>
         <attr name="hintTextColor" format="color|reference"/>
         <attr name="separatorColor" format="color|reference"/>
         <attr name="eventStartMargin" format="dimension"/>
@@ -65,6 +66,7 @@
         <attr name="eventNonFavoriteColor" format="color|reference"/>
         <attr name="eventFavoriteColor" format="color|reference"/>
         <attr name="eventAlertsIcon" format="integer|reference"/>
+        <attr name="eventAlertsIconColor" format="integer|reference"/>
         <attr name="eventDetailsColorEnded" format="color|reference"/>
         <attr name="eventDetailsColorCurrent" format="color|reference"/>
         <attr name="eventDetailsColorNotStarted" format="color|reference"/>
@@ -91,8 +93,12 @@
         <attr name="homeMessageText" format="color|reference"/>
         <attr name="homeCurrentEventText" format="color|reference"/>
         <attr name="homeEventTimeText" format="color|reference"/>
+        <attr name="homeEventHallText" format="color|reference"/>
         <attr name="homeCurrentEventBackground" format="color|reference"/>
         <attr name="homeUpcomingEventBackground" format="color|reference"/>
+        <attr name="homeUpcomingPadding" format="dimension"/>
+        <attr name="homeUpcomingPaddingTop" format="dimension"/>
+        <attr name="homeUpcomingMarginBottom" format="dimension"/>
         <attr name="homeCurrentEventOnlyBackground" format="color|reference"/>
         <attr name="homeEventNameInList" format="color|reference"/>
         <attr name="homeEventsListDivider" format="color|reference"/>
@@ -113,6 +119,10 @@
         <attr name="navigationPopupBackground" format="color|reference"/>
         <attr name="navigationPopupTitle" format="integer|reference"/>
         <attr name="navigationPopupBottomImage" format="integer|reference"/>
+        <attr name="navigationPopupSpaceVisibility" format="integer|reference">
+            <enum name="visible" value="0" />
+            <enum name="gone" value="2" />
+        </attr>
         <attr name="navigationPopupTopSelectedColor" format="color|reference"/>
         <attr name="navigationPopupTopNotSelectedColor" format="color|reference"/>
         <attr name="navigationPopupSelectedColor" format="color|reference"/>
@@ -126,6 +136,7 @@
         <attr name="navigationPopupItemPaddingBottom" format="dimension" />
         <attr name="navigationPopupTitleMargins" format="dimension"/>
         <attr name="navigationPopupBottomImageMargins" format="dimension"/>
+        <attr name="navigationPopupBottomImageTopMargin" format="dimension"/>
         <attr name="navigationItemsShouldDisplayIcon" format="boolean"/>
         <!-- Updates Screen -->
         <attr name="updateTimeColor" format="color|reference"/>
@@ -158,6 +169,7 @@
         <attr name="eventDescriptionBoxColor" format="color|reference"/>
         <attr name="eventDescriptionTextColor" format="color|reference"/>
         <attr name="eventTitleBackground" format="integer|reference"/>
+        <attr name="eventTitlePadding" format="dimension"/>
         <attr name="eventTitleTextColor" format="color|reference"/>
         <attr name="eventDetailsTextColor" format="color|reference"/>
         <attr name="eventDetailsHighlightedTextColor" format="color|reference"/>
@@ -171,9 +183,10 @@
         <attr name="eventActivityFavoriteColor" format="color|reference"/>
         <!-- Buttons -->
         <attr name="highlightedButtonBackground" format="integer|reference"/>
-        <attr name="highlightedButtonTextColor" format="integer|reference"/>
+        <attr name="buttonTextColor" format="integer|reference"/>
         <attr name="buttonColor" format="color|reference"/>
         <attr name="buttonColorPressed" format="color|reference"/>
+        <attr name="buttonColorDisabled" format="color|reference"/>
         <attr name="borderlessButtonColor" format="color|reference"/>
         <attr name="feedbackButtonColor" format="color|reference"/>
         <attr name="feedbackAnswerButtonColor" format="color|reference"/>
@@ -188,6 +201,8 @@
         <attr name="eventTimeHeaderAlwaysUseDefaultTextColor" format="boolean"/>
         <attr name="eventTimeHeaderMarginTop" format="dimension" />
         <attr name="eventTimeHeaderMarginBottom" format="dimension" />
+        <attr name="eventTimeHeaderPaddingHorizontal" format="dimension" />
+        <attr name="eventTimeHeaderPaddingVertical" format="dimension"/>
         <attr name="marginBetweenEventsListAndNextHeader" format="dimension" />
         <attr name="fabOnProgrammeTop" format="boolean"/>
         <attr name="searchCategoriesColor" format="color|reference" />

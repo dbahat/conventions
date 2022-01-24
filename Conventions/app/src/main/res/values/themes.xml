@@ -20,9 +20,11 @@
         <item name="swipeToRefreshBackgroundColor">@color/white</item>
         <item name="stickyListHeadersListViewStyle">@style/Widget.AppCompat.ListView</item>
         <item name="activitiesBackground">@null</item>
+        <item name="highlightedButtonBackground">@drawable/highlighted_button</item>
         <item name="actionButtonColor">?colorAccent</item>
+        <item name="actionButtonIcon">@drawable/ic_action_search</item>
         <item name="borderlessButtonColor">?buttonColor</item>
-        <item name="highlightedButtonTextColor">@color/white</item>
+        <item name="buttonTextColor">@color/white</item>
         <item name="eventStartMargin">0dp</item>
         <item name="eventEndMargin">0dp</item>
         <item name="contentStartMargin">0dp</item>
@@ -41,6 +43,8 @@
         <item name="eventTimeHeaderAlwaysUseDefaultTextColor">true</item>
         <item name="eventTimeHeaderMarginTop">10dp</item>
         <item name="eventTimeHeaderMarginBottom">0dp</item>
+        <item name="eventTimeHeaderPaddingHorizontal">30dp</item>
+        <item name="eventTimeHeaderPaddingVertical">5dp</item>
         <item name="eventTypeEndedColor">@color/gray</item>
         <item name="eventTypeCurrentColor">@color/light_yellow</item>
         <item name="eventTypeNotStartedColor">@color/white</item>
@@ -56,10 +60,13 @@
         <item name="eventFeedbackColorOverride">@android:color/transparent</item>
         <item name="eventFavoriteIcon">@drawable/ic_star_black_24dp</item>
         <item name="eventAlertsIcon">@drawable/ic_action_alarms</item>
+        <item name="eventAlertsIconColor">?eventFavoriteColor</item>
 
         <!-- Navigation popup -->
         <item name="navigationPopupSeparatorColor">?navigationPopupNotSelectedColor</item>
+        <item name="navigationPopupSpaceVisibility">visible</item>
         <item name="navigationPopupBottomImageMargins">31dp</item>
+        <item name="navigationPopupBottomImageTopMargin">0dp</item>
         <item name="navigationPopupTitleMargins">16dp</item>
         <item name="navigationPopupTitleWidth">match_parent</item>
         <item name="navigationItemsShouldDisplayIcon">true</item>
@@ -76,6 +83,7 @@
         <item name="homeButtonsSideMargin">0dp</item>
         <item name="homeSingleButtonStyle">@style/HomeButton.Single</item>
         <item name="homeEventTimeText">?homeMessageText</item>
+        <item name="homeEventHallText">?homeMessageText</item>
         <item name="homeCurrentEventText">?homeMessageText</item>
         <item name="homeCurrentEventOnlyBackground">?homeCurrentEventBackground</item>
         <item name="homeEventsListDivider">@drawable/home_event_list_divider</item>
@@ -85,6 +93,9 @@
         <item name="homeFrameBottomMargin">?homeFrameMargins</item>
         <item name="homeShowButtons">true</item>
         <item name="homeTitleSize">32sp</item>
+        <item name="homeUpcomingPadding">5dp</item>
+        <item name="homeUpcomingPaddingTop">8dp</item>
+        <item name="homeUpcomingMarginBottom">8dp</item>
 
         <!-- About -->
         <item name="aboutLogoMargins">36dp</item>
@@ -115,6 +126,7 @@
         <item name="eventDetailsHighlightedTextColor">?eventDetailsTextColor</item>
         <item name="feedbackButtonColor">?borderlessButtonColor</item>
         <item name="eventTitleTextColor">?android:textColorPrimary</item>
+        <item name="eventTitlePadding">8dp</item>
         <item name="eventFeedbackTextColor">?attr/eventDescriptionTextColor</item>
         <item name="eventFeedbackAnswerColor">?feedbackAnswerButtonColor</item>
         <item name="eventFeedbackSelectedAnswerColor">?feedbackAnswerButtonSelectedColor</item>
@@ -170,9 +182,11 @@
         <item name="swipeToRefreshBackgroundColor">@color/white</item>
         <item name="stickyListHeadersListViewStyle">@style/Widget.AppCompat.ListView</item>
         <item name="activitiesBackground">@null</item>
+        <item name="highlightedButtonBackground">@drawable/highlighted_button</item>
         <item name="actionButtonColor">?colorAccent</item>
+        <item name="actionButtonIcon">@drawable/ic_action_search</item>
         <item name="borderlessButtonColor">?buttonColor</item>
-        <item name="highlightedButtonTextColor">@color/white</item>
+        <item name="buttonTextColor">@color/white</item>
         <item name="eventStartMargin">0dp</item>
         <item name="eventEndMargin">0dp</item>
         <item name="contentStartMargin">0dp</item>
@@ -191,6 +205,8 @@
         <item name="eventTimeHeaderAlwaysUseDefaultTextColor">true</item>
         <item name="eventTimeHeaderMarginTop">10dp</item>
         <item name="eventTimeHeaderMarginBottom">0dp</item>
+        <item name="eventTimeHeaderPaddingHorizontal">30dp</item>
+        <item name="eventTimeHeaderPaddingVertical">5dp</item>
         <item name="eventTypeEndedColor">@color/gray</item>
         <item name="eventTypeCurrentColor">@color/light_yellow</item>
         <item name="eventTypeNotStartedColor">@color/white</item>
@@ -206,10 +222,13 @@
         <item name="eventFeedbackColorOverride">@android:color/transparent</item>
         <item name="eventFavoriteIcon">@drawable/ic_star_black_24dp</item>
         <item name="eventAlertsIcon">@drawable/ic_action_alarms</item>
+        <item name="eventAlertsIconColor">?eventFavoriteColor</item>
 
         <!-- Navigation popup -->
         <item name="navigationPopupSeparatorColor">?navigationPopupNotSelectedColor</item>
+        <item name="navigationPopupSpaceVisibility">visible</item>
         <item name="navigationPopupBottomImageMargins">31dp</item>
+        <item name="navigationPopupBottomImageTopMargin">0dp</item>
         <item name="navigationPopupTitleMargins">16dp</item>
         <item name="navigationPopupTitleWidth">match_parent</item>
         <item name="navigationItemsShouldDisplayIcon">true</item>
@@ -226,6 +245,7 @@
         <item name="homeButtonsSideMargin">0dp</item>
         <item name="homeSingleButtonStyle">@style/HomeButton.Single</item>
         <item name="homeEventTimeText">?homeMessageText</item>
+        <item name="homeEventHallText">?homeMessageText</item>
         <item name="homeCurrentEventText">?homeMessageText</item>
         <item name="homeCurrentEventOnlyBackground">?homeCurrentEventBackground</item>
         <item name="homeEventsListDivider">@drawable/home_event_list_divider</item>
@@ -235,6 +255,9 @@
         <item name="homeFrameBottomMargin">?homeFrameMargins</item>
         <item name="homeShowButtons">true</item>
         <item name="homeTitleSize">32sp</item>
+        <item name="homeUpcomingPadding">5dp</item>
+        <item name="homeUpcomingPaddingTop">8dp</item>
+        <item name="homeUpcomingMarginBottom">8dp</item>
 
         <!-- About -->
         <item name="aboutLogoMargins">36dp</item>
@@ -265,6 +288,7 @@
         <item name="eventDetailsHighlightedTextColor">?eventDetailsTextColor</item>
         <item name="feedbackButtonColor">?borderlessButtonColor</item>
         <item name="eventTitleTextColor">?android:textColorPrimary</item>
+        <item name="eventTitlePadding">8dp</item>
         <item name="eventFeedbackTextColor">?attr/eventDescriptionTextColor</item>
         <item name="eventFeedbackAnswerColor">?feedbackAnswerButtonColor</item>
         <item name="eventFeedbackSelectedAnswerColor">?feedbackAnswerButtonSelectedColor</item>

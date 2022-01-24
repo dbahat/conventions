@@ -286,8 +286,8 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		}
 	}
 
-	protected void setupActionButton(int imageResource, View.OnClickListener listener) {
-		actionButton.setImageResource(imageResource);
+	protected void setupActionButton(Drawable image, View.OnClickListener listener) {
+		actionButton.setImageDrawable(image);
 		actionButton.setOnClickListener(listener);
 		actionButton.setVisibility(View.VISIBLE);
 	}

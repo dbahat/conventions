@@ -81,7 +81,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		setToolbarAndContentContainerBackground(ThemeAttributes.getDrawable(this, R.attr.mapBackground));
 		setToolbarBackground(ThemeAttributes.getDrawable(this, R.attr.mapToolbarColor));
 		if (map.getLocations().size() > 0) {
-			setupActionButton(R.drawable.ic_action_search, new View.OnClickListener() {
+			setupActionButton(ThemeAttributes.getDrawable(this, R.attr.actionButtonIcon), new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					toggleSearch();
