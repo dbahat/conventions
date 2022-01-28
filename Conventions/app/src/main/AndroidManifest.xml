@@ -40,11 +40,11 @@
         android:installLocation="auto"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppBaseTheme.Harucon2020">
+        android:theme="@style/AppBaseTheme.Harucon2022">
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppBaseTheme.Harucon2020.Splash">
+            android:theme="@style/AppBaseTheme.Harucon2022.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -58,7 +58,7 @@
         <activity android:name=".map.MapActivity" />
         <activity
             android:name=".events.activities.EventActivity"
-            android:theme="@style/AppBaseTheme.Harucon2020.Event"
+            android:theme="@style/AppBaseTheme.Harucon2022.Event"
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".ArrivalMethodsActivity" />
         <activity

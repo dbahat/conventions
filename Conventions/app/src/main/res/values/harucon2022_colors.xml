@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="harucon2022_light_blue">#6886ce</color>
+    <color name="harucon2022_red">#c72741</color>
+    <color name="harucon2022_dark_blue">#000b41</color>
+    <color name="harucon2022_light_yellow">#ffebc1</color>
+    <color name="harucon2022_dark_red">#a32442</color>
+    <color name="harucon2022_pink">#dd756c</color>
+    <color name="harucon2022_purple">#3c256d</color>
+    <color name="harucon2022_blue">#1c55a2</color>
+    <color name="harucon2022_green">#a7c80f</color>
+
+    <color name="harucon2022_transparent_dark_blue">#cc000b41</color>
+    <color name="harucon2022_gray_blue">#2b2f41</color>
+</resources>
