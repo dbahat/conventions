@@ -24,7 +24,7 @@ public class Dates {
 	private static Date getInitialDate() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm", Dates.getLocale());
 		try {
-			return dateFormat.parse("10.03.2020 12:10");
+			return dateFormat.parse("17.03.2022 12:10");
 		} catch (ParseException e) {
 			throw new RuntimeException(e);
 		}
@@ -37,14 +37,6 @@ public class Dates {
 		// Used for testing
 		// Fixed startup date
 //        return new Date(System.currentTimeMillis() - appStartDate.getTime() + initialDate.getTime());
-
-		// Current time at the convention's start date
-//	    Calendar currDate = Calendar.getInstance();
-//		Calendar conventionStartDate = Convention.getInstance().getStartDate();
-//		currDate.set(conventionStartDate.get(Calendar.YEAR),
-//				conventionStartDate.get(Calendar.MONTH),
-//				conventionStartDate.get(Calendar.DAY_OF_MONTH));
-//	    return currDate.getTime();
 	}
 
 	public static Calendar toCalendar(Date date) {
