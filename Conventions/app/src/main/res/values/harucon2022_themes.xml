@@ -128,7 +128,7 @@
         <item name="updateItemBorder">@color/harucon2022_light_yellow</item>
         <item name="updateItemSeparator">@color/harucon2022_light_yellow</item>
         <item name="updateTextColor">@color/harucon2022_dark_blue</item>
-        <item name="newUpdateTextColor">@color/harucon2022_light_yellow</item>
+        <item name="newUpdateTextColor">@color/white</item>
         <item name="newUpdateBackground">@null</item>
         <item name="focusedUpdateTextColor">@color/harucon2022_dark_blue</item>
         <item name="focusedUpdateBackground">@color/harucon2022_dark_red</item>

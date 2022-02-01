@@ -117,7 +117,7 @@ public class Harucon2022Convention extends AmaiConvention {
 	@Override
 	protected URL initUpdatesURL() {
 		try {
-			return new URL("https://amai.org.il/wp-content/plugins/GetHaruconFeed.php");
+			return new URL("https://harucon.org.il/2022/wp-content/plugins/get-harucon-feed.php");
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
