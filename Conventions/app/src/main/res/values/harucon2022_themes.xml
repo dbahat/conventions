@@ -122,6 +122,13 @@
         <item name="conventionFeedbackTextColor">@color/harucon2022_dark_blue</item>
         <item name="feedbackAnswerButtonColor">@color/harucon2022_purple</item>
         <item name="feedbackAnswerButtonSelectedColor">@color/harucon2022_light_yellow</item>
+        <item name="feedbackMultiAnswerBackgroundSelected">@drawable/harucon2022_feedback_selected_answer_bg</item>
+        <item name="feedbackMultiAnswerBackgroundNotSelected">@drawable/harucon2022_feedback_answer_bg</item>
+        <item name="feedbackMultiAnswerPaddingTopBottom">4dp</item>
+        <item name="feedbackMultiAnswerPaddingStartEnd">9dp</item>
+        <item name="feedbackMultiAnswerPaddingStartFirstAnswer">9dp</item>
+        <item name="feedbackMultiAnswerMarginTopBottom">2dp</item>
+        <item name="feedbackMultiAnswerMarginBetweenAnswers">9dp</item>
         <!-- Updates Screen -->
         <item name="updateTimeColor">@android:color/transparent</item>
         <item name="updateTimeBackground">@null</item>
