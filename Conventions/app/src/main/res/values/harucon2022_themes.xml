@@ -145,9 +145,9 @@
         <item name="eventTitleBackground">@drawable/harucon2022_frame_bg</item>
         <item name="eventTitlePadding">@null</item>
         <item name="eventTitleTextColor">@color/harucon2022_light_yellow</item>
-        <item name="eventDetailsBoxColor">@color/harucon2022_transparent_dark_blue</item>
+        <item name="eventDetailsBoxColor">@android:color/transparent</item>
         <item name="eventFeedbackBoxColor">@color/harucon2022_dark_red</item>
-        <item name="eventVoteBoxColor">@color/harucon2022_dark_red</item>
+        <item name="eventVoteBoxColor">@color/harucon2022_blue</item>
         <item name="eventVoteTextColor">@color/harucon2022_light_yellow</item>
         <item name="eventDescriptionBoxColor">@color/harucon2022_transparent_dark_blue</item>
         <item name="feedbackButtonColor">@color/harucon2022_light_yellow</item>
