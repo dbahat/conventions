@@ -139,7 +139,13 @@
 
         <!-- Feedback activity -->
         <item name="conventionFeedbackTextColor">?eventTitleTextColor</item>
-        <item name="feedbackMultiAnswerPadding">4.5dp</item>
+        <item name="feedbackMultiAnswerBackgroundSelected">@null</item>
+        <item name="feedbackMultiAnswerBackgroundNotSelected">@null</item>
+        <item name="feedbackMultiAnswerPaddingTopBottom">4.5dp</item>
+        <item name="feedbackMultiAnswerPaddingStartEnd">18dp</item>
+        <item name="feedbackMultiAnswerPaddingStartFirstAnswer">0dp</item>
+        <item name="feedbackMultiAnswerMarginTopBottom">0dp</item>
+        <item name="feedbackMultiAnswerMarginBetweenAnswers">0dp</item>
 
         <!-- Programme Activity -->
         <item name="marginBetweenEventsListAndNextHeader">20dp</item>
@@ -285,7 +291,13 @@
 
         <!-- Feedback activity -->
         <item name="conventionFeedbackTextColor">?eventTitleTextColor</item>
-        <item name="feedbackMultiAnswerPadding">4.5dp</item>
+        <item name="feedbackMultiAnswerBackgroundSelected">@null</item>
+        <item name="feedbackMultiAnswerBackgroundNotSelected">@null</item>
+        <item name="feedbackMultiAnswerPaddingTopBottom">4.5dp</item>
+        <item name="feedbackMultiAnswerPaddingStartEnd">18dp</item>
+        <item name="feedbackMultiAnswerPaddingStartFirstAnswer">0dp</item>
+        <item name="feedbackMultiAnswerMarginTopBottom">0dp</item>
+        <item name="feedbackMultiAnswerMarginBetweenAnswers">0dp</item>
 
         <!-- Programme Activity -->
         <item name="marginBetweenEventsListAndNextHeader">20dp</item>

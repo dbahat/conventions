@@ -193,7 +193,13 @@
         <!-- Feedback Screen -->
         <attr name="progressBarDrawable" format="integer|reference"/>
         <attr name="conventionFeedbackTextColor" format="color|reference"/>
-        <attr name="feedbackMultiAnswerPadding" format="dimension"/>
+        <attr name="feedbackMultiAnswerBackgroundSelected" format="integer|reference"/>
+        <attr name="feedbackMultiAnswerBackgroundNotSelected" format="integer|reference"/>
+        <attr name="feedbackMultiAnswerPaddingTopBottom" format="dimension"/>
+        <attr name="feedbackMultiAnswerPaddingStartFirstAnswer" format="dimension"/>
+        <attr name="feedbackMultiAnswerPaddingStartEnd" format="dimension"/>
+        <attr name="feedbackMultiAnswerMarginTopBottom" format="dimension"/>
+        <attr name="feedbackMultiAnswerMarginBetweenAnswers" format="dimension"/>
         <!-- Programme Screen -->
         <attr name="eventTimeHeaderBackground" format="color|reference"/>
         <attr name="eventTimeHeaderDefaultTextColor" format="color|reference"/>

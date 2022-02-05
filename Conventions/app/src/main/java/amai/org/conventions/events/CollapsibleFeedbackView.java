@@ -36,6 +36,7 @@ import android.widget.Toast;
 
 import androidx.annotation.StringRes;
 import androidx.appcompat.widget.AppCompatRadioButton;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.CompoundButtonCompat;
 import androidx.core.widget.TextViewCompat;
@@ -533,6 +534,8 @@ public class CollapsibleFeedbackView extends FrameLayout {
 
 		int unselectedColor = answerColor != Convention.NO_COLOR ? answerColor : ThemeAttributes.getColor(getContext(), R.attr.feedbackAnswerButtonColor);
 		int selectedColor = selectedAnswerColor != Convention.NO_COLOR ? selectedAnswerColor : ThemeAttributes.getColor(getContext(), R.attr.feedbackAnswerButtonSelectedColor);
+		final int answerBg = ThemeAttributes.getResourceId(getContext(), R.attr.feedbackMultiAnswerBackgroundNotSelected);
+		final int selectedAnswerBg = ThemeAttributes.getResourceId(getContext(), R.attr.feedbackMultiAnswerBackgroundSelected);
 
 		OnClickListener listener = new OnClickListener() {
 			@Override
@@ -540,6 +543,9 @@ public class CollapsibleFeedbackView extends FrameLayout {
 				TextView selected = (TextView) v;
 				TextViewCompat.setTextAppearance(selected, R.style.EventAnswerButton);
 				selected.setTextColor(selectedColor);
+				if (!radio) {
+					selected.setBackgroundResource(selectedAnswerBg);
+				}
 
 				// If the user selected the same answer, deselect it
 				String selectedAnswer = selected.getText().toString();
@@ -560,6 +566,9 @@ public class CollapsibleFeedbackView extends FrameLayout {
 					if (selectedAnswer == null || selected != answerView) {
 						TextViewCompat.setTextAppearance(answerView, R.style.EventAnswerButton);
 						answerView.setTextColor(unselectedColor);
+						if (!radio) {
+							answerView.setBackgroundResource(answerBg);
+						}
 					}
 				}
 
@@ -569,7 +578,10 @@ public class CollapsibleFeedbackView extends FrameLayout {
 			}
 		};
 
-		int padding = ThemeAttributes.getDimensionPixelOffset(getContext(), R.attr.feedbackMultiAnswerPadding);
+		int paddingTopBottom = ThemeAttributes.getDimensionPixelOffset(getContext(), R.attr.feedbackMultiAnswerPaddingTopBottom);
+		int paddingStartEnd = ThemeAttributes.getDimensionPixelOffset(getContext(), R.attr.feedbackMultiAnswerPaddingStartEnd);
+		int marginBetween = ThemeAttributes.getDimensionPixelOffset(getContext(), R.attr.feedbackMultiAnswerMarginBetweenAnswers);
+		int marginTopBottom = ThemeAttributes.getDimensionPixelOffset(getContext(), R.attr.feedbackMultiAnswerMarginTopBottom);
 		boolean first = true;
 		for (String answerString : possibleAnswers) {
 			final TextView answerButton;
@@ -586,20 +598,30 @@ public class CollapsibleFeedbackView extends FrameLayout {
 						}
 				));
 			} else {
-				answerButton = new TextView(getContext());
+				answerButton = new AppCompatTextView(getContext());
 			}
 			answerViews.add(answerButton);
 			TextViewCompat.setTextAppearance(answerButton, R.style.EventAnswerButton);
 			answerButton.setTextColor(unselectedColor);
+			if (!radio) {
+				answerButton.setBackgroundResource(answerBg);
+			}
 			answerButton.setText(answerString);
-			int endPadding = padding * 4;
-			int startPadding = padding * 4;
+			int paddingStart = paddingStartEnd;
 			if ((!radio) && first) {
-				startPadding = 0;
+				paddingStart = ThemeAttributes.getDimensionPixelOffset(getContext(), R.attr.feedbackMultiAnswerPaddingStartFirstAnswer);
 				first = false;
 			}
-			answerButton.setPaddingRelative(startPadding, padding, endPadding, padding);
+			answerButton.setPaddingRelative(paddingStart, paddingTopBottom, paddingStartEnd, paddingTopBottom);
 			buttonsLayout.addView(answerButton);
+
+			// Set margins
+			LinearLayout.LayoutParams layoutParams = ((LinearLayout.LayoutParams) answerButton.getLayoutParams());
+			layoutParams.setMargins(marginBetween, marginTopBottom, marginBetween, marginTopBottom);
+			layoutParams.setMarginStart(0);
+			layoutParams.setMarginEnd(marginBetween);
+			answerButton.setLayoutParams(layoutParams);
+
 			if (!feedback.isSent()) {
 				answerButton.setOnClickListener(listener);
 			} else {
