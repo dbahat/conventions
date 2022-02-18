@@ -502,8 +502,8 @@ public class ConventionEvent implements Serializable {
 				} else if (span.getUrl().startsWith("https://docs.google.com/forms/")) {
 					linkText = "לטופס";
 				}
-				link.append(linkText);
-				link.setSpan(new CustomURLSpan(span.getUrl()), 0, link.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+				link.append(linkText).append("\n");
+				link.setSpan(new CustomURLSpan(span.getUrl()), 0, link.length() - 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
 			}
 			spanned = (Spanned) TextUtils.concat(spanned.subSequence(0, spanStart), link, spanned.subSequence(spanEnd, spanned.length()));
 		}
@@ -515,8 +515,8 @@ public class ConventionEvent implements Serializable {
 			int spanEnd = span.getEnd();
 			SpannableStringBuilder linkToForm = new SpannableStringBuilder();
 			if (!TextUtils.isEmpty(span.getUrl())) {
-				linkToForm.append("לטופס");
-				linkToForm.setSpan(new CustomURLSpan(span.getUrl()), 0, linkToForm.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+				linkToForm.append("לטופס").append("\n");
+				linkToForm.setSpan(new CustomURLSpan(span.getUrl()), 0, linkToForm.length() - 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
 			}
 			spanned = (Spanned) TextUtils.concat(spanned.subSequence(0, spanStart), linkToForm, spanned.subSequence(spanEnd, spanned.length()));
 		}
