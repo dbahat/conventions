@@ -154,7 +154,7 @@
         <item name="eventSurveyAnswerColor">@color/harucon2022_purple</item>
         <item name="eventSurveySelectedAnswerColor">@color/harucon2022_pink</item>
         <!-- Map Screen -->
-        <item name="mapBackground">@drawable/harucon2022_default_background</item>
+        <item name="mapBackground">@drawable/harucon2022_home_background</item>
         <item name="standIconColor">@color/harucon2022_red</item>
         <item name="standsTypeTitleColor">@color/harucon2022_red</item>
         <item name="locationDetailsBackground">@color/transparent_white</item>
