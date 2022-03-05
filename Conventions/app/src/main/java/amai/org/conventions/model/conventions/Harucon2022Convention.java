@@ -41,6 +41,7 @@ public class Harucon2022Convention extends AmaiConvention {
 	private static final String WORKSHOPS_NAME = "חדר סדנאות";
 	private static final String GAMES_NAME = "משחקייה";
 	private static final String COSPLAY_AREA_NAME = "מתחם הקוספליי";
+	private static final String SCREENINGS_NAME = "חדר הקרנות";
 	// Location names
 	public static final String PARENTS_ROOM_NAME = "חדר הורים";
 
@@ -216,7 +217,8 @@ public class Harucon2022Convention extends AmaiConvention {
 		Hall workshops = new Hall().withName(WORKSHOPS_NAME).withOrder(6);
 		Hall cosplayArea = new Hall().withName(COSPLAY_AREA_NAME).withOrder(7);
 		Hall games = new Hall().withName(GAMES_NAME).withOrder(8);
-		return new Halls(Arrays.asList(mainHall, auditorium, eshkol1, eshkol2, eshkol3, workshops, cosplayArea, games));
+		Hall screenings = new Hall().withName(SCREENINGS_NAME).withOrder(9);
+		return new Halls(Arrays.asList(mainHall, auditorium, eshkol1, eshkol2, eshkol3, workshops, cosplayArea, games, screenings));
 	}
 
 	@Override
@@ -233,6 +235,7 @@ public class Harucon2022Convention extends AmaiConvention {
 		Hall workshops = this.getHalls().findByName(WORKSHOPS_NAME);
 		Hall games = this.getHalls().findByName(GAMES_NAME);
 		Hall cosplayArea = this.getHalls().findByName(COSPLAY_AREA_NAME);
+		Hall screenings = this.getHalls().findByName(SCREENINGS_NAME);
 
 		Floor entrance = new Floor(1)
 				.withName("מתחם כניסה")
@@ -318,7 +321,7 @@ public class Harucon2022Convention extends AmaiConvention {
 												.withX(1533.1f)
 												.withY(526.5f),
 										new MapLocation()
-												.withPlace(new Place().withName("חדר הקרנות"))
+												.withPlace(screenings)
 												.withMarkerResource(R.raw.harucon2022_marker_screenings, true)
 												.withSelectedMarkerResource(R.raw.harucon2022_marker_screenings_selected, true)
 												.withMarkerHeight(70.8f)
