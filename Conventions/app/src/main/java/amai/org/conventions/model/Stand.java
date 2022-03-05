@@ -5,6 +5,7 @@ public class Stand {
 	private StandType type;
 	private StandsArea standsArea;
 	private String locationName;
+	private String sort;
 	private float imageX;
 	private float imageY;
 
@@ -57,6 +58,19 @@ public class Stand {
 
 	public Stand withLocationName(String locationName) {
 		setLocationName(locationName);
+		return this;
+	}
+
+	public String getSort() {
+		return sort;
+	}
+
+	public void setSort(String sort) {
+		this.sort = sort;
+	}
+
+	public Stand withSort(String sort) {
+		setSort(sort);
 		return this;
 	}
 
