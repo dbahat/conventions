@@ -72,7 +72,7 @@ public class StandsAreaFragment extends DialogFragment {
                 public int compare(Stand lhs, Stand rhs) {
                     int result = lhs.getType().compareTo(rhs.getType());
                     if (result == 0) {
-                        result = Objects.compareTo(lhs.getLocationName(), rhs.getLocationName(), false);
+                        result = Objects.compareTo(lhs.getSort(), rhs.getSort(), false);
                     }
                     return result;
                 }
