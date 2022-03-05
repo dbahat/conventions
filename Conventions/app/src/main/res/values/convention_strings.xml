@@ -109,7 +109,7 @@
     <string name="artist_stand">ציירים</string>
     <string name="manga_stand">מנגה, קומיקס ואביזרים נלווים</string>
     <string name="tabletop_games_stand">משחקי קופסה, משחקי קלפים ואביזרים נלווים</string>
-    <string name="comp_games_stand">משחקי מחשב ואביזרים נלווים</string>
+    <string name="video_games_stand">משחקי וידאו ואביזרים נלווים</string>
     <string name="other_stand">שונות</string>
 
 </resources>
