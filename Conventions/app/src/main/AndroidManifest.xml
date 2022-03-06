@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="amai.org.conventions"
     android:versionCode="52"
-    android:versionName="10.2.1">
+    android:versionName="11.0.0">
 
     <!-- For notifications -->
     <uses-permission android:name="android.permission.VIBRATE" />
