@@ -99,8 +99,11 @@
     <style name="HomeButton">
         <item name="android:background">?homeButtonBackground</item>
         <item name="android:textColor">?homeButtonText</item>
-        <item name="android:minHeight">@null</item>
-        <item name="android:minWidth">@null</item>
+        <!-- The default values (48dp) makes the buttons bigger according to the android accessibility guidelines:
+         https://developer.android.com/guide/topics/ui/accessibility/apps#large-controls
+         It seems that despite the documentation, the minHeight and minWidth include the padding. -->
+<!--        <item name="android:minHeight">@null</item>-->
+<!--        <item name="android:minWidth">@null</item>-->
         <item name="android:padding">5dp</item>
         <item name="android:layout_margin">@null</item>
         <item name="android:gravity">top|center</item>
