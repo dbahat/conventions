@@ -15,22 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "458203975509-n8naaft9fn02phqbukdtftjemtpn85it.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "amai.org.conventions",
-            "certificate_hash": "be937b5158a856ca48a2302ab434a48985e73d3a"
-          }
-        },
-        {
           "client_id": "458203975509-qghf2og9qjhlt8hmd8pv1d2ttra5pk8h.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
-        {
-          "current_key": "AIzaSyAXItZJdwfvtf4df0u4tLaN0PFPiQnvLRg"
-        },
         {
           "current_key": "AIzaSyAD4VkVJEOsU6OvTu2sv-4dGrfBnQZG1Ls"
         }
@@ -62,22 +51,6 @@
         }
       },
       "oauth_client": [
-        {
-          "client_id": "458203975509-srhrefcc9b9f0jimm6i8ri6i0m5kc26l.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "amai.org.pushnotificationsender",
-            "certificate_hash": "154834815d8915f619a83552a3a4c8cd70ca64c2"
-          }
-        },
-        {
-          "client_id": "458203975509-qoh79rk8sokpo5gqfnmikqqkub63dv0p.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "amai.org.pushnotificationsender",
-            "certificate_hash": "be937b5158a856ca48a2302ab434a48985e73d3a"
-          }
-        },
         {
           "client_id": "458203975509-qghf2og9qjhlt8hmd8pv1d2ttra5pk8h.apps.googleusercontent.com",
           "client_type": 3
