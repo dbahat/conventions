@@ -769,7 +769,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 			if (exception instanceof SurveyDisabledException) {
 				SurveyDisabledException surveyDisabledException = (SurveyDisabledException) exception;
 				String toastMessage = TextUtils.isEmpty(surveyDisabledException.getDisabledErrorMessage())
-						? getContext().getString(R.string.vote_send_error)
+						? getContext().getString(R.string.form_closed_error)
 						: surveyDisabledException.getDisabledErrorMessage();
 				Toast.makeText(getContext(), toastMessage, Toast.LENGTH_LONG).show();
 				// Using success because the problem here is not in the application

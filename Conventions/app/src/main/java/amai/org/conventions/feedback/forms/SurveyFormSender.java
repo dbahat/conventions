@@ -17,6 +17,7 @@ import javax.net.ssl.HttpsURLConnection;
 import amai.org.conventions.feedback.SurveySender;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.Survey;
+import amai.org.conventions.networking.SurveyDataRetriever;
 import amai.org.conventions.utils.HttpConnectionCreator;
 import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.URLUtils;
@@ -24,9 +25,11 @@ import amai.org.conventions.utils.URLUtils;
 public abstract class SurveyFormSender extends SurveySender {
 	private final static String TAG = SurveyFormSender.class.getCanonicalName();
 	private SurveyForm form;
+	private SurveyDataRetriever.DisabledMessage disabledMessageRetriever;
 
-	public SurveyFormSender(SurveyForm form) {
+	public SurveyFormSender(SurveyForm form, SurveyDataRetriever.DisabledMessage disabledMessageRetriever) {
 		this.form = form;
+		this.disabledMessageRetriever = disabledMessageRetriever;
 	}
 
 	protected Map<String, String> getAnswers() {
@@ -58,6 +61,9 @@ public abstract class SurveyFormSender extends SurveySender {
 
 		URL url = form.getSendUrl();
 
+		// TODO check if google forms API support creating responses (as for Match 2022 it only supports reading responses)
+		// and use the API instead of the below code
+		// https://developers.google.com/forms/api/reference/rest/v1/forms.responses
 		HttpURLConnection connection = HttpConnectionCreator.createConnection(url);
 		BufferedWriter writer = null;
 		OutputStream outputStream = null;
@@ -94,30 +100,35 @@ public abstract class SurveyFormSender extends SurveySender {
 		BufferedReader reader = null;
 		try {
 			int responseCode = connection.getResponseCode();
-			if (responseCode >= 200 && responseCode <= 299) {
-				inputStream = connection.getInputStream();
-			} else {
-				inputStream = connection.getErrorStream();
+
+			// Check if the form is closed and throw the correct exception
+			if (responseCode == HttpsURLConnection.HTTP_MOVED_TEMP && connection.getHeaderField("Location").contains("closedform")) {
+				// In the special case of survey votes, it's possible the request will fail since the survey was disabled.
+				// In such a case, try to fetch the disable message and propagate it to the caller.
+				throw new SurveyDisabledException(tryFetchDisabledMessage());
 			}
 
-			reader = new BufferedReader(new InputStreamReader(inputStream));
-			StringBuilder responseBuilder = new StringBuilder();
-			String output;
-			while ((output = reader.readLine()) != null) {
-				responseBuilder.append(output);
-			}
-			String responseBody = responseBuilder.toString();
-
-			// Check if the form was sent successfully
-			// Unfortunately, even for unsuccessful send we get a 200 response, so we need to check the output.
-			// There is no indication of error messages, but the "form was sent" message has class "freebirdFormviewerViewResponseConfirmationMessage"
-			// in case of a new form and "ss-resp-message" in case of an old form so we check if one of them exists (the success message itself is
-			// localized so we can't check its text).
-			// There is no error in case a field with a non-existing id was sent, there is if the form is not accepting answers.
-			// For new forms there is an error if a required field was not sent.
-			// In case a non-existing form ID is used the response code is 404.
-			if (responseCode != HttpsURLConnection.HTTP_OK ||
-					(!responseBody.contains("\"freebirdFormviewerViewResponseConfirmationMessage\"") && !responseBody.contains("ss-resp-message"))) {
+			// Check if the form was sent successfully.
+			// In old forms, even for unsuccessful send we sometimes got a 200 response, so we had to check the output.
+			// In new forms this has been fixed so we can rely on the response code.
+			// We don't support old forms anymore because we can't know when the response is actually successful
+			// (we used to be able to tell according to the success message css class but that's not possible anymore).
+			if (responseCode != HttpsURLConnection.HTTP_OK) {
+				String responseBody = "";
+				if (responseCode >= 200 && responseCode <= 299) {
+					inputStream = connection.getInputStream();
+				} else {
+					inputStream = connection.getErrorStream();
+				}
+				if (inputStream != null) {
+					reader = new BufferedReader(new InputStreamReader(inputStream));
+					StringBuilder responseBuilder = new StringBuilder();
+					String output;
+					while ((output = reader.readLine()) != null) {
+						responseBuilder.append(output);
+					}
+					responseBody = responseBuilder.toString();
+				}
 				throw new RuntimeException("Could not send feedback, response code: " + responseCode + ", response body:\n" + responseBody);
 			}
 		} finally {
@@ -131,6 +142,17 @@ public abstract class SurveyFormSender extends SurveySender {
 			} catch (Exception e) {
 				Log.e(TAG, "could not close input stream", e);
 			}
+		}
+	}
+
+	private String tryFetchDisabledMessage() {
+		try {
+			if (disabledMessageRetriever == null) {
+				return "";
+			}
+			return disabledMessageRetriever.retrieveClosedMessage();
+		} catch (Exception e) {
+			return "";
 		}
 	}
 }
