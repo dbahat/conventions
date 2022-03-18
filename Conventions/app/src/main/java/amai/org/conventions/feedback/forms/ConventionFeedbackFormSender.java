@@ -14,7 +14,7 @@ public class ConventionFeedbackFormSender extends SurveyFormSender {
 	private final FeedbackForm form;
 
 	public ConventionFeedbackFormSender(FeedbackForm form, Convention convention) {
-		super(form);
+		super(form, null);
 		this.convention = convention;
 		this.form = form;
 	}

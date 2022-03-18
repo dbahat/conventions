@@ -178,6 +178,7 @@
     <string name="view_event">לצפיה באירוע</string>
     <string name="view_event_error">לא ניתן לצפות באירוע. וודא שמותקן דפדפן אינטרנט ונסה שנית.</string>
     <string name="vote_send_error">לא ניתן להצביע. נסה שנית מאוחר יותר.</string>
+    <string name="form_closed_error">הטופס סגור. נסה שנית מאוחר יותר.</string>
     <string name="home_current_event_vote_possible">לחץ להצבעה עבור חביב הקהל!</string>
     <string name="home_current_event_vote_or_view_possible">לחץ לצפיה באירוע ולהצבעה עבור חביב הקהל!</string>
     <string name="home_current_event_view_possible">לחץ לצפיה באירוע!</string>

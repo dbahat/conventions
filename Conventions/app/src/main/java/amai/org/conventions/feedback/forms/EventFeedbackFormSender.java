@@ -18,7 +18,7 @@ public class EventFeedbackFormSender extends SurveyFormSender {
     private EventFeedbackForm form;
 
     public EventFeedbackFormSender(EventFeedbackForm form, Convention convention, ConventionEvent event) {
-        super(form);
+        super(form, null);
 		this.convention = convention;
 		this.event = event;
         this.form = form;
