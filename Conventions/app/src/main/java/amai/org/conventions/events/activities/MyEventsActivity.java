@@ -51,6 +51,7 @@ import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.app.ShareCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -103,7 +104,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		setupDays(dateIndexToSelect);
 
 		if (Convention.getInstance().canUserLogin()) {
-			setupActionButton(R.drawable.ic_add_white, view -> showAddEventsDialog());
+			setupActionButton(AppCompatResources.getDrawable(this, R.drawable.ic_add_white), view -> showAddEventsDialog());
 		}
 	}
 

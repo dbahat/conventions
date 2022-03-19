@@ -20,6 +20,7 @@ import amai.org.conventions.utils.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.widget.ListViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -98,7 +99,7 @@ public class SecondHandSellFragment extends Fragment implements SwipeRefreshLayo
 
 	@Override
 	public void onFragmentSelected(SecondHandActivity context) {
-		context.setupActionButton(R.drawable.ic_add_white, new View.OnClickListener() {
+		context.setupActionButton(AppCompatResources.getDrawable(context, R.drawable.ic_add_white), new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

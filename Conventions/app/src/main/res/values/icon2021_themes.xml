@@ -17,7 +17,7 @@
         <item name="swipeToRefreshBackgroundColor">@color/icon2021_yellow2</item>
         <item name="snackbarActionColor">@color/icon2021_yellow2</item>
         <item name="highlightedButtonBackground">@drawable/icon2021_highlighted_button</item>
-        <item name="highlightedButtonTextColor">@color/black</item>
+        <item name="buttonTextColor">@color/black</item>
         <item name="borderlessButtonColor">@color/icon2021_yellow2</item>
         <item name="activitiesBackground">@drawable/icon2021_background</item>
         <item name="eventListDivider">@drawable/icon2021_event_list_divider</item>

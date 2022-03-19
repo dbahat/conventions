@@ -1,5 +1,6 @@
 package amai.org.conventions.secondhand;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 
@@ -74,8 +75,8 @@ public class SecondHandActivity extends NavigationActivity {
 	}
 
 	@Override
-	public void setupActionButton(int imageResource, View.OnClickListener listener) {
-		super.setupActionButton(imageResource, listener);
+	public void setupActionButton(Drawable image, View.OnClickListener listener) {
+		super.setupActionButton(image, listener);
 	}
 
 	@Override
