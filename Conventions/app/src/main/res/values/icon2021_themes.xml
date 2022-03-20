@@ -128,7 +128,7 @@
         <item name="conventionFeedbackTextColor">@color/black</item>
         <!-- Programme Screen -->
         <item name="eventTimeHeaderAlwaysUseDefaultTextColor">false</item>
-        <item name="eventTimeHeaderDefaultTextColor">@null</item>
+        <item name="eventTimeHeaderDefaultTextColor">?eventTypeEndedColor</item>
         <item name="eventTimeHeaderBackground">@null</item>
         <item name="searchCategoriesColor">@color/icon2021_yellow1</item>
         <!-- Programme Search Screen -->
