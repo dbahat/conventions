@@ -30,7 +30,6 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -523,8 +522,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 			eventDate = event.getStartTime();
 
 			if (newDate) {
-				SimpleDateFormat sdf = new SimpleDateFormat("EEEE (dd.MM)", Dates.getLocale());
-				stringBuilder.append("\n").append(sdf.format(eventDate)).append("\n");
+				stringBuilder.append("\n").append(Dates.formatDate("EEEE (dd.MM)", eventDate)).append("\n");
 			}
 
 			stringBuilder.append(formatEventToShare(event)).append("\n");
