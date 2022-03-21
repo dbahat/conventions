@@ -157,16 +157,20 @@ public class Dates {
 		return result.toString();
 	}
 
+	public static String formatDate(String pattern, Date date) {
+		return new SimpleDateFormat(pattern, getLocale()).format(date);
+	}
+
 	public static String formatDateWithoutTime(Date date) {
-		return new SimpleDateFormat("dd.MM.yyyy", getLocale()).format(date);
+		return formatDate("dd.MM.yyyy", date);
 	}
 
 	public static String formatHoursAndMinutes(Date date) {
-		return new SimpleDateFormat("HH:mm", getLocale()).format(date);
+		return formatDate("HH:mm", date);
 	}
 
 	public static String formatDateAndTime(Date date) {
-		return new SimpleDateFormat("dd.MM.yyyy HH:mm", getLocale()).format(date);
+		return formatDate("dd.MM.yyyy HH:mm", date);
 	}
 
 	public static Locale getLocale() {

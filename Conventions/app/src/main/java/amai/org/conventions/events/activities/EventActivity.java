@@ -44,7 +44,6 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
@@ -523,10 +522,9 @@ public class EventActivity extends NavigationActivity {
 			hall.setVisibility(View.GONE);
 		}
 
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE dd.MM, ", Dates.getLocale());
 		String formattedEventTime = String.format("%s%s-%s (%s)",
 				// In case of single day convention, don't show the date
-				Convention.getInstance().getLengthInDays() == 1 ? "" : simpleDateFormat.format(event.getStartTime()),
+				Convention.getInstance().getLengthInDays() == 1 ? "" : Dates.formatDate("EEE dd.MM, ", event.getStartTime()),
 				Dates.formatHoursAndMinutes(event.getStartTime()),
 				Dates.formatHoursAndMinutes(event.getEndTime()),
 				Dates.toHumanReadableTimeDuration(event.getEndTime().getTime() - event.getStartTime().getTime()));

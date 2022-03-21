@@ -1,6 +1,5 @@
 package amai.org.conventions.events.adapters;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import amai.org.conventions.utils.Dates;
@@ -26,8 +25,7 @@ public abstract class DayFragmentAdapter extends FragmentStatePagerAdapter {
 
 	@Override
 	public CharSequence getPageTitle(int position) {
-		SimpleDateFormat sdf = new SimpleDateFormat("EEE (dd.MM)", Dates.getLocale());
-		return sdf.format(getDate(position).getTime());
+		return Dates.formatDate("EEE (dd.MM)", getDate(position).getTime());
 	}
 
 	@Override

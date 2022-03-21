@@ -18,7 +18,6 @@ import android.view.ViewTreeObserver;
 import android.widget.AbsListView;
 import android.widget.NumberPicker;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -245,8 +244,7 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 		List<String> formattedSections = CollectionUtils.map(timeSections, new CollectionUtils.Mapper<Calendar, String>() {
 			@Override
 			public String map(Calendar item) {
-				SimpleDateFormat sdf = new SimpleDateFormat("HH:00", Dates.getLocale());
-				return sdf.format(item.getTime());
+				return Dates.formatDate("HH:00", item.getTime());
 			}
 		});
 

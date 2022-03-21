@@ -1,14 +1,13 @@
 package amai.org.conventions.events.holders;
 
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 import amai.org.conventions.utils.Dates;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class TimeViewHolder extends RecyclerView.ViewHolder {
 	private TextView timeTextView;
@@ -21,7 +20,7 @@ public class TimeViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	public void setTime(Date date, String timeFormat) {
-		timeTextView.setText(new SimpleDateFormat(timeFormat, Dates.getLocale()).format(date));
+		timeTextView.setText(Dates.formatDate(timeFormat, date));
 
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
