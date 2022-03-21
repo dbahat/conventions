@@ -69,8 +69,7 @@ public class SecondHandBuy extends SecondHand {
 						throw new RuntimeException("Could not read items, error code: " + responseCode);
 					}
 					reader = new InputStreamReader((InputStream) request.getContent());
-					JsonParser jp = new JsonParser();
-					JsonElement root = jp.parse(reader);
+					JsonElement root = JsonParser.parseReader(reader);
 					JsonArray itemsJson = root.getAsJsonArray();
 					for (int itemIndex = 0; itemIndex < itemsJson.size(); ++itemIndex) {
 						JsonObject itemJson = itemsJson.get(itemIndex).getAsJsonObject();

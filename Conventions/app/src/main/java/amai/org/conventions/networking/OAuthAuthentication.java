@@ -84,8 +84,7 @@ public class OAuthAuthentication {
 		InputStreamReader reader = null;
 		try {
 			reader = new InputStreamReader(response);
-			JsonParser jp = new JsonParser();
-			JsonElement root = jp.parse(reader);
+			JsonElement root = JsonParser.parseReader(reader);
 			JsonObject rootObject = root.getAsJsonObject();
 			return rootObject.getAsJsonPrimitive("access_token").getAsString();
 		} finally {

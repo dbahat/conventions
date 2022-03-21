@@ -136,15 +136,14 @@ public class UpdatesRefresher {
 
 	private List<Update> parseUpdates(InputStreamReader reader) throws ParseException {
 		List<Update> updates = new LinkedList<>();
-		JsonParser jp = new JsonParser();
-		JsonElement root = jp.parse(reader);
+		JsonElement root = JsonParser.parseReader(reader);
 		JsonArray updatesArray = root.getAsJsonArray();
 		for (int i = 0; i < updatesArray.size(); i++) {
 			JsonObject updateObject = updatesArray.get(i).getAsJsonObject();
 			if (updateObject.has("id") && updateObject.has("content") && updateObject.has("update_time")) {
 
 				String dateString = updateObject.get("update_time").getAsString();
-				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SS", Dates.getLocale());
+				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Dates.getLocale());
 				Date date = simpleDateFormat.parse(dateString);
 
 				String message = updateObject.get("content").getAsString();

@@ -274,8 +274,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 				throw new RuntimeException("Could not read user purchased events, error code: " + responseCode);
 			}
 			reader = new InputStreamReader((InputStream) request.getContent());
-			JsonParser jp = new JsonParser();
-			JsonElement root = jp.parse(reader);
+			JsonElement root = JsonParser.parseReader(reader);
 			JsonArray eventsArray = root.getAsJsonArray();
 			for (int i = 0; i < eventsArray.size(); ++i) {
 				int eventServerId = eventsArray.get(i).getAsInt();

@@ -11,6 +11,7 @@ import com.google.gson.JsonParser;
 import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
@@ -29,8 +30,7 @@ public class SffModelParser implements ModelParser {
 
 	@Override
 	public List<ConventionEvent> parse(Date modifiedDate, InputStreamReader reader) {
-		JsonParser jp = new JsonParser();
-		JsonElement root = jp.parse(reader);
+		JsonElement root = JsonParser.parseReader(reader);
 		JsonArray events = root.getAsJsonArray();
 
 		List<ConventionEvent> eventList = new LinkedList<>();
@@ -150,7 +150,7 @@ public class SffModelParser implements ModelParser {
 	}
 
 	public static Date parseEventTime(String sffFormat) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SS", Dates.getLocale());
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Dates.getLocale());
 		try {
 			return dateFormat.parse(sffFormat);
 		} catch (ParseException e) {

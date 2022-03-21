@@ -91,8 +91,7 @@ public class SecondHandSell extends SecondHand {
 						throw new RuntimeException("Could not read forms " + formIds + " , error code: " + responseCode);
 					}
 					reader = new InputStreamReader((InputStream) request.getContent());
-					JsonParser jp = new JsonParser();
-					JsonElement root = jp.parse(reader);
+					JsonElement root = JsonParser.parseReader(reader);
 					JsonArray formsJson = root.getAsJsonArray();
 					newForms = parseForms(formsJson);
 				} finally {
@@ -149,8 +148,7 @@ public class SecondHandSell extends SecondHand {
 				throw new RuntimeException("Could not read form, error code: " + responseCode);
 			}
 			reader = new InputStreamReader((InputStream) request.getContent());
-			JsonParser jp = new JsonParser();
-			JsonElement root = jp.parse(reader);
+			JsonElement root = JsonParser.parseReader(reader);
 			// The API can also return a json object instead of array when the form number is invalid
 			if (!root.isJsonArray()) {
 				throw new FormNotFoundException();

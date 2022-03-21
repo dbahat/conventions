@@ -11,8 +11,7 @@ public class SffEventTicketsParser implements EventTicketsParser {
 
 	@Override
 	public int parse(InputStreamReader reader) {
-		JsonParser jp = new JsonParser();
-		JsonElement root = jp.parse(reader);
+		JsonElement root = JsonParser.parseReader(reader);
 		JsonObject ticketsInfo = root.getAsJsonObject();
 		JsonElement availableTicketsElement = ticketsInfo.get("available_tickets");
 		int ticketsNumber;
