@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 
 public class Dates {
 	public static final long MILLISECONDS_IN_MINUTE = java.util.concurrent.TimeUnit.MINUTES.toMillis(1);
@@ -18,6 +19,8 @@ public class Dates {
 	}
 
 	private static final Locale LOCALE = new Locale("iw", "IL");
+	private static final TimeZone CONVENTION_TIME_ZONE = TimeZone.getTimeZone("Asia/Jerusalem");
+	private static final TimeZone LOCAL_TIME_ZONE = TimeZone.getDefault();
 	private static Date appStartDate = new Date();
 	private static Date initialDate = getInitialDate();
 
@@ -175,6 +178,40 @@ public class Dates {
 
 	public static Locale getLocale() {
 		return LOCALE;
+	}
+
+	public static TimeZone getConventionTimeZone() {
+		return CONVENTION_TIME_ZONE;
+	}
+
+	public static TimeZone getLocalTimeZone() {
+		return LOCAL_TIME_ZONE;
+	}
+
+	public static Date utcToLocalTime(Date utcTime) {
+		long timeInMillis = utcTime.getTime();
+		return new Date(timeInMillis + Dates.getLocalTimeZone().getOffset(timeInMillis));
+	}
+
+	public static Date localToUTCTime(Date conventionTime) {
+		long timeInMillis = conventionTime.getTime();
+		return new Date(timeInMillis - Dates.getLocalTimeZone().getOffset(timeInMillis));
+	}
+
+	public static Date localToConventionTime(Date localTime) {
+		long timeInMillis = localTime.getTime();
+		return new Date(timeInMillis -
+				Dates.getLocalTimeZone().getOffset(timeInMillis) + // Convert to UTC
+				Dates.getConventionTimeZone().getOffset(timeInMillis) // Convert to convention time
+		);
+	}
+
+	public static Date conventionToLocalTime(Date localTime) {
+		long timeInMillis = localTime.getTime();
+		return new Date(timeInMillis -
+				Dates.getConventionTimeZone().getOffset(timeInMillis) +  // Convert to UTC
+				Dates.getLocalTimeZone().getOffset(timeInMillis) // Convert to local time
+		);
 	}
 
 	public static Calendar createDate(int year, int month, int day) {
