@@ -86,7 +86,7 @@ public class Icon2021Convention extends SffConvention {
 
 	@Override
 	protected ConventionStorage initStorage() {
-		return new ConventionStorage(this, R.raw.icon2021_convention_events, 0);
+		return new ConventionStorage(this, R.raw.icon2021_convention_events, 1);
 	}
 
 	@Override
@@ -830,7 +830,7 @@ public class Icon2021Convention extends SffConvention {
 					"?entry.1572016508=" + URLUtils.encodeURLParameterValue(event.getTitle()) +
 					"&entry.1917108492=" + URLUtils.encodeURLParameterValue(event.getLecturer()) +
 					"&entry.10889808=" + URLUtils.encodeURLParameterValue(event.getHall().getName()) +
-					"&entry.1131737302=" + URLUtils.encodeURLParameterValue(Dates.formatDateAndTime(event.getStartTime()))
+					"&entry.1131737302=" + URLUtils.encodeURLParameterValue(Dates.formatDateAndTime(Dates.localToConventionTime(event.getStartTime())))
 			);
 		} catch (Exception e) {
 			return null;

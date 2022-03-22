@@ -11,7 +11,6 @@ import com.google.gson.JsonParser;
 import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
@@ -152,7 +151,7 @@ public class SffModelParser implements ModelParser {
 	public static Date parseEventTime(String sffFormat) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Dates.getLocale());
 		try {
-			return dateFormat.parse(sffFormat);
+			return Dates.conventionToLocalTime(dateFormat.parse(sffFormat));
 		} catch (ParseException e) {
 			throw new RuntimeException(e);
 		}

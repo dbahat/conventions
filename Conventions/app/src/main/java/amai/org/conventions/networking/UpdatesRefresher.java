@@ -151,7 +151,7 @@ public class UpdatesRefresher {
 				Update update = new Update()
 						.withId(updateObject.get("id").getAsString())
 						.withIsNew(true)
-						.withDate(date)
+						.withDate(Dates.conventionToLocalTime(date))
 						.withText(message);
 
 				updates.add(update);

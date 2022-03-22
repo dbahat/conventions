@@ -158,7 +158,11 @@ public class Settings {
 		if (date == -1) {
 			return null;
 		}
-		return new Date(date);
+		return Dates.utcToLocalTime(new Date(date));
+	}
+
+	public void setLastSecondHandUpdatedDate() {
+		sharedPreferences.edit().putLong(LAST_SECOND_HAND_UPDATE_DATE, Dates.localToUTCTime(Dates.now()).getTime()).apply();
 	}
 
 	public Date getLastSecondHandSearchItemsUpdateDate() {
@@ -166,15 +170,11 @@ public class Settings {
 		if (date == -1) {
 			return null;
 		}
-		return new Date(date);
-	}
-
-	public void setLastSecondHandUpdatedDate() {
-		sharedPreferences.edit().putLong(LAST_SECOND_HAND_UPDATE_DATE, Dates.now().getTime()).apply();
+		return Dates.utcToLocalTime(new Date(date));
 	}
 
 	public void setLastSecondHandSearchItemsUpdateDate() {
-		sharedPreferences.edit().putLong(LAST_SECOND_HAND_SEARCH_ITEMS_UPDATE_DATE, Dates.now().getTime()).apply();
+		sharedPreferences.edit().putLong(LAST_SECOND_HAND_SEARCH_ITEMS_UPDATE_DATE, Dates.localToUTCTime(Dates.now()).getTime()).apply();
 	}
 
 	public String getUserId() {

@@ -61,6 +61,7 @@ public class ModelRefresher {
 			} finally {
 				request.disconnect();
 			}
+
 			Convention.getInstance().getStorage().saveEvents();
 		} catch (IOException e) {
 			Log.i(TAG, "Could not retrieve model due to IOException: " + e.getMessage());
@@ -149,7 +150,7 @@ public class ModelRefresher {
 			request.connect();
 			long lastModifiedAsLong = request.getHeaderFieldDate("Last-Modified", -1);
 			if (lastModifiedAsLong > -1) {
-				modifiedDate = new Date(lastModifiedAsLong);
+				modifiedDate = Dates.conventionToLocalTime(new Date(lastModifiedAsLong));
 			}
 			return modifiedDate;
 		} catch (Exception e) {
