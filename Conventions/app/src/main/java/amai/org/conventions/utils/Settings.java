@@ -126,11 +126,11 @@ public class Settings {
 		if (date == -1) {
 			return null;
 		}
-		return new Date(date);
+		return Dates.utcToLocalTime(new Date(date));
 	}
 
 	public void setLastEventsUpdatedDate() {
-		sharedPreferences.edit().putLong(LAST_EVENTS_UPDATE_DATE, Dates.now().getTime()).apply();
+		sharedPreferences.edit().putLong(LAST_EVENTS_UPDATE_DATE, Dates.localToUTCTime(Dates.now()).getTime()).apply();
 	}
 
 	public Date getLastUpdatesUpdateDate() {
@@ -138,7 +138,11 @@ public class Settings {
 		if (date == -1) {
 			return null;
 		}
-		return new Date(date);
+		return Dates.utcToLocalTime(new Date(date));
+	}
+
+	public void setLastUpdatesUpdatedDate() {
+		sharedPreferences.edit().putLong(LAST_UPDATES_UPDATE_DATE, Dates.localToUTCTime(Dates.now()).getTime()).apply();
 	}
 
 	public void setAdvancedOptionsEnabled(boolean enabled) {
@@ -147,10 +151,6 @@ public class Settings {
 
 	public boolean isAdvancedOptionsEnabled() {
 		return sharedPreferences.getBoolean(IS_ADVANCED_OPTIONS_ENABLED, false);
-	}
-
-	public void setLastUpdatesUpdatedDate() {
-		sharedPreferences.edit().putLong(LAST_UPDATES_UPDATE_DATE, Dates.now().getTime()).apply();
 	}
 
 	public Date getLastSecondHandUpdateDate() {

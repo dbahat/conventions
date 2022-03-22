@@ -35,9 +35,9 @@ public class EventFeedbackFormSender extends SurveyFormSender {
         // Event start time
         String eventStartTime;
         if (convention.getLengthInDays() > 1) {
-            eventStartTime = Dates.formatDateAndTime(event.getStartTime());
+            eventStartTime = Dates.formatDateAndTime(Dates.localToConventionTime(event.getStartTime()));
         } else {
-            eventStartTime = Dates.formatHoursAndMinutes(event.getStartTime());
+            eventStartTime = Dates.formatHoursAndMinutes(Dates.localToConventionTime(event.getStartTime()));
         }
         answers.put(form.getEventTimeEntry(), eventStartTime);
         // Device id

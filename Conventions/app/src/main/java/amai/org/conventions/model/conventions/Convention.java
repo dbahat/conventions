@@ -230,10 +230,18 @@ public abstract class Convention implements Serializable {
 	public abstract HttpURLConnection getUserQRRequest(String user) throws Exception;
 
 	public Calendar getStartDate() {
+		Calendar[] eventDates = getEventDates();
+		if (eventDates != null && eventDates.length > 0) {
+			return eventDates[0];
+		}
 		return startDate;
 	}
 
 	public Calendar getEndDate() {
+		Calendar[] eventDates = getEventDates();
+		if (eventDates != null && eventDates.length > 0) {
+			return eventDates[eventDates.length - 1];
+		}
 		return endDate;
 	}
 
@@ -353,7 +361,7 @@ public abstract class Convention implements Serializable {
 
 		// We can't not show any dates. If there are no events, the day will be empty but at least it will be displayed.
 		if (foundDates.isEmpty()) {
-			foundDates.add(Convention.getInstance().getStartDate());
+			foundDates.add(startDate);
 		}
 
 		eventDates = foundDates.toArray(new Calendar[]{});
@@ -503,7 +511,7 @@ public abstract class Convention implements Serializable {
 	public boolean isFeedbackSendingTimeOver() {
 		// Only allow to send feedback for a week after the convention is over
 		Calendar lastFeedbackSendTime = Calendar.getInstance();
-		lastFeedbackSendTime.setTime(this.endDate.getTime());
+		lastFeedbackSendTime.setTime(this.getEndDate().getTime());
 		lastFeedbackSendTime.add(Calendar.DATE, 7);
 		return lastFeedbackSendTime.getTime().before(Dates.now());
 	}

@@ -4,7 +4,10 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
@@ -20,7 +23,10 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.lang.reflect.Type;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -132,7 +138,7 @@ public class ConventionStorage {
 
 	private static Gson createGsonSerializer() {
 		return new GsonBuilder()
-				.setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+				.registerTypeAdapter(Date.class, new DateAdapter())
 				// Save smiley answers according to enum value name instead of toString()
 				.registerTypeAdapter(FeedbackQuestion.Smiley3PointAnswer.class, new EnumSerializer<>())
 				.registerTypeAdapter(FeedbackQuestion.Smiley5PointAnswer.class, new EnumSerializer<>())
@@ -141,6 +147,7 @@ public class ConventionStorage {
 
 	private static Gson createGsonDeserializer() {
 		return new GsonBuilder()
+				.registerTypeAdapter(Date.class, new DateAdapter())
 				.setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
 				.create();
 	}
@@ -457,6 +464,26 @@ public class ConventionStorage {
 		@Override
 		public JsonElement serialize(T src, Type typeOfSrc, JsonSerializationContext context) {
 			return new JsonPrimitive(src.name());
+		}
+	}
+
+	private static class DateAdapter implements JsonSerializer<Date>, JsonDeserializer<Date> {
+		@Override
+		public JsonElement serialize(Date src, Type typeOfSrc, JsonSerializationContext context) {
+			String formatted = Dates.formatDate("yyyy-MM-dd'T'HH:mm:ss", Dates.localToUTCTime(src));
+			return new JsonPrimitive(formatted);
+		}
+
+		@Override
+		public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+			String formattedDate = json.getAsString();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Dates.getLocale());
+			try {
+				Date utcDate = sdf.parse(formattedDate);
+				return Dates.utcToLocalTime(utcDate);
+			} catch (ParseException e) {
+				throw new JsonParseException("Date cannot be parsed", e);
+			}
 		}
 	}
 }
