@@ -49,7 +49,7 @@ public class ConventionEvent implements Serializable {
 	private int ticketsLimit = -1; // No ticket info available
 	private Date ticketsLastModifiedDate;
 	private String websiteUrl;
-	private EventLocationType locationType;
+	private List<EventLocationType> locationTypes;
 
 	public ConventionEvent() {
 		images = new ArrayList<>();
@@ -74,7 +74,8 @@ public class ConventionEvent implements Serializable {
 		if (textColor != Convention.NO_COLOR) {
 			return textColor;
 		}
-		if (Convention.getInstance().getEventLocationType(this) == EventLocationType.VIRTUAL) {
+		List<EventLocationType> eventLocationTypes = Convention.getInstance().getEventLocationTypes(this);
+		if (eventLocationTypes != null && eventLocationTypes.size() > 0 && eventLocationTypes.get(0) == EventLocationType.VIRTUAL) {
 			return ThemeAttributes.getColor(context, R.attr.eventTimeVirtualTextColor);
 		}
 		return ThemeAttributes.getColor(context, R.attr.eventTimeDefaultTextColor);
@@ -191,7 +192,8 @@ public class ConventionEvent implements Serializable {
 		if (eventTypeColor != Convention.NO_COLOR) {
 			return eventTypeColor;
 		}
-		if (Convention.getInstance().getEventLocationType(this) == EventLocationType.VIRTUAL) {
+		List<EventLocationType> eventLocationTypes = Convention.getInstance().getEventLocationTypes(this);
+		if (eventLocationTypes != null && eventLocationTypes.size() > 0 && eventLocationTypes.get(0) == EventLocationType.VIRTUAL) {
 			return ThemeAttributes.getColor(context, R.attr.eventTimeVirtualBackgroundColor);
 		}
 		return ThemeAttributes.getColor(context, R.attr.eventTimeDefaultBackgroundColor);
@@ -332,16 +334,16 @@ public class ConventionEvent implements Serializable {
 	}
 
 	/** Use Convention.getInstance().getEventLocationType(event) */
-	public EventLocationType getLocationType() {
-		return locationType;
+	public List<EventLocationType> getLocationTypes() {
+		return locationTypes;
 	}
 
-	public void setLocationType(EventLocationType locationType) {
-		this.locationType = locationType;
+	public void setLocationTypes(List<EventLocationType> locationTypes) {
+		this.locationTypes = locationTypes;
 	}
 
-	public ConventionEvent withLocationType(EventLocationType locationType) {
-		setLocationType(locationType);
+	public ConventionEvent withLocationType(List<EventLocationType> locationType) {
+		setLocationTypes(locationType);
 		return this;
 	}
 

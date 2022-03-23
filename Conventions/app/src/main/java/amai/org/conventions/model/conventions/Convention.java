@@ -373,8 +373,8 @@ public abstract class Convention implements Serializable {
 	private void updateEventLocationTypes() {
 		Set<ConventionEvent.EventLocationType> locationTypes = new HashSet<>();
 		for (ConventionEvent event : events) {
-			if (this.getEventLocationType(event) != null) {
-				locationTypes.add(this.getEventLocationType(event));
+			if (this.getEventLocationTypes(event) != null) {
+				locationTypes.addAll(this.getEventLocationTypes(event));
 			}
 		}
 		eventLocationTypes = new ArrayList<>(locationTypes);
@@ -851,7 +851,7 @@ public abstract class Convention implements Serializable {
 		return null;
 	}
 
-	public ConventionEvent.EventLocationType getEventLocationType(ConventionEvent event) {
-		return ConventionEvent.EventLocationType.PHYSICAL;
+	public List<ConventionEvent.EventLocationType> getEventLocationTypes(ConventionEvent event) {
+		return Collections.singletonList(ConventionEvent.EventLocationType.PHYSICAL);
 	}
 }

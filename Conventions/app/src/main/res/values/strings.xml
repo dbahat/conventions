@@ -193,6 +193,7 @@
     <string name="show_sold_out_events">אירועים ללא כרטיסים</string>
     <string name="physical_event">אירוע פיזי</string>
     <string name="virtual_event">אירוע וירטואלי</string>
+    <string name="hybrid_event">אירוע היברידי</string>
     <string name="last_modified">עודכן: %s</string>
     <string name="second_hand">יד שנייה</string>
     <string name="second_hand_no_forms">הוסף את הטפסים שמילאת באתר או במסירת הפריטים לדוכן יד שנייה כדי לראות את מצב הפרטים</string>
