@@ -65,7 +65,8 @@ public class ConventionEvent implements Serializable {
 		if (textColor != AmaiModelConverter.NO_COLOR) {
 			return textColor;
 		}
-		if (Convention.getInstance().getEventLocationType(this) == EventLocationType.VIRTUAL) {
+		List<EventLocationType> eventLocationTypes = Convention.getInstance().getEventLocationTypes(this);
+		if (eventLocationTypes != null && eventLocationTypes.size() > 0 && eventLocationTypes.get(0) == EventLocationType.VIRTUAL) {
 			return ThemeAttributes.getColor(context, R.attr.eventTimeVirtualTextColor);
 		}
 		return ThemeAttributes.getColor(context, R.attr.eventTimeDefaultTextColor);
@@ -187,7 +188,8 @@ public class ConventionEvent implements Serializable {
 		if (eventTypeColor != AmaiModelConverter.NO_COLOR) {
 			return eventTypeColor;
 		}
-		if (Convention.getInstance().getEventLocationType(this) == EventLocationType.VIRTUAL) {
+		List<EventLocationType> eventLocationTypes = Convention.getInstance().getEventLocationTypes(this);
+		if (eventLocationTypes != null && eventLocationTypes.size() > 0 && eventLocationTypes.get(0) == EventLocationType.VIRTUAL) {
 			return ThemeAttributes.getColor(context, R.attr.eventTimeVirtualBackgroundColor);
 		}
 		return ThemeAttributes.getColor(context, R.attr.eventTimeDefaultBackgroundColor);

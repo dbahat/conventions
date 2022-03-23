@@ -490,9 +490,13 @@ public class EventActivity extends NavigationActivity {
 
 
 		TextView locationType = findViewById(R.id.event_location_type);
-		ConventionEvent.EventLocationType eventLocationType = Convention.getInstance().getEventLocationType(event);
-		if (eventLocationType != null && Convention.getInstance().getEventLocationTypes().size() > 1) {
-			locationType.setText(eventLocationType.getDescriptionStringId());
+		List<ConventionEvent.EventLocationType> eventLocationTypes = Convention.getInstance().getEventLocationTypes(event);
+		if (eventLocationTypes != null && eventLocationTypes.size() > 0 && Convention.getInstance().getEventLocationTypes().size() > 1) {
+			if (eventLocationTypes.size() > 1) {
+				locationType.setText(R.string.hybrid_event);
+			} else {
+				locationType.setText(eventLocationTypes.get(0).getDescriptionStringId());
+			}
 		} else {
 			showLocationTypeSeparator = false;
 			locationType.setVisibility(View.GONE);

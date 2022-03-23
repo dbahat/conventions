@@ -185,6 +185,7 @@
     <string name="tickets">כרטיסים</string>
     <string name="physical_event">אירוע פיזי</string>
     <string name="virtual_event">אירוע וירטואלי</string>
+    <string name="hybrid_event">אירוע היברידי</string>
     <string name="notification_channel_description_reminders">תזכורות הקשורות לאירועים שסימנת בתוכניה</string>
 
     <string name="accessibility">נגישות</string>
