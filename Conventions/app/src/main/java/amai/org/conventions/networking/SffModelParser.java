@@ -106,7 +106,7 @@ public class SffModelParser implements ModelParser {
 					.withTicketsLastModifiedDate(modifiedDate)
 					.withWebsiteUrl(websiteUrl)
 					// Currently an event can be either virtual or physical (and not both or other types)
-					.withLocationType(isVirtual ? ConventionEvent.EventLocationType.VIRTUAL : ConventionEvent.EventLocationType.PHYSICAL);
+					.withLocationType(Collections.singletonList(isVirtual ? ConventionEvent.EventLocationType.VIRTUAL : ConventionEvent.EventLocationType.PHYSICAL));
 
 			eventList.add(conventionEvent);
 		}

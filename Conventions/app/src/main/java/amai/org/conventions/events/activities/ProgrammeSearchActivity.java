@@ -326,16 +326,18 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 							return filter.getType() == SearchFilter.Type.EventLocationType;
 						}
 					});
-					List<String> eventLocationTypes = CollectionUtils.map(eventLocationTypeFilters, new CollectionUtils.Mapper<SearchFilter, String>() {
+					List<String> selectedLocationTypes = CollectionUtils.map(eventLocationTypeFilters, new CollectionUtils.Mapper<SearchFilter, String>() {
 						@Override
 						public String map(SearchFilter item) {
 							return item.getName();
 						}
 					});
-					if (eventLocationTypes.size() > 0 && eventLocationTypes.size() < totalEventLocationTypeFiltersCount) {
-						ConventionEvent.EventLocationType eventLocationType = Convention.getInstance().getEventLocationType(event);
+					if (selectedLocationTypes.size() > 0 && selectedLocationTypes.size() < totalEventLocationTypeFiltersCount) {
+						List<ConventionEvent.EventLocationType> eventLocationTypes = Convention.getInstance().getEventLocationTypes(event);
 						// Only keep events with a location type, if only certain location types are requested
-						result &= eventLocationType != null && !eventLocationTypes.contains(getResources().getString(eventLocationType.getDescriptionStringId()));
+						result &= eventLocationTypes != null && eventLocationTypes.size() > 0 &&
+							// Check if at least one of the event's location types is included in the filter
+							CollectionUtils.findFirst(eventLocationTypes, s -> selectedLocationTypes.contains(getResources().getString(s.getDescriptionStringId()))) == null;
 					}
 				}
 

@@ -86,7 +86,7 @@ public class Icon2021Convention extends SffConvention {
 
 	@Override
 	protected ConventionStorage initStorage() {
-		return new ConventionStorage(this, R.raw.icon2021_convention_events, 1);
+		return new ConventionStorage(this, R.raw.icon2021_convention_events, 2);
 	}
 
 	@Override
@@ -869,7 +869,7 @@ public class Icon2021Convention extends SffConvention {
 	}
 
 	@Override
-	public ConventionEvent.EventLocationType getEventLocationType(ConventionEvent event) {
-		return event.getLocationType();
+	public List<ConventionEvent.EventLocationType> getEventLocationTypes(ConventionEvent event) {
+		return event.getLocationTypes();
 	}
 }
