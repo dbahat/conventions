@@ -103,7 +103,10 @@ public class EventActivity extends NavigationActivity {
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentInContentContainer(R.layout.activity_event);
-		setBackgroundColor(ThemeAttributes.getColor(this, R.attr.eventDetailsDefaultBackgroundColor));
+		int defaultBackgroundColor = ThemeAttributes.getColor(this, R.attr.eventDetailsDefaultBackgroundColor);
+		if (defaultBackgroundColor != Color.TRANSPARENT) {
+			setBackgroundColor(defaultBackgroundColor);
+		}
 
 		mainLayout = findViewById(R.id.event_main_layout);
 		imagesBackground = findViewById(R.id.images_background);
@@ -129,7 +132,9 @@ public class EventActivity extends NavigationActivity {
 		}
 
 		setToolbarTitle(conventionEvent.getType().getDescription());
-		setToolbarAndContentContainerBackground(null);
+		if (defaultBackgroundColor != Color.TRANSPARENT) {
+			setToolbarAndContentContainerBackground(null);
+		}
 		setToolbarBackground(ThemeAttributes.getDrawable(this, R.attr.eventToolbarColor));
 
 		// In this activity we have many items in the navigation bar (including overflow menu). They create 2 problems with a centered title design:

@@ -82,7 +82,7 @@ public class ImageIdToImageResourceMapper {
 		});
 
 		// In case some events came up without any images at all, add a generic image to them.
-		if (existingImages.size() == 0) {
+		if (existingImages.size() == 0 && imageIdToImageResourceIdMap.containsKey(EVENT_GENERIC)) {
 			existingImages.add(EVENT_GENERIC);
 		}
 
