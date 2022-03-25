@@ -534,6 +534,14 @@ public class EventActivity extends NavigationActivity {
 				Dates.toHumanReadableTimeDuration(event.getEndTime().getTime() - event.getStartTime().getTime()));
 		time.setText(formattedEventTime);
 
+		TextView additionalInfo = (TextView) findViewById(R.id.event_additional_info);
+		String eventAdditionalInfo = Convention.getInstance().getEventAdditionalInfo(event, this);
+		if (eventAdditionalInfo == null || eventAdditionalInfo.isEmpty()) {
+			additionalInfo.setVisibility(View.GONE);
+		} else {
+			additionalInfo.setText(eventAdditionalInfo);
+		}
+
 		setupFeedback(event);
 
 		setupEventDescription(event);

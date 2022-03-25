@@ -793,4 +793,8 @@ public abstract class Convention implements Serializable {
 	public List<ConventionEvent.EventLocationType> getEventLocationTypes(ConventionEvent event) {
 		return Collections.singletonList(ConventionEvent.EventLocationType.PHYSICAL);
 	}
+
+	public String getEventAdditionalInfo(ConventionEvent event, Context context) {
+		return null;
+	}
 }

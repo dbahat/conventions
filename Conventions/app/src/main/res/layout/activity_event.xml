@@ -131,7 +131,17 @@
                     android:paddingTop="5dp"
                     android:gravity="center"
                     tools:text="time" />
+
+				<TextView
+					android:id="@+id/event_additional_info"
+					style="@style/TextAppearance.AppCompat.Small"
+					android:textColor="?attr/eventDescriptionTextColor"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:paddingTop="10dp"
+					tools:text="additional info for the event" />
             </LinearLayout>
+
 
 			<LinearLayout
 				android:id="@+id/event_vote_opener_container"
