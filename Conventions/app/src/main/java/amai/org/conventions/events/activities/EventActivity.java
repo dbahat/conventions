@@ -575,6 +575,14 @@ public class EventActivity extends NavigationActivity {
 
 		setupEventTicketsAndPrices(event);
 
+		TextView additionalInfo = (TextView) findViewById(R.id.event_additional_info);
+		String eventAdditionalInfo = Convention.getInstance().getEventAdditionalInfo(event, this);
+		if (eventAdditionalInfo == null || eventAdditionalInfo.isEmpty()) {
+			additionalInfo.setVisibility(View.GONE);
+		} else {
+			additionalInfo.setText(eventAdditionalInfo);
+		}
+
 		TextView tags = (TextView) findViewById(R.id.event_tags);
 		List<String> eventTags = event.getTags();
 		if (eventTags == null || eventTags.size() == 0) {

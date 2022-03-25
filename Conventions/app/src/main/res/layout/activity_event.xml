@@ -155,6 +155,15 @@
 				</LinearLayout>
 
 				<TextView
+					android:id="@+id/event_additional_info"
+					style="@style/TextAppearance.AppCompat.Small"
+					android:textColor="?attr/eventDescriptionTextColor"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:paddingTop="10dp"
+					tools:text="additional info for the event" />
+
+				<TextView
 					android:id="@+id/event_prices"
 					style="@style/TextAppearance.AppCompat.Small"
 					android:textColor="?attr/eventDescriptionTextColor"
