@@ -147,4 +147,9 @@
     <string name="discounts_bbb">BBB, רחוב הארבעה 12. 10% הנחה. כולל תפריט טבעוני. לא כשר.</string>
     <string name="discounts_parking">חניה בחניון גבעון TLV</string>
     <string name="discounts_parking_details">החל מהשעה 16:00 ועד 05:00 למחרת היום, חניה במחיר של 10 ש"ח בלבד למקודדים את כרטיס החנייה בעמדת הקידוד בלובי סינמטק תל אביב (ליד קופות הסינמטק).</string>
+
+    <string name="physical_only_event_desc">האירוע יועבר באופן פיזי בלבד.</string>
+    <string name="virtual_only_event_desc">האירוע יועבר באופן וירטואלי בלבד.</string>
+    <string name="physical_hybrid_event_desc">האירוע יועבר באופן פיזי ובנוסף לכך ישודר בשידור חי לאתר השידורים.</string>
+    <string name="virtual_hybrid_event_desc">האירוע יועבר באופן וירטואלי, ובנוסף לכך יוקרן באולם במתחם הפיזי. הכניסה לאולם ההקרנה מותנית ברכישת כרטיס ככל אירוע פיזי אחר.</string>
 </resources>

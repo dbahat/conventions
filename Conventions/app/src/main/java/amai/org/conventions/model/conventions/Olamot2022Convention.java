@@ -1,5 +1,6 @@
 package amai.org.conventions.model.conventions;
 
+import android.content.Context;
 import android.text.TextUtils;
 
 import com.google.gson.JsonObject;
@@ -884,6 +885,26 @@ public class Olamot2022Convention extends SffConvention {
 			return Collections.singletonList(ConventionEvent.EventLocationType.VIRTUAL);
 		} else {
 			return Collections.singletonList(ConventionEvent.EventLocationType.PHYSICAL);
+		}
+	}
+
+	@Override
+	public String getEventAdditionalInfo(ConventionEvent event, Context context) {
+		List<ConventionEvent.EventLocationType> allLocationTypes = getEventLocationTypes();
+		List<ConventionEvent.EventLocationType> eventLocationTypes = getEventLocationTypes(event);
+		if (allLocationTypes == null || allLocationTypes.size() < 2 || eventLocationTypes == null || eventLocationTypes.size() == 0) {
+			return null;
+		}
+
+		ConventionEvent.EventLocationType primaryLocationType = eventLocationTypes.get(0);
+		if (eventLocationTypes.size() == 1 && primaryLocationType == ConventionEvent.EventLocationType.PHYSICAL) {
+			return context.getString(R.string.physical_only_event_desc);
+		} else if (eventLocationTypes.size() == 1 && primaryLocationType == ConventionEvent.EventLocationType.VIRTUAL) {
+			return context.getString(R.string.virtual_only_event_desc);
+		} else if (primaryLocationType == ConventionEvent.EventLocationType.PHYSICAL) {
+			return context.getString(R.string.physical_hybrid_event_desc);
+		} else {
+			return context.getString(R.string.virtual_hybrid_event_desc);
 		}
 	}
 }
