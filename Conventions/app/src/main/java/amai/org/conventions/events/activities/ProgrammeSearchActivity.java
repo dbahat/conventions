@@ -326,18 +326,18 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 							return filter.getType() == SearchFilter.Type.EventLocationType;
 						}
 					});
-					List<String> selectedLocationTypes = CollectionUtils.map(eventLocationTypeFilters, new CollectionUtils.Mapper<SearchFilter, String>() {
+					List<String> filteredLocationTypes = CollectionUtils.map(eventLocationTypeFilters, new CollectionUtils.Mapper<SearchFilter, String>() {
 						@Override
 						public String map(SearchFilter item) {
 							return item.getName();
 						}
 					});
-					if (selectedLocationTypes.size() > 0 && selectedLocationTypes.size() < totalEventLocationTypeFiltersCount) {
+					if (filteredLocationTypes.size() > 0 && filteredLocationTypes.size() < totalEventLocationTypeFiltersCount) {
 						List<ConventionEvent.EventLocationType> eventLocationTypes = Convention.getInstance().getEventLocationTypes(event);
 						// Only keep events with a location type, if only certain location types are requested
 						result &= eventLocationTypes != null && eventLocationTypes.size() > 0 &&
-							// Check if at least one of the event's location types is included in the filter
-							CollectionUtils.findFirst(eventLocationTypes, s -> selectedLocationTypes.contains(getResources().getString(s.getDescriptionStringId()))) == null;
+							// Check if all of event's location types are included in the filters
+							!areAllLocationTypesFiltered(eventLocationTypes, filteredLocationTypes);
 					}
 				}
 
@@ -399,6 +399,16 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 					}
 				}
 
+				return true;
+			}
+
+			private boolean areAllLocationTypesFiltered(List<ConventionEvent.EventLocationType> locationTypes, List<String> filteredLocationTypes) {
+				for (ConventionEvent.EventLocationType locationType : locationTypes) {
+					String locationTypeDesc = getResources().getString(locationType.getDescriptionStringId());
+					if (!filteredLocationTypes.contains(locationTypeDesc)) {
+						return false;
+					}
+				}
 				return true;
 			}
 		});
