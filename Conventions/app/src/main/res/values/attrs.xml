@@ -23,6 +23,8 @@
         <attr name="eventListDivider" format="color|reference"/>
         <attr name="conflictingEventListDivider" format="color|reference"/>
         <!-- Activities -->
+        <!-- Content top margin for all activities (useful for bg that should have the top visible) -->
+        <attr name="activitiesTopPadding" format="dimension"/>
         <attr name="activitiesBackground" format="color|reference"/>
         <attr name="actionButtonColor" format="color|reference"/>
         <attr name="actionButtonIcon" format="integer|reference"/>
@@ -45,6 +47,7 @@
         <attr name="swipeToRefreshColor" format="color|reference"/>
         <attr name="swipeToRefreshBackgroundColor" format="color|reference"/>
         <!-- Tabs -->
+        <attr name="tabsBackground" format="color|reference"/>
         <attr name="selectedTabIndicatorColor" format="color|reference"/>
         <attr name="unselectedTabTextColor" format="color|reference"/>
         <attr name="selectedTabTextColor" format="color|reference"/>

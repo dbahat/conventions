@@ -65,6 +65,7 @@
         <!-- The content of each navigation page will be placed in runtime in this container -->
         <amai.org.conventions.customviews.NestedScrollingFrameLayout
             android:id="@+id/navigation_content_view_container"
+            android:paddingTop="?activitiesTopPadding"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
