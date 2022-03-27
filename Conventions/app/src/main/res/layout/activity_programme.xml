@@ -10,7 +10,7 @@
         android:id="@+id/programme_days_tabs"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         style="@style/TabStyle"
-        android:background="?toolbarBackground"
+        android:background="?tabsBackground"
         app:tabGravity="fill"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"/>
