@@ -58,7 +58,7 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 		super.onCreate(savedInstanceState);
 		setContentInContentContainer(R.layout.activity_programme);
 		setToolbarTitle(getResources().getString(R.string.programme_title));
-		removeForeground();
+		removeContentContainerForeground();
 
 		setupActionButton(ThemeAttributes.getDrawable(this, R.attr.actionButtonIcon), new View.OnClickListener() {
 			@Override

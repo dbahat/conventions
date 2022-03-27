@@ -351,7 +351,7 @@
         <item name="newUpdateBackground">@color/transparent_white</item>
         <item name="eventDetailsBoxColor">@color/transparent_black</item>
         <item name="eventFeedbackBoxColor">@color/transparent_black</item>
-        <item name="eventDetailsDefaultBackgroundColor">@color/black</item>
+        <item name="eventDetailsDefaultBackground">@color/black</item>
         <item name="separatorColor">@color/white</item>
         <item name="locationDetailsTopLineColor">@android:color/white</item>
         <item name="iconAddToFavorites">@drawable/star_with_plus_white</item>
@@ -388,7 +388,7 @@
         <item name="newUpdateBackground">@color/very_light_gray</item>
         <item name="eventDetailsBoxColor">@color/transparent_white</item>
         <item name="eventFeedbackBoxColor">@color/transparent_light_yellow</item>
-        <item name="eventDetailsDefaultBackgroundColor">@color/white</item>
+        <item name="eventDetailsDefaultBackground">@color/white</item>
         <item name="separatorColor">@color/black</item>
         <item name="locationDetailsTopLineColor">@android:color/black</item>
         <item name="iconAddToFavorites">@drawable/star_with_plus</item>

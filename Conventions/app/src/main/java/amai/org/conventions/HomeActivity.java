@@ -46,9 +46,9 @@ public class HomeActivity extends NavigationActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setToolbarAndContentContainerBackground(ThemeAttributes.getDrawable(this, R.attr.homeBackground));
-		setToolbarTitle(ThemeAttributes.getDrawable(this, R.attr.homeToolbarTitle));
 		setToolbarBackground(ThemeAttributes.getDrawable(this, R.attr.homeToolbarBackground));
+		setToolbarTitle(ThemeAttributes.getDrawable(this, R.attr.homeToolbarTitle));
+		setBackground(ThemeAttributes.getDrawable(this, R.attr.homeBackground));
 	}
 
 	@Override
@@ -57,6 +57,7 @@ public class HomeActivity extends NavigationActivity {
 
 		currentFavoriteEvent = getCurrentFavoriteEvent();
 		setContentInContentContainer(ThemeAttributes.getResourceId(this, R.attr.homeActivityLayout), false, false);
+		setBackground(ThemeAttributes.getDrawable(this, R.attr.homeBackground));
 
 		// Creating the page layout during onResume (and not onCreate) since the layout is time-driven,
 		// and we want it refreshed in case the activity was paused and got resumed.

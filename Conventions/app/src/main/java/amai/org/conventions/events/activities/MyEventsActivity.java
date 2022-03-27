@@ -94,7 +94,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		super.onCreate(savedInstanceState);
 		setContentInContentContainer(R.layout.activity_my_events);
 		setToolbarTitle(getResources().getString(R.string.my_events_title));
-		removeForeground();
+		removeContentContainerForeground();
 
 		nextEventStart = (TextView) findViewById(R.id.nextEventStart);
 		nextEventStartBottomLine = findViewById(R.id.nextEventStartBottomLine);
