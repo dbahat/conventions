@@ -3,6 +3,7 @@ package amai.org.conventions.navigation;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
@@ -240,15 +241,28 @@ public abstract class NavigationActivity extends AppCompatActivity {
 			navigationToolbar.setLayoutParams(layoutParams);
 		}
 
-		if (useDefaultBackground) {
-			// Set the background in code due to an Android bug that if the background is set in the xml
-			// and then removed, the foreground isn't displayed either and it's not possible to bring it back
-			setBackgroundColor(ThemeAttributes.getColor(this, android.R.attr.colorBackground));
-		} else {
-			removeBackground();
-		}
+//		if (useDefaultBackground) {
+//			// Set the background in code due to an Android bug that if the background is set in the xml
+//			// and then removed, the foreground isn't displayed either and it's not possible to bring it back
+//			int colorBackground = ThemeAttributes.getColor(this, android.R.attr.colorBackground);
+//			setContentContainerBackground(new ColorDrawable(colorBackground));
+//		} else {
+//			removeContentContainerBackground();
+//		}
+
+		setBackground(ThemeAttributes.getDrawable(this, R.attr.activitiesBackground));
 
 		return contentContainer;
+	}
+
+	protected void setBackground(Drawable drawable) {
+		if (navigationToolbar.getBackground() == null) {
+			setToolbarAndContentContainerBackground(drawable);
+			setContentContainerBackground(null);
+		} else {
+			setContentContainerBackground(drawable);
+			setToolbarAndContentContainerBackground(null);
+		}
 	}
 
 	protected void setToolbarAndContentContainerBackground(Drawable drawable) {
@@ -256,23 +270,24 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		toolbarAndContentContainer.setBackground(drawable);
 	}
 
+	/** Always call {@link #setBackground(Drawable)} after this method */
 	protected void setToolbarBackground(Drawable drawable) {
 		navigationToolbar.setBackground(drawable);
 	}
 
-	protected void setBackgroundColor(int color) {
+	protected void setContentContainerBackground(Drawable drawable) {
 		if (contentContainer != null) {
-			contentContainer.setBackgroundColor(color);
+			contentContainer.setBackground(drawable);
 		}
 	}
 
-	protected void removeBackground() {
+	protected void removeContentContainerBackground() {
 		if (contentContainer != null) {
 			contentContainer.setBackground(null);
 		}
 	}
 
-	protected void removeForeground() {
+	protected void removeContentContainerForeground() {
 		if (contentContainer != null) {
 			contentContainer.setForeground(null);
 		}

@@ -37,7 +37,7 @@ public class HallActivity extends NavigationActivity {
 
 		setContentInContentContainer(R.layout.activity_hall);
 		setToolbarTitle(hallName);
-		removeForeground();
+		removeContentContainerForeground();
 
 		int dateIndexToSelect = savedInstanceState == null ? SELECT_CURRENT_DATE : savedInstanceState.getInt(STATE_SELECTED_DATE_INDEX, SELECT_CURRENT_DATE);
 		setupDays(dateIndexToSelect);

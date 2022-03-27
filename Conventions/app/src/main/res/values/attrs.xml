@@ -176,7 +176,8 @@
         <attr name="eventVoteBoxColor" format="color|reference"/>
         <attr name="eventVoteTextColor" format="color|reference"/>
         <attr name="eventFeedbackBoxColor" format="color|reference"/>
-        <attr name="eventDetailsDefaultBackgroundColor" format="color|reference"/>
+        <!-- Must be a color if there are any mapped images -->
+        <attr name="eventDetailsDefaultBackground" format="color|reference"/>
         <attr name="eventFeedbackTextColor" format="color|reference"/>
         <attr name="eventFeedbackAnswerColor" format="color|reference"/>
         <attr name="eventFeedbackSelectedAnswerColor" format="color|reference"/>

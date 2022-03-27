@@ -103,10 +103,6 @@ public class EventActivity extends NavigationActivity {
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentInContentContainer(R.layout.activity_event);
-		int defaultBackgroundColor = ThemeAttributes.getColor(this, R.attr.eventDetailsDefaultBackgroundColor);
-		if (defaultBackgroundColor != Color.TRANSPARENT) {
-			setBackgroundColor(defaultBackgroundColor);
-		}
 
 		mainLayout = findViewById(R.id.event_main_layout);
 		imagesBackground = findViewById(R.id.images_background);
@@ -132,10 +128,9 @@ public class EventActivity extends NavigationActivity {
 		}
 
 		setToolbarTitle(conventionEvent.getType().getDescription());
-		if (defaultBackgroundColor != Color.TRANSPARENT) {
-			setToolbarAndContentContainerBackground(null);
-		}
+
 		setToolbarBackground(ThemeAttributes.getDrawable(this, R.attr.eventToolbarColor));
+		setBackground(ThemeAttributes.getDrawable(this, R.attr.eventDetailsDefaultBackground));
 
 		// In this activity we have many items in the navigation bar (including overflow menu). They create 2 problems with a centered title design:
 		// 1. The code for centering the title based on the number of action items assumes there's no overflow menu.
@@ -234,11 +229,17 @@ public class EventActivity extends NavigationActivity {
 									// Try vibrant swatch
 									swatch = palette.getDarkVibrantSwatch();
 								}
+								// Don't fade from custom background color if the images don't fade to it
+								final boolean setBackgroundBeforeAnimation = isFadingEffectEnabled();
+								final int backgroundColor;
 								if (swatch != null) {
-									updateBackgroundColor(swatch.getRgb());
+									backgroundColor = swatch.getRgb();
 								} else {
-									// Set default background
-									updateBackgroundColor(ThemeAttributes.getColor(EventActivity.this, android.R.attr.colorBackground));
+									// Use default background
+									backgroundColor = ThemeAttributes.getColor(EventActivity.this, R.attr.eventDetailsDefaultBackground);
+								}
+								if (setBackgroundBeforeAnimation) {
+									updateBackgroundColor(backgroundColor);
 								}
 
 								// Fade in the images
@@ -252,7 +253,11 @@ public class EventActivity extends NavigationActivity {
 									public void onAnimationEnd(Animation animation) {
 										// Replace default background with images layout
 										imagesLayout.setVisibility(View.VISIBLE);
-										removeBackground();
+										if (!setBackgroundBeforeAnimation) {
+											updateBackgroundColor(backgroundColor);
+
+										}
+										removeContentContainerBackground();
 									}
 
 									@Override
@@ -303,6 +308,10 @@ public class EventActivity extends NavigationActivity {
 		if (gradientImageView != null) {
 			gradientImageView.setVisibility(View.GONE);
 		}
+	}
+
+	private boolean isFadingEffectEnabled() {
+		return gradientImageView != null && gradientImageView.getVisibility() == View.VISIBLE;
 	}
 
 	@Override
