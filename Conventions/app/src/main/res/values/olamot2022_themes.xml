@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+   <style name="AppBaseTheme.Olamot2022" parent="AppBaseTheme.Light.DarkToolbar">
+        <!-- Sub-themes -->
+        <item name="android:dialogTheme">@style/AppDialogTheme.Olamot2022</item>
+        <item name="alertDialogTheme">@style/AppAlertDialogTheme.Olamot2022</item>
+        <!-- General -->
+        <item name="activitiesTopPadding">7dp</item>
+        <!-- Status bar color -->
+        <item name="android:colorPrimaryDark">@color/black</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="colorAccent">@color/olamot2022_rust</item>
+        <item name="android:colorBackground">@null</item>
+        <item name="android:textColorLink">@color/olamot2022_rust</item>
+        <item name="actionButtonColor">@color/olamot2022_rust</item>
+        <item name="swipeToRefreshColor">@color/olamot2022_rust</item>
+        <item name="swipeToRefreshBackgroundColor">@color/white</item>
+        <item name="snackbarActionColor">@color/olamot2022_rust</item>
+        <item name="highlightedButtonBackground">@drawable/olamot2022_highlighted_button</item>
+        <item name="buttonTextColor">@color/white</item>
+        <item name="borderlessButtonColor">@color/olamot2022_rust</item>
+        <item name="activitiesBackground">@drawable/olamot2022_background</item>
+        <item name="eventListDivider">@drawable/olamot2022_event_list_divider</item>
+        <item name="conflictingEventListDivider">@android:color/transparent</item>
+        <item name="hintTextColor">@color/olamot2022_brown4</item>
+        <item name="separatorColor">@color/olamot2022_brown3</item>
+
+        <!-- Tabs -->
+        <item name="tabsBackground">@null</item>
+        <item name="unselectedTabTextColor">@color/olamot2022_brown1</item>
+        <item name="selectedTabTextColor">@color/white</item>
+        <item name="selectedTabIndicatorColor">@color/white</item>
+
+        <!-- Notifications -->
+        <item name="notificationSmallIcon">@drawable/olamot2022_notification</item>
+        <!-- Toolbar -->
+        <item name="toolbarBackground">@drawable/olamot2022_toolbar_bg</item>
+        <item name="toolbarIconAccentColor">@color/olamot2022_yellow3</item>
+        <!-- Navigation Popup -->
+        <item name="navigationPopupBackground">@color/olamot2022_yellow3</item>
+        <item name="navigationPopupTitle">@drawable/olamot2022_title_small</item>
+        <item name="navigationPopupTitleMargins">20dp</item>
+        <item name="navigationPopupBottomImage">@null</item>
+        <item name="navigationPopupNotSelectedColor">@color/olamot2022_rust</item>
+        <item name="navigationPopupSelectedColor">@color/black</item>
+        <item name="navigationPopupSeparatorColor">@color/olamot2022_brown3</item>
+        <!-- About Screen -->
+        <item name="aboutLogo">@drawable/olamot2022_title</item>
+        <item name="aboutLogoMargins">20dp</item>
+        <!-- Home Screen -->
+        <item name="homeBoxTopMargin">0dp</item>
+        <item name="homeSingleButtonTopMargin">10dp</item>
+        <item name="homeButtonsSideMargin">15dp</item>
+        <item name="homeBackground">@drawable/olamot2022_background</item>
+        <item name="homeLogo">@drawable/olamot2022_title</item>
+        <item name="homeLogoMargin">0dp</item>
+        <item name="homeFrameTopMargin">5dp</item>
+        <item name="homeFrameBottomMargin">5dp</item>
+        <item name="homeToolbarTitle">@null</item>
+        <item name="homeTitleBackground">@color/olamot2022_rust</item>
+        <item name="homeTitleText">@color/white</item>
+        <item name="homeMessageBackground">@color/olamot2022_brown1</item>
+        <item name="homeMessageText">@color/white</item>
+        <item name="homeCurrentEventBackground">@color/olamot2022_brown2</item>
+        <item name="homeCurrentEventText">@color/white</item>
+        <item name="homeUpcomingEventBackground">@color/olamot2022_brown1</item>
+        <item name="homeButtonBackground">@drawable/olamot2022_home_activity_button</item>
+        <item name="homeButtonText">@color/black</item>
+        <item name="homeBottomImage">@drawable/olamot2022_home_bottom</item>
+        <item name="homeEventNameInList">@color/white</item>
+        <item name="homeEventsListDivider">@drawable/olamot2022_home_event_list_divider</item>
+        <!-- Event View -->
+        <item name="eventTypeEndedColor">@color/olamot2022_brown2</item>
+        <item name="eventTypeCurrentColor">@color/olamot2022_rust</item>
+        <item name="eventTypeNotStartedColor">@color/black</item>
+        <item name="eventTimeDefaultTextColor">@color/white</item>
+        <item name="eventTimeDefaultBackgroundColor">@color/olamot2022_brown2</item>
+        <item name="eventTimeVirtualTextColor">@color/white</item>
+        <item name="eventTimeVirtualBackgroundColor">@color/olamot2022_yellow1</item>
+        <item name="eventDetailsColorNotStarted">@color/black</item>
+        <item name="eventDetailsColorCurrent">@color/olamot2022_rust</item>
+        <item name="eventDetailsColorEnded">@color/olamot2022_brown2</item>
+        <item name="eventSendFeedbackColor">@color/olamot2022_yellow2</item>
+        <item name="eventSentFeedbackColor">@color/olamot2022_yellow2</item>
+        <item name="eventNonFavoriteColor">@color/olamot2022_brown2</item>
+        <item name="eventFavoriteColor">@color/olamot2022_rust</item>
+        <!-- Map Screen -->
+        <item name="locationDetailsBackground">@color/white</item>
+        <item name="locationDetailsTitleColor">@color/black</item>
+        <item name="mapBackground">@drawable/olamot2022_background</item>
+        <item name="floorChangeBackground">@color/very_transparent_white</item>
+        <item name="standIconColor">@color/black</item>
+        <item name="standsTypeTitleColor">@color/black</item>
+        <!-- Updates Screen -->
+        <item name="focusedUpdateBackground">@android:color/transparent</item>
+        <item name="newUpdateBackground">@android:color/transparent</item>
+        <item name="updateItemBorder">@color/olamot2022_brown3</item>
+        <item name="updateTextColor">@color/olamot2022_brown2</item>
+        <item name="newUpdateTextColor">@color/black</item>
+        <item name="focusedUpdateTextColor">@color/olamot2022_rust</item>
+        <item name="updateItemSeparator">@null</item>
+        <item name="updateTimeBackground">@color/olamot2022_rust</item>
+        <item name="updateTimeColor">@color/white</item>
+        <item name="updatesSeparatorColor">@android:color/transparent</item>
+        <!-- My Events Screen -->
+        <item name="nextEventStartTimeBackground">@android:color/transparent</item>
+        <item name="nextEventStartTimeTextColor">@color/olamot2022_rust</item>
+        <item name="nextEventStartTimeBottomLineColor">@color/olamot2022_brown3</item>
+        <item name="conflictingEventsBackground">@color/transparent_black</item>
+        <!-- Event Screen -->
+        <item name="eventToolbarColor">?toolbarBackground</item>
+        <item name="eventActivityFavoriteColor">@color/olamot2022_yellow3</item>
+        <!-- Must be a color if there are any mapped images -->
+        <item name="eventDetailsDefaultBackground">?activitiesBackground</item>
+        <item name="eventTitleBackground">@drawable/olamot2022_event_title_background</item>
+        <item name="eventTitleTextColor">@color/white</item>
+        <item name="eventDetailsBoxColor">@android:color/transparent</item>
+        <item name="eventDetailsHighlightedTextColor">@color/olamot2022_rust</item>
+        <item name="eventDescriptionTextColor">@color/black</item>
+        <item name="eventDescriptionBoxColor">@android:color/transparent</item>
+        <item name="eventFeedbackBoxColor">@color/olamot2022_brown2</item>
+        <item name="eventFeedbackTextColor">@color/white</item>
+        <item name="feedbackButtonColor">@color/olamot2022_yellow3</item>
+        <item name="eventFeedbackAnswerColor">@color/white</item>
+        <item name="eventFeedbackSelectedAnswerColor">@color/olamot2022_yellow3</item>
+        <item name="eventVoteBoxColor">@color/olamot2022_yellow3</item>
+        <item name="eventVoteTextColor">@color/black</item>
+        <!-- Feedback Screen -->
+        <item name="progressBarDrawable">@drawable/olamot2022_rotating_circular_progress_bar</item>
+        <item name="feedbackAnswerButtonColor">@color/black</item>
+        <item name="feedbackAnswerButtonSelectedColor">@color/olamot2022_rust</item>
+        <item name="conventionFeedbackTextColor">@color/black</item>
+        <!-- Programme Screen -->
+        <item name="eventTimeHeaderAlwaysUseDefaultTextColor">false</item>
+        <item name="eventTimeHeaderDefaultTextColor">?eventTypeEndedColor</item>
+        <item name="eventTimeHeaderBackground">@null</item>
+        <item name="searchCategoriesColor">@color/olamot2022_rust</item>
+        <!-- Programme Search Screen -->
+        <item name="eventNameKeywordHighlightColor">@color/olamot2022_yellow2</item>
+        <item name="eventKeywordHighlightColor">@color/olamot2022_yellow2</item>
+        <item name="searchDrawerAccentColor">@color/olamot2022_rust</item>
+        <!-- Second Hand Screen -->
+        <item name="secondHandFormOpenColor">?eventTypeNotStartedColor</item>
+        <item name="secondHandFormClosedColor">?eventTypeEndedColor</item>
+        <item name="secondHandItemDefaultColor">?secondHandFormOpenColor</item>
+        <item name="secondHandItemCreatedColor">?secondHandFormClosedColor</item>
+        <item name="secondHandItemSoldColor">@color/green</item>
+        <item name="secondHandItemMissingColor">@color/red</item>
+        <item name="secondHandItemsDivider">@drawable/olamot2022_second_hand_item_list_divider</item>
+        <item name="secondHandFilterColor">?android:textColorPrimary</item>
+        <!-- Discounts activity -->
+        <item name="discountsActivityLayout">@layout/activity_discounts</item>
+    </style>
+
+    <style name="AppBaseTheme.Olamot2022.Event" parent="AppBaseTheme.Olamot2022">
+        <item name="android:textColorLink">@color/olamot2022_rust</item>
+    </style>
+
+    <style name="AppBaseTheme.Olatmo20221.Settings" parent="AppBaseTheme.Olamot2022">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorSecondary">@color/black</item>
+    </style>
+
+
+    <style name="AppDialogTheme.Olamot2022" parent="Theme.AppCompat.Light.Dialog">
+        <!-- This is the default starting API23. In any case the title is always left-justified so it's best to not use it. -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="colorAccent">@color/olamot2022_rust</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="borderlessButtonColor">@color/olamot2022_rust</item>
+    </style>
+
+    <style name="AppAlertDialogTheme.Olamot2022" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/olamot2022_rust</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="borderlessButtonColor">@color/olamot2022_rust</item>
+    </style>
+
+    <style name="AppBaseTheme.Olamot2022.Splash">
+        <item name="android:windowBackground">@drawable/olamot2022_splash</item>
+    </style>
+</resources>

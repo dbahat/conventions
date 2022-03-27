@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="olamot2022_brown1">#210400</color>
+    <color name="olamot2022_brown2">#4e463c</color>
+    <color name="olamot2022_brown3">#776654</color>
+    <color name="olamot2022_brown4">#998d78</color>
+    <color name="olamot2022_yellow1">#9f735b</color>
+    <color name="olamot2022_yellow2">#ed9928</color>
+    <color name="olamot2022_rust">#9b3f38</color>
+
+    <color name="olamot2022_yellow3">#cdbb7b</color>
+</resources>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="@color/icon2021_blue3" >
-    <item android:drawable="@color/icon2021_blue2"/>
+    android:color="@color/olamot2022_brown4" >
+    <item android:drawable="@color/olamot2022_yellow1"/>
 </ripple>
