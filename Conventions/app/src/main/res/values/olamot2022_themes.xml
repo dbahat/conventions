@@ -28,8 +28,8 @@
         <!-- Tabs -->
         <item name="tabsBackground">@null</item>
         <item name="unselectedTabTextColor">@color/olamot2022_brown1</item>
-        <item name="selectedTabTextColor">@color/white</item>
-        <item name="selectedTabIndicatorColor">@color/white</item>
+        <item name="selectedTabTextColor">@color/olamot2022_rust</item>
+        <item name="selectedTabIndicatorColor">@color/olamot2022_rust</item>
 
         <!-- Notifications -->
         <item name="notificationSmallIcon">@drawable/olamot2022_notification</item>
@@ -95,7 +95,7 @@
         <item name="focusedUpdateBackground">@android:color/transparent</item>
         <item name="newUpdateBackground">@android:color/transparent</item>
         <item name="updateItemBorder">@color/olamot2022_brown3</item>
-        <item name="updateTextColor">@color/olamot2022_brown2</item>
+        <item name="updateTextColor">@color/olamot2022_brown3</item>
         <item name="newUpdateTextColor">@color/black</item>
         <item name="focusedUpdateTextColor">@color/olamot2022_rust</item>
         <item name="updateItemSeparator">@null</item>
