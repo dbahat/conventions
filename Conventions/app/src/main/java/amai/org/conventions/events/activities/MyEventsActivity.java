@@ -117,7 +117,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 				.setMessage(R.string.add_events_instructions)
 				.setView(dialogView)
 				.setPositiveButton(R.string.add, (dialogInterface, i) -> {
-					final String user = userNameTextView.getText().toString();
+					final String user = userNameTextView.getText().toString().trim();
 					final String password = passwordTextView.getText().toString();
 					final ProgressDialog progressDialog = new ProgressDialog(MyEventsActivity.this);
 					progressDialog.setMessage(getString(R.string.loading_events));
