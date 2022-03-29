@@ -57,6 +57,7 @@ import amai.org.conventions.utils.Objects;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import sff.org.conventions.BuildConfig;
+import sff.org.conventions.R;
 
 public abstract class Convention implements Serializable {
 
@@ -857,5 +858,22 @@ public abstract class Convention implements Serializable {
 
 	public String getEventAdditionalInfo(ConventionEvent event, Context context) {
 		return null;
+	}
+
+	public boolean areVirtualEventTicketsUnlimited(ConventionEvent event) {
+		return false;
+	}
+
+	public String getSoldOutTicketsMessage(Context context, ConventionEvent event) {
+		String message;
+		if (this.areVirtualEventTicketsUnlimited(event)) {
+			message = context.getString(R.string.event_tickets_sold_out_are_you_sure_unlimited_virtual);
+		} else {
+			message = context.getString(R.string.event_tickets_sold_out_are_you_sure);
+		}
+		if (this.canUserLogin()) {
+			message += "\n" + context.getString(R.string.add_preordered_tickets);
+		}
+		return message;
 	}
 }

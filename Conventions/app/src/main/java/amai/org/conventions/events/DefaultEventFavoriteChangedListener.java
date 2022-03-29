@@ -36,9 +36,7 @@ public class DefaultEventFavoriteChangedListener implements OnEventFavoriteChang
 			new AlertDialog.Builder(view.getContext())
 					.setTitle(R.string.event_add_to_favorites)
 					.setMessage(
-						Convention.getInstance().canUserLogin() ?
-							R.string.event_tickets_sold_out_are_you_sure :
-							R.string.event_tickets_sold_out_are_you_sure_no_login
+						Convention.getInstance().getSoldOutTicketsMessage(view.getContext(), updatedEvent)
 					)
 					.setPositiveButton(R.string.add_anyway, new DialogInterface.OnClickListener() {
 						@Override

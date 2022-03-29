@@ -907,4 +907,12 @@ public class Olamot2022Convention extends SffConvention {
 			return context.getString(R.string.virtual_hybrid_event_desc);
 		}
 	}
+
+	@Override
+	public boolean areVirtualEventTicketsUnlimited(ConventionEvent event) {
+		// For this convention, all hybrid events virtual tickets are unlimited.
+		// There are virtual events with limited tickets but they aren't hybrid.
+		List<ConventionEvent.EventLocationType> eventLocationTypes = this.getEventLocationTypes(event);
+		return eventLocationTypes != null && eventLocationTypes.size() > 1;
+	}
 }
