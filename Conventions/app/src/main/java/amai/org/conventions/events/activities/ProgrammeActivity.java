@@ -80,6 +80,8 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 		if (savedInstanceState != null && savedInstanceState.getBoolean(STATE_NAVIGATE_ICON_MODIFIED, false)) {
 			navigateToMyEventsIconModified = true;
 		}
+
+		refreshModel(false, false);
 	}
 
 	private void setupDays(int dateIndexToSelect) {
@@ -211,11 +213,15 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 				.getInstance(this)
 				.logEvent("pull_to_refresh", null);
 
+		refreshModel(true, true);
+	}
+
+	private void refreshModel(boolean showError, boolean force) {
 		new AsyncTask<Void, Void, Boolean>() {
 			@Override
 			protected Boolean doInBackground(Void... params) {
-				ModelRefresher modelRefresher = new ModelRefresher();
-				return modelRefresher.refreshFromServer(true);
+				ModelRefresher modelRefresher = ModelRefresher.getInstance();
+				return modelRefresher.refreshFromServer(force);
 			}
 
 			@Override
@@ -228,7 +234,7 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 						fragment.updateEvents();
 					}
 				}
-				if (!isSuccess) {
+				if (showError && !isSuccess) {
 					Toast.makeText(ProgrammeActivity.this, R.string.update_refresh_failed, Toast.LENGTH_SHORT).show();
 				}
 			}
