@@ -62,6 +62,7 @@
         <item name="eventFavoriteIcon">@drawable/ic_star_black_24dp</item>
         <item name="eventAlertsIcon">@drawable/ic_action_alarms</item>
         <item name="eventAlertsIconColor">?eventFavoriteColor</item>
+        <item name="eventRatingColor">@color/yellow</item>
 
         <!-- Navigation popup -->
         <item name="navigationPopupSeparatorColor">?navigationPopupNotSelectedColor</item>
@@ -231,6 +232,7 @@
         <item name="eventFavoriteIcon">@drawable/ic_star_black_24dp</item>
         <item name="eventAlertsIcon">@drawable/ic_action_alarms</item>
         <item name="eventAlertsIconColor">?eventFavoriteColor</item>
+        <item name="eventRatingColor">@color/yellow</item>
 
         <!-- Navigation popup -->
         <item name="navigationPopupSeparatorColor">?navigationPopupNotSelectedColor</item>

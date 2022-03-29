@@ -266,7 +266,11 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		int filterColor;
 		if (weightedRating != null) {
 			icon = ContextCompat.getDrawable(getContext(), weightedRating.getImageResourceId());
-			filterColor = ContextCompat.getColor(getContext(), R.color.yellow);
+			if (weightedRating instanceof FeedbackQuestion.Smiley3PointAnswer) {
+				filterColor = ContextCompat.getColor(getContext(), R.color.yellow);
+			} else {
+				filterColor = selectedAnswerColor != Convention.NO_COLOR ? selectedAnswerColor : ThemeAttributes.getColor(getContext(), R.attr.feedbackAnswerButtonSelectedColor);
+			}
 		} else {
 			icon = ContextCompat.getDrawable(getContext(), R.drawable.feedback);
 			filterColor = ThemeAttributes.getColor(getContext(), R.attr.feedbackButtonColor);

@@ -76,6 +76,7 @@
         <attr name="eventSendFeedbackColor" format="color|reference"/>
         <attr name="eventSentFeedbackColor" format="color|reference"/>
         <attr name="eventFeedbackColorOverride" format="color|reference"/>
+        <attr name="eventRatingColor" format="color|reference"/>
         <!-- About screen -->
         <attr name="aboutLogo" format="integer"/>
         <attr name="aboutLogoMargins" format="dimension"/>
