@@ -82,7 +82,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 		List<Update> updates = Convention.getInstance().getUpdates();
 		initializeUpdatesList(updates, updates.size()); // All items are new in this list
 	    setUpdatesVisibility();
-	    retrieveUpdatesList(false);
+	    retrieveUpdatesList(false, false);
 	}
 
 	@Override
@@ -95,7 +95,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 
 		setUpdatesBackground();
 		updatesAdapter.notifyItemRangeChanged(0, Convention.getInstance().getUpdates().size());
-        retrieveUpdatesList(true);
+        retrieveUpdatesList(true, true);
 	}
 
 	private void resolveUiElements() {
@@ -115,8 +115,11 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 		updatesLayout.setVisibility(showMessage ? View.GONE : View.VISIBLE);
 	}
 
-    private void retrieveUpdatesList(final boolean showError) {
+    private void retrieveUpdatesList(final boolean showError, final boolean force) {
 		final UpdatesRefresher refresher = UpdatesRefresher.getInstance(UpdatesActivity.this);
+		if (refresher.isRefreshInProgress()) {
+			return;
+		}
 
 		// Workaround (Android issue #77712) - SwipeRefreshLayout indicator does not appear when the `setRefreshing(true)` is called before
 		// the `SwipeRefreshLayout#onMeasure()`, so we post the setRefreshing call to the layout queue.
@@ -130,7 +133,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 
         // Refresh, and don't allow new updates notification to occur due to this refresh.
 	    // Only force refresh if it's due to user interaction (in that case we also show an error).
-	    refresher.refreshFromServer(false, showError, new UpdatesRefresher.OnUpdateFinishedListener() {
+	    refresher.refreshFromServer(false, force, new UpdatesRefresher.OnUpdateFinishedListener() {
 			@Override
 			public void onSuccess(int newUpdatesNumber) {
 				updateRefreshingFlag();
@@ -204,6 +207,8 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 
 		if (updatePosition == UpdatesAdapter.UPDATE_NOT_FOUND) {
 			super.onPushNotificationReceived(pushNotification); // Default implementation (popup)
+			// Refresh
+			retrieveUpdatesList(false, true);
 		} else {
 			// Scroll to update
 			recyclerView.scrollToPosition(updatePosition);
