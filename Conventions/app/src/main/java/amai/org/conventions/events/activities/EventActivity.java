@@ -622,7 +622,7 @@ public class EventActivity extends NavigationActivity {
 					new AsyncTask<Void, Void, Boolean>() {
 						@Override
 						protected Boolean doInBackground(Void... params) {
-							ModelRefresher modelRefresher = new ModelRefresher();
+							ModelRefresher modelRefresher = ModelRefresher.getInstance();
 							return modelRefresher.refreshTicketsForEvent(event);
 						}
 

@@ -24,6 +24,23 @@ public class ModelRefresher {
 
 	private static final long MINIMUM_REFRESH_TIME = Dates.MILLISECONDS_IN_HOUR;
 
+	private static ModelRefresher instance = null;
+	private boolean isRefreshingModel = false;
+
+	public static synchronized ModelRefresher getInstance() {
+		if (instance == null) {
+			instance = new ModelRefresher();
+		}
+		return instance;
+	}
+
+	private ModelRefresher() {
+	}
+
+	public boolean isRefreshingModel() {
+		return isRefreshingModel;
+	}
+
 	/**
 	 * Downloads the model from the server.
 	 *
@@ -41,6 +58,8 @@ public class ModelRefresher {
 				return true;
 			}
 		}
+
+		isRefreshingModel = true;
 
 		try {
 			Date ticketsModifiedDate = getTicketsModifiedDate();
@@ -69,6 +88,8 @@ public class ModelRefresher {
 		} catch (Exception e) {
 			Log.e(TAG, "Could not retrieve model: " + e.getMessage(), e);
 			return false;
+		} finally {
+			isRefreshingModel = false;
 		}
 
 		return true;

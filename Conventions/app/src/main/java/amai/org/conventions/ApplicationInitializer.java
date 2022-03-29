@@ -76,7 +76,7 @@ public class ApplicationInitializer {
 
             @Override
             protected Void doInBackground(Void... voids) {
-                ModelRefresher modelRefresher = new ModelRefresher();
+                ModelRefresher modelRefresher = ModelRefresher.getInstance();
                 modelRefresher.refreshFromServer(false);
                 return null;
             }
