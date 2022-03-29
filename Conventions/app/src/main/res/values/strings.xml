@@ -60,7 +60,7 @@
     <string name="events_one_search_results_number">נמצא אירוע אחד</string>
 
     <string name="notification_event_about_to_start_title">אירוע עומד להתחיל</string>
-    <string name="notification_event_about_to_start_message_format">האירוע %1$s עומד להתחיל באולם %2$s</string>
+    <string name="notification_event_about_to_start_message_format">האירוע %1$s עומד להתחיל ב%2$s</string>
     <string name="notification_event_ended_title">עזרו לנו להשתפר</string>
     <string name="notification_event_ended_message_format">נהנת באירוע %s? שלח פידבק למארגני האירוע</string>
     <string name="notification_2_events_ended_message_format">נהנת באירוע %s ובאירוע נוסף אחד? שלח פידבק למארגנים</string>
