@@ -1,5 +1,6 @@
 package amai.org.conventions.updates;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -14,6 +15,7 @@ import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.Update;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
+import amai.org.conventions.networking.ModelRefresher;
 import amai.org.conventions.networking.UpdatesRefresher;
 import amai.org.conventions.notifications.PushNotification;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -138,7 +140,11 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 			public void onSuccess(int newUpdatesNumber) {
 				updateRefreshingFlag();
 				initializeUpdatesList(Convention.getInstance().getUpdates(), newUpdatesNumber);
-			    setUpdatesVisibility();
+				// Many updates are related to changes in the programme
+				if (newUpdatesNumber > 0 && !ModelRefresher.getInstance().isRefreshingModel()) {
+					refreshModel();
+				}
+				setUpdatesVisibility();
 				// If we don't do that, the recycler view will show the previous items and the user will have to scroll manually
 				recyclerView.scrollToPosition(0);
 			}
@@ -155,6 +161,17 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 				swipeRefreshLayout.setRefreshing(false);
 			}
 		});
+	}
+
+	private void refreshModel() {
+		new AsyncTask<Void, Void, Void>() {
+
+			@Override
+			protected Void doInBackground(Void... voids) {
+				ModelRefresher.getInstance().refreshFromServer(true);
+				return null;
+			}
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private void initializeUpdatesList(List<Update> updates, int newItemsNumber) {
