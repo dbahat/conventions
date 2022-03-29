@@ -84,6 +84,7 @@
         <item name="eventSentFeedbackColor">@color/olamot2022_yellow2</item>
         <item name="eventNonFavoriteColor">@color/olamot2022_brown2</item>
         <item name="eventFavoriteColor">@color/olamot2022_rust</item>
+        <item name="eventRatingColor">@color/olamot2022_rust</item>
         <!-- Map Screen -->
         <item name="locationDetailsBackground">@color/white</item>
         <item name="locationDetailsTitleColor">@color/black</item>
