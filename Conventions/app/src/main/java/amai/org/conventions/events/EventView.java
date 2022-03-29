@@ -251,7 +251,7 @@ public class EventView extends FrameLayout {
             int filterColor;
             if (weightedRating != null) {
                 icon = ContextCompat.getDrawable(getContext(), weightedRating.getImageResourceId());
-                filterColor = ContextCompat.getColor(getContext(), R.color.yellow);
+                filterColor = ThemeAttributes.getColor(getContext(), R.attr.eventRatingColor);
             } else if ((!feedback.isSent()) && feedback.hasAnsweredQuestions() &&
                     !Convention.getInstance().isFeedbackSendingTimeOver()) {
                 icon = ContextCompat.getDrawable(getContext(), android.R.drawable.ic_dialog_email);
