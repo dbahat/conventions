@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import androidx.annotation.VisibleForTesting;
+import sff.org.conventions.BuildConfig;
+
 public class Dates {
 	public static final long MILLISECONDS_IN_MINUTE = java.util.concurrent.TimeUnit.MINUTES.toMillis(1);
 	public static final long MILLISECONDS_IN_HOUR = java.util.concurrent.TimeUnit.HOURS.toMillis(1);
@@ -27,19 +30,27 @@ public class Dates {
 	private static Date getInitialDate() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm", Dates.getLocale());
 		try {
-			return dateFormat.parse("19.04.2022 18:10");
-		} catch (ParseException e) {
+//			return dateFormat.parse("19.04.2022 18:10");
+			return null;
+		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 	}
 
+	@VisibleForTesting
+	public static void setInitialDate(Date newInitialDate) {
+		initialDate = newInitialDate;
+	}
+
 	public static Date now() {
+		if (BuildConfig.DEBUG && initialDate != null) {
+			// Used for testing
+			// Fixed startup date
+			return new Date(System.currentTimeMillis() - appStartDate.getTime() + initialDate.getTime());
+		}
+
 		// Now
 		return new Date(System.currentTimeMillis());
-
-		// Used for testing
-		// Fixed startup date
-//		return new Date(System.currentTimeMillis() - appStartDate.getTime() + initialDate.getTime());
 	}
 
 	public static Calendar toCalendar(Date date) {
@@ -170,6 +181,10 @@ public class Dates {
 
 	public static String formatHoursAndMinutes(Date date) {
 		return formatDate("HH:mm", date);
+	}
+
+	public static String formatDay(Date date) {
+		return formatDate("EEEE", date);
 	}
 
 	public static String formatDateAndTime(Date date) {

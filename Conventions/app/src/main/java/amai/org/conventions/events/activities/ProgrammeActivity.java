@@ -258,28 +258,22 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 	}
 
 	private void refreshModel(boolean showError, boolean force) {
-		new AsyncTask<Void, Void, Boolean>() {
+		ModelRefresher.getInstance().refreshFromServer(force, new ModelRefresher.OnModelRefreshFinishedListener() {
 			@Override
-			protected Boolean doInBackground(Void... params) {
-				ModelRefresher modelRefresher = ModelRefresher.getInstance();
-				return modelRefresher.refreshFromServer(force);
-			}
-
-			@Override
-			protected void onPostExecute(Boolean isSuccess) {
+			public void onRefreshFinished(Exception e) {
 				isRefreshing = false;
 				for (int i = 0; i < daysPager.getAdapter().getCount(); ++i) {
 					ProgrammeDayFragment fragment = getDayFragment(i);
 					fragment.setRefreshing(false);
-					if (isSuccess) {
+					if (e == null) {
 						fragment.updateEvents();
 					}
 				}
-				if (showError && !isSuccess) {
+				if (e != null && showError) {
 					Toast.makeText(ProgrammeActivity.this, R.string.update_refresh_failed, Toast.LENGTH_SHORT).show();
 				}
 			}
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		});
 	}
 
 	private ProgrammeDayFragment getDayFragment(int i) {

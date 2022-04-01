@@ -72,16 +72,7 @@ public class ApplicationInitializer {
     }
 
     private void refreshModel() {
-        new AsyncTask<Void, Void, Void>() {
-
-            @Override
-            protected Void doInBackground(Void... voids) {
-                ModelRefresher modelRefresher = ModelRefresher.getInstance();
-                modelRefresher.refreshFromServer(false);
-                return null;
-            }
-        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-
+        ModelRefresher.getInstance().refreshFromServer(false, new ModelRefresher.OnModelRefreshFinishedListener() {});
     }
 
     // Since push notifications cannot work without google play services, check for play services existence, and if

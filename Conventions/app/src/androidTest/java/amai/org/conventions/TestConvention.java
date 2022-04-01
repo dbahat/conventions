@@ -164,4 +164,10 @@ public class TestConvention extends Convention {
     public ConventionStorage getStorage() {
         return mock(ConventionStorage.class);
     }
+
+    @Override
+    public List<ConventionEvent.EventLocationType> getEventLocationTypes(ConventionEvent event) {
+        //noinspection deprecation - intentional
+        return event.getLocationTypes();
+    }
 }

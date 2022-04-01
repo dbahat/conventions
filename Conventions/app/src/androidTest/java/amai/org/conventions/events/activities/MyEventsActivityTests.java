@@ -1,9 +1,6 @@
 package amai.org.conventions.events.activities;
 
-import android.content.Intent;
-
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -18,9 +15,9 @@ import amai.org.conventions.model.EventType;
 import amai.org.conventions.model.Hall;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Dates;
-import androidx.test.InstrumentationRegistry;
-import androidx.test.rule.ActivityTestRule;
-import androidx.test.runner.AndroidJUnit4;
+import androidx.test.core.app.ActivityScenario;
+import androidx.test.core.app.ApplicationProvider;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.assertion.ViewAssertions.doesNotExist;
@@ -37,12 +34,9 @@ public class MyEventsActivityTests {
                 generateEvent(), generateEvent(), generateEvent()
         )));
         convention.setUserInput(new HashMap<String, ConventionEvent.UserInput>());
-        convention.load(InstrumentationRegistry.getTargetContext());
+        convention.load(ApplicationProvider.getApplicationContext());
         Convention.setConvention(convention);
     }
-
-    @Rule
-    public ActivityTestRule<MyEventsActivity> myEventsActivityActivityTestRule = new ActivityTestRule<>(MyEventsActivity.class, false, false);
 
     @Test
     public void MyEvents_Shows_Single_Event_When_User_Marked_Single_Event_As_Favorite() {
@@ -50,10 +44,10 @@ public class MyEventsActivityTests {
         ConventionEvent nonAttendingEvent = Convention.getInstance().getEvents().get(1);
 
         attendingEvent.setAttending(true);
-        myEventsActivityActivityTestRule.launchActivity(new Intent());
-
-        onView(withText(attendingEvent.getTitle())).check(matches(isDisplayed()));
-        onView(withText(nonAttendingEvent.getTitle())).check(doesNotExist());
+        try (ActivityScenario<MyEventsActivity> scenario = ActivityScenario.launch(MyEventsActivity.class)) {
+            onView(withText(attendingEvent.getTitle())).check(matches(isDisplayed()));
+            onView(withText(nonAttendingEvent.getTitle())).check(doesNotExist());
+        }
     }
 
     private ConventionEvent generateEvent() {
