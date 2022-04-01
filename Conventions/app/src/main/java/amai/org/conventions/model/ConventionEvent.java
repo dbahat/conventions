@@ -342,7 +342,7 @@ public class ConventionEvent implements Serializable {
 		this.locationTypes = locationTypes;
 	}
 
-	public ConventionEvent withLocationType(List<EventLocationType> locationType) {
+	public ConventionEvent withLocationTypes(List<EventLocationType> locationType) {
 		setLocationTypes(locationType);
 		return this;
 	}
@@ -609,7 +609,10 @@ public class ConventionEvent implements Serializable {
 				Objects.equals(this.category, other.category) &&
 				Objects.equals(this.price, other.price) &&
 				Objects.equals(this.websiteUrl, other.websiteUrl) &&
-				Objects.equals(this.tags, other.tags);
+				Objects.equals(this.tags, other.tags) &&
+				Objects.equals(this.availableTickets, other.availableTickets) &&
+				Objects.equals(this.ticketsLimit, other.ticketsLimit) &&
+				Objects.equals(this.locationTypes, other.locationTypes);
 	}
 
 	@Override
