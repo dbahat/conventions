@@ -164,14 +164,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 	}
 
 	private void refreshModel() {
-		new AsyncTask<Void, Void, Void>() {
-
-			@Override
-			protected Void doInBackground(Void... voids) {
-				ModelRefresher.getInstance().refreshFromServer(true);
-				return null;
-			}
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		ModelRefresher.getInstance().refreshFromServer(true, new ModelRefresher.OnModelRefreshFinishedListener() {});
 	}
 
 	private void initializeUpdatesList(List<Update> updates, int newItemsNumber) {
