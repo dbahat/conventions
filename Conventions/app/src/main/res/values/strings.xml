@@ -141,6 +141,11 @@
     <string name="show_reminder_before_event_starts_summary">הצג תזכורת לפני שאירוע שסימנתי מתחיל.\nניתן לשנות הגדרה זו לכל אירוע בנפרד בדף האירוע.</string>
     <string name="show_event_feedback_reminder_title">פידבק לאירוע</string>
     <string name="show_event_feedback_reminder_summary">הצג תזכורת לשליחת פידבק אחרי שאירוע שסימנתי מסתיים.\nניתן לשנות הגדרה זו לכל אירוע בנפרד בדף האירוע.</string>
+    <string name="general_preferences">כללי</string>
+    <string name="favorites_were_updated">שינויים באירועים מועדפים</string>
+    <string name="go_to_my_events">עבור לאירועים שלי</string>
+    <string name="show_favorites_updates_title">הודע על שינויים באירועים מועדפים</string>
+    <string name="show_favorites_updates_summary">הצג הודעות כאשר התוכניה מתעדכנת ויש שינויים חשובים באירועים מועדפים, כמו זמן, מיקום ואורך האירוע.</string>
     <string name="push_registration_failed">לא ניתן לעדכן. בדוק חיבור לאינטרנט</string>
     <string name="push_notification_title">התראה</string>
     <string name="change_settings">שנה הגדרות</string>
@@ -190,4 +195,17 @@
 
     <string name="accessibility">נגישות</string>
     <string name="accessibility_android_settings_button">להפעלת אפשרויות הנגישות של אנדרואיד</string>
+    <string name="deleted_event_message">האירוע \'%s\' שהיה אמור להתקיים ב%s ב%s בוטל.</string>
+    <string name="changed_event_message">האירוע \'%s\' שהיה אמור להיות %sב%s ב%s %s%s.</string>
+    <string name="changed_day_and_time">%s בשעה %s</string>
+    <string name="changed_time_today">היום בשעה %s</string>
+    <string name="changed_time">שעה %s</string>
+    <string name="changed_duration">באורך %s</string>
+    <string name="changed_event_new_time">עבר ל%s</string>
+    <string name="changed_event_new_hall">עבר ל%s</string>
+    <string name="changed_event_new_hall_continued">ב%s</string>
+    <string name="changed_event_new_duration">יארך %s</string>
+    <string name="changed_event_new_duration_continued">ויארך %s</string>
+    <string name="changed_event_new_location_type">עבר להיות %s</string>
+    <string name="changed_event_new_location_type_continued">ויהיה %s</string>
 </resources>

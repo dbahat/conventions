@@ -2,9 +2,12 @@ package amai.org.conventions;
 
 import java.net.URL;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.List;
 
 import amai.org.conventions.feedback.forms.EventFeedbackForm;
 import amai.org.conventions.feedback.forms.FeedbackForm;
+import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.Halls;
 import amai.org.conventions.model.ImageIdToImageResourceMapper;
@@ -103,5 +106,10 @@ public class TestConvention extends Convention {
     @Override
     public ConventionStorage getStorage() {
         return mock(ConventionStorage.class);
+    }
+
+    @Override
+    public List<ConventionEvent.EventLocationType> getEventLocationTypes(ConventionEvent event) {
+        return Collections.singletonList(ConventionEvent.EventLocationType.PHYSICAL);
     }
 }

@@ -43,6 +43,14 @@
             android:defaultValue="true" />
     </PreferenceCategory>
 
+    <PreferenceCategory android:title="@string/general_preferences">
+        <CheckBoxPreference
+            android:key="harucon2022_favorite_event_changes"
+            android:title="@string/show_favorites_updates_title"
+            android:summary="@string/show_favorites_updates_summary"
+            android:defaultValue="true" />
+    </PreferenceCategory>
+
     <PreferenceCategory
         android:key="advanced"
         android:title="@string/advanced_preferences">

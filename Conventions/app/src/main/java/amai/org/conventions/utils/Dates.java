@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import androidx.annotation.VisibleForTesting;
+import amai.org.conventions.BuildConfig;
+
 public class Dates {
 	public static final long MILLISECONDS_IN_MINUTE = java.util.concurrent.TimeUnit.MINUTES.toMillis(1);
 	public static final long MILLISECONDS_IN_HOUR = java.util.concurrent.TimeUnit.HOURS.toMillis(1);
@@ -30,19 +33,30 @@ public class Dates {
 	private static Date getInitialDate() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm", Dates.getLocale());
 		try {
-			return dateFormat.parse("17.03.2022 12:10");
-		} catch (ParseException e) {
+//			return dateFormat.parse("17.03.2022 12:10");
+			return null;
+		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	public static Date now() {
-		// Now
-		Date result = new Date(System.currentTimeMillis());
+	@VisibleForTesting
+	public static void setInitialDate(Date newInitialDate) {
+		initialDate = newInitialDate;
+	}
 
-		// Used for testing
-		// Fixed startup date
-//        Date result = new Date(System.currentTimeMillis() - appStartDate.getTime() + initialDate.getTime());
+	public static Date now() {
+		Date result;
+
+		if (BuildConfig.DEBUG && initialDate != null) {
+			// Used for testing
+			// Fixed startup date
+			result = new Date(System.currentTimeMillis() - appStartDate.getTime() + initialDate.getTime());
+		} else {
+			// Now
+			result = new Date(System.currentTimeMillis());
+		}
+
 
 		if (!Dates.getLocalTimeZone().equals(TimeZone.getDefault())) {
 			result = Dates.convertTimeZone(result, TimeZone.getDefault(), Dates.getLocalTimeZone());
@@ -178,6 +192,10 @@ public class Dates {
 
 	public static String formatHoursAndMinutes(Date date) {
 		return formatDate("HH:mm", date);
+	}
+
+	public static String formatDay(Date date) {
+		return formatDate("EEEE", date);
 	}
 
 	public static String formatDateAndTime(Date date) {
