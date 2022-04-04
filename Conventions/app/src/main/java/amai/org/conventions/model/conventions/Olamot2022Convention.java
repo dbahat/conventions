@@ -877,15 +877,8 @@ public class Olamot2022Convention extends SffConvention {
 
 	@Override
 	public List<ConventionEvent.EventLocationType> getEventLocationTypes(ConventionEvent event) {
-		if (HALL_NAME_ESHKOL_2.equals(event.getHall().getName()) || HALL_NAME_ESHKOL_3.equals(event.getHall().getName())) {
-			return Arrays.asList(ConventionEvent.EventLocationType.PHYSICAL, ConventionEvent.EventLocationType.VIRTUAL);
-		} else if (HALL_NAME_ESHKOL_4_VIRTUAL.equals(event.getHall().getName())) {
-			return Arrays.asList(ConventionEvent.EventLocationType.VIRTUAL, ConventionEvent.EventLocationType.PHYSICAL);
-		} else if (HALL_NAME_WORKSHOPS.equals(event.getHall().getName()) && event.getTitle().contains("וירטואלי")) {
-			return Collections.singletonList(ConventionEvent.EventLocationType.VIRTUAL);
-		} else {
-			return Collections.singletonList(ConventionEvent.EventLocationType.PHYSICAL);
-		}
+		//noinspection deprecation - this is on purpose
+		return event.getLocationTypes();
 	}
 
 	@Override
