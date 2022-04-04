@@ -333,7 +333,7 @@ public class ConventionEvent implements Serializable {
 		return this;
 	}
 
-	/** @deprecated Use Convention.getInstance().getEventLocationType(event) */
+	/** @deprecated Use {@link Convention#getEventLocationTypes(ConventionEvent)} */
 	public List<EventLocationType> getLocationTypes() {
 		return locationTypes;
 	}
