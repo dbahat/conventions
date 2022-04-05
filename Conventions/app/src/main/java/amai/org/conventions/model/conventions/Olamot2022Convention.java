@@ -822,7 +822,7 @@ public class Olamot2022Convention extends SffConvention {
 	@Override
 	public URL getAdditionalConventionFeedbackURL() {
 		try {
-			return new URL("https://docs.google.com/forms/d/e/1FAIpQLSemzbkybjgdigQOBKM625vKAp5-WJY_U64U2ANk5xjgI4CohA/viewform");
+			return new URL("https://docs.google.com/forms/d/e/1FAIpQLSe14ezOfJvwkV9yQi8S8LTB8a0gjxjpxEpZ-vtMVEp-jQqc0w/viewform");
 		} catch (Exception e) {
 			return null;
 		}
@@ -831,7 +831,7 @@ public class Olamot2022Convention extends SffConvention {
 	@Override
 	public URL getAdditionalEventFeedbackURL(ConventionEvent event) {
 		try {
-			return new URL("https://docs.google.com/forms/d/e/1FAIpQLSdalflMANwYLg1YwYzeSmq5HYdgj-vXc3FIXicZncUvH4zMWw/viewform" +
+			return new URL("https://docs.google.com/forms/d/e/1FAIpQLSdHvVv-cztVhWjDe0NzMne40gj-woeg1Eq_9eGv7jxuRBf5Iw/viewform" +
 					"?entry.1572016508=" + URLUtils.encodeURLParameterValue(event.getTitle()) +
 					"&entry.1917108492=" + URLUtils.encodeURLParameterValue(event.getLecturer()) +
 					"&entry.10889808=" + URLUtils.encodeURLParameterValue(event.getHall().getName()) +
