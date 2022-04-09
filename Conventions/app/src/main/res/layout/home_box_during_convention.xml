@@ -62,7 +62,7 @@
                 android:text="@string/home_current_event_vote_possible"
                 android:textColor="?homeCurrentEventText"
                 android:textAlignment="center"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:paddingBottom="8dp"
                 />
         </LinearLayout>
@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 tools:text="כעת"
                 android:textColor="?homeEventTimeText"
-                android:textSize="20sp"/>
+                android:textSize="18sp"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/home_upcoming_event_title"
@@ -103,7 +103,7 @@
                 android:textColor="?homeMessageText"
                 android:textStyle="bold"
                 app:autoSizeTextType="uniform"
-                app:autoSizeMinTextSize="14sp"
+                app:autoSizeMinTextSize="12sp"
                 app:autoSizeMaxTextSize="70sp"
                 app:autoSizeStepGranularity="2sp"
                 android:layout_marginTop="8dp"
@@ -115,7 +115,7 @@
                 android:layout_height="wrap_content"
                 tools:text="אולם ראשי"
                 android:textColor="?homeEventHallText"
-                android:textSize="23sp"
+                android:textSize="18sp"
                 android:layout_marginBottom="?homeUpcomingMarginBottom"/>
 
             <TextView
@@ -127,7 +127,7 @@
                 android:text="@string/home_current_event_vote_possible"
                 android:textColor="?homeEventHallText"
                 android:textAlignment="center"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:paddingBottom="?homeUpcomingMarginBottom"
                 />
         </LinearLayout>
