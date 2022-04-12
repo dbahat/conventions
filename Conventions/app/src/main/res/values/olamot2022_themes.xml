@@ -11,14 +11,14 @@
         <item name="android:textColorPrimary">@color/black</item>
         <item name="colorAccent">@color/olamot2022_rust</item>
         <item name="android:colorBackground">@null</item>
-        <item name="android:textColorLink">@color/olamot2022_rust</item>
+        <item name="android:textColorLink">@color/olamot2022_blue</item>
         <item name="actionButtonColor">@color/olamot2022_rust</item>
         <item name="swipeToRefreshColor">@color/olamot2022_rust</item>
         <item name="swipeToRefreshBackgroundColor">@color/white</item>
         <item name="snackbarActionColor">@color/olamot2022_rust</item>
         <item name="highlightedButtonBackground">@drawable/olamot2022_highlighted_button</item>
         <item name="buttonTextColor">@color/white</item>
-        <item name="borderlessButtonColor">@color/olamot2022_rust</item>
+        <item name="borderlessButtonColor">@color/olamot2022_blue</item>
         <item name="activitiesBackground">@drawable/olamot2022_background</item>
         <item name="eventListDivider">@drawable/olamot2022_event_list_divider</item>
         <item name="conflictingEventListDivider">@android:color/transparent</item>
@@ -28,8 +28,8 @@
         <!-- Tabs -->
         <item name="tabsBackground">@null</item>
         <item name="unselectedTabTextColor">@color/olamot2022_brown1</item>
-        <item name="selectedTabTextColor">@color/olamot2022_rust</item>
-        <item name="selectedTabIndicatorColor">@color/olamot2022_rust</item>
+        <item name="selectedTabTextColor">@color/olamot2022_blue</item>
+        <item name="selectedTabIndicatorColor">@color/olamot2022_blue</item>
 
         <!-- Notifications -->
         <item name="notificationSmallIcon">@drawable/olamot2022_notification</item>
@@ -98,14 +98,14 @@
         <item name="updateItemBorder">@color/olamot2022_brown3</item>
         <item name="updateTextColor">@color/olamot2022_brown3</item>
         <item name="newUpdateTextColor">@color/black</item>
-        <item name="focusedUpdateTextColor">@color/olamot2022_rust</item>
+        <item name="focusedUpdateTextColor">@color/olamot2022_blue</item>
         <item name="updateItemSeparator">@null</item>
         <item name="updateTimeBackground">@color/olamot2022_rust</item>
         <item name="updateTimeColor">@color/white</item>
         <item name="updatesSeparatorColor">@android:color/transparent</item>
         <!-- My Events Screen -->
         <item name="nextEventStartTimeBackground">@android:color/transparent</item>
-        <item name="nextEventStartTimeTextColor">@color/olamot2022_rust</item>
+        <item name="nextEventStartTimeTextColor">@color/olamot2022_blue</item>
         <item name="nextEventStartTimeBottomLineColor">@color/olamot2022_brown3</item>
         <item name="conflictingEventsBackground">@color/transparent_black</item>
         <!-- Event Screen -->
@@ -116,7 +116,7 @@
         <item name="eventTitleBackground">@drawable/olamot2022_event_title_background</item>
         <item name="eventTitleTextColor">@color/white</item>
         <item name="eventDetailsBoxColor">@android:color/transparent</item>
-        <item name="eventDetailsHighlightedTextColor">@color/olamot2022_rust</item>
+        <item name="eventDetailsHighlightedTextColor">@color/olamot2022_blue</item>
         <item name="eventDescriptionTextColor">@color/black</item>
         <item name="eventDescriptionBoxColor">@android:color/transparent</item>
         <item name="eventFeedbackBoxColor">@color/olamot2022_brown2</item>
@@ -137,8 +137,8 @@
         <item name="eventTimeHeaderBackground">@null</item>
         <item name="searchCategoriesColor">@color/olamot2022_rust</item>
         <!-- Programme Search Screen -->
-        <item name="eventNameKeywordHighlightColor">@color/olamot2022_yellow2</item>
-        <item name="eventKeywordHighlightColor">@color/olamot2022_yellow2</item>
+        <item name="eventNameKeywordHighlightColor">@color/olamot2022_blue</item>
+        <item name="eventKeywordHighlightColor">@color/olamot2022_blue</item>
         <item name="searchDrawerAccentColor">@color/olamot2022_rust</item>
         <!-- Second Hand Screen -->
         <item name="secondHandFormOpenColor">?eventTypeNotStartedColor</item>
@@ -154,7 +154,7 @@
     </style>
 
     <style name="AppBaseTheme.Olamot2022.Event" parent="AppBaseTheme.Olamot2022">
-        <item name="android:textColorLink">@color/olamot2022_rust</item>
+        <item name="android:textColorLink">@color/olamot2022_blue</item>
     </style>
 
     <style name="AppBaseTheme.Olatmo20221.Settings" parent="AppBaseTheme.Olamot2022">
