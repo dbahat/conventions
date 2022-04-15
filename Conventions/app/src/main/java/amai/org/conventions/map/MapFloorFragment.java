@@ -9,7 +9,9 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Picture;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PictureDrawable;
 import android.os.AsyncTask;
@@ -541,7 +543,11 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 			SVG markerSvg = ImageHandler.loadSVG(appContext, location.getMarkerResource());
 			markerImageView.setSVG(markerSvg);
 		} else {
-			markerImageView.setImageDrawable(ContextCompat.getDrawable(appContext, location.getMarkerResource()));
+			Drawable drawable = ContextCompat.getDrawable(appContext, location.getMarkerResource());
+			if (location.getMarkerTintColorResource() != MapLocation.NO_TINT) {
+				drawable.mutate().setColorFilter(ContextCompat.getColor(appContext, location.getMarkerTintColorResource()), PorterDuff.Mode.MULTIPLY);
+			}
+			markerImageView.setImageDrawable(drawable);
 		}
 
 		// Setting layer type to none to avoid caching the marker views bitmap when in zoomed-out state.
@@ -579,6 +585,9 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 								drawable = new PictureDrawable(markerSelectedSvg.renderToPicture());
 							} else {
 								drawable = ContextCompat.getDrawable(appContext, location.getSelectedMarkerResource());
+								if (location.getSelectedMarkerTintColorResource() != MapLocation.NO_TINT) {
+									drawable.mutate().setColorFilter(ContextCompat.getColor(appContext, location.getSelectedMarkerTintColorResource()), PorterDuff.Mode.MULTIPLY);
+								}
 							}
 						}
 						return drawable;
