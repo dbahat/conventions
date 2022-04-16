@@ -65,6 +65,11 @@
         <item name="android:textSize" tools:ignore="SpUsage">14dp</item>
     </style>
 
+    <style name="EventViewSmallerText">
+        <!-- Setting text size in DP because the entire view's height is pre-determined -->
+        <item name="android:textSize" tools:ignore="SpUsage">13dp</item>
+    </style>
+
     <style name="EventViewExtraSmallText">
         <!-- Setting text size in DP because the entire view's height is pre-determined -->
         <item name="android:textSize" tools:ignore="SpUsage">10dp</item>

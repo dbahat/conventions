@@ -3,7 +3,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="event_height">73dp</dimen>
+    <dimen name="event_height">74dp</dimen>
     <dimen name="event_divider_height">1dp</dimen>
 
     <dimen name="update_extra_text_margin_for_top_update_lines">2dp</dimen>
