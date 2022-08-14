@@ -245,6 +245,10 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 			AlertDialog dialog = builder
 					.setView(dialogView)
 					.setPositiveButton(R.string.ok, null)
+					.setNegativeButton(R.string.logout, (DialogInterface.OnClickListener) (dialog1, which) -> {
+						ConventionsApplication.settings.setUserId(null);
+						Convention.getInstance().getStorage().deleteUserIDQR();
+					})
 					.create();
 			dialog.show();
 		}

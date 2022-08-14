@@ -87,6 +87,7 @@
     <string name="no_navigation_activity">לא נמצאה אפליקציה מתאימה לניווט</string>
     <string name="share_no_events">הוסף אירועים כדי לשתף</string>
     <string name="ok">אישור</string>
+    <string name="logout">התנתק</string>
     <string name="events_without_feedback_title">מלא פידבק על אירועים</string>
     <string name="events_feedback_no_events">בחר אירועים שהיית בהם דרך התוכנייה ומלא עליהם פידבק.</string>
     <string name="events_with_feedback_title">פידבק שמילאת על אירועים</string>
