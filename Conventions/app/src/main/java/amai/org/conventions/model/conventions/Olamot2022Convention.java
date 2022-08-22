@@ -13,6 +13,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
+import amai.org.conventions.auth.Configuration;
 import amai.org.conventions.feedback.forms.EventFeedbackForm;
 import amai.org.conventions.feedback.forms.FeedbackForm;
 import amai.org.conventions.model.ConventionEvent;
@@ -695,5 +696,18 @@ public class Olamot2022Convention extends SffConvention {
 		// There are virtual events with limited tickets but they aren't hybrid.
 		List<ConventionEvent.EventLocationType> eventLocationTypes = this.getEventLocationTypes(event);
 		return eventLocationTypes != null && eventLocationTypes.size() > 1;
+	}
+
+	@Override
+	public Configuration getAuthConfiguration(Context context) {
+		return new Configuration(
+				context,
+				"con_apps_v2",
+				null, // If the client is not "public" this must contain the client secret
+				"https://sso.sf-f.org.il/auth/realms/sf-f/protocol/openid-connect/auth",
+				"https://sso.sf-f.org.il/auth/realms/sf-f/protocol/openid-connect/token",
+				"https://sso.sf-f.org.il/auth/realms/sf-f/protocol/openid-connect/logout",
+				"https://sso.sf-f.org.il/auth/realms/sf-f/protocol/openid-connect/userinfo"
+		);
 	}
 }

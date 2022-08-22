@@ -7,7 +7,6 @@ import android.content.pm.ResolveInfo;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
@@ -35,9 +34,13 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.ThemeAttributes;
+import amai.org.conventions.auth.AuthorizationActivity;
 import amai.org.conventions.events.adapters.DayFragmentAdapter;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
@@ -49,6 +52,10 @@ import amai.org.conventions.utils.BundleBuilder;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.app.ShareCompat;
@@ -73,6 +80,11 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 	private ViewPager daysPager;
 	private AlertDialog noEventsDialog;
 	private Menu menu;
+	private ExecutorService executor;
+
+	// Authentication result handlers
+	private final ActivityResultLauncher<Intent> addEventsAuthResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), this::addEventsAuthResult);
+	private final ActivityResultLauncher<Intent> logoutResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), this::logoutResult);
 
 	public static List<ConventionEvent> getMyEvents() {
 		ArrayList<ConventionEvent> events = CollectionUtils.filter(
@@ -96,6 +108,8 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		setToolbarTitle(getResources().getString(R.string.my_events_title));
 		removeContentContainerForeground();
 
+		executor = Executors.newSingleThreadExecutor();
+
 		nextEventStart = (TextView) findViewById(R.id.nextEventStart);
 		nextEventStartBottomLine = findViewById(R.id.nextEventStartBottomLine);
 
@@ -103,103 +117,134 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		setupDays(dateIndexToSelect);
 
 		if (Convention.getInstance().canUserLogin()) {
-			setupActionButton(AppCompatResources.getDrawable(this, R.drawable.ic_add_white), view -> showAddEventsDialog());
+			setupActionButton(AppCompatResources.getDrawable(this, R.drawable.ic_add_white), view -> addEvents());
 		}
 	}
 
-	private void showAddEventsDialog() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(MyEventsActivity.this);
-		View dialogView = View.inflate(builder.getContext(), R.layout.login_layout, null);
-		final EditText userNameTextView = dialogView.findViewById(R.id.user_name);
-		final EditText passwordTextView = dialogView.findViewById(R.id.password);
-		AlertDialog dialog = builder
-				.setTitle(R.string.add_events)
-				.setMessage(R.string.add_events_instructions)
-				.setView(dialogView)
-				.setPositiveButton(R.string.add, (dialogInterface, i) -> {
-					final String user = userNameTextView.getText().toString().trim();
-					final String password = passwordTextView.getText().toString();
-					final ProgressDialog progressDialog = new ProgressDialog(MyEventsActivity.this);
-					progressDialog.setMessage(getString(R.string.loading_events));
-					progressDialog.setCancelable(false);
-					progressDialog.setCanceledOnTouchOutside(false);
-					progressDialog.show();
-					new AsyncTask<Void, Void, Exception>() {
-						private int newFavoriteEventsNumber = 0;
-						private String userId;
-						private Exception userIdException;
-						@Override
-						protected Exception doInBackground(Void... params) {
-							try {
-								String token = OAuthAuthentication.getInstance().authenticate(user, password);
-								newFavoriteEventsNumber = addFavoriteEventsFromWebsite(token);
-								// If we can't get the user ID, still let the user know the events were added
-								try {
-									userId = getUserId(token);
-									ConventionsApplication.settings.setUserId(userId);
-									saveUserQR(user);
-								} catch (Exception ex) {
-									userIdException = ex;
-								}
-								return null;
-							} catch (Exception e) {
-								return e;
-							}
-						}
 
-						@Override
-						protected void onPostExecute(Exception exception) {
-							progressDialog.dismiss();
-							FirebaseAnalytics
-									.getInstance(MyEventsActivity.this)
-									.logEvent("favorites", new BundleBuilder()
-											.putString("action", exception == null ? "success" : "failure")
-											.putString("label", "AddFromWebsite")
-											.build()
-									);
+	private void addEvents() {
+		Intent intent = new Intent(this, AuthorizationActivity.class);
+		addEventsAuthResultLauncher.launch(intent);
+	}
 
-							if (exception == null) {
-								// Refresh favorite events in all days
-								for (int i = 0; i < daysPager.getAdapter().getCount(); ++i) {
-									MyEventsDayFragment fragment = (MyEventsDayFragment) daysPager.getAdapter().instantiateItem(daysPager, i);
-									fragment.updateDataset();
-								}
-								setNextEventStartText(getMyEvents());
-								String message;
-								if (newFavoriteEventsNumber == 0) {
-									message = getString(R.string.no_events_added);
-								} else if (newFavoriteEventsNumber == 1) {
-									message = getString(R.string.one_event_added);
-								} else {
-									message = getString(R.string.several_events_added, newFavoriteEventsNumber);
-								}
-								if (userIdException != null) {
-									Log.e(TAG, userIdException.getMessage(), userIdException);
-								}
-								if (userId == null || userId.isEmpty()) {
-									Toast.makeText(MyEventsActivity.this, message, Toast.LENGTH_LONG).show();
-								} else {
-									changeIconColor(menu.findItem(R.id.my_events_show_user_id));
-									showUserIdDialog(message);
-								}
-							} else {
-								int messageId = R.string.add_events_failed;
-								if (exception instanceof OAuthAuthentication.AuthenticationException) {
-									messageId = R.string.wrong_user_or_password;
-								}
-								Log.e(TAG, exception.getMessage(), exception);
-								Toast.makeText(MyEventsActivity.this, messageId, Toast.LENGTH_LONG).show();
-							}
-						}
-					}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-				})
-				.setNegativeButton(R.string.cancel, null)
-				.create();
-		dialog.setOnShowListener(dialogInterface -> userNameTextView.requestFocus());
-		dialog.show();
+	private void addEventsAuthResult(ActivityResult activityResult) {
+		AuthorizationActivity.SignInResult result = AuthorizationActivity.SignInResult.fromActivityResult(activityResult);
+		if (result.userCancelled) {
+			return;
+		}
+
+		if (result.exception != null) {
+			Log.e(TAG, "Could not get user token: " + result.exception.getMessage(), result.exception);
+			int messageId = R.string.login_failed;
+			Toast.makeText(MyEventsActivity.this, messageId, Toast.LENGTH_LONG).show();
+		} else if (result.email == null) {
+			Log.e(TAG, "email did not return from AuthorizationActivity");
+			int messageId = R.string.login_failed;
+			Toast.makeText(MyEventsActivity.this, messageId, Toast.LENGTH_LONG).show();
+		} else {
+			final ProgressDialog progressDialog = new ProgressDialog(MyEventsActivity.this);
+			progressDialog.setMessage(getString(R.string.loading_events_for, result.email));
+			progressDialog.setCancelable(false);
+			progressDialog.setCanceledOnTouchOutside(false);
+			progressDialog.show();
+			executor.submit(() -> addEventsWithToken(result.email, result.accessToken, ignoreErrors(progressDialog::dismiss)));
+		}
+	}
+
+	private Runnable ignoreErrors(Runnable r) {
+		return () -> {
+			try {
+				r.run();
+			} catch (Exception e) {
+				Log.e(TAG, e.getMessage());
+			}
+		};
+	}
+
+	@WorkerThread
+	private void updateUserDetails(String user, String token) throws Exception {
+		String oldUser = ConventionsApplication.settings.getUser();
+		// No need to update the user data if it's the same user
+		if (!Objects.equals(oldUser, user)) {
+			// Clear previous user data
+			ConventionsApplication.settings.setUser(null);
+			ConventionsApplication.settings.setUserId(null);
+			Convention.getInstance().getStorage().deleteUserIDQR();
+
+			// Set new user data
+			ConventionsApplication.settings.setUser(user);
+			String userId = getUserId(token);
+			ConventionsApplication.settings.setUserId(userId);
+			saveUserQR(user);
+		}
+	}
+
+	@WorkerThread
+	private void addEventsWithToken(String user, String token, Runnable afterRequestCompleted) {
+		try {
+			updateUserDetails(user, token);
+		} catch (Exception e) {
+			Log.e(TAG, "Could not update user details: " + e.getMessage(), e);
+		}
+
+		// If we can't update the user details, still add the events
+		int newFavoriteEventsNumber1 = 0;
+		Exception addEventsException1 = null;
+		try {
+			newFavoriteEventsNumber1 = addFavoriteEventsFromWebsite(token);
+		} catch (Exception e) {
+			addEventsException1 = e;
+		}
+
+		int newFavoriteEventsNumber = newFavoriteEventsNumber1;
+		String userId = ConventionsApplication.settings.getUserId();
+		Exception addEventsException = addEventsException1;
+
+		runOnUiThread(() -> {
+			afterRequestCompleted.run();
+			FirebaseAnalytics
+					.getInstance(MyEventsActivity.this)
+					.logEvent("favorites", new BundleBuilder()
+							.putString("action", addEventsException == null ? "success" : "failure")
+							.putString("label", "AddFromWebsite")
+							.build()
+					);
+
+			if (addEventsException == null) {
+				// Refresh favorite events in all days
+				for (int i = 0; i < daysPager.getAdapter().getCount(); ++i) {
+					MyEventsDayFragment fragment = (MyEventsDayFragment) daysPager.getAdapter().instantiateItem(daysPager, i);
+					fragment.updateDataset();
+				}
+				setNextEventStartText(getMyEvents());
+				String message;
+				if (newFavoriteEventsNumber == 0) {
+					message = getString(R.string.no_events_added);
+				} else if (newFavoriteEventsNumber == 1) {
+					message = getString(R.string.one_event_added);
+				} else {
+					message = getString(R.string.several_events_added, newFavoriteEventsNumber);
+				}
+
+				if (userId == null || userId.isEmpty()) {
+					Toast.makeText(MyEventsActivity.this, message, Toast.LENGTH_LONG).show();
+				} else {
+					changeIconColor(menu.findItem(R.id.my_events_show_user_id));
+					showUserIdDialog(message);
+				}
+			} else {
+				int messageId = R.string.add_events_failed;
+				if (addEventsException instanceof OAuthAuthentication.AuthenticationException) {
+					messageId = R.string.wrong_user_or_password;
+				}
+				Log.e(TAG, "Could not add events for logged in user: " + addEventsException.getMessage(), addEventsException);
+				Toast.makeText(MyEventsActivity.this, messageId, Toast.LENGTH_LONG).show();
+			}
+		});
 	}
 
 	private void showUserIdDialog(String firstLineMessage) {
+		String user = ConventionsApplication.settings.getUser();
 		String userId = ConventionsApplication.settings.getUserId();
 		if (userId != null && !userId.isEmpty()) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(MyEventsActivity.this);
@@ -226,6 +271,9 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 				userIdQRImageView.setImageDrawable(new BitmapDrawable(getResources(), userQRInputStream));
 			}
 
+			TextView userView = dialogView.findViewById(R.id.user);
+			userView.setText(getString(R.string.inst_user, user));
+
 			TextView userIdView = dialogView.findViewById(R.id.user_id);
 			userIdView.setText(getString(R.string.inst_user_id, userId));
 
@@ -245,12 +293,23 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 			AlertDialog dialog = builder
 					.setView(dialogView)
 					.setPositiveButton(R.string.ok, null)
-					.setNegativeButton(R.string.logout, (DialogInterface.OnClickListener) (dialog1, which) -> {
-						ConventionsApplication.settings.setUserId(null);
-						Convention.getInstance().getStorage().deleteUserIDQR();
+					.setNegativeButton(R.string.logout, (dialog1, which) -> {
+						Intent intent = new Intent(this, AuthorizationActivity.class);
+						intent.putExtra(AuthorizationActivity.PARAM_SIGN_OUT, true);
+						logoutResultLauncher.launch(intent);
 					})
 					.create();
 			dialog.show();
+		}
+	}
+
+	private void logoutResult(ActivityResult result) {
+		if (result.getResultCode() == RESULT_OK) {
+			ConventionsApplication.settings.setUser(null);
+			ConventionsApplication.settings.setUserId(null);
+			Convention.getInstance().getStorage().deleteUserIDQR();
+		} else {
+			Log.e(TAG, "could not log out: " + result.getData());
 		}
 	}
 
@@ -479,7 +538,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 				if (userId != null && !userId.isEmpty()) {
 					showUserIdDialog(null);
 				} else {
-					showAddEventsDialog();
+					addEvents();
 				}
 
 		}

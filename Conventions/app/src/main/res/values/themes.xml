@@ -488,4 +488,8 @@
     <style name="OverflowMenu.Dark" parent="Widget.AppCompat.ActionButton.Overflow">
         <item name="android:src">@drawable/ic_more_vert_white_24dp</item>
     </style>
+
+    <style name="TransparentTheme" parent="Theme.AppCompat.Translucent.NoTitleBar">
+        <item name="android:colorPrimaryDark">@color/black</item>
+    </style>
 </resources>

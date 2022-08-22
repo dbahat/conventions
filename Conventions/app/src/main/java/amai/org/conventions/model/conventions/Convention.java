@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+import amai.org.conventions.auth.Configuration;
 import amai.org.conventions.events.SearchCategory;
 import amai.org.conventions.feedback.SurveySender;
 import amai.org.conventions.feedback.forms.ConventionFeedbackFormSender;
@@ -876,4 +877,6 @@ public abstract class Convention implements Serializable {
 		}
 		return message;
 	}
+
+	public abstract Configuration getAuthConfiguration(Context context);
 }

@@ -54,6 +54,15 @@
             android:textSize="14sp"/>
     </FrameLayout>
     <TextView
+        android:id="@+id/user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        tools:text="שם משתמש: a@b.c"
+        android:textSize="16sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"/>
+    <TextView
         android:id="@+id/user_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
