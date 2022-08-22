@@ -9,6 +9,7 @@ import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
 
 import amai.org.conventions.navigation.NavigationActivity;
+import amai.org.conventions.utils.Log;
 import androidx.annotation.StringRes;
 import fi.iki.kuitsi.listtest.ListTagHandler;
 import sff.org.conventions.R;
@@ -34,11 +35,12 @@ public abstract class WebContentActivity extends NavigationActivity {
 
 	private void handleDeepLinks() {
 		Uri intentData = getIntent().getData();
-		if (intentData != null && intentData.getHost() != null) {
-			switch (intentData.getHost().intern()) {
-				case "open-accessibility": {
+		if (intentData != null && intentData.getPath() != null) {
+			switch (intentData.getPath().intern()) {
+				case "/open-accessibility": {
 					Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
 					startActivity(intent);
+					finish(); // This activity was opened again due to the deep link so close the new instance
 					break;
 				}
 			}
