@@ -74,7 +74,8 @@
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
                 <action android:name="android.intent.action.VIEW" />
-                <data android:scheme="org.amai.conventions" />
+                <!-- We must define the host so that we can handle other deep links correctly -->
+                <data android:scheme="org.amai.conventions" android:host="accessibility" />
             </intent-filter>
         </activity>
 

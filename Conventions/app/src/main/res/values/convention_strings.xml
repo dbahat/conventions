@@ -69,7 +69,7 @@
     <!-- Added instructions about downloading the accessible programme file. -->
     <string name="accessibility_content" formatted="false"><![CDATA[
 <h1>נגישות באפליקציה</h1>
-<p>מערכת ההפעלה אנדרואיד מאפשרת להפעיל אפשרויות נגישות שונות באפליקציות. <a href="org.amai.conventions://open-accessibility">לחצו כאן להפעלת אפשרויות הנגישות</a>.</p>
+<p>מערכת ההפעלה אנדרואיד מאפשרת להפעיל אפשרויות נגישות שונות באפליקציות. <a href="org.amai.conventions://accessibility/open-accessibility">לחצו כאן להפעלת אפשרויות הנגישות</a>.</p>
 <h1>נגישות במתחם הכנס</h1>
 <p><span>צוות הנגישות כאן בשבילכם. לכל שאלה או בקשה ניתן לפנות לצוות בכתובת המייל: <a href="mailto:access@harucon.org.il">access@harucon.org.il</a><br />
 </span><span>בנוסף, הצוות יהיה זמין לכל בעיה או צורך אשר יעלו במהלך יום הכנס.</span></p>
