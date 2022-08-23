@@ -173,9 +173,9 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 
 			// Set new user data
 			ConventionsApplication.settings.setUser(user);
+			saveUserQR(user);
 			String userId = getUserId(token);
 			ConventionsApplication.settings.setUserId(userId);
-			saveUserQR(user);
 		}
 	}
 
@@ -197,7 +197,6 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		}
 
 		int newFavoriteEventsNumber = newFavoriteEventsNumber1;
-		String userId = ConventionsApplication.settings.getUserId();
 		Exception addEventsException = addEventsException1;
 
 		runOnUiThread(() -> {
@@ -226,7 +225,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 					message = getString(R.string.several_events_added, newFavoriteEventsNumber);
 				}
 
-				if (userId == null || userId.isEmpty()) {
+				if (user == null || user.isEmpty()) {
 					Toast.makeText(MyEventsActivity.this, message, Toast.LENGTH_LONG).show();
 				} else {
 					changeIconColor(menu.findItem(R.id.my_events_show_user_id));
@@ -245,8 +244,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 
 	private void showUserIdDialog(String firstLineMessage) {
 		String user = ConventionsApplication.settings.getUser();
-		String userId = ConventionsApplication.settings.getUserId();
-		if (userId != null && !userId.isEmpty()) {
+		if (user != null && !user.isEmpty()) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(MyEventsActivity.this);
 			View dialogView = View.inflate(builder.getContext(), R.layout.user_id_layout, null);
 			TextView messageView = dialogView.findViewById(R.id.message);
@@ -274,8 +272,14 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 			TextView userView = dialogView.findViewById(R.id.user);
 			userView.setText(getString(R.string.inst_user, user));
 
+			String userId = ConventionsApplication.settings.getUserId();
 			TextView userIdView = dialogView.findViewById(R.id.user_id);
-			userIdView.setText(getString(R.string.inst_user_id, userId));
+			if (userId != null && !userId.isEmpty()) {
+				userIdView.setVisibility(View.VISIBLE);
+				userIdView.setText(getString(R.string.inst_user_id, userId));
+			} else {
+				userIdView.setVisibility(View.GONE);
+			}
 
 			userIdInst.setText(Html.fromHtml(getString(R.string.inst_user_id_in_toolbar), source -> {
 				Drawable drawable = null;
@@ -534,8 +538,8 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 				FirebaseAnalytics
 						.getInstance(MyEventsActivity.this)
 						.logEvent("show_user_id_clicked", null);
-				String userId = ConventionsApplication.settings.getUserId();
-				if (userId != null && !userId.isEmpty()) {
+				String user = ConventionsApplication.settings.getUser();
+				if (user != null && !user.isEmpty()) {
 					showUserIdDialog(null);
 				} else {
 					addEvents();
