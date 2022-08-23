@@ -180,4 +180,9 @@
     <style name="AppBaseTheme.Olamot2022.Splash">
         <item name="android:windowBackground">@drawable/olamot2022_splash</item>
     </style>
+
+     <style name="TransparentTheme.Olamot2022" parent="TransparentTheme">
+          <!-- Custom Tabs -->
+          <item name="customTabsToolbarColor">@color/olamot2022_brown3</item>
+     </style>
 </resources>

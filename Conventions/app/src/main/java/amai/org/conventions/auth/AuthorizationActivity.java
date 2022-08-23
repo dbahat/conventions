@@ -17,12 +17,16 @@ import net.openid.appauth.ResponseTypeValues;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.utils.Log;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.browser.customtabs.CustomTabColorSchemeParams;
+import androidx.browser.customtabs.CustomTabsIntent;
+import sff.org.conventions.R;
 
 public class AuthorizationActivity extends AppCompatActivity {
 	private static final String TAG = AuthorizationActivity.class.getCanonicalName();
@@ -126,11 +130,20 @@ public class AuthorizationActivity extends AppCompatActivity {
 		return authRequestBuilder.build();
 	}
 
+	private CustomTabsIntent getCustomTabsIntent() {
+		CustomTabColorSchemeParams.Builder tabColorBuilder = new CustomTabColorSchemeParams.Builder()
+				.setToolbarColor(ThemeAttributes.getColor(this, R.attr.customTabsToolbarColor));
+		CustomTabsIntent.Builder intentBuilder = mAuthService
+				.createCustomTabsIntentBuilder()
+				.setDefaultColorSchemeParams(tabColorBuilder.build());
+		return intentBuilder.build();
+	}
+
 	@WorkerThread
 	private void login() {
 		Log.i(TAG, "login");
 		AuthorizationRequest authRequest = getAuthRequest();
-		Intent intent = mAuthService.getAuthorizationRequestIntent(authRequest);
+		Intent intent = mAuthService.getAuthorizationRequestIntent(authRequest, getCustomTabsIntent());
 		loginLauncher.launch(intent);
 	}
 
@@ -199,7 +212,7 @@ public class AuthorizationActivity extends AppCompatActivity {
 						.setIdTokenHint(mAuthStateManager.getCurrent().getIdToken())
 						.setPostLogoutRedirectUri(mConfiguration.getEndSessionRedirectUri())
 						.build();
-		Intent intent = mAuthService.getEndSessionRequestIntent(endSessionRequest);
+		Intent intent = mAuthService.getEndSessionRequestIntent(endSessionRequest, getCustomTabsIntent());
 		logoutLauncher.launch(intent);
 	}
 

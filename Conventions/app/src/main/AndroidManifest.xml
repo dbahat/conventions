@@ -79,7 +79,7 @@
                 <data android:scheme="sff.org.conventions" android:host="web-content" />
             </intent-filter>
         </activity>
-        <activity android:name="amai.org.conventions.auth.AuthorizationActivity" android:theme="@style/TransparentTheme"></activity>
+        <activity android:name="amai.org.conventions.auth.AuthorizationActivity" android:theme="@style/TransparentTheme.Olamot2022"></activity>
         <activity
             android:name="net.openid.appauth.RedirectUriReceiverActivity"
             tools:node="replace">
