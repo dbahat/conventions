@@ -14,7 +14,6 @@ import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,7 +45,7 @@ import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
-import amai.org.conventions.networking.OAuthAuthentication;
+import amai.org.conventions.networking.AuthenticationException;
 import amai.org.conventions.notifications.PushNotificationTopicsSubscriber;
 import amai.org.conventions.utils.BundleBuilder;
 import amai.org.conventions.utils.CollectionUtils;
@@ -83,6 +82,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 	private ExecutorService executor;
 
 	// Authentication result handlers
+	private final ActivityResultLauncher<Intent> userDetailsAuthResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), this::userDetailsAuthResult);
 	private final ActivityResultLauncher<Intent> addEventsAuthResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), this::addEventsAuthResult);
 	private final ActivityResultLauncher<Intent> logoutResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), this::logoutResult);
 
@@ -121,13 +121,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		}
 	}
 
-
-	private void addEvents() {
-		Intent intent = new Intent(this, AuthorizationActivity.class);
-		addEventsAuthResultLauncher.launch(intent);
-	}
-
-	private void addEventsAuthResult(ActivityResult activityResult) {
+	private void handleAuthResult(ActivityResult activityResult, boolean ignoreUserUpdateError, GetProgressMessage getProgressMessage, OnAuthRequestCompleted onSuccess) {
 		AuthorizationActivity.SignInResult result = AuthorizationActivity.SignInResult.fromActivityResult(activityResult);
 		if (result.userCancelled) {
 			return;
@@ -135,20 +129,66 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 
 		if (result.exception != null) {
 			Log.e(TAG, "Could not get user token: " + result.exception.getMessage(), result.exception);
-			int messageId = R.string.login_failed;
-			Toast.makeText(MyEventsActivity.this, messageId, Toast.LENGTH_LONG).show();
+			Toast.makeText(MyEventsActivity.this, R.string.login_failed, Toast.LENGTH_LONG).show();
 		} else if (result.email == null) {
 			Log.e(TAG, "email did not return from AuthorizationActivity");
-			int messageId = R.string.login_failed;
-			Toast.makeText(MyEventsActivity.this, messageId, Toast.LENGTH_LONG).show();
+			Toast.makeText(MyEventsActivity.this, R.string.login_failed, Toast.LENGTH_LONG).show();
 		} else {
 			final ProgressDialog progressDialog = new ProgressDialog(MyEventsActivity.this);
-			progressDialog.setMessage(getString(R.string.loading_events_for, result.email));
+			progressDialog.setMessage(getProgressMessage.run(result.email));
 			progressDialog.setCancelable(false);
 			progressDialog.setCanceledOnTouchOutside(false);
 			progressDialog.show();
-			executor.submit(() -> addEventsWithToken(result.email, result.accessToken, ignoreErrors(progressDialog::dismiss)));
+			executor.submit(() -> {
+				boolean stopExecution = false;
+				try {
+					updateUserDetails(result.email, result.accessToken);
+				} catch (Exception e) {
+					Log.e(TAG, "Could not update user details: " + e.getMessage(), e);
+					if( !ignoreUserUpdateError) {
+						stopExecution = true;
+						Toast.makeText(MyEventsActivity.this, R.string.login_failed, Toast.LENGTH_LONG).show();
+					}
+				}
+
+				if (!stopExecution) {
+					onSuccess.run(result.email, result.accessToken, ignoreErrors(progressDialog::dismiss));
+				}
+			});
 		}
+	}
+
+	private void loginAndShowUserDetails() {
+		Intent intent = new Intent(this, AuthorizationActivity.class);
+		userDetailsAuthResultLauncher.launch(intent);
+	}
+
+
+	private void userDetailsAuthResult(ActivityResult activityResult) {
+		handleAuthResult(activityResult, false, (user) -> getString(R.string.updating_user_details), (user, token, afterRequestCompleted) -> {
+			afterRequestCompleted.run();
+			FirebaseAnalytics
+					.getInstance(MyEventsActivity.this)
+					.logEvent("favorites", new BundleBuilder()
+							.putString("action", "success")
+							.putString("label", "ShowUserDetails")
+							.build()
+					);
+			runOnUiThread(() -> {
+				changeIconColor(menu.findItem(R.id.my_events_show_user_id));
+				showUserIdDialog(null);
+			});
+		});
+	}
+
+	private void addEvents() {
+		Intent intent = new Intent(this, AuthorizationActivity.class);
+		addEventsAuthResultLauncher.launch(intent);
+	}
+
+	private void addEventsAuthResult(ActivityResult activityResult) {
+		// Ignore user details update errors and still add the events
+		handleAuthResult(activityResult, true, (user) -> getString(R.string.loading_events_for, user), this::addEventsWithToken);
 	}
 
 	private Runnable ignoreErrors(Runnable r) {
@@ -181,13 +221,6 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 
 	@WorkerThread
 	private void addEventsWithToken(String user, String token, Runnable afterRequestCompleted) {
-		try {
-			updateUserDetails(user, token);
-		} catch (Exception e) {
-			Log.e(TAG, "Could not update user details: " + e.getMessage(), e);
-		}
-
-		// If we can't update the user details, still add the events
 		int newFavoriteEventsNumber1 = 0;
 		Exception addEventsException1 = null;
 		try {
@@ -233,7 +266,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 				}
 			} else {
 				int messageId = R.string.add_events_failed;
-				if (addEventsException instanceof OAuthAuthentication.AuthenticationException) {
+				if (addEventsException instanceof AuthenticationException) {
 					messageId = R.string.wrong_user_or_password;
 				}
 				Log.e(TAG, "Could not add events for logged in user: " + addEventsException.getMessage(), addEventsException);
@@ -326,7 +359,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		try {
 			int responseCode = request.getResponseCode();
 			if (responseCode == 400 || responseCode == 401) {
-				throw new OAuthAuthentication.AuthenticationException();
+				throw new AuthenticationException();
 			} else if (responseCode != 200) {
 				if (BuildConfig.DEBUG) {
 					BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(request.getErrorStream()));
@@ -375,7 +408,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		try {
 			int responseCode = request.getResponseCode();
 			if (responseCode == HttpURLConnection.HTTP_UNAUTHORIZED) {
-				throw new OAuthAuthentication.AuthenticationException();
+				throw new AuthenticationException();
 			} else if (responseCode != HttpURLConnection.HTTP_OK) {
 				if (BuildConfig.DEBUG) {
 					BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(request.getErrorStream()));
@@ -542,7 +575,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 				if (user != null && !user.isEmpty()) {
 					showUserIdDialog(null);
 				} else {
-					addEvents();
+					loginAndShowUserDetails();
 				}
 
 		}
@@ -690,5 +723,13 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		public Fragment getItem(int position) {
 			return MyEventsDayFragment.newInstance(getDate(position));
 		}
+	}
+
+	private interface OnAuthRequestCompleted {
+		void run(String user, String token, Runnable afterRequestCompleted);
+	}
+
+	private interface GetProgressMessage {
+		String run(String user);
 	}
 }

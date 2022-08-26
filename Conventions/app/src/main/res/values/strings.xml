@@ -235,6 +235,7 @@
     <string name="user_email">אימייל</string>
     <string name="password">סיסמא</string>
     <string name="wrong_user_or_password">אימות משתמש נכשל, נסה להתנתק ולהתחבר מחדש</string>
+    <string name="updating_user_details">מעדכן פרטי משתמש…</string>
     <string name="no_events_added">לא נוספו אירועים</string>
     <string name="loading_events">מייבא אירועים…</string>
     <string name="loading_events_for">מייבא אירועים עבור %s…</string>
