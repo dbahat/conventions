@@ -14,10 +14,20 @@
         tools:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <amai.org.conventions.customviews.AspectRatioImageView
-            android:id="@+id/stands_area_map"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+        <FrameLayout
+            android:id="@+id/stands_area_map_frame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <amai.org.conventions.customviews.AspectRatioImageView
+                android:id="@+id/stands_area_map"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:id="@+id/stands_area_map_highlight"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </FrameLayout>
     </pl.polidea.view.ZoomView>
 
     <androidx.recyclerview.widget.RecyclerView
