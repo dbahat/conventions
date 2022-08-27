@@ -12,6 +12,7 @@ public class StandsArea extends Place implements Serializable {
 	private float imageWidth;
 	private float imageHeight;
 	private List<Stand> stands = Collections.emptyList();
+	private StandLocations standLocations = new StandLocations();
 
 	public StandsArea() {
 		id = ObjectIDs.getNextID();
@@ -58,6 +59,19 @@ public class StandsArea extends Place implements Serializable {
 
 	public StandsArea withStands(List<Stand> stands) {
 		setStands(stands);
+		return this;
+	}
+
+	public void setStandLocations(StandLocations standLocations) {
+		this.standLocations = standLocations;
+	}
+
+	public StandLocations getStandLocations() {
+		return standLocations;
+	}
+
+	public StandsArea withStandLocations(StandLocations standLocations) {
+		setStandLocations(standLocations);
 		return this;
 	}
 
