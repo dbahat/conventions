@@ -165,6 +165,7 @@
         <item name="iconFloorDown">@drawable/arrow_down_wide</item>
         <item name="floorChangeBackground">@color/transparent_white</item>
         <item name="floorUpDownTextColor">@color/black</item>
+        <item name="standsMapHighlight">@color/harucon2022_transparent_light_yellow</item>
     </style>
 
     <style name="AppBaseTheme.Harucon2022.Event" parent="AppBaseTheme.Harucon2022">
