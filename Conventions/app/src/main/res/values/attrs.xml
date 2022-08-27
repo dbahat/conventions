@@ -163,6 +163,7 @@
         <attr name="floorUpDownTextColor" format="color|reference"/>
         <attr name="standIconColor" format="color|reference"/>
         <attr name="standsTypeTitleColor" format="color|reference"/>
+        <attr name="standsMapHighlight" format="color|reference"/>
         <!-- Event Screen -->
         <attr name="eventToolbarColor" format="color|reference"/>
         <attr name="eventDetailsBoxColor" format="color|reference"/>

@@ -2,6 +2,9 @@ package amai.org.conventions.events.activities;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
@@ -17,13 +21,16 @@ import java.util.Comparator;
 import java.util.List;
 
 import amai.org.conventions.R;
+import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.map.StandsRecyclerAdapter;
 import amai.org.conventions.model.Stand;
+import amai.org.conventions.model.StandLocation;
 import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Objects;
 import amai.org.conventions.utils.Views;
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearSmoothScroller;
@@ -39,7 +46,9 @@ public class StandsAreaFragment extends DialogFragment {
     private String selectedStandName;
     private StandsArea area;
     private ZoomView zoom;
+    private FrameLayout imageFrame;
     private ImageView image;
+    private ImageView imageHighlight;
     private RecyclerView standsList;
     private StandsRecyclerAdapter standsAdapter;
     // Using RecyclerView with custom adapter since sticky headers GridView didn't
@@ -64,7 +73,9 @@ public class StandsAreaFragment extends DialogFragment {
         area = Convention.getInstance().findStandsArea(standsAreaID);
         if (area != null) {
             zoom = view.findViewById(R.id.stands_area_zoom);
+            imageFrame = view.findViewById(R.id.stands_area_map_frame);
             image = view.findViewById(R.id.stands_area_map);
+            imageHighlight = view.findViewById(R.id.stands_area_map_highlight);
 
             List<Stand> stands = new ArrayList<>(area.getStands());
             Collections.sort(stands, new Comparator<Stand>() {
@@ -88,7 +99,7 @@ public class StandsAreaFragment extends DialogFragment {
                 image.setImageResource(area.getImageResource());
                 zoom.setVisibility(View.VISIBLE);
                 zoom.setMaxZoom(3);
-                image.setOnTouchListener(Views.createOnSingleTapConfirmedListener(getActivity(), new Runnable() {
+                imageFrame.setOnTouchListener(Views.createOnSingleTapConfirmedListener(getActivity(), new Runnable() {
                     @Override
                     public void run() {
                         openStandsMap();
@@ -162,6 +173,35 @@ public class StandsAreaFragment extends DialogFragment {
             zoom.smoothZoomTo(zoom.getMaxZoom(),
                     stand.getImageX() / area.getImageWidth() * image.getWidth(),
                     stand.getImageY() / area.getImageHeight() * image.getHeight());
+        }
+
+        // Highlight
+        if (imageHighlight != null) {
+            if (stand.getLocations().size() == 0) {
+                imageHighlight.setVisibility(View.GONE);
+            } else {
+                ArrayList<Drawable> drawables = new ArrayList<>(stand.getLocations().size());
+                for (StandLocation location : stand.getLocations()) {
+                    // It has to be a different drawable for each layer
+                    Drawable drawable = ThemeAttributes.getDrawable(getActivity(), R.attr.standsMapHighlight);
+                    drawables.add(drawable);
+                }
+                LayerDrawable layerDrawable = new LayerDrawable(drawables.toArray(new Drawable[0]));
+                int index = 0;
+                for (StandLocation location : stand.getLocations()) {
+                    layerDrawable.setLayerInset(
+                            index,
+                            (int)(location.getLeft() / area.getImageWidth() * image.getWidth()),
+                            (int) (location.getTop()  / area.getImageHeight() * image.getHeight()),
+                            image.getWidth() - (int)(location.getRight() / area.getImageWidth() * image.getWidth()),
+                            image.getHeight() - (int) (location.getBottom()  / area.getImageHeight() * image.getHeight())
+                    );
+                    ++index;
+                }
+
+                imageHighlight.setImageDrawable(layerDrawable);
+                imageHighlight.setVisibility(View.VISIBLE);
+            }
         }
     }
 
