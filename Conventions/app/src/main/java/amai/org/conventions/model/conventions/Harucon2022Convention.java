@@ -631,7 +631,7 @@ public class Harucon2022Convention extends AmaiConvention {
 		float a1Top = 57;
 		float a1Left = 126;
 		float a9Top = a1Top;
-		float a9Left = 655;
+		float a9Left = 656;
 		float a15Top = a1Top;
 		float a15Left = 1069;
 		float a21Top = a1Top;
@@ -646,11 +646,11 @@ public class Harucon2022Convention extends AmaiConvention {
 		float a39Left = 57;
 
 		// Bottom right column
-		float a43Top = 561;
+		float a43Top = 545;
 		float a43Left = 2582;
 
 		// Left square
-		float b1Top = 413;
+		float b1Top = 414;
 		float b1Left = 904;
 		float b9Top = 799;
 		float b9Left = 620;
@@ -663,20 +663,20 @@ public class Harucon2022Convention extends AmaiConvention {
 		float b20Top = 502;
 		float b20Left = 1445;
 		float b28Top = 801;
-		float b28Left = 1205;
-		float b33Top = 405;
+		float b28Left = 1206;
+		float b33Top = 406;
 		float b33Left = 1113;
 		float b34Top = 345;
 		float b34Left = 1173;
 
 		// Right square
 		float b38Top = b34Top;
-		float b38Left = 1859;
+		float b38Left = 1860;
 		float b42Top = 417;
 		float b42Left = 2123;
 		float b52Top = b28Top;
-		float b52Left = 1792;
-		float b57Top = 404;
+		float b52Left = 1794;
+		float b57Top = 405;
 		float b57Left = 1728;
 
 		return new StandLocations(
@@ -812,16 +812,16 @@ public class Harucon2022Convention extends AmaiConvention {
 		float defaultHeight = 88;
 
 		// Top row
-		float c1Top = 83;
+		float c1Top = 84;
 		float c1Left = 83;
 		float c9Top = c1Top;
 		float c9Left = 996;
 		float c13Top = c1Top;
-		float c13Left = 1451;
+		float c13Left = 1449;
 
 		// Right column
-		float c23Top = 461;
-		float c23Left = 2369;
+		float c23Top = 460;
+		float c23Left = 2370;
 
 		// Bottom row
 		float c36Top = 1647;
@@ -836,14 +836,14 @@ public class Harucon2022Convention extends AmaiConvention {
 		float c49Left = 718;
 
 		// Middle square
-		float d1Top = 549;
+		float d1Top = 550;
 		float d1Left = 1806;
 		float d3Top = 636;
 		float d3Left = 1982;
 		float d14Top = 1159;
 		float d14Left = 1459;
 		float d20Top = d3Top;
-		float d20Left = 1268;
+		float d20Left = 1269;
 		float d21Top = d1Top;
 		float d21Left = 1355;
 
