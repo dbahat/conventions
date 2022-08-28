@@ -2,7 +2,6 @@ package amai.org.conventions.events.activities;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
@@ -17,7 +16,6 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import amai.org.conventions.R;
@@ -30,7 +28,6 @@ import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Objects;
 import amai.org.conventions.utils.Views;
 import androidx.annotation.NonNull;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearSmoothScroller;
@@ -58,8 +55,16 @@ public class StandsAreaFragment extends DialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        standsAreaID = getArguments().getInt(ARGUMENT_STANDS_AREA_ID, -1);
-        selectedStandName = getArguments().getString(ARGUMENT_STAND_NAME);
+        Bundle args = savedInstanceState != null ? savedInstanceState : getArguments();
+        standsAreaID = args.getInt(ARGUMENT_STANDS_AREA_ID, -1);
+        selectedStandName = args.getString(ARGUMENT_STAND_NAME);
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(ARGUMENT_STANDS_AREA_ID, standsAreaID);
+        outState.putString(ARGUMENT_STAND_NAME, selectedStandName);
     }
 
     @Override
@@ -78,15 +83,12 @@ public class StandsAreaFragment extends DialogFragment {
             imageHighlight = view.findViewById(R.id.stands_area_map_highlight);
 
             List<Stand> stands = new ArrayList<>(area.getStands());
-            Collections.sort(stands, new Comparator<Stand>() {
-                @Override
-                public int compare(Stand lhs, Stand rhs) {
-                    int result = lhs.getType().compareTo(rhs.getType());
-                    if (result == 0) {
-                        result = Objects.compareTo(lhs.getSort(), rhs.getSort(), false);
-                    }
-                    return result;
+            Collections.sort(stands, (lhs, rhs) -> {
+                int result = lhs.getType().compareTo(rhs.getType());
+                if (result == 0) {
+                    result = Objects.compareTo(lhs.getSort(), rhs.getSort(), false);
                 }
+                return result;
             });
 
             standsAdapter = new StandsRecyclerAdapter(stands, true, area.hasImageResource(), selectedStandName);
