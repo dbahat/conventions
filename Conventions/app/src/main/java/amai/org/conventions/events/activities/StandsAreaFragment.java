@@ -2,6 +2,7 @@ package amai.org.conventions.events.activities;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
@@ -179,47 +180,53 @@ public class StandsAreaFragment extends DialogFragment {
 
         // Highlight
         if (imageHighlight != null) {
-            if (stand.getLocations().size() == 0) {
-                imageHighlight.setVisibility(View.GONE);
-            } else {
-                ArrayList<Drawable> drawables = new ArrayList<>(stand.getLocations().size());
-                for (StandLocation location : stand.getLocations()) {
-                    // It has to be a different drawable for each layer
-                    Drawable drawable = ThemeAttributes.getDrawable(getActivity(), R.attr.standsMapHighlight);
-                    drawables.add(drawable);
-                }
-                LayerDrawable layerDrawable = new LayerDrawable(drawables.toArray(new Drawable[0]));
-                int index = 0;
-                for (StandLocation location : stand.getLocations()) {
-                    layerDrawable.setLayerInset(
-                            index,
-                            (int)(location.getLeft() / area.getImageWidth() * image.getWidth()),
-                            (int) (location.getTop()  / area.getImageHeight() * image.getHeight()),
-                            image.getWidth() - (int)(location.getRight() / area.getImageWidth() * image.getWidth()),
-                            image.getHeight() - (int) (location.getBottom()  / area.getImageHeight() * image.getHeight())
-                    );
-                    ++index;
-                }
+            highlightStand(getActivity(), area, stand, image.getWidth(), image.getHeight(), imageHighlight);
+        }
+    }
 
-                imageHighlight.setImageDrawable(layerDrawable);
-                imageHighlight.setVisibility(View.VISIBLE);
+    private static void highlightStand(Context context, StandsArea area, Stand stand, int imageWidth, int imageHeight, ImageView imageHighlight) {
+        if (stand.getLocations().size() == 0) {
+            imageHighlight.setVisibility(View.GONE);
+        } else {
+            ArrayList<Drawable> drawables = new ArrayList<>(stand.getLocations().size());
+            for (StandLocation location : stand.getLocations()) {
+                // It has to be a different drawable for each layer
+                Drawable drawable = ThemeAttributes.getDrawable(context, R.attr.standsMapHighlight);
+                drawables.add(drawable);
             }
+            LayerDrawable layerDrawable = new LayerDrawable(drawables.toArray(new Drawable[0]));
+            int index = 0;
+            for (StandLocation location : stand.getLocations()) {
+                layerDrawable.setLayerInset(
+                        index,
+                        (int)(location.getLeft() / area.getImageWidth() * imageWidth),
+                        (int) (location.getTop()  / area.getImageHeight() * imageHeight),
+                        imageWidth - (int)(location.getRight() / area.getImageWidth() * imageWidth),
+                        imageHeight - (int) (location.getBottom()  / area.getImageHeight() * imageHeight)
+                );
+                ++index;
+            }
+
+            imageHighlight.setImageDrawable(layerDrawable);
+            imageHighlight.setVisibility(View.VISIBLE);
         }
     }
 
     private void openStandsMap() {
-        ImageZoomDialogFragment.newInstance(area.getImageResource()).show(getActivity().getSupportFragmentManager(), null);
-
+        ImageZoomDialogFragment.newInstance(area, selectedStandName).show(getActivity().getSupportFragmentManager(), null);
     }
 
     public static class ImageZoomDialogFragment extends DialogFragment {
-        private static final String ARG_IMAGE_RESOURCE = "ImageResource";
-        private int imageResource;
+        private static final String ARG_STANDS_AREA = "StandsArea";
+        private static final String ARG_STAND_NAME = "StandName";
+        private int standsArea;
+        private String standName;
 
-        public static ImageZoomDialogFragment newInstance(int imageResource) {
+        public static ImageZoomDialogFragment newInstance(StandsArea area, String selectedStandName) {
             ImageZoomDialogFragment fragment = new ImageZoomDialogFragment();
             Bundle args = new Bundle();
-            args.putInt(ARG_IMAGE_RESOURCE, imageResource);
+            args.putInt(ARG_STANDS_AREA, area.getId());
+            args.putString(ARG_STAND_NAME, selectedStandName);
             fragment.setArguments(args);
             return fragment;
         }
@@ -228,7 +235,8 @@ public class StandsAreaFragment extends DialogFragment {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             if (getArguments() != null) {
-                imageResource = getArguments().getInt(ARG_IMAGE_RESOURCE);
+                standsArea = getArguments().getInt(ARG_STANDS_AREA);
+                standName = getArguments().getString(ARG_STAND_NAME);
             }
         }
 
@@ -242,9 +250,14 @@ public class StandsAreaFragment extends DialogFragment {
             @SuppressLint("InflateParams") final View view = LayoutInflater.from(getActivity()).inflate(R.layout.image_zoom, null);
             ZoomView zoom = (ZoomView) view.findViewById(R.id.image_zoom_view);
             ImageView image = (ImageView) view.findViewById(R.id.zoomed_image);
+            ImageView highlightImage = view.findViewById(R.id.zoomed_image_highlight);
 
             zoom.setMaxZoom(3);
-            image.setImageResource(imageResource);
+
+            StandsArea area = Convention.getInstance().findStandsArea(standsArea);
+            if (area != null) {
+                image.setImageResource(area.getImageResource());
+            }
 
             final Dialog dialog = new Dialog(getActivity(), R.style.FullScreenDialog);
             dialog.setCancelable(true);
@@ -256,6 +269,25 @@ public class StandsAreaFragment extends DialogFragment {
             layoutParams.copyFrom(dialog.getWindow().getAttributes());
             layoutParams.dimAmount = 0.7f;
             dialog.getWindow().setAttributes(layoutParams);
+
+            if (area != null && standName != null) {
+                Stand selectedStand = null;
+                for (Stand stand : area.getStands()) {
+                    if (stand.getName().equals(standName)) {
+                        selectedStand = stand;
+                        break;
+                    }
+                }
+                if (selectedStand != null) {
+                    final Stand finalSelectedStand = selectedStand;
+
+                    // We need the image size for this
+                    dialog.setOnShowListener(dialog1 -> {
+                        // Highlight
+                        highlightStand(getActivity(), area, finalSelectedStand, image.getWidth(), image.getHeight(), highlightImage);
+                    });
+                }
+            }
 
             view.setOnTouchListener(Views.createOnSingleTapConfirmedListener(getActivity(), new Runnable() {
                 @Override

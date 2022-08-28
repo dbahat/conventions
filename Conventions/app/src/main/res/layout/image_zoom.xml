@@ -4,12 +4,25 @@
     android:id="@+id/image_zoom_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <ImageView
-        android:id="@+id/zoomed_image"
-        android:layout_gravity="center"
-        android:scaleType="centerInside"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <amai.org.conventions.customviews.AspectRatioImageView
+                android:id="@+id/zoomed_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:id="@+id/zoomed_image_highlight"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </FrameLayout>
+    </FrameLayout>
+
+
 
 </pl.polidea.view.ZoomView>
