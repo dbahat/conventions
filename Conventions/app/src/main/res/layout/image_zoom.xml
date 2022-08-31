@@ -4,23 +4,25 @@
     android:id="@+id/image_zoom_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <!-- This layout has to be wrap_content for the highlight image to be the exact same size as the zoomed image -->
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <FrameLayout
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <amai.org.conventions.customviews.AspectRatioImageView
-                android:id="@+id/zoomed_image"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-            <ImageView
-                android:id="@+id/zoomed_image_highlight"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-        </FrameLayout>
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <!-- This image must have width and height with match_parent so that it is the full size of the screen,
+             centerInside so that it's not too big when the aspect ratio is not like the screen,
+             and adjustViewBounds so that the highlighting can know the exact size of the image -->
+        <ImageView
+            android:id="@+id/zoomed_image"
+            android:adjustViewBounds="true"
+            android:scaleType="centerInside"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <ImageView
+            android:id="@+id/zoomed_image_highlight"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
     </FrameLayout>
 
 
