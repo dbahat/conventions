@@ -3,6 +3,8 @@ package amai.org.conventions.events.activities;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
@@ -30,6 +32,7 @@ import amai.org.conventions.utils.Objects;
 import amai.org.conventions.utils.Views;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
@@ -270,6 +273,7 @@ public class StandsAreaFragment extends DialogFragment {
             layoutParams.dimAmount = 0.7f;
             dialog.getWindow().setAttributes(layoutParams);
 
+            // Highlight the selected stand locations
             if (area != null && standName != null) {
                 Stand selectedStand = null;
                 for (Stand stand : area.getStands()) {
@@ -283,20 +287,34 @@ public class StandsAreaFragment extends DialogFragment {
 
                     // We need the image size for this
                     dialog.setOnShowListener(dialog1 -> {
-                        // Highlight
-                        highlightStand(getActivity(), area, finalSelectedStand, image.getWidth(), image.getHeight(), highlightImage);
+                        FragmentActivity activity = getActivity();
+                        // This can happen the first time
+                        if (activity != null) {
+                            // Highlight
+                            highlightStand(activity, area, finalSelectedStand, image.getWidth(), image.getHeight(), highlightImage);
+                        }
                     });
                 }
             }
 
-            view.setOnTouchListener(Views.createOnSingleTapConfirmedListener(getActivity(), new Runnable() {
-                @Override
-                public void run() {
-                    dialog.dismiss();
-                }
-            }));
+            view.setOnTouchListener(Views.createOnSingleTapConfirmedListener(getActivity(), this::dismiss));
+
+            // Show in landscape mode if the image is wide (or portrait if it's long)
+            if (area.getImageWidth() > area.getImageHeight() * 1.2) {
+                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            } else if (area.getImageHeight() > area.getImageWidth() * 1.2) {
+                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            }
 
             return dialog;
+        }
+
+
+        @Override
+        public void onDismiss(@NonNull DialogInterface dialog) {
+            super.onDismiss(dialog);
+            // Set the orientation back to normal
+            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         }
     }
 }
