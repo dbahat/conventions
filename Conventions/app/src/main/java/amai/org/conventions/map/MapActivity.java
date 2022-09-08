@@ -357,11 +357,12 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 
 		// Setup locations and stands search results list
 		locationsSearchResultsAdapter = new MapLocationsAdapter(Collections.<MapLocation>emptyList());
+		standsSearchResultsAdapter = new StandsAdapter(Collections.<Stand>emptyList(), false, false, null);
+
 		if (showSearch) {
 			locationsSearchResultsAdapter.setFloor(map.getLastLookedAtFloor());
+			standsSearchResultsAdapter.setFloor(map.getLastLookedAtFloor());
 		}
-
-		standsSearchResultsAdapter = new StandsAdapter(Collections.<Stand>emptyList(), false, false, null);
 		searchResults.setAdapter(isLocationsSearch() ? locationsSearchResultsAdapter : standsSearchResultsAdapter);
 
 		searchResults.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -561,6 +562,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		getCurrentFloorFragment().resetState();
 		isSearchClosing = false;
 		locationsSearchResultsAdapter.setFloor(getCurrentFloorFragment().getFloor());
+		standsSearchResultsAdapter.setFloor(getCurrentFloorFragment().getFloor());
 		searchContainer.setVisibility(View.VISIBLE);
 		searchContainer.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in_from_right));
 		applySearchFiltersInBackground();

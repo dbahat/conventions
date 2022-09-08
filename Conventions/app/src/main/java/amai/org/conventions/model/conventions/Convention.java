@@ -706,6 +706,22 @@ public abstract class Convention implements Serializable {
 		return null;
 	}
 
+	public MapLocation findStandsAreaLocation(int id) {
+		for (MapLocation location : map.getLocations()) {
+			List<? extends Place> places = location.getPlaces();
+			if (places == null) {
+				continue;
+			}
+			for (Place place : places) {
+				if (place instanceof StandsArea && ((StandsArea) place).getId() == id) {
+					return location;
+				}
+			}
+		}
+
+		return null;
+	}
+
 	public boolean hasStands() {
 		for (MapLocation location : map.getLocations()) {
 			List<? extends Place> places = location.getPlaces();
