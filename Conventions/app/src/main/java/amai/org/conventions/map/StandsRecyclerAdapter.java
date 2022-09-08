@@ -44,7 +44,7 @@ public class StandsRecyclerAdapter extends SectionedRecyclerViewAdapter<Stand, S
     @Override
     public void onBindViewHolder(@NonNull StandViewHolder holder, int position) {
         Stand stand = stands.get(position);
-        holder.setStand(stand, selectedStandName != null && selectedStandName.equals(stand.getName()));
+        holder.setStand(stand, selectedStandName != null && selectedStandName.equals(stand.getName()), null);
         holder.itemView.setOnClickListener(view -> onClickListener.onItemClicked(position));
     }
 

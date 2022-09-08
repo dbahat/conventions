@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<amai.org.conventions.customviews.CompoundTextView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/stand_name"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:compoundDrawableWidth="24dp"
-    app:compoundDrawableHeight="24dp"
-    android:drawablePadding="5dp"
-    style="@style/Base.TextAppearance.AppCompat.Body1"
-    android:textColor="@android:color/black"
-    android:gravity="center_vertical"
-    tools:text="Einav Hats"
-    android:padding="10dp"
-    />
+    android:padding="10dp">
+    <amai.org.conventions.customviews.CompoundTextView
+        android:id="@+id/stand_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:compoundDrawableWidth="24dp"
+        app:compoundDrawableHeight="24dp"
+        android:drawablePadding="5dp"
+        style="@style/Base.TextAppearance.AppCompat.Body1"
+        android:textColor="@android:color/black"
+        android:gravity="center_vertical"
+        tools:text="Einav Hats"
+        />
+    <TextView
+        style="@style/Base.TextAppearance.AppCompat.Small"
+        android:textColor="@android:color/black"
+        android:layout_marginStart="29dp"
+        tools:text="First floor"
+        android:id="@+id/stand_floor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

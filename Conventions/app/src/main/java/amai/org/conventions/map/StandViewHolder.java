@@ -4,6 +4,11 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+
+import amai.org.conventions.model.Floor;
+import amai.org.conventions.model.MapLocation;
+import amai.org.conventions.model.conventions.Convention;
+import amai.org.conventions.utils.Objects;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
@@ -15,17 +20,19 @@ import amai.org.conventions.model.Stand;
 
 public class StandViewHolder extends RecyclerView.ViewHolder {
 	private final TextView standName;
+	private final TextView standFloor;
 	private final boolean showLocation;
-	private boolean colorImage;
+	private final boolean colorImage;
 
 	public StandViewHolder(View itemView, boolean colorImage, boolean showLocation) {
 		super(itemView);
 		standName = (TextView) itemView.findViewById(R.id.stand_name);
+		standFloor = itemView.findViewById(R.id.stand_floor);
 		this.colorImage = colorImage;
 		this.showLocation = showLocation;
 	}
 
-	public void setStand(Stand stand, boolean isSelected) {
+	public void setStand(Stand stand, boolean isSelected, Floor showFloorIfDifferent) {
 		String name = stand.getName();
 		String locationName = stand.getLocationName();
 		Context context = itemView.getContext();
@@ -52,5 +59,17 @@ public class StandViewHolder extends RecyclerView.ViewHolder {
 		// After recycling it works. I tried calling setCompoundRelative twice (with same parameters and with nulls), calling setCompoundDrawables with nulls
 		// and to change the order of method calls on standName but it didn't work.
 		standName.setCompoundDrawables(null, null, image, null);
+
+		if (showFloorIfDifferent != null) {
+			MapLocation location = Convention.getInstance().findStandsAreaLocation(stand.getStandsArea().getId());
+			if (location != null && location.getFloor() != null && !Objects.equals(location.getFloor(), showFloorIfDifferent)) {
+				standFloor.setVisibility(View.VISIBLE);
+				standFloor.setText(location.getFloor().getName());
+			} else {
+				standFloor.setVisibility(View.GONE);
+			}
+		} else {
+			standFloor.setVisibility(View.GONE);
+		}
 	}
 }

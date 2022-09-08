@@ -7,6 +7,7 @@ import android.widget.BaseAdapter;
 
 import java.util.List;
 
+import amai.org.conventions.model.Floor;
 import amai.org.conventions.model.Stand;
 import sff.org.conventions.R;
 
@@ -15,12 +16,17 @@ public class StandsAdapter extends BaseAdapter {
 	private List<Stand> stands;
 	private boolean colorImages;
 	private String selectedStandName;
+	private Floor currentFloor;
 
 	public StandsAdapter(List<Stand> stands, boolean colorImages, boolean showLocations, String selectedStandName) {
 		this.stands = stands;
 		this.colorImages = colorImages;
 		this.showLocations = showLocations;
 		this.selectedStandName = selectedStandName;
+	}
+
+	public void setFloor(Floor currentFloor) {
+		this.currentFloor = currentFloor;
 	}
 
 	public void setStands(List<Stand> stands) {
@@ -58,7 +64,7 @@ public class StandsAdapter extends BaseAdapter {
 		}
 
 		Stand stand = stands.get(position);
-		holder.setStand(stand, selectedStandName != null && selectedStandName.equals(stand.getName()));
+		holder.setStand(stand, selectedStandName != null && selectedStandName.equals(stand.getName()), currentFloor);
 		return convertView;
 	}
 }
