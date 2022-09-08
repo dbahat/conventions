@@ -38,8 +38,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import pl.polidea.view.ZoomView;
 import sff.org.conventions.R;
 
-import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE;
-
 public class StandsAreaFragment extends DialogFragment {
     public static final String ARGUMENT_STANDS_AREA_ID = "ArgumentStandsAreaID";
     public static final String ARGUMENT_STAND_NAME = "ArgumentStandsID";
@@ -150,26 +148,17 @@ public class StandsAreaFragment extends DialogFragment {
         }
         if (foundPosition != -1) {
             Stand finalFoundStand = foundStand;
-            // After we finish scrolling, zoom to the stand
-            if (zoomAfterScroll) {
-                standsList.addOnScrollListener(new RecyclerView.OnScrollListener() {
-                    @Override
-                    public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                        if (newState == SCROLL_STATE_IDLE) {
-                            zoomToStand(finalFoundStand);
-                            standsList.removeOnScrollListener(this);
-                        }
+            RecyclerView.SmoothScroller smoothScroller = new LinearSmoothScroller(getContext()) {
+                @Override
+                protected void onStop() {
+                    super.onStop();
+                    // After we finish scrolling, zoom to the stand
+                    if (zoomAfterScroll) {
+                        zoomToStand(finalFoundStand);
                     }
-
-                    @Override
-                    public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                    }
-                });
-            }
-
-            RecyclerView.SmoothScroller smoothScroller = new LinearSmoothScroller(getContext());
+                }
+            };
             smoothScroller.setTargetPosition(sectionedStandsAdapter.positionToSectionedPosition(foundPosition));
-
             standsList.getLayoutManager().startSmoothScroll(smoothScroller);
         }
     }
