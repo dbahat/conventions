@@ -358,19 +358,19 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		int newFavoriteEvents = 0;
 		try {
 			int responseCode = request.getResponseCode();
+			if (BuildConfig.DEBUG && responseCode != 200) {
+				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(request.getErrorStream()));
+				StringBuilder responseBuilder = new StringBuilder();
+				String output;
+				while ((output = bufferedReader.readLine()) != null) {
+					responseBuilder.append(output);
+				}
+				String responseBody = responseBuilder.toString();
+				Log.e(TAG, "Could not read user purchased events, response code: " + responseCode + ", response is: " + responseBody);
+			}
 			if (responseCode == 400 || responseCode == 401) {
 				throw new AuthenticationException();
 			} else if (responseCode != 200) {
-				if (BuildConfig.DEBUG) {
-					BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(request.getErrorStream()));
-					StringBuilder responseBuilder = new StringBuilder();
-					String output;
-					while ((output = bufferedReader.readLine()) != null) {
-						responseBuilder.append(output);
-					}
-					String responseBody = responseBuilder.toString();
-					Log.e(TAG, "Could not read user purchased events, response is: " + responseBody);
-				}
 				throw new RuntimeException("Could not read user purchased events, error code: " + responseCode);
 			}
 			reader = new InputStreamReader((InputStream) request.getContent());
