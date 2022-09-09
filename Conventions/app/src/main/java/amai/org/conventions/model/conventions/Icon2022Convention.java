@@ -35,7 +35,7 @@ import amai.org.conventions.utils.HttpConnectionCreator;
 import amai.org.conventions.utils.URLUtils;
 import sff.org.conventions.R;
 
-public class Olamot2022Convention extends SffConvention {
+public class Icon2022Convention extends SffConvention {
 //	private static final String HALL_NAME_CINEMATHEQUE_1_3_4 = "סינמטק 1, 3, 4";
 //	private static final String HALL_NAME_CINEMATHEQUE_2 = "סינמטק 2";
 //	private static final String HALL_NAME_CINEMATHEQUE_5 = "סינמטק 5";
@@ -43,19 +43,20 @@ public class Olamot2022Convention extends SffConvention {
 	private static final String HALL_NAME_ESHKOL_2 = "אשכול 2";
 //	private static final String HALL_NAME_ESHKOL_2_VIRTUAL = "אשכול 2 (וירטואלי)";
 	private static final String HALL_NAME_ESHKOL_3 = "אשכול 3";
-//	private static final String HALL_NAME_ESHKOL_4 = "אשכול 4";
+	private static final String HALL_NAME_ESHKOL_4 = "אשכול 4";
 //	private static final String HALL_NAME_ESHKOL_3_VIRTUAL = "אשכול 3 (וירטואלי)";
-	private static final String HALL_NAME_ESHKOL_4_VIRTUAL = "אשכול 4 (וירטואלי)";
-//	private static final String HALL_NAME_ESHKOL_5 = "אשכול 5";
+//	private static final String HALL_NAME_ESHKOL_4_VIRTUAL = "אשכול 4 (וירטואלי)";
+	private static final String HALL_NAME_ESHKOL_5 = "אשכול 5";
 //	private static final String HALL_NAME_ESHKOL_6 = "אשכול 6";
 	private static final String HALL_NAME_WORKSHOPS = "סדנאות";
 //	private static final String HALL_NAME_WORKSHOPS_1 = "סדנאות 1";
 //	private static final String HALL_NAME_WORKSHOPS_2 = "סדנאות 2";
-//	private static final String HALL_NAME_KIDS = "ילדים";
+	private static final String HALL_NAME_KIDS = "ילדים";
 //	private static final String HALL_NAME_KIDS_VIRTUAL = "ילדים (וירטואלי)";
-//	private static final String HALL_NAME_MEETINGS = "מפגשים";
+	private static final String HALL_NAME_MEETINGS = "מפגשים";
 //	private static final String HALL_NAME_MEETINGS_VIRTUAL = "מפגשים (וירטואלי)";
-//	private static final String HALL_NAME_OUTSIDE = "אירועי חוצות";
+	private static final String HALL_NAME_OUTSIDE = "חוצות";
+	private static final String HALL_NAME_ARENA = "הזירה";
 //	private static final String HALL_NAME_TENT_1 = "אוהל 1";
 //	private static final String HALL_NAME_TENT_2 = "אוהל 2";
 //	private static final String HALL_NAME_TENT_3 = "אוהל 3";
@@ -64,16 +65,18 @@ public class Olamot2022Convention extends SffConvention {
 //	private static final String HALL_NAME_TENT_6 = "אוהל 6";
 //	private static final String HALL_NAME_TENT_7 = "אוהל 7";
 //	private static final String HALL_NAME_TENT_8 = "אוהל 8";
-//	private static final String HALL_NAME_IRONI_1 = "עירוני 1";
-//	private static final String HALL_NAME_IRONI_2 = "עירוני 2";
-//	private static final String HALL_NAME_IRONI_3 = "עירוני 3";
-//	private static final String HALL_NAME_IRONI_4 = "עירוני 4";
-//	private static final String HALL_NAME_IRONI_5 = "עירוני 5";
+	private static final String HALL_NAME_TENT_20 = "אוהל 20 טבעי";
+	private static final String HALL_NAME_IRONI_1 = "עירוני 1";
+	private static final String HALL_NAME_IRONI_2 = "עירוני 2";
+	private static final String HALL_NAME_IRONI_3 = "עירוני 3";
+	private static final String HALL_NAME_IRONI_4 = "עירוני 4";
+	private static final String HALL_NAME_IRONI_5 = "עירוני 5";
 //	private static final String HALL_NAME_IRONI_5_VIRTUAL = "עירוני 5 (וירטואלי)";
-//	private static final String HALL_NAME_IRONI_6 = "עירוני 6";
+	private static final String HALL_NAME_IRONI_6 = "עירוני 6";
 //	private static final String HALL_NAME_IRONI_6_VIRTUAL = "עירוני 6 (וירטואלי)";
-//	private static final String HALL_NAME_IRONI_7 = "עירוני 7";
+	private static final String HALL_NAME_IRONI_7 = "עירוני 7";
 //	private static final String HALL_NAME_IRONI_7_VIRTUAL = "עירוני 7 (וירטואלי)";
+	private static final String HALL_NAME_IRONI_8 = "עירוני 8";
 //	private static final String HALL_NAME_IRONI_8_VIRTUAL = "עירוני 8 (וירטואלי)";
 //	private static final String HALL_NAME_IRONI_9_VIRTUAL = "עירוני 9 (וירטואלי)";
 //	private static final String HALL_NAME_ARTEMIS = "ארטמיס";
@@ -81,39 +84,39 @@ public class Olamot2022Convention extends SffConvention {
 //	private static final String HALL_NAME_MINIATURES_2 = "מיניאטורות 2";
 //	private static final String HALL_NAME_MINIATURES_DEMO = "הדגמות מיניאטורות";
 //	private static final String HALL_NAME_MINIATURES_WORKSHOP = "סדנאות מיניאטורות";
-//	private static final String HALL_NAME_GAMES_1 = "משחקים 1";
-//	private static final String HALL_NAME_GAMES_2 = "משחקים 2";
+	private static final String HALL_NAME_GAMES_1 = "משחקי קופסה 1";
+	private static final String HALL_NAME_GAMES_2 = "משחקי קופסה 2";
 //	private static final String HALL_NAME_GAMES_3 = "משחקים 3";
 //	private static final String HALL_NAME_GAMES_4 = "משחקים 4";
 
-	private static final String API_SLUG = "olamot2022";
+	private static final String API_SLUG = "icon2022";
 	private static final String TEST_API_SLUG = "test_con";
 	private static final String YAD2_API = "https://api.sf-f.org.il/yad2/";
 	private static final String TEST_YAD2_API = "https://test.api.sf-f.org.il/yad2/";
 
 	@Override
 	protected ConventionStorage initStorage() {
-		return new ConventionStorage(this, R.raw.olamot2022_convention_events, 0);
+		return new ConventionStorage(this, R.raw.icon2022_convention_events, 0);
 	}
 
 	@Override
 	protected Calendar initStartDate() {
-		return Dates.createDate(2022, Calendar.APRIL, 19);
+		return Dates.createDate(2022, Calendar.OCTOBER, 11);
 	}
 
 	@Override
 	protected Calendar initEndDate() {
-		return Dates.createDate(2022, Calendar.APRIL, 20);
+		return Dates.createDate(2022, Calendar.OCTOBER, 13);
 	}
 
 	@Override
 	protected String initID() {
-		return "Olamot2022";
+		return "Icon2022";
 	}
 
 	@Override
 	protected String initDisplayName() {
-		return "כנס עולמות 2022";
+		return "פסטיבל אייקון 2022";
 	}
 
 	@Override
@@ -127,17 +130,18 @@ public class Olamot2022Convention extends SffConvention {
 //				new Hall().withName(HALL_NAME_ESHKOL_2_VIRTUAL),
 				new Hall().withName(HALL_NAME_ESHKOL_3),
 //				new Hall().withName(HALL_NAME_ESHKOL_3_VIRTUAL),
-				new Hall().withName(HALL_NAME_ESHKOL_4_VIRTUAL),
-//				new Hall().withName(HALL_NAME_ESHKOL_5),
+				new Hall().withName(HALL_NAME_ESHKOL_4),
+				new Hall().withName(HALL_NAME_ESHKOL_5),
 //				new Hall().withName(HALL_NAME_ESHKOL_6),
-				new Hall().withName(HALL_NAME_WORKSHOPS)
+				new Hall().withName(HALL_NAME_WORKSHOPS),
 //				new Hall().withName(HALL_NAME_WORKSHOPS_1),
 //				new Hall().withName(HALL_NAME_WORKSHOPS_2),
-//				new Hall().withName(HALL_NAME_KIDS),
+				new Hall().withName(HALL_NAME_KIDS),
 //				new Hall().withName(HALL_NAME_KIDS_VIRTUAL),
-//				new Hall().withName(HALL_NAME_MEETINGS),
+				new Hall().withName(HALL_NAME_MEETINGS),
 //				new Hall().withName(HALL_NAME_MEETINGS_VIRTUAL),
-//				new Hall().withName(HALL_NAME_OUTSIDE),
+				new Hall().withName(HALL_NAME_OUTSIDE),
+				new Hall().withName(HALL_NAME_ARENA),
 //				new Hall().withName(HALL_NAME_TENT_1),
 //				new Hall().withName(HALL_NAME_TENT_2),
 //				new Hall().withName(HALL_NAME_TENT_3),
@@ -146,27 +150,28 @@ public class Olamot2022Convention extends SffConvention {
 //				new Hall().withName(HALL_NAME_TENT_6),
 //				new Hall().withName(HALL_NAME_TENT_7),
 //				new Hall().withName(HALL_NAME_TENT_8),
-//				new Hall().withName(HALL_NAME_IRONI_1),
-//				new Hall().withName(HALL_NAME_IRONI_2),
-//				new Hall().withName(HALL_NAME_IRONI_3),
-//				new Hall().withName(HALL_NAME_IRONI_4),
-//				new Hall().withName(HALL_NAME_IRONI_5),
+				new Hall().withName(HALL_NAME_IRONI_1),
+				new Hall().withName(HALL_NAME_IRONI_2),
+				new Hall().withName(HALL_NAME_IRONI_3),
+				new Hall().withName(HALL_NAME_IRONI_4),
+				new Hall().withName(HALL_NAME_IRONI_5),
 //				new Hall().withName(HALL_NAME_IRONI_5_VIRTUAL),
-//				new Hall().withName(HALL_NAME_IRONI_6),
+				new Hall().withName(HALL_NAME_IRONI_6),
 //				new Hall().withName(HALL_NAME_IRONI_6_VIRTUAL),
-//				new Hall().withName(HALL_NAME_IRONI_7),
+				new Hall().withName(HALL_NAME_IRONI_7),
 //				new Hall().withName(HALL_NAME_IRONI_7_VIRTUAL),
-//				new Hall().withName(HALL_NAME_IRONI_8_VIRTUAL),
+				new Hall().withName(HALL_NAME_IRONI_8),
 //				new Hall().withName(HALL_NAME_IRONI_9_VIRTUAL)
 //				new Hall().withName(HALL_NAME_ARTEMIS),
 //				new Hall().withName(HALL_NAME_MINIATURES_1),
 //				new Hall().withName(HALL_NAME_MINIATURES_2),
 //				new Hall().withName(HALL_NAME_MINIATURES_DEMO),
 //				new Hall().withName(HALL_NAME_MINIATURES_WORKSHOP)
-//				new Hall().withName(HALL_NAME_GAMES_1),
-//				new Hall().withName(HALL_NAME_GAMES_2),
+				new Hall().withName(HALL_NAME_GAMES_1),
+				new Hall().withName(HALL_NAME_GAMES_2),
 //				new Hall().withName(HALL_NAME_GAMES_3),
-//				new Hall().withName(HALL_NAME_GAMES_4)
+//				new Hall().withName(HALL_NAME_GAMES_4),
+				new Hall().withName(HALL_NAME_TENT_20)
 		);
 		int i = 1;
 		for (Hall hall : halls) {
@@ -185,7 +190,7 @@ public class Olamot2022Convention extends SffConvention {
 		Hall eshkol1 = getHalls().findByName(HALL_NAME_ESHKOL_1);
 		Hall eshkol2 = getHalls().findByName(HALL_NAME_ESHKOL_2);
 		Hall eshkol3 = getHalls().findByName(HALL_NAME_ESHKOL_3);
-		Hall eshkol4 = getHalls().findByName(HALL_NAME_ESHKOL_4_VIRTUAL);
+		Hall eshkol4 = getHalls().findByName(HALL_NAME_ESHKOL_4);
 		Hall workshops = getHalls().findByName(HALL_NAME_WORKSHOPS);
 
 		Floor floor = new Floor(1)
@@ -480,8 +485,8 @@ public class Olamot2022Convention extends SffConvention {
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_LECTURER_QUALITY_5P, "entry.1327236956")
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_SIMILAR_EVENTS_5P, "entry.1416969956")
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_ADDITIONAL_INFO, "entry.1582215667")
-					.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSdVCHOLBCXjNlVEBVDudeUwKneksjqZPLoRrc-ktiPHmLqmmg/formResponse"));
-		} catch (MalformedURLException e) {
+					.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSeIsX_1PjmOJrsk5468qphLsYh_1DVgx39bLh4y0v2KFZfn2w/formResponse"));
+		} catch (MalformedURLException e) {//
 			throw new RuntimeException(e);
 		}
 		return eventFeedbackForm;
@@ -500,7 +505,7 @@ public class Olamot2022Convention extends SffConvention {
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_MAP_SIGNS, "entry.1416969956")
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_CONFLICTING_EVENTS, "entry.1582215667")
 					.withQuestionEntry(FeedbackQuestion.QUESTION_ID_IMPROVEMENT, "entry.993320932")
-					.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSfZGzaYKDdJe3iOS0EsWWnIeDvtWhKc6e5BXIY8eGHyggneyQ/formResponse"));
+					.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSdwefudcwQye8_91qW9wzocvVOYMFsrZyPG6P7_79qBCat57Q/formResponse"));
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
@@ -654,7 +659,7 @@ public class Olamot2022Convention extends SffConvention {
 				return new URL("https://olamot2022.virtualcon.org.il/room-a");
 			} else if (HALL_NAME_ESHKOL_3.equals(event.getHall().getName())) {
 				return new URL("https://olamot2022.virtualcon.org.il/room-b");
-			} else if (HALL_NAME_ESHKOL_4_VIRTUAL.equals(event.getHall().getName())) {
+			} else if (HALL_NAME_ESHKOL_4.equals(event.getHall().getName())) {
 				return new URL("https://olamot2022.virtualcon.org.il/room-c");
 			} else {
 				return null;

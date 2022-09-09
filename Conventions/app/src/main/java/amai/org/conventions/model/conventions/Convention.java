@@ -62,7 +62,7 @@ import sff.org.conventions.R;
 
 public abstract class Convention implements Serializable {
 
-	private static Convention convention = new Olamot2022Convention();
+	private static Convention convention = new Icon2022Convention();
 	public static final int NO_COLOR = Color.TRANSPARENT; // Assuming we will never get this from the server...
 
 	// Currently supporting conventions of up to 5 days (UI restriction, since the programme is set
