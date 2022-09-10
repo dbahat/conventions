@@ -596,14 +596,6 @@ public class Icon2022Convention extends SffConvention {
 		return request;
 	}
 
-	@Override
-	public URL getOAuthURL() {
-		try {
-			return new URL("https://sso.sf-f.org.il/auth/realms/sf-f/protocol/openid-connect/token");
-		} catch (MalformedURLException e) {
-			throw new RuntimeException(e);
-		}
-	}
 
 //	@Override
 //	public ConventionEvent findEventByURL(String url) {
