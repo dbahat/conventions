@@ -646,16 +646,12 @@ public class Icon2022Convention extends SffConvention {
 	@Override
 	public URL getEventViewURL(ConventionEvent event) {
 		try {
-			// Only events in eshkol 3-4 are available from the convention website
-			if (HALL_NAME_ESHKOL_2.equals(event.getHall().getName())) {
-				return new URL("https://olamot2022.virtualcon.org.il/room-a");
-			} else if (HALL_NAME_ESHKOL_3.equals(event.getHall().getName())) {
-				return new URL("https://olamot2022.virtualcon.org.il/room-b");
-			} else if (HALL_NAME_ESHKOL_4.equals(event.getHall().getName())) {
-				return new URL("https://olamot2022.virtualcon.org.il/room-c");
-			} else {
-				return null;
+			// All virtual-enabled events are in the same room
+			// TODO should we also check the hall name?
+			if (this.getEventLocationTypes(event).contains(ConventionEvent.EventLocationType.VIRTUAL)) {
+				return new URL("https://icon2022.virtualcon.org.il/room-a");
 			}
+			return null;
 		} catch (Exception e) {
 			return null;
 		}
