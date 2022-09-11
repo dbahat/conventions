@@ -1,5 +1,6 @@
 package amai.org.conventions;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -32,6 +34,7 @@ import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Views;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import static amai.org.conventions.utils.CollectionUtils.filter;
@@ -89,19 +92,19 @@ public class HomeActivity extends NavigationActivity {
 		}
 	}
 
-	private boolean setupVoteOrViewText(ConventionEvent currentEvent, TextView textView) {
+	private boolean setupVoteOrViewText(ConventionEvent currentEvent, ImageView imageView) {
 		if (currentEvent.getUserInput().getVoteSurvey() != null || Convention.getInstance().getEventViewURL(currentEvent) != null) {
 			if (Convention.getInstance().getEventViewURL(currentEvent) == null) {
-				textView.setText(R.string.home_current_event_vote_possible);
+				imageView.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.outline_poll_white_48));
 			} else if (currentEvent.getUserInput().getVoteSurvey() == null) {
-				textView.setText(R.string.home_current_event_view_possible);
+				imageView.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.baseline_videocam_white_48));
 			} else {
-				textView.setText(R.string.home_current_event_vote_or_view_possible);
+				imageView.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.videocam_poll_white_48));
 			}
-			textView.setVisibility(View.VISIBLE);
+			imageView.setVisibility(View.VISIBLE);
 			return true;
 		} else {
-			textView.setVisibility(View.GONE);
+			imageView.setVisibility(View.GONE);
 			return false;
 		}
 	}
@@ -117,14 +120,14 @@ public class HomeActivity extends NavigationActivity {
 		View currentEventTitleContainer = findViewById(R.id.home_current_event_title_container);
 		View currentEventContainer = findViewById(R.id.home_current_event_container);
 		TextView currentEventTitle = (TextView)findViewById(R.id.home_current_event_title);
-		TextView currentEventVoteText = (TextView)findViewById(R.id.home_current_event_vote);
+		ImageView currentEventVoteText = findViewById(R.id.home_current_event_vote);
 
 		View upcomingEventTitleContainer = findViewById(R.id.home_upcoming_event_title_container);
 		View upcomingEventContainer = findViewById(R.id.home_upcoming_event_container);
 		TextView upcomingEventTime = (TextView)findViewById(R.id.home_upcoming_event_time);
 		TextView upcomingEventTitle = (TextView)findViewById(R.id.home_upcoming_event_title);
 		TextView upcomingEventHall = (TextView)findViewById(R.id.home_upcoming_event_hall);
-		TextView upcomingEventVoteText = (TextView)findViewById(R.id.home_upcoming_event_vote);
+		ImageView upcomingEventVoteText = findViewById(R.id.home_upcoming_event_vote);
 
 		if (upcomingEvent != null) {
 			// There's an upcoming event - show it
@@ -170,7 +173,7 @@ public class HomeActivity extends NavigationActivity {
 			upcomingEventContainer.setBackground(ThemeAttributes.getDrawable(this, R.attr.homeCurrentEventOnlyBackground));
 			boolean isVisible = setupVoteOrViewText(currentEvent, upcomingEventVoteText);
 			if (isVisible) {
-				upcomingEventVoteText.setTextColor(ThemeAttributes.getColor(this, R.attr.homeCurrentEventText));
+				upcomingEventVoteText.setImageTintList(ColorStateList.valueOf(ThemeAttributes.getColor(this, R.attr.homeCurrentEventText)));
 			}
 
 			// In this case, we want the 'go to my events' to go to the programme instead, since the user has no more favorite events.
