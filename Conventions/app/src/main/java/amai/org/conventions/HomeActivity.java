@@ -108,11 +108,19 @@ public class HomeActivity extends NavigationActivity {
 	}
 
 	private void setContentWithUpcomingFavorites(ConventionEvent currentEvent, ConventionEvent upcomingEvent) {
-		setInfoBoxContent(R.layout.home_box_during_convention);
+		boolean useSepTitlesLayout = ThemeAttributes.getBoolean(this, R.attr.homeShowCurrentUpcomingTitles);
+		if (useSepTitlesLayout) {
+			setInfoBoxContent(R.layout.home_box_during_convention_sep_titles);
+		} else {
+			setInfoBoxContent(R.layout.home_box_during_convention);
+		}
 
+		View currentEventTitleContainer = findViewById(R.id.home_current_event_title_container);
 		View currentEventContainer = findViewById(R.id.home_current_event_container);
 		TextView currentEventTitle = (TextView)findViewById(R.id.home_current_event_title);
 		TextView currentEventVoteText = (TextView)findViewById(R.id.home_current_event_vote);
+
+		View upcomingEventTitleContainer = findViewById(R.id.home_upcoming_event_title_container);
 		View upcomingEventContainer = findViewById(R.id.home_upcoming_event_container);
 		TextView upcomingEventTime = (TextView)findViewById(R.id.home_upcoming_event_time);
 		TextView upcomingEventTitle = (TextView)findViewById(R.id.home_upcoming_event_title);
@@ -130,17 +138,33 @@ public class HomeActivity extends NavigationActivity {
 
 			// if there's a current event, show it as well
 			if (currentEvent != null) {
-				currentEventTitle.setText(getString(R.string.home_now_showing, currentEvent.getTitle()));
+				// Only add the "currently showing:" prefix if it's not in the title
+				if (useSepTitlesLayout) {
+					currentEventTitle.setText(currentEvent.getTitle());
+				} else {
+					currentEventTitle.setText(getString(R.string.home_now_showing, currentEvent.getTitle()));
+				}
 				setupVoteOrViewText(currentEvent, currentEventVoteText);
 			} else {
 				currentEventContainer.setVisibility(View.GONE);
+				if (useSepTitlesLayout) {
+					currentEventTitleContainer.setVisibility(View.GONE);
+				}
 			}
 		} else {
 			// no upcoming event to show, but there's an event currently showing - show the current event at the upcoming event layout
-			currentEventTitle.setVisibility(View.GONE);
+			currentEventContainer.setVisibility(View.GONE);
+			if (useSepTitlesLayout) {
+				currentEventTitleContainer.setVisibility(View.GONE);
+
+				upcomingEventTitleContainer.setBackground(ThemeAttributes.getDrawable(this, R.attr.homeCurrentEventTitleBackground));
+				TextView titleText = findViewById(R.id.home_upcoming_event_title_text);
+				titleText.setText(R.string.home_now_showing_title);
+				titleText.setTextColor(ThemeAttributes.getColor(this, R.attr.homeCurrentEventTitleText));
+			}
 			upcomingEventTitle.setText(currentEvent.getTitle());
 			upcomingEventTitle.setTextColor(ThemeAttributes.getColor(this, R.attr.homeCurrentEventText));
-			upcomingEventTime.setText(getString(R.string.home_now_showing, ""));
+			upcomingEventTime.setText(R.string.home_now_showing_no_title);
 			upcomingEventTime.setTextColor(ThemeAttributes.getColor(this, R.attr.homeCurrentEventText));
 			upcomingEventHall.setText(currentEvent.getHall().getName());
 			upcomingEventHall.setTextColor(ThemeAttributes.getColor(this, R.attr.homeCurrentEventText));

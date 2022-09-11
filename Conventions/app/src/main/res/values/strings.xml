@@ -172,7 +172,10 @@
     <string name="home_go_to_my_events">עבור לאירועים שלי</string>
     <string name="home_go_to_programme">לכל האירועים</string>
     <string name="home_now_showing">כעת: %s</string>
+    <string name="home_now_showing_no_title">כעת</string>
+    <string name="home_now_showing_title">מתקיים עכשיו</string>
     <string name="home_upcoming_event_time">בעוד %s</string>
+    <string name="home_upcoming_title">האירוע הבא</string>
     <string name="home_upcoming_programme_events">אירועים שמתחילים ב-%s</string>
     <string name="to_vote_survey">להצבעה</string>
     <string name="survey_vote_details">באירוע זה ניתן להצביע עבור חביב הקהל.</string>

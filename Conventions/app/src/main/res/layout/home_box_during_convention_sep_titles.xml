@@ -11,17 +11,15 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?homeTitleBackground"
-        android:onClick="onGoToMyEventsClicked"
-        android:foreground="?selectableItemBackground"
+        android:id="@+id/home_current_event_title_container"
+        android:background="?homeCurrentEventTitleBackground"
         android:padding="8dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/my_events_title"
+            android:text="@string/home_now_showing_title"
             android:textSize="?homeTitleSize"
-            android:textColor="?homeTitleText"
-            android:textStyle="bold"
+            android:textColor="?homeCurrentEventTitleText"
             android:layout_gravity="center"/>
     </FrameLayout>
 
@@ -29,7 +27,6 @@
         android:id="@+id/home_current_event_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="?homeBoxTopMargin"
         android:foreground="?selectableItemBackground"
         android:gravity="center"
         android:onClick="onCurrentEventClicked">
@@ -69,11 +66,27 @@
     </FrameLayout>
 
     <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/home_upcoming_event_title_container"
+        android:background="?homeUpcomingEventTitleBackground"
+        android:layout_marginTop="?homeEventsMargin"
+        android:padding="8dp">
+        <TextView
+            android:id="@+id/home_upcoming_event_title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_upcoming_title"
+            android:textSize="?homeTitleSize"
+            android:textColor="?homeUpcomingEventTitleText"
+            android:layout_gravity="center"/>
+    </FrameLayout>
+
+    <FrameLayout
         android:id="@+id/home_upcoming_event_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_marginTop="?homeEventsMargin"
         android:foreground="?selectableItemBackground"
         android:paddingTop="?homeUpcomingPaddingTop"
         android:padding="?homeUpcomingPadding"
@@ -85,14 +98,6 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical">
-            <TextView
-                android:id="@+id/home_upcoming_event_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="כעת"
-                android:textColor="?homeEventTimeText"
-                android:textSize="18sp"/>
-
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/home_upcoming_event_title"
                 android:layout_width="match_parent"
@@ -110,15 +115,6 @@
                 android:layout_marginBottom="8dp"/>
 
             <TextView
-                android:id="@+id/home_upcoming_event_hall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="אולם ראשי"
-                android:textColor="?homeEventHallText"
-                android:textSize="18sp"
-                android:layout_marginBottom="?homeUpcomingMarginBottom"/>
-
-            <TextView
                 android:id="@+id/home_upcoming_event_vote"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -130,6 +126,28 @@
                 android:textSize="18sp"
                 android:paddingBottom="?homeUpcomingMarginBottom"
                 />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/home_upcoming_event_time"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    tools:text="כעת"
+                    android:textColor="?homeEventTimeText"
+                    android:textSize="18sp"/>
+                <TextView
+                    android:id="@+id/home_upcoming_event_hall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="אולם ראשי"
+                    android:textColor="?homeEventHallText"
+                    android:textSize="18sp"/>
+            </LinearLayout>
+
         </LinearLayout>
     </FrameLayout>
 

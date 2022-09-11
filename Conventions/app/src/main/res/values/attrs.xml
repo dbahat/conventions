@@ -97,15 +97,22 @@
         <attr name="homeTitleText" format="color|reference"/>
         <attr name="homeMessageBackground" format="color|reference"/>
         <attr name="homeMessageText" format="color|reference"/>
+        <attr name="homeEventsMargin" format="dimension"/>
         <attr name="homeCurrentEventText" format="color|reference"/>
         <attr name="homeEventTimeText" format="color|reference"/>
         <attr name="homeEventHallText" format="color|reference"/>
         <attr name="homeCurrentEventBackground" format="color|reference"/>
         <attr name="homeUpcomingEventBackground" format="color|reference"/>
+        <attr name="homeUpcomingEventText" format="color|reference"/>
         <attr name="homeUpcomingPadding" format="dimension"/>
         <attr name="homeUpcomingPaddingTop" format="dimension"/>
         <attr name="homeUpcomingMarginBottom" format="dimension"/>
         <attr name="homeCurrentEventOnlyBackground" format="color|reference"/>
+        <attr name="homeShowCurrentUpcomingTitles" format="boolean"/>
+        <attr name="homeCurrentEventTitleBackground" format="color|reference"/>
+        <attr name="homeCurrentEventTitleText" format="color|reference"/>
+        <attr name="homeUpcomingEventTitleBackground" format="color|reference"/>
+        <attr name="homeUpcomingEventTitleText" format="color|reference"/>
         <attr name="homeEventNameInList" format="color|reference"/>
         <attr name="homeEventsListDivider" format="color|reference"/>
         <attr name="homeButtonBackground" format="color|reference"/>
