@@ -12,7 +12,7 @@
                 android:useLevel="true">
                 <!-- Should be same as ?attr/buttonColor
                 Referencing theme attributes is not supported before L -->
-                <solid android:color="@color/olamot2022_rust"/>
+                <solid android:color="@color/icon2022_red1"/>
             </shape>
         </rotate>
     </item>

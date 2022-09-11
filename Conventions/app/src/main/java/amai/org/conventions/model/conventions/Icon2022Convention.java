@@ -203,9 +203,9 @@ public class Icon2022Convention extends SffConvention {
 		final int SMALL_MARKER_HEIGHT = 45;
 
 		int DEFAULT_MARKER = R.drawable.baseline_place_24_no_padding;
-		int DEFAULT_MARKER_TINT_RES = R.color.olamot2022_yellow3;
+		int DEFAULT_MARKER_TINT_RES = R.color.icon2022_grey3;
 		int DEFAULT_SELECTED_MARKER = R.drawable.baseline_place_24_no_padding;
-		int DEFAULT_SELECTED_MARKER_TINT_RES = R.color.olamot2022_rust;
+		int DEFAULT_SELECTED_MARKER_TINT_RES = R.color.icon2022_red1;
 		return new ConventionMap()
 			.withFloors(Collections.singletonList(floor))
 			.withLocations(

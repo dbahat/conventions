@@ -36,13 +36,13 @@
     <application
         android:name="amai.org.conventions.ConventionsApplication"
         android:allowBackup="false"
-        android:icon="@mipmap/olamot2022_app_icon"
+        android:icon="@mipmap/icon2022_app_icon"
         android:installLocation="auto"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppBaseTheme.Olamot2022">
+        android:theme="@style/AppBaseTheme.Icon2022">
         <activity
-            android:name="amai.org.conventions.SplashActivity" android:theme="@style/AppBaseTheme.Olamot2022.Splash"
+            android:name="amai.org.conventions.SplashActivity" android:theme="@style/AppBaseTheme.Icon2022.Splash"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -57,7 +57,7 @@
         <activity android:name="amai.org.conventions.map.MapActivity"></activity>
         <activity
             android:name="amai.org.conventions.events.activities.EventActivity"
-            android:theme="@style/AppBaseTheme.Olamot2022.Event"
+            android:theme="@style/AppBaseTheme.Icon2022.Event"
             android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name="amai.org.conventions.ArrivalMethodsActivity"></activity>
         <activity
@@ -65,7 +65,7 @@
             android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name="amai.org.conventions.updates.UpdatesActivity"></activity>
         <activity android:name="amai.org.conventions.settings.SettingsActivity"
-            android:theme="@style/AppBaseTheme.Olatmo20221.Settings"></activity>
+            android:theme="@style/AppBaseTheme.Icon20221.Settings"></activity>
         <activity android:name="amai.org.conventions.DiscountsActivity"></activity>
         <activity android:name="amai.org.conventions.AboutActivity"></activity>
         <activity android:name="amai.org.conventions.HomeActivity" android:screenOrientation="portrait"/>
@@ -79,7 +79,7 @@
                 <data android:scheme="sff.org.conventions" android:host="web-content" />
             </intent-filter>
         </activity>
-        <activity android:name="amai.org.conventions.auth.AuthorizationActivity" android:theme="@style/TransparentTheme.Olamot2022"></activity>
+        <activity android:name="amai.org.conventions.auth.AuthorizationActivity" android:theme="@style/TransparentTheme.Icon2022"></activity>
         <activity
             android:name="net.openid.appauth.RedirectUriReceiverActivity"
             tools:node="replace">
@@ -117,7 +117,7 @@
      See README(https://goo.gl/l4GJaQ) for more. -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/olamot2022_notification" />
+            android:resource="@drawable/icon2022_notification" />
     </application>
 
 </manifest>

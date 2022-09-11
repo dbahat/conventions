@@ -26,8 +26,8 @@
         <item android:state_enabled="false">
             <shape android:shape="rectangle"
                 android:tint="?attr/buttonColor">
-                <corners android:radius="@dimen/control_corner_material" />
-                <solid android:color="@color/gray" />
+<!--                <corners android:radius="@dimen/control_corner_material" />-->
+                <solid android:color="@color/icon2022_grey2" />
                 <padding android:left="@dimen/button_padding_horizontal_material"
                     android:top="@dimen/button_padding_vertical_material"
                     android:right="@dimen/button_padding_horizontal_material"
@@ -39,8 +39,8 @@
         <item>
             <shape android:shape="rectangle"
                    android:tint="?attr/buttonColor">
-                <corners android:radius="@dimen/control_corner_material" />
-                <solid android:color="@color/olamot2022_rust" />
+<!--                <corners android:radius="@dimen/control_corner_material" /> -->
+                <solid android:color="@color/icon2022_red1" />
                 <padding android:left="@dimen/button_padding_horizontal_material"
                          android:top="@dimen/button_padding_vertical_material"
                          android:right="@dimen/button_padding_horizontal_material"
