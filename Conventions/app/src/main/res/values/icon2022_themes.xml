@@ -95,7 +95,7 @@
         <item name="eventDetailsColorNotStarted">@color/icon2022_grey3</item>
         <item name="eventDetailsColorCurrent">@color/icon2022_green1</item>
         <item name="eventDetailsColorEnded">@color/icon2022_grey2</item>
-        <item name="eventSendFeedbackColor">@color/icon2022_green1</item>
+        <item name="eventSendFeedbackColor">@color/icon2022_red1</item>
         <item name="eventSentFeedbackColor">@color/icon2022_green2</item>
         <item name="eventNonFavoriteColor">@color/icon2022_grey3</item>
         <item name="eventFavoriteColor">@color/icon2022_red1</item>
