@@ -334,6 +334,7 @@
         <item name="eventKeywordHighlightColor">@color/white</item>
         <item name="eventDetailsColorNotStarted">@color/white</item>
         <item name="nextEventStartTimeBottomLineColor">@android:color/white</item>
+        <item name="conflictingEventsListBorder">@drawable/conflicting_events_list_border</item>
         <item name="conflictingEventsBackground">@color/transparent_white</item>
         <item name="navigationPopupNotSelectedColor">@android:color/white</item>
         <item name="updateTimeColor">@color/transparent_white</item>
@@ -372,6 +373,7 @@
         <item name="eventKeywordHighlightColor">@color/black</item>
         <item name="eventDetailsColorNotStarted">@color/dark_gray</item>
         <item name="nextEventStartTimeBottomLineColor">@android:color/black</item>
+        <item name="conflictingEventsListBorder">@drawable/conflicting_events_list_border</item>
         <item name="conflictingEventsBackground">@color/dark_gray</item>
         <item name="navigationPopupNotSelectedColor">@android:color/black</item>
         <item name="updateTimeColor">@color/ultra_light_gray</item>

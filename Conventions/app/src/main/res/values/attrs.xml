@@ -129,6 +129,7 @@
         <attr name="nextEventStartTimeBackground" format="color|reference"/>
         <attr name="nextEventStartTimeTextColor" format="color|reference"/>
         <attr name="nextEventStartTimeBottomLineColor" format="color|reference"/>
+        <attr name="conflictingEventsListBorder" format="integer|reference"/>
         <attr name="conflictingEventsBackground" format="color|reference"/>
         <!-- Navigation Drawer -->
         <attr name="navigationPopupBackground" format="color|reference"/>
