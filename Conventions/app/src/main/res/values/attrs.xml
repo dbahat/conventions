@@ -234,6 +234,9 @@
         <attr name="searchCategoriesColor" format="color|reference" />
         <!-- Programme Search Screen -->
         <attr name="searchDrawerAccentColor" format="color|reference"/>
+        <attr name="searchDrawerBackground" format="integer|reference"/>
+        <attr name="searchDrawerTextColor" format="color|reference"/>
+        <attr name="searchDrawerSeparatorColor" format="color|reference"/>
         <!-- Event Survey Dialog -->
         <attr name="eventSurveyTextColor" format="color|reference"/>
         <attr name="eventSurveyAnswerColor" format="color|reference"/>

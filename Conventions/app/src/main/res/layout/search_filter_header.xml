@@ -9,7 +9,7 @@
         android:id="@+id/search_filter_header_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
+        android:textColor="?searchDrawerTextColor"
         style="@style/TextAppearance.AppCompat.Medium"/>
 
 </FrameLayout>
