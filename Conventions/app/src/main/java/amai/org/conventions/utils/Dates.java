@@ -30,7 +30,7 @@ public class Dates {
 	private static Date getInitialDate() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm", Dates.getLocale());
 		try {
-//			return dateFormat.parse("19.04.2022 18:10");
+//			return dateFormat.parse("11.10.2022 16:10");
 			return null;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
