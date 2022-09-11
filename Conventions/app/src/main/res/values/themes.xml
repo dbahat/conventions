@@ -91,6 +91,7 @@
         <item name="homeCurrentEventText">?homeMessageText</item>
         <item name="homeUpcomingEventText">?homeMessageText</item>
         <item name="homeCurrentEventOnlyBackground">?homeCurrentEventBackground</item>
+        <item name="homeEventsListBackground">?homeUpcomingEventBackground</item>
         <item name="homeEventsListDivider">@drawable/home_event_list_divider</item>
         <item name="homeLogoMargin">10dp</item>
         <item name="homeFrameMargins">24dp</item>
@@ -264,6 +265,7 @@
         <item name="homeCurrentEventText">?homeMessageText</item>
         <item name="homeUpcomingEventText">?homeMessageText</item>
         <item name="homeCurrentEventOnlyBackground">?homeCurrentEventBackground</item>
+        <item name="homeEventsListBackground">?homeUpcomingEventBackground</item>
         <item name="homeEventsListDivider">@drawable/home_event_list_divider</item>
         <item name="homeLogoMargin">10dp</item>
         <item name="homeFrameMargins">24dp</item>
