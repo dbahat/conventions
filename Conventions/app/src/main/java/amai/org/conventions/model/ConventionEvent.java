@@ -1,6 +1,8 @@
 package amai.org.conventions.model;
 
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.text.Editable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -70,7 +72,7 @@ public class ConventionEvent implements Serializable {
 		this.textColor = textColor;
 	}
 
-	public int getTextColor(Context context) {
+	public int getEventTimeTextColor(Context context) {
 		if (textColor != Convention.NO_COLOR) {
 			return textColor;
 		}
@@ -197,6 +199,24 @@ public class ConventionEvent implements Serializable {
 			return ThemeAttributes.getColor(context, R.attr.eventTimeVirtualBackgroundColor);
 		}
 		return ThemeAttributes.getColor(context, R.attr.eventTimeDefaultBackgroundColor);
+	}
+
+	public Drawable getEventTimeBackground(Context context) {
+		Drawable drawable = null;
+		if (!this.hasStarted()) {
+			drawable = ThemeAttributes.getDrawable(context, R.attr.eventTimeNotStartedBackground);
+		} else if (this.hasEnded()) {
+			drawable = ThemeAttributes.getDrawable(context, R.attr.eventTimeEndedBackground);
+		} else {
+			drawable = ThemeAttributes.getDrawable(context, R.attr.eventTimeCurrentBackground);
+		}
+
+		if (drawable == null) {
+			int color = getBackgroundColor(context);
+			drawable = new ColorDrawable(color);
+		}
+
+		return drawable;
 	}
 
 	public void setType(EventType type) {

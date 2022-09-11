@@ -64,6 +64,9 @@
         <attr name="eventKeywordHighlightColor" format="color|reference"/>
         <attr name="eventTimeDefaultTextColor" format="color|reference"/>
         <attr name="eventTimeDefaultBackgroundColor" format="color|reference"/>
+        <attr name="eventTimeNotStartedBackground" format="integer|reference"/>
+        <attr name="eventTimeCurrentBackground" format="integer|reference"/>
+        <attr name="eventTimeEndedBackground" format="integer|reference"/>
         <attr name="eventTimeVirtualTextColor" format="color|reference"/>
         <attr name="eventTimeVirtualBackgroundColor" format="color|reference"/>
         <attr name="eventTimeAlwaysUseDefaultBackgroundColor" format="boolean"/>
