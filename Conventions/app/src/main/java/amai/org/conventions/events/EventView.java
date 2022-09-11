@@ -99,25 +99,33 @@ public class EventView extends FrameLayout {
     }
 
     private void setColorsFromEvent(ConventionEvent event) {
-        int eventTypeColor = event.getBackgroundColor(getContext());
-        setEventTypeColor(eventTypeColor);
-        setEventTimeTextColor(event.getTextColor(getContext()));
-        if (!event.hasStarted()) {
-            setEventNameColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeNotStartedColor), eventTypeColor);
-            setEventBackgroundColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeNotStartedBackgroundColor));
-        } else if (event.hasEnded()) {
-            setEventNameColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeEndedColor), eventTypeColor);
-            setEventBackgroundColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeEndedBackgroundColor));
-        } else {
-            setEventNameColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeCurrentColor), eventTypeColor);
-            setEventBackgroundColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeCurrentBackgroundColor));
-        }
+		int eventTypeColor = event.getBackgroundColor(getContext());
+		setEventTypeBackground(event.getEventTimeBackground(getContext()));
+
+		int eventNameColor;
+		if (!event.hasStarted()) {
+			eventNameColor = ThemeAttributes.getColor(getContext(), R.attr.eventTypeNotStartedColor);
+			setEventBackgroundColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeNotStartedBackgroundColor));
+		} else if (event.hasEnded()) {
+			eventNameColor = ThemeAttributes.getColor(getContext(), R.attr.eventTypeEndedColor);
+			setEventBackgroundColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeEndedBackgroundColor));
+		} else {
+			eventNameColor = ThemeAttributes.getColor(getContext(), R.attr.eventTypeCurrentColor);
+			setEventBackgroundColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeCurrentBackgroundColor));
+		}
+
+		// If no color is specified for the event name, use the same color from the event type
+		if (eventNameColor == Convention.NO_COLOR) {
+			eventNameColor = eventTypeColor;
+		}
+
+		setEventNameColor(eventNameColor);
+		setEventTimeTextColor(event.getEventTimeTextColor(getContext()), eventNameColor);
         setEventDetailsColor(getEventDetailsColor(event));
     }
 
     private int getEventDetailsColor(ConventionEvent event) {
         int eventDetailsColor;
-        int eventTypeColor = event.getBackgroundColor(getContext());
         if (!event.hasStarted()) {
             eventDetailsColor = ThemeAttributes.getColor(getContext(), R.attr.eventDetailsColorNotStarted);
         } else if (event.hasEnded()) {
@@ -126,29 +134,28 @@ public class EventView extends FrameLayout {
             eventDetailsColor = ThemeAttributes.getColor(getContext(), R.attr.eventDetailsColorCurrent);
         }
         // If no color is specified, use the same color from the event type
-        if (eventDetailsColor == AmaiModelConverter.NO_COLOR) {
-            eventDetailsColor = eventTypeColor;
+        if (eventDetailsColor == Convention.NO_COLOR) {
+            eventDetailsColor = event.getBackgroundColor(getContext());
         }
         return eventDetailsColor;
     }
 
-    public void setEventTypeColor(int color) {
-        setLayoutColor(timeLayout, color);
-    }
+	public void setEventTypeBackground(Drawable drawable) {
+		setLayoutBackground(timeLayout, drawable);
+	}
 
-    public void setEventTimeTextColor(int color) {
-        startTime.setTextColor(color);
-        timeBoxTo.setTextColor(color);
-        endTime.setTextColor(color);
-    }
+	public void setEventTimeTextColor(int color, int defaultColor) {
+		if (color == Convention.NO_COLOR) {
+			color = defaultColor;
+		}
+		startTime.setTextColor(color);
+		timeBoxTo.setTextColor(color);
+		endTime.setTextColor(color);
+	}
 
-    public void setEventNameColor(int eventNameColor, int eventTypeColor) {
-        // If no color is specified for the event name, use the same color from the event type
-        if (eventNameColor == AmaiModelConverter.NO_COLOR) {
-            eventNameColor = eventTypeColor;
-        }
-        eventName.setTextColor(eventNameColor);
-    }
+	public void setEventNameColor(int eventNameColor) {
+		eventName.setTextColor(eventNameColor);
+	}
 
     public void setEventDetailsColor(int eventDetailsColor) {
         hallName.setTextColor(eventDetailsColor);
@@ -164,7 +171,11 @@ public class EventView extends FrameLayout {
         layout.setBackgroundColor(color);
     }
 
-    public void setAttending(boolean isAttending) {
+	private void setLayoutBackground(ViewGroup layout, Drawable drawable) {
+		layout.setBackground(drawable);
+	}
+
+	public void setAttending(boolean isAttending) {
         Drawable attendingDrawable = ThemeAttributes.getDrawable(getContext(), R.attr.eventFavoriteColor);
         Drawable notAttendingDrawable = ThemeAttributes.getDrawable(getContext(), R.attr.eventNonFavoriteColor);
 

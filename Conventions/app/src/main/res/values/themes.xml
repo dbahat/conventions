@@ -54,6 +54,9 @@
         <item name="eventTypeCurrentBackgroundColor">@null</item>
         <item name="eventTypeNotStartedBackgroundColor">@null</item>
         <item name="eventTimeDefaultBackgroundColor">@null</item>
+        <item name="eventTimeNotStartedBackground">@null</item>
+        <item name="eventTimeCurrentBackground">@null</item>
+        <item name="eventTimeEndedBackground">@null</item>
         <item name="eventTimeVirtualTextColor">?eventTimeDefaultTextColor</item>
         <item name="eventTimeVirtualBackgroundColor">?eventTimeDefaultBackgroundColor</item>
         <item name="eventTimeAlwaysUseDefaultBackgroundColor">false</item>
@@ -213,6 +216,9 @@
         <item name="eventTypeCurrentBackgroundColor">@null</item>
         <item name="eventTypeNotStartedBackgroundColor">@null</item>
         <item name="eventTimeDefaultBackgroundColor">@null</item>
+        <item name="eventTimeNotStartedBackground">@null</item>
+        <item name="eventTimeCurrentBackground">@null</item>
+        <item name="eventTimeEndedBackground">@null</item>
         <item name="eventTimeVirtualTextColor">?eventTimeDefaultTextColor</item>
         <item name="eventTimeVirtualBackgroundColor">?eventTimeDefaultBackgroundColor</item>
         <item name="eventTimeAlwaysUseDefaultBackgroundColor">false</item>
