@@ -41,30 +41,30 @@
             android:paddingStart="5dp"
             android:paddingEnd="5dp"
             android:background="?homeCurrentEventBackground"
-            android:orientation="vertical">
+            android:orientation="horizontal">
             <TextView
                 android:id="@+id/home_current_event_title"
                 android:visibility="visible"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 tools:text="כעת: תחרות השירה"
                 android:textAlignment="center"
                 android:textColor="?homeCurrentEventText"
                 android:textSize="20sp"
+                android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 />
-            <TextView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/home_current_event_vote"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="5dp"
                 android:visibility="gone"
                 tools:visibility="visible"
-                android:text="@string/home_current_event_vote_possible"
-                android:textColor="?homeCurrentEventText"
-                android:textAlignment="center"
-                android:textSize="18sp"
-                android:paddingBottom="8dp"
-                />
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/baseline_videocam_white_48"
+                app:tint="?homeCurrentEventText" />
         </LinearLayout>
     </FrameLayout>
 
@@ -93,21 +93,39 @@
                 android:textColor="?homeEventTimeText"
                 android:textSize="18sp"/>
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/home_upcoming_event_title"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                tools:text="2D Musical"
-                android:textAlignment="center"
-                android:textColor="?homeUpcomingEventText"
-                android:textStyle="bold"
-                app:autoSizeTextType="uniform"
-                app:autoSizeMinTextSize="12sp"
-                app:autoSizeMaxTextSize="70sp"
-                app:autoSizeStepGranularity="2sp"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/home_upcoming_event_title"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    tools:text="2D Musical"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:textColor="?homeUpcomingEventText"
+                    android:textStyle="bold"
+                    app:autoSizeTextType="uniform"
+                    app:autoSizeMinTextSize="12sp"
+                    app:autoSizeMaxTextSize="70sp"
+                    app:autoSizeStepGranularity="2sp"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/home_upcoming_event_vote"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="5dp"
+                    android:visibility="gone"
+                    tools:visibility="visible"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/baseline_videocam_white_48"
+                    app:tint="?homeUpcomingEventText" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/home_upcoming_event_hall"
@@ -117,19 +135,6 @@
                 android:textColor="?homeEventHallText"
                 android:textSize="18sp"
                 android:layout_marginBottom="?homeUpcomingMarginBottom"/>
-
-            <TextView
-                android:id="@+id/home_upcoming_event_vote"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                tools:visibility="visible"
-                android:text="@string/home_current_event_vote_possible"
-                android:textColor="?homeEventHallText"
-                android:textAlignment="center"
-                android:textSize="18sp"
-                android:paddingBottom="?homeUpcomingMarginBottom"
-                />
         </LinearLayout>
     </FrameLayout>
 
