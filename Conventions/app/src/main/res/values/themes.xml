@@ -178,6 +178,9 @@
         <item name="searchDrawerBackground">@color/white</item>
         <item name="searchDrawerTextColor">@color/black</item>
         <item name="searchDrawerSeparatorColor">@color/dark_gray</item>
+
+        <!-- My Events Activity -->
+        <item name="addActionButtonIcon">@drawable/ic_add_white</item>
     </style>
 
     <!-- Since there is no multiple inheritance with themes, we have to copy basic attributes to have
@@ -358,6 +361,9 @@
         <item name="searchDrawerBackground">@color/white</item>
         <item name="searchDrawerTextColor">@color/black</item>
         <item name="searchDrawerSeparatorColor">@color/dark_gray</item>
+
+        <!-- My Events Activity -->
+        <item name="addActionButtonIcon">@drawable/ic_add_white</item>
     </style>
 
     <!-- Additional default attributes for dark themes. Inherit the actual theme from this one for dark themes. -->

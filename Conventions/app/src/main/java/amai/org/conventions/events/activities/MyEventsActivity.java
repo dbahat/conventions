@@ -56,7 +56,6 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.app.ShareCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -117,7 +116,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		setupDays(dateIndexToSelect);
 
 		if (Convention.getInstance().canUserLogin()) {
-			setupActionButton(AppCompatResources.getDrawable(this, R.drawable.ic_add_white), view -> addEvents());
+			setupActionButton(ThemeAttributes.getDrawable(this, R.attr.addActionButtonIcon), view -> addEvents());
 		}
 	}
 
