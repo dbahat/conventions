@@ -111,6 +111,7 @@
         <attr name="homeCurrentEventTitleText" format="color|reference"/>
         <attr name="homeUpcomingEventTitleBackground" format="color|reference"/>
         <attr name="homeUpcomingEventTitleText" format="color|reference"/>
+        <attr name="homeEventsListBackground" format="color|reference"/>
         <attr name="homeEventNameInList" format="color|reference"/>
         <attr name="homeEventsListDivider" format="color|reference"/>
         <attr name="homeButtonBackground" format="color|reference"/>
