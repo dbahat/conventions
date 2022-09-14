@@ -142,7 +142,7 @@
     <string name="general_preferences">כללי</string>
     <string name="favorites_were_updated">שינויים באירועים מועדפים</string>
     <string name="go_to_my_events">עבור לאירועים שלי</string>
-    <string name="show_favorites_updates_title">הודע על שינויים באירועים מועדפים</string>
+    <string name="show_favorites_updates_title">הצג שינויים באירועים מועדפים</string>
     <string name="show_favorites_updates_summary">הצג הודעות כאשר התוכניה מתעדכנת ויש שינויים חשובים באירועים מועדפים, כמו זמן, מיקום ואורך האירוע.</string>
     <string name="push_registration_failed">לא ניתן לעדכן. בדוק חיבור לאינטרנט</string>
     <string name="push_notification_title">התראה</string>
