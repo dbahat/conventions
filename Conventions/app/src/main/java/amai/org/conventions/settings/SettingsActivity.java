@@ -1,10 +1,8 @@
 package amai.org.conventions.settings;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
 import android.widget.Toast;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -18,6 +16,9 @@ import amai.org.conventions.notifications.PushNotificationTopic;
 import amai.org.conventions.notifications.PushNotificationTopicsSubscriber;
 import amai.org.conventions.utils.BundleBuilder;
 import amai.org.conventions.utils.Dates;
+import androidx.annotation.Nullable;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 import sff.org.conventions.R;
 
 public class SettingsActivity extends NavigationActivity {
@@ -64,20 +65,18 @@ public class SettingsActivity extends NavigationActivity {
 		recreate();
 	}
 
-	public static class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
-
+	public static class SettingsFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
 		@Override
-		public void onCreate(Bundle savedInstanceState) {
-			super.onCreate(savedInstanceState);
+		public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
 			// Save the preferences in the convention's file
 			getPreferenceManager().setSharedPreferencesName(ConventionsApplication.settings.getSharedPreferencesName());
-			addPreferencesFromResource(R.xml.settings_preferences);
+			setPreferencesFromResource(R.xml.settings_preferences, rootKey);
 			setupPreferences(); // This can only be done after loading the preferences
 		}
 
 		@Override
-		public void onAttach(Activity activity) {
-			super.onAttach(activity);
+		public void onAttach(Context context) {
+			super.onAttach(context);
 			SharedPreferences sharedPreferences = ConventionsApplication.settings.getSharedPreferences();
 			sharedPreferences.registerOnSharedPreferenceChangeListener(this);
 		}

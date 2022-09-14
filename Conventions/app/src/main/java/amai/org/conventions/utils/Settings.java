@@ -2,7 +2,6 @@ package amai.org.conventions.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,6 +13,7 @@ import java.util.Set;
 import amai.org.conventions.events.SearchCategory;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.notifications.PushNotificationTopic;
+import androidx.preference.PreferenceManager;
 import sff.org.conventions.R;
 
 public class Settings {
