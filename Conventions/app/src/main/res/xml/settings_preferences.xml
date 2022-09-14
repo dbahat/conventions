@@ -1,64 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory
-        android:key="push_notifications"
-        android:title="@string/notifications_preferences">
-        <CheckBoxPreference
-            android:key="harucon2022_general"
-            android:title="@string/show_general_notifications_title"
-            android:summary="@string/show_general_notifications_summary"
-            android:defaultValue="true" />
+        app:key="push_notifications"
+        app:iconSpaceReserved="false"
+        app:title="@string/notifications_preferences">
+        <SwitchPreferenceCompat
+            app:key="harucon2022_general"
+            app:iconSpaceReserved="false"
+            app:title="@string/show_general_notifications_title"
+            app:summary="@string/show_general_notifications_summary"
+            app:defaultValue="true" />
 
-        <CheckBoxPreference
-            android:key="harucon2022_events"
-            android:title="@string/show_event_notifications_title"
-            android:summary="@string/show_event_notifications_summary"
-            android:defaultValue="true" />
+        <SwitchPreferenceCompat
+            app:key="harucon2022_events"
+            app:iconSpaceReserved="false"
+            app:title="@string/show_event_notifications_title"
+            app:summary="@string/show_event_notifications_summary"
+            app:defaultValue="true" />
 
-        <CheckBoxPreference
-            android:key="harucon2022_cosplay"
-            android:title="@string/show_cosplay_notifications_title"
-            android:summary="@string/show_cosplay_notifications_summary"
-            android:defaultValue="false" />
+        <SwitchPreferenceCompat
+            app:key="harucon2022_cosplay"
+            app:iconSpaceReserved="false"
+            app:title="@string/show_cosplay_notifications_title"
+            app:summary="@string/show_cosplay_notifications_summary"
+            app:defaultValue="false" />
 
-        <!--<CheckBoxPreference-->
-            <!--android:key="cami2018_bus"-->
-            <!--android:title="@string/show_bus_notifications_title"-->
-            <!--android:summary="@string/show_bus_notifications_summary"-->
-            <!--android:defaultValue="false"/>-->
-    </PreferenceCategory>
-
-    <PreferenceCategory android:title="@string/reminder_preferences">
-        <CheckBoxPreference
-            android:key="harucon2022_event_starting_reminder"
-            android:title="@string/show_reminder_before_event_starts_title"
-            android:summary="@string/show_reminder_before_event_starts_summary"
-            android:defaultValue="true" />
-
-        <CheckBoxPreference
-            android:key="harucon2022_event_feedback_reminder"
-            android:title="@string/show_event_feedback_reminder_title"
-            android:summary="@string/show_event_feedback_reminder_summary"
-            android:defaultValue="true" />
-    </PreferenceCategory>
-
-    <PreferenceCategory android:title="@string/general_preferences">
-        <CheckBoxPreference
-            android:key="harucon2022_favorite_event_changes"
-            android:title="@string/show_favorites_updates_title"
-            android:summary="@string/show_favorites_updates_summary"
-            android:defaultValue="true" />
+        <!--<SwitchPreferenceCompat-->
+            <!--app:key="cami2018_bus"-->
+            <!--app:iconSpaceReserved="false"-->
+            <!--app:title="@string/show_bus_notifications_title"-->
+            <!--app:summary="@string/show_bus_notifications_summary"-->
+            <!--app:defaultValue="false"/>-->
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="advanced"
-        android:title="@string/advanced_preferences">
-        <CheckBoxPreference
-            android:key="harucon2022_test"
-            android:title="@string/show_test_notifications_title"
-            android:summary="@string/show_test_notifications_summary"
-            android:defaultValue="false" />
+        app:title="@string/reminder_preferences"
+        app:iconSpaceReserved="false">
+        <SwitchPreferenceCompat
+            app:key="harucon2022_event_starting_reminder"
+            app:iconSpaceReserved="false"
+            app:title="@string/show_reminder_before_event_starts_title"
+            app:summary="@string/show_reminder_before_event_starts_summary"
+            app:defaultValue="true" />
+
+        <SwitchPreferenceCompat
+            app:key="harucon2022_event_feedback_reminder"
+            app:iconSpaceReserved="false"
+            app:title="@string/show_event_feedback_reminder_title"
+            app:summary="@string/show_event_feedback_reminder_summary"
+            app:defaultValue="true" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:title="@string/general_preferences"
+        app:iconSpaceReserved="false">
+        <SwitchPreferenceCompat
+            app:key="harucon2022_favorite_event_changes"
+            app:iconSpaceReserved="false"
+            app:title="@string/show_favorites_updates_title"
+            app:summary="@string/show_favorites_updates_summary"
+            app:defaultValue="true" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:key="advanced"
+        app:iconSpaceReserved="false"
+        app:title="@string/advanced_preferences">
+        <SwitchPreferenceCompat
+            app:key="harucon2022_test"
+            app:iconSpaceReserved="false"
+            app:title="@string/show_test_notifications_title"
+            app:summary="@string/show_test_notifications_summary"
+            app:defaultValue="false" />
     </PreferenceCategory>
 
 </PreferenceScreen>

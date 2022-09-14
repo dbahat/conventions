@@ -2,7 +2,6 @@ package amai.org.conventions.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -11,6 +10,7 @@ import java.util.List;
 import amai.org.conventions.R;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.notifications.PushNotificationTopic;
+import androidx.preference.PreferenceManager;
 
 public class Settings {
 	public static final int NO_PUSH_NOTIFICATION_SEEN_NOTIFICATION_ID = -1;
