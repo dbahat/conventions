@@ -215,6 +215,10 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 			saveUserQR(user);
 			String userId = getUserId(token);
 			ConventionsApplication.settings.setUserId(userId);
+		} else if (ConventionsApplication.settings.getUserId() == null) {
+			// Update only the user ID if it was not available before
+			String userId = getUserId(token);
+			ConventionsApplication.settings.setUserId(userId);
 		}
 	}
 
@@ -419,6 +423,12 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 					String responseBody = responseBuilder.toString();
 					Log.e(TAG, "Could not read user ID, response is: " + responseBody);
 				}
+
+				if (responseCode == HttpURLConnection.HTTP_BAD_REQUEST) {
+					// User has not connected to the programme yet, user ID is not available
+					return null;
+				}
+
 				throw new RuntimeException("Could not read user ID, error code: " + responseCode);
 			}
 			inputStream = (InputStream) request.getContent();
@@ -523,8 +533,8 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		this.menu = menu;
 
 		if (Convention.getInstance().canUserLogin()) {
-			String userId = ConventionsApplication.settings.getUserId();
-			if (userId != null && !userId.isEmpty()) {
+			String user = ConventionsApplication.settings.getUser();
+			if (user != null && !user.isEmpty()) {
 				changeIconColor(menu.findItem(R.id.my_events_show_user_id));
 			}
 		} else {
