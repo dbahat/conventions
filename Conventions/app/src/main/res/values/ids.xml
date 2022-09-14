@@ -3,4 +3,7 @@
     <item name="main_event_view" type="id"/>
     <item name="hidden_event_view" type="id"/>
     <item name="hidden_event_view2" type="id"/>
+
+    <item name="fab_translation" type="id"/>
+    <item name="fab_fixed_translation" type="id"/>
 </resources>
