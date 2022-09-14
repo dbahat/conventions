@@ -179,7 +179,7 @@
 
     <style name="AppBaseTheme.Icon20221.Settings" parent="AppBaseTheme.Icon2022">
         <item name="android:textColor">@color/icon2022_grey3</item>
-        <item name="android:textColorSecondary">@color/icon2022_grey2</item>
+        <item name="android:textColorSecondary">@color/icon2022_grey3</item>
     </style>
 
 
