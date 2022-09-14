@@ -42,7 +42,7 @@
         <item name="navigationPopupTitle">@drawable/icon2022_title_small</item>
         <item name="navigationPopupTitleMargins">20dp</item>
         <item name="navigationPopupBottomImage">@null</item>
-        <item name="navigationPopupNotSelectedColor">@color/icon2022_grey2</item>
+        <item name="navigationPopupNotSelectedColor">@color/icon2022_grey3</item>
         <item name="navigationPopupSelectedColor">@color/icon2022_green1</item>
         <item name="navigationPopupSeparatorColor">@color/icon2022_grey2</item>
         <!-- About Screen -->
