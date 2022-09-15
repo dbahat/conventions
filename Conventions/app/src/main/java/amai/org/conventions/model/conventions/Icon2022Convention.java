@@ -644,20 +644,6 @@ public class Icon2022Convention extends SffConvention {
 	}
 
 	@Override
-	public URL getEventViewURL(ConventionEvent event) {
-		try {
-			// All virtual-enabled events are in the same room
-			// TODO should we also check the hall name?
-			if (this.getEventLocationTypes(event).contains(ConventionEvent.EventLocationType.VIRTUAL)) {
-				return new URL("https://icon2022.virtualcon.org.il/room-a");
-			}
-			return null;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	@Override
 	public List<ConventionEvent.EventLocationType> getEventLocationTypes(ConventionEvent event) {
 		//noinspection deprecation - this is on purpose
 		return event.getLocationTypes();
