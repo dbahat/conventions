@@ -51,6 +51,7 @@ public class ConventionEvent implements Serializable {
 	private int ticketsLimit = -1; // No ticket info available
 	private Date ticketsLastModifiedDate;
 	private String websiteUrl;
+	private String eventViewUrl;
 	private List<EventLocationType> locationTypes;
 
 	public ConventionEvent() {
@@ -350,6 +351,19 @@ public class ConventionEvent implements Serializable {
 
 	public ConventionEvent withWebsiteUrl(String websiteUrl) {
 		setWebsiteUrl(websiteUrl);
+		return this;
+	}
+
+	public String getEventViewUrl() {
+		return eventViewUrl;
+	}
+
+	public void setEventViewUrl(String eventViewUrl) {
+		this.eventViewUrl = eventViewUrl;
+	}
+
+	public ConventionEvent withEventViewUrl(String eventViewUrl) {
+		setEventViewUrl(eventViewUrl);
 		return this;
 	}
 

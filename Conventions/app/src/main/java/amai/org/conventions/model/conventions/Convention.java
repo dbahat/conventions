@@ -864,7 +864,14 @@ public abstract class Convention implements Serializable {
 	public abstract boolean canUserLogin();
 
 	public URL getEventViewURL(ConventionEvent event) {
-		return null;
+		try {
+			if (event.getEventViewUrl() != null) {
+				return new URL(event.getEventViewUrl());
+			}
+			return null;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	public List<ConventionEvent.EventLocationType> getEventLocationTypes(ConventionEvent event) {
