@@ -90,8 +90,8 @@
         <item name="eventTimeNotStartedBackground">@drawable/icon2022_event_time_bg_not_started</item>
         <item name="eventTimeCurrentBackground">@drawable/icon2022_event_time_bg_current</item>
         <item name="eventTimeEndedBackground">@drawable/icon2022_event_time_bg_ended</item>
-<!--        <item name="eventTimeVirtualTextColor">@color/white</item>-->
-<!--        <item name="eventTimeVirtualBackgroundColor">@color/olamot2022_yellow1</item>-->
+<!--        <item name="eventTimeVirtualTextColor"></item>-->
+<!--        <item name="eventTimeVirtualBackgroundColor"></item>-->
         <item name="eventDetailsColorNotStarted">@color/icon2022_grey3</item>
         <item name="eventDetailsColorCurrent">@color/icon2022_green1</item>
         <item name="eventDetailsColorEnded">@color/icon2022_grey2</item>
