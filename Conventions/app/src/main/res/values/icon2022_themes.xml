@@ -101,12 +101,18 @@
         <item name="eventFavoriteColor">@color/icon2022_red1</item>
         <item name="eventRatingColor">@color/icon2022_green1</item>
         <!-- Map Screen -->
-        <item name="locationDetailsBackground">@color/white</item>
-        <item name="locationDetailsTitleColor">@color/black</item>
+        <item name="locationDetailsBackground">@color/icon2022_grey1</item>
+        <item name="locationDetailsTitleColor">@color/icon2022_grey3</item>
         <item name="mapBackground">@drawable/icon2022_background</item>
         <item name="floorChangeBackground">@color/very_transparent_white</item>
         <item name="standIconColor">@color/black</item>
         <item name="standsTypeTitleColor">@color/black</item>
+        <item name="mapSearchText">@color/icon2022_grey3</item>
+        <item name="mapSearchFiltersBackground">@color/icon2022_grey1</item>
+        <item name="mapSearchResultsBackground">@color/icon2022_transparent_grey1</item>
+        <item name="mapSearchHint">@color/icon2022_grey2</item>
+        <item name="mapSearchSeparator">@color/icon2022_grey2</item>
+        <item name="mapSearchBorder">@color/icon2022_grey3</item>
         <!-- Updates Screen -->
         <item name="focusedUpdateBackground">@android:color/transparent</item>
         <item name="newUpdateBackground">@android:color/transparent</item>

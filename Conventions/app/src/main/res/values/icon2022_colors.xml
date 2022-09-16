@@ -7,4 +7,6 @@
     <color name="icon2022_grey1">#2b2928</color>
     <color name="icon2022_grey2">#969493</color>
     <color name="icon2022_grey3">#e9e4e0</color>
+
+    <color name="icon2022_transparent_grey1">#C02b2928</color>
 </resources>
