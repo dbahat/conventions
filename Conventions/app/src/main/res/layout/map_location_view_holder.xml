@@ -14,12 +14,12 @@
         app:compoundDrawableHeight="24dp"
         android:drawablePadding="5dp"
         style="@style/Base.TextAppearance.AppCompat.Medium"
-        android:textColor="@android:color/black"
+        android:textColor="?mapSearchText"
         tools:text="Eshkol 1"
         />
     <TextView
         style="@style/Base.TextAppearance.AppCompat.Small"
-        android:textColor="@android:color/black"
+        android:textColor="?mapSearchText"
         android:layout_marginStart="29dp"
         tools:text="First floor"
         android:id="@+id/map_location_floor"

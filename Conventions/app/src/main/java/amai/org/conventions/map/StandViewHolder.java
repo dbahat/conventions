@@ -43,7 +43,7 @@ public class StandViewHolder extends RecyclerView.ViewHolder {
 		if (isSelected) {
 			standName.setTextColor(ThemeAttributes.getColor(context, R.attr.standsTypeTitleColor));
 		} else {
-			standName.setTextColor(Color.BLACK);
+			standName.setTextColor(ThemeAttributes.getColor(context, R.attr.mapSearchText));
 		}
 		Drawable image = ContextCompat.getDrawable(context, stand.getType().getImage());
 		if (image != null) {
@@ -51,7 +51,7 @@ public class StandViewHolder extends RecyclerView.ViewHolder {
 			if (colorImage) {
 				color = ThemeAttributes.getColor(context, R.attr.standIconColor);
 			} else {
-				color = Color.BLACK;
+				color = ThemeAttributes.getColor(context, R.attr.mapSearchText);
 			}
 			image.mutate().setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
 		}

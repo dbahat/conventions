@@ -14,13 +14,13 @@
         app:compoundDrawableHeight="24dp"
         android:drawablePadding="5dp"
         style="@style/Base.TextAppearance.AppCompat.Body1"
-        android:textColor="@android:color/black"
+        android:textColor="?mapSearchText"
         android:gravity="center_vertical"
         tools:text="Einav Hats"
         />
     <TextView
         style="@style/Base.TextAppearance.AppCompat.Small"
-        android:textColor="@android:color/black"
+        android:textColor="?mapSearchText"
         android:layout_marginStart="29dp"
         tools:text="First floor"
         android:id="@+id/stand_floor"
