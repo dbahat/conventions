@@ -26,9 +26,14 @@
             android:id="@+id/map_search_pane"
             android:layout_height="match_parent">
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?mapSearchBorder"/>
+
             <RadioGroup
                 android:id="@+id/search_type"
-                android:background="@color/white"
+                android:background="?mapSearchFiltersBackground"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -40,8 +45,8 @@
                     android:layout_weight="0.5"
                     android:layout_height="wrap_content"
                     android:text="@string/search_locations"
-                    android:textColor="@color/black"
-                    app:buttonTint="@color/black"
+                    android:textColor="?mapSearchText"
+                    app:buttonTint="?mapSearchText"
                     android:checked="true"/>
 
                 <androidx.appcompat.widget.AppCompatRadioButton
@@ -50,14 +55,13 @@
                     android:layout_weight="0.5"
                     android:layout_height="wrap_content"
                     android:text="@string/search_stands"
-                    android:textColor="@color/black"
-                    app:buttonTint="@color/black"/>
+                    android:textColor="?mapSearchText"
+                    app:buttonTint="?mapSearchText"/>
             </RadioGroup>
-
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:background="@color/white"
+                android:background="?mapSearchFiltersBackground"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <EditText
@@ -67,16 +71,16 @@
                     android:layout_height="wrap_content"
                     android:maxLines="1"
                     android:inputType="textFilter"
-                    android:textColorHint="@color/hint_gray"
-                    android:textColor="@color/black"
+                    android:textColorHint="?mapSearchHint"
+                    android:textColor="?mapSearchText"
                     android:hint="@string/search_input_search_keyword"/>
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:textColor="@color/black"
+                android:background="?mapSearchFiltersBackground"
+                android:textColor="?mapSearchText"
                 app:buttonTint="?colorAccent"
                 android:id="@+id/map_search_show_only_halls"
                 android:text="@string/show_only_halls"/>
@@ -84,13 +88,13 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/very_dark_gray"/>
+                android:background="?mapSearchSeparator"/>
 
             <ListView
                 android:id="@+id/map_search_results"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/transparent_white">
+                android:background="?mapSearchResultsBackground">
 
             </ListView>
 
@@ -104,18 +108,18 @@
                 android:textColor="?hintTextColor"
                 android:padding="5dp"
                 android:text="@string/search_no_results_found"
-                android:background="@color/transparent_white"/>
+                android:background="?mapSearchResultsBackground"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/transparent_white"/>
+                android:background="?mapSearchResultsBackground"/>
 
         </LinearLayout>
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="@android:color/black"/>
+            android:background="?mapSearchBorder"/>
     </LinearLayout>
 
 </FrameLayout>

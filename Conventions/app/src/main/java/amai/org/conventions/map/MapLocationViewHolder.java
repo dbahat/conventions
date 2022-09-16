@@ -3,6 +3,8 @@ package amai.org.conventions.map;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+
+import amai.org.conventions.ThemeAttributes;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
@@ -38,7 +40,7 @@ public class MapLocationViewHolder extends RecyclerView.ViewHolder {
 			image = ContextCompat.getDrawable(context, R.drawable.ic_action_place);
 		}
 		if (image != null) {
-			image.mutate().setColorFilter(ContextCompat.getColor(context, android.R.color.black), PorterDuff.Mode.SRC_ATOP);
+			image.mutate().setColorFilter(ThemeAttributes.getColor(context, R.attr.mapSearchText), PorterDuff.Mode.SRC_ATOP);
 		}
 		// this should be setCompoundDrawablesRelative(image, null, null, null) but in API 17 and 18 it appears on the wrong side.
 		locationName.setCompoundDrawables(null, null, image, null);
