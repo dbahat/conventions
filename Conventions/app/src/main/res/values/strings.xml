@@ -138,9 +138,9 @@
     <string name="show_bus_notifications_summary">הצג התראות על הסעות</string>
     <string name="reminder_preferences">תזכורות</string>
     <string name="show_reminder_before_event_starts_title">לפני שאירוע מתחיל</string>
-    <string name="show_reminder_before_event_starts_summary">הצג תזכורת לפני שאירוע שסימנתי מתחיל.\nניתן לשנות הגדרה זו לכל אירוע בנפרד בדף האירוע.</string>
+    <string name="show_reminder_before_event_starts_summary">הצג תזכורת לפני שאירוע שסימנת מתחיל.\nניתן לשנות הגדרה זו לכל אירוע בנפרד בדף האירוע.</string>
     <string name="show_event_feedback_reminder_title">פידבק לאירוע</string>
-    <string name="show_event_feedback_reminder_summary">הצג תזכורת לשליחת פידבק אחרי שאירוע שסימנתי מסתיים.\nניתן לשנות הגדרה זו לכל אירוע בנפרד בדף האירוע.</string>
+    <string name="show_event_feedback_reminder_summary">הצג תזכורת לשליחת פידבק אחרי שאירוע שסימנת מסתיים.\nניתן לשנות הגדרה זו לכל אירוע בנפרד בדף האירוע.</string>
     <string name="general_preferences">כללי</string>
     <string name="favorites_were_updated">שינויים באירועים מועדפים</string>
     <string name="go_to_my_events">עבור לאירועים שלי</string>
