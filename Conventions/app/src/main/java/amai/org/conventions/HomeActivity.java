@@ -137,6 +137,7 @@ public class HomeActivity extends NavigationActivity {
 					R.string.home_upcoming_event_time,
 					Dates.toHumanReadableTimeDuration(upcomingEvent.getStartTime().getTime() - Dates.now().getTime()))
 			);
+			setupVoteOrViewText(upcomingEvent, upcomingEventVoteText);
 
 			// if there's a current event, show it as well
 			if (currentEvent != null) {
@@ -243,7 +244,7 @@ public class HomeActivity extends NavigationActivity {
 				}
 
 				ConventionEvent upcomingEvent = upcomingEvents.get(position);
-				viewHolder.bind(upcomingEvent.getTitle(), position < getCount() - 1);
+				viewHolder.bind(upcomingEvent.getTitle(), Convention.getInstance().getEventViewURL(upcomingEvent) != null, position < getCount() - 1);
 				return convertView;
 			}
 		};
@@ -273,21 +274,22 @@ public class HomeActivity extends NavigationActivity {
 		}
 	}
 
-	private class ProgrammeEventTitleViewHolder extends RecyclerView.ViewHolder {
-
+	private static class ProgrammeEventTitleViewHolder extends RecyclerView.ViewHolder {
 		private TextView title;
+		private ImageView image;
 		private View divider;
 
 		ProgrammeEventTitleViewHolder(View itemView) {
 			super(itemView);
-
 			title = (TextView)itemView.findViewById(R.id.home_programme_event_title);
+			image = itemView.findViewById(R.id.home_programme_event_image);
 			divider = itemView.findViewById(R.id.home_programme_event_divider);
 		}
 
-		void bind(String upcomingEventTitle, boolean shouldShowDivider) {
+		void bind(String upcomingEventTitle, boolean showImage, boolean showDivider) {
 			title.setText(upcomingEventTitle);
-			divider.setVisibility(shouldShowDivider ? View.VISIBLE : View.GONE);
+			image.setVisibility(showImage ? View.VISIBLE : View.GONE);
+			divider.setVisibility(showDivider ? View.VISIBLE : View.GONE);
 		}
 	}
 
