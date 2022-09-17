@@ -65,6 +65,7 @@
         <item name="homeShowCurrentUpcomingTitles">true</item>
         <item name="homeMessageBackground">@drawable/icon2022_home_green_bg</item>
         <item name="homeMessageText">@color/icon2022_green1</item>
+        <item name="homeMaxMessageSize">50sp</item>
         <item name="homeCurrentEventTitleBackground">@color/icon2022_green1</item>
         <item name="homeCurrentEventTitleText">@color/icon2022_grey1</item>
         <item name="homeCurrentEventBackground">@drawable/icon2022_home_green_bg</item>
