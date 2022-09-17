@@ -125,6 +125,7 @@
         <attr name="homeSingleButtonStyle" format="integer|reference"/>
         <attr name="homeShowButtons" format="boolean"/>
         <attr name="homeTitleSize" format="dimension"/>
+        <attr name="homeMaxMessageSize" format="dimension"/>
         <!-- My Events Screen -->
         <attr name="nextEventStartTimeBackground" format="color|reference"/>
         <attr name="nextEventStartTimeTextColor" format="color|reference"/>

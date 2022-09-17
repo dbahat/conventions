@@ -117,7 +117,7 @@
                     android:textStyle="bold"
                     app:autoSizeTextType="uniform"
                     app:autoSizeMinTextSize="12sp"
-                    app:autoSizeMaxTextSize="70sp"
+                    app:autoSizeMaxTextSize="?homeMaxMessageSize"
                     app:autoSizeStepGranularity="2sp"/>
 
                 <androidx.appcompat.widget.AppCompatImageView

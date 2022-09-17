@@ -47,7 +47,7 @@
             android:textStyle="bold"
             app:autoSizeTextType="uniform"
             app:autoSizeMinTextSize="?homeTitleSize"
-            app:autoSizeMaxTextSize="70sp"
+            app:autoSizeMaxTextSize="?homeMaxMessageSize"
             app:autoSizeStepGranularity="2sp"
             android:textAlignment="center"
             android:layout_marginTop="8dp"
