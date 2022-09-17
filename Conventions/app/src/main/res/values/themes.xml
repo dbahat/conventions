@@ -101,6 +101,7 @@
         <item name="homeFrameBottomMargin">?homeFrameMargins</item>
         <item name="homeShowButtons">true</item>
         <item name="homeTitleSize">32sp</item>
+        <item name="homeMaxMessageSize">70sp</item>
         <item name="homeUpcomingPadding">5dp</item>
         <item name="homeUpcomingPaddingTop">8dp</item>
         <item name="homeUpcomingMarginBottom">8dp</item>
@@ -290,6 +291,7 @@
         <item name="homeFrameBottomMargin">?homeFrameMargins</item>
         <item name="homeShowButtons">true</item>
         <item name="homeTitleSize">32sp</item>
+        <item name="homeMaxMessageSize">70sp</item>
         <item name="homeUpcomingPadding">5dp</item>
         <item name="homeUpcomingPaddingTop">8dp</item>
         <item name="homeUpcomingMarginBottom">8dp</item>
