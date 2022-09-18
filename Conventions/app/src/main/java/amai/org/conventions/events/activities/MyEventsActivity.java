@@ -348,6 +348,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 			ConventionsApplication.settings.setUser(null);
 			ConventionsApplication.settings.setUserId(null);
 			Convention.getInstance().getStorage().deleteUserIDQR();
+			resetIconColor(menu.findItem(R.id.my_events_show_user_id));
 		} else {
 			Log.e(TAG, "could not log out: " + result.getData());
 		}

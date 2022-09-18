@@ -434,9 +434,26 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	 * @return The new color
 	 */
 	protected int changeIconColor(MenuItem item) {
+		if (item == null) {
+			return Convention.NO_COLOR;
+		}
 		Drawable icon = item.getIcon().mutate();
 		int accentColor = ThemeAttributes.getColor(this, R.attr.toolbarIconAccentColor);
 		icon.setColorFilter(accentColor, PorterDuff.Mode.SRC_ATOP);
 		return accentColor;
+	}
+
+	/**
+	 * Change color of menu item icon to be accented
+	 *
+	 * @param item the menu item
+	 * @return The new color
+	 */
+	protected void resetIconColor(MenuItem item) {
+		if (item == null) {
+			return;
+		}
+		Drawable icon = item.getIcon().mutate();
+		icon.setColorFilter(null);
 	}
 }
