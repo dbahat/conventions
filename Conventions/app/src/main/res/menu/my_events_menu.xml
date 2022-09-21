@@ -7,7 +7,7 @@
 
     <item
         android:id="@+id/my_events_show_user_id"
-        android:title="@string/show_user_id"
+        android:title="@string/show_user_details"
         android:icon="?iconUserId"
         android:orderInCategory="1"
         app:showAsAction="always"/>

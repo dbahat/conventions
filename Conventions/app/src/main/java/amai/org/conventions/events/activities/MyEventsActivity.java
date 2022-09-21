@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -11,6 +12,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
 import android.text.Html;
+import android.text.SpannableStringBuilder;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.text.style.URLSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -54,6 +59,7 @@ import amai.org.conventions.utils.Log;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ShareCompat;
@@ -79,11 +85,13 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 	private AlertDialog noEventsDialog;
 	private Menu menu;
 	private ExecutorService executor;
+	private View userIdDialogView;
 
 	// Authentication result handlers
 	private final ActivityResultLauncher<Intent> userDetailsAuthResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), this::userDetailsAuthResult);
 	private final ActivityResultLauncher<Intent> addEventsAuthResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), this::addEventsAuthResult);
 	private final ActivityResultLauncher<Intent> logoutResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), this::logoutResult);
+	private final ActivityResultLauncher<Intent> userIdAuthResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), this::userIdAuthResult);
 
 	public static List<ConventionEvent> getMyEvents() {
 		ArrayList<ConventionEvent> events = CollectionUtils.filter(
@@ -175,7 +183,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 					);
 			runOnUiThread(() -> {
 				changeIconColor(menu.findItem(R.id.my_events_show_user_id));
-				showUserIdDialog(null);
+				showUserDetailsDialog(null);
 			});
 		});
 	}
@@ -265,7 +273,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 					Toast.makeText(MyEventsActivity.this, message, Toast.LENGTH_LONG).show();
 				} else {
 					changeIconColor(menu.findItem(R.id.my_events_show_user_id));
-					showUserIdDialog(message);
+					showUserDetailsDialog(message);
 				}
 			} else {
 				int messageId = R.string.add_events_failed;
@@ -278,7 +286,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		});
 	}
 
-	private void showUserIdDialog(String firstLineMessage) {
+	private void showUserDetailsDialog(String firstLineMessage) {
 		String user = ConventionsApplication.settings.getUser();
 		if (user != null && !user.isEmpty()) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(MyEventsActivity.this);
@@ -308,14 +316,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 			TextView userView = dialogView.findViewById(R.id.user);
 			userView.setText(getString(R.string.inst_user, user));
 
-			String userId = ConventionsApplication.settings.getUserId();
-			TextView userIdView = dialogView.findViewById(R.id.user_id);
-			if (userId != null && !userId.isEmpty()) {
-				userIdView.setVisibility(View.VISIBLE);
-				userIdView.setText(getString(R.string.inst_user_id, userId));
-			} else {
-				userIdView.setVisibility(View.GONE);
-			}
+			setupUserId(dialogView);
 
 			userIdInst.setText(Html.fromHtml(getString(R.string.inst_user_id_in_toolbar), source -> {
 				Drawable drawable = null;
@@ -341,6 +342,54 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 					.create();
 			dialog.show();
 		}
+	}
+
+	private void setupUserId(View dialogView) {
+		String userId = ConventionsApplication.settings.getUserId();
+		TextView userIdView = dialogView.findViewById(R.id.user_id);
+		TextView noUserIdView = dialogView.findViewById(R.id.no_user_id);
+
+		if (userId != null && !userId.isEmpty()) {
+			noUserIdView.setVisibility(View.GONE);
+			userIdView.setVisibility(View.VISIBLE);
+			userIdView.setText(getString(R.string.inst_user_id, userId));
+		} else {
+			userIdView.setVisibility(View.GONE);
+			noUserIdView.setVisibility(View.VISIBLE);
+
+			// Handle the link click
+			SpannableStringBuilder spanBuilder = new SpannableStringBuilder(Html.fromHtml(getString(R.string.inst_display_user_id)));
+			URLSpan[] spans = spanBuilder.getSpans(0, spanBuilder.length(), URLSpan.class);
+			for (URLSpan span : spans) {
+				spanBuilder.setSpan(new ClickableSpan() {
+					@Override
+					public void onClick(@NonNull View widget) {
+						// There is only one link, but checking it anyway
+						if ("showUserId".equals(span.getURL())) {
+							userIdDialogView = dialogView;
+							Intent intent = new Intent(MyEventsActivity.this, AuthorizationActivity.class);
+							userIdAuthResultLauncher.launch(intent);
+						}
+					}
+				}, spanBuilder.getSpanStart(span), spanBuilder.getSpanEnd(span), spanBuilder.getSpanFlags(span));
+				spanBuilder.removeSpan(span);
+			}
+			noUserIdView.setText(spanBuilder);
+			noUserIdView.setMovementMethod(LinkMovementMethod.getInstance());
+			noUserIdView.setHighlightColor(Color.TRANSPARENT);
+		}
+	}
+
+	private void userIdAuthResult(ActivityResult activityResult) {
+		handleAuthResult(activityResult, false, user -> getString(R.string.updating_user_details), (user, token, afterRequestCompleted) -> {
+			afterRequestCompleted.run();
+			runOnUiThread(() -> {
+				if (userIdDialogView != null) {
+					setupUserId(userIdDialogView);
+					userIdDialogView = null;
+				}
+			});
+		});
 	}
 
 	private void logoutResult(ActivityResult result) {
@@ -583,7 +632,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 						.logEvent("show_user_id_clicked", null);
 				String user = ConventionsApplication.settings.getUser();
 				if (user != null && !user.isEmpty()) {
-					showUserIdDialog(null);
+					showUserDetailsDialog(null);
 				} else {
 					loginAndShowUserDetails();
 				}
