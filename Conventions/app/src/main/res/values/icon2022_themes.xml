@@ -33,7 +33,7 @@
         <item name="selectedTabIndicatorColor">@color/icon2022_red1</item>
 
         <!-- Notifications -->
-        <item name="notificationSmallIcon">@drawable/icon2022_notification</item>
+        <item name="notificationSmallIcon">@drawable/icon2022_notification_white</item>
         <!-- Toolbar -->
         <item name="toolbarBackground">@null</item>
         <item name="toolbarIconAccentColor">@color/icon2022_red1</item>

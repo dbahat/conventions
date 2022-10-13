@@ -117,7 +117,7 @@
      See README(https://goo.gl/l4GJaQ) for more. -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/icon2022_notification" />
+            android:resource="@drawable/icon2022_notification_white" />
     </application>
 
 </manifest>
