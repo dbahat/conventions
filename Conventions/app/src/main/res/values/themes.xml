@@ -38,6 +38,7 @@
         <item name="selectedTabIndicatorColor">?snackbarActionColor</item>
         <item name="unselectedTabTextColor">?android:textColorPrimary</item>
         <item name="selectedTabTextColor">?android:textColorSecondary</item>
+        <item name="tabsBackground">?toolbarBackground</item>
 
         <!-- Event list activities -->
         <item name="eventTimeHeaderBackground">@drawable/flat_event_time_background</item>
@@ -192,6 +193,7 @@
         <item name="selectedTabIndicatorColor">?snackbarActionColor</item>
         <item name="unselectedTabTextColor">?android:textColorPrimary</item>
         <item name="selectedTabTextColor">?android:textColorSecondary</item>
+        <item name="tabsBackground">?toolbarBackground</item>
 
         <!-- Event list activities -->
         <item name="eventTimeHeaderBackground">@drawable/flat_event_time_background</item>
