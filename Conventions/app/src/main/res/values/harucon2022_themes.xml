@@ -141,7 +141,7 @@
         <item name="focusedUpdateBackground">@color/harucon2022_dark_red</item>
         <!-- Event Screen -->
         <item name="eventToolbarColor">@color/harucon2022_pink</item>
-        <item name="eventDetailsDefaultBackgroundColor">@color/harucon2022_light_blue</item>
+        <item name="eventDetailsDefaultBackground">@color/harucon2022_light_blue</item>
         <item name="eventTitleBackground">@drawable/harucon2022_frame_bg</item>
         <item name="eventTitlePadding">@null</item>
         <item name="eventTitleTextColor">@color/harucon2022_light_yellow</item>
