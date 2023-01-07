@@ -404,7 +404,6 @@
         <item name="iconMap">@drawable/ic_dialog_map</item>
         <item name="iconFloorUp">@drawable/arrow_up_wide_white</item>
         <item name="iconFloorDown">@drawable/arrow_down_wide_white</item>
-        <item name="iconUserId">@drawable/baseline_person_white_36</item>
         <item name="toolbarLogo">@drawable/ic_menu_white_24dp</item>
     </style>
 
@@ -428,7 +427,6 @@
         <item name="iconMap">@drawable/ic_dialog_map_black</item>
         <item name="iconFloorUp">@drawable/arrow_up_wide</item>
         <item name="iconFloorDown">@drawable/arrow_down_wide</item>
-        <item name="iconUserId">@drawable/baseline_person_black_36</item>
         <item name="toolbarLogo">@drawable/ic_menu_black_24dp</item>
     </style>
 
