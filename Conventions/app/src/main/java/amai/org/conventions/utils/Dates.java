@@ -35,11 +35,16 @@ public class Dates {
 
 	public static Date now() {
 		// Now
-		return new Date(System.currentTimeMillis());
+		Date result = new Date(System.currentTimeMillis());
 
 		// Used for testing
 		// Fixed startup date
-//        return new Date(System.currentTimeMillis() - appStartDate.getTime() + initialDate.getTime());
+//        Date result = new Date(System.currentTimeMillis() - appStartDate.getTime() + initialDate.getTime());
+
+		if (!Dates.getLocalTimeZone().equals(TimeZone.getDefault())) {
+			result = Dates.convertTimeZone(result, TimeZone.getDefault(), Dates.getLocalTimeZone());
+		}
+		return result;
 	}
 
 	public static Calendar toCalendar(Date date) {
@@ -199,18 +204,18 @@ public class Dates {
 	}
 
 	public static Date localToConventionTime(Date localTime) {
-		long timeInMillis = localTime.getTime();
-		return new Date(timeInMillis -
-				Dates.getLocalTimeZone().getOffset(timeInMillis) + // Convert to UTC
-				Dates.getConventionTimeZone().getOffset(timeInMillis) // Convert to convention time
-		);
+		return convertTimeZone(localTime, Dates.getLocalTimeZone(), Dates.getConventionTimeZone());
 	}
 
-	public static Date conventionToLocalTime(Date localTime) {
-		long timeInMillis = localTime.getTime();
+	public static Date conventionToLocalTime(Date conventionTime) {
+		return convertTimeZone(conventionTime, Dates.getConventionTimeZone(), Dates.getLocalTimeZone());
+	}
+
+	public static Date convertTimeZone(Date time, TimeZone from, TimeZone to) {
+		long timeInMillis = time.getTime();
 		return new Date(timeInMillis -
-				Dates.getConventionTimeZone().getOffset(timeInMillis) +  // Convert to UTC
-				Dates.getLocalTimeZone().getOffset(timeInMillis) // Convert to local time
+			from.getOffset(timeInMillis) +  // Convert from "from" to UTC
+			to.getOffset(timeInMillis) // Convert from UTC to "to"
 		);
 	}
 
