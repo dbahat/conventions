@@ -13,7 +13,7 @@ import amai.org.conventions.customviews.NestedScrollingFrameLayout;
 import amai.org.conventions.utils.Log;
 import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import sff.org.conventions.R;
+import amai.org.conventions.R;
 
 /**
  * Scroll the action button off screen when the AppBarLayout is scrolled off screen by the same proportions.
