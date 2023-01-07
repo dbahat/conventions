@@ -165,7 +165,7 @@ public class UpdatesRefresher {
 				.map(updateDtos, item -> new Update()
 						.withId(item.getId())
 						.withText(item.getMessage())
-						.withDate(item.getCreatedTime())
+						.withDate(Dates.conventionToLocalTime(item.getCreatedTime()))
                         .withIsNew(true));
 	}
 

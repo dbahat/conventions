@@ -138,7 +138,7 @@ public class AmaiModelConverter {
 					conventionStartDate.get(Calendar.MONTH),
 					conventionStartDate.get(Calendar.DAY_OF_MONTH));
 
-			return calendar.getTime();
+			return Dates.conventionToLocalTime(calendar.getTime());
 		} catch (ParseException e) {
 			return new Date();
 		}

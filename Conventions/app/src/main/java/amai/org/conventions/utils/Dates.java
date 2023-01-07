@@ -20,7 +20,10 @@ public class Dates {
 
 	private static final Locale LOCALE = new Locale("iw", "IL");
 	private static final TimeZone CONVENTION_TIME_ZONE = TimeZone.getTimeZone("Asia/Jerusalem");
-	private static final TimeZone LOCAL_TIME_ZONE = TimeZone.getDefault();
+	// Using Israel time as the local time for amai since the conventions are 1 day (no tab support
+	// defined) and they aren't virtual, so you have to be in Israel to attend them anyway.
+	// If one of these condition changes, use "TimeZone.getDefault();" instead of "CONVENTION_TIME_ZONE" below.
+	private static final TimeZone LOCAL_TIME_ZONE = CONVENTION_TIME_ZONE;
 	private static Date appStartDate = new Date();
 	private static Date initialDate = getInitialDate();
 
