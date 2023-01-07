@@ -37,14 +37,14 @@ public class AccessibilityActivity extends NavigationActivity {
 
     private void handleDeepLinks() {
         Uri intentData = getIntent().getData();
-        if (intentData != null && intentData.getHost() != null) {
-            switch (intentData.getHost().intern()) {
-                case "open-accessibility": {
+        if (intentData != null && intentData.getPath() != null) {
+            switch (intentData.getPath().intern()) {
+                case "/open-accessibility": {
                     Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
                     startActivity(intent);
                     break;
                 }
-                case "open-map-in-parent-room": {
+                case "/open-map-in-parent-room": {
                     ConventionMap map = Convention.getInstance().getMap();
                     List<MapLocation> locations = map.findLocationsByName(Harucon2022Convention.PARENTS_ROOM_NAME);
                     int[] locationIds = CollectionUtils.mapToInt(locations, MapLocation::getId);
@@ -53,7 +53,7 @@ public class AccessibilityActivity extends NavigationActivity {
                     navigateToActivity(MapActivity.class, false, floorBundle);
                     break;
                 }
-                case "open-map-in-accessible-cashiers": {
+                case "/open-map-in-accessible-cashiers": {
                     ConventionMap map = Convention.getInstance().getMap();
                     List<MapLocation> locations = map.findLocationsByName("נגישה", false);
                     int[] locationIds = CollectionUtils.mapToInt(locations, MapLocation::getId);
@@ -62,11 +62,12 @@ public class AccessibilityActivity extends NavigationActivity {
                     navigateToActivity(MapActivity.class, false, floorBundle);
                     break;
                 }
-                case "open-map": {
+                case "/open-map": {
                     navigateToActivity(MapActivity.class, false, null);
                     break;
                 }
             }
+            finish(); // This activity was opened again due to the deep link so close the new instance
         }
     }
 }
