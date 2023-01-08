@@ -75,7 +75,7 @@ public abstract class Convention implements Serializable {
 	private EventFeedbackForm eventFeedbackForm;
 
 	private ConventionMap map;
-	private Calendar startDate;
+	protected Calendar startDate;
 	private Calendar endDate;
 	private String id;
 	private String displayName;

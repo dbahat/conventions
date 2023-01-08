@@ -20,7 +20,9 @@ public abstract class AmaiConvention extends Convention {
 
 	@Override
 	public ModelParser getModelParser() {
-		return new AmaiModelParser(getHalls(), getStartDate(), getSpecialEventsProcessor());
+		// Using the original start date since we don't want to take into account the old events list
+		// when calculating the date of the new events list
+		return new AmaiModelParser(getHalls(), this.startDate, getSpecialEventsProcessor());
 	}
 
 	@Override
