@@ -19,7 +19,7 @@
         <item name="swipeToRefreshColor">@color/harucon2022_pink</item>
         <item name="snackbarActionColor">@color/harucon2022_pink</item>
         <item name="borderlessButtonColor">@color/harucon2022_light_yellow</item>
-        <item name="activitiesBackground">@drawable/harucon2022_default_background</item>
+        <item name="activitiesBackground">@color/harucon2023_light_gray</item>
         <item name="eventListDivider">@drawable/harucon2022_event_list_divider</item>
         <item name="separatorColor">@color/harucon2022_light_yellow</item>
         <!-- These are used for buttons. They should be usable when the background is:
@@ -85,6 +85,8 @@
         <item name="homeUpcomingMarginBottom">@null</item>
         <item name="homeFrameTopMargin">10dp</item>
         <!-- Event View -->
+        <item name="eventViewLayout">@layout/rounded_convention_event</item>
+        <item name="eventViewHeight">96dp</item>
         <item name="eventTypeEndedColor">@color/harucon2022_dark_red</item>
         <item name="eventTypeEndedBackgroundColor">@color/harucon2022_dark_blue</item>
         <item name="eventTypeCurrentColor">@color/harucon2022_dark_blue</item>
@@ -99,9 +101,11 @@
         <item name="eventDetailsColorNotStarted">?eventTypeNotStartedColor</item>
         <item name="eventSendFeedbackColor">@color/harucon2022_light_yellow</item>
         <item name="eventSentFeedbackColor">@color/harucon2022_light_yellow</item>
-        <item name="eventNonFavoriteColor">@drawable/harucon2022_non_favorite_icon</item>
-        <item name="eventFavoriteColor">@drawable/harucon2022_favorite_icon</item>
+        <item name="eventNonFavoriteColor">@drawable/harucon2023_favorite_empty</item>
+        <item name="eventFavoriteColor">@drawable/harucon2023_favorite_full</item>
         <item name="eventAlertsIconColor">@color/harucon2022_light_yellow</item>
+        <item name="conflictingEventTextColor">@color/harucon2023_red</item>
+        <item name="conflictingEventBackground">@drawable/harucon2023_conflicting_event_label_bg</item>
         <!-- Programme Screen -->
         <item name="eventTimeHeaderBackground">@drawable/harucon2022_frame</item>
         <item name="eventTimeHeaderAlwaysUseDefaultTextColor">true</item>

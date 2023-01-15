@@ -211,6 +211,7 @@
 
         <!-- Event list activities -->
         <item name="eventViewLayout">@layout/convention_event</item>
+        <item name="eventViewHeight">74dp</item>
         <item name="eventTimeHeaderBackground">@drawable/flat_event_time_background</item>
         <item name="eventTimeHeaderAlwaysUseDefaultTextColor">true</item>
         <item name="eventTimeHeaderMarginTop">10dp</item>
