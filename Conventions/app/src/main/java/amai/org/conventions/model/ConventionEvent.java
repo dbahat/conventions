@@ -27,6 +27,8 @@ import amai.org.conventions.utils.HtmlParser;
 import amai.org.conventions.utils.Objects;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.core.content.ContextCompat;
+
 import fi.iki.kuitsi.listtest.ListTagHandler;
 import sff.org.conventions.R;
 
@@ -202,22 +204,22 @@ public class ConventionEvent implements Serializable {
 		return ThemeAttributes.getColor(context, R.attr.eventTimeDefaultBackgroundColor);
 	}
 
-	public Drawable getEventTimeBackground(Context context) {
-		Drawable drawable = null;
+	public int getEventTimeBackground(Context context) {
+		int colorResourceId;
 		if (!this.hasStarted()) {
-			drawable = ThemeAttributes.getDrawable(context, R.attr.eventTimeNotStartedBackground);
+			colorResourceId = R.attr.eventTimeNotStartedBackground;
 		} else if (this.hasEnded()) {
-			drawable = ThemeAttributes.getDrawable(context, R.attr.eventTimeEndedBackground);
+			colorResourceId = R.attr.eventTimeEndedBackground;
 		} else {
-			drawable = ThemeAttributes.getDrawable(context, R.attr.eventTimeCurrentBackground);
+			colorResourceId = R.attr.eventTimeCurrentBackground;
+		}
+		int color = ThemeAttributes.getColor(context, colorResourceId);
+
+		if (color == ContextCompat.getColor(context, android.R.color.transparent)) {
+			color = getBackgroundColor(context);
 		}
 
-		if (drawable == null) {
-			int color = getBackgroundColor(context);
-			drawable = new ColorDrawable(color);
-		}
-
-		return drawable;
+		return color;
 	}
 
 	public void setType(EventType type) {
