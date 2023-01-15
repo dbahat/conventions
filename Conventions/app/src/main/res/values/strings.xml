@@ -211,4 +211,5 @@
     <string name="changed_event_new_duration_continued">ויארך %s</string>
     <string name="changed_event_new_location_type">עבר להיות %s</string>
     <string name="changed_event_new_location_type_continued">ויהיה %s</string>
+    <string name="conflicting_event_label">אירוע מתנגש</string>
 </resources>

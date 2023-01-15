@@ -52,6 +52,7 @@
         <attr name="unselectedTabTextColor" format="color|reference"/>
         <attr name="selectedTabTextColor" format="color|reference"/>
         <!-- Event View -->
+        <attr name="eventViewLayout" format="integer|reference"/>
         <attr name="eventTypeEndedColor" format="color|reference"/>
         <attr name="eventTypeCurrentColor" format="color|reference"/>
         <attr name="eventTypeNotStartedColor" format="color|reference"/>
@@ -62,9 +63,9 @@
         <attr name="eventKeywordHighlightColor" format="color|reference"/>
         <attr name="eventTimeDefaultTextColor" format="color|reference"/>
         <attr name="eventTimeDefaultBackgroundColor" format="color|reference"/>
-        <attr name="eventTimeNotStartedBackground" format="integer|reference"/>
-        <attr name="eventTimeCurrentBackground" format="integer|reference"/>
-        <attr name="eventTimeEndedBackground" format="integer|reference"/>
+        <attr name="eventTimeNotStartedBackground" format="color|reference"/>
+        <attr name="eventTimeCurrentBackground" format="color|reference"/>
+        <attr name="eventTimeEndedBackground" format="color|reference"/>
         <attr name="eventTimeVirtualTextColor" format="color|reference"/>
         <attr name="eventTimeVirtualBackgroundColor" format="color|reference"/>
         <attr name="eventTimeAlwaysUseDefaultBackgroundColor" format="boolean"/>
@@ -80,6 +81,8 @@
         <attr name="eventSentFeedbackColor" format="color|reference"/>
         <attr name="eventFeedbackColorOverride" format="color|reference"/>
         <attr name="eventRatingColor" format="color|reference"/>
+        <attr name="conflictingEventTextColor" format="color|reference" />
+        <attr name="conflictingEventBackground" format="integer|reference" />
         <!-- About screen -->
         <attr name="aboutLogo" format="integer"/>
         <attr name="aboutLogoMargins" format="dimension"/>

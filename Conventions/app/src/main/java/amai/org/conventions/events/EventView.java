@@ -20,13 +20,14 @@ import java.util.List;
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.ConventionEvent;
-import amai.org.conventions.model.EventNotification;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.networking.AmaiModelConverter;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Strings;
+
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
 public class EventView extends FrameLayout {
@@ -40,8 +41,7 @@ public class EventView extends FrameLayout {
     private final TextView eventName;
     private final TextView lecturerName;
     private final ImageView feedbackIcon;
-    private final ImageView alarmIcon;
-    private final ViewGroup timeLayout;
+    private final CardView timeLayout;
     private final ViewGroup eventContainer;
     private final View eventMainTouchArea;
     private final View bottomLayout;
@@ -51,6 +51,8 @@ public class EventView extends FrameLayout {
     private final TextView searchDescription;
     private String eventDescriptionContent;
 
+    private TextView conflictingEventLabel;
+
     public EventView(Context context) {
         this(context, null);
     }
@@ -58,9 +60,10 @@ public class EventView extends FrameLayout {
     public EventView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        LayoutInflater.from(this.getContext()).inflate(R.layout.convention_event, this, true);
+        int eventViewLayout = ThemeAttributes.getResourceId(context, R.attr.eventViewLayout);
+        LayoutInflater.from(this.getContext()).inflate(eventViewLayout, this, true);
 
-        timeLayout = (ViewGroup) this.findViewById(R.id.timeLayout);
+        timeLayout = this.findViewById(R.id.timeLayout);
         favoriteIcon = (ImageView) this.findViewById(R.id.eventFavoriteIcon);
         favoriteIconTouchArea = this.findViewById(R.id.eventFavoriteIconTouchArea);
         hallName = (TextView) this.findViewById(R.id.hallName);
@@ -70,15 +73,19 @@ public class EventView extends FrameLayout {
         eventName = (TextView) this.findViewById(R.id.eventName);
         lecturerName = (TextView) this.findViewById(R.id.lecturerName);
         feedbackIcon = (ImageView) this.findViewById(R.id.feedback_icon);
-        alarmIcon = (ImageView) this.findViewById(R.id.alarm_icon);
         eventContainer = (ViewGroup) this.findViewById(R.id.eventContainer);
         eventMainTouchArea = this.findViewById(R.id.eventMainTouchArea);
         bottomLayout = this.findViewById(R.id.bottom_layout);
         searchDescriptionContainer = this.findViewById(R.id.search_description_container);
         searchDescription = (TextView) this.findViewById(R.id.search_description);
+        conflictingEventLabel = this.findViewById(R.id.conflictingEventLabel);
     }
 
     public void setEvent(ConventionEvent event) {
+        setEvent(event, false);
+    }
+
+    public void setEvent(ConventionEvent event, boolean conflicting) {
         if (event != null) {
             setColorsFromEvent(event);
             setAttending(event.isAttending());
@@ -88,14 +95,29 @@ public class EventView extends FrameLayout {
             setEventTitle(event.getTitle());
             setLecturerName(event.getLecturer());
             setFeedbackIconFromEvent(event);
-            setAlarmIconFromEvent(event);
             eventDescriptionContent = event.getPlainTextDescription();
+            setConflicting(conflicting);
         }
 
         searchDescription.setText("");
 
         // Setting the event id inside the view tag, so we can easily extract it from the view when listening to onClick events.
         eventMainTouchArea.setTag(event == null ? null : event.getId());
+    }
+
+    private void setConflicting(boolean enabled) {
+        int color = ThemeAttributes.getColor(getContext(), R.attr.conflictingEventTextColor);
+
+        // only altering the colors if conflicting, since setEvent already
+        // set the non-conflict colors before calling this.
+        if (color != Convention.NO_COLOR && enabled) {
+            eventName.setTextColor(color);
+            lecturerName.setTextColor(color);
+            hallName.setTextColor(color);
+        }
+        if (conflictingEventLabel != null) {
+            conflictingEventLabel.setVisibility(enabled ? VISIBLE : GONE);
+        }
     }
 
     private void setColorsFromEvent(ConventionEvent event) {
@@ -140,8 +162,8 @@ public class EventView extends FrameLayout {
         return eventDetailsColor;
     }
 
-	public void setEventTypeBackground(Drawable drawable) {
-		setLayoutBackground(timeLayout, drawable);
+	public void setEventTypeBackground(int color) {
+        timeLayout.setCardBackgroundColor(color);
 	}
 
 	public void setEventTimeTextColor(int color, int defaultColor) {
@@ -170,10 +192,6 @@ public class EventView extends FrameLayout {
     private void setLayoutColor(ViewGroup layout, int color) {
         layout.setBackgroundColor(color);
     }
-
-	private void setLayoutBackground(ViewGroup layout, Drawable drawable) {
-		layout.setBackground(drawable);
-	}
 
 	public void setAttending(boolean isAttending) {
         Drawable attendingDrawable = ThemeAttributes.getDrawable(getContext(), R.attr.eventFavoriteColor);
@@ -228,29 +246,6 @@ public class EventView extends FrameLayout {
             feedbackIcon.setImageDrawable(feedbackDrawable);
         } else {
             feedbackIcon.setVisibility(GONE);
-        }
-    }
-
-	protected boolean isNotificationAlarmScheduled(ConventionEvent event, EventNotification.Type type) {
-		switch (type) {
-			case AboutToStart:
-				return event.getEventAboutToStartNotificationTime() != null && event.getEventAboutToStartNotificationTime().after(Dates.now());
-			case FeedbackReminder:
-				return event.getEventFeedbackReminderNotificationTime() != null && event.getEventFeedbackReminderNotificationTime().after(Dates.now());
-		}
-		return false;
-	}
-
-	protected void setAlarmIconFromEvent(ConventionEvent event) {
-		if (isNotificationAlarmScheduled(event, EventNotification.Type.AboutToStart) ||
-				isNotificationAlarmScheduled(event, EventNotification.Type.FeedbackReminder)) {
-			alarmIcon.setVisibility(VISIBLE);
-            Drawable alertColorDrawable = ThemeAttributes.getDrawable(getContext(), R.attr.eventAlertsIconColor);
-            if (alertColorDrawable instanceof ColorDrawable) {
-                alarmIcon.setColorFilter(((ColorDrawable) alertColorDrawable).getColor());
-            }
-        } else {
-            alarmIcon.setVisibility(GONE);
         }
     }
 
@@ -318,7 +313,7 @@ public class EventView extends FrameLayout {
                 if (!didHighlightLectureName && !didHighlightHallName) {
                     if (filteredDescriptionText.toLowerCase().contains(lowerCaseKeyword)) {
                         if (!isAnyDescriptionKeywordHighlighted) {
-                            bottomLayout.setVisibility(INVISIBLE); // This can't be GONE because it will mess up the favorite icon alignment
+                            bottomLayout.setVisibility(GONE);
                             searchDescriptionContainer.setVisibility(VISIBLE);
                             searchDescription.setText(Strings.snipTextNearKeyword(filteredDescriptionText, lowerCaseKeyword));
                             filteredDescriptionText = searchDescription.getText().toString();
