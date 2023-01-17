@@ -46,7 +46,7 @@
 
                     <TextView
                         android:id="@+id/startTime"
-                        style="@style/EventViewSmallText"
+                        style="@style/EventViewMediumText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         tools:text="Start Time" />
@@ -60,7 +60,7 @@
 
                     <TextView
                         android:id="@+id/endTime"
-                        style="@style/EventViewSmallText"
+                        style="@style/EventViewMediumText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         tools:text="End Time" />
@@ -84,7 +84,7 @@
 
                     <TextView
                         android:id="@+id/eventName"
-                        style="@style/EventViewLargeText"
+                        style="@style/EventViewMediumText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
@@ -106,7 +106,7 @@
                         there is room for -->
                         <TextView
                             android:id="@+id/lecturerName"
-                            style="@style/EventViewSmallText"
+                            style="@style/EventViewMediumText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
@@ -143,7 +143,7 @@
                                  there is room for -->
                             <TextView
                                 android:id="@+id/hallName"
-                                style="@style/EventViewSmallText"
+                                style="@style/EventViewMediumText"
                                 android:layout_marginEnd="10dp"
                                 android:layout_marginStart="10dp"
                                 android:layout_width="0dp"

@@ -119,7 +119,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 			@Override
 			public void run() {
 				searchCategoriesLayout.setMaxDisplayedCategories(5);
-				searchCategoriesLayout.setSearchCategories(Convention.getInstance().getEventTypesSearchCategories());
+				searchCategoriesLayout.setSearchCategories(Convention.getInstance().getEventTypesSearchCategories(ProgrammeSearchActivity.this));
 				searchCategoriesLayout.setOnFilterSelectedListener(new SearchCategoriesLayout.OnFilterSelectedListener() {
 					@Override
 					public void onFilterSelected(List<String> selectedSearchCategories) {

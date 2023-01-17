@@ -18,245 +18,593 @@
 
     <declare-styleable name="ApplicationTheme">
         <!-- Sub-themes -->
+
+        <!-- Used for: notification time selection, hour selection in programme -->
         <attr name="numberPickerTheme" format="integer|reference"/>
+
         <!-- Events Lists -->
+
+        <!-- Used for: feedback activity event lists, programme search event list, programme events list,
+             hall events list, my events event groups list, separator between current and next event in map location,
+             separator between section header and its first event in the programme and programme search,
+             separator between last event in section and the next section header in programme and programme search.
+             Height is defined in attribute eventListDividerHeight and the resource should use the same attribute for its height. -->
         <attr name="eventListDivider" format="color|reference"/>
+        <!-- Height for event list divider. See eventListDivider for usage. -->
+        <attr name="eventListDividerHeight" format="dimension|reference"/>
+        <!-- Used for: my events conflicting event group.
+             Height is defined in attribute conflictingEventListDividerHeight and the resource should use the same attribute for its height. -->
         <attr name="conflictingEventListDivider" format="color|reference"/>
+        <!-- Height for conflicting events list divider. See conflictingEventListDivider for usage. -->
+        <attr name="conflictingEventListDividerHeight" format="dimension|reference"/>
+
         <!-- Activities -->
-        <!-- Content top margin for all activities (useful for bg that should have the top visible) -->
+
+        <!-- Content top margin for all activities (useful for bg that should have the top visible). -->
         <attr name="activitiesTopPadding" format="dimension"/>
+        <!-- Default background for activities -->
         <attr name="activitiesBackground" format="color|reference"/>
+        <!-- Background color for FAB -->
         <attr name="actionButtonColor" format="color|reference"/>
+        <!-- Icon for FAB (search) -->
         <attr name="actionButtonIcon" format="integer|reference"/>
+        <!-- Text color for message when something cannot be displayed.
+             Used in: arrival methods (map cannot be displayed), map search results, programme search,
+             updates, hall, my events -->
         <attr name="hintTextColor" format="color|reference"/>
+        <!-- Color for content separator. Height is 1dp.
+             Used in: hall (below tabs), programme search (below search results number). -->
         <attr name="separatorColor" format="color|reference"/>
+        <!-- Margin before event view. Used in all event views except in the map. -->
         <attr name="eventStartMargin" format="dimension"/>
+        <!-- Margin after event view. Used in all event views except in the map. -->
         <attr name="eventEndMargin" format="dimension"/>
+        <!-- Margin from screen to start of activity content.
+             Not including scroll views, map in arrival methods, event view, updates separator before
+             and after updates list. -->
         <attr name="contentStartMargin" format="dimension"/>
+        <!-- Margin from activity content to screen See contentStartMargin for usage. -->
         <attr name="contentEndMargin" format="dimension"/>
+
         <!-- Notifications -->
+
+        <!-- Notification icon. Used in all notifications created by code: new updates available, event about to start,
+             send event feedback send convention feedback, push notification arrived when app is open. -->
         <attr name="notificationSmallIcon" format="integer"/>
+
         <!-- Toolbar -->
+
+        <!-- Toolbar title text color -->
         <attr name="toolbarTitleColor" format="color|reference"/>
+        <!-- Default toolbar background color -->
         <attr name="toolbarBackground" format="color|reference"/>
+        <!-- Navigation icon (hamburger) -->
         <attr name="toolbarLogo" format="integer|reference"/>
+        <!-- Color for highlighted toolbar icons. Used in: go to favorites in programme activity when
+             favorite event is added/removed, feedback icon in programme activity when convention ended
+             and user hasn't sent feedback -->
         <attr name="toolbarIconAccentColor" format="color|reference"/>
+
         <!-- Snackbar -->
+
+        <!-- Button color for snackbar action -->
         <attr name="snackbarActionColor" format="color|reference"/>
+
         <!-- Swipe to Refresh -->
+
+        <!-- Icon color for swipe-to-refresh -->
         <attr name="swipeToRefreshColor" format="color|reference"/>
+        <!-- Background color for swipe-to-refresh -->
         <attr name="swipeToRefreshBackgroundColor" format="color|reference"/>
+
         <!-- Tabs -->
+
+        <!-- Icon color for tabs -->
         <attr name="tabsBackground" format="color|reference"/>
+        <!-- Color for seleted tab indicator -->
         <attr name="selectedTabIndicatorColor" format="color|reference"/>
+        <!-- Text color for tab which is not selected -->
         <attr name="unselectedTabTextColor" format="color|reference"/>
+        <!-- Text color for selected tab -->
         <attr name="selectedTabTextColor" format="color|reference"/>
+
         <!-- Event View -->
+
+        <!-- Layout resource for event view -->
         <attr name="eventViewLayout" format="integer|reference"/>
+        <!-- Height for event view resource -->
         <attr name="eventViewHeight" format="dimension|reference"/>
-        <attr name="eventTypeEndedColor" format="color|reference"/>
-        <attr name="eventTypeCurrentColor" format="color|reference"/>
-        <attr name="eventTypeNotStartedColor" format="color|reference"/>
-        <attr name="eventTypeEndedBackgroundColor" format="color|reference"/>
-        <attr name="eventTypeCurrentBackgroundColor" format="color|reference"/>
-        <attr name="eventTypeNotStartedBackgroundColor" format="color|reference"/>
-        <attr name="eventNameKeywordHighlightColor" format="color|reference"/>
-        <attr name="eventKeywordHighlightColor" format="color|reference"/>
-        <attr name="eventTimeDefaultTextColor" format="color|reference"/>
-        <attr name="eventTimeDefaultBackgroundColor" format="color|reference"/>
-        <attr name="eventTimeNotStartedBackground" format="color|reference"/>
-        <attr name="eventTimeCurrentBackground" format="color|reference"/>
-        <attr name="eventTimeEndedBackground" format="color|reference"/>
-        <attr name="eventTimeVirtualTextColor" format="color|reference"/>
-        <attr name="eventTimeVirtualBackgroundColor" format="color|reference"/>
-        <attr name="eventTimeAlwaysUseDefaultBackgroundColor" format="boolean"/>
-        <attr name="eventFavoriteIcon" format="integer|reference"/>
-        <attr name="eventNonFavoriteColor" format="color|reference"/>
-        <attr name="eventFavoriteColor" format="color|reference"/>
-        <attr name="eventAlertsIcon" format="integer|reference"/>
-        <attr name="eventAlertsIconColor" format="integer|reference"/>
-        <attr name="eventDetailsColorEnded" format="color|reference"/>
-        <attr name="eventDetailsColorCurrent" format="color|reference"/>
-        <attr name="eventDetailsColorNotStarted" format="color|reference"/>
-        <attr name="eventSendFeedbackColor" format="color|reference"/>
-        <attr name="eventSentFeedbackColor" format="color|reference"/>
-        <attr name="eventFeedbackColorOverride" format="color|reference"/>
-        <attr name="eventRatingColor" format="color|reference"/>
+
+        <!-- Should the event color received from backend be used for event name and details text -->
+        <attr name="useEventTextColorFromEventType" format="boolean"/>
+
+        <!-- Text color for ended: event name (if useEventTextColorFromEventType is false or timetable color is transparent),
+             free time in my events, hour in programme (if eventTimeHeaderAlwaysUseDefaultTextColor is false).
+             If transparent, event hour and free time slot are set from eventTimeHeaderDefaultTextColor. -->
+        <attr name="eventEndedTextColor" format="color|reference"/>
+        <!-- Text color for current: event name, free time in my events, hour in programme. See eventEndedTextColor for defaults and conditions. -->
+        <attr name="eventCurrentTextColor" format="color|reference"/>
+        <!-- Text color for not started: event name, free time in my events, hour in programme. See eventEndedTextColor for defaults and conditions. -->
+        <attr name="eventNotStartedTextColor" format="color|reference"/>
+
+        <!-- Text color for conflicting event. Used in event name, lecturer nad hall (if not transparent). -->
         <attr name="conflictingEventTextColor" format="color|reference" />
+
+        <!-- Background for conflicting event label. Used when event is conflicting and the label exists in the layout.
+             The corresponding text color is white. -->
         <attr name="conflictingEventBackground" format="integer|reference" />
+
+        <!-- Background color for event view when event has ended -->
+        <attr name="eventTypeEndedBackgroundColor" format="color|reference"/>
+        <!-- Background color for event view when event is current -->
+        <attr name="eventTypeCurrentBackgroundColor" format="color|reference"/>
+        <!-- Background color for event view when event has not started -->
+        <attr name="eventTypeNotStartedBackgroundColor" format="color|reference"/>
+
+        <!-- Should the event color received from backend be used for event time box background -->
+        <attr name="useEventTimeColorFromEventType" format="boolean"/>
+        <!-- Default text color for event time.
+             Used when timetable text color is transparent or useEventTimeColorFromEventType is false and event is not virtual. -->
+        <attr name="eventTimeDefaultTextColor" format="color|reference"/>
+
+        <!-- Default background color for event time and search categories.
+             Used for event when useEventTimeColorFromEventType is false or event timetable color is transparent,
+             event time background color (ended/not started/current) is transparent and event is not virtual.
+             Used for search categories checkbox when useEventTimeColorFromEventType is false and searchCategoriesColor is transparent. -->
+        <attr name="eventTimeDefaultBackgroundColor" format="color|reference"/>
+
+        <!-- Background color for event time for event which hasn't started. Used when useEventTimeColorFromEventType is false or event timetable color is transparent. -->
+        <attr name="eventTimeNotStartedBackground" format="color|reference"/>
+        <!-- Background color for event time for current event. Used when useEventTimeColorFromEventType is false or event timetable color is transparent. -->
+        <attr name="eventTimeCurrentBackground" format="color|reference"/>
+        <!-- Background color for event time for ended event. Used when useEventTimeColorFromEventType is false or event timetable color is transparent. -->
+        <attr name="eventTimeEndedBackground" format="color|reference"/>
+        <!-- Background color for event time for virtual event. Used when useEventTimeColorFromEventType is false or event timetable color is transparent, and
+             event time background color (ended/not started/current) is transparent. -->
+        <attr name="eventTimeVirtualBackgroundColor" format="color|reference"/>
+        <!-- Text color for event time for virtual event. Used when useEventTimeColorFromEventType is false or event timetable color is transparent. -->
+        <attr name="eventTimeVirtualTextColor" format="color|reference"/>
+
+        <!-- Text color for ended event details (if useEventTextColorFromEventType is false or timetable color is transparent) -->
+        <attr name="eventDetailsColorEnded" format="color|reference"/>
+        <!-- Text color for current event details (if useEventTextColorFromEventType is false or timetable color is transparent) -->
+        <attr name="eventDetailsColorCurrent" format="color|reference"/>
+        <!-- Text color for not started event details (if useEventTextColorFromEventType is false or timetable color is transparent) -->
+        <attr name="eventDetailsColorNotStarted" format="color|reference"/>
+
+        <!-- Text color for search terms in event tile in event search -->
+        <attr name="eventNameKeywordHighlightColor" format="color|reference"/>
+        <!-- Text color for search terms in event details in event search -->
+        <attr name="eventKeywordHighlightColor" format="color|reference"/>
+
+        <!-- Default favorite icon (for both favorite and non-favorite events -->
+        <attr name="eventFavoriteIcon" format="integer|reference"/>
+        <!-- Color or icon for non-favorite event. If it's a color, eventFavoriteIcon is used as the base image. -->
+        <attr name="eventNonFavoriteColor" format="color|reference"/>
+        <!-- Color or icon for favorite event. If it's a color, eventFavoriteIcon is used as the base image. -->
+        <attr name="eventFavoriteColor" format="color|reference"/>
+
+        <!-- Alerts base icon -->
+        <attr name="eventAlertsIcon" format="integer|reference"/>
+        <!-- Alerts icon color filer. Only colors are allowed (other drawables are ignored). -->
+        <attr name="eventAlertsIconColor" format="integer|reference"/>
+
+        <!-- Color for feedback icon when user sent the feedback and answered a smiley question. The icon is the smiley. -->
+        <attr name="eventRatingColor" format="color|reference"/>
+        <!-- Color for feedback icon when user sent the feedback and didn't answer smiley questions
+             Icon is feedback_sent. -->
+        <attr name="eventSentFeedbackColor" format="color|reference"/>
+        <!-- Color for feedback icon when user attended the event or filled feedback without sending it (and can still send it).
+             Icon is ic_dialog_email if feedback was filled and feedback if it wasn't filled. -->
+        <attr name="eventSendFeedbackColor" format="color|reference"/>
+        <!-- Color for feedback icon when user can't send feedback anymore, or user didn't attend the event and didn't fill feedback.
+             If not defined, event details color is used.
+             Icon is ic_dialog_email if feedback was filled and feedback if it wasn't filled. -->
+        <attr name="eventFeedbackColor" format="color|reference"/>
+
         <!-- About screen -->
+
+        <!-- Top image in about screen -->
         <attr name="aboutLogo" format="integer"/>
+        <!-- Side margins for aboutLogo -->
         <attr name="aboutLogoMargins" format="dimension"/>
+
         <!-- Home screen -->
-        <attr name="homeActivityLayout" format="integer|reference"/>
+
+        <!-- Background for home activity (all screens) -->
         <attr name="homeBackground" format="color|reference"/>
+        <!-- Toolbar title image for home activity (all screens) -->
         <attr name="homeToolbarTitle" format="integer|reference"/>
+        <!-- Home activity toolbar background (all screens) -->
         <attr name="homeToolbarBackground" format="integer|reference"/>
+        <!-- Top image in home activity (all screens) -->
         <attr name="homeLogo" format="integer|reference"/>
+        <!-- Margins (all sides) for homeLogo -->
         <attr name="homeLogoMargin" format="dimension"/>
+        <!-- Side margins for home frame (the changing part) -->
         <attr name="homeFrameMargins" format="dimension" />
+        <!-- Top margin for home frame (the changing part). Default is homeFrameMargins. -->
         <attr name="homeFrameTopMargin" format="dimension" />
+        <!-- Bottom margin for home frame (the changing part). Default is homeFrameMargins. -->
         <attr name="homeFrameBottomMargin" format="dimension" />
+        <!-- Bottom image in home activity (all screens) -->
         <attr name="homeBottomImage" format="integer|reference"/>
-        <attr name="homeTitleBackground" format="color|reference"/>
-        <attr name="homeTitleText" format="color|reference"/>
-        <attr name="homeMessageBackground" format="color|reference"/>
-        <attr name="homeMessageText" format="color|reference"/>
-        <attr name="homeEventsMargin" format="dimension"/>
-        <attr name="homeCurrentEventText" format="color|reference"/>
-        <attr name="homeEventTimeText" format="color|reference"/>
-        <attr name="homeEventHallText" format="color|reference"/>
-        <attr name="homeCurrentEventBackground" format="color|reference"/>
-        <attr name="homeUpcomingEventBackground" format="color|reference"/>
-        <attr name="homeUpcomingEventText" format="color|reference"/>
-        <attr name="homeUpcomingPadding" format="dimension"/>
-        <attr name="homeUpcomingPaddingTop" format="dimension"/>
-        <attr name="homeUpcomingMarginBottom" format="dimension"/>
-        <attr name="homeCurrentEventOnlyBackground" format="color|reference"/>
+
+        <!-- During the convention when user has favorite events, should the current and upcoming event have separate titles. -->
         <attr name="homeShowCurrentUpcomingTitles" format="boolean"/>
-        <attr name="homeCurrentEventTitleBackground" format="color|reference"/>
-        <attr name="homeCurrentEventTitleText" format="color|reference"/>
-        <attr name="homeUpcomingEventTitleBackground" format="color|reference"/>
-        <attr name="homeUpcomingEventTitleText" format="color|reference"/>
-        <attr name="homeEventsListBackground" format="color|reference"/>
-        <attr name="homeEventNameInList" format="color|reference"/>
-        <attr name="homeEventsListDivider" format="color|reference"/>
-        <attr name="homeButtonBackground" format="color|reference"/>
-        <attr name="homeButtonsSideMargin" format="dimension"/>
-        <attr name="homeButtonText" format="color|reference"/>
+        <!-- Background for title of info boxes in home screen.
+             Used in: after convention box title, before convention title with convention date,
+             during convention with favorites (with single title) "my events" title,
+             during convention without favorites "events starting at..." title. -->
+        <attr name="homeTitleBackground" format="color|reference"/>
+        <!-- Text color for title of info boxes in home screen. See homeTitleBackground for usage. -->
+        <attr name="homeTitleText" format="color|reference"/>
+        <!-- Margin between title and info box. Used in: before convention, after convention,
+             during convention when no favorites, single title during convention with favorties. -->
         <attr name="homeBoxTopMargin" format="dimension"/>
+        <!-- Background for info box in home screen. Used in: after convention info box, before convention info box. -->
+        <attr name="homeMessageBackground" format="color|reference"/>
+        <!-- Text color for text in info box in home screen. See homeMessageBackground for usage. -->
+        <attr name="homeMessageText" format="color|reference"/>
+        <!-- Margin between current and upcoming event in home during convention when there are favorites.
+             Used in both single and separate title layouts. Also used when there is only one event (and not both current and upcoming). -->
+        <attr name="homeEventsMargin" format="dimension"/>
+
+        <!-- Separate titles - background color for current event title. Also used when there is no upcoming event. -->
+        <attr name="homeCurrentEventTitleBackground" format="color|reference"/>
+        <!-- Separate titles - text color for current event title. Also used when there is no upcoming event. -->
+        <attr name="homeCurrentEventTitleText" format="color|reference"/>
+        <!-- Background color for current event (both single and separate titles) when there is an upcoming event -->
+        <attr name="homeCurrentEventBackground" format="color|reference"/>
+        <!-- Background color for current event (both single and separate titles) when there is no upcoming event -->
+        <attr name="homeCurrentEventOnlyBackground" format="color|reference"/>
+        <!-- Color for current event name and images in home screen (both single and separate titles).
+             Also used when there is only a current event and no upcoming event (in name, images, hall and time). -->
+        <attr name="homeCurrentEventText" format="color|reference"/>
+
+        <!-- Separate titles - background color for upcoming event title -->
+        <attr name="homeUpcomingEventTitleBackground" format="color|reference"/>
+        <!-- Separate titles - text color for upcoming event title -->
+        <attr name="homeUpcomingEventTitleText" format="color|reference"/>
+        <!-- Background color for upcoming event (both single and separate titles) -->
+        <attr name="homeUpcomingEventBackground" format="color|reference"/>
+        <!-- Color for upcoming event name and images in home screen (both single and separate titles). -->
+        <attr name="homeUpcomingEventText" format="color|reference"/>
+        <!-- Text color for upcoming event time (both single and separate titles). -->
+        <attr name="homeEventTimeText" format="color|reference"/>
+        <!-- Text color for upcoming event hall (both single and separate titles). -->
+        <attr name="homeEventHallText" format="color|reference"/>
+        <!-- Padding for upcoming event box (except top padding), for both single and separate titles -->
+        <attr name="homeUpcomingPadding" format="dimension"/>
+        <!-- Top padding for upcoming event box, for both single and separate titles -->
+        <attr name="homeUpcomingPaddingTop" format="dimension"/>
+        <!-- Single title - additional padding at the bottom of the upcoming event box -->
+        <attr name="homeUpcomingMarginBottom" format="dimension"/>
+
+        <!-- Title size in home screen when there are no favorites. -->
+        <attr name="homeEventsListTitleSize" format="dimension"/>
+        <!-- Background for events list when no favorites -->
+        <attr name="homeEventsListBackground" format="color|reference"/>
+        <!-- Color for event name and image in events list when no favorites -->
+        <attr name="homeEventNameInList" format="color|reference"/>
+        <!-- Divider for events list when no favorites. Height is defined in attribute homeEventListDividerHeight. -->
+        <attr name="homeEventsListDivider" format="color|reference"/>
+        <!-- Height for events list divider when no favorites. -->
+        <attr name="homeEventListDividerHeight" format="dimension|reference"/>
+
+        <!-- Background for all buttons in home screen -->
+        <attr name="homeButtonBackground" format="color|reference"/>
+        <!-- Text color for all buttons in home screen -->
+        <attr name="homeButtonText" format="color|reference"/>
+        <!-- Margins before and after the go to programme/updates buttons in home screen, before convention starts (not between them) -->
+        <attr name="homeButtonsSideMargin" format="dimension"/>
+        <!-- Margin above the single button in home screen during convention (with and without favorites, single and separate titles) -->
         <attr name="homeSingleButtonTopMargin" format="dimension"/>
+        <!-- Style for the single button in home screen during convention -->
         <attr name="homeSingleButtonStyle" format="integer|reference"/>
+        <!-- Show buttons in home screen (before and during convention) -->
         <attr name="homeShowButtons" format="boolean"/>
+        <!-- Title size in home screen. Used in: before convention, after convention,
+             during convention when there are favorites (single and separate titles).
+             Also used as the min size for before and after convention message. -->
         <attr name="homeTitleSize" format="dimension"/>
+        <!-- Max text size for message before and after convention, and upcoming event name during convention (same and separate titles) -->
         <attr name="homeMaxMessageSize" format="dimension"/>
+
         <!-- My Events Screen -->
+
+        <!-- Background for next event start time -->
         <attr name="nextEventStartTimeBackground" format="color|reference"/>
+        <!-- Text color for next event start time -->
         <attr name="nextEventStartTimeTextColor" format="color|reference"/>
+        <!-- Bottom line color for next event start time -->
         <attr name="nextEventStartTimeBottomLineColor" format="color|reference"/>
+
+        <!-- Foreground color for conflicting events group. Can be used as a border. -->
         <attr name="conflictingEventsListBorder" format="integer|reference"/>
+        <!-- Background color for conflicting events group -->
         <attr name="conflictingEventsBackground" format="color|reference"/>
+
         <!-- Navigation Drawer -->
+
+        <!-- Background for the navigation drawer-->
         <attr name="navigationPopupBackground" format="color|reference"/>
+
+        <!-- Top image in the navigation drawer -->
         <attr name="navigationPopupTitle" format="integer|reference"/>
-        <attr name="navigationPopupBottomImage" format="integer|reference"/>
-        <attr name="navigationPopupSpaceVisibility" format="integer|reference">
-            <enum name="visible" value="0" />
-            <enum name="gone" value="2" />
-        </attr>
-        <attr name="navigationPopupTopSelectedColor" format="color|reference"/>
-        <attr name="navigationPopupTopNotSelectedColor" format="color|reference"/>
-        <attr name="navigationPopupSelectedColor" format="color|reference"/>
-        <attr name="navigationPopupNotSelectedColor" format="color|reference"/>
-        <attr name="navigationPopupSeparatorColor" format="color|reference"/>
+        <!-- width for the top image. Can be match_parent. -->
         <attr name="navigationPopupTitleWidth" format="dimension|reference">
             <!-- This allows to use match_parent as a value for this attribute -->
             <enum name="match_parent" value="-1" />
         </attr>
-        <attr name="navigationPopupItemPaddingTop" format="dimension" />
-        <attr name="navigationPopupItemPaddingBottom" format="dimension" />
+        <!-- Side margins for the top image -->
         <attr name="navigationPopupTitleMargins" format="dimension"/>
+
+        <!-- Bottom image in the navigation drawer -->
+        <attr name="navigationPopupBottomImage" format="integer|reference"/>
+        <!-- Side margins for the bottom image -->
         <attr name="navigationPopupBottomImageMargins" format="dimension"/>
+        <!-- Top margin for the bottom image -->
         <attr name="navigationPopupBottomImageTopMargin" format="dimension"/>
+        <!-- Visibility for the space above the bottom image.
+             Visible = the image is at the very bottom, gone = the image is right below the items. -->
+        <attr name="navigationPopupSpaceVisibility" format="integer|reference">
+            <enum name="visible" value="0" />
+            <enum name="gone" value="2" />
+        </attr>
+
+        <!-- Color for selected item image in the top row -->
+        <attr name="navigationPopupTopSelectedColor" format="color|reference"/>
+        <!-- Color for non-selected item image in the top row -->
+        <attr name="navigationPopupTopNotSelectedColor" format="color|reference"/>
+
+        <!-- Color for selected item text and image in the main part of the navigation drawer -->
+        <attr name="navigationPopupSelectedColor" format="color|reference"/>
+        <!-- Color for non-selected item text and image in the main part of the navigation drawer -->
+        <attr name="navigationPopupNotSelectedColor" format="color|reference"/>
+        <!-- Color for separator between items in the main part of the navigation drawer -->
+        <attr name="navigationPopupSeparatorColor" format="color|reference"/>
+        <!-- Padding above an item in the main part of the navigation drawer -->
+        <attr name="navigationPopupItemPaddingTop" format="dimension" />
+        <!-- Padding below an item in the main part of the navigation drawer -->
+        <attr name="navigationPopupItemPaddingBottom" format="dimension" />
+        <!-- Display icons for items in the main part of the navigation drawer -->
         <attr name="navigationItemsShouldDisplayIcon" format="boolean"/>
+
         <!-- Updates Screen -->
-        <attr name="updateTimeColor" format="color|reference"/>
-        <attr name="updateTimeBackground" format="color|reference"/>
-        <attr name="updateItemBorder" format="color|reference"/>
-        <attr name="updateItemSeparator" format="color|reference"/>
-        <attr name="updatesBackground" format="color|reference"/>
-        <attr name="updatesBackgroundDrawable" format="color|reference"/>
+
+        <!-- Separator color between the toolbar and updates lis -->
         <attr name="updatesSeparatorColor" format="color|reference"/>
-        <attr name="updateTextColor" format="color|reference"/>
+        <!-- Background for updates activity, to be used when it's not a color (otherwise use updatesBackgroundColor which causes less overdraw) -->
+        <attr name="updatesBackgroundDrawable" format="color|reference"/>
+        <!-- Background color for updates activity.
+             Used in: space between updates list and screen end, background when there are no updates,
+             background during update refresh animations. -->
+        <attr name="updatesBackgroundColor" format="color|reference"/>
+
+        <!-- Background color for regular update -->
+        <attr name="updateBackgroundColor" format="color|reference"/>
+        <!-- Background color for new update -->
         <attr name="newUpdateBackground" format="color|reference"/>
-        <attr name="newUpdateTextColor" format="color|reference"/>
+        <!-- Background color for focused update (even if it's new) -->
         <attr name="focusedUpdateBackground" format="color|reference"/>
+        <!-- Text color for update date and time. If transparent, same color as update text is used. -->
+        <attr name="updateTimeColor" format="color|reference"/>
+        <!-- Background for update date and time line -->
+        <attr name="updateTimeBackground" format="color|reference"/>
+        <!-- Color for separator between updates and the line after the date and time -->
+        <attr name="updateItemSeparator" format="color|reference"/>
+        <!-- Separator above the "show more" button -->
+        <attr name="updateItemBorder" format="color|reference"/>
+        <!-- Text color for regular update -->
+        <attr name="updateTextColor" format="color|reference"/>
+        <!-- Text color for new update -->
+        <attr name="newUpdateTextColor" format="color|reference"/>
+        <!-- Text color for focused update (even if it's new) -->
         <attr name="focusedUpdateTextColor" format="color|reference"/>
+
         <!-- Map Screen -->
-        <attr name="locationDetailsBackground" format="color|reference"/>
-        <attr name="locationDetailsTopLineColor" format="color|reference"/>
-        <attr name="locationDetailsTitleColor" format="color|reference"/>
-        <attr name="mapBackground" format="color|reference"/>
+
+        <!-- Color for toolbar in map activity -->
         <attr name="mapToolbarColor" format="color|reference"/>
+        <!-- Background for map activity -->
+        <attr name="mapBackground" format="color|reference"/>
+        <!-- Background for floor up/down lines -->
         <attr name="floorChangeBackground" format="color|reference"/>
-        <attr name="iconFloorUp" format="integer|reference"/>
-        <attr name="iconFloorDown" format="integer|reference"/>
+        <!-- Text color for floor up/down lines -->
         <attr name="floorUpDownTextColor" format="color|reference"/>
-        <attr name="standIconColor" format="color|reference"/>
-        <attr name="standsTypeTitleColor" format="color|reference"/>
-        <attr name="standsMapHighlight" format="color|reference"/>
-        <attr name="mapSearchText" format="color|reference"/>
-        <attr name="mapSearchFiltersBackground" format="color|reference"/>
-        <attr name="mapSearchResultsBackground" format="color|reference"/>
-        <attr name="mapSearchHint" format="color|reference"/>
-        <attr name="mapSearchSeparator" format="color|reference"/>
+        <!-- Icon for map floor up -->
+        <attr name="iconFloorUp" format="integer|reference"/>
+        <!-- Icon for map floor down -->
+        <attr name="iconFloorDown" format="integer|reference"/>
+        <!-- Color for separator line above location details -->
+        <attr name="locationDetailsTopLineColor" format="color|reference"/>
+        <!-- Background for location details -->
+        <attr name="locationDetailsBackground" format="color|reference"/>
+        <!-- Text color for location name -->
+        <attr name="locationDetailsTitleColor" format="color|reference"/>
+
+        <!-- Border color around map search (above and to the left) -->
         <attr name="mapSearchBorder" format="color|reference"/>
+        <!-- Background for map search filters -->
+        <attr name="mapSearchFiltersBackground" format="color|reference"/>
+        <!-- Color for separator between search filters and search results -->
+        <attr name="mapSearchSeparator" format="color|reference"/>
+        <!-- Background color for map search results section -->
+        <attr name="mapSearchResultsBackground" format="color|reference"/>
+        <!-- Text color for all text in map search. Used in: search filters, radio buttons, search keyword, show only halls checkbox text,
+             location result name, floor and icon, stand result name, icon and floor. Also used for stands popup text for unselected stand. -->
+        <attr name="mapSearchText" format="color|reference"/>
+        <!-- Text color for map search hint for keywords -->
+        <attr name="mapSearchHint" format="color|reference"/>
+
+        <!-- Stands popup stand icon color -->
+        <attr name="standIconColor" format="color|reference"/>
+        <!-- Stands popup - color for stand type title and selected stand name and location -->
+        <attr name="standsTypeTitleColor" format="color|reference"/>
+        <!-- Color for stands map location highlight on the stands map image (for selected location) -->
+        <attr name="standsMapHighlight" format="color|reference"/>
+
         <!-- Event Screen -->
+
+        <!-- Toolbar color in event activity -->
         <attr name="eventToolbarColor" format="color|reference"/>
-        <attr name="eventDetailsBoxColor" format="color|reference"/>
-        <attr name="eventDescriptionBoxColor" format="color|reference"/>
-        <attr name="eventDescriptionTextColor" format="color|reference"/>
-        <attr name="eventTitleBackground" format="integer|reference"/>
-        <attr name="eventTitlePadding" format="dimension"/>
-        <attr name="eventTitleTextColor" format="color|reference"/>
-        <attr name="eventDetailsTextColor" format="color|reference"/>
-        <attr name="eventVoteBoxColor" format="color|reference"/>
-        <attr name="eventVoteTextColor" format="color|reference"/>
-        <attr name="eventFeedbackBoxColor" format="color|reference"/>
-        <!-- Must be a color if there are any mapped images -->
-        <attr name="eventDetailsDefaultBackground" format="color|reference"/>
-        <attr name="eventFeedbackTextColor" format="color|reference"/>
-        <attr name="eventFeedbackAnswerColor" format="color|reference"/>
-        <attr name="eventFeedbackSelectedAnswerColor" format="color|reference"/>
+        <!-- Favorite icon color in toolbar for favorite event -->
         <attr name="eventActivityFavoriteColor" format="color|reference"/>
-        <!-- Buttons -->
-        <attr name="highlightedButtonBackground" format="integer|reference"/>
-        <attr name="buttonTextColor" format="integer|reference"/>
-        <attr name="buttonColor" format="color|reference"/>
-        <attr name="buttonColorPressed" format="color|reference"/>
-        <attr name="buttonColorDisabled" format="color|reference"/>
-        <attr name="borderlessButtonColor" format="color|reference"/>
+        <!-- Background for event details. If there are mapped images, possibly used for fading effect.
+             This means it must be a color if there are any mapped images. -->
+        <attr name="eventDetailsDefaultBackground" format="color|reference"/>
+
+        <!-- Background for event title box -->
+        <attr name="eventTitleBackground" format="integer|reference"/>
+        <!-- Padding for event title box -->
+        <attr name="eventTitlePadding" format="dimension"/>
+        <!-- Text color for text in event title box (event name, type and location type) -->
+        <attr name="eventTitleTextColor" format="color|reference"/>
+
+        <!-- Background for event details box -->
+        <attr name="eventDetailsBoxColor" format="color|reference"/>
+        <!-- Text color for text in event details box (lecturer, hall, time, additional info; in sf-f: Price, tickets availability, tags) -->
+        <attr name="eventDetailsTextColor" format="color|reference"/>
+
+        <!-- Background for event description box -->
+        <attr name="eventDescriptionBoxColor" format="color|reference"/>
+        <!-- Text color for event description -->
+        <attr name="eventDescriptionTextColor" format="color|reference"/>
+
+        <!-- Text color for event feedback. Used in: title (collapsed and open), feedback sent message, questions, text answers. -->
+        <attr name="eventFeedbackTextColor" format="color|reference"/>
+        <!-- Text color for unselected feedback answer (of types multiple answers, radio and 5-point smiley) and for additional feedback links. -->
+        <attr name="eventFeedbackAnswerColor" format="color|reference"/>
+        <!-- Color for selected feedback answer (of types multiple answers, radio and 5-point smiley) and feedback icon for sent feedback with 5-point smiley answer -->
+        <attr name="eventFeedbackSelectedAnswerColor" format="color|reference"/>
+        <!-- Background color for feedback box in event activity -->
+        <attr name="eventFeedbackBoxColor" format="color|reference"/>
+        <!-- Color for borderless button text and feedback icon (when it's not a smiley) in feedback layout
+             (open/close feedback). Used in event activity. -->
         <attr name="feedbackButtonColor" format="color|reference"/>
-        <attr name="feedbackAnswerButtonColor" format="color|reference"/>
-        <attr name="feedbackAnswerButtonSelectedColor" format="color|reference"/>
-        <!-- Feedback Screen -->
-        <attr name="progressBarDrawable" format="integer|reference"/>
-        <attr name="conventionFeedbackTextColor" format="color|reference"/>
-        <attr name="feedbackMultiAnswerBackgroundSelected" format="integer|reference"/>
-        <attr name="feedbackMultiAnswerBackgroundNotSelected" format="integer|reference"/>
-        <attr name="feedbackMultiAnswerPaddingTopBottom" format="dimension"/>
-        <attr name="feedbackMultiAnswerPaddingStartFirstAnswer" format="dimension"/>
-        <attr name="feedbackMultiAnswerPaddingStartEnd" format="dimension"/>
-        <attr name="feedbackMultiAnswerMarginTopBottom" format="dimension"/>
-        <attr name="feedbackMultiAnswerMarginBetweenAnswers" format="dimension"/>
-        <!-- Programme Screen -->
-        <attr name="eventTimeHeaderBackground" format="color|reference"/>
-        <attr name="eventTimeHeaderDefaultTextColor" format="color|reference"/>
-        <attr name="eventTimeHeaderAlwaysUseDefaultTextColor" format="boolean"/>
-        <attr name="eventTimeHeaderMarginTop" format="dimension" />
-        <attr name="eventTimeHeaderMarginBottom" format="dimension" />
-        <attr name="eventTimeHeaderPaddingHorizontal" format="dimension" />
-        <attr name="eventTimeHeaderPaddingVertical" format="dimension"/>
-        <attr name="marginBetweenEventsListAndNextHeader" format="dimension" />
-        <attr name="fabOnProgrammeTop" format="boolean"/>
-        <attr name="searchCategoriesColor" format="color|reference" />
+
+
+        <!-- Background color for event vote/view box in event activity -->
+        <attr name="eventVoteBoxColor" format="color|reference"/>
+        <!-- Text color for event vote/view box in event activity. Used for: view description, vote description, vote note. -->
+        <attr name="eventVoteTextColor" format="color|reference"/>
+
         <!-- Event Survey Dialog -->
+
+        <!-- Text color for event vote survey. See eventFeedbackTextColor for usage. -->
         <attr name="eventSurveyTextColor" format="color|reference"/>
+        <!-- Text color for unselected answer in event vote survey. See eventFeedbackAnswerColor for usage. -->
         <attr name="eventSurveyAnswerColor" format="color|reference"/>
+        <!-- Text color for selected answer in event vote survey. See eventFeedbackSelectedAnswerColor for usage. -->
         <attr name="eventSurveySelectedAnswerColor" format="color|reference"/>
+
+        <!-- Buttons -->
+
+        <!-- Button style. By default, uses buttonColorPressed for the ripple, buttonColorDisabled for
+             disabled color, and buttonColor for regular color.
+             The style is used in: arrival methods (install google services), event activity (view, vote),
+             feedback activity (send all feedbacks), feedback layout (send feedback), map (open stands, goto floor). -->
+        <attr name="highlightedButtonBackground" format="integer|reference"/>
+        <!-- Text color for button. See highlightedButtonBackground for usage. -->
+        <attr name="buttonTextColor" format="integer|reference"/>
+        <!-- Default color for button. See highlightedButtonBackground for usage. Also used as the default borderlessButtonColor. -->
+        <attr name="buttonColor" format="color|reference"/>
+        <!-- Ripple color for button. See highlightedButtonBackground for usage. -->
+        <attr name="buttonColorPressed" format="color|reference"/>
+        <!-- Disabled color for button. See highlightedButtonBackground for usage. -->
+        <attr name="buttonColorDisabled" format="color|reference"/>
+
+        <!-- Color for borderless button. Used in: updates ("show more"), feedback activity (hide sent feedback),
+             stands popup (dismiss), configure notifications (configure before start/after end/dismiss),
+             event vote popup (dimiss). Some of these are configured in sub-themes. -->
+        <attr name="borderlessButtonColor" format="color|reference"/>
+
+        <!-- Feedback Screen -->
+
+        <!-- Text color for feedback in feedback activity. See eventFeedbackTextColor for usage. -->
+        <attr name="conventionFeedbackTextColor" format="color|reference"/>
+        <!-- Unselected answer color and additional feedback link color for feedback in feedback activity.
+             See eventFeedbackAnswerColor for usage. -->
+        <attr name="feedbackAnswerButtonColor" format="color|reference"/>
+        <!-- Selected answer color for feedback in feedback activity. See eventFeedbackSelectedAnswerColor for usage. -->
+        <attr name="feedbackAnswerButtonSelectedColor" format="color|reference"/>
+
+        <!-- Background for selected answer in multiple-answer feedback question (not radio). Used in feedback activity. -->
+        <attr name="feedbackMultiAnswerBackgroundSelected" format="integer|reference"/>
+        <!-- Background for unselected answers in multiple-answer feedback question (not radio). Used in feedback activity. -->
+        <attr name="feedbackMultiAnswerBackgroundNotSelected" format="integer|reference"/>
+        <!-- Top and bottom padding for answer in multiple-answer question (including radio). Used in feedback activity. -->
+        <attr name="feedbackMultiAnswerPaddingTopBottom" format="dimension"/>
+        <!-- Padding at start of first answer in multiple-answer question (not radio). Used in feedback activity. -->
+        <attr name="feedbackMultiAnswerPaddingStartFirstAnswer" format="dimension"/>
+        <!-- Padding at end of first answer of non-radio and both sides of other answers in multiple-answer question. Used in feedback activity. -->
+        <attr name="feedbackMultiAnswerPaddingStartEnd" format="dimension"/>
+        <!-- Margins at top and bottom of answer in multiple-answer question. Used in feedback activity. -->
+        <attr name="feedbackMultiAnswerMarginTopBottom" format="dimension"/>
+        <!-- Margins between answers in multiple-answer question. Used in feedback activity. -->
+        <attr name="feedbackMultiAnswerMarginBetweenAnswers" format="dimension"/>
+
+        <!-- Progress bar for "send all" in feedback activity -->
+        <attr name="progressBarDrawable" format="integer|reference"/>
+        <!-- Color for the default "send all" progress bar in feedback activity -->
+        <attr name="feedbackProgressBarColor" format="color|reference"/>
+
+        <!-- Programme and Programme Search Screens -->
+
+        <!-- Background for event time/day header in programme and programme search  -->
+        <attr name="eventTimeHeaderBackground" format="color|reference"/>
+        <!-- Default text color for event time/day header in programme and programme search. Used when eventTimeHeaderAlwaysUseDefaultTextColor is true
+             or the started/ended/current color is missing. -->
+        <attr name="eventTimeHeaderDefaultTextColor" format="color|reference"/>
+        <!-- Should eventTimeHeaderDefaultTextColor always be used for the event time/day header in programme and programme search -->
+        <attr name="eventTimeHeaderAlwaysUseDefaultTextColor" format="boolean"/>
+        <!-- Top margin for event time/day header in programme and programme search -->
+        <attr name="eventTimeHeaderMarginTop" format="dimension" />
+        <!-- Bottom margin for event time/day header in programme and programme search -->
+        <attr name="eventTimeHeaderMarginBottom" format="dimension" />
+        <!-- Side padding for event time/day header in programme and programme search -->
+        <attr name="eventTimeHeaderPaddingHorizontal" format="dimension" />
+        <!-- Top and bottom padding for event time/day header in programme and programme search -->
+        <attr name="eventTimeHeaderPaddingVertical" format="dimension"/>
+        <!-- Margin between events list in a certain hour and the next hour/day header in prgramme and programme search activities. -->
+        <attr name="marginBetweenEventsListAndNextHeader" format="dimension" />
+
+        <!-- Should programme search FAB be at the top of the programme activity -->
+        <attr name="fabOnProgrammeTop" format="boolean"/>
+
+        <!-- Color for search categories checkboxes, if color from event type is not used. -->
+        <attr name="searchCategoriesColor" format="color|reference" />
+
         <!-- Icons -->
+
+        <!-- Add to favorites toolbar icon. Used in event activity.
+             Remove from favorites icon color is defined in eventActivityFavoriteColor. -->
         <attr name="iconAddToFavorites" format="integer|reference"/>
+        <!-- Zoom out toolbar icon. Used in map activity. -->
         <attr name="iconShrink" format="integer|reference"/>
+        <!-- Zoom in toolbar icon. Used in map activity. -->
         <attr name="iconEnlarge" format="integer|reference"/>
+        <!-- My events toolbar icon. Used in programme activity. -->
         <attr name="iconFavorites" format="integer|reference"/>
+        <!-- Car navigation toolbar icon. Used in arrival methods activity. -->
         <attr name="iconDirections" format="integer|reference"/>
+        <!-- Public transport navigation toolbar icon. Used in arrival methods activity. -->
         <attr name="iconTransport" format="integer|reference"/>
+        <!-- Setup alarms toolbar icon. Used in event activity (only if there is room for it). -->
         <attr name="iconAlarm" format="integer|reference"/>
+        <!-- Programme toolbar icon. Used in my events and feedback activities. -->
         <attr name="iconProgramme" format="integer|reference"/>
+        <!-- Close toolbar icon. Used in programme search activity. -->
         <attr name="iconClear" format="integer|reference"/>
+        <!-- Share toolbar icon. Used in my events activity. -->
         <attr name="iconShare" format="integer|reference"/>
+        <!-- Feedback toolbar icon. Used in programme activity. -->
         <attr name="iconFeedback" format="integer|reference"/>
+        <!-- Map toolbar icon. Used in event activity. -->
         <attr name="iconMap" format="integer|reference"/>
+
+        <!-- Close location details icon in map activity -->
         <attr name="iconClearMap" format="integer|reference"/>
     </declare-styleable>
 </resources>

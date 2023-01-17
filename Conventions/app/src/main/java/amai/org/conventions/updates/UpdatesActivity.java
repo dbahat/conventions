@@ -172,7 +172,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 	 * This method must be called before recycler view animation starts and adapter updates to prevent flickering
 	 */
 	private void setUpdatesBackground() {
-		updatesLayout.setBackgroundColor(ThemeAttributes.getColor(this, R.attr.updatesBackground));
+		updatesLayout.setBackgroundColor(ThemeAttributes.getColor(this, R.attr.updatesBackgroundColor));
 	}
 
 	/**

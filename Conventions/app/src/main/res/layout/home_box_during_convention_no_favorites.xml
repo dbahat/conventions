@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="אירועים שמתחילים ב-11:00"
-            android:textSize="20sp"
+            android:textSize="?attr/homeEventsListTitleSize"
             android:textColor="?homeTitleText"
             android:textStyle="bold"
             android:layout_gravity="center"/>

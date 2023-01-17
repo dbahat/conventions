@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
 
+import amai.org.conventions.R;
+import amai.org.conventions.ThemeAttributes;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
@@ -543,31 +545,35 @@ public abstract class Convention implements Serializable {
 		return Arrays.asList(locations);
 	}
 
-	public List<SearchCategory> getEventTypesSearchCategories() {
+	public List<SearchCategory> getEventTypesSearchCategories(Context context) {
+		return getEventTypesSearchCategories(context, null);
+	}
+
+	private List<SearchCategory> getEventTypesSearchCategories(Context context, AggregatedEventTypes aggregatedEventTypes) {
 		List<SearchCategory> categories = new LinkedList<>();
 		if (events != null) {
-			for (final ConventionEvent event : events) {
-				SearchCategory category = CollectionUtils.findFirst(categories, new CollectionUtils.Predicate<SearchCategory>() {
-					@Override
-					public boolean where(SearchCategory item) {
-						return item.getName().equals(event.getType().getDescription());
-					}
-				});
+			boolean useColorFromEventType = ThemeAttributes.getBoolean(context, R.attr.useEventTimeColorFromEventType);
+			int defaultCategoryColor = Convention.NO_COLOR;
+			if (!useColorFromEventType) {
+				defaultCategoryColor = ThemeAttributes.getColor(context, R.attr.searchCategoriesColor);
+			}
+
+			for (ConventionEvent event : events) {
+				// Count the number of occurrences of each event per type
+				final String categoryName = aggregatedEventTypes == null ? event.getType().getDescription() : aggregatedEventTypes.getForEventType(event.getType());
+				SearchCategory category = CollectionUtils.findFirst(categories, item -> item.getName().equals(categoryName));
 
 				if (category != null) {
 					category.increase();
 				} else {
-					categories.add(new SearchCategory(event.getType().getDescription(), event.getType().getBackgroundColor()));
+					int currCategoryColor = useColorFromEventType ? event.getBackgroundColor() : defaultCategoryColor;
+					categories.add(new SearchCategory(categoryName, currCategoryColor));
 				}
 			}
 		}
 
-		Collections.sort(categories, new Comparator<SearchCategory>() {
-			@Override
-			public int compare(SearchCategory o1, SearchCategory o2) {
-				return o2.getCount() - o1.getCount();
-			}
-		});
+		// Ensure the result is sorted by occurrences, so the most popular event type is first
+		Collections.sort(categories, (category1, category2) -> category2.getCount() - category1.getCount());
 
 		return categories;
 	}
@@ -625,36 +631,7 @@ public abstract class Convention implements Serializable {
 	}
 
 	public List<SearchCategory> getAggregatedEventTypesSearchCategories(Context context) {
-		List<SearchCategory> categories = new LinkedList<>();
-		final AggregatedEventTypes aggregatedEventTypes = new AggregatedEventTypes();
-		if (events != null) {
-			for (ConventionEvent event : events) {
-				// Count the number of occurrences of each event per type
-				final String aggregatedEventType = aggregatedEventTypes.getForEventType(event.getType());
-				SearchCategory category = CollectionUtils.findFirst(categories, new CollectionUtils.Predicate<SearchCategory>() {
-					@Override
-					public boolean where(SearchCategory item) {
-						return item.getName().equals(aggregatedEventType);
-					}
-				});
-
-				if (category != null) {
-					category.increase();
-				} else {
-					categories.add(new SearchCategory(aggregatedEventType, event.getBackgroundColor(context)));
-				}
-			}
-		}
-
-		// Ensure the result is sorted by occurrences, so the most popular event type is first
-		Collections.sort(categories, new Comparator<SearchCategory>() {
-			@Override
-			public int compare(SearchCategory category1, SearchCategory category2) {
-				return category2.getCount() - category1.getCount();
-			}
-		});
-
-		return categories;
+		return getEventTypesSearchCategories(context, new AggregatedEventTypes());
 	}
 
 	public Date getNewestUpdateTime() {

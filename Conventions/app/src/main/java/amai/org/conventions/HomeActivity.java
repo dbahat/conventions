@@ -58,7 +58,7 @@ public class HomeActivity extends NavigationActivity {
 		super.onResume();
 
 		currentFavoriteEvent = getCurrentFavoriteEvent();
-		setContentInContentContainer(ThemeAttributes.getResourceId(this, R.attr.homeActivityLayout), false, false);
+		setContentInContentContainer(R.layout.activity_home, false, false);
 		setBackground(ThemeAttributes.getDrawable(this, R.attr.homeBackground));
 
 		// Creating the page layout during onResume (and not onCreate) since the layout is time-driven,

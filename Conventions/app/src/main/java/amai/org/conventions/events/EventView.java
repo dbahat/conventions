@@ -26,7 +26,8 @@ import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.networking.AmaiModelConverter;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Strings;
-
+import androidx.annotation.AttrRes;
+import androidx.annotation.ColorInt;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
@@ -45,13 +46,13 @@ public class EventView extends FrameLayout {
     private final ViewGroup eventContainer;
     private final View eventMainTouchArea;
     private final View bottomLayout;
+    private TextView conflictingEventLabel;
 
     // Used for keyword highlighting - see setKeywordsHighlighting
     private final View searchDescriptionContainer;
     private final TextView searchDescription;
     private String eventDescriptionContent;
 
-    private TextView conflictingEventLabel;
 
     public EventView(Context context) {
         this(context, null);
@@ -120,56 +121,102 @@ public class EventView extends FrameLayout {
         }
     }
 
+    private @ColorInt int getColorFromTheme(ConventionEvent event, @AttrRes int attrNotStarted, @AttrRes int attrCurrent, @AttrRes int attrEnded) {
+        @ColorInt int color;
+        if (!event.hasStarted()) {
+            color = ThemeAttributes.getColor(getContext(), attrNotStarted);
+        } else if (event.hasEnded()) {
+            color = ThemeAttributes.getColor(getContext(), attrEnded);
+        } else {
+            color = ThemeAttributes.getColor(getContext(), attrCurrent);
+        }
+        return color;
+    }
+
+    private int getEventNameColor(ConventionEvent event) {
+        int eventNameColor = Convention.NO_COLOR;
+        if (ThemeAttributes.getBoolean(getContext(), R.attr.useEventTextColorFromEventType)) {
+            eventNameColor = event.getBackgroundColor();
+        }
+        if (eventNameColor == Convention.NO_COLOR) {
+            eventNameColor = getColorFromTheme(event, R.attr.eventNotStartedTextColor, R.attr.eventCurrentTextColor, R.attr.eventEndedTextColor);
+        }
+        return eventNameColor;
+    }
+
     private void setColorsFromEvent(ConventionEvent event) {
-		int eventTypeColor = event.getBackgroundColor(getContext());
-		setEventTypeBackground(event.getEventTimeBackground(getContext()));
-
-		int eventNameColor;
-		if (!event.hasStarted()) {
-			eventNameColor = ThemeAttributes.getColor(getContext(), R.attr.eventTypeNotStartedColor);
-			setEventBackgroundColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeNotStartedBackgroundColor));
-		} else if (event.hasEnded()) {
-			eventNameColor = ThemeAttributes.getColor(getContext(), R.attr.eventTypeEndedColor);
-			setEventBackgroundColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeEndedBackgroundColor));
-		} else {
-			eventNameColor = ThemeAttributes.getColor(getContext(), R.attr.eventTypeCurrentColor);
-			setEventBackgroundColor(ThemeAttributes.getColor(getContext(), R.attr.eventTypeCurrentBackgroundColor));
-		}
-
-		// If no color is specified for the event name, use the same color from the event type
-		if (eventNameColor == Convention.NO_COLOR) {
-			eventNameColor = eventTypeColor;
-		}
-
-		setEventNameColor(eventNameColor);
-		setEventTimeTextColor(event.getEventTimeTextColor(getContext()), eventNameColor);
+        setEventNameColor(getEventNameColor(event));
         setEventDetailsColor(getEventDetailsColor(event));
+
+        int eventBackgroundColor = getColorFromTheme(event, R.attr.eventTypeNotStartedBackgroundColor, R.attr.eventTypeCurrentBackgroundColor, R.attr.eventTypeEndedBackgroundColor);
+        setEventBackgroundColor(eventBackgroundColor);
+
+        setEventTimeBackground(getEventTimeBackground(event));
+        setEventTimeTextColor(getEventTimeTextColor(event));
+    }
+
+    public int getEventTimeTextColor(ConventionEvent event) {
+        int textColor = Convention.NO_COLOR;
+        if (ThemeAttributes.getBoolean(getContext(), R.attr.useEventTimeColorFromEventType)) {
+            textColor = event.getTextColor();
+        }
+
+        if (textColor == Convention.NO_COLOR) {
+            List<ConventionEvent.EventLocationType> eventLocationTypes = Convention.getInstance().getEventLocationTypes(event);
+            if (eventLocationTypes != null && eventLocationTypes.size() > 0 && eventLocationTypes.get(0) == ConventionEvent.EventLocationType.VIRTUAL) {
+                textColor = ThemeAttributes.getColor(getContext(), R.attr.eventTimeVirtualTextColor);
+            } else {
+                textColor = ThemeAttributes.getColor(getContext(), R.attr.eventTimeDefaultTextColor);
+            }
+        }
+
+        return textColor;
+    }
+
+    private int getEventTimeBackground(ConventionEvent event) {
+        int color = Convention.NO_COLOR;
+        if (ThemeAttributes.getBoolean(getContext(), R.attr.useEventTimeColorFromEventType)) {
+            color = event.getBackgroundColor();
+        }
+
+        if (color == Convention.NO_COLOR) {
+            if (!event.hasStarted()) {
+                color = ThemeAttributes.getColor(getContext(), R.attr.eventTimeNotStartedBackground);
+            } else if (event.hasEnded()) {
+                color = ThemeAttributes.getColor(getContext(), R.attr.eventTimeEndedBackground);
+            } else {
+                color = ThemeAttributes.getColor(getContext(), R.attr.eventTimeCurrentBackground);
+            }
+        }
+
+        if (color == Convention.NO_COLOR) {
+            List<ConventionEvent.EventLocationType> eventLocationTypes = Convention.getInstance().getEventLocationTypes(event);
+            if (eventLocationTypes != null && eventLocationTypes.size() > 0 && eventLocationTypes.get(0) == ConventionEvent.EventLocationType.VIRTUAL) {
+                color = ThemeAttributes.getColor(getContext(), R.attr.eventTimeVirtualBackgroundColor);
+            } else {
+                color = ThemeAttributes.getColor(getContext(), R.attr.eventTimeDefaultBackgroundColor);
+            }
+        }
+
+        return color;
     }
 
     private int getEventDetailsColor(ConventionEvent event) {
-        int eventDetailsColor;
-        if (!event.hasStarted()) {
-            eventDetailsColor = ThemeAttributes.getColor(getContext(), R.attr.eventDetailsColorNotStarted);
-        } else if (event.hasEnded()) {
-            eventDetailsColor = ThemeAttributes.getColor(getContext(), R.attr.eventDetailsColorEnded);
-        } else {
-            eventDetailsColor = ThemeAttributes.getColor(getContext(), R.attr.eventDetailsColorCurrent);
+        int eventDetailsColor = Convention.NO_COLOR;
+        if (ThemeAttributes.getBoolean(getContext(), R.attr.useEventTextColorFromEventType)) {
+            eventDetailsColor = event.getBackgroundColor();
         }
-        // If no color is specified, use the same color from the event type
         if (eventDetailsColor == Convention.NO_COLOR) {
-            eventDetailsColor = event.getBackgroundColor(getContext());
+            eventDetailsColor = getColorFromTheme(event, R.attr.eventDetailsColorNotStarted, R.attr.eventDetailsColorCurrent, R.attr.eventDetailsColorEnded);
         }
         return eventDetailsColor;
     }
 
-	public void setEventTypeBackground(int color) {
+	public void setEventTimeBackground(int color) {
         timeLayout.setCardBackgroundColor(color);
 	}
 
-	public void setEventTimeTextColor(int color, int defaultColor) {
-		if (color == Convention.NO_COLOR) {
-			color = defaultColor;
-		}
+	public void setEventTimeTextColor(int color) {
 		startTime.setTextColor(color);
 		timeBoxTo.setTextColor(color);
 		endTime.setTextColor(color);
@@ -194,12 +241,11 @@ public class EventView extends FrameLayout {
     }
 
 	public void setAttending(boolean isAttending) {
-        Drawable attendingDrawable = ThemeAttributes.getDrawable(getContext(), R.attr.eventFavoriteColor);
-        Drawable notAttendingDrawable = ThemeAttributes.getDrawable(getContext(), R.attr.eventNonFavoriteColor);
+        Drawable currentStateDrawable = isAttending ?
+            ThemeAttributes.getDrawable(getContext(), R.attr.eventFavoriteColor) :
+            ThemeAttributes.getDrawable(getContext(), R.attr.eventNonFavoriteColor);
 
-        Drawable currentStateDrawable = isAttending ? attendingDrawable : notAttendingDrawable;
-
-        if (attendingDrawable instanceof ColorDrawable) {
+        if (currentStateDrawable instanceof ColorDrawable) {
             favoriteIcon.setImageDrawable(ThemeAttributes.getDrawable(getContext(), R.attr.eventFavoriteIcon));
             favoriteIcon.setColorFilter(((ColorDrawable) currentStateDrawable).getColor(), PorterDuff.Mode.SRC_ATOP);
         } else {
@@ -256,25 +302,28 @@ public class EventView extends FrameLayout {
 			FeedbackQuestion.DrawableAnswer weightedRating = feedback.getWeightedRating();
             int filterColor;
             if (weightedRating != null) {
+                // Feedback was sent and has smiley answer
                 icon = ContextCompat.getDrawable(getContext(), weightedRating.getImageResourceId());
                 filterColor = ThemeAttributes.getColor(getContext(), R.attr.eventRatingColor);
-            } else if ((!feedback.isSent()) && feedback.hasAnsweredQuestions() &&
-                    !Convention.getInstance().isFeedbackSendingTimeOver()) {
-                icon = ContextCompat.getDrawable(getContext(), android.R.drawable.ic_dialog_email);
-                filterColor = ThemeAttributes.getColor(getContext(), R.attr.eventSendFeedbackColor);
+            } else if (feedback.isSent()) {
+                // Feedback was sent and has no smiley answer
+                icon = ContextCompat.getDrawable(getContext(), R.drawable.feedback_sent);
+                filterColor = ThemeAttributes.getColor(getContext(), R.attr.eventSentFeedbackColor);
             } else {
-                icon = ContextCompat.getDrawable(getContext(), R.drawable.feedback);
-                // If the user sent the feedback but it did not fill any smiley questions, there won't
-                // be a weighted rating
-                if (feedback.isSent()) {
-                    icon = ContextCompat.getDrawable(getContext(), R.drawable.feedback_sent);
-                    filterColor = ThemeAttributes.getColor(getContext(), R.attr.eventSentFeedbackColor);
-                } else if (event.isAttending() || feedback.hasAnsweredQuestions()) {
+                if (feedback.hasAnsweredQuestions()) {
+                    icon = ContextCompat.getDrawable(getContext(), android.R.drawable.ic_dialog_email);
+                } else {
+                    icon = ContextCompat.getDrawable(getContext(), R.drawable.feedback);
+                }
+
+                if (!Convention.getInstance().isFeedbackSendingTimeOver() && (feedback.hasAnsweredQuestions() || event.isAttending())) {
+                    // Feedback was filled and not sent or user attended (and feedback can still be sent)
                     filterColor = ThemeAttributes.getColor(getContext(), R.attr.eventSendFeedbackColor);
                 } else {
-                    int feedbackColorOverride = ThemeAttributes.getColor(getContext(), R.attr.eventFeedbackColorOverride);
-                    if (feedbackColorOverride != AmaiModelConverter.NO_COLOR) {
-                        filterColor = feedbackColorOverride;
+                    // Feedback cannot be sent / user didn't attend or fill feedback
+                    int feedbackColor = ThemeAttributes.getColor(getContext(), R.attr.eventFeedbackColor);
+                    if (feedbackColor != AmaiModelConverter.NO_COLOR) {
+                        filterColor = feedbackColor;
                     } else {
                         filterColor = getEventDetailsColor(event);
                     }
@@ -322,6 +371,14 @@ public class EventView extends FrameLayout {
                         tryHighlightKeywordInTextView(searchDescription, lowerCaseKeyword, eventHighlightColor);
                     }
                 }
+            }
+        }
+
+        // Fix bottom layout visibility. In the convention_event layout, it can't be GONE because it will mess up the favorite icon alignment.
+        if (bottomLayout.getVisibility() == GONE) {
+            int eventViewLayout = ThemeAttributes.getResourceId(getContext(), R.attr.eventViewLayout);
+            if (eventViewLayout == R.layout.convention_event) {
+                bottomLayout.setVisibility(INVISIBLE);
             }
         }
     }
