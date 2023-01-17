@@ -14,6 +14,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -81,32 +82,25 @@ public class UpdatesRefresher {
 			@Override
 			protected Integer doInBackground(Void... voids) {
 				try {
-					URL updatesURL = getUpdatesURL();
-					Log.i(TAG, "Fetching updates using URL: " + updatesURL);
-					HttpURLConnection request = HttpConnectionCreator.createConnection(updatesURL);
-					request.connect();
-					try (InputStreamReader reader = new InputStreamReader((InputStream) request.getContent())) {
-						List<Update> updatesFromResponse = parseUpdates(reader);
-						int newUpdatesNumber = 0;
-						for (Update responseUpdate : updatesFromResponse) {
-							Update currentUpdate = Convention.getInstance().getUpdate(responseUpdate.getId());
-							if (currentUpdate == null) {
-								++newUpdatesNumber;
-							} else {
-								responseUpdate.setIsNew(currentUpdate.isNew());
-							}
+					List<Update> updatesFromResponse = getUpdatesFromServer();
+
+					int newUpdatesNumber = 0;
+					for (Update responseUpdate : updatesFromResponse) {
+						Update currentUpdate = Convention.getInstance().getUpdate(responseUpdate.getId());
+						if (currentUpdate == null) {
+							++newUpdatesNumber;
+						} else {
+							responseUpdate.setIsNew(currentUpdate.isNew());
 						}
-						// Update the model, so next time we can read them from cache.
-						Convention.getInstance().addUpdates(updatesFromResponse,
-								// Since facebook has a unique ID per event, we can perform an incremental model update
-								false);
-						Convention.getInstance().getStorage().saveUpdates();
-						ConventionsApplication.settings.setLastUpdatesUpdatedDate();
-						isRefreshInProgress = false;
-						return newUpdatesNumber;
-					} finally {
-						request.disconnect();
 					}
+					// Update the model, so next time we can read them from cache.
+					Convention.getInstance().addUpdates(updatesFromResponse,
+						// Since facebook has a unique ID per event, we can perform an incremental model update
+						false);
+					Convention.getInstance().getStorage().saveUpdates();
+					ConventionsApplication.settings.setLastUpdatesUpdatedDate();
+					isRefreshInProgress = false;
+					return newUpdatesNumber;
 				} catch (IOException e) {
 					exception = e;
 					Log.i(TAG, "Could not retrieve updates due to IOException: " + e.getMessage());
@@ -119,27 +113,6 @@ public class UpdatesRefresher {
 				return -1;
 			}
 
-            private URL getUpdatesURL() {
-				Date newestUpdateTime = Convention.getInstance().getNewestUpdateTime();
-				if (newestUpdateTime == null) {
-					return Convention.getInstance().getUpdatesURL();
-				}
-
-				// Get all the new updates and the updates from 2 days before the last time in case an older post
-				// was updated. The Facebook Graph API since parameter receives unix epoch time which is the number
-				// of seconds instead of milliseconds.
-				long timeToUpdateSince = (newestUpdateTime.getTime() / 1000) - (2 * 24 * 60 * 60);
-                try {
-                    return new URL(Uri.parse(Convention.getInstance().getUpdatesURL().toString())
-                            .buildUpon()
-                            .appendQueryParameter("since", String.valueOf(timeToUpdateSince))
-                            .build()
-                    .toString());
-                } catch (MalformedURLException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-
             @Override
 			protected void onPostExecute(Integer newUpdatesNumber) {
 				if (exception == null) {
@@ -149,6 +122,39 @@ public class UpdatesRefresher {
 				}
 			}
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	protected List<Update> getUpdatesFromServer() throws Exception {
+		URL updatesURL = getUpdatesURL();
+		Log.i(TAG, "Fetching updates using URL: " + updatesURL);
+		HttpURLConnection request = HttpConnectionCreator.createConnection(updatesURL);
+		request.connect();
+		try (InputStreamReader reader = new InputStreamReader((InputStream) request.getContent())) {
+			return parseUpdates(reader);
+		} finally {
+			request.disconnect();
+		}
+	}
+
+	private URL getUpdatesURL() {
+		Date newestUpdateTime = Convention.getInstance().getNewestUpdateTime();
+		if (newestUpdateTime == null) {
+			return Convention.getInstance().getUpdatesURL();
+		}
+
+		// Get all the new updates and the updates from 2 days before the last time in case an older post
+		// was updated. The Facebook Graph API since parameter receives unix epoch time which is the number
+		// of seconds instead of milliseconds.
+		long timeToUpdateSince = (newestUpdateTime.getTime() / 1000) - (2 * 24 * 60 * 60);
+		try {
+			return new URL(Uri.parse(Convention.getInstance().getUpdatesURL().toString())
+				.buildUpon()
+				.appendQueryParameter("since", String.valueOf(timeToUpdateSince))
+				.build()
+				.toString());
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	public boolean shouldEnableNotificationAfterUpdate() {
@@ -213,6 +219,21 @@ public class UpdatesRefresher {
 		public UpdateDto setCreatedTime(Date createdTime) {
 			this.createdTime = createdTime;
 			return this;
+		}
+	}
+	private static class MockUpdatesRefresher extends UpdatesRefresher {
+		private MockUpdatesRefresher(Context context) {
+			super(context);
+		}
+
+		@Override
+		protected List<Update> getUpdatesFromServer() throws Exception {
+			return Arrays.asList(
+				// To use this mock, change the initialization of the UpdatesRefresher
+				// instance to MockUpdatesRefresher.
+				// Add mock updates / extra logic here (you can keep a state since
+				// this is a singleton).
+			);
 		}
 	}
 }
