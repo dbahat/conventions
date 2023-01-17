@@ -2,7 +2,7 @@
 <inset xmlns:android="http://schemas.android.com/apk/res/android"
     android:insetLeft="0dp" android:insetRight="0dp">
     <shape android:shape="rectangle">
-        <size android:height="@dimen/event_divider_height"/>
+        <size android:height="?eventListDividerHeight"/>
         <solid android:color="@android:color/transparent"/>
     </shape>
 </inset>

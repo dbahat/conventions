@@ -87,23 +87,25 @@
         <!-- Event View -->
         <item name="eventViewLayout">@layout/rounded_convention_event</item>
         <item name="eventViewHeight">96dp</item>
-        <item name="eventTypeEndedColor">@color/harucon2022_dark_red</item>
+        <item name="eventEndedTextColor">@color/harucon2022_dark_red</item>
         <item name="eventTypeEndedBackgroundColor">@color/harucon2022_dark_blue</item>
-        <item name="eventTypeCurrentColor">@color/harucon2022_dark_blue</item>
+        <item name="eventCurrentTextColor">@color/harucon2022_dark_blue</item>
         <item name="eventTypeCurrentBackgroundColor">@color/harucon2022_dark_red</item>
-        <item name="eventTypeNotStartedColor">@color/harucon2022_dark_blue</item>
+        <item name="eventNotStartedTextColor">@color/harucon2022_dark_blue</item>
         <item name="eventNameKeywordHighlightColor">@color/harucon2022_light_yellow</item>
         <item name="eventKeywordHighlightColor">@color/harucon2022_light_yellow</item>
         <item name="eventTimeDefaultTextColor">@color/harucon2022_light_yellow</item>
         <item name="eventTimeDefaultBackgroundColor">@color/harucon2022_dark_blue</item>
-        <item name="eventDetailsColorEnded">?eventTypeEndedColor</item>
-        <item name="eventDetailsColorCurrent">?eventTypeCurrentColor</item>
-        <item name="eventDetailsColorNotStarted">?eventTypeNotStartedColor</item>
+        <item name="eventDetailsColorEnded">?eventEndedTextColor</item>
+        <item name="eventDetailsColorCurrent">?eventCurrentTextColor</item>
+        <item name="eventDetailsColorNotStarted">?eventNotStartedTextColor</item>
         <item name="eventSendFeedbackColor">@color/harucon2022_light_yellow</item>
         <item name="eventSentFeedbackColor">@color/harucon2022_light_yellow</item>
         <item name="eventNonFavoriteColor">@drawable/harucon2023_favorite_empty</item>
         <item name="eventFavoriteColor">@drawable/harucon2023_favorite_full</item>
         <item name="eventAlertsIconColor">@color/harucon2022_light_yellow</item>
+        <item name="useEventTextColorFromEventType">false</item>
+        <item name="useEventTimeColorFromEventType">true</item>
         <item name="conflictingEventTextColor">@color/harucon2023_red</item>
         <item name="conflictingEventBackground">@drawable/harucon2023_conflicting_event_label_bg</item>
         <!-- Programme Screen -->
@@ -122,7 +124,6 @@
         <item name="conflictingEventsBackground">@null</item>
         <item name="nextEventStartTimeBottomLineColor">@color/harucon2022_light_yellow</item>
         <!-- Feedback Screen -->
-        <item name="progressBarDrawable">@drawable/harucon2022_rotating_circular_progress_bar</item>
         <item name="conventionFeedbackTextColor">@color/harucon2022_dark_blue</item>
         <item name="feedbackAnswerButtonColor">@color/harucon2022_purple</item>
         <item name="feedbackAnswerButtonSelectedColor">@color/harucon2022_light_yellow</item>
@@ -133,6 +134,7 @@
         <item name="feedbackMultiAnswerPaddingStartFirstAnswer">9dp</item>
         <item name="feedbackMultiAnswerMarginTopBottom">2dp</item>
         <item name="feedbackMultiAnswerMarginBetweenAnswers">9dp</item>
+        <item name="feedbackProgressBarColor">@color/harucon2022_pink</item>
         <!-- Updates Screen -->
         <item name="updateTimeColor">@android:color/transparent</item>
         <item name="updateTimeBackground">@null</item>
