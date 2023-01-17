@@ -14,6 +14,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.ParseException;
+import java.util.Arrays;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
@@ -81,34 +82,23 @@ public class UpdatesRefresher {
 			@Override
 			protected Integer doInBackground(Void... voids) {
 				try {
-					URL updatesURL = getUpdatesURL();
-					HttpURLConnection request = HttpConnectionCreator.createConnection(updatesURL);
-					request.connect();
-					InputStreamReader reader = null;
-					try {
-						reader = new InputStreamReader((InputStream) request.getContent());
-						List<Update> updatesFromResponse = parseUpdates(reader);
-						int newUpdatesNumber = 0;
-						for (Update responseUpdate : updatesFromResponse) {
-							Update currentUpdate = Convention.getInstance().getUpdate(responseUpdate.getId());
-							if (currentUpdate == null) {
-								++newUpdatesNumber;
-							} else  {
-								responseUpdate.setIsNew(currentUpdate.isNew());
-							}
+					List<Update> updatesFromResponse = getUpdatesFromServer();
+
+					int newUpdatesNumber = 0;
+					for (Update responseUpdate : updatesFromResponse) {
+						Update currentUpdate = Convention.getInstance().getUpdate(responseUpdate.getId());
+						if (currentUpdate == null) {
+							++newUpdatesNumber;
+						} else  {
+							responseUpdate.setIsNew(currentUpdate.isNew());
 						}
-						// Update the model, so next time we can read them from cache.
-						Convention.getInstance().addUpdates(updatesFromResponse, true);
-						Convention.getInstance().getStorage().saveUpdates();
-						ConventionsApplication.settings.setLastUpdatesUpdatedDate();
-						isRefreshInProgress = false;
-						return newUpdatesNumber;
-					} finally {
-						if (reader != null) {
-							reader.close();
-						}
-						request.disconnect();
 					}
+					// Update the model, so next time we can read them from cache.
+					Convention.getInstance().addUpdates(updatesFromResponse, true);
+					Convention.getInstance().getStorage().saveUpdates();
+					ConventionsApplication.settings.setLastUpdatesUpdatedDate();
+					isRefreshInProgress = false;
+					return newUpdatesNumber;
 				} catch (IOException e) {
 					exception = e;
 					Log.i(TAG, "Could not retrieve updates due to IOException: " + e.getMessage());
@@ -121,11 +111,7 @@ public class UpdatesRefresher {
 				return -1;
 			}
 
-			private URL getUpdatesURL() {
-				return Convention.getInstance().getUpdatesURL();
-			}
-
-			@Override
+            @Override
 			protected void onPostExecute(Integer newUpdatesNumber) {
 				if (exception == null) {
 					listener.onSuccess(newUpdatesNumber);
@@ -134,6 +120,22 @@ public class UpdatesRefresher {
 				}
 			}
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	protected List<Update> getUpdatesFromServer() throws Exception {
+		URL updatesURL = getUpdatesURL();
+		Log.i(TAG, "Fetching updates using URL: " + updatesURL);
+		HttpURLConnection request = HttpConnectionCreator.createConnection(updatesURL);
+		request.connect();
+		try (InputStreamReader reader = new InputStreamReader((InputStream) request.getContent())) {
+			return parseUpdates(reader);
+		} finally {
+			request.disconnect();
+		}
+	}
+
+	private URL getUpdatesURL() {
+		return Convention.getInstance().getUpdatesURL();
 	}
 
 	public boolean shouldEnableNotificationAfterUpdate() {
@@ -165,5 +167,20 @@ public class UpdatesRefresher {
 		}
 
 		return updates;
+	}
+	private static class MockUpdatesRefresher extends UpdatesRefresher {
+		private MockUpdatesRefresher(Context context) {
+			super(context);
+		}
+
+		@Override
+		protected List<Update> getUpdatesFromServer() throws Exception {
+			return Arrays.asList(
+				// To use this mock, change the initialization of the UpdatesRefresher
+				// instance to MockUpdatesRefresher.
+				// Add mock updates / extra logic here (you can keep a state since
+				// this is a singleton).
+			);
+		}
 	}
 }
