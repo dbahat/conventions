@@ -48,9 +48,9 @@
         <item name="eventTimeHeaderMarginBottom">0dp</item>
         <item name="eventTimeHeaderPaddingHorizontal">30dp</item>
         <item name="eventTimeHeaderPaddingVertical">5dp</item>
-        <item name="eventTypeEndedColor">@color/gray</item>
-        <item name="eventTypeCurrentColor">@color/light_yellow</item>
-        <item name="eventTypeNotStartedColor">@color/white</item>
+        <item name="eventEndedTextColor">@color/gray</item>
+        <item name="eventCurrentTextColor">@color/light_yellow</item>
+        <item name="eventNotStartedTextColor">@color/white</item>
         <item name="eventTypeEndedBackgroundColor">@null</item>
         <item name="eventTypeCurrentBackgroundColor">@null</item>
         <item name="eventTypeNotStartedBackgroundColor">@null</item>
@@ -60,14 +60,18 @@
         <item name="eventTimeEndedBackground">@android:color/transparent</item>
         <item name="eventTimeVirtualTextColor">?eventTimeDefaultTextColor</item>
         <item name="eventTimeVirtualBackgroundColor">?eventTimeDefaultBackgroundColor</item>
-        <item name="eventTimeAlwaysUseDefaultBackgroundColor">false</item>
         <item name="eventSendFeedbackColor">@color/green</item>
         <item name="eventSentFeedbackColor">@color/yellow</item>
-        <item name="eventFeedbackColorOverride">@android:color/transparent</item>
+        <item name="eventFeedbackColor">@android:color/transparent</item>
         <item name="eventFavoriteIcon">@drawable/ic_star_black_24dp</item>
         <item name="eventAlertsIcon">@drawable/ic_action_alarms</item>
         <item name="eventAlertsIconColor">?eventFavoriteColor</item>
         <item name="eventRatingColor">@color/yellow</item>
+        <item name="conflictingEventListDivider">?eventListDivider</item>
+        <item name="useEventTextColorFromEventType">false</item>
+        <item name="useEventTimeColorFromEventType">false</item>
+        <item name="eventListDividerHeight">1dp</item>
+        <item name="conflictingEventListDividerHeight">?eventListDividerHeight</item>
 
         <!-- Navigation popup -->
         <item name="navigationPopupSeparatorColor">?navigationPopupNotSelectedColor</item>
@@ -83,7 +87,6 @@
         <item name="navigationPopupItemPaddingBottom">4dp</item>
 
         <!-- Home -->
-        <item name="homeActivityLayout">@layout/activity_home</item>
         <item name="homeToolbarBackground">?toolbarBackground</item>
         <item name="homeBoxTopMargin">0dp</item>
         <item name="homeEventsMargin">?homeBoxTopMargin</item>
@@ -108,15 +111,18 @@
         <item name="homeUpcomingPadding">5dp</item>
         <item name="homeUpcomingPaddingTop">8dp</item>
         <item name="homeUpcomingMarginBottom">8dp</item>
+        <item name="homeEventListDividerHeight">?eventListDividerHeight</item>
+        <item name="homeEventsListTitleSize">20sp</item>
 
         <!-- About -->
         <item name="aboutLogoMargins">36dp</item>
 
         <!-- Updates -->
         <item name="updatesBackgroundDrawable">?activitiesBackground</item>
-        <item name="updatesBackground">?android:colorBackground</item>
+        <item name="updatesBackgroundColor">?android:colorBackground</item>
         <item name="updatesSeparatorColor">?separatorColor</item>
         <item name="updateItemSeparator">?separatorColor</item>
+        <item name="updateBackgroundColor">?updatesBackgroundColor</item>
         <item name="updateTextColor">?android:textColorPrimary</item>
         <item name="newUpdateTextColor">?android:textColorPrimary</item>
         <item name="focusedUpdateTextColor">?android:textColorPrimary</item>
@@ -165,6 +171,7 @@
         <item name="feedbackMultiAnswerPaddingStartFirstAnswer">0dp</item>
         <item name="feedbackMultiAnswerMarginTopBottom">0dp</item>
         <item name="feedbackMultiAnswerMarginBetweenAnswers">0dp</item>
+        <item name="progressBarDrawable">@drawable/rotating_circular_progress_bar</item>
 
         <!-- Second Hand activity -->
         <item name="secondHandFormOpenColor">?eventTypeNotStartedColor</item>
@@ -240,9 +247,9 @@
         <item name="eventTimeHeaderMarginBottom">0dp</item>
         <item name="eventTimeHeaderPaddingHorizontal">30dp</item>
         <item name="eventTimeHeaderPaddingVertical">5dp</item>
-        <item name="eventTypeEndedColor">@color/gray</item>
-        <item name="eventTypeCurrentColor">@color/light_yellow</item>
-        <item name="eventTypeNotStartedColor">@color/white</item>
+        <item name="eventEndedTextColor">@color/gray</item>
+        <item name="eventCurrentTextColor">@color/light_yellow</item>
+        <item name="eventNotStartedTextColor">@color/white</item>
         <item name="eventTypeEndedBackgroundColor">@null</item>
         <item name="eventTypeCurrentBackgroundColor">@null</item>
         <item name="eventTypeNotStartedBackgroundColor">@null</item>
@@ -252,14 +259,18 @@
         <item name="eventTimeEndedBackground">@null</item>
         <item name="eventTimeVirtualTextColor">?eventTimeDefaultTextColor</item>
         <item name="eventTimeVirtualBackgroundColor">?eventTimeDefaultBackgroundColor</item>
-        <item name="eventTimeAlwaysUseDefaultBackgroundColor">false</item>
         <item name="eventSendFeedbackColor">@color/green</item>
         <item name="eventSentFeedbackColor">@color/yellow</item>
-        <item name="eventFeedbackColorOverride">@android:color/transparent</item>
+        <item name="eventFeedbackColor">@android:color/transparent</item>
         <item name="eventFavoriteIcon">@drawable/ic_star_black_24dp</item>
         <item name="eventAlertsIcon">@drawable/ic_action_alarms</item>
         <item name="eventAlertsIconColor">?eventFavoriteColor</item>
         <item name="eventRatingColor">@color/yellow</item>
+        <item name="conflictingEventListDivider">?eventListDivider</item>
+        <item name="useEventTextColorFromEventType">false</item>
+        <item name="useEventTimeColorFromEventType">false</item>
+        <item name="eventListDividerHeight">1dp</item>
+        <item name="conflictingEventListDividerHeight">?eventListDividerHeight</item>
 
         <!-- Navigation popup -->
         <item name="navigationPopupSeparatorColor">?navigationPopupNotSelectedColor</item>
@@ -275,7 +286,6 @@
         <item name="navigationPopupItemPaddingBottom">4dp</item>
 
         <!-- Home -->
-        <item name="homeActivityLayout">@layout/activity_home</item>
         <item name="homeToolbarBackground">?toolbarBackground</item>
         <item name="homeBoxTopMargin">0dp</item>
         <item name="homeEventsMargin">?homeBoxTopMargin</item>
@@ -300,15 +310,18 @@
         <item name="homeUpcomingPadding">5dp</item>
         <item name="homeUpcomingPaddingTop">8dp</item>
         <item name="homeUpcomingMarginBottom">8dp</item>
+        <item name="homeEventListDividerHeight">?eventListDividerHeight</item>
+        <item name="homeEventsListTitleSize">20sp</item>
 
         <!-- About -->
         <item name="aboutLogoMargins">36dp</item>
 
         <!-- Updates -->
         <item name="updatesBackgroundDrawable">?activitiesBackground</item>
-        <item name="updatesBackground">?android:colorBackground</item>
+        <item name="updatesBackgroundColor">?android:colorBackground</item>
         <item name="updatesSeparatorColor">?separatorColor</item>
         <item name="updateItemSeparator">?separatorColor</item>
+        <item name="updateBackgroundColor">?updatesBackgroundColor</item>
         <item name="updateTextColor">?android:textColorPrimary</item>
         <item name="newUpdateTextColor">?android:textColorPrimary</item>
         <item name="focusedUpdateTextColor">?android:textColorPrimary</item>
@@ -357,6 +370,7 @@
         <item name="feedbackMultiAnswerPaddingStartFirstAnswer">0dp</item>
         <item name="feedbackMultiAnswerMarginTopBottom">0dp</item>
         <item name="feedbackMultiAnswerMarginBetweenAnswers">0dp</item>
+        <item name="progressBarDrawable">@drawable/rotating_circular_progress_bar</item>
 
         <!-- Second Hand activity -->
         <item name="secondHandFormOpenColor">?eventTypeNotStartedColor</item>

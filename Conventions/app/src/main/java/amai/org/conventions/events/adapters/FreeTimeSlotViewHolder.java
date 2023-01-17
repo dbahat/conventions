@@ -29,11 +29,11 @@ public class FreeTimeSlotViewHolder extends RecyclerView.ViewHolder {
 		// Set color according to started/during/passed
 		int color;
 		if (!startTime.before(Dates.now())) {
-			color = ThemeAttributes.getColor(itemView.getContext(), R.attr.eventTypeNotStartedColor);
+			color = ThemeAttributes.getColor(itemView.getContext(), R.attr.eventNotStartedTextColor);
 		} else if (endTime.before(Dates.now())) {
-			color = ThemeAttributes.getColor(itemView.getContext(), R.attr.eventTypeEndedColor);
+			color = ThemeAttributes.getColor(itemView.getContext(), R.attr.eventEndedTextColor);
 		} else {
-			color = ThemeAttributes.getColor(itemView.getContext(), R.attr.eventTypeCurrentColor);
+			color = ThemeAttributes.getColor(itemView.getContext(), R.attr.eventCurrentTextColor);
 		}
 		if (color == Convention.NO_COLOR) {
 			color = ThemeAttributes.getColor(itemView.getContext(), R.attr.eventTimeHeaderDefaultTextColor);

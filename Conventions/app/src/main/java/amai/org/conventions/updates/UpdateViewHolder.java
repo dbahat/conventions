@@ -55,7 +55,7 @@ public class UpdateViewHolder extends RecyclerView.ViewHolder {
 			backgroundColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.newUpdateBackground);
 			textColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.newUpdateTextColor);
 		} else {
-			backgroundColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.updatesBackground);
+			backgroundColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.updateBackgroundColor);
 			textColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.updateTextColor);
 		}
 		updateContainer.setBackgroundColor(backgroundColor);

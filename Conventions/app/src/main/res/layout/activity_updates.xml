@@ -19,26 +19,25 @@
                 android:orientation="vertical"
                 android:visibility="gone">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="?updatesSeparatorColor"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/updates_list"
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="1dp"
+                    android:background="?updatesSeparatorColor"/>
 
-            </androidx.recyclerview.widget.RecyclerView>
+                <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/updates_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="?attr/updatesBackground"/>
+                    android:background="?attr/updatesBackgroundColor"/>
 
             </LinearLayout>
             <FrameLayout
                 android:id="@+id/no_updates"
-                android:background="?attr/updatesBackground"
+                android:background="?attr/updatesBackgroundColor"
                 android:layout_marginTop="50dp"
                 android:padding="10dp"
                 android:visibility="gone"

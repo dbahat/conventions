@@ -262,7 +262,7 @@ public class EventActivity extends NavigationActivity {
 											updateBackgroundColor(backgroundColor);
 
 										}
-										removeContentContainerBackground();
+										setBackground(null);
 									}
 
 									@Override

@@ -134,7 +134,7 @@
                 <View
                     android:id="@+id/location_events_divider"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/event_divider_height"
+                    android:layout_height="?eventListDividerHeight"
                     android:background="?eventListDivider"/>
 
                 <amai.org.conventions.events.EventView

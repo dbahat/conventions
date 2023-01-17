@@ -106,7 +106,7 @@ public class ConflictingEventsViewHolder extends RecyclerView.ViewHolder {
 					@Override
 					public void run() {
 						int initialHeight = eventsListView.getLayoutParams().height;
-						int targetHeight = getListHeight(eventsListView.getResources(), adapter.getItemCount());
+						int targetHeight = getListHeight(eventsListView.getContext(), adapter.getItemCount());
 
 						Animator animator = getHeightChangeAnimator(eventsListView, initialHeight, targetHeight);
 						animator.setDuration(getMoveDuration()).start();
@@ -140,15 +140,15 @@ public class ConflictingEventsViewHolder extends RecyclerView.ViewHolder {
 
 	private void updateListHeight() {
 		// Set height - must be calculated at runtime since wrap_content does not work for recycler view inside recycler view
-		updateViewHeight(getListHeight(eventsListView.getResources(), adapter.getItemCount()), eventsListView);
+		updateViewHeight(getListHeight(eventsListView.getContext(), adapter.getItemCount()), eventsListView);
 	}
 
-	private int getListHeight(Resources resources, int items) {
-		return (items * eventViewHeight) + (getDividerHeight(resources) * (items > 0 ? items - 1 : 0));
+	private int getListHeight(Context context, int items) {
+		return (items * eventViewHeight) + (getDividerHeight(context) * (items > 0 ? items - 1 : 0));
 	}
 
-	private int getDividerHeight(Resources resources) {
-		return resources.getDimensionPixelSize(R.dimen.event_divider_height);
+	private int getDividerHeight(Context context) {
+		return ThemeAttributes.getDimensionSize(context, R.attr.conflictingEventListDividerHeight);
 	}
 
 	public static interface OnEventListChangedListener {

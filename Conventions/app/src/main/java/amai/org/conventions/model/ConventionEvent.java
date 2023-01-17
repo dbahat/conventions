@@ -27,8 +27,6 @@ import amai.org.conventions.utils.HtmlParser;
 import amai.org.conventions.utils.Objects;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import androidx.core.content.ContextCompat;
-
 import fi.iki.kuitsi.listtest.ListTagHandler;
 import sff.org.conventions.R;
 
@@ -75,15 +73,8 @@ public class ConventionEvent implements Serializable {
 		this.textColor = textColor;
 	}
 
-	public int getEventTimeTextColor(Context context) {
-		if (textColor != Convention.NO_COLOR) {
-			return textColor;
-		}
-		List<EventLocationType> eventLocationTypes = Convention.getInstance().getEventLocationTypes(this);
-		if (eventLocationTypes != null && eventLocationTypes.size() > 0 && eventLocationTypes.get(0) == EventLocationType.VIRTUAL) {
-			return ThemeAttributes.getColor(context, R.attr.eventTimeVirtualTextColor);
-		}
-		return ThemeAttributes.getColor(context, R.attr.eventTimeDefaultTextColor);
+	public int getTextColor() {
+		return textColor;
 	}
 
 	public ConventionEvent withTextColor(int textColor) {
@@ -189,37 +180,11 @@ public class ConventionEvent implements Serializable {
 		return type;
 	}
 
-	public int getBackgroundColor(Context context) {
+	public int getBackgroundColor() {
 		if (backgroundColor != Convention.NO_COLOR) {
 			return backgroundColor;
 		}
-		int eventTypeColor = getType().getBackgroundColor();
-		if (eventTypeColor != Convention.NO_COLOR) {
-			return eventTypeColor;
-		}
-		List<EventLocationType> eventLocationTypes = Convention.getInstance().getEventLocationTypes(this);
-		if (eventLocationTypes != null && eventLocationTypes.size() > 0 && eventLocationTypes.get(0) == EventLocationType.VIRTUAL) {
-			return ThemeAttributes.getColor(context, R.attr.eventTimeVirtualBackgroundColor);
-		}
-		return ThemeAttributes.getColor(context, R.attr.eventTimeDefaultBackgroundColor);
-	}
-
-	public int getEventTimeBackground(Context context) {
-		int colorResourceId;
-		if (!this.hasStarted()) {
-			colorResourceId = R.attr.eventTimeNotStartedBackground;
-		} else if (this.hasEnded()) {
-			colorResourceId = R.attr.eventTimeEndedBackground;
-		} else {
-			colorResourceId = R.attr.eventTimeCurrentBackground;
-		}
-		int color = ThemeAttributes.getColor(context, colorResourceId);
-
-		if (color == ContextCompat.getColor(context, android.R.color.transparent)) {
-			color = getBackgroundColor(context);
-		}
-
-		return color;
+		return getType().getBackgroundColor();
 	}
 
 	public void setType(EventType type) {

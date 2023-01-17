@@ -47,7 +47,7 @@
                     <amai.org.conventions.customviews.NestedListView
                         android:id="@+id/events_without_feedback_list"
                         android:divider="?eventListDivider"
-                        android:dividerHeight="@dimen/event_divider_height"
+                        android:dividerHeight="?eventListDividerHeight"
                         android:animateLayoutChanges="true"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
@@ -138,7 +138,7 @@
             <amai.org.conventions.customviews.NestedListView
                 android:id="@+id/events_with_sent_feedback_list"
                 android:divider="?eventListDivider"
-                android:dividerHeight="@dimen/event_divider_height"
+                android:dividerHeight="?eventListDividerHeight"
                 android:animateLayoutChanges="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>

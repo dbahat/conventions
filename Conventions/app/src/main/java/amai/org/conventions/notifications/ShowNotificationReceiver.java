@@ -272,10 +272,8 @@ public class ShowNotificationReceiver extends BroadcastReceiver {
     }
 
     private NotificationCompat.Builder getDefaultNotificationBuilder(PushNotification.Channel channel) {
-
         return new NotificationCompat.Builder(context, channel.toString())
                 .setSmallIcon(ThemeAttributes.getResourceId(context, R.attr.notificationSmallIcon))
-                .setContentTitle(context.getResources().getString(R.string.notification_event_about_to_start_title))
                 .setAutoCancel(true);
     }
 

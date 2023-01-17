@@ -26,6 +26,8 @@
                 android:maxLines="1"
                 android:inputType="textFilter"
                 android:hint="@string/search_input_search_keyword"
+                android:layout_marginStart="?contentStartMargin"
+                android:layout_marginEnd="0dp"
                 android:layout_alignParentStart="true"
                 android:layout_toStartOf="@+id/search_filter_button"/>
 
@@ -41,16 +43,11 @@
                 android:onClick="onFilterClicked"
                 android:background="@null"
                 android:padding="10dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="?contentEndMargin"
                 tools:ignore="ContentDescription" />
 
         </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?separatorColor"
-            android:layout_marginStart="?contentStartMargin"
-            android:layout_marginEnd="?contentEndMargin"/>
 
         <TextView
             android:id="@+id/search_results_number"
@@ -76,7 +73,7 @@
             android:id="@+id/searchEventsList"
             app:isDrawingListUnderStickyHeader="false"
             android:divider="?eventListDivider"
-            android:dividerHeight="@dimen/event_divider_height"
+            android:dividerHeight="?eventListDividerHeight"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 

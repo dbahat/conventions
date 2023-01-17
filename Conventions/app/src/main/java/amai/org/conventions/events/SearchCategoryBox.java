@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import amai.org.conventions.ThemeAttributes;
+import amai.org.conventions.model.conventions.Convention;
 import androidx.appcompat.widget.AppCompatCheckBox;
 import androidx.core.widget.CompoundButtonCompat;
 import sff.org.conventions.R;
@@ -29,16 +30,7 @@ public class SearchCategoryBox extends LinearLayout {
 
 	public void setSearchCategory(SearchCategory searchCategory) {
 		textView.setText(searchCategory.getName());
-		// Check if searchCategoriesColor is defined. If not, use the color from the event time box.
-		int color = ThemeAttributes.getColor(getContext(), R.attr.searchCategoriesColor);
-		if (color == 0) {
-			boolean alwaysUseDefaultColor = ThemeAttributes.getBoolean(getContext(), R.attr.eventTimeAlwaysUseDefaultBackgroundColor);
-			if (searchCategory.hasColor() && !alwaysUseDefaultColor) {
-				color = searchCategory.getColor();
-			} else {
-				color = ThemeAttributes.getColor(getContext(), R.attr.eventTimeDefaultBackgroundColor);
-			}
-		}
+		int color = searchCategory.getColor();
 		ColorStateList checkboxColors = new ColorStateList(
 			new int[][]{
 				new int[]{-android.R.attr.state_checked},

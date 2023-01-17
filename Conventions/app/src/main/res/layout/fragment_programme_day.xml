@@ -10,7 +10,7 @@
         android:id="@+id/programmeList"
         app:isDrawingListUnderStickyHeader="false"
         android:divider="?eventListDivider"
-        android:dividerHeight="@dimen/event_divider_height"
+        android:dividerHeight="?eventListDividerHeight"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
