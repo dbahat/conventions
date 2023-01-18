@@ -71,7 +71,8 @@ public class EventsViewWithDateHeaderAdapter extends BaseAdapter {
 			if (convertView == null) {
 				convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.small_text_view, parent, false);
 				TextView textView = (TextView) convertView.findViewById(R.id.small_text);
-				textView.setTextColor(ThemeAttributes.getColor(textView.getContext(), R.attr.eventTimeHeaderDefaultTextColor));
+				// Use default color from the color state list
+				textView.setTextColor(ThemeAttributes.getColorFromStateList(textView.getContext(), R.attr.eventTimeHeaderTextColor, new int[0]));
 				((FrameLayout.LayoutParams) textView.getLayoutParams()).gravity = Gravity.CENTER_HORIZONTAL;
 				textView.setLayoutParams(textView.getLayoutParams());
 				holder = new TimeViewHolder(convertView, R.id.small_text);

@@ -84,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="start"
                     android:singleLine="true"
-                    android:textColor="?attr/eventDetailsColorNotStarted"
+                    android:textColor="?attr/eventDetailsColor"
                     tools:ignore="Deprecated"
                     tools:text="Hall name" />
 
@@ -108,7 +108,7 @@
                         android:ellipsize="end"
                         android:gravity="end"
                         android:singleLine="true"
-                        android:textColor="?attr/eventDetailsColorNotStarted"
+                        android:textColor="?attr/eventDetailsColor"
                         tools:ignore="Deprecated"
                         tools:text="Lecturer name" />
 
@@ -168,7 +168,7 @@
                     android:layout_gravity="bottom|start"
                     android:ellipsize="end"
                     android:maxLines="2"
-                    android:textColor="?attr/eventDetailsColorNotStarted"
+                    android:textColor="?attr/eventDetailsColor"
                     tools:text="Event search description which can be fairly long" />
             </FrameLayout>
         </RelativeLayout>

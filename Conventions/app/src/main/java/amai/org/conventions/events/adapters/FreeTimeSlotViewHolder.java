@@ -8,7 +8,6 @@ import java.util.Date;
 
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.activities.EventsTimeSlot;
-import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Dates;
 import sff.org.conventions.R;
 
@@ -27,17 +26,15 @@ public class FreeTimeSlotViewHolder extends RecyclerView.ViewHolder {
 				Dates.toHumanReadableTimeDuration(endTime.getTime() - startTime.getTime())));
 
 		// Set color according to started/during/passed
-		int color;
+		int[] attributes = new int[1];
 		if (!startTime.before(Dates.now())) {
-			color = ThemeAttributes.getColor(itemView.getContext(), R.attr.eventNotStartedTextColor);
+			attributes[0] = R.attr.state_event_not_started;
 		} else if (endTime.before(Dates.now())) {
-			color = ThemeAttributes.getColor(itemView.getContext(), R.attr.eventEndedTextColor);
+			attributes[0] = R.attr.state_event_ended;
 		} else {
-			color = ThemeAttributes.getColor(itemView.getContext(), R.attr.eventCurrentTextColor);
+			attributes[0] = R.attr.state_event_current;
 		}
-		if (color == Convention.NO_COLOR) {
-			color = ThemeAttributes.getColor(itemView.getContext(), R.attr.eventTimeHeaderDefaultTextColor);
-		}
+		int color = ThemeAttributes.getColorFromStateList(itemView.getContext(), R.attr.freeTimeTextColor, attributes);
 		textView.setTextColor(color);
 	}
 }

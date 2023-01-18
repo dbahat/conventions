@@ -104,19 +104,16 @@ public class EventsViewOrHourAdapter extends BaseAdapter implements StickyListHe
 		Calendar endTimeCalendar = Calendar.getInstance();
 		endTimeCalendar.setTimeInMillis(startTime.getTime() + Dates.MILLISECONDS_IN_HOUR);
 		Date endTime = endTimeCalendar.getTime();
-		int color;
 
+		int[] attributes = new int[1];
 		if (!startTime.before(Dates.now())) {
-			color = ThemeAttributes.getColor(holder.itemView.getContext(), R.attr.eventNotStartedTextColor);
+			attributes[0] = R.attr.state_event_not_started;
 		} else if (endTime.before(Dates.now())) {
-			color = ThemeAttributes.getColor(holder.itemView.getContext(), R.attr.eventEndedTextColor);
+			attributes[0] = R.attr.state_event_ended;
 		} else {
-			color = ThemeAttributes.getColor(holder.itemView.getContext(), R.attr.eventCurrentTextColor);
+			attributes[0] = R.attr.state_event_current;
 		}
-		if (color == Convention.NO_COLOR || ThemeAttributes.getBoolean(holder.itemView.getContext(), R.attr.eventTimeHeaderAlwaysUseDefaultTextColor)) {
-			color = ThemeAttributes.getColor(holder.itemView.getContext(), R.attr.eventTimeHeaderDefaultTextColor);
-		}
-		return color;
+		return ThemeAttributes.getColorFromStateList(holder.itemView.getContext(), R.attr.eventTimeHeaderTextColor, attributes);
 	}
 
 	@Override

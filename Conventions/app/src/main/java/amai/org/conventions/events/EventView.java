@@ -15,6 +15,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import amai.org.conventions.ThemeAttributes;
@@ -54,6 +55,7 @@ public class EventView extends FrameLayout {
 	private final TextView searchDescription;
 	private String eventDescriptionContent;
 	private String eventTags;
+    private int[] eventState;
 
 
     public EventView(Context context) {
@@ -90,6 +92,7 @@ public class EventView extends FrameLayout {
 
     public void setEvent(ConventionEvent event, boolean conflicting) {
         if (event != null) {
+            setEventState(event, conflicting);
             setColorsFromEvent(event);
             setAttending(event.isAttending());
             setHallName(event.getHall().getName());
@@ -110,15 +113,6 @@ public class EventView extends FrameLayout {
 	}
 
     private void setConflicting(boolean enabled) {
-        int color = ThemeAttributes.getColor(getContext(), R.attr.conflictingEventTextColor);
-
-        // only altering the colors if conflicting, since setEvent already
-        // set the non-conflict colors before calling this.
-        if (color != Convention.NO_COLOR && enabled) {
-            eventName.setTextColor(color);
-            lecturerName.setTextColor(color);
-            hallName.setTextColor(color);
-        }
         if (conflictingEventLabel != null) {
             conflictingEventLabel.setVisibility(enabled ? VISIBLE : GONE);
         }
@@ -142,7 +136,7 @@ public class EventView extends FrameLayout {
             eventNameColor = event.getBackgroundColor();
         }
         if (eventNameColor == Convention.NO_COLOR) {
-            eventNameColor = getColorFromTheme(event, R.attr.eventNotStartedTextColor, R.attr.eventCurrentTextColor, R.attr.eventEndedTextColor);
+            eventNameColor = getEventColorFromStateList(R.attr.eventTextColor);
         }
         return eventNameColor;
     }
@@ -151,11 +145,46 @@ public class EventView extends FrameLayout {
         setEventNameColor(getEventNameColor(event));
         setEventDetailsColor(getEventDetailsColor(event));
 
-        int eventBackgroundColor = getColorFromTheme(event, R.attr.eventTypeNotStartedBackgroundColor, R.attr.eventTypeCurrentBackgroundColor, R.attr.eventTypeEndedBackgroundColor);
+        int eventBackgroundColor = getEventBackgroundColor();
         setEventBackgroundColor(eventBackgroundColor);
 
         setEventTimeBackground(getEventTimeBackground(event));
         setEventTimeTextColor(getEventTimeTextColor(event));
+    }
+
+    private void setEventState(ConventionEvent event, boolean conflicting) {
+        List<Integer> states = new ArrayList<Integer>(3);
+
+        if (!event.hasStarted()) {
+            states.add(R.attr.state_event_not_started);
+        } else if (event.hasEnded()) {
+            states.add(R.attr.state_event_ended);
+        } else {
+            states.add(R.attr.state_event_current);
+        }
+
+        List<ConventionEvent.EventLocationType> eventLocationTypes = Convention.getInstance().getEventLocationTypes(event);
+        if (eventLocationTypes != null && eventLocationTypes.size() > 0 && eventLocationTypes.get(0) == ConventionEvent.EventLocationType.VIRTUAL) {
+            states.add(R.attr.state_event_virtual);
+        } else {
+            states.add(R.attr.state_event_physical);
+        }
+
+        if (event.isAttending()) {
+            states.add(R.attr.state_event_favorite);
+        }
+
+        if (conflicting) {
+            states.add(R.attr.state_event_conflicting);
+        }
+
+        // Convert to int[]
+        int[] intStates = new int[states.size()];
+        for(int i = 0; i < states.size(); ++i) {
+            intStates[i] = states.get(i);
+        }
+
+        this.eventState = intStates;
     }
 
     public int getEventTimeTextColor(ConventionEvent event) {
@@ -165,12 +194,7 @@ public class EventView extends FrameLayout {
         }
 
         if (textColor == Convention.NO_COLOR) {
-            List<ConventionEvent.EventLocationType> eventLocationTypes = Convention.getInstance().getEventLocationTypes(event);
-            if (eventLocationTypes != null && eventLocationTypes.size() > 0 && eventLocationTypes.get(0) == ConventionEvent.EventLocationType.VIRTUAL) {
-                textColor = ThemeAttributes.getColor(getContext(), R.attr.eventTimeVirtualTextColor);
-            } else {
-                textColor = ThemeAttributes.getColor(getContext(), R.attr.eventTimeDefaultTextColor);
-            }
+            textColor = getEventColorFromStateList(R.attr.eventTimeTextColor);
         }
 
         return textColor;
@@ -183,22 +207,7 @@ public class EventView extends FrameLayout {
         }
 
         if (color == Convention.NO_COLOR) {
-            if (!event.hasStarted()) {
-                color = ThemeAttributes.getColor(getContext(), R.attr.eventTimeNotStartedBackground);
-            } else if (event.hasEnded()) {
-                color = ThemeAttributes.getColor(getContext(), R.attr.eventTimeEndedBackground);
-            } else {
-                color = ThemeAttributes.getColor(getContext(), R.attr.eventTimeCurrentBackground);
-            }
-        }
-
-        if (color == Convention.NO_COLOR) {
-            List<ConventionEvent.EventLocationType> eventLocationTypes = Convention.getInstance().getEventLocationTypes(event);
-            if (eventLocationTypes != null && eventLocationTypes.size() > 0 && eventLocationTypes.get(0) == ConventionEvent.EventLocationType.VIRTUAL) {
-                color = ThemeAttributes.getColor(getContext(), R.attr.eventTimeVirtualBackgroundColor);
-            } else {
-                color = ThemeAttributes.getColor(getContext(), R.attr.eventTimeDefaultBackgroundColor);
-            }
+            color = getEventColorFromStateList(R.attr.eventTimeBackground);
         }
 
         return color;
@@ -210,10 +219,19 @@ public class EventView extends FrameLayout {
             eventDetailsColor = event.getBackgroundColor();
         }
         if (eventDetailsColor == Convention.NO_COLOR) {
-            eventDetailsColor = getColorFromTheme(event, R.attr.eventDetailsColorNotStarted, R.attr.eventDetailsColorCurrent, R.attr.eventDetailsColorEnded);
+            eventDetailsColor = getEventColorFromStateList(R.attr.eventDetailsColor);
         }
         return eventDetailsColor;
 	}
+
+    private int getEventColorFromStateList(int attr) {
+        // The event state must already be set here
+        return ThemeAttributes.getColorFromStateList(getContext(), attr, eventState);
+    }
+
+    private int getEventBackgroundColor() {
+        return getEventColorFromStateList(R.attr.eventBackgroundColor);
+    }
 
 	public void setEventTimeBackground(int color) {
         timeLayout.setCardBackgroundColor(color);
@@ -243,7 +261,7 @@ public class EventView extends FrameLayout {
 		layout.setBackgroundColor(color);
 	}
 
-	public void setAttending(boolean isAttending) {
+	private void setAttending(boolean isAttending) {
         Drawable currentStateDrawable = isAttending ?
             ThemeAttributes.getDrawable(getContext(), R.attr.eventFavoriteColor) :
             ThemeAttributes.getDrawable(getContext(), R.attr.eventNonFavoriteColor);
