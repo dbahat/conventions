@@ -61,7 +61,7 @@ public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 			}
 			case ITEM_VIEW_TYPE_REGULAR: {
 				View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.swipeable_event_view, viewGroup, false);
-				return new SwipeableEventViewHolder(view, true);
+				return new SwipeableEventViewHolder(view);
 			}
 			case ITEM_VIEW_TYPE_CONFLICTING: {
 				View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.conflicting_events_view, viewGroup, false);

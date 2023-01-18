@@ -22,7 +22,7 @@ public class DismissibleEventsViewAdapter extends RecyclerView.Adapter<Swipeable
 	@Override
 	public SwipeableEventViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.swipeable_event_view, parent, false);
-		return new SwipeableEventViewHolder(view, true);
+		return new SwipeableEventViewHolder(view);
 	}
 
 	@Override

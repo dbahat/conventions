@@ -118,59 +118,30 @@
         <!-- Should the event color received from backend be used for event name and details text -->
         <attr name="useEventTextColorFromEventType" format="boolean"/>
 
-        <!-- Text color for ended: event name (if useEventTextColorFromEventType is false or timetable color is transparent),
-             free time in my events, hour in programme (if eventTimeHeaderAlwaysUseDefaultTextColor is false).
-             If transparent, event hour and free time slot are set from eventTimeHeaderDefaultTextColor. -->
-        <attr name="eventEndedTextColor" format="color|reference"/>
-        <!-- Text color for current: event name, free time in my events, hour in programme. See eventEndedTextColor for defaults and conditions. -->
-        <attr name="eventCurrentTextColor" format="color|reference"/>
-        <!-- Text color for not started: event name, free time in my events, hour in programme. See eventEndedTextColor for defaults and conditions. -->
-        <attr name="eventNotStartedTextColor" format="color|reference"/>
-
-        <!-- Text color for conflicting event. Used in event name, lecturer nad hall (if not transparent). -->
-        <attr name="conflictingEventTextColor" format="color|reference" />
+        <!-- Text color for event name (if useEventTextColorFromEventType is false or timetable color is transparent).
+             Can be a color state list. Event/time state is set with state_event_... attributes. -->
+        <attr name="eventTextColor" format="color|reference"/>
 
         <!-- Background for conflicting event label. Used when event is conflicting and the label exists in the layout.
              The corresponding text color is white. -->
         <attr name="conflictingEventBackground" format="integer|reference" />
 
-        <!-- Background color for event view when event has ended -->
-        <attr name="eventTypeEndedBackgroundColor" format="color|reference"/>
-        <!-- Background color for event view when event is current -->
-        <attr name="eventTypeCurrentBackgroundColor" format="color|reference"/>
-        <!-- Background color for event view when event has not started -->
-        <attr name="eventTypeNotStartedBackgroundColor" format="color|reference"/>
+        <!-- Background color for event view. Can be a color state list. Event state is set with state_event_... attributes. -->
+        <attr name="eventBackgroundColor" format="color|reference"/>
 
         <!-- Should the event color received from backend be used for event time box background -->
         <attr name="useEventTimeColorFromEventType" format="boolean"/>
-        <!-- Default text color for event time.
-             Used when timetable text color is transparent or useEventTimeColorFromEventType is false and event is not virtual. -->
-        <attr name="eventTimeDefaultTextColor" format="color|reference"/>
+        <!-- Text color for event time.
+             Used when timetable text color is transparent or useEventTimeColorFromEventType is false.
+             Can be a color state list. Event state is set with state_event_... attributes. -->
+        <attr name="eventTimeTextColor" format="color|reference"/>
 
-        <!-- Default background color for event time and search categories.
-             Used for event when useEventTimeColorFromEventType is false or event timetable color is transparent,
-             event time background color (ended/not started/current) is transparent and event is not virtual.
-             Used for search categories checkbox when useEventTimeColorFromEventType is false and searchCategoriesColor is transparent. -->
-        <attr name="eventTimeDefaultBackgroundColor" format="color|reference"/>
+        <!-- Background color for event time. Used when useEventTimeColorFromEventType is false or event timetable color is transparent.
+             Can be a color state list. Event state is set with state_event_... attributes. -->
+        <attr name="eventTimeBackground" format="color|reference"/>
 
-        <!-- Background color for event time for event which hasn't started. Used when useEventTimeColorFromEventType is false or event timetable color is transparent. -->
-        <attr name="eventTimeNotStartedBackground" format="color|reference"/>
-        <!-- Background color for event time for current event. Used when useEventTimeColorFromEventType is false or event timetable color is transparent. -->
-        <attr name="eventTimeCurrentBackground" format="color|reference"/>
-        <!-- Background color for event time for ended event. Used when useEventTimeColorFromEventType is false or event timetable color is transparent. -->
-        <attr name="eventTimeEndedBackground" format="color|reference"/>
-        <!-- Background color for event time for virtual event. Used when useEventTimeColorFromEventType is false or event timetable color is transparent, and
-             event time background color (ended/not started/current) is transparent. -->
-        <attr name="eventTimeVirtualBackgroundColor" format="color|reference"/>
-        <!-- Text color for event time for virtual event. Used when useEventTimeColorFromEventType is false or event timetable color is transparent. -->
-        <attr name="eventTimeVirtualTextColor" format="color|reference"/>
-
-        <!-- Text color for ended event details (if useEventTextColorFromEventType is false or timetable color is transparent) -->
-        <attr name="eventDetailsColorEnded" format="color|reference"/>
-        <!-- Text color for current event details (if useEventTextColorFromEventType is false or timetable color is transparent) -->
-        <attr name="eventDetailsColorCurrent" format="color|reference"/>
-        <!-- Text color for not started event details (if useEventTextColorFromEventType is false or timetable color is transparent) -->
-        <attr name="eventDetailsColorNotStarted" format="color|reference"/>
+        <!-- Text color for event details (if useEventTextColorFromEventType is false or timetable color is transparent) -->
+        <attr name="eventDetailsColor" format="color|reference"/>
 
         <!-- Text color for search terms in event tile in event search -->
         <attr name="eventNameKeywordHighlightColor" format="color|reference"/>
@@ -184,10 +155,6 @@
         <!-- Color or icon for favorite event. If it's a color, eventFavoriteIcon is used as the base image. -->
         <attr name="eventFavoriteColor" format="color|reference"/>
 
-        <!-- Alerts base icon -->
-        <attr name="eventAlertsIcon" format="integer|reference"/>
-        <!-- Alerts icon color filer. Only colors are allowed (other drawables are ignored). -->
-        <attr name="eventAlertsIconColor" format="integer|reference"/>
 
         <!-- Color for feedback icon when user sent the feedback and answered a smiley question. The icon is the smiley. -->
         <attr name="eventRatingColor" format="color|reference"/>
@@ -324,6 +291,9 @@
         <attr name="conflictingEventsListBorder" format="integer|reference"/>
         <!-- Background color for conflicting events group -->
         <attr name="conflictingEventsBackground" format="color|reference"/>
+
+        <!-- Text color for free time in my events. Can be a color state list. State is set with state_event_... attributes. -->
+        <attr name="freeTimeTextColor" format="color|reference"/>
 
         <!-- Navigation Drawer -->
 
@@ -554,11 +524,10 @@
 
         <!-- Background for event time/day header in programme and programme search  -->
         <attr name="eventTimeHeaderBackground" format="color|reference"/>
-        <!-- Default text color for event time/day header in programme and programme search. Used when eventTimeHeaderAlwaysUseDefaultTextColor is true
-             or the started/ended/current color is missing. -->
-        <attr name="eventTimeHeaderDefaultTextColor" format="color|reference"/>
-        <!-- Should eventTimeHeaderDefaultTextColor always be used for the event time/day header in programme and programme search -->
-        <attr name="eventTimeHeaderAlwaysUseDefaultTextColor" format="boolean"/>
+        <!-- Text color for event time/day header in programme and programme search.
+             Can be a color state list. Time state is set with state_event_... attributes.
+             For programme search, the default color is used. -->
+        <attr name="eventTimeHeaderTextColor" format="color|reference"/>
         <!-- Top margin for event time/day header in programme and programme search -->
         <attr name="eventTimeHeaderMarginTop" format="dimension" />
         <!-- Bottom margin for event time/day header in programme and programme search -->
@@ -607,4 +576,12 @@
         <!-- Close location details icon in map activity -->
         <attr name="iconClearMap" format="integer|reference"/>
     </declare-styleable>
+
+    <attr name="state_event_not_started" format="boolean"/>
+    <attr name="state_event_current" format="boolean"/>
+    <attr name="state_event_ended" format="boolean"/>
+    <attr name="state_event_virtual" format="boolean"/>
+    <attr name="state_event_physical" format="boolean"/>
+    <attr name="state_event_favorite" format="boolean"/>
+    <attr name="state_event_conflicting" format="boolean"/>
 </resources>

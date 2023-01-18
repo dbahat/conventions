@@ -6,7 +6,6 @@ public class OnSwipeListener implements ViewPager.OnPageChangeListener {
 	private final Runnable action;
 	private ViewPager viewPager;
 	private int mainViewPosition;
-	private boolean dismiss;
 	private boolean pageSelected;
 	private Runnable delayedSwipeActionPerformer = new Runnable() {
 		@Override
@@ -17,28 +16,25 @@ public class OnSwipeListener implements ViewPager.OnPageChangeListener {
 		}
 	};
 
-	public OnSwipeListener(ViewPager viewPager, int mainViewPosition, Runnable action, boolean dismiss) {
+	public OnSwipeListener(ViewPager viewPager, int mainViewPosition, Runnable action) {
 		this.viewPager = viewPager;
 		this.mainViewPosition = mainViewPosition;
 		this.action = action;
-		this.dismiss = dismiss;
 		pageSelected = false;
 	}
 
 	@Override
 	public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-		if (dismiss) {
-			int viewWidth = viewPager.getMeasuredWidth();
+		int viewWidth = viewPager.getMeasuredWidth();
 
-			// Depending on the side we're swiping to, the scroll could be attributed to a different page.
-			// So we calculate the offset from the main view position in absolute terms.
-			positionOffsetPixels = Math.abs(positionOffsetPixels - (mainViewPosition - position) * viewWidth);
+		// Depending on the side we're swiping to, the scroll could be attributed to a different page.
+		// So we calculate the offset from the main view position in absolute terms.
+		positionOffsetPixels = Math.abs(positionOffsetPixels - (mainViewPosition - position) * viewWidth);
 
-			// The closer we are to offset 0, the closest the progress should be to 1 (opaque). The progress is non-linear
-			// to make it appear smoother.
-			float progress = 1 - (positionOffsetPixels * 1.5f / (float) viewWidth);
-			viewPager.setAlpha(progress);
-		}
+		// The closer we are to offset 0, the closest the progress should be to 1 (opaque). The progress is non-linear
+		// to make it appear smoother.
+		float progress = 1 - (positionOffsetPixels * 1.5f / (float) viewWidth);
+		viewPager.setAlpha(progress);
 	}
 
 	@Override
