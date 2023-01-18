@@ -1,8 +1,8 @@
 package amai.org.conventions.events;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
@@ -94,7 +94,6 @@ public class EventView extends FrameLayout {
         if (event != null) {
             setEventState(event, conflicting);
             setColorsFromEvent(event);
-            setAttending(event.isAttending());
             setHallName(event.getHall().getName());
             setStartTime(Dates.formatHoursAndMinutes(event.getStartTime()));
             setEndTime(Dates.formatHoursAndMinutes(event.getEndTime()));
@@ -150,6 +149,8 @@ public class EventView extends FrameLayout {
 
         setEventTimeBackground(getEventTimeBackground(event));
         setEventTimeTextColor(getEventTimeTextColor(event));
+
+        setFavoriteIconColor(getFavoriteIconColor(event));
     }
 
     private void setEventState(ConventionEvent event, boolean conflicting) {
@@ -178,6 +179,21 @@ public class EventView extends FrameLayout {
             states.add(R.attr.state_event_conflicting);
         }
 
+        if (event.canFillFeedback()) {
+            Survey feedback = event.getUserInput().getFeedback();
+            if (feedback.isSent()) {
+                states.add(R.attr.state_event_feedback_sent);
+            }
+
+            if (feedback.hasAnsweredQuestions()) {
+                states.add(R.attr.state_event_feedback_filled);
+            }
+
+            if (!Convention.getInstance().isFeedbackSendingTimeOver()) {
+                states.add(R.attr.state_event_feedback_can_send);
+            }
+        }
+
         // Convert to int[]
         int[] intStates = new int[states.size()];
         for(int i = 0; i < states.size(); ++i) {
@@ -185,6 +201,20 @@ public class EventView extends FrameLayout {
         }
 
         this.eventState = intStates;
+        this.favoriteIcon.setImageState(eventState, false);
+        this.feedbackIcon.setImageState(eventState, false);
+    }
+
+    public int getFavoriteIconColor(ConventionEvent event) {
+        return getEventColorFromStateList(R.attr.eventFavoriteIconColor);
+    }
+
+    public void setFavoriteIconColor(int color) {
+        if (color == Convention.NO_COLOR) {
+            favoriteIcon.setImageTintList(null);
+        } else {
+            favoriteIcon.setImageTintList(new ColorStateList(new int[][]{new int[0]}, new int[]{color}));
+        }
     }
 
     public int getEventTimeTextColor(ConventionEvent event) {
@@ -266,20 +296,6 @@ public class EventView extends FrameLayout {
 		layout.setBackgroundColor(color);
 	}
 
-	private void setAttending(boolean isAttending) {
-        Drawable currentStateDrawable = isAttending ?
-            ThemeAttributes.getDrawable(getContext(), R.attr.eventFavoriteColor) :
-            ThemeAttributes.getDrawable(getContext(), R.attr.eventNonFavoriteColor);
-
-        if (currentStateDrawable instanceof ColorDrawable) {
-		favoriteIcon.setImageDrawable(ThemeAttributes.getDrawable(getContext(), R.attr.eventFavoriteIcon));
-            favoriteIcon.setColorFilter(((ColorDrawable) currentStateDrawable).getColor(), PorterDuff.Mode.SRC_ATOP);
-		} else {
-            favoriteIcon.setImageDrawable(currentStateDrawable);
-		}
-
-	}
-
 	public void setShowHallName(boolean show) {
 		hallName.setVisibility(show ? VISIBLE : GONE);
 	}
@@ -327,34 +343,25 @@ public class EventView extends FrameLayout {
 			Survey feedback = event.getUserInput().getFeedback();
 			FeedbackQuestion.DrawableAnswer weightedRating = feedback.getWeightedRating();
 			int filterColor;
-			if (weightedRating != null) {
-                // Feedback was sent and has smiley answer
-				icon = ContextCompat.getDrawable(getContext(), weightedRating.getImageResourceId());
-				filterColor = ThemeAttributes.getColor(getContext(), R.attr.eventRatingColor);
-            } else if (feedback.isSent()) {
-                // Feedback was sent and has no smiley answer
-                icon = ContextCompat.getDrawable(getContext(), R.drawable.feedback_sent);
-                filterColor = ThemeAttributes.getColor(getContext(), R.attr.eventSentFeedbackColor);
-            } else {
-                if (feedback.hasAnsweredQuestions()) {
-				icon = ContextCompat.getDrawable(getContext(), android.R.drawable.ic_dialog_email);
-			} else {
-				icon = ContextCompat.getDrawable(getContext(), R.drawable.feedback);
-                }
 
-                if (!Convention.getInstance().isFeedbackSendingTimeOver() && (feedback.hasAnsweredQuestions() || event.isAttending())) {
-                    // Feedback was filled and not sent or user attended (and feedback can still be sent)
-					filterColor = ThemeAttributes.getColor(getContext(), R.attr.eventSendFeedbackColor);
+            // Image
+			if (weightedRating != null) {
+				icon = ContextCompat.getDrawable(getContext(), weightedRating.getImageResourceId());
+			} else {
+                icon = ThemeAttributes.getDrawable(getContext(), R.attr.eventFeedbackIcon);
+            }
+
+            // Color
+            if (weightedRating instanceof FeedbackQuestion.Smiley3PointAnswer) {
+                filterColor = ContextCompat.getColor(getContext(), R.color.yellow);
 				} else {
-                    // Feedback cannot be sent / user didn't attend or fill feedback
-                    int feedbackColor = ThemeAttributes.getColor(getContext(), R.attr.eventFeedbackColor);
-                    if (feedbackColor != Convention.NO_COLOR) {
-                        filterColor = feedbackColor;
-                    } else {
+                filterColor = getEventColorFromStateList(R.attr.eventFeedbackIconColor);
+
+                // If color is set to transparent, use event details color
+                if (filterColor == Convention.NO_COLOR) {
                         filterColor = getEventDetailsColor(event);
                     }
 				}
-			}
 
 			if (icon != null) {
 				icon = icon.mutate();

@@ -116,6 +116,8 @@
                         android:layout_height="18dp"
                         android:layout_marginStart="5dp"
                         android:src="@drawable/feedback"
+                        tools:visibility="visible"
+                        tools:background="@color/black"
                         android:visibility="gone" />
                 </LinearLayout>
 
@@ -127,7 +129,8 @@
                 android:layout_height="24dp"
                 android:layout_above="@+id/bottom_layout"
                 android:layout_alignParentEnd="true"
-                android:src="@drawable/ic_star_black_24dp" />
+                tools:background="@color/black"
+                android:src="?eventFavoriteIcon" />
 
             <TextView
                 android:id="@+id/eventName"

@@ -150,26 +150,17 @@
         <!-- Text color for search terms in event details in event search -->
         <attr name="eventKeywordHighlightColor" format="color|reference"/>
 
-        <!-- Default favorite icon (for both favorite and non-favorite events -->
+        <!-- Favorite icon for event. Can be a state list drawable. Event state is set with state_event_... attributes. -->
         <attr name="eventFavoriteIcon" format="integer|reference"/>
-        <!-- Color or icon for non-favorite event. If it's a color, eventFavoriteIcon is used as the base image. -->
-        <attr name="eventNonFavoriteColor" format="color|reference"/>
-        <!-- Color or icon for favorite event. If it's a color, eventFavoriteIcon is used as the base image. -->
-        <attr name="eventFavoriteColor" format="color|reference"/>
+        <!-- Favorite icon filter color for event. Can be a color list drawable. Event state is set with state_event_... attributes. -->
+        <attr name="eventFavoriteIconColor" format="color|reference"/>
 
-
-        <!-- Color for feedback icon when user sent the feedback and answered a smiley question. The icon is the smiley. -->
-        <attr name="eventRatingColor" format="color|reference"/>
-        <!-- Color for feedback icon when user sent the feedback and didn't answer smiley questions
-             Icon is feedback_sent. -->
-        <attr name="eventSentFeedbackColor" format="color|reference"/>
-        <!-- Color for feedback icon when user attended the event or filled feedback without sending it (and can still send it).
-             Icon is ic_dialog_email if feedback was filled and feedback if it wasn't filled. -->
-        <attr name="eventSendFeedbackColor" format="color|reference"/>
-        <!-- Color for feedback icon when user can't send feedback anymore, or user didn't attend the event and didn't fill feedback.
-             If not defined, event details color is used.
-             Icon is ic_dialog_email if feedback was filled and feedback if it wasn't filled. -->
-        <attr name="eventFeedbackColor" format="color|reference"/>
+        <!-- Feedback icon for event. Can be a state list drawable. Event and feedback state is set with state_event_... attributes. -->
+        <attr name="eventFeedbackIcon" format="integer|reference"/>
+        <!-- Feedback icon filter color for event (used with MULTIPLY mode). Can be a color list drawable.
+             Event and feedback state is set with state_event_... attributes.
+             If transparent color is selected, event details color is used. -->
+        <attr name="eventFeedbackIconColor" format="color|reference"/>
 
         <!-- About screen -->
 
@@ -628,6 +619,7 @@
         <attr name="discountsActivityLayout" format="reference"/>
     </declare-styleable>
 
+    <!-- Event states for color/drawable state lists -->
     <attr name="state_event_not_started" format="boolean"/>
     <attr name="state_event_current" format="boolean"/>
     <attr name="state_event_ended" format="boolean"/>
@@ -635,6 +627,11 @@
     <attr name="state_event_physical" format="boolean"/>
     <attr name="state_event_favorite" format="boolean"/>
     <attr name="state_event_conflicting" format="boolean"/>
+    <!-- Feedback-specific states -->
+    <attr name="state_event_feedback_sent" format="boolean"/>
+    <attr name="state_event_feedback_filled" format="boolean"/>
+    <attr name="state_event_feedback_can_send" format="boolean"/>
+
 
     <declare-styleable name="SecondHandState">
         <attr name="state_second_hand_form_closed" format="boolean"/>

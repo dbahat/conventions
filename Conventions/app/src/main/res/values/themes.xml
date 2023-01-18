@@ -54,11 +54,9 @@
         <item name="eventDetailsColor">?eventTextColor</item>
         <item name="eventBackgroundColor">@null</item>
         <item name="eventTimeBackground">@android:color/transparent</item>
-        <item name="eventSendFeedbackColor">@color/green</item>
-        <item name="eventSentFeedbackColor">@color/yellow</item>
-        <item name="eventFeedbackColor">@android:color/transparent</item>
+        <item name="eventFeedbackIcon">@drawable/event_feedback_icon</item>
+        <item name="eventFeedbackIconColor">@drawable/event_feedback_icon_color</item>
         <item name="eventFavoriteIcon">@drawable/ic_star_black_24dp</item>
-        <item name="eventRatingColor">@color/yellow</item>
         <item name="conflictingEventListDivider">?eventListDivider</item>
         <item name="useEventTextColorFromEventType">false</item>
         <item name="useEventTimeColorFromEventType">false</item>
@@ -242,11 +240,9 @@
         <item name="eventDetailsColor">?eventTextColor</item>
         <item name="eventBackgroundColor">@null</item>
         <item name="eventTimeBackground">@android:color/transparent</item>
-        <item name="eventSendFeedbackColor">@color/green</item>
-        <item name="eventSentFeedbackColor">@color/yellow</item>
-        <item name="eventFeedbackColor">@android:color/transparent</item>
+        <item name="eventFeedbackIcon">@drawable/event_feedback_icon</item>
+        <item name="eventFeedbackIconColor">@drawable/event_feedback_icon_color</item>
         <item name="eventFavoriteIcon">@drawable/ic_star_black_24dp</item>
-        <item name="eventRatingColor">@color/yellow</item>
         <item name="conflictingEventListDivider">?eventListDivider</item>
         <item name="useEventTextColorFromEventType">false</item>
         <item name="useEventTimeColorFromEventType">false</item>
