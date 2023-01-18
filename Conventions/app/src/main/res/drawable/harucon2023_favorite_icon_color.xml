@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:color="@color/harucon2023_green" app:state_event_favorite="true"/>
+    <item android:color="@color/harucon2023_blue"/>
+</selector>

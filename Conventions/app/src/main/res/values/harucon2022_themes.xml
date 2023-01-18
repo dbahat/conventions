@@ -93,10 +93,9 @@
         <item name="eventKeywordHighlightColor">@color/harucon2022_light_yellow</item>
         <item name="eventTimeTextColor">@color/harucon2022_light_yellow</item>
         <item name="eventTimeBackground">@color/harucon2022_dark_blue</item>
-        <item name="eventSendFeedbackColor">@color/harucon2022_light_yellow</item>
-        <item name="eventSentFeedbackColor">@color/harucon2022_light_yellow</item>
-        <item name="eventNonFavoriteColor">@drawable/harucon2023_favorite_empty</item>
-        <item name="eventFavoriteColor">@drawable/harucon2023_favorite_full</item>
+        <item name="eventFavoriteIcon">@drawable/harucon2023_favorite_icon</item>
+        <item name="eventFavoriteIconColor">@drawable/harucon2023_favorite_icon_color</item>
+        <item name="eventFeedbackIconColor">@drawable/harucon2022_event_feedback_icon_color</item>
         <item name="useEventTextColorFromEventType">false</item>
         <item name="useEventTimeColorFromEventType">true</item>
         <item name="conflictingEventBackground">@drawable/harucon2023_conflicting_event_label_bg</item>
