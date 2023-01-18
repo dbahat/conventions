@@ -190,7 +190,8 @@
                     android:layout_marginEnd="4dp"
                     android:layout_alignParentEnd="true"
                     android:paddingTop="4dp"
-                    android:src="@drawable/ic_star_black_24dp" />
+                    tools:background="@color/black"
+                    android:src="?eventFavoriteIcon" />
 
                 <amai.org.conventions.customviews.AspectRatioImageView
                     android:id="@+id/feedback_icon"
