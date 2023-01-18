@@ -44,6 +44,7 @@
         <item name="eventViewHeight">74dp</item>
         <item name="eventTimeHeaderBackground">@drawable/flat_event_time_background</item>
         <item name="eventTimeHeaderTextColor">?eventTextColor</item>
+        <item name="eventDateHeaderTextColor">?eventTimeHeaderTextColor</item>
         <item name="freeTimeTextColor">?eventTimeTextColor</item>
         <item name="eventTimeHeaderMarginTop">10dp</item>
         <item name="eventTimeHeaderMarginBottom">0dp</item>
@@ -231,6 +232,7 @@
         <item name="eventViewLayout">@layout/convention_event</item>
         <item name="eventTimeHeaderBackground">@drawable/flat_event_time_background</item>
         <item name="eventTimeHeaderTextColor">?eventTextColor</item>
+        <item name="eventDateHeaderTextColor">?eventTimeHeaderTextColor</item>
         <item name="freeTimeTextColor">?eventTextColor</item>
         <item name="eventTimeHeaderMarginTop">10dp</item>
         <item name="eventTimeHeaderMarginBottom">0dp</item>

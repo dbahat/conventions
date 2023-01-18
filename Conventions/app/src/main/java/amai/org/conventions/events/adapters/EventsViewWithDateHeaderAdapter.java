@@ -68,11 +68,22 @@ public class EventsViewWithDateHeaderAdapter extends BaseAdapter {
 			holder.setModel((ConventionEvent) eventOrDate);
 		} else {
 			final TimeViewHolder holder;
+			Date titleDate = (Date) eventOrDate;
 			if (convertView == null) {
 				convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.small_text_view, parent, false);
 				TextView textView = (TextView) convertView.findViewById(R.id.small_text);
-				// Use default color from the color state list
-				textView.setTextColor(ThemeAttributes.getColorFromStateList(textView.getContext(), R.attr.eventTimeHeaderTextColor, new int[0]));
+
+				// Calculate date state
+				int[] attributes = new int[1];
+				if (Dates.isSameDate(Dates.now(), titleDate)) {
+					attributes[0] = R.attr.state_event_current;
+				} else if (titleDate.after(Dates.now())) {
+					attributes[0] = R.attr.state_event_not_started;
+				} else {
+					attributes[0] = R.attr.state_event_ended;
+				}
+
+				textView.setTextColor(ThemeAttributes.getColorFromStateList(textView.getContext(), R.attr.eventTimeHeaderTextColor, attributes));
 				((FrameLayout.LayoutParams) textView.getLayoutParams()).gravity = Gravity.CENTER_HORIZONTAL;
 				textView.setLayoutParams(textView.getLayoutParams());
 				holder = new TimeViewHolder(convertView, R.id.small_text);
@@ -80,7 +91,7 @@ public class EventsViewWithDateHeaderAdapter extends BaseAdapter {
 			} else {
 				holder = (TimeViewHolder) convertView.getTag();
 			}
-			holder.setTime((Date) eventOrDate, "EEE (dd.MM)");
+			holder.setTime(titleDate, "EEE (dd.MM)");
 		}
 
 		return convertView;
