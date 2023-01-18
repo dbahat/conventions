@@ -24,9 +24,8 @@ public class SwipeableEventViewHolder extends RecyclerView.ViewHolder {
 	private final static int MAIN_VIEW_POSITION = 1;
 	private ViewPager viewPager;
 	private EventView mainEventView;
-	private EventView hiddenEventView;
-	private EventView hiddenEventView2;
-
+	private View hiddenView;
+	private View hiddenView2;
 	private ViewPager.OnPageChangeListener listener;
 	private ConventionEvent event;
 
@@ -35,16 +34,13 @@ public class SwipeableEventViewHolder extends RecyclerView.ViewHolder {
 
 		viewPager = (ViewPager) itemView.findViewById(R.id.swipe_pager);
 		mainEventView = createEventView(viewPager.getContext(), R.id.main_event_view);
-		hiddenEventView = createEventView(viewPager.getContext(), R.id.hidden_event_view);
-		hiddenEventView2 = createEventView(viewPager.getContext(), R.id.hidden_event_view2);
-
-		hiddenEventView.setVisibility(View.GONE);
-		hiddenEventView2.setVisibility(View.GONE);
+		hiddenView = createHiddenView(viewPager.getContext(), R.id.hidden_event_view);
+		hiddenView2 = createHiddenView(viewPager.getContext(), R.id.hidden_event_view2);
 
 		List<View> views = new ArrayList<>(3);
-		views.add(hiddenEventView);
+		views.add(hiddenView);
 		views.add(mainEventView);
-		views.add(hiddenEventView2);
+		views.add(hiddenView2);
 
 		viewPager.setCurrentItem(MAIN_VIEW_POSITION, false);
 		viewPager.setOffscreenPageLimit(views.size() - 1);
@@ -62,6 +58,17 @@ public class SwipeableEventViewHolder extends RecyclerView.ViewHolder {
 		params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
 		eventView.setLayoutParams(params);
 		return eventView;
+	}
+
+	private View createHiddenView(Context context, int id) {
+		View view = new View(context);
+		view.setId(id);
+		ViewPager.LayoutParams params = new ViewPager.LayoutParams();
+		params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+		params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+		view.setLayoutParams(params);
+		view.setVisibility(View.GONE);
+		return view;
 	}
 
 	public ConventionEvent getModel() {
