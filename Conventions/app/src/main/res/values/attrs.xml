@@ -524,9 +524,8 @@
 
         <!-- Background for event time/day header in programme and programme search  -->
         <attr name="eventTimeHeaderBackground" format="color|reference"/>
-        <!-- Text color for event time/day header in programme and programme search.
-             Can be a color state list. Time state is set with state_event_... attributes.
-             For programme search, the default color is used. -->
+        <!-- Text color for event time header in programme.
+             Can be a color state list. Time state is set with state_event_... attributes. -->
         <attr name="eventTimeHeaderTextColor" format="color|reference"/>
         <!-- Top margin for event time/day header in programme and programme search -->
         <attr name="eventTimeHeaderMarginTop" format="dimension" />
@@ -544,6 +543,10 @@
 
         <!-- Color for search categories checkboxes, if color from event type is not used. -->
         <attr name="searchCategoriesColor" format="color|reference" />
+
+        <!-- Text color for day header in programme search.
+             Can be a color state list. Time state is set with state_event_... attributes. -->
+        <attr name="eventDateHeaderTextColor" format="color|reference"/>
 
         <!-- Icons -->
 
