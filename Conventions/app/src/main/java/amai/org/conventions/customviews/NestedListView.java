@@ -6,10 +6,16 @@ import android.view.View;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import java.util.Arrays;
+
+import amai.org.conventions.utils.DrawableStateHelper;
+
 /**
  * List view that supports wrap_content height inside other scroll view
  */
-public class NestedListView extends ListView {
+public class NestedListView extends ListView implements ViewWithDrawableState {
+	private final DrawableStateHelper stateHelper = new DrawableStateHelper();
+
 	public NestedListView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
@@ -41,5 +47,15 @@ public class NestedListView extends ListView {
 			}
 		}
 		setMeasuredDimension(getMeasuredWidth(), newHeight);
+	}
+
+	@Override
+	protected int[] onCreateDrawableState(int extraSpace) {
+		// stateHelper is null when this method is called from the constructor
+		return stateHelper == null ? super.onCreateDrawableState(extraSpace) : stateHelper.onCreateDrawableState(extraSpace, super::onCreateDrawableState, View::mergeDrawableStates);
+	}
+
+	public void setState(int[] newState) {
+		stateHelper.setState(newState, this::refreshDrawableState);
 	}
 }

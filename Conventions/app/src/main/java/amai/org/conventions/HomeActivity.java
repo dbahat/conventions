@@ -31,6 +31,7 @@ import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.updates.UpdatesActivity;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.StateList;
 import amai.org.conventions.utils.Views;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
@@ -110,6 +111,10 @@ public class HomeActivity extends NavigationActivity {
 		}
 	}
 
+	private void setViewState(int viewID, StateList states) {
+		states.setForView(findViewById(viewID));
+	}
+
 	private void setContentWithUpcomingFavorites(ConventionEvent currentEvent, ConventionEvent upcomingEvent) {
 		boolean useSepTitlesLayout = ThemeAttributes.getBoolean(this, R.attr.homeShowCurrentUpcomingTitles);
 		if (useSepTitlesLayout) {
@@ -118,37 +123,69 @@ public class HomeActivity extends NavigationActivity {
 			setInfoBoxContent(R.layout.home_box_during_convention);
 		}
 
+		TextView currentEventTitle = findViewById(R.id.home_current_event_title);
 		View currentEventTitleContainer = findViewById(R.id.home_current_event_title_container);
-		View currentEventContainer = findViewById(R.id.home_current_event_container);
-		TextView currentEventTitle = (TextView)findViewById(R.id.home_current_event_title);
-		ImageView currentEventVoteText = findViewById(R.id.home_current_event_vote);
+		View currentEventContainer = findViewById(R.id.home_current_event_container_title);
+		TextView currentEventName = findViewById(R.id.home_current_event_name);
+		ImageView currentEventVote = findViewById(R.id.home_current_event_vote);
 
-		View upcomingEventTitleContainer = findViewById(R.id.home_upcoming_event_title_container);
+		TextView upcomingEventTitle = findViewById(R.id.home_upcoming_event_title);
 		View upcomingEventContainer = findViewById(R.id.home_upcoming_event_container);
-		TextView upcomingEventTime = (TextView)findViewById(R.id.home_upcoming_event_time);
-		TextView upcomingEventTitle = (TextView)findViewById(R.id.home_upcoming_event_title);
-		TextView upcomingEventHall = (TextView)findViewById(R.id.home_upcoming_event_hall);
-		ImageView upcomingEventVoteText = findViewById(R.id.home_upcoming_event_vote);
+		TextView upcomingEventTime = findViewById(R.id.home_upcoming_event_time);
+		TextView upcomingEventName = findViewById(R.id.home_upcoming_event_name);
+		TextView upcomingEventHall = findViewById(R.id.home_upcoming_event_hall);
+		ImageView upcomingEventVote = findViewById(R.id.home_upcoming_event_vote);
+
+		StateList baseStates = new StateList(R.attr.state_home_during_con, R.attr.state_home_has_favorites);
+		if (currentEvent != null) {
+			baseStates.add(R.attr.state_home_has_current);
+		}
+		if (upcomingEvent != null) {
+			baseStates.add(R.attr.state_home_has_upcoming);
+		}
+
+		StateList currEventStates = baseStates.clone().add(R.attr.state_home_is_current);
+		currEventStates.setForView(currentEventContainer);
+		currEventStates.setForView(currentEventVote);
+		currentEventName.setTextColor(currEventStates.getThemeColor(this, R.attr.homeContentText));
+
+		StateList upcomingEventStates = baseStates.clone().add(R.attr.state_home_is_upcoming);
+		upcomingEventStates.setForView(upcomingEventContainer);
+		upcomingEventStates.setForView(upcomingEventVote);
+		upcomingEventName.setTextColor(upcomingEventStates.getThemeColor(this, R.attr.homeContentText));
+		upcomingEventTime.setTextColor(upcomingEventStates.getThemeColor(this, R.attr.homeEventTimeText));
+		upcomingEventHall.setTextColor(upcomingEventStates.getThemeColor(this, R.attr.homeEventHallText));
+
+		if (useSepTitlesLayout) {
+			currEventStates.setForView(currentEventTitleContainer);
+			currentEventTitle.setTextColor(currEventStates.getThemeColor(this, R.attr.homeTitleText));
+			setViewState(R.id.home_upcoming_event_title_container, upcomingEventStates);
+			upcomingEventTitle.setTextColor(upcomingEventStates.getThemeColor(this, R.attr.homeTitleText));
+		} else {
+			setViewState(R.id.home_title_container, baseStates);
+			TextView title = findViewById(R.id.home_content_title);
+			title.setTextColor(baseStates.getThemeColor(this, R.attr.homeTitleText));
+		}
 
 		if (upcomingEvent != null) {
 			// There's an upcoming event - show it
-			upcomingEventTitle.setText(upcomingEvent.getTitle());
+			upcomingEventName.setText(upcomingEvent.getTitle());
 			upcomingEventHall.setText(upcomingEvent.getHall().getName());
 			upcomingEventTime.setText(getString(
 					R.string.home_upcoming_event_time,
 					Dates.toHumanReadableTimeDuration(upcomingEvent.getStartTime().getTime() - Dates.now().getTime()))
 			);
-			setupVoteOrViewText(upcomingEvent, upcomingEventVoteText);
+			setupVoteOrViewText(upcomingEvent, upcomingEventVote);
 
 			// if there's a current event, show it as well
 			if (currentEvent != null) {
 				// Only add the "currently showing:" prefix if it's not in the title
 				if (useSepTitlesLayout) {
-					currentEventTitle.setText(currentEvent.getTitle());
+					currentEventName.setText(currentEvent.getTitle());
 				} else {
-					currentEventTitle.setText(getString(R.string.home_now_showing, currentEvent.getTitle()));
+					currentEventName.setText(getString(R.string.home_now_showing, currentEvent.getTitle()));
 				}
-				setupVoteOrViewText(currentEvent, currentEventVoteText);
+				setupVoteOrViewText(currentEvent, currentEventVote);
 			} else {
 				currentEventContainer.setVisibility(View.GONE);
 				if (useSepTitlesLayout) {
@@ -158,28 +195,25 @@ public class HomeActivity extends NavigationActivity {
 		} else {
 			// no upcoming event to show, but there's an event currently showing - show the current event at the upcoming event layout
 			currentEventContainer.setVisibility(View.GONE);
+			currEventStates.setForView(upcomingEventContainer);
 			if (useSepTitlesLayout) {
 				currentEventTitleContainer.setVisibility(View.GONE);
 
-				upcomingEventTitleContainer.setBackground(ThemeAttributes.getDrawable(this, R.attr.homeCurrentEventTitleBackground));
-				TextView titleText = findViewById(R.id.home_upcoming_event_title_text);
-				titleText.setText(R.string.home_now_showing_title);
-				titleText.setTextColor(ThemeAttributes.getColor(this, R.attr.homeCurrentEventTitleText));
+				setViewState(R.id.home_upcoming_event_title_container, currEventStates);
+				upcomingEventTitle.setText(R.string.home_now_showing_title);
+				upcomingEventTitle.setTextColor(currEventStates.getThemeColor(this, R.attr.homeTitleText));
 			}
-			upcomingEventTitle.setText(currentEvent.getTitle());
-			upcomingEventTitle.setTextColor(ThemeAttributes.getColor(this, R.attr.homeCurrentEventText));
+			upcomingEventName.setText(currentEvent.getTitle());
+			upcomingEventName.setTextColor(currEventStates.getThemeColor(this, R.attr.homeContentText));
 			upcomingEventTime.setText(R.string.home_now_showing_no_title);
-			upcomingEventTime.setTextColor(ThemeAttributes.getColor(this, R.attr.homeCurrentEventText));
+			upcomingEventTime.setTextColor(currEventStates.getThemeColor(this, R.attr.homeEventTimeText));
 			upcomingEventHall.setText(currentEvent.getHall().getName());
-			upcomingEventHall.setTextColor(ThemeAttributes.getColor(this, R.attr.homeCurrentEventText));
-			upcomingEventContainer.setBackground(ThemeAttributes.getDrawable(this, R.attr.homeCurrentEventOnlyBackground));
-			boolean isVisible = setupVoteOrViewText(currentEvent, upcomingEventVoteText);
-			if (isVisible) {
-				upcomingEventVoteText.setImageTintList(ColorStateList.valueOf(ThemeAttributes.getColor(this, R.attr.homeCurrentEventText)));
-			}
+			upcomingEventHall.setTextColor(currEventStates.getThemeColor(this, R.attr.homeEventHallText));
+			setupVoteOrViewText(currentEvent, upcomingEventVote);
+			currEventStates.setForView(upcomingEventVote);
 
 			// In this case, we want the 'go to my events' to go to the programme instead, since the user has no more favorite events.
-			Button goToMyEventsButton = (Button)findViewById(R.id.home_go_to_my_events_button);
+			Button goToMyEventsButton = findViewById(R.id.home_go_to_my_events_button);
 			goToMyEventsButton.setText(R.string.home_go_to_programme);
 			goToMyEventsButton.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -188,7 +222,7 @@ public class HomeActivity extends NavigationActivity {
 				}
 			});
 		}
-		Views.fixRadialGradient(findViewById(R.id.home_current_event_container_background));
+		Views.fixRadialGradient(findViewById(R.id.home_current_event_container_title));
 		Views.fixRadialGradient(upcomingEventContainer);
 
 		boolean showButtons = ThemeAttributes.getBoolean(this, R.attr.homeShowButtons);
@@ -207,8 +241,13 @@ public class HomeActivity extends NavigationActivity {
 			button.setVisibility(View.GONE);
 		}
 
-		TextView upcomingProgrammeEventsTitle = (TextView) findViewById(R.id.home_upcoming_programme_events_title);
-		ListView upcomingEventsListView = (ListView) findViewById(R.id.home_upcoming_programme_events_list);
+		TextView upcomingProgrammeEventsTitle = findViewById(R.id.home_upcoming_programme_events_title);
+		ListView upcomingEventsListView = findViewById(R.id.home_upcoming_programme_events_list);
+
+		StateList baseStates = new StateList(R.attr.state_home_during_con);
+		setViewState(R.id.home_title_container, baseStates);
+		baseStates.setForView(upcomingEventsListView);
+		upcomingProgrammeEventsTitle.setTextColor(baseStates.getThemeColor(this, R.attr.homeTitleText));
 
 		final List<ConventionEvent> upcomingEvents = getUpcomingProgrammeEvents();
 
@@ -245,7 +284,7 @@ public class HomeActivity extends NavigationActivity {
 				}
 
 				ConventionEvent upcomingEvent = upcomingEvents.get(position);
-				viewHolder.bind(upcomingEvent.getTitle(), Convention.getInstance().getEventViewURL(upcomingEvent) != null, position < getCount() - 1);
+				viewHolder.bind(upcomingEvent.getTitle(), Convention.getInstance().getEventViewURL(upcomingEvent) != null, position < getCount() - 1, baseStates);
 				return convertView;
 			}
 		};
@@ -287,9 +326,11 @@ public class HomeActivity extends NavigationActivity {
 			divider = itemView.findViewById(R.id.home_programme_event_divider);
 		}
 
-		void bind(String upcomingEventTitle, boolean showImage, boolean showDivider) {
+		void bind(String upcomingEventTitle, boolean showImage, boolean showDivider, StateList states) {
 			title.setText(upcomingEventTitle);
+			title.setTextColor(states.getThemeColor(itemView.getContext(), R.attr.homeContentText));
 			image.setVisibility(showImage ? View.VISIBLE : View.GONE);
+			states.setForView(image);
 			divider.setVisibility(showDivider ? View.VISIBLE : View.GONE);
 		}
 	}
@@ -348,9 +389,14 @@ public class HomeActivity extends NavigationActivity {
 
 	private void setContentForBeforeConventionStarted() {
 		setInfoBoxContent(R.layout.home_box_before_convention);
-		TextView titleView = (TextView)findViewById(R.id.home_content_title);
-		TextView contentView = (TextView)findViewById(R.id.home_content);
+		TextView titleView = findViewById(R.id.home_content_title);
+		TextView contentView = findViewById(R.id.home_content);
 		Views.fixRadialGradient(findViewById(R.id.home_content_container));
+
+		StateList baseStates = new StateList(R.attr.state_home_before_con);
+		setViewState(R.id.home_title_container, baseStates);
+		setViewState(R.id.home_content_container, baseStates);
+		contentView.setTextColor(baseStates.getThemeColor(this, R.attr.homeContentText));
 
 		// the convention didn't start yet. Show the user the number of days until it starts.
 		int daysUntilConventionStarts = getDaysUntilConventionStart();
@@ -370,6 +416,7 @@ public class HomeActivity extends NavigationActivity {
 			titleView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 		}
 		titleView.setText(dateTitle);
+		titleView.setTextColor(baseStates.getThemeColor(this, R.attr.homeTitleText));
 
 		boolean showButtons = ThemeAttributes.getBoolean(this, R.attr.homeShowButtons);
 		if (!showButtons) {
@@ -380,9 +427,9 @@ public class HomeActivity extends NavigationActivity {
 
 	private void setContentForAfterConventionEnded() {
 		setInfoBoxContent(R.layout.home_box_after_convention);
-		FrameLayout contentViewContainer = (FrameLayout)findViewById(R.id.home_content_container);
-		TextView titleView = (TextView)findViewById(R.id.home_content_title);
-		TextView contentView = (TextView)findViewById(R.id.home_content);
+		FrameLayout contentViewContainer = findViewById(R.id.home_content_container);
+		TextView titleView = findViewById(R.id.home_content_title);
+		TextView contentView = findViewById(R.id.home_content);
 		Views.fixRadialGradient(contentViewContainer);
 		// All the events are already in-progress or finished. Show the user to the feedback screen.
 		contentViewContainer.setOnClickListener(new View.OnClickListener() {
@@ -392,15 +439,23 @@ public class HomeActivity extends NavigationActivity {
 			}
 		});
 
+		StateList baseStates = new StateList(R.attr.state_home_after_con);
+
 		if (Convention.getInstance().getFeedback().isSent() || Convention.getInstance().isFeedbackSendingTimeOver()) {
 			// The feedback filling time is over or feedback was sent. Allow the user to see his feedback
 			titleView.setText(R.string.home_convention_ended);
 			contentView.setText(R.string.home_show_feedback);
+			baseStates.add(R.attr.state_home_should_send_feedback);
 		} else {
 			// Ask the user to fill feedback
 			titleView.setText(R.string.home_help_us_improve);
 			contentView.setText(R.string.home_send_feedback);
 		}
+
+		setViewState(R.id.home_title_container, baseStates);
+		baseStates.setForView(contentViewContainer);
+		titleView.setTextColor(baseStates.getThemeColor(this, R.attr.homeTitleText));
+		contentView.setTextColor(baseStates.getThemeColor(this, R.attr.homeContentText));
 	}
 
 	private int getDaysUntilConventionStart() {
