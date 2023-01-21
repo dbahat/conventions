@@ -92,12 +92,7 @@
         <item name="homeFrameTopMargin">?homeFrameMargins</item>
         <item name="homeFrameBottomMargin">?homeFrameMargins</item>
         <item name="homeShowButtons">true</item>
-        <item name="homeTitleSize">32sp</item>
-        <item name="homeMaxMessageSize">70sp</item>
-        <item name="homeUpcomingPadding">5dp</item>
-        <item name="homeUpcomingPaddingTop">8dp</item>
-        <item name="homeUpcomingMarginBottom">8dp</item>
-        <item name="homeEventListDividerHeight">?eventListDividerHeight</item>
+        <item name="homeEventsListDividerHeight">?eventListDividerHeight</item>
         <item name="homeEventsListTitleSize">20sp</item>
 
         <!-- About -->
@@ -276,12 +271,7 @@
         <item name="homeFrameTopMargin">?homeFrameMargins</item>
         <item name="homeFrameBottomMargin">?homeFrameMargins</item>
         <item name="homeShowButtons">true</item>
-        <item name="homeTitleSize">32sp</item>
-        <item name="homeMaxMessageSize">70sp</item>
-        <item name="homeUpcomingPadding">5dp</item>
-        <item name="homeUpcomingPaddingTop">8dp</item>
-        <item name="homeUpcomingMarginBottom">8dp</item>
-        <item name="homeEventListDividerHeight">?eventListDividerHeight</item>
+        <item name="homeEventsListDividerHeight">?eventListDividerHeight</item>
         <item name="homeEventsListTitleSize">20sp</item>
 
         <!-- About -->

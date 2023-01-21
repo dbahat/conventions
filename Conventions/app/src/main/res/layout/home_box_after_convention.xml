@@ -18,43 +18,41 @@
             android:id="@+id/home_content_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="?homeTitleSize"
+            android:textSize="24sp"
             android:textColor="?homeTitleText"
             android:textStyle="bold"
             android:layout_gravity="center"
-            tools:text="@string/home_help_us_improve"/>
+            tools:text="@string/thanks_for_coming"/>
     </amai.org.conventions.customviews.FrameLayoutWithState>
 
-    <amai.org.conventions.customviews.FrameLayoutWithMaxHeight
+    <amai.org.conventions.customviews.FrameLayoutWithState
         android:id="@+id/home_content_container"
         android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="0dp"
-        app:maxHeight="190dp"
-        android:orientation="vertical"
-        android:gravity="center"
+        android:layout_height="wrap_content"
         android:layout_marginTop="?homeBoxTopMargin"
-        android:foreground="?selectableItemBackground"
-        android:clickable="true"
+        android:gravity="center"
         android:background="?attr/homeContentBackground">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/home_content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:text="@string/home_send_feedback"
+            android:layout_height="wrap_content"
+            android:text="@string/home_convention_ended"
             android:textColor="?attr/homeContentText"
             android:gravity="center"
             android:textStyle="bold"
-            app:autoSizeTextType="uniform"
-            app:autoSizeMinTextSize="?homeTitleSize"
-            app:autoSizeMaxTextSize="?homeMaxMessageSize"
-            app:autoSizeStepGranularity="2sp"
+            android:textSize="24sp"
             android:textAlignment="center"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="13dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"/>
+    </amai.org.conventions.customviews.FrameLayoutWithState>
 
-    </amai.org.conventions.customviews.FrameLayoutWithMaxHeight>
+    <Button
+        android:id="@+id/home_go_to_feedback_button"
+        android:text="@string/home_go_to_my_events"
+        android:layout_marginTop="?homeSingleButtonTopMargin"
+        style="?homeSingleButtonStyle"
+        android:onClick="onGoToFeedbackClicked"/>
 </LinearLayout>

@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:gravity="bottom"
     android:orientation="vertical">
 
@@ -24,14 +24,18 @@
             android:layout_gravity="center"/>
     </amai.org.conventions.customviews.FrameLayoutWithState>
 
-    <amai.org.conventions.customviews.NestedListView
-        android:id="@+id/home_upcoming_programme_events_list"
+    <amai.org.conventions.customviews.FrameLayoutWithState
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="?homeContentBackground"
-        android:layout_marginTop="?homeBoxTopMargin"
-        android:divider="@null"/>
+        android:layout_height="250dp"
+        android:layout_marginTop="?homeBoxTopMargin">
+        <amai.org.conventions.customviews.NestedListView
+            android:id="@+id/home_upcoming_programme_events_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?homeContentBackground"
+            android:divider="?homeEventsListDivider"
+            android:dividerHeight="?attr/homeEventsListDividerHeight"/>
+    </amai.org.conventions.customviews.FrameLayoutWithState>
 
     <Button
         android:id="@+id/home_screen_bottom_button"

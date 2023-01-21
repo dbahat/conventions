@@ -38,4 +38,10 @@
 
     <dimen name="fab_margin">26dp</dimen>
     <dimen name="fab_margin_anchored_to_top">10dp</dimen>
+
+    <!-- Assumed heights in home screen. These are not accurate, they just have to give the feeling
+         of the actual height. The heights were taken from the layout inspector. -->
+    <dimen name="home_during_event_title_height">34dp</dimen>
+    <dimen name="home_during_event_content_height">77dp</dimen>
+    <dimen name="home_during_event_curr_event_height">62dp</dimen>
 </resources>

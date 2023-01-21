@@ -6,19 +6,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <amai.org.conventions.customviews.AspectRatioImageView
-        android:id="@+id/home_logo"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="?homeLogoMargin"
-        android:src="?homeLogo"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="top"
+        android:layout_margin="?homeLogoMargin">
+        <ImageView
+            android:id="@+id/home_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:scaleType="fitStart"
+            android:adjustViewBounds="true"
+            android:layout_gravity="center_horizontal"
+            android:src="?homeLogo"/>
+    </FrameLayout>
 
     <!-- The content of the info box will be placed at runtime inside this layout -->
     <FrameLayout
         android:id="@+id/home_info_box"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:layout_marginTop="?homeFrameTopMargin"
         android:layout_marginStart="?homeFrameMargins"
         android:layout_marginEnd="?homeFrameMargins"
