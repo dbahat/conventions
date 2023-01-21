@@ -529,6 +529,11 @@
 
         <!-- Should programme search FAB be at the top of the programme activity -->
         <attr name="fabOnProgrammeTop" format="boolean"/>
+        <!-- The gravity of the fab in case of fabOnProgrammeTop -->
+        <attr name="fabOnProgrammeTopAlignment" format="enum|reference">
+            <enum name="START" value="8388611"/>
+            <enum name="END" value="8388613"/>
+        </attr>
 
         <!-- Color for search categories checkboxes, if color from event type is not used. -->
         <attr name="searchCategoriesColor" format="color|reference" />
