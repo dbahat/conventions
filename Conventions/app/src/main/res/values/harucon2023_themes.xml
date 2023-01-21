@@ -62,22 +62,21 @@
         <item name="homeLogoMargin">20dp</item>
         <item name="homeLogo">@drawable/harucon2022_home_image</item>
         <item name="homeBottomImage">@null</item>
-        <item name="homeBackground">@drawable/harucon2022_home_background</item>
+        <item name="homeBackground">@color/harucon2023_light_gray</item>
         <item name="homeToolbarTitle">@drawable/harucon2022_logo_small</item>
-        <item name="homeToolbarBackground">@null</item>
-        <item name="homeTitleBackground">@null</item>
+        <item name="homeToolbarBackground">@color/harucon2023_pink</item>
+        <item name="homeTitleBackground">@drawable/harucon2023_home_title_background</item>
         <item name="homeShowCurrentUpcomingTitles">true</item>
-        <item name="homeTitleText">@color/harucon2022_dark_blue</item>
-        <item name="homeContentBackground">@drawable/harucon2022_home_content_background</item>
-        <item name="homeContentText">@drawable/harucon2022_home_content_text</item>
-        <item name="homeButtonBackground">@drawable/harucon2022_home_button</item>
+        <item name="homeTitleText">@drawable/harucon2023_home_title_text</item>
+        <item name="homeContentBackground">@drawable/harucon2023_home_content_background</item>
+        <item name="homeContentText">@drawable/harucon2023_home_content_text</item>
+        <item name="homeButtonBackground">@drawable/harucon2023_home_button</item>
         <item name="homeButtonText">@color/white</item>
-        <item name="homeEventsListDivider">@drawable/harucon2022_home_event_list_divider</item>
+        <item name="homeEventsListEventBackground">@drawable/harucon2023_rounded_edges_white</item>
+        <item name="homeEventsListDivider">@android:color/transparent</item>
+        <item name="homeEventsListDividerHeight">10dp</item>
         <item name="homeBoxTopMargin">10dp</item>
         <item name="homeSingleButtonTopMargin">10dp</item>
-        <item name="homeUpcomingPadding">@null</item>
-        <item name="homeUpcomingPaddingTop">@null</item>
-        <item name="homeUpcomingMarginBottom">@null</item>
         <item name="homeFrameTopMargin">10dp</item>
         <!-- Event View -->
         <item name="eventViewLayout">@layout/rounded_convention_event</item>
@@ -181,7 +180,7 @@
     </style>
 
     <style name="AppBaseTheme.Harucon2023.Splash">
-        <item name="android:windowBackground">@drawable/harucon2022_home_background</item>
+        <item name="android:windowBackground">@color/harucon2023_light_gray</item>
     </style>
 
     <style name="OverflowMenu.Harucon2023" parent="Widget.AppCompat.ActionButton.Overflow">

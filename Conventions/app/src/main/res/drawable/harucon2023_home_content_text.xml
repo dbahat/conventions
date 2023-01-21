@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:color="@color/harucon2023_green" app:state_home_during_con="true" app:state_home_has_favorites="false"/>
+    <item android:color="@color/harucon2023_pink" app:state_home_during_con="true" app:state_home_has_favorites="true" app:state_home_is_current="true"/>
+    <item android:color="@color/harucon2023_green" app:state_home_during_con="true" app:state_home_has_favorites="true" app:state_home_is_upcoming="true"/>
+    <item android:color="@color/harucon2023_gray"/>
+</selector>

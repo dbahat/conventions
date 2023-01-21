@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:drawable="@color/white" app:state_home_during_con="true" app:state_home_has_favorites="true" app:state_home_is_current="true"/>
-    <item android:drawable="@drawable/harucon2022_home_message_background"/>
-</selector>
