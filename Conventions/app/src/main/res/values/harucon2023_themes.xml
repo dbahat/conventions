@@ -90,7 +90,7 @@
         <item name="eventTimeBackground">@drawable/harucon2023_event_view_time_background_color</item>
         <item name="eventFavoriteIcon">@drawable/harucon2023_favorite_icon</item>
         <item name="eventFavoriteIconColor">@drawable/harucon2023_favorite_icon_color</item>
-<!--        <item name="eventFeedbackIcon">@drawable/harucon2023_feedback_icon</item>-->
+        <item name="eventFeedbackIcon">@drawable/harucon2023_event_feedback_icon</item>
         <item name="eventFeedbackIconColor">@drawable/harucon2022_event_feedback_icon_color</item>
         <item name="useEventTextColorFromEventType">false</item>
         <item name="useEventTimeColorFromEventType">false</item>
