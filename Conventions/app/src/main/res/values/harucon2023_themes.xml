@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppBaseTheme.Harucon2022" parent="AppBaseTheme.Light">
+    <style name="AppBaseTheme.Harucon2023" parent="AppBaseTheme.Light">
         <!-- Sub-themes -->
-        <item name="android:dialogTheme">@style/AppDialogTheme.Harucon2022</item>
-        <item name="alertDialogTheme">@style/AppAlertDialogTheme.Harucon2022</item>
+        <item name="android:dialogTheme">@style/AppDialogTheme.Harucon2023</item>
+        <item name="alertDialogTheme">@style/AppAlertDialogTheme.Harucon2023</item>
         <!-- not using android:actionOverflowButtonStyle since it doesn't seem to work in Jellybean -->
-        <item name="actionOverflowButtonStyle">@style/OverflowMenu.Harucon2022</item>
+        <item name="actionOverflowButtonStyle">@style/OverflowMenu.Harucon2023</item>
         <!-- General -->
         <item name="android:colorPrimaryDark">@color/black</item> <!-- Toolbar color -->
         <item name="colorAccent">@color/harucon2022_light_yellow</item>
@@ -161,11 +161,11 @@
         <item name="standsMapHighlight">@color/harucon2022_transparent_light_yellow</item>
     </style>
 
-    <style name="AppBaseTheme.Harucon2022.Event" parent="AppBaseTheme.Harucon2022">
+    <style name="AppBaseTheme.Harucon2023.Event" parent="AppBaseTheme.Harucon2023">
         <item name="android:textColorLink">@color/harucon2022_pink</item>
     </style>
 
-    <style name="AppDialogTheme.Harucon2022" parent="Theme.AppCompat.Light.Dialog">
+    <style name="AppDialogTheme.Harucon2023" parent="Theme.AppCompat.Light.Dialog">
         <!-- This is the default starting API23. In any case the title is always left-justified so it's best to not use it. -->
         <item name="android:windowNoTitle">true</item>
         <item name="colorAccent">@color/harucon2022_dark_red</item>
@@ -173,17 +173,17 @@
         <item name="android:textColorPrimary">@android:color/black</item>
     </style>
 
-    <style name="AppAlertDialogTheme.Harucon2022" parent="Theme.AppCompat.Light.Dialog.Alert">
+    <style name="AppAlertDialogTheme.Harucon2023" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorAccent">@color/harucon2022_dark_red</item>
         <item name="borderlessButtonColor">@color/harucon2022_dark_red</item>
         <item name="android:textColorPrimary">@android:color/black</item>
     </style>
 
-    <style name="AppBaseTheme.Harucon2022.Splash">
+    <style name="AppBaseTheme.Harucon2023.Splash">
         <item name="android:windowBackground">@drawable/harucon2022_home_background</item>
     </style>
 
-    <style name="OverflowMenu.Harucon2022" parent="Widget.AppCompat.ActionButton.Overflow">
+    <style name="OverflowMenu.Harucon2023" parent="Widget.AppCompat.ActionButton.Overflow">
         <item name="android:src">@drawable/ic_more_vert_black_24dp</item>
     </style>
 </resources>
