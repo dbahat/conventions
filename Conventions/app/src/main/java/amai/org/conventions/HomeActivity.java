@@ -166,6 +166,7 @@ public class HomeActivity extends NavigationActivity {
 			TextView title = findViewById(R.id.home_content_title);
 			title.setTextColor(baseStates.getThemeColor(this, R.attr.homeTitleText));
 		}
+		setViewState(R.id.home_logo, baseStates);
 
 		if (upcomingEvent != null) {
 			// There's an upcoming event - show it
@@ -248,6 +249,7 @@ public class HomeActivity extends NavigationActivity {
 		setViewState(R.id.home_title_container, baseStates);
 		baseStates.setForView(upcomingEventsListView);
 		upcomingProgrammeEventsTitle.setTextColor(baseStates.getThemeColor(this, R.attr.homeTitleText));
+		setViewState(R.id.home_logo, baseStates);
 
 		final List<ConventionEvent> upcomingEvents = getUpcomingProgrammeEvents();
 
@@ -397,6 +399,7 @@ public class HomeActivity extends NavigationActivity {
 		setViewState(R.id.home_title_container, baseStates);
 		setViewState(R.id.home_content_container, baseStates);
 		contentView.setTextColor(baseStates.getThemeColor(this, R.attr.homeContentText));
+		setViewState(R.id.home_logo, baseStates);
 
 		// the convention didn't start yet. Show the user the number of days until it starts.
 		int daysUntilConventionStarts = getDaysUntilConventionStart();
@@ -456,6 +459,7 @@ public class HomeActivity extends NavigationActivity {
 		baseStates.setForView(contentViewContainer);
 		titleView.setTextColor(baseStates.getThemeColor(this, R.attr.homeTitleText));
 		contentView.setTextColor(baseStates.getThemeColor(this, R.attr.homeContentText));
+		setViewState(R.id.home_logo, baseStates);
 	}
 
 	private int getDaysUntilConventionStart() {
