@@ -96,12 +96,13 @@
         <item name="useEventTimeColorFromEventType">false</item>
         <item name="conflictingEventBackground">@drawable/harucon2023_conflicting_event_label_bg</item>
         <!-- Programme Screen -->
-        <item name="eventTimeHeaderBackground">@drawable/harucon2022_frame</item>
-        <item name="eventTimeHeaderTextColor">@color/harucon2022_light_yellow</item>
+        <item name="eventTimeHeaderBackground">@drawable/harucon2023_event_time_header_background</item>
+        <item name="eventTimeHeaderWidth">match_parent</item>
+        <item name="eventTimeHeaderTextColor">@color/white</item>
         <item name="eventTimeHeaderMarginTop">10dp</item>
-        <item name="eventTimeHeaderMarginBottom">0dp</item>
-        <item name="eventTimeHeaderPaddingHorizontal">@null</item>
-        <item name="eventTimeHeaderPaddingVertical">@null</item>
+        <item name="eventTimeHeaderMarginBottom">@null</item>
+        <item name="eventTimeHeaderMarginHorizontal">8dp</item>
+        <item name="eventTimeHeaderPaddingVertical">4dp</item>
         <item name="marginBetweenEventsListAndNextHeader">0dp</item>
         <item name="fabOnProgrammeTop">true</item>
         <!-- My Events Screen -->

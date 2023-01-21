@@ -12,11 +12,13 @@
 
     <FrameLayout
         android:layout_gravity="center"
-        android:layout_width="wrap_content"
+        android:layout_width="?eventTimeHeaderWidth"
         android:layout_height="wrap_content"
         android:background="?eventTimeHeaderBackground"
         android:layout_marginTop="?eventTimeHeaderMarginTop"
         android:layout_marginBottom="?eventTimeHeaderMarginBottom"
+        android:layout_marginStart="?eventTimeHeaderMarginHorizontal"
+        android:layout_marginEnd="?eventTimeHeaderMarginHorizontal"
         android:paddingStart="?eventTimeHeaderPaddingHorizontal"
         android:paddingEnd="?eventTimeHeaderPaddingHorizontal"
         android:paddingTop="?eventTimeHeaderPaddingVertical"
