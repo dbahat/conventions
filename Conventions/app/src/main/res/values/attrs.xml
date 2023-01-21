@@ -188,8 +188,6 @@
         <!-- Bottom image in home activity (all screens) -->
         <attr name="homeBottomImage" format="integer|reference"/>
 
-        <!-- During the convention when user has favorite events, should the current and upcoming event have separate titles. -->
-        <attr name="homeShowCurrentUpcomingTitles" format="boolean"/>
         <!-- Background for title of info boxes in home screen.
              Used in: after convention box title, before convention title with convention date,
              during convention with favorites (with single title) "my events" title,
@@ -200,35 +198,33 @@
         <!-- Text color for title of info boxes in home screen. See homeTitleBackground for usage. -->
         <attr name="homeTitleText" format="color|reference"/>
         <!-- Margin between title and info box. Used in: before convention, after convention,
-             during convention when no favorites, single title during convention with favorites. -->
+             during convention when no favorites, during convention with favorites (single or separate titles). -->
         <attr name="homeBoxTopMargin" format="dimension"/>
         <!-- Background for info box in home screen. See homeTitleBackground for usage. -->
         <attr name="homeContentBackground" format="color|reference"/>
         <!-- Text color for text in info box in home screen. See homeContentBackground for usage. -->
         <attr name="homeContentText" format="color|reference"/>
         <!-- Margin between current and upcoming event in home during convention when there are favorites.
-             Used in both single and separate title layouts. Also used when there is only one event (and not both current and upcoming). -->
+             Used in both single and separate title layouts. -->
         <attr name="homeEventsMargin" format="dimension"/>
 
+        <!-- During the convention when user has favorite events, should the current and upcoming event have separate titles. -->
+        <attr name="homeShowCurrentUpcomingTitles" format="boolean"/>
         <!-- Text color for upcoming event time (both single and separate titles) and current event time (when no upcoming event).
              Can be a color state list drawable. Home state is set with state_home_... attributes. -->
         <attr name="homeEventTimeText" format="color|reference"/>
         <!-- Text color for upcoming event hall (both single and separate titles).
              Can be a color state list drawable. Home state is set with state_home_... attributes. -->
         <attr name="homeEventHallText" format="color|reference"/>
-        <!-- Padding for upcoming event box (except top padding), for both single and separate titles -->
-        <attr name="homeUpcomingPadding" format="dimension"/>
-        <!-- Top padding for upcoming event box, for both single and separate titles -->
-        <attr name="homeUpcomingPaddingTop" format="dimension"/>
-        <!-- Single title - additional padding at the bottom of the upcoming event box -->
-        <attr name="homeUpcomingMarginBottom" format="dimension"/>
 
         <!-- Title size in home screen when there are no favorites. -->
         <attr name="homeEventsListTitleSize" format="dimension"/>
         <!-- Divider for events list when no favorites. Height is defined in attribute homeEventListDividerHeight. -->
         <attr name="homeEventsListDivider" format="color|reference"/>
         <!-- Height for events list divider when no favorites. -->
-        <attr name="homeEventListDividerHeight" format="dimension|reference"/>
+        <attr name="homeEventsListDividerHeight" format="dimension|reference"/>
+        <!-- Background for single event in the events list -->
+        <attr name="homeEventsListEventBackground" format="color|reference"/>
 
         <!-- Background for all buttons in home screen -->
         <attr name="homeButtonBackground" format="color|reference"/>
@@ -242,12 +238,6 @@
         <attr name="homeSingleButtonStyle" format="integer|reference"/>
         <!-- Show buttons in home screen (before and during convention) -->
         <attr name="homeShowButtons" format="boolean"/>
-        <!-- Title size in home screen. Used in: before convention, after convention,
-             during convention when there are favorites (single and separate titles).
-             Also used as the min size for before and after convention message. -->
-        <attr name="homeTitleSize" format="dimension"/>
-        <!-- Max text size for message before and after convention, and upcoming event name during convention (same and separate titles) -->
-        <attr name="homeMaxMessageSize" format="dimension"/>
 
         <!-- My Events Screen -->
 

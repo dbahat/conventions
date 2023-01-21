@@ -1,6 +1,5 @@
 package amai.org.conventions;
 
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -93,7 +92,7 @@ public class HomeActivity extends NavigationActivity {
 		}
 	}
 
-	private boolean setupVoteOrViewText(ConventionEvent currentEvent, ImageView imageView) {
+	private boolean setupVoteOrView(ConventionEvent currentEvent, ImageView imageView) {
 		if (currentEvent.getUserInput().getVoteSurvey() != null || Convention.getInstance().getEventViewURL(currentEvent) != null) {
 			if (Convention.getInstance().getEventViewURL(currentEvent) == null) {
 				imageView.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.outline_poll_white_48));
@@ -126,6 +125,7 @@ public class HomeActivity extends NavigationActivity {
 		View currentEventTitleContainer = findViewById(R.id.home_current_event_title_container);
 		View currentEventContainer = findViewById(R.id.home_current_event_container_title);
 		TextView currentEventName = findViewById(R.id.home_current_event_name);
+		TextView currentEventHall = findViewById(R.id.home_current_event_hall);
 		ImageView currentEventVote = findViewById(R.id.home_current_event_vote);
 
 		TextView upcomingEventTitle = findViewById(R.id.home_upcoming_event_title);
@@ -160,6 +160,7 @@ public class HomeActivity extends NavigationActivity {
 			currentEventTitle.setTextColor(currEventStates.getThemeColor(this, R.attr.homeTitleText));
 			setViewState(R.id.home_upcoming_event_title_container, upcomingEventStates);
 			upcomingEventTitle.setTextColor(upcomingEventStates.getThemeColor(this, R.attr.homeTitleText));
+			currentEventHall.setTextColor(currEventStates.getThemeColor(this, R.attr.homeEventHallText));
 		} else {
 			setViewState(R.id.home_title_container, baseStates);
 			TextView title = findViewById(R.id.home_content_title);
@@ -175,17 +176,18 @@ public class HomeActivity extends NavigationActivity {
 					R.string.home_upcoming_event_time,
 					Dates.toHumanReadableTimeDuration(upcomingEvent.getStartTime().getTime() - Dates.now().getTime()))
 			);
-			setupVoteOrViewText(upcomingEvent, upcomingEventVote);
+			setupVoteOrView(upcomingEvent, upcomingEventVote);
 
 			// if there's a current event, show it as well
 			if (currentEvent != null) {
 				// Only add the "currently showing:" prefix if it's not in the title
 				if (useSepTitlesLayout) {
 					currentEventName.setText(currentEvent.getTitle());
+					currentEventHall.setText(currentEvent.getHall().getName());
 				} else {
 					currentEventName.setText(getString(R.string.home_now_showing, currentEvent.getTitle()));
 				}
-				setupVoteOrViewText(currentEvent, currentEventVote);
+				setupVoteOrView(currentEvent, currentEventVote);
 			} else {
 				currentEventContainer.setVisibility(View.GONE);
 				if (useSepTitlesLayout) {
@@ -205,25 +207,44 @@ public class HomeActivity extends NavigationActivity {
 			}
 			upcomingEventName.setText(currentEvent.getTitle());
 			upcomingEventName.setTextColor(currEventStates.getThemeColor(this, R.attr.homeContentText));
-			upcomingEventTime.setText(R.string.home_now_showing_no_title);
+			// Only set the "current" time if it's not in the title
+			if (!useSepTitlesLayout) {
+				upcomingEventTime.setText(R.string.home_now_showing_no_title);
+			}
 			upcomingEventTime.setTextColor(currEventStates.getThemeColor(this, R.attr.homeEventTimeText));
 			upcomingEventHall.setText(currentEvent.getHall().getName());
 			upcomingEventHall.setTextColor(currEventStates.getThemeColor(this, R.attr.homeEventHallText));
-			setupVoteOrViewText(currentEvent, upcomingEventVote);
+			setupVoteOrView(currentEvent, upcomingEventVote);
 			currEventStates.setForView(upcomingEventVote);
 
 			// In this case, we want the 'go to my events' to go to the programme instead, since the user has no more favorite events.
 			Button goToMyEventsButton = findViewById(R.id.home_go_to_my_events_button);
 			goToMyEventsButton.setText(R.string.home_go_to_programme);
-			goToMyEventsButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					onGoToProgrammeClicked(v);
-				}
-			});
+			goToMyEventsButton.setOnClickListener(this::onGoToProgrammeClicked);
 		}
 		Views.fixRadialGradient(findViewById(R.id.home_current_event_container_title));
 		Views.fixRadialGradient(upcomingEventContainer);
+
+		// If one of the events is missing, add space to make it look like it's invisible instead of gone
+		if (currentEvent == null || upcomingEvent == null) {
+			View spaceView = findViewById(R.id.hidden_event_space);
+			spaceView.setVisibility(View.VISIBLE);
+			int height;
+
+			// The spacing is different in each layout
+			if (useSepTitlesLayout) {
+				height = ThemeAttributes.getDimensionSize(this, R.attr.homeEventsMargin) +
+					getResources().getDimensionPixelSize(R.dimen.home_during_event_title_height) +
+					ThemeAttributes.getDimensionSize(this, R.attr.homeBoxTopMargin) +
+					getResources().getDimensionPixelSize(R.dimen.home_during_event_content_height);
+			} else {
+				height = ThemeAttributes.getDimensionSize(this, R.attr.homeEventsMargin) +
+					getResources().getDimensionPixelSize(R.dimen.home_during_event_curr_event_height);
+			}
+			ViewGroup.LayoutParams layoutParams = spaceView.getLayoutParams();
+			layoutParams.height = height;
+			spaceView.setLayoutParams(layoutParams);
+		}
 
 		boolean showButtons = ThemeAttributes.getBoolean(this, R.attr.homeShowButtons);
 		if (!showButtons) {
@@ -285,7 +306,7 @@ public class HomeActivity extends NavigationActivity {
 				}
 
 				ConventionEvent upcomingEvent = upcomingEvents.get(position);
-				viewHolder.bind(upcomingEvent.getTitle(), Convention.getInstance().getEventViewURL(upcomingEvent) != null, position < getCount() - 1, baseStates);
+				viewHolder.bind(upcomingEvent.getTitle(), Convention.getInstance().getEventViewURL(upcomingEvent) != null, baseStates);
 				return convertView;
 			}
 		};
@@ -318,21 +339,18 @@ public class HomeActivity extends NavigationActivity {
 	private static class ProgrammeEventTitleViewHolder extends RecyclerView.ViewHolder {
 		private TextView title;
 		private ImageView image;
-		private View divider;
 
 		ProgrammeEventTitleViewHolder(View itemView) {
 			super(itemView);
-			title = (TextView)itemView.findViewById(R.id.home_programme_event_title);
+			title = itemView.findViewById(R.id.home_programme_event_title);
 			image = itemView.findViewById(R.id.home_programme_event_image);
-			divider = itemView.findViewById(R.id.home_programme_event_divider);
 		}
 
-		void bind(String upcomingEventTitle, boolean showImage, boolean showDivider, StateList states) {
+		void bind(String upcomingEventTitle, boolean showImage, StateList states) {
 			title.setText(upcomingEventTitle);
 			title.setTextColor(states.getThemeColor(itemView.getContext(), R.attr.homeContentText));
 			image.setVisibility(showImage ? View.VISIBLE : View.GONE);
 			states.setForView(image);
-			divider.setVisibility(showDivider ? View.VISIBLE : View.GONE);
 		}
 	}
 
@@ -428,30 +446,24 @@ public class HomeActivity extends NavigationActivity {
 	}
 
 	private void setContentForAfterConventionEnded() {
+		// All the events are already in-progress or finished. Show the user to the feedback screen.
 		setInfoBoxContent(R.layout.home_box_after_convention);
 		FrameLayout contentViewContainer = findViewById(R.id.home_content_container);
 		TextView titleView = findViewById(R.id.home_content_title);
 		TextView contentView = findViewById(R.id.home_content);
+		Button goToFeedbackButton = findViewById(R.id.home_go_to_feedback_button);
 		Views.fixRadialGradient(contentViewContainer);
-		// All the events are already in-progress or finished. Show the user to the feedback screen.
-		contentViewContainer.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				navigateToActivity(FeedbackActivity.class);
-			}
-		});
-
 		StateList baseStates = new StateList(R.attr.state_home_after_con);
+
+		titleView.setText(getString(R.string.thanks_for_coming, Convention.getInstance().getDisplayName()));
 
 		if (Convention.getInstance().getFeedback().isSent() || Convention.getInstance().isFeedbackSendingTimeOver()) {
 			// The feedback filling time is over or feedback was sent. Allow the user to see his feedback
-			titleView.setText(R.string.home_convention_ended);
-			contentView.setText(R.string.home_show_feedback);
+			goToFeedbackButton.setText(R.string.home_show_feedback);
 			baseStates.add(R.attr.state_home_should_send_feedback);
 		} else {
 			// Ask the user to fill feedback
-			titleView.setText(R.string.home_help_us_improve);
-			contentView.setText(R.string.home_send_feedback);
+			goToFeedbackButton.setText(R.string.home_send_feedback);
 		}
 
 		setViewState(R.id.home_title_container, baseStates);
@@ -477,5 +489,9 @@ public class HomeActivity extends NavigationActivity {
 
 	public void onGoToMyEventsClicked(View view) {
 		navigateToActivity(MyEventsActivity.class);
+	}
+
+	public void onGoToFeedbackClicked(View view) {
+		navigateToActivity(FeedbackActivity.class);
 	}
 }

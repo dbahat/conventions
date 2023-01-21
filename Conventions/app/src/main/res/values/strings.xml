@@ -145,7 +145,7 @@
     <string name="favorites_were_updated">שינויים באירועים מועדפים</string>
     <string name="go_to_my_events">עבור לאירועים שלי</string>
     <string name="show_favorites_updates_title">הודע על שינויים באירועים מועדפים</string>
-    <string name="show_favorites_updates_summary">הצג הודעות כאשר התוכניה מתעדכנת ויש שינויים חשובים באירועים מועדפים, כמו זמן, מיקום ואורך האירוע.</string>
+    <string name="show_favorites_updates_summary">הצג הודעות כאשר התוכנייה מתעדכנת ויש שינויים חשובים באירועים מועדפים, כמו זמן, מיקום ואורך האירוע.</string>
     <string name="push_registration_failed">לא ניתן לעדכן. בדוק חיבור לאינטרנט</string>
     <string name="push_notification_title">התראה</string>
     <string name="change_settings">שנה הגדרות</string>
@@ -164,11 +164,11 @@
     <string name="dash_with_values">%1$s – %2$s</string>
 
     <string name="home_convention_start_time">עוד %d ימים!</string>
-    <string name="home_help_us_improve">עזרו לנו להשתפר</string>
+    <string name="thanks_for_coming">תודה שבאתם ל%s</string>
     <string name="home_send_feedback">לשליחת פידבק</string>
     <string name="home_show_feedback">הצג פידבק</string>
     <string name="home_go_to_my_events">עבור לאירועים שלי</string>
-    <string name="home_go_to_programme">לכל האירועים</string>
+    <string name="home_go_to_programme">עבור לתוכנייה</string>
     <string name="home_now_showing">כעת: %s</string>
     <string name="home_now_showing_no_title">כעת</string>
     <string name="home_now_showing_title">מתקיים עכשיו</string>
@@ -194,7 +194,7 @@
     <string name="physical_event">אירוע פיזי</string>
     <string name="virtual_event">אירוע וירטואלי</string>
     <string name="hybrid_event">אירוע היברידי</string>
-    <string name="notification_channel_description_reminders">תזכורות הקשורות לאירועים שסימנת בתוכניה</string>
+    <string name="notification_channel_description_reminders">תזכורות הקשורות לאירועים שסימנת בתוכנייה</string>
 
     <string name="accessibility">נגישות</string>
     <string name="accessibility_android_settings_button">להפעלת אפשרויות הנגישות של אנדרואיד</string>
