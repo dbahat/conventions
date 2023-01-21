@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppBaseTheme.Harucon2023" parent="AppBaseTheme.Light">
+    <style name="AppBaseTheme.Harucon2023" parent="AppBaseTheme.Light.DarkToolbar">
         <!-- Sub-themes -->
         <item name="android:dialogTheme">@style/AppDialogTheme.Harucon2023</item>
         <item name="alertDialogTheme">@style/AppAlertDialogTheme.Harucon2023</item>
@@ -13,8 +13,8 @@
         <item name="android:textColorSecondary">@color/harucon2022_dark_blue</item>
         <item name="android:textColorHint">@color/harucon2022_light_yellow</item>
         <item name="android:textColorLink">@color/harucon2022_light_yellow</item>
-        <item name="actionButtonColor">@color/harucon2022_dark_blue</item>
-        <item name="actionButtonIcon">@drawable/harucon2022_search</item>
+        <item name="actionButtonColor">@color/harucon2023_pink</item>
+        <item name="actionButtonIcon">@drawable/harucon2023_search_icon</item>
         <item name="hintTextColor">@color/harucon2022_light_yellow</item>
         <item name="swipeToRefreshColor">@color/harucon2022_pink</item>
         <item name="snackbarActionColor">@color/harucon2022_pink</item>
@@ -37,9 +37,9 @@
         <!-- Notifications -->
         <item name="notificationSmallIcon">@drawable/harucon_notification_small</item>
         <!-- Toolbar -->
-        <item name="toolbarBackground">@color/harucon2022_pink</item>
-        <item name="toolbarIconAccentColor">@color/harucon2022_light_yellow</item>
-        <item name="toolbarTitleColor">@color/harucon2022_dark_blue</item>
+        <item name="toolbarBackground">@color/harucon2023_pink</item>
+        <item name="toolbarIconAccentColor">@color/harucon2023_yellow</item>
+        <item name="toolbarTitleColor">@color/white</item>
         <!-- Navigation Drawer -->
         <item name="navigationPopupBackground">@drawable/harucon2022_navigation_background</item>
         <item name="navigationPopupSpaceVisibility">gone</item>
@@ -105,6 +105,7 @@
         <item name="eventTimeHeaderPaddingVertical">4dp</item>
         <item name="marginBetweenEventsListAndNextHeader">0dp</item>
         <item name="fabOnProgrammeTop">true</item>
+        <item name="fabOnProgrammeTopAlignment">START</item>
         <!-- My Events Screen -->
         <item name="nextEventStartTimeBackground">@null</item>
         <item name="nextEventStartTimeTextColor">@color/harucon2022_light_yellow</item>
