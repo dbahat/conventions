@@ -175,7 +175,7 @@
         <attr name="homeToolbarTitle" format="integer|reference"/>
         <!-- Home activity toolbar background (all screens) -->
         <attr name="homeToolbarBackground" format="integer|reference"/>
-        <!-- Top image in home activity (all screens) -->
+        <!-- Top image in home activity (all screens). Can be a state list drawable. Home state is set with state_home_... attributes. -->
         <attr name="homeLogo" format="integer|reference"/>
         <!-- Margins (all sides) for homeLogo -->
         <attr name="homeLogoMargin" format="dimension"/>
