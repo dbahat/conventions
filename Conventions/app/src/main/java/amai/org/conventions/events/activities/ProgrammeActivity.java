@@ -67,7 +67,8 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 			FloatingActionButton actionButton = getActionButton();
 			if (actionButton.getLayoutParams() instanceof CoordinatorLayout.LayoutParams) {
 				CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) actionButton.getLayoutParams();
-				layoutParams.anchorGravity = Gravity.TOP | Gravity.END;
+				int fabAlignment = ThemeAttributes.getInteger(this, R.attr.fabOnProgrammeTopAlignment);
+				layoutParams.anchorGravity = Gravity.TOP | fabAlignment;
 				layoutParams.topMargin = ThemeAttributes.getDimensionSize(this, android.R.attr.actionBarSize) +
 						getResources().getDimensionPixelOffset(R.dimen.fab_margin_anchored_to_top);
 				actionButton.setLayoutParams(actionButton.getLayoutParams());
