@@ -7,7 +7,8 @@
     android:gravity="bottom"
     android:orientation="vertical">
 
-    <FrameLayout
+    <amai.org.conventions.customviews.FrameLayoutWithState
+        android:id="@+id/home_title_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?homeTitleBackground"
@@ -21,14 +22,14 @@
             android:textColor="?homeTitleText"
             android:textStyle="bold"
             android:layout_gravity="center"/>
-    </FrameLayout>
+    </amai.org.conventions.customviews.FrameLayoutWithState>
 
     <amai.org.conventions.customviews.NestedListView
         android:id="@+id/home_upcoming_programme_events_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="?homeEventsListBackground"
+        android:background="?homeContentBackground"
         android:layout_marginTop="?homeBoxTopMargin"
         android:divider="@null"/>
 

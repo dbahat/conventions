@@ -11,7 +11,7 @@ import android.widget.FrameLayout;
 
 import amai.org.conventions.R;
 
-public class FrameLayoutWithMaxHeight extends FrameLayout {
+public class FrameLayoutWithMaxHeight extends FrameLayoutWithState {
 	private int maxHeight;
 
 	public FrameLayoutWithMaxHeight(@NonNull Context context) {

@@ -193,44 +193,28 @@
         <!-- Background for title of info boxes in home screen.
              Used in: after convention box title, before convention title with convention date,
              during convention with favorites (with single title) "my events" title,
-             during convention without favorites "events starting at..." title. -->
+             during convention with favorites current and upcoming event titles,
+             during convention without favorites "events starting at..." title.
+             Can be a state list drawable. Home state is set with state_home_... attributes. -->
         <attr name="homeTitleBackground" format="color|reference"/>
         <!-- Text color for title of info boxes in home screen. See homeTitleBackground for usage. -->
         <attr name="homeTitleText" format="color|reference"/>
         <!-- Margin between title and info box. Used in: before convention, after convention,
-             during convention when no favorites, single title during convention with favorties. -->
+             during convention when no favorites, single title during convention with favorites. -->
         <attr name="homeBoxTopMargin" format="dimension"/>
-        <!-- Background for info box in home screen. Used in: after convention info box, before convention info box. -->
-        <attr name="homeMessageBackground" format="color|reference"/>
-        <!-- Text color for text in info box in home screen. See homeMessageBackground for usage. -->
-        <attr name="homeMessageText" format="color|reference"/>
+        <!-- Background for info box in home screen. See homeTitleBackground for usage. -->
+        <attr name="homeContentBackground" format="color|reference"/>
+        <!-- Text color for text in info box in home screen. See homeContentBackground for usage. -->
+        <attr name="homeContentText" format="color|reference"/>
         <!-- Margin between current and upcoming event in home during convention when there are favorites.
              Used in both single and separate title layouts. Also used when there is only one event (and not both current and upcoming). -->
         <attr name="homeEventsMargin" format="dimension"/>
 
-        <!-- Separate titles - background color for current event title. Also used when there is no upcoming event. -->
-        <attr name="homeCurrentEventTitleBackground" format="color|reference"/>
-        <!-- Separate titles - text color for current event title. Also used when there is no upcoming event. -->
-        <attr name="homeCurrentEventTitleText" format="color|reference"/>
-        <!-- Background color for current event (both single and separate titles) when there is an upcoming event -->
-        <attr name="homeCurrentEventBackground" format="color|reference"/>
-        <!-- Background color for current event (both single and separate titles) when there is no upcoming event -->
-        <attr name="homeCurrentEventOnlyBackground" format="color|reference"/>
-        <!-- Color for current event name and images in home screen (both single and separate titles).
-             Also used when there is only a current event and no upcoming event (in name, images, hall and time). -->
-        <attr name="homeCurrentEventText" format="color|reference"/>
-
-        <!-- Separate titles - background color for upcoming event title -->
-        <attr name="homeUpcomingEventTitleBackground" format="color|reference"/>
-        <!-- Separate titles - text color for upcoming event title -->
-        <attr name="homeUpcomingEventTitleText" format="color|reference"/>
-        <!-- Background color for upcoming event (both single and separate titles) -->
-        <attr name="homeUpcomingEventBackground" format="color|reference"/>
-        <!-- Color for upcoming event name and images in home screen (both single and separate titles). -->
-        <attr name="homeUpcomingEventText" format="color|reference"/>
-        <!-- Text color for upcoming event time (both single and separate titles). -->
+        <!-- Text color for upcoming event time (both single and separate titles) and current event time (when no upcoming event).
+             Can be a color state list drawable. Home state is set with state_home_... attributes. -->
         <attr name="homeEventTimeText" format="color|reference"/>
-        <!-- Text color for upcoming event hall (both single and separate titles). -->
+        <!-- Text color for upcoming event hall (both single and separate titles).
+             Can be a color state list drawable. Home state is set with state_home_... attributes. -->
         <attr name="homeEventHallText" format="color|reference"/>
         <!-- Padding for upcoming event box (except top padding), for both single and separate titles -->
         <attr name="homeUpcomingPadding" format="dimension"/>
@@ -241,10 +225,6 @@
 
         <!-- Title size in home screen when there are no favorites. -->
         <attr name="homeEventsListTitleSize" format="dimension"/>
-        <!-- Background for events list when no favorites -->
-        <attr name="homeEventsListBackground" format="color|reference"/>
-        <!-- Color for event name and image in events list when no favorites -->
-        <attr name="homeEventNameInList" format="color|reference"/>
         <!-- Divider for events list when no favorites. Height is defined in attribute homeEventListDividerHeight. -->
         <attr name="homeEventsListDivider" format="color|reference"/>
         <!-- Height for events list divider when no favorites. -->
@@ -583,5 +563,15 @@
     <attr name="state_event_feedback_sent" format="boolean"/>
     <attr name="state_event_feedback_filled" format="boolean"/>
     <attr name="state_event_feedback_can_send" format="boolean"/>
+
+    <attr name="state_home_before_con" type="bool"/>
+    <attr name="state_home_during_con" type="bool"/>
+    <attr name="state_home_has_favorites" format="boolean"/>
+    <attr name="state_home_after_con" type="bool"/>
+    <attr name="state_home_has_current" type="bool"/>
+    <attr name="state_home_has_upcoming" type="bool"/>
+    <attr name="state_home_is_current" type="bool"/>
+    <attr name="state_home_is_upcoming" type="bool"/>
+    <attr name="state_home_should_send_feedback" type="bool"/>
 
 </resources>

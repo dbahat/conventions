@@ -8,7 +8,8 @@
     android:gravity="bottom"
     android:orientation="vertical">
 
-    <FrameLayout
+    <amai.org.conventions.customviews.FrameLayoutWithState
+        android:id="@+id/home_title_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?homeTitleBackground"
@@ -25,7 +26,7 @@
             android:gravity="center"
             android:textDirection="ltr"
             tools:text="12.03.2017"/>
-    </FrameLayout>
+    </amai.org.conventions.customviews.FrameLayoutWithState>
 
     <amai.org.conventions.customviews.FrameLayoutWithMaxHeight
         android:id="@+id/home_content_container"
@@ -35,14 +36,14 @@
         android:layout_marginTop="?homeBoxTopMargin"
         app:maxHeight="190dp"
         android:gravity="center"
-        android:background="?homeMessageBackground">
+        android:background="?attr/homeContentBackground">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/home_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:text="עוד 10 ימים!"
-            android:textColor="?homeMessageText"
+            android:textColor="?attr/homeContentText"
             android:textStyle="bold"
             app:autoSizeTextType="uniform"
             app:autoSizeMinTextSize="?homeTitleSize"

@@ -25,6 +25,7 @@ import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.StateList;
 import amai.org.conventions.utils.Strings;
 import androidx.annotation.AttrRes;
 import androidx.annotation.ColorInt;
@@ -52,7 +53,7 @@ public class EventView extends FrameLayout {
     private final View searchDescriptionContainer;
     private final TextView searchDescription;
     private String eventDescriptionContent;
-    private int[] eventState;
+    private StateList eventState;
 
 
     public EventView(Context context) {
@@ -150,7 +151,7 @@ public class EventView extends FrameLayout {
     }
 
     private void setEventState(ConventionEvent event, boolean conflicting) {
-        List<Integer> states = new ArrayList<Integer>(3);
+        StateList states = new StateList();
 
         if (!event.hasStarted()) {
             states.add(R.attr.state_event_not_started);
@@ -190,15 +191,9 @@ public class EventView extends FrameLayout {
             }
         }
 
-        // Convert to int[]
-        int[] intStates = new int[states.size()];
-        for(int i = 0; i < states.size(); ++i) {
-            intStates[i] = states.get(i);
-        }
-
-        this.eventState = intStates;
-        this.favoriteIcon.setImageState(eventState, false);
-        this.feedbackIcon.setImageState(eventState, false);
+        this.eventState = states;
+        eventState.setForView(this.favoriteIcon);
+        eventState.setForView(this.feedbackIcon);
     }
 
     public int getFavoriteIconColor(ConventionEvent event) {
@@ -252,7 +247,7 @@ public class EventView extends FrameLayout {
 
     private int getEventColorFromStateList(int attr) {
         // The event state must already be set here
-        return ThemeAttributes.getColorFromStateList(getContext(), attr, eventState);
+        return eventState.getThemeColor(getContext(), attr);
     }
 
     private int getEventBackgroundColor() {

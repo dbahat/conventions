@@ -16,7 +16,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             tools:text="'פחד' באנימציה לילדים"
-            android:textColor="?homeEventNameInList"
+            android:textColor="?homeContentText"
             android:textSize="18sp"
             android:layout_margin="8dp"
             />
@@ -26,7 +26,7 @@
             android:layout_height="30dp"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
-            app:tint="?homeEventNameInList"
+            app:tint="?homeContentText"
             android:visibility="gone"
             tools:visibility="visible"
             android:src="@drawable/baseline_videocam_white_48"

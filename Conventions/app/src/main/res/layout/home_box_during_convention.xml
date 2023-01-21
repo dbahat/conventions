@@ -8,7 +8,8 @@
     android:gravity="bottom"
     android:orientation="vertical">
 
-    <FrameLayout
+    <amai.org.conventions.customviews.FrameLayoutWithState
+        android:id="@+id/home_title_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?homeTitleBackground"
@@ -16,6 +17,7 @@
         android:foreground="?selectableItemBackground"
         android:padding="8dp">
         <TextView
+            android:id="@+id/home_content_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/my_events_title"
@@ -23,34 +25,33 @@
             android:textColor="?homeTitleText"
             android:textStyle="bold"
             android:layout_gravity="center"/>
-    </FrameLayout>
+    </amai.org.conventions.customviews.FrameLayoutWithState>
 
-    <FrameLayout
-        android:id="@+id/home_current_event_container"
+    <amai.org.conventions.customviews.FrameLayoutWithState
+        android:id="@+id/home_current_event_container_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="?homeBoxTopMargin"
         android:foreground="?selectableItemBackground"
+        android:background="?homeContentBackground"
         android:gravity="center"
         android:onClick="onCurrentEventClicked">
         <!-- This view is inside a FrameLayout because in previous API levels foreground was not available for other views -->
         <LinearLayout
-            android:id="@+id/home_current_event_container_background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="5dp"
             android:paddingEnd="5dp"
-            android:background="?homeCurrentEventBackground"
             android:orientation="horizontal">
             <TextView
-                android:id="@+id/home_current_event_title"
+                android:id="@+id/home_current_event_name"
                 android:visibility="visible"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 tools:text="כעת: תחרות השירה"
                 android:textAlignment="center"
-                android:textColor="?homeCurrentEventText"
+                android:textColor="?homeContentText"
                 android:textSize="20sp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
@@ -64,11 +65,11 @@
                 tools:visibility="visible"
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/baseline_videocam_white_48"
-                app:tint="?homeCurrentEventText" />
+                app:tint="?homeContentText" />
         </LinearLayout>
-    </FrameLayout>
+    </amai.org.conventions.customviews.FrameLayoutWithState>
 
-    <FrameLayout
+    <amai.org.conventions.customviews.FrameLayoutWithState
         android:id="@+id/home_upcoming_event_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -78,7 +79,7 @@
         android:paddingTop="?homeUpcomingPaddingTop"
         android:padding="?homeUpcomingPadding"
         android:onClick="onUpcomingEventClicked"
-        android:background="?homeUpcomingEventBackground">
+        android:background="?homeContentBackground">
         <!-- This layout is inside a FrameLayout because in previous API levels foreground was not available for other views -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -101,14 +102,14 @@
                 android:layout_marginBottom="8dp"
                 android:orientation="horizontal">
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/home_upcoming_event_title"
+                    android:id="@+id/home_upcoming_event_name"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="match_parent"
                     tools:text="2D Musical"
                     android:textAlignment="center"
                     android:gravity="center"
-                    android:textColor="?homeUpcomingEventText"
+                    android:textColor="?homeContentText"
                     android:textStyle="bold"
                     app:autoSizeTextType="uniform"
                     app:autoSizeMinTextSize="12sp"
@@ -124,7 +125,7 @@
                     tools:visibility="visible"
                     android:layout_gravity="center_vertical"
                     android:src="@drawable/baseline_videocam_white_48"
-                    app:tint="?homeUpcomingEventText" />
+                    app:tint="?homeContentText" />
             </LinearLayout>
 
             <TextView
@@ -136,7 +137,7 @@
                 android:textSize="18sp"
                 android:layout_marginBottom="?homeUpcomingMarginBottom"/>
         </LinearLayout>
-    </FrameLayout>
+    </amai.org.conventions.customviews.FrameLayoutWithState>
 
     <Button
         android:id="@+id/home_go_to_my_events_button"
