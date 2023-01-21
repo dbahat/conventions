@@ -498,12 +498,19 @@
         <!-- Text color for event time header in programme.
              Can be a color state list. Time state is set with state_event_... attributes. -->
         <attr name="eventTimeHeaderTextColor" format="color|reference"/>
+        <!-- width of the frame wrapping the time header (the background is for this frame) -->
+        <attr name="eventTimeHeaderWidth" format="dimension|reference">
+            <enum name="match_parent" value="-1" />
+            <enum name="wrap_content" value="-2" />
+        </attr>
         <!-- Top margin for event time/day header in programme and programme search -->
         <attr name="eventTimeHeaderMarginTop" format="dimension" />
         <!-- Bottom margin for event time/day header in programme and programme search -->
         <attr name="eventTimeHeaderMarginBottom" format="dimension" />
         <!-- Side padding for event time/day header in programme and programme search -->
         <attr name="eventTimeHeaderPaddingHorizontal" format="dimension" />
+        <!-- Side margin for event time/day header in programme and programme search -->
+        <attr name="eventTimeHeaderMarginHorizontal" format="dimension" />
         <!-- Top and bottom padding for event time/day header in programme and programme search -->
         <attr name="eventTimeHeaderPaddingVertical" format="dimension"/>
         <!-- Margin between events list in a certain hour and the next hour/day header in prgramme and programme search activities. -->
