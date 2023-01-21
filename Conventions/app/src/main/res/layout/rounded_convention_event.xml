@@ -28,8 +28,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 app:cardCornerRadius="4dp"
+                app:cardElevation="0dp"
                 app:cardPreventCornerOverlap="true"
-                tools:cardBackgroundColor="@color/green"
+                tools:cardBackgroundColor="@color/harucon2023_transparent_blue"
                 >
 
                 <LinearLayout
