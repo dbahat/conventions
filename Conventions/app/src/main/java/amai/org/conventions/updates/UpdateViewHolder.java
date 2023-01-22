@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Point;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.graphics.drawable.Drawable;
 import android.text.SpannableString;
 import android.view.Display;
 import android.view.View;
@@ -46,19 +48,19 @@ public class UpdateViewHolder extends RecyclerView.ViewHolder {
 		SpannableString spannedUpdateText = new SpannableString(updateViewModel.getUpdate().getText());
 
 		// Make new/focused updates highlighted
-		int backgroundColor;
+		Drawable background;
 		int textColor;
 		if (updateViewModel.isFocused()) {
-			backgroundColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.focusedUpdateBackground);
+			background = ThemeAttributes.getDrawable(itemView.getContext(), R.attr.focusedUpdateBackground);
 			textColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.focusedUpdateTextColor);
 		} else if (updateViewModel.getUpdate().isNew()) {
-			backgroundColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.newUpdateBackground);
+			background = ThemeAttributes.getDrawable(itemView.getContext(), R.attr.newUpdateBackground);
 			textColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.newUpdateTextColor);
 		} else {
-			backgroundColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.updateBackgroundColor);
+			background = ThemeAttributes.getDrawable(itemView.getContext(), R.attr.updateBackground);
 			textColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.updateTextColor);
 		}
-		updateContainer.setBackgroundColor(backgroundColor);
+		updateContainer.setBackground(background);
 
 		separator.setVisibility((getAdapterPosition() == 0) ? View.GONE : View.VISIBLE);
 

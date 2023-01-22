@@ -322,11 +322,11 @@
              background during update refresh animations. -->
         <attr name="updatesBackgroundColor" format="color|reference"/>
 
-        <!-- Background color for regular update -->
-        <attr name="updateBackgroundColor" format="color|reference"/>
-        <!-- Background color for new update -->
+        <!-- Background for regular update -->
+        <attr name="updateBackground" format="color|reference"/>
+        <!-- Background for new update -->
         <attr name="newUpdateBackground" format="color|reference"/>
-        <!-- Background color for focused update (even if it's new) -->
+        <!-- Background for focused update (even if it's new) -->
         <attr name="focusedUpdateBackground" format="color|reference"/>
         <!-- Text color for update date and time. If transparent, same color as update text is used. -->
         <attr name="updateTimeColor" format="color|reference"/>
