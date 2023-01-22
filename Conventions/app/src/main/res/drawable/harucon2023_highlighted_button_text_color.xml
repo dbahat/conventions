@@ -3,5 +3,5 @@
     <!-- Disabled state -->
     <item android:state_enabled="false" android:color="@color/transparent_white"/>
     <!-- Normal state -->
-    <item android:color="@color/harucon2022_light_yellow"/>
+    <item android:color="@color/white"/>
 </selector>

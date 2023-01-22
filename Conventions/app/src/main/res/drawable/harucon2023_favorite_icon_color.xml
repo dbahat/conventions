@@ -3,5 +3,5 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:color="@color/harucon2023_yellow" app:state_event_favorite="true"/>
-    <item android:color="@color/harucon2023_light_gray"/>
+    <item android:color="@color/harucon2023_gray1"/>
 </selector>

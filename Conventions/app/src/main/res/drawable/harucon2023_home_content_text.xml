@@ -5,5 +5,5 @@
     <item android:color="@color/harucon2023_green" app:state_home_during_con="true" app:state_home_has_favorites="false"/>
     <item android:color="@color/harucon2023_pink" app:state_home_during_con="true" app:state_home_has_favorites="true" app:state_home_is_current="true"/>
     <item android:color="@color/harucon2023_green" app:state_home_during_con="true" app:state_home_has_favorites="true" app:state_home_is_upcoming="true"/>
-    <item android:color="@color/harucon2023_gray"/>
+    <item android:color="@color/harucon2023_gray4"/>
 </selector>
