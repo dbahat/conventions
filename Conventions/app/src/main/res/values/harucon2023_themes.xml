@@ -133,12 +133,13 @@
         <item name="updateTimeColor">@color/harucon2023_pink</item>
         <item name="updateTimeBackground">@null</item>
         <item name="updateItemBorder">@color/harucon2023_pink</item>
-        <item name="updateItemSeparator">@color/harucon2023_pink</item>
+        <item name="updateItemSeparator">@android:color/transparent</item>
+        <item name="updateBackground">@drawable/harucon2023_rounded_edges_white_inset</item>
         <item name="updateTextColor">@color/harucon2023_gray4</item>
         <item name="newUpdateTextColor">@color/harucon2023_pink</item>
-        <item name="newUpdateBackground">@null</item>
+        <item name="newUpdateBackground">?updateBackground</item>
         <item name="focusedUpdateTextColor">@color/harucon2023_green</item>
-        <item name="focusedUpdateBackground">@null</item>
+        <item name="focusedUpdateBackground">?updateBackground</item>
         <!-- Event Screen -->
         <item name="eventToolbarColor">@color/harucon2022_pink</item>
         <item name="eventDetailsDefaultBackground">@color/harucon2022_light_blue</item>
