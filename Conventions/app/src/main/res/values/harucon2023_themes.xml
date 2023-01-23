@@ -86,17 +86,17 @@
         <item name="homeFrameTopMargin">10dp</item>
         <!-- Event View -->
         <item name="eventViewLayout">@layout/rounded_convention_event</item>
-        <item name="eventViewHeight">96dp</item>
+        <item name="eventViewHeight">104dp</item>
         <item name="eventBackgroundColor">@color/white</item>
-        <item name="eventTextColor">@drawable/harucon2022_event_view_text_color</item>
-        <item name="eventNameKeywordHighlightColor">@color/harucon2022_light_yellow</item>
-        <item name="eventKeywordHighlightColor">@color/harucon2022_light_yellow</item>
+        <item name="eventTextColor">@drawable/harucon2023_event_view_text_color</item>
+        <item name="eventNameKeywordHighlightColor">@color/harucon2023_pink</item>
+        <item name="eventKeywordHighlightColor">@color/harucon2023_pink</item>
         <item name="eventTimeTextColor">@color/white</item>
         <item name="eventTimeBackground">@drawable/harucon2023_event_view_time_background_color</item>
         <item name="eventFavoriteIcon">@drawable/harucon2023_favorite_icon</item>
         <item name="eventFavoriteIconColor">@drawable/harucon2023_favorite_icon_color</item>
         <item name="eventFeedbackIcon">@drawable/harucon2023_event_feedback_icon</item>
-        <item name="eventFeedbackIconColor">@drawable/harucon2022_event_feedback_icon_color</item>
+        <item name="eventFeedbackIconColor">@drawable/harucon2023_event_feedback_icon_color</item>
         <item name="useEventTextColorFromEventType">false</item>
         <item name="useEventTimeColorFromEventType">false</item>
         <item name="conflictingEventBackground">@drawable/harucon2023_conflicting_event_label_bg</item>
@@ -114,9 +114,9 @@
         <item name="searchCategoriesColor">@color/harucon2023_blue</item>
         <!-- My Events Screen -->
         <item name="nextEventStartTimeBackground">@null</item>
-        <item name="nextEventStartTimeTextColor">@color/harucon2022_light_yellow</item>
+        <item name="nextEventStartTimeTextColor">@color/harucon2023_pink</item>
         <item name="conflictingEventsBackground">@null</item>
-        <item name="nextEventStartTimeBottomLineColor">@color/harucon2022_light_yellow</item>
+        <item name="nextEventStartTimeBottomLineColor">@null</item>
         <item name="conflictingEventsSideMargin">0dp</item>
         <item name="conflictingEventsTopBottomMargin">0dp</item>
         <item name="conflictingEventsGroupSeparator">@drawable/harucon2023_conflicting_events_group_separator</item>
@@ -125,16 +125,16 @@
         <item name="conflictingEventsListBorder">@null</item>
         <!-- Feedback Screen -->
         <item name="conventionFeedbackTextColor">@color/harucon2022_dark_blue</item>
-        <item name="feedbackAnswerButtonColor">@color/harucon2022_purple</item>
-        <item name="feedbackAnswerButtonSelectedColor">@color/harucon2022_light_yellow</item>
-        <item name="feedbackMultiAnswerBackgroundSelected">@drawable/harucon2022_feedback_selected_answer_bg</item>
-        <item name="feedbackMultiAnswerBackgroundNotSelected">@drawable/harucon2022_feedback_answer_bg</item>
+        <item name="feedbackAnswerButtonColor">@color/harucon2023_gray4</item>
+        <item name="feedbackAnswerButtonSelectedColor">@color/harucon2023_blue</item>
+        <item name="feedbackMultiAnswerBackgroundSelected">@drawable/harucon2023_feedback_selected_answer_bg</item>
+        <item name="feedbackMultiAnswerBackgroundNotSelected">@drawable/harucon2023_feedback_answer_bg</item>
         <item name="feedbackMultiAnswerPaddingTopBottom">4dp</item>
         <item name="feedbackMultiAnswerPaddingStartEnd">9dp</item>
         <item name="feedbackMultiAnswerPaddingStartFirstAnswer">9dp</item>
         <item name="feedbackMultiAnswerMarginTopBottom">2dp</item>
         <item name="feedbackMultiAnswerMarginBetweenAnswers">9dp</item>
-        <item name="feedbackProgressBarColor">@color/harucon2022_pink</item>
+        <item name="feedbackProgressBarColor">@color/harucon2023_pink</item>
         <!-- Updates Screen -->
         <item name="updateTimeColor">@color/harucon2023_pink</item>
         <item name="updateTimeBackground">@null</item>
