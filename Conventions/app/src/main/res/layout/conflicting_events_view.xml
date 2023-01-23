@@ -3,14 +3,38 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:foreground="?conflictingEventsListBorder"
-    android:layout_margin="3dp">
+    android:layout_marginStart="?conflictingEventsSideMargin"
+    android:layout_marginEnd="?conflictingEventsSideMargin"
+    android:layout_marginTop="?conflictingEventsTopBottomMargin"
+    android:layout_marginBottom="?conflictingEventsTopBottomMargin">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/conflictingEventsList"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:visibility="visible"
-        android:background="?conflictingEventsBackground">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    </androidx.recyclerview.widget.RecyclerView>
+        <View
+            android:id="@+id/conflictingEventsGroupSeparatorBefore"
+            android:layout_width="match_parent"
+            android:layout_marginTop="?attr/conflictingEventsGroupSeparatorMargin"
+            android:layout_marginBottom="?attr/conflictingEventsGroupSeparatorMargin"
+            android:layout_height="?conflictingEventsGroupSeparatorHeight"
+            android:background="?conflictingEventsGroupSeparator"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/conflictingEventsList"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:visibility="visible"
+            android:background="?conflictingEventsBackground" />
+
+        <View
+            android:id="@+id/conflictingEventsGroupSeparatorAfter"
+            android:layout_width="match_parent"
+            android:layout_marginTop="?attr/conflictingEventsGroupSeparatorMargin"
+            android:layout_marginBottom="?attr/conflictingEventsGroupSeparatorMargin"
+            android:layout_height="?conflictingEventsGroupSeparatorHeight"
+            android:background="?conflictingEventsGroupSeparator"/>
+    </LinearLayout>
+
 </FrameLayout>

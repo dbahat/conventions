@@ -89,6 +89,11 @@ public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 		} else if (eventsViewHolder instanceof ConflictingEventsViewHolder) {
 			final ConflictingEventsViewHolder conflictingEventsViewHolder = (ConflictingEventsViewHolder) eventsViewHolder;
 			conflictingEventsViewHolder.setModel(timeSlot.getEvents());
+			conflictingEventsViewHolder.setSeparatorsDisplayed(
+				position > 0,
+				// Only show the bottom separator if the next group isn't also conflicting (since it will draw its own top separator if it is)
+				position < getItemCount() - 1 && eventGroups.get(position + 1).getType() != EventsTimeSlot.EventsTimeSlotType.CONFLICTING_EVENTS
+			);
 			conflictingEventsViewHolder.setEventRemovedListener(new ConflictingEventsViewHolder.OnEventListChangedListener() {
 				@Override
 				public void onEventRemoved() {
@@ -132,8 +137,10 @@ public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
 		EventsTimeSlot previousEvents = null;
 		EventsTimeSlot nextEvents = null;
-		boolean hadFreeBefore = false;
-		boolean hadFreeAfter = false;
+		EventsTimeSlot.EventsTimeSlotType beforeType = null;
+		EventsTimeSlot.EventsTimeSlotType beforePreviousType = null;
+		EventsTimeSlot.EventsTimeSlotType afterType = null;
+		EventsTimeSlot.EventsTimeSlotType afterNextType = null;
 
 		// This is the position before the changed event group
 		int previousPosition = adapterPosition - 1;
@@ -143,17 +150,23 @@ public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 		// Get the event groups before and after the changed group and check if there were free slots between them
 		if (previousPosition >= 0) {
 			previousEvents = eventGroups.get(previousPosition);
+			beforeType = previousEvents.getType();
 			if (previousEvents.getType() == EventsTimeSlot.EventsTimeSlotType.NO_EVENTS && previousPosition > 0) {
 				previousEvents = eventGroups.get(previousPosition - 1);
-				hadFreeBefore = true;
+			}
+			if (previousPosition > 0) {
+				beforePreviousType = eventGroups.get(previousPosition - 1).getType();
 			}
 		}
 
 		if (nextPosition < eventGroups.size()) {
 			nextEvents = eventGroups.get(nextPosition);
+			afterType = nextEvents.getType();
 			if (nextEvents.getType() == EventsTimeSlot.EventsTimeSlotType.NO_EVENTS && nextPosition < eventGroups.size() - 1) {
 				nextEvents = eventGroups.get(nextPosition + 1);
-				hadFreeAfter = true;
+			}
+			if (nextPosition + 1 < eventGroups.size()) {
+				afterNextType = eventGroups.get(nextPosition + 1).getType();
 			}
 		}
 
@@ -165,13 +178,13 @@ public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 		int positionToAddFrom = adapterPosition;
 
 		// Remove the original groups and its neighbor free slots starting at the largest position going backwards
-		if (hadFreeAfter) {
+		if (afterType == EventsTimeSlot.EventsTimeSlotType.NO_EVENTS) {
 			eventGroups.remove(nextPosition);
 		}
 		if (!alreadyRemoved) {
 			eventGroups.remove(adapterPosition);
 		}
-		if (hadFreeBefore) {
+		if (beforeType == EventsTimeSlot.EventsTimeSlotType.NO_EVENTS) {
 			eventGroups.remove(previousPosition);
 			// If we removed items from the previous position, that's where we'll add the new items
 			positionToAddFrom = previousPosition;
@@ -189,33 +202,52 @@ public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 		// because an "after" slot cannot be in the first index (in case there is only 1 slot and it's a free slot we treat it as
 		// a "before" slot). In that case, this must happen before the notifying about the new "before" slot or they will cancel each other
 		// (due to notifying "item inserted" then "item removed" on the same index).
+		boolean removedFreeSlotAfter = false;
 		if (groups.size() > 1 && groups.get(groups.size() - 1).getType() == EventsTimeSlot.EventsTimeSlotType.NO_EVENTS) {
 			--newGroupsSize;
 			// Notify the list: if there was no free slot after the events, it was added. If there was, it was possibly changed.
 			// The position here is always the one after the original events group.
-			if (!hadFreeAfter) {
+			if (afterType != EventsTimeSlot.EventsTimeSlotType.NO_EVENTS) {
 				notifyItemInserted(nextPosition);
 			} else {
 				notifyItemChanged(nextPosition);
 			}
-		} else if (hadFreeAfter) {
+		} else if (afterType == EventsTimeSlot.EventsTimeSlotType.NO_EVENTS) {
 			// If there was a free slot after, it was removed.
 			notifyItemRemoved(nextPosition);
+			removedFreeSlotAfter = true;
 		}
 
 		// Check if there is a free slot before the changed events
+		boolean removedFreeSlotBefore = false;
 		if (groups.size() > 0 && groups.get(0).getType() == EventsTimeSlot.EventsTimeSlotType.NO_EVENTS) {
 			--newGroupsSize;
 			// Notify the list: if there was no free slot before, it was added. If there was, it was possibly changed.
-			if (!hadFreeBefore) {
+			if (beforeType != EventsTimeSlot.EventsTimeSlotType.NO_EVENTS) {
 				// The free slot was added at the original group's position (since there was no "previous position")
 				notifyItemInserted(adapterPosition);
 			} else {
 				notifyItemChanged(previousPosition);
 			}
-		} else if (hadFreeBefore) {
+		} else if (beforeType == EventsTimeSlot.EventsTimeSlotType.NO_EVENTS) {
 			// If there was a free slot before, it was removed.
 			notifyItemRemoved(previousPosition);
+			removedFreeSlotBefore = true;
+		}
+
+		// Notify the list about a possible change in the previous and next items in case they are conflicting
+		// (due to the custom conflicting events separator between conflicting events group and other groups).
+		// In case the previous or next position was a removed free time, the one before/after it should be notified.
+		if (beforeType == EventsTimeSlot.EventsTimeSlotType.CONFLICTING_EVENTS) {
+			notifyItemChanged(previousPosition);
+		} else if (removedFreeSlotBefore && beforePreviousType == EventsTimeSlot.EventsTimeSlotType.CONFLICTING_EVENTS) {
+			notifyItemChanged(previousPosition - 1);
+		}
+		if (afterType == EventsTimeSlot.EventsTimeSlotType.CONFLICTING_EVENTS) {
+			notifyItemChanged(nextPosition);
+		} else if (removedFreeSlotAfter && afterNextType == EventsTimeSlot.EventsTimeSlotType.CONFLICTING_EVENTS) {
+			// The position here is the same as the removed slot because it was removed and this item is after it
+			notifyItemChanged(nextPosition);
 		}
 
 		// Notify the list about changes in the original group, This is only relevant if it was a conflicting group
