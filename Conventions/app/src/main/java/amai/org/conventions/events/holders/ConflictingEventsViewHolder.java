@@ -28,6 +28,8 @@ import amai.org.conventions.model.ConventionEvent;
 public class ConflictingEventsViewHolder extends RecyclerView.ViewHolder {
 	private static int eventViewHeight = -1;
 	private final RecyclerView eventsListView;
+	private final View separatorBefore;
+	private final View separatorAfter;
 	private final Context context;
 	private DismissibleEventsViewAdapter adapter;
 	private RecyclerView.AdapterDataObserver eventRemovedListener;
@@ -35,6 +37,8 @@ public class ConflictingEventsViewHolder extends RecyclerView.ViewHolder {
 	public ConflictingEventsViewHolder(View itemView, Context context) {
 		super(itemView);
 		eventsListView = (RecyclerView) itemView.findViewById(R.id.conflictingEventsList);
+		separatorBefore = itemView.findViewById(R.id.conflictingEventsGroupSeparatorBefore);
+		separatorAfter = itemView.findViewById(R.id.conflictingEventsGroupSeparatorAfter);
 		this.context = context;
 		if (eventViewHeight < 0) {
 			eventViewHeight = calculateEventViewHeight();
@@ -115,6 +119,11 @@ public class ConflictingEventsViewHolder extends RecyclerView.ViewHolder {
 				}, getRemoveDuration());
 			}
 		});
+	}
+
+	public void setSeparatorsDisplayed(boolean showBefore, boolean showAfter) {
+		separatorBefore.setVisibility(showBefore ? View.VISIBLE : View.GONE);
+		separatorAfter.setVisibility(showAfter ? View.VISIBLE : View.GONE);
 	}
 
 	public void setEventRemovedListener(final OnEventListChangedListener listener) {

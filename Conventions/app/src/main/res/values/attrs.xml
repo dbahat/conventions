@@ -252,6 +252,18 @@
         <attr name="conflictingEventsListBorder" format="integer|reference"/>
         <!-- Background color for conflicting events group -->
         <attr name="conflictingEventsBackground" format="color|reference"/>
+        <!-- Margins to the sides of a conflicting events group -->
+        <attr name="conflictingEventsSideMargin" format="dimension|reference"/>
+        <!-- Margins to the top and bottom of a conflicting events group -->
+        <attr name="conflictingEventsTopBottomMargin" format="dimension|reference"/>
+        <!-- Separator between conflicting events group and other groups. Displayed in addition to the
+             regular separator between groups. -->
+        <attr name="conflictingEventsGroupSeparator" format="integer|reference"/>
+        <!-- Height of the separator between conflicting events group and other groups -->
+        <attr name="conflictingEventsGroupSeparatorHeight" format="dimension|reference"/>
+        <!-- Margin around conflicting events separator from other groups -->
+        <attr name="conflictingEventsGroupSeparatorMargin" format="dimension|reference"/>
+
 
         <!-- Text color for free time in my events. Can be a color state list. State is set with state_event_... attributes. -->
         <attr name="freeTimeTextColor" format="color|reference"/>

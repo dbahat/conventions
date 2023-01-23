@@ -64,6 +64,11 @@
         <item name="useEventTimeColorFromEventType">false</item>
         <item name="eventListDividerHeight">1dp</item>
         <item name="conflictingEventListDividerHeight">?eventListDividerHeight</item>
+        <item name="conflictingEventsSideMargin">3dp</item>
+        <item name="conflictingEventsTopBottomMargin">3dp</item>
+        <item name="conflictingEventsGroupSeparator">@null</item>
+        <item name="conflictingEventsGroupSeparatorHeight">0dp</item>
+        <item name="conflictingEventsGroupSeparatorMargin">0dp</item>
 
         <!-- Navigation popup -->
         <item name="navigationPopupSeparatorColor">?navigationPopupNotSelectedColor</item>
@@ -223,6 +228,11 @@
         <item name="useEventTimeColorFromEventType">false</item>
         <item name="eventListDividerHeight">1dp</item>
         <item name="conflictingEventListDividerHeight">?eventListDividerHeight</item>
+        <item name="conflictingEventsSideMargin">3dp</item>
+        <item name="conflictingEventsTopBottomMargin">3dp</item>
+        <item name="conflictingEventsGroupSeparator">@null</item>
+        <item name="conflictingEventsGroupSeparatorHeight">0dp</item>
+        <item name="conflictingEventsGroupSeparatorMargin">0dp</item>
 
         <!-- Navigation popup -->
         <item name="navigationPopupSeparatorColor">?navigationPopupNotSelectedColor</item>
