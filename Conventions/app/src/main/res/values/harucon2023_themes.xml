@@ -117,6 +117,12 @@
         <item name="nextEventStartTimeTextColor">@color/harucon2022_light_yellow</item>
         <item name="conflictingEventsBackground">@null</item>
         <item name="nextEventStartTimeBottomLineColor">@color/harucon2022_light_yellow</item>
+        <item name="conflictingEventsSideMargin">0dp</item>
+        <item name="conflictingEventsTopBottomMargin">0dp</item>
+        <item name="conflictingEventsGroupSeparator">@drawable/harucon2023_conflicting_events_group_separator</item>
+        <item name="conflictingEventsGroupSeparatorHeight">4dp</item>
+        <item name="conflictingEventsGroupSeparatorMargin">4dp</item>
+        <item name="conflictingEventsListBorder">@null</item>
         <!-- Feedback Screen -->
         <item name="conventionFeedbackTextColor">@color/harucon2022_dark_blue</item>
         <item name="feedbackAnswerButtonColor">@color/harucon2022_purple</item>
