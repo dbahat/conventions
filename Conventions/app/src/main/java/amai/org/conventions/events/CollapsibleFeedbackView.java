@@ -34,13 +34,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.StringRes;
-import androidx.appcompat.widget.AppCompatRadioButton;
-import androidx.appcompat.widget.AppCompatTextView;
-import androidx.core.content.ContextCompat;
-import androidx.core.widget.CompoundButtonCompat;
-import androidx.core.widget.TextViewCompat;
-
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.net.URL;
@@ -52,6 +45,7 @@ import java.util.List;
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.AspectRatioImageView;
+import amai.org.conventions.customviews.TextViewWithState;
 import amai.org.conventions.feedback.SurveySender;
 import amai.org.conventions.feedback.forms.SurveyDisabledException;
 import amai.org.conventions.model.FeedbackQuestion;
@@ -60,10 +54,17 @@ import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.BundleBuilder;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Log;
+import amai.org.conventions.utils.StateList;
 import amai.org.conventions.utils.Views;
+import androidx.annotation.StringRes;
+import androidx.appcompat.widget.AppCompatRadioButton;
+import androidx.core.content.ContextCompat;
+import androidx.core.widget.CompoundButtonCompat;
+import androidx.core.widget.TextViewCompat;
 
 public class CollapsibleFeedbackView extends FrameLayout {
 	private static final String TAG = CollapsibleFeedbackView.class.getCanonicalName();
+	private static final int NO_RESOURCE = 0;
 
 	private State state;
 	private TextView feedbackLayoutTitle;
@@ -81,10 +82,8 @@ public class CollapsibleFeedbackView extends FrameLayout {
 
 	private Survey feedback;
 	private boolean feedbackChanged;
-	private int textColor = Convention.NO_COLOR;
-	private int answerColor = Convention.NO_COLOR;
-	private int selectedAnswerColor = Convention.NO_COLOR;
-	private int linkColor = Convention.NO_COLOR;
+	private ColorStateList textColor;
+	private int answerBackgroundResource;
 	private int feedbackSentTextResource = R.string.feedback_sent;
 	private int feedbackSendErrorMessage = R.string.feedback_send_failed;
 	private URL additionalFeedbackURL;
@@ -95,10 +94,8 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		if (attrs != null) {
 			TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.CollapsibleFeedbackView, 0, 0);
 			try {
-				textColor = array.getColor(R.styleable.CollapsibleFeedbackView_textColor, Convention.NO_COLOR);
-				answerColor = array.getColor(R.styleable.CollapsibleFeedbackView_answerColor, Convention.NO_COLOR);
-				selectedAnswerColor = array.getColor(R.styleable.CollapsibleFeedbackView_selectedAnswerColor, Convention.NO_COLOR);
-				linkColor = array.getColor(R.styleable.CollapsibleFeedbackView_linkColor, Convention.NO_COLOR);
+				textColor = array.getColorStateList(R.styleable.CollapsibleFeedbackView_textColor);
+				answerBackgroundResource = array.getResourceId(R.styleable.CollapsibleFeedbackView_answerBackground, NO_RESOURCE);
 			} finally {
 				array.recycle();
 			}
@@ -194,7 +191,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 			additionalFeedbackLink.setVisibility(VISIBLE);
 			additionalFeedbackLink.setText(Html.fromHtml(getContext().getString(R.string.additional_feedback, additionalFeedbackURL.toString())));
 			additionalFeedbackLink.setMovementMethod(LinkMovementMethod.getInstance());
-			additionalFeedbackLink.setLinkTextColor(this.linkColor);
+			additionalFeedbackLink.setLinkTextColor(new StateList(R.attr.state_feedback_link).getColor(this.textColor));
 		}
 	}
 
@@ -207,14 +204,18 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		feedbackSendErrorMessage = stringResource;
 	}
 
-	private void setTextColor(int color) {
-		textColor = color;
+	private void setTextColor(ColorStateList colors) {
+		textColor = colors;
+		StateList state = new StateList(R.attr.state_feedback_text);
+		int color = state.getColor(textColor);
 		if (color != Convention.NO_COLOR) {
 			collapsedFeedbackTitle.setTextColor(color);
 			feedbackSentText.setTextColor(color);
 			feedbackLayoutTitle.setTextColor(color);
+			StateList questionState = state.clone().add(R.attr.state_feedback_question);
+			int questionColor = questionState.getColor(textColor);
 			for (TextView textView : generatedQuestionTextViews) {
-				textView.setTextColor(color);
+				textView.setTextColor(questionColor);
 			}
 		}
 	}
@@ -268,7 +269,8 @@ public class CollapsibleFeedbackView extends FrameLayout {
 			if (weightedRating instanceof FeedbackQuestion.Smiley3PointAnswer) {
 				filterColor = ContextCompat.getColor(getContext(), R.color.yellow);
 			} else {
-				filterColor = selectedAnswerColor;
+				StateList answerState = new StateList(R.attr.state_feedback_answer, R.attr.state_feedback_answer_selected, R.attr.state_feedback_answer_type_smiley_5_point);
+				filterColor = answerState.getColor(this.textColor);
 			}
 		} else {
 			icon = ContextCompat.getDrawable(getContext(), R.drawable.feedback);
@@ -397,6 +399,12 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		imagesLayout.setOrientation(LinearLayout.HORIZONTAL);
 		int margin = getResources().getDimensionPixelOffset(R.dimen.feedback_smiley_answer_margin);
 		int size = getResources().getDimensionPixelSize(R.dimen.feedback_smiley5p_icon_size);
+
+		StateList answerState = new StateList(R.attr.state_feedback_answer, R.attr.state_feedback_answer_type_smiley_5_point);
+		StateList selectedAnswerState = answerState.clone().add(R.attr.state_feedback_answer_selected);
+
+		int answerColor = answerState.getColor(this.textColor);
+		int selectedAnswerColor = selectedAnswerState.getColor(this.textColor);
 
 		LinkedHashMap<ImageView, FeedbackQuestion.Smiley5PointAnswer> imagesAndAnswers = new LinkedHashMap<>();
 		for (FeedbackQuestion.Smiley5PointAnswer answer : FeedbackQuestion.Smiley5PointAnswer.values()) {
@@ -532,8 +540,16 @@ public class CollapsibleFeedbackView extends FrameLayout {
 
 		final List<TextView> answerViews = new ArrayList<>(possibleAnswers.size());
 
-		final int answerBg = ThemeAttributes.getResourceId(getContext(), R.attr.feedbackMultiAnswerBackgroundNotSelected);
-		final int selectedAnswerBg = ThemeAttributes.getResourceId(getContext(), R.attr.feedbackMultiAnswerBackgroundSelected);
+		StateList answerState = new StateList(R.attr.state_feedback_answer);
+		if (radio) {
+			answerState.add(R.attr.state_feedback_answer_type_radio);
+		} else {
+			answerState.add(R.attr.state_feedback_answer_type_multi);
+		}
+		StateList selectedAnswerState = answerState.clone().add(R.attr.state_feedback_answer_selected);
+
+		int answerColor = answerState.getColor(textColor);
+		int selectedAnswerColor = selectedAnswerState.getColor(textColor);
 
 		OnClickListener listener = new OnClickListener() {
 			@Override
@@ -542,7 +558,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 				TextViewCompat.setTextAppearance(selected, R.style.EventAnswerButton);
 				selected.setTextColor(selectedAnswerColor);
 				if (!radio) {
-					selected.setBackgroundResource(selectedAnswerBg);
+					selectedAnswerState.setForView(selected);
 				}
 
 				// If the user selected the same answer, deselect it
@@ -565,7 +581,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 						TextViewCompat.setTextAppearance(answerView, R.style.EventAnswerButton);
 						answerView.setTextColor(answerColor);
 						if (!radio) {
-							answerView.setBackgroundResource(answerBg);
+							answerState.setForView(answerView);
 						}
 					}
 				}
@@ -596,13 +612,14 @@ public class CollapsibleFeedbackView extends FrameLayout {
 						}
 				));
 			} else {
-				answerButton = new AppCompatTextView(getContext());
+				answerButton = new TextViewWithState(getContext());
+				answerState.setForView(answerButton);
 			}
 			answerViews.add(answerButton);
 			TextViewCompat.setTextAppearance(answerButton, R.style.EventAnswerButton);
 			answerButton.setTextColor(answerColor);
-			if (!radio) {
-				answerButton.setBackgroundResource(answerBg);
+			if (!radio && answerBackgroundResource != NO_RESOURCE) {
+				answerButton.setBackgroundResource(answerBackgroundResource);
 			}
 			answerButton.setText(answerString);
 			int paddingStart = paddingStartEnd;
