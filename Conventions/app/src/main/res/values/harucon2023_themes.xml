@@ -124,11 +124,8 @@
         <item name="conflictingEventsGroupSeparatorMargin">4dp</item>
         <item name="conflictingEventsListBorder">@null</item>
         <!-- Feedback Screen -->
-        <item name="conventionFeedbackTextColor">@color/harucon2022_dark_blue</item>
-        <item name="feedbackAnswerButtonColor">@color/harucon2023_gray4</item>
-        <item name="feedbackAnswerButtonSelectedColor">@color/harucon2023_blue</item>
-        <item name="feedbackMultiAnswerBackgroundSelected">@drawable/harucon2023_feedback_selected_answer_bg</item>
-        <item name="feedbackMultiAnswerBackgroundNotSelected">@drawable/harucon2023_feedback_answer_bg</item>
+        <item name="conventionFeedbackTextColor">@drawable/harucon2023_convention_feedback_text_color</item>
+        <item name="conventionFeedbackAnswerBackground">@drawable/harucon2023_convention_feedback_answer_bg_selector</item>
         <item name="feedbackMultiAnswerPaddingTopBottom">4dp</item>
         <item name="feedbackMultiAnswerPaddingStartEnd">9dp</item>
         <item name="feedbackMultiAnswerPaddingStartFirstAnswer">9dp</item>
@@ -153,13 +150,14 @@
         <item name="eventTitlePadding">@null</item>
         <item name="eventTitleTextColor">@color/harucon2022_light_yellow</item>
         <item name="eventDetailsBoxColor">@android:color/transparent</item>
-        <item name="eventFeedbackBoxColor">@color/harucon2022_dark_red</item>
-        <item name="eventVoteBoxColor">@color/harucon2022_blue</item>
-        <item name="eventVoteTextColor">@color/harucon2022_light_yellow</item>
+        <item name="eventFeedbackBoxColor">@color/harucon2023_blue</item>
+        <item name="eventFeedbackTextColor">@drawable/harucon2023_event_feedback_text_color</item>
+        <item name="eventFeedbackAnswerBackground">@drawable/harucon2023_event_feedback_answer_bg_selector</item>
+        <item name="eventVoteBoxColor">@color/harucon2023_green</item>
+        <item name="eventVoteTextColor">@color/white</item>
         <item name="eventDescriptionBoxColor">@color/harucon2022_transparent_dark_blue</item>
         <item name="feedbackButtonColor">@color/harucon2022_light_yellow</item>
-        <item name="eventSurveyAnswerColor">@color/harucon2022_purple</item>
-        <item name="eventSurveySelectedAnswerColor">@color/harucon2022_pink</item>
+        <item name="eventSurveyTextColor">@drawable/harucon2023_event_vote_text_color</item>
         <!-- Map Screen -->
         <item name="mapBackground">@color/harucon2023_gray1</item>
         <item name="standIconColor">@color/harucon2023_pink</item>

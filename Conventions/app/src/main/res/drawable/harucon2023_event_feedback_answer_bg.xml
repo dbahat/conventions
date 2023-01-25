@@ -3,5 +3,5 @@
     <corners
         android:radius="5dp"
         />
-    <stroke android:width="1dp" android:color="@color/harucon2023_gray4" />
+    <stroke android:width="1dp" android:color="@color/white" />
 </shape>
