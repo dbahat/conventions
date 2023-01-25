@@ -179,9 +179,7 @@
             android:layout_marginStart="?contentStartMargin"
             android:layout_marginEnd="?contentEndMargin"
             app:textColor="?conventionFeedbackTextColor"
-            app:answerColor="?feedbackAnswerButtonColor"
-            app:linkColor="?feedbackAnswerButtonColor"
-            app:selectedAnswerColor="?feedbackAnswerButtonSelectedColor"
+            app:answerBackground="?conventionFeedbackAnswerBackground"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

@@ -11,9 +11,7 @@
 
     <declare-styleable name="CollapsibleFeedbackView">
         <attr name="textColor" format="integer|reference"/>
-        <attr name="answerColor" format="integer|reference"/>
-        <attr name="selectedAnswerColor" format="integer|reference"/>
-        <attr name="linkColor" format="integer|reference"/>
+        <attr name="answerBackground" format="integer|reference"/>
     </declare-styleable>
 
     <declare-styleable name="ApplicationTheme">
@@ -426,14 +424,14 @@
         <!-- Text color for event description -->
         <attr name="eventDescriptionTextColor" format="color|reference"/>
 
-        <!-- Text color for event feedback. Used in: title (collapsed and open), feedback sent message, questions, text answers. -->
-        <attr name="eventFeedbackTextColor" format="color|reference"/>
-        <!-- Text color for unselected feedback answer (of types multiple answers, radio and 5-point smiley) and for additional feedback links. -->
-        <attr name="eventFeedbackAnswerColor" format="color|reference"/>
-        <!-- Color for selected feedback answer (of types multiple answers, radio and 5-point smiley) and feedback icon for sent feedback with 5-point smiley answer -->
-        <attr name="eventFeedbackSelectedAnswerColor" format="color|reference"/>
         <!-- Background color for feedback box in event activity -->
         <attr name="eventFeedbackBoxColor" format="color|reference"/>
+        <!-- Text color for event feedback. Used in: title (collapsed and open), feedback sent message, questions, answers, additional feedback link.
+             Can be a color state list. Feedback state is set with state_feedback_... attributes. -->
+        <attr name="eventFeedbackTextColor" format="color|reference"/>
+        <!-- Background for event feedback answer. Used in multiple answers for selected and unselected answers.
+             Can be a drawable state list. Feedback state is set with state_feedback_... attributes. -->
+        <attr name="eventFeedbackAnswerBackground" format="color|reference"/>
         <!-- Color for borderless button text and feedback icon (when it's not a smiley) in feedback layout
              (open/close feedback). Used in event activity. -->
         <attr name="feedbackButtonColor" format="color|reference"/>
@@ -448,10 +446,6 @@
 
         <!-- Text color for event vote survey. See eventFeedbackTextColor for usage. -->
         <attr name="eventSurveyTextColor" format="color|reference"/>
-        <!-- Text color for unselected answer in event vote survey. See eventFeedbackAnswerColor for usage. -->
-        <attr name="eventSurveyAnswerColor" format="color|reference"/>
-        <!-- Text color for selected answer in event vote survey. See eventFeedbackSelectedAnswerColor for usage. -->
-        <attr name="eventSurveySelectedAnswerColor" format="color|reference"/>
 
         <!-- Buttons -->
 
@@ -478,16 +472,8 @@
 
         <!-- Text color for feedback in feedback activity. See eventFeedbackTextColor for usage. -->
         <attr name="conventionFeedbackTextColor" format="color|reference"/>
-        <!-- Unselected answer color and additional feedback link color for feedback in feedback activity.
-             See eventFeedbackAnswerColor for usage. -->
-        <attr name="feedbackAnswerButtonColor" format="color|reference"/>
-        <!-- Selected answer color for feedback in feedback activity. See eventFeedbackSelectedAnswerColor for usage. -->
-        <attr name="feedbackAnswerButtonSelectedColor" format="color|reference"/>
+        <attr name="conventionFeedbackAnswerBackground" format="integer|reference"/>
 
-        <!-- Background for selected answer in multiple-answer feedback question (not radio). Used in feedback activity. -->
-        <attr name="feedbackMultiAnswerBackgroundSelected" format="integer|reference"/>
-        <!-- Background for unselected answers in multiple-answer feedback question (not radio). Used in feedback activity. -->
-        <attr name="feedbackMultiAnswerBackgroundNotSelected" format="integer|reference"/>
         <!-- Top and bottom padding for answer in multiple-answer question (including radio). Used in feedback activity. -->
         <attr name="feedbackMultiAnswerPaddingTopBottom" format="dimension"/>
         <!-- Padding at start of first answer in multiple-answer question (not radio). Used in feedback activity. -->
@@ -618,28 +604,43 @@
         <attr name="discountsActivityLayout" format="reference"/>
     </declare-styleable>
 
-    <!-- Event states for color/drawable state lists -->
-    <attr name="state_event_not_started" format="boolean"/>
-    <attr name="state_event_current" format="boolean"/>
-    <attr name="state_event_ended" format="boolean"/>
-    <attr name="state_event_virtual" format="boolean"/>
-    <attr name="state_event_physical" format="boolean"/>
-    <attr name="state_event_favorite" format="boolean"/>
-    <attr name="state_event_conflicting" format="boolean"/>
-    <!-- Feedback-specific states -->
-    <attr name="state_event_feedback_sent" format="boolean"/>
-    <attr name="state_event_feedback_filled" format="boolean"/>
-    <attr name="state_event_feedback_can_send" format="boolean"/>
+    <declare-styleable name="EventState">
+        <!-- Event states for color/drawable state lists -->
+        <attr name="state_event_not_started" format="boolean"/>
+        <attr name="state_event_current" format="boolean"/>
+        <attr name="state_event_ended" format="boolean"/>
+        <attr name="state_event_virtual" format="boolean"/>
+        <attr name="state_event_physical" format="boolean"/>
+        <attr name="state_event_favorite" format="boolean"/>
+        <attr name="state_event_conflicting" format="boolean"/>
+        <!-- Feedback-specific states -->
+        <attr name="state_event_feedback_sent" format="boolean"/>
+        <attr name="state_event_feedback_filled" format="boolean"/>
+        <attr name="state_event_feedback_can_send" format="boolean"/>
+    </declare-styleable>
 
-    <attr name="state_home_before_con" type="bool"/>
-    <attr name="state_home_during_con" type="bool"/>
-    <attr name="state_home_has_favorites" format="boolean"/>
-    <attr name="state_home_after_con" type="bool"/>
-    <attr name="state_home_has_current" type="bool"/>
-    <attr name="state_home_has_upcoming" type="bool"/>
-    <attr name="state_home_is_current" type="bool"/>
-    <attr name="state_home_is_upcoming" type="bool"/>
-    <attr name="state_home_should_send_feedback" type="bool"/>
+    <declare-styleable name="HomeState">
+        <attr name="state_home_before_con" type="bool"/>
+        <attr name="state_home_during_con" type="bool"/>
+        <attr name="state_home_has_favorites" format="boolean"/>
+        <attr name="state_home_after_con" type="bool"/>
+        <attr name="state_home_has_current" type="bool"/>
+        <attr name="state_home_has_upcoming" type="bool"/>
+        <attr name="state_home_is_current" type="bool"/>
+        <attr name="state_home_is_upcoming" type="bool"/>
+        <attr name="state_home_should_send_feedback" type="bool"/>
+    </declare-styleable>
+
+    <declare-styleable name="CollapsibleFeedbackViewState">
+        <attr name="state_feedback_text" type="bool"/>
+        <attr name="state_feedback_link" type="bool"/>
+        <attr name="state_feedback_question" type="bool"/>
+        <attr name="state_feedback_answer" type="bool"/>
+        <attr name="state_feedback_answer_selected" type="bool"/>
+        <attr name="state_feedback_answer_type_smiley_5_point" type="bool"/>
+        <attr name="state_feedback_answer_type_radio" type="bool"/>
+        <attr name="state_feedback_answer_type_multi" type="bool"/>
+    </declare-styleable>
 
 
     <declare-styleable name="SecondHandState">

@@ -1,6 +1,7 @@
 package amai.org.conventions.utils;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -10,6 +11,7 @@ import java.util.List;
 import sff.org.conventions.BuildConfig;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.ViewWithDrawableState;
+import amai.org.conventions.model.conventions.Convention;
 import androidx.annotation.NonNull;
 
 public class StateList {
@@ -52,5 +54,12 @@ public class StateList {
 
 	public int getThemeColor(Context context, int attribute) {
 		return ThemeAttributes.getColorFromStateList(context, attribute, this.toArray());
+	}
+
+	public int getColor(ColorStateList colors) {
+		if (colors == null) {
+			return Convention.NO_COLOR;
+		}
+		return colors.getColorForState(this.toArray(), Convention.NO_COLOR);
 	}
 }
