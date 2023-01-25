@@ -15,18 +15,17 @@
     <string name="my_events_no_data">הוסף אירוע לאירועים שלי ע\"י לחיצה על הכוכב בדף האירוע או ברשימת האירועים</string>
 
     <!-- Relevant to this specific convention -->
-    <string name="app_name">הארוקון 2022</string>
+    <string name="app_name">הארוקון 2023</string>
     <string name="amaidol_name_question">איך קוראים לך?</string>
     <string name="amaidol_vote_question">מי המתמודד/ת החביב/ה עליך?</string>
     <string name="about_content"><![CDATA[אמא\"י – ארגון מנגה ואנימה ישראל. הארגון הוקם במאי 2007 על ידי קבוצת חברים בקהילת חובבי המנגה, אנימה ותרבות יפן ופועל למען קהילת חובבים זו.]]></string>
     <string name="about_links" formatted="false"><![CDATA[
 <p><a href="http://www.amai.org.il/">לאתר אמא\"י</a></p>
-<p><a href="https://harucon.org.il/2022/">לאתר הכנס</a></p>
-<p><a href="https://harucon.org.il/2022/%d7%90%d7%9e%d7%a0%d7%99-%d7%94%d7%9b%d7%a0%d7%a1/">אמני הכנס</a></p>
+<p><a href="https://harucon.org.il/2023/">לאתר הכנס</a></p>
 ]]></string>
     <string name="about_app_content"><![CDATA[
-האפליקציה פותחה עבור כנס הארוקון 2022.<br/>בקשות והצעות ניתן לכתוב <a href="market://details?id=amai.org.conventions">בדף האפליקציה בחנות</a>.
-<p><a href="https://harucon.org.il/2022/app-privacy/">למדיניות הפרטיות של האפליקציה</a></p>
+האפליקציה פותחה עבור כנס הארוקון 2023.<br/>בקשות והצעות ניתן לכתוב <a href="market://details?id=amai.org.conventions">בדף האפליקציה בחנות</a>.
+<p><a href="https://harucon.org.il/2023/app-privacy/">למדיניות הפרטיות של האפליקציה</a></p>
 ]]></string>
     <!-- Copied from https://harucon.org.il/2022/%d7%9e%d7%99%d7%a7%d7%95%d7%9d-%d7%95%d7%93%d7%a8%d7%9b%d7%99-%d7%94%d7%92%d7%a2%d7%94/
          Removed unnecessary styles and flattened tab content. Escaped apostrophe. -->
@@ -82,14 +81,13 @@
 <p><span>בכל חדרי השירותים במתחם ישנם שירותי נכים זמינים ונגישים.</span></p>
 <p>&nbsp;</p>
 <h3>עיוורים וכבדי ראייה</h3>
-<p><span><a href="https://harucon.org.il/2022/wp-content/uploads/2022/02/תוכנייה-נגישה-הארוקון-2022.txt" download="">תכנייה מונגשת בקובץ המותאם לתוכנות הקראה זמינה להורדה כאן.</a> אם הקובץ אינו מוצג כראוי יש להוריד אותו למכשיר דרך התפריט של הדפדפן.</span></p>
+<p>תכנייה מונגשת תהיה זמינה לאחר שחרורה.</p>
 <p>&nbsp;</p>
 <h3>חירשים וכבדי שמיעה</h3>
 <p><span>קטעי הווידאו אשר יוקרנו באירועי הכנס ילוו בכתוביות.</span></p>
 <p>&nbsp;</p>
 <h3>קופה נגישה</h3>
 <p><span>הקופה הימנית באגף קניית הכרטיסים והקופה הימנית באגף הקנייה מראש בכניסה למתחם הכנס הן קופות נגישות. ניתן להגיע אל קופות אלו בהצגת תעודת נכה למתנדב במקום.</span>
-<a href="org.amai.conventions://accessibility/open-map-in-accessible-cashiers">לחצו כאן לצפיה במיקום הקופה הנגישה במפה</a>.</p>
 <p>&nbsp;</p>
 <h3>מלווים</h3>
 <p><span>מציג תעודת נכה זכאי להכנסת מלווה בחינם.</span></p>
@@ -99,8 +97,7 @@
 <p>&nbsp;</p>
 <h3>חדר הורים</h3>
 <p><span>חדר ההורים יכלול פינת הנקה, פינת החתלה ומים חמים. החדר מיועד להורים וילדיהם בלבד. חדר ההורים ימוקם בחדר 301 מאחורי האולם הראשי.<br />
-<a href="https://harucon.org.il/2022/%d7%94%d7%a0%d7%97%d7%99%d7%95%d7%aa-%d7%91%d7%98%d7%99%d7%97%d7%95%d7%aa-%d7%9c%d7%a9%d7%99%d7%9e%d7%95%d7%a9-%d7%91%d7%97%d7%93%d7%a8-%d7%94%d7%94%d7%95%d7%a8%d7%99%d7%9d/">לקריאת תקנון השימוש בחדר ההורים</a><br />
-<a href="org.amai.conventions://accessibility/open-map-in-parent-room">לחצו כאן לצפיה במיקום חדר ההורים במפה</a>.
+<a href="https://harucon.org.il/2023/%d7%94%d7%a0%d7%97%d7%99%d7%95%d7%aa-%d7%91%d7%98%d7%99%d7%97%d7%95%d7%aa-%d7%9c%d7%a9%d7%99%d7%9e%d7%95%d7%a9-%d7%91%d7%97%d7%93%d7%a8-%d7%94%d7%94%d7%95%d7%a8%d7%99%d7%9d/">לקריאת תקנון השימוש בחדר ההורים</a><br />
 </span></p>
 </div>
 ]]></string>
