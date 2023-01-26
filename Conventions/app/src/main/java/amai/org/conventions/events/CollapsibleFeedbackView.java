@@ -57,6 +57,7 @@ import amai.org.conventions.utils.StateList;
 import amai.org.conventions.utils.Views;
 import sff.org.conventions.R;
 import androidx.annotation.StringRes;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.AppCompatRadioButton;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.CompoundButtonCompat;
@@ -86,6 +87,9 @@ public class CollapsibleFeedbackView extends FrameLayout {
 	private int answerBackgroundResource;
 	private int feedbackSentTextResource = R.string.feedback_sent;
 	private int feedbackSendErrorMessage = R.string.feedback_send_failed;
+	private int sendButtonBackgroundResource;
+	private int sendButtonTextColorResource;
+	private int progressBarColor;
 	private URL additionalFeedbackURL;
 
 	public CollapsibleFeedbackView(Context context, AttributeSet attrs) {
@@ -96,6 +100,9 @@ public class CollapsibleFeedbackView extends FrameLayout {
 			try {
 				textColor = array.getColorStateList(R.styleable.CollapsibleFeedbackView_textColor);
 				answerBackgroundResource = array.getResourceId(R.styleable.CollapsibleFeedbackView_answerBackground, NO_RESOURCE);
+				sendButtonBackgroundResource = array.getResourceId(R.styleable.CollapsibleFeedbackView_sendButtonBackground, NO_RESOURCE);
+				sendButtonTextColorResource = array.getResourceId(R.styleable.CollapsibleFeedbackView_sendButtonTextColor, NO_RESOURCE);
+				progressBarColor = array.getColor(R.styleable.CollapsibleFeedbackView_progressBarColor, Convention.NO_COLOR);
 			} finally {
 				array.recycle();
 			}
@@ -117,6 +124,13 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		feedbackExpended = (ViewGroup) findViewById(R.id.feedback_expended);
 		progressBar = (ProgressBar) findViewById(R.id.feedback_progress_bar);
 		additionalFeedbackLink = findViewById(R.id.additional_feedback_link);
+
+		sendFeedbackButton.setBackgroundResource(sendButtonBackgroundResource);
+		sendFeedbackButton.setTextColor(AppCompatResources.getColorStateList(getContext(), sendButtonTextColorResource));
+		if (progressBarColor != Convention.NO_COLOR) {
+			progressBar.setProgressTintList(ColorStateList.valueOf(progressBarColor));
+			progressBar.setIndeterminateTintList(ColorStateList.valueOf(progressBarColor));
+		}
 	}
 
 	public void setState(State state, boolean animate) {

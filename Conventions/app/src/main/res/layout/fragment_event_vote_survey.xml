@@ -29,6 +29,8 @@
                 android:id="@+id/event_vote_survey_container"
                 app:textColor="?eventSurveyTextColor"
                 app:answerBackground="@null"
+                app:sendButtonBackground="?highlightedButtonBackground"
+                app:sendButtonTextColor="?buttonTextColor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </LinearLayout>

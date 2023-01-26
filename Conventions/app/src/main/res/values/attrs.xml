@@ -12,6 +12,9 @@
     <declare-styleable name="CollapsibleFeedbackView">
         <attr name="textColor" format="integer|reference"/>
         <attr name="answerBackground" format="integer|reference"/>
+        <attr name="progressBarColor" format="color|reference"/>
+        <attr name="sendButtonBackground" format="integer|reference"/>
+        <attr name="sendButtonTextColor" format="integer|reference"/>
     </declare-styleable>
 
     <declare-styleable name="ApplicationTheme">
@@ -435,6 +438,12 @@
         <!-- Color for borderless button text and feedback icon (when it's not a smiley) in feedback layout
              (open/close feedback). Used in event activity. -->
         <attr name="feedbackButtonColor" format="color|reference"/>
+        <!-- Button background for event feedback "send" button -->
+        <attr name="eventFeedbackButtonBackground" format="integer|reference"/>
+        <!-- Button text color for event feedback "send" button -->
+        <attr name="eventFeedbackButtonTextColor" format="integer|reference"/>
+        <!-- Color for the sending progress bar in event feedback view -->
+        <attr name="eventFeedbackProgressBarColor" format="color|reference"/>
 
 
         <!-- Background color for event vote/view box in event activity -->
@@ -452,7 +461,8 @@
         <!-- Button style. By default, uses buttonColorPressed for the ripple, buttonColorDisabled for
              disabled color, and buttonColor for regular color.
              The style is used in: arrival methods (install google services), event activity (view, vote),
-             feedback activity (send all feedbacks), feedback layout (send feedback), map (open stands, goto floor). -->
+             feedback activity (send all feedbacks), feedback layout in feedback screen and event vote
+             survey (send feedback), map (open stands, goto floor). -->
         <attr name="highlightedButtonBackground" format="integer|reference"/>
         <!-- Text color for button. See highlightedButtonBackground for usage. -->
         <attr name="buttonTextColor" format="integer|reference"/>

@@ -65,7 +65,6 @@
             android:id="@+id/send_feedback_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/HighlightedButton"
             android:enabled="false"
             android:text="@string/send" />
 
