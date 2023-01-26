@@ -158,6 +158,9 @@
         <item name="eventDescriptionBoxColor">@color/harucon2022_transparent_dark_blue</item>
         <item name="feedbackButtonColor">@color/harucon2022_light_yellow</item>
         <item name="eventSurveyTextColor">@drawable/harucon2023_event_vote_text_color</item>
+        <item name="eventFeedbackButtonBackground">@drawable/harucon2023_event_feedback_button</item>
+        <item name="eventFeedbackButtonTextColor">@drawable/harucon2023_event_feedback_button_text_color</item>
+        <item name="eventFeedbackProgressBarColor">@color/white</item>
         <!-- Map Screen -->
         <item name="mapBackground">@color/harucon2023_gray1</item>
         <item name="standIconColor">@color/harucon2023_pink</item>

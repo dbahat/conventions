@@ -106,7 +106,7 @@ public class Harucon2023Convention extends AmaiConvention {
 	protected Calendar initDate() {
 		Calendar date = Calendar.getInstance();
 		date.clear();
-		date.set(2023, Calendar.MARCH, 8);
+		date.set(2022, Calendar.MARCH, 17);
 		return date;
 	}
 
