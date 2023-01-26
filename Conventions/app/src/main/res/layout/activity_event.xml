@@ -238,6 +238,9 @@
                     android:id="@+id/event_feedback_view"
 					app:textColor="?eventFeedbackTextColor"
 					app:answerBackground="?eventFeedbackAnswerBackground"
+					app:sendButtonBackground="?eventFeedbackButtonBackground"
+					app:sendButtonTextColor="?eventFeedbackButtonTextColor"
+					app:progressBarColor="?eventFeedbackProgressBarColor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
             </LinearLayout>

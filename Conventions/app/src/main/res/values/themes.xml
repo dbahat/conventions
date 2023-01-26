@@ -141,6 +141,8 @@
         <item name="eventDescriptionBoxColor">?eventDetailsBoxColor</item>
         <item name="eventActivityFavoriteColor">@color/gold</item>
         <item name="eventFeedbackAnswerBackground">@null</item>
+        <item name="eventFeedbackButtonBackground">?highlightedButtonBackground</item>
+        <item name="eventFeedbackButtonTextColor">?buttonTextColor</item>
 
         <!-- Feedback activity -->
         <item name="conventionFeedbackAnswerBackground">?eventFeedbackAnswerBackground</item>
@@ -298,6 +300,8 @@
         <item name="eventDescriptionBoxColor">?eventDetailsBoxColor</item>
         <item name="eventActivityFavoriteColor">@color/gold</item>
         <item name="eventFeedbackAnswerBackground">@null</item>
+        <item name="eventFeedbackButtonBackground">?highlightedButtonBackground</item>
+        <item name="eventFeedbackButtonTextColor">?buttonTextColor</item>
 
         <!-- Feedback activity -->
         <item name="conventionFeedbackAnswerBackground">?eventFeedbackAnswerBackground</item>

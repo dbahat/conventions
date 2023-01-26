@@ -180,6 +180,9 @@
             android:layout_marginEnd="?contentEndMargin"
             app:textColor="?conventionFeedbackTextColor"
             app:answerBackground="?conventionFeedbackAnswerBackground"
+            app:sendButtonBackground="?highlightedButtonBackground"
+            app:sendButtonTextColor="?buttonTextColor"
+            app:progressBarColor="?feedbackProgressBarColor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
