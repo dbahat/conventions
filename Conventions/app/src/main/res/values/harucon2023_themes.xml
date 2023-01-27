@@ -8,9 +8,9 @@
         <item name="actionOverflowButtonStyle">@style/OverflowMenu.Harucon2023</item>
         <!-- General -->
         <item name="android:colorPrimaryDark">@color/black</item> <!-- Toolbar color -->
-        <!-- Used in: checkbox colors in map search, default selected checkbox/switch color, cursor color in all edit texts.
-             Also used as the default action button color. -->
-        <item name="colorAccent">@color/harucon2023_pink</item>
+        <!-- Used in: checkbox colors in map search, default selected checkbox/switch color, settings titles,
+             cursor color in all edit texts. Also used as the default action button color. -->
+        <item name="colorAccent">@color/harucon2023_green</item>
         <!-- This color should be readable over the activities background.
              Used as the text color in: accessibility, arrival methods, programme search search results number,
              search category box. Also used as default for many texts and as the default "large text" color (e.g. in settings). -->
