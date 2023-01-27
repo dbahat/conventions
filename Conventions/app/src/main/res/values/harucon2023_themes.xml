@@ -8,8 +8,9 @@
         <item name="actionOverflowButtonStyle">@style/OverflowMenu.Harucon2023</item>
         <!-- General -->
         <item name="android:colorPrimaryDark">@color/black</item> <!-- Toolbar color -->
-        <!-- Used in: checkbox colors in map search, default selected checkbox/switch color. Also used as the default action button color. -->
-        <item name="colorAccent">@color/harucon2023_blue</item>
+        <!-- Used in: checkbox colors in map search, default selected checkbox/switch color, cursor color in all edit texts.
+             Also used as the default action button color. -->
+        <item name="colorAccent">@color/harucon2023_pink</item>
         <!-- This color should be readable over the activities background.
              Used as the text color in: accessibility, arrival methods, programme search search results number,
              search category box. Also used as default for many texts and as the default "large text" color (e.g. in settings). -->
@@ -28,15 +29,14 @@
         <item name="eventListDivider">@drawable/harucon2023_event_list_divider</item>
         <item name="separatorColor">@null</item>
         <!-- These are used for buttons. They should be usable when the background is:
-             Event screen feedback
              Event screen vote
              Feedback screen
              Map bottom info panel
              Arrival methods screen
          -->
-        <item name="buttonColor">@color/harucon2023_pink</item>
-        <item name="buttonColorPressed">@color/harucon2023_light_pink</item>
-        <item name="buttonColorDisabled">@color/harucon2023_very_light_pink</item>
+        <item name="buttonColor">@color/harucon2023_blue</item>
+        <item name="buttonColorPressed">@color/harucon2023_light_blue</item>
+        <item name="buttonColorDisabled">@color/harucon2023_gray4</item>
         <item name="buttonTextColor">@drawable/harucon2023_highlighted_button_text_color</item>
 
         <!-- Notifications -->
