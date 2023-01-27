@@ -329,6 +329,7 @@ public class EventView extends FrameLayout {
             Survey feedback = event.getUserInput().getFeedback();
 			FeedbackQuestion.DrawableAnswer weightedRating = feedback.getWeightedRating();
             int filterColor;
+            PorterDuff.Mode filterMode = PorterDuff.Mode.SRC_IN;
 
             // Image
             if (weightedRating != null) {
@@ -340,6 +341,7 @@ public class EventView extends FrameLayout {
             // Color
             if (weightedRating instanceof FeedbackQuestion.Smiley3PointAnswer) {
                 filterColor = ContextCompat.getColor(getContext(), R.color.yellow);
+                filterMode = PorterDuff.Mode.MULTIPLY;
             } else {
                 filterColor = getEventColorFromStateList(R.attr.eventFeedbackIconColor);
 
@@ -351,7 +353,7 @@ public class EventView extends FrameLayout {
 
             if (icon != null) {
                 icon = icon.mutate();
-                icon.setColorFilter(filterColor, PorterDuff.Mode.MULTIPLY);
+                icon.setColorFilter(filterColor, filterMode);
             }
         }
         setFeedbackIcon(icon);
