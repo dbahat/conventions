@@ -278,6 +278,8 @@
 							android:id="@+id/event_open_vote_survey_progress_bar"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
+							android:progressTint="?eventVoteTextColor"
+							android:indeterminateTint="?eventVoteTextColor"
 							android:visibility="gone" />
 
 					</FrameLayout>

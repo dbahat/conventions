@@ -85,8 +85,9 @@
                             android:layout_width="48dp"
                             android:layout_height="48dp"
                             android:layout_gravity="center"
-                            style="@android:style/Widget.ProgressBar.Horizontal"
+                            android:indeterminateOnly="false"
                             android:progressDrawable="?progressBarDrawable"
+                            android:indeterminateDrawable="?progressBarDrawable"
                             android:visibility="gone" />
 
                     </FrameLayout>

@@ -73,7 +73,9 @@
                     android:inputType="textFilter"
                     android:textColorHint="?mapSearchHint"
                     android:textColor="?mapSearchText"
-                    android:hint="@string/search_input_search_keyword"/>
+                    android:backgroundTint="?mapSearchText"
+                    android:hint="@string/search_input_search_keyword"
+                    />
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatCheckBox
