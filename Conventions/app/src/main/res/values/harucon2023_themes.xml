@@ -111,7 +111,9 @@
         <item name="marginBetweenEventsListAndNextHeader">0dp</item>
         <item name="fabOnProgrammeTop">true</item>
         <item name="fabOnProgrammeTopAlignment">START</item>
-        <item name="searchCategoriesColor">@color/harucon2023_blue</item>
+        <item name="searchCategoriesColor">@color/white</item>
+        <item name="searchTitleTextColor">@color/white</item>
+        <item name="searchTitleBackgroundColor">@color/harucon2023_pink</item>
         <!-- My Events Screen -->
         <item name="nextEventStartTimeBackground">@null</item>
         <item name="nextEventStartTimeTextColor">@color/harucon2023_pink</item>
@@ -147,7 +149,7 @@
         <item name="eventToolbarColor">@color/harucon2023_pink</item>
         <item name="eventDetailsDefaultBackground">@color/harucon2023_gray1</item>
         <item name="eventTitleBackground">@drawable/harucon2023_event_activity_title_background</item>
-        <item name="eventTitlePadding">@null</item>
+        <item name="eventTitlePadding">8dp</item>
         <item name="eventTitleTextColor">@color/white</item>
         <item name="eventDetailsBoxColor">@color/white</item>
         <item name="eventFeedbackBoxColor">@color/harucon2023_blue</item>
@@ -156,7 +158,7 @@
         <item name="eventVoteBoxColor">@color/harucon2023_green</item>
         <item name="eventVoteTextColor">@color/white</item>
         <item name="eventDescriptionBoxColor">@color/white</item>
-        <item name="feedbackButtonColor">@color/harucon2023_yellow</item>
+        <item name="feedbackButtonColor">@color/white</item>
         <item name="eventSurveyTextColor">@drawable/harucon2023_event_vote_text_color</item>
         <item name="eventFeedbackButtonBackground">@drawable/harucon2023_event_feedback_button</item>
         <item name="eventFeedbackButtonTextColor">@drawable/harucon2023_event_feedback_button_text_color</item>
