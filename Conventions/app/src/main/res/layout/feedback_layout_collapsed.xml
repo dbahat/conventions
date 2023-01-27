@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/event_details_box_padding"
-        android:text="@string/event_has_ended" />
+        android:text="@string/feedback_can_be_sent" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -33,7 +33,7 @@
             android:paddingEnd="@dimen/event_details_box_padding"
             android:paddingStart="0dp"
             android:paddingTop="@dimen/event_details_box_padding"
-            android:text="@string/add_feedback" />
+            android:text="" />
 
         <amai.org.conventions.customviews.AspectRatioImageView
             android:layout_marginEnd="@dimen/event_details_box_padding"
