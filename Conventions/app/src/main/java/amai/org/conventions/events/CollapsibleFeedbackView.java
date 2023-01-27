@@ -58,6 +58,7 @@ import amai.org.conventions.utils.StateList;
 import amai.org.conventions.utils.Views;
 import androidx.annotation.StringRes;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatRadioButton;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.CompoundButtonCompat;
@@ -230,6 +231,10 @@ public class CollapsibleFeedbackView extends FrameLayout {
 			int questionColor = questionState.getColor(textColor);
 			for (TextView textView : generatedQuestionTextViews) {
 				textView.setTextColor(questionColor);
+				if (textView instanceof EditText) {
+					EditText editText = (EditText) textView;
+					editText.setBackgroundTintList(ColorStateList.valueOf(color));
+				}
 			}
 		}
 	}
@@ -495,7 +500,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 			answerView = textView;
 		} else {
 			// Display in an editable text
-			EditText editText = new EditText(getContext());
+			AppCompatEditText editText = new AppCompatEditText(getContext());
 			generatedQuestionTextViews.add(editText);
 			editText.setFreezesText(true);
 			int type = InputType.TYPE_CLASS_TEXT |

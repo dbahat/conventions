@@ -418,7 +418,8 @@
 
         <!-- Background color for feedback box in event activity -->
         <attr name="eventFeedbackBoxColor" format="color|reference"/>
-        <!-- Text color for event feedback. Used in: title (collapsed and open), feedback sent message, questions, answers, additional feedback link.
+        <!-- Text color for event feedback. Used in: title (collapsed and open), feedback sent message,
+             questions, answers, additional feedback link, separator above the send button.
              Can be a color state list. Feedback state is set with state_feedback_... attributes. -->
         <attr name="eventFeedbackTextColor" format="color|reference"/>
         <!-- Background for event feedback answer. Used in multiple answers for selected and unselected answers.
