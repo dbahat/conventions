@@ -48,14 +48,6 @@
         android:orientation="vertical"
         android:padding="@dimen/event_details_box_padding" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginEnd="@dimen/event_details_box_padding"
-        android:layout_marginStart="@dimen/event_details_box_padding"
-        android:layout_marginTop="@dimen/event_details_box_padding"
-        android:background="@color/transparent_black" />
-
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
