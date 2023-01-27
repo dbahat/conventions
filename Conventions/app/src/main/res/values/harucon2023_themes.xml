@@ -144,23 +144,25 @@
         <item name="focusedUpdateTextColor">@color/harucon2023_green</item>
         <item name="focusedUpdateBackground">?updateBackground</item>
         <!-- Event Screen -->
-        <item name="eventToolbarColor">@color/harucon2022_pink</item>
-        <item name="eventDetailsDefaultBackground">@color/harucon2022_light_blue</item>
-        <item name="eventTitleBackground">@drawable/harucon2022_frame_bg</item>
+        <item name="eventToolbarColor">@color/harucon2023_pink</item>
+        <item name="eventDetailsDefaultBackground">@color/harucon2023_gray1</item>
+        <item name="eventTitleBackground">@drawable/harucon2023_event_activity_title_background</item>
         <item name="eventTitlePadding">@null</item>
-        <item name="eventTitleTextColor">@color/harucon2022_light_yellow</item>
-        <item name="eventDetailsBoxColor">@android:color/transparent</item>
+        <item name="eventTitleTextColor">@color/white</item>
+        <item name="eventDetailsBoxColor">@color/white</item>
         <item name="eventFeedbackBoxColor">@color/harucon2023_blue</item>
         <item name="eventFeedbackTextColor">@drawable/harucon2023_event_feedback_text_color</item>
         <item name="eventFeedbackAnswerBackground">@drawable/harucon2023_event_feedback_answer_bg_selector</item>
         <item name="eventVoteBoxColor">@color/harucon2023_green</item>
         <item name="eventVoteTextColor">@color/white</item>
-        <item name="eventDescriptionBoxColor">@color/harucon2022_transparent_dark_blue</item>
-        <item name="feedbackButtonColor">@color/harucon2022_light_yellow</item>
+        <item name="eventDescriptionBoxColor">@color/white</item>
+        <item name="feedbackButtonColor">@color/harucon2023_yellow</item>
         <item name="eventSurveyTextColor">@drawable/harucon2023_event_vote_text_color</item>
         <item name="eventFeedbackButtonBackground">@drawable/harucon2023_event_feedback_button</item>
         <item name="eventFeedbackButtonTextColor">@drawable/harucon2023_event_feedback_button_text_color</item>
         <item name="eventFeedbackProgressBarColor">@color/white</item>
+        <item name="eventDetailsTextColor">@color/black</item>
+        <item name="eventDescriptionTextColor">@color/black</item>
         <!-- Map Screen -->
         <item name="mapBackground">@color/harucon2023_gray1</item>
         <item name="standIconColor">@color/harucon2023_pink</item>

@@ -206,7 +206,7 @@ public class Harucon2023Convention extends AmaiConvention {
 //		);
 
 		return new ImageIdToImageResourceMapper()
-				.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.harucon2022_default_background);
+				.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.harucon2023_event_activity_background);
 	}
 
 	@Override
