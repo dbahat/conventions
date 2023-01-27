@@ -5,42 +5,51 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/search_keyword_text_box"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxLines="1"
-        android:inputType="textFilter"
-        android:hint="@string/search_input_search_keyword"
-        android:layout_marginStart="?contentStartMargin"
-        android:layout_marginEnd="?contentEndMargin"/>
+        android:orientation="vertical"
+        android:background="?searchTitleBackgroundColor">
 
-    <amai.org.conventions.events.SearchCategoriesLayout
-        android:id="@+id/search_categories_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="?contentStartMargin"
-        android:layout_marginEnd="?contentEndMargin"/>
+        <EditText
+            android:id="@+id/search_keyword_text_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:inputType="textFilter"
+            android:hint="@string/search_input_search_keyword"
+            android:layout_marginStart="?contentStartMargin"
+            android:layout_marginEnd="?contentEndMargin"
+            android:textColorHint="?searchTitleTextColor"
+            android:textColor="?searchTitleTextColor"/>
 
-    <TextView
-        android:id="@+id/search_results_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="?android:textColorPrimary"
-        android:layout_marginStart="?contentStartMargin"
-        android:layout_marginEnd="?contentEndMargin"
-        android:paddingStart="5dp"
-        android:paddingEnd="5dp"
-        android:textSize="@dimen/text_size_small_material"
-        />
+        <amai.org.conventions.events.SearchCategoriesLayout
+            android:id="@+id/search_categories_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="?contentStartMargin"
+            android:layout_marginEnd="?contentEndMargin" />
 
-    <View
-        android:id="@+id/search_results_number_separator"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?separatorColor"
-        android:layout_marginStart="?contentStartMargin"
-        android:layout_marginEnd="?contentEndMargin"/>
+        <TextView
+            android:id="@+id/search_results_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?searchTitleTextColor"
+            android:layout_marginStart="?contentStartMargin"
+            android:layout_marginEnd="?contentEndMargin"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:textSize="@dimen/text_size_small_material"
+            />
+
+        <View
+            android:id="@+id/search_results_number_separator"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?separatorColor"
+            android:layout_marginStart="?contentStartMargin"
+            android:layout_marginEnd="?contentEndMargin"/>
+    </LinearLayout>
 
     <se.emilsjolander.stickylistheaders.StickyListHeadersListView
         android:id="@+id/searchEventsList"
