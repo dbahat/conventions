@@ -151,13 +151,13 @@
         <item name="eventTitleBackground">@drawable/harucon2023_event_activity_title_background</item>
         <item name="eventTitlePadding">8dp</item>
         <item name="eventTitleTextColor">@color/white</item>
-        <item name="eventDetailsBoxColor">@color/white</item>
-        <item name="eventFeedbackBoxColor">@color/harucon2023_blue</item>
+        <item name="eventDetailsBoxColor">@null</item>
+        <item name="eventFeedbackBoxColor">@drawable/harucon2023_rounded_edges_blue</item>
         <item name="eventFeedbackTextColor">@drawable/harucon2023_event_feedback_text_color</item>
         <item name="eventFeedbackAnswerBackground">@drawable/harucon2023_event_feedback_answer_bg_selector</item>
-        <item name="eventVoteBoxColor">@color/harucon2023_green</item>
+        <item name="eventVoteBoxColor">@drawable/harucon2023_rounded_edges_green</item>
         <item name="eventVoteTextColor">@color/white</item>
-        <item name="eventDescriptionBoxColor">@color/white</item>
+        <item name="eventDescriptionBoxColor">@drawable/harucon2023_rounded_edges_white</item>
         <item name="feedbackButtonColor">@color/white</item>
         <item name="eventSurveyTextColor">@drawable/harucon2023_event_vote_text_color</item>
         <item name="eventFeedbackButtonBackground">@drawable/harucon2023_event_feedback_button</item>
