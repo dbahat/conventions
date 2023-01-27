@@ -30,6 +30,7 @@ public class SearchCategoryBox extends LinearLayout {
 
 	public void setSearchCategory(SearchCategory searchCategory) {
 		textView.setText(searchCategory.getName());
+		textView.setTextColor(ThemeAttributes.getColor(getContext(), R.attr.searchTitleTextColor));
 		int color = searchCategory.getColor();
 		ColorStateList checkboxColors = new ColorStateList(
 			new int[][]{

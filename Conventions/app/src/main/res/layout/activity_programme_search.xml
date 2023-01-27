@@ -17,7 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="?contentStartMargin"
-            android:layout_marginEnd="?contentEndMargin">
+            android:layout_marginEnd="?contentEndMargin"
+            android:background="?searchTitleBackgroundColor">
 
             <EditText
                 android:id="@+id/search_keyword_text_box"
@@ -29,7 +30,9 @@
                 android:layout_marginStart="?contentStartMargin"
                 android:layout_marginEnd="0dp"
                 android:layout_alignParentStart="true"
-                android:layout_toStartOf="@+id/search_filter_button"/>
+                android:layout_toStartOf="@+id/search_filter_button"
+                android:textColorHint="?searchTitleTextColor"
+                android:textColor="?searchTitleTextColor"/>
 
             <ImageButton
                 android:id="@+id/search_filter_button"
@@ -47,27 +50,29 @@
                 android:layout_marginEnd="?contentEndMargin"
                 tools:ignore="ContentDescription" />
 
+            <TextView
+                android:id="@+id/search_results_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?searchTitleTextColor"
+                android:layout_marginStart="?contentStartMargin"
+                android:layout_marginEnd="?contentEndMargin"
+                android:layout_below="@id/search_keyword_text_box"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:textSize="@dimen/text_size_small_material"
+                />
+
+            <View
+                android:id="@+id/search_results_number_separator"
+                android:layout_below="@id/search_results_number"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?separatorColor"
+                android:layout_marginStart="?contentStartMargin"
+                android:layout_marginEnd="?contentEndMargin"/>
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/search_results_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="?android:textColorPrimary"
-            android:layout_marginStart="?contentStartMargin"
-            android:layout_marginEnd="?contentEndMargin"
-            android:paddingStart="5dp"
-            android:paddingEnd="5dp"
-            android:textSize="@dimen/text_size_small_material"
-            />
-
-        <View
-            android:id="@+id/search_results_number_separator"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?separatorColor"
-            android:layout_marginStart="?contentStartMargin"
-            android:layout_marginEnd="?contentEndMargin"/>
 
         <se.emilsjolander.stickylistheaders.StickyListHeadersListView
             android:id="@+id/searchEventsList"

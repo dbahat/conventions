@@ -538,6 +538,11 @@
         <!-- Color for search categories checkboxes, if color from event type is not used. -->
         <attr name="searchCategoriesColor" format="color|reference" />
 
+        <!-- Color for search categories text, hint text and labels -->
+        <attr name="searchTitleTextColor" format="color|reference" />
+        <!-- Color for the background of the search screen title layout -->
+        <attr name="searchTitleBackgroundColor" format="color|reference" />
+
         <!-- Text color for day header in programme search.
              Can be a color state list. Time state is set with state_event_... attributes. -->
         <attr name="eventDateHeaderTextColor" format="color|reference"/>
