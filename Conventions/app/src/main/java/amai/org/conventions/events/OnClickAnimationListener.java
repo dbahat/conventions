@@ -5,13 +5,13 @@ import android.view.ViewParent;
 
 import androidx.viewpager.widget.ViewPager;
 
-public class ApplyBounceAnimationListener implements View.OnClickListener {
+public class OnClickAnimationListener implements View.OnClickListener {
 	@Override
 	public void onClick(View view) {
-		applyBounceAnimation(view);
+		applyAnimation(view);
 	}
 
-	private void applyBounceAnimation(View view) {
+	private void applyAnimation(View view) {
 		ViewParent parent = view.getParent();
 		while (parent != null && !(parent instanceof EventView)) {
 			parent = parent.getParent();
@@ -27,7 +27,7 @@ public class ApplyBounceAnimationListener implements View.OnClickListener {
 			if (pager.isFakeDragging()) {
 				return;
 			}
-			ViewPagerAnimator.applyBounceAnimation(pager);
+			ViewPagerDismissAnimator.apply(pager);
 		}
 	}
 }

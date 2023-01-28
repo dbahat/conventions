@@ -4,15 +4,16 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ValueAnimator;
+
 import androidx.viewpager.widget.ViewPager;
 
-public class ViewPagerAnimator {
+public class ViewPagerDismissAnimator {
 
-	public static void applyBounceAnimation(ViewPager pager) {
-		applyBounceAnimation(pager, 150, 250);
+	public static void apply(ViewPager pager) {
+		apply(pager, pager.getWidth(), 600);
 	}
 
-	public static void applyBounceAnimation(final ViewPager pager, final int offset, final int delay) {
+	public static void apply(final ViewPager pager, final int offset, final int delay) {
 
 		final AnimatorSet set = new AnimatorSet();
 
@@ -39,10 +40,7 @@ public class ViewPagerAnimator {
 
 		// Open, close, half-open, half-close for a bounce effect
 		set.playSequentially(
-				ValueAnimator.ofFloat(0, offset),
-				ValueAnimator.ofFloat(offset, 0),
-				ValueAnimator.ofFloat(0, offset / 4),
-				ValueAnimator.ofFloat(offset / 4, 0));
+				ValueAnimator.ofFloat(0, offset));
 
 		// Register the listener to all the animation sequences
 		for (Animator animator : set.getChildAnimations()) {
