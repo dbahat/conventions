@@ -274,7 +274,7 @@ public class ConventionEvent implements Serializable {
 		if (diff == null) {
 			return null;
 		}
-		return new Date(getStartTime().getTime() + diff);
+		return Dates.localToDeviceTime(new Date(getStartTime().getTime() + diff));
 	}
 
 	@Nullable
@@ -283,7 +283,7 @@ public class ConventionEvent implements Serializable {
 		if (diff == null) {
 			return null;
 		}
-		return new Date(getEndTime().getTime() + diff);
+		return Dates.localToDeviceTime(new Date(getEndTime().getTime() + diff));
 	}
 
 

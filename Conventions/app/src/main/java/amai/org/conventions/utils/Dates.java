@@ -1,6 +1,5 @@
 package amai.org.conventions.utils;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -23,15 +22,17 @@ public class Dates {
 
 	private static final Locale LOCALE = new Locale("iw", "IL");
 	private static final TimeZone CONVENTION_TIME_ZONE = TimeZone.getTimeZone("Asia/Jerusalem");
+	private static final TimeZone DEVICE_TIME_ZONE = TimeZone.getDefault();
 	// Using Israel time as the local time for amai since the conventions are 1 day (no tab support
 	// defined) and they aren't virtual, so you have to be in Israel to attend them anyway.
-	// If one of these condition changes, use "TimeZone.getDefault();" instead of "CONVENTION_TIME_ZONE" below.
+	// If one of these condition changes, use "DEVICE_TIME_ZONE" instead of "CONVENTION_TIME_ZONE" below.
 	private static final TimeZone LOCAL_TIME_ZONE = CONVENTION_TIME_ZONE;
 	private static Date appStartDate = new Date();
 	private static Date initialDate = getInitialDate();
 
 	private static Date getInitialDate() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm", Dates.getLocale());
+		dateFormat.setTimeZone(LOCAL_TIME_ZONE);
 		try {
 //			return dateFormat.parse("17.03.2022 12:10");
 			return null;
@@ -232,7 +233,14 @@ public class Dates {
 		return convertTimeZone(conventionTime, Dates.getConventionTimeZone(), Dates.getLocalTimeZone());
 	}
 
+	public static Date localToDeviceTime(Date localTime) {
+		return convertTimeZone(localTime, Dates.getLocalTimeZone(), DEVICE_TIME_ZONE);
+	}
+
 	public static Date convertTimeZone(Date time, TimeZone from, TimeZone to) {
+		if (from.equals(to)) {
+			return time;
+		}
 		long timeInMillis = time.getTime();
 		return new Date(timeInMillis -
 			from.getOffset(timeInMillis) +  // Convert from "from" to UTC
