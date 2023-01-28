@@ -1,6 +1,5 @@
 package amai.org.conventions.utils;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -23,15 +22,17 @@ public class Dates {
 
 	private static final Locale LOCALE = new Locale("iw", "IL");
 	private static final TimeZone CONVENTION_TIME_ZONE = TimeZone.getTimeZone("Asia/Jerusalem");
-	private static final TimeZone LOCAL_TIME_ZONE = TimeZone.getDefault();
+	private static final TimeZone DEVICE_TIME_ZONE = TimeZone.getDefault();
+	private static final TimeZone LOCAL_TIME_ZONE = DEVICE_TIME_ZONE;
 	private static Date appStartDate = new Date();
 	private static Date initialDate = getInitialDate();
 
 	private static Date getInitialDate() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm", Dates.getLocale());
+		dateFormat.setTimeZone(LOCAL_TIME_ZONE);
 		try {
-			return dateFormat.parse("11.10.2022 16:10");
-//			return null;
+//			return dateFormat.parse("11.10.2022 16:10");
+			return null;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -229,7 +230,14 @@ public class Dates {
 		return convertTimeZone(conventionTime, Dates.getConventionTimeZone(), Dates.getLocalTimeZone());
 	}
 
+	public static Date localToDeviceTime(Date localTime) {
+		return convertTimeZone(localTime, Dates.getLocalTimeZone(), DEVICE_TIME_ZONE);
+	}
+
 	public static Date convertTimeZone(Date time, TimeZone from, TimeZone to) {
+		if (from.equals(to)) {
+			return time;
+		}
 		long timeInMillis = time.getTime();
 		return new Date(timeInMillis -
 			from.getOffset(timeInMillis) +  // Convert from "from" to UTC
