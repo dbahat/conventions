@@ -21,7 +21,7 @@ public class NavigationItemViewHolder extends RecyclerView.ViewHolder {
 	public void setData(final NavigationItem item, final NavigationActivity currentActivity) {
 		textView.setText(item.getText());
 		boolean isCurrentItemSelected = currentActivity.getClass() == item.getActivity();
-		configureDrawableIfNeeded(currentActivity, isCurrentItemSelected, item.getIcon());
+		configureDrawableIfNeeded(currentActivity, isCurrentItemSelected, item, isCurrentItemSelected);
 
 		if (isCurrentItemSelected) {
 			int color = ThemeAttributes.getColor(currentActivity, R.attr.navigationPopupSelectedColor);
@@ -34,10 +34,15 @@ public class NavigationItemViewHolder extends RecyclerView.ViewHolder {
 		}
 	}
 
-	private void configureDrawableIfNeeded(Context context, boolean isCurrentItemSelected, Drawable icon) {
-		boolean shouldDisplayIcon = ThemeAttributes.getBoolean(context, R.attr.navigationItemsShouldDisplayIcon);
-		if (!shouldDisplayIcon) {
+	private void configureDrawableIfNeeded(Context context, boolean isCurrentItemSelected, NavigationItem item, boolean isSelected) {
+		if (!item.isShowDrawable()) {
+			textView.setCompoundDrawables(null, null, null, null);
 			return;
+		}
+
+		Drawable icon = item.getIcon();
+		if (isSelected && item.getSelectedIcon() != null) {
+			icon = item.getSelectedIcon();
 		}
 
 		int color;
@@ -50,6 +55,10 @@ public class NavigationItemViewHolder extends RecyclerView.ViewHolder {
 
 		// this should be setCompoundDrawablesRelative(icon, null, null, null) but in API 17 and 18 it appears on the wrong side.
 		// I tried to fix it by setting the layout direction to RTL directly on the textview but it didn't work.
-		textView.setCompoundDrawables(null, null, icon, null);
+		if (item.isShowDrawableOnEnd()) {
+			textView.setCompoundDrawables(icon, null, null, null);
+		} else {
+			textView.setCompoundDrawables(null, null, icon, null);
+		}
 	}
 }

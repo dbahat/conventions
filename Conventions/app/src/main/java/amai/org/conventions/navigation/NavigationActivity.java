@@ -176,32 +176,34 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	}
 
 	private void initializeNavigationDrawer() {
+		boolean shouldDisplayIcon = ThemeAttributes.getBoolean(this, R.attr.navigationItemsShouldDisplayIcon);
+
 		final List<NavigationItem> items = new ArrayList<>(Arrays.asList(
-				new NavigationItem(HomeActivity.class, getString(R.string.home), ContextCompat.getDrawable(this, R.drawable.ic_home_white_36dp)),
-				new NavigationItem(ProgrammeActivity.class, getString(R.string.programme_title), ContextCompat.getDrawable(this, R.drawable.events_list)),
-//				new NavigationItem(WebContentActivity.IconKidsActivity.class, getString(R.string.icon_kids), ContextCompat.getDrawable(this, R.drawable.ic_face_white_24dp)),
-				new NavigationItem(MyEventsActivity.class, getString(R.string.my_events_title), ContextCompat.getDrawable(this, R.drawable.events_list_with_star))
+				new NavigationItem(HomeActivity.class, getString(R.string.home), ContextCompat.getDrawable(this, R.drawable.ic_home_white_36dp), shouldDisplayIcon),
+				new NavigationItem(ProgrammeActivity.class, getString(R.string.programme_title), ContextCompat.getDrawable(this, R.drawable.events_list), shouldDisplayIcon),
+//				new NavigationItem(WebContentActivity.IconKidsActivity.class, getString(R.string.icon_kids), ContextCompat.getDrawable(this, R.drawable.ic_face_white_24dp), shouldDisplayIcon),
+				new NavigationItem(MyEventsActivity.class, getString(R.string.my_events_title), ContextCompat.getDrawable(this, R.drawable.events_list_with_star), shouldDisplayIcon)
 		));
 
 		// Only add the map if it's available
 		if (Convention.getInstance().getMap().isAvailable()) {
-			items.add(new NavigationItem(MapActivity.class, getString(R.string.map), ContextCompat.getDrawable(this, android.R.drawable.ic_dialog_map)));
+			items.add(new NavigationItem(MapActivity.class, getString(R.string.map), ContextCompat.getDrawable(this, android.R.drawable.ic_dialog_map), shouldDisplayIcon));
 		}
-		items.add(new NavigationItem(UpdatesActivity.class, getString(R.string.updates), ContextCompat.getDrawable(this, android.R.drawable.stat_notify_sync_noanim)));
-		items.add(new NavigationItem(SecondHandActivity.class, getString(R.string.second_hand), ContextCompat.getDrawable(this, R.drawable.ic_attach_money_white)));
-		items.add(new NavigationItem(ArrivalMethodsActivity.class, getString(R.string.arrival_methods), ContextCompat.getDrawable(this, R.drawable.directions)));
+		items.add(new NavigationItem(UpdatesActivity.class, getString(R.string.updates), ContextCompat.getDrawable(this, android.R.drawable.stat_notify_sync_noanim), shouldDisplayIcon));
+		items.add(new NavigationItem(SecondHandActivity.class, getString(R.string.second_hand), ContextCompat.getDrawable(this, R.drawable.ic_attach_money_white), shouldDisplayIcon));
+		items.add(new NavigationItem(ArrivalMethodsActivity.class, getString(R.string.arrival_methods), ContextCompat.getDrawable(this, R.drawable.directions), shouldDisplayIcon));
 
 		if (Convention.getInstance().canFillFeedback()) {
-			items.add(new NavigationItem(FeedbackActivity.class, getString(R.string.feedback), ContextCompat.getDrawable(this, R.drawable.feedback_menu_icon)));
+			items.add(new NavigationItem(FeedbackActivity.class, getString(R.string.feedback), ContextCompat.getDrawable(this, R.drawable.feedback_menu_icon), shouldDisplayIcon));
 		}
-		items.add(new NavigationItem(DiscountsActivity.class, getString(R.string.discounts), ContextCompat.getDrawable(this, R.drawable.ic_card_giftcard_white)));
-		items.add(new NavigationItem(WebContentActivity.AccessibilityActivity.class, getString(R.string.accessibility), ContextCompat.getDrawable(this, R.drawable.baseline_accessibility_new_white_18)));
-		items.add(new NavigationItem(AboutActivity.class, getString(R.string.about), ContextCompat.getDrawable(this, R.drawable.ic_action_about)));
-		items.add(new NavigationItem(SettingsActivity.class, getString(R.string.settings), ContextCompat.getDrawable(this, R.drawable.ic_settings)));
+		items.add(new NavigationItem(DiscountsActivity.class, getString(R.string.discounts), ContextCompat.getDrawable(this, R.drawable.ic_card_giftcard_white), shouldDisplayIcon));
+		items.add(new NavigationItem(WebContentActivity.AccessibilityActivity.class, getString(R.string.accessibility), ContextCompat.getDrawable(this, R.drawable.baseline_accessibility_new_white_18), shouldDisplayIcon));
+		items.add(new NavigationItem(AboutActivity.class, getString(R.string.about), ContextCompat.getDrawable(this, R.drawable.ic_action_about), shouldDisplayIcon));
+		items.add(new NavigationItem(SettingsActivity.class, getString(R.string.settings), ContextCompat.getDrawable(this, R.drawable.ic_settings), shouldDisplayIcon));
 
 //		navigationTopButtonsLayout.setNavigationItems(this, Arrays.asList(
-//				new NavigationItem(AboutActivity.class, getString(R.string.about), ContextCompat.getDrawable(this, R.drawable.about)),
-//				new NavigationItem(SettingsActivity.class, getString(R.string.settings), ContextCompat.getDrawable(this, R.drawable.settings))
+//				new NavigationItem(AboutActivity.class, getString(R.string.about), ContextCompat.getDrawable(this, R.drawable.about), shouldDisplayIcon),
+//				new NavigationItem(SettingsActivity.class, getString(R.string.settings), ContextCompat.getDrawable(this, R.drawable.settings), shouldDisplayIcon)
 //		));
 
 		ListView navigationItems = (ListView) findViewById(R.id.navigation_items);
