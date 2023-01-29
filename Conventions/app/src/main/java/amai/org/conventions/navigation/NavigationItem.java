@@ -8,16 +8,24 @@ public class NavigationItem {
 	private final String text;
 	private final Drawable icon;
 	private final Drawable selectedIcon;
+	private final boolean showDrawableOnEnd;
+	private final boolean showDrawable;
 
-	public NavigationItem(Class<? extends Activity> activity, String text, Drawable icon) {
-		this(activity, text, icon, null);
+	public NavigationItem(Class<? extends Activity> activity, String text, Drawable icon, boolean showDrawable) {
+		this(activity, text, icon, null, showDrawable, false);
 	}
 
-	public NavigationItem(Class<? extends Activity> activity, String text, Drawable icon, Drawable selectedIcon) {
+	public NavigationItem(Class<? extends Activity> activity, String text, Drawable icon, Drawable selectedIcon, boolean showDrawable) {
+		this(activity, text, icon, selectedIcon, showDrawable, false);
+	}
+
+	public NavigationItem(Class<? extends Activity> activity, String text, Drawable icon, Drawable selectedIcon, boolean showDrawable, boolean showDrawableOnEnd) {
 		this.activity = activity;
 		this.text = text;
 		this.icon = icon;
 		this.selectedIcon = selectedIcon;
+		this.showDrawable = showDrawable;
+		this.showDrawableOnEnd = showDrawableOnEnd;
 	}
 
 	public Class<? extends Activity> getActivity() {
@@ -34,5 +42,13 @@ public class NavigationItem {
 
 	public Drawable getSelectedIcon() {
 		return selectedIcon;
+	}
+
+	public boolean isShowDrawable() {
+		return showDrawable;
+	}
+
+	public boolean isShowDrawableOnEnd() {
+		return showDrawableOnEnd;
 	}
 }
