@@ -115,7 +115,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="18dp"
                         android:layout_marginStart="5dp"
-                        android:src="@drawable/feedback"
+                        android:src="@drawable/chat"
                         tools:visibility="visible"
                         tools:background="@color/black"
                         android:visibility="gone" />

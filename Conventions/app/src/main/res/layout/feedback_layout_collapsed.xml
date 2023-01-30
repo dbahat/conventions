@@ -42,7 +42,7 @@
             android:layout_gravity="top|end"
             android:layout_height="18dp"
             android:id="@+id/feedback_icon"
-            android:src="@drawable/feedback"
+            android:src="@drawable/chat"
             android:visibility="visible"/>
 
     </LinearLayout>
