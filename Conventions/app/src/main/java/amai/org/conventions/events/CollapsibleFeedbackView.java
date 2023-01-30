@@ -292,7 +292,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 				filterColor = answerState.getColor(this.textColor);
 			}
 		} else {
-			icon = ContextCompat.getDrawable(getContext(), R.drawable.feedback);
+			icon = ContextCompat.getDrawable(getContext(), R.drawable.chat);
 			filterColor = ThemeAttributes.getColor(getContext(), R.attr.feedbackButtonColor);
 		}
 		icon = icon.mutate();
