@@ -26,8 +26,8 @@
         <item android:state_enabled="false">
             <shape android:shape="rectangle">
                 <corners android:radius="3dp" />
-                <stroke android:color="@color/transparent_white" android:width="1dp"/>
-                <solid android:color="@color/harucon2023_gray4" />
+                <stroke android:color="@color/harucon2023_gray3" android:width="1dp"/>
+                <solid android:color="@color/harucon2023_gray1" />
                 <padding android:left="@dimen/button_padding_horizontal_material"
                     android:top="@dimen/button_padding_vertical_material"
                     android:right="@dimen/button_padding_horizontal_material"
