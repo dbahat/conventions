@@ -326,13 +326,11 @@
              background during update refresh animations. -->
         <attr name="updatesBackgroundColor" format="color|reference"/>
 
-        <!-- Background for regular update -->
+        <!-- Elevation for update item -->
+        <attr name="updateElevation" format="dimension"/>
+        <!-- Background for regular update. Can be a drawable state list. State is set with state_update_... -->
         <attr name="updateBackground" format="color|reference"/>
-        <!-- Background for new update -->
-        <attr name="newUpdateBackground" format="color|reference"/>
-        <!-- Background for focused update (even if it's new) -->
-        <attr name="focusedUpdateBackground" format="color|reference"/>
-        <!-- Text color for update date and time. If transparent, same color as update text is used. -->
+        <!-- Text color for update date and time. Can be a color state list. State is set with state_update_... -->
         <attr name="updateTimeColor" format="color|reference"/>
         <!-- Background for update date and time line -->
         <attr name="updateTimeBackground" format="color|reference"/>
@@ -340,12 +338,8 @@
         <attr name="updateItemSeparator" format="color|reference"/>
         <!-- Separator above the "show more" button -->
         <attr name="updateItemBorder" format="color|reference"/>
-        <!-- Text color for regular update -->
+        <!-- Text color for update text. Can be a color state list. State is set with state_update_... -->
         <attr name="updateTextColor" format="color|reference"/>
-        <!-- Text color for new update -->
-        <attr name="newUpdateTextColor" format="color|reference"/>
-        <!-- Text color for focused update (even if it's new) -->
-        <attr name="focusedUpdateTextColor" format="color|reference"/>
 
         <!-- Map Screen -->
 
@@ -603,6 +597,11 @@
         <attr name="state_feedback_answer_type_smiley_5_point" type="bool"/>
         <attr name="state_feedback_answer_type_radio" type="bool"/>
         <attr name="state_feedback_answer_type_multi" type="bool"/>
+    </declare-styleable>
+
+    <declare-styleable name="UpdateState">
+        <attr name="state_update_new" type="bool"/>
+        <attr name="state_update_focused" type="bool"/>
     </declare-styleable>
 
 </resources>

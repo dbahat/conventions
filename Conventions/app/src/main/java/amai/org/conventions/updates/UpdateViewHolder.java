@@ -3,6 +3,9 @@ package amai.org.conventions.updates;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Point;
+
+import amai.org.conventions.utils.Log;
+import amai.org.conventions.utils.StateList;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.drawable.Drawable;
@@ -20,8 +23,7 @@ import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.utils.Dates;
 
 public class UpdateViewHolder extends RecyclerView.ViewHolder {
-	private static final int MAX_LINES_FOR_COLLAPSED_UPDATE = 7;
-	private static final int MAX_LINES_FOR_COLLAPSED_VIEW = 6;
+	private static final int MAX_LINES_FOR_COLLAPSED_UPDATE = 5;
 
 	private ViewGroup updateContainer;
 	private View separator;
@@ -47,26 +49,21 @@ public class UpdateViewHolder extends RecyclerView.ViewHolder {
 	public void setContent(UpdateViewModel updateViewModel) {
 		SpannableString spannedUpdateText = new SpannableString(updateViewModel.getUpdate().getText());
 
-		// Make new/focused updates highlighted
-		Drawable background;
-		int textColor;
+		StateList updateState = new StateList();
 		if (updateViewModel.isFocused()) {
-			background = ThemeAttributes.getDrawable(itemView.getContext(), R.attr.focusedUpdateBackground);
-			textColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.focusedUpdateTextColor);
-		} else if (updateViewModel.getUpdate().isNew()) {
-			background = ThemeAttributes.getDrawable(itemView.getContext(), R.attr.newUpdateBackground);
-			textColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.newUpdateTextColor);
-		} else {
-			background = ThemeAttributes.getDrawable(itemView.getContext(), R.attr.updateBackground);
-			textColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.updateTextColor);
+			updateState.add(R.attr.state_update_focused);
 		}
-		updateContainer.setBackground(background);
+		if (updateViewModel.getUpdate().isNew()) {
+			updateState.add(R.attr.state_update_new);
+		}
+
+		updateState.setForView(updateContainer);
+		updateContainer.setBackground(ThemeAttributes.getDrawable(itemView.getContext(), R.attr.updateBackground));
 
 		separator.setVisibility((getAdapterPosition() == 0) ? View.GONE : View.VISIBLE);
 
+		int textColor = updateState.getThemeColor(itemView.getContext(), R.attr.updateTextColor);
 		updateTextView.setText(spannedUpdateText);
-		updateTime.setText(Dates.formatHoursAndMinutes(updateViewModel.getUpdate().getDate()));
-		updateDay.setText(Dates.formatDateWithoutTime(updateViewModel.getUpdate().getDate()));
 		updateTextView.setTextColor(textColor);
 
 		if (updateBottomLine.getDrawable() == null) {
@@ -75,11 +72,10 @@ public class UpdateViewHolder extends RecyclerView.ViewHolder {
 			updateBottomLine.setVisibility(View.VISIBLE);
 		}
 
-		int updateTimeTextColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.updateTimeColor);
-		if (updateTimeTextColor == Color.TRANSPARENT) {
-			updateTimeTextColor = textColor;
-		}
+		int updateTimeTextColor = updateState.getThemeColor(itemView.getContext(), R.attr.updateTimeColor);
+		updateTime.setText(Dates.formatHoursAndMinutes(updateViewModel.getUpdate().getDate()));
 		updateTime.setTextColor(updateTimeTextColor);
+		updateDay.setText(Dates.formatDateWithoutTime(updateViewModel.getUpdate().getDate()));
 		updateDay.setTextColor(updateTimeTextColor);
 
 		expandViewIfNumberOfTextLinesIsSmall(updateViewModel);
@@ -92,12 +88,9 @@ public class UpdateViewHolder extends RecyclerView.ViewHolder {
 			showDetailsButton.setVisibility(View.GONE);
 		}
 
-		showDetailsButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (onMoreInfoClickListener != null) {
-					onMoreInfoClickListener.onClicked();
-				}
+		showDetailsButton.setOnClickListener(v -> {
+			if (onMoreInfoClickListener != null) {
+				onMoreInfoClickListener.onClicked();
 			}
 		});
 	}
@@ -117,7 +110,7 @@ public class UpdateViewHolder extends RecyclerView.ViewHolder {
 		// For this check we need to measure the textView size. Not using accurate measure call here due to time constraints, and since the approximate measure
 		// we do here is good enough.
 		updateTextView.measure(screenSize.x, screenSize.y);
-		if (updateTextView.getLineCount() <= MAX_LINES_FOR_COLLAPSED_VIEW) {
+		if (updateTextView.getLineCount() <= MAX_LINES_FOR_COLLAPSED_UPDATE) {
 			updateViewModel.setCollapsed(false);
 		}
 	}
