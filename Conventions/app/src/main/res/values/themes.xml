@@ -113,8 +113,8 @@
         <item name="updateItemSeparator">?separatorColor</item>
         <item name="updateBackground">?updatesBackgroundColor</item>
         <item name="updateTextColor">?android:textColorPrimary</item>
-        <item name="newUpdateTextColor">?android:textColorPrimary</item>
-        <item name="focusedUpdateTextColor">?android:textColorPrimary</item>
+        <item name="updateTimeColor">?updateTextColor</item>
+        <item name="updateElevation">0dp</item>
 
         <!-- Map -->
         <item name="mapBackground">?activitiesBackground</item>
@@ -295,8 +295,8 @@
         <item name="updateItemSeparator">?separatorColor</item>
         <item name="updateBackground">?updatesBackgroundColor</item>
         <item name="updateTextColor">?android:textColorPrimary</item>
-        <item name="newUpdateTextColor">?android:textColorPrimary</item>
-        <item name="focusedUpdateTextColor">?android:textColorPrimary</item>
+        <item name="updateTimeColor">?updateTextColor</item>
+        <item name="updateElevation">0dp</item>
 
         <!-- Map -->
         <item name="mapBackground">?activitiesBackground</item>
@@ -374,9 +374,7 @@
         <item name="conflictingEventsListBorder">@drawable/conflicting_events_list_border</item>
         <item name="conflictingEventsBackground">@color/transparent_white</item>
         <item name="navigationPopupNotSelectedColor">@android:color/white</item>
-        <item name="updateTimeColor">@android:color/transparent</item>
         <item name="updateItemBorder">@android:color/white</item>
-        <item name="newUpdateBackground">@color/transparent_white</item>
         <item name="eventDetailsBoxColor">@color/transparent_black</item>
         <item name="eventFeedbackBoxColor">@color/transparent_black</item>
         <item name="eventDetailsDefaultBackground">@color/black</item>
@@ -413,9 +411,7 @@
         <item name="conflictingEventsListBorder">@drawable/conflicting_events_list_border</item>
         <item name="conflictingEventsBackground">@color/dark_gray</item>
         <item name="navigationPopupNotSelectedColor">@android:color/black</item>
-        <item name="updateTimeColor">@android:color/transparent</item>
         <item name="updateItemBorder">@android:color/darker_gray</item>
-        <item name="newUpdateBackground">@color/very_light_gray</item>
         <item name="eventDetailsBoxColor">@color/transparent_white</item>
         <item name="eventFeedbackBoxColor">@color/transparent_light_yellow</item>
         <item name="eventDetailsDefaultBackground">@color/white</item>
