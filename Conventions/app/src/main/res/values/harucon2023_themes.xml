@@ -135,13 +135,16 @@
         <item name="feedbackMultiAnswerMarginBetweenAnswers">9dp</item>
         <item name="feedbackProgressBarColor">@color/harucon2023_pink</item>
         <!-- Updates Screen -->
-        <item name="updateTimeColor">@color/harucon2023_pink</item>
+        <item name="updateTimeColor">@drawable/harucon2023_update_time_color</item>
         <item name="updateTimeBackground">@null</item>
         <item name="updateItemBorder">@color/harucon2023_blue</item>
         <item name="updateItemSeparator">@android:color/transparent</item>
         <item name="updateBackground">@drawable/harucon2023_rounded_edges_white_inset</item>
-        <item name="updateTextColor">@drawable/harucon2023_update_text_color</item>
+        <item name="updateTextColor">@color/harucon2023_gray4</item>
         <item name="updateElevation">2dp</item>
+        <item name="showNewUpdateIndicator">true</item>
+        <item name="newUpdateIndicatorTextColor">@color/white</item>
+        <item name="newUpdateIndicatorBackground">@drawable/harucon2023_new_update_indicator_background</item>
         <!-- Event Screen -->
         <item name="eventToolbarColor">@color/harucon2023_pink</item>
         <item name="eventDetailsDefaultBackground">@color/harucon2023_gray1</item>
