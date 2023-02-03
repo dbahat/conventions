@@ -36,7 +36,7 @@
          -->
         <item name="buttonColor">@color/harucon2023_blue</item>
         <item name="buttonColorPressed">@color/harucon2023_light_blue</item>
-        <item name="buttonColorDisabled">@color/harucon2023_gray4</item>
+        <item name="buttonColorDisabled">@color/harucon2023_gray2</item>
         <item name="buttonTextColor">@drawable/harucon2023_highlighted_button_text_color</item>
 
         <!-- Notifications -->
@@ -128,6 +128,7 @@
         <!-- Feedback Screen -->
         <item name="conventionFeedbackTextColor">@drawable/harucon2023_convention_feedback_text_color</item>
         <item name="conventionFeedbackAnswerBackground">@drawable/harucon2023_convention_feedback_answer_bg_selector</item>
+        <item name="feedbackMultiAnswerMinWidth">50dp</item>
         <item name="feedbackMultiAnswerPaddingTopBottom">4dp</item>
         <item name="feedbackMultiAnswerPaddingStartEnd">9dp</item>
         <item name="feedbackMultiAnswerPaddingStartFirstAnswer">9dp</item>
