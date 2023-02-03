@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Point;
 
+import amai.org.conventions.customviews.TextViewWithState;
 import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.StateList;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,6 +31,7 @@ public class UpdateViewHolder extends RecyclerView.ViewHolder {
 	private ImageView updateBottomLine;
 	private TextView updateTextView;
 	private TextView updateTime;
+	private TextViewWithState newUpdateIndicator;
 	private TextView updateDay;
 	private FrameLayout showDetailsButton;
 	private OnMoreInfoClickListener onMoreInfoClickListener;
@@ -42,6 +44,7 @@ public class UpdateViewHolder extends RecyclerView.ViewHolder {
 		updateTextView = (TextView) itemView.findViewById(R.id.update_text);
 		updateTime = (TextView) itemView.findViewById(R.id.update_time);
 		updateDay = (TextView) itemView.findViewById(R.id.update_day);
+		newUpdateIndicator = itemView.findViewById(R.id.update_new_indicator);
 		showDetailsButton = (FrameLayout) itemView.findViewById(R.id.update_show_details_button);
 		updateBottomLine = itemView.findViewById(R.id.update_bottom_line);
 	}
@@ -77,6 +80,13 @@ public class UpdateViewHolder extends RecyclerView.ViewHolder {
 		updateTime.setTextColor(updateTimeTextColor);
 		updateDay.setText(Dates.formatDateWithoutTime(updateViewModel.getUpdate().getDate()));
 		updateDay.setTextColor(updateTimeTextColor);
+
+		if (updateViewModel.getUpdate().isNew() && ThemeAttributes.getBoolean(itemView.getContext(), R.attr.showNewUpdateIndicator)) {
+			newUpdateIndicator.setVisibility(View.VISIBLE);
+			updateState.setForView(newUpdateIndicator);
+		} else {
+			newUpdateIndicator.setVisibility(View.GONE);
+		}
 
 		expandViewIfNumberOfTextLinesIsSmall(updateViewModel);
 
