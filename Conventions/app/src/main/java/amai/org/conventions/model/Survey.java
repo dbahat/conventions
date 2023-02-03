@@ -71,6 +71,9 @@ public class Survey implements Serializable, Cloneable {
 			} catch (IllegalArgumentException e) {
 				Log.e(TAG, "Smiley answer with incorrect enum name for SMILEY_5_POINTS answer: " + question.getAnswer().toString());
 			}
+		} else if (question.hasAnswer() && question.getAnswerType() == FeedbackQuestion.AnswerType.FIVE_STARS) {
+			// Needed since Jackson's default deserialized type for numbers (when the target type is unspecified) is Double
+			question.setAnswer(((Double) question.getAnswer()).intValue());
 		}
 	}
 

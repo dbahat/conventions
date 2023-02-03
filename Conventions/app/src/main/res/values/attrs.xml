@@ -603,6 +603,7 @@
         <attr name="state_feedback_answer_type_smiley_5_point" type="bool"/>
         <attr name="state_feedback_answer_type_radio" type="bool"/>
         <attr name="state_feedback_answer_type_multi" type="bool"/>
+        <attr name="state_feedback_answer_type_five_stars" type="bool"/>
     </declare-styleable>
 
     <declare-styleable name="UpdateState">
