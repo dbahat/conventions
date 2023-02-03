@@ -114,6 +114,9 @@
         <item name="updateTextColor">?android:textColorPrimary</item>
         <item name="updateTimeColor">?updateTextColor</item>
         <item name="updateElevation">0dp</item>
+        <item name="showNewUpdateIndicator">false</item>
+        <item name="newUpdateIndicatorTextColor">?updateTimeColor</item>
+        <item name="newUpdateIndicatorBackground">@null</item>
 
         <!-- Map -->
         <item name="mapBackground">?activitiesBackground</item>
@@ -277,6 +280,9 @@
         <item name="updateTextColor">?android:textColorPrimary</item>
         <item name="updateTimeColor">?updateTextColor</item>
         <item name="updateElevation">0dp</item>
+        <item name="showNewUpdateIndicator">false</item>
+        <item name="newUpdateIndicatorTextColor">?updateTimeColor</item>
+        <item name="newUpdateIndicatorBackground">@null</item>
 
         <!-- Map -->
         <item name="mapBackground">?activitiesBackground</item>

@@ -105,6 +105,7 @@
     <string name="send_all">שלח הכל</string>
     <string name="new_updates">יש %d עדכונים חדשים</string>
     <string name="new_update">יש עדכון חדש</string>
+    <string name="new_update_indicator">חדש</string>
     <string name="cannot_set_past_alarm">לא ניתן לקבוע תזכורת בעבר</string>
     <string name="close">סגור</string>
     <string name="other">אחר</string>

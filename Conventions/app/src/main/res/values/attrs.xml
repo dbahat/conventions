@@ -340,6 +340,12 @@
         <attr name="updateItemBorder" format="color|reference"/>
         <!-- Text color for update text. Can be a color state list. State is set with state_update_... -->
         <attr name="updateTextColor" format="color|reference"/>
+        <!-- Should there be a "new" indicator for new updates -->
+        <attr name="showNewUpdateIndicator" format="boolean"/>
+        <!-- Text color for new update indicator. Can be a color state list. State is set with state_update_... -->
+        <attr name="newUpdateIndicatorTextColor" format="color|reference"/>
+        <!-- Background for new update indicator. Can be a color state list. State is set with state_update_... -->
+        <attr name="newUpdateIndicatorBackground" format="integer|reference"/>
 
         <!-- Map Screen -->
 
