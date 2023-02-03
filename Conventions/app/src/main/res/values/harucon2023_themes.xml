@@ -69,7 +69,7 @@
         <item name="homeLogo">@drawable/harucon2022_home_image</item>
         <item name="homeBottomImage">@null</item>
         <item name="homeBackground">@color/harucon2023_gray1</item>
-        <item name="homeToolbarTitle">@drawable/harucon2022_logo_small</item>
+        <item name="homeToolbarTitle">@drawable/harucon_logo_white_small</item>
         <item name="homeToolbarBackground">@color/harucon2023_pink</item>
         <item name="homeTitleBackground">@drawable/harucon2023_home_title_background</item>
         <item name="homeShowCurrentUpcomingTitles">true</item>
