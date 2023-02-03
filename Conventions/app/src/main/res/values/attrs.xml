@@ -474,6 +474,8 @@
         <attr name="conventionFeedbackTextColor" format="color|reference"/>
         <attr name="conventionFeedbackAnswerBackground" format="integer|reference"/>
 
+        <!-- Minimal width for answer in multiple-answer question (not radio). Used in feedack activity. -->
+        <attr name="feedbackMultiAnswerMinWidth" format="dimension"/>
         <!-- Top and bottom padding for answer in multiple-answer question (including radio). Used in feedback activity. -->
         <attr name="feedbackMultiAnswerPaddingTopBottom" format="dimension"/>
         <!-- Padding at start of first answer in multiple-answer question (not radio). Used in feedback activity. -->
