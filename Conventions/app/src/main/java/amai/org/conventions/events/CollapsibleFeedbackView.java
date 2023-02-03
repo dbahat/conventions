@@ -17,6 +17,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -625,6 +626,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 			}
 		};
 
+		int minWidth = ThemeAttributes.getDimensionSize(getContext(), R.attr.feedbackMultiAnswerMinWidth);
 		int paddingTopBottom = ThemeAttributes.getDimensionPixelOffset(getContext(), R.attr.feedbackMultiAnswerPaddingTopBottom);
 		int paddingStartEnd = ThemeAttributes.getDimensionPixelOffset(getContext(), R.attr.feedbackMultiAnswerPaddingStartEnd);
 		int marginBetween = ThemeAttributes.getDimensionPixelOffset(getContext(), R.attr.feedbackMultiAnswerMarginBetweenAnswers);
@@ -661,6 +663,10 @@ public class CollapsibleFeedbackView extends FrameLayout {
 				first = false;
 			}
 			answerButton.setPaddingRelative(paddingStart, paddingTopBottom, paddingStartEnd, paddingTopBottom);
+			if (!radio) {
+				answerButton.setMinWidth(minWidth);
+			}
+			answerButton.setGravity(Gravity.CENTER);
 			buttonsLayout.addView(answerButton);
 
 			// Set margins
