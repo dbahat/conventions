@@ -19,6 +19,9 @@
     <dimen name="feedback_smiley_answer_margin">20dp</dimen>
     <dimen name="feedback_smiley_icon_size">50dp</dimen>
 
+    <dimen name="feedback_five_stars_answer_margin">10dp</dimen>
+    <dimen name="feedback_five_stars_icon_size">24dp</dimen>
+
     <dimen name="feedback_smiley5p_icon_size">35dp</dimen>
 
     <!-- action bar item width copied from ActionMenuItemView (constant MAX_ICON_SIZE) -->

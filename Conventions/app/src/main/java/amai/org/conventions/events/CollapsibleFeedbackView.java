@@ -336,6 +336,10 @@ public class CollapsibleFeedbackView extends FrameLayout {
 						(question.getAnswerType() == FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO));
 				break;
 			}
+			case FIVE_STARS: {
+				answerView = buildFiveStarsAnswersView(question, feedback);
+				break;
+			}
 		}
 
 		questionLayout.setOrientation(layoutOrientation);
@@ -343,6 +347,16 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		questionLayout.addView(answerView);
 
 		return questionLayout;
+	}
+
+	private View buildFiveStarsAnswersView(FeedbackQuestion question, Survey feedback) {
+		return FiveStarsAnswersViewBuilder
+				.withContext(getContext(), textColor)
+				.onAnswerChange(() -> {
+					feedbackChanged |= question.isAnswerChanged();
+					updateSendButtonEnabledState(feedback);
+				})
+				.build(question, feedback);
 	}
 
 	private View buildSmiley3PointsAnswerView(final FeedbackQuestion question, final Survey feedback) {

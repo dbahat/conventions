@@ -165,7 +165,7 @@ public class FeedbackQuestion {
 
 	// This enum must be backwards compatible - don't remove or rename any values from it
 	public enum AnswerType {
-		TEXT, SINGLE_LINE_TEXT, SMILEY_3_POINTS, SMILEY_5_POINTS, MULTIPLE_ANSWERS, MULTIPLE_ANSWERS_RADIO, HIDDEN
+		TEXT, SINGLE_LINE_TEXT, SMILEY_3_POINTS, SMILEY_5_POINTS, MULTIPLE_ANSWERS, MULTIPLE_ANSWERS_RADIO, HIDDEN, FIVE_STARS
 	}
 
 	public interface DrawableAnswer {
