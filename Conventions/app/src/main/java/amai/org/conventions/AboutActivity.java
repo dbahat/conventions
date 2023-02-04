@@ -16,6 +16,7 @@ public class AboutActivity extends NavigationActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentInContentContainer(R.layout.activity_about);
+		setBackground(ThemeAttributes.getDrawable(this, R.attr.infoActivitiesBackground));
 		setToolbarTitle(getString(R.string.about));
 
 		TextView aboutView = (TextView) findViewById(R.id.about_content);
