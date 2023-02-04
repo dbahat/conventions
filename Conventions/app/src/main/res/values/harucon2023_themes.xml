@@ -26,6 +26,7 @@
         <item name="snackbarActionColor">@color/harucon2023_pink</item>
         <item name="borderlessButtonColor">@color/harucon2023_blue</item>
         <item name="activitiesBackground">@color/harucon2023_gray1</item>
+        <item name="infoActivitiesBackground">@color/white</item>
         <item name="eventListDivider">@drawable/harucon2023_event_list_divider</item>
         <item name="separatorColor">@null</item>
         <!-- These are used for buttons. They should be usable when the background is:
