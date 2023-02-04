@@ -24,6 +24,7 @@ public class AccessibilityActivity extends NavigationActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentInContentContainer(R.layout.activity_accessability);
+        setBackground(ThemeAttributes.getDrawable(this, R.attr.infoActivitiesBackground));
         setToolbarTitle(getString(R.string.accessibility));
 
         handleDeepLinks();

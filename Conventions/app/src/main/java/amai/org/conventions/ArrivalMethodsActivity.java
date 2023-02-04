@@ -38,6 +38,7 @@ public class ArrivalMethodsActivity extends NavigationActivity implements OnMapR
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentInContentContainer(R.layout.activity_arrival_methods, false, false);
+		setBackground(ThemeAttributes.getDrawable(this, R.attr.infoActivitiesBackground));
 		setToolbarTitle(getResources().getString(R.string.arrival_methods));
 
 		arrivalMethodsRoot = findViewById(R.id.arrival_methods_root);

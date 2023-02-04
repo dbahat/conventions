@@ -11,6 +11,7 @@ import java.util.Date;
 
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.R;
+import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.notifications.PlayServicesInstallation;
 import amai.org.conventions.notifications.PushNotificationTopic;
@@ -31,6 +32,7 @@ public class SettingsActivity extends NavigationActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentInContentContainer(R.layout.activity_settings);
+		setBackground(ThemeAttributes.getDrawable(this, R.attr.infoActivitiesBackground));
 		setToolbarTitle(getString(R.string.settings));
 	}
 

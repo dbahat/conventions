@@ -45,6 +45,8 @@
         <attr name="activitiesTopPadding" format="dimension"/>
         <!-- Default background for activities -->
         <attr name="activitiesBackground" format="color|reference"/>
+        <!-- Background for text-based activities: about, settings, accessibility, arrival methods. -->
+        <attr name="infoActivitiesBackground" format="color|reference"/>
         <!-- Background color for FAB -->
         <attr name="actionButtonColor" format="color|reference"/>
         <!-- Icon for FAB (search) -->
