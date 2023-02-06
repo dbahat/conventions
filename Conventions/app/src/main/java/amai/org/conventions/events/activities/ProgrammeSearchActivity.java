@@ -1,5 +1,6 @@
 package amai.org.conventions.events.activities;
 
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -17,6 +18,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import amai.org.conventions.R;
+import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.SearchCategoriesLayout;
 import amai.org.conventions.events.adapters.EventsViewListAdapter;
 import amai.org.conventions.model.ConventionEvent;
@@ -162,6 +164,12 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 				applyFiltersInBackground(NO_DELAY);
 			}
 		});
+
+		Drawable textEditBackground = ThemeAttributes.getDrawable(this, R.attr.programmeSearchBarBackground);
+		if (textEditBackground != null) {
+			keywordTextBox.setBackground(textEditBackground);
+			keywordTextBox.setBackgroundTintList(null);
+		}
 
 		if (keywordsFilter != null) {
 			keywordTextBox.setText(keywordsFilter);

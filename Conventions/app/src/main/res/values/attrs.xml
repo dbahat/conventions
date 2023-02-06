@@ -532,6 +532,9 @@
 
         <!-- Color for search categories text, hint text and labels -->
         <attr name="searchTitleTextColor" format="color|reference" />
+        <!-- Custom background for the programme search TextEdit.
+             If null, background tint of the default text edit background is set to searchTitleTexColor. -->
+        <attr name="programmeSearchBarBackground" format="integer|reference" />
         <!-- Color for the background of the search screen title layout -->
         <attr name="searchTitleBackgroundColor" format="color|reference" />
 
