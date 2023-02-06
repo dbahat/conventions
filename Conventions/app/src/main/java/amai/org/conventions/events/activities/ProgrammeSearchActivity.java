@@ -258,6 +258,12 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 			}
 		});
 
+		Drawable textEditBackground = ThemeAttributes.getDrawable(this, R.attr.programmeSearchBarBackground);
+		if (textEditBackground != null) {
+			keywordTextBox.setBackground(textEditBackground);
+			keywordTextBox.setBackgroundTintList(null);
+		}
+
 		if (keywordsFilter != null) {
 			keywordTextBox.setText(keywordsFilter);
 		}

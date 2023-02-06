@@ -176,8 +176,8 @@
         <item name="fabOnProgrammeTop">false</item>
 
         <!-- Programme Search Activity -->
-        <item name="searchTitleTextColor">@color/black</item>
         <item name="searchTitleBackgroundColor">@android:color/transparent</item>
+        <item name="programmeSearchBarBackground">@null</item>
         <item name="searchDrawerAccentColor">?colorAccent</item>
         <item name="searchDrawerBackground">@color/white</item>
         <item name="searchDrawerTextColor">@color/black</item>
@@ -363,6 +363,8 @@
         <item name="fabOnProgrammeTop">false</item>
 
         <!-- Programme Search Activity -->
+        <item name="searchTitleBackgroundColor">@android:color/transparent</item>
+        <item name="programmeSearchBarBackground">@null</item>
         <item name="searchDrawerAccentColor">?colorAccent</item>
         <item name="searchDrawerBackground">@color/white</item>
         <item name="searchDrawerTextColor">@color/black</item>
@@ -407,6 +409,7 @@
         <item name="iconFloorDown">@drawable/arrow_down_wide_white</item>
         <item name="iconUserId">@drawable/baseline_person_white_36</item>
         <item name="toolbarLogo">@drawable/ic_menu_white_24dp</item>
+        <item name="searchTitleTextColor">@color/white</item>
     </style>
 
     <!-- Additional default attributes for light themes. Inherit the actual theme from this one for light themes. -->
@@ -444,6 +447,7 @@
         <item name="iconFloorDown">@drawable/arrow_down_wide</item>
         <item name="iconUserId">@drawable/baseline_person_black_36</item>
         <item name="toolbarLogo">@drawable/ic_menu_black_24dp</item>
+        <item name="searchTitleTextColor">@color/black</item>
     </style>
 
     <!-- Additional default attributes for light themes with dark toolbar. Inherit the actual theme from this one for light themes with dark toolbar. -->
