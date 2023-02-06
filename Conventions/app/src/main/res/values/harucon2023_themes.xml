@@ -115,6 +115,7 @@
         <item name="searchCategoriesColor">@color/harucon2023_pink</item>
         <item name="searchTitleTextColor">@color/harucon2023_gray3</item>
         <item name="searchTitleBackgroundColor">@color/white</item>
+        <item name="programmeSearchBarBackground">@drawable/harucon2023_search_bar_background</item>
         <!-- My Events Screen -->
         <item name="nextEventStartTimeBackground">@null</item>
         <item name="nextEventStartTimeTextColor">@color/harucon2023_pink</item>
