@@ -27,7 +27,7 @@
                 android:maxLines="1"
                 android:inputType="textFilter"
                 android:hint="@string/search_input_search_keyword"
-                android:layout_marginStart="?contentStartMargin"
+                android:layout_marginStart="5dp"
                 android:layout_marginEnd="0dp"
                 android:layout_alignParentStart="true"
                 android:layout_toStartOf="@+id/search_filter_button"
@@ -49,7 +49,7 @@
                 android:background="@null"
                 android:padding="10dp"
                 android:layout_marginStart="0dp"
-                android:layout_marginEnd="?contentEndMargin"
+                android:layout_marginEnd="0dp"
                 tools:ignore="ContentDescription" />
 
             <TextView
@@ -57,11 +57,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="?searchTitleTextColor"
-                android:layout_marginStart="?contentStartMargin"
-                android:layout_marginEnd="?contentEndMargin"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:layout_below="@id/search_keyword_text_box"
-                android:paddingStart="5dp"
-                android:paddingEnd="5dp"
                 android:textSize="@dimen/text_size_small_material"
                 />
 

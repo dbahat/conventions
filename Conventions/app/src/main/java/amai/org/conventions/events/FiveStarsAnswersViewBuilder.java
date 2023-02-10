@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 
 import java.util.stream.IntStream;
 
-import amai.org.conventions.R;
+import sff.org.conventions.R;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.Survey;
 import amai.org.conventions.utils.StateList;
