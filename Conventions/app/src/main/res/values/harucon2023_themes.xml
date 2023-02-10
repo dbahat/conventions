@@ -79,6 +79,7 @@
         <item name="homeContentText">@drawable/harucon2023_home_content_text</item>
         <item name="homeButtonBackground">@drawable/harucon2023_home_button</item>
         <item name="homeButtonText">@color/white</item>
+        <item name="homeGotoUpdatesButtonBackground">@drawable/harucon2023_home_updates_button</item>
         <item name="homeEventsListEventBackground">@drawable/harucon2023_rounded_edges_white</item>
         <item name="homeEventsListDivider">@android:color/transparent</item>
         <item name="homeEventsListDividerHeight">10dp</item>
