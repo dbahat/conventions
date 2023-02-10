@@ -51,7 +51,7 @@ public class StandViewHolder extends RecyclerView.ViewHolder {
 			if (colorImage) {
 				color = ThemeAttributes.getColor(context, R.attr.standIconColor);
 			} else {
-				color = ThemeAttributes.getColor(context, R.attr.mapSearchText);
+				color = ThemeAttributes.getColor(context, R.attr.mapSearchImageColor);
 			}
 			image.mutate().setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
 		}

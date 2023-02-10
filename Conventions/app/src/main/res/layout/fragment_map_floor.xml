@@ -15,11 +15,13 @@
         android:layout_height="wrap_content"
         android:paddingTop="5dp"
         android:background="?floorChangeBackground"
+        android:elevation="?floorUpDownElevation"
         android:orientation="vertical">
 
         <amai.org.conventions.customviews.AspectRatioImageView
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:layout_margin="5dp"
             android:src="?iconFloorUp"
             android:layout_gravity="center_horizontal"/>
 
@@ -29,12 +31,13 @@
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="?floorUpDownTextColor"
+            android:layout_marginBottom="5dp"
             android:layout_gravity="center_horizontal"/>
 
         <View
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="@color/very_dark_gray"/>
+            android:background="?floorUpDownSeparator"/>
     </LinearLayout>
 
     <RelativeLayout
@@ -82,6 +85,8 @@
             android:visibility="gone"
             tools:visibility="visible"
             android:alpha="0.9"
+            android:elevation="?locationDetailsElevation"
+            android:background="?locationDetailsBackground"
             android:layout_alignParentBottom="true">
 
             <View
@@ -94,8 +99,7 @@
                 android:paddingBottom="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:background="?locationDetailsBackground">
+                android:orientation="vertical">
 
                 <RelativeLayout
                     android:paddingStart="5dp"
@@ -111,6 +115,8 @@
                         style="@style/TextAppearance.AppCompat.Title"
                         android:layout_alignParentStart="true"
                         android:textColor="?locationDetailsTitleColor"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
                         tools:text="Hall name"/>
 
                     <ImageView
@@ -175,12 +181,13 @@
         android:layout_height="wrap_content"
         android:paddingBottom="5dp"
         android:background="?floorChangeBackground"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:elevation="?floorUpDownElevation">
 
         <View
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="@color/very_dark_gray"/>
+            android:background="?floorUpDownSeparator"/>
 
         <TextView
             android:id="@+id/map_floor_down_text"
@@ -188,11 +195,13 @@
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="?floorUpDownTextColor"
+            android:layout_marginTop="5dp"
             android:layout_gravity="center_horizontal"/>
 
         <amai.org.conventions.customviews.AspectRatioImageView
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:layout_margin="5dp"
             android:src="?iconFloorDown"
             android:layout_gravity="center_horizontal"/>
 
