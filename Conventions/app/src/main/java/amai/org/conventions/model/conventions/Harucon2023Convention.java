@@ -99,7 +99,7 @@ public class Harucon2023Convention extends AmaiConvention {
 
 	@Override
 	protected ConventionStorage initStorage() {
-		return new ConventionStorage(this, R.raw.harucon2022_convention_events, 0);
+		return new ConventionStorage(this, R.raw.harucon2023_convention_events, 0);
 	}
 
 	@Override
@@ -184,7 +184,7 @@ public class Harucon2023Convention extends AmaiConvention {
 	@Override
 	protected URL initModelURL() {
 		try {
-			return new URL("https://harucon.org.il/2022/wp-admin/admin-ajax.php?action=get_event_list");
+			return new URL("https://harucon.org.il/2023/wp-admin/admin-ajax.php?action=get_event_list");
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
