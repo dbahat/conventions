@@ -9,6 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_marginStart="?contentStartMargin"
+        android:layout_marginEnd="?contentEndMargin"
         android:background="?searchTitleBackgroundColor">
 
         <EditText
@@ -18,8 +20,8 @@
             android:maxLines="1"
             android:inputType="textFilter"
             android:hint="@string/search_input_search_keyword"
-            android:layout_marginStart="?contentStartMargin"
-            android:layout_marginEnd="?contentEndMargin"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:textColorHint="?searchTitleTextColor"
             android:textColor="?searchTitleTextColor"
             android:backgroundTint="?searchTitleTextColor"
@@ -29,18 +31,18 @@
             android:id="@+id/search_categories_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="?contentStartMargin"
-            android:layout_marginEnd="?contentEndMargin" />
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp" />
 
         <TextView
             android:id="@+id/search_results_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="?searchTitleTextColor"
-            android:layout_marginStart="?contentStartMargin"
-            android:layout_marginEnd="?contentEndMargin"
-            android:paddingStart="5dp"
-            android:paddingEnd="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:textSize="@dimen/text_size_small_material"
             />
 
