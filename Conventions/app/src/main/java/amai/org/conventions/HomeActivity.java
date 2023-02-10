@@ -95,11 +95,11 @@ public class HomeActivity extends NavigationActivity {
 	private boolean setupVoteOrView(ConventionEvent currentEvent, ImageView imageView) {
 		if (currentEvent.getUserInput().getVoteSurvey() != null || Convention.getInstance().getEventViewURL(currentEvent) != null) {
 			if (Convention.getInstance().getEventViewURL(currentEvent) == null) {
-				imageView.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.outline_poll_white_48));
+				imageView.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.vote));
 			} else if (currentEvent.getUserInput().getVoteSurvey() == null) {
 				imageView.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.baseline_videocam_white_48));
 			} else {
-				imageView.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.videocam_poll_white_48));
+				imageView.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.videocam_vote_white_48));
 			}
 			imageView.setVisibility(View.VISIBLE);
 			return true;
