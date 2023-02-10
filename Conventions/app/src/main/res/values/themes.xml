@@ -156,6 +156,11 @@
         <item name="eventDetailsHighlightedTextColor">?eventDetailsTextColor</item>
         <item name="feedbackButtonColor">?borderlessButtonColor</item>
         <item name="eventTitleTextColor">?android:textColorPrimary</item>
+        <item name="eventLecturerTextColor">?eventTitleTextColor</item>
+        <item name="eventTypeTextColor">?eventTitleTextColor</item>
+        <item name="eventNameBackground">@null</item>
+        <item name="eventLecturerBackground">@null</item>
+        <item name="eventTypeBackground">@null</item>
         <item name="eventTitlePadding">8dp</item>
         <item name="eventVoteBoxColor">?eventFeedbackBoxColor</item>
         <item name="eventVoteTextColor">?eventDescriptionTextColor</item>
@@ -359,6 +364,11 @@
         <item name="eventDetailsHighlightedTextColor">?eventDetailsTextColor</item>
         <item name="feedbackButtonColor">?borderlessButtonColor</item>
         <item name="eventTitleTextColor">?android:textColorPrimary</item>
+        <item name="eventLecturerTextColor">?eventTitleTextColor</item>
+        <item name="eventTypeTextColor">?eventTitleTextColor</item>
+        <item name="eventNameBackground">@null</item>
+        <item name="eventLecturerBackground">@null</item>
+        <item name="eventTypeBackground">@null</item>
         <item name="eventTitlePadding">8dp</item>
         <item name="eventVoteBoxColor">?eventFeedbackBoxColor</item>
         <item name="eventVoteTextColor">?eventDescriptionTextColor</item>

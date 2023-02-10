@@ -43,18 +43,43 @@
 
 			<LinearLayout
 				style="@style/EventDetailsHeaderBox">
+				<TextView
+					android:id="@+id/event_title"
+					style="@style/TextAppearance.AppCompat.Title"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="?eventNameBackground"
+					android:gravity="center"
+					android:padding="5dp"
+					android:textColor="?eventTitleTextColor"
+					android:textStyle="bold"
+					tools:text="title" />
+
+				<TextView
+					android:id="@+id/event_lecturer"
+					style="@style/TextAppearance.AppCompat.Subhead"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="?eventLecturerBackground"
+					android:gravity="center"
+					android:padding="5dp"
+					android:textColor="?eventLecturerTextColor"
+					tools:text="lecturer" />
+
 				<LinearLayout
-					android:layout_width="wrap_content"
+					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:orientation="horizontal"
+					android:background="?eventTypeBackground"
 					android:gravity="center_horizontal"
+					android:padding="5dp"
 					android:layout_gravity="center_horizontal">
 					<TextView
 						android:id="@+id/event_category"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						style="@style/TextAppearance.AppCompat.Small"
-						android:textColor="?eventTitleTextColor"
+						android:textColor="?eventTypeTextColor"
 						tools:text="Event Category"
 						/>
 					<TextView
@@ -64,10 +89,10 @@
 						android:gravity="center_horizontal"
 						android:text="@string/dash_with_spaces"
 						style="@style/TextAppearance.AppCompat.Small"
-						android:textColor="?eventTitleTextColor"/>
+						android:textColor="?eventTypeTextColor"/>
 					<TextView
 						android:id="@+id/event_type"
-						android:textColor="?eventTitleTextColor"
+						android:textColor="?eventTypeTextColor"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						style="@style/TextAppearance.AppCompat.Small"
@@ -81,10 +106,10 @@
 						android:gravity="center_horizontal"
 						android:text="@string/dash_with_spaces"
 						style="@style/TextAppearance.AppCompat.Small"
-						android:textColor="?eventTitleTextColor"/>
+						android:textColor="?eventTypeTextColor"/>
 					<TextView
 						android:id="@+id/event_location_type"
-						android:textColor="?eventTitleTextColor"
+						android:textColor="?eventTypeTextColor"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						style="@style/TextAppearance.AppCompat.Small"
@@ -92,15 +117,6 @@
 						android:gravity="center"
 						/>
 				</LinearLayout>
-				<TextView
-					android:id="@+id/event_title"
-					style="@style/TextAppearance.AppCompat.Headline"
-					android:textColor="?eventTitleTextColor"
-					android:textStyle="bold"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:gravity="center"
-					tools:text="title" />
 			</LinearLayout>
 
 			<amai.org.conventions.customviews.AspectRatioImageView
@@ -124,15 +140,6 @@
 					android:gravity="center">
 
 					<TextView
-						android:id="@+id/event_lecturer"
-						style="@style/TextAppearance.AppCompat.Title"
-						android:textColor="?eventDetailsTextColor"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:gravity="center"
-						tools:text="lecturer" />
-
-					<TextView
 						android:id="@+id/event_hall"
 						style="@style/TextAppearance.AppCompat.Subhead"
 						android:textColor="?eventDetailsTextColor"
@@ -144,8 +151,7 @@
 
 					<TextView
 						android:id="@+id/event_time"
-						style="@style/TextAppearance.AppCompat.Title"
-						android:textStyle="bold"
+						style="@style/TextAppearance.AppCompat.Subhead"
 						android:textColor="?eventDetailsTextColor"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
