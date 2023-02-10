@@ -432,8 +432,18 @@
         <attr name="eventTitleBackground" format="integer|reference"/>
         <!-- Padding for event title box -->
         <attr name="eventTitlePadding" format="dimension"/>
-        <!-- Text color for text in event title box (event name, type and location type) -->
+        <!-- Text color for event name -->
         <attr name="eventTitleTextColor" format="color|reference"/>
+        <!-- Background for event name -->
+        <attr name="eventNameBackground" format="integer|reference"/>
+        <!-- Text color for lecturer. Default is eventTitleTextColor. -->
+        <attr name="eventLecturerTextColor" format="color|reference"/>
+        <!-- Background for lecturer -->
+        <attr name="eventLecturerBackground" format="integer|reference"/>
+        <!-- Text color for event type and location type. Default is eventTitleTextColor. -->
+        <attr name="eventTypeTextColor" format="color|reference"/>
+        <!-- Background for event type and location type -->
+        <attr name="eventTypeBackground" format="integer|reference"/>
 
         <!-- Background for event details box -->
         <attr name="eventDetailsBoxColor" format="color|reference"/>
