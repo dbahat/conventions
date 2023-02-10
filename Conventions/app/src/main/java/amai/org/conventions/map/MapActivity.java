@@ -21,6 +21,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabItem;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.Collections;
@@ -63,7 +65,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 
 	// Search
 	private LinearLayout searchContainer;
-	private RadioButton searchTypeLocations;
+	private TabLayout searchType;
 	private TextView noResultsFound;
 	private ListView searchResults;
 	private CheckBox showOnlyHallsCheckbox;
@@ -301,9 +303,8 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 	}
 
 	private void initializeSearch(Bundle savedInstanceState) {
-		RadioGroup searchType = (RadioGroup) findViewById(R.id.search_type);
+		searchType = findViewById(R.id.search_type);
 		searchContainer = (LinearLayout) findViewById(R.id.map_search);
-		searchTypeLocations = (RadioButton) findViewById(R.id.search_type_locations);
 		noResultsFound = (TextView) findViewById(R.id.map_search_no_results_found);
 		searchResults = (ListView) findViewById(R.id.map_search_results);
 		showOnlyHallsCheckbox = (CheckBox) findViewById(R.id.map_search_show_only_halls);
@@ -334,17 +335,28 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 			}
 		});
 
+		TabLayout.Tab searchLocationsTab = searchType.newTab().setText(R.string.search_locations).setId(R.id.mapSearchTabLocation);
+		searchType.addTab(searchLocationsTab);
+		searchType.addTab(searchType.newTab().setText(R.string.search_stands).setId(R.id.mapSearchTabStands));
+		searchType.selectTab(searchLocationsTab);
+
+		Drawable tabIndicator = ThemeAttributes.getDrawable(this, R.attr.mapSearchTabsIndicator);
+		if (tabIndicator != null) {
+			searchType.setSelectedTabIndicator(tabIndicator);
+		}
+
 		// Check if we can search for stands
 		if (!Convention.getInstance().hasStands()) {
 			searchType.setVisibility(View.GONE);
 		}
 
 		// Setup search type (radio button) change
-		searchType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+		searchType.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+
 			@Override
-			public void onCheckedChanged(RadioGroup group, int checkedId) {
+			public void onTabSelected(TabLayout.Tab tab) {
 				getCurrentFloorFragment().resetState();
-				if (checkedId == R.id.search_type_locations) {
+				if (tab.getId() == R.id.mapSearchTabLocation) {
 					showOnlyHallsCheckbox.setVisibility(View.VISIBLE);
 					searchResults.setAdapter(locationsSearchResultsAdapter);
 				} else {
@@ -352,6 +364,14 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 					searchResults.setAdapter(standsSearchResultsAdapter);
 				}
 				applySearchFiltersInBackground();
+			}
+
+			@Override
+			public void onTabUnselected(TabLayout.Tab tab) {
+			}
+
+			@Override
+			public void onTabReselected(TabLayout.Tab tab) {
 			}
 		});
 
@@ -443,7 +463,8 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 	}
 
 	private boolean isLocationsSearch() {
-		return searchTypeLocations.isChecked();
+		TabLayout.Tab selectedTab = searchType.getTabAt(searchType.getSelectedTabPosition());
+		return selectedTab != null && selectedTab.getId() == R.id.mapSearchTabLocation;
 	}
 
 	private void setCurrentFloor(Floor floor) {

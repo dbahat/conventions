@@ -33,33 +33,17 @@
                 android:layout_height="1dp"
                 android:background="?mapSearchBorder"/>
 
-            <RadioGroup
+            <com.google.android.material.tabs.TabLayout
                 android:id="@+id/search_type"
                 android:background="?mapSearchFiltersBackground"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="1"
+                app:tabGravity="fill"
+                app:tabIndicatorColor="?mapSearchTabsColor"
+                app:tabSelectedTextColor="?mapSearchTabsColor"
+                app:tabTextColor="?mapSearchTabsColor"
                 android:paddingTop="3dp">
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/search_type_locations"
-                    android:layout_width="0dp"
-                    android:layout_weight="0.5"
-                    android:layout_height="wrap_content"
-                    android:text="@string/search_locations"
-                    android:textColor="?mapSearchText"
-                    app:buttonTint="?mapSearchText"
-                    android:checked="true"/>
-
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/search_type_stands"
-                    android:layout_width="0dp"
-                    android:layout_weight="0.5"
-                    android:layout_height="wrap_content"
-                    android:text="@string/search_stands"
-                    android:textColor="?mapSearchText"
-                    app:buttonTint="?mapSearchText"/>
-            </RadioGroup>
+            </com.google.android.material.tabs.TabLayout>
 
             <LinearLayout
                 android:orientation="vertical"
