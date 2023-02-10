@@ -184,6 +184,8 @@
         <item name="floorUpDownTextColor">@color/harucon2023_gray4</item>
         <item name="floorUpDownSeparator">@color/white</item>
         <item name="floorUpDownElevation">3dp</item>
+        <item name="mapSearchTabsColor">@color/harucon2023_pink</item>
+        <item name="mapSearchTabsIndicator">@drawable/harucon2023_map_tab_indicator</item>
         <item name="mapSearchBorder">@color/white</item>
         <item name="mapSearchResultsBackground">@color/less_transparent_white</item>
         <item name="mapSearchPaneElevation">10dp</item>
