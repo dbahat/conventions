@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
-        <inset android:inset="10dp">
+        <inset android:insetTop="10dp" android:insetBottom="10dp">
             <shape>
                 <corners android:radius="20dp" />
                 <solid android:color="@color/harucon2023_gray1" />
