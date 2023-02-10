@@ -453,6 +453,10 @@
         <attr name="eventVoteBoxColor" format="color|reference"/>
         <!-- Text color for event vote/view box in event activity. Used for: view description, vote description, vote note. -->
         <attr name="eventVoteTextColor" format="color|reference"/>
+        <!-- Button text color for event vote/view button -->
+        <attr name="eventVoteButtonTextColor" format="color|reference"/>
+        <!-- Button background for event vote/view button -->
+        <attr name="eventVoteButtonBackground" format="integer|reference"/>
 
         <!-- Event Survey Dialog -->
 
