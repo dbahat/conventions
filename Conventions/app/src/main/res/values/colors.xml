@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="less_transparent_white">#99ffffff</color>
+    <color name="less_transparent_white">#D9FFFFFF</color>
     <color name="transparent_white">#C0FFFFFF</color>
     <color name="white">#FFFFFF</color>
     <color name="ultra_light_gray">#EBEBEB</color>
