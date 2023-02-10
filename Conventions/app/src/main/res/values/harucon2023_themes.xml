@@ -8,8 +8,8 @@
         <item name="actionOverflowButtonStyle">@style/OverflowMenu.Harucon2023</item>
         <!-- General -->
         <item name="android:colorPrimaryDark">@color/black</item> <!-- Toolbar color -->
-        <!-- Used in: checkbox colors in map search, default selected checkbox/switch color, settings titles,
-             cursor color in all edit texts. Also used as the default action button color. -->
+        <!-- Used in: default selected checkbox/switch color, settings titles,
+             cursor color in all edit texts. Also used as the default action button color and map search checkbox color. -->
         <item name="colorAccent">@color/harucon2023_green</item>
         <!-- This color should be readable over the activities background.
              Used as the text color in: accessibility, arrival methods.
@@ -173,16 +173,28 @@
         <item name="eventDescriptionTextColor">@color/black</item>
         <!-- Map Screen -->
         <item name="mapBackground">@color/harucon2023_gray1</item>
+        <item name="locationDetailsBackground">@color/harucon2023_gray2</item>
+        <item name="locationDetailsTopLineColor">@android:color/transparent</item>
+        <item name="locationDetailsTitleColor">@color/black</item>
+        <item name="locationDetailsElevation">3dp</item>
+        <item name="iconClearMap">@drawable/ic_clear_black</item>
+        <item name="iconFloorUp">@drawable/harucon2023_arrow_up</item>
+        <item name="iconFloorDown">@drawable/harucon2023_arrow_down</item>
+        <item name="floorChangeBackground">@color/white</item>
+        <item name="floorUpDownTextColor">@color/harucon2023_gray4</item>
+        <item name="floorUpDownSeparator">@color/white</item>
+        <item name="floorUpDownElevation">3dp</item>
+        <item name="mapSearchBorder">@color/white</item>
+        <item name="mapSearchResultsBackground">@color/less_transparent_white</item>
+        <item name="mapSearchPaneElevation">10dp</item>
+        <item name="mapSearchImageColor">@color/harucon2023_blue</item>
+        <item name="mapSearchSeparator">@color/harucon2023_gray2</item>
+        <item name="mapSearchResultsDivider">@drawable/harucon2023_map_search_results_divider</item>
+        <item name="mapSearchCheckboxTint">@color/harucon2023_pink</item>
+        <item name="mapSearchBarBackground">@drawable/harucon2023_search_bar_background</item>
+        <item name="mapSearchBarHorizontalMargins">5dp</item>
         <item name="standIconColor">@color/harucon2023_pink</item>
         <item name="standsTypeTitleColor">@color/harucon2023_pink</item>
-        <item name="locationDetailsBackground">@color/transparent_white</item>
-        <item name="locationDetailsTopLineColor">@color/black</item>
-        <item name="locationDetailsTitleColor">@color/black</item>
-        <item name="iconClearMap">@drawable/ic_clear_black</item>
-        <item name="iconFloorUp">@drawable/arrow_up_wide</item>
-        <item name="iconFloorDown">@drawable/arrow_down_wide</item>
-        <item name="floorChangeBackground">@color/transparent_white</item>
-        <item name="floorUpDownTextColor">@color/black</item>
         <item name="standsMapHighlight">@color/harucon2023_transparent_green</item>
     </style>
 
