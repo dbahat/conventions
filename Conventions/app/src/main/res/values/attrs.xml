@@ -241,6 +241,8 @@
         <attr name="homeSingleButtonStyle" format="integer|reference"/>
         <!-- Show buttons in home screen (before and during convention) -->
         <attr name="homeShowButtons" format="boolean"/>
+        <!-- Background for "go to updates" button before convention. Default is homeButtonBackground. -->
+        <attr name="homeGotoUpdatesButtonBackground" format="integer|reference"/>
 
         <!-- My Events Screen -->
 
