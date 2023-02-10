@@ -142,6 +142,8 @@
         <item name="eventTitlePadding">8dp</item>
         <item name="eventVoteBoxColor">?eventFeedbackBoxColor</item>
         <item name="eventVoteTextColor">?eventDescriptionTextColor</item>
+        <item name="eventVoteButtonBackground">?highlightedButtonBackground</item>
+        <item name="eventVoteButtonTextColor">?buttonTextColor</item>
         <item name="eventDescriptionBoxColor">?eventDetailsBoxColor</item>
         <item name="eventActivityFavoriteColor">@color/gold</item>
         <item name="eventFeedbackAnswerBackground">@null</item>
@@ -310,6 +312,8 @@
         <item name="eventTitlePadding">8dp</item>
         <item name="eventVoteBoxColor">?eventFeedbackBoxColor</item>
         <item name="eventVoteTextColor">?eventDescriptionTextColor</item>
+        <item name="eventVoteButtonBackground">?highlightedButtonBackground</item>
+        <item name="eventVoteButtonTextColor">?buttonTextColor</item>
         <item name="eventDescriptionBoxColor">?eventDetailsBoxColor</item>
         <item name="eventActivityFavoriteColor">@color/gold</item>
         <item name="eventFeedbackAnswerBackground">@null</item>
