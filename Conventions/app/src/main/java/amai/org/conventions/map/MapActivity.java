@@ -1,5 +1,6 @@
 package amai.org.conventions.map;
 
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -419,6 +420,12 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 				}
 			}
 		});
+
+		Drawable textEditBackground = ThemeAttributes.getDrawable(this, R.attr.mapSearchBarBackground);
+		if (textEditBackground != null) {
+			searchText.setBackground(textEditBackground);
+			searchText.setBackgroundTintList(null);
+		}
 
 		// Setup "show only halls" checkbox
 		showOnlyHallsCheckbox.setChecked(showOnlyHalls);

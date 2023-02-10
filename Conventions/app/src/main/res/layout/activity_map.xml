@@ -22,8 +22,10 @@
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="200dp"
+            android:layout_width="220dp"
+            android:background="?mapSearchResultsBackground"
             android:id="@+id/map_search_pane"
+            android:elevation="?mapSearchPaneElevation"
             android:layout_height="match_parent">
 
             <View
@@ -60,32 +62,36 @@
             </RadioGroup>
 
             <LinearLayout
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:background="?mapSearchFiltersBackground"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp">
                 <EditText
                     android:id="@+id/map_search_text"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
                     android:inputType="textFilter"
                     android:textColorHint="?mapSearchHint"
                     android:textColor="?mapSearchText"
                     android:backgroundTint="?mapSearchText"
+                    android:layout_marginStart="?mapSearchBarHorizontalMargins"
+                    android:layout_marginEnd="?mapSearchBarHorizontalMargins"
+                    android:textSize="16sp"
                     android:hint="@string/search_input_search_keyword"
                     />
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="?mapSearchText"
+                    app:buttonTint="?mapSearchCheckboxTint"
+                    android:id="@+id/map_search_show_only_halls"
+                    android:text="@string/show_only_halls"/>
             </LinearLayout>
 
-            <androidx.appcompat.widget.AppCompatCheckBox
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?mapSearchFiltersBackground"
-                android:textColor="?mapSearchText"
-                app:buttonTint="?colorAccent"
-                android:id="@+id/map_search_show_only_halls"
-                android:text="@string/show_only_halls"/>
 
             <View
                 android:layout_width="match_parent"
@@ -96,7 +102,8 @@
                 android:id="@+id/map_search_results"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?mapSearchResultsBackground">
+                android:divider="?mapSearchResultsDivider"
+                android:dividerHeight="?mapSearchResultsDividerHeight">
 
             </ListView>
 
@@ -109,13 +116,11 @@
                 android:textSize="@dimen/text_size_medium_material"
                 android:textColor="?hintTextColor"
                 android:padding="5dp"
-                android:text="@string/search_no_results_found"
-                android:background="?mapSearchResultsBackground"/>
+                android:text="@string/search_no_results_found"/>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="?mapSearchResultsBackground"/>
+                android:layout_height="match_parent"/>
 
         </LinearLayout>
         <View

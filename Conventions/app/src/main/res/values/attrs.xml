@@ -370,6 +370,10 @@
         <attr name="floorChangeBackground" format="color|reference"/>
         <!-- Text color for floor up/down lines -->
         <attr name="floorUpDownTextColor" format="color|reference"/>
+        <!-- Color for floor up/down lines border line -->
+        <attr name="floorUpDownSeparator" format="color|reference"/>
+        <!-- Elevation for floor up/down lines -->
+        <attr name="floorUpDownElevation" format="dimension|reference"/>
         <!-- Icon for map floor up -->
         <attr name="iconFloorUp" format="integer|reference"/>
         <!-- Icon for map floor down -->
@@ -378,6 +382,8 @@
         <attr name="locationDetailsTopLineColor" format="color|reference"/>
         <!-- Background for location details -->
         <attr name="locationDetailsBackground" format="color|reference"/>
+        <!-- Elevation for location details -->
+        <attr name="locationDetailsElevation" format="dimension|reference"/>
         <!-- Text color for location name -->
         <attr name="locationDetailsTitleColor" format="color|reference"/>
 
@@ -389,11 +395,26 @@
         <attr name="mapSearchSeparator" format="color|reference"/>
         <!-- Background color for map search results section -->
         <attr name="mapSearchResultsBackground" format="color|reference"/>
+        <!-- Divider for map search results. Height is defined in mapSearchResultsDividerHeight. -->
+        <attr name="mapSearchResultsDivider" format="color|reference"/>
+        <!-- Height for map search results divider -->
+        <attr name="mapSearchResultsDividerHeight" format="dimension|reference"/>
         <!-- Text color for all text in map search. Used in: search filters, radio buttons, search keyword, show only halls checkbox text,
-             location result name, floor and icon, stand result name, icon and floor. Also used for stands popup text for unselected stand. -->
+             location result name and floor, stand result name and floor. Also used for stands popup text for unselected stand. -->
         <attr name="mapSearchText" format="color|reference"/>
+        <!-- Image color for map search results icons (for both locations and stands) -->
+        <attr name="mapSearchImageColor" format="color|reference"/>
         <!-- Text color for map search hint for keywords -->
         <attr name="mapSearchHint" format="color|reference"/>
+        <!-- Color for map search "show only halls" checkbox -->
+        <attr name="mapSearchCheckboxTint" format="color|reference"/>
+        <!-- Custom background for the map search TextEdit.
+             If null, background tint of the default text edit background is set to mapSearchTex. -->
+        <attr name="mapSearchBarBackground" format="integer|reference"/>
+        <!-- Additional margins for map search TextEdit -->
+        <attr name="mapSearchBarHorizontalMargins" format="dimension|reference"/>
+        <!-- Elevation for map search pane -->
+        <attr name="mapSearchPaneElevation" format="dimension|reference"/>
 
         <!-- Stands popup stand icon color -->
         <attr name="standIconColor" format="color|reference"/>
