@@ -159,7 +159,9 @@
         <item name="eventFeedbackTextColor">@drawable/harucon2023_event_feedback_text_color</item>
         <item name="eventFeedbackAnswerBackground">@drawable/harucon2023_event_feedback_answer_bg_selector</item>
         <item name="eventVoteBoxColor">@drawable/harucon2023_rounded_edges_green</item>
-        <item name="eventVoteTextColor">@color/white</item>
+        <item name="eventVoteTextColor">@color/harucon2023_gray4</item>
+        <item name="eventVoteButtonBackground">@drawable/harucon2023_event_feedback_button</item>
+        <item name="eventVoteButtonTextColor">@drawable/harucon2023_event_feedback_button_text_color</item>
         <item name="eventDescriptionBoxColor">@drawable/harucon2023_rounded_edges_white</item>
         <item name="feedbackButtonColor">@color/white</item>
         <item name="eventSurveyTextColor">@drawable/harucon2023_event_vote_text_color</item>
