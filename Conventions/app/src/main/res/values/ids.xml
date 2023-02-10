@@ -6,4 +6,7 @@
 
     <item name="fab_translation" type="id"/>
     <item name="fab_fixed_translation" type="id"/>
+
+    <item name="mapSearchTabLocation" type="id"/>
+    <item name="mapSearchTabStands" type="id"/>
 </resources>

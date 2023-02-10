@@ -390,9 +390,13 @@
         <attr name="mapSearchResultsDivider" format="color|reference"/>
         <!-- Height for map search results divider -->
         <attr name="mapSearchResultsDividerHeight" format="dimension|reference"/>
-        <!-- Text color for all text in map search. Used in: search filters, radio buttons, search keyword, show only halls checkbox text,
+        <!-- Text color for all text in map search. Used in: search filters, search keyword, show only halls checkbox text,
              location result name and floor, stand result name and floor. Also used for stands popup text for unselected stand. -->
         <attr name="mapSearchText" format="color|reference"/>
+        <!-- Color for tabs in map search, including selected, not selected, and tab indicator. -->
+        <attr name="mapSearchTabsColor" format="color|reference"/>
+        <!-- Custom tab indicator for map search. If null, the default will be used. -->
+        <attr name="mapSearchTabsIndicator" format="integer|reference"/>
         <!-- Image color for map search results icons (for both locations and stands) -->
         <attr name="mapSearchImageColor" format="color|reference"/>
         <!-- Text color for map search hint for keywords -->
