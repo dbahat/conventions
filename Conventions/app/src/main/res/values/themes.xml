@@ -191,7 +191,7 @@
          similar light and dark themes.
          The attributes defined in this theme (except for the parent) should be exactly the same as in
          AppBaseTheme.Dark.Base -->
-    <style name="AppBaseTheme.Light.Base" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppBaseTheme.Light.Base" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
         <item name="android:windowBackground">@null</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowSoftInputMode">adjustPan</item>
