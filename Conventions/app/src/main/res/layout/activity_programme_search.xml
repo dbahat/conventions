@@ -27,7 +27,7 @@
             android:backgroundTint="?searchTitleTextColor"
             />
 
-        <amai.org.conventions.events.SearchCategoriesLayout
+        <amai.org.conventions.events.ChipCategoriesLayout
             android:id="@+id/search_categories_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

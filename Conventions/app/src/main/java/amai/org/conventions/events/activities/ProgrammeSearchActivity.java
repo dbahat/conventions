@@ -19,7 +19,7 @@ import java.util.List;
 
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
-import amai.org.conventions.events.SearchCategoriesLayout;
+import amai.org.conventions.events.ChipCategoriesLayout;
 import amai.org.conventions.events.adapters.EventsViewListAdapter;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
@@ -114,33 +114,21 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 	}
 
 	private void initializeSearchCategories() {
-		final SearchCategoriesLayout searchCategoriesLayout = (SearchCategoriesLayout) findViewById(R.id.search_categories_layout);
+		final ChipCategoriesLayout searchCategoriesLayout = findViewById(R.id.search_categories_layout);
 		// Wait for the layout to finish before configuring the checkbox.
 		// Seems to be needed since otherwise after config change, the state of the UI components in the layout changes.
-		searchCategoriesLayout.post(new Runnable() {
-			@Override
-			public void run() {
-				searchCategoriesLayout.setMaxDisplayedCategories(5);
-				searchCategoriesLayout.setSearchCategories(Convention.getInstance().getEventTypesSearchCategories(ProgrammeSearchActivity.this));
-				searchCategoriesLayout.setOnFilterSelectedListener(new SearchCategoriesLayout.OnFilterSelectedListener() {
-					@Override
-					public void onFilterSelected(List<String> selectedSearchCategories) {
-						eventTypeFilter = new LinkedList<>(CollectionUtils.map(selectedSearchCategories, new CollectionUtils.Mapper<String, EventType>() {
-							@Override
-							public EventType map(String item) {
-								return new EventType(item);
-							}
-						}));
-						// We must delay the UI update here because if adapter.setItems runs during the checkbox
-						// toggle animation it makes it not smooth, so we need to ensure it runs after it ends
-						applyFiltersInBackground(CHECKBOX_ANIMATION_TIME);
-					}
+		searchCategoriesLayout.post(() -> {
+			searchCategoriesLayout.setSearchCategories(Convention.getInstance().getEventTypesSearchCategories(ProgrammeSearchActivity.this));
+			searchCategoriesLayout.setOnFilterSelectedListener(selectedSearchCategories -> {
+					eventTypeFilter = new LinkedList<>(CollectionUtils.map(selectedSearchCategories, EventType::new));
+					// We must delay the UI update here because if adapter.setItems runs during the checkbox
+					// toggle animation it makes it not smooth, so we need to ensure it runs after it ends
+					applyFiltersInBackground(CHECKBOX_ANIMATION_TIME);
 				});
 
-				if (eventTypeFilter.size() > 0) {
-					for (EventType eventType : eventTypeFilter) {
-						searchCategoriesLayout.checkSearchCategory(eventType.getDescription());
-					}
+			if (eventTypeFilter.size() > 0) {
+				for (EventType eventType : eventTypeFilter) {
+					searchCategoriesLayout.checkSearchCategory(eventType.getDescription());
 				}
 			}
 		});

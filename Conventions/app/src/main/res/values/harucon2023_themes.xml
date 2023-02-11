@@ -114,6 +114,10 @@
         <item name="fabOnProgrammeTop">true</item>
         <item name="fabOnProgrammeTopAlignment">START</item>
         <item name="searchCategoriesColor">@color/harucon2023_pink</item>
+        <item name="searchCategoriesChipBackgroundColor">@drawable/harucon2023_event_search_chip_background_color</item>
+        <item name="searchCategoriesChipTextColor">@drawable/harucon2023_event_search_chip_text_color</item>
+        <item name="searchCategoriesChipStrokeColor">@color/harucon2023_pink</item>
+        <item name="searchCategoriesChipRippleColor">@color/harucon2023_light_pink</item>
         <item name="searchTitleTextColor">@color/harucon2023_gray3</item>
         <item name="searchTitleBackgroundColor">@color/white</item>
         <item name="programmeSearchBarBackground">@drawable/harucon2023_search_bar_background</item>
