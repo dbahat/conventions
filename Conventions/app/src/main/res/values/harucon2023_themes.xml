@@ -67,7 +67,7 @@
         <item name="aboutLogoMargins">80dp</item>
         <!-- Home Screen -->
         <item name="homeLogoMargin">20dp</item>
-        <item name="homeLogo">@drawable/harucon2022_home_image</item>
+        <item name="homeLogo">@drawable/harucon2023_home_image</item>
         <item name="homeBottomImage">@null</item>
         <item name="homeBackground">@color/harucon2023_gray1</item>
         <item name="homeToolbarTitle">@drawable/harucon_logo_white_small</item>
