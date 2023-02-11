@@ -230,7 +230,7 @@
     </style>
 
     <style name="AppBaseTheme.Harucon2023.Splash">
-        <item name="android:windowBackground">@color/harucon2023_gray1</item>
+        <item name="android:windowBackground">@drawable/harucon2023_splash</item>
     </style>
 
     <style name="OverflowMenu.Harucon2023" parent="Widget.AppCompat.ActionButton.Overflow">
