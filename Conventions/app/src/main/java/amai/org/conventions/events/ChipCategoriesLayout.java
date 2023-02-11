@@ -53,11 +53,18 @@ public class ChipCategoriesLayout extends ChipGroup {
 		chip.setText(searchCategory.getName());
 		chip.setTag(searchCategory);
 
-		chip.setOnClickListener(v -> {
+		chip.setOnClickListener(view -> {
 			List<Chip> checkedChips = CollectionUtils.filter(chips, CompoundButton::isChecked);
 			onFilterSelectedListener.onFilterSelected(
 					CollectionUtils.map(checkedChips, item -> item.getText().toString())
 			);
+
+			// Simulate a check animation. By removing and re-adding the view, the ChipLayout animates
+			// the transition of the other chips, simulating transition animation.
+			// See https://stackoverflow.com/questions/71228956/animate-chip-checking-in-material-chipgroup-android
+			int index = this.indexOfChild(view);
+			this.removeView(view);
+			this.addView(view, index);
 		});
 
 		return chip;
