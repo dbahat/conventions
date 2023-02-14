@@ -64,7 +64,7 @@
 <p>לחלופין, &quot;בנייני האומה&quot; ב-waze יביא אתכם אל המקום.</p>
 <p>במתחם קיימים 850 מקומות חנייה בתשלום המתחלקים בין חניון תת קרקעי וחניון חיצוני.</p>
 ]]></string>
-    <!-- Text about convention accessibility taken from https://harucon.org.il/2022/%d7%a0%d7%92%d7%99%d7%a9%d7%95%d7%aa-%d7%91%d7%9b%d7%a0%d7%a1/ -->
+    <!-- Text about convention accessibility taken from https://harucon.org.il/2023/%d7%a0%d7%92%d7%99%d7%a9%d7%95%d7%aa-%d7%91%d7%9b%d7%a0%d7%a1/ -->
     <!-- Added instructions about downloading the accessible programme file. -->
     <string name="accessibility_content" formatted="false"><![CDATA[
 <h1>נגישות באפליקציה</h1>
@@ -88,6 +88,7 @@
 <p>&nbsp;</p>
 <h3>קופה נגישה</h3>
 <p><span>הקופה הימנית באגף קניית הכרטיסים והקופה הימנית באגף הקנייה מראש בכניסה למתחם הכנס הן קופות נגישות. ניתן להגיע אל קופות אלו בהצגת תעודת נכה למתנדב במקום.</span>
+<a href="org.amai.conventions://accessibility/open-map-in-accessible-cashiers">לחצו כאן לצפיה במיקום הקופה הנגישה במפה</a>.</p>
 <p>&nbsp;</p>
 <h3>מלווים</h3>
 <p><span>מציג תעודת נכה זכאי להכנסת מלווה בחינם.</span></p>
@@ -98,6 +99,7 @@
 <h3>חדר הורים</h3>
 <p><span>חדר ההורים יכלול פינת הנקה, פינת החתלה ומים חמים. החדר מיועד להורים וילדיהם בלבד. חדר ההורים ימוקם בחדר 301 מאחורי האולם הראשי.<br />
 <a href="https://harucon.org.il/2023/%d7%94%d7%a0%d7%97%d7%99%d7%95%d7%aa-%d7%91%d7%98%d7%99%d7%97%d7%95%d7%aa-%d7%9c%d7%a9%d7%99%d7%9e%d7%95%d7%a9-%d7%91%d7%97%d7%93%d7%a8-%d7%94%d7%94%d7%95%d7%a8%d7%99%d7%9d/">לקריאת תקנון השימוש בחדר ההורים</a><br />
+<a href="org.amai.conventions://accessibility/open-map-in-parent-room">לחצו כאן לצפיה במיקום חדר ההורים במפה</a>.
 </span></p>
 </div>
 ]]></string>
