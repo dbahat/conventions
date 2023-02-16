@@ -774,4 +774,8 @@ public abstract class Convention implements Serializable {
 	public String getEventAdditionalInfo(ConventionEvent event, Context context) {
 		return null;
 	}
+
+	public String convertEventDescriptionURL(String url) {
+		return url;
+	}
 }

@@ -293,6 +293,7 @@ public class ConventionEvent implements Serializable {
 		Spanned spanned = HtmlParser.fromHtml(eventDescription, null, new HtmlParser.TagHandler() {
 			private Stack<DivSpan> divSpans = new Stack<>();
 			private Stack<IFrameSpan> iframeSpans = new Stack<>();
+			private Stack<VideoSpan> videoSpans = new Stack<>();
 
 			@Override
 			public boolean handleTag(boolean opening, String tag, Editable output, Attributes attributes) {
@@ -357,6 +358,30 @@ public class ConventionEvent implements Serializable {
 						span.setEnd(length);
 						output.setSpan(span, span.getStart(), length, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
 					}
+				// Handle embedded videos - video tag with inner source tag
+				} else if (tag.equals("video")) {
+					int length = output.length();
+					if (opening) {
+						VideoSpan span = new VideoSpan();
+						span.setStart(length);
+						videoSpans.push(span);
+					} else {
+						VideoSpan span = videoSpans.pop();
+						span.setEnd(length);
+						if (span.getUrl() != null) {
+							output.setSpan(span, span.getStart(), length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+						}
+					}
+				} else if (tag.equals("source") && attributes != null) {
+					VideoSpan span = videoSpans.peek();
+					if (span != null) {
+						// We replace all src attributes with xsrc in amai but not in sff
+						String url = HtmlParser.getValue(attributes, "xsrc");
+						if (url == null) {
+							url = HtmlParser.getValue(attributes, "src");
+						}
+						span.setUrl(url);
+					}
 				}
 				return false;
 			}
@@ -372,15 +397,31 @@ public class ConventionEvent implements Serializable {
 			int spanStart = span.getStart();
 			int spanEnd = span.getEnd();
 			SpannableStringBuilder link = new SpannableStringBuilder();
-			if (!TextUtils.isEmpty(span.getUrl())) {
+			String url = Convention.getInstance().convertEventDescriptionURL(span.getUrl());
+			if (!TextUtils.isEmpty(url)) {
 				String linkText = "למידע נוסף";
-				if (span.getUrl().startsWith("https://www.youtube.com/")) {
+				if (url.startsWith("https://www.youtube.com/")) {
 					linkText = "לסרטון";
-				} else if (span.getUrl().startsWith("https://docs.google.com/forms/")) {
+				} else if (url.startsWith("https://docs.google.com/forms/")) {
 					linkText = "לטופס";
 				}
 				link.append(linkText).append("\n");
-				link.setSpan(new CustomURLSpan(span.getUrl()), 0, link.length() - 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+				link.setSpan(new CustomURLSpan(url), 0, link.length() - 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+			}
+			spanned = (Spanned) TextUtils.concat(spanned.subSequence(0, spanStart), link, spanned.subSequence(spanEnd, spanned.length()));
+		}
+
+		// Convert video to CustomURLSpans by removing the original (video) content and adding a link
+		VideoSpan[] videos = spanned.getSpans(0, spanned.length(), VideoSpan.class);
+		for (VideoSpan span : videos) {
+			int spanStart = span.getStart();
+			int spanEnd = span.getEnd();
+			SpannableStringBuilder link = new SpannableStringBuilder();
+			String url = Convention.getInstance().convertEventDescriptionURL(span.getUrl());
+			if (!TextUtils.isEmpty(url)) {
+				String linkText = "לסרטון";
+				link.append(linkText).append("\n");
+				link.setSpan(new CustomURLSpan(url), 0, link.length() - 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
 			}
 			spanned = (Spanned) TextUtils.concat(spanned.subSequence(0, spanStart), link, spanned.subSequence(spanEnd, spanned.length()));
 		}
@@ -391,18 +432,29 @@ public class ConventionEvent implements Serializable {
 			int spanStart = span.getStart();
 			int spanEnd = span.getEnd();
 			SpannableStringBuilder linkToForm = new SpannableStringBuilder();
-			if (!TextUtils.isEmpty(span.getUrl())) {
+			String url = Convention.getInstance().convertEventDescriptionURL(span.getUrl());
+			if (!TextUtils.isEmpty(url)) {
 				linkToForm.append("לטופס").append("\n");
-				linkToForm.setSpan(new CustomURLSpan(span.getUrl()), 0, linkToForm.length() - 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+				linkToForm.setSpan(new CustomURLSpan(url), 0, linkToForm.length() - 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
 			}
 			spanned = (Spanned) TextUtils.concat(spanned.subSequence(0, spanStart), linkToForm, spanned.subSequence(spanEnd, spanned.length()));
 		}
 		// Remove any links to google forms (since they were handled previously)
 		for (URLSpan urlSpan : spanned.getSpans(0, spanned.length(), URLSpan.class)) {
-			if (urlSpan.getURL().startsWith("https://docs.google.com/forms/") && !(urlSpan instanceof CustomURLSpan)) {
+			String url = Convention.getInstance().convertEventDescriptionURL(urlSpan.getURL());
+			if (url.startsWith("https://docs.google.com/forms/") && !(urlSpan instanceof CustomURLSpan)) {
 				int spanStart = spanned.getSpanStart(urlSpan);
 				int spanEnd = spanned.getSpanEnd(urlSpan);
 				spanned = (Spanned) TextUtils.concat(spanned.subSequence(0, spanStart), spanned.subSequence(spanEnd, spanned.length()));
+			} else if (!Objects.equals(url, urlSpan.getURL())) {
+				// Fix url
+				int spanStart = spanned.getSpanStart(urlSpan);
+				int spanEnd = spanned.getSpanEnd(urlSpan);
+				SpannableStringBuilder builder = new SpannableStringBuilder();
+				builder.append(spanned);
+				builder.removeSpan(urlSpan);
+				builder.setSpan(new CustomURLSpan(url), spanStart, spanEnd, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+				spanned = builder;
 			}
 		}
 		return spanned;
@@ -444,6 +496,17 @@ public class ConventionEvent implements Serializable {
 		}
 	}
 	private static class IFrameSpan extends DivSpan {
+		private String url = null;
+
+		public void setUrl(String url) {
+			this.url = url;
+		}
+
+		public String getUrl() {
+			return url;
+		}
+	}
+	private static class VideoSpan extends DivSpan {
 		private String url = null;
 
 		public void setUrl(String url) {
