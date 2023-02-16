@@ -878,4 +878,8 @@ public abstract class Convention implements Serializable {
 	}
 
 	public abstract Configuration getAuthConfiguration(Context context);
+
+	public String convertEventDescriptionURL(String url) {
+		return url;
+	}
 }
