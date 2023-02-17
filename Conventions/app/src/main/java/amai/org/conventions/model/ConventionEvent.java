@@ -3,6 +3,7 @@ package amai.org.conventions.model;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.text.Editable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -416,14 +417,17 @@ public class ConventionEvent implements Serializable {
 	public Spanned getSpannedDescription() {
 		String eventDescription = this.getDescription();
 		final ListTagHandler listTagHandler = new ListTagHandler();
-		Spanned spanned = HtmlParser.fromHtml(eventDescription, null, new HtmlParser.TagHandler() {
+		Spanned spannedResult = HtmlParser.fromHtml(eventDescription, null, new HtmlParser.TagHandler() {
 			private Stack<DivSpan> divSpans = new Stack<>();
 			private Stack<IFrameSpan> iframeSpans = new Stack<>();
 			private Stack<VideoSpan> videoSpans = new Stack<>();
 
 			@Override
 			public boolean handleTag(boolean opening, String tag, Editable output, Attributes attributes) {
-				listTagHandler.handleTag(opening, tag, output, null);
+				// Starting Android N, the list items are handled in the Html class
+				if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+					listTagHandler.handleTag(opening, tag, output, null);
+				}
 
 				// Mark embedded google form with a GoogleFormSpan:
 				// An embedded google forms is a div that has a form inside it.
@@ -444,9 +448,7 @@ public class ConventionEvent implements Serializable {
 					} else {
 						DivSpan span = divSpans.pop();
 						span.setEnd(length);
-						if (span instanceof GoogleFormSpan) {
-							output.setSpan(span, span.getStart(), length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-						}
+						output.setSpan(span, span.getStart(), length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 					}
 				} else if (opening && tag.equals("form") && attributes != null) {
 					// Add the url to the google form (only if this form is inside the google form,
@@ -482,7 +484,7 @@ public class ConventionEvent implements Serializable {
 					} else {
 						IFrameSpan span = iframeSpans.pop();
 						span.setEnd(length);
-						output.setSpan(span, span.getStart(), length, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+						output.setSpan(span, span.getStart(), length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 					}
 				// Handle embedded videos - video tag with inner source tag
 				} else if (tag.equals("video")) {
@@ -513,15 +515,16 @@ public class ConventionEvent implements Serializable {
 			}
 		});
 
-		if (spanned == null) {
+		if (spannedResult == null || spannedResult.length() == 0) {
 			return null;
 		}
 
+		SpannableStringBuilder editableSpanned = SpannableStringBuilder.valueOf(spannedResult);
+
 		// Convert iframes to CustomURLSpans by removing the original (iframe) content and adding a link
-		IFrameSpan[] iframes = spanned.getSpans(0, spanned.length(), IFrameSpan.class);
-		for (IFrameSpan span : iframes) {
-			int spanStart = span.getStart();
-			int spanEnd = span.getEnd();
+		for (IFrameSpan span : editableSpanned.getSpans(0, editableSpanned.length(), IFrameSpan.class)) {
+			int spanStart = editableSpanned.getSpanStart(span);
+			int spanEnd = editableSpanned.getSpanEnd(span);
 			SpannableStringBuilder link = new SpannableStringBuilder();
 			String url = Convention.getInstance().convertEventDescriptionURL(span.getUrl());
 			if (!TextUtils.isEmpty(url)) {
@@ -531,59 +534,93 @@ public class ConventionEvent implements Serializable {
 				} else if (url.startsWith("https://docs.google.com/forms/")) {
 					linkText = "לטופס";
 				}
-				link.append(linkText).append("\n");
+				link.append(linkText);
+				if (editableSpanned.charAt(spanEnd) != '\n') {
+					link.append("\n");
+				}
 				link.setSpan(new CustomURLSpan(url), 0, link.length() - 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
 			}
-			spanned = (Spanned) TextUtils.concat(spanned.subSequence(0, spanStart), link, spanned.subSequence(spanEnd, spanned.length()));
+			editableSpanned.replace(spanStart, spanEnd, link);
 		}
 
 		// Convert video to CustomURLSpans by removing the original (video) content and adding a link
-		VideoSpan[] videos = spanned.getSpans(0, spanned.length(), VideoSpan.class);
-		for (VideoSpan span : videos) {
-			int spanStart = span.getStart();
-			int spanEnd = span.getEnd();
+		for (VideoSpan span : editableSpanned.getSpans(0, editableSpanned.length(), VideoSpan.class)) {
+			int spanStart = editableSpanned.getSpanStart(span);
+			int spanEnd = editableSpanned.getSpanEnd(span);
 			SpannableStringBuilder link = new SpannableStringBuilder();
 			String url = Convention.getInstance().convertEventDescriptionURL(span.getUrl());
 			if (!TextUtils.isEmpty(url)) {
 				String linkText = "לסרטון";
-				link.append(linkText).append("\n");
+				link.append(linkText);
+				if (editableSpanned.charAt(spanEnd) != '\n') {
+					link.append("\n");
+				}
 				link.setSpan(new CustomURLSpan(url), 0, link.length() - 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
 			}
-			spanned = (Spanned) TextUtils.concat(spanned.subSequence(0, spanStart), link, spanned.subSequence(spanEnd, spanned.length()));
+			editableSpanned.replace(spanStart, spanEnd, link);
 		}
 
 		// Convert google form spans to CustomURLSpan by removing the original (div) content and adding a link to the form
-		GoogleFormSpan[] forms = spanned.getSpans(0, spanned.length(), GoogleFormSpan.class);
-		for (GoogleFormSpan span : forms) {
-			int spanStart = span.getStart();
-			int spanEnd = span.getEnd();
-			SpannableStringBuilder linkToForm = new SpannableStringBuilder();
+		for (GoogleFormSpan span : editableSpanned.getSpans(0, editableSpanned.length(), GoogleFormSpan.class)) {
+			int spanStart = editableSpanned.getSpanStart(span);
+			int spanEnd = editableSpanned.getSpanEnd(span);
+			SpannableStringBuilder link = new SpannableStringBuilder();
 			String url = Convention.getInstance().convertEventDescriptionURL(span.getUrl());
 			if (!TextUtils.isEmpty(url)) {
-				linkToForm.append("לטופס").append("\n");
-				linkToForm.setSpan(new CustomURLSpan(url), 0, linkToForm.length() - 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+				link.append("לטופס");
+				if (editableSpanned.charAt(spanEnd) != '\n') {
+					link.append("\n");
+				}
+				link.setSpan(new CustomURLSpan(url), 0, link.length() - 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
 			}
-			spanned = (Spanned) TextUtils.concat(spanned.subSequence(0, spanStart), linkToForm, spanned.subSequence(spanEnd, spanned.length()));
+			editableSpanned.replace(spanStart, spanEnd, link);
 		}
 		// Remove any links to google forms (since they were handled previously)
-		for (URLSpan urlSpan : spanned.getSpans(0, spanned.length(), URLSpan.class)) {
+		for (URLSpan urlSpan : editableSpanned.getSpans(0, editableSpanned.length(), URLSpan.class)) {
 			String url = Convention.getInstance().convertEventDescriptionURL(urlSpan.getURL());
 			if (url.startsWith("https://docs.google.com/forms/") && !(urlSpan instanceof CustomURLSpan)) {
-				int spanStart = spanned.getSpanStart(urlSpan);
-				int spanEnd = spanned.getSpanEnd(urlSpan);
-				spanned = (Spanned) TextUtils.concat(spanned.subSequence(0, spanStart), spanned.subSequence(spanEnd, spanned.length()));
+				int spanStart = editableSpanned.getSpanStart(urlSpan);
+				int spanEnd = editableSpanned.getSpanEnd(urlSpan);
+				editableSpanned.delete(spanStart, spanEnd);
 			} else if (!Objects.equals(url, urlSpan.getURL())) {
 				// Fix url
-				int spanStart = spanned.getSpanStart(urlSpan);
-				int spanEnd = spanned.getSpanEnd(urlSpan);
-				SpannableStringBuilder builder = new SpannableStringBuilder();
-				builder.append(spanned);
-				builder.removeSpan(urlSpan);
-				builder.setSpan(new CustomURLSpan(url), spanStart, spanEnd, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-				spanned = builder;
+				int spanStart = editableSpanned.getSpanStart(urlSpan);
+				int spanEnd = editableSpanned.getSpanEnd(urlSpan);
+				editableSpanned.removeSpan((urlSpan));
+				editableSpanned.setSpan(new CustomURLSpan(url), spanStart, spanEnd, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
 			}
 		}
-		return spanned;
+
+		// Trim linebreaks at the start and end
+		int start = 0;
+		while (start < editableSpanned.length() && editableSpanned.charAt(start) == '\n') {
+			++start;
+		}
+		editableSpanned.delete(0, start);
+
+		int end = editableSpanned.length() - 1;
+		while (end >= 0 && editableSpanned.charAt(end) == '\n') {
+			--end;
+		}
+		editableSpanned.delete(end + 1, editableSpanned.length());
+
+		// Add linebreaks after divs
+		for (DivSpan span : editableSpanned.getSpans(0, editableSpanned.length(), DivSpan.class)) {
+			int spanStart = editableSpanned.getSpanStart(span);
+			int spanEnd = editableSpanned.getSpanEnd(span);
+
+			// Don't add linebreaks at the beginning and end, or if the div is empty
+			if (spanEnd <= 0 || spanEnd >= editableSpanned.length() - 1 || spanStart == spanEnd) {
+				continue;
+			}
+			// Only add a linebreak if there isn't one right before or after it
+			if (editableSpanned.charAt(spanEnd - 1) != '\n' &&
+				editableSpanned.charAt(spanEnd) != '\n' &&
+				editableSpanned.charAt(spanEnd + 1) != '\n') {
+				editableSpanned.insert(spanEnd + 1, "\n");
+			}
+		}
+		return editableSpanned;
 	}
 
 	private static class DivSpan {
