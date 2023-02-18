@@ -167,12 +167,13 @@ public class UpdatesRefresher {
 				.create()
 				.fromJson(reader, UpdatesResponseDto.class).getData();
 
-		return CollectionUtils
+		List<Update> updates = CollectionUtils
 				.map(updateDtos, item -> new Update()
 						.withId(item.getId())
 						.withText(item.getMessage())
 						.withDate(Dates.conventionToLocalTime(item.getCreatedTime()))
                         .withIsNew(true));
+		return CollectionUtils.filter(updates, item -> item.getText() != null);
 	}
 
 	public static class UpdatesResponseDto {
