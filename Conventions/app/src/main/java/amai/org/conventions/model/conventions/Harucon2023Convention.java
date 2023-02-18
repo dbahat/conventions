@@ -122,7 +122,7 @@ public class Harucon2023Convention extends AmaiConvention {
 	@Override
 	protected URL initUpdatesURL() {
 		try {
-			return new URL("https://harucon.org.il/2022/wp-content/plugins/get-harucon-feed.php");
+			return new URL("https://harucon.org.il/2023/wp-content/plugins/get-harucon-feed.php");
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
