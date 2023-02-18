@@ -23,6 +23,7 @@ import java.util.List;
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.model.Update;
 import amai.org.conventions.model.conventions.Convention;
+import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.HttpConnectionCreator;
 import amai.org.conventions.utils.Log;
@@ -166,7 +167,7 @@ public class UpdatesRefresher {
 			}
 		}
 
-		return updates;
+		return CollectionUtils.filter(updates, item -> item.getText() != null);
 	}
 	private static class MockUpdatesRefresher extends UpdatesRefresher {
 		private MockUpdatesRefresher(Context context) {
