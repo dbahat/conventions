@@ -191,10 +191,10 @@ public class StandsAreaFragment extends DialogFragment {
             for (StandLocation location : stand.getLocations()) {
                 layerDrawable.setLayerInset(
                         index,
-                        (int)(location.getLeft() / area.getImageWidth() * imageWidth),
-                        (int) (location.getTop()  / area.getImageHeight() * imageHeight),
-                        imageWidth - (int)(location.getRight() / area.getImageWidth() * imageWidth),
-                        imageHeight - (int) (location.getBottom()  / area.getImageHeight() * imageHeight)
+                        Math.round(location.getLeft() / area.getImageWidth() * imageWidth),
+                        Math.round(location.getTop()  / area.getImageHeight() * imageHeight),
+                        imageWidth - Math.round(location.getRight() / area.getImageWidth() * imageWidth),
+                        imageHeight - Math.round(location.getBottom()  / area.getImageHeight() * imageHeight)
                 );
                 ++index;
             }
