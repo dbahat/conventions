@@ -6,6 +6,7 @@
     android:versionName="12.0.0">
 
     <!-- For notifications -->
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <!-- Required for google maps, updates and refreshing the programme -->
@@ -44,7 +45,8 @@
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppBaseTheme.Harucon2023.Splash">
+            android:theme="@style/AppBaseTheme.Harucon2023.Splash"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -70,7 +72,8 @@
         <activity
             android:name=".HomeActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".AccessibilityActivity" >
+        <activity android:name=".AccessibilityActivity"
+            android:exported="true">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
                 <action android:name="android.intent.action.VIEW" />

@@ -1,14 +1,18 @@
 package amai.org.conventions;
 
+import static android.app.PendingIntent.FLAG_MUTABLE;
+
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.NotificationCompat;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -22,11 +26,8 @@ import amai.org.conventions.notifications.PlayServicesInstallation;
 import amai.org.conventions.notifications.PushNotification;
 import amai.org.conventions.notifications.PushNotificationTopic;
 import amai.org.conventions.notifications.PushNotificationTopicsSubscriber;
-import amai.org.conventions.settings.SettingsActivity;
 import amai.org.conventions.updates.UpdatesActivity;
 import amai.org.conventions.utils.CollectionUtils;
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.NotificationCompat;
 
 public class ApplicationInitializer {
     private static final int NEW_UPDATES_NOTIFICATION_ID = 75457;
@@ -142,12 +143,13 @@ public class ApplicationInitializer {
                     }
 
 					Intent intent = new Intent(currentContext, UpdatesActivity.class);
+                    int flags = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? FLAG_MUTABLE : 0;
                     NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context, PushNotification.Channel.Notifications.toString())
 							.setSmallIcon(ThemeAttributes.getResourceId(currentContext, R.attr.notificationSmallIcon))
 							.setContentTitle(notificationTitle)
 							.setContentText(notificationMessage)
 							.setAutoCancel(true)
-							.setContentIntent(PendingIntent.getActivity(currentContext, 0, intent, 0))
+							.setContentIntent(PendingIntent.getActivity(currentContext, 0, intent, flags))
 							.setDefaults(Notification.DEFAULT_VIBRATE);
 
 

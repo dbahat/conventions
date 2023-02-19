@@ -1,5 +1,8 @@
 package amai.org.conventions.notifications;
 
+import static android.app.PendingIntent.FLAG_CANCEL_CURRENT;
+import static android.app.PendingIntent.FLAG_MUTABLE;
+
 import android.annotation.TargetApi;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -83,7 +86,8 @@ public class LocalNotificationScheduler {
 				.setAction(notificationType.toString() + event.getId())
 				.putExtra(ShowNotificationReceiver.EXTRA_EVENT_ID_TO_NOTIFY, event.getId())
 				.putExtra(ShowNotificationReceiver.EXTRA_NOTIFICATION_TYPE, notificationType.toString());
-		PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+		int flags = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? FLAG_MUTABLE : 0;
+		PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, flags);
 
 		alarmManager.cancel(pendingIntent);
 	}
@@ -106,7 +110,8 @@ public class LocalNotificationScheduler {
 			Intent intent = new Intent(context, ShowNotificationReceiver.class)
 					.setAction(PushNotification.Type.ConventionFeedbackReminder.toString())
 					.putExtra(ShowNotificationReceiver.EXTRA_NOTIFICATION_TYPE, PushNotification.Type.ConventionFeedbackReminder.toString());
-			scheduleAlarm(oneDayPostConventionDate.getTimeInMillis(), PendingIntent.getBroadcast(context, 0, intent, 0), Accuracy.INACCURATE);
+			int flags = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? FLAG_MUTABLE : 0;
+			scheduleAlarm(oneDayPostConventionDate.getTimeInMillis(), PendingIntent.getBroadcast(context, 0, intent, flags), Accuracy.INACCURATE);
 		}
 
 		if (!ConventionsApplication.settings.wasConventionLastChanceFeedbackNotificationShown()) {
@@ -118,7 +123,8 @@ public class LocalNotificationScheduler {
 			Intent intent = new Intent(context, ShowNotificationReceiver.class)
 					.setAction(PushNotification.Type.ConventionFeedbackLastChanceReminder.toString())
 					.putExtra(ShowNotificationReceiver.EXTRA_NOTIFICATION_TYPE, PushNotification.Type.ConventionFeedbackLastChanceReminder.toString());
-			scheduleAlarm(tenDaysPostConventionDate.getTimeInMillis(), PendingIntent.getBroadcast(context, 0, intent, 0), Accuracy.INACCURATE);
+			int flags = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? FLAG_MUTABLE : 0;
+			scheduleAlarm(tenDaysPostConventionDate.getTimeInMillis(), PendingIntent.getBroadcast(context, 0, intent, flags), Accuracy.INACCURATE);
 		}
 	}
 
@@ -128,7 +134,9 @@ public class LocalNotificationScheduler {
 				.setAction(notificationType.toString() + event.getId()) // Setting unique action id so different event intents won't collide
 				.putExtra(ShowNotificationReceiver.EXTRA_EVENT_ID_TO_NOTIFY, event.getId())
 				.putExtra(ShowNotificationReceiver.EXTRA_NOTIFICATION_TYPE, notificationType.toString());
-		return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+		int flags = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? FLAG_CANCEL_CURRENT | FLAG_MUTABLE : FLAG_CANCEL_CURRENT;
+		return PendingIntent.getBroadcast(context, 0, intent, flags);
 	}
 
 	private void scheduleAlarm(long time, PendingIntent pendingIntent, Accuracy accuracy) {
@@ -149,7 +157,6 @@ public class LocalNotificationScheduler {
 		alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, time, pendingIntent);
 	}
 
-	@TargetApi(Build.VERSION_CODES.KITKAT)
 	private void scheduleInaccurateAlarm(long time, PendingIntent pendingIntent, Accuracy accuracy) {
 		// For Kitkat and above, the AlarmService batches notifications to improve battery life at the cost of alarm accuracy.
 		// Since event start notification time is important, schedule them using setWindow, which gives an exact window of time,
