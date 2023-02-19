@@ -98,35 +98,7 @@ public class ApplicationInitializer {
                 }
                 if (checkResult.isUserError()) {
                     PlayServicesInstallation.showInstallationDialog(currentContext, checkResult);
-                } else if (checkResult.isSuccess()) {
-                    showConfigureNotificationsDialog(currentContext);
                 }
-            }
-
-            private void showConfigureNotificationsDialog(final Context context) {
-                if (!ConventionsApplication.settings.wasSettingsPopupDisplayed()) {
-                    configureNotificationDialog = new AlertDialog.Builder(context)
-                            .setTitle(R.string.configure_notifications)
-                            .setMessage(R.string.configure_notifications_dialog_message)
-                            .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    configureNotificationDialog.hide();
-                                }
-                            })
-                            .setNeutralButton(R.string.change_settings, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    configureNotificationDialog.hide();
-                                    Intent intent = new Intent(context, SettingsActivity.class);
-                                    context.startActivity(intent);
-                                }
-                            })
-                            .setCancelable(true)
-                            .show();
-                    ConventionsApplication.settings.setSettingsPopupAsDisplayed();
-                }
-
             }
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
