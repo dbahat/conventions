@@ -1,16 +1,20 @@
 package amai.org.conventions;
 
+import static android.app.PendingIntent.FLAG_MUTABLE;
+
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import androidx.core.app.NotificationCompat;
 import androidx.appcompat.app.AlertDialog;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.NotificationCompat;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -147,12 +151,13 @@ public class ApplicationInitializer {
                     }
                     NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
                     Intent intent = new Intent(currentContext, UpdatesActivity.class);
+                    int flags = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? FLAG_MUTABLE : 0;
                     NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(currentContext, PushNotification.Channel.Notifications.toString())
                             .setSmallIcon(ThemeAttributes.getResourceId(currentContext, R.attr.notificationSmallIcon))
                             .setContentTitle(notificationTitle)
                             .setContentText(notificationMessage)
                             .setAutoCancel(true)
-                            .setContentIntent(PendingIntent.getActivity(currentContext, 0, intent, 0))
+							.setContentIntent(PendingIntent.getActivity(currentContext, 0, intent, flags))
                             .setDefaults(Notification.DEFAULT_VIBRATE);
 
 
