@@ -2,10 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_item_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:background="@color/black">
+    android:foreground="?selectableItemBackground"
+    tools:background="@color/black"
+    tools:ignore="UnusedAttribute">
 
     <amai.org.conventions.customviews.CompoundTextView
         android:id="@+id/navigation_item_text"
