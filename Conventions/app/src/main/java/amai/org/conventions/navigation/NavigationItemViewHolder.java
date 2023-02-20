@@ -12,9 +12,11 @@ import sff.org.conventions.R;
 
 public class NavigationItemViewHolder extends RecyclerView.ViewHolder {
 	private final TextView textView;
+	private final View navigationItemLayout;
 
 	public NavigationItemViewHolder(View itemView) {
 		super(itemView);
+		navigationItemLayout = itemView.findViewById(R.id.navigation_item_layout);
 		textView = (TextView) itemView.findViewById(R.id.navigation_item_text);
 	}
 
@@ -26,11 +28,11 @@ public class NavigationItemViewHolder extends RecyclerView.ViewHolder {
 		if (isCurrentItemSelected) {
 			int color = ThemeAttributes.getColor(currentActivity, R.attr.navigationPopupSelectedColor);
 			textView.setTextColor(color);
-			textView.setOnClickListener(null);
+			navigationItemLayout.setOnClickListener(null);
 		} else {
 			int color = ThemeAttributes.getColor(currentActivity, R.attr.navigationPopupNotSelectedColor);
 			textView.setTextColor(color);
-			textView.setOnClickListener(v -> currentActivity.navigateToActivity(item.getActivity()));
+			navigationItemLayout.setOnClickListener(v -> currentActivity.navigateToActivity(item.getActivity()));
 		}
 	}
 
