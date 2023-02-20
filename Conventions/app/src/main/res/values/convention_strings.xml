@@ -20,6 +20,8 @@
     <string name="amaidol_vote_question">מי המתמודד/ת החביב/ה עליך?</string>
     <string name="about_content"><![CDATA[אמא\"י – ארגון מנגה ואנימה ישראל. הארגון הוקם במאי 2007 על ידי קבוצת חברים בקהילת חובבי המנגה, אנימה ותרבות יפן ופועל למען קהילת חובבים זו.]]></string>
     <string name="about_links" formatted="false"><![CDATA[
+    <br/>
+    <p><b>קרדיט לאמנים:</b> שירה אביגד, יובל דוד ממן, עומר אלבז, ניקי קרוטקוב.</p>
 <p><a href="http://www.amai.org.il/">לאתר אמא\"י</a></p>
 <p><a href="https://harucon.org.il/2023/">לאתר הכנס</a></p>
 ]]></string>
