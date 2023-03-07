@@ -55,6 +55,7 @@
         <attr name="selectedTabTextColor" format="color|reference"/>
         <!-- Event View -->
         <attr name="eventViewLayout" format="integer|reference"/>
+        <attr name="eventViewHeight" format="dimension|reference"/>
         <attr name="eventTypeEndedColor" format="color|reference"/>
         <attr name="eventTypeCurrentColor" format="color|reference"/>
         <attr name="eventTypeNotStartedColor" format="color|reference"/>
