@@ -174,8 +174,8 @@
         <item name="progressBarDrawable">@drawable/rotating_circular_progress_bar</item>
 
         <!-- Second Hand activity -->
-        <item name="secondHandFormOpenColor">?eventTypeNotStartedColor</item>
-        <item name="secondHandFormClosedColor">?eventTypeEndedColor</item>
+        <item name="secondHandFormOpenColor">?eventNotStartedTextColor</item>
+        <item name="secondHandFormClosedColor">?eventEndedTextColor</item>
         <item name="secondHandItemDefaultColor">?android:textColorSecondary</item>
         <item name="secondHandItemNotSoldColor">?secondHandItemDefaultColor</item>
         <item name="secondHandItemCreatedColor">?secondHandItemDefaultColor</item>
@@ -373,8 +373,8 @@
         <item name="progressBarDrawable">@drawable/rotating_circular_progress_bar</item>
 
         <!-- Second Hand activity -->
-        <item name="secondHandFormOpenColor">?eventTypeNotStartedColor</item>
-        <item name="secondHandFormClosedColor">?eventTypeEndedColor</item>
+        <item name="secondHandFormOpenColor">?eventNotStartedTextColor</item>
+        <item name="secondHandFormClosedColor">?eventEndedTextColor</item>
         <item name="secondHandItemDefaultColor">?android:textColorSecondary</item>
         <item name="secondHandItemNotSoldColor">?secondHandItemDefaultColor</item>
         <item name="secondHandItemCreatedColor">?secondHandItemDefaultColor</item>
