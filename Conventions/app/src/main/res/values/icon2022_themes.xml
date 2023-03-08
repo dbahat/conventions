@@ -83,19 +83,14 @@
         <item name="homeEventNameInList">@color/icon2022_green1</item>
         <item name="homeEventsListDivider">@drawable/icon2022_home_event_list_divider</item>
         <!-- Event View -->
-        <item name="eventEndedTextColor">@color/icon2022_grey2</item>
-        <item name="eventCurrentTextColor">@color/icon2022_green1</item>
-        <item name="eventNotStartedTextColor">@color/icon2022_grey3</item>
-        <item name="eventTimeDefaultTextColor">@null</item>
-        <item name="eventTimeDefaultBackgroundColor">@color/icon2022_grey3</item>
-        <item name="eventTimeNotStartedBackground">@drawable/icon2022_event_time_bg_not_started</item>
-        <item name="eventTimeCurrentBackground">@drawable/icon2022_event_time_bg_current</item>
-        <item name="eventTimeEndedBackground">@drawable/icon2022_event_time_bg_ended</item>
-<!--        <item name="eventTimeVirtualTextColor"></item>-->
-<!--        <item name="eventTimeVirtualBackgroundColor"></item>-->
-        <item name="eventDetailsColorNotStarted">@color/icon2022_grey3</item>
-        <item name="eventDetailsColorCurrent">@color/icon2022_green1</item>
-        <item name="eventDetailsColorEnded">@color/icon2022_grey2</item>
+        <item name="eventTextColor">@drawable/icon2022_event_view_text_color</item>
+        <item name="eventTimeTextColor">?eventTextColor</item>
+        <!-- TODO use a drawable state list with the below properties instead -->
+        <item name="eventTimeBackground">@color/icon2022_grey1</item>
+<!--        <item name="eventTimeNotStartedBackground">@drawable/icon2022_event_time_bg_not_started</item>-->
+<!--        <item name="eventTimeCurrentBackground">@drawable/icon2022_event_time_bg_current</item>-->
+<!--        <item name="eventTimeEndedBackground">@drawable/icon2022_event_time_bg_ended</item>-->
+        <item name="eventDetailsColor">?eventTextColor</item>
         <item name="eventSendFeedbackColor">@color/icon2022_red1</item>
         <item name="eventSentFeedbackColor">@color/icon2022_green2</item>
         <item name="eventNonFavoriteColor">@color/icon2022_grey3</item>
@@ -156,8 +151,7 @@
         <item name="feedbackAnswerButtonSelectedColor">@color/icon2022_green1</item>
         <item name="conventionFeedbackTextColor">@color/icon2022_grey3</item>
         <!-- Programme Screen -->
-        <item name="eventTimeHeaderAlwaysUseDefaultTextColor">false</item>
-        <item name="eventTimeHeaderDefaultTextColor">?eventNotStartedTextColor</item>
+        <item name="eventTimeHeaderTextColor">?eventTextColor</item>
         <item name="eventTimeHeaderBackground">@null</item>
         <item name="searchCategoriesColor">@color/icon2022_green1</item>
         <!-- Programme Search Screen -->
@@ -168,10 +162,9 @@
         <item name="searchDrawerTextColor">@color/icon2022_grey3</item>
         <item name="searchDrawerSeparatorColor">@color/icon2022_grey2</item>
         <!-- Second Hand Screen -->
-        <item name="secondHandFormOpenColor">?eventNotStartedTextColor</item>
-        <item name="secondHandFormClosedColor">?eventEndedTextColor</item>
-        <item name="secondHandItemDefaultColor">?secondHandFormOpenColor</item>
-        <item name="secondHandItemCreatedColor">?secondHandFormClosedColor</item>
+        <item name="secondHandFormColor">@drawable/icon2022_second_hand_form_text_color</item>
+        <item name="secondHandItemDefaultColor">@color/icon2022_grey3</item>
+        <item name="secondHandItemCreatedColor">@color/icon2022_grey2</item>
         <item name="secondHandItemSoldColor">@color/icon2022_green1</item>
         <item name="secondHandItemMissingColor">@color/icon2022_red1</item>
         <item name="secondHandItemsDivider">@drawable/icon2022_second_hand_item_list_divider</item>
