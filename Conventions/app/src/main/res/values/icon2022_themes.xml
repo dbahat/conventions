@@ -59,7 +59,7 @@
         <item name="homeFrameBottomMargin">5dp</item>
         <item name="homeToolbarTitle">@null</item>
         <item name="homeTitleSize">20sp</item>
-        <item name="homeTitleBackground">@drawable/icon2022_home_content_text</item>
+        <item name="homeTitleBackground">@drawable/icon2022_home_title_background</item>
         <item name="homeTitleText">@color/icon2022_grey1</item>
         <item name="homeEventsMargin">10dp</item>
         <item name="homeShowCurrentUpcomingTitles">true</item>
@@ -75,10 +75,10 @@
         <!-- Event View -->
         <item name="eventTextColor">@drawable/icon2022_event_view_text_color</item>
         <item name="eventTimeTextColor">?eventTextColor</item>
-        <item name="eventTimeBackground">@drawable/icon2022_event_time_background</item>
+        <item name="eventTimeBackgroundDrawable">@drawable/icon2022_event_time_background</item>
         <item name="eventDetailsColor">?eventTextColor</item>
         <item name="eventFeedbackIconColor">@drawable/icon2022_feedback_icon_color</item>
-        <item name="eventFavoriteIconColor">@color/icon2022_grey3</item>
+        <item name="eventFavoriteIconColor">@drawable/icon2022_favorite_icon_color</item>
         <!-- Map Screen -->
         <item name="locationDetailsBackground">@color/icon2022_grey1</item>
         <item name="locationDetailsTitleColor">@color/icon2022_grey3</item>
@@ -118,6 +118,7 @@
         <item name="eventTitleBackground">@drawable/icon2022_event_title_background</item>
         <item name="eventTitleTextColor">@color/icon2022_grey1</item>
         <item name="eventDetailsBoxColor">@drawable/icon2022_event_details_background</item>
+        <item name="eventDetailsTextColor">@color/icon2022_green2</item>
         <item name="eventDetailsHighlightedTextColor">@color/icon2022_red1</item>
         <item name="eventDescriptionTextColor">@color/icon2022_green2</item>
         <item name="eventDescriptionBoxColor">@drawable/icon2022_event_details_background</item>
