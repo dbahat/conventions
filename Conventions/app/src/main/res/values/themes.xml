@@ -238,7 +238,7 @@
         <item name="eventTimeHeaderPaddingVertical">5dp</item>
         <item name="eventTextColor">@drawable/event_view_default_text_color</item>
         <item name="eventDetailsColor">?eventTextColor</item>
-        <item name="eventBackgroundColor">@android:color/transparent</item>
+        <item name="eventBackgroundColor">@null</item>
         <item name="eventTimeBackground">@android:color/transparent</item>
         <item name="eventSendFeedbackColor">@color/green</item>
         <item name="eventSentFeedbackColor">@color/yellow</item>
