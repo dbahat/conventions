@@ -85,11 +85,7 @@
         <!-- Event View -->
         <item name="eventTextColor">@drawable/icon2022_event_view_text_color</item>
         <item name="eventTimeTextColor">?eventTextColor</item>
-        <!-- TODO use a drawable state list with the below properties instead -->
-        <item name="eventTimeBackground">@color/icon2022_grey1</item>
-<!--        <item name="eventTimeNotStartedBackground">@drawable/icon2022_event_time_bg_not_started</item>-->
-<!--        <item name="eventTimeCurrentBackground">@drawable/icon2022_event_time_bg_current</item>-->
-<!--        <item name="eventTimeEndedBackground">@drawable/icon2022_event_time_bg_ended</item>-->
+        <item name="eventTimeBackground">@drawable/icon2022_event_time_background</item>
         <item name="eventDetailsColor">?eventTextColor</item>
         <item name="eventFeedbackIconColor">@drawable/icon2022_feedback_icon_color</item>
         <item name="eventFavoriteIconColor">@color/icon2022_grey3</item>

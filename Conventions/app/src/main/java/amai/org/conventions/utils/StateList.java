@@ -7,7 +7,7 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 import java.util.List;
 
-import amai.org.conventions.BuildConfig;
+import sff.org.conventions.BuildConfig;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.ViewWithDrawableState;
 import androidx.annotation.NonNull;
