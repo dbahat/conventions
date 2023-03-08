@@ -12,13 +12,11 @@
         android:orientation="horizontal"
         android:weightSum="1">
 
-        <androidx.cardview.widget.CardView
+        <FrameLayout
             android:id="@+id/timeLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            app:cardPreventCornerOverlap="true"
-            tools:cardBackgroundColor="@color/harucon2022_green">
+            android:layout_gravity="center_vertical">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -52,7 +50,7 @@
                     tools:text="End Time" />
 
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </FrameLayout>
 
         <RelativeLayout
             android:id="@+id/eventDescription"

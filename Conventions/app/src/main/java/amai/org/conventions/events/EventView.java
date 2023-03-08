@@ -44,7 +44,7 @@ public class EventView extends FrameLayout {
 	private final TextView eventName;
 	private final TextView lecturerName;
 	private final ImageView feedbackIcon;
-	private final CardView timeLayout;
+	private final ViewGroup timeLayout;
 	private final ViewGroup eventContainer;
 	private final View eventMainTouchArea;
 	private final View bottomLayout;
@@ -234,7 +234,12 @@ public class EventView extends FrameLayout {
     }
 
 	public void setEventTimeBackground(int color) {
-        timeLayout.setCardBackgroundColor(color);
+		// TODO handle drawable + set state
+		if (timeLayout instanceof CardView) {
+			((CardView) timeLayout).setCardBackgroundColor(color);
+		} else {
+			timeLayout.setBackgroundColor(color);
+		}
 	}
 
 	public void setEventTimeTextColor(int color) {
