@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -80,7 +81,8 @@ public class UpdatesRefresher {
 			@Override
 			protected Integer doInBackground(Void... voids) {
 				try {
-					HttpURLConnection request = HttpConnectionCreator.createConnection(Convention.getInstance().getUpdatesURL());
+					URL updatesURL = getUpdatesURL();
+					HttpURLConnection request = HttpConnectionCreator.createConnection(updatesURL);
 					request.connect();
 					InputStreamReader reader = null;
 					try {
@@ -117,6 +119,10 @@ public class UpdatesRefresher {
 					isRefreshInProgress = false;
 				}
 				return -1;
+			}
+
+			private URL getUpdatesURL() {
+				return Convention.getInstance().getUpdatesURL();
 			}
 
 			@Override
