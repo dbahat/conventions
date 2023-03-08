@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.SecondHandItem;
+import amai.org.conventions.utils.StateList;
 import amai.org.conventions.utils.Strings;
 import androidx.recyclerview.widget.RecyclerView;
 import sff.org.conventions.R;
@@ -33,11 +34,11 @@ class SecondHandItemSearchViewHolder extends RecyclerView.ViewHolder {
 
 	private void setFavorite(boolean isFavorite) {
 		favoriteIcon.setImageDrawable(ThemeAttributes.getDrawable(itemView.getContext(), R.attr.eventFavoriteIcon));
+		StateList faveState = new StateList();
 		if (isFavorite) {
-			favoriteIcon.setColorFilter(ThemeAttributes.getColor(itemView.getContext(), R.attr.eventFavoriteColor), PorterDuff.Mode.SRC_ATOP);
-		} else {
-			favoriteIcon.setColorFilter(ThemeAttributes.getColor(itemView.getContext(), R.attr.eventNonFavoriteColor), PorterDuff.Mode.SRC_ATOP);
+			faveState.add(R.attr.state_event_favorite);
 		}
+		favoriteIcon.setColorFilter(faveState.getThemeColor(itemView.getContext(), R.attr.eventFavoriteIconColor), PorterDuff.Mode.SRC_ATOP);
 	}
 
 	public void setItem(SecondHandItem newItem, boolean isFavorite) {
