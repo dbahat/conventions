@@ -472,6 +472,8 @@
 
         <!-- Text color for feedback in feedback activity. See eventFeedbackTextColor for usage. -->
         <attr name="conventionFeedbackTextColor" format="color|reference"/>
+        <!-- Background for convention feedback answer. Used in multiple answers for selected and unselected answers.
+             Can be a drawable state list. Feedback state is set with state_feedback_... attributes. -->
         <attr name="conventionFeedbackAnswerBackground" format="integer|reference"/>
 
         <!-- Top and bottom padding for answer in multiple-answer question (including radio). Used in feedback activity. -->
