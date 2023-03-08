@@ -121,17 +121,13 @@
         <item name="eventDescriptionTextColor">@color/icon2022_green2</item>
         <item name="eventDescriptionBoxColor">@drawable/icon2022_event_details_background</item>
         <item name="eventFeedbackBoxColor">@drawable/icon2022_event_feedback_background</item>
-        <item name="eventFeedbackTextColor">@color/icon2022_grey3</item>
+        <item name="eventFeedbackTextColor">@drawable/icon2022_event_feedback_text_color</item>
         <item name="feedbackButtonColor">@color/icon2022_red1</item>
-        <item name="eventFeedbackAnswerColor">@color/icon2022_grey3</item>
-        <item name="eventFeedbackSelectedAnswerColor">@color/icon2022_green1</item>
         <item name="eventVoteBoxColor">@drawable/icon2022_event_feedback_background</item>
         <item name="eventVoteTextColor">@color/icon2022_grey3</item>
         <!-- Feedback Screen -->
         <item name="feedbackProgressBarColor">@color/icon2022_red1</item>
-        <item name="feedbackAnswerButtonColor">@color/icon2022_grey3</item>
-        <item name="feedbackAnswerButtonSelectedColor">@color/icon2022_green1</item>
-        <item name="conventionFeedbackTextColor">@color/icon2022_grey3</item>
+        <item name="conventionFeedbackTextColor">@drawable/icon2022_event_feedback_text_color</item>
         <!-- Programme Screen -->
         <item name="eventTimeHeaderTextColor">?eventTextColor</item>
         <item name="eventTimeHeaderBackground">@null</item>
