@@ -133,6 +133,7 @@
         <item name="eventTimeHeaderBackground">@null</item>
         <item name="searchCategoriesColor">@color/icon2022_green1</item>
         <!-- Programme Search Screen -->
+        <item name="searchTitleTextColor">@color/icon2022_grey3</item>
         <item name="eventNameKeywordHighlightColor">@color/icon2022_red1</item>
         <item name="eventKeywordHighlightColor">@color/icon2022_red1</item>
         <item name="searchDrawerAccentColor">@color/icon2022_red1</item>
