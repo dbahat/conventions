@@ -122,6 +122,7 @@
         <item name="eventDescriptionBoxColor">@drawable/icon2022_event_details_background</item>
         <item name="eventFeedbackBoxColor">@drawable/icon2022_event_feedback_background</item>
         <item name="eventFeedbackTextColor">@drawable/icon2022_event_feedback_text_color</item>
+        <item name="eventFeedbackProgressBarColor">@color/icon2022_red1</item>
         <item name="feedbackButtonColor">@color/icon2022_red1</item>
         <item name="eventVoteBoxColor">@drawable/icon2022_event_feedback_background</item>
         <item name="eventVoteTextColor">@color/icon2022_grey3</item>
