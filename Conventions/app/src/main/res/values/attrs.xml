@@ -597,12 +597,10 @@
 
         <!-- Second Hand Screen -->
 
-        <!-- Text color used in second hand sell tab for open form (form name, total price of sold items, item name, edit button color, price)
-             and in second hand buy tab (item name, price, id) -->
-        <attr name="secondHandFormOpenColor" format="color|reference"/>
-        <!-- Text color used in second hand sell tab for closed form (form name and status,
-             total price of sold items, item name, edit button color, price, status, id) -->
-        <attr name="secondHandFormClosedColor" format="color|reference"/>
+        <!-- Text color used in second hand sell tab (form name and status, total price of sold items, item name, edit button color, price; for closed form - item status and id too)
+             and in second hand buy tab (item name, price, id)
+             Can be a color state list. Form state is set with state_second_hand_form_... attributes. -->
+        <attr name="secondHandFormColor" format="color|reference"/>
         <!-- Text color used in second hand sell tab (item price, id, status,
              and in second hand buy tab (item price, id). Actually used for sell item id and as the default status color. -->
         <attr name="secondHandItemDefaultColor" format="color|reference"/>
@@ -634,4 +632,8 @@
     <attr name="state_event_physical" format="boolean"/>
     <attr name="state_event_favorite" format="boolean"/>
     <attr name="state_event_conflicting" format="boolean"/>
+
+    <declare-styleable name="SecondHandState">
+        <attr name="state_second_hand_form_closed" format="boolean"/>
+    </declare-styleable>
 </resources>

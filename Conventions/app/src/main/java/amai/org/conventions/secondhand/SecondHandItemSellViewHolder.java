@@ -120,12 +120,12 @@ class SecondHandItemSellViewHolder extends RecyclerView.ViewHolder {
 			itemStatusView.setText(newItem.getStatusText());
 		}
 		if (form.isClosed()) {
-			int formClosedColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandFormClosedColor);
+			int formClosedColor = ThemeAttributes.getColorFromStateList(itemView.getContext(), R.attr.secondHandFormColor, new int[]{R.attr.state_second_hand_form_closed});
 			titleColor = formClosedColor;
 			statusColor = formClosedColor;;
 			itemIdColor = formClosedColor;
 		} else {
-			titleColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandFormOpenColor);
+			titleColor = ThemeAttributes.getColorFromStateList(itemView.getContext(), R.attr.secondHandFormColor, new int[]{});
 			itemIdColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandItemDefaultColor);
 			switch (newItem.getStatus()) {
 				case CREATED:

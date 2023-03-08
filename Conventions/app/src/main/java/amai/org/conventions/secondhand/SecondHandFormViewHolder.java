@@ -32,18 +32,18 @@ class SecondHandFormViewHolder extends RecyclerView.ViewHolder {
 
 	public void setForm(SecondHandForm form) {
 		this.form = form;
-		int color;
+		int[] attrs = new int[]{};
 		formName.setText(itemView.getContext().getString(R.string.second_hand_form_name, form.getId()));
 		if (form.isClosed()) {
 			formStatus.setVisibility(View.VISIBLE);
 			formStatus.setText(R.string.second_hand_form_closed);
-			color = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandFormClosedColor);
-			formStatus.setTextColor(color);
+			attrs = new int[]{R.attr.state_second_hand_form_closed};
 		} else {
 			formStatus.setVisibility(View.INVISIBLE); // This must be invisible and not gone to keep the layout correct
-			color = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandFormOpenColor);
 		}
+		int color = ThemeAttributes.getColorFromStateList(itemView.getContext(), R.attr.secondHandFormColor, attrs);
 		formName.setTextColor(color);
+		formStatus.setTextColor(color);
 		int total = form.getSoldItemsTotalPrice();
 		if (total > 0) {
 			int soldItemsNumber = form.getNumberOfSoldItems();

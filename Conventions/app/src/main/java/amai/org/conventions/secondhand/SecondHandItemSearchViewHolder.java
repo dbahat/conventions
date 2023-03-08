@@ -59,7 +59,7 @@ class SecondHandItemSearchViewHolder extends RecyclerView.ViewHolder {
 			itemPriceView.setText(itemView.getContext().getString(R.string.second_hand_item_price, item.getPrice()));
 			itemPriceView.setTextColor(ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandItemNotSoldColor));
 		}
-		int textColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandFormOpenColor);
+		int textColor = ThemeAttributes.getColorFromStateList(itemView.getContext(), R.attr.secondHandFormColor, new int[]{});
 		itemNameView.setTextColor(textColor);
 		itemPriceView.setTextColor(textColor);
 		itemIdView.setTextColor(textColor);
