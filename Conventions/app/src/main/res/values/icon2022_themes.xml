@@ -91,12 +91,8 @@
         <item name="mapSearchSeparator">@color/icon2022_grey2</item>
         <item name="mapSearchBorder">@color/icon2022_grey3</item>
         <!-- Updates Screen -->
-        <item name="focusedUpdateBackground">@android:color/transparent</item>
-        <item name="newUpdateBackground">@android:color/transparent</item>
         <item name="updateItemBorder">@color/icon2022_grey2</item>
-        <item name="updateTextColor">@color/icon2022_grey3</item>
-        <item name="newUpdateTextColor">@color/icon2022_green2</item>
-        <item name="focusedUpdateTextColor">@color/icon2022_red2</item>
+        <item name="updateTextColor">@drawable/icon2022_update_text_color</item>
         <item name="updateItemSeparator">@null</item>
         <item name="updateTimeBackground">@color/icon2022_green1</item>
         <item name="updateTimeColor">@color/icon2022_grey1</item>
