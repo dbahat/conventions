@@ -142,6 +142,11 @@
              Can be a color state list. Event state is set with state_event_... attributes. -->
         <attr name="eventTimeBackground" format="color|reference"/>
 
+        <!-- Background drawable for event time. Used when useEventTimeColorFromEventType is false or event timetable color is transparent
+             and eventTimeBackground is transparent/null. Only supported for non-rounded event view.
+             Can be a drawable state list. Event state is set with state_event_... attributes. -->
+        <attr name="eventTimeBackgroundDrawable" format="color|reference"/>
+
         <!-- Text color for event details (if useEventTextColorFromEventType is false or timetable color is transparent) -->
         <attr name="eventDetailsColor" format="color|reference"/>
 

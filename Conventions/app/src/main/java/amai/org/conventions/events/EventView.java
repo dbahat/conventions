@@ -15,7 +15,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import amai.org.conventions.ThemeAttributes;
@@ -148,7 +147,7 @@ public class EventView extends FrameLayout {
         int eventBackgroundColor = getEventBackgroundColor();
         setEventBackgroundColor(eventBackgroundColor);
 
-        setEventTimeBackground(getEventTimeBackground(event));
+        setEventTimeBackground(event);
         setEventTimeTextColor(getEventTimeTextColor(event));
 
         setFavoriteIconColor(getFavoriteIconColor(event));
@@ -225,7 +224,7 @@ public class EventView extends FrameLayout {
         return textColor;
     }
 
-    private int getEventTimeBackground(ConventionEvent event) {
+    private int getEventTimeBackgroundColor(ConventionEvent event) {
         int color = Convention.NO_COLOR;
         if (ThemeAttributes.getBoolean(getContext(), R.attr.useEventTimeColorFromEventType)) {
             color = event.getBackgroundColor();
@@ -258,12 +257,18 @@ public class EventView extends FrameLayout {
         return getEventColorFromStateList(R.attr.eventBackgroundColor);
     }
 
-	public void setEventTimeBackground(int color) {
-		// TODO handle drawable + set state
+	private void setEventTimeBackground(ConventionEvent event) {
+		int color = getEventTimeBackgroundColor(event);
+
 		if (timeLayout instanceof CardView) {
 			((CardView) timeLayout).setCardBackgroundColor(color);
 		} else {
-			timeLayout.setBackgroundColor(color);
+			eventState.setForView(timeLayout);
+			if (color != Convention.NO_COLOR) {
+				timeLayout.setBackgroundColor(color);
+			} else {
+				timeLayout.setBackground(ThemeAttributes.getDrawable(getContext(), R.attr.eventTimeBackgroundDrawable));
+			}
 		}
 	}
 

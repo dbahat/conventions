@@ -12,7 +12,7 @@
         android:orientation="horizontal"
         android:weightSum="1">
 
-        <FrameLayout
+        <amai.org.conventions.customviews.FrameLayoutWithState
             android:id="@+id/timeLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
                     tools:text="End Time" />
 
             </LinearLayout>
-        </FrameLayout>
+        </amai.org.conventions.customviews.FrameLayoutWithState>
 
         <RelativeLayout
             android:id="@+id/eventDescription"
