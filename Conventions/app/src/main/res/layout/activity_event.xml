@@ -166,7 +166,7 @@
 				<TextView
 					android:id="@+id/event_prices"
 					style="@style/TextAppearance.AppCompat.Small"
-					android:textColor="?attr/eventDescriptionTextColor"
+					android:textColor="?eventDetailsTextColor"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:paddingTop="10dp"
@@ -183,7 +183,7 @@
 						style="@style/TextAppearance.AppCompat.Small"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:textColor="?attr/eventDescriptionTextColor"
+						android:textColor="?eventDetailsTextColor"
 						android:layout_marginEnd="5dp"
 						tools:text="there are tickets (700)"/>
 
@@ -198,7 +198,7 @@
 				<TextView
 					android:id="@+id/event_tags"
 					style="@style/TextAppearance.AppCompat.Small"
-					android:textColor="?attr/eventDescriptionTextColor"
+					android:textColor="?eventDetailsTextColor"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:paddingTop="10dp"

@@ -83,9 +83,9 @@
         <item name="homeEventNameInList">@color/icon2022_green1</item>
         <item name="homeEventsListDivider">@drawable/icon2022_home_event_list_divider</item>
         <!-- Event View -->
-        <item name="eventTypeEndedColor">@color/icon2022_grey2</item>
-        <item name="eventTypeCurrentColor">@color/icon2022_green1</item>
-        <item name="eventTypeNotStartedColor">@color/icon2022_grey3</item>
+        <item name="eventEndedTextColor">@color/icon2022_grey2</item>
+        <item name="eventCurrentTextColor">@color/icon2022_green1</item>
+        <item name="eventNotStartedTextColor">@color/icon2022_grey3</item>
         <item name="eventTimeDefaultTextColor">@null</item>
         <item name="eventTimeDefaultBackgroundColor">@color/icon2022_grey3</item>
         <item name="eventTimeNotStartedBackground">@drawable/icon2022_event_time_bg_not_started</item>
@@ -151,13 +151,13 @@
         <item name="eventVoteBoxColor">@drawable/icon2022_event_feedback_background</item>
         <item name="eventVoteTextColor">@color/icon2022_grey3</item>
         <!-- Feedback Screen -->
-        <item name="progressBarDrawable">@drawable/icon2022_rotating_circular_progress_bar</item>
+        <item name="feedbackProgressBarColor">@color/icon2022_red1</item>
         <item name="feedbackAnswerButtonColor">@color/icon2022_grey3</item>
         <item name="feedbackAnswerButtonSelectedColor">@color/icon2022_green1</item>
         <item name="conventionFeedbackTextColor">@color/icon2022_grey3</item>
         <!-- Programme Screen -->
         <item name="eventTimeHeaderAlwaysUseDefaultTextColor">false</item>
-        <item name="eventTimeHeaderDefaultTextColor">?eventTypeNotStartedColor</item>
+        <item name="eventTimeHeaderDefaultTextColor">?eventNotStartedTextColor</item>
         <item name="eventTimeHeaderBackground">@null</item>
         <item name="searchCategoriesColor">@color/icon2022_green1</item>
         <!-- Programme Search Screen -->
@@ -168,8 +168,8 @@
         <item name="searchDrawerTextColor">@color/icon2022_grey3</item>
         <item name="searchDrawerSeparatorColor">@color/icon2022_grey2</item>
         <!-- Second Hand Screen -->
-        <item name="secondHandFormOpenColor">?eventTypeNotStartedColor</item>
-        <item name="secondHandFormClosedColor">?eventTypeEndedColor</item>
+        <item name="secondHandFormOpenColor">?eventNotStartedTextColor</item>
+        <item name="secondHandFormClosedColor">?eventEndedTextColor</item>
         <item name="secondHandItemDefaultColor">?secondHandFormOpenColor</item>
         <item name="secondHandItemCreatedColor">?secondHandFormClosedColor</item>
         <item name="secondHandItemSoldColor">@color/icon2022_green1</item>

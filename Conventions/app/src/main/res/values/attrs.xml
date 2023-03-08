@@ -326,6 +326,7 @@
         <attr name="conflictingEventsListBorder" format="integer|reference"/>
         <!-- Background color for conflicting events group -->
         <attr name="conflictingEventsBackground" format="color|reference"/>
+        <!-- Icon for FAB (add). Used in My Events and Second Hand Sell. Background is defined in actionButtonColor. -->
         <attr name="addActionButtonIcon" format="integer|reference"/>
 
         <!-- Navigation Drawer -->
@@ -469,6 +470,7 @@
         <attr name="eventDetailsBoxColor" format="color|reference"/>
         <!-- Text color for text in event details box (lecturer, hall, time, additional info; in sf-f: Price, tickets availability, tags) -->
         <attr name="eventDetailsTextColor" format="color|reference"/>
+        <!-- Text color for highlighted text in event details box (used for tickets are unavailable text) -->
         <attr name="eventDetailsHighlightedTextColor" format="color|reference"/>
 
         <!-- Background for event description box -->
@@ -581,9 +583,14 @@
         <attr name="searchCategoriesColor" format="color|reference" />
 
         <!-- Programme Search Screen -->
+
+        <!-- Text color for search drawer borderless button and selected checkbox -->
         <attr name="searchDrawerAccentColor" format="color|reference"/>
+        <!-- Background color for the search drawer -->
         <attr name="searchDrawerBackground" format="integer|reference"/>
+        <!-- Text olor for texts in the search drawer (title, search results number, filter titles and names -->
         <attr name="searchDrawerTextColor" format="color|reference"/>
+        <!-- Separator color in search drawer (under the title) -->
         <attr name="searchDrawerSeparatorColor" format="color|reference"/>
 
         <!-- Icons -->
@@ -616,19 +623,38 @@
 
         <!-- Close location details icon in map activity -->
         <attr name="iconClearMap" format="integer|reference"/>
+        <!-- User ID icon. Used in My Events activity in the toolbar and user details dialog. -->
         <attr name="iconUserId" format="integer|reference"/>
+
         <!-- Second Hand Screen -->
+
+        <!-- Text color used in second hand sell tab for open form (form name, total price of sold items, item name, edit button color, price)
+             and in second hand buy tab (item name, price, id) -->
         <attr name="secondHandFormOpenColor" format="color|reference"/>
+        <!-- Text color used in second hand sell tab for closed form (form name and status,
+             total price of sold items, item name, edit button color, price, status, id) -->
         <attr name="secondHandFormClosedColor" format="color|reference"/>
+        <!-- Text color used in second hand sell tab (item price, id, status,
+             and in second hand buy tab (item price, id). Actually used for sell item id and as the default status color. -->
         <attr name="secondHandItemDefaultColor" format="color|reference"/>
+        <!-- Text color used in second hand buy tab for item price, and second hand sell tab for item status for in the stand, withdrawn and donated items  -->
         <attr name="secondHandItemNotSoldColor" format="color|reference"/>
+        <!-- Text color used in second hand sell tab for item status for created items -->
         <attr name="secondHandItemCreatedColor" format="color|reference"/>
+        <!-- Text color used in second hand sell tab for total price of all sold forms and for item status for sold items -->
         <attr name="secondHandItemSoldColor" format="color|reference"/>
+        <!-- Text color used in second hand sell tab for item status for missing items and second hand buy tab for items not in the stand (displayed instead of the price) -->
         <attr name="secondHandItemMissingColor" format="color|reference"/>
+        <!-- Divider color for items in buy and sell tabs. The height is 1dp. -->
         <attr name="secondHandItemsDivider" format="color|reference"/>
+        <!-- Color for unselected sort/filter in second hand buy (both text and icon) -->
         <attr name="secondHandFilterColor" format="color|reference"/>
+        <!-- Color for selected sort/filter in second hand buy (both text and icon) -->
         <attr name="secondHandSelectedFilterColor" format="color|reference"/>
+
         <!-- Discounts Screen -->
+
+        <!-- Layout resource for discounts activity -->
         <attr name="discountsActivityLayout" format="reference"/>
     </declare-styleable>
 </resources>

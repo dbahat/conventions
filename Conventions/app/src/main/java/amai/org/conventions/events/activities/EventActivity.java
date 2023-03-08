@@ -606,7 +606,7 @@ public class EventActivity extends NavigationActivity {
 			updateTicketsText(event);
 
 			final ImageView updateTicketsButton = findViewById(R.id.event_check_tickets_update);
-			updateTicketsButton.setColorFilter(ThemeAttributes.getColor(this, R.attr.eventDescriptionTextColor), PorterDuff.Mode.SRC_ATOP);
+			updateTicketsButton.setColorFilter(ThemeAttributes.getColor(this, R.attr.eventDetailsTextColor), PorterDuff.Mode.SRC_ATOP);
 			updateTicketsButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
@@ -660,7 +660,7 @@ public class EventActivity extends NavigationActivity {
 			availableTickets.setTextColor(ThemeAttributes.getColor(this, R.attr.eventDetailsHighlightedTextColor));
 		} else {
 			availableTickets.setTypeface(availableTickets.getTypeface(), Typeface.NORMAL);
-			availableTickets.setTextColor(ThemeAttributes.getColor(this, R.attr.eventDescriptionTextColor));
+			availableTickets.setTextColor(ThemeAttributes.getColor(this, R.attr.eventDetailsTextColor));
 		}
 
 		// Setup text

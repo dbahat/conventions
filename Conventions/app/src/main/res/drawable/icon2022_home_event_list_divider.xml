@@ -2,5 +2,5 @@
 <shape android:shape="rectangle"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <solid android:color="@color/icon2022_green1"/>
-    <size android:height="@dimen/event_divider_height"/>
+    <size android:height="?eventListDividerHeight"/>
 </shape>
