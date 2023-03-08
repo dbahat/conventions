@@ -91,11 +91,8 @@
 <!--        <item name="eventTimeCurrentBackground">@drawable/icon2022_event_time_bg_current</item>-->
 <!--        <item name="eventTimeEndedBackground">@drawable/icon2022_event_time_bg_ended</item>-->
         <item name="eventDetailsColor">?eventTextColor</item>
-        <item name="eventSendFeedbackColor">@color/icon2022_red1</item>
-        <item name="eventSentFeedbackColor">@color/icon2022_green2</item>
-        <item name="eventNonFavoriteColor">@color/icon2022_grey3</item>
-        <item name="eventFavoriteColor">@color/icon2022_red1</item>
-        <item name="eventRatingColor">@color/icon2022_green1</item>
+        <item name="eventFeedbackIconColor">@drawable/icon2022_feedback_icon_color</item>
+        <item name="eventFavoriteIconColor">@color/icon2022_grey3</item>
         <!-- Map Screen -->
         <item name="locationDetailsBackground">@color/icon2022_grey1</item>
         <item name="locationDetailsTitleColor">@color/icon2022_grey3</item>
