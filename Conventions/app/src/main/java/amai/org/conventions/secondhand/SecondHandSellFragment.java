@@ -17,6 +17,7 @@ import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.SecondHandSell;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Log;
+import amai.org.conventions.utils.StateList;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -56,6 +57,9 @@ public class SecondHandSellFragment extends Fragment implements SwipeRefreshLayo
 		listView = view.findViewById(R.id.second_hand_form_items_list);
 		adapter = new SecondHandItemsAdapter(secondHandSell.getForms());
 		listView.setAdapter(adapter);
+
+		soldFormsTotal.setTextColor(new StateList(R.attr.state_second_hand_item_sold).getThemeColor(getContext(), R.attr.secondHandItemStatusColor));
+
 		updateSoldForms();
 
 		isRefreshing = false;

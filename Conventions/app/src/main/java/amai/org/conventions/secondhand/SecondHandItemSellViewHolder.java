@@ -15,6 +15,7 @@ import amai.org.conventions.model.SecondHandForm;
 import amai.org.conventions.model.SecondHandItem;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Log;
+import amai.org.conventions.utils.StateList;
 import amai.org.conventions.utils.Strings;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
@@ -105,9 +106,6 @@ class SecondHandItemSellViewHolder extends RecyclerView.ViewHolder {
 				dialog.show();
 			}
 		});
-		int statusColor;
-		int titleColor;
-		int itemIdColor;
 		if (item.getPrice() == -1) {
 			itemPriceView.setVisibility(View.GONE);
 		} else {
@@ -119,34 +117,35 @@ class SecondHandItemSellViewHolder extends RecyclerView.ViewHolder {
 		} else {
 			itemStatusView.setText(newItem.getStatusText());
 		}
+
+		StateList itemState = new StateList();
 		if (form.isClosed()) {
-			int formClosedColor = ThemeAttributes.getColorFromStateList(itemView.getContext(), R.attr.secondHandFormColor, new int[]{R.attr.state_second_hand_form_closed});
-			titleColor = formClosedColor;
-			statusColor = formClosedColor;;
-			itemIdColor = formClosedColor;
-		} else {
-			titleColor = ThemeAttributes.getColorFromStateList(itemView.getContext(), R.attr.secondHandFormColor, new int[]{});
-			itemIdColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandItemDefaultColor);
-			switch (newItem.getStatus()) {
-				case CREATED:
-					statusColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandItemCreatedColor);
-					break;
-				case SOLD:
-					statusColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandItemSoldColor);
-					break;
-				case MISSING:
-					statusColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandItemMissingColor);
-					break;
-				default: // In the stand / withdrawn / donated
-					statusColor = ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandItemNotSoldColor);
-					break;
-			}
+			itemState.add(R.attr.state_second_hand_form_closed);
 		}
-		itemNameView.setTextColor(titleColor);
-		itemEditButton.setColorFilter(titleColor, PorterDuff.Mode.SRC_ATOP);
-		itemStatusView.setTextColor(statusColor);
-		itemIdView.setTextColor(itemIdColor);
-		itemPriceView.setTextColor(titleColor);
+
+		switch (newItem.getStatus()) {
+			case CREATED:
+				itemState.add(R.attr.state_second_hand_item_created);
+				break;
+			case SOLD:
+				itemState.add(R.attr.state_second_hand_item_sold);
+				break;
+			case MISSING:
+				itemState.add(R.attr.state_second_hand_item_missing);
+				break;
+			default: // In the stand / withdrawn / donated
+				itemState.add(R.attr.state_second_hand_item_not_sold);
+				break;
+		}
+
+		int itemTextColor = itemState.getThemeColor(itemView.getContext(), R.attr.secondHandFormColor);
+		itemNameView.setTextColor(itemTextColor);
+		itemEditButton.setColorFilter(itemTextColor, PorterDuff.Mode.SRC_ATOP);
+		itemIdView.setTextColor(itemTextColor);
+		itemPriceView.setTextColor(itemTextColor);
+
+		int itemStatusColor = itemState.getThemeColor(itemView.getContext(), R.attr.secondHandItemStatusColor);
+		itemStatusView.setTextColor(itemStatusColor);
 	}
 
 	private void refreshItemNameText() {

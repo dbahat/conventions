@@ -32,7 +32,7 @@
                 android:padding="5dp"/>
             <TextView
                 android:id="@+id/second_hand_item_price"
-                android:textColor="?secondHandItemDefaultColor"
+                android:textColor="?secondHandFormColor"
                 android:padding="5dp"
                 android:textSize="12sp"
                 tools:text="Price: 10 NIS"
@@ -49,7 +49,7 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
-                android:textColor="?secondHandItemDefaultColor"
+                android:textColor="?secondHandFormColor"
                 tools:text="005/01"
                 android:padding="5dp"/>
             <TextView
@@ -57,7 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
-                android:textColor="?secondHandItemDefaultColor"
+                android:textColor="?secondHandItemStatusColor"
                 tools:text="not sold"
                 android:padding="5dp"/>
         </LinearLayout>

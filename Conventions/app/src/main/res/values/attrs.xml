@@ -636,21 +636,14 @@
 
         <!-- Second Hand Screen -->
 
-        <!-- Text color used in second hand sell tab (form name and status, total price of sold items, item name, edit button color, price; for closed form - item status and id too)
-             and in second hand buy tab (item name, price, id)
+        <!-- Text color used in second hand sell tab (form name and status, total price of sold items,
+             item name, edit button color, price, id) and in second hand buy tab (item name, price, id).
              Can be a color state list. Form state is set with state_second_hand_form_... attributes. -->
         <attr name="secondHandFormColor" format="color|reference"/>
-        <!-- Text color used in second hand sell tab (item price, id, status,
-             and in second hand buy tab (item price, id). Actually used for sell item id and as the default status color. -->
-        <attr name="secondHandItemDefaultColor" format="color|reference"/>
-        <!-- Text color used in second hand buy tab for item price, and second hand sell tab for item status for in the stand, withdrawn and donated items  -->
-        <attr name="secondHandItemNotSoldColor" format="color|reference"/>
-        <!-- Text color used in second hand sell tab for item status for created items -->
-        <attr name="secondHandItemCreatedColor" format="color|reference"/>
-        <!-- Text color used in second hand sell tab for total price of all sold forms and for item status for sold items -->
-        <attr name="secondHandItemSoldColor" format="color|reference"/>
-        <!-- Text color used in second hand sell tab for item status for missing items and second hand buy tab for items not in the stand (displayed instead of the price) -->
-        <attr name="secondHandItemMissingColor" format="color|reference"/>
+        <!-- Text color used in second hand buy tab for item price (not sold when it's in the stand, missing when it isn't),
+             and second hand sell tab for item status.
+             Can be a color state list. Form and item state are set with state_second_hand_... attributes. -->
+        <attr name="secondHandItemStatusColor" format="color|reference"/>
         <!-- Divider color for items in buy and sell tabs. The height is 1dp. -->
         <attr name="secondHandItemsDivider" format="color|reference"/>
         <!-- Color for unselected sort/filter in second hand buy (both text and icon) -->
@@ -711,5 +704,9 @@
 
     <declare-styleable name="SecondHandState">
         <attr name="state_second_hand_form_closed" format="boolean"/>
+        <attr name="state_second_hand_item_created" format="boolean"/>
+        <attr name="state_second_hand_item_not_sold" format="boolean"/>
+        <attr name="state_second_hand_item_sold" format="boolean"/>
+        <attr name="state_second_hand_item_missing" format="boolean"/>
     </declare-styleable>
 </resources>

@@ -16,7 +16,7 @@
                 android:id="@+id/second_hand_sold_forms_total"
                 tools:text="Forms 1, 2 items are all sold for 120 NIS"
                 android:textSize="14sp"
-                android:textColor="?secondHandItemSoldColor"
+                android:textColor="?secondHandItemStatusColor"
                 android:layout_marginStart="?contentStartMargin"
                 android:layout_marginEnd="?contentEndMargin"
                 android:padding="5dp"

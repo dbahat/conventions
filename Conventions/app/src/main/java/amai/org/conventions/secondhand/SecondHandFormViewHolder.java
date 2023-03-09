@@ -5,6 +5,7 @@ import android.widget.TextView;
 
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.SecondHandForm;
+import amai.org.conventions.utils.StateList;
 import androidx.recyclerview.widget.RecyclerView;
 import sff.org.conventions.R;
 
@@ -32,16 +33,16 @@ class SecondHandFormViewHolder extends RecyclerView.ViewHolder {
 
 	public void setForm(SecondHandForm form) {
 		this.form = form;
-		int[] attrs = new int[]{};
+		StateList formState = new StateList();
 		formName.setText(itemView.getContext().getString(R.string.second_hand_form_name, form.getId()));
 		if (form.isClosed()) {
 			formStatus.setVisibility(View.VISIBLE);
 			formStatus.setText(R.string.second_hand_form_closed);
-			attrs = new int[]{R.attr.state_second_hand_form_closed};
+			formState.add(R.attr.state_second_hand_form_closed);
 		} else {
 			formStatus.setVisibility(View.INVISIBLE); // This must be invisible and not gone to keep the layout correct
 		}
-		int color = ThemeAttributes.getColorFromStateList(itemView.getContext(), R.attr.secondHandFormColor, attrs);
+		int color = formState.getThemeColor(itemView.getContext(), R.attr.secondHandFormColor);
 		formName.setTextColor(color);
 		formStatus.setTextColor(color);
 		int total = form.getSoldItemsTotalPrice();

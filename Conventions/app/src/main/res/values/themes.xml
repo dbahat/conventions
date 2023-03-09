@@ -177,11 +177,7 @@
 
         <!-- Second Hand activity -->
         <item name="secondHandFormColor">@drawable/second_hand_form_default_text_color</item>
-        <item name="secondHandItemDefaultColor">?android:textColorSecondary</item>
-        <item name="secondHandItemNotSoldColor">?secondHandItemDefaultColor</item>
-        <item name="secondHandItemCreatedColor">?secondHandItemDefaultColor</item>
-        <item name="secondHandItemSoldColor">?secondHandItemDefaultColor</item>
-        <item name="secondHandItemMissingColor">?secondHandItemDefaultColor</item>
+        <item name="secondHandItemStatusColor">?android:textColorSecondary</item>
         <item name="secondHandItemsDivider">@drawable/second_hand_item_list_divider</item>
         <item name="secondHandFilterColor">?android:textColorPrimary</item>
         <item name="secondHandSelectedFilterColor">?colorAccent</item>
@@ -379,11 +375,7 @@
 
         <!-- Second Hand activity -->
         <item name="secondHandFormColor">@drawable/second_hand_form_default_text_color</item>
-        <item name="secondHandItemDefaultColor">?android:textColorSecondary</item>
-        <item name="secondHandItemNotSoldColor">?secondHandItemDefaultColor</item>
-        <item name="secondHandItemCreatedColor">?secondHandItemDefaultColor</item>
-        <item name="secondHandItemSoldColor">?secondHandItemDefaultColor</item>
-        <item name="secondHandItemMissingColor">?secondHandItemDefaultColor</item>
+        <item name="secondHandItemStatusColor">?android:textColorSecondary</item>
         <item name="secondHandItemsDivider">@drawable/second_hand_item_list_divider</item>
         <item name="secondHandFilterColor">?android:textColorSecondary</item>
         <item name="secondHandSelectedFilterColor">?colorAccent</item>

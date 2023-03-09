@@ -48,19 +48,21 @@ class SecondHandItemSearchViewHolder extends RecyclerView.ViewHolder {
 				Strings.padWithZeros(formId, 3), Strings.padWithZeros(newItem.getNumber(), 2));
 		itemIdView.setText(itemId);
 		refreshItemNameText();
+		StateList itemState = new StateList();
 		if (item.getStatus() == SecondHandItem.Status.UNKNOWN) {
 			// Showing the status instead of the price
 			itemPriceView.setVisibility(View.VISIBLE);
 			itemPriceView.setText(R.string.second_hand_unknown_status);
-			itemPriceView.setTextColor(ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandItemMissingColor));
+			itemState.add(R.attr.state_second_hand_item_missing);
 		} else if (item.getPrice() == -1) {
 			itemPriceView.setVisibility(View.GONE);
 		} else {
 			itemPriceView.setVisibility(View.VISIBLE);
 			itemPriceView.setText(itemView.getContext().getString(R.string.second_hand_item_price, item.getPrice()));
-			itemPriceView.setTextColor(ThemeAttributes.getColor(itemView.getContext(), R.attr.secondHandItemNotSoldColor));
+			itemState.add(R.attr.state_second_hand_item_not_sold);
 		}
-		int textColor = ThemeAttributes.getColorFromStateList(itemView.getContext(), R.attr.secondHandFormColor, new int[]{});
+		itemPriceView.setTextColor(itemState.getThemeColor(itemView.getContext(), R.attr.secondHandItemStatusColor));
+		int textColor = itemState.getThemeColor(itemView.getContext(), R.attr.secondHandFormColor);
 		itemNameView.setTextColor(textColor);
 		itemPriceView.setTextColor(textColor);
 		itemIdView.setTextColor(textColor);
