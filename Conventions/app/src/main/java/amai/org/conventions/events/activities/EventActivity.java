@@ -796,8 +796,10 @@ public class EventActivity extends NavigationActivity {
 												.putString("event_title", conventionEvent.getTitle())
 												.build()
 										);
-								EventVoteSurveyFragment eventVoteSurveyFragment = EventVoteSurveyFragment.newInstance(conventionEvent.getId());
-								eventVoteSurveyFragment.show(getSupportFragmentManager(), null);
+								if (!getSupportFragmentManager().isStateSaved()) {
+									EventVoteSurveyFragment eventVoteSurveyFragment = EventVoteSurveyFragment.newInstance(conventionEvent.getId());
+									eventVoteSurveyFragment.show(getSupportFragmentManager(), null);
+								}
 							}
 						}
 					}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
