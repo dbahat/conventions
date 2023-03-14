@@ -83,7 +83,7 @@ public class EventsViewWithDateHeaderAdapter extends BaseAdapter {
 					attributes[0] = R.attr.state_event_ended;
 				}
 
-				textView.setTextColor(ThemeAttributes.getColorFromStateList(textView.getContext(), R.attr.eventTimeHeaderTextColor, attributes));
+				textView.setTextColor(ThemeAttributes.getColorFromStateList(textView.getContext(), R.attr.feedbackEventDateHeaderTextColor, attributes));
 				((FrameLayout.LayoutParams) textView.getLayoutParams()).gravity = Gravity.CENTER_HORIZONTAL;
 				textView.setLayoutParams(textView.getLayoutParams());
 				holder = new TimeViewHolder(convertView, R.id.small_text);

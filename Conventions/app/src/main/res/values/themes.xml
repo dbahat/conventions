@@ -167,6 +167,7 @@
 
         <!-- Feedback activity -->
         <item name="conventionFeedbackAnswerBackground">?eventFeedbackAnswerBackground</item>
+        <item name="feedbackEventDateHeaderTextColor">?eventTimeHeaderTextColor</item>
         <item name="feedbackMultiAnswerMinWidth">0dp</item>
         <item name="feedbackMultiAnswerPaddingTopBottom">4.5dp</item>
         <item name="feedbackMultiAnswerPaddingStartEnd">18dp</item>
@@ -241,6 +242,7 @@
 
         <!-- Event list activities -->
         <item name="eventViewLayout">@layout/convention_event</item>
+        <item name="eventViewHeight">74dp</item>
         <item name="eventTimeHeaderBackground">@drawable/flat_event_time_background</item>
         <item name="eventTimeHeaderWidth">wrap_content</item>
         <item name="eventTimeHeaderTextColor">?eventTextColor</item>
@@ -365,6 +367,7 @@
 
         <!-- Feedback activity -->
         <item name="conventionFeedbackAnswerBackground">?eventFeedbackAnswerBackground</item>
+        <item name="feedbackEventDateHeaderTextColor">?eventTimeHeaderTextColor</item>
         <item name="feedbackMultiAnswerMinWidth">0dp</item>
         <item name="feedbackMultiAnswerPaddingTopBottom">4.5dp</item>
         <item name="feedbackMultiAnswerPaddingStartEnd">18dp</item>
