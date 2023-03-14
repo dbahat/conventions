@@ -134,7 +134,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:id="@+id/second_hand_buy_show_favorites"
                 android:text="@string/second_hand_show_favorites"
                 android:textColor="?android:textColorPrimary"/>
