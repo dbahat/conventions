@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item app:state_event_ended="true" android:drawable="@drawable/icon2022_event_time_bg_ended"/>
-    <item app:state_event_current="true" android:drawable="@drawable/icon2022_event_time_bg_current"/>
-    <item android:drawable="@drawable/icon2022_event_time_bg_not_started"/>
-</selector>

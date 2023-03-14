@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<inset xmlns:android="http://schemas.android.com/apk/res/android"
-       android:insetLeft="20dp" android:insetRight="65dp">
-    <shape android:shape="rectangle">
-        <solid android:color="@color/icon2022_grey2"/>
-        <size android:height="?eventListDividerHeight"/>
-    </shape>
-</inset>
