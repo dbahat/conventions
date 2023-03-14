@@ -87,6 +87,8 @@
              favorite event is added/removed, feedback icon in programme activity when convention ended
              and user hasn't sent feedback -->
         <attr name="toolbarIconAccentColor" format="color|reference"/>
+        <!-- Custom Tabs (used for authentication) -->
+        <attr name="customTabsToolbarColor" format="color|reference"/>
 
         <!-- Snackbar -->
 
@@ -102,9 +104,9 @@
 
         <!-- Tabs -->
 
-        <!-- Icon color for tabs -->
+        <!-- Background color for tabs -->
         <attr name="tabsBackground" format="color|reference"/>
-        <!-- Color for seleted tab indicator -->
+        <!-- Color for selected tab indicator -->
         <attr name="selectedTabIndicatorColor" format="color|reference"/>
         <!-- Text color for tab which is not selected -->
         <attr name="unselectedTabTextColor" format="color|reference"/>
@@ -142,6 +144,11 @@
         <!-- Background color for event time. Used when useEventTimeColorFromEventType is false or event timetable color is transparent.
              Can be a color state list. Event state is set with state_event_... attributes. -->
         <attr name="eventTimeBackground" format="color|reference"/>
+
+        <!-- Background drawable for event time. Used when useEventTimeColorFromEventType is false or event timetable color is transparent
+             and eventTimeBackground is transparent/null. Only supported for non-rounded event view.
+             Can be a drawable state list. Event state is set with state_event_... attributes. -->
+        <attr name="eventTimeBackgroundDrawable" format="color|reference"/>
 
         <!-- Text color for event details (if useEventTextColorFromEventType is false or timetable color is transparent) -->
         <attr name="eventDetailsColor" format="color|reference"/>
@@ -269,6 +276,8 @@
         <!-- Margin around conflicting events separator from other groups -->
         <attr name="conflictingEventsGroupSeparatorMargin" format="dimension|reference"/>
 
+        <!-- Icon for FAB (add). Used in My Events and Second Hand Sell. Background is defined in actionButtonColor. -->
+        <attr name="addActionButtonIcon" format="integer|reference"/>
 
         <!-- Text color for free time in my events. Can be a color state list. State is set with state_event_... attributes. -->
         <attr name="freeTimeTextColor" format="color|reference"/>
@@ -332,7 +341,7 @@
 
         <!-- Elevation for update item -->
         <attr name="updateElevation" format="dimension"/>
-        <!-- Background for regular update. Can be a drawable state list. State is set with state_update_... -->
+        <!-- Background for update. Can be a drawable state list. State is set with state_update_... -->
         <attr name="updateBackground" format="color|reference"/>
         <!-- Text color for update date and time. Can be a color state list. State is set with state_update_... -->
         <attr name="updateTimeColor" format="color|reference"/>
@@ -432,7 +441,7 @@
         <attr name="eventTitleBackground" format="integer|reference"/>
         <!-- Padding for event title box -->
         <attr name="eventTitlePadding" format="dimension"/>
-        <!-- Text color for event name -->
+        <!-- Text color for text in event title box (event name, type and location type) -->
         <attr name="eventTitleTextColor" format="color|reference"/>
         <!-- Background for event name -->
         <attr name="eventNameBackground" format="integer|reference"/>
@@ -449,6 +458,8 @@
         <attr name="eventDetailsBoxColor" format="color|reference"/>
         <!-- Text color for text in event details box (lecturer, hall, time, additional info; in sf-f: Price, tickets availability, tags) -->
         <attr name="eventDetailsTextColor" format="color|reference"/>
+        <!-- Text color for highlighted text in event details box (used for tickets are unavailable text) -->
+        <attr name="eventDetailsHighlightedTextColor" format="color|reference"/>
 
         <!-- Background for event description box -->
         <attr name="eventDescriptionBoxColor" format="color|reference"/>
@@ -508,14 +519,20 @@
 
         <!-- Color for borderless button. Used in: updates ("show more"), feedback activity (hide sent feedback),
              stands popup (dismiss), configure notifications (configure before start/after end/dismiss),
-             event vote popup (dimiss). Some of these are configured in sub-themes. -->
+             event vote popup (dimiss), second hand activity sell tab (delete form).
+             Some of these are configured in sub-themes. -->
         <attr name="borderlessButtonColor" format="color|reference"/>
 
         <!-- Feedback Screen -->
 
         <!-- Text color for feedback in feedback activity. See eventFeedbackTextColor for usage. -->
         <attr name="conventionFeedbackTextColor" format="color|reference"/>
+        <!-- Background for convention feedback answer. Used in multiple answers for selected and unselected answers.
+             Can be a drawable state list. Feedback state is set with state_feedback_... attributes. -->
         <attr name="conventionFeedbackAnswerBackground" format="integer|reference"/>
+
+        <!-- Text color for events list date header in feedback screen -->
+        <attr name="feedbackEventDateHeaderTextColor" format="color|reference"/>
 
         <!-- Minimal width for answer in multiple-answer question (not radio). Used in feedack activity. -->
         <attr name="feedbackMultiAnswerMinWidth" format="dimension"/>
@@ -568,14 +585,27 @@
             <enum name="END" value="8388613"/>
         </attr>
 
+        <!-- Text color for day header in programme search.
+             Can be a color state list. Time state is set with state_event_... attributes. -->
+        <attr name="eventDateHeaderTextColor" format="color|reference"/>
+
         <!-- Color for search categories checkboxes, if color from event type is not used. -->
         <attr name="searchCategoriesColor" format="color|reference" />
+        <!-- Text color for search categories checkboxes -->
+        <attr name="searchCategoriesTextColor" format="color|reference" />
+
+        <!-- Programme Search Screen -->
+
+        <!-- Background color for search chips -->
         <attr name="searchCategoriesChipBackgroundColor" format="color|reference" />
+        <!-- Text color for search chips -->
         <attr name="searchCategoriesChipTextColor" format="color|reference" />
+        <!-- Stroke color for search chips -->
         <attr name="searchCategoriesChipStrokeColor" format="color|reference" />
+        <!-- Ripple color for search chips -->
         <attr name="searchCategoriesChipRippleColor" format="color|reference" />
 
-        <!-- Color for search categories text, hint text and labels -->
+        <!-- Color for search text edit text, hint text and labels -->
         <attr name="searchTitleTextColor" format="color|reference" />
         <!-- Custom background for the programme search TextEdit.
              If null, background tint of the default text edit background is set to searchTitleTexColor. -->
@@ -583,9 +613,14 @@
         <!-- Color for the background of the search screen title layout -->
         <attr name="searchTitleBackgroundColor" format="color|reference" />
 
-        <!-- Text color for day header in programme search.
-             Can be a color state list. Time state is set with state_event_... attributes. -->
-        <attr name="eventDateHeaderTextColor" format="color|reference"/>
+        <!-- Text color for search drawer borderless button and selected checkbox -->
+        <attr name="searchDrawerAccentColor" format="color|reference"/>
+        <!-- Background color for the search drawer -->
+        <attr name="searchDrawerBackground" format="integer|reference"/>
+        <!-- Text olor for texts in the search drawer (title, search results number, filter titles and names -->
+        <attr name="searchDrawerTextColor" format="color|reference"/>
+        <!-- Separator color in search drawer (under the title) -->
+        <attr name="searchDrawerSeparatorColor" format="color|reference"/>
 
         <!-- Icons -->
 
@@ -617,6 +652,30 @@
 
         <!-- Close location details icon in map activity -->
         <attr name="iconClearMap" format="integer|reference"/>
+        <!-- User ID icon. Used in My Events activity in the toolbar and user details dialog. -->
+        <attr name="iconUserId" format="integer|reference"/>
+
+        <!-- Second Hand Screen -->
+
+        <!-- Text color used in second hand sell tab (form name and status, total price of sold items,
+             item name, edit button color, price, id) and in second hand buy tab (item name, price, id).
+             Can be a color state list. Form state is set with state_second_hand_form_... attributes. -->
+        <attr name="secondHandFormColor" format="color|reference"/>
+        <!-- Text color used in second hand buy tab for item price (not sold when it's in the stand, missing when it isn't),
+             and second hand sell tab for item status.
+             Can be a color state list. Form and item state are set with state_second_hand_... attributes. -->
+        <attr name="secondHandItemStatusColor" format="color|reference"/>
+        <!-- Divider color for items in buy and sell tabs. The height is 1dp. -->
+        <attr name="secondHandItemsDivider" format="color|reference"/>
+        <!-- Color for unselected sort/filter in second hand buy (both text and icon) -->
+        <attr name="secondHandFilterColor" format="color|reference"/>
+        <!-- Color for selected sort/filter in second hand buy (both text and icon) -->
+        <attr name="secondHandSelectedFilterColor" format="color|reference"/>
+
+        <!-- Discounts Screen -->
+
+        <!-- Layout resource for discounts activity -->
+        <attr name="discountsActivityLayout" format="reference"/>
     </declare-styleable>
 
     <declare-styleable name="EventState">
@@ -663,4 +722,12 @@
         <attr name="state_update_focused" type="bool"/>
     </declare-styleable>
 
+
+    <declare-styleable name="SecondHandState">
+        <attr name="state_second_hand_form_closed" format="boolean"/>
+        <attr name="state_second_hand_item_created" format="boolean"/>
+        <attr name="state_second_hand_item_not_sold" format="boolean"/>
+        <attr name="state_second_hand_item_sold" format="boolean"/>
+        <attr name="state_second_hand_item_missing" format="boolean"/>
+    </declare-styleable>
 </resources>

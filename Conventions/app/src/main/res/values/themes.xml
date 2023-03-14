@@ -170,6 +170,7 @@
 
         <!-- Feedback activity -->
         <item name="conventionFeedbackAnswerBackground">?eventFeedbackAnswerBackground</item>
+        <item name="feedbackEventDateHeaderTextColor">?eventTimeHeaderTextColor</item>
         <item name="feedbackMultiAnswerMinWidth">0dp</item>
         <item name="feedbackMultiAnswerPaddingTopBottom">4.5dp</item>
         <item name="feedbackMultiAnswerPaddingStartEnd">18dp</item>
@@ -358,6 +359,7 @@
 
         <!-- Feedback activity -->
         <item name="conventionFeedbackAnswerBackground">?eventFeedbackAnswerBackground</item>
+        <item name="feedbackEventDateHeaderTextColor">?eventTimeHeaderTextColor</item>
         <item name="feedbackMultiAnswerMinWidth">0dp</item>
         <item name="feedbackMultiAnswerPaddingTopBottom">4.5dp</item>
         <item name="feedbackMultiAnswerPaddingStartEnd">18dp</item>
