@@ -61,11 +61,10 @@ import amai.org.conventions.utils.Objects;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import sff.org.conventions.BuildConfig;
-import sff.org.conventions.R;
 
 public abstract class Convention implements Serializable {
 
-	private static Convention convention = new Icon2022Convention();
+	private static Convention convention = new Olamot2023Convention();
 	public static final int NO_COLOR = Color.TRANSPARENT; // Assuming we will never get this from the server...
 
 	// Currently supporting conventions of up to 5 days (UI restriction, since the programme is set
