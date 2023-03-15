@@ -86,7 +86,7 @@ public class SffModelParser implements ModelParser {
 				availableTickets = availableTicketsElement.getAsInt();
 			}
 
-			if (eventObj.get("is_ticketless") != null && eventObj.get("is_ticketless").getAsBoolean()) {
+			if (getBooleanValue(eventObj, "is_ticketless")) {
 				availableTickets = -1;
 			}
 
@@ -125,13 +125,17 @@ public class SffModelParser implements ModelParser {
 		return eventList;
 	}
 
+	private boolean getBooleanValue(JsonObject object, String member) {
+		return object.has(member) && !object.get(member).isJsonNull() && object.get(member).getAsBoolean();
+	}
+
 	private List<ConventionEvent.EventLocationType> getLocationTypes(JsonObject eventObj) {
-		boolean hasVirtual = eventObj.get("has_virtual").getAsBoolean();
-		boolean hasPhysical = eventObj.get("has_physical").getAsBoolean();
+		boolean hasVirtual = getBooleanValue(eventObj, "has_virtual");
+		boolean hasPhysical = getBooleanValue(eventObj, "has_physical");
 
 		if (hasPhysical && hasVirtual) {
 			// Inhouse = streamed from the convention physical location
-			boolean isInhouse = eventObj.get("is_inhouse").getAsBoolean();
+			boolean isInhouse = getBooleanValue(eventObj, "is_inhouse");
 			if (isInhouse) {
 				return Arrays.asList(ConventionEvent.EventLocationType.PHYSICAL, ConventionEvent.EventLocationType.VIRTUAL);
 			} else {
