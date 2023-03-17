@@ -180,7 +180,8 @@ public class Olamot2023Convention extends SffConvention {
 
 	@Override
 	protected ConventionMap initMap() {
-		return createMap();
+		return null;
+//		return createMap();
 	}
 
 	private ConventionMap createMap() {
