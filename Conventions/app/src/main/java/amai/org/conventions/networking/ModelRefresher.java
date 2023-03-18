@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import amai.org.conventions.BuildConfig;
 import amai.org.conventions.ConventionsApplication;
@@ -94,6 +95,7 @@ public class ModelRefresher {
 					request.connect();
 					try (InputStreamReader reader = new InputStreamReader((InputStream) request.getContent())) {
 						List<ConventionEvent> eventList = Convention.getInstance().getModelParser().parse(reader);
+						eventList = filterDuplicateEvents(eventList);
 
 						Context context = ConventionsApplication.getCurrentContext();
 						if (context != null) {
@@ -141,6 +143,28 @@ public class ModelRefresher {
 				}
 			}
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	private List<ConventionEvent> filterDuplicateEvents(List<ConventionEvent> eventList) {
+		Map<String, ConventionEvent> existingEvents = new HashMap<>();
+		List<ConventionEvent> filteredEvents = new LinkedList<>();
+
+		for (ConventionEvent currEvent : eventList) {
+			ConventionEvent existingEvent = existingEvents.get(currEvent.getId());
+			if (existingEvent != null) {
+				if (BuildConfig.DEBUG && !existingEvent.same(currEvent)) {
+					Log.e(TAG, "Found different duplicate event with ID " + currEvent.getId() + ": " + currEvent.getTitle());
+				} else {
+					Log.w(TAG, "Found duplicate event with ID " + currEvent.getId() + ": " + currEvent.getTitle());
+				}
+				continue;
+			}
+
+			existingEvents.put(currEvent.getId(), currEvent);
+			filteredEvents.add(currEvent);
+		}
+
+		return filteredEvents;
 	}
 
 	private void showFavoritesChangedMessage(String message) {
