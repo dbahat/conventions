@@ -686,16 +686,6 @@ public class Olamot2023Convention extends SffConvention {
 	}
 
 	@Override
-	public ModelParser getModelParser() {
-		return new SffModelParser() {
-			@Override
-			protected int getEventPrice(JsonObject eventObj) {
-				return -1;
-			}
-		};
-	}
-
-	@Override
 	public boolean canUserLogin() {
 		return true;
 	}

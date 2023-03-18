@@ -14,8 +14,10 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.EventType;
@@ -71,6 +73,7 @@ public class SffModelParser implements ModelParser {
 			JsonElement tagsElement = eventObj.get("tags");
 			if (tagsElement.isJsonArray()) {
 				tags = convertValuesToStringList(tagsElement.getAsJsonArray());
+				tags = filterDuplicates(tags);
 			} else {
 				tags = Collections.emptyList();
 				Log.w(TAG, "Tags list is not an array: " + tagsElement);
@@ -123,6 +126,20 @@ public class SffModelParser implements ModelParser {
 		}
 
 		return eventList;
+	}
+
+	private List<String> filterDuplicates(List<String> strings) {
+		Set<String> existing = new HashSet<>();
+		List<String> filtered = new LinkedList<>();
+		for (String value: strings) {
+			if (!existing.contains(value)) {
+				existing.add(value);
+				filtered.add(value);
+			} else {
+				Log.i(TAG, "found duplicate string: " + value);
+			}
+		}
+		return filtered;
 	}
 
 	private boolean getBooleanValue(JsonObject object, String member) {
