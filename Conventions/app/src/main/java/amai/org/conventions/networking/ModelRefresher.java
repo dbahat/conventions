@@ -449,7 +449,7 @@ public class ModelRefresher {
 			}
 			Convention.getInstance().getStorage().saveEvents();
 		} catch (IOException e) {
-			Log.i(TAG, "Could not retrieve tickets number for event " + event.getId() + " due to IOException: " + e.getMessage());
+			Log.e(TAG, "Could not retrieve tickets number for event " + event.getId() + " due to IOException: " + e.getMessage());
 			return false;
 		} catch (Exception e) {
 			Log.e(TAG, "Could not retrieve tickets number for event" + event.getId() + ": " + e.getMessage(), e);

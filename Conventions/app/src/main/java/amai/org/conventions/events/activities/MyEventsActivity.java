@@ -154,12 +154,15 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 					Log.e(TAG, "Could not update user details: " + e.getMessage(), e);
 					if( !ignoreUserUpdateError) {
 						stopExecution = true;
-						Toast.makeText(MyEventsActivity.this, R.string.login_failed, Toast.LENGTH_LONG).show();
 					}
 				}
 
 				if (!stopExecution) {
 					onSuccess.run(result.email, result.accessToken, ignoreErrors(progressDialog::dismiss));
+				} else {
+					ignoreErrors(progressDialog::dismiss).run();
+					// Can't show a toast while there is a progress dialog open
+					Toast.makeText(MyEventsActivity.this, R.string.login_failed, Toast.LENGTH_LONG).show();
 				}
 			});
 		}
@@ -519,12 +522,15 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 						responseBuilder.append(output);
 					}
 					String responseBody = responseBuilder.toString();
-					Log.e(TAG, "Could not read user QR, response is: " + responseBody);
+					Log.e(TAG, "Could not read user QR, error code: " + responseCode + ", response is: " + responseBody);
 				}
 				throw new RuntimeException("Could not read user QR, error code: " + responseCode);
 			}
 			inputStream = (InputStream) request.getContent();
 			Convention.getInstance().getStorage().saveUserIDQR(inputStream);
+		} catch (Exception e) {
+			// Don't throw an error, we still want to show the user details even if there is no QR
+			Log.e(TAG, "Could not read user QR", e);
 		} finally {
 			request.disconnect();
 		}
