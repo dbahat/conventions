@@ -51,6 +51,7 @@ import amai.org.conventions.model.ConventionEventComparator;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.networking.AuthenticationException;
+import amai.org.conventions.networking.RequestConnector;
 import amai.org.conventions.notifications.PushNotificationTopicsSubscriber;
 import amai.org.conventions.utils.BundleBuilder;
 import amai.org.conventions.utils.CollectionUtils;
@@ -224,12 +225,10 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 			// Set new user data
 			ConventionsApplication.settings.setUser(user);
 			saveUserQR(user);
-			String userId = getUserId(token);
-			ConventionsApplication.settings.setUserId(userId);
+			saveUserId(token);
 		} else if (ConventionsApplication.settings.getUserId() == null) {
 			// Update only the user ID if it was not available before
-			String userId = getUserId(token);
-			ConventionsApplication.settings.setUserId(userId);
+			saveUserId(token);
 		}
 	}
 
@@ -407,15 +406,15 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 	}
 
 	private int addFavoriteEventsFromWebsite(String token) throws Exception {
-		HttpURLConnection request = Convention.getInstance().getUserPurchasedEventsRequest(token);
-		request.connect();
+		RequestConnector request = new RequestConnector(Convention.getInstance().getUserPurchasedEventsRequest(token));
 		InputStreamReader reader = null;
 		boolean changed = false;
 		int newFavoriteEvents = 0;
 		try {
-			int responseCode = request.getResponseCode();
+			request.connect();
+			int responseCode = request.getRequest().getResponseCode();
 			if (BuildConfig.DEBUG && responseCode != 200) {
-				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(request.getErrorStream()));
+				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(request.getRequest().getErrorStream()));
 				StringBuilder responseBuilder = new StringBuilder();
 				String output;
 				while ((output = bufferedReader.readLine()) != null) {
@@ -429,7 +428,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 			} else if (responseCode != 200) {
 				throw new RuntimeException("Could not read user purchased events, error code: " + responseCode);
 			}
-			reader = new InputStreamReader((InputStream) request.getContent());
+			reader = new InputStreamReader((InputStream) request.getRequest().getContent());
 			JsonElement root = JsonParser.parseReader(reader);
 			JsonArray eventsArray = root.getAsJsonArray();
 			for (int i = 0; i < eventsArray.size(); ++i) {
@@ -455,19 +454,19 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		return newFavoriteEvents;
 	}
 
-	private String getUserId(String token) throws Exception {
-		HttpURLConnection request = Convention.getInstance().getUserIDRequest(token);
-		request.connect();
+	private void saveUserId(String token) throws Exception {
+		RequestConnector request = new RequestConnector(Convention.getInstance().getUserIDRequest(token));
 		InputStream inputStream = null;
 		BufferedReader reader = null;
 		String userId = null;
 		try {
-			int responseCode = request.getResponseCode();
+			request.connect();
+			int responseCode = request.getRequest().getResponseCode();
 			if (responseCode == HttpURLConnection.HTTP_UNAUTHORIZED) {
 				throw new AuthenticationException();
 			} else if (responseCode != HttpURLConnection.HTTP_OK) {
 				if (BuildConfig.DEBUG) {
-					BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(request.getErrorStream()));
+					BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(request.getRequest().getErrorStream()));
 					StringBuilder responseBuilder = new StringBuilder();
 					String output;
 					while ((output = bufferedReader.readLine()) != null) {
@@ -479,12 +478,12 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 
 				if (responseCode == HttpURLConnection.HTTP_BAD_REQUEST) {
 					// User has not connected to the programme yet, user ID is not available
-					return null;
+					return;
 				}
 
 				throw new RuntimeException("Could not read user ID, error code: " + responseCode);
 			}
-			inputStream = (InputStream) request.getContent();
+			inputStream = (InputStream) request.getRequest().getContent();
 			reader = new BufferedReader(new InputStreamReader(inputStream));
 			StringBuilder responseBuilder = new StringBuilder();
 			String output;
@@ -492,6 +491,10 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 				responseBuilder.append(output);
 			}
 			userId = responseBuilder.toString();
+			ConventionsApplication.settings.setUserId(userId);
+		} catch (Exception e) {
+			// Don't throw an error, we still want to show the user details even if there is no ID
+			Log.e(TAG, "Could not read user ID", e);
 		} finally {
 			if (reader != null) {
 				reader.close();
@@ -501,21 +504,21 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 			}
 			request.disconnect();
 		}
-		return userId;
 	}
 
 	private void saveUserQR(String user) throws Exception {
 		// First, delete the existing file (since a new user ID was set, we don't want leftovers from the previous user ID)
 		Convention.getInstance().getStorage().deleteUserIDQR();
 
-		HttpURLConnection request = Convention.getInstance().getUserQRRequest(user);
-		request.connect();
+		RequestConnector request = new RequestConnector(Convention.getInstance().getUserQRRequest(user));
 		InputStream inputStream = null;
 		try {
-			int responseCode = request.getResponseCode();
+			// This should be inside the try-catch because it can throw an exception
+			request.connect();
+			int responseCode = request.getRequest().getResponseCode();
 			if (responseCode != 200) {
 				if (BuildConfig.DEBUG) {
-					BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(request.getErrorStream()));
+					BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(request.getRequest().getErrorStream()));
 					StringBuilder responseBuilder = new StringBuilder();
 					String output;
 					while ((output = bufferedReader.readLine()) != null) {
@@ -526,7 +529,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 				}
 				throw new RuntimeException("Could not read user QR, error code: " + responseCode);
 			}
-			inputStream = (InputStream) request.getContent();
+			inputStream = (InputStream) request.getRequest().getContent();
 			Convention.getInstance().getStorage().saveUserIDQR(inputStream);
 		} catch (Exception e) {
 			// Don't throw an error, we still want to show the user details even if there is no QR

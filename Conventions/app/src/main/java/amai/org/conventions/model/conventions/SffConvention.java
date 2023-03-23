@@ -35,7 +35,6 @@ public abstract class SffConvention extends Convention {
 	public HttpURLConnection getUserQRRequest(String user) throws Exception {
 		URL url = new URL("https://api.sf-f.org.il/cons/qr/login/" + URLUtils.encodeURLPath(user));
 		HttpURLConnection request = HttpConnectionCreator.createConnection(url);
-		request.connect();
 		return request;
 	}
 }
