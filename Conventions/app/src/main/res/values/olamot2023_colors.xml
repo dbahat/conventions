@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="icon2022_red1">#ff3333</color>
-    <color name="icon2022_red2">#a82222</color>
-
     <color name="olamot2023_yellow">#f0cc92</color>
     <color name="olamot2023_green">#9d9855</color>
     <color name="olamot2023_red1">#902b13</color>
