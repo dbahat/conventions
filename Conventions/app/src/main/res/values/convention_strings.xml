@@ -102,12 +102,13 @@
 <p><strong>מלווים:</strong> במידה וישנו צורך במלווה אל תוך אירוע מסוים, המלווה חייב בכרטיס גם הוא על מנת להיכנס לאירוע, וכרטיס זה יינתן בחינם.</p>
 <p>על מנת לקבל את כרטיסי המלווה יש לשלוח את הבקשה לדוא&quot;ל <a href="mailto:Tickets@olamot-con.org.il">Tickets@olamot-con.org.il</a> עד ה-07 באפריל, יום שישי, בשעה 12:00. רק במידה ולא היה ניתן לשלוח דוא&quot;ל עד לתאריך זה, ניתן גם לפנות לסגל הקופות בפסטיבל עצמו ולבקש את כרטיסי המלווה.</p>
 ]]></string>
-    <string name="discounts_overview">המסעדות הבאות מעניקות הנחה בהצגת כרטיס או תג של הכנס, במהלך ימי הכנס:</string>
+    <string name="discounts_overview">באי הכנס של עולמות 2023 זכאים להטבות במגוון חנויות באיזור מתחם הכנס!\n
+המסעדות הבאות מעניקות הנחה בהצגת כרטיס או תג של הכנס, במהלך שני הימים של הכנס:</string>
     <string name="discounts_memphis">ממפיס, רחוב קרליבך 20. כשר בשר חלק, ירק מהדרין. 10% הנחה.</string>
-    <string name="discounts_aroma">ארומה, רחוב הארבעה 24. 10% הנחה.</string>
-    <string name="discounts_suduch">סודוך, רחוב קרליבך 20. כשר בשרי. 27 ש\"ח לטוסט רגיל/נקנקיה בלחמניה ושתייה מהמקרר בתוספת של 3 ש\"ח, עד השעה 16:00.</string>
-    <string name="discounts_tlab">TLAB, רחוב החשמונאים 103. גלידה מתנה בקניית משקה.</string>
-    <string name="discounts_oban_koban">אובן קובן. רחוב הארבעה 16. משקה חינם (סאקה/בירה/שתיה קלה).</string>
+    <string name="discounts_aroma">ארומה סניף הארבעה – 10% הנחה</string>
+    <string name="discounts_suduch">סודוך סניף קרליבך – סודוך טוסט ב-29 ש\"ח</string>
+    <string name="discounts_tlab">ויסוצקי Tlab החשמונאים – תוספת באבל פירותי חינם</string>
+    <string name="discounts_oban_koban">אובן קובן הארבעה 16 – 10% הנחה</string>
     <string name="discounts_parking">חניה בחניון גבעון TLV</string>
     <string name="discounts_parking_details">החל מהשעה 16:00 ועד 05:00 למחרת היום, חניה במחיר של 10 ש"ח בלבד למקודדים את כרטיס החנייה בעמדת הקידוד בלובי סינמטק תל אביב (ליד קופות הסינמטק).</string>
 

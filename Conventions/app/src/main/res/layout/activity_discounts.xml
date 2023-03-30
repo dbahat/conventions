@@ -28,21 +28,6 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/discounts_suduch"
-            android:layout_marginBottom="15dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:textColor="?android:textColorPrimary"
-            android:text="@string/discounts_suduch"
-            android:layout_marginBottom="30dp"/>
-
-
-        <amai.org.conventions.customviews.AspectRatioImageView
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:src="@drawable/discounts_aroma"
             android:layout_marginBottom="15dp"/>
         <TextView
@@ -51,6 +36,21 @@
             android:textColor="?android:textColorPrimary"
             android:textSize="14sp"
             android:text="@string/discounts_aroma"
+            android:layout_marginBottom="30dp"/>
+
+
+        <amai.org.conventions.customviews.AspectRatioImageView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/discounts_suduch"
+            android:layout_marginBottom="15dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="?android:textColorPrimary"
+            android:text="@string/discounts_suduch"
             android:layout_marginBottom="30dp"/>
 
 
@@ -84,19 +84,19 @@
             android:layout_marginBottom="30dp"/>
 
 
-        <amai.org.conventions.customviews.AspectRatioImageView
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/discounts_memphis"
-            android:layout_marginBottom="15dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="?android:textColorPrimary"
-            android:textSize="14sp"
-            android:text="@string/discounts_memphis"
-            android:layout_marginBottom="30dp"/>
+<!--        <amai.org.conventions.customviews.AspectRatioImageView-->
+<!--            android:layout_width="150dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:src="@drawable/discounts_memphis"-->
+<!--            android:layout_marginBottom="15dp"/>-->
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textColor="?android:textColorPrimary"-->
+<!--            android:textSize="14sp"-->
+<!--            android:text="@string/discounts_memphis"-->
+<!--            android:layout_marginBottom="30dp"/>-->
 
 
 <!--        <TextView-->
