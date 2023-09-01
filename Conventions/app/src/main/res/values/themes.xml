@@ -43,6 +43,7 @@
         <!-- Event list activities -->
         <item name="eventViewLayout">@layout/convention_event</item>
         <item name="eventViewHeight">74dp</item>
+        <item name="eventViewCornerRadius">4dp</item>
         <item name="eventTimeHeaderBackground">@drawable/flat_event_time_background</item>
         <item name="eventTimeHeaderWidth">wrap_content</item>
         <item name="eventTimeHeaderTextColor">?eventTextColor</item>
@@ -232,6 +233,7 @@
         <!-- Event list activities -->
         <item name="eventViewLayout">@layout/convention_event</item>
         <item name="eventViewHeight">74dp</item>
+        <item name="eventViewCornerRadius">4dp</item>
         <item name="eventTimeHeaderBackground">@drawable/flat_event_time_background</item>
         <item name="eventTimeHeaderWidth">wrap_content</item>
         <item name="eventTimeHeaderTextColor">?eventTextColor</item>
