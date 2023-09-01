@@ -38,8 +38,8 @@
         <!-- Normal state -->
         <item>
             <shape android:shape="rectangle"
-                   android:tint="@color/olamot2023_red2">
-                <solid android:color="@color/olamot2023_red2" />
+                   android:tint="@color/icon2023_brown1">
+                <solid android:color="@color/icon2023_brown1" />
                 <padding android:left="@dimen/button_padding_horizontal_material"
                          android:top="@dimen/button_padding_vertical_material"
                          android:right="@dimen/button_padding_horizontal_material"

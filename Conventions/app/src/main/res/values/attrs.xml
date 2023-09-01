@@ -604,6 +604,8 @@
         <attr name="programmeSearchBarBackground" format="integer|reference" />
         <!-- Color for the background of the search screen title layout -->
         <attr name="searchTitleBackgroundColor" format="color|reference" />
+        <!-- Start and end padding for search screen title layout -->
+        <attr name="searchTitleHorizontalPadding" format="dimension|reference" />
 
         <!-- Text color for search drawer borderless button and selected checkbox -->
         <attr name="searchDrawerAccentColor" format="color|reference"/>

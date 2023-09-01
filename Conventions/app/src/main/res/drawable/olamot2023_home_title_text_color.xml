@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item app:state_home_during_con="true" app:state_home_has_favorites="true" app:state_home_is_upcoming="true" android:color="@color/olamot2023_green"/>
-    <item android:color="@color/olamot2023_yellow"/>
-</selector>

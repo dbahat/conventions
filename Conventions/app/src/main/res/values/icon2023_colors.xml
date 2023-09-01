@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="icon2023_red">#6d2115</color>
+    <color name="icon2023_brown1">#251c0f</color>
+    <color name="icon2023_brown2">#af9c74</color>
+    <color name="icon2023_brown3">#e3d7b5</color>
+    <color name="icon2023_blue1">#2c3c5e</color>
+    <color name="icon2023_blue2">#a3a8b4</color>
+    <color name="icon2023_blue3">#c6d0e0</color>
+    <color name="icon2023_green1">#407049</color>
+    <color name="icon2023_green2">#8fa371</color>
+    
+    
+    
     <color name="olamot2023_yellow">#f0cc92</color>
     <color name="olamot2023_green">#9d9855</color>
     <color name="olamot2023_red1">#902b13</color>
@@ -8,6 +20,5 @@
     <color name="olamot2023_brown2">#63332C</color>
     <color name="olamot2023_pink1">#d8a388</color>
     <color name="olamot2023_pink2">#d18f6d</color>
-
     <color name="olamot2023_transparent_pink2">#D8D18F6D</color>
 </resources>
