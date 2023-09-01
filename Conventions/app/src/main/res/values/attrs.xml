@@ -119,6 +119,8 @@
         <attr name="eventViewLayout" format="integer|reference"/>
         <!-- Height for event view resource -->
         <attr name="eventViewHeight" format="dimension|reference"/>
+        <!-- Radius for round event view card corners (both the main part of the view and the time box) -->
+        <attr name="eventViewCornerRadius" format="dimension|reference"/>
 
         <!-- Should the event color received from backend be used for event name and details text -->
         <attr name="useEventTextColorFromEventType" format="boolean"/>
