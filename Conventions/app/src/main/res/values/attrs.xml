@@ -195,7 +195,7 @@
         <attr name="homeFrameTopMargin" format="dimension" />
         <!-- Bottom margin for home frame (the changing part). Default is homeFrameMargins. -->
         <attr name="homeFrameBottomMargin" format="dimension" />
-        <!-- Bottom image in home activity (all screens) -->
+        <!-- Bottom image in home activity (all screens). Can be a state list drawable. Home state is set with state_home_... attributes. -->
         <attr name="homeBottomImage" format="integer|reference"/>
 
         <!-- Background for title of info boxes in home screen.
