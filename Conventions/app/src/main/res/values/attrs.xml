@@ -323,6 +323,8 @@
         <attr name="navigationPopupSelectedColor" format="color|reference"/>
         <!-- Color for non-selected item text and image in the main part of the navigation drawer -->
         <attr name="navigationPopupNotSelectedColor" format="color|reference"/>
+        <!-- Background color for selected item text and image in the main part of the navigation drawer -->
+        <attr name="navigationPopupSelectedBackground" format="color|reference"/>
         <!-- Color for separator between items in the main part of the navigation drawer -->
         <attr name="navigationPopupSeparatorColor" format="color|reference"/>
         <!-- Padding above an item in the main part of the navigation drawer -->

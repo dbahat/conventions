@@ -1,6 +1,7 @@
 package amai.org.conventions.navigation;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -28,10 +29,13 @@ public class NavigationItemViewHolder extends RecyclerView.ViewHolder {
 		if (isCurrentItemSelected) {
 			int color = ThemeAttributes.getColor(currentActivity, R.attr.navigationPopupSelectedColor);
 			textView.setTextColor(color);
+			int backgroundColor = ThemeAttributes.getColor(currentActivity, R.attr.navigationPopupSelectedBackground);
+			navigationItemLayout.setBackgroundColor(backgroundColor);
 			navigationItemLayout.setOnClickListener(null);
 		} else {
 			int color = ThemeAttributes.getColor(currentActivity, R.attr.navigationPopupNotSelectedColor);
 			textView.setTextColor(color);
+			navigationItemLayout.setBackgroundColor(Color.TRANSPARENT);
 			navigationItemLayout.setOnClickListener(v -> currentActivity.navigateToActivity(item.getActivity()));
 		}
 	}
