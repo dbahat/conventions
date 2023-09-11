@@ -40,14 +40,12 @@ import amai.org.conventions.utils.Dates;
 public class MyEventsActivity extends NavigationActivity implements MyEventsDayFragment.EventsListener {
 	private static final String TAG = MyEventsActivity.class.getCanonicalName();
 	private static final String STATE_SELECTED_DATE_INDEX = "StateSelectedDateIndex";
-	private static final int SELECT_CURRENT_DATE = -1;
 	private static final int NEXT_EVENT_START_TIME_UPDATE_DELAY = 60000; // 1 minute
 	// Handler for updating the next event start text
 	private Handler nextEventStartTextRunner = new Handler();
 	private Runnable updateNextEventStartTimeText;
 	private TextView nextEventStart;
 	private View nextEventStartBottomLine;
-	private TabLayout daysTabLayout;
 	private ViewPager daysPager;
 	private AlertDialog noEventsDialog;
 
@@ -81,33 +79,9 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 	}
 
 	private void setupDays(int dateIndexToSelect) {
-		daysTabLayout = (TabLayout) findViewById(R.id.my_events_days_tabs);
-		daysPager = (ViewPager) findViewById(R.id.my_events_days_pager);
-
-		int days = Convention.getInstance().getLengthInDays();
-		if (days == 1) {
-			daysTabLayout.setVisibility(View.GONE);
-		}
-
-		// Setup view pager
+		daysPager = findViewById(R.id.my_events_days_pager);
 		MyEventsDayAdapter adapter = new MyEventsDayAdapter(getSupportFragmentManager(), Convention.getInstance().getEventDates());
-		daysPager.setAdapter(adapter);
-		daysPager.setOffscreenPageLimit(days); // Load all dates for smooth scrolling
-
-		// Setup tabs
-		daysTabLayout.setupWithViewPager(daysPager, false);
-
-		int selectedDateIndex = dateIndexToSelect;
-		// Find the current date's index if requested
-		if (dateIndexToSelect == SELECT_CURRENT_DATE) {
-			selectedDateIndex = adapter.getItemToDisplayForDate(Dates.toCalendar(Dates.now()));
-		}
-
-		// Default - first day
-		if (selectedDateIndex < 0) {
-			selectedDateIndex = 0;
-		}
-		daysPager.setCurrentItem(selectedDateIndex, false);
+		super.setupDaysTabs(findViewById(R.id.my_events_days_tabs), daysPager, adapter, dateIndexToSelect);
 	}
 
 	@Override

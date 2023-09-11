@@ -3,7 +3,6 @@ package amai.org.conventions.navigation;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,15 +13,9 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -41,12 +34,22 @@ import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.activities.EventActivity;
 import amai.org.conventions.events.activities.MyEventsActivity;
 import amai.org.conventions.events.activities.ProgrammeActivity;
+import amai.org.conventions.events.adapters.DayFragmentAdapter;
 import amai.org.conventions.map.MapActivity;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.notifications.PushNotification;
 import amai.org.conventions.notifications.PushNotificationDialogPresenter;
 import amai.org.conventions.settings.SettingsActivity;
 import amai.org.conventions.updates.UpdatesActivity;
+import amai.org.conventions.utils.Dates;
+import androidx.annotation.IdRes;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.viewpager.widget.ViewPager;
 
 import static amai.org.conventions.notifications.PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION;
 
@@ -55,6 +58,8 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	public static final String EXTRA_INITIALIZE = "ExtraInitialize";
 	public static final String EXTRA_EXIT_ON_BACK = "ExtraExitOnBack";
 	public static final String EXTRA_SHOW_HOME_ON_BACK = "ExtraShowHomeOnBack";
+
+	protected static final int SELECT_CURRENT_DATE = -1;
 
 	private TextView navigationToolbarTitle;
 	private Toolbar navigationToolbar;
@@ -321,6 +326,37 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		return actionButton;
 	}
 
+	protected void setupDaysTabs(TabLayout daysTabLayout, ViewPager daysPager, DayFragmentAdapter adapter, int dateIndexToSelect) {
+		int days = Convention.getInstance().getLengthInDays();
+		if (days == 1) {
+			daysTabLayout.setVisibility(View.GONE);
+		}
+
+		Drawable tabIndicator = ThemeAttributes.getDrawable(this, R.attr.selectedTabIndicator);
+		if (tabIndicator != null) {
+			daysTabLayout.setSelectedTabIndicator(tabIndicator);
+		}
+
+		// Setup view pager
+		daysPager.setAdapter(adapter);
+		daysPager.setOffscreenPageLimit(days); // Load all dates for smooth scrolling
+
+		// Setup tabs
+		daysTabLayout.setupWithViewPager(daysPager, false);
+
+		int selectedDateIndex = dateIndexToSelect;
+		// Find the current date's index if requested
+		if (dateIndexToSelect == SELECT_CURRENT_DATE) {
+			selectedDateIndex = adapter.getItemToDisplayForDate(Dates.toCalendar(Dates.now()));
+		}
+
+		// Default - first day
+		if (selectedDateIndex < 0) {
+			selectedDateIndex = 0;
+		}
+		daysPager.setCurrentItem(selectedDateIndex, false);
+	}
+
 	public void onConventionEventClicked(View view) {
 		navigateToEvent((String) view.getTag());
 	}
@@ -430,9 +466,26 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	 * @return The new color
 	 */
 	protected int changeIconColor(MenuItem item) {
+		if (item == null) {
+			return Convention.NO_COLOR;
+		}
 		Drawable icon = item.getIcon().mutate();
 		int accentColor = ThemeAttributes.getColor(this, R.attr.toolbarIconAccentColor);
 		icon.setColorFilter(accentColor, PorterDuff.Mode.SRC_ATOP);
 		return accentColor;
+	}
+
+	/**
+	 * Change color of menu item icon to be accented
+	 *
+	 * @param item the menu item
+	 * @return The new color
+	 */
+	protected void resetIconColor(MenuItem item) {
+		if (item == null) {
+			return;
+		}
+		Drawable icon = item.getIcon().mutate();
+		icon.setColorFilter(null);
 	}
 }

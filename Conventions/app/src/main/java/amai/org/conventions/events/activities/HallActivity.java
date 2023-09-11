@@ -21,7 +21,6 @@ public class HallActivity extends NavigationActivity {
 	public static final String EXTRA_USE_SLIDE_OUT_ANIMATION_ON_BACK = "ExtraUseSlideOutAnimationOnBack";
 
 	private static final String STATE_SELECTED_DATE_INDEX = "StateSelectedDateIndex";
-	private static final int SELECT_CURRENT_DATE = -1;
 
 	private ViewPager daysPager;
 
@@ -52,33 +51,9 @@ public class HallActivity extends NavigationActivity {
 	}
 
 	private void setupDays(int dateIndexToSelect) {
-		TabLayout daysTabLayout = (TabLayout) findViewById(R.id.hall_days_tabs);
-		daysPager = (ViewPager) findViewById(R.id.hall_days_pager);
-
-		int days = Convention.getInstance().getLengthInDays();
-		if (days == 1) {
-			daysTabLayout.setVisibility(View.GONE);
-		}
-
-		// Setup view pager
+		daysPager = findViewById(R.id.hall_days_pager);
 		HallDayAdapter adapter = new HallDayAdapter(getSupportFragmentManager(), Convention.getInstance().getEventDates());
-		daysPager.setAdapter(adapter);
-		daysPager.setOffscreenPageLimit(days); // Load all dates for smooth scrolling
-
-		// Setup tabs
-		daysTabLayout.setupWithViewPager(daysPager, false);
-
-		int selectedDateIndex = dateIndexToSelect;
-		// Find the current date's index if requested
-		if (dateIndexToSelect == SELECT_CURRENT_DATE) {
-			selectedDateIndex = adapter.getItemToDisplayForDate(Dates.toCalendar(Dates.now()));
-		}
-
-		// Default - first day
-		if (selectedDateIndex < 0) {
-			selectedDateIndex = 0;
-		}
-		daysPager.setCurrentItem(selectedDateIndex, false);
+		super.setupDaysTabs(findViewById(R.id.hall_days_tabs), daysPager, adapter, dateIndexToSelect);
 	}
 
 	@Override
