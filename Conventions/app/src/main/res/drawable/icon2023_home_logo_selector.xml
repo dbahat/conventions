@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item app:state_second_hand_form_closed="true" android:color="@color/olamot2023_brown2"/>
-    <item android:color="@color/black"/>
+    <item android:drawable="@drawable/icon2023_home_logo" app:state_home_during_con="true"/>
+    <item android:drawable="@drawable/icon2023_home_big"/>
 </selector>

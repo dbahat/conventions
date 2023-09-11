@@ -5,108 +5,114 @@
         <item name="android:dialogTheme">@style/AppDialogTheme.Icon2023</item>
         <item name="alertDialogTheme">@style/AppAlertDialogTheme.Icon2023</item>
         <!-- General -->
-<!--        <item name="activitiesTopPadding">7dp</item>-->
         <item name="android:colorPrimaryDark">@color/black</item> <!-- Toolbar color -->
         <!-- Used in: default selected checkbox/switch color, settings titles,
              cursor color in all edit texts. Also used as the default action button color and map search checkbox color. -->
-        <item name="colorAccent">@color/olamot2023_red2</item>
+        <item name="colorAccent">@color/icon2023_brown3</item>
         <!-- This color should be readable over the activities background.
              Used as the text color in: accessibility, arrival methods.
              Also used as default for many texts and as the default "large text" color (e.g. in settings). -->
-        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:textColorPrimary">@color/white</item>
         <!-- Used in: default unselected checkbox color and default "medium/small" texts (e.g. in settings). -->
-        <item name="android:textColorSecondary">@color/olamot2023_red2</item>
+        <item name="android:textColorSecondary">@color/icon2023_brown3</item>
         <item name="android:colorBackground">@null</item>
-        <item name="android:textColorHint">@color/olamot2023_brown2</item>
-        <item name="android:textColorLink">@color/icon2023_blue1</item>
-        <item name="actionButtonColor">@color/icon2023_brown3</item>
-        <item name="actionButtonIcon">@drawable/ic_action_search_black</item>
-        <item name="hintTextColor">@color/olamot2023_brown2</item>
-        <item name="swipeToRefreshColor">@color/black</item>
+        <item name="android:textColorHint">@color/icon2023_brown2</item>
+        <item name="android:textColorLink">@color/icon2023_blue</item>
+        <item name="actionButtonColor">@color/icon2023_blue</item>
+        <item name="actionButtonIcon">@drawable/search</item>
+        <item name="hintTextColor">@color/icon2023_brown2</item>
+        <item name="swipeToRefreshColor">@color/icon2023_brown7</item>
         <item name="swipeToRefreshBackgroundColor">@color/icon2023_brown3</item>
-        <item name="snackbarActionColor">@color/icon2023_brown3</item>
+        <item name="snackbarActionColor">@color/icon2023_brown2</item>
         <item name="highlightedButtonBackground">@drawable/highlighted_button</item>
-        <item name="borderlessButtonColor">@color/olamot2023_red1</item>
-        <item name="activitiesBackground">@drawable/icon2023_background</item>
+        <item name="borderlessButtonColor">@color/icon2023_brown6</item>
+        <item name="activitiesBackground">@color/icon2023_green4</item>
         <item name="contentStartMargin">0dp</item>
         <item name="contentEndMargin">0dp</item>
         <item name="eventListDivider">@drawable/icon2023_event_list_divider</item>
-        <item name="conflictingEventListDivider">@color/transparent</item>
-        <item name="separatorColor">@color/transparent</item>
+        <item name="separatorColor">@null</item>
         <!-- These are used for buttons. They should be usable when the background is:
              Event screen vote
              Feedback screen
              Map bottom info panel
              Arrival methods screen
          -->
-        <item name="buttonColor">@color/icon2023_blue3</item>
+        <item name="buttonColor">@color/icon2023_blue</item>
         <item name="buttonColorPressed">@color/icon2023_blue2</item>
-        <item name="buttonColorDisabled">@color/dark_gray</item>
-        <item name="buttonTextColor">@color/black</item>
+        <item name="buttonColorDisabled">@color/icon2023_gray1</item>
+        <item name="buttonTextColor">@drawable/icon2023_highlighted_button_text_color</item>
 
         <!-- Tabs -->
-        <item name="tabsBackground">@color/icon2023_brown3</item>
-        <item name="unselectedTabTextColor">@color/icon2023_brown1</item>
-        <item name="selectedTabTextColor">@color/icon2023_brown1</item>
-        <item name="selectedTabIndicatorColor">@color/icon2023_brown1</item>
+        <item name="tabsBackground">@color/icon2023_brown1</item>
+        <item name="unselectedTabTextColor">@color/icon2023_brown7</item>
+        <item name="selectedTabTextColor">@color/icon2023_brown7</item>
+        <item name="selectedTabIndicator">@drawable/tab_indicator</item>
+        <item name="selectedTabIndicatorColor">@color/icon2023_brown7</item>
 
         <!-- Notifications -->
         <item name="notificationSmallIcon">@drawable/icon2023_notification_icon</item>
         <!-- Toolbar -->
         <item name="toolbarBackground">@color/icon2023_brown2</item>
-        <item name="toolbarIconAccentColor">@color/icon2023_green1</item>
+        <item name="toolbarIconAccentColor">@color/icon2023_green4</item>
         <!-- Navigation Popup -->
-        <item name="navigationPopupBackground">@color/olamot2023_pink1</item>
-        <item name="navigationPopupTitle">@drawable/olamot2023_navigation_logo</item>
+        <item name="navigationPopupBackground">@color/icon2023_brown2</item>
+        <item name="navigationPopupTitle">@null</item>
         <item name="navigationPopupTitleMargins">10dp</item>
         <item name="navigationPopupBottomImage">@null</item>
-        <item name="navigationPopupNotSelectedColor">@color/black</item>
-        <item name="navigationPopupSelectedColor">@color/olamot2023_brown1</item>
-        <item name="navigationPopupSeparatorColor">@color/black</item>
+        <item name="navigationPopupNotSelectedColor">@color/icon2023_brown7</item>
+        <item name="navigationPopupSelectedColor">@color/icon2023_brown7</item>
+        <item name="navigationPopupSelectedBackground">@color/icon2023_brown1</item>
+        <item name="navigationPopupSeparatorColor">@color/icon2023_brown7</item>
         <!-- About Screen -->
-        <item name="aboutLogo">@drawable/olamot2023_home_logo</item>
+        <item name="aboutLogo">@drawable/icon2023_home_logo</item>
         <item name="aboutLogoMargins">20dp</item>
         <!-- Home Screen -->
-        <item name="homeBoxTopMargin">0dp</item>
+        <item name="homeBoxTopMargin">10dp</item>
         <item name="homeSingleButtonTopMargin">10dp</item>
         <item name="homeButtonsSideMargin">0dp</item>
-        <item name="homeBackground">@drawable/icon2023_background</item>
-        <item name="homeLogo">@drawable/icon2023_home_logo</item>
+        <item name="homeBackground">@color/icon2023_green4</item>
+        <item name="homeLogo">@drawable/icon2023_home_logo_selector</item>
         <item name="homeLogoMargin">5dp</item>
         <item name="homeFrameTopMargin">5dp</item>
         <item name="homeFrameBottomMargin">5dp</item>
         <item name="homeToolbarBackground">@null</item>
         <item name="homeToolbarTitle">@null</item>
-        <item name="homeTitleBackground">@color/icon2023_brown1</item>
+        <item name="homeTitleBackground">@drawable/icon2023_home_title_background</item>
         <item name="homeTitleText">@drawable/icon2023_home_title_text_color</item>
         <item name="homeEventsMargin">10dp</item>
         <item name="homeShowCurrentUpcomingTitles">true</item>
         <item name="homeContentBackground">@drawable/icon2023_home_content_background</item>
-        <item name="homeContentText">@color/icon2023_brown1</item>
-        <item name="homeEventTimeText">@color/icon2023_brown1</item>
-        <item name="homeEventHallText">@color/icon2023_brown1</item>
-        <item name="homeButtonBackground">@drawable/highlighted_button_not_rounded</item>
-        <item name="homeButtonText">@color/black</item>
-        <item name="homeBottomImage">@drawable/icon2023_home_bottom</item>
-        <item name="homeEventsListDivider">@drawable/icon2023_home_event_list_divider</item>
+        <item name="homeContentText">@drawable/icon2023_home_content_text_color</item>
+        <item name="homeEventTimeText">@color/icon2023_brown7</item>
+        <item name="homeEventHallText">@color/icon2023_brown7</item>
+        <item name="homeButtonBackground">@drawable/icon2023_home_button</item>
+        <item name="homeGotoUpdatesButtonBackground">@drawable/icon2023_goto_updates_button</item>
+        <item name="homeGotoUpdatesButtonText">@color/icon2023_blue</item>
+        <item name="homeButtonText">@color/icon2023_brown1</item>
+        <item name="homeBottomImage">@drawable/icon2023_home_bottom_selector</item>
+        <item name="homeEventsListDivider">@color/transparent</item>
+        <item name="homeEventsListDividerHeight">10dp</item>
+        <item name="homeEventsListEventBackground">@drawable/icon2023_brown1_round</item>
         <!-- Event View -->
         <item name="eventViewLayout">@layout/rounded_convention_event</item>
         <item name="eventViewHeight">104dp</item>
-        <item name="eventViewCornerRadius">0dp</item>
-        <item name="eventBackgroundColor">@color/icon2023_brown3</item>
+        <item name="eventViewCornerRadius">4dp</item>
+        <item name="eventBackgroundColor">@color/icon2023_brown1</item>
         <item name="eventTextColor">@drawable/icon2023_event_view_text_color</item>
-        <item name="eventTimeTextColor">@color/black</item>
-        <item name="eventTimeBackground">@color/icon2023_brown2</item>
+        <item name="eventTimeTextColor">@drawable/icon2023_event_time_text_color</item>
+        <item name="eventTimeBackground">@drawable/icon2023_event_time_background</item>
         <item name="eventDetailsColor">?eventTextColor</item>
-        <item name="eventFavoriteIconColor">@drawable/icon2023_favorite_icon_color</item>
+        <item name="eventFavoriteIcon">@drawable/icon2023_favorite_icon</item>
+        <item name="eventFavoriteIconColor">@color/icon2023_brown5</item>
+        <item name="eventFeedbackIcon">@drawable/icon2023_feedback_icon</item>
         <item name="eventFeedbackIconColor">@drawable/icon2023_feedback_icon_color</item>
         <item name="eventStartMargin">0dp</item>
         <item name="conflictingEventBackground">@drawable/icon2023_conflicting_event_label_bg</item>
         <!-- Programme Screen -->
-        <item name="eventTimeHeaderTextColor">@color/icon2023_brown1</item>
+        <item name="eventTimeHeaderTextColor">@color/white</item>
         <item name="eventTimeHeaderBackground">@drawable/icon2023_event_time_header</item>
-        <item name="searchCategoriesColor">@color/icon2023_brown3</item>
-        <item name="searchCategoriesTextColor">@color/icon2023_brown3</item>
+        <item name="searchCategoriesColor">@color/icon2023_brown2</item>
+        <item name="searchCategoriesTextColor">@color/icon2023_brown1</item>
         <item name="eventTimeHeaderWidth">match_parent</item>
         <item name="eventTimeHeaderMarginTop">10dp</item>
         <item name="eventTimeHeaderMarginBottom">@null</item>
@@ -114,106 +120,109 @@
         <item name="eventTimeHeaderPaddingVertical">4dp</item>
         <item name="marginBetweenEventsListAndNextHeader">0dp</item>
         <!-- Programme Search Screen -->
-        <item name="searchTitleBackgroundColor">@drawable/icon2023_brown3_inset</item>
+        <item name="searchTitleBackgroundColor">@color/icon2023_brown1</item>
         <item name="searchTitleHorizontalPadding">8dp</item>
-        <item name="searchTitleTextColor">@color/icon2023_brown1</item>
+        <item name="searchTitleTextColor">@color/icon2023_brown7</item>
         <item name="programmeSearchBarBackground">@drawable/icon2023_search_bar_background</item>
         <item name="eventNameKeywordHighlightColor">@color/icon2023_green1</item>
         <item name="eventKeywordHighlightColor">@color/icon2023_green1</item>
-        <item name="searchDrawerAccentColor">@color/icon2023_blue3</item>
-        <item name="searchDrawerBackground">@color/icon2023_brown3</item>
-        <item name="searchDrawerTextColor">@color/icon2023_brown1</item>
-        <item name="searchDrawerSeparatorColor">@color/icon2023_brown1</item>
+        <item name="searchDrawerAccentColor">@color/icon2023_brown5</item>
+        <item name="searchDrawerBackground">@color/icon2023_brown1</item>
+        <item name="searchDrawerTextColor">@color/icon2023_brown7</item>
+        <item name="searchDrawerSeparatorColor">@color/icon2023_brown7</item>
         <!-- My Events Screen -->
-        <item name="nextEventStartTimeBackground">@color/icon2023_brown2</item>
-        <item name="nextEventStartTimeTextColor">@color/icon2023_brown1</item>
-        <item name="nextEventStartTimeBottomLineColor">@color/icon2023_brown2</item>
+        <item name="nextEventStartTimeBackground">@color/transparent</item>
+        <item name="nextEventStartTimeTextColor">@color/white</item>
+        <item name="nextEventStartTimeBottomLineColor">@color/transparent</item>
         <item name="conflictingEventsListBorder">@null</item>
         <item name="conflictingEventsBackground">@null</item>
         <item name="conflictingEventsGroupSeparator">@drawable/icon2023_conflicting_events_group_separator</item>
         <item name="conflictingEventsGroupSeparatorHeight">4dp</item>
         <item name="conflictingEventsGroupSeparatorMargin">4dp</item>
-        <item name="addActionButtonIcon">@drawable/baseline_add_black_36</item>
+        <item name="freeTimeTextColor">@color/white</item>
+        <item name="addActionButtonIcon">@drawable/ic_add_white</item>
         <!-- Feedback Screen -->
-        <item name="feedbackProgressBarColor">@color/olamot2023_brown1</item>
-        <item name="conventionFeedbackTextColor">@drawable/olamot2023_feedback_text_color</item>
-        <item name="feedbackEventDateHeaderTextColor">@color/olamot2023_red2</item>
+        <item name="feedbackProgressBarColor">@color/icon2023_blue</item>
+        <item name="conventionFeedbackTextColor">@drawable/icon2023_feedback_text_color</item>
+        <item name="feedbackEventDateHeaderTextColor">@color/icon2023_brown1</item>
         <!-- Updates Screen -->
-        <item name="updateItemBorder">@color/olamot2023_red1</item>
-        <item name="updateTextColor">@drawable/olamot2023_update_text_color</item>
+        <item name="updateItemBorder">@color/white</item>
+        <item name="updateTextColor">@drawable/icon2023_update_text_color</item>
         <item name="updateItemSeparator">@null</item>
-        <item name="updateTimeBackground">@color/black</item>
-        <item name="updateTimeColor">@color/olamot2023_yellow</item>
+        <item name="updateTimeBackground">@color/icon2023_brown6</item>
+        <item name="updateTimeColor">@color/white</item>
         <item name="updatesSeparatorColor">@color/transparent</item>
         <!-- Event Screen -->
         <item name="eventToolbarColor">?toolbarBackground</item>
         <item name="eventActivityFavoriteColor">@color/icon2023_green1</item>
         <item name="eventDetailsDefaultBackground">?activitiesBackground</item>
         <item name="eventTitleBackground">@color/icon2023_brown3</item>
-        <item name="eventTitleTextColor">@color/icon2023_brown1</item>
-        <item name="eventDetailsBoxColor">@color/icon2023_brown2</item>
-        <item name="eventDetailsTextColor">@color/icon2023_brown1</item>
+        <item name="eventTitleTextColor">@color/icon2023_brown7</item>
+        <item name="eventDetailsBoxColor">@color/transparent</item>
+        <item name="eventDetailsTextColor">@color/white</item>
         <item name="eventDetailsHighlightedTextColor">@color/icon2023_red</item>
-        <item name="eventDescriptionTextColor">@color/black</item>
-        <item name="eventDescriptionBoxColor">@color/icon2023_brown3</item>
-        <item name="eventFeedbackBoxColor">@color/icon2023_blue1</item>
+        <item name="eventDescriptionTextColor">@color/icon2023_brown7</item>
+        <item name="eventDescriptionBoxColor">@drawable/icon2023_brown1_round</item>
+        <item name="eventFeedbackBoxColor">@color/icon2023_brown6</item>
         <item name="eventFeedbackTextColor">@drawable/icon2023_event_feedback_text_color</item>
-        <item name="eventFeedbackProgressBarColor">@color/black</item>
-        <item name="eventFeedbackButtonBackground">@drawable/icon2023_event_feedback_button</item>
-        <item name="eventFeedbackButtonTextColor">@color/icon2023_brown3</item>
-        <item name="feedbackButtonColor">@color/black</item>
-        <item name="eventVoteBoxColor">@color/icon2023_blue1</item>
-        <item name="eventVoteTextColor">@color/black</item>
+        <item name="eventFeedbackProgressBarColor">@color/white</item>
+        <item name="eventFeedbackButtonBackground">@drawable/highlighted_button</item>
+        <item name="eventFeedbackButtonTextColor">@drawable/icon2023_highlighted_button_text_color</item>
+        <item name="feedbackButtonColor">@color/white</item>
+        <item name="eventVoteBoxColor">@color/icon2023_blue</item>
+        <item name="eventVoteTextColor">@color/white</item>
         <!-- Map Screen -->
-        <item name="locationDetailsBackground">@color/olamot2023_pink2</item>
+        <item name="locationDetailsBackground">@color/icon2023_brown3</item>
         <item name="locationDetailsTitleColor">@color/black</item>
-        <item name="mapBackground">@drawable/olamot2023_map_background</item>
-        <item name="floorChangeBackground">@color/olamot2023_pink2</item>
-        <item name="standIconColor">@color/olamot2023_red1</item>
-        <item name="standsTypeTitleColor">@color/olamot2023_red1</item>
-        <item name="mapSearchText">@color/black</item>
-        <item name="mapSearchFiltersBackground">@color/olamot2023_pink2</item>
-        <item name="mapSearchResultsBackground">@color/olamot2023_transparent_pink2</item>
-        <item name="mapSearchHint">@color/olamot2023_brown2</item>
+        <item name="mapBackground">?activitiesBackground</item>
+        <item name="floorChangeBackground">@color/icon2023_brown4</item>
+        <item name="standIconColor">@color/icon2023_brown7</item>
+        <item name="standsTypeTitleColor">@color/icon2023_brown6</item>
+        <item name="mapSearchText">@color/icon2023_brown7</item>
+        <item name="mapSearchFiltersBackground">@color/icon2023_brown1</item>
+        <item name="mapSearchResultsBackground">@color/icon2023_transparent_brown1</item>
+        <item name="mapSearchHint">@color/icon2023_brown3</item>
         <item name="mapSearchSeparator">@color/black</item>
         <item name="mapSearchResultsDivider">@color/black</item>
         <item name="mapSearchBorder">@color/black</item>
-        <item name="mapSearchCheckboxTint">@color/olamot2023_red1</item>
+        <item name="mapSearchCheckboxTint">@color/icon2023_brown3</item>
         <!-- Second Hand Screen -->
-        <item name="secondHandFormColor">@drawable/olamot2023_second_hand_form_text_color</item>
-        <item name="secondHandItemStatusColor">@drawable/olamot2023_second_hand_item_status_text_color</item>
-        <item name="secondHandItemsDivider">@drawable/olamot2023_second_hand_item_list_divider</item>
-        <item name="secondHandFilterColor">@color/black</item>
-        <item name="secondHandSelectedFilterColor">@color/olamot2023_red1</item>
+        <item name="secondHandFormColor">@drawable/icon2023_second_hand_form_text_color</item>
+        <item name="secondHandItemStatusColor">@drawable/icon2023_second_hand_item_status_text_color</item>
+        <item name="secondHandItemsDivider">@drawable/icon2023_second_hand_item_list_divider</item>
+        <item name="secondHandFilterColor">@color/white</item>
+        <item name="secondHandSelectedFilterColor">@color/icon2023_brown2</item>
         <!-- Discounts activity -->
         <item name="discountsActivityLayout">@layout/activity_discounts</item>
     </style>
 
     <style name="AppBaseTheme.Icon2023.Event" parent="AppBaseTheme.Icon2023">
-        <item name="android:textColorLink">@color/icon2023_blue1</item>
+        <item name="android:textColorLink">@color/icon2023_blue</item>
     </style>
 
     <style name="AppBaseTheme.Icon2023.Settings" parent="AppBaseTheme.Icon2023">
-        <item name="android:textColor">@color/icon2023_brown3</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorPrimary">@color/white</item>
+         <item name="android:textColorSecondary">@color/white</item>
     </style>
 
 
     <style name="AppDialogTheme.Icon2023" parent="Theme.AppCompat.Light.Dialog">
         <!-- This is the default starting API23. In any case the title is always left-justified so it's best to not use it. -->
         <item name="android:windowNoTitle">true</item>
-        <item name="colorAccent">@color/icon2023_brown2</item>
+        <item name="colorAccent">@color/icon2023_brown5</item>
         <item name="android:textColorPrimary">@color/black</item>
-        <item name="borderlessButtonColor">@color/icon2023_brown2</item>
+        <item name="borderlessButtonColor">@color/icon2023_brown5</item>
     </style>
 
     <style name="AppAlertDialogTheme.Icon2023" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="colorAccent">@color/icon2023_brown2</item>
+        <item name="colorAccent">@color/icon2023_brown5</item>
         <item name="android:textColorPrimary">@color/black</item>
-        <item name="borderlessButtonColor">@color/icon2023_brown2</item>
+        <item name="borderlessButtonColor">@color/icon2023_brown5</item>
     </style>
 
     <style name="AppBaseTheme.Icon2023.Splash">
-        <item name="android:windowBackground">@drawable/icon2023_background</item>
+        <item name="android:windowBackground">@color/icon2023_green4</item>
     </style>
 
      <style name="TransparentTheme.Icon2023" parent="TransparentTheme">

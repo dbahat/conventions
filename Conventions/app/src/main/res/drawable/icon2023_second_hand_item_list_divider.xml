@@ -2,7 +2,7 @@
 <inset xmlns:android="http://schemas.android.com/apk/res/android"
        android:insetLeft="20dp" android:insetRight="20dp">
     <shape android:shape="rectangle">
-        <solid android:color="@color/olamot2023_red1"/>
+        <solid android:color="@color/white"/>
         <size android:height="?eventListDividerHeight"/>
     </shape>
 </inset>
