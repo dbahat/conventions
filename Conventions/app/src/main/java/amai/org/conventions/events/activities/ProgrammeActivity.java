@@ -45,8 +45,6 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 	public static final String EXTRA_DELAY_SCROLLING = "DelayScrollingExtra";
 	private static final String STATE_NAVIGATE_ICON_MODIFIED = "StateNavigateIconModified";
 	private static final String STATE_SELECTED_DATE_INDEX = "StateSelectedDateIndex";
-	private final static int SELECT_CURRENT_DATE = -1;
-	private TabLayout daysTabLayout;
 	private ViewPager daysPager;
 
 	private Menu menu;
@@ -126,34 +124,10 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 	}
 
 	private void setupDays(int dateIndexToSelect) {
-		daysTabLayout = (TabLayout) findViewById(R.id.programme_days_tabs);
-		daysPager = (ViewPager) findViewById(R.id.programme_days_pager);
-
-		int days = Convention.getInstance().getLengthInDays();
-		if (days == 1) {
-			daysTabLayout.setVisibility(View.GONE);
-		}
-
-		// Setup view pager
+		daysPager = findViewById(R.id.programme_days_pager);
 		int delay = getIntent().getIntExtra(EXTRA_DELAY_SCROLLING, 0);
 		ProgrammeDayAdapter adapter = new ProgrammeDayAdapter(getSupportFragmentManager(), delay, Convention.getInstance().getEventDates());
-		daysPager.setAdapter(adapter);
-		daysPager.setOffscreenPageLimit(days); // Load all dates for smooth scrolling
-
-		// Setup tabs
-		daysTabLayout.setupWithViewPager(daysPager, false);
-
-		int selectedDateIndex = dateIndexToSelect;
-		// Find the current date's index if requested
-		if (dateIndexToSelect == SELECT_CURRENT_DATE) {
-			selectedDateIndex = adapter.getItemToDisplayForDate(Dates.toCalendar(Dates.now()));
-		}
-
-		// Default - first day
-		if (selectedDateIndex < 0) {
-			selectedDateIndex = 0;
-		}
-		daysPager.setCurrentItem(selectedDateIndex, false);
+		super.setupDaysTabs(findViewById(R.id.programme_days_tabs), daysPager, adapter, dateIndexToSelect);
 	}
 
 	@Override

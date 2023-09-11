@@ -3,7 +3,6 @@ package amai.org.conventions.navigation;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,6 +15,7 @@ import android.widget.TextView;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -34,19 +34,22 @@ import amai.org.conventions.WebContentActivity;
 import amai.org.conventions.events.activities.EventActivity;
 import amai.org.conventions.events.activities.MyEventsActivity;
 import amai.org.conventions.events.activities.ProgrammeActivity;
+import amai.org.conventions.events.adapters.DayFragmentAdapter;
 import amai.org.conventions.map.MapActivity;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.notifications.PushNotification;
 import amai.org.conventions.notifications.PushNotificationDialogPresenter;
-import amai.org.conventions.secondhand.SecondHandActivity;
 import amai.org.conventions.settings.SettingsActivity;
 import amai.org.conventions.updates.UpdatesActivity;
+import amai.org.conventions.utils.Dates;
+import androidx.annotation.IdRes;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.viewpager.widget.ViewPager;
 import sff.org.conventions.R;
 
 import static amai.org.conventions.notifications.PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION;
@@ -56,6 +59,8 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	public static final String EXTRA_INITIALIZE = "ExtraInitialize";
 	public static final String EXTRA_EXIT_ON_BACK = "ExtraExitOnBack";
 	public static final String EXTRA_SHOW_HOME_ON_BACK = "ExtraShowHomeOnBack";
+
+	protected static final int SELECT_CURRENT_DATE = -1;
 
 	private TextView navigationToolbarTitle;
 	private Toolbar navigationToolbar;
@@ -325,6 +330,37 @@ public abstract class NavigationActivity extends AppCompatActivity {
 
 	public FloatingActionButton getActionButton() {
 		return actionButton;
+	}
+
+	protected void setupDaysTabs(TabLayout daysTabLayout, ViewPager daysPager, DayFragmentAdapter adapter, int dateIndexToSelect) {
+		int days = Convention.getInstance().getLengthInDays();
+		if (days == 1) {
+			daysTabLayout.setVisibility(View.GONE);
+		}
+
+		Drawable tabIndicator = ThemeAttributes.getDrawable(this, R.attr.selectedTabIndicator);
+		if (tabIndicator != null) {
+			daysTabLayout.setSelectedTabIndicator(tabIndicator);
+		}
+
+		// Setup view pager
+		daysPager.setAdapter(adapter);
+		daysPager.setOffscreenPageLimit(days); // Load all dates for smooth scrolling
+
+		// Setup tabs
+		daysTabLayout.setupWithViewPager(daysPager, false);
+
+		int selectedDateIndex = dateIndexToSelect;
+		// Find the current date's index if requested
+		if (dateIndexToSelect == SELECT_CURRENT_DATE) {
+			selectedDateIndex = adapter.getItemToDisplayForDate(Dates.toCalendar(Dates.now()));
+		}
+
+		// Default - first day
+		if (selectedDateIndex < 0) {
+			selectedDateIndex = 0;
+		}
+		daysPager.setCurrentItem(selectedDateIndex, false);
 	}
 
 	public void onConventionEventClicked(View view) {

@@ -108,6 +108,8 @@
         <attr name="tabsBackground" format="color|reference"/>
         <!-- Color for selected tab indicator -->
         <attr name="selectedTabIndicatorColor" format="color|reference"/>
+        <!-- Custom tab indicator for days tabs. If null, the default will be used. -->
+        <attr name="selectedTabIndicator" format="integer|reference"/>
         <!-- Text color for tab which is not selected -->
         <attr name="unselectedTabTextColor" format="color|reference"/>
         <!-- Text color for selected tab -->
@@ -688,32 +690,32 @@
     </declare-styleable>
 
     <declare-styleable name="HomeState">
-        <attr name="state_home_before_con" type="bool"/>
-        <attr name="state_home_during_con" type="bool"/>
+        <attr name="state_home_before_con" type="boolean"/>
+        <attr name="state_home_during_con" type="boolean"/>
         <attr name="state_home_has_favorites" format="boolean"/>
-        <attr name="state_home_after_con" type="bool"/>
-        <attr name="state_home_has_current" type="bool"/>
-        <attr name="state_home_has_upcoming" type="bool"/>
-        <attr name="state_home_is_current" type="bool"/>
-        <attr name="state_home_is_upcoming" type="bool"/>
-        <attr name="state_home_should_send_feedback" type="bool"/>
+        <attr name="state_home_after_con" type="boolean"/>
+        <attr name="state_home_has_current" type="boolean"/>
+        <attr name="state_home_has_upcoming" type="boolean"/>
+        <attr name="state_home_is_current" type="boolean"/>
+        <attr name="state_home_is_upcoming" type="boolean"/>
+        <attr name="state_home_should_send_feedback" type="boolean"/>
     </declare-styleable>
 
     <declare-styleable name="CollapsibleFeedbackViewState">
-        <attr name="state_feedback_text" type="bool"/>
-        <attr name="state_feedback_link" type="bool"/>
-        <attr name="state_feedback_question" type="bool"/>
-        <attr name="state_feedback_answer" type="bool"/>
-        <attr name="state_feedback_answer_selected" type="bool"/>
-        <attr name="state_feedback_answer_type_smiley_5_point" type="bool"/>
-        <attr name="state_feedback_answer_type_radio" type="bool"/>
-        <attr name="state_feedback_answer_type_multi" type="bool"/>
-        <attr name="state_feedback_answer_type_five_stars" type="bool"/>
+        <attr name="state_feedback_text" type="boolean"/>
+        <attr name="state_feedback_link" type="boolean"/>
+        <attr name="state_feedback_question" type="boolean"/>
+        <attr name="state_feedback_answer" type="boolean"/>
+        <attr name="state_feedback_answer_selected" type="boolean"/>
+        <attr name="state_feedback_answer_type_smiley_5_point" type="boolean"/>
+        <attr name="state_feedback_answer_type_radio" type="boolean"/>
+        <attr name="state_feedback_answer_type_multi" type="boolean"/>
+        <attr name="state_feedback_answer_type_five_stars" type="boolean"/>
     </declare-styleable>
 
     <declare-styleable name="UpdateState">
-        <attr name="state_update_new" type="bool"/>
-        <attr name="state_update_focused" type="bool"/>
+        <attr name="state_update_new" type="boolean"/>
+        <attr name="state_update_focused" type="boolean"/>
     </declare-styleable>
 
 
