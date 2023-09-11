@@ -79,6 +79,7 @@
             android:text="@string/updates"
             android:textSize="23sp"
             android:layout_weight="1"
+            android:textColor="?homeGotoUpdatesButtonText"
             android:onClick="onGoToUpdatesClicked"/>
 
     </LinearLayout>

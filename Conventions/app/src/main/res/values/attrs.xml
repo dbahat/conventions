@@ -254,6 +254,8 @@
         <attr name="homeShowButtons" format="boolean"/>
         <!-- Background for "go to updates" button before convention. Default is homeButtonBackground. -->
         <attr name="homeGotoUpdatesButtonBackground" format="integer|reference"/>
+        <!-- Text color for "go to updates" button before convention. Default is homeButtonText. -->
+        <attr name="homeGotoUpdatesButtonText" format="integer|reference"/>
 
         <!-- My Events Screen -->
 

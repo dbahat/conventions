@@ -48,7 +48,7 @@
         <item name="eventTimeHeaderWidth">wrap_content</item>
         <item name="eventTimeHeaderTextColor">?eventTextColor</item>
         <item name="eventDateHeaderTextColor">?eventTimeHeaderTextColor</item>
-        <item name="freeTimeTextColor">?eventTimeTextColor</item>
+        <item name="freeTimeTextColor">?eventTextColor</item>
         <item name="eventTimeHeaderMarginTop">10dp</item>
         <item name="eventTimeHeaderMarginBottom">0dp</item>
         <item name="eventTimeHeaderPaddingHorizontal">30dp</item>
@@ -93,6 +93,7 @@
         <item name="homeButtonsSideMargin">0dp</item>
         <item name="homeSingleButtonStyle">@style/HomeButton.Single</item>
         <item name="homeGotoUpdatesButtonBackground">?homeButtonBackground</item>
+        <item name="homeGotoUpdatesButtonText">?homeButtonText</item>
         <item name="homeShowCurrentUpcomingTitles">false</item>
         <item name="homeEventTimeText">?attr/homeContentText</item>
         <item name="homeEventHallText">?attr/homeContentText</item>
@@ -283,6 +284,7 @@
         <item name="homeButtonsSideMargin">0dp</item>
         <item name="homeSingleButtonStyle">@style/HomeButton.Single</item>
         <item name="homeGotoUpdatesButtonBackground">?homeButtonBackground</item>
+        <item name="homeGotoUpdatesButtonText">?homeButtonText</item>
         <item name="homeShowCurrentUpcomingTitles">false</item>
         <item name="homeEventTimeText">?attr/homeContentText</item>
         <item name="homeEventHallText">?attr/homeContentText</item>
