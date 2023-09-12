@@ -145,7 +145,7 @@ public abstract class Convention implements Serializable {
 
 	private void initFeedback() {
 		feedback = new Survey().withQuestions(
-				new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_LIKED_5P, FeedbackQuestion.AnswerType.SMILEY_5_POINTS),
+				new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_LIKED_5S, FeedbackQuestion.AnswerType.FIVE_STARS),
 				new FeedbackQuestion(FeedbackQuestion.QUESTION_ID_IMPROVEMENT, FeedbackQuestion.AnswerType.TEXT)
 		);
 	}

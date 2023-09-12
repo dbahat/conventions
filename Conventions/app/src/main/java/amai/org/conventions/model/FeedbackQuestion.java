@@ -29,6 +29,10 @@ public class FeedbackQuestion {
 	public static final int QUESTION_ID_SIMILAR_EVENTS_5P = 13;
 	public static final int QUESTION_ID_LIKED_5P = 18;
 
+	public static final int QUESTION_ID_ENJOYMENT_5S = 21;
+
+	public static final int QUESTION_ID_LIKED_5S = 28;
+
 	private static final Map<Integer, Integer> questions = initQuestions();
 	private static final Map<Integer, List<Integer>> questionToMultipleAnswers = initMultipleAnswers();
 
@@ -36,6 +40,7 @@ public class FeedbackQuestion {
 		Map<Integer, Integer> questions = new HashMap<>();
 		questions.put(QUESTION_ID_ENJOYMENT, R.string.question_enjoyment);
 		questions.put(QUESTION_ID_ENJOYMENT_5P, R.string.question_enjoyment);
+		questions.put(QUESTION_ID_ENJOYMENT_5S, R.string.question_enjoyment);
 		questions.put(QUESTION_ID_LECTURER_QUALITY, R.string.question_lecturer_quality);
 		questions.put(QUESTION_ID_LECTURER_QUALITY_5P, R.string.question_lecturer_quality);
 		questions.put(QUESTION_ID_SIMILAR_EVENTS, R.string.question_similar_events);
@@ -44,6 +49,7 @@ public class FeedbackQuestion {
 		questions.put(QUESTION_ID_AGE, R.string.question_age);
 		questions.put(QUESTION_ID_LIKED, R.string.question_liked);
 		questions.put(QUESTION_ID_LIKED_5P, R.string.question_liked);
+		questions.put(QUESTION_ID_LIKED_5S, R.string.question_liked);
 		questions.put(QUESTION_ID_IMPROVEMENT, R.string.question_improvement);
 		questions.put(QUESTION_ID_MAP_SIGNS, R.string.question_map_signs);
 		questions.put(QUESTION_ID_CONFLICTING_EVENTS, R.string.question_conflicting_events);

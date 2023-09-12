@@ -689,7 +689,7 @@ public class EventActivity extends NavigationActivity {
 			} else {
 				formattedLastModifiedDate = Dates.formatDateAndTime(ticketsModifiedDate);
 			}
-			ticketsText += ". " + getString(R.string.last_modified, formattedLastModifiedDate);
+			ticketsText += " (" + getString(R.string.last_modified, formattedLastModifiedDate) + ")";
 		}
 
 		availableTickets.setText(ticketsText);
