@@ -16,11 +16,11 @@
         <!-- Used in: default unselected checkbox color and default "medium/small" texts (e.g. in settings). -->
         <item name="android:textColorSecondary">@color/icon2023_brown3</item>
         <item name="android:colorBackground">@null</item>
-        <item name="android:textColorHint">@color/icon2023_brown2</item>
-        <item name="android:textColorLink">@color/icon2023_blue</item>
+        <item name="android:textColorHint">@color/icon2023_brown3</item>
+        <item name="android:textColorLink">@color/icon2023_brown2</item>
         <item name="actionButtonColor">@color/icon2023_blue</item>
         <item name="actionButtonIcon">@drawable/search</item>
-        <item name="hintTextColor">@color/icon2023_brown2</item>
+        <item name="hintTextColor">@color/icon2023_green5</item>
         <item name="swipeToRefreshColor">@color/icon2023_brown7</item>
         <item name="swipeToRefreshBackgroundColor">@color/icon2023_brown3</item>
         <item name="snackbarActionColor">@color/icon2023_brown2</item>
