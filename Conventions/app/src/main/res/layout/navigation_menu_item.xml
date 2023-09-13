@@ -17,6 +17,8 @@
         android:drawablePadding="5dp"
         android:paddingTop="?navigationPopupItemPaddingTop"
         android:paddingBottom="?navigationPopupItemPaddingBottom"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="?navigationPopupNotSelectedColor"
         app:compoundDrawableHeight="24dp"
