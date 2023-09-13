@@ -146,11 +146,16 @@
         <item name="conventionFeedbackTextColor">@drawable/icon2023_feedback_text_color</item>
         <item name="feedbackEventDateHeaderTextColor">@color/icon2023_brown1</item>
         <!-- Updates Screen -->
-        <item name="updateItemBorder">@color/white</item>
+        <item name="updateTimeBackground">@null</item>
+        <item name="updateTimeColor">@color/icon2023_green3</item>
+        <item name="showNewUpdateIndicator">true</item>
+        <item name="newUpdateIndicatorTextColor">@color/white</item>
+        <item name="newUpdateIndicatorBackground">@drawable/icon2023_new_update_indicator_background</item>
+        <item name="updateItemSeparator">@color/transparent</item>
+        <item name="updateBackground">@drawable/icon2023_update_background</item>
         <item name="updateTextColor">@drawable/icon2023_update_text_color</item>
-        <item name="updateItemSeparator">@null</item>
-        <item name="updateTimeBackground">@color/icon2023_brown6</item>
-        <item name="updateTimeColor">@color/white</item>
+        <item name="updateElevation">2dp</item>
+        <item name="updateItemBorder">?borderlessButtonColor</item>
         <item name="updatesSeparatorColor">@color/transparent</item>
         <!-- Event Screen -->
         <item name="eventToolbarColor">?toolbarBackground</item>

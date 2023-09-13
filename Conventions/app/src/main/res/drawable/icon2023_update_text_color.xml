@@ -2,7 +2,6 @@
 <selector
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:color="@color/icon2023_brown3" app:state_update_focused="true" />
-    <item android:color="@color/icon2023_brown2" app:state_update_new="true" />
-    <item android:color="@color/icon2023_brown1" />
+    <item android:color="@color/icon2023_brown7" app:state_update_focused="true" />
+    <item android:color="@color/icon2023_brown7" />
 </selector>
