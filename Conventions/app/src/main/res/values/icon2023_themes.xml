@@ -63,6 +63,7 @@
         <item name="navigationPopupSelectedColor">@color/icon2023_brown7</item>
         <item name="navigationPopupSelectedBackground">@color/icon2023_brown1</item>
         <item name="navigationPopupSeparatorColor">@color/icon2023_brown7</item>
+        <item name="navigationItemsShouldDisplayIcon">false</item>
         <!-- About Screen -->
         <item name="aboutLogo">@drawable/icon2023_home_logo</item>
         <item name="aboutLogoMargins">20dp</item>
