@@ -2,5 +2,10 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:drawable="@drawable/icon2023_home_bottom" app:state_home_during_con="true"/>
-    <item android:drawable="@drawable/blank"/>
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/transparent"/>
+            <size android:height="3dp" android:width="30dp"/>
+        </shape>
+    </item>
 </selector>
