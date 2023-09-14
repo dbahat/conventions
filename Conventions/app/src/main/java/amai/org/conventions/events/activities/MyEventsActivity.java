@@ -19,10 +19,13 @@ import android.text.style.URLSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.JsonArray;
@@ -63,6 +66,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.app.ShareCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -85,6 +89,9 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 	private Menu menu;
 	private ExecutorService executor;
 	private View userIdDialogView;
+
+	private final static float UNKNOWN_BRIGHTNESS = 2; // Brightness can be <0 for preferred or 0-1 for specific brightness
+	private float screenBrightness = UNKNOWN_BRIGHTNESS;
 
 	// Authentication result handlers
 	private final ActivityResultLauncher<Intent> userDetailsAuthResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), this::userDetailsAuthResult);
@@ -293,6 +300,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 			View dialogView = View.inflate(builder.getContext(), R.layout.user_id_layout, null);
 			TextView messageView = dialogView.findViewById(R.id.message);
 			TextView userIdInst = dialogView.findViewById(R.id.show_user_id_inst);
+			SwitchMaterial brightnessSwitch = dialogView.findViewById(R.id.increase_brightness_toggle);
 
 			if (firstLineMessage != null && !firstLineMessage.isEmpty()) {
 				messageView.setText(firstLineMessage);
@@ -331,6 +339,15 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 				return drawable;
 			}, null));
 
+			brightnessSwitch.setChecked(false);
+			brightnessSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+				if (isChecked) {
+					increaseScreenBrightness();
+				} else {
+					resetScreenBrightness();
+				}
+			});
+
 			AlertDialog dialog = builder
 					.setView(dialogView)
 					.setPositiveButton(R.string.ok, null)
@@ -340,7 +357,30 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 						logoutResultLauncher.launch(intent);
 					})
 					.create();
+			dialog.setOnDismissListener(dialog1 -> resetScreenBrightness());
 			dialog.show();
+		}
+	}
+
+	private void increaseScreenBrightness() {
+		WindowManager.LayoutParams layout = getWindow().getAttributes();
+		Log.i(TAG, "current brightness: " + layout.screenBrightness);
+		if (layout.screenBrightness < 1) {
+			Log.i(TAG, "setting brightness to 1");
+			this.screenBrightness = layout.screenBrightness;
+			layout.screenBrightness = 1;
+			getWindow().setAttributes(layout);
+		}
+	}
+
+	private void resetScreenBrightness() {
+		Log.i(TAG, "saved brightness: " + this.screenBrightness);
+		if (this.screenBrightness != UNKNOWN_BRIGHTNESS) {
+			Log.i(TAG, "resetting brightness");
+			WindowManager.LayoutParams layout = getWindow().getAttributes();
+			layout.screenBrightness = this.screenBrightness;
+			this.screenBrightness = UNKNOWN_BRIGHTNESS;
+			getWindow().setAttributes(layout);
 		}
 	}
 
