@@ -82,7 +82,7 @@ public class Icon2023Convention extends SffConvention {
 
 	@Override
 	protected ConventionStorage initStorage() {
-		return new ConventionStorage(this, R.raw.olamot2023_convention_events, 0);
+		return new ConventionStorage(this, R.raw.icon2023_convention_events, 0);
 	}
 
 	@Override
