@@ -109,6 +109,7 @@
         <item name="eventFeedbackIconColor">@drawable/icon2023_feedback_icon_color</item>
         <item name="eventStartMargin">0dp</item>
         <item name="conflictingEventBackground">@drawable/icon2023_conflicting_event_label_bg</item>
+        <item name="logoutButtonTextColor">@color/icon2023_red2</item>
         <!-- Programme Screen -->
         <item name="eventTimeHeaderTextColor">@color/white</item>
         <item name="eventTimeHeaderBackground">@drawable/icon2023_event_time_header</item>
