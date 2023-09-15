@@ -210,7 +210,7 @@
     </style>
 
     <style name="AppBaseTheme.Icon2023.Event" parent="AppBaseTheme.Icon2023">
-        <item name="android:textColorLink">@color/icon2023_blue</item>
+        <item name="android:textColorLink">@color/icon2023_blue4</item>
     </style>
 
     <style name="AppBaseTheme.Icon2023.Settings" parent="AppBaseTheme.Icon2023">
