@@ -71,6 +71,7 @@
         <item name="conflictingEventsGroupSeparator">@null</item>
         <item name="conflictingEventsGroupSeparatorHeight">0dp</item>
         <item name="conflictingEventsGroupSeparatorMargin">0dp</item>
+        <item name="logoutButtonTextColor">@color/transparent</item>
 
         <!-- Navigation popup -->
         <item name="navigationPopupSeparatorColor">?navigationPopupNotSelectedColor</item>
@@ -279,6 +280,7 @@
         <item name="conflictingEventsGroupSeparator">@null</item>
         <item name="conflictingEventsGroupSeparatorHeight">0dp</item>
         <item name="conflictingEventsGroupSeparatorMargin">0dp</item>
+        <item name="logoutButtonTextColor">@color/transparent</item>
 
         <!-- Navigation popup -->
         <item name="navigationPopupSeparatorColor">?navigationPopupNotSelectedColor</item>

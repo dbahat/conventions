@@ -359,6 +359,11 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 					.create();
 			dialog.setOnDismissListener(dialog1 -> resetScreenBrightness());
 			dialog.show();
+
+			int logoutButtonColor = ThemeAttributes.getColor(this, R.attr.logoutButtonTextColor);
+			if (logoutButtonColor != Color.TRANSPARENT) {
+				dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(logoutButtonColor);
+			}
 		}
 	}
 
