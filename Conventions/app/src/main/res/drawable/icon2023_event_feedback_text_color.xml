@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:color="@color/icon2023_brown2" app:state_feedback_answer="true" app:state_feedback_answer_selected="true" app:state_feedback_answer_type_multi="true"/>
     <item android:color="@color/icon2023_brown6" app:state_feedback_answer="true"/>
+    <item android:color="@color/icon2023_brown6" app:state_feedback_link="true"/>
     <item android:color="@color/icon2023_brown7"/>
 </selector>

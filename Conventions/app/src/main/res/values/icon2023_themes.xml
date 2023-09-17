@@ -26,7 +26,7 @@
         <item name="snackbarActionColor">@color/icon2023_brown2</item>
         <item name="highlightedButtonBackground">@drawable/highlighted_button</item>
         <item name="borderlessButtonColor">@color/icon2023_brown6</item>
-        <item name="activitiesBackground">@color/icon2023_green4</item>
+        <item name="activitiesBackground">@drawable/icon2023_activities_background</item>
         <item name="contentStartMargin">0dp</item>
         <item name="contentEndMargin">0dp</item>
         <item name="eventListDivider">@drawable/icon2023_event_list_divider</item>
@@ -71,7 +71,7 @@
         <item name="homeBoxTopMargin">10dp</item>
         <item name="homeSingleButtonTopMargin">10dp</item>
         <item name="homeButtonsSideMargin">0dp</item>
-        <item name="homeBackground">@color/icon2023_green4</item>
+        <item name="homeBackground">?activitiesBackground</item>
         <item name="homeLogo">@drawable/icon2023_home_logo_selector</item>
         <item name="homeLogoMargin">5dp</item>
         <item name="homeFrameTopMargin">5dp</item>
@@ -237,7 +237,7 @@
     </style>
 
     <style name="AppBaseTheme.Icon2023.Splash">
-        <item name="android:windowBackground">@color/icon2023_green4</item>
+        <item name="android:windowBackground">@drawable/icon2023_activities_background</item>
     </style>
 
      <style name="TransparentTheme.Icon2023" parent="TransparentTheme">
