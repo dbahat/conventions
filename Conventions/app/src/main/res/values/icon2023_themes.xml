@@ -185,8 +185,8 @@
         <item name="eventVoteBoxColor">@color/icon2023_blue</item>
         <item name="eventVoteTextColor">@color/white</item>
         <!-- Map Screen -->
-        <item name="locationDetailsBackground">@color/icon2023_brown3</item>
-        <item name="locationDetailsTitleColor">@color/black</item>
+        <item name="locationDetailsBackground">@color/icon2023_brown2</item>
+        <item name="locationDetailsTitleColor">@color/icon2023_brown7</item>
         <item name="mapBackground">?activitiesBackground</item>
         <item name="floorChangeBackground">@color/icon2023_brown4</item>
         <item name="standIconColor">@color/icon2023_brown7</item>
@@ -194,11 +194,11 @@
         <item name="mapSearchText">@color/icon2023_brown7</item>
         <item name="mapSearchFiltersBackground">@color/icon2023_brown1</item>
         <item name="mapSearchResultsBackground">@color/icon2023_transparent_brown1</item>
-        <item name="mapSearchHint">@color/icon2023_brown3</item>
-        <item name="mapSearchSeparator">@color/black</item>
-        <item name="mapSearchResultsDivider">@color/black</item>
-        <item name="mapSearchBorder">@color/black</item>
-        <item name="mapSearchCheckboxTint">@color/icon2023_brown3</item>
+        <item name="mapSearchHint">@color/icon2023_brown4</item>
+        <item name="mapSearchSeparator">@color/icon2023_brown7</item>
+        <item name="mapSearchResultsDivider">@color/icon2023_brown7</item>
+        <item name="mapSearchBorder">@color/icon2023_brown7</item>
+        <item name="mapSearchCheckboxTint">@color/icon2023_brown4</item>
         <!-- Second Hand Screen -->
         <item name="secondHandFormColor">@drawable/icon2023_second_hand_form_text_color</item>
         <item name="secondHandItemStatusColor">@drawable/icon2023_second_hand_item_status_text_color</item>
