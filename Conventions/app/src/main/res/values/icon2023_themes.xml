@@ -178,7 +178,7 @@
         <item name="eventDescriptionTextColor">@color/icon2023_brown7</item>
         <item name="eventFeedbackBoxColor">@drawable/icon2023_brown2_round</item>
         <item name="eventFeedbackTextColor">@drawable/icon2023_event_feedback_text_color</item>
-        <item name="eventFeedbackProgressBarColor">@color/icon2023_brown1</item>
+        <item name="eventFeedbackProgressBarColor">@color/icon2023_blue4</item>
         <item name="eventFeedbackButtonBackground">@drawable/highlighted_button</item>
         <item name="eventFeedbackButtonTextColor">@drawable/icon2023_highlighted_button_text_color</item>
         <item name="feedbackButtonColor">@color/icon2023_brown6</item>
