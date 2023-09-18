@@ -185,20 +185,25 @@
         <item name="eventVoteBoxColor">@color/icon2023_blue</item>
         <item name="eventVoteTextColor">@color/white</item>
         <!-- Map Screen -->
-        <item name="locationDetailsBackground">@color/icon2023_brown2</item>
-        <item name="locationDetailsTitleColor">@color/icon2023_brown7</item>
         <item name="mapBackground">?activitiesBackground</item>
+        <item name="locationDetailsBackground">@color/icon2023_brown2</item>
+        <item name="locationDetailsTopLineColor">@color/transparent</item>
+        <item name="locationDetailsTitleColor">@color/icon2023_brown7</item>
+        <item name="locationDetailsElevation">3dp</item>
         <item name="floorChangeBackground">@color/icon2023_brown4</item>
-        <item name="standIconColor">@color/icon2023_brown7</item>
-        <item name="standsTypeTitleColor">@color/icon2023_brown6</item>
-        <item name="mapSearchText">@color/icon2023_brown7</item>
         <item name="mapSearchFiltersBackground">@color/icon2023_brown1</item>
         <item name="mapSearchResultsBackground">@color/icon2023_transparent_brown1</item>
-        <item name="mapSearchHint">@color/icon2023_brown4</item>
-        <item name="mapSearchSeparator">@color/icon2023_brown7</item>
-        <item name="mapSearchResultsDivider">@color/icon2023_brown7</item>
-        <item name="mapSearchBorder">@color/icon2023_brown7</item>
-        <item name="mapSearchCheckboxTint">@color/icon2023_brown4</item>
+        <item name="mapSearchBorder">@color/icon2023_brown1</item>
+        <item name="mapSearchPaneElevation">10dp</item>
+        <item name="mapSearchText">@color/icon2023_brown7</item>
+        <item name="mapSearchSeparator">@color/icon2023_brown6</item>
+        <item name="mapSearchResultsDivider">@drawable/icon2023_map_search_results_divider</item>
+        <item name="mapSearchCheckboxTint">@color/icon2023_brown6</item>
+        <item name="mapSearchHint">@color/icon2023_brown6</item>
+        <item name="mapSearchBarBackground">@drawable/icon2023_search_bar_background</item>
+        <item name="mapSearchBarHorizontalMargins">5dp</item>
+        <item name="standIconColor">@color/icon2023_brown7</item>
+        <item name="standsTypeTitleColor">@color/icon2023_brown6</item>
         <!-- Second Hand Screen -->
         <item name="secondHandFormColor">@drawable/icon2023_second_hand_form_text_color</item>
         <item name="secondHandItemStatusColor">@drawable/icon2023_second_hand_item_status_text_color</item>
