@@ -70,7 +70,8 @@
             android:theme="@style/AppBaseTheme.Icon2023.Settings"></activity>
         <activity android:name="amai.org.conventions.DiscountsActivity"></activity>
         <activity android:name="amai.org.conventions.AboutActivity"></activity>
-        <activity android:name="amai.org.conventions.HomeActivity" android:screenOrientation="portrait"/>
+        <activity android:name="amai.org.conventions.HomeActivity" android:screenOrientation="portrait"
+            android:theme="@style/AppBaseTheme.Icon2023.Home"/>
         <activity android:name="amai.org.conventions.secondhand.SecondHandActivity" />
         <activity android:name="amai.org.conventions.WebContentActivity$IconKidsActivity" />
         <activity android:name="amai.org.conventions.WebContentActivity$AccessibilityActivity" android:exported="true">

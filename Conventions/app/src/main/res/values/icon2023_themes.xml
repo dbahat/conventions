@@ -224,6 +224,10 @@
          <item name="android:textColorSecondary">@color/white</item>
     </style>
 
+     <style name="AppBaseTheme.Icon2023.Home">
+          <item name="toolbarLogo">@drawable/ic_menu_white_24dp</item>
+     </style>
+
 
     <style name="AppDialogTheme.Icon2023" parent="Theme.AppCompat.Light.Dialog">
         <!-- This is the default starting API23. In any case the title is always left-justified so it's best to not use it. -->
