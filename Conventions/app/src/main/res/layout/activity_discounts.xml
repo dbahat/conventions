@@ -17,27 +17,29 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/discounts_overview"
+            android:text="@string/discounts_main_title"
             android:layout_marginBottom="20dp"
-            android:textSize="14sp"
+            android:textSize="18sp"
             android:textColor="?android:textColorPrimary"
             />
 
 
-        <amai.org.conventions.customviews.AspectRatioImageView
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/discounts_aroma"
-            android:layout_marginBottom="15dp"/>
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@string/discounts_restaurants_title"
+            android:layout_marginBottom="20dp"
+            android:textSize="16sp"
             android:textColor="?android:textColorPrimary"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/discounts_restaurants_overview"
+            android:layout_marginBottom="20dp"
             android:textSize="14sp"
-            android:text="@string/discounts_aroma"
-            android:layout_marginBottom="30dp"/>
-
+            android:textColor="?android:textColorPrimary"
+            />
 
         <amai.org.conventions.customviews.AspectRatioImageView
             android:layout_width="150dp"
@@ -53,6 +55,19 @@
             android:text="@string/discounts_suduch"
             android:layout_marginBottom="30dp"/>
 
+        <amai.org.conventions.customviews.AspectRatioImageView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/discounts_aroma"
+            android:layout_marginBottom="15dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="14sp"
+            android:text="@string/discounts_aroma"
+            android:layout_marginBottom="30dp"/>
 
         <amai.org.conventions.customviews.AspectRatioImageView
             android:layout_width="150dp"
@@ -68,7 +83,6 @@
             android:text="@string/discounts_tlab"
             android:layout_marginBottom="30dp"/>
 
-
         <amai.org.conventions.customviews.AspectRatioImageView
             android:layout_width="150dp"
             android:layout_height="wrap_content"
@@ -83,23 +97,123 @@
             android:text="@string/discounts_oban_koban"
             android:layout_marginBottom="30dp"/>
 
+        <amai.org.conventions.customviews.AspectRatioImageView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/discounts_memphis"
+            android:layout_marginBottom="15dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="14sp"
+            android:text="@string/discounts_memphis"
+            android:layout_marginBottom="30dp"/>
 
-<!--        <amai.org.conventions.customviews.AspectRatioImageView-->
-<!--            android:layout_width="150dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:src="@drawable/discounts_memphis"-->
-<!--            android:layout_marginBottom="15dp"/>-->
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textColor="?android:textColorPrimary"-->
-<!--            android:textSize="14sp"-->
-<!--            android:text="@string/discounts_memphis"-->
-<!--            android:layout_marginBottom="30dp"/>-->
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/discounts_title"
+            android:layout_marginBottom="20dp"
+            android:textSize="16sp"
+            android:textColor="?android:textColorPrimary"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/discounts_overview"
+            android:layout_marginBottom="20dp"
+            android:textSize="14sp"
+            android:textColor="?android:textColorPrimary"
+            />
 
-<!--        <TextView-->
+        <amai.org.conventions.customviews.AspectRatioImageView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/discounts_dizengoff_center"
+            android:layout_marginBottom="15dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="14sp"
+            android:text="@string/discounts_dizengoff_center"
+            android:layout_marginBottom="30dp"/>
+
+        <amai.org.conventions.customviews.AspectRatioImageView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/discounts_evrit"
+            android:layout_marginBottom="15dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="14sp"
+            android:text="@string/discounts_evrit"
+            android:layout_marginBottom="30dp"/>
+
+        <amai.org.conventions.customviews.AspectRatioImageView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/discounts_pundak"
+            android:layout_marginBottom="15dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="14sp"
+            android:text="@string/discounts_pundak"
+            android:layout_marginBottom="30dp"/>
+
+        <amai.org.conventions.customviews.AspectRatioImageView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/discounts_kingdom"
+            android:layout_marginBottom="15dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="14sp"
+            android:text="@string/discounts_kingdom"
+            android:layout_marginBottom="30dp"/>
+
+        <amai.org.conventions.customviews.AspectRatioImageView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/discounts_escape_room"
+            android:layout_marginBottom="15dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="14sp"
+            android:text="@string/discounts_escape_room"
+            android:layout_marginBottom="30dp"/>
+
+        <amai.org.conventions.customviews.AspectRatioImageView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/discounts_oz"
+            android:layout_marginBottom="15dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="14sp"
+            android:text="@string/discounts_oz"
+            android:layout_marginBottom="30dp"/>
+
+        <!--        <TextView-->
 <!--            android:layout_width="150dp"-->
 <!--            android:layout_height="wrap_content"-->
 <!--            android:layout_gravity="center"-->
@@ -114,5 +228,167 @@
 <!--            android:textSize="14sp"-->
 <!--            android:text="@string/discounts_parking_details"-->
 <!--            android:layout_marginBottom="30dp"/>-->
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/discounts_special_title"
+            android:layout_marginBottom="20dp"
+            android:textSize="16sp"
+            android:textColor="?android:textColorPrimary"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/discounts_special_overview"
+            android:layout_marginBottom="20dp"
+            android:textSize="14sp"
+            android:textColor="?android:textColorPrimary"
+            />
+
+        <amai.org.conventions.customviews.AspectRatioImageView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/discounts_antuquities"
+            android:layout_marginBottom="15dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="14sp"
+            android:text="@string/discounts_antuquities"
+            android:layout_marginBottom="30dp"/>
+
+        <amai.org.conventions.customviews.AspectRatioImageView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/discounts_legion501"
+            android:layout_marginBottom="15dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="14sp"
+            android:text="@string/discounts_legion501"
+            android:layout_marginBottom="30dp"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/discounts_sponsors_title"
+            android:layout_marginBottom="20dp"
+            android:textSize="16sp"
+            android:textColor="?android:textColorPrimary"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/discounts_sponsors_overview"
+            android:layout_marginBottom="20dp"
+            android:textSize="14sp"
+            android:textColor="?android:textColorPrimary"
+            />
+
+        <amai.org.conventions.customviews.AspectRatioImageView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/discounts_dizengoff_center_sponsor"
+            android:layout_marginBottom="15dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="14sp"
+            android:text="@string/discounts_dizengoff_center_sponsor"
+            android:layout_marginBottom="30dp"/>
+
+        <amai.org.conventions.customviews.AspectRatioImageView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/discounts_emily"
+            android:layout_marginBottom="15dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="14sp"
+            android:text="@string/discounts_emily"
+            android:layout_marginBottom="30dp"/>
+
+        <amai.org.conventions.customviews.AspectRatioImageView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/discounts_comikaza"
+            android:layout_marginBottom="15dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="14sp"
+            android:text="@string/discounts_comikaza"
+            android:layout_marginBottom="30dp"/>
+
+        <amai.org.conventions.customviews.AspectRatioImageView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/discounts_lyra"
+            android:layout_marginBottom="15dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="14sp"
+            android:text="@string/discounts_lyra"
+            android:layout_marginBottom="30dp"/>
+
+        <amai.org.conventions.customviews.AspectRatioImageView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/discounts_gaming_land"
+            android:layout_marginBottom="15dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="14sp"
+            android:text="@string/discounts_gaming_land"
+            android:layout_marginBottom="30dp"/>
+
+        <amai.org.conventions.customviews.AspectRatioImageView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/discounts_kingdom"
+            android:layout_marginBottom="15dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="14sp"
+            android:text="@string/discounts_kingdom_sponsor"
+            android:layout_marginBottom="30dp"/>
+
+<!--        <amai.org.conventions.customviews.AspectRatioImageView-->
+<!--            android:layout_width="150dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:src="@drawable/discounts_national_geographic_kids"-->
+<!--            android:layout_marginBottom="15dp"/>-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="14sp"
+            android:text="@string/discounts_national_geographic_kids"
+            android:layout_marginBottom="30dp"/>
     </LinearLayout>
 </ScrollView>

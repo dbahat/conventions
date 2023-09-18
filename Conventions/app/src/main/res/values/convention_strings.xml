@@ -100,15 +100,37 @@
 <p><strong>כניסה מוקדמת לאירועים</strong><strong>:</strong> אנשים עם מוגבלות יוכלו להיכנס לאירועים מוקדם וללא תור בהצגת תג <strong>קדימות בנגישות</strong> או תעודת נכה. לכניסה מהירה אנא פנו לסדרן. את תג<strong> קדימות בנגישות</strong> תוכלו לאסוף בדוכני מודיעין הפסטיבל, הפזורים ברחבי המתחם.</p>
 <p><strong>כניסה עם כלבי שירות:</strong> כניסה עם כלבי שירות מותרת לכלל סוגי כלבי השירות. ככלל, אין להיכנס למתחם הפסטיבל עם כלבים שאינם כלבי שירות.</p>
 ]]></string>
-    <string name="discounts_overview">באי הכנס של עולמות 2023 זכאים להטבות במגוון חנויות באיזור מתחם הכנס!\n
-המסעדות הבאות מעניקות הנחה בהצגת כרטיס או תג של הכנס, במהלך שני הימים של הכנס:</string>
-    <string name="discounts_memphis">ממפיס, רחוב קרליבך 20. כשר בשר חלק, ירק מהדרין. 10% הנחה.</string>
-    <string name="discounts_aroma">ארומה סניף הארבעה – 10% הנחה</string>
-    <string name="discounts_suduch">סודוך סניף קרליבך – סודוך טוסט ב-29 ש\"ח</string>
-    <string name="discounts_tlab">ויסוצקי Tlab החשמונאים – תוספת באבל פירותי חינם</string>
-    <string name="discounts_oban_koban">אובן קובן הארבעה 16 – 10% הנחה</string>
+    <string name="discounts_main_title">הטבות וחסויות</string>
+    <string name="discounts_restaurants_title">הנחות במסעדות</string>
+    <string name="discounts_restaurants_overview">המסעדות הבאות מעניקות הנחה בהצגת כרטיס או תג של הפסטיבל, במהלך שלושת ימי הפסטיבל:</string>
+    <string name="discounts_memphis">ממפיס. קרליבך 20. כשר בשר חלק, ירק מהדרין.\n10% הנחה.</string>
+    <string name="discounts_aroma">ארומה. הארבעה 24.\n10% הנחה למעט דילים קיימים בסניף רחוב הארבעה בלבד.</string>
+    <string name="discounts_suduch">סודוך. קרליבך 20. כשר בשרי.\nשתייה ב-3 שקלים בקניית מנה.</string>
+    <string name="discounts_tlab">TLAB. החשמונאים 103.\nתוספת באבלס על חשבון הבית.</string>
+    <string name="discounts_oban_koban">אובן קובן. הארבעה 16.\n10% הנחה בין השעות 11:30-18:00.</string>
+    <string name="discounts_title">הטבות</string>
+    <string name="discounts_overview">העסקים הבאים מעניקים הנחה בהצגת כרטיס או תג של הפסטיבל, במהלך שלושת ימי הפסטיבל:</string>
+    <string name="discounts_dizengoff_center">דיזינגוף סנטר. דיזנגוף 50.\nברד חינם בהצגת כרטיס.</string>
+    <string name="discounts_evrit">עברית ספרים דיגיטלים\nהנחה על כל ספרי ההשקות בפסטיבל ועל המועמדים לפרס גפן.</string>
+    <string name="discounts_pundak">הפונדק\n50% הנחה על כל איי הסערה + סט קוביות מתנה בקניית פאת\'פיינדר בעולמות פראיים.</string>
+    <string name="discounts_kingdom">הממלכה\n10 ש"ח מתנה בהצגת כרטיס/תג.</string>
+    <string name="discounts_escape_room">אסקייפ רום\n10% הנחה למשחק בחדר בריחה ל5 משתתפים ומעלה.\nניתן לממש את ההטבה בימים א׳-ה׳ לחדרי הבריחה \"גיבורי העל\" ו\"פיקסלים\".\nעל מנת לממש את ההטבה יש להזין משחק עם הקוד Icon10 דרך האתר.</string>
+    <string name="discounts_oz">עוץ הוצאה לאור\nסימניית אוריגמי מתנה בהצגת תג.</string>
     <string name="discounts_parking">חניה בחניון גבעון TLV</string>
     <string name="discounts_parking_details">החל מהשעה 16:00 ועד 05:00 למחרת היום, חניה במחיר של 10 ש"ח בלבד למקודדים את כרטיס החנייה בעמדת הקידוד בלובי סינמטק תל אביב (ליד קופות הסינמטק).</string>
+    <string name="discounts_special_title">פעילויות מיוחדות</string>
+    <string name="discounts_special_overview">הארגונים הבאים יקיימו פעילות מיוחדת במהלך פסטיבל אייקון:</string>
+    <string name="discounts_antuquities">רשות העתיקות\n\"משחקי אסטרטגיה בעת העתיקה\" – פעילות משפחות במתחם הקהילתי. הפעילות בחינם.</string>
+    <string name="discounts_legion501">לגיון 501\nאיסוף תרומות ספרים, משחקים, קוספליי ועוד לטובת חלוקה בבתי חולים ומוסדות אחרים.</string>
+    <string name="discounts_sponsors_title">חסויות</string>
+    <string name="discounts_sponsors_overview">העסקים הבאים העניקו חסות לפסטיבל אייקון:</string>
+    <string name="discounts_dizengoff_center_sponsor">דיזינגוף סנטר</string>
+    <string name="discounts_emily">Out&amp;About Emily\'s Boutique</string>
+    <string name="discounts_comikaza">קומקיאזה</string>
+    <string name="discounts_lyra"> Lyra Magical Stuff</string>
+    <string name="discounts_gaming_land">Gaming Land</string>
+    <string name="discounts_kingdom_sponsor">הממלכה</string>
+    <string name="discounts_national_geographic_kids">נשיונל ג\'אוגרפיק קידס</string>
 
     <string name="physical_only_event_desc">האירוע יועבר באופן פיזי בלבד.</string>
     <string name="virtual_only_event_desc">האירוע יועבר באופן וירטואלי בלבד.</string>
