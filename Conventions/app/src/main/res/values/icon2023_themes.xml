@@ -173,7 +173,7 @@
         <item name="eventTypeTextColor">@color/icon2023_brown9</item>
         <item name="eventDetailsBoxColor">@color/transparent</item>
         <item name="eventDetailsTextColor">@color/white</item>
-        <item name="eventDetailsHighlightedTextColor">@color/icon2023_green5</item>
+        <item name="eventDetailsHighlightedTextColor">@color/icon2023_brown2</item>
         <item name="eventDescriptionBoxColor">@drawable/icon2023_brown1_round</item>
         <item name="eventDescriptionTextColor">@color/icon2023_brown7</item>
         <item name="eventFeedbackBoxColor">@drawable/icon2023_brown2_round</item>

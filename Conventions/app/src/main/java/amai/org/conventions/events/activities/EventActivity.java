@@ -552,14 +552,7 @@ public class EventActivity extends NavigationActivity {
 			lecturerName.setText(lecturer);
 		}
 
-		TextView hall = (TextView) findViewById(R.id.event_hall);
-		TextView time = (TextView) findViewById(R.id.event_time);
-
-		if (event.getHall() != null) {
-			hall.setText(event.getHall().getName());
-		} else {
-			hall.setVisibility(View.GONE);
-		}
+		TextView hallAndTime = (TextView) findViewById(R.id.event_hall_and_time);
 
 		String formattedEventTime = String.format("%s%s-%s (%s)",
 				// In case of single day convention, don't show the date
@@ -567,7 +560,12 @@ public class EventActivity extends NavigationActivity {
 				Dates.formatHoursAndMinutes(event.getStartTime()),
 				Dates.formatHoursAndMinutes(event.getEndTime()),
 				Dates.toHumanReadableTimeDuration(event.getEndTime().getTime() - event.getStartTime().getTime()));
-		time.setText(formattedEventTime);
+
+		if (event.getHall() != null) {
+			formattedEventTime = event.getHall().getName() + ", " + formattedEventTime;
+		}
+
+		hallAndTime.setText(formattedEventTime);
 
 		setupEventTicketsAndPrices(event);
 
@@ -580,9 +578,11 @@ public class EventActivity extends NavigationActivity {
 		}
 
 		TextView tags = (TextView) findViewById(R.id.event_tags);
+		View tagsSeparator = findViewById(R.id.event_tags_separator);
 		List<String> eventTags = event.getTags();
 		if (eventTags == null || eventTags.size() == 0) {
 			tags.setVisibility(View.GONE);
+			tagsSeparator.setVisibility(View.GONE);
 		} else {
 			tags.setText(getString(R.string.tags, event.getTagsAsString()));
 		}
@@ -597,12 +597,15 @@ public class EventActivity extends NavigationActivity {
 	}
 
 	private void setupEventTicketsAndPrices(final ConventionEvent event) {
-		ViewGroup ticketsLayout = (ViewGroup) findViewById(R.id.event_tickets);
+		View ticketsSeparator = findViewById(R.id.event_tickets_separator);
+		boolean hideSeparator = true; // Don't hide it if any relevant details is visible
+
 		int eventAvailableTickets = event.getAvailableTickets();
 		boolean soldOut = (eventAvailableTickets == 0);
 		if (eventAvailableTickets < 0) {
-			ticketsLayout.setVisibility(View.GONE);
+			findViewById(R.id.event_tickets).setVisibility(View.GONE);
 		} else {
+			hideSeparator = false;
 			updateTicketsText(event);
 
 			final ImageView updateTicketsButton = findViewById(R.id.event_check_tickets_update);
@@ -644,10 +647,14 @@ public class EventActivity extends NavigationActivity {
 		if (soldOut || event.getPrice() == -1) {
 			prices.setVisibility(View.GONE);
 		} else if (event.getPrice() == 0) {
+			hideSeparator = false;
 			prices.setText(getString(R.string.event_price_free));
 		} else {
+			hideSeparator = false;
 			prices.setText(getString(R.string.event_prices, event.getPrice(), event.getDiscountPrice()));
 		}
+
+		ticketsSeparator.setVisibility(hideSeparator ? View.GONE : View.VISIBLE);
 	}
 
 	private void updateTicketsText(ConventionEvent event) {
