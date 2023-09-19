@@ -479,8 +479,9 @@ public class Icon2023Convention extends SffConvention {
 							.withX(640)
 							.withY(209),
 						new MapLocation()
-							.withName("השטיח האדום")
-							.withPlace(outside)
+//							.withName("השטיח האדום")
+//							.withPlace(outside)
+							.withPlace(new Place().withName("השטיח האדום"))
 							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
 							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
 							.withX(617)
