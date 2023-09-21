@@ -210,17 +210,17 @@ public class Icon2023Convention extends SffConvention {
 				CollectionUtils.flattenList(
 					inFloor(floor,
 						new MapLocation()
-							.withPlace(new Place().withName("כניסה מרחוב דה וינצ'י"))
+							.withPlace(new Place().withName("יציאה בלבד"))
 							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
 							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(155)
+							.withX(170)
 							.withY(48),
 						new MapLocation()
 							.withPlace(new Place().withName("מודיעין"))
 							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
 							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(123)
-							.withY(71),
+							.withX(53)
+							.withY(48),
 						new MapLocation()
 							.withPlace(new Place().withName("דוכנים"))
 							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
@@ -487,7 +487,7 @@ public class Icon2023Convention extends SffConvention {
 							.withX(617)
 							.withY(563),
 						new MapLocation()
-							.withPlace(new Place().withName("יציאת חירום"))
+							.withPlace(new Place().withName("כניסה מרחוב שפרינצק"))
 							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
 							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
 							.withX(612)
