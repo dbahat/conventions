@@ -120,7 +120,7 @@ public class Views {
 				// a radial gradient if it has a value
 				if (view.getBackground() != null && view.getBackground() instanceof GradientDrawable) {
 					GradientDrawable gradient = (GradientDrawable) view.getBackground();
-					float gradientRadius = getGradientRadius(gradient);
+					float gradientRadius = gradient.getGradientRadius();
 					if (gradientRadius > 0) {
 						int viewSize;
 						if (view.getMeasuredHeight() < view.getMeasuredWidth()) {
@@ -135,25 +135,4 @@ public class Views {
 			}
 		});
 	}
-
-	private static float getGradientRadius(GradientDrawable gradient) {
-		if (Build.VERSION.SDK_INT >= 21) {
-			return gradient.getGradientRadius();
-		}
-		// getGradientRadius was added in Lollipop for some reason so we have to use reflection to get it
-		// prior
-		try {
-			Field mGradientStateField = gradient.getClass().getDeclaredField("mGradientState");
-			mGradientStateField.setAccessible(true);
-			Object gradientState = mGradientStateField.get(gradient);
-			Field mGradientRadiusField = gradientState.getClass().getDeclaredField("mGradientRadius");
-			mGradientRadiusField.setAccessible(true);
-			Object gradientRadius = mGradientRadiusField.get(gradientState);
-			return (Float) gradientRadius;
-		} catch (Exception e) {
-			Log.e("amai", "Could not get gradient radius", e);
-			return 0;
-		}
-	}
-
 }
