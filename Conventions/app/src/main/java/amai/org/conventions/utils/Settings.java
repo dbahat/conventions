@@ -24,6 +24,7 @@ public class Settings {
 	private static final String WAS_FEEDBACK_NOTIFICATION_SHOWN = "WasFeedbackNotificationShown";
 	private static final String WAS_LAST_CHANCE_FEEDBACK_NOTIFICATION_SHOWN = "WasLastChanceFeedbackNotificationShown";
 	private static final String WAS_PLAY_SERVICES_INSTALLATION_CANCELLED = "WasPlayServicesInstallationCancelled";
+	private static final String WAS_SETTINGS_POPUP_DISPLAYED = "WasSettingsPopupDisplayed";
 	private static final String LAST_SEEN_PUSH_NOTIFICATION_ID = "LastSeenPushNotificationId";
 	private static final String PROGRAMME_SEARCH_CATEGORIES = "ProgrammeSearchCategories";
 	private static final String LAST_EVENTS_UPDATE_DATE = "LastEventsUpdateDate";
@@ -84,6 +85,14 @@ public class Settings {
 
 	public void setPlayServicesInstallationCancelled() {
 		sharedPreferences.edit().putBoolean(WAS_PLAY_SERVICES_INSTALLATION_CANCELLED, true).apply();
+	}
+
+	public boolean wasSettingsPopupDisplayed() {
+		return sharedPreferences.getBoolean(WAS_SETTINGS_POPUP_DISPLAYED, false);
+	}
+
+	public void setSettingsPopupAsDisplayed() {
+		sharedPreferences.edit().putBoolean(WAS_SETTINGS_POPUP_DISPLAYED, true).apply();
 	}
 
 	public int getLastSeenPushNotificationId() {

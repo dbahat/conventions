@@ -1,7 +1,5 @@
 package amai.org.conventions;
 
-import static android.app.PendingIntent.FLAG_MUTABLE;
-
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -10,11 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
-import androidx.core.app.NotificationCompat;
-import androidx.appcompat.app.AlertDialog;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.NotificationCompat;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -22,21 +15,22 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import amai.org.conventions.model.SecondHandSell;
 import amai.org.conventions.model.SecondHandForm;
+import amai.org.conventions.model.SecondHandSell;
 import amai.org.conventions.model.Update;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.networking.ModelRefresher;
 import amai.org.conventions.networking.UpdatesRefresher;
-import amai.org.conventions.notifications.PlayServicesInstallation;
 import amai.org.conventions.notifications.PushNotification;
 import amai.org.conventions.notifications.PushNotificationTopic;
 import amai.org.conventions.notifications.PushNotificationTopicsSubscriber;
 import amai.org.conventions.secondhand.SecondHandActivity;
-import amai.org.conventions.settings.SettingsActivity;
 import amai.org.conventions.updates.UpdatesActivity;
 import amai.org.conventions.utils.CollectionUtils;
+import androidx.core.app.NotificationCompat;
 import sff.org.conventions.R;
+
+import static android.app.PendingIntent.FLAG_MUTABLE;
 
 public class ApplicationInitializer {
     private static final int NEW_UPDATES_NOTIFICATION_ID = 75457;
@@ -44,8 +38,6 @@ public class ApplicationInitializer {
 
     public void initialize(final Context context) {
         refreshModel();
-        checkGooglePlayServicesAndShowNotificationsWarnings(context);
-
         for (PushNotificationTopic topic : ConventionsApplication.settings.getNotificationTopics()) {
             PushNotificationTopicsSubscriber.subscribe(topic);
         }
@@ -54,7 +46,6 @@ public class ApplicationInitializer {
         }
 
         refreshUpdatesAndNotifyIfNewUpdatesAreAvailable(context);
-
         refreshSecondHand(context);
     }
 
@@ -77,34 +68,6 @@ public class ApplicationInitializer {
 
     private void refreshModel() {
         ModelRefresher.getInstance().refreshFromServer(false, new ModelRefresher.OnModelRefreshFinishedListener() {});
-    }
-
-    // Since push notifications cannot work without google play services, check for play services existence, and if
-    // they don't exist show a proper message to the user.
-    // After the check, inform the user he can change push notification settings in a dialog (one time).
-    private void checkGooglePlayServicesAndShowNotificationsWarnings(final Context context) {
-        new AsyncTask<Void, Void, PlayServicesInstallation.CheckResult>() {
-            private AlertDialog configureNotificationDialog;
-
-            @Override
-            protected PlayServicesInstallation.CheckResult doInBackground(Void... params) {
-                return PlayServicesInstallation.checkPlayServicesExist(context, false);
-            }
-
-            @Override
-            protected void onPostExecute(PlayServicesInstallation.CheckResult checkResult) {
-                // We use the current activity context and not the initial activity because it's possible the user
-                // already navigated from it. We can't use a destroyed activity to display a dialog
-                // since it causes an exception.
-                Context currentContext = ConventionsApplication.getCurrentContext();
-                if (currentContext == null) {
-                    return;
-                }
-                if (checkResult.isUserError()) {
-                    PlayServicesInstallation.showInstallationDialog(currentContext, checkResult);
-                }
-            }
-        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     private void refreshUpdatesAndNotifyIfNewUpdatesAreAvailable(final Context context) {
