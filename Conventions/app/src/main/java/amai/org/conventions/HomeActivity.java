@@ -51,6 +51,8 @@ public class HomeActivity extends NavigationActivity {
 		setToolbarBackground(ThemeAttributes.getDrawable(this, R.attr.homeToolbarBackground));
 		setToolbarTitle(ThemeAttributes.getDrawable(this, R.attr.homeToolbarTitle));
 		setBackground(ThemeAttributes.getDrawable(this, R.attr.homeBackground));
+
+		askForNotificationsPermissions();
 	}
 
 	@Override

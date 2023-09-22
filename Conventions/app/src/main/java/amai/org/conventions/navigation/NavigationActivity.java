@@ -1,9 +1,14 @@
 package amai.org.conventions.navigation;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,6 +31,7 @@ import amai.org.conventions.AboutActivity;
 import amai.org.conventions.AccessibilityActivity;
 import amai.org.conventions.ApplicationInitializer;
 import amai.org.conventions.ArrivalMethodsActivity;
+import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.FeedbackActivity;
 import amai.org.conventions.HomeActivity;
 import amai.org.conventions.R;
@@ -37,15 +43,17 @@ import amai.org.conventions.events.activities.ProgrammeActivity;
 import amai.org.conventions.events.adapters.DayFragmentAdapter;
 import amai.org.conventions.map.MapActivity;
 import amai.org.conventions.model.conventions.Convention;
+import amai.org.conventions.notifications.PlayServicesInstallation;
 import amai.org.conventions.notifications.PushNotification;
 import amai.org.conventions.notifications.PushNotificationDialogPresenter;
 import amai.org.conventions.settings.SettingsActivity;
 import amai.org.conventions.updates.UpdatesActivity;
 import amai.org.conventions.utils.Dates;
-import androidx.annotation.IdRes;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -70,6 +78,8 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	private DrawerLayout navigationDrawer;
 	private PushNotification receivedPushNotification;
 	private NavigationTopButtonsLayout navigationTopButtonsLayout;
+
+	protected static final int NOTIFICATIONS_PERMISSION_REQUEST_CODE = 10;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -487,5 +497,67 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		}
 		Drawable icon = item.getIcon().mutate();
 		icon.setColorFilter(null);
+	}
+
+	protected void askForNotificationsPermissions() {
+		if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+			return;
+		}
+		if (ConventionsApplication.settings.wasSettingsPopupDisplayed() && !ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.POST_NOTIFICATIONS)) {
+			requestNotificationsPermission();
+			return;
+		}
+
+		// Since push notifications cannot work without google play services, check for play services existence, and if
+		// they don't exist show a proper message to the user.
+		// After the check, inform the user he can change push notification settings in a dialog (one time).
+		new AsyncTask<Void, Void, PlayServicesInstallation.CheckResult>() {
+			private AlertDialog configureNotificationDialog;
+
+			@Override
+			protected PlayServicesInstallation.CheckResult doInBackground(Void... params) {
+				return PlayServicesInstallation.checkPlayServicesExist(NavigationActivity.this, false);
+			}
+
+			@Override
+			protected void onPostExecute(PlayServicesInstallation.CheckResult checkResult) {
+				// We use the current activity context and not the initial activity because it's possible the user
+				// already navigated from it. We can't use a destroyed activity to display a dialog
+				// since it causes an exception.
+				Context currentContext = ConventionsApplication.getCurrentContext();
+				if (currentContext == null) {
+					return;
+				}
+				if (checkResult.isUserError()) {
+					PlayServicesInstallation.showInstallationDialog(currentContext, checkResult);
+				} else if (checkResult.isSuccess()) {
+					showConfigureNotificationsDialog(currentContext);
+				}
+			}
+
+			private void showConfigureNotificationsDialog(final Context context) {
+				configureNotificationDialog = new AlertDialog.Builder(context)
+					.setTitle(R.string.configure_notifications)
+					.setMessage(R.string.configure_notifications_dialog_message)
+					.setPositiveButton(R.string.ok, (dialog, which) -> configureNotificationDialog.hide())
+					.setNeutralButton(R.string.change_settings, (dialog, which) -> {
+						configureNotificationDialog.hide();
+						Intent intent = new Intent(context, SettingsActivity.class);
+						context.startActivity(intent);
+					})
+					.setCancelable(true)
+					.show();
+				ConventionsApplication.settings.setSettingsPopupAsDisplayed();
+
+				configureNotificationDialog.setOnDismissListener(dialog -> requestNotificationsPermission());
+			}
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	private void requestNotificationsPermission() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+			// We don't care about the result, if the permissions is blocked the notifications aren't displayed
+			requestPermissions(new String[]{ "android.permission.POST_NOTIFICATIONS" }, NOTIFICATIONS_PERMISSION_REQUEST_CODE);
+		}
 	}
 }
