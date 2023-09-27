@@ -377,12 +377,12 @@
             android:text="@string/discounts_kingdom_sponsor"
             android:layout_marginBottom="30dp"/>
 
-<!--        <amai.org.conventions.customviews.AspectRatioImageView-->
-<!--            android:layout_width="150dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:src="@drawable/discounts_national_geographic_kids"-->
-<!--            android:layout_marginBottom="15dp"/>-->
+        <amai.org.conventions.customviews.AspectRatioImageView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/discounts_national_geographic_kids"
+            android:layout_marginBottom="15dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
