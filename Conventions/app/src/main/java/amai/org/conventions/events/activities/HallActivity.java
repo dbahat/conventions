@@ -1,5 +1,6 @@
 package amai.org.conventions.events.activities;
 
+import android.os.Build;
 import android.os.Bundle;
 import com.google.android.material.tabs.TabLayout;
 import androidx.fragment.app.Fragment;
@@ -33,6 +34,9 @@ public class HallActivity extends NavigationActivity {
 
 		hallName = getIntent().getStringExtra(EXTRA_HALL_NAME);
 		useSlideOutAnimationOnBack = getIntent().getBooleanExtra(EXTRA_USE_SLIDE_OUT_ANIMATION_ON_BACK, false);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE && useSlideOutAnimationOnBack) {
+			overrideActivityTransition(OVERRIDE_TRANSITION_CLOSE, 0, R.anim.slide_out_bottom);
+		}
 
 		setContentInContentContainer(R.layout.activity_hall);
 		setToolbarTitle(hallName);
