@@ -304,7 +304,6 @@ public class ModelRefresherTest {
 				.withHall(new Hall().withName(hall))
 				.withTitle("שם האירוע")
 				.withLecturer("testLecturer")
-				.withLocationTypes(locationTypes)
 				.withId("1");
 	}
 }
