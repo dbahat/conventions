@@ -3,7 +3,6 @@ package amai.org.conventions.notifications;
 import static android.app.PendingIntent.FLAG_CANCEL_CURRENT;
 import static android.app.PendingIntent.FLAG_MUTABLE;
 
-import android.annotation.TargetApi;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -42,7 +41,7 @@ public class LocalNotificationScheduler {
 		if (sharedPreferences.getBoolean(Convention.getInstance().getId().toLowerCase() + "_event_feedback_reminder", false)) {
 			EventNotification eventFeedbackReminderNotification = event.getUserInput().getEventFeedbackReminderNotification();
 			eventFeedbackReminderNotification.setTimeDiffInMillis(
-				ConfigureNotificationsFragment.DEFAULT_POST_EVENT_START_NOTIFICATION_MINUTES * Dates.MILLISECONDS_IN_MINUTE
+				ConfigureNotificationsFragment.DEFAULT_POST_EVENT_END_NOTIFICATION_MINUTES * Dates.MILLISECONDS_IN_MINUTE
 			);
 			scheduleFillFeedbackOnEventNotification(event, event.getEventFeedbackReminderNotificationTime().getTime());
 		}
@@ -57,7 +56,7 @@ public class LocalNotificationScheduler {
 		}
 
 		PendingIntent pendingIntent = createEventNotificationPendingIntent(event, PushNotification.Type.EventAboutToStart);
-		scheduleAlarm(time, pendingIntent, Accuracy.UP_TO_1_MINUTE_EARLIER);
+		scheduleAlarm(time, pendingIntent, Accuracy.SMALLEST_TIME_WINDOW_BEFORE);
 	}
 
 	public void scheduleFillFeedbackOnEventNotification(ConventionEvent event, long time) {
@@ -67,7 +66,7 @@ public class LocalNotificationScheduler {
 		}
 
 		PendingIntent pendingIntent = createEventNotificationPendingIntent(event, PushNotification.Type.EventFeedbackReminder);
-		scheduleAlarm(time, pendingIntent, Accuracy.UP_TO_5_MINUTES_LATER);
+		scheduleAlarm(time, pendingIntent, Accuracy.INACCURATE);
 	}
 
 	public void cancelDefaultEventAlarms(ConventionEvent event) {
@@ -93,38 +92,33 @@ public class LocalNotificationScheduler {
 	}
 
 	public void scheduleNotificationsToFillConventionFeedback() {
-		Calendar twoWeeksPostConventionDate = Calendar.getInstance();
-		twoWeeksPostConventionDate.setTime(Convention.getInstance().getEndDate().getTime());
-		twoWeeksPostConventionDate.add(Calendar.DATE, 14);
-
-		if (Convention.getInstance().getFeedback().isSent()
-				|| Calendar.getInstance().getTimeInMillis() >= twoWeeksPostConventionDate.getTimeInMillis()) {
+		if (Convention.getInstance().getFeedback().isSent() || Convention.getInstance().isFeedbackSendingTimeOver()) {
 			return;
 		}
 
 		if (!ConventionsApplication.settings.wasConventionFeedbackNotificationShown()) {
-			Calendar oneDayPostConventionDate = Calendar.getInstance();
-			oneDayPostConventionDate.setTime(Convention.getInstance().getEndDate().getTime());
-			oneDayPostConventionDate.set(Calendar.HOUR_OF_DAY, 22);
+			Calendar conventionFeedbackNotificationTime = Calendar.getInstance();
+			conventionFeedbackNotificationTime.setTime(Convention.getInstance().getEndDate().getTime());
+			conventionFeedbackNotificationTime.set(Calendar.HOUR_OF_DAY, 22);
 
 			Intent intent = new Intent(context, ShowNotificationReceiver.class)
 					.setAction(PushNotification.Type.ConventionFeedbackReminder.toString())
 					.putExtra(ShowNotificationReceiver.EXTRA_NOTIFICATION_TYPE, PushNotification.Type.ConventionFeedbackReminder.toString());
 			int flags = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? FLAG_MUTABLE : 0;
-			scheduleAlarm(oneDayPostConventionDate.getTimeInMillis(), PendingIntent.getBroadcast(context, 0, intent, flags), Accuracy.INACCURATE);
+			scheduleAlarm(conventionFeedbackNotificationTime.getTimeInMillis(), PendingIntent.getBroadcast(context, 0, intent, flags), Accuracy.INACCURATE);
 		}
 
 		if (!ConventionsApplication.settings.wasConventionLastChanceFeedbackNotificationShown()) {
-			Calendar tenDaysPostConventionDate = Calendar.getInstance();
-			tenDaysPostConventionDate.setTime(Convention.getInstance().getEndDate().getTime());
-			tenDaysPostConventionDate.add(Calendar.DATE, 4);
-			tenDaysPostConventionDate.set(Calendar.HOUR_OF_DAY, 10);
+			Calendar lastChanceNotificationTime = Calendar.getInstance();
+			lastChanceNotificationTime.setTime(Convention.getInstance().getEndDate().getTime());
+			lastChanceNotificationTime.add(Calendar.DATE, 4);
+			lastChanceNotificationTime.set(Calendar.HOUR_OF_DAY, 10);
 
 			Intent intent = new Intent(context, ShowNotificationReceiver.class)
 					.setAction(PushNotification.Type.ConventionFeedbackLastChanceReminder.toString())
 					.putExtra(ShowNotificationReceiver.EXTRA_NOTIFICATION_TYPE, PushNotification.Type.ConventionFeedbackLastChanceReminder.toString());
 			int flags = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? FLAG_MUTABLE : 0;
-			scheduleAlarm(tenDaysPostConventionDate.getTimeInMillis(), PendingIntent.getBroadcast(context, 0, intent, flags), Accuracy.INACCURATE);
+			scheduleAlarm(lastChanceNotificationTime.getTimeInMillis(), PendingIntent.getBroadcast(context, 0, intent, flags), Accuracy.INACCURATE);
 		}
 	}
 
@@ -140,47 +134,24 @@ public class LocalNotificationScheduler {
 	}
 
 	private void scheduleAlarm(long time, PendingIntent pendingIntent, Accuracy accuracy) {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && accuracy != Accuracy.INACCURATE) {
-			scheduleAlarmWhileInDoze(time, pendingIntent);
-		} else {
-			scheduleInaccurateAlarm(time, pendingIntent, accuracy);
-		}
-	}
-
-	@TargetApi(Build.VERSION_CODES.M)
-	private void scheduleAlarmWhileInDoze(long time, PendingIntent pendingIntent) {
-		// Starting Android M the device can enter doze mode, meaning it might not get the notifications in time.
-		// The only API currently available to get the notification to wake up the device is either
-		// the inaccurate setAndAllowWhileIdle() and setExactAndAllowWhileIdle().
-		//
-		// Since there's no option to define a window, we go with the more battery consuming but accurate setExactAndAllowWhileIdle().
-		alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, time, pendingIntent);
-	}
-
-	private void scheduleInaccurateAlarm(long time, PendingIntent pendingIntent, Accuracy accuracy) {
 		// For Kitkat and above, the AlarmService batches notifications to improve battery life at the cost of alarm accuracy.
 		// Since event start notification time is important, schedule them using setWindow, which gives an exact window of time,
 		// allowing for some optimization while being accurate enough.
 		long length;
 		switch (accuracy) {
 			case INACCURATE:
-				scheduleAlarm(time, pendingIntent);
+				scheduleInaccurateAlarm(time, pendingIntent);
 				break;
-			default:
-				if (accuracy == Accuracy.UP_TO_1_MINUTE_EARLIER) {
-					time = time - Dates.MILLISECONDS_IN_MINUTE;
-					length = Dates.MILLISECONDS_IN_MINUTE;
-				} else {
-					length = 5 * Dates.MILLISECONDS_IN_MINUTE;
-				}
+			default: // Accuracy.SMALLEST_TIME_WINDOW_BEFORE
+				// The smallest reliable time window is 10 minutes
+				length = 10 * Dates.MILLISECONDS_IN_MINUTE;
+				time = time - length;
 				alarmManager.setWindow(AlarmManager.RTC_WAKEUP, time, length, pendingIntent);
-
 		}
 	}
 
-	private void scheduleAlarm(long time, PendingIntent pendingIntent) {
-		alarmManager.set(AlarmManager.RTC_WAKEUP, time, pendingIntent);
-	}
+	private void scheduleInaccurateAlarm(long time, PendingIntent pendingIntent) {
+		alarmManager.set(AlarmManager.RTC, time, pendingIntent);	}
 
-	private enum Accuracy {UP_TO_1_MINUTE_EARLIER, UP_TO_5_MINUTES_LATER, INACCURATE}
+	private enum Accuracy {SMALLEST_TIME_WINDOW_BEFORE, INACCURATE}
 }
