@@ -3,7 +3,9 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     tools:context="amai.org.conventions.events.ConfigureNotificationsFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp">
 
     <TextView
         android:layout_width="wrap_content"
@@ -35,14 +37,6 @@
             android:maxWidth="200dp"
             android:text="@string/configure_notification_event_about_to_start_message"
             android:gravity="center|start"/>
-
-        <Button
-            android:id="@+id/configure_notification_before_event_start_time"
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:text="@string/configure_notification_time"
-            style="@style/BorderlessButton"/>
-
     </LinearLayout>
 
     <LinearLayout
@@ -62,14 +56,6 @@
             android:maxWidth="200dp"
             android:text="@string/configure_notification_event_feedback_reminder_message"
             android:gravity="center|start"/>
-
-        <Button
-            android:id="@+id/configure_notification_after_event_end_time"
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:text="@string/configure_notification_time"
-            style="@style/BorderlessButton"/>
-
     </LinearLayout>
 
     <View
