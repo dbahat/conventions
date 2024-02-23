@@ -418,7 +418,7 @@ public abstract class Convention implements Serializable {
 		return null;
 	}
 
-	public ArrayList<ConventionEvent> findEventsByHall(final String hallName) {
+	public List<ConventionEvent> findEventsByHall(final String hallName) {
 		return CollectionUtils.filter(
 				getEvents(),
 				new CollectionUtils.Predicate<ConventionEvent>() {
