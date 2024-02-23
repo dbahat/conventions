@@ -350,6 +350,10 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 				if (result == 0) {
 					result = lhs.getEvent().getStartTime().compareTo(rhs.getEvent().getStartTime());
 				}
+				// If the events also start at the same time, compare by end time
+				if (result == 0) {
+					result = lhs.getEvent().getEndTime().compareTo(rhs.getEvent().getEndTime());
+				}
 
 				return result;
 			}

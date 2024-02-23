@@ -30,6 +30,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import amai.org.conventions.utils.CollectionUtils;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.MotionEventCompat;
@@ -41,6 +42,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.manuelpeinado.imagelayout.ImageLayout;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
@@ -942,25 +944,43 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
 	private void setupHallLocation(final MapLocation location) {
 		ConventionEvent currEvent = null;
+		ConventionEvent alternativeCurrEvent = null; // If there is no next event, we can display 2 current events
 		ConventionEvent nextEvent = null;
+		ConventionEvent alternativeNextEvent = null; // If there is no current event, we can display 2 next events
 		boolean isSingleHall = location.hasSinglePlace() && location.getPlaces().get(0) instanceof Hall;
 		if (isSingleHall) {
-			ArrayList<ConventionEvent> events = Convention.getInstance().findEventsByHall(location.getPlaces().get(0).getName());
+			List<ConventionEvent> events = Convention.getInstance().findEventsByHall(location.getPlaces().get(0).getName());
+			// Only show events that happen today
+			Date now = Dates.now();
+			events = CollectionUtils.filter(events, (event) -> Dates.isSameDate(now, event.getStartTime()));
 			if (events.size() == 0) {
 				isSingleHall = false;
 			} else {
 				Collections.sort(events, new ConventionEventComparator());
 				for (ConventionEvent event : events) {
-					Date now = Dates.now();
-					if (currEvent == null && event.getStartTime().before(now) && event.getEndTime().after(now)) {
-						currEvent = event;
+					if (event.getStartTime().before(now) && event.getEndTime().after(now)) {
+						if (currEvent == null) {
+							currEvent = event;
+						} else if (alternativeCurrEvent == null) {
+							alternativeCurrEvent = event;
+						}
 					}
-					if (nextEvent == null && event.getStartTime().after(now)) {
-						nextEvent = event;
+					if (event.getStartTime().after(now)) {
+						if (nextEvent == null) {
+							nextEvent = event;
+						} else if (alternativeNextEvent == null) {
+							alternativeNextEvent = event;
+						}
 					}
 					if (currEvent != null && nextEvent != null) {
 						break;
 					}
+				}
+				if (currEvent == null) {
+					currEvent = nextEvent;
+					nextEvent = alternativeNextEvent;
+				} else if (nextEvent == null) {
+					nextEvent = alternativeCurrEvent;
 				}
 			}
 		}
