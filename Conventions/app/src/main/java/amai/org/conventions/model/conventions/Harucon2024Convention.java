@@ -33,25 +33,24 @@ import amai.org.conventions.networking.SurveyDataRetriever;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 
-public class Harucon2023Convention extends AmaiConvention {
+public class Harucon2024Convention extends AmaiConvention {
 	// Hall names
 	private static final String MAIN_HALL_NAME = "אולם ראשי";
-	private static final String ORANIM_NAME = "אודיטוריום אורנים";
 	private static final String ESHKOL1_NAME = "אשכול 1";
 	private static final String ESHKOL2_NAME = "אשכול 2";
 	private static final String ESHKOL3_NAME = "אשכול 3";
-	private static final String WORKSHOPS_NAME = "חדר סדנאות";
+	private static final String CONTENT4_NAME = "חדר תוכן 4";
 	private static final String GAMES_NAME = "משחקייה";
-	private static final String COSPLAY_AREA_NAME = "מתחם הקוספליי";
+	private static final String COSPLAY_AREA_NAME = "מתחם קוספליי";
 	// Location names
-	public static final String PARENTS_ROOM_NAME = "חדר הורים";
+	public static final String CHILDREN_ROOM_NAME = "חדר פעוטות";
 
 	// Vote questions - these values are serialized, don't change them!
 	private static final int QUESTION_ID_AMAIDOL_VOTE = 1000;
 	private static final int QUESTION_ID_AMAIDOL_NAME = 1001;
 
 	// Special events server id
-	private static final int EVENT_ID_AMAIDOL = 12431;
+	private static final int EVENT_ID_AMAIDOL = 1775;
 
 	// Ids of google spreadsheets associated with the special events
 	private static final String AMAIDOL_SPREADSHEET_ID = "1u9xu3FNq2gA25oZoVHVguTzJA5HheXWPf2wnUj-iipE";
@@ -98,25 +97,25 @@ public class Harucon2023Convention extends AmaiConvention {
 
 	@Override
 	protected ConventionStorage initStorage() {
-		return new ConventionStorage(this, R.raw.harucon2023_convention_events, 0);
+		return new ConventionStorage(this, R.raw.harucon2024_convention_events, 0);
 	}
 
 	@Override
 	protected Calendar initDate() {
 		Calendar date = Calendar.getInstance();
 		date.clear();
-		date.set(2023, Calendar.MARCH, 8);
+		date.set(2024, Calendar.MARCH, 23);
 		return date;
 	}
 
 	@Override
 	protected String initID() {
-		return "Harucon2023";
+		return "Harucon2024";
 	}
 
 	@Override
 	protected String initDisplayName() {
-		return "הארוקון 2023";
+		return "הארוקון 2024";
 	}
 
 	@Override
@@ -183,7 +182,7 @@ public class Harucon2023Convention extends AmaiConvention {
 	@Override
 	protected URL initModelURL() {
 		try {
-			return new URL("https://harucon.org.il/2023/wp-admin/admin-ajax.php?action=get_event_list");
+			return new URL("https://harucon.org.il/2024/wp-admin/admin-ajax.php?action=get_event_list");
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
@@ -211,14 +210,13 @@ public class Harucon2023Convention extends AmaiConvention {
 	@Override
 	protected Halls initHalls() {
 		Hall mainHall = new Hall().withName(MAIN_HALL_NAME).withOrder(1);
-		Hall auditorium = new Hall().withName(ORANIM_NAME).withOrder(2);
-		Hall eshkol1 = new Hall().withName(ESHKOL1_NAME).withOrder(3);
-		Hall eshkol2 = new Hall().withName(ESHKOL2_NAME).withOrder(4);
-		Hall eshkol3 = new Hall().withName(ESHKOL3_NAME).withOrder(5);
-		Hall workshops = new Hall().withName(WORKSHOPS_NAME).withOrder(6);
+		Hall eshkol1 = new Hall().withName(ESHKOL1_NAME).withOrder(2);
+		Hall eshkol2 = new Hall().withName(ESHKOL2_NAME).withOrder(3);
+		Hall eshkol3 = new Hall().withName(ESHKOL3_NAME).withOrder(4);
+		Hall content4 = new Hall().withName(CONTENT4_NAME).withOrder(5);
 		Hall cosplayArea = new Hall().withName(COSPLAY_AREA_NAME).withOrder(7);
 		Hall games = new Hall().withName(GAMES_NAME).withOrder(8);
-		return new Halls(Arrays.asList(mainHall, auditorium, eshkol1, eshkol2, eshkol3, workshops, cosplayArea, games));
+		return new Halls(Arrays.asList(mainHall, eshkol1, eshkol2, eshkol3, content4, cosplayArea, games));
 	}
 
 	@Override
@@ -228,27 +226,26 @@ public class Harucon2023Convention extends AmaiConvention {
 
 	private ConventionMap createMap() {
 		Hall mainHall = this.getHalls().findByName(MAIN_HALL_NAME);
-		Hall auditorium = this.getHalls().findByName(ORANIM_NAME);
 		Hall eshkol1 = this.getHalls().findByName(ESHKOL1_NAME);
 		Hall eshkol2 = this.getHalls().findByName(ESHKOL2_NAME);
 		Hall eshkol3 = this.getHalls().findByName(ESHKOL3_NAME);
-		Hall workshops = this.getHalls().findByName(WORKSHOPS_NAME);
+		Hall content4 = this.getHalls().findByName(CONTENT4_NAME);
 		Hall games = this.getHalls().findByName(GAMES_NAME);
 		Hall cosplayArea = this.getHalls().findByName(COSPLAY_AREA_NAME);
 
 		Floor entrance = new Floor(1)
 				.withName("מתחם כניסה")
-				.withImageResource(R.raw.harucon2023_floor_entrance, true)
+				.withImageResource(R.raw.harucon2024_floor_entrance, true)
 				.withImageWidth(1297.96997f)
 				.withImageHeight(804.69f);
 		Floor floor1 = new Floor(2)
 				.withName("קומה 1")
-				.withImageResource(R.raw.harucon2023_floor1, true)
+				.withImageResource(R.raw.harucon2024_floor1, true)
 				.withImageWidth(1657f)
 				.withImageHeight(836.90002f);
 		Floor floor2 = new Floor(3)
 				.withName("קומה 2")
-				.withImageResource(R.raw.harucon2023_floor2, true)
+				.withImageResource(R.raw.harucon2024_floor2, true)
 				.withImageWidth(1825.90002f)
 				.withImageHeight(1101.19995f);
 
@@ -275,50 +272,50 @@ public class Harucon2023Convention extends AmaiConvention {
 								inFloor(entrance,
 										new MapLocation()
 												.withPlace(new Place().withName("עמדת מודיעין"))
-												.withMarkerResource(R.raw.harucon2023_marker_information, true)
-												.withSelectedMarkerResource(R.raw.harucon2023_marker_information_selected, true)
+												.withMarkerResource(R.raw.harucon2024_marker_information, true)
+												.withSelectedMarkerResource(R.raw.harucon2024_marker_information_selected, true)
 												.withMarkerHeight(136.51f)
 												.withX(1047.39f)
 												.withY(658.18f),
 										new MapLocation()
 												.withPlace(new Place().withName("עמדות צימוד"))
-												.withMarkerResource(R.raw.harucon2023_marker_bracelets, true)
-												.withSelectedMarkerResource(R.raw.harucon2023_marker_bracelets_selected, true)
+												.withMarkerResource(R.raw.harucon2024_marker_bracelets, true)
+												.withSelectedMarkerResource(R.raw.harucon2024_marker_bracelets_selected, true)
 												.withMarkerHeight(104.76f)
 												.withX(661.73f)
 												.withY(674.37f),
 										new MapLocation()
 												.withPlace(new Place().withName("קופות"))
-												.withMarkerResource(R.raw.harucon2023_marker_cashiers, true)
-												.withSelectedMarkerResource(R.raw.harucon2023_marker_cashiers_selected, true)
+												.withMarkerResource(R.raw.harucon2024_marker_cashiers, true)
+												.withSelectedMarkerResource(R.raw.harucon2024_marker_cashiers_selected, true)
 												.withMarkerHeight(104.76f)
 												.withX(498.6f)
 												.withY(634.04f),
 										new MapLocation()
 												.withPlace(new Place().withName("קופה נגישה"))
-												.withMarkerResource(R.raw.harucon2023_marker_accessible_cashier, true)
-												.withSelectedMarkerResource(R.raw.harucon2023_marker_accessible_cashier_selected, true)
+												.withMarkerResource(R.raw.harucon2024_marker_accessible_cashier, true)
+												.withSelectedMarkerResource(R.raw.harucon2024_marker_accessible_cashier_selected, true)
 												.withMarkerHeight(104.76f)
 												.withX(670.84f)
 												.withY(521.85f),
 										new MapLocation()
 												.withPlace(new Place().withName("מתחם הזמנה מראש"))
-												.withMarkerResource(R.raw.harucon2023_marker_preorders, true)
-												.withSelectedMarkerResource(R.raw.harucon2023_marker_preorders_selected, true)
+												.withMarkerResource(R.raw.harucon2024_marker_preorders, true)
+												.withSelectedMarkerResource(R.raw.harucon2024_marker_preorders_selected, true)
 												.withMarkerHeight(104.75f)
 												.withX(722.45f)
 												.withY(237.4f),
 										new MapLocation()
 												.withPlace(new Place().withName("מתחם קנייה במקום"))
-												.withMarkerResource(R.raw.harucon2023_marker_tickets_area, true)
-												.withSelectedMarkerResource(R.raw.harucon2023_marker_tickets_area_selected, true)
+												.withMarkerResource(R.raw.harucon2024_marker_tickets_area, true)
+												.withSelectedMarkerResource(R.raw.harucon2024_marker_tickets_area_selected, true)
 												.withMarkerHeight(104.76f)
 												.withX(220.69f)
 												.withY(369.84f),
 										new MapLocation()
 												.withPlace(new Place().withName("מעבר נגיש"))
-												.withMarkerResource(R.raw.harucon2023_marker_accessible_passage, true)
-												.withSelectedMarkerResource(R.raw.harucon2023_marker_accessible_passage_selected, true)
+												.withMarkerResource(R.raw.harucon2024_marker_accessible_passage, true)
+												.withSelectedMarkerResource(R.raw.harucon2024_marker_accessible_passage_selected, true)
 												.withMarkerHeight(104.76f)
 												.withX(195.73f)
 												.withY(258.36f)
@@ -326,174 +323,182 @@ public class Harucon2023Convention extends AmaiConvention {
 								inFloor(floor1,
 										new MapLocation()
 												.withPlace(new Place().withName("שירותים"))
-												.withMarkerResource(R.raw.harucon2023_marker_toilet, true)
-												.withSelectedMarkerResource(R.raw.harucon2023_marker_toilet_selected, true)
+												.withMarkerResource(R.raw.harucon2024_marker_toilet, true)
+												.withSelectedMarkerResource(R.raw.harucon2024_marker_toilet_selected, true)
 												.withMarkerHeight(97.3f)
 												.withX(1543.1f)
 												.withY(536.50002f),
 										new MapLocation()
-												.withPlace(auditorium)
-												.withMarkerResource(R.raw.harucon2023_marker_oranim, true)
-												.withSelectedMarkerResource(R.raw.harucon2023_marker_oranim_selected, true)
-												.withMarkerHeight(126.4f)
+												.withPlace(new Place().withName("שמירת חפצים"))
+												.withMarkerResource(R.raw.harucon2024_marker_storage, true)
+												.withSelectedMarkerResource(R.raw.harucon2024_marker_storage_selected, true)
+												.withMarkerHeight(134.7f)
 												.withX(1400.3f)
 												.withY(645.20002f),
 										new MapLocation()
-												.withPlace(new Place().withName("שמירת חפצים"))
-												.withMarkerResource(R.raw.harucon2023_marker_storage, true)
-												.withSelectedMarkerResource(R.raw.harucon2023_marker_storage_selected, true)
-												.withMarkerHeight(127.8f)
+												.withPlace(new Place().withName("מרחב מוגן"))
+												.withMarkerResource(R.raw.harucon2024_marker_safe, true)
+												.withSelectedMarkerResource(R.raw.harucon2024_marker_safe_selected, true)
+												.withMarkerHeight(105.5f)
 												.withX(1320.9f)
 												.withY(671.00002f),
 										new MapLocation()
 												.withName("מתחם דוכנים")
 												.withPlace(pinkus)
-												.withMarkerResource(R.raw.harucon2023_marker_stands, true)
-												.withSelectedMarkerResource(R.raw.harucon2023_marker_stands_selected, true)
+												.withMarkerResource(R.raw.harucon2024_marker_stands, true)
+												.withSelectedMarkerResource(R.raw.harucon2024_marker_stands_selected, true)
 												.withMarkerHeight(94.4f)
 												.withX(1074.4f)
 												.withY(565.40002f),
 										new MapLocation()
 												.withPlace(new Place().withName("שירותים"))
-												.withMarkerResource(R.raw.harucon2023_marker_toilet, true)
-												.withSelectedMarkerResource(R.raw.harucon2023_marker_toilet_selected, true)
+												.withMarkerResource(R.raw.harucon2024_marker_toilet, true)
+												.withSelectedMarkerResource(R.raw.harucon2024_marker_toilet_selected, true)
 												.withMarkerHeight(97.3f)
 												.withX(924.6f)
 												.withY(103.50002f),
 										new MapLocation()
 												.withPlace(new Place().withName("מעלית"))
-												.withMarkerResource(R.raw.harucon2023_marker_elevator, true)
-												.withSelectedMarkerResource(R.raw.harucon2023_marker_elevator_selected, true)
+												.withMarkerResource(R.raw.harucon2024_marker_elevator, true)
+												.withSelectedMarkerResource(R.raw.harucon2024_marker_elevator_selected, true)
 												.withMarkerHeight(94.502f)
 												.withX(786.1f)
 												.withY(149.90002f),
 										new MapLocation()
 												.withPlace(new Place().withName("מודיעין ודוכן אמא\"י"))
-												.withMarkerResource(R.raw.harucon2023_marker_info, true)
-												.withSelectedMarkerResource(R.raw.harucon2023_marker_info_selected, true)
+												.withMarkerResource(R.raw.harucon2024_marker_info, true)
+												.withSelectedMarkerResource(R.raw.harucon2024_marker_info_selected, true)
 												.withMarkerHeight(144.2f)
 												.withX(771.5f)
 												.withY(319.30002f),
 										new MapLocation()
 												.withPlace(eshkol1)
-												.withMarkerResource(R.raw.harucon2023_marker_eshkol1, true)
-												.withSelectedMarkerResource(R.raw.harucon2023_marker_eshkol1_selected, true)
+												.withMarkerResource(R.raw.harucon2024_marker_eshkol1, true)
+												.withSelectedMarkerResource(R.raw.harucon2024_marker_eshkol1_selected, true)
 												.withMarkerHeight(116.8f)
 												.withX(460.5f)
 												.withY(517.50002f),
 										new MapLocation()
 												.withPlace(eshkol3)
-												.withMarkerResource(R.raw.harucon2023_marker_eshkol3, true)
-												.withSelectedMarkerResource(R.raw.harucon2023_marker_eshkol3_selected, true)
+												.withMarkerResource(R.raw.harucon2024_marker_eshkol3, true)
+												.withSelectedMarkerResource(R.raw.harucon2024_marker_eshkol3_selected, true)
 												.withMarkerHeight(116.8f)
 												.withX(337.6f)
 												.withY(700.10002f),
 										new MapLocation()
 												.withPlace(eshkol2)
-												.withMarkerResource(R.raw.harucon2023_marker_eshkol2, true)
-												.withSelectedMarkerResource(R.raw.harucon2023_marker_eshkol2_selected, true)
+												.withMarkerResource(R.raw.harucon2024_marker_eshkol2, true)
+												.withSelectedMarkerResource(R.raw.harucon2024_marker_eshkol2_selected, true)
 												.withMarkerHeight(116.8f)
 												.withX(502.9f)
 												.withY(700.10002f),
 										new MapLocation()
 												.withPlace(new Place().withName("שירותים"))
-												.withMarkerResource(R.raw.harucon2023_marker_toilet, true)
-												.withSelectedMarkerResource(R.raw.harucon2023_marker_toilet_selected, true)
+												.withMarkerResource(R.raw.harucon2024_marker_toilet, true)
+												.withSelectedMarkerResource(R.raw.harucon2024_marker_toilet_selected, true)
 												.withMarkerHeight(98.3f)
 												.withX(272.8f)
 												.withY(426.80002f),
 										new MapLocation()
 												.withPlace(new Place().withName("מעלית"))
-												.withMarkerResource(R.raw.harucon2023_marker_elevator, true)
-												.withSelectedMarkerResource(R.raw.harucon2023_marker_elevator_selected, true)
+												.withMarkerResource(R.raw.harucon2024_marker_elevator, true)
+												.withSelectedMarkerResource(R.raw.harucon2024_marker_elevator_selected, true)
 												.withMarkerHeight(94.502f)
 												.withX(99.2f)
 												.withY(514.20002f)
 								),
 								inFloor(floor2,
 										new MapLocation()
-												.withPlace(workshops)
-												.withMarkerResource(R.raw.harucon2023_marker_workshops, true)
-												.withSelectedMarkerResource(R.raw.harucon2023_marker_workshops_selected, true)
+												.withPlace(content4)
+												.withMarkerResource(R.raw.harucon2024_marker_content4, true)
+												.withSelectedMarkerResource(R.raw.harucon2024_marker_content4_selected, true)
 												.withMarkerHeight(133.6f)
 												.withX(1503.6f)
 												.withY(947.59995f),
 										new MapLocation()
 												.withPlace(new Place().withName("שיפוט קוספליי"))
-												.withMarkerResource(R.raw.harucon2023_marker_cosplay_judgement, true)
-												.withSelectedMarkerResource(R.raw.harucon2023_marker_cosplay_judgement_selected, true)
+												.withMarkerResource(R.raw.harucon2024_marker_cosplay_judgement, true)
+												.withSelectedMarkerResource(R.raw.harucon2024_marker_cosplay_judgement_selected, true)
 												.withMarkerHeight(116f)
 												.withX(1365.5f)
 												.withY(895.59995f),
 										new MapLocation()
-												.withPlace(new Place().withName(PARENTS_ROOM_NAME))
-												.withMarkerResource(R.raw.harucon2023_marker_parents, true)
-												.withSelectedMarkerResource(R.raw.harucon2023_marker_parents_selected, true)
+												.withPlace(new Place().withName(CHILDREN_ROOM_NAME))
+												.withMarkerResource(R.raw.harucon2024_marker_children_room, true)
+												.withSelectedMarkerResource(R.raw.harucon2024_marker_children_room_selected, true)
 												.withMarkerHeight(94.6f)
 												.withX(1486.6f)
 												.withY(724.09995f),
 										new MapLocation()
 												.withPlace(new Place().withName("שירותים"))
-												.withMarkerResource(R.raw.harucon2023_marker_toilet, true)
-												.withSelectedMarkerResource(R.raw.harucon2023_marker_toilet_selected, true)
+												.withMarkerResource(R.raw.harucon2024_marker_toilet, true)
+												.withSelectedMarkerResource(R.raw.harucon2024_marker_toilet_selected, true)
 												.withMarkerHeight(98.8f)
 												.withX(1715.8f)
 												.withY(597.49995f),
 										new MapLocation()
+											.withPlace(mainHall)
+											.withName("כניסה נגישה")
+											.withMarkerResource(R.raw.harucon2024_marker_accessible_entrance, true)
+											.withSelectedMarkerResource(R.raw.harucon2024_marker_accessible_entrance_selected, true)
+											.withMarkerHeight(98.8f)
+											.withX(1370.61f)
+											.withY(450.39895f),
+										new MapLocation()
 												.withPlace(mainHall)
-												.withMarkerResource(R.raw.harucon2023_marker_main_hall, true)
-												.withSelectedMarkerResource(R.raw.harucon2023_marker_main_hall_selected, true)
+												.withMarkerResource(R.raw.harucon2024_marker_main_hall, true)
+												.withSelectedMarkerResource(R.raw.harucon2024_marker_main_hall_selected, true)
 												.withMarkerHeight(177.805f)
 												.withX(1199.8f)
 												.withY(527.19995f),
 										new MapLocation()
 												.withPlace(new Place().withName("שירותים"))
-												.withMarkerResource(R.raw.harucon2023_marker_toilet, true)
-												.withSelectedMarkerResource(R.raw.harucon2023_marker_toilet_selected, true)
+												.withMarkerResource(R.raw.harucon2024_marker_toilet, true)
+												.withSelectedMarkerResource(R.raw.harucon2024_marker_toilet_selected, true)
 												.withMarkerHeight(101.1f)
 												.withX(1164.6f)
 												.withY(118.19995f),
 										new MapLocation()
 												.withPlace(new Place().withName("מעלית"))
-												.withMarkerResource(R.raw.harucon2023_marker_elevator, true)
-												.withSelectedMarkerResource(R.raw.harucon2023_marker_elevator_selected, true)
+												.withMarkerResource(R.raw.harucon2024_marker_elevator, true)
+												.withSelectedMarkerResource(R.raw.harucon2024_marker_elevator_selected, true)
 												.withMarkerHeight(94.502f)
 												.withX(1035.7f)
 												.withY(136.89995f),
 										new MapLocation()
 												.withPlace(cosplayArea)
-												.withMarkerResource(R.raw.harucon2023_marker_cosplay_area, true)
-												.withSelectedMarkerResource(R.raw.harucon2023_marker_cosplay_area_selected, true)
+												.withMarkerResource(R.raw.harucon2024_marker_cosplay_area, true)
+												.withSelectedMarkerResource(R.raw.harucon2024_marker_cosplay_area_selected, true)
 												.withMarkerHeight(261.6f)
 												.withX(1014.7f)
 												.withY(728.79995f),
 										new MapLocation()
 												.withPlace(games)
 												.withName("משחקייה")
-												.withMarkerResource(R.raw.harucon2023_marker_games, true)
-												.withSelectedMarkerResource(R.raw.harucon2023_marker_games_selected, true)
+												.withMarkerResource(R.raw.harucon2024_marker_games, true)
+												.withSelectedMarkerResource(R.raw.harucon2024_marker_games_selected, true)
 												.withMarkerHeight(256.9f)
 												.withX(762.8f)
 												.withY(651.49995f),
 										new MapLocation()
 												.withName("שדרת ציירים ומתחם דוכנים")
 												.withPlace(agam)
-												.withMarkerResource(R.raw.harucon2023_marker_artists_alley, true)
-												.withSelectedMarkerResource(R.raw.harucon2023_marker_artists_alley_selected, true)
+												.withMarkerResource(R.raw.harucon2024_marker_artists_alley, true)
+												.withSelectedMarkerResource(R.raw.harucon2024_marker_artists_alley_selected, true)
 												.withMarkerHeight(139.3f)
 												.withX(762.8f)
 												.withY(351.59995f),
 										new MapLocation()
 												.withPlace(new Place().withName("שירותים"))
-												.withMarkerResource(R.raw.harucon2023_marker_toilet, true)
-												.withSelectedMarkerResource(R.raw.harucon2023_marker_toilet_selected, true)
+												.withMarkerResource(R.raw.harucon2024_marker_toilet, true)
+												.withSelectedMarkerResource(R.raw.harucon2024_marker_toilet_selected, true)
 												.withMarkerHeight(94.6f)
 												.withX(353.6f)
 												.withY(481.79995f),
 										new MapLocation()
 												.withPlace(new Place().withName("מעלית"))
-												.withMarkerResource(R.raw.harucon2023_marker_elevator, true)
-												.withSelectedMarkerResource(R.raw.harucon2023_marker_elevator_selected, true)
+												.withMarkerResource(R.raw.harucon2024_marker_elevator, true)
+												.withSelectedMarkerResource(R.raw.harucon2024_marker_elevator_selected, true)
 												.withMarkerHeight(94.502f)
 												.withX(261.4f)
 												.withY(559.59995f)
@@ -1036,7 +1041,7 @@ public class Harucon2023Convention extends AmaiConvention {
 		return new SpecialEventsProcessor() {
 			@Override
 			public boolean processSpecialEvent(ConventionEvent event) {
-				return false;
+				return true;
 			}
 		};
 	}
