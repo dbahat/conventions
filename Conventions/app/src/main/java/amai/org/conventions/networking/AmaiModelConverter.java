@@ -165,6 +165,8 @@ public class AmaiModelConverter {
 				.replaceAll("style=\"[^\"]*\"", "")
 				.replaceAll("width=\"[^\"]*\"", "")
 				.replaceAll("height=\"[^\"]*\"", "")
+				// Remove scripts (multi-line and lazy)
+				.replaceAll("(?s)<script>.*?</script>", "")
 				// Replace divs and images with some other unsupported (and therefore ignored)
 				.replace("<div", "<xdiv")
 				.replace("/div>", "/xdiv>")
