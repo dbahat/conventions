@@ -1041,7 +1041,7 @@ public class Harucon2024Convention extends AmaiConvention {
 		return new SpecialEventsProcessor() {
 			@Override
 			public boolean processSpecialEvent(ConventionEvent event) {
-				return true;
+				return false;
 			}
 		};
 	}
