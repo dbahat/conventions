@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+        android:color="@color/harucon_gen_light_pink">
+    <item android:drawable="@drawable/harucon_gen_event_feedback_button_shape" />
+</ripple>

@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppBaseTheme.HaruconGen" parent="AppBaseTheme.Light.DarkToolbar">
+        <!-- Sub-themes -->
+        <item name="android:dialogTheme">@style/AppDialogTheme.HaruconGen</item>
+        <item name="alertDialogTheme">@style/AppAlertDialogTheme.HaruconGen</item>
+        <!-- not using android:actionOverflowButtonStyle since it doesn't seem to work in Jellybean -->
+        <item name="actionOverflowButtonStyle">@style/OverflowMenu.HaruconGen</item>
+        <!-- General -->
+        <item name="android:colorPrimaryDark">@color/black</item> <!-- Toolbar color -->
+        <!-- Used in: default selected checkbox/switch color, settings titles,
+             cursor color in all edit texts. Also used as the default action button color and map search checkbox color. -->
+        <item name="colorAccent">@color/harucon_gen_green</item>
+        <!-- This color should be readable over the activities background.
+             Used as the text color in: accessibility, arrival methods.
+             Also used as default for many texts and as the default "large text" color (e.g. in settings). -->
+        <item name="android:textColorPrimary">@color/harucon_gen_gray4</item>
+        <!-- Used in: default unselected checkbox color and default "medium/small" texts (e.g. in settings). -->
+        <item name="android:textColorSecondary">@color/harucon_gen_gray4</item>
+        <item name="android:textColorHint">@color/harucon_gen_gray3</item>
+        <item name="android:textColorLink">@color/harucon_gen_blue</item>
+        <item name="actionButtonColor">@color/harucon_gen_pink</item>
+        <item name="actionButtonIcon">@drawable/harucon_gen_search_icon</item>
+        <item name="hintTextColor">@color/harucon_gen_gray3</item>
+        <item name="swipeToRefreshColor">@color/harucon_gen_pink</item>
+        <item name="snackbarActionColor">@color/harucon_gen_pink</item>
+        <item name="borderlessButtonColor">@color/harucon_gen_blue</item>
+        <item name="activitiesBackground">@color/harucon_gen_gray1</item>
+        <item name="infoActivitiesBackground">@color/white</item>
+        <item name="eventListDivider">@drawable/harucon_gen_event_list_divider</item>
+        <item name="separatorColor">@null</item>
+        <!-- These are used for buttons. They should be usable when the background is:
+             Event screen vote
+             Feedback screen
+             Map bottom info panel
+             Arrival methods screen
+         -->
+        <item name="buttonColor">@color/harucon_gen_blue</item>
+        <item name="buttonColorPressed">@color/harucon_gen_light_blue</item>
+        <item name="buttonColorDisabled">@color/harucon_gen_gray2</item>
+        <item name="buttonTextColor">@drawable/harucon_gen_highlighted_button_text_color</item>
+
+        <!-- Notifications -->
+        <item name="notificationSmallIcon">@drawable/harucon_notification_small</item>
+        <!-- Toolbar -->
+        <item name="toolbarBackground">@color/harucon_gen_pink</item>
+        <item name="toolbarIconAccentColor">@color/harucon_gen_yellow</item>
+        <item name="toolbarTitleColor">@color/white</item>
+        <!-- Navigation Drawer -->
+        <item name="navigationPopupBackground">@color/harucon_gen_pink</item>
+        <item name="navigationPopupSpaceVisibility">gone</item>
+        <item name="navigationPopupTitle">@null</item>
+        <item name="navigationPopupBottomImage">@null</item>
+        <item name="navigationPopupTopSelectedColor">@color/harucon_gen_yellow</item>
+        <item name="navigationPopupTopNotSelectedColor">@color/white</item>
+        <item name="navigationPopupNotSelectedColor">@color/white</item>
+        <item name="navigationPopupSelectedColor">@color/harucon_gen_yellow</item>
+        <item name="navigationPopupSeparatorColor">@color/white</item>
+        <item name="navigationPopupBottomImageMargins">0dp</item>
+        <item name="navigationPopupBottomImageTopMargin">0dp</item>
+        <item name="navigationPopupTitleWidth">0dp</item>
+        <item name="navigationItemsShouldDisplayIcon">false</item>
+        <item name="navigationPopupItemPaddingTop">13dp</item>
+        <item name="navigationPopupItemPaddingBottom">13dp</item>
+        <!-- About Screen -->
+        <item name="aboutLogo">@drawable/amai_logo_black</item>
+        <item name="aboutLogoMargins">80dp</item>
+        <!-- Home Screen -->
+        <item name="homeLogoMargin">20dp</item>
+        <item name="homeBottomImage">@null</item>
+        <item name="homeBackground">@color/harucon_gen_gray1</item>
+        <item name="homeToolbarTitle">@drawable/harucon_logo_white_small</item>
+        <item name="homeToolbarBackground">@color/harucon_gen_pink</item>
+        <item name="homeTitleBackground">@drawable/harucon_gen_home_title_background</item>
+        <item name="homeShowCurrentUpcomingTitles">true</item>
+        <item name="homeTitleText">@drawable/harucon_gen_home_title_text</item>
+        <item name="homeContentBackground">@drawable/harucon_gen_home_content_background</item>
+        <item name="homeContentText">@drawable/harucon_gen_home_content_text</item>
+        <item name="homeButtonBackground">@drawable/harucon_gen_home_button</item>
+        <item name="homeButtonText">@color/white</item>
+        <item name="homeGotoUpdatesButtonBackground">@drawable/harucon_gen_home_updates_button</item>
+        <item name="homeEventsListEventBackground">@drawable/harucon_gen_rounded_edges_white</item>
+        <item name="homeEventsListDivider">@android:color/transparent</item>
+        <item name="homeEventsListDividerHeight">10dp</item>
+        <item name="homeBoxTopMargin">10dp</item>
+        <item name="homeSingleButtonTopMargin">10dp</item>
+        <item name="homeFrameTopMargin">10dp</item>
+        <!-- Event View -->
+        <item name="eventViewLayout">@layout/rounded_convention_event</item>
+        <item name="eventViewHeight">104dp</item>
+        <item name="eventBackgroundColor">@color/white</item>
+        <item name="eventTextColor">@drawable/harucon_gen_event_view_text_color</item>
+        <item name="eventNameKeywordHighlightColor">@color/harucon_gen_pink</item>
+        <item name="eventKeywordHighlightColor">@color/harucon_gen_pink</item>
+        <item name="eventTimeTextColor">@color/white</item>
+        <item name="eventTimeBackground">@drawable/harucon_gen_event_view_time_background_color</item>
+        <item name="eventFavoriteIcon">@drawable/harucon_gen_favorite_icon</item>
+        <item name="eventFavoriteIconColor">@drawable/harucon_gen_favorite_icon_color</item>
+        <item name="eventFeedbackIcon">@drawable/harucon_gen_event_feedback_icon</item>
+        <item name="eventFeedbackIconColor">@drawable/harucon_gen_event_feedback_icon_color</item>
+        <item name="useEventTextColorFromEventType">false</item>
+        <item name="useEventTimeColorFromEventType">false</item>
+        <item name="conflictingEventBackground">@drawable/harucon_gen_conflicting_event_label_bg</item>
+        <!-- Programme Screen and Programme Search Screen -->
+        <item name="eventTimeHeaderBackground">@drawable/harucon_gen_event_time_header_background</item>
+        <item name="eventTimeHeaderWidth">match_parent</item>
+        <item name="eventTimeHeaderTextColor">@color/white</item>
+        <item name="eventTimeHeaderMarginTop">10dp</item>
+        <item name="eventTimeHeaderMarginBottom">@null</item>
+        <item name="eventTimeHeaderMarginHorizontal">8dp</item>
+        <item name="eventTimeHeaderPaddingVertical">4dp</item>
+        <item name="marginBetweenEventsListAndNextHeader">0dp</item>
+        <item name="fabOnProgrammeTop">true</item>
+        <item name="fabOnProgrammeTopAlignment">START</item>
+        <item name="searchCategoriesColor">@color/harucon_gen_pink</item>
+        <item name="searchCategoriesChipBackgroundColor">@drawable/harucon_gen_event_search_chip_background_color</item>
+        <item name="searchCategoriesChipTextColor">@drawable/harucon_gen_event_search_chip_text_color</item>
+        <item name="searchCategoriesChipStrokeColor">@color/harucon_gen_pink</item>
+        <item name="searchCategoriesChipRippleColor">@color/harucon_gen_light_pink</item>
+        <item name="searchTitleTextColor">@color/harucon_gen_gray3</item>
+        <item name="searchTitleBackgroundColor">@color/white</item>
+        <item name="programmeSearchBarBackground">@drawable/harucon_gen_search_bar_background</item>
+        <!-- My Events Screen -->
+        <item name="nextEventStartTimeBackground">@null</item>
+        <item name="nextEventStartTimeTextColor">@color/harucon_gen_pink</item>
+        <item name="conflictingEventsBackground">@null</item>
+        <item name="nextEventStartTimeBottomLineColor">@null</item>
+        <item name="conflictingEventsSideMargin">0dp</item>
+        <item name="conflictingEventsTopBottomMargin">0dp</item>
+        <item name="conflictingEventsGroupSeparator">@drawable/harucon_gen_conflicting_events_group_separator</item>
+        <item name="conflictingEventsGroupSeparatorHeight">4dp</item>
+        <item name="conflictingEventsGroupSeparatorMargin">4dp</item>
+        <item name="conflictingEventsListBorder">@null</item>
+        <!-- Feedback Screen -->
+        <item name="conventionFeedbackTextColor">@drawable/harucon_gen_convention_feedback_text_color</item>
+        <item name="conventionFeedbackAnswerBackground">@drawable/harucon_gen_convention_feedback_answer_bg_selector</item>
+        <item name="feedbackMultiAnswerMinWidth">50dp</item>
+        <item name="feedbackMultiAnswerPaddingTopBottom">4dp</item>
+        <item name="feedbackMultiAnswerPaddingStartEnd">9dp</item>
+        <item name="feedbackMultiAnswerPaddingStartFirstAnswer">9dp</item>
+        <item name="feedbackMultiAnswerMarginTopBottom">2dp</item>
+        <item name="feedbackMultiAnswerMarginBetweenAnswers">9dp</item>
+        <item name="feedbackProgressBarColor">@color/harucon_gen_pink</item>
+        <!-- Updates Screen -->
+        <item name="updateTimeColor">@drawable/harucon_gen_update_time_color</item>
+        <item name="updateTimeBackground">@null</item>
+        <item name="updateItemBorder">@color/harucon_gen_blue</item>
+        <item name="updateItemSeparator">@android:color/transparent</item>
+        <item name="updateBackground">@drawable/harucon_gen_rounded_edges_white_inset</item>
+        <item name="updateTextColor">@color/harucon_gen_gray4</item>
+        <item name="updateElevation">2dp</item>
+        <item name="showNewUpdateIndicator">true</item>
+        <item name="newUpdateIndicatorTextColor">@color/white</item>
+        <item name="newUpdateIndicatorBackground">@drawable/harucon_gen_new_update_indicator_background</item>
+        <!-- Event Screen -->
+        <item name="eventToolbarColor">@color/harucon_gen_pink</item>
+        <item name="eventDetailsDefaultBackground">@color/harucon_gen_gray1</item>
+        <item name="eventTitleBackground">@null</item>
+        <item name="eventTitlePadding">0dp</item>
+        <item name="eventTitleTextColor">@color/white</item>
+        <item name="eventLecturerTextColor">@color/harucon_gen_pink</item>
+        <item name="eventTypeTextColor">@color/harucon_gen_gray4</item>
+        <item name="eventNameBackground">@drawable/harucon_gen_rounded_top_edges_pink</item>
+        <item name="eventLecturerBackground">@color/white</item>
+        <item name="eventTypeBackground">@drawable/harucon_gen_rounded_bottom_edges_gray</item>
+        <item name="eventDetailsBoxColor">@null</item>
+        <item name="eventFeedbackBoxColor">@drawable/harucon_gen_rounded_edges_blue</item>
+        <item name="eventFeedbackTextColor">@drawable/harucon_gen_event_feedback_text_color</item>
+        <item name="eventFeedbackAnswerBackground">@drawable/harucon_gen_event_feedback_answer_bg_selector</item>
+        <item name="eventVoteBoxColor">@drawable/harucon_gen_rounded_edges_green</item>
+        <item name="eventVoteTextColor">@color/harucon_gen_gray4</item>
+        <item name="eventVoteButtonBackground">@drawable/harucon_gen_event_feedback_button</item>
+        <item name="eventVoteButtonTextColor">@drawable/harucon_gen_event_feedback_button_text_color</item>
+        <item name="eventDescriptionBoxColor">@drawable/harucon_gen_rounded_edges_white</item>
+        <item name="feedbackButtonColor">@color/white</item>
+        <item name="eventSurveyTextColor">@drawable/harucon_gen_event_vote_text_color</item>
+        <item name="eventFeedbackButtonBackground">@drawable/harucon_gen_event_feedback_button</item>
+        <item name="eventFeedbackButtonTextColor">@drawable/harucon_gen_event_feedback_button_text_color</item>
+        <item name="eventFeedbackProgressBarColor">@color/white</item>
+        <item name="eventDetailsTextColor">@color/black</item>
+        <item name="eventDescriptionTextColor">@color/black</item>
+        <!-- Map Screen -->
+        <item name="mapBackground">@color/harucon_gen_gray1</item>
+        <item name="locationDetailsBackground">@color/harucon_gen_gray2</item>
+        <item name="locationDetailsTopLineColor">@android:color/transparent</item>
+        <item name="locationDetailsTitleColor">@color/black</item>
+        <item name="locationDetailsElevation">3dp</item>
+        <item name="iconClearMap">@drawable/ic_clear_black</item>
+        <item name="iconFloorUp">@drawable/harucon_gen_arrow_up</item>
+        <item name="iconFloorDown">@drawable/harucon_gen_arrow_down</item>
+        <item name="floorChangeBackground">@color/white</item>
+        <item name="floorUpDownTextColor">@color/harucon_gen_gray4</item>
+        <item name="floorUpDownSeparator">@color/white</item>
+        <item name="floorUpDownElevation">3dp</item>
+        <item name="mapSearchTabsColor">@color/harucon_gen_pink</item>
+        <item name="mapSearchTabsIndicator">@drawable/harucon_gen_map_tab_indicator</item>
+        <item name="mapSearchBorder">@color/white</item>
+        <item name="mapSearchResultsBackground">@color/less_transparent_white</item>
+        <item name="mapSearchPaneElevation">10dp</item>
+        <item name="mapSearchImageColor">@color/harucon_gen_blue</item>
+        <item name="mapSearchSeparator">@color/harucon_gen_gray2</item>
+        <item name="mapSearchResultsDivider">@drawable/harucon_gen_map_search_results_divider</item>
+        <item name="mapSearchCheckboxTint">@color/harucon_gen_pink</item>
+        <item name="mapSearchBarBackground">@drawable/harucon_gen_search_bar_background</item>
+        <item name="mapSearchBarHorizontalMargins">5dp</item>
+        <item name="standIconColor">@color/harucon_gen_pink</item>
+        <item name="standsTypeTitleColor">@color/harucon_gen_pink</item>
+        <item name="standsMapHighlight">@color/harucon_gen_transparent_green</item>
+    </style>
+
+    <style name="AppBaseTheme.HaruconGen.Event">
+        <item name="android:textColorLink">@color/harucon_gen_blue</item>
+    </style>
+
+    <style name="AppDialogTheme.HaruconGen" parent="Theme.AppCompat.Light.Dialog">
+        <!-- This is the default starting API23. In any case the title is always left-justified so it's best to not use it. -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- Used for configure notifications popup title and separator -->
+        <item name="colorAccent">@color/harucon_gen_blue</item>
+        <item name="borderlessButtonColor">@color/harucon_gen_blue</item>
+        <item name="android:textColorPrimary">@android:color/black</item>
+    </style>
+
+    <style name="AppAlertDialogTheme.HaruconGen" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!-- Used for configure notifications popup title and separator -->
+        <item name="colorAccent">@color/harucon_gen_blue</item>
+        <item name="borderlessButtonColor">@color/harucon_gen_blue</item>
+        <item name="android:textColorPrimary">@android:color/black</item>
+    </style>
+
+    <style name="AppBaseTheme.HaruconGen.Splash">
+        <item name="android:windowBackground">@drawable/harucon_gen_splash</item>
+    </style>
+
+    <style name="OverflowMenu.HaruconGen" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_more_vert_white_24dp</item>
+    </style>
+</resources>

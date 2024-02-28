@@ -1,6 +1,5 @@
 package amai.org.conventions.events;
 
-import android.animation.AnimatorInflater;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.util.AttributeSet;
@@ -48,7 +47,7 @@ public class ChipCategoriesLayout extends ChipGroup {
 		chip.setChipStrokeColor(getThemedColor(R.attr.searchCategoriesChipStrokeColor));
 		chip.setRippleColor(getThemedColor(R.attr.searchCategoriesChipRippleColor));
 		chip.setTextColor(getThemedColor(R.attr.searchCategoriesChipTextColor));
-		chip.setCheckedIcon(ContextCompat.getDrawable(getContext(), R.drawable.harucon2023_event_seach_chip_icon));
+		chip.setCheckedIcon(ContextCompat.getDrawable(getContext(), R.drawable.harucon_gen_event_search_chip_icon));
 		chip.setChipStrokeWidth(3);
 		chip.setText(searchCategory.getName());
 		chip.setTag(searchCategory);
