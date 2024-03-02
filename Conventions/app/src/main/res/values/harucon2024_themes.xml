@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppBaseTheme.Harucon2024" parent="AppBaseTheme.HaruconGen">
+        <item name="homeLogo">@drawable/harucon2024_home_image</item>
+    </style>
+
+    <style name="AppBaseTheme.Harucon2024.Splash" parent="AppBaseTheme.HaruconGen.Splash">
+    </style>
+
+    <style name="AppBaseTheme.Harucon2024.Event" parent="AppBaseTheme.HaruconGen.Event">
+    </style>
+</resources>

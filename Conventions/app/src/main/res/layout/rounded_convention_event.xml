@@ -30,7 +30,7 @@
                 app:cardCornerRadius="?eventViewCornerRadius"
                 app:cardElevation="0dp"
                 app:cardPreventCornerOverlap="true"
-                tools:cardBackgroundColor="@color/harucon2023_transparent_blue"
+                tools:cardBackgroundColor="@color/transparent_light_yellow"
                 >
 
                 <LinearLayout
