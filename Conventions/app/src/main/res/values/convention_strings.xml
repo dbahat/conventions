@@ -80,7 +80,8 @@
 <p>לחלופין, &quot;בנייני האומה&quot; ב-waze יביא אתכם אל המקום.</p>
 <p>במתחם קיימים 850 מקומות חנייה בתשלום המתחלקים בין חניון תת קרקעי וחניון חיצוני.</p>
 ]]></string>
-    <!-- Text about convention accessibility taken from https://harucon.org.il/2024/accessibility/ -->
+    <!-- Text about convention accessibility taken from https://harucon.org.il/2024/accessibility/
+         Instead of link to accessible programme file, added a link to the website programme which should be accessible. -->
     <string name="accessibility_content" formatted="false"><![CDATA[
 <h1>נגישות באפליקציה</h1>
 <p>מערכת ההפעלה אנדרואיד מאפשרת להפעיל אפשרויות נגישות שונות באפליקציות. <a href="org.amai.conventions://accessibility/open-accessibility">לחצו כאן להפעלת אפשרויות הנגישות</a>.</p>
@@ -93,7 +94,7 @@
 <h3><strong>שירותים</strong></h3>
 <p>בכל חדרי השירותים במתחם ישנם שירותי נכים זמינים ונגישים.</p>
 <h3><strong>עיוורים וכבדי ראייה</strong></h3>
-<p>תכנייה מונגשת בקובץ המותאם לתוכנות הקראה תהיה זמינה להורדה <a href="https://harucon.org.il/2024/accessibility/">באתר</a>.</p>
+<p>תכנייה המותאמת לתוכנות הקראה זמינה  <a href="https://harucon.org.il/2024/events/">באתר</a>.</p>
 <h3><strong>חירשים וכבדי שמיעה</strong></h3>
 <p>קטעי הווידאו אשר יוקרנו באירועי הכנס ילוו בכתוביות.</p>
 <h3><strong>קופה נגישה</strong></h3>
