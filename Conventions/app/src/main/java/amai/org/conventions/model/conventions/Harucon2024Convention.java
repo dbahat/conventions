@@ -510,7 +510,7 @@ public class Harucon2024Convention extends AmaiConvention {
 	private List<Stand> getPinkusStands() {
 		return Arrays.asList(
 			new Stand().withName("נקסוס").withType(StandType.TABLETOP_GAMES).withLocationIds("c1", "c2", "c3"),
-			new Stand().withName("MangaLi").withType(StandType.MERCH).withLocationIds("c12"),
+			new Stand().withName("Velvet Octopus").withType(StandType.CLOTHES).withLocationIds("c12"),
 			new Stand().withName("גיימינג לנד").withType(StandType.VIDEO_GAMES).withLocationIds("c13", "c14", "c15", "c16"),
 			new Stand().withName("סירולניה").withType(StandType.TABLETOP_GAMES).withLocationIds("c17", "c18", "c19", "c20", "c21", "c22"),
 			new Stand().withName("Tokinoten").withType(StandType.MERCH).withLocationIds("c23", "c24"),
@@ -522,7 +522,7 @@ public class Harucon2024Convention extends AmaiConvention {
 			new Stand().withName("Card zone").withType(StandType.TABLETOP_GAMES).withLocationIds("c7", "c8"),
 			new Stand().withName("Fantasy House").withType(StandType.MERCH).withLocationIds("c9", "c10", "c11"),
 			new Stand().withName("Sheers By Shir").withType(StandType.CLOTHES).withLocationIds("d1", "d2"),
-			new Stand().withName("Mink Tatts").withType(StandType.MERCH).withLocationIds("d13"),
+			new Stand().withName("Gear fifth figure's").withType(StandType.MERCH).withLocationIds("d13"),
 			new Stand().withName("אפריל").withType(StandType.OTHER).withLocationIds("d14"),
 			new Stand().withName("דוכן שיפודן").withType(StandType.MERCH).withLocationIds("d15", "d16", "d17", "d18", "d19", "d20"),
 			new Stand().withName("Coolstuff").withType(StandType.MERCH).withLocationIds("d21", "d22", "d23", "d24"),
@@ -552,7 +552,7 @@ public class Harucon2024Convention extends AmaiConvention {
 			new Stand().withName("Myst").withType(StandType.MERCH).withLocationIds("a13", "a14", "a15", "a16", "a17", "a18"),
 			new Stand().withName("may shiri design & art").withType(StandType.CLOTHES).withLocationIds("a19", "a20"),
 			new Stand().withName("קומיקאזה").withType(StandType.MANGA).withLocationIds("a21", "a22", "a23", "a24"),
-			new Stand().withName("בתאל וערן").withType(StandType.OTHER).withLocationIds("a25","a26","a27"),
+			new Stand().withName("בתאל וערן").withType(StandType.OTHER).withLocationIds("a25", "a26", "a27"),
 			new Stand().withName("קומיקס וירקות").withType(StandType.MANGA).withLocationIds("a28", "a29", "a30"),
 			new Stand().withName("Creative a tea").withType(StandType.OTHER).withLocationIds("a3", "a4"),
 			new Stand().withName("הממלכה").withType(StandType.TABLETOP_GAMES).withLocationIds("a31", "a32"),
@@ -601,7 +601,7 @@ public class Harucon2024Convention extends AmaiConvention {
 			new Stand().withName("kartzi's").withType(StandType.ARTIST).withLocationIds("b53", "b54"),
 			new Stand().withName("Kosaio art").withType(StandType.ARTIST).withLocationIds("b55"),
 			new Stand().withName("MartinDraws").withType(StandType.ARTIST).withLocationIds("b56"),
-			new Stand().withName("OdeChan Art").withType(StandType.ARTIST).withLocationIds("b7"),
+			new Stand().withName("Little Artshop of Horrors").withType(StandType.ARTIST).withLocationIds("b7"),
 			new Stand().withName("eszart").withType(StandType.ARTIST).withLocationIds("b8"),
 			new Stand().withName("אוריג׳ין סטורי").withType(StandType.ARTIST).withLocationIds("b9", "b10")
 		);
