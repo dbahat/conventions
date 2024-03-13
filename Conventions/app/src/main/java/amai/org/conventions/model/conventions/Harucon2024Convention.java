@@ -339,7 +339,7 @@ public class Harucon2024Convention extends AmaiConvention {
 												.withPlace(new Place().withName("מרחב מוגן"))
 												.withMarkerResource(R.raw.harucon2024_marker_safe, true)
 												.withSelectedMarkerResource(R.raw.harucon2024_marker_safe_selected, true)
-												.withMarkerHeight(105.5f)
+												.withMarkerHeight(145.900f)
 												.withX(1320.9f)
 												.withY(671.00002f),
 										new MapLocation()
@@ -441,9 +441,9 @@ public class Harucon2024Convention extends AmaiConvention {
 											.withName("כניסה נגישה")
 											.withMarkerResource(R.raw.harucon2024_marker_accessible_entrance, true)
 											.withSelectedMarkerResource(R.raw.harucon2024_marker_accessible_entrance_selected, true)
-											.withMarkerHeight(98.8f)
-											.withX(1370.61f)
-											.withY(450.39895f),
+											.withMarkerHeight(113.3f)
+											.withX(1359.3f)
+											.withY(430.99995f),
 										new MapLocation()
 												.withPlace(mainHall)
 												.withMarkerResource(R.raw.harucon2024_marker_main_hall, true)
@@ -451,6 +451,14 @@ public class Harucon2024Convention extends AmaiConvention {
 												.withMarkerHeight(177.805f)
 												.withX(1199.8f)
 												.withY(527.19995f),
+										new MapLocation()
+												.withPlace(mainHall)
+												.withName("כניסה ראשית")
+												.withMarkerResource(R.raw.harucon2024_marker_main_entrance, true)
+												.withSelectedMarkerResource(R.raw.harucon2024_marker_main_entrance_selected, true)
+												.withMarkerHeight(112f)
+												.withX(1054.5f)
+												.withY(618.99995f),
 										new MapLocation()
 												.withPlace(new Place().withName("שירותים"))
 												.withMarkerResource(R.raw.harucon2024_marker_toilet, true)
