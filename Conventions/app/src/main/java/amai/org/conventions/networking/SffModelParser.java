@@ -237,6 +237,8 @@ public class SffModelParser implements ModelParser {
 				.replaceAll("width=\"[^\"]*\"", "")
 				.replaceAll("height=\"[^\"]*\"", "")
 				.replaceAll("font\\s+color=\"[^\"]*\"", "font") // Remove font colors - they won't match the theme
+				// Remove scripts (multi-line and lazy)
+				.replaceAll("(?s)<script>.*?</script>", "")
 				// Replace divs and images with some other unsupported (and therefore ignored)
 				.replace("<div", "<xdiv")
 				.replace("/div>", "/xdiv>")
