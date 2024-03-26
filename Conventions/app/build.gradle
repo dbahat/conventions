@@ -29,6 +29,9 @@ android {
         targetCompatibility = '1.8'
     }
     namespace 'sff.org.conventions'
+    buildFeatures {
+        buildConfig true
+    }
 }
 
 dependencies {
