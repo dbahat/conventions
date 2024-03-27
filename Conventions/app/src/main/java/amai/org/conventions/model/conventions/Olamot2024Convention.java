@@ -8,7 +8,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.List;
 
 import amai.org.conventions.auth.Configuration;
@@ -22,7 +21,6 @@ import amai.org.conventions.model.Hall;
 import amai.org.conventions.model.Halls;
 import amai.org.conventions.model.ImageIdToImageResourceMapper;
 import amai.org.conventions.model.MapLocation;
-import amai.org.conventions.model.Place;
 import amai.org.conventions.model.SecondHandItem;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
@@ -31,7 +29,7 @@ import amai.org.conventions.utils.HttpConnectionCreator;
 import amai.org.conventions.utils.URLUtils;
 import sff.org.conventions.R;
 
-public class Icon2023Convention extends SffConvention {
+public class Olamot2024Convention extends SffConvention {
 //	private static final String HALL_NAME_CINEMATHEQUE_1_3_4 = "סינמטק 1, 3, 4";
 //	private static final String HALL_NAME_CINEMATHEQUE_2 = "סינמטק 2";
 //	private static final String HALL_NAME_CINEMATHEQUE_5 = "סינמטק 5";
@@ -44,7 +42,7 @@ public class Icon2023Convention extends SffConvention {
 	private static final String HALL_NAME_WORKSHOPS = "סדנאות";
 //	private static final String HALL_NAME_WORKSHOPS_1 = "סדנאות 1";
 //	private static final String HALL_NAME_WORKSHOPS_2 = "סדנאות 2";
-	private static final String HALL_NAME_KIDS = "ילדים";
+//	private static final String HALL_NAME_KIDS = "ילדים";
 	private static final String HALL_NAME_MEETINGS = "מפגשים";
 	private static final String HALL_NAME_OUTSIDE = "חוצות";
 //	private static final String HALL_NAME_ARENA = "הזירה";
@@ -57,14 +55,14 @@ public class Icon2023Convention extends SffConvention {
 //	private static final String HALL_NAME_TENT_7 = "אוהל 7";
 //	private static final String HALL_NAME_TENT_8 = "אוהל 8";
 //	private static final String HALL_NAME_TENT_20 = "אוהל 20 טבעי";
-	private static final String HALL_NAME_IRONI_1 = "עירוני 1";
-	private static final String HALL_NAME_IRONI_2 = "עירוני 2";
-	private static final String HALL_NAME_IRONI_3 = "עירוני 3";
-	private static final String HALL_NAME_IRONI_4 = "עירוני 4";
-	private static final String HALL_NAME_IRONI_5 = "עירוני 5";
-	private static final String HALL_NAME_IRONI_6 = "עירוני 6";
-	private static final String HALL_NAME_IRONI_7 = "עירוני 7";
-	private static final String HALL_NAME_IRONI_8 = "עירוני 8";
+//	private static final String HALL_NAME_IRONI_1 = "עירוני 1";
+//	private static final String HALL_NAME_IRONI_2 = "עירוני 2";
+//	private static final String HALL_NAME_IRONI_3 = "עירוני 3";
+//	private static final String HALL_NAME_IRONI_4 = "עירוני 4";
+//	private static final String HALL_NAME_IRONI_5 = "עירוני 5";
+//	private static final String HALL_NAME_IRONI_6 = "עירוני 6";
+//	private static final String HALL_NAME_IRONI_7 = "עירוני 7";
+//	private static final String HALL_NAME_IRONI_8 = "עירוני 8";
 //	private static final String HALL_NAME_ARTEMIS = "ארטמיס";
 //	private static final String HALL_NAME_MINIATURES_1 = "מיניאטורות 1";
 //	private static final String HALL_NAME_MINIATURES_2 = "מיניאטורות 2";
@@ -75,34 +73,34 @@ public class Icon2023Convention extends SffConvention {
 //	private static final String HALL_NAME_GAMES_3 = "משחקים 3";
 //	private static final String HALL_NAME_GAMES_4 = "משחקים 4";
 
-	private static final String API_SLUG = "icon2023";
+	private static final String API_SLUG = "olamot2024";
 	private static final String TEST_API_SLUG = "test_con";
 	private static final String YAD2_API = "https://api.sf-f.org.il/yad2/";
 	private static final String TEST_YAD2_API = "https://test.api.sf-f.org.il/yad2/";
 
 	@Override
 	protected ConventionStorage initStorage() {
-		return new ConventionStorage(this, R.raw.icon2023_convention_events, 0);
+		return new ConventionStorage(this, R.raw.olamot2024_convention_events, 0);
 	}
 
 	@Override
 	protected Calendar initStartDate() {
-		return Dates.createDate(2023, Calendar.OCTOBER, 3);
+		return Dates.createDate(2024, Calendar.APRIL, 24);
 	}
 
 	@Override
 	protected Calendar initEndDate() {
-		return Dates.createDate(2023, Calendar.OCTOBER, 5);
+		return Dates.createDate(2025, Calendar.APRIL, 25);
 	}
 
 	@Override
 	protected String initID() {
-		return "Icon2023";
+		return "Olamot2024";
 	}
 
 	@Override
 	protected String initDisplayName() {
-		return "פסטיבל אייקון 2023";
+		return "כנס עולמות 2024";
 	}
 
 	@Override
@@ -117,14 +115,14 @@ public class Icon2023Convention extends SffConvention {
 				new Hall().withName(HALL_NAME_ESHKOL_4),
 				new Hall().withName(HALL_NAME_ESHKOL_5),
 				new Hall().withName(HALL_NAME_ESHKOL_6),
-				new Hall().withName(HALL_NAME_WORKSHOPS),
-				new Hall().withName(HALL_NAME_KIDS),
 				new Hall().withName(HALL_NAME_MEETINGS),
+				new Hall().withName(HALL_NAME_WORKSHOPS),
+//				new Hall().withName(HALL_NAME_KIDS),
 //				new Hall().withName(HALL_NAME_WORKSHOPS_1),
 //				new Hall().withName(HALL_NAME_WORKSHOPS_2),
 //				new Hall().withName(HALL_NAME_KIDS_VIRTUAL),
 //				new Hall().withName(HALL_NAME_MEETINGS_VIRTUAL),
-				new Hall().withName(HALL_NAME_OUTSIDE),
+				new Hall().withName(HALL_NAME_OUTSIDE)
 //				new Hall().withName(HALL_NAME_ARENA),
 //				new Hall().withName(HALL_NAME_TENT_1),
 //				new Hall().withName(HALL_NAME_TENT_2),
@@ -134,14 +132,14 @@ public class Icon2023Convention extends SffConvention {
 //				new Hall().withName(HALL_NAME_TENT_6),
 //				new Hall().withName(HALL_NAME_TENT_7),
 //				new Hall().withName(HALL_NAME_TENT_8),
-				new Hall().withName(HALL_NAME_IRONI_1),
-				new Hall().withName(HALL_NAME_IRONI_2),
-				new Hall().withName(HALL_NAME_IRONI_3),
-				new Hall().withName(HALL_NAME_IRONI_4),
-				new Hall().withName(HALL_NAME_IRONI_5),
-				new Hall().withName(HALL_NAME_IRONI_6),
-				new Hall().withName(HALL_NAME_IRONI_7),
-				new Hall().withName(HALL_NAME_IRONI_8)
+//				new Hall().withName(HALL_NAME_IRONI_1),
+//				new Hall().withName(HALL_NAME_IRONI_2),
+//				new Hall().withName(HALL_NAME_IRONI_3),
+//				new Hall().withName(HALL_NAME_IRONI_4),
+//				new Hall().withName(HALL_NAME_IRONI_5),
+//				new Hall().withName(HALL_NAME_IRONI_6),
+//				new Hall().withName(HALL_NAME_IRONI_7),
+//				new Hall().withName(HALL_NAME_IRONI_8)
 //				new Hall().withName(HALL_NAME_ARTEMIS),
 //				new Hall().withName(HALL_NAME_MINIATURES_1),
 //				new Hall().withName(HALL_NAME_MINIATURES_2),
@@ -176,15 +174,15 @@ public class Icon2023Convention extends SffConvention {
 		Hall eshkol6 = getHalls().findByName(HALL_NAME_ESHKOL_6);
 		Hall workshops = getHalls().findByName(HALL_NAME_WORKSHOPS);
 		Hall meetings = getHalls().findByName(HALL_NAME_MEETINGS);
-		Hall kids = getHalls().findByName(HALL_NAME_KIDS);
-		Hall ironi1 = getHalls().findByName(HALL_NAME_IRONI_1);
-		Hall ironi2 = getHalls().findByName(HALL_NAME_IRONI_2);
-		Hall ironi3 = getHalls().findByName(HALL_NAME_IRONI_3);
-		Hall ironi4 = getHalls().findByName(HALL_NAME_IRONI_4);
-		Hall ironi5 = getHalls().findByName(HALL_NAME_IRONI_5);
-		Hall ironi6 = getHalls().findByName(HALL_NAME_IRONI_6);
-		Hall ironi7 = getHalls().findByName(HALL_NAME_IRONI_7);
-		Hall ironi8 = getHalls().findByName(HALL_NAME_IRONI_8);
+//		Hall kids = getHalls().findByName(HALL_NAME_KIDS);
+//		Hall ironi1 = getHalls().findByName(HALL_NAME_IRONI_1);
+//		Hall ironi2 = getHalls().findByName(HALL_NAME_IRONI_2);
+//		Hall ironi3 = getHalls().findByName(HALL_NAME_IRONI_3);
+//		Hall ironi4 = getHalls().findByName(HALL_NAME_IRONI_4);
+//		Hall ironi5 = getHalls().findByName(HALL_NAME_IRONI_5);
+//		Hall ironi6 = getHalls().findByName(HALL_NAME_IRONI_6);
+//		Hall ironi7 = getHalls().findByName(HALL_NAME_IRONI_7);
+//		Hall ironi8 = getHalls().findByName(HALL_NAME_IRONI_8);
 		Hall outside = getHalls().findByName(HALL_NAME_OUTSIDE);
 //		Hall arena = getHalls().findByName(HALL_NAME_ARENA);
 //		Hall tent20 = getHalls().findByName(HALL_NAME_TENT_20);
@@ -205,7 +203,7 @@ public class Icon2023Convention extends SffConvention {
 		int DEFAULT_SELECTED_MARKER = R.drawable.icon2023_place_selected;
 		int DEFAULT_SELECTED_MARKER_TINT_RES = MapLocation.NO_TINT;
 		return new ConventionMap()
-			.withFloors(Collections.singletonList(floor))
+			/*.withFloors(Collections.singletonList(floor))
 			.withLocations(
 				CollectionUtils.flattenList(
 					inFloor(floor,
@@ -494,7 +492,7 @@ public class Icon2023Convention extends SffConvention {
 							.withY(626)
 					)
 				)
-			);
+			)*/;
 	}
 
 	@Override
