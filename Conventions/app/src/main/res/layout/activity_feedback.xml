@@ -168,6 +168,7 @@
             android:id="@+id/convention_feedback_view"
             android:paddingStart="@dimen/activity_horizontal_margin"
             android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:background="?conventionFeedbackBackgroundColor"
             android:layout_marginStart="?contentStartMargin"
             android:layout_marginEnd="?contentEndMargin"
             app:textColor="?conventionFeedbackTextColor"
@@ -177,6 +178,5 @@
             app:progressBarColor="?feedbackProgressBarColor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-
     </LinearLayout>
 </ScrollView>
