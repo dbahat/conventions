@@ -255,7 +255,7 @@
         <!-- Background for "go to updates" button before convention. Default is homeButtonBackground. -->
         <attr name="homeGotoUpdatesButtonBackground" format="integer|reference"/>
         <!-- Text color for "go to updates" button before convention. Default is homeButtonText. -->
-        <attr name="homeGotoUpdatesButtonText" format="integer|reference"/>
+        <attr name="homeGotoUpdatesButtonText" format="color|reference"/>
 
         <!-- My Events Screen -->
 
@@ -532,6 +532,9 @@
         <attr name="borderlessButtonColor" format="color|reference"/>
 
         <!-- Feedback Screen -->
+
+        <!-- Background color for feedback in feedback activity -->
+        <attr name="conventionFeedbackBackgroundColor" format="color|reference"/>
 
         <!-- Text color for feedback in feedback activity. See eventFeedbackTextColor for usage. -->
         <attr name="conventionFeedbackTextColor" format="color|reference"/>
