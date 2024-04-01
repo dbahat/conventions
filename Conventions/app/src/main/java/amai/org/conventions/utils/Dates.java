@@ -31,7 +31,7 @@ public class Dates {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm", Dates.getLocale());
 		dateFormat.setTimeZone(LOCAL_TIME_ZONE);
 		try {
-//			return dateFormat.parse("03.10.2023 16:10");
+//			return dateFormat.parse("24.04.2024 16:10");
 			return null;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
