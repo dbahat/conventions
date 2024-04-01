@@ -288,7 +288,10 @@
         <!-- Text color for free time in my events. Can be a color state list. State is set with state_event_... attributes. -->
         <attr name="freeTimeTextColor" format="color|reference"/>
 
+        <!-- User Details Dialog -->
+
         <!-- Text color for logout button in user details popup. If transparent, the default color is used. -->
+        <attr name="userDetailsTextColor" format="color|reference"/>
         <attr name="logoutButtonTextColor" format="color|reference"/>
 
         <!-- Navigation Drawer -->
