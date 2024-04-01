@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:drawable="@drawable/olamot2024_pink50_transparent_80_round"  app:state_home_during_con="true" app:state_home_has_favorites="true"/>
+    <item android:drawable="@color/transparent"/>
+</selector>

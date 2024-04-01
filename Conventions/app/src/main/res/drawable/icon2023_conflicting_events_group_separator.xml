@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<inset android:insetLeft="30dp" android:insetRight="30dp" xmlns:android="http://schemas.android.com/apk/res/android">
-    <shape android:shape="rectangle">
-        <solid android:color="@color/icon2023_brown1"/>
-        <size android:height="?conflictingEventsGroupSeparatorHeight"/>
-    </shape>
-</inset>

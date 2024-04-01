@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item app:state_second_hand_form_closed="true" android:color="@color/icon2023_brown5"/>
-    <item app:state_second_hand_item_created="true" android:color="@color/icon2023_brown5"/>
-    <item app:state_second_hand_item_sold="true" android:color="@color/icon2023_gray2"/>
-    <item app:state_second_hand_item_missing="true" android:color="@color/icon2023_red2"/>
-    <item android:color="@color/white"/>
-</selector>

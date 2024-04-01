@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="olamot2024_blue50_transparent_80">#CCF0FDFF</color>
+    <color name="olamot2024_blue100">#D6FAFF</color>
+    <color name="olamot2024_blue300">#94DCE7</color>
+    <color name="olamot2024_blue600">#348895</color>
+    <color name="olamot2024_blue700">#1A727F</color>
+    <color name="olamot2024_blue700_transparent_50">#801A727F</color>
+    <color name="olamot2024_blue900">#08353C</color>
+
+    <color name="olamot2024_pink50">#FFF5F6</color>
+    <color name="olamot2024_pink50_transparent_80">#CCFFF5F6</color>
+    <color name="olamot2024_pink100">#FFE5E7</color>
+    <color name="olamot2024_pink200">#FAD0D3</color>
+    <color name="olamot2024_pink300">#E7B2B6</color>
+    <color name="olamot2024_pink400">#E6A3AB</color>
+    <color name="olamot2024_pink600">#B45069</color>
+    <color name="olamot2024_pink700">#871A40</color>
+    <color name="olamot2024_pink900">#4A061E</color>
+
+    <color name="olamot2024_gray3">#A3B5BC</color>
+    <color name="olamot2024_gold">#E8B247</color>
+    <color name="olamot2024_red1">#D41206</color>
+    <color name="olamot2024_green1">#99C95E</color>
+
+    <color name="olamot2024_black">#303030</color>
+
+
+    <color name="icon2023_brown1">#FFF6E5</color>
+    <color name="icon2023_brown2">#FFDEA1</color>
+    <color name="icon2023_brown4">#D29957</color>
+    <color name="icon2023_brown5">#B06C1E</color>
+    <color name="icon2023_brown6">#69401F</color>
+    <color name="icon2023_brown7">#251B0F</color>
+    <color name="icon2023_transparent_brown1">#E6FFF6E5</color>
+</resources>
