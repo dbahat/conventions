@@ -189,30 +189,31 @@
         <item name="eventVoteTextColor">@color/olamot2024_blue100</item>
         <!-- Map Screen -->
         <item name="mapBackground">?activitiesBackground</item>
-        <item name="locationDetailsBackground">@color/icon2023_brown2</item>
+        <item name="locationDetailsBackground">@color/olamot2024_blue100</item>
         <item name="locationDetailsTopLineColor">@color/transparent</item>
-        <item name="locationDetailsTitleColor">@color/icon2023_brown7</item>
+        <item name="iconClearMap">@drawable/ic_clear_black</item>
+        <item name="locationDetailsTitleColor">@color/olamot2024_blue900</item>
         <item name="locationDetailsElevation">3dp</item>
-        <item name="floorChangeBackground">@color/icon2023_brown4</item>
-        <item name="mapSearchFiltersBackground">@color/icon2023_brown1</item>
-        <item name="mapSearchResultsBackground">@color/icon2023_transparent_brown1</item>
-        <item name="mapSearchBorder">@color/icon2023_brown1</item>
+        <item name="floorChangeBackground">@color/olamot2024_blue300</item>
+        <item name="mapSearchFiltersBackground">@color/olamot2024_pink50</item>
+        <item name="mapSearchResultsBackground">@color/olamot2024_pink50_transparent_80</item>
+        <item name="mapSearchBorder">@color/olamot2024_pink50</item>
         <item name="mapSearchPaneElevation">10dp</item>
-        <item name="mapSearchText">@color/icon2023_brown7</item>
-        <item name="mapSearchSeparator">@color/icon2023_brown6</item>
-        <item name="mapSearchResultsDivider">@drawable/icon2023_map_search_results_divider</item>
-        <item name="mapSearchCheckboxTint">@color/icon2023_brown6</item>
-        <item name="mapSearchHint">@color/icon2023_brown6</item>
+        <item name="mapSearchText">@color/olamot2024_pink900</item>
+        <item name="mapSearchSeparator">@color/olamot2024_pink400</item>
+        <item name="mapSearchResultsDivider">@drawable/olamot2024_map_search_results_divider</item>
+        <item name="mapSearchCheckboxTint">@color/olamot2024_pink600</item>
+        <item name="mapSearchHint">@color/olamot2024_pink900</item>
         <item name="mapSearchBarBackground">@drawable/olamot2024_search_bar_background</item>
         <item name="mapSearchBarHorizontalMargins">5dp</item>
-        <item name="standIconColor">@color/icon2023_brown7</item>
-        <item name="standsTypeTitleColor">@color/icon2023_brown6</item>
+        <item name="standIconColor">@color/olamot2024_blue900</item>
+        <item name="standsTypeTitleColor">@color/olamot2024_blue900</item>
         <!-- Second Hand Screen -->
-<!--        <item name="secondHandFormColor">@drawable/icon2023_second_hand_form_text_color</item>-->
-<!--        <item name="secondHandItemStatusColor">@drawable/icon2023_second_hand_item_status_text_color</item>-->
-<!--        <item name="secondHandItemsDivider">@drawable/icon2023_second_hand_item_list_divider</item>-->
-<!--        <item name="secondHandFilterColor">@color/white</item>-->
-<!--        <item name="secondHandSelectedFilterColor">@color/icon2023_brown2</item>-->
+<!--        <item name="secondHandFormColor">@drawable/second_hand_form_text_color</item>-->
+<!--        <item name="secondHandItemStatusColor">@drawable/second_hand_item_status_text_color</item>-->
+<!--        <item name="secondHandItemsDivider">@drawable/second_hand_item_list_divider</item>-->
+<!--        <item name="secondHandFilterColor"></item>-->
+<!--        <item name="secondHandSelectedFilterColor"></item>-->
         <!-- Discounts activity -->
         <item name="discountsActivityLayout">@layout/activity_discounts</item>
     </style>

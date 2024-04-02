@@ -24,13 +24,4 @@
     <color name="olamot2024_green1">#99C95E</color>
 
     <color name="olamot2024_black">#303030</color>
-
-
-    <color name="icon2023_brown1">#FFF6E5</color>
-    <color name="icon2023_brown2">#FFDEA1</color>
-    <color name="icon2023_brown4">#D29957</color>
-    <color name="icon2023_brown5">#B06C1E</color>
-    <color name="icon2023_brown6">#69401F</color>
-    <color name="icon2023_brown7">#251B0F</color>
-    <color name="icon2023_transparent_brown1">#E6FFF6E5</color>
 </resources>

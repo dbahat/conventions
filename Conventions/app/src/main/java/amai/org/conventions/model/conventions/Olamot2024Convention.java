@@ -8,6 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 import amai.org.conventions.auth.Configuration;
@@ -21,6 +22,7 @@ import amai.org.conventions.model.Hall;
 import amai.org.conventions.model.Halls;
 import amai.org.conventions.model.ImageIdToImageResourceMapper;
 import amai.org.conventions.model.MapLocation;
+import amai.org.conventions.model.Place;
 import amai.org.conventions.model.SecondHandItem;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
@@ -191,308 +193,97 @@ public class Olamot2024Convention extends SffConvention {
 
 		Floor floor = new Floor(1)
 				.withName("מפת מתחם")
-				.withImageResource(R.raw.icon2023_map, true)
-				.withImageHeight(715)
-				.withImageWidth(820)
+				.withImageResource(R.raw.olamot2024_map, true)
+				.withImageHeight(813)
+				.withImageWidth(836.38f)
 				.withDefaultMarkerHeight(35);
 		final int BIG_MARKER_HEIGHT = 70;
 		final int SMALL_MARKER_HEIGHT = 20;
 
-		int DEFAULT_MARKER = R.drawable.icon2023_place;
-		int DEFAULT_MARKER_TINT_RES = MapLocation.NO_TINT;
-		int DEFAULT_SELECTED_MARKER = R.drawable.icon2023_place_selected;
-		int DEFAULT_SELECTED_MARKER_TINT_RES = MapLocation.NO_TINT;
 		return new ConventionMap()
-			/*.withFloors(Collections.singletonList(floor))
+			.withFloors(Collections.singletonList(floor))
 			.withLocations(
 				CollectionUtils.flattenList(
 					inFloor(floor,
-						new MapLocation()
-							.withPlace(new Place().withName("יציאה בלבד"))
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(170)
-							.withY(48),
-						new MapLocation()
-							.withPlace(new Place().withName("מודיעין"))
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(53)
-							.withY(48),
-						new MapLocation()
-							.withPlace(new Place().withName("דוכנים"))
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(191)
-							.withY(81),
-						new MapLocation()
-							.withName("אשכולות 3-4")
-							.withPlaces(Arrays.asList(eshkol3, eshkol4))
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(113)
-							.withY(181),
-//							.withMarkerHeight(SMALL_MARKER_HEIGHT),
-						new MapLocation()
-							.withPlace(new Place().withName("דוכנים"))
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(164)
-							.withY(185),
-						new MapLocation()
-							.withName("אשכולות 5-6")
-							.withPlaces(Arrays.asList(eshkol3, eshkol4, eshkol5, eshkol6))
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(219)
-							.withY(183),
-//							.withMarkerHeight(SMALL_MARKER_HEIGHT),
-						new MapLocation()
-							.withPlace(new Place().withName("שירותי גברים"))
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(73)
-							.withY(229),
-//							.withMarkerHeight(SMALL_MARKER_HEIGHT),
-						new MapLocation()
-							.withPlace(new Place().withName("שירותי נשים"))
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(254)
-							.withY(229),
-//							.withMarkerHeight(SMALL_MARKER_HEIGHT),
-						new MapLocation()
-							.withPlace(eshkol1)
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(166)
-							.withY(265),
-						new MapLocation()
-							.withPlace(eshkol2)
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(92)
-							.withY(265),
-						new MapLocation()
-							.withPlace(new Place().withName("דוכנים"))
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(319)
-							.withY(49),
-//							.withMarkerHeight(SMALL_MARKER_HEIGHT),
-						new MapLocation()
-							.withPlace(new Place().withName("דוכנים"))
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(225)
-							.withY(313),
-//							.withMarkerHeight(SMALL_MARKER_HEIGHT),
-						new MapLocation()
-							.withPlace(new Place().withName("דוכנים"))
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(262)
-							.withY(382),
-//							.withMarkerHeight(SMALL_MARKER_HEIGHT),
-						new MapLocation()
-							.withPlace(new Place().withName("הזירה"))
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(128)
-							.withY(399),
-						new MapLocation()
-							.withPlace(new Place().withName("כניסה מרחוב הארבעה"))
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(37)
-							.withY(448)
-							.withMarkerHeight(SMALL_MARKER_HEIGHT),
-						new MapLocation()
-							.withPlace(new Place().withName("מודיעין"))
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(50)
-							.withY(491),
-						new MapLocation()
-							.withPlace(new Place().withName("דוכני עמותות"))
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(113)
-							.withY(491),
-						new MapLocation()
-							.withPlace(new Place().withName("קופות"))
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(254)
-							.withY(500),
-						new MapLocation()
-							.withPlace(new Place().withName("סינמטק תל אביב"))
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(108)
-							.withY(649),
-						new MapLocation()
-							.withPlace(new Place().withName("אולם ספורט"))
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(350)
-							.withY(598),
-						new MapLocation()
-							.withPlace(new Place().withName("קפיטריה"))
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(372)
-							.withY(536),
-						new MapLocation()
-							.withPlace(new Place().withName("כניסה לעירוני"))
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(550)
-							.withY(64),
-						new MapLocation()
-							.withPlace(new Place().withName("שירותי גברים"))
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(511)
-							.withY(122)
-							.withMarkerHeight(SMALL_MARKER_HEIGHT),
-						new MapLocation()
-							.withPlace(new Place().withName("שירותי נשים"))
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(536)
-							.withY(122)
-							.withMarkerHeight(SMALL_MARKER_HEIGHT),
-						new MapLocation()
-							.withPlace(new Place().withName("חדר קוספליי נשים"))
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(535)
-							.withY(159),
-//							.withMarkerHeight(SMALL_MARKER_HEIGHT),
-						new MapLocation()
-							.withPlace(workshops)
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(535)
-							.withY(199),
-//							.withMarkerHeight(SMALL_MARKER_HEIGHT),
-						new MapLocation()
-							.withPlace(meetings)
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(535)
-							.withY(235),
-//							.withMarkerHeight(SMALL_MARKER_HEIGHT),
-						new MapLocation()
-							.withPlace(kids)
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(535)
-							.withY(275),
-//							.withMarkerHeight(SMALL_MARKER_HEIGHT),
-						new MapLocation()
-							.withPlace(ironi6)
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(535)
-							.withY(315),
-//							.withMarkerHeight(SMALL_MARKER_HEIGHT),
-						new MapLocation()
-							.withPlace(new Place().withName("כניסה נגישה לעירוני"))
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(605)
-							.withY(350),
-						new MapLocation()
-							.withPlace(new Place().withName("תיקון קוספליי"))
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(492)
-							.withY(367),
-						new MapLocation()
-							.withName("עירוניים 1-8")
-							.withPlaces(Arrays.asList(ironi1, ironi2, ironi3, ironi4, ironi5, ironi7, ironi8))
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(557)
-							.withY(402),
-						new MapLocation()
-							.withPlace(new Place().withName("שירותי יוניסקס"))
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(488)
-							.withY(457),
-//							.withMarkerHeight(SMALL_MARKER_HEIGHT),
-						new MapLocation()
-							.withPlace(new Place().withName("כניסה לעירוני"))
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(438)
-							.withY(476),
-//							.withMarkerHeight(SMALL_MARKER_HEIGHT),
-						new MapLocation()
-							.withPlace(new Place().withName("דוכנים"))
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(448)
-							.withY(529),
-//							.withMarkerHeight(SMALL_MARKER_HEIGHT),
-						new MapLocation()
-							.withPlace(new Place().withName("הוביטון"))
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(488)
-							.withY(509),
-//							.withMarkerHeight(SMALL_MARKER_HEIGHT),
-						new MapLocation()
-							.withPlace(new Place().withName("חדר קוספליי גברים"))
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(488)
-							.withY(548),
-//							.withMarkerHeight(SMALL_MARKER_HEIGHT),
-						new MapLocation()
-							.withPlace(new Place().withName("שמירת חפצים"))
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(501)
-							.withY(614),
-						new MapLocation()
-							.withPlace(new Place().withName("אוהל משחקים"))
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(477)
-							.withY(674),
-						new MapLocation()
-							.withPlace(new Place().withName("יציאת חירום"))
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(649)
-							.withY(87),
-						new MapLocation()
-							.withPlace(new Place().withName("המתחם הקהילתי"))
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(640)
-							.withY(209),
-						new MapLocation()
-//							.withName("השטיח האדום")
-//							.withPlace(outside)
-							.withPlace(new Place().withName("השטיח האדום"))
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(617)
-							.withY(563),
-						new MapLocation()
-							.withPlace(new Place().withName("כניסה מרחוב שפרינצק"))
-							.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-							.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
-							.withX(612)
-							.withY(626)
+						mapLocation("יציאת חירום", 207, 39),
+						mapLocation("דוכנים", 357, 42),
+						mapLocation("מודיעין", 127, 65),
+						mapLocation("מתחם דוכני פופ-אפ", 135, 111),
+						mapLocation("מתחם משחקי מחשב", 243, 111),
+						mapLocation("אשכולות 3-4", Arrays.asList(eshkol3, eshkol4), 101, 206).withMarkerHeight(SMALL_MARKER_HEIGHT),
+						mapLocation("דוכנים", 190, 222),
+						mapLocation("אשכולות 5-6", Arrays.asList(eshkol5, eshkol6), 290, 206).withMarkerHeight(SMALL_MARKER_HEIGHT),
+						mapLocation("שירותי גברים", 119, 246),
+						mapLocation("שירותי נשים", 260, 246),
+						mapLocation(eshkol1, 193, 317),
+						mapLocation("מרחב מוגן", 238, 292),
+						mapLocation(eshkol2, 105, 317),
+						mapLocation("דוכנים", 240, 346),
+						mapLocation("דוכנים", 169, 415),
+						mapLocation("דוכנים", 288, 415),
+						mapLocation("דוכנים", 365, 415),
+						mapLocation("כניסה ויציאה מרחוב הארבעה", 36, 514),
+						mapLocation("מודיעין", 51, 596),
+						mapLocation("דוכני עמותות", 129, 596),
+						mapLocation("קופות", 293, 587),
+						mapLocation("סינמטק תל אביב", 125, 743),
+						mapLocation("אולם ספורט", 405, 689),
+						mapLocation("קפיטריה", 441, 608),
+						mapLocation("כניסה לעירוני", 633, 62),
+						mapLocation("שירותי גברים", 600, 122).withMarkerHeight(SMALL_MARKER_HEIGHT),
+						mapLocation("מרחב מוגן", 584, 185),
+						mapLocation("שירותי נשים", 619, 122).withMarkerHeight(SMALL_MARKER_HEIGHT),
+						mapLocation(workshops, 649, 219),
+						mapLocation(meetings, 649, 176),
+						mapLocation("הוביטון", 649, 267),
+						mapLocation("קוספליי גברים", 666, 368),
+						mapLocation("עמדת תיקון קוספליי", 573, 403),
+						mapLocation("מרחב מוגן", 651, 463),
+						mapLocation("קוספליי נשים", 781, 460),
+						mapLocation("כניסה ויציאה נגישה לעירוני", 726, 385),
+						mapLocation("המתחם הקהילתי", 744, 294),
+						mapLocation("אוהל זיכרון", 776, 173),
+						mapLocation("יציאת חירום", 730, 73),
+						mapLocation("שירותי יוניסקס", 596, 548),
+						mapLocation("מעבר לעירוני", 501, 535),
+						mapLocation("דוכנים", 515, 613),
+						mapLocation("שמירת חפצים", 584, 702),
+						mapLocation("השטיח האדום", 719, 625),
+						mapLocation("כניסה ויציאה מרחוב שפרינצק", 699, 710)
 					)
 				)
-			)*/;
+			);
+	}
+
+	private MapLocation mapLocation(String name, float x, float y) {
+		return mapLocation(name, null, x, y);
+	}
+
+	private MapLocation mapLocation(Place place, float x, float y) {
+		return mapLocation(null, Collections.singletonList(place), x, y);
+	}
+
+	private MapLocation mapLocation(String name, List<? extends Place> places, float x, float y) {
+		final int DEFAULT_MARKER = R.drawable.olamot2024_place;
+		final int DEFAULT_MARKER_TINT_RES = MapLocation.NO_TINT;
+		final int DEFAULT_SELECTED_MARKER = R.drawable.olamot2024_place_selected;
+		final int DEFAULT_SELECTED_MARKER_TINT_RES = MapLocation.NO_TINT;
+
+		MapLocation result = new MapLocation();
+		if (places != null) {
+			result.setPlaces(places);
+			if (name != null) {
+				result.setName(name);
+			}
+		} else {
+			result.setPlace(new Place().withName(name));
+		}
+
+		return result
+			.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
+			.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
+			.withX(x)
+			.withY(y);
 	}
 
 	@Override
