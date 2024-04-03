@@ -20,6 +20,7 @@
         <item name="stickyListHeadersListViewStyle">@style/Widget.AppCompat.ListView</item>
         <item name="activitiesBackground">@null</item>
         <item name="infoActivitiesBackground">?activitiesBackground</item>
+        <item name="infoActivitiesTextBackground">@color/transparent</item>
         <item name="highlightedButtonBackground">@drawable/highlighted_button</item>
         <item name="actionButtonColor">?colorAccent</item>
         <item name="actionButtonIcon">@drawable/ic_action_search</item>
@@ -231,6 +232,7 @@
         <item name="stickyListHeadersListViewStyle">@style/Widget.AppCompat.ListView</item>
         <item name="activitiesBackground">@null</item>
         <item name="infoActivitiesBackground">?activitiesBackground</item>
+        <item name="infoActivitiesTextBackground">@color/transparent</item>
         <item name="highlightedButtonBackground">@drawable/highlighted_button</item>
         <item name="actionButtonColor">?colorAccent</item>
         <item name="actionButtonIcon">@drawable/ic_action_search</item>

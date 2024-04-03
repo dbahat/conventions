@@ -19,6 +19,7 @@ public abstract class WebContentActivity extends NavigationActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentInContentContainer(R.layout.activity_web_content);
+		setBackground(ThemeAttributes.getDrawable(this, R.attr.infoActivitiesBackground));
 		setToolbarTitle(getString(getPageTitleResourceId()));
 
 		handleDeepLinks();
