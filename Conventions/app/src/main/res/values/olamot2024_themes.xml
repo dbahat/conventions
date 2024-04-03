@@ -17,7 +17,7 @@
         <item name="android:textColorSecondary">@color/olamot2024_gray3</item>
         <item name="android:colorBackground">@null</item>
         <item name="android:textColorHint">@color/olamot2024_pink900</item>
-        <item name="android:textColorLink">@color/olamot2024_blue600</item>
+        <item name="android:textColorLink">@color/olamot2024_blue700</item>
         <item name="actionButtonColor">@color/olamot2024_blue300</item>
         <item name="actionButtonIcon">@drawable/search_black</item>
         <item name="hintTextColor">@color/olamot2024_blue700</item>
@@ -27,6 +27,7 @@
         <item name="highlightedButtonBackground">@drawable/highlighted_button</item>
         <item name="borderlessButtonColor">@color/olamot2024_blue700</item>
         <item name="activitiesBackground">@drawable/olamot2024_activities_background</item>
+        <item name="infoActivitiesTextBackground">@drawable/olamot2024_rounded_edges_pink50_transparent_80_inset</item>
         <item name="contentStartMargin">0dp</item>
         <item name="contentEndMargin">0dp</item>
         <item name="eventListDivider">@drawable/transparent_event_list_divider</item>
@@ -66,7 +67,7 @@
         <item name="navigationItemsShouldDisplayIcon">false</item>
         <!-- About Screen -->
         <item name="aboutLogo">@drawable/olamot2024_home_logo</item>
-        <item name="aboutLogoMargins">20dp</item>
+        <item name="aboutLogoMargins">50dp</item>
         <!-- Home Screen -->
         <item name="homeBoxTopMargin">10dp</item>
         <item name="homeSingleButtonTopMargin">10dp</item>

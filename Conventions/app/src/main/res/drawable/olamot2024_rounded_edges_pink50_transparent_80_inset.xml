@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<inset android:inset="10dp" xmlns:android="http://schemas.android.com/apk/res/android">
-    <shape>
-        <corners android:radius="4dp" />
-        <solid android:color="@color/olamot2024_pink50_transparent_80" />
-    </shape>
-</inset>
+<!-- Note: insets set the padding of the view and not just the background. This has the same effect. -->
+<layer-list
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:top="10dp"
+        android:bottom="10dp"
+        android:left="10dp"
+        android:right="10dp">
+        <shape>
+            <corners android:radius="4dp" />
+            <solid android:color="@color/olamot2024_pink50_transparent_80" />
+        </shape>
+    </item>
+</layer-list>
