@@ -13,6 +13,7 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:layout_marginStart="?contentStartMargin"
         android:layout_marginEnd="?contentEndMargin"
+        android:background="?infoActivitiesTextBackground"
         android:orientation="vertical">
         <TextView
             android:layout_width="match_parent"
