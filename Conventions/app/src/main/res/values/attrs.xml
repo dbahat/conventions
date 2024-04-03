@@ -355,6 +355,10 @@
              background during update refresh animations. -->
         <attr name="updatesBackgroundColor" format="color|reference"/>
 
+        <!-- Padding for update item top -->
+        <attr name="updatePaddingTop" format="dimension"/>
+        <!-- Padding for update item bottom -->
+        <attr name="updatePaddingBottom" format="dimension"/>
         <!-- Elevation for update item -->
         <attr name="updateElevation" format="dimension"/>
         <!-- Background for update. Can be a drawable state list. State is set with state_update_... -->
