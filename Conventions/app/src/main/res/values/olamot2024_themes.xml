@@ -160,6 +160,8 @@
         <item name="updateItemSeparator">@color/transparent</item>
         <item name="updateBackground">@drawable/olamot2024_update_background</item>
         <item name="updateTextColor">@drawable/olamot2024_update_text_color</item>
+        <item name="updatePaddingTop">10dp</item>
+        <item name="updatePaddingBottom">25dp</item>
         <item name="updateElevation">2dp</item>
         <item name="updateItemBorder">?borderlessButtonColor</item>
         <item name="updatesSeparatorColor">@color/transparent</item>

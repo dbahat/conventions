@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Note: insets set the padding of the view and not just the background. This has the same effect. -->
+<!-- Note: insets set the padding of the view and not just the background.
+     Layer list items have the same effect as insets, but without changing the padding.
+     We need this resource not to change the padding in the sides. -->
 <layer-list
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:top="10dp"
-        android:bottom="10dp"
         android:left="10dp"
         android:right="10dp">
+        <inset android:insetTop="10dp" android:insetBottom="10dp">
             <shape>
                 <corners android:radius="4dp" />
                 <solid android:color="@color/olamot2024_pink200" />
             </shape>
+        </inset>>
     </item>
 </layer-list>
