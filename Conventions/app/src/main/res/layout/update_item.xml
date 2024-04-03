@@ -5,7 +5,8 @@
               android:orientation="vertical"
               android:layout_marginStart="?contentStartMargin"
               android:layout_marginEnd="?contentEndMargin"
-              android:paddingBottom="15dp"
+              android:paddingTop="?updatePaddingTop"
+              android:paddingBottom="?updatePaddingBottom"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:elevation="?updateElevation">
