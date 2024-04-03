@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?infoActivitiesTextBackground"
     tools:context="amai.org.conventions.settings.SettingsActivity">
 
     <fragment android:name="amai.org.conventions.settings.SettingsActivity$SettingsFragment"
@@ -13,5 +14,4 @@
         android:layout_marginStart="?contentStartMargin"
         android:layout_marginEnd="?contentEndMargin"
         />
-
 </FrameLayout>
