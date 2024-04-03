@@ -125,7 +125,7 @@
         <item name="searchTitleBackgroundColor">@color/olamot2024_pink50</item>
         <item name="searchTitleHorizontalPadding">8dp</item>
         <item name="searchTitleTextColor">@color/olamot2024_pink900</item>
-        <item name="programmeSearchBarBackground">@drawable/olamot2024_search_bar_background</item>
+        <item name="programmeSearchBarBackground">@drawable/olamot2024_search_bar_background_pink</item>
         <item name="eventNameKeywordHighlightColor">@color/olamot2024_pink600</item>
         <item name="eventKeywordHighlightColor">@color/olamot2024_pink600</item>
         <item name="searchDrawerAccentColor">@color/olamot2024_pink600</item>
@@ -190,22 +190,22 @@
         <item name="eventVoteTextColor">@color/olamot2024_blue100</item>
         <!-- Map Screen -->
         <item name="mapBackground">?activitiesBackground</item>
-        <item name="locationDetailsBackground">@color/olamot2024_blue100</item>
+        <item name="locationDetailsBackground">@color/olamot2024_blue50</item>
         <item name="locationDetailsTopLineColor">@color/transparent</item>
         <item name="iconClearMap">@drawable/ic_clear_black</item>
         <item name="locationDetailsTitleColor">@color/olamot2024_blue900</item>
         <item name="locationDetailsElevation">3dp</item>
-        <item name="floorChangeBackground">@color/olamot2024_blue300</item>
-        <item name="mapSearchFiltersBackground">@color/olamot2024_pink50</item>
-        <item name="mapSearchResultsBackground">@color/olamot2024_pink50_transparent_80</item>
-        <item name="mapSearchBorder">@color/olamot2024_pink50</item>
+        <item name="floorChangeBackground">@color/olamot2024_pink50</item>
+        <item name="mapSearchFiltersBackground">@color/olamot2024_blue50</item>
+        <item name="mapSearchResultsBackground">@color/olamot2024_blue50_transparent_90</item>
+        <item name="mapSearchBorder">@color/olamot2024_blue50</item>
         <item name="mapSearchPaneElevation">10dp</item>
-        <item name="mapSearchText">@color/olamot2024_pink900</item>
-        <item name="mapSearchSeparator">@color/olamot2024_pink400</item>
+        <item name="mapSearchText">@color/olamot2024_blue900</item>
+        <item name="mapSearchSeparator">@color/olamot2024_gray1</item>
         <item name="mapSearchResultsDivider">@drawable/olamot2024_map_search_results_divider</item>
         <item name="mapSearchCheckboxTint">@color/olamot2024_pink600</item>
-        <item name="mapSearchHint">@color/olamot2024_pink900</item>
-        <item name="mapSearchBarBackground">@drawable/olamot2024_search_bar_background</item>
+        <item name="mapSearchHint">@color/olamot2024_blue900</item>
+        <item name="mapSearchBarBackground">@drawable/olamot2024_search_bar_background_blue</item>
         <item name="mapSearchBarHorizontalMargins">5dp</item>
         <item name="standIconColor">@color/olamot2024_blue900</item>
         <item name="standsTypeTitleColor">@color/olamot2024_blue900</item>
@@ -220,7 +220,7 @@
     </style>
 
     <style name="AppBaseTheme.Olamot2024.Event">
-        <item name="android:textColorLink">@color/olamot2024_pink700</item>
+        <item name="android:textColorLink">@color/olamot2024_blue700</item>
     </style>
 
     <style name="AppBaseTheme.Olamot2024.Settings">
