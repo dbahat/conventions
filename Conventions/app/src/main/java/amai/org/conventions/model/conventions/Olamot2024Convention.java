@@ -198,7 +198,7 @@ public class Olamot2024Convention extends SffConvention {
 				.withImageWidth(836.38f)
 				.withDefaultMarkerHeight(35);
 		final int BIG_MARKER_HEIGHT = 70;
-		final int SMALL_MARKER_HEIGHT = 20;
+		final int SMALL_MARKER_HEIGHT = 25;
 
 		return new ConventionMap()
 			.withFloors(Collections.singletonList(floor))
