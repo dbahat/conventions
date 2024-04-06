@@ -126,6 +126,7 @@
         <item name="searchTitleHorizontalPadding">8dp</item>
         <item name="searchTitleTextColor">@color/olamot2024_pink900</item>
         <item name="programmeSearchBarBackground">@drawable/olamot2024_search_bar_background_pink</item>
+        <item name="programmeSearchFilterColor">@color/olamot2024_pink600</item>
         <item name="eventNameKeywordHighlightColor">@color/olamot2024_pink600</item>
         <item name="eventKeywordHighlightColor">@color/olamot2024_pink600</item>
         <item name="searchDrawerAccentColor">@color/olamot2024_pink600</item>

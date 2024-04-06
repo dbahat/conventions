@@ -203,6 +203,7 @@
         <!-- Programme Search Activity -->
         <item name="searchTitleBackgroundColor">@android:color/transparent</item>
         <item name="searchTitleHorizontalPadding">0dp</item>
+        <item name="programmeSearchFilterColor">?colorAccent</item>
         <item name="programmeSearchBarBackground">@null</item>
         <item name="searchDrawerAccentColor">?colorAccent</item>
         <item name="searchDrawerBackground">@color/white</item>
@@ -417,6 +418,7 @@
         <!-- Programme Search Activity -->
         <item name="searchTitleBackgroundColor">@android:color/transparent</item>
         <item name="searchTitleHorizontalPadding">0dp</item>
+        <item name="programmeSearchFilterColor">?colorAccent</item>
         <item name="programmeSearchBarBackground">@null</item>
         <item name="searchDrawerAccentColor">?colorAccent</item>
         <item name="searchDrawerBackground">@color/white</item>

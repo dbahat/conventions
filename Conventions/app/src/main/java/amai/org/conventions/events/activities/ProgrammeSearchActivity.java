@@ -196,7 +196,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 				? R.drawable.filter
 				: R.drawable.filter_full);
 		filterIcon.mutate();
-		filterIcon.setColorFilter(ThemeAttributes.getColor(this, R.attr.colorAccent), PorterDuff.Mode.SRC_ATOP);
+		filterIcon.setColorFilter(ThemeAttributes.getColor(this, R.attr.programmeSearchFilterColor), PorterDuff.Mode.SRC_ATOP);
 		filterButton.setImageDrawable(filterIcon);
 	}
 
