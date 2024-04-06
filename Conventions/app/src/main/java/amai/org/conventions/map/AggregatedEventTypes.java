@@ -18,7 +18,8 @@ public class AggregatedEventTypes {
 		aggregatedEventTypes = Arrays.asList(
 				new AggregatedType("הרצאות", Arrays.asList(
 						new EventType("הרצאה"),
-						new EventType("פאנל"))),
+						new EventType("פאנל"),
+						new EventType("פאנל TED"))),
 				new AggregatedType("משחקים", Arrays.asList(
 						new EventType("משחק שולחני"),
 						new EventType("משחק תפקידים חי"),
@@ -34,7 +35,9 @@ public class AggregatedEventTypes {
 						new EventType("הקרנה מונחית"),
 						new EventType("מופע"),
 						new EventType("סרט"),
-						new EventType("מופע מוזיקלי")))
+						new EventType("מופע מוזיקלי"))),
+				new AggregatedType("מפגשים", Arrays.asList(
+					new EventType("מפגש")))
 		);
 	}
 
