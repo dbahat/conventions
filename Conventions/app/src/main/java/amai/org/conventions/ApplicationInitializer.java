@@ -24,7 +24,7 @@ import amai.org.conventions.updates.UpdatesActivity;
 import amai.org.conventions.utils.CollectionUtils;
 import androidx.core.app.NotificationCompat;
 
-import static android.app.PendingIntent.FLAG_MUTABLE;
+import static android.app.PendingIntent.FLAG_IMMUTABLE;
 
 public class ApplicationInitializer {
     private static final int NEW_UPDATES_NOTIFICATION_ID = 75457;
@@ -110,8 +110,8 @@ public class ApplicationInitializer {
                     }
 
 					Intent intent = new Intent(currentContext, UpdatesActivity.class);
-                    int flags = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? FLAG_MUTABLE : 0;
-                    NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context, PushNotification.Channel.Notifications.toString())
+                    int flags = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE : PendingIntent.FLAG_UPDATE_CURRENT;
+                    NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(currentContext, PushNotification.Channel.Notifications.toString())
 							.setSmallIcon(ThemeAttributes.getResourceId(currentContext, R.attr.notificationSmallIcon))
 							.setContentTitle(notificationTitle)
 							.setContentText(notificationMessage)
@@ -130,7 +130,7 @@ public class ApplicationInitializer {
 
             @Override
             public void onError(Exception error) {
-				
+
             }
 		});
 	}
