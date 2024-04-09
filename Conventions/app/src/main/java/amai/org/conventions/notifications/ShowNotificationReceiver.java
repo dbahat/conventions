@@ -1,11 +1,5 @@
 package amai.org.conventions.notifications;
 
-import static android.app.PendingIntent.FLAG_MUTABLE;
-import static android.app.PendingIntent.FLAG_UPDATE_CURRENT;
-import static android.content.Context.NOTIFICATION_SERVICE;
-import static amai.org.conventions.model.EventNotification.Type.AboutToStart;
-import static amai.org.conventions.model.EventNotification.Type.FeedbackReminder;
-
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -16,8 +10,6 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
-
-import androidx.core.app.NotificationCompat;
 
 import java.util.List;
 
@@ -31,7 +23,15 @@ import amai.org.conventions.networking.UpdatesRefresher;
 import amai.org.conventions.updates.UpdatesActivity;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Log;
+import androidx.core.app.NotificationCompat;
 import sff.org.conventions.R;
+
+import static amai.org.conventions.model.EventNotification.Type.AboutToStart;
+import static amai.org.conventions.model.EventNotification.Type.FeedbackReminder;
+import static android.app.PendingIntent.FLAG_IMMUTABLE;
+import static android.app.PendingIntent.FLAG_MUTABLE;
+import static android.app.PendingIntent.FLAG_UPDATE_CURRENT;
+import static android.content.Context.NOTIFICATION_SERVICE;
 
 /**
  * Responsible for showing notifications using the Android NotificationManager.
@@ -104,7 +104,7 @@ public class ShowNotificationReceiver extends BroadcastReceiver {
         String message = lastChance ? context.getString(R.string.notification_feedback_last_chance_message, Convention.getInstance().getDisplayName()) :
                 context.getString(R.string.notification_feedback_ended_message, Convention.getInstance().getDisplayName());
 
-        int flags = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? FLAG_MUTABLE : 0;
+        int flags = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE : PendingIntent.FLAG_UPDATE_CURRENT;
         NotificationCompat.Builder builder = getDefaultNotificationBuilder(PushNotification.Type.ConventionFeedbackReminder.getChannel())
                 .setContentTitle(title)
                 .setContentText(message)
@@ -174,7 +174,7 @@ public class ShowNotificationReceiver extends BroadcastReceiver {
         // the intent must have a different action (extras don't affect the equality check - see documentation of PendingIntent).
         // In our case we either have a new intent each time (in case it's a a new event displayed) or the same intent of
         // opening the FeedbackActivity. If it's the latter we should update it.
-        int flags = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? FLAG_UPDATE_CURRENT | FLAG_MUTABLE : FLAG_UPDATE_CURRENT;
+        int flags = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? FLAG_UPDATE_CURRENT | FLAG_IMMUTABLE : FLAG_UPDATE_CURRENT;
         NotificationCompat.Builder builder = getDefaultNotificationBuilder(PushNotification.Type.EventFeedbackReminder.getChannel())
                 .setContentTitle(context.getResources().getString(R.string.notification_event_ended_title))
                 .setContentText(notificationText)
@@ -205,7 +205,7 @@ public class ShowNotificationReceiver extends BroadcastReceiver {
                 .putExtra(EventActivity.EXTRA_EVENT_ID, event.getId())
                 .putExtra(EventActivity.EXTRA_FOCUS_ON_FEEDBACK, false);
 
-        int flags = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? FLAG_MUTABLE : 0;
+        int flags = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE : PendingIntent.FLAG_UPDATE_CURRENT;
         NotificationCompat.Builder builder = getDefaultNotificationBuilder(PushNotification.Type.EventAboutToStart.getChannel())
                 .setContentTitle(context.getResources().getString(R.string.notification_event_about_to_start_title))
                 .setContentText(getEventAboutToStartNotificationText(event))
@@ -242,7 +242,7 @@ public class ShowNotificationReceiver extends BroadcastReceiver {
         // The action is necessary to ensure a new pending intent is created instead of re-used
         openAppIntent.setAction(PushNotification.Type.Push.toString() + messageId + "_" + notification.id);
 
-        int flags = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? FLAG_MUTABLE : 0;
+        int flags = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE : PendingIntent.FLAG_UPDATE_CURRENT;
         NotificationCompat.Builder builder = getDefaultNotificationBuilder(PushNotification.Type.Push.getChannel())
                 .setContentTitle(context.getString(R.string.app_name)) // Showing the app name as title to be consistent with iOS behavior
                 .setContentText(message)

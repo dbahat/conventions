@@ -1,8 +1,5 @@
 package amai.org.conventions.notifications;
 
-import static android.app.PendingIntent.FLAG_CANCEL_CURRENT;
-import static android.app.PendingIntent.FLAG_MUTABLE;
-
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -18,6 +15,9 @@ import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.EventNotification;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Dates;
+
+import static android.app.PendingIntent.FLAG_CANCEL_CURRENT;
+import static android.app.PendingIntent.FLAG_IMMUTABLE;
 
 public class LocalNotificationScheduler {
 
@@ -85,7 +85,7 @@ public class LocalNotificationScheduler {
 				.setAction(notificationType.toString() + event.getId())
 				.putExtra(ShowNotificationReceiver.EXTRA_EVENT_ID_TO_NOTIFY, event.getId())
 				.putExtra(ShowNotificationReceiver.EXTRA_NOTIFICATION_TYPE, notificationType.toString());
-		int flags = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? FLAG_MUTABLE : 0;
+		int flags = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? PendingIntent.FLAG_UPDATE_CURRENT | FLAG_IMMUTABLE : PendingIntent.FLAG_UPDATE_CURRENT;
 		PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, flags);
 
 		alarmManager.cancel(pendingIntent);
@@ -104,7 +104,7 @@ public class LocalNotificationScheduler {
 			Intent intent = new Intent(context, ShowNotificationReceiver.class)
 					.setAction(PushNotification.Type.ConventionFeedbackReminder.toString())
 					.putExtra(ShowNotificationReceiver.EXTRA_NOTIFICATION_TYPE, PushNotification.Type.ConventionFeedbackReminder.toString());
-			int flags = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? FLAG_MUTABLE : 0;
+			int flags = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? PendingIntent.FLAG_UPDATE_CURRENT | FLAG_IMMUTABLE : PendingIntent.FLAG_UPDATE_CURRENT;
 			scheduleAlarm(conventionFeedbackNotificationTime.getTimeInMillis(), PendingIntent.getBroadcast(context, 0, intent, flags), Accuracy.INACCURATE);
 		}
 
@@ -117,7 +117,7 @@ public class LocalNotificationScheduler {
 			Intent intent = new Intent(context, ShowNotificationReceiver.class)
 					.setAction(PushNotification.Type.ConventionFeedbackLastChanceReminder.toString())
 					.putExtra(ShowNotificationReceiver.EXTRA_NOTIFICATION_TYPE, PushNotification.Type.ConventionFeedbackLastChanceReminder.toString());
-			int flags = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? FLAG_MUTABLE : 0;
+			int flags = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? PendingIntent.FLAG_UPDATE_CURRENT | FLAG_IMMUTABLE : PendingIntent.FLAG_UPDATE_CURRENT;
 			scheduleAlarm(lastChanceNotificationTime.getTimeInMillis(), PendingIntent.getBroadcast(context, 0, intent, flags), Accuracy.INACCURATE);
 		}
 	}
@@ -129,7 +129,7 @@ public class LocalNotificationScheduler {
 				.putExtra(ShowNotificationReceiver.EXTRA_EVENT_ID_TO_NOTIFY, event.getId())
 				.putExtra(ShowNotificationReceiver.EXTRA_NOTIFICATION_TYPE, notificationType.toString());
 
-		int flags = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? FLAG_CANCEL_CURRENT | FLAG_MUTABLE : FLAG_CANCEL_CURRENT;
+		int flags = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? FLAG_CANCEL_CURRENT | FLAG_IMMUTABLE : FLAG_CANCEL_CURRENT;
 		return PendingIntent.getBroadcast(context, 0, intent, flags);
 	}
 
