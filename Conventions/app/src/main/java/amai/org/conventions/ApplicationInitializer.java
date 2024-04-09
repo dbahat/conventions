@@ -178,12 +178,13 @@ public class ApplicationInitializer {
                         String notificationMessage = secondHandSell.getSoldFormsMessage(currentContext);
 
                         Intent intent = new Intent(currentContext, SecondHandActivity.class);
+                        int flags = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? PendingIntent.FLAG_UPDATE_CURRENT | FLAG_IMMUTABLE : PendingIntent.FLAG_UPDATE_CURRENT;
                         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(currentContext, PushNotification.Channel.Notifications.toString())
                                 .setSmallIcon(ThemeAttributes.getResourceId(currentContext, R.attr.notificationSmallIcon))
                                 .setContentTitle(currentContext.getString(R.string.second_hand_sold_forms_notification_title))
                                 .setContentText(notificationMessage)
                                 .setAutoCancel(true)
-                                .setContentIntent(PendingIntent.getActivity(currentContext, 0, intent, 0))
+                                .setContentIntent(PendingIntent.getActivity(currentContext, 0, intent, flags))
                                 .setDefaults(Notification.DEFAULT_VIBRATE);
 
 
