@@ -69,6 +69,7 @@
         <activity android:name="amai.org.conventions.settings.SettingsActivity"
             android:theme="@style/AppBaseTheme.Olamot2024.Settings"></activity>
         <activity android:name="amai.org.conventions.DiscountsActivity"></activity>
+        <activity android:name="amai.org.conventions.ActivitiesActivity"/>
         <activity android:name="amai.org.conventions.AboutActivity"></activity>
         <activity android:name="amai.org.conventions.HomeActivity" android:screenOrientation="portrait"
             android:theme="@style/AppBaseTheme.Olamot2024.Home"/>

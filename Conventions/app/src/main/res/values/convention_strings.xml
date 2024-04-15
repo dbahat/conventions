@@ -102,36 +102,31 @@
 <p>כניסה עם כלבי שירות: כניסה עם כלבי שירות מותרת לכלל סוגי כלבי השירות. ככלל, אין להיכנס למתחם הכנס עם כלבים שאינם כלבי שירות.</p>
 ]]></string>
     <string name="discounts_main_title">הטבות וחסויות</string>
-    <string name="discounts_restaurants_title">הנחות במסעדות</string>
-    <string name="discounts_restaurants_overview">המסעדות הבאות מעניקות הנחה בהצגת כרטיס או תג של הפסטיבל, במהלך שלושת ימי הפסטיבל:</string>
-    <string name="discounts_memphis">ממפיס. קרליבך 20. כשר בשר חלק, ירק מהדרין.\n10% הנחה.</string>
-    <string name="discounts_aroma">ארומה. הארבעה 24.\n10% הנחה למעט דילים קיימים בסניף רחוב הארבעה בלבד.</string>
-    <string name="discounts_suduch">סודוך. קרליבך 20. כשר בשרי.\nשתייה ב-3 שקלים בקניית מנה.</string>
-    <string name="discounts_tlab">TLAB. החשמונאים 103.\nתוספת באבלס על חשבון הבית.</string>
-    <string name="discounts_oban_koban">אובן קובן. הארבעה 16.\n10% הנחה בין השעות 11:30-18:00.</string>
-    <string name="discounts_title">הטבות</string>
-    <string name="discounts_overview">העסקים הבאים מעניקים הנחה בהצגת כרטיס או תג של הפסטיבל, במהלך שלושת ימי הפסטיבל:</string>
-    <string name="discounts_dizengoff_center">דיזינגוף סנטר. דיזנגוף 50.\nברד חינם בהצגת כרטיס.</string>
-    <string name="discounts_evrit">עברית ספרים דיגיטלים\nהנחה על כל ספרי ההשקות בפסטיבל ועל המועמדים לפרס גפן.</string>
-    <string name="discounts_pundak">הפונדק\n50% הנחה על כל איי הסערה + סט קוביות מתנה בקניית פאת\'פיינדר בעולמות פראיים.</string>
-    <string name="discounts_kingdom">הממלכה\n10 ש"ח מתנה בהצגת כרטיס/תג.</string>
-    <string name="discounts_escape_room">אסקייפ רום\n10% הנחה למשחק בחדר בריחה ל5 משתתפים ומעלה.\nניתן לממש את ההטבה בימים א׳-ה׳ לחדרי הבריחה \"גיבורי העל\" ו\"פיקסלים\".\nעל מנת לממש את ההטבה יש להזין משחק עם הקוד Icon10 דרך האתר.</string>
-    <string name="discounts_oz">עוץ הוצאה לאור\nסימניית אוריגמי מתנה בהצגת תג.</string>
-    <string name="discounts_parking">חניה בחניון גבעון TLV</string>
-    <string name="discounts_parking_details">החל מהשעה 16:00 ועד 05:00 למחרת היום, חניה במחיר של 10 ש"ח בלבד למקודדים את כרטיס החנייה בעמדת הקידוד בלובי סינמטק תל אביב (ליד קופות הסינמטק).</string>
-    <string name="discounts_special_title">פעילויות מיוחדות</string>
-    <string name="discounts_special_overview">הארגונים הבאים יקיימו פעילות מיוחדת במהלך פסטיבל אייקון:</string>
-    <string name="discounts_antuquities">רשות העתיקות\n\"משחקי אסטרטגיה בעת העתיקה\" – פעילות משפחות במתחם הקהילתי. הפעילות בחינם.</string>
-    <string name="discounts_legion501">לגיון 501\nאיסוף תרומות ספרים, משחקים, קוספליי ועוד לטובת חלוקה בבתי חולים ומוסדות אחרים.</string>
+    <string name="discounts_restaurants_title">הטבות במסעדות</string>
+    <string name="discounts_restaurants_overview">המסעדות הבאות מעניקות הנחה בהצגת כרטיס או תג של הכנס, במהלך שני הימים של הכנס:</string>
+    <string name="discounts_buzza">בוזה\nהטבה בהצגת כרטיס או תג\n<a href="https://www.buzaisrael.co.il/">לביקור באתר בוזה</a></string>
+    <string name="discounts_aroma">ארומה. הארבעה 24.\n10% הנחה למעט דילים קיימים, בסניף רחוב הארבעה בלבד.\n<a href="https://www.aroma.co.il/store/%D7%94%D7%90%D7%A8%D7%91%D7%A2%D7%94-%D7%AA%D7%9C-%D7%90%D7%91%D7%99%D7%91/">לביקור באתר ארומה</a></string>
+    <string name="discounts_tlab">T LAB. החשמונאים 103.\nתוספת באבלס חינם בכל משקה, בהצגת כרטיס כנס.\n<a href="https://wissotzky-tlab.co.il/?utm_source=google&amp;utm_medium=search&amp;utm_campaign=modern_talking_search_aug_23&amp;gad_source=1&amp;gclid=CjwKCAjw17qvBhBrEiwA1rU9w4xJ1f873HGNpJYfE8ILjcbj4OxoE_Gzb73k_tsxK_ainRjXf69TfhoChuEQAvD_BwE">לביקור באתר T LAB</a></string>
+    <string name="discounts_title">הטבות בחנויות</string>
+    <string name="discounts_overview">החנויות הבאות מעניקות הנחה בהצגת כרטיס או תג של הכנס, במהלך שני הימים של הכנס:</string>
+    <string name="discounts_evrit">עברית\n10% הנחה על כל ספרי המד"ב והפנטזיה\nההנחה בימי הכנס בלבד\nקוד להנחה 10%: OLAMOT10\n<a href="https://www.e-vrit.co.il/Category/11/%D7%9E%D7%93_%D7%91_%D7%95%D7%A4%D7%A0%D7%98%D7%96%D7%99%D7%94">לביקור באתר עברית</a></string>
+    <string name="discounts_evrit_recursion">ספר מתנה בחנות עברית\nספר מתנה! "רקורסיה" מאת בלייק קראוץ\' להורדה בחינם.\nההטבה בימי הכנס בלבד\nקוד: OLAMOT\n<a href="https://www.e-vrit.co.il/Product/23635/%D7%A8%D7%A7%D7%95%D7%A8%D7%A1%D7%99%D7%94">לעמוד הספר "רקורסיה"</a></string>
+    <string name="discounts_kingdom">הממלכה\nמעטפת Funpack פוקימון בהצגת כרטיס בדוכן\n<a href="https://thekingdom.co.il/">לביקור באתר הממלכה</a></string>
     <string name="discounts_sponsors_title">חסויות</string>
     <string name="discounts_sponsors_overview">העסקים הבאים העניקו חסות לפסטיבל אייקון:</string>
-    <string name="discounts_dizengoff_center_sponsor">דיזינגוף סנטר</string>
-    <string name="discounts_emily">Out&amp;About Emily\'s Boutique</string>
-    <string name="discounts_comikaza">קומקיאזה</string>
-    <string name="discounts_lyra"> Lyra Magical Stuff</string>
-    <string name="discounts_gaming_land">Gaming Land</string>
-    <string name="discounts_kingdom_sponsor">הממלכה</string>
-    <string name="discounts_national_geographic_kids">נשיונל ג\'אוגרפיק קידס</string>
+    <string name="discounts_gaming_land">גיימינג לנד\n5% הנחה בדוכן בהצגת כרטיס\n<a href="https://www.gamingland.co.il/">לביקור באתר גיימינג לנד</a></string>
+    <string name="discounts_iac">IAC – המכללה הישראלית לאנימציה ועיצוב\nתודה למכללה על החסות מוזמנים.ות לבקר בדוכן\n<a href="https://www.ani-mator.com/">לביקור במכללה לאנימציה</a></string>
+    <string name="discounts_tiltan">תילתן המכללה לעיצוב ולתקשורת חזותית\nתודה למכללה על החסות מוזמנים.ות לבקר בדוכן\n<a href="https://www.tiltan.co.il/">לביקור במכללת תילתן</a></string>
+    <string name="discounts_kineret">כנרת זמורה דביר\nתחרות הסיפורים של כנס עולמות בחסות הוצאת כנרת-זמורה-דביר\n<a href="https://www.kinbooks.co.il/?utm_source=google&amp;utm_medium=cpc&amp;utm_campaign=kin_books&amp;utm_id=kin_books&amp;utm_term=kin_books&amp;gad_source=1&amp;gclid=CjwKCAiA0PuuBhBsEiwAS7fsNbe87oc0MbGRCxY3f7ItpXikYqwTmc8rf4GxFyg_q_Ig2x5rvuRiixoC0qgQAvD_BwE">לביקור באתר כנרת זמורה דביר</a></string>
+    <string name="discounts_marilyn">מרלין האדומה / דניאלה ג\'וליה טראוב\n<a href="https://bit.ly/RedMarilynUrion">לרכישת ספר הדיסטופיה הישראלי החדש</a></string>
+    <string name="activities_main_title">פעילויות במתחם</string>
+    <string name="activities_dizengoff">דיזינגוף סנטר\nקווסט לאיסוף קוביות DND בחסות הסנטר! פרטים בעמדות המודיעין\n<a href="https://2024.olamot-con.org.il/dizengof-center-adventure/">לפרטים נוספים על הקווסט</a>\n<a href="https://www.dizengof-center.co.il/">לביקור בדיזינגוף סנטר</a></string>
+    <string name="activities_youdo">יודו\nחינוך הרפתקני ופיתוח אמצעי הדרכה ולמידה.\n<a href="https://youdoadventures.com/">לביקור ביודו</a>\nיודו וסרברו מביאים <a href="https://2024.olamot-con.org.il/services/the-adventure/">הרפתקה במתחם לאורך כל הכנס</a>, פרטים בעמדות המודיעין</string>
+    <string name="activities_cerebro">סרברו\nסרברו מפתחת חוויות משחקיות מעבירות תוכן וידע לחברות, ארגונים, מוזיאונים, ועוד.\n<a href="https://cerebro.co.il/">לביקור בסרברו</a>\nיודו וסרברו מביאים <a href="https://2024.olamot-con.org.il/services/the-adventure/">הרפתקה במתחם לאורך כל הכנס</a>, פרטים בעמדות המודיעין</string>
+    <string name="activities_gaming">משחקי מחשב\nמתחם משחקי מחשב חדשים תוצרת הארץ שיפעל לאורך הכנס כולו\n<a href="https://2024.olamot-con.org.il/services/games-station/">לפרטים על מתחם משחקי המחשב לחצו כאן</a></string>
+    <string name="activities_antiquities">רשות העתיקות\n<a href="https://2024.olamot-con.org.il/services/antiquities-activity/">משחקי רצפה ענקיים</a> במתחם הקהילתי</string>
+    <string name="activities_emily">Out &amp; About – אמילי רייכר\nהגרלה בדוכן, כל משתתפ.ת זוכה!*\n*ההגרלה באחריות המפעילה בלבד\n<a href="https://www.facebook.com/outandaboutemily/?paipv=0&amp;eav=AfbXdlwpgPGs4ypd8IuPy5YrvLhLQIqxnuoIrsJThvLA4k2xNb3WHFkWIu8KL1ei5Pk&amp;_rdr">לביקור ב-Out &amp; About</a></string>
+    <string name="activities_legion501">לגיון 501\nלגיון 501 אוספים תרומות ספרים, משחקים, קוספליי ועוד לטובת חלוקה בבתי חולים ומוסדות אחרים\n<a href="https://www.501.org.il/">לביקור בלגיון 501</a></string>
 
     <string name="physical_only_event_desc">האירוע יועבר באופן פיזי בלבד.</string>
     <string name="virtual_only_event_desc">האירוע יועבר באופן וירטואלי בלבד.</string>
