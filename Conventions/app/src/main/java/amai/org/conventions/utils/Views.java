@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Point;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
+import android.text.method.LinkMovementMethod;
 import android.view.Display;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -15,6 +16,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ListAdapter;
+import android.widget.TextView;
 
 import java.lang.reflect.Field;
 
@@ -62,6 +64,13 @@ public class Views {
 		inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
 	}
 
+	public static void enableLinkClicks(ViewGroup parentView) {
+		for (int i = 0; i < parentView.getChildCount(); ++i) {
+			if (parentView.getChildAt(i) instanceof TextView) {
+				((TextView) parentView.getChildAt(i)).setMovementMethod(LinkMovementMethod.getInstance());
+			}
+		}
+	}
 
 	/**
 	 * Calculates the width of the widest view in an adapter, for use when you need to wrap_content on a ListView.
