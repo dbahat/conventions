@@ -17,7 +17,7 @@ public class ActivitiesActivity extends NavigationActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentInContentContainer(R.layout.activity_activities);
-		setToolbarTitle(getString(R.string.discounts));
+		setToolbarTitle(getString(R.string.activities));
 
 		handleLinks();
 	}
