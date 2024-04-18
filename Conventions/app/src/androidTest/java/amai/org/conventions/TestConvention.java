@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.Calendar;
 import java.util.List;
 
+import amai.org.conventions.auth.Configuration;
 import amai.org.conventions.feedback.forms.EventFeedbackForm;
 import amai.org.conventions.feedback.forms.FeedbackForm;
 import amai.org.conventions.model.ConventionEvent;
@@ -21,6 +22,8 @@ import amai.org.conventions.utils.ConventionStorage;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
+import android.content.Context;
 
 public class TestConvention extends Convention {
     @Override
@@ -131,11 +134,6 @@ public class TestConvention extends Convention {
     }
 
     @Override
-    public URL getOAuthURL() {
-        return null;
-    }
-
-    @Override
     public HttpURLConnection getUserPurchasedEventsRequest(String token) throws Exception {
         return null;
     }
@@ -169,5 +167,10 @@ public class TestConvention extends Convention {
     public List<ConventionEvent.EventLocationType> getEventLocationTypes(ConventionEvent event) {
         //noinspection deprecation - intentional
         return event.getLocationTypes();
+    }
+
+    @Override
+    public Configuration getAuthConfiguration(Context context) {
+        return null;
     }
 }
