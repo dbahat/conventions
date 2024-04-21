@@ -104,13 +104,13 @@
     <string name="discounts_main_title">הטבות וחסויות</string>
     <string name="discounts_restaurants_title">הטבות במסעדות</string>
     <string name="discounts_restaurants_overview">המסעדות הבאות מעניקות הנחה בהצגת כרטיס או תג של הכנס, במהלך שני הימים של הכנס:</string>
-    <string name="discounts_buzza">בוזה\nהטבה בהצגת כרטיס או תג\n<a href="https://www.buzaisrael.co.il/">לביקור באתר בוזה</a></string>
+    <string name="discounts_buzza">בוזה\nכדור אחד ב-16 שח\n2 כדורים ב-22 שח\nלכל באות ובאי הכנס\n<a href="https://www.buzaisrael.co.il/">לביקור באתר בוזה</a></string>
     <string name="discounts_aroma">ארומה. הארבעה 24.\n10% הנחה למעט דילים קיימים, בסניף רחוב הארבעה בלבד.\n<a href="https://www.aroma.co.il/store/%D7%94%D7%90%D7%A8%D7%91%D7%A2%D7%94-%D7%AA%D7%9C-%D7%90%D7%91%D7%99%D7%91/">לביקור באתר ארומה</a></string>
     <string name="discounts_tlab">T LAB. החשמונאים 103.\nתוספת באבלס חינם בכל משקה, בהצגת כרטיס כנס.\n<a href="https://wissotzky-tlab.co.il/?utm_source=google&amp;utm_medium=search&amp;utm_campaign=modern_talking_search_aug_23&amp;gad_source=1&amp;gclid=CjwKCAjw17qvBhBrEiwA1rU9w4xJ1f873HGNpJYfE8ILjcbj4OxoE_Gzb73k_tsxK_ainRjXf69TfhoChuEQAvD_BwE">לביקור באתר T LAB</a></string>
     <string name="discounts_title">הטבות בחנויות</string>
     <string name="discounts_overview">החנויות הבאות מעניקות הנחה בהצגת כרטיס או תג של הכנס, במהלך שני הימים של הכנס:</string>
-    <string name="discounts_evrit">עברית\n10% הנחה על כל ספרי המד"ב והפנטזיה\nההנחה בימי הכנס בלבד\nקוד להנחה 10%: OLAMOT10\n<a href="https://www.e-vrit.co.il/Category/11/%D7%9E%D7%93_%D7%91_%D7%95%D7%A4%D7%A0%D7%98%D7%96%D7%99%D7%94">לביקור באתר עברית</a></string>
-    <string name="discounts_evrit_recursion">ספר מתנה בחנות עברית\nספר מתנה! "רקורסיה" מאת בלייק קראוץ\' להורדה בחינם.\nההטבה בימי הכנס בלבד\nקוד: OLAMOT\n<a href="https://www.e-vrit.co.il/Product/23635/%D7%A8%D7%A7%D7%95%D7%A8%D7%A1%D7%99%D7%94">לעמוד הספר "רקורסיה"</a></string>
+    <string name="discounts_evrit">עברית\n10% הנחה על כל ספרי המד\"ב והפנטזיה\nההנחה בימי הכנס בלבד\nקוד להנחה 10%: OLAMOT10\n<a href="https://www.e-vrit.co.il/Category/11/%D7%9E%D7%93_%D7%91_%D7%95%D7%A4%D7%A0%D7%98%D7%96%D7%99%D7%94">לביקור באתר עברית</a></string>
+    <string name="discounts_evrit_recursion">ספר מתנה בחנות עברית\nספר מתנה! \"רקורסיה\" מאת בלייק קראוץ\' להורדה בחינם.\nההטבה בימי הכנס בלבד\nקוד: OLAMOT\n<a href="https://www.e-vrit.co.il/Product/23635/%D7%A8%D7%A7%D7%95%D7%A8%D7%A1%D7%99%D7%94">לעמוד הספר \"רקורסיה\"</a></string>
     <string name="discounts_kingdom">הממלכה\nמעטפת Funpack פוקימון בהצגת כרטיס בדוכן\n<a href="https://thekingdom.co.il/">לביקור באתר הממלכה</a></string>
     <string name="discounts_sponsors_title">חסויות</string>
     <string name="discounts_sponsors_overview">העסקים הבאים העניקו חסות לפסטיבל אייקון:</string>
