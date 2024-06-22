@@ -5,9 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.mockito.stubbing.Answer;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -25,8 +23,8 @@ import amai.org.conventions.model.SpecialEventsProcessor;
 import amai.org.conventions.networking.AmaiEventContract;
 import amai.org.conventions.networking.AmaiModelConverter;
 
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -44,17 +42,12 @@ public class AmaiModelConverterTests {
 		amaiModelConverter = new AmaiModelConverter(hallsMock, Calendar.getInstance(), new SpecialEventsProcessor());
 
 		// Simulate the default behavior of adding a hall, which is common for most tests
-		doAnswer(new Answer() {
-			@Override
-			public Object answer(InvocationOnMock invocation) throws Throwable {
-				return new Hall().withName(invocation.getArguments()[0].toString());
-			}
-		}).when(hallsMock).add(anyString());
+		doAnswer(invocation -> new Hall().withName(invocation.getArguments()[0].toString())).when(hallsMock).add(anyString());
 	}
 
 	@Test
 	public void Convert_Returns_EmptyList_When_ContractList_Is_Empty() {
-		List<ConventionEvent> result = amaiModelConverter.convert(new ArrayList<AmaiEventContract>());
+		List<ConventionEvent> result = amaiModelConverter.convert(new ArrayList<>());
 		Assert.assertEquals(0, result.size());
 	}
 
@@ -115,7 +108,7 @@ public class AmaiModelConverterTests {
 
 		List<AmaiEventContract> contracts = Arrays.asList(
 				generateEventContract(0, Collections.singletonList(instanceContact)),
-				generateEventContract(1, Collections.singletonList(generateTimetableInfoInstance(1).setTooltip("hidden"))),
+				generateEventContract(1, Collections.singletonList(generateTimetableInfoInstance(1).setHidden(true))),
 				generateEventContract(2, Collections.singletonList(instanceContact)));
 
 		List<ConventionEvent> eventList = amaiModelConverter.convert(contracts);
@@ -126,55 +119,14 @@ public class AmaiModelConverterTests {
 	}
 
 	@Test
-	public void Convert_Strips_EventDescription_When_EventContract_Has_DisableUrlFlag() {
-		AmaiEventContract contract = generateEventContract(0, Collections.singletonList(generateTimetableInfoInstance(0)))
-				.setTimetableDisableUrl("1");
-
-		List<ConventionEvent> eventList = amaiModelConverter.convert(Collections.singletonList(contract));
-
-		Assert.assertEquals(1, eventList.size());
-		Assert.assertNull(eventList.get(0).getDescription());
-	}
-
-	@Test
-	public void Convert_Strips_Unneeded_Html_Tags_From_EventContract_Description() {
+	public void Convert_Disables_Unneeded_Html_Tags_From_EventContract_Description() {
 		AmaiEventContract contract = generateEventContract(0, Collections.singletonList(generateTimetableInfoInstance(0)))
 				.setContent("<p><span style=\"font-weight: 400\"></span><img src=\"http://a.com/image.png\"/></p>");
 
 		List<ConventionEvent> eventList = amaiModelConverter.convert(Collections.singletonList(contract));
 
 		Assert.assertEquals(1, eventList.size());
-		Assert.assertEquals("<p><span ></span><ximg /></p>", eventList.get(0).getDescription());
-	}
-
-	@Test
-	public void Convert_Returns_EventDescription_When_EventWithSpecialContent_Conversion_Occurs() {
-		AmaiEventContract.TimetableInfoInstance instanceContact = generateTimetableInfoInstance(0);
-
-		List<AmaiEventContract> contracts = Arrays.asList(
-				generateEventContract(1, Collections.singletonList(instanceContact)),
-				generateEventContract(2, Collections.singletonList(instanceContact)).setTimetableUrlPid(1));
-
-		List<ConventionEvent> eventList = amaiModelConverter.convert(contracts);
-
-		Assert.assertEquals(2, eventList.size());
-		// The description of the 2nd (special) event should be the content of event number #1
-		Assert.assertEquals(contracts.get(0).getContent(), eventList.get(1).getDescription());
-	}
-
-	@Test
-	public void Convert_Returns_No_EventDescription_When_EventWithSpecialContent_Conversion_Fails() {
-		AmaiEventContract.TimetableInfoInstance instanceContact = generateTimetableInfoInstance(0);
-
-		List<AmaiEventContract> contracts = Arrays.asList(
-				generateEventContract(1, Collections.singletonList(instanceContact)),
-				generateEventContract(2, Collections.singletonList(instanceContact)).setTimetableUrlPid(3));
-
-		List<ConventionEvent> eventList = amaiModelConverter.convert(contracts);
-
-		Assert.assertEquals(2, eventList.size());
-		// The description of the 2nd (special) event should be null, since it's pointing to non-existing event #3
-		Assert.assertNull(eventList.get(1).getDescription());
+		Assert.assertEquals("<p><span ></span><ximg xsrc=\"http://a.com/image.png\"/></p>", eventList.get(0).getDescription());
 	}
 
 	@Test
@@ -201,29 +153,33 @@ public class AmaiModelConverterTests {
 	private AmaiEventContract.TimetableInfoInstance generateTimetableInfoInstance(int index) {
 		return new AmaiEventContract.TimetableInfoInstance()
 				.setRoom("testRoom" + index)
-				.setBeforeHourText("testLecturer" + index)
+				.setLecturer("testLecturer" + index)
 				.setStart("19:30:0" + index)
-				.setEnd("20:00:0" + index);
+				.setEnd("20:00:0" + index)
+				.setSubtitle("subTitle" + index);
 	}
 
 	private AmaiEventContract generateEventContract(int index, List<AmaiEventContract.TimetableInfoInstance> timetableInfoInstances) {
 		return new AmaiEventContract()
 				.setId(index)
 				.setTitle("testEvent" + index)
-				.setCategoriesText(new AmaiEventContract.CategoriesText().setName("testCategory" + index))
+				.setCategory("testCategory" + index)
 				.setContent("testContent" + index)
+				.setTags(Arrays.asList("tag1", "tag2"))
 				.setTimetableInfo(timetableInfoInstances);
 	}
 
 	private void assertEquals(AmaiEventContract expectedContract, AmaiEventContract.TimetableInfoInstance expectedInstanceContract, ConventionEvent actual) {
 		Assert.assertEquals(expectedContract.getId(), actual.getServerId());
-		Assert.assertEquals(expectedContract.getCategoriesText().getName(), actual.getType().getDescription());
+		Assert.assertEquals(expectedContract.getCategory(), actual.getType().getDescription());
 		Assert.assertEquals(expectedContract.getTitle(), actual.getTitle());
 		Assert.assertEquals(expectedContract.getContent(), actual.getDescription());
-		Assert.assertEquals(expectedInstanceContract.getBeforeHourText(), actual.getLecturer());
+		Assert.assertEquals(expectedContract.getTags(), actual.getTags());
+		Assert.assertEquals(expectedInstanceContract.getLecturer(), actual.getLecturer());
 		Assert.assertEquals(expectedInstanceContract.getRoom(), actual.getHall().getName());
 		Assert.assertEquals(expectedInstanceContract.getStart(), formatHoursMinutesAndSeconds(actual.getStartTime()));
 		Assert.assertEquals(expectedInstanceContract.getEnd(), formatHoursMinutesAndSeconds(actual.getEndTime()));
+		Assert.assertEquals(expectedInstanceContract.getSubtitle(), actual.getSubTitle());
 	}
 
 	private String formatHoursMinutesAndSeconds(Date date) {

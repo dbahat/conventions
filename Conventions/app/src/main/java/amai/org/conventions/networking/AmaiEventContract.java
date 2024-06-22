@@ -1,40 +1,25 @@
 package amai.org.conventions.networking;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.util.List;
 
 public class AmaiEventContract {
-	@SerializedName("ID")
 	private int id;
-
-	private CategoriesText categoriesText;
-	private int timetableUrlPid;
+	private String category;
 	private String title;
-	private String timetableDisableUrl;
 	private String content;
 	private List<TimetableInfoInstance> timetableInfo;
-	private String timetableBg;
-	private String timetableTextColor;
+	private List<String> tags;
 
 	public int getId() {
 		return id;
 	}
 
-	public CategoriesText getCategoriesText() {
-		return categoriesText;
-	}
-
-	public int getTimetableUrlPid() {
-		return timetableUrlPid;
+	public String getCategory() {
+		return category;
 	}
 
 	public String getTitle() {
 		return title;
-	}
-
-	public String getTimetableDisableUrl() {
-		return timetableDisableUrl;
 	}
 
 	public String getContent() {
@@ -45,12 +30,8 @@ public class AmaiEventContract {
 		return timetableInfo;
 	}
 
-	public String getTimetableBg() {
-		return timetableBg;
-	}
-
-	public String getTimetableTextColor() {
-		return timetableTextColor;
+	public List<String> getTags() {
+		return tags;
 	}
 
 	public AmaiEventContract setId(int id) {
@@ -58,23 +39,13 @@ public class AmaiEventContract {
 		return this;
 	}
 
-	public AmaiEventContract setCategoriesText(CategoriesText categoriesText) {
-		this.categoriesText = categoriesText;
-		return this;
-	}
-
-	public AmaiEventContract setTimetableUrlPid(int timetableUrlPid) {
-		this.timetableUrlPid = timetableUrlPid;
+	public AmaiEventContract setCategory(String category) {
+		this.category = category;
 		return this;
 	}
 
 	public AmaiEventContract setTitle(String title) {
 		this.title = title;
-		return this;
-	}
-
-	public AmaiEventContract setTimetableDisableUrl(String timetableDisableUrl) {
-		this.timetableDisableUrl = timetableDisableUrl;
 		return this;
 	}
 
@@ -88,30 +59,20 @@ public class AmaiEventContract {
 		return this;
 	}
 
-	public AmaiEventContract setTimetableBg(String timetableBg) {
-		this.timetableBg = timetableBg;
-		return this;
-	}
-
-	public AmaiEventContract setTimetableTextColor(String timetableTextColor) {
-		this.timetableTextColor = timetableTextColor;
+	public AmaiEventContract setTags(List<String> tags) {
+		this.tags = tags;
 		return this;
 	}
 
 	public static class TimetableInfoInstance {
-		private String tooltip;
 		private String room;
-		@SerializedName("before_hour_text")
-		private String beforeHourText;
-
 		// Keeping the date values as Strings in the contract class, since transforming them into Date format requires convention information (as they
 		// only contain the time portion of the date).
 		private String start;
 		private String end;
-
-		public String getTooltip() {
-			return tooltip;
-		}
+		private boolean hidden;
+		private String lecturer;
+		private String subtitle;
 
 		public String getStart() {
 			return start;
@@ -125,13 +86,16 @@ public class AmaiEventContract {
 			return room;
 		}
 
-		public String getBeforeHourText() {
-			return beforeHourText;
+		public String getLecturer() {
+			return lecturer;
 		}
 
-		public TimetableInfoInstance setTooltip(String tooltip) {
-			this.tooltip = tooltip;
-			return this;
+		public String getSubtitle() {
+			return subtitle;
+		}
+
+		public boolean isHidden() {
+			return hidden;
 		}
 
 		public TimetableInfoInstance setStart(String start) {
@@ -149,21 +113,18 @@ public class AmaiEventContract {
 			return this;
 		}
 
-		public TimetableInfoInstance setBeforeHourText(String beforeHourText) {
-			this.beforeHourText = beforeHourText;
+		public TimetableInfoInstance setLecturer(String lecturer) {
+			this.lecturer = lecturer;
 			return this;
 		}
-	}
 
-	public static class CategoriesText {
-		private String name;
-
-		public String getName() {
-			return name;
+		public TimetableInfoInstance setSubtitle(String subtitle) {
+			this.subtitle = subtitle;
+			return this;
 		}
 
-		public CategoriesText setName(String name) {
-			this.name = name;
+		public TimetableInfoInstance setHidden(boolean hidden) {
+			this.hidden = hidden;
 			return this;
 		}
 	}

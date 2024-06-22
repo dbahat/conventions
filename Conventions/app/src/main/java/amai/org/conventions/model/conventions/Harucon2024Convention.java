@@ -104,7 +104,7 @@ public class Harucon2024Convention extends AmaiConvention {
 	protected Calendar initDate() {
 		Calendar date = Calendar.getInstance();
 		date.clear();
-		date.set(2024, Calendar.MARCH, 24);
+		date.set(2024, Calendar.AUGUST, 8);
 		return date;
 	}
 
@@ -182,7 +182,7 @@ public class Harucon2024Convention extends AmaiConvention {
 	@Override
 	protected URL initModelURL() {
 		try {
-			return new URL("https://harucon.org.il/2024/wp-admin/admin-ajax.php?action=get_event_list");
+			return new URL("https://animatsuri.org.il/2024/wp-admin/admin-ajax.php?action=get_event_list");
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
