@@ -16,6 +16,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Stack;
@@ -37,6 +38,7 @@ public class ConventionEvent implements Serializable {
 	private int backgroundColor;
 	private int textColor;
 	private String title;
+	private String subTitle;
 	private String lecturer;
 	private Date startTime;
 	private Date endTime;
@@ -45,10 +47,12 @@ public class ConventionEvent implements Serializable {
 	private List<String> images;
 	private String description;
 	private String plainTextDescription;
+	private List<String> tags;
 
 	public ConventionEvent() {
 		images = new ArrayList<>();
 		plainTextDescription = "";
+		tags = new LinkedList<>();
 	}
 
 	public void setBackgroundColor(int color) {
@@ -117,6 +121,19 @@ public class ConventionEvent implements Serializable {
 
 	public ConventionEvent withTitle(String title) {
 		setTitle(title);
+		return this;
+	}
+
+	public String getSubTitle() {
+		return subTitle;
+	}
+
+	public void setSubTitle(String subTitle) {
+		this.subTitle = subTitle;
+	}
+
+	public ConventionEvent withSubTitle(String subTitle) {
+		setSubTitle(subTitle);
 		return this;
 	}
 
@@ -220,6 +237,23 @@ public class ConventionEvent implements Serializable {
 	public ConventionEvent withImages(List<String> images) {
 		setImages(images);
 		return this;
+	}
+
+	public List<String> getTags() {
+		return tags;
+	}
+
+	public void setTags(List<String> tags) {
+		this.tags = tags;
+	}
+
+	public ConventionEvent withTags(List<String> tags) {
+		setTags(tags);
+		return this;
+	}
+
+	public String getTagsAsString() {
+		return TextUtils.join(", ", getTags());
 	}
 
 	public UserInput getUserInput() {
