@@ -37,6 +37,7 @@ public class ConventionEvent implements Serializable {
 	private int backgroundColor;
 	private int textColor;
 	private String title;
+	private String subTitle;
 	private String lecturer;
 	private Date startTime;
 	private Date endTime;
@@ -127,6 +128,19 @@ public class ConventionEvent implements Serializable {
 
 	public ConventionEvent withTitle(String title) {
 		setTitle(title);
+		return this;
+	}
+
+	public String getSubTitle() {
+		return subTitle;
+	}
+
+	public void setSubTitle(String subTitle) {
+		this.subTitle = subTitle;
+	}
+
+	public ConventionEvent withSubTitle(String subTitle) {
+		setSubTitle(subTitle);
 		return this;
 	}
 
