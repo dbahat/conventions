@@ -33,7 +33,7 @@ import amai.org.conventions.networking.SurveyDataRetriever;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 
-public class Harucon2024Convention extends AmaiConvention {
+public class Animatsuri2024Convention extends AmaiConvention {
 	// Hall names
 	private static final String MAIN_HALL_NAME = "אולם ראשי";
 	private static final String ESHKOL1_NAME = "אשכול 1";
@@ -97,7 +97,7 @@ public class Harucon2024Convention extends AmaiConvention {
 
 	@Override
 	protected ConventionStorage initStorage() {
-		return new ConventionStorage(this, R.raw.harucon2024_convention_events, 1);
+		return new ConventionStorage(this, R.raw.animatsuri2024_convention_events, 1);
 	}
 
 	@Override
@@ -110,12 +110,12 @@ public class Harucon2024Convention extends AmaiConvention {
 
 	@Override
 	protected String initID() {
-		return "Harucon2024";
+		return "Animatsuri2024";
 	}
 
 	@Override
 	protected String initDisplayName() {
-		return "הארוקון 2024";
+		return "אנימאטסורי 2024";
 	}
 
 	@Override
