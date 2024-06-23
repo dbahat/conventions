@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<inset android:insetLeft="10dp" android:insetRight="10dp" xmlns:android="http://schemas.android.com/apk/res/android">
+    <shape android:shape="rectangle">
+        <solid android:color="@color/animatsuri2024_white_transparent60"/>
+        <size android:height="?conflictingEventsGroupSeparatorHeight"/>
+    </shape>
+</inset>

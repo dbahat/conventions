@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:drawable="@drawable/animatsuri2024_rounded_edges_purple100" app:state_event_feedback_sent="true"/>
+    <item android:drawable="@drawable/animatsuri2024_rounded_edges_transparent_red" app:state_event_feedback_can_send="true"/>
+    <item android:drawable="@drawable/animatsuri2024_rounded_edges_gray200"/>
+</selector>

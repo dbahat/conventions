@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!-- Feedback sent -->
+    <item android:color="@color/animatsuri2024_purple900" app:state_event_feedback_sent="true"/>
+    <!-- Can send feedback -->
+    <item android:color="@color/white" app:state_event_feedback_can_send="true"/>
+    <!-- Can't send feedback-->
+    <item android:color="@color/animatsuri2024_gray1000"/>
+</selector>

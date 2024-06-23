@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!-- Feedback sent -->
+    <item android:drawable="@drawable/animatsuri2024_event_feedback_answer_bg_purple900" app:state_feedback_answer="true" app:state_feedback_answer_selected="true" app:state_feedback_answer_type_multi="true" app:state_event_feedback_sent="true"/>
+    <item android:drawable="@drawable/animatsuri2024_event_feedback_answer_bg_gray1000_outline" app:state_feedback_answer="true" app:state_feedback_answer_type_multi="true"  app:state_event_feedback_sent="true"/>
+    <!-- Can send feedback -->
+    <item android:drawable="@drawable/animatsuri2024_event_feedback_answer_bg_white" app:state_feedback_answer="true" app:state_feedback_answer_selected="true" app:state_feedback_answer_type_multi="true"  app:state_event_feedback_can_send="true"/>
+    <item android:drawable="@drawable/animatsuri2024_event_feedback_answer_bg_white_outline" app:state_feedback_answer="true" app:state_feedback_answer_type_multi="true"  app:state_event_feedback_can_send="true"/>
+    <!-- Can't send feedback-->
+    <item android:drawable="@drawable/animatsuri2024_event_feedback_answer_bg_gray1000" app:state_feedback_answer="true" app:state_feedback_answer_selected="true" app:state_feedback_answer_type_multi="true"/>
+    <item android:drawable="@drawable/animatsuri2024_event_feedback_answer_bg_gray1000_outline" app:state_feedback_answer="true" app:state_feedback_answer_type_multi="true"/>
+
+    <item android:drawable="@android:color/transparent"/>
+</selector>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:drawable="@drawable/animatsuri2024_rounded_edges_transparent_cream" app:state_home_during_con="true" app:state_home_has_favorites="true"/>
+    <item android:drawable="@color/transparent" app:state_home_during_con="true" app:state_home_has_favorites="false"/>
+    <item android:drawable="@drawable/animatsuri2024_rounded_edges_transparent_white"/>
+</selector>

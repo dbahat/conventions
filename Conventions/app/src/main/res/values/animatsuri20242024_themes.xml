@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppBaseTheme.Animatsuri2024" parent="AppBaseTheme.Light.DarkToolbar">
+        <!-- Sub-themes -->
+        <item name="android:dialogTheme">@style/AppDialogTheme.Animatsuri2024</item>
+        <item name="alertDialogTheme">@style/AppAlertDialogTheme.Animatsuri2024</item>
+        <!-- not using android:actionOverflowButtonStyle since it doesn't seem to work in Jellybean -->
+        <item name="actionOverflowButtonStyle">@style/OverflowMenu.Animatsuri2024</item>
+        <!-- General -->
+        <item name="android:colorPrimaryDark">@color/black</item> <!-- Toolbar color -->
+        <!-- Used in: default selected checkbox/switch color, settings titles,
+             cursor color in all edit texts. Also used as the default action button color and map search checkbox color. -->
+        <item name="colorAccent">@color/animatsuri2024_green500</item>
+        <!-- This color should be readable over the activities background.
+             Used as the text color in: accessibility, arrival methods.
+             Also used as default for many texts and as the default "large text" color (e.g. in settings). -->
+        <item name="android:textColorPrimary">@color/animatsuri2024_gray1000</item>
+        <!-- Used in: default unselected checkbox color and default "medium/small" texts (e.g. in settings). -->
+        <item name="android:textColorSecondary">@color/animatsuri2024_gray900</item>
+        <item name="android:textColorHint">@color/animatsuri2024_gray600</item>
+        <item name="android:textColorLink">@color/animatsuri2024_purple600</item>
+        <item name="actionButtonColor">@color/animatsuri2024_red600</item>
+        <item name="actionButtonIcon">@drawable/harucon_gen_search_icon</item>
+        <item name="hintTextColor">@color/animatsuri2024_gray1000</item>
+        <item name="swipeToRefreshColor">@color/white</item>
+        <item name="swipeToRefreshBackgroundColor">@color/animatsuri2024_red600</item>
+        <item name="snackbarActionColor">@color/animatsuri2024_purple600</item>
+        <item name="borderlessButtonColor">@color/animatsuri2024_purple700</item>
+        <item name="activitiesBackground">@drawable/animatsuri2024_background</item>
+        <item name="infoActivitiesBackground">@color/animatsuri2024_gray50</item>
+        <item name="eventListDivider">@drawable/harucon_gen_event_list_divider</item>
+        <item name="separatorColor">@null</item>
+        <!-- These are used for buttons. They should be usable when the background is:
+             Event screen vote survey
+             Feedback screen
+             Map bottom info panel
+             Arrival methods screen
+         -->
+        <item name="buttonColor">@color/animatsuri2024_purple800</item>
+        <item name="buttonColorPressed">@color/animatsuri2024_purple500</item>
+        <item name="buttonColorDisabled">@color/animatsuri2024_gray100</item>
+        <item name="buttonTextColor">@drawable/animatsuri2024_highlighted_button_text_color</item>
+
+        <!-- Notifications -->
+        <item name="notificationSmallIcon">@drawable/harucon_notification_small</item>
+        <!-- Toolbar -->
+        <item name="toolbarBackground">@color/animatsuri2024_purple800</item>
+        <item name="toolbarIconAccentColor">@color/gold</item>
+        <item name="toolbarTitleColor">@color/white</item>
+        <!-- Navigation Drawer -->
+        <item name="navigationPopupBackground">@color/animatsuri2024_purple50</item>
+        <item name="navigationPopupSpaceVisibility">gone</item>
+        <item name="navigationPopupTitle">@null</item>
+        <item name="navigationPopupBottomImage">@null</item>
+        <item name="navigationPopupTopSelectedColor">@color/animatsuri2024_purple900</item>
+        <item name="navigationPopupTopNotSelectedColor">@color/animatsuri2024_purple900</item>
+        <item name="navigationPopupNotSelectedColor">@color/animatsuri2024_purple900</item>
+        <item name="navigationPopupSelectedColor">@color/animatsuri2024_purple900</item>
+        <item name="navigationPopupSelectedBackground">@color/animatsuri2024_purple200</item>
+        <item name="navigationPopupSeparatorColor">@color/transparent</item>
+        <item name="navigationPopupBottomImageMargins">0dp</item>
+        <item name="navigationPopupBottomImageTopMargin">0dp</item>
+        <item name="navigationPopupTitleWidth">0dp</item>
+        <item name="navigationItemsShouldDisplayIcon">false</item>
+        <item name="navigationPopupItemPaddingTop">13dp</item>
+        <item name="navigationPopupItemPaddingBottom">13dp</item>
+        <!-- About Screen -->
+        <item name="aboutLogo">@drawable/amai_logo_black</item>
+        <item name="aboutLogoMargins">80dp</item>
+        <!-- Home Screen -->
+        <item name="homeLogo">@drawable/animatsuri2024_logo</item>
+        <item name="homeLogoMargin">20dp</item>
+        <item name="homeBottomImage">@null</item>
+        <item name="homeBackground">@drawable/animatsuri2024_background</item>
+        <item name="homeToolbarTitle">@null</item>
+        <item name="homeToolbarBackground">@color/animatsuri2024_purple800</item>
+        <item name="homeTitleBackground">@drawable/animatsuri2024_home_title_background</item>
+        <item name="homeShowCurrentUpcomingTitles">true</item>
+        <item name="homeTitleText">@drawable/animatsuri2024_home_title_text</item>
+        <item name="homeContentBackground">@drawable/animatsuri2024_home_content_background</item>
+        <item name="homeContentText">@color/animatsuri2024_gray1000</item>
+        <item name="homeButtonBackground">@drawable/animatsuri2024_home_button</item>
+        <item name="homeButtonText">@color/white</item>
+        <item name="homeGotoUpdatesButtonBackground">@drawable/animatsuri2024_home_updates_button</item>
+        <item name="homeEventsListEventBackground">@drawable/animatsuri2024_rounded_edges_transparent_cream</item>
+        <item name="homeEventsListDivider">@android:color/transparent</item>
+        <item name="homeEventsListDividerHeight">10dp</item>
+        <item name="homeBoxTopMargin">10dp</item>
+        <item name="homeSingleButtonTopMargin">10dp</item>
+        <item name="homeFrameTopMargin">10dp</item>
+        <!-- Event View -->
+        <item name="eventViewLayout">@layout/rounded_convention_event</item>
+        <item name="eventViewHeight">104dp</item>
+        <item name="eventBackgroundColor">@color/animatsuri2024_cream100_transparent85</item>
+        <item name="eventTextColor">@drawable/animatsuri2024_event_view_text_color</item>
+        <item name="eventNameKeywordHighlightColor">@color/animatsuri2024_green500</item>
+        <item name="eventKeywordHighlightColor">@color/animatsuri2024_green500</item>
+        <item name="eventTimeTextColor">@drawable/animatsuri2024_event_view_time_text_color</item>
+        <item name="eventTimeBackground">@drawable/animatsuri2024_event_view_time_background_color</item>
+        <item name="eventFavoriteIcon">@drawable/harucon_gen_favorite_icon</item>
+        <item name="eventFavoriteIconColor">@drawable/animatsuri2024_favorite_icon_color</item>
+        <item name="eventFeedbackIcon">@drawable/harucon_gen_event_feedback_icon</item>
+        <item name="eventFeedbackIconColor">@drawable/animatsuri2024_event_feedback_icon_color</item>
+        <item name="useEventTextColorFromEventType">false</item>
+        <item name="useEventTimeColorFromEventType">false</item>
+        <item name="conflictingEventBackground">@drawable/harucon_gen_conflicting_event_label_bg</item>
+        <item name="conflictingEventLabelTextColor">@color/animatsuri2024_cream100</item>
+        <!-- Programme Screen and Programme Search Screen -->
+        <item name="eventTimeHeaderBackground">@color/animatsuri2024_red300_transparent70</item>
+        <item name="eventTimeHeaderWidth">match_parent</item>
+        <item name="eventTimeHeaderTextColor">@color/animatsuri2024_purple900</item>
+        <item name="eventTimeHeaderMarginTop">10dp</item>
+        <item name="eventTimeHeaderMarginBottom">@null</item>
+        <item name="eventTimeHeaderMarginHorizontal">8dp</item>
+        <item name="eventTimeHeaderPaddingVertical">4dp</item>
+        <item name="marginBetweenEventsListAndNextHeader">0dp</item>
+        <item name="fabOnProgrammeTop">true</item>
+        <item name="fabOnProgrammeTopAlignment">START</item>
+        <item name="searchCategoriesColor">@color/animatsuri2024_purple600</item>
+        <item name="searchCategoriesChipBackgroundColor">@drawable/animatsuri2024_event_search_chip_background_color</item>
+        <item name="searchCategoriesChipTextColor">@drawable/animatsuri2024_event_search_chip_text_color</item>
+        <item name="searchCategoriesChipStrokeColor">@color/animatsuri2024_purple600</item>
+        <item name="searchCategoriesChipRippleColor">@color/animatsuri2024_purple50</item>
+        <item name="searchTitleTextColor">@color/animatsuri2024_gray1000</item>
+        <item name="searchTitleBackgroundColor">@color/animatsuri2024_gray50</item>
+        <item name="programmeSearchBarBackground">@drawable/animatsuri2024_search_bar_background</item>
+        <!-- My Events Screen -->
+        <item name="nextEventStartTimeBackground">@color/animatsuri2024_white_transparent60</item>
+        <item name="nextEventStartTimeTextColor">@color/animatsuri2024_gray1000</item>
+        <item name="conflictingEventsBackground">@null</item>
+        <item name="nextEventStartTimeBottomLineColor">@null</item>
+        <item name="conflictingEventsSideMargin">0dp</item>
+        <item name="conflictingEventsTopBottomMargin">0dp</item>
+        <item name="conflictingEventsGroupSeparator">@drawable/animatsuri2024_conflicting_events_group_separator</item>
+        <item name="conflictingEventsGroupSeparatorHeight">4dp</item>
+        <item name="conflictingEventsGroupSeparatorMargin">4dp</item>
+        <item name="conflictingEventsListBorder">@null</item>
+        <item name="freeTimeTextColor">@color/animatsuri2024_gray1000</item>
+        <item name="freeTimeBackground">@drawable/animatsuri2024_transparent_white_inset</item>
+        <!-- Feedback Screen -->
+        <item name="conventionFeedbackTextColor">@drawable/harucon_gen_convention_feedback_text_color</item>
+        <item name="conventionFeedbackAnswerBackground">@drawable/harucon_gen_convention_feedback_answer_bg_selector</item>
+        <item name="feedbackMultiAnswerMinWidth">50dp</item>
+        <item name="feedbackMultiAnswerPaddingTopBottom">4dp</item>
+        <item name="feedbackMultiAnswerPaddingStartEnd">9dp</item>
+        <item name="feedbackMultiAnswerPaddingStartFirstAnswer">9dp</item>
+        <item name="feedbackMultiAnswerMarginTopBottom">2dp</item>
+        <item name="feedbackMultiAnswerMarginBetweenAnswers">9dp</item>
+        <item name="feedbackProgressBarColor">@color/animatsuri2024_purple900</item>
+        <!-- Updates Screen -->
+        <item name="updateTimeColor">@drawable/animatsuri2024_update_time_color</item>
+        <item name="updateTimeBackground">@null</item>
+        <item name="updateItemBorder">@color/animatsuri2024_purple700</item>
+        <item name="updateItemSeparator">@android:color/transparent</item>
+        <item name="updateBackground">@drawable/animatsuri2024_update_background</item>
+        <item name="updateTextColor">@color/animatsuri2024_gray1000</item>
+        <item name="updateElevation">2dp</item>
+        <item name="showNewUpdateIndicator">true</item>
+        <item name="newUpdateIndicatorTextColor">@color/white</item>
+        <item name="newUpdateIndicatorBackground">@drawable/animatsuri2024_new_update_indicator_background</item>
+        <!-- Event Screen -->
+        <item name="eventToolbarColor">@color/animatsuri2024_purple800</item>
+        <item name="eventDetailsDefaultBackground">@drawable/animatsuri2024_background</item>
+        <item name="eventTitleBackground">@null</item>
+        <item name="eventTitlePadding">0dp</item>
+        <item name="eventTitleTextColor">@color/white</item>
+        <item name="eventLecturerTextColor">@color/harucon_gen_pink</item>
+        <item name="eventTypeTextColor">@color/harucon_gen_gray4</item>
+        <item name="eventNameBackground">@drawable/harucon_gen_rounded_top_edges_pink</item>
+        <item name="eventLecturerBackground">@color/white</item>
+        <item name="eventTypeBackground">@drawable/harucon_gen_rounded_bottom_edges_gray</item>
+        <item name="eventDetailsBoxColor">@null</item>
+        <item name="eventFeedbackBoxColor">@drawable/animatsuri2024_event_feedback_bg</item>
+        <item name="eventFeedbackTextColor">@drawable/animatsuri2024_event_feedback_text_color</item>
+        <item name="eventFeedbackAnswerBackground">@drawable/animatsuri2024_event_feedback_answer_bg_selector</item>
+        <item name="eventVoteBoxColor">@drawable/animatsuri2024_rounded_edges_transparent_purple</item>
+        <item name="eventVoteTextColor">@color/white</item>
+        <item name="eventVoteButtonBackground">@drawable/animatsuri2024_event_feedback_button</item>
+        <item name="eventVoteButtonTextColor">@drawable/animatsuri2024_event_feedback_button_text_color</item>
+        <item name="eventDescriptionBoxColor">@drawable/animatsuri2024_rounded_edges_transparent_cream</item>
+        <item name="feedbackButtonColor">@drawable/animatsuri2024_event_feedback_button_color_selector</item>
+        <item name="eventSurveyTextColor">@drawable/animatsuri2024_event_vote_text_color</item>
+        <item name="eventFeedbackButtonBackground">@drawable/animatsuri2024_event_feedback_button</item>
+        <item name="eventFeedbackButtonTextColor">@drawable/animatsuri2024_event_feedback_button_text_color</item>
+        <item name="eventFeedbackProgressBarColor">@color/white</item>
+        <item name="eventDetailsTextColor">@color/animatsuri2024_gray1000</item>
+        <item name="eventDescriptionTextColor">@color/animatsuri2024_gray1000</item>
+        <!-- Map Screen -->
+        <item name="mapBackground">@color/animatsuri2024_gray50</item>
+        <item name="locationDetailsBackground">@color/animatsuri2024_purple700</item>
+        <item name="locationDetailsTopLineColor">@android:color/transparent</item>
+        <item name="locationDetailsTitleColor">@color/white</item>
+        <item name="locationDetailsElevation">3dp</item>
+        <item name="iconClearMap">@drawable/ic_clear_white_24dp</item>
+        <item name="iconFloorUp">@drawable/animatsuri2024_arrow_up</item>
+        <item name="iconFloorDown">@drawable/animatsuri2024_arrow_down</item>
+        <item name="floorChangeBackground">@color/animatsuri2024_purple50</item>
+        <item name="floorUpDownTextColor">@color/animatsuri2024_purple900</item>
+        <item name="floorUpDownSeparator">@color/animatsuri2024_purple50</item>
+        <item name="floorUpDownElevation">10dp</item>
+        <item name="mapSearchTabsBackground">@color/animatsuri2024_purple800</item>
+        <item name="mapSearchFiltersBackground">@color/white</item>
+        <item name="mapSearchTabsColor">@color/white</item>
+        <item name="mapSearchTabsIndicator">@drawable/animatsuri2024_map_tab_indicator</item>
+        <item name="mapSearchTopBorder">@color/animatsuri2024_purple800</item>
+        <item name="mapSearchBorder">@color/white</item>
+        <item name="mapSearchResultsBackground">@color/less_transparent_white</item>
+        <item name="mapSearchPaneElevation">10dp</item>
+        <item name="mapSearchImageColor">@color/animatsuri2024_gray900</item>
+        <item name="mapSearchSeparator">@color/animatsuri2024_gray300</item>
+        <item name="mapSearchResultsDivider">@drawable/animatsuri2024_map_search_results_divider</item>
+        <item name="mapSearchCheckboxTint">@color/animatsuri2024_purple700</item>
+        <item name="mapSearchBarBackground">@drawable/animatsuri2024_search_bar_background</item>
+        <item name="mapSearchBarHorizontalMargins">5dp</item>
+        <item name="standIconColor">@color/animatsuri2024_purple900</item>
+        <item name="standsTypeTitleColor">@color/animatsuri2024_purple900</item>
+        <item name="standsMapHighlight">@color/animatsuri2024_purple900_transparent60</item>
+    </style>
+
+    <style name="AppBaseTheme.Animatsuri2024.Event">
+        <item name="android:textColorLink">@color/animatsuri2024_purple600</item>
+    </style>
+
+    <style name="AppDialogTheme.Animatsuri2024" parent="Theme.AppCompat.Light.Dialog">
+        <!-- This is the default starting API23. In any case the title is always left-justified so it's best to not use it. -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- Used for configure notifications popup title and separator -->
+        <item name="colorAccent">@color/animatsuri2024_purple800</item>
+        <item name="borderlessButtonColor">@color/animatsuri2024_purple700</item>
+        <item name="android:textColorPrimary">@color/animatsuri2024_gray1000</item>
+    </style>
+
+    <style name="AppAlertDialogTheme.Animatsuri2024" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!-- Used for configure notifications popup title and separator -->
+        <item name="colorAccent">@color/animatsuri2024_purple800</item>
+        <item name="borderlessButtonColor">@color/animatsuri2024_purple700</item>
+        <item name="android:textColorPrimary">@color/animatsuri2024_gray1000</item>
+    </style>
+
+    <style name="AppBaseTheme.Animatsuri2024.Splash">
+        <item name="android:windowBackground">@drawable/animatsuri2024_background</item>
+    </style>
+
+    <style name="OverflowMenu.Animatsuri2024" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_more_vert_white_24dp</item>
+    </style>
+</resources>
+
