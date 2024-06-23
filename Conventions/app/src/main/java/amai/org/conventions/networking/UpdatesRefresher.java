@@ -162,11 +162,16 @@ public class UpdatesRefresher {
 	}
 
 	private List<Update> parseUpdates(InputStreamReader reader) {
-		List<UpdateDto> updateDtos = new GsonBuilder()
+		UpdatesResponseDto updateResponse = new GsonBuilder()
 				.setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
 				.create()
-				.fromJson(reader, UpdatesResponseDto.class).getData();
+				.fromJson(reader, UpdatesResponseDto.class);
 
+		if (updateResponse.getError() != null) {
+			throw new RuntimeException(updateResponse.getError().getType() + " - " + updateResponse.getError().getMessage());
+		}
+
+		List<UpdateDto> updateDtos = updateResponse.getData();
 		List<Update> updates = CollectionUtils
 				.map(updateDtos, item -> new Update()
 						.withId(item.getId())
@@ -178,6 +183,7 @@ public class UpdatesRefresher {
 
 	public static class UpdatesResponseDto {
 		private List<UpdateDto> data;
+		private UpdateError error;
 
 		public List<UpdateDto> getData() {
 			return data;
@@ -186,6 +192,14 @@ public class UpdatesRefresher {
 		public UpdatesResponseDto setData(List<UpdateDto> data) {
 			this.data = data;
 			return this;
+		}
+
+		public UpdateError getError() {
+			return error;
+		}
+
+		public void setError(UpdateError error) {
+			this.error = error;
 		}
 	}
 
@@ -222,6 +236,28 @@ public class UpdatesRefresher {
 			return this;
 		}
 	}
+
+	private static class UpdateError {
+		private String type;
+		private String message;
+
+		public String getType() {
+			return type;
+		}
+
+		public void setType(String type) {
+			this.type = type;
+		}
+
+		public String getMessage() {
+			return message;
+		}
+
+		public void setMessage(String message) {
+			this.message = message;
+		}
+	}
+
 	private static class MockUpdatesRefresher extends UpdatesRefresher {
 		private MockUpdatesRefresher(Context context) {
 			super(context);
