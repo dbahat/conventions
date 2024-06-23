@@ -1,6 +1,7 @@
 package amai.org.conventions.navigation;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
@@ -33,8 +34,11 @@ public class NavigationTopButtonsLayout extends LinearLayout {
             int color;
             if (isSelected) {
                 color = ThemeAttributes.getColor(currentActivity, R.attr.navigationPopupTopSelectedColor);
+                int backgroundColor = ThemeAttributes.getColor(currentActivity, R.attr.navigationPopupSelectedBackground);
+                imageView.setBackgroundColor(backgroundColor);
             } else {
                 color = ThemeAttributes.getColor(currentActivity, R.attr.navigationPopupTopNotSelectedColor);
+                imageView.setBackgroundColor(Color.TRANSPARENT);
             }
             icon.mutate().setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
             imageView.setImageDrawable(icon);

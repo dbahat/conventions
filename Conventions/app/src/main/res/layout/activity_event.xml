@@ -234,7 +234,7 @@
 			</LinearLayout>
 
 
-            <LinearLayout
+            <amai.org.conventions.customviews.FrameLayoutWithState
                 android:id="@+id/event_feedback_container"
                 style="@style/EventDescriptionBox.Feedback"
                 android:visibility="gone"
@@ -253,7 +253,7 @@
 					app:progressBarColor="?eventFeedbackProgressBarColor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
-            </LinearLayout>
+            </amai.org.conventions.customviews.FrameLayoutWithState>
 
             <LinearLayout
                 android:id="@+id/event_description_box"

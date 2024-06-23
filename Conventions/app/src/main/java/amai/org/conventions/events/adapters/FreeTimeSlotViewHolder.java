@@ -1,6 +1,8 @@
 package amai.org.conventions.events.adapters;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.TextView;
 
@@ -9,7 +11,6 @@ import java.util.Date;
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.activities.EventsTimeSlot;
-import amai.org.conventions.networking.AmaiModelConverter;
 import amai.org.conventions.utils.Dates;
 
 public class FreeTimeSlotViewHolder extends RecyclerView.ViewHolder {
@@ -36,6 +37,8 @@ public class FreeTimeSlotViewHolder extends RecyclerView.ViewHolder {
 			attributes[0] = R.attr.state_event_current;
 		}
 		int color = ThemeAttributes.getColorFromStateList(itemView.getContext(), R.attr.freeTimeTextColor, attributes);
+		Drawable background = ThemeAttributes.getDrawable(itemView.getContext(), R.attr.freeTimeBackground);
 		textView.setTextColor(color);
+		itemView.setBackground(background);
 	}
 }

@@ -133,9 +133,11 @@
              Can be a color state list. Event/time state is set with state_event_... attributes. -->
         <attr name="eventTextColor" format="color|reference"/>
 
-        <!-- Background for conflicting event label. Used when event is conflicting and the label exists in the layout.
-             The corresponding text color is white. -->
+        <!-- Background for conflicting event label. Used when event is conflicting and the label exists in the layout. -->
         <attr name="conflictingEventBackground" format="integer|reference" />
+
+        <!-- Text color for conflicting event label. See conflictingEventBackground for usage. -->
+        <attr name="conflictingEventLabelTextColor" format="color|reference" />
 
         <!-- Background color for event view. Can be a color state list. Event state is set with state_event_... attributes. -->
         <attr name="eventBackgroundColor" format="color|reference"/>
@@ -290,6 +292,9 @@
         <!-- Text color for free time in my events. Can be a color state list. State is set with state_event_... attributes. -->
         <attr name="freeTimeTextColor" format="color|reference"/>
 
+        <!-- Background for free time in my events. Not a state list. -->
+        <attr name="freeTimeBackground" format="integer|reference"/>
+
         <!-- Navigation Drawer -->
 
         <!-- Background for the navigation drawer-->
@@ -401,8 +406,12 @@
         <!-- Text color for location name -->
         <attr name="locationDetailsTitleColor" format="color|reference"/>
 
-        <!-- Border color around map search (above and to the left) -->
+        <!-- Border color above map search -->
+        <attr name="mapSearchTopBorder" format="color|reference"/>
+        <!-- Border color to the left of map search -->
         <attr name="mapSearchBorder" format="color|reference"/>
+        <!-- Background for map search tabs -->
+        <attr name="mapSearchTabsBackground" format="color|reference"/>
         <!-- Background for map search filters -->
         <attr name="mapSearchFiltersBackground" format="color|reference"/>
         <!-- Color for separator between search filters and search results -->
@@ -480,17 +489,18 @@
         <!-- Text color for event description -->
         <attr name="eventDescriptionTextColor" format="color|reference"/>
 
-        <!-- Background color for feedback box in event activity -->
+        <!-- Background color for feedback box in event activity.
+             Can be a state list. Feedback state is set with state_event_feedback_... attributes (except state_event_feedback_filled). -->
         <attr name="eventFeedbackBoxColor" format="color|reference"/>
         <!-- Text color for event feedback. Used in: title (collapsed and open), feedback sent message,
              questions, answers, additional feedback link, separator above the send button.
-             Can be a color state list. Feedback state is set with state_feedback_... attributes. -->
+             Can be a color state list. Feedback state is set with state_feedback_... and state_event_feedback_... (except state_event_feedback_filled) attributes. -->
         <attr name="eventFeedbackTextColor" format="color|reference"/>
         <!-- Background for event feedback answer. Used in multiple answers for selected and unselected answers.
              Can be a drawable state list. Feedback state is set with state_feedback_... attributes. -->
         <attr name="eventFeedbackAnswerBackground" format="color|reference"/>
         <!-- Color for borderless button text and feedback icon (when it's not a smiley) in feedback layout
-             (open/close feedback). Used in event activity. -->
+             (open/close feedback). Used in event activity. Can be a drawable state list. Feedback state is set with state_event_feedback_... (except state_event_feedback_filled) attributes. -->
         <attr name="feedbackButtonColor" format="color|reference"/>
         <!-- Button background for event feedback "send" button -->
         <attr name="eventFeedbackButtonBackground" format="integer|reference"/>

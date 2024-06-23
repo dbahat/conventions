@@ -50,6 +50,7 @@
         <item name="eventTimeHeaderTextColor">?eventTextColor</item>
         <item name="eventDateHeaderTextColor">?eventTimeHeaderTextColor</item>
         <item name="freeTimeTextColor">?eventTextColor</item>
+        <item name="freeTimeBackground">@null</item>
         <item name="eventTimeHeaderMarginTop">10dp</item>
         <item name="eventTimeHeaderMarginBottom">0dp</item>
         <item name="eventTimeHeaderPaddingHorizontal">30dp</item>
@@ -62,6 +63,7 @@
         <item name="eventFeedbackIcon">@drawable/event_feedback_icon</item>
         <item name="eventFeedbackIconColor">@drawable/event_feedback_icon_color</item>
         <item name="eventFavoriteIcon">@drawable/ic_star_black_24dp</item>
+        <item name="conflictingEventLabelTextColor">@color/white</item>
         <item name="conflictingEventListDivider">?eventListDivider</item>
         <item name="useEventTextColorFromEventType">false</item>
         <item name="useEventTimeColorFromEventType">false</item>
@@ -137,10 +139,12 @@
         <item name="floorUpDownElevation">0dp</item>
         <item name="mapSearchText">@color/black</item>
         <item name="mapSearchFiltersBackground">@color/white</item>
+        <item name="mapSearchTabsBackground">?mapSearchFiltersBackground</item>
         <item name="mapSearchResultsBackground">@color/transparent_white</item>
         <item name="mapSearchHint">@color/hint_gray</item>
         <item name="mapSearchSeparator">@color/very_dark_gray</item>
         <item name="mapSearchBorder">@color/black</item>
+        <item name="mapSearchTopBorder">?mapSearchBorder</item>
         <item name="mapSearchImageColor">?mapSearchText</item>
         <item name="mapSearchTabsColor">?mapSearchText</item>
         <item name="mapSearchTabsIndicator">@null</item>
@@ -245,6 +249,7 @@
         <item name="eventTimeHeaderTextColor">?eventTextColor</item>
         <item name="eventDateHeaderTextColor">?eventTimeHeaderTextColor</item>
         <item name="freeTimeTextColor">?eventTextColor</item>
+        <item name="freeTimeBackground">@null</item>
         <item name="eventTimeHeaderMarginTop">10dp</item>
         <item name="eventTimeHeaderMarginBottom">0dp</item>
         <item name="eventTimeHeaderPaddingHorizontal">30dp</item>
@@ -257,6 +262,7 @@
         <item name="eventFeedbackIcon">@drawable/event_feedback_icon</item>
         <item name="eventFeedbackIconColor">@drawable/event_feedback_icon_color</item>
         <item name="eventFavoriteIcon">@drawable/ic_star_black_24dp</item>
+        <item name="conflictingEventLabelTextColor">@color/white</item>
         <item name="conflictingEventListDivider">?eventListDivider</item>
         <item name="useEventTextColorFromEventType">false</item>
         <item name="useEventTimeColorFromEventType">false</item>
@@ -332,10 +338,12 @@
         <item name="floorUpDownElevation">0dp</item>
         <item name="mapSearchText">@color/black</item>
         <item name="mapSearchFiltersBackground">@color/white</item>
+        <item name="mapSearchTabsBackground">?mapSearchFiltersBackground</item>
         <item name="mapSearchResultsBackground">@color/transparent_white</item>
         <item name="mapSearchHint">@color/hint_gray</item>
         <item name="mapSearchSeparator">@color/very_dark_gray</item>
         <item name="mapSearchBorder">@color/black</item>
+        <item name="mapSearchTopBorder">?mapSearchBorder</item>
         <item name="mapSearchImageColor">?mapSearchText</item>
         <item name="mapSearchTabsColor">?mapSearchText</item>
         <item name="mapSearchTabsIndicator">@null</item>
