@@ -56,6 +56,7 @@ public class EventView extends FrameLayout {
 	private final TextView searchDescription;
 	private String eventDescriptionContent;
 	private String eventTags;
+    private String eventSubTitle;
     private StateList eventState;
 
 
@@ -103,6 +104,7 @@ public class EventView extends FrameLayout {
             setFeedbackIconFromEvent(event);
             eventDescriptionContent = event.getPlainTextDescription();
             eventTags = getContext().getString(R.string.tags, event.getTagsAsString());
+            eventSubTitle = event.getSubTitle();
             setConflicting(conflicting);
         }
 
@@ -381,7 +383,7 @@ public class EventView extends FrameLayout {
 		boolean isAnyDescriptionKeywordHighlighted = false;
 
         // Prioritized list of additional event details to highlight (if lecturer and hall aren't highlighted)
-        List<String> eventDetailsText = Arrays.asList(eventTags, eventDescriptionContent);
+        List<String> eventDetailsText = Arrays.asList(eventSubTitle, eventTags, eventDescriptionContent);
 		int eventNameHighlightColor = ThemeAttributes.getColor(getContext(), R.attr.eventNameKeywordHighlightColor);
 		int eventHighlightColor = ThemeAttributes.getColor(getContext(), R.attr.eventKeywordHighlightColor);
 
@@ -393,7 +395,7 @@ public class EventView extends FrameLayout {
 				boolean didHighlightLectureName = tryHighlightKeywordInTextView(lecturerName, lowerCaseKeyword, eventHighlightColor);
 				boolean didHighlightHallName = tryHighlightKeywordInTextView(hallName, lowerCaseKeyword, eventHighlightColor);
 
-                // If the keyword is in the additional event details (description or tags), hide the lecturer name and hall name and show the
+                // If the keyword is in the additional event details (subtitle, description or tags), hide the lecturer name and hall name and show the
                 // event detail text next to the keyword instead (assuming there are no highlighted keywords in the views we hid)
 				if (!didHighlightLectureName && !didHighlightHallName) {
                     boolean highlightDescription = false;
