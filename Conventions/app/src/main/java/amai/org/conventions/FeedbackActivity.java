@@ -67,6 +67,7 @@ public class FeedbackActivity extends NavigationActivity {
 		super.onCreate(savedInstanceState);
 		setContentInContentContainer(R.layout.activity_feedback);
 		setToolbarTitle(getString(R.string.feedback));
+		setBackground(ThemeAttributes.getDrawable(this, R.attr.feedbackActivityBackground));
 
 		eventsWithoutFeedbackLayout = (ViewGroup) findViewById(R.id.events_without_feedback);
 		eventsWithoutFeedbackList = (ListView) findViewById(R.id.events_without_feedback_list);

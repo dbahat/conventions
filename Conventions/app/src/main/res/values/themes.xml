@@ -182,6 +182,7 @@
         <item name="eventFeedbackButtonTextColor">?buttonTextColor</item>
 
         <!-- Feedback activity -->
+        <item name="feedbackActivityBackground">?activitiesBackground</item>
         <item name="conventionFeedbackBackgroundColor">@color/transparent</item>
         <item name="conventionFeedbackAnswerBackground">?eventFeedbackAnswerBackground</item>
         <item name="feedbackEventDateHeaderTextColor">?eventTimeHeaderTextColor</item>
@@ -401,6 +402,7 @@
         <item name="eventFeedbackButtonTextColor">?buttonTextColor</item>
 
         <!-- Feedback activity -->
+        <item name="feedbackActivityBackground">?activitiesBackground</item>
         <item name="conventionFeedbackBackgroundColor">@color/transparent</item>
         <item name="conventionFeedbackAnswerBackground">?eventFeedbackAnswerBackground</item>
         <item name="feedbackEventDateHeaderTextColor">?eventTimeHeaderTextColor</item>
