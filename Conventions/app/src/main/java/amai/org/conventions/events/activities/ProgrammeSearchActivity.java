@@ -256,7 +256,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 
 		keyword = keyword.toLowerCase();
 		return event.getTitle().toLowerCase().contains(keyword)
-				|| event.getSubTitle().toLowerCase().contains(keyword)
+				|| (event.getSubTitle() != null && event.getSubTitle().toLowerCase().contains(keyword))
 				|| event.getLecturer().toLowerCase().contains(keyword)
 				|| event.getHall().getName().toLowerCase().contains(keyword)
 				|| filteredEventDescription.toLowerCase().contains(keyword);

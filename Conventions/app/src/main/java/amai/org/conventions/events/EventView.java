@@ -389,7 +389,7 @@ public class EventView extends FrameLayout {
                     boolean highlightDescription = false;
                     for (int i = 0; i < eventDetailsText.size(); ++i) {
                         String eventDetail = eventDetailsText.get(i);
-                        if (eventDetail.toLowerCase().contains(lowerCaseKeyword)) {
+                        if (eventDetail != null && eventDetail.toLowerCase().contains(lowerCaseKeyword)) {
                             highlightDescription = true;
                             if (!isAnyDescriptionKeywordHighlighted) {
                                 eventDetail = showBottomHighlightedText(eventDetail, lowerCaseKeyword);

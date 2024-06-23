@@ -56,6 +56,17 @@
 					tools:text="title" />
 
 				<TextView
+					android:id="@+id/event_subtitle"
+					style="@style/TextAppearance.AppCompat.Subhead"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="?eventSubTitleBackground"
+					android:gravity="center"
+					android:padding="5dp"
+					android:textColor="?eventSubTitleTextColor"
+					tools:text="subtitle" />
+
+				<TextView
 					android:id="@+id/event_lecturer"
 					style="@style/TextAppearance.AppCompat.Subhead"
 					android:layout_width="match_parent"
