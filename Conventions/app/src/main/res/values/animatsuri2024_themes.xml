@@ -163,12 +163,12 @@
         <item name="eventDetailsDefaultBackground">@drawable/animatsuri2024_background</item>
         <item name="eventTitleBackground">@null</item>
         <item name="eventTitlePadding">0dp</item>
-        <item name="eventTitleTextColor">@color/white</item>
-        <item name="eventLecturerTextColor">@color/harucon_gen_pink</item>
-        <item name="eventTypeTextColor">@color/harucon_gen_gray4</item>
-        <item name="eventNameBackground">@drawable/harucon_gen_rounded_top_edges_pink</item>
+        <item name="eventTitleTextColor">@color/animatsuri2024_purple900</item>
+        <item name="eventLecturerTextColor">@color/animatsuri2024_purple900</item>
+        <item name="eventTypeTextColor">@color/animatsuri2024_purple900</item>
+        <item name="eventNameBackground">@drawable/animatsuri2024_rounded_top_edges_purple400</item>
         <item name="eventLecturerBackground">@color/white</item>
-        <item name="eventTypeBackground">@drawable/harucon_gen_rounded_bottom_edges_gray</item>
+        <item name="eventTypeBackground">@drawable/animatsuri2024_rounded_bottom_edges_gray200</item>
         <item name="eventDetailsBoxColor">@null</item>
         <item name="eventFeedbackBoxColor">@drawable/animatsuri2024_event_feedback_bg</item>
         <item name="eventFeedbackTextColor">@drawable/animatsuri2024_event_feedback_text_color</item>
