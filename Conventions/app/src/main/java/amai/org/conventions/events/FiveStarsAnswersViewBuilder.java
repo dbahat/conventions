@@ -20,12 +20,14 @@ public class FiveStarsAnswersViewBuilder {
 
     private Context context;
     private ColorStateList textColor;
+    private StateList initialStateList;
     private Runnable onAnswerChanged = () -> {};
 
-    public static FiveStarsAnswersViewBuilder withContext(Context context, ColorStateList textColor) {
+    public static FiveStarsAnswersViewBuilder withContext(Context context, ColorStateList textColor, StateList initialStateList) {
         FiveStarsAnswersViewBuilder builder = new FiveStarsAnswersViewBuilder();
         builder.context = context;
         builder.textColor = textColor;
+        builder.initialStateList = initialStateList;
         return builder;
     }
 
@@ -83,7 +85,7 @@ public class FiveStarsAnswersViewBuilder {
                 .forEach(i -> {
                     ImageView image = (ImageView) starsLayout.getChildAt(i);
 
-                    StateList answerState = new StateList(R.attr.state_feedback_answer, R.attr.state_feedback_answer_type_five_stars);
+                    StateList answerState = initialStateList.clone().add(R.attr.state_feedback_answer).add(R.attr.state_feedback_answer_type_five_stars);
                     StateList selectedAnswerState = answerState.clone().add(R.attr.state_feedback_answer_selected);
 
                     int answerColor = answerState.getColor(textColor);

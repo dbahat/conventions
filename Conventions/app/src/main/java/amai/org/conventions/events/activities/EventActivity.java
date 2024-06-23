@@ -39,6 +39,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import amai.org.conventions.customviews.FrameLayoutWithState;
+import amai.org.conventions.utils.StateList;
+
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
@@ -90,7 +93,7 @@ public class EventActivity extends NavigationActivity {
 	private View mainLayout;
 	private ConventionEvent conventionEvent;
 	private LinearLayout imagesLayout;
-	private LinearLayout feedbackContainer;
+	private FrameLayoutWithState feedbackContainer;
 	private View voteSurveyOpenerContainer;
 	private View voteSurveyOpenerLayout;
 	private Button voteSurveyOpener;
@@ -112,7 +115,7 @@ public class EventActivity extends NavigationActivity {
 		mainLayout = findViewById(R.id.event_main_layout);
 		imagesBackground = findViewById(R.id.images_background);
 		imagesLayout = (LinearLayout) findViewById(R.id.images_layout);
-		feedbackContainer = (LinearLayout) findViewById(R.id.event_feedback_container);
+		feedbackContainer = findViewById(R.id.event_feedback_container);
 		voteSurveyOpenerContainer = findViewById(R.id.event_vote_opener_container);
 		voteSurveyOpenerLayout = findViewById(R.id.event_vote_opener_layout);
 		voteSurveyOpener = (Button) findViewById(R.id.event_open_vote_survey_button);
@@ -845,6 +848,8 @@ public class EventActivity extends NavigationActivity {
 	private void setupFeedback(ConventionEvent event) {
 		if (event.canFillFeedback()) {
 			feedbackContainer.setVisibility(View.VISIBLE);
+			updateFeedbackState(event);
+
 			feedbackView.setAdditionalFeedbackURL(Convention.getInstance().getAdditionalEventFeedbackURL(event));
 			feedbackView.setModel(event.getUserInput().getFeedback());
 
@@ -869,11 +874,24 @@ public class EventActivity extends NavigationActivity {
 				protected void onSuccess() {
 					super.onSuccess();
 					feedbackView.setState(CollapsibleFeedbackView.State.Collapsed, true);
+					updateFeedbackState(event);
 				}
 			});
 		} else {
 			feedbackContainer.setVisibility(View.GONE);
 		}
+	}
+
+	private void updateFeedbackState(ConventionEvent event) {
+		StateList states = new StateList();
+		Survey feedback = event.getUserInput().getFeedback();
+		if (feedback.isSent()) {
+			states.add(R.attr.state_event_feedback_sent);
+		}
+		if (!Convention.getInstance().isFeedbackSendingTimeOver()) {
+			states.add(R.attr.state_event_feedback_can_send);
+		}
+		states.setForView(feedbackContainer);
 	}
 
 	private boolean shouldFeedbackBeClosed() {

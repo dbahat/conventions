@@ -31,11 +31,11 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="?mapSearchBorder"/>
+                android:background="?mapSearchTopBorder"/>
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/search_type"
-                android:background="?mapSearchFiltersBackground"
+                android:background="?mapSearchTabsBackground"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:tabGravity="fill"

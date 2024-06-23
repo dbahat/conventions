@@ -73,6 +73,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 	private TextView feedbackLayoutTitle;
 	private TextView collapsedFeedbackTitle;
 	private Button openFeedbackButton;
+	private Button closeFeedbackButton;
 	private Button sendFeedbackButton;
 	private ImageView feedbackIcon;
 	private TextView feedbackSentText;
@@ -118,7 +119,9 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		feedbackLayoutTitle = (TextView) findViewById(R.id.feedback_layout_title);
 		collapsedFeedbackTitle = (TextView) findViewById(R.id.collapsed_feedback_title);
 		openFeedbackButton = (Button) findViewById(R.id.open_feedback_button);
+		closeFeedbackButton = (Button) findViewById(R.id.close_feedback_button);
 		feedbackIcon = (ImageView) findViewById(R.id.feedback_icon);
+
 		feedbackContainer = (ViewGroup) findViewById(R.id.feedback_container);
 		sendFeedbackButton = (Button) findViewById(R.id.send_feedback_button);
 		feedbackSentText = (TextView) findViewById(R.id.feedback_sent_text);
@@ -186,6 +189,9 @@ public class CollapsibleFeedbackView extends FrameLayout {
 			feedbackSentText.setVisibility(View.VISIBLE);
 			feedbackSentText.setText(getContext().getString(R.string.feedback_sending_time_over));
 		}
+		int feedbackOpenCloseColor = ThemeAttributes.getColorFromStateList(getContext(), R.attr.feedbackButtonColor, createStateList().toArray());
+		openFeedbackButton.setTextColor(feedbackOpenCloseColor);
+		closeFeedbackButton.setTextColor(feedbackOpenCloseColor);
 
 		setFeedbackIcon(feedback);
 		setupAdditionalFeedback();
@@ -207,7 +213,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 			additionalFeedbackLink.setVisibility(VISIBLE);
 			additionalFeedbackLink.setText(Html.fromHtml(getContext().getString(R.string.additional_feedback, additionalFeedbackURL.toString())));
 			additionalFeedbackLink.setMovementMethod(LinkMovementMethod.getInstance());
-			additionalFeedbackLink.setLinkTextColor(new StateList(R.attr.state_feedback_link).getColor(this.textColor));
+			additionalFeedbackLink.setLinkTextColor(createStateList(R.attr.state_feedback_link).getColor(this.textColor));
 		}
 	}
 
@@ -220,9 +226,20 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		feedbackSendErrorMessage = stringResource;
 	}
 
+	private StateList createStateList(int... initialStates) {
+		StateList state = new StateList(initialStates);
+		if (feedback.isSent()) {
+			state.add(R.attr.state_event_feedback_sent);
+		}
+		if (!Convention.getInstance().isFeedbackSendingTimeOver()) {
+			state.add(R.attr.state_event_feedback_can_send);
+		}
+		return state;
+	}
+
 	private void setTextColor(ColorStateList colors) {
 		textColor = colors;
-		StateList state = new StateList(R.attr.state_feedback_text);
+		StateList state = createStateList(R.attr.state_feedback_text);
 		int color = state.getColor(textColor);
 		if (color != Convention.NO_COLOR) {
 			collapsedFeedbackTitle.setTextColor(color);
@@ -289,12 +306,12 @@ public class CollapsibleFeedbackView extends FrameLayout {
 			if (weightedRating instanceof FeedbackQuestion.Smiley3PointAnswer) {
 				filterColor = ContextCompat.getColor(getContext(), R.color.yellow);
 			} else {
-				StateList answerState = new StateList(R.attr.state_feedback_answer, R.attr.state_feedback_answer_selected, R.attr.state_feedback_answer_type_smiley_5_point);
+				StateList answerState = createStateList(R.attr.state_feedback_answer, R.attr.state_feedback_answer_selected, R.attr.state_feedback_answer_type_smiley_5_point);
 				filterColor = answerState.getColor(this.textColor);
 			}
 		} else {
 			icon = ContextCompat.getDrawable(getContext(), R.drawable.chat);
-			filterColor = ThemeAttributes.getColor(getContext(), R.attr.feedbackButtonColor);
+			filterColor = ThemeAttributes.getColorFromStateList(getContext(), R.attr.feedbackButtonColor, createStateList().toArray());
 		}
 		icon = icon.mutate();
 		icon.setColorFilter(filterColor, PorterDuff.Mode.MULTIPLY);
@@ -352,7 +369,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 
 	private View buildFiveStarsAnswersView(FeedbackQuestion question, Survey feedback) {
 		return FiveStarsAnswersViewBuilder
-				.withContext(getContext(), textColor)
+				.withContext(getContext(), textColor, createStateList())
 				.onAnswerChange(() -> {
 					feedbackChanged |= question.isAnswerChanged();
 					updateSendButtonEnabledState(feedback);
@@ -434,7 +451,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		int margin = getResources().getDimensionPixelOffset(R.dimen.feedback_smiley_answer_margin);
 		int size = getResources().getDimensionPixelSize(R.dimen.feedback_smiley5p_icon_size);
 
-		StateList answerState = new StateList(R.attr.state_feedback_answer, R.attr.state_feedback_answer_type_smiley_5_point);
+		StateList answerState = createStateList(R.attr.state_feedback_answer, R.attr.state_feedback_answer_type_smiley_5_point);
 		StateList selectedAnswerState = answerState.clone().add(R.attr.state_feedback_answer_selected);
 
 		int answerColor = answerState.getColor(this.textColor);
@@ -574,7 +591,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 
 		final List<TextView> answerViews = new ArrayList<>(possibleAnswers.size());
 
-		StateList answerState = new StateList(R.attr.state_feedback_answer);
+		StateList answerState = createStateList(R.attr.state_feedback_answer);
 		if (radio) {
 			answerState.add(R.attr.state_feedback_answer_type_radio);
 		} else {
