@@ -154,6 +154,7 @@
     <string name="show_test_notifications_title">בדיקות</string>
     <string name="show_test_notifications_summary">הצג התראות בדיקה</string>
     <string name="advanced_options_enabled">אפשרויות מתקדמות אופשרו</string>
+    <string name="tags">תגיות: %s</string>
     <string name="about">אודות</string>
     <string name="no_updates_found">לא נמצאו עדכונים</string>
     <string name="discounts">הטבות</string>

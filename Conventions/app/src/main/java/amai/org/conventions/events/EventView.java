@@ -15,7 +15,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import amai.org.conventions.R;
@@ -29,6 +28,7 @@ import amai.org.conventions.utils.StateList;
 import amai.org.conventions.utils.Strings;
 import androidx.annotation.AttrRes;
 import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
@@ -53,6 +53,7 @@ public class EventView extends FrameLayout {
     private final View searchDescriptionContainer;
     private final TextView searchDescription;
     private String eventDescriptionContent;
+	private String eventTags;
     private StateList eventState;
 
 
@@ -99,6 +100,7 @@ public class EventView extends FrameLayout {
             setLecturerName(event.getLecturer());
             setFeedbackIconFromEvent(event);
             eventDescriptionContent = event.getPlainTextDescription();
+            eventTags = getContext().getString(R.string.tags, event.getTagsAsString());
             setConflicting(conflicting);
         }
 
@@ -366,7 +368,7 @@ public class EventView extends FrameLayout {
         boolean isAnyDescriptionKeywordHighlighted = false;
 
         String filteredDescriptionText = eventDescriptionContent;
-
+		String filteredTagsText = eventTags;
         int eventNameHighlightColor = ThemeAttributes.getColor(getContext(), R.attr.eventNameKeywordHighlightColor);
         int eventHighlightColor = ThemeAttributes.getColor(getContext(), R.attr.eventKeywordHighlightColor);
 
@@ -378,17 +380,24 @@ public class EventView extends FrameLayout {
                 boolean didHighlightLectureName = tryHighlightKeywordInTextView(lecturerName, lowerCaseKeyword, eventHighlightColor);
                 boolean didHighlightHallName = tryHighlightKeywordInTextView(hallName, lowerCaseKeyword, eventHighlightColor);
 
-                // If the keyword is in the description, hide the lecturer name and hall name and show the description text next to the keyword instead
-                // (assuming there are no highlighted keywords in the views we hid)
+				// If the keyword is in the description or tags, hide the lecturer name and hall name and show the
+				// description/tags text next to the keyword instead (assuming there are no highlighted keywords in the views we hid)
                 if (!didHighlightLectureName && !didHighlightHallName) {
-                    if (filteredDescriptionText.toLowerCase().contains(lowerCaseKeyword)) {
+					boolean highlightDescription = true;
+					if (filteredTagsText.toLowerCase().contains(lowerCaseKeyword)) {
                         if (!isAnyDescriptionKeywordHighlighted) {
-                            bottomLayout.setVisibility(GONE);
-                            searchDescriptionContainer.setVisibility(VISIBLE);
-                            searchDescription.setText(Strings.snipTextNearKeyword(filteredDescriptionText, lowerCaseKeyword));
-                            filteredDescriptionText = searchDescription.getText().toString();
+							filteredTagsText = showBottomHighlightedText(filteredTagsText, lowerCaseKeyword);
                             isAnyDescriptionKeywordHighlighted = true;
                         }
+					} else if (filteredDescriptionText.toLowerCase().contains(lowerCaseKeyword)) {
+						if (!isAnyDescriptionKeywordHighlighted) {
+							filteredDescriptionText = showBottomHighlightedText(filteredDescriptionText, lowerCaseKeyword);
+							isAnyDescriptionKeywordHighlighted = true;
+						}
+					} else {
+						highlightDescription = false;
+					}
+					if (highlightDescription) {
                         tryHighlightKeywordInTextView(searchDescription, lowerCaseKeyword, eventHighlightColor);
                     }
                 }
@@ -403,6 +412,15 @@ public class EventView extends FrameLayout {
             }
         }
     }
+
+	@NonNull
+	private String showBottomHighlightedText(String text, String lowerCaseKeyword) {
+		bottomLayout.setVisibility(GONE);
+		searchDescriptionContainer.setVisibility(VISIBLE);
+		searchDescription.setText(Strings.snipTextNearKeyword(text, lowerCaseKeyword));
+		text = searchDescription.getText().toString();
+		return text;
+	}
 
     private boolean tryHighlightKeywordInTextView(TextView textView, String keyword, int color) {
         CharSequence originalText = textView.getText();
