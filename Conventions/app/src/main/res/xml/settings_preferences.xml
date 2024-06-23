@@ -6,21 +6,21 @@
         app:iconSpaceReserved="false"
         app:title="@string/notifications_preferences">
         <SwitchPreferenceCompat
-            app:key="harucon2024_general"
+            app:key="animatsuri2024_general"
             app:iconSpaceReserved="false"
             app:title="@string/show_general_notifications_title"
             app:summary="@string/show_general_notifications_summary"
             app:defaultValue="true" />
 
         <SwitchPreferenceCompat
-            app:key="harucon2024_events"
+            app:key="animatsuri2024_events"
             app:iconSpaceReserved="false"
             app:title="@string/show_event_notifications_title"
             app:summary="@string/show_event_notifications_summary"
             app:defaultValue="true" />
 
         <SwitchPreferenceCompat
-            app:key="harucon2024_cosplay"
+            app:key="animatsuri2024_cosplay"
             app:iconSpaceReserved="false"
             app:title="@string/show_cosplay_notifications_title"
             app:summary="@string/show_cosplay_notifications_summary"
@@ -38,14 +38,14 @@
         app:title="@string/reminder_preferences"
         app:iconSpaceReserved="false">
         <SwitchPreferenceCompat
-            app:key="harucon2024_event_starting_reminder"
+            app:key="animatsuri2024_event_starting_reminder"
             app:iconSpaceReserved="false"
             app:title="@string/show_reminder_before_event_starts_title"
             app:summary="@string/show_reminder_before_event_starts_summary"
             app:defaultValue="true" />
 
         <SwitchPreferenceCompat
-            app:key="harucon2024_event_feedback_reminder"
+            app:key="animatsuri2024_event_feedback_reminder"
             app:iconSpaceReserved="false"
             app:title="@string/show_event_feedback_reminder_title"
             app:summary="@string/show_event_feedback_reminder_summary"
@@ -56,7 +56,7 @@
         app:title="@string/general_preferences"
         app:iconSpaceReserved="false">
         <SwitchPreferenceCompat
-            app:key="harucon2024_favorite_event_changes"
+            app:key="animatsuri2024_favorite_event_changes"
             app:iconSpaceReserved="false"
             app:title="@string/show_favorites_updates_title"
             app:summary="@string/show_favorites_updates_summary"
@@ -68,7 +68,7 @@
         app:iconSpaceReserved="false"
         app:title="@string/advanced_preferences">
         <SwitchPreferenceCompat
-            app:key="harucon2024_test"
+            app:key="animatsuri2024_test"
             app:iconSpaceReserved="false"
             app:title="@string/show_test_notifications_title"
             app:summary="@string/show_test_notifications_summary"
