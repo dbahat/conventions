@@ -93,8 +93,8 @@
         <item name="eventViewHeight">104dp</item>
         <item name="eventBackgroundColor">@color/animatsuri2024_cream100_transparent85</item>
         <item name="eventTextColor">@drawable/animatsuri2024_event_view_text_color</item>
-        <item name="eventNameKeywordHighlightColor">@color/animatsuri2024_green500</item>
-        <item name="eventKeywordHighlightColor">@color/animatsuri2024_green500</item>
+        <item name="eventNameKeywordHighlightColor">@color/animatsuri2024_orange</item>
+        <item name="eventKeywordHighlightColor">@color/animatsuri2024_orange</item>
         <item name="eventTimeTextColor">@drawable/animatsuri2024_event_view_time_text_color</item>
         <item name="eventTimeBackground">@drawable/animatsuri2024_event_view_time_background_color</item>
         <item name="eventFavoriteIcon">@drawable/harucon_gen_favorite_icon</item>
@@ -138,8 +138,8 @@
         <item name="freeTimeTextColor">@color/animatsuri2024_gray1000</item>
         <item name="freeTimeBackground">@drawable/animatsuri2024_transparent_white_inset</item>
         <!-- Feedback Screen -->
-        <item name="conventionFeedbackTextColor">@drawable/harucon_gen_convention_feedback_text_color</item>
-        <item name="conventionFeedbackAnswerBackground">@drawable/harucon_gen_convention_feedback_answer_bg_selector</item>
+        <item name="conventionFeedbackTextColor">@drawable/animatsuri2024_convention_feedback_text_color</item>
+        <item name="conventionFeedbackAnswerBackground">@drawable/animatsuri2024_convention_feedback_answer_bg_selector</item>
         <item name="feedbackMultiAnswerMinWidth">50dp</item>
         <item name="feedbackMultiAnswerPaddingTopBottom">4dp</item>
         <item name="feedbackMultiAnswerPaddingStartEnd">9dp</item>
