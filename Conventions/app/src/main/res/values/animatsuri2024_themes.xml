@@ -217,6 +217,11 @@
         <item name="standIconColor">@color/animatsuri2024_purple900</item>
         <item name="standsTypeTitleColor">@color/animatsuri2024_purple900</item>
         <item name="standsMapHighlight">@color/animatsuri2024_purple900_transparent60</item>
+        <!-- Search drawer -->
+        <item name="searchDrawerAccentColor">@color/animatsuri2024_green500</item>
+        <item name="searchDrawerBackground">@color/animatsuri2024_purple50</item>
+        <item name="searchDrawerTextColor">@color/animatsuri2024_purple900</item>
+        <item name="searchDrawerSeparatorColor">@color/transparent</item>
     </style>
 
     <style name="AppBaseTheme.Animatsuri2024.Event">

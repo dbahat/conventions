@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Using RelativeLayout because LinearLayout doesn't calculate the height of the item name correctly -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp"
+    android:background="?selectableItemBackground">
+
+    <!-- Using transparent background to remove the ripple effect on the checkbox itself -->
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/search_filter_item_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:clickable="false"
+        android:background="@android:color/transparent"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:checked="true"/>
+
+    <!-- This is written after the CheckBox because it references it, and if it's written before it doesn't compile -->
+    <TextView
+        android:id="@+id/search_filter_item_name"
+        android:layout_alignParentEnd="true"
+        android:layout_centerInParent="true"
+        android:layout_toEndOf="@id/search_filter_item_checkbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="?searchDrawerTextColor"
+        tools:text="הרצאות"
+        style="@style/TextAppearance.AppCompat.Small"/>
+
+</RelativeLayout>

@@ -192,6 +192,7 @@
     <string name="home_current_event_view_possible">לחץ לצפיה באירוע!</string>
     <string name="event_not_found">האירוע לא נמצא</string>
     <string name="tickets">כרטיסים</string>
+    <string name="show_sold_out_events">אירועים ללא כרטיסים</string>
     <string name="physical_event">אירוע פיזי</string>
     <string name="virtual_event">אירוע וירטואלי</string>
     <string name="hybrid_event">אירוע היברידי</string>

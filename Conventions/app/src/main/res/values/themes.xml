@@ -197,6 +197,7 @@
 
         <!-- Programme Search Activity -->
         <item name="searchTitleBackgroundColor">@android:color/transparent</item>
+        <item name="programmeSearchFilterColor">?colorAccent</item>
         <item name="programmeSearchBarBackground">@null</item>
     </style>
 

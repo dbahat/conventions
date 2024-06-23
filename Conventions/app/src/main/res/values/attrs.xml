@@ -641,6 +641,8 @@
         <!-- Custom background for the programme search TextEdit.
              If null, background tint of the default text edit background is set to searchTitleTexColor. -->
         <attr name="programmeSearchBarBackground" format="integer|reference" />
+        <!-- Filter button color -->
+        <attr name="programmeSearchFilterColor" format="color|reference" />
         <!-- Color for the background of the search screen title layout -->
         <attr name="searchTitleBackgroundColor" format="color|reference" />
 

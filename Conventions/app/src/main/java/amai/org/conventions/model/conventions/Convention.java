@@ -589,7 +589,25 @@ public abstract class Convention implements Serializable {
 		return normalizeSearchFilters(filters);
 	}
 
+	public List<SearchFilter> getCategorySearchFilters() {
+		List<SearchFilter> filters = CollectionUtils.map(events, new CollectionUtils.Mapper<ConventionEvent, SearchFilter>() {
+			@Override
+			public SearchFilter map(ConventionEvent event) {
+				return new SearchFilter().withName(event.getCategory()).withType(SearchFilter.Type.Category);
+			}
+		});
+
+		return normalizeSearchFilters(filters);
+	}
+
 	private List<SearchFilter> normalizeSearchFilters(List<SearchFilter> filters) {
+		filters = CollectionUtils.filter(filters, new CollectionUtils.Predicate<SearchFilter>() {
+			@Override
+			public boolean where(SearchFilter item) {
+				return item.getName() != null && !"".equals(item.getName().trim());
+			}
+		});
+
 		Collections.sort(filters, new Comparator<SearchFilter>() {
 			@Override
 			public int compare(SearchFilter searchFilter, SearchFilter other) {
@@ -597,19 +615,29 @@ public abstract class Convention implements Serializable {
 			}
 		});
 
-		filters = CollectionUtils.unique(filters, new CollectionUtils.EqualityPredicate<SearchFilter>() {
+		return CollectionUtils.unique(filters, new CollectionUtils.EqualityPredicate<SearchFilter>() {
 			@Override
 			public boolean equals(SearchFilter lhs, SearchFilter rhs) {
 				return lhs.getName().equals(rhs.getName());
 			}
 		});
+	}
 
-		return CollectionUtils.filter(filters, new CollectionUtils.Predicate<SearchFilter>() {
+	public List<SearchFilter> getKeywordsSearchFilters() {
+		Set<String> allTags = new HashSet<>();
+		for (ConventionEvent event : events) {
+			allTags.addAll(event.getTags());
+		}
+
+		List<SearchFilter> filters = CollectionUtils.map(new ArrayList<>(allTags), new CollectionUtils.Mapper<String, SearchFilter>() {
 			@Override
-			public boolean where(SearchFilter item) {
-				return !"".equals(item.getName().trim());
+			public SearchFilter map(String tag) {
+				return new SearchFilter().withName(tag).withType(SearchFilter.Type.Tag);
 			}
 		});
+
+
+		return normalizeSearchFilters(filters);
 	}
 
 	public List<SearchFilter> getEventLocationTypeFilters(Resources resources) {

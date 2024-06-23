@@ -47,7 +47,15 @@ public class ConventionEvent implements Serializable {
 	private List<String> images;
 	private String description;
 	private String plainTextDescription;
+	private String category;
 	private List<String> tags;
+	private int price;
+	private int availableTickets = -1; // No ticket info available
+	private int ticketsLimit = -1; // No ticket info available
+	private Date ticketsLastModifiedDate;
+	private String websiteUrl;
+	private String eventViewUrl;
+	private List<EventLocationType> locationTypes;
 
 	public ConventionEvent() {
 		images = new ArrayList<>();
@@ -239,6 +247,15 @@ public class ConventionEvent implements Serializable {
 		return this;
 	}
 
+	public String getCategory() {
+		return category;
+	}
+
+	public ConventionEvent withCategory(String category) {
+		this.category = category;
+		return this;
+	}
+
 	public List<String> getTags() {
 		return tags;
 	}
@@ -254,6 +271,102 @@ public class ConventionEvent implements Serializable {
 
 	public String getTagsAsString() {
 		return TextUtils.join(", ", getTags());
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public int getDiscountPrice() {
+		return price >= 10 ? price - 10 : 0;
+	}
+
+	public ConventionEvent withPrice(int price) {
+		setPrice(price);
+		return this;
+	}
+
+	public void setAvailableTickets(int availableTickets) {
+		this.availableTickets = availableTickets;
+	}
+
+	public int getAvailableTickets() {
+		return availableTickets;
+	}
+
+	public ConventionEvent withAvailableTickets(int availableTickets) {
+		setAvailableTickets(availableTickets);
+		return this;
+	}
+
+	public void setTicketsLimit(int ticketsLimit) {
+		this.ticketsLimit = ticketsLimit;
+	}
+
+	public int getTicketsLimit() {
+		return ticketsLimit;
+	}
+
+	public ConventionEvent withTicketsLimit(int ticketsLimit) {
+		setTicketsLimit(ticketsLimit);
+		return this;
+	}
+
+	public void setTicketsLastModifiedDate(Date ticketsLastModifiedDate) {
+		this.ticketsLastModifiedDate = ticketsLastModifiedDate;
+	}
+
+	public Date getTicketsLastModifiedDate() {
+		return ticketsLastModifiedDate;
+	}
+
+	public ConventionEvent withTicketsLastModifiedDate(Date ticketsLastModifiedDate) {
+		setTicketsLastModifiedDate(ticketsLastModifiedDate);;
+		return this;
+	}
+
+	public String getWebsiteUrl() {
+		return websiteUrl;
+	}
+
+	public void setWebsiteUrl(String websiteUrl) {
+		this.websiteUrl = websiteUrl;
+	}
+
+	public ConventionEvent withWebsiteUrl(String websiteUrl) {
+		setWebsiteUrl(websiteUrl);
+		return this;
+	}
+
+	public String getEventViewUrl() {
+		return eventViewUrl;
+	}
+
+	public void setEventViewUrl(String eventViewUrl) {
+		this.eventViewUrl = eventViewUrl;
+	}
+
+	public ConventionEvent withEventViewUrl(String eventViewUrl) {
+		setEventViewUrl(eventViewUrl);
+		return this;
+	}
+
+	/** @deprecated Use {@link Convention#getEventLocationTypes(ConventionEvent)} */
+	public List<EventLocationType> getLocationTypes() {
+		return locationTypes;
+	}
+
+	public void setLocationTypes(List<EventLocationType> locationTypes) {
+		this.locationTypes = locationTypes;
+	}
+
+	public ConventionEvent withLocationTypes(List<EventLocationType> locationType) {
+		setLocationTypes(locationType);
+		return this;
 	}
 
 	public UserInput getUserInput() {
@@ -614,7 +727,14 @@ public class ConventionEvent implements Serializable {
 				Objects.equals(this.id, other.id) &&
 				Objects.equals(this.backgroundColor, other.backgroundColor) &&
 				Objects.equals(this.textColor, other.textColor) &&
-				Objects.equals(this.description, other.description);
+				Objects.equals(this.description, other.description) &&
+				Objects.equals(this.category, other.category) &&
+				Objects.equals(this.price, other.price) &&
+				Objects.equals(this.websiteUrl, other.websiteUrl) &&
+				Objects.equals(this.tags, other.tags) &&
+				Objects.equals(this.availableTickets, other.availableTickets) &&
+				Objects.equals(this.ticketsLimit, other.ticketsLimit) &&
+				Objects.equals(this.locationTypes, other.locationTypes);
 	}
 
 	@Override
