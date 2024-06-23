@@ -553,6 +553,9 @@
 
         <!-- Feedback Screen -->
 
+        <!-- Background for feedback activity -->
+        <attr name="feedbackActivityBackground" format="color|reference"/>
+
         <!-- Background color for feedback in feedback activity -->
         <attr name="conventionFeedbackBackgroundColor" format="color|reference"/>
 
