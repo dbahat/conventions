@@ -1,6 +1,6 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/event_main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -115,28 +115,16 @@
 
             <LinearLayout
                 style="@style/EventDetailsBox"
-                android:gravity="center"
                 android:layout_marginTop="10dp">
 
-                <TextView
-                    android:id="@+id/event_hall"
-                    style="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="?eventDetailsTextColor"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="5dp"
-                    android:gravity="center"
-                    tools:text="hall" />
-
-                <TextView
-                    android:id="@+id/event_time"
-                    style="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="?eventDetailsTextColor"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="5dp"
-                    android:gravity="center"
-                    tools:text="time" />
+				<TextView
+					android:id="@+id/event_hall_and_time"
+					style="@style/TextAppearance.AppCompat.Subhead"
+					android:textColor="?eventDetailsTextColor"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:paddingTop="5dp"
+					tools:text="time" />
 
 				<TextView
 					android:id="@+id/event_additional_info"
@@ -146,6 +134,23 @@
 					android:layout_height="wrap_content"
 					android:paddingTop="10dp"
 					tools:text="additional info for the event" />
+
+				<View
+					android:id="@+id/event_tags_separator"
+					android:layout_width="match_parent"
+					android:layout_height="1dp"
+					android:layout_marginTop="10dp"
+					android:background="?eventDetailsTextColor"
+					/>
+
+				<TextView
+					android:id="@+id/event_tags"
+					style="@style/TextAppearance.AppCompat.Small"
+					android:textColor="?eventDetailsTextColor"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:paddingTop="10dp"
+					tools:text="tags" />
             </LinearLayout>
 
 

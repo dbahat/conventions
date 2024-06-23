@@ -533,14 +533,7 @@ public class EventActivity extends NavigationActivity {
 			lecturerName.setText(lecturer);
 		}
 
-		TextView hall = (TextView) findViewById(R.id.event_hall);
-		TextView time = (TextView) findViewById(R.id.event_time);
-
-		if (event.getHall() != null) {
-			hall.setText(event.getHall().getName());
-		} else {
-			hall.setVisibility(View.GONE);
-		}
+		TextView hallAndTime = (TextView) findViewById(R.id.event_hall_and_time);
 
 		String formattedEventTime = String.format("%s%s-%s (%s)",
 				// In case of single day convention, don't show the date
@@ -548,7 +541,12 @@ public class EventActivity extends NavigationActivity {
 				Dates.formatHoursAndMinutes(event.getStartTime()),
 				Dates.formatHoursAndMinutes(event.getEndTime()),
 				Dates.toHumanReadableTimeDuration(event.getEndTime().getTime() - event.getStartTime().getTime()));
-		time.setText(formattedEventTime);
+
+		if (event.getHall() != null) {
+			formattedEventTime = event.getHall().getName() + ", " + formattedEventTime;
+		}
+
+		hallAndTime.setText(formattedEventTime);
 
 		TextView additionalInfo = (TextView) findViewById(R.id.event_additional_info);
 		String eventAdditionalInfo = Convention.getInstance().getEventAdditionalInfo(event, this);
@@ -556,6 +554,16 @@ public class EventActivity extends NavigationActivity {
 			additionalInfo.setVisibility(View.GONE);
 		} else {
 			additionalInfo.setText(eventAdditionalInfo);
+		}
+
+		TextView tags = (TextView) findViewById(R.id.event_tags);
+		View tagsSeparator = findViewById(R.id.event_tags_separator);
+		List<String> eventTags = event.getTags();
+		if (eventTags == null || eventTags.size() == 0) {
+			tags.setVisibility(View.GONE);
+			tagsSeparator.setVisibility(View.GONE);
+		} else {
+			tags.setText(getString(R.string.tags, event.getTagsAsString()));
 		}
 
 		setupFeedback(event);
