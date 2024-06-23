@@ -478,6 +478,10 @@
         <attr name="eventTitleTextColor" format="color|reference"/>
         <!-- Background for event name -->
         <attr name="eventNameBackground" format="integer|reference"/>
+        <!-- Text color for event subtitle -->
+        <attr name="eventSubTitleTextColor" format="color|reference"/>
+        <!-- Background for event subtitle -->
+        <attr name="eventSubTitleBackground" format="integer|reference"/>
         <!-- Text color for lecturer. Default is eventTitleTextColor. -->
         <attr name="eventLecturerTextColor" format="color|reference"/>
         <!-- Background for lecturer -->

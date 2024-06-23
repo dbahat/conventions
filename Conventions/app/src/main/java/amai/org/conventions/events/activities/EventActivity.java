@@ -548,6 +548,13 @@ public class EventActivity extends NavigationActivity {
 		TextView title = (TextView) findViewById(R.id.event_title);
 		title.setText(event.getTitle());
 
+		TextView subtitle = findViewById(R.id.event_subtitle);
+		if (event.getSubTitle() == null || event.getSubTitle().isEmpty()) {
+			subtitle.setVisibility(View.GONE);
+		} else {
+			subtitle.setText(event.getSubTitle());
+		}
+
 		TextView lecturerName = (TextView) findViewById(R.id.event_lecturer);
 		String lecturer = event.getLecturer();
 		if (lecturer == null || lecturer.length() == 0) {
