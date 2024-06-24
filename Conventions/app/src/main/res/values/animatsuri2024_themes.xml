@@ -38,7 +38,7 @@
          -->
         <item name="buttonColor">@color/animatsuri2024_purple800</item>
         <item name="buttonColorPressed">@color/animatsuri2024_purple500</item>
-        <item name="buttonColorDisabled">@color/animatsuri2024_gray100</item>
+        <item name="buttonColorDisabled">@color/animatsuri2024_gray300</item>
         <item name="buttonTextColor">@drawable/animatsuri2024_highlighted_button_text_color</item>
 
         <!-- Notifications -->
@@ -124,6 +124,12 @@
         <item name="searchTitleTextColor">@color/animatsuri2024_gray1000</item>
         <item name="searchTitleBackgroundColor">@color/animatsuri2024_gray50</item>
         <item name="programmeSearchBarBackground">@drawable/animatsuri2024_search_bar_background</item>
+        <item name="programmeSearchFilterColor">@color/animatsuri2024_purple800</item>
+        <!-- Search drawer -->
+        <item name="searchDrawerAccentColor">@color/animatsuri2024_purple600</item>
+        <item name="searchDrawerBackground">@color/white</item>
+        <item name="searchDrawerTextColor">@color/animatsuri2024_gray1000</item>
+        <item name="searchDrawerSeparatorColor">@color/transparent</item>
         <!-- My Events Screen -->
         <item name="nextEventStartTimeBackground">@color/animatsuri2024_white_transparent60</item>
         <item name="nextEventStartTimeTextColor">@color/animatsuri2024_gray1000</item>
@@ -138,6 +144,7 @@
         <item name="freeTimeTextColor">@color/animatsuri2024_gray1000</item>
         <item name="freeTimeBackground">@drawable/animatsuri2024_transparent_white_inset</item>
         <!-- Feedback Screen -->
+        <item name="conventionFeedbackBackgroundColor">@drawable/animatsuri2024_rounded_edges_transparent_cream_inset</item>
         <item name="conventionFeedbackTextColor">@drawable/animatsuri2024_convention_feedback_text_color</item>
         <item name="conventionFeedbackAnswerBackground">@drawable/animatsuri2024_convention_feedback_answer_bg_selector</item>
         <item name="feedbackMultiAnswerMinWidth">50dp</item>
@@ -217,11 +224,6 @@
         <item name="standIconColor">@color/animatsuri2024_purple900</item>
         <item name="standsTypeTitleColor">@color/animatsuri2024_purple900</item>
         <item name="standsMapHighlight">@color/animatsuri2024_purple900_transparent60</item>
-        <!-- Search drawer -->
-        <item name="searchDrawerAccentColor">@color/animatsuri2024_green500</item>
-        <item name="searchDrawerBackground">@color/animatsuri2024_purple50</item>
-        <item name="searchDrawerTextColor">@color/animatsuri2024_purple900</item>
-        <item name="searchDrawerSeparatorColor">@color/transparent</item>
     </style>
 
     <style name="AppBaseTheme.Animatsuri2024.Event">
