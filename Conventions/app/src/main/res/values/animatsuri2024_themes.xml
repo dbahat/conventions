@@ -91,6 +91,7 @@
         <!-- Event View -->
         <item name="eventViewLayout">@layout/rounded_convention_event</item>
         <item name="eventViewHeight">104dp</item>
+        <item name="eventViewCardBackground">@color/transparent</item>
         <item name="eventBackgroundColor">@color/animatsuri2024_cream100_transparent85</item>
         <item name="eventTextColor">@drawable/animatsuri2024_event_view_text_color</item>
         <item name="eventNameKeywordHighlightColor">@color/animatsuri2024_orange</item>
