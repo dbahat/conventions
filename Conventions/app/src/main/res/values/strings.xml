@@ -155,6 +155,9 @@
     <string name="event_price_free">מחיר: חינם</string>
     <string name="event_prices">מחיר: %1$d ש\"ח, תעריף עמותות מארגנות: %2$d ש\"ח</string>
     <string name="tags">תגיות: %s</string>
+    <string name="tags_formatted"><![CDATA[
+        <b>תגיות:</b> %s
+]]></string>
     <string name="about">אודות</string>
     <string name="no_updates_found">לא נמצאו עדכונים</string>
     <string name="discounts">הטבות וחסויות</string>

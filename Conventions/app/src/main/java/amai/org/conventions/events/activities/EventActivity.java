@@ -16,6 +16,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Html;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -587,7 +588,7 @@ public class EventActivity extends NavigationActivity {
 			tags.setVisibility(View.GONE);
 			tagsSeparator.setVisibility(View.GONE);
 		} else {
-			tags.setText(getString(R.string.tags, event.getTagsAsString()));
+			tags.setText(Html.fromHtml(getString(R.string.tags_formatted, event.getTagsAsString())));
 		}
 
 		setupFeedback(event);
