@@ -197,11 +197,11 @@
         <item name="eventDescriptionTextColor">@color/animatsuri2024_gray1000</item>
         <!-- Map Screen -->
         <item name="mapBackground">@color/animatsuri2024_gray50</item>
-        <item name="locationDetailsBackground">@color/animatsuri2024_purple700</item>
+        <item name="locationDetailsBackground">@color/white</item>
         <item name="locationDetailsTopLineColor">@android:color/transparent</item>
-        <item name="locationDetailsTitleColor">@color/white</item>
-        <item name="locationDetailsElevation">3dp</item>
-        <item name="iconClearMap">@drawable/ic_clear_white_24dp</item>
+        <item name="locationDetailsTitleColor">@color/animatsuri2024_gray1000</item>
+        <item name="locationDetailsElevation">10dp</item>
+        <item name="iconClearMap">@drawable/ic_clear_black</item>
         <item name="iconFloorUp">@drawable/animatsuri2024_arrow_up</item>
         <item name="iconFloorDown">@drawable/animatsuri2024_arrow_down</item>
         <item name="floorChangeBackground">@color/animatsuri2024_purple50</item>
