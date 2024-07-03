@@ -52,7 +52,7 @@ public class HomeActivity extends NavigationActivity {
 
 		setToolbarBackground(ThemeAttributes.getDrawable(this, R.attr.homeToolbarBackground));
 		setToolbarTitle(ThemeAttributes.getDrawable(this, R.attr.homeToolbarTitle));
-		setBackground(ThemeAttributes.getDrawable(this, R.attr.homeBackground));
+		setHomeActivityBackground();
 
 		askForNotificationsPermissions();
 	}
@@ -63,7 +63,7 @@ public class HomeActivity extends NavigationActivity {
 
 		currentFavoriteEvent = getCurrentFavoriteEvent();
 		setContentInContentContainer(R.layout.activity_home, false, false);
-		setBackground(ThemeAttributes.getDrawable(this, R.attr.homeBackground));
+		setHomeActivityBackground();
 
 		// Creating the page layout during onResume (and not onCreate) since the layout is time-driven,
 		// and we want it refreshed in case the activity was paused and got resumed.
@@ -75,6 +75,15 @@ public class HomeActivity extends NavigationActivity {
 			setContentForAfterConventionEnded();
 		} else {
 			setContentForDuringConvention();
+		}
+	}
+
+	private void setHomeActivityBackground() {
+		if (Dates.now().before(Convention.getInstance().getStartDate().getTime()) ||
+			(Convention.getInstance().haveAllEventsStarted() && currentFavoriteEvent == null)) {
+			setBackground(ThemeAttributes.getDrawable(this, R.attr.homeBackground));
+		} else {
+			setBackground(ThemeAttributes.getDrawable(this, R.attr.homeBackgroundDuringConvention));
 		}
 	}
 
