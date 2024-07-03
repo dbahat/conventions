@@ -4,5 +4,5 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:drawable="@drawable/animatsuri2024_rounded_edges_transparent_cream" app:state_home_during_con="true" app:state_home_has_favorites="true"/>
     <item android:drawable="@color/transparent" app:state_home_during_con="true" app:state_home_has_favorites="false"/>
-    <item android:drawable="@drawable/animatsuri2024_rounded_edges_transparent_white"/>
+    <item android:drawable="@color/transparent"/>
 </selector>

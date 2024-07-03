@@ -68,17 +68,18 @@
         <item name="aboutLogo">@drawable/amai_logo_black</item>
         <item name="aboutLogoMargins">80dp</item>
         <!-- Home Screen -->
-        <item name="homeLogo">@drawable/animatsuri2024_logo</item>
-        <item name="homeLogoMargin">20dp</item>
+        <item name="homeLogo">@drawable/animatsuri2024_home_image</item>
+        <item name="homeLogoMargin">0dp</item>
         <item name="homeBottomImage">@null</item>
-        <item name="homeBackground">@drawable/animatsuri2024_background</item>
+        <item name="homeBackground">@drawable/animatsuri2024_home_background</item>
+        <item name="homeBackgroundDuringConvention">@drawable/animatsuri2024_background</item>
         <item name="homeToolbarTitle">@null</item>
         <item name="homeToolbarBackground">@color/animatsuri2024_purple800</item>
         <item name="homeTitleBackground">@drawable/animatsuri2024_home_title_background</item>
         <item name="homeShowCurrentUpcomingTitles">true</item>
         <item name="homeTitleText">@drawable/animatsuri2024_home_title_text</item>
         <item name="homeContentBackground">@drawable/animatsuri2024_home_content_background</item>
-        <item name="homeContentText">@color/animatsuri2024_gray1000</item>
+        <item name="homeContentText">@drawable/animatsuri2024_home_content_text</item>
         <item name="homeButtonBackground">@drawable/animatsuri2024_home_button</item>
         <item name="homeButtonText">@color/white</item>
         <item name="homeGotoUpdatesButtonBackground">@drawable/animatsuri2024_home_updates_button</item>

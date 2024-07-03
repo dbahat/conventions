@@ -2,6 +2,6 @@
 <selector
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:color="@color/animatsuri2024_gray1000" app:state_home_during_con="true" app:state_home_is_upcoming="true"/>
+    <item android:color="@color/animatsuri2024_gray1000" app:state_home_during_con="true"/>
     <item android:color="@color/white"/>
 </selector>
