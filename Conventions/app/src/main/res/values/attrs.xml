@@ -191,6 +191,8 @@
 
         <!-- Background for home activity (all screens) -->
         <attr name="homeBackground" format="color|reference"/>
+        <!-- Background for home activity during the convention. By default, set to homeBackground. -->
+        <attr name="homeBackgroundDuringConvention" format="color|reference"/>
         <!-- Toolbar title image for home activity (all screens) -->
         <attr name="homeToolbarTitle" format="integer|reference"/>
         <!-- Home activity toolbar background (all screens) -->

@@ -90,6 +90,7 @@
         <item name="navigationPopupItemPaddingBottom">4dp</item>
 
         <!-- Home -->
+        <item name="homeBackgroundDuringConvention">?homeBackground</item>
         <item name="homeToolbarBackground">?toolbarBackground</item>
         <item name="homeBoxTopMargin">0dp</item>
         <item name="homeEventsMargin">?homeBoxTopMargin</item>
@@ -294,6 +295,7 @@
         <item name="navigationPopupItemPaddingBottom">4dp</item>
 
         <!-- Home -->
+        <item name="homeBackgroundDuringConvention">?homeBackground</item>
         <item name="homeToolbarBackground">?toolbarBackground</item>
         <item name="homeBoxTopMargin">0dp</item>
         <item name="homeEventsMargin">?homeBoxTopMargin</item>
