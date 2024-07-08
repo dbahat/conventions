@@ -42,7 +42,7 @@
         <item name="buttonTextColor">@drawable/animatsuri2024_highlighted_button_text_color</item>
 
         <!-- Notifications -->
-        <item name="notificationSmallIcon">@drawable/harucon_notification_small</item>
+        <item name="notificationSmallIcon">@drawable/animatsuri_notification_small</item>
         <!-- Toolbar -->
         <item name="toolbarBackground">@color/animatsuri2024_purple800</item>
         <item name="toolbarIconAccentColor">@color/gold</item>
