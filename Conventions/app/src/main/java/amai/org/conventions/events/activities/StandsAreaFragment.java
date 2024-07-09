@@ -191,10 +191,10 @@ public class StandsAreaFragment extends DialogFragment {
             for (StandLocation location : stand.getLocations()) {
                 layerDrawable.setLayerInset(
                         index,
-                        Math.round(location.getLeft() / area.getImageWidth() * imageWidth),
-                        Math.round(location.getTop()  / area.getImageHeight() * imageHeight),
-                        imageWidth - Math.round(location.getRight() / area.getImageWidth() * imageWidth),
-                        imageHeight - Math.round(location.getBottom()  / area.getImageHeight() * imageHeight)
+                        toInset(location.getLeft() / area.getImageWidth() * imageWidth),
+                        toInset(location.getTop()  / area.getImageHeight() * imageHeight),
+                        toInset(imageWidth - location.getRight() / area.getImageWidth() * imageWidth),
+                        toInset(imageHeight - location.getBottom()  / area.getImageHeight() * imageHeight)
                 );
                 ++index;
             }
@@ -202,6 +202,10 @@ public class StandsAreaFragment extends DialogFragment {
             imageHighlight.setImageDrawable(layerDrawable);
             imageHighlight.setVisibility(View.VISIBLE);
         }
+    }
+
+    private static int toInset(float f) {
+        return (int) f;
     }
 
     private void openStandsMap() {
