@@ -224,7 +224,7 @@
         <item name="mapSearchBarBackground">@drawable/animatsuri2024_search_bar_background</item>
         <item name="mapSearchBarHorizontalMargins">5dp</item>
         <item name="standIconColor">@color/animatsuri2024_purple900</item>
-        <item name="standsTypeTitleColor">@color/animatsuri2024_purple900</item>
+        <item name="standsTypeTitleColor">@color/animatsuri2024_purple700</item>
         <item name="standsMapHighlight">@color/animatsuri2024_purple900_transparent60</item>
     </style>
 

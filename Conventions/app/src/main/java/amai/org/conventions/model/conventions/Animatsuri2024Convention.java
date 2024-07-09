@@ -253,16 +253,16 @@ public class Animatsuri2024Convention extends AmaiConvention {
 				.withName("טרקלין אגם")
 				.withStandLocations(getAgamStandLocations()) // This must be initialized before the stands
 				.withStands(getAgamStands())
-				.withImageResource(R.drawable.harucon2024_stands_map_agam)
-				.withImageWidth(1545)
-				.withImageHeight(662);
+				.withImageResource(R.drawable.animatsuri2024_stands_map_agam)
+				.withImageWidth(4320)
+				.withImageHeight(2430);
 		StandsArea pinkus = new StandsArea()
 				.withName("אולם פינקוס")
 				.withStandLocations(getPinkusStandLocations()) // This must be initialized before the stands
 				.withStands(getPinkusStands())
-				.withImageResource(R.drawable.harucon2024_stands_map_pinkus)
-				.withImageWidth(934)
-				.withImageHeight(564);
+				.withImageResource(R.drawable.animatsuri2024_stands_map_pinkus)
+				.withImageWidth(4320)
+				.withImageHeight(2430);
 
 		return new ConventionMap()
 				.withFloors(Arrays.asList(entrance, floor1, floor2))
@@ -616,62 +616,66 @@ public class Animatsuri2024Convention extends AmaiConvention {
 	}
 
 	private StandLocations getAgamStandLocations() {
-		float defaultWidth = 24;
-		float defaultSpaceHorizontal = 4;
-		float defaultHeight = 24;
-		float defaultSpaceVertical = 4;
+		float defaultWidth = 72;
+		float defaultSpaceHorizontal = 9;
+		float defaultHeight = 72;
+		float defaultSpaceVertical = 9;
 
 		// Top row
-		float a5Left = 292.000f;
-		float a5Top = 88.000f;
-		float a13Left = 532.000f;
-		float a13Top = 88.000f;
-		float a19Left = 716.000f;
-		float a19Top = 88.000f;
-		float a25Left = 900.000f;
-		float a25Top = 88.000f;
-		float a31Left = 1084.000f;
-		float a31Top = 88.000f;
-		float a37Left = 1268.000f;
-		float a37Top = 88.000f;
+		float a5Left = 768.500f;
+		float a5Top = 512.000f;
+		float a11Left = 1290.500f;
+		float a11Top = 512.000f;
+		float a19Left = 1974.500f;
+		float a19Top = 512.000f;
+		float a25Left = 2496.500f;
+		float a25Top = 512.000f;
+		float a31Left = 3018.500f;
+		float a31Top = 512.000f;
+		float a37Left = 3540.500f;
+		float a37Top = 512.000f;
 
 		// Bottom left column
-		float a43Left = 1385.000f;
-		float a43Top = 290.500f;
+		float a43Left = 3459.500f;
+		float a43Top = 993.500f;
 
 		// Bottom right column
-		float a4Left = 209.500f;
-		float a4Top = 292.500f;
+		float a4Left = 1016.000f;
+		float a4Top = 998.000f;
 
-		// Left square
-		float b6Left = 426.000f;
-		float b6Top = 213.000f;
-		float b7Left = 459.000f;
-		float b7Top = 185.000f;
-		float b11Left = 585.000f;
-		float b11Top = 213.000f;
-		float b19Left = 452.000f;
-		float b19Top = 384.000f;
+		// Middle columns from left to right
 
-		// Middle square
-		float b24Left = 698.000f;
-		float b24Top = 213.000f;
-		float b25Left = 728.500f;
-		float b25Top = 185.000f;
-		float b29Left = 852.000f;
-		float b29Top = 248.000f;
-		float b37Left = 741.000f;
-		float b37Top = 384.000f;
+		float b7Left = 1317.500f;
+		float b7Top = 821.375f;
 
-		// Right square
-		float b41Left = 968.500f;
-		float b41Top = 228.500f;
-		float b42Left = 1037.000f;
-		float b42Top = 185.000f;
-		float b46Left = 1154.000f;
-		float b46Top = 215.000f;
-		float b56Left = 1004.500f;
-		float b56Top = 384.000f;
+		float b14Left = 1484.000f;
+		float b14Top = 821.375f;
+
+		float b20Left = 1724.750f;
+		float b20Top = 834.875f;
+		float b16Left = 1724.750f;
+		float b16Top = 1230.880f;
+
+		float b27Left = 1895.750f;
+		float b27Top = 834.875f;
+
+		float b34Left = 2163.500f;
+		float b34Top = 830.375f;
+
+		float b41Left = 2330.000f;
+		float b41Top = 830.375f;
+
+		float b48Left = 2579.750f;
+		float b48Top = 830.375f;
+
+		float b55Left = 2746.250f;
+		float b55Top = 830.375f;
+
+		float b62Left = 3018.500f;
+		float b62Top = 830.375f;
+
+		float b69Left = 3185.000f;
+		float b69Top = 830.375f;
 
 		return new StandLocations(
 				// As
@@ -686,15 +690,15 @@ public class Animatsuri2024Convention extends AmaiConvention {
 				StandLocation.fromWidths("a8", "a08", "a9", a5Left + 3*(defaultWidth + defaultSpaceHorizontal), defaultWidth, a5Top, defaultHeight),
 				StandLocation.fromWidths("a9", "a09", "a10", a5Left + 4*(defaultWidth + defaultSpaceHorizontal), defaultWidth, a5Top, defaultHeight),
 				StandLocation.fromWidths("a10", "a10", "a11", a5Left + 5*(defaultWidth + defaultSpaceHorizontal), defaultWidth, a5Top, defaultHeight),
-				StandLocation.fromWidths("a11", "a11", "a12", a5Left + 6*(defaultWidth + defaultSpaceHorizontal), defaultWidth, a5Top, defaultHeight),
-				StandLocation.fromWidths("a12", "a12", "a13", a5Left + 7*(defaultWidth + defaultSpaceHorizontal), defaultWidth, a5Top, defaultHeight),
 
-				StandLocation.fromWidths("a13", "a13", "a14", a13Left, defaultWidth, a13Top, defaultHeight),
-				StandLocation.fromWidths("a14", "a14", "a15", a13Left + (defaultWidth + defaultSpaceHorizontal), defaultWidth, a13Top, defaultHeight),
-				StandLocation.fromWidths("a15", "a15", "a16", a13Left + 2*(defaultWidth + defaultSpaceHorizontal), defaultWidth, a13Top, defaultHeight),
-				StandLocation.fromWidths("a16", "a16", "a17", a13Left + 3*(defaultWidth + defaultSpaceHorizontal), defaultWidth, a13Top, defaultHeight),
-				StandLocation.fromWidths("a17", "a17", "a18", a13Left + 4*(defaultWidth + defaultSpaceHorizontal), defaultWidth, a13Top, defaultHeight),
-				StandLocation.fromWidths("a18", "a18", "a19", a13Left + 5*(defaultWidth + defaultSpaceHorizontal), defaultWidth, a13Top, defaultHeight),
+				StandLocation.fromWidths("a11", "a11", "a12", a11Left, defaultWidth, a11Top, defaultHeight),
+				StandLocation.fromWidths("a12", "a12", "a13", a11Left + (defaultWidth + defaultSpaceHorizontal), defaultWidth, a11Top, defaultHeight),
+				StandLocation.fromWidths("a13", "a13", "a14", a11Left + 2*(defaultWidth + defaultSpaceHorizontal), defaultWidth, a11Top, defaultHeight),
+				StandLocation.fromWidths("a14", "a14", "a15", a11Left + 3*(defaultWidth + defaultSpaceHorizontal), defaultWidth, a11Top, defaultHeight),
+				StandLocation.fromWidths("a15", "a15", "a16", a11Left + 4*(defaultWidth + defaultSpaceHorizontal), defaultWidth, a11Top, defaultHeight),
+				StandLocation.fromWidths("a16", "a16", "a17", a11Left + 5*(defaultWidth + defaultSpaceHorizontal), defaultWidth, a11Top, defaultHeight),
+				StandLocation.fromWidths("a17", "a17", "a18", a11Left + 6*(defaultWidth + defaultSpaceHorizontal), defaultWidth, a11Top, defaultHeight),
+				StandLocation.fromWidths("a18", "a18", "a19", a11Left + 7*(defaultWidth + defaultSpaceHorizontal), defaultWidth, a11Top, defaultHeight),
 
 				StandLocation.fromWidths("a19", "a19", "a20", a19Left, defaultWidth, a19Top, defaultHeight),
 				StandLocation.fromWidths("a20", "a20", "a21", a19Left + (defaultWidth + defaultSpaceHorizontal), defaultWidth, a19Top, defaultHeight),
@@ -730,131 +734,140 @@ public class Animatsuri2024Convention extends AmaiConvention {
 				StandLocation.fromWidths("a46", "a46", null, a43Left, defaultWidth, a43Top + 3*(defaultHeight + defaultSpaceVertical), defaultHeight),
 
 				// Bs
-				StandLocation.fromWidths("b1", "b01", "b2", b6Left, defaultWidth, b6Top + 5*(defaultHeight + defaultSpaceVertical), defaultHeight),
-				StandLocation.fromWidths("b2", "b02", "b3", b6Left, defaultWidth, b6Top + 4*(defaultHeight + defaultSpaceVertical), defaultHeight),
-				StandLocation.fromWidths("b3", "b03", "b4", b6Left, defaultWidth, b6Top + 3*(defaultHeight + defaultSpaceVertical), defaultHeight),
-				StandLocation.fromWidths("b4", "b04", "b5", b6Left, defaultWidth, b6Top + 2*(defaultHeight + defaultSpaceVertical), defaultHeight),
-				StandLocation.fromWidths("b5", "b05", "b6", b6Left, defaultWidth, b6Top + (defaultHeight + defaultSpaceVertical), defaultHeight),
-				StandLocation.fromWidths("b6", "b06", "b7", b6Left, defaultWidth, b6Top, defaultHeight),
-
+				StandLocation.fromWidths("b1", "b01", "b2", b7Left, defaultWidth, b7Top + 6*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b2", "b02", "b3", b7Left, defaultWidth, b7Top + 5*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b3", "b03", "b4", b7Left, defaultWidth, b7Top + 4*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b4", "b04", "b5", b7Left, defaultWidth, b7Top + 3*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b5", "b05", "b6", b7Left, defaultWidth, b7Top + 2*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b6", "b06", "b7", b7Left, defaultWidth, b7Top + (defaultHeight + defaultSpaceVertical), defaultHeight),
 				StandLocation.fromWidths("b7", "b07", "b8", b7Left, defaultWidth, b7Top, defaultHeight),
-				StandLocation.fromWidths("b8", "b08", "b9", b7Left + (defaultWidth + defaultSpaceHorizontal), defaultWidth, b7Top, defaultHeight),
-				StandLocation.fromWidths("b9", "b09", "b10", b7Left + 2*(defaultWidth + defaultSpaceHorizontal), defaultWidth, b7Top, defaultHeight),
-				StandLocation.fromWidths("b10", "b10", "b11", b7Left + 3*(defaultWidth + defaultSpaceHorizontal), defaultWidth, b7Top, defaultHeight),
 
-				StandLocation.fromWidths("b11", "b11", "b12", b11Left, defaultWidth, b11Top, defaultHeight),
-				StandLocation.fromWidths("b12", "b12", "b13", b11Left, defaultWidth, b11Top + (defaultHeight + defaultSpaceVertical), defaultHeight),
-				StandLocation.fromWidths("b13", "b13", "b14", b11Left, defaultWidth, b11Top + 2*(defaultHeight + defaultSpaceVertical), defaultHeight),
-				StandLocation.fromWidths("b14", "b14", "b15", b11Left, defaultWidth, b11Top + 3*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b8", "b08", "b9", b14Left, defaultWidth, b14Top + 6*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b9", "b09", "b10", b14Left, defaultWidth, b14Top + 5*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b10", "b10", "b11", b14Left, defaultWidth, b14Top + 4*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b11", "b11", "b12", b14Left, defaultWidth, b14Top + 3*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b12", "b12", "b13", b14Left, defaultWidth, b14Top + 2*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b13", "b13", "b14", b14Left, defaultWidth, b14Top + (defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b14", "b14", "b15", b14Left, defaultWidth, b14Top, defaultHeight),
 
-				StandLocation.fromWidths("b15", "b15", "b16", b19Left + 4*(defaultWidth + defaultSpaceHorizontal), defaultWidth, b19Top, defaultHeight),
-				StandLocation.fromWidths("b16", "b16", "b17", b19Left + 3*(defaultWidth + defaultSpaceHorizontal), defaultWidth, b19Top, defaultHeight),
-				StandLocation.fromWidths("b17", "b17", "b18", b19Left + 2*(defaultWidth + defaultSpaceHorizontal), defaultWidth, b19Top, defaultHeight),
-				StandLocation.fromWidths("b18", "b18", "b19", b19Left + (defaultWidth + defaultSpaceHorizontal), defaultWidth, b19Top, defaultHeight),
-				StandLocation.fromWidths("b19", "b19", "b1", b19Left, defaultWidth, b19Top, defaultHeight),
+				StandLocation.fromWidths("b15", "b15", "b16", b16Left, defaultWidth, b16Top + (defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b16", "b16", "b17", b16Left, defaultWidth, b16Top, defaultHeight),
+				StandLocation.fromWidths("b17", "b17", "b18", b20Left, defaultWidth, b20Top + 3*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b18", "b18", "b19", b20Left, defaultWidth, b20Top + 2*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b19", "b19", "b20", b20Left, defaultWidth, b20Top + (defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b20", "b20", "b21", b20Left, defaultWidth, b20Top, defaultHeight),
 
-				StandLocation.fromWidths("b20", "b20", "b21", b24Left, defaultWidth, b24Top + 4*(defaultHeight + defaultSpaceVertical), defaultHeight),
-				StandLocation.fromWidths("b21", "b21", "b22", b24Left, defaultWidth, b24Top + 3*(defaultHeight + defaultSpaceVertical), defaultHeight),
-				StandLocation.fromWidths("b22", "b22", "b23", b24Left, defaultWidth, b24Top + 2*(defaultHeight + defaultSpaceVertical), defaultHeight),
-				StandLocation.fromWidths("b23", "b23", "b24", b24Left, defaultWidth, b24Top + (defaultHeight + defaultSpaceVertical), defaultHeight),
-				StandLocation.fromWidths("b24", "b24", "b25", b24Left, defaultWidth, b24Top, defaultHeight),
+				StandLocation.fromWidths("b21", "b21", "b22", b27Left, defaultWidth, b27Top + 6*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b22", "b22", "b23", b27Left, defaultWidth, b27Top + 5*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b23", "b23", "b24", b27Left, defaultWidth, b27Top + 4*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b24", "b24", "b25", b27Left, defaultWidth, b27Top + 3*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b25", "b25", "b26", b27Left, defaultWidth, b27Top + 2*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b26", "b26", "b27", b27Left, defaultWidth, b27Top + (defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b27", "b27", "b28", b27Left, defaultWidth, b27Top, defaultHeight),
 
-				StandLocation.fromWidths("b25", "b25", "b26", b25Left, defaultWidth, b25Top, defaultHeight),
-				StandLocation.fromWidths("b26", "b26", "b27", b25Left + (defaultWidth + defaultSpaceHorizontal), defaultWidth, b25Top, defaultHeight),
-				StandLocation.fromWidths("b27", "b27", "b28", b25Left + 2*(defaultWidth + defaultSpaceHorizontal), defaultWidth, b25Top, defaultHeight),
-				StandLocation.fromWidths("b28", "b28", "b29", b25Left + 3*(defaultWidth + defaultSpaceHorizontal), defaultWidth, b25Top, defaultHeight),
+				StandLocation.fromWidths("b28", "b28", "b29", b34Left, defaultWidth, b34Top + 6*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b29", "b29", "b30", b34Left, defaultWidth, b34Top + 5*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b30", "b30", "b31", b34Left, defaultWidth, b34Top + 4*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b31", "b31", "b32", b34Left, defaultWidth, b34Top + 3*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b32", "b32", "b33", b34Left, defaultWidth, b34Top + 2*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b33", "b33", "b34", b34Left, defaultWidth, b34Top + (defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b34", "b34", "b35", b34Left, defaultWidth, b34Top, defaultHeight),
 
-				StandLocation.fromWidths("b29", "b29", "b30", b29Left, defaultWidth, b29Top, defaultHeight),
-				StandLocation.fromWidths("b30", "b30", "b31", b29Left, defaultWidth, b29Top + (defaultHeight + defaultSpaceVertical), defaultHeight),
-				StandLocation.fromWidths("b31", "b31", "b32", b29Left, defaultWidth, b29Top + 2*(defaultHeight + defaultSpaceVertical), defaultHeight),
-				StandLocation.fromWidths("b32", "b32", "b33", b29Left, defaultWidth, b29Top + 3*(defaultHeight + defaultSpaceVertical), defaultHeight),
-				StandLocation.fromWidths("b33", "b33", "b34", b29Left, defaultWidth, b29Top + 4*(defaultHeight + defaultSpaceVertical), defaultHeight),
-
-				StandLocation.fromWidths("b34", "b34", "b35", b37Left + 3*(defaultWidth + defaultSpaceHorizontal), defaultWidth, b37Top, defaultHeight),
-				StandLocation.fromWidths("b35", "b35", "b36", b37Left + 2*(defaultWidth + defaultSpaceHorizontal), defaultWidth, b37Top, defaultHeight),
-				StandLocation.fromWidths("b36", "b36", "b37", b37Left + (defaultWidth + defaultSpaceHorizontal), defaultWidth, b37Top, defaultHeight),
-				StandLocation.fromWidths("b37", "b37", "b20", b37Left, defaultWidth, b37Top, defaultHeight),
-
+				StandLocation.fromWidths("b35", "b35", "b36", b41Left, defaultWidth, b41Top + 6*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b36", "b36", "b37", b41Left, defaultWidth, b41Top + 5*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b37", "b37", "b38", b41Left, defaultWidth, b41Top + 4*(defaultHeight + defaultSpaceVertical), defaultHeight),
 				StandLocation.fromWidths("b38", "b38", "b39", b41Left, defaultWidth, b41Top + 3*(defaultHeight + defaultSpaceVertical), defaultHeight),
 				StandLocation.fromWidths("b39", "b39", "b40", b41Left, defaultWidth, b41Top + 2*(defaultHeight + defaultSpaceVertical), defaultHeight),
 				StandLocation.fromWidths("b40", "b40", "b41", b41Left, defaultWidth, b41Top + (defaultHeight + defaultSpaceVertical), defaultHeight),
 				StandLocation.fromWidths("b41", "b41", "b42", b41Left, defaultWidth, b41Top, defaultHeight),
 
-				StandLocation.fromWidths("b42", "b42", "b43", b42Left, defaultWidth, b42Top, defaultHeight),
-				StandLocation.fromWidths("b43", "b43", "b44", b42Left + (defaultWidth + defaultSpaceHorizontal), defaultWidth, b42Top, defaultHeight),
-				StandLocation.fromWidths("b44", "b44", "b45", b42Left + 2*(defaultWidth + defaultSpaceHorizontal), defaultWidth, b42Top, defaultHeight),
-				StandLocation.fromWidths("b45", "b45", "b46", b42Left + 3*(defaultWidth + defaultSpaceHorizontal), defaultWidth, b42Top, defaultHeight),
+				StandLocation.fromWidths("b42", "b42", "b43", b48Left, defaultWidth, b48Top + 6*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b43", "b43", "b44", b48Left, defaultWidth, b48Top + 5*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b44", "b44", "b45", b48Left, defaultWidth, b48Top + 4*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b45", "b45", "b46", b48Left, defaultWidth, b48Top + 3*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b46", "b46", "b47", b48Left, defaultWidth, b48Top + 2*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b47", "b47", "b48", b48Left, defaultWidth, b48Top + (defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b48", "b48", "b49", b48Left, defaultWidth, b48Top, defaultHeight),
 
-				StandLocation.fromWidths("b46", "b46", "b47", b46Left, defaultWidth, b46Top, defaultHeight),
-				StandLocation.fromWidths("b47", "b47", "b48", b46Left, defaultWidth, b46Top + (defaultHeight + defaultSpaceVertical), defaultHeight),
-				StandLocation.fromWidths("b48", "b48", "b49", b46Left, defaultWidth, b46Top + 2*(defaultHeight + defaultSpaceVertical), defaultHeight),
-				StandLocation.fromWidths("b49", "b49", "b50", b46Left, defaultWidth, b46Top + 3*(defaultHeight + defaultSpaceVertical), defaultHeight),
-				StandLocation.fromWidths("b50", "b50", "b51", b46Left, defaultWidth, b46Top + 4*(defaultHeight + defaultSpaceVertical), defaultHeight),
-				StandLocation.fromWidths("b51", "b51", "b52", b46Left, defaultWidth, b46Top + 5*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b49", "b49", "b50", b55Left, defaultWidth, b55Top + 6*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b50", "b50", "b51", b55Left, defaultWidth, b55Top + 5*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b51", "b51", "b52", b55Left, defaultWidth, b55Top + 4*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b52", "b52", "b53", b55Left, defaultWidth, b55Top + 3*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b53", "b53", "b54", b55Left, defaultWidth, b55Top + 2*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b54", "b54", "b55", b55Left, defaultWidth, b55Top + (defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b55", "b55", "b56", b55Left, defaultWidth, b55Top, defaultHeight),
 
-				StandLocation.fromWidths("b52", "b52", "b53", b56Left + 4*(defaultWidth + defaultSpaceHorizontal), defaultWidth, b56Top, defaultHeight),
-				StandLocation.fromWidths("b53", "b53", "b54", b56Left + 3*(defaultWidth + defaultSpaceHorizontal), defaultWidth, b56Top, defaultHeight),
-				StandLocation.fromWidths("b54", "b54", "b55", b56Left + 2*(defaultWidth + defaultSpaceHorizontal), defaultWidth, b56Top, defaultHeight),
-				StandLocation.fromWidths("b55", "b55", "b56", b56Left + (defaultWidth + defaultSpaceHorizontal), defaultWidth, b56Top, defaultHeight),
-				StandLocation.fromWidths("b56", "b56", "b38", b56Left, defaultWidth, b56Top, defaultHeight)
+				StandLocation.fromWidths("b56", "b56", "b57", b62Left, defaultWidth, b62Top + 6*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b57", "b57", "b58", b62Left, defaultWidth, b62Top + 5*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b58", "b58", "b59", b62Left, defaultWidth, b62Top + 4*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b59", "b59", "b60", b62Left, defaultWidth, b62Top + 3*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b60", "b60", "b61", b62Left, defaultWidth, b62Top + 2*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b61", "b61", "b62", b62Left, defaultWidth, b62Top + (defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b62", "b62", "b63", b62Left, defaultWidth, b62Top, defaultHeight),
+
+				StandLocation.fromWidths("b63", "b63", "b64", b69Left, defaultWidth, b69Top + 6*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b64", "b64", "b65", b69Left, defaultWidth, b69Top + 5*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b65", "b65", "b66", b69Left, defaultWidth, b69Top + 4*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b66", "b66", "b67", b69Left, defaultWidth, b69Top + 3*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b67", "b67", "b68", b69Left, defaultWidth, b69Top + 2*(defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b68", "b68", "b69", b69Left, defaultWidth, b69Top + (defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("b69", "b69", null, b69Left, defaultWidth, b69Top, defaultHeight)
 		);
 	}
 
 	private StandLocations getPinkusStandLocations() {
-		float defaultWidth = 24;
-		float defaultSpaceHorizontal = 2;
-		float defaultHeight = 24;
-		float defaultSpaceVertical = 2;
+		float defaultWidth = 72;
+		float defaultSpaceHorizontal = 4.5f;
+		float defaultHeight = 72;
+		float defaultSpaceVertical = 4.5f;
 
 		// Top row
-		float c1Left = 190.000f;
-		float c1Top = 105.000f;
-		float c9Left = 460.000f;
-		float c9Top = 105.000f;
-		float c13Left = 594.000f;
-		float c13Top = 105.000f;
+		float c1Left = 1386.380f;
+		float c1Top = 573.000f;
+		float c9Left = 2137.880f;
+		float c9Top = 573.000f;
+		float c13Left = 2511.380f;
+		float c13Top = 573.000f;
 
 		// Right column
-		float c23Left = 832.000f;
-		float c23Top = 187.000f;
+		float c23Left = 3422.620f;
+		float c23Top = 924.000f;
 
 		// Bottom row
-		float c36Left = 702.000f;
-		float c36Top = 461.000f;
-		float c42Left = 524.000f;
-		float c42Top = 461.000f;
-		float c48Left = 346.000f;
-		float c48Top = 461.000f;
+		float c36Left = 3040.120f;
+		float c36Top = 1826.250f;
+		float c40Left = 2684.620f;
+		float c40Top = 1826.250f;
+		float c48Left = 2023.120f;
+		float c48Top = 1826.250f;
 
 		// Bottom left column
-		float c50Left = 320.000f;
-		float c50Top = 485.000f;
+		float c49Left = 1942.120f;
+		float c49Top = 1898.250f;
 
 		// Middle square
-		float d1Left = 669.000f;
-		float d1Top = 211.000f;
-		float d3Left = 720.000f;
-		float d3Top = 234.000f;
-		float d14Left = 565.000f;
-		float d14Top = 391.000f;
-		float d20Left = 525.000f;
-		float d20Top = 235.000f;
-		float d21Left = 549.000f;
-		float d21Top = 211.000f;
+		float d1Left = 2941.120f;
+		float d1Top = 1002.750f;
+		float d3Left = 3091.880f;
+		float d3Top = 1077.000f;
+		float d14Left = 2626.120f;
+		float d14Top = 1536.000f;
+		float d20Left = 2515.880f;
+		float d20Top = 1077.000f;
+		float d21Left = 2596.880f;
+		float d21Top = 1002.750f;
 
 		// Left square
-		float e1Left = 360.000f;
-		float e1Top = 211.000f;
-		float e3Left = 412.000f;
-		float e3Top = 236.000f;
-		float e10Left = 360.000f;
-		float e10Top = 391.000f;
-		float e14Left = 240.000f;
-		float e14Top = 391.000f;
-		float e20Left = 216.000f;
-		float e20Top = 235.000f;
-		float e21Left = 240.000f;
-		float e21Top = 211.000f;
+		float e1Left = 1964.620f;
+		float e1Top = 1000.500f;
+		float e3Left = 2115.380f;
+		float e3Top = 1077.000f;
+		float e14Left = 1651.880f;
+		float e14Top = 1536.000f;
+		float e20Left = 1516.880f;
+		float e20Top = 1077.000f;
+		float e21Left = 1588.880f;
+		float e21Top = 1002.750f;
 
 
 		return new StandLocations(
@@ -900,13 +913,13 @@ public class Animatsuri2024Convention extends AmaiConvention {
 				StandLocation.fromWidths("c35", "c35", "c36", c36Left + (defaultWidth + defaultSpaceHorizontal), defaultWidth, c36Top, defaultHeight),
 				StandLocation.fromWidths("c36", "c36", "c37", c36Left, defaultWidth, c36Top, defaultHeight),
 
-				StandLocation.fromWidths("c37", "c37", "c38", c42Left + 5*(defaultWidth + defaultSpaceHorizontal), defaultWidth, c42Top, defaultHeight),
-				StandLocation.fromWidths("c38", "c38", "c39", c42Left + 4*(defaultWidth + defaultSpaceHorizontal), defaultWidth, c42Top, defaultHeight),
-				StandLocation.fromWidths("c39", "c39", "c40", c42Left + 3*(defaultWidth + defaultSpaceHorizontal), defaultWidth, c42Top, defaultHeight),
-				StandLocation.fromWidths("c40", "c40", "c41", c42Left + 2*(defaultWidth + defaultSpaceHorizontal), defaultWidth, c42Top, defaultHeight),
-				StandLocation.fromWidths("c41", "c41", "c42", c42Left + (defaultWidth + defaultSpaceHorizontal), defaultWidth, c42Top, defaultHeight),
-				StandLocation.fromWidths("c42", "c42", "c43", c42Left, defaultWidth, c42Top, defaultHeight),
+				StandLocation.fromWidths("c37", "c37", "c38", c40Left + 3*(defaultWidth + defaultSpaceHorizontal), defaultWidth, c40Top, defaultHeight),
+				StandLocation.fromWidths("c38", "c38", "c39", c40Left + 2*(defaultWidth + defaultSpaceHorizontal), defaultWidth, c40Top, defaultHeight),
+				StandLocation.fromWidths("c39", "c39", "c40", c40Left + (defaultWidth + defaultSpaceHorizontal), defaultWidth, c40Top, defaultHeight),
+				StandLocation.fromWidths("c40", "c40", "c41", c40Left, defaultWidth, c40Top, defaultHeight),
 
+				StandLocation.fromWidths("c41", "c41", "c42", c48Left + 7*(defaultWidth + defaultSpaceHorizontal), defaultWidth, c48Top, defaultHeight),
+				StandLocation.fromWidths("c42", "c42", "c43", c48Left + 6*(defaultWidth + defaultSpaceHorizontal), defaultWidth, c48Top, defaultHeight),
 				StandLocation.fromWidths("c43", "c43", "c44", c48Left + 5*(defaultWidth + defaultSpaceHorizontal), defaultWidth, c48Top, defaultHeight),
 				StandLocation.fromWidths("c44", "c44", "c45", c48Left + 4*(defaultWidth + defaultSpaceHorizontal), defaultWidth, c48Top, defaultHeight),
 				StandLocation.fromWidths("c45", "c45", "c46", c48Left + 3*(defaultWidth + defaultSpaceHorizontal), defaultWidth, c48Top, defaultHeight),
@@ -914,8 +927,8 @@ public class Animatsuri2024Convention extends AmaiConvention {
 				StandLocation.fromWidths("c47", "c47", "c48", c48Left + (defaultWidth + defaultSpaceHorizontal), defaultWidth, c48Top, defaultHeight),
 				StandLocation.fromWidths("c48", "c48", "c49", c48Left, defaultWidth, c48Top, defaultHeight),
 
-				StandLocation.fromWidths("c49", "c49", "c50", c50Left, defaultWidth, c50Top + (defaultHeight + defaultSpaceVertical), defaultHeight),
-				StandLocation.fromWidths("c50", "c50", null, c50Left, defaultWidth, c50Top, defaultHeight),
+				StandLocation.fromWidths("c49", "c49", "c50", c49Left, defaultWidth, c49Top + (defaultHeight + defaultSpaceVertical), defaultHeight),
+				StandLocation.fromWidths("c50", "c50", null, c49Left, defaultWidth, c49Top, defaultHeight),
 
 
 				// Ds
@@ -959,9 +972,8 @@ public class Animatsuri2024Convention extends AmaiConvention {
 				StandLocation.fromWidths("e7", "e07", "e8", e3Left, defaultWidth, e3Top + 4*(defaultHeight + defaultSpaceVertical), defaultHeight),
 				StandLocation.fromWidths("e8", "e08", "e9", e3Left, defaultWidth, e3Top + 5*(defaultHeight + defaultSpaceVertical), defaultHeight),
 
-				StandLocation.fromWidths("e9", "e09", "e10", e10Left + (defaultWidth + defaultSpaceHorizontal), defaultWidth, e10Top, defaultHeight),
-				StandLocation.fromWidths("e10", "e10", "e11", e10Left, defaultWidth, e10Top, defaultHeight),
-
+				StandLocation.fromWidths("e9", "e09", "e10", e14Left + 5*(defaultWidth + defaultSpaceHorizontal), defaultWidth, e14Top, defaultHeight),
+				StandLocation.fromWidths("e10", "e10", "e11", e14Left + 4*(defaultWidth + defaultSpaceHorizontal), defaultWidth, e14Top, defaultHeight),
 				StandLocation.fromWidths("e11", "e11", "e12", e14Left + 3*(defaultWidth + defaultSpaceHorizontal), defaultWidth, e14Top, defaultHeight),
 				StandLocation.fromWidths("e12", "e12", "e13", e14Left + 2*(defaultWidth + defaultSpaceHorizontal), defaultWidth, e14Top, defaultHeight),
 				StandLocation.fromWidths("e13", "e13", "e14", e14Left + (defaultWidth + defaultSpaceHorizontal), defaultWidth, e14Top, defaultHeight),
