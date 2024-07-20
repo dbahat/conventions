@@ -203,8 +203,10 @@ public class Animatsuri2024Convention extends AmaiConvention {
 //				"https://harucon.org.il/2020/wp-content/uploads/sites/21/2019/07/IMG_3812.png"
 //		);
 
-		return new ImageIdToImageResourceMapper()
-				.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.harucon_gen_event_activity_background);
+		// In case the convention has a generic image which should keep aspect ratio and the fade effect, map it like this
+//		imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.harucon_gen_event_activity_background);
+
+		return new ImageIdToImageResourceMapper();
 	}
 
 	@Override
@@ -1058,7 +1060,7 @@ public class Animatsuri2024Convention extends AmaiConvention {
 	public String convertEventDescriptionURL(String url) {
 		// URLs in event descriptions that don't have a domain should point to the website URL
 		if (url != null && url.startsWith("/")) {
-			return "https://harucon.org.il" + url;
+			return "https://animatsuri.org.il" + url;
 		}
 		return super.convertEventDescriptionURL(url);
 	}
