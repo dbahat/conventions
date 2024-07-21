@@ -72,7 +72,7 @@
         <item name="homeLogoMargin">0dp</item>
         <item name="homeBottomImage">@null</item>
         <item name="homeBackground">@drawable/animatsuri2024_home_background</item>
-        <item name="homeBackgroundDuringConvention">@drawable/animatsuri2024_background</item>
+        <item name="homeBackgroundDuringConvention">@drawable/animatsuri2024_home_background</item>
         <item name="homeToolbarTitle">@null</item>
         <item name="homeToolbarBackground">@color/animatsuri2024_purple800</item>
         <item name="homeTitleBackground">@drawable/animatsuri2024_home_title_background</item>
