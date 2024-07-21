@@ -48,16 +48,20 @@ public class Animatsuri2024Convention extends AmaiConvention {
 	// Vote questions - these values are serialized, don't change them!
 	private static final int QUESTION_ID_AMAIDOL_VOTE = 1000;
 	private static final int QUESTION_ID_AMAIDOL_NAME = 1001;
+	private static final int QUESTION_ID_IDOLFEST_VOTE = 1002;
 
 	// Special events server id
 	private static final int EVENT_ID_AMAIDOL = 1775;
+	private static final int EVENT_ID_IDOLFEST = 4011;
 
 	// Ids of google spreadsheets associated with the special events
 	private static final String AMAIDOL_SPREADSHEET_ID = "1u9xu3FNq2gA25oZoVHVguTzJA5HheXWPf2wnUj-iipE";
+	private static final String IDOLFEST_SPREADSHEET_ID = "1tTqrnVOzDnu_wesOMKmbtW5nk6bFpFsk9DhkfcYG_n0";
 
 	static {
 		FeedbackQuestion.addQuestion(QUESTION_ID_AMAIDOL_NAME, R.string.amaidol_name_question);
 		FeedbackQuestion.addQuestion(QUESTION_ID_AMAIDOL_VOTE, R.string.amaidol_vote_question);
+		FeedbackQuestion.addQuestion(QUESTION_ID_IDOLFEST_VOTE, R.string.idolfest_vote_question);
 	}
 
 	// Stand types
@@ -1006,7 +1010,15 @@ public class Animatsuri2024Convention extends AmaiConvention {
 
                 return new EventVoteSurveyFormSender(form, event.getUserInput().getVoteSurvey(), disabledMessageRetriever);
 
-            }
+            } else if (event.getServerId() == EVENT_ID_IDOLFEST) {
+				SurveyForm form = new SurveyForm()
+						.withQuestionEntry(QUESTION_ID_IDOLFEST_VOTE, "entry.1250645599")
+						.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSc-X3LyAKiKRXiBwq3q8KEQwsYGwn7pZAqK2g1273sVroPWvw/formResponse"));
+
+				SurveyDataRetriever.DisabledMessage disabledMessageRetriever = new SurveyDataRetriever.GoogleSpreadSheet(IDOLFEST_SPREADSHEET_ID);
+
+				return new EventVoteSurveyFormSender(form, event.getUserInput().getVoteSurvey(), disabledMessageRetriever);
+			}
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
@@ -1020,6 +1032,9 @@ public class Animatsuri2024Convention extends AmaiConvention {
             case QUESTION_ID_AMAIDOL_VOTE: {
                 return new SurveyDataRetriever.GoogleSpreadSheet(AMAIDOL_SPREADSHEET_ID);
             }
+			case QUESTION_ID_IDOLFEST_VOTE: {
+				return new SurveyDataRetriever.GoogleSpreadSheet(IDOLFEST_SPREADSHEET_ID);
+			}
         }
 
 		return null;
@@ -1044,6 +1059,11 @@ public class Animatsuri2024Convention extends AmaiConvention {
 //                        new FeedbackQuestion(QUESTION_ID_AMAIDOL_VOTE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO, true)
 //                ));
 //            }
+            if (event.getServerId() == EVENT_ID_IDOLFEST) {
+                userInput.setVoteSurvey(new Survey().withQuestions(
+                        new FeedbackQuestion(QUESTION_ID_IDOLFEST_VOTE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO, true)
+                ));
+            }
         }
 	}
 

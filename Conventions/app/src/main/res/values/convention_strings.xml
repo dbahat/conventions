@@ -18,6 +18,7 @@
     <string name="app_name">אנימאטסורי 2024</string>
     <string name="amaidol_name_question">איך קוראים לך?</string>
     <string name="amaidol_vote_question">מי המתמודד/ת החביב/ה עליך?</string>
+    <string name="idolfest_vote_question">בחרו את הביצוע האהוב עליכם!</string>
     <!-- Copied from https://animatsuri.org.il/2024/ !-->
     <string name="about_content"><![CDATA[
     <h1>אנימאטסורי 2024</h1>
