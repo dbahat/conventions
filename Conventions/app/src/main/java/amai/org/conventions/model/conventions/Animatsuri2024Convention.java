@@ -1037,12 +1037,13 @@ public class Animatsuri2024Convention extends AmaiConvention {
 		super.convertUserInputForEvent(userInput, event);
 
         if (userInput.getVoteSurvey() == null && event != null) {
-            if (event.getServerId() == EVENT_ID_AMAIDOL) {
-                userInput.setVoteSurvey(new Survey().withQuestions(
-                        new FeedbackQuestion(QUESTION_ID_AMAIDOL_NAME, FeedbackQuestion.AnswerType.SINGLE_LINE_TEXT, true),
-                        new FeedbackQuestion(QUESTION_ID_AMAIDOL_VOTE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO, true)
-                ));
-            }
+			// TODO Enable for conventions with Amaidol (after updating the event ID)
+//            if (event.getServerId() == EVENT_ID_AMAIDOL) {
+//                userInput.setVoteSurvey(new Survey().withQuestions(
+//                        new FeedbackQuestion(QUESTION_ID_AMAIDOL_NAME, FeedbackQuestion.AnswerType.SINGLE_LINE_TEXT, true),
+//                        new FeedbackQuestion(QUESTION_ID_AMAIDOL_VOTE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO, true)
+//                ));
+//            }
         }
 	}
 
