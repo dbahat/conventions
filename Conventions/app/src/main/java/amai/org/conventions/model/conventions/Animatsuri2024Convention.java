@@ -240,13 +240,13 @@ public class Animatsuri2024Convention extends AmaiConvention {
 		Floor entrance = new Floor(1)
 				.withName("מתחם כניסה")
 				.withImageResource(R.raw.animatsuri2024_floor_entrance, true)
-				.withImageWidth(1297.96997f)
-				.withImageHeight(804.69f);
+				.withImageWidth(1805.65186f)
+				.withImageHeight(1081.33826f);
 		Floor floor1 = new Floor(2)
 				.withName("קומה 1")
 				.withImageResource(R.raw.animatsuri2024_floor1, true)
 				.withImageWidth(1608.79663f)
-				.withImageHeight(821.56598f);
+				.withImageHeight(822f);
 		Floor floor2 = new Floor(3)
 				.withName("קומה 2")
 				.withImageResource(R.raw.animatsuri2024_floor2, true)
@@ -278,58 +278,65 @@ public class Animatsuri2024Convention extends AmaiConvention {
 												.withPlace(new Place().withName("עמדת מודיעין"))
 												.withMarkerResource(R.raw.animatsuri2024_marker_information_entrance, true)
 												.withSelectedMarkerResource(R.raw.animatsuri2024_marker_information_entrance_selected, true)
-												.withMarkerHeight(136.51f)
-												.withX(1047.39f)
-												.withY(658.18f),
+												.withMarkerHeight(123.89f)
+												.withX(1225.847f)
+												.withY(796.28926f),
 										new MapLocation()
-												.withPlace(new Place().withName("עמדות צימוד"))
+												.withPlace(new Place().withName("עמדת צימוד"))
 												.withMarkerResource(R.raw.animatsuri2024_marker_bracelets, true)
 												.withSelectedMarkerResource(R.raw.animatsuri2024_marker_bracelets_selected, true)
-												.withMarkerHeight(104.76f)
-												.withX(661.73f)
-												.withY(674.37f),
+												.withMarkerHeight(92.439f)
+												.withX(857.8445f)
+												.withY(822.74126f),
 										new MapLocation()
 												.withPlace(new Place().withName("קופות"))
 												.withMarkerResource(R.raw.animatsuri2024_marker_cashiers, true)
 												.withSelectedMarkerResource(R.raw.animatsuri2024_marker_cashiers_selected, true)
-												.withMarkerHeight(104.76f)
-												.withX(498.6f)
-												.withY(634.04f),
+												.withMarkerHeight(92.439f)
+												.withX(623.8445f)
+												.withY(785.74126f),
 										new MapLocation()
 												.withPlace(new Place().withName("קופה נגישה"))
 												.withMarkerResource(R.raw.animatsuri2024_marker_accessible_cashier, true)
 												.withSelectedMarkerResource(R.raw.animatsuri2024_marker_accessible_cashier_selected, true)
-												.withMarkerHeight(104.76f)
-												.withX(670.84f)
-												.withY(521.85f),
+												.withMarkerHeight(92.439f)
+												.withX(843.8445f)
+												.withY(634.74126f),
+										new MapLocation()
+												.withPlace(new Place().withName("קופת פלוס"))
+												.withMarkerResource(R.raw.animatsuri2024_marker_plus_cashier, true)
+												.withSelectedMarkerResource(R.raw.animatsuri2024_marker_plus_cashier_selected, true)
+												.withMarkerHeight(92.439f)
+												.withX(1142.347f)
+												.withY(493.74126f),
 										new MapLocation()
 												.withPlace(new Place().withName("מתחם הזמנה מראש"))
 												.withMarkerResource(R.raw.animatsuri2024_marker_preorders, true)
 												.withSelectedMarkerResource(R.raw.animatsuri2024_marker_preorders_selected, true)
-												.withMarkerHeight(104.75f)
-												.withX(722.45f)
-												.withY(237.4f),
-										new MapLocation()
-												.withPlace(new Place().withName("קופה נגישה"))
-												.withMarkerResource(R.raw.animatsuri2024_marker_accessible_cashier, true)
-												.withSelectedMarkerResource(R.raw.animatsuri2024_marker_accessible_cashier_selected, true)
-												.withMarkerHeight(104.76f)
-												.withX(697.8965f)
-												.withY(110.342f),
+												.withMarkerHeight(92.439f)
+												.withX(880.3445f)
+												.withY(327.74126f),
 										new MapLocation()
 												.withPlace(new Place().withName("מתחם קנייה במקום"))
 												.withMarkerResource(R.raw.animatsuri2024_marker_tickets_area, true)
 												.withSelectedMarkerResource(R.raw.animatsuri2024_marker_tickets_area_selected, true)
-												.withMarkerHeight(104.76f)
-												.withX(330.69f)
-												.withY(389.84f),
+												.withMarkerHeight(92.439f)
+												.withX(474.8445f)
+												.withY(556.74126f),
+										new MapLocation()
+												.withPlace(new Place().withName("קופה נגישה"))
+												.withMarkerResource(R.raw.animatsuri2024_marker_accessible_cashier, true)
+												.withSelectedMarkerResource(R.raw.animatsuri2024_marker_accessible_cashier_selected, true)
+												.withMarkerHeight(92.439f)
+												.withX(733.3445f)
+												.withY(181.74126f),
 										new MapLocation()
 												.withPlace(new Place().withName("מעבר נגיש"))
 												.withMarkerResource(R.raw.animatsuri2024_marker_accessible_passage, true)
 												.withSelectedMarkerResource(R.raw.animatsuri2024_marker_accessible_passage_selected, true)
-												.withMarkerHeight(104.76f)
-												.withX(195.73f)
-												.withY(258.36f)
+												.withMarkerHeight(92.439f)
+												.withX(279.8445f)
+												.withY(326.74126f)
 								),
 								inFloor(floor1,
 										new MapLocation()
@@ -337,86 +344,93 @@ public class Animatsuri2024Convention extends AmaiConvention {
 												.withMarkerResource(R.raw.animatsuri2024_marker_toilet, true)
 												.withSelectedMarkerResource(R.raw.animatsuri2024_marker_toilet_selected, true)
 												.withMarkerHeight(102.438f)
-												.withX(1511.577f)
-												.withY(523.45498f),
-										new MapLocation()
-												.withPlace(new Place().withName("שמירת חפצים"))
-												.withMarkerResource(R.raw.animatsuri2024_marker_storage, true)
-												.withSelectedMarkerResource(R.raw.animatsuri2024_marker_storage_selected, true)
-												.withMarkerHeight(126.947f)
-												.withX(1374.322f)
-												.withY(630.56198f),
+												.withX(1503.577f)
+												.withY(523.889f),
 										new MapLocation()
 												.withPlace(new Place().withName("מרחב מוגן"))
 												.withMarkerResource(R.raw.animatsuri2024_marker_safe, true)
 												.withSelectedMarkerResource(R.raw.animatsuri2024_marker_safe_selected, true)
 												.withMarkerHeight(131.35f)
-												.withX(1283.822f)
-												.withY(673.16498f),
+												.withX(1275.822f)
+												.withY(673.599f),
 										new MapLocation()
 												.withName("מתחם דוכנים")
 												.withPlace(pinkus)
 												.withMarkerResource(R.raw.animatsuri2024_marker_stands, true)
 												.withSelectedMarkerResource(R.raw.animatsuri2024_marker_stands_selected, true)
 												.withMarkerHeight(98.445f)
-												.withX(1053.502f)
-												.withY(572.10298f),
+												.withX(1045.502f)
+												.withY(572.537f),
+										new MapLocation()
+												.withPlace(new Place().withName("מתחם אוכל"))
+												.withMarkerResource(R.raw.animatsuri2024_marker_food, true)
+												.withSelectedMarkerResource(R.raw.animatsuri2024_marker_food_selected, true)
+												.withMarkerHeight(126.947f)
+												.withX(1182.052f)
+												.withY(192.053f),
+										new MapLocation()
+												.withPlace(new Place().withName("שמירת חפצים"))
+												.withMarkerResource(R.raw.animatsuri2024_marker_storage, true)
+												.withSelectedMarkerResource(R.raw.animatsuri2024_marker_storage_selected, true)
+												.withMarkerHeight(126.947f)
+												.withX(1046.052f)
+												.withY(108.053f),
 										new MapLocation()
 												.withPlace(new Place().withName("שירותים"))
 												.withMarkerResource(R.raw.animatsuri2024_marker_toilet, true)
 												.withSelectedMarkerResource(R.raw.animatsuri2024_marker_toilet_selected, true)
 												.withMarkerHeight(102.437f)
-												.withX(891.0995f)
-												.withY(72.19898f),
+												.withX(880.2945f)
+												.withY(72.633f),
 										new MapLocation()
 												.withPlace(new Place().withName("מעלית"))
 												.withMarkerResource(R.raw.animatsuri2024_marker_elevator, true)
 												.withSelectedMarkerResource(R.raw.animatsuri2024_marker_elevator_selected, true)
 												.withMarkerHeight(85.813f)
-												.withX(750.969f)
-												.withY(142.84798f),
+												.withX(742.969f)
+												.withY(143.282f),
 										new MapLocation()
 												.withPlace(new Place().withName("מודיעין ודוכן אמא\"י"))
 												.withMarkerResource(R.raw.animatsuri2024_marker_information, true)
 												.withSelectedMarkerResource(R.raw.animatsuri2024_marker_information_selected, true)
 												.withMarkerHeight(168.231f)
-												.withX(735.953f)
-												.withY(307.24298f),
+												.withX(727.953f)
+												.withY(307.677f),
 										new MapLocation()
 												.withPlace(eshkol1)
 												.withMarkerResource(R.raw.animatsuri2024_marker_eshkol1, true)
 												.withSelectedMarkerResource(R.raw.animatsuri2024_marker_eshkol1_selected, true)
 												.withMarkerHeight(123.669f)
-												.withX(421.7735f)
-												.withY(504.57398f),
+												.withX(413.7735f)
+												.withY(505.008f),
 										new MapLocation()
 												.withPlace(eshkol3)
 												.withMarkerResource(R.raw.animatsuri2024_marker_eshkol3, true)
 												.withSelectedMarkerResource(R.raw.animatsuri2024_marker_eshkol3_selected, true)
 												.withMarkerHeight(123.67f)
-												.withX(299.5585f)
-												.withY(687.89598f),
+												.withX(291.5585f)
+												.withY(688.33f),
 										new MapLocation()
 												.withPlace(eshkol2)
 												.withMarkerResource(R.raw.animatsuri2024_marker_eshkol2, true)
 												.withSelectedMarkerResource(R.raw.animatsuri2024_marker_eshkol2_selected, true)
 												.withMarkerHeight(123.67f)
-												.withX(464.0785f)
-												.withY(687.89598f),
+												.withX(456.0785f)
+												.withY(688.33f),
 										new MapLocation()
 												.withPlace(new Place().withName("שירותים"))
 												.withMarkerResource(R.raw.animatsuri2024_marker_toilet, true)
 												.withSelectedMarkerResource(R.raw.animatsuri2024_marker_toilet_selected, true)
 												.withMarkerHeight(102.436f)
 												.withX(233.0185f)
-												.withY(415.34298f),
+												.withY(415.777f),
 										new MapLocation()
 												.withPlace(new Place().withName("מעלית"))
 												.withMarkerResource(R.raw.animatsuri2024_marker_elevator, true)
 												.withSelectedMarkerResource(R.raw.animatsuri2024_marker_elevator_selected, true)
 												.withMarkerHeight(85.813f)
-												.withX(59.983f)
-												.withY(509.49298f)
+												.withX(51.983f)
+												.withY(509.927f)
 								),
 								inFloor(floor2,
 										new MapLocation()
