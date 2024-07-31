@@ -488,7 +488,7 @@ public class Animatsuri2024Convention extends AmaiConvention {
 												.withMarkerResource(R.raw.animatsuri2024_marker_games, true)
 												.withSelectedMarkerResource(R.raw.animatsuri2024_marker_games_selected, true)
 												.withMarkerHeight(206.269f)
-												.withX(682.55f)
+												.withX(685.187f)
 												.withY(581.77198f),
 										new MapLocation()
 												.withName("שדרת ציירים ומתחם דוכנים")
