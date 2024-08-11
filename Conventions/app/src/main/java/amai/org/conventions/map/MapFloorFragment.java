@@ -948,12 +948,13 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		ConventionEvent alternativeNextEvent = null; // If there is no current event, we can display 2 next events
 		boolean isSingleHall = location.hasSinglePlace() && location.getPlaces().get(0) instanceof Hall;
 		if (isSingleHall) {
-			List<ConventionEvent> events = Convention.getInstance().findEventsByHall(location.getPlaces().get(0).getName());
+			List<ConventionEvent> allHallEvents = Convention.getInstance().findEventsByHall(location.getPlaces().get(0).getName());
 			// Only show events that happen today
 			Date now = Dates.now();
-			events = CollectionUtils.filter(events, (event) -> Dates.isSameDate(now, event.getStartTime()));
+			List<ConventionEvent> events = CollectionUtils.filter(allHallEvents, (event) -> Dates.isSameDate(now, event.getStartTime()));
 			if (events.size() == 0) {
-				isSingleHall = false;
+				// Allow to go to hall if it has any events, not necessarily today
+				isSingleHall = allHallEvents.size() > 0;
 			} else {
 				Collections.sort(events, new ConventionEventComparator());
 				for (ConventionEvent event : events) {
