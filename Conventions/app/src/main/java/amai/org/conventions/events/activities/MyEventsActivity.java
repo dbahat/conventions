@@ -350,7 +350,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 
 			AlertDialog dialog = builder
 					.setView(dialogView)
-					.setPositiveButton(R.string.ok, null)
+					.setPositiveButton(R.string.close, null)
 					.setNegativeButton(R.string.logout, (dialog1, which) -> {
 						Intent intent = new Intent(this, AuthorizationActivity.class);
 						intent.putExtra(AuthorizationActivity.PARAM_SIGN_OUT, true);
