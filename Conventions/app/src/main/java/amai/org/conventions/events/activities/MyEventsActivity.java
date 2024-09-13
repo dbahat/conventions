@@ -229,7 +229,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 
 			// Set new user data
 			ConventionsApplication.settings.setUser(user);
-			saveUserQR(user);
+			saveUserQR(token, user);
 			saveUserId(token);
 		} else if (ConventionsApplication.settings.getUserId() == null) {
 			// Update only the user ID if it was not available before
@@ -549,11 +549,11 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		}
 	}
 
-	private void saveUserQR(String user) throws Exception {
+	private void saveUserQR(String token, String user) throws Exception {
 		// First, delete the existing file (since a new user ID was set, we don't want leftovers from the previous user ID)
 		Convention.getInstance().getStorage().deleteUserIDQR();
 
-		RequestConnector request = new RequestConnector(Convention.getInstance().getUserQRRequest(user));
+		RequestConnector request = new RequestConnector(Convention.getInstance().getUserQRRequest(token, user));
 		InputStream inputStream = null;
 		try {
 			// This should be inside the try-catch because it can throw an exception

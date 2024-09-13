@@ -229,7 +229,7 @@ public abstract class Convention implements Serializable {
 
 	public abstract HttpURLConnection getUserIDRequest(String token) throws Exception;
 
-	public abstract HttpURLConnection getUserQRRequest(String user) throws Exception;
+	public abstract HttpURLConnection getUserQRRequest(String token, String user) throws Exception;
 
 	public Calendar getStartDate() {
 		Calendar[] eventDates = getEventDates();

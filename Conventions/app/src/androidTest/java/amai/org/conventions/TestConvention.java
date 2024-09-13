@@ -144,7 +144,7 @@ public class TestConvention extends Convention {
     }
 
     @Override
-    public HttpURLConnection getUserQRRequest(String user) throws Exception {
+    public HttpURLConnection getUserQRRequest(String token, String user) throws Exception {
         return null;
     }
 
