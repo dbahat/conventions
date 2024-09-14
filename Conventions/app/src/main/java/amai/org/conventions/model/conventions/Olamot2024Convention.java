@@ -264,9 +264,9 @@ public class Olamot2024Convention extends SffConvention {
 	}
 
 	private MapLocation mapLocation(String name, List<? extends Place> places, float x, float y) {
-		final int DEFAULT_MARKER = R.drawable.olamot2024_place;
+		final int DEFAULT_MARKER = R.drawable.icon2024_place;
 		final int DEFAULT_MARKER_TINT_RES = MapLocation.NO_TINT;
-		final int DEFAULT_SELECTED_MARKER = R.drawable.olamot2024_place_selected;
+		final int DEFAULT_SELECTED_MARKER = R.drawable.icon2024_place_selected;
 		final int DEFAULT_SELECTED_MARKER_TINT_RES = MapLocation.NO_TINT;
 
 		MapLocation result = new MapLocation();

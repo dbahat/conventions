@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<inset xmlns:android="http://schemas.android.com/apk/res/android" android:inset="10dp">
-    <shape android:shape="rectangle">
-        <corners android:radius="4dp"/>
-        <solid android:color="@color/olamot2024_blue50_transparent_80"/>
-    </shape>
-</inset>

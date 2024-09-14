@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="icon2024_blue50">#D6ECFF</color>
+    <color name="icon2024_blue100">#ADD2F3</color>
+    <color name="icon2024_blue200">#8EBBE3</color>
+    <color name="icon2024_blue300">#6FA5D5</color>
+    <color name="icon2024_blue600">#2F70AA</color>
+    <color name="icon2024_blue600_transparent_50">#802F70AA</color>
+    <color name="icon2024_blue900">#0C3B66</color>
+
+    <color name="icon2024_clay50">#FCEAE3</color>
+    <color name="icon2024_clay100">#F5CCBC</color>
+    <color name="icon2024_clay200">#ECAE97</color>
+    <color name="icon2024_clay300">#E59375</color>
+    <color name="icon2024_clay400">#D27654</color>
+    <color name="icon2024_clay600">#B54C25</color>
+    <color name="icon2024_clay700">#AB411A</color>
+    <color name="icon2024_clay900">#7E2505</color>
+
+    <color name="icon2024_gray200">#E1D7D3</color>
+    <color name="icon2024_gray300">#CCC3C0</color>
+    <color name="icon2024_gray700">#706763</color>
+    <color name="icon2024_gray800">#554D49</color>
+    <color name="icon2024_gray900">#352E2A</color>
+
+    <color name="icon2024_cream50">#FFF9F0</color>
+    <color name="icon2024_cream50_transparent_90">#E6FFF9F0</color>
+    <color name="icon2024_cream200">#FEEAC6</color>
+    <color name="icon2024_cream400">#F4CE8C</color>
+    <color name="icon2024_cream500">#EBBF72</color>
+    <color name="icon2024_cream600">#E8B04E</color>
+    <color name="icon2024_cream700">#DDA034</color>
+    <color name="icon2024_cream1000">#7E5204</color>
+
+    <color name="icon2024_green600">#839669</color>
+
+    <color name="icon2024_gold">#F0CF64</color>
+    <color name="icon2024_red">#D41206</color>
+</resources>

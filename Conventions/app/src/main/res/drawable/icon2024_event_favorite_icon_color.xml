@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:color="@color/icon2024_cream700" app:state_event_favorite="true"/>
+    <item android:color="@color/icon2024_gray200"/>
+</selector>

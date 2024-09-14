@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:drawable="@drawable/icon2024_logo" app:state_home_during_con="true"/>
+    <item android:drawable="@drawable/icon2024_home_before" app:state_home_before_con="true"/>
+    <item android:drawable="@drawable/icon2024_home_after"/>
+</selector>

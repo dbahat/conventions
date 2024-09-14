@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:color="@color/icon2024_cream600" app:state_feedback_answer="true" app:state_feedback_answer_type_five_stars="true"/>
+    <item android:color="@color/icon2024_blue600" app:state_feedback_link="true"/>
+    <item android:color="@color/icon2024_gray800"/>
+</selector>

@@ -40,9 +40,9 @@
         android:installLocation="auto"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppBaseTheme.Olamot2024">
+        android:theme="@style/AppBaseTheme.Icon2024">
         <activity
-            android:name="amai.org.conventions.SplashActivity" android:theme="@style/AppBaseTheme.Olamot2024.Splash"
+            android:name="amai.org.conventions.SplashActivity" android:theme="@style/AppBaseTheme.Icon2024.Splash"
             android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
@@ -58,7 +58,7 @@
         <activity android:name="amai.org.conventions.map.MapActivity"></activity>
         <activity
             android:name="amai.org.conventions.events.activities.EventActivity"
-            android:theme="@style/AppBaseTheme.Olamot2024.Event"
+            android:theme="@style/AppBaseTheme.Icon2024.Event"
             android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name="amai.org.conventions.ArrivalMethodsActivity"></activity>
         <activity
@@ -66,12 +66,12 @@
             android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name="amai.org.conventions.updates.UpdatesActivity"></activity>
         <activity android:name="amai.org.conventions.settings.SettingsActivity"
-            android:theme="@style/AppBaseTheme.Olamot2024.Settings"></activity>
+            android:theme="@style/AppBaseTheme.Icon2024.Settings"></activity>
         <activity android:name="amai.org.conventions.DiscountsActivity"></activity>
         <activity android:name="amai.org.conventions.ActivitiesActivity"/>
         <activity android:name="amai.org.conventions.AboutActivity"></activity>
         <activity android:name="amai.org.conventions.HomeActivity" android:screenOrientation="portrait"
-            android:theme="@style/AppBaseTheme.Olamot2024.Home"/>
+            android:theme="@style/AppBaseTheme.Icon2024.Home"/>
         <activity android:name="amai.org.conventions.secondhand.SecondHandActivity" />
         <activity android:name="amai.org.conventions.WebContentActivity$IconKidsActivity" />
         <activity android:name="amai.org.conventions.WebContentActivity$AccessibilityActivity" android:exported="true">
@@ -82,7 +82,7 @@
                 <data android:scheme="sff.org.conventions" android:host="web-content" />
             </intent-filter>
         </activity>
-        <activity android:name="amai.org.conventions.auth.AuthorizationActivity" android:theme="@style/TransparentTheme.Olamot2024"></activity>
+        <activity android:name="amai.org.conventions.auth.AuthorizationActivity" android:theme="@style/TransparentTheme.Icon2024"></activity>
         <activity
             android:name="net.openid.appauth.RedirectUriReceiverActivity"
             android:exported="true"
@@ -121,7 +121,7 @@
      See README(https://goo.gl/l4GJaQ) for more. -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/olamot2024_notification_icon" />
+            android:resource="@drawable/icon2024_notification_icon" />
     </application>
 
 </manifest>

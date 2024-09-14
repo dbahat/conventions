@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+   <style name="AppBaseTheme.Icon2024" parent="AppBaseTheme.Light.DarkToolbar">
+        <!-- Sub-themes -->
+        <item name="android:dialogTheme">@style/AppDialogTheme.Icon2024</item>
+        <item name="alertDialogTheme">@style/AppAlertDialogTheme.Icon2024</item>
+        <!-- General -->
+        <item name="android:colorPrimaryDark">@color/black</item> <!-- Toolbar color -->
+        <!-- Used in: default selected checkbox/switch color, settings titles,
+             cursor color in all edit texts. Also used as the default action button color and map search checkbox color. -->
+        <item name="colorAccent">@color/icon2024_blue900</item>
+        <!-- This color should be readable over the activities background.
+             Used as the text color in: accessibility, arrival methods.
+             Also used as default for many texts and as the default "large text" color (e.g. in settings). -->
+        <item name="android:textColorPrimary">@color/icon2024_gray800</item>
+        <!-- Used in: default unselected checkbox color and default "medium/small" texts (e.g. in settings). -->
+        <item name="android:textColorSecondary">@color/icon2024_gray700</item>
+        <item name="android:colorBackground">@null</item>
+        <item name="android:textColorHint">@color/icon2024_gray700</item>
+        <item name="android:textColorLink">@color/icon2024_blue600</item>
+        <item name="actionButtonColor">@color/icon2024_clay700</item>
+        <item name="actionButtonIcon">@drawable/search</item>
+        <item name="hintTextColor">@color/icon2024_gray700</item>
+        <item name="swipeToRefreshColor">@color/white</item>
+        <item name="swipeToRefreshBackgroundColor">@color/icon2024_clay700</item>
+        <item name="snackbarActionColor">@color/icon2024_blue100</item>
+        <item name="highlightedButtonBackground">@drawable/highlighted_button</item>
+        <item name="borderlessButtonColor">@color/icon2024_blue600</item>
+        <item name="activitiesBackground">@drawable/icon2024_activities_background</item>
+        <item name="infoActivitiesTextBackground">@drawable/icon2024_rounded_edges_cream50_inset</item>
+        <item name="contentStartMargin">0dp</item>
+        <item name="contentEndMargin">0dp</item>
+        <item name="eventListDivider">@drawable/transparent_event_list_divider</item>
+        <item name="separatorColor">@null</item>
+        <!-- These are used for buttons. They should be usable when the background is:
+             Event screen vote
+             Feedback screen
+             Map bottom info panel
+             Arrival methods screen
+         -->
+        <item name="buttonColor">@color/icon2024_blue600</item>
+        <item name="buttonColorPressed">@color/icon2024_blue300</item>
+        <item name="buttonColorDisabled">@color/icon2024_blue600_transparent_50</item>
+        <item name="buttonTextColor">@drawable/icon2024_highlighted_button_text_color</item>
+
+        <!-- Tabs -->
+        <item name="tabsBackground">@color/icon2024_cream50</item>
+        <item name="unselectedTabTextColor">@color/icon2024_cream1000</item>
+        <item name="selectedTabTextColor">@color/icon2024_cream1000</item>
+        <item name="selectedTabIndicator">@drawable/tab_indicator</item>
+        <item name="selectedTabIndicatorColor">@color/icon2024_cream1000</item>
+
+        <!-- Notifications -->
+        <item name="notificationSmallIcon">@drawable/icon2024_notification_icon</item>
+        <!-- Toolbar -->
+        <item name="toolbarBackground">@color/icon2024_blue600</item>
+        <item name="toolbarIconAccentColor">@color/icon2024_gold</item>
+        <!-- Navigation Popup -->
+        <item name="navigationPopupBackground">@color/icon2024_cream50</item>
+        <item name="navigationPopupTitle">@null</item>
+        <item name="navigationPopupTitleMargins">10dp</item>
+        <item name="navigationPopupBottomImage">@null</item>
+        <item name="navigationPopupNotSelectedColor">@color/icon2024_cream1000</item>
+        <item name="navigationPopupSelectedColor">@color/icon2024_cream1000</item>
+        <item name="navigationPopupSelectedBackground">@color/icon2024_cream400</item>
+        <item name="navigationPopupSeparatorColor">@color/icon2024_cream400</item>
+        <item name="navigationItemsShouldDisplayIcon">false</item>
+        <!-- About Screen -->
+        <item name="aboutLogo">@drawable/icon2024_logo</item>
+        <item name="aboutLogoMargins">50dp</item>
+        <!-- Home Screen -->
+        <item name="homeBoxTopMargin">10dp</item>
+        <item name="homeSingleButtonTopMargin">10dp</item>
+        <item name="homeButtonsSideMargin">0dp</item>
+        <item name="homeBackground">?activitiesBackground</item>
+        <item name="homeLogo">@drawable/icon2024_home_logo_selector</item>
+        <item name="homeLogoMargin">10dp</item>
+        <item name="homeFrameTopMargin">5dp</item>
+        <item name="homeFrameBottomMargin">10dp</item>
+        <item name="homeToolbarBackground">?toolbarBackground</item>
+        <item name="homeToolbarTitle">@null</item>
+        <item name="homeTitleBackground">@drawable/icon2024_home_title_background</item>
+        <item name="homeTitleText">@drawable/icon2024_home_title_text_color</item>
+        <item name="homeEventsMargin">20dp</item>
+        <item name="homeShowCurrentUpcomingTitles">true</item>
+        <item name="homeContentBackground">@drawable/icon2024_home_content_background</item>
+        <item name="homeContentText">@drawable/icon2024_home_content_text_color</item>
+        <item name="homeEventTimeText">@color/icon2024_gray900</item>
+        <item name="homeEventHallText">@color/icon2024_gray900</item>
+        <item name="homeButtonBackground">@drawable/icon2024_home_button</item>
+        <item name="homeGotoUpdatesButtonBackground">@drawable/icon2024_goto_updates_button</item>
+        <item name="homeButtonText">@color/white</item>
+        <item name="homeGotoUpdatesButtonText">@color/icon2024_clay900</item>
+        <item name="homeBottomImage">@null</item>
+        <item name="homeEventsListDivider">@color/transparent</item>
+        <item name="homeEventsListDividerHeight">10dp</item>
+        <item name="homeEventsListEventBackground">@drawable/icon2024_cream50_round</item>
+        <!-- Event View -->
+        <item name="eventViewLayout">@layout/rounded_convention_event</item>
+        <item name="eventViewHeight">104dp</item>
+        <item name="eventViewCornerRadius">4dp</item>
+        <item name="eventBackgroundColor">@color/icon2024_cream50</item>
+        <item name="eventTextColor">@drawable/icon2024_event_view_text_color</item>
+        <item name="eventTimeTextColor">@drawable/icon2024_event_time_text_color</item>
+        <item name="eventTimeBackground">@drawable/icon2024_event_time_background</item>
+        <item name="eventDetailsColor">?eventTextColor</item>
+        <item name="eventFavoriteIcon">@drawable/favorite_full</item>
+        <item name="eventFavoriteIconColor">@drawable/icon2024_event_favorite_icon_color</item>
+        <item name="eventFeedbackIcon">@drawable/feedback_icon</item>
+        <item name="eventFeedbackIconColor">@drawable/icon2024_feedback_icon_color</item>
+        <item name="eventStartMargin">0dp</item>
+        <item name="conflictingEventBackground">@drawable/icon2024_conflicting_event_label_bg</item>
+        <!-- Programme Screen -->
+        <item name="eventTimeHeaderTextColor">@color/icon2024_cream1000</item>
+        <item name="eventTimeHeaderBackground">@drawable/icon2024_event_time_header</item>
+        <item name="searchCategoriesColor">@color/icon2024_cream1000</item>
+        <item name="searchCategoriesTextColor">@color/icon2024_cream1000</item>
+        <item name="eventTimeHeaderWidth">match_parent</item>
+        <item name="eventTimeHeaderMarginTop">10dp</item>
+        <item name="eventTimeHeaderMarginBottom">@null</item>
+        <item name="eventTimeHeaderMarginHorizontal">8dp</item>
+        <item name="eventTimeHeaderPaddingVertical">4dp</item>
+        <item name="marginBetweenEventsListAndNextHeader">0dp</item>
+        <!-- Programme Search Screen -->
+        <item name="searchTitleBackgroundColor">@color/icon2024_cream50</item>
+        <item name="searchTitleHorizontalPadding">8dp</item>
+        <item name="searchTitleTextColor">@color/icon2024_gray800</item>
+        <item name="programmeSearchBarBackground">@drawable/icon2024_search_bar_background</item>
+        <item name="programmeSearchFilterColor">@color/icon2024_clay200</item>
+        <item name="eventNameKeywordHighlightColor">@color/icon2024_clay600</item>
+        <item name="eventKeywordHighlightColor">@color/icon2024_clay600</item>
+        <item name="searchDrawerAccentColor">@color/icon2024_cream1000</item>
+        <item name="searchDrawerBackground">@color/icon2024_cream50</item>
+        <item name="searchDrawerTextColor">@color/icon2024_gray800</item>
+        <item name="searchDrawerSeparatorColor">@color/icon2024_clay200</item>
+        <!-- My Events Screen -->
+        <item name="nextEventStartTimeBackground">@color/transparent</item>
+        <item name="nextEventStartTimeTextColor">@color/icon2024_cream1000</item>
+        <item name="nextEventStartTimeBottomLineColor">@color/transparent</item>
+        <item name="conflictingEventsListBorder">@null</item>
+        <item name="conflictingEventsBackground">@null</item>
+        <item name="conflictingEventsGroupSeparator">@drawable/icon2024_conflicting_events_group_separator</item>
+        <item name="conflictingEventsGroupSeparatorHeight">4dp</item>
+        <item name="conflictingEventsGroupSeparatorMargin">4dp</item>
+        <item name="freeTimeTextColor">@color/icon2024_cream1000</item>
+        <item name="addActionButtonIcon">@drawable/ic_add_white</item>
+        <!-- User Details Dialog -->
+        <item name="userDetailsTextColor">@color/icon2024_gray800</item>
+        <item name="logoutButtonTextColor">@color/icon2024_clay700</item>
+        <!-- Feedback Screen -->
+        <item name="conventionFeedbackBackgroundColor">@drawable/icon2024_rounded_edges_cream50_inset</item>
+        <item name="feedbackProgressBarColor">@color/icon2024_blue600</item>
+        <item name="conventionFeedbackTextColor">@drawable/icon2024_feedback_text_color</item>
+        <item name="feedbackEventDateHeaderTextColor">@color/icon2024_cream1000</item>
+        <!-- Updates Screen -->
+        <item name="updateTimeBackground">@null</item>
+        <item name="updateTimeColor">@color/icon2024_clay600</item>
+        <item name="showNewUpdateIndicator">true</item>
+        <item name="newUpdateIndicatorTextColor">@color/white</item>
+        <item name="newUpdateIndicatorBackground">@drawable/icon2024_new_update_indicator_background</item>
+        <item name="updateItemSeparator">@color/transparent</item>
+        <item name="updateBackground">@drawable/icon2024_update_background</item>
+        <item name="updateTextColor">@drawable/icon2024_update_text_color</item>
+        <item name="updatePaddingTop">10dp</item>
+        <item name="updatePaddingBottom">25dp</item>
+        <item name="updateElevation">2dp</item>
+        <item name="updateItemBorder">?borderlessButtonColor</item>
+        <item name="updatesSeparatorColor">@color/transparent</item>
+        <!-- Event Screen -->
+        <item name="eventToolbarColor">?toolbarBackground</item>
+        <item name="eventActivityFavoriteColor">?toolbarIconAccentColor</item>
+        <item name="eventDetailsDefaultBackground">?activitiesBackground</item>
+        <item name="eventTitleBackground">@null</item>
+        <item name="eventTitlePadding">0dp</item>
+        <item name="eventNameBackground">@drawable/icon2024_clay400_top_round</item>
+        <item name="eventTitleTextColor">@color/white</item>
+        <item name="eventLecturerBackground">@color/icon2024_clay50</item>
+        <item name="eventLecturerTextColor">@color/icon2024_clay900</item>
+        <item name="eventTypeBackground">@drawable/icon2024_clay100_bottom_round</item>
+        <item name="eventTypeTextColor">@color/icon2024_clay900</item>
+        <item name="eventDetailsBoxColor">@color/transparent</item>
+        <item name="eventDetailsTextColor">@color/icon2024_gray800</item>
+        <item name="eventDetailsHighlightedTextColor">@color/icon2024_clay600</item>
+        <item name="eventDescriptionBoxColor">@drawable/icon2024_cream50_round</item>
+        <item name="eventDescriptionTextColor">@color/icon2024_gray800</item>
+        <item name="eventFeedbackBoxColor">@drawable/icon2024_blue100_round</item>
+        <item name="eventFeedbackTextColor">@drawable/icon2024_event_feedback_text_color</item>
+        <item name="eventFeedbackProgressBarColor">@color/icon2024_blue600</item>
+        <item name="eventFeedbackButtonBackground">@drawable/highlighted_button</item>
+        <item name="eventFeedbackButtonTextColor">@drawable/icon2024_highlighted_button_text_color</item>
+        <item name="feedbackButtonColor">@color/icon2024_blue900</item>
+        <item name="eventVoteBoxColor">@color/icon2024_blue900</item>
+        <item name="eventVoteTextColor">@color/icon2024_blue100</item>
+        <!-- Map Screen -->
+        <item name="mapBackground">?activitiesBackground</item>
+        <item name="locationDetailsBackground">@color/white</item>
+        <item name="locationDetailsTopLineColor">@color/transparent</item>
+        <item name="iconClearMap">@drawable/ic_clear_black</item>
+        <item name="locationDetailsTitleColor">@color/icon2024_gray800</item>
+        <item name="locationDetailsElevation">3dp</item>
+        <item name="floorChangeBackground">@color/icon2024_cream50</item>
+        <item name="mapSearchFiltersBackground">@color/icon2024_cream50</item>
+        <item name="mapSearchResultsBackground">@color/icon2024_cream50_transparent_90</item>
+        <item name="mapSearchBorder">@color/icon2024_cream50</item>
+        <item name="mapSearchPaneElevation">10dp</item>
+        <item name="mapSearchText">@color/icon2024_gray800</item>
+        <item name="mapSearchSeparator">@color/icon2024_cream1000</item>
+        <item name="mapSearchResultsDivider">@drawable/icon2024_map_search_results_divider</item>
+        <item name="mapSearchCheckboxTint">@color/icon2024_cream1000</item>
+        <item name="mapSearchHint">@color/icon2024_gray700</item>
+        <item name="mapSearchBarBackground">@drawable/icon2024_search_bar_background</item>
+        <item name="mapSearchBarHorizontalMargins">5dp</item>
+        <item name="standIconColor">@color/icon2024_cream1000</item>
+        <item name="standsTypeTitleColor">@color/icon2024_cream1000</item>
+        <!-- Second Hand Screen -->
+<!--        <item name="secondHandFormColor">@drawable/second_hand_form_text_color</item>-->
+<!--        <item name="secondHandItemStatusColor">@drawable/second_hand_item_status_text_color</item>-->
+<!--        <item name="secondHandItemsDivider">@drawable/second_hand_item_list_divider</item>-->
+<!--        <item name="secondHandFilterColor"></item>-->
+<!--        <item name="secondHandSelectedFilterColor"></item>-->
+        <!-- Discounts activity -->
+        <item name="discountsActivityLayout">@layout/activity_discounts</item>
+    </style>
+
+    <style name="AppBaseTheme.Icon2024.Event">
+        <item name="android:textColorLink">@color/icon2024_blue600</item>
+    </style>
+
+    <style name="AppBaseTheme.Icon2024.Settings">
+        <item name="android:textColor">@color/icon2024_gray800</item>
+        <item name="android:textColorPrimary">@color/icon2024_gray800</item>
+         <item name="android:textColorSecondary">@color/icon2024_gray800</item>
+    </style>
+
+     <style name="AppBaseTheme.Icon2024.Home">
+          <item name="toolbarLogo">@drawable/ic_menu_white_24dp</item>
+     </style>
+
+
+    <style name="AppDialogTheme.Icon2024" parent="Theme.AppCompat.Light.Dialog">
+        <!-- This is the default starting API23. In any case the title is always left-justified so it's best to not use it. -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="colorAccent">@color/icon2024_blue600</item>
+        <item name="android:textColorPrimary">@color/icon2024_gray800</item>
+        <item name="borderlessButtonColor">@color/icon2024_blue600</item>
+        <item name="android:layoutDirection">rtl</item>
+    </style>
+
+    <style name="AppAlertDialogTheme.Icon2024" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/icon2024_blue600</item>
+        <item name="android:textColorPrimary">@color/icon2024_gray800</item>
+        <item name="borderlessButtonColor">@color/icon2024_blue600</item>
+        <item name="android:layoutDirection">rtl</item>
+    </style>
+
+    <style name="AppBaseTheme.Icon2024.Splash">
+        <item name="android:windowBackground">@drawable/icon2024_activities_background</item>
+    </style>
+
+     <style name="TransparentTheme.Icon2024" parent="TransparentTheme">
+          <!-- Custom Tabs -->
+          <item name="customTabsToolbarColor">@color/icon2024_blue600</item>
+     </style>
+</resources>
