@@ -36,7 +36,7 @@
     <application
         android:name="amai.org.conventions.ConventionsApplication"
         android:allowBackup="false"
-        android:icon="@mipmap/olamot2024_app_icon"
+        android:icon="@mipmap/icon2024_app_icon"
         android:installLocation="auto"
         android:label="@string/app_name"
         android:supportsRtl="true"
