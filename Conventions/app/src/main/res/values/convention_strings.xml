@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Relevant to all Icon conventions (convention/festival strings) -->
-    <string name="missing_play_services_dialog_message">על מנת לקבל התראות במהלך הכנס ולצפות בדרכי הגעה, יש להתקין או לעדכן את Google play services ולוודא שהשירות פעיל</string>
-    <string name="convention_feedback_title">מלא פידבק על הכנס</string>
-    <string name="question_liked">באיזו מידה נהנית מהכנס?</string>
-    <string name="configure_notifications_dialog_message">באפליקציה זו נשלחות התראות בזמן הכנס על אירועים שהוספת למועדפים ועדכונים הנוגעים לכנס. ניתן לשנות את הגדרות קבלת ההתראות בכל זמן דרך מסך ההגדרות.</string>
-    <string name="home_convention_ended">הכנס נגמר</string>
-    <string name="notification_channel_description_notifications">הודעות בזמן אמת מהנהלת הכנס</string>
+    <string name="missing_play_services_dialog_message">על מנת לקבל התראות במהלך הפסטיבל ולצפות בדרכי הגעה, יש להתקין או לעדכן את Google play services ולוודא שהשירות פעיל</string>
+    <string name="convention_feedback_title">מלא פידבק על הפסטיבל</string>
+    <string name="question_liked">באיזו מידה נהנית מהפסטיבל?</string>
+    <string name="configure_notifications_dialog_message">באפליקציה זו נשלחות התראות בזמן הפסטיבל על אירועים שהוספת למועדפים ועדכונים הנוגעים לפסטיבל. ניתן לשנות את הגדרות קבלת ההתראות בכל זמן דרך מסך ההגדרות.</string>
+    <string name="home_convention_ended">הפסטיבל נגמר</string>
+    <string name="notification_channel_description_notifications">הודעות בזמן אמת מהנהלת הפסטיבל</string>
 
     <!-- Relevant to all sf-f conventions -->
     <string name="arrival_methods_marker_name">%s - אשכול פיס</string>
     <string name="my_event_share_link">http://play.google.com/store/apps/details?id=sff.org.conventions</string>
 
     <!-- Relevant to all Icon conventions -->
-    <string name="app_name">כנס עולמות</string>
-    <string name="my_events_no_data">הוסף אירוע לאירועים שלי ע\"י לחיצה על הכוכב בדף האירוע או ברשימת האירועים, או ע\"י יבוא מאתר עולמות</string>
+    <string name="app_name">פסטיבל אייקון</string>
+    <string name="my_events_no_data">הוסף אירוע לאירועים שלי ע\"י לחיצה על הכוכב בדף האירוע או ברשימת האירועים, או ע\"י יבוא מאתר אייקון</string>
     <string name="my_events_no_data_no_login">הוסף אירוע לאירועים שלי ע\"י לחיצה על הכוכב בדף האירוע או ברשימת האירועים</string>
 
     <!-- Relevant to this specific convention -->
@@ -33,92 +33,104 @@
 <h2><strong>הקרנות מיוחדות לילדים בדיבוב לעברית:</strong></h2>
 <p><span style="font-size: 14pt"><strong>למועדי ההקרנות </strong><strong>ולהזמנת כרטיסים אנא בקרו <a href="https://www.cinema.co.il/series/%D7%A1%D7%95%D7%9B%D7%95%D7%AA-%D7%9C%D7%99%D7%9C%D7%93%D7%99%D7%9D/">באתר סינמטק תל אביב</a></strong></span></p>
 ]]></string>
-    <!-- Taken from https://2024.olamot-con.org.il/about/  -->
+    <!-- Taken from https://2024.iconfestival.org.il/about/  -->
     <string name="about_content"><![CDATA[
-<br/>
-<p>הצטרפו אלינו ולמאות חובבים וחובבות מכל הארץ לחגוג את כנס עולמות. בכנס תוכלו למצוא הרצאות, מפגשים, סדנאות ושלל אירועים בתחומי הספרות, הטלוויזיה, הקולנוע, הקומיקס, המדע הפופולרי, האנימה, הספקנות ועוד!</p>
-<p>כנס &quot;עולמות&quot; הוא כנס למדע בדיוני ולפנטזיה שמנוהל על ידי <a href="http://www.sf-f.org.il/">האגודה הישראלית למדע בדיוני ולפנטסיה</a> ו<a href="http://tolkien.org.il/">קהילת טולקין הישראלית</a> מאז 2005. השנה יערך כנס עולמות בנושא &quot;נדודים&quot; בתאריכים 24-25 באפריל 2024, במתחם אשכול פיס, שפרינצק, 4 תל אביב.</p>
-<p>בכנס תוכלו להנות מאירועים שעוסקים במגוון רחב מאוד של יצירות שמרכזן עולמות אחרים ובדיוניים, וכן מיריד דוכני ספרים ופריטים גיקיים אחרים. הכנס מאפשר לחובבים ותיקים וחדשים להכיר ולהנות יחד מתכנים בתחומים האהובים על כולנו, להתווכח על פאנדומים בהפסקות, ליצור חברויות חדשות ולקיים מפגשים של קבוצות קיימות.</p>
-<p>הכנס מאורגן על ידי ולמען חובבי הפנטזיה והמד&quot;ב בארץ. הסגל והצוות המארגן, ההנהלה ומעבירי התוכן מגיעים מתוך הקהילה ועושים זאת בהתנדבות מלאה ולמען הקהילה. ההכנסות מהכנס מוקדשות לצורך כיסוי העלויות של הכנס ולקידום היצירה והעיסוק בז\'אנרים בארץ. בנוסף לכנס &quot;עולמות&quot; ישנם אירועים נוספים לחובבים וחובבות במהלך השנה וניתן למצוא פרטים נוספים בעמוד &quot;<a href="https://2024.olamot-con.org.il/about/organizers/">העמותות המארגנות</a>&quot; או בדוכני העמותות בכנס. בין היתר, בכנס עולמות מתקיימת תחרות כתיבת סיפורים קצרים שמטרתה לעודד יצירה ישראלית מקורית בז\'אנר. בנוסף, הכנס משמש במה להעלאת מחזות מקוריים או בהשראת יצירות קיימות בז\'אנר, וכן מופעים של הרכבים מוזיקליים שממוקדים ביצירות חובבים.</p>
-<p>בואו ליהנות איתנו מאירוע שמצית את הדמיון ואת המחשבה.</p>
-<p>להתראות בעולמות!</p>
+<p>פסטיבל אייקון הוא פסטיבל ארצי שנתי למדע בדיוני, פנטזיה ומשחקי תפקידים, שמתקיים במרכז תל אביב מאז שנת 1998. מדי שנה מושך אליו הפסטיבל קהל של אלפים, צעירים וצעירים ברוחם. השנה יתקיים הפסטיבל בתאריכים 20-22 באוקטובר, בחול המועד סוכות.</p>
+<p>הפסטיבל מציע תוכנית ענפה הכוללת מאות אירועים בתחומי הספרות, הטלוויזיה, הקולנוע, הקומיקס, המדע הפופולרי ועוד. בין התכנים המגוונים מציג הפסטיבל מופעי בידור מקוריים, הרצאות, פאנלים, חידונים, תחרות תחפושות, סדנאות מקצועיות, אירוח של יוצרים ועוד. הפסטיבל מפעיל אולמות רבים במקביל ומציע מתחם ענק של משחקי תפקידים מכל הסוגים, מתחם למוצרי יד שנייה, זירת קרבות ראווה, מתחם משחקי לוח וקלפים ויריד דוכנים הגדול מסוגו בישראל.</p>
+<p>הפסטיבל מעניק למבקריו מגוון הזדמנויות למפגשים ולהיכרות עם חובבים אחרים בטווח רחב של גילאים ותחומי עניין וכך תורם לגיבוש קהילות החובבים בתחומי המדע הבדיוני, הפנטזיה ומשחקי התפקידים בישראל. כמו כן, מוענקים במהלך הפסטיבל פרס גפן ופרס עינת לעידוד היצירה בתחום המדע הבדיוני והפנטזיה וכן פרסים בתחום הקוספליי.</p>
+<p>הפסטיבל מאורגן על ידי האגודה הישראלית למדע בדיוני ולפנטסיה והעמותה למשחקי תפקידים בישראל.</p>
+<p><a title="האגודה הישראלית למדע בדיוני ולפנטסיה" href="http://www.sf-f.org.il/" target="_blank" rel="noopener noreferrer"><strong>האגודה הישראלית למדע בדיוני ולפנטסיה</strong></a>&nbsp;הינה מוסד ללא כוונת רווח (מלכ&quot;ר) שנוסדה על מנת לקדם את תחום המדע הבדיוני והפנטזיה בישראל. האגודה פועלת ברציפות מאז שנת 1996, ופעילותה עד כה כוללת כנסים רבים (פסטיבל &quot;אייקון&quot;, כנס &quot;<a href="http://www.olamot-con.org.il/" target="_blank" rel="noopener noreferrer">עולמות</a>&quot;, כנס &quot;<a href="http://meorot.sf-f.org.il/" target="_blank" rel="noopener noreferrer">מאורות</a>&quot;, ועוד); חלוקת <a href="http://geffen.sf-f.org.il/" target="_blank" rel="noopener noreferrer">הפרס השנתי לספרות מדע בדיוני ופנטזיה ע&quot;ש עמוס גפן ז&quot;ל</a>; חלוקת <a href="http://www.sf-f.org.il/archives/710" target="_blank" rel="noopener noreferrer">מענק שנתי להפקות מקור</a>; הרצאות בנושאי מדע ומדע בדיוני; הקרנות בכורה של סרטי מדע בדיוני ופנטזיה בחסות המפיצים; תרומות ספרים; תחרויות סיפורי מדע בדיוני ופנטזיה מקוריים; מועדון קריאה חודשי; סדנאות כתיבה; הפעלת מגזין מקוון למדע בדיוני ולפנטזיה&nbsp;ופעילויות נוספות. כמו כן מוציאה האגודה לאור מדי שנה את הספר &quot;<a href="http://annual.sf-f.org.il/" target="_blank" rel="noopener noreferrer">היֹה יהיה</a>&quot;: אסופת סיפורי מדע בדיוני ופנטזיה ישראלית מקורית. <strong>כל פעילי האגודה הם מתנדבים המקדישים מזמנם ללא תמורה.</strong> ניתן לקרוא עוד על אודות האגודה, להצטרף ולקרוא כתבות, מאמרים וביקורות בנושאי מדע בדיוני ופנטזיה באתר <a href="http://www.sf-f.org.il/" target="_blank" rel="noopener noreferrer">www.sf-f.org.il</a> . בקרו בדוכן האגודה בפסטיבל ותוכלו להירשם כחברי אגודה ולקבל את המהדורה החדשה של &quot;היה יהיה&quot; וכמובן הנחות לאירועי הפסטיבל ולכנסים נוספים בהפקת האגודה.</p>
+<p><a title="העמותה למשחקי תפקידים בישראל" href="http://www.roleplay.org.il/" target="_blank" rel="noopener noreferrer"><strong>העמותה למשחקי תפקידים בישראל</strong></a> הוקמה בשנת 1999 על ידי חובבים ישראלים ושמה לה למטרה לקדם את המודעות למשחקי התפקידים – תחביב שמושך כיום עשרות מיליוני צעירים ומבוגרים, נשים וגברים, בכל רחבי העולם. במשך שנות פעילותה קיימה העמותה מאות פעילויות, בעבודה התנדבותית של פעילים מסורים, וכן הוציאה לאור ספרים ובטאון. העמותה שותפה בארגון אירועים לאורך השנה, ביניהם&nbsp;פסטיבל אייקון למדע בדיוני, פנטזיה ומשחקי תפקידים. כמו כן היא מספקת ייעוץ בתחומה לגופים מקצועיים ולכלי תקשורת. אתר העמותה: <a href="http://www.roleplay.org.il/" target="_blank" rel="noopener noreferrer">www.roleplay.org.il</a> . בקרו בדוכן העמותה בפסטיבל ותוכלו להירשם למועדון &quot;דרקון&quot; ולקבל הנחות לאירועי הפסטיבל ולכנסים נוספים בהפקת העמותה.</p>
 ]]></string>
     <string name="about_links"><![CDATA[
-<p><a href=\"https://2024.olamot-con.org.il/\">לאתר הכנס</a></p>
+<p><a href=\"https://2024.iconfestival.org.il/\">לאתר הפסטיבל</a></p>
 ]]></string>
     <string name="about_app_content"><![CDATA[
-האפליקציה פותחה על ידי דוד בהט וטל ספן עבור כנס עולמות. בקשות והצעות ניתן לכתוב <a href="market://details?id=sff.org.conventions">בדף האפליקציה בחנות</a>.
+האפליקציה פותחה על ידי דוד בהט וטל ספן עבור פסטיבל אייקון. בקשות והצעות ניתן לכתוב <a href="market://details?id=sff.org.conventions">בדף האפליקציה בחנות</a>.
 <br/>תודות: אלי בויום, איתמר ריינר, גליה בהט, מיה שראל.
-<p><a href=\"https://2024.olamot-con.org.il/app/\">להצהרת הפרטיות</a></p>
+<p><a href=\"https://2024.iconfestival.org.il/app/\">להצהרת הפרטיות</a></p>
 ]]></string>
-    <!-- Copied from https://2024.olamot-con.org.il/info/arrival/
+    <!-- Copied from https://2024.iconfestival.org.il/info/transportation-parking/
     Replaced links to https and fixed moovit link to be direct to the search -->
     <string name="arrival_method_description"><![CDATA[
 <h1>דרכי הגעה וחניה</h1>
-<p>כתובת הכנס: מתחם אשכול פיס, שפרינצק, 4 תל אביב. הכניסה נמצאת ברחוב הארבעה, ליד החניון.</p>
+<p>כתובת הפסטיבל: סינמטק תל אביב ומתחם אשכול הפיס, רחוב הארבעה (פינת שפרינצק 4) תל אביב.</p>
 <h2>תחבורה ציבורית</h2>
-<p><b>מתחנת רכבת השלום</b> אפשר להגיע באמצעות קו 63 של דן (ירידה בתחנת החשמונאים). אפשר גם להגיע רגלית, תחנת הרכבת נמצאת במרחק 15 דקות הליכה ממתחם הכנס. אפשר גם לנסוע תחנה אחת דרומה בקווים 60 או 1600 ולהמשיך ברגל כחמש דקות הליכה.</p>
-<p><b>מהתחנה המרכזית החדשה</b> בתל אביב: קווים 26, 70 של דן (תחנת ירידה באבן גבירול) או קו 5 של דן (תחנת ירידה בשדרות רוטשילד פינת מרמורק, מרחק עשר דקות הליכה ממתחם הכנס).</p>
+<p><b>מתחנת רכבת השלום</b> אפשר להגיע באמצעות קווים 23, 63, 238 של דן וקו 64 של מטרופולין (ירידה בתחנת קניון טי.אל.וי/החשמונאים). אפשר גם להגיע רגלית, תחנת הרכבת נמצאת במרחק 15 דקות הליכה ממתחם הפסטיבל.</p>
+<p><b>מהתחנה המרכזית החדשה</b> בתל אביב: קו 289 של דן (תחנת ירידה בקרליבך) או קווים 51, 53, 60, 160 של דן (ירידה בתחנת ת.רק&quot;ל יהודית/דרך מנחם בגין, מרחק שבע דקות הליכה ממתחם הפסטיבל)</p>
 <h3>קווי לילה:</h3>
-<p>במהלך חול המועד פסח יפעלו קווי לילה מיוחדים בתוך תל אביב וקווים בין-עירוניים לכל הערים המרכזיות בארץ ובתוכן. ב<a href="https://www.kav-layla.co.il/">אתר קווי לילה</a> אפשר להתעדכן בחברות המפעילות את השירות (כולל אגד, דן, ויאוליה, מטרופוליטן, קוים, מטרודן ונתיב אקספרס) בפריסה ארצית ובאפליקציות הסלולריות לתחבורה ציבורית בזמן אמת.</p>
+<p>במהלך חול המועד סוכות יפעלו קווי לילה מיוחדים בתוך תל אביב וקווים בין-עירוניים לכל הערים המרכזיות בארץ ובתוכן. באתר קווי לילה אפשר להתעדכן בחברות המפעילות את השירות (כולל אגד, דן, ויאוליה, מטרופוליטן, קוים, מטרודן, נתיב אקספרס) בפריסה ארצית.</p>
 <h3>הרכבת הקלה – הדנקל:</h3>
-<p>מגיעים עם הקו האדום אל תחנת &quot;יהודית&quot;, עולים למעלה דרך &quot;יציאה A&quot; (מתחם שרונה) ופונים ימינה אל רחוב הארבעה.</p>
+<p><p>מגיעים עם הקו האדום אל תחנת &quot;יהודית&quot;, עולים למעלה דרך &quot;יציאה A&quot; (מתחם שרונה) ופונים ימינה אל רחוב הארבעה.</p></p>
 <h3>רכבות:</h3>
-<p>מידע על שעות פעילות הרכבת בלילה אפשר למצוא ב<a href="https://www.rail.co.il">אתר רכבת ישראל</a>. המתחם נמצא במרחק 15 דקות הליכה לא מאומצת מתחנת רכבת השלום, ואפשר להגיע אליו גם באוטובוס מהתחנה הזו (קו 63) ומתחנות נוספות.</p>
-<p>לנוחותכם, אתם מוזמנים לבדוק דרכי הגעה נוספות באתרים הבאים:</p>
+<p>מידע על שעות פעילות הרכבת בלילה אפשר למצוא באתר רכבת ישראל. המתחם נמצא במרחק 15 דקות הליכה מתחנת רכבת השלום, ואפשר להגיע אליו גם באוטובוס מתחנה זו ומתחנות נוספות.</p>
+<p>לנוחיותכם הנכם מוזמנים לבדוק דרכי הגעה נוספות באתרים הבאים:</p>
 <p><a href="https://moovitapp.com/israel-1/poi/he">www.moovit.co.il</a></p>
 <p><a href="https://www.bus.co.il/">www.bus.co.il</a></p>
 <p><a href="https://bus.gov.il">www.bus.gov.il</a></p>
 <h2>חניה:</h2>
-<p>מגרשי חניה הסמוכים למתחם הכנס:</p>
+<p>מגרשי חניה הסמוכים למתחם הפסטיבל:</p>
 <ul>
-<li>חניון גבעון, לשעבר הארבעה (רחוב החשמונאים)</li>
-<li>חניוני מתחם שרונה (דרך אריה לובה אליאב)</li>
+<li>חניון הארבעה (רחוב החשמונאים)</li>
+<li>חניון גבעון / TLV (רחוב הארבעה)</li>
 </ul>
-
 ]]></string>
     <!-- App accessibility link and accessible programme link were added, and title changed for con accessibility.
-         Apostrophes were escaped. -->
+         Apostrophes were escaped. Content taken from: https://2024.iconfestival.org.il/info/access/ -->
     <!-- To add: accessible map link when it's available. Previously this was:
 <p><a href="http://2019.iconfestival.org.il/%d7%9e%d7%a4%d7%aa-%d7%94%d7%9e%d7%aa%d7%97%d7%9d/">למפה נגישה</a></p>
      -->
     <string name="accessibility_content"><![CDATA[
-<p><b><a href="https://tickets.sf-f.org.il/olamot2024/wp-json/wp_cod/v2/accprog/">לתוכניה נגישה</a></b></p>
+<p><b><a href="https://tickets.sf-f.org.il/icon2024/wp-json/wp_cod/v2/accprog/">לתוכניה נגישה</a></b></p>
 <h1>נגישות באפליקציה</h1>
 <p>מערכת ההפעלה אנדרואיד מאפשרת להפעיל אפשרויות נגישות שונות באפליקציות. <a href="sff.org.conventions://web-content/open-accessibility">לחצו כאן להפעלת אפשרויות הנגישות</a>.</p>
-<h1>נגישות במתחם הכנס</h1>
-<h1>נגישות</h1>
-<p>בכנס פועל צוות שמטרתו להנגיש את הכנס לאנשים עם מוגבלויות שונות. המידע על הנגישות בכנס מפורט למטה לפי סוג המוגבלות. למידע נוסף ולבקשות הנגשה ספציפיות אנא פנו לצוות נגישות בכתובת הדוא&quot;ל <a href="mailto:Access@olamot-con.org.il">Access@olamot-con.org.il</a>. במהלך הכנס ניתן יהיה לפנות גם בטלפון, ווטסאפ, או SMS במספר 058-643-2082.</p>
-<p>גם השנה אפשר יהיה לקבל בכנס <strong>תגי &quot;קדימות בנגישות&quot;</strong>, אותם תוכלו להציג כדי לקבל קדימות בתורים במקום תעודות נכה (מומלץ במיוחד עבור אנשים עם מוגבלות בלתי נראית). את התגים אפשר יהיה לקבל בדוכן המודיעין. למען הסר ספק, אין חובה להסתובב עם תג &quot;קדימות בנגישות&quot;, וניתן להשאירו מוסתר מהעין עד לרגע השימוש בו.</p>
-<p>ייתכנו שינויים, ומומלץ להתעדכן לקראת הכנס.</p>
-<p><strong><u>להלן פירוט הנגישות של מתחמי הכנס על פי סוג המוגבלות:</u></strong></p>
-<p>מוגבלות בתנועה, שימוש בכיסאות גלגלים והליכונים</p>
-<p>אשכול פיס: קומת הקרקע נגישה לכיסאות גלגלים. קיימת מעלית שמובילה לקומה העליונה. כדי להשתמש בה במהלך הכנס אנא פנו לעמדת המודיעין, או לצוות הנגישות של הכנס בטלפון 058-643-2082.</p>
-<p>עירוני א\': המפלס העליון של הקומה הראשונה של בניין העירוני, יהיה נגיש (גם להורים עם עגלות) מהכניסה הצפונית של הבניין. <br>המפלס התחתון של הקומה הראשונה של העירוני, יהיה נגיש מהכניסה הדרומית של הבניין – מכיוון מגרש הכדורסל (גם להורים עם עגלות). <br>בין המפלסים מפרידות כמה מדרגות.</p>
-<p><strong><u>שירותים</u></strong></p>
-<p>שירותים נגישים לאנשים בכיסאות גלגלים נמצאים בקומת הקרקע של אשכול הפיס. שירותים נגישים נוספים נמצאים בבניין הסינמטק (השנה לא יתקיימו בו אירועים של הכנס).</p>
-<p><strong><u>הנגשות נוספות</u></strong></p>
-<p>כניסה מוקדמת לאירועים: אנשים עם מוגבלות יוכלו להיכנס לאירועים מוקדם וללא תור בהצגת תג קדימות בנגישות או תעודת נכה. לכניסה מהירה אנא פנו לסדרן. את תג קדימות בנגישות תוכלו לאסוף בדוכני מודיעין הכנס, הפזורים ברחבי המתחם.</p>
-<p>כניסה עם כלבי שירות: כניסה עם כלבי שירות מותרת לכלל סוגי כלבי השירות. ככלל, אין להיכנס למתחם הכנס עם כלבים שאינם כלבי שירות.</p>
+<h1>נגישות במתחם הפסטיבל</h1>
+<p>בפסטיבל פועל צוות שמטרתו להנגיש את הפסטיבל לאנשים עם מוגבלויות שונות. המידע על הנגישות בפסטיבל מפורט למטה לפי סוג המוגבלות. למידע נוסף ולבקשות הנגשה ספציפיות אנא פנו לצוות נגישות בכתובת הדוא&quot;ל <a href="mailto:access@iconfestival.org.il">access@iconfestival.org.il</a>. במהלך הפסטיבל ניתן יהיה לפנות גם בטלפון, ווטסאפ, או SMS במספר 058-643-2082.</p>
+<p>גם השנה אפשר יהיה לקבל בפסטיבל תגי &quot;קדימות בנגישות&quot;, אותם תוכלו להציג כדי לקבל קדימות בתורים במקום תעודות נכה (מומלץ במיוחד עבור אנשים עם מוגבלות בלתי נראית). את התגים אפשר יהיה לקבל בדוכן המודיעין. למען הסר ספק, אין חובה להסתובב עם תג &quot;קדימות בנגישות&quot;, וניתן להשאירו מוסתר מהעין עד לרגע השימוש בו.</p>
+<p>ייתכנו שינויים, ומומלץ להתעדכן <a href="https://2024.iconfestival.org.il/info/access/">באתר</a> לקראת הפסטיבל.</p>
+<h2><strong>להלן פירוט הנגישות של מתחמי הפסטיבל על פי סוג המוגבלות</strong><strong>:</strong></h2>
+<p><strong>מוגבלות בתנועה, שימוש בכיסאות גלגלים והליכונים</strong></p>
+<p><strong>אשכול פיס:</strong> קומת הקרקע נגישה לכיסאות גלגלים. קיימת מעלית שמובילה לקומה העליונה. כדי להשתמש בה במהלך הפסטיבל אנא פנו לעמדת המודיעין, או לצוות הנגישות של הפסטיבל בטלפון 058-643-2082.</p>
+<p><strong>עירוני א\':</strong> המפלס העליון של הקומה הראשונה של בניין העירוני, יהיה נגיש (גם להורים עם עגלות) מהכניסה הצפונית של הבניין.</p>
+<p><strong>הקומות העליונות של עירוני א\' אינן נגישות לכיסאות גלגלים</strong>.</p>
+<h2><strong>שירותים</strong></h2>
+<p>שירותים נגישים לאנשים בכיסאות גלגלים נמצאים בקומת הקרקע של אשכול הפיס. שירותים נגישים נוספים נמצאים בבניין הסינמטק (השנה לא יתקיימו בו אירועים של הפסטיבל).</p>
+<h2><strong>הנגשות נוספות</strong></h2>
+<p><strong>כניסה מוקדמת לאירועים:</strong> אנשים עם מוגבלות יוכלו להיכנס לאירועים מוקדם וללא תור בהצגת תג <strong>קדימות בנגישות</strong> או תעודת נכה. לכניסה מהירה אנא פנו לסדרן. את תג<strong> קדימות בנגישות</strong> תוכלו לאסוף בדוכני מודיעין הפסטיבל, הפזורים ברחבי המתחם.</p>
+<p><strong>כניסה עם כלבי שירות:</strong> כניסה עם כלבי שירות מותרת לכלל סוגי כלבי השירות. ככלל, אין להיכנס למתחם הפסטיבל עם כלבים שאינם כלבי שירות.</p>
 ]]></string>
-    <string name="discounts_main_title">הטבות וחסויות</string>
+    <string name="discounts_main_title">הטבות</string>
     <string name="discounts_restaurants_title">הטבות במסעדות</string>
     <string name="discounts_restaurants_overview">המסעדות הבאות מעניקות הנחה בהצגת כרטיס או תג של הכנס, במהלך שני הימים של הכנס:</string>
-    <string name="discounts_buzza">בוזה\nכדור אחד ב-16 שח\n2 כדורים ב-22 שח\nלכל באות ובאי הכנס\n<a href="https://www.buzaisrael.co.il/">לביקור באתר בוזה</a></string>
-    <string name="discounts_aroma">ארומה. הארבעה 24.\n10% הנחה למעט דילים קיימים, בסניף רחוב הארבעה בלבד.\n<a href="https://www.aroma.co.il/store/%D7%94%D7%90%D7%A8%D7%91%D7%A2%D7%94-%D7%AA%D7%9C-%D7%90%D7%91%D7%99%D7%91/">לביקור באתר ארומה</a></string>
-    <string name="discounts_tlab">T LAB. החשמונאים 103.\nתוספת באבלס חינם בכל משקה, בהצגת כרטיס כנס.\n<a href="https://wissotzky-tlab.co.il/?utm_source=google&amp;utm_medium=search&amp;utm_campaign=modern_talking_search_aug_23&amp;gad_source=1&amp;gclid=CjwKCAjw17qvBhBrEiwA1rU9w4xJ1f873HGNpJYfE8ILjcbj4OxoE_Gzb73k_tsxK_ainRjXf69TfhoChuEQAvD_BwE">לביקור באתר T LAB</a></string>
+    <string name="discounts_buzza">כדור אחד 16 ש\"ח (במקום 18), 2 כדורים 23 ש\"ח (במקום 25)\n<a href="https://buzaicecream.co.il/">לאתר בוזה</a></string>
+    <string name="discounts_aroma">10% הנחה, לא כולל דילים קיימים. סניף הארבעה בלבד\n<a href="https://www.aroma.co.il/store/%D7%94%D7%90%D7%A8%D7%91%D7%A2%D7%94-%D7%AA%D7%9C-%D7%90%D7%91%D7%99%D7%91/">לאתר ארומה</a></string>
+    <string name="discounts_tlab">תוספת באבלס על חשבון הבית\n<a href="https://wissotzky-tlab.co.il/%d7%94%d7%a1%d7%a0%d7%99%d7%a4%d7%99%d7%9d-%d7%a9%d7%9c%d7%a0%d7%95/">לאתר T LAB</a></string>
+    <string name="discounts_night_cookie">עוגיה חינם על קניית 3 עוגיות ומעלה\n<a href="https://www.nightcookie.com/">לאתר עוגיית לילה</a></string>
+    <string name="discounts_oban_koban">10% הנחה בין השעות 11:30-18:00\n<a href="https://www.obankoban.co.il/">לאתר אובן קובן</a></string>
+    <string name="discounts_suduch">טוסט + שתייה + נקניקיית נשנוש ב-45₪ (במקום 55)\n<a href="https://suduch.co.il/">לאתר סודוך</a></string>
+    <string name="discounts_memphis">10% הנחה לא כולל עסקיות צהריים\n<a href="https://www.memphis.co.il/about/">לאתר ממפיס</a></string>
+    <string name="discounts_storytel">25% הנחה לשנה על מינוי לספרים מוקלטים ודיגיטלים בעברית ובאנגלית\n<a href="https://www.storytel.com/il">לאתר storytel</a></string>
     <string name="discounts_title">הטבות בחנויות</string>
     <string name="discounts_overview">החנויות הבאות מעניקות הנחה בהצגת כרטיס או תג של הכנס, במהלך שני הימים של הכנס:</string>
     <string name="discounts_evrit">עברית\n10% הנחה על כל ספרי המד\"ב והפנטזיה\nההנחה בימי הכנס בלבד\nקוד להנחה 10%: OLAMOT10\n<a href="https://www.e-vrit.co.il/Category/11/%D7%9E%D7%93_%D7%91_%D7%95%D7%A4%D7%A0%D7%98%D7%96%D7%99%D7%94">לביקור באתר עברית</a></string>
     <string name="discounts_evrit_recursion">ספר מתנה בחנות עברית\nספר מתנה! \"רקורסיה\" מאת בלייק קראוץ\' להורדה בחינם.\nההטבה בימי הכנס בלבד\nקוד: OLAMOT\n<a href="https://www.e-vrit.co.il/Product/23635/%D7%A8%D7%A7%D7%95%D7%A8%D7%A1%D7%99%D7%94">לעמוד הספר \"רקורסיה\"</a></string>
-    <string name="discounts_kingdom">הממלכה\nמעטפת Funpack פוקימון בהצגת כרטיס בדוכן\n<a href="https://thekingdom.co.il/">לביקור באתר הממלכה</a></string>
-    <string name="discounts_sponsors_title">חסויות</string>
+    <string name="discounts_sponsors_title">השותפים שלנו</string>
     <string name="discounts_sponsors_overview">העסקים הבאים העניקו חסות לפסטיבל אייקון:</string>
-    <string name="discounts_gaming_land">גיימינג לנד\n5% הנחה בדוכן בהצגת כרטיס\n<a href="https://www.gamingland.co.il/">לביקור באתר גיימינג לנד</a></string>
-    <string name="discounts_iac">IAC – המכללה הישראלית לאנימציה ועיצוב\nתודה למכללה על החסות מוזמנים.ות לבקר בדוכן\n<a href="https://www.ani-mator.com/">לביקור במכללה לאנימציה</a></string>
-    <string name="discounts_tiltan">תילתן המכללה לעיצוב ולתקשורת חזותית\nתודה למכללה על החסות מוזמנים.ות לבקר בדוכן\n<a href="https://www.tiltan.co.il/">לביקור במכללת תילתן</a></string>
-    <string name="discounts_kineret">כנרת זמורה דביר\nתחרות הסיפורים של כנס עולמות בחסות הוצאת כנרת-זמורה-דביר\n<a href="https://www.kinbooks.co.il/?utm_source=google&amp;utm_medium=cpc&amp;utm_campaign=kin_books&amp;utm_id=kin_books&amp;utm_term=kin_books&amp;gad_source=1&amp;gclid=CjwKCAiA0PuuBhBsEiwAS7fsNbe87oc0MbGRCxY3f7ItpXikYqwTmc8rf4GxFyg_q_Ig2x5rvuRiixoC0qgQAvD_BwE">לביקור באתר כנרת זמורה דביר</a></string>
-    <string name="discounts_marilyn">מרלין האדומה / דניאלה ג\'וליה טראוב\n<a href="https://bit.ly/RedMarilynUrion">לרכישת ספר הדיסטופיה הישראלי החדש</a></string>
+    <string name="discounts_dizengoff">דיזנגוף סנטר\n<a href="https://www.dizengof-center.co.il/">לביקור באתר</a></string>
+    <string name="discounts_tsameret">הוצאה לאור - ספרי צמרת\n<a href="https://zbooks.co.il/?gad_source=1&amp;gclid=Cj0KCQjwhb60BhClARIsABGGtw_MH17b4hBFPlwQCToPb--XH93r6d5hcIT9sdzmDu3Lhp0DM8Or-C4aAsE8EALw_wcB">לביקור באתר</a></string>
+    <string name="discounts_emily">בוטיק Out&amp;About\n<a href="https://www.facebook.com/outandaboutemily?mibextid=ZbWKwL">לביקור באתר</a></string>
+    <string name="discounts_kingdom">הממלכה - משחקי לוח, משחקי תפקידים ועוד\n<a href="https://thekingdom.co.il/">לביקור באתר</a></string>
+    <string name="discounts_youdo">יודו מתמחה בחינוך הרפתקני ופיתוח אמצעי הדרכה ולמידה\n<a href="https://youdoadventures.com/">לביקור באתר</a></string>
+    <string name="discounts_cerebro">סרברו מפתחת חוויות משחקיות המעבירות תוכן וידע\n<a href="https://cerebro.co.il/">לביקור באתר</a></string>
+    <string name="discounts_dov">משחקים וספרים לחינוך מדעי ושיווין חברתי\n<a href="https://dovladaat.com/shop">לביקור באתר</a></string>
+    <string name="discounts_keren_hashefa">קרן השפע - יוצרת הרפתקאות ומשחקי דמיון\n<a href="https://קרן-השפע.co.il/">לביקור באתר</a></string>
+    <string name="discounts_animaya">אנימאיה - המרכז לאנימציה ומדיה דיגיטלית\n<a href="https://animaya.co.il/?gad_source=1&amp;gclid=CjwKCAjwnK60BhA9EiwAmpHZw5KIMfzVWfvGkCrYc6ZrzJgYLqhG-xHtncRRTd-GpZJhsH4q1cuVrBoCfDkQAvD_BwE">לביקור באתר</a></string>
+    <string name="discounts_philharmonicon">תוכנית \"מפתח\" של התזמורת הפילהרמונית הישראלית\n<a href="https://www.ipo.co.il/%D7%AA%D7%95%D7%9B%D7%A0%D7%99%D7%AA-%D7%9E%D7%A4%D7%AA%D7%97/">לביקור באתר</a></string>
+    <string name="discounts_hanut">החנות - קבוצת תיאטרון\n<a href="https://www.hanut31.co.il/">לביקור באתר</a></string>
+    <string name="discounts_iac">IAC - המכללה הישראלית לאנימציה ועיצוב\n<a href="https://www.ani-mator.com/">לביקור באתר</a></string>
+    <string name="discounts_bezalel">בצלאל המחלקה לאומנויות המסך\n<a href="https://www.bezalel.ac.il/">לביקור באתר</a></string>
+    <string name="discounts_seminar">קהילת למידה של פנטזיה, מדע בדיוני ומשחקי תפקידים בתואר ראשון עם תעודת הוראה\n<a href="https://www.smkb.ac.il/">לביקור באתר</a></string>
+
     <string name="activities_main_title">פעילויות במתחם</string>
     <string name="activities_dizengoff">דיזינגוף סנטר\nקווסט לאיסוף קוביות DND בחסות הסנטר! פרטים בעמדות המודיעין\n<a href="https://2024.olamot-con.org.il/dizengof-center-adventure/">לפרטים נוספים על הקווסט</a>\n<a href="https://www.dizengof-center.co.il/">לביקור בדיזינגוף סנטר</a></string>
     <string name="activities_youdo">יודו\nחינוך הרפתקני ופיתוח אמצעי הדרכה ולמידה.\n<a href="https://youdoadventures.com/">לביקור ביודו</a>\nיודו וסרברו מביאים <a href="https://2024.olamot-con.org.il/services/the-adventure/">הרפתקה במתחם לאורך כל הכנס</a>, פרטים בעמדות המודיעין</string>

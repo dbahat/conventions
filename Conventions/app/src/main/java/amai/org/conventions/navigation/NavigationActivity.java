@@ -47,6 +47,7 @@ import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.notifications.PlayServicesInstallation;
 import amai.org.conventions.notifications.PushNotification;
 import amai.org.conventions.notifications.PushNotificationDialogPresenter;
+import amai.org.conventions.secondhand.SecondHandActivity;
 import amai.org.conventions.settings.SettingsActivity;
 import amai.org.conventions.updates.UpdatesActivity;
 import amai.org.conventions.utils.Dates;
@@ -206,14 +207,14 @@ public abstract class NavigationActivity extends AppCompatActivity {
 			items.add(new NavigationItem(MapActivity.class, getString(R.string.map), ContextCompat.getDrawable(this, android.R.drawable.ic_dialog_map), shouldDisplayIcon));
 		}
 		items.add(new NavigationItem(UpdatesActivity.class, getString(R.string.updates), ContextCompat.getDrawable(this, android.R.drawable.stat_notify_sync_noanim), shouldDisplayIcon));
-//		items.add(new NavigationItem(SecondHandActivity.class, getString(R.string.second_hand), ContextCompat.getDrawable(this, R.drawable.ic_attach_money_white), shouldDisplayIcon));
+		items.add(new NavigationItem(SecondHandActivity.class, getString(R.string.second_hand), ContextCompat.getDrawable(this, R.drawable.ic_attach_money_white), shouldDisplayIcon));
 		items.add(new NavigationItem(ArrivalMethodsActivity.class, getString(R.string.arrival_methods), ContextCompat.getDrawable(this, R.drawable.directions), shouldDisplayIcon));
 
 		if (Convention.getInstance().canFillFeedback()) {
 			items.add(new NavigationItem(FeedbackActivity.class, getString(R.string.feedback), ContextCompat.getDrawable(this, R.drawable.feedback_menu_icon), shouldDisplayIcon));
 		}
 		items.add(new NavigationItem(DiscountsActivity.class, getString(R.string.discounts), ContextCompat.getDrawable(this, R.drawable.ic_card_giftcard_white), shouldDisplayIcon));
-		items.add(new NavigationItem(ActivitiesActivity.class, getString(R.string.activities), ContextCompat.getDrawable(this, R.drawable.ic_card_giftcard_white), shouldDisplayIcon));
+//		items.add(new NavigationItem(ActivitiesActivity.class, getString(R.string.activities), ContextCompat.getDrawable(this, R.drawable.ic_card_giftcard_white), shouldDisplayIcon));
 		items.add(new NavigationItem(WebContentActivity.AccessibilityActivity.class, getString(R.string.accessibility), ContextCompat.getDrawable(this, R.drawable.baseline_accessibility_new_white_18), null, true, true));
 		items.add(new NavigationItem(AboutActivity.class, getString(R.string.about), ContextCompat.getDrawable(this, R.drawable.ic_action_about), shouldDisplayIcon));
 //		items.add(new NavigationItem(SettingsActivity.class, getString(R.string.settings), ContextCompat.getDrawable(this, R.drawable.ic_settings), shouldDisplayIcon));
