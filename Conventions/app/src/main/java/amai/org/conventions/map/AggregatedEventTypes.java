@@ -35,6 +35,7 @@ public class AggregatedEventTypes {
 						new EventType("הקרנה מונחית"),
 						new EventType("מופע"),
 						new EventType("סרט"),
+						new EventType("שעשועון"),
 						new EventType("מופע מוזיקלי"))),
 				new AggregatedType("מפגשים", Arrays.asList(
 					new EventType("מפגש")))
