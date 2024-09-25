@@ -112,8 +112,6 @@
     <string name="discounts_storytel">25% הנחה לשנה על מינוי לספרים מוקלטים ודיגיטלים בעברית ובאנגלית\n<a href="https://www.storytel.com/il">לאתר storytel</a></string>
     <string name="discounts_title">הטבות בחנויות</string>
     <string name="discounts_overview">החנויות הבאות מעניקות הנחה בהצגת כרטיס או תג של הכנס, במהלך שני הימים של הכנס:</string>
-    <string name="discounts_evrit">עברית\n10% הנחה על כל ספרי המד\"ב והפנטזיה\nההנחה בימי הכנס בלבד\nקוד להנחה 10%: OLAMOT10\n<a href="https://www.e-vrit.co.il/Category/11/%D7%9E%D7%93_%D7%91_%D7%95%D7%A4%D7%A0%D7%98%D7%96%D7%99%D7%94">לביקור באתר עברית</a></string>
-    <string name="discounts_evrit_recursion">ספר מתנה בחנות עברית\nספר מתנה! \"רקורסיה\" מאת בלייק קראוץ\' להורדה בחינם.\nההטבה בימי הכנס בלבד\nקוד: OLAMOT\n<a href="https://www.e-vrit.co.il/Product/23635/%D7%A8%D7%A7%D7%95%D7%A8%D7%A1%D7%99%D7%94">לעמוד הספר \"רקורסיה\"</a></string>
     <string name="discounts_sponsors_title">השותפים שלנו</string>
     <string name="discounts_sponsors_overview">העסקים הבאים העניקו חסות לפסטיבל אייקון:</string>
     <string name="discounts_dizengoff">דיזנגוף סנטר\n<a href="https://www.dizengof-center.co.il/">לביקור באתר</a></string>
@@ -132,13 +130,6 @@
     <string name="discounts_seminar">קהילת למידה של פנטזיה, מדע בדיוני ומשחקי תפקידים בתואר ראשון עם תעודת הוראה\n<a href="https://www.smkb.ac.il/">לביקור באתר</a></string>
 
     <string name="activities_main_title">פעילויות במתחם</string>
-    <string name="activities_dizengoff">דיזינגוף סנטר\nקווסט לאיסוף קוביות DND בחסות הסנטר! פרטים בעמדות המודיעין\n<a href="https://2024.olamot-con.org.il/dizengof-center-adventure/">לפרטים נוספים על הקווסט</a>\n<a href="https://www.dizengof-center.co.il/">לביקור בדיזינגוף סנטר</a></string>
-    <string name="activities_youdo">יודו\nחינוך הרפתקני ופיתוח אמצעי הדרכה ולמידה.\n<a href="https://youdoadventures.com/">לביקור ביודו</a>\nיודו וסרברו מביאים <a href="https://2024.olamot-con.org.il/services/the-adventure/">הרפתקה במתחם לאורך כל הכנס</a>, פרטים בעמדות המודיעין</string>
-    <string name="activities_cerebro">סרברו\nסרברו מפתחת חוויות משחקיות מעבירות תוכן וידע לחברות, ארגונים, מוזיאונים, ועוד.\n<a href="https://cerebro.co.il/">לביקור בסרברו</a>\nיודו וסרברו מביאים <a href="https://2024.olamot-con.org.il/services/the-adventure/">הרפתקה במתחם לאורך כל הכנס</a>, פרטים בעמדות המודיעין</string>
-    <string name="activities_gaming">משחקי מחשב\nמתחם משחקי מחשב חדשים תוצרת הארץ שיפעל לאורך הכנס כולו\n<a href="https://2024.olamot-con.org.il/services/games-station/">לפרטים על מתחם משחקי המחשב לחצו כאן</a></string>
-    <string name="activities_antiquities">רשות העתיקות\n<a href="https://2024.olamot-con.org.il/services/antiquities-activity/">משחקי רצפה ענקיים</a> במתחם הקהילתי</string>
-    <string name="activities_emily">Out &amp; About – אמילי רייכר\nהגרלה בדוכן, כל משתתפ.ת זוכה!*\n*ההגרלה באחריות המפעילה בלבד\n<a href="https://www.facebook.com/outandaboutemily/?paipv=0&amp;eav=AfbXdlwpgPGs4ypd8IuPy5YrvLhLQIqxnuoIrsJThvLA4k2xNb3WHFkWIu8KL1ei5Pk&amp;_rdr">לביקור ב-Out &amp; About</a></string>
-    <string name="activities_legion501">לגיון 501\nלגיון 501 אוספים תרומות ספרים, משחקים, קוספליי ועוד לטובת חלוקה בבתי חולים ומוסדות אחרים\n<a href="https://www.501.org.il/">לביקור בלגיון 501</a></string>
 
     <string name="physical_only_event_desc">האירוע יועבר באופן פיזי בלבד.</string>
     <string name="virtual_only_event_desc">האירוע יועבר באופן וירטואלי בלבד.</string>
