@@ -265,7 +265,12 @@
     <string name="second_hand_show_favorites">מועדפים בהתחלה</string>
     <string name="show_user_details">הצג פרטי משתמש</string>
     <string name="inst_show_qr">הצג את קוד ה-QR בקופות העצמאיות עבור איסוף מהיר של הכרטיסים:</string>
-    <string name="inst_qr_error">לא ניתן להציג את קוד ה-QR. יש להתחבר שנית דרך כפתור יבוא כרטיסים.</string>
+    <string name="inst_qr_error"><![CDATA[
+לא ניתן להציג את קוד ה-QR. <a href="showUserId">לחץ כאן</a> כדי לנסות שנית.
+]]></string>
+    <string name="inst_qr_missing"><![CDATA[
+קנית כרטיסים? <a href="showUserId">לחץ כאן</a> כדי להציג את קוד ה-QR
+]]></string>
     <string name="inst_user">שם משתמש: %s</string>
     <string name="inst_user_id">מספר משתמש: %s</string>
     <string name="inst_display_user_id"><![CDATA[

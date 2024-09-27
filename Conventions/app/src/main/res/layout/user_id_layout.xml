@@ -48,7 +48,7 @@
             android:id="@+id/user_id_qr_error"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/red"
+            android:textColor="?userDetailsTextColor"
             android:text="@string/inst_qr_error"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"

@@ -231,9 +231,15 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 			ConventionsApplication.settings.setUser(user);
 			saveUserQR(token, user);
 			saveUserId(token);
-		} else if (ConventionsApplication.settings.getUserId() == null) {
-			// Update only the user ID if it was not available before
-			saveUserId(token);
+		} else {
+			if (!Convention.getInstance().getStorage().hasUserQR()) {
+				// Update only the user QR if it was not available before
+				saveUserQR(token, user);
+			}
+			if (ConventionsApplication.settings.getUserId() == null) {
+				// Update only the user ID if it was not available before
+				saveUserId(token);
+			}
 		}
 	}
 
@@ -309,17 +315,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 				dialogView.findViewById(R.id.separator).setVisibility(View.GONE);
 			}
 
-			ImageView userIdQRImageView = dialogView.findViewById(R.id.user_id_qr);
-			TextView userIdQRErrorText = dialogView.findViewById(R.id.user_id_qr_error);
-			InputStream userQRInputStream = Convention.getInstance().getStorage().getUserQRInputStream();
-			if (userQRInputStream == null) {
-				userIdQRErrorText.setVisibility(View.VISIBLE);
-				userIdQRImageView.setVisibility(View.GONE);
-			} else {
-				userIdQRErrorText.setVisibility(View.GONE);
-				userIdQRImageView.setVisibility(View.VISIBLE);
-				userIdQRImageView.setImageDrawable(new BitmapDrawable(getResources(), userQRInputStream));
-			}
+			setupUserQR(dialogView);
 
 			TextView userView = dialogView.findViewById(R.id.user);
 			userView.setText(getString(R.string.inst_user, user));
@@ -389,6 +385,24 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		}
 	}
 
+	private void setupUserQR(View dialogView) {
+		ImageView userIdQRImageView = dialogView.findViewById(R.id.user_id_qr);
+		TextView userIdQRErrorText = dialogView.findViewById(R.id.user_id_qr_error);
+		View brightnessView = dialogView.findViewById(R.id.increase_brightness_toggle);
+		InputStream userQRInputStream = Convention.getInstance().getStorage().getUserQRInputStream();
+		if (userQRInputStream == null) {
+			userIdQRErrorText.setVisibility(View.VISIBLE);
+			userIdQRImageView.setVisibility(View.GONE);
+			brightnessView.setVisibility(View.GONE);
+			setupTextViewWithLink(getString(R.string.inst_qr_missing), userIdQRErrorText, dialogView);
+		} else {
+			userIdQRErrorText.setVisibility(View.GONE);
+			userIdQRImageView.setVisibility(View.VISIBLE);
+			userIdQRImageView.setImageDrawable(new BitmapDrawable(getResources(), userQRInputStream));
+			brightnessView.setVisibility(View.VISIBLE);
+		}
+	}
+
 	private void setupUserId(View dialogView) {
 		String userId = ConventionsApplication.settings.getUserId();
 		TextView userIdView = dialogView.findViewById(R.id.user_id);
@@ -401,28 +415,31 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		} else {
 			userIdView.setVisibility(View.GONE);
 			noUserIdView.setVisibility(View.VISIBLE);
-
-			// Handle the link click
-			SpannableStringBuilder spanBuilder = new SpannableStringBuilder(Html.fromHtml(getString(R.string.inst_display_user_id)));
-			URLSpan[] spans = spanBuilder.getSpans(0, spanBuilder.length(), URLSpan.class);
-			for (URLSpan span : spans) {
-				spanBuilder.setSpan(new ClickableSpan() {
-					@Override
-					public void onClick(@NonNull View widget) {
-						// There is only one link, but checking it anyway
-						if ("showUserId".equals(span.getURL())) {
-							userIdDialogView = dialogView;
-							Intent intent = new Intent(MyEventsActivity.this, AuthorizationActivity.class);
-							userIdAuthResultLauncher.launch(intent);
-						}
-					}
-				}, spanBuilder.getSpanStart(span), spanBuilder.getSpanEnd(span), spanBuilder.getSpanFlags(span));
-				spanBuilder.removeSpan(span);
-			}
-			noUserIdView.setText(spanBuilder);
-			noUserIdView.setMovementMethod(LinkMovementMethod.getInstance());
-			noUserIdView.setHighlightColor(Color.TRANSPARENT);
+			setupTextViewWithLink(getString(R.string.inst_display_user_id), noUserIdView, dialogView);
 		}
+	}
+
+	private void setupTextViewWithLink(String stringWithLink, TextView textView, View dialogView) {
+		SpannableStringBuilder spanBuilder = new SpannableStringBuilder(Html.fromHtml(stringWithLink));
+		URLSpan[] spans = spanBuilder.getSpans(0, spanBuilder.length(), URLSpan.class);
+		for (URLSpan span : spans) {
+			spanBuilder.setSpan(new ClickableSpan() {
+				@Override
+				public void onClick(@NonNull View widget) {
+					// There is only one link, but checking it anyway
+					if ("showUserId".equals(span.getURL())) {
+						userIdDialogView = dialogView;
+						Intent intent = new Intent(MyEventsActivity.this, AuthorizationActivity.class);
+						userIdAuthResultLauncher.launch(intent);
+					}
+				}
+			}, spanBuilder.getSpanStart(span), spanBuilder.getSpanEnd(span), spanBuilder.getSpanFlags(span));
+			spanBuilder.removeSpan(span);
+		}
+
+		textView.setText(spanBuilder);
+		textView.setMovementMethod(LinkMovementMethod.getInstance());
+		textView.setHighlightColor(Color.TRANSPARENT);
 	}
 
 	private void userIdAuthResult(ActivityResult activityResult) {
@@ -430,6 +447,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 			afterRequestCompleted.run();
 			runOnUiThread(() -> {
 				if (userIdDialogView != null) {
+					setupUserQR(userIdDialogView);
 					setupUserId(userIdDialogView);
 					userIdDialogView = null;
 				}
@@ -570,6 +588,12 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 					String responseBody = responseBuilder.toString();
 					Log.e(TAG, "Could not read user QR, error code: " + responseCode + ", response is: " + responseBody);
 				}
+
+				if (responseCode == HttpURLConnection.HTTP_BAD_REQUEST) {
+					// User has not connected to the programme yet, QR is not available
+					return;
+				}
+
 				throw new RuntimeException("Could not read user QR, error code: " + responseCode);
 			}
 			inputStream = (InputStream) request.getRequest().getContent();

@@ -400,6 +400,10 @@ public class ConventionStorage {
 		return openTextFile(getUserQRFileName());
 	}
 
+	public boolean hasUserQR() {
+		return context.getFileStreamPath(getUserQRFileName()).exists();
+	}
+
 	private static InputStream openTextFile(String fileName) {
 		try {
 			return context.openFileInput(fileName);
