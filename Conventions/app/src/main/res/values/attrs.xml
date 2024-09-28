@@ -739,6 +739,8 @@
         <attr name="state_event_feedback_sent" format="boolean"/>
         <attr name="state_event_feedback_filled" format="boolean"/>
         <attr name="state_event_feedback_can_send" format="boolean"/>
+        <!-- Second hand specific states -->
+        <attr name="state_favorite_second_hand" format="boolean"/>
     </declare-styleable>
 
     <declare-styleable name="HomeState">

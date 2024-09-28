@@ -9,6 +9,7 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.navigation.NavigationActivity;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -61,6 +62,10 @@ public class SecondHandActivity extends NavigationActivity {
 		});
 
 		// Setup tabs
+		Drawable tabIndicator = ThemeAttributes.getDrawable(this, R.attr.selectedTabIndicator);
+		if (tabIndicator != null) {
+			tabLayout.setSelectedTabIndicator(tabIndicator);
+		}
 		tabLayout.setupWithViewPager(viewPager, false);
 
 		viewPager.setCurrentItem(0, false);

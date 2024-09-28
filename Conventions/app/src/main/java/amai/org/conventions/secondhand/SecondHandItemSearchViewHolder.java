@@ -34,7 +34,7 @@ class SecondHandItemSearchViewHolder extends RecyclerView.ViewHolder {
 
 	private void setFavorite(boolean isFavorite) {
 		favoriteIcon.setImageDrawable(ThemeAttributes.getDrawable(itemView.getContext(), R.attr.eventFavoriteIcon));
-		StateList faveState = new StateList();
+		StateList faveState = new StateList(R.attr.state_favorite_second_hand);
 		if (isFavorite) {
 			faveState.add(R.attr.state_event_favorite);
 		}
