@@ -215,7 +215,7 @@
         <!-- Second Hand Screen -->
         <item name="secondHandFormColor">@drawable/icon2024_second_hand_form_text_color</item>
         <item name="secondHandItemStatusColor">@drawable/icon2024_second_hand_item_status_text_color</item>
-        <item name="secondHandItemsDivider">@drawable/second_hand_item_list_divider</item>
+        <item name="secondHandItemsDivider">@drawable/icon2024_second_hand_item_list_divider</item>
         <item name="secondHandFilterColor">@color/icon2024_cream1000</item>
         <item name="secondHandSelectedFilterColor">@color/icon2024_blue600</item>
         <!-- Discounts activity -->
