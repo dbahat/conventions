@@ -192,7 +192,7 @@
         <item name="eventVoteBoxColor">@color/icon2024_blue900</item>
         <item name="eventVoteTextColor">@color/icon2024_blue100</item>
         <!-- Map Screen -->
-        <item name="mapBackground">?activitiesBackground</item>
+        <item name="mapBackground">@drawable/icon2024_map_background</item>
         <item name="locationDetailsBackground">@color/white</item>
         <item name="locationDetailsTopLineColor">@color/transparent</item>
         <item name="iconClearMap">@drawable/ic_clear_black</item>

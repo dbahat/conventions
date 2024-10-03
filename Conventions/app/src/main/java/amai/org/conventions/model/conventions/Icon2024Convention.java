@@ -17,6 +17,7 @@ import amai.org.conventions.feedback.forms.FeedbackForm;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.FeedbackQuestion;
+import amai.org.conventions.model.Floor;
 import amai.org.conventions.model.Hall;
 import amai.org.conventions.model.Halls;
 import amai.org.conventions.model.ImageIdToImageResourceMapper;
@@ -171,91 +172,93 @@ public class Icon2024Convention extends SffConvention {
 	}
 
 	private ConventionMap createMap() {
-//		Hall eshkol1 = getHalls().findByName(HALL_NAME_ESHKOL_1);
-//		Hall eshkol2 = getHalls().findByName(HALL_NAME_ESHKOL_2);
-//		Hall eshkol3 = getHalls().findByName(HALL_NAME_ESHKOL_3);
-//		Hall eshkol4 = getHalls().findByName(HALL_NAME_ESHKOL_4);
-//		Hall eshkol5 = getHalls().findByName(HALL_NAME_ESHKOL_5);
-//		Hall eshkol6 = getHalls().findByName(HALL_NAME_ESHKOL_6);
-//		Hall workshops = getHalls().findByName(HALL_NAME_WORKSHOPS);
-//		Hall meetings = getHalls().findByName(HALL_NAME_MEETINGS);
-//		Hall kids = getHalls().findByName(HALL_NAME_KIDS);
-//		Hall ironi1 = getHalls().findByName(HALL_NAME_IRONI_1);
-//		Hall ironi2 = getHalls().findByName(HALL_NAME_IRONI_2);
-//		Hall ironi3 = getHalls().findByName(HALL_NAME_IRONI_3);
-//		Hall ironi4 = getHalls().findByName(HALL_NAME_IRONI_4);
-//		Hall ironi5 = getHalls().findByName(HALL_NAME_IRONI_5);
-//		Hall ironi6 = getHalls().findByName(HALL_NAME_IRONI_6);
-//		Hall ironi7 = getHalls().findByName(HALL_NAME_IRONI_7);
-//		Hall ironi8 = getHalls().findByName(HALL_NAME_IRONI_8);
-//		Hall outside = getHalls().findByName(HALL_NAME_OUTSIDE);
-//		Hall arena = getHalls().findByName(HALL_NAME_ARENA);
-//		Hall tent20 = getHalls().findByName(HALL_NAME_TENT_20);
-//		Hall games1 = getHalls().findByName(HALL_NAME_GAMES_1);
-//		Hall games2 = getHalls().findByName(HALL_NAME_GAMES_2);
+		Hall cinematheque2 = getHalls().findByName(HALL_NAME_CINEMATHEQUE_2);
+		Hall cinematheque4 = getHalls().findByName(HALL_NAME_CINEMATHEQUE_4);
+		Hall eshkol1 = getHalls().findByName(HALL_NAME_ESHKOL_1);
+		Hall eshkol2 = getHalls().findByName(HALL_NAME_ESHKOL_2);
+		Hall eshkol3 = getHalls().findByName(HALL_NAME_ESHKOL_3);
+		Hall eshkol4 = getHalls().findByName(HALL_NAME_ESHKOL_4);
+		Hall workshops = getHalls().findByName(HALL_NAME_WORKSHOPS);
+		Hall kids = getHalls().findByName(HALL_NAME_KIDS);
+		Hall meetings = getHalls().findByName(HALL_NAME_MEETINGS);
+		Hall arena = getHalls().findByName(HALL_NAME_ARENA);
+		Hall ironi1 = getHalls().findByName(HALL_NAME_IRONI_1);
+		Hall ironi2 = getHalls().findByName(HALL_NAME_IRONI_2);
+		Hall ironi3 = getHalls().findByName(HALL_NAME_IRONI_3);
+		Hall ironi4 = getHalls().findByName(HALL_NAME_IRONI_4);
+		Hall ironi5 = getHalls().findByName(HALL_NAME_IRONI_5);
+		Hall ironi6 = getHalls().findByName(HALL_NAME_IRONI_6);
+		Hall ironi7 = getHalls().findByName(HALL_NAME_IRONI_7);
+		Hall ironi8 = getHalls().findByName(HALL_NAME_IRONI_8);
+		Hall ironi9 = getHalls().findByName(HALL_NAME_IRONI_9);
+		Hall games1 = getHalls().findByName(HALL_NAME_GAMES_1);
+		Hall games2 = getHalls().findByName(HALL_NAME_GAMES_2);
 
-//		Floor floor = new Floor(1)
-//				.withName("מפת מתחם")
-//				.withImageResource(R.raw.olamot2024_map, true)
-//				.withImageHeight(813)
-//				.withImageWidth(836.38f)
-//				.withDefaultMarkerHeight(35);
-//		final int BIG_MARKER_HEIGHT = 70;
-//		final int SMALL_MARKER_HEIGHT = 25;
+		Floor floor = new Floor(1)
+				.withName("מפת המתחם")
+				.withImageResource(R.raw.icon2024_map, true)
+				.withImageHeight(894)
+				.withImageWidth(856.90002f)
+				.withDefaultMarkerHeight(35);
+		final int BIG_MARKER_HEIGHT = 70;
+		final int SMALL_MARKER_HEIGHT = 25;
 
-		return new ConventionMap();
-//			.withFloors(Collections.singletonList(floor))
-//			.withLocations(
-//				CollectionUtils.flattenList(
-//					inFloor(floor,
-//						mapLocation("יציאת חירום", 207, 39),
-//						mapLocation("דוכנים", 357, 42),
-//						mapLocation("מודיעין", 127, 65),
-//						mapLocation("מתחם דוכני פופ-אפ", 135, 111),
-//						mapLocation("מתחם משחקי מחשב", 243, 111),
-//						mapLocation("אשכולות 3-4", Arrays.asList(eshkol3, eshkol4), 101, 206).withMarkerHeight(SMALL_MARKER_HEIGHT),
-//						mapLocation("דוכנים", 190, 222),
-//						mapLocation("אשכולות 5-6", Arrays.asList(eshkol5, eshkol6), 290, 206).withMarkerHeight(SMALL_MARKER_HEIGHT),
-//						mapLocation("שירותי גברים", 119, 246),
-//						mapLocation("שירותי נשים", 260, 246),
-//						mapLocation(eshkol1, 193, 317),
-//						mapLocation("מרחב מוגן", 238, 292),
-//						mapLocation(eshkol2, 105, 317),
-//						mapLocation("דוכנים", 240, 346),
-//						mapLocation("דוכנים", 169, 415),
-//						mapLocation("דוכנים", 288, 415),
-//						mapLocation("דוכנים", 365, 415),
-//						mapLocation("כניסה ויציאה מרחוב הארבעה", 36, 514),
-//						mapLocation("מודיעין", 51, 596),
-//						mapLocation("דוכני עמותות", 129, 596),
-//						mapLocation("קופות", 293, 587),
-//						mapLocation("סינמטק תל אביב", 125, 743),
-//						mapLocation("אולם ספורט", 405, 689),
-//						mapLocation("קפיטריה", 441, 608),
-//						mapLocation("כניסה לעירוני", 633, 62),
-//						mapLocation("שירותי גברים", 600, 122).withMarkerHeight(SMALL_MARKER_HEIGHT),
-//						mapLocation("מרחב מוגן", 584, 185),
-//						mapLocation("שירותי נשים", 619, 122).withMarkerHeight(SMALL_MARKER_HEIGHT),
-//						mapLocation(workshops, 649, 219),
-//						mapLocation(meetings, 649, 176),
-//						mapLocation("הוביטון", 649, 267),
-//						mapLocation("קוספליי גברים", 666, 368),
-//						mapLocation("עמדת תיקון קוספליי", 573, 403),
-//						mapLocation("מרחב מוגן", 651, 463),
-//						mapLocation("קוספליי נשים", 781, 460),
-//						mapLocation("כניסה ויציאה נגישה לעירוני", 726, 385),
-//						mapLocation("המתחם הקהילתי", 744, 294),
-//						mapLocation("אוהל זיכרון", 776, 173),
-//						mapLocation("יציאת חירום", 730, 73),
-//						mapLocation("שירותי יוניסקס", 596, 548),
-//						mapLocation("מעבר לעירוני", 501, 535),
-//						mapLocation("דוכנים", 515, 613),
-//						mapLocation("שמירת חפצים", 584, 702),
-//						mapLocation("השטיח האדום", 719, 625),
-//						mapLocation("כניסה ויציאה מרחוב שפרינצק", 699, 710)
-//					)
-//				)
-//			);
+		return new ConventionMap()
+			.withFloors(Collections.singletonList(floor))
+			.withLocations(
+				CollectionUtils.flattenList(
+					inFloor(floor,
+						mapLocation("כניסה ויציאה מרחוב דה-וינצ'י", 178, 79),
+						mapLocation("מודיעין", 82, 95),
+						mapLocation("דוכני פופ-אפ", 110, 146),
+						mapLocation("מתחם משחקי אינדי", 288, 151),
+						mapLocation(eshkol3, 89, 204),
+						mapLocation("אשכול 4 וחדר מפגשים", Arrays.asList(eshkol4, meetings), 315, 201),
+						mapLocation("דוכני עמותות", 235, 261),
+						mapLocation("איסוף כרטיסים", 234, 234).withMarkerHeight(SMALL_MARKER_HEIGHT),
+						mapLocation("שירותי גברים", 130, 248),
+						mapLocation("שירותי נשים", 269, 248),
+						mapLocation(eshkol1, 243, 311),
+						mapLocation("מרחב מוגן", 168, 311),
+						mapLocation(eshkol2, 143, 305),
+						mapLocation("דוכנים", 220, 466),
+						mapLocation("דוכנים", 397, 466),
+						mapLocation(arena, 268, 574),
+						mapLocation("כניסה ויציאה מרחוב הארבעה", 25, 513),
+						mapLocation("מודיעין", 72, 589),
+						mapLocation("כניסה ויציאה מרחוב הארבעה", 28, 756),
+						mapLocation("מתחם משחקי לוח", 114, 714),
+						mapLocation("משחקי שער", 241, 661),
+						mapLocation("מרחב מוגן", 240, 713),
+						mapLocation("מודיעין", 157, 791),
+						mapLocation("קופות", 274, 780),
+						mapLocation(cinematheque2, 251, 859),
+						mapLocation(cinematheque4, 177, 859),
+						mapLocation("אולם ספורט", 415, 790),
+						mapLocation("קפיטריה", 430, 685),
+						mapLocation("מדרגות לעירוני מפלס עליון", 567, 73),
+						mapLocation("שירותי גברים", 610, 116).withMarkerHeight(SMALL_MARKER_HEIGHT),
+						mapLocation("מדרגות למרחב מוגן", 584, 198),
+						mapLocation("שירותי נשים", 631, 116).withMarkerHeight(SMALL_MARKER_HEIGHT),
+						mapLocation("קוספליי נשים", 686, 175),
+						mapLocation(workshops, 686, 224),
+						mapLocation(kids, 686, 270),
+						mapLocation(ironi2, 686, 316),
+						mapLocation(ironi1, 686, 358),
+						mapLocation("מדרגות למרחב מוגן", 686, 406),
+						mapLocation("עירוני 3-9", Arrays.asList(ironi3, ironi4, ironi5, ironi6, ironi7, ironi8, ironi9), 686, 451),
+						mapLocation("תיקון קוספליי", 577, 413),
+						mapLocation("כניסה ויציאה נגישה לעירוני מפלס עליון", 744, 395),
+						mapLocation("המתחם הקהילתי", 755, 303),
+						mapLocation("סוכה", 794, 193),
+						mapLocation("מעבר לעירוני מפלס תחתון", 453, 505),
+						mapLocation("שירותי יוניסקס", 593, 529),
+						mapLocation("הוביטון", 610, 573),
+						mapLocation("קוספליי גברים", 587, 619),
+						mapLocation("שמירת חפצים", 625, 676)
+					)
+				)
+			);
 	}
 
 	private MapLocation mapLocation(String name, float x, float y) {
