@@ -25,8 +25,8 @@ import amai.org.conventions.model.SpecialEventsProcessor;
 import amai.org.conventions.networking.AmaiEventContract;
 import amai.org.conventions.networking.AmaiModelConverter;
 
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -44,9 +44,9 @@ public class AmaiModelConverterTests {
 		amaiModelConverter = new AmaiModelConverter(hallsMock, Calendar.getInstance(), new SpecialEventsProcessor());
 
 		// Simulate the default behavior of adding a hall, which is common for most tests
-		doAnswer(new Answer() {
+		doAnswer(new Answer<Hall>() {
 			@Override
-			public Object answer(InvocationOnMock invocation) throws Throwable {
+			public Hall answer(InvocationOnMock invocation) throws Throwable {
 				return new Hall().withName(invocation.getArguments()[0].toString());
 			}
 		}).when(hallsMock).add(anyString());
