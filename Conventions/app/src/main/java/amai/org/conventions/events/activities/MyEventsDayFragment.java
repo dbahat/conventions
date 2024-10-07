@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import amai.org.conventions.ThemeAttributes;
@@ -45,8 +46,9 @@ public class MyEventsDayFragment extends Fragment {
 	}
 
 	/**
-	 * Split events to conflicting groups. A conflict between 2 events happens when one of events starts
-	 * after the other event's start time and before its end time.
+	 * Split events to conflicting groups. A conflict between 2 events happens when one of the events
+	 * starts after the other event's start time and before its end time, and neither of the events are
+	 * ongoing.
 	 *
 	 * @param events - list of events sorted by start time
 	 * @return a list of event groups. Each event group is a list of events, with the same sort order as
@@ -55,10 +57,17 @@ public class MyEventsDayFragment extends Fragment {
 	 */
 	public static ArrayList<EventsTimeSlot> getNonConflictingGroups(EventsTimeSlot previous, List<ConventionEvent> events, EventsTimeSlot next) {
 		ArrayList<EventsTimeSlot> nonConflictingTimeSlots = new ArrayList<>();
+		List<ConventionEvent> currOngoingEvents = new LinkedList<>();
 
 		Date currGroupEndTime = (previous != null ? previous.getEndTime() : null);
 		EventsTimeSlot currSlot = previous;
 		for (ConventionEvent event : events) {
+			// Ongoing events are handled separately, when we add non-ongoing events
+			if (Convention.getInstance().isEventOngoing(event)) {
+				currOngoingEvents.add(event);
+				continue;
+			}
+
 			// Non-conflicting event - it's either the first event or it starts after
 			// (or at the same time as) the current group ends.
 			if (currSlot == null || !event.getStartTime().before(currGroupEndTime)) {
@@ -76,6 +85,20 @@ public class MyEventsDayFragment extends Fragment {
 				}
 				currSlot = new EventsTimeSlot();
 				currGroupEndTime = null;
+
+				// Add the current ongoing events in separate groups
+				for (ConventionEvent ongoingEvent : currOngoingEvents) {
+					EventsTimeSlot ongoingSlot = new EventsTimeSlot();
+					ongoingSlot.addEvent(ongoingEvent);
+					nonConflictingTimeSlots.add(ongoingSlot);
+				}
+				currOngoingEvents = new LinkedList<>();
+			} else {
+				// Add the current ongoing events to the current list, before the new event
+				for (ConventionEvent ongoingEvent : currOngoingEvents) {
+					currSlot.addEvent(ongoingEvent);
+				}
+				currOngoingEvents = new LinkedList<>();
 			}
 			currSlot.addEvent(event);
 			if (currGroupEndTime == null || event.getEndTime().after(currGroupEndTime)) {
@@ -93,6 +116,13 @@ public class MyEventsDayFragment extends Fragment {
 				EventsTimeSlot freeSlot = new EventsTimeSlot(currGroupEndTime, next.getStartTime());
 				nonConflictingTimeSlots.add(freeSlot);
 			}
+		}
+
+		// Add the remaining ongoing events in separate groups
+		for (ConventionEvent ongoingEvent : currOngoingEvents) {
+			EventsTimeSlot ongoingSlot = new EventsTimeSlot();
+			ongoingSlot.addEvent(ongoingEvent);
+			nonConflictingTimeSlots.add(ongoingSlot);
 		}
 
 		return nonConflictingTimeSlots;

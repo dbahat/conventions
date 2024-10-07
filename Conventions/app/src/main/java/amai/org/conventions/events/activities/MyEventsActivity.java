@@ -769,7 +769,8 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		ConventionEvent nextEvent = null;
 		Date currTime = Dates.now();
 		for (ConventionEvent curr : events) {
-			if (curr.getStartTime().after(currTime)) {
+			// Don't show ongoing events as the next event, since we don't have to go to them when they start
+			if (!Convention.getInstance().isEventOngoing(curr) && curr.getStartTime().after(currTime)) {
 				nextEvent = curr;
 				break;
 			}
@@ -785,7 +786,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 
 		if (displayNextEventStart) {
 			nextEventStart.setVisibility(View.VISIBLE);
-	        nextEventStartBottomLine.setVisibility(View.VISIBLE);
+			nextEventStartBottomLine.setVisibility(View.VISIBLE);
 			nextEventStart.setText(getString(R.string.next_event_start,
 					Dates.toHumanReadableTimeDuration(nextEvent.getStartTime().getTime() - currTime.getTime()),
 					nextEvent.getHall().getName()));

@@ -75,13 +75,18 @@ public class ConfigureNotificationsFragment extends DialogFragment {
 			}
 		});
 
-		beforeEventStartEnabledCheckbox = (CheckBox) view.findViewById(R.id.configure_notification_before_event_start_enabled);
-		afterEventEndEnabledCheckbox = (CheckBox) view.findViewById(R.id.configure_notification_after_event_end_enabled);
+		beforeEventStartEnabledCheckbox = view.findViewById(R.id.configure_notification_before_event_start_enabled);
+		afterEventEndEnabledCheckbox = view.findViewById(R.id.configure_notification_after_event_end_enabled);
 
 		EventNotification eventAboutToStartNotification = event.getUserInput().getEventAboutToStartNotification();
 		EventNotification eventEndedNotification = event.getUserInput().getEventFeedbackReminderNotification();
 
-		configureCheckboxOnClickListener(beforeEventStartEnabledCheckbox, eventAboutToStartNotification);
+		if (Convention.getInstance().isEventOngoing(event)) {
+			view.findViewById(R.id.before_event_start_container).setVisibility(View.GONE);
+		} else {
+			view.findViewById(R.id.before_event_start_container).setVisibility(View.VISIBLE);
+			configureCheckboxOnClickListener(beforeEventStartEnabledCheckbox, eventAboutToStartNotification);
+		}
 		configureCheckboxOnClickListener(afterEventEndEnabledCheckbox, eventEndedNotification);
 
 		return view;
@@ -116,7 +121,7 @@ public class ConfigureNotificationsFragment extends DialogFragment {
 		}
 
 		EventNotification eventStartNotification = event.getUserInput().getEventAboutToStartNotification();
-		if (beforeEventStartEnabledCheckbox.isChecked()) {
+		if (beforeEventStartEnabledCheckbox.isChecked() && !Convention.getInstance().isEventOngoing(event)) {
 			eventStartNotification.setTimeDiffInMillis(- DEFAULT_PRE_EVENT_START_NOTIFICATION_MINUTES * Dates.MILLISECONDS_IN_MINUTE);
 			Date beforeEventNotificationTime = event.getEventAboutToStartNotificationTime();
 			if (beforeEventNotificationTime.before(new Date())) {

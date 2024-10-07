@@ -66,6 +66,7 @@
         <item name="eventFavoriteIcon">@drawable/ic_star_black_24dp</item>
         <item name="conflictingEventLabelTextColor">@color/white</item>
         <item name="conflictingEventListDivider">?eventListDivider</item>
+        <item name="ongoingEventLabelTextColor">@color/white</item>
         <item name="useEventTextColorFromEventType">false</item>
         <item name="useEventTimeColorFromEventType">false</item>
         <item name="eventListDividerHeight">1dp</item>
@@ -290,6 +291,7 @@
         <item name="eventFavoriteIcon">@drawable/ic_star_black_24dp</item>
         <item name="conflictingEventLabelTextColor">@color/white</item>
         <item name="conflictingEventListDivider">?eventListDivider</item>
+        <item name="ongoingEventLabelTextColor">@color/white</item>
         <item name="useEventTextColorFromEventType">false</item>
         <item name="useEventTimeColorFromEventType">false</item>
         <item name="eventListDividerHeight">1dp</item>

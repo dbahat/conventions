@@ -138,6 +138,23 @@
                                 tools:visibility="visible"
                                 />
 
+                            <!-- Setting text size in DP because the entire view's height is pre-determined -->
+                            <TextView
+                                tools:ignore="SpUsage"
+                                android:textSize="14dp"
+                                android:id="@+id/ongoingEventLabel"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="bottom"
+                                android:text="@string/ongoing_event_label"
+                                android:background="?ongoingEventBackground"
+                                android:textColor="?ongoingEventLabelTextColor"
+                                android:paddingStart="10dp"
+                                android:paddingEnd="10dp"
+                                android:visibility="gone"
+                                tools:visibility="visible"
+                                />
+
                             <!-- singleLine attribute is ued instead of maxLines because maxLines="1" cuts words
                                  in the space between them when ellipsis is used instead of showing all the characters
                                  there is room for -->

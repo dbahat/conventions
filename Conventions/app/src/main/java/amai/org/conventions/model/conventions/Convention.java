@@ -707,13 +707,14 @@ public abstract class Convention implements Serializable {
 	}
 
 	public boolean conflictsWithOtherFavoriteEvent(ConventionEvent event) {
+		// Ongoing events don't have conflicts, you can join them at any time
+		if (this.isEventOngoing(event)) {
+			return false;
+		}
+
 		for (ConventionEvent otherEvent : Convention.getInstance().getEvents()) {
-			if (!otherEvent.getId().equals(event.getId()) && otherEvent.isAttending()) {
-				boolean first = event.getStartTime().before(otherEvent.getStartTime());
-				if ((first && event.getEndTime().after(otherEvent.getStartTime())) ||
-						((!first) && otherEvent.getEndTime().after(event.getStartTime()))) {
-					return true;
-				}
+			if (otherEvent.isAttending() && isConflicting(event, otherEvent)) {
+				return true;
 			}
 		}
 		return false;
@@ -729,6 +730,16 @@ public abstract class Convention implements Serializable {
 	}
 
 	private boolean isConflicting(ConventionEvent firstEvent, ConventionEvent secondEvent) {
+		// An event doesn't conflict with itself
+		if (firstEvent.getId().equals(secondEvent.getId())) {
+			return false;
+		}
+
+		// Ongoing events don't have conflicts, you can join them at any time
+		if (this.isEventOngoing(firstEvent) || this.isEventOngoing(secondEvent)) {
+			return false;
+		}
+
 		// An event conflicts with another event when, in chronological order,
 		// the first event ends after the second event starts.
 		boolean first = firstEvent.getStartTime().before(secondEvent.getStartTime());
@@ -880,5 +891,13 @@ public abstract class Convention implements Serializable {
 
 	public String convertEventDescriptionURL(String url) {
 		return url;
+	}
+
+	/**
+	 * Ongoing events are events you can join any time which usually go on for several hours or a whole day
+	 */
+	public boolean isEventOngoing(ConventionEvent event) {
+		//noinspection deprecation - this is on purpose
+		return event.isOngoing();
 	}
 }

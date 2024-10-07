@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -403,6 +404,14 @@ public class HomeActivity extends NavigationActivity {
 			return null;
 		}
 
+		// Check if there is a non-ongoing event and show it if there is (since we don't have to
+		// show up to ongoing events when they start)
+		for (ConventionEvent curr : currentFavoriteEvents) {
+			if (!Convention.getInstance().isEventOngoing(curr)) {
+				return curr;
+			}
+		}
+
 		return currentFavoriteEvents.get(0);
 	}
 
@@ -417,7 +426,29 @@ public class HomeActivity extends NavigationActivity {
 		if (upcomingFavoriteEvents.size() == 0) {
 			return null;
 		}
-		Collections.sort(upcomingFavoriteEvents, new ConventionEventEndTimeComparator());
+		Collections.sort(upcomingFavoriteEvents, (lhs, rhs) -> {
+			// Order by start time, ongoing, end time, and hall
+			// Ongoing events are not displayed if another event starts at the same time since we don't have
+			// to join them when they start
+			int result = lhs.getStartTime().compareTo(rhs.getStartTime());
+			if (result == 0) {
+				boolean isFirstOngoing = Convention.getInstance().isEventOngoing(lhs);
+				boolean isSecondOngoing = Convention.getInstance().isEventOngoing(rhs);
+				if (isFirstOngoing && !isSecondOngoing) {
+					result = 1;
+				} else if (isSecondOngoing && !isFirstOngoing) {
+					result = -1;
+				}
+			}
+			if (result == 0) {
+				result = lhs.getEndTime().compareTo(rhs.getEndTime());
+			}
+			if (result == 0) {
+				result = lhs.getHall().getOrder() - rhs.getHall().getOrder();
+			}
+			return result;
+		});
+
 		return upcomingFavoriteEvents.get(0);
 	}
 

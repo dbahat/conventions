@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import amai.org.conventions.model.ConventionEvent;
+import amai.org.conventions.model.conventions.Convention;
 
 public class EventsTimeSlot {
 	private ArrayList<ConventionEvent> events;
@@ -30,12 +31,20 @@ public class EventsTimeSlot {
 	public Date getStartTime() {
 		if (events != null && events.size() > 0) {
 			Date firstStartTime = null;
+			Date firstOngoingEventStartTime = null;
 			for (ConventionEvent event : events) {
-				if (firstStartTime == null || firstStartTime.after(event.getStartTime())) {
-					firstStartTime = event.getStartTime();
+				if (Convention.getInstance().isEventOngoing(event)) {
+					if (firstOngoingEventStartTime == null || firstOngoingEventStartTime.after(event.getStartTime())) {
+						firstOngoingEventStartTime = event.getStartTime();
+					}
+				} else {
+					if (firstStartTime == null || firstStartTime.after(event.getStartTime())) {
+						firstStartTime = event.getStartTime();
+					}
 				}
 			}
-			return firstStartTime;
+			// Only return the time of ongoing events if there are no regular events
+			return firstStartTime == null ? firstOngoingEventStartTime : firstStartTime;
 		} else {
 			return startTime;
 		}
@@ -44,15 +53,37 @@ public class EventsTimeSlot {
 	public Date getEndTime() {
 		if (events != null && events.size() > 0) {
 			Date lastEndTime = null;
+			Date lastOngoingEventEndTime = null;
 			for (ConventionEvent event : events) {
-				if (lastEndTime == null || lastEndTime.before(event.getEndTime())) {
-					lastEndTime = event.getEndTime();
+				if (Convention.getInstance().isEventOngoing(event)) {
+					if (lastOngoingEventEndTime == null || lastOngoingEventEndTime.before(event.getEndTime())) {
+						lastOngoingEventEndTime = event.getEndTime();
+					}
+				} else {
+					if (lastEndTime == null || lastEndTime.before(event.getEndTime())) {
+						lastEndTime = event.getEndTime();
+					}
 				}
 			}
-			return lastEndTime;
+			// Only return the time of ongoing events if there are no regular events
+			return lastEndTime == null ? lastOngoingEventEndTime : lastEndTime;
 		} else {
 			return endTime;
 		}
+	}
+
+	public boolean areAllEventsOngoing() {
+		if (events == null || events.size() == 0) {
+			return false;
+		}
+
+		for (ConventionEvent event : events) {
+			if (!Convention.getInstance().isEventOngoing(event)) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	public EventsTimeSlotType getType() {
