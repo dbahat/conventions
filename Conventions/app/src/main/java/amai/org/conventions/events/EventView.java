@@ -48,7 +48,8 @@ public class EventView extends FrameLayout {
     private final ViewGroup eventContainer;
     private final View eventMainTouchArea;
     private final View bottomLayout;
-    private TextView conflictingEventLabel;
+	private final TextView conflictingEventLabel;
+	private final TextView ongoingEventLabel;
 
     // Used for keyword highlighting - see setKeywordsHighlighting
     private final View searchDescriptionContainer;
@@ -85,6 +86,7 @@ public class EventView extends FrameLayout {
         searchDescriptionContainer = this.findViewById(R.id.search_description_container);
         searchDescription = (TextView) this.findViewById(R.id.search_description);
         conflictingEventLabel = this.findViewById(R.id.conflictingEventLabel);
+		ongoingEventLabel = this.findViewById(R.id.ongoingEventLabel);
     }
 
     public void setEvent(ConventionEvent event) {
@@ -93,6 +95,10 @@ public class EventView extends FrameLayout {
 
     public void setEvent(ConventionEvent event, boolean conflicting) {
         if (event != null) {
+            // We don't display ongoing events as conflicting, since we don't have to go to them while the other
+            // events are happening
+            boolean isOngoingEvent = Convention.getInstance().isEventOngoing(event);
+            conflicting = conflicting && !isOngoingEvent;
             setEventState(event, conflicting);
             setColorsFromEvent(event);
             setHallName(event.getHall().getName());
@@ -105,6 +111,7 @@ public class EventView extends FrameLayout {
             eventTags = getContext().getString(R.string.tags, event.getTagsAsString());
             eventSubTitle = event.getSubTitle();
             setConflicting(conflicting);
+            setOngoing(isOngoingEvent);
         }
 
         searchDescription.setText("");
@@ -118,6 +125,12 @@ public class EventView extends FrameLayout {
             conflictingEventLabel.setVisibility(enabled ? VISIBLE : GONE);
         }
     }
+
+	private void setOngoing(boolean ongoing) {
+		if (ongoingEventLabel != null) {
+			ongoingEventLabel.setVisibility(ongoing ? VISIBLE : GONE);
+		}
+	}
 
     private @ColorInt int getColorFromTheme(ConventionEvent event, @AttrRes int attrNotStarted, @AttrRes int attrCurrent, @AttrRes int attrEnded) {
         @ColorInt int color;

@@ -56,6 +56,7 @@ public class ConventionEvent implements Serializable {
 	private String websiteUrl;
 	private String eventViewUrl;
 	private List<EventLocationType> locationTypes;
+	private boolean isOngoing;
 
 	public ConventionEvent() {
 		images = new ArrayList<>();
@@ -416,8 +417,27 @@ public class ConventionEvent implements Serializable {
 		return this;
 	}
 
+	/** @deprecated Use {@link Convention#isEventOngoing(ConventionEvent)} */
+	public boolean isOngoing() {
+		return isOngoing;
+	}
+
+	public void setOngoing(boolean ongoing) {
+		isOngoing = ongoing;
+	}
+
+	public ConventionEvent withOngoing(boolean ongoing) {
+		setOngoing(ongoing);
+		return this;
+	}
+
 	@Nullable
 	public Date getEventAboutToStartNotificationTime() {
+		// We don't show event about to start notifications for ongoing events, since you can join them any time
+		if (Convention.getInstance().isEventOngoing(this)) {
+			return null;
+		}
+
 		Long diff = getUserInput().getEventAboutToStartNotification().getTimeDiffInMillis();
 		if (diff == null) {
 			return null;
@@ -734,7 +754,8 @@ public class ConventionEvent implements Serializable {
 				Objects.equals(this.tags, other.tags) &&
 				Objects.equals(this.availableTickets, other.availableTickets) &&
 				Objects.equals(this.ticketsLimit, other.ticketsLimit) &&
-				Objects.equals(this.locationTypes, other.locationTypes);
+				Objects.equals(this.locationTypes, other.locationTypes) &&
+				Objects.equals(this.isOngoing, other.isOngoing);
 	}
 
 	@Override

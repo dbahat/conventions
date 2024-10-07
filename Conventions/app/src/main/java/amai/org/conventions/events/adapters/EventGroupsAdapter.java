@@ -135,6 +135,23 @@ public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 			return;
 		}
 
+		// Logic:
+		// 1. Calculate new time slots:
+		//    * Find previous and next event groups with regular events to calculate the new free time slots
+		//    * Calculate new groups + free time slots for the changed events list
+		// 2. Update list:
+		//    * Remove previous and next free time slots
+		//    * Add first free time slot after the previous events, if it exists
+		//    * Add the rest of the slots instead of the changed events group
+		// 3. Notify changes:
+		//    * Free time after the changed group was added/changed/removed
+		//    * Free time before the changed group (i.e. after the previous events) was added/changed/removed
+		//    * Conflicting events list before the changed group (or before the free time between them), in case its separator should be updated
+		//      (i.e. it's now the last group, or the changed group was conflicting before and now the first returned slot is not conflicting)
+		//    * Conflicting events list after the changed group (or after the free time between them), in case its separator should be updated (i.e. it's now the first group)
+		//    * The changed group itself, in case its not empty and either its type or number of groups changed
+		//      (removed event in conflicting list is handled inside the conflicting list adapter)
+
 		EventsTimeSlot previousEvents = null;
 		EventsTimeSlot nextEvents = null;
 		EventsTimeSlot.EventsTimeSlotType beforeType = null;
@@ -147,34 +164,74 @@ public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 		// This is the position after the changed event group
 		int nextPosition = alreadyRemoved ? adapterPosition : adapterPosition + 1;
 
+		// This is the position of the free time slot before the changed group and after any non-ongoing event, if there is one.
+		// This time slot should be replaced with the new free time slot which may be returned after the change.
+		// If there is no free time slot before, this is the position where the possible new one should be added.
+		int freeTimeSlotBeforePosition = -1;
+		boolean freeTimeSlotBeforePositionIsFreeTime = false;
+
 		// Get the event groups before and after the changed group and check if there were free slots between them
 		if (previousPosition >= 0) {
 			previousEvents = eventGroups.get(previousPosition);
 			beforeType = previousEvents.getType();
-			if (previousEvents.getType() == EventsTimeSlot.EventsTimeSlotType.NO_EVENTS && previousPosition > 0) {
-				previousEvents = eventGroups.get(previousPosition - 1);
-			}
+
+			// We need this to know if we should update the conflicting events separators
 			if (previousPosition > 0) {
 				beforePreviousType = eventGroups.get(previousPosition - 1).getType();
 			}
+
+			// Get the time slot with events which aren't all ongoing so we can use it to calculate the free time slots
+			// for the updated event groups
+			int i = 1;
+			while (previousEvents.getType() == EventsTimeSlot.EventsTimeSlotType.NO_EVENTS || previousEvents.areAllEventsOngoing()) {
+				if (freeTimeSlotBeforePosition < 0 && previousEvents.getType() == EventsTimeSlot.EventsTimeSlotType.NO_EVENTS) {
+					freeTimeSlotBeforePosition = previousPosition - i + 1; // The position of previousEvents
+					freeTimeSlotBeforePositionIsFreeTime = true;
+				}
+				if (previousPosition >= i) {
+					previousEvents = eventGroups.get(previousPosition - i);
+					++i;
+				} else {
+					previousEvents = null;
+					++i; // For the free time slot before position calculation (even though there shouldn't be a new free time slot before the group if there are no previous events)
+					break;
+				}
+			}
+			if (freeTimeSlotBeforePosition < 0) {
+				freeTimeSlotBeforePosition = previousPosition - i + 2; // After previousEvents
+			}
+		} else {
+			// There shouldn't be a free time slot before it if this is the first group, but if there is, it should be added before the group
+			freeTimeSlotBeforePosition = 0;
 		}
 
 		if (nextPosition < eventGroups.size()) {
 			nextEvents = eventGroups.get(nextPosition);
 			afterType = nextEvents.getType();
-			if (nextEvents.getType() == EventsTimeSlot.EventsTimeSlotType.NO_EVENTS && nextPosition < eventGroups.size() - 1) {
-				nextEvents = eventGroups.get(nextPosition + 1);
-			}
+
+			// We need this to know if we should update the conflicting events separator
 			if (nextPosition + 1 < eventGroups.size()) {
 				afterNextType = eventGroups.get(nextPosition + 1).getType();
+			}
+
+			// Get the time slot with events which aren't all ongoing so we can use it to calculate the free time slots
+			// for the updated event groups
+			int i = 1;
+			while (nextEvents.getType() == EventsTimeSlot.EventsTimeSlotType.NO_EVENTS || nextEvents.areAllEventsOngoing()) {
+				if (nextPosition + i < eventGroups.size()) {
+					nextEvents = eventGroups.get(nextPosition + i);
+					++i;
+				} else {
+					nextEvents = null;
+					break;
+				}
 			}
 		}
 
 		// Get the new groups, including possible free slots before and after it (in case they were updated)
 		ArrayList<EventsTimeSlot> groups = MyEventsDayFragment.getNonConflictingGroups(previousEvents, eventsList, nextEvents);
 
-		// This is the position in the slots list where we will insert the new items.
-		// It should be the smallest position we removed items from.
+		// This is the position in the slots list where we will insert the new items
 		int positionToAddFrom = adapterPosition;
 
 		// Remove the original groups and its neighbor free slots starting at the largest position going backwards
@@ -184,10 +241,16 @@ public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 		if (!alreadyRemoved) {
 			eventGroups.remove(adapterPosition);
 		}
-		if (beforeType == EventsTimeSlot.EventsTimeSlotType.NO_EVENTS) {
-			eventGroups.remove(previousPosition);
-			// If we removed items from the previous position, that's where we'll add the new items
-			positionToAddFrom = previousPosition;
+		boolean hasNewFreeTimeSlotBefore = groups.size() > 0 && groups.get(0).getType() == EventsTimeSlot.EventsTimeSlotType.NO_EVENTS;
+		if (freeTimeSlotBeforePositionIsFreeTime) {
+			eventGroups.remove(freeTimeSlotBeforePosition);
+			--positionToAddFrom;
+		}
+		// If there is a new free time slot, add it in the free time slot before position
+		if (hasNewFreeTimeSlotBefore) {
+			eventGroups.add(freeTimeSlotBeforePosition, groups.get(0));
+			groups.remove(0);
+			++positionToAddFrom;
 		}
 		eventGroups.addAll(positionToAddFrom, groups);
 
@@ -220,18 +283,16 @@ public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
 		// Check if there is a free slot before the changed events
 		boolean removedFreeSlotBefore = false;
-		if (groups.size() > 0 && groups.get(0).getType() == EventsTimeSlot.EventsTimeSlotType.NO_EVENTS) {
-			--newGroupsSize;
+		if (hasNewFreeTimeSlotBefore) {
 			// Notify the list: if there was no free slot before, it was added. If there was, it was possibly changed.
-			if (beforeType != EventsTimeSlot.EventsTimeSlotType.NO_EVENTS) {
-				// The free slot was added at the original group's position (since there was no "previous position")
-				notifyItemInserted(adapterPosition);
+			if (!freeTimeSlotBeforePositionIsFreeTime) {
+				notifyItemInserted(freeTimeSlotBeforePosition);
 			} else {
-				notifyItemChanged(previousPosition);
+				notifyItemChanged(freeTimeSlotBeforePosition);
 			}
-		} else if (beforeType == EventsTimeSlot.EventsTimeSlotType.NO_EVENTS) {
+		} else if (freeTimeSlotBeforePositionIsFreeTime) {
 			// If there was a free slot before, it was removed.
-			notifyItemRemoved(previousPosition);
+			notifyItemRemoved(freeTimeSlotBeforePosition);
 			removedFreeSlotBefore = true;
 		}
 
@@ -240,7 +301,7 @@ public class EventGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 		// In case the previous or next position was a removed free time, the one before/after it should be notified.
 		if (beforeType == EventsTimeSlot.EventsTimeSlotType.CONFLICTING_EVENTS) {
 			notifyItemChanged(previousPosition);
-		} else if (removedFreeSlotBefore && beforePreviousType == EventsTimeSlot.EventsTimeSlotType.CONFLICTING_EVENTS) {
+		} else if (removedFreeSlotBefore && freeTimeSlotBeforePosition == previousPosition && beforePreviousType == EventsTimeSlot.EventsTimeSlotType.CONFLICTING_EVENTS) {
 			notifyItemChanged(previousPosition - 1);
 		}
 		if (afterType == EventsTimeSlot.EventsTimeSlotType.CONFLICTING_EVENTS) {

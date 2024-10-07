@@ -141,6 +141,12 @@
         <!-- Text color for conflicting event label. See conflictingEventBackground for usage. -->
         <attr name="conflictingEventLabelTextColor" format="color|reference" />
 
+        <!-- Background for ongoing event label. Used when event is ongoing and the label exists in the layout. -->
+        <attr name="ongoingEventBackground" format="integer|reference" />
+
+        <!-- Text color for ongoing event label. See ongoingEventBackground for usage. -->
+        <attr name="ongoingEventLabelTextColor" format="color|reference" />
+
         <!-- Background color for event view. Can be a color state list. Event state is set with state_event_... attributes. -->
         <attr name="eventBackgroundColor" format="color|reference"/>
 

@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.events.ConfigureNotificationsFragment;
@@ -35,7 +36,10 @@ public class LocalNotificationScheduler {
 			EventNotification eventAboutToStartNotification = event.getUserInput().getEventAboutToStartNotification();
 			eventAboutToStartNotification.setTimeDiffInMillis(
 				- ConfigureNotificationsFragment.DEFAULT_PRE_EVENT_START_NOTIFICATION_MINUTES * Dates.MILLISECONDS_IN_MINUTE);
-			scheduleEventAboutToStartNotification(event, event.getEventAboutToStartNotificationTime().getTime());
+			Date eventAboutToStartNotificationTime = event.getEventAboutToStartNotificationTime();
+			if (eventAboutToStartNotificationTime != null) {
+				scheduleEventAboutToStartNotification(event, eventAboutToStartNotificationTime.getTime());
+			}
 		}
 
 		if (sharedPreferences.getBoolean(Convention.getInstance().getId().toLowerCase() + "_event_feedback_reminder", false)) {
@@ -43,7 +47,10 @@ public class LocalNotificationScheduler {
 			eventFeedbackReminderNotification.setTimeDiffInMillis(
 				ConfigureNotificationsFragment.DEFAULT_POST_EVENT_END_NOTIFICATION_MINUTES * Dates.MILLISECONDS_IN_MINUTE
 			);
-			scheduleFillFeedbackOnEventNotification(event, event.getEventFeedbackReminderNotificationTime().getTime());
+			Date eventFeedbackReminderNotificationTime = event.getEventFeedbackReminderNotificationTime();
+			if (eventFeedbackReminderNotificationTime != null) {
+				scheduleFillFeedbackOnEventNotification(event, eventFeedbackReminderNotificationTime.getTime());
+			}
 		}
 
 		Convention.getInstance().getStorage().saveUserInput();
