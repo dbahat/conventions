@@ -102,6 +102,7 @@ public class SffModelParser implements ModelParser {
 				eventViewUrl = eventObj.get("virtual_url").getAsString();
 			}
 
+			boolean isOngoingEvent = getBooleanValue(eventObj, "is_ongoing");
 
 			ConventionEvent conventionEvent = new ConventionEvent()
 					.withServerId(eventId)
@@ -120,7 +121,8 @@ public class SffModelParser implements ModelParser {
 					.withTicketsLastModifiedDate(modifiedDate)
 					.withWebsiteUrl(websiteUrl)
 					.withLocationTypes(locationTypes)
-					.withEventViewUrl(eventViewUrl);
+					.withEventViewUrl(eventViewUrl)
+					.withOngoing(isOngoingEvent);
 
 			eventList.add(conventionEvent);
 		}
