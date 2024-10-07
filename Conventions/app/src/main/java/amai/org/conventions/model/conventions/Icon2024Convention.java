@@ -79,7 +79,7 @@ public class Icon2024Convention extends SffConvention {
 
 	private static final String API_SLUG = "icon2024";
 	private static final String TEST_API_SLUG = "test_con";
-	private static final String YAD2_API = "https://api.sf-f.org.il/yad2/";
+	private static final String YAD2_API = "https://api.yadash.sf-f.org.il/";
 	private static final String TEST_YAD2_API = "https://test.api.sf-f.org.il/yad2/";
 
 	@Override
