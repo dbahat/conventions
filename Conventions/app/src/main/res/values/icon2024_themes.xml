@@ -110,6 +110,7 @@
         <item name="eventFeedbackIconColor">@drawable/icon2024_feedback_icon_color</item>
         <item name="eventStartMargin">0dp</item>
         <item name="conflictingEventBackground">@drawable/icon2024_conflicting_event_label_bg</item>
+        <item name="ongoingEventBackground">@drawable/icon2024_ongoing_event_label_bg</item>
         <!-- Programme Screen -->
         <item name="eventTimeHeaderTextColor">@color/icon2024_cream1000</item>
         <item name="eventTimeHeaderBackground">@drawable/icon2024_event_time_header</item>

@@ -67,6 +67,23 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 		return fragment;
 	}
 
+	private static int getHour(Date date) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		return calendar.get(Calendar.HOUR_OF_DAY);
+	}
+
+	private static int getEndHour(Date endTime) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(endTime);
+		int hour = calendar.get(Calendar.HOUR_OF_DAY);
+		int minute = calendar.get(Calendar.MINUTE);
+
+		// The first minute of the next hour is considered this hour. For example, an event
+		// ending at 12:00 is only considered to run during hour 11:00.
+		return minute > 0 ? hour : hour - 1;
+	}
+
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -335,10 +352,21 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 			if (!Dates.isSameDate(date, startTime)) {
 				continue;
 			}
-			Calendar startHour = Calendar.getInstance();
-			startHour.setTime(event.getStartTime());
-			startHour.clear(Calendar.MINUTE);
-			programmeEvents.add(new ProgrammeConventionEvent(event, startHour));
+
+			// If this event is on-going (can be joined in the middle), we display it in every hour it occurs in
+			// Convert the event start time to hourly time sections, and duplicate it if needed (e.g. if an event started at 13:30 and ended at 15:00, its
+			// time sections are 13:00 and 14:00)
+			int eventDurationInHours = 1;
+			if (Convention.getInstance().isEventOngoing(event)) {
+				eventDurationInHours = getEndHour(event.getEndTime()) - getHour(event.getStartTime()) + 1;
+			}
+			for (int i = 0; i < eventDurationInHours; i++) {
+				Calendar calendar = Calendar.getInstance();
+				calendar.setTime(event.getStartTime());
+				calendar.add(Calendar.HOUR_OF_DAY, i);
+				calendar.clear(Calendar.MINUTE);
+				programmeEvents.add(new ProgrammeConventionEvent(event, calendar));
+			}
 		}
 
 		Collections.sort(programmeEvents, new Comparator<ProgrammeConventionEvent>() {
