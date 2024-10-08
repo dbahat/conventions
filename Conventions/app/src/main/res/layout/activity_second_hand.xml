@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"/>
 
-    <klogi.com.RtlViewPager
+    <com.duolingo.open.rtlviewpager.RtlViewPager
         android:id="@+id/second_hand_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
