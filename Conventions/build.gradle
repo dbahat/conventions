@@ -8,7 +8,6 @@ buildscript {
             name 'Google'
         }
         google()
-        jcenter() // for rtlviewpager
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:8.6.0'
@@ -29,6 +28,5 @@ allprojects {
             name 'Google'
         }
         maven { url 'https://jitpack.io' }
-        jcenter() // for rtlviewpager
     }
 }
