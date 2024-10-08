@@ -31,7 +31,7 @@
                 android:layout_marginStart="?contentStartMargin"
                 android:layout_marginEnd="?contentEndMargin"/>
 
-            <klogi.com.RtlViewPager
+            <com.duolingo.open.rtlviewpager.RtlViewPager
                 android:id="@+id/programme_days_pager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
