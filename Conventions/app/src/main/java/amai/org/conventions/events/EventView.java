@@ -88,6 +88,10 @@ public class EventView extends FrameLayout {
 		searchDescription = (TextView) this.findViewById(R.id.search_description);
 		conflictingEventLabel = this.findViewById(R.id.conflictingEventLabel);
 		ongoingEventLabel = this.findViewById(R.id.ongoingEventLabel);
+
+		// Disable horizontal scrolling (which intercepts touch events) on singleLine text views
+		lecturerName.setHorizontallyScrolling(false);
+		hallName.setHorizontallyScrolling(false);
     }
 
     public void setEvent(ConventionEvent event) {
