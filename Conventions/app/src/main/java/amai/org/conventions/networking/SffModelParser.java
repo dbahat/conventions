@@ -145,7 +145,7 @@ public class SffModelParser implements ModelParser {
 	}
 
 	private boolean getBooleanValue(JsonObject object, String member) {
-		return object.has(member) && !object.get(member).isJsonNull() && object.get(member).getAsBoolean();
+		return object.has(member) && !object.get(member).isJsonNull() && object.get(member).isJsonPrimitive() && object.get(member).getAsBoolean();
 	}
 
 	private List<ConventionEvent.EventLocationType> getLocationTypes(JsonObject eventObj) {
