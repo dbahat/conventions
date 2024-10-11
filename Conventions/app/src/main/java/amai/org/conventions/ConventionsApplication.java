@@ -15,6 +15,7 @@ import amai.org.conventions.model.EventNotification;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.notifications.LocalNotificationScheduler;
+import amai.org.conventions.notifications.PushNotification;
 import amai.org.conventions.utils.BundleBuilder;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
@@ -122,12 +123,30 @@ public class ConventionsApplication extends Application {
 
 	public void rescheduleChangedEventAlarms(ConventionEvent event, ConventionEvent previousEvent) {
 		boolean alarmsChanged = false;
+
+		// Event about to start notification should be automatically disabled/enabled when ongoing event status changes
+		boolean isEventOngoing = Convention.getInstance().isEventOngoing(event);
+		boolean isPreviousEventOngoing = Convention.getInstance().isEventOngoing(event);
+
 		EventNotification aboutToStartNotification = event.getUserInput().getEventAboutToStartNotification();
 		if (
 			aboutToStartNotification != null &&
-			aboutToStartNotification.isEnabled() &&
-			!Objects.equals(event.getStartTime(), previousEvent.getStartTime())
+			aboutToStartNotification.isEnabled()
 		) {
+			if (!Objects.equals(event.getStartTime(), previousEvent.getStartTime())) {
+				alarmsChanged = true;
+			}
+
+			// Event changed from regular to ongoing, we need to disable the alarm
+			if (isEventOngoing && !isPreviousEventOngoing) {
+				alarmScheduler.cancelEventAlarm(event, PushNotification.Type.EventAboutToStart);
+			}
+		}
+
+		// Favorite event changed from ongoing to regular, we should schedule the new alarm. It might not be configured
+		// because when it was added as favorite, it was ongoing, but now the user should be notified.
+		if (isPreviousEventOngoing && !isEventOngoing && event.isAttending()) {
+			LocalNotificationScheduler.setDefaultEventAboutToStartNotification(event);
 			alarmsChanged = true;
 		}
 
