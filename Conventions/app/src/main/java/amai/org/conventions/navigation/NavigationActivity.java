@@ -207,7 +207,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 			items.add(new NavigationItem(MapActivity.class, getString(R.string.map), ContextCompat.getDrawable(this, android.R.drawable.ic_dialog_map), shouldDisplayIcon));
 		}
 		items.add(new NavigationItem(UpdatesActivity.class, getString(R.string.updates), ContextCompat.getDrawable(this, android.R.drawable.stat_notify_sync_noanim), shouldDisplayIcon));
-//		items.add(new NavigationItem(SecondHandActivity.class, getString(R.string.second_hand), ContextCompat.getDrawable(this, R.drawable.ic_attach_money_white), shouldDisplayIcon));
+		items.add(new NavigationItem(SecondHandActivity.class, getString(R.string.second_hand), ContextCompat.getDrawable(this, R.drawable.ic_attach_money_white), shouldDisplayIcon));
 		items.add(new NavigationItem(ArrivalMethodsActivity.class, getString(R.string.arrival_methods), ContextCompat.getDrawable(this, R.drawable.directions), shouldDisplayIcon));
 
 		if (Convention.getInstance().canFillFeedback()) {
