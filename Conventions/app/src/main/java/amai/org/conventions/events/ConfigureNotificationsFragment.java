@@ -1,6 +1,8 @@
 package amai.org.conventions.events;
 
 
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,8 @@ import amai.org.conventions.model.EventNotification;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.notifications.LocalNotificationScheduler;
 import amai.org.conventions.notifications.PushNotification;
+import amai.org.conventions.utils.Log;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import sff.org.conventions.R;
 
@@ -134,5 +138,30 @@ public class ConfigureNotificationsFragment extends DialogFragment {
 		}
 
 		Convention.getInstance().getStorage().saveUserInput();
+	}
+
+	@Override
+	public void onDismiss(@NonNull DialogInterface dialog) {
+		super.onDismiss(dialog);
+
+		// Show message in case a configured notification is disabled in the settings
+
+		boolean eventAboutToStartNotificationEnabled = (!Convention.getInstance().isEventOngoing(event)) && event.getUserInput().getEventAboutToStartNotification().isEnabled();
+		boolean eventFeedbackReminderEnabled = event.getUserInput().getEventFeedbackReminderNotification().isEnabled();
+
+		SharedPreferences sharedPreferences = ConventionsApplication.settings.getSharedPreferences();
+		boolean startNotificationIssue = eventAboutToStartNotificationEnabled && !sharedPreferences.getBoolean(Convention.getInstance().getId().toLowerCase() + "_event_starting_reminder", false);
+		boolean feedbackNotificationIssue = eventFeedbackReminderEnabled && !sharedPreferences.getBoolean(Convention.getInstance().getId().toLowerCase() + "_event_feedback_reminder", false);
+
+		if (startNotificationIssue || feedbackNotificationIssue) {
+			int message = R.string.events_notifications_disabled;
+			if (!feedbackNotificationIssue) {
+				message = R.string.start_notifications_disabled;
+			} else if (!startNotificationIssue) {
+				message = R.string.feedback_notifications_disabled;
+			}
+
+			Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+		}
 	}
 }

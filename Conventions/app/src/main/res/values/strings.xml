@@ -104,6 +104,9 @@
     <string name="new_update">יש עדכון חדש</string>
     <string name="new_update_indicator">חדש</string>
     <string name="cannot_set_past_alarm">לא ניתן לקבוע תזכורת בעבר</string>
+    <string name="start_notifications_disabled">יש לאפשר תזכורות לפני תחילת אירועים במסך ההגדרות</string>
+    <string name="feedback_notifications_disabled">יש לאפשר תזכורות לשליחת פידבק לאירועים במסך ההגדרות</string>
+    <string name="events_notifications_disabled">יש לאפשר תזכורות עבור אירועים במסך ההגדרות</string>
     <string name="close">סגור</string>
     <string name="other">אחר</string>
     <string name="discounts_content"/>

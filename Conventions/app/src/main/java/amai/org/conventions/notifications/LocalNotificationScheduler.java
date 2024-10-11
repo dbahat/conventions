@@ -35,21 +35,16 @@ public class LocalNotificationScheduler {
 	}
 
 	public void scheduleDefaultEventAlarms(ConventionEvent event) {
-		SharedPreferences sharedPreferences = ConventionsApplication.settings.getSharedPreferences();
-		if (sharedPreferences.getBoolean(Convention.getInstance().getId().toLowerCase() + "_event_starting_reminder", false)) {
-			setDefaultEventAboutToStartNotification(event);
-			Date eventAboutToStartNotificationTime = event.getEventAboutToStartNotificationTime();
-			if (eventAboutToStartNotificationTime != null) {
-				scheduleEventAboutToStartNotification(event, eventAboutToStartNotificationTime.getTime());
-			}
+		setDefaultEventAboutToStartNotification(event);
+		Date eventAboutToStartNotificationTime = event.getEventAboutToStartNotificationTime();
+		if (eventAboutToStartNotificationTime != null) {
+			scheduleEventAboutToStartNotification(event, eventAboutToStartNotificationTime.getTime());
 		}
 
-		if (sharedPreferences.getBoolean(Convention.getInstance().getId().toLowerCase() + "_event_feedback_reminder", false)) {
-			setDefaultEventFeedbackReminderNotification(event);
-			Date eventFeedbackReminderNotificationTime = event.getEventFeedbackReminderNotificationTime();
-			if (eventFeedbackReminderNotificationTime != null) {
-				scheduleFillFeedbackOnEventNotification(event, eventFeedbackReminderNotificationTime.getTime());
-			}
+		setDefaultEventFeedbackReminderNotification(event);
+		Date eventFeedbackReminderNotificationTime = event.getEventFeedbackReminderNotificationTime();
+		if (eventFeedbackReminderNotificationTime != null) {
+			scheduleFillFeedbackOnEventNotification(event, eventFeedbackReminderNotificationTime.getTime());
 		}
 
 		Convention.getInstance().getStorage().saveUserInput();

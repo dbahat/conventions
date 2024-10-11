@@ -125,6 +125,12 @@ public class ShowNotificationReceiver extends BroadcastReceiver {
     }
 
     private void showEventFeedbackReminderNotification(Intent intent) {
+        SharedPreferences sharedPreferences = ConventionsApplication.settings.getSharedPreferences();
+        if (!sharedPreferences.getBoolean(Convention.getInstance().getId().toLowerCase() + "_event_feedback_reminder", false)) {
+            Log.v(TAG, "Event feedback notification is disabled, ignoring");
+            return;
+        }
+
         String eventId = intent.getStringExtra(EXTRA_EVENT_ID_TO_NOTIFY);
         final ConventionEvent event = Convention.getInstance().getEventById(eventId);
         if (event == null) {
@@ -189,6 +195,11 @@ public class ShowNotificationReceiver extends BroadcastReceiver {
     }
 
     private void showEventAboutToStartNotification(Intent intent) {
+        SharedPreferences sharedPreferences = ConventionsApplication.settings.getSharedPreferences();
+        if (!sharedPreferences.getBoolean(Convention.getInstance().getId().toLowerCase() + "_event_starting_reminder", false)) {
+            Log.v(TAG, "Event about to start notification is disabled, ignoring");
+            return;
+        }
 
         String eventId = intent.getStringExtra(EXTRA_EVENT_ID_TO_NOTIFY);
         ConventionEvent event = Convention.getInstance().getEventById(eventId);
