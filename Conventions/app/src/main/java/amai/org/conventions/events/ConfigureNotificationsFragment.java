@@ -1,9 +1,7 @@
 package amai.org.conventions.events;
 
 
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,25 +9,20 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.NumberPicker;
 import android.widget.Toast;
 
 import java.util.Date;
 
 import amai.org.conventions.ConventionsApplication;
-import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.EventNotification;
 import amai.org.conventions.model.conventions.Convention;
+import amai.org.conventions.notifications.LocalNotificationScheduler;
 import amai.org.conventions.notifications.PushNotification;
-import amai.org.conventions.utils.Dates;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import sff.org.conventions.R;
 
 public class ConfigureNotificationsFragment extends DialogFragment {
-	public static final int DEFAULT_PRE_EVENT_START_NOTIFICATION_MINUTES = 5;
-	public static final int DEFAULT_POST_EVENT_END_NOTIFICATION_MINUTES = 0;
 	private static final String EventId = "EventId";
 	private ConventionEvent event;
 
@@ -105,7 +98,7 @@ public class ConfigureNotificationsFragment extends DialogFragment {
 	private void updateNotificationSettings() {
 		EventNotification feedbackReminder = event.getUserInput().getEventFeedbackReminderNotification();
 		if (afterEventEndEnabledCheckbox.isChecked()) {
-			feedbackReminder.setTimeDiffInMillis(DEFAULT_POST_EVENT_END_NOTIFICATION_MINUTES * Dates.MILLISECONDS_IN_MINUTE);
+			LocalNotificationScheduler.setDefaultEventFeedbackReminderNotification(event);
 			Date afterEventNotificationTime = event.getEventFeedbackReminderNotificationTime();
 			if (afterEventNotificationTime.before(new Date())) {
 				Toast.makeText(getActivity(), R.string.cannot_set_past_alarm, Toast.LENGTH_SHORT).show();
@@ -120,24 +113,26 @@ public class ConfigureNotificationsFragment extends DialogFragment {
 			ConventionsApplication.alarmScheduler.cancelEventAlarm(event, PushNotification.Type.EventFeedbackReminder);
 		}
 
-		EventNotification eventStartNotification = event.getUserInput().getEventAboutToStartNotification();
-		if (beforeEventStartEnabledCheckbox.isChecked() && !Convention.getInstance().isEventOngoing(event)) {
-			eventStartNotification.setTimeDiffInMillis(- DEFAULT_PRE_EVENT_START_NOTIFICATION_MINUTES * Dates.MILLISECONDS_IN_MINUTE);
-			Date beforeEventNotificationTime = event.getEventAboutToStartNotificationTime();
-			if (beforeEventNotificationTime.before(new Date())) {
-				Toast.makeText(getActivity(), R.string.cannot_set_past_alarm, Toast.LENGTH_SHORT).show();
+		// Ongoing events don't have an alarm when they start, this is disabled automatically
+		if (!Convention.getInstance().isEventOngoing(event)) {
+			EventNotification eventStartNotification = event.getUserInput().getEventAboutToStartNotification();
+			if (beforeEventStartEnabledCheckbox.isChecked()) {
+				LocalNotificationScheduler.setDefaultEventAboutToStartNotification(event);
+				Date beforeEventNotificationTime = event.getEventAboutToStartNotificationTime();
+				if (beforeEventNotificationTime.before(new Date())) {
+					Toast.makeText(getActivity(), R.string.cannot_set_past_alarm, Toast.LENGTH_SHORT).show();
+					eventStartNotification.disable();
+					beforeEventStartEnabledCheckbox.setChecked(false);
+				}
+				ConventionsApplication.alarmScheduler.scheduleEventAboutToStartNotification(event, beforeEventNotificationTime.getTime());
+			} else {
 				eventStartNotification.disable();
-				beforeEventStartEnabledCheckbox.setChecked(false);
 			}
-			ConventionsApplication.alarmScheduler.scheduleEventAboutToStartNotification(event, beforeEventNotificationTime.getTime());
-		} else {
-			eventStartNotification.disable();
-		}
-		if (!eventStartNotification.isEnabled()) {
-			ConventionsApplication.alarmScheduler.cancelEventAlarm(event, PushNotification.Type.EventAboutToStart);
+			if (!eventStartNotification.isEnabled()) {
+				ConventionsApplication.alarmScheduler.cancelEventAlarm(event, PushNotification.Type.EventAboutToStart);
+			}
 		}
 
 		Convention.getInstance().getStorage().saveUserInput();
-
 	}
 }

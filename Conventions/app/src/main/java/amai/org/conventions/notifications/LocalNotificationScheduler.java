@@ -11,16 +11,20 @@ import java.util.Calendar;
 import java.util.Date;
 
 import amai.org.conventions.ConventionsApplication;
-import amai.org.conventions.events.ConfigureNotificationsFragment;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.EventNotification;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.Log;
 
 import static android.app.PendingIntent.FLAG_CANCEL_CURRENT;
 import static android.app.PendingIntent.FLAG_IMMUTABLE;
 
 public class LocalNotificationScheduler {
+	private final static String TAG = LocalNotificationScheduler.class.getCanonicalName();
+
+	public static final int DEFAULT_PRE_EVENT_START_NOTIFICATION_MINUTES = 5;
+	public static final int DEFAULT_POST_EVENT_END_NOTIFICATION_MINUTES = 0;
 
 	private Context context;
 	private AlarmManager alarmManager;
@@ -33,9 +37,7 @@ public class LocalNotificationScheduler {
 	public void scheduleDefaultEventAlarms(ConventionEvent event) {
 		SharedPreferences sharedPreferences = ConventionsApplication.settings.getSharedPreferences();
 		if (sharedPreferences.getBoolean(Convention.getInstance().getId().toLowerCase() + "_event_starting_reminder", false)) {
-			EventNotification eventAboutToStartNotification = event.getUserInput().getEventAboutToStartNotification();
-			eventAboutToStartNotification.setTimeDiffInMillis(
-				- ConfigureNotificationsFragment.DEFAULT_PRE_EVENT_START_NOTIFICATION_MINUTES * Dates.MILLISECONDS_IN_MINUTE);
+			setDefaultEventAboutToStartNotification(event);
 			Date eventAboutToStartNotificationTime = event.getEventAboutToStartNotificationTime();
 			if (eventAboutToStartNotificationTime != null) {
 				scheduleEventAboutToStartNotification(event, eventAboutToStartNotificationTime.getTime());
@@ -43,10 +45,7 @@ public class LocalNotificationScheduler {
 		}
 
 		if (sharedPreferences.getBoolean(Convention.getInstance().getId().toLowerCase() + "_event_feedback_reminder", false)) {
-			EventNotification eventFeedbackReminderNotification = event.getUserInput().getEventFeedbackReminderNotification();
-			eventFeedbackReminderNotification.setTimeDiffInMillis(
-				ConfigureNotificationsFragment.DEFAULT_POST_EVENT_END_NOTIFICATION_MINUTES * Dates.MILLISECONDS_IN_MINUTE
-			);
+			setDefaultEventFeedbackReminderNotification(event);
 			Date eventFeedbackReminderNotificationTime = event.getEventFeedbackReminderNotificationTime();
 			if (eventFeedbackReminderNotificationTime != null) {
 				scheduleFillFeedbackOnEventNotification(event, eventFeedbackReminderNotificationTime.getTime());
@@ -57,6 +56,7 @@ public class LocalNotificationScheduler {
 	}
 
 	public void scheduleEventAboutToStartNotification(ConventionEvent event, long time) {
+		Log.i(TAG, "Scheduling event start notification of type for event " + event.getTitle() + " to " + time);
 		if (time < System.currentTimeMillis()) {
 			// Don't allow scheduling notifications in the past
 			return;
@@ -67,6 +67,7 @@ public class LocalNotificationScheduler {
 	}
 
 	public void scheduleFillFeedbackOnEventNotification(ConventionEvent event, long time) {
+		Log.i(TAG, "Scheduling event feedback notification of type for event " + event.getTitle() + " to " + time);
 		if (time < System.currentTimeMillis()) {
 			// Don't allow scheduling notifications in the past
 			return;
@@ -86,6 +87,7 @@ public class LocalNotificationScheduler {
 	}
 
 	public void cancelEventAlarm(ConventionEvent event, PushNotification.Type notificationType) {
+		Log.i(TAG, "Cancelling event alarm for notification of type " + notificationType + " for event " + event.getTitle());
 		// Sending the extras due to apparent bug on Lollipop that this exact intent is used when rescheduling it
 		// (canceling then re-setting it), so it needs the extras or it arrives without parameters and is not displayed
 		Intent intent = new Intent(context, ShowNotificationReceiver.class)
@@ -161,4 +163,14 @@ public class LocalNotificationScheduler {
 		alarmManager.set(AlarmManager.RTC, time, pendingIntent);	}
 
 	private enum Accuracy {SMALLEST_TIME_WINDOW_BEFORE, INACCURATE}
+
+	public static void setDefaultEventAboutToStartNotification(ConventionEvent event) {
+		EventNotification eventAboutToStartNotification = event.getUserInput().getEventAboutToStartNotification();
+		eventAboutToStartNotification.setTimeDiffInMillis(- DEFAULT_PRE_EVENT_START_NOTIFICATION_MINUTES * Dates.MILLISECONDS_IN_MINUTE);
+	}
+
+	public static void setDefaultEventFeedbackReminderNotification(ConventionEvent event) {
+		EventNotification feedbackReminder = event.getUserInput().getEventFeedbackReminderNotification();
+		feedbackReminder.setTimeDiffInMillis(DEFAULT_POST_EVENT_END_NOTIFICATION_MINUTES * Dates.MILLISECONDS_IN_MINUTE);
+	}
 }
