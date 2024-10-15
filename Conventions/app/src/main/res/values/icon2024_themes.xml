@@ -228,7 +228,6 @@
     </style>
 
     <style name="AppBaseTheme.Icon2024.Settings">
-        <item name="android:textColor">@color/icon2024_gray800</item>
         <item name="android:textColorPrimary">@color/icon2024_gray800</item>
          <item name="android:textColorSecondary">@color/icon2024_gray800</item>
     </style>
