@@ -11,22 +11,15 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
@@ -41,6 +34,8 @@ import amai.org.conventions.customviews.ConditionalSwipeVerticalViewPager;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.Floor;
 import amai.org.conventions.model.MapLocation;
+import amai.org.conventions.model.Place;
+import amai.org.conventions.model.Shelter;
 import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.model.conventions.Convention;
@@ -48,6 +43,10 @@ import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Objects;
 import amai.org.conventions.utils.Views;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 public class MapActivity extends NavigationActivity implements MapFloorFragment.OnMapFloorEventListener {
 	public static final String EXTRA_FLOOR_NUMBER = "ExtraFloorNumber";
@@ -116,6 +115,8 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		setFloorInViewPager(floorNumber, initialLocations);
 
 		initializeSearch(savedInstanceState);
+
+		initializeShowSheltersButton();
 	}
 
 	@Override
@@ -301,6 +302,26 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		outState.putString(STATE_SEARCH_TERM, searchText.getText().toString());
 		outState.putBoolean(STATE_MAP_SEARCH_ONLY_HALLS, showOnlyHallsCheckbox.isChecked());
 		outState.putBoolean(STATE_MAP_SEARCH_OPEN, isSearchOpen());
+	}
+
+	private void initializeShowSheltersButton() {
+		Button showSheltersButton = findViewById(R.id.map_show_shelters);
+		List<MapLocation> shelters = CollectionUtils.filter(map.getLocations(), item -> {
+			for (Place place : item.getPlaces()) {
+				if (place instanceof Shelter) {
+					return true;
+				}
+			}
+			return false;
+		});
+		if (shelters.isEmpty()) {
+			showSheltersButton.setVisibility(View.GONE);
+		} else {
+			showSheltersButton.setVisibility(View.VISIBLE);
+			showSheltersButton.setOnClickListener(v -> {
+				getCurrentFloorFragment().selectMarkersWithNameAndFloor(shelters);
+			});
+		}
 	}
 
 	private void initializeSearch(Bundle savedInstanceState) {
