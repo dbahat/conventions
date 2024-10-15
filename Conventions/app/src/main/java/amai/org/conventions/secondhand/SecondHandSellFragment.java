@@ -5,13 +5,17 @@ import android.content.DialogInterface;
 import android.database.DataSetObserver;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.InputType;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.net.URL;
 
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.SecondHandSell;
@@ -61,6 +65,16 @@ public class SecondHandSellFragment extends Fragment implements SwipeRefreshLayo
 		soldFormsTotal.setTextColor(new StateList(R.attr.state_second_hand_item_sold).getThemeColor(getContext(), R.attr.secondHandItemStatusColor));
 
 		updateSoldForms();
+
+		TextView gotoCreateFormsView = view.findViewById(R.id.second_hand_goto_create_forms);
+		URL gotoCreateFormsURL = Convention.getInstance().getSecondHandGoToCreateFormsURL();
+		if (gotoCreateFormsURL == null) {
+			gotoCreateFormsView.setVisibility(View.GONE);
+		} else {
+			gotoCreateFormsView.setText(Html.fromHtml(getString(R.string.second_hand_goto_create_form, gotoCreateFormsURL)));
+			gotoCreateFormsView.setMovementMethod(LinkMovementMethod.getInstance());
+			gotoCreateFormsView.setVisibility(View.VISIBLE);
+		}
 
 		isRefreshing = false;
 		isAddingItem = false;

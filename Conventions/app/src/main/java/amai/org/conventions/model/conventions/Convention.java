@@ -225,6 +225,8 @@ public abstract class Convention implements Serializable {
 
 	public abstract URL getSecondHandItemsURL(SecondHandItem.Status status);
 
+	public abstract URL getSecondHandGoToCreateFormsURL();
+
 	public abstract HttpURLConnection getUserPurchasedEventsRequest(String token) throws Exception;
 
 	public abstract HttpURLConnection getUserIDRequest(String token) throws Exception;

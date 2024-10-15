@@ -134,6 +134,11 @@ public class TestConvention extends Convention {
     }
 
     @Override
+    public URL getSecondHandGoToCreateFormsURL() {
+        return null;
+    }
+
+    @Override
     public HttpURLConnection getUserPurchasedEventsRequest(String token) throws Exception {
         return null;
     }

@@ -239,6 +239,9 @@
     <string name="second_hand_sold_form_notification">כל הפריטים של טופס מספר %s נמכרו ב-%d ש\"ח</string>
     <string name="second_hand_form_sold_items_total">בטופס זה נמכרו %d פריטים בסך %d ש\"ח</string>
     <string name="second_hand_form_sold_item_total">בטופס זה נמכר פריט אחד בסך %d ש\"ח</string>
+    <string name="second_hand_goto_create_form"><![CDATA[
+<a href="%s">עבור להגשת טופס.</a> שים לב, יש להוסיף את הטופס לאפליקציה לאחר ההגשה.
+]]></string>
     <string name="second_hand_sell">מכירה</string>
     <string name="second_hand_buy">קנייה</string>
     <string name="cancel2">ביטול</string>

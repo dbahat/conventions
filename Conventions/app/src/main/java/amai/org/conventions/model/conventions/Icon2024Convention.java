@@ -419,6 +419,15 @@ public class Icon2024Convention extends SffConvention {
 	}
 
 	@Override
+	public URL getSecondHandGoToCreateFormsURL() {
+		try {
+			return new URL("https://yadash.sf-f.org.il/");
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@Override
 	public HttpURLConnection getUserPurchasedEventsRequest(String token) throws Exception {
 		URL url = new URL("https://api.sf-f.org.il/program/cod3/events_per_user_sso/?slug=" + API_SLUG);
 		HttpURLConnection request = HttpConnectionCreator.createConnection(url);
