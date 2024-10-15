@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import androidx.appcompat.app.AlertDialog;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -14,6 +13,8 @@ import com.google.android.gms.common.GoogleApiAvailability;
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.R;
 import amai.org.conventions.utils.Log;
+import amai.org.conventions.utils.Settings;
+import androidx.appcompat.app.AlertDialog;
 
 public class PlayServicesInstallation {
 	private static final String TAG = PlayServicesInstallation.class.getCanonicalName();
@@ -53,7 +54,7 @@ public class PlayServicesInstallation {
 	 * The context sent can be any context object.
 	 */
 	public static CheckResult checkPlayServicesExist(final Context context, boolean ignoreCancelled) {
-		if ((!ignoreCancelled) && ConventionsApplication.settings.wasPlayServicesInstallationCancelled()) {
+		if ((!ignoreCancelled) && ConventionsApplication.settings.getPlayServicesInstallationCancelledTimes() >= Settings.MAX_CANCEL_TIMES) {
 			return new CheckResult(-1, true, false);
 		}
 		GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
@@ -65,8 +66,8 @@ public class PlayServicesInstallation {
 		return new CheckResult(resultCode, false, false);
 	}
 
-	public static void showInstallationDialog(final Context context, final CheckResult checkResult) {
-		new AlertDialog.Builder(context)
+	public static void showInstallationDialog(final Context context, final CheckResult checkResult, Runnable onDismiss) {
+		AlertDialog dialog = new AlertDialog.Builder(context)
 				.setTitle(R.string.missing_play_services_dialog_title)
 				.setMessage(R.string.missing_play_services_dialog_message)
 				.setPositiveButton(R.string.missing_play_services_ok_button, new DialogInterface.OnClickListener() {
@@ -83,15 +84,14 @@ public class PlayServicesInstallation {
 						dialogInterface.dismiss();
 					}
 				})
-				.setNeutralButton(R.string.missing_play_services_neutral_button, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialogInterface, int i) {
-						dialogInterface.dismiss();
-					}
-				})
 				.setCancelable(true)
-				.create()
-				.show();
+				.create();
+		dialog.setOnDismissListener(dialog1 -> {
+			if (onDismiss != null) {
+				onDismiss.run();
+			}
+		});
+		dialog.show();
 	}
 
 	public static void resolvePlayServicesError(Context context, CheckResult checkResult) {

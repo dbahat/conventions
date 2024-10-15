@@ -14,17 +14,20 @@ import androidx.preference.PreferenceManager;
 
 public class Settings {
 	public static final int NO_PUSH_NOTIFICATION_SEEN_NOTIFICATION_ID = -1;
+	public static final int MAX_CANCEL_TIMES = 2;
 
 	private static final String SETTINGS_SUFFIX = "settings";
 	private static final String PREFERENCES_FILE_NAME = Convention.getInstance().getId() + "_" + SETTINGS_SUFFIX;
 	private static final String WAS_FEEDBACK_NOTIFICATION_SHOWN = "WasFeedbackNotificationShown";
 	private static final String WAS_LAST_CHANCE_FEEDBACK_NOTIFICATION_SHOWN = "WasLastChanceFeedbackNotificationShown";
 	private static final String WAS_PLAY_SERVICES_INSTALLATION_CANCELLED = "WasPlayServicesInstallationCancelled";
+	private static final String PLAY_SERVICES_INSTALLATION_CANCELLED_TIMES = "PlayServicesInstallationCancelledTimes";
 	private static final String WAS_SETTINGS_POPUP_DISPLAYED = "WasSettingsPopupDisplayed";
 	private static final String LAST_SEEN_PUSH_NOTIFICATION_ID = "LastSeenPushNotificationId";
 	private static final String LAST_EVENTS_UPDATE_DATE = "LastEventsUpdateDate";
 	private static final String LAST_UPDATES_UPDATE_DATE = "LastUpdatesUpdateDate";
 	private static final String IS_ADVANCED_OPTIONS_ENABLED = "isAdvancedOptionsEnabled";
+	private static final String NUMBER_OF_TIMES_ASKED_FOR_EXACT_ALARMS = "NumberOfTimesAskedForExactAlarms";
 
 	private final SharedPreferences sharedPreferences;
 
@@ -69,12 +72,30 @@ public class Settings {
 		sharedPreferences.edit().putBoolean(WAS_LAST_CHANCE_FEEDBACK_NOTIFICATION_SHOWN, true).apply();
 	}
 
-	public boolean wasPlayServicesInstallationCancelled() {
-		return sharedPreferences.getBoolean(WAS_PLAY_SERVICES_INSTALLATION_CANCELLED, false);
+	public int getPlayServicesInstallationCancelledTimes() {
+		// User has previously selected "don't show again"
+		if (sharedPreferences.getBoolean(WAS_PLAY_SERVICES_INSTALLATION_CANCELLED, false)) {
+			return MAX_CANCEL_TIMES;
+		}
+		return sharedPreferences.getInt(PLAY_SERVICES_INSTALLATION_CANCELLED_TIMES, 0);
 	}
 
 	public void setPlayServicesInstallationCancelled() {
-		sharedPreferences.edit().putBoolean(WAS_PLAY_SERVICES_INSTALLATION_CANCELLED, true).apply();
+		int currentTimes = getPlayServicesInstallationCancelledTimes();
+		sharedPreferences.edit().putInt(PLAY_SERVICES_INSTALLATION_CANCELLED_TIMES, currentTimes + 1).apply();
+	}
+
+	public int getNumberOfTimesAskedForExactAlarms() {
+		return sharedPreferences.getInt(NUMBER_OF_TIMES_ASKED_FOR_EXACT_ALARMS, 0);
+	}
+
+	public void resetNumberOfTimesAskedForExactAlarms() {
+		sharedPreferences.edit().putInt(NUMBER_OF_TIMES_ASKED_FOR_EXACT_ALARMS, 0).apply();
+	}
+
+	public void askedForExactAlarms() {
+		int currentTimes = getNumberOfTimesAskedForExactAlarms();
+		sharedPreferences.edit().putInt(NUMBER_OF_TIMES_ASKED_FOR_EXACT_ALARMS, currentTimes + 1).apply();
 	}
 
 	public boolean wasSettingsPopupDisplayed() {

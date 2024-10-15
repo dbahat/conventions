@@ -43,7 +43,6 @@ public class ConventionsApplication extends Application {
 		alarmScheduler = new LocalNotificationScheduler(this);
 
 		try {
-			alarmScheduler.scheduleNotificationsToFillConventionFeedback();
 			restoreAlarmConfiguration();
 		} catch (Exception e) {
 			// Added due to a SecurityException when trying to schedule alarms on some devices.
@@ -65,11 +64,7 @@ public class ConventionsApplication extends Application {
 		registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
 			@Override
 			public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-				// Important - only keep our activities here! Update when adding new activities if
-				// they aren't NavigationActivity!
-				if (activity instanceof NavigationActivity || activity instanceof SplashActivity) {
-					currentContext = activity;
-				}
+				saveCurrentActivity(activity);
 			}
 
 			@Override
@@ -81,6 +76,8 @@ public class ConventionsApplication extends Application {
 
 			@Override
 			public void onActivityStarted(Activity activity) {
+				// When returning from activity result, the current activity is not created again unless it was destroyed
+				saveCurrentActivity(activity);
 			}
 
 			@Override
@@ -98,6 +95,14 @@ public class ConventionsApplication extends Application {
 			@Override
 			public void onActivityDestroyed(Activity activity) {
 			}
+
+			private void saveCurrentActivity(Activity activity) {
+				// Important - only keep our activities here! Update when adding new activities if
+				// they aren't NavigationActivity!
+				if (activity instanceof NavigationActivity || activity instanceof SplashActivity) {
+					currentContext = activity;
+				}
+			}
 		});
 	}
 
@@ -113,9 +118,12 @@ public class ConventionsApplication extends Application {
 	}
 
 	/**
-	 * Since the Android AlarmManager gets reset whenever the device reboots, we re-schedule all the notifications when the app is launched.
+	 * Since the Android AlarmManager gets reset whenever the device reboots or the exact alarms permission is revoked,
+	 * we re-schedule all the notifications when the app is launched.
+	 * We also call this when exact schedule permission is granted and when the decide is restarted.
 	 */
-	private void restoreAlarmConfiguration() {
+	public static void restoreAlarmConfiguration() {
+		alarmScheduler.scheduleNotificationsToFillConventionFeedback();
 		for (ConventionEvent event : Convention.getInstance().getEvents()) {
 			scheduleEventAlarms(event);
 		}
@@ -165,12 +173,12 @@ public class ConventionsApplication extends Application {
 		}
 	}
 
-	private void scheduleEventAlarms(ConventionEvent event) {
+	private static void scheduleEventAlarms(ConventionEvent event) {
 		restoreAlarmConfiguration(event, EventNotification.Type.AboutToStart);
 		restoreAlarmConfiguration(event, EventNotification.Type.FeedbackReminder);
 	}
 
-	private void restoreAlarmConfiguration(ConventionEvent event, EventNotification.Type eventNotificationType) {
+	private static void restoreAlarmConfiguration(ConventionEvent event, EventNotification.Type eventNotificationType) {
 		switch (eventNotificationType) {
 			case AboutToStart:
 				if (event.getEventAboutToStartNotificationTime() != null) {
