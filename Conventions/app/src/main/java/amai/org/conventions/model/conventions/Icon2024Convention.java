@@ -24,6 +24,7 @@ import amai.org.conventions.model.ImageIdToImageResourceMapper;
 import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.model.Place;
 import amai.org.conventions.model.SecondHandItem;
+import amai.org.conventions.model.Shelter;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 import amai.org.conventions.utils.Dates;
@@ -200,7 +201,7 @@ public class Icon2024Convention extends SffConvention {
 				.withImageHeight(894)
 				.withImageWidth(856.90002f)
 				.withDefaultMarkerHeight(35);
-		final int BIG_MARKER_HEIGHT = 70;
+		final int BIG_MARKER_HEIGHT = 50;
 		final int SMALL_MARKER_HEIGHT = 25;
 
 		return new ConventionMap()
@@ -219,7 +220,7 @@ public class Icon2024Convention extends SffConvention {
 						mapLocation("שירותי גברים", 130, 248),
 						mapLocation("שירותי נשים", 269, 248),
 						mapLocation(eshkol1, 243, 311),
-						mapLocation("מרחב מוגן", 168, 311),
+						mapLocationForShelter("מרחב מוגן", 168, 311).withMarkerHeight(BIG_MARKER_HEIGHT),
 						mapLocation(eshkol2, 143, 305),
 						mapLocation("דוכנים", 220, 466),
 						mapLocation("דוכנים", 397, 466),
@@ -229,24 +230,24 @@ public class Icon2024Convention extends SffConvention {
 						mapLocation("כניסה ויציאה מרחוב הארבעה", 28, 756),
 						mapLocation("מתחם משחקי לוח", 114, 714),
 						mapLocation("משחקי שער", 241, 661),
-						mapLocation("מרחב מוגן", 240, 713),
+						mapLocationForShelter("מרחב מוגן", 240, 713).withMarkerHeight(BIG_MARKER_HEIGHT),
 						mapLocation("מודיעין", 157, 791),
 						mapLocation("קופות", 274, 780),
 						mapLocation(cinematheque2, 271, 859),
-						mapLocation("מרחב מוגן", 216, 859),
+						mapLocationForShelter("מרחב מוגן", 216, 859).withMarkerHeight(BIG_MARKER_HEIGHT),
 						mapLocation(cinematheque4, 162, 859),
 						mapLocation("אולם ספורט", 415, 790),
 						mapLocation("קפיטריה", 430, 685),
 						mapLocation("מדרגות לעירוני מפלס עליון", 567, 73),
 						mapLocation("שירותי גברים", 610, 116).withMarkerHeight(SMALL_MARKER_HEIGHT),
-						mapLocation("מדרגות למרחב מוגן", 584, 198),
+						mapLocationForShelter("מדרגות למרחב מוגן", 584, 198).withMarkerHeight(BIG_MARKER_HEIGHT),
 						mapLocation("שירותי נשים", 631, 116).withMarkerHeight(SMALL_MARKER_HEIGHT),
 						mapLocation("קוספליי נשים", 686, 175),
 						mapLocation(workshops, 686, 224),
 						mapLocation(ironi8, 686, 270),
 						mapLocation(ironi9, 686, 316),
 						mapLocation(kids, 686, 358),
-						mapLocation("מדרגות למרחב מוגן", 686, 399),
+						mapLocationForShelter("מדרגות למרחב מוגן", 686, 395).withMarkerHeight(40),
 						mapLocation("עירוני 1-7 ומשחקי קופסה 1-2", Arrays.asList(ironi1, ironi2, ironi3, ironi4, ironi5, ironi6, ironi7, games1, games2), 672, 469),
 						mapLocation("תיקון קוספליי", 577, 413),
 						mapLocation("כניסה ויציאה נגישה לעירוני מפלס עליון", 744, 395),
@@ -291,6 +292,12 @@ public class Icon2024Convention extends SffConvention {
 			.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
 			.withX(x)
 			.withY(y);
+	}
+
+	private MapLocation mapLocationForShelter(String name, float x, float y) {
+		return mapLocation(new Shelter().withName(name), x, y)
+			.withMarkerResource(R.drawable.icon2024_place_red, false, MapLocation.NO_TINT)
+			.withSelectedMarkerResource(R.drawable.icon2024_place_red_selected, false, MapLocation.NO_TINT);
 	}
 
 	@Override

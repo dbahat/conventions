@@ -213,6 +213,7 @@
         <item name="mapSearchBarHorizontalMargins">5dp</item>
         <item name="standIconColor">@color/icon2024_cream1000</item>
         <item name="standsTypeTitleColor">@color/icon2024_cream1000</item>
+        <item name="mapShelterButtonBackground">@drawable/icon2024_map_shelter_button</item>
         <!-- Second Hand Screen -->
         <item name="secondHandFormColor">@drawable/icon2024_second_hand_form_text_color</item>
         <item name="secondHandItemStatusColor">@drawable/icon2024_second_hand_item_status_text_color</item>
