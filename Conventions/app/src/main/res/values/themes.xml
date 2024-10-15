@@ -160,6 +160,7 @@
         <item name="mapSearchBarBackground">@null</item>
         <item name="mapSearchBarHorizontalMargins">0dp</item>
         <item name="mapSearchPaneElevation">0dp</item>
+        <item name="mapShelterButtonBackground">?highlightedButtonBackground</item>
 
         <!-- Event activity -->
         <item name="eventToolbarColor">?toolbarBackground</item>
@@ -385,6 +386,7 @@
         <item name="mapSearchBarBackground">@null</item>
         <item name="mapSearchBarHorizontalMargins">0dp</item>
         <item name="mapSearchPaneElevation">0dp</item>
+        <item name="mapShelterButtonBackground">?highlightedButtonBackground</item>
 
         <!-- Event activity -->
         <item name="eventToolbarColor">?toolbarBackground</item>

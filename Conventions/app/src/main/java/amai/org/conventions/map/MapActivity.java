@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -30,6 +31,8 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
+import amai.org.conventions.model.Place;
+import amai.org.conventions.model.Shelter;
 import sff.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.ConditionalSwipeVerticalViewPager;
@@ -115,6 +118,8 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		setFloorInViewPager(floorNumber, initialLocations);
 
 		initializeSearch(savedInstanceState);
+
+		initializeShowSheltersButton();
 	}
 
 	@Override
@@ -300,6 +305,26 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		outState.putString(STATE_SEARCH_TERM, searchText.getText().toString());
 		outState.putBoolean(STATE_MAP_SEARCH_ONLY_HALLS, showOnlyHallsCheckbox.isChecked());
 		outState.putBoolean(STATE_MAP_SEARCH_OPEN, isSearchOpen());
+	}
+
+	private void initializeShowSheltersButton() {
+		Button showSheltersButton = findViewById(R.id.map_show_shelters);
+		List<MapLocation> shelters = CollectionUtils.filter(map.getLocations(), item -> {
+			for (Place place : item.getPlaces()) {
+				if (place instanceof Shelter) {
+					return true;
+				}
+			}
+			return false;
+		});
+		if (shelters.isEmpty()) {
+			showSheltersButton.setVisibility(View.GONE);
+		} else {
+			showSheltersButton.setVisibility(View.VISIBLE);
+			showSheltersButton.setOnClickListener(v -> {
+				getCurrentFloorFragment().selectMarkersWithNameAndFloor(shelters);
+			});
+		}
 	}
 
 	private void initializeSearch(Bundle savedInstanceState) {

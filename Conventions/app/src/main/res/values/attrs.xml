@@ -459,6 +459,9 @@
         <!-- Elevation for map search pane -->
         <attr name="mapSearchPaneElevation" format="dimension|reference"/>
 
+        <!-- Shelter button background -->
+        <attr name="mapShelterButtonBackground" format="integer|reference"/>
+
         <!-- Stands popup stand icon color -->
         <attr name="standIconColor" format="color|reference"/>
         <!-- Stands popup - color for stand type title and selected stand name and location -->
