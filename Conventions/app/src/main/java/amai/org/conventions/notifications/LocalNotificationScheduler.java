@@ -4,7 +4,6 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Build;
 
 import java.util.Calendar;
@@ -58,7 +57,7 @@ public class LocalNotificationScheduler {
 		}
 
 		PendingIntent pendingIntent = createEventNotificationPendingIntent(event, PushNotification.Type.EventAboutToStart);
-		scheduleAlarm(time, pendingIntent, Accuracy.SMALLEST_TIME_WINDOW_BEFORE);
+		scheduleAlarm(time, pendingIntent, Accuracy.ACCURATE);
 	}
 
 	public void scheduleFillFeedbackOnEventNotification(ConventionEvent event, long time) {
@@ -146,18 +145,23 @@ public class LocalNotificationScheduler {
 			case INACCURATE:
 				scheduleInaccurateAlarm(time, pendingIntent);
 				break;
-			default: // Accuracy.SMALLEST_TIME_WINDOW_BEFORE
-				// The smallest reliable time window is 10 minutes
-				length = 10 * Dates.MILLISECONDS_IN_MINUTE;
-				time = time - length;
-				alarmManager.setWindow(AlarmManager.RTC_WAKEUP, time, length, pendingIntent);
+			default: // Accuracy.ACCURATE
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && alarmManager.canScheduleExactAlarms()) {
+					alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, time, pendingIntent);
+				} else {
+					// The smallest reliable time window is 10 minutes
+					length = 10 * Dates.MILLISECONDS_IN_MINUTE;
+					time = time - length;
+					alarmManager.setWindow(AlarmManager.RTC_WAKEUP, time, length, pendingIntent);
+				}
 		}
 	}
 
 	private void scheduleInaccurateAlarm(long time, PendingIntent pendingIntent) {
-		alarmManager.set(AlarmManager.RTC, time, pendingIntent);	}
+		alarmManager.set(AlarmManager.RTC, time, pendingIntent);
+	}
 
-	private enum Accuracy {SMALLEST_TIME_WINDOW_BEFORE, INACCURATE}
+	private enum Accuracy {ACCURATE, INACCURATE}
 
 	public static void setDefaultEventAboutToStartNotification(ConventionEvent event) {
 		EventNotification eventAboutToStartNotification = event.getUserInput().getEventAboutToStartNotification();

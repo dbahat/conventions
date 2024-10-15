@@ -18,7 +18,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -26,7 +25,6 @@ import amai.org.conventions.events.activities.MyEventsActivity;
 import amai.org.conventions.events.activities.ProgrammeActivity;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
-import amai.org.conventions.model.ConventionEventEndTimeComparator;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.updates.UpdatesActivity;
@@ -55,7 +53,11 @@ public class HomeActivity extends NavigationActivity {
 		setToolbarTitle(ThemeAttributes.getDrawable(this, R.attr.homeToolbarTitle));
 		setHomeActivityBackground();
 
-		askForNotificationsPermissions();
+		// Only ask for permissions when opening the app (and not when pressing back or navigating to the home screen)
+		if ((savedInstanceState == null || !savedInstanceState.getBoolean(STATE_DISABLE_PERMISSION_REQUEST, false)) &&
+			shouldInitialize(savedInstanceState)) {
+			askForPermissions();
+		}
 	}
 
 	@Override

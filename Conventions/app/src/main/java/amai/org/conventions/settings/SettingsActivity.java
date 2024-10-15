@@ -11,12 +11,15 @@ import java.util.Date;
 
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.ThemeAttributes;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.notifications.PlayServicesInstallation;
 import amai.org.conventions.notifications.PushNotificationTopic;
 import amai.org.conventions.notifications.PushNotificationTopicsSubscriber;
+import amai.org.conventions.tasks.TasksExecutor;
 import amai.org.conventions.utils.BundleBuilder;
 import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.Log;
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -65,6 +68,12 @@ public class SettingsActivity extends NavigationActivity {
 		ConventionsApplication.settings.setAdvancedOptionsEnabled(true);
 		Toast.makeText(this, R.string.advanced_options_enabled, Toast.LENGTH_SHORT).show();
 		recreate();
+	}
+
+	public void askForExactAlarmsPermission() {
+		TasksExecutor<Boolean> executor = new TasksExecutor<>(Boolean.FALSE, newAskForExactAlarmsPermissionTask());
+		disableNextTaskExecution();
+		executor.execute();
 	}
 
 	public static class SettingsFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
@@ -133,6 +142,14 @@ public class SettingsActivity extends NavigationActivity {
 				}
 			} else {
 				if (key != null && findPreference(key) != null) {
+					// If the user enabled the event start remined, start a task to check if we have exact alarm permissions, and if not ask for it
+					if (key.equals(Convention.getInstance().getId().toLowerCase() + "_event_starting_reminder") && sharedPreferences.getBoolean(key, false)) {
+						if (getActivity() instanceof SettingsActivity) {
+							SettingsActivity activity = (SettingsActivity) getActivity();
+							activity.askForExactAlarmsPermission();
+						}
+					}
+
 					final boolean isSelected = sharedPreferences.getBoolean(key, false);
 					FirebaseAnalytics
 							.getInstance(getActivity())

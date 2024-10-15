@@ -7,6 +7,10 @@
     <!-- For notifications -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- For exact event about to start notifications -->
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+    <!-- To reschedule alarms when device reboots -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <!-- Required for google maps, updates and refreshing the programme -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -106,6 +110,17 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <!-- This receiver is invoked when we want to reschedule alarms -->
+        <receiver android:name="amai.org.conventions.notifications.RescheduleAlarmsReceiver" android:exported="false">
+            <intent-filter>
+                <!-- Listen for the system broadcast sent when scheduling exact alarm permissions are granted.
+                Note that there is no event when the permission is revoked. -->
+                <action android:name="android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED" />
+                <!-- Listen for device reboot -->
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
 
         <meta-data
             android:name="com.google.android.gms.version"

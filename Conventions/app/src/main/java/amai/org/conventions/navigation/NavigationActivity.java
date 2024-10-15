@@ -2,14 +2,17 @@ package amai.org.conventions.navigation;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,7 +31,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import amai.org.conventions.AboutActivity;
-import amai.org.conventions.ActivitiesActivity;
 import amai.org.conventions.ApplicationInitializer;
 import amai.org.conventions.ArrivalMethodsActivity;
 import amai.org.conventions.ConventionsApplication;
@@ -49,8 +51,15 @@ import amai.org.conventions.notifications.PushNotification;
 import amai.org.conventions.notifications.PushNotificationDialogPresenter;
 import amai.org.conventions.secondhand.SecondHandActivity;
 import amai.org.conventions.settings.SettingsActivity;
+import amai.org.conventions.tasks.Task;
+import amai.org.conventions.tasks.TasksExecutor;
 import amai.org.conventions.updates.UpdatesActivity;
 import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.Log;
+import amai.org.conventions.utils.Settings;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -69,6 +78,9 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	public static final String EXTRA_INITIALIZE = "ExtraInitialize";
 	public static final String EXTRA_EXIT_ON_BACK = "ExtraExitOnBack";
 	public static final String EXTRA_SHOW_HOME_ON_BACK = "ExtraShowHomeOnBack";
+	private static final String STATE_TASK_EXECUTOR_SHARED_DATA = "TaskExecutorSharedData";
+	protected static final String STATE_DISABLE_PERMISSION_REQUEST = "DisablePermissionRequest";
+	protected static final String STATE_DISABLE_NEXT_TASK_EXECUTION = "DisableNextTaskExecution";
 
 	protected static final int SELECT_CURRENT_DATE = -1;
 
@@ -81,8 +93,31 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	private DrawerLayout navigationDrawer;
 	private PushNotification receivedPushNotification;
 	private NavigationTopButtonsLayout navigationTopButtonsLayout;
+	private boolean disablePermissionRequest = false;
+	private boolean nextTaskExecutionDisabled = false;
 
-	protected static final int NOTIFICATIONS_PERMISSION_REQUEST_CODE = 10;
+	private final TasksExecutor<Boolean> permissionTasks = new TasksExecutor<>(
+		Boolean.FALSE,
+		// First ask generally to show notifications
+		new AskForNotificationsPermissionTask(),
+		// Ask for specific permissions for event about to start exact alarm
+		new AskForExactAlarmsPermissionTask(),
+		// Ask to install Google Play Services for push notifications
+		new InstallGooglePlayServicesTask()
+	);
+
+	private String continueAfterTask = null;
+
+	private final ActivityResultLauncher<String> requestNotificationsPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+		// We don't care about the result, if the permissions is blocked the notifications aren't displayed
+		continueAfterTask = AskForNotificationsPermissionTask.NAME;
+	});
+
+	private final ActivityResultLauncher<Intent> requestExactPermissionsIntentLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+		// We handle the actual result in RescheduleAlarmsReceiver. This is here just so we can continue executing tasks.
+		continueAfterTask = AskForExactAlarmsPermissionTask.NAME;
+	});
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -92,9 +127,15 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		exitOnBack = getIntent().getBooleanExtra(EXTRA_EXIT_ON_BACK, false);
 		showHomeOnBack = getIntent().getBooleanExtra(EXTRA_SHOW_HOME_ON_BACK, false);
 
-		if (getIntent().getBooleanExtra(EXTRA_INITIALIZE, false) &&
-				!(savedInstanceState != null && savedInstanceState.getBoolean(EXTRA_INITIALIZE, true))) {
+		if (shouldInitialize(savedInstanceState)) {
 			new ApplicationInitializer().initialize(this.getApplicationContext());
+		}
+
+		if (savedInstanceState != null) {
+			permissionTasks.setSharedData(savedInstanceState.getBoolean(STATE_TASK_EXECUTOR_SHARED_DATA, false));
+			if (savedInstanceState.getBoolean(STATE_DISABLE_NEXT_TASK_EXECUTION, false)) {
+				disableNextTaskExecution();
+			}
 		}
 
 		navigationToolbar = (Toolbar) findViewById(R.id.navigation_toolbar);
@@ -128,6 +169,11 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		this.receivedPushNotification = getNotificationFromIntent(getIntent());
 	}
 
+	protected boolean shouldInitialize(Bundle savedInstanceState) {
+		return (getIntent().getBooleanExtra(EXTRA_INITIALIZE, false) &&
+			!(savedInstanceState != null && savedInstanceState.getBoolean(EXTRA_INITIALIZE, true)));
+	}
+
 	@Override
 	protected void onNewIntent(Intent intent) {
 		super.onNewIntent(intent);
@@ -139,11 +185,21 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		showPushNotificationIfReceived(getNotificationFromIntent(intent));
 	}
 
+	protected void disableNextTaskExecution() {
+		nextTaskExecutionDisabled = true;
+	}
+
 	@Override
 	protected void onResume() {
 		super.onResume();
 		showPushNotificationIfReceived(this.receivedPushNotification);
 		this.receivedPushNotification = null;
+
+		if (continueAfterTask != null && !nextTaskExecutionDisabled) {
+			String taskToContinueAfter = continueAfterTask;
+			continueAfterTask = null;
+			permissionTasks.executeNextTaskAfter(taskToContinueAfter);
+		}
 	}
 
 	private PushNotification getNotificationFromIntent(Intent intent) {
@@ -172,6 +228,9 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		outState.putBoolean(EXTRA_INITIALIZE, false); // Prevent re-initializing
+		outState.putBoolean(STATE_TASK_EXECUTOR_SHARED_DATA, permissionTasks.getSharedData()); // So we can continue the flow if the app was restarted
+		outState.putBoolean(STATE_DISABLE_PERMISSION_REQUEST, disablePermissionRequest); // If we're waiting for the result, don't request the permissions again
+		outState.putBoolean(STATE_DISABLE_NEXT_TASK_EXECUTION, nextTaskExecutionDisabled); // If we started a one-time task, don't continue the flow
 		super.onSaveInstanceState(outState);
 	}
 
@@ -508,65 +567,231 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		icon.setColorFilter(null);
 	}
 
-	protected void askForNotificationsPermissions() {
-		if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
-			return;
-		}
-		if (ConventionsApplication.settings.wasSettingsPopupDisplayed() && !ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.POST_NOTIFICATIONS)) {
-			requestNotificationsPermission();
-			return;
-		}
+	protected void askForPermissions() {
+		/*
+		We need to request 2 kinds of permissions: to display notifications, and to schedule exact alarms.
+		The app can still work in both cases:
+		- If we don't have permissions to display notifications, they will just not be displayed.
+		- If we don't have permissions to schedule exact alarms, we will schedule inexact alarms for event about to start.
 
-		// Since push notifications cannot work without google play services, check for play services existence, and if
-		// they don't exist show a proper message to the user.
-		// After the check, inform the user he can change push notification settings in a dialog (one time).
-		new AsyncTask<Void, Void, PlayServicesInstallation.CheckResult>() {
-			private AlertDialog configureNotificationDialog;
+		For push notifications, the user must have Google Play Services installed, so we also check this and ask to install it if it isn't.
 
-			@Override
-			protected PlayServicesInstallation.CheckResult doInBackground(Void... params) {
-				return PlayServicesInstallation.checkPlayServicesExist(NavigationActivity.this, false);
-			}
+		We don't want to ask the user for permissions if they already decided not to grant it.
+		The notifications permission has Android logic to choose when to ask for it, so we can call it every time (it just won't be displayed if it shouldn't be).
+		It's denied when the user chooses no in the system grant notification dialog.
+		The Android logic is: ask for permissions twice, the second time with rationale. If denied both time don't ask again. (We show the rationale the first time too anyway.)
 
-			@Override
-			protected void onPostExecute(PlayServicesInstallation.CheckResult checkResult) {
-				// We use the current activity context and not the initial activity because it's possible the user
-				// already navigated from it. We can't use a destroyed activity to display a dialog
-				// since it causes an exception.
-				Context currentContext = ConventionsApplication.getCurrentContext();
-				if (currentContext == null) {
-					return;
-				}
-				if (checkResult.isUserError()) {
-					PlayServicesInstallation.showInstallationDialog(currentContext, checkResult);
-				} else if (checkResult.isSuccess()) {
-					showConfigureNotificationsDialog(currentContext);
-				}
-			}
+		For the exact alarms notifications, since it's a special permission, we have to decide when to show it. This will also be twice. It's denied when the user got to the setting page
+		and didn't choose to approve the permission, or when the user selected no in the rationale dialog. It's reset when the app starts and already has the permission.
+		Since the rationale dialog from the notifications permission is also relevant for the exact alarms, we don't display the exact alarms dialog it it was displayed in the same flow.
 
-			private void showConfigureNotificationsDialog(final Context context) {
-				configureNotificationDialog = new AlertDialog.Builder(context)
-					.setTitle(R.string.configure_notifications)
-					.setMessage(R.string.configure_notifications_dialog_message)
-					.setPositiveButton(R.string.ok, (dialog, which) -> configureNotificationDialog.hide())
-					.setNeutralButton(R.string.change_settings, (dialog, which) -> {
-						configureNotificationDialog.hide();
-						Intent intent = new Intent(context, SettingsActivity.class);
-						context.startActivity(intent);
-					})
-					.setCancelable(true)
-					.show();
-				ConventionsApplication.settings.setSettingsPopupAsDisplayed();
+		For Google Play Services installation, we also decide when to show it. It will be twice. It's denied when the user chose not to install in the dialog.
 
-				configureNotificationDialog.setOnDismissListener(dialog -> requestNotificationsPermission());
-			}
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		Since the alarms and push notifications are not be displayed anyway unless we can show notifications, we only ask for them when we have permissions
+		to display notifications.
+		 */
+		disablePermissionRequest = true;
+		permissionTasks.execute();
 	}
 
-	private void requestNotificationsPermission() {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-			// We don't care about the result, if the permissions is blocked the notifications aren't displayed
-			requestPermissions(new String[]{ "android.permission.POST_NOTIFICATIONS" }, NOTIFICATIONS_PERMISSION_REQUEST_CODE);
+	private static void showConfigureNotificationsDialog(final Activity context, Runnable onOk) {
+		if (context == null) {
+			return;
 		}
+
+		new AlertDialog.Builder(context)
+			.setTitle(R.string.configure_notifications)
+			.setMessage(R.string.configure_notifications_dialog_message)
+			.setPositiveButton(R.string.ok, (dialog, which) -> {
+				if (onOk != null) {
+					onOk.run();
+				}
+				dialog.dismiss();
+			})
+			.setCancelable(true)
+			.show();
+
+		ConventionsApplication.settings.setSettingsPopupAsDisplayed();
+	}
+
+	private static void showExactAlarmsRationaleDialog(final Activity context, Runnable onOk, Runnable onCancel) {
+		if (context == null) {
+			return;
+		}
+		new AlertDialog.Builder(context)
+			.setTitle(R.string.configure_alarms)
+			.setMessage(R.string.configure_alarms_dialog_message)
+			.setPositiveButton(R.string.ok, (dialog, which) -> {
+				if (onOk != null) {
+					onOk.run();
+				}
+				dialog.dismiss();
+			})
+			.setNegativeButton(R.string.dont_configure_notifications, (dialog, which) -> {
+				if (onCancel != null) {
+					onCancel.run();
+				}
+				dialog.dismiss();
+			})
+			.setCancelable(false)
+			.show();
+	}
+
+	private class AskForNotificationsPermissionTask extends Task<Boolean> {
+		public final static String NAME = "AskForNotificationsPermissionTask";
+
+		@Override
+		public String getName() {
+			return NAME;
+		}
+
+		@Override
+		public void execute(Activity activity) {
+			if (ContextCompat.checkSelfPermission(activity, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+				executeNextTask();
+				return;
+			}
+
+			if (ConventionsApplication.settings.wasSettingsPopupDisplayed() && !ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.POST_NOTIFICATIONS)) {
+				requestNotificationsPermission(activity);
+				return;
+			}
+
+			showConfigureNotificationsDialog(activity, () -> {
+				setSharedData(true); // Shared data here is whether the configure notifications dialog was displayed
+				requestNotificationsPermission(activity);
+			});
+		}
+
+		private void requestNotificationsPermission(Activity context) {
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+				requestNotificationsPermissionLauncher.launch("android.permission.POST_NOTIFICATIONS");
+			} else {
+				executeNextTask();
+			}
+		}
+	}
+
+	private static class InstallGooglePlayServicesTask extends Task<Boolean> {
+		public final static String NAME = "InstallGooglePlayServicesTask";
+
+		@Override
+		public String getName() {
+			return NAME;
+		}
+
+		@Override
+		public void execute(Activity currentActivity) {
+			// If we can't show notifications, there is no reason to install google play services here
+			// (it is also used for arrival methods, but we ask for it there too)
+			if (ContextCompat.checkSelfPermission(currentActivity, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+				executeNextTask();
+				return;
+			}
+
+			// Since push notifications cannot work without google play services, check for play services existence, and if
+			// they don't exist show a proper message to the user.
+			new AsyncTask<Void, Void, PlayServicesInstallation.CheckResult>() {
+				@Override
+				protected PlayServicesInstallation.CheckResult doInBackground(Void... params) {
+					return PlayServicesInstallation.checkPlayServicesExist(currentActivity, false);
+				}
+
+				@Override
+				protected void onPostExecute(PlayServicesInstallation.CheckResult checkResult) {
+					// We use the current activity context and not the initial activity because it's possible the user
+					// already navigated from it. We can't use a destroyed activity to display a dialog
+					// since it causes an exception.
+					Context currentContext = ConventionsApplication.getCurrentContext();
+					if (!(currentContext instanceof Activity)) {
+						return;
+					}
+					if (checkResult.isUserError()) {
+						PlayServicesInstallation.showInstallationDialog(currentContext, checkResult, () -> {
+							executeNextTask();
+						});
+					} else {
+						executeNextTask();
+					}
+				}
+			}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		}
+
+		@Override
+		public void setNextTask(Task<Boolean> nextTask) {
+			// To support a next task we have to handle the result of the installation so the next task doesn't run
+			// in parallel to another activity and the user can see it
+			throw new IllegalArgumentException("Next task after " + NAME + " is not supported");
+		}
+	}
+
+	protected class AskForExactAlarmsPermissionTask extends Task<Boolean> {
+		public final static String NAME = "AskForExactAlarmsPermissionTask";
+
+		@Override
+		public String getName() {
+			return NAME;
+		}
+
+		@Override
+		public void execute(Activity currentActivity) {
+			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
+				executeNextTask();
+				return;
+			}
+
+			// If we can't show notifications, there is no reason to ask for exact alarm permissions
+			if (ContextCompat.checkSelfPermission(currentActivity, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+				executeNextTask();
+				return;
+			}
+
+			AlarmManager alarmManager = (AlarmManager) currentActivity.getSystemService(Context.ALARM_SERVICE);
+			if (alarmManager.canScheduleExactAlarms()) {
+				// Reset the number of times we asked for exact alarms if the user has granted it
+				// (so in case it's revoked, we'll start counting from 0 again)
+				ConventionsApplication.settings.resetNumberOfTimesAskedForExactAlarms();
+				executeNextTask();
+				return;
+			}
+
+			// If the user doesn't want reminders for event start, don't ask for the permission (we will ask for it in case they change the settings)
+			if (!ConventionsApplication.settings.getSharedPreferences().getBoolean(Convention.getInstance().getId().toLowerCase() + "_event_starting_reminder", false)) {
+				executeNextTask();
+				return;
+			}
+
+			// Check if we should ask for exact alarms permissions
+			if (ConventionsApplication.settings.getNumberOfTimesAskedForExactAlarms() >= Settings.MAX_CANCEL_TIMES) {
+				executeNextTask();
+				return;
+			}
+
+			// Don't show the dialog again if already displayed
+			if (getSharedData()) { // Shared data here is whether the configure notifications dialog was displayed
+				requestScheduleExactAlarmsPermission(currentActivity);
+			} else {
+				showExactAlarmsRationaleDialog(currentActivity, () -> {
+					setSharedData(true); // Shared data here is whether the configure notifications dialog was displayed
+					requestScheduleExactAlarmsPermission(currentActivity);
+				}, () -> {
+					ConventionsApplication.settings.askedForExactAlarms();
+					executeNextTask();
+				});
+			}
+		}
+
+		@RequiresApi(api = Build.VERSION_CODES.S)
+		private void requestScheduleExactAlarmsPermission(Activity currentActivity) {
+			ConventionsApplication.settings.askedForExactAlarms();
+			Intent intent = new Intent(android.provider.Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
+			Uri uri = Uri.fromParts("package", currentActivity.getPackageName(), null);
+			intent.setData(uri);
+			requestExactPermissionsIntentLauncher.launch(intent);
+		}
+	}
+
+	protected AskForExactAlarmsPermissionTask newAskForExactAlarmsPermissionTask() {
+		return new AskForExactAlarmsPermissionTask();
 	}
 }
