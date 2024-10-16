@@ -106,10 +106,13 @@
     <string name="discounts_aroma">10% הנחה, לא כולל דילים קיימים. סניף הארבעה בלבד\n<a href="https://www.aroma.co.il/store/%D7%94%D7%90%D7%A8%D7%91%D7%A2%D7%94-%D7%AA%D7%9C-%D7%90%D7%91%D7%99%D7%91/">לאתר ארומה</a></string>
     <string name="discounts_tlab">תוספת באבלס על חשבון הבית\n<a href="https://wissotzky-tlab.co.il/%d7%94%d7%a1%d7%a0%d7%99%d7%a4%d7%99%d7%9d-%d7%a9%d7%9c%d7%a0%d7%95/">לאתר T LAB</a></string>
     <string name="discounts_night_cookie">עוגיה חינם על קניית 3 עוגיות ומעלה\n<a href="https://www.nightcookie.com/">לאתר עוגיית לילה</a></string>
+    <string name="discounts_dizengof_lottery">הגרלה בסנטר! כל כרטיס יכול לזכות\n<a href="https://www.dizengof-center.co.il/activities/events/?ContentID=60925">למידע נוסף באתר דיזינגוף סנטר</a></string>
+    <string name="discounts_vitamin">מיצים, גלידות ושייקים ב15% הנחה. קרליבך 20</string>
     <string name="discounts_oban_koban">10% הנחה בין השעות 11:30-18:00\n<a href="https://www.obankoban.co.il/">לאתר אובן קובן</a></string>
     <string name="discounts_suduch">טוסט + שתייה + נקניקיית נשנוש ב-45₪ (במקום 55)\n<a href="https://suduch.co.il/">לאתר סודוך</a></string>
     <string name="discounts_memphis">10% הנחה לא כולל עסקיות צהריים\n<a href="https://www.memphis.co.il/about/">לאתר ממפיס</a></string>
     <string name="discounts_storytel">25% הנחה לשנה על מינוי לספרים מוקלטים ודיגיטלים בעברית ובאנגלית\n<a href="https://www.storytel.com/il">לאתר storytel</a></string>
+    <string name="discounts_steimatzky_free_books">שלושה ספרים במתנה בימי הפסטיבל\n<a href="https://d-steimatzky.co.il/?page_id=891070&amp;preview=true">למידע נוסף באתר סטימצקי</a></string>
     <string name="discounts_title">הטבות בחנויות</string>
     <string name="discounts_overview">החנויות הבאות מעניקות הנחה בהצגת כרטיס או תג של הכנס, במהלך שני הימים של הכנס:</string>
     <string name="discounts_sponsors_title">השותפים שלנו</string>
@@ -128,6 +131,9 @@
     <string name="discounts_iac">IAC - המכללה הישראלית לאנימציה ועיצוב\n<a href="https://www.ani-mator.com/">לביקור באתר</a></string>
     <string name="discounts_bezalel">בצלאל המחלקה לאומנויות המסך\n<a href="https://www.bezalel.ac.il/">לביקור באתר</a></string>
     <string name="discounts_seminar">קהילת למידה של פנטזיה, מדע בדיוני ומשחקי תפקידים בתואר ראשון עם תעודת הוראה\n<a href="https://www.smkb.ac.il/">לביקור באתר</a></string>
+    <string name="discounts_opus">אופוס הוצאה לאור\n<a href="https://www.opus.co.il/?id=main">לביקור באתר</a></string>
+    <string name="discounts_modan">מודן הוצאה לאור\n<a href="https://www.modan.co.il/">לביקור באתר</a></string>
+    <string name="discounts_pinkkosaurus">פינקוזאורוס - מאי רדומיר\n<a href="http://www.pinkkishu.co/shop">לביקור באתר</a></string>
 
     <string name="activities_main_title">פעילויות במתחם</string>
 
