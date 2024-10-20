@@ -247,7 +247,7 @@
     <string name="second_hand_buy">קנייה</string>
     <string name="cancel2">ביטול</string>
     <string name="login_failed">לא ניתן להתחבר, נסה שוב מאוחר יותר</string>
-    <string name="add_events_failed">לא ניתן להוסיף אירועים, בדוק חיבור לאינטרנט</string>
+    <string name="add_events_failed">לא ניתן להוסיף אירועים, נסה שנית מאוחר יותר</string>
     <string name="several_events_added">נוספו %d אירועים</string>
     <string name="one_event_added">נוסף אירוע אחד</string>
     <string name="user_email">אימייל</string>
