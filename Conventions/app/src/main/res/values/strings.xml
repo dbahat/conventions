@@ -17,7 +17,7 @@
     <string name="event_configure_notifications">הגדר תזכורות</string>
 
     <string name="update_show_full_text">הצג עדכון מלא</string>
-    <string name="update_refresh_failed">לא ניתן לעדכן. בדוק חיבור לאינטרנט</string>
+    <string name="update_refresh_failed">לא ניתן לעדכן. נסה שנית מאוחר יותר</string>
 
     <string name="my_events_share">שתף</string>
     <string name="my_event_share_title">התוכנייה שלי ל%s:</string>
@@ -148,7 +148,7 @@
     <string name="go_to_my_events">עבור לאירועים שלי</string>
     <string name="show_favorites_updates_title">הצג שינויים באירועים מועדפים</string>
     <string name="show_favorites_updates_summary">הצג הודעות כאשר התוכניה מתעדכנת ויש שינויים חשובים באירועים מועדפים, כמו זמן, מיקום ואורך האירוע.</string>
-    <string name="push_registration_failed">לא ניתן לעדכן. בדוק חיבור לאינטרנט</string>
+    <string name="push_registration_failed">לא ניתן לעדכן. נסה שנית מאוחר יותר</string>
     <string name="push_notification_title">התראה</string>
     <string name="change_settings">שנה הגדרות</string>
     <string name="configure_notifications">הגדר התראות</string>
@@ -192,7 +192,7 @@
     <string name="to_vote_survey">להצבעה</string>
     <string name="survey_vote_details">באירוע זה ניתן להצביע עבור חביב הקהל.</string>
     <string name="survey_vote_note">שימו לב! ניתן להצביע פעם אחת בלבד, ורק לאחר שכל המתמודדים עלו לבמה.</string>
-    <string name="vote_survey_retrieve_answers_error">לא ניתן להציג את טופס ההצבעה. בדוק שחיבור האינטרנט תקין ונסה שנית מאוחר יותר.</string>
+    <string name="vote_survey_retrieve_answers_error">לא ניתן להציג את טופס ההצבעה. נסה שנית מאוחר יותר.</string>
     <string name="event_vote_survey_title">הצבעה לאירוע %s</string>
     <string name="event_vote_survey_sent">ההצבעה נשלחה. תודה!</string>
     <string name="event_view_details">ניתן לצפות באירוע זה בשידור ישיר.</string>
