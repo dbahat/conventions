@@ -87,6 +87,8 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 	private ExecutorService executor;
 	private View userIdDialogView;
 
+	private ProgressDialog progressDialog;
+
 	private final static float UNKNOWN_BRIGHTNESS = 2; // Brightness can be <0 for preferred or 0-1 for specific brightness
 	private float screenBrightness = UNKNOWN_BRIGHTNESS;
 
@@ -144,7 +146,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 			Log.e(TAG, "email did not return from AuthorizationActivity");
 			Toast.makeText(MyEventsActivity.this, R.string.login_failed, Toast.LENGTH_LONG).show();
 		} else {
-			final ProgressDialog progressDialog = new ProgressDialog(MyEventsActivity.this);
+			progressDialog = new ProgressDialog(MyEventsActivity.this);
 			progressDialog.setMessage(getProgressMessage.run(result.email));
 			progressDialog.setCancelable(false);
 			progressDialog.setCanceledOnTouchOutside(false);
@@ -808,6 +810,9 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		super.onDestroy();
 		if (noEventsDialog != null && noEventsDialog.isShowing()) {
 			noEventsDialog.dismiss();
+		}
+		if (progressDialog != null && progressDialog.isShowing()) {
+			progressDialog.dismiss();
 		}
 	}
 
