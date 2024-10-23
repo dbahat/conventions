@@ -8,6 +8,7 @@ public class Update implements Serializable {
 	private String text;
 	private Date date;
 	private boolean isNew;
+	private String category;
 
 	public String getId() {
 		return id;
@@ -58,6 +59,19 @@ public class Update implements Serializable {
 
 	public Update withDate(Date date) {
 		setDate(date);
+		return this;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public Update withCategory(String category) {
+		setCategory(category);
 		return this;
 	}
 }
