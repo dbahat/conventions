@@ -108,12 +108,12 @@ public abstract class NavigationActivity extends AppCompatActivity {
 
 	private String continueAfterTask = null;
 
-	private final ActivityResultLauncher<String> requestNotificationsPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+	private ActivityResultLauncher<String> requestNotificationsPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
 		// We don't care about the result, if the permissions is blocked the notifications aren't displayed
 		continueAfterTask = AskForNotificationsPermissionTask.NAME;
 	});
 
-	private final ActivityResultLauncher<Intent> requestExactPermissionsIntentLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+	private ActivityResultLauncher<Intent> requestExactPermissionsIntentLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
 		// We handle the actual result in RescheduleAlarmsReceiver. This is here just so we can continue executing tasks.
 		continueAfterTask = AskForExactAlarmsPermissionTask.NAME;
 	});
@@ -200,6 +200,14 @@ public abstract class NavigationActivity extends AppCompatActivity {
 			continueAfterTask = null;
 			permissionTasks.executeNextTaskAfter(taskToContinueAfter);
 		}
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		// Launchers are automatically unregistered, so we should avoid calling them after this
+		requestNotificationsPermissionLauncher = null;
+		requestExactPermissionsIntentLauncher = null;
 	}
 
 	private PushNotification getNotificationFromIntent(Intent intent) {
@@ -664,7 +672,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		}
 
 		private void requestNotificationsPermission(Activity context) {
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && requestNotificationsPermissionLauncher != null) {
 				requestNotificationsPermissionLauncher.launch("android.permission.POST_NOTIFICATIONS");
 			} else {
 				executeNextTask();
@@ -783,6 +791,10 @@ public abstract class NavigationActivity extends AppCompatActivity {
 
 		@RequiresApi(api = Build.VERSION_CODES.S)
 		private void requestScheduleExactAlarmsPermission(Activity currentActivity) {
+			if (requestExactPermissionsIntentLauncher == null) {
+				executeNextTask();
+				return;
+			}
 			ConventionsApplication.settings.askedForExactAlarms();
 			Intent intent = new Intent(android.provider.Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
 			Uri uri = Uri.fromParts("package", currentActivity.getPackageName(), null);

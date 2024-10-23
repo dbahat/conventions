@@ -43,8 +43,8 @@ public class AuthorizationActivity extends AppCompatActivity {
 	private AuthStateManager mAuthStateManager;
 	private Configuration mConfiguration;
 	private ExecutorService mExecutor;
-	private final ActivityResultLauncher<Intent> loginLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), this::handleAuthResult);
-	private final ActivityResultLauncher<Intent> logoutLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), this::handleLogoutResult);
+	private ActivityResultLauncher<Intent> loginLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), this::handleAuthResult);
+	private ActivityResultLauncher<Intent> logoutLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), this::handleLogoutResult);
 
 
 	@Override
@@ -64,6 +64,14 @@ public class AuthorizationActivity extends AppCompatActivity {
 		} else {
 			mExecutor.submit(this::doSignIn);
 		}
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		// Launchers are automatically unregistered, so we should avoid calling them after this
+		loginLauncher = null;
+		logoutLauncher = null;
 	}
 
 	@WorkerThread
@@ -144,7 +152,11 @@ public class AuthorizationActivity extends AppCompatActivity {
 		Log.i(TAG, "login");
 		AuthorizationRequest authRequest = getAuthRequest();
 		Intent intent = mAuthService.getAuthorizationRequestIntent(authRequest, getCustomTabsIntent());
-		loginLauncher.launch(intent);
+		if (loginLauncher != null) {
+			loginLauncher.launch(intent);
+		} else {
+			Log.i(TAG, "loginLauncher is null, don't login");
+		}
 	}
 
 	private void handleAuthResult(ActivityResult result) {
@@ -213,7 +225,11 @@ public class AuthorizationActivity extends AppCompatActivity {
 						.setPostLogoutRedirectUri(mConfiguration.getEndSessionRedirectUri())
 						.build();
 		Intent intent = mAuthService.getEndSessionRequestIntent(endSessionRequest, getCustomTabsIntent());
-		logoutLauncher.launch(intent);
+		if (logoutLauncher != null) {
+			logoutLauncher.launch(intent);
+		} else {
+			Log.i(TAG, "logoutLauncher is null, don't logout");
+		}
 	}
 
 	private void handleLogoutResult(ActivityResult result) {
