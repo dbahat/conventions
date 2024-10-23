@@ -71,10 +71,15 @@ public class ApplicationInitializer {
     }
 
     private void refreshUpdatesAndNotifyIfNewUpdatesAreAvailable(final Context context) {
-        // Updates refresher must be called from the UI thread
+        // If we're in the updates activity, we will refresh from there
+        if (ConventionsApplication.getCurrentContext() instanceof UpdatesActivity) {
+            return;
+        }
+
         final int numberOfUpdatesBeforeRefresh = Convention.getInstance().getUpdates().size();
 
         // Refresh and ignore all errors
+        // Updates refresher must be called from the UI thread
         final UpdatesRefresher updatesRefresher = UpdatesRefresher.getInstance(context);
         updatesRefresher.refreshFromServer(true, false, new UpdatesRefresher.OnUpdateFinishedListener() {
             @Override

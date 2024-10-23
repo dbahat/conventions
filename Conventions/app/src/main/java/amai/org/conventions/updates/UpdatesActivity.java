@@ -1,6 +1,5 @@
 package amai.org.conventions.updates;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -18,6 +17,8 @@ import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.networking.ModelRefresher;
 import amai.org.conventions.networking.UpdatesRefresher;
 import amai.org.conventions.notifications.PushNotification;
+import amai.org.conventions.notifications.PushNotificationDialogPresenter;
+import amai.org.conventions.utils.Log;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -84,7 +85,8 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 		List<Update> updates = Convention.getInstance().getUpdates();
 		initializeUpdatesList(updates, updates.size()); // All items are new in this list
 	    setUpdatesVisibility();
-	    retrieveUpdatesList(false, false);
+	    // Force update if we got here from a push notification
+	    retrieveUpdatesList(false, getIntent() != null && getIntent().hasExtra(PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION));
 	}
 
 	@Override
