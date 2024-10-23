@@ -6,7 +6,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Build;
 
 import java.util.Collections;
@@ -23,8 +22,6 @@ import amai.org.conventions.notifications.PushNotificationTopicsSubscriber;
 import amai.org.conventions.updates.UpdatesActivity;
 import amai.org.conventions.utils.CollectionUtils;
 import androidx.core.app.NotificationCompat;
-
-import static android.app.PendingIntent.FLAG_IMMUTABLE;
 
 public class ApplicationInitializer {
     private static final int NEW_UPDATES_NOTIFICATION_ID = 75457;
@@ -63,10 +60,15 @@ public class ApplicationInitializer {
     }
 
     private void refreshUpdatesAndNotifyIfNewUpdatesAreAvailable(final Context context) {
-        // Updates refresher must be called from the UI thread
+        // If we're in the updates activity, we will refresh from there
+        if (ConventionsApplication.getCurrentContext() instanceof UpdatesActivity) {
+            return;
+        }
+
         final int numberOfUpdatesBeforeRefresh = Convention.getInstance().getUpdates().size();
 
 		// Refresh and ignore all errors
+		// Updates refresher must be called from the UI thread
 		UpdatesRefresher.getInstance(context).refreshFromServer(true, false, new UpdatesRefresher.OnUpdateFinishedListener() {
             @Override
             public void onSuccess(int newUpdatesNumber) {
