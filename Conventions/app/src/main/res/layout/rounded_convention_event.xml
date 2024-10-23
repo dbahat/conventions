@@ -242,10 +242,11 @@
                 android:layout_height="match_parent"
                 android:onClick="onConventionEventClicked" />
 
+            <!-- The recommended touch area is 48dp -->
             <View
                 android:id="@+id/eventFavoriteIconTouchArea"
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_gravity="end" />
 
         </FrameLayout>
