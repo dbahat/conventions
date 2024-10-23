@@ -14,6 +14,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,6 +24,7 @@ import java.util.List;
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.model.Update;
 import amai.org.conventions.model.conventions.Convention;
+import amai.org.conventions.notifications.PushNotificationTopic;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.HttpConnectionCreator;
@@ -85,8 +87,17 @@ public class UpdatesRefresher {
 				try {
 					List<Update> updatesFromResponse = getUpdatesFromServer();
 
+					List<Update> updatesToAdd = new ArrayList<>(updatesFromResponse.size());
+					String testTopic = PushNotificationTopic.TOPIC_TEST.getTopic();
+					boolean testTopicAllowed = ConventionsApplication.settings.getSharedPreferences().getBoolean(testTopic, false);
 					int newUpdatesNumber = 0;
 					for (Update responseUpdate : updatesFromResponse) {
+						// Ignore test updates if not selected in the settings
+						if ((!testTopicAllowed) && testTopic.equals(responseUpdate.getCategory())) {
+							continue;
+						}
+						updatesToAdd.add(responseUpdate);
+
 						Update currentUpdate = Convention.getInstance().getUpdate(responseUpdate.getId());
 						if (currentUpdate == null) {
 							++newUpdatesNumber;
@@ -95,7 +106,7 @@ public class UpdatesRefresher {
 						}
 					}
 					// Update the model, so next time we can read them from cache.
-					Convention.getInstance().addUpdates(updatesFromResponse, true);
+					Convention.getInstance().addUpdates(updatesToAdd, true);
 					Convention.getInstance().getStorage().saveUpdates();
 					ConventionsApplication.settings.setLastUpdatesUpdatedDate();
 					isRefreshInProgress = false;
@@ -156,12 +167,17 @@ public class UpdatesRefresher {
 				Date date = simpleDateFormat.parse(dateString);
 
 				String message = updateObject.get("content").getAsString();
+				String category = null;
+				if (updateObject.has("category") && updateObject.get("category").isJsonPrimitive()) {
+					category = updateObject.get("category").getAsString();
+				}
 
 				Update update = new Update()
 						.withId(updateObject.get("id").getAsString())
 						.withIsNew(true)
 						.withDate(Dates.conventionToLocalTime(date))
-						.withText(message);
+						.withText(message)
+						.withCategory(category);
 
 				updates.add(update);
 			}
