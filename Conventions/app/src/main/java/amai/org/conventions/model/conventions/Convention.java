@@ -141,6 +141,21 @@ public abstract class Convention implements Serializable {
 	}
 
 	public void load(Context context) {
+		initFields();
+		getStorage().initFromFile(context);
+
+		if (getLengthInDays() > MAX_CONVENTION_LENGTH_IN_DAYS) {
+			throw new RuntimeException("Conventions with over " + MAX_CONVENTION_LENGTH_IN_DAYS + " days are currently un-supported.");
+		}
+
+		if (BuildConfig.DEBUG) {
+			if (!conventionFeedbackForm.canFillFeedback(feedback)) {
+				throw new RuntimeException("Bad convention feedback form");
+			}
+		}
+	}
+
+	public void initFields() {
 		this.conventionStorage = initStorage();
 		this.startDate = initStartDate();
 		this.endDate = initEndDate();
@@ -158,18 +173,6 @@ public abstract class Convention implements Serializable {
 		this.longitude = initLongitude();
 		this.latitude = initLatitude();
 		this.imageMapper = initImageMapper();
-
-		getStorage().initFromFile(context);
-
-		if (getLengthInDays() > MAX_CONVENTION_LENGTH_IN_DAYS) {
-			throw new RuntimeException("Conventions with over " + MAX_CONVENTION_LENGTH_IN_DAYS + " days are currently un-supported.");
-		}
-
-		if (BuildConfig.DEBUG) {
-			if (!conventionFeedbackForm.canFillFeedback(feedback)) {
-				throw new RuntimeException("Bad convention feedback form");
-			}
-		}
 	}
 
 	protected abstract ConventionStorage initStorage();
