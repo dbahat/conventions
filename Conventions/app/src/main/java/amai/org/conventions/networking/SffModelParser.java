@@ -1,8 +1,5 @@
 package amai.org.conventions.networking;
 
-import android.text.Html;
-import android.text.TextUtils;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -51,10 +48,10 @@ public class SffModelParser implements ModelParser {
 			Date endTime = parseEventTime(timeObject.get("end").getAsString());
 
 			JsonArray speakers = eventObj.get("speakers").getAsJsonArray();
-			String allSpeakers = speakers.size() > 0 ? TextUtils.join(", ", getSpeakers(speakers)) : "";
+			String allSpeakers = speakers.size() > 0 ? ParseUtils.joinStrings(", ", getSpeakers(speakers)) : "";
 
 			String hallName = eventObj.get("location").isJsonNull() ? "" : decodeHtml(eventObj.get("location").getAsString());
-			if (TextUtils.isEmpty(hallName)) {
+			if (ParseUtils.isEmpty(hallName)) {
 				// Some SF-F events came up corrupted without a location.
 				// Ignore them - they don't appear in the programme in the site either.
 				Log.w(TAG, "Skipping event with no hall: " + title + " (" + eventId + ")");
@@ -182,12 +179,7 @@ public class SffModelParser implements ModelParser {
 	}
 
 	private String decodeHtml(String string) {
-		if (string == null) {
-			return null;
-		}
-		// Using deprecated fromHtml() overload, since fromHtml(string, int) is only supported from api level 17
-		// noinspection deprecation
-		return Html.fromHtml(string).toString();
+		return ParseUtils.parseHTML(string);
 	}
 
 	@NonNull
@@ -195,7 +187,7 @@ public class SffModelParser implements ModelParser {
 		List<String> stringList = new LinkedList<>();
 		for (int i = 0; i < jsonArray.size(); ++i) {
 			JsonElement jsonStringElement = jsonArray.get(i);
-			if (jsonStringElement != null && jsonStringElement.isJsonPrimitive() && !TextUtils.isEmpty(jsonStringElement.getAsString())) {
+			if (jsonStringElement != null && jsonStringElement.isJsonPrimitive() && !ParseUtils.isEmpty(jsonStringElement.getAsString())) {
 				stringList.add(jsonStringElement.getAsString());
 			}
 		}

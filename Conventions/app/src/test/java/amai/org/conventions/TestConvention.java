@@ -4,6 +4,7 @@ import android.content.Context;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -68,7 +69,7 @@ public class TestConvention extends Convention {
 
     @Override
     protected Halls initHalls() {
-        return null;
+        return new Halls(new ArrayList<>());
     }
 
     @Override
