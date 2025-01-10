@@ -4,11 +4,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.Collections;
@@ -22,6 +17,11 @@ import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.networking.UpdatesRefresher;
 import amai.org.conventions.notifications.PushNotification;
+import amai.org.conventions.notifications.PushNotificationDialogPresenter;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 public class UpdatesActivity extends NavigationActivity implements SwipeRefreshLayout.OnRefreshListener {
 
@@ -83,7 +83,8 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 		List<Update> updates = Convention.getInstance().getUpdates();
 		initializeUpdatesList(updates, updates.size()); // All items are new in this list
 	    setUpdatesVisibility();
-	    retrieveUpdatesList(false);
+		// Force update if we got here from a push notification
+		retrieveUpdatesList(false, getIntent() != null && getIntent().hasExtra(PushNotificationDialogPresenter.EXTRA_PUSH_NOTIFICATION));
 	}
 
 	@Override
@@ -96,7 +97,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 
 		setUpdatesBackground();
 		updatesAdapter.notifyItemRangeChanged(0, Convention.getInstance().getUpdates().size());
-        retrieveUpdatesList(true);
+        retrieveUpdatesList(true, true);
 	}
 
 	private void resolveUiElements() {
@@ -116,7 +117,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 		updatesLayout.setVisibility(showMessage ? View.GONE : View.VISIBLE);
 	}
 
-    private void retrieveUpdatesList(final boolean showError) {
+    private void retrieveUpdatesList(final boolean showError, boolean force) {
 		final UpdatesRefresher refresher = UpdatesRefresher.getInstance(UpdatesActivity.this);
 
 		// Workaround (Android issue #77712) - SwipeRefreshLayout indicator does not appear when the `setRefreshing(true)` is called before
@@ -131,7 +132,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 
         // Refresh, and don't allow new updates notification to occur due to this refresh.
 	    // Only force refresh if it's due to user interaction (in that case we also show an error).
-	    refresher.refreshFromServer(false, showError, new UpdatesRefresher.OnUpdateFinishedListener() {
+	    refresher.refreshFromServer(false, force, new UpdatesRefresher.OnUpdateFinishedListener() {
 			@Override
 			public void onSuccess(int newUpdatesNumber) {
 				updateRefreshingFlag();
