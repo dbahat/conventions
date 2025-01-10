@@ -35,7 +35,6 @@ import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.Floor;
 import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.model.Place;
-import amai.org.conventions.model.Shelter;
 import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.model.conventions.Convention;
@@ -308,7 +307,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		Button showSheltersButton = findViewById(R.id.map_show_shelters);
 		List<MapLocation> shelters = CollectionUtils.filter(map.getLocations(), item -> {
 			for (Place place : item.getPlaces()) {
-				if (place instanceof Shelter) {
+				if (place.isShelter()) {
 					return true;
 				}
 			}
