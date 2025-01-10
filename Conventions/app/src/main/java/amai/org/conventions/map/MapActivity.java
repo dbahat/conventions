@@ -311,7 +311,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		Button showSheltersButton = findViewById(R.id.map_show_shelters);
 		List<MapLocation> shelters = CollectionUtils.filter(map.getLocations(), item -> {
 			for (Place place : item.getPlaces()) {
-				if (place instanceof Shelter) {
+				if (place.isShelter()) {
 					return true;
 				}
 			}
