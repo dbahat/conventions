@@ -1,23 +1,17 @@
 package amai.org.conventions;
 
-import android.content.Context;
-
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Calendar;
 import java.util.List;
 
-import amai.org.conventions.auth.Configuration;
 import amai.org.conventions.feedback.forms.EventFeedbackForm;
 import amai.org.conventions.feedback.forms.FeedbackForm;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.Halls;
 import amai.org.conventions.model.ImageIdToImageResourceMapper;
-import amai.org.conventions.model.SecondHandItem;
 import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.conventions.Convention;
-import amai.org.conventions.networking.EventTicketsParser;
 import amai.org.conventions.networking.ModelParser;
 import amai.org.conventions.utils.ConventionStorage;
 
@@ -58,11 +52,6 @@ public class TestConvention extends Convention {
 
     @Override
     protected URL initModelURL() {
-        return null;
-    }
-
-    @Override
-    protected URL initTicketsLastUpdateURL() {
         return null;
     }
 
@@ -109,53 +98,8 @@ public class TestConvention extends Convention {
     }
 
     @Override
-    public URL getEventTicketsNumberURL(ConventionEvent event) {
-        return null;
-    }
-
-    @Override
-    public EventTicketsParser getEventTicketsParser() {
-        return null;
-    }
-
-    @Override
-    public URL getSecondHandFormURL(String id) {
-        return null;
-    }
-
-    @Override
-    public URL getSecondHandFormsURL(List<String> ids) {
-        return null;
-    }
-
-    @Override
-    public URL getSecondHandItemsURL(SecondHandItem.Status status) {
-        return null;
-    }
-
-    @Override
-    public HttpURLConnection getUserPurchasedEventsRequest(String token) throws Exception {
-        return null;
-    }
-
-    @Override
-    public HttpURLConnection getUserIDRequest(String token) throws Exception {
-        return null;
-    }
-
-    @Override
-    public HttpURLConnection getUserQRRequest(String token, String user) throws Exception {
-        return null;
-    }
-
-    @Override
     public ModelParser getModelParser() {
         return null;
-    }
-
-    @Override
-    public boolean canUserLogin() {
-        return false;
     }
 
     @Override
@@ -167,10 +111,5 @@ public class TestConvention extends Convention {
     public List<ConventionEvent.EventLocationType> getEventLocationTypes(ConventionEvent event) {
         //noinspection deprecation - intentional
         return event.getLocationTypes();
-    }
-
-    @Override
-    public Configuration getAuthConfiguration(Context context) {
-        return null;
     }
 }
