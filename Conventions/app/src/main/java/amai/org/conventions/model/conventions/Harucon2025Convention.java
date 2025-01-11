@@ -33,7 +33,7 @@ import amai.org.conventions.networking.SurveyDataRetriever;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 
-public class Animatsuri2024Convention extends AmaiConvention {
+public class Harucon2025Convention extends AmaiConvention {
 	// Hall names
 	private static final String MAIN_HALL_NAME = "אולם ראשי";
 	private static final String ESHKOL1_NAME = "אשכול 1";
@@ -108,18 +108,18 @@ public class Animatsuri2024Convention extends AmaiConvention {
 	protected Calendar initDate() {
 		Calendar date = Calendar.getInstance();
 		date.clear();
-		date.set(2024, Calendar.AUGUST, 8);
+		date.set(2025, Calendar.MARCH, 16);
 		return date;
 	}
 
 	@Override
 	protected String initID() {
-		return "Animatsuri2024";
+		return "Harucon2025";
 	}
 
 	@Override
 	protected String initDisplayName() {
-		return "אנימאטסורי 2024";
+		return "הארוקון 2025";
 	}
 
 	@Override

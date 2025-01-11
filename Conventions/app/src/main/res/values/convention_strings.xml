@@ -15,7 +15,7 @@
     <string name="my_events_no_data">הוסף אירוע לאירועים שלי ע\"י לחיצה על הכוכב בדף האירוע או ברשימת האירועים</string>
 
     <!-- Relevant to this specific convention -->
-    <string name="app_name">אנימאטסורי 2024</string>
+    <string name="app_name">הארוקון 2025</string>
     <string name="amaidol_name_question">איך קוראים לך?</string>
     <string name="amaidol_vote_question">מי המתמודד/ת החביב/ה עליך?</string>
     <string name="idolfest_vote_question">בחרו את הביצוע האהוב עליכם!</string>
@@ -35,11 +35,11 @@
     <p><b>קרדיט לאמנים:</b><br/>
      <b>איור:</b> מעיין אלבז, שירה אביגד, גל מאור, Grisim, קים קפלן, עומר אלבז.<br/>
      <b>גרפיקה:</b> דוד צור, ניקי קרוטקוב, איריס חיים</p>
-<p><a href="http://www.amai.org.il/">לאתר אמא\"י</a></p>
-<p><a href="https://animatsuri.org.il/2024/">לאתר הכנס</a></p>
+<p><a href="https://amai.org.il/">לאתר אמא\"י</a></p>
+<p><a href="https://harucon.org.il/2025/">לאתר הכנס</a></p>
 ]]></string>
     <string name="about_app_content"><![CDATA[
-האפליקציה פותחה עבור כנס אנימאטסורי 2024.<br/>בקשות והצעות ניתן לכתוב <a href="market://details?id=amai.org.conventions">בדף האפליקציה בחנות</a>.
+האפליקציה פותחה עבור כנס הארוקון 2025.<br/>בקשות והצעות ניתן לכתוב <a href="market://details?id=amai.org.conventions">בדף האפליקציה בחנות</a>.
 <p><a href="https://animatsuri.org.il/2024/app-privacy/">למדיניות הפרטיות של האפליקציה</a></p>
 ]]></string>
     <!-- Copied from https://animatsuri.org.il/2024/location-and-directions/
