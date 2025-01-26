@@ -35,9 +35,9 @@ public class MapLocationViewHolder extends RecyclerView.ViewHolder {
 		Context context = itemView.getContext();
 		Drawable image;
 		if (location.areAllPlacesHalls()) {
-			image = ContextCompat.getDrawable(context, R.drawable.events_list);
+			image = ContextCompat.getDrawable(context, R.drawable.list_alt_24dp_white);
 		} else {
-			image = ContextCompat.getDrawable(context, R.drawable.ic_action_place);
+			image = ContextCompat.getDrawable(context, R.drawable.location_on_24dp_white);
 		}
 		if (image != null) {
 			image.mutate().setColorFilter(ThemeAttributes.getColor(context, R.attr.mapSearchImageColor), PorterDuff.Mode.SRC_ATOP);

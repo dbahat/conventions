@@ -193,8 +193,8 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 		// In case all (or none) of the filters are active, show an empty filter icon (since we don't apply any filters in such cases)
 		Drawable filterIcon = ContextCompat.getDrawable(this, numberOfActiveFilters == 0
 				|| numberOfActiveFilters == totalCategorySearchFiltersCount + totalEventTypeSearchFiltersCount + totalTagSearchFiltersCount + totalEventLocationTypeFiltersCount + 1
-				? R.drawable.filter
-				: R.drawable.filter_full);
+				? R.drawable.filter_alt_empty
+				: R.drawable.filter_alt_full);
 		filterIcon.mutate();
 		filterIcon.setColorFilter(ThemeAttributes.getColor(this, R.attr.programmeSearchFilterColor), PorterDuff.Mode.SRC_ATOP);
 		filterButton.setImageDrawable(filterIcon);

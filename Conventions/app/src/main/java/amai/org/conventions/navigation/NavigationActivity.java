@@ -266,7 +266,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 				new NavigationItem(HomeActivity.class, getString(R.string.home), ContextCompat.getDrawable(this, R.drawable.ic_home_white_36dp), shouldDisplayIcon),
 				new NavigationItem(ProgrammeActivity.class, getString(R.string.programme_title), ContextCompat.getDrawable(this, R.drawable.events_list), shouldDisplayIcon),
 //				new NavigationItem(WebContentActivity.IconKidsActivity.class, getString(R.string.icon_kids), ContextCompat.getDrawable(this, R.drawable.ic_face_white_24dp), shouldDisplayIcon),
-				new NavigationItem(MyEventsActivity.class, getString(R.string.my_events_title), ContextCompat.getDrawable(this, R.drawable.events_list_with_star), shouldDisplayIcon)
+				new NavigationItem(MyEventsActivity.class, getString(R.string.my_events_title), ContextCompat.getDrawable(this, R.drawable.hotel_class_32dp_white), shouldDisplayIcon)
 		));
 
 		// Only add the map if it's available
