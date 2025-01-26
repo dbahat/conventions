@@ -203,6 +203,7 @@
         <!-- Programme Search Activity -->
         <item name="searchTitleBackgroundColor">@android:color/transparent</item>
         <item name="programmeSearchFilterColor">?colorAccent</item>
+        <item name="programmeSearchFilterBackground">@null</item>
         <item name="programmeSearchBarBackground">@null</item>
     </style>
 
@@ -410,6 +411,7 @@
         <!-- Programme Search Activity -->
         <item name="searchTitleBackgroundColor">@android:color/transparent</item>
         <item name="programmeSearchFilterColor">?colorAccent</item>
+        <item name="programmeSearchFilterBackground">@null</item>
         <item name="programmeSearchBarBackground">@null</item>
     </style>
 
@@ -431,10 +433,10 @@
         <item name="eventDetailsDefaultBackground">@color/black</item>
         <item name="separatorColor">@color/white</item>
         <item name="locationDetailsTopLineColor">@android:color/white</item>
-        <item name="iconAddToFavorites">@drawable/star_with_plus_white</item>
+        <item name="iconAddToFavorites">@drawable/ic_star_white_24dp</item>
         <item name="iconShrink">@drawable/shrink_white</item>
         <item name="iconEnlarge">@drawable/enlarge_white</item>
-        <item name="iconFavorites">@drawable/events_list_with_star</item>
+        <item name="iconFavorites">@drawable/hotel_class_32dp_white</item>
         <item name="iconDirections">@drawable/ic_directions_white_36dp</item>
         <item name="iconTransport">@drawable/ic_directions_bus_white_36dp</item>
         <item name="iconAlarm">@drawable/ic_action_alarms</item>
@@ -442,8 +444,8 @@
         <item name="iconClear">@drawable/ic_clear_white_24dp</item>
         <item name="iconClearMap">@drawable/ic_clear_white_24dp</item>
         <item name="iconShare">@drawable/ic_action_share_white</item>
-        <item name="iconFeedback">@drawable/feedback_menu_icon</item>
-        <item name="iconMap">@drawable/ic_dialog_map</item>
+        <item name="iconFeedback">@drawable/chat</item>
+        <item name="iconMap">@drawable/pin_drop_24dp_white</item>
         <item name="iconFloorUp">@drawable/arrow_up_wide_white</item>
         <item name="iconFloorDown">@drawable/arrow_down_wide_white</item>
         <item name="toolbarLogo">@drawable/ic_menu_white_24dp</item>
@@ -468,10 +470,10 @@
         <item name="eventDetailsDefaultBackground">@color/white</item>
         <item name="separatorColor">@color/black</item>
         <item name="locationDetailsTopLineColor">@android:color/black</item>
-        <item name="iconAddToFavorites">@drawable/star_with_plus</item>
+        <item name="iconAddToFavorites">@drawable/ic_star_black_24dp</item>
         <item name="iconShrink">@drawable/shrink_black</item>
         <item name="iconEnlarge">@drawable/enlarge_black</item>
-        <item name="iconFavorites">@drawable/events_list_with_star_black</item>
+        <item name="iconFavorites">@drawable/hotel_class_32dp_black</item>
         <item name="iconDirections">@drawable/ic_directions</item>
         <item name="iconTransport">@drawable/ic_directions_bus</item>
         <item name="iconAlarm">@drawable/ic_action_alarms_black</item>
@@ -479,8 +481,8 @@
         <item name="iconClear">@drawable/ic_clear_black</item>
         <item name="iconClearMap">@drawable/ic_clear_black</item>
         <item name="iconShare">@drawable/ic_action_share_black</item>
-        <item name="iconFeedback">@drawable/feedback_menu_icon_black</item>
-        <item name="iconMap">@drawable/ic_dialog_map_black</item>
+        <item name="iconFeedback">@drawable/chat_black</item>
+        <item name="iconMap">@drawable/pin_drop_24dp_black</item>
         <item name="iconFloorUp">@drawable/arrow_up_wide</item>
         <item name="iconFloorDown">@drawable/arrow_down_wide</item>
         <item name="toolbarLogo">@drawable/ic_menu_black_24dp</item>
@@ -492,10 +494,10 @@
         <!-- not using android:actionOverflowButtonStyle since it doesn't seem to work in Jellybean -->
         <item name="actionOverflowButtonStyle">@style/OverflowMenu.Dark</item>
         <item name="toolbarTitleColor">@color/white</item>
-        <item name="iconAddToFavorites">@drawable/star_with_plus_white</item>
+        <item name="iconAddToFavorites">@drawable/ic_star_white_24dp</item>
         <item name="iconShrink">@drawable/shrink_white</item>
         <item name="iconEnlarge">@drawable/enlarge_white</item>
-        <item name="iconFavorites">@drawable/events_list_with_star</item>
+        <item name="iconFavorites">@drawable/hotel_class_32dp_white</item>
         <item name="iconDirections">@drawable/ic_directions_white_36dp</item>
         <item name="iconTransport">@drawable/ic_directions_bus_white_36dp</item>
         <item name="iconAlarm">@drawable/ic_action_alarms</item>
@@ -503,8 +505,8 @@
         <item name="iconClear">@drawable/ic_clear_white_24dp</item>
         <item name="iconClearMap">@drawable/ic_clear_white_24dp</item>
         <item name="iconShare">@drawable/ic_action_share_white</item>
-        <item name="iconFeedback">@drawable/feedback_menu_icon</item>
-        <item name="iconMap">@drawable/ic_dialog_map</item>
+        <item name="iconFeedback">@drawable/chat</item>
+        <item name="iconMap">@drawable/pin_drop_24dp_white</item>
         <item name="iconFloorUp">@drawable/arrow_up_wide_white</item>
         <item name="iconFloorDown">@drawable/arrow_down_wide_white</item>
         <item name="toolbarLogo">@drawable/ic_menu_white_24dp</item>
@@ -515,10 +517,10 @@
         <!-- not using android:actionOverflowButtonStyle since it doesn't seem to work in Jellybean -->
         <item name="actionOverflowButtonStyle">@style/OverflowMenu.Light</item>
         <item name="toolbarTitleColor">@color/black</item>
-        <item name="iconAddToFavorites">@drawable/star_with_plus</item>
+        <item name="iconAddToFavorites">@drawable/ic_star_black_24dp</item>
         <item name="iconShrink">@drawable/shrink_black</item>
         <item name="iconEnlarge">@drawable/enlarge_black</item>
-        <item name="iconFavorites">@drawable/events_list_with_star_black</item>
+        <item name="iconFavorites">@drawable/hotel_class_32dp_black</item>
         <item name="iconDirections">@drawable/ic_directions</item>
         <item name="iconTransport">@drawable/ic_directions_bus</item>
         <item name="iconAlarm">@drawable/ic_action_alarms_black</item>
@@ -526,8 +528,8 @@
         <item name="iconClear">@drawable/ic_clear_black</item>
         <item name="iconClearMap">@drawable/ic_clear_black</item>
         <item name="iconShare">@drawable/ic_action_share_black</item>
-        <item name="iconFeedback">@drawable/feedback_menu_icon_black</item>
-        <item name="iconMap">@drawable/ic_dialog_map_black</item>
+        <item name="iconFeedback">@drawable/chat_black</item>
+        <item name="iconMap">@drawable/pin_drop_24dp_black</item>
         <item name="iconFloorUp">@drawable/arrow_up_wide</item>
         <item name="iconFloorDown">@drawable/arrow_down_wide</item>
         <item name="toolbarLogo">@drawable/ic_menu_black_24dp</item>

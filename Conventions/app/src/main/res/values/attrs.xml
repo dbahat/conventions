@@ -659,6 +659,8 @@
         <attr name="programmeSearchBarBackground" format="integer|reference" />
         <!-- Filter button color -->
         <attr name="programmeSearchFilterColor" format="color|reference" />
+        <!-- Filter button background -->
+        <attr name="programmeSearchFilterBackground" format="integer|reference" />
         <!-- Color for the background of the search screen title layout -->
         <attr name="searchTitleBackgroundColor" format="color|reference" />
 
