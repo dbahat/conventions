@@ -22,6 +22,7 @@
             android:textColor="?homeTitleText"
             android:textStyle="bold"
             android:layout_gravity="center"
+            android:gravity="center"
             tools:text="@string/thanks_for_coming"/>
     </amai.org.conventions.customviews.FrameLayoutWithState>
 

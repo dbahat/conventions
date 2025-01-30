@@ -21,6 +21,7 @@
             android:text="@string/home_now_showing_title"
             android:textSize="20sp"
             android:textColor="?homeTitleText"
+            android:gravity="center"
             android:layout_gravity="center"/>
     </amai.org.conventions.customviews.FrameLayoutWithState>
 
@@ -95,6 +96,7 @@
             android:text="@string/home_upcoming_title"
             android:textSize="20sp"
             android:textColor="?homeTitleText"
+            android:gravity="center"
             android:layout_gravity="center"/>
     </amai.org.conventions.customviews.FrameLayoutWithState>
 
