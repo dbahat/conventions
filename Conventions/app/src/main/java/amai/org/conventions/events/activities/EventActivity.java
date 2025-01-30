@@ -856,16 +856,16 @@ public class EventActivity extends NavigationActivity {
 	private void setupFeedback(ConventionEvent event) {
 		if (event.canFillFeedback()) {
 			feedbackContainer.setVisibility(View.VISIBLE);
-			updateFeedbackState(event);
 
-			feedbackView.setAdditionalFeedbackURL(Convention.getInstance().getAdditionalEventFeedbackURL(event));
-			feedbackView.setModel(event.getUserInput().getFeedback());
-
+			// This should be called before setModel for the color states to be correct
 			if (shouldFeedbackBeClosed()) {
 				feedbackView.setState(CollapsibleFeedbackView.State.Collapsed, false);
 			} else {
 				feedbackView.setState(CollapsibleFeedbackView.State.Expanded, false);
 			}
+
+			feedbackView.setAdditionalFeedbackURL(Convention.getInstance().getAdditionalEventFeedbackURL(event));
+			feedbackView.setModel(event.getUserInput().getFeedback());
 
 			feedbackView.setSendFeedbackClickListener(feedbackView.new CollapsibleFeedbackViewSendListener() {
 				@Override
@@ -885,6 +885,12 @@ public class EventActivity extends NavigationActivity {
 					updateFeedbackState(event);
 				}
 			});
+
+			feedbackView.setOnStateChangedListener(() -> {
+				updateFeedbackState(event);
+			});
+
+			updateFeedbackState(event);
 		} else {
 			feedbackContainer.setVisibility(View.GONE);
 		}
@@ -898,6 +904,10 @@ public class EventActivity extends NavigationActivity {
 		}
 		if (!Convention.getInstance().isFeedbackSendingTimeOver()) {
 			states.add(R.attr.state_event_feedback_can_send);
+		}
+
+		if (feedbackView.getState() == CollapsibleFeedbackView.State.Collapsed) {
+			states.add(R.attr.state_feedback_collapsed);
 		}
 		states.setForView(feedbackContainer);
 	}

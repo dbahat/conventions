@@ -776,6 +776,7 @@
         <attr name="state_feedback_answer_type_radio" type="boolean"/>
         <attr name="state_feedback_answer_type_multi" type="boolean"/>
         <attr name="state_feedback_answer_type_five_stars" type="boolean"/>
+        <attr name="state_feedback_collapsed" format="boolean"/>
     </declare-styleable>
 
     <declare-styleable name="UpdateState">

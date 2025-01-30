@@ -95,6 +95,8 @@ public class CollapsibleFeedbackView extends FrameLayout {
 	private int progressBarColor;
 	private URL additionalFeedbackURL;
 
+	private Runnable onStateChangedListener;
+
 	public CollapsibleFeedbackView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 
@@ -143,6 +145,17 @@ public class CollapsibleFeedbackView extends FrameLayout {
 			setState(state);
 		} else {
 			setStateWithoutAnimation(state);
+		}
+	}
+
+	public void setOnStateChangedListener(Runnable onStateChangedListener) {
+		this.onStateChangedListener = onStateChangedListener;
+	}
+
+	private void notifyStateChanged() {
+		refresh();
+		if (this.onStateChangedListener != null) {
+			this.onStateChangedListener.run();
 		}
 	}
 
@@ -234,6 +247,9 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		if (!Convention.getInstance().isFeedbackSendingTimeOver()) {
 			state.add(R.attr.state_event_feedback_can_send);
 		}
+		if (getState() == State.Collapsed) {
+			state.add(R.attr.state_feedback_collapsed);
+		}
 		return state;
 	}
 
@@ -295,6 +311,8 @@ public class CollapsibleFeedbackView extends FrameLayout {
 				feedbackExpended.setVisibility(VISIBLE);
 				feedbackCollapsed.setVisibility(GONE);
 		}
+
+		this.notifyStateChanged();
 	}
 
 	private void setFeedbackIcon(Survey feedback) {
@@ -786,6 +804,8 @@ public class CollapsibleFeedbackView extends FrameLayout {
 
 				finalLayoutAfterResize.setVisibility(View.VISIBLE);
 				finalLayoutAfterResize.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
+
+				notifyStateChanged();
 			}
 
 			@Override
