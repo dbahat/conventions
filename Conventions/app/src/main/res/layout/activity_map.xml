@@ -10,16 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <Button
-        android:id="@+id/map_show_shelters"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:layout_gravity="end"
-        style="@style/HighlightedButton"
-        android:background="?mapShelterButtonBackground"
-        android:text="@string/map_show_shelters"/>
-
     <!-- This layout is the full width and height of the screen so that we can
          catch clicks anywhere to dismiss the search. -->
     <LinearLayout

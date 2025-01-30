@@ -106,6 +106,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 	private EventView locationNextEvent;
 	private Button gotoStandsListButton;
 	private Button gotoFloorButton;
+	private Button showSheltersButton;
 
 	private OnMapFloorEventListener mapFloorEventsListener;
 
@@ -131,6 +132,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		initializeEventsListener();
 		setMapClickListeners();
 		configureMapFloorAndRestoreState(savedInstanceState);
+		initializeShowSheltersButton();
 
 		return view;
 	}
@@ -279,6 +281,26 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		locationNextEvent = (EventView) view.findViewById(R.id.location_next_event);
 		gotoStandsListButton = (Button) view.findViewById(R.id.goto_stands_list_button);
 		gotoFloorButton = view.findViewById(R.id.goto_floor_button);
+		showSheltersButton = view.findViewById(R.id.map_show_shelters);
+	}
+
+	private void initializeShowSheltersButton() {
+		List<MapLocation> shelters = CollectionUtils.filter(Convention.getInstance().getMap().getLocations(), item -> {
+			for (Place place : item.getPlaces()) {
+				if (place.isShelter()) {
+					return true;
+				}
+			}
+			return false;
+		});
+		if (shelters.isEmpty()) {
+			showSheltersButton.setVisibility(View.GONE);
+		} else {
+			showSheltersButton.setVisibility(View.VISIBLE);
+			showSheltersButton.setOnClickListener(v -> {
+				selectMarkersWithNameAndFloor(shelters);
+			});
+		}
 	}
 
 	private void initializeLocationDetails() {
