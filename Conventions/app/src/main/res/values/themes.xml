@@ -197,6 +197,7 @@
         <item name="feedbackMultiAnswerMarginTopBottom">0dp</item>
         <item name="feedbackMultiAnswerMarginBetweenAnswers">0dp</item>
         <item name="progressBarDrawable">@drawable/rotating_circular_progress_bar</item>
+        <item name="feedbackSeparatorColor">@color/transparent_black</item>
 
         <!-- Programme Activity -->
         <item name="marginBetweenEventsListAndNextHeader">20dp</item>
@@ -407,6 +408,7 @@
         <item name="feedbackMultiAnswerMarginTopBottom">0dp</item>
         <item name="feedbackMultiAnswerMarginBetweenAnswers">0dp</item>
         <item name="progressBarDrawable">@drawable/rotating_circular_progress_bar</item>
+        <item name="feedbackSeparatorColor">@color/transparent_black</item>
 
         <!-- Programme Activity -->
         <item name="marginBetweenEventsListAndNextHeader">20dp</item>
