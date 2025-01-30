@@ -544,11 +544,13 @@
         <!-- Buttons -->
 
         <!-- Button style. By default, uses buttonColorPressed for the ripple, buttonColorDisabled for
-             disabled color, and buttonColor for regular color.
+             disabled color, and buttonColor for regular color. Use highlightedButtonRadius for the round corners radius.
              The style is used in: arrival methods (install google services), event activity (view, vote),
              feedback activity (send all feedbacks), feedback layout in feedback screen and event vote
              survey (send feedback), map (open stands, goto floor). -->
         <attr name="highlightedButtonBackground" format="integer|reference"/>
+        <!-- Radius for button. See highlightedButtonBackground for usage. -->
+        <attr name="highlightedButtonRadius" format="dimension|reference"/>
         <!-- Text color for button. See highlightedButtonBackground for usage. -->
         <attr name="buttonTextColor" format="integer|reference"/>
         <!-- Default color for button. See highlightedButtonBackground for usage. Also used as the default borderlessButtonColor. -->

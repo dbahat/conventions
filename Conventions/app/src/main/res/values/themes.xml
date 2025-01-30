@@ -22,6 +22,7 @@
         <item name="infoActivitiesBackground">?activitiesBackground</item>
         <item name="infoActivitiesTextBackground">@color/transparent</item>
         <item name="highlightedButtonBackground">@drawable/highlighted_button</item>
+        <item name="highlightedButtonRadius">@dimen/control_corner_material</item>
         <item name="actionButtonColor">?colorAccent</item>
         <item name="actionButtonIcon">@drawable/ic_action_search</item>
         <item name="borderlessButtonColor">?buttonColor</item>
@@ -230,6 +231,7 @@
         <item name="infoActivitiesBackground">?activitiesBackground</item>
         <item name="infoActivitiesTextBackground">@color/transparent</item>
         <item name="highlightedButtonBackground">@drawable/highlighted_button</item>
+        <item name="highlightedButtonRadius">@dimen/control_corner_material</item>
         <item name="actionButtonColor">?colorAccent</item>
         <item name="actionButtonIcon">@drawable/ic_action_search</item>
         <item name="borderlessButtonColor">?buttonColor</item>
