@@ -347,7 +347,7 @@ public class Harucon2025Convention extends AmaiConvention {
 												.withX(1503.577f)
 												.withY(523.889f),
 										new MapLocation()
-												.withPlace(new Place().withName("מרחב מוגן"))
+												.withPlace(new Place().withName("מרחב מוגן").withShelter(true))
 												.withMarkerResource(R.raw.animatsuri2024_marker_safe, true)
 												.withSelectedMarkerResource(R.raw.animatsuri2024_marker_safe_selected, true)
 												.withMarkerHeight(131.35f)
