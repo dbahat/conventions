@@ -611,6 +611,8 @@
         <attr name="progressBarDrawable" format="integer|reference"/>
         <!-- Color for the default "send all" progress bar in feedback activity -->
         <attr name="feedbackProgressBarColor" format="color|reference"/>
+        <!-- Color for the separator between feedback screen parts, like events and convention feedback -->
+        <attr name="feedbackSeparatorColor" format="color|reference"/>
 
         <!-- Programme and Programme Search Screens -->
 
