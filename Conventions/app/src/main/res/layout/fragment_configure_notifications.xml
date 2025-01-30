@@ -37,6 +37,7 @@
             android:maxLines="4"
             android:maxWidth="200dp"
             android:text="@string/configure_notification_event_about_to_start_message"
+            android:textColor="?android:textColorPrimary"
             android:gravity="center|start"/>
     </LinearLayout>
 
@@ -56,6 +57,7 @@
             android:maxLines="4"
             android:maxWidth="200dp"
             android:text="@string/configure_notification_event_feedback_reminder_message"
+            android:textColor="?android:textColorPrimary"
             android:gravity="center|start"/>
     </LinearLayout>
 
