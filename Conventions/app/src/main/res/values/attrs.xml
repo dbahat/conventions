@@ -207,6 +207,8 @@
         <attr name="homeLogo" format="integer|reference"/>
         <!-- Margins (all sides) for homeLogo -->
         <attr name="homeLogoMargin" format="dimension"/>
+        <!-- Top margin for homeLogo. Default is homeLogoMargin. -->
+        <attr name="homeLogoMarginTop" format="dimension"/>
         <!-- Side margins for home frame (the changing part) -->
         <attr name="homeFrameMargins" format="dimension" />
         <!-- Top margin for home frame (the changing part). Default is homeFrameMargins. -->

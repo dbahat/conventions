@@ -108,6 +108,7 @@
         <item name="homeEventHallText">?attr/homeContentText</item>
         <item name="homeEventsListDivider">@drawable/home_event_list_divider</item>
         <item name="homeLogoMargin">10dp</item>
+        <item name="homeLogoMarginTop">?homeLogoMargin</item>
         <item name="homeFrameMargins">24dp</item>
         <item name="homeFrameTopMargin">?homeFrameMargins</item>
         <item name="homeFrameBottomMargin">?homeFrameMargins</item>
@@ -336,6 +337,7 @@
         <item name="homeEventHallText">?attr/homeContentText</item>
         <item name="homeEventsListDivider">@drawable/home_event_list_divider</item>
         <item name="homeLogoMargin">10dp</item>
+        <item name="homeLogoMarginTop">?homeLogoMargin</item>
         <item name="homeFrameMargins">24dp</item>
         <item name="homeFrameTopMargin">?homeFrameMargins</item>
         <item name="homeFrameBottomMargin">?homeFrameMargins</item>

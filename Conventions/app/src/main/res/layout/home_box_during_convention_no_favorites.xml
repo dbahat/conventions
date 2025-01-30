@@ -21,6 +21,7 @@
             android:textSize="?attr/homeEventsListTitleSize"
             android:textColor="?homeTitleText"
             android:textStyle="bold"
+            android:gravity="center"
             android:layout_gravity="center"/>
     </amai.org.conventions.customviews.FrameLayoutWithState>
 
