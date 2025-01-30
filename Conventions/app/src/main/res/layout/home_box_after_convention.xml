@@ -52,7 +52,7 @@
 
     <Button
         android:id="@+id/home_go_to_feedback_button"
-        android:text="@string/home_go_to_my_events"
+        android:text="@string/home_show_feedback"
         android:layout_marginTop="?homeSingleButtonTopMargin"
         style="?homeSingleButtonStyle"
         android:onClick="onGoToFeedbackClicked"/>

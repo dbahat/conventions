@@ -38,11 +38,36 @@
             android:dividerHeight="?attr/homeEventsListDividerHeight"/>
     </amai.org.conventions.customviews.FrameLayoutWithState>
 
-    <Button
-        android:id="@+id/home_screen_bottom_button"
-        android:text="@string/home_go_to_programme"
-        android:layout_marginTop="?homeSingleButtonTopMargin"
-        style="?homeSingleButtonStyle"
-        android:onClick="onGoToProgrammeClicked"/>
+    <LinearLayout
+        android:id="@+id/home_buttons_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <Button
+            style="@style/HomeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/programme_title"
+            android:textSize="23sp"
+            android:layout_weight="1"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="?attr/homeButtonsSideMargin"
+            android:onClick="onGoToProgrammeClicked"/>
+
+        <Button
+            style="@style/HomeButton"
+            android:background="?attr/homeButton2Background"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="?attr/homeButtonsSideMargin"
+            android:text="@string/home_go_to_my_events"
+            android:textSize="23sp"
+            android:layout_weight="1"
+            android:textColor="?attr/homeButton2Text"
+            android:onClick="onGoToMyEventsClicked"/>
+
+    </LinearLayout>
 
 </LinearLayout>
