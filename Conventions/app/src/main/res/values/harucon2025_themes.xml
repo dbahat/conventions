@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppBaseTheme.Harucon2025" parent="AppBaseTheme.HaruconGen">
+        <!-- Sub-themes -->
+        <item name="android:dialogTheme">@style/AppDialogTheme.Harucon2025</item>
+        <item name="alertDialogTheme">@style/AppAlertDialogTheme.Harucon2025</item>
+        <!-- General -->
+        <item name="android:colorPrimaryDark">@color/black</item> <!-- Toolbar color -->
+        <!-- Used in: default selected checkbox/switch color, settings titles,
+             cursor color in all edit texts. Also used as the default action button color and map search checkbox color. -->
+        <item name="colorAccent">@color/harucon2025_purple4</item>
+        <!-- This color should be readable over the activities background.
+             Used as the text color in: accessibility, arrival methods.
+             Also used as default for many texts and as the default "large text" color (e.g. in settings). -->
+        <item name="android:textColorPrimary">@color/harucon2025_purple5</item>
+        <!-- Used in: default unselected checkbox color and default "medium/small" texts (e.g. in settings). -->
+        <item name="android:textColorSecondary">@color/harucon2025_purple4</item>
+        <item name="android:textColorHint">@color/harucon2025_purple5</item>
+        <item name="android:textColorLink">@color/harucon2025_pink6</item>
+        <item name="actionButtonColor">@color/harucon2025_green5</item>
+        <item name="actionButtonIcon">@drawable/harucon_gen_search_icon</item>
+        <item name="hintTextColor">@color/harucon2025_purple5</item>
+        <item name="swipeToRefreshColor">@color/white</item>
+        <item name="swipeToRefreshBackgroundColor">@color/harucon2025_green5</item>
+        <item name="snackbarActionColor">@color/harucon2025_green6</item>
+        <item name="borderlessButtonColor">@color/harucon2025_pink5</item>
+        <item name="activitiesBackground">@drawable/harucon2025_app_background</item>
+        <item name="infoActivitiesBackground">@color/harucon2025_yellow1</item>
+        <item name="eventListDivider">@drawable/harucon_gen_event_list_divider</item>
+        <item name="separatorColor">@null</item>
+        <!-- These are used for buttons. They should be usable when the background is:
+             Event screen vote survey
+             Feedback screen
+             Map bottom info panel
+             Arrival methods screen
+         -->
+        <item name="buttonColor">@color/harucon2025_pink6</item>
+        <item name="buttonColorPressed">@color/harucon2025_pink4</item>
+        <item name="buttonColorDisabled">@color/harucon2025_gray5</item>
+        <item name="buttonTextColor">@drawable/harucon2025_highlighted_button_text_color</item>
+        <item name="highlightedButtonRadius">8dp</item>
+
+        <!-- Notifications -->
+        <item name="notificationSmallIcon">@drawable/harucon_notification_small</item>
+        <!-- Toolbar -->
+        <item name="toolbarBackground">@color/harucon2025_purple5</item>
+        <item name="toolbarIconAccentColor">@color/harucon2025_pink3</item>
+        <item name="toolbarTitleColor">@color/white</item>
+        <!-- Navigation Drawer -->
+        <item name="navigationPopupBackground">@color/harucon2025_yellow1</item>
+        <item name="navigationPopupSpaceVisibility">gone</item>
+        <item name="navigationPopupTitle">@null</item>
+        <item name="navigationPopupBottomImage">@null</item>
+        <item name="navigationPopupTopSelectedColor">@color/harucon2025_pink4</item>
+        <item name="navigationPopupTopNotSelectedColor">@color/harucon2025_pink4</item>
+        <item name="navigationPopupNotSelectedColor">@color/harucon2025_pink4</item>
+        <item name="navigationPopupSelectedColor">@color/harucon2025_pink4</item>
+        <item name="navigationPopupSelectedBackground">@color/harucon2025_pink1</item>
+        <item name="navigationPopupSeparatorColor">@color/transparent</item>
+        <item name="navigationPopupBottomImageMargins">0dp</item>
+        <item name="navigationPopupBottomImageTopMargin">0dp</item>
+        <item name="navigationPopupTitleWidth">0dp</item>
+        <item name="navigationItemsShouldDisplayIcon">false</item>
+        <item name="navigationPopupItemPaddingTop">13dp</item>
+        <item name="navigationPopupItemPaddingBottom">13dp</item>
+        <!-- About Screen -->
+        <item name="aboutLogo">@drawable/harucon2025_about_title</item>
+        <item name="aboutLogoMargins">0dp</item>
+        <!-- Home Screen -->
+        <item name="homeLogo">@drawable/harucon2025_home_image</item>
+        <item name="homeLogoMargin">0dp</item>
+        <item name="homeLogoMarginTop">10dp</item>
+        <item name="homeBottomImage">@null</item>
+        <item name="homeBackground">@drawable/harucon2025_home_background</item>
+        <item name="homeBackgroundDuringConvention">@drawable/harucon2025_home_background</item>
+        <item name="homeToolbarTitle">@drawable/harucon2025_toolbar_title_small</item>
+        <item name="homeToolbarBackground">@color/harucon2025_purple5</item>
+        <item name="homeTitleBackground">@drawable/harucon2025_home_title_background</item>
+        <item name="homeShowCurrentUpcomingTitles">true</item>
+        <item name="homeTitleText">@drawable/harucon2025_home_title_text</item>
+        <item name="homeContentBackground">@drawable/harucon2025_home_content_background</item>
+        <item name="homeContentText">@drawable/harucon2025_home_content_text</item>
+        <item name="homeButtonBackground">@drawable/harucon2025_home_button</item>
+        <item name="homeButtonText">@color/white</item>
+        <item name="homeButton2Background">@drawable/harucon2025_home_updates_button</item>
+        <item name="homeButton2Text">@color/harucon2025_green7</item>
+        <item name="homeEventsListEventBackground">@drawable/harucon2025_rounded_edges_yellow1</item>
+        <item name="homeEventsListDivider">@android:color/transparent</item>
+        <item name="homeEventsListDividerHeight">10dp</item>
+        <item name="homeBoxTopMargin">10dp</item>
+        <item name="homeSingleButtonTopMargin">10dp</item>
+        <item name="homeFrameTopMargin">10dp</item>
+        <!-- Event View -->
+        <item name="eventViewLayout">@layout/rounded_convention_event</item>
+        <item name="eventViewHeight">104dp</item>
+        <item name="eventBackgroundColor">@color/harucon2025_yellow1</item>
+        <item name="eventTextColor">@drawable/harucon2025_event_view_text_color</item>
+        <item name="eventNameKeywordHighlightColor">@color/harucon2025_green4</item>
+        <item name="eventKeywordHighlightColor">@color/harucon2025_green4</item>
+        <item name="eventTimeTextColor">@drawable/harucon2025_event_view_time_text_color</item>
+        <item name="eventTimeBackground">@drawable/harucon2025_event_view_time_background_color</item>
+        <item name="eventFavoriteIcon">@drawable/harucon_gen_favorite_icon</item>
+        <item name="eventFavoriteIconColor">@drawable/harucon2025_favorite_icon_color</item>
+        <item name="eventFeedbackIcon">@drawable/harucon_gen_event_feedback_icon</item>
+        <item name="eventFeedbackIconColor">@drawable/harucon2025_event_feedback_icon_color</item>
+        <item name="useEventTextColorFromEventType">false</item>
+        <item name="useEventTimeColorFromEventType">false</item>
+        <item name="conflictingEventBackground">@drawable/harucon2025_conflicting_event_label_bg</item>
+        <item name="conflictingEventLabelTextColor">@color/white</item>
+        <item name="ongoingEventBackground">@drawable/harucon2025_ongoing_event_label_bg</item>
+        <item name="ongoingEventLabelTextColor">@color/harucon2025_purple4</item>
+        <!-- Programme Screen and Programme Search Screen -->
+        <item name="eventTimeHeaderBackground">@color/harucon2025_green1</item>
+        <item name="eventTimeHeaderWidth">match_parent</item>
+        <item name="eventTimeHeaderTextColor">@color/harucon2025_green7</item>
+        <item name="eventTimeHeaderMarginTop">10dp</item>
+        <item name="eventTimeHeaderMarginBottom">@null</item>
+        <item name="eventTimeHeaderMarginHorizontal">8dp</item>
+        <item name="eventTimeHeaderPaddingVertical">4dp</item>
+        <item name="marginBetweenEventsListAndNextHeader">0dp</item>
+        <item name="fabOnProgrammeTop">true</item>
+        <item name="fabOnProgrammeTopAlignment">START</item>
+        <item name="searchTitleTextColor">@color/harucon2025_purple5</item>
+        <item name="searchTitleBackgroundColor">@color/harucon2025_yellow1</item>
+        <item name="programmeSearchBarBackground">@drawable/harucon2025_search_bar_background</item>
+        <item name="programmeSearchFilterColor">@color/harucon2025_pink6</item>
+        <item name="programmeSearchFilterBackground">@drawable/harucon2025_filter_background</item>
+        <!-- Search drawer -->
+        <item name="searchDrawerAccentColor">@color/harucon2025_pink6</item>
+        <item name="searchDrawerBackground">@color/harucon2025_yellow1</item>
+        <item name="searchDrawerTextColor">@color/harucon2025_purple5</item>
+        <item name="searchDrawerSeparatorColor">@color/transparent</item>
+        <!-- My Events Screen -->
+        <item name="nextEventStartTimeBackground">@color/harucon2025_white_transparent60</item>
+        <item name="nextEventStartTimeTextColor">@color/harucon2025_purple4</item>
+        <item name="conflictingEventsBackground">@null</item>
+        <item name="nextEventStartTimeBottomLineColor">@null</item>
+        <item name="conflictingEventsSideMargin">0dp</item>
+        <item name="conflictingEventsTopBottomMargin">0dp</item>
+        <item name="conflictingEventsGroupSeparator">@drawable/harucon2025_conflicting_events_group_separator</item>
+        <item name="conflictingEventsGroupSeparatorHeight">4dp</item>
+        <item name="conflictingEventsGroupSeparatorMargin">4dp</item>
+        <item name="conflictingEventsListBorder">@null</item>
+        <item name="freeTimeTextColor">@color/harucon2025_purple4</item>
+        <item name="freeTimeBackground">@drawable/harucon2025_transparent_white_inset</item>
+        <!-- Feedback Screen -->
+        <item name="conventionFeedbackBackgroundColor">@drawable/harucon2025_rounded_edges_yellow1_inset</item>
+        <item name="conventionFeedbackTextColor">@drawable/harucon2025_convention_feedback_text_color</item>
+        <item name="conventionFeedbackAnswerBackground">@drawable/harucon2025_convention_feedback_answer_bg_selector</item>
+        <item name="feedbackMultiAnswerMinWidth">50dp</item>
+        <item name="feedbackMultiAnswerPaddingTopBottom">4dp</item>
+        <item name="feedbackMultiAnswerPaddingStartEnd">9dp</item>
+        <item name="feedbackMultiAnswerPaddingStartFirstAnswer">9dp</item>
+        <item name="feedbackMultiAnswerMarginTopBottom">2dp</item>
+        <item name="feedbackMultiAnswerMarginBetweenAnswers">9dp</item>
+        <item name="feedbackProgressBarColor">@color/harucon2025_pink6</item>
+        <item name="feedbackSeparatorColor">@color/white</item>
+        <!-- Updates Screen -->
+        <item name="updateTimeColor">@drawable/harucon2025_update_time_color</item>
+        <item name="updateTimeBackground">@null</item>
+        <item name="updateItemBorder">@color/harucon2025_pink5</item>
+        <item name="updateItemSeparator">@android:color/transparent</item>
+        <item name="updateBackground">@drawable/harucon2025_update_background</item>
+        <item name="updateTextColor">@color/harucon2025_purple5</item>
+        <item name="updateElevation">2dp</item>
+        <item name="showNewUpdateIndicator">true</item>
+        <item name="newUpdateIndicatorTextColor">@color/harucon2025_yellow1</item>
+        <item name="newUpdateIndicatorBackground">@drawable/harucon2025_new_update_indicator_background</item>
+        <!-- Event Screen -->
+        <item name="eventToolbarColor">@color/harucon2025_purple5</item>
+        <item name="eventDetailsDefaultBackground">@drawable/harucon2025_app_background</item>
+        <item name="eventTitleBackground">@null</item>
+        <item name="eventTitlePadding">0dp</item>
+        <item name="eventTitleTextColor">@color/white</item>
+        <item name="eventSubTitleTextColor">@color/white</item>
+        <item name="eventLecturerTextColor">@color/harucon2025_purple4</item>
+        <item name="eventTypeTextColor">@color/harucon2025_purple4</item>
+        <item name="eventNameBackground">@drawable/harucon2025_rounded_top_edges_pink6</item>
+        <item name="eventSubTitleBackground">@color/harucon2025_pink6</item>
+        <item name="eventLecturerBackground">@color/harucon2025_peach1</item>
+        <item name="eventTypeBackground">@drawable/harucon2025_rounded_bottom_edges_yellow1</item>
+        <item name="eventDetailsBoxColor">@null</item>
+        <item name="eventFeedbackBoxColor">@drawable/harucon2025_event_feedback_bg</item>
+        <item name="eventFeedbackTextColor">@drawable/harucon2025_event_feedback_text_color</item>
+        <item name="eventFeedbackAnswerBackground">@drawable/harucon2025_event_feedback_answer_bg_selector</item>
+        <item name="feedbackButtonColor">@drawable/harucon2025_event_feedback_button_color_selector</item>
+        <item name="eventFeedbackButtonBackground">@drawable/harucon2025_event_feedback_button</item>
+        <item name="eventFeedbackButtonTextColor">@drawable/harucon2025_event_feedback_button_text_color</item>
+        <item name="eventFeedbackProgressBarColor">@color/harucon2025_green4</item>
+        <item name="eventVoteBoxColor">@drawable/harucon2025_rounded_edges_peach1</item>
+        <item name="eventVoteTextColor">@color/harucon2025_purple4</item>
+        <item name="eventVoteButtonBackground">@drawable/harucon2025_event_vote_button</item>
+        <item name="eventVoteButtonTextColor">@drawable/harucon2025_event_feedback_button_text_color</item>
+        <item name="eventDescriptionBoxColor">@drawable/harucon2025_rounded_edges_yellow1</item>
+        <item name="eventSurveyTextColor">@drawable/harucon2025_event_vote_text_color</item>
+        <item name="eventDetailsTextColor">@color/harucon2025_purple4</item>
+        <item name="eventDescriptionTextColor">@color/harucon2025_purple4</item>
+        <!-- Map Screen -->
+        <item name="mapBackground">@drawable/harucon2025_app_background</item>
+        <item name="mapShelterButtonBackground">@drawable/harucon2025_map_shelters_button</item>
+        <item name="locationDetailsBackground">@color/white</item>
+        <item name="locationDetailsTopLineColor">@color/transparent</item>
+        <item name="locationDetailsTitleColor">@color/harucon2025_purple4</item>
+        <item name="locationDetailsElevation">10dp</item>
+        <item name="iconClearMap">@drawable/ic_clear_black</item>
+        <item name="iconFloorUp">@drawable/harucon2025_arrow_up</item>
+        <item name="iconFloorDown">@drawable/harucon2025_arrow_down</item>
+        <item name="floorChangeBackground">@color/harucon2025_green1</item>
+        <item name="floorUpDownTextColor">@color/harucon2025_green7</item>
+        <item name="floorUpDownSeparator">@color/harucon2025_green1</item>
+        <item name="floorUpDownElevation">10dp</item>
+        <item name="mapSearchTabsBackground">@color/harucon2025_pink6</item>
+        <item name="mapSearchFiltersBackground">@color/harucon2025_yellow1</item>
+        <item name="mapSearchTabsColor">@color/harucon2025_yellow1</item>
+        <item name="mapSearchTabsIndicator">@drawable/harucon2025_map_tab_indicator</item>
+        <item name="mapSearchTopBorder">@color/harucon2025_pink6</item>
+        <item name="mapSearchBorder">@color/harucon2025_yellow1</item>
+        <item name="mapSearchResultsBackground">@color/harucon2025_yellow1_transparent85</item>
+        <item name="mapSearchPaneElevation">10dp</item>
+        <item name="mapSearchImageColor">@color/harucon2025_purple3</item>
+        <item name="mapSearchSeparator">@color/harucon2025_gray1</item>
+        <item name="mapSearchResultsDivider">@drawable/harucon2025_map_search_results_divider</item>
+        <item name="mapSearchCheckboxTint">@color/harucon2025_pink6</item>
+        <item name="mapSearchBarBackground">@drawable/harucon2025_search_bar_background</item>
+        <item name="mapSearchBarHorizontalMargins">5dp</item>
+        <item name="standIconColor">@color/harucon2025_purple4</item>
+        <item name="standsTypeTitleColor">@color/harucon2025_purple3</item>
+        <item name="standsMapHighlight">@color/harucon2025_purple1_transparent60</item>
+    </style>
+
+    <style name="AppBaseTheme.Harucon2025.Event">
+        <item name="android:textColorLink">@color/harucon2025_pink6</item>
+    </style>
+
+    <style name="AppDialogTheme.Harucon2025" parent="Theme.AppCompat.Light.Dialog">
+        <!-- This is the default starting API23. In any case the title is always left-justified so it's best to not use it. -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- Used for configure notifications popup title and separator -->
+        <item name="colorAccent">@color/harucon2025_pink6</item>
+        <item name="borderlessButtonColor">@color/harucon2025_pink6</item>
+        <item name="android:textColorPrimary">@color/harucon2025_purple4</item>
+        <item name="android:layoutDirection">rtl</item>
+    </style>
+
+    <style name="AppAlertDialogTheme.Harucon2025" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!-- Used for configure notifications popup title and separator -->
+        <item name="colorAccent">@color/harucon2025_pink6</item>
+        <item name="borderlessButtonColor">@color/harucon2025_pink6</item>
+        <item name="android:textColorPrimary">@color/harucon2025_purple4</item>
+        <item name="android:layoutDirection">rtl</item>
+    </style>
+
+    <style name="AppBaseTheme.Harucon2025.Splash">
+        <item name="android:windowBackground">@drawable/harucon2025_home_background</item>
+    </style>
+</resources>
+
