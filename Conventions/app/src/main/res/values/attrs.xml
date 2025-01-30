@@ -268,10 +268,10 @@
         <attr name="homeSingleButtonStyle" format="integer|reference"/>
         <!-- Show buttons in home screen (before and during convention) -->
         <attr name="homeShowButtons" format="boolean"/>
-        <!-- Background for "go to updates" button before convention. Default is homeButtonBackground. -->
-        <attr name="homeGotoUpdatesButtonBackground" format="integer|reference"/>
-        <!-- Text color for "go to updates" button before convention. Default is homeButtonText. -->
-        <attr name="homeGotoUpdatesButtonText" format="color|reference"/>
+        <!-- Background for the second (left) button when there are 2 buttons. Default is homeButtonBackground. -->
+        <attr name="homeButton2Background" format="integer|reference"/>
+        <!-- Text color for the second (left) button when there are 2 buttons. Default is homeButtonText. -->
+        <attr name="homeButton2Text" format="color|reference"/>
 
         <!-- My Events Screen -->
 

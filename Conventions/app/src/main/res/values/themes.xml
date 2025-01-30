@@ -101,8 +101,8 @@
         <item name="homeSingleButtonTopMargin">0dp</item>
         <item name="homeButtonsSideMargin">0dp</item>
         <item name="homeSingleButtonStyle">@style/HomeButton.Single</item>
-        <item name="homeGotoUpdatesButtonBackground">?homeButtonBackground</item>
-        <item name="homeGotoUpdatesButtonText">?homeButtonText</item>
+        <item name="homeButton2Background">?homeButtonBackground</item>
+        <item name="homeButton2Text">?homeButtonText</item>
         <item name="homeShowCurrentUpcomingTitles">false</item>
         <item name="homeEventTimeText">?attr/homeContentText</item>
         <item name="homeEventHallText">?attr/homeContentText</item>
@@ -332,8 +332,8 @@
         <item name="homeSingleButtonTopMargin">0dp</item>
         <item name="homeButtonsSideMargin">0dp</item>
         <item name="homeSingleButtonStyle">@style/HomeButton.Single</item>
-        <item name="homeGotoUpdatesButtonBackground">?homeButtonBackground</item>
-        <item name="homeGotoUpdatesButtonText">?homeButtonText</item>
+        <item name="homeButton2Background">?homeButtonBackground</item>
+        <item name="homeButton2Text">?homeButtonText</item>
         <item name="homeShowCurrentUpcomingTitles">false</item>
         <item name="homeEventTimeText">?attr/homeContentText</item>
         <item name="homeEventHallText">?attr/homeContentText</item>

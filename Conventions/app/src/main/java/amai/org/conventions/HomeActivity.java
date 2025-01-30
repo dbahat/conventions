@@ -233,11 +233,6 @@ public class HomeActivity extends NavigationActivity {
 			upcomingEventHall.setTextColor(currEventStates.getThemeColor(this, R.attr.homeEventHallText));
 			setupVoteOrView(currentEvent, upcomingEventVote);
 			currEventStates.setForView(upcomingEventVote);
-
-			// In this case, we want the 'go to my events' to go to the programme instead, since the user has no more favorite events.
-			Button goToMyEventsButton = findViewById(R.id.home_go_to_my_events_button);
-			goToMyEventsButton.setText(R.string.home_go_to_programme);
-			goToMyEventsButton.setOnClickListener(this::onGoToProgrammeClicked);
 		}
 		Views.fixRadialGradient(findViewById(R.id.home_current_event_container_title));
 		Views.fixRadialGradient(upcomingEventContainer);
@@ -265,8 +260,8 @@ public class HomeActivity extends NavigationActivity {
 
 		boolean showButtons = ThemeAttributes.getBoolean(this, R.attr.homeShowButtons);
 		if (!showButtons) {
-			View goToMyEventsButton = findViewById(R.id.home_go_to_my_events_button);
-			goToMyEventsButton.setVisibility(View.GONE);
+			View homeButtons = findViewById(R.id.home_buttons_layout);
+			homeButtons.setVisibility(View.GONE);
 		}
 	}
 
@@ -275,7 +270,7 @@ public class HomeActivity extends NavigationActivity {
 
 		boolean showButtons = ThemeAttributes.getBoolean(this, R.attr.homeShowButtons);
 		if (!showButtons) {
-			View button = findViewById(R.id.home_screen_bottom_button);
+			View button = findViewById(R.id.home_buttons_layout);
 			button.setVisibility(View.GONE);
 		}
 

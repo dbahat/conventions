@@ -72,14 +72,14 @@
 
         <Button
             style="@style/HomeButton"
-            android:background="?attr/homeGotoUpdatesButtonBackground"
+            android:background="?attr/homeButton2Background"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="?attr/homeButtonsSideMargin"
             android:text="@string/updates"
             android:textSize="23sp"
             android:layout_weight="1"
-            android:textColor="?homeGotoUpdatesButtonText"
+            android:textColor="?attr/homeButton2Text"
             android:onClick="onGoToUpdatesClicked"/>
 
     </LinearLayout>
