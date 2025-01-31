@@ -154,7 +154,7 @@
         <item name="feedbackMultiAnswerMarginTopBottom">2dp</item>
         <item name="feedbackMultiAnswerMarginBetweenAnswers">9dp</item>
         <item name="feedbackProgressBarColor">@color/harucon2025_pink6</item>
-        <item name="feedbackSeparatorColor">@color/white</item>
+        <item name="feedbackSeparatorColor">@drawable/harucon2025_white_inset</item>
         <!-- Updates Screen -->
         <item name="updateTimeColor">@drawable/harucon2025_update_time_color</item>
         <item name="updateTimeBackground">@null</item>
