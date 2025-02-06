@@ -36,12 +36,14 @@ import amai.org.conventions.utils.ConventionStorage;
 public class Harucon2025Convention extends AmaiConvention {
 	// Hall names
 	private static final String MAIN_HALL_NAME = "אולם ראשי";
+	private static final String ORANIM_NAME = "אודיטוריום אורנים";
 	private static final String ESHKOL1_NAME = "אשכול 1";
 	private static final String ESHKOL2_NAME = "אשכול 2";
 	private static final String ESHKOL3_NAME = "אשכול 3";
-//	private static final String CONTENT4_NAME = "חדר תוכן 4";
+	private static final String WORKSHOPS_NAME = "חדר סדנאות";
 	private static final String GAMES_NAME = "משחקייה";
 	private static final String COSPLAY_AREA_NAME = "מתחם קוספליי";
+	private static final String FOODCOURT_NAME = "מתחם אוכל";
 	// Location names
 	public static final String CHILDREN_ROOM_NAME = "חדר פעוטות";
 
@@ -101,7 +103,7 @@ public class Harucon2025Convention extends AmaiConvention {
 
 	@Override
 	protected ConventionStorage initStorage() {
-		return new ConventionStorage(this, R.raw.animatsuri2024_convention_events, 1);
+		return new ConventionStorage(this, R.raw.harucon2025_convention_events, 1);
 	}
 
 	@Override
@@ -186,7 +188,7 @@ public class Harucon2025Convention extends AmaiConvention {
 	@Override
 	protected URL initModelURL() {
 		try {
-			return new URL("https://animatsuri.org.il/2024/wp-admin/admin-ajax.php?action=get_event_list");
+			return new URL("https://harucon.org.il/2025/wp-admin/admin-ajax.php?action=get_event_list");
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
@@ -215,13 +217,23 @@ public class Harucon2025Convention extends AmaiConvention {
 
 	@Override
 	protected Halls initHalls() {
-		Hall mainHall = new Hall().withName(MAIN_HALL_NAME).withOrder(1);
-		Hall eshkol1 = new Hall().withName(ESHKOL1_NAME).withOrder(2);
-		Hall eshkol2 = new Hall().withName(ESHKOL2_NAME).withOrder(3);
-		Hall eshkol3 = new Hall().withName(ESHKOL3_NAME).withOrder(4);
-		Hall cosplayArea = new Hall().withName(COSPLAY_AREA_NAME).withOrder(5);
-		Hall games = new Hall().withName(GAMES_NAME).withOrder(6);
-		return new Halls(Arrays.asList(mainHall, eshkol1, eshkol2, eshkol3, cosplayArea, games));
+		List<Hall> halls = Arrays.asList(
+			new Hall().withName(MAIN_HALL_NAME),
+			new Hall().withName(ORANIM_NAME),
+			new Hall().withName(ESHKOL1_NAME),
+			new Hall().withName(ESHKOL2_NAME),
+			new Hall().withName(ESHKOL3_NAME),
+			new Hall().withName(WORKSHOPS_NAME),
+			new Hall().withName(GAMES_NAME),
+			new Hall().withName(COSPLAY_AREA_NAME),
+			new Hall().withName(FOODCOURT_NAME)
+		);
+		int i = 1;
+		for (Hall hall : halls) {
+			hall.setOrder(i);
+			++i;
+		}
+		return new Halls(halls);
 	}
 
 	@Override
