@@ -9,6 +9,7 @@ public class AmaiEventContract {
 	private String content;
 	private List<TimetableInfoInstance> timetableInfo;
 	private List<String> tags;
+	private boolean isOngoing;
 
 	public int getId() {
 		return id;
@@ -32,6 +33,10 @@ public class AmaiEventContract {
 
 	public List<String> getTags() {
 		return tags;
+	}
+
+	public boolean isOngoing() {
+		return isOngoing;
 	}
 
 	public AmaiEventContract setId(int id) {
@@ -61,6 +66,11 @@ public class AmaiEventContract {
 
 	public AmaiEventContract setTags(List<String> tags) {
 		this.tags = tags;
+		return this;
+	}
+
+	public AmaiEventContract setOngoing(boolean ongoing) {
+		isOngoing = ongoing;
 		return this;
 	}
 

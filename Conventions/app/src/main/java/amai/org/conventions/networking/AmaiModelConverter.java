@@ -59,7 +59,8 @@ public class AmaiModelConverter {
 						.withHall(convertHall(eventInstance.getRoom()))
 						.withSubTitle(eventInstance.getSubtitle())
 						.withImages(extractEventImageUrls(eventContract.getContent()))
-						.withTags(eventContract.getTags());
+						.withTags(eventContract.getTags())
+						.withOngoing(eventContract.isOngoing());
 
 				boolean stopProcessingEventDescription = specialEventsProcessor.processSpecialEvent(event);
 
