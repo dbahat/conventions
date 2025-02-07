@@ -11,6 +11,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
 import java.util.ArrayDeque;
+import java.util.Arrays;
 
 public class HtmlParser implements Html.TagHandler, ContentHandler {
 	public interface TagHandler {
@@ -35,6 +36,14 @@ public class HtmlParser implements Html.TagHandler, ContentHandler {
 				return attributes.getValue(i);
 		}
 		return null;
+	}
+
+	public static boolean hasClass(Attributes attributes, String className) {
+		String classes = getValue(attributes, "class");
+		if (classes == null) {
+			return false;
+		}
+		return Arrays.asList(classes.split(" ")).contains(className);
 	}
 
 	private final TagHandler handler;

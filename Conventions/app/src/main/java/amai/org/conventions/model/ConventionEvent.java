@@ -1,8 +1,5 @@
 package amai.org.conventions.model;
 
-import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.text.Editable;
 import android.text.SpannableStringBuilder;
@@ -16,14 +13,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 import java.util.Stack;
 
 import androidx.annotation.Nullable;
 import amai.org.conventions.R;
-import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.networking.AmaiModelConverter;
 import amai.org.conventions.utils.Dates;
@@ -459,15 +457,52 @@ public class ConventionEvent implements Serializable {
 		String eventDescription = this.getDescription();
 		final ListTagHandler listTagHandler = new ListTagHandler();
 		Spanned spannedResult = HtmlParser.fromHtml(eventDescription, null, new HtmlParser.TagHandler() {
-			private Stack<DivSpan> divSpans = new Stack<>();
-			private Stack<IFrameSpan> iframeSpans = new Stack<>();
-			private Stack<VideoSpan> videoSpans = new Stack<>();
+			private Map<String, Stack<Object>> tagSpans = new HashMap<>();
+			private int hiddenSpansDepth = 0;
 
 			@Override
 			public boolean handleTag(boolean opening, String tag, Editable output, Attributes attributes) {
 				// Starting Android N, the list items are handled in the Html class
 				if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
 					listTagHandler.handleTag(opening, tag, output, null);
+				}
+
+				Object currSpan = null;
+				if (tagSpans.get(tag) == null) {
+					tagSpans.put(tag, new Stack<>());
+				}
+				Stack<Object> currTagSpans = tagSpans.get(tag);
+				if (!opening && !currTagSpans.isEmpty()) { // This happens for the "inject" tag
+					currSpan = currTagSpans.pop();
+				}
+
+				// This tag is used in amai events that have different content for desktop and mobile.
+				// Probably added by EditorsKit plugin for WordPress.
+				// We hide content not available in the mobile version.
+				if (opening && HtmlParser.hasClass(attributes, "editorskit-no-mobile")) {
+					HiddenSpan span = new HiddenSpan();
+					currSpan = span;
+					span.setStart(output.length());
+					++hiddenSpansDepth;
+				} else if (!opening && currSpan instanceof HiddenSpan) {
+					HiddenSpan span = (HiddenSpan) currSpan;
+					--hiddenSpansDepth;
+					span.setEnd(output.length());
+					// SPAN_EXCLUSIVE_EXCLUSIVE is removed if its length is 0
+					int spanFlags = Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
+					if (span.getStart() == span.getEnd()) {
+						spanFlags = Spanned.SPAN_MARK_MARK;
+					}
+					output.setSpan(span, span.getStart(), span.getEnd(), spanFlags);
+					return false; // Can't rely on the check in the next line because we popped the span
+				}
+
+				// Don't add other spans inside parts we want to hide
+				if (hiddenSpansDepth > 0) {
+					if (opening) {
+						currTagSpans.push(currSpan);
+					}
+					return false;
 				}
 
 				// Mark embedded google form with a GoogleFormSpan:
@@ -478,28 +513,36 @@ public class ConventionEvent implements Serializable {
 					int length = output.length();
 					if (opening) {
 						DivSpan span;
-						String classStyle = HtmlParser.getValue(attributes, "class");
-						if ("ss-form-container".equals(classStyle)) {
+						if (HtmlParser.hasClass(attributes, "ss-form-container")) {
 							span = new GoogleFormSpan();
 						} else {
 							span = new DivSpan();
 						}
 						span.setStart(length);
-						divSpans.push(span);
-					} else {
-						DivSpan span = divSpans.pop();
+						currSpan = span;
+					} else if (currSpan instanceof DivSpan) {
+						DivSpan span = (DivSpan) currSpan;
 						span.setEnd(length);
-						output.setSpan(span, span.getStart(), length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+						// SPAN_EXCLUSIVE_EXCLUSIVE is removed if its length is 0
+						int spanFlags = Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
+						if (span.getStart() == span.getEnd()) {
+							spanFlags = Spanned.SPAN_MARK_MARK;
+						}
+						output.setSpan(span, span.getStart(), length, spanFlags);
 					}
 				} else if (opening && tag.equals("form") && attributes != null) {
 					// Add the url to the google form (only if this form is inside the google form,
 					// meaning the form wasn't attached to the output yet so it's still in the divSpans stack).
 					// We go over the stack in reverse order because the current form was added last.
 					GoogleFormSpan span = null;
-					DivSpan currentSpan = null;
-					for (ListIterator<DivSpan> iter = divSpans.listIterator(divSpans.size()); iter.hasPrevious(); currentSpan = iter.previous()) {
-						if (currentSpan instanceof GoogleFormSpan) {
-							span = (GoogleFormSpan) currentSpan;
+					Object currentDivSpan = null;
+					// We will have either div or xdiv tags, so the order doesn't matter
+					Stack<Object> allDivSpans = new Stack<>();
+					allDivSpans.addAll(tagSpans.get("div"));
+					allDivSpans.addAll(tagSpans.get("xdiv"));
+					for (ListIterator<Object> iter = allDivSpans.listIterator(allDivSpans.size()); iter.hasPrevious(); currentDivSpan = iter.previous()) {
+						if (currentDivSpan instanceof GoogleFormSpan) {
+							span = (GoogleFormSpan) currentDivSpan;
 							break;
 						}
 					}
@@ -521,11 +564,16 @@ public class ConventionEvent implements Serializable {
 							url = HtmlParser.getValue(attributes, "src");
 						}
 						span.setUrl(url);
-						iframeSpans.push(span);
-					} else {
-						IFrameSpan span = iframeSpans.pop();
+						currSpan = span;
+					} else if (currSpan instanceof IFrameSpan) {
+						IFrameSpan span =  (IFrameSpan) currSpan;
 						span.setEnd(length);
-						output.setSpan(span, span.getStart(), length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+						// SPAN_EXCLUSIVE_EXCLUSIVE is removed if its length is 0
+						int spanFlags = Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
+						if (span.getStart() == span.getEnd()) {
+							spanFlags = Spanned.SPAN_MARK_MARK;
+						}
+						output.setSpan(span, span.getStart(), length, spanFlags);
 					}
 				// Handle embedded videos - video tag with inner source tag
 				} else if (tag.equals("video")) {
@@ -533,16 +581,24 @@ public class ConventionEvent implements Serializable {
 					if (opening) {
 						VideoSpan span = new VideoSpan();
 						span.setStart(length);
-						videoSpans.push(span);
-					} else {
-						VideoSpan span = videoSpans.pop();
+						currSpan = span;
+					} else if (currSpan instanceof VideoSpan) {
+						VideoSpan span = (VideoSpan) currSpan;
 						span.setEnd(length);
 						if (span.getUrl() != null) {
-							output.setSpan(span, span.getStart(), length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+							// SPAN_EXCLUSIVE_EXCLUSIVE is removed if its length is 0
+							int spanFlags = Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
+							if (span.getStart() == span.getEnd()) {
+								spanFlags = Spanned.SPAN_MARK_MARK;
+							}
+							output.setSpan(span, span.getStart(), length, spanFlags);
 						}
 					}
 				} else if (tag.equals("source") && attributes != null) {
-					VideoSpan span = videoSpans.peek();
+					VideoSpan span = null;
+					if (tagSpans.get("video") != null && !tagSpans.get("video").isEmpty() && tagSpans.get("video").peek() instanceof VideoSpan) {
+						span = (VideoSpan) tagSpans.get("video").peek();
+					}
 					if (span != null) {
 						// We replace all src attributes with xsrc in amai but not in sff
 						String url = HtmlParser.getValue(attributes, "xsrc");
@@ -551,6 +607,10 @@ public class ConventionEvent implements Serializable {
 						}
 						span.setUrl(url);
 					}
+				}
+
+				if (opening) {
+					currTagSpans.push(currSpan);
 				}
 				return false;
 			}
@@ -561,6 +621,14 @@ public class ConventionEvent implements Serializable {
 		}
 
 		SpannableStringBuilder editableSpanned = SpannableStringBuilder.valueOf(spannedResult);
+
+		// Remove hidden content
+		for (HiddenSpan span : editableSpanned.getSpans(0, editableSpanned.length(), HiddenSpan.class)) {
+			int spanStart = editableSpanned.getSpanStart(span);
+			int spanEnd = editableSpanned.getSpanEnd(span);
+			editableSpanned.replace(spanStart, spanEnd, "");
+			editableSpanned.removeSpan(span); // In case it's a 0-length span, it might stay
+		}
 
 		// Convert iframes to CustomURLSpans by removing the original (iframe) content and adding a link
 		for (IFrameSpan span : editableSpanned.getSpans(0, editableSpanned.length(), IFrameSpan.class)) {
@@ -576,7 +644,7 @@ public class ConventionEvent implements Serializable {
 					linkText = "לטופס";
 				}
 				link.append(linkText);
-				if (editableSpanned.charAt(spanEnd) != '\n') {
+				if (editableSpanned.length() <= spanEnd || editableSpanned.charAt(spanEnd) != '\n') {
 					link.append("\n");
 				}
 				link.setSpan(new CustomURLSpan(url), 0, link.length() - 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
@@ -593,7 +661,7 @@ public class ConventionEvent implements Serializable {
 			if (!TextUtils.isEmpty(url)) {
 				String linkText = "לסרטון";
 				link.append(linkText);
-				if (editableSpanned.charAt(spanEnd) != '\n') {
+				if (editableSpanned.length() <= spanEnd || editableSpanned.charAt(spanEnd) != '\n') {
 					link.append("\n");
 				}
 				link.setSpan(new CustomURLSpan(url), 0, link.length() - 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
@@ -609,7 +677,7 @@ public class ConventionEvent implements Serializable {
 			String url = Convention.getInstance().convertEventDescriptionURL(span.getUrl());
 			if (!TextUtils.isEmpty(url)) {
 				link.append("לטופס");
-				if (editableSpanned.charAt(spanEnd) != '\n') {
+				if (editableSpanned.length() <= spanEnd || editableSpanned.charAt(spanEnd) != '\n') {
 					link.append("\n");
 				}
 				link.setSpan(new CustomURLSpan(url), 0, link.length() - 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
@@ -693,6 +761,8 @@ public class ConventionEvent implements Serializable {
 		public String getUrl() {
 			return url;
 		}
+	}
+	private static class HiddenSpan extends DivSpan {
 	}
 	private static class CustomURLSpan extends URLSpan {
 		public CustomURLSpan(String url) {

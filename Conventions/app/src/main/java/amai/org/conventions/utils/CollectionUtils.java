@@ -124,6 +124,18 @@ public class CollectionUtils {
 		return true;
 	}
 
+	/**
+	 * Returns whether any member of the list is of the specific type
+	 */
+	public static boolean containsAny(List<?> list, Class<?> type) {
+		for (Object member : list) {
+			if (member != null && type.isInstance(member)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public static <AggKey, AggVal, T> Map<AggKey, AggVal> groupBy(List<T> list, Mapper<T, AggKey> mapper, Aggregator<T, AggVal> aggregator) {
 		Map<AggKey, AggVal> map = new LinkedHashMap<>();
 		for (T item : list) {
