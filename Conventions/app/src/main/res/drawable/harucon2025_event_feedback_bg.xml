@@ -2,8 +2,8 @@
 <selector
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:drawable="@drawable/harucon2025_rounded_edges_green2" app:state_event_feedback_sent="true" app:state_feedback_collapsed="true"/>
-    <item android:drawable="@drawable/harucon2025_rounded_edges_green4" app:state_event_feedback_can_send="true" app:state_feedback_collapsed="true"/>
+    <item android:drawable="@drawable/harucon2025_rounded_edges_yellow3" app:state_event_feedback_sent="true" app:state_feedback_collapsed="true"/>
+    <item android:drawable="@drawable/harucon2025_rounded_edges_yellow3" app:state_event_feedback_can_send="true" app:state_feedback_collapsed="true"/>
     <item android:drawable="@drawable/harucon2025_rounded_edges_gray5" app:state_event_feedback_can_send="false" app:state_feedback_collapsed="true"/>
-    <item android:drawable="@drawable/harucon2025_rounded_edges_green1"/>
+    <item android:drawable="@drawable/harucon2025_rounded_edges_yellow3"/>
 </selector>

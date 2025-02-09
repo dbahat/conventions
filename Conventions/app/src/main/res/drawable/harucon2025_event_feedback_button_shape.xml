@@ -26,7 +26,7 @@
         <item android:state_enabled="false">
             <shape android:shape="rectangle">
                 <corners android:radius="3dp" />
-                <stroke android:color="@color/harucon2025_gray5" android:width="1dp"/>
+                <stroke android:color="@color/harucon2025_gray4" android:width="1dp"/>
                 <solid android:color="@color/harucon2025_gray5" />
                 <padding android:left="@dimen/button_padding_horizontal_material"
                     android:top="@dimen/button_padding_vertical_material"
@@ -39,8 +39,8 @@
         <item>
             <shape android:shape="rectangle">
                 <corners android:radius="3dp" />
-                <stroke android:color="@color/harucon2025_green4" android:width="1dp"/>
-                <solid android:color="@color/harucon2025_green4" />
+                <stroke android:color="@color/harucon2025_pink6" android:width="1dp"/>
+                <solid android:color="@color/harucon2025_pink6" />
                 <padding android:left="@dimen/button_padding_horizontal_material"
                          android:top="@dimen/button_padding_vertical_material"
                          android:right="@dimen/button_padding_horizontal_material"

@@ -4,13 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <!-- Feedback is collapsed -->
     <!-- Feedback sent -->
-    <item android:color="@color/harucon2025_green7" app:state_event_feedback_sent="true" app:state_feedback_collapsed="true"/>
+    <item android:color="@color/harucon2025_purple4" app:state_event_feedback_sent="true" app:state_feedback_collapsed="true"/>
     <!-- Can send feedback -->
-    <item android:color="@color/white" app:state_event_feedback_can_send="true" app:state_feedback_collapsed="true"/>
+    <item android:color="@color/harucon2025_purple4" app:state_event_feedback_can_send="true" app:state_feedback_collapsed="true"/>
     <!-- Can't send feedback -->
     <item android:color="@color/harucon2025_gray4" app:state_feedback_collapsed="true"/>
 
     <!-- Feedback is expanded -->
-    <item android:color="@color/harucon2025_green1" app:state_feedback_answer="true" app:state_feedback_answer_selected="true" app:state_feedback_answer_type_multi="true"/>
+    <item android:color="@color/harucon2025_yellow3" app:state_feedback_answer="true" app:state_feedback_answer_selected="true" app:state_feedback_answer_type_multi="true"/>
     <item android:color="@color/harucon2025_purple4"/>
 </selector>

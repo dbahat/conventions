@@ -5,7 +5,7 @@
     <color name="harucon2025_pink3">#F89EA7</color>
     <color name="harucon2025_pink4">#AD2458</color>
     <color name="harucon2025_pink5">#79193D</color>
-    <color name="harucon2025_pink6">#D43D77</color>
+    <color name="harucon2025_pink6">#E32260</color>
     <color name="harucon2025_red1">#EDB6C1</color>
     <color name="harucon2025_red2">#E28C9D</color>
     <color name="harucon2025_red3">#AC293D</color>
@@ -42,6 +42,7 @@
     <color name="harucon2025_peach1">#FEE0E2</color>
     <color name="harucon2025_peach2">#FCB6BE</color>
     <color name="harucon2025_peach3">#F08993</color>
+    <color name="harucon2025_peach4">#F5556A</color>
 
     <color name="harucon2025_white_transparent60">#99FFFFFF</color>
     <color name="harucon2025_yellow1_transparent85">#D9FFFCF7</color>

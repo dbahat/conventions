@@ -5,9 +5,9 @@
     <!-- Feedback is expanded -->
     <item android:color="@color/harucon2025_purple4" app:state_feedback_collapsed="false"/>
     <!-- Feedback sent -->
-    <item android:color="@color/harucon2025_green7" app:state_event_feedback_sent="true"/>
+    <item android:color="@color/harucon2025_purple4" app:state_event_feedback_sent="true"/>
     <!-- Can send feedback -->
-    <item android:color="@color/white" app:state_event_feedback_can_send="true"/>
+    <item android:color="@color/harucon2025_purple4" app:state_event_feedback_can_send="true"/>
     <!-- Can't send feedback-->
     <item android:color="@color/harucon2025_gray4"/>
 </selector>
