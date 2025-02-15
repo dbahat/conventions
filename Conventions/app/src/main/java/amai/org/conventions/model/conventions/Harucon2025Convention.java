@@ -53,7 +53,11 @@ public class Harucon2025Convention extends AmaiConvention {
 	private static final int QUESTION_ID_IDOLFEST_VOTE = 1002;
 
 	// Special events server id
-	private static final int EVENT_ID_AMAIDOL = 1775;
+	/** To add / enable for event, update methods:
+	 * {@link #convertUserInputForEvent(ConventionEvent.UserInput, ConventionEvent)}
+	 * {@link #getEventVoteSender(ConventionEvent)}
+	 */
+	private static final int EVENT_ID_AMAIDOL = 7870;
 	private static final int EVENT_ID_IDOLFEST = 4011;
 
 	// Ids of google spreadsheets associated with the special events
@@ -1036,15 +1040,16 @@ public class Harucon2025Convention extends AmaiConvention {
 
                 return new EventVoteSurveyFormSender(form, event.getUserInput().getVoteSurvey(), disabledMessageRetriever);
 
-            } else if (event.getServerId() == EVENT_ID_IDOLFEST) {
-				SurveyForm form = new SurveyForm()
-						.withQuestionEntry(QUESTION_ID_IDOLFEST_VOTE, "entry.1250645599")
-						.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSc-X3LyAKiKRXiBwq3q8KEQwsYGwn7pZAqK2g1273sVroPWvw/formResponse"));
-
-				SurveyDataRetriever.DisabledMessage disabledMessageRetriever = new SurveyDataRetriever.GoogleSpreadSheet(IDOLFEST_SPREADSHEET_ID);
-
-				return new EventVoteSurveyFormSender(form, event.getUserInput().getVoteSurvey(), disabledMessageRetriever);
-			}
+            }
+//			if (event.getServerId() == EVENT_ID_IDOLFEST) {
+//				SurveyForm form = new SurveyForm()
+//						.withQuestionEntry(QUESTION_ID_IDOLFEST_VOTE, "entry.1250645599")
+//						.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSc-X3LyAKiKRXiBwq3q8KEQwsYGwn7pZAqK2g1273sVroPWvw/formResponse"));
+//
+//				SurveyDataRetriever.DisabledMessage disabledMessageRetriever = new SurveyDataRetriever.GoogleSpreadSheet(IDOLFEST_SPREADSHEET_ID);
+//
+//				return new EventVoteSurveyFormSender(form, event.getUserInput().getVoteSurvey(), disabledMessageRetriever);
+//			}
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
@@ -1078,18 +1083,17 @@ public class Harucon2025Convention extends AmaiConvention {
 		super.convertUserInputForEvent(userInput, event);
 
         if (userInput.getVoteSurvey() == null && event != null) {
-			// TODO Enable for conventions with Amaidol (after updating the event ID)
-//            if (event.getServerId() == EVENT_ID_AMAIDOL) {
-//                userInput.setVoteSurvey(new Survey().withQuestions(
-//                        new FeedbackQuestion(QUESTION_ID_AMAIDOL_NAME, FeedbackQuestion.AnswerType.SINGLE_LINE_TEXT, true),
-//                        new FeedbackQuestion(QUESTION_ID_AMAIDOL_VOTE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO, true)
-//                ));
-//            }
-            if (event.getServerId() == EVENT_ID_IDOLFEST) {
+            if (event.getServerId() == EVENT_ID_AMAIDOL) {
                 userInput.setVoteSurvey(new Survey().withQuestions(
-                        new FeedbackQuestion(QUESTION_ID_IDOLFEST_VOTE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO, true)
+                        new FeedbackQuestion(QUESTION_ID_AMAIDOL_NAME, FeedbackQuestion.AnswerType.SINGLE_LINE_TEXT, true),
+                        new FeedbackQuestion(QUESTION_ID_AMAIDOL_VOTE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO, true)
                 ));
             }
+//            if (event.getServerId() == EVENT_ID_IDOLFEST) {
+//                userInput.setVoteSurvey(new Survey().withQuestions(
+//                        new FeedbackQuestion(QUESTION_ID_IDOLFEST_VOTE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO, true)
+//                ));
+//            }
         }
 	}
 
