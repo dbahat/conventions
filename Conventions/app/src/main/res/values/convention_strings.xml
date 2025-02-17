@@ -31,14 +31,15 @@
     <string name="about_links" formatted="false"><![CDATA[
     <br/>
     <p><b>קרדיט לאמנים:</b><br/>
-     <b>איור:</b> מעיין אלבז, שירה אביגד, גל מאור, Grisim, קים קפלן, עומר אלבז.<br/>
-     <b>גרפיקה:</b> דוד צור, ניקי קרוטקוב, איריס חיים</p>
+     <b>גרפיקה:</b> Lyddar Shafrir, <a href="https://www.instagram.com/chroniika">@CHRONIIKA</a><br/>
+     <b>איור:</b> \u202A<a href="https://www.instagram.com/shourterthan">@shourterthan</a></p>
 <p><a href="https://amai.org.il/">לאתר אמא\"י</a></p>
 <p><a href="https://harucon.org.il/2025/">לאתר הכנס</a></p>
 ]]></string>
     <string name="about_app_content"><![CDATA[
-האפליקציה פותחה עבור כנס הארוקון 2025.<br/>בקשות והצעות ניתן לכתוב <a href="market://details?id=amai.org.conventions">בדף האפליקציה בחנות</a>.
-<p><a href="https://harucon.org.il/2025/app-privacy/">למדיניות הפרטיות של האפליקציה</a></p>
+האפליקציה פותחה על ידי דוד בהט וטל ספן עבור כנס הארוקון 2025.<br/>בקשות והצעות ניתן לכתוב <a href="market://details?id=amai.org.conventions">בדף האפליקציה בחנות</a>.
+<br/>תודות: מיה שראל.
+<p><a href="https://harucon.org.il/2025/app-privacy/">להצהרת הפרטיות</a></p>
 ]]></string>
     <!-- Copied from https://harucon.org.il/2025/location-and-directions/
          Removed unnecessary styles and flattened tab content. Escaped apostrophe. -->
