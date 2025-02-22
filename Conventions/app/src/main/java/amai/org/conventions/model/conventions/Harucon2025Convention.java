@@ -131,7 +131,7 @@ public class Harucon2025Convention extends AmaiConvention {
 	@Override
 	protected URL initUpdatesURL() {
 		try {
-			return new URL("https://us-central1-starlit-brand-95018.cloudfunctions.net/get-feed");
+			return new URL("https://us-central1-starlit-brand-95018.cloudfunctions.net/getFeed");
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
