@@ -198,7 +198,8 @@
         <!-- Map Screen -->
         <item name="mapBackground">@drawable/harucon2025_app_background</item>
         <item name="mapShelterButtonBackground">@drawable/harucon2025_map_shelters_button</item>
-        <item name="locationDetailsBackground">@color/white</item>
+        <item name="mapDetailButtonsBackground">@drawable/harucon2025_map_shelters_button</item>
+        <item name="locationDetailsBackground">@color/white_90</item>
         <item name="locationDetailsTopLineColor">@color/transparent</item>
         <item name="locationDetailsTitleColor">@color/harucon2025_purple4</item>
         <item name="locationDetailsElevation">10dp</item>

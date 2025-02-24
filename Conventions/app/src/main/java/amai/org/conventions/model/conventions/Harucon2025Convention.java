@@ -503,7 +503,7 @@ public class Harucon2025Convention extends AmaiConvention {
 												.withX(1078.215f)
 												.withY(469.22701f),
 										new MapLocation()
-												.withPlaces(Arrays.asList(games, new FloorLocation().withFloor(gamesFloor)))
+												.withPlaces(Arrays.asList(games, new FloorLocation().withFloor(gamesFloor), new StandsArea().withStands(getGamesStands())))
 												.withMarkerResource(R.raw.harucon2025_marker_games, true)
 												.withSelectedMarkerResource(R.raw.harucon2025_marker_games, true)
 												.withMarkerHeight(239.27f)
@@ -643,6 +643,14 @@ public class Harucon2025Convention extends AmaiConvention {
 			new Stand().withName("Fusion Frame Studio").withType(StandType.MERCH).withLocationIds("e5", "e6"),
 			new Stand().withName("קאוואי לנד שופ").withType(StandType.CLOTHES).withLocationIds("e7", "e8"),
 			new Stand().withName("Anime Storm").withType(StandType.CLOTHES).withLocationIds("e9", "e10", "e11", "e12", "e13", "e14")
+		);
+	}
+
+	private List<Stand> getGamesStands() {
+		return Arrays.asList(
+			new Stand().withName("נקסוס").withType(StandType.TABLETOP_GAMES),
+			new Stand().withName("הממלכה").withType(StandType.TABLETOP_GAMES),
+			new Stand().withName("Top Deck").withType(StandType.TABLETOP_GAMES)
 		);
 	}
 
