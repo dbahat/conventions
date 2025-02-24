@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -493,7 +492,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 						@Override
 						public boolean where(MapLocation item) {
 							return (searchTerm == null || searchTerm.isEmpty() || item.getName().toLowerCase().contains(searchTerm.toLowerCase())) &&
-									((!showOnlyHalls) || item.areAllPlacesHalls());
+									((!showOnlyHalls) || item.areAnyPlacesHalls());
 						}
 					});
 					Collections.sort(locations, new Comparator<MapLocation>() {
@@ -508,8 +507,8 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 								} else {
 									return lhs.getFloor().getNumber() - rhs.getFloor().getNumber();
 								}
-							} else if (lhs.areAllPlacesHalls() != rhs.areAllPlacesHalls()) {
-								if (lhs.areAllPlacesHalls()) {
+							} else if (lhs.areAnyPlacesHalls() != rhs.areAnyPlacesHalls()) {
+								if (lhs.areAnyPlacesHalls()) {
 									return -1;
 								} else {
 									return 1;

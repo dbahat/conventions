@@ -96,6 +96,24 @@ public class MapLocation {
 		return places != null && places.size() == 1;
 	}
 
+	public <T extends Place> T getSinglePlace(Class<T> type) {
+		if (places == null) {
+			return null;
+		}
+		T found = null;
+		for (Place place : places) {
+			if (type.isInstance(place)) {
+				// If there is more than 1 matching place, don't return anything
+				if (found != null) {
+					return null;
+				}
+				found = (T) place;
+			}
+		}
+		// Return the single matched place
+		return found;
+	}
+
 	public List<? extends Place> getPlaces() {
 		return places;
 	}
@@ -192,15 +210,15 @@ public class MapLocation {
 		return isSelectedMarkerResourceSVG;
 	}
 
-	public boolean areAllPlacesHalls() {
+	public boolean areAnyPlacesHalls() {
 		if (places == null || places.size() == 0) {
 			return false;
 		}
 		for (Place place : places) {
-			if (!(place instanceof Hall)) {
-				return false;
+			if (place instanceof Hall) {
+				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 }

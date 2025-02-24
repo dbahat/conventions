@@ -917,12 +917,11 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
 	private void setupStandsLocation(final MapLocation location) {
 		// Only show button if there is more than 1 stand
-		if (location.hasSinglePlace() && location.getPlaces().get(0) instanceof StandsArea && ((StandsArea) location.getPlaces().get(0)).getStands().size() > 1) {
+		if (location.getSinglePlace(StandsArea.class) != null && location.getSinglePlace(StandsArea.class).getStands().size() > 1) {
 			gotoStandsListButton.setVisibility(View.VISIBLE);
 			gotoStandsListButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-
 					showStandsArea(location, null);
 				}
 			});
@@ -933,8 +932,8 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
 	private void setupFloorLocation(final MapLocation location) {
 		// Only show button if there is a floor set
-		if (location.hasSinglePlace() && location.getPlaces().get(0) instanceof FloorLocation && ((FloorLocation) location.getPlaces().get(0)).getFloor() != null) {
-			Floor floor = ((FloorLocation) location.getPlaces().get(0)).getFloor();
+		if (location.getSinglePlace(FloorLocation.class) != null && location.getSinglePlace(FloorLocation.class).getFloor() != null) {
+			Floor floor = location.getSinglePlace(FloorLocation.class).getFloor();
 			gotoFloorButton.setVisibility(View.VISIBLE);
 			gotoFloorButton.setText(getString(R.string.goto_floor, floor.getName()));
 			gotoFloorButton.setOnClickListener(v -> {
@@ -949,11 +948,11 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
 	private void showStandsArea(MapLocation location, Stand stand) {
 		// Show the list of stands in a dialog
-		Place place = location.getPlaces().get(0);
+		StandsArea place = location.getSinglePlace(StandsArea.class);
 		StandsAreaFragment standsFragment = new StandsAreaFragment();
 
 		Bundle args = new Bundle();
-		args.putInt(StandsAreaFragment.ARGUMENT_STANDS_AREA_ID, ((StandsArea) place).getId());
+		args.putInt(StandsAreaFragment.ARGUMENT_STANDS_AREA_ID, place.getId());
 		if (stand != null) {
 			// Select the stand inside the area
 			args.putString(StandsAreaFragment.ARGUMENT_STAND_NAME, stand.getName());
@@ -968,15 +967,16 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		ConventionEvent alternativeCurrEvent = null; // If there is no next event, we can display 2 current events
 		ConventionEvent nextEvent = null;
 		ConventionEvent alternativeNextEvent = null; // If there is no current event, we can display 2 next events
-		boolean isSingleHall = location.hasSinglePlace() && location.getPlaces().get(0) instanceof Hall;
-		if (isSingleHall) {
-			List<ConventionEvent> allHallEvents = Convention.getInstance().findEventsByHall(location.getPlaces().get(0).getName());
+		final Hall hall = location.getSinglePlace(Hall.class);
+		boolean hasEvents = (hall != null);
+		if (hasEvents) {
+			List<ConventionEvent> allHallEvents = Convention.getInstance().findEventsByHall(hall.getName());
 			// Only show events that happen today
 			Date now = Dates.now();
 			List<ConventionEvent> events = CollectionUtils.filter(allHallEvents, (event) -> Dates.isSameDate(now, event.getStartTime()));
 			if (events.size() == 0) {
 				// Allow to go to hall if it has any events, not necessarily today
-				isSingleHall = allHallEvents.size() > 0;
+				hasEvents = allHallEvents.size() > 0;
 			} else {
 				Collections.sort(events, new ConventionEventComparator());
 				for (ConventionEvent event : events) {
@@ -1027,15 +1027,14 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 			locationEventsDivider.setVisibility(View.GONE);
 		}
 
-		if (isSingleHall) {
+		if (hasEvents) {
 			locationDetails.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					// Navigate to the hall associated with this location (only if it's a hall)
-					Place place = location.getPlaces().get(0);
 					Bundle animationBundle = ActivityOptions.makeCustomAnimation(appContext, R.anim.slide_in_bottom, 0).toBundle();
 					Bundle bundle = new Bundle();
-					bundle.putString(HallActivity.EXTRA_HALL_NAME, place.getName());
+					bundle.putString(HallActivity.EXTRA_HALL_NAME, hall.getName());
 					bundle.putBoolean(HallActivity.EXTRA_USE_SLIDE_OUT_ANIMATION_ON_BACK, true);
 
 					Intent intent = new Intent(getActivity(), HallActivity.class);

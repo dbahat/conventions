@@ -94,7 +94,6 @@
             android:orientation="vertical"
             android:visibility="gone"
             tools:visibility="visible"
-            android:alpha="0.9"
             android:elevation="?locationDetailsElevation"
             android:background="?locationDetailsBackground"
             android:layout_alignParentBottom="true">
@@ -141,6 +140,35 @@
                         android:layout_alignParentEnd="true"/>
                 </RelativeLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <!-- Go to floor button - used for floor locations -->
+                    <Button
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:id="@+id/goto_floor_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/HighlightedButton"
+                        android:background="?mapDetailButtonsBackground"
+                        android:enabled="true"
+                        tools:text="עבור לקומה 2" />
+
+                    <!-- Go to stands list button - used for stand areas -->
+                    <Button
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:id="@+id/goto_stands_list_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/HighlightedButton"
+                        android:background="?mapDetailButtonsBackground"
+                        android:enabled="true"
+                        android:text="@string/goto_stands_list" />
+                </LinearLayout>
+
                 <!-- Events - used for halls -->
                 <amai.org.conventions.events.EventView
                     android:id="@+id/location_current_event"
@@ -157,28 +185,6 @@
                     android:id="@+id/location_next_event"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
-
-                <!-- Go to stands list button - used for stand areas -->
-                <Button
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:id="@+id/goto_stands_list_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/HighlightedButton"
-                    android:enabled="true"
-                    android:text="@string/goto_stands_list" />
-
-                <!-- Go to floor button - used for floor locations -->
-                <Button
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:id="@+id/goto_floor_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/HighlightedButton"
-                    android:enabled="true"
-                    tools:text="עבור לקומה 2" />
 
             </LinearLayout>
         </amai.org.conventions.customviews.InterceptorLinearLayout>

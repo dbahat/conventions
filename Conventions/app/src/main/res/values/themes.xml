@@ -137,7 +137,7 @@
 
         <!-- Map -->
         <item name="mapBackground">?activitiesBackground</item>
-        <item name="locationDetailsBackground">@color/white</item>
+        <item name="locationDetailsBackground">@color/white_90</item>
         <item name="locationDetailsTitleColor">?android:textColorPrimary</item>
         <item name="locationDetailsElevation">0dp</item>
         <item name="mapToolbarColor">?toolbarBackground</item>
@@ -163,6 +163,7 @@
         <item name="mapSearchBarHorizontalMargins">0dp</item>
         <item name="mapSearchPaneElevation">0dp</item>
         <item name="mapShelterButtonBackground">?highlightedButtonBackground</item>
+        <item name="mapDetailButtonsBackground">?highlightedButtonBackground</item>
 
         <!-- Event activity -->
         <item name="eventToolbarColor">?toolbarBackground</item>
@@ -366,7 +367,7 @@
 
         <!-- Map -->
         <item name="mapBackground">?activitiesBackground</item>
-        <item name="locationDetailsBackground">@color/white</item>
+        <item name="locationDetailsBackground">@color/white_90</item>
         <item name="locationDetailsTitleColor">?android:textColorPrimary</item>
         <item name="locationDetailsElevation">0dp</item>
         <item name="mapToolbarColor">?toolbarBackground</item>
@@ -392,6 +393,7 @@
         <item name="mapSearchBarHorizontalMargins">0dp</item>
         <item name="mapSearchPaneElevation">0dp</item>
         <item name="mapShelterButtonBackground">?highlightedButtonBackground</item>
+        <item name="mapDetailButtonsBackground">?highlightedButtonBackground</item>
 
         <!-- Event activity -->
         <item name="eventToolbarColor">?toolbarBackground</item>
