@@ -1187,7 +1187,7 @@ public class Harucon2025Convention extends AmaiConvention {
 	public String convertEventDescriptionURL(String url) {
 		// URLs in event descriptions that don't have a domain should point to the website URL
 		if (url != null && url.startsWith("/")) {
-			return "https://animatsuri.org.il" + url;
+			return "https://harucon.org.il" + url;
 		}
 		return super.convertEventDescriptionURL(url);
 	}
