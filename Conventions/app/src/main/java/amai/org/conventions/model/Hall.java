@@ -16,6 +16,12 @@ public class Hall extends Place implements Serializable {
 		return this;
 	}
 
+	@Override
+	public Hall withShelter(boolean shelter) {
+		super.withShelter(shelter);
+		return this;
+	}
+
 	public int getOrder() {
 		return order;
 	}
