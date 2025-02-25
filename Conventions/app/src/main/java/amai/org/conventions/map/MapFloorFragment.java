@@ -31,6 +31,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import amai.org.conventions.utils.CollectionUtils;
+import amai.org.conventions.utils.Objects;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.MotionEventCompat;
@@ -285,7 +286,11 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 	}
 
 	private void initializeShowSheltersButton() {
+		// Only show button if there are shelters on this floor
 		List<MapLocation> shelters = CollectionUtils.filter(Convention.getInstance().getMap().getLocations(), item -> {
+			if (!Objects.equals(item.getFloor(), floor)) {
+				return false;
+			}
 			for (Place place : item.getPlaces()) {
 				if (place.isShelter()) {
 					return true;
