@@ -223,11 +223,11 @@ public class Harucon2025Convention extends AmaiConvention {
 	@Override
 	protected Halls initHalls() {
 		List<Hall> halls = Arrays.asList(
-			new Hall().withName(MAIN_HALL_NAME),
-			new Hall().withName(ORANIM_NAME),
-			new Hall().withName(ESHKOL1_NAME),
-			new Hall().withName(ESHKOL2_NAME),
-			new Hall().withName(ESHKOL3_NAME),
+			new Hall().withName(MAIN_HALL_NAME).withShelter(true),
+			new Hall().withName(ORANIM_NAME).withShelter(true),
+			new Hall().withName(ESHKOL1_NAME).withShelter(true),
+			new Hall().withName(ESHKOL2_NAME).withShelter(true),
+			new Hall().withName(ESHKOL3_NAME).withShelter(true),
 			new Hall().withName(WORKSHOPS_NAME),
 			new Hall().withName(GAMES_NAME),
 			new Hall().withName(COSPLAY_AREA_NAME),
@@ -430,13 +430,6 @@ public class Harucon2025Convention extends AmaiConvention {
 												.withX(737.152f)
 												.withY(143.28218f),
 										new MapLocation()
-												.withPlace(eshkol1)
-												.withMarkerResource(R.raw.harucon2025_marker_eshkol1, true)
-												.withSelectedMarkerResource(R.raw.harucon2025_selected_marker_eshkol1, true)
-												.withMarkerHeight(123.669f)
-												.withX(407.9565f)
-												.withY(505.00818f),
-										new MapLocation()
 												.withPlace(eshkol3)
 												.withMarkerResource(R.raw.harucon2025_marker_eshkol3, true)
 												.withSelectedMarkerResource(R.raw.harucon2025_selected_marker_eshkol3, true)
@@ -450,6 +443,13 @@ public class Harucon2025Convention extends AmaiConvention {
 												.withMarkerHeight(123.67f)
 												.withX(450.2615f)
 												.withY(688.33018f),
+										new MapLocation()
+												.withPlace(eshkol1)
+												.withMarkerResource(R.raw.harucon2025_marker_eshkol1, true)
+												.withSelectedMarkerResource(R.raw.harucon2025_selected_marker_eshkol1, true)
+												.withMarkerHeight(123.669f)
+												.withX(407.9565f)
+												.withY(505.00818f),
 										new MapLocation()
 												.withPlace(new Place().withName("שירותים"))
 												.withMarkerResource(R.raw.harucon2025_marker_toilet, true)
@@ -488,6 +488,13 @@ public class Harucon2025Convention extends AmaiConvention {
 												.withX(1337.895f)
 												.withY(647.50601f),
 										new MapLocation()
+												.withPlace(mainHall)
+												.withMarkerResource(R.raw.harucon2025_marker_main_hall, true)
+												.withSelectedMarkerResource(R.raw.harucon2025_selected_marker_main_hall, true)
+												.withMarkerHeight(160.988f)
+												.withX(1078.215f)
+												.withY(469.22701f),
+										new MapLocation()
 												.withName("כניסה נגישה")
 												.withPlace(mainHall)
 												.withMarkerResource(R.raw.harucon2025_marker_accessible_entrance, true)
@@ -495,13 +502,6 @@ public class Harucon2025Convention extends AmaiConvention {
 												.withMarkerHeight(98.282f)
 												.withX(1221.545f)
 												.withY(379.97801f),
-										new MapLocation()
-												.withPlace(mainHall)
-												.withMarkerResource(R.raw.harucon2025_marker_main_hall, true)
-												.withSelectedMarkerResource(R.raw.harucon2025_selected_marker_main_hall, true)
-												.withMarkerHeight(160.988f)
-												.withX(1078.215f)
-												.withY(469.22701f),
 										new MapLocation()
 												.withPlaces(Arrays.asList(games, new FloorLocation().withFloor(gamesFloor).withName(games.getName()), new StandsArea().withStands(getGamesStands()).withName(games.getName())))
 												.withMarkerResource(R.raw.harucon2025_marker_games, true)
