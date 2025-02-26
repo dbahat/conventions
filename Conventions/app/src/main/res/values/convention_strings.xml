@@ -119,6 +119,8 @@
     <string name="manga_stand">מנגה, קומיקס, ועזרים נלווים</string>
     <string name="tabletop_games_stand">משחקי קופסה, משחקי קלפים ואביזרים נלווים</string>
     <string name="video_games_stand">משחקי וידאו ואביזרים נלווים</string>
+    <string name="jewelry_stand">עבודות יד, תכשיטים ואופנה</string>
+    <string name="general_stand">כללי</string>
     <string name="other_stand">שונות</string>
 
 </resources>
