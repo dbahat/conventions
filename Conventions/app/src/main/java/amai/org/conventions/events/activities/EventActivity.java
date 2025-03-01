@@ -565,7 +565,9 @@ public class EventActivity extends NavigationActivity {
 
 		TextView hallAndTime = (TextView) findViewById(R.id.event_hall_and_time);
 
-		String formattedEventTime = String.format("%s%s-%s (%s)",
+		// The unicode characters make sure the start time is printed before the end time
+		// (U+2067 is RIGHT-TO-LEFT ISOLATE and U+2069 ends its scope). See https://unicode.org/reports/tr9/
+		String formattedEventTime = String.format("%s%s\u2067–\u2069%s (%s)",
 				// In case of single day convention, don't show the date
 				Convention.getInstance().getLengthInDays() == 1 ? "" : Dates.formatDate("EEE dd.MM, ", event.getStartTime()),
 				Dates.formatHoursAndMinutes(event.getStartTime()),
