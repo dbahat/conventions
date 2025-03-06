@@ -226,7 +226,7 @@
         <item name="mapSearchBarHorizontalMargins">5dp</item>
         <item name="standIconColor">@color/harucon2025_purple4</item>
         <item name="standsTypeTitleColor">@color/harucon2025_pink6</item>
-        <item name="standsMapHighlight">@color/harucon2025_peach3_transparent60</item>
+        <item name="standsMapHighlight">@color/harucon2025_blue4_transparent50</item>
     </style>
 
     <style name="AppBaseTheme.Harucon2025.Event">
