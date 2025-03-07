@@ -280,10 +280,10 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		if (Convention.getInstance().canFillFeedback()) {
 			items.add(new NavigationItem(FeedbackActivity.class, getString(R.string.feedback), ContextCompat.getDrawable(this, R.drawable.feedback_menu_icon), shouldDisplayIcon));
 		}
-		items.add(new NavigationItem(AccessibilityActivity.class, getString(R.string.accessibility), ContextCompat.getDrawable(this, R.drawable.baseline_accessibility_new_white_18), null, true, true));
-		items.add(new NavigationItem(AboutActivity.class, getString(R.string.about), ContextCompat.getDrawable(this, R.drawable.ic_action_about), shouldDisplayIcon));
 		items.add(new NavigationItem(AmaiGameActivity.class, getString(R.string.amai_game_title), ContextCompat.getDrawable(this, R.drawable.videogame_black), shouldDisplayIcon));
+		items.add(new NavigationItem(AccessibilityActivity.class, getString(R.string.accessibility), ContextCompat.getDrawable(this, R.drawable.baseline_accessibility_new_white_18), null, true, true));
 		items.add(new NavigationItem(SafeSpaceActivity.class, getString(R.string.safe_space_title), ContextCompat.getDrawable(this, android.R.drawable.ic_menu_call), shouldDisplayIcon));
+		items.add(new NavigationItem(AboutActivity.class, getString(R.string.about), ContextCompat.getDrawable(this, R.drawable.ic_action_about), shouldDisplayIcon));
 
 		ListView navigationItems = (ListView) findViewById(R.id.navigation_items);
 		navigationItems.setAdapter(new NavigationItemsAdapter(this, items));
