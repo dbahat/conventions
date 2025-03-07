@@ -227,6 +227,9 @@
         <item name="standIconColor">@color/harucon2025_purple4</item>
         <item name="standsTypeTitleColor">@color/harucon2025_pink6</item>
         <item name="standsMapHighlight">@color/harucon2025_blue4_transparent50</item>
+
+        <!-- Safe Space Screen -->
+        <item name="safeSpaceLogo">@drawable/harucon2025_safe_space</item>
     </style>
 
     <style name="AppBaseTheme.Harucon2025.Event">

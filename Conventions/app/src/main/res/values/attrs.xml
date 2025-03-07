@@ -736,6 +736,11 @@
 
         <!-- Layout resource for discounts activity -->
         <attr name="discountsActivityLayout" format="reference"/>
+
+        <!-- Safe Space Screen -->
+
+        <!-- Safe Space top image -->
+        <attr name="safeSpaceLogo" format="integer|reference"/>
     </declare-styleable>
 
     <declare-styleable name="EventState">

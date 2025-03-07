@@ -73,6 +73,8 @@
         <activity android:name=".updates.UpdatesActivity" />
         <activity android:name=".settings.SettingsActivity" />
         <activity android:name=".AboutActivity" />
+        <activity android:name=".AmaiGameActivity" />
+        <activity android:name=".SafeSpaceActivity" />
         <activity
             android:name=".HomeActivity"
             android:screenOrientation="portrait" />

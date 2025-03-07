@@ -35,8 +35,10 @@ import amai.org.conventions.ApplicationInitializer;
 import amai.org.conventions.ArrivalMethodsActivity;
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.FeedbackActivity;
+import amai.org.conventions.AmaiGameActivity;
 import amai.org.conventions.HomeActivity;
 import amai.org.conventions.R;
+import amai.org.conventions.SafeSpaceActivity;
 import amai.org.conventions.SplashActivity;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.activities.EventActivity;
@@ -280,6 +282,8 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		}
 		items.add(new NavigationItem(AccessibilityActivity.class, getString(R.string.accessibility), ContextCompat.getDrawable(this, R.drawable.baseline_accessibility_new_white_18), null, true, true));
 		items.add(new NavigationItem(AboutActivity.class, getString(R.string.about), ContextCompat.getDrawable(this, R.drawable.ic_action_about), shouldDisplayIcon));
+		items.add(new NavigationItem(AmaiGameActivity.class, getString(R.string.amai_game_title), ContextCompat.getDrawable(this, R.drawable.videogame_black), shouldDisplayIcon));
+		items.add(new NavigationItem(SafeSpaceActivity.class, getString(R.string.safe_space_title), ContextCompat.getDrawable(this, android.R.drawable.ic_menu_call), shouldDisplayIcon));
 
 		ListView navigationItems = (ListView) findViewById(R.id.navigation_items);
 		navigationItems.setAdapter(new NavigationItemsAdapter(this, items));

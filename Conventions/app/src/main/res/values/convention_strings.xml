@@ -13,6 +13,11 @@
     <string name="my_event_share_link">http://play.google.com/store/apps/details?id=amai.org.conventions</string>
     <string name="convention_feedback_subtitle">מלא פידבק כללי על הכנס - קופות, דוכנים, משחקייה, עמדת צילום וכל דבר אחר.</string>
     <string name="my_events_no_data">הוסף אירוע לאירועים שלי ע\"י לחיצה על הכוכב בדף האירוע או ברשימת האירועים</string>
+    <string name="amai_game_title">משחק הכנס</string>
+    <string name="amai_game_button">שחקו עכשיו!</string>
+    <string name="safe_space_title">מרחב בטוח</string>
+    <string name="safe_space_button">ליצירת קשר ב-WhatsApp</string>
+    <string name="safe_space_button_phone">ליצירת קשר בטלפון</string>
 
     <!-- Relevant to this specific convention -->
     <string name="app_name">הארוקון 2025</string>
@@ -111,6 +116,36 @@
 <a href="org.amai.conventions://accessibility/open-map-in-parent-room">לחצו כאן לצפיה במיקום חדר הפעוטות במפה</a>.<br/>
 <a href="https://harucon.org.il/2025/toddler-room/">לקריאת תקנון השימוש בחדר הפעוטות</a>.</p>
 ]]></string>
+    <string name="safe_space_content" formatted="false"><![CDATA[
+<h1>אנחנו כאן בשבילכם!</h1>
+<p>
+צוות מרחב בטוח מסתובב ברחבי בנייני האומה וזמין לאורך כל הכנס. איתנו יש עובדת סוציאלית שזמינה גם היא לאורך כל הכנס.
+הצוות מזוהה בתג עם שרוך אדום וסיכת צוות אדומה.
+</p><p>
+אנחנו זמינים במהלך הכנס במספר <a href="tel:0522284458">052-2284458</a>, וניתן להשיג אותנו בפנייה לכל אחד מאנשי הסגל במקרה הצורך.
+</p><p>
+לפני יום הכנס ולאחר סופו אפשר להשיג אותנו במייל <a href="mailto:safe.space@amai.org.il">safe.space@amai.org.il</a>.
+</p><p>
+שיהיה לכולנו כנס נעים ובטוח!
+</p>
+]]></string>
+    <string name="amai_game_content" formatted="false"><![CDATA[
+<h1>תקציר</h1>
+<p>
+אתה בדרכך לכנס הראשון שלך בבנייני האומה, אך אוי לא - שירו, אאוי ואקאי צריכים עזרה! בתור אדם כל כך נחמד וטוב אתה מחליט לעזור להם כמה שתוכל בבעיותיהם במהלך הכנס. לא רק החוויה שלהם תלויה בזה, אלא גם שלך!
+</p><p>
+האם תצליח לעזור למאסקוטים לחוות כנס מוצלח, או שמא הם יחזרו הביתה מבואסים ועצובים? הכוח בידיים שלך…
+</p>
+<h1>על היצירה</h1>
+<p>
+המשחק הוא חלק מפרויקט שנתי הנועד להעלות את רמת ההיכרות של אוהב אמא&quot;י הממוצע על המאסקוטים של הארגון ועל הכנסים עצמם.
+</p><p>
+הדמויות שירו ואאוי נוצרו על ידי סם דניאל ועינב יצחק ונתרמו לארגון אמא&quot;י. לאחר כמה שנים, הצטרף אליהם אקאי שנוצר על ידי ענן גיבסון, לסימון השותפות של אמא&quot;י עם שגרירות יפן.
+</p><p>
+המשחק נוצר לראשונה במסגרת הארוקון 2025, והשתתפו ביצירתו חברי סגל ומתנדבים מהקהילה למען קהילת הכנסים ואוהבי תרבות יפן בכלל.<br/>
+שום בורקסים לא נפגעו במהלך יצירת המשחק.
+</p>
+]]></string>
 
     <!-- Stand types -->
     <string name="merch_stand">מוצרי אנימה ומנגה</string>
@@ -122,5 +157,4 @@
     <string name="jewelry_stand">עבודות יד, תכשיטים ואופנה</string>
     <string name="general_stand">כללי</string>
     <string name="other_stand">שונות</string>
-
 </resources>
