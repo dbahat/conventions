@@ -698,10 +698,12 @@ public class CollapsibleFeedbackView extends FrameLayout {
 				first = false;
 			}
 			answerButton.setPaddingRelative(paddingStart, paddingTopBottom, paddingStartEnd, paddingTopBottom);
-			if (!radio) {
+			if (radio) {
+				answerButton.setGravity(Gravity.START);
+			} else {
 				answerButton.setMinWidth(minWidth);
+				answerButton.setGravity(Gravity.CENTER);
 			}
-			answerButton.setGravity(Gravity.CENTER);
 			buttonsLayout.addView(answerButton);
 
 			// Set margins
