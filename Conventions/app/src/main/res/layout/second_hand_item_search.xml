@@ -7,6 +7,8 @@
     android:layout_marginStart="?contentStartMargin"
     android:layout_marginEnd="?contentEndMargin"
     android:orientation="vertical"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp"
     android:paddingStart="20dp"
     android:paddingEnd="20dp"
     android:clickable="true"

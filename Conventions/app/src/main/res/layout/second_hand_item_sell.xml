@@ -61,5 +61,12 @@
                 tools:text="not sold"
                 android:padding="5dp"/>
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="?secondHandSellFormsDividerHeight"
+            android:id="@+id/second_hand_sell_item_bottom_divider"
+            android:visibility="gone"
+            android:layout_marginBottom="0dp"
+            android:background="?secondHandSellFormsDivider"/>
     </LinearLayout>
 </FrameLayout>

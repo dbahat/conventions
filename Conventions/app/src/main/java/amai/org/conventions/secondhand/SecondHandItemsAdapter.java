@@ -110,6 +110,13 @@ public class SecondHandItemsAdapter extends BaseAdapter implements StickyListHea
 		}
 
 		holder.setItem(items.get(position), itemIndexToForm.get(position));
+
+		boolean isLastInNonLastSection = false;
+		if (position < items.size() - 1 && getHeaderId(position) != getHeaderId(position + 1)) {
+			isLastInNonLastSection = true;
+		}
+		holder.setBottomDividerVisible(isLastInNonLastSection);
+
 		return convertView;
 	}
 

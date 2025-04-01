@@ -205,11 +205,16 @@
         <item name="feedbackSeparatorColor">@color/transparent_black</item>
 
         <!-- Second Hand activity -->
+        <item name="secondHandBackground">?activitiesBackground</item>
         <item name="secondHandFormColor">@drawable/second_hand_form_default_text_color</item>
         <item name="secondHandItemStatusColor">?android:textColorSecondary</item>
         <item name="secondHandItemsDivider">@drawable/second_hand_item_list_divider</item>
+        <item name="secondHandSellFormsDivider">@color/transparent</item>
+        <item name="secondHandSellFormsDividerHeight">0dp</item>
         <item name="secondHandFilterColor">?android:textColorPrimary</item>
         <item name="secondHandSelectedFilterColor">?colorAccent</item>
+        <item name="secondHandBuyFiltersBackground">@color/transparent</item>
+        <item name="secondHandBuyFiltersBottomPadding">0dp</item>
 
         <!-- Programme Activity -->
         <item name="marginBetweenEventsListAndNextHeader">20dp</item>
@@ -436,11 +441,16 @@
         <item name="feedbackSeparatorColor">@color/transparent_black</item>
 
         <!-- Second Hand activity -->
+        <item name="secondHandBackground">?activitiesBackground</item>
         <item name="secondHandFormColor">@drawable/second_hand_form_default_text_color</item>
         <item name="secondHandItemStatusColor">?android:textColorSecondary</item>
         <item name="secondHandItemsDivider">@drawable/second_hand_item_list_divider</item>
-        <item name="secondHandFilterColor">?android:textColorSecondary</item>
+        <item name="secondHandSellFormsDivider">@color/transparent</item>
+        <item name="secondHandSellFormsDividerHeight">0dp</item>
+        <item name="secondHandFilterColor">?android:textColorPrimary</item>
         <item name="secondHandSelectedFilterColor">?colorAccent</item>
+        <item name="secondHandBuyFiltersBackground">@color/transparent</item>
+        <item name="secondHandBuyFiltersBottomPadding">0dp</item>
 
         <!-- Programme Activity -->
         <item name="marginBetweenEventsListAndNextHeader">20dp</item>

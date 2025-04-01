@@ -725,6 +725,8 @@
 
         <!-- Second Hand Screen -->
 
+        <!-- Background for second hand activity -->
+        <attr name="secondHandBackground" format="color|reference"/>
         <!-- Text color used in second hand sell tab (form name and status, total price of sold items,
              item name, edit button color, price, id) and in second hand buy tab (item name, price, id).
              Can be a color state list. Form state is set with state_second_hand_form_... attributes. -->
@@ -735,10 +737,18 @@
         <attr name="secondHandItemStatusColor" format="color|reference"/>
         <!-- Divider color for items in buy and sell tabs. The height is 1dp. -->
         <attr name="secondHandItemsDivider" format="color|reference"/>
+        <!-- Divider color for forms in sell tab. The height is secondHandSellFormsDividerHeight. -->
+        <attr name="secondHandSellFormsDivider" format="color|reference"/>
+        <!-- Divider height for forms in sell tab -->
+        <attr name="secondHandSellFormsDividerHeight" format="dimension|reference"/>
         <!-- Color for unselected sort/filter in second hand buy (both text and icon) -->
         <attr name="secondHandFilterColor" format="color|reference"/>
         <!-- Color for selected sort/filter in second hand buy (both text and icon) -->
         <attr name="secondHandSelectedFilterColor" format="color|reference"/>
+        <!-- Color for sort/filter and search results number section background in second hand buy -->
+        <attr name="secondHandBuyFiltersBackground" format="color|reference"/>
+        <!-- Bottom padding for sort/filter and search results number section in second hand buy -->
+        <attr name="secondHandBuyFiltersBottomPadding" format="dimension|reference"/>
 
         <!-- Discounts Screen -->
 

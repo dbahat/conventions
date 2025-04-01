@@ -30,6 +30,7 @@ public class SecondHandActivity extends NavigationActivity {
 		super.onCreate(savedInstanceState);
 		setContentInContentContainer(R.layout.activity_second_hand);
 		setToolbarTitle(getString(R.string.second_hand));
+		setBackground(ThemeAttributes.getDrawable(this, R.attr.secondHandBackground));
 
 		tabLayout = findViewById(R.id.second_hand_tabs);
 		viewPager = findViewById(R.id.second_hand_pager);

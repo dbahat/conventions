@@ -29,6 +29,7 @@ class SecondHandItemSellViewHolder extends RecyclerView.ViewHolder {
 	private final TextView itemStatusView;
 	private final TextView itemPriceView;
 	private final ImageView itemEditButton;
+	private final View bottomDivider;
 
 	public SecondHandItemSellViewHolder(View itemView) {
 		super(itemView);
@@ -37,6 +38,7 @@ class SecondHandItemSellViewHolder extends RecyclerView.ViewHolder {
 		itemStatusView = itemView.findViewById(R.id.second_hand_item_status);
 		itemPriceView = itemView.findViewById(R.id.second_hand_item_price);
 		itemEditButton = itemView.findViewById(R.id.second_hand_item_edit);
+		bottomDivider = itemView.findViewById(R.id.second_hand_sell_item_bottom_divider);
 	}
 
 	public void setItem(SecondHandItem newItem, SecondHandForm form) {
@@ -163,5 +165,9 @@ class SecondHandItemSellViewHolder extends RecyclerView.ViewHolder {
 			itemName += " (" + item.getType() + ")";
 		}
 		this.itemNameView.setText(itemName);
+	}
+
+	public void setBottomDividerVisible(boolean visible) {
+		bottomDivider.setVisibility(visible ? View.VISIBLE : View.GONE);
 	}
 }
