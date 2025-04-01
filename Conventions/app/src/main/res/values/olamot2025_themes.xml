@@ -217,11 +217,16 @@
         <item name="standsTypeTitleColor">@color/olamot2025_gray900</item>
         <item name="mapShelterButtonBackground">@drawable/highlighted_button</item>
         <!-- Second Hand Screen -->
+        <item name="secondHandBackground">@color/olamot2025_blue300</item>
         <item name="secondHandFormColor">@drawable/olamot2025_second_hand_form_text_color</item>
         <item name="secondHandItemStatusColor">@drawable/olamot2025_second_hand_item_status_text_color</item>
         <item name="secondHandItemsDivider">@drawable/olamot2025_second_hand_item_list_divider</item>
-        <item name="secondHandFilterColor">@color/olamot2025_purple900</item>
+        <item name="secondHandSellFormsDivider">@color/olamot2025_gray900</item>
+        <item name="secondHandSellFormsDividerHeight">2dp</item>
+        <item name="secondHandFilterColor">@color/olamot2025_gray900</item>
         <item name="secondHandSelectedFilterColor">@color/olamot2025_purple700</item>
+        <item name="secondHandBuyFiltersBackground">@color/olamot2025_purple50</item>
+        <item name="secondHandBuyFiltersBottomPadding">8dp</item>
         <!-- Discounts activity -->
         <item name="discountsActivityLayout">@layout/activity_discounts</item>
     </style>

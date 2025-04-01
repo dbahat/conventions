@@ -49,6 +49,7 @@ public class Olamot2025Convention extends SffConvention {
 	private static final String HALL_NAME_KIDS = "עירוני ילדים";
 	private static final String HALL_NAME_MEETINGS = "עירוני מפגשים";
 	private static final String HALL_NAME_SPECIAL = "אירועים מיוחדים";
+	private static final String HALL_NAME_ENTIRE_CON = "מתחם הכנס";
 //	private static final String HALL_NAME_OUTSIDE = "חוצות";
 //	private static final String HALL_NAME_ARENA = "זירה";
 //	private static final String HALL_NAME_TENT_1 = "אוהל 1";
@@ -125,7 +126,8 @@ public class Olamot2025Convention extends SffConvention {
 				new Hall().withName(HALL_NAME_ESHKOL_6),
 				new Hall().withName(HALL_NAME_KIDS),
 				new Hall().withName(HALL_NAME_WORKSHOPS),
-				new Hall().withName(HALL_NAME_MEETINGS)
+				new Hall().withName(HALL_NAME_MEETINGS),
+				new Hall().withName(HALL_NAME_ENTIRE_CON)
 //				new Hall().withName(HALL_NAME_WORKSHOPS_1),
 //				new Hall().withName(HALL_NAME_WORKSHOPS_2),
 //				new Hall().withName(HALL_NAME_KIDS_VIRTUAL),
