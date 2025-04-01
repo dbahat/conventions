@@ -146,7 +146,8 @@
         <item name="conflictingEventsGroupSeparatorHeight">4dp</item>
         <item name="conflictingEventsGroupSeparatorMargin">4dp</item>
         <item name="freeTimeTextColor">@color/olamot2025_gray900</item>
-        <item name="addActionButtonIcon">@drawable/ic_add_white</item>
+        <item name="importEventsButtonIcon">@drawable/system_update_40px</item>
+        <item name="myEventsFABMaxImageSize">36dp</item>
         <!-- User Details Dialog -->
         <item name="userDetailsTextColor">@color/olamot2025_gray900</item>
         <item name="logoutButtonTextColor">@color/olamot2025_pink700</item>
