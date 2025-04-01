@@ -129,7 +129,8 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		setupDays(dateIndexToSelect);
 
 		if (Convention.getInstance().canUserLogin()) {
-			setupActionButton(ThemeAttributes.getDrawable(this, R.attr.addActionButtonIcon), view -> addEvents());
+			setupActionButton(ThemeAttributes.getDrawable(this, R.attr.importEventsButtonIcon), view -> addEvents());
+			setFABMaxImageSize(ThemeAttributes.getDimensionSize(this, R.attr.myEventsFABMaxImageSize));
 		}
 	}
 

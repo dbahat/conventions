@@ -215,6 +215,7 @@
         <item name="secondHandSelectedFilterColor">?colorAccent</item>
         <item name="secondHandBuyFiltersBackground">@color/transparent</item>
         <item name="secondHandBuyFiltersBottomPadding">0dp</item>
+        <item name="addActionButtonIcon">@drawable/ic_add_white</item>
 
         <!-- Programme Activity -->
         <item name="marginBetweenEventsListAndNextHeader">20dp</item>
@@ -232,7 +233,8 @@
         <item name="searchDrawerSeparatorColor">@color/dark_gray</item>
 
         <!-- My Events Activity -->
-        <item name="addActionButtonIcon">@drawable/ic_add_white</item>
+        <item name="importEventsButtonIcon">@drawable/ic_add_white</item>
+        <item name="myEventsFABMaxImageSize">24dp</item>
     </style>
 
     <!-- Since there is no multiple inheritance with themes, we have to copy basic attributes to have
@@ -451,6 +453,7 @@
         <item name="secondHandSelectedFilterColor">?colorAccent</item>
         <item name="secondHandBuyFiltersBackground">@color/transparent</item>
         <item name="secondHandBuyFiltersBottomPadding">0dp</item>
+        <item name="addActionButtonIcon">@drawable/ic_add_white</item>
 
         <!-- Programme Activity -->
         <item name="marginBetweenEventsListAndNextHeader">20dp</item>
@@ -468,7 +471,8 @@
         <item name="searchDrawerSeparatorColor">@color/dark_gray</item>
 
         <!-- My Events Activity -->
-        <item name="addActionButtonIcon">@drawable/ic_add_white</item>
+        <item name="importEventsButtonIcon">@drawable/ic_add_white</item>
+        <item name="myEventsFABMaxImageSize">24dp</item>
     </style>
 
     <!-- Additional default attributes for dark themes. Inherit the actual theme from this one for dark themes. -->

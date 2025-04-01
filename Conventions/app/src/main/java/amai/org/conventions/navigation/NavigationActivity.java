@@ -12,7 +12,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -55,7 +54,6 @@ import amai.org.conventions.tasks.Task;
 import amai.org.conventions.tasks.TasksExecutor;
 import amai.org.conventions.updates.UpdatesActivity;
 import amai.org.conventions.utils.Dates;
-import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Settings;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -390,6 +388,10 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		actionButton.setImageDrawable(image);
 		actionButton.setOnClickListener(listener);
 		actionButton.setVisibility(View.VISIBLE);
+	}
+
+	protected void setFABMaxImageSize(int size) {
+		actionButton.setMaxImageSize(size);
 	}
 
 	protected void removeActionButton() {

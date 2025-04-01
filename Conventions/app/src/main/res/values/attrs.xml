@@ -281,6 +281,8 @@
         <attr name="nextEventStartTimeTextColor" format="color|reference"/>
         <!-- Bottom line color for next event start time -->
         <attr name="nextEventStartTimeBottomLineColor" format="color|reference"/>
+        <!-- FAB max image size, for reducing the inner padding of the FAB in my events -->
+        <attr name="myEventsFABMaxImageSize" format="dimension|reference"/>
 
         <!-- Foreground color for conflicting events group. Can be used as a border. -->
         <attr name="conflictingEventsListBorder" format="integer|reference"/>
@@ -298,8 +300,11 @@
         <!-- Margin around conflicting events separator from other groups -->
         <attr name="conflictingEventsGroupSeparatorMargin" format="dimension|reference"/>
 
-        <!-- Icon for FAB (add). Used in My Events and Second Hand Sell. Background is defined in actionButtonColor. -->
+        <!-- Icon for FAB (add). Used in Second Hand Sell. Background is defined in actionButtonColor. -->
         <attr name="addActionButtonIcon" format="integer|reference"/>
+
+        <!-- Icon for FAB (import events). Used in My Events. Background is defined in actionButtonColor. -->
+        <attr name="importEventsButtonIcon" format="integer|reference"/>
 
         <!-- Text color for free time in my events. Can be a color state list. State is set with state_event_... attributes. -->
         <attr name="freeTimeTextColor" format="color|reference"/>
