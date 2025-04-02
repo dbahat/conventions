@@ -226,7 +226,7 @@
         <item name="secondHandSellFormsDividerHeight">2dp</item>
         <item name="secondHandFilterColor">@color/olamot2025_gray900</item>
         <item name="secondHandSelectedFilterColor">@color/olamot2025_purple700</item>
-        <item name="secondHandBuyFiltersBackground">@color/olamot2025_purple50</item>
+        <item name="secondHandBuyFiltersBackground">@color/olamot2025_gray100</item>
         <item name="secondHandBuyFiltersBottomPadding">8dp</item>
         <!-- Discounts activity -->
         <item name="discountsActivityLayout">@layout/activity_discounts</item>
