@@ -172,8 +172,8 @@ public class Olamot2025Convention extends SffConvention {
 
 	@Override
 	protected ConventionMap initMap() {
-		return null;
-//		return createMap();
+//		return null;
+		return createMap();
 	}
 
 	private ConventionMap createMap() {
@@ -183,6 +183,8 @@ public class Olamot2025Convention extends SffConvention {
 		Hall eshkol2 = getHalls().findByName(HALL_NAME_ESHKOL_2);
 		Hall eshkol3 = getHalls().findByName(HALL_NAME_ESHKOL_3);
 		Hall eshkol4 = getHalls().findByName(HALL_NAME_ESHKOL_4);
+		Hall eshkol5 = getHalls().findByName(HALL_NAME_ESHKOL_5);
+		Hall eshkol6 = getHalls().findByName(HALL_NAME_ESHKOL_6);
 		Hall workshops = getHalls().findByName(HALL_NAME_WORKSHOPS);
 		Hall kids = getHalls().findByName(HALL_NAME_KIDS);
 		Hall meetings = getHalls().findByName(HALL_NAME_MEETINGS);
@@ -201,67 +203,65 @@ public class Olamot2025Convention extends SffConvention {
 
 		Floor floor = new Floor(1)
 				.withName("מפת המתחם")
-				.withImageResource(R.raw.icon2024_map, true)
-				.withImageHeight(894)
-				.withImageWidth(856.90002f)
-				.withDefaultMarkerHeight(35);
-		final int BIG_MARKER_HEIGHT = 50;
-		final int SMALL_MARKER_HEIGHT = 25;
+				.withImageResource(R.raw.olamot2025_map, true)
+				.withImageHeight(3996)
+				.withImageWidth(3643)
+				.withDefaultMarkerHeight(100);
+		final int BIG_MARKER_HEIGHT = 150;
+		final int SMALL_MARKER_HEIGHT = 75;
 
 		return new ConventionMap()
 			.withFloors(Collections.singletonList(floor))
 			.withLocations(
 				CollectionUtils.flattenList(
 					inFloor(floor,
-						mapLocation("כניסה ויציאה מרחוב דה-וינצ'י", 178, 79),
-						mapLocation("מודיעין", 82, 95),
-						mapLocation("דוכני פופ-אפ", 110, 146),
-						mapLocation("מתחם משחקי אינדי", 288, 151),
-						mapLocation(eshkol3, 89, 204),
-						mapLocation("אשכול 4 וחדר מפגשים", Arrays.asList(eshkol4, meetings), 315, 201),
-						mapLocation("דוכני עמותות", 235, 261),
-						mapLocation("איסוף כרטיסים", 234, 234).withMarkerHeight(SMALL_MARKER_HEIGHT),
-						mapLocation("שירותי גברים", 130, 248),
-						mapLocation("שירותי נשים", 269, 248),
-						mapLocation(eshkol1, 243, 311),
-						mapLocationForShelter("מרחב מוגן", 168, 311).withMarkerHeight(BIG_MARKER_HEIGHT),
-						mapLocation(eshkol2, 143, 305),
-						mapLocation("דוכנים", 220, 466),
-						mapLocation("דוכנים", 397, 466),
-//						mapLocation(arena, 268, 574),
-						mapLocation("כניסה ויציאה מרחוב הארבעה", 25, 513),
-						mapLocation("מודיעין", 72, 589),
-						mapLocation("כניסה ויציאה מרחוב הארבעה", 28, 756),
-						mapLocation("מתחם משחקי לוח", 114, 714),
-						mapLocation("משחקי שער", 241, 661),
-						mapLocationForShelter("מרחב מוגן", 240, 713).withMarkerHeight(BIG_MARKER_HEIGHT),
-						mapLocation("מודיעין", 157, 791),
-						mapLocation("קופות", 274, 780),
-//						mapLocation(cinematheque2, 271, 859),
-						mapLocationForShelter("מרחב מוגן", 216, 859).withMarkerHeight(BIG_MARKER_HEIGHT),
-//						mapLocation(cinematheque4, 162, 859),
-						mapLocation("אולם ספורט", 415, 790),
-						mapLocation("קפיטריה", 430, 685),
-						mapLocation("מדרגות לעירוני מפלס עליון", 567, 73),
-						mapLocation("שירותי גברים", 610, 116).withMarkerHeight(SMALL_MARKER_HEIGHT),
-						mapLocationForShelter("מדרגות למרחב מוגן", 584, 198).withMarkerHeight(BIG_MARKER_HEIGHT),
-						mapLocation("שירותי נשים", 631, 116).withMarkerHeight(SMALL_MARKER_HEIGHT),
-						mapLocation("קוספליי נשים", 686, 175),
-						mapLocation(workshops, 686, 224),
-//						mapLocation(ironi8, 686, 270),
-//						mapLocation(ironi9, 686, 316),
-						mapLocation(kids, 686, 358),
-						mapLocationForShelter("מדרגות למרחב מוגן", 686, 395).withMarkerHeight(40),
-//						mapLocation("עירוני 1-7 ומשחקי קופסה 1-2", Arrays.asList(ironi1, ironi2, ironi3, ironi4, ironi5, ironi6, ironi7, games1, games2), 672, 469),
-						mapLocation("תיקון קוספליי", 577, 413),
-						mapLocation("כניסה ויציאה נגישה לעירוני מפלס עליון", 744, 395),
-						mapLocation("המתחם הקהילתי", 755, 303),
-						mapLocation("סוכה", 794, 193),
-						mapLocation("מעבר לעירוני מפלס תחתון", 453, 505),
-						mapLocation("שירותי יוניסקס", 593, 529),
-						mapLocation("הוביטון", 610, 573),
-						mapLocation("קוספליי גברים", 587, 619),
-						mapLocation("שמירת חפצים", 625, 676)
+						mapLocation("יציאת חירום", 730, 345),
+						mapLocation("כניסה ויציאה מאשכול פיס", 1103, 435),
+						mapLocation("דוכני פופ-אפ P", 1731, 517),
+						mapLocation("משחקי מחשב", 1312, 719),
+						mapLocation("משחקי קופסה ולוח", 568, 719),
+						mapLocation("אשכולות 3-4", Arrays.asList(eshkol3, eshkol4), 615, 997),
+						mapLocation("אשכולות 5-6", Arrays.asList(eshkol5, eshkol6), 1335, 1008),
+						mapLocation("דוכנים", 937, 1002),
+						mapLocation("שירותי גברים", 625, 1153),
+						mapLocation("שירותי נשים", 1250, 1153),
+						mapLocation(eshkol1, 967, 1502),
+						mapLocationForShelter("מרחב מוגן", 1134, 1356),
+						mapLocation(eshkol2, 572, 1502),
+						mapLocation("דוכנים A,B,C,D", 952, 2176),
+						mapLocation("דוכנים E", 1727, 2176),
+						mapLocation("דוכנים F", 1164, 1622),
+						mapLocation("דוכנים F", 1726, 1718),
+						mapLocation("דוכנים G", 2158, 2814),
+						mapLocation("דוכנים G", 2158, 2026),
+						mapLocation("יציאת חירום", 359, 2089),
+						mapLocation("כניסה ויציאה", 355, 2696),
+						mapLocation("מודיעין", 665, 2592),
+						mapLocation("דוכני עמותות", 950, 2611),
+						mapLocation("קופות", 1655, 2597),
+						mapLocation("אולם ספורט", 1712, 3267),
+						mapLocation("קפיטריה", 1766, 2851),
+						mapLocation("דוכנים H", 2679, 403),
+						mapLocation("כניסה ויציאה", 3116, 928),
+						mapLocation("מודיעין", 3279, 815),
+						mapLocation("מדרגות לעירוני מפלס עליון", 2640, 599),
+						mapLocation("שירותי גברים", 2509, 740).withMarkerHeight(SMALL_MARKER_HEIGHT),
+						mapLocationForShelter("מדרגות למרחב מוגן", 2343, 1026),
+						mapLocation("שירותי נשים", 2587, 740).withMarkerHeight(SMALL_MARKER_HEIGHT),
+						mapLocation("קוספליי נשים", 2807, 958),
+						mapLocation(workshops, 2807, 1143),
+						mapLocation(kids, 2807, 1337),
+						mapLocation(meetings, 2807, 1693),
+						mapLocation("תיקון קוספליי", 2391, 1868),
+						mapLocationForShelter("מדרגות למרחב מוגן", 2599, 2006),
+						mapLocation("כניסה ויציאה נגישה לעירוני מפלס עליון", 3063, 1623),
+						mapLocation("מעבר לעירוני מפלס תחתון", 2188, 2373),
+						mapLocation("שירותי יוניסקס", 2612, 2235),
+						mapLocation("הוביטון", 2612, 2465),
+						mapLocation("קוספליי גברים", 2612, 2615),
+						mapLocation("שמירת חפצים", 2587, 2887),
+						mapLocation("המתחם הקהילתי", 2289, 3210),
+						mapLocation("השטיח האדום", 2038, 3572)
 					)
 				)
 			);
@@ -276,9 +276,9 @@ public class Olamot2025Convention extends SffConvention {
 	}
 
 	private MapLocation mapLocation(String name, List<? extends Place> places, float x, float y) {
-		final int DEFAULT_MARKER = R.drawable.icon2024_place;
+		final int DEFAULT_MARKER = R.drawable.olamot2025_place;
 		final int DEFAULT_MARKER_TINT_RES = MapLocation.NO_TINT;
-		final int DEFAULT_SELECTED_MARKER = R.drawable.icon2024_place_selected;
+		final int DEFAULT_SELECTED_MARKER = R.drawable.olamot2025_place_selected;
 		final int DEFAULT_SELECTED_MARKER_TINT_RES = MapLocation.NO_TINT;
 
 		MapLocation result = new MapLocation();
@@ -300,8 +300,8 @@ public class Olamot2025Convention extends SffConvention {
 
 	private MapLocation mapLocationForShelter(String name, float x, float y) {
 		return mapLocation(new Shelter().withName(name), x, y)
-			.withMarkerResource(R.drawable.icon2024_place_red, false, MapLocation.NO_TINT)
-			.withSelectedMarkerResource(R.drawable.icon2024_place_red_selected, false, MapLocation.NO_TINT);
+			.withMarkerResource(R.drawable.olamot2025_place_red, false, MapLocation.NO_TINT)
+			.withSelectedMarkerResource(R.drawable.olamot2025_place_red_selected, false, MapLocation.NO_TINT);
 	}
 
 	@Override
