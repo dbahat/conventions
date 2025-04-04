@@ -172,8 +172,8 @@ public class Olamot2025Convention extends SffConvention {
 
 	@Override
 	protected ConventionMap initMap() {
-//		return null;
-		return createMap();
+		return null;
+//		return createMap();
 	}
 
 	private ConventionMap createMap() {
