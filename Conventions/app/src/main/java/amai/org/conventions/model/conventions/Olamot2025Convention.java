@@ -3,6 +3,9 @@ package amai.org.conventions.model.conventions;
 import android.content.Context;
 import android.text.TextUtils;
 
+import java.io.BufferedWriter;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -455,6 +458,24 @@ public class Olamot2025Convention extends SffConvention {
 		request.setRequestMethod("GET");
 		request.addRequestProperty("Authorization", "Bearer " + token);
 		request.setDoOutput(true);
+		return request;
+	}
+
+	@Override
+	public HttpURLConnection getUserQRRequest(String token, String user) throws Exception {
+		URL url = new URL("https://api.sf-f.org.il/cons/qr/byToken");
+		HttpURLConnection request = HttpConnectionCreator.createConnection(url);
+
+		request.setRequestMethod("GET");
+		request.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+		request.setDoInput(true);
+		request.setDoOutput(true);
+
+		OutputStream outputStream = request.getOutputStream();
+		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+		writer.write("token=" + URLUtils.encodeURLParameterValue(token) + "&email=" + URLUtils.encodeURLParameterValue(user));
+		writer.flush();
+
 		return request;
 	}
 
