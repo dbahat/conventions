@@ -338,6 +338,8 @@ public class EventActivity extends NavigationActivity {
 
 		hideNavigateToMapButtonIfNoLocationExists(menu);
 
+		hideShareEventIfNoWebsiteUrl(menu);
+
 		return true;
 	}
 
@@ -408,6 +410,16 @@ public class EventActivity extends NavigationActivity {
 				floorBundle.putIntArray(MapActivity.EXTRA_MAP_LOCATION_IDS, locationIds);
 
 				navigateToActivity(MapActivity.class, false, floorBundle);
+				return true;
+			case R.id.event_share_event:
+				// Share a link to the event
+				Intent sendIntent = new Intent();
+				sendIntent.setAction(Intent.ACTION_SEND);
+				sendIntent.putExtra(Intent.EXTRA_TEXT, conventionEvent.getWebsiteUrl());
+				sendIntent.setType("text/plain");
+
+				Intent shareIntent = Intent.createChooser(sendIntent, null);
+				startActivity(shareIntent);
 				return true;
 			case R.id.event_navigate_to_hall:
 				// Navigate to the hall associated with this event
@@ -501,6 +513,12 @@ public class EventActivity extends NavigationActivity {
 		List<MapLocation> locations = map.findLocationsByName(conventionEvent.getHall().getName());
 		if (locations.size() == 0) {
 			menu.findItem(R.id.event_navigate_to_map).setVisible(false);
+		}
+	}
+
+	private void hideShareEventIfNoWebsiteUrl(Menu menu) {
+		if (conventionEvent.getWebsiteUrl() == null || conventionEvent.getWebsiteUrl().isEmpty()) {
+			menu.findItem(R.id.event_share_event).setVisible(false);
 		}
 	}
 
