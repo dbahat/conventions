@@ -98,17 +98,17 @@
 <p>כניסה עם כלבי שירות: כניסה עם כלבי שירות מותרת לכלל סוגי כלבי השירות. ככלל, אין להיכנס למתחם הכנס עם כלבים שאינם כלבי שירות.</p>
 ]]></string>
     <string name="discounts_main_title">הטבות</string>
-    <string name="discounts_restaurants_title">הטבות במסעדות</string>
+    <string name="discounts_restaurants_title">סידרנו לכם הטבות עם טעמים מכוכבים נפלאים!</string>
     <string name="discounts_restaurants_overview">המסעדות הבאות מעניקות הנחה בהצגת כרטיס או תג של הכנס, במהלך שני הימים של הכנס:</string>
-    <string name="discounts_buzza">כדור אחד 16 ש\"ח (במקום 18), 2 כדורים 23 ש\"ח (במקום 25)\n<a href="https://buzaicecream.co.il/">לאתר בוזה</a></string>
-    <string name="discounts_aroma">10% הנחה, לא כולל דילים קיימים. סניף הארבעה בלבד\n<a href="https://www.aroma.co.il/store/%D7%94%D7%90%D7%A8%D7%91%D7%A2%D7%94-%D7%AA%D7%9C-%D7%90%D7%91%D7%99%D7%91/">לאתר ארומה</a></string>
-    <string name="discounts_tlab">תוספת באבלס על חשבון הבית\n<a href="https://wissotzky-tlab.co.il/%d7%94%d7%a1%d7%a0%d7%99%d7%a4%d7%99%d7%9d-%d7%a9%d7%9c%d7%a0%d7%95/">לאתר T LAB</a></string>
+    <string name="discounts_buzza">הנחה על כל הגלידות בהצגת תג/כרטיס או קוספליי\n<a href="https://buzaicecream.co.il/">לאתר בוזה</a></string>
+    <string name="discounts_aroma">10% הנחה בסניף TLV\n<a href="https://www.aroma.co.il/store/%D7%A7%D7%A0%D7%99%D7%95%D7%9F-tlv/">לאתר ארומה</a></string>
+    <string name="discounts_tlab">באבלס על חשבון הבית\n<a href="https://wissotzky-tlab.co.il/%D7%94%D7%A1%D7%A0%D7%99%D7%A4%D7%99%D7%9D-%D7%A9%D7%9C%D7%A0%D7%95/?gad_source=1">לאתר T LAB</a></string>
     <string name="discounts_night_cookie">עוגיה חינם על קניית 3 עוגיות ומעלה\n<a href="https://www.nightcookie.com/">לאתר עוגיית לילה</a></string>
     <string name="discounts_dizengof_lottery">הגרלה בסנטר! כל כרטיס יכול לזכות\n<a href="https://www.dizengof-center.co.il/activities/events/?ContentID=60925">למידע נוסף באתר דיזינגוף סנטר</a></string>
     <string name="discounts_vitamin">מיצים, גלידות ושייקים ב15% הנחה. קרליבך 20</string>
-    <string name="discounts_oban_koban">10% הנחה בין השעות 11:30-18:00\n<a href="https://www.obankoban.co.il/">לאתר אובן קובן</a></string>
+    <string name="discounts_oban_koban">10% הנחה בין השעות 11:00-18:00\n<a href="https://www.obankoban.co.il/">לאתר אובן קובן</a></string>
     <string name="discounts_suduch">טוסט + שתייה + נקניקיית נשנוש ב-45₪ (במקום 55)\n<a href="https://suduch.co.il/">לאתר סודוך</a></string>
-    <string name="discounts_memphis">10% הנחה לא כולל עסקיות צהריים\n<a href="https://www.memphis.co.il/about/">לאתר ממפיס</a></string>
+    <string name="discounts_memphis">10% הנחה בהצגת תג/כרטיס/קוספליי\n<a href="https://www.memphis.co.il/">לאתר ממפיס</a></string>
     <string name="discounts_storytel">25% הנחה לשנה על מינוי לספרים מוקלטים ודיגיטלים בעברית ובאנגלית\n<a href="https://www.storytel.com/il">לאתר storytel</a></string>
     <string name="discounts_steimatzky_free_books">שלושה ספרים במתנה בימי הפסטיבל\n<a href="https://d-steimatzky.co.il/?page_id=891070&amp;preview=true">למידע נוסף באתר סטימצקי</a></string>
     <string name="discounts_title">הטבות בחנויות</string>
@@ -116,22 +116,13 @@
     <string name="discounts_sponsors_title">השותפים שלנו</string>
     <string name="discounts_sponsors_overview">העסקים הבאים העניקו חסות לפסטיבל אייקון:</string>
     <string name="discounts_dizengoff">דיזנגוף סנטר\n<a href="https://www.dizengof-center.co.il/">לביקור באתר</a></string>
-    <string name="discounts_tsameret">הוצאה לאור - ספרי צמרת\n<a href="https://zbooks.co.il/?gad_source=1&amp;gclid=Cj0KCQjwhb60BhClARIsABGGtw_MH17b4hBFPlwQCToPb--XH93r6d5hcIT9sdzmDu3Lhp0DM8Or-C4aAsE8EALw_wcB">לביקור באתר</a></string>
-    <string name="discounts_emily">בוטיק Out&amp;About\n<a href="https://www.facebook.com/outandaboutemily?mibextid=ZbWKwL">לביקור באתר</a></string>
-    <string name="discounts_kingdom">הממלכה - משחקי לוח, משחקי תפקידים ועוד\n<a href="https://thekingdom.co.il/">לביקור באתר</a></string>
-    <string name="discounts_youdo">יודו מתמחה בחינוך הרפתקני ופיתוח אמצעי הדרכה ולמידה\n<a href="https://youdoadventures.com/">לביקור באתר</a></string>
-    <string name="discounts_cerebro">סרברו מפתחת חוויות משחקיות המעבירות תוכן וידע\n<a href="https://cerebro.co.il/">לביקור באתר</a></string>
-    <string name="discounts_dov">משחקים וספרים לחינוך מדעי ושיווין חברתי\n<a href="https://dovladaat.com/shop">לביקור באתר</a></string>
-    <string name="discounts_keren_hashefa">קרן השפע - יוצרת הרפתקאות ומשחקי דמיון\n<a href="https://קרן-השפע.co.il/">לביקור באתר</a></string>
-    <string name="discounts_animaya">אנימאיה - המרכז לאנימציה ומדיה דיגיטלית\n<a href="https://animaya.co.il/?gad_source=1&amp;gclid=CjwKCAjwnK60BhA9EiwAmpHZw5KIMfzVWfvGkCrYc6ZrzJgYLqhG-xHtncRRTd-GpZJhsH4q1cuVrBoCfDkQAvD_BwE">לביקור באתר</a></string>
-    <string name="discounts_philharmonicon">תוכנית \"מפתח\" של התזמורת הפילהרמונית הישראלית\n<a href="https://www.ipo.co.il/%D7%AA%D7%95%D7%9B%D7%A0%D7%99%D7%AA-%D7%9E%D7%A4%D7%AA%D7%97/">לביקור באתר</a></string>
-    <string name="discounts_hanut">החנות - קבוצת תיאטרון\n<a href="https://www.hanut31.co.il/">לביקור באתר</a></string>
-    <string name="discounts_iac">IAC - המכללה הישראלית לאנימציה ועיצוב\n<a href="https://www.ani-mator.com/">לביקור באתר</a></string>
-    <string name="discounts_bezalel">בצלאל המחלקה לאומנויות המסך\n<a href="https://www.bezalel.ac.il/">לביקור באתר</a></string>
-    <string name="discounts_seminar">קהילת למידה של פנטזיה, מדע בדיוני ומשחקי תפקידים בתואר ראשון עם תעודת הוראה\n<a href="https://www.smkb.ac.il/">לביקור באתר</a></string>
-    <string name="discounts_opus">אופוס הוצאה לאור\n<a href="https://www.opus.co.il/?id=main">לביקור באתר</a></string>
-    <string name="discounts_modan">מודן הוצאה לאור\n<a href="https://www.modan.co.il/">לביקור באתר</a></string>
-    <string name="discounts_pinkkosaurus">פינקוזאורוס - מאי רדומיר\n<a href="http://www.pinkkishu.co/shop">לביקור באתר</a></string>
+    <string name="discounts_tsameret">ספרי צמרת הוצאה לאור\n<a href="https://zbooks.co.il/">לביקור באתר</a></string>
+    <string name="discounts_hakubia">הקוביה משחקים\n<a href="https://www.hakubia.com/">לביקור באתר</a></string>
+    <string name="discounts_kingdom">הממלכה\n<a href="https://thekingdom.co.il/">לביקור באתר</a></string>
+    <string name="discounts_sirolynia">סירולניה</string>
+    <string name="discounts_philharmonicon">קונצרט מיוחד בהיכל התרבות</string>
+    <string name="discounts_iac">המכללה הישראלית לאנימציה ולעיצוב\n<a href="https://www.ani-mator.com/">לביקור באתר</a></string>
+    <string name="discounts_buzza_sponsor">בוזה\n<a href="https://buzaicecream.co.il/">לביקור באתר</a></string>
 
     <string name="activities_main_title">פעילויות במתחם</string>
 
