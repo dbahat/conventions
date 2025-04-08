@@ -1,8 +1,11 @@
 package amai.org.conventions.events.activities;
 
+import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.ResolveInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
@@ -28,6 +31,7 @@ import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.BundleBuilder;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ShareCompat;
 import androidx.fragment.app.Fragment;
@@ -143,19 +147,25 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 	}
 
 	private Intent createSharingIntent() {
-		// get available share intents
+		// There is a new solution for excluding intents from API level 24
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+			return createSharingIntentAPI24();
+		}
+
+		// Get available share intents
 		List<Intent> targets = new ArrayList<>();
 		Intent template = new Intent(Intent.ACTION_SEND)
 				.setType("text/plain");
 		List<ResolveInfo> candidates = this.getPackageManager()
 				.queryIntentActivities(template, 0);
 
-		// remove facebook, since they don't allow sharing text inside the sharing intent, causing the app to appear broken.
+		// Only add included intents
+		// Note that in newer versions, this doesn't add all the intents except what we remove,
+		// so the newer API is preferred
 		for (ResolveInfo candidate : candidates) {
 			String packageName = candidate.activityInfo.packageName;
-			if (!packageName.equals("com.facebook.katana")) {
-				Intent shareIntent = ShareCompat.IntentBuilder
-						.from(this)
+			if (!shouldExcludeIntent(candidate.activityInfo)) {
+				Intent shareIntent = new ShareCompat.IntentBuilder(this)
 						.setText(formatMyEventsToShare(false))
 						.setHtmlText(formatMyEventsToShare(true))
 						.setType("text/plain")
@@ -168,6 +178,36 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		return Intent
 				.createChooser(targets.remove(0), getString(R.string.my_event_share_chooser_dialog_title))
 				.putExtra(Intent.EXTRA_INITIAL_INTENTS, targets.toArray(new Parcelable[targets.size()]));
+	}
+
+	@RequiresApi(api = Build.VERSION_CODES.N)
+	private Intent createSharingIntentAPI24() {
+		Intent sendIntent = new Intent();
+		sendIntent.setAction(Intent.ACTION_SEND);
+		sendIntent.putExtra(Intent.EXTRA_TEXT, formatMyEventsToShare(false));
+		sendIntent.putExtra(Intent.EXTRA_HTML_TEXT, formatMyEventsToShare(true));
+		sendIntent.setType("text/plain");
+
+		Intent shareIntent = Intent.createChooser(sendIntent, getString(R.string.my_event_share_chooser_dialog_title));
+
+		// Get intents to exclude
+		ArrayList<ComponentName> targets = new ArrayList<>();
+		for (ResolveInfo candidate : this.getPackageManager().queryIntentActivities(sendIntent, 0)) {
+			String packageName = candidate.activityInfo.packageName;
+			if (shouldExcludeIntent(candidate.activityInfo)) {
+				targets.add(new ComponentName(packageName, candidate.activityInfo.name));
+			}
+		}
+
+		// Exclude intents
+		shareIntent.putExtra(Intent.EXTRA_EXCLUDE_COMPONENTS, targets.toArray(new ComponentName[0]));
+		return shareIntent;
+	}
+
+	private boolean shouldExcludeIntent(ActivityInfo info) {
+		// We have to remove facebook since they don't allow sharing text inside the sharing intent,
+		// resulting in an empty share (only a link to the app is displayed)
+		return info.packageName.equals("com.facebook.katana");
 	}
 
 	private String formatMyEventsToShare(boolean isHtml) {
