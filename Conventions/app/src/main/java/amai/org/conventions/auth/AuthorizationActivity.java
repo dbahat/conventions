@@ -1,5 +1,6 @@
 package amai.org.conventions.auth;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -161,11 +162,17 @@ public class AuthorizationActivity extends AppCompatActivity {
 
 	private void handleAuthResult(ActivityResult result) {
 		Log.i(TAG, "handleAuthResult");
-		AuthorizationResponse resp = AuthorizationResponse.fromIntent(result.getData());
-		AuthorizationException ex = AuthorizationException.fromIntent(result.getData());
+
+		// The cancel case might return without data
+		AuthorizationResponse resp = null;
+		AuthorizationException ex = null;
+		if (result.getData() != null) {
+			resp = AuthorizationResponse.fromIntent(result.getData());
+			ex = AuthorizationException.fromIntent(result.getData());
+		}
 
 		// User cancelled
-		if (AuthorizationException.GeneralErrors.USER_CANCELED_AUTH_FLOW.equals(ex)) {
+		if (result.getData() == null || AuthorizationException.GeneralErrors.USER_CANCELED_AUTH_FLOW.equals(ex)) {
 			setResult(result.getResultCode(), result.getData());
 			finish();
 			return;
@@ -235,10 +242,14 @@ public class AuthorizationActivity extends AppCompatActivity {
 	private void handleLogoutResult(ActivityResult result) {
 		Log.i(TAG, "handleLogoutResult");
 		Intent data = result.getData();
-		EndSessionResponse resp = EndSessionResponse.fromIntent(data);
-		AuthorizationException ex = AuthorizationException.fromIntent(data);
 
-		if (AuthorizationException.GeneralErrors.USER_CANCELED_AUTH_FLOW.equals(ex)) {
+		// The cancel case may return without data
+		AuthorizationException ex = null;
+		if (data != null) {
+			ex = AuthorizationException.fromIntent(data);
+		}
+
+		if (data == null || AuthorizationException.GeneralErrors.USER_CANCELED_AUTH_FLOW.equals(ex)) {
 			setResult(result.getResultCode(), result.getData());
 			finish();
 			return;
