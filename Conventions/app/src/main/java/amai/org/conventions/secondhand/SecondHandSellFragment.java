@@ -27,6 +27,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.widget.ListViewCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 import sff.org.conventions.R;
@@ -119,7 +120,11 @@ public class SecondHandSellFragment extends Fragment implements SwipeRefreshLayo
 		context.setupActionButton(ThemeAttributes.getDrawable(context, R.attr.addActionButtonIcon), new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+				FragmentActivity activity = getActivity();
+				if (activity == null) {
+					return;
+				}
+				AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 				View dialogView = View.inflate(builder.getContext(), R.layout.dialog_edit_text_layout, null);
 				final EditText formIdText = dialogView.findViewById(R.id.dialog_edit_text);
 				formIdText.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -132,7 +137,9 @@ public class SecondHandSellFragment extends Fragment implements SwipeRefreshLayo
 							public void onClick(DialogInterface dialogInterface, int i) {
 								final String id = formIdText.getText().toString();
 								if (!isInteger(id)) {
-									Toast.makeText(getActivity(), R.string.form_id_not_a_number, Toast.LENGTH_LONG).show();
+									if (getActivity() != null) {
+										Toast.makeText(getActivity(), R.string.form_id_not_a_number, Toast.LENGTH_LONG).show();
+									}
 									return;
 								}
 								isAddingItem = true;
@@ -153,7 +160,8 @@ public class SecondHandSellFragment extends Fragment implements SwipeRefreshLayo
 										isAddingItem = false;
 										updateRefreshing();
 
-										if (getActivity() == null) {
+										FragmentActivity activity = getActivity();
+										if (activity == null) {
 											return;
 										}
 										if (exception == null) {
@@ -174,7 +182,7 @@ public class SecondHandSellFragment extends Fragment implements SwipeRefreshLayo
 											} else {
 												Log.e(TAG, exception.getMessage(), exception);
 											}
-											Toast.makeText(getActivity(), messageId, Toast.LENGTH_LONG).show();
+											Toast.makeText(activity, messageId, Toast.LENGTH_LONG).show();
 										}
 									}
 								}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
