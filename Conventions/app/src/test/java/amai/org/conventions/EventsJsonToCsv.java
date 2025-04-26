@@ -2,11 +2,13 @@ package amai.org.conventions;
 
 import com.opencsv.CSVWriter;
 
+import org.apache.commons.text.StringEscapeUtils;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -29,10 +31,18 @@ import amai.org.conventions.utils.HttpConnectionCreator;
  * This is not really a test class. It's a class used to easily convert between
  * the events json and a csv, so we can enrich the feedback answers with event data.
  * To run it:
- * 1. Update the source url (probably just the slug) and output file path (if necessary) at the end of the convert method
+ * 1. Update the constants at the beginning of the class (probably just the slug and convention folder)
  * 2. Comment the @Ignore on the convert method and run it as a test
  */
 public class EventsJsonToCsv {
+	private static final String SLUG = "olamot2025";
+	private static final String CONVENTION_FOLDER = "olamot 2025";
+
+	// If you have a json file already downloaded, uncomment its path below
+//	private static final String INPUT_FILE = "D:\\conventions app\\convention resources\\" + CONVENTION_FOLDER + "\\feedback\\all_events.json";
+	private static final String INPUT_FILE = null;
+	private static final String INPUT_URL = "https://api.sf-f.org.il/program/list_events.php?slug=" + SLUG;
+	private static final String OUTPUT_PATH = "D:\\conventions app\\convention resources\\" + CONVENTION_FOLDER + "\\feedback\\all_events2.csv";
 
 	private List<ConventionEvent> readEvents(InputStreamReader reader) {
 		return new AmaiModelParser(new Halls(new LinkedList<>()), Calendar.getInstance(), null).parse(reader);
@@ -116,16 +126,13 @@ public class EventsJsonToCsv {
 		ParseUtils.setHtmlParser(new ParseUtils.HTMLParser() {
 			@Override
 			public String parse(String html) {
-				return html;
-				// The library for html parsing doesn't work here. We don't really need it for now so it's ok.
-//				try {
-//					HTMLDocument doc = new HTMLDocument();
-//					new HTMLEditorKit().read( new StringReader( "<html><body>" + html ), doc, 0 );
-//					return doc.getText( 1, doc.getLength() ).trim();
-//				} catch( Exception ex ) {
-//					System.err.println("Error decoding html: " + html);
-//					return html;
-//				}
+				try {
+					// The android library for parsing doesn't work here, but this should cover most cases
+					return StringEscapeUtils.unescapeHtml4(html);
+				} catch( Exception ex ) {
+					System.err.println("Error decoding html: " + html + "\n" + ex.getMessage());
+					return html;
+				}
 			}
 		});
 		ParseUtils.setTextUtils(new ParseUtils.TextUtils() {
@@ -145,15 +152,20 @@ public class EventsJsonToCsv {
 		convention.initFields();
 		Convention.setConvention(convention);
 
-		// If you have a json file already downloaded, you can use this instead of the URL reader
-//		FileReader eventsReader = new FileReader("D:\\conventions app\\convention resources\\icon 2024\\feedback\\all_events.json");
-		HttpURLConnection request = HttpConnectionCreator.createConnection(new URL("https://api.sf-f.org.il/program/list_events.php?slug=icon2024"));
-		request.connect();
-		try (InputStreamReader eventsReader = new InputStreamReader((InputStream) request.getContent())) {
+		try (InputStreamReader eventsReader = getEventsReader()) {
 			logic.writeEventsToFile(
 					logic.readEvents(eventsReader),
-					"D:\\conventions app\\convention resources\\icon 2024\\feedback\\all_events.csv");
+					OUTPUT_PATH);
 		}
 
+	}
+
+	private InputStreamReader getEventsReader() throws Exception {
+		if (INPUT_FILE != null) {
+			return new FileReader(INPUT_FILE);
+		}
+		HttpURLConnection request = HttpConnectionCreator.createConnection(new URL(INPUT_URL));
+		request.connect();
+		return new InputStreamReader((InputStream) request.getContent());
 	}
 }
