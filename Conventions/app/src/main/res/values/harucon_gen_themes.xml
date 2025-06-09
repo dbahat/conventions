@@ -203,7 +203,6 @@
         <item name="mapSearchBarHorizontalMargins">5dp</item>
         <item name="standIconColor">@color/harucon_gen_pink</item>
         <item name="standsTypeTitleColor">@color/harucon_gen_pink</item>
-        <item name="standsMapHighlight">@color/harucon_gen_transparent_green</item>
     </style>
 
     <style name="AppBaseTheme.HaruconGen.Event">

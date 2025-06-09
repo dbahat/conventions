@@ -1,5 +1,8 @@
 package amai.org.conventions.model.conventions;
 
+import android.graphics.BlendMode;
+import android.os.Build;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
@@ -825,8 +828,13 @@ public class Harucon2025Convention extends AmaiConvention {
 		float d44Left = 3205.001f;
 		float d44Top = 1779.000f;
 
+		BlendMode highlightBlendMode = null;
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+			highlightBlendMode = BlendMode.MULTIPLY;
+		}
+
 		return new StandLocationsBuilder()
-			.setDefaults(defaultWidth, defaultHeight, defaultSpaceHorizontal, defaultSpaceVertical)
+			.setDefaults(defaultWidth, defaultHeight, defaultSpaceHorizontal, defaultSpaceVertical, R.color.harucon2025_blue3, highlightBlendMode)
 			.leftToRight(d1Left, d1Top, "d", 1, 2, "d3")
 			.topToBottom(d3Left, d3Top, "d", 3, 12, "d13")
 			.leftToRight(d13Left, d13Top, "d", 13, 26, "d27")
@@ -889,8 +897,13 @@ public class Harucon2025Convention extends AmaiConvention {
 		float a27Left = 2662.000f;
 		float a27Top = 1806.000f;
 
+		BlendMode highlightBlendMode = null;
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+			highlightBlendMode = BlendMode.MULTIPLY;
+		}
+
 		return new StandLocationsBuilder()
-			.setDefaults(defaultWidth, defaultHeight, defaultSpaceHorizontal, defaultSpaceHorizontal)
+			.setDefaults(defaultWidth, defaultHeight, defaultSpaceHorizontal, defaultSpaceHorizontal, R.color.harucon2025_blue3, highlightBlendMode)
 			.leftToRight(a1Left, a1Top, "a", 1, 6, "a7")
 			.leftToRight(a7Left, a7Top, "a", 7, 11, "a12")
 			.leftToRight(a12Left, a12Top, "a", 12, 18, null)
