@@ -1,7 +1,11 @@
 package amai.org.conventions.model;
 
+import android.graphics.BlendMode;
+
 import java.util.LinkedList;
 import java.util.List;
+
+import amai.org.conventions.R;
 
 public class StandLocationsBuilder {
 	private List<StandLocation> locations = new LinkedList<>();
@@ -9,15 +13,19 @@ public class StandLocationsBuilder {
 	float defaultHeight = 0f;
 	float defaultWidthSpace = 0f;
 	float defaultHeightSpace = 0f;
+	int defaultHighlightColorResource = R.color.transparent;
+	BlendMode defaultHighlightBlendMode;
 
 	/**
 	 * Must be called before the other methods to take effect
 	 */
-	public StandLocationsBuilder setDefaults(float defaultWidth, float defaultHeight, float defaultWidthSpace, float defaultHeightSpace) {
+	public StandLocationsBuilder setDefaults(float defaultWidth, float defaultHeight, float defaultWidthSpace, float defaultHeightSpace, int defaultHighlightColorResource, BlendMode defaultHighlightBlendMode) {
 		this.defaultWidth = defaultWidth;
 		this.defaultHeight = defaultHeight;
 		this.defaultWidthSpace = defaultWidthSpace;
 		this.defaultHeightSpace = defaultHeightSpace;
+		this.defaultHighlightColorResource = defaultHighlightColorResource;
+		this.defaultHighlightBlendMode = defaultHighlightBlendMode;
 		return this;
 	}
 
@@ -28,7 +36,10 @@ public class StandLocationsBuilder {
 	private StandLocationsBuilder single(float left, float top, float width, float height, String letter, int number, String next) {
 		String name = letter + number;
 		String sort = (number < 10) ? letter + "0" + number : name;
-		locations.add(StandLocation.fromWidths(name, sort, next, left, width, top, height));
+		StandLocation location = StandLocation.fromWidths(name, sort, next, left, width, top, height);
+		location.setHighlightColorResource(defaultHighlightColorResource);
+		location.setHighlightBlendMode(defaultHighlightBlendMode);
+		locations.add(location);
 		return this;
 	}
 
