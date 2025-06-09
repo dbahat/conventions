@@ -1,5 +1,14 @@
 package amai.org.conventions.model;
 
+import android.content.Context;
+import android.graphics.BlendMode;
+import android.os.Build;
+
+import amai.org.conventions.customviews.PaintDrawable;
+import amai.org.conventions.customviews.RectPaintDrawable;
+import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
+
 public class StandLocation implements Comparable<StandLocation> {
 	private String id;
 	private String sort;
@@ -8,6 +17,8 @@ public class StandLocation implements Comparable<StandLocation> {
 	private float right = -1;
 	private float top = -1;
 	private float bottom = -1;
+	private int highlightColorResource;
+	private BlendMode highlightBlendMode;
 
 	public StandLocation(String id, String sort, String next) {
 		this.id = id;
@@ -55,8 +66,21 @@ public class StandLocation implements Comparable<StandLocation> {
 		return bottom;
 	}
 
+	public void setHighlightColorResource(int highlightColorResource) {
+		this.highlightColorResource = highlightColorResource;
+	}
+
+	public void setHighlightBlendMode(BlendMode highlightBlendMode) {
+		this.highlightBlendMode = highlightBlendMode;
+	}
+
 	@Override
 	public int compareTo(StandLocation o) {
 		return this.sort.compareTo(o.sort);
+	}
+
+	@RequiresApi(api = Build.VERSION_CODES.Q)
+	public PaintDrawable getHighlightPaintDrawable(Context context) {
+		return new RectPaintDrawable(ContextCompat.getColor(context, highlightColorResource), highlightBlendMode, left, top, right, bottom);
 	}
 }

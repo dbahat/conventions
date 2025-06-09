@@ -465,8 +465,6 @@
         <attr name="standIconColor" format="color|reference"/>
         <!-- Stands popup - color for stand type title and selected stand name and location -->
         <attr name="standsTypeTitleColor" format="color|reference"/>
-        <!-- Color for stands map location highlight on the stands map image (for selected location) -->
-        <attr name="standsMapHighlight" format="color|reference"/>
 
         <!-- Event Screen -->
 
