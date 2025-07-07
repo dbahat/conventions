@@ -27,7 +27,6 @@ import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.model.Place;
 import amai.org.conventions.model.SpecialEventsProcessor;
 import amai.org.conventions.model.Stand;
-import amai.org.conventions.model.StandLocation;
 import amai.org.conventions.model.StandLocations;
 import amai.org.conventions.model.StandLocationsBuilder;
 import amai.org.conventions.model.StandsArea;
@@ -37,7 +36,7 @@ import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 import androidx.annotation.Nullable;
 
-public class Harucon2025Convention extends AmaiConvention {
+public class Animatsuri2025Convention extends AmaiConvention {
 	// Hall names
 	private static final String MAIN_HALL_NAME = "אולם ראשי";
 	private static final String ORANIM_NAME = "אודיטוריום אורנים";
@@ -126,12 +125,12 @@ public class Harucon2025Convention extends AmaiConvention {
 
 	@Override
 	protected String initID() {
-		return "Harucon2025";
+		return "Animatsuri2025";
 	}
 
 	@Override
 	protected String initDisplayName() {
-		return "הארוקון 2025";
+		return "אנימאטסורי 2025";
 	}
 
 	@Override
