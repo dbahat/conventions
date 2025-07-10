@@ -187,7 +187,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/programme_title"
-            android:textSize="23sp"
             android:layout_weight="1"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="?attr/homeButtonsSideMargin"
@@ -200,7 +199,6 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="?attr/homeButtonsSideMargin"
             android:text="@string/home_go_to_my_events"
-            android:textSize="23sp"
             android:layout_weight="1"
             android:textColor="?attr/homeButton2Text"
             android:onClick="onGoToMyEventsClicked"/>
