@@ -479,6 +479,11 @@
              This means it must be a color if there are any mapped images. -->
         <attr name="eventDetailsDefaultBackground" format="color|reference"/>
 
+        <!-- Gravity for texts in the event title box and the box itself -->
+        <attr name="eventTitleGravity" format="integer|reference">
+            <enum name="start" value="8388611"/>
+            <enum name="center" value="17"/>
+        </attr>
         <!-- Background for event title box -->
         <attr name="eventTitleBackground" format="integer|reference"/>
         <!-- Padding for event title box -->
@@ -499,6 +504,12 @@
         <attr name="eventTypeTextColor" format="color|reference"/>
         <!-- Background for event type and location type -->
         <attr name="eventTypeBackground" format="integer|reference"/>
+        <!-- Width for event type and location type -->
+        <attr name="eventTypeBackgroundWidth" format="dimension|reference">
+            <enum name="match_parent" value="-1" />
+            <enum name="wrap_content" value="-2" />
+        </attr>
+
 
         <!-- Background for event details box -->
         <attr name="eventDetailsBoxColor" format="color|reference"/>
