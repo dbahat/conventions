@@ -147,7 +147,8 @@
         <!-- Text color for ongoing event label. See ongoingEventBackground for usage. -->
         <attr name="ongoingEventLabelTextColor" format="color|reference" />
 
-        <!-- Background color for event view. Can be a color state list. Event state is set with state_event_... attributes. -->
+        <!-- Background color for event view. Can be a color state list. Event state is set with state_event_... attributes.
+             If this is not a solid color, eventViewCardBackground must be transparent. -->
         <attr name="eventBackgroundColor" format="color|reference"/>
 
         <!-- Should the event color received from backend be used for event time box background -->
@@ -339,10 +340,12 @@
         <attr name="navigationPopupTopSelectedColor" format="color|reference"/>
         <!-- Color for non-selected item image in the top row -->
         <attr name="navigationPopupTopNotSelectedColor" format="color|reference"/>
+        <!-- Background color for selected item image in the top row -->
+        <attr name="navigationPopupTopSelectedBackground" format="color|reference"/>
 
         <!-- Color for selected item text and image in the main part of the navigation drawer -->
         <attr name="navigationPopupSelectedColor" format="color|reference"/>
-        <!-- Color for non-selected item text and image in the main part of the navigation drawer -->
+        <!-- Color for non-selected item text and image in the top row and the main part of the navigation drawer -->
         <attr name="navigationPopupNotSelectedColor" format="color|reference"/>
         <!-- Background color for selected item text and image in the main part of the navigation drawer -->
         <attr name="navigationPopupSelectedBackground" format="color|reference"/>

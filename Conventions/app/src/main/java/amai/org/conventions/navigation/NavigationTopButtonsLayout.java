@@ -34,7 +34,7 @@ public class NavigationTopButtonsLayout extends LinearLayout {
             int color;
             if (isSelected) {
                 color = ThemeAttributes.getColor(currentActivity, R.attr.navigationPopupTopSelectedColor);
-                int backgroundColor = ThemeAttributes.getColor(currentActivity, R.attr.navigationPopupSelectedBackground);
+                int backgroundColor = ThemeAttributes.getColor(currentActivity, R.attr.navigationPopupTopSelectedBackground);
                 imageView.setBackgroundColor(backgroundColor);
             } else {
                 color = ThemeAttributes.getColor(currentActivity, R.attr.navigationPopupTopNotSelectedColor);
