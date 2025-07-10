@@ -261,7 +261,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		boolean shouldDisplayIcon = ThemeAttributes.getBoolean(this, R.attr.navigationItemsShouldDisplayIcon);
 
 		navigationTopButtonsLayout.setNavigationItems(this, Arrays.asList(
-				new NavigationItem(SettingsActivity.class, getString(R.string.settings), ContextCompat.getDrawable(this, R.drawable.harucon_gen_settings), shouldDisplayIcon)
+				new NavigationItem(SettingsActivity.class, getString(R.string.settings), ContextCompat.getDrawable(this, R.drawable.settings), shouldDisplayIcon)
 		));
 
 		final List<NavigationItem> items = new ArrayList<>(Arrays.asList(

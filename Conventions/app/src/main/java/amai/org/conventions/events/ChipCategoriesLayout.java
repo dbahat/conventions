@@ -47,7 +47,7 @@ public class ChipCategoriesLayout extends ChipGroup {
 		chip.setChipStrokeColor(getThemedColor(R.attr.searchCategoriesChipStrokeColor));
 		chip.setRippleColor(getThemedColor(R.attr.searchCategoriesChipRippleColor));
 		chip.setTextColor(getThemedColor(R.attr.searchCategoriesChipTextColor));
-		chip.setCheckedIcon(ContextCompat.getDrawable(getContext(), R.drawable.harucon_gen_event_search_chip_icon));
+		chip.setCheckedIcon(ContextCompat.getDrawable(getContext(), R.drawable.event_search_chip_icon));
 		chip.setChipStrokeWidth(3);
 		chip.setText(searchCategory.getName());
 		chip.setTag(searchCategory);

@@ -219,7 +219,7 @@ public class Animatsuri2025Convention extends AmaiConvention {
 //		);
 
 		// In case the convention has a generic image which should keep aspect ratio and the fade effect, map it like this
-//		imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.harucon_gen_event_activity_background);
+//		imageMapper.addMapping(ImageIdToImageResourceMapper.EVENT_GENERIC, R.drawable.event_activity_background);
 
 		return new ImageIdToImageResourceMapper();
 	}
@@ -833,7 +833,7 @@ public class Animatsuri2025Convention extends AmaiConvention {
 		}
 
 		return new StandLocationsBuilder()
-			.setDefaults(defaultWidth, defaultHeight, defaultSpaceHorizontal, defaultSpaceVertical, R.color.harucon2025_blue3, highlightBlendMode)
+			.setDefaults(defaultWidth, defaultHeight, defaultSpaceHorizontal, defaultSpaceVertical, R.color.animatsuri2025_light_blue300, highlightBlendMode)
 			.leftToRight(d1Left, d1Top, "d", 1, 2, "d3")
 			.topToBottom(d3Left, d3Top, "d", 3, 12, "d13")
 			.leftToRight(d13Left, d13Top, "d", 13, 26, "d27")
@@ -902,7 +902,7 @@ public class Animatsuri2025Convention extends AmaiConvention {
 		}
 
 		return new StandLocationsBuilder()
-			.setDefaults(defaultWidth, defaultHeight, defaultSpaceHorizontal, defaultSpaceHorizontal, R.color.harucon2025_blue3, highlightBlendMode)
+			.setDefaults(defaultWidth, defaultHeight, defaultSpaceHorizontal, defaultSpaceHorizontal, R.color.animatsuri2025_light_blue300, highlightBlendMode)
 			.leftToRight(a1Left, a1Top, "a", 1, 6, "a7")
 			.leftToRight(a7Left, a7Top, "a", 7, 11, "a12")
 			.leftToRight(a12Left, a12Top, "a", 12, 18, null)

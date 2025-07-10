@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="animatsuri2025_gray50">#EEEDF5</color>
+    <color name="animatsuri2025_gray300">#ADADBA</color>
+    <color name="animatsuri2025_gray800">#3E3E4A</color>
+
+    <color name="animatsuri2025_yellow50_transparent80">#CCFFF6E5</color>
+    <color name="animatsuri2025_yellow50">#FFF6E5</color>
+    <color name="animatsuri2025_yellow100">#FFEDC9</color>
+    <color name="animatsuri2025_yellow400">#FFCD69</color>
+
+    <color name="animatsuri2025_pink100">#FF8CCB</color>
+    <color name="animatsuri2025_pink200">#FF6EBD</color>
+    <color name="animatsuri2025_pink300">#FF5CB5</color>
+    <color name="animatsuri2025_pink500">#FF30A1</color>
+
+    <color name="animatsuri2025_lilach25">#F3E0FF</color>
+    <color name="animatsuri2025_lilach100">#E4B8FF</color>
+    <color name="animatsuri2025_lilach300">#D289FF</color>
+    <color name="animatsuri2025_lilach1050">#3A0C57</color>
+
+    <color name="animatsuri2025_light_blue300">#527AFF</color>
+
+    <color name="animatsuri2025_blue1000">#080429</color>
+    <color name="animatsuri2025_blue1050_transparent60">#9904021A</color>
+    <color name="animatsuri2025_blue1050_transparent80">#CC04021A</color>
+    <color name="animatsuri2025_blue1100">#030114</color>
+
+    <color name="animatsuri2025_magenta50">#D950A0</color>
+    <color name="animatsuri2025_magenta200_transparent30">#4DB52B7C</color>
+    <color name="animatsuri2025_magenta400">#8F145C</color>
+    <color name="animatsuri2025_magenta600">#740546</color>
+    <color name="animatsuri2025_magenta1000">#400126</color>
+    <color name="animatsuri2025_magenta1200">#260016</color>
+
+    <color name="animatsuri2025_orange50_transparent25">#40FCBAAE</color>
+    <color name="animatsuri2025_orange100">#FCA292</color>
+    <color name="animatsuri2025_orange400">#F76A52</color>
+    <color name="animatsuri2025_orange500">#F55F45</color>
+    <color name="animatsuri2025_orange1200_transparent90">#E6400A01</color>
+    <color name="animatsuri2025_orange1200">#400A01</color>
+</resources>

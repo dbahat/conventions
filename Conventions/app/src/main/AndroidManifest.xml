@@ -6,7 +6,6 @@
 
     <!-- For notifications -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
-    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <!-- For exact event about to start notifications -->
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
@@ -45,11 +44,11 @@
         android:installLocation="auto"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppBaseTheme.Harucon2025">
+        android:theme="@style/AppBaseTheme.Animatsuri2025">
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppBaseTheme.Harucon2025.Splash"
+            android:theme="@style/AppBaseTheme.Animatsuri2025.Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -64,7 +63,7 @@
         <activity android:name=".map.MapActivity" />
         <activity
             android:name=".events.activities.EventActivity"
-            android:theme="@style/AppBaseTheme.Harucon2025.Event"
+            android:theme="@style/AppBaseTheme.Animatsuri2025.Event"
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".ArrivalMethodsActivity" />
         <activity

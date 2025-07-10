@@ -270,6 +270,21 @@ public class UpdatesRefresher {
 				// instance to MockUpdatesRefresher.
 				// Add mock updates / extra logic here (you can keep a state since
 				// this is a singleton).
+				new Update()
+					.withId("1")
+					.withText("this is my first update")
+					.withDate(Dates.now())
+					.withIsNew(true),
+				new Update()
+					.withId("2")
+					.withText("this is my second update.\nit's longer than the first one.\nit has more than one line!\ncheck out the rest\nunder \nthe \ncut")
+					.withDate(Dates.now())
+					.withIsNew(true),
+				new Update()
+					.withId("3")
+					.withText("one more update!")
+					.withDate(Dates.now())
+					.withIsNew(true)
 			);
 		}
 	}
