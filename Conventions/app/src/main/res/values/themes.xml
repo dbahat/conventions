@@ -179,6 +179,8 @@
         <item name="eventSubTitleBackground">@null</item>
         <item name="eventLecturerBackground">@null</item>
         <item name="eventTypeBackground">@null</item>
+        <item name="eventTypeBackgroundWidth">match_parent</item>
+        <item name="eventTitleGravity">center</item>
         <item name="eventTitlePadding">8dp</item>
         <item name="eventVoteBoxColor">?eventFeedbackBoxColor</item>
         <item name="eventVoteTextColor">?eventDescriptionTextColor</item>
@@ -417,6 +419,8 @@
         <item name="eventSubTitleBackground">@null</item>
         <item name="eventLecturerBackground">@null</item>
         <item name="eventTypeBackground">@null</item>
+        <item name="eventTypeBackgroundWidth">match_parent</item>
+        <item name="eventTitleGravity">center</item>
         <item name="eventTitlePadding">8dp</item>
         <item name="eventVoteBoxColor">?eventFeedbackBoxColor</item>
         <item name="eventVoteTextColor">?eventDescriptionTextColor</item>

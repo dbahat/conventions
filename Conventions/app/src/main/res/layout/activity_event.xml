@@ -45,11 +45,11 @@
 				style="@style/EventDetailsHeaderBox">
 				<TextView
 					android:id="@+id/event_title"
-					style="@style/TextAppearance.AppCompat.Title"
+					style="@style/TextAppearance.AppCompat.Headline"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:background="?eventNameBackground"
-					android:gravity="center"
+					android:gravity="?eventTitleGravity"
 					android:padding="5dp"
 					android:textColor="?eventTitleTextColor"
 					android:textStyle="bold"
@@ -57,11 +57,11 @@
 
 				<TextView
 					android:id="@+id/event_subtitle"
-					style="@style/TextAppearance.AppCompat.Subhead"
+					style="@style/TextAppearance.AppCompat.Title"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:background="?eventSubTitleBackground"
-					android:gravity="center"
+					android:gravity="?eventTitleGravity"
 					android:padding="5dp"
 					android:textColor="?eventSubTitleTextColor"
 					tools:text="subtitle" />
@@ -72,19 +72,19 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:background="?eventLecturerBackground"
-					android:gravity="center"
+					android:gravity="?eventTitleGravity"
 					android:padding="5dp"
 					android:textColor="?eventLecturerTextColor"
 					tools:text="lecturer" />
 
 				<LinearLayout
-					android:layout_width="match_parent"
+					android:layout_width="?eventTypeBackgroundWidth"
 					android:layout_height="wrap_content"
 					android:orientation="horizontal"
 					android:background="?eventTypeBackground"
-					android:gravity="center_horizontal"
+					android:gravity="?eventTitleGravity"
 					android:padding="5dp"
-					android:layout_gravity="center_horizontal">
+					android:layout_gravity="?eventTitleGravity">
 					<TextView
 						android:id="@+id/event_category"
 						android:layout_width="wrap_content"
@@ -108,13 +108,13 @@
 						android:layout_height="wrap_content"
 						style="@style/TextAppearance.AppCompat.Small"
 						tools:text="Event Type"
-						android:gravity="center"
+						android:gravity="?eventTitleGravity"
 						/>
 					<TextView
 						android:id="@+id/event_type_and_location_type_separator"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:gravity="center_horizontal"
+						android:gravity="?eventTitleGravity"
 						android:text="@string/dash_with_spaces"
 						style="@style/TextAppearance.AppCompat.Small"
 						android:textColor="?eventTypeTextColor"/>
@@ -125,7 +125,7 @@
 						android:layout_height="wrap_content"
 						style="@style/TextAppearance.AppCompat.Small"
 						tools:text="Event Location Type"
-						android:gravity="center"
+						android:gravity="?eventTitleGravity"
 						/>
 				</LinearLayout>
 			</LinearLayout>
