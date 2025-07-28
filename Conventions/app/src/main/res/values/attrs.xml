@@ -438,6 +438,8 @@
         <attr name="mapSearchBorder" format="color|reference"/>
         <!-- Background for map search tabs -->
         <attr name="mapSearchTabsBackground" format="color|reference"/>
+        <!-- Border color between tabs and search filters -->
+        <attr name="mapSearchTabsBorder" format="color|reference"/>
         <!-- Background for map search filters -->
         <attr name="mapSearchFiltersBackground" format="color|reference"/>
         <!-- Color for separator between search filters and search results -->

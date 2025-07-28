@@ -45,6 +45,12 @@
                 android:paddingTop="3dp">
             </com.google.android.material.tabs.TabLayout>
 
+            <View
+                android:id="@+id/tab_search_border"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?mapSearchTabsBorder"/>
+
             <LinearLayout
                 android:orientation="vertical"
                 android:background="?mapSearchFiltersBackground"
