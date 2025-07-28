@@ -63,6 +63,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 	// Search
 	private LinearLayout searchContainer;
 	private TabLayout searchType;
+	private View searchTypeBorder;
 	private TextView noResultsFound;
 	private ListView searchResults;
 	private CheckBox showOnlyHallsCheckbox;
@@ -301,6 +302,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 
 	private void initializeSearch(Bundle savedInstanceState) {
 		searchType = findViewById(R.id.search_type);
+		searchTypeBorder = findViewById(R.id.tab_search_border);
 		searchContainer = (LinearLayout) findViewById(R.id.map_search);
 		noResultsFound = (TextView) findViewById(R.id.map_search_no_results_found);
 		searchResults = (ListView) findViewById(R.id.map_search_results);
@@ -345,6 +347,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		// Check if we can search for stands
 		if (!Convention.getInstance().hasStands()) {
 			searchType.setVisibility(View.GONE);
+			searchTypeBorder.setVisibility(View.GONE);
 		}
 
 		// Setup search type (radio button) change
