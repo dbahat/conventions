@@ -203,7 +203,7 @@
         <item name="mapBackground">@drawable/animatsuri2025_activities_background</item>
         <item name="mapShelterButtonBackground">@drawable/animatsuri2025_home_button2</item>
         <item name="mapDetailButtonsBackground">@drawable/animatsuri2025_home_button</item>
-        <item name="locationDetailsBackground">@color/animatsuri2025_orange1200_transparent90</item>
+        <item name="locationDetailsBackground">@color/animatsuri2025_blue1050_transparent90</item>
         <item name="locationDetailsTopLineColor">@color/transparent</item>
         <item name="locationDetailsTitleColor">@color/animatsuri2025_yellow50</item>
         <item name="locationDetailsElevation">10dp</item>
@@ -214,12 +214,13 @@
         <item name="floorUpDownTextColor">@color/animatsuri2025_lilach25</item>
         <item name="floorUpDownSeparator">@color/animatsuri2025_lilach1050</item>
         <item name="floorUpDownElevation">10dp</item>
-        <item name="mapSearchTabsBackground">@color/animatsuri2025_yellow50</item>
-        <item name="mapSearchFiltersBackground">@color/animatsuri2025_magenta1200</item>
-        <item name="mapSearchTabsColor">@color/animatsuri2025_magenta1200</item>
+        <item name="mapSearchTabsBackground">@color/animatsuri2025_magenta1000</item>
+        <item name="mapSearchFiltersBackground">@color/animatsuri2025_magenta1000</item>
+        <item name="mapSearchTabsColor">@color/animatsuri2025_yellow50</item>
         <item name="mapSearchTabsIndicator">@drawable/animatsuri2025_map_tab_indicator</item>
-        <item name="mapSearchTopBorder">@color/animatsuri2025_yellow50</item>
-        <item name="mapSearchBorder">@color/animatsuri2025_magenta1200</item>
+        <item name="mapSearchTabsBorder">@color/animatsuri2025_yellow50</item>
+        <item name="mapSearchTopBorder">@color/animatsuri2025_magenta1000</item>
+        <item name="mapSearchBorder">@color/animatsuri2025_magenta1000</item>
         <item name="mapSearchResultsBackground">@color/animatsuri2025_blue1050_transparent80</item>
         <item name="mapSearchPaneElevation">10dp</item>
         <item name="mapSearchImageColor">@color/animatsuri2025_orange400</item>
@@ -262,7 +263,8 @@
     </style>
 
     <style name="AppBaseTheme.Animatsuri2025.Splash">
-        <item name="android:windowBackground">@drawable/animatsuri2025_activities_background</item>
+        <!-- This is displayed with the app icon in the foreground -->
+        <item name="android:windowBackground">@color/animatsuri2025_blue1100</item>
     </style>
 </resources>
 

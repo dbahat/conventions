@@ -40,7 +40,7 @@
     <application
         android:name=".ConventionsApplication"
         android:allowBackup="false"
-        android:icon="@mipmap/animatsuri2024_app_icon"
+        android:icon="@mipmap/animatsuri2025_app_icon"
         android:installLocation="auto"
         android:label="@string/app_name"
         android:supportsRtl="true"
