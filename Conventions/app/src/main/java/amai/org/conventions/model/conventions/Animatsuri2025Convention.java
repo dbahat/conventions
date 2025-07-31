@@ -43,10 +43,8 @@ public class Animatsuri2025Convention extends AmaiConvention {
 	private static final String ESHKOL1_NAME = "אשכול 1";
 	private static final String ESHKOL2_NAME = "אשכול 2";
 	private static final String ESHKOL3_NAME = "אשכול 3";
-	private static final String WORKSHOPS_NAME = "חדר סדנאות";
 	private static final String GAMES_NAME = "משחקייה";
 	private static final String COSPLAY_AREA_NAME = "מתחם קוספליי";
-	private static final String FOODCOURT_NAME = "מתחם אוכל";
 	// Location names
 	public static final String CHILDREN_ROOM_NAME = "חדר פעוטות";
 
@@ -56,12 +54,15 @@ public class Animatsuri2025Convention extends AmaiConvention {
 	private static final int QUESTION_ID_IDOLFEST_VOTE = 1002;
 
 	// Special events server id
-	/** To add / enable for event, update methods:
+	/**
+	 * To disable, set the event ID to EVENT_ID_NO_EVENT.
+	 * To add a new event, update methods:
 	 * {@link #convertUserInputForEvent(ConventionEvent.UserInput, ConventionEvent)}
 	 * {@link #getEventVoteSender(ConventionEvent)}
 	 */
-	private static final int EVENT_ID_AMAIDOL = 7870;
-	private static final int EVENT_ID_IDOLFEST = 4011;
+	private static final int EVENT_ID_NO_EVENT = -1;
+	private static final int EVENT_ID_AMAIDOL = EVENT_ID_NO_EVENT;
+	private static final int EVENT_ID_IDOLFEST = 884;
 
 	// Ids of google spreadsheets associated with the special events
 	private static final String AMAIDOL_SPREADSHEET_ID = "1u9xu3FNq2gA25oZoVHVguTzJA5HheXWPf2wnUj-iipE";
@@ -112,14 +113,14 @@ public class Animatsuri2025Convention extends AmaiConvention {
 
 	@Override
 	protected ConventionStorage initStorage() {
-		return new ConventionStorage(this, R.raw.harucon2025_convention_events, 0);
+		return new ConventionStorage(this, R.raw.animatsuri2025_convention_events, 0);
 	}
 
 	@Override
 	protected Calendar initDate() {
 		Calendar date = Calendar.getInstance();
 		date.clear();
-		date.set(2025, Calendar.MARCH, 16);
+		date.set(2025, Calendar.AUGUST, 28);
 		return date;
 	}
 
@@ -197,7 +198,7 @@ public class Animatsuri2025Convention extends AmaiConvention {
 	@Override
 	protected URL initModelURL() {
 		try {
-			return new URL("https://harucon.org.il/2025/wp-admin/admin-ajax.php?action=get_event_list");
+			return new URL("https://animatsuri.org.il/2025/wp-admin/admin-ajax.php?action=get_event_list");
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
@@ -232,10 +233,8 @@ public class Animatsuri2025Convention extends AmaiConvention {
 			new Hall().withName(ESHKOL1_NAME).withShelter(true),
 			new Hall().withName(ESHKOL2_NAME).withShelter(true),
 			new Hall().withName(ESHKOL3_NAME).withShelter(true),
-			new Hall().withName(WORKSHOPS_NAME),
 			new Hall().withName(GAMES_NAME),
-			new Hall().withName(COSPLAY_AREA_NAME),
-			new Hall().withName(FOODCOURT_NAME)
+			new Hall().withName(COSPLAY_AREA_NAME)
 		);
 		int i = 1;
 		for (Hall hall : halls) {
@@ -256,10 +255,8 @@ public class Animatsuri2025Convention extends AmaiConvention {
 		Hall eshkol1 = this.getHalls().findByName(ESHKOL1_NAME);
 		Hall eshkol2 = this.getHalls().findByName(ESHKOL2_NAME);
 		Hall eshkol3 = this.getHalls().findByName(ESHKOL3_NAME);
-		Hall workshops = this.getHalls().findByName(WORKSHOPS_NAME);
 		Hall games = this.getHalls().findByName(GAMES_NAME);
 		Hall cosplayArea = this.getHalls().findByName(COSPLAY_AREA_NAME);
-		Hall foodcourt = this.getHalls().findByName(FOODCOURT_NAME);
 
 		Floor entrance = new Floor(1)
 				.withName("מתחם כניסה")
@@ -470,13 +467,13 @@ public class Animatsuri2025Convention extends AmaiConvention {
 												.withY(509.92718f)
 								),
 								inFloor(floor2,
-									new MapLocation()
-												.withPlace(workshops)
-												.withMarkerResource(R.raw.harucon2025_marker_workshops, true)
-												.withSelectedMarkerResource(R.raw.harucon2025_selected_marker_workshops, true)
-												.withMarkerHeight(113.011f)
-												.withX(1370.185f)
-												.withY(855.24901f),
+//									new MapLocation()
+//												.withPlace(workshops)
+//												.withMarkerResource(R.raw.harucon2025_marker_workshops, true)
+//												.withSelectedMarkerResource(R.raw.harucon2025_selected_marker_workshops, true)
+//												.withMarkerHeight(113.011f)
+//												.withX(1370.185f)
+//												.withY(855.24901f),
 										new MapLocation()
 												.withPlace(new Place().withName("שיפוט קוספליי"))
 												.withMarkerResource(R.raw.harucon2025_marker_cosplay_judgement, true)
@@ -527,29 +524,29 @@ public class Animatsuri2025Convention extends AmaiConvention {
 												.withMarkerHeight(85.564f)
 												.withX(931.613f)
 												.withY(114.23401f),
-										new MapLocation()
-												.withPlace(foodcourt)
-												.withName("סדנת קנדו")
-												.withMarkerResource(R.raw.harucon2025_marker_kendo, true)
-												.withSelectedMarkerResource(R.raw.harucon2025_selected_marker_kendo, true)
-												.withMarkerHeight(98.282f)
-												.withX(829.545f)
-												.withY(230.97801f),
-										new MapLocation()
-												.withPlace(foodcourt)
-												.withMarkerResource(R.raw.harucon2025_marker_food, true)
-												.withSelectedMarkerResource(R.raw.harucon2025_selected_marker_food, true)
-												.withMarkerHeight(98.282f)
-												.withX(630.545f)
-												.withY(369.97801f),
-										new MapLocation()
-												.withPlace(foodcourt)
-												.withName("מנגה קפה")
-												.withMarkerResource(R.raw.harucon2025_marker_manga_cafe, true)
-												.withSelectedMarkerResource(R.raw.harucon2025_selected_marker_manga_cafe, true)
-												.withMarkerHeight(98.282f)
-												.withX(432.045f)
-												.withY(369.97801f),
+//										new MapLocation()
+//												.withPlace(foodcourt)
+//												.withName("סדנת קנדו")
+//												.withMarkerResource(R.raw.harucon2025_marker_kendo, true)
+//												.withSelectedMarkerResource(R.raw.harucon2025_selected_marker_kendo, true)
+//												.withMarkerHeight(98.282f)
+//												.withX(829.545f)
+//												.withY(230.97801f),
+//										new MapLocation()
+//												.withPlace(foodcourt)
+//												.withMarkerResource(R.raw.harucon2025_marker_food, true)
+//												.withSelectedMarkerResource(R.raw.harucon2025_selected_marker_food, true)
+//												.withMarkerHeight(98.282f)
+//												.withX(630.545f)
+//												.withY(369.97801f),
+//										new MapLocation()
+//												.withPlace(foodcourt)
+//												.withName("מנגה קפה")
+//												.withMarkerResource(R.raw.harucon2025_marker_manga_cafe, true)
+//												.withSelectedMarkerResource(R.raw.harucon2025_selected_marker_manga_cafe, true)
+//												.withMarkerHeight(98.282f)
+//												.withX(432.045f)
+//												.withY(369.97801f),
 										new MapLocation()
 												.withPlace(new Place().withName("שירותים"))
 												.withMarkerResource(R.raw.harucon2025_marker_toilet, true)
@@ -925,7 +922,7 @@ public class Animatsuri2025Convention extends AmaiConvention {
 			return null;
 		}
         try {
-            if (event.getServerId() == EVENT_ID_AMAIDOL) {
+            if (event.getServerId() == EVENT_ID_AMAIDOL && isEventIDRelevantForEventVote(EVENT_ID_AMAIDOL)) {
                 SurveyForm form = new SurveyForm()
                         .withQuestionEntry(QUESTION_ID_AMAIDOL_NAME, "entry.109802680")
                         .withQuestionEntry(QUESTION_ID_AMAIDOL_VOTE, "entry.1600353678")
@@ -936,19 +933,23 @@ public class Animatsuri2025Convention extends AmaiConvention {
                 return new EventVoteSurveyFormSender(form, event.getUserInput().getVoteSurvey(), disabledMessageRetriever);
 
             }
-//			if (event.getServerId() == EVENT_ID_IDOLFEST) {
-//				SurveyForm form = new SurveyForm()
-//						.withQuestionEntry(QUESTION_ID_IDOLFEST_VOTE, "entry.1250645599")
-//						.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSc-X3LyAKiKRXiBwq3q8KEQwsYGwn7pZAqK2g1273sVroPWvw/formResponse"));
-//
-//				SurveyDataRetriever.DisabledMessage disabledMessageRetriever = new SurveyDataRetriever.GoogleSpreadSheet(IDOLFEST_SPREADSHEET_ID);
-//
-//				return new EventVoteSurveyFormSender(form, event.getUserInput().getVoteSurvey(), disabledMessageRetriever);
-//			}
+			if (event.getServerId() == EVENT_ID_IDOLFEST && isEventIDRelevantForEventVote(EVENT_ID_IDOLFEST)) {
+				SurveyForm form = new SurveyForm()
+						.withQuestionEntry(QUESTION_ID_IDOLFEST_VOTE, "entry.1250645599")
+						.withSendUrl(new URL("https://docs.google.com/forms/d/e/1FAIpQLSc-X3LyAKiKRXiBwq3q8KEQwsYGwn7pZAqK2g1273sVroPWvw/formResponse"));
+
+				SurveyDataRetriever.DisabledMessage disabledMessageRetriever = new SurveyDataRetriever.GoogleSpreadSheet(IDOLFEST_SPREADSHEET_ID);
+
+				return new EventVoteSurveyFormSender(form, event.getUserInput().getVoteSurvey(), disabledMessageRetriever);
+			}
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
 		return super.getEventVoteSender(event);
+	}
+
+	private boolean isEventIDRelevantForEventVote(int id) {
+		return id != EVENT_ID_NO_EVENT;
 	}
 
 	@Override
@@ -978,17 +979,17 @@ public class Animatsuri2025Convention extends AmaiConvention {
 		super.convertUserInputForEvent(userInput, event);
 
         if (userInput.getVoteSurvey() == null && event != null) {
-            if (event.getServerId() == EVENT_ID_AMAIDOL) {
+            if (event.getServerId() == EVENT_ID_AMAIDOL && isEventIDRelevantForEventVote(EVENT_ID_AMAIDOL)) {
                 userInput.setVoteSurvey(new Survey().withQuestions(
                         new FeedbackQuestion(QUESTION_ID_AMAIDOL_NAME, FeedbackQuestion.AnswerType.SINGLE_LINE_TEXT, true),
                         new FeedbackQuestion(QUESTION_ID_AMAIDOL_VOTE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO, true)
                 ));
             }
-//            if (event.getServerId() == EVENT_ID_IDOLFEST) {
-//                userInput.setVoteSurvey(new Survey().withQuestions(
-//                        new FeedbackQuestion(QUESTION_ID_IDOLFEST_VOTE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO, true)
-//                ));
-//            }
+            if (event.getServerId() == EVENT_ID_IDOLFEST && isEventIDRelevantForEventVote(EVENT_ID_IDOLFEST)) {
+                userInput.setVoteSurvey(new Survey().withQuestions(
+                        new FeedbackQuestion(QUESTION_ID_IDOLFEST_VOTE, FeedbackQuestion.AnswerType.MULTIPLE_ANSWERS_RADIO, true)
+                ));
+            }
         }
 	}
 
