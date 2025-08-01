@@ -69,13 +69,13 @@
         <item name="aboutLogo">@drawable/animatsuri2025_about_logo</item>
         <item name="aboutLogoMargins">0dp</item>
         <!-- Home Screen -->
-        <item name="homeLogo">@drawable/harucon2025_home_image</item>
+        <item name="homeLogo">@drawable/animatsuri2025_home_image</item>
         <item name="homeLogoMargin">0dp</item>
         <item name="homeLogoMarginTop">10dp</item>
         <item name="homeBottomImage">@null</item>
         <item name="homeBackground">@drawable/animatsuri2025_activities_background</item>
         <item name="homeBackgroundDuringConvention">@drawable/animatsuri2025_activities_background</item>
-        <item name="homeToolbarTitle">@null</item>
+        <item name="homeToolbarTitle">@drawable/animatsuri2025_toolbar_logo</item>
         <item name="homeToolbarBackground">@null</item>
         <item name="homeTitleBackground">@drawable/animatsuri2025_home_title_background</item>
         <item name="homeShowCurrentUpcomingTitles">true</item>
