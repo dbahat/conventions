@@ -43,7 +43,7 @@ public class Animatsuri2025Convention extends AmaiConvention {
 	private static final String ESHKOL2_NAME = "אשכול 2";
 	private static final String ESHKOL3_NAME = "אשכול 3";
 	private static final String GAMES_NAME = "משחקייה";
-	private static final String COSPLAY_AREA_NAME = "מתחם קוספליי";
+	private static final String COSPLAY_AREA_NAME = "תיקון קוספליי";
 	private static final String COSPLAY_PHOTOGRAPHY_NAME = "עמדת צילום";
 	// Location names
 	public static final String CHILDREN_ROOM_NAME = "חדר פעוטות";
@@ -391,8 +391,7 @@ public class Animatsuri2025Convention extends AmaiConvention {
 												.withX(1170.355f)
 												.withY(651.554f),
 										new MapLocation()
-												.withName("כניסה נגישה לדוכנים מסחריים")
-												.withPlace(tetsugot)
+												.withPlace(new Place().withName("כניסה נגישה לדוכנים מסחריים"))
 												.withMarkerResource(R.raw.animatsuri2025_marker_accessible_entrance, true)
 												.withSelectedMarkerResource(R.raw.animatsuri2025_selected_marker_accessible_entrance, true)
 												.withMarkerHeight(95.439f)
@@ -493,31 +492,27 @@ public class Animatsuri2025Convention extends AmaiConvention {
 												.withX(1316.975f)
 												.withY(604.26f),
 										new MapLocation()
-												.withName("כניסה נגישה לאולם ראשי")
-												.withPlace(mainHall)
+												.withPlace(new Place().withName("כניסה נגישה לאולם ראשי"))
 												.withMarkerResource(R.raw.animatsuri2025_marker_main_hall_accessible_entrance, true)
 												.withSelectedMarkerResource(R.raw.animatsuri2025_selected_marker_main_hall_accessible_entrance, true)
 												.withMarkerHeight(98.353f)
 												.withX(1155.105f)
 												.withY(692.907f),
 										new MapLocation()
-												.withName("כניסת פלוס לאולם ראשי")
-												.withPlace(mainHall)
+												.withPlace(new Place().withName("כניסת פלוס לאולם ראשי"))
 												.withMarkerResource(R.raw.animatsuri2025_marker_main_hall_plus_entrance, true)
 												.withSelectedMarkerResource(R.raw.animatsuri2025_selected_marker_main_hall_plus_entrance, true)
 												.withMarkerHeight(98.282f)
 												.withX(1311.545f)
 												.withY(469.978f),
 										new MapLocation()
-												.withName("כניסה ראשית לאולם ראשי")
-												.withPlace(mainHall)
+												.withPlace(new Place().withName("כניסה ראשית לאולם ראשי"))
 												.withMarkerResource(R.raw.animatsuri2025_marker_main_hall_entrance, true)
 												.withSelectedMarkerResource(R.raw.animatsuri2025_selected_marker_main_hall_entrance, true)
 												.withMarkerHeight(98.353f)
 												.withX(1002.1025f)
 												.withY(640.907f),
 										new MapLocation()
-												.withName("עמדת תיקון קוספליי")
 												.withPlace(cosplayArea)
 												.withMarkerResource(R.raw.animatsuri2025_marker_cosplay_area, true)
 												.withSelectedMarkerResource(R.raw.animatsuri2025_selected_marker_cosplay_area, true)
