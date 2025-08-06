@@ -1,11 +1,13 @@
 package amai.org.conventions.networking;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.text.TextUtils;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -399,6 +401,12 @@ public class ModelRefresher {
 		}
 		if (changes.size() == 0) {
 			Log.i(TAG, "Events refresh: No changes");
+		} else if (BuildConfig.DEBUG) { // Making double sure since the other actions in this method are not visible to the user
+			// Show toast to know we should update the events cache
+			Context context = ConventionsApplication.getCurrentContext();
+			if (context instanceof Activity) {
+				((Activity) context).runOnUiThread(() -> Toast.makeText(context, changes.size() + " event changes found", Toast.LENGTH_SHORT).show());
+			}
 		}
 	}
 }
