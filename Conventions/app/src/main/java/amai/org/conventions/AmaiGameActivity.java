@@ -25,7 +25,7 @@ public class AmaiGameActivity extends NavigationActivity {
 	}
 
 	public void onGoToGameClicked(View view) {
-		Uri uri = Uri.parse("https://game.amai.org.il/");
+		Uri uri = Uri.parse("https://game.amai.org.il:8443/");
 		Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 		startActivity(intent);
 	}
