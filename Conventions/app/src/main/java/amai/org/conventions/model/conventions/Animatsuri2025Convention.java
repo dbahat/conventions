@@ -276,20 +276,22 @@ public class Animatsuri2025Convention extends AmaiConvention {
 				.withImageWidth(1817f)
 				.withImageHeight(1122.078f);
 
-		StandsArea tetsugot = new StandsArea()
-				.withName("תצוגות")
-				.withStandLocations(getTetsugotStandLocations()) // This must be initialized before the stands
-				.withStands(getTetsugotStands())
-				.withImageResource(R.drawable.harucon2025_stands_map_tetsugot)
-				.withImageWidth(4320.03564f)
-				.withImageHeight(2430.00049f);
-		StandsArea agam = new StandsArea()
-				.withName("אולם אגם")
-				.withStandLocations(getAgamStandLocations()) // This must be initialized before the stands
-				.withStands(getAgamStands())
-				.withImageResource(R.drawable.harucon2025_stands_map_pinkus)
-				.withImageWidth(4320)
-				.withImageHeight(2430);
+		Place tetsugot = new Place().withName("תצוגות");
+//		StandsArea tetsugot = new StandsArea()
+//				.withName("תצוגות")
+//				.withStandLocations(getTetsugotStandLocations()) // This must be initialized before the stands
+//				.withStands(getTetsugotStands())
+//				.withImageResource(R.drawable.harucon2025_stands_map_tetsugot)
+//				.withImageWidth(4320.03564f)
+//				.withImageHeight(2430.00049f);
+		Place agam = new Place().withName("אגם");
+//		StandsArea agam = new StandsArea()
+//				.withName("אולם אגם")
+//				.withStandLocations(getAgamStandLocations()) // This must be initialized before the stands
+//				.withStands(getAgamStands())
+//				.withImageResource(R.drawable.harucon2025_stands_map_pinkus)
+//				.withImageWidth(4320)
+//				.withImageHeight(2430);
 
 		return new ConventionMap()
 				.withFloors(Arrays.asList(entrance, floor1, floor2))
