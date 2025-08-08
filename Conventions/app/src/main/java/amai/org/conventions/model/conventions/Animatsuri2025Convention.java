@@ -137,7 +137,7 @@ public class Animatsuri2025Convention extends AmaiConvention {
 	@Override
 	protected URL initUpdatesURL() {
 		try {
-			return new URL("https://us-central1-starlit-brand-95018.cloudfunctions.net/getFeed");
+			return new URL("https://us-central1-starlit-brand-95018.cloudfunctions.net/getFeed?page=animatsuri.org.il");
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
