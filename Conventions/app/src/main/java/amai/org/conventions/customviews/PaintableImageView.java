@@ -45,5 +45,6 @@ public class PaintableImageView extends AspectRatioImageView {
 		for (PaintDrawable paintDrawable : paintDrawables) {
 			paintDrawable.onDraw(canvas, paint, ((float) imageWidth) / this.referenceWidth, ((float) imageHeight) / this.referenceHeight);
 		}
+		invalidate();
 	}
 }

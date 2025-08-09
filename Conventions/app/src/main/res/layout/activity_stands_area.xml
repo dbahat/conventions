@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".events.activities.StandsAreaFragment">
 
@@ -14,15 +15,17 @@
         tools:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <FrameLayout
+        <amai.org.conventions.customviews.FrameLayoutWithMaxHeight
             android:id="@+id/stands_area_map_frame"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:maxHeight="300dp">
             <amai.org.conventions.customviews.PaintableImageView
                 android:id="@+id/stands_area_map"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-        </FrameLayout>
+        </amai.org.conventions.customviews.FrameLayoutWithMaxHeight>
     </pl.polidea.view.ZoomView>
 
     <androidx.recyclerview.widget.RecyclerView

@@ -28,6 +28,7 @@ import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.StandLocation;
 import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.model.conventions.Convention;
+import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Objects;
 import amai.org.conventions.utils.Views;
 import androidx.annotation.NonNull;
@@ -100,6 +101,20 @@ public class StandsAreaFragment extends DialogFragment {
 
             if (area.hasImageResource()) {
                 image.setImageResource(area.getImageResource());
+
+                int orientation = area.getImageOrientation();
+                if (orientation == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+                    ViewGroup.LayoutParams layoutParams = image.getLayoutParams();
+                    layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                    layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                    image.setLayoutParams(layoutParams);
+                } else if (orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+                    ViewGroup.LayoutParams layoutParams = image.getLayoutParams();
+                    layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+                    layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
+                    image.setLayoutParams(layoutParams);
+                }
+
                 zoom.setVisibility(View.VISIBLE);
                 zoom.setMaxZoom(3);
                 imageFrame.setOnTouchListener(Views.createOnSingleTapConfirmedListener(getActivity(), new Runnable() {
@@ -164,9 +179,12 @@ public class StandsAreaFragment extends DialogFragment {
 
     private void zoomToStand(Stand stand) {
         if (zoom != null) {
+            // If the image is smaller than the frame (due to the max height), there will be an offset
+            float offsetX = imageFrame.getX();
+            float offsetY = imageFrame.getY();
             zoom.smoothZoomTo(zoom.getMaxZoom(),
-                    stand.getImageX() / area.getImageWidth() * image.getWidth(),
-                    stand.getImageY() / area.getImageHeight() * image.getHeight());
+                    offsetX + (stand.getImageX() / area.getImageWidth() * image.getWidth()),
+                    offsetY + (stand.getImageY() / area.getImageHeight() * image.getHeight()));
         }
 
         // Highlight
@@ -274,12 +292,7 @@ public class StandsAreaFragment extends DialogFragment {
             view.setOnTouchListener(Views.createOnSingleTapConfirmedListener(getActivity(), this::dismiss));
 
             // Show in landscape mode if the image is wide (or portrait if it's long)
-            if (area.getImageWidth() > area.getImageHeight() * 1.2) {
-                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-            } else if (area.getImageHeight() > area.getImageWidth() * 1.2) {
-                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-            }
-
+            getActivity().setRequestedOrientation(area.getImageOrientation());
             return dialog;
         }
 
