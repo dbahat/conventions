@@ -231,8 +231,8 @@
         <item name="mapSearchBarBackground">@drawable/animatsuri2025_search_bar_background</item>
         <item name="mapSearchHint">@color/animatsuri2025_yellow50</item>
         <item name="mapSearchBarHorizontalMargins">5dp</item>
-        <item name="standIconColor">@color/animatsuri2025_orange500</item>
-        <item name="standsTypeTitleColor">@color/animatsuri2025_orange500</item>
+        <item name="standIconColor">@color/animatsuri2025_magenta400</item>
+        <item name="standsTypeTitleColor">@color/animatsuri2025_magenta400</item>
 
         <!-- Safe Space Screen -->
         <item name="safeSpaceLogo">@drawable/animatsuri2025_safe_space</item>
