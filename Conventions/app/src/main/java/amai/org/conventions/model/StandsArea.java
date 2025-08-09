@@ -1,5 +1,7 @@
 package amai.org.conventions.model;
 
+import android.content.pm.ActivityInfo;
+
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
@@ -95,6 +97,15 @@ public class StandsArea extends Place implements Serializable {
 
 	public void setImageWidth(float imageWidth) {
 		this.imageWidth = imageWidth;
+	}
+
+	public int getImageOrientation() {
+		if (this.getImageWidth() > this.getImageHeight() * 1.2) {
+			return ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
+		} else if (this.getImageHeight() > this.getImageWidth() * 1.2) {
+			return ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+		}
+		return ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED; // Keep the default/current orientation
 	}
 
 	public StandsArea withImageWidth(float imageWidth) {
