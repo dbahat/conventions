@@ -113,7 +113,7 @@ public class Animatsuri2025Convention extends AmaiConvention {
 
 	@Override
 	protected ConventionStorage initStorage() {
-		return new ConventionStorage(this, R.raw.animatsuri2025_convention_events, 0);
+		return new ConventionStorage(this, R.raw.animatsuri2025_convention_events, 1);
 	}
 
 	@Override
@@ -712,7 +712,7 @@ public class Animatsuri2025Convention extends AmaiConvention {
 			new Stand().withName("גלנה - אנימה, מנגה ומוצרי יד שניה").withType(StandType.MERCH).withLocationIds("h4", "h5"),
 			new Stand().withName("iDollsCollection").withType(StandType.JEWELRY).withLocationIds("h6", "h7"),
 			new Stand().withName("קי\"ק").withType(StandType.MANGA).withLocationIds("h8", "h9"),
-		new Stand().withName("ישראקומיקס").withType(StandType.MERCH).withLocationIds("i15", "i16"),
+			new Stand().withName("ישראקומיקס").withType(StandType.MERCH).withLocationIds("i15", "i16"),
 			new Stand().withName("מנגה ישראל").withType(StandType.MANGA).withLocationIds("i17", "i18", "i19", "i20"),
 			new Stand().withName("Jill creation").withType(StandType.OTHER).withLocationIds("i2"),
 			new Stand().withName("Raspberry").withType(StandType.JEWELRY).withLocationIds("i3", "i4"),
