@@ -84,7 +84,7 @@ public class Animatsuri2025Convention extends AmaiConvention {
 		ARTIST(R.string.artist_stand, R.drawable.ic_color_lens),
 		JEWELRY(R.string.jewelry_stand, R.drawable.diamond_24px),
 		GENERAL(R.string.general_stand, R.drawable.ic_shopping_basket),
-		OTHER(R.string.other_stand, R.drawable.icon_harucon);
+		OTHER(R.string.other_stand, R.drawable.icon_animatsuri);
 
 		private final int title;
 		private final int image;
