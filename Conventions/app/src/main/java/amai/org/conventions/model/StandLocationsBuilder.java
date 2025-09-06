@@ -5,7 +5,7 @@ import android.graphics.BlendMode;
 import java.util.LinkedList;
 import java.util.List;
 
-import amai.org.conventions.R;
+import sff.org.conventions.R;
 
 public class StandLocationsBuilder {
 	private List<StandLocation> locations = new LinkedList<>();
