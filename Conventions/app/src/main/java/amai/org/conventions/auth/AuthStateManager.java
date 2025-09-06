@@ -45,7 +45,7 @@ public class AuthStateManager {
     private static final String TAG = "AuthStateManager";
 
     private static final String STORE_NAME = "AuthState";
-    private static final String KEY_STATE = "state";
+    private static final String KEY_STATE = "auth_state";
 
     private final SharedPreferences mPrefs;
     private final ReentrantLock mPrefsLock;

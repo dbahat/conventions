@@ -556,10 +556,10 @@ public class Olamot2025Convention extends SffConvention {
 				context,
 				"con_apps_v2",
 				null, // If the client is not "public" this must contain the client secret
-				"https://sso.sf-f.org.il/auth/realms/sf-f/protocol/openid-connect/auth",
-				"https://sso.sf-f.org.il/auth/realms/sf-f/protocol/openid-connect/token",
-				"https://sso.sf-f.org.il/auth/realms/sf-f/protocol/openid-connect/logout",
-				"https://sso.sf-f.org.il/auth/realms/sf-f/protocol/openid-connect/userinfo"
+				"https://sso.sf-f.org.il/realms/sf-f/protocol/openid-connect/auth",
+				"https://sso.sf-f.org.il/realms/sf-f/protocol/openid-connect/token",
+				"https://sso.sf-f.org.il/realms/sf-f/protocol/openid-connect/logout",
+				"https://sso.sf-f.org.il/realms/sf-f/protocol/openid-connect/userinfo"
 		);
 	}
 }
