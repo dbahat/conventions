@@ -63,6 +63,7 @@
         <item name="navigationPopupNotSelectedColor">@color/olamot2025_purple900</item>
         <item name="navigationPopupSelectedColor">@color/olamot2025_purple900</item>
         <item name="navigationPopupSelectedBackground">@color/olamot2025_purple200</item>
+        <item name="navigationPopupTopSelectedBackground">@color/olamot2025_purple200</item>
         <item name="navigationPopupSeparatorColor">@color/olamot2025_purple200</item>
         <item name="navigationItemsShouldDisplayIcon">false</item>
         <!-- About Screen -->
