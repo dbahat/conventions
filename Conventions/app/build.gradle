@@ -25,8 +25,17 @@ android {
         unitTests.returnDefaultValues = true
     }
     compileOptions {
+        // This is the version supported on the defined minSdkVersion
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'
+    }
+    java {
+        toolchain {
+            // This is required to ensure compiled code is compatible with the defined compatibility version.
+            // This Java version is above the minimal version required for the defined targetSdk version
+            // but still supports this compatibility version.
+            languageVersion = JavaLanguageVersion.of(17)
+        }
     }
     namespace 'sff.org.conventions'
     buildFeatures {
