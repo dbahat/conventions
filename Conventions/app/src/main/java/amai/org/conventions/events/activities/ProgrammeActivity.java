@@ -2,7 +2,6 @@ package amai.org.conventions.events.activities;
 
 import android.annotation.SuppressLint;
 import android.graphics.PorterDuff;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
@@ -21,7 +20,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.Calendar;
@@ -34,7 +32,6 @@ import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.networking.ModelRefresher;
-import amai.org.conventions.utils.Dates;
 
 public class ProgrammeActivity extends NavigationActivity implements ProgrammeDayFragment.EventsListener {
 
@@ -51,6 +48,20 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		// This must be done before setContentInContentContainer so the FAB has the correct margin
+		if (ThemeAttributes.getBoolean(this, R.attr.fabOnProgrammeTop)) {
+			FloatingActionButton actionButton = getActionButton();
+			if (actionButton.getLayoutParams() instanceof CoordinatorLayout.LayoutParams) {
+				CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) actionButton.getLayoutParams();
+				int fabAlignment = ThemeAttributes.getInteger(this, R.attr.fabOnProgrammeTopAlignment);
+				layoutParams.anchorGravity = Gravity.TOP | fabAlignment;
+				layoutParams.topMargin = ThemeAttributes.getDimensionSize(this, android.R.attr.actionBarSize) +
+					getResources().getDimensionPixelOffset(R.dimen.fab_margin_anchored_to_top);
+				actionButton.setLayoutParams(actionButton.getLayoutParams());
+			}
+		}
+
 		setContentInContentContainer(R.layout.activity_programme);
 		setToolbarTitle(getResources().getString(R.string.programme_title));
 		removeContentContainerForeground();
@@ -61,17 +72,6 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 				navigateToActivity(ProgrammeSearchActivity.class, false, null);
 			}
 		});
-		if (ThemeAttributes.getBoolean(this, R.attr.fabOnProgrammeTop)) {
-			FloatingActionButton actionButton = getActionButton();
-			if (actionButton.getLayoutParams() instanceof CoordinatorLayout.LayoutParams) {
-				CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) actionButton.getLayoutParams();
-				int fabAlignment = ThemeAttributes.getInteger(this, R.attr.fabOnProgrammeTopAlignment);
-				layoutParams.anchorGravity = Gravity.TOP | fabAlignment;
-				layoutParams.topMargin = ThemeAttributes.getDimensionSize(this, android.R.attr.actionBarSize) +
-						getResources().getDimensionPixelOffset(R.dimen.fab_margin_anchored_to_top);
-				actionButton.setLayoutParams(actionButton.getLayoutParams());
-			}
-		}
 
 		int dateIndexToSelect = savedInstanceState == null ? SELECT_CURRENT_DATE : savedInstanceState.getInt(STATE_SELECTED_DATE_INDEX, SELECT_CURRENT_DATE);
 		setupDays(dateIndexToSelect);

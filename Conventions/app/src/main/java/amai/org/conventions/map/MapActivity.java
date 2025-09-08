@@ -1,5 +1,6 @@
 package amai.org.conventions.map;
 
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -81,6 +82,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		setContentInContentContainer(R.layout.activity_map, false, false);
 		setToolbarBackground(ThemeAttributes.getDrawable(this, R.attr.mapToolbarColor));
 		setBackground(ThemeAttributes.getDrawable(this, R.attr.mapBackground));
+
 		if (map.getLocations().size() > 0) {
 			setupActionButton(ThemeAttributes.getDrawable(this, R.attr.actionButtonIcon), new View.OnClickListener() {
 				@Override
@@ -113,6 +115,9 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		setFloorInViewPager(floorNumber, initialLocations);
 
 		initializeSearch(savedInstanceState);
+
+		// Handle edge to edge
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, searchResults);
 	}
 
 	@Override
@@ -634,6 +639,16 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 			if (top > parentHeight - actionButtonHeight) {
 				top = parentHeight - actionButtonHeight;
 			}
+			// In case there are inset margins, both the FAB and the location details have the same
+			// margin/padding from the bottom, so we need to remove it from the result
+			if (top > 0 && actionButton.getTag(R.id.inset_margins) instanceof Rect) {
+				top -= ((Rect) actionButton.getTag(R.id.inset_margins)).bottom;
+				// The location details go below their padding, we don't want the FAB to follow too low
+				if (top < 0) {
+					top = 0;
+				}
+			}
+
 			actionButton.setTranslationY(-top);
 		}
 	}

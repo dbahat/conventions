@@ -24,6 +24,7 @@ import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.notifications.PlayServicesInstallation;
 import amai.org.conventions.utils.URLUtils;
+import amai.org.conventions.utils.Views;
 import fi.iki.kuitsi.listtest.ListTagHandler;
 
 public class ArrivalMethodsActivity extends NavigationActivity implements OnMapReadyCallback {
@@ -49,6 +50,9 @@ public class ArrivalMethodsActivity extends NavigationActivity implements OnMapR
 		TextView arrivalMethodsDescription = (TextView) findViewById(R.id.arrival_methods_description);
 		arrivalMethodsDescription.setText(Html.fromHtml(getString(R.string.arrival_method_description), null, new ListTagHandler()));
 		arrivalMethodsDescription.setMovementMethod(LinkMovementMethod.getInstance());
+
+		// Handle edge to edge
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, findViewById(R.id.arrival_methods_scroll));
 	}
 
 	@Override

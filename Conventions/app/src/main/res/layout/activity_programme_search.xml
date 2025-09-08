@@ -88,6 +88,7 @@
         <se.emilsjolander.stickylistheaders.StickyListHeadersListView
             android:id="@+id/searchEventsList"
             app:isDrawingListUnderStickyHeader="false"
+            android:clipToPadding="false"
             android:divider="?eventListDivider"
             android:dividerHeight="?eventListDividerHeight"
             android:layout_width="match_parent"

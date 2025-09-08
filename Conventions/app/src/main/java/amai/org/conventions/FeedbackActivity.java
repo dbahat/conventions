@@ -34,6 +34,7 @@ import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.BundleBuilder;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Log;
+import amai.org.conventions.utils.Views;
 
 
 public class FeedbackActivity extends NavigationActivity {
@@ -67,6 +68,9 @@ public class FeedbackActivity extends NavigationActivity {
 		setContentInContentContainer(R.layout.activity_feedback);
 		setToolbarTitle(getString(R.string.feedback));
 		setBackground(ThemeAttributes.getDrawable(this, R.attr.feedbackActivityBackground));
+
+		// Handle edge to edge
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, findViewById(R.id.feedback_scroll));
 
 		eventsWithoutFeedbackLayout = (ViewGroup) findViewById(R.id.events_without_feedback);
 		eventsWithoutFeedbackList = (ListView) findViewById(R.id.events_without_feedback_list);

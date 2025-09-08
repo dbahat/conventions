@@ -1,6 +1,8 @@
 package amai.org.conventions.events.activities;
 
 import android.os.Bundle;
+
+import amai.org.conventions.utils.Views;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -48,6 +50,9 @@ public class HallDayFragment extends Fragment {
 
 		RecyclerView hallEventsList = (RecyclerView) view.findViewById(R.id.hallEventsList);
 		View hallNoEvents = view.findViewById(R.id.hall_no_events_found);
+
+		// Handle edge to edge
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, hallEventsList);
 
 		List<ConventionEvent> events = Convention.getInstance().findEventsByHall(hallName);
 		events = CollectionUtils.filter(events, new CollectionUtils.Predicate<ConventionEvent>() {

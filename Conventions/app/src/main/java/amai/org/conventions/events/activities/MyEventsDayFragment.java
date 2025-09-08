@@ -19,6 +19,7 @@ import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.Views;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -142,6 +143,9 @@ public class MyEventsDayFragment extends Fragment {
 				DividerItemDecoration.VERTICAL);
 		dividerItemDecoration.setDrawable(ThemeAttributes.getDrawable(getActivity(), R.attr.eventListDivider));
 		eventsList.addItemDecoration(dividerItemDecoration);
+
+		// Handle edge to edge
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, eventsList);
 
 		return view;
 	}

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
+import amai.org.conventions.utils.Views;
 import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -67,19 +68,11 @@ public class ConflictingEventsViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	private int calculateEventViewHeight() {
-		Point screenSize = getScreenSize();
+		Point screenSize = Views.getScreenSize(context);
 		EventView eventView = new EventView(context);
 		eventView.setEvent(null);
 		eventView.measure(screenSize.x, screenSize.y);
 		return eventView.getMeasuredHeight();
-	}
-
-	private Point getScreenSize() {
-		WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-		Display display = wm.getDefaultDisplay();
-		Point size = new Point();
-		display.getSize(size);
-		return size;
 	}
 
 	public List<ConventionEvent> getModel() {

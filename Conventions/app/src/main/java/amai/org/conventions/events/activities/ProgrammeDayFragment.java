@@ -36,6 +36,7 @@ import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.Views;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
 public class ProgrammeDayFragment extends Fragment implements StickyListHeadersListView.OnHeaderClickListener, SwipeRefreshLayout.OnRefreshListener {
@@ -109,6 +110,9 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 		});
 
 		listView.setOnHeaderClickListener(this);
+
+		// Handle edge to edge
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, listView);
 
 		if (savedInstanceState == null || !savedInstanceState.getBoolean(STATE_PREVENT_SCROLLING, false)) {
 			final int position = findHourPosition(Dates.now());

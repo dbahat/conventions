@@ -66,6 +66,9 @@ public class HomeActivity extends NavigationActivity {
 		setContentInContentContainer(R.layout.activity_home, false, false);
 		setHomeActivityBackground();
 
+		// Handle edge to edge
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, findViewById(R.id.home_container));
+
 		// Creating the page layout during onResume (and not onCreate) since the layout is time-driven,
 		// and we want it refreshed in case the activity was paused and got resumed.
 		if (Dates.now().before(Convention.getInstance().getStartDate().getTime())) {
