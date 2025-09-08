@@ -134,6 +134,15 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		configureMapFloorAndRestoreState(savedInstanceState);
 		initializeShowSheltersButton();
 
+		// Handle edge to edge
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE,
+			mapZoomView,
+			downArrow
+		);
+		if (downArrow.getVisibility() != View.VISIBLE) {
+			Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, locationDetails);
+		}
+
 		return view;
 	}
 
@@ -810,7 +819,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 	@NonNull
 	private ObjectAnimator animateLocationDetailsTranslationY(float fromFraction, float toFraction, TimeInterpolator interpolator) {
 		// Using ObjectAnimator and not xml animation so we can listen to the animation update and notify the listener
-		// (which updates the location of the floating action button(
+		// (which updates the location of the floating action button)
 		final int detailsHeight = locationDetails.getMeasuredHeight();
 		ObjectAnimator animator = ObjectAnimator.ofFloat(locationDetails, "translationY", fromFraction * detailsHeight, toFraction * detailsHeight);
 		animator.setInterpolator(interpolator);

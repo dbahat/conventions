@@ -16,6 +16,9 @@ public class DiscountsActivity extends NavigationActivity {
 		setContentInContentContainer(layout);
 		setToolbarTitle(getString(R.string.discounts));
 
+		// Handle edge to edge
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, findViewById(R.id.discounts_scroll));
+
 		handleLinks();
 	}
 

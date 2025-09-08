@@ -55,6 +55,7 @@ import amai.org.conventions.tasks.TasksExecutor;
 import amai.org.conventions.updates.UpdatesActivity;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Settings;
+import amai.org.conventions.utils.Views;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.RequiresApi;
@@ -65,6 +66,11 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.insets.ColorProtection;
+import androidx.core.view.insets.GradientProtection;
+import androidx.core.view.insets.ProtectionLayout;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 import sff.org.conventions.R;
@@ -122,6 +128,10 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_navigation);
 
+		navigationDrawer = (DrawerLayout) findViewById(R.id.navigation_drawer);
+		navigationToolbar = (Toolbar) findViewById(R.id.navigation_toolbar);
+		actionButton = (FloatingActionButton) findViewById(R.id.action_button);
+
 		exitOnBack = getIntent().getBooleanExtra(EXTRA_EXIT_ON_BACK, false);
 		showHomeOnBack = getIntent().getBooleanExtra(EXTRA_SHOW_HOME_ON_BACK, false);
 
@@ -136,9 +146,8 @@ public abstract class NavigationActivity extends AppCompatActivity {
 			}
 		}
 
-		navigationToolbar = (Toolbar) findViewById(R.id.navigation_toolbar);
 		navigationToolbarTitle = (TextView) findViewById(R.id.navigation_toolbar_title);
-		navigationDrawer = (DrawerLayout) findViewById(R.id.navigation_drawer);
+
 		setupActionBar(navigationToolbar);
 		navigationToolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
@@ -159,8 +168,6 @@ public abstract class NavigationActivity extends AppCompatActivity {
 				setNavigationDrawerHeight();
 			}
 		});
-
-		actionButton = (FloatingActionButton) findViewById(R.id.action_button);
 
 		// We will display the notification once during onResume to let child activities override it safely
 		// (after their onCreate is called)
@@ -206,6 +213,29 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		// Launchers are automatically unregistered, so we should avoid calling them after this
 		requestNotificationsPermissionLauncher = null;
 		requestExactPermissionsIntentLauncher = null;
+	}
+
+	private void handleEdgeToEdge() {
+		WindowCompat.enableEdgeToEdge(getWindow());
+
+		Views.registerApplyInsets(Views.InsetType.PADDING, Views.InsetType.NONE, Views.InsetType.PADDING, navigationToolbar);
+
+		Views.registerApplyInsets(Views.InsetType.PADDING, Views.InsetType.NONE, Views.InsetType.NONE, findViewById(R.id.navigation_drawer_wrapper));
+
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.MARGIN, findViewById(R.id.navigation_drawer_content));
+
+		// The bottom padding is handled in each activity/fragment for a better user experience
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, findViewById(R.id.navigation_content_view_container));
+
+		Views.registerApplyInsets(Views.InsetType.MARGIN, Views.InsetType.MARGIN, Views.InsetType.MARGIN, actionButton);
+
+		ProtectionLayout edgesProtection = findViewById(R.id.edge_protection);
+		edgesProtection.setProtections(Arrays.asList(
+			new GradientProtection(WindowInsetsCompat.Side.TOP, getResources().getColor(R.color.transparent_black_50)),
+			new ColorProtection(WindowInsetsCompat.Side.BOTTOM, getResources().getColor(R.color.transparent_black_50)),
+			new ColorProtection(WindowInsetsCompat.Side.LEFT, getResources().getColor(R.color.transparent_black_50)),
+			new ColorProtection(WindowInsetsCompat.Side.RIGHT, getResources().getColor(R.color.transparent_black_50))
+		));
 	}
 
 	private PushNotification getNotificationFromIntent(Intent intent) {
@@ -342,6 +372,8 @@ public abstract class NavigationActivity extends AppCompatActivity {
 //		}
 
 		setBackground(ThemeAttributes.getDrawable(this, R.attr.activitiesBackground));
+
+		handleEdgeToEdge();
 
 		return contentContainer;
 	}

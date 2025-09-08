@@ -5,7 +5,10 @@
     <item name="hidden_event_view2" type="id"/>
 
     <item name="fab_translation" type="id"/>
-    <item name="fab_fixed_translation" type="id"/>
+
+    <item name="inset_listener_applied" type="id"/>
+    <item name="inset_margins" type="id"/>
+    <item name="inset_padding" type="id"/>
 
     <item name="mapSearchTabLocation" type="id"/>
     <item name="mapSearchTabStands" type="id"/>

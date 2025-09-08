@@ -7,6 +7,7 @@ import android.graphics.Point;
 import amai.org.conventions.customviews.TextViewWithState;
 import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.StateList;
+import amai.org.conventions.utils.Views;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.drawable.Drawable;
@@ -116,20 +117,12 @@ public class UpdateViewHolder extends RecyclerView.ViewHolder {
 	private void expandViewIfNumberOfTextLinesIsSmall(UpdateViewModel updateViewModel) {
 		// In case the number of lines in the update is too small, show it as expanded (otherwise the user will get UX where clicking the expand button
 		// results in the view getting smaller).
-		Point screenSize = getScreenSize();
+		Point screenSize = Views.getScreenSize(updateContainer.getContext());
 		// For this check we need to measure the textView size. Not using accurate measure call here due to time constraints, and since the approximate measure
 		// we do here is good enough.
 		updateTextView.measure(screenSize.x, screenSize.y);
 		if (updateTextView.getLineCount() <= MAX_LINES_FOR_COLLAPSED_UPDATE) {
 			updateViewModel.setCollapsed(false);
 		}
-	}
-
-	private Point getScreenSize() {
-		WindowManager wm = (WindowManager) updateContainer.getContext().getSystemService(Context.WINDOW_SERVICE);
-		Display display = wm.getDefaultDisplay();
-		Point size = new Point();
-		display.getSize(size);
-		return size;
 	}
 }

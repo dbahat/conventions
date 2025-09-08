@@ -33,6 +33,7 @@ import amai.org.conventions.model.EventType;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.Views;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.widget.ListViewCompat;
@@ -120,6 +121,9 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 		});
 
 		listView.setOnHeaderClickListener(this);
+
+		// Handle edge to edge
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, listView);
 
 		if (savedInstanceState == null || !savedInstanceState.getBoolean(STATE_PREVENT_SCROLLING, false)) {
 			final int position = findHourPosition(Dates.now());

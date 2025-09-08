@@ -19,6 +19,7 @@ import amai.org.conventions.networking.UpdatesRefresher;
 import amai.org.conventions.notifications.PushNotification;
 import amai.org.conventions.notifications.PushNotificationDialogPresenter;
 import amai.org.conventions.utils.Log;
+import amai.org.conventions.utils.Views;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,6 +42,9 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 		setToolbarTitle(getResources().getString(R.string.updates));
 		setContentInContentContainer(R.layout.activity_updates, false);
 		resolveUiElements();
+
+		// Handle edge to edge
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, recyclerView);
 
 		// Initialize the recycler view.
 		updatesAdapter = new UpdatesAdapter();

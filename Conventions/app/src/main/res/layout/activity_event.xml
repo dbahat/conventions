@@ -30,6 +30,7 @@
 
 	<uk.co.chrisjenx.paralloid.views.ParallaxScrollView
 		android:id="@+id/parallax_scroll"
+		android:clipToPadding="false"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent">
 

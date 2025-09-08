@@ -11,6 +11,7 @@
         app:isDrawingListUnderStickyHeader="false"
         android:divider="?eventListDivider"
         android:dividerHeight="?eventListDividerHeight"
+        android:clipToPadding="false"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

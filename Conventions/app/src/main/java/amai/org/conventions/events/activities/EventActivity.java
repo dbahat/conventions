@@ -127,6 +127,9 @@ public class EventActivity extends NavigationActivity {
 		final View detailBoxes = findViewById(R.id.event_detail_boxes);
 		final ParallaxScrollView scrollView = (ParallaxScrollView) findViewById(R.id.parallax_scroll);
 
+		// Handle edge to edge
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, scrollView);
+
 		String eventId = getIntent().getStringExtra(EXTRA_EVENT_ID);
 		conventionEvent = Convention.getInstance().findEventById(eventId);
 		if (conventionEvent == null) {
@@ -992,9 +995,7 @@ public class EventActivity extends NavigationActivity {
 		int lastImageHeight = -1;
 		int i = 0;
 		// Screen size for calculating last image height
-		Display display = getWindowManager().getDefaultDisplay();
-		Point size = new Point();
-		display.getSize(size);
+		Point size = Views.getScreenSize(this);
 		int widthSpec = View.MeasureSpec.makeMeasureSpec(size.x, View.MeasureSpec.EXACTLY);
 		for (Integer imageResource : images) {
 			boolean last = (i == images.size() - 1);

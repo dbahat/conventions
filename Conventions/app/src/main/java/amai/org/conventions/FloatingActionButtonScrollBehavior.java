@@ -1,6 +1,7 @@
 package amai.org.conventions;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
@@ -21,11 +22,10 @@ import sff.org.conventions.R;
  * fix the CoordinatorLayout behavior which flickers the action button.
  */
 public class FloatingActionButtonScrollBehavior extends FloatingActionButton.Behavior {
-	private int toolbarHeight;
+	private final Rect visibilityRect = new Rect();
 
 	public FloatingActionButtonScrollBehavior(Context context, AttributeSet attrs) {
 		super();
-		this.toolbarHeight = ThemeAttributes.getDimensionSize(context, android.R.attr.actionBarSize);
 	}
 
 	@Override
@@ -58,43 +58,54 @@ public class FloatingActionButtonScrollBehavior extends FloatingActionButton.Beh
 			int distanceToScroll = fab.getHeight() + fabBottomMargin;
 
 			// Check how much of the app bar layout is off-screen
-			float ratio = dependency.getY() / (float) toolbarHeight;
+			float ratio = dependency.getY() / (float) dependency.getHeight();
 			fab.setTranslationY(-distanceToScroll * ratio);
 
 			fab.setTag(R.id.fab_translation, fab.getTranslationY());
 			return true;
 		} else if (dependency instanceof Snackbar.SnackbarLayout) {
-			// The CoordinatorLayout takes care of changing the action button location according to the snackbar,
-			// but there is a bug where for a single frame the action button is shown above the snackbar while the
-			// snackbar isn't visible (when the animation starts).
-			// Fix this by moving the action button down by the snackbar height, and returning it to its regular location after.
+			// When the animation begins, the snackbar isn't visible in the first frame and its translationY is 0,
+			// so we shouldn't move the fab (it will flicker)
+			if (dependency.getVisibility() != View.VISIBLE) {
+				return false;
+			}
+
+			// Handling the snackbar manually because in edge to edge mode, the fab might have extra margins due to bottom insets,
+			// which causes a big margin between it and the snackbar when managed by the CoordinatorLayout.
+			// We set dodgeInsetEdges not to include bottom for this reason.
+
+			// Don't move the fab unless it's fully visible (otherwise the snackbar appears to drag it from the bottom)
+			boolean isVisible = fab.getGlobalVisibleRect(visibilityRect);
+			if (!isVisible || visibilityRect.height() == 0 || visibilityRect.height() < fab.getMeasuredHeight()) {
+				return false;
+			}
+
+			// Get fab bottom margin (without insets). This is the distance it should have from the snackbar.
+			CoordinatorLayout.LayoutParams lp = (CoordinatorLayout.LayoutParams) fab.getLayoutParams();
+			int fabBottomMargin = lp.bottomMargin;
+			if (fab.getTag(R.id.inset_margins) instanceof Rect) {
+				fabBottomMargin -= ((Rect) fab.getTag(R.id.inset_margins)).bottom;
+			}
+
+			// Get the current distance between the fab bottom and snackbar top.
+			// fab bottom is calculated according to its position without considering the snackbar movements, only possible app bar changes.
 			float lastTranslationY = 0;
 			if (fab.getTag(R.id.fab_translation) instanceof Float) {
 				lastTranslationY = (float) fab.getTag(R.id.fab_translation);
 			}
+			float fabBottom = fab.getTop() + fab.getMeasuredHeight() + lastTranslationY;
+			float snackbarTop = dependency.getY();
 
-			boolean fixedTranslation = false;
-			if (fab.getTag(R.id.fab_fixed_translation) instanceof Boolean) {
-				fixedTranslation = (boolean) fab.getTag(R.id.fab_fixed_translation);
+			// If the current distance is less than the margin, set translation to the difference
+			float moveBy = 0;
+			if (snackbarTop - fabBottom < fabBottomMargin) {
+				moveBy = fabBottomMargin - (snackbarTop - fabBottom);
 			}
 
-			if (!fixedTranslation) {
-				fab.setTranslationY(dependency.getHeight() + lastTranslationY);
-				fab.setTag(R.id.fab_fixed_translation, true);
-			} else {
-				fab.setTranslationY(lastTranslationY);
-			}
+			fab.setTranslationY(lastTranslationY - moveBy);
 			return true;
 		}
 
 		return super.onDependentViewChanged(parent, fab, dependency);
-	}
-
-	@Override
-	public void onDependentViewRemoved(@NonNull CoordinatorLayout parent, @NonNull FloatingActionButton fab, @NonNull View dependency) {
-		if (dependency instanceof Snackbar.SnackbarLayout) {
-			fab.setTag(R.id.fab_fixed_translation, false);
-		}
-		super.onDependentViewRemoved(parent, fab, dependency);
 	}
 }

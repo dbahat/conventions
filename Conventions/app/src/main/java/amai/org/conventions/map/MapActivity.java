@@ -1,5 +1,6 @@
 package amai.org.conventions.map;
 
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,12 +17,9 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
@@ -30,9 +28,6 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
-import amai.org.conventions.model.Place;
-import amai.org.conventions.model.Shelter;
-import sff.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.ConditionalSwipeVerticalViewPager;
 import amai.org.conventions.model.ConventionMap;
@@ -49,6 +44,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+import sff.org.conventions.R;
 
 public class MapActivity extends NavigationActivity implements MapFloorFragment.OnMapFloorEventListener {
 	public static final String EXTRA_FLOOR_NUMBER = "ExtraFloorNumber";
@@ -86,6 +82,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		setContentInContentContainer(R.layout.activity_map, false, false);
 		setToolbarBackground(ThemeAttributes.getDrawable(this, R.attr.mapToolbarColor));
 		setBackground(ThemeAttributes.getDrawable(this, R.attr.mapBackground));
+
 		if (map.getLocations().size() > 0) {
 			setupActionButton(ThemeAttributes.getDrawable(this, R.attr.actionButtonIcon), new View.OnClickListener() {
 				@Override
@@ -118,6 +115,9 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		setFloorInViewPager(floorNumber, initialLocations);
 
 		initializeSearch(savedInstanceState);
+
+		// Handle edge to edge
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, searchResults);
 	}
 
 	@Override
@@ -639,6 +639,16 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 			if (top > parentHeight - actionButtonHeight) {
 				top = parentHeight - actionButtonHeight;
 			}
+			// In case there are inset margins, both the FAB and the location details have the same
+			// margin/padding from the bottom, so we need to remove it from the result
+			if (top > 0 && actionButton.getTag(R.id.inset_margins) instanceof Rect) {
+				top -= ((Rect) actionButton.getTag(R.id.inset_margins)).bottom;
+				// The location details go below their padding, we don't want the FAB to follow too low
+				if (top < 0) {
+					top = 0;
+				}
+			}
+
 			actionButton.setTranslationY(-top);
 		}
 	}

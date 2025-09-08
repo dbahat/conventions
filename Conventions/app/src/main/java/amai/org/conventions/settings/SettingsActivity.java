@@ -3,6 +3,9 @@ package amai.org.conventions.settings;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -20,6 +23,8 @@ import amai.org.conventions.tasks.TasksExecutor;
 import amai.org.conventions.utils.BundleBuilder;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
+import amai.org.conventions.utils.Views;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -90,6 +95,16 @@ public class SettingsActivity extends NavigationActivity {
 			super.onAttach(context);
 			SharedPreferences sharedPreferences = ConventionsApplication.settings.getSharedPreferences();
 			sharedPreferences.registerOnSharedPreferenceChangeListener(this);
+		}
+
+		@NonNull
+		@Override
+		public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+			View result = super.onCreateView(inflater, container, savedInstanceState);
+			// Handle edge to edge
+			// Must be called after the list view is created
+			Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, getListView());
+			return result;
 		}
 
 		@Override

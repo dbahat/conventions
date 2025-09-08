@@ -1,97 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout
+<androidx.core.view.insets.ProtectionLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/navigation_drawer"
+    android:id="@+id/edge_protection"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="amai.org.conventions.navigation.NavigationActivity">
-
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/toolbarAndContentContainer"
+    android:layout_height="match_parent">
+    <androidx.drawerlayout.widget.DrawerLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/navigation_drawer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?activitiesBackground">
+        tools:context="amai.org.conventions.navigation.NavigationActivity">
 
-        <!-- Removing elevation so we can show the tab layout in the same elevation and still be backwards compatible.
-             Instead of elevation we add a shadow in the content container foreground. -->
-        <com.google.android.material.appbar.AppBarLayout
-            app:layout_behavior="amai.org.conventions.AppBarLayoutSnapBehavior"
-            android:background="@null"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="0dp"
-            app:elevation="0dp"
-            tools:ignore="UnusedAttribute">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/navigation_toolbar"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:titleTextAppearance="@style/ToolbarTitle"
-                android:titleMargin="0dp"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?toolbarBackground"
-                app:layout_scrollFlags="scroll|enterAlways"
-                app:contentInsetStart="0dp">
-
-                <amai.org.conventions.customviews.CenterInToolbarFrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="16dp"> <!-- by default Android seems to leave 16dp margin from the nav bar to the toolbar layout.
-                    This margin is not included in the size of the nav bar so we can't find it when calculating the size of hte nav bar. -->
-
-                    <!-- Using a custom textView for the toolbar title for better customization (allow centering the title, allow showing an image
-                     instead of text, allow automatic resize) -->
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/navigation_toolbar_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:textAlignment="center"
-                        tools:text="title"
-                        android:textColor="?toolbarTitleColor"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        app:autoSizeTextType="uniform"
-                        app:autoSizeMinTextSize="12sp"
-                        app:autoSizeMaxTextSize="20sp"
-                        app:autoSizeStepGranularity="2sp"
-                        style="@style/ToolbarTitle"/>
-
-                </amai.org.conventions.customviews.CenterInToolbarFrameLayout>
-            </androidx.appcompat.widget.Toolbar>
-
-        </com.google.android.material.appbar.AppBarLayout>
-
-        <!-- The content of each navigation page will be placed in runtime in this container -->
-        <amai.org.conventions.customviews.NestedScrollingFrameLayout
-            android:id="@+id/navigation_content_view_container"
-            android:paddingTop="?activitiesTopPadding"
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/toolbarAndContentContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+            android:background="?activitiesBackground">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/action_button"
-            app:layout_behavior="amai.org.conventions.FloatingActionButtonScrollBehavior"
-            android:visibility="gone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="?actionButtonIcon"
-            app:layout_anchor="@+id/navigation_content_view_container"
-            app:layout_anchorGravity="bottom|end"
-            android:layout_margin="@dimen/fab_margin"
-            app:elevation="4dp"
-            app:backgroundTint="?actionButtonColor"/>
+            <!-- Removing elevation so we can show the tab layout in the same elevation and still be backwards compatible.
+                 Instead of elevation we add a shadow in the content container foreground. -->
+            <com.google.android.material.appbar.AppBarLayout
+                app:layout_behavior="amai.org.conventions.AppBarLayoutSnapBehavior"
+                android:background="@null"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="0dp"
+                app:elevation="0dp"
+                tools:ignore="UnusedAttribute">
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/navigation_toolbar"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                    app:titleTextAppearance="@style/ToolbarTitle"
+                    android:titleMargin="0dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?toolbarBackground"
+                    app:layout_scrollFlags="scroll|enterAlways"
+                    app:contentInsetStart="0dp">
 
-    <include layout="@layout/layout_navigation_drawer"
-        android:layout_gravity="start"
-        android:layout_width="250dp"
-        android:layout_height="match_parent"/>
+                    <amai.org.conventions.customviews.CenterInToolbarFrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="16dp"> <!-- by default Android seems to leave 16dp margin from the nav bar to the toolbar layout.
+                        This margin is not included in the size of the nav bar so we can't find it when calculating the size of hte nav bar. -->
 
-</androidx.drawerlayout.widget.DrawerLayout>
+                        <!-- Using a custom textView for the toolbar title for better customization (allow centering the title, allow showing an image
+                         instead of text, allow automatic resize) -->
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/navigation_toolbar_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:textAlignment="center"
+                            tools:text="title"
+                            android:textColor="?toolbarTitleColor"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="12sp"
+                            app:autoSizeMaxTextSize="20sp"
+                            app:autoSizeStepGranularity="2sp"
+                            style="@style/ToolbarTitle"/>
+
+                    </amai.org.conventions.customviews.CenterInToolbarFrameLayout>
+                </androidx.appcompat.widget.Toolbar>
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <!-- The content of each navigation page will be placed in runtime in this container -->
+            <amai.org.conventions.customviews.NestedScrollingFrameLayout
+                android:id="@+id/navigation_content_view_container"
+                android:paddingTop="?activitiesTopPadding"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/action_button"
+                app:layout_behavior="amai.org.conventions.FloatingActionButtonScrollBehavior"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="?actionButtonIcon"
+                app:layout_anchor="@+id/navigation_content_view_container"
+                app:layout_anchorGravity="bottom|end"
+                android:layout_margin="@dimen/fab_margin"
+                app:elevation="4dp"
+                app:layout_dodgeInsetEdges="left|right"
+                app:backgroundTint="?actionButtonColor"/>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <include layout="@layout/layout_navigation_drawer"
+            android:id="@+id/navigation_drawer_wrapper"
+            android:layout_gravity="start"
+            android:layout_width="250dp"
+            android:layout_height="match_parent"/>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+</androidx.core.view.insets.ProtectionLayout>

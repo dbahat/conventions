@@ -145,7 +145,6 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 
 		searchFiltersList.setAdapter(new SectionedGridRecyclerViewAdapterWrapper<>(searchFiltersList, searchFiltersAdapter));
 
-
 		final Button editAllButton = (Button) findViewById(R.id.search_filter_drawer_container_edit_all_button);
 		editAllButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -171,6 +170,8 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 
 
 		Views.hideKeyboardOnClickOutsideEditText(this, rootView);
+		// Handle edge to edge
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, listView, searchFiltersList);
 	}
 
 	private boolean hasEventsWithTicketsInfo() {
