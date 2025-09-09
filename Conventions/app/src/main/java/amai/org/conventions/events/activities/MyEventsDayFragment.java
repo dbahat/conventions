@@ -151,7 +151,7 @@ public class MyEventsDayFragment extends Fragment {
 		eventsList.addItemDecoration(dividerItemDecoration);
 
 		// Handle edge to edge
-		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, eventsList);
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, Views.InsetType.PADDING, eventsList);
 
 		return view;
 	}

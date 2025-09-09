@@ -21,7 +21,7 @@ public class AboutActivity extends NavigationActivity {
 		setToolbarTitle(getString(R.string.about));
 
 		// Handle edge to edge
-		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, findViewById(R.id.about_scroll));
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, Views.InsetType.PADDING, findViewById(R.id.about_scroll));
 
 		TextView aboutView = (TextView) findViewById(R.id.about_content);
 		aboutView.setText(Html.fromHtml(getString(R.string.about_content), null, new ListTagHandler()));

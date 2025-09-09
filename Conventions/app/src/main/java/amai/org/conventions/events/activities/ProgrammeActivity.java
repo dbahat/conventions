@@ -31,6 +31,7 @@ import amai.org.conventions.model.EventType;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.networking.ModelRefresher;
+import amai.org.conventions.utils.Views;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -89,6 +90,9 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 
 	private void initializeSearchCategories() {
 		final SearchCategoriesLayout searchCategoriesLayout = (SearchCategoriesLayout) findViewById(R.id.programme_search_categories);
+
+		// Handle edge to edge
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, searchCategoriesLayout);
 
 		// Wait for the layout to finish before configuring the checkbox.
 		// Seems to be needed since otherwise after config change, the state of the UI components in the layout changes.

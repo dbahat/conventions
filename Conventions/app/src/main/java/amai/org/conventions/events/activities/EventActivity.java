@@ -128,7 +128,7 @@ public class EventActivity extends NavigationActivity {
 		final ParallaxScrollView scrollView = (ParallaxScrollView) findViewById(R.id.parallax_scroll);
 
 		// Handle edge to edge
-		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, scrollView);
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, Views.InsetType.PADDING, scrollView);
 
 		String eventId = getIntent().getStringExtra(EXTRA_EVENT_ID);
 		conventionEvent = Convention.getInstance().findEventById(eventId);

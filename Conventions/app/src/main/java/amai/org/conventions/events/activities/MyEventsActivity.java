@@ -61,6 +61,7 @@ import amai.org.conventions.utils.BundleBuilder;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
+import amai.org.conventions.utils.Views;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -136,6 +137,9 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 			setupActionButton(ThemeAttributes.getDrawable(this, R.attr.importEventsButtonIcon), view -> addEvents());
 			setFABMaxImageSize(ThemeAttributes.getDimensionSize(this, R.attr.myEventsFABMaxImageSize));
 		}
+
+		// Handle edge to edge
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, nextEventStart);
 	}
 
 	private void handleAuthResult(ActivityResult activityResult, boolean ignoreUserUpdateError, GetProgressMessage getProgressMessage, OnAuthRequestCompleted onSuccess) {

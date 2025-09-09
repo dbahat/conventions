@@ -71,7 +71,7 @@ public class FeedbackActivity extends NavigationActivity {
 		setBackground(ThemeAttributes.getDrawable(this, R.attr.feedbackActivityBackground));
 
 		// Handle edge to edge
-		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, findViewById(R.id.feedback_scroll));
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, Views.InsetType.PADDING, findViewById(R.id.feedback_scroll));
 
 		eventsWithoutFeedbackLayout = (ViewGroup) findViewById(R.id.events_without_feedback);
 		eventsWithoutFeedbackList = (ListView) findViewById(R.id.events_without_feedback_list);

@@ -62,6 +62,7 @@
             android:visibility="invisible"
             android:layerType="software"
             android:animationCache="false"
+            android:clipToPadding="false"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

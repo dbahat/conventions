@@ -44,7 +44,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 		resolveUiElements();
 
 		// Handle edge to edge
-		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, recyclerView);
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, Views.InsetType.PADDING, recyclerView);
 
 		// Initialize the recycler view.
 		updatesAdapter = new UpdatesAdapter();
