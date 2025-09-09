@@ -33,7 +33,6 @@ import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Views;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.widget.ListViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import sff.org.conventions.R;
@@ -105,7 +104,7 @@ public class SecondHandBuyFragment extends Fragment implements SwipeRefreshLayou
 		swipeRefreshLayout.setOnChildScrollUpCallback(new SwipeRefreshLayout.OnChildScrollUpCallback() {
 			@Override
 			public boolean canChildScrollUp(SwipeRefreshLayout parent, @Nullable View child) {
-				return ListViewCompat.canScrollList(listView, -1);
+				return listView.canScrollList(-1);
 			}
 		});
 

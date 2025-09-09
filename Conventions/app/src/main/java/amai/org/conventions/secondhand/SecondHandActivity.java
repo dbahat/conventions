@@ -22,6 +22,8 @@ import sff.org.conventions.R;
 public class SecondHandActivity extends NavigationActivity {
 	private static final String TAG = SecondHandActivity.class.getCanonicalName();
 
+	private static final String STATE_SELECTED_PAGE = "StateSelectedPage";
+
 	private TabLayout tabLayout;
 	private ViewPager viewPager;
 	private TabAdapter adapter;
@@ -73,7 +75,9 @@ public class SecondHandActivity extends NavigationActivity {
 		}
 		tabLayout.setupWithViewPager(viewPager, false);
 
-		viewPager.setCurrentItem(0, false);
+		// Select the first tab by default
+		int pageToSelect = savedInstanceState == null ? 0 : savedInstanceState.getInt(STATE_SELECTED_PAGE, 0);
+		viewPager.setCurrentItem(pageToSelect, false);
 		triggerFragmentSelected(viewPager.getCurrentItem());
 	}
 
@@ -92,6 +96,14 @@ public class SecondHandActivity extends NavigationActivity {
 	@Override
 	protected void removeActionButton() {
 		super.removeActionButton();
+	}
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		// We must set the page because the UI will show the last selected page even if we set it
+		// to a different page in onCreate after orientation change. Also, it's a better user experience.
+		outState.putInt(STATE_SELECTED_PAGE, viewPager.getCurrentItem());
+		super.onSaveInstanceState(outState);
 	}
 
 	private class TabAdapter extends FragmentPagerAdapter {
