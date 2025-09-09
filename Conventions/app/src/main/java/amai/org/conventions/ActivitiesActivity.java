@@ -19,6 +19,9 @@ public class ActivitiesActivity extends NavigationActivity {
 		setContentInContentContainer(R.layout.activity_activities);
 		setToolbarTitle(getString(R.string.activities));
 
+		// Handle edge to edge
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, findViewById(R.id.activities_scroll));
+
 		handleLinks();
 	}
 

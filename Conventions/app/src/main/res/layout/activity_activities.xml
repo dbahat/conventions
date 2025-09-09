@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/activities_scroll"
+    android:clipToPadding="false"
     tools:context="amai.org.conventions.ActivitiesActivity">
     <LinearLayout
         android:layout_width="match_parent"

@@ -207,6 +207,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:divider="?secondHandItemsDivider"
+                    android:clipToPadding="false"
                     android:dividerHeight="1dp" />
 
                 <TextView

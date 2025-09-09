@@ -30,6 +30,7 @@ import amai.org.conventions.model.SecondHandItem;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.Views;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.ListViewCompat;
@@ -117,6 +118,9 @@ public class SecondHandBuyFragment extends Fragment implements SwipeRefreshLayou
 //		initializeCategories(view);
 
 		refreshItemsListInBackground(false);
+
+		// Handle edge to edge
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, listView);
 
 		return view;
 	}

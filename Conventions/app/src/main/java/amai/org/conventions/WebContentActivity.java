@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.Log;
+import amai.org.conventions.utils.Views;
 import androidx.annotation.StringRes;
 import fi.iki.kuitsi.listtest.ListTagHandler;
 import sff.org.conventions.R;
@@ -21,6 +22,9 @@ public abstract class WebContentActivity extends NavigationActivity {
 		setContentInContentContainer(R.layout.activity_web_content);
 		setBackground(ThemeAttributes.getDrawable(this, R.attr.infoActivitiesBackground));
 		setToolbarTitle(getString(getPageTitleResourceId()));
+
+		// Handle edge to edge
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, findViewById(R.id.web_content_scroll));
 
 		handleDeepLinks();
 
