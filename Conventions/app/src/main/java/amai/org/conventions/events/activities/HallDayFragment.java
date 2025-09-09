@@ -52,7 +52,7 @@ public class HallDayFragment extends Fragment {
 		View hallNoEvents = view.findViewById(R.id.hall_no_events_found);
 
 		// Handle edge to edge
-		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, hallEventsList);
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, Views.InsetType.PADDING, hallEventsList);
 
 		List<ConventionEvent> events = Convention.getInstance().findEventsByHall(hallName);
 		events = CollectionUtils.filter(events, new CollectionUtils.Predicate<ConventionEvent>() {

@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ListAdapter;
 
+import amai.org.conventions.ThemeAttributes;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import amai.org.conventions.R;
@@ -97,7 +98,7 @@ public class Views {
 			// Gets insets size.
 			// Should be in sync with the implementation in registerApplyInsets
 			final WindowInsets windowInsets = metrics.getWindowInsets();
-			Insets insets = windowInsets.getInsetsIgnoringVisibility(WindowInsets.Type.systemBars());
+			Insets insets = windowInsets.getInsetsIgnoringVisibility(WindowInsets.Type.systemBars() | WindowInsets.Type.displayCutout());
 			int insetsWidth = insets.right + insets.left;
 			int insetsHeight = insets.top + insets.bottom;
 
@@ -115,13 +116,17 @@ public class Views {
 	}
 
 	public enum InsetType { PADDING, MARGIN, NONE; }
-	public static void registerApplyInsets(InsetType applyToTop, InsetType applyToBottom, InsetType applyToSides, View... views) {
+	public static void registerApplyInsets(InsetType applyToTop, InsetType applyToBottom, InsetType applyToStart, InsetType applyToEnd, View... views) {
 		for (View view : views) {
-			registerApplyInsetsForView(view, applyToTop, applyToBottom, applyToSides);
+			registerApplyInsetsForView(view, applyToTop, applyToBottom, applyToStart, applyToEnd);
 		}
 	}
 
-	public static void registerApplyInsetsForView(View view, InsetType applyToTop, InsetType applyToBottom, InsetType applyToSides) {
+	public static void registerApplyInsetsForView(View view, InsetType applyToTop, InsetType applyToBottom, InsetType applyToStart, InsetType applyToEnd) {
+		boolean isRtl = ThemeAttributes.getInteger(view.getContext(), android.R.attr.layoutDirection) == View.LAYOUT_DIRECTION_RTL;
+		InsetType applyToLeft = (isRtl ? applyToEnd : applyToStart);
+		InsetType applyToRight = (isRtl ? applyToStart : applyToEnd);
+
 		// Only apply the listener once for each view
 		if (view == null || view.getTag(R.id.inset_listener_applied) == Boolean.TRUE) {
 			return;
@@ -147,10 +152,12 @@ public class Views {
 
 		// Apply system bar insets to the root view
 		ViewCompat.setOnApplyWindowInsetsListener(view, (v, insets) -> {
-			// displayCutout is the top part of the screen where the camera is. It's included in the system bars in portrait mode.
-			// In landscape mode the app looks ok drawing behind it in all screens, so we ignore it.
+			// System bars are the bars added by Android for the status bar, navigation buttons, and gesture navigation.
+			// Display cutouts are hardware areas which obscure the screen. In portrait mode, they are usually included in the system bars.
+			// We shouldn't draw important content (like text and buttons) under cutouts since it can impact usability.
+			// It's the same for system bars, although they can be hidden in code.
 			// Should be in sync with the implementation in getScreenSize
-			androidx.core.graphics.Insets systemInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+			androidx.core.graphics.Insets systemInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout());
 
 			// Apply new margins
 			ViewGroup.LayoutParams layoutParams = v.getLayoutParams();
@@ -158,8 +165,8 @@ public class Views {
 				ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) layoutParams;
 
 				Rect insetMargins = new Rect();
-				insetMargins.left = (applyToSides == InsetType.MARGIN ? systemInsets.left : 0);
-				insetMargins.right = (applyToSides == InsetType.MARGIN ? systemInsets.right : 0);
+				insetMargins.left = (applyToLeft == InsetType.MARGIN ? systemInsets.left : 0);
+				insetMargins.right = (applyToRight == InsetType.MARGIN ? systemInsets.right : 0);
 				insetMargins.top = (applyToTop == InsetType.MARGIN ? systemInsets.top : 0);
 				insetMargins.bottom = (applyToBottom == InsetType.MARGIN ? systemInsets.bottom : 0);
 
@@ -171,10 +178,10 @@ public class Views {
 				v.setLayoutParams(layoutParams);
 				v.setTag(R.id.inset_margins, insetMargins);
 			}
-			if (applyToTop == InsetType.PADDING || applyToBottom == InsetType.PADDING || applyToSides == InsetType.PADDING) {
+			if (applyToTop == InsetType.PADDING || applyToBottom == InsetType.PADDING || applyToLeft == InsetType.PADDING || applyToRight == InsetType.PADDING) {
 				Rect insetPadding = new Rect();
-				insetPadding.left = applyToSides == InsetType.PADDING ? systemInsets.left : 0;
-				insetPadding.right = applyToSides == InsetType.PADDING ? systemInsets.right : 0;
+				insetPadding.left = applyToLeft == InsetType.PADDING ? systemInsets.left : 0;
+				insetPadding.right = applyToRight == InsetType.PADDING ? systemInsets.right : 0;
 				insetPadding.top = applyToTop == InsetType.PADDING ? systemInsets.top : 0;
 				insetPadding.bottom = applyToBottom == InsetType.PADDING ? systemInsets.bottom : 0;
 

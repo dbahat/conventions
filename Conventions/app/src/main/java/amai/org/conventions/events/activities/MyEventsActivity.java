@@ -31,6 +31,7 @@ import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.BundleBuilder;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.Views;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ShareCompat;
@@ -78,6 +79,9 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 
 		int dateIndexToSelect = savedInstanceState == null ? SELECT_CURRENT_DATE : savedInstanceState.getInt(STATE_SELECTED_DATE_INDEX, SELECT_CURRENT_DATE);
 		setupDays(dateIndexToSelect);
+
+		// Handle edge to edge
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, nextEventStart);
 	}
 
 	private void setupDays(int dateIndexToSelect) {

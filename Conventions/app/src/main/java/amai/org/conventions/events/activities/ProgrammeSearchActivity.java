@@ -171,7 +171,10 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 
 		Views.hideKeyboardOnClickOutsideEditText(this, rootView);
 		// Handle edge to edge
-		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, listView, searchFiltersList);
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, findViewById(R.id.programme_search_title_section));
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, Views.InsetType.PADDING, listView);
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, findViewById(R.id.search_filter_drawer_container));
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, Views.InsetType.NONE, searchFiltersList);
 	}
 
 	private boolean hasEventsWithTicketsInfo() {

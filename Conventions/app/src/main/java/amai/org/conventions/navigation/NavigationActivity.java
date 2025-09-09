@@ -218,16 +218,13 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	private void handleEdgeToEdge() {
 		WindowCompat.enableEdgeToEdge(getWindow());
 
-		Views.registerApplyInsets(Views.InsetType.PADDING, Views.InsetType.NONE, Views.InsetType.PADDING, navigationToolbar);
+		Views.registerApplyInsets(Views.InsetType.PADDING, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, navigationToolbar);
 
-		Views.registerApplyInsets(Views.InsetType.PADDING, Views.InsetType.NONE, Views.InsetType.NONE, findViewById(R.id.navigation_drawer_wrapper));
+		Views.registerApplyInsets(Views.InsetType.PADDING, Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.NONE, findViewById(R.id.navigation_drawer_wrapper));
 
-		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.MARGIN, findViewById(R.id.navigation_drawer_content));
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.MARGIN, Views.InsetType.NONE, findViewById(R.id.navigation_drawer_content));
 
-		// The bottom padding is handled in each activity/fragment for a better user experience
-		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, findViewById(R.id.navigation_content_view_container));
-
-		Views.registerApplyInsets(Views.InsetType.MARGIN, Views.InsetType.MARGIN, Views.InsetType.MARGIN, actionButton);
+		Views.registerApplyInsets(Views.InsetType.MARGIN, Views.InsetType.MARGIN, Views.InsetType.MARGIN, Views.InsetType.MARGIN, actionButton);
 
 		ProtectionLayout edgesProtection = findViewById(R.id.edge_protection);
 		edgesProtection.setProtections(Arrays.asList(
@@ -443,6 +440,9 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		if (days == 1) {
 			daysTabLayout.setVisibility(View.GONE);
 		}
+
+		// Handle edge to edge
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, daysTabLayout);
 
 		Drawable tabIndicator = ThemeAttributes.getDrawable(this, R.attr.selectedTabIndicator);
 		if (tabIndicator != null) {

@@ -52,7 +52,7 @@ public class ArrivalMethodsActivity extends NavigationActivity implements OnMapR
 		arrivalMethodsDescription.setMovementMethod(LinkMovementMethod.getInstance());
 
 		// Handle edge to edge
-		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, findViewById(R.id.arrival_methods_scroll));
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, Views.InsetType.PADDING, findViewById(R.id.arrival_methods_scroll));
 	}
 
 	@Override
