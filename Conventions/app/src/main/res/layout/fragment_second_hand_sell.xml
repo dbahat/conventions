@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
+            android:id="@+id/second_hand_sell_container"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">

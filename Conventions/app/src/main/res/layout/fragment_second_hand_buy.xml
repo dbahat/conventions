@@ -13,6 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/second_hand_buy_filters"
         android:background="?secondHandBuyFiltersBackground"
         android:paddingBottom="?secondHandBuyFiltersBottomPadding"
         android:orientation="vertical">

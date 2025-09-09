@@ -120,7 +120,8 @@ public class SecondHandBuyFragment extends Fragment implements SwipeRefreshLayou
 		refreshItemsListInBackground(false);
 
 		// Handle edge to edge
-		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, listView);
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, view.findViewById(R.id.second_hand_buy_filters));
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, Views.InsetType.PADDING, listView);
 
 		return view;
 	}

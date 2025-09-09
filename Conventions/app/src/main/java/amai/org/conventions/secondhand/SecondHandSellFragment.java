@@ -65,7 +65,8 @@ public class SecondHandSellFragment extends Fragment implements SwipeRefreshLayo
 		listView.setAdapter(adapter);
 
 		// Handle edge to edge
-		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, listView);
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, view.findViewById(R.id.second_hand_sell_container));
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, Views.InsetType.NONE, listView);
 
 		soldFormsTotal.setTextColor(new StateList(R.attr.state_second_hand_item_sold).getThemeColor(getContext(), R.attr.secondHandItemStatusColor));
 

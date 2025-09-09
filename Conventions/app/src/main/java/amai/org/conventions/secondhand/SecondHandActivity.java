@@ -11,6 +11,7 @@ import java.util.List;
 
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.navigation.NavigationActivity;
+import amai.org.conventions.utils.Views;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -34,6 +35,9 @@ public class SecondHandActivity extends NavigationActivity {
 
 		tabLayout = findViewById(R.id.second_hand_tabs);
 		viewPager = findViewById(R.id.second_hand_pager);
+
+		// Handle edge to edge
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, tabLayout);
 
 		// Setup adapter
 		adapter = new TabAdapter(getSupportFragmentManager());

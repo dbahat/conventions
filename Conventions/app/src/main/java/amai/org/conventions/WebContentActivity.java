@@ -24,7 +24,7 @@ public abstract class WebContentActivity extends NavigationActivity {
 		setToolbarTitle(getString(getPageTitleResourceId()));
 
 		// Handle edge to edge
-		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, findViewById(R.id.web_content_scroll));
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, Views.InsetType.PADDING, findViewById(R.id.web_content_scroll));
 
 		handleDeepLinks();
 
