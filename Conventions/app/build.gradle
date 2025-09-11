@@ -37,9 +37,9 @@ android {
             languageVersion = JavaLanguageVersion.of(17)
         }
     }
-    namespace 'amai.org.conventions'
+    namespace = 'amai.org.conventions'
     buildFeatures {
-        buildConfig true
+        buildConfig = true
     }
 
 }
