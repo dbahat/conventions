@@ -730,13 +730,9 @@ public class EventActivity extends NavigationActivity {
 				public void onClick(View v) {
 					try {
 						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(eventViewURL.toURI().toString()));
-						if (intent.resolveActivity(getPackageManager()) != null) {
-							try {
-								EventActivity.this.startActivity(intent);
-							} catch (ActivityNotFoundException e) {
-								Toast.makeText(EventActivity.this, getString(R.string.view_event_error), Toast.LENGTH_LONG).show();
-							}
-						} else {
+						try {
+							EventActivity.this.startActivity(intent);
+						} catch (ActivityNotFoundException e) {
 							Toast.makeText(EventActivity.this, getString(R.string.view_event_error), Toast.LENGTH_LONG).show();
 						}
 					} catch (URISyntaxException e) {

@@ -2,6 +2,7 @@ package amai.org.conventions;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
@@ -23,6 +24,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.notifications.PlayServicesInstallation;
+import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.URLUtils;
 import amai.org.conventions.utils.Views;
 import fi.iki.kuitsi.listtest.ListTagHandler;
@@ -76,13 +78,9 @@ public class ArrivalMethodsActivity extends NavigationActivity implements OnMapR
 				Intent intent = new Intent(Intent.ACTION_VIEW,
 						Uri.parse("geo:" + latitude + "," + longitude +
 								"?q=" + latitude + "," + longitude));
-				if (intent.resolveActivity(getPackageManager()) != null) {
-					try {
-						this.startActivity(intent);
-					} catch (ActivityNotFoundException e) {
-						Toast.makeText(this, getString(R.string.no_navigation_activity), Toast.LENGTH_LONG).show();
-					}
-				} else {
+				try {
+					this.startActivity(intent);
+				} catch (ActivityNotFoundException e) {
 					Toast.makeText(this, getString(R.string.no_navigation_activity), Toast.LENGTH_LONG).show();
 				}
 				return true;
@@ -90,22 +88,22 @@ public class ArrivalMethodsActivity extends NavigationActivity implements OnMapR
 			case R.id.arrival_methods_navigate_bus: {
 				double latitude = Convention.getInstance().getLatitude();
 				double longitude = Convention.getInstance().getLongitude();
-				Intent intent = new Intent(Intent.ACTION_VIEW,
-						Uri.parse("moovit://directions?dest_lat=" + latitude + "&dest_lon=" + longitude + "&partner_id=" + this.getPackageName()));
-				if (intent.resolveActivity(getPackageManager()) == null) {
-					String encodedLocationName = URLUtils.encodeURLPath(Convention.getInstance().getDisplayName());
-					intent = new Intent(Intent.ACTION_VIEW,
-							Uri.parse("https://moovitapp.com/israel-1/poi/" + encodedLocationName + "/t/he?tll=" + latitude + "_" + longitude)
+				String encodedLocationName = URLUtils.encodeURLPath(Convention.getInstance().getDisplayName());
+
+				try {
+					Intent intent = new Intent(Intent.ACTION_VIEW,
+							Uri.parse("moovit://directions?dest_lat=" + latitude + "&dest_lon=" + longitude + "&dest_name=" + encodedLocationName + "&partner_id=" + this.getPackageName()));
+					this.startActivity(intent);
+				} catch (ActivityNotFoundException e) {
+					// Fallback if app not found - open in browser
+					Intent intent = new Intent(Intent.ACTION_VIEW,
+						Uri.parse("https://moovitapp.com/israel-1/poi/" + encodedLocationName + "/t/he?tll=" + latitude + "_" + longitude)
 					);
-				}
-				if (intent.resolveActivity(getPackageManager()) != null) {
 					try {
 						this.startActivity(intent);
-					} catch (ActivityNotFoundException e) {
+					} catch (ActivityNotFoundException e2) {
 						Toast.makeText(this, getString(R.string.no_navigation_activity), Toast.LENGTH_LONG).show();
 					}
-				} else {
-					Toast.makeText(this, getString(R.string.no_navigation_activity), Toast.LENGTH_LONG).show();
 				}
 				return true;
 			}
