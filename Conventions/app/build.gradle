@@ -8,7 +8,7 @@ android {
     defaultConfig {
         applicationId "sff.org.conventions"
         minSdk 21
-        targetSdk 34
+        targetSdk 35
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
