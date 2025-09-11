@@ -37,9 +37,9 @@ android {
             languageVersion = JavaLanguageVersion.of(17)
         }
     }
-    namespace 'sff.org.conventions'
+    namespace = 'sff.org.conventions'
     buildFeatures {
-        buildConfig true
+        buildConfig = true
     }
 
 }
