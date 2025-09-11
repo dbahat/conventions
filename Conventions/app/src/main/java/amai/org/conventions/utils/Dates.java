@@ -20,7 +20,7 @@ public class Dates {
 		DAY, HOUR, MINUTE, SECOND
 	}
 
-	private static final Locale LOCALE = new Locale("iw", "IL");
+	private static final Locale LOCALE = new Locale("he", "IL");
 	private static final TimeZone CONVENTION_TIME_ZONE = TimeZone.getTimeZone("Asia/Jerusalem");
 	private static final TimeZone DEVICE_TIME_ZONE = TimeZone.getDefault();
 	// Using Israel time as the local time for amai since the conventions are 1 day (no tab support
