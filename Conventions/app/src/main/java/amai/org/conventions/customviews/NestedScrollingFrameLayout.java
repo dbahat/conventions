@@ -1,24 +1,23 @@
 package amai.org.conventions.customviews;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.core.view.GestureDetectorCompat;
-import androidx.core.view.NestedScrollingChild;
-import androidx.core.view.NestedScrollingChildHelper;
-import androidx.core.view.NestedScrollingParent;
-import androidx.core.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
+
+import androidx.annotation.NonNull;
+import androidx.core.view.NestedScrollingChild;
+import androidx.core.view.NestedScrollingChildHelper;
+import androidx.core.view.NestedScrollingParent;
+import androidx.core.view.ViewCompat;
 
 public class NestedScrollingFrameLayout extends FrameLayout implements NestedScrollingParent, NestedScrollingChild, GestureDetector.OnGestureListener {
 	private static int TOUCH_SLOP = -1;
 	private NestedScrollingChildHelper nestedScrollingChildHelper;
-	private GestureDetectorCompat mDetector;
+	private GestureDetector mDetector;
 	private int[] scrollOffset = new int[2];
 	private boolean dummyScroll = false;
 	private boolean isScrolling = false;
@@ -34,7 +33,7 @@ public class NestedScrollingFrameLayout extends FrameLayout implements NestedScr
 
 	public NestedScrollingFrameLayout(Context context, AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
-		mDetector = new GestureDetectorCompat(context, this);
+		mDetector = new GestureDetector(context, this);
 		nestedScrollingChildHelper = new NestedScrollingChildHelper(this);
 		setNestedScrollingEnabled(true);
 
@@ -223,18 +222,5 @@ public class NestedScrollingFrameLayout extends FrameLayout implements NestedScr
 		// If we send "false" the fling will only scroll the toolbar (and not the child views)
 		dispatchNestedFling(-velocityX, -velocityY, true);
 		return false;
-	}
-
-	@Override
-	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		// Fix issue where this view is not full-size due to bug in AppBarLayout.Behavior onMeasureChild method - the sent
-		// measure mode is AT_MOST instead of EXACTLY even for match_parent children of the CoordinatorLayout.
-		// This was fixed already in the design library but not in the version we currently use (22.2.1).
-		// Note that if any other views use this behavior we should make the same workaround (or better for that case,
-		// create a new Behavior that works correctly).
-		if (getLayoutParams().height == ViewGroup.LayoutParams.MATCH_PARENT && MeasureSpec.getMode(heightMeasureSpec) == MeasureSpec.AT_MOST) {
-			heightMeasureSpec = MeasureSpec.makeMeasureSpec(MeasureSpec.getSize(heightMeasureSpec), MeasureSpec.EXACTLY);
-		}
-		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 	}
 }
