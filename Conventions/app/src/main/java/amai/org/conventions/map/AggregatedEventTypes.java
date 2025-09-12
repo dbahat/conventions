@@ -19,13 +19,17 @@ public class AggregatedEventTypes {
 				new AggregatedType("הרצאות", Arrays.asList(
 						new EventType("הרצאה"),
 						new EventType("פאנל"),
+						new EventType("פאנל הרצאות"),
 						new EventType("פאנל TED"))),
 				new AggregatedType("משחקים", Arrays.asList(
 						new EventType("משחק שולחני"),
 						new EventType("משחק תפקידים חי"),
 						new EventType("משחק תפקידים שולחני"),
+						new EventType("משחק תפקידים שולחני לילדים"),
 						new EventType("משחק תפקידים לילדים"),
+						new EventType("משחק תפקידים לנוער"),
 						new EventType("משחק"),
+						new EventType("הדגמה"),
 						new EventType("משחק קלפים"),
 						new EventType("טורניר"))),
 				new AggregatedType("סדנאות", Arrays.asList(
@@ -34,11 +38,13 @@ public class AggregatedEventTypes {
 						new EventType("הקרנה"),
 						new EventType("הקרנה מונחית"),
 						new EventType("מופע"),
+						new EventType("מחזה"),
 						new EventType("סרט"),
 						new EventType("שעשועון"),
 						new EventType("מופע מוזיקלי"))),
 				new AggregatedType("מפגשים", Arrays.asList(
-					new EventType("מפגש")))
+					new EventType("מפגש"),
+					new EventType("השקה")))
 		);
 	}
 
