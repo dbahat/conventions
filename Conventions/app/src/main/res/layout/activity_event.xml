@@ -8,28 +8,9 @@
 	tools:visibility="visible"
 	tools:context="amai.org.conventions.events.activities.EventActivity">
 
-	<!-- The image background starts off as transparent just so we have a color (there is another background behind it
-		 coming from NavigationActivity). The background from NavigationActivity is necessary so that screen doesn't
-		 start off as black. The color itself is taken from eventDetailsDefaultBackground.
-		 The color here is necessary since when we create the gradient above the last image we need to have some color
-		 specified but we don't know the final background color yet.
-		 Note: this causes overdraw, but only for the few seconds until we know the actual background color. -->
-	<ScrollView
-		android:id="@+id/images_background"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:background="@android:color/transparent">
-
-		<LinearLayout
-			android:id="@+id/images_layout"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:visibility="invisible"
-			android:orientation="vertical" />
-	</ScrollView>
-
-	<uk.co.chrisjenx.paralloid.views.ParallaxScrollView
-		android:id="@+id/parallax_scroll"
+	<androidx.core.widget.NestedScrollView
+		android:id="@+id/event_details_scroll"
+		android:scrollbars="vertical"
 		android:clipToPadding="false"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent">
@@ -330,7 +311,8 @@
 			<LinearLayout
 				android:id="@+id/event_description_box"
 				style="@style/EventDescriptionBox"
-				android:layout_marginTop="10dp">
+				android:layout_marginTop="10dp"
+				android:orientation="vertical">
 
 				<TextView
 					android:id="@+id/event_description"
@@ -343,7 +325,7 @@
 
 		</LinearLayout>
 
-	</uk.co.chrisjenx.paralloid.views.ParallaxScrollView>
+	</androidx.core.widget.NestedScrollView>
 
 
 </FrameLayout>
