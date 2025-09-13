@@ -10,9 +10,6 @@ import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
-import amai.org.conventions.customviews.NestedScrollingFrameLayout;
-import amai.org.conventions.utils.Log;
-import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import sff.org.conventions.R;
 
