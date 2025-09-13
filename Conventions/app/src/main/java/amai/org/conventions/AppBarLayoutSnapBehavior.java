@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
+import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.google.android.material.appbar.AppBarLayout;
@@ -22,8 +23,8 @@ public class AppBarLayoutSnapBehavior extends AppBarLayout.Behavior {
 
 	@Override
 	public boolean onStartNestedScroll(CoordinatorLayout coordinatorLayout, AppBarLayout child,
-	                                   View directTargetChild, View target, int nestedScrollAxes) {
-		mNestedScrollStarted = super.onStartNestedScroll(coordinatorLayout, child, directTargetChild, target, nestedScrollAxes);
+	                                   View directTargetChild, View target, int nestedScrollAxes, int type) {
+		mNestedScrollStarted = super.onStartNestedScroll(coordinatorLayout, child, directTargetChild, target, nestedScrollAxes, type);
 		lastScroll = 0;
 		if (mNestedScrollStarted && mAnimator != null) {
 			mAnimator.cancel();
@@ -32,8 +33,8 @@ public class AppBarLayoutSnapBehavior extends AppBarLayout.Behavior {
 	}
 
 	@Override
-	public void onStopNestedScroll(CoordinatorLayout coordinatorLayout, AppBarLayout child, View target) {
-		super.onStopNestedScroll(coordinatorLayout, child, target);
+	public void onStopNestedScroll(CoordinatorLayout coordinatorLayout, AppBarLayout child, View target, int type) {
+		super.onStopNestedScroll(coordinatorLayout, child, target, type);
 
 		if (!mNestedScrollStarted) {
 			return;
@@ -85,8 +86,8 @@ public class AppBarLayoutSnapBehavior extends AppBarLayout.Behavior {
 	}
 
 	@Override
-	public void onNestedPreScroll(CoordinatorLayout coordinatorLayout, AppBarLayout child, View target, int dx, int dy, int[] consumed) {
-		super.onNestedPreScroll(coordinatorLayout, child, target, dx, dy, consumed);
+	public void onNestedPreScroll(CoordinatorLayout coordinatorLayout, AppBarLayout child, View target, int dx, int dy, int[] consumed, int type) {
+		super.onNestedPreScroll(coordinatorLayout, child, target, dx, dy, consumed, type);
 		this.lastScroll = dy;
 	}
 }
