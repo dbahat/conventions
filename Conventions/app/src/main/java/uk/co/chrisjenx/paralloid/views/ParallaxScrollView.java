@@ -4,8 +4,8 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.ScrollView;
 
+import androidx.core.widget.NestedScrollView;
 import uk.co.chrisjenx.paralloid.ParallaxViewController;
 import uk.co.chrisjenx.paralloid.Parallaxor;
 import uk.co.chrisjenx.paralloid.transform.Transformer;
@@ -14,7 +14,7 @@ import uk.co.chrisjenx.paralloid.transform.Transformer;
  * Created by chris on 02/10/2013
  * Project: Paralloid
  */
-public class ParallaxScrollView extends ScrollView implements Parallaxor {
+public class ParallaxScrollView extends NestedScrollView implements Parallaxor {
 
     ParallaxViewController mParallaxViewController;
 

@@ -3,14 +3,9 @@ package amai.org.conventions.events.activities;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,28 +14,17 @@ import android.text.Html;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
-import android.view.Display;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import amai.org.conventions.customviews.FrameLayoutWithState;
-import amai.org.conventions.utils.StateList;
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.ContextCompat;
-import androidx.palette.graphics.Palette;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -54,7 +38,7 @@ import amai.org.conventions.BuildConfig;
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
-import amai.org.conventions.customviews.AspectRatioImageView;
+import amai.org.conventions.customviews.FrameLayoutWithState;
 import amai.org.conventions.events.CollapsibleFeedbackView;
 import amai.org.conventions.events.ConfigureNotificationsFragment;
 import amai.org.conventions.events.EventVoteSurveyFragment;
@@ -73,9 +57,11 @@ import amai.org.conventions.utils.BundleBuilder;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
+import amai.org.conventions.utils.StateList;
 import amai.org.conventions.utils.Views;
-import uk.co.chrisjenx.paralloid.views.ParallaxScrollView;
-
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
 
 public class EventActivity extends NavigationActivity {
 
@@ -97,10 +83,7 @@ public class EventActivity extends NavigationActivity {
 	private Button viewEventButton;
 	private CollapsibleFeedbackView feedbackView;
 
-	private ImageView gradientImageView;
-	private ImageView lastImageView;
 	private Menu menu;
-	private View imagesBackground;
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
@@ -108,8 +91,6 @@ public class EventActivity extends NavigationActivity {
 		setContentInContentContainer(R.layout.activity_event);
 
 		mainLayout = findViewById(R.id.event_main_layout);
-		imagesBackground = findViewById(R.id.images_background);
-		imagesLayout = (LinearLayout) findViewById(R.id.images_layout);
 		feedbackContainer = findViewById(R.id.event_feedback_container);
 		voteSurveyOpenerContainer = findViewById(R.id.event_vote_opener_container);
 		voteSurveyOpenerLayout = findViewById(R.id.event_vote_opener_layout);
@@ -119,7 +100,7 @@ public class EventActivity extends NavigationActivity {
 		viewEventButton = findViewById(R.id.event_view_button);
 		feedbackView = (CollapsibleFeedbackView) findViewById(R.id.event_feedback_view);
 		final View detailBoxes = findViewById(R.id.event_detail_boxes);
-		final ParallaxScrollView scrollView = (ParallaxScrollView) findViewById(R.id.parallax_scroll);
+		final NestedScrollView scrollView = findViewById(R.id.event_details_scroll);
 
 		// Handle edge to edge
 		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, Views.InsetType.PADDING, scrollView);
@@ -181,104 +162,7 @@ public class EventActivity extends NavigationActivity {
 					});
 				}
 
-				mainLayout.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
-					@Override
-					public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-						// Set parallax
-						int foregroundHeight = detailBoxes.getMeasuredHeight();
-						int backgroundHeight = imagesLayout.getMeasuredHeight();
-						int screenHeight = mainLayout.getMeasuredHeight();
-						float maxParallax = 1;
-
-						// If background height is bigger than screen size, scrolling should be until background full height is reached.
-						// If it's smaller, scrolling should be until background is scrolled out of the screen.
-						int backgroundToScroll;
-						if (backgroundHeight < screenHeight) {
-							backgroundToScroll = backgroundHeight;
-							maxParallax = 0.7f;
-							enableFadingEffect();
-						} else {
-							disableFadingEffect();
-							backgroundToScroll = backgroundHeight - screenHeight;
-
-							// If foreground height is smaller than background height (and background should be scrolled),
-							// increase foreground height to allow scrolling until the end of the background and see all the images.
-							if (backgroundToScroll > 0 && foregroundHeight < backgroundHeight) {
-								detailBoxes.setMinimumHeight(backgroundHeight);
-								// Update height to calculate the parallax factor
-								foregroundHeight = backgroundHeight;
-							}
-						}
-						int foregroundToScroll = foregroundHeight - screenHeight;
-
-						// Set parallax scrolling if both foreground and background should be scrolled
-						if (backgroundToScroll > 0 && foregroundToScroll > 0) {
-							float scrollFactor = backgroundToScroll / (float) foregroundToScroll;
-							// If scroll factor is bigger than 1, set it to 1 so the background doesn't move too fast.
-							// This could happen only in case the background is smaller than screen size so we can
-							// still see all the images.
-							scrollView.parallaxViewBy(imagesLayout, Math.min(scrollFactor, maxParallax));
-						}
-					}
-				});
-
-				// Set images background color according to last image's color palette
-				if (lastImageView != null) {
-					if (lastImageView.getDrawable() instanceof BitmapDrawable) {
-						Bitmap bitmap = ((BitmapDrawable) lastImageView.getDrawable()).getBitmap();
-
-						Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
-							@Override
-							public void onGenerated(Palette palette) {
-								Palette.Swatch swatch = palette.getMutedSwatch();
-								if (swatch == null) {
-									// Try vibrant swatch
-									swatch = palette.getDarkVibrantSwatch();
-								}
-								// Don't fade from custom background color if the images don't fade to it
-								final boolean setBackgroundBeforeAnimation = isFadingEffectEnabled();
-								final int backgroundColor;
-								if (swatch != null) {
-									backgroundColor = swatch.getRgb();
-								} else {
-									// Use default background
-									backgroundColor = ThemeAttributes.getColor(EventActivity.this, R.attr.eventDetailsDefaultBackground);
-								}
-								if (setBackgroundBeforeAnimation) {
-									updateBackgroundColor(backgroundColor);
-								}
-
-								// Fade in the images
-								Animation fadeIn = AnimationUtils.loadAnimation(EventActivity.this, R.anim.fade_in);
-								fadeIn.setAnimationListener(new Animation.AnimationListener() {
-									@Override
-									public void onAnimationStart(Animation animation) {
-									}
-
-									@Override
-									public void onAnimationEnd(Animation animation) {
-										// Replace default background with images layout
-										imagesLayout.setVisibility(View.VISIBLE);
-										if (!setBackgroundBeforeAnimation) {
-											updateBackgroundColor(backgroundColor);
-
-										}
-										setBackground(null);
-									}
-
-									@Override
-									public void onAnimationRepeat(Animation animation) {
-
-									}
-								});
-								imagesLayout.startAnimation(fadeIn);
-							}
-						});
-					}
-				}
-
 				mainLayout.setVisibility(View.VISIBLE);
-				mainLayout.startAnimation(AnimationUtils.loadAnimation(EventActivity.this, android.R.anim.fade_in));
 			}
 		}, 50);
 
@@ -290,34 +174,6 @@ public class EventActivity extends NavigationActivity {
 		// This view is time-sensitive (it is visible or invisible according to the time)
 		// so it should be updated more frequently
 		setupVoteSurveyAndEventView(conventionEvent);
-	}
-
-	private int getBackgroundColor() {
-		return ((ColorDrawable) imagesBackground.getBackground()).getColor();
-	}
-
-	private void updateBackgroundColor(int newColor) {
-		imagesBackground.setBackgroundColor(newColor);
-		if (gradientImageView != null) {
-			((GradientDrawable) gradientImageView.getDrawable()).setColors(new int[]{Color.TRANSPARENT, newColor});
-		}
-	}
-
-	private void enableFadingEffect() {
-		if (gradientImageView != null) {
-			((GradientDrawable) gradientImageView.getDrawable()).setColors(new int[]{Color.TRANSPARENT, getBackgroundColor()});
-			gradientImageView.setVisibility(View.VISIBLE);
-		}
-	}
-
-	private void disableFadingEffect() {
-		if (gradientImageView != null) {
-			gradientImageView.setVisibility(View.GONE);
-		}
-	}
-
-	private boolean isFadingEffectEnabled() {
-		return gradientImageView != null && gradientImageView.getVisibility() == View.VISIBLE;
 	}
 
 	@Override
@@ -526,7 +382,6 @@ public class EventActivity extends NavigationActivity {
 			type.setText(event.getType().getDescription());
 		}
 
-
 		TextView locationType = findViewById(R.id.event_location_type);
 		List<ConventionEvent.EventLocationType> eventLocationTypes = Convention.getInstance().getEventLocationTypes(event);
 		if (eventLocationTypes != null && eventLocationTypes.size() > 0 && Convention.getInstance().getEventLocationTypes().size() > 1) {
@@ -602,8 +457,6 @@ public class EventActivity extends NavigationActivity {
 		setupEventDescription(event);
 
 		setupLogoImage(event);
-
-		setupBackgroundImages(event);
 
 	}
 
@@ -812,7 +665,6 @@ public class EventActivity extends NavigationActivity {
 						!conventionEvent.getUserInput().getFeedback().hasAnsweredQuestions());
 	}
 
-
 	private void setupEventDescription(ConventionEvent event) {
 		String eventDescription = event.getDescription();
 		if (eventDescription == null || eventDescription.isEmpty() || event.getPlainTextDescription().trim().isEmpty()) {
@@ -838,81 +690,6 @@ public class EventActivity extends NavigationActivity {
 				Log.e(TAG, images.size() + " logo images found in event " + event.getTitle() + "; using first image");
 			}
 		}
-	}
-
-	private void setupBackgroundImages(ConventionEvent event) {
-		// Add images to the layout
-		List<Integer> images = event.getImageResources();
-		boolean first = true;
-		// This will contain the last image view after the loop
-		FrameLayout lastImageLayout = null;
-		int lastImageHeight = -1;
-		int i = 0;
-		// Screen size for calculating last image height
-		Point size = Views.getScreenSize(this);
-		int widthSpec = View.MeasureSpec.makeMeasureSpec(size.x, View.MeasureSpec.EXACTLY);
-		for (Integer imageResource : images) {
-			boolean last = (i == images.size() - 1);
-
-			AspectRatioImageView imageView = new AspectRatioImageView(this);
-			View viewToAdd = imageView;
-			imageView.setImageResource(imageResource);
-
-			// Last image - make a frame layout with the image so we can put the gradient on top of it
-			if (last) {
-				FrameLayout frameLayout = new FrameLayout(this);
-				viewToAdd = frameLayout;
-				lastImageLayout = frameLayout;
-				lastImageView = imageView;
-
-				// Add the image view to the frame layout
-				FrameLayout.LayoutParams imageLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-				imageView.setLayoutParams(imageLayoutParams);
-				frameLayout.addView(imageView);
-
-				// Calculate the last image's height according the screen width
-				imageView.measure(widthSpec, View.MeasureSpec.UNSPECIFIED);
-				lastImageHeight = imageView.getMeasuredHeight();
-			}
-
-			LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-			int topMargin = 0;
-			if (first) {
-				first = false;
-			} else {
-				topMargin = getResources().getDimensionPixelOffset(R.dimen.event_images_margin);
-			}
-			layoutParams.setMargins(0, topMargin, 0, 0);
-			viewToAdd.setLayoutParams(layoutParams);
-			imagesLayout.addView(viewToAdd);
-
-			++i;
-		}
-
-		if (lastImageLayout != null) {
-			int gradientHeight = getResources().getDimensionPixelSize(R.dimen.event_last_image_gradient_max_height);
-			if (gradientHeight > lastImageHeight) {
-				gradientHeight = lastImageHeight;
-			}
-			// Note: instead of gradient we could supposedly use fading edges and override getSolidColor of lastImageView
-			// to return the background color. This will cause the same level of overdraw as this solution but will require
-			// much less code and remove the need for a FrameLayout above this image (to make sure it works call
-			// lastImageView.invalidate() in updateBackgroundColor).
-			// However, for some reason the fade effect doesn't look as good - it doesn't start at the right place if the image is
-			// small. So we stick with the gradient.
-			gradientImageView = new ImageView(this);
-			FrameLayout.LayoutParams gradientLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, gradientHeight);
-			gradientImageView.setImageDrawable(createGradient());
-			gradientLayoutParams.gravity = Gravity.BOTTOM;
-			gradientImageView.setLayoutParams(gradientLayoutParams);
-			lastImageLayout.addView(gradientImageView);
-
-			enableFadingEffect();
-		}
-	}
-
-	private Drawable createGradient() {
-		return new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, new int[]{Color.TRANSPARENT, getBackgroundColor()});
 	}
 
 	public void openFeedback(View view) {
