@@ -28,11 +28,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import amai.org.conventions.customviews.FrameLayoutWithState;
-import amai.org.conventions.utils.StateList;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -45,6 +43,7 @@ import java.util.List;
 
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.ThemeAttributes;
+import amai.org.conventions.customviews.FrameLayoutWithState;
 import amai.org.conventions.events.CollapsibleFeedbackView;
 import amai.org.conventions.events.ConfigureNotificationsFragment;
 import amai.org.conventions.events.EventVoteSurveyFragment;
@@ -64,11 +63,11 @@ import amai.org.conventions.utils.BundleBuilder;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
+import amai.org.conventions.utils.StateList;
 import amai.org.conventions.utils.Views;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.core.text.method.LinkMovementMethodCompat;
-import androidx.core.widget.NestedScrollView;
 import sff.org.conventions.BuildConfig;
 import sff.org.conventions.R;
 
@@ -110,10 +109,13 @@ public class EventActivity extends NavigationActivity {
 		viewEventButton = findViewById(R.id.event_view_button);
 		feedbackView = (CollapsibleFeedbackView) findViewById(R.id.event_feedback_view);
 		final View detailBoxes = findViewById(R.id.event_detail_boxes);
-		final NestedScrollView scrollView = findViewById(R.id.event_details_scroll);
+		final ScrollView scrollView = findViewById(R.id.event_details_scroll);
 
 		// Handle edge to edge
-		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, Views.InsetType.PADDING, scrollView);
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, scrollView);
+		// The bottom padding must be applied to a view inside the scroll view, otherwise the scrolling doesn't include the padding when scrolled from the last
+		// textview and it has a LinkMovementMethod
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, Views.InsetType.NONE, findViewById(R.id.scroll_view_bottom_padding));
 
 		String eventId = getIntent().getStringExtra(EXTRA_EVENT_ID);
 		conventionEvent = Convention.getInstance().findEventById(eventId);
