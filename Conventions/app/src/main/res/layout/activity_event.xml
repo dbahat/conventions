@@ -8,9 +8,12 @@
 	tools:visibility="visible"
 	tools:context="amai.org.conventions.events.activities.EventActivity">
 
+	<!-- Disabling overscroll since it's done even when the toolbar should appear/disappear
+		 which makes the scrolling feel "stuck" for a bit -->
 	<androidx.core.widget.NestedScrollView
 		android:id="@+id/event_details_scroll"
 		android:scrollbars="vertical"
+		android:overScrollMode="never"
 		android:clipToPadding="false"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent">
@@ -306,7 +309,7 @@
 					app:progressBarColor="?eventFeedbackProgressBarColor"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"/>
-            </amai.org.conventions.customviews.FrameLayoutWithState>
+			</amai.org.conventions.customviews.FrameLayoutWithState>
 
 			<LinearLayout
 				android:id="@+id/event_description_box"
@@ -326,6 +329,5 @@
 		</LinearLayout>
 
 	</androidx.core.widget.NestedScrollView>
-
 
 </FrameLayout>
