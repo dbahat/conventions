@@ -23,7 +23,10 @@ public abstract class WebContentActivity extends NavigationActivity {
 		setToolbarTitle(getString(getPageTitleResourceId()));
 
 		// Handle edge to edge
-		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, Views.InsetType.PADDING, findViewById(R.id.web_content_scroll));
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, findViewById(R.id.web_content_scroll));
+		// The bottom padding must be applied to a view inside the scroll view, otherwise the scrolling doesn't include the padding when scrolled from the last
+		// textview and it has a LinkMovementMethod
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, Views.InsetType.NONE, findViewById(R.id.scroll_view_bottom_padding));
 
 		handleDeepLinks();
 
