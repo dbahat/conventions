@@ -303,6 +303,11 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 				}
 				Log.e(TAG, "Could not add events for logged in user: " + addEventsException.getMessage(), addEventsException);
 				Toast.makeText(MyEventsActivity.this, messageId, Toast.LENGTH_LONG).show();
+
+				// If we couldn't add events but the login succeeded
+				if (user != null && !user.isEmpty()) {
+					changeIconColor(menu.findItem(R.id.my_events_show_user_id));
+				}
 			}
 		});
 	}
