@@ -5,13 +5,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.Html;
-import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
 
 import amai.org.conventions.navigation.NavigationActivity;
-import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Views;
 import androidx.annotation.StringRes;
+import androidx.core.text.method.LinkMovementMethodCompat;
 import fi.iki.kuitsi.listtest.ListTagHandler;
 import sff.org.conventions.R;
 
@@ -31,7 +30,7 @@ public abstract class WebContentActivity extends NavigationActivity {
 		TextView webContentContainer = findViewById(R.id.web_content);
 		if (webContentContainer != null) {
 			webContentContainer.setText(Html.fromHtml(getString(getWebContentResourceId()), null, new ListTagHandler()));
-			webContentContainer.setMovementMethod(LinkMovementMethod.getInstance());
+			webContentContainer.setMovementMethod(LinkMovementMethodCompat.getInstance());
 		}
 	}
 	protected abstract @StringRes

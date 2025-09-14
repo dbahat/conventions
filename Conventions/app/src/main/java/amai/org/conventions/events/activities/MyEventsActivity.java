@@ -16,7 +16,6 @@ import android.os.Handler;
 import android.os.Parcelable;
 import android.text.Html;
 import android.text.SpannableStringBuilder;
-import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.URLSpan;
 import android.view.Menu;
@@ -70,6 +69,7 @@ import androidx.annotation.RequiresApi;
 import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ShareCompat;
+import androidx.core.text.method.LinkMovementMethodCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
@@ -446,7 +446,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		}
 
 		textView.setText(spanBuilder);
-		textView.setMovementMethod(LinkMovementMethod.getInstance());
+		textView.setMovementMethod(LinkMovementMethodCompat.getInstance());
 		textView.setHighlightColor(Color.TRANSPARENT);
 	}
 

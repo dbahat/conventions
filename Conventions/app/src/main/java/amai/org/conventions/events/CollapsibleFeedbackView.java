@@ -15,7 +15,6 @@ import android.text.Html;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.text.method.LinkMovementMethod;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -56,14 +55,15 @@ import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.StateList;
 import amai.org.conventions.utils.Views;
-import sff.org.conventions.R;
 import androidx.annotation.StringRes;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatRadioButton;
 import androidx.core.content.ContextCompat;
+import androidx.core.text.method.LinkMovementMethodCompat;
 import androidx.core.widget.CompoundButtonCompat;
 import androidx.core.widget.TextViewCompat;
+import sff.org.conventions.R;
 
 public class CollapsibleFeedbackView extends FrameLayout {
 	private static final String TAG = CollapsibleFeedbackView.class.getCanonicalName();
@@ -225,7 +225,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		} else {
 			additionalFeedbackLink.setVisibility(VISIBLE);
 			additionalFeedbackLink.setText(Html.fromHtml(getContext().getString(R.string.additional_feedback, additionalFeedbackURL.toString())));
-			additionalFeedbackLink.setMovementMethod(LinkMovementMethod.getInstance());
+			additionalFeedbackLink.setMovementMethod(LinkMovementMethodCompat.getInstance());
 			additionalFeedbackLink.setLinkTextColor(createStateList(R.attr.state_feedback_link).getColor(this.textColor));
 		}
 	}

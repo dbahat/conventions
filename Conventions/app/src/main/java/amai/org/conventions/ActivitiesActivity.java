@@ -1,14 +1,10 @@
 package amai.org.conventions;
 
+import android.os.Bundle;
+import android.view.ViewGroup;
+
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.Views;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-import android.text.method.LinkMovementMethod;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
 import sff.org.conventions.R;
 
 public class ActivitiesActivity extends NavigationActivity {

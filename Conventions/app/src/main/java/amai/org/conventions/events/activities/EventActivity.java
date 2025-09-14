@@ -15,7 +15,6 @@ import android.text.Html;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
-import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.URLSpan;
 import android.view.Gravity;
@@ -68,6 +67,7 @@ import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Views;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
+import androidx.core.text.method.LinkMovementMethodCompat;
 import androidx.core.widget.NestedScrollView;
 import sff.org.conventions.BuildConfig;
 import sff.org.conventions.R;
@@ -806,7 +806,7 @@ public class EventActivity extends NavigationActivity {
 		} else {
 			// Enable internal links from HTML <a> tags within the description textView.
 			TextView description = (TextView) findViewById(R.id.event_description);
-			description.setMovementMethod(LinkMovementMethod.getInstance());
+			description.setMovementMethod(LinkMovementMethodCompat.getInstance());
 			Spanned spanned = event.getSpannedDescription();
 			description.setText(spanned);
 

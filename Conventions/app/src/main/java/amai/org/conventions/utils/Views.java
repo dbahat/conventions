@@ -7,7 +7,6 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
-import android.text.method.LinkMovementMethod;
 import android.view.Display;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -23,6 +22,7 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import amai.org.conventions.ThemeAttributes;
+import androidx.core.text.method.LinkMovementMethodCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import sff.org.conventions.R;
@@ -74,7 +74,7 @@ public class Views {
 	public static void enableLinkClicks(ViewGroup parentView) {
 		for (int i = 0; i < parentView.getChildCount(); ++i) {
 			if (parentView.getChildAt(i) instanceof TextView) {
-				((TextView) parentView.getChildAt(i)).setMovementMethod(LinkMovementMethod.getInstance());
+				((TextView) parentView.getChildAt(i)).setMovementMethod(LinkMovementMethodCompat.getInstance());
 			}
 		}
 	}

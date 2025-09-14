@@ -7,7 +7,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.InputType;
-import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +25,7 @@ import amai.org.conventions.utils.Views;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.text.method.LinkMovementMethodCompat;
 import androidx.core.widget.ListViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -78,7 +78,7 @@ public class SecondHandSellFragment extends Fragment implements SwipeRefreshLayo
 			gotoCreateFormsView.setVisibility(View.GONE);
 		} else {
 			gotoCreateFormsView.setText(Html.fromHtml(getString(R.string.second_hand_goto_create_form, gotoCreateFormsURL)));
-			gotoCreateFormsView.setMovementMethod(LinkMovementMethod.getInstance());
+			gotoCreateFormsView.setMovementMethod(LinkMovementMethodCompat.getInstance());
 			gotoCreateFormsView.setVisibility(View.VISIBLE);
 		}
 
