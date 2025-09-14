@@ -2,11 +2,9 @@ package amai.org.conventions;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
-import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,9 +22,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.notifications.PlayServicesInstallation;
-import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.URLUtils;
 import amai.org.conventions.utils.Views;
+import androidx.core.text.method.LinkMovementMethodCompat;
 import fi.iki.kuitsi.listtest.ListTagHandler;
 
 public class ArrivalMethodsActivity extends NavigationActivity implements OnMapReadyCallback {
@@ -51,7 +49,7 @@ public class ArrivalMethodsActivity extends NavigationActivity implements OnMapR
 
 		TextView arrivalMethodsDescription = (TextView) findViewById(R.id.arrival_methods_description);
 		arrivalMethodsDescription.setText(Html.fromHtml(getString(R.string.arrival_method_description), null, new ListTagHandler()));
-		arrivalMethodsDescription.setMovementMethod(LinkMovementMethod.getInstance());
+		arrivalMethodsDescription.setMovementMethod(LinkMovementMethodCompat.getInstance());
 
 		// Handle edge to edge
 		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, Views.InsetType.PADDING, findViewById(R.id.arrival_methods_scroll));

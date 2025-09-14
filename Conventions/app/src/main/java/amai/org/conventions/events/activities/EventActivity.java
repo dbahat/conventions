@@ -13,7 +13,7 @@ import android.os.Handler;
 import android.text.Html;
 import android.text.Spanned;
 import android.text.TextUtils;
-import android.text.method.LinkMovementMethod;
+import androidx.core.text.method.LinkMovementMethodCompat;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -672,7 +672,7 @@ public class EventActivity extends NavigationActivity {
 		} else {
 			// Enable internal links from HTML <a> tags within the description textView.
 			TextView description = (TextView) findViewById(R.id.event_description);
-			description.setMovementMethod(LinkMovementMethod.getInstance());
+			description.setMovementMethod(LinkMovementMethodCompat.getInstance());
 			Spanned spanned = event.getSpannedDescription();
 			description.setText(spanned);
 		}

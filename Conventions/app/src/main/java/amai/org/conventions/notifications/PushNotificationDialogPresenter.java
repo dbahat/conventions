@@ -3,9 +3,7 @@ package amai.org.conventions.notifications;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import androidx.appcompat.app.AlertDialog;
 import android.text.SpannableString;
-import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
 import android.view.View;
 import android.widget.TextView;
@@ -14,6 +12,7 @@ import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.R;
 import amai.org.conventions.settings.SettingsActivity;
 import amai.org.conventions.utils.Settings;
+import androidx.core.text.method.LinkMovementMethodCompat;
 
 /**
  * Allows displaying a dialog with the content of a push notification.
@@ -74,7 +73,7 @@ public class PushNotificationDialogPresenter {
 			View messageView = pushNotificationDialog.findViewById(android.R.id.message);
 			if (messageView instanceof TextView) {
 				TextView textView = (TextView) messageView;
-				textView.setMovementMethod(LinkMovementMethod.getInstance());
+                textView.setMovementMethod(LinkMovementMethodCompat.getInstance());
 			}
 		}
 

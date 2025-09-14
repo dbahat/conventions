@@ -2,12 +2,12 @@ package amai.org.conventions;
 
 import android.os.Bundle;
 import android.text.Html;
-import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.TextView;
 
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.Views;
+import androidx.core.text.method.LinkMovementMethodCompat;
 import fi.iki.kuitsi.listtest.ListTagHandler;
 
 public class AboutActivity extends NavigationActivity {
@@ -23,15 +23,15 @@ public class AboutActivity extends NavigationActivity {
 
 		TextView aboutView = (TextView) findViewById(R.id.about_content);
 		aboutView.setText(Html.fromHtml(getString(R.string.about_content), null, new ListTagHandler()));
-		aboutView.setMovementMethod(LinkMovementMethod.getInstance());
+		aboutView.setMovementMethod(LinkMovementMethodCompat.getInstance());
 
 		TextView linksView = (TextView) findViewById(R.id.about_links);
 		linksView.setText(Html.fromHtml(getString(R.string.about_links), null, new ListTagHandler()));
-		linksView.setMovementMethod(LinkMovementMethod.getInstance());
+		linksView.setMovementMethod(LinkMovementMethodCompat.getInstance());
 
 		TextView aboutAppView = (TextView) findViewById(R.id.about_app_content);
 		aboutAppView.setText(Html.fromHtml(getString(R.string.about_app_content), null, new ListTagHandler()));
-		aboutAppView.setMovementMethod(LinkMovementMethod.getInstance());
+		aboutAppView.setMovementMethod(LinkMovementMethodCompat.getInstance());
 
 		TextView aboutAppVersion = (TextView) findViewById(R.id.about_app_version);
 		String versionName = ConventionsApplication.getVersionName();

@@ -19,11 +19,13 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ListAdapter;
+import android.widget.TextView;
 
+import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
+import androidx.core.text.method.LinkMovementMethodCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import amai.org.conventions.R;
 
 public class Views {
 	public static Point findCoordinates(ViewGroup parentView, View childView) {
@@ -69,6 +71,13 @@ public class Views {
 		inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
 	}
 
+	public static void enableLinkClicks(ViewGroup parentView) {
+		for (int i = 0; i < parentView.getChildCount(); ++i) {
+			if (parentView.getChildAt(i) instanceof TextView) {
+				((TextView) parentView.getChildAt(i)).setMovementMethod(LinkMovementMethodCompat.getInstance());
+			}
+		}
+	}
 
 	/**
 	 * Calculates the width of the widest view in an adapter, for use when you need to wrap_content on a ListView.
