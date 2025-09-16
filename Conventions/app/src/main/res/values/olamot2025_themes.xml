@@ -51,7 +51,7 @@
         <item name="selectedTabIndicatorColor">@color/olamot2025_purple900</item>
 
         <!-- Notifications -->
-        <item name="notificationSmallIcon">@drawable/olamot2025_notification_icon</item>
+        <item name="notificationSmallIcon">@drawable/icon2025_notification_icon</item>
         <!-- Toolbar -->
         <item name="toolbarBackground">@color/olamot2025_purple800</item>
         <item name="toolbarIconAccentColor">@color/olamot2025_pink500</item>
