@@ -125,6 +125,7 @@ public class EventActivity extends NavigationActivity {
 			finish();
 			return;
 		}
+		Log.i(TAG, "Entered event with id " + eventId + ": " + conventionEvent.getTitle());
 
 		setToolbarTitle(conventionEvent.getType().getDescription());
 
