@@ -13,8 +13,11 @@ import android.graphics.drawable.Drawable;
 import android.text.Editable;
 import android.text.Html;
 import android.text.InputType;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.text.method.LinkMovementMethod;
+import android.text.method.MovementMethod;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -35,6 +38,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
+
+import org.w3c.dom.Text;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -207,7 +212,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		closeFeedbackButton.setTextColor(feedbackOpenCloseColor);
 
 		setFeedbackIcon(feedback);
-		setupAdditionalFeedback();
+		setupAdditionalFeedback(additionalFeedbackLink);
 
 		LinearLayout questionsLayout = (LinearLayout) findViewById(R.id.questions_layout);
 		buildQuestionsLayout(questionsLayout, feedback);
@@ -219,14 +224,14 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		this.additionalFeedbackURL = additionalFeedbackURL;
 	}
 
-	private void setupAdditionalFeedback() {
+	private void setupAdditionalFeedback(TextView additionalFeedbackLink) {
 		if (additionalFeedbackURL == null) {
 			additionalFeedbackLink.setVisibility(GONE);
 		} else {
-			additionalFeedbackLink.setVisibility(VISIBLE);
 			additionalFeedbackLink.setText(Html.fromHtml(getContext().getString(R.string.additional_feedback, additionalFeedbackURL.toString())));
 			additionalFeedbackLink.setMovementMethod(LinkMovementMethodCompat.getInstance());
 			additionalFeedbackLink.setLinkTextColor(createStateList(R.attr.state_feedback_link).getColor(this.textColor));
+			additionalFeedbackLink.setVisibility(VISIBLE);
 		}
 	}
 
@@ -741,6 +746,9 @@ public class CollapsibleFeedbackView extends FrameLayout {
 	private int calculateExpendedFeedbackHeight() {
 		ViewGroup expendedFeedbackLayout = (ViewGroup) LayoutInflater.from(this.getContext()).inflate(R.layout.feedback_layout_expanded, feedbackContainer, false);
 
+		// Check if additional feedback is visible and set its text
+		setupAdditionalFeedback(expendedFeedbackLayout.findViewById(R.id.additional_feedback_link));
+
 		// Add all the questions to the view
 		LinearLayout questionsLayout = (LinearLayout) expendedFeedbackLayout.findViewById(R.id.questions_layout);
 		buildQuestionsLayout(questionsLayout, feedback);
@@ -785,6 +793,13 @@ public class CollapsibleFeedbackView extends FrameLayout {
 				throw new RuntimeException("ExpandedHeadless state is not supported for animation");
 		}
 
+		// For some reason, the layout resize (especially when collapsing) causes the additional
+		// feedback link to scroll when the link movement method is set and the link has been clicked.
+		// When expanding back, the scroll position remains, so the link is invisible.
+		// Removing the movement method for the duration of the animation prevents the scrolling.
+		final MovementMethod oldMovementMethod = additionalFeedbackLink.getMovementMethod();
+		additionalFeedbackLink.setMovementMethod(null);
+
 		ValueAnimator animation = slideAnimator(currentHeight, targetHeight, feedbackContainer);
 		animation.setDuration(300);
 
@@ -799,6 +814,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 
 			@Override
 			public void onAnimationEnd(Animator animation) {
+				additionalFeedbackLink.setMovementMethod(oldMovementMethod);
 				finalLayoutBeforeResize.setVisibility(View.GONE);
 				ViewGroup.LayoutParams layoutParams = feedbackContainer.getLayoutParams();
 				layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
@@ -824,7 +840,6 @@ public class CollapsibleFeedbackView extends FrameLayout {
 	}
 
 	private ValueAnimator slideAnimator(int start, int end, final View viewToResize) {
-
 		ValueAnimator animator = ValueAnimator.ofInt(start, end);
 		animator.setInterpolator(new AccelerateDecelerateInterpolator());
 
