@@ -12,8 +12,7 @@ public class DiscountsActivity extends NavigationActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		int layout = ThemeAttributes.getResourceId(this, R.attr.discountsActivityLayout);
-		setContentInContentContainer(layout);
+		setContentInContentContainer(R.layout.activity_discounts);
 		setToolbarTitle(getString(R.string.discounts));
 
 		// Handle edge to edge
