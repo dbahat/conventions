@@ -1,5 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
         android:color="?attr/buttonColorPressed">
-    <item android:drawable="@drawable/material_button_shape" />
+    <item>
+        <inset
+            android:insetLeft="@dimen/button_inset_horizontal_material"
+            android:insetTop="@dimen/button_inset_vertical_material"
+            android:insetRight="@dimen/button_inset_horizontal_material"
+            android:insetBottom="@dimen/button_inset_vertical_material">
+            <selector>
+                <!-- Disabled state -->
+                <item android:state_enabled="false">
+                    <shape android:shape="rectangle">
+                        <corners android:radius="?attr/highlightedButtonRadius" />
+                        <solid android:color="?attr/buttonColorDisabled" />
+                        <padding android:left="@dimen/button_padding_horizontal_material"
+                            android:top="@dimen/button_padding_vertical_material"
+                            android:right="@dimen/button_padding_horizontal_material"
+                            android:bottom="@dimen/button_padding_vertical_material" />
+                    </shape>
+
+                </item>
+
+                <!-- Normal state -->
+                <item>
+                    <shape android:shape="rectangle">
+                        <corners android:radius="?attr/highlightedButtonRadius" />
+                        <solid android:color="?attr/buttonColor" />
+                        <padding android:left="@dimen/button_padding_horizontal_material"
+                            android:top="@dimen/button_padding_vertical_material"
+                            android:right="@dimen/button_padding_horizontal_material"
+                            android:bottom="@dimen/button_padding_vertical_material" />
+                    </shape>
+                </item>
+            </selector>
+        </inset>
+    </item>
 </ripple>

@@ -746,11 +746,6 @@
         <!-- Color for selected sort/filter in second hand buy (both text and icon) -->
         <attr name="secondHandSelectedFilterColor" format="color|reference"/>
 
-        <!-- Discounts Screen -->
-
-        <!-- Layout resource for discounts activity -->
-        <attr name="discountsActivityLayout" format="reference"/>
-
         <!-- Safe Space Screen -->
 
         <!-- Safe Space top image -->

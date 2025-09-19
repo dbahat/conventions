@@ -444,7 +444,7 @@
         <item name="updateItemBorder">@android:color/white</item>
         <item name="eventDetailsBoxColor">@color/transparent_black</item>
         <item name="eventFeedbackBoxColor">@color/transparent_black</item>
-        <item name="eventDetailsDefaultBackground">@color/black</item>
+        <item name="eventDetailsDefaultBackground">?activitiesBackground</item>
         <item name="separatorColor">@color/white</item>
         <item name="locationDetailsTopLineColor">@android:color/white</item>
         <item name="iconAddToFavorites">@drawable/ic_star_white_24dp</item>
@@ -481,7 +481,7 @@
         <item name="updateItemBorder">@android:color/darker_gray</item>
         <item name="eventDetailsBoxColor">@color/transparent_white</item>
         <item name="eventFeedbackBoxColor">@color/transparent_light_yellow</item>
-        <item name="eventDetailsDefaultBackground">@color/white</item>
+        <item name="eventDetailsDefaultBackground">?activitiesBackground</item>
         <item name="separatorColor">@color/black</item>
         <item name="locationDetailsTopLineColor">@android:color/black</item>
         <item name="iconAddToFavorites">@drawable/ic_star_black_24dp</item>
