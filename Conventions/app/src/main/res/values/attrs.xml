@@ -768,11 +768,6 @@
         <attr name="secondHandBuyFiltersBackground" format="color|reference"/>
         <!-- Bottom padding for sort/filter and search results number section in second hand buy -->
         <attr name="secondHandBuyFiltersBottomPadding" format="dimension|reference"/>
-
-        <!-- Discounts Screen -->
-
-        <!-- Layout resource for discounts activity -->
-        <attr name="discountsActivityLayout" format="reference"/>
     </declare-styleable>
 
     <declare-styleable name="EventState">
