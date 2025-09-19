@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="icon2025_blue1_25">#9CD2FF</color>
+    <color name="icon2025_blue1_500">#014882</color>
+
+    <color name="icon2025_blue2_50">#E8EDFF</color>
+    <color name="icon2025_blue2_100">#D7DFFF</color>
+    <color name="icon2025_blue2_300">#A1B2F3</color>
+    <color name="icon2025_blue2_400">#8598E3</color>
+    <color name="icon2025_blue2_500">#6077CE</color>
+    <color name="icon2025_blue2_600">#465EBB</color>
+    <color name="icon2025_blue2_700">#354CA7</color>
+    <color name="icon2025_blue2_800">#263A88</color>
+    <color name="icon2025_blue2_900">#1A2B70</color>
+
+    <color name="icon2025_green100">#69A785</color>
+    <color name="icon2025_green200">#498B67</color>
+
+    <color name="icon2025_gold100">#FFFAF0</color>
+    <color name="icon2025_gold200">#FFF5DE</color>
+    <color name="icon2025_gold500">#F2DFB3</color>
+    <color name="icon2025_gold800">#C8AD72</color>
+    <color name="icon2025_gold100_transparent_95">#F2FFFAF0</color>
+
+    <color name="icon2025_brown200">#D08F65</color>
+    <color name="icon2025_brown300">#BD7C53</color>
+    <color name="icon2025_brown800">#522A11</color>
+
+    <color name="icon2025_gray100">#F5F6FA</color>
+    <color name="icon2025_gray200">#EBECF2</color>
+    <color name="icon2025_gray300">#E6E7ED</color>
+    <color name="icon2025_gray400">#DCDEE5</color>
+    <color name="icon2025_gray900">#6B6D77</color>
+    <color name="icon2025_gray100_transparent_95">#F2F5F6FA</color>
+
+    <color name="icon2025_pink100">#F7EBF4</color>
+    <color name="icon2025_pink300">#EED6E6</color>
+    <color name="icon2025_pink400">#E0C1D6</color>
+    <color name="icon2025_pink500">#D9BACF</color>
+
+    <color name="icon2025_red">#C5143A</color>
+
+
+    <color name="olamot2025_pink500">#E8549B</color>
+    <color name="olamot2025_pink900">#680E39</color>
+    <color name="olamot2025_green200">#C7FFBE</color>
+    <color name="olamot2025_green600">#53CF3E</color>
+    <color name="olamot2025_dark_green300">#0D8C4B</color>
+
+</resources>

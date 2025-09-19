@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:color="@color/olamot2025_pink500" app:state_favorite_second_hand="true" app:state_event_favorite="true"/>
-    <item android:color="@color/olamot2025_pink500" app:state_event_favorite="true"/>
-    <item android:color="@color/white" app:state_favorite_second_hand="true"/>
-    <item android:color="@color/olamot2025_gray200"/>
-</selector>

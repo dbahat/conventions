@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item app:state_event_not_started="true" android:color="@color/icon2025_blue2_300"/>
+    <item app:state_event_current="true" android:color="@color/icon2025_blue2_600"/>
+    <item android:color="@color/icon2025_blue2_100"/>
+</selector>
