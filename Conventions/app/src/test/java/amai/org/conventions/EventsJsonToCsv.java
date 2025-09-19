@@ -32,8 +32,8 @@ import amai.org.conventions.utils.HttpConnectionCreator;
  * 2. Comment the @Ignore on the convert method and run it as a test
  */
 public class EventsJsonToCsv {
-	private static final String SLUG = "olamot2025";
-	private static final String CONVENTION_FOLDER = "olamot 2025";
+	private static final String SLUG = "icon2025";
+	private static final String CONVENTION_FOLDER = "icon 2025";
 
 	// If you have a json file already downloaded, uncomment its path below
 //	private static final String INPUT_FILE = "D:\\conventions app\\convention resources\\" + CONVENTION_FOLDER + "\\feedback\\all_events.json";
