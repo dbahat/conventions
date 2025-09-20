@@ -28,13 +28,13 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 tools:text="The title - volume 1 (book)"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:padding="5dp"/>
             <TextView
                 android:id="@+id/second_hand_item_price"
                 android:textColor="?secondHandFormColor"
                 android:padding="5dp"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 tools:text="Price: 10 NIS"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -48,7 +48,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:textColor="?secondHandFormColor"
                 tools:text="005/01"
                 android:padding="5dp"/>
@@ -56,7 +56,7 @@
                 android:id="@+id/second_hand_item_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:textColor="?secondHandItemStatusColor"
                 tools:text="not sold"
                 android:padding="5dp"/>

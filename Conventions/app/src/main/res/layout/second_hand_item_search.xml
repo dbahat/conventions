@@ -25,7 +25,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:textSize="14sp"
+            android:textSize="16sp"
             tools:text="The title - volume 1 (book)" />
         <ImageView
             android:layout_width="29dp"
@@ -47,7 +47,7 @@
             android:layout_weight="1"
             android:padding="5dp"
             android:textColor="?secondHandFormColor"
-            android:textSize="12sp"
+            android:textSize="14sp"
             tools:text="10 NIS" />
 
         <TextView
@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:textColor="?secondHandFormColor"
-            android:textSize="12sp"
+            android:textSize="14sp"
             tools:text="005/01" />
     </LinearLayout>
 </LinearLayout>
