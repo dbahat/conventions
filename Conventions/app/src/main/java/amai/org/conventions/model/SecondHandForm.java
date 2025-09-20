@@ -48,7 +48,7 @@ public class SecondHandForm implements Serializable {
 
 	public boolean areAllItemsSold() {
 		for (SecondHandItem item : getItems()) {
-			if (item.getStatus() != SecondHandItem.Status.SOLD) {
+			if (item.getStatus() != SecondHandItem.ITEM_STATUS_SOLD) {
 				return false;
 			}
 		}
@@ -58,7 +58,7 @@ public class SecondHandForm implements Serializable {
 	public int getNumberOfSoldItems() {
 		int number = 0;
 		for (SecondHandItem item : getItems()) {
-			if (item.getStatus() == SecondHandItem.Status.SOLD) {
+			if (item.getStatus() == SecondHandItem.ITEM_STATUS_SOLD) {
 				++number;
 			}
 		}
@@ -68,7 +68,7 @@ public class SecondHandForm implements Serializable {
 	public int getSoldItemsTotalPrice() {
 		int total = 0;
 		for (SecondHandItem item : getItems()) {
-			if (item.getStatus() == SecondHandItem.Status.SOLD && item.getPrice() > -1) {
+			if (item.getStatus() == SecondHandItem.ITEM_STATUS_SOLD && item.getPrice() > -1) {
 				total += item.getPrice();
 			}
 		}

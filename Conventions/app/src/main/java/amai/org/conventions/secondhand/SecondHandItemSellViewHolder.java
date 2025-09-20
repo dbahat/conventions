@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.model.SecondHandForm;
 import amai.org.conventions.model.SecondHandItem;
 import amai.org.conventions.model.conventions.Convention;
@@ -114,8 +113,8 @@ class SecondHandItemSellViewHolder extends RecyclerView.ViewHolder {
 			itemPriceView.setVisibility(View.VISIBLE);
 			itemPriceView.setText(itemView.getContext().getString(R.string.second_hand_item_price, item.getPrice()));
 		}
-		if (newItem.getStatus() == SecondHandItem.Status.UNKNOWN) {
-			itemStatusView.setText(R.string.second_hand_unknown_status);
+		if (newItem.getStatusText() == null) {
+			itemStatusView.setText("");
 		} else {
 			itemStatusView.setText(newItem.getStatusText());
 		}
@@ -126,13 +125,13 @@ class SecondHandItemSellViewHolder extends RecyclerView.ViewHolder {
 		}
 
 		switch (newItem.getStatus()) {
-			case CREATED:
+			case SecondHandItem.ITEM_STATUS_CREATED:
 				itemState.add(R.attr.state_second_hand_item_created);
 				break;
-			case SOLD:
+			case SecondHandItem.ITEM_STATUS_SOLD:
 				itemState.add(R.attr.state_second_hand_item_sold);
 				break;
-			case MISSING:
+			case SecondHandItem.ITEM_STATUS_LOST:
 				itemState.add(R.attr.state_second_hand_item_missing);
 				break;
 			default: // In the stand / withdrawn / donated

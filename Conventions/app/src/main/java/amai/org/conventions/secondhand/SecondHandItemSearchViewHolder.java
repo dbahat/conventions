@@ -49,7 +49,7 @@ class SecondHandItemSearchViewHolder extends RecyclerView.ViewHolder {
 		itemIdView.setText(itemId);
 		refreshItemNameText();
 		StateList itemState = new StateList();
-		if (item.getStatus() == SecondHandItem.Status.UNKNOWN) {
+		if (item.getStatus() == SecondHandItem.ITEM_STATUS_UNKNOWN) {
 			// Showing the status instead of the price
 			itemPriceView.setVisibility(View.VISIBLE);
 			itemPriceView.setText(R.string.second_hand_unknown_status);

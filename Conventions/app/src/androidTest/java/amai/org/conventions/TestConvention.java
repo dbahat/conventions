@@ -129,7 +129,7 @@ public class TestConvention extends Convention {
     }
 
     @Override
-    public URL getSecondHandItemsURL(SecondHandItem.Status status) {
+    public URL getSecondHandItemsURL(int status) {
         return null;
     }
 

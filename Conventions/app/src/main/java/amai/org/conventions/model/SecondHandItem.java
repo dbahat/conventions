@@ -2,17 +2,36 @@ package amai.org.conventions.model;
 
 import java.io.Serializable;
 
-import amai.org.conventions.utils.Log;
-
 public class SecondHandItem implements Serializable {
 	private static final String TAG = SecondHandItem.class.getCanonicalName();
+
+	// Not arrived at the stand yet
+	public static final int ITEM_STATUS_CREATED = 1;
+	// In the stand
+	public static final int ITEM_STATUS_ACCEPTED = 2;
+	public static final int ITEM_STATUS_CONFISCATED = 10;
+	public static final int ITEM_STATUS_SOLD = 3;
+	public static final int ITEM_STATUS_LOST = 4;
+	// Statuses that happen when closing the form
+	public static final int ITEM_STATUS_RETURNED = 5;
+	public static final int ITEM_STATUS_DONATED = 6;
+	public static final int ITEM_STATUS_ABANDONED = 8;
+	// These statuses can happen if a lost item is found after the form was closed
+	public static final int ITEM_STATUS_SOLD_AND_FOUND = 7;
+	public static final int ITEM_STATUS_FOUND = 9;
+	public static final int ITEM_STATUS_SUBMITTED_AND_FOUND = 11;
+	public static final int ITEM_STATUS_DONATED_AND_FOUND = 12;
+	// A buyer scanned the item in self service and hasn't paid yet
+	public static final int ITEM_STATUS_RESERVED_FOR_PAYMENT = 13;
+	// Item not found
+	public static final int ITEM_STATUS_UNKNOWN = -1;
 
 	private String id;
 	private String type;
 	private String description;
 	private String userDescription;
 	private int price = -1; // Unknown
-	private Status status;
+	private int status;
 	private String statusText;
 	private int number;
 	private String formId;
@@ -41,11 +60,11 @@ public class SecondHandItem implements Serializable {
 		this.description = description;
 	}
 
-	public Status getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(Status status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 
@@ -87,35 +106,5 @@ public class SecondHandItem implements Serializable {
 
 	public void setFormId(String formId) {
 		this.formId = formId;
-	}
-
-	public enum Status {
-		CREATED(1), // Not arrived at the stand yet
-		READY(2), // In the stand
-		SOLD(3),
-		MISSING(4),
-		RETURNED(5),
-		DONATED(6),
-		UNKNOWN(-1);
-
-		private int serverStatus;
-		Status(int serverStatus) {
-			this.serverStatus = serverStatus;
-		}
-
-		public int getServerStatus() {
-			return serverStatus;
-		}
-
-		static Status getByServerStatus(int serverStatus) {
-			for (Status status : values()) {
-				if (status.getServerStatus() == serverStatus) {
-					return status;
-				}
-			}
-			// This shouldn't happen, but if a new status appears without the application being updated it might
-			Log.e(TAG, "Unknown status for second hand item: " + serverStatus);
-			return UNKNOWN;
-		}
 	}
 }

@@ -57,7 +57,7 @@ public class SecondHandBuy extends SecondHand {
 		Log.i(TAG, "Refreshing second hand buy");
 		try {
 			List<SecondHandItem> items = new LinkedList<>();
-			URL refreshURL = Convention.getInstance().getSecondHandItemsURL(SecondHandItem.Status.READY);
+			URL refreshURL = Convention.getInstance().getSecondHandItemsURL(SecondHandItem.ITEM_STATUS_ACCEPTED);
 			if (refreshURL != null) {
 				HttpURLConnection request = HttpConnectionCreator.createConnection(refreshURL);
 				request.connect();
@@ -106,7 +106,7 @@ public class SecondHandBuy extends SecondHand {
 		for (Map.Entry<String, SecondHandItem> pair : favoriteItems.entrySet()) {
 			SecondHandItem favoriteItem = pair.getValue();
 			if (!existingItemIDs.containsKey(favoriteItem.getId())) {
-				favoriteItem.setStatus(SecondHandItem.Status.UNKNOWN);
+				favoriteItem.setStatus(SecondHandItem.ITEM_STATUS_UNKNOWN);
 				favoriteItem.setStatusText(null);
 				items.add(favoriteItem);
 			} else {

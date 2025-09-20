@@ -444,7 +444,7 @@ public class SecondHandBuyFragment extends Fragment implements SwipeRefreshLayou
 				if (showAllFavorites && secondHandBuy.isFavorite(item)) {
 					return true;
 				}
-				if (item.getStatus() == SecondHandItem.Status.UNKNOWN) {
+				if (item.getStatus() == SecondHandItem.ITEM_STATUS_UNKNOWN) {
 					// This could happen if the user had a favorite event which wasn't
 					// found in the search then removed it from the favorites. It will remain in
 					// the list until the next refresh but we won't show it.

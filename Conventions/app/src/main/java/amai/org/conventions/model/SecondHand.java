@@ -18,7 +18,7 @@ class SecondHand {
 			item.setDescription(decodeHtml(itemJson.get("description").getAsString()));
 		}
 		JsonObject statusObject = itemJson.get("status").getAsJsonObject();
-		item.setStatus(SecondHandItem.Status.getByServerStatus(statusObject.get("id").getAsInt()));
+		item.setStatus(statusObject.get("id").getAsInt());
 		item.setStatusText(statusObject.get("text").getAsString());
 		item.setType(itemJson.get("category").getAsJsonObject().get("text").getAsString());
 		JsonElement priceJson = itemJson.get("price");
