@@ -99,31 +99,41 @@
 <p><strong>כניסה עם כלבי שירות</strong><strong>:</strong> כניסה עם כלבי שירות מותרת לכלל סוגי כלבי השירות. ככלל, אין להיכנס למתחם הפסטיבל עם כלבים שאינם כלבי שירות.</p>
 ]]></string>
     <string name="discounts_main_title">הטבות</string>
-    <string name="discounts_restaurants_title">סידרנו לכם הטבות עם טעמים מכוכבים נפלאים!</string>
-    <string name="discounts_restaurants_overview">המסעדות הבאות מעניקות הנחה בהצגת כרטיס או תג של הכנס, במהלך שני הימים של הכנס:</string>
-    <string name="discounts_buzza">הנחה על כל הגלידות בהצגת תג/כרטיס או קוספליי\n<a href="https://buzaicecream.co.il/">לאתר בוזה</a></string>
-    <string name="discounts_aroma">10% הנחה בסניף TLV\n<a href="https://www.aroma.co.il/store/%D7%A7%D7%A0%D7%99%D7%95%D7%9F-tlv/">לאתר ארומה</a></string>
-    <string name="discounts_tlab">באבלס על חשבון הבית\n<a href="https://wissotzky-tlab.co.il/%D7%94%D7%A1%D7%A0%D7%99%D7%A4%D7%99%D7%9D-%D7%A9%D7%9C%D7%A0%D7%95/?gad_source=1">לאתר T LAB</a></string>
-    <string name="discounts_night_cookie">עוגיה חינם על קניית 3 עוגיות ומעלה\n<a href="https://www.nightcookie.com/">לאתר עוגיית לילה</a></string>
-    <string name="discounts_dizengof_lottery">הגרלה בסנטר! כל כרטיס יכול לזכות\n<a href="https://www.dizengof-center.co.il/activities/events/?ContentID=60925">למידע נוסף באתר דיזינגוף סנטר</a></string>
-    <string name="discounts_vitamin">מיצים, גלידות ושייקים ב15% הנחה. קרליבך 20</string>
-    <string name="discounts_oban_koban">10% הנחה בין השעות 11:00-18:00\n<a href="https://www.obankoban.co.il/">לאתר אובן קובן</a></string>
-    <string name="discounts_suduch">טוסט + שתייה + נקניקיית נשנוש ב-45₪ (במקום 55)\n<a href="https://suduch.co.il/">לאתר סודוך</a></string>
-    <string name="discounts_memphis">10% הנחה בהצגת תג/כרטיס/קוספליי\n<a href="https://www.memphis.co.il/">לאתר ממפיס</a></string>
-    <string name="discounts_storytel">25% הנחה לשנה על מינוי לספרים מוקלטים ודיגיטלים בעברית ובאנגלית\n<a href="https://www.storytel.com/il">לאתר storytel</a></string>
-    <string name="discounts_steimatzky_free_books">שלושה ספרים במתנה בימי הפסטיבל\n<a href="https://d-steimatzky.co.il/?page_id=891070&amp;preview=true">למידע נוסף באתר סטימצקי</a></string>
-    <string name="discounts_title">הטבות בחנויות</string>
-    <string name="discounts_overview">החנויות הבאות מעניקות הנחה בהצגת כרטיס או תג של הכנס, במהלך שני הימים של הכנס:</string>
+    <string name="discounts_main_overview">העסקים הבאים מעניקים הנחה במהלך שלושת ימי הפסטיבל:</string>
+    <string name="discounts_liam"><b>משחקי ליאם</b>\nהנחה מצטברת! 5 ש\"ח בדוכן <b>על כל כרטיס בתשלום לאירוע!</b>\n<a href="https://liamgames.co.il/">לאתר משחקי ליאם</a></string>
+    <string name="discounts_dizengoff"><b>דיזינגוף סנטר – הגרלה</b>\nבאר המשאלות בסנטר! הגרלה נושאת פרסים בשיתוף דיזנגוף סנטר, רכשו כרטיסים דרך התוכניה, הרשמו ותוכלו לזכות ב-<b>2500 ש\"ח!</b>\n<a href="https://2025.iconfestival.org.il/center/">לפרטים נוספים</a></string>
+    <string name="discounts_evrit"><b>עברית</b>\n10% הנחה על המועמדים לפרס גפן.\nקוד: <b>MADAB25</b>\n<a href="https://www.e-vrit.co.il/Group/8872/%D7%A4%D7%A1%D7%98%D7%99%D7%91%D7%9C_%D7%90%D7%99%D7%99%D7%A7%D7%95%D7%9F_%D7%94%D7%A2%D7%95%D7%9C%D7%99%D7%9D_%D7%9C%D7%92%D7%9E%D7%A8_%D7%A4%D7%A8%D7%A1_%D7%92%D7%A4%D7%9F_25">לפרטים נוספים</a></string>
+    <string name="discounts_catharsis"><b>קתרזיס</b>\n30% הנחה על ספרי מד"ב באתר.\nקוד: <b>ICON25</b>\n<a href="https://bookscatharsis.com/product-category/%d7%90%d7%98%d7%9c%d7%a0%d7%98%d7%99%d7%a1/">לאתר קתרזיס</a></string>
+    <string name="discounts_pardes"><b>פרדס הוצאה לאור</b>\n10% הנחה על \"<a href="https://www.pardes.co.il/?id=showbook&amp;catnum=978-965-541-514-8">טרול</a>\" של מיכל הבורצקי <a href="https://tickets.sf-f.org.il/icon2025/event/%d7%98%d7%a8%d7%95%d7%9c%d7%99%d7%9d-%d7%9b%d7%96%d7%91%d7%99%d7%9d-%d7%95%d7%9e%d7%93%d7%a2-%d7%91%d7%93%d7%99%d7%95%d7%a0%d7%99-%d7%a1%d7%9c%d7%95%d7%91%d7%a7%d7%99-%d7%91%d7%90%d7%a0%d7%92%d7%9c/">המתארח בפסטיבל</a>, 10% על <a href="https://www.pardes.co.il/?id=showbook&amp;catnum=978-965-541-727-2">אאליטה</a> של אלכסיי טולסטוי. מד\"ב קלאסי בתרגום ראשון לעברית. <b>קוד הנחה: אייקון</b>\n<a href="https://www.pardes.co.il/?id=showbook&amp;catnum=978-965-541-514-8">לאתר פרדס</a></string>
+    <string name="discounts_national_geographic_kids"><b>נשיונל ג\'אוגרפיק קידס</b>\n4 חודשים ראשונים ב-25 ש\"ח לחודש בלבד (במקום 49)\n<a href="https://ngkids.co.il/product/icon">לפרטים נוספים</a></string>
+    <string name="discounts_restaurants_title">הנחות במסעדות</string>
+    <string name="discounts_restaurants_overview">המסעדות הבאות מעניקות הנחה בהצגת כרטיס או תג של הפסטיבל, במהלך שלושת ימי הפסטיבל:</string>
+    <string name="discounts_sorsetto"><b>Sorsetto. רחוב הארבעה 16</b>\n15% הנחה על תפריט הצהריים (עד השעה 16:00), מנת חברים מיוחדת בהצגת תג/כרטיס/קוספליי.\n<a href="https://www.instagram.com/sorsetto_tlv">לאתר Sorsetto</a></string>
+    <string name="discounts_buza"><b>בוזה. החשמונאים 91</b>\nכדור אחד ב-17 ש\"ח, 2 כדורים ב-24 ש\"ח לכל באות ובאי הכנס.\n<a href="https://buzaicecream.co.il/">לאתר בוזה</a></string>
+    <string name="discounts_tlab"><b>TLAB. החשמונאים 103.</b>\nתוספת באבלס על חשבון הבית.\n<a href="https://wissotzky-tlab.co.il/app/uploads/2025/01/%D7%AA%D7%A4%D7%A8%D7%99%D7%98-TLAB-12-24-A4.pdf">לאתר T LAB</a></string>
+    <string name="discounts_oban_koban"><b>אובן קובן. הארבעה 16.</b>\n10% הנחה בין השעות 11:00-20:00\n<a href="https://www.obankoban.co.il/">לאתר אובן קובן</a></string>
+    <string name="discounts_memphis"><b>ממפיס. קרליבך 20.</b>\n10% הנחה בהצגת תג/כרטיס/קוספליי\n<a href="https://www.memphis.co.il/branch/%D7%AA%D7%9C-%D7%90%D7%91%D7%99%D7%91/">לאתר ממפיס</a></string>
+    <string name="discounts_greg"><b>גרג TLV. קניון TLV.</b>\n5% הנחה בהצגת תג/כרטיס/קוספליי\n<a href="https://gregcafe.co.il/branch/%D7%92%D7%A8%D7%92-tlv/">לאתר גרג</a></string>
+    <string name="discounts_aroma"><b>ארומה TLV. קניון TLV</b>\n5% הנחה בסניף בהצגת תג או כרטיס\n<a href="https://www.aroma.co.il/store/%D7%A7%D7%A0%D7%99%D7%95%D7%9F-tlv/">לאתר ארומה</a></string>
     <string name="discounts_sponsors_title">השותפים שלנו</string>
     <string name="discounts_sponsors_overview">העסקים הבאים העניקו חסות לפסטיבל אייקון:</string>
-    <string name="discounts_dizengoff">דיזנגוף סנטר\n<a href="https://www.dizengof-center.co.il/">לביקור באתר</a></string>
-    <string name="discounts_tsameret">ספרי צמרת הוצאה לאור\n<a href="https://zbooks.co.il/">לביקור באתר</a></string>
-    <string name="discounts_hakubia">הקוביה משחקים\n<a href="https://www.hakubia.com/">לביקור באתר</a></string>
-    <string name="discounts_kingdom">הממלכה\n<a href="https://thekingdom.co.il/">לביקור באתר</a></string>
-    <string name="discounts_sirolynia">סירולניה</string>
-    <string name="discounts_philharmonicon">קונצרט מיוחד בהיכל התרבות</string>
-    <string name="discounts_iac">המכללה הישראלית לאנימציה ולעיצוב\n<a href="https://www.ani-mator.com/">לביקור באתר</a></string>
-    <string name="discounts_buzza_sponsor">בוזה\n<a href="https://buzaicecream.co.il/">לביקור באתר</a></string>
+    <string name="discounts_sponsor_liam">משחקי ליאם מתרגמת ומנגישה מגוון משחקים נבחרים מהטופ העולמי.\nהמגוון הרחב שלנו מתאים לשחקנים ותיקים, מתחילים ומשפחות.\n<a href="https://liamgames.co.il/">לביקור באתר</a></string>
+    <string name="discounts_sponsor_dizengoff">דיזנגוף סנטר\n<a href="https://2025.iconfestival.org.il/center/">לביקור באתר</a></string>
+    <string name="discounts_sponsor_cinema_podcast">פודקאסט הקולנוע של אמיר בוקסבאום\n<a href="https://open.spotify.com/show/1ZyJFE0v7LnVxwokVIRlJm?si=NHLr_xluRCK0U-PFS3vZ9w">לביקור באתר</a></string>
+    <string name="discounts_sponsor_magi_podcast">פודקאסט הקולנוע והטלוויזיה של מאגי\n<a href="https://open.spotify.com/show/6lDeAFl6OCDjgqemKYL73m?si=708dfd0cfc6b4fea">לביקור באתר</a></string>
+    <string name="discounts_sponsor_spaceship">מתחם למשחקי \"צוות חללית\"\n<a href="https://www.larp-g.com/spaceshiplarp">לביקור באתר</a></string>
+    <string name="discounts_sponsor_icode"><b>אייקוד</b>\nפעילות בריחה אינטראקטיבית\nקחו בדוכן האגודה את מפת הרמזים וצאו להרפתקה!\n<a href="https://hovav1.com/">לביקור באתר</a></string>
+    <string name="discounts_sponsor_emily">Out&amp;About\nEmily\'s Boutoque\nבסינמטק!\n</string>
+    <string name="discounts_sponsor_cinematheque">סינמטק תל אביב\n<a href="https://www.cinema.co.il/">לביקור באתר</a></string>
+    <string name="discounts_sponsor_iac">המכללה הישראלית לאנימציה ועיצוב\n<a href="https://www.ani-mator.com/">לביקור באתר</a></string>
+    <string name="discounts_sponsor_kingdom">חנות התחביב המובילה בארץ למשחקי לוח, משחקי תפקידים ועוד\n<a href="https://thekingdom.co.il/">לביקור באתר</a></string>
+    <string name="discounts_sponsor_sirolynia">חנות המשחקים הגדולה של ירושלים\n<a href="https://sirolynia.com/il">לביקור באתר</a></string>
+    <string name="discounts_sponsor_paper_tiger">ספרים במחירים שמתאימים לכולם\n<a href="https://lp.vp4.me/rbne">לביקור באתר</a></string>
+    <string name="discounts_sponsor_dov"><b>דוב לדעת</b>\nמשחקים עם מילים\n<a href="https://www.dovladaat.com/">לביקור באתר</a></string>
+    <string name="discounts_sponsor_utz">הוצאת עוץ – ספרים עם קסם\n<a href="https://utz.co.il/">לביקור באתר</a></string>
+    <string name="discounts_sponsor_chaotic">ארבע אמניות מקומיות של פופ ארט גיקי ואומנות גותית מעולמות הכישוף\n<a href="https://www.instagram.com/chaoticneutral_collab">לביקור באתר</a></string>
+    <string name="discounts_sponsor_legion">לגיון 501 אוספים תרומות בדוכן\n<a href="https://www.501st.com/members/garrisonroster.php?garrisonId=41">לביקור באתר</a></string>
+    <string name="discounts_sponsor_igy">ארגון נוער גאה, חפשו את הדוכן שלנו בפסטיבל\n<a href="https://igy.org.il/">לביקור באתר</a></string>
 
     <string name="activities_main_title">פעילויות במתחם</string>
 
