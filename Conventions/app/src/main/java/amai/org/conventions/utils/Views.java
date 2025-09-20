@@ -21,6 +21,8 @@ import android.widget.FrameLayout;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
+import java.util.function.Consumer;
+
 import amai.org.conventions.ThemeAttributes;
 import androidx.core.text.method.LinkMovementMethodCompat;
 import androidx.core.view.ViewCompat;
@@ -72,9 +74,21 @@ public class Views {
 	}
 
 	public static void enableLinkClicks(ViewGroup parentView) {
+		runOnAllTextViews(parentView, (TextView view) -> {
+			view.setMovementMethod(LinkMovementMethodCompat.getInstance());
+		});
+	}
+
+	public interface Action<T> {
+		void run(T on);
+	}
+	public static void runOnAllTextViews(ViewGroup parentView, Action<TextView> action) {
 		for (int i = 0; i < parentView.getChildCount(); ++i) {
 			if (parentView.getChildAt(i) instanceof TextView) {
+				action.run((TextView) parentView.getChildAt(i));
 				((TextView) parentView.getChildAt(i)).setMovementMethod(LinkMovementMethodCompat.getInstance());
+			} else if (parentView.getChildAt(i) instanceof ViewGroup) {
+				runOnAllTextViews((ViewGroup) parentView.getChildAt(i), action);
 			}
 		}
 	}

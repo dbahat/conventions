@@ -31,5 +31,8 @@ public class DiscountsActivity extends NavigationActivity {
 		}
 
 		Views.enableLinkClicks(contentContainer);
+
+		// The texts may have links to events
+		Views.runOnAllTextViews(contentContainer, this::interceptEventLinks);
 	}
 }

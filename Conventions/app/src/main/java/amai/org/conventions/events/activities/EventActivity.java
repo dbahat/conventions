@@ -812,20 +812,7 @@ public class EventActivity extends NavigationActivity {
 			description.setMovementMethod(LinkMovementMethodCompat.getInstance());
 			Spanned spanned = event.getSpannedDescription();
 			description.setText(spanned);
-
-			// Intercept clicks on links to other events
-			if (description.getText() instanceof SpannableString) {
-				SpannableString spannable = (SpannableString) description.getText();
-				URLSpan[] spans = spannable.getSpans(0, spanned.length(), URLSpan.class);
-				for (URLSpan span : spans) {
-					int spanStart = spannable.getSpanStart(span);
-					int spanEnd = spannable.getSpanEnd(span);
-					int spanFlags = spannable.getSpanFlags(span);
-					spannable.removeSpan(span);
-					spannable.setSpan(new EventURLSpan(span), spanStart, spanEnd, spanFlags);
-				}
-				description.setText(spannable);
-			}
+			interceptEventLinks(description);
 		}
 	}
 
@@ -849,24 +836,5 @@ public class EventActivity extends NavigationActivity {
 
 	public void closeFeedback(View view) {
 		feedbackView.setState(CollapsibleFeedbackView.State.Collapsed);
-	}
-
-	private class EventURLSpan extends ClickableSpan {
-		private final URLSpan urlSpan;
-
-		public EventURLSpan(URLSpan span) {
-			this.urlSpan = span;
-		}
-
-		@Override
-		public void onClick(View view) {
-			ConventionEvent event = Convention.getInstance().findEventByURL(urlSpan.getURL());
-			// Go to the event in case of a link to an event. Otherwise go to the original URL.
-			if (event != null) {
-				navigateToEvent(event.getId());
-			} else {
-				urlSpan.onClick(view);
-			}
-		}
 	}
 }

@@ -12,6 +12,9 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.ClickableSpan;
+import android.text.style.URLSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -44,6 +47,7 @@ import amai.org.conventions.events.activities.MyEventsActivity;
 import amai.org.conventions.events.activities.ProgrammeActivity;
 import amai.org.conventions.events.adapters.DayFragmentAdapter;
 import amai.org.conventions.map.MapActivity;
+import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.notifications.PlayServicesInstallation;
 import amai.org.conventions.notifications.PushNotification;
@@ -839,5 +843,47 @@ public abstract class NavigationActivity extends AppCompatActivity {
 
 	protected AskForExactAlarmsPermissionTask newAskForExactAlarmsPermissionTask() {
 		return new AskForExactAlarmsPermissionTask();
+	}
+
+	protected void interceptEventLinks(TextView textView) {
+		// Intercept clicks on links to other events
+		if (textView.getText() instanceof SpannableString) {
+			SpannableString spannable = (SpannableString) textView.getText();
+			URLSpan[] spans = spannable.getSpans(0, spannable.length(), URLSpan.class);
+			for (URLSpan span : spans) {
+				EventURLSpan eventURLSpan = getEventSpanForURL(span);
+				if (eventURLSpan == null) {
+					continue;
+				}
+				int spanStart = spannable.getSpanStart(span);
+				int spanEnd = spannable.getSpanEnd(span);
+				int spanFlags = spannable.getSpanFlags(span);
+				spannable.removeSpan(span);
+				spannable.setSpan(eventURLSpan, spanStart, spanEnd, spanFlags);
+			}
+			textView.setText(spannable);
+		}
+	}
+
+	private EventURLSpan getEventSpanForURL(URLSpan urlSpan) {
+		ConventionEvent event = Convention.getInstance().findEventByURL(urlSpan.getURL());
+		// Go to the event in case of a link to an event. Otherwise go to the original URL.
+		if (event != null) {
+			return new EventURLSpan(event.getId());
+		}
+		return null;
+	}
+
+	private class EventURLSpan extends ClickableSpan {
+		private final String eventId;
+
+		public EventURLSpan(String eventId) {
+			this.eventId = eventId;
+		}
+
+		@Override
+		public void onClick(View view) {
+			navigateToEvent(eventId);
+		}
 	}
 }
