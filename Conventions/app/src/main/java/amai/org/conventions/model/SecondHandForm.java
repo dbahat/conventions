@@ -48,7 +48,8 @@ public class SecondHandForm implements Serializable {
 
 	public boolean areAllItemsSold() {
 		for (SecondHandItem item : getItems()) {
-			if (item.getStatus() != SecondHandItem.ITEM_STATUS_SOLD) {
+			// Ignoring confiscated items because they can't be sold
+			if (item.getStatus() != SecondHandItem.ITEM_STATUS_SOLD && item.getStatus() != SecondHandItem.ITEM_STATUS_CONFISCATED) {
 				return false;
 			}
 		}
