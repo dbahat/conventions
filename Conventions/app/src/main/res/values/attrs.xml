@@ -70,6 +70,8 @@
         <attr name="contentStartMargin" format="dimension"/>
         <!-- Margin from activity content to screen See contentStartMargin for usage. -->
         <attr name="contentEndMargin" format="dimension"/>
+        <!-- Should the status bar have light icons -->
+        <attr name="lightStatusBarIcons" format="boolean"/>
 
         <!-- Notifications -->
 

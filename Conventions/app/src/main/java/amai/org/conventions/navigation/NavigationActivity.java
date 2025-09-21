@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -30,6 +31,7 @@ import com.google.android.material.tabs.TabLayout;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 import amai.org.conventions.AboutActivity;
@@ -74,6 +76,7 @@ import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.insets.ColorProtection;
 import androidx.core.view.insets.GradientProtection;
+import androidx.core.view.insets.Protection;
 import androidx.core.view.insets.ProtectionLayout;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
@@ -220,7 +223,10 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	}
 
 	private void handleEdgeToEdge() {
-		WindowCompat.enableEdgeToEdge(getWindow());
+		Window window = getWindow();
+		WindowCompat.enableEdgeToEdge(window);
+		boolean useLightIcons = ThemeAttributes.getBoolean(this, R.attr.lightStatusBarIcons);
+		WindowCompat.getInsetsController(window, window.getDecorView()).setAppearanceLightStatusBars(!useLightIcons);
 
 		Views.registerApplyInsets(Views.InsetType.PADDING, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, navigationToolbar);
 
@@ -231,12 +237,15 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		Views.registerApplyInsets(Views.InsetType.MARGIN, Views.InsetType.MARGIN, Views.InsetType.MARGIN, Views.InsetType.MARGIN, actionButton);
 
 		ProtectionLayout edgesProtection = findViewById(R.id.edge_protection);
-		edgesProtection.setProtections(Arrays.asList(
-			new GradientProtection(WindowInsetsCompat.Side.TOP, getResources().getColor(R.color.transparent_black_50)),
+		List<Protection> protectionsList = new LinkedList<>(Arrays.asList(
 			new ColorProtection(WindowInsetsCompat.Side.BOTTOM, getResources().getColor(R.color.transparent_black_50)),
 			new ColorProtection(WindowInsetsCompat.Side.LEFT, getResources().getColor(R.color.transparent_black_50)),
 			new ColorProtection(WindowInsetsCompat.Side.RIGHT, getResources().getColor(R.color.transparent_black_50))
 		));
+		if (useLightIcons) {
+			protectionsList.add(new GradientProtection(WindowInsetsCompat.Side.TOP, getResources().getColor(R.color.transparent_black_50)));
+		}
+		edgesProtection.setProtections(protectionsList);
 	}
 
 	private PushNotification getNotificationFromIntent(Intent intent) {
