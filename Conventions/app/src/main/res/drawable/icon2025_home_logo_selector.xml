@@ -3,5 +3,5 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:drawable="@drawable/icon2025_logo" app:state_home_during_con="true"/>
     <item android:drawable="@drawable/icon2025_clown_w_logo" app:state_home_before_con="true"/>
-    <item android:drawable="@drawable/icon2025_clown_w_logo"/>
+    <item android:drawable="@drawable/icon2025_wizards_w_logo"/>
 </selector>
