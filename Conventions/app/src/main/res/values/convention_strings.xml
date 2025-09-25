@@ -113,8 +113,11 @@
     <string name="discounts_tlab"><b>TLAB. החשמונאים 103.</b>\nתוספת באבלס על חשבון הבית.\n<a href="https://wissotzky-tlab.co.il/app/uploads/2025/01/%D7%AA%D7%A4%D7%A8%D7%99%D7%98-TLAB-12-24-A4.pdf">לאתר T LAB</a></string>
     <string name="discounts_oban_koban"><b>אובן קובן. הארבעה 16.</b>\n10% הנחה בין השעות 11:00-20:00\n<a href="https://www.obankoban.co.il/">לאתר אובן קובן</a></string>
     <string name="discounts_memphis"><b>ממפיס. קרליבך 20.</b>\n10% הנחה בהצגת תג/כרטיס/קוספליי\n<a href="https://www.memphis.co.il/branch/%D7%AA%D7%9C-%D7%90%D7%91%D7%99%D7%91/">לאתר ממפיס</a></string>
-    <string name="discounts_greg"><b>גרג TLV. קניון TLV.</b>\n5% הנחה בהצגת תג/כרטיס/קוספליי\n<a href="https://gregcafe.co.il/branch/%D7%92%D7%A8%D7%92-tlv/">לאתר גרג</a></string>
+    <string name="discounts_night_cookie"><b>נייט קוקי. סניף קרליבך בלבד.</b>\n<b>2 עוגיות מתנה</b> בהזמנת מארז שישייה.\n<a href="https://www.nightcookie.com/">לאתר נייט קוקי</a></string>
+    <string name="discounts_giraffe"><b>ג\'ירף. הארבעה 13.</b>\n20% הנחה על כל הקינוחים\n<a href="https://tabitisrael.co.il/tabit-order?orgName=Giraffe&amp;step=enter&amp;gad_source=1&amp;gad_campaignid=21132986808">לאתר ההזמנות</a></string>
+    <string name="discounts_wok_to_walk"><b>ווק טו ווק. החשמונאים 86.</b>\n15% הנחה על כל התפריט, בישיבה או באיסוף עצמי. <b>קוד: CINIMA15</b>\n<a href="https://tabitisrael.co.il/tabit-order?siteName=woktowalkhahashmonaim&amp;step=enter">לאתר ההזמנות</a></string>
     <string name="discounts_aroma"><b>ארומה TLV. קניון TLV</b>\n5% הנחה בסניף בהצגת תג או כרטיס\n<a href="https://www.aroma.co.il/store/%D7%A7%D7%A0%D7%99%D7%95%D7%9F-tlv/">לאתר ארומה</a></string>
+    <string name="discounts_greg"><b>גרג TLV. קניון TLV.</b>\n5% הנחה בהצגת תג/כרטיס/קוספליי\n<a href="https://gregcafe.co.il/branch/%D7%92%D7%A8%D7%92-tlv/">לאתר גרג</a></string>
     <string name="discounts_sponsors_title">השותפים שלנו</string>
     <string name="discounts_sponsors_overview">העסקים הבאים העניקו חסות לפסטיבל אייקון:</string>
     <string name="discounts_sponsor_liam">משחקי ליאם מתרגמת ומנגישה מגוון משחקים נבחרים מהטופ העולמי.\nהמגוון הרחב שלנו מתאים לשחקנים ותיקים, מתחילים ומשפחות.\n<a href="https://liamgames.co.il/">לביקור באתר</a></string>
