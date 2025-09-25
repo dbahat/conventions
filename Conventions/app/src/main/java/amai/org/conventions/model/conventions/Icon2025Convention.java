@@ -290,9 +290,9 @@ public class Icon2025Convention extends SffConvention {
 	}
 
 	private MapLocation mapLocation(String name, List<? extends Place> places, float x, float y) {
-		final int DEFAULT_MARKER = R.drawable.olamot2025_place;
+		final int DEFAULT_MARKER = R.drawable.icon2025_place;
 		final int DEFAULT_MARKER_TINT_RES = MapLocation.NO_TINT;
-		final int DEFAULT_SELECTED_MARKER = R.drawable.olamot2025_place_selected;
+		final int DEFAULT_SELECTED_MARKER = R.drawable.icon2025_place_selected;
 		final int DEFAULT_SELECTED_MARKER_TINT_RES = MapLocation.NO_TINT;
 
 		MapLocation result = new MapLocation();
@@ -314,8 +314,8 @@ public class Icon2025Convention extends SffConvention {
 
 	private MapLocation mapLocationForShelter(String name, float x, float y) {
 		return mapLocation(new Shelter().withName(name), x, y)
-			.withMarkerResource(R.drawable.olamot2025_place_red, false, MapLocation.NO_TINT)
-			.withSelectedMarkerResource(R.drawable.olamot2025_place_red_selected, false, MapLocation.NO_TINT);
+			.withMarkerResource(R.drawable.icon2025_place_red, false, MapLocation.NO_TINT)
+			.withSelectedMarkerResource(R.drawable.icon2025_place_red_selected, false, MapLocation.NO_TINT);
 	}
 
 	@Override

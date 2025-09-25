@@ -39,12 +39,4 @@
     <color name="icon2025_pink500">#D9BACF</color>
 
     <color name="icon2025_red">#C5143A</color>
-
-
-    <color name="olamot2025_pink500">#E8549B</color>
-    <color name="olamot2025_pink900">#680E39</color>
-    <color name="olamot2025_green200">#C7FFBE</color>
-    <color name="olamot2025_green600">#53CF3E</color>
-    <color name="olamot2025_dark_green300">#0D8C4B</color>
-
 </resources>
