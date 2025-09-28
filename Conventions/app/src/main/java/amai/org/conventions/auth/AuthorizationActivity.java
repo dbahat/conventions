@@ -19,6 +19,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import amai.org.conventions.ThemeAttributes;
+import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultLauncher;
@@ -135,7 +136,8 @@ public class AuthorizationActivity extends AppCompatActivity {
 				mConfiguration.getClientId(),
 				ResponseTypeValues.CODE,
 				mConfiguration.getRedirectUri())
-				.setScope(mConfiguration.getScope());
+				.setScope(mConfiguration.getScope())
+				.setUiLocales(Dates.getLocale().getLanguage());
 		return authRequestBuilder.build();
 	}
 
