@@ -37,6 +37,7 @@
     <color name="icon2025_pink300">#EED6E6</color>
     <color name="icon2025_pink400">#E0C1D6</color>
     <color name="icon2025_pink500">#D9BACF</color>
+    <color name="icon2025_pink800">#B28BA6</color>
 
     <color name="icon2025_red">#C5143A</color>
 </resources>
