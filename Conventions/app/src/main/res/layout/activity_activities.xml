@@ -18,113 +18,71 @@
         android:layout_marginEnd="?contentEndMargin"
         android:background="?infoActivitiesTextBackground"
         android:orientation="vertical">
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/activities_main_title"-->
+<!--            android:layout_marginBottom="20dp"-->
+<!--            android:textSize="18sp"-->
+<!--            android:textColor="?android:textColorPrimary"-->
+<!--            />-->
+
+
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/activities_main_title"
-            android:layout_marginBottom="20dp"
-            android:textSize="18sp"
             android:textColor="?android:textColorPrimary"
-            />
+            android:textSize="14sp"
+            android:text="@string/activities_glhf"
+            android:layout_marginBottom="15dp"/>
+        <amai.org.conventions.customviews.AspectRatioImageView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/icon2025_activities_glhf"
+            android:layout_marginBottom="30dp"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="?android:textColorPrimary"
+            android:text="@string/activities_icode"
+            android:layout_marginBottom="15dp"/>
+        <amai.org.conventions.customviews.AspectRatioImageView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/icon2025_activities_icode"
+            android:layout_marginBottom="30dp"/>
 
-<!--        <amai.org.conventions.customviews.AspectRatioImageView-->
-<!--            android:layout_width="150dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:src="@drawable/olamot2024_activities_dizengoff"-->
-<!--            android:layout_marginBottom="15dp"/>-->
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textColor="?android:textColorPrimary"-->
-<!--            android:textSize="14sp"-->
-<!--            android:text="@string/activities_dizengoff"-->
-<!--            android:layout_marginBottom="30dp"/>-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="14sp"
+            android:text="@string/activities_spaceship"
+            android:layout_marginBottom="15dp"/>
+        <amai.org.conventions.customviews.AspectRatioImageView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/icon2025_discounts_spaceship"
+            android:layout_marginBottom="30dp"/>
 
-<!--        <amai.org.conventions.customviews.AspectRatioImageView-->
-<!--            android:layout_width="150dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:src="@drawable/olamot2024_activities_youdo"-->
-<!--            android:layout_marginBottom="15dp"/>-->
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textSize="14sp"-->
-<!--            android:textColor="?android:textColorPrimary"-->
-<!--            android:text="@string/activities_youdo"-->
-<!--            android:layout_marginBottom="30dp"/>-->
-
-<!--        <amai.org.conventions.customviews.AspectRatioImageView-->
-<!--            android:layout_width="150dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:src="@drawable/olamot2024_activities_cerebro"-->
-<!--            android:layout_marginBottom="15dp"/>-->
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textColor="?android:textColorPrimary"-->
-<!--            android:textSize="14sp"-->
-<!--            android:text="@string/activities_cerebro"-->
-<!--            android:layout_marginBottom="30dp"/>-->
-
-<!--        <amai.org.conventions.customviews.AspectRatioImageView-->
-<!--            android:layout_width="150dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:src="@drawable/olamot2024_activities_gaming"-->
-<!--            android:layout_marginBottom="15dp"/>-->
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textColor="?android:textColorPrimary"-->
-<!--            android:textSize="14sp"-->
-<!--            android:text="@string/activities_gaming"-->
-<!--            android:layout_marginBottom="30dp"/>-->
-
-<!--        <amai.org.conventions.customviews.AspectRatioImageView-->
-<!--            android:layout_width="150dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:src="@drawable/olamot2024_activities_antiquities"-->
-<!--            android:layout_marginBottom="15dp"/>-->
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textColor="?android:textColorPrimary"-->
-<!--            android:textSize="14sp"-->
-<!--            android:text="@string/activities_antiquities"-->
-<!--            android:layout_marginBottom="30dp"/>-->
-
-<!--        <amai.org.conventions.customviews.AspectRatioImageView-->
-<!--            android:layout_width="150dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:src="@drawable/olamot2024_activities_emily"-->
-<!--            android:layout_marginBottom="15dp"/>-->
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textColor="?android:textColorPrimary"-->
-<!--            android:textSize="14sp"-->
-<!--            android:text="@string/activities_emily"-->
-<!--            android:layout_marginBottom="30dp"/>-->
-
-<!--        <amai.org.conventions.customviews.AspectRatioImageView-->
-<!--            android:layout_width="150dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:src="@drawable/olamot2024_activities_legion501"-->
-<!--            android:layout_marginBottom="15dp"/>-->
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textColor="?android:textColorPrimary"-->
-<!--            android:textSize="14sp"-->
-<!--            android:text="@string/activities_legion501"-->
-<!--            android:layout_marginBottom="30dp"/>-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="14sp"
+            android:text="@string/activities_legion"
+            android:layout_marginBottom="15dp"/>
+        <amai.org.conventions.customviews.AspectRatioImageView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/icon2025_discounts_legion"
+            android:layout_marginBottom="30dp"/>
 
         <View
             android:layout_width="match_parent"

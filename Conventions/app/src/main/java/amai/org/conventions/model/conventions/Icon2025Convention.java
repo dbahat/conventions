@@ -289,7 +289,7 @@ public class Icon2025Convention extends SffConvention {
 						mapLocation("עמדת קונסולות VR", 1049.1145f, 3309.571f),
 						mapLocation("מודיעין (סינמטק)", 579.7445f, 3309.953f),
 						mapLocation("קופות", 1166.8555f, 3196.949f),
-						mapLocation("דוכן", 902.1805f, 3076.215f),
+						mapLocation("דוכן Out&About", 902.1805f, 3076.215f),
 						mapLocation(cinematheque5, 1194.1535f, 2938.762f),
 						mapLocation("מתחם משחקי לוח", 714.6065f, 2948.433f),
 						mapLocationForShelter("מרחב מוגן", 819.907f, 3438.442f).withMarkerHeight(SMALL_MARKER_HEIGHT)
