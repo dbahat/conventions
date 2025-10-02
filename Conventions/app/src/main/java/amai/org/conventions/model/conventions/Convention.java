@@ -226,7 +226,7 @@ public abstract class Convention implements Serializable {
 
 	public abstract URL getSecondHandFormsURL(List<String> ids);
 
-	public abstract URL getSecondHandItemsURL(int status);
+	public abstract URL getSecondHandItemsURL(int itemStatus, int formStatus);
 
 	public abstract URL getSecondHandGoToCreateFormsURL();
 

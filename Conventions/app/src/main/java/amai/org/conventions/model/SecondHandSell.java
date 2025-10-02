@@ -186,7 +186,7 @@ public class SecondHandSell extends SecondHand {
 		JsonObject formStatusObject = formJson.get("status").getAsJsonObject();
 
 		int formStatusId = formStatusObject.get("id").getAsInt();
-		form.setClosed(formStatusId == 3);
+		form.setClosed(formStatusId == SecondHandForm.FORM_STATUS_CLOSED);
 
 		String formStatusText = formStatusObject.get("text").getAsString();
 		form.setId(normalizeFormId(formJson.get("id").getAsString()));

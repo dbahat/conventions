@@ -452,9 +452,9 @@ public class Icon2025Convention extends SffConvention {
 	}
 
 	@Override
-	public URL getSecondHandItemsURL(int status) {
+	public URL getSecondHandItemsURL(int itemStatus, int formStatus) {
 		try {
-			return new URL(YAD2_API + "allItems?status=" + status);
+			return new URL(YAD2_API + "allItems?status=" + itemStatus + "&formStatus=" + formStatus);
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}

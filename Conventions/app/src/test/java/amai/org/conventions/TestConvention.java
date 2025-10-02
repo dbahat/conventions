@@ -130,7 +130,7 @@ public class TestConvention extends Convention {
     }
 
     @Override
-    public URL getSecondHandItemsURL(int status) {
+    public URL getSecondHandItemsURL(int itemStatus, int formStatus) {
         return null;
     }
 

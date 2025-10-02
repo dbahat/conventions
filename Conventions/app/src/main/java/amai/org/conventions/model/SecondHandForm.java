@@ -9,6 +9,11 @@ public class SecondHandForm implements Serializable {
 	private List<SecondHandItem> items;
 	private String status;
 
+	public static final int FORM_STATUS_CREATED = 1;
+	public static final int FORM_STATUS_ACCEPTED = 2;
+	public static final int FORM_STATUS_CLOSED = 3;
+	public static final int FORM_STATUS_CLOSING = 4;
+
 	public String getId() {
 		return id;
 	}
