@@ -30,6 +30,8 @@ import androidx.core.view.WindowInsetsCompat;
 import sff.org.conventions.R;
 
 public class Views {
+	final static public int NO_VIEW = -1;
+
 	public static Point findCoordinates(ViewGroup parentView, View childView) {
 		// getX() and getY() (and also getTop(), getBottom() etc) return the
 		// coordinates of the view inside its parent. If a view is not directly inside

@@ -29,9 +29,12 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
+import amai.org.conventions.ActivitiesActivity;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.ConditionalSwipeVerticalViewPager;
+import amai.org.conventions.events.activities.EventActivity;
 import amai.org.conventions.model.ConventionMap;
+import amai.org.conventions.model.DetailsActivityLocation;
 import amai.org.conventions.model.Floor;
 import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.model.Stand;
@@ -484,8 +487,8 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 	}
 
 	@Override
-	public void onShowDetailsActivityClicked(Class<? extends Activity> detailsActivity) {
-		navigateToActivity(detailsActivity, false, null);
+	public void onShowDetailsActivityClicked(DetailsActivityLocation detailsActivityLocation) {
+		navigateToActivity(detailsActivityLocation.getActivityClass(), false, detailsActivityLocation.getBundle());
 	}
 
 	private void applySearchFiltersInBackground() {

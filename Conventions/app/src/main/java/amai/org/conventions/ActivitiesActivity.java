@@ -1,13 +1,18 @@
 package amai.org.conventions;
 
+import android.graphics.Point;
 import android.os.Bundle;
+import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.widget.ScrollView;
 
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.Views;
 import sff.org.conventions.R;
 
 public class ActivitiesActivity extends NavigationActivity {
+	public static final String EXTRA_FOCUS_ON_VIEW = "ExtraFocusOnView";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +27,28 @@ public class ActivitiesActivity extends NavigationActivity {
 		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, Views.InsetType.NONE, findViewById(R.id.scroll_view_bottom_padding));
 
 		handleLinks();
+
+		final int focusOnView = getIntent().getIntExtra(EXTRA_FOCUS_ON_VIEW, Views.NO_VIEW);
+
+		if (focusOnView != Views.NO_VIEW) {
+			View viewToFocus = findViewById(focusOnView);
+			if (viewToFocus != null) {
+				ScrollView scrollView = findViewById(R.id.activities_scroll);
+				scrollView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+					public void onGlobalLayout() {
+						// Unregister the listener to only call smoothScrollTo once
+						scrollView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+						scrollView.post(new Runnable() {
+							@Override
+							public void run() {
+								Point coordinates = Views.findCoordinates(scrollView, viewToFocus);
+								scrollView.smoothScrollTo(coordinates.x, coordinates.y);
+							}
+						});
+					}
+				});
+			}
+		}
 	}
 
 	private void handleLinks() {

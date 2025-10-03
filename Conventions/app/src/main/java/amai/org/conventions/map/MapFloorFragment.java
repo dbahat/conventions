@@ -750,7 +750,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
 		void onShowFloorClicked(Floor floor);
 
-		void onShowDetailsActivityClicked(Class<? extends Activity> detailsActivity);
+		void onShowDetailsActivityClicked(DetailsActivityLocation detailsActivityLocation);
 	}
 
 	@Override
@@ -972,12 +972,12 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
 	private void setupDetailsActivityLocation(final MapLocation location) {
 		// Only show button if there is an activity set
-		if (location.getSinglePlace(DetailsActivityLocation.class) != null && location.getSinglePlace(DetailsActivityLocation.class).getActivityClass() != null) {
-			Class<? extends Activity> activityClass = location.getSinglePlace(DetailsActivityLocation.class).getActivityClass();
+		if (location.getSinglePlace(DetailsActivityLocation.class) != null) {
+			DetailsActivityLocation activityLocation = location.getSinglePlace(DetailsActivityLocation.class);
 			gotoActivityButton.setVisibility(View.VISIBLE);
 			gotoActivityButton.setOnClickListener(v -> {
 				if (mapFloorEventsListener != null) {
-					mapFloorEventsListener.onShowDetailsActivityClicked(activityClass);
+					mapFloorEventsListener.onShowDetailsActivityClicked(activityLocation);
 				}
 			});
 		} else {

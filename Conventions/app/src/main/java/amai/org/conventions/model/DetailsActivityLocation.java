@@ -1,9 +1,13 @@
 package amai.org.conventions.model;
 
 import android.app.Activity;
+import android.os.Bundle;
+
+import amai.org.conventions.utils.Views;
 
 public class DetailsActivityLocation extends Place {
 	private Class<? extends Activity> activityClass;
+	private Bundle bundle = null;
 
 	@Override
 	public DetailsActivityLocation withName(String name) {
@@ -21,6 +25,19 @@ public class DetailsActivityLocation extends Place {
 
 	public DetailsActivityLocation withActivityClass(Class<? extends Activity> activityClass) {
 		setActivityClass(activityClass);
+		return this;
+	}
+
+	public Bundle getBundle() {
+		return bundle;
+	}
+
+	public void setBundle(Bundle bundle) {
+		this.bundle = bundle;
+	}
+
+	public DetailsActivityLocation withBundle(Bundle bundle) {
+		setBundle(bundle);
 		return this;
 	}
 }
