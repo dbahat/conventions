@@ -124,6 +124,7 @@
     <string name="map_floor_search_title">חיפוש במפה</string>
     <string name="show_only_halls">הצג אולמות בלבד</string>
     <string name="goto_stands_list">הצג דוכנים</string>
+    <string name="goto_activity">לפרטים נוספים</string>
     <string name="search_locations">מתחם</string>
     <string name="search_stands">דוכנים</string>
     <string name="map_show_shelters">מרחבים מוגנים</string>

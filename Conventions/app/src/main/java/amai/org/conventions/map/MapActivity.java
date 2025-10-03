@@ -1,5 +1,6 @@
 package amai.org.conventions.map;
 
+import android.app.Activity;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -480,6 +481,11 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 	@Override
 	public void onShowFloorClicked(Floor floor) {
 		setCurrentFloor(floor);
+	}
+
+	@Override
+	public void onShowDetailsActivityClicked(Class<? extends Activity> detailsActivity) {
+		navigateToActivity(detailsActivity, false, null);
 	}
 
 	private void applySearchFiltersInBackground() {

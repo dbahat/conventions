@@ -30,6 +30,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import amai.org.conventions.model.DetailsActivityLocation;
+import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Objects;
 import com.caverock.androidsvg.SVG;
@@ -106,6 +108,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 	private EventView locationNextEvent;
 	private Button gotoStandsListButton;
 	private Button gotoFloorButton;
+	private Button gotoActivityButton;
 	private Button showSheltersButton;
 
 	private OnMapFloorEventListener mapFloorEventsListener;
@@ -291,6 +294,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		locationNextEvent = (EventView) view.findViewById(R.id.location_next_event);
 		gotoStandsListButton = (Button) view.findViewById(R.id.goto_stands_list_button);
 		gotoFloorButton = view.findViewById(R.id.goto_floor_button);
+		gotoActivityButton = (Button) view.findViewById(R.id.goto_activity_button);
 		showSheltersButton = view.findViewById(R.id.map_show_shelters);
 	}
 
@@ -745,6 +749,8 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		void onLocationDetailsTopChanged(int top, MapFloorFragment floor);
 
 		void onShowFloorClicked(Floor floor);
+
+		void onShowDetailsActivityClicked(Class<? extends Activity> detailsActivity);
 	}
 
 	@Override
@@ -926,6 +932,9 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		// Check if it's a floor location
 		setupFloorLocation(location);
 
+		// Check if there is a details activity
+		setupDetailsActivityLocation(location);
+
 		// We have to measure for the animations to work (we can't define percentage in ObjectAnimator)
 		locationDetails.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
 	}
@@ -958,6 +967,21 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 			});
 		} else {
 			gotoFloorButton.setVisibility(View.GONE);
+		}
+	}
+
+	private void setupDetailsActivityLocation(final MapLocation location) {
+		// Only show button if there is an activity set
+		if (location.getSinglePlace(DetailsActivityLocation.class) != null && location.getSinglePlace(DetailsActivityLocation.class).getActivityClass() != null) {
+			Class<? extends Activity> activityClass = location.getSinglePlace(DetailsActivityLocation.class).getActivityClass();
+			gotoActivityButton.setVisibility(View.VISIBLE);
+			gotoActivityButton.setOnClickListener(v -> {
+				if (mapFloorEventsListener != null) {
+					mapFloorEventsListener.onShowDetailsActivityClicked(activityClass);
+				}
+			});
+		} else {
+			gotoActivityButton.setVisibility(View.GONE);
 		}
 	}
 
