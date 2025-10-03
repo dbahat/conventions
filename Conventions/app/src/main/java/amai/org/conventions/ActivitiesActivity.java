@@ -1,13 +1,21 @@
 package amai.org.conventions;
 
 import android.graphics.Point;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ScrollView;
 
+import java.util.List;
+
+import amai.org.conventions.map.MapActivity;
+import amai.org.conventions.model.ConventionMap;
+import amai.org.conventions.model.MapLocation;
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
+import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Views;
 import sff.org.conventions.R;
 
@@ -26,6 +34,7 @@ public class ActivitiesActivity extends NavigationActivity {
 		// textview and it has a LinkMovementMethod
 		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, Views.InsetType.NONE, findViewById(R.id.scroll_view_bottom_padding));
 
+		handleDeepLinks();
 		handleLinks();
 
 		final int focusOnView = getIntent().getIntExtra(EXTRA_FOCUS_ON_VIEW, Views.NO_VIEW);
@@ -61,5 +70,25 @@ public class ActivitiesActivity extends NavigationActivity {
 
 		// The texts may have links to events
 		Views.runOnAllTextViews(contentContainer, this::interceptEventLinks);
+	}
+
+	private void handleDeepLinks() {
+		Uri intentData = getIntent().getData();
+		if (intentData != null && intentData.getPath() != null) {
+			switch (intentData.getPath().intern()) {
+				case "/open-map": {
+					//The URL looks like this: sff.org.conventions://activities/open-map?location=name
+					String location = intentData.getQueryParameter("location");
+					ConventionMap map = Convention.getInstance().getMap();
+					List<MapLocation> locations = map.findLocationsByName(location);
+					int[] locationIds = CollectionUtils.mapToInt(locations, MapLocation::getId);
+					Bundle floorBundle = new Bundle();
+					floorBundle.putIntArray(MapActivity.EXTRA_MAP_LOCATION_IDS, locationIds);
+					navigateToActivity(MapActivity.class, false, floorBundle);
+					break;
+				}
+			}
+			finish(); // This activity was opened again due to the deep link so close the new instance
+		}
 	}
 }
