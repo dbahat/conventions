@@ -91,11 +91,24 @@ public class ConventionMap {
 		return CollectionUtils.filter(getLocations(), new CollectionUtils.Predicate<MapLocation>() {
 			@Override
 			public boolean where(MapLocation location) {
+				// Check location name
+				if (location.getName() != null) {
+					if (exact && location.getName().equals(name)) {
+						return true;
+					} else if (!exact && location.getName().contains(name)) {
+						return true;
+					}
+				}
+
+				// Check places in location
 				List<? extends Place> places = location.getPlaces();
 				if (places == null) {
 					return false;
 				}
 				for (Place place : places) {
+					if (place.getName() == null) {
+						continue;
+					}
 					if (exact && place.getName().equals(name)) {
 						return true;
 					} else if (!exact && place.getName().contains(name)) {
