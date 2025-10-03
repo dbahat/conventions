@@ -14,11 +14,13 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
+import amai.org.conventions.ActivitiesActivity;
 import amai.org.conventions.auth.Configuration;
 import amai.org.conventions.feedback.forms.EventFeedbackForm;
 import amai.org.conventions.feedback.forms.FeedbackForm;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
+import amai.org.conventions.model.DetailsActivityLocation;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.Floor;
 import amai.org.conventions.model.Hall;
@@ -216,6 +218,7 @@ public class Icon2025Convention extends SffConvention {
 		Hall games2 = getHalls().findByName(HALL_NAME_GAMES_2);
 		Hall icode = getHalls().findByName(HALL_NAME_ICODE);
 		Hall spaceship = getHalls().findByName(HALL_NAME_SPACESHIP);
+		DetailsActivityLocation detailsActivityLocation = new DetailsActivityLocation().withName("פעילויות").withActivityClass(ActivitiesActivity.class);
 
 		Floor floor = new Floor(1)
 				.withName("מפת המתחם")
@@ -243,14 +246,14 @@ public class Icon2025Convention extends SffConvention {
 						mapLocation(eshkol2, 809.8425f, 1739.515f),
 						mapLocation("שירותי גברים", 540.6735f, 1748.117f),
 						mapLocation("משחקי שער", 1320.0415f, 1436.399f),
-						mapLocation("דוכני עמותות", Collections.singletonList(icode), 1084.492f, 1504.888f).withMarkerHeight(SMALL_MARKER_HEIGHT),
+						mapLocation("דוכני עמותות", Arrays.asList(icode, detailsActivityLocation), 1084.492f, 1504.888f).withMarkerHeight(SMALL_MARKER_HEIGHT),
 						mapLocation("עמדת הדפסת כרטיסים עצמאית", 778.309f, 1521.169f).withMarkerHeight(SMALL_MARKER_HEIGHT),
 						mapLocation(eshkol5, 1146.046f, 1427.014f).withMarkerHeight(SMALL_MARKER_HEIGHT),
 						mapLocation(eshkol4, 912.676f, 1382.617f).withMarkerHeight(SMALL_MARKER_HEIGHT),
 						mapLocation(eshkol3, 724.935f, 1431.951f).withMarkerHeight(SMALL_MARKER_HEIGHT),
-						mapLocation(spaceship, 1274.4095f, 1005.949f),
+						mapLocation(spaceship.getName(), Arrays.asList(spaceship, detailsActivityLocation), 1274.4095f, 1005.949f),
 						mapLocation("דוכנים", 775.3735f, 1069.155f),
-						mapLocation("מתחם משחקי אינדי", 569.3475f, 1012.53f),
+						mapLocation("מתחם משחקי אינדי", Collections.singletonList(detailsActivityLocation), 569.3475f, 1012.53f),
 						mapLocation("מודיעין (אשכול)", 670.1375f, 793.045f),
 						mapLocation("יציאה בלבד", 857.5545f, 697.683f),
 						mapLocation("יריד הדוכנים H", 1589.8035f, 757.029f),
@@ -286,7 +289,7 @@ public class Icon2025Convention extends SffConvention {
 						mapLocation("כניסה ויציאה", 285.5005f, 3318.433f),
 						mapLocation("מדרגות לסינמטק 3+4", Arrays.asList(cinematheque3, cinematheque4), 658.2755f, 3530.08f),
 						mapLocation("מעלית לסינמטק 3+4", Arrays.asList(cinematheque3, cinematheque4), 952.1975f, 3462.456f),
-						mapLocation("עמדת קונסולות VR", 1049.1145f, 3309.571f),
+						mapLocation("עמדת קונסולות VR", Collections.singletonList(detailsActivityLocation), 1049.1145f, 3309.571f),
 						mapLocation("מודיעין (סינמטק)", 579.7445f, 3309.953f),
 						mapLocation("קופות", 1166.8555f, 3196.949f),
 						mapLocation("דוכן Out&About", 902.1805f, 3076.215f),
