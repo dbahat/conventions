@@ -259,7 +259,7 @@ public class Icon2025Convention extends SffConvention {
 						mapLocation("יציאה בלבד", 857.5545f, 697.683f),
 						mapLocation("יריד הדוכנים H", 1589.8035f, 757.029f),
 						mapLocation("אולם ספורט", 1659.7675f, 3238.266f),
-						mapLocation("דוכני POP-UP P", 2068.1975f, 3400.144f),
+						mapLocation("דוכני POP-UP P", Collections.singletonList(getActivitiesActivityLocationForView(R.id.activities_legion)), 2068.1975f, 3400.144f),
 						mapLocation("יריד הדוכנים G", 2032.4585f, 2855.851f),
 						mapLocation("כניסה נגישה לעירוני מפלס תחתון", 1992.3625f, 2428.712f),
 						mapLocation("יריד הדוכנים G", 2032.9835f, 2115.124f),
