@@ -139,7 +139,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		}
 
 		// Handle edge to edge
-		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, nextEventStart);
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, false, nextEventStart);
 	}
 
 	private void handleAuthResult(ActivityResult activityResult, boolean ignoreUserUpdateError, GetProgressMessage getProgressMessage, OnAuthRequestCompleted onSuccess) {

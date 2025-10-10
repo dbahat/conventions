@@ -112,10 +112,10 @@ public class EventActivity extends NavigationActivity {
 		final ScrollView scrollView = findViewById(R.id.event_details_scroll);
 
 		// Handle edge to edge
-		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, scrollView);
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, true, scrollView);
 		// The bottom padding must be applied to a view inside the scroll view, otherwise the scrolling doesn't include the padding when scrolled from the last
 		// textview and it has a LinkMovementMethod
-		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, Views.InsetType.NONE, findViewById(R.id.scroll_view_bottom_padding));
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, Views.InsetType.NONE, true, findViewById(R.id.scroll_view_bottom_padding));
 
 		String eventId = getIntent().getStringExtra(EXTRA_EVENT_ID);
 		conventionEvent = Convention.getInstance().findEventById(eventId);

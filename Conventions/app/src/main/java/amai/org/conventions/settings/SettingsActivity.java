@@ -103,7 +103,7 @@ public class SettingsActivity extends NavigationActivity {
 			View result = super.onCreateView(inflater, container, savedInstanceState);
 			// Handle edge to edge
 			// Must be called after the list view is created
-			Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, Views.InsetType.PADDING, getListView());
+			Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, Views.InsetType.PADDING, false, getListView());
 			return result;
 		}
 

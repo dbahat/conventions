@@ -92,7 +92,7 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 		final SearchCategoriesLayout searchCategoriesLayout = (SearchCategoriesLayout) findViewById(R.id.programme_search_categories);
 
 		// Handle edge to edge
-		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, searchCategoriesLayout);
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, false, searchCategoriesLayout);
 
 		// Wait for the layout to finish before configuring the checkbox.
 		// Seems to be needed since otherwise after config change, the state of the UI components in the layout changes.
