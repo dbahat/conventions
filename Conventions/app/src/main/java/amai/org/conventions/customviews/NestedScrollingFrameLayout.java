@@ -248,7 +248,6 @@ public class NestedScrollingFrameLayout extends FrameLayout implements NestedScr
 
 	@Override
 	public void onStopNestedScroll(@org.jspecify.annotations.NonNull View target, int type) {
-		nestedScrollingChildHelper.onStopNestedScroll(target);
 		nestedScrollingParentHelper.onStopNestedScroll(target, type);
 	}
 
