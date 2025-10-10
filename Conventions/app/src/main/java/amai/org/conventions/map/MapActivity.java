@@ -118,8 +118,8 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		initializeSearch(savedInstanceState);
 
 		// Handle edge to edge
-		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, Views.InsetType.NONE, searchResults);
-		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, findViewById(R.id.map_search_pane));
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, Views.InsetType.NONE, false, searchResults);
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, false, findViewById(R.id.map_search_pane));
 	}
 
 	@Override

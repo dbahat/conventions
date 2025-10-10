@@ -139,14 +139,14 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		initializeShowSheltersButton();
 
 		// Handle edge to edge
-		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, Views.InsetType.PADDING,
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, Views.InsetType.PADDING, false,
 			mapZoomView,
 			downArrow
 		);
 		if (downArrow.getVisibility() != View.VISIBLE) {
-			Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, Views.InsetType.PADDING, locationDetails);
+			Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, Views.InsetType.PADDING, false, locationDetails);
 		}
-		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.MARGIN, showSheltersButton);
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.MARGIN, false, showSheltersButton);
 
 		return view;
 	}

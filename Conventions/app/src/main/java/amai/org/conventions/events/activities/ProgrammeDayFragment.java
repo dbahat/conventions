@@ -112,7 +112,7 @@ public class ProgrammeDayFragment extends Fragment implements StickyListHeadersL
 		listView.setOnHeaderClickListener(this);
 
 		// Handle edge to edge
-		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, Views.InsetType.PADDING, listView);
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, Views.InsetType.PADDING, false, listView);
 
 		if (savedInstanceState == null || !savedInstanceState.getBoolean(STATE_PREVENT_SCROLLING, false)) {
 			final int position = findHourPosition(Dates.now());

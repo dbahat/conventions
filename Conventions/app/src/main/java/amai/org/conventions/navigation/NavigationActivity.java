@@ -224,13 +224,13 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		boolean useLightIcons = ThemeAttributes.getBoolean(this, R.attr.lightStatusBarIcons);
 		WindowCompat.getInsetsController(window, window.getDecorView()).setAppearanceLightStatusBars(!useLightIcons);
 
-		Views.registerApplyInsets(Views.InsetType.PADDING, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, navigationToolbar);
+		Views.registerApplyInsets(Views.InsetType.PADDING, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, false, navigationToolbar);
 
-		Views.registerApplyInsets(Views.InsetType.PADDING, Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.NONE, findViewById(R.id.navigation_drawer_wrapper));
+		Views.registerApplyInsets(Views.InsetType.PADDING, Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.NONE, false, findViewById(R.id.navigation_drawer_wrapper));
 
-		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.MARGIN, Views.InsetType.NONE, findViewById(R.id.navigation_drawer_content));
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.MARGIN, Views.InsetType.NONE, false, findViewById(R.id.navigation_drawer_content));
 
-		Views.registerApplyInsets(Views.InsetType.MARGIN, Views.InsetType.MARGIN, Views.InsetType.MARGIN, Views.InsetType.MARGIN, actionButton);
+		Views.registerApplyInsets(Views.InsetType.MARGIN, Views.InsetType.MARGIN, Views.InsetType.MARGIN, Views.InsetType.MARGIN, false, actionButton);
 
 		ProtectionLayout edgesProtection = findViewById(R.id.edge_protection);
 		List<Protection> protectionsList = new LinkedList<>(Arrays.asList(
@@ -451,7 +451,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		}
 
 		// Handle edge to edge
-		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, daysTabLayout);
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, false, daysTabLayout);
 
 		Drawable tabIndicator = ThemeAttributes.getDrawable(this, R.attr.selectedTabIndicator);
 		if (tabIndicator != null) {

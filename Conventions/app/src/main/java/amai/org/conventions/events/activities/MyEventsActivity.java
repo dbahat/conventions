@@ -81,7 +81,7 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 		setupDays(dateIndexToSelect);
 
 		// Handle edge to edge
-		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, nextEventStart);
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, false, nextEventStart);
 	}
 
 	private void setupDays(int dateIndexToSelect) {

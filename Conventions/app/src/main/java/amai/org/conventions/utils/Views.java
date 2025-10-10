@@ -46,12 +46,12 @@ public class Views {
 		return coordinates;
 	}
 
-	public static void hideKeyboardOnClickOutsideEditText(final Activity activity, View view) {
+	public static void hideKeyboardOnClickOutsideEditText(final Context context, View view) {
 		//Set up touch listener for non-text box views to hide keyboard.
 		if (!(view instanceof EditText)) {
 			view.setOnTouchListener(new View.OnTouchListener() {
 				public boolean onTouch(View v, MotionEvent event) {
-					hideKeyboard(activity, v);
+					hideKeyboard(context, v);
 					return false;
 				}
 			});
@@ -61,13 +61,13 @@ public class Views {
 		if (view instanceof ViewGroup) {
 			for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
 				View innerView = ((ViewGroup) view).getChildAt(i);
-				hideKeyboardOnClickOutsideEditText(activity, innerView);
+				hideKeyboardOnClickOutsideEditText(context, innerView);
 			}
 		}
 	}
 
-	private static void hideKeyboard(Activity activity, View view) {
-		InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+	private static void hideKeyboard(Context context, View view) {
+		InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
 		inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
 	}
 
@@ -105,7 +105,7 @@ public class Views {
 			final WindowMetrics metrics = wm.getCurrentWindowMetrics();
 
 			// Gets insets size.
-			// Should be in sync with the implementation in registerApplyInsets
+			// Should be in sync with the implementation in registerApplyInsetsForView
 			final WindowInsets windowInsets = metrics.getWindowInsets();
 			Insets insets = windowInsets.getInsetsIgnoringVisibility(WindowInsets.Type.systemBars() | WindowInsets.Type.displayCutout());
 			int insetsWidth = insets.right + insets.left;
@@ -124,14 +124,14 @@ public class Views {
 		return size;
 	}
 
-	public enum InsetType { PADDING, MARGIN, NONE; }
-	public static void registerApplyInsets(InsetType applyToTop, InsetType applyToBottom, InsetType applyToStart, InsetType applyToEnd, View... views) {
+	public enum InsetType { PADDING, MARGIN, NONE }
+	public static void registerApplyInsets(InsetType applyToTop, InsetType applyToBottom, InsetType applyToStart, InsetType applyToEnd, boolean includeIme, View... views) {
 		for (View view : views) {
-			registerApplyInsetsForView(view, applyToTop, applyToBottom, applyToStart, applyToEnd);
+			registerApplyInsetsForView(view, applyToTop, applyToBottom, applyToStart, applyToEnd, includeIme);
 		}
 	}
 
-	public static void registerApplyInsetsForView(View view, InsetType applyToTop, InsetType applyToBottom, InsetType applyToStart, InsetType applyToEnd) {
+	public static void registerApplyInsetsForView(View view, InsetType applyToTop, InsetType applyToBottom, InsetType applyToStart, InsetType applyToEnd, boolean includeIme) {
 		boolean isRtl = ThemeAttributes.getInteger(view.getContext(), android.R.attr.layoutDirection) == View.LAYOUT_DIRECTION_RTL;
 		InsetType applyToLeft = (isRtl ? applyToEnd : applyToStart);
 		InsetType applyToRight = (isRtl ? applyToStart : applyToEnd);
@@ -165,8 +165,14 @@ public class Views {
 			// Display cutouts are hardware areas which obscure the screen. In portrait mode, they are usually included in the system bars.
 			// We shouldn't draw important content (like text and buttons) under cutouts since it can impact usability.
 			// It's the same for system bars, although they can be hidden in code.
-			// Should be in sync with the implementation in getScreenSize
-			androidx.core.graphics.Insets systemInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout());
+			// IME is required in activities with softInputMode set to adjustResize to make sure the screen is resized properly when the keyboard is opened
+			// (otherwise the keyboard will hide the bottom part of the screen without a scroll option).
+			// Should be in sync with the implementation in getScreenSize (ime is not relevant there since it will be hidden when we use the screen size)
+			int insetsMask = WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout();
+			if (includeIme) {
+				insetsMask |= WindowInsetsCompat.Type.ime();
+			}
+			androidx.core.graphics.Insets systemInsets = insets.getInsets(insetsMask);
 
 			// Apply new margins
 			ViewGroup.LayoutParams layoutParams = v.getLayoutParams();

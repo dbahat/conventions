@@ -41,6 +41,7 @@ public class FeedbackActivity extends NavigationActivity {
 	private final static String TAG = FeedbackActivity.class.getCanonicalName();
 
 	private final static int ITEM_PROGRESS = 100;
+	private static final int ITEM_FEEDBACK_MAX_SEND_DURATION = 3000;
 	private static final String STATE_SENT_FEEDBACK_OPEN = "StateEventsWithSentFeedbackOpen";
 
 	private CollapsibleFeedbackView feedbackView;
@@ -70,7 +71,7 @@ public class FeedbackActivity extends NavigationActivity {
 		setBackground(ThemeAttributes.getDrawable(this, R.attr.feedbackActivityBackground));
 
 		// Handle edge to edge
-		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, Views.InsetType.PADDING, findViewById(R.id.feedback_scroll));
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, Views.InsetType.PADDING, true, findViewById(R.id.feedback_scroll));
 
 		eventsWithoutFeedbackLayout = (ViewGroup) findViewById(R.id.events_without_feedback);
 		eventsWithoutFeedbackList = (ListView) findViewById(R.id.events_without_feedback_list);
@@ -128,10 +129,10 @@ public class FeedbackActivity extends NavigationActivity {
 							progressAnimation.cancel();
 						}
 						progressAnimation = ObjectAnimator.ofInt(sendAllProgress, "progress", progress, progress + ITEM_PROGRESS);
-						// Assuming sending the feedback takes less than 5 seconds on average, we set the animation to be long enough
+						// Assuming sending the feedback takes less than ITEM_FEEDBACK_MAX_SEND_DURATION ms on average, we set the animation to be long enough
 						// that it wil run until the next update. Even if we update it again before it's finished it will appear
 						// smooth because we always start from the previous value.
-						progressAnimation.setDuration(5000);
+						progressAnimation.setDuration(ITEM_FEEDBACK_MAX_SEND_DURATION);
 						progressAnimation.setInterpolator(new DecelerateInterpolator());
 						progressAnimation.start();
 					}
