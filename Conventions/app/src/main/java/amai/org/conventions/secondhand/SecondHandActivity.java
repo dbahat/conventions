@@ -39,7 +39,7 @@ public class SecondHandActivity extends NavigationActivity {
 		viewPager = findViewById(R.id.second_hand_pager);
 
 		// Handle edge to edge
-		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, tabLayout);
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, false, tabLayout);
 
 		// Setup adapter
 		adapter = new TabAdapter(getSupportFragmentManager());

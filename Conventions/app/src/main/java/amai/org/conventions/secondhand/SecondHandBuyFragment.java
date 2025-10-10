@@ -118,9 +118,10 @@ public class SecondHandBuyFragment extends Fragment implements SwipeRefreshLayou
 
 		refreshItemsListInBackground(false);
 
+		Views.hideKeyboardOnClickOutsideEditText(view.getContext(), view);
 		// Handle edge to edge
-		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, view.findViewById(R.id.second_hand_buy_filters));
-		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, Views.InsetType.PADDING, listView);
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, false, view.findViewById(R.id.second_hand_buy_filters));
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, Views.InsetType.PADDING, false, listView);
 
 		return view;
 	}
