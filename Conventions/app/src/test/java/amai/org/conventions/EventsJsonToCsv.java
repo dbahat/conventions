@@ -7,6 +7,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.InputStream;
@@ -39,7 +40,7 @@ public class EventsJsonToCsv {
 //	private static final String INPUT_FILE = "D:\\conventions app\\convention resources\\" + CONVENTION_FOLDER + "\\feedback\\all_events.json";
 	private static final String INPUT_FILE = null;
 	private static final String INPUT_URL = "https://api.sf-f.org.il/program/list_events.php?slug=" + SLUG;
-	private static final String OUTPUT_PATH = "D:\\conventions app\\convention resources\\" + CONVENTION_FOLDER + "\\feedback\\all_events2.csv";
+	private static final String OUTPUT_PATH = "D:\\conventions app\\convention resources\\" + CONVENTION_FOLDER + "\\feedback\\all_events.csv";
 
 	private List<ConventionEvent> readEvents(InputStreamReader reader) {
 		return new SffModelParser().parse(new Date(), reader);
@@ -60,53 +61,54 @@ public class EventsJsonToCsv {
 	}
 	
 	private void writeEventsToFile(List<ConventionEvent> events, String filePath) throws Exception {
+		new File(filePath).getParentFile().mkdirs();
 		BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
 				new FileOutputStream(filePath), "UTF-8"
 				));
-			// BOM is necessary for opening the file correctly in Excel
-			out.write('\ufeff');
-			
-			CSVWriter writer = new CSVWriter(out);
-			
-			// Write headers
-			String[] line = new String[]{
-					"מספר אירוע",
-					"שם האירוע",
-					"אולם",
-					"תאריך",
-					"שעת התחלה",
-					"שעת סיום",
-					"אורך בשעות",
-					"מנחים",
-					"קטגוריה",
-					"מחיר",
-					"כרטיסים שנותרו",
-					"תגיות",
+		// BOM is necessary for opening the file correctly in Excel
+		out.write('\ufeff');
+
+		CSVWriter writer = new CSVWriter(out);
+
+		// Write headers
+		String[] line = new String[]{
+				"מספר אירוע",
+				"שם האירוע",
+				"אולם",
+				"תאריך",
+				"שעת התחלה",
+				"שעת סיום",
+				"אורך בשעות",
+				"מנחים",
+				"קטגוריה",
+				"מחיר",
+				"כרטיסים שנותרו",
+				"תגיות",
+		};
+		writer.writeNext(line);
+
+		// Write lines
+		SimpleDateFormat eventDateFormatter = new SimpleDateFormat("dd.MM.yyyy");
+		SimpleDateFormat eventTimeFormatter = new SimpleDateFormat("HH:mm");
+		for (ConventionEvent event : events) {
+			line = new String[]{
+					event.getId(),
+					event.getTitle(),
+					event.getHall().getName(),
+					eventDateFormatter.format(event.getStartTime()),
+					eventTimeFormatter.format(event.getStartTime()),
+					eventTimeFormatter.format(event.getEndTime()),
+					timeDiffInHours(event.getEndTime(), event.getStartTime()),
+					event.getLecturer(),
+					event.getCategory(),
+					event.getPrice() < 0 ? "" : String.valueOf(event.getPrice()),
+					event.getTicketsLimit() < 0 || event.getAvailableTickets() < 0 ? "" : String.valueOf(event.getAvailableTickets()),
+					join(event.getTags(), ", "),
 			};
 			writer.writeNext(line);
-			
-			// Write lines
-			SimpleDateFormat eventDateFormatter = new SimpleDateFormat("dd.MM.yyyy");
-			SimpleDateFormat eventTimeFormatter = new SimpleDateFormat("HH:mm");
-			for (ConventionEvent event : events) {
-				line = new String[]{
-						event.getId(),
-						event.getTitle(),
-						event.getHall().getName(),
-						eventDateFormatter.format(event.getStartTime()),
-						eventTimeFormatter.format(event.getStartTime()),
-						eventTimeFormatter.format(event.getEndTime()),
-						timeDiffInHours(event.getEndTime(), event.getStartTime()),
-						event.getLecturer(),
-						event.getCategory(),
-						event.getPrice() < 0 ? "" : String.valueOf(event.getPrice()),
-						event.getTicketsLimit() < 0 || event.getAvailableTickets() < 0 ? "" : String.valueOf(event.getAvailableTickets()),
-						join(event.getTags(), ", "),
-				};
-				writer.writeNext(line);
-			}
-			
-			writer.close();
+		}
+
+		writer.close();
 	}
 	
 	private String timeDiffInHours(Date end, Date start) {
