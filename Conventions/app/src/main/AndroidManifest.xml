@@ -76,6 +76,7 @@
         <activity android:name=".SafeSpaceActivity" />
         <activity
             android:name=".HomeActivity"
+            android:theme="@style/AppBaseTheme.Animatsuri2025.Home"
             android:screenOrientation="portrait" />
         <activity android:name=".AccessibilityActivity"
             android:exported="true">
