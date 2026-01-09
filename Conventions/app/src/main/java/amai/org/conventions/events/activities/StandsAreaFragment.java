@@ -32,6 +32,9 @@ import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Objects;
 import amai.org.conventions.utils.Views;
 import androidx.annotation.NonNull;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -258,12 +261,18 @@ public class StandsAreaFragment extends DialogFragment {
             dialog.setCancelable(true);
             dialog.setContentView(view);
 
+            // Handle edge to edge
+            Views.registerApplyInsets(Views.InsetType.PADDING, Views.InsetType.PADDING, Views.InsetType.PADDING, Views.InsetType.PADDING, false, zoom);
+
             // Dim background behind the dialog
-            dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            Window window = dialog.getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
             WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
-            layoutParams.copyFrom(dialog.getWindow().getAttributes());
+            layoutParams.copyFrom(window.getAttributes());
             layoutParams.dimAmount = 0.7f;
-            dialog.getWindow().setAttributes(layoutParams);
+            window.setAttributes(layoutParams);
+
+            setImmersiveMode(window, true);
 
             // Highlight the selected stand locations
             if (area != null && standName != null) {
@@ -302,6 +311,19 @@ public class StandsAreaFragment extends DialogFragment {
             super.onDismiss(dialog);
             // Set the orientation back to normal
             getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+            setImmersiveMode(getActivity().getWindow(), false);
+        }
+
+        private void setImmersiveMode(Window window, boolean enabled) {
+            WindowInsetsControllerCompat windowInsetsController = WindowCompat.getInsetsController(window, window.getDecorView());
+            if (enabled) {
+                // Enable immersive mode - hide system bars by default (they can be displayed with swipe)
+                windowInsetsController.setSystemBarsBehavior(WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
+                windowInsetsController.hide(WindowInsetsCompat.Type.systemBars());
+            } else {
+                windowInsetsController.setSystemBarsBehavior(WindowInsetsControllerCompat.BEHAVIOR_DEFAULT);
+                windowInsetsController.show(WindowInsetsCompat.Type.systemBars());
+            }
         }
     }
 }

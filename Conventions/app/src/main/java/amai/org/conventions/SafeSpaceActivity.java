@@ -14,6 +14,8 @@ import android.widget.Toast;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import amai.org.conventions.navigation.NavigationActivity;
+import amai.org.conventions.utils.Views;
+import androidx.core.text.method.LinkMovementMethodCompat;
 import fi.iki.kuitsi.listtest.ListTagHandler;
 
 public class SafeSpaceActivity extends NavigationActivity {
@@ -26,9 +28,15 @@ public class SafeSpaceActivity extends NavigationActivity {
 		setBackground(ThemeAttributes.getDrawable(this, R.attr.infoActivitiesBackground));
 		setToolbarTitle(getString(R.string.safe_space_title));
 
+		// Handle edge to edge
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, false, findViewById(R.id.safe_space_scroll));
+		// The bottom padding must be applied to a view inside the scroll view, otherwise the scrolling doesn't include the padding when scrolled from the last
+		// textview and it has a LinkMovementMethod
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, Views.InsetType.NONE, false, findViewById(R.id.scroll_view_bottom_padding));
+
 		TextView contentView = findViewById(R.id.content);
 		contentView.setText(Html.fromHtml(getString(R.string.safe_space_content), null, new ListTagHandler()));
-		contentView.setMovementMethod(LinkMovementMethod.getInstance());
+		contentView.setMovementMethod(LinkMovementMethodCompat.getInstance());
 
 		if (getWhatsAppIntentIfInstalled() == null) {
 			Button safeSpaceButton = findViewById(R.id.safe_space_button);

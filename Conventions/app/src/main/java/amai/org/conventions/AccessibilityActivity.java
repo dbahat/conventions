@@ -17,6 +17,8 @@ import amai.org.conventions.model.conventions.Animatsuri2025Convention;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.CollectionUtils;
+import amai.org.conventions.utils.Views;
+import androidx.core.text.method.LinkMovementMethodCompat;
 import fi.iki.kuitsi.listtest.ListTagHandler;
 
 public class AccessibilityActivity extends NavigationActivity {
@@ -27,12 +29,18 @@ public class AccessibilityActivity extends NavigationActivity {
         setBackground(ThemeAttributes.getDrawable(this, R.attr.infoActivitiesBackground));
         setToolbarTitle(getString(R.string.accessibility));
 
+        // Handle edge to edge
+        Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, false, findViewById(R.id.accessibility_scroll));
+        // The bottom padding must be applied to a view inside the scroll view, otherwise the scrolling doesn't include the padding when scrolled from the last
+        // textview and it has a LinkMovementMethod
+        Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, Views.InsetType.NONE, false, findViewById(R.id.scroll_view_bottom_padding));
+
         handleDeepLinks();
 
         TextView webContentContainer = findViewById(R.id.web_content);
         if (webContentContainer != null) {
             webContentContainer.setText(Html.fromHtml(getString(R.string.accessibility_content), null, new ListTagHandler()));
-            webContentContainer.setMovementMethod(LinkMovementMethod.getInstance());
+            webContentContainer.setMovementMethod(LinkMovementMethodCompat.getInstance());
         }
     }
 

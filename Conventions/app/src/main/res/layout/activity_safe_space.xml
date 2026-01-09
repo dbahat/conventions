@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/safe_space_scroll"
+    android:clipToPadding="false"
     tools:context="amai.org.conventions.SafeSpaceActivity">
     <LinearLayout
             android:layout_width="match_parent"
@@ -43,5 +45,10 @@
                 android:textColor="?buttonTextColor"
                 android:onClick="onContactSafeSpaceClicked"/>
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/scroll_view_bottom_padding"/>
     </LinearLayout>
 </ScrollView>

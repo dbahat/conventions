@@ -12,6 +12,7 @@ import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.R;
 import amai.org.conventions.settings.SettingsActivity;
 import amai.org.conventions.utils.Settings;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.text.method.LinkMovementMethodCompat;
 
 /**
