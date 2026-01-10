@@ -35,7 +35,7 @@ import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 import androidx.annotation.Nullable;
 
-public class Animatsuri2025Convention extends AmaiConvention {
+public class Harucon2026Convention extends AmaiConvention {
 	// Hall names
 	private static final String MAIN_HALL_NAME = "אולם ראשי";
 	private static final String ORANIM_NAME = "אודיטוריום אורנים";
@@ -120,18 +120,18 @@ public class Animatsuri2025Convention extends AmaiConvention {
 	protected Calendar initDate() {
 		Calendar date = Calendar.getInstance();
 		date.clear();
-		date.set(2025, Calendar.AUGUST, 28);
+		date.set(2026, Calendar.MARCH, 3);
 		return date;
 	}
 
 	@Override
 	protected String initID() {
-		return "Animatsuri2025";
+		return "Harucon2026";
 	}
 
 	@Override
 	protected String initDisplayName() {
-		return "אנימאטסורי 2025";
+		return "הארוקון 2026";
 	}
 
 	@Override

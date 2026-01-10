@@ -20,14 +20,14 @@
     <string name="safe_space_button_phone">ליצירת קשר בטלפון</string>
 
     <!-- Relevant to this specific convention -->
-    <string name="app_name">אנימאטסורי 2025</string>
+    <string name="app_name">הארוקון 2026</string>
     <string name="amaidol_name_question">איך קוראים לך?</string>
     <string name="amaidol_vote_question">מי המתמודד/ת החביב/ה עליך?</string>
     <string name="idolfest_vote_question">בחרו את הביצוע האהוב עליכם!</string>
     <!-- Copied from https://animatsuri.org.il/ !-->
     <string name="about_content"><![CDATA[
 <h2>ברוכים הבאים לכנס האנימה והמנגה הגדול בישראל!</h2>
-ברוכים הבאים וברוכות הבאות לכנס האנימה והמנגה הגדול של הקיץ!</br>
+ברוכים הבאים וברוכות הבאות לכנס האנימה והמנגה הגדול בישראל!</br>
 יום אחד שלם שמוקדש לעולמות שאנחנו הכי אוהבים – אנימה, מנגה, גיימינג ותרבות יפן הפופולרית.
 <p>
 הכנס מתאים לכל הגילאים ומלא בתחרויות שונות ומגוונות, הרצאות במגוון רחב של נושאים, מופעים מיוחדים, דוכנים מסחריים ודוכני אמנים, מחזות זמר ועוד.
@@ -43,10 +43,10 @@
     <br/>
     <p><b>קרדיט לאמנים:</b><br/>
     איה יוחאי (אינסטגרם: <a href="http://instagram.com/youkaiiisama">@youkaiiisama</a>, פייסבוק: <a href="https://www.facebook.com/youkaiiisama">Aya Youkai Sama</a>, טוויטר: <a href="https://x.com/actuallyoukai">actuallyoukai</a>)</p>
-<p><a href="https://animatsuri.org.il/2025">לאתר הכנס</a></p>
+<p><a href="https://harucon.org.il/">לאתר הכנס</a></p>
 ]]></string>
     <string name="about_app_content"><![CDATA[
-האפליקציה פותחה על ידי דוד בהט וטל ספן עבור כנס אנימאטסורי 2025.<br/>בקשות והצעות ניתן לכתוב <a href="market://details?id=amai.org.conventions">בדף האפליקציה בחנות</a>.
+האפליקציה פותחה על ידי דוד בהט וטל ספן עבור כנס הארוקון 2026.<br/>בקשות והצעות ניתן לכתוב <a href="market://details?id=amai.org.conventions">בדף האפליקציה בחנות</a>.
 <br/>תודות: מיה שראל.
 <p><a href="https://animatsuri.org.il/app-privacy">להצהרת הפרטיות</a></p>
 ]]></string>
@@ -96,29 +96,27 @@
     <!-- Text about convention accessibility taken from https://harucon.org.il/2025/accessibility/
          Instead of link to accessible programme file, added a link to the website programme which should be accessible. Also added map links and fixed the mail address. -->
     <string name="accessibility_content" formatted="false"><![CDATA[
-<h1>נגישות באפליקציה</h1>
-<p>מערכת ההפעלה אנדרואיד מאפשרת להפעיל אפשרויות נגישות שונות באפליקציות. <a href="org.amai.conventions://accessibility/open-accessibility">לחצו כאן להפעלת אפשרויות הנגישות</a>.</p>
-<h1>נגישות במתחם הכנס</h1>
-<p>צוות הנגישות כאן בשבילכם. לכל שאלה או בקשה ניתן לפנות לצוות בכתובת המייל:&nbsp;<a href="mailto:access@animatsuri.org.il">access@animatsuri.org.il</a><br/>בנוסף, הצוות יהיה זמין לכל בעיה או צורך אשר יעלו במהלך יום הכנס.</p>
+<p>על מנת לאפשר חווית כנס נעימה לכלל מבקרי הכנס, צוות נגישות כאן בשבילכם. לכל שאלה או בקשה ניתן לפנות לצוות בכתובת המייל: <a href="mailto:access@harucon.org.il">access@harucon.org.il</a></p>
+<p>בנוסף, הצוות יהיה זמין לכל בעיה או צורך אשר יעלו במהלך יום הכנס.</p>
 <h3><strong>מוגבלות בתנועה, שימוש בכיסאות גלגלים, הליכונים ועגלות ילדים</strong></h3>
 <p>הן הכניסה הראשית למתחם הכנס והן הקופות מונגשות.<br/>בין הקומות במתחם פועלות מעליות המיועדות לשימוש בעלי מוגבלות בתנועה.</p>
-<h3><strong>שירותים</strong></h3>
-<p>בכל חדרי השירותים במתחם ישנם שירותי נכים זמינים ונגישים.</p>
 <h3><strong>עיוורים וכבדי ראייה</strong></h3>
-<p>תכנייה המותאמת לתוכנות הקראה זמינה  <a href="https://animatsuri.org.il/2025/events/">באתר</a>.</p>
+<p>תכנייה המותאמת לתוכנות הקראה זמינה  <a href="https://harucon.org.il/events/">באתר</a>.</p>
 <h3><strong>חירשים וכבדי שמיעה</strong></h3>
 <p>קטעי הווידאו אשר יוקרנו באירועי הכנס ילוו בכתוביות.</p>
 <h3><strong>קופה נגישה</strong></h3>
-<p>הקופה הימנית באגף קניית הכרטיסים והקופה הימנית באגף הקנייה מראש בכניסה למתחם הכנס הן קופות נגישות. <br/>ניתן להגיע אל קופות אלו בהצגת תעודת נכה בפני מתנדב במקום.</p>
+<p>הקופה הימנית באגף קניית הכרטיסים, והקופה הימנית באגף הקנייה מראש בכניסה למתחם הכנס הן קופות נגישות.<br/>ניתן לגשת אל קופות אלו בהצגת תעודת נכה בפני מתנדב במקום.</p>
 <a href="org.amai.conventions://accessibility/open-map-in-accessible-cashiers">לחצו כאן לצפיה במיקום הקופות הנגישות במפה</a>.</p>
+<h3><strong>שירותים</strong></h3>
+<p>בכל חדרי השירותים במתחם ישנם שירותי נכים זמינים ונגישים.</p>
 <h3><strong>מלווים</strong></h3>
 <p>בעלי תעודת נכה זכאים להכנסת מלווה בחינם, כל עוד גיל המלווה מעל 18.</p>
 <h3><strong>כניסה מוקדמת לאירועים</strong></h3>
-<p>הצגת תעודת נכה תאפשר כניסה מוקדמת לאירועים ופטור מהמתנה בתור. במעמד קבלת הכרטיס בקופה הנגישה, תודבק על צמיד הכניסה מדבקת &quot;כניסה מוקדמת&quot;. <br/>לקבלת המדבקה יש לפנות למתנדב במקום ולהציג תעודת נכה או צמיד מתאים. המדבקה זמינה גם בעמדת המודיעין.<br/>בחדרי התכנים, המקומות בקדמת האולם שמורים לבעלי תעודת נכה.</p>
+<p>הצגת תעודת נכה תאפשר כניסה מוקדמת לאירועים ופטור מהמתנה בתור.<br/>בחדרי התכנים, יהיו מקומות  שמורים לבעלי תעודת נכה.</p>
 <h3><strong>חדר פעוטות</strong></h3>
 <p>בכנס יעמוד לרשות הקהל חדר פעוטות הכולל פינת הנקה, פינת החתלה ומים חמים. החדר מיועד להורים וילדיהם בלבד.<br/>
 <a href="org.amai.conventions://accessibility/open-map-in-parent-room">לחצו כאן לצפיה במיקום חדר הפעוטות במפה</a>.<br/>
-<a href="https://animatsuri.org.il/toddler-room/">לקריאת תקנון השימוש בחדר הפעוטות</a>.</p>
+<a href="https://harucon.org.il/toddler-room/">לקריאת תקנון השימוש בחדר הפעוטות</a>.</p>
 ]]></string>
     <string name="safe_space_content" formatted="false"><![CDATA[
 <h1>אנחנו כאן בשבילכם!</h1>
