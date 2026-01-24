@@ -44,11 +44,11 @@
         android:installLocation="auto"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppBaseTheme.Animatsuri2025">
+        android:theme="@style/AppBaseTheme.Harucon2026">
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppBaseTheme.Animatsuri2025.Splash"
+            android:theme="@style/AppBaseTheme.Harucon2026.Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -63,7 +63,7 @@
         <activity android:name=".map.MapActivity" />
         <activity
             android:name=".events.activities.EventActivity"
-            android:theme="@style/AppBaseTheme.Animatsuri2025.Event"
+            android:theme="@style/AppBaseTheme.Harucon2026.Event"
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".ArrivalMethodsActivity" />
         <activity
@@ -76,7 +76,7 @@
         <activity android:name=".SafeSpaceActivity" />
         <activity
             android:name=".HomeActivity"
-            android:theme="@style/AppBaseTheme.Animatsuri2025.Home"
+            android:theme="@style/AppBaseTheme.Harucon2026.Home"
             android:screenOrientation="portrait" />
         <activity android:name=".AccessibilityActivity"
             android:exported="true">
@@ -124,7 +124,7 @@
      See README(https://goo.gl/l4GJaQ) for more. -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/animatsuri_notification_small" />
+            android:resource="@drawable/harucon_notification_small" />
     </application>
 
 </manifest>

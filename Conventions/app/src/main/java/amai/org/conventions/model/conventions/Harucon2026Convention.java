@@ -84,7 +84,7 @@ public class Harucon2026Convention extends AmaiConvention {
 		ARTIST(R.string.artist_stand, R.drawable.ic_color_lens),
 		JEWELRY(R.string.jewelry_stand, R.drawable.diamond_24px),
 		GENERAL(R.string.general_stand, R.drawable.ic_shopping_basket),
-		OTHER(R.string.other_stand, R.drawable.icon_animatsuri);
+		OTHER(R.string.other_stand, R.drawable.icon_harucon);
 
 		private final int title;
 		private final int image;
@@ -137,7 +137,7 @@ public class Harucon2026Convention extends AmaiConvention {
 	@Override
 	protected URL initUpdatesURL() {
 		try {
-			return new URL("https://us-central1-starlit-brand-95018.cloudfunctions.net/getFeed?page=animatsuri.org.il");
+			return new URL("https://us-central1-starlit-brand-95018.cloudfunctions.net/getFeed?page=harucon.org.il");
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
@@ -816,7 +816,7 @@ public class Harucon2026Convention extends AmaiConvention {
 		}
 
 		return new StandLocationsBuilder()
-			.setDefaults(defaultWidth, defaultHeight, defaultSpaceHorizontal, defaultSpaceVertical, R.color.animatsuri2025_pink200, highlightBlendMode)
+			.setDefaults(defaultWidth, defaultHeight, defaultSpaceHorizontal, defaultSpaceVertical, R.color.harucon2026_pink1, highlightBlendMode)
 			.topToBottom(d1Left, d1Top, "d", 1, 2, "d3")
 			.leftToRight(d12Left, d12Top, "d", 12, 3, "d13")
 			.topToBottom(d13Left, d13Top, "d", 13, 22, "d24")
@@ -921,7 +921,7 @@ public class Harucon2026Convention extends AmaiConvention {
 		}
 
 		return new StandLocationsBuilder()
-			.setDefaults(defaultWidth, defaultHeight, defaultSpaceHorizontal, defaultSpaceVertical, R.color.animatsuri2025_pink200, highlightBlendMode)
+			.setDefaults(defaultWidth, defaultHeight, defaultSpaceHorizontal, defaultSpaceVertical, R.color.harucon2026_pink1, highlightBlendMode)
 			.leftToRight(a1Left, a1Top, "a", 1, 4, null)
 			.leftToRight(b1Left, b1Top, "b", 1, 7, null)
 			.leftToRight(b8Left, b8Top, "b", 8, 14, null)

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:color="@color/animatsuri2025_pink500" app:state_feedback_answer="true" app:state_feedback_answer_selected="true"/>
-    <item android:color="@color/animatsuri2025_magenta1200" app:state_feedback_answer="true"/>
-    <item android:color="@color/animatsuri2025_magenta1200"/>
-</selector>
