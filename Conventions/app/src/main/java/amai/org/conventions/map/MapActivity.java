@@ -351,6 +351,11 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 			searchType.setSelectedTabIndicator(tabIndicator);
 		}
 
+		Drawable mapSearchTopBorderColor = ThemeAttributes.getDrawable(this, R.attr.mapSearchTopBorder);
+		if (mapSearchTopBorderColor == null) {
+			findViewById(R.id.map_search_top_border).setVisibility(View.GONE);
+		}
+
 		// Check if we can search for stands
 		if (!Convention.getInstance().hasStands()) {
 			searchType.setVisibility(View.GONE);

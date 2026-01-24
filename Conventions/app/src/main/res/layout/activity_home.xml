@@ -7,7 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
+    <amai.org.conventions.customviews.FrameLayoutWithState
+        android:id="@+id/home_logo_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -15,16 +16,17 @@
         android:layout_marginTop="?homeLogoMarginTop"
         android:layout_marginBottom="?homeLogoMargin"
         android:layout_marginStart="?homeLogoMargin"
-        android:layout_marginEnd="?homeLogoMargin">
+        android:layout_marginEnd="?homeLogoMargin"
+        android:background="?homeLogoBackground">
         <ImageView
             android:id="@+id/home_logo"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:scaleType="fitStart"
+            android:scaleType="fitEnd"
             android:adjustViewBounds="true"
             android:layout_gravity="center_horizontal"
             android:src="?homeLogo"/>
-    </FrameLayout>
+    </amai.org.conventions.customviews.FrameLayoutWithState>
 
     <!-- The content of the info box will be placed at runtime inside this layout -->
     <FrameLayout

@@ -92,6 +92,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 	private Survey feedback;
 	private boolean feedbackChanged;
 	private ColorStateList textColor;
+	private int titleBackgroundResource;
 	private int answerBackgroundResource;
 	private int feedbackSentTextResource = R.string.feedback_sent;
 	private int feedbackSendErrorMessage = R.string.feedback_send_failed;
@@ -109,6 +110,7 @@ public class CollapsibleFeedbackView extends FrameLayout {
 			TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.CollapsibleFeedbackView, 0, 0);
 			try {
 				textColor = array.getColorStateList(R.styleable.CollapsibleFeedbackView_textColor);
+				titleBackgroundResource = array.getResourceId(R.styleable.CollapsibleFeedbackView_titleBackground, NO_RESOURCE);
 				answerBackgroundResource = array.getResourceId(R.styleable.CollapsibleFeedbackView_answerBackground, NO_RESOURCE);
 				sendButtonBackgroundResource = array.getResourceId(R.styleable.CollapsibleFeedbackView_sendButtonBackground, NO_RESOURCE);
 				sendButtonTextColorResource = array.getResourceId(R.styleable.CollapsibleFeedbackView_sendButtonTextColor, NO_RESOURCE);
@@ -217,6 +219,10 @@ public class CollapsibleFeedbackView extends FrameLayout {
 		LinearLayout questionsLayout = (LinearLayout) findViewById(R.id.questions_layout);
 		buildQuestionsLayout(questionsLayout, feedback);
 		setTextColor(textColor);
+
+		if (titleBackgroundResource != NO_RESOURCE) {
+			findViewById(R.id.feedback_expanded_title).setBackgroundResource(titleBackgroundResource);
+		}
 	}
 
 	/** This must be called before setModel or refresh */

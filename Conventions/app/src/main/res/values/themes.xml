@@ -25,6 +25,9 @@
         <item name="highlightedButtonRadius">@dimen/control_corner_material</item>
         <item name="actionButtonColor">?colorAccent</item>
         <item name="actionButtonIcon">@drawable/ic_action_search</item>
+        <item name="actionButtonShapeAppearance">@null</item>
+        <item name="actionButtonBorderWidth">0dp</item>
+        <item name="actionButtonBorderColor">?actionButtonColor</item>
         <item name="borderlessButtonColor">?buttonColor</item>
         <item name="buttonTextColor">@color/white</item>
         <item name="activitiesTopPadding">0dp</item>
@@ -92,6 +95,7 @@
         <item name="navigationPopupItemPaddingBottom">4dp</item>
 
         <!-- Home -->
+        <item name="homeLogoBackground">@null</item>
         <item name="homeBackgroundDuringConvention">?homeBackground</item>
         <item name="homeToolbarBackground">?toolbarBackground</item>
         <item name="homeBoxTopMargin">0dp</item>
@@ -160,7 +164,9 @@
         <item name="mapSearchBarBackground">@null</item>
         <item name="mapSearchBarHorizontalMargins">0dp</item>
         <item name="mapSearchPaneElevation">0dp</item>
+        <item name="mapShelterButtonTextColor">?buttonTextColor</item>
         <item name="mapShelterButtonBackground">?highlightedButtonBackground</item>
+        <item name="mapDetailButtonsTextColor">?buttonTextColor</item>
         <item name="mapDetailButtonsBackground">?highlightedButtonBackground</item>
 
         <!-- Event activity -->
@@ -183,11 +189,13 @@
         <item name="eventVoteTextColor">?eventDescriptionTextColor</item>
         <item name="eventVoteButtonBackground">?highlightedButtonBackground</item>
         <item name="eventVoteButtonTextColor">?buttonTextColor</item>
+        <item name="eventVoteTitleBackground">@null</item>
         <item name="eventDescriptionBoxColor">?eventDetailsBoxColor</item>
         <item name="eventActivityFavoriteColor">@color/gold</item>
         <item name="eventFeedbackAnswerBackground">@null</item>
         <item name="eventFeedbackButtonBackground">?highlightedButtonBackground</item>
         <item name="eventFeedbackButtonTextColor">?buttonTextColor</item>
+        <item name="eventFeedbackTitleBackground">@null</item>
 
         <!-- Feedback activity -->
         <item name="feedbackActivityBackground">?activitiesBackground</item>
@@ -240,6 +248,9 @@
         <item name="highlightedButtonRadius">@dimen/control_corner_material</item>
         <item name="actionButtonColor">?colorAccent</item>
         <item name="actionButtonIcon">@drawable/ic_action_search</item>
+        <item name="actionButtonShapeAppearance">@null</item>
+        <item name="actionButtonBorderWidth">0dp</item>
+        <item name="actionButtonBorderColor">?actionButtonColor</item>
         <item name="borderlessButtonColor">?buttonColor</item>
         <item name="buttonTextColor">@color/white</item>
         <item name="activitiesTopPadding">0dp</item>
@@ -307,6 +318,7 @@
         <item name="navigationPopupItemPaddingBottom">4dp</item>
 
         <!-- Home -->
+        <item name="homeLogoBackground">@null</item>
         <item name="homeBackgroundDuringConvention">?homeBackground</item>
         <item name="homeToolbarBackground">?toolbarBackground</item>
         <item name="homeBoxTopMargin">0dp</item>
@@ -375,7 +387,9 @@
         <item name="mapSearchBarBackground">@null</item>
         <item name="mapSearchBarHorizontalMargins">0dp</item>
         <item name="mapSearchPaneElevation">0dp</item>
+        <item name="mapShelterButtonTextColor">?buttonTextColor</item>
         <item name="mapShelterButtonBackground">?highlightedButtonBackground</item>
+        <item name="mapDetailButtonsTextColor">?buttonTextColor</item>
         <item name="mapDetailButtonsBackground">?highlightedButtonBackground</item>
 
         <!-- Event activity -->
@@ -398,11 +412,13 @@
         <item name="eventVoteTextColor">?eventDescriptionTextColor</item>
         <item name="eventVoteButtonBackground">?highlightedButtonBackground</item>
         <item name="eventVoteButtonTextColor">?buttonTextColor</item>
+        <item name="eventVoteTitleBackground">@null</item>
         <item name="eventDescriptionBoxColor">?eventDetailsBoxColor</item>
         <item name="eventActivityFavoriteColor">@color/gold</item>
         <item name="eventFeedbackAnswerBackground">@null</item>
         <item name="eventFeedbackButtonBackground">?highlightedButtonBackground</item>
         <item name="eventFeedbackButtonTextColor">?buttonTextColor</item>
+        <item name="eventFeedbackTitleBackground">@null</item>
 
         <!-- Feedback activity -->
         <item name="feedbackActivityBackground">?activitiesBackground</item>

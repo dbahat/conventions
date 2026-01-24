@@ -46,6 +46,7 @@
     </style>
 
     <style name="EventDescriptionBox.Vote">
+        <item name="android:padding">0dp</item>
         <item name="android:background">?eventVoteBoxColor</item>
     </style>
 
@@ -113,7 +114,7 @@
          It seems that despite the documentation, the minHeight and minWidth include the padding. -->
 <!--        <item name="android:minHeight">@null</item>-->
 <!--        <item name="android:minWidth">@null</item>-->
-        <item name="android:padding">12dp</item>
+        <item name="android:padding">11dp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">20sp</item>
         <item name="android:layout_margin">@null</item>
@@ -125,5 +126,10 @@
         <item name="android:textSize">20sp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="SquareFAB">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">0dp</item>
     </style>
 </resources>

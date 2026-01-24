@@ -183,6 +183,7 @@ public class HomeActivity extends NavigationActivity {
 			TextView title = findViewById(R.id.home_content_title);
 			title.setTextColor(baseStates.getThemeColor(this, R.attr.homeTitleText));
 		}
+		setViewState(R.id.home_logo_container, baseStates);
 		setViewState(R.id.home_logo, baseStates);
 		setViewState(R.id.home_bottom_image, baseStates);
 

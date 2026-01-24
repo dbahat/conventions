@@ -85,6 +85,7 @@
             android:layout_margin="20dp"
             android:layout_alignParentEnd="true"
             style="@style/HighlightedButton"
+            android:textColor="?mapShelterButtonTextColor"
             android:background="?mapShelterButtonBackground"
             android:text="@string/map_show_shelters"/>
 

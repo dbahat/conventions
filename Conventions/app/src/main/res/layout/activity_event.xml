@@ -169,6 +169,8 @@
 						android:textColor="?attr/eventVoteTextColor"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
+						android:background="?eventVoteTitleBackground"
+						android:padding="@dimen/event_details_box_padding"
 						android:text="@string/event_view_details" />
 					<Button
 						android:id="@+id/event_view_button"
@@ -179,6 +181,9 @@
 						android:background="?eventVoteButtonBackground"
 						android:textColor="?eventVoteButtonTextColor"
 						android:enabled="true"
+						android:layout_marginBottom="@dimen/event_details_box_padding"
+						android:layout_marginStart="@dimen/event_details_box_padding"
+						android:layout_marginEnd="@dimen/event_details_box_padding"
 						android:text="@string/view_event" />
 				</LinearLayout>
 				<LinearLayout
@@ -190,10 +195,11 @@
 						android:id="@+id/event_vote_description"
 						style="@style/TextAppearance.AppCompat.Subhead"
 						android:textColor="?attr/eventVoteTextColor"
+						android:background="?eventVoteTitleBackground"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
+						android:padding="@dimen/event_details_box_padding"
 						android:text="@string/survey_vote_details" />
-
 
 					<TextView
 						android:id="@+id/event_vote_note"
@@ -202,12 +208,17 @@
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						android:layout_marginTop="5dp"
+						android:layout_marginStart="@dimen/event_details_box_padding"
+						android:layout_marginEnd="@dimen/event_details_box_padding"
 						android:text="@string/survey_vote_note" />
 
 					<FrameLayout
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:layout_marginTop="5dp"
+						android:layout_marginBottom="@dimen/event_details_box_padding"
+						android:layout_marginStart="@dimen/event_details_box_padding"
+						android:layout_marginEnd="@dimen/event_details_box_padding"
 						android:layout_gravity="center">
 
 						<Button
@@ -250,6 +261,7 @@
 					app:sendButtonBackground="?eventFeedbackButtonBackground"
 					app:sendButtonTextColor="?eventFeedbackButtonTextColor"
 					app:progressBarColor="?eventFeedbackProgressBarColor"
+					app:titleBackground="?eventFeedbackTitleBackground"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
             </amai.org.conventions.customviews.FrameLayoutWithState>
