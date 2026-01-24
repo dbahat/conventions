@@ -11,9 +11,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import amai.org.conventions.navigation.NavigationActivity;
+import amai.org.conventions.utils.BundleBuilder;
+import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Views;
 import androidx.core.text.method.LinkMovementMethodCompat;
 import fi.iki.kuitsi.listtest.ListTagHandler;
@@ -54,6 +58,7 @@ public class SafeSpaceActivity extends NavigationActivity {
 	}
 
 	public void onContactSafeSpaceClicked(View view) {
+		String contactApp = "whatsapp";
 		Intent intent = getWhatsAppIntentIfInstalled();
 
 		// If whatsapp is not available, open phone
@@ -61,7 +66,16 @@ public class SafeSpaceActivity extends NavigationActivity {
 			intent = new Intent(Intent.ACTION_DIAL,
 				Uri.parse("tel:" + PHONE_NUMBER)
 			);
+			contactApp = "phone";
 		}
+
+		FirebaseAnalytics
+			.getInstance(view.getContext())
+			.logEvent("contact_safe_space_clicked", new BundleBuilder()
+				.putString("contact_app", contactApp)
+				.build()
+			);
+		Log.i("amai", "sent contact_safe_space_clicked");
 
 		if (intent.resolveActivity(getPackageManager()) != null) {
 			try {
