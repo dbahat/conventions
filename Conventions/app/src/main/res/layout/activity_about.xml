@@ -29,6 +29,7 @@
             android:background="?infoActivitiesTextBackground"
             android:orientation="vertical">
             <TextView
+                android:paddingTop="@dimen/activity_horizontal_margin"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:id="@+id/about_content"
