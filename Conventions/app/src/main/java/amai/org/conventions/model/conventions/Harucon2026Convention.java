@@ -202,7 +202,7 @@ public class Harucon2026Convention extends AmaiConvention {
 	@Override
 	protected URL initModelURL() {
 		try {
-			return new URL("https://animatsuri.org.il/2025/wp-admin/admin-ajax.php?action=get_event_list");
+			return new URL("https://harucon.org.il/2026/wp-admin/admin-ajax.php?action=get_event_list");
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
