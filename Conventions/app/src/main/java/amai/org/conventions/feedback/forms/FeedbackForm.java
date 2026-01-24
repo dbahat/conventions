@@ -6,6 +6,8 @@ public class FeedbackForm extends SurveyForm {
     private String conventionNameEntry;
     private String deviceIdEntry;
     private String testEntry;
+	private String osEntry;
+	private String versionEntry;
 
     public String getConventionNameEntry() {
         return conventionNameEntry;
@@ -46,6 +48,32 @@ public class FeedbackForm extends SurveyForm {
         return this;
     }
 
+	public String getOsEntry() {
+        return osEntry;
+    }
+
+	public void setOsEntry(String osEntry) {
+        this.osEntry = osEntry;
+    }
+
+	public FeedbackForm withOsEntry(String osEntry) {
+		setOsEntry(osEntry);
+		return this;
+	}
+
+	public String getVersionEntry() {
+        return versionEntry;
+    }
+
+	public void setVersionEntry(String versionEntry) {
+        this.versionEntry = versionEntry;
+    }
+
+	public FeedbackForm withVersionEntry(String versionEntry) {
+		setVersionEntry(versionEntry);
+		return this;
+	}
+
     public boolean canFillFeedback(Survey feedback) {
         if (getSendUrl() == null) {
             return false;
@@ -57,6 +85,12 @@ public class FeedbackForm extends SurveyForm {
             return false;
         }
         if (getTestEntry() == null) {
+            return false;
+        }
+        if (getOsEntry() == null) {
+            return false;
+        }
+        if (getVersionEntry() == null) {
             return false;
         }
         return super.canFillFeedback(feedback);
