@@ -15,6 +15,7 @@
         <attr name="progressBarColor" format="color|reference"/>
         <attr name="sendButtonBackground" format="integer|reference"/>
         <attr name="sendButtonTextColor" format="integer|reference"/>
+        <attr name="titleBackground" format="integer|reference"/>
     </declare-styleable>
 
     <declare-styleable name="ApplicationTheme">
@@ -51,6 +52,12 @@
         <attr name="infoActivitiesTextBackground" format="color|reference"/>
         <!-- Background color for FAB -->
         <attr name="actionButtonColor" format="color|reference"/>
+        <!-- Shape appearance for FAB -->
+        <attr name="actionButtonShapeAppearance" format="integer|reference"/>
+        <!-- Border width for FAB -->
+        <attr name="actionButtonBorderWidth" format="dimension"/>
+        <!-- Border color for FAB -->
+        <attr name="actionButtonBorderColor" format="color|reference"/>
         <!-- Icon for FAB (search) -->
         <attr name="actionButtonIcon" format="integer|reference"/>
         <!-- Text color for message when something cannot be displayed.
@@ -208,6 +215,8 @@
         <attr name="homeToolbarBackground" format="integer|reference"/>
         <!-- Top image in home activity (all screens). Can be a state list drawable. Home state is set with state_home_... attributes. -->
         <attr name="homeLogo" format="integer|reference"/>
+        <!-- Background for home activity top image (all screens). Can be a state list drawable. Home state is set with state_home_... attributes. -->
+        <attr name="homeLogoBackground" format="integer|reference"/>
         <!-- Margins (all sides) for homeLogo -->
         <attr name="homeLogoMargin" format="dimension"/>
         <!-- Top margin for homeLogo. Default is homeLogoMargin. -->
@@ -438,7 +447,10 @@
         <attr name="mapSearchTopBorder" format="color|reference"/>
         <!-- Border color to the left of map search -->
         <attr name="mapSearchBorder" format="color|reference"/>
-        <!-- Background for map search tabs -->
+        <!-- Tab background for map search tabs.
+             Can be a state list drawable. Use android:selected="true" for the selected tab. -->
+        <attr name="mapSearchTabsTabBackground" format="color|reference"/>
+        <!-- Tab background for map search tabs -->
         <attr name="mapSearchTabsBackground" format="color|reference"/>
         <!-- Border color between tabs and search filters -->
         <attr name="mapSearchTabsBorder" format="color|reference"/>
@@ -476,8 +488,14 @@
         <!-- Shelter button background -->
         <attr name="mapShelterButtonBackground" format="integer|reference"/>
 
+        <!-- Shelter button text color -->
+        <attr name="mapShelterButtonTextColor" format="integer|reference"/>
+
         <!-- Details buttons background -->
         <attr name="mapDetailButtonsBackground" format="integer|reference"/>
+
+        <!-- Details button text color -->
+        <attr name="mapDetailButtonsTextColor" format="integer|reference"/>
 
         <!-- Stands popup stand icon color -->
         <attr name="standIconColor" format="color|reference"/>
@@ -557,7 +575,8 @@
         <attr name="eventFeedbackButtonTextColor" format="integer|reference"/>
         <!-- Color for the sending progress bar in event feedback view -->
         <attr name="eventFeedbackProgressBarColor" format="color|reference"/>
-
+        <!-- Background for the title in event feedback view -->
+        <attr name="eventFeedbackTitleBackground" format="color|reference"/>
 
         <!-- Background color for event vote/view box in event activity -->
         <attr name="eventVoteBoxColor" format="color|reference"/>
@@ -567,6 +586,8 @@
         <attr name="eventVoteButtonTextColor" format="color|reference"/>
         <!-- Button background for event vote/view button -->
         <attr name="eventVoteButtonBackground" format="integer|reference"/>
+        <!-- Background for event vote/view box in event activity. -->
+        <attr name="eventVoteTitleBackground" format="color|reference"/>
 
         <!-- Event Survey Dialog -->
 

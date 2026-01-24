@@ -29,6 +29,7 @@
             android:layout_height="match_parent">
 
             <View
+                android:id="@+id/map_search_top_border"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="?mapSearchTopBorder"/>
@@ -36,6 +37,7 @@
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/search_type"
                 android:background="?mapSearchTabsBackground"
+                app:tabBackground="?mapSearchTabsTabBackground"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:tabGravity="fill"

@@ -91,7 +91,10 @@
                 android:layout_margin="@dimen/fab_margin"
                 app:elevation="4dp"
                 app:layout_dodgeInsetEdges="left|right"
-                app:backgroundTint="?actionButtonColor"/>
+                app:shapeAppearanceOverlay="?actionButtonShapeAppearance"
+                android:backgroundTint="?actionButtonColor"
+                app:borderWidth="?actionButtonBorderWidth"
+                app:backgroundTint="?actionButtonBorderColor"/>
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
