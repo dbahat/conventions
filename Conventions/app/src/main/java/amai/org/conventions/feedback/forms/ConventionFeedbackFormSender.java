@@ -36,6 +36,10 @@ public class ConventionFeedbackFormSender extends SurveyFormSender {
 		if (BuildConfig.DEBUG) {
 			answers.put(form.getTestEntry(), "true");
 		}
+		// OS
+		answers.put(form.getOsEntry(), "Android");
+		// Version
+		answers.put(form.getVersionEntry(), BuildConfig.VERSION_NAME);
 
 		// Questions
 		List<FeedbackQuestion> questions = getSurvey().getQuestions();
