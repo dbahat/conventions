@@ -17,6 +17,7 @@ import amai.org.conventions.model.Halls;
 import amai.org.conventions.model.SpecialEventsProcessor;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
+import androidx.annotation.VisibleForTesting;
 
 public class AmaiModelConverter {
 	public static final int NO_COLOR = Color.TRANSPARENT; // Assuming we will never get this from the server...
@@ -104,7 +105,8 @@ public class AmaiModelConverter {
 		return hall;
 	}
 
-	private String convertEventDescription(String rawEventDescription) {
+	@VisibleForTesting
+	public static String convertEventDescription(String rawEventDescription) {
 		return rawEventDescription
 				// Remove style, height and width attributes in tags since they make the element take
 				// up more space than needed and are not supported anyway.
@@ -115,6 +117,8 @@ public class AmaiModelConverter {
 				.replaceAll("height=\"[^\"]*\"", "")
 				// Remove scripts (multi-line and lazy)
 				.replaceAll("(?s)<script>.*?</script>", "")
+				// Remove styles (multi-line and lazy)
+				.replaceAll("(?s)<style>.*?</style>", "")
 				// Replace divs and images with some other unsupported (and therefore ignored)
 				.replace("<div", "<xdiv")
 				.replace("/div>", "/xdiv>")
