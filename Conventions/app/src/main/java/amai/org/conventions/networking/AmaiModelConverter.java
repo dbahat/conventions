@@ -22,6 +22,7 @@ import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
+import androidx.annotation.VisibleForTesting;
 
 public class AmaiModelConverter {
 
@@ -156,7 +157,8 @@ public class AmaiModelConverter {
 		return hall;
 	}
 
-	private String convertEventDescription(String rawEventDescription) {
+	@VisibleForTesting
+	public static String convertEventDescription(String rawEventDescription) {
 		return rawEventDescription
 				// Remove style, height and width attributes in tags since they make the element take
 				// up more space than needed and are not supported anyway.
@@ -165,8 +167,10 @@ public class AmaiModelConverter {
 				.replaceAll("style=\"[^\"]*\"", "")
 				.replaceAll("width=\"[^\"]*\"", "")
 				.replaceAll("height=\"[^\"]*\"", "")
-				// TODO: This change was added as a workaround to Harucon2017 Cosplay Event page parsing. Should be dropped after Harucon is over.
-				.replace("target=\"_self\"><img", "target=\"_self\"><br/><br/><img")
+				// Remove scripts (multi-line and lazy)
+				.replaceAll("(?s)<script>.*?</script>", "")
+				// Remove styles (multi-line and lazy)
+				.replaceAll("(?s)<style>.*?</style>", "")
 				// Replace divs and images with some other unsupported (and therefore ignored)
 				.replace("<div", "<xdiv")
 				.replace("/div>", "/xdiv>")

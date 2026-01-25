@@ -26,10 +26,16 @@ import amai.org.conventions.utils.HtmlParser;
 import amai.org.conventions.utils.Objects;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.annotation.VisibleForTesting;
 import fi.iki.kuitsi.listtest.ListTagHandler;
 import sff.org.conventions.R;
 
 public class ConventionEvent implements Serializable {
+	@VisibleForTesting
+	public static final String FORM_LINK_TEXT = "לטופס";
+	private static final String VIDEO_LINK_TEXT = "לסרטון";
+	private static final String DEFAULT_IFRAME_LINK_TEXT = "למידע נוסף";
+
 	private String id;
 	private int serverId;
 	private int backgroundColor;
@@ -447,6 +453,7 @@ public class ConventionEvent implements Serializable {
 	}
 
 	public Spanned getSpannedDescription() {
+		// This is tested in ConventionEventTests - check the tests pass before making changes
 		String eventDescription = this.getDescription();
 		final ListTagHandler listTagHandler = new ListTagHandler();
 		Spanned spannedResult = HtmlParser.fromHtml(eventDescription, null, new HtmlParser.TagHandler() {
@@ -630,11 +637,11 @@ public class ConventionEvent implements Serializable {
 			SpannableStringBuilder link = new SpannableStringBuilder();
 			String url = Convention.getInstance().convertEventDescriptionURL(span.getUrl());
 			if (!TextUtils.isEmpty(url)) {
-				String linkText = "למידע נוסף";
+				String linkText = DEFAULT_IFRAME_LINK_TEXT;
 				if (url.startsWith("https://www.youtube.com/")) {
-					linkText = "לסרטון";
+					linkText = VIDEO_LINK_TEXT;
 				} else if (url.startsWith("https://docs.google.com/forms/")) {
-					linkText = "לטופס";
+					linkText = FORM_LINK_TEXT;
 				}
 				link.append(linkText);
 				if (editableSpanned.length() <= spanEnd || editableSpanned.charAt(spanEnd) != '\n') {
@@ -652,7 +659,7 @@ public class ConventionEvent implements Serializable {
 			SpannableStringBuilder link = new SpannableStringBuilder();
 			String url = Convention.getInstance().convertEventDescriptionURL(span.getUrl());
 			if (!TextUtils.isEmpty(url)) {
-				String linkText = "לסרטון";
+				String linkText = VIDEO_LINK_TEXT;
 				link.append(linkText);
 				if (editableSpanned.length() <= spanEnd || editableSpanned.charAt(spanEnd) != '\n') {
 					link.append("\n");
@@ -669,7 +676,7 @@ public class ConventionEvent implements Serializable {
 			SpannableStringBuilder link = new SpannableStringBuilder();
 			String url = Convention.getInstance().convertEventDescriptionURL(span.getUrl());
 			if (!TextUtils.isEmpty(url)) {
-				link.append("לטופס");
+				link.append(FORM_LINK_TEXT);
 				if (editableSpanned.length() <= spanEnd || editableSpanned.charAt(spanEnd) != '\n') {
 					link.append("\n");
 				}
@@ -719,7 +726,9 @@ public class ConventionEvent implements Serializable {
 			if (editableSpanned.charAt(spanEnd - 1) != '\n' &&
 				editableSpanned.charAt(spanEnd) != '\n' &&
 				editableSpanned.charAt(spanEnd + 1) != '\n') {
-				editableSpanned.insert(spanEnd + 1, "\n");
+				// The linebreak should not be included in the span. Since we always create div spans as exclusive, inserting a character
+				// at the end of the span will not be included in it.
+				editableSpanned.insert(spanEnd, "\n");
 			}
 		}
 		return editableSpanned;
