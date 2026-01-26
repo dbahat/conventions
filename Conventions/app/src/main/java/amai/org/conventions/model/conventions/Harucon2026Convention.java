@@ -42,9 +42,10 @@ public class Harucon2026Convention extends AmaiConvention {
 	private static final String ESHKOL1_NAME = "אשכול 1";
 	private static final String ESHKOL2_NAME = "אשכול 2";
 	private static final String ESHKOL3_NAME = "אשכול 3";
+	private static final String WORKSHOPS_NAME = "חדר סדנאות";
+	private static final String ORANIM2_NAME = "אורנים 2";
 	private static final String GAMES_NAME = "משחקייה";
-	private static final String COSPLAY_AREA_NAME = "תיקון קוספליי";
-	private static final String COSPLAY_PHOTOGRAPHY_NAME = "עמדת צילום";
+	private static final String COSPLAY_AREA_NAME = "מתחם קוספליי";
 	// Location names
 	public static final String CHILDREN_ROOM_NAME = "חדר פעוטות";
 
@@ -61,8 +62,8 @@ public class Harucon2026Convention extends AmaiConvention {
 	 * {@link #getEventVoteSender(ConventionEvent)}
 	 */
 	private static final int EVENT_ID_NO_EVENT = -1;
-	private static final int EVENT_ID_AMAIDOL = EVENT_ID_NO_EVENT;
-	private static final int EVENT_ID_IDOLFEST = 884;
+	private static final int EVENT_ID_AMAIDOL = 1439;
+	private static final int EVENT_ID_IDOLFEST = EVENT_ID_NO_EVENT;
 
 	// Ids of google spreadsheets associated with the special events
 	private static final String AMAIDOL_SPREADSHEET_ID = "1u9xu3FNq2gA25oZoVHVguTzJA5HheXWPf2wnUj-iipE";
@@ -113,7 +114,7 @@ public class Harucon2026Convention extends AmaiConvention {
 
 	@Override
 	protected ConventionStorage initStorage() {
-		return new ConventionStorage(this, R.raw.animatsuri2025_convention_events, 1);
+		return new ConventionStorage(this, R.raw.harucon2026_convention_events, 0);
 	}
 
 	@Override
@@ -202,7 +203,7 @@ public class Harucon2026Convention extends AmaiConvention {
 	@Override
 	protected URL initModelURL() {
 		try {
-			return new URL("https://harucon.org.il/2026/wp-admin/admin-ajax.php?action=get_event_list");
+			return new URL("https://harucon.org.il/wp-admin/admin-ajax.php?action=get_event_list");
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
@@ -237,9 +238,10 @@ public class Harucon2026Convention extends AmaiConvention {
 			new Hall().withName(ESHKOL1_NAME).withShelter(true),
 			new Hall().withName(ESHKOL2_NAME).withShelter(true),
 			new Hall().withName(ESHKOL3_NAME).withShelter(true),
+			new Hall().withName(WORKSHOPS_NAME),
+			new Hall().withName(ORANIM2_NAME),
 			new Hall().withName(GAMES_NAME),
-			new Hall().withName(COSPLAY_AREA_NAME),
-			new Hall().withName(COSPLAY_PHOTOGRAPHY_NAME)
+			new Hall().withName(COSPLAY_AREA_NAME)
 		);
 		int i = 1;
 		for (Hall hall : halls) {
@@ -262,7 +264,6 @@ public class Harucon2026Convention extends AmaiConvention {
 		Hall eshkol3 = this.getHalls().findByName(ESHKOL3_NAME);
 		Hall games = this.getHalls().findByName(GAMES_NAME);
 		Hall cosplayArea = this.getHalls().findByName(COSPLAY_AREA_NAME);
-		Hall cosplayPhotography = this.getHalls().findByName(COSPLAY_PHOTOGRAPHY_NAME);
 
 		Floor entrance = new Floor(1)
 				.withName("מתחם כניסה")
@@ -380,13 +381,13 @@ public class Harucon2026Convention extends AmaiConvention {
 												.withMarkerHeight(128.037f)
 												.withX(1315.234f)
 												.withY(783.963f),
-										new MapLocation()
-												.withPlace(cosplayPhotography)
-												.withMarkerResource(R.raw.animatsuri2025_marker_photography, true)
-												.withSelectedMarkerResource(R.raw.animatsuri2025_selected_marker_photography, true)
-												.withMarkerHeight(178.085f)
-												.withX(1205.449f)
-												.withY(829.415f),
+//										new MapLocation()
+//												.withPlace(cosplayPhotography)
+//												.withMarkerResource(R.raw.animatsuri2025_marker_photography, true)
+//												.withSelectedMarkerResource(R.raw.animatsuri2025_selected_marker_photography, true)
+//												.withMarkerHeight(178.085f)
+//												.withX(1205.449f)
+//												.withY(829.415f),
 										new MapLocation()
 												.withPlace(new Place().withName("פינת אוכל"))
 												.withMarkerResource(R.raw.animatsuri2025_marker_food_court, true)
