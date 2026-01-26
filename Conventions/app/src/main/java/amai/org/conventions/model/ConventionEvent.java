@@ -35,6 +35,7 @@ public class ConventionEvent implements Serializable {
 	@VisibleForTesting
 	public static final String FORM_LINK_TEXT = "לטופס";
 	private static final String VIDEO_LINK_TEXT = "לסרטון";
+	private static final String AUDIO_LINK_TEXT = "להאזנה";
 	private static final String DEFAULT_IFRAME_LINK_TEXT = "למידע נוסף";
 
 	private String id;
@@ -614,6 +615,29 @@ public class ConventionEvent implements Serializable {
 						}
 						span.setUrl(url);
 					}
+				} else if (tag.equals("li")) {
+					int length = output.length();
+					if (opening) {
+						// Add song link for Amaidol
+						String song = HtmlParser.getValue(attributes, "song");
+						if (song != null) {
+							AudioSpan span = new AudioSpan();
+							span.setStart(length);
+							span.setUrl(song);
+							currSpan = span;
+						}
+					} else if (currSpan instanceof AudioSpan) {
+						AudioSpan span = (AudioSpan) currSpan;
+						span.setEnd(length);
+						if (span.getUrl() != null) {
+							// SPAN_EXCLUSIVE_EXCLUSIVE is removed if its length is 0
+							int spanFlags = Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
+							if (span.getStart() == span.getEnd()) {
+								spanFlags = Spanned.SPAN_MARK_MARK;
+							}
+							output.setSpan(span, span.getStart(), length, spanFlags);
+						}
+					}
 				}
 
 				if (opening) {
@@ -674,6 +698,35 @@ public class ConventionEvent implements Serializable {
 				link.setSpan(new CustomURLSpan(url), 0, link.length() - 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
 			}
 			editableSpanned.replace(spanStart, spanEnd, link);
+		}
+
+		// Add audio links at the end of the span content with a CustomURLSpans
+		for (AudioSpan span : editableSpanned.getSpans(0, editableSpanned.length(), AudioSpan.class)) {
+			int spanStart = editableSpanned.getSpanStart(span);
+			int spanEnd = editableSpanned.getSpanEnd(span);
+			String url = Convention.getInstance().convertEventDescriptionURL(span.getUrl());
+			if (!TextUtils.isEmpty(url)) {
+				// Since this is added at the end of li tags, whitespace is added automatically.
+				// We want the link to appear before the extra whitespace so we have to find the last whitespace
+				// and add it before.
+				int insertPlace = spanEnd;
+				while (insertPlace > spanStart && Character.isWhitespace(editableSpanned.charAt(insertPlace - 1))) {
+					--insertPlace;
+				}
+
+				// Since we add it before all whitespace at the end, add a linebreak before unless the span is empty
+				SpannableStringBuilder link = new SpannableStringBuilder();
+				if (insertPlace > spanStart) {
+					link.append("\n");
+				}
+				String linkText = AUDIO_LINK_TEXT;
+				link.append(linkText);
+				if (editableSpanned.length() <= spanEnd || editableSpanned.charAt(spanEnd) != '\n') {
+					link.append("\n");
+				}
+				link.setSpan(new CustomURLSpan(url), 0, link.length() - 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+				editableSpanned.insert(insertPlace, link);
+			}
 		}
 
 		// Convert google form spans to CustomURLSpan by removing the original (div) content and adding a link to the form
@@ -790,6 +843,17 @@ public class ConventionEvent implements Serializable {
 		}
 	}
 	private static class VideoSpan extends DivSpan {
+		private String url = null;
+
+		public void setUrl(String url) {
+			this.url = url;
+		}
+
+		public String getUrl() {
+			return url;
+		}
+	}
+	private static class AudioSpan extends DivSpan {
 		private String url = null;
 
 		public void setUrl(String url) {
