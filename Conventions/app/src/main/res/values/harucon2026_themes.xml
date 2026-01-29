@@ -75,7 +75,7 @@
         <item name="aboutLogoMargins">0dp</item>
         <!-- Home Screen -->
         <item name="homeLogo">@drawable/harucon2026_home_image</item>
-        <item name="homeLogoBackground">@drawable/harucon2026_home_logo_background</item>
+        <item name="homeLogoBackground">@null</item>
         <item name="homeLogoMargin">0dp</item>
         <item name="homeLogoMarginTop">0dp</item>
         <item name="homeBottomImage">@null</item>
@@ -98,7 +98,7 @@
         <item name="homeBoxTopMargin">0dp</item>
         <item name="homeEventsMargin">10dp</item>
         <item name="homeSingleButtonTopMargin">10dp</item>
-        <item name="homeFrameTopMargin">10dp</item>
+        <item name="homeFrameTopMargin">0dp</item>
         <!-- Event View -->
         <item name="eventViewLayout">@layout/rounded_convention_event</item>
         <item name="eventViewHeight">104dp</item>
