@@ -63,7 +63,7 @@ public class AccessibilityActivity extends NavigationActivity {
                 }
                 case "/open-map-in-accessible-cashiers": {
                     ConventionMap map = Convention.getInstance().getMap();
-                    List<MapLocation> locations = map.findLocationsByName("קופה נגישה", false);
+                    List<MapLocation> locations = map.findLocationsByName(Harucon2026Convention.ACCESSIBLE_CASHIERS_NAME, false);
                     int[] locationIds = CollectionUtils.mapToInt(locations, MapLocation::getId);
                     Bundle floorBundle = new Bundle();
                     floorBundle.putIntArray(MapActivity.EXTRA_MAP_LOCATION_IDS, locationIds);
