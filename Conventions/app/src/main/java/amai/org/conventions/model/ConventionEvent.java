@@ -536,17 +536,24 @@ public class ConventionEvent implements Serializable {
 					// meaning the form wasn't attached to the output yet so it's still in the divSpans stack).
 					// We go over the stack in reverse order because the current form was added last.
 					GoogleFormSpan span = null;
-					Object currentDivSpan = null;
 					// We will have either div or xdiv tags, so the order doesn't matter
 					Stack<Object> allDivSpans = new Stack<>();
-					allDivSpans.addAll(tagSpans.get("div"));
-					allDivSpans.addAll(tagSpans.get("xdiv"));
-					for (ListIterator<Object> iter = allDivSpans.listIterator(allDivSpans.size()); iter.hasPrevious(); currentDivSpan = iter.previous()) {
+					if (tagSpans.get("div") != null) {
+						allDivSpans.addAll(tagSpans.get("div"));
+					}
+					if (tagSpans.get("xdiv") != null) {
+						allDivSpans.addAll(tagSpans.get("xdiv"));
+					}
+
+					ListIterator<Object> iter = allDivSpans.listIterator(allDivSpans.size());
+					while (iter.hasPrevious()) {
+						Object currentDivSpan = iter.previous();
 						if (currentDivSpan instanceof GoogleFormSpan) {
 							span = (GoogleFormSpan) currentDivSpan;
 							break;
 						}
 					}
+
 					if (span != null) {
 						String url = HtmlParser.getValue(attributes, "action");
 						span.setUrl(url);
@@ -737,15 +744,10 @@ public class ConventionEvent implements Serializable {
 			}
 			editableSpanned.replace(spanStart, spanEnd, link);
 		}
-		// Remove any links to google forms (since they were handled previously)
+		// Fix urls
 		for (URLSpan urlSpan : editableSpanned.getSpans(0, editableSpanned.length(), URLSpan.class)) {
 			String url = Convention.getInstance().convertEventDescriptionURL(urlSpan.getURL());
-			if (url.startsWith("https://docs.google.com/forms/") && !(urlSpan instanceof CustomURLSpan)) {
-				int spanStart = editableSpanned.getSpanStart(urlSpan);
-				int spanEnd = editableSpanned.getSpanEnd(urlSpan);
-				editableSpanned.delete(spanStart, spanEnd);
-			} else if (!Objects.equals(url, urlSpan.getURL())) {
-				// Fix url
+			if (!Objects.equals(url, urlSpan.getURL())) {
 				int spanStart = editableSpanned.getSpanStart(urlSpan);
 				int spanEnd = editableSpanned.getSpanEnd(urlSpan);
 				editableSpanned.removeSpan((urlSpan));
