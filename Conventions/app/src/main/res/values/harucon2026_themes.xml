@@ -76,6 +76,8 @@
         <!-- Home Screen -->
         <item name="homeLogo">@drawable/harucon2026_home_image</item>
         <item name="homeLogoBackground">@null</item>
+        <item name="homeLogoScaleType">fitStart</item>
+        <item name="homeLogoScaleTypeDuringConvention">fitEnd</item>
         <item name="homeLogoMargin">0dp</item>
         <item name="homeLogoMarginTop">0dp</item>
         <item name="homeBottomImage">@null</item>
