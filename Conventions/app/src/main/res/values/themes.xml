@@ -97,6 +97,8 @@
         <!-- Home -->
         <item name="homeLogoBackground">@null</item>
         <item name="homeBackgroundDuringConvention">?homeBackground</item>
+        <item name="homeLogoScaleType">fitStart</item>
+        <item name="homeLogoScaleTypeDuringConvention">?homeLogoScaleType</item>
         <item name="homeToolbarBackground">?toolbarBackground</item>
         <item name="homeBoxTopMargin">0dp</item>
         <item name="homeEventsMargin">?homeBoxTopMargin</item>
@@ -320,6 +322,8 @@
         <!-- Home -->
         <item name="homeLogoBackground">@null</item>
         <item name="homeBackgroundDuringConvention">?homeBackground</item>
+        <item name="homeLogoScaleType">fitStart</item>
+        <item name="homeLogoScaleTypeDuringConvention">?homeLogoScaleType</item>
         <item name="homeToolbarBackground">?toolbarBackground</item>
         <item name="homeBoxTopMargin">0dp</item>
         <item name="homeEventsMargin">?homeBoxTopMargin</item>
