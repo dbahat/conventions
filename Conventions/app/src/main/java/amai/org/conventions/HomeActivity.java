@@ -32,6 +32,7 @@ import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.StateList;
 import amai.org.conventions.utils.Views;
+import androidx.annotation.AttrRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -109,6 +110,8 @@ public class HomeActivity extends NavigationActivity {
 		} else {
 			setContentForNoUpcomingFavorites();
 		}
+
+		setHomeLogoScaleType(R.attr.homeLogoScaleTypeDuringConvention);
 	}
 
 	private boolean setupVoteOrView(ConventionEvent currentEvent, ImageView imageView) {
@@ -465,6 +468,7 @@ public class HomeActivity extends NavigationActivity {
 		contentView.setTextColor(baseStates.getThemeColor(this, R.attr.homeContentText));
 		setViewState(R.id.home_logo, baseStates);
 		setViewState(R.id.home_bottom_image, baseStates);
+		setHomeLogoScaleType(R.attr.homeLogoScaleType);
 
 		// the convention didn't start yet. Show the user the number of days until it starts.
 		int daysUntilConventionStarts = getDaysUntilConventionStart();
@@ -502,6 +506,7 @@ public class HomeActivity extends NavigationActivity {
 		Button goToFeedbackButton = findViewById(R.id.home_go_to_feedback_button);
 		Views.fixRadialGradient(contentViewContainer);
 		StateList baseStates = new StateList(R.attr.state_home_after_con);
+		setHomeLogoScaleType(R.attr.homeLogoScaleType);
 
 		titleView.setText(getString(R.string.thanks_for_coming, Convention.getInstance().getDisplayName()));
 
@@ -520,6 +525,24 @@ public class HomeActivity extends NavigationActivity {
 		contentView.setTextColor(baseStates.getThemeColor(this, R.attr.homeContentText));
 		setViewState(R.id.home_logo, baseStates);
 		setViewState(R.id.home_bottom_image, baseStates);
+	}
+
+	private void setHomeLogoScaleType(@AttrRes int homeLogoScaleTypeAttr) {
+		ImageView homeLogoImage = findViewById(R.id.home_logo);
+		int scaleTypeFromAttr = ThemeAttributes.getInteger(this, homeLogoScaleTypeAttr);
+		// This should be aligned with attrs.xml
+		ImageView.ScaleType[] scaleTypes = {
+			ImageView.ScaleType.MATRIX, // 0
+			ImageView.ScaleType.FIT_XY, // 1
+			ImageView.ScaleType.FIT_START, // 2
+			ImageView.ScaleType.FIT_CENTER, // 3
+			ImageView.ScaleType.FIT_END, // 4
+			ImageView.ScaleType.CENTER, // 5
+			ImageView.ScaleType.CENTER_CROP, // 6
+			ImageView.ScaleType.CENTER_INSIDE // 7
+		};
+		ImageView.ScaleType scaleType = scaleTypes[scaleTypeFromAttr];
+		homeLogoImage.setScaleType(scaleType);
 	}
 
 	private int getDaysUntilConventionStart() {

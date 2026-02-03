@@ -217,6 +217,32 @@
         <attr name="homeLogo" format="integer|reference"/>
         <!-- Background for home activity top image (all screens). Can be a state list drawable. Home state is set with state_home_... attributes. -->
         <attr name="homeLogoBackground" format="integer|reference"/>
+        <!-- Scale type for home top image -->
+        <attr name="homeLogoScaleType" format="enum|reference">
+            <!-- These are the actual values from the attribute, but they are mapped in HomeActivity to the Java enums
+                 since ImageView.ScaleType doesn't provide a way to get the enum by value -->
+            <enum name="matrix" value="0" />
+            <enum name="fitXY" value="1" />
+            <enum name="fitStart" value="2" />
+            <enum name="fitCenter" value="3" />
+            <enum name="fitEnd" value="4" />
+            <enum name="center" value="5" />
+            <enum name="centerCrop" value="6" />
+            <enum name="centerInside" value="7" />
+        </attr>
+        <!-- Scale type for home top image during the convention. By default, set to homeLogoScaleTypeDuringConvention. -->
+        <attr name="homeLogoScaleTypeDuringConvention" format="enum|reference">
+            <!-- These are the actual values from the attribute, but they are mapped in HomeActivity to the Java enums
+                 since ImageView.ScaleType doesn't provide a way to get the enum by value -->
+            <enum name="matrix" value="0" />
+            <enum name="fitXY" value="1" />
+            <enum name="fitStart" value="2" />
+            <enum name="fitCenter" value="3" />
+            <enum name="fitEnd" value="4" />
+            <enum name="center" value="5" />
+            <enum name="centerCrop" value="6" />
+            <enum name="centerInside" value="7" />
+        </attr>
         <!-- Margins (all sides) for homeLogo -->
         <attr name="homeLogoMargin" format="dimension"/>
         <!-- Top margin for homeLogo. Default is homeLogoMargin. -->
