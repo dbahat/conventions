@@ -235,13 +235,13 @@ public class Harucon2026Convention extends AmaiConvention {
 	protected Halls initHalls() {
 		List<Hall> halls = Arrays.asList(
 			new Hall().withName(MAIN_HALL_NAME).withShelter(true),
-			new Hall().withName(ORANIM_NAME).withShelter(true),
 			new Hall().withName(ESHKOL1_NAME).withShelter(true),
 			new Hall().withName(ESHKOL2_NAME).withShelter(true),
 			new Hall().withName(ESHKOL3_NAME).withShelter(true),
 			new Hall().withName(WORKSHOPS_NAME),
-			new Hall().withName(ORANIM2_NAME),
+			new Hall().withName(ORANIM_NAME).withShelter(true),
 			new Hall().withName(GAMES_NAME),
+			new Hall().withName(ORANIM2_NAME),
 			new Hall().withName(COSPLAY_AREA_NAME)
 		);
 		int i = 1;
