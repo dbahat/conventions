@@ -97,7 +97,8 @@
 <p>במתחם ישנם 850 מקומות חנייה בתשלום המתחלקים בין חניון תת קרקעי וחניון חיצוני.</p>
 ]]></string>
     <!-- Text about convention accessibility taken from https://harucon.org.il/2025/accessibility/
-         Instead of link to accessible programme file, added a link to the website programme which should be accessible. Also added map links and fixed the mail address. -->
+         Instead of link to accessible programme file, added a link to the website programme which should be accessible. Also added map links.
+         Punctuation is kept inside the full-line links because we hide the map links if the map isn't available and don't want to only keep the punctuation. -->
     <string name="accessibility_content" formatted="false"><![CDATA[
 <p>על מנת לאפשר חווית כנס נעימה לכלל מבקרי הכנס, צוות נגישות כאן בשבילכם. לכל שאלה או בקשה ניתן לפנות לצוות בכתובת המייל: <a href="mailto:access@harucon.org.il">access@harucon.org.il</a></p>
 <p>בנוסף, הצוות יהיה זמין לכל בעיה או צורך אשר יעלו במהלך יום הכנס.</p>
@@ -109,7 +110,7 @@
 <p>קטעי הווידאו אשר יוקרנו באירועי הכנס ילוו בכתוביות.</p>
 <h3><strong>קופה נגישה</strong></h3>
 <p>הקופה הימנית באגף קניית הכרטיסים, והקופה הימנית באגף הקנייה מראש בכניסה למתחם הכנס הן קופות נגישות.<br/>ניתן לגשת אל קופות אלו בהצגת תעודת נכה בפני מתנדב במקום.</p>
-<a href="org.amai.conventions://accessibility/open-map-in-accessible-cashiers">לחצו כאן לצפיה במיקום הקופות הנגישות במפה</a>.</p>
+<a href="org.amai.conventions://accessibility/open-map-in-accessible-cashiers">לחצו כאן לצפיה במיקום הקופות הנגישות במפה.</a></p>
 <h3><strong>שירותים</strong></h3>
 <p>בכל חדרי השירותים במתחם ישנם שירותי נכים זמינים ונגישים.</p>
 <h3><strong>מלווים</strong></h3>
@@ -118,8 +119,8 @@
 <p>הצגת תעודת נכה תאפשר כניסה מוקדמת לאירועים ופטור מהמתנה בתור.<br/>בחדרי התכנים, יהיו מקומות  שמורים לבעלי תעודת נכה.</p>
 <h3><strong>חדר פעוטות</strong></h3>
 <p>בכנס יעמוד לרשות הקהל חדר פעוטות הכולל פינת הנקה, פינת החתלה ומים חמים. החדר מיועד להורים וילדיהם בלבד.<br/>
-<a href="org.amai.conventions://accessibility/open-map-in-parent-room">לחצו כאן לצפיה במיקום חדר הפעוטות במפה</a>.<br/>
-<a href="https://harucon.org.il/toddler-room/">לקריאת תקנון השימוש בחדר הפעוטות</a>.</p>
+<a href="org.amai.conventions://accessibility/open-map-in-parent-room">לחצו כאן לצפיה במיקום חדר הפעוטות במפה.</a><br/>
+<a href="https://harucon.org.il/toddler-room/">לקריאת תקנון השימוש בחדר הפעוטות.</a></p>
 ]]></string>
     <string name="safe_space_content" formatted="false"><![CDATA[
 <h1>אנחנו כאן בשבילכם!</h1>

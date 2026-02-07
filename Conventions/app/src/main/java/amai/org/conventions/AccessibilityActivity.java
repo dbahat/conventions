@@ -5,6 +5,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.Html;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.URLSpan;
 import android.widget.TextView;
 
 import java.util.List;
@@ -38,7 +41,18 @@ public class AccessibilityActivity extends NavigationActivity {
 
         TextView webContentContainer = findViewById(R.id.web_content);
         if (webContentContainer != null) {
-            webContentContainer.setText(Html.fromHtml(getString(R.string.accessibility_content), null, new ListTagHandler()));
+            Spanned spannedContent = Html.fromHtml(getString(R.string.accessibility_content), null, new ListTagHandler());
+            if (!Convention.getInstance().getMap().isAvailable()) {
+                SpannableStringBuilder spanBuilder = new SpannableStringBuilder(spannedContent);
+                // Remove links to map
+                for (URLSpan urlSpan : spanBuilder.getSpans(0, spannedContent.length(), URLSpan.class)) {
+                    if (urlSpan.getURL().startsWith("org.amai.conventions://accessibility/open-map")) {
+                        spanBuilder.replace(spanBuilder.getSpanStart(urlSpan), spanBuilder.getSpanEnd(urlSpan), "");
+                    }
+                }
+                spannedContent = spanBuilder;
+            }
+            webContentContainer.setText(spannedContent);
             webContentContainer.setMovementMethod(LinkMovementMethodCompat.getInstance());
         }
     }
