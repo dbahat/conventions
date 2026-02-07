@@ -254,7 +254,8 @@ public class Harucon2026Convention extends AmaiConvention {
 
 	@Override
 	protected ConventionMap initMap() {
-		return createMap();
+		return new ConventionMap();
+//		return createMap();
 	}
 
 	private ConventionMap createMap() {
