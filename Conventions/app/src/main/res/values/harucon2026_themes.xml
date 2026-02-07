@@ -202,11 +202,11 @@
         <item name="eventFeedbackButtonBackground">@drawable/harucon2026_event_feedback_button</item>
         <item name="eventFeedbackButtonTextColor">@drawable/harucon2026_event_feedback_button_text_color</item>
         <item name="eventFeedbackProgressBarColor">@color/harucon2026_green3</item>
-        <item name="eventVoteBoxColor">@drawable/harucon2026_mint2_w_green2_border</item>
-        <item name="eventVoteTextColor">@color/harucon2026_green3</item>
-        <item name="eventVoteButtonBackground">@drawable/harucon2026_event_feedback_button</item>
-        <item name="eventVoteButtonTextColor">@drawable/harucon2026_event_feedback_button_text_color</item>
-        <item name="eventVoteTitleBackground">@drawable/harucon2026_green1_w_green2_border_3_sides</item>
+        <item name="eventVoteBoxColor">@drawable/harucon2026_lilach3_w_violet1_border</item>
+        <item name="eventVoteTextColor">@color/harucon2026_eggplant1</item>
+        <item name="eventVoteButtonBackground">@drawable/harucon2026_event_vote_button</item>
+        <item name="eventVoteButtonTextColor">@drawable/harucon2026_event_vote_button_text_color</item>
+        <item name="eventVoteTitleBackground">@drawable/harucon2026_lilach1_w_violet1_border_3_sides</item>
         <item name="eventDescriptionBoxColor">@drawable/harucon2026_white_w_peach1_border</item>
         <item name="eventDescriptionTextColor">@color/harucon2026_eggplant1</item>
         <item name="eventSurveyTextColor">@drawable/harucon2026_event_vote_text_color</item>
