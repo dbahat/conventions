@@ -411,12 +411,12 @@ public class Harucon2026Convention extends AmaiConvention {
 												.withX(1298.979f)
 												.withY(364.086f),
 										new MapLocation()
-												.withPlace(new Place().withName("Nintendo"))
+												.withPlace(new Place().withName("מתחם נינטנדו"))
 												.withMarkerResource(R.raw.harucon2026_marker_nintendo, true)
 												.withSelectedMarkerResource(R.raw.harucon2026_selected_marker_nintendo, true)
-												.withMarkerHeight(102.037f)
+												.withMarkerHeight(114.037f)
 												.withX(1294.234f)
-												.withY(251.963f),
+												.withY(247.963f),
 										new MapLocation()
 												.withPlace(new Place().withName("שמירת חפצים"))
 												.withMarkerResource(R.raw.harucon2026_marker_storage, true)
