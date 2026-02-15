@@ -37,7 +37,12 @@ public class StandLocationsBuilder {
 
 	private StandLocationsBuilder single(float left, float top, float width, float height, float rotation, String letter, int number, String next) {
 		String name = letter + number;
-		String sort = (number < 10) ? letter + "0" + number : name;
+		String sort = name;
+		if (number < 10) {
+			sort = letter + "00" + number;
+		} else if (number < 100) {
+			sort = letter + "0" + number;
+		}
 		StandLocation location = StandLocation.fromWidths(name, sort, next, left, width, top, height, rotation);
 		location.setHighlightColorResource(defaultHighlightColorResource);
 		location.setHighlightBlendMode(defaultHighlightBlendMode);
@@ -45,30 +50,60 @@ public class StandLocationsBuilder {
 		return this;
 	}
 
-	public StandLocationsBuilder leftToRight(float firstLocationLeft, float firstLocationTop, String letter, int firstNumber, int lastNumber, String next) {
-		return leftToRight(firstLocationLeft, firstLocationTop, defaultWidth, defaultHeight, defaultRotation, defaultWidthSpace, letter, firstNumber, lastNumber, next);
+	private interface DoForConsecutive {
+		void call(int index, int currentNumber, String nextName);
 	}
 
-	public StandLocationsBuilder leftToRight(float firstLocationLeft, float firstLocationTop, float rotation, String letter, int firstNumber, int lastNumber, String next) {
-		return leftToRight(firstLocationLeft, firstLocationTop, defaultWidth, defaultHeight, rotation, defaultWidthSpace, letter, firstNumber, lastNumber, next);
-	}
-
-	public StandLocationsBuilder leftToRight(float firstLocationLeft, float firstLocationTop, float width, float height, float rotation, float space, String letter, int firstNumber, int lastNumber, String next) {
+	private void consecutive(String letter, int firstNumber, int lastNumber, String next, DoForConsecutive action) {
 		if (firstNumber <= lastNumber) {
 			int index = 0;
 			for (int currNumber = firstNumber; currNumber <= lastNumber; ++currNumber) {
 				String nextName = (currNumber == lastNumber) ? next : letter + (currNumber + 1);
-				single(firstLocationLeft + index * (width + space), firstLocationTop, width, height, rotation, letter, currNumber, nextName);
+				action.call(index, currNumber, nextName);
 				++index;
 			}
 		} else {
 			int index = 0;
 			for (int currNumber = firstNumber; currNumber >= lastNumber; --currNumber) {
 				String nextName = (currNumber == firstNumber) ? next : letter + (currNumber + 1);
-				single(firstLocationLeft + index * (width + space), firstLocationTop, width, height, rotation, letter, currNumber, nextName);
+				action.call(index, currNumber, nextName);
 				++index;
 			}
 		}
+	}
+
+	public StandLocationsBuilder diagonalFromTopLeft(float firstLocationLeft, float firstLocationTop, String letter, int firstNumber, int lastNumber, String next) {
+		return diagonalFromTopLeft(firstLocationLeft, firstLocationTop, defaultWidth, defaultHeight, defaultRotation, defaultWidthSpace, defaultHeightSpace, letter, firstNumber, lastNumber, next);
+	}
+
+	// widthSpace heightSpace are between the left/top corners of both locations
+	public StandLocationsBuilder diagonalFromTopLeft(float firstLocationLeft, float firstLocationTop, float width, float height, float rotation, float widthSpace, float heightSpace, String letter, int firstNumber, int lastNumber, String next) {
+		consecutive(letter, firstNumber, lastNumber, next, (index, currentNumber, nextName) -> {
+			single(firstLocationLeft + index * widthSpace, firstLocationTop + index * heightSpace, width, height, rotation, letter, currentNumber, nextName);
+		});
+		return this;
+	}
+
+	public StandLocationsBuilder diagonalFromBottomLeft(float firstLocationLeft, float firstLocationTop, String letter, int firstNumber, int lastNumber, String next) {
+		return diagonalFromBottomLeft(firstLocationLeft, firstLocationTop, defaultWidth, defaultHeight, defaultRotation, defaultWidthSpace, defaultHeightSpace, letter, firstNumber, lastNumber, next);
+	}
+
+	public StandLocationsBuilder diagonalFromBottomLeft(float firstLocationLeft, float firstLocationTop, float width, float height, float rotation, float widthSpace, float heightSpace, String letter, int firstNumber, int lastNumber, String next) {
+		consecutive(letter, firstNumber, lastNumber, next, (index, currentNumber, nextName) -> {
+			single(firstLocationLeft + index * widthSpace, firstLocationTop - index * heightSpace, width, height, rotation, letter, currentNumber, nextName);
+		});
+		return this;
+	}
+
+	public StandLocationsBuilder leftToRight(float firstLocationLeft, float firstLocationTop, String letter, int firstNumber, int lastNumber, String next) {
+		return leftToRight(firstLocationLeft, firstLocationTop, defaultWidth, defaultHeight, defaultRotation, defaultWidthSpace, letter, firstNumber, lastNumber, next);
+	}
+
+	// space is between the right corner of one location and the left corner of the next location
+	public StandLocationsBuilder leftToRight(float firstLocationLeft, float firstLocationTop, float width, float height, float rotation, float space, String letter, int firstNumber, int lastNumber, String next) {
+		consecutive(letter, firstNumber, lastNumber, next, (index, currentNumber, nextName) -> {
+			single(firstLocationLeft + index * (width + space), firstLocationTop, width, height, rotation, letter, currentNumber, nextName);
+		});
 		return this;
 	}
 
@@ -80,22 +115,11 @@ public class StandLocationsBuilder {
 		return topToBottom(firstLocationLeft, firstLocationTop, defaultWidth, defaultHeight, rotation, defaultHeightSpace, letter, firstNumber, lastNumber, next);
 	}
 
+	// space is between the bottom corner of one location and the top corner of the next location
 	public StandLocationsBuilder topToBottom(float firstLocationLeft, float firstLocationTop, float width, float height, float rotation, float space, String letter, int firstNumber, int lastNumber, String next) {
-		if (firstNumber <= lastNumber) {
-			int index = 0;
-			for (int currNumber = firstNumber; currNumber <= lastNumber; ++currNumber) {
-				String nextName = (currNumber == lastNumber) ? next : letter + (currNumber + 1);
-				single(firstLocationLeft, firstLocationTop + index * (height + space), width, height, rotation, letter, currNumber, nextName);
-				++index;
-			}
-		} else {
-			int index = 0;
-			for (int currNumber = firstNumber; currNumber >= lastNumber; --currNumber) {
-				String nextName = (currNumber == firstNumber) ? next : letter + (currNumber + 1);
-				single(firstLocationLeft, firstLocationTop + index * (height + space), width, height, rotation, letter, currNumber, nextName);
-				++index;
-			}
-		}
+		consecutive(letter, firstNumber, lastNumber, next, (index, currentNumber, nextName) -> {
+			single(firstLocationLeft, firstLocationTop + index * (height + space), width, height, rotation, letter, currentNumber, nextName);
+		});
 		return this;
 	}
 
