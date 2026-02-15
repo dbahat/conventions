@@ -17,6 +17,7 @@ public class StandLocation implements Comparable<StandLocation> {
 	private float right = -1;
 	private float top = -1;
 	private float bottom = -1;
+	private float rotation = 0;
 	private int highlightColorResource;
 	private BlendMode highlightBlendMode;
 
@@ -26,16 +27,17 @@ public class StandLocation implements Comparable<StandLocation> {
 		this.next = next;
 	}
 
-	public StandLocation(String id, String sort, String next, float left, float right, float top, float bottom) {
+	public StandLocation(String id, String sort, String next, float left, float right, float top, float bottom, float rotation) {
 		this(id, sort, next);
 		this.left = left;
 		this.right = right;
 		this.top = top;
 		this.bottom = bottom;
+		this.rotation = rotation;
 	}
 
-	public static StandLocation fromWidths(String id, String sort, String next, float left, float width, float top, float height) {
-		return new StandLocation(id, sort, next, left, left + width, top, top + height);
+	public static StandLocation fromWidths(String id, String sort, String next, float left, float width, float top, float height, float rotation) {
+		return new StandLocation(id, sort, next, left, left + width, top, top + height, rotation);
 	}
 
 	public String getId() {
@@ -66,6 +68,10 @@ public class StandLocation implements Comparable<StandLocation> {
 		return bottom;
 	}
 
+	public float getRotation() {
+		return rotation;
+	}
+
 	public void setHighlightColorResource(int highlightColorResource) {
 		this.highlightColorResource = highlightColorResource;
 	}
@@ -81,6 +87,6 @@ public class StandLocation implements Comparable<StandLocation> {
 
 	@RequiresApi(api = Build.VERSION_CODES.Q)
 	public PaintDrawable getHighlightPaintDrawable(Context context) {
-		return new RectPaintDrawable(ContextCompat.getColor(context, highlightColorResource), highlightBlendMode, left, top, right, bottom);
+		return new RectPaintDrawable(ContextCompat.getColor(context, highlightColorResource), highlightBlendMode, left, top, right, bottom, rotation);
 	}
 }
