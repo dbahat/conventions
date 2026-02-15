@@ -15,15 +15,17 @@ public class RectPaintDrawable implements PaintDrawable {
 	private float top;
 	private float right;
 	private float bottom;
+	private float rotation;
 	private int color;
 	private BlendMode blendMode;
 
-	public RectPaintDrawable(int color, BlendMode blendMode, float left, float top, float right, float bottom) {
+	public RectPaintDrawable(int color, BlendMode blendMode, float left, float top, float right, float bottom, float rotation) {
 		this.left = left;
 		this.top = top;
 		this.right = right;
 		this.bottom = bottom;
 		this.color = color;
+		this.rotation = rotation;
 		this.blendMode = blendMode;
 	}
 
@@ -40,6 +42,16 @@ public class RectPaintDrawable implements PaintDrawable {
 			right * widthFactor,
 			bottom  * heightFactor
 		);
+
+		if (rotation != 0) {
+			canvas.save();
+			canvas.rotate(rotation, box.centerX(), box.centerY());
+		}
+
 		canvas.drawRect(box, paint);
+
+		if (rotation != 0) {
+			canvas.restore();
+		}
 	}
 }
