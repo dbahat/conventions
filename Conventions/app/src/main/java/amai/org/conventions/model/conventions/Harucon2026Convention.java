@@ -285,20 +285,20 @@ public class Harucon2026Convention extends AmaiConvention {
 				.withImageWidth(1817f)
 				.withImageHeight(1155.26f);
 
-		StandsArea tetsugot = new StandsArea()
-				.withName("תצוגות")
-				.withStandLocations(getTetsugotStandLocations()) // This must be initialized before the stands
+		StandsArea tedi = new StandsArea()
+				.withName("אולם טדי")
+				.withStandLocations(getTediStandLocations()) // This must be initialized before the stands
 				.withStands(getTetsugotStands())
-				.withImageResource(R.drawable.animatsuri2025_stands_map_tetzugot)
-				.withImageWidth(1335.000f)
-				.withImageHeight(3157.000f);
+				.withImageResource(R.drawable.harucon2026_stands_map_tedi)
+				.withImageWidth(4948.000f)
+				.withImageHeight(5036.000f);
 		StandsArea agam = new StandsArea()
 				.withName("אולם אגם")
 				.withStandLocations(getAgamStandLocations()) // This must be initialized before the stands
 				.withStands(getAgamStands())
-				.withImageResource(R.drawable.animatsuri2025_stands_map_agam)
-				.withImageWidth(1244.160f)
-				.withImageHeight(3152.000f);
+				.withImageResource(R.drawable.harucon2026_stands_map_agam)
+				.withImageWidth(4425.000f)
+				.withImageHeight(1728.000f);
 
 		return new ConventionMap()
 				.withFloors(Arrays.asList(entrance, floor1, floor2))
@@ -381,8 +381,7 @@ public class Harucon2026Convention extends AmaiConvention {
 												.withY(859.33f),
 										new MapLocation()
 												.withName("מתחם דוכנים")
-												.withPlace(new Place().withName("מתחם דוכנים"))
-//												.withPlace(tetsugot)
+												.withPlace(tedi)
 												.withMarkerResource(R.raw.harucon2026_marker_stands, true)
 												.withSelectedMarkerResource(R.raw.harucon2026_selected_marker_stands, true)
 												.withMarkerHeight(94.947f)
@@ -540,8 +539,7 @@ public class Harucon2026Convention extends AmaiConvention {
 												.withY(710.249f),
 										new MapLocation()
 												.withName("שדרת ציירים")
-												.withPlace(new Place().withName("שדרת ציירים"))
-//												.withPlace(agam)
+												.withPlace(agam)
 												.withMarkerResource(R.raw.harucon2026_marker_artist_alley, true)
 												.withSelectedMarkerResource(R.raw.harucon2026_selected_marker_artist_alley, true)
 												.withMarkerHeight(98.282f)
@@ -734,94 +732,24 @@ public class Harucon2026Convention extends AmaiConvention {
 		);
 	}
 
-	private StandLocations getTetsugotStandLocations() {
-		float defaultWidth = 40;
-		float defaultSpaceHorizontal = 16;
-		float defaultHeight = 40;
-		float defaultSpaceVertical = 16;
+	private StandLocations getTediStandLocations() {
+		float defaultWidth = 72;
+		float defaultSpaceHorizontal = 8;
+		float defaultHeight = 72;
+		float defaultSpaceVertical = 8;
 
-		// Wrapping line
+		float defaultRotatedWidth = 72;
+		float defaultRotatedSpaceHorizontal = 69.28f;
+		float defaultRotatedHeight = 72;
+		float defaultRotatedSpaceVertical = 40;
+		int defaultRotationFromTopLeft = 30;
+		int defaultRotationFromBottomLeft = -30;
 
-		float d1Left = 827.000f;
-		float d1Top = 159.000f;
+		// Adjust left and top for rotation - add half the difference between full width (or height) and non-rotated width (or height)
+		float horizontalRotationFactor = (98.354f - defaultRotatedWidth) / 2;
+		float verticalRotationFactor = (98.354f - defaultRotatedHeight) / 2;
 
-		float d12Left = 265.000f;
-		float d12Top = 267.000f;
-
-		float d13Left = 168.000f;
-		float d13Top = 324.997f;
-
-		float d24Left = 168.000f;
-		float d24Top = 949.000f;
-
-		float d37Left = 172.000f;
-		float d37Top = 1797.000f;
-
-		float d45Left = 172.000f;
-		float d45Top = 2400.000f;
-
-		float d55Left = 209.000f;
-		float d55Top = 2960.000f;
-
-		float d62Left = 601.000f;
-		float d62Top = 2960.000f;
-
-		float d78Left = 1158.000f;
-		float d78Top = 2456.000f;
-
-		// Rows from top to bottom
-
-		float e10Left = 377.000f;
-		float e10Top = 493.000f;
-
-		float e5Left = 657.000f;
-		float e5Top = 493.000f;
-
-		float e19Left = 377.000f;
-		float e19Top = 717.000f;
-
-		float e15Left = 657.000f;
-		float e15Top = 717.000f;
-
-		float f9Left = 433.000f;
-		float f9Top = 949.000f;
-
-		float f20Left = 377.000f;
-		float f20Top = 1173.000f;
-
-		float f15Left = 657.000f;
-		float f15Top = 1173.000f;
-
-		float g10Left = 377.000f;
-		float g10Top = 1397.000f;
-
-		float g5Left = 657.000f;
-		float g5Top = 1397.000f;
-
-		float g20Left = 377.000f;
-		float g20Top = 1627.000f;
-
-		float g14Left = 713.000f;
-		float g14Top = 1627.000f;
-
-		float h9Left = 377.000f;
-		float h9Top = 1965.000f;
-
-		float h5Left = 657.000f;
-		float h5Top = 1965.000f;
-
-		float h17Left = 489.000f;
-		float h17Top = 2189.000f;
-
-		float i10Left = 377.000f;
-		float i10Top = 2400.000f;
-
-		float i20Left = 377.000f;
-		float i20Top = 2624.000f;
-
-		float i12Left = 825.000f;
-		float i12Top = 2624.000f;
-
+		int defaultHighlightColor = R.color.harucon2026_violet1;
 
 		BlendMode highlightBlendMode = null;
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -829,132 +757,98 @@ public class Harucon2026Convention extends AmaiConvention {
 		}
 
 		return new StandLocationsBuilder()
-			.setDefaults(defaultWidth, defaultHeight, defaultSpaceHorizontal, defaultSpaceVertical, R.color.harucon2026_pink1, highlightBlendMode)
-			.topToBottom(d1Left, d1Top, "d", 1, 2, "d3")
-			.leftToRight(d12Left, d12Top, "d", 12, 3, "d13")
-			.topToBottom(d13Left, d13Top, "d", 13, 22, "d24")
-			.topToBottom(d24Left, d24Top, "d", 24, 35, "d37")
-			.topToBottom(d37Left, d37Top, "d", 37, 44, "d45")
-			.topToBottom(d45Left, d45Top, "d", 45, 54, "d55")
-			.leftToRight(d55Left, d55Top, "d", 55, 60, "d62")
-			.leftToRight(d62Left, d62Top, "d", 62, 70, "d71")
-			.topToBottom(d78Left, d78Top, "d", 78, 71, null)
+			.setDefaults(defaultRotatedWidth, defaultRotatedHeight, defaultRotationFromTopLeft, defaultRotatedSpaceHorizontal, defaultRotatedSpaceVertical, defaultHighlightColor, highlightBlendMode)
+			.diagonalFromTopLeft(2085.960f + horizontalRotationFactor, 4087.200f + verticalRotationFactor, "d", 8, 1, "d9")
+			.diagonalFromTopLeft(1469.000f + horizontalRotationFactor, 3731.000f + verticalRotationFactor, "d", 16, 9, "d17")
 
-			.leftToRight(e5Left, e5Top, "e", 5, 1, "e7")
-			.leftToRight(e10Left, e10Top, "e", 10, 7, null)
-			.leftToRight(e15Left, e15Top, "e", 15, 11, "e16")
-			.leftToRight(e19Left, e19Top, "e", 19, 16, null)
-			.leftToRight(f9Left, f9Top, "f", 9, 1, null)
-			.leftToRight(f15Left, f15Top, "f", 15, 11, "e17")
-			.leftToRight(f20Left, f20Top, "f", 20, 17, null)
-			.leftToRight(g5Left, g5Top, "g", 5, 1, "g7")
-			.leftToRight(g10Left, g10Top, "g", 10, 7, null)
-			.leftToRight(g14Left, g14Top, "g", 14, 11, "g16")
-			.leftToRight(g20Left, g20Top, "g", 20, 16, null)
-			.leftToRight(h5Left, h5Top, "h", 5, 1, "h6")
-			.leftToRight(h9Left, h9Top, "h", 9, 6, null)
-			.leftToRight(h17Left, h17Top, "h", 17, 10, null)
-			.leftToRight(i10Left, i10Top, "i", 10, 2, null)
-			.leftToRight(i12Left, i12Top, "i", 12, 11, "i14")
-			.leftToRight(i20Left, i20Top, "i", 20, 14, null)
+			.setDefaults(defaultWidth, defaultHeight, 0, defaultSpaceHorizontal, defaultSpaceVertical, defaultHighlightColor, highlightBlendMode)
+			.leftToRight(559.000f, 3797.000f, "d", 24, 17, "d25")
+			.topToBottom(385.000f, 2875.000f, "d", 34, 25, "d35")
+			.topToBottom(385.000f, 2141.000f, "d", 40, 35, "d41")
+			.leftToRight(534.000f, 1845.000f, "d", 41, 48, "d49")
+			.topToBottom(1191.000f, 1650.000f, "d", 50, 49, "d51")
+
+			.setDefaults(defaultRotatedWidth, defaultRotatedHeight, defaultRotationFromBottomLeft, defaultRotatedSpaceHorizontal, defaultRotatedSpaceVertical, defaultHighlightColor, highlightBlendMode)
+			.diagonalFromBottomLeft(1388.000f + horizontalRotationFactor, 984.000f + verticalRotationFactor, "d", 51, 56, "d57")
+			.diagonalFromBottomLeft(1866.050f + horizontalRotationFactor, 708.000f + verticalRotationFactor, "d", 57, 62, "d63")
+
+			.setDefaults(defaultWidth, defaultHeight, 0, defaultSpaceHorizontal, defaultSpaceVertical, defaultHighlightColor, highlightBlendMode)
+			.leftToRight(2421.000f, 406.000f, "d", 63, 68, "d69")
+			.leftToRight(3015.000f, 406.000f, "d", 69, 74, null)
+
+			.setDefaults(defaultRotatedWidth, defaultRotatedHeight, defaultRotationFromTopLeft, defaultRotatedSpaceHorizontal, defaultRotatedSpaceVertical, defaultHighlightColor, highlightBlendMode)
+			.diagonalFromTopLeft(1788.000f + horizontalRotationFactor, 3602.000f + verticalRotationFactor, "e", 12, 1, "e13")
+
+			.setDefaults(defaultWidth, defaultHeight, 0, defaultSpaceHorizontal, defaultSpaceVertical, defaultHighlightColor, highlightBlendMode)
+			.leftToRight(1742.000f, 2955.000f, "e", 13, 14, "e15")
+			.topToBottom(1894.000f, 2163.000f, "e", 24, 15, "e25")
+			.leftToRight(1742.000f, 2091.000f, "e", 26, 25, "e27")
+
+			.setDefaults(defaultRotatedWidth, defaultRotatedHeight, defaultRotationFromBottomLeft, defaultRotatedSpaceHorizontal, defaultRotatedSpaceVertical, defaultHighlightColor, highlightBlendMode)
+			.diagonalFromBottomLeft(1763.000f + horizontalRotationFactor, 1388.000f + verticalRotationFactor, "e", 27, 38, null)
+
+			.setDefaults(defaultWidth, defaultHeight, 0, defaultSpaceHorizontal, defaultSpaceVertical, defaultHighlightColor, highlightBlendMode)
+			.leftToRight(2776.000f, 3587.000f, "f", 1, 10, null)
+			.leftToRight(2776.000f, 3435.000f, "f", 11, 20, null)
+			.leftToRight(2400.000f, 3093.000f, "f", 21, 40, null)
+			.leftToRight(2400.000f, 2941.000f, "f", 41, 60, null)
+			.leftToRight(2400.000f, 2599.000f, "f", 61, 80, null)
+			.leftToRight(2400.000f, 2447.000f, "f", 81, 100, null)
+			.leftToRight(2400.000f, 2105.000f, "f", 101, 120, null)
+			.leftToRight(2400.000f, 1953.000f, "f", 121, 140, null)
+			.leftToRight(2776.000f, 1611.000f, "f", 141, 150, null)
+			.leftToRight(2776.000f, 1459.000f, "f", 151, 160, null)
+
+			.setDefaults(defaultRotatedWidth, defaultRotatedHeight, defaultRotationFromBottomLeft, defaultRotatedSpaceHorizontal, defaultRotatedSpaceVertical, defaultHighlightColor, highlightBlendMode)
+			.diagonalFromBottomLeft(3659.000f + horizontalRotationFactor, 4058.000f + verticalRotationFactor, "g", 1, 10, "g11")
+
+			.setDefaults(defaultWidth, defaultHeight, 0, defaultSpaceHorizontal, defaultSpaceVertical, defaultHighlightColor, highlightBlendMode)
+			.topToBottom(4452.000f, 2578.900f, "g", 24, 17, "g25")
+			.topToBottom(4452.000f, 1427.000f, "g", 38, 25, "g39")
+
+			.setDefaults(defaultRotatedWidth, defaultRotatedHeight, defaultRotationFromTopLeft, defaultRotatedSpaceHorizontal, defaultRotatedSpaceVertical, defaultHighlightColor, highlightBlendMode)
+			.diagonalFromTopLeft(3659.000f + horizontalRotationFactor, 952.000f + verticalRotationFactor, "g", 48, 39, null)
+
 			.build();
 	}
 
 	private StandLocations getAgamStandLocations() {
-		float defaultWidth = 40;
-		float defaultSpaceHorizontal = 16;
-		float defaultSpaceVertical = 16;
-		float defaultHeight = 40;
+		float defaultWidth = 72;
+		float defaultSpaceHorizontal = 8;
+		float defaultSpaceVertical = 8;
+		float defaultHeight = 72;
 
-		// Rows from top to bottom
-
-		float a1Left = 589.000f;
-		float a1Top = 386.500f;
-
-		float b1Left = 505.000f;
-		float b1Top = 733.500f;
-
-		float b8Left = 505.000f;
-		float b8Top = 917.500f;
-
-		float b15Left = 505.000f;
-		float b15Top = 1141.500f;
-
-		float b17Left = 673.000f;
-		float b17Top = 1141.500f;
-
-		float b21Left = 505.000f;
-		float b21Top = 1326.500f;
-
-		float b28Left = 505.000f;
-		float b28Top = 1549.500f;
-
-		float b35Left = 505.000f;
-		float b35Top = 1729.500f;
-
-		float b42Left = 505.000f;
-		float b42Top = 1953.500f;
-
-		float b49Left = 505.000f;
-		float b49Top = 2131.500f;
-
-		float b56Left = 505.000f;
-		float b56Top = 2357.500f;
-
-		float b63Left = 505.000f;
-		float b63Top = 2593.500f;
-
-		float a46Left = 589.000f;
-		float a46Top = 2883.500f;
-
-
-		// Right column
-
-		float a5Left = 1016.000f;
-		float a5Top = 453.500f;
-
-		float a11Left = 1016.000f;
-		float a11Top = 861.500f;
-
-		float a19Left = 1016.000f;
-		float a19Top = 1381.500f;
-
-		float a25Left = 1016.000f;
-		float a25Top = 1785.500f;
-
-		float a31Left = 1016.000f;
-		float a31Top = 2189.500f;
-
-		float a37Left = 1016.000f;
-		float a37Top = 2593.500f;
-
+		int defaultHighlightColor = R.color.harucon2026_violet1;
 		BlendMode highlightBlendMode = null;
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
 			highlightBlendMode = BlendMode.MULTIPLY;
 		}
 
 		return new StandLocationsBuilder()
-			.setDefaults(defaultWidth, defaultHeight, defaultSpaceHorizontal, defaultSpaceVertical, R.color.harucon2026_pink1, highlightBlendMode)
-			.leftToRight(a1Left, a1Top, "a", 1, 4, null)
-			.leftToRight(b1Left, b1Top, "b", 1, 7, null)
-			.leftToRight(b8Left, b8Top, "b", 8, 14, null)
-			.leftToRight(b15Left, b15Top, "b", 15, 16, "b17")
-			.leftToRight(b17Left, b17Top, "b", 17, 20, null)
-			.leftToRight(b21Left, b21Top, "b", 21, 27, null)
-			.leftToRight(b28Left, b28Top, "b", 28, 34, null)
-			.leftToRight(b35Left, b35Top, "b", 35, 41, null)
-			.leftToRight(b42Left, b42Top, "b", 42, 48, null)
-			.leftToRight(b49Left, b49Top, "b", 49, 55, null)
-			.leftToRight(b56Left, b56Top, "b", 56, 62, null)
-			.leftToRight(b63Left, b63Top, "b", 63, 69, null)
-			.leftToRight(a46Left, a46Top, "a", 46, 43, null)
+			.setSortFormat("%s%04.1f") // width includes the decimal digit
+			.setDefaults(defaultWidth, defaultHeight, 0, defaultSpaceHorizontal, defaultSpaceVertical, defaultHighlightColor, highlightBlendMode)
+			.topToBottom(304.000f, 672.000f, "a", 4, 1, "a5")
+			.leftToRight(416.000f, 373.000f, "a", 5, 10, "a11")
+			.leftToRight(1008.000f, 373.000f, "a", 11, 18, "a19")
+			.leftToRight(1760.000f, 373.000f, "a", 19, 22, "a23")
+			.leftToRight(2192.000f, 373.000f, "a", 23, 30, "a31")
+			.leftToRight(2944.000f, 373.000f, "a", 31, 36, "a37")
+			.leftToRight(3536.000f, 373.000f, "a", 37, 42, "a43")
+			.topToBottom(4049.000f, 680.000f, "a", 43, 46, null)
 
-			.topToBottom(a5Left, a5Top, "a", 5, 10, "a11")
-			.topToBottom(a11Left, a11Top, "a",11, 18, "a19")
-			.topToBottom(a19Left, a19Top, "a", 19, 24, "a25")
-			.topToBottom(a25Left, a25Top, "a", 25, 30, "a31")
-			.topToBottom(a31Left, a31Top, "a", 31, 36, "a37")
-			.topToBottom(a37Left, a37Top, "a", 37, 42, null)
+			.topToBottom(876.000f, 592.000f, "b", 1, 7, "b7.5")
+			.single(876.000f, 1152.000f, "b", 7.5f, null)
+			.topToBottom(1068.000f, 592.000f, "b", 8, 14, null)
+			.topToBottom(1468.000f, 592.000f, "b", 15, 18, "b19")
+			.topToBottom(1468.000f, 992.000f, "b", 19, 20, null)
+			.topToBottom(1660.000f, 592.000f, "b", 21, 27, null)
+			.topToBottom(2060.000f, 592.000f, "b", 28, 34, null)
+			.topToBottom(2252.000f, 592.000f, "b", 35, 41, null)
+			.topToBottom(2652.000f, 592.000f, "b", 42, 48, null)
+			.topToBottom(2844.000f, 592.000f, "b", 49, 55, null)
+			.topToBottom(3244.000f, 592.000f, "b", 56, 62, null)
+			.topToBottom(3436.000f, 592.000f, "b", 63, 69, null)
+
 			.build();
 	}
 
