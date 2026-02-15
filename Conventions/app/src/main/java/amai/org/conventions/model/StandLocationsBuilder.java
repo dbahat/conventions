@@ -2,20 +2,25 @@ package amai.org.conventions.model;
 
 import android.graphics.BlendMode;
 
+import java.text.DecimalFormat;
 import java.util.LinkedList;
 import java.util.List;
 
 import amai.org.conventions.R;
+import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.Log;
 
 public class StandLocationsBuilder {
 	private List<StandLocation> locations = new LinkedList<>();
-	float defaultWidth = 0f;
-	float defaultHeight = 0f;
-	float defaultWidthSpace = 0f;
-	float defaultHeightSpace = 0f;
-	float defaultRotation = 0f;
-	int defaultHighlightColorResource = R.color.transparent;
-	BlendMode defaultHighlightBlendMode;
+	private float defaultWidth = 0f;
+	private float defaultHeight = 0f;
+	private float defaultWidthSpace = 0f;
+	private float defaultHeightSpace = 0f;
+	private float defaultRotation = 0f;
+	private int defaultHighlightColorResource = R.color.transparent;
+	private BlendMode defaultHighlightBlendMode;
+	private final static DecimalFormat idFormatter = new DecimalFormat("#.##");
+	private String sortFormat = "%s%03.0f";
 
 	/**
 	 * Must be called before the other methods to take effect
@@ -31,19 +36,23 @@ public class StandLocationsBuilder {
 		return this;
 	}
 
-	private StandLocationsBuilder single(float left, float top, String letter, int number, String next) {
+	/**
+	 * Must be called before adding stands to take effect.
+	 * The format is for the number and letter. The letter is the first parameter. The number is a floating point.
+	 */
+	public StandLocationsBuilder setSortFormat(String sortFormat) {
+		this.sortFormat = sortFormat;
+		return this;
+	}
+
+	public StandLocationsBuilder single(float left, float top, String letter, float number, String next) {
 		return single(left, top, defaultWidth, defaultHeight, defaultRotation, letter, number, next);
 	}
 
-	private StandLocationsBuilder single(float left, float top, float width, float height, float rotation, String letter, int number, String next) {
-		String name = letter + number;
-		String sort = name;
-		if (number < 10) {
-			sort = letter + "00" + number;
-		} else if (number < 100) {
-			sort = letter + "0" + number;
-		}
-		StandLocation location = StandLocation.fromWidths(name, sort, next, left, width, top, height, rotation);
+	public StandLocationsBuilder single(float left, float top, float width, float height, float rotation, String letter, float number, String next) {
+		String id = letter + idFormatter.format(number);
+		String sort = String.format(Dates.getLocale(), sortFormat, letter, number);
+		StandLocation location = StandLocation.fromWidths(id, sort, next, left, width, top, height, rotation);
 		location.setHighlightColorResource(defaultHighlightColorResource);
 		location.setHighlightBlendMode(defaultHighlightBlendMode);
 		locations.add(location);
