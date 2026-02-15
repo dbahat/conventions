@@ -16,8 +16,9 @@
     <string name="amai_game_title">משחק הכנס</string>
     <string name="amai_game_button">שחקו עכשיו!</string>
     <string name="safe_space_title">מרחב בטוח</string>
-    <string name="safe_space_button">ליצירת קשר ב-WhatsApp</string>
+    <string name="safe_space_button_whatsapp">ליצירת קשר ב-WhatsApp</string>
     <string name="safe_space_button_phone">ליצירת קשר בטלפון</string>
+    <string name="safe_space_button_mail">ליצירת קשר במייל</string>
 
     <!-- Relevant to this specific convention -->
     <string name="app_name">הארוקון 2026</string>

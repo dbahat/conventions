@@ -90,6 +90,7 @@
     <string name="shrink_map">הקטן</string>
     <string name="no_navigation_activity">לא נמצאה אפליקציה מתאימה לניווט</string>
     <string name="no_dial_activity">לא נמצאה אפליקציה מתאימה לשיחה</string>
+    <string name="no_mail_activity">לא נמצאה אפליקציה מתאימה לשליחת מייל</string>
     <string name="share_no_events">הוסף אירועים כדי לשתף</string>
     <string name="ok">אישור</string>
     <string name="events_without_feedback_title">מלא פידבק על אירועים</string>

@@ -42,7 +42,7 @@
             <Button
                 android:id="@+id/safe_space_button"
                 style="@style/HomeButton.Single"
-                android:text="@string/safe_space_button"
+                android:text="@string/safe_space_button_whatsapp"
                 android:background="?highlightedButtonBackground"
                 android:textColor="?buttonTextColor"
                 android:onClick="onContactSafeSpaceClicked"/>
