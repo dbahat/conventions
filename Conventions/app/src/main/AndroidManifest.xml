@@ -59,7 +59,15 @@
         <activity android:name="amai.org.conventions.events.activities.MyEventsActivity"></activity>
         <activity android:name="amai.org.conventions.events.activities.ProgrammeActivity"></activity>
         <activity android:name="amai.org.conventions.events.activities.ProgrammeSearchActivity"></activity>
-        <activity android:name="amai.org.conventions.map.MapActivity"></activity>
+        <activity android:name="amai.org.conventions.map.MapActivity" android:exported="true">
+            <intent-filter>
+                <!-- Both categories and the action are required to enable browser redirect to this link -->
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.VIEW" />
+                <data android:scheme="sff.org.conventions" android:host="stands" />
+            </intent-filter>
+        </activity>
         <activity
             android:name="amai.org.conventions.events.activities.EventActivity"
             android:theme="@style/AppBaseTheme.Icon2025.Event"

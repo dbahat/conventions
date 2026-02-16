@@ -86,9 +86,10 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 	private static final String STATE_MAP_FLOOR_ZOOM_X = "StateMapFloorZoomX";
 	private static final String STATE_MAP_FLOOR_ZOOM_Y = "StateMapFloorZoomY";
 
-
 	private static final float MAX_ZOOM = 2.5f;
 	private static final int LOCATION_DETAILS_OPEN_CLOSE_DURATION = 300;
+	public static final int SELECT_STAND_DELAY_SHORT = 200;
+	public static final int SELECT_STAND_DELAY_LONG = 500;
 
 	private Floor floor;
 
@@ -707,8 +708,8 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		}
 	}
 
-	public void selectStandByLocation(final MapLocation location, final Stand stand) {
-		int delayOpenStandsLocation = 200;
+	public void selectStandByLocation(final MapLocation location, final Stand stand, int delay) {
+		int delayOpenStandsLocation = delay;
 		int numOfSelectedMarkers = 0;
 		for (Marker marker : floorMarkers) {
 			boolean selected = false;
