@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -169,9 +170,9 @@ public class StandsAreaFragment extends DialogFragment {
                 @Override
                 protected void onStop() {
                     super.onStop();
-                    // After we finish scrolling, zoom to the stand
+                    // After we finish scrolling, zoom to the stand (with a small delay so the user can see it's being zoomed in)
                     if (zoomAfterScroll) {
-                        zoomToStand(finalFoundStand);
+                        new Handler().postDelayed(() -> zoomToStand(finalFoundStand), 400);
                     }
                 }
             };

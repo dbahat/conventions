@@ -60,7 +60,15 @@
         <activity android:name=".events.activities.MyEventsActivity" />
         <activity android:name=".events.activities.ProgrammeActivity" />
         <activity android:name=".events.activities.ProgrammeSearchActivity" />
-        <activity android:name=".map.MapActivity" />
+        <activity android:name=".map.MapActivity" android:exported="true">
+            <intent-filter>
+                <!-- Both categories and the action are required to enable browser redirect to this link -->
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.VIEW" />
+                <data android:scheme="org.amai.conventions" android:host="stands" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".events.activities.EventActivity"
             android:theme="@style/AppBaseTheme.Harucon2026.Event"

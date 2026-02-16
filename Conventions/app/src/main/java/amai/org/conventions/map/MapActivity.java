@@ -1,10 +1,13 @@
 package amai.org.conventions.map;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
@@ -24,6 +27,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -42,6 +46,7 @@ import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Objects;
 import amai.org.conventions.utils.Views;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -120,6 +125,8 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		// Handle edge to edge
 		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, Views.InsetType.NONE, false, searchResults);
 		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, false, findViewById(R.id.map_search_pane));
+
+		handleDeepLinks();
 	}
 
 	@Override
@@ -413,18 +420,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 					getCurrentFloorFragment().selectMarkersWithNameAndFloor(Collections.singletonList(location));
 				} else {
 					Stand stand = (Stand) standsSearchResultsAdapter.getItem(position);
-					StandsArea standsArea = stand.getStandsArea();
-					List<MapLocation> locations = map.findLocationsByStandsArea(standsArea);
-					if (locations.size() >= 1) {
-						MapLocation location = locations.get(0);
-						// Go to selected stand's stand area floor and reset its zoom/selection state
-						if (!Objects.equals(getCurrentFloorFragment().getFloor(), location.getFloor())) {
-							setCurrentFloor(location.getFloor());
-							getCurrentFloorFragment().resetState();
-						}
-						// Set selected marker
-						getCurrentFloorFragment().selectStandByLocation(location, stand);
-					}
+					selectStand(stand, MapFloorFragment.SELECT_STAND_DELAY_SHORT);
 				}
 			}
 		});
@@ -472,6 +468,21 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 				}
 			}
 		});
+	}
+
+	private void selectStand(Stand stand, int delay) {
+		StandsArea standsArea = stand.getStandsArea();
+		List<MapLocation> locations = map.findLocationsByStandsArea(standsArea);
+		if (locations.size() >= 1) {
+			MapLocation location = locations.get(0);
+			// Go to selected stand's stand area floor and reset its zoom/selection state
+			if (!Objects.equals(getCurrentFloorFragment().getFloor(), location.getFloor())) {
+				setCurrentFloor(location.getFloor());
+				getCurrentFloorFragment().resetState();
+			}
+			// Set selected marker
+			getCurrentFloorFragment().selectStandByLocation(location, stand, delay);
+		}
 	}
 
 	private boolean isLocationsSearch() {
@@ -672,5 +683,61 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		}
 		int baseHeight = currentFloorFragment.getMapHiddenPortionHeight();
 		onLocationDetailsTopChanged(baseHeight, null);
+	}
+
+	private void handleDeepLinks() {
+		Uri intentData = getIntent().getData();
+		// The URI looks like: org.amai.conventions://stands/by-name?name=abc
+		if (intentData != null && "stands".equals(intentData.getHost()) && intentData.getPath() != null) {
+			if (intentData.getPath().equals("/by-name")) {
+				String standName = intentData.getQueryParameter("name") == null ? "" : intentData.getQueryParameter("name");
+				List<Stand> stands = new ArrayList<>(1);
+				if (!standName.isEmpty()) {
+					for (Stand stand : Convention.getInstance().getStands()) {
+						if (stand.getName().equals(standName)) {
+							stands.add(stand);
+						}
+					}
+				}
+
+				if (stands.size() == 1) {
+					// Select the stand after the floors are loaded
+					new Handler().postDelayed(() -> selectStand(stands.get(0), MapFloorFragment.SELECT_STAND_DELAY_LONG), 500);
+				} else {
+					// Show error message. Since this deep link is opened from outside the app, we show it in a dialog, so the user has time
+					// to read the message and understand the problem.
+					String message;
+					if (stands.isEmpty()) {
+						message = getString(R.string.stand_not_found, standName);
+					} else {
+						message = getString(R.string.too_many_stands_found, standName);
+					}
+
+					new AlertDialog.Builder(this)
+						.setTitle(R.string.show_stand)
+						.setMessage(message)
+						.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								// Open search with the name
+								int standsTab = -1;
+								for (int i = 0; i < searchType.getTabCount(); i++) {
+									if (searchType.getTabAt(i).getId() == R.id.mapSearchTabStands) {
+										standsTab = i;
+										break;
+									}
+								}
+								if (standsTab != -1) {
+									searchType.selectTab(searchType.getTabAt(standsTab));
+								}
+								searchTerm = standName;
+								searchText.setText(searchTerm);
+								openSearch();
+							}
+						})
+						.show();
+				}
+			}
+		}
 	}
 }
