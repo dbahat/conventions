@@ -214,7 +214,7 @@
         <item name="mapBackground">@drawable/harucon2026_background</item>
         <item name="mapShelterButtonBackground">@drawable/harucon2026_event_feedback_button</item>
         <item name="mapShelterButtonTextColor">@drawable/harucon2026_event_feedback_button_text_color</item>
-        <item name="mapDetailButtonsBackground">@drawable/harucon2026_home_button2</item>
+        <item name="mapDetailButtonsBackground">@drawable/harucon2026_map_details_button</item>
         <item name="mapDetailButtonsTextColor">@color/harucon2026_red1</item>
         <item name="locationDetailsBackground">@drawable/harucon2026_peach3_90_w_pink1_border</item>
         <item name="locationDetailsTopLineColor">@color/transparent</item>
