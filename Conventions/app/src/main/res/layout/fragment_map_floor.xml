@@ -153,8 +153,7 @@
                         android:id="@+id/goto_floor_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="@style/HighlightedButton"
-                        android:background="?mapDetailButtonsBackground"
+                        style="@style/MapDetailsButton"
                         android:enabled="true"
                         tools:text="עבור לקומה 2" />
 
@@ -165,8 +164,7 @@
                         android:id="@+id/goto_stands_list_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="@style/HighlightedButton"
-                        android:background="?mapDetailButtonsBackground"
+                        style="@style/MapDetailsButton"
                         android:enabled="true"
                         android:text="@string/goto_stands_list" />
 
@@ -177,8 +175,7 @@
                         android:id="@+id/goto_activity_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="@style/HighlightedButton"
-                        android:background="?mapDetailButtonsBackground"
+                        style="@style/MapDetailsButton"
                         android:enabled="true"
                         android:text="@string/goto_activity" />
                 </LinearLayout>
