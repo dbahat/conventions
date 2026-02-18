@@ -240,8 +240,8 @@ public class Harucon2026Convention extends AmaiConvention {
 			new Hall().withName(ESHKOL3_NAME).withShelter(true),
 			new Hall().withName(WORKSHOPS_NAME),
 			new Hall().withName(ORANIM_NAME).withShelter(true),
-			new Hall().withName(GAMES_NAME),
-			new Hall().withName(ORANIM2_NAME),
+			new Hall().withName(GAMES_NAME).withShelter(true),
+			new Hall().withName(ORANIM2_NAME).withShelter(true),
 			new Hall().withName(COSPLAY_AREA_NAME)
 		);
 		int i = 1;
@@ -254,8 +254,7 @@ public class Harucon2026Convention extends AmaiConvention {
 
 	@Override
 	protected ConventionMap initMap() {
-		return new ConventionMap();
-//		return createMap();
+		return createMap();
 	}
 
 	private ConventionMap createMap() {
@@ -381,7 +380,8 @@ public class Harucon2026Convention extends AmaiConvention {
 												.withY(859.33f),
 										new MapLocation()
 												.withName("מתחם דוכנים")
-												.withPlace(tedi)
+												.withDescription("החלק הפנימי של מתחם זה הינו מרחב מוגן.")
+												.withPlace(tedi.withShelter(true))
 												.withMarkerResource(R.raw.harucon2026_marker_stands, true)
 												.withSelectedMarkerResource(R.raw.harucon2026_selected_marker_stands, true)
 												.withMarkerHeight(94.947f)
@@ -410,14 +410,14 @@ public class Harucon2026Convention extends AmaiConvention {
 												.withX(1298.979f)
 												.withY(364.086f),
 										new MapLocation()
-												.withPlace(new Place().withName("מתחם נינטנדו"))
+												.withPlace(new Place().withName("מתחם נינטנדו").withShelter(true))
 												.withMarkerResource(R.raw.harucon2026_marker_nintendo, true)
 												.withSelectedMarkerResource(R.raw.harucon2026_selected_marker_nintendo, true)
 												.withMarkerHeight(114.037f)
 												.withX(1294.234f)
 												.withY(247.963f),
 										new MapLocation()
-												.withPlace(new Place().withName("שמירת חפצים"))
+												.withPlace(new Place().withName("שמירת חפצים").withShelter(true))
 												.withMarkerResource(R.raw.harucon2026_marker_storage, true)
 												.withSelectedMarkerResource(R.raw.harucon2026_selected_marker_storage, true)
 												.withMarkerHeight(128.037f)
