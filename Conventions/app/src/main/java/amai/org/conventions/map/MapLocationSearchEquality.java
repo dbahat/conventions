@@ -9,6 +9,7 @@ class MapLocationSearchEquality implements CollectionUtils.EqualityPredicate<Map
 	public boolean equals(MapLocation lhs, MapLocation rhs) {
 		return Objects.equals(lhs.getFloor(), rhs.getFloor()) &&
 				Objects.equals(lhs.getName(), rhs.getName()) &&
+				Objects.equals(lhs.getDescription(), rhs.getDescription()) &&
 				lhs.hasSinglePlace() == rhs.hasSinglePlace() &&
 				lhs.areAnyPlacesHalls() == rhs.areAnyPlacesHalls();
 	}

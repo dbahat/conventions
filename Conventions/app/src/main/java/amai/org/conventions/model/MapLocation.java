@@ -15,6 +15,7 @@ public class MapLocation {
 	private boolean doesMarkerPointUp = false;
 	private List<? extends Place> places;
 	private String name;
+	private String description;
 	private int markerResource;
 	private int markerTintColorResource = NO_TINT;
 	private boolean isMarkerResourceSVG;
@@ -115,6 +116,9 @@ public class MapLocation {
 	}
 
 	public List<? extends Place> getPlaces() {
+		if (places == null) {
+			return Collections.emptyList();
+		}
 		return places;
 	}
 
@@ -152,6 +156,19 @@ public class MapLocation {
 
 	public MapLocation withName(String name) {
 		setName(name);
+		return this;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public MapLocation withDescription(String description) {
+		setDescription(description);
 		return this;
 	}
 
