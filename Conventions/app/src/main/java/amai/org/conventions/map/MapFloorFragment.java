@@ -104,6 +104,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
 	private InterceptorLinearLayout locationDetails;
 	private TextView locationTitle;
+	private TextView locationDescription;
 	private ImageView locationDetailsCloseImage;
 	private EventView locationCurrentEvent;
 	private View locationEventsDivider;
@@ -290,6 +291,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		// Current selected location details
 		locationDetails = (InterceptorLinearLayout) view.findViewById(R.id.location_details);
 		locationTitle = (TextView) view.findViewById(R.id.location_title);
+		locationDescription = view.findViewById(R.id.location_description);
 		locationDetailsCloseImage = (ImageView) view.findViewById(R.id.location_details_close_image);
 		locationCurrentEvent = (EventView) view.findViewById(R.id.location_current_event);
 		locationEventsDivider = view.findViewById(R.id.location_events_divider);
@@ -924,6 +926,13 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		locationDetails.setVisibility(View.VISIBLE);
 		locationTitle.setText(location.getName());
 		locationDetails.setOnClickListener(null);
+
+		if (location.getDescription() != null && !location.getDescription().isEmpty()) {
+			locationDescription.setText(location.getDescription());
+			locationDescription.setVisibility(View.VISIBLE);
+		} else {
+			locationDescription.setVisibility(View.GONE);
+		}
 
 		// Get current and next events in this location
 		setupHallLocation(location);

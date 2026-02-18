@@ -102,9 +102,6 @@ public class ConventionMap {
 
 				// Check places in location
 				List<? extends Place> places = location.getPlaces();
-				if (places == null) {
-					return false;
-				}
 				for (Place place : places) {
 					if (place.getName() == null) {
 						continue;
@@ -125,9 +122,6 @@ public class ConventionMap {
 			@Override
 			public boolean where(MapLocation location) {
 				List<? extends Place> places = location.getPlaces();
-				if (places == null) {
-					return false;
-				}
 				for (Place place : places) {
 					if (place instanceof StandsArea && ((StandsArea) place).getId() == standsArea.getId()) {
 						return true;

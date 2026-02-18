@@ -720,9 +720,6 @@ public abstract class Convention implements Serializable {
 	public StandsArea findStandsArea(int id) {
 		for (MapLocation location : map.getLocations()) {
 			List<? extends Place> places = location.getPlaces();
-			if (places == null) {
-				continue;
-			}
 			for (Place place : places) {
 				if (place instanceof StandsArea && ((StandsArea) place).getId() == id) {
 					return (StandsArea) place;
@@ -736,9 +733,6 @@ public abstract class Convention implements Serializable {
 	public MapLocation findStandsAreaLocation(int id) {
 		for (MapLocation location : map.getLocations()) {
 			List<? extends Place> places = location.getPlaces();
-			if (places == null) {
-				continue;
-			}
 			for (Place place : places) {
 				if (place instanceof StandsArea && ((StandsArea) place).getId() == id) {
 					return location;
@@ -752,9 +746,6 @@ public abstract class Convention implements Serializable {
 	public boolean hasStands() {
 		for (MapLocation location : map.getLocations()) {
 			List<? extends Place> places = location.getPlaces();
-			if (places == null) {
-				continue;
-			}
 			for (Place place : places) {
 				if (place instanceof StandsArea &&
 						((StandsArea) place).getStands().size() > 0) {
