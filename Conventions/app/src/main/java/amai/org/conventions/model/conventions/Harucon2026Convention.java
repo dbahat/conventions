@@ -287,14 +287,14 @@ public class Harucon2026Convention extends AmaiConvention {
 		StandsArea tedi = new StandsArea()
 				.withName("אולם טדי")
 				.withStandLocations(getTediStandLocations()) // This must be initialized before the stands
-				.withStands(getTetsugotStands())
+//				.withStands(getTetsugotStands())
 				.withImageResource(R.drawable.harucon2026_stands_map_tedi)
 				.withImageWidth(4948.000f)
 				.withImageHeight(5036.000f);
 		StandsArea agam = new StandsArea()
 				.withName("אולם אגם")
 				.withStandLocations(getAgamStandLocations()) // This must be initialized before the stands
-				.withStands(getAgamStands())
+//				.withStands(getAgamStands())
 				.withImageResource(R.drawable.harucon2026_stands_map_agam)
 				.withImageWidth(4425.000f)
 				.withImageHeight(1728.000f);
