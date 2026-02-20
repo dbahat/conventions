@@ -155,13 +155,16 @@
 ]]></string>
 
     <!-- Stand types -->
-    <string name="merch_stand">מוצרי אנימה ומנגה</string>
+    <string name="jewelry_stand">תכשיטים ואופנה</string>
     <string name="clothes_stand">ביגוד ואקססוריז</string>
-    <string name="artist_stand">ציירים</string>
-    <string name="manga_stand">מנגה, קומיקס, ועזרים נלווים</string>
-    <string name="tabletop_games_stand">משחקי קופסה, משחקי קלפים ואביזרים נלווים</string>
-    <string name="video_games_stand">משחקי וידאו ואביזרים נלווים</string>
-    <string name="jewelry_stand">עבודות יד, תכשיטים ואופנה</string>
-    <string name="general_stand">כללי</string>
+    <string name="hand_made_stand">עבודות יד</string>
+    <string name="merch_stand">מרצ\'נדייז</string>
     <string name="other_stand">שונות</string>
+    <string name="tabletop_games_stand">משחקי קופסה ומשחקי קלפים</string>
+    <string name="role_play_games_stand">משחקי תפקידים</string>
+    <string name="video_games_stand">משחקי וידאו</string>
+    <string name="manga_stand">מנגה וקומיקס</string>
+    <string name="figures_stand">בובות ופיגרים</string>
+    <string name="artist_stand">ציירים</string>
+    <string name="general_stand">כללי</string>
 </resources>
