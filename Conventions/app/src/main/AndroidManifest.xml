@@ -60,6 +60,18 @@
         <activity android:name="amai.org.conventions.events.activities.ProgrammeActivity"></activity>
         <activity android:name="amai.org.conventions.events.activities.ProgrammeSearchActivity"></activity>
         <activity android:name="amai.org.conventions.map.MapActivity" android:exported="true">
+            <!-- The intent filters should be synched with MapActivity isStandsIntent, and receive a "name" parameter with the stand name -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- https://dbahat.github.io/conventions-redirect-test/stands-sff.html -->
+                <data
+                    android:scheme="https"
+                    android:host="dbahat.github.io"
+                    android:pathPrefix="/conventions-redirect-test/stands-sff.html"/>
+            </intent-filter>
+
             <intent-filter>
                 <!-- Both categories and the action are required to enable browser redirect to this link -->
                 <category android:name="android.intent.category.BROWSABLE" />

@@ -691,56 +691,82 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 	private void handleDeepLinks() {
 		Uri intentData = getIntent().getData();
 		// The URI looks like: sff.org.conventions://stands/by-name?name=abc
-		if (intentData != null && "stands".equals(intentData.getHost()) && intentData.getPath() != null) {
-			if (intentData.getPath().equals("/by-name")) {
-				String standName = intentData.getQueryParameter("name") == null ? "" : intentData.getQueryParameter("name");
-				List<Stand> stands = new ArrayList<>(1);
-				if (!standName.isEmpty()) {
-					for (Stand stand : Convention.getInstance().getStands()) {
-						if (stand.getName().equals(standName)) {
-							stands.add(stand);
-						}
+		if (isStandsIntent(intentData)) {
+			String standName = intentData.getQueryParameter("name") == null ? "" : intentData.getQueryParameter("name");
+			List<Stand> stands = new ArrayList<>(1);
+			if (!standName.isEmpty()) {
+				for (Stand stand : Convention.getInstance().getStands()) {
+					if (stand.getName().equals(standName)) {
+						stands.add(stand);
 					}
-				}
-
-				if (stands.size() == 1) {
-					// Select the stand after the floors are loaded
-					new Handler().postDelayed(() -> selectStand(stands.get(0), MapFloorFragment.SELECT_STAND_DELAY_LONG), 500);
-				} else {
-					// Show error message. Since this deep link is opened from outside the app, we show it in a dialog, so the user has time
-					// to read the message and understand the problem.
-					String message;
-					if (stands.isEmpty()) {
-						message = getString(R.string.stand_not_found, standName);
-					} else {
-						message = getString(R.string.too_many_stands_found, standName);
-					}
-
-					new AlertDialog.Builder(this)
-						.setTitle(R.string.show_stand)
-						.setMessage(message)
-						.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								// Open search with the name
-								int standsTab = -1;
-								for (int i = 0; i < searchType.getTabCount(); i++) {
-									if (searchType.getTabAt(i).getId() == R.id.mapSearchTabStands) {
-										standsTab = i;
-										break;
-									}
-								}
-								if (standsTab != -1) {
-									searchType.selectTab(searchType.getTabAt(standsTab));
-								}
-								searchTerm = standName;
-								searchText.setText(searchTerm);
-								openSearch();
-							}
-						})
-						.show();
 				}
 			}
+
+			if (stands.size() == 1) {
+				// Select the stand after the floors are loaded
+				String finalStandName = standName;
+				new Handler().postDelayed(() -> {
+					setStandNameInSearch(finalStandName); // If they close the stands area, this will make it easier to find the stand again
+					selectStand(stands.get(0), MapFloorFragment.SELECT_STAND_DELAY_LONG);
+				}, 500);
+			} else {
+				// Show error message. Since this deep link is opened from outside the app, we show it in a dialog, so the user has time
+				// to read the message and understand the problem.
+				String message;
+				if (stands.isEmpty()) {
+					if ("null".equals(standName)) { // Possibly passed as null from Javascript code
+						standName = "";
+					}
+					message = getString(R.string.stand_not_found, standName);
+				} else {
+					message = getString(R.string.too_many_stands_found, standName);
+				}
+
+				String finalStandName = standName;
+				new AlertDialog.Builder(this)
+					.setTitle(R.string.show_stand)
+					.setMessage(message)
+					.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							// Open search with the name
+							setStandNameInSearch(finalStandName);
+							openSearch();
+						}
+					})
+					.show();
+			}
 		}
+	}
+
+	private boolean isStandsIntent(Uri intentData) {
+		// This method should be synched with the intent filters for MapActivity in AndroidManifest.xml
+		if (intentData == null) {
+			return false;
+		}
+
+		// Direct deep link - sff.org.conventions://stands/by-name?name=standName
+		if ("stands".equals(intentData.getHost()) && intentData.getPath() != null && intentData.getPath().equals("/by-name")) {
+			return true;
+		// Test deep link - https://dbahat.github.io/conventions-redirect-test/stands-sff.html?name=standName
+		} else if ("dbahat.github.io".equals(intentData.getHost()) && "/conventions-redirect-test/stands-sff.html".equals(intentData.getPath())) {
+			return true;
+		}
+		return false;
+	}
+
+	private void setStandNameInSearch(String standName) {
+		int standsTab = -1;
+		for (int i = 0; i < searchType.getTabCount(); i++) {
+			if (searchType.getTabAt(i).getId() == R.id.mapSearchTabStands) {
+				standsTab = i;
+				break;
+			}
+		}
+		if (standsTab != -1) {
+			searchType.selectTab(searchType.getTabAt(standsTab));
+		}
+		searchTerm = standName;
+		searchText.setText(searchTerm);
 	}
 }
