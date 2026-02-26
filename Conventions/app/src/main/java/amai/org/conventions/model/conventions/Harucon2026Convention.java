@@ -80,14 +80,14 @@ public class Harucon2026Convention extends AmaiConvention {
 	private enum StandType implements Stand.StandType {
 		JEWELRY(R.string.jewelry_stand, R.drawable.diamond_24px),
 		CLOTHES(R.string.clothes_stand, R.drawable.shirt),
-		HAND_MADE(R.string.hand_made_stand, R.drawable.diamond_24px),
+		HAND_MADE(R.string.hand_made_stand, R.drawable.content_cut_24px),
 		MERCH(R.string.merch_stand, R.drawable.ic_shopping_basket),
 		OTHER(R.string.other_stand, R.drawable.icon_harucon),
 		TABLETOP_GAMES(R.string.tabletop_games_stand, R.drawable.casino_24px),
-		ROLE_PLAY_GAMES(R.string.role_play_games_stand, R.drawable.casino_24px),
+		ROLE_PLAY_GAMES(R.string.role_play_games_stand, R.drawable.swords_24px),
 		VIDEO_GAMES(R.string.video_games_stand, R.drawable.videogame_black),
 		MANGA(R.string.manga_stand, R.drawable.book),
-		FIGURES(R.string.figures_stand, R.drawable.ic_shopping_basket),
+		FIGURES(R.string.figures_stand, R.drawable.face_2_24px),
 		ARTIST(R.string.artist_stand, R.drawable.ic_color_lens),
 		GENERAL(R.string.general_stand, R.drawable.ic_shopping_basket);
 
