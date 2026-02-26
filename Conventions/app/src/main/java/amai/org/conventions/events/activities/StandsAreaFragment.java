@@ -84,6 +84,7 @@ public class StandsAreaFragment extends DialogFragment {
             zoom = view.findViewById(R.id.stands_area_zoom);
             imageFrame = view.findViewById(R.id.stands_area_map_frame);
             image = view.findViewById(R.id.stands_area_map);
+			View zoomContainer = view.findViewById(R.id.stands_area_zoom_container);
 
             List<Stand> stands = new ArrayList<>(area.getStands());
             Collections.sort(stands, (lhs, rhs) -> {
@@ -116,7 +117,7 @@ public class StandsAreaFragment extends DialogFragment {
                     image.setLayoutParams(layoutParams);
                 }
 
-                zoom.setVisibility(View.VISIBLE);
+                zoomContainer.setVisibility(View.VISIBLE);
                 zoom.setMaxZoom(3);
                 imageFrame.setOnTouchListener(Views.createOnSingleTapConfirmedListener(getActivity(), new Runnable() {
                     @Override
