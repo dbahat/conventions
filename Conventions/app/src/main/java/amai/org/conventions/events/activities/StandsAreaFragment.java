@@ -202,6 +202,11 @@ public class StandsAreaFragment extends DialogFragment {
             return;
         }
 
+		// This could happen if the user exited the activity before this is called (since it runs delayed in some cases)
+		if (context == null) {
+			return;
+		}
+
         if (imageView instanceof PaintableImageView) {
             List<PaintDrawable> highlights = new ArrayList<>(stand.getLocations().size());
             for (StandLocation location : stand.getLocations()) {
