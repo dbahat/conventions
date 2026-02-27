@@ -706,7 +706,7 @@ public class Harucon2026Convention extends AmaiConvention {
 			new Stand().withName("Mzarssssss").withType(StandType.CLOTHES).withLocationIds("d9"),
 			new Stand().withName("קאי קולקטורז").withType(StandType.TABLETOP_GAMES).withLocationIds("e13", "e14"),
 			new Stand().withName("חלומות").withType(StandType.HAND_MADE).withLocationIds("e15"),
-			new Stand().withName("MYST").withType(StandType.MERCH).withLocationIds("e16", "e17", "e18", "e16"),
+			new Stand().withName("MYST").withType(StandType.MERCH).withLocationIds("e16", "e17", "e18"),
 			new Stand().withName("Babyzkpop").withType(StandType.JEWELRY).withLocationIds("e21", "e22"),
 			new Stand().withName("ghost's cemetery").withType(StandType.MERCH).withLocationIds("e22"),
 			new Stand().withName("AURORA").withType(StandType.HAND_MADE).withLocationIds("e23", "e24", "e25", "e26"),
