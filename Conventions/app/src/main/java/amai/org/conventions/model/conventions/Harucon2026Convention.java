@@ -118,14 +118,14 @@ public class Harucon2026Convention extends AmaiConvention {
 
 	@Override
 	protected ConventionStorage initStorage() {
-		return new ConventionStorage(this, R.raw.harucon2026_convention_events, 2);
+		return new ConventionStorage(this, R.raw.harucon2026_convention_events, 3);
 	}
 
 	@Override
 	protected Calendar initDate() {
 		Calendar date = Calendar.getInstance();
 		date.clear();
-		date.set(2026, Calendar.MARCH, 3);
+		date.set(2026, Calendar.MARCH, 31);
 		return date;
 	}
 
