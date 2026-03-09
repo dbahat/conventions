@@ -29,7 +29,6 @@ import amai.org.conventions.model.Halls;
 import amai.org.conventions.model.ImageIdToImageResourceMapper;
 import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.model.Place;
-import amai.org.conventions.model.SecondHandItem;
 import amai.org.conventions.model.Shelter;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
@@ -39,7 +38,7 @@ import amai.org.conventions.utils.URLUtils;
 import amai.org.conventions.utils.Views;
 import sff.org.conventions.R;
 
-public class Icon2025Convention extends SffConvention {
+public class Olamot2026Convention extends SffConvention {
 //	private static final String HALL_NAME_CINEMATHEQUE_1_3_4 = "סינמטק 1, 3, 4";
 //	private static final String HALL_NAME_CINEMATHEQUE_2 = "סינמטק 2";
 	private static final String HALL_NAME_CINEMATHEQUE_3 = "סינמטק 3";
@@ -103,22 +102,22 @@ public class Icon2025Convention extends SffConvention {
 
 	@Override
 	protected Calendar initStartDate() {
-		return Dates.createDate(2025, Calendar.OCTOBER, 8);
+		return Dates.createDate(2026, Calendar.APRIL, 5);
 	}
 
 	@Override
 	protected Calendar initEndDate() {
-		return Dates.createDate(2025, Calendar.OCTOBER, 10);
+		return Dates.createDate(2026, Calendar.APRIL, 6);
 	}
 
 	@Override
 	protected String initID() {
-		return "Icon2025";
+		return "Olamot2026";
 	}
 
 	@Override
 	protected String initDisplayName() {
-		return "פסטיבל אייקון 2025";
+		return "כנס עולמות 2026";
 	}
 
 	@Override
