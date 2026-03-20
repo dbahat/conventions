@@ -27,7 +27,7 @@
         <item name="snackbarActionColor">@color/icon2025_blue1_25</item>
         <item name="highlightedButtonBackground">@drawable/highlighted_button</item>
         <item name="borderlessButtonColor">@color/icon2025_blue1_500</item>
-        <item name="activitiesBackground">@drawable/icon2025_background</item>
+        <item name="activitiesBackground">@drawable/olamot2026_background</item>
         <item name="infoActivitiesTextBackground">@drawable/icon2025_rounded_edges_gold100_inset</item>
         <item name="contentStartMargin">0dp</item>
         <item name="contentEndMargin">0dp</item>
@@ -52,7 +52,7 @@
         <item name="selectedTabIndicatorColor">@color/icon2025_blue1_500</item>
 
         <!-- Notifications -->
-        <item name="notificationSmallIcon">@drawable/icon2025_notification_icon</item>
+        <item name="notificationSmallIcon">@drawable/olamot2026_notification_icon</item>
         <!-- Toolbar -->
         <item name="toolbarBackground">@color/icon2025_blue1_500</item>
         <item name="toolbarIconAccentColor">@color/icon2025_brown200</item>
@@ -74,8 +74,8 @@
         <item name="homeBoxTopMargin">10dp</item>
         <item name="homeSingleButtonTopMargin">10dp</item>
         <item name="homeButtonsSideMargin">0dp</item>
-        <item name="homeBackground">@drawable/icon2025_background</item>
-        <item name="homeLogo">@drawable/icon2025_home_logo_selector</item>
+        <item name="homeBackground">@drawable/olamot2026_background</item>
+        <item name="homeLogo">@drawable/olamot2026_home_logo_selector</item>
         <item name="homeLogoMargin">10dp</item>
         <item name="homeFrameTopMargin">5dp</item>
         <item name="homeFrameBottomMargin">50dp</item>
@@ -264,7 +264,7 @@
     </style>
 
     <style name="AppBaseTheme.Icon2025.Splash">
-        <item name="android:windowBackground">@drawable/icon2025_background</item>
+        <item name="android:windowBackground">@drawable/olamot2026_background</item>
     </style>
 
      <style name="TransparentTheme.Icon2025" parent="TransparentTheme">
