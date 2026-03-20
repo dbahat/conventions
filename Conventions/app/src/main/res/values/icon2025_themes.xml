@@ -68,7 +68,7 @@
         <item name="navigationPopupSeparatorColor">@color/icon2025_gold500</item>
         <item name="navigationItemsShouldDisplayIcon">false</item>
         <!-- About Screen -->
-        <item name="aboutLogo">@drawable/icon2025_logo</item>
+        <item name="aboutLogo">@drawable/olamot2026_logo_title</item>
         <item name="aboutLogoMargins">50dp</item>
         <!-- Home Screen -->
         <item name="homeBoxTopMargin">10dp</item>
