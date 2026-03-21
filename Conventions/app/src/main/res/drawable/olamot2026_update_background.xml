@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item app:state_update_focused="true" android:drawable="@drawable/olamot2026_rounded_edges_purple100_inset"/>
+    <item android:drawable="@drawable/olamot2026_rounded_edges_gray50_inset"/>
+</selector>

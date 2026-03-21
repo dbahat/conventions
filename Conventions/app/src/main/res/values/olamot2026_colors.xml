@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="olamot2026_blue25">#EAF5FA</color>
+    <color name="olamot2026_blue50">#D8ECF6</color>
+    <color name="olamot2026_blue100">#B4D8EB</color>
+    <color name="olamot2026_blue200">#96C8E2</color>
+    <color name="olamot2026_blue400">#64A2C1</color>
+    <color name="olamot2026_blue500">#458EB2</color>
+    <color name="olamot2026_blue600">#29789F</color>
+    <color name="olamot2026_blue700">#17668D</color>
+    <color name="olamot2026_blue900">#034566</color>
+    <color name="olamot2026_blue1000">#003048</color>
+
+    <color name="olamot2026_purple25">#F3F0F5</color>
+    <color name="olamot2026_purple100">#E9E3EB</color>
+    <color name="olamot2026_purple200">#DDD2E2</color>
+    <color name="olamot2026_purple400">#B1A2B8</color>
+    <color name="olamot2026_purple700">#80668C</color>
+    <color name="olamot2026_purple900">#563963</color>
+    <color name="olamot2026_purple1000">#40274C</color>
+
+    <color name="olamot2026_gray50">#F7F8FA</color>
+    <color name="olamot2026_gray100">#EBECF0</color>
+    <color name="olamot2026_gray200">#D9DCE3</color>
+    <color name="olamot2026_gray300">#BCC0C8</color>
+    <color name="olamot2026_gray600">#545967</color>
+    <color name="olamot2026_gray700">#3C414D</color>
+    <color name="olamot2026_gray800">#2A3141</color>
+    <color name="olamot2026_gray900">#291D46</color>
+
+    <color name="olamot2026_copper">#C89C6A</color>
+
+    <color name="olamot2026_green25">#F5FFFA</color>
+    <color name="olamot2026_green100">#D8F3E5</color>
+    <color name="olamot2026_green200">#BEEBD3</color>
+    <color name="olamot2026_green700">#3EA36D</color>
+    <color name="olamot2026_green800">#318E5D</color>
+    <color name="olamot2026_green1000">#105E35</color>
+    <color name="olamot2026_green50_transparent_95">#F2E6F7EE</color>
+
+    <color name="olamot2026_red">#C5143A</color>
+</resources>

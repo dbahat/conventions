@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+   <style name="AppBaseTheme.Olamot2026" parent="AppBaseTheme.Light.DarkToolbar">
+        <!-- Sub-themes -->
+        <item name="android:dialogTheme">@style/AppDialogTheme.Olamot2026</item>
+        <item name="alertDialogTheme">@style/AppAlertDialogTheme.Olamot2026</item>
+        <!-- General -->
+        <item name="lightStatusBarIcons">true</item>
+        <item name="android:colorPrimaryDark">@color/black</item> <!-- Status bar color without edge-to-edge (in edge-to-edge, it's the toolbar color) -->
+        <!-- Used in: default selected checkbox/switch color, settings titles,
+             cursor color in all edit texts. Also used as the default action button color and map search checkbox color. -->
+        <item name="colorAccent">@color/olamot2026_blue700</item>
+        <!-- This color should be readable over the activities background.
+             Used as the text color in: accessibility, arrival methods.
+             Also used as default for many texts and as the default "large text" color (e.g. in settings). -->
+        <item name="android:textColorPrimary">@color/olamot2026_purple1000</item>
+        <!-- Used in: default unselected checkbox color and default "medium/small" texts (e.g. in settings). -->
+        <item name="android:textColorSecondary">@color/olamot2026_purple1000</item>
+        <item name="android:colorBackground">@null</item>
+        <item name="android:textColorHint">@color/olamot2026_blue700</item>
+        <item name="android:textColorLink">@color/olamot2026_blue700</item>
+        <item name="actionButtonColor">@color/olamot2026_purple700</item>
+        <item name="actionButtonIcon">@drawable/search</item>
+        <item name="hintTextColor">@color/olamot2026_blue700</item>
+        <item name="swipeToRefreshColor">@color/white</item>
+        <item name="swipeToRefreshBackgroundColor">@color/olamot2026_purple700</item>
+        <item name="snackbarActionColor">@color/olamot2026_blue400</item>
+        <item name="highlightedButtonBackground">@drawable/highlighted_button</item>
+        <item name="borderlessButtonColor">@color/olamot2026_blue1000</item>
+        <item name="activitiesBackground">@drawable/olamot2026_background</item>
+        <item name="infoActivitiesTextBackground">@drawable/olamot2026_rounded_edges_gray50_inset</item>
+        <item name="contentStartMargin">0dp</item>
+        <item name="contentEndMargin">0dp</item>
+        <item name="eventListDivider">@drawable/transparent_event_list_divider</item>
+        <item name="separatorColor">@null</item>
+        <!-- These are used for buttons. They should be usable when the background is:
+             Event screen vote
+             Feedback screen
+             Map bottom info panel
+             Arrival methods screen
+         -->
+        <item name="buttonColor">@color/olamot2026_blue700</item>
+        <item name="buttonColorPressed">@color/olamot2026_blue400</item>
+        <item name="buttonColorDisabled">@color/olamot2026_gray200</item>
+        <item name="buttonTextColor">@drawable/olamot2026_highlighted_button_text_color</item>
+
+        <!-- Tabs -->
+        <item name="tabsBackground">@color/olamot2026_purple25</item>
+        <item name="unselectedTabTextColor">@color/olamot2026_purple1000</item>
+        <item name="selectedTabTextColor">@color/olamot2026_purple1000</item>
+        <item name="selectedTabIndicator">@drawable/tab_indicator</item>
+        <item name="selectedTabIndicatorColor">@color/olamot2026_purple1000</item>
+
+        <!-- Notifications -->
+        <item name="notificationSmallIcon">@drawable/olamot2026_notification_icon</item>
+        <!-- Toolbar -->
+        <item name="toolbarBackground">@color/olamot2026_purple1000</item>
+        <item name="toolbarIconAccentColor">@color/olamot2026_copper</item>
+        <!-- Navigation Popup -->
+        <item name="navigationPopupBackground">@color/olamot2026_green25</item>
+        <item name="navigationPopupTitle">@null</item>
+        <item name="navigationPopupTitleMargins">10dp</item>
+        <item name="navigationPopupBottomImage">@null</item>
+        <item name="navigationPopupNotSelectedColor">@color/olamot2026_purple900</item>
+        <item name="navigationPopupSelectedColor">@color/olamot2026_purple900</item>
+        <item name="navigationPopupSelectedBackground">@color/olamot2026_green200</item>
+        <item name="navigationPopupTopSelectedBackground">@color/olamot2026_green200</item>
+        <item name="navigationPopupSeparatorColor">@color/olamot2026_green200</item>
+        <item name="navigationItemsShouldDisplayIcon">false</item>
+        <!-- About Screen -->
+        <item name="aboutLogo">@drawable/olamot2026_logo_title</item>
+        <item name="aboutLogoMargins">50dp</item>
+        <!-- Home Screen -->
+        <item name="homeBoxTopMargin">10dp</item>
+        <item name="homeSingleButtonTopMargin">10dp</item>
+        <item name="homeButtonsSideMargin">0dp</item>
+        <item name="homeBackground">@drawable/olamot2026_background</item>
+        <item name="homeLogo">@drawable/olamot2026_home_logo_selector</item>
+        <item name="homeLogoMargin">0dp</item>
+        <item name="homeFrameTopMargin">5dp</item>
+        <item name="homeFrameBottomMargin">50dp</item>
+        <item name="homeToolbarBackground">@null</item>
+        <item name="homeToolbarTitle">@null</item>
+        <item name="homeTitleBackground">@drawable/olamot2026_home_title_background</item>
+        <item name="homeTitleText">@drawable/olamot2026_home_title_text_color</item>
+        <item name="homeEventsMargin">20dp</item>
+        <item name="homeShowCurrentUpcomingTitles">true</item>
+        <item name="homeContentBackground">@drawable/olamot2026_home_content_background</item>
+        <item name="homeContentText">@drawable/olamot2026_home_content_text_color</item>
+        <item name="homeEventTimeText">@color/olamot2026_gray800</item>
+        <item name="homeEventHallText">@color/olamot2026_gray800</item>
+        <item name="homeButtonBackground">@drawable/olamot2026_home_button</item>
+        <item name="homeButton2Background">@drawable/olamot2026_home_button2</item>
+        <item name="homeButtonText">@color/white</item>
+        <item name="homeButton2Text">@color/white</item>
+        <item name="homeBottomImage">@null</item>
+        <item name="homeEventsListDivider">@color/transparent</item>
+        <item name="homeEventsListDividerHeight">10dp</item>
+        <item name="homeEventsListEventBackground">@drawable/olamot2026_gray50_round</item>
+        <!-- Event View -->
+        <item name="eventViewLayout">@layout/rounded_convention_event</item>
+        <item name="eventViewHeight">104dp</item>
+        <item name="eventViewCornerRadius">4dp</item>
+        <item name="eventBackgroundColor">@color/olamot2026_gray50</item>
+        <item name="eventTextColor">@drawable/olamot2026_event_view_text_color</item>
+        <item name="eventTimeTextColor">@drawable/olamot2026_event_time_text_color</item>
+        <item name="eventTimeBackground">@drawable/olamot2026_event_time_background</item>
+        <item name="eventDetailsColor">?eventTextColor</item>
+        <item name="eventFavoriteIcon">@drawable/favorite_full</item>
+        <item name="eventFavoriteIconColor">@drawable/olamot2026_event_favorite_icon_color</item>
+        <item name="eventFeedbackIcon">@drawable/feedback_icon</item>
+        <item name="eventFeedbackIconColor">@drawable/olamot2026_feedback_icon_color</item>
+        <item name="eventStartMargin">0dp</item>
+        <item name="conflictingEventBackground">@drawable/olamot2026_conflicting_event_label_bg</item>
+        <item name="conflictingEventLabelTextColor">@color/white</item>
+        <item name="ongoingEventBackground">@drawable/olamot2026_ongoing_event_label_bg</item>
+        <item name="ongoingEventLabelTextColor">@color/olamot2026_green1000</item>
+        <!-- Programme Screen -->
+        <item name="eventTimeHeaderTextColor">@color/white</item>
+        <item name="eventTimeHeaderBackground">@drawable/olamot2026_event_time_header</item>
+        <item name="searchCategoriesColor">@color/olamot2026_blue1000</item>
+        <item name="searchCategoriesTextColor">@color/olamot2026_blue1000</item>
+        <item name="eventTimeHeaderWidth">match_parent</item>
+        <item name="eventTimeHeaderMarginTop">10dp</item>
+        <item name="eventTimeHeaderMarginBottom">@null</item>
+        <item name="eventTimeHeaderMarginHorizontal">8dp</item>
+        <item name="eventTimeHeaderPaddingVertical">4dp</item>
+        <item name="marginBetweenEventsListAndNextHeader">0dp</item>
+        <!-- Programme Search Screen -->
+        <item name="searchTitleBackgroundColor">@color/olamot2026_purple25</item>
+        <item name="searchTitleHorizontalPadding">8dp</item>
+        <item name="searchTitleTextColor">@color/olamot2026_purple1000</item>
+        <item name="programmeSearchBarBackground">@drawable/olamot2026_search_bar_background_purple</item>
+        <item name="programmeSearchFilterColor">@color/olamot2026_green1000</item>
+        <item name="programmeSearchFilterBackground">@drawable/olamot2026_filter_background</item>
+        <item name="eventNameKeywordHighlightColor">@color/olamot2026_blue500</item>
+        <item name="eventKeywordHighlightColor">@color/olamot2026_blue500</item>
+        <item name="searchDrawerAccentColor">@color/olamot2026_blue700</item>
+        <item name="searchDrawerBackground">@color/olamot2026_green25</item>
+        <item name="searchDrawerTextColor">@color/olamot2026_gray900</item>
+        <item name="searchDrawerSeparatorColor">@color/transparent</item>
+        <!-- My Events Screen -->
+        <item name="nextEventStartTimeBackground">@color/transparent</item>
+        <item name="nextEventStartTimeTextColor">@color/olamot2026_blue500</item>
+        <item name="nextEventStartTimeBottomLineColor">@color/transparent</item>
+        <item name="conflictingEventsListBorder">@null</item>
+        <item name="conflictingEventsBackground">@null</item>
+        <item name="conflictingEventsGroupSeparator">@drawable/olamot2026_conflicting_events_group_separator</item>
+        <item name="conflictingEventsGroupSeparatorHeight">4dp</item>
+        <item name="conflictingEventsGroupSeparatorMargin">4dp</item>
+        <item name="freeTimeTextColor">@color/olamot2026_blue500</item>
+        <item name="importEventsButtonIcon">@drawable/system_update_40px</item>
+        <item name="myEventsFABMaxImageSize">36dp</item>
+        <!-- User Details Dialog -->
+        <item name="userDetailsTextColor">@color/olamot2026_gray800</item>
+        <item name="logoutButtonTextColor">@color/olamot2026_red</item>
+        <!-- Feedback Screen -->
+        <item name="conventionFeedbackBackgroundColor">@drawable/olamot2026_rounded_edges_gray50_inset</item>
+        <item name="feedbackProgressBarColor">@color/olamot2026_blue700</item>
+        <item name="conventionFeedbackTextColor">@drawable/olamot2026_feedback_text_color</item>
+        <item name="feedbackEventDateHeaderTextColor">@color/olamot2026_purple1000</item>
+        <!-- Updates Screen -->
+        <item name="updateTimeBackground">@null</item>
+        <item name="updateTimeColor">@drawable/olamot2026_update_time_text_color</item>
+        <item name="showNewUpdateIndicator">true</item>
+        <item name="newUpdateIndicatorTextColor">@color/white</item>
+        <item name="newUpdateIndicatorBackground">@drawable/olamot2026_new_update_indicator_background</item>
+        <item name="updateItemSeparator">@color/transparent</item>
+        <item name="updateBackground">@drawable/olamot2026_update_background</item>
+        <item name="updateTextColor">@drawable/olamot2026_update_text_color</item>
+        <item name="updatePaddingTop">10dp</item>
+        <item name="updatePaddingBottom">25dp</item>
+        <item name="updateElevation">2dp</item>
+        <item name="updateItemBorder">@color/olamot2026_blue700</item>
+        <item name="updatesSeparatorColor">@color/transparent</item>
+        <!-- Event Screen -->
+        <item name="eventToolbarColor">?toolbarBackground</item>
+        <item name="eventActivityFavoriteColor">?toolbarIconAccentColor</item>
+        <item name="eventTitleBackground">@null</item>
+        <item name="eventTitlePadding">0dp</item>
+        <item name="eventNameBackground">@drawable/olamot2026_blue700_top_round</item>
+        <item name="eventTitleTextColor">@color/white</item>
+        <item name="eventLecturerBackground">@color/olamot2026_blue25</item>
+        <item name="eventLecturerTextColor">@color/olamot2026_blue900</item>
+        <item name="eventTypeBackground">@drawable/olamot2026_blue100_bottom_round</item>
+        <item name="eventTypeTextColor">@color/olamot2026_blue900</item>
+        <item name="eventDetailsBoxColor">@color/transparent</item>
+        <item name="eventDetailsTextColor">@color/olamot2026_purple1000</item>
+        <item name="eventDetailsHighlightedTextColor">@color/olamot2026_red</item>
+        <item name="eventDescriptionBoxColor">@drawable/olamot2026_gray50_round</item>
+        <item name="eventDescriptionTextColor">@color/olamot2026_purple1000</item>
+        <item name="eventFeedbackBoxColor">@drawable/olamot2026_blue100_round</item>
+        <item name="eventFeedbackTextColor">@drawable/olamot2026_event_feedback_text_color</item>
+        <item name="eventFeedbackProgressBarColor">@color/olamot2026_blue900</item>
+        <item name="eventFeedbackButtonBackground">@drawable/olamot2026_event_feedback_button</item>
+        <item name="eventFeedbackButtonTextColor">@drawable/olamot2026_highlighted_button_text_color</item>
+        <item name="feedbackButtonColor">@color/olamot2026_blue900</item>
+        <item name="eventVoteBoxColor">@drawable/olamot2026_purple100_round</item>
+        <item name="eventVoteTextColor">@color/olamot2026_purple1000</item>
+       <item name="eventVoteButtonBackground">@drawable/olamot2026_event_vote_button</item>
+        <!-- Map Screen -->
+        <item name="mapBackground">?activitiesBackground</item>
+        <item name="locationDetailsBackground">@color/white_90</item>
+        <item name="locationDetailsTopLineColor">@color/transparent</item>
+        <item name="iconClearMap">@drawable/ic_clear_black</item>
+        <item name="locationDetailsTitleColor">@color/olamot2026_gray900</item>
+        <item name="locationDetailsElevation">3dp</item>
+        <item name="floorChangeBackground">@color/olamot2026_gray200</item>
+        <item name="mapSearchFiltersBackground">@color/olamot2026_purple25</item>
+        <item name="mapSearchResultsBackground">@color/olamot2026_green50_transparent_95</item>
+        <item name="mapSearchBorder">@color/transparent</item>
+        <item name="mapSearchPaneElevation">10dp</item>
+        <item name="mapSearchText">@color/olamot2026_purple1000</item>
+        <item name="mapSearchSeparator">@color/olamot2026_gray300</item>
+        <item name="mapSearchResultsDivider">@drawable/olamot2026_map_search_results_divider</item>
+        <item name="mapSearchCheckboxTint">@color/olamot2026_blue700</item>
+        <item name="mapSearchHint">@color/olamot2026_purple1000</item>
+        <item name="mapSearchBarBackground">@drawable/olamot2026_search_bar_background_purple</item>
+        <item name="mapSearchBarHorizontalMargins">5dp</item>
+        <item name="standIconColor">@color/olamot2026_purple1000</item>
+        <item name="standsTypeTitleColor">@color/olamot2026_purple1000</item>
+        <item name="mapShelterButtonBackground">@drawable/highlighted_button</item>
+        <!-- Second Hand Screen -->
+        <item name="secondHandBackground">?activitiesBackground</item>
+        <item name="secondHandFormColor">@drawable/olamot2026_second_hand_form_text_color</item>
+        <item name="secondHandItemStatusColor">@drawable/olamot2026_second_hand_item_status_text_color</item>
+        <item name="secondHandItemsDivider">@drawable/olamot2026_second_hand_item_list_divider</item>
+        <item name="secondHandSellFormsDivider">@color/olamot2026_purple1000</item>
+        <item name="secondHandSellFormsDividerHeight">2dp</item>
+        <item name="secondHandFilterColor">@color/olamot2026_purple1000</item>
+        <item name="secondHandSelectedFilterColor">@color/olamot2026_blue700</item>
+        <item name="secondHandBuyFiltersBackground">@color/olamot2026_green25</item>
+        <item name="secondHandBuyFiltersBottomPadding">8dp</item>
+    </style>
+
+    <style name="AppBaseTheme.Olamot2026.Event">
+<!--        <item name="android:textColorLink">@color/...</item>-->
+    </style>
+
+    <style name="AppBaseTheme.Olamot2026.Settings">
+        <item name="android:textColorPrimary">@color/olamot2026_purple1000</item>
+         <item name="android:textColorSecondary">@color/olamot2026_purple1000</item>
+    </style>
+
+     <style name="AppBaseTheme.Olamot2026.Home">
+          <item name="toolbarLogo">@drawable/ic_menu_black_24dp</item>
+          <item name="lightStatusBarIcons">false</item>
+     </style>
+
+
+    <style name="AppDialogTheme.Olamot2026" parent="Theme.AppCompat.Light.Dialog">
+        <!-- This is the default starting API23. In any case the title is always left-justified so it's best to not use it. -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="colorAccent">@color/olamot2026_blue700</item>
+        <item name="android:textColorPrimary">@color/olamot2026_purple1000</item>
+        <item name="borderlessButtonColor">@color/olamot2026_blue700</item>
+        <item name="android:layoutDirection">rtl</item>
+    </style>
+
+    <style name="AppAlertDialogTheme.Olamot2026" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/olamot2026_blue700</item>
+        <item name="android:textColorPrimary">@color/olamot2026_purple1000</item>
+        <item name="borderlessButtonColor">@color/olamot2026_blue700</item>
+        <item name="android:layoutDirection">rtl</item>
+    </style>
+
+    <style name="AppBaseTheme.Olamot2026.Splash">
+        <item name="android:windowBackground">@drawable/olamot2026_background</item>
+    </style>
+
+     <style name="TransparentTheme.Olamot2026" parent="TransparentTheme">
+          <!-- Custom Tabs -->
+          <item name="customTabsToolbarColor">@color/olamot2026_purple1000</item>
+     </style>
+</resources>

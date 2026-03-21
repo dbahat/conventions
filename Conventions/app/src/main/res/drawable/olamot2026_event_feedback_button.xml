@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+        android:color="@color/olamot2026_blue1000">
+    <item>
+        <inset
+            android:insetLeft="@dimen/button_inset_horizontal_material"
+            android:insetTop="@dimen/button_inset_vertical_material"
+            android:insetRight="@dimen/button_inset_horizontal_material"
+            android:insetBottom="@dimen/button_inset_vertical_material">
+            <selector>
+                <!-- Disabled state -->
+                <item android:state_enabled="false">
+                    <shape android:shape="rectangle">
+                        <corners android:radius="?attr/highlightedButtonRadius" />
+                        <stroke android:color="@color/olamot2026_gray700" android:width="1dp" />
+                        <solid android:color="@color/olamot2026_gray200" />
+                        <padding android:left="@dimen/button_padding_horizontal_material"
+                            android:top="@dimen/button_padding_vertical_material"
+                            android:right="@dimen/button_padding_horizontal_material"
+                            android:bottom="@dimen/button_padding_vertical_material" />
+                    </shape>
+
+                </item>
+
+                <!-- Normal state -->
+                <item>
+                    <shape android:shape="rectangle">
+                        <corners android:radius="?attr/highlightedButtonRadius" />
+                        <solid android:color="@color/olamot2026_blue700" />
+                        <padding android:left="@dimen/button_padding_horizontal_material"
+                            android:top="@dimen/button_padding_vertical_material"
+                            android:right="@dimen/button_padding_horizontal_material"
+                            android:bottom="@dimen/button_padding_vertical_material" />
+                    </shape>
+                </item>
+            </selector>
+        </inset>
+    </item>
+</ripple>
