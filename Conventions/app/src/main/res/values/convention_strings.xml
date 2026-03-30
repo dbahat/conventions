@@ -9,7 +9,7 @@
     <string name="notification_channel_description_notifications">הודעות בזמן אמת מהנהלת הכנס</string>
 
     <!-- Relevant to all sf-f conventions -->
-    <string name="arrival_methods_marker_name">%s - אשכול פיס</string>
+    <string name="arrival_methods_marker_name">%s - דיזינגוף סנטר</string>
     <string name="my_event_share_link">http://play.google.com/store/apps/details?id=sff.org.conventions</string>
 
     <!-- Relevant to all Icon conventions -->
@@ -77,35 +77,11 @@
     <string name="arrival_method_description"><![CDATA[
 <h1>מיקום, דרכי הגעה וחניה</h1>
 <p>הכנס יתקיים אונליין ובמקביל אירוע מצומצם בדיזינגוף סנטר, רחוב דיזנגוף 50 בתל אביב-יפו. בתאריכים 6-5 באפריל 2026. אירועי האונליין יתקיימו בין השעות 10:00 עד 22:00.
-<br>מומלץ להתעדכן לקראת הכנס בכניסות למתחם שיכולות להשתנות.</p>
 <h2>תחבורה ציבורית</h2>
 <p>שימו לב!</p>
 <p>בימים אלו התנועה בתחבורה הציבורית עשויה להיות שונה ולקחת זמן רב מהצפוי, אנא קחו את הפרטים המופיעים באתר בנוגע לקווי התחבורה בערבון מוגבל.</p>
 <p>בנוסף, אנו עושים את מירב המאמצים על מנת להקל עליכם את הניווט וההגעה למיקומים השונים של אירועים בתוך הכנס, אבל הניווט בדיזינגוף סנטר גם הוא עשוי להיות מאתגר ולקחת זמן רב מהצפוי, במיוחד לאלו ללא היכרות מוקדמת עם המבנה.</p>
 <p> אנא קחו זאת בחשבון ותכננו את ההגעה תוך לקיחה בחשבון של נסיעה ארוכה מהרגיל.</p>
-<h3>רכבות</h3>
-<p>מידע על שעות פעילות הרכבת אפשר למצוא <a href="https://www.rail.co.il">באתר רכבת ישראל</a>.<br>
-ניתן להגיע למתחם מתחנת הרכבת השלום בהליכה לא מאומצת של 15 דקות או באמצעות קווי האוטובוס 23, 63, 64, 238  ולרדת בתחנת החשמונאים קניון TLV או תחנת סינמטק תל אביב.</p>
-<h3>הרכבת הקלה – הדנקל</h3>
-<p>מגיעים עם הקו האדום אל תחנת &quot;יהודית&quot;, עולים למעלה דרך &quot;יציאה A&quot; (מתחם שרונה) ופונים ימינה אל רחוב הארבעה.</p>
-<h3>אוטובוסים:</h3>
-<p>ישנם קווי אוטובוס רבים בסביבת מתחם הכנס כולל קווי אוטובוסים בין עירוניים הנוסעים בדרך מנחם בגין, בניהם ישנם הקווים הבאים:</p>
-<ul>
-<li><strong>מהתחנה המרכזית החדשה בתל אביב: </strong>קווי אוטובוס &#8211; 53, 60, 160.</li>
-<li><strong>מתחנת סבידור מרכז:</strong> קווי אוטובוס &#8211; 40, 44.</li>
-<li><strong>מקניון עזריאלי\תחנת רכבת השלום:</strong> קווי אוטובוס &#8211; 23, 63, 64 , 238.</li>
-</ul>
-<p>במהלך חול המועד פסח יפעלו קווי לילה מיוחדים בתוך תל אביב וקווים בין-עירוניים לכל הערים המרכזיות בארץ ובתוכן, ניתן להתעדכן <a href="https://www.kav-layla.co.il/">באתר&nbsp;קווי לילה</a> ובאפליקציות הסלולריות לתחבורה ציבורית בזמן אמת.</p>
-<p>מומלץ להתעדכן לפני ההגעה לכנס באפליקציות לתחבורה ציבורית (<a href="https://moovitapp.com" data-type="link" data-id="https://moovitapp.com">moovit</a>, <a href="https://hopon.co.il/">HopOn</a>) או באתרי האינטרנט לתחבורה ציבורית (<a href="https://busnearby.co.il">busnearby</a>, <a href="https://bus.gov.il">bus.gov.il</a>)</p>
-<h2>חניה</h2>
-<p>במתחם הכנס אין חנייה אך ישנם חניונים רבים בסביבת הכנס, בין החניונים שבסביבה:</p>
-<ul>
-<li><a href="https://centralpark.co.il/parking/46-Osvaldo-Araniha%2032,%20Tel%20Aviv">חניון גבעון</a></li>
-<li><a href="https://www.tlvmall.com/Content/%D7%97%D7%A0%D7%99%D7%94">חניון קניון TLV</a></li>
-<li>חניוני מתחם שרונה (דרך אריה לובה אליאב)</li>
-<li><a href="https://www.ahuzot.co.il/Parking/ParkingDetails/?ID=31">חניון מפעל הפיס</a> (אחוזת החוף)</li>
-</ul>
-<p>בנוסף, ישנן חניות נכים ברחובות ליד הכניסות למתחם &#8211; רחובות הארבעה, שפרינצ\'ק ולאונרדו דה וינצ\'י.</p>
 ]]></string>
     <!-- App accessibility link and accessible programme link were added, and title changed for con accessibility.
          Apostrophes were escaped. Content taken from: https://2025.iconfestival.org.il/info/access/ -->
