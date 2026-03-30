@@ -44,18 +44,18 @@ public class Olamot2026Convention extends SffConvention {
 //	private static final String HALL_NAME_CINEMATHEQUE_3 = "סינמטק 3";
 //	private static final String HALL_NAME_CINEMATHEQUE_4 = "סינמטק 4";
 //	private static final String HALL_NAME_CINEMATHEQUE_5 = "סינמטק 5";
-	private static final String HALL_NAME_ESHKOL_1 = "אשכול 1";
-	private static final String HALL_NAME_ESHKOL_2 = "אשכול 2";
-	private static final String HALL_NAME_ESHKOL_3 = "אשכול 3";
-	private static final String HALL_NAME_ESHKOL_4 = "אשכול 4";
-	private static final String HALL_NAME_ESHKOL_5 = "אשכול 5";
-	private static final String HALL_NAME_ESHKOL_6 = "אשכול 6";
-	private static final String HALL_NAME_WORKSHOPS = "עירוני סדנאות";
+//	private static final String HALL_NAME_ESHKOL_1 = "אשכול 1";
+//	private static final String HALL_NAME_ESHKOL_2 = "אשכול 2";
+//	private static final String HALL_NAME_ESHKOL_3 = "אשכול 3";
+//	private static final String HALL_NAME_ESHKOL_4 = "אשכול 4";
+//	private static final String HALL_NAME_ESHKOL_5 = "אשכול 5";
+//	private static final String HALL_NAME_ESHKOL_6 = "אשכול 6";
+//	private static final String HALL_NAME_WORKSHOPS = "עירוני סדנאות";
 //	private static final String HALL_NAME_WORKSHOPS_1 = "סדנאות 1";
 //	private static final String HALL_NAME_WORKSHOPS_2 = "סדנאות 2";
-	private static final String HALL_NAME_KIDS = "עירוני ילדים";
-	private static final String HALL_NAME_MEETINGS = "עירוני מפגשים";
-	private static final String HALL_NAME_SPECIAL = "אירועים מיוחדים";
+//	private static final String HALL_NAME_MEETINGS = "עירוני מפגשים";
+//	private static final String HALL_NAME_KIDS = "עירוני ילדים";
+//	private static final String HALL_NAME_SPECIAL = "אירועים מיוחדים";
 //	private static final String HALL_NAME_ENTIRE_CON = "מתחם הכנס";
 //	private static final String HALL_NAME_OUTSIDE = "חוצות";
 //	private static final String HALL_NAME_ARENA = "זירה";
@@ -89,8 +89,13 @@ public class Olamot2026Convention extends SffConvention {
 //	private static final String HALL_NAME_GAMES_4 = "משחקים 4";
 //	private static final String HALL_NAME_ICODE = "אייקוד";
 //	private static final String HALL_NAME_SPACESHIP = "החללית";
+	private static final String HALL_NAME_CENTER1 = "סנטר 1 (סמוך לשער 1)";
+	private static final String HALL_NAME_CENTER2 = "סנטר 2 (צומת ספרים – הספרייה)";
+	private static final String HALL_NAME_CENTER3 = "סנטר 3 (חנות פריק)";
+	private static final String HALL_NAME_VIRTUAL1 = "וירטואלי 1";
+	private static final String HALL_NAME_VIRTUAL2 = "וירטואלי 2";
 
-	private static final String API_SLUG = "olamot2026";
+	private static final String API_SLUG = "olamot2026c";
 	private static final String TEST_API_SLUG = "test_con";
 	private static final String YAD2_API = "https://api.yadash.sf-f.org.il/";
 	private static final String TEST_YAD2_API = "https://test.api.sf-f.org.il/yad2/";
@@ -129,17 +134,17 @@ public class Olamot2026Convention extends SffConvention {
 //				new Hall().withName(HALL_NAME_CINEMATHEQUE_4),
 //				new Hall().withName(HALL_NAME_CINEMATHEQUE_5),
 //				new Hall().withName(HALL_NAME_SPECIAL),
-				new Hall().withName(HALL_NAME_ESHKOL_1).withShelter(true),
-				new Hall().withName(HALL_NAME_ESHKOL_2),
-				new Hall().withName(HALL_NAME_ESHKOL_3),
-				new Hall().withName(HALL_NAME_ESHKOL_4),
-				new Hall().withName(HALL_NAME_ESHKOL_5),
-				new Hall().withName(HALL_NAME_ESHKOL_6),
+//				new Hall().withName(HALL_NAME_ESHKOL_1).withShelter(true),
+//				new Hall().withName(HALL_NAME_ESHKOL_2),
+//				new Hall().withName(HALL_NAME_ESHKOL_3),
+//				new Hall().withName(HALL_NAME_ESHKOL_4),
+//				new Hall().withName(HALL_NAME_ESHKOL_5),
+//				new Hall().withName(HALL_NAME_ESHKOL_6),
 //				new Hall().withName(HALL_NAME_WORKSHOPS_1),
 //				new Hall().withName(HALL_NAME_WORKSHOPS_2),
-				new Hall().withName(HALL_NAME_MEETINGS),
-				new Hall().withName(HALL_NAME_WORKSHOPS),
-				new Hall().withName(HALL_NAME_KIDS),
+//				new Hall().withName(HALL_NAME_MEETINGS),
+//				new Hall().withName(HALL_NAME_WORKSHOPS),
+//				new Hall().withName(HALL_NAME_KIDS),
 //				new Hall().withName(HALL_NAME_OUTSIDE),
 //				new Hall().withName(HALL_NAME_ENTIRE_CON)
 //				new Hall().withName(HALL_NAME_KIDS_VIRTUAL),
@@ -174,7 +179,12 @@ public class Olamot2026Convention extends SffConvention {
 //				new Hall().withName(HALL_NAME_GAMES_4),
 //				new Hall().withName(HALL_NAME_TENT_20)
 //				new Hall().withName(HALL_NAME_ICODE),
-				new Hall().withName(HALL_NAME_SPECIAL)
+//				new Hall().withName(HALL_NAME_SPECIAL)
+				new Hall().withName(HALL_NAME_CENTER1),
+				new Hall().withName(HALL_NAME_CENTER2),
+				new Hall().withName(HALL_NAME_CENTER3),
+				new Hall().withName(HALL_NAME_VIRTUAL1),
+				new Hall().withName(HALL_NAME_VIRTUAL2)
 		);
 		int i = 1;
 		for (Hall hall : halls) {
@@ -194,17 +204,17 @@ public class Olamot2026Convention extends SffConvention {
 //		Hall cinematheque3 = getHalls().findByName(HALL_NAME_CINEMATHEQUE_3);
 //		Hall cinematheque4 = getHalls().findByName(HALL_NAME_CINEMATHEQUE_4);
 //		Hall cinematheque5 = getHalls().findByName(HALL_NAME_CINEMATHEQUE_5);
-		Hall eshkol1 = getHalls().findByName(HALL_NAME_ESHKOL_1);
-		Hall eshkol2 = getHalls().findByName(HALL_NAME_ESHKOL_2);
-		Hall eshkol3 = getHalls().findByName(HALL_NAME_ESHKOL_3);
-		Hall eshkol4 = getHalls().findByName(HALL_NAME_ESHKOL_4);
-		Hall eshkol5 = getHalls().findByName(HALL_NAME_ESHKOL_5);
-		Hall eshkol6 = getHalls().findByName(HALL_NAME_ESHKOL_6);
+//		Hall eshkol1 = getHalls().findByName(HALL_NAME_ESHKOL_1);
+//		Hall eshkol2 = getHalls().findByName(HALL_NAME_ESHKOL_2);
+//		Hall eshkol3 = getHalls().findByName(HALL_NAME_ESHKOL_3);
+//		Hall eshkol4 = getHalls().findByName(HALL_NAME_ESHKOL_4);
+//		Hall eshkol5 = getHalls().findByName(HALL_NAME_ESHKOL_5);
+//		Hall eshkol6 = getHalls().findByName(HALL_NAME_ESHKOL_6);
 //		Hall workshops1 = getHalls().findByName(HALL_NAME_WORKSHOPS_1);
 //		Hall workshops2 = getHalls().findByName(HALL_NAME_WORKSHOPS_2);
-		Hall workshops = getHalls().findByName(HALL_NAME_WORKSHOPS);
-		Hall kids = getHalls().findByName(HALL_NAME_KIDS);
-		Hall meetings = getHalls().findByName(HALL_NAME_MEETINGS);
+//		Hall workshops = getHalls().findByName(HALL_NAME_WORKSHOPS);
+//		Hall kids = getHalls().findByName(HALL_NAME_KIDS);
+//		Hall meetings = getHalls().findByName(HALL_NAME_MEETINGS);
 //		Hall arena = getHalls().findByName(HALL_NAME_ARENA);
 //		Hall ironi1 = getHalls().findByName(HALL_NAME_IRONI_1);
 //		Hall ironi2 = getHalls().findByName(HALL_NAME_IRONI_2);
@@ -221,13 +231,13 @@ public class Olamot2026Convention extends SffConvention {
 //		Hall icode = getHalls().findByName(HALL_NAME_ICODE);
 //		Hall spaceship = getHalls().findByName(HALL_NAME_SPACESHIP);
 
-		Floor floor = new Floor(1)
-				.withName("מפת המתחם")
-				.withImageResource(R.raw.icon2025_map, true)
-				.withImageHeight(3832.88f)
-				.withImageWidth(3406.42f)
-				.withDefaultMarkerHeight(153.195f);
-		final float SMALL_MARKER_HEIGHT = 104.497f;
+//		Floor floor = new Floor(1)
+//				.withName("מפת המתחם")
+//				.withImageResource(R.raw.icon2025_map, true)
+//				.withImageHeight(3832.88f)
+//				.withImageWidth(3406.42f)
+//				.withDefaultMarkerHeight(153.195f);
+//		final float SMALL_MARKER_HEIGHT = 104.497f;
 
 		return new ConventionMap();
 			/*.withFloors(Collections.singletonList(floor))
@@ -349,12 +359,18 @@ public class Olamot2026Convention extends SffConvention {
 
 	@Override
 	protected double initLongitude() {
-		return 34.7845003;
+		// Dizengoff
+		return 34.7750651;
+		// Ironi
+//		return 34.7845003;
 	}
 
 	@Override
 	protected double initLatitude() {
-		return 32.0707265;
+		// Dizengoff
+		return 32.0751854;
+		// Ironi
+//		return 32.0707265;
 	}
 
 	@Override
@@ -557,7 +573,7 @@ public class Olamot2026Convention extends SffConvention {
 
 	@Override
 	public boolean canUserLogin() {
-		return true;
+		return false;
 	}
 
 	@Override
