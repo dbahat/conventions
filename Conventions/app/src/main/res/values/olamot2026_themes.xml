@@ -141,14 +141,14 @@
         <item name="searchDrawerSeparatorColor">@color/transparent</item>
         <!-- My Events Screen -->
         <item name="nextEventStartTimeBackground">@color/transparent</item>
-        <item name="nextEventStartTimeTextColor">@color/olamot2026_blue500</item>
+        <item name="nextEventStartTimeTextColor">@color/olamot2026_blue700</item>
         <item name="nextEventStartTimeBottomLineColor">@color/transparent</item>
         <item name="conflictingEventsListBorder">@null</item>
         <item name="conflictingEventsBackground">@null</item>
         <item name="conflictingEventsGroupSeparator">@drawable/olamot2026_conflicting_events_group_separator</item>
         <item name="conflictingEventsGroupSeparatorHeight">4dp</item>
         <item name="conflictingEventsGroupSeparatorMargin">4dp</item>
-        <item name="freeTimeTextColor">@color/olamot2026_blue500</item>
+        <item name="freeTimeTextColor">@color/olamot2026_blue700</item>
         <item name="importEventsButtonIcon">@drawable/system_update_40px</item>
         <item name="myEventsFABMaxImageSize">36dp</item>
         <!-- User Details Dialog -->
