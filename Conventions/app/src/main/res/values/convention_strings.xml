@@ -95,15 +95,16 @@
 ]]></string>
     <string name="discounts_main_title">הטבות</string>
     <string name="discounts_main_overview">העסקים הבאים מעניקים הנחה במהלך שלושת ימי הפסטיבל:</string>
-    <string name="discounts_evrit"><b><a href="https://bookscatharsis.com/product-category/%d7%90%d7%98%d7%9c%d7%a0%d7%98%d7%99%d7%a1/">עברית</a></b>\n10% הנחה על כל ספרי פנטזיה ומד\"ב\nקוד: OLAMOT26</string>
+    <string name="discounts_evrit"><b><a href="https://www.e-vrit.co.il/Category/11/%D7%9E%D7%93_%D7%91_%D7%95%D7%A4%D7%A0%D7%98%D7%96%D7%99%D7%94">עברית</a></b>\n10% הנחה על כל ספרי פנטזיה ומד\"ב\nקוד: OLAMOT26</string>
     <string name="discounts_matar"><b><a href="https://www.matarbooks.co.il/?gad_source=1&amp;gad_campaignid=11243389634">מטר</a></b>\n10% הנחה + כפל מבצעים על כל ספרי הפנטזיה והמד\"ב באתר\nקוד: עולמות26</string>
     <string name="discounts_catharsis"><b><a href="https://bookscatharsis.com/product-category/%d7%90%d7%98%d7%9c%d7%a0%d7%98%d7%99%d7%a1/">קתרזיס</a></b>\n30% הנחה על כל הספרות הספקולטיבית באתר\nקוד: עולמות2026</string>
     <string name="discounts_patzkareshet"><b><a href="https://patzkareshet.com/">פצקרשת</a></b>\n10% הנחה על מינוי שנתי\nקוד: עולמות</string>
     <string name="discounts_bernina"><b><a href="https://www.bernina.co.il/?utm_source=google&amp;utm_term=&amp;utm_campaign=x&amp;utm_medium=c&amp;utm_content=1007978&amp;gad_source=1&amp;gad_campaignid=21514437813">ברנינה</a></b>\nציוד ואביזרי תפירה\nהנחה באתר עד סוף חודש אפריל\nקוד: olam10</string>
     <string name="discounts_pokemon"><b><a href="https://www.dizengof-center.co.il/activities/events/?ContentID=71963">פופאפ פוקימון</a></b>\nפופאפ פוקימון בסנטר\n5% הנחה בחנות + כפל מבצעים\nקוד: OLAM\nגשר הפיל, מול הכל בדולר</string>
-    <string name="discounts_yogo"><b><a href="https://www.dizengof-center.co.il/shops/food/?ItemID=62014">יוגו – גלידה ויוגורט</a></b>\nקרפ צרפתי כולל תוספות במקום ב-25 ש\"ח (במקום 31)\nבניין A קומה שנייה\nגשר הפיל, מול הכל בדולר</string>
-    <string name="discounts_tony_vespa"><b><a href="https://www.dizengof-center.co.il/shops/food/?ItemID=62005">טוני וספה</a></b>\nפיצה</string>
-    <string name="discounts_freak"><b><a href="https://apps.sf-f.org.il/kmolamot/">פריק</a></b>\n<a href="https://www.freak-tlv.com/">לאתר פריק</a></string>
+    <string name="discounts_yogo"><b><a href="https://www.dizengof-center.co.il/shops/food/?ItemID=62014">יוגו – גלידה ויוגורט</a></b>\nקרפ צרפתי כולל תוספות במקום ב-25 ש\"ח (במקום 31)\nגלידה 3 כדורים ב-25 ש\"ח (במקום 33)\nפרוזן יוגורט ב-25 ש\"ח (במקם 30)\nבניין A קומה שנייה</string>
+    <string name="discounts_tony_vespa"><b><a href="https://www.dizengof-center.co.il/shops/food/?ItemID=62005">טוני וספה</a></b>\n10% הנחה לקהל הכנס\nאמרו \"כנס עולמות\" בתשלום\nבניין A קומה 2</string>
+    <string name="discounts_freak"><b><a href="https://apps.sf-f.org.il/kmolamot/">פריק</a></b>\nמתחם משחקי לוח בימי הכנס\nמגוון הנחות לקהל הכנס\nבניין B קומת כניסה</string>
+    <string name="discounts_aroma"><b><a href="https://www.dizengof-center.co.il/shops/food/?ItemID=61938">ארומה</a></b>\n10% הנחה בהצגת קופון – ניתן לאסוף בדוכן האגודה בגלריה\nבניין A קומה 1</string>
     <string name="discounts_scaryfairygifts"><b><a href="https://www.scaryfairygifts.com/">ScaryFairyGifts</a></b>\n15% הנחה בחנות OLAMOT15\nסימניה חינם בקניה מעל 150 ש\"ח</string>
     <string name="discounts_bibliocave"><b><a href="https://www.bibliocave.com/downloads">BiblioCave</a></b>\nתוכנה לניהול כתיבה\n20% הנחה קוד: olamot2026</string>
 
