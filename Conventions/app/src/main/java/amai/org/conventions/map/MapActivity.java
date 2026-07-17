@@ -687,7 +687,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 
 	private void handleDeepLinks() {
 		Uri intentData = getIntent().getData();
-		// The URI looks like: org.amai.conventions://stands/by-name?name=abc
+		// The URI looks like: <scheme>://<host>/<path>?name=abc
 		if (isStandsIntent(intentData)) {
 			String standName = intentData.getQueryParameter("name") == null ? "" : intentData.getQueryParameter("name");
 			List<Stand> stands = new ArrayList<>(1);
@@ -747,6 +747,9 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 			return true;
 		// Test deep link - https://dbahat.github.io/conventions-redirect-test/stands.html?name=standName
 		} else if ("dbahat.github.io".equals(intentData.getHost()) && "/conventions-redirect-test/stands.html".equals(intentData.getPath())) {
+			return true;
+		// Official website deep link - https://animatsuri.org.il/app/stands or https://animatsuri.org.il/app/stands/
+		} else if ("animatsuri.org.il".equals(intentData.getHost()) && ("/app/stands".equals(intentData.getPath()) || "/app/stands/".equals(intentData.getPath()))) {
 			return true;
 		}
 		return false;

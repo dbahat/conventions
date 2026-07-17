@@ -35,7 +35,7 @@ import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 import androidx.annotation.Nullable;
 
-public class Harucon2026Convention extends AmaiConvention {
+public class Animatsuri2026Convention extends AmaiConvention {
 	// Hall names
 	private static final String MAIN_HALL_NAME = "אולם ראשי";
 	private static final String ORANIM_NAME = "אודיטוריום אורנים";
@@ -125,24 +125,24 @@ public class Harucon2026Convention extends AmaiConvention {
 	protected Calendar initDate() {
 		Calendar date = Calendar.getInstance();
 		date.clear();
-		date.set(2026, Calendar.MARCH, 31);
+		date.set(2026, Calendar.AUGUST, 27);
 		return date;
 	}
 
 	@Override
 	protected String initID() {
-		return "Harucon2026";
+		return "Animatsuri2026";
 	}
 
 	@Override
 	protected String initDisplayName() {
-		return "הארוקון 2026";
+		return "אנימאטסורי 2026";
 	}
 
 	@Override
 	protected URL initUpdatesURL() {
 		try {
-			return new URL("https://us-central1-starlit-brand-95018.cloudfunctions.net/getFeed?page=harucon.org.il");
+			return new URL("https://us-central1-starlit-brand-95018.cloudfunctions.net/getFeed?page=animatsuri.org.il");
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
@@ -1002,7 +1002,7 @@ public class Harucon2026Convention extends AmaiConvention {
 	public String convertEventDescriptionURL(String url) {
 		// URLs in event descriptions that don't have a domain should point to the website URL
 		if (url != null && url.startsWith("/")) {
-			return "https://harucon.org.il" + url;
+			return "https://animatsuri.org.il" + url;
 		}
 		return super.convertEventDescriptionURL(url);
 	}

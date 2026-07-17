@@ -15,7 +15,7 @@ import java.util.List;
 import amai.org.conventions.map.MapActivity;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.MapLocation;
-import amai.org.conventions.model.conventions.Harucon2026Convention;
+import amai.org.conventions.model.conventions.Animatsuri2026Convention;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.CollectionUtils;
@@ -68,7 +68,7 @@ public class AccessibilityActivity extends NavigationActivity {
                 }
                 case "/open-map-in-parent-room": {
                     ConventionMap map = Convention.getInstance().getMap();
-                    List<MapLocation> locations = map.findLocationsByName(Harucon2026Convention.CHILDREN_ROOM_NAME);
+                    List<MapLocation> locations = map.findLocationsByName(Animatsuri2026Convention.CHILDREN_ROOM_NAME);
                     int[] locationIds = CollectionUtils.mapToInt(locations, MapLocation::getId);
                     Bundle floorBundle = new Bundle();
                     floorBundle.putIntArray(MapActivity.EXTRA_MAP_LOCATION_IDS, locationIds);
@@ -77,7 +77,7 @@ public class AccessibilityActivity extends NavigationActivity {
                 }
                 case "/open-map-in-accessible-cashiers": {
                     ConventionMap map = Convention.getInstance().getMap();
-                    List<MapLocation> locations = map.findLocationsByName(Harucon2026Convention.ACCESSIBLE_CASHIERS_NAME, false);
+                    List<MapLocation> locations = map.findLocationsByName(Animatsuri2026Convention.ACCESSIBLE_CASHIERS_NAME, false);
                     int[] locationIds = CollectionUtils.mapToInt(locations, MapLocation::getId);
                     Bundle floorBundle = new Bundle();
                     floorBundle.putIntArray(MapActivity.EXTRA_MAP_LOCATION_IDS, locationIds);

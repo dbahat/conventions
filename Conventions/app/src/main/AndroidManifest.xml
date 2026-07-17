@@ -63,6 +63,7 @@
         <activity android:name=".events.activities.ProgrammeSearchActivity" />
         <activity android:name=".map.MapActivity" android:exported="true">
             <!-- The intent filters should be synched with MapActivity isStandsIntent, and receive a "name" parameter with the stand name -->
+            <!-- Test page -->
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -72,6 +73,17 @@
                     android:scheme="https"
                     android:host="dbahat.github.io"
                     android:pathPrefix="/conventions-redirect-test/stands.html"/>
+            </intent-filter>
+            <!-- Official website page -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- https://animatsuri.org.il/app/stands -->
+                <data
+                    android:scheme="https"
+                    android:host="animatsuri.org.il"
+                    android:pathPrefix="/app/stands"/>
             </intent-filter>
 
             <intent-filter>

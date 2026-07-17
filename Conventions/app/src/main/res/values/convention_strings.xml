@@ -21,7 +21,7 @@
     <string name="safe_space_button_mail">ליצירת קשר במייל</string>
 
     <!-- Relevant to this specific convention -->
-    <string name="app_name">הארוקון 2026</string>
+    <string name="app_name">אנימאטסורי 2026</string>
     <string name="amaidol_name_question">איך קוראים לך?</string>
     <string name="amaidol_vote_question">מי המתמודד/ת החביב/ה עליך?</string>
     <string name="idolfest_vote_question">בחרו את הביצוע האהוב עליכם!</string>
@@ -46,12 +46,12 @@
     עיצוב: סם דניאל (אינסטגרם: <a href="https://www.instagram.com/Sem_d_apchi">@Sem_d_apchi</a>)<br/>
     איור למסך הבית: סם דניאל (אינסטגרם: <a href="https://www.instagram.com/Sem_d_apchi">@Sem_d_apchi</a>)<br/>
     איור למרחב בטוח: <a href="https://www.instagram.com/tod_mugi">@tod_mugi</a></p>
-<p><a href="https://harucon.org.il/">לאתר הכנס</a></p>
+<p><a href="https://animatsuri.org.il/">לאתר הכנס</a></p>
 ]]></string>
     <string name="about_app_content"><![CDATA[
-האפליקציה פותחה על ידי דוד בהט וטל ספן עבור כנס הארוקון 2026.<br/>בקשות והצעות ניתן לכתוב <a href="market://details?id=amai.org.conventions">בדף האפליקציה בחנות</a>.
+האפליקציה פותחה על ידי דוד בהט וטל ספן עבור כנס אנימאטסורי 2026.<br/>בקשות והצעות ניתן לכתוב <a href="market://details?id=amai.org.conventions">בדף האפליקציה בחנות</a>.
 <br/>תודות: מיה שראל.
-<p><a href="https://harucon.org.il/app-privacy/">להצהרת הפרטיות</a></p>
+<p><a href="https://animatsuri.org.il/app/privacy-policy/">להצהרת הפרטיות</a></p>
 ]]></string>
     <!-- Copied from https://harucon.org.il/event-details/
          Removed unnecessary styles and flattened tab content. Escaped apostrophe and encoded quotes. -->
