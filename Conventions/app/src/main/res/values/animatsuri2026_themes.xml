@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppBaseTheme.Animatsuri2026" parent="AppBaseTheme.Dark">
+        <!-- Sub-themes -->
+        <item name="android:dialogTheme">@style/AppDialogTheme.Animatsuri2026</item>
+        <item name="alertDialogTheme">@style/AppAlertDialogTheme.Animatsuri2026</item>
+        <!-- General -->
+        <item name="lightStatusBarIcons">true</item>
+        <item name="android:colorPrimaryDark">@color/black</item> <!-- Toolbar color -->
+        <!-- Used in: default selected checkbox/switch color, settings titles,
+             cursor color in all edit texts. Also used as the default action button color and map search checkbox color. -->
+        <item name="colorAccent">@color/animatsuri2026_orange50</item>
+        <!-- This color should be readable over the activities background.
+             Used as the text color in: accessibility, arrival methods.
+             Also used as default for many texts and as the default "large text" color (e.g. in settings). -->
+        <item name="android:textColorPrimary">@color/animatsuri2026_almost_white</item>
+        <!-- Used in: default unselected checkbox color and default "medium/small" texts (e.g. in settings). -->
+        <item name="android:textColorSecondary">@color/animatsuri2026_almost_white</item>
+        <item name="android:textColorHint">@color/animatsuri2026_almost_white</item>
+        <item name="android:textColorLink">@color/animatsuri2026_orange300</item>
+        <item name="actionButtonColor">@color/animatsuri2026_pink950</item>
+        <item name="actionButtonBorderWidth">1dp</item>
+        <item name="actionButtonBorderColor">@color/animatsuri2026_pink500</item>
+        <item name="actionButtonIcon">@drawable/animatsuri2026_search_icon</item>
+<!--        <item name="actionButtonShapeAppearance">@style/SquareFAB</item>-->
+        <item name="hintTextColor">@color/animatsuri2026_almost_white</item>
+        <item name="swipeToRefreshColor">@color/animatsuri2026_pink500</item>
+        <item name="swipeToRefreshBackgroundColor">@color/animatsuri2026_pink950</item>
+        <item name="snackbarActionColor">@color/animatsuri2026_pink300</item>
+        <item name="borderlessButtonColor">@color/animatsuri2026_orange300</item>
+        <item name="activitiesBackground">@drawable/animatsuri2026_bg_cropped</item>
+        <item name="infoActivitiesBackground">@drawable/animatsuri2026_bg_cropped</item>
+<!--        <item name="infoActivitiesTextBackground">@drawable/...</item>-->
+        <item name="eventListDivider">@drawable/transparent_event_list_divider_no_inset</item>
+        <item name="separatorColor">@null</item>
+        <!-- These are used for buttons. They should be usable when the background is:
+             Event screen vote survey
+             Feedback screen
+             Map bottom info panel
+             Arrival methods screen
+         -->
+        <item name="buttonColor">@color/animatsuri2026_pink500</item>
+        <item name="buttonColorPressed">@color/animatsuri2026_pink700</item>
+        <item name="buttonColorDisabled">@color/animatsuri2026_gray</item>
+        <item name="buttonTextColor">@drawable/animatsuri20262026_highlighted_button_text_color</item>
+        <item name="highlightedButtonRadius">8dp</item>
+        <item name="highlightedButtonBackground">@drawable/highlighted_button</item>
+
+        <!-- Notifications -->
+        <item name="notificationSmallIcon">@drawable/animatsuri_notification_small</item>
+        <!-- Toolbar -->
+        <item name="toolbarBackground">@drawable/animatsuri2026_toolbar_background</item>
+        <item name="toolbarIconAccentColor">@color/animatsuri2026_pink300</item>
+        <item name="toolbarTitleColor">@color/animatsuri2026_almost_white</item>
+        <!-- Navigation Drawer -->
+        <item name="navigationPopupBackground">@color/animatsuri2026_darkest_blue_80</item>
+        <item name="navigationPopupSpaceVisibility">gone</item>
+        <item name="navigationPopupTitle">@null</item>
+        <item name="navigationPopupBottomImage">@null</item>
+        <item name="navigationPopupTopSelectedColor">@color/animatsuri2026_darkest_blue</item>
+        <item name="navigationPopupTopNotSelectedColor">@color/white</item>
+        <item name="navigationPopupTopSelectedBackground">@color/animatsuri2026_almost_white</item>
+        <item name="navigationPopupNotSelectedColor">@color/white</item>
+        <item name="navigationPopupSelectedColor">@color/animatsuri2026_darkest_blue</item>
+        <item name="navigationPopupSelectedBackground">@color/animatsuri2026_almost_white</item>
+        <item name="navigationPopupSeparatorColor">@color/transparent</item>
+        <item name="navigationPopupBottomImageMargins">0dp</item>
+        <item name="navigationPopupBottomImageTopMargin">0dp</item>
+        <item name="navigationPopupTitleWidth">0dp</item>
+        <item name="navigationItemsShouldDisplayIcon">false</item>
+        <item name="navigationPopupItemPaddingTop">13dp</item>
+        <item name="navigationPopupItemPaddingBottom">13dp</item>
+        <!-- About Screen -->
+        <item name="aboutLogo">@drawable/animatsuri2026_about_logo</item>
+        <item name="aboutLogoMargins">0dp</item>
+        <!-- Home Screen -->
+        <item name="homeLogo">@drawable/harucon2026_home_image</item>
+        <item name="homeLogoBackground">@null</item>
+        <item name="homeLogoScaleType">fitStart</item>
+        <item name="homeLogoScaleTypeDuringConvention">fitEnd</item>
+        <item name="homeLogoMargin">0dp</item>
+        <item name="homeLogoMarginTop">0dp</item>
+        <item name="homeBottomImage">@null</item>
+        <item name="homeBackground">@drawable/animatsuri2026_bg_cropped</item>
+        <item name="homeBackgroundDuringConvention">@drawable/animatsuri2026_bg_cropped</item>
+        <item name="homeToolbarTitle">@drawable/animatsuri2026_toolbar_logo</item>
+        <item name="homeToolbarBackground">@drawable/animatsuri2026_toolbar_background</item>
+        <item name="homeTitleBackground">@drawable/animatsuri2026_home_title_background</item>
+        <item name="homeShowCurrentUpcomingTitles">true</item>
+        <item name="homeTitleText">@drawable/animatsuri2026_home_title_text</item>
+        <item name="homeContentBackground">@drawable/animatsuri2026_home_content_background</item>
+        <item name="homeContentText">@drawable/animatsuri2026_home_content_text</item>
+        <item name="homeButtonBackground">@drawable/animatsuri2026_home_button</item>
+        <item name="homeButtonText">@color/animatsuri2026_almost_white</item>
+        <item name="homeButton2Background">@drawable/animatsuri2026_home_button2</item>
+        <item name="homeButton2Text">@color/animatsuri2026_orange800</item>
+        <item name="homeEventsListEventBackground">@drawable/animatsuri2026_rounded_edges_lavender_20</item>
+        <item name="homeEventsListDivider">@color/transparent</item>
+        <item name="homeEventsListDividerHeight">4dp</item>
+        <item name="homeBoxTopMargin">0dp</item>
+        <item name="homeEventsMargin">10dp</item>
+        <item name="homeSingleButtonTopMargin">10dp</item>
+        <item name="homeFrameTopMargin">0dp</item>
+        <!-- Event View -->
+        <item name="eventViewLayout">@layout/rounded_convention_event</item>
+        <item name="eventViewHeight">104dp</item>
+        <item name="eventViewCardBackground">@color/animatsuri2026_lavender_20</item> <!-- Only set if eventBackgroundColor is not solid -->
+        <item name="eventBackgroundColor">@color/transparent</item>
+        <item name="eventTextColor">@drawable/animatsuri2026_event_view_text_color</item>
+        <item name="eventNameKeywordHighlightColor">@color/animatsuri2026_orange300</item>
+        <item name="eventKeywordHighlightColor">@color/animatsuri2026_orange300</item>
+        <item name="eventTimeTextColor">@drawable/animatsuri2026_event_view_time_text_color</item>
+        <item name="eventTimeBackground">@drawable/animatsuri2026_event_view_time_background_color</item>
+        <item name="eventFavoriteIcon">@drawable/favorite_full</item>
+        <item name="eventFavoriteIconColor">@drawable/animatsuri2026_favorite_icon_color</item>
+        <item name="eventFeedbackIconColor">@drawable/animatsuri2026_event_feedback_icon_color</item>
+        <item name="useEventTextColorFromEventType">false</item>
+        <item name="useEventTimeColorFromEventType">false</item>
+        <item name="conflictingEventBackground">@drawable/animatsuri2026_conflicting_event_label_bg</item>
+        <item name="conflictingEventLabelTextColor">@color/animatsuri2026_almost_white</item>
+        <item name="ongoingEventBackground">@drawable/animatsuri2026_ongoing_event_label_bg</item>
+        <item name="ongoingEventLabelTextColor">@color/animatsuri2026_darkest_blue</item>
+        <!-- Programme Screen and Programme Search Screen -->
+        <item name="eventTimeHeaderBackground">@color/animatsuri2026_pink500_20</item>
+        <item name="eventTimeHeaderWidth">match_parent</item>
+        <item name="eventTimeHeaderTextColor">@color/animatsuri2026_pink500</item>
+        <item name="eventTimeHeaderMarginTop">10dp</item>
+        <item name="eventTimeHeaderMarginBottom">@null</item>
+        <item name="eventTimeHeaderMarginHorizontal">8dp</item>
+        <item name="eventTimeHeaderPaddingVertical">4dp</item>
+        <item name="marginBetweenEventsListAndNextHeader">0dp</item>
+        <item name="fabOnProgrammeTop">false</item>
+        <item name="fabOnProgrammeTopAlignment">END</item>
+        <item name="searchTitleTextColor">@color/animatsuri2026_almost_white</item>
+        <item name="searchTitleBackgroundColor">@drawable/animatsuri2026_events_search_title_background</item>
+        <item name="programmeSearchBarBackground">@drawable/animatsuri2026_search_bar_background</item>
+        <item name="programmeSearchFilterColor">@color/animatsuri2026_pink500</item>
+        <item name="programmeSearchFilterBackground">@drawable/animatsuri2026_filter_background</item>
+        <!-- Search drawer -->
+        <item name="searchDrawerAccentColor">@color/animatsuri2026_pink500</item>
+        <item name="searchDrawerBackground">@color/animatsuri2026_darkest_blue</item>
+        <item name="searchDrawerTextColor">@color/animatsuri2026_almost_white</item>
+        <item name="searchDrawerSeparatorColor">@color/transparent</item>
+        <!-- My Events Screen -->
+        <item name="nextEventStartTimeBackground">@color/transparent</item>
+        <item name="nextEventStartTimeTextColor">@color/white</item>
+        <item name="conflictingEventsBackground">@null</item>
+        <item name="nextEventStartTimeBottomLineColor">@null</item>
+        <item name="conflictingEventsSideMargin">0dp</item>
+        <item name="conflictingEventsTopBottomMargin">0dp</item>
+        <item name="conflictingEventsGroupSeparator">@drawable/animatsuri2026_conflicting_events_group_separator</item>
+        <item name="conflictingEventsGroupSeparatorHeight">4dp</item>
+        <item name="conflictingEventsGroupSeparatorMargin">4dp</item>
+        <item name="conflictingEventsListBorder">@null</item>
+        <item name="freeTimeTextColor">@color/white</item>
+        <item name="freeTimeBackground">@color/transparent</item>
+        <!-- Feedback Screen -->
+        <item name="conventionFeedbackBackgroundColor">@drawable/animatsuri2026_darkest_blue_80_w_pink300_border_inset</item>
+        <item name="conventionFeedbackTextColor">@drawable/animatsuri2026_convention_feedback_text_color</item>
+        <item name="conventionFeedbackAnswerBackground">@drawable/animatsuri2026_convention_feedback_answer_bg_selector</item>
+        <item name="feedbackMultiAnswerMinWidth">50dp</item>
+        <item name="feedbackMultiAnswerPaddingTopBottom">4dp</item>
+        <item name="feedbackMultiAnswerPaddingStartEnd">9dp</item>
+        <item name="feedbackMultiAnswerPaddingStartFirstAnswer">9dp</item>
+        <item name="feedbackMultiAnswerMarginTopBottom">2dp</item>
+        <item name="feedbackMultiAnswerMarginBetweenAnswers">9dp</item>
+        <item name="feedbackProgressBarColor">@color/animatsuri2026_pink300</item>
+        <item name="feedbackSeparatorColor">@drawable/animatsuri2026_pink300_inset</item>
+        <!-- Updates Screen -->
+        <item name="updateTimeColor">@drawable/animatsuri2026_update_time_color</item>
+        <item name="updateTimeBackground">@null</item>
+        <item name="updateItemBorder">@color/animatsuri2026_orange300</item>
+        <item name="updateItemSeparator">@android:color/transparent</item>
+        <item name="updateBackground">@drawable/animatsuri2026_update_background</item>
+        <item name="updateTextColor">@color/animatsuri2026_almost_white</item>
+        <item name="updateElevation">2dp</item>
+        <item name="showNewUpdateIndicator">true</item>
+        <item name="newUpdateIndicatorTextColor">@color/animatsuri2026_blue800</item>
+        <item name="newUpdateIndicatorBackground">@drawable/animatsuri2026_new_update_indicator_background</item>
+        <item name="updatesBackgroundDrawable">@drawable/animatsuri2026_updates_background</item>
+        <!-- Event Screen -->
+        <item name="eventToolbarColor">?toolbarBackground</item>
+        <item name="eventActivityFavoriteColor">?toolbarIconAccentColor</item>
+        <item name="eventDetailsDefaultBackground">?activitiesBackground</item>
+        <item name="eventTitleBackground">@null</item>
+        <item name="eventTitlePadding">0dp</item>
+        <item name="eventTitleTextColor">@color/animatsuri2026_almost_white</item>
+        <item name="eventSubTitleTextColor">@color/animatsuri2026_almost_white</item>
+        <item name="eventLecturerTextColor">@color/animatsuri2026_almost_white</item>
+        <item name="eventTypeTextColor">@color/animatsuri2026_darkest_blue</item>
+        <item name="eventNameBackground">@null</item>
+        <item name="eventSubTitleBackground">@null</item>
+        <item name="eventLecturerBackground">@null</item>
+        <item name="eventTypeBackground">@drawable/animatsuri2026_rounded_edges_orange300</item>
+        <item name="eventTypeBackgroundWidth">wrap_content</item>
+        <item name="eventTitleGravity">start</item>
+        <item name="eventDetailsBoxColor">@null</item>
+        <item name="eventDetailsTextColor">@color/animatsuri2026_almost_white</item>
+        <item name="eventFeedbackBoxColor">@drawable/animatsuri2026_event_feedback_bg</item>
+        <item name="eventFeedbackTextColor">@drawable/animatsuri2026_event_feedback_text_color</item>
+        <item name="eventFeedbackAnswerBackground">@drawable/animatsuri2026_event_feedback_answer_bg_selector</item>
+        <item name="eventFeedbackTitleBackground">@null</item>
+        <item name="feedbackButtonColor">@drawable/animatsuri2026_event_feedback_button_color_selector</item>
+        <item name="eventFeedbackButtonBackground">@drawable/animatsuri2026_event_feedback_button</item>
+        <item name="eventFeedbackButtonTextColor">@drawable/animatsuri2026_event_feedback_button_text_color</item>
+        <item name="eventFeedbackProgressBarColor">@color/animatsuri2026_orange300</item>
+        <item name="eventVoteBoxColor">@drawable/animatsuri2026_pink500_20_w_pink500_border</item>
+        <item name="eventVoteTextColor">@color/animatsuri2026_almost_white</item>
+        <item name="eventVoteButtonBackground">@drawable/animatsuri2026_event_vote_button</item>
+        <item name="eventVoteButtonTextColor">@drawable/animatsuri2026_event_vote_button_text_color</item>
+        <item name="eventVoteTitleBackground">@null</item>
+        <item name="eventDescriptionBoxColor">@drawable/animatsuri2026_darkest_blue_80_w_orange300_border</item>
+        <item name="eventDescriptionTextColor">@color/animatsuri2026_almost_white</item>
+        <item name="eventSurveyTextColor">@drawable/animatsuri2026_event_vote_text_color</item>
+        <!-- Map Screen -->
+        <item name="mapBackground">@drawable/animatsuri2026_bg_cropped</item>
+        <item name="mapShelterButtonBackground">@drawable/animatsuri2026_event_feedback_button</item>
+        <item name="mapShelterButtonTextColor">@drawable/animatsuri2026_event_feedback_button_text_color</item>
+        <item name="mapDetailButtonsBackground">@drawable/animatsuri2026_event_vote_button</item>
+        <item name="mapDetailButtonsTextColor">@color/animatsuri2026_almost_white</item>
+        <item name="locationDetailsBackground">@color/animatsuri2026_pink500_20</item>
+        <item name="locationDetailsTopLineColor">@color/animatsuri2026_red</item>
+        <item name="locationDetailsTitleColor">@color/white</item>
+        <item name="locationDetailsElevation">10dp</item>
+        <item name="iconClearMap">@drawable/ic_clear_white_24dp</item>
+        <item name="iconFloorUp">@drawable/animatsuri2026_arrow_up</item>
+        <item name="iconFloorDown">@drawable/animatsuri2026_arrow_down</item>
+        <item name="floorChangeBackground">@color/animatsuri2026_darkest_blue</item>
+        <item name="floorUpDownTextColor">@color/animatsuri2026_pink700</item>
+        <item name="floorUpDownSeparator">@color/animatsuri2026_red</item>
+        <item name="floorUpDownElevation">10dp</item>
+        <item name="mapSearchTabsTabBackground">@drawable/animatsuri2026_map_search_tabs_background</item>
+        <item name="mapSearchTabsBackground">@color/animatsuri2026_darkest_blue</item>
+        <item name="mapSearchFiltersBackground">@color/animatsuri2026_darkest_blue</item>
+        <item name="mapSearchTabsColor">@color/animatsuri2026_pink400</item>
+        <item name="mapSearchTabsIndicator">@null</item>
+        <item name="mapSearchTabsBorder">@color/animatsuri2026_pink400</item>
+        <item name="mapSearchTopBorder">@null</item>
+        <item name="mapSearchBorder">@color/transparent</item>
+        <item name="mapSearchResultsBackground">@color/animatsuri2026_darkest_blue_80</item>
+        <item name="mapSearchPaneElevation">10dp</item>
+        <item name="mapSearchImageColor">@color/animatsuri2026_pink500</item>
+        <item name="mapSearchText">@color/animatsuri2026_almost_white</item>
+        <item name="mapSearchSeparator">@color/animatsuri2026_pink400</item>
+        <item name="mapSearchResultsDivider">@drawable/animatsuri2026_map_search_results_divider</item>
+        <item name="mapSearchCheckboxTint">@color/animatsuri2026_almost_white</item>
+        <item name="mapSearchBarBackground">@drawable/animatsuri2026_search_bar_background</item>
+        <item name="mapSearchHint">@color/animatsuri2026_almost_white</item>
+        <item name="mapSearchBarHorizontalMargins">5dp</item>
+        <item name="standIconColor">@color/animatsuri2026_pink700</item>
+        <item name="standsTypeTitleColor">@color/animatsuri2026_pink700</item>
+
+        <!-- Safe Space Screen -->
+        <item name="safeSpaceLogo">@drawable/amai_safe_space</item>
+    </style>
+
+    <style name="AppBaseTheme.Animatsuri2026.Event">
+<!--        <item name="android:textColorLink"></item>-->
+    </style>
+
+    <style name="AppBaseTheme.Animatsuri2026.Home">
+<!--        <item name="toolbarLogo">@drawable/ic_menu_black_24dp</item>-->
+        <item name="lightStatusBarIcons">true</item>
+    </style>
+
+    <style name="AppDialogTheme.Animatsuri2026" parent="Theme.AppCompat.Light.Dialog">
+        <!-- This is the default starting API23. In any case the title is always left-justified so it's best to not use it. -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- Used for configure notifications popup title and separator -->
+        <item name="colorAccent">@color/animatsuri2026_pink700</item>
+        <item name="borderlessButtonColor">@color/animatsuri2026_pink700</item>
+        <item name="android:textColorPrimary">@color/animatsuri2026_darkest_blue</item>
+        <item name="android:layoutDirection">rtl</item>
+        <!-- For stands popup in map - unselected stand text color -->
+        <item name="mapSearchText">@color/animatsuri2026_darkest_blue</item>
+    </style>
+
+    <style name="AppAlertDialogTheme.Animatsuri2026" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!-- Used for configure notifications popup title and separator -->
+        <item name="colorAccent">@color/animatsuri2026_pink700</item>
+        <item name="borderlessButtonColor">@color/animatsuri2026_pink700</item>
+        <item name="android:textColorPrimary">@color/animatsuri2026_darkest_blue</item>
+        <item name="android:layoutDirection">rtl</item>
+    </style>
+
+    <style name="AppBaseTheme.Animatsuri2026.Splash">
+        <!-- This is displayed with the app icon in the foreground -->
+        <item name="android:windowBackground">@drawable/animatsuri2026_bg_cropped</item>
+    </style>
+</resources>
+

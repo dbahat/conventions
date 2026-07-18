@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="animatsuri2026_orange50">#FFEBCC</color>
+    <color name="animatsuri2026_orange300">#FFA011</color>
+    <color name="animatsuri2026_orange300_40">#66FFA011</color>
+    <color name="animatsuri2026_orange500">#DF8804</color>
+    <color name="animatsuri2026_orange800">#3A2300</color>
+
+    <color name="animatsuri2026_yellow">#FFED3B</color>
+
+    <color name="animatsuri2026_pink300">#FF70B7</color>
+    <color name="animatsuri2026_pink400">#FF4BA5</color>
+    <color name="animatsuri2026_pink500">#F82D92</color>
+    <color name="animatsuri2026_pink500_20">#33F82D92</color>
+    <color name="animatsuri2026_pink700">#C40062</color>
+    <color name="animatsuri2026_pink950">#4D0027</color>
+
+    <color name="animatsuri2026_red">#CA004E</color>
+
+    <color name="animatsuri2026_blue800">#0D0052</color>
+    <color name="animatsuri2026_darkest_blue">#0F0619</color>
+    <color name="animatsuri2026_darkest_blue_80">#CC0F0619</color>
+
+    <color name="animatsuri2026_purple">#5D00EA</color>
+    <color name="animatsuri2026_lavender_20">#33CFADFF</color>
+
+    <color name="animatsuri2026_almost_white">#E3FFF6</color>
+    <color name="animatsuri2026_green">#00B432</color>
+
+    <color name="animatsuri2026_gray">#E5E1E6</color>
+    <color name="animatsuri2026_dark_gray">#5D4D66</color>
+</resources>

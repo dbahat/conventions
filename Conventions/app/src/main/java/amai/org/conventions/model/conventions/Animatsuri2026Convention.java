@@ -818,7 +818,7 @@ public class Animatsuri2026Convention extends AmaiConvention {
 		float horizontalRotationFactor = (98.354f - defaultRotatedWidth) / 2;
 		float verticalRotationFactor = (98.354f - defaultRotatedHeight) / 2;
 
-		int defaultHighlightColor = R.color.harucon2026_pink1;
+		int defaultHighlightColor = R.color.animatsuri2026_pink300;
 
 		BlendMode highlightBlendMode = null;
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -887,7 +887,7 @@ public class Animatsuri2026Convention extends AmaiConvention {
 		float defaultSpaceVertical = 8;
 		float defaultHeight = 72;
 
-		int defaultHighlightColor = R.color.harucon2026_pink1;
+		int defaultHighlightColor = R.color.animatsuri2026_pink300;
 		BlendMode highlightBlendMode = null;
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
 			highlightBlendMode = BlendMode.COLOR;

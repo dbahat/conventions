@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:drawable="@drawable/animatsuri2026_darkest_blue_80_w_orange300_border_inset" app:state_update_focused="true" />
+    <item android:drawable="@drawable/animatsuri2026_darkest_blue_80_w_orange300_border_inset" />
+</selector>

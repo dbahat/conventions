@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:drawable="@drawable/harucon2026_mint2_w_green2_border" app:state_event_feedback_sent="true" app:state_feedback_collapsed="true"/>
-    <item android:drawable="@drawable/harucon2026_mint2_w_green2_border" app:state_event_feedback_can_send="true" app:state_feedback_collapsed="true"/>
-    <item android:drawable="@drawable/harucon2026_gray1_w_gray2_border" app:state_event_feedback_can_send="false" app:state_feedback_collapsed="true"/>
-    <item android:drawable="@drawable/harucon2026_mint2_w_green2_border"/>
-</selector>

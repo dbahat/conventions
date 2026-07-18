@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:color="@color/animatsuri2026_orange300" app:state_update_new="true" />
+    <item android:color="@color/animatsuri2026_almost_white" />
+</selector>
