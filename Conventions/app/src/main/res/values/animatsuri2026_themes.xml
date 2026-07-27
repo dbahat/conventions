@@ -28,8 +28,8 @@
         <item name="swipeToRefreshBackgroundColor">@color/animatsuri2026_pink950</item>
         <item name="snackbarActionColor">@color/animatsuri2026_pink300</item>
         <item name="borderlessButtonColor">@color/animatsuri2026_orange300</item>
-        <item name="activitiesBackground">@drawable/animatsuri2026_bg_cropped</item>
-        <item name="infoActivitiesBackground">@drawable/animatsuri2026_bg_cropped</item>
+        <item name="activitiesBackground">@drawable/animatsuri2026_background</item>
+        <item name="infoActivitiesBackground">@drawable/animatsuri2026_background</item>
 <!--        <item name="infoActivitiesTextBackground">@drawable/...</item>-->
         <item name="eventListDivider">@drawable/transparent_event_list_divider_no_inset</item>
         <item name="separatorColor">@null</item>
@@ -81,8 +81,8 @@
         <item name="homeLogoMargin">0dp</item>
         <item name="homeLogoMarginTop">0dp</item>
         <item name="homeBottomImage">@null</item>
-        <item name="homeBackground">@drawable/animatsuri2026_bg_cropped</item>
-        <item name="homeBackgroundDuringConvention">@drawable/animatsuri2026_bg_cropped</item>
+        <item name="homeBackground">@drawable/animatsuri2026_background</item>
+        <item name="homeBackgroundDuringConvention">@drawable/animatsuri2026_background</item>
         <item name="homeToolbarTitle">@drawable/animatsuri2026_toolbar_logo</item>
         <item name="homeToolbarBackground">@drawable/animatsuri2026_toolbar_background</item>
         <item name="homeTitleBackground">@drawable/animatsuri2026_home_title_background</item>
@@ -177,7 +177,7 @@
         <item name="showNewUpdateIndicator">true</item>
         <item name="newUpdateIndicatorTextColor">@color/animatsuri2026_blue800</item>
         <item name="newUpdateIndicatorBackground">@drawable/animatsuri2026_new_update_indicator_background</item>
-        <item name="updatesBackgroundDrawable">@drawable/animatsuri2026_updates_background</item>
+        <item name="updatesBackgroundDrawable">@drawable/animatsuri2026_background</item>
         <!-- Event Screen -->
         <item name="eventToolbarColor">?toolbarBackground</item>
         <item name="eventActivityFavoriteColor">?toolbarIconAccentColor</item>
@@ -213,7 +213,7 @@
         <item name="eventDescriptionTextColor">@color/animatsuri2026_almost_white</item>
         <item name="eventSurveyTextColor">@drawable/animatsuri2026_event_vote_text_color</item>
         <!-- Map Screen -->
-        <item name="mapBackground">@drawable/animatsuri2026_bg_cropped</item>
+        <item name="mapBackground">@drawable/animatsuri2026_background</item>
         <item name="mapShelterButtonBackground">@drawable/animatsuri2026_event_feedback_button</item>
         <item name="mapShelterButtonTextColor">@drawable/animatsuri2026_event_feedback_button_text_color</item>
         <item name="mapDetailButtonsBackground">@drawable/animatsuri2026_event_vote_button</item>
@@ -285,7 +285,7 @@
 
     <style name="AppBaseTheme.Animatsuri2026.Splash">
         <!-- This is displayed with the app icon in the foreground -->
-        <item name="android:windowBackground">@drawable/animatsuri2026_bg_cropped</item>
+        <item name="android:windowBackground">@drawable/animatsuri2026_background</item>
     </style>
 </resources>
 
