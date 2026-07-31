@@ -14,6 +14,7 @@ import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import amai.org.conventions.utils.Log;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -39,6 +40,9 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 	public static final int MAX_DAYS_NUMBER = 5;
 	private static final String STATE_NAVIGATE_ICON_MODIFIED = "StateNavigateIconModified";
 	private static final String STATE_SELECTED_DATE_INDEX = "StateSelectedDateIndex";
+
+	private static final String TAG = ProgrammeActivity.class.getCanonicalName();
+
 	private ViewPager daysPager;
 
 	private Menu menu;
@@ -205,6 +209,9 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 				}
 				if (e != null && showError) {
 					Toast.makeText(ProgrammeActivity.this, R.string.update_refresh_failed, Toast.LENGTH_SHORT).show();
+				}
+				if (e != null) {
+					Log.e(TAG, "could not refresh model", e);
 				}
 			}
 		});
