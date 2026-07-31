@@ -20,6 +20,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import java.util.Calendar;
 import java.util.List;
 
+import amai.org.conventions.utils.Log;
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.FeedbackActivity;
 import amai.org.conventions.ThemeAttributes;
@@ -43,6 +44,9 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 	public static final String EXTRA_DELAY_SCROLLING = "DelayScrollingExtra";
 	private static final String STATE_NAVIGATE_ICON_MODIFIED = "StateNavigateIconModified";
 	private static final String STATE_SELECTED_DATE_INDEX = "StateSelectedDateIndex";
+
+	private static final String TAG = ProgrammeActivity.class.getCanonicalName();
+
 	private ViewPager daysPager;
 
 	private Menu menu;
@@ -250,6 +254,9 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 				}
 				if (e != null && showError) {
 					Toast.makeText(ProgrammeActivity.this, R.string.update_refresh_failed, Toast.LENGTH_SHORT).show();
+				}
+				if (e != null) {
+					Log.e(TAG, "could not refresh model", e);
 				}
 			}
 		});
