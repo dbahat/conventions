@@ -1,0 +1,131 @@
+{
+  "project_info": {
+    "project_number": "458203975509",
+    "firebase_url": "https://starlit-brand-95018.firebaseio.com",
+    "project_id": "starlit-brand-95018",
+    "storage_bucket": "starlit-brand-95018.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:458203975509:android:094ef81b4464ff0f",
+        "android_client_info": {
+          "package_name": "amai.org.conventions"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "458203975509-qghf2og9qjhlt8hmd8pv1d2ttra5pk8h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAD4VkVJEOsU6OvTu2sv-4dGrfBnQZG1Ls"
+        },
+        {
+          "current_key": "AIzaSyAXItZJdwfvtf4df0u4tLaN0PFPiQnvLRg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "458203975509-qghf2og9qjhlt8hmd8pv1d2ttra5pk8h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "458203975509-6gse3d9p6ivovv37hn1jqhc2veb6c9rh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "AMAI.Conventions",
+                "app_store_id": "1092678215"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:458203975509:android:094ef81b4464ff0f",
+        "android_client_info": {
+          "package_name": "amai.org.conventions.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "458203975509-qghf2og9qjhlt8hmd8pv1d2ttra5pk8h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAD4VkVJEOsU6OvTu2sv-4dGrfBnQZG1Ls"
+        },
+        {
+          "current_key": "AIzaSyAXItZJdwfvtf4df0u4tLaN0PFPiQnvLRg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "458203975509-qghf2og9qjhlt8hmd8pv1d2ttra5pk8h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "458203975509-6gse3d9p6ivovv37hn1jqhc2veb6c9rh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "AMAI.Conventions",
+                "app_store_id": "1092678215"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:458203975509:android:1d81098cc74d144a",
+        "android_client_info": {
+          "package_name": "amai.org.pushnotificationsender"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "458203975509-qghf2og9qjhlt8hmd8pv1d2ttra5pk8h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXItZJdwfvtf4df0u4tLaN0PFPiQnvLRg"
+        },
+        {
+          "current_key": "AIzaSyAD4VkVJEOsU6OvTu2sv-4dGrfBnQZG1Ls"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "458203975509-qghf2og9qjhlt8hmd8pv1d2ttra5pk8h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "458203975509-6gse3d9p6ivovv37hn1jqhc2veb6c9rh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "AMAI.Conventions",
+                "app_store_id": "1092678215"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
