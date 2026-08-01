@@ -74,7 +74,7 @@
         <item name="aboutLogo">@drawable/animatsuri2026_about_logo</item>
         <item name="aboutLogoMargins">0dp</item>
         <!-- Home Screen -->
-        <item name="homeLogo">@drawable/harucon2026_home_image</item>
+        <item name="homeLogo">@drawable/animatsuri2026_home_image</item>
         <item name="homeLogoBackground">@null</item>
         <item name="homeLogoScaleType">fitStart</item>
         <item name="homeLogoScaleTypeDuringConvention">fitEnd</item>
