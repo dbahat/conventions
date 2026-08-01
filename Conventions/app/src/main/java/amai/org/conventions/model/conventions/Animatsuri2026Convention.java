@@ -42,8 +42,8 @@ public class Animatsuri2026Convention extends AmaiConvention {
 	private static final String ESHKOL1_NAME = "אשכול 1";
 	private static final String ESHKOL2_NAME = "אשכול 2";
 	private static final String ESHKOL3_NAME = "אשכול 3";
-	private static final String WORKSHOPS_NAME = "חדר סדנאות";
-	private static final String ORANIM2_NAME = "אורנים 2";
+//	private static final String WORKSHOPS_NAME = "חדר סדנאות";
+//	private static final String ORANIM2_NAME = "אורנים 2";
 	private static final String GAMES_NAME = "משחקייה";
 	private static final String COSPLAY_AREA_NAME = "מתחם קוספליי";
 	// Location names
@@ -63,8 +63,8 @@ public class Animatsuri2026Convention extends AmaiConvention {
 	 * {@link #getEventVoteSender(ConventionEvent)}
 	 */
 	private static final int EVENT_ID_NO_EVENT = -1;
-	private static final int EVENT_ID_AMAIDOL = 1439;
-	private static final int EVENT_ID_IDOLFEST = EVENT_ID_NO_EVENT;
+	private static final int EVENT_ID_AMAIDOL = 3712;
+	private static final int EVENT_ID_IDOLFEST = 3713;
 
 	// Ids of google spreadsheets associated with the special events
 	private static final String AMAIDOL_SPREADSHEET_ID = "1u9xu3FNq2gA25oZoVHVguTzJA5HheXWPf2wnUj-iipE";
@@ -118,7 +118,7 @@ public class Animatsuri2026Convention extends AmaiConvention {
 
 	@Override
 	protected ConventionStorage initStorage() {
-		return new ConventionStorage(this, R.raw.harucon2026_convention_events, 4);
+		return new ConventionStorage(this, R.raw.animatsuri2026_convention_events, 4);
 	}
 
 	@Override
@@ -207,7 +207,7 @@ public class Animatsuri2026Convention extends AmaiConvention {
 	@Override
 	protected URL initModelURL() {
 		try {
-			return new URL("https://harucon.org.il/wp-admin/admin-ajax.php?action=get_event_list");
+			return new URL("https://animatsuri.org.il/wp-admin/admin-ajax.php?action=get_event_list");
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
@@ -238,13 +238,11 @@ public class Animatsuri2026Convention extends AmaiConvention {
 	protected Halls initHalls() {
 		List<Hall> halls = Arrays.asList(
 			new Hall().withName(MAIN_HALL_NAME).withShelter(true),
+			new Hall().withName(ORANIM_NAME).withShelter(true),
 			new Hall().withName(ESHKOL1_NAME).withShelter(true),
 			new Hall().withName(ESHKOL2_NAME).withShelter(true),
 			new Hall().withName(ESHKOL3_NAME).withShelter(true),
-			new Hall().withName(WORKSHOPS_NAME),
-			new Hall().withName(ORANIM_NAME).withShelter(true),
 			new Hall().withName(GAMES_NAME).withShelter(true),
-			new Hall().withName(ORANIM2_NAME).withShelter(true),
 			new Hall().withName(COSPLAY_AREA_NAME)
 		);
 		int i = 1;
@@ -266,8 +264,6 @@ public class Animatsuri2026Convention extends AmaiConvention {
 		Hall eshkol1 = this.getHalls().findByName(ESHKOL1_NAME);
 		Hall eshkol2 = this.getHalls().findByName(ESHKOL2_NAME);
 		Hall eshkol3 = this.getHalls().findByName(ESHKOL3_NAME);
-		Hall workshops = this.getHalls().findByName(WORKSHOPS_NAME);
-		Hall oranim2 = this.getHalls().findByName(ORANIM2_NAME);
 		Hall games = this.getHalls().findByName(GAMES_NAME);
 		Hall cosplayArea = this.getHalls().findByName(COSPLAY_AREA_NAME);
 
@@ -373,14 +369,14 @@ public class Animatsuri2026Convention extends AmaiConvention {
 												.withMarkerHeight(161f)
 												.withX(1415.979f)
 												.withY(775f),
-										new MapLocation()
-												.withPlace(oranim2)
-												.withName("אורנים 2 - סדנת קנדו")
-												.withMarkerResource(R.raw.harucon2026_marker_oranim2, true)
-												.withSelectedMarkerResource(R.raw.harucon2026_selected_marker_oranim2, true)
-												.withMarkerHeight(152.67f)
-												.withX(1266.404f)
-												.withY(859.33f),
+//										new MapLocation()
+//												.withPlace(oranim2)
+//												.withName("אורנים 2 - סדנת קנדו")
+//												.withMarkerResource(R.raw.harucon2026_marker_oranim2, true)
+//												.withSelectedMarkerResource(R.raw.harucon2026_selected_marker_oranim2, true)
+//												.withMarkerHeight(152.67f)
+//												.withX(1266.404f)
+//												.withY(859.33f),
 										new MapLocation()
 												.withName("מתחם דוכנים")
 												.withDescription("החלק הפנימי של מתחם זה הינו מרחב מוגן.")
@@ -498,13 +494,13 @@ public class Animatsuri2026Convention extends AmaiConvention {
 												.withMarkerHeight(113.011f)
 												.withX(1305.49f)
 												.withY(874.509f),
-										new MapLocation()
-												.withPlace(workshops)
-												.withMarkerResource(R.raw.harucon2026_marker_workshops, true)
-												.withSelectedMarkerResource(R.raw.harucon2026_selected_marker_workshops, true)
-												.withMarkerHeight(111.82f)
-												.withX(1454.525f)
-												.withY(943.44f),
+//										new MapLocation()
+//												.withPlace(workshops)
+//												.withMarkerResource(R.raw.harucon2026_marker_workshops, true)
+//												.withSelectedMarkerResource(R.raw.harucon2026_selected_marker_workshops, true)
+//												.withMarkerHeight(111.82f)
+//												.withX(1454.525f)
+//												.withY(943.44f),
 										new MapLocation()
 												.withPlace(new Place().withName(CHILDREN_ROOM_NAME))
 												.withMarkerResource(R.raw.harucon2026_marker_parents_room, true)
