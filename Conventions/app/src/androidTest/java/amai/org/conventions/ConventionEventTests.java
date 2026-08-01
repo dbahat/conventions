@@ -94,4 +94,54 @@ public class ConventionEventTests {
 		Assert.assertEquals(18, spannedDescription.getSpanStart(firstURLSpan));
 		Assert.assertEquals(textDescription.length() - 1, spannedDescription.getSpanEnd(firstURLSpan));
 	}
+
+	@Test
+	public void getSpannedDescription_removes_fragment_only_links() {
+		String desc = "<p>this is a " +
+			"<a href=\"#somewhere\">" +
+			"fragment only link</a>.</p>";
+
+		ConventionEvent event = new ConventionEvent().withDescription(AmaiModelConverter.convertEventDescription(desc));
+
+		Spanned spannedDescription = event.getSpannedDescription();
+		String textDescription = spannedDescription.toString();
+
+		// Validate that the link text is added
+		Assert.assertEquals("this is a fragment only link.", textDescription);
+
+		// Validate the link was removed
+		URLSpan[] urlSpans = spannedDescription.getSpans(0, spannedDescription.length(), URLSpan.class);
+		Assert.assertEquals(0, urlSpans.length);
+	}
+
+	@Test
+	public void getSpannedDescription_removes_hidden_content() {
+		String desc = "<p>the rest of this is" +
+			"<p class=\"has-text-align-right decimal-ol editorskit-no-mobile wp-block-paragraph\">" +
+			" hidden</p>";
+
+		ConventionEvent event = new ConventionEvent().withDescription(AmaiModelConverter.convertEventDescription(desc));
+
+		Spanned spannedDescription = event.getSpannedDescription();
+		String textDescription = spannedDescription.toString();
+
+		// Validate that the hidden text was removed
+		Assert.assertEquals("the rest of this is", textDescription);
+	}
+
+	@Test
+	public void getSpannedDescription_removes_nested_hidden_content() {
+		String desc = "<p>the rest of this is" +
+			"<xdiv class=\"wp-block-column is-vertically-aligned-top editorskit-no-mobile is-layout-flow wp-block-column-is-layout-flow\" >" +
+			"<p class=\"has-text-align-right decimal-ol editorskit-no-mobile wp-block-paragraph\">" +
+			" hidden</p></xdiv>";
+
+		ConventionEvent event = new ConventionEvent().withDescription(AmaiModelConverter.convertEventDescription(desc));
+
+		Spanned spannedDescription = event.getSpannedDescription();
+		String textDescription = spannedDescription.toString();
+
+		// Validate that the hidden text was removed
+		Assert.assertEquals("the rest of this is", textDescription);
+	}
 }

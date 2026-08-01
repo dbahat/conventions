@@ -486,15 +486,18 @@ public class ConventionEvent implements Serializable {
 					span.setStart(output.length());
 					++hiddenSpansDepth;
 				} else if (!opening && currSpan instanceof HiddenSpan) {
-					HiddenSpan span = (HiddenSpan) currSpan;
 					--hiddenSpansDepth;
-					span.setEnd(output.length());
-					// SPAN_EXCLUSIVE_EXCLUSIVE is removed if its length is 0
-					int spanFlags = Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
-					if (span.getStart() == span.getEnd()) {
-						spanFlags = Spanned.SPAN_MARK_MARK;
+					// Don't add a hidden span inside another hidden span, it will be removed anyway
+					if (hiddenSpansDepth == 0) {
+						HiddenSpan span = (HiddenSpan) currSpan;
+						span.setEnd(output.length());
+						// SPAN_EXCLUSIVE_EXCLUSIVE is removed if its length is 0
+						int spanFlags = Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
+						if (span.getStart() == span.getEnd()) {
+							spanFlags = Spanned.SPAN_MARK_MARK;
+						}
+						output.setSpan(span, span.getStart(), span.getEnd(), spanFlags);
 					}
-					output.setSpan(span, span.getStart(), span.getEnd(), spanFlags);
 					return false; // Can't rely on the check in the next line because we popped the span
 				}
 
@@ -752,6 +755,9 @@ public class ConventionEvent implements Serializable {
 				int spanEnd = editableSpanned.getSpanEnd(urlSpan);
 				editableSpanned.removeSpan((urlSpan));
 				editableSpanned.setSpan(new CustomURLSpan(url), spanStart, spanEnd, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+			} else if (url != null && url.startsWith("#")) {
+				// Remove URL as it will not work
+				editableSpanned.removeSpan(urlSpan);
 			}
 		}
 

@@ -168,9 +168,9 @@ public class AmaiModelConverter {
 				.replaceAll("width=\"[^\"]*\"", "")
 				.replaceAll("height=\"[^\"]*\"", "")
 				// Remove scripts (multi-line and lazy)
-				.replaceAll("(?s)<script>.*?</script>", "")
+				.replaceAll("(?s)<script(\\s[^>]*)?>.*?</script>", "")
 				// Remove styles (multi-line and lazy)
-				.replaceAll("(?s)<style>.*?</style>", "")
+				.replaceAll("(?s)<style(\\s[^>]*)?>.*?</style>", "")
 				// Replace divs and images with some other unsupported (and therefore ignored)
 				.replace("<div", "<xdiv")
 				.replace("/div>", "/xdiv>")
@@ -179,7 +179,9 @@ public class AmaiModelConverter {
 				// Replace img tags and remove src attribute since we don't want images to appear in the description
 				.replaceAll("src=\"[^\"]*\"", "")
 				.replace("<img", "<ximg")
-				.replace("/img>", "/ximg>");
+				.replace("/img>", "/ximg>")
+				// Remove figcaption tags, as they describe images which will not be displayed
+				.replaceAll("(?s)<figcaption(\\s[^>]*)?>.*?</figcaption>", "");
 	}
 
 	private List<String> extractEventImageUrls(String rawEventDescription) {
