@@ -77,13 +77,13 @@
         <item name="homeLogo">@drawable/animatsuri2026_home_image</item>
         <item name="homeLogoBackground">@null</item>
         <item name="homeLogoScaleType">fitStart</item>
-        <item name="homeLogoScaleTypeDuringConvention">fitEnd</item>
+        <item name="homeLogoScaleTypeDuringConvention">fitStart</item>
         <item name="homeLogoMargin">0dp</item>
         <item name="homeLogoMarginTop">0dp</item>
         <item name="homeBottomImage">@null</item>
         <item name="homeBackground">@drawable/animatsuri2026_background</item>
         <item name="homeBackgroundDuringConvention">@drawable/animatsuri2026_background</item>
-        <item name="homeToolbarTitle">@drawable/animatsuri2026_toolbar_logo</item>
+        <item name="homeToolbarTitle">@null</item>
         <item name="homeToolbarBackground">@drawable/animatsuri2026_toolbar_background</item>
         <item name="homeTitleBackground">@drawable/animatsuri2026_home_title_background</item>
         <item name="homeShowCurrentUpcomingTitles">true</item>
