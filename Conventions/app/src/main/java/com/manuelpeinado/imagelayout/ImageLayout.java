@@ -30,6 +30,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PictureDrawable;
 import androidx.core.content.ContextCompat;
+
+import android.graphics.drawable.VectorDrawable;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
@@ -175,8 +177,10 @@ public class ImageLayout extends ViewGroup {
 			return new BitmapImageResource(((BitmapDrawable) drawable).getBitmap());
 		} else if (drawable instanceof PictureDrawable) {
 			return new PictureImageResource(((PictureDrawable) drawable).getPicture());
+		} else if (drawable instanceof VectorDrawable) {
+			return new VectorImageResource((VectorDrawable) drawable);
 		}
-		throw new RuntimeException("Drawable must be of type \"BitmapDrawable\" or \"PictureDrawable\"");
+		throw new RuntimeException("Drawable must be of type: \"BitmapDrawable\", \"PictureDrawable\" or \"VectorDrawable\", type is \"" + drawable.getClass().getSimpleName() + "\"");
     }
 
 	public void setImageResource(ImageResource image, float imageWidth, float imageHeight) {
@@ -500,6 +504,28 @@ public class ImageLayout extends ViewGroup {
 		@Override
 		public void draw(Canvas canvas, Rect srcRect, Rect destRect) {
 			canvas.drawPicture(picture, destRect);
+		}
+	}
+
+	public class VectorImageResource implements ImageResource {
+		private VectorDrawable vectorDrawable;
+		public VectorImageResource(VectorDrawable vectorDrawable) {
+			this.vectorDrawable = vectorDrawable;
+		}
+		@Override
+		public int getHeight() {
+			return vectorDrawable.getIntrinsicHeight();
+		}
+
+		@Override
+		public int getWidth() {
+			return vectorDrawable.getIntrinsicWidth();
+		}
+
+		@Override
+		public void draw(Canvas canvas, Rect srcRect, Rect destRect) {
+			vectorDrawable.setBounds(destRect);
+			vectorDrawable.draw(canvas);
 		}
 	}
 }
