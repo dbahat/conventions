@@ -160,13 +160,16 @@
     <string name="jewelry_stand">תכשיטים ואופנה</string>
     <string name="clothes_stand">ביגוד ואקססוריז</string>
     <string name="hand_made_stand">עבודות יד</string>
+    <string name="creators_stand">יוצרים</string>
     <string name="merch_stand">מרצ\'נדייז</string>
     <string name="other_stand">שונות</string>
     <string name="tabletop_games_stand">משחקי קופסה ומשחקי קלפים</string>
     <string name="role_play_games_stand">משחקי תפקידים</string>
     <string name="video_games_stand">משחקי וידאו</string>
     <string name="manga_stand">מנגה וקומיקס</string>
-    <string name="figures_stand">בובות ופיגרים</string>
+    <string name="books_stand">ספרים</string>
+    <string name="figures_stand">פיגרים</string>
+    <string name="dolls_stand">בובות</string>
     <string name="artist_stand">ציירים</string>
-    <string name="general_stand">כללי</string>
+    <string name="general_stand">כלליים</string>
 </resources>
