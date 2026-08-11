@@ -693,7 +693,7 @@ public class Animatsuri2026Convention extends AmaiConvention {
 			new Stand().withName("Kuzco").withType(StandType.MERCH).withLocationIds("e11", "e12"),
 			new Stand().withName("Sugoii ! Anime streetwear").withType(StandType.CLOTHES).withLocationIds("e13"),
 			new Stand().withName("אפריל").withType(StandType.GENERAL).withLocationIds("e14"),
-			new Stand().withName("Bored reys art").withType(StandType.ARTIST).withLocationIds("e15"),
+			new Stand().withName("Bored reys art").withType(StandType.GENERAL).withLocationIds("e15"),
 			new Stand().withName("Yael's Colors").withType(StandType.MERCH).withLocationIds("e16"),
 			new Stand().withName("מ.ש. אלבוים").withType(StandType.MANGA).withLocationIds("e17"),
 			new Stand().withName("Seal mochi kawaii shop").withType(StandType.JEWELRY).withLocationIds("e18"),
