@@ -249,6 +249,9 @@
         <item name="mapSearchBarHorizontalMargins">5dp</item>
         <item name="standIconColor">@color/animatsuri2026_pink700</item>
         <item name="standsTypeTitleColor">@color/animatsuri2026_pink700</item>
+        <!-- Stands Popup -->
+        <item name="standsMapFullScreenIconColor">@color/white</item>
+        <item name="standsMapFullScreenIconBackground">@color/white_20</item>
 
         <!-- Safe Space Screen -->
         <item name="safeSpaceLogo">@drawable/amai_safe_space</item>
