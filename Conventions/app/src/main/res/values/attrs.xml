@@ -527,6 +527,10 @@
         <attr name="standIconColor" format="color|reference"/>
         <!-- Stands popup - color for stand type title and selected stand name and location -->
         <attr name="standsTypeTitleColor" format="color|reference"/>
+        <!-- Stands popup - color for fullscreen icon in stands map -->
+        <attr name="standsMapFullScreenIconColor" format="color|reference"/>
+        <!-- Stands popup - color for fullscreen icon background in stands map -->
+        <attr name="standsMapFullScreenIconBackground" format="color|reference"/>
 
         <!-- Event Screen -->
 
