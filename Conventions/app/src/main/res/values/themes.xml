@@ -171,6 +171,10 @@
         <item name="mapDetailButtonsTextColor">?buttonTextColor</item>
         <item name="mapDetailButtonsBackground">?highlightedButtonBackground</item>
 
+        <!-- Stands Popup -->
+        <item name="standsMapFullScreenIconColor">@color/black</item>
+        <item name="standsMapFullScreenIconBackground">@color/transparent_black</item>
+
         <!-- Event activity -->
         <item name="eventToolbarColor">?toolbarBackground</item>
         <item name="eventDescriptionTextColor">?eventTitleTextColor</item>
@@ -395,6 +399,10 @@
         <item name="mapShelterButtonBackground">?highlightedButtonBackground</item>
         <item name="mapDetailButtonsTextColor">?buttonTextColor</item>
         <item name="mapDetailButtonsBackground">?highlightedButtonBackground</item>
+
+        <!-- Stands Popup -->
+        <item name="standsMapFullScreenIconColor">@color/black</item>
+        <item name="standsMapFullScreenIconBackground">@color/transparent_black</item>
 
         <!-- Event activity -->
         <item name="eventToolbarColor">?toolbarBackground</item>
