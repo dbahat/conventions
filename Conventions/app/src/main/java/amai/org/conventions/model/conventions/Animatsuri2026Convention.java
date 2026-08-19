@@ -764,7 +764,7 @@ public class Animatsuri2026Convention extends AmaiConvention {
 			new Stand().withName("Scylla art").withType(StandType.CREATORS).withLocationIds("f50"),
 			new Stand().withName("Stuffer").withType(StandType.CREATORS).withLocationIds("f51"),
 			new Stand().withName("Redkon Art").withType(StandType.CREATORS).withLocationIds("f52"),
-			new Stand().withName("מיה").withType(StandType.CREATORS).withLocationIds("f53", "f54"),
+			new Stand().withName("Baaahd Girl").withType(StandType.CREATORS).withLocationIds("f53", "f54"),
 			new Stand().withName("דניהלמן ארט").withType(StandType.CREATORS).withLocationIds("f55"),
 			new Stand().withName("Tslil jewelry").withType(StandType.CREATORS).withLocationIds("f56"),
 			new Stand().withName("Cherry Staff🍒✨").withType(StandType.CREATORS).withLocationIds("f57"),
