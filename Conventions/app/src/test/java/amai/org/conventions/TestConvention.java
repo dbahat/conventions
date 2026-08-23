@@ -3,6 +3,7 @@ package amai.org.conventions;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 import amai.org.conventions.feedback.forms.EventFeedbackForm;
@@ -11,6 +12,8 @@ import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.Halls;
 import amai.org.conventions.model.ImageIdToImageResourceMapper;
+import amai.org.conventions.model.Stand;
+import amai.org.conventions.model.StandTypes;
 import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.networking.ModelParser;
@@ -59,6 +62,11 @@ public class TestConvention extends Convention {
     @Override
     protected Halls initHalls() {
         return new Halls(new ArrayList<>());
+    }
+
+    @Override
+    protected StandTypes initStandTypes() {
+        return null;
     }
 
     @Override

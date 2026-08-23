@@ -1,6 +1,7 @@
 package amai.org.conventions.map;
 
 import android.content.res.Resources;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,14 +9,15 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import amai.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.adapters.SectionedRecyclerViewAdapter;
 import amai.org.conventions.model.Stand;
+import amai.org.conventions.model.StandType;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import amai.org.conventions.R;
 
-public class StandsRecyclerAdapter extends SectionedRecyclerViewAdapter<Stand, Stand.StandType, StandViewHolder, StandsRecyclerAdapter.SectionViewHolder> {
+public class StandsRecyclerAdapter extends SectionedRecyclerViewAdapter<Stand, StandType, StandViewHolder, StandsRecyclerAdapter.SectionViewHolder> {
     private final boolean showLocations;
     private List<Stand> stands;
     private boolean colorImages;
@@ -46,6 +48,7 @@ public class StandsRecyclerAdapter extends SectionedRecyclerViewAdapter<Stand, S
         Stand stand = stands.get(position);
         holder.setStand(stand, selectedStandName != null && selectedStandName.equals(stand.getName()), null);
         holder.itemView.setOnClickListener(view -> onClickListener.onItemClicked(position));
+        holder.itemView.setOnCreateContextMenuListener((ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) -> onClickListener.onItemContextMenu(position, menu));
     }
 
     public void setOnClickListener(OnClickListener onClickListener) {
@@ -53,7 +56,7 @@ public class StandsRecyclerAdapter extends SectionedRecyclerViewAdapter<Stand, S
     }
 
     @Override
-    protected Stand.StandType getSection(Stand item) {
+    protected StandType getSection(Stand item) {
         return item.getType();
     }
 
@@ -64,9 +67,9 @@ public class StandsRecyclerAdapter extends SectionedRecyclerViewAdapter<Stand, S
     }
 
     @Override
-    public void onBindSectionViewHolder(SectionViewHolder sectionViewHolder, Stand.StandType section) {
+    public void onBindSectionViewHolder(SectionViewHolder sectionViewHolder, StandType section) {
         Resources resources = sectionViewHolder.title.getResources();
-        sectionViewHolder.title.setText(resources.getString(section.getTitle()));
+        sectionViewHolder.title.setText(section.getName());
     }
 
     @Override
@@ -76,6 +79,7 @@ public class StandsRecyclerAdapter extends SectionedRecyclerViewAdapter<Stand, S
 
     public interface OnClickListener {
         void onItemClicked(int position);
+        void onItemContextMenu(int position, ContextMenu menu);
     }
 
     public void setSelectedStandName(String selectedStandName) {

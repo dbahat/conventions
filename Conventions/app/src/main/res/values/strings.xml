@@ -134,6 +134,10 @@
     <string name="show_stand">הצגת דוכן</string>
     <string name="stand_not_found">לא נמצא דוכן עם השם %s</string>
     <string name="too_many_stands_found">נמאו מספר דוכנים עם השם %s, יש לבחור דוכן מהרשימה כדי להציג את מיקומו</string>
+    <string name="stand_info">מידע נוסף</string>
+    <string name="stand_website"><![CDATA[<a href=\"%s\">לאתר</a>]]></string>
+    <string name="stand_types">קטגוריות: %s</string>
+    <string name="stand_location">מיקום: %s, %s</string>
     <string name="map_show_shelters">מרחבים מוגנים</string>
     <string name="goto_floor">עבור ל%s</string>
     <string name="next_event_start">האירוע הבא מתחיל בעוד %1$s ב%2$s</string>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="10dp">
+
+    <TextView
+        android:id="@+id/stand_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="זה דוכן יפה מאוד עם הרבה מוצרים מגניבים. התיאור יכול להיות מאוד ארוך\nכולל כמה שורות בתוכו!"
+        android:textSize="14sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"/>
+
+    <TextView
+        android:id="@+id/stand_website"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="כתובת: https://my.website.com"
+        android:textSize="14sp"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"/>
+
+    <TextView
+        android:id="@+id/stand_types"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="קטגוריות: יוצרים, כללים, בובות"
+        android:textSize="14sp"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"/>
+
+    <TextView
+        android:id="@+id/stand_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="מיקום: אולם טדי, e12-e15"
+        android:textSize="14sp"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"/>
+</LinearLayout>

@@ -952,7 +952,7 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
 	private void setupStandsLocation(final MapLocation location) {
 		// Only show button if there is more than 1 stand
-		if (location.getSinglePlace(StandsArea.class) != null && location.getSinglePlace(StandsArea.class).getStands().size() > 1) {
+		if (location.getSinglePlace(StandsArea.class) != null && Convention.getInstance().getStandsByStandArea(location.getSinglePlace(StandsArea.class)).size() > 1) {
 			gotoStandsListButton.setVisibility(View.VISIBLE);
 			gotoStandsListButton.setOnClickListener(new View.OnClickListener() {
 				@Override

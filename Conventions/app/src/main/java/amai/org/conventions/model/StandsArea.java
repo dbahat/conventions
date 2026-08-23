@@ -13,7 +13,6 @@ public class StandsArea extends Place implements Serializable {
 	private Integer imageResource;
 	private float imageWidth;
 	private float imageHeight;
-	private List<Stand> stands = Collections.emptyList();
 	private StandLocations standLocations = new StandLocations();
 
 	public StandsArea() {
@@ -47,23 +46,6 @@ public class StandsArea extends Place implements Serializable {
 		return this;
 	}
 
-	public void setStands(List<Stand> stands) {
-		this.stands = stands;
-
-		for (Stand stand : stands) {
-			stand.setStandsArea(this);
-		}
-	}
-
-	public List<Stand> getStands() {
-		return stands;
-	}
-
-	public StandsArea withStands(List<Stand> stands) {
-		setStands(stands);
-		return this;
-	}
-
 	public void setStandLocations(StandLocations standLocations) {
 		this.standLocations = standLocations;
 	}
@@ -81,14 +63,14 @@ public class StandsArea extends Place implements Serializable {
 	public boolean equals(Object o) {
 		if (o instanceof StandsArea) {
 			StandsArea other = (StandsArea) o;
-			return Objects.equals(name, other.name) && Objects.equals(stands, other.stands);
+			return Objects.equals(name, other.name);
 		}
 		return false;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(name, stands);
+		return Objects.hash(name);
 	}
 
 	public float getImageWidth() {
