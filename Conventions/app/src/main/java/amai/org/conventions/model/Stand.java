@@ -7,16 +7,19 @@ import java.util.List;
 
 public class Stand {
 	private String name;
-	private StandType type;
+	private String description;
+	private String website;
+	private List<StandType> types;
 	private StandsArea standsArea;
 	private List<String> locationIds;
 
 	// Calculated from stands area and location IDs
-	private List<StandLocation> locations;
-	private String locationName;
-	private String sort;
-	private float imageX = -1;
-	private float imageY = -1;
+	// They are transient so we don't serialize them. They are re-calculated when deserialized.
+	private transient List<StandLocation> locations;
+	private transient String locationName;
+	private transient String sort;
+	private transient float imageX = -1;
+	private transient float imageY = -1;
 
 	public String getName() {
 		return name;
@@ -31,16 +34,46 @@ public class Stand {
 		return this;
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Stand withDescription(String description) {
+		setDescription(description);
+		return this;
+	}
+
+	public String getWebsite() {
+		return website;
+	}
+
+	public void setWebsite(String website) {
+		this.website = website;
+	}
+
+	public Stand withWebsite(String website) {
+		setWebsite(website);
+		return this;
+	}
+
 	public StandType getType() {
-		return type;
+		return types.get(0);
 	}
 
-	public void setType(StandType type) {
-		this.type = type;
+	public List<StandType> getTypes() {
+		return types;
 	}
 
-	public Stand withType(StandType type) {
-		setType(type);
+	public void setTypes(List<StandType> types) {
+		this.types = types;
+	}
+
+	public Stand withTypes(List<StandType> types) {
+		setTypes(types);
 		return this;
 	}
 
@@ -72,8 +105,8 @@ public class Stand {
 		standLocationsUpdated();
 	}
 
-	public Stand withLocationIds(String... locationIds) {
-		setLocationIds(Arrays.asList(locationIds));
+	public Stand withLocationIds(List<String> locationIds) {
+		setLocationIds(locationIds);
 		return this;
 	}
 
@@ -182,12 +215,5 @@ public class Stand {
 			nameBuilder.append("-").append(lastConsecutive.getId());
 		}
 		return nameBuilder.toString();
-	}
-
-	public interface StandType {
-		int getTitle();
-		int getImage();
-		int ordinal();
-		int compareTo(StandType t);
 	}
 }

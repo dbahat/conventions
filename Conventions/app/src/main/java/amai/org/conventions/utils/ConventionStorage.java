@@ -33,6 +33,9 @@ import java.util.Map;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import amai.org.conventions.model.ConventionEvent;
+import amai.org.conventions.model.Stand;
+import amai.org.conventions.model.StandType;
+import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.SecondHandForm;
 import amai.org.conventions.model.SecondHandItem;
@@ -40,6 +43,7 @@ import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.Update;
 import amai.org.conventions.model.conventions.Convention;
 import androidx.annotation.RawRes;
+import androidx.annotation.VisibleForTesting;
 
 public class ConventionStorage {
 	private static final String TAG = ConventionStorage.class.getCanonicalName();
@@ -60,17 +64,26 @@ public class ConventionStorage {
 	private boolean hasInitialEventsFile;
 	private int initialEventsFileResource = 0;
 	private int eventsFileVersion = 0;
-
-	public ConventionStorage(Convention convention, @RawRes int initialEventsFile, int eventsFileVersion) {
-		this.convention = convention;
-		this.hasInitialEventsFile = true;
-		this.initialEventsFileResource = initialEventsFile;
-		this.eventsFileVersion = eventsFileVersion;
-	}
+	private boolean hasInitialStandsFile;
+	private int initialStandsFileResource = 0;
 
 	public ConventionStorage(Convention convention) {
 		this.convention = convention;
 		hasInitialEventsFile = false;
+		hasInitialStandsFile = false;
+	}
+
+	public ConventionStorage withInitialEventsFile(@RawRes int initialEventsFile, int eventsFileVersion) {
+		this.hasInitialEventsFile = true;
+		this.initialEventsFileResource = initialEventsFile;
+		this.eventsFileVersion = eventsFileVersion;
+		return this;
+	}
+
+	public ConventionStorage withInitialStandsFile(@RawRes int initialStandsFile) {
+		this.hasInitialStandsFile = true;
+		this.initialStandsFileResource = initialStandsFile;
+		return this;
 	}
 
 	private String getConventionFileName(String file) {
@@ -136,12 +149,17 @@ public class ConventionStorage {
 		savePrivateFile(createGsonSerializer().toJson(userInput), getEventUserInputFileName());
 	}
 
-	private static Gson createGsonSerializer() {
+	@VisibleForTesting
+	public static Gson createGsonSerializer() {
 		return new GsonBuilder()
 				.registerTypeAdapter(Date.class, new DateAdapter())
 				// Save smiley answers according to enum value name instead of toString()
 				.registerTypeAdapter(FeedbackQuestion.Smiley3PointAnswer.class, new EnumSerializer<>())
 				.registerTypeAdapter(FeedbackQuestion.Smiley5PointAnswer.class, new EnumSerializer<>())
+				// Save stand type names only
+				.registerTypeAdapter(StandType.class, new StandTypeAdapter())
+				// Save stands area name only
+				.registerTypeAdapter(StandsArea.class, new StandsAreaAdapter())
 				.create();
 	}
 
@@ -149,6 +167,8 @@ public class ConventionStorage {
 		return new GsonBuilder()
 				.registerTypeAdapter(Date.class, new DateAdapter())
 				.setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+				.registerTypeAdapter(StandType.class, new StandTypeAdapter())
+				.registerTypeAdapter(StandsArea.class, new StandsAreaAdapter())
 				.create();
 	}
 
@@ -287,6 +307,8 @@ public class ConventionStorage {
 		readUserInputFromFile();
 		readConventionFeedbackFromFile();
 		readUpdatesFromFile();
+
+		readStandsFromLocalResources();
 	}
 
 	private boolean tryReadEventsFromCache() {
@@ -329,6 +351,35 @@ public class ConventionStorage {
 			events = new ArrayList<>();
 		}
 		Convention.getInstance().setEvents(events);
+	}
+
+	private void readStandsFromLocalResources() {
+		if (!hasInitialStandsFile) {
+			// The app can work without stands, silently skip loading them
+			return;
+		}
+
+		// No need to lock here, since we only read from the resources and only during app launch.
+		List<Stand> stands = null;
+		try {
+			stands = readJsonAndClose(new TypeToken<List<Stand>>() {
+				}.getType(),
+				context.getResources().openRawResource(initialStandsFileResource));
+		} catch (Exception e) {
+			Log.e(TAG, "Could not read initial application stands cache", e);
+		}
+
+		// We will load it from the internet if possible
+		if (stands == null) {
+			stands = new ArrayList<>();
+		}
+
+		// Enrich data, since we don't save everything in the file
+		for (Stand stand : stands) {
+			convention.enrichStand(stand);
+		}
+
+		Convention.getInstance().setStands(stands);
 	}
 
 	private void readUserInputFromFile() {
@@ -488,6 +539,30 @@ public class ConventionStorage {
 			} catch (ParseException e) {
 				throw new JsonParseException("Date cannot be parsed", e);
 			}
+		}
+	}
+
+	private static class StandTypeAdapter implements JsonSerializer<StandType>, JsonDeserializer<StandType> {
+		@Override
+		public JsonElement serialize(StandType src, Type typeOfSrc, JsonSerializationContext context) {
+			return new JsonPrimitive(src.getName());
+		}
+
+		@Override
+		public StandType deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+			return new StandType().withName(json.getAsString());
+		}
+	}
+
+	private static class StandsAreaAdapter implements JsonSerializer<StandsArea>, JsonDeserializer<StandsArea> {
+		@Override
+		public JsonElement serialize(StandsArea src, Type typeOfSrc, JsonSerializationContext context) {
+			return new JsonPrimitive(src.getName());
+		}
+
+		@Override
+		public StandsArea deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+			return new StandsArea().withName(json.getAsString());
 		}
 	}
 }

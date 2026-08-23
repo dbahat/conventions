@@ -6,6 +6,8 @@ import android.graphics.Color;
 
 import sff.org.conventions.R;
 import amai.org.conventions.ThemeAttributes;
+import amai.org.conventions.model.StandType;
+import amai.org.conventions.model.StandTypes;
 
 import java.io.Serializable;
 import java.net.HttpURLConnection;
@@ -81,6 +83,8 @@ public abstract class Convention implements Serializable {
 	private FeedbackForm conventionFeedbackForm;
 	private EventFeedbackForm eventFeedbackForm;
 
+	private StandTypes standTypes;
+	private List<Stand> stands;
 	private ConventionMap map;
 	private Calendar startDate;
 	private Calendar endDate;
@@ -97,6 +101,7 @@ public abstract class Convention implements Serializable {
 	private double latitude;
 
 	private final ReentrantReadWriteLock eventLockObject = new ReentrantReadWriteLock();
+	private final ReentrantReadWriteLock standsLockObject = new ReentrantReadWriteLock();
 	private ConventionStorage conventionStorage;
 
 
@@ -176,7 +181,8 @@ public abstract class Convention implements Serializable {
 		this.ticketsLastUpdateURL = initTicketsLastUpdateURL();
 		this.updatesURL = initUpdatesURL();
 		this.halls = initHalls();
-		this.map = initMap();
+		this.standTypes = initStandTypes(); // Must be called before initializing the stands
+		this.map = initMap(); // Must be called before initializing the stands
 		if (this.map == null) {
 			this.map = new ConventionMap();
 		}
@@ -202,6 +208,8 @@ public abstract class Convention implements Serializable {
 	protected abstract URL initTicketsLastUpdateURL();
 
 	protected abstract Halls initHalls();
+
+	protected abstract StandTypes initStandTypes();
 
 	protected abstract ConventionMap initMap();
 
@@ -303,6 +311,15 @@ public abstract class Convention implements Serializable {
 		}
 	}
 
+	public void setStands(List<Stand> stands) {
+		standsLockObject.writeLock().lock();
+		try {
+			this.stands = stands;
+		} finally {
+			standsLockObject.writeLock().unlock();
+		}
+	}
+
 	public List<ConventionEvent> getEvents() {
 		eventLockObject.readLock().lock();
 		try {
@@ -396,6 +413,10 @@ public abstract class Convention implements Serializable {
 
 	public Halls getHalls() {
 		return halls;
+	}
+
+	public StandTypes getStandTypes() {
+		return standTypes;
 	}
 
 	public ConventionMap getMap() {
@@ -764,6 +785,19 @@ public abstract class Convention implements Serializable {
 		return null;
 	}
 
+	public StandsArea findStandsAreaByName(String name) {
+		for (MapLocation location : map.getLocations()) {
+			List<? extends Place> places = location.getPlaces();
+			for (Place place : places) {
+				if (place instanceof StandsArea && name.equals(place.getName())) {
+					return (StandsArea) place;
+				}
+			}
+		}
+
+		return null;
+	}
+
 	public MapLocation findStandsAreaLocation(int id) {
 		for (MapLocation location : map.getLocations()) {
 			List<? extends Place> places = location.getPlaces();
@@ -778,34 +812,21 @@ public abstract class Convention implements Serializable {
 	}
 
 	public boolean hasStands() {
-		for (MapLocation location : map.getLocations()) {
-			List<? extends Place> places = location.getPlaces();
-			for (Place place : places) {
-				if (place instanceof StandsArea &&
-						((StandsArea) place).getStands().size() > 0) {
-					return true;
-				}
-			}
-		}
-		return false;
+		List<Stand> stands = this.getStands();
+		return stands != null && !stands.isEmpty();
 	}
 
 	public List<Stand> getStands() {
-		Set<Integer> foundStandAreas = new HashSet<>();
-		List<Stand> stands = new LinkedList<>();
-		for (MapLocation location : map.getLocations()) {
-			List<? extends Place> places = location.getPlaces();
-			for (Place place : places) {
-				if (place instanceof StandsArea) {
-					StandsArea area = (StandsArea) place;
-					if (!foundStandAreas.contains(area.getId())) {
-						stands.addAll(area.getStands());
-						foundStandAreas.add(area.getId());
-					}
-				}
-			}
+		eventLockObject.readLock().lock();
+		try {
+			return this.stands;
+		} finally {
+			eventLockObject.readLock().unlock();
 		}
-		return stands;
+	}
+
+	public List<Stand> getStandsByStandArea(StandsArea area) {
+		return CollectionUtils.filter(this.getStands(), item -> item.getStandsArea() == area || (item.getStandsArea() != null && area != null && item.getStandsArea().getId() == area.getId()));
 	}
 
 	public abstract ModelParser getModelParser();
@@ -894,5 +915,17 @@ public abstract class Convention implements Serializable {
 	public boolean isEventOngoing(ConventionEvent event) {
 		//noinspection deprecation - this is on purpose
 		return event.isOngoing();
+	}
+
+	// Add back information we didn't save on the event when serializing it.
+	// This should be in sync with the GSON serializers in ConventionStorage.
+	public void enrichStand(Stand stand) {
+		if (stand.getStandsArea().getName() != null) {
+			stand.setStandsArea(this.findStandsAreaByName(stand.getStandsArea().getName()));
+		}
+		if (stand.getTypes() != null) {
+			StandTypes standTypes = getStandTypes();
+			stand.setTypes(CollectionUtils.map(stand.getTypes(), standType -> standTypes.findByName(standType.getName())));
+		}
 	}
 }
