@@ -40,6 +40,7 @@ import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.Floor;
 import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.model.Stand;
+import amai.org.conventions.model.StandType;
 import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
@@ -551,7 +552,10 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 					stands = CollectionUtils.filter(stands, new CollectionUtils.Predicate<Stand>() {
 						@Override
 						public boolean where(Stand item) {
-							return searchTerm == null || searchTerm.isEmpty() || item.getName().toLowerCase().contains(searchTerm.toLowerCase());
+							return searchTerm == null || searchTerm.isEmpty() ||
+								item.getName().toLowerCase().contains(searchTerm.toLowerCase()) ||
+								(item.getDescription() != null && item.getDescription().toLowerCase().contains(searchTerm.toLowerCase())) ||
+								CollectionUtils.filter(CollectionUtils.map(item.getTypes(), StandType::getName), name -> name.toLowerCase().contains(searchTerm.toLowerCase())).size() > 0;
 						}
 					});
 					Collections.sort(stands, new Comparator<Stand>() {
