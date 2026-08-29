@@ -37,7 +37,6 @@ import amai.org.conventions.networking.ModelRefresher;
 public class ProgrammeActivity extends NavigationActivity implements ProgrammeDayFragment.EventsListener {
 
 	public static final String EXTRA_DELAY_SCROLLING = "DelayScrollingExtra";
-	public static final int MAX_DAYS_NUMBER = 5;
 	private static final String STATE_NAVIGATE_ICON_MODIFIED = "StateNavigateIconModified";
 	private static final String STATE_SELECTED_DATE_INDEX = "StateSelectedDateIndex";
 
