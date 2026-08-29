@@ -1,0 +1,91 @@
+{
+  "project_info": {
+    "project_number": "377234495790",
+    "firebase_url": "https://sff-conventions.firebaseio.com",
+    "project_id": "sff-conventions",
+    "storage_bucket": "sff-conventions.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:377234495790:android:d2ff041601be5128",
+        "android_client_info": {
+          "package_name": "sff.org.conventions"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "377234495790-m5bjqq9715ov2g7p211m7asajebegokp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8udZy2kfO64lxoaheiRKhAiKW71B9vp8"
+        },
+        {
+          "current_key": "AIzaSyC2Xs7P4abAbGrWSpJwgs-QCixZoe1Xl74"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "377234495790-m5bjqq9715ov2g7p211m7asajebegokp.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "377234495790-11qk70872sstae5i1a130ee45249n4kd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "SF-F.Conventions",
+                "app_store_id": "1161141212"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:377234495790:android:d2ff041601be5128",
+        "android_client_info": {
+          "package_name": "sff.org.conventions.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "377234495790-m5bjqq9715ov2g7p211m7asajebegokp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8udZy2kfO64lxoaheiRKhAiKW71B9vp8"
+        },
+        {
+          "current_key": "AIzaSyC2Xs7P4abAbGrWSpJwgs-QCixZoe1Xl74"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "377234495790-m5bjqq9715ov2g7p211m7asajebegokp.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "377234495790-11qk70872sstae5i1a130ee45249n4kd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "SF-F.Conventions",
+                "app_store_id": "1161141212"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
