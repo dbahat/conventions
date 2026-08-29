@@ -206,7 +206,6 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 		switch (item.getItemId()) {
 			case R.id.programme_navigate_to_my_events:
 				navigateToMyEventsIconModified = false;
-	            item.getIcon().clearColorFilter();
 				navigateToActivity(MyEventsActivity.class);
 				return true;
 			case R.id.programme_navigate_to_feedback:
