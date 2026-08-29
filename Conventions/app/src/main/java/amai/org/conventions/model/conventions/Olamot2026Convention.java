@@ -30,6 +30,7 @@ import amai.org.conventions.model.ImageIdToImageResourceMapper;
 import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.model.Place;
 import amai.org.conventions.model.Shelter;
+import amai.org.conventions.model.StandTypes;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 import amai.org.conventions.utils.Dates;
@@ -102,7 +103,8 @@ public class Olamot2026Convention extends SffConvention {
 
 	@Override
 	protected ConventionStorage initStorage() {
-		return new ConventionStorage(this, R.raw.olamot2026_convention_events, 1);
+		return new ConventionStorage(this)
+			.withInitialEventsFile(R.raw.olamot2026_convention_events, 1);
 	}
 
 	@Override
@@ -192,6 +194,11 @@ public class Olamot2026Convention extends SffConvention {
 			++i;
 		}
 		return new Halls(halls);
+	}
+
+	@Override
+	protected StandTypes initStandTypes() {
+		return new StandTypes(Collections.emptyList());
 	}
 
 	@Override

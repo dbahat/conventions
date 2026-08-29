@@ -3,7 +3,7 @@ package amai.org.conventions.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import amai.org.conventions.R;
+import sff.org.conventions.R;
 import amai.org.conventions.utils.CollectionUtils;
 
 public class StandTypes {
