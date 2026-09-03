@@ -383,6 +383,10 @@ public class ConventionStorage {
 			tryDeleteCacheFile(getStandsFileName());
 			return false;
 		}
+		// Enrich data, since we don't save everything in the file
+		for (Stand stand : stands) {
+			convention.enrichStand(stand);
+		}
 		convention.setStands(stands);
 		return true;
 	}

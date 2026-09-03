@@ -411,7 +411,11 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 					searchResults.setAdapter(locationsSearchResultsAdapter);
 				} else {
 					showOnlyHallsCheckbox.setVisibility(View.GONE);
-					showOnlyDiscountStandsCheckbox.setVisibility(View.VISIBLE);
+					if (showOnlyDiscountsStandsCheckbox()) {
+						showOnlyDiscountStandsCheckbox.setVisibility(View.VISIBLE);
+					} else {
+						showOnlyDiscountStandsCheckbox.setVisibility(View.GONE);
+					}
 					searchResults.setAdapter(standsSearchResultsAdapter);
 				}
 				applySearchFiltersInBackground();
@@ -514,6 +518,20 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 				}
 			}
 		});
+	}
+
+	private boolean showOnlyDiscountsStandsCheckbox() {
+		List<Stand> stands = Convention.getInstance().getStands();
+		if (stands.isEmpty()) {
+			return false;
+		}
+		boolean initialValue = stands.get(0).hasDiscount();
+		for (Stand stand : stands) {
+			if (stand.hasDiscount() != initialValue) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private void selectStand(Stand stand, int delay) {
