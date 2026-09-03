@@ -218,7 +218,7 @@
         <item name="mapSearchBarBackground">@drawable/olamot2026_search_bar_background_purple</item>
         <item name="mapSearchBarHorizontalMargins">5dp</item>
         <item name="standIconColor">@color/olamot2026_purple1000</item>
-        <item name="standsTypeTitleColor">@color/olamot2026_purple1000</item>
+        <item name="standsTypeTitleColor">@color/olamot2026_blue700</item>
         <item name="mapShelterButtonBackground">@drawable/highlighted_button</item>
         <!-- Second Hand Screen -->
         <item name="secondHandBackground">?activitiesBackground</item>

@@ -10,6 +10,8 @@ import amai.org.conventions.networking.EventTicketsParser;
 import amai.org.conventions.networking.ModelParser;
 import amai.org.conventions.networking.SffEventTicketsParser;
 import amai.org.conventions.networking.SffModelParser;
+import amai.org.conventions.networking.SffStandsParser;
+import amai.org.conventions.networking.StandsParser;
 import amai.org.conventions.utils.HttpConnectionCreator;
 import amai.org.conventions.utils.URLUtils;
 
@@ -17,6 +19,11 @@ public abstract class SffConvention extends Convention {
 	@Override
 	public ModelParser getModelParser() {
 		return new SffModelParser();
+	}
+
+	@Override
+	public StandsParser getStandsParser() {
+		return new SffStandsParser();
 	}
 
 	@Override
