@@ -1,6 +1,5 @@
 package amai.org.conventions.map;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -22,6 +21,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
@@ -33,10 +33,9 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
-import amai.org.conventions.ActivitiesActivity;
+import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.ConditionalSwipeVerticalViewPager;
-import amai.org.conventions.events.activities.EventActivity;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.DetailsActivityLocation;
 import amai.org.conventions.model.Floor;
@@ -46,6 +45,7 @@ import amai.org.conventions.model.StandType;
 import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
+import amai.org.conventions.networking.StandsRefresher;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Objects;
 import amai.org.conventions.utils.Views;
@@ -54,6 +54,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+import sff.org.conventions.BuildConfig;
 import sff.org.conventions.R;
 
 public class MapActivity extends NavigationActivity implements MapFloorFragment.OnMapFloorEventListener {
@@ -62,6 +63,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 
 	private static final String STATE_SEARCH_TERM = "StateMapSearchTerm";
 	private static final String STATE_MAP_SEARCH_ONLY_HALLS = "StateMapSearchOnlyHalls";
+	private static final String STATE_MAP_SEARCH_ONLY_DISCOUNT_STANDS = "StateMapSearchOnlyDiscountStands";
 	private static final String STATE_MAP_SEARCH_OPEN = "StateMapSearchOpen";
 
 	private static final ConventionMap map = Convention.getInstance().getMap();
@@ -78,11 +80,13 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 	private TextView noResultsFound;
 	private ListView searchResults;
 	private CheckBox showOnlyHallsCheckbox;
+	private CheckBox showOnlyDiscountStandsCheckbox;
 	private EditText searchText;
 	private MapLocationsAdapter locationsSearchResultsAdapter;
-	private StandsAdapter standsSearchResultsAdapter;
+	private StandsSearchAdapter standsSearchResultsAdapter;
 	private String searchTerm;
 	private boolean showOnlyHalls;
+	private boolean showOnlyDiscountStands;
 	private boolean isSearchClosing;
 	private Menu menu;
 
@@ -131,6 +135,25 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, false, findViewById(R.id.map_search_pane));
 
 		handleDeepLinks();
+
+		StandsRefresher.getInstance().refreshFromServer(false, new StandsRefresher.OnRefreshFinishedListener() {
+			@Override
+			public void onError(Exception error) {
+				if (BuildConfig.DEBUG) {
+					ConventionsApplication.runOnCurrentActivityUiThread(activity -> {
+						Toast.makeText(activity, "Error refreshing stands: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+					});
+				}
+			}
+
+			@Override
+			public void onSuccess() {
+				// Update search results
+				if (isSearchOpen() && !isLocationsSearch() && standsSearchResultsAdapter != null) {
+					applySearchFiltersInBackground();
+				}
+			}
+		});
 	}
 
 	@Override
@@ -315,6 +338,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		outState.putInt(EXTRA_FLOOR_NUMBER, currentFloorNumber);
 		outState.putString(STATE_SEARCH_TERM, searchText.getText().toString());
 		outState.putBoolean(STATE_MAP_SEARCH_ONLY_HALLS, showOnlyHallsCheckbox.isChecked());
+		outState.putBoolean(STATE_MAP_SEARCH_ONLY_DISCOUNT_STANDS, showOnlyDiscountStandsCheckbox.isChecked());
 		outState.putBoolean(STATE_MAP_SEARCH_OPEN, isSearchOpen());
 	}
 
@@ -325,6 +349,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		noResultsFound = (TextView) findViewById(R.id.map_search_no_results_found);
 		searchResults = (ListView) findViewById(R.id.map_search_results);
 		showOnlyHallsCheckbox = (CheckBox) findViewById(R.id.map_search_show_only_halls);
+		showOnlyDiscountStandsCheckbox = (CheckBox) findViewById(R.id.map_search_show_only_discount_stands);
 		searchText = (EditText) findViewById(R.id.map_search_text);
 
 		isSearchClosing = false;
@@ -332,6 +357,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		// Restore state or use defaults
 		searchTerm = (savedInstanceState != null ? savedInstanceState.getString(STATE_SEARCH_TERM) : null);
 		showOnlyHalls = (savedInstanceState != null && savedInstanceState.getBoolean(STATE_MAP_SEARCH_ONLY_HALLS));
+		showOnlyDiscountStands = (savedInstanceState != null && savedInstanceState.getBoolean(STATE_MAP_SEARCH_ONLY_DISCOUNT_STANDS));
 		boolean showSearch = (savedInstanceState != null && savedInstanceState.getBoolean(STATE_MAP_SEARCH_OPEN));
 		searchContainer.setVisibility(showSearch ? View.VISIBLE : View.GONE);
 
@@ -381,9 +407,11 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 				getCurrentFloorFragment().resetState();
 				if (tab.getId() == R.id.mapSearchTabLocation) {
 					showOnlyHallsCheckbox.setVisibility(View.VISIBLE);
+					showOnlyDiscountStandsCheckbox.setVisibility(View.GONE);
 					searchResults.setAdapter(locationsSearchResultsAdapter);
 				} else {
 					showOnlyHallsCheckbox.setVisibility(View.GONE);
+					showOnlyDiscountStandsCheckbox.setVisibility(View.VISIBLE);
 					searchResults.setAdapter(standsSearchResultsAdapter);
 				}
 				applySearchFiltersInBackground();
@@ -400,7 +428,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 
 		// Setup locations and stands search results list
 		locationsSearchResultsAdapter = new MapLocationsAdapter(Collections.<MapLocation>emptyList());
-		standsSearchResultsAdapter = new StandsAdapter(Collections.<Stand>emptyList(), false, false, null);
+		standsSearchResultsAdapter = new StandsSearchAdapter(Collections.<Stand>emptyList());
 
 		if (showSearch) {
 			locationsSearchResultsAdapter.setFloor(map.getLastLookedAtFloor());
@@ -472,6 +500,20 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 				}
 			}
 		});
+
+		// Setup "show only discount stands" checkbox
+		showOnlyDiscountStandsCheckbox.setChecked(showOnlyDiscountStands);
+		showOnlyDiscountStandsCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				showOnlyDiscountStands = isChecked;
+				// Only apply the filters if the user is currently searching
+				// (otherwise it might happen when restoring the saved state)
+				if (isSearchOpen()) {
+					applySearchFiltersInBackground();
+				}
+			}
+		});
 	}
 
 	private void selectStand(Stand stand, int delay) {
@@ -511,6 +553,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 	private void applySearchFiltersInBackground() {
 		final String searchTerm = this.searchTerm;
 		final boolean showOnlyHalls = this.showOnlyHalls;
+		final boolean showOnlyDiscountStands = this.showOnlyDiscountStands;
 		final Floor floor = getCurrentFloorFragment().getFloor();
 
 		new AsyncTask<Void, Void, List<?>>() {
@@ -555,10 +598,11 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 					stands = CollectionUtils.filter(stands, new CollectionUtils.Predicate<Stand>() {
 						@Override
 						public boolean where(Stand item) {
-							return searchTerm == null || searchTerm.isEmpty() ||
+							return (searchTerm == null || searchTerm.isEmpty() ||
 								item.getName().toLowerCase().contains(searchTerm.toLowerCase()) ||
 								(item.getDescription() != null && item.getDescription().toLowerCase().contains(searchTerm.toLowerCase())) ||
-								CollectionUtils.filter(CollectionUtils.map(item.getTypes(), StandType::getName), name -> name.toLowerCase().contains(searchTerm.toLowerCase())).size() > 0;
+								CollectionUtils.filter(CollectionUtils.map(item.getTypes(), StandType::getName), name -> name.toLowerCase().contains(searchTerm.toLowerCase())).size() > 0) &&
+								(!showOnlyDiscountStands || item.hasDiscount());
 						}
 					});
 					Collections.sort(stands, new Comparator<Stand>() {

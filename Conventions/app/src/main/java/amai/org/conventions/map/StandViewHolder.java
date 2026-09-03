@@ -1,17 +1,15 @@
 package amai.org.conventions.map;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 
-import amai.org.conventions.model.Floor;
-import amai.org.conventions.model.MapLocation;
-import amai.org.conventions.model.conventions.Convention;
-import amai.org.conventions.utils.Objects;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.view.ContextMenu;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import sff.org.conventions.R;
@@ -20,19 +18,17 @@ import amai.org.conventions.model.Stand;
 
 public class StandViewHolder extends RecyclerView.ViewHolder {
 	private final TextView standName;
-	private final TextView standFloor;
+	private final Button infoButton;
 	private final boolean showLocation;
-	private final boolean colorImage;
 
-	public StandViewHolder(View itemView, boolean colorImage, boolean showLocation) {
+	public StandViewHolder(View itemView, boolean showLocation) {
 		super(itemView);
-		standName = (TextView) itemView.findViewById(R.id.stand_name);
-		standFloor = itemView.findViewById(R.id.stand_floor);
-		this.colorImage = colorImage;
+		standName = itemView.findViewById(R.id.stand_name);
+		infoButton = itemView.findViewById(R.id.open_stand_info);
 		this.showLocation = showLocation;
 	}
 
-	public void setStand(Stand stand, boolean isSelected, Floor showFloorIfDifferent) {
+	public void setStand(Stand stand, boolean isSelected, boolean showDivider, OnClickListener onClickListener) {
 		String name = stand.getName();
 		String locationName = stand.getLocationName();
 		Context context = itemView.getContext();
@@ -47,12 +43,7 @@ public class StandViewHolder extends RecyclerView.ViewHolder {
 		}
 		Drawable image = ContextCompat.getDrawable(context, stand.getType().getImage());
 		if (image != null) {
-			int color;
-			if (colorImage) {
-				color = ThemeAttributes.getColor(context, R.attr.standIconColor);
-			} else {
-				color = ThemeAttributes.getColor(context, R.attr.mapSearchImageColor);
-			}
+			int color = ThemeAttributes.getColor(context, R.attr.standIconColor);
 			image.mutate().setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
 		}
 		// this should be setCompoundDrawablesRelative(image, null, null, null) but in API 17 and 18 it appears on the wrong side.
@@ -60,16 +51,24 @@ public class StandViewHolder extends RecyclerView.ViewHolder {
 		// and to change the order of method calls on standName but it didn't work.
 		standName.setCompoundDrawables(null, null, image, null);
 
-		if (showFloorIfDifferent != null) {
-			MapLocation location = Convention.getInstance().findStandsAreaLocation(stand.getStandsArea().getId());
-			if (location != null && location.getFloor() != null && !Objects.equals(location.getFloor(), showFloorIfDifferent)) {
-				standFloor.setVisibility(View.VISIBLE);
-				standFloor.setText(location.getFloor().getName());
-			} else {
-				standFloor.setVisibility(View.GONE);
-			}
+		itemView.setOnClickListener(view -> onClickListener.onItemClicked(stand));
+		if (onClickListener != null) {
+			infoButton.setVisibility(View.VISIBLE);
+			infoButton.setOnClickListener(view -> onClickListener.onItemInfoClicked(stand));
 		} else {
-			standFloor.setVisibility(View.GONE);
+			infoButton.setVisibility(View.GONE);
 		}
+
+		View divider = itemView.findViewById(R.id.stand_divider);
+		if (showDivider) {
+			divider.setVisibility(View.VISIBLE);
+		} else {
+			divider.setVisibility(View.GONE);
+		}
+	}
+
+	public interface OnClickListener {
+		void onItemClicked(Stand stand);
+		void onItemInfoClicked(Stand stand);
 	}
 }

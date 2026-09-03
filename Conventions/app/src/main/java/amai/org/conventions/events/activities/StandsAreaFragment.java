@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Html;
 import android.text.TextUtils;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +26,7 @@ import java.util.List;
 
 import amai.org.conventions.customviews.PaintDrawable;
 import amai.org.conventions.customviews.PaintableImageView;
+import amai.org.conventions.map.StandViewHolder;
 import amai.org.conventions.map.StandsRecyclerAdapter;
 import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.StandLocation;
@@ -34,19 +34,17 @@ import amai.org.conventions.model.StandType;
 import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.CollectionUtils;
-import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Objects;
-import amai.org.conventions.utils.Strings;
 import amai.org.conventions.utils.Views;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.text.method.LinkMovementMethodCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.text.method.LinkMovementMethodCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 import pl.polidea.view.ZoomView;
@@ -94,6 +92,9 @@ public class StandsAreaFragment extends DialogFragment {
         Convention convention = Convention.getInstance();
         area = convention.findStandsArea(standsAreaID);
         if (area != null) {
+            TextView nameView = view.findViewById(R.id.stands_area_name);
+            nameView.setText(area.getName());
+
             zoom = view.findViewById(R.id.stands_area_zoom);
             imageFrame = view.findViewById(R.id.stands_area_map_frame);
             image = view.findViewById(R.id.stands_area_map);
@@ -108,9 +109,8 @@ public class StandsAreaFragment extends DialogFragment {
                 return result;
             });
 
-            standsAdapter = new StandsRecyclerAdapter(stands, true, area.hasImageResource(), selectedStandName);
-            standsList.setLayoutManager(new GridLayoutManager(getContext(), 2));
-
+            standsAdapter = new StandsRecyclerAdapter(stands, area.hasImageResource(), selectedStandName);
+            standsList.setLayoutManager(new LinearLayoutManager(getContext()));
             sectionedStandsAdapter = new SectionedGridRecyclerViewAdapterWrapper<>(standsList, standsAdapter);
             standsList.setAdapter(sectionedStandsAdapter);
 
@@ -140,10 +140,9 @@ public class StandsAreaFragment extends DialogFragment {
                 }));
             }
 
-            standsAdapter.setOnClickListener(new StandsRecyclerAdapter.OnClickListener() {
+            standsAdapter.setOnClickListener(new StandViewHolder.OnClickListener() {
                 @Override
-                public void onItemClicked(int position) {
-                    Stand stand = standsAdapter.getStands().get(position);
+                public void onItemClicked(Stand stand) {
                     zoomToStand(stand);
                     selectedStandName = stand.getName();
                     standsAdapter.setSelectedStandName(selectedStandName);
@@ -151,51 +150,9 @@ public class StandsAreaFragment extends DialogFragment {
                 }
 
                 @Override
-                public void onItemContextMenu(int position, ContextMenu menu) {
-                    menu.add(R.string.stand_info).setOnMenuItemClickListener(item -> {
-                        // Show stand additional info in a new popup
-                        Stand stand = standsAdapter.getStands().get(position);
-                        Context context = getContext();
-                        if (context == null) {
-                            return true;
-                        }
-
-                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-
-                        View dialogView = View.inflate(builder.getContext(), R.layout.dialog_stand_info, null);
-
-                        TextView descView = dialogView.findViewById(R.id.stand_description);
-                        if (stand.getDescription() == null || stand.getDescription().trim().isEmpty()) {
-                            descView.setVisibility(View.GONE);
-                        } else {
-                            descView.setVisibility(View.VISIBLE);
-                            descView.setText(stand.getDescription());
-                        }
-
-                        TextView websiteView = dialogView.findViewById(R.id.stand_website);
-                        if (stand.getWebsite() == null || stand.getWebsite().trim().isEmpty()) {
-                            websiteView.setVisibility(View.GONE);
-                        } else {
-                            websiteView.setVisibility(View.VISIBLE);
-                            websiteView.setText(Html.fromHtml(builder.getContext().getString(R.string.stand_website, stand.getWebsite())));
-                            websiteView.setMovementMethod(LinkMovementMethodCompat.getInstance());
-                        }
-
-                        TextView typesView = dialogView.findViewById(R.id.stand_types);
-                        List<String> standTypeNames = CollectionUtils.map(stand.getTypes(), StandType::getName);
-                        typesView.setText(builder.getContext().getString(R.string.stand_types, TextUtils.join(", ", standTypeNames)));
-
-                        TextView locationView = dialogView.findViewById(R.id.stand_location);
-                        locationView.setText(builder.getContext().getString(R.string.stand_location, stand.getStandsArea().getName(), stand.getLocationName()));
-
-                        builder
-                            .setTitle(stand.getName())
-                            .setView(dialogView)
-                            .setPositiveButton(R.string.close, (dialog, which) -> dialog.dismiss())
-                            .setCancelable(true)
-                            .show();;
-                        return true;
-                    });
+                public void onItemInfoClicked(Stand stand) {
+                    // Show stand additional info in a new popup
+                    showStandInfo(getContext(), stand);
                 }
             });
             if (selectedStandName != null) {
@@ -212,6 +169,58 @@ public class StandsAreaFragment extends DialogFragment {
         });
 
         return view;
+    }
+
+    public static void showStandInfo(Context context, Stand stand) {
+        if (context == null) {
+            return;
+        }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+        View dialogView = View.inflate(builder.getContext(), R.layout.dialog_stand_info, null);
+
+        TextView discountView = dialogView.findViewById(R.id.stand_discount);
+        if (stand.hasDiscount()) {
+            discountView.setVisibility(View.VISIBLE);
+        } else {
+            discountView.setVisibility(View.GONE);
+        }
+
+        TextView descView = dialogView.findViewById(R.id.stand_description);
+        if (stand.getDescription() == null || stand.getDescription().trim().isEmpty()) {
+            descView.setVisibility(View.GONE);
+        } else {
+            descView.setVisibility(View.VISIBLE);
+            descView.setText(stand.getDescription());
+        }
+
+        TextView websiteView = dialogView.findViewById(R.id.stand_website);
+        if (stand.getWebsite() == null || stand.getWebsite().trim().isEmpty()) {
+            websiteView.setVisibility(View.GONE);
+        } else {
+            websiteView.setVisibility(View.VISIBLE);
+            websiteView.setText(Html.fromHtml(builder.getContext().getString(R.string.stand_website, stand.getWebsite())));
+            websiteView.setMovementMethod(LinkMovementMethodCompat.getInstance());
+        }
+
+        TextView typesView = dialogView.findViewById(R.id.stand_types);
+        List<String> standTypeNames = CollectionUtils.map(stand.getTypes(), StandType::getName);
+        typesView.setText(builder.getContext().getString(R.string.stand_types, TextUtils.join(", ", standTypeNames)));
+
+        TextView locationView = dialogView.findViewById(R.id.stand_location);
+        if (stand.getLocationName() == null || stand.getLocationName().trim().isEmpty()) {
+            locationView.setText(builder.getContext().getString(R.string.stand_location_only_area, stand.getStandsArea().getName()));
+        } else {
+            locationView.setText(builder.getContext().getString(R.string.stand_location, stand.getStandsArea().getName(), stand.getLocationName()));
+        }
+
+        builder
+            .setTitle(stand.getName())
+            .setView(dialogView)
+            .setPositiveButton(R.string.close, (dialog, which) -> dialog.dismiss())
+            .setCancelable(true)
+            .show();
     }
 
     private void scrollToStand(String selectedStandName, boolean zoomAfterScroll) {

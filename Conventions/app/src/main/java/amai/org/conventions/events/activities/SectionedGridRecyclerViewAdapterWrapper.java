@@ -60,13 +60,15 @@ public class SectionedGridRecyclerViewAdapterWrapper<T, S,
             }
         });
 
-        final GridLayoutManager layoutManager = (GridLayoutManager)(recyclerView.getLayoutManager());
-        layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-            @Override
-            public int getSpanSize(int position) {
-                return (isSectionHeaderPosition(position))? layoutManager.getSpanCount() : 1 ;
-            }
-        });
+        if (recyclerView.getLayoutManager() instanceof GridLayoutManager) {
+            final GridLayoutManager layoutManager = (GridLayoutManager)(recyclerView.getLayoutManager());
+            layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    return (isSectionHeaderPosition(position))? layoutManager.getSpanCount() : 1 ;
+                }
+            });
+        }
 
         SectionedGridRecyclerViewAdapterWrapper.Section<S>[] sectionArray = new SectionedGridRecyclerViewAdapterWrapper.Section[mBaseAdapter.getSections().size()];
         this.setSections(mBaseAdapter.getSections().toArray(sectionArray));

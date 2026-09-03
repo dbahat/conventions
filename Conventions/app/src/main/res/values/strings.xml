@@ -123,6 +123,7 @@
     <string name="free_time">זמן פנוי: %s</string>
     <string name="map_floor_search_title">חיפוש במפה</string>
     <string name="show_only_halls">הצג אולמות בלבד</string>
+    <string name="show_only_discount_stands">הצג דוכנים עם הנחות לחברי העמותות המארגנות בלבד</string>
     <string name="goto_stands_list">הצג דוכנים</string>
     <string name="goto_activity">לפרטים נוספים</string>
     <string name="search_locations">מתחם</string>
@@ -134,6 +135,9 @@
     <string name="stand_website"><![CDATA[<a href=\"%s\">לאתר</a>]]></string>
     <string name="stand_types">קטגוריות: %s</string>
     <string name="stand_location">מיקום: %s, %s</string>
+    <string name="stand_location_search">%s, %s</string>
+    <string name="stand_location_only_area">מיקום: %s</string>
+    <string name="stand_discount">בדוכן זה יש הנחות לחברי העמותות המארגנות.</string>
     <string name="map_show_shelters">מרחבים מוגנים</string>
     <string name="goto_floor">עבור ל%s</string>
     <string name="next_event_start">האירוע הבא מתחיל בעוד %1$s ב%2$s</string>

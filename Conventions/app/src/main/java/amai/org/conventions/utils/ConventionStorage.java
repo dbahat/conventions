@@ -55,6 +55,7 @@ public class ConventionStorage {
 	private static final String SECOND_HAND_SEARCH_ITEMS_FILE_NAME = "second_hand_search_items.json";
 	private static final String SECOND_HAND_SEARCH_FAVORITES_FILE_NAME = "second_hand_search_favorite_items.json";
 	private static final String EVENTS_FILE_NAME = "convention_events.json";
+	private static final String STANDS_FILE_NAME = "stands.json";
 	private static final String USER_QR_IMAGE = "user_qr_image.png";
 
 	private static final ReentrantReadWriteLock filesystemAccessLock = new ReentrantReadWriteLock();
@@ -64,6 +65,7 @@ public class ConventionStorage {
 	private boolean hasInitialEventsFile;
 	private int initialEventsFileResource = 0;
 	private int eventsFileVersion = 0;
+	private int standsFileVersion = 0;
 	private boolean hasInitialStandsFile;
 	private int initialStandsFileResource = 0;
 
@@ -80,9 +82,10 @@ public class ConventionStorage {
 		return this;
 	}
 
-	public ConventionStorage withInitialStandsFile(@RawRes int initialStandsFile) {
+	public ConventionStorage withInitialStandsFile(@RawRes int initialStandsFile, int standsFileVersion) {
 		this.hasInitialStandsFile = true;
 		this.initialStandsFileResource = initialStandsFile;
+		this.standsFileVersion = standsFileVersion;
 		return this;
 	}
 
@@ -106,6 +109,14 @@ public class ConventionStorage {
 		String fileName = getConventionFileName(EVENTS_FILE_NAME);
 		if (eventsFileVersion > 0) {
 			fileName = eventsFileVersion + "_" + fileName;
+		}
+		return fileName;
+	}
+
+	private String getStandsFileName() {
+		String fileName = getConventionFileName(STANDS_FILE_NAME);
+		if (standsFileVersion > 0) {
+			fileName = standsFileVersion + "_" + fileName;
 		}
 		return fileName;
 	}
@@ -193,6 +204,16 @@ public class ConventionStorage {
 		filesystemAccessLock.writeLock().lock();
 		try {
 			saveCacheFile(eventsString, getEventsFileName());
+		} finally {
+			filesystemAccessLock.writeLock().unlock();
+		}
+	}
+
+	public void saveStands() {
+		String standsString = createGsonSerializer().toJson(convention.getStands());
+		filesystemAccessLock.writeLock().lock();
+		try {
+			saveCacheFile(standsString, getStandsFileName());
 		} finally {
 			filesystemAccessLock.writeLock().unlock();
 		}
@@ -307,8 +328,9 @@ public class ConventionStorage {
 		readUserInputFromFile();
 		readConventionFeedbackFromFile();
 		readUpdatesFromFile();
-
-		readStandsFromLocalResources();
+		if (!tryReadStandsFromCache()) {
+			readStandsFromLocalResources();
+		}
 	}
 
 	private boolean tryReadEventsFromCache() {
@@ -351,6 +373,18 @@ public class ConventionStorage {
 			events = new ArrayList<>();
 		}
 		Convention.getInstance().setEvents(events);
+	}
+
+	private boolean tryReadStandsFromCache() {
+		List<Stand> stands = readJsonFromCacheFile(new TypeToken<List<Stand>>() {
+		}.getType(), getStandsFileName());
+		if (stands == null) {
+			// Since we cannot read the cache file, delete it so we won't try to read it again next time
+			tryDeleteCacheFile(getStandsFileName());
+			return false;
+		}
+		convention.setStands(stands);
+		return true;
 	}
 
 	private void readStandsFromLocalResources() {

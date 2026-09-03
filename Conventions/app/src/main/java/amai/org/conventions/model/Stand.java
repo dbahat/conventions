@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import amai.org.conventions.utils.CollectionUtils;
+import amai.org.conventions.utils.Objects;
+
 public class Stand {
 	private String name;
 	private String description;
@@ -12,6 +15,7 @@ public class Stand {
 	private List<StandType> types;
 	private StandsArea standsArea;
 	private List<String> locationIds;
+	private boolean discount;
 
 	// Calculated from stands area and location IDs
 	// They are transient so we don't serialize them. They are re-calculated when deserialized.
@@ -107,6 +111,19 @@ public class Stand {
 
 	public Stand withLocationIds(List<String> locationIds) {
 		setLocationIds(locationIds);
+		return this;
+	}
+
+	public boolean hasDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(boolean discount) {
+		this.discount = discount;
+	}
+
+	public Stand withDiscount(boolean discount) {
+		setDiscount(discount);
 		return this;
 	}
 
@@ -215,5 +232,23 @@ public class Stand {
 			nameBuilder.append("-").append(lastConsecutive.getId());
 		}
 		return nameBuilder.toString();
+	}
+
+	/**
+	 * Check if all non-calculated fields are equal
+	 * @param other the stand to check against
+	 * @return true if all their non-calculated fields are equal
+	 */
+	public boolean same(Stand other) {
+		if (other == null) {
+			return false;
+		}
+		return Objects.equals(this.name, other.name) &&
+			Objects.equals(this.description, other.description) &&
+			Objects.equals(this.website, other.website) &&
+			Objects.equals(CollectionUtils.map(this.types, StandType::getName), CollectionUtils.map(other.types, StandType::getName)) &&
+			// Checking the stands area name because we need to enable null, and we get the stand areas by name anyway
+			Objects.equals(this.standsArea == null ? null : this.standsArea.getName(), other.standsArea == null ? null : other.standsArea.getName()) &&
+			Objects.equals(this.locationIds, other.locationIds);
 	}
 }

@@ -950,8 +950,8 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 	}
 
 	private void setupStandsLocation(final MapLocation location) {
-		// Only show button if there is more than 1 stand
-		if (location.getSinglePlace(StandsArea.class) != null && Convention.getInstance().getStandsByStandArea(location.getSinglePlace(StandsArea.class)).size() > 1) {
+		StandsArea standsArea = location.getSinglePlace(StandsArea.class);
+		if (standsArea != null && !Convention.getInstance().getStandsByStandArea(standsArea).isEmpty()) {
 			gotoStandsListButton.setVisibility(View.VISIBLE);
 			gotoStandsListButton.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -996,8 +996,18 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 	}
 
 	private void showStandsArea(MapLocation location, Stand stand) {
-		// Show the list of stands in a dialog
+		// Show the list of stands in a dialog (if there is only one stands area in this location)
 		StandsArea place = location.getSinglePlace(StandsArea.class);
+		if (place == null) {
+			return;
+		}
+
+		// If there is only 1 stand and no stands map, show the stand directly
+		if (!place.hasImageResource() && Convention.getInstance().getStandsByStandArea(place).size() == 1) {
+			StandsAreaFragment.showStandInfo(getContext(), Convention.getInstance().getStandsByStandArea(place).get(0));
+			return;
+		}
+
 		StandsAreaFragment standsFragment = new StandsAreaFragment();
 
 		Bundle args = new Bundle();

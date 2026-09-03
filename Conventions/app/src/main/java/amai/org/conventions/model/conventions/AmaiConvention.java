@@ -1,9 +1,11 @@
 package amai.org.conventions.model.conventions;
 
+import java.net.URL;
 import java.util.Calendar;
 
 import amai.org.conventions.networking.AmaiModelParser;
 import amai.org.conventions.networking.ModelParser;
+import amai.org.conventions.networking.StandsParser;
 
 public abstract class AmaiConvention extends Convention {
 	@Override
@@ -21,6 +23,16 @@ public abstract class AmaiConvention extends Convention {
 	@Override
 	public ModelParser getModelParser() {
 		return new AmaiModelParser(getHalls(), getStartDate(), getSpecialEventsProcessor());
+	}
+
+	@Override
+	public URL getStandsURL() {
+		return null;
+	}
+
+	@Override
+	public StandsParser getStandsParser() {
+		return null;
 	}
 
 	@Override

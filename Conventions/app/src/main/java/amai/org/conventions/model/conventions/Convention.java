@@ -4,11 +4,6 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
 
-import sff.org.conventions.R;
-import amai.org.conventions.ThemeAttributes;
-import amai.org.conventions.model.StandType;
-import amai.org.conventions.model.StandTypes;
-
 import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -28,6 +23,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.auth.Configuration;
 import amai.org.conventions.events.SearchCategory;
 import amai.org.conventions.feedback.SurveySender;
@@ -49,24 +45,30 @@ import amai.org.conventions.model.SecondHandBuy;
 import amai.org.conventions.model.SecondHandSell;
 import amai.org.conventions.model.SpecialEventsProcessor;
 import amai.org.conventions.model.Stand;
+import amai.org.conventions.model.StandType;
+import amai.org.conventions.model.StandTypes;
 import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.Update;
 import amai.org.conventions.networking.EventTicketsParser;
 import amai.org.conventions.networking.ModelParser;
+import amai.org.conventions.networking.StandsParser;
 import amai.org.conventions.networking.SurveyDataRetriever;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
 import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Objects;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import sff.org.conventions.BuildConfig;
+import sff.org.conventions.R;
 
 public abstract class Convention implements Serializable {
 
 	private static Convention convention = new Olamot2026Convention();
 	public static final int NO_COLOR = Color.TRANSPARENT; // Assuming we will never get this from the server...
+	private static final String TAG = Convention.class.getCanonicalName();
 
 	// Currently supporting conventions of up to 5 days (UI restriction, since the programme is set
 	// to fit up to 5 days in its tab bar).
@@ -93,6 +95,7 @@ public abstract class Convention implements Serializable {
 	private URL modelURL;
 	private URL ticketsLastUpdateURL;
 	private URL updatesURL;
+	private URL standsURL;
 	private ImageIdToImageResourceMapper imageMapper;
 	private SecondHandSell secondHandSell;
 	private SecondHandBuy secondHandBuy;
@@ -129,6 +132,10 @@ public abstract class Convention implements Serializable {
 
 	public URL getUpdatesURL() {
 		return updatesURL;
+	}
+
+	public URL getStandsURL() {
+		return standsURL;
 	}
 
 	public double getLongitude() {
@@ -180,6 +187,7 @@ public abstract class Convention implements Serializable {
 		this.modelURL = initModelURL();
 		this.ticketsLastUpdateURL = initTicketsLastUpdateURL();
 		this.updatesURL = initUpdatesURL();
+		this.standsURL = initStandsURL();
 		this.halls = initHalls();
 		this.standTypes = initStandTypes(); // Must be called before initializing the stands
 		this.map = initMap(); // Must be called before initializing the stands
@@ -204,6 +212,8 @@ public abstract class Convention implements Serializable {
 	protected abstract URL initUpdatesURL();
 
 	protected abstract URL initModelURL();
+
+	protected abstract URL initStandsURL();
 
 	protected abstract URL initTicketsLastUpdateURL();
 
@@ -418,6 +428,8 @@ public abstract class Convention implements Serializable {
 	public StandTypes getStandTypes() {
 		return standTypes;
 	}
+
+	protected abstract String getGeneralStandType();
 
 	public ConventionMap getMap() {
 		return map;
@@ -831,6 +843,8 @@ public abstract class Convention implements Serializable {
 
 	public abstract ModelParser getModelParser();
 
+	public abstract StandsParser getStandsParser();
+
 	public SurveySender getConventionFeedbackSender() {
 		return new ConventionFeedbackFormSender(conventionFeedbackForm, this);
 	}
@@ -925,7 +939,23 @@ public abstract class Convention implements Serializable {
 		}
 		if (stand.getTypes() != null) {
 			StandTypes standTypes = getStandTypes();
-			stand.setTypes(CollectionUtils.map(stand.getTypes(), standType -> standTypes.findByName(standType.getName())));
+			stand.setTypes(CollectionUtils.map(stand.getTypes(), standType -> getOrAddStandType(standType.getName())));
 		}
+	}
+
+	public StandType getOrAddStandType(String standTypeName) {
+		if (standTypeName == null || standTypeName.trim().isEmpty()) {
+			// Default stand type - general
+			standTypeName = getGeneralStandType();
+		}
+		StandType standType = standTypes.findByName(standTypeName);
+
+		if (standType == null) {
+			// Add a new stand type to the convention
+			standType = standTypes.add(standTypeName);
+			Log.i(TAG, "Found and added new stand type with name " + standTypeName);
+		}
+
+		return standType;
 	}
 }

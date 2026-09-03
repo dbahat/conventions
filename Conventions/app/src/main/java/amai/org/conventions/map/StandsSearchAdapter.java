@@ -11,18 +11,12 @@ import amai.org.conventions.model.Floor;
 import amai.org.conventions.model.Stand;
 import sff.org.conventions.R;
 
-public class StandsAdapter extends BaseAdapter {
-	private final boolean showLocations;
+public class StandsSearchAdapter extends BaseAdapter {
 	private List<Stand> stands;
-	private boolean colorImages;
-	private String selectedStandName;
 	private Floor currentFloor;
 
-	public StandsAdapter(List<Stand> stands, boolean colorImages, boolean showLocations, String selectedStandName) {
+	public StandsSearchAdapter(List<Stand> stands) {
 		this.stands = stands;
-		this.colorImages = colorImages;
-		this.showLocations = showLocations;
-		this.selectedStandName = selectedStandName;
 	}
 
 	public void setFloor(Floor currentFloor) {
@@ -54,17 +48,17 @@ public class StandsAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		final StandViewHolder holder;
+		final StandSearchViewHolder holder;
 		if (convertView == null) {
-			convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.stand_view_holder, parent, false);
-			holder = new StandViewHolder(convertView, colorImages, showLocations);
+			convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.stand_search_view_holder, parent, false);
+			holder = new StandSearchViewHolder(convertView);
 			convertView.setTag(holder);
 		} else {
-			holder = (StandViewHolder) convertView.getTag();
+			holder = (StandSearchViewHolder) convertView.getTag();
 		}
 
 		Stand stand = stands.get(position);
-		holder.setStand(stand, selectedStandName != null && selectedStandName.equals(stand.getName()), currentFloor);
+		holder.setStand(stand, currentFloor);
 		return convertView;
 	}
 }

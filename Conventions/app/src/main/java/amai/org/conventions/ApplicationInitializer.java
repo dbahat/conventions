@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.widget.Toast;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -20,6 +21,7 @@ import amai.org.conventions.model.SecondHandSell;
 import amai.org.conventions.model.Update;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.networking.ModelRefresher;
+import amai.org.conventions.networking.StandsRefresher;
 import amai.org.conventions.networking.UpdatesRefresher;
 import amai.org.conventions.notifications.PushNotification;
 import amai.org.conventions.notifications.PushNotificationTopic;
@@ -27,7 +29,9 @@ import amai.org.conventions.notifications.PushNotificationTopicsSubscriber;
 import amai.org.conventions.secondhand.SecondHandActivity;
 import amai.org.conventions.updates.UpdatesActivity;
 import amai.org.conventions.utils.CollectionUtils;
+import amai.org.conventions.utils.Log;
 import androidx.core.app.NotificationCompat;
+import sff.org.conventions.BuildConfig;
 import sff.org.conventions.R;
 
 import static android.app.PendingIntent.FLAG_IMMUTABLE;
@@ -47,6 +51,7 @@ public class ApplicationInitializer {
 
         refreshUpdatesAndNotifyIfNewUpdatesAreAvailable(context);
         refreshSecondHand(context);
+        refreshStands();
     }
 
     private void registerNotificationChannel(Context context, PushNotification.Channel channel) {
@@ -204,5 +209,16 @@ public class ApplicationInitializer {
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
-
+    private void refreshStands() {
+        StandsRefresher.getInstance().refreshFromServer(false, new StandsRefresher.OnRefreshFinishedListener() {
+            @Override
+            public void onError(Exception error) {
+                if (BuildConfig.DEBUG) {
+                    ConventionsApplication.runOnCurrentActivityUiThread(activity -> {
+                        Toast.makeText(activity, "Error refreshing stands: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    });
+                }
+            }
+        });
+    }
 }

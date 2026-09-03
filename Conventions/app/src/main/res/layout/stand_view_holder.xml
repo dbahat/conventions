@@ -1,11 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- We want to achieve the following things with the layout:
+     1. Align the button and text view baseline
+     2. Keep a constant space between the text view and divider
+     3. Support multi-line stand names
+     LinearLayout had an issue where the baseline alignment caused the stand name
+     to be cut in the bottom when it was multi-line, and adding padding caused
+     the space between the text view and divider to be too big when it was only
+     one line.
+     ConstraintLayout had RTL issues. -->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="10dp">
+
+    <!-- The Button is placed first so the text can safely align to its Start boundary -->
+    <Button
+        android:id="@+id/open_stand_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/stand_info"
+        style="@style/BorderlessButton"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true" />
+
     <amai.org.conventions.customviews.CompoundTextView
         android:id="@+id/stand_name"
         android:layout_width="match_parent"
@@ -17,13 +37,17 @@
         android:textColor="?mapSearchText"
         android:gravity="center_vertical"
         tools:text="Einav Hats"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@id/open_stand_info"
+        android:layout_alignBaseline="@id/open_stand_info"
         />
-    <TextView
-        style="@style/Base.TextAppearance.AppCompat.Small"
-        android:textColor="?mapSearchText"
-        android:layout_marginStart="29dp"
-        tools:text="First floor"
-        android:id="@+id/stand_floor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-</LinearLayout>
+
+    <View
+        android:id="@+id/stand_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        android:layout_below="@id/stand_name"
+        android:layout_marginTop="5dp" />
+
+</RelativeLayout>

@@ -1,18 +1,16 @@
 package amai.org.conventions.customviews;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.util.AttributeSet;
-import android.widget.TextView;
 
+import androidx.appcompat.widget.AppCompatTextView;
 import sff.org.conventions.R;
 
-public class CompoundTextView extends TextView {
+public class CompoundTextView extends AppCompatTextView {
 	private int mDrawableWidth;
 	private int mDrawableHeight;
 	private boolean initialized = false;
@@ -30,11 +28,6 @@ public class CompoundTextView extends TextView {
 	public CompoundTextView(Context context, AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 		init(context, attrs, defStyleAttr, 0);
-	}
-
-	public CompoundTextView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-		super(context, attrs, defStyleAttr, defStyleRes);
-		init(context, attrs, defStyleAttr, defStyleRes);
 	}
 
 	private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {

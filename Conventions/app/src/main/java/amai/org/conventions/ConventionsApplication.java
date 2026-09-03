@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
@@ -21,6 +22,7 @@ import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Objects;
 import amai.org.conventions.utils.Settings;
+import androidx.core.util.Consumer;
 
 public class ConventionsApplication extends Application {
 	private final static String TAG = ConventionsApplication.class.getCanonicalName();
@@ -208,5 +210,17 @@ public class ConventionsApplication extends Application {
 
 	public static Context getCurrentContext() {
 		return currentContext;
+	}
+
+	/**
+	 * If the current context is null or not an Activity, the runnable doesn't run
+	 * @param runnable - action to run on the UI thread of the current activity
+	 */
+	public static void runOnCurrentActivityUiThread(Consumer<Activity> runnable) {
+		Context context = ConventionsApplication.getCurrentContext();
+		if (context instanceof Activity) {
+			Activity activity = (Activity) context;
+			activity.runOnUiThread(() -> runnable.accept(activity));
+		}
 	}
 }

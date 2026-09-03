@@ -33,6 +33,7 @@ public class Settings {
 	private static final String LAST_UPDATES_UPDATE_DATE = "LastUpdatesUpdateDate";
 	private static final String LAST_SECOND_HAND_UPDATE_DATE = "LastSecondHandUpdateDate";
 	private static final String LAST_SECOND_HAND_SEARCH_ITEMS_UPDATE_DATE = "LastSecondHandSearchItemsUpdateDate";
+	private static final String LAST_STANDS_UPDATE_DATE = "LastStandsUpdateDate";
 	private static final String USER_ID = "UserId";
 	private static final String USER = "User";
 	private static final String NUMBER_OF_TIMES_ASKED_FOR_EXACT_ALARMS = "NumberOfTimesAskedForExactAlarms";
@@ -165,6 +166,18 @@ public class Settings {
 
 	public void setLastUpdatesUpdatedDate() {
 		sharedPreferences.edit().putLong(LAST_UPDATES_UPDATE_DATE, Dates.localToUTCTime(Dates.now()).getTime()).apply();
+	}
+
+	public Date getLastStandsUpdateDate() {
+		long date = sharedPreferences.getLong(LAST_STANDS_UPDATE_DATE, -1);
+		if (date == -1) {
+			return null;
+		}
+		return Dates.utcToLocalTime(new Date(date));
+	}
+
+	public void setLastStandsUpdateDate() {
+		sharedPreferences.edit().putLong(LAST_STANDS_UPDATE_DATE, Dates.localToUTCTime(Dates.now()).getTime()).apply();
 	}
 
 	public void setAdvancedOptionsEnabled(boolean enabled) {

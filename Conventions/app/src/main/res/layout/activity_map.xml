@@ -82,6 +82,16 @@
                     app:buttonTint="?mapSearchCheckboxTint"
                     android:id="@+id/map_search_show_only_halls"
                     android:text="@string/show_only_halls"/>
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="?mapSearchText"
+                    app:buttonTint="?mapSearchCheckboxTint"
+                    android:visibility="gone"
+                    android:paddingBottom="5dp"
+                    android:id="@+id/map_search_show_only_discount_stands"
+                    android:text="@string/show_only_discount_stands"/>
             </LinearLayout>
 
 
