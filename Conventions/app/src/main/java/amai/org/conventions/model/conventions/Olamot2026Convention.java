@@ -108,7 +108,7 @@ public class Olamot2026Convention extends SffConvention {
 	protected ConventionStorage initStorage() {
 		return new ConventionStorage(this)
 			.withInitialEventsFile(R.raw.olamot2026_convention_events, 1)
-			.withInitialEventsFile(R.raw.icon2026_stands, 0);
+			.withInitialStandsFile(R.raw.icon2026_stands, 0);
 	}
 
 	@Override
