@@ -28,11 +28,14 @@ public class StandViewHolder extends RecyclerView.ViewHolder {
 		this.showLocation = showLocation;
 	}
 
-	public void setStand(Stand stand, boolean isSelected, boolean showDivider, OnClickListener onClickListener) {
+	public void setStand(Stand stand, boolean isSelected, boolean showInactiveIndication, boolean showDivider, OnClickListener onClickListener) {
 		String name = stand.getName();
 		String locationName = stand.getLocationName();
 		Context context = itemView.getContext();
-		if (showLocation && locationName != null && !locationName.isEmpty()) {
+		// If the stand is inactive, show this instead of its location
+		if (showInactiveIndication && !stand.isActive()) {
+			name = context.getString(R.string.stand_name_inactive, name);
+		} else  if (showLocation && locationName != null && !locationName.isEmpty()) {
 			name += " (" + locationName + ")";
 		}
 		standName.setText(name);

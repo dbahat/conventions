@@ -64,6 +64,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 	private static final String STATE_SEARCH_TERM = "StateMapSearchTerm";
 	private static final String STATE_MAP_SEARCH_ONLY_HALLS = "StateMapSearchOnlyHalls";
 	private static final String STATE_MAP_SEARCH_ONLY_DISCOUNT_STANDS = "StateMapSearchOnlyDiscountStands";
+	private static final String STATE_MAP_SEARCH_ONLY_ACTIVE_STANDS = "StateMapSearchOnlyActiveStands";
 	private static final String STATE_MAP_SEARCH_OPEN = "StateMapSearchOpen";
 
 	private static final ConventionMap map = Convention.getInstance().getMap();
@@ -81,12 +82,14 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 	private ListView searchResults;
 	private CheckBox showOnlyHallsCheckbox;
 	private CheckBox showOnlyDiscountStandsCheckbox;
+	private CheckBox showOnlyActiveStandsCheckbox;
 	private EditText searchText;
 	private MapLocationsAdapter locationsSearchResultsAdapter;
 	private StandsSearchAdapter standsSearchResultsAdapter;
 	private String searchTerm;
 	private boolean showOnlyHalls;
 	private boolean showOnlyDiscountStands;
+	private boolean showOnlyActiveStands;
 	private boolean isSearchClosing;
 	private Menu menu;
 
@@ -339,6 +342,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		outState.putString(STATE_SEARCH_TERM, searchText.getText().toString());
 		outState.putBoolean(STATE_MAP_SEARCH_ONLY_HALLS, showOnlyHallsCheckbox.isChecked());
 		outState.putBoolean(STATE_MAP_SEARCH_ONLY_DISCOUNT_STANDS, showOnlyDiscountStandsCheckbox.isChecked());
+		outState.putBoolean(STATE_MAP_SEARCH_ONLY_ACTIVE_STANDS, showOnlyActiveStandsCheckbox.isChecked());
 		outState.putBoolean(STATE_MAP_SEARCH_OPEN, isSearchOpen());
 	}
 
@@ -350,6 +354,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		searchResults = (ListView) findViewById(R.id.map_search_results);
 		showOnlyHallsCheckbox = (CheckBox) findViewById(R.id.map_search_show_only_halls);
 		showOnlyDiscountStandsCheckbox = (CheckBox) findViewById(R.id.map_search_show_only_discount_stands);
+		showOnlyActiveStandsCheckbox = (CheckBox) findViewById(R.id.map_search_show_only_active_stands);
 		searchText = (EditText) findViewById(R.id.map_search_text);
 
 		isSearchClosing = false;
@@ -358,6 +363,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		searchTerm = (savedInstanceState != null ? savedInstanceState.getString(STATE_SEARCH_TERM) : null);
 		showOnlyHalls = (savedInstanceState != null && savedInstanceState.getBoolean(STATE_MAP_SEARCH_ONLY_HALLS));
 		showOnlyDiscountStands = (savedInstanceState != null && savedInstanceState.getBoolean(STATE_MAP_SEARCH_ONLY_DISCOUNT_STANDS));
+		showOnlyActiveStands = (savedInstanceState != null && savedInstanceState.getBoolean(STATE_MAP_SEARCH_ONLY_ACTIVE_STANDS));
 		boolean showSearch = (savedInstanceState != null && savedInstanceState.getBoolean(STATE_MAP_SEARCH_OPEN));
 		searchContainer.setVisibility(showSearch ? View.VISIBLE : View.GONE);
 
@@ -408,6 +414,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 				if (tab.getId() == R.id.mapSearchTabLocation) {
 					showOnlyHallsCheckbox.setVisibility(View.VISIBLE);
 					showOnlyDiscountStandsCheckbox.setVisibility(View.GONE);
+					showOnlyActiveStandsCheckbox.setVisibility(View.GONE);
 					searchResults.setAdapter(locationsSearchResultsAdapter);
 				} else {
 					showOnlyHallsCheckbox.setVisibility(View.GONE);
@@ -415,6 +422,11 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 						showOnlyDiscountStandsCheckbox.setVisibility(View.VISIBLE);
 					} else {
 						showOnlyDiscountStandsCheckbox.setVisibility(View.GONE);
+					}
+					if (showOnlyActiveStandsCheckbox()) {
+						showOnlyActiveStandsCheckbox.setVisibility(View.VISIBLE);
+					} else {
+						showOnlyActiveStandsCheckbox.setVisibility(View.GONE);
 					}
 					searchResults.setAdapter(standsSearchResultsAdapter);
 				}
@@ -518,6 +530,20 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 				}
 			}
 		});
+
+		// Setup "show only active stands" checkbox
+		showOnlyActiveStandsCheckbox.setChecked(showOnlyActiveStands);
+		showOnlyActiveStandsCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				showOnlyActiveStands = isChecked;
+				// Only apply the filters if the user is currently searching
+				// (otherwise it might happen when restoring the saved state)
+				if (isSearchOpen()) {
+					applySearchFiltersInBackground();
+				}
+			}
+		});
 	}
 
 	private boolean showOnlyDiscountsStandsCheckbox() {
@@ -528,6 +554,20 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		boolean initialValue = stands.get(0).hasDiscount();
 		for (Stand stand : stands) {
 			if (stand.hasDiscount() != initialValue) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean showOnlyActiveStandsCheckbox() {
+		List<Stand> stands = Convention.getInstance().getStands();
+		if (stands.isEmpty()) {
+			return false;
+		}
+		boolean initialValue = stands.get(0).isActive();
+		for (Stand stand : stands) {
+			if (stand.isActive() != initialValue) {
 				return true;
 			}
 		}
@@ -572,6 +612,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		final String searchTerm = this.searchTerm;
 		final boolean showOnlyHalls = this.showOnlyHalls;
 		final boolean showOnlyDiscountStands = this.showOnlyDiscountStands;
+		final boolean showOnlyActiveStands = this.showOnlyActiveStands;
 		final Floor floor = getCurrentFloorFragment().getFloor();
 
 		new AsyncTask<Void, Void, List<?>>() {
@@ -620,7 +661,8 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 								item.getName().toLowerCase().contains(searchTerm.toLowerCase()) ||
 								(item.getDescription() != null && item.getDescription().toLowerCase().contains(searchTerm.toLowerCase())) ||
 								CollectionUtils.filter(CollectionUtils.map(item.getTypes(), StandType::getName), name -> name.toLowerCase().contains(searchTerm.toLowerCase())).size() > 0) &&
-								(!showOnlyDiscountStands || item.hasDiscount());
+								(!showOnlyDiscountStands || item.hasDiscount()) &&
+								(!showOnlyActiveStands || item.isActive());
 						}
 					});
 					Collections.sort(stands, new Comparator<Stand>() {

@@ -35,6 +35,26 @@
         android:layout_marginEnd="20dp"/>
 
     <TextView
+        android:id="@+id/stand_inactive"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/stand_inactive"
+        android:textSize="14sp"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"/>
+
+    <TextView
+        android:id="@+id/stand_active_days"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="ימי פעילות: יום שני, 15/10"
+        android:textSize="14sp"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"/>
+
+    <TextView
         android:id="@+id/stand_types"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

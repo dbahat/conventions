@@ -164,6 +164,7 @@ public class ConventionStorage {
 	public static Gson createGsonSerializer() {
 		return new GsonBuilder()
 				.registerTypeAdapter(Date.class, new DateAdapter())
+				.registerTypeAdapter(Dates.LocalDate.class, new LocalDateAdapter())
 				// Save smiley answers according to enum value name instead of toString()
 				.registerTypeAdapter(FeedbackQuestion.Smiley3PointAnswer.class, new EnumSerializer<>())
 				.registerTypeAdapter(FeedbackQuestion.Smiley5PointAnswer.class, new EnumSerializer<>())
@@ -178,6 +179,7 @@ public class ConventionStorage {
 		return new GsonBuilder()
 				.registerTypeAdapter(Date.class, new DateAdapter())
 				.setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+				.registerTypeAdapter(Dates.LocalDate.class, new LocalDateAdapter())
 				.registerTypeAdapter(StandType.class, new StandTypeAdapter())
 				.registerTypeAdapter(StandsArea.class, new StandsAreaAdapter())
 				.create();
@@ -576,6 +578,26 @@ public class ConventionStorage {
 				return Dates.utcToLocalTime(utcDate);
 			} catch (ParseException e) {
 				throw new JsonParseException("Date cannot be parsed", e);
+			}
+		}
+	}
+
+	private static class LocalDateAdapter implements JsonSerializer<Dates.LocalDate>, JsonDeserializer<Dates.LocalDate> {
+		@Override
+		public JsonElement serialize(Dates.LocalDate src, Type typeOfSrc, JsonSerializationContext context) {
+			String formatted = Dates.formatDate("yyyy-MM-dd", src.getDate());
+			return new JsonPrimitive(formatted);
+		}
+
+		@Override
+		public Dates.LocalDate deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+			String formattedDate = json.getAsString();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Dates.getLocale());
+			try {
+				Date date = sdf.parse(formattedDate);
+				return new Dates.LocalDate(date);
+			} catch (ParseException e) {
+				throw new JsonParseException("LocalDate cannot be parsed", e);
 			}
 		}
 	}

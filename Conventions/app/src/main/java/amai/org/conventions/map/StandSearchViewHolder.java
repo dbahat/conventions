@@ -26,10 +26,13 @@ public class StandSearchViewHolder extends RecyclerView.ViewHolder {
 		standFloor = itemView.findViewById(R.id.stand_floor);
 	}
 
-	public void setStand(Stand stand, Floor showFloorIfDifferent) {
+	public void setStand(Stand stand, Floor showFloorIfDifferent, boolean showInactiveIndication) {
 		String name = stand.getName();
 		String locationName = stand.getLocationName();
 		Context context = itemView.getContext();
+		if (showInactiveIndication && !stand.isActive()) {
+			name = context.getString(R.string.stand_name_inactive, name);
+		}
 		standName.setText(name);
 		standName.setTextColor(ThemeAttributes.getColor(context, R.attr.mapSearchText));
 

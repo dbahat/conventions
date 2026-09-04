@@ -88,13 +88,15 @@ public class SffStandsParser implements StandsParser {
 
 				List<String> locationIds = parseLocationIds(name, tableIdsFrom, tableIdsTo);
 
+				List<Dates.LocalDate> activeDays = null;
 				Stand currStand = new Stand()
 					.withName(name)
 					.withStandsArea(standsArea)
 					.withWebsite(url)
 					.withTypes(Collections.singletonList(standType))
 					.withLocationIds(locationIds)
-					.withDiscount(discountOrga);
+					.withDiscount(discountOrga)
+					.withActiveDays(activeDays);
 
 				standsList.add(currStand);
 			} catch (Exception e) {

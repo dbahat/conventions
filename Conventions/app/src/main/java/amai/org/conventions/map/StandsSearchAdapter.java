@@ -9,14 +9,18 @@ import java.util.List;
 
 import amai.org.conventions.model.Floor;
 import amai.org.conventions.model.Stand;
+import amai.org.conventions.model.conventions.Convention;
 import sff.org.conventions.R;
 
 public class StandsSearchAdapter extends BaseAdapter {
 	private List<Stand> stands;
 	private Floor currentFloor;
+	private boolean showInactiveIndication;
 
 	public StandsSearchAdapter(List<Stand> stands) {
 		this.stands = stands;
+		// We only show the inactive indication during the convention
+		this.showInactiveIndication = Convention.getInstance().hasStarted() && !Convention.getInstance().hasEnded();
 	}
 
 	public void setFloor(Floor currentFloor) {
@@ -58,7 +62,7 @@ public class StandsSearchAdapter extends BaseAdapter {
 		}
 
 		Stand stand = stands.get(position);
-		holder.setStand(stand, currentFloor);
+		holder.setStand(stand, currentFloor, showInactiveIndication);
 		return convertView;
 	}
 }

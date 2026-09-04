@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import sff.org.conventions.BuildConfig;
 
@@ -33,6 +34,7 @@ public class Dates {
 		try {
 //			return dateFormat.parse("05.04.2026 16:10");
 			return null;
+//			return null;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -250,5 +252,38 @@ public class Dates {
 		date.clear();
 		date.set(year, month, day);
 		return date;
+	}
+
+	/**
+	 * Represents a date without time.
+	 * We can't use the built-in LocalDate and its formatting classes beforee API level 26,
+	 * so wrapping a regular Date with our own class which has a specific serializer and deserializer.
+	 */
+	public static class LocalDate {
+		private Date date;
+
+		public LocalDate(Date date) {
+			// Remove time info from the date
+			Calendar calendar = Dates.toCalendar(date);
+			Calendar calendarDateOnly = Dates.createDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE));
+			this.date = calendarDateOnly.getTime();
+		}
+
+		public Date getDate() {
+			return date;
+		}
+
+		@Override
+		public boolean equals(@Nullable Object obj) {
+			if (!(obj instanceof LocalDate)) {
+				return false;
+			}
+			return this.date.equals(((LocalDate) obj).getDate());
+		}
+
+		@Override
+		public int hashCode() {
+			return this.date.hashCode();
+		}
 	}
 }

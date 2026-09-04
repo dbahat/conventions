@@ -1,11 +1,16 @@
 package amai.org.conventions.model;
 
+import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.CollectionUtils;
+import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Objects;
 
 public class Stand {
@@ -16,6 +21,7 @@ public class Stand {
 	private StandsArea standsArea;
 	private List<String> locationIds;
 	private boolean discount;
+	private List<Dates.LocalDate> activeDays;
 
 	// Calculated from stands area and location IDs
 	// They are transient so we don't serialize them. They are re-calculated when deserialized.
@@ -125,6 +131,51 @@ public class Stand {
 	public Stand withDiscount(boolean discount) {
 		setDiscount(discount);
 		return this;
+	}
+
+	public List<Dates.LocalDate> getActiveDays() {
+		return activeDays;
+	}
+
+	public void setActiveDays(List<Dates.LocalDate> activeDays) {
+		this.activeDays = activeDays;
+	}
+
+	public Stand withActiveDays(List<Dates.LocalDate> activeDays) {
+		setActiveDays(activeDays);
+		return this;
+	}
+
+	private boolean isActiveOn(Date date) {
+		if (activeDays == null || activeDays.isEmpty()) {
+			return true;
+		}
+		for (Dates.LocalDate activeDay : activeDays) {
+			if (Dates.isSameDate(activeDay.getDate(), date)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean isActive() {
+		// Check if the stand is currently active, in the convention time
+		Date nowInConventionTime = Dates.localToConventionTime(Dates.now());
+		return isActiveOn(nowInConventionTime);
+	}
+
+	public boolean isAlwaysActive() {
+		// Return true if active on all convention days (or active days are not set)
+		if (activeDays == null || activeDays.isEmpty()) {
+			return true;
+		}
+		Calendar[] eventDates = Convention.getInstance().getEventDates();
+		for (Calendar eventDate : eventDates) {
+			if (!isActiveOn(eventDate.getTime())) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public boolean hasImageCoordinates() {
@@ -249,6 +300,7 @@ public class Stand {
 			Objects.equals(CollectionUtils.map(this.types, StandType::getName), CollectionUtils.map(other.types, StandType::getName)) &&
 			// Checking the stands area name because we need to enable null, and we get the stand areas by name anyway
 			Objects.equals(this.standsArea == null ? null : this.standsArea.getName(), other.standsArea == null ? null : other.standsArea.getName()) &&
-			Objects.equals(this.locationIds, other.locationIds);
+			Objects.equals(this.locationIds, other.locationIds) &&
+			Objects.equals(this.activeDays, other.activeDays);
 	}
 }

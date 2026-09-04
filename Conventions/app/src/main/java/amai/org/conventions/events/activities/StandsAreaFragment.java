@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import amai.org.conventions.customviews.PaintDrawable;
@@ -34,6 +35,7 @@ import amai.org.conventions.model.StandType;
 import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.CollectionUtils;
+import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Objects;
 import amai.org.conventions.utils.Views;
 import androidx.annotation.NonNull;
@@ -202,6 +204,25 @@ public class StandsAreaFragment extends DialogFragment {
             websiteView.setVisibility(View.VISIBLE);
             websiteView.setText(Html.fromHtml(builder.getContext().getString(R.string.stand_website, stand.getWebsite())));
             websiteView.setMovementMethod(LinkMovementMethodCompat.getInstance());
+        }
+
+        boolean isAlwaysActive = true;
+        TextView activeDaysView = dialogView.findViewById(R.id.stand_active_days);
+        if (!stand.isAlwaysActive()) {
+            isAlwaysActive = false;
+            List<String> activeDays = CollectionUtils.map(stand.getActiveDays(), date -> Dates.formatDate("EEE dd.MM", date.getDate()));
+            activeDaysView.setText(context.getString(R.string.stand_active_days, TextUtils.join(", ", activeDays)));
+            activeDaysView.setVisibility(View.VISIBLE);
+        } else {
+            activeDaysView.setVisibility(View.GONE);
+        }
+
+        // Show "stand is inactive" message if we are during the convention and the stand is not currently active
+        TextView inactiveView = dialogView.findViewById(R.id.stand_inactive);
+        if (!isAlwaysActive && Convention.getInstance().hasStarted() && !Convention.getInstance().hasEnded() && !stand.isActive()) {
+            inactiveView.setVisibility(View.VISIBLE);
+        } else {
+            inactiveView.setVisibility(View.GONE);
         }
 
         TextView typesView = dialogView.findViewById(R.id.stand_types);

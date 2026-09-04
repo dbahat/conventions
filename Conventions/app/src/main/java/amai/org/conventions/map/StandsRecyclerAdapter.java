@@ -12,6 +12,7 @@ import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.adapters.SectionedRecyclerViewAdapter;
 import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.StandType;
+import amai.org.conventions.model.conventions.Convention;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import sff.org.conventions.R;
@@ -20,6 +21,7 @@ public class StandsRecyclerAdapter extends SectionedRecyclerViewAdapter<Stand, S
     private final boolean showLocations;
     private List<Stand> stands;
     private String selectedStandName;
+    private boolean showInactiveIndication;
     private StandViewHolder.OnClickListener onClickListener;
 
     public StandsRecyclerAdapter(List<Stand> stands, boolean showLocations, String selectedStandName) {
@@ -27,6 +29,8 @@ public class StandsRecyclerAdapter extends SectionedRecyclerViewAdapter<Stand, S
         this.stands = stands;
         this.showLocations = showLocations;
         this.selectedStandName = selectedStandName;
+        // We only show the inactive indication during the convention
+        this.showInactiveIndication = Convention.getInstance().hasStarted() && !Convention.getInstance().hasEnded();
     }
 
     public List<Stand> getStands() {
@@ -45,7 +49,7 @@ public class StandsRecyclerAdapter extends SectionedRecyclerViewAdapter<Stand, S
         Stand stand = stands.get(position);
         // Show the divider if it's not the last item
         boolean showDivider = position < getItemCount() - 1;
-        holder.setStand(stand, selectedStandName != null && selectedStandName.equals(stand.getName()), showDivider, onClickListener);
+        holder.setStand(stand, selectedStandName != null && selectedStandName.equals(stand.getName()), showInactiveIndication, showDivider, onClickListener);
     }
 
     public void setOnClickListener(StandViewHolder.OnClickListener onClickListener) {
