@@ -561,6 +561,12 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 	}
 
 	private boolean showOnlyActiveStandsCheckbox() {
+		// Only show during the convention
+		if (!Convention.getInstance().hasStarted() || Convention.getInstance().hasEnded()) {
+			return false;
+		}
+
+		// Only show when at least one stand is active and at least one stand is inactive
 		List<Stand> stands = Convention.getInstance().getStands();
 		if (stands.isEmpty()) {
 			return false;
