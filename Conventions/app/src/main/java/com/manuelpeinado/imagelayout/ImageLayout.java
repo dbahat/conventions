@@ -398,37 +398,26 @@ public class ImageLayout extends ViewGroup {
             int N = a.getIndexCount();
             for (int i = 0; i < N; i++) {
                 int attr = a.getIndex(i);
-                switch (attr) {
-                case R.styleable.ImageLayout_Layout_layout_left:
-                    left = a.getInt(attr, -1);
-                    break;
-                case R.styleable.ImageLayout_Layout_layout_top:
+                if (attr == R.styleable.ImageLayout_Layout_layout_left) {
+					left = a.getInt(attr, -1);
+				} else if (attr == R.styleable.ImageLayout_Layout_layout_top) {
                     top = a.getInt(attr, -1);
-                    break;
-                case R.styleable.ImageLayout_Layout_layout_right:
+				} else if (attr == R.styleable.ImageLayout_Layout_layout_right) {
                     right = a.getInt(attr, -1);
-                    break;
-                case R.styleable.ImageLayout_Layout_layout_bottom:
+				} else if (attr == R.styleable.ImageLayout_Layout_layout_bottom) {
                     bottom = a.getInt(attr, -1);
-                    break;
-                case R.styleable.ImageLayout_Layout_layout_centerX:
+				} else if (attr == R.styleable.ImageLayout_Layout_layout_centerX) {
                     centerX = a.getInt(attr, -1);
-                    break;
-                case R.styleable.ImageLayout_Layout_layout_centerY:
+				} else if (attr == R.styleable.ImageLayout_Layout_layout_centerY) {
                     centerY = a.getInt(attr, -1);
-                    break;
-                case R.styleable.ImageLayout_Layout_layout_width:
+				} else if (attr == R.styleable.ImageLayout_Layout_layout_width) {
                     width = a.getInt(attr, -1);
-                    break;
-                case R.styleable.ImageLayout_Layout_layout_maxWidth:
+				} else if (attr == R.styleable.ImageLayout_Layout_layout_maxWidth) {
                     maxWidth = a.getInt(attr, -1);
-                    break;
-                case R.styleable.ImageLayout_Layout_layout_height:
+				} else if (attr == R.styleable.ImageLayout_Layout_layout_height) {
                     height = a.getInt(attr, -1);
-                    break;
-                case R.styleable.ImageLayout_Layout_layout_maxHeight:
+				} else if (attr == R.styleable.ImageLayout_Layout_layout_maxHeight) {
                     maxHeight = a.getInt(attr, -1);
-                    break;
                 }
             }
             a.recycle();
@@ -465,7 +454,7 @@ public class ImageLayout extends ViewGroup {
 		void draw(Canvas canvas, Rect srcRect, Rect destRect);
 	}
 
-	public class BitmapImageResource implements ImageResource {
+	public static class BitmapImageResource implements ImageResource {
 		private Bitmap bitmap;
 		public BitmapImageResource(Bitmap bitmap) {
 			this.bitmap = bitmap;
@@ -486,7 +475,7 @@ public class ImageLayout extends ViewGroup {
 		}
 	}
 
-	public class PictureImageResource implements ImageResource {
+	public static class PictureImageResource implements ImageResource {
 		private Picture picture;
 		public PictureImageResource(Picture picture) {
 			this.picture = picture;
@@ -507,7 +496,7 @@ public class ImageLayout extends ViewGroup {
 		}
 	}
 
-	public class VectorImageResource implements ImageResource {
+	public static class VectorImageResource implements ImageResource {
 		private VectorDrawable vectorDrawable;
 		public VectorImageResource(VectorDrawable vectorDrawable) {
 			this.vectorDrawable = vectorDrawable;

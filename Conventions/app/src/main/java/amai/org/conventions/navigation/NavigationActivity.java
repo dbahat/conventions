@@ -730,7 +730,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		}
 
 		private void requestNotificationsPermission(Activity context) {
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && requestNotificationsPermissionLauncher != null) {
+			if (requestNotificationsPermissionLauncher != null) {
 				requestNotificationsPermissionLauncher.launch("android.permission.POST_NOTIFICATIONS");
 			} else {
 				executeNextTask();

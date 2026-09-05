@@ -101,7 +101,6 @@ public class ParallaxDrawable extends Drawable {
         return mWrappedDrawable.isStateful();
     }
 
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public void jumpToCurrentState() {
         mWrappedDrawable.jumpToCurrentState();

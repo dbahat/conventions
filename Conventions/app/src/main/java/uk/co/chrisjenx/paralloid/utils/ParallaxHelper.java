@@ -52,7 +52,6 @@ public final class ParallaxHelper {
             }
         });
         view.setBackground(parallaxDrawable);
-        fixParallaxBackgroundPreJBMR1(view, parallaxDrawable);
     }
 
     static void requestScrollableWidthHeight(final View view, final float multiplier, final ScrollableWidthHeightCallback callback) {
@@ -105,31 +104,6 @@ public final class ParallaxHelper {
 
     static float calculateExtraScroll(float parent, float child, float factor) {
         return parent + (child - parent) * factor;
-    }
-
-    /**
-     * Hack to fix pre JB MR1 Kudos to @cyrilmottier
-     *
-     * @param view     view drawable attached too.
-     * @param drawable drawable which gets invalidated
-     */
-    static void fixParallaxBackgroundPreJBMR1(final View view, final Drawable drawable) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            drawable.setCallback(new Drawable.Callback() {
-                @Override
-                public void invalidateDrawable(Drawable who) {
-                    view.setBackground(who);
-                }
-
-                @Override
-                public void scheduleDrawable(Drawable who, Runnable what, long when) {
-                }
-
-                @Override
-                public void unscheduleDrawable(Drawable who, Runnable what) {
-                }
-            });
-        }
     }
 
     interface ScrollableWidthHeightCallback {
