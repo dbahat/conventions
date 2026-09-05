@@ -31,6 +31,7 @@ public class AggregatedEventTypes {
 						new EventType("משחק"),
 						new EventType("הדגמה"),
 						new EventType("משחק קלפים"),
+						new EventType("משחק לוח או קלפים"),
 						new EventType("טורניר"))),
 				new AggregatedType("סדנאות", Arrays.asList(
 						new EventType("סדנה"))),
