@@ -32,7 +32,7 @@ public class Dates {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm", Dates.getLocale());
 		dateFormat.setTimeZone(LOCAL_TIME_ZONE);
 		try {
-//			return dateFormat.parse("05.04.2026 16:10");
+//			return dateFormat.parse("30.09.2026 16:10");
 			return null;
 //			return null;
 		} catch (Exception e) {
