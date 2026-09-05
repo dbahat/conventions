@@ -37,6 +37,7 @@ import java.net.URL;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.ThemeAttributes;
@@ -232,8 +233,8 @@ public class EventActivity extends NavigationActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(final MenuItem item) {
-		switch (item.getItemId()) {
-			case R.id.event_change_favorite_state:
+		return handleOptionsItem(item, Map.of(
+			R.id.event_change_favorite_state, () -> {
 				ConventionEvent.UserInput userInput = conventionEvent.getUserInput();
 
 				// In the user is adding this event and it conflicts with another favorite event or sold out, ask the user what to do
@@ -249,22 +250,22 @@ public class EventActivity extends NavigationActivity {
 						message = getString(R.string.event_conflicts_with_several_question, conflictingEvents.size());
 					}
 					new AlertDialog.Builder(this)
-							.setTitle(R.string.event_add_to_favorites)
-							.setMessage(message)
-							.setPositiveButton(R.string.add_anyway, new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									changeEventFavoriteState(item);
-								}
-							})
-							.setNegativeButton(R.string.cancel, null)
-							.show();
-					return true;
+						.setTitle(R.string.event_add_to_favorites)
+						.setMessage(message)
+						.setPositiveButton(R.string.add_anyway, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								changeEventFavoriteState(item);
+							}
+						})
+						.setNegativeButton(R.string.cancel, null)
+						.show();
+					return;
 				}
 
 				changeEventFavoriteState(item);
-				return true;
-			case R.id.event_navigate_to_map:
+			},
+			R.id.event_navigate_to_map, () -> {
 				// Navigate to the map floor associated with this event
 				Bundle floorBundle = new Bundle();
 				ConventionMap map = Convention.getInstance().getMap();
@@ -273,8 +274,8 @@ public class EventActivity extends NavigationActivity {
 				floorBundle.putIntArray(MapActivity.EXTRA_MAP_LOCATION_IDS, locationIds);
 
 				navigateToActivity(MapActivity.class, false, floorBundle);
-				return true;
-			case R.id.event_share_event:
+			},
+			R.id.event_share_event, () -> {
 				// Share a link to the event
 				Intent sendIntent = new Intent();
 				sendIntent.setAction(Intent.ACTION_SEND);
@@ -283,30 +284,26 @@ public class EventActivity extends NavigationActivity {
 
 				Intent shareIntent = Intent.createChooser(sendIntent, null);
 				startActivity(shareIntent);
-				return true;
-			case R.id.event_navigate_to_hall:
+			},
+			R.id.event_navigate_to_hall, () -> {
 				// Navigate to the hall associated with this event
 				Bundle bundle = new Bundle();
 				bundle.putString(HallActivity.EXTRA_HALL_NAME, conventionEvent.getHall().getName());
 
 				navigateToActivity(HallActivity.class, false, bundle);
-				return true;
-			case R.id.event_configure_notifications:
-
+			},
+			R.id.event_configure_notifications, () -> {
 				ConfigureNotificationsFragment configureNotificationsFragment = ConfigureNotificationsFragment.newInstance(conventionEvent.getId());
 				configureNotificationsFragment.show(getSupportFragmentManager(), null);
 
 				FirebaseAnalytics
-						.getInstance(this)
-						.logEvent("event_notification", new BundleBuilder()
-								.putString("action", "EditClicked")
-								.build()
-						);
-
-				return true;
-		}
-
-		return super.onOptionsItemSelected(item);
+					.getInstance(this)
+					.logEvent("event_notification", new BundleBuilder()
+						.putString("action", "EditClicked")
+						.build()
+					);
+			}
+		));
 	}
 
 	private void changeEventFavoriteState(MenuItem item) {

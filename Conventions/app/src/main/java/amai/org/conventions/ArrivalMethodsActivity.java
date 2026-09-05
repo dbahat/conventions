@@ -19,6 +19,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.Map;
+
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.notifications.PlayServicesInstallation;
@@ -70,28 +72,27 @@ public class ArrivalMethodsActivity extends NavigationActivity implements OnMapR
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			case R.id.arrival_methods_navigate: {
+		return handleOptionsItem(item, Map.of(
+			R.id.arrival_methods_navigate, () -> {
 				double latitude = Convention.getInstance().getLatitude();
 				double longitude = Convention.getInstance().getLongitude();
 				Intent intent = new Intent(Intent.ACTION_VIEW,
-						Uri.parse("geo:" + latitude + "," + longitude +
-								"?q=" + latitude + "," + longitude));
+					Uri.parse("geo:" + latitude + "," + longitude +
+						"?q=" + latitude + "," + longitude));
 				try {
 					this.startActivity(intent);
 				} catch (ActivityNotFoundException e) {
 					Toast.makeText(this, getString(R.string.no_navigation_activity), Toast.LENGTH_LONG).show();
 				}
-				return true;
-			}
-			case R.id.arrival_methods_navigate_bus: {
+			},
+			R.id.arrival_methods_navigate_bus, () -> {
 				double latitude = Convention.getInstance().getLatitude();
 				double longitude = Convention.getInstance().getLongitude();
 				String encodedLocationName = URLUtils.encodeURLPath(Convention.getInstance().getDisplayName());
 
 				try {
 					Intent intent = new Intent(Intent.ACTION_VIEW,
-							Uri.parse("moovit://directions?dest_lat=" + latitude + "&dest_lon=" + longitude + "&dest_name=" + encodedLocationName + "&partner_id=" + this.getPackageName()));
+						Uri.parse("moovit://directions?dest_lat=" + latitude + "&dest_lon=" + longitude + "&dest_name=" + encodedLocationName + "&partner_id=" + this.getPackageName()));
 					this.startActivity(intent);
 				} catch (ActivityNotFoundException e) {
 					// Fallback if app not found - open in browser
@@ -104,11 +105,8 @@ public class ArrivalMethodsActivity extends NavigationActivity implements OnMapR
 						Toast.makeText(this, getString(R.string.no_navigation_activity), Toast.LENGTH_LONG).show();
 					}
 				}
-				return true;
 			}
-		}
-
-		return super.onOptionsItemSelected(item);
+		));
 	}
 
 	/**

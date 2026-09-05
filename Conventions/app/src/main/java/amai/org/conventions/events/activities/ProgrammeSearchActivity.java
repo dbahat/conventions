@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.adapters.EventsViewListAdapter;
@@ -221,18 +222,16 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			case R.id.programme_search_back:
+		return handleOptionsItem(item, Map.of(
+			R.id.programme_search_back, () -> {
 				if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
 					drawerLayout.closeDrawer(GravityCompat.END);
-					return true;
+					return;
 				}
 
 				supportFinishAfterTransition();
-				return true;
-		}
-
-		return super.onOptionsItemSelected(item);
+			}
+		));
 	}
 
 	private void initializeEventsList() {

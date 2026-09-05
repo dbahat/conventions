@@ -32,8 +32,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
-import amai.org.conventions.ConventionsApplication;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.ConditionalSwipeVerticalViewPager;
 import amai.org.conventions.model.ConventionMap;
@@ -189,20 +189,17 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			case R.id.map_floor_zoom_to_fit:
+		return handleOptionsItem(item, Map.of(
+			R.id.map_floor_zoom_to_fit, () -> {
 				FirebaseAnalytics
-						.getInstance(this)
-						.logEvent("zoom_to_fit_clicked", null);
+					.getInstance(this)
+					.logEvent("zoom_to_fit_clicked", null);
 
 				closeSearch();
 				getCurrentFloorFragment().toggleMapZoom();
-				return true;
-			case R.id.map_refresh_stands:
-				refreshStands(true);
-				return true;
-		}
-		return super.onOptionsItemSelected(item);
+			},
+			R.id.map_refresh_stands, () -> refreshStands(true)
+		));
 	}
 
 	private MapFloorFragment getCurrentFloorFragment() {

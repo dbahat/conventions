@@ -21,6 +21,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import amai.org.conventions.events.CollapsibleFeedbackView;
 import amai.org.conventions.events.activities.EventActivity;
@@ -330,13 +331,9 @@ public class FeedbackActivity extends NavigationActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			case R.id.feedback_navigate_to_programme:
-				navigateToActivity(ProgrammeActivity.class);
-				return true;
-		}
-
-		return super.onOptionsItemSelected(item);
+		return handleOptionsItem(item, Map.of(
+			R.id.feedback_navigate_to_programme, () -> navigateToActivity(ProgrammeActivity.class)
+		));
 	}
 
 	private void saveConventionFeedback() {

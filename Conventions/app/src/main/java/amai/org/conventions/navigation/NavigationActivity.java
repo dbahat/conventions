@@ -33,9 +33,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import amai.org.conventions.AboutActivity;
-import amai.org.conventions.ActivitiesActivity;
 import amai.org.conventions.ApplicationInitializer;
 import amai.org.conventions.ArrivalMethodsActivity;
 import amai.org.conventions.ConventionsApplication;
@@ -55,7 +55,6 @@ import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.notifications.PlayServicesInstallation;
 import amai.org.conventions.notifications.PushNotification;
 import amai.org.conventions.notifications.PushNotificationDialogPresenter;
-import amai.org.conventions.secondhand.SecondHandActivity;
 import amai.org.conventions.settings.SettingsActivity;
 import amai.org.conventions.tasks.Task;
 import amai.org.conventions.tasks.TasksExecutor;
@@ -292,6 +291,17 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	// Alternative callback for creating the options menu for derived classes to implement.
 	protected boolean onCreateCustomOptionsMenu(Menu menu) {
 		return super.onCreateOptionsMenu(menu);
+	}
+
+	// Utility method for handling option menu items. Includes a handlers map to replace switch calls,
+	// returns true after the handler finishes, and calls super.onOptionsItemMenuSelected if no handler is found.
+	protected boolean handleOptionsItem(MenuItem item, Map<Integer, Runnable> handlers) {
+		Runnable handler = handlers.get(item.getItemId());
+		if (handler != null) {
+			handler.run();
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 
 	protected void onNavigationButtonClicked() {

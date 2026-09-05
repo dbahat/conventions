@@ -41,6 +41,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -661,50 +662,43 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-
-		switch (item.getItemId()) {
-			case R.id.my_events_navigate_to_programme:
-				navigateToActivity(ProgrammeActivity.class);
-
-				return true;
-			case R.id.my_events_share:
+		return handleOptionsItem(item, Map.of(
+			R.id.my_events_navigate_to_programme, () -> navigateToActivity(ProgrammeActivity.class),
+			R.id.my_events_share, () -> {
 				FirebaseAnalytics
-						.getInstance(this)
-						.logEvent("share_clicked", new BundleBuilder()
-								.putString("number_of_events", String.valueOf(getMyEvents().size()))
-								.build()
-						);
+					.getInstance(this)
+					.logEvent("share_clicked", new BundleBuilder()
+						.putString("number_of_events", String.valueOf(getMyEvents().size()))
+						.build()
+					);
 
 				if (getMyEvents().size() > 0) {
 					startActivity(createSharingIntent());
 				} else {
 					noEventsDialog = new AlertDialog.Builder(this)
-							.setMessage(R.string.share_no_events)
-							.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									noEventsDialog.dismiss();
-								}
-							})
-							.create();
+						.setMessage(R.string.share_no_events)
+						.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								noEventsDialog.dismiss();
+							}
+						})
+						.create();
 					noEventsDialog.show();
 				}
-
-				return true;
-			case R.id.my_events_show_user_id:
+			},
+			R.id.my_events_show_user_id, () -> {
 				FirebaseAnalytics
-						.getInstance(MyEventsActivity.this)
-						.logEvent("show_user_id_clicked", null);
+					.getInstance(MyEventsActivity.this)
+					.logEvent("show_user_id_clicked", null);
 				String user = ConventionsApplication.settings.getUser();
 				if (user != null && !user.isEmpty()) {
 					showUserDetailsDialog(null);
 				} else {
 					loginAndShowUserDetails();
 				}
-
-		}
-
-		return super.onOptionsItemSelected(item);
+			}
+		));
 	}
 
 	private Intent createSharingIntent() {

@@ -19,6 +19,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 import amai.org.conventions.utils.Log;
 import amai.org.conventions.ConventionsApplication;
@@ -203,17 +204,13 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			case R.id.programme_navigate_to_my_events:
+		return handleOptionsItem(item, Map.of(
+			R.id.programme_navigate_to_my_events, () -> {
 				navigateToMyEventsIconModified = false;
 				navigateToActivity(MyEventsActivity.class);
-				return true;
-			case R.id.programme_navigate_to_feedback:
-				navigateToActivity(FeedbackActivity.class);
-				return true;
-		}
-
-		return super.onOptionsItemSelected(item);
+			},
+			R.id.programme_navigate_to_feedback, () -> navigateToActivity(FeedbackActivity.class)
+		));
 	}
 
 	@Override
