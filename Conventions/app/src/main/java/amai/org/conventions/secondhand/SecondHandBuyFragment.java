@@ -284,7 +284,7 @@ public class SecondHandBuyFragment extends Fragment implements SwipeRefreshLayou
 					return;
 				}
 				if (!success) {
-					Toast.makeText(getContext(), R.string.update_refresh_failed, Toast.LENGTH_SHORT).show();
+					Toast.makeText(getContext(), R.string.update_failed, Toast.LENGTH_SHORT).show();
 				}
 				// Even if the refresh wasn't successful we still need to set the items, apply the filters etc
 				updateRefreshTime();

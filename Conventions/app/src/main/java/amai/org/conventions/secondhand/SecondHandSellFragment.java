@@ -178,7 +178,7 @@ public class SecondHandSellFragment extends Fragment implements SwipeRefreshLayo
 												}
 											});
 										} else {
-											int messageId = R.string.update_refresh_failed;
+											int messageId = R.string.update_failed;
 											if (exception instanceof SecondHandSell.FormNotFoundException ||
 													exception instanceof SecondHandSell.NoItemsException) {
 												messageId = R.string.form_not_found;
@@ -245,7 +245,7 @@ public class SecondHandSellFragment extends Fragment implements SwipeRefreshLayo
 				adapter.setForms(secondHandSell.getForms());
 				adapter.notifyDataSetChanged();
 				if (!success) {
-					Toast.makeText(getActivity(), R.string.update_refresh_failed, Toast.LENGTH_LONG).show();
+					Toast.makeText(getActivity(), R.string.update_failed, Toast.LENGTH_LONG).show();
 				}
 			}
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
