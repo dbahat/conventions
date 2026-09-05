@@ -165,6 +165,10 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/olamot2026_notification_icon" />
+
+        <!-- Required for using Google Maps SDK v20.0.0 when running with older versions of Google Play Services (before version 25.50.34)
+             https://issuetracker.google.com/issues/476788722 -->
+        <uses-library android:name="org.apache.http.legacy" android:required="false" />
     </application>
 
 </manifest>
