@@ -7,4 +7,11 @@
         android:icon="?iconEnlarge"
         android:orderInCategory="2"
         app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/map_refresh_stands"
+        android:title="@string/refresh_stands"
+        android:icon="@android:drawable/stat_notify_sync_noanim"
+        android:orderInCategory="3"
+        app:showAsAction="never"/>
 </menu>

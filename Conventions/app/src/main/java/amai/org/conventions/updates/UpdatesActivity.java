@@ -18,7 +18,6 @@ import amai.org.conventions.networking.ModelRefresher;
 import amai.org.conventions.networking.UpdatesRefresher;
 import amai.org.conventions.notifications.PushNotification;
 import amai.org.conventions.notifications.PushNotificationDialogPresenter;
-import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Views;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -159,7 +158,7 @@ public class UpdatesActivity extends NavigationActivity implements SwipeRefreshL
 		    public void onError(Exception error) {
 				updateRefreshingFlag();
 				if (showError) {
-					Toast.makeText(UpdatesActivity.this, R.string.update_refresh_failed, Toast.LENGTH_LONG).show();
+					Toast.makeText(UpdatesActivity.this, R.string.update_failed, Toast.LENGTH_LONG).show();
 				}
 			}
 

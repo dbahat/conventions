@@ -18,7 +18,7 @@
     <string name="event_share">שתף</string>
 
     <string name="update_show_full_text">הצג עדכון מלא</string>
-    <string name="update_refresh_failed">לא ניתן לעדכן. נסה שנית מאוחר יותר</string>
+    <string name="update_failed">לא ניתן לעדכן. נסה שנית מאוחר יותר</string>
 
     <string name="my_events_share">שתף</string>
     <string name="my_event_share_title">התוכנייה שלי ל%s:</string>
@@ -84,6 +84,8 @@
     <string name="display">הצג</string>
     <string name="enlarge_map">הגדל</string>
     <string name="shrink_map">הקטן</string>
+    <string name="refresh_stands">עדכן דוכנים</string>
+    <string name="refresh_stands_finished">הדוכנים עודכנו</string>
     <string name="no_navigation_activity">לא נמצאה אפליקציה מתאימה לניווט</string>
     <string name="share_no_events">הוסף אירועים כדי לשתף</string>
     <string name="ok">אישור</string>

@@ -252,7 +252,7 @@ public class ProgrammeActivity extends NavigationActivity implements ProgrammeDa
 					}
 				}
 				if (e != null && showError) {
-					Toast.makeText(ProgrammeActivity.this, R.string.update_refresh_failed, Toast.LENGTH_SHORT).show();
+					Toast.makeText(ProgrammeActivity.this, R.string.update_failed, Toast.LENGTH_SHORT).show();
 				}
 				if (e != null) {
 					Log.e(TAG, "could not refresh model", e);

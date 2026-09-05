@@ -91,6 +91,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 	private boolean showOnlyDiscountStands;
 	private boolean showOnlyActiveStands;
 	private boolean isSearchClosing;
+	private boolean isRefreshingStands;
 	private Menu menu;
 
 	@Override
@@ -139,21 +140,35 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 
 		handleDeepLinks();
 
-		StandsRefresher.getInstance().refreshFromServer(false, new StandsRefresher.OnRefreshFinishedListener() {
+		isRefreshingStands = false;
+		refreshStands(false);
+	}
+
+	private void refreshStands(boolean force) {
+		if (isRefreshingStands) {
+			return;
+		}
+		isRefreshingStands = true;
+		StandsRefresher.getInstance().refreshFromServer(force, new StandsRefresher.OnRefreshFinishedListener() {
 			@Override
 			public void onError(Exception error) {
+				isRefreshingStands = false;
 				if (BuildConfig.DEBUG) {
-					ConventionsApplication.runOnCurrentActivityUiThread(activity -> {
-						Toast.makeText(activity, "Error refreshing stands: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-					});
+					Toast.makeText(MapActivity.this, "Error refreshing stands: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+				} else if (force) {
+					Toast.makeText(MapActivity.this, R.string.update_failed, Toast.LENGTH_SHORT).show();
 				}
 			}
 
 			@Override
 			public void onSuccess() {
+				isRefreshingStands = false;
 				// Update search results
 				if (isSearchOpen() && !isLocationsSearch() && standsSearchResultsAdapter != null) {
 					applySearchFiltersInBackground();
+				}
+				if (force) {
+					Toast.makeText(MapActivity.this, R.string.refresh_stands_finished, Toast.LENGTH_SHORT).show();
 				}
 			}
 		});
@@ -164,6 +179,10 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		getMenuInflater().inflate(R.menu.menu_map, menu);
 		this.menu = menu;
 		updateZoomMenuItem();
+		// Don't show "update stands" menu item if we can't update them
+		if (Convention.getInstance().getStandsURL() == null) {
+			menu.findItem(R.id.map_refresh_stands).setVisible(false);
+		}
 
 		return true;
 	}
@@ -178,6 +197,9 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 
 				closeSearch();
 				getCurrentFloorFragment().toggleMapZoom();
+				return true;
+			case R.id.map_refresh_stands:
+				refreshStands(true);
 				return true;
 		}
 		return super.onOptionsItemSelected(item);

@@ -12,11 +12,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Html;
-import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
-import android.text.style.ClickableSpan;
-import android.text.style.URLSpan;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -530,7 +527,7 @@ public class EventActivity extends NavigationActivity {
 							rotateAnimation.setRepeatCount(0);
 							setupEventTicketsAndPrices(event);
 							if (!isSuccess) {
-								Toast.makeText(EventActivity.this, R.string.update_refresh_failed, Toast.LENGTH_SHORT).show();
+								Toast.makeText(EventActivity.this, R.string.update_failed, Toast.LENGTH_SHORT).show();
 							}
 						}
 					}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
