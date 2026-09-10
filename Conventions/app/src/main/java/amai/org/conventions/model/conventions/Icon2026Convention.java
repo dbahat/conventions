@@ -286,7 +286,7 @@ public class Icon2026Convention extends SffConvention {
 						mapLocation("יריד הדוכנים F", Collections.singletonList(standsAreaF), 1009.7235f, 1840.217f),
 						mapLocation("יריד הדוכנים F", Collections.singletonList(standsAreaF), 1591.3565f, 1900.534f),
 						mapLocation("שירותי נשים", 1288.3165f, 1742.721f),
-						mapLocation(eshkol1, 1123.6445f, 1730.957f).withMarkerResource(R.drawable.olamot2026_place_red, false).withSelectedMarkerResource(R.drawable.olamot2026_place_red_selected, false),
+						mapLocation(eshkol1, 1123.6445f, 1730.957f).withMarkerResource(R.drawable.icon2026_place_red, false).withSelectedMarkerResource(R.drawable.icon2026_place_red_selected, false),
 						mapLocation(eshkol2, 809.8425f, 1739.515f),
 						mapLocation("שירותי גברים", 540.6735f, 1748.117f),
 						mapLocation("משחקי שער", 1320.0415f, 1436.399f),
@@ -362,9 +362,9 @@ public class Icon2026Convention extends SffConvention {
 	}
 
 	private MapLocation mapLocation(String name, List<? extends Place> places, float x, float y) {
-		final int DEFAULT_MARKER = R.drawable.olamot2026_place;
+		final int DEFAULT_MARKER = R.drawable.icon2026_place;
 		final int DEFAULT_MARKER_TINT_RES = MapLocation.NO_TINT;
-		final int DEFAULT_SELECTED_MARKER = R.drawable.olamot2026_place_selected;
+		final int DEFAULT_SELECTED_MARKER = R.drawable.icon2026_place_selected;
 		final int DEFAULT_SELECTED_MARKER_TINT_RES = MapLocation.NO_TINT;
 
 		MapLocation result = new MapLocation();
@@ -386,8 +386,8 @@ public class Icon2026Convention extends SffConvention {
 
 	private MapLocation mapLocationForShelter(String name, float x, float y) {
 		return mapLocation(new Shelter().withName(name), x, y)
-			.withMarkerResource(R.drawable.olamot2026_place_red, false, MapLocation.NO_TINT)
-			.withSelectedMarkerResource(R.drawable.olamot2026_place_red_selected, false, MapLocation.NO_TINT);
+			.withMarkerResource(R.drawable.icon2026_place_red, false, MapLocation.NO_TINT)
+			.withSelectedMarkerResource(R.drawable.icon2026_place_red_selected, false, MapLocation.NO_TINT);
 	}
 
 	@Override

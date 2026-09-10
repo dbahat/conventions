@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="icon2026_green50">#EAFFDE</color>
+    <color name="icon2026_green600">#5CC225</color>
+    <color name="icon2026_green900">#348209</color>
+    <color name="icon2026_green950">#276B02</color>
+
+    <color name="icon2026_brown25">#F0DFE3</color>
+    <color name="icon2026_brown50">#E5CFD4</color>
+    <color name="icon2026_brown100">#D5B3BB</color>
+    <color name="icon2026_brown200">#BD939D</color>
+    <color name="icon2026_brown400">#894B59</color>
+    <color name="icon2026_brown600">#5C1A29</color>
+    <color name="icon2026_brown700">#4A0414</color>
+    <color name="icon2026_brown800">#3F0210</color>
+
+    <color name="icon2026_blue50">#CBE1F2</color>
+    <color name="icon2026_blue500">#4B93BF</color>
+    <color name="icon2026_blue600">#4084AE</color>
+    <color name="icon2026_blue700">#2973A1</color>
+    <color name="icon2026_blue800">#1A5C86</color>
+
+    <color name="icon2026_purple25">#FAF7FC</color>
+    <color name="icon2026_purple50">#EFE8F4</color>
+    <color name="icon2026_purple100">#DFD4E8</color>
+    <color name="icon2026_purple200">#BAA1CA</color>
+    <color name="icon2026_purple400">#6E4B87</color>
+    <color name="icon2026_purple600">#472360</color>
+
+    <color name="icon2026_orange25">#FFF7F2</color>
+    <color name="icon2026_orange100">#FADAC8</color>
+    <color name="icon2026_orange300">#F7BA99</color>
+
+    <color name="icon2026_yellow25_95">#F2FFFBF5</color>
+    <color name="icon2026_yellow25">#FFFBF5</color>
+    <color name="icon2026_yellow100">#FFF3DB</color>
+    <color name="icon2026_yellow300">#FFDD9C</color>
+    <color name="icon2026_yellow500">#FFC252</color>
+    <color name="icon2026_yellow600">#FFB326</color>
+
+    <color name="icon2026_gray100">#E6E7ED</color>
+    <color name="icon2026_gray200">#DCDEE5</color>
+    <color name="icon2026_gray700">#595B67</color>
+
+    <color name="icon2026_red">#DD2F31</color>
+    <color name="icon2026_red2">#FD7576</color>
+    <color name="icon2026_bronze">#D08F65</color>
+</resources>

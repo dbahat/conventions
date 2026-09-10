@@ -34,7 +34,6 @@ public class Dates {
 		try {
 //			return dateFormat.parse("30.09.2026 16:10");
 			return null;
-//			return null;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
