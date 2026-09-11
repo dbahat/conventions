@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-   <style name="AppBaseTheme.Icon2026" parent="AppBaseTheme.Light.DarkToolbar">
+    <style name="AppBaseTheme.Icon2026" parent="AppBaseTheme.Light.DarkToolbar">
         <!-- Sub-themes -->
         <item name="android:dialogTheme">@style/AppDialogTheme.Icon2026</item>
         <item name="alertDialogTheme">@style/AppAlertDialogTheme.Icon2026</item>
@@ -220,9 +220,14 @@
         <item name="mapSearchBarBackground">@drawable/icon2026_search_bar_background_purple</item>
         <item name="mapSearchBarHorizontalMargins">5dp</item>
         <item name="mapShelterButtonBackground">@drawable/highlighted_button</item>
-       <!-- Stands -->
+        <!-- Stands -->
         <item name="standIconColor">@color/icon2026_brown600</item>
         <item name="standsTypeTitleColor">@color/icon2026_purple400</item>
+        <item name="standInfoTextColor">@color/icon2026_gray800</item>
+        <item name="standDescriptionTextColor">@color/icon2026_gray950</item>
+        <item name="standInactiveTextColor">@color/icon2026_red</item>
+        <item name="standTagTextColor">@color/icon2026_orange900</item>
+        <item name="standTagBackground">@drawable/icon2026_stand_tag_background</item>
         <!-- Second Hand Screen -->
         <item name="secondHandBackground">?activitiesBackground</item>
         <item name="secondHandFormColor">@drawable/icon2026_second_hand_form_text_color</item>
@@ -254,16 +259,16 @@
     <style name="AppDialogTheme.Icon2026" parent="Theme.AppCompat.Light.Dialog">
         <!-- This is the default starting API23. In any case the title is always left-justified so it's best to not use it. -->
         <item name="android:windowNoTitle">true</item>
-        <item name="colorAccent">@color/icon2026_purple400</item>
+        <item name="colorAccent">@color/icon2026_blue700</item>
         <item name="android:textColorPrimary">@color/icon2026_brown600</item>
-        <item name="borderlessButtonColor">@color/icon2026_purple400</item>
+        <item name="borderlessButtonColor">@color/icon2026_blue700</item>
         <item name="android:layoutDirection">rtl</item>
     </style>
 
     <style name="AppAlertDialogTheme.Icon2026" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="colorAccent">@color/icon2026_purple400</item>
+        <item name="colorAccent">@color/icon2026_blue700</item>
         <item name="android:textColorPrimary">@color/icon2026_brown600</item>
-        <item name="borderlessButtonColor">@color/icon2026_purple400</item>
+        <item name="borderlessButtonColor">@color/icon2026_blue700</item>
         <item name="android:layoutDirection">rtl</item>
     </style>
 

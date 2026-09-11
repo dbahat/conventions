@@ -28,8 +28,10 @@
     <color name="icon2026_purple600">#472360</color>
 
     <color name="icon2026_orange25">#FFF7F2</color>
+    <color name="icon2026_orange50">#FCE6D9</color>
     <color name="icon2026_orange100">#FADAC8</color>
     <color name="icon2026_orange300">#F7BA99</color>
+    <color name="icon2026_orange900">#9E3E0A</color>
 
     <color name="icon2026_yellow25_95">#F2FFFBF5</color>
     <color name="icon2026_yellow25">#FFFBF5</color>
@@ -41,6 +43,8 @@
     <color name="icon2026_gray100">#E6E7ED</color>
     <color name="icon2026_gray200">#DCDEE5</color>
     <color name="icon2026_gray700">#595B67</color>
+    <color name="icon2026_gray800">#414557</color>
+    <color name="icon2026_gray950">#0D122B</color>
 
     <color name="icon2026_red">#DD2F31</color>
     <color name="icon2026_red2">#FD7576</color>
