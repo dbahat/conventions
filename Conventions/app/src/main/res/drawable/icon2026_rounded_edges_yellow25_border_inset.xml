@@ -10,8 +10,9 @@
         <inset android:insetTop="10dp" android:insetBottom="10dp">
             <shape>
                 <corners android:radius="8dp" />
-                <solid android:color="@color/icon2026_yellow100" />
+                <stroke android:color="@color/icon2026_brown300" android:width="1dp"/>
+                <solid android:color="@color/icon2026_yellow25" />
             </shape>
-        </inset>>
+        </inset>
     </item>
 </layer-list>
