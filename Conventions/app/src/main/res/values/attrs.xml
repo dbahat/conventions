@@ -532,6 +532,13 @@
         <!-- Stands popup - color for fullscreen icon background in stands map -->
         <attr name="standsMapFullScreenIconBackground" format="color|reference"/>
 
+        <!-- Stand Information Popup -->
+        <attr name="standTagTextColor" format="color|reference"/>
+        <attr name="standTagBackground" format="integer|reference"/>
+        <attr name="standInfoTextColor" format="color|reference"/>
+        <attr name="standDescriptionTextColor" format="color|reference"/>
+        <attr name="standInactiveTextColor" format="color|reference"/>
+
         <!-- Event Screen -->
 
         <!-- Toolbar color in event activity -->

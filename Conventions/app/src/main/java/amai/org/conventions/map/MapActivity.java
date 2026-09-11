@@ -685,7 +685,8 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 							return (searchTerm == null || searchTerm.isEmpty() ||
 								item.getName().toLowerCase().contains(searchTerm.toLowerCase()) ||
 								(item.getDescription() != null && item.getDescription().toLowerCase().contains(searchTerm.toLowerCase())) ||
-								CollectionUtils.filter(CollectionUtils.map(item.getTypes(), StandType::getName), name -> name.toLowerCase().contains(searchTerm.toLowerCase())).size() > 0) &&
+								CollectionUtils.filter(CollectionUtils.map(item.getTypes(), StandType::getName), name -> name.toLowerCase().contains(searchTerm.toLowerCase())).size() > 0 ||
+								(item.getTags() != null && CollectionUtils.filter(item.getTags(), name -> name.toLowerCase().contains(searchTerm.toLowerCase())).size() > 0)) &&
 								(!showOnlyDiscountStands || item.hasDiscount()) &&
 								(!showOnlyActiveStands || item.isActive());
 						}

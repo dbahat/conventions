@@ -137,12 +137,10 @@
     <string name="stand_info">מידע נוסף</string>
     <string name="stand_website"><![CDATA[<a href=\"%s\">לאתר</a>]]></string>
     <string name="stand_types">קטגוריות: %s</string>
-    <string name="stand_location">מיקום: %s, %s</string>
+    <string name="stand_location">%s, %s</string>
     <string name="stand_location_search">%s, %s</string>
-    <string name="stand_location_only_area">מיקום: %s</string>
     <string name="stand_discount">בדוכן זה יש הנחות לחברי העמותות המארגנות.</string>
-    <string name="stand_inactive">הדוכן אינו פעיל כעת.</string>
-    <string name="stand_active_days">ימי פעילות: %s</string>
+    <string name="stand_inactive">לא פעיל</string>
     <string name="stand_name_inactive">%s (לא פעיל)</string>
     <string name="map_show_shelters">מרחבים מוגנים</string>
     <string name="goto_floor">עבור ל%s</string>

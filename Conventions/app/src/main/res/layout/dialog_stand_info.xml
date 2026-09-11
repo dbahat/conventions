@@ -1,10 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="10dp">
+
+    <TextView
+        android:id="@+id/stand_active_days"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="יום שני, 15/10"
+        android:textSize="14sp"
+        android:textColor="?standInfoTextColor"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"/>
+
+    <TextView
+        android:id="@+id/stand_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="אולם טדי, e12-e15"
+        android:textSize="14sp"
+        android:textColor="?standInfoTextColor"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"/>
+
+    <TextView
+        android:id="@+id/stand_inactive"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/stand_inactive"
+        android:textColor="?standInactiveTextColor"
+        android:textSize="14sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"/>
 
     <TextView
         android:id="@+id/stand_discount"
@@ -12,6 +44,7 @@
         android:layout_height="wrap_content"
         android:text="@string/stand_discount"
         android:textSize="14sp"
+        android:textColor="?standInfoTextColor"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="5dp"/>
@@ -21,7 +54,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="זה דוכן יפה מאוד עם הרבה מוצרים מגניבים. התיאור יכול להיות מאוד ארוך\nכולל כמה שורות בתוכו!"
-        android:textSize="14sp"
+        android:textSize="16sp"
+        android:textColor="?standDescriptionTextColor"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"/>
 
@@ -29,59 +64,20 @@
         android:id="@+id/stand_website"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="כתובת: https://my.website.com"
-        android:textSize="14sp"
+        tools:text="לאתר"
+        android:textSize="16sp"
         android:layout_marginTop="5dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"/>
 
-    <TextView
-        android:id="@+id/stand_inactive"
+    <com.google.android.flexbox.FlexboxLayout
+        android:id="@+id/stand_tags_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/stand_inactive"
-        android:textSize="14sp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
+        app:flexWrap="wrap"
         android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"/>
+        android:layout_marginEnd="20dp">
+    </com.google.android.flexbox.FlexboxLayout>
 
-    <TextView
-        android:id="@+id/stand_active_days"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="ימי פעילות: יום שני, 15/10"
-        android:textSize="14sp"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"/>
-
-    <TextView
-        android:id="@+id/stand_types"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="קטגוריות: יוצרים, כללים, בובות"
-        android:textSize="14sp"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"/>
-
-    <TextView
-        android:id="@+id/stand_tags"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="תגיות: יוצרים, כללים, בובות"
-        android:textSize="14sp"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"/>
-
-    <TextView
-        android:id="@+id/stand_location"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="מיקום: אולם טדי, e12-e15"
-        android:textSize="14sp"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"/>
 </LinearLayout>

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Html;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +19,17 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.google.android.flexbox.FlexboxLayout;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.PaintDrawable;
 import amai.org.conventions.customviews.PaintableImageView;
 import amai.org.conventions.map.StandViewHolder;
@@ -44,6 +49,7 @@ import androidx.core.text.method.LinkMovementMethodCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
+import androidx.core.widget.TextViewCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -180,7 +186,34 @@ public class StandsAreaFragment extends DialogFragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
-        View dialogView = View.inflate(builder.getContext(), R.layout.dialog_stand_info, null);
+        Context builderContext = builder.getContext();
+        View dialogView = View.inflate(builderContext, R.layout.dialog_stand_info, null);
+
+        boolean isAlwaysActive = true;
+        TextView activeDaysView = dialogView.findViewById(R.id.stand_active_days);
+        if (!stand.isAlwaysActive()) {
+            isAlwaysActive = false;
+            List<String> activeDays = CollectionUtils.map(stand.getActiveDays(), date -> Dates.formatDate("EEE dd.MM", date.getDate()));
+            activeDaysView.setText(TextUtils.join(", ", activeDays));
+            activeDaysView.setVisibility(View.VISIBLE);
+        } else {
+            activeDaysView.setVisibility(View.GONE);
+        }
+
+        TextView locationView = dialogView.findViewById(R.id.stand_location);
+        if (stand.getLocationName() == null || stand.getLocationName().trim().isEmpty()) {
+            locationView.setText(stand.getStandsArea().getName());
+        } else {
+            locationView.setText(builderContext.getString(R.string.stand_location, stand.getStandsArea().getName(), stand.getLocationName()));
+        }
+
+        // Show "stand is inactive" message if we are during the convention and the stand is not currently active
+        TextView inactiveView = dialogView.findViewById(R.id.stand_inactive);
+        if (!isAlwaysActive && Convention.getInstance().hasStarted() && !Convention.getInstance().hasEnded() && !stand.isActive()) {
+            inactiveView.setVisibility(View.VISIBLE);
+        } else {
+            inactiveView.setVisibility(View.GONE);
+        }
 
         TextView discountView = dialogView.findViewById(R.id.stand_discount);
         if (stand.hasDiscount()) {
@@ -202,47 +235,48 @@ public class StandsAreaFragment extends DialogFragment {
             websiteView.setVisibility(View.GONE);
         } else {
             websiteView.setVisibility(View.VISIBLE);
-            websiteView.setText(Html.fromHtml(builder.getContext().getString(R.string.stand_website, stand.getWebsite())));
+            websiteView.setText(Html.fromHtml(builderContext.getString(R.string.stand_website, stand.getWebsite())));
             websiteView.setMovementMethod(LinkMovementMethodCompat.getInstance());
         }
 
-        boolean isAlwaysActive = true;
-        TextView activeDaysView = dialogView.findViewById(R.id.stand_active_days);
-        if (!stand.isAlwaysActive()) {
-            isAlwaysActive = false;
-            List<String> activeDays = CollectionUtils.map(stand.getActiveDays(), date -> Dates.formatDate("EEE dd.MM", date.getDate()));
-            activeDaysView.setText(context.getString(R.string.stand_active_days, TextUtils.join(", ", activeDays)));
-            activeDaysView.setVisibility(View.VISIBLE);
-        } else {
-            activeDaysView.setVisibility(View.GONE);
+        // Add the types and tags as text views inside stand_tags_container
+        FlexboxLayout tagsContainer = dialogView.findViewById(R.id.stand_tags_container);
+        tagsContainer.removeAllViews();
+        List<String> allTags = CollectionUtils.map(stand.getTypes(), StandType::getName);
+        if (stand.getTags() != null) {
+            allTags.addAll(stand.getTags());
         }
 
-        // Show "stand is inactive" message if we are during the convention and the stand is not currently active
-        TextView inactiveView = dialogView.findViewById(R.id.stand_inactive);
-        if (!isAlwaysActive && Convention.getInstance().hasStarted() && !Convention.getInstance().hasEnded() && !stand.isActive()) {
-            inactiveView.setVisibility(View.VISIBLE);
-        } else {
-            inactiveView.setVisibility(View.GONE);
-        }
+        int tagViewTextColor = ThemeAttributes.getColor(builderContext, R.attr.standTagTextColor);
+        int tagViewBackgroundResource = ThemeAttributes.getResourceId(builderContext, R.attr.standTagBackground);
+        int paddingTopBottom = builderContext.getResources().getDimensionPixelOffset(R.dimen.stand_tag_padding_top_bottom);
+        int paddingStartEnd = builderContext.getResources().getDimensionPixelOffset(R.dimen.stand_tag_padding_start_end);
+        int marginTop = builderContext.getResources().getDimensionPixelOffset(R.dimen.stand_tag_margin_top);
+        int marginBetween = builderContext.getResources().getDimensionPixelOffset(R.dimen.stand_tag_margin_between);
+        boolean first = true;
+        int i = 0;
+        int lastIndex = allTags.size() - 1;
+        for (String tag : allTags) {
+            TextView tagView = new TextView(builderContext);
 
-        TextView typesView = dialogView.findViewById(R.id.stand_types);
-        List<String> standTypeNames = CollectionUtils.map(stand.getTypes(), StandType::getName);
-        typesView.setText(builder.getContext().getString(R.string.stand_types, TextUtils.join(", ", standTypeNames)));
+            TextViewCompat.setTextAppearance(tagView, R.style.StandTag);
+            tagView.setTextColor(tagViewTextColor);
+            tagView.setBackgroundResource(tagViewBackgroundResource);
+            tagView.setText(tag);
+            if (first) {
+                first = false;
+            }
+            tagView.setPaddingRelative(paddingStartEnd, paddingTopBottom, paddingStartEnd, paddingTopBottom);
+            tagView.setGravity(Gravity.CENTER);
+            tagsContainer.addView(tagView);
 
-        TextView tagsView = dialogView.findViewById(R.id.stand_tags);
-        List<String> standTags = stand.getTags();
-        if (standTags == null) {
-            tagsView.setVisibility(View.GONE);
-        } else {
-            tagsView.setVisibility(View.VISIBLE);
-            tagsView.setText(builder.getContext().getString(R.string.tags, TextUtils.join(", ", standTags)));
-        }
-
-        TextView locationView = dialogView.findViewById(R.id.stand_location);
-        if (stand.getLocationName() == null || stand.getLocationName().trim().isEmpty()) {
-            locationView.setText(builder.getContext().getString(R.string.stand_location_only_area, stand.getStandsArea().getName()));
-        } else {
-            locationView.setText(builder.getContext().getString(R.string.stand_location, stand.getStandsArea().getName(), stand.getLocationName()));
+            // Set margins
+            FlexboxLayout.LayoutParams layoutParams = ((FlexboxLayout.LayoutParams) tagView.getLayoutParams());
+            layoutParams.setMargins(0, marginTop, 0, 0);
+            int marginEnd = i == lastIndex ? 0 : marginBetween;
+            layoutParams.setMarginEnd(marginEnd);
+            tagView.setLayoutParams(layoutParams);
+            ++i;
         }
 
         builder
