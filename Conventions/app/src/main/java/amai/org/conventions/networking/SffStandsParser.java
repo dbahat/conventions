@@ -6,6 +6,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.io.InputStreamReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -15,12 +17,12 @@ import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.StandType;
 import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.model.conventions.Convention;
+import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
 
 public class SffStandsParser implements StandsParser {
 	private static final String TAG = SffStandsParser.class.getCanonicalName();
-	private final static int MAX_LOCATION_IDS = 30;
 
 	@Override
 	public List<Stand> parse(InputStreamReader reader) {
@@ -32,18 +34,22 @@ public class SffStandsParser implements StandsParser {
 		// Array booths
 		// 		String id
 		// 		String name
-		// 		String category -> change to String array?
-		// 		String area -> update values to only have the full name?
-		// 		Object tableIds -> change to String array of location IDs?
+		// 		String category
+		//		String Array tags
+		// 		Object area
+		//			String id
+		//			String title
+		// 		Object tableIds
 		// 			int from
 		//			int to
 		//			int count
 		//			String raw
+		//			int Array list -> change to String Array?
 		// 		String discountOrga -> change to boolean?
 		// 		String url
 		// 		String logo
-		// 		-> Add description?
-		//		-> Add when as String array?
+		// 		String description
+		//		String Array dates
 		JsonObject rootObj = root.getAsJsonObject();
 		JsonArray stands = rootObj.get("booths").getAsJsonArray();
 
@@ -55,21 +61,24 @@ public class SffStandsParser implements StandsParser {
 				JsonObject standObj = stand.getAsJsonObject();
 
 				String name = standObj.get("name").getAsString();
-				String category = standObj.get("category").getAsString();
-				String area = standObj.get("area").getAsString();
-				int tableIdsFrom = -1;
-				int tableIdsTo = -1;
+				String description = hasNonNullProperty(standObj, "description") ? standObj.get("description").getAsString() : null;
+				String category = hasNonNullProperty(standObj, "category") ? standObj.get("category").getAsString() : null;
+				JsonArray jsonTags = hasNonNullProperty(standObj, "tags") ? standObj.get("tags").getAsJsonArray() : null;
+				String area = null;
+				if (standObj.has("area") && standObj.get("area").isJsonObject()) {
+					JsonObject jsonArea = standObj.get("area").getAsJsonObject();
+					area = hasNonNullProperty(jsonArea, "title") ? jsonArea.get("title").getAsString() : null;
+				}
+				JsonArray tableIdsList = null;
 				if (standObj.has("tableIds") &&  standObj.get("tableIds").isJsonObject()) {
 					JsonObject tableIds = standObj.get("tableIds").getAsJsonObject();
-					if (tableIds.has("from") && !tableIds.get("from").isJsonNull()) {
-						tableIdsFrom = tableIds.get("from").getAsInt();
-					}
-					if (tableIds.has("to") && !tableIds.get("to").isJsonNull()) {
-						tableIdsTo = tableIds.get("to").getAsInt();
+					if (hasNonNullProperty(tableIds, "list")) {
+						tableIdsList = tableIds.get("list").getAsJsonArray();
 					}
 				}
-				boolean discountOrga = standObj.get("discountOrga").getAsBoolean();
-				String url = standObj.get("url").getAsString();
+				boolean discountOrga = hasNonNullProperty(standObj, "discountOrga") && standObj.get("discountOrga").getAsBoolean();
+				String url = hasNonNullProperty(standObj, "url") ? standObj.get("url").getAsString() : null;
+				JsonArray dates = hasNonNullProperty(standObj, "dates") ? standObj.get("dates").getAsJsonArray() : null;
 
 				// Don't show stands with no area - they will not be displayed anywhere
 				if (ParseUtils.isEmpty(area)) {
@@ -86,14 +95,19 @@ public class SffStandsParser implements StandsParser {
 
 				StandType standType = convention.getOrAddStandType(category);
 
-				List<String> locationIds = parseLocationIds(name, tableIdsFrom, tableIdsTo);
+				List<String> locationIds = parseStringArray(tableIdsList);
 
-				List<Dates.LocalDate> activeDays = null;
+				List<String> tags = parseStringArray(jsonTags);
+
+				List<Dates.LocalDate> activeDays = parseLocalDates(dates);
+
 				Stand currStand = new Stand()
 					.withName(name)
+					.withDescription(description)
 					.withStandsArea(standsArea)
 					.withWebsite(url)
 					.withTypes(Collections.singletonList(standType))
+					.withTags(tags)
 					.withLocationIds(locationIds)
 					.withDiscount(discountOrga)
 					.withActiveDays(activeDays);
@@ -109,23 +123,38 @@ public class SffStandsParser implements StandsParser {
 		return standsList;
 	}
 
-	private List<String> parseLocationIds(String name, int from, int to) {
-		if (from == -1 || to == -1) {
-			Log.w(TAG, "stand " + name + ": missing from or to location IDs: from=" + from + ", to=" + to + ". Not setting location IDs.");
-			return new ArrayList<>(); // Must be an array list to compare it to the existing stand
-		} else if (to < from) {
-			Log.e(TAG, "stand " + name + ": to < from in location IDs: from=" + from + ", to=" + to + ". Not setting location IDs.");
-			return new ArrayList<>(); // Must be an array list to compare it to the existing stand
+	private boolean hasNonNullProperty(JsonObject jsonObject, String key) {
+		return jsonObject.has(key) && !jsonObject.get(key).isJsonNull();
+	}
+
+	private List<String> parseStringArray(JsonArray array) {
+		if (array == null) {
+			return null;
 		}
 
-		List<String> locationIds = new ArrayList<>(Math.min(to - from + 1, MAX_LOCATION_IDS));
-		for (int curr = from; curr <= to; ++curr) {
-			locationIds.add(String.valueOf(curr));
-			if (locationIds.size() >= MAX_LOCATION_IDS) {
-				Log.e(TAG, "stand " + name + ": too many location IDs, max is " + MAX_LOCATION_IDS + ": from=" + from + ", to=" + to + ". Skipping the rest.");
-				break;
+		List<String> list = new ArrayList<>(array.size());
+		for (JsonElement element : array) {
+			if (element.isJsonPrimitive()) {
+				list.add(element.getAsString());
 			}
 		}
-		return locationIds;
+
+		return list;
+	}
+
+	private List<Dates.LocalDate> parseLocalDates(JsonArray array) {
+		List<String> rawDates = parseStringArray(array);
+		if (rawDates == null) {
+			return null;
+		}
+
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Dates.getLocale());
+		return CollectionUtils.map(rawDates, dateString -> {
+			try {
+				return new Dates.LocalDate(format.parse(dateString));
+			} catch (ParseException e) {
+				throw new RuntimeException(e);
+			}
+		});
 	}
 }

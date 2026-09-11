@@ -194,7 +194,7 @@ public class Icon2026Convention extends SffConvention {
 	@Override
 	protected URL initStandsURL() {
 		try {
-			return new URL("https://api.sf-f.org.il/booths/booths.json");
+			return new URL("https://api.sf-f.org.il/booths/" + API_SLUG + ".json");
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
@@ -257,16 +257,16 @@ public class Icon2026Convention extends SffConvention {
 				.withDefaultMarkerHeight(153.195f);
 		final float SMALL_MARKER_HEIGHT = 104.497f;
 
-		StandsArea standsAreaA = new StandsArea().withName("א'-אטלנטיס");
-		StandsArea standsAreaB = new StandsArea().withName("ב'-בה סינג סה");
-		StandsArea standsAreaC = new StandsArea().withName("ג' - גאליפריי");
-		StandsArea standsAreaD = new StandsArea().withName("ד'- דרגונסטון");
-		StandsArea standsAreaE = new StandsArea().withName("ה'-היפריון");
-		StandsArea standsAreaF = new StandsArea().withName("ו'- וולקן");
-		StandsArea standsAreaP = new StandsArea().withName("פ'- פלורין שלישי");
+		StandsArea standsAreaA = new StandsArea().withName("אטלנטיס");
+		StandsArea standsAreaB = new StandsArea().withName("בה סינג סה");
+		StandsArea standsAreaC = new StandsArea().withName("גאליפריי");
+		StandsArea standsAreaD = new StandsArea().withName("דרגונסטון");
+		StandsArea standsAreaE = new StandsArea().withName("היפריון");
+		StandsArea standsAreaF = new StandsArea().withName("וולקן");
+		StandsArea standsAreaH = new StandsArea().withName("זוטרופוליס");
+		StandsArea standsAreaG = new StandsArea().withName("חלם");
+		StandsArea standsAreaP = new StandsArea().withName("פלורין");
 		StandsArea standsAreaEshkol = new StandsArea().withName("אשכול");
-		StandsArea standsAreaH = new StandsArea().withName("ז'- זוטרופוליס");
-		StandsArea standsAreaG = new StandsArea().withName("ח'- חלם");
 		StandsArea standsAreaCinematheque = new StandsArea().withName("סינמטק");
 
 		return new ConventionMap()
