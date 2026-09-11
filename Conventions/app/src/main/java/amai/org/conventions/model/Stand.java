@@ -20,6 +20,7 @@ public class Stand {
 	private List<StandType> types;
 	private StandsArea standsArea;
 	private List<String> locationIds;
+	private List<String> tags;
 	private boolean discount;
 	private List<Dates.LocalDate> activeDays;
 
@@ -130,6 +131,19 @@ public class Stand {
 
 	public Stand withDiscount(boolean discount) {
 		setDiscount(discount);
+		return this;
+	}
+
+	public List<String> getTags() {
+		return tags;
+	}
+
+	public void setTags(List<String> tags) {
+		this.tags = tags;
+	}
+
+	public Stand withTags(List<String> tags) {
+		setTags(tags);
 		return this;
 	}
 

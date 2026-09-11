@@ -229,6 +229,15 @@ public class StandsAreaFragment extends DialogFragment {
         List<String> standTypeNames = CollectionUtils.map(stand.getTypes(), StandType::getName);
         typesView.setText(builder.getContext().getString(R.string.stand_types, TextUtils.join(", ", standTypeNames)));
 
+        TextView tagsView = dialogView.findViewById(R.id.stand_tags);
+        List<String> standTags = stand.getTags();
+        if (standTags == null) {
+            tagsView.setVisibility(View.GONE);
+        } else {
+            tagsView.setVisibility(View.VISIBLE);
+            tagsView.setText(builder.getContext().getString(R.string.tags, TextUtils.join(", ", standTags)));
+        }
+
         TextView locationView = dialogView.findViewById(R.id.stand_location);
         if (stand.getLocationName() == null || stand.getLocationName().trim().isEmpty()) {
             locationView.setText(builder.getContext().getString(R.string.stand_location_only_area, stand.getStandsArea().getName()));

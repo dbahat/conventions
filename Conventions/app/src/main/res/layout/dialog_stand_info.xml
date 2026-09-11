@@ -13,7 +13,8 @@
         android:text="@string/stand_discount"
         android:textSize="14sp"
         android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"/>
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="5dp"/>
 
     <TextView
         android:id="@+id/stand_description"
@@ -59,6 +60,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="קטגוריות: יוצרים, כללים, בובות"
+        android:textSize="14sp"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"/>
+
+    <TextView
+        android:id="@+id/stand_tags"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="תגיות: יוצרים, כללים, בובות"
         android:textSize="14sp"
         android:layout_marginTop="5dp"
         android:layout_marginStart="20dp"
