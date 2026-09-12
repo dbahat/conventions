@@ -1,23 +1,18 @@
 package amai.org.conventions.map;
 
-import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.util.List;
 
-import amai.org.conventions.ThemeAttributes;
-import amai.org.conventions.events.adapters.SectionedRecyclerViewAdapter;
 import amai.org.conventions.model.Stand;
-import amai.org.conventions.model.StandType;
 import amai.org.conventions.model.conventions.Convention;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import sff.org.conventions.R;
 
-public class StandsRecyclerAdapter extends SectionedRecyclerViewAdapter<Stand, StandType, StandViewHolder, StandsRecyclerAdapter.SectionViewHolder> {
+public class StandsRecyclerAdapter extends RecyclerView.Adapter<StandViewHolder> {
     private final boolean showLocations;
     private List<Stand> stands;
     private String selectedStandName;
@@ -25,7 +20,6 @@ public class StandsRecyclerAdapter extends SectionedRecyclerViewAdapter<Stand, S
     private StandViewHolder.OnClickListener onClickListener;
 
     public StandsRecyclerAdapter(List<Stand> stands, boolean showLocations, String selectedStandName) {
-        super(stands);
         this.stands = stands;
         this.showLocations = showLocations;
         this.selectedStandName = selectedStandName;
@@ -47,30 +41,11 @@ public class StandsRecyclerAdapter extends SectionedRecyclerViewAdapter<Stand, S
     @Override
     public void onBindViewHolder(@NonNull StandViewHolder holder, int position) {
         Stand stand = stands.get(position);
-        // Show the divider if it's not the last item
-        boolean showDivider = position < getItemCount() - 1;
-        holder.setStand(stand, selectedStandName != null && selectedStandName.equals(stand.getName()), showInactiveIndication, showDivider, onClickListener);
+        holder.setStand(stand, selectedStandName != null && selectedStandName.equals(stand.getName()), showInactiveIndication, onClickListener);
     }
 
     public void setOnClickListener(StandViewHolder.OnClickListener onClickListener) {
         this.onClickListener = onClickListener;
-    }
-
-    @Override
-    protected StandType getSection(Stand item) {
-        return item.getType();
-    }
-
-    @Override
-    public SectionViewHolder onCreateSectionViewHolder(ViewGroup parent, int typeView) {
-        final View view = LayoutInflater.from(parent.getContext()).inflate(android.R.layout.simple_list_item_1, parent, false);
-        return new SectionViewHolder(view, android.R.id.text1);
-    }
-
-    @Override
-    public void onBindSectionViewHolder(SectionViewHolder sectionViewHolder, StandType section) {
-        Resources resources = sectionViewHolder.title.getResources();
-        sectionViewHolder.title.setText(section.getName());
     }
 
     @Override
@@ -80,15 +55,5 @@ public class StandsRecyclerAdapter extends SectionedRecyclerViewAdapter<Stand, S
 
     public void setSelectedStandName(String selectedStandName) {
         this.selectedStandName = selectedStandName;
-    }
-
-    public static class SectionViewHolder extends RecyclerView.ViewHolder {
-        public TextView title;
-
-        public SectionViewHolder(View view, int mTextResourceid) {
-            super(view);
-            title = view.findViewById(mTextResourceid);
-            title.setTextColor(ThemeAttributes.getColor(view.getContext(), R.attr.standsTypeTitleColor));
-        }
     }
 }

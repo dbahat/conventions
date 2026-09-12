@@ -9,7 +9,6 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Picture;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -30,34 +29,29 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import amai.org.conventions.model.DetailsActivityLocation;
-import amai.org.conventions.navigation.NavigationActivity;
-import amai.org.conventions.utils.CollectionUtils;
-import amai.org.conventions.utils.Objects;
 import com.caverock.androidsvg.SVG;
 import com.caverock.androidsvg.SVGImageView;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.manuelpeinado.imagelayout.ImageLayout;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
 import amai.org.conventions.ImageHandler;
-import amai.org.conventions.model.FloorLocation;
-import sff.org.conventions.R;
 import amai.org.conventions.customviews.AspectRatioSVGImageView;
 import amai.org.conventions.customviews.InterceptorLinearLayout;
 import amai.org.conventions.events.EventView;
 import amai.org.conventions.events.activities.HallActivity;
-import amai.org.conventions.events.activities.StandsAreaFragment;
+import amai.org.conventions.events.activities.StandsAreaActivity;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionEventComparator;
 import amai.org.conventions.model.ConventionMap;
+import amai.org.conventions.model.DetailsActivityLocation;
 import amai.org.conventions.model.Floor;
+import amai.org.conventions.model.FloorLocation;
 import amai.org.conventions.model.Hall;
 import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.model.Place;
@@ -65,13 +59,16 @@ import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.BundleBuilder;
+import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.Objects;
 import amai.org.conventions.utils.Views;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.MotionEventCompat;
 import androidx.fragment.app.Fragment;
 import pl.polidea.view.ZoomView;
+import sff.org.conventions.R;
 
 /**
  * A fragment showing a single map floor
@@ -997,28 +994,29 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 
 	private void showStandsArea(MapLocation location, Stand stand) {
 		// Show the list of stands in a dialog (if there is only one stands area in this location)
-		StandsArea place = location.getSinglePlace(StandsArea.class);
-		if (place == null) {
+		StandsArea standsArea = location.getSinglePlace(StandsArea.class);
+		if (standsArea == null) {
 			return;
 		}
 
 		// If there is only 1 stand and no stands map, show the stand directly
-		if (!place.hasImageResource() && Convention.getInstance().getStandsByStandArea(place).size() == 1) {
-			StandsAreaFragment.showStandInfo(getContext(), Convention.getInstance().getStandsByStandArea(place).get(0));
+		if (!standsArea.hasImageResource() && Convention.getInstance().getStandsByStandArea(standsArea).size() == 1) {
+			StandsAreaActivity.showStandInfo(getContext(), Convention.getInstance().getStandsByStandArea(standsArea).get(0));
 			return;
 		}
 
-		StandsAreaFragment standsFragment = new StandsAreaFragment();
-
-		Bundle args = new Bundle();
-		args.putInt(StandsAreaFragment.ARGUMENT_STANDS_AREA_ID, place.getId());
+		// Navigate to the stands area
+		Bundle animationBundle = ActivityOptions.makeCustomAnimation(appContext, R.anim.slide_in_bottom, 0).toBundle();
+		Bundle bundle = new Bundle();
+		bundle.putString(StandsAreaActivity.EXTRA_STANDS_AREA_NAME, standsArea.getName());
 		if (stand != null) {
-			// Select the stand inside the area
-			args.putString(StandsAreaFragment.ARGUMENT_STAND_NAME, stand.getName());
+			bundle.putString(StandsAreaActivity.EXTRA_STAND_NAME, stand.getName());
 		}
-		standsFragment.setArguments(args);
+		bundle.putBoolean(StandsAreaActivity.EXTRA_USE_SLIDE_OUT_ANIMATION_ON_BACK, true);
 
-		standsFragment.show(getFragmentManager(), null);
+		Intent intent = new Intent(getActivity(), StandsAreaActivity.class);
+		intent.putExtras(bundle);
+		getActivity().startActivity(intent, animationBundle);
 	}
 
 	private void setupHallLocation(final MapLocation location) {
@@ -1033,9 +1031,9 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 			// Only show events that happen today
 			Date now = Dates.now();
 			List<ConventionEvent> events = CollectionUtils.filter(allHallEvents, (event) -> Dates.isSameDate(now, event.getStartTime()));
-			if (events.size() == 0) {
+			if (events.isEmpty()) {
 				// Allow to go to hall if it has any events, not necessarily today
-				hasEvents = allHallEvents.size() > 0;
+				hasEvents = !allHallEvents.isEmpty();
 			} else {
 				Collections.sort(events, new ConventionEventComparator());
 				for (ConventionEvent event : events) {

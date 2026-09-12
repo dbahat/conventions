@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- We want to achieve the following things with the layout:
-     1. Align the button and text view baseline
-     2. Keep a constant space between the text view and divider
+     1. Have the ability to align the button and text view baseline
+     2. Keep a constant space between the text view and view bottom
      3. Support multi-line stand names
      LinearLayout had an issue where the baseline alignment caused the stand name
      to be cut in the bottom when it was multi-line, and adding padding caused
@@ -14,7 +14,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp">
+    android:background="?standBackground"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="8dp"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/stand_type_image"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        tools:src="@drawable/ic_shopping_basket"
+        android:layout_marginEnd="16dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"/>
 
     <!-- The Button is placed first so the text can safely align to its Start boundary -->
     <Button
@@ -26,28 +39,40 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true" />
 
-    <amai.org.conventions.customviews.CompoundTextView
+    <TextView
         android:id="@+id/stand_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:compoundDrawableWidth="24dp"
-        app:compoundDrawableHeight="24dp"
-        android:drawablePadding="5dp"
-        style="@style/Base.TextAppearance.AppCompat.Body1"
-        android:textColor="?mapSearchText"
+        android:textSize="16sp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
+        android:textColor="?standNameColor"
         android:gravity="center_vertical"
         tools:text="Einav Hats"
-        android:layout_alignParentStart="true"
+        android:layout_toEndOf="@id/stand_type_image"
         android:layout_toStartOf="@id/open_stand_info"
         android:layout_alignBaseline="@id/open_stand_info"
         />
 
-    <View
-        android:id="@+id/stand_divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/gray"
-        android:layout_below="@id/stand_name"
-        android:layout_marginTop="5dp" />
+    <TextView
+        android:id="@+id/stand_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="12-13"
+        android:textColor="?attr/standLocationTextColor"
+        android:layout_marginEnd="8dp"
+        android:layout_toEndOf="@id/stand_type_image"
+        android:layout_below="@id/stand_name"/>
 
+    <TextView
+        android:id="@+id/stand_inactive_indication"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="?inactiveStandIndicationTextColor"
+        android:background="?inactiveStandIndicationBackground"
+        android:text="@string/stand_inactive"
+        android:paddingStart="6dp"
+        android:paddingEnd="6dp"
+        android:layout_toEndOf="@id/stand_location"
+        android:layout_below="@id/stand_name"/>
 </RelativeLayout>

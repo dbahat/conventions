@@ -433,6 +433,8 @@
         <attr name="updateItemSeparator" format="color|reference"/>
         <!-- Separator above the "show more" button -->
         <attr name="updateItemBorder" format="color|reference"/>
+        <!-- "show more" button text color -->
+        <attr name="updateItemShowMoreTextColor" format="color|reference"/>
         <!-- Text color for update text. Can be a color state list. State is set with state_update_... -->
         <attr name="updateTextColor" format="color|reference"/>
         <!-- Should there be a "new" indicator for new updates -->
@@ -523,20 +525,38 @@
         <!-- Details button text color -->
         <attr name="mapDetailButtonsTextColor" format="integer|reference"/>
 
+        <!-- Stands Area -->
+
+        <!-- Background resource for stand -->
+        <attr name="standBackground" format="integer|reference"/>
+        <!-- Background resource for selected stand -->
+        <attr name="selectedStandBackground" format="integer|reference"/>
         <!-- Stands popup stand icon color -->
         <attr name="standIconColor" format="color|reference"/>
-        <!-- Stands popup - color for stand type title and selected stand name and location -->
-        <attr name="standsTypeTitleColor" format="color|reference"/>
-        <!-- Stands popup - color for fullscreen icon in stands map -->
+        <!-- Text color for stand name -->
+        <attr name="standNameColor" format="color|reference"/>
+        <!-- Text color for stand location -->
+        <attr name="standLocationTextColor" format="color|reference"/>
+        <!-- Text color for inactive stand indication -->
+        <attr name="inactiveStandIndicationTextColor" format="color|reference"/>
+        <!-- Background resource for inactive stand indication -->
+        <attr name="inactiveStandIndicationBackground" format="integer|reference"/>
+        <!-- Color for fullscreen icon in stands map -->
         <attr name="standsMapFullScreenIconColor" format="color|reference"/>
-        <!-- Stands popup - color for fullscreen icon background in stands map -->
+        <!-- Color for fullscreen icon background in stands map -->
         <attr name="standsMapFullScreenIconBackground" format="color|reference"/>
 
         <!-- Stand Information Popup -->
+
+        <!-- Text color for stand tag -->
         <attr name="standTagTextColor" format="color|reference"/>
+        <!-- Background resource for stand tag -->
         <attr name="standTagBackground" format="integer|reference"/>
+        <!-- Text color for stand information (location, dates) -->
         <attr name="standInfoTextColor" format="color|reference"/>
+        <!-- Text color for stand description -->
         <attr name="standDescriptionTextColor" format="color|reference"/>
+        <!-- Text color for inactive stand notice -->
         <attr name="standInactiveTextColor" format="color|reference"/>
 
         <!-- Event Screen -->
@@ -651,7 +671,7 @@
         <attr name="buttonColorDisabled" format="color|reference"/>
 
         <!-- Color for borderless button. Used in: updates ("show more"), feedback activity (hide sent feedback),
-             stands popup (dismiss), configure notifications (configure before start/after end/dismiss),
+             stands area (show more info), configure notifications (configure before start/after end/dismiss),
              event vote popup (dimiss), second hand activity sell tab (delete form).
              Some of these are configured in sub-themes. -->
         <attr name="borderlessButtonColor" format="color|reference"/>

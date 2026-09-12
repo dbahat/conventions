@@ -16,17 +16,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.flexbox.FlexboxLayout;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import amai.org.conventions.ThemeAttributes;
@@ -39,8 +37,10 @@ import amai.org.conventions.model.StandLocation;
 import amai.org.conventions.model.StandType;
 import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.model.conventions.Convention;
+import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
+import amai.org.conventions.utils.Log;
 import amai.org.conventions.utils.Objects;
 import amai.org.conventions.utils.Views;
 import androidx.annotation.NonNull;
@@ -58,10 +58,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import pl.polidea.view.ZoomView;
 import sff.org.conventions.R;
 
-public class StandsAreaFragment extends DialogFragment {
-    public static final String ARGUMENT_STANDS_AREA_ID = "ArgumentStandsAreaID";
-    public static final String ARGUMENT_STAND_NAME = "ArgumentStandsID";
-    private int standsAreaID = -1;
+public class StandsAreaActivity extends NavigationActivity {
+    private static final String TAG = StandsAreaActivity.class.getCanonicalName();
+
+    public static final String EXTRA_STANDS_AREA_NAME = "ExtraStandsAreaName";
+    public static final String EXTRA_STAND_NAME = "ExtraStandID";
+    public static final String EXTRA_USE_SLIDE_OUT_ANIMATION_ON_BACK = "ExtraUseSlideOutAnimationOnBack";
+
+    private boolean useSlideOutAnimationOnBack;
+    private String standsAreaName;
     private String selectedStandName;
     private StandsArea area;
     private ZoomView zoom;
@@ -70,113 +75,119 @@ public class StandsAreaFragment extends DialogFragment {
     private ImageView imageHighlight;
     private RecyclerView standsList;
     private StandsRecyclerAdapter standsAdapter;
-    // Using RecyclerView with custom adapter since sticky headers GridView didn't
-    // properly support scrollToPosition
-    private SectionedGridRecyclerViewAdapterWrapper sectionedStandsAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle args = savedInstanceState != null ? savedInstanceState : getArguments();
-        standsAreaID = args.getInt(ARGUMENT_STANDS_AREA_ID, -1);
-        selectedStandName = args.getString(ARGUMENT_STAND_NAME);
+
+        Bundle bundle = (savedInstanceState != null ? savedInstanceState : getIntent().getExtras());
+        standsAreaName = bundle.getString(EXTRA_STANDS_AREA_NAME);
+        selectedStandName = bundle.getString(EXTRA_STAND_NAME);
+        useSlideOutAnimationOnBack = bundle.getBoolean(EXTRA_USE_SLIDE_OUT_ANIMATION_ON_BACK, false);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE && useSlideOutAnimationOnBack) {
+            overrideActivityTransition(OVERRIDE_TRANSITION_CLOSE, 0, R.anim.slide_out_bottom);
+        }
+
+        area = Convention.getInstance().findStandsAreaByName(standsAreaName);
+        if (area == null) {
+            Log.e(TAG, "Could not find stands area with name " + standsAreaName);
+            Toast.makeText(this, getString(R.string.stands_area_not_found), Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
+
+        setContentInContentContainer(R.layout.activity_stands_area);
+        setToolbarTitle(area.getName());
+
+        setupStandsArea();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (useSlideOutAnimationOnBack) {
+            overridePendingTransition(0, R.anim.slide_out_bottom);
+        }
     }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt(ARGUMENT_STANDS_AREA_ID, standsAreaID);
-        outState.putString(ARGUMENT_STAND_NAME, selectedStandName);
+        outState.putString(EXTRA_STANDS_AREA_NAME, standsAreaName);
+        outState.putString(EXTRA_STAND_NAME, selectedStandName);
+        outState.putBoolean(EXTRA_USE_SLIDE_OUT_ANIMATION_ON_BACK, useSlideOutAnimationOnBack);
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
-        getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-        View view = inflater.inflate(R.layout.activity_stands_area, container, false);
-
-        standsList = view.findViewById(R.id.standsList);
+    private void setupStandsArea() {
+        standsList = findViewById(R.id.standsList);
         Convention convention = Convention.getInstance();
-        area = convention.findStandsArea(standsAreaID);
-        if (area != null) {
-            TextView nameView = view.findViewById(R.id.stands_area_name);
-            nameView.setText(area.getName());
 
-            zoom = view.findViewById(R.id.stands_area_zoom);
-            imageFrame = view.findViewById(R.id.stands_area_map_frame);
-            image = view.findViewById(R.id.stands_area_map);
-			View zoomContainer = view.findViewById(R.id.stands_area_zoom_container);
+        zoom = findViewById(R.id.stands_area_zoom);
+        imageFrame = findViewById(R.id.stands_area_map_frame);
+        image = findViewById(R.id.stands_area_map);
+        View zoomContainer = findViewById(R.id.stands_area_zoom_container);
 
-            List<Stand> stands = convention.getStandsByStandArea(area);
-            Collections.sort(stands, (lhs, rhs) -> {
-                int result = lhs.getType().getOrder() - rhs.getType().getOrder();
-                if (result == 0) {
-                    result = Objects.compareTo(lhs.getSort(), rhs.getSort(), false);
-                }
-                return result;
-            });
+        // Handle edge to edge
+        Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, Views.InsetType.PADDING, false, zoom);
+        Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, Views.InsetType.PADDING, false, standsList);
 
-            standsAdapter = new StandsRecyclerAdapter(stands, area.hasImageResource(), selectedStandName);
-            standsList.setLayoutManager(new LinearLayoutManager(getContext()));
-            sectionedStandsAdapter = new SectionedGridRecyclerViewAdapterWrapper<>(standsList, standsAdapter);
-            standsList.setAdapter(sectionedStandsAdapter);
-
-            if (area.hasImageResource()) {
-                image.setImageResource(area.getImageResource());
-
-                int orientation = area.getImageOrientation();
-                if (orientation == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
-                    ViewGroup.LayoutParams layoutParams = image.getLayoutParams();
-                    layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-                    layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-                    image.setLayoutParams(layoutParams);
-                } else if (orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
-                    ViewGroup.LayoutParams layoutParams = image.getLayoutParams();
-                    layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT;
-                    layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
-                    image.setLayoutParams(layoutParams);
-                }
-
-                zoomContainer.setVisibility(View.VISIBLE);
-                zoom.setMaxZoom(3);
-                imageFrame.setOnTouchListener(Views.createOnSingleTapConfirmedListener(getActivity(), new Runnable() {
-                    @Override
-                    public void run() {
-                        openStandsMap();
-                    }
-                }));
+        List<Stand> stands = convention.getStandsByStandArea(area);
+        Collections.sort(stands, (lhs, rhs) -> {
+            int result = Objects.compareTo(lhs.getSort(), rhs.getSort(), false);
+            if (result == 0) {
+                result = Objects.compareTo(lhs.getName(), rhs.getName(), false);
             }
-
-            standsAdapter.setOnClickListener(new StandViewHolder.OnClickListener() {
-                @Override
-                public void onItemClicked(Stand stand) {
-                    zoomToStand(stand);
-                    selectedStandName = stand.getName();
-                    standsAdapter.setSelectedStandName(selectedStandName);
-                    standsAdapter.notifyDataSetChanged();
-                }
-
-                @Override
-                public void onItemInfoClicked(Stand stand) {
-                    // Show stand additional info in a new popup
-                    showStandInfo(getContext(), stand);
-                }
-            });
-            if (selectedStandName != null) {
-                scrollToStand(selectedStandName, true);
-            }
-        }
-
-        Button dismissButton = (Button) view.findViewById(R.id.stands_dismiss);
-        dismissButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
-            }
+            return result;
         });
 
-        return view;
+        standsAdapter = new StandsRecyclerAdapter(stands, area.hasImageResource(), selectedStandName);
+        standsList.setLayoutManager(new LinearLayoutManager(this));
+        standsList.setAdapter(standsAdapter);
+
+        if (area.hasImageResource()) {
+            image.setImageResource(area.getImageResource());
+
+            int orientation = area.getImageOrientation();
+            if (orientation == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+                ViewGroup.LayoutParams layoutParams = image.getLayoutParams();
+                layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                image.setLayoutParams(layoutParams);
+            } else if (orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+                ViewGroup.LayoutParams layoutParams = image.getLayoutParams();
+                layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+                layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
+                image.setLayoutParams(layoutParams);
+            }
+
+            zoomContainer.setVisibility(View.VISIBLE);
+            zoom.setMaxZoom(3);
+            imageFrame.setOnTouchListener(Views.createOnSingleTapConfirmedListener(this, new Runnable() {
+                @Override
+                public void run() {
+                    openStandsMap();
+                }
+            }));
+        }
+
+        standsAdapter.setOnClickListener(new StandViewHolder.OnClickListener() {
+            @Override
+            public void onItemClicked(Stand stand) {
+                zoomToStand(stand);
+                selectedStandName = stand.getName();
+                standsAdapter.setSelectedStandName(selectedStandName);
+                standsAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onItemInfoClicked(Stand stand) {
+                // Show stand additional info in a new popup
+                showStandInfo(StandsAreaActivity.this, stand);
+            }
+        });
+        if (selectedStandName != null) {
+            scrollToStand(selectedStandName, true);
+        }
     }
 
     public static void showStandInfo(Context context, Stand stand) {
@@ -301,7 +312,7 @@ public class StandsAreaFragment extends DialogFragment {
         }
         if (foundPosition != -1) {
             Stand finalFoundStand = foundStand;
-            RecyclerView.SmoothScroller smoothScroller = new LinearSmoothScroller(getContext()) {
+            RecyclerView.SmoothScroller smoothScroller = new LinearSmoothScroller(this) {
                 @Override
                 protected void onStop() {
                     super.onStop();
@@ -310,8 +321,13 @@ public class StandsAreaFragment extends DialogFragment {
                         new Handler().postDelayed(() -> zoomToStand(finalFoundStand), 400);
                     }
                 }
+
+                @Override
+                protected int getVerticalSnapPreference() {
+                    return SNAP_TO_START;
+                }
             };
-            smoothScroller.setTargetPosition(sectionedStandsAdapter.positionToSectionedPosition(foundPosition));
+            smoothScroller.setTargetPosition(foundPosition);
             standsList.getLayoutManager().startSmoothScroll(smoothScroller);
         }
     }
@@ -327,8 +343,8 @@ public class StandsAreaFragment extends DialogFragment {
         }
 
         // Highlight
-        if (image != null) {
-            highlightStand(getActivity(), area, stand, image);
+        if (image != null && image.getVisibility() == View.VISIBLE) {
+            highlightStand(this, area, stand, image);
         }
     }
 
@@ -342,7 +358,7 @@ public class StandsAreaFragment extends DialogFragment {
 			return;
 		}
 
-        if (imageView instanceof PaintableImageView) {
+        if (imageView instanceof PaintableImageView && stand.getLocations() != null) {
             List<PaintDrawable> highlights = new ArrayList<>(stand.getLocations().size());
             for (StandLocation location : stand.getLocations()) {
                 highlights.add(location.getHighlightPaintDrawable(context));
@@ -353,7 +369,7 @@ public class StandsAreaFragment extends DialogFragment {
     }
 
     private void openStandsMap() {
-        ImageZoomDialogFragment.newInstance(area, selectedStandName).show(getActivity().getSupportFragmentManager(), null);
+        ImageZoomDialogFragment.newInstance(area, selectedStandName).show(getSupportFragmentManager(), null);
     }
 
     public static class ImageZoomDialogFragment extends DialogFragment {
