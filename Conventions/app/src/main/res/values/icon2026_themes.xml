@@ -26,7 +26,7 @@
         <item name="swipeToRefreshBackgroundColor">@color/icon2026_purple600</item>
         <item name="snackbarActionColor">@color/icon2026_orange100</item>
         <item name="highlightedButtonBackground">@drawable/highlighted_button</item>
-        <item name="borderlessButtonColor">@color/icon2026_purple400</item>
+        <item name="borderlessButtonColor">@color/icon2026_blue700</item>
         <item name="activitiesBackground">@drawable/icon2026_background</item>
         <item name="infoActivitiesTextBackground">@drawable/icon2026_rounded_edges_yellow25_inset</item>
         <item name="contentStartMargin">0dp</item>
@@ -172,6 +172,7 @@
         <item name="updatePaddingBottom">25dp</item>
         <item name="updateElevation">2dp</item>
         <item name="updateItemBorder">@color/icon2026_purple400</item>
+        <item name="updateItemShowMoreTextColor">@color/icon2026_purple400</item>
         <item name="updatesSeparatorColor">@color/transparent</item>
         <!-- Event Screen -->
         <item name="eventToolbarColor">?toolbarBackground</item>
@@ -220,9 +221,15 @@
         <item name="mapSearchBarBackground">@drawable/icon2026_search_bar_background_purple</item>
         <item name="mapSearchBarHorizontalMargins">5dp</item>
         <item name="mapShelterButtonBackground">@drawable/highlighted_button</item>
-        <!-- Stands -->
+        <!-- Stands Area -->
+        <item name="standBackground">@drawable/icon2026_yellow25_round8</item>
+        <item name="selectedStandBackground">@drawable/icon2026_yellow25_round8_border</item>
         <item name="standIconColor">@color/icon2026_brown600</item>
-        <item name="standsTypeTitleColor">@color/icon2026_purple400</item>
+        <item name="standNameColor">@color/icon2026_brown600</item>
+        <item name="standLocationTextColor">@color/icon2026_gray900</item>
+        <item name="inactiveStandIndicationTextColor">@color/icon2026_gray800</item>
+        <item name="inactiveStandIndicationBackground">@drawable/icon2026_gray100_round10</item>
+        <!-- Stand Information -->
         <item name="standInfoTextColor">@color/icon2026_gray800</item>
         <item name="standDescriptionTextColor">@color/icon2026_gray950</item>
         <item name="standInactiveTextColor">@color/icon2026_red</item>
