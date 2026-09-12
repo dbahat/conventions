@@ -25,13 +25,13 @@ import amai.org.conventions.model.DetailsActivityLocation;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.Floor;
 import amai.org.conventions.model.Hall;
-import amai.org.conventions.model.Halls;
 import amai.org.conventions.model.ImageIdToImageResourceMapper;
 import amai.org.conventions.model.MapLocation;
+import amai.org.conventions.model.NamedItems;
+import amai.org.conventions.model.OrderedNamedItems;
 import amai.org.conventions.model.Place;
 import amai.org.conventions.model.Shelter;
 import amai.org.conventions.model.StandType;
-import amai.org.conventions.model.StandTypes;
 import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.ConventionStorage;
@@ -128,7 +128,7 @@ public class Icon2026Convention extends SffConvention {
 	}
 
 	@Override
-	protected Halls initHalls() {
+	protected OrderedNamedItems<Hall> initHalls() {
 		List<Hall> halls = Arrays.asList(
 //				new Hall().withName(HALL_NAME_CINEMATHEQUE_1_3_4),
 //				new Hall().withName(HALL_NAME_CINEMATHEQUE_2),
@@ -183,12 +183,7 @@ public class Icon2026Convention extends SffConvention {
 //				new Hall().withName(HALL_NAME_ICODE),
 //				new Hall().withName(HALL_NAME_SPECIAL),
 		);
-		int i = 1;
-		for (Hall hall : halls) {
-			hall.setOrder(i);
-			++i;
-		}
-		return new Halls(halls);
+		return new OrderedNamedItems<>(halls);
 	}
 
 	@Override
@@ -206,18 +201,13 @@ public class Icon2026Convention extends SffConvention {
 	}
 
 	@Override
-	protected StandTypes initStandTypes() {
+	protected NamedItems<StandType> initStandTypes() {
 		List<StandType> standTypes = Arrays.asList(
 			new StandType().withName("דוכן יוצר.ת עצמאי.ת").withImage(R.drawable.diamond_24px),
 			new StandType().withName("דוכן מסחרי").withImage(R.drawable.ic_shopping_basket),
 			new StandType().withName("דוכן סופר.ת עצמאי.ת").withImage(R.drawable.book_5_24px)
 		);
-		int i = 1;
-		for (StandType standType : standTypes) {
-			standType.setOrder(i);
-			++i;
-		}
-		return new StandTypes(standTypes);
+		return new OrderedNamedItems<>(standTypes);
 	}
 
 	@Override

@@ -61,7 +61,7 @@ public class SffModelParser implements ModelParser {
 			Hall hall = Convention.getInstance().getHalls().findByName(hallName);
 			if (hall == null) {
 				// Add a new hall to the convention
-				hall = Convention.getInstance().getHalls().add(hallName);
+				hall = Convention.getInstance().getHalls().add(new Hall().withName(hallName));
 				Log.i(TAG, "Found and added new hall with name " + hallName);
 			}
 
