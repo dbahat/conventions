@@ -42,7 +42,7 @@ import amai.org.conventions.utils.Views;
 import sff.org.conventions.R;
 
 public class Icon2026Convention extends SffConvention {
-//	private static final String HALL_NAME_CINEMATHEQUE_1_3_4 = "סינמטק 1, 3, 4";
+	//	private static final String HALL_NAME_CINEMATHEQUE_1_3_4 = "סינמטק 1, 3, 4";
 //	private static final String HALL_NAME_CINEMATHEQUE_2 = "סינמטק 2";
 //	private static final String HALL_NAME_CINEMATHEQUE_3 = "סינמטק 3";
 	private static final String HALL_NAME_CINEMATHEQUE_4 = "סינמטק 4";
@@ -92,6 +92,18 @@ public class Icon2026Convention extends SffConvention {
 //	private static final String HALL_NAME_GAMES_4 = "משחקים 4";
 //	private static final String HALL_NAME_ICODE = "אייקוד";
 //	private static final String HALL_NAME_SPACESHIP = "החללית";
+
+	private static final String STANDS_AREA_A = "אטלנטיס";
+	private static final String STANDS_AREA_B = "בה סינג סה";
+	private static final String STANDS_AREA_G = "גאליפריי";
+	private static final String STANDS_AREA_D = "דרגונסטון";
+	private static final String STANDS_AREA_H = "היפריון";
+	private static final String STANDS_AREA_V = "וולקן";
+	private static final String STANDS_AREA_Z = "זוטרופוליס";
+	private static final String STANDS_AREA_CH = "חלם";
+	private static final String STANDS_AREA_P = "פלורין";
+	private static final String STANDS_AREA_ESHKOL = "אשכול";
+	private static final String STANDS_AREA_CINEMATHEQUE = "סינמטק";
 
 	private static final String GENERAL_STAND_TYPE = "כללי";
 
@@ -201,6 +213,24 @@ public class Icon2026Convention extends SffConvention {
 	}
 
 	@Override
+	protected NamedItems<StandsArea> initStandsAreas() {
+		List<StandsArea> standsAreas = Arrays.asList(
+			new StandsArea().withName(STANDS_AREA_A),
+			new StandsArea().withName(STANDS_AREA_B),
+			new StandsArea().withName(STANDS_AREA_G),
+			new StandsArea().withName(STANDS_AREA_D),
+			new StandsArea().withName(STANDS_AREA_H),
+			new StandsArea().withName(STANDS_AREA_V),
+			new StandsArea().withName(STANDS_AREA_Z),
+			new StandsArea().withName(STANDS_AREA_CH),
+			new StandsArea().withName(STANDS_AREA_P),
+			new StandsArea().withName(STANDS_AREA_ESHKOL),
+			new StandsArea().withName(STANDS_AREA_CINEMATHEQUE)
+		);
+		return new NamedItems<>(standsAreas);
+	}
+
+	@Override
 	protected NamedItems<StandType> initStandTypes() {
 		List<StandType> standTypes = Arrays.asList(
 			new StandType().withName("דוכן יוצר.ת עצמאי.ת").withImage(R.drawable.diamond_24px),
@@ -247,17 +277,17 @@ public class Icon2026Convention extends SffConvention {
 				.withDefaultMarkerHeight(153.195f);
 		final float SMALL_MARKER_HEIGHT = 104.497f;
 
-		StandsArea standsAreaA = new StandsArea().withName("אטלנטיס");
-		StandsArea standsAreaB = new StandsArea().withName("בה סינג סה");
-		StandsArea standsAreaC = new StandsArea().withName("גאליפריי");
-		StandsArea standsAreaD = new StandsArea().withName("דרגונסטון");
-		StandsArea standsAreaE = new StandsArea().withName("היפריון");
-		StandsArea standsAreaF = new StandsArea().withName("וולקן");
-		StandsArea standsAreaH = new StandsArea().withName("זוטרופוליס");
-		StandsArea standsAreaG = new StandsArea().withName("חלם");
-		StandsArea standsAreaP = new StandsArea().withName("פלורין");
-		StandsArea standsAreaEshkol = new StandsArea().withName("אשכול");
-		StandsArea standsAreaCinematheque = new StandsArea().withName("סינמטק");
+		StandsArea standsAreaA = getStandsAreas().findByName(STANDS_AREA_A);
+		StandsArea standsAreaB = getStandsAreas().findByName(STANDS_AREA_B);
+		StandsArea standsAreaC = getStandsAreas().findByName(STANDS_AREA_G);
+		StandsArea standsAreaD = getStandsAreas().findByName(STANDS_AREA_D);
+		StandsArea standsAreaE = getStandsAreas().findByName(STANDS_AREA_H);
+		StandsArea standsAreaF = getStandsAreas().findByName(STANDS_AREA_V);
+		StandsArea standsAreaH = getStandsAreas().findByName(STANDS_AREA_Z);
+		StandsArea standsAreaG = getStandsAreas().findByName(STANDS_AREA_CH);
+		StandsArea standsAreaP = getStandsAreas().findByName(STANDS_AREA_P);
+		StandsArea standsAreaEshkol = getStandsAreas().findByName(STANDS_AREA_ESHKOL);
+		StandsArea standsAreaCinematheque = getStandsAreas().findByName(STANDS_AREA_CINEMATHEQUE);
 
 		return new ConventionMap()
 			.withFloors(Collections.singletonList(floor))
