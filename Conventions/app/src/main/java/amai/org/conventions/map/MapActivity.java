@@ -63,6 +63,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 
 	private static final String STATE_SEARCH_TERM = "StateMapSearchTerm";
 	private static final String STATE_MAP_SEARCH_ONLY_HALLS = "StateMapSearchOnlyHalls";
+	private static final String STATE_MAP_SEARCH_ONLY_STANDS_AREAS = "StateMapSearchOnlyStandsAreas";
 	private static final String STATE_MAP_SEARCH_ONLY_DISCOUNT_STANDS = "StateMapSearchOnlyDiscountStands";
 	private static final String STATE_MAP_SEARCH_ONLY_ACTIVE_STANDS = "StateMapSearchOnlyActiveStands";
 	private static final String STATE_MAP_SEARCH_OPEN = "StateMapSearchOpen";
@@ -81,6 +82,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 	private TextView noResultsFound;
 	private ListView searchResults;
 	private CheckBox showOnlyHallsCheckbox;
+	private CheckBox showOnlyStandsAreasCheckbox;
 	private CheckBox showOnlyDiscountStandsCheckbox;
 	private CheckBox showOnlyActiveStandsCheckbox;
 	private EditText searchText;
@@ -88,6 +90,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 	private StandsSearchAdapter standsSearchResultsAdapter;
 	private String searchTerm;
 	private boolean showOnlyHalls;
+	private boolean showOnlyStandsAreas;
 	private boolean showOnlyDiscountStands;
 	private boolean showOnlyActiveStands;
 	private boolean isSearchClosing;
@@ -360,6 +363,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		outState.putInt(EXTRA_FLOOR_NUMBER, currentFloorNumber);
 		outState.putString(STATE_SEARCH_TERM, searchText.getText().toString());
 		outState.putBoolean(STATE_MAP_SEARCH_ONLY_HALLS, showOnlyHallsCheckbox.isChecked());
+		outState.putBoolean(STATE_MAP_SEARCH_ONLY_STANDS_AREAS, showOnlyStandsAreasCheckbox.isChecked());
 		outState.putBoolean(STATE_MAP_SEARCH_ONLY_DISCOUNT_STANDS, showOnlyDiscountStandsCheckbox.isChecked());
 		outState.putBoolean(STATE_MAP_SEARCH_ONLY_ACTIVE_STANDS, showOnlyActiveStandsCheckbox.isChecked());
 		outState.putBoolean(STATE_MAP_SEARCH_OPEN, isSearchOpen());
@@ -372,6 +376,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		noResultsFound = (TextView) findViewById(R.id.map_search_no_results_found);
 		searchResults = (ListView) findViewById(R.id.map_search_results);
 		showOnlyHallsCheckbox = (CheckBox) findViewById(R.id.map_search_show_only_halls);
+		showOnlyStandsAreasCheckbox = (CheckBox) findViewById(R.id.map_search_show_only_stands_areas);
 		showOnlyDiscountStandsCheckbox = (CheckBox) findViewById(R.id.map_search_show_only_discount_stands);
 		showOnlyActiveStandsCheckbox = (CheckBox) findViewById(R.id.map_search_show_only_active_stands);
 		searchText = (EditText) findViewById(R.id.map_search_text);
@@ -381,6 +386,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		// Restore state or use defaults
 		searchTerm = (savedInstanceState != null ? savedInstanceState.getString(STATE_SEARCH_TERM) : null);
 		showOnlyHalls = (savedInstanceState != null && savedInstanceState.getBoolean(STATE_MAP_SEARCH_ONLY_HALLS));
+		showOnlyStandsAreas = (savedInstanceState != null && savedInstanceState.getBoolean(STATE_MAP_SEARCH_ONLY_STANDS_AREAS));
 		showOnlyDiscountStands = (savedInstanceState != null && savedInstanceState.getBoolean(STATE_MAP_SEARCH_ONLY_DISCOUNT_STANDS));
 		showOnlyActiveStands = (savedInstanceState != null && savedInstanceState.getBoolean(STATE_MAP_SEARCH_ONLY_ACTIVE_STANDS));
 		boolean showSearch = (savedInstanceState != null && savedInstanceState.getBoolean(STATE_MAP_SEARCH_OPEN));
@@ -432,11 +438,13 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 				getCurrentFloorFragment().resetState();
 				if (tab.getId() == R.id.mapSearchTabLocation) {
 					showOnlyHallsCheckbox.setVisibility(View.VISIBLE);
+					showOnlyStandsAreasCheckbox.setVisibility(View.VISIBLE);
 					showOnlyDiscountStandsCheckbox.setVisibility(View.GONE);
 					showOnlyActiveStandsCheckbox.setVisibility(View.GONE);
 					searchResults.setAdapter(locationsSearchResultsAdapter);
 				} else {
 					showOnlyHallsCheckbox.setVisibility(View.GONE);
+					showOnlyStandsAreasCheckbox.setVisibility(View.GONE);
 					if (showOnlyDiscountsStandsCheckbox()) {
 						showOnlyDiscountStandsCheckbox.setVisibility(View.VISIBLE);
 					} else {
@@ -528,6 +536,20 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				showOnlyHalls = isChecked;
+				// Only apply the filters if the user is currently searching
+				// (otherwise it might happen when restoring the saved state)
+				if (isSearchOpen()) {
+					applySearchFiltersInBackground();
+				}
+			}
+		});
+
+		// Setup "show only stands areas" checkbox
+		showOnlyStandsAreasCheckbox.setChecked(showOnlyStandsAreas);
+		showOnlyStandsAreasCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				showOnlyStandsAreas = isChecked;
 				// Only apply the filters if the user is currently searching
 				// (otherwise it might happen when restoring the saved state)
 				if (isSearchOpen()) {
@@ -636,6 +658,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 	private void applySearchFiltersInBackground() {
 		final String searchTerm = this.searchTerm;
 		final boolean showOnlyHalls = this.showOnlyHalls;
+		final boolean showOnlyStandsAreas = this.showOnlyStandsAreas;
 		final boolean showOnlyDiscountStands = this.showOnlyDiscountStands;
 		final boolean showOnlyActiveStands = this.showOnlyActiveStands;
 		final Floor floor = getCurrentFloorFragment().getFloor();
@@ -649,13 +672,14 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 						@Override
 						public boolean where(MapLocation item) {
 							return (searchTerm == null || searchTerm.isEmpty() || item.getName().toLowerCase().contains(searchTerm.toLowerCase())) &&
-									((!showOnlyHalls) || item.areAnyPlacesHalls());
+									((!showOnlyHalls) || item.areAnyPlacesHalls()) &&
+									((!showOnlyStandsAreas) || item.areaAnyPlacesStandsAreas());
 						}
 					});
 					Collections.sort(locations, new Comparator<MapLocation>() {
 						@Override
 						public int compare(MapLocation lhs, MapLocation rhs) {
-							// Sort order - floor (current floor is first), is hall (halls are first), name
+							// Sort order - floor (current floor is first), is hall (halls are first), is stands area, name
 							if (!Objects.equals(lhs.getFloor(), rhs.getFloor())) {
 								if (Objects.equals(lhs.getFloor(), floor)) {
 									return -1;
@@ -666,6 +690,12 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 								}
 							} else if (lhs.areAnyPlacesHalls() != rhs.areAnyPlacesHalls()) {
 								if (lhs.areAnyPlacesHalls()) {
+									return -1;
+								} else {
+									return 1;
+								}
+							} else if (lhs.areaAnyPlacesStandsAreas() != rhs.areaAnyPlacesStandsAreas()) {
+								if (lhs.areaAnyPlacesStandsAreas()) {
 									return -1;
 								} else {
 									return 1;
@@ -724,10 +754,10 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 					searchResults.setVisibility(View.VISIBLE);
 				}
 
-				// Select markers (only if a search term was entered or the halls checkbox selected - and only for locations search)
+				// Select markers (only if a search term was entered or one of the checkboxes selected - and only for locations search)
 				if (locationsSearch) {
 					getCurrentFloorFragment().selectMarkersWithNameAndFloor(
-							(searchTerm == null || searchTerm.isEmpty()) && !showOnlyHalls ?
+							(searchTerm == null || searchTerm.isEmpty()) && !showOnlyHalls && !showOnlyStandsAreas ?
 									null : locationsSearchResultsAdapter.getMapLocations());
 				}
 			}

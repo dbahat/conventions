@@ -227,15 +227,23 @@ public class MapLocation {
 		return isSelectedMarkerResourceSVG;
 	}
 
-	public boolean areAnyPlacesHalls() {
-		if (places == null || places.size() == 0) {
+	public boolean areAnyPlacesOfType(Class<? extends Place> type) {
+		if (places == null || places.isEmpty()) {
 			return false;
 		}
 		for (Place place : places) {
-			if (place instanceof Hall) {
+			if (type.isInstance(place)) {
 				return true;
 			}
 		}
 		return false;
+	}
+
+	public boolean areAnyPlacesHalls() {
+		return areAnyPlacesOfType(Hall.class);
+	}
+
+	public boolean areaAnyPlacesStandsAreas() {
+		return areAnyPlacesOfType(StandsArea.class);
 	}
 }

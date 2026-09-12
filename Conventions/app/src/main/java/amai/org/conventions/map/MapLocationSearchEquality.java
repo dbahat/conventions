@@ -11,6 +11,7 @@ class MapLocationSearchEquality implements CollectionUtils.EqualityPredicate<Map
 				Objects.equals(lhs.getName(), rhs.getName()) &&
 				Objects.equals(lhs.getDescription(), rhs.getDescription()) &&
 				lhs.hasSinglePlace() == rhs.hasSinglePlace() &&
-				lhs.areAnyPlacesHalls() == rhs.areAnyPlacesHalls();
+				lhs.areAnyPlacesHalls() == rhs.areAnyPlacesHalls() &&
+				lhs.areaAnyPlacesStandsAreas() == rhs.areaAnyPlacesStandsAreas();
 	}
 }

@@ -125,6 +125,7 @@
     <string name="free_time">זמן פנוי: %s</string>
     <string name="map_floor_search_title">חיפוש במפה</string>
     <string name="show_only_halls">הצג אולמות בלבד</string>
+    <string name="show_only_stands_areas">הצג איזורי דוכנים בלבד</string>
     <string name="show_only_discount_stands">הצג דוכנים עם הנחות לחברי העמותות המארגנות בלבד</string>
     <string name="show_only_active_stands">הצג דוכנים פעילים בלבד</string>
     <string name="goto_stands_list">הצג דוכנים</string>
