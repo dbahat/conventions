@@ -6,7 +6,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.List;
 
 import amai.org.conventions.auth.Configuration;
@@ -14,15 +13,16 @@ import amai.org.conventions.feedback.forms.EventFeedbackForm;
 import amai.org.conventions.feedback.forms.FeedbackForm;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
-import amai.org.conventions.model.Halls;
+import amai.org.conventions.model.Hall;
 import amai.org.conventions.model.ImageIdToImageResourceMapper;
-import amai.org.conventions.model.SecondHandItem;
-import amai.org.conventions.model.Stand;
-import amai.org.conventions.model.StandTypes;
+import amai.org.conventions.model.NamedItems;
+import amai.org.conventions.model.OrderedNamedItems;
+import amai.org.conventions.model.StandType;
 import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.networking.EventTicketsParser;
 import amai.org.conventions.networking.ModelParser;
+import amai.org.conventions.networking.StandsParser;
 import amai.org.conventions.utils.ConventionStorage;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -66,17 +66,22 @@ public class TestConvention extends Convention {
     }
 
     @Override
+    protected URL initStandsURL() {
+        return null;
+    }
+
+    @Override
     protected URL initTicketsLastUpdateURL() {
         return null;
     }
 
     @Override
-    protected Halls initHalls() {
-        return new Halls(new ArrayList<>());
+    protected OrderedNamedItems<Hall> initHalls() {
+        return new OrderedNamedItems<>(new ArrayList<>());
     }
 
     @Override
-    protected StandTypes initStandTypes() {
+    protected NamedItems<StandType> initStandTypes() {
         return null;
     }
 
@@ -163,7 +168,17 @@ public class TestConvention extends Convention {
     }
 
     @Override
+    protected String getGeneralStandType() {
+        return "GENERAL";
+    }
+
+    @Override
     public ModelParser getModelParser() {
+        return null;
+    }
+
+    @Override
+    public StandsParser getStandsParser() {
         return null;
     }
 

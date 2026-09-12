@@ -12,15 +12,16 @@ import java.util.Date;
 import java.util.List;
 
 import amai.org.conventions.model.ConventionEvent;
-import amai.org.conventions.model.Halls;
+import amai.org.conventions.model.Hall;
+import amai.org.conventions.model.NamedItems;
 import amai.org.conventions.model.SpecialEventsProcessor;
 
 public class AmaiModelParser implements ModelParser {
-	private Halls halls;
+	private NamedItems<Hall> halls;
 	private Calendar conventionStartDate;
 	private SpecialEventsProcessor specialEventsProcessor;
 
-	public AmaiModelParser(Halls halls, Calendar conventionStartDate, SpecialEventsProcessor specialEventsProcessor) {
+	public AmaiModelParser(NamedItems<Hall> halls, Calendar conventionStartDate, SpecialEventsProcessor specialEventsProcessor) {
 		this.halls = halls;
 		this.conventionStartDate = conventionStartDate;
 		this.specialEventsProcessor = specialEventsProcessor;

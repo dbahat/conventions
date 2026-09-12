@@ -36,9 +36,11 @@ import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.FeedbackQuestion;
 import amai.org.conventions.model.Floor;
-import amai.org.conventions.model.Halls;
+import amai.org.conventions.model.Hall;
 import amai.org.conventions.model.ImageIdToImageResourceMapper;
 import amai.org.conventions.model.MapLocation;
+import amai.org.conventions.model.NamedItems;
+import amai.org.conventions.model.OrderedNamedItems;
 import amai.org.conventions.model.Place;
 import amai.org.conventions.model.SearchFilter;
 import amai.org.conventions.model.SecondHandBuy;
@@ -46,7 +48,6 @@ import amai.org.conventions.model.SecondHandSell;
 import amai.org.conventions.model.SpecialEventsProcessor;
 import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.StandType;
-import amai.org.conventions.model.StandTypes;
 import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.Update;
@@ -74,7 +75,7 @@ public abstract class Convention implements Serializable {
 	// to fit up to 5 days in its tab bar).
 	private static final int MAX_CONVENTION_LENGTH_IN_DAYS = 5;
 
-	private Halls halls;
+	private OrderedNamedItems<Hall> halls;
 	private List<ConventionEvent> events;
 	private List<Update> updates;
 	private Map<String, Update> updatesById;
@@ -85,7 +86,7 @@ public abstract class Convention implements Serializable {
 	private FeedbackForm conventionFeedbackForm;
 	private EventFeedbackForm eventFeedbackForm;
 
-	private StandTypes standTypes;
+	private NamedItems<StandType> standTypes;
 	private List<Stand> stands;
 	private ConventionMap map;
 	private Calendar startDate;
@@ -217,9 +218,9 @@ public abstract class Convention implements Serializable {
 
 	protected abstract URL initTicketsLastUpdateURL();
 
-	protected abstract Halls initHalls();
+	protected abstract OrderedNamedItems<Hall> initHalls();
 
-	protected abstract StandTypes initStandTypes();
+	protected abstract NamedItems<StandType> initStandTypes();
 
 	protected abstract ConventionMap initMap();
 
@@ -421,11 +422,11 @@ public abstract class Convention implements Serializable {
 	public void convertUserInputForEvent(ConventionEvent.UserInput input, ConventionEvent event) {
 	}
 
-	public Halls getHalls() {
+	public NamedItems<Hall> getHalls() {
 		return halls;
 	}
 
-	public StandTypes getStandTypes() {
+	public NamedItems<StandType> getStandTypes() {
 		return standTypes;
 	}
 
@@ -938,7 +939,6 @@ public abstract class Convention implements Serializable {
 			stand.setStandsArea(this.findStandsAreaByName(stand.getStandsArea().getName()));
 		}
 		if (stand.getTypes() != null) {
-			StandTypes standTypes = getStandTypes();
 			stand.setTypes(CollectionUtils.map(stand.getTypes(), standType -> getOrAddStandType(standType.getName())));
 		}
 	}
@@ -952,7 +952,7 @@ public abstract class Convention implements Serializable {
 
 		if (standType == null) {
 			// Add a new stand type to the convention
-			standType = standTypes.add(standTypeName);
+			standType = standTypes.add(new StandType().withName(standTypeName).withImage(R.drawable.ic_shopping_basket));
 			Log.i(TAG, "Found and added new stand type with name " + standTypeName);
 		}
 

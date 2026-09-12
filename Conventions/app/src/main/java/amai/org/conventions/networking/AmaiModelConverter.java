@@ -16,7 +16,7 @@ import java.util.Map;
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.EventType;
 import amai.org.conventions.model.Hall;
-import amai.org.conventions.model.Halls;
+import amai.org.conventions.model.NamedItems;
 import amai.org.conventions.model.SpecialEventsProcessor;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.CollectionUtils;
@@ -29,10 +29,10 @@ public class AmaiModelConverter {
 	private static final String TAG = AmaiModelConverter.class.getCanonicalName();
 
 	private Calendar conventionStartDate;
-	private Halls halls;
+	private NamedItems<Hall> halls;
 	private SpecialEventsProcessor specialEventsProcessor;
 
-	public AmaiModelConverter(Halls halls, Calendar conventionStartDate, SpecialEventsProcessor specialEventsProcessor) {
+	public AmaiModelConverter(NamedItems<Hall> halls, Calendar conventionStartDate, SpecialEventsProcessor specialEventsProcessor) {
 		this.conventionStartDate = conventionStartDate;
 		this.halls = halls;
 		this.specialEventsProcessor = specialEventsProcessor;
@@ -54,6 +54,11 @@ public class AmaiModelConverter {
 			// During convection, treat each event instance as a separate ConventionEvent
 			for (AmaiEventContract.TimetableInfoInstance eventInstance : eventContract.getTimetableInfo()) {
 				if ("hidden".equals(eventInstance.getTooltip())) {
+					continue;
+				}
+
+				if (ParseUtils.isEmpty(eventInstance.getRoom())) {
+					Log.w(TAG, "Skipping event with no hall: " + eventContract.getTitle() + " (" + eventContract.getId() + ")");
 					continue;
 				}
 
@@ -150,7 +155,7 @@ public class AmaiModelConverter {
 
 		if (hall == null) {
 			// Add a new hall to the convention
-			hall = halls.add(hallName);
+			hall = halls.add(new Hall().withName(hallName));
 			Log.i(TAG, "Found and added new hall with name " + hallName);
 		}
 

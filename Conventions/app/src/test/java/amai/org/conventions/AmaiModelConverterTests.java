@@ -20,12 +20,12 @@ import java.util.Locale;
 
 import amai.org.conventions.model.ConventionEvent;
 import amai.org.conventions.model.Hall;
-import amai.org.conventions.model.Halls;
+import amai.org.conventions.model.NamedItems;
 import amai.org.conventions.model.SpecialEventsProcessor;
 import amai.org.conventions.networking.AmaiEventContract;
 import amai.org.conventions.networking.AmaiModelConverter;
 
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.times;
@@ -37,7 +37,7 @@ public class AmaiModelConverterTests {
 	private AmaiModelConverter amaiModelConverter;
 
 	@Mock
-	private Halls hallsMock;
+	private NamedItems<Hall> hallsMock;
 
 	@Before
 	public void setup() {
@@ -49,7 +49,7 @@ public class AmaiModelConverterTests {
 			public Hall answer(InvocationOnMock invocation) throws Throwable {
 				return new Hall().withName(invocation.getArguments()[0].toString());
 			}
-		}).when(hallsMock).add(anyString());
+		}).when(hallsMock).add(any());
 	}
 
 	@Test
@@ -181,7 +181,7 @@ public class AmaiModelConverterTests {
 	public void Convert_Adds_New_Hall_If_Event_Has_Undefined_Hall_Name() {
 		AmaiEventContract.TimetableInfoInstance instanceContract = generateTimetableInfoInstance(0);
 		amaiModelConverter.convert(Collections.singletonList(generateEventContract(0, Collections.singletonList(instanceContract))));
-		verify(hallsMock, times(1)).add(eq(instanceContract.getRoom()));
+		verify(hallsMock, times(1)).add(eq(new Hall().withName(instanceContract.getRoom())));
 	}
 
 	@Test
@@ -194,7 +194,7 @@ public class AmaiModelConverterTests {
 
 		List<ConventionEvent> eventList = amaiModelConverter.convert(Collections.singletonList(generateEventContract(0, Collections.singletonList(instanceContract))));
 
-		verify(hallsMock, times(0)).add(anyString());
+		verify(hallsMock, times(0)).add(any());
 		Assert.assertEquals(expectedHall, eventList.get(0).getHall());
 	}
 

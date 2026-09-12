@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import amai.org.conventions.utils.Objects;
 
-public class Hall extends Place implements Serializable {
+public class Hall extends Place implements Serializable, OrderedNamedItems.OrderedNamedItem {
 	private int order;
 
 	public Hall() {

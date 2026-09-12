@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import amai.org.conventions.utils.Objects;
 
-public class StandType  implements Serializable {
+public class StandType  implements Serializable, OrderedNamedItems.OrderedNamedItem {
 	private int order;
 	private String name;
 	private int image;
