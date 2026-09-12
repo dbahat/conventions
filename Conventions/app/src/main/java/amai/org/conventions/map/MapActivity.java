@@ -601,7 +601,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 
 	private void selectStand(Stand stand, int delay) {
 		StandsArea standsArea = stand.getStandsArea();
-		List<MapLocation> locations = map.findLocationsByStandsArea(standsArea);
+		List<MapLocation> locations = map.findLocationsByStandsAreaId(standsArea.getId());
 		if (locations.size() >= 1) {
 			MapLocation location = locations.get(0);
 			// Go to selected stand's stand area floor and reset its zoom/selection state

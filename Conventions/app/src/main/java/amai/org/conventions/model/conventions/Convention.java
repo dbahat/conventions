@@ -86,6 +86,7 @@ public abstract class Convention implements Serializable {
 	private FeedbackForm conventionFeedbackForm;
 	private EventFeedbackForm eventFeedbackForm;
 
+	private NamedItems<StandsArea> standsAreas;
 	private NamedItems<StandType> standTypes;
 	private List<Stand> stands;
 	private ConventionMap map;
@@ -191,7 +192,8 @@ public abstract class Convention implements Serializable {
 		this.standsURL = initStandsURL();
 		this.halls = initHalls();
 		this.standTypes = initStandTypes(); // Must be called before initializing the stands
-		this.map = initMap(); // Must be called before initializing the stands
+		this.standsAreas = initStandsAreas(); // Must be called before initializing the stands
+		this.map = initMap();
 		if (this.map == null) {
 			this.map = new ConventionMap();
 		}
@@ -219,6 +221,8 @@ public abstract class Convention implements Serializable {
 	protected abstract URL initTicketsLastUpdateURL();
 
 	protected abstract OrderedNamedItems<Hall> initHalls();
+
+	protected abstract NamedItems<StandsArea> initStandsAreas();
 
 	protected abstract NamedItems<StandType> initStandTypes();
 
@@ -424,6 +428,10 @@ public abstract class Convention implements Serializable {
 
 	public NamedItems<Hall> getHalls() {
 		return halls;
+	}
+
+	public NamedItems<StandsArea> getStandsAreas() {
+		return standsAreas;
 	}
 
 	public NamedItems<StandType> getStandTypes() {
@@ -786,42 +794,24 @@ public abstract class Convention implements Serializable {
 	}
 
 	public StandsArea findStandsArea(int id) {
-		for (MapLocation location : map.getLocations()) {
-			List<? extends Place> places = location.getPlaces();
-			for (Place place : places) {
-				if (place instanceof StandsArea && ((StandsArea) place).getId() == id) {
-					return (StandsArea) place;
-				}
+		for (StandsArea area : standsAreas.getItems()) {
+			if (area.getId() == id) {
+				return area;
 			}
 		}
-
 		return null;
 	}
 
 	public StandsArea findStandsAreaByName(String name) {
-		for (MapLocation location : map.getLocations()) {
-			List<? extends Place> places = location.getPlaces();
-			for (Place place : places) {
-				if (place instanceof StandsArea && name.equals(place.getName())) {
-					return (StandsArea) place;
-				}
-			}
-		}
-
-		return null;
+		return standsAreas.findByName(name);
 	}
 
 	public MapLocation findStandsAreaLocation(int id) {
-		for (MapLocation location : map.getLocations()) {
-			List<? extends Place> places = location.getPlaces();
-			for (Place place : places) {
-				if (place instanceof StandsArea && ((StandsArea) place).getId() == id) {
-					return location;
-				}
-			}
+		List<MapLocation> locations = map.findLocationsByStandsAreaId(id);
+		if (locations == null || locations.isEmpty()) {
+			return null;
 		}
-
-		return null;
+		return locations.get(0);
 	}
 
 	public boolean hasStands() {

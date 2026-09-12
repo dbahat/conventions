@@ -120,13 +120,13 @@ public class ConventionMap {
 		});
 	}
 
-	public List<MapLocation> findLocationsByStandsArea(final StandsArea standsArea) {
+	public List<MapLocation> findLocationsByStandsAreaId(int id) {
 		return CollectionUtils.filter(getLocations(), new CollectionUtils.Predicate<MapLocation>() {
 			@Override
 			public boolean where(MapLocation location) {
 				List<? extends Place> places = location.getPlaces();
 				for (Place place : places) {
-					if (place instanceof StandsArea && ((StandsArea) place).getId() == standsArea.getId()) {
+					if (place instanceof StandsArea && ((StandsArea) place).getId() == id) {
 						return true;
 					}
 				}

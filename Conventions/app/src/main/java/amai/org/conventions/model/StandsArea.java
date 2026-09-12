@@ -8,7 +8,7 @@ import java.util.List;
 
 import amai.org.conventions.utils.Objects;
 
-public class StandsArea extends Place implements Serializable {
+public class StandsArea extends Place implements Serializable, NamedItems.NamedItem {
 	private int id;
 	private Integer imageResource;
 	private float imageWidth;
