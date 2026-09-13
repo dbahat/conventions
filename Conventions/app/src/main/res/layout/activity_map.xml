@@ -60,20 +60,19 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="5dp"
                 android:paddingEnd="5dp">
-                <EditText
-                    android:id="@+id/map_search_text"
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:inputType="textFilter"
-                    android:textColorHint="?mapSearchHint"
-                    android:textColor="?mapSearchText"
-                    android:backgroundTint="?mapSearchText"
+                    android:layout_marginTop="12dp"
                     android:layout_marginStart="?mapSearchBarHorizontalMargins"
                     android:layout_marginEnd="?mapSearchBarHorizontalMargins"
-                    android:textSize="16sp"
-                    android:hint="@string/search_input_search_keyword"
-                    />
+                    android:theme="?mapSearchTheme">
+                    <androidx.appcompat.widget.SearchView
+                        android:id="@+id/map_search_text2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:queryHint="@string/search_input_search_keyword" />
+                </com.google.android.material.card.MaterialCardView>
 
                 <androidx.appcompat.widget.AppCompatCheckBox
                     android:layout_width="match_parent"

@@ -50,6 +50,7 @@ import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Objects;
 import amai.org.conventions.utils.Views;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -85,7 +86,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 	private CheckBox showOnlyStandsAreasCheckbox;
 	private CheckBox showOnlyDiscountStandsCheckbox;
 	private CheckBox showOnlyActiveStandsCheckbox;
-	private EditText searchText;
+	private SearchView searchView;
 	private MapLocationsAdapter locationsSearchResultsAdapter;
 	private StandsSearchAdapter standsSearchResultsAdapter;
 	private String searchTerm;
@@ -361,7 +362,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putInt(EXTRA_FLOOR_NUMBER, currentFloorNumber);
-		outState.putString(STATE_SEARCH_TERM, searchText.getText().toString());
+		outState.putString(STATE_SEARCH_TERM, searchView.getQuery().toString());
 		outState.putBoolean(STATE_MAP_SEARCH_ONLY_HALLS, showOnlyHallsCheckbox.isChecked());
 		outState.putBoolean(STATE_MAP_SEARCH_ONLY_STANDS_AREAS, showOnlyStandsAreasCheckbox.isChecked());
 		outState.putBoolean(STATE_MAP_SEARCH_ONLY_DISCOUNT_STANDS, showOnlyDiscountStandsCheckbox.isChecked());
@@ -379,7 +380,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		showOnlyStandsAreasCheckbox = (CheckBox) findViewById(R.id.map_search_show_only_stands_areas);
 		showOnlyDiscountStandsCheckbox = (CheckBox) findViewById(R.id.map_search_show_only_discount_stands);
 		showOnlyActiveStandsCheckbox = (CheckBox) findViewById(R.id.map_search_show_only_active_stands);
-		searchText = (EditText) findViewById(R.id.map_search_text);
+		searchView = findViewById(R.id.map_search_text2);
 
 		isSearchClosing = false;
 
@@ -500,34 +501,32 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 			}
 		});
 
-		// Setup search text filter
-		if (searchTerm != null) {
-			searchText.setText(searchTerm);
-		}
-		searchText.addTextChangedListener(new TextWatcher() {
+		// Setup search view
+		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-			}
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-				searchTerm = s.toString();
+			public boolean onQueryTextSubmit(String query) {
+				searchTerm = query;
 				// Only apply the filters if the user is currently searching
 				// (otherwise it might happen when restoring the saved state)
 				if (isSearchOpen()) {
 					applySearchFiltersInBackground();
 				}
+				return false; // Close the search bar if full screen
+			}
+
+			@Override
+			public boolean onQueryTextChange(String newText) {
+				searchTerm = newText;
+				// Only apply the filters if the user is currently searching
+				// (otherwise it might happen when restoring the saved state)
+				if (isSearchOpen()) {
+					applySearchFiltersInBackground();
+				}
+				return true;
 			}
 		});
-
-		Drawable textEditBackground = ThemeAttributes.getDrawable(this, R.attr.mapSearchBarBackground);
-		if (textEditBackground != null) {
-			searchText.setBackground(textEditBackground);
-			searchText.setBackgroundTintList(null);
+		if (searchTerm != null) {
+			searchView.setQuery(searchTerm, true);
 		}
 
 		// Setup "show only halls" checkbox
@@ -931,6 +930,6 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 			searchType.selectTab(searchType.getTabAt(standsTab));
 		}
 		searchTerm = standName;
-		searchText.setText(searchTerm);
+		searchView.setQuery(searchTerm, true);
 	}
 }

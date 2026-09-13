@@ -4,13 +4,10 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -33,6 +30,7 @@ import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Views;
+import androidx.appcompat.widget.SearchView;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -243,32 +241,28 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 	}
 
 	private void initializeKeywordFilter() {
-		EditText keywordTextBox = (EditText) findViewById(R.id.search_keyword_text_box);
-		keywordTextBox.addTextChangedListener(new TextWatcher() {
+		SearchView searchView = findViewById(R.id.search_keyword_text_box);
+		searchView.setIconified(false);
 
+		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-			}
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-				keywordsFilter = s.toString();
+			public boolean onQueryTextSubmit(String query) {
+				keywordsFilter = query;
 				applyFiltersInBackground();
+				// Returning false closes the text edit when it's full screen and the keyboard when it's not
+				return false;
+			}
+
+			@Override
+			public boolean onQueryTextChange(String newText) {
+				keywordsFilter = newText;
+				applyFiltersInBackground();
+				return true;
 			}
 		});
 
-		Drawable textEditBackground = ThemeAttributes.getDrawable(this, R.attr.programmeSearchBarBackground);
-		if (textEditBackground != null) {
-			keywordTextBox.setBackground(textEditBackground);
-			keywordTextBox.setBackgroundTintList(null);
-		}
-
 		if (keywordsFilter != null) {
-			keywordTextBox.setText(keywordsFilter);
+			searchView.setQuery(keywordsFilter, true);
 		}
 	}
 

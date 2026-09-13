@@ -24,19 +24,19 @@
             android:paddingEnd="8dp"
             android:background="?searchTitleBackgroundColor">
 
-            <EditText
-                android:id="@+id/search_keyword_text_box"
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:inputType="textFilter"
-                android:hint="@string/search_input_search_keyword"
+                android:layout_marginTop="12dp"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="0dp"
-                android:textColorHint="?searchTitleTextColor"
-                android:textColor="?searchTitleTextColor"
-                android:backgroundTint="?searchTitleTextColor"
-            />
+                android:theme="?programmeSearchTheme">
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/search_keyword_text_box"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:queryHint="@string/search_input_search_keyword" />
+            </com.google.android.material.card.MaterialCardView>
 
             <LinearLayout
                 android:layout_width="match_parent"

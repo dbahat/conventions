@@ -492,8 +492,8 @@
         <attr name="mapSearchResultsDivider" format="color|reference"/>
         <!-- Height for map search results divider -->
         <attr name="mapSearchResultsDividerHeight" format="dimension|reference"/>
-        <!-- Text color for all text in map search. Used in: search filters, search keyword, show only halls checkbox text,
-             location result name and floor, stand result name and floor. Also used for stands popup text for unselected stand. -->
+        <!-- Text color for all text in map search. Used in: search filters, checkbox texts,
+             location result name and floor, stand result name and floor. -->
         <attr name="mapSearchText" format="color|reference"/>
         <!-- Color for tabs in map search, including selected, not selected, and tab indicator. -->
         <attr name="mapSearchTabsColor" format="color|reference"/>
@@ -501,13 +501,10 @@
         <attr name="mapSearchTabsIndicator" format="integer|reference"/>
         <!-- Image color for map search results icons (for both locations and stands) -->
         <attr name="mapSearchImageColor" format="color|reference"/>
-        <!-- Text color for map search hint for keywords -->
-        <attr name="mapSearchHint" format="color|reference"/>
         <!-- Color for map search "show only halls" checkbox -->
         <attr name="mapSearchCheckboxTint" format="color|reference"/>
-        <!-- Custom background for the map search TextEdit.
-             If null, background tint of the default text edit background is set to mapSearchTex. -->
-        <attr name="mapSearchBarBackground" format="integer|reference"/>
+        <!-- Theme for the map search MaterialCardView and SearchView -->
+        <attr name="mapSearchTheme" format="integer|reference"/>
         <!-- Additional margins for map search TextEdit -->
         <attr name="mapSearchBarHorizontalMargins" format="dimension|reference"/>
         <!-- Elevation for map search pane -->
@@ -765,12 +762,10 @@
         <attr name="searchCategoriesChipStrokeColor" format="color|reference" />
         <!-- Ripple color for search chips -->
         <attr name="searchCategoriesChipRippleColor" format="color|reference" />
-
-        <!-- Color for search text edit text, hint text and labels -->
+        <!-- Text color for programme search results number -->
         <attr name="searchTitleTextColor" format="color|reference" />
-        <!-- Custom background for the programme search TextEdit.
-             If null, background tint of the default text edit background is set to searchTitleTexColor. -->
-        <attr name="programmeSearchBarBackground" format="integer|reference" />
+        <!-- Theme for the programme search MaterialCardView and SearchView -->
+        <attr name="programmeSearchTheme" format="integer|reference" />
         <!-- Filter button color -->
         <attr name="programmeSearchFilterColor" format="color|reference" />
         <!-- Filter button background -->
