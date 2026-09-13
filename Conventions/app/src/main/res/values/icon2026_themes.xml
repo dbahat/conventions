@@ -130,7 +130,7 @@
         <item name="searchTitleBackgroundColor">@color/icon2026_purple25</item>
         <item name="searchTitleHorizontalPadding">8dp</item>
         <item name="searchTitleTextColor">@color/icon2026_purple600</item>
-        <item name="programmeSearchBarBackground">@drawable/icon2026_search_bar_background_purple</item>
+        <item name="programmeSearchTheme">@style/Icon2026.SearchTheme</item>
         <item name="programmeSearchFilterColor">@color/icon2026_purple600</item>
         <item name="programmeSearchFilterBackground">@drawable/icon2026_filter_background</item>
         <item name="eventNameKeywordHighlightColor">@color/icon2026_blue600</item>
@@ -217,8 +217,7 @@
         <item name="mapSearchSeparator">@color/icon2026_purple100</item>
         <item name="mapSearchResultsDivider">@drawable/icon2026_map_search_results_divider</item>
         <item name="mapSearchCheckboxTint">@color/icon2026_blue500</item>
-        <item name="mapSearchHint">@color/icon2026_brown600</item>
-        <item name="mapSearchBarBackground">@drawable/icon2026_search_bar_background_purple</item>
+        <item name="mapSearchTheme">@style/Icon2026.SearchTheme.Map</item>
         <item name="mapSearchBarHorizontalMargins">5dp</item>
         <item name="mapShelterButtonBackground">@drawable/highlighted_button</item>
         <!-- Stands Area -->
@@ -287,4 +286,39 @@
           <!-- Custom Tabs -->
           <item name="customTabsToolbarColor">@color/icon2026_purple600</item>
      </style>
+
+    <style name="Icon2026.SearchTheme" parent="SearchTheme">
+        <item name="materialCardViewStyle">@style/Icon2026.SearchCardViewStyle</item>
+
+        <!-- Color of text typed inside the SearchView -->
+        <item name="android:textColorPrimary">@color/icon2026_purple600</item>
+        <!-- Color of hint text inside the SearchView -->
+        <item name="android:textColorHint">@color/icon2026_purple600</item>
+        <!-- Cursor color -->
+        <item name="colorControlActivated">@color/icon2026_purple600</item>
+        <!-- Image colors -->
+        <item name="tint">@color/icon2026_purple600</item>
+    </style>
+
+    <style name="Icon2026.SearchCardViewStyle" parent="SearchCardViewStyle">
+        <item name="cardBackgroundColor">@color/icon2026_purple50</item>
+    </style>
+
+    <style name="Icon2026.SearchTheme.Map" parent="Icon2026.SearchTheme">
+        <item name="materialCardViewStyle">@style/Icon2026.SearchCardViewStyle.Map</item>
+        <item name="android:textSize">16sp</item>
+
+        <!-- Color of text typed inside the SearchView -->
+        <item name="android:textColorPrimary">@color/icon2026_brown600</item>
+        <!-- Color of hint text inside the SearchView -->
+        <item name="android:textColorHint">@color/icon2026_brown600</item>
+        <!-- Cursor color -->
+        <item name="colorControlActivated">@color/icon2026_brown600</item>
+        <!-- Image colors -->
+        <item name="tint">@color/icon2026_brown600</item>
+    </style>
+
+    <style name="Icon2026.SearchCardViewStyle.Map" parent="Icon2026.SearchCardViewStyle">
+        <item name="cardCornerRadius">38dp</item>
+    </style>
 </resources>
