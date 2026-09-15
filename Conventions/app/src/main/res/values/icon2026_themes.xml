@@ -220,6 +220,15 @@
         <item name="mapSearchTheme">@style/Icon2026.SearchTheme.Map</item>
         <item name="mapSearchBarHorizontalMargins">5dp</item>
         <item name="mapShelterButtonBackground">@drawable/highlighted_button</item>
+        <!-- Stands -->
+        <item name="standsSearchTheme">@style/Icon2026.SearchTheme</item>
+        <item name="standsSearchTitleTextColor">@color/icon2026_purple600</item>
+        <item name="standsSearchTitleBackgroundColor">@color/icon2026_purple25</item>
+        <item name="standsAreaBackground">@drawable/icon2026_yellow25_round8</item>
+        <item name="standsAreaNameColor">@color/icon2026_brown600</item>
+        <!-- Stands Search -->
+        <item name="standsSearchFilterBackground">@drawable/icon2026_filter_background</item>
+        <item name="standKeywordHighlightColor">@color/icon2026_blue600</item>
         <!-- Stands Area -->
         <item name="standBackground">@drawable/icon2026_yellow25_round8</item>
         <item name="selectedStandBackground">@drawable/icon2026_yellow25_round8_border</item>
@@ -305,7 +314,6 @@
     </style>
 
     <style name="Icon2026.SearchTheme.Map" parent="Icon2026.SearchTheme">
-        <item name="materialCardViewStyle">@style/Icon2026.SearchCardViewStyle.Map</item>
         <item name="android:textSize">16sp</item>
 
         <!-- Color of text typed inside the SearchView -->
@@ -316,9 +324,5 @@
         <item name="colorControlActivated">@color/icon2026_brown600</item>
         <!-- Image colors -->
         <item name="tint">@color/icon2026_brown600</item>
-    </style>
-
-    <style name="Icon2026.SearchCardViewStyle.Map" parent="Icon2026.SearchCardViewStyle">
-        <item name="cardCornerRadius">38dp</item>
     </style>
 </resources>
