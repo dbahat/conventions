@@ -26,6 +26,7 @@ import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.StateList;
 import amai.org.conventions.utils.Strings;
+import amai.org.conventions.utils.Views;
 import androidx.annotation.NonNull;
 
 import androidx.annotation.AttrRes;
@@ -407,10 +408,10 @@ public class EventView extends FrameLayout {
 		for (String keyword : keywords) {
 			if (keyword.length() > 0) {
 				String lowerCaseKeyword = keyword.toLowerCase();
-				tryHighlightKeywordInTextView(eventName, lowerCaseKeyword, eventNameHighlightColor);
+				Views.tryHighlightKeywordInTextView(eventName, lowerCaseKeyword, eventNameHighlightColor);
 
-				boolean didHighlightLectureName = tryHighlightKeywordInTextView(lecturerName, lowerCaseKeyword, eventHighlightColor);
-				boolean didHighlightHallName = tryHighlightKeywordInTextView(hallName, lowerCaseKeyword, eventHighlightColor);
+				boolean didHighlightLectureName = Views.tryHighlightKeywordInTextView(lecturerName, lowerCaseKeyword, eventHighlightColor);
+				boolean didHighlightHallName = Views.tryHighlightKeywordInTextView(hallName, lowerCaseKeyword, eventHighlightColor);
 
                 // If the keyword is in the additional event details (subtitle, description or tags), hide the lecturer name and hall name and show the
                 // event detail text next to the keyword instead (assuming there are no highlighted keywords in the views we hid)
@@ -430,7 +431,7 @@ public class EventView extends FrameLayout {
                     }
 
 					if (highlightDescription) {
-						tryHighlightKeywordInTextView(searchDescription, lowerCaseKeyword, eventHighlightColor);
+						Views.tryHighlightKeywordInTextView(searchDescription, lowerCaseKeyword, eventHighlightColor);
 					}
 				}
 			}
@@ -452,31 +453,5 @@ public class EventView extends FrameLayout {
 		searchDescription.setText(Strings.snipTextNearKeyword(text, lowerCaseKeyword));
 		text = searchDescription.getText().toString();
 		return text;
-	}
-
-	private boolean tryHighlightKeywordInTextView(TextView textView, String keyword, int color) {
-		CharSequence originalText = textView.getText();
-
-		String textToHighlight = originalText.toString().toLowerCase();
-		if (!textToHighlight.contains(keyword)) {
-			return false;
-		}
-
-		SpannableString highlightedText = originalText instanceof SpannableString
-				? (SpannableString) originalText
-				: new SpannableString(originalText);
-
-		int currentKeywordIndex = textToHighlight.indexOf(keyword);
-		while (currentKeywordIndex != -1) {
-			// Highlight the keyword
-			highlightedText.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), currentKeywordIndex, currentKeywordIndex + keyword.length(), 0);
-			highlightedText.setSpan(new ForegroundColorSpan(color), currentKeywordIndex, currentKeywordIndex + keyword.length(), 0);
-
-			// Now move to highlight the next word
-			currentKeywordIndex = textToHighlight.indexOf(keyword, currentKeywordIndex + keyword.length());
-		}
-
-		textView.setText(highlightedText);
-		return true;
 	}
 }

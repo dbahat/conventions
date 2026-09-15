@@ -7,8 +7,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,14 +15,11 @@ import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.ArrayList;
@@ -41,11 +36,9 @@ import amai.org.conventions.model.DetailsActivityLocation;
 import amai.org.conventions.model.Floor;
 import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.model.Stand;
-import amai.org.conventions.model.StandType;
 import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
-import amai.org.conventions.networking.StandsRefresher;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Objects;
 import amai.org.conventions.utils.Views;
@@ -55,7 +48,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-import sff.org.conventions.BuildConfig;
 import sff.org.conventions.R;
 
 public class MapActivity extends NavigationActivity implements MapFloorFragment.OnMapFloorEventListener {
@@ -65,8 +57,6 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 	private static final String STATE_SEARCH_TERM = "StateMapSearchTerm";
 	private static final String STATE_MAP_SEARCH_ONLY_HALLS = "StateMapSearchOnlyHalls";
 	private static final String STATE_MAP_SEARCH_ONLY_STANDS_AREAS = "StateMapSearchOnlyStandsAreas";
-	private static final String STATE_MAP_SEARCH_ONLY_DISCOUNT_STANDS = "StateMapSearchOnlyDiscountStands";
-	private static final String STATE_MAP_SEARCH_ONLY_ACTIVE_STANDS = "StateMapSearchOnlyActiveStands";
 	private static final String STATE_MAP_SEARCH_OPEN = "StateMapSearchOpen";
 
 	private static final ConventionMap map = Convention.getInstance().getMap();
@@ -78,24 +68,16 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 
 	// Search
 	private LinearLayout searchContainer;
-	private TabLayout searchType;
-	private View searchTypeBorder;
 	private TextView noResultsFound;
 	private ListView searchResults;
 	private CheckBox showOnlyHallsCheckbox;
 	private CheckBox showOnlyStandsAreasCheckbox;
-	private CheckBox showOnlyDiscountStandsCheckbox;
-	private CheckBox showOnlyActiveStandsCheckbox;
 	private SearchView searchView;
 	private MapLocationsAdapter locationsSearchResultsAdapter;
-	private StandsSearchAdapter standsSearchResultsAdapter;
 	private String searchTerm;
 	private boolean showOnlyHalls;
 	private boolean showOnlyStandsAreas;
-	private boolean showOnlyDiscountStands;
-	private boolean showOnlyActiveStands;
 	private boolean isSearchClosing;
-	private boolean isRefreshingStands;
 	private Menu menu;
 
 	@Override
@@ -141,41 +123,6 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		// Handle edge to edge
 		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, Views.InsetType.NONE, false, searchResults);
 		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, false, findViewById(R.id.map_search_pane));
-
-		handleDeepLinks();
-
-		isRefreshingStands = false;
-		refreshStands(false);
-	}
-
-	private void refreshStands(boolean force) {
-		if (isRefreshingStands) {
-			return;
-		}
-		isRefreshingStands = true;
-		StandsRefresher.getInstance().refreshFromServer(force, new StandsRefresher.OnRefreshFinishedListener() {
-			@Override
-			public void onError(Exception error) {
-				isRefreshingStands = false;
-				if (BuildConfig.DEBUG) {
-					Toast.makeText(MapActivity.this, "Error refreshing stands: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-				} else if (force) {
-					Toast.makeText(MapActivity.this, R.string.update_failed, Toast.LENGTH_SHORT).show();
-				}
-			}
-
-			@Override
-			public void onSuccess() {
-				isRefreshingStands = false;
-				// Update search results
-				if (isSearchOpen() && !isLocationsSearch() && standsSearchResultsAdapter != null) {
-					applySearchFiltersInBackground();
-				}
-				if (force) {
-					Toast.makeText(MapActivity.this, R.string.refresh_stands_finished, Toast.LENGTH_SHORT).show();
-				}
-			}
-		});
 	}
 
 	@Override
@@ -183,10 +130,6 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		getMenuInflater().inflate(R.menu.menu_map, menu);
 		this.menu = menu;
 		updateZoomMenuItem();
-		// Don't show "update stands" menu item if we can't update them
-		if (Convention.getInstance().getStandsURL() == null) {
-			menu.findItem(R.id.map_refresh_stands).setVisible(false);
-		}
 
 		return true;
 	}
@@ -201,8 +144,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 
 				closeSearch();
 				getCurrentFloorFragment().toggleMapZoom();
-			},
-			R.id.map_refresh_stands, () -> refreshStands(true)
+			}
 		));
 	}
 
@@ -365,22 +307,16 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		outState.putString(STATE_SEARCH_TERM, searchView.getQuery().toString());
 		outState.putBoolean(STATE_MAP_SEARCH_ONLY_HALLS, showOnlyHallsCheckbox.isChecked());
 		outState.putBoolean(STATE_MAP_SEARCH_ONLY_STANDS_AREAS, showOnlyStandsAreasCheckbox.isChecked());
-		outState.putBoolean(STATE_MAP_SEARCH_ONLY_DISCOUNT_STANDS, showOnlyDiscountStandsCheckbox.isChecked());
-		outState.putBoolean(STATE_MAP_SEARCH_ONLY_ACTIVE_STANDS, showOnlyActiveStandsCheckbox.isChecked());
 		outState.putBoolean(STATE_MAP_SEARCH_OPEN, isSearchOpen());
 	}
 
 	private void initializeSearch(Bundle savedInstanceState) {
-		searchType = findViewById(R.id.search_type);
-		searchTypeBorder = findViewById(R.id.tab_search_border);
 		searchContainer = (LinearLayout) findViewById(R.id.map_search);
 		noResultsFound = (TextView) findViewById(R.id.map_search_no_results_found);
 		searchResults = (ListView) findViewById(R.id.map_search_results);
 		showOnlyHallsCheckbox = (CheckBox) findViewById(R.id.map_search_show_only_halls);
 		showOnlyStandsAreasCheckbox = (CheckBox) findViewById(R.id.map_search_show_only_stands_areas);
-		showOnlyDiscountStandsCheckbox = (CheckBox) findViewById(R.id.map_search_show_only_discount_stands);
-		showOnlyActiveStandsCheckbox = (CheckBox) findViewById(R.id.map_search_show_only_active_stands);
-		searchView = findViewById(R.id.map_search_text2);
+		searchView = findViewById(R.id.map_search_text);
 
 		isSearchClosing = false;
 
@@ -388,8 +324,6 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		searchTerm = (savedInstanceState != null ? savedInstanceState.getString(STATE_SEARCH_TERM) : null);
 		showOnlyHalls = (savedInstanceState != null && savedInstanceState.getBoolean(STATE_MAP_SEARCH_ONLY_HALLS));
 		showOnlyStandsAreas = (savedInstanceState != null && savedInstanceState.getBoolean(STATE_MAP_SEARCH_ONLY_STANDS_AREAS));
-		showOnlyDiscountStands = (savedInstanceState != null && savedInstanceState.getBoolean(STATE_MAP_SEARCH_ONLY_DISCOUNT_STANDS));
-		showOnlyActiveStands = (savedInstanceState != null && savedInstanceState.getBoolean(STATE_MAP_SEARCH_ONLY_ACTIVE_STANDS));
 		boolean showSearch = (savedInstanceState != null && savedInstanceState.getBoolean(STATE_MAP_SEARCH_OPEN));
 		searchContainer.setVisibility(showSearch ? View.VISIBLE : View.GONE);
 
@@ -410,94 +344,32 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 			}
 		});
 
-		TabLayout.Tab searchLocationsTab = searchType.newTab().setText(R.string.search_locations).setId(R.id.mapSearchTabLocation);
-		searchType.addTab(searchLocationsTab);
-		searchType.addTab(searchType.newTab().setText(R.string.search_stands).setId(R.id.mapSearchTabStands));
-		searchType.selectTab(searchLocationsTab);
-
-		Drawable tabIndicator = ThemeAttributes.getDrawable(this, R.attr.mapSearchTabsIndicator);
-		if (tabIndicator != null) {
-			searchType.setSelectedTabIndicator(tabIndicator);
-		}
-
 		Drawable mapSearchTopBorderColor = ThemeAttributes.getDrawable(this, R.attr.mapSearchTopBorder);
 		if (mapSearchTopBorderColor == null) {
 			findViewById(R.id.map_search_top_border).setVisibility(View.GONE);
 		}
 
-		// Check if we can search for stands
-		if (!Convention.getInstance().hasStands()) {
-			searchType.setVisibility(View.GONE);
-			searchTypeBorder.setVisibility(View.GONE);
-		}
-
-		// Setup search type (radio button) change
-		searchType.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-
-			@Override
-			public void onTabSelected(TabLayout.Tab tab) {
-				getCurrentFloorFragment().resetState();
-				if (tab.getId() == R.id.mapSearchTabLocation) {
-					showOnlyHallsCheckbox.setVisibility(View.VISIBLE);
-					showOnlyStandsAreasCheckbox.setVisibility(View.VISIBLE);
-					showOnlyDiscountStandsCheckbox.setVisibility(View.GONE);
-					showOnlyActiveStandsCheckbox.setVisibility(View.GONE);
-					searchResults.setAdapter(locationsSearchResultsAdapter);
-				} else {
-					showOnlyHallsCheckbox.setVisibility(View.GONE);
-					showOnlyStandsAreasCheckbox.setVisibility(View.GONE);
-					if (showOnlyDiscountsStandsCheckbox()) {
-						showOnlyDiscountStandsCheckbox.setVisibility(View.VISIBLE);
-					} else {
-						showOnlyDiscountStandsCheckbox.setVisibility(View.GONE);
-					}
-					if (showOnlyActiveStandsCheckbox()) {
-						showOnlyActiveStandsCheckbox.setVisibility(View.VISIBLE);
-					} else {
-						showOnlyActiveStandsCheckbox.setVisibility(View.GONE);
-					}
-					searchResults.setAdapter(standsSearchResultsAdapter);
-				}
-				applySearchFiltersInBackground();
-			}
-
-			@Override
-			public void onTabUnselected(TabLayout.Tab tab) {
-			}
-
-			@Override
-			public void onTabReselected(TabLayout.Tab tab) {
-			}
-		});
-
-		// Setup locations and stands search results list
+		// Setup locations search results list
 		locationsSearchResultsAdapter = new MapLocationsAdapter(Collections.<MapLocation>emptyList());
-		standsSearchResultsAdapter = new StandsSearchAdapter(Collections.<Stand>emptyList());
 
 		if (showSearch) {
 			locationsSearchResultsAdapter.setFloor(map.getLastLookedAtFloor());
-			standsSearchResultsAdapter.setFloor(map.getLastLookedAtFloor());
 		}
-		searchResults.setAdapter(isLocationsSearch() ? locationsSearchResultsAdapter : standsSearchResultsAdapter);
+		searchResults.setAdapter(locationsSearchResultsAdapter);
 
 		searchResults.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				closeSearch();
 
-				if (isLocationsSearch()) {
-					MapLocation location = (MapLocation) locationsSearchResultsAdapter.getItem(position);
-					// Go to the selected location's floor and reset its zoom/selection state
-					if (!Objects.equals(getCurrentFloorFragment().getFloor(), location.getFloor())) {
-						setCurrentFloor(location.getFloor());
-						getCurrentFloorFragment().resetState();
-					}
-					// Set selected marker
-					getCurrentFloorFragment().selectMarkersWithNameAndFloor(Collections.singletonList(location));
-				} else {
-					Stand stand = (Stand) standsSearchResultsAdapter.getItem(position);
-					selectStand(stand, MapFloorFragment.SELECT_STAND_DELAY_SHORT);
+				MapLocation location = (MapLocation) locationsSearchResultsAdapter.getItem(position);
+				// Go to the selected location's floor and reset its zoom/selection state
+				if (!Objects.equals(getCurrentFloorFragment().getFloor(), location.getFloor())) {
+					setCurrentFloor(location.getFloor());
+					getCurrentFloorFragment().resetState();
 				}
+				// Set selected marker
+				getCurrentFloorFragment().selectMarkersWithNameAndFloor(Collections.singletonList(location));
 			}
 		});
 
@@ -556,68 +428,6 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 				}
 			}
 		});
-
-		// Setup "show only discount stands" checkbox
-		showOnlyDiscountStandsCheckbox.setChecked(showOnlyDiscountStands);
-		showOnlyDiscountStandsCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				showOnlyDiscountStands = isChecked;
-				// Only apply the filters if the user is currently searching
-				// (otherwise it might happen when restoring the saved state)
-				if (isSearchOpen()) {
-					applySearchFiltersInBackground();
-				}
-			}
-		});
-
-		// Setup "show only active stands" checkbox
-		showOnlyActiveStandsCheckbox.setChecked(showOnlyActiveStands);
-		showOnlyActiveStandsCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				showOnlyActiveStands = isChecked;
-				// Only apply the filters if the user is currently searching
-				// (otherwise it might happen when restoring the saved state)
-				if (isSearchOpen()) {
-					applySearchFiltersInBackground();
-				}
-			}
-		});
-	}
-
-	private boolean showOnlyDiscountsStandsCheckbox() {
-		List<Stand> stands = Convention.getInstance().getStands();
-		if (stands.isEmpty()) {
-			return false;
-		}
-		boolean initialValue = stands.get(0).hasDiscount();
-		for (Stand stand : stands) {
-			if (stand.hasDiscount() != initialValue) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	private boolean showOnlyActiveStandsCheckbox() {
-		// Only show during the convention
-		if (!Convention.getInstance().hasStarted() || Convention.getInstance().hasEnded()) {
-			return false;
-		}
-
-		// Only show when at least one stand is active and at least one stand is inactive
-		List<Stand> stands = Convention.getInstance().getStands();
-		if (stands.isEmpty()) {
-			return false;
-		}
-		boolean initialValue = stands.get(0).isActive();
-		for (Stand stand : stands) {
-			if (stand.isActive() != initialValue) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	private void selectStand(Stand stand, int delay) {
@@ -633,11 +443,6 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 			// Set selected marker
 			getCurrentFloorFragment().selectStandByLocation(location, stand, delay);
 		}
-	}
-
-	private boolean isLocationsSearch() {
-		TabLayout.Tab selectedTab = searchType.getTabAt(searchType.getSelectedTabPosition());
-		return selectedTab != null && selectedTab.getId() == R.id.mapSearchTabLocation;
 	}
 
 	private void setCurrentFloor(Floor floor) {
@@ -658,94 +463,57 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		final String searchTerm = this.searchTerm;
 		final boolean showOnlyHalls = this.showOnlyHalls;
 		final boolean showOnlyStandsAreas = this.showOnlyStandsAreas;
-		final boolean showOnlyDiscountStands = this.showOnlyDiscountStands;
-		final boolean showOnlyActiveStands = this.showOnlyActiveStands;
 		final Floor floor = getCurrentFloorFragment().getFloor();
 
-		new AsyncTask<Void, Void, List<?>>() {
+		new AsyncTask<Void, Void, List<MapLocation>>() {
 			@Override
-			protected List<?> doInBackground(Void... params) {
-				if (isLocationsSearch()) {
-					List<MapLocation> locations = map.getLocations();
-					locations = CollectionUtils.filter(locations, new CollectionUtils.Predicate<MapLocation>() {
-						@Override
-						public boolean where(MapLocation item) {
-							return (searchTerm == null || searchTerm.isEmpty() || item.getName().toLowerCase().contains(searchTerm.toLowerCase())) &&
-									((!showOnlyHalls) || item.areAnyPlacesHalls()) &&
-									((!showOnlyStandsAreas) || item.areaAnyPlacesStandsAreas());
-						}
-					});
-					Collections.sort(locations, new Comparator<MapLocation>() {
-						@Override
-						public int compare(MapLocation lhs, MapLocation rhs) {
-							// Sort order - floor (current floor is first), is hall (halls are first), is stands area, name
-							if (!Objects.equals(lhs.getFloor(), rhs.getFloor())) {
-								if (Objects.equals(lhs.getFloor(), floor)) {
-									return -1;
-								} else if (Objects.equals(rhs.getFloor(), floor)) {
-									return 1;
-								} else {
-									return lhs.getFloor().getNumber() - rhs.getFloor().getNumber();
-								}
-							} else if (lhs.areAnyPlacesHalls() != rhs.areAnyPlacesHalls()) {
-								if (lhs.areAnyPlacesHalls()) {
-									return -1;
-								} else {
-									return 1;
-								}
-							} else if (lhs.areaAnyPlacesStandsAreas() != rhs.areaAnyPlacesStandsAreas()) {
-								if (lhs.areaAnyPlacesStandsAreas()) {
-									return -1;
-								} else {
-									return 1;
-								}
+			protected List<MapLocation> doInBackground(Void... params) {
+				List<MapLocation> locations = map.getLocations();
+				locations = CollectionUtils.filter(locations, item ->
+					(searchTerm == null || searchTerm.isEmpty() || item.getName().toLowerCase().contains(searchTerm.toLowerCase())) &&
+						((!showOnlyHalls) || item.areAnyPlacesHalls()) &&
+						((!showOnlyStandsAreas) || item.areaAnyPlacesStandsAreas())
+				);
+				Collections.sort(locations, new Comparator<MapLocation>() {
+					@Override
+					public int compare(MapLocation lhs, MapLocation rhs) {
+						// Sort order - floor (current floor is first), is hall (halls are first), is stands area, name
+						if (!Objects.equals(lhs.getFloor(), rhs.getFloor())) {
+							if (Objects.equals(lhs.getFloor(), floor)) {
+								return -1;
+							} else if (Objects.equals(rhs.getFloor(), floor)) {
+								return 1;
 							} else {
-								return lhs.getName().compareTo(rhs.getName());
+								return lhs.getFloor().getNumber() - rhs.getFloor().getNumber();
 							}
-						}
-					});
-					locations = CollectionUtils.unique(locations, new MapLocationSearchEquality());
-					return locations;
-				} else {
-					List<Stand> stands = Convention.getInstance().getStands();
-					stands = CollectionUtils.filter(stands, new CollectionUtils.Predicate<Stand>() {
-						@Override
-						public boolean where(Stand item) {
-							return (searchTerm == null || searchTerm.isEmpty() ||
-								item.getName().toLowerCase().contains(searchTerm.toLowerCase()) ||
-								(item.getDescription() != null && item.getDescription().toLowerCase().contains(searchTerm.toLowerCase())) ||
-								CollectionUtils.filter(CollectionUtils.map(item.getTypes(), StandType::getName), name -> name.toLowerCase().contains(searchTerm.toLowerCase())).size() > 0 ||
-								(item.getTags() != null && CollectionUtils.filter(item.getTags(), name -> name.toLowerCase().contains(searchTerm.toLowerCase())).size() > 0)) &&
-								(!showOnlyDiscountStands || item.hasDiscount()) &&
-								(!showOnlyActiveStands || item.isActive());
-						}
-					});
-					Collections.sort(stands, new Comparator<Stand>() {
-						@Override
-						public int compare(Stand lhs, Stand rhs) {
+						} else if (lhs.areAnyPlacesHalls() != rhs.areAnyPlacesHalls()) {
+							if (lhs.areAnyPlacesHalls()) {
+								return -1;
+							} else {
+								return 1;
+							}
+						} else if (lhs.areaAnyPlacesStandsAreas() != rhs.areaAnyPlacesStandsAreas()) {
+							if (lhs.areaAnyPlacesStandsAreas()) {
+								return -1;
+							} else {
+								return 1;
+							}
+						} else {
 							return lhs.getName().compareTo(rhs.getName());
 						}
-					});
-					return stands;
-				}
+					}
+				});
+				locations = CollectionUtils.unique(locations, new MapLocationSearchEquality());
+				return locations;
 			}
 
 			@Override
-			protected void onPostExecute(List<?> searchResult) {
-				boolean locationsSearch = isLocationsSearch();
-				if (locationsSearch) {
-					//noinspection unchecked
-					locationsSearchResultsAdapter.setMapLocations((List<MapLocation>) searchResult);
-					locationsSearchResultsAdapter.notifyDataSetChanged();
-				} else {
-					//noinspection unchecked
-					standsSearchResultsAdapter.setStands((List<Stand>) searchResult);
-					standsSearchResultsAdapter.notifyDataSetChanged();
-				}
+			protected void onPostExecute(List<MapLocation> searchResult) {
+				locationsSearchResultsAdapter.setMapLocations(searchResult);
+				locationsSearchResultsAdapter.notifyDataSetChanged();
 
 				// Show the "no results found" message if there are no results after applying the filters
-				if ((locationsSearch && locationsSearchResultsAdapter.getCount() == 0) ||
-						(!locationsSearch && standsSearchResultsAdapter.getCount() == 0)) {
+				if (locationsSearchResultsAdapter.getCount() == 0) {
 					noResultsFound.setVisibility(View.VISIBLE);
 					searchResults.setVisibility(View.GONE);
 				} else {
@@ -753,12 +521,10 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 					searchResults.setVisibility(View.VISIBLE);
 				}
 
-				// Select markers (only if a search term was entered or one of the checkboxes selected - and only for locations search)
-				if (locationsSearch) {
-					getCurrentFloorFragment().selectMarkersWithNameAndFloor(
-							(searchTerm == null || searchTerm.isEmpty()) && !showOnlyHalls && !showOnlyStandsAreas ?
-									null : locationsSearchResultsAdapter.getMapLocations());
-				}
+				// Select markers (only if a search term was entered or one of the checkboxes selected)
+				getCurrentFloorFragment().selectMarkersWithNameAndFloor(
+					(searchTerm == null || searchTerm.isEmpty()) && !showOnlyHalls && !showOnlyStandsAreas ?
+						null : locationsSearchResultsAdapter.getMapLocations());
 			}
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
@@ -783,7 +549,6 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		getCurrentFloorFragment().resetState();
 		isSearchClosing = false;
 		locationsSearchResultsAdapter.setFloor(getCurrentFloorFragment().getFloor());
-		standsSearchResultsAdapter.setFloor(getCurrentFloorFragment().getFloor());
 		searchContainer.setVisibility(View.VISIBLE);
 		searchContainer.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in_from_right));
 		applySearchFiltersInBackground();
@@ -849,87 +614,5 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		}
 		int baseHeight = currentFloorFragment.getMapHiddenPortionHeight();
 		onLocationDetailsTopChanged(baseHeight, null);
-	}
-
-	private void handleDeepLinks() {
-		Uri intentData = getIntent().getData();
-		// The URI looks like: sff.org.conventions://stands/by-name?name=abc
-		if (isStandsIntent(intentData)) {
-			String standName = intentData.getQueryParameter("name") == null ? "" : intentData.getQueryParameter("name");
-			List<Stand> stands = new ArrayList<>(1);
-			if (!standName.isEmpty()) {
-				for (Stand stand : Convention.getInstance().getStands()) {
-					if (stand.getName().equals(standName)) {
-						stands.add(stand);
-					}
-				}
-			}
-
-			if (stands.size() == 1) {
-				// Select the stand after the floors are loaded
-				String finalStandName = standName;
-				new Handler().postDelayed(() -> {
-					setStandNameInSearch(finalStandName); // If they close the stands area, this will make it easier to find the stand again
-					selectStand(stands.get(0), MapFloorFragment.SELECT_STAND_DELAY_LONG);
-				}, 500);
-			} else {
-				// Show error message. Since this deep link is opened from outside the app, we show it in a dialog, so the user has time
-				// to read the message and understand the problem.
-				String message;
-				if (stands.isEmpty()) {
-					if ("null".equals(standName)) { // Possibly passed as null from Javascript code
-						standName = "";
-					}
-					message = getString(R.string.stand_not_found, standName);
-				} else {
-					message = getString(R.string.too_many_stands_found, standName);
-				}
-
-				String finalStandName = standName;
-				new AlertDialog.Builder(this)
-					.setTitle(R.string.show_stand)
-					.setMessage(message)
-					.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							// Open search with the name
-							setStandNameInSearch(finalStandName);
-							openSearch();
-						}
-					})
-					.show();
-			}
-		}
-	}
-
-	private boolean isStandsIntent(Uri intentData) {
-		// This method should be synched with the intent filters for MapActivity in AndroidManifest.xml
-		if (intentData == null) {
-			return false;
-		}
-
-		// Direct deep link - sff.org.conventions://stands/by-name?name=standName
-		if ("stands".equals(intentData.getHost()) && intentData.getPath() != null && intentData.getPath().equals("/by-name")) {
-			return true;
-		// Test deep link - https://dbahat.github.io/conventions-redirect-test/stands-sff.html?name=standName
-		} else if ("dbahat.github.io".equals(intentData.getHost()) && "/conventions-redirect-test/stands-sff.html".equals(intentData.getPath())) {
-			return true;
-		}
-		return false;
-	}
-
-	private void setStandNameInSearch(String standName) {
-		int standsTab = -1;
-		for (int i = 0; i < searchType.getTabCount(); i++) {
-			if (searchType.getTabAt(i).getId() == R.id.mapSearchTabStands) {
-				standsTab = i;
-				break;
-			}
-		}
-		if (standsTab != -1) {
-			searchType.selectTab(searchType.getTabAt(standsTab));
-		}
-		searchTerm = standName;
-		searchView.setQuery(searchTerm, true);
 	}
 }

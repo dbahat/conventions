@@ -475,13 +475,6 @@
         <attr name="mapSearchTopBorder" format="color|reference"/>
         <!-- Border color to the left of map search -->
         <attr name="mapSearchBorder" format="color|reference"/>
-        <!-- Tab background for map search tabs.
-             Can be a state list drawable. Use android:selected="true" for the selected tab. -->
-        <attr name="mapSearchTabsTabBackground" format="color|reference"/>
-        <!-- Tab background for map search tabs -->
-        <attr name="mapSearchTabsBackground" format="color|reference"/>
-        <!-- Border color between tabs and search filters -->
-        <attr name="mapSearchTabsBorder" format="color|reference"/>
         <!-- Background for map search filters -->
         <attr name="mapSearchFiltersBackground" format="color|reference"/>
         <!-- Color for separator between search filters and search results -->
@@ -495,10 +488,6 @@
         <!-- Text color for all text in map search. Used in: search filters, checkbox texts,
              location result name and floor, stand result name and floor. -->
         <attr name="mapSearchText" format="color|reference"/>
-        <!-- Color for tabs in map search, including selected, not selected, and tab indicator. -->
-        <attr name="mapSearchTabsColor" format="color|reference"/>
-        <!-- Custom tab indicator for map search. If null, the default will be used. -->
-        <attr name="mapSearchTabsIndicator" format="integer|reference"/>
         <!-- Image color for map search results icons (for both locations and stands) -->
         <attr name="mapSearchImageColor" format="color|reference"/>
         <!-- Color for map search "show only halls" checkbox -->
@@ -521,6 +510,23 @@
 
         <!-- Details button text color -->
         <attr name="mapDetailButtonsTextColor" format="integer|reference"/>
+
+        <!-- Stands -->
+        <!-- Theme for the stands search MaterialCardView and SearchView in stands screen and stands search screen -->
+        <attr name="standsSearchTheme" format="integer|reference" />
+        <!-- Text color for stands search title -->
+        <attr name="standsSearchTitleTextColor" format="color|reference"/>
+        <!-- Color for the background of the stands screen and stands search screen title layout -->
+        <attr name="standsSearchTitleBackgroundColor" format="color|reference"/>
+        <!-- Background resource for stands area -->
+        <attr name="standsAreaBackground" format="integer|reference"/>
+        <!-- Text color for stands area name -->
+        <attr name="standsAreaNameColor" format="color|reference"/>
+        <!-- Filter button background -->
+        <attr name="standsSearchFilterBackground" format="integer|reference"/>
+
+        <!-- Stands Search -->
+        <attr name="standKeywordHighlightColor" format="color|reference"/>
 
         <!-- Stands Area -->
 

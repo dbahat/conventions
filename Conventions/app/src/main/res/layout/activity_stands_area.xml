@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".events.activities.StandsAreaActivity">
+    tools:context="amai.org.conventions.events.activities.StandsAreaActivity">
 
     <FrameLayout
         android:id="@+id/stands_area_zoom_container"

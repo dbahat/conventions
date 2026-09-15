@@ -19,34 +19,34 @@ import androidx.core.widget.CompoundButtonCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import sff.org.conventions.R;
 
-public class SearchFiltersAdapter extends SectionedRecyclerViewAdapter<SearchFilter, SearchFilter.Type, SearchFiltersAdapter.ViewHolder, SearchFiltersAdapter.SectionViewHolder> {
+public class SearchFiltersAdapter<T extends SearchFilter.SearchFilterType> extends SectionedRecyclerViewAdapter<SearchFilter<T>, T, SearchFiltersAdapter.ViewHolder<T>, SearchFiltersAdapter.SectionViewHolder> {
 
-	private List<SearchFilter> searchFilters;
-	private OnFilterChangeListener onFilterChangeListener;
-	private List<SectionedGridRecyclerViewAdapterWrapper.Section> sections;
+	private List<SearchFilter<T>> searchFilters;
+	private OnFilterChangeListener<T> onFilterChangeListener;
+	private List<SectionedGridRecyclerViewAdapterWrapper.Section<T>> sections;
 
-	public SearchFiltersAdapter(List<SearchFilter> searchFilters) {
+	public SearchFiltersAdapter(List<SearchFilter<T>> searchFilters) {
 		super(searchFilters);
 	}
 
 	@Override
-	protected SearchFilter.Type getSection(SearchFilter item) {
+	protected T getSection(SearchFilter<T> item) {
 		return item.getType();
 	}
 
-	public void setOnFilterChangeListener(OnFilterChangeListener onFilterChangeListener) {
+	public void setOnFilterChangeListener(OnFilterChangeListener<T> onFilterChangeListener) {
 		this.onFilterChangeListener = onFilterChangeListener;
 	}
 
 	@NonNull
 	@Override
-	public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+	public ViewHolder<T> onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_filter_item, parent, false);
-		return new ViewHolder(view, onFilterChangeListener);
+		return new ViewHolder<>(view, onFilterChangeListener);
 	}
 
 	@Override
-	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+	public void onBindViewHolder(@NonNull ViewHolder<T> holder, int position) {
 		holder.bind(getItems().get(position));
 	}
 
@@ -57,18 +57,17 @@ public class SearchFiltersAdapter extends SectionedRecyclerViewAdapter<SearchFil
 	}
 
 	@Override
-	public void onBindSectionViewHolder(SectionViewHolder sectionViewHolder, SearchFilter.Type section) {
+	public void onBindSectionViewHolder(SectionViewHolder sectionViewHolder, T section) {
 		Resources resources = sectionViewHolder.title.getResources();
 		sectionViewHolder.title.setText(resources.getString(section.getDescriptionStringId()));
 	}
 
-	public static class ViewHolder extends RecyclerView.ViewHolder {
-
+	public static class ViewHolder<T extends SearchFilter.SearchFilterType> extends RecyclerView.ViewHolder {
 		private TextView filterName;
 		private CheckBox checkBox;
-		private SearchFilter searchFilter;
+		private SearchFilter<T> searchFilter;
 
-		public ViewHolder(View itemView, final OnFilterChangeListener onFilterChangeListener) {
+		public ViewHolder(View itemView, final OnFilterChangeListener<T> onFilterChangeListener) {
 			super(itemView);
 
 			filterName = (TextView) itemView.findViewById(R.id.search_filter_item_name);
@@ -92,10 +91,15 @@ public class SearchFiltersAdapter extends SectionedRecyclerViewAdapter<SearchFil
 			CompoundButtonCompat.setButtonTintList(this.checkBox, checkboxColors);
 		}
 
-		public void bind(SearchFilter searchFilter) {
+		public void bind(SearchFilter<T> searchFilter) {
 			this.searchFilter = searchFilter;
 			filterName.setText(searchFilter.getName());
-			checkBox.setChecked(!searchFilter.isActive());
+			// By default, active filters are unchecked. If the reverse is requested, set active filters to checked.
+			if (searchFilter.isDisplayActiveAsChecked()) {
+				checkBox.setChecked(searchFilter.isActive());
+			} else {
+				checkBox.setChecked(!searchFilter.isActive());
+			}
 		}
 	}
 
@@ -108,7 +112,7 @@ public class SearchFiltersAdapter extends SectionedRecyclerViewAdapter<SearchFil
 		}
 	}
 
-	public interface OnFilterChangeListener {
-		void onFilterStateChanged(SearchFilter searchFilter);
+	public interface OnFilterChangeListener<T extends SearchFilter.SearchFilterType> {
+		void onFilterStateChanged(SearchFilter<T> searchFilter);
 	}
 }

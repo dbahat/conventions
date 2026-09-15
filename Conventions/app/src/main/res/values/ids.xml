@@ -9,7 +9,4 @@
     <item name="inset_listener_applied" type="id"/>
     <item name="inset_margins" type="id"/>
     <item name="inset_padding" type="id"/>
-
-    <item name="mapSearchTabLocation" type="id"/>
-    <item name="mapSearchTabStands" type="id"/>
 </resources>

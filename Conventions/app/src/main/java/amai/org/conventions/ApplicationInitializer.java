@@ -210,9 +210,10 @@ public class ApplicationInitializer {
     }
 
     private void refreshStands() {
-        StandsRefresher.getInstance().refreshFromServer(false, new StandsRefresher.OnRefreshFinishedListener() {
+        // This should only happen once so no need to unregister the listener or check it isn't already registered
+        StandsRefresher.getInstance().addListener(new StandsRefresher.OnRefreshFinishedListener() {
             @Override
-            public void onError(Exception error) {
+            public void onError(Exception error, boolean force) {
                 if (BuildConfig.DEBUG) {
                     ConventionsApplication.runOnCurrentActivityUiThread(activity -> {
                         Toast.makeText(activity, "Error refreshing stands: " + error.getMessage(), Toast.LENGTH_SHORT).show();
@@ -220,5 +221,6 @@ public class ApplicationInitializer {
                 }
             }
         });
+        StandsRefresher.getInstance().refreshFromServer(false);
     }
 }

@@ -78,11 +78,12 @@ public class StandViewHolder extends RecyclerView.ViewHolder {
 			itemView.setBackground(ThemeAttributes.getDrawable(context, R.attr.standBackground));
 		}
 
-		itemView.setOnClickListener(view -> onClickListener.onItemClicked(stand));
 		if (onClickListener != null) {
+			itemView.setOnClickListener(view -> onClickListener.onItemClicked(stand));
 			infoButton.setVisibility(View.VISIBLE);
 			infoButton.setOnClickListener(view -> onClickListener.onItemInfoClicked(stand));
 		} else {
+			itemView.setOnClickListener(null);
 			infoButton.setVisibility(View.GONE);
 		}
 	}

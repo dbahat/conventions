@@ -41,7 +41,6 @@ import amai.org.conventions.model.ImageIdToImageResourceMapper;
 import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.model.NamedItems;
 import amai.org.conventions.model.OrderedNamedItems;
-import amai.org.conventions.model.Place;
 import amai.org.conventions.model.SearchFilter;
 import amai.org.conventions.model.SecondHandBuy;
 import amai.org.conventions.model.SecondHandSell;
@@ -657,82 +656,49 @@ public abstract class Convention implements Serializable {
 		return categories;
 	}
 
-	public List<SearchFilter> getEventTypesSearchFilters() {
-		List<SearchFilter> filters = CollectionUtils.map(events, new CollectionUtils.Mapper<ConventionEvent, SearchFilter>() {
-					@Override
-			public SearchFilter map(ConventionEvent event) {
-				return new SearchFilter().withName(event.getType().getDescription()).withType(SearchFilter.Type.EventType);
-					}
-				});
+	public List<SearchFilter<SearchFilter.EventSearchFilterType>> getEventTypesSearchFilters() {
+		List<SearchFilter<SearchFilter.EventSearchFilterType>> filters = CollectionUtils.map(events, event ->
+			new SearchFilter<SearchFilter.EventSearchFilterType>().withName(event.getType().getDescription()).withType(SearchFilter.EventSearchFilterType.EventType)
+		);
 
 		return normalizeSearchFilters(filters);
 	}
 
-	public List<SearchFilter> getCategorySearchFilters() {
-		List<SearchFilter> filters = CollectionUtils.map(events, new CollectionUtils.Mapper<ConventionEvent, SearchFilter>() {
-			@Override
-			public SearchFilter map(ConventionEvent event) {
-				return new SearchFilter().withName(event.getCategory()).withType(SearchFilter.Type.Category);
-			}
-		});
+	public List<SearchFilter<SearchFilter.EventSearchFilterType>> getCategorySearchFilters() {
+		List<SearchFilter<SearchFilter.EventSearchFilterType>> filters = CollectionUtils.map(events, event ->
+			new SearchFilter<SearchFilter.EventSearchFilterType>().withName(event.getCategory()).withType(SearchFilter.EventSearchFilterType.Category)
+		);
 
 		return normalizeSearchFilters(filters);
 	}
 
-	private List<SearchFilter> normalizeSearchFilters(List<SearchFilter> filters) {
-		filters = CollectionUtils.filter(filters, new CollectionUtils.Predicate<SearchFilter>() {
-			@Override
-			public boolean where(SearchFilter item) {
-				return item.getName() != null && !"".equals(item.getName().trim());
-			}
-		});
+	public <T extends SearchFilter.SearchFilterType> List<SearchFilter<T>> normalizeSearchFilters(List<SearchFilter<T>> filters) {
+		filters = CollectionUtils.filter(filters, item -> item.getName() != null && !item.getName().trim().isEmpty());
 
-		Collections.sort(filters, new Comparator<SearchFilter>() {
-			@Override
-			public int compare(SearchFilter searchFilter, SearchFilter other) {
-				return searchFilter.getName().compareTo(other.getName());
-			}
-		});
+		Collections.sort(filters, (searchFilter, other) -> searchFilter.getName().compareTo(other.getName()));
 
-		return CollectionUtils.unique(filters, new CollectionUtils.EqualityPredicate<SearchFilter>() {
-			@Override
-			public boolean equals(SearchFilter lhs, SearchFilter rhs) {
-				return lhs.getName().equals(rhs.getName());
-			}
-		});
+		return CollectionUtils.unique(filters, (lhs, rhs) -> lhs.getName().equals(rhs.getName()));
 	}
 
-	public List<SearchFilter> getKeywordsSearchFilters() {
+	public List<SearchFilter<SearchFilter.EventSearchFilterType>> getKeywordsSearchFilters() {
 		Set<String> allTags = new HashSet<>();
 		for (ConventionEvent event : events) {
 			allTags.addAll(event.getTags());
 		}
 
-		List<SearchFilter> filters = CollectionUtils.map(new ArrayList<>(allTags), new CollectionUtils.Mapper<String, SearchFilter>() {
-			@Override
-			public SearchFilter map(String tag) {
-				return new SearchFilter().withName(tag).withType(SearchFilter.Type.Tag);
-			}
-		});
-
+		List<SearchFilter<SearchFilter.EventSearchFilterType>> filters = CollectionUtils.map(new ArrayList<>(allTags), tag ->
+			new SearchFilter<SearchFilter.EventSearchFilterType>().withName(tag).withType(SearchFilter.EventSearchFilterType.Tag)
+		);
 
 		return normalizeSearchFilters(filters);
 	}
 
-	public List<SearchFilter> getEventLocationTypeFilters(Resources resources) {
-		List<SearchFilter> filters = CollectionUtils.map(getEventLocationTypes(), new CollectionUtils.Mapper<ConventionEvent.EventLocationType, SearchFilter>() {
-			@Override
-			public SearchFilter map(ConventionEvent.EventLocationType item) {
-				return new SearchFilter().withName(resources.getString(item.getDescriptionStringId())).withType(SearchFilter.Type.EventLocationType);
-			}
-		});
+	public List<SearchFilter<SearchFilter.EventSearchFilterType>> getEventLocationTypeFilters(Resources resources) {
+		List<SearchFilter<SearchFilter.EventSearchFilterType>> filters = CollectionUtils.map(getEventLocationTypes(),
+			item -> new SearchFilter<SearchFilter.EventSearchFilterType>().withName(resources.getString(item.getDescriptionStringId())).withType(SearchFilter.EventSearchFilterType.EventLocationType)
+		);
 
-		Collections.sort(filters, new Comparator<SearchFilter>() {
-			@Override
-			public int compare(SearchFilter searchFilter, SearchFilter other) {
-				return searchFilter.getName().compareTo(other.getName());
-			}
-		});
+		Collections.sort(filters, (searchFilter, other) -> searchFilter.getName().compareTo(other.getName()));
 
 		return filters;
 	}

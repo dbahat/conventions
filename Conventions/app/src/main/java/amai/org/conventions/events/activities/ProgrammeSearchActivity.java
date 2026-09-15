@@ -45,7 +45,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 	private static final String STATE_SEARCH_FILTERS = "SearchFilters";
 
 	// Not using the interface List since we want to persist this in the savedInstanceState
-	private HashSet<SearchFilter> searchFilters;
+	private HashSet<SearchFilter<SearchFilter.EventSearchFilterType>> searchFilters;
 
 	private String keywordsFilter;
 	private TextView searchResultsNumber;
@@ -74,7 +74,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 			Serializable savedFilters = savedInstanceState.getSerializable(STATE_SEARCH_FILTERS);
 			if (savedFilters instanceof HashSet) {
 				//noinspection unchecked
-				searchFilters = (HashSet<SearchFilter>) savedFilters;
+				searchFilters = (HashSet<SearchFilter<SearchFilter.EventSearchFilterType>>) savedFilters;
 			} else {
 				searchFilters = new HashSet<>();
 			}
@@ -84,10 +84,10 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 			searchFilters = new HashSet<>();
 		}
 
-		noResultsFoundView = (TextView) findViewById(R.id.search_no_results_found);
+		noResultsFoundView = findViewById(R.id.search_no_results_found);
 		searchResultsNumber = findViewById(R.id.search_results_number);
 		searchResultsNumberSeparator = findViewById(R.id.search_results_number_separator);
-		drawerLayout = (DrawerLayout) findViewById(R.id.search_drawer_layout);
+		drawerLayout = findViewById(R.id.search_drawer_layout);
 
 		initializeEventsList();
 		initializeKeywordFilter();
@@ -95,25 +95,25 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 		applyFiltersInBackground();
 
 		searchFilterResultsNumber = findViewById(R.id.search_filter_results_number);
-		filterButton = (ImageButton) findViewById(R.id.search_filter_button);
+		filterButton = findViewById(R.id.search_filter_button);
 		refreshFilterButton();
 
-		List<SearchFilter> eventTypesSearchFilters = Convention.getInstance().getEventTypesSearchFilters();
+		List<SearchFilter<SearchFilter.EventSearchFilterType>> eventTypesSearchFilters = Convention.getInstance().getEventTypesSearchFilters();
 		totalEventTypeSearchFiltersCount = eventTypesSearchFilters.size();
 
-		List<SearchFilter> categoryFilters = Convention.getInstance().getCategorySearchFilters();
+		List<SearchFilter<SearchFilter.EventSearchFilterType>> categoryFilters = Convention.getInstance().getCategorySearchFilters();
 		totalCategorySearchFiltersCount = categoryFilters.size();
 
-		List<SearchFilter> tagFilters = Convention.getInstance().getKeywordsSearchFilters();
+		List<SearchFilter<SearchFilter.EventSearchFilterType>> tagFilters = Convention.getInstance().getKeywordsSearchFilters();
 		totalTagSearchFiltersCount = tagFilters.size();
 
-		List<SearchFilter> eventLocationTypeFilters = Convention.getInstance().getEventLocationTypeFilters(getResources());
+		List<SearchFilter<SearchFilter.EventSearchFilterType>> eventLocationTypeFilters = Convention.getInstance().getEventLocationTypeFilters(getResources());
 		// Only show this filter if there is more than 1 event location type
 		totalEventLocationTypeFiltersCount = eventLocationTypeFilters.size() > 1 ? eventLocationTypeFilters.size() : 0;
 
-		if (searchFilters.size() == 0) {
+		if (searchFilters.isEmpty()) {
 			if (hasEventsWithTicketsInfo()) {
-				SearchFilter soldOutFilter = new SearchFilter().withName(getString(R.string.show_sold_out_events)).withType(SearchFilter.Type.Tickets);
+				SearchFilter<SearchFilter.EventSearchFilterType> soldOutFilter = new SearchFilter<SearchFilter.EventSearchFilterType>().withName(getString(R.string.show_sold_out_events)).withType(SearchFilter.EventSearchFilterType.Tickets);
 				searchFilters.add(soldOutFilter);
 			}
 			if (eventLocationTypeFilters.size() > 1) {
@@ -124,7 +124,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 			searchFilters.addAll(tagFilters);
 		}
 
-		List<SearchFilter> sortedFilters = new ArrayList<>(searchFilters);
+		List<SearchFilter<SearchFilter.EventSearchFilterType>> sortedFilters = new ArrayList<>(searchFilters);
 		Collections.sort(sortedFilters, (filter, other) -> {
 			if (filter.getType().equals(other.getType())) {
 				return filter.getName().compareTo(other.getName());
@@ -136,7 +136,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 		RecyclerView searchFiltersList = findViewById(R.id.search_filters_list);
 		searchFiltersList.setLayoutManager(new GridLayoutManager(this, 2));
 
-		final SearchFiltersAdapter searchFiltersAdapter = new SearchFiltersAdapter(sortedFilters);
+		final SearchFiltersAdapter<SearchFilter.EventSearchFilterType> searchFiltersAdapter = new SearchFiltersAdapter<>(sortedFilters);
 		searchFiltersAdapter.setOnFilterChangeListener(searchFilter -> {
 			searchFilters.add(searchFilter);
 			applyFiltersInBackground();
@@ -144,27 +144,24 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 
 		searchFiltersList.setAdapter(new SectionedGridRecyclerViewAdapterWrapper<>(searchFiltersList, searchFiltersAdapter));
 
-		final Button editAllButton = (Button) findViewById(R.id.search_filter_drawer_container_edit_all_button);
-		editAllButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (editAllButton.getText().equals(getResources().getString(R.string.search_filter_select_all))) {
-					for (SearchFilter filter : searchFilters) {
-						filter.withActive(false);
-					}
-
-					editAllButton.setText(getResources().getString(R.string.search_filter_clear_all));
-				} else {
-					for (SearchFilter filter : searchFilters) {
-						filter.withActive(true);
-					}
-
-					editAllButton.setText(getResources().getString(R.string.search_filter_select_all));
+		final Button editAllButton = findViewById(R.id.search_filter_drawer_container_edit_all_button);
+		editAllButton.setOnClickListener(view -> {
+			if (editAllButton.getText().equals(getResources().getString(R.string.search_filter_select_all))) {
+				for (SearchFilter<SearchFilter.EventSearchFilterType> filter : searchFilters) {
+					filter.withActive(filter.isDisplayActiveAsChecked());
 				}
 
-				searchFiltersAdapter.notifyDataSetChanged();
-				applyFiltersInBackground();
+				editAllButton.setText(getResources().getString(R.string.search_filter_clear_all));
+			} else {
+				for (SearchFilter<SearchFilter.EventSearchFilterType> filter : searchFilters) {
+					filter.withActive(!filter.isDisplayActiveAsChecked());
+				}
+
+				editAllButton.setText(getResources().getString(R.string.search_filter_select_all));
 			}
+
+			searchFiltersAdapter.notifyDataSetChanged();
+			applyFiltersInBackground();
 		});
 
 
@@ -177,27 +174,24 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 	}
 
 	private boolean hasEventsWithTicketsInfo() {
-		return CollectionUtils.findFirst(Convention.getInstance().getEvents(), new CollectionUtils.Predicate<ConventionEvent>() {
-			@Override
-			public boolean where(ConventionEvent item) {
-				return item.getAvailableTickets() >= 0;
-			}
-		}) != null;
+		return CollectionUtils.findFirst(Convention.getInstance().getEvents(), item -> item.getAvailableTickets() >= 0) != null;
 	}
 
 	private void refreshFilterButton() {
-		int numberOfActiveFilters = CollectionUtils.filter(new ArrayList<>(searchFilters), new CollectionUtils.Predicate<SearchFilter>() {
-			@Override
-			public boolean where(SearchFilter item) {
-				return item.isActive();
-			}
-		}).size();
+		List<SearchFilter<SearchFilter.EventSearchFilterType>> activeFilters = CollectionUtils.filter(new ArrayList<>(searchFilters), SearchFilter::isActive);
 
-		// In case all (or none) of the filters are active, show an empty filter icon (since we don't apply any filters in such cases)
-		Drawable filterIcon = ContextCompat.getDrawable(this, numberOfActiveFilters == 0
-				|| numberOfActiveFilters == totalCategorySearchFiltersCount + totalEventTypeSearchFiltersCount + totalTagSearchFiltersCount + totalEventLocationTypeFiltersCount + 1
-				? R.drawable.filter_alt_empty
-				: R.drawable.filter_alt_full);
+		boolean areAnyFiltersApplied =
+			// The following checks are also done in filterEvents
+			filterBySoldOut(activeFilters) ||
+				filterByEventLocationTypes(activeFilters) != null ||
+				filterByEventType(activeFilters) != null ||
+				filterByEventCategory(activeFilters) != null ||
+				filterByEventTags(activeFilters) != null;
+
+		// In case no filters are applied, show an empty filter icon
+		Drawable filterIcon = ContextCompat.getDrawable(this, areAnyFiltersApplied
+				? R.drawable.filter_alt_full
+				: R.drawable.filter_alt_empty);
 		filterIcon.mutate();
 		filterIcon.setColorFilter(ThemeAttributes.getColor(this, R.attr.programmeSearchFilterColor), PorterDuff.Mode.SRC_ATOP);
 		filterButton.setImageDrawable(filterIcon);
@@ -233,10 +227,10 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 	}
 
 	private void initializeEventsList() {
-		listView = (StickyListHeadersListView) findViewById(R.id.searchEventsList);
+		listView = findViewById(R.id.searchEventsList);
 
 		boolean showHeaders = Convention.getInstance().getLengthInDays() > 1;
-		adapter = new EventsViewListAdapter(Collections.<ConventionEvent>emptyList(), listView, showHeaders);
+		adapter = new EventsViewListAdapter(Collections.emptyList(), listView, showHeaders);
 		listView.setAdapter(adapter);
 	}
 
@@ -268,12 +262,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 
 	private void applyFiltersInBackground() {
 		// Duplicating the lists since we will now access it from multiple threads
-		final List<SearchFilter> activeFilters = CollectionUtils.filter(new ArrayList<>(searchFilters), new CollectionUtils.Predicate<SearchFilter>() {
-			@Override
-			public boolean where(SearchFilter item) {
-				return item.isActive();
-			}
-		});
+		final List<SearchFilter<SearchFilter.EventSearchFilterType>> activeFilters = CollectionUtils.filter(new ArrayList<>(searchFilters), SearchFilter::isActive);
 
 		// Canceling the previous async task so the UI won't be refreshed with outdated search results in case the user
 		// is in the middle of typing. Since we use a thread pool, this can also result in the user seeing wrong results
@@ -298,7 +287,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	private List<ConventionEvent> filterEvents(final String keywordsFilter, final List<SearchFilter> filters) {
+	private List<ConventionEvent> filterEvents(final String keywordsFilter, final List<SearchFilter<SearchFilter.EventSearchFilterType>> filters) {
 		List<ConventionEvent> events = Convention.getInstance().getEvents();
 
 		events = CollectionUtils.filter(events, new CollectionUtils.Predicate<ConventionEvent>() {
@@ -307,88 +296,39 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 				// filters - list of currently active filters (active filter = unchecked)
 				// result - should we keep the event
 				boolean result = true;
-				if (keywordsFilter != null && keywordsFilter.length() > 0) {
+				if (keywordsFilter != null && !keywordsFilter.isEmpty()) {
 					result = containsKeywords(event);
 				}
 
-				SearchFilter soldOutTicketsFilter = CollectionUtils.findFirst(filters, new CollectionUtils.Predicate<SearchFilter>() {
-					@Override
-					public boolean where(SearchFilter item) {
-						return item.getType() == SearchFilter.Type.Tickets;
-					}
-				});
-				// If the filter is active the user doesn't want to show sold out events
-				if (soldOutTicketsFilter != null) {
+				if (filterBySoldOut(filters)) {
 					result &= event.getAvailableTickets() != 0; // tickets<0 means there is no info about the number of tickets
 				}
 
-				if (totalEventLocationTypeFiltersCount > 0) {
-					List<SearchFilter> eventLocationTypeFilters = CollectionUtils.filter(filters, new CollectionUtils.Predicate<SearchFilter>() {
-						@Override
-						public boolean where(SearchFilter filter) {
-							return filter.getType() == SearchFilter.Type.EventLocationType;
-						}
-					});
-					List<String> filteredLocationTypes = CollectionUtils.map(eventLocationTypeFilters, new CollectionUtils.Mapper<SearchFilter, String>() {
-						@Override
-						public String map(SearchFilter item) {
-							return item.getName();
-						}
-					});
-					if (filteredLocationTypes.size() > 0 && filteredLocationTypes.size() < totalEventLocationTypeFiltersCount) {
-						List<ConventionEvent.EventLocationType> eventLocationTypes = Convention.getInstance().getEventLocationTypes(event);
-						// Only keep events with a location type, if only certain location types are requested
-						result &= eventLocationTypes != null && eventLocationTypes.size() > 0 &&
-							// Check if all of event's location types are included in the filters
-							!areAllLocationTypesFiltered(eventLocationTypes, filteredLocationTypes);
-					}
+				List<SearchFilter<SearchFilter.EventSearchFilterType>> eventLocationTypeFilters = filterByEventLocationTypes(filters);
+				if (eventLocationTypeFilters != null) {
+					List<String> filteredLocationTypes = CollectionUtils.map(eventLocationTypeFilters, SearchFilter::getName);
+					List<ConventionEvent.EventLocationType> eventLocationTypes = Convention.getInstance().getEventLocationTypes(event);
+					// Only keep events with a location type, if only certain location types are requested
+					result &= eventLocationTypes != null && !eventLocationTypes.isEmpty() &&
+						// Check if all of event's location types are included in the filters
+						!areAllLocationTypesFiltered(eventLocationTypes, filteredLocationTypes);
 				}
 
-				List<SearchFilter> eventTypeFilters = CollectionUtils.filter(filters, new CollectionUtils.Predicate<SearchFilter>() {
-					@Override
-					public boolean where(SearchFilter filter) {
-						return filter.getType() == SearchFilter.Type.EventType;
-					}
-				});
-				List<EventType> eventTypes = CollectionUtils.map(eventTypeFilters, new CollectionUtils.Mapper<SearchFilter, EventType>() {
-					@Override
-					public EventType map(SearchFilter item) {
-						return new EventType(item.getName());
-					}
-				});
-				if (eventTypes.size() > 0 && eventTypes.size() < totalEventTypeSearchFiltersCount) {
+				List<SearchFilter<SearchFilter.EventSearchFilterType>> eventTypeFilters = filterByEventType(filters);
+				if (eventTypeFilters != null) {
+					List<EventType> eventTypes = CollectionUtils.map(eventTypeFilters, item -> new EventType(item.getName()));
 					result &= !eventTypes.contains(event.getType());
 				}
 
-				List<SearchFilter> categoryFilters = CollectionUtils.filter(filters, new CollectionUtils.Predicate<SearchFilter>() {
-					@Override
-					public boolean where(SearchFilter filter) {
-						return filter.getType() == SearchFilter.Type.Category;
-					}
-				});
-				List<String> categories = CollectionUtils.map(categoryFilters, new CollectionUtils.Mapper<SearchFilter, String>() {
-					@Override
-					public String map(SearchFilter item) {
-						return item.getName();
-					}
-				});
-				if (categories.size() > 0 && categories.size() < totalCategorySearchFiltersCount) {
+				List<SearchFilter<SearchFilter.EventSearchFilterType>> categoryFilters = filterByEventCategory(filters);
+				if (categoryFilters != null) {
+					List<String> categories = CollectionUtils.map(categoryFilters, SearchFilter::getName);
 					result &= !categories.contains(event.getCategory());
 				}
 
-				List<SearchFilter> tagFilters = CollectionUtils.filter(filters, new CollectionUtils.Predicate<SearchFilter>() {
-					@Override
-					public boolean where(SearchFilter filter) {
-						return filter.getType() == SearchFilter.Type.Tag;
-					}
-				});
-				List<String> tags = CollectionUtils.map(tagFilters, new CollectionUtils.Mapper<SearchFilter, String>() {
-					@Override
-					public String map(SearchFilter item) {
-						return item.getName();
-					}
-				});
-				if (tags.size() > 0 && tags.size() < totalTagSearchFiltersCount) {
+				List<SearchFilter<SearchFilter.EventSearchFilterType>> tagFilters = filterByEventTags(filters);
+				if (tagFilters != null) {
+					List<String> tags = CollectionUtils.map(tagFilters, SearchFilter::getName);
 					result &= !areAllEventTagsFiltered(event, tags);
 				}
 
@@ -420,6 +360,46 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 			adapter.setKeywordsHighlighting(Arrays.asList(keywordsFilter.split(" ")));
 		}
 		return events;
+	}
+
+	private boolean filterBySoldOut(List<SearchFilter<SearchFilter.EventSearchFilterType>> activeFilters) {
+		SearchFilter<SearchFilter.EventSearchFilterType> soldOutTicketsFilter = CollectionUtils.findFirst(activeFilters, item -> item.getType() == SearchFilter.EventSearchFilterType.Tickets);
+		// If the filter is active the user doesn't want to show sold out events
+		return soldOutTicketsFilter != null;
+	}
+
+	private List<SearchFilter<SearchFilter.EventSearchFilterType>> filterByEventLocationTypes(List<SearchFilter<SearchFilter.EventSearchFilterType>> activeFilters) {
+		if (totalEventLocationTypeFiltersCount > 0) {
+			List<SearchFilter<SearchFilter.EventSearchFilterType>> eventLocationTypeFilters = CollectionUtils.filter(activeFilters, filter -> filter.getType() == SearchFilter.EventSearchFilterType.EventLocationType);
+			if (!eventLocationTypeFilters.isEmpty() && eventLocationTypeFilters.size() < totalEventLocationTypeFiltersCount) {
+				return eventLocationTypeFilters;
+			}
+		}
+		return null;
+	}
+
+	private List<SearchFilter<SearchFilter.EventSearchFilterType>> filterByEventType(List<SearchFilter<SearchFilter.EventSearchFilterType>> activeFilters) {
+		List<SearchFilter<SearchFilter.EventSearchFilterType>> eventTypeFilters = CollectionUtils.filter(activeFilters, filter -> filter.getType() == SearchFilter.EventSearchFilterType.EventType);
+		if (!eventTypeFilters.isEmpty() && eventTypeFilters.size() < totalEventTypeSearchFiltersCount) {
+			return eventTypeFilters;
+		}
+		return null;
+	}
+
+	private List<SearchFilter<SearchFilter.EventSearchFilterType>> filterByEventCategory(List<SearchFilter<SearchFilter.EventSearchFilterType>> activeFilters) {
+		List<SearchFilter<SearchFilter.EventSearchFilterType>> categoryFilters = CollectionUtils.filter(activeFilters, filter -> filter.getType() == SearchFilter.EventSearchFilterType.Category);
+		if (!categoryFilters.isEmpty() && categoryFilters.size() < totalCategorySearchFiltersCount) {
+			return categoryFilters;
+		}
+		return null;
+	}
+
+	private List<SearchFilter<SearchFilter.EventSearchFilterType>> filterByEventTags(List<SearchFilter<SearchFilter.EventSearchFilterType>> activeFilters) {
+		List<SearchFilter<SearchFilter.EventSearchFilterType>> tagFilters = CollectionUtils.filter(activeFilters, filter -> filter.getType() == SearchFilter.EventSearchFilterType.Tag);
+		if (!tagFilters.isEmpty() && tagFilters.size() < totalTagSearchFiltersCount) {
+			return tagFilters;
+		}
+		return null;
 	}
 
 	private void updateSearchResultsNumber(int resultsNumber) {

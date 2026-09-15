@@ -60,9 +60,8 @@
         <activity android:name="amai.org.conventions.events.activities.MyEventsActivity" />
         <activity android:name="amai.org.conventions.events.activities.ProgrammeActivity" />
         <activity android:name="amai.org.conventions.events.activities.ProgrammeSearchActivity" />
-        <activity android:name="amai.org.conventions.events.activities.StandsAreaActivity" />
-        <activity android:name="amai.org.conventions.map.MapActivity" android:exported="true">
-            <!-- The intent filters should be synched with MapActivity isStandsIntent, and receive a "name" parameter with the stand name -->
+        <activity android:name="amai.org.conventions.events.activities.StandsActivity" android:exported="true">
+            <!-- The intent filters should be synched with StandsActivity isStandsIntent, and receive a "name" parameter with the stand name -->
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -82,6 +81,9 @@
                 <data android:scheme="sff.org.conventions" android:host="stands" />
             </intent-filter>
         </activity>
+        <activity android:name="amai.org.conventions.events.activities.StandsSearchActivity"/>
+        <activity android:name="amai.org.conventions.events.activities.StandsAreaActivity" />
+        <activity android:name="amai.org.conventions.map.MapActivity" />
         <activity
             android:name="amai.org.conventions.events.activities.EventActivity"
             android:theme="@style/AppBaseTheme.Icon2026.Event"

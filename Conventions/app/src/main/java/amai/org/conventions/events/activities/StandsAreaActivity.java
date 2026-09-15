@@ -12,6 +12,8 @@ import android.text.Html;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -26,18 +28,23 @@ import com.google.android.flexbox.FlexboxLayout;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.customviews.PaintDrawable;
 import amai.org.conventions.customviews.PaintableImageView;
+import amai.org.conventions.map.MapActivity;
 import amai.org.conventions.map.StandViewHolder;
 import amai.org.conventions.map.StandsRecyclerAdapter;
+import amai.org.conventions.model.ConventionMap;
+import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.StandLocation;
 import amai.org.conventions.model.StandType;
 import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
+import amai.org.conventions.networking.StandsRefresher;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Log;
@@ -62,7 +69,7 @@ public class StandsAreaActivity extends NavigationActivity {
     private static final String TAG = StandsAreaActivity.class.getCanonicalName();
 
     public static final String EXTRA_STANDS_AREA_NAME = "ExtraStandsAreaName";
-    public static final String EXTRA_STAND_NAME = "ExtraStandID";
+    public static final String EXTRA_STAND_NAME = "ExtraStandName";
     public static final String EXTRA_USE_SLIDE_OUT_ANIMATION_ON_BACK = "ExtraUseSlideOutAnimationOnBack";
 
     private boolean useSlideOutAnimationOnBack;
@@ -75,6 +82,7 @@ public class StandsAreaActivity extends NavigationActivity {
     private ImageView imageHighlight;
     private RecyclerView standsList;
     private StandsRecyclerAdapter standsAdapter;
+    private StandsRefresher.OnRefreshFinishedListener listener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -100,6 +108,27 @@ public class StandsAreaActivity extends NavigationActivity {
         setToolbarTitle(area.getName());
 
         setupStandsArea();
+
+        // Handle stands list refresh
+        listener = new StandsRefresher.OnRefreshFinishedListener() {
+            @Override
+            public void onSuccess(boolean force) {
+                // Update stands list
+                if (standsAdapter != null) {
+                    List<Stand> stands = getStandsList();
+                    standsAdapter.setStands(stands);
+                }
+            }
+        };
+        StandsRefresher.getInstance().addListener(listener);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (listener != null) {
+            StandsRefresher.getInstance().removeListener(listener);
+        }
     }
 
     @Override
@@ -108,6 +137,38 @@ public class StandsAreaActivity extends NavigationActivity {
         if (useSlideOutAnimationOnBack) {
             overridePendingTransition(0, R.anim.slide_out_bottom);
         }
+    }
+
+    @Override
+    protected boolean onCreateCustomOptionsMenu(Menu menu) {
+        // Only show the options menu if this stands area exists in the map
+        List<MapLocation> locations = getStandsAreaMapLocations();
+        if (!locations.isEmpty()) {
+            getMenuInflater().inflate(R.menu.menu_stands_areas, menu);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        return handleOptionsItem(item, Map.of(
+            R.id.stands_areas_map, () -> {
+                // Show location(s) for this stands area in the map
+                List<MapLocation> locations = getStandsAreaMapLocations();
+                if (!locations.isEmpty()) {
+                    Bundle bundle = new Bundle();
+                    int[] locationIds = CollectionUtils.mapToInt(locations, MapLocation::getId);
+                    bundle.putIntArray(MapActivity.EXTRA_MAP_LOCATION_IDS, locationIds);
+
+                    navigateToActivity(MapActivity.class, false, bundle);
+                }
+            }
+        ));
+    }
+
+    private List<MapLocation> getStandsAreaMapLocations() {
+        ConventionMap map = Convention.getInstance().getMap();
+        return map.findLocationsByStandsAreaId(area.getId());
     }
 
     @Override
@@ -128,18 +189,10 @@ public class StandsAreaActivity extends NavigationActivity {
         View zoomContainer = findViewById(R.id.stands_area_zoom_container);
 
         // Handle edge to edge
-        Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, Views.InsetType.PADDING, false, zoom);
+        Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, false, zoom);
         Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, Views.InsetType.PADDING, false, standsList);
 
-        List<Stand> stands = convention.getStandsByStandArea(area);
-        Collections.sort(stands, (lhs, rhs) -> {
-            int result = Objects.compareTo(lhs.getSort(), rhs.getSort(), false);
-            if (result == 0) {
-                result = Objects.compareTo(lhs.getName(), rhs.getName(), false);
-            }
-            return result;
-        });
-
+        List<Stand> stands = getStandsList();
         standsAdapter = new StandsRecyclerAdapter(stands, area.hasImageResource(), selectedStandName);
         standsList.setLayoutManager(new LinearLayoutManager(this));
         standsList.setAdapter(standsAdapter);
@@ -190,7 +243,33 @@ public class StandsAreaActivity extends NavigationActivity {
         }
     }
 
+    private List<Stand> getStandsList() {
+        List<Stand> stands = Convention.getInstance().getStandsByStandArea(area);
+        boolean checkActive = Convention.getInstance().hasStarted() && !Convention.getInstance().hasEnded();
+        Collections.sort(stands, (lhs, rhs) -> {
+            // Show inactive stands at the end (during the convention)
+            if (checkActive) {
+                if (lhs.isActive() && !rhs.isActive()) {
+                    return 1;
+                } else if (!lhs.isActive() && rhs.isActive()) {
+                    return -1;
+                }
+            }
+
+            int result = Objects.compareTo(lhs.getSort(), rhs.getSort(), false);
+            if (result == 0) {
+                result = Objects.compareTo(lhs.getName(), rhs.getName(), false);
+            }
+            return result;
+        });
+        return stands;
+    }
+
     public static void showStandInfo(Context context, Stand stand) {
+        showStandInfo(context, stand, null);
+    }
+
+    public static void showStandInfo(Context context, Stand stand, List<String> keywordsToHighlight) {
         if (context == null) {
             return;
         }
@@ -267,6 +346,7 @@ public class StandsAreaActivity extends NavigationActivity {
         boolean first = true;
         int i = 0;
         int lastIndex = allTags.size() - 1;
+        List<TextView> tagViews = new ArrayList<>(allTags.size());
         for (String tag : allTags) {
             TextView tagView = new TextView(builderContext);
 
@@ -280,6 +360,7 @@ public class StandsAreaActivity extends NavigationActivity {
             tagView.setPaddingRelative(paddingStartEnd, paddingTopBottom, paddingStartEnd, paddingTopBottom);
             tagView.setGravity(Gravity.CENTER);
             tagsContainer.addView(tagView);
+            tagViews.add(tagView);
 
             // Set margins
             FlexboxLayout.LayoutParams layoutParams = ((FlexboxLayout.LayoutParams) tagView.getLayoutParams());
@@ -288,6 +369,19 @@ public class StandsAreaActivity extends NavigationActivity {
             layoutParams.setMarginEnd(marginEnd);
             tagView.setLayoutParams(layoutParams);
             ++i;
+        }
+
+        // Highlight keywords in the stand description, types and tags
+        if (keywordsToHighlight != null) {
+            int highlightColor = ThemeAttributes.getColor(context, R.attr.standKeywordHighlightColor);
+            for (String keyword : keywordsToHighlight) {
+                if (!keyword.trim().isEmpty()) {
+                    Views.tryHighlightKeywordInTextView(descView, keyword, highlightColor);
+                    for (TextView tagView : tagViews) {
+                        Views.tryHighlightKeywordInTextView(tagView, keyword, highlightColor);
+                    }
+                }
+            }
         }
 
         builder

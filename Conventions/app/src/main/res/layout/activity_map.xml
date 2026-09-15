@@ -34,25 +34,6 @@
                 android:layout_height="1dp"
                 android:background="?mapSearchTopBorder"/>
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/search_type"
-                android:background="?mapSearchTabsBackground"
-                app:tabBackground="?mapSearchTabsTabBackground"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:tabGravity="fill"
-                app:tabIndicatorColor="?mapSearchTabsColor"
-                app:tabSelectedTextColor="?mapSearchTabsColor"
-                app:tabTextColor="?mapSearchTabsColor"
-                android:paddingTop="3dp">
-            </com.google.android.material.tabs.TabLayout>
-
-            <View
-                android:id="@+id/tab_search_border"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="?mapSearchTabsBorder"/>
-
             <LinearLayout
                 android:orientation="vertical"
                 android:background="?mapSearchFiltersBackground"
@@ -68,7 +49,7 @@
                     android:layout_marginEnd="?mapSearchBarHorizontalMargins"
                     android:theme="?mapSearchTheme">
                     <androidx.appcompat.widget.SearchView
-                        android:id="@+id/map_search_text2"
+                        android:id="@+id/map_search_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:queryHint="@string/search_input_search_keyword" />
@@ -91,28 +72,6 @@
                     android:paddingBottom="5dp"
                     android:id="@+id/map_search_show_only_stands_areas"
                     android:text="@string/show_only_stands_areas"/>
-
-                <androidx.appcompat.widget.AppCompatCheckBox
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="?mapSearchText"
-                    app:buttonTint="?mapSearchCheckboxTint"
-                    android:visibility="gone"
-                    tools:visibility="visible"
-                    android:paddingBottom="5dp"
-                    android:id="@+id/map_search_show_only_discount_stands"
-                    android:text="@string/show_only_discount_stands"/>
-
-                <androidx.appcompat.widget.AppCompatCheckBox
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="?mapSearchText"
-                    app:buttonTint="?mapSearchCheckboxTint"
-                    android:visibility="gone"
-                    tools:visibility="visible"
-                    android:paddingBottom="5dp"
-                    android:id="@+id/map_search_show_only_active_stands"
-                    android:text="@string/show_only_active_stands"/>
             </LinearLayout>
 
 

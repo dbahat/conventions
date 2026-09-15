@@ -90,7 +90,7 @@ public class CollectionUtils {
 	 * Return a list with unique values. Original list is assumed to be sorted for the sake of uniqueness.
 	 */
 	public static <T> List<T> unique(List<T> list, EqualityPredicate<T> comparator) {
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			return list;
 		}
 

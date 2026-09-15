@@ -3,19 +3,20 @@ package amai.org.conventions.map;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 
 import java.util.List;
 
-import amai.org.conventions.model.Floor;
 import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.conventions.Convention;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import sff.org.conventions.R;
 
-public class StandsSearchAdapter extends BaseAdapter {
+public class StandsSearchAdapter extends RecyclerView.Adapter<StandSearchViewHolder> {
 	private List<Stand> stands;
-	private Floor currentFloor;
 	private boolean showInactiveIndication;
+	private StandSearchViewHolder.OnClickListener onClickListener;
+	List<String> keywordsToHighlight;
 
 	public StandsSearchAdapter(List<Stand> stands) {
 		this.stands = stands;
@@ -23,46 +24,38 @@ public class StandsSearchAdapter extends BaseAdapter {
 		this.showInactiveIndication = Convention.getInstance().hasStarted() && !Convention.getInstance().hasEnded();
 	}
 
-	public void setFloor(Floor currentFloor) {
-		this.currentFloor = currentFloor;
-	}
-
 	public void setStands(List<Stand> stands) {
 		this.stands = stands;
+		notifyDataSetChanged();
+	}
+
+	public void setKeywordsHighlighting(List<String> keywords) {
+		keywordsToHighlight = keywords;
 	}
 
 	public List<Stand> getStands() {
 		return stands;
 	}
 
+	@NonNull
 	@Override
-	public int getCount() {
+	public StandSearchViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.stand_search_view_holder, parent, false);
+		return new StandSearchViewHolder(view);
+	}
+
+	@Override
+	public void onBindViewHolder(@NonNull StandSearchViewHolder holder, int position) {
+		Stand stand = stands.get(position);
+		holder.setStand(stand, showInactiveIndication, keywordsToHighlight, onClickListener);
+	}
+
+	@Override
+	public int getItemCount() {
 		return stands.size();
 	}
 
-	@Override
-	public Object getItem(int position) {
-		return stands.get(position);
-	}
-
-	@Override
-	public long getItemId(int position) {
-		return position;
-	}
-
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		final StandSearchViewHolder holder;
-		if (convertView == null) {
-			convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.stand_search_view_holder, parent, false);
-			holder = new StandSearchViewHolder(convertView);
-			convertView.setTag(holder);
-		} else {
-			holder = (StandSearchViewHolder) convertView.getTag();
-		}
-
-		Stand stand = stands.get(position);
-		holder.setStand(stand, currentFloor, showInactiveIndication);
-		return convertView;
+	public void setOnClickListener(StandSearchViewHolder.OnClickListener onClickListener) {
+		this.onClickListener = onClickListener;
 	}
 }

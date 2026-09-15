@@ -33,14 +33,15 @@ public class StandsRefresher {
 
 	public interface OnRefreshFinishedListener {
 		/** Called after refresh finished when successful */
-		default void onSuccess() {}
+		default void onSuccess(boolean force) {}
 		/** Called after refresh finished when an error occured */
-		default void onError(Exception error) {}
+		default void onError(Exception error, boolean force) {}
 	}
 
 	private static StandsRefresher instance = null;
 	private final ExecutorService mExecutor;
 	private boolean isRefreshing = false;
+	private List<OnRefreshFinishedListener> listeners;
 
 	public static synchronized StandsRefresher getInstance() {
 		if (instance == null) {
@@ -51,35 +52,60 @@ public class StandsRefresher {
 
 	private StandsRefresher() {
 		mExecutor = Executors.newSingleThreadExecutor();
+		listeners = new LinkedList<>();
 	}
 
 	public boolean isRefreshing() {
 		return isRefreshing;
 	}
 
+	public boolean canRefresh() {
+		// We can't refresh if there are no stands or the stands are static
+		return Convention.getInstance().getStandsURL() != null;
+	}
+
+	public void addListener(OnRefreshFinishedListener listener) {
+		listeners.add(listener);
+	}
+
+	public void removeListener(OnRefreshFinishedListener listener) {
+		listeners.remove(listener);
+	}
+
+	private void notifyListeners(Exception e, boolean force) {
+		for (OnRefreshFinishedListener listener : listeners) {
+			if (listener != null) {
+				if (e == null) {
+					listener.onSuccess(force);
+				} else {
+					listener.onError(e, force);
+				}
+			}
+		}
+	}
+
 	/**
 	 * Downloads the stands model from the server and updates it.
 	 *
 	 */
-	public void refreshFromServer(boolean force, OnRefreshFinishedListener listener) {
-		URL standsURL = Convention.getInstance().getStandsURL();
-
-		// No stands / static stands
-		if (standsURL == null) {
-			listener.onSuccess();
+	public void refreshFromServer(boolean force) {
+		if (!canRefresh()) {
+			notifyListeners(null, force);
 			return;
 		}
+
+		URL standsURL = Convention.getInstance().getStandsURL();
 
 		if (!force) {
 			// Don't download if the convention is over (there won't be any more updates to the stands...)
 			if (Convention.getInstance().hasEnded()) {
-				listener.onSuccess();
+				notifyListeners(null, force);
 				return;
 			}
 			// Also don't download if we recently updated the stands
 			Date lastUpdate = ConventionsApplication.settings.getLastStandsUpdateDate();
 			if (lastUpdate != null && Dates.now().getTime() - lastUpdate.getTime() < MINIMUM_REFRESH_TIME) {
-				listener.onSuccess();
+				notifyListeners(null, force);
 				return;
 			}
 		}
@@ -117,11 +143,7 @@ public class StandsRefresher {
 
 			Exception exception = ex;
 			ConventionsApplication.runOnCurrentActivityUiThread(context -> {
-				if (exception == null) {
-					listener.onSuccess();
-				} else {
-					listener.onError(exception);
-				}
+				notifyListeners(exception, force);
 			});
 		});
 	}

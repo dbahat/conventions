@@ -1,0 +1,71 @@
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/stands_swipe_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        tools:context="amai.org.conventions.events.activities.StandsActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/stands_search_title_section"
+            android:orientation="vertical"
+            android:layout_marginStart="?contentStartMargin"
+            android:layout_marginEnd="?contentEndMargin"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:background="?standsSearchTitleBackgroundColor">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="?standsSearchTitleTextColor"
+                android:text="@string/stands_description"/>
+
+            <!-- Dummy search box that opens the stands search activity -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/stands_search_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:theme="?standsSearchTheme">
+                    <androidx.appcompat.widget.SearchView
+                        android:id="@+id/stands_search_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        app:queryHint="@string/stands_search" />
+                </com.google.android.material.card.MaterialCardView>
+                <View
+                    android:id="@+id/stands_search_interceptor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/stands_search_card"
+                    android:layout_alignBottom="@id/stands_search_card"
+                    android:layout_alignStart="@id/stands_search_card"
+                    android:layout_alignEnd="@id/stands_search_card"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/stands_areas_list"
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:clipToPadding="false"
+            android:layout_height="0dp"
+            android:paddingTop="8dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

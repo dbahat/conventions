@@ -27,6 +27,11 @@ public class StandsRecyclerAdapter extends RecyclerView.Adapter<StandViewHolder>
         this.showInactiveIndication = Convention.getInstance().hasStarted() && !Convention.getInstance().hasEnded();
     }
 
+    public void setStands(List<Stand> stands) {
+        this.stands = stands;
+        notifyDataSetChanged();
+    }
+
     public List<Stand> getStands() {
         return stands;
     }

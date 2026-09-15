@@ -5,22 +5,28 @@ import java.io.Serializable;
 import androidx.annotation.StringRes;
 import sff.org.conventions.R;
 
-public class SearchFilter implements Serializable {
+public class SearchFilter<T extends SearchFilter.SearchFilterType> implements Serializable {
     private String name;
     private boolean active;
-    private Type type;
+    private boolean displayActiveAsChecked;
+    private T type;
 
-    public SearchFilter withActive(boolean active) {
+    public SearchFilter<T> withActive(boolean active) {
         this.active = active;
         return this;
     }
 
-    public SearchFilter withName(String name) {
+    public SearchFilter<T> withDisplayActiveAsChecked(boolean displayActiveAsChecked) {
+        this.displayActiveAsChecked = displayActiveAsChecked;
+        return this;
+    }
+
+    public SearchFilter<T> withName(String name) {
         this.name = name;
         return this;
     }
 
-    public SearchFilter withType(Type type) {
+    public SearchFilter<T> withType(T type) {
         this.type = type;
         return this;
     }
@@ -33,7 +39,11 @@ public class SearchFilter implements Serializable {
         return active;
     }
 
-    public Type getType() {
+    public boolean isDisplayActiveAsChecked() {
+        return displayActiveAsChecked;
+    }
+
+    public T getType() {
         return type;
     }
 
@@ -42,7 +52,9 @@ public class SearchFilter implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        SearchFilter filter = (SearchFilter) o;
+        // We can't check the generic parameter at runtime, assuming it's the same
+        // but we will return false if not in any case
+        SearchFilter<T> filter = (SearchFilter<T>) o;
 
         if (!name.equals(filter.name)) return false;
         return type == filter.type;
@@ -56,8 +68,12 @@ public class SearchFilter implements Serializable {
         return result;
     }
 
+    public interface SearchFilterType {
+        int ordinal();
+        int getDescriptionStringId();
+    }
 
-    public enum Type {
+    public enum EventSearchFilterType implements SearchFilterType {
         Tickets,
         EventLocationType,
         EventType,
@@ -80,6 +96,26 @@ public class SearchFilter implements Serializable {
             }
 
             throw new RuntimeException("missing description for search filter type " + this.toString());
+        }
+    }
+
+    public enum StandSearchFilterType implements SearchFilterType {
+        General,
+        Type,
+        Tag;
+
+        @StringRes
+        public int getDescriptionStringId() {
+            switch (this) {
+                case General:
+                    return R.string.search_filter_general_info;
+                case Type:
+                    return R.string.search_filter_by_stand_type;
+                case Tag:
+                    return R.string.search_filter_by_tag;
+            }
+
+            throw new RuntimeException("missing description for stand search filter type " + this.toString());
         }
     }
 }

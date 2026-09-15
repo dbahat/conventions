@@ -7,6 +7,9 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.view.Display;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -281,5 +284,31 @@ public class Views {
 				}
 			}
 		});
+	}
+
+	public static boolean tryHighlightKeywordInTextView(TextView textView, String keyword, int color) {
+		CharSequence originalText = textView.getText();
+
+		String textToHighlight = originalText.toString().toLowerCase();
+		if (!textToHighlight.contains(keyword)) {
+			return false;
+		}
+
+		SpannableString highlightedText = originalText instanceof SpannableString
+			? (SpannableString) originalText
+			: new SpannableString(originalText);
+
+		int currentKeywordIndex = textToHighlight.indexOf(keyword);
+		while (currentKeywordIndex != -1) {
+			// Highlight the keyword
+			highlightedText.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), currentKeywordIndex, currentKeywordIndex + keyword.length(), 0);
+			highlightedText.setSpan(new ForegroundColorSpan(color), currentKeywordIndex, currentKeywordIndex + keyword.length(), 0);
+
+			// Now move to highlight the next word
+			currentKeywordIndex = textToHighlight.indexOf(keyword, currentKeywordIndex + keyword.length());
+		}
+
+		textView.setText(highlightedText);
+		return true;
 	}
 }
