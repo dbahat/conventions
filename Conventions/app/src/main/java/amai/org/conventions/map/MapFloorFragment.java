@@ -671,6 +671,12 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 	}
 
 	public void selectMarkersWithNameAndFloor(List<MapLocation> locations) {
+		// If this fragment is not initialized yet, save for later
+		if (floorMarkers.isEmpty()) {
+			locationsToSelect = locations;
+			return;
+		}
+
 		if (locations == null || locations.isEmpty()) {
 			for (Marker marker : floorMarkers) {
 				marker.deselect();

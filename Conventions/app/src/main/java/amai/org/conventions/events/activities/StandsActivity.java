@@ -174,10 +174,7 @@ public class StandsActivity extends NavigationActivity implements SwipeRefreshLa
             R.id.stands_areas_map, () -> {
                 // Show all stands areas in the map
                 Bundle bundle = new Bundle();
-                ConventionMap map = Convention.getInstance().getMap();
-                List<MapLocation> standAreasLocations = CollectionUtils.filter(map.getLocations(), MapLocation::areaAnyPlacesStandsAreas);
-                int[] locationIds = CollectionUtils.mapToInt(standAreasLocations, MapLocation::getId);
-                bundle.putIntArray(MapActivity.EXTRA_MAP_LOCATION_IDS, locationIds);
+                bundle.putBoolean(MapActivity.EXTRA_MAP_SEARCH_ONLY_STANDS_AREAS, true);
 
                 navigateToActivity(MapActivity.class, false, bundle);
             }

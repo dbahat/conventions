@@ -1,12 +1,9 @@
 package amai.org.conventions.map;
 
-import android.content.DialogInterface;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,7 +19,6 @@ import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -42,7 +38,6 @@ import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Objects;
 import amai.org.conventions.utils.Views;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -53,10 +48,10 @@ import sff.org.conventions.R;
 public class MapActivity extends NavigationActivity implements MapFloorFragment.OnMapFloorEventListener {
 	public static final String EXTRA_FLOOR_NUMBER = "ExtraFloorNumber";
 	public static final String EXTRA_MAP_LOCATION_IDS = "ExtraMapLocationId";
+	public static final String EXTRA_MAP_SEARCH_ONLY_STANDS_AREAS = "ExtraMapSearchOnlyStandsAreas";
 
 	private static final String STATE_SEARCH_TERM = "StateMapSearchTerm";
 	private static final String STATE_MAP_SEARCH_ONLY_HALLS = "StateMapSearchOnlyHalls";
-	private static final String STATE_MAP_SEARCH_ONLY_STANDS_AREAS = "StateMapSearchOnlyStandsAreas";
 	private static final String STATE_MAP_SEARCH_OPEN = "StateMapSearchOpen";
 
 	private static final ConventionMap map = Convention.getInstance().getMap();
@@ -118,11 +113,15 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		initializeViewPager();
 		setFloorInViewPager(floorNumber, initialLocations);
 
-		initializeSearch(savedInstanceState);
+		initializeSearch(bundle);
 
 		// Handle edge to edge
 		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, Views.InsetType.NONE, false, searchResults);
 		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, false, findViewById(R.id.map_search_pane));
+
+		if (savedInstanceState == null && getIntent().getExtras() != null && getIntent().getExtras().getBoolean(EXTRA_MAP_SEARCH_ONLY_STANDS_AREAS)) {
+			applySearchFiltersInBackground();
+		}
 	}
 
 	@Override
@@ -306,7 +305,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		outState.putInt(EXTRA_FLOOR_NUMBER, currentFloorNumber);
 		outState.putString(STATE_SEARCH_TERM, searchView.getQuery().toString());
 		outState.putBoolean(STATE_MAP_SEARCH_ONLY_HALLS, showOnlyHallsCheckbox.isChecked());
-		outState.putBoolean(STATE_MAP_SEARCH_ONLY_STANDS_AREAS, showOnlyStandsAreasCheckbox.isChecked());
+		outState.putBoolean(EXTRA_MAP_SEARCH_ONLY_STANDS_AREAS, showOnlyStandsAreasCheckbox.isChecked());
 		outState.putBoolean(STATE_MAP_SEARCH_OPEN, isSearchOpen());
 	}
 
@@ -323,7 +322,7 @@ public class MapActivity extends NavigationActivity implements MapFloorFragment.
 		// Restore state or use defaults
 		searchTerm = (savedInstanceState != null ? savedInstanceState.getString(STATE_SEARCH_TERM) : null);
 		showOnlyHalls = (savedInstanceState != null && savedInstanceState.getBoolean(STATE_MAP_SEARCH_ONLY_HALLS));
-		showOnlyStandsAreas = (savedInstanceState != null && savedInstanceState.getBoolean(STATE_MAP_SEARCH_ONLY_STANDS_AREAS));
+		showOnlyStandsAreas = (savedInstanceState != null && savedInstanceState.getBoolean(EXTRA_MAP_SEARCH_ONLY_STANDS_AREAS));
 		boolean showSearch = (savedInstanceState != null && savedInstanceState.getBoolean(STATE_MAP_SEARCH_OPEN));
 		searchContainer.setVisibility(showSearch ? View.VISIBLE : View.GONE);
 
