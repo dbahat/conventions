@@ -3,7 +3,6 @@ package amai.org.conventions.events.activities;
 import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,12 +10,13 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.map.MapActivity;
-import amai.org.conventions.map.MapFloorFragment;
 import amai.org.conventions.map.StandsAreasRecyclerAdapter;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.MapLocation;
@@ -58,8 +58,7 @@ public class StandsActivity extends NavigationActivity implements SwipeRefreshLa
         Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, false, standsSearchTitleSection);
         Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, Views.InsetType.PADDING, false, standsAreasList);
 
-        List<StandsArea> standsAreas = Convention.getInstance().getStandsAreas().getItems();
-        Collections.sort(standsAreas, (lhs, rhs) -> Objects.compareTo(lhs.getName(), rhs.getName(), false));
+        List<StandsArea> standsAreas = getStandsAreas();
 
         standsAreasAdapter = new StandsAreasRecyclerAdapter(standsAreas);
         standsAreasList.setLayoutManager(new LinearLayoutManager(this));
@@ -94,8 +93,7 @@ public class StandsActivity extends NavigationActivity implements SwipeRefreshLa
                 isRefreshingStands = false;
 
                 // Update stands areas, in case new ones were added after the refresh
-                List<StandsArea> standsAreas = Convention.getInstance().getStandsAreas().getItems();
-                Collections.sort(standsAreas, (lhs, rhs) -> Objects.compareTo(lhs.getName(), rhs.getName(), false));
+                List<StandsArea> standsAreas = getStandsAreas();
                 standsAreasAdapter.setStandsAreas(standsAreas);
             }
         };
@@ -113,6 +111,26 @@ public class StandsActivity extends NavigationActivity implements SwipeRefreshLa
         if (listener != null) {
             StandsRefresher.getInstance().removeListener(listener);
         }
+    }
+
+    private List<StandsArea> getStandsAreas() {
+        List<StandsArea> standsAreas = Convention.getInstance().getStandsAreas().getItems();
+        Collections.sort(standsAreas, (lhs, rhs) -> Objects.compareTo(lhs.getName(), rhs.getName(), false));
+
+        // Filter out stands areas without stands
+        Set<String> noStands = new HashSet<>();
+        for (StandsArea area : standsAreas) {
+            noStands.add(area.getName());
+        }
+        for (Stand stand : Convention.getInstance().getStands()) {
+            noStands.remove(stand.getStandsArea().getName());
+            if (noStands.isEmpty()) {
+                break;
+            }
+        }
+        standsAreas = CollectionUtils.filter(standsAreas, standsArea -> !noStands.contains(standsArea.getName()));
+
+        return standsAreas;
     }
 
     private void setupSwipeRefreshLayout() {
