@@ -18,8 +18,6 @@ import java.util.Set;
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.map.MapActivity;
 import amai.org.conventions.map.StandsAreasRecyclerAdapter;
-import amai.org.conventions.model.ConventionMap;
-import amai.org.conventions.model.MapLocation;
 import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.model.conventions.Convention;
@@ -30,6 +28,7 @@ import amai.org.conventions.utils.Objects;
 import amai.org.conventions.utils.Views;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -64,14 +63,19 @@ public class StandsActivity extends NavigationActivity implements SwipeRefreshLa
         standsAreasList.setLayoutManager(new LinearLayoutManager(this));
         standsAreasList.setAdapter(standsAreasAdapter);
 
-        standsAreasAdapter.setOnClickListener(standsArea -> {
+        standsAreasAdapter.setOnClickListener((view, standsArea) -> {
 			Bundle bundle = new Bundle();
 			bundle.putString(StandsAreaActivity.EXTRA_STANDS_AREA_NAME, standsArea.getName());
 			navigateToActivity(StandsAreaActivity.class, false, bundle);
 		});
 
         findViewById(R.id.stands_search_interceptor).setOnClickListener(v -> {
-            navigateToActivity(StandsSearchActivity.class, false, null);
+            ActivityOptionsCompat transitionOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                StandsActivity.this,
+                findViewById(R.id.stands_search_card),
+                StandsSearchActivity.VIEW_NAME_SEARCH_CARD
+            );
+            navigateToActivity(StandsSearchActivity.class, false, null, transitionOptions);
         });
 
         setupSwipeRefreshLayout();

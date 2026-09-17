@@ -4,6 +4,7 @@
          The attributes defined in this theme (except for the parent) should be exactly the same as in
          AppBaseTheme.Light.Base -->
     <style name="AppBaseTheme.Dark.Base" parent="Theme.MaterialComponents.NoActionBar.Bridge">
+        <item name="android:windowActivityTransitions">true</item>
         <item name="android:windowBackground">@null</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowSoftInputMode">adjustPan</item>
@@ -254,6 +255,7 @@
          The attributes defined in this theme (except for the parent) should be exactly the same as in
          AppBaseTheme.Dark.Base -->
     <style name="AppBaseTheme.Light.Base" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
+        <item name="android:windowActivityTransitions">true</item>
         <item name="android:windowBackground">@null</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowSoftInputMode">adjustPan</item>
@@ -527,6 +529,7 @@
         <item name="iconAlarm">@drawable/ic_action_alarms</item>
         <item name="iconProgramme">@drawable/events_list</item>
         <item name="iconClear">@drawable/ic_clear_white_24dp</item>
+        <item name="iconBack">@drawable/arrow_back_24px</item>
         <item name="iconClearMap">@drawable/ic_clear_white_24dp</item>
         <item name="iconShare">@drawable/ic_action_share_white</item>
         <item name="iconFeedback">@drawable/chat</item>
@@ -566,6 +569,7 @@
         <item name="iconAlarm">@drawable/ic_action_alarms_black</item>
         <item name="iconProgramme">@drawable/events_list_black</item>
         <item name="iconClear">@drawable/ic_clear_black</item>
+        <item name="iconBack">@drawable/arrow_back_black_24px</item>
         <item name="iconClearMap">@drawable/ic_clear_black</item>
         <item name="iconShare">@drawable/ic_action_share_black</item>
         <item name="iconFeedback">@drawable/chat_black</item>
@@ -591,6 +595,7 @@
         <item name="iconAlarm">@drawable/ic_action_alarms</item>
         <item name="iconProgramme">@drawable/events_list</item>
         <item name="iconClear">@drawable/ic_clear_white_24dp</item>
+        <item name="iconBack">@drawable/arrow_back_24px</item>
         <item name="iconClearMap">@drawable/ic_clear_white_24dp</item>
         <item name="iconShare">@drawable/ic_action_share_white</item>
         <item name="iconFeedback">@drawable/chat</item>
@@ -615,6 +620,7 @@
         <item name="iconAlarm">@drawable/ic_action_alarms_black</item>
         <item name="iconProgramme">@drawable/events_list_black</item>
         <item name="iconClear">@drawable/ic_clear_black</item>
+        <item name="iconBack">@drawable/arrow_back_black_24px</item>
         <item name="iconClearMap">@drawable/ic_clear_black</item>
         <item name="iconShare">@drawable/ic_action_share_black</item>
         <item name="iconFeedback">@drawable/chat_black</item>

@@ -27,6 +27,7 @@
             android:background="?standsSearchTitleBackgroundColor">
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/stands_search_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"

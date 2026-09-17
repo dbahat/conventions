@@ -71,6 +71,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.core.view.WindowCompat;
@@ -94,6 +95,9 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	protected static final String STATE_DISABLE_PERMISSION_REQUEST = "DisablePermissionRequest";
 	protected static final String STATE_DISABLE_NEXT_TASK_EXECUTION = "DisableNextTaskExecution";
 
+	private static final String EXTRA_TRANSITION_TYPE = "ExtraTransitionType";
+	private static final String TRANSITION_TYPE_SLIDE = "Slide";
+
 	protected static final int SELECT_CURRENT_DATE = -1;
 
 	private TextView navigationToolbarTitle;
@@ -107,6 +111,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	private NavigationTopButtonsLayout navigationTopButtonsLayout;
 	private boolean disablePermissionRequest = false;
 	private boolean nextTaskExecutionDisabled = false;
+	private String transitionType;
 
 	private final TasksExecutor<Boolean> permissionTasks = new TasksExecutor<>(
 		Boolean.FALSE,
@@ -135,6 +140,13 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_navigation);
+
+		transitionType = getIntent().getStringExtra(EXTRA_TRANSITION_TYPE);
+		if (TRANSITION_TYPE_SLIDE.equals(transitionType)) {
+			// If we don't override the exit transition, the default transition is triggered.
+			// When the device is in Hebrew it looks weird.
+			setCloseTransition(0, R.anim.slide_out_to_right, true);
+		}
 
 		navigationDrawer = (DrawerLayout) findViewById(R.id.navigation_drawer);
 		navigationToolbar = (Toolbar) findViewById(R.id.navigation_toolbar);
@@ -514,7 +526,6 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		bundle.putString(EventActivity.EXTRA_EVENT_ID, id);
 		addCustomEventActivityParameters(bundle);
 		navigateToActivity(EventActivity.class, false, bundle);
-		overridePendingTransition(0, 0);
 	}
 
 	protected void addCustomEventActivityParameters(Bundle bundle) {
@@ -540,6 +551,10 @@ public abstract class NavigationActivity extends AppCompatActivity {
 	}
 
 	protected void navigateToActivity(Class<? extends Activity> activityToNavigateTo, boolean clearBackStack, Bundle extras) {
+		navigateToActivity(activityToNavigateTo, clearBackStack, extras, null);
+	}
+
+	public void navigateToActivity(Class<? extends Activity> activityToNavigateTo, boolean clearBackStack, Bundle extras, ActivityOptionsCompat transitionOptions) {
 		closeDrawerIfNeeded();
 
 		// In case we were asked to navigate to the activity we're already in, ignore the request
@@ -571,13 +586,15 @@ public abstract class NavigationActivity extends AppCompatActivity {
 			intent.putExtras(extras);
 		}
 
-		startActivity(intent);
-
-		if (clearBackStack) {
-			overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-		} else {
-			overridePendingTransition(R.anim.grow_fade_in_from_bottom, R.anim.shrink_fade_out_from_bottom);
+		if (transitionOptions == null) {
+			if (clearBackStack) {
+				transitionOptions = ActivityOptionsCompat.makeCustomAnimation(this, android.R.anim.fade_in, android.R.anim.fade_out);
+			} else {
+				transitionOptions = ActivityOptionsCompat.makeCustomAnimation(this, R.anim.slide_in_from_right, 0);
+				intent.putExtra(EXTRA_TRANSITION_TYPE, TRANSITION_TYPE_SLIDE);
+			}
 		}
+		startActivity(intent, transitionOptions.toBundle());
 	}
 
 	private void closeDrawerIfNeeded() {
@@ -603,7 +620,26 @@ public abstract class NavigationActivity extends AppCompatActivity {
 		} else if (showHomeOnBack) {
 			navigateToActivity(HomeActivity.class);
 		}
+		onFinishing();
 		super.onBackPressed();
+	}
+
+	// Call this before the activity is closed when it's not from the standard back button
+	protected void onFinishing() {
+		if (TRANSITION_TYPE_SLIDE.equals(transitionType)) {
+			// If we don't override the exit transition, the default transition is triggered.
+			// When the device is in Hebrew it looks weird.
+			setCloseTransition(0, R.anim.slide_out_to_right, true);
+		}
+	}
+
+	protected void setCloseTransition(int enter, int exit, boolean fromBack) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+			overrideActivityTransition(OVERRIDE_TRANSITION_CLOSE, enter, exit);
+		} else if (fromBack) {
+			// This should only be called right before the transition
+			overridePendingTransition(enter, exit);
+		}
 	}
 
 

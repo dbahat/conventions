@@ -817,6 +817,8 @@
         <attr name="iconFeedback" format="integer|reference"/>
         <!-- Map toolbar icon. Used in event activity. -->
         <attr name="iconMap" format="integer|reference"/>
+        <!-- Back toolbar icon. Used in stands search activity. -->
+        <attr name="iconBack" format="integer|reference"/>
 
         <!-- Close location details icon in map activity -->
         <attr name="iconClearMap" format="integer|reference"/>

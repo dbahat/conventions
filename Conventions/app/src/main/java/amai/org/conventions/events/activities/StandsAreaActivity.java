@@ -72,6 +72,8 @@ public class StandsAreaActivity extends NavigationActivity {
     public static final String EXTRA_STAND_NAME = "ExtraStandName";
     public static final String EXTRA_USE_SLIDE_OUT_ANIMATION_ON_BACK = "ExtraUseSlideOutAnimationOnBack";
 
+    public static final String VIEW_NAME_STANDS_LIST = "stands_list";
+
     private boolean useSlideOutAnimationOnBack;
     private String standsAreaName;
     private String selectedStandName;
@@ -92,14 +94,13 @@ public class StandsAreaActivity extends NavigationActivity {
         standsAreaName = bundle.getString(EXTRA_STANDS_AREA_NAME);
         selectedStandName = bundle.getString(EXTRA_STAND_NAME);
         useSlideOutAnimationOnBack = bundle.getBoolean(EXTRA_USE_SLIDE_OUT_ANIMATION_ON_BACK, false);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE && useSlideOutAnimationOnBack) {
-            overrideActivityTransition(OVERRIDE_TRANSITION_CLOSE, 0, R.anim.slide_out_bottom);
-        }
+        setCloseTransition(0, R.anim.slide_out_bottom, false);
 
         area = Convention.getInstance().findStandsAreaByName(standsAreaName);
         if (area == null) {
             Log.e(TAG, "Could not find stands area with name " + standsAreaName);
             Toast.makeText(this, getString(R.string.stands_area_not_found), Toast.LENGTH_LONG).show();
+            onFinishing();
             finish();
             return;
         }
@@ -135,7 +136,7 @@ public class StandsAreaActivity extends NavigationActivity {
     public void onBackPressed() {
         super.onBackPressed();
         if (useSlideOutAnimationOnBack) {
-            overridePendingTransition(0, R.anim.slide_out_bottom);
+            setCloseTransition(0, R.anim.slide_out_bottom, true);
         }
     }
 
@@ -181,12 +182,12 @@ public class StandsAreaActivity extends NavigationActivity {
 
     private void setupStandsArea() {
         standsList = findViewById(R.id.standsList);
-        Convention convention = Convention.getInstance();
-
         zoom = findViewById(R.id.stands_area_zoom);
         imageFrame = findViewById(R.id.stands_area_map_frame);
         image = findViewById(R.id.stands_area_map);
         View zoomContainer = findViewById(R.id.stands_area_zoom_container);
+
+        standsList.setTransitionName(VIEW_NAME_STANDS_LIST);
 
         // Handle edge to edge
         Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, false, zoom);

@@ -58,12 +58,14 @@ import amai.org.conventions.model.Place;
 import amai.org.conventions.model.Stand;
 import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.model.conventions.Convention;
+import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.BundleBuilder;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Dates;
 import amai.org.conventions.utils.Objects;
 import amai.org.conventions.utils.Views;
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.MotionEventCompat;
 import androidx.fragment.app.Fragment;
@@ -1012,7 +1014,6 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		}
 
 		// Navigate to the stands area
-		Bundle animationBundle = ActivityOptions.makeCustomAnimation(appContext, R.anim.slide_in_bottom, 0).toBundle();
 		Bundle bundle = new Bundle();
 		bundle.putString(StandsAreaActivity.EXTRA_STANDS_AREA_NAME, standsArea.getName());
 		if (stand != null) {
@@ -1020,9 +1021,8 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 		}
 		bundle.putBoolean(StandsAreaActivity.EXTRA_USE_SLIDE_OUT_ANIMATION_ON_BACK, true);
 
-		Intent intent = new Intent(getActivity(), StandsAreaActivity.class);
-		intent.putExtras(bundle);
-		getActivity().startActivity(intent, animationBundle);
+		((NavigationActivity) getActivity()).navigateToActivity(StandsAreaActivity.class, false, bundle,
+			ActivityOptionsCompat.makeCustomAnimation(appContext, R.anim.slide_in_bottom, 0));
 	}
 
 	private void setupHallLocation(final MapLocation location) {
@@ -1095,14 +1095,13 @@ public class MapFloorFragment extends Fragment implements Marker.MarkerListener 
 				@Override
 				public void onClick(View v) {
 					// Navigate to the hall associated with this location (only if it's a hall)
-					Bundle animationBundle = ActivityOptions.makeCustomAnimation(appContext, R.anim.slide_in_bottom, 0).toBundle();
 					Bundle bundle = new Bundle();
 					bundle.putString(HallActivity.EXTRA_HALL_NAME, hall.getName());
 					bundle.putBoolean(HallActivity.EXTRA_USE_SLIDE_OUT_ANIMATION_ON_BACK, true);
+					ActivityOptionsCompat transitionOptions = ActivityOptionsCompat.makeCustomAnimation(appContext, R.anim.slide_in_bottom, 0);
 
-					Intent intent = new Intent(getActivity(), HallActivity.class);
-					intent.putExtras(bundle);
-					getActivity().startActivity(intent, animationBundle);
+					((NavigationActivity) getActivity()).navigateToActivity(HallActivity.class, false, bundle,
+						transitionOptions);
 				}
 			});
 		}

@@ -221,6 +221,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 					return;
 				}
 
+				onFinishing();
 				supportFinishAfterTransition();
 			}
 		));

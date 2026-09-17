@@ -66,7 +66,7 @@ public class StandSearchViewHolder extends RecyclerView.ViewHolder {
 		itemView.setBackground(ThemeAttributes.getDrawable(context, R.attr.standBackground));
 
 		if (onClickListener != null) {
-			itemView.setOnClickListener(view -> onClickListener.onItemClicked(stand));
+			itemView.setOnClickListener(view -> onClickListener.onItemClicked(itemView, stand));
 			infoButton.setVisibility(View.VISIBLE);
 			infoButton.setOnClickListener(view -> onClickListener.onItemInfoClicked(stand, keywordsToHighlight));
 		} else {
@@ -86,7 +86,7 @@ public class StandSearchViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	public interface OnClickListener {
-		void onItemClicked(Stand stand);
+		void onItemClicked(View view, Stand stand);
 		void onItemInfoClicked(Stand stand, List<String> keywordsToHighlight);
 	}
 }

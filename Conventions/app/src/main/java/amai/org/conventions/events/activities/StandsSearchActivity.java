@@ -34,6 +34,7 @@ import amai.org.conventions.networking.StandsRefresher;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Views;
 import androidx.appcompat.widget.SearchView;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -46,6 +47,8 @@ public class StandsSearchActivity extends NavigationActivity {
 
 	public static final String EXTRA_KEYWORDS_FILTER = "ExtraKeywordsFilter";
 	private static final String STATE_SEARCH_FILTERS = "SearchFilters";
+
+	public static final String VIEW_NAME_SEARCH_CARD = "search_card";
 
 	// Not using the interface List since we want to persist this in the savedInstanceState
 	private HashSet<SearchFilter<SearchFilter.StandSearchFilterType>> searchFilters;
@@ -86,6 +89,7 @@ public class StandsSearchActivity extends NavigationActivity {
 			searchFilters = new HashSet<>();
 		}
 
+		findViewById(R.id.stands_search_card).setTransitionName(VIEW_NAME_SEARCH_CARD);
 
 		noResultsFoundView = (TextView) findViewById(R.id.search_no_results_found);
 		searchResultsNumber = findViewById(R.id.search_results_number);
@@ -290,6 +294,7 @@ public class StandsSearchActivity extends NavigationActivity {
 					return;
 				}
 
+				onFinishing();
 				supportFinishAfterTransition();
 			}
 		));
@@ -302,14 +307,16 @@ public class StandsSearchActivity extends NavigationActivity {
 		standsList.setAdapter(adapter);
 		adapter.setOnClickListener(new StandSearchViewHolder.OnClickListener() {
 			@Override
-			public void onItemClicked(Stand stand) {
+			public void onItemClicked(View standView, Stand stand) {
 				StandsArea standsArea = stand.getStandsArea();
 
 				// Open stands area screen with the stand selected
 				Bundle bundle = new Bundle();
 				bundle.putString(StandsAreaActivity.EXTRA_STANDS_AREA_NAME, standsArea.getName());
 				bundle.putString(StandsAreaActivity.EXTRA_STAND_NAME, stand.getName());
-				navigateToActivity(StandsAreaActivity.class, false, bundle);
+
+				ActivityOptionsCompat transitionOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(StandsSearchActivity.this, standView, StandsAreaActivity.VIEW_NAME_STANDS_LIST);
+				navigateToActivity(StandsAreaActivity.class, false, bundle, transitionOptions);
 			}
 
 			@Override

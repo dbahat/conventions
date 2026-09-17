@@ -120,6 +120,7 @@ public class EventActivity extends NavigationActivity {
 		if (conventionEvent == null) {
 			Log.e(TAG, "Could not find event with id " + eventId);
 			Toast.makeText(this, getString(R.string.event_not_found), Toast.LENGTH_LONG).show();
+			onFinishing();
 			finish();
 			return;
 		}

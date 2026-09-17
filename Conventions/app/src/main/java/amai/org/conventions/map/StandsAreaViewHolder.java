@@ -28,10 +28,10 @@ public class StandsAreaViewHolder extends RecyclerView.ViewHolder {
 		standsAraName.setText(name);
 		standsAraName.setTextColor(ThemeAttributes.getColor(context, R.attr.standsAreaNameColor));
 
-		itemView.setOnClickListener(view -> onClickListener.onItemClicked(standsArea));
+		itemView.setOnClickListener(view -> onClickListener.onItemClicked(view, standsArea));
 	}
 
 	public interface OnClickListener {
-		void onItemClicked(StandsArea standsArea);
+		void onItemClicked(View view, StandsArea standsArea);
 	}
 }
