@@ -115,8 +115,8 @@ public class Icon2026Convention extends SffConvention {
 	@Override
 	protected ConventionStorage initStorage() {
 		return new ConventionStorage(this)
-			.withInitialEventsFile(R.raw.icon2026_convention_events, 0)
-			.withInitialStandsFile(R.raw.icon2026_stands, 0);
+			.withInitialEventsFile(R.raw.icon2026_convention_events, 0);
+//			.withInitialStandsFile(R.raw.icon2026_stands, 0);
 	}
 
 	@Override
@@ -200,11 +200,12 @@ public class Icon2026Convention extends SffConvention {
 
 	@Override
 	protected URL initStandsURL() {
-		try {
-			return new URL("https://api.sf-f.org.il/booths/" + API_SLUG + ".json");
-		} catch (MalformedURLException e) {
-			throw new RuntimeException(e);
-		}
+		return null;
+//		try {
+//			return new URL("https://api.sf-f.org.il/booths/" + API_SLUG + ".json");
+//		} catch (MalformedURLException e) {
+//			throw new RuntimeException(e);
+//		}
 	}
 
 	@Override
@@ -242,8 +243,8 @@ public class Icon2026Convention extends SffConvention {
 
 	@Override
 	protected ConventionMap initMap() {
-//		return null;
-		return createMap();
+		return null;
+//		return createMap();
 	}
 
 	private ConventionMap createMap() {
