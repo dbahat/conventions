@@ -18,6 +18,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import amai.org.conventions.ThemeAttributes;
 import amai.org.conventions.events.adapters.EventsViewListAdapter;
@@ -40,6 +41,8 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 import sff.org.conventions.R;
 
 public class ProgrammeSearchActivity extends NavigationActivity {
+	// Filter according to the sent set of tags. Other tag filters will be deselected. The object type must be Set<String>.
+	public static final String EXTRA_FILTER_BY_TAGS = "ExtraFilterByTags";
 
 	private static final String STATE_KEYWORDS_FILTER = "KeywordsFilter";
 	private static final String STATE_SEARCH_FILTERS = "SearchFilters";
@@ -56,6 +59,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 	private TextView noResultsFoundView;
 	private DrawerLayout drawerLayout;
 	private ImageButton filterButton;
+	private RecyclerView searchFiltersList;
 
 	private int totalEventTypeSearchFiltersCount;
 	private int totalCategorySearchFiltersCount;
@@ -70,8 +74,9 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 		View rootView = setContentInContentContainer(R.layout.activity_programme_search);
 		setToolbarTitle(getResources().getString(R.string.programme_search_title));
 
-		if (savedInstanceState != null) {
-			Serializable savedFilters = savedInstanceState.getSerializable(STATE_SEARCH_FILTERS);
+		Bundle bundle = (savedInstanceState != null ? savedInstanceState : getIntent().getExtras());
+		if (bundle != null) {
+			Serializable savedFilters = bundle.getSerializable(STATE_SEARCH_FILTERS);
 			if (savedFilters instanceof HashSet) {
 				//noinspection unchecked
 				searchFilters = (HashSet<SearchFilter<SearchFilter.EventSearchFilterType>>) savedFilters;
@@ -79,7 +84,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 				searchFilters = new HashSet<>();
 			}
 
-			keywordsFilter = savedInstanceState.getString(STATE_KEYWORDS_FILTER);
+			keywordsFilter = bundle.getString(STATE_KEYWORDS_FILTER);
 		} else {
 			searchFilters = new HashSet<>();
 		}
@@ -91,6 +96,19 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 
 		initializeEventsList();
 		initializeKeywordFilter();
+		initializeSearchFilters();
+
+		// This must be done after the search filters are initialized
+		if (bundle != null && bundle.get(EXTRA_FILTER_BY_TAGS) instanceof Set) {
+			Set<String> filterByTags = (Set<String>) bundle.get(EXTRA_FILTER_BY_TAGS);
+			for (SearchFilter<SearchFilter.EventSearchFilterType> filter : searchFilters) {
+				if (filter.getType() == SearchFilter.EventSearchFilterType.Tag) {
+					// Active tag filters filter out. We want to set all the tag filters to active except
+					// the sent ones.
+					filter.withActive(!filterByTags.contains(filter.getName()));
+				}
+			}
+		}
 
 		applyFiltersInBackground();
 
@@ -98,6 +116,15 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 		filterButton = findViewById(R.id.search_filter_button);
 		refreshFilterButton();
 
+		Views.hideKeyboardOnClickOutsideEditText(this, rootView);
+		// Handle edge to edge
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, false, findViewById(R.id.programme_search_title_section));
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, Views.InsetType.PADDING, false, listView);
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, false, findViewById(R.id.search_filter_drawer_container));
+		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, Views.InsetType.NONE, false, searchFiltersList);
+	}
+
+	private void initializeSearchFilters() {
 		List<SearchFilter<SearchFilter.EventSearchFilterType>> eventTypesSearchFilters = Convention.getInstance().getEventTypesSearchFilters();
 		totalEventTypeSearchFiltersCount = eventTypesSearchFilters.size();
 
@@ -133,7 +160,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 			return filter.getType().ordinal() - other.getType().ordinal();
 		});
 
-		RecyclerView searchFiltersList = findViewById(R.id.search_filters_list);
+		searchFiltersList = findViewById(R.id.search_filters_list);
 		searchFiltersList.setLayoutManager(new GridLayoutManager(this, 2));
 
 		final SearchFiltersAdapter<SearchFilter.EventSearchFilterType> searchFiltersAdapter = new SearchFiltersAdapter<>(sortedFilters);
@@ -163,14 +190,6 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 			searchFiltersAdapter.notifyDataSetChanged();
 			applyFiltersInBackground();
 		});
-
-
-		Views.hideKeyboardOnClickOutsideEditText(this, rootView);
-		// Handle edge to edge
-		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, false, findViewById(R.id.programme_search_title_section));
-		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.PADDING, Views.InsetType.PADDING, false, listView);
-		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.NONE, Views.InsetType.PADDING, false, findViewById(R.id.search_filter_drawer_container));
-		Views.registerApplyInsets(Views.InsetType.NONE, Views.InsetType.PADDING, Views.InsetType.NONE, Views.InsetType.NONE, false, searchFiltersList);
 	}
 
 	private boolean hasEventsWithTicketsInfo() {
