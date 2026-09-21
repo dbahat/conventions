@@ -149,6 +149,27 @@
     <string name="sponsors_matmon"><b><a href="https://matmon.space/">מטמון</a></b>. סלון וחנות ספרים בקומה הראשונה של בית רומנו\nמקום לשהות ולשוחח, לצלול עמוק ולגלות אוצרות.</string>
 
     <string name="activities_main_title">פעילויות</string>
+    <string name="activities_roads"><![CDATA[
+        <b>מסלולי תוכן</b><p>
+תוכניית הפסטיבל ענקית, מופלאה ועמוסה בכל טוב!<br/>
+כדי לעזור לך בהתמצאות הכנו מפת שבילים מומלצים לכל יום שיאפשרו לך להנות מכל מה שיש לפסטיבל
+להציע בנחת ובכיף. אפשר למצוא את ההמלצות בקלות על ידי לחיצה על שם התגית.<p>
+<b>יום שלישי 29.9.26</b><br/>
+<a href="sff.org.conventions://activities/open-search-programme?tag=שביל%20טעימה%20מאייקון">שביל טעימה מאייקון</a><br/>
+<a href="sff.org.conventions://activities/open-search-programme?tag=שביל%20מסביב%20לעולם">שביל מסביב לעולם</a><p>
+<b>יום רביעי 30.9.26</b><br/>
+<a href="sff.org.conventions://activities/open-search-programme?tag=שביל%20רומנטזי">שביל רומנטזי</a><br/>
+<a href="sff.org.conventions://activities/open-search-programme?tag=שביל%20פעיל">השביל הפעיל</a><p>
+<b>יום חמישי 1.10.26</b><br/>
+<a href="sff.org.conventions://activities/open-search-programme?tag=שביל%20עומק">שביל עומק</a><br/>
+<a href="sff.org.conventions://activities/open-search-programme?tag=שביל%20ילדים%20ונוער">שביל ילדים ונוער</a><p>
+<b>מסלולי משחקי תפקידים</b><br/>
+<a href="sff.org.conventions://activities/open-search-programme?tag=שביל%20משחקי%20תפקידים%20-%20עיוני">שביל משחקי תפקידים - עיוני</a><br/>
+<a href="sff.org.conventions://activities/open-search-programme?tag=שביל%20משחקי%20תפקידים%20-%20לילדים">שביל משחקי תפקידים - לילדים</a><br/>
+<a href="sff.org.conventions://activities/open-search-programme?tag=שביל%20משחקי%20תפקידים%20-%20לנוער">שביל משחקי תפקידים - לנוער</a><br/>
+<a href="sff.org.conventions://activities/open-search-programme?tag=שביל%20משחקי%20תפקידים%20-%20ערפדים">שביל משחקי תפקידים - ערפדים</a><br/>
+<a href="sff.org.conventions://activities/open-search-programme?tag=שביל%20משחקי%20תפקידים%20-%20אייקון%20אחרי%20העבודה">שביל משחקי תפקידים - אייקון אחרי העבודה</a>
+]]></string>
     <string name="activities_city_spirits_cards"><b>קלפי רוחות ערים</b>\n<b>אספו את כולם!</b>\nקלפי הדמויות של הפקת המקור \"רוחות הערים עושות סדר\" מחכים ברחבי הפסטיבל! קבלו את הקלף הראשון בדוכן האגודה ועקבו אחרי ההוראות כדי להשלים את כל האוסף!\nפרטים נוספים בדוכן האגודה ובמודיעין</string>
     <string name="activities_secret_of_wonders"><b>מרחב בריחה בפסטיבל: סוד הפלאות</b>\nהיכונו להרפתקה! סוד הפלאות, מרחב חידות חוויתי ברחבי הכנס. בכל שעות היום וללא עלות, התחילו כאן או גשו לדוכן המודיעין וסרקו את הקוד על מנת להתחיל במסע\nכבר מספר שבועות שאנחנו בא.ל.י.ס. עוקבים אחר \"הארנב הלבן\", כנופיית ההאקרים הידועה לשמצה. הארנב הלבן טוענים שהנהלת אייקון מסתירה מידע על קיומם של חייזרים, יקומים מקבילים, ושלל עולמות פנטסטיים. אנחנו לא יכולים לאשר או להכחיש את הטענות, אך כך או כך אסור לנו לתת לארנב הלבן להפיל את אייקון. אנו זקוקים לצוות הטוב ביותר, האם תתגייסו למשימה?</string>
     <string name="activities_indie_games"><b>מתחם משחקי מחשב</b>\nמתחם משחקי אינדי ישראלים!\nכמו בכל שנה בשנים האחרונות מוזמנות ומוזמנים למתחם הגיימינג בו תוכלו לשחק במשחקים ישראלים חדשים, לפגוש את המפתחים ולהשאיר רשמים וביקורות!</string>

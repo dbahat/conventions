@@ -3,13 +3,18 @@ package amai.org.conventions;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
+import amai.org.conventions.events.activities.ProgrammeSearchActivity;
 import amai.org.conventions.map.MapActivity;
 import amai.org.conventions.model.ConventionMap;
 import amai.org.conventions.model.MapLocation;
@@ -17,6 +22,7 @@ import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.navigation.NavigationActivity;
 import amai.org.conventions.utils.CollectionUtils;
 import amai.org.conventions.utils.Views;
+import fi.iki.kuitsi.listtest.ListTagHandler;
 import sff.org.conventions.R;
 
 public class ActivitiesActivity extends NavigationActivity {
@@ -36,6 +42,9 @@ public class ActivitiesActivity extends NavigationActivity {
 
 		handleDeepLinks();
 		handleLinks();
+
+		TextView roadsView = findViewById(R.id.activity_roads);
+		roadsView.setText(Html.fromHtml(getString(R.string.activities_roads), null, new ListTagHandler()));
 
 		final int focusOnView = getIntent().getIntExtra(EXTRA_FOCUS_ON_VIEW, Views.NO_VIEW);
 
@@ -85,6 +94,15 @@ public class ActivitiesActivity extends NavigationActivity {
 					Bundle floorBundle = new Bundle();
 					floorBundle.putIntArray(MapActivity.EXTRA_MAP_LOCATION_IDS, locationIds);
 					navigateToActivity(MapActivity.class, false, floorBundle);
+					break;
+				}
+				case "/open-search-programme": {
+					//The URL looks like this: sff.org.conventions://activities/open-search-programme?tag=name
+					String tag = intentData.getQueryParameter("tag");
+					Bundle progeammeSearchBundle = new Bundle();
+					// Create a serializable set with one string - tag
+					progeammeSearchBundle.putSerializable(ProgrammeSearchActivity.EXTRA_FILTER_BY_TAGS, new HashSet<>(Collections.singletonList(tag)));
+					navigateToActivity(ProgrammeSearchActivity.class, false, progeammeSearchBundle);
 					break;
 				}
 			}
