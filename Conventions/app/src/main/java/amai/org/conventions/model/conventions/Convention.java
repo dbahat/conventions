@@ -892,7 +892,7 @@ public abstract class Convention implements Serializable {
 	// This should be in sync with the GSON serializers in ConventionStorage.
 	public void enrichStand(Stand stand) {
 		if (stand.getStandsArea().getName() != null) {
-			stand.setStandsArea(this.findStandsAreaByName(stand.getStandsArea().getName()));
+			stand.setStandsArea(this.getOrAddStandsArea(stand.getStandsArea().getName()));
 		}
 		if (stand.getTypes() != null) {
 			stand.setTypes(CollectionUtils.map(stand.getTypes(), standType -> getOrAddStandType(standType.getName())));
@@ -913,5 +913,17 @@ public abstract class Convention implements Serializable {
 		}
 
 		return standType;
+	}
+
+	public StandsArea getOrAddStandsArea(String standsAreaName) {
+		if (standsAreaName == null || standsAreaName.trim().isEmpty()) {
+			return null;
+		}
+		StandsArea standsArea = standsAreas.findByName(standsAreaName);
+		if (standsArea == null) {
+			standsArea = standsAreas.add(new StandsArea().withName(standsAreaName));
+			Log.i(TAG, "Found and added new stands area with name " + standsAreaName);
+		}
+		return standsArea;
 	}
 }
