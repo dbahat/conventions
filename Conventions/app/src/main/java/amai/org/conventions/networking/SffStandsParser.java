@@ -87,11 +87,7 @@ public class SffStandsParser implements StandsParser {
 				}
 
 				Convention convention = Convention.getInstance();
-				StandsArea standsArea = convention.findStandsAreaByName(area);
-				if (standsArea == null) {
-					Log.w(TAG, "Skipping stand with unknown stands area: " + name + ", area: " + area);
-					continue;
-				}
+				StandsArea standsArea = convention.getOrAddStandsArea(area);
 
 				StandType standType = convention.getOrAddStandType(category);
 

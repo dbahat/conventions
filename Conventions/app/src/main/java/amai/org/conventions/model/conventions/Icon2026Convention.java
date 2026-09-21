@@ -100,7 +100,7 @@ public class Icon2026Convention extends SffConvention {
 	private static final String STANDS_AREA_H = "היפריון";
 	private static final String STANDS_AREA_V = "וולקן";
 	private static final String STANDS_AREA_Z = "זוטרופוליס";
-	private static final String STANDS_AREA_CH = "חלם";
+	private static final String STANDS_AREA_CH = "חולית";
 	private static final String STANDS_AREA_P = "פלורין";
 	private static final String STANDS_AREA_ESHKOL = "אשכול";
 	private static final String STANDS_AREA_CINEMATHEQUE = "סינמטק";
@@ -234,9 +234,13 @@ public class Icon2026Convention extends SffConvention {
 	@Override
 	protected NamedItems<StandType> initStandTypes() {
 		List<StandType> standTypes = Arrays.asList(
-			new StandType().withName("דוכן יוצר.ת עצמאי.ת").withImage(R.drawable.diamond_24px),
-			new StandType().withName("דוכן מסחרי").withImage(R.drawable.ic_shopping_basket),
-			new StandType().withName("דוכן סופר.ת עצמאי.ת").withImage(R.drawable.book_5_24px)
+			new StandType().withName("איור").withImage(R.drawable.ic_color_lens),
+			new StandType().withName("מלאכת יד").withImage(R.drawable.diamond_24px),
+			new StandType().withName("מרץ'").withImage(R.drawable.ic_shopping_basket),
+			new StandType().withName("משחקי קופסה").withImage(R.drawable.casino_24px),
+			new StandType().withName("ספרים").withImage(R.drawable.book_5_24px),
+			new StandType().withName("קומיקס").withImage(R.drawable.book_5_24px),
+			new StandType().withName("שונות").withImage(R.drawable.ic_shopping_basket)
 		);
 		return new OrderedNamedItems<>(standTypes);
 	}
