@@ -59,6 +59,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 	private TextView noResultsFoundView;
 	private DrawerLayout drawerLayout;
 	private ImageButton filterButton;
+	private SearchView searchView;
 	private RecyclerView searchFiltersList;
 
 	private int totalEventTypeSearchFiltersCount;
@@ -101,12 +102,16 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 		// This must be done after the search filters are initialized
 		if (bundle != null && bundle.get(EXTRA_FILTER_BY_TAGS) instanceof Set) {
 			Set<String> filterByTags = (Set<String>) bundle.get(EXTRA_FILTER_BY_TAGS);
-			for (SearchFilter<SearchFilter.EventSearchFilterType> filter : searchFilters) {
-				if (filter.getType() == SearchFilter.EventSearchFilterType.Tag) {
-					// Active tag filters filter out. We want to set all the tag filters to active except
-					// the sent ones.
-					filter.withActive(!filterByTags.contains(filter.getName()));
+			if (!filterByTags.isEmpty()) {
+				for (SearchFilter<SearchFilter.EventSearchFilterType> filter : searchFilters) {
+					if (filter.getType() == SearchFilter.EventSearchFilterType.Tag) {
+						// Active tag filters filter out. We want to set all the tag filters to active except
+						// the sent ones.
+						filter.withActive(!filterByTags.contains(filter.getName()));
+					}
 				}
+				// Close the keyboard - the list is already filtered
+				searchView.clearFocus();
 			}
 		}
 
@@ -255,7 +260,7 @@ public class ProgrammeSearchActivity extends NavigationActivity {
 	}
 
 	private void initializeKeywordFilter() {
-		SearchView searchView = findViewById(R.id.search_keyword_text_box);
+		searchView = findViewById(R.id.search_keyword_text_box);
 		searchView.setIconified(false);
 
 		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
