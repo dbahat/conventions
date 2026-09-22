@@ -93,17 +93,11 @@ public class Icon2026Convention extends SffConvention {
 //	private static final String HALL_NAME_ICODE = "אייקוד";
 //	private static final String HALL_NAME_SPACESHIP = "החללית";
 
-	private static final String STANDS_AREA_A = "אטלנטיס";
-	private static final String STANDS_AREA_B = "בה סינג סה";
-	private static final String STANDS_AREA_G = "גאליפריי";
-	private static final String STANDS_AREA_D = "דרגונסטון";
-	private static final String STANDS_AREA_H = "היפריון";
-	private static final String STANDS_AREA_V = "וולקן";
-	private static final String STANDS_AREA_Z = "זוטרופוליס";
-	private static final String STANDS_AREA_CH = "חולית";
-	private static final String STANDS_AREA_P = "פלורין";
 	private static final String STANDS_AREA_ESHKOL = "אשכול";
+	private static final String STANDS_AREA_DE_VINCI = "דה וינצ'י";
+	private static final String STANDS_AREA_FIELD = "מגרש";
 	private static final String STANDS_AREA_CINEMATHEQUE = "סינמטק";
+	private static final String STANDS_AREA_POPUP = "פופ-אפ";
 
 	private static final String GENERAL_STAND_TYPE = "כללי";
 
@@ -115,8 +109,8 @@ public class Icon2026Convention extends SffConvention {
 	@Override
 	protected ConventionStorage initStorage() {
 		return new ConventionStorage(this)
-			.withInitialEventsFile(R.raw.icon2026_convention_events, 0);
-//			.withInitialStandsFile(R.raw.icon2026_stands, 0);
+			.withInitialEventsFile(R.raw.icon2026_convention_events, 0)
+			.withInitialStandsFile(R.raw.icon2026_stands, 0);
 	}
 
 	@Override
@@ -200,12 +194,11 @@ public class Icon2026Convention extends SffConvention {
 
 	@Override
 	protected URL initStandsURL() {
-		return null;
-//		try {
-//			return new URL("https://api.sf-f.org.il/booths/" + API_SLUG + ".json");
-//		} catch (MalformedURLException e) {
-//			throw new RuntimeException(e);
-//		}
+		try {
+			return new URL("https://api.sf-f.org.il/booths/" + API_SLUG + ".json");
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override
@@ -216,15 +209,9 @@ public class Icon2026Convention extends SffConvention {
 	@Override
 	protected NamedItems<StandsArea> initStandsAreas() {
 		List<StandsArea> standsAreas = Arrays.asList(
-			new StandsArea().withName(STANDS_AREA_A),
-			new StandsArea().withName(STANDS_AREA_B),
-			new StandsArea().withName(STANDS_AREA_G),
-			new StandsArea().withName(STANDS_AREA_D),
-			new StandsArea().withName(STANDS_AREA_H),
-			new StandsArea().withName(STANDS_AREA_V),
-			new StandsArea().withName(STANDS_AREA_Z),
-			new StandsArea().withName(STANDS_AREA_CH),
-			new StandsArea().withName(STANDS_AREA_P),
+			new StandsArea().withName(STANDS_AREA_FIELD),
+			new StandsArea().withName(STANDS_AREA_DE_VINCI),
+			new StandsArea().withName(STANDS_AREA_POPUP),
 			new StandsArea().withName(STANDS_AREA_ESHKOL),
 			new StandsArea().withName(STANDS_AREA_CINEMATHEQUE)
 		);
@@ -282,21 +269,15 @@ public class Icon2026Convention extends SffConvention {
 				.withDefaultMarkerHeight(153.195f);
 		final float SMALL_MARKER_HEIGHT = 104.497f;
 
-		StandsArea standsAreaA = getStandsAreas().findByName(STANDS_AREA_A);
-		StandsArea standsAreaB = getStandsAreas().findByName(STANDS_AREA_B);
-		StandsArea standsAreaC = getStandsAreas().findByName(STANDS_AREA_G);
-		StandsArea standsAreaD = getStandsAreas().findByName(STANDS_AREA_D);
-		StandsArea standsAreaE = getStandsAreas().findByName(STANDS_AREA_H);
-		StandsArea standsAreaF = getStandsAreas().findByName(STANDS_AREA_V);
-		StandsArea standsAreaH = getStandsAreas().findByName(STANDS_AREA_Z);
-		StandsArea standsAreaG = getStandsAreas().findByName(STANDS_AREA_CH);
-		StandsArea standsAreaP = getStandsAreas().findByName(STANDS_AREA_P);
+		StandsArea standsAreaA = getStandsAreas().findByName(STANDS_AREA_FIELD);
+		StandsArea standsAreaB = getStandsAreas().findByName(STANDS_AREA_DE_VINCI);
+		StandsArea standsAreaP = getStandsAreas().findByName(STANDS_AREA_POPUP);
 		StandsArea standsAreaEshkol = getStandsAreas().findByName(STANDS_AREA_ESHKOL);
 		StandsArea standsAreaCinematheque = getStandsAreas().findByName(STANDS_AREA_CINEMATHEQUE);
 
 		return new ConventionMap()
 			.withFloors(Collections.singletonList(floor))
-			.withLocations(
+			/*.withLocations(
 				CollectionUtils.flattenList(
 					inFloor(floor,
 						mapLocation("כניסה ויציאה", 222.8435f, 2815.011f),
@@ -367,7 +348,7 @@ public class Icon2026Convention extends SffConvention {
 						mapLocationForShelter("מרחב מוגן", 819.907f, 3438.442f).withMarkerHeight(SMALL_MARKER_HEIGHT)
 					)
 				)
-			);
+			)*/;
 	}
 
 	private DetailsActivityLocation getActivitiesActivityLocationForView(int viewId) {
