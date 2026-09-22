@@ -127,6 +127,9 @@ public class StandsActivity extends NavigationActivity implements SwipeRefreshLa
             noStands.add(area.getName());
         }
         for (Stand stand : Convention.getInstance().getStands()) {
+            if (stand.getStandsArea() == null) {
+                continue;
+            }
             noStands.remove(stand.getStandsArea().getName());
             if (noStands.isEmpty()) {
                 break;
