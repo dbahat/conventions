@@ -1,6 +1,8 @@
 package amai.org.conventions.model;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class StandLocations {
@@ -19,5 +21,9 @@ public class StandLocations {
 
 	public boolean isConsecutive(StandLocation first, StandLocation second) {
 		return first.getNext() != null && get(first.getNext()) == second;
+	}
+
+	public Collection<StandLocation> getAllLocations() {
+		return locationById.values();
 	}
 }

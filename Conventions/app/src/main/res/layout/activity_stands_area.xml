@@ -27,6 +27,8 @@
                 app:maxHeight="300dp">
                 <amai.org.conventions.customviews.PaintableImageView
                     android:id="@+id/stands_area_map"
+                    android:layout_gravity="center"
+                    android:scaleType="centerInside"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
             </amai.org.conventions.customviews.FrameLayoutWithMaxHeight>

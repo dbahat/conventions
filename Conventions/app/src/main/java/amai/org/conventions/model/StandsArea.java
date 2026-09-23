@@ -13,6 +13,8 @@ public class StandsArea extends Place implements Serializable, NamedItems.NamedI
 	private Integer imageResource;
 	private float imageWidth;
 	private float imageHeight;
+	private float defaultZoom;
+	private float maxZoom;
 	private StandLocations standLocations = new StandLocations();
 
 	public StandsArea() {
@@ -43,6 +45,32 @@ public class StandsArea extends Place implements Serializable, NamedItems.NamedI
 
 	public StandsArea withImageResource(int imageResource) {
 		setImageResource(imageResource);
+		return this;
+	}
+
+	public float getDefaultZoom() {
+		return defaultZoom;
+	}
+
+	public void setDefaultZoom(float defaultZoom) {
+		this.defaultZoom = defaultZoom;
+	}
+
+	public StandsArea withDefaultZoom(float defaultZoom) {
+		setDefaultZoom(defaultZoom);
+		return this;
+	}
+
+	public float getMaxZoom() {
+		return maxZoom;
+	}
+
+	public void setMaxZoom(float maxZoom) {
+		this.maxZoom = maxZoom;
+	}
+
+	public StandsArea withMaxZoom(float maxZoom) {
+		setMaxZoom(maxZoom);
 		return this;
 	}
 

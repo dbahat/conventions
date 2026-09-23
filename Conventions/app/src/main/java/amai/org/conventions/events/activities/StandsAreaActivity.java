@@ -74,6 +74,8 @@ public class StandsAreaActivity extends NavigationActivity {
 
     public static final String VIEW_NAME_STANDS_LIST = "stands_list";
 
+    private final static float DEFAULT_MAX_ZOOM = 3;
+
     private boolean useSlideOutAnimationOnBack;
     private String standsAreaName;
     private String selectedStandName;
@@ -215,7 +217,9 @@ public class StandsAreaActivity extends NavigationActivity {
             }
 
             zoomContainer.setVisibility(View.VISIBLE);
-            zoom.setMaxZoom(3);
+            float maxZoom = area.getMaxZoom() > 1 ? area.getMaxZoom() : DEFAULT_MAX_ZOOM;
+            zoom.setMaxZoom(maxZoom);
+
             imageFrame.setOnTouchListener(Views.createOnSingleTapConfirmedListener(this, new Runnable() {
                 @Override
                 public void run() {
@@ -251,9 +255,9 @@ public class StandsAreaActivity extends NavigationActivity {
             // Show inactive stands at the end (during the convention)
             if (checkActive) {
                 if (lhs.isActive() && !rhs.isActive()) {
-                    return 1;
-                } else if (!lhs.isActive() && rhs.isActive()) {
                     return -1;
+                } else if (!lhs.isActive() && rhs.isActive()) {
+                    return 1;
                 }
             }
 
@@ -423,16 +427,21 @@ public class StandsAreaActivity extends NavigationActivity {
                 }
             };
             smoothScroller.setTargetPosition(foundPosition);
-            standsList.getLayoutManager().startSmoothScroll(smoothScroller);
+            standsList.postDelayed(() -> standsList.getLayoutManager().startSmoothScroll(smoothScroller), 500);
         }
     }
 
     private void zoomToStand(Stand stand) {
+        if (!stand.hasImageCoordinates()) {
+            return;
+        }
+
         if (zoom != null) {
             // If the image is smaller than the frame (due to the max height), there will be an offset
             float offsetX = imageFrame.getX();
             float offsetY = imageFrame.getY();
-            zoom.smoothZoomTo(zoom.getMaxZoom(),
+            float zoomLevel = area.getDefaultZoom() > 1 ? area.getDefaultZoom() : zoom.getMaxZoom();
+            zoom.smoothZoomTo(zoomLevel,
                     offsetX + (stand.getImageX() / area.getImageWidth() * image.getWidth()),
                     offsetY + (stand.getImageY() / area.getImageHeight() * image.getHeight()));
         }
@@ -502,12 +511,13 @@ public class StandsAreaActivity extends NavigationActivity {
             ZoomView zoom = (ZoomView) view.findViewById(R.id.image_zoom_view);
             ImageView image = (ImageView) view.findViewById(R.id.zoomed_image);
 
-            zoom.setMaxZoom(3);
-
             StandsArea area = Convention.getInstance().findStandsArea(standsArea);
             if (area != null) {
                 image.setImageResource(area.getImageResource());
             }
+
+            float maxZoom = (area != null && area.getMaxZoom() > 1) ? area.getMaxZoom() : DEFAULT_MAX_ZOOM;
+            zoom.setMaxZoom(maxZoom);
 
             final Dialog dialog = new Dialog(getActivity(), R.style.FullScreenDialog);
             dialog.setCancelable(true);
