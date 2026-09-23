@@ -237,6 +237,10 @@
         <item name="standLocationTextColor">@color/icon2026_gray900</item>
         <item name="inactiveStandIndicationTextColor">@color/icon2026_gray800</item>
         <item name="inactiveStandIndicationBackground">@drawable/icon2026_gray100_round10</item>
+        <item name="standsMapFullScreenIcon">@drawable/icon2026_stand_zoom</item>
+        <item name="standsMapFullScreenIconBackground">@null</item>
+        <item name="standsMapFullScreenIconPadding">0dp</item>
+        <item name="standsMapFullScreenIconSize">62dp</item>
         <!-- Stand Information -->
         <item name="standInfoTextColor">@color/icon2026_gray800</item>
         <item name="standDescriptionTextColor">@color/icon2026_gray950</item>
