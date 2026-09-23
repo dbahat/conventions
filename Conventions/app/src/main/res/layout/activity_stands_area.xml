@@ -34,15 +34,15 @@
             </amai.org.conventions.customviews.FrameLayoutWithMaxHeight>
         </pl.polidea.view.ZoomView>
         <ImageView
-            android:layout_width="42dp"
-            android:layout_height="42dp"
+            android:layout_width="?standsMapFullScreenIconSize"
+            android:layout_height="?standsMapFullScreenIconSize"
             android:layout_gravity="bottom|end"
             android:background="?standsMapFullScreenIconBackground"
-            android:padding="10dp"
+            android:padding="?standsMapFullScreenIconPadding"
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:src="@drawable/stands_fullscreen_24px"
+            android:src="?standsMapFullScreenIcon"
             />
     </FrameLayout>
 

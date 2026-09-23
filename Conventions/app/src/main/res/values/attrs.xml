@@ -544,10 +544,16 @@
         <attr name="inactiveStandIndicationTextColor" format="color|reference"/>
         <!-- Background resource for inactive stand indication -->
         <attr name="inactiveStandIndicationBackground" format="integer|reference"/>
-        <!-- Color for fullscreen icon in stands map -->
+        <!-- Fullscreen icon in stands map -->
+        <attr name="standsMapFullScreenIcon" format="color|reference"/>
+        <!-- Color for default fullscreen icon in stands map -->
         <attr name="standsMapFullScreenIconColor" format="color|reference"/>
         <!-- Color for fullscreen icon background in stands map -->
         <attr name="standsMapFullScreenIconBackground" format="color|reference"/>
+        <!-- Fullscreen icon padding in stands map -->
+        <attr name="standsMapFullScreenIconPadding" format="dimension|reference"/>
+        <!-- Fullscreen icon size in stands map -->
+        <attr name="standsMapFullScreenIconSize" format="dimension|reference"/>
 
         <!-- Stand Information Popup -->
 
