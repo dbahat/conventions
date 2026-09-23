@@ -1,6 +1,8 @@
 package amai.org.conventions.model.conventions;
 
 import android.content.Context;
+import android.graphics.BlendMode;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 
@@ -31,6 +33,8 @@ import amai.org.conventions.model.NamedItems;
 import amai.org.conventions.model.OrderedNamedItems;
 import amai.org.conventions.model.Place;
 import amai.org.conventions.model.Shelter;
+import amai.org.conventions.model.StandLocations;
+import amai.org.conventions.model.StandLocationsBuilder;
 import amai.org.conventions.model.StandType;
 import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.utils.CollectionUtils;
@@ -66,8 +70,8 @@ public class Icon2026Convention extends SffConvention {
 	private static final String HALL_NAME_GAMES_2 = "חדר משחקי קופסה 2";
 
 	private static final String STANDS_AREA_ESHKOL = "אשכול";
-	private static final String STANDS_AREA_DE_VINCI = "דה וינצ'י";
-	private static final String STANDS_AREA_FIELD = "מגרש";
+	private static final String STANDS_AREA_DA_VINCI = "דה וינצ'י";
+	private static final String STANDS_AREA_COURT = "מגרש";
 	private static final String STANDS_AREA_CINEMATHEQUE = "סינמטק";
 	private static final String STANDS_AREA_POPUP = "פופ-אפ";
 
@@ -181,11 +185,33 @@ public class Icon2026Convention extends SffConvention {
 	@Override
 	protected NamedItems<StandsArea> initStandsAreas() {
 		List<StandsArea> standsAreas = Arrays.asList(
-			new StandsArea().withName(STANDS_AREA_FIELD),
-			new StandsArea().withName(STANDS_AREA_DE_VINCI),
-			new StandsArea().withName(STANDS_AREA_POPUP),
-			new StandsArea().withName(STANDS_AREA_ESHKOL),
+			new StandsArea().withName(STANDS_AREA_COURT)
+				.withImageResource(R.drawable.icon2026_stands_court)
+				.withImageWidth(4704)
+				.withImageHeight(3931)
+				.withDefaultZoom(3)
+				.withMaxZoom(5)
+				.withStandLocations(getCourtStandLocations()),
+			new StandsArea().withName(STANDS_AREA_DA_VINCI)
+				.withImageResource(R.drawable.icon2026_stands_da_vinci)
+				.withImageWidth(2500)
+				.withImageHeight(1500)
+				.withStandLocations(getDaVinciStandLocations()),
+			new StandsArea().withName(STANDS_AREA_POPUP)
+				.withImageResource(R.drawable.icon2026_stands_popup)
+				.withImageWidth(2500)
+				.withImageHeight(1500)
+				.withStandLocations(getPopupStandLocations()),
+			new StandsArea().withName(STANDS_AREA_ESHKOL)
+				.withImageResource(R.drawable.icon2026_stands_eshkol)
+				.withImageWidth(1709)
+				.withImageHeight(1710)
+				.withStandLocations(getEshkolStandLocations()),
 			new StandsArea().withName(STANDS_AREA_CINEMATHEQUE)
+				.withImageResource(R.drawable.icon2026_stands_cinematheque)
+				.withImageWidth(1500)
+				.withImageHeight(1500)
+				.withStandLocations(getCinemathequeStandLocations())
 		);
 		return new NamedItems<>(standsAreas);
 	}
@@ -242,8 +268,8 @@ public class Icon2026Convention extends SffConvention {
 				.withDefaultMarkerHeight(152.779f);
 		final float SMALL_MARKER_HEIGHT = 92.788f;
 
-		StandsArea standsAreaField = getStandsAreas().findByName(STANDS_AREA_FIELD);
-		StandsArea standsAreaDeVinci = getStandsAreas().findByName(STANDS_AREA_DE_VINCI);
+		StandsArea standsAreaCourt = getStandsAreas().findByName(STANDS_AREA_COURT);
+		StandsArea standsAreaDaVinci = getStandsAreas().findByName(STANDS_AREA_DA_VINCI);
 		StandsArea standsAreaPopup = getStandsAreas().findByName(STANDS_AREA_POPUP);
 		StandsArea standsAreaEshkol = getStandsAreas().findByName(STANDS_AREA_ESHKOL);
 		StandsArea standsAreaCinematheque = getStandsAreas().findByName(STANDS_AREA_CINEMATHEQUE);
@@ -255,13 +281,13 @@ public class Icon2026Convention extends SffConvention {
 					inFloor(floor,
 						mapLocation("מודיעין (מגרש)", 682.9125f, 2641.324f),
 						mapLocation("זירה", Collections.singletonList(outside), 1032.0295f, 2637.757f),
-						mapLocation("מתחם דוכנים - מגרש", Collections.singletonList(standsAreaField), 1592.6965f, 2121.656f),
+						mapLocation("מתחם דוכנים - מגרש", Collections.singletonList(standsAreaCourt), 1592.6965f, 2121.656f),
 						mapLocation("אולם ספורט", 1669.8305f, 3222.68f),
 						mapLocation("מתחם דוכנים - פופ-אפ", Collections.singletonList(standsAreaPopup), 2099.2775f, 3305.469f),
 						mapLocation("השטיח האדום", Collections.singletonList(outside), 2567.6675f, 2869.21f),
 						mapLocation("סוכה", 2794.1995f, 2594.611f),
 						mapLocation("המתחם הקהילתי", 2881.3625f, 1556.851f),
-						mapLocation("מתחם דוכנים - דה וינצ'י", Collections.singletonList(standsAreaDeVinci), 1950.0905f, 760.918f),
+						mapLocation("מתחם דוכנים - דה וינצ'י", Collections.singletonList(standsAreaDaVinci), 1950.0905f, 760.918f),
 						mapLocation("שירותי נשים", 1275.3945f, 1740.74f).withMarkerHeight(SMALL_MARKER_HEIGHT),
 						mapLocation("שירותי גברים", 551.5685f, 1737.869f).withMarkerHeight(SMALL_MARKER_HEIGHT),
 						mapLocation(eshkol1, 1039.6225f, 1725.021f).withMarkerResource(R.drawable.icon2026_place_red, false, MapLocation.NO_TINT).withSelectedMarkerResource(R.drawable.icon2026_place_red_selected, false, MapLocation.NO_TINT),
@@ -345,6 +371,141 @@ public class Icon2026Convention extends SffConvention {
 		return mapLocation(new Shelter().withName(name), x, y)
 			.withMarkerResource(R.drawable.icon2026_place_red, false, MapLocation.NO_TINT)
 			.withSelectedMarkerResource(R.drawable.icon2026_place_red_selected, false, MapLocation.NO_TINT);
+	}
+
+	private StandLocations getPopupStandLocations() {
+		float defaultWidth = 104;
+		float defaultSpaceHorizontal = 21f;
+		float defaultSpaceVertical = 21f;
+		float defaultHeight = 104;
+
+		int defaultHighlightColor = R.color.icon2026_red;
+		BlendMode highlightBlendMode = null;
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+			highlightBlendMode = BlendMode.OVERLAY;
+		}
+
+		return new StandLocationsBuilder()
+			.setDefaults(defaultWidth, defaultHeight, 0, defaultSpaceHorizontal, defaultSpaceVertical, defaultHighlightColor, highlightBlendMode)
+			.leftToRight(911.000f, 933.000f, "פ", 1, 12, null)
+			.build();
+	}
+
+	private StandLocations getDaVinciStandLocations() {
+		float defaultWidth = 84;
+		float defaultSpaceHorizontal = 18;
+		float defaultSpaceVertical = 18;
+		float defaultHeight = 84;
+
+		int defaultHighlightColor = R.color.icon2026_red;
+		BlendMode highlightBlendMode = null;
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+			highlightBlendMode = BlendMode.OVERLAY;
+		}
+
+		return new StandLocationsBuilder()
+			.setDefaults(defaultWidth, defaultHeight, 0, defaultSpaceHorizontal, defaultSpaceVertical, defaultHighlightColor, highlightBlendMode)
+			.leftToRight(402.000f, 1310.000f, "ח", 1, 2, "ח3")
+			.leftToRight(1095.000f, 1310.000f, "ח", 3, 6, "ח7")
+			.leftToRight(1613.000f, 1310.000f, "ח", 7, 12, null)
+			.build();
+	}
+
+	private StandLocations getEshkolStandLocations() {
+		float defaultWidth = 70.247f;
+		float defaultSpaceHorizontal = 14.753f;
+		float defaultSpaceVertical = 14.861f;
+		float defaultHeight = 70.247f;
+
+		int defaultHighlightColor = R.color.icon2026_red;
+		BlendMode highlightBlendMode = null;
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+			highlightBlendMode = BlendMode.OVERLAY;
+		}
+
+		return new StandLocationsBuilder()
+			.setDefaults(defaultWidth, defaultHeight, 0, defaultSpaceHorizontal, defaultSpaceVertical, defaultHighlightColor, highlightBlendMode)
+			.single(535.000f, 976.477f, "ש", 1, "ש2")
+			.leftToRight(535.000f, 891.369f, "ש", 2, 9, "ש10")
+			.single(1130.750f, 976.477f, "ש", 10, null)
+			.build();
+	}
+
+	private StandLocations getCinemathequeStandLocations() {
+		float defaultWidth = 95.759f;
+		float defaultSpaceHorizontal = 10.854f;
+		float defaultSpaceVertical = 10.854f;
+		float defaultHeight = 95.759f;
+
+		int defaultHighlightColor = R.color.icon2026_red;
+		BlendMode highlightBlendMode = null;
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+			highlightBlendMode = BlendMode.OVERLAY;
+		}
+
+		return new StandLocationsBuilder()
+			.setDefaults(defaultWidth, defaultHeight, 0, defaultSpaceHorizontal, defaultSpaceVertical, defaultHighlightColor, highlightBlendMode)
+			.leftToRight(988.000f, 1014.800f, "ס", 1, 2, "ס3")
+			.leftToRight(775.000f, 717.000f, "ס", 3, 6, null)
+			.build();
+	}
+
+	private StandLocations getCourtStandLocations() {
+		float defaultWidth = 52f;
+		float defaultSpaceHorizontal = 11f;
+		float defaultSpaceVertical = 11f;
+		float defaultHeight = 52f;
+
+		int defaultHighlightColor = R.color.icon2026_red;
+		BlendMode highlightBlendMode = null;
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+			highlightBlendMode = BlendMode.OVERLAY;
+		}
+
+		return new StandLocationsBuilder()
+			.setDefaults(defaultWidth, defaultHeight, 0, defaultSpaceHorizontal, defaultSpaceVertical, defaultHighlightColor, highlightBlendMode)
+			.leftToRight(394.684f, 2465.430f, "א", 1, 8, "א9")
+			.leftToRight(967.684f, 2465.430f, "א", 9, 16, "א17")
+			.leftToRight(1540.680f, 2465.430f, "א", 17, 24, "א25")
+			.leftToRight(2113.680f, 2465.430f, "א", 25, 32, null)
+
+			.leftToRight(408.000f, 2724.430f, "ב", 1, 8, "ב9")
+			.leftToRight(981.000f, 2724.430f, "ב", 9, 16, "ב17")
+			.topToBottom(1489.000f, 2807.430f, "ב", 17, 20, "ב21")
+			.leftToRight(1122.000f, 3078.430f, "ב", 26, 21, "ב27")
+			.leftToRight(675.000f, 3078.430f, "ב", 32, 27, "ב33")
+			.leftToRight(228.000f, 3078.430f, "ב", 38, 33, null)
+
+			.leftToRight(2065.680f, 2724.430f, "ג", 10, 1, "ג11")
+			.topToBottom(1970.680f, 2807.430f, "ג", 11, 14, "ג15")
+			.leftToRight(2065.680f, 3078.430f, "ג", 15, 24, null)
+
+			.leftToRight(158.684f, 3337.430f, "ד", 1, 4, "ד5")
+			.leftToRight(479.684f, 3337.430f, "ד", 5, 10, "ד11")
+			.leftToRight(926.684f, 3337.430f, "ד", 11, 16, "ד17")
+			.leftToRight(1373.680f, 3337.430f, "ד", 17, 22, "ד23")
+			.leftToRight(1820.680f, 3337.430f, "ד", 23, 28, "ד29")
+			.leftToRight(2267.680f, 3337.430f, "ד", 29, 34, null)
+
+			.leftToRight(3184.680f, 2517.430f, "ה", 1, 7, "ה8")
+			.topToBottom(3562.680f, 2580.430f, "ה", 8, 14, "ה15")
+			.topToBottom(3562.680f, 3116.430f, "ה", 15, 18, "ה19")
+			.leftToRight(3167.000f, 3431.000f, "ה", 24, 19, "ה25")
+			.leftToRight(2988.000f, 3431.000f, "ה", 26, 25, "ה27")
+			.topToBottom(2987.680f, 3179.000f, "ה", 30, 27, "ה31")
+			.topToBottom(2987.680f, 2603.430f, "ה", 38, 31, "ה1")
+
+			.leftToRight(795.684f, 3759.430f, "ו", 1, 20, "ו21")
+			.leftToRight(2128.680f, 3759.430f, "ו", 21, 28, "ו29")
+			.leftToRight(2730.680f, 3759.430f, "ו", 29, 38, null)
+
+			.topToBottom(4060.680f, 3020.430f, "ז", 8, 1, "ז9")
+			.topToBottom(4060.680f, 2573.430f, "ז", 14, 9, "ז15")
+			.topToBottom(4060.680f, 1625.430f, "ז", 22, 15, "ז23")
+			.topToBottom(4060.680f, 926.434f, "ז", 32, 23, "ז33")
+			.topToBottom(4060.680f, 227.434f, "ז", 42, 33, null)
+
+			.build();
 	}
 
 	@Override
