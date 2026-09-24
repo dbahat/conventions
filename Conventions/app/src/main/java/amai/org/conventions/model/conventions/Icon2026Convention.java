@@ -240,6 +240,18 @@ public class Icon2026Convention extends SffConvention {
 		return createMap();
 	}
 
+	private static class MarkerIcon {
+		public int resource;
+		public boolean isSvg = false;
+		public int tint = MapLocation.NO_TINT;
+	}
+
+	private static class IconConfig {
+		public int height = -1; // -1 means use default height
+		public MarkerIcon marker;
+		public MarkerIcon selectedMarker;
+	}
+
 	private ConventionMap createMap() {
 		Hall cinematheque4 = getHalls().findByName(HALL_NAME_CINEMATHEQUE_4);
 		Hall eshkol1 = getHalls().findByName(HALL_NAME_ESHKOL_1);
@@ -264,69 +276,94 @@ public class Icon2026Convention extends SffConvention {
 		Hall games1 = getHalls().findByName(HALL_NAME_GAMES_1);
 		Hall games2 = getHalls().findByName(HALL_NAME_GAMES_2);
 
-		Floor floor = new Floor(1)
-				.withName("מפת המתחם")
-				.withImageResource(R.drawable.icon2026_map, false)
-				.withImageHeight(3804f)
-				.withImageWidth(3500.315f)
-				.withDefaultMarkerHeight(152.779f);
-		final float SMALL_MARKER_HEIGHT = 92.788f;
-
 		StandsArea standsAreaCourt = getStandsAreas().findByName(STANDS_AREA_COURT);
 		StandsArea standsAreaDaVinci = getStandsAreas().findByName(STANDS_AREA_DA_VINCI);
 		StandsArea standsAreaPopup = getStandsAreas().findByName(STANDS_AREA_POPUP);
 		StandsArea standsAreaEshkol = getStandsAreas().findByName(STANDS_AREA_ESHKOL);
 		StandsArea standsAreaCinematheque = getStandsAreas().findByName(STANDS_AREA_CINEMATHEQUE);
 
+//		final float SMALL_MARKER_HEIGHT = 92.788f;
+
+		IconConfig regular = new IconConfig();
+		regular.marker = new MarkerIcon();
+		regular.marker.resource = R.drawable.icon2026_place;
+		regular.selectedMarker = new MarkerIcon();
+		regular.selectedMarker.resource = R.drawable.icon2026_place_selected;
+
+		IconConfig regularShelter = new IconConfig();
+		regularShelter.marker = new MarkerIcon();
+		regularShelter.marker.resource = R.drawable.icon2026_place_red;
+		regularShelter.selectedMarker = new MarkerIcon();
+		regularShelter.selectedMarker.resource = R.drawable.icon2026_place_red_selected;
+
+		IconConfig small = new IconConfig();
+		small.marker = new MarkerIcon();
+		small.marker.resource = R.drawable.icon2026_place_small;
+		small.selectedMarker = new MarkerIcon();
+		small.selectedMarker.resource = R.drawable.icon2026_place_small_selected;
+
+		IconConfig smallShelter = new IconConfig();
+		smallShelter.marker = new MarkerIcon();
+		smallShelter.marker.resource = R.drawable.icon2026_place_small_red;
+		smallShelter.selectedMarker = new MarkerIcon();
+		smallShelter.selectedMarker.resource = R.drawable.icon2026_place_small_red_selected;
+
+		Floor floor = new Floor(1)
+				.withName("מפת המתחם")
+				.withImageResource(R.drawable.icon2026_map, false)
+				.withImageHeight(3753f)
+				.withImageWidth(3450.315f)
+				.withDefaultMarkerHeight(152.779f);
+
 		return new ConventionMap()
 			.withFloors(Collections.singletonList(floor))
 			.withLocations(
 				CollectionUtils.flattenList(
 					inFloor(floor,
-						mapLocation("מודיעין (מגרש)", 682.9125f, 2641.324f),
-						mapLocation("זירה", Collections.singletonList(outside), 1032.0295f, 2637.757f),
-						mapLocation("מתחם דוכנים - מגרש", Collections.singletonList(standsAreaCourt), 1592.6965f, 2121.656f),
-						mapLocation("אולם ספורט", 1669.8305f, 3222.68f),
-						mapLocation("מתחם דוכנים - פופ-אפ", Collections.singletonList(standsAreaPopup), 2099.2775f, 3305.469f),
-						mapLocation("השטיח האדום", Collections.singletonList(outside), 2567.6675f, 2869.21f),
-						mapLocation("סוכה", 2794.1995f, 2594.611f),
-						mapLocation("המתחם הקהילתי", 2881.3625f, 1556.851f),
-						mapLocation("מתחם דוכנים - דה וינצ'י", Collections.singletonList(standsAreaDaVinci), 1950.0905f, 760.918f),
-						mapLocation("שירותי נשים", 1275.3945f, 1740.74f).withMarkerHeight(SMALL_MARKER_HEIGHT),
-						mapLocation("שירותי גברים", 551.5685f, 1737.869f).withMarkerHeight(SMALL_MARKER_HEIGHT),
-						mapLocation(eshkol1, 1039.6225f, 1725.021f).withMarkerResource(R.drawable.icon2026_place_red, false, MapLocation.NO_TINT).withSelectedMarkerResource(R.drawable.icon2026_place_red_selected, false, MapLocation.NO_TINT),
-						mapLocation(eshkol2, 842.0425f, 1724.87f),
-						mapLocation("דוכני עמותות", Collections.singletonList(getActivitiesActivityLocationForView(R.id.activity_city_spirits_cards)), 1122.2995f, 1509.177f).withMarkerHeight(SMALL_MARKER_HEIGHT),
-						mapLocation("עמדת כרטיסים", 915.5105f, 1544.813f).withMarkerHeight(SMALL_MARKER_HEIGHT),
-						mapLocation("מודיעין (אשכול)", 743.2125f, 1547.679f).withMarkerHeight(SMALL_MARKER_HEIGHT),
-						mapLocation("משחקי שער", 1315.6005f, 1428.393f).withMarkerHeight(SMALL_MARKER_HEIGHT),
-						mapLocation(eshkol5, 1169.2145f, 1406.317f).withMarkerHeight(SMALL_MARKER_HEIGHT),
-						mapLocation(eshkol4, 843.3465f, 1400.858f).withMarkerHeight(SMALL_MARKER_HEIGHT),
-						mapLocation(eshkol3, 687.8545f, 1407.53f).withMarkerHeight(SMALL_MARKER_HEIGHT),
-						mapLocation("מתחם דוכנים - אשכול", Collections.singletonList(standsAreaEshkol), 920.2285f, 1039.119f).withMarkerHeight(SMALL_MARKER_HEIGHT),
-						mapLocation("מתחם משחקי אינדי", Collections.singletonList(getActivitiesActivityLocationForView(R.id.activity_indie_games)), 564.6135f, 1005.506f).withMarkerHeight(SMALL_MARKER_HEIGHT),
-						mapLocation("שירותי נשים", 2496.5225f, 974.612f).withMarkerHeight(SMALL_MARKER_HEIGHT),
-						mapLocation("שירותי גברים", 2302.2885f, 933.025f).withMarkerHeight(SMALL_MARKER_HEIGHT),
-						mapLocationForShelter("מדרגות למרחב מוגן", 2192.3145f, 1185.516f).withMarkerHeight(SMALL_MARKER_HEIGHT),
-						mapLocation("קוספליי נשים", 2529.7085f, 1148.506f).withMarkerHeight(SMALL_MARKER_HEIGHT),
-						mapLocation(kids, 2529.2955f, 1352.32f).withMarkerHeight(SMALL_MARKER_HEIGHT),
-						mapLocation(meetings, 2525.4525f, 1540.871f).withMarkerHeight(SMALL_MARKER_HEIGHT),
-						mapLocation(workshops1, 2565.8565f, 1762.507f).withMarkerHeight(SMALL_MARKER_HEIGHT),
-						mapLocation(workshops2, 2528.2495f, 1963.194f).withMarkerHeight(SMALL_MARKER_HEIGHT),
-						mapLocation("מדרגות לעירוני 1-9 ומשחקי קופסה 1-2", Arrays.asList(ironi1, ironi2, ironi3, ironi4, ironi5, ironi6, ironi7, ironi8, ironi9, games1, games2), 2775.1325f, 2188.282f).withMarkerHeight(SMALL_MARKER_HEIGHT),
-						mapLocationForShelter("מדרגות למרחב מוגן", 2619.0285f, 2007.119f).withMarkerHeight(SMALL_MARKER_HEIGHT),
-						mapLocation("תיקון קוספליי", 2216.2845f, 2064.274f).withMarkerHeight(SMALL_MARKER_HEIGHT),
-						mapLocation("שירותי יוניסקס", 2336.7725f, 2370.395f).withMarkerHeight(SMALL_MARKER_HEIGHT),
-						mapLocation("הוביטון", 2334.4425f, 2587.234f).withMarkerHeight(SMALL_MARKER_HEIGHT),
-						mapLocation("קוספליי גברים", 2335.6155f, 2838.249f).withMarkerHeight(SMALL_MARKER_HEIGHT),
-						mapLocation("שמירת חפצים", 2279.8465f, 3076.914f).withMarkerHeight(SMALL_MARKER_HEIGHT),
-						mapLocation("מדרגות לסינמטק 4", Collections.singletonList(cinematheque4), 707.3305f, 3511.446f).withMarkerHeight(SMALL_MARKER_HEIGHT),
-						mapLocation("מעלית לסינמטק 4", Collections.singletonList(cinematheque4), 960.4385f, 3397.739f).withMarkerHeight(SMALL_MARKER_HEIGHT),
-						mapLocationForShelter("מרחב מוגן", 775.2955f, 3298.655f).withMarkerHeight(SMALL_MARKER_HEIGHT),
-						mapLocation("קופות", 1185.7885f, 3156.354f),
-						mapLocation("מתחם דוכנים - סינמטק", Collections.singletonList(standsAreaCinematheque), 986.7465f, 3185.284f),
-						mapLocation("מודיעין (סינמטק)", 596.6895f, 3274.609f),
-						mapLocation("מתחם משחקי לוח", Collections.singletonList(getActivitiesActivityLocationForView(R.id.activity_sirolynia)), 798.4805f, 2942.752f)
+						mapLocation("מודיעין (מגרש)", 680.9635f, 2597.091f, regular),
+						mapLocation("זירה", Collections.singletonList(outside), 1030.0805f, 2593.524f, regular),
+						mapLocation("מתחם דוכנים - מגרש", Collections.singletonList(standsAreaCourt), 1590.7475f, 2077.423f, regular),
+						mapLocation("אולם ספורט", 1667.8815f, 3178.447f, regular),
+						mapLocation("מתחם דוכנים - פופ-אפ", Collections.singletonList(standsAreaPopup), 2097.3285f, 3261.236f, regular),
+						mapLocation("השטיח האדום", Collections.singletonList(outside), 2565.7185f, 2824.977f, regular),
+						mapLocation("סוכה", 2792.2505f, 2550.378f, regular),
+						mapLocation("המתחם הקהילתי", 2879.4135f, 1512.618f, regular),
+						mapLocation("מתחם דוכנים - דה וינצ'י", Collections.singletonList(standsAreaDaVinci), 1948.1415f, 716.685f, regular),
+						mapLocation("שירותי נשים", 1273.4455f, 1696.506f, small),
+						mapLocation("שירותי גברים", 549.6195f, 1693.628f, small),
+						mapLocation(eshkol1, 1037.6735f, 1680.788f, regularShelter),
+						mapLocation(eshkol2, 840.0935f, 1680.637f, regular),
+						mapLocation("דוכני עמותות", Collections.singletonList(getActivitiesActivityLocationForView(R.id.activity_city_spirits_cards)), 1060.3655f, 1461.541f, small),
+						mapLocation("עמדת כרטיסים", 913.5615f, 1500.572f, small),
+						mapLocation("מודיעין (אשכול)", 631.4795f, 751.932f, small),
+						mapLocation("משחקי שער", 1313.6515f, 1383.839f, small),
+						mapLocation(eshkol5, 1148.7365f, 1370.097f, small),
+						mapLocation(eshkol4, 774.6215f, 1372.462f, small),
+						mapLocation(eshkol3, 685.9045f, 1363.288f, small),
+						mapLocation("מתחם דוכנים - אשכול", Collections.singletonList(standsAreaEshkol), 918.2795f, 994.878f, small),
+						mapLocation("מתחם משחקי אינדי", Collections.singletonList(getActivitiesActivityLocationForView(R.id.activity_indie_games)), 562.6645f, 961.272f, small),
+						mapLocation("שירותי נשים", 2494.5735f, 932.371f, small),
+						mapLocation("שירותי גברים", 2306.3395f, 888.784f, small),
+						mapLocationForShelter("מדרגות למרחב מוגן", 2190.3655f, 1141.275f, smallShelter),
+						mapLocation("קוספליי נשים", 2527.7595f, 1104.265f, small),
+						mapLocation(kids, 2527.3465f, 1308.079f, small),
+						mapLocation(meetings, 2523.5035f, 1496.63f, small),
+						mapLocation(workshops1, 2563.9075f, 1717.953f, small),
+						mapLocation(workshops2, 2526.2995f, 1918.952f, small),
+						mapLocation("מדרגות לעירוני 1-9 ומשחקי קופסה 1-2", Arrays.asList(ironi1, ironi2, ironi3, ironi4, ironi5, ironi6, ironi7, ironi8, ironi9, games1, games2), 2773.1835f, 2144.041f, small),
+						mapLocationForShelter("מדרגות למרחב מוגן", 2617.0795f, 1962.877f, smallShelter),
+						mapLocation("תיקון קוספליי", 2214.3355f, 2020.033f, small),
+						mapLocation("שירותי יוניסקס", 2334.8235f, 2326.154f, small),
+						mapLocation("הוביטון", 2332.4935f, 2542.993f, small),
+						mapLocation("קוספליי גברים", 2333.6665f, 2794.008f, small),
+						mapLocation("שמירת חפצים", 2277.8965f, 3032.672f, small),
+						mapLocation("מדרגות לסינמטק 4", Collections.singletonList(cinematheque4), 705.3815f, 3466.891f, small),
+						mapLocation("מעלית לסינמטק 4", Collections.singletonList(cinematheque4), 958.4895f, 3353.498f, small),
+						mapLocationForShelter("מרחב מוגן", 773.3455f, 3254.413f, smallShelter),
+						mapLocation("קופות", 1183.8395f, 3112.121f, regular),
+						mapLocation("מתחם דוכנים - סינמטק", Collections.singletonList(standsAreaCinematheque), 984.7975f, 3141.051f, regular),
+						mapLocation("מודיעין (סינמטק)", 594.7405f, 3230.376f, regular),
+						mapLocation("מתחם משחקי לוח", Collections.singletonList(getActivitiesActivityLocationForView(R.id.activity_sirolynia)), 796.5315f, 2898.519f, regular)
 					)
 				)
 			);
@@ -340,20 +377,15 @@ public class Icon2026Convention extends SffConvention {
 		return new DetailsActivityLocation().withName("פעילויות").withActivityClass(ActivitiesActivity.class).withBundle(bundle);
 	}
 
-	private MapLocation mapLocation(String name, float x, float y) {
-		return mapLocation(name, null, x, y);
+	private MapLocation mapLocation(String name, float x, float y, IconConfig iconConfig) {
+		return mapLocation(name, null, x, y, iconConfig);
 	}
 
-	private MapLocation mapLocation(Place place, float x, float y) {
-		return mapLocation(null, Collections.singletonList(place), x, y);
+	private MapLocation mapLocation(Place place, float x, float y, IconConfig iconConfig) {
+		return mapLocation(null, Collections.singletonList(place), x, y, iconConfig);
 	}
 
-	private MapLocation mapLocation(String name, List<? extends Place> places, float x, float y) {
-		final int DEFAULT_MARKER = R.drawable.icon2026_place;
-		final int DEFAULT_MARKER_TINT_RES = MapLocation.NO_TINT;
-		final int DEFAULT_SELECTED_MARKER = R.drawable.icon2026_place_selected;
-		final int DEFAULT_SELECTED_MARKER_TINT_RES = MapLocation.NO_TINT;
-
+	private MapLocation mapLocation(String name, List<? extends Place> places, float x, float y, IconConfig iconConfig) {
 		MapLocation result = new MapLocation();
 		if (places != null) {
 			result.setPlaces(places);
@@ -364,17 +396,19 @@ public class Icon2026Convention extends SffConvention {
 			result.setPlace(new Place().withName(name));
 		}
 
+		if (iconConfig.height > 0) {
+			result.withMarkerHeight(iconConfig.height);
+		}
+
 		return result
-			.withMarkerResource(DEFAULT_MARKER, false, DEFAULT_MARKER_TINT_RES)
-			.withSelectedMarkerResource(DEFAULT_SELECTED_MARKER, false, DEFAULT_SELECTED_MARKER_TINT_RES)
+			.withMarkerResource(iconConfig.marker.resource, iconConfig.marker.isSvg, iconConfig.marker.tint)
+			.withSelectedMarkerResource(iconConfig.selectedMarker.resource, iconConfig.selectedMarker.isSvg, iconConfig.selectedMarker.tint)
 			.withX(x)
 			.withY(y);
 	}
 
-	private MapLocation mapLocationForShelter(String name, float x, float y) {
-		return mapLocation(new Shelter().withName(name), x, y)
-			.withMarkerResource(R.drawable.icon2026_place_red, false, MapLocation.NO_TINT)
-			.withSelectedMarkerResource(R.drawable.icon2026_place_red_selected, false, MapLocation.NO_TINT);
+	private MapLocation mapLocationForShelter(String name, float x, float y, IconConfig iconConfig) {
+		return mapLocation(new Shelter().withName(name), x, y, iconConfig);
 	}
 
 	private StandLocations getPopupStandLocations() {
