@@ -206,11 +206,15 @@ public class Icon2026Convention extends SffConvention {
 				.withImageResource(R.drawable.icon2026_stands_eshkol)
 				.withImageWidth(1709)
 				.withImageHeight(1710)
+				.withDefaultZoom(2)
+				.withMaxZoom(3)
 				.withStandLocations(getEshkolStandLocations()),
 			new StandsArea().withName(STANDS_AREA_CINEMATHEQUE)
 				.withImageResource(R.drawable.icon2026_stands_cinematheque)
 				.withImageWidth(1500)
 				.withImageHeight(1500)
+				.withDefaultZoom(2)
+				.withMaxZoom(3)
 				.withStandLocations(getCinemathequeStandLocations())
 		);
 		return new NamedItems<>(standsAreas);
