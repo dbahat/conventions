@@ -349,7 +349,6 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 				return drawable;
 			}, null));
 
-			brightnessSwitch.setChecked(false);
 			brightnessSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
 				if (isChecked) {
 					increaseScreenBrightness();
@@ -357,6 +356,8 @@ public class MyEventsActivity extends NavigationActivity implements MyEventsDayF
 					resetScreenBrightness();
 				}
 			});
+			// Increase the brightness by default during the convention, since the user is probably trying to print tickets at this point
+			brightnessSwitch.setChecked(Convention.getInstance().hasStarted() && !Convention.getInstance().hasEnded());
 
 			AlertDialog dialog = builder
 					.setView(dialogView)
