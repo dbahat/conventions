@@ -18,6 +18,7 @@ import amai.org.conventions.model.ImageIdToImageResourceMapper;
 import amai.org.conventions.model.NamedItems;
 import amai.org.conventions.model.OrderedNamedItems;
 import amai.org.conventions.model.StandType;
+import amai.org.conventions.model.StandsArea;
 import amai.org.conventions.model.Survey;
 import amai.org.conventions.model.conventions.Convention;
 import amai.org.conventions.networking.EventTicketsParser;
@@ -78,6 +79,11 @@ public class TestConvention extends Convention {
     @Override
     protected OrderedNamedItems<Hall> initHalls() {
         return new OrderedNamedItems<>(new ArrayList<>());
+    }
+
+    @Override
+    protected NamedItems<StandsArea> initStandsAreas() {
+        return null;
     }
 
     @Override
